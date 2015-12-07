@@ -237,6 +237,7 @@ public class ApplicationMode {
 	}
 
 	public int getResourceBearingNight() {
+		//return bearingIconDay;
 		return bearingIconNight;
 	}
 	
@@ -245,6 +246,7 @@ public class ApplicationMode {
 	}
 
 	public int getResourceLocationNight() {
+		//return locationIconDay;
 		return locationIconNight;
 	}
 	

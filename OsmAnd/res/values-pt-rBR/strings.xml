@@ -558,7 +558,7 @@
 	<string name="lang_ko">Coreano</string>
 	<string name="lang_lv">Letão</string>
 	<string name="lang_lt">Lituano</string>
-	<string name="lang_mr">Marathi</string>
+	<string name="lang_mr">Marata</string>
 	<string name="lang_no">Norueguês</string>
 	<string name="lang_fa">Persa</string>
 	<string name="lang_pl">Polonês</string>
@@ -1710,7 +1710,7 @@
     <string name="light_theme">Claro</string>
     <string name="dark_theme">Escuro</string>
     <string name="lang_pms">Piemontês</string>
-    <string name="lang_bn">Bengalês</string>
+    <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_sh">Servo-croata</string>
     <string name="lang_az">Azeri</string>
@@ -1796,7 +1796,6 @@
 	<string name="saved_at_time">Salvo com sucesso em: %1$s</string>
 <string name="poi_deleted_localy">POI será apagado quando você enviar suas alterações</string>
 	<string name="show_gpx">Mostrar GPX</string>
-<string name="address_unknown">Endereço ainda não é conhecido</string>
     <string name="show_on_start">Mostrar no início</string>
 	<string name="count_of_lines">Número de linhas</string>
 <string name="are_you_sure">Tem certeza?</string>
@@ -1810,11 +1809,11 @@
     
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Mapa baixado</string>
-    <string name="please_specify_poi_type_only_from_list">"Especifique o tipo correto de POI ou ignore. "</string>
+    <string name="please_specify_poi_type_only_from_list">Especifique o tipo correto de POI ou ignore</string>
     <string name="access_from_map">Acessar a partir do mapa</string>
     <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
-    <string name="release_2_2">" • Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas\n\n • Tela do mapa é agora lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado\n\n • Configure quais e de que forma os cartões são exibidos no painel de controle\n\n • Desative o painel de controle, se preferir um controle baseado em menus\n\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo\n\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas\n\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM\n\n • Reformulação de estrutura e de interface para baixa dados de mapa.\n\n e mais… "</string>
+    <string name="release_2_2">" • Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas\n\n • Tela do mapa agora é lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado\n\n • Configure quais e de que forma os cartões são exibidos no painel de controle\n\n • Desative o painel de controle, se preferir um controle baseado em menus\n\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo\n\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas\n\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM\n\n • Reformulação de estrutura e de interface para baixar dados de mapa.\n\n e mais… "</string>
     <string name="access_from_map_description">O botão menu lança o painel de controle, não o menu</string>
     <string name="osm_save_offline">Salvar offline</string>
     <string name="osm_edit_modified_poi">POI no OSM modificado</string>
@@ -1940,8 +1939,8 @@
     <string name="dashboard_or_drawer_title">Painel de controle ou controle por menu</string>
     <string name="dashboard_or_drawer_description">Há uma nova opção para controlar principalmente o app via painel de controle flexível ou um menu estático. Sua escolha sempre pode ser alterada nas configurações do painel de controle.</string>
 <string name="shared_string_hide">Ocultar</string>
-    <string name="av_video_quality_low">Menor resolução</string>
-    <string name="av_video_quality_high">Maior resolução</string>
+    <string name="av_video_quality_low">Menor qualidade</string>
+    <string name="av_video_quality_high">Maior qualidade</string>
     <string name="av_video_quality">Qualidade do vídeo</string>
     <string name="av_video_quality_descr">Selecionar a qualidade de saída de vídeo</string>
     <string name="av_audio_format">Formato de áudio</string>
@@ -1949,4 +1948,6 @@
     <string name="av_audio_bitrate">Bitrate de áudio</string>
     <string name="av_audio_bitrate_descr">Selecionar o bitrate de áudio</string>
     <string name="shared_string_near">Perto</string>
+    <string name="no_address_found">Sem endereço determinado</string>
+	<string name="looking_up_address">Endereço procurado</string>
     </resources>

@@ -1937,7 +1937,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="saved_at_time">Salvato con successo in: %1$s</string>
     <string name="poi_deleted_localy">I PDI verranno cancellati una volta caricate le modiche</string>
     <string name="show_gpx">Visualizza GPX</string>
-    <string name="address_unknown">Indirizzo sconosciuto</string>
     <string name="show_on_start">Mostra all\'avvio</string>
     <string name="count_of_lines">Conteggio delle linee</string>
     <string name="are_you_sure">Sei sicuro?</string>

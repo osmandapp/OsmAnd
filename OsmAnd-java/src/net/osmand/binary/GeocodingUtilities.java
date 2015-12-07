@@ -117,7 +117,7 @@ public class GeocodingUtilities {
 		}
 		
 		public double getDistance() {
-			if(dist == -1) {
+			if(dist == -1 && connectionPoint != null && searchPoint != null) {
 				dist = MapUtils.getDistance(connectionPoint, searchPoint);
 			}
 			return dist;
@@ -161,7 +161,7 @@ public class GeocodingUtilities {
 			}
 			boolean emptyName = Algorithms.isEmpty(road.getName()) && Algorithms.isEmpty(road.getRef()) ;
 			if(!emptyName) {
-				if(dist == 0) {
+				if(dist == 0 || dist > p.dist) {
 					dist = p.dist;
 				}
 				GeocodingResult sr = new GeocodingResult();

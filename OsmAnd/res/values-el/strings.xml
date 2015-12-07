@@ -1704,7 +1704,6 @@
     <string name="shared_string_trip_recording">Καταγραφή ταξιδιού</string>
     <string name="shared_string_navigation">Πλοήγηση</string>
     <string name="osmand_running_in_background">Εκτέλεση στο υπόβαθρο</string>
-    <string name="address_unknown">Η διεύθυνση δεν είναι ακόμη γνωστή</string>
     <string name="navigate_point_northing">Βόρεια</string>
     <string name="navigate_point_easting">Ανατολικά</string>
     <string name="proxy_port_title">Θύρα διακομιστή μεσολάβησης</string>

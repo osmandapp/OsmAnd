@@ -2,11 +2,9 @@
     OsmAnd – OSM Automated Navigation Directions – navigation software based on OpenStreetMap.
     Copyright © 2010–2015 OsmAnd BV (Amstelveen, Netherlands - KvK 62066714).
 
-    The code in that repository is mainly covered by *GPLv3*, except some 3rd party libs and resources.
+    The code in that repository is mainly covered by *GPLv3* (for code) and *CC-BY-ND-NC* (for artwork with restriction), except some 3rd party libs and resources.
     ATTENTION: please be aware that some artwork has proprietary license.
-    EXCEPTION of GPLv3:
-    * Publishing applications using the OsmAnd GPLv3 code to Google Play, Amazon Market or Apple Store should be done with written permission*
-
+    
     Main AUTHORS (more detailed list in AUTHORS):
         Victor Shcherb – all parts of the project, originator
         Alexey Pelykh – rendering and core parts
@@ -38,8 +36,11 @@
         - https://github.com/osmandapp/OsmAnd-tools
         - https://github.com/osmandapp/OsmAnd-resources
 
-    * UI Design and UX work, such as layout, icons is covered by CC-BY-ND-NC
+    * UI Design and UX work, such as layout, icons is covered by CC-BY-ND-NC 
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
+    Restriction to UI/UX CC-BY-ND-NC:
+    * Publishing applications using the OsmAnd UI/UX code to Google Play, Amazon Market or Apple Store must be done with written permission*
+
 
     * Map icons are taken from sjjb and some are drawn and distributed under Public Domain (except icons8)
         - https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg

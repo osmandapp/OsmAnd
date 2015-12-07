@@ -2229,4 +2229,334 @@
 	<string name="poi_tomb_pyramid">Tipo: pirâmide</string>
 
 	<string name="poi_tomb_mausoleum">Tipo: mausoléu</string>
+	<string name="poi_tomb_sarcophagus">Tipo: sarcófago</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilização: roma antiga (753 a.C. – 284 d.C.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilização: nuráguica (XVIII a.C. – II d.C.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilização: etrusca (XII – VI a.C.)</string>
+	<string name="poi_historic_civilization_prehistoric">Civilização: pré-histórica</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilização: grega antiga</string>
+	<string name="poi_historic_civilization_roman">Civilização: romana</string>
+	<string name="poi_historic_civilization_byzantine">Civilização: bizantina (285 d.C. – 1453 d.C.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilização: imperial chinês (221 a.C. – 1911 d.C.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilização: egípcia antiga (até 332 a.C.)</string>
+	<string name="poi_historic_civilization_celtic">Civilização: celta</string>
+	<string name="poi_historic_civilization_western_roman">Civilização: romana ocidental (285 d.C – 476 d.C.)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilização: micênica</string>
+	<string name="poi_historic_civilization_hernici">Civilização: hérnicos</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilização: grego-egípcia (332 a.C. – 30 a.C.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilização: romana e egípcio bizantina</string>
+	<string name="poi_historic_civilization_helladic">Civilização: heládica</string>
+	<string name="poi_historic_civilization_cycladic">Civilização: cíclades</string>
+	<string name="poi_historic_civilization_minoan">Civilização: minóica</string>
+	<string name="poi_historic_civilization_dacian">Civilização: dácios</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilization: tiahuanaco</string>
+
+	<string name="poi_animal_training">Treinamento animal</string>
+	<string name="poi_animal_training_dog">Treinamento canino</string>
+	<string name="poi_animal_training_horse">Treinamento equino</string>
+
+	<string name="poi_horse_yes">Permitido cavalos</string>
+	<string name="poi_horse_no">Proibido cavalos</string>
+	<string name="poi_animal_yes">Permitido animais</string>
+	<string name="poi_animal_no">Proibido animais</string>
+
+	<string name="poi_historic_period_nuragic">Período histórico: nuráguico</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Período histórico: idade da pedra / idade do bronze (indeterminado)</string>
+	<string name="poi_historic_period_bronze_age">Período histórico: idade do bronze</string>
+	<string name="poi_historic_period_principate">Período histórico: principado (27 a.C. – 284 d.C.)</string>
+	<string name="poi_historic_period_classical_greece">Período histórico: Grécia clássica (V – IV a.C.)</string>
+	<string name="poi_historic_period_archaic_greece">Período histórico: Grécia arcaica</string>
+	<string name="poi_historic_period_iron_age">Período histórico: idade do ferro</string>
+	<string name="poi_historic_period_roman_republic">Período histórico: República romana (508 – 27 a.C.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Período histórico: Grécia helenística</string>
+	<string name="poi_historic_period_new_kingdom">Período histórico: império novo (1550 – 1069 a.C.)</string>
+	<string name="poi_historic_period_middle_kingdom">Período histórico: império médio (2055 – 1650 a.C.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Período histórico: Egito pré-dinástico</string>
+	<string name="poi_historic_period_early_dynastic_period">Período histórico: período arcaico (3100 – 2686 a.C.)</string>
+	<string name="poi_historic_period_old_kingdom">Período histórico: império antigo (2686 – 2181 a.C.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Período histórico: primeiro período intermediário (2181 – 2055 a.C.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Período histórico: segundo período intermediário (1650 – 1550 a.C.)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Período histórico: terceiro período intermediário (1069 – 664 a.C.) "</string>
+	<string name="poi_historic_period_first_persian_period">Período histórico: primeiro período persa</string>
+	<string name="poi_historic_period_late_period">Período histórico: último período (664 – 332 a.C.)</string>
+	<string name="poi_historic_period_second_persian_period">Período histórico: segundo período persa</string>
+	<string name="poi_historic_period_alexander_the_great">Período histórico: Alexandre, o Grande</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Período histórico: Egito ptolemaico (305 – 30 a.C.)</string>
+	<string name="poi_historic_period_christian_egypt">Período histórico: Egito cristão</string>
+	<string name="poi_historic_period_byzantine_egypt">Período histórico: Egito bizantino (30 a.C. – 641 d.C.)</string>
+	<string name="poi_historic_period_persian_occupation">Período histórico: ocupação persa</string>
+	<string name="poi_historic_period_greek_dark_ages">Período histórico: período homérico (1100 – 800 a.C.)</string>
+	<string name="poi_historic_period_roman_greece">Período histórico: Roma Grécia (146 a.C. – 330 d.C.)</string>
+	<string name="poi_historic_period_roman_kingdom">Período histórico: Império Romano (753 – 509 a.C.)</string>
+	<string name="poi_historic_period_dominate">Período histórico: dominato (285 – 476 d.C.)</string>
+	<string name="poi_historic_period_villager">Período histórico: aldeão (época I e II, 1580 a.C. – 133 d.C.)</string>
+	<string name="poi_historic_period_urban">Período histórico: urbano (época III, 133 – 374 d.C.)</string>
+	<string name="poi_historic_period_classical">Período histórico: clássico (época IV, 374 – 900 d.C.)</string>
+	<string name="poi_historic_period_imperial">Período histórico: imperial (época V, 900 – 1200 d.C.)</string>
+
+	<string name="poi_historic_era_paleolithic">Era histórica: paleolítico (2,6 milhões de anos – 10000 AP)</string>
+	<string name="poi_historic_era_mesolithic">Era histórica: mesolítico</string>
+	<string name="poi_historic_era_neolithic">Era histórica: neolítico</string>
+	<string name="poi_historic_era_chalcolithic">Era histórica: idade do cobre (milênios IV-III a.C.)</string>
+
+	<string name="poi_historic_stone">Pedra histórica</string>
+	<string name="poi_material_wood">Material: madeira</string>
+	<string name="poi_material_metal">Material: metal</string>
+	<string name="poi_material_reinforced_concrete">Material: concreto armado</string>
+	<string name="poi_material_concrete">Material: concreto</string>
+	<string name="poi_material_steel">Material: aço</string>
+	<string name="poi_material_stone">Material: pedra</string>
+	<string name="poi_material_masonry">Material: alvenaria</string>
+	<string name="poi_material_brick">Material: tijolo</string>
+	<string name="poi_material_plastic">Material: plástico</string>
+	<string name="poi_material_sandstone">Material: arenito</string>
+	<string name="poi_material_granite_stone">Material: pedra de granito</string>
+	<string name="poi_material_metal_wood">Material: metal;madeira</string>
+	<string name="poi_material_glass">Material: vidro</string>
+	<string name="poi_material_bronze">Material: bronze</string>
+	<string name="poi_material_earth">Material: terra</string>
+	<string name="poi_material_composite">Material: composto</string>
+	<string name="poi_material_limestone">Material: calcário</string>
+	<string name="poi_material_marble">Material: mármore</string>
+	<string name="poi_material_aluminium">Material: alumínio</string>
+
+	<string name="poi_site_type_megalith">Tipo: megálito</string>
+	<string name="poi_site_type_tumulus">Tipo: túmulo</string>
+	<string name="poi_site_type_fortification">Tipo: fortificação</string>
+	<string name="poi_site_type_settlement">Tipo: assentamento</string>
+	<string name="poi_site_type_city">Tipo: cidade</string>
+	<string name="poi_site_type_necropolis">Tipo: necrópole</string>
+	<string name="poi_site_type_petroglyph">Tipo: petróglifo</string>
+	<string name="poi_site_type_earthwork">Tipo: terraplenagem</string>
+	<string name="poi_megalith_type_menhir">Tipo de megálito: menir</string>
+	<string name="poi_megalith_type_dolmen">Tipo de megálito: dólmen</string>
+	<string name="poi_megalith_type_nuraghe">Tipo de megálito: nurague</string>
+	<string name="poi_megalith_type_stone_circle">Tipo de megálito: círculo de pedras</string>
+	<string name="poi_megalith_type_passage_grave">Tipo de megálito: tumba de passagem</string>
+	<string name="poi_fortification_type_hill_fort">Tipo de fortificação: colina</string>
+	<string name="poi_fortification_type_limes">Tipo de fortificação: limes</string>
+	<string name="poi_fortification_type_sconce">Tipo de fortificação: arandela</string>
+	<string name="poi_historic_farm">Fazenda histórica</string>
+	<string name="poi_historic_railway_station">Estação ferroviária histórica</string>
+
+	<string name="poi_club_freemasonry">Loja maçônica</string>
+	<string name="poi_club_sailing">Clube de vela</string>
+	<string name="poi_club_scout">Clube de escoteiros</string>
+
+	<string name="poi_historic_gallows">Forca histórica</string>
+	<string name="poi_historic_railway">Ferrovia histórica</string>
+
+	<string name="poi_square">Praça</string>
+	<string name="poi_artist_name">Artista</string>
+	<string name="poi_sculptor">Escultor</string>
+
+	<string name="poi_building_type_church">Tipo de construção: igreja</string>
+	<string name="poi_building_type_chapel">Tipo de construção: capela</string>
+	<string name="poi_building_type_mosque">Tipo de construção: mesquita</string>
+	<string name="poi_building_type_temple">Tipo de construção: templo</string>
+	<string name="poi_building_type_cathedral">Tipo de construção: catedral</string>
+	<string name="poi_building_type_monastery">Tipo de construção: mosteiro</string>
+	<string name="poi_building_type_basilica">Tipo de construção: basílica</string>
+	<string name="poi_building_type_synagogue">Tipo de construção: sinagoga</string>
+	<string name="poi_building_type_shrine">Tipo de construção: santuário</string>
+
+	<string name="poi_cross">Cruz</string>
+	<string name="poi_prison_camp">Antigo campo de detenção</string>
+	<string name="poi_concentration_camp">Tipo: campo de concentração</string>
+	<string name="poi_pow_camp">Tipo: campo de prisioneiros de guerra</string>
+	<string name="poi_labor_camp">Tipo: campo de trabalho</string>
+	<string name="poi_concentration_camp_nazism">Tipo: nazi</string>
+	<string name="poi_concentration_camp_gulag">Tipo: gulag</string>
+
+	<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bathing_yes">Banho: sim</string>
+	<string name="poi_bathing_no">Banho: não</string>
+
+	<string name="poi_boat_storage">Armazenamento de barco</string>
+
+	<string name="poi_conveying_yes">Transporte: Sim</string>
+
+	<string name="poi_bridge_ref">Ponte ref</string>
+	<string name="poi_tunnel_ref">Túnel ref</string>
+
+	<string name="poi_ref">Ref</string>
+
+	<string name="poi_cargo_passengers">Carga: passageiros</string>
+	<string name="poi_cargo_vehicle">Carga: veículos</string>
+	<string name="poi_cargo_bicycle">Carga: bicicletas</string>
+	<string name="poi_cargo_container">Carga: contêineres</string>
+	<string name="poi_cargo_hgv">Carga: veículos pesados</string>
+
+	<string name="poi_fitness_station">Estação de ginástica</string>
+
+	<string name="poi_castle_type_castrum">Tipo de castelo: castra</string>
+	<string name="poi_backcountry_yes">Acampamento em zona isolada</string>
+	<string name="poi_backcountry_no">Acampamento em zona isolada: não</string>
+	<string name="poi_ramp_stroller_yes">Rampa para rodas: sim</string>
+	<string name="poi_ramp_stroller_no">Rampa para rodas: não</string>
+	<string name="poi_step_count">Quantidade de degraus</string>
+	<string name="poi_step_condition_even">Condição dos degraus: regular</string>
+	<string name="poi_step_condition_uneven">Condição dos degraus: irregular</string>
+	<string name="poi_step_condition_rough">Condição dos degraus: acidentada</string>
+
+	<string name="poi_cairn">Moledro</string>
+
+	<string name="poi_tomb_rock_cut">Tipo: escavação em rocha</string>
+	<string name="poi_tomb_hypogeum">Tipo: hipogeu</string>
+	<string name="poi_tomb_vault">Tipo: catacumba</string>
+	<string name="poi_tomb_columbarium">Tipo: columbário</string>
+	<string name="poi_stone_type_conciliation_cross">Tipo: cruz de conciliação</string>
+	<string name="poi_stone_type_coat_of_arms">Tipo: brasão</string>
+
+	<string name="poi_historic_threshing_floor">Eira histórica</string>
+	<string name="poi_summit_cross">Cruz de cimeira: sim</string>
+
+	<string name="poi_hackerspace">Hackerspace</string>
+
+	<string name="poi_wiki_lang_af">Wiki em africâner</string>
+	<string name="poi_wiki_lang_als">Wiki em alemânico</string>
+	<string name="poi_wiki_lang_az">Wiki em azeri</string>
+	<string name="poi_wiki_lang_bn">Wiki em bengali</string>
+	<string name="poi_wiki_lang_bpy">Wiki em bishnupriya</string>
+	<string name="poi_wiki_lang_br">Wiki em bretão</string>
+	<string name="poi_wiki_lang_bs">Wiki em bósnio</string>
+	<string name="poi_wiki_lang_cy">Wiki em galês</string>
+	<string name="poi_wiki_lang_eo">Wiki em esperanto</string>
+	<string name="poi_wiki_lang_eu">Wiki em basco</string>
+	<string name="poi_wiki_lang_fa">Wiki em persa</string>
+	<string name="poi_wiki_lang_fy">Wiki em frisão</string>
+	<string name="poi_wiki_lang_ga">Wiki em irlandês</string>
+	<string name="poi_wiki_lang_hy">Wiki em armênio</string>
+	<string name="poi_wiki_lang_is">Wiki em islandês</string>
+	<string name="poi_wiki_lang_ka">Wiki em georgiano</string>
+	<string name="poi_wiki_lang_ku">Wiki em curdo</string>
+	<string name="poi_wiki_lang_la">Wiki em latim</string>
+	<string name="poi_wiki_lang_lb">Wiki em luxemburguês</string>
+	<string name="poi_wiki_lang_mk">Wiki em macedônio</string>
+	<string name="poi_wiki_lang_ml">Wiki em malaiala</string>
+	<string name="poi_wiki_lang_mr">Wiki em marata</string>
+	<string name="poi_wiki_lang_nds">Wiki em baixo-saxão</string>
+	<string name="poi_wiki_lang_nv">Wiki em navajo</string>
+	<string name="poi_wiki_lang_os">Wiki em osseta</string>
+	<string name="poi_wiki_lang_pms">Wiki em piamontês</string>
+	<string name="poi_wiki_lang_sc">Wiki em sardenho</string>
+	<string name="poi_wiki_lang_sh">Wiki em servo-croata</string>
+	<string name="poi_wiki_lang_sq">Wiki em albanês</string>
+	<string name="poi_wiki_lang_ta">Wiki em tâmil</string>
+	<string name="poi_wiki_lang_tl">Wiki em filipino</string>
+
+	<string name="poi_wiki_lang_war">Wiki em wáray-wáray</string>
+	<string name="poi_wiki_lang_min">Wiki em minangkabau</string>
+	<string name="poi_wiki_lang_kk">Wiki em cazaque</string>
+	<string name="poi_wiki_lang_uz">Wiki em uzbeque</string>
+	<string name="poi_wiki_lang_ce">Wiki em checheno</string>
+	<string name="poi_wiki_lang_ur">Wiki em urdu</string>
+	<string name="poi_wiki_lang_oc">Wiki em franco-provençal</string>
+	<string name="poi_wiki_lang_zhminnan">Wiki em min nan</string>
+	<string name="poi_wiki_lang_mg">Wiki em malgaxe</string>
+	<string name="poi_wiki_lang_tt">Wiki em tártaro</string>
+	<string name="poi_wiki_lang_jv">Wiki em javanês</string>
+	<string name="poi_wiki_lang_ky">Wiki em quirguiz</string>
+	<string name="poi_wiki_lang_zhyue">Wiki em cantonês</string>
+	<string name="poi_wiki_lang_ast">Wiki em asturo-leonês</string>
+	<string name="poi_wiki_lang_tg">Wiki em tajique</string>
+	<string name="poi_wiki_lang_ba">Wiki em bashkir</string>
+	<string name="poi_wiki_lang_sco">Wiki em scots</string>
+	<string name="poi_wiki_lang_pnb">Wiki em panjabi</string>
+	<string name="poi_wiki_lang_cv">Wiki em tchuvache</string>
+	<string name="poi_wiki_lang_lmo">Wiki em lombardo</string>
+	<string name="poi_wiki_lang_my">Wiki em birmanês</string>
+	<string name="poi_aerialway_length">Comprimento</string>
+
+	<string name="poi_health_specialty_general_yes">Especialidade médica: clínica geral</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Especialidade médica: oftalmologia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Especialidade médica: ginecologia</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Especialidade médica: medicina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Especialidade médica: ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Especialidade médica: otorrinolaringologia</string>
+	<string name="poi_health_specialty_paediatrics_yes">Especialidade médica: pediatria</string>
+	<string name="poi_health_specialty_paediatrics_no">Especialidade médica: sem pediatria</string>
+	<string name="poi_health_specialty_dermatology_yes">Especialidade médica: dermatologia</string>
+	<string name="poi_health_specialty_urology_yes">Especialidade médica: urologia</string>
+	<string name="poi_health_specialty_surgery_yes">Especialidade médica: cirurgia geral</string>
+	<string name="poi_health_specialty_radiology_yes">Especialidade médica: radiologia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Especialidade médica: psiquiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Especialidade médica: neurologia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Especialidade médica: dermatovenereología</string>
+	<string name="poi_health_specialty_cardiology_yes">Especialidade médica: cardiologia</string>
+	<string name="poi_health_specialty_trauma_yes">Especialidade médica: traumatologia</string>
+	<string name="poi_health_specialty_biology_yes">Especialidade médica: bioclínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Especialidade médica: osteopatia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Especialidade médica: anestesia</string>
+	<string name="poi_health_specialty_pulmonology_yes">Especialidade médica: pneumologia</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Especialidade médica: cirurgia dental, oral e maxilofacial</string>
+	<string name="poi_health_specialty_maternity_yes">Especialidade médica: maternidade</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Especialidade médica: emergência e urgência</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Especialidade médica: sem emergência e urgência</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Especialidade médica: cirurgia plástica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Especialidade médica: ortodontia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Especialidade médica: psicoterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Especialidade médica: bioquímica</string>
+	<string name="poi_health_specialty_occupational_yes">Especialidade médica: terapia ocupacional</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Especialidade médica: psiquiatria infantil</string>
+	<string name="poi_health_specialty_physiatry_yes">Especialidade médica: fisiatria</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Especialidade médica: cirugia maxilofacial</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Especialidade médica: radiologia diagnóstica</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Especialidade médica: gastroenterologia</string>
+	<string name="poi_health_specialty_dentistry_yes">Especialidade médica: odontologia</string>
+	<string name="poi_health_specialty_nephrology_yes">Especialidade médica: nefrologia (doenças renais)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Especialidade médica: neurocirurgia</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Especialidade médica: neuropsiquiatria</string>
+	<string name="poi_health_specialty_endocrinology_yes">Especialidade médica: endocrinologia</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Especialidade médica: medicina nuclear</string>
+	<string name="poi_health_specialty_pathology_yes">Especialidade médica: anatomia patológica</string>
+	<string name="poi_health_specialty_oncology_yes">Especialidade médica: oncologia</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Especialidade médica: medicina tropical</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Especialidade médica: sem medicina tropical</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Especialidade médica: obstetrícia (pós-natal)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Especialidade médica: sem obstetrícia (pós-natal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Especialidade médica: obstetrícia (pré-natal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Especialidade médica: sem obstetrícia (pré-natal)</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Especialidade médica: pediatria social</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Especialidade médica: sem pediatria social</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Especialidade médica: obstetrícia (cesariana)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialidade médica: sem obstetrícia (cesariana)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Especialidade médica: toxicologia clínica</string>
+	<string name="poi_health_specialty_optometry_yes">Especialidade médica: optometria</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Especialidade médica: patologia clínica</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Especialidade médica: fonoaudiologia</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Especialidade médica: terapia manual</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Especialidade médica: medicina esportiva</string>
+	<string name="poi_health_specialty_podology_yes">Especialidade médica: podologia</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Especialidade médica: psiquiatria adulta</string>
+	<string name="poi_health_specialty_acupuncture_yes">Especialidade médica: acupuntura</string>
+	<string name="poi_health_specialty_homeopathy_yes">Especialidade médica: homeopatia</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">"Especialidade médica:  medicina tradicional chinesa"</string>
+	<string name="poi_health_specialty_reiki_yes">Especialidade médica: reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Especialidade médica: fitoterapia</string>
+	<string name="poi_health_specialty_chiropractic_yes">Especialidade médica: quiropraxia</string>
+	<string name="poi_health_specialty_naturopathy_yes">Especialidade médica: naturopatia</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Especialidade médica: psicologia profunda</string>
+	<string name="poi_health_specialty_behavior_yes">Especialidade médica: comportamento</string>
+
+	<string name="poi_building_type_pyramid">Tipo de construção: pirâmide</string>
+
+<string name="poi_pa">Pa (assentamento fortificado maori)</string>
+
+	<string name="poi_wiki_lang_yo">Wiki em iorubá</string>
+	<string name="poi_wiki_lang_an">Wiki em aragonês</string>
+	<string name="poi_wiki_lang_ne">Wiki em nepalês</string>
+	<string name="poi_wiki_lang_gu">Wiki em guzerate</string>
+	<string name="poi_wiki_lang_scn">Wiki em siciliano</string>
+	<string name="poi_wiki_lang_bar">Wiki em bávaro</string>
+	<string name="poi_wiki_lang_mn">Wiki em mongol</string>
+	<string name="poi_wiki_lang_nap">Wiki em napolitano</string>
+
+	<string name="poi_craft_electronics">Conserto de eletrônicos</string>
+	<string name="poi_fireworks">Loja de fogos de artifício</string>
+
+	<string name="poi_memorial_fassade_decoration">Decoração da fachada</string>
+	<string name="poi_site_type_hut_circle">Tipo: círculo de cabana</string>
+	<string name="poi_fortification_type_ring_ditch">Tipo de fortificação: vala circular</string>
+
 	</resources>

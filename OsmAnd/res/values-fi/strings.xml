@@ -870,7 +870,6 @@
 	
 	<string name="closing_at">Sulkeutuu</string>
 	<string name="opening_at">Avautuu</string>
-	<string name="address_unknown">Osoitetta ei tiedetä vielä</string>
     <string name="no_updates_available">Ei päivityksiä saatavilla</string>
     <string name="days_behind">päivää jäljessä</string>
 	<string name="download_tab_updates">Päivitykset</string>

@@ -131,8 +131,10 @@
 	
 	<!-- Map colors, layers, special purpose consistency colors -->
 	<color name="pos_heading">#320000FF</color>
+	<!-- color name="pos_heading_night">#880000FF</color -->
 	<color name="pos_heading_night">#88ff8800</color>
 	<color name="pos_area">#280000FF</color>
+	<!-- color name="pos_area_night">#660000FF</color -->
 	<color name="pos_area_night">#66ff8800</color>
 	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
 

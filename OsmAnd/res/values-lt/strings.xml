@@ -1891,7 +1891,6 @@
     <string name="poi_deleted_localy">LV bus ištrinti, kai jūs įkelsite pakeitimus</string>
     <string name="show_gpx">Rodyti GPX</string>
     <string name="recent_places">Vėliausios vietos</string>
-    <string name="address_unknown">Adresas vis dar nežinomas</string>
     <string name="routing_attr_avoid_shuttle_train_name">Vengti priemiestinių traukinių</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vengti priemiestinių traukinių</string>
     <string name="dahboard_options_dialog_title">Duomenų skydelio nustatymai</string>

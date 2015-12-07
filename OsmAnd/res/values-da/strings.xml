@@ -1961,7 +1961,6 @@
     <string name="show_gpx">Vis GPX</string>
     <string name="count_of_lines">Antal linjer</string>
     <string name="show_on_start">Vis ved start</string>
-    <string name="address_unknown">Adressen kendes endnu ikke</string>
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
     <string name="are_you_sure">Sikker?</string>
     <string name="simulate_your_location_stop_descr">Stop simulering af position</string>
@@ -2109,15 +2108,15 @@
     <string name="use_drawer_btn">Brug menuen</string>
     <string name="access_from_map_description">Menuknappen viser betjeningspanel, ikke menuen</string>
     <string name="access_from_map">Adgang fra kort</string>
-    <string name="please_specify_poi_type_only_from_list">"Angiv en korrekt IP type eller spring over. "</string>
+    <string name="please_specify_poi_type_only_from_list">Angiv den korrekte IP-type eller spring over</string>
     <string name="routing_attr_avoid_stairs_name">Undgå trapper</string>
 	<string name="routing_attr_avoid_stairs_description">Undgå trapper</string>
 	<string name="routing_attr_avoid_borders_name">Undgå grænseovergang</string>
 	
 	<string name="color_purple">Lilla</string>
 	<string name="shared_string_hide">Skjul</string>
-    <string name="av_video_quality_low">Laveste opløsning</string>
-    <string name="av_video_quality_high">Højeste opløsning</string>
+    <string name="av_video_quality_low">Laveste kvalitet</string>
+    <string name="av_video_quality_high">Højeste kvalitet</string>
     <string name="av_video_quality">Videokvalitet</string>
     <string name="av_video_quality_descr">Vælg videokvalitet</string>
     <string name="av_audio_format">Audioformat</string>
@@ -2125,4 +2124,6 @@
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Vælg audio bitrate</string>
     <string name="shared_string_near">I nærheden af</string>
+    <string name="no_address_found">Kan ikke bestemme adresse</string>
+	<string name="looking_up_address">Søger efter adressen</string>
     </resources>

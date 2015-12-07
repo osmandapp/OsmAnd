@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -45,6 +46,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
@@ -87,6 +89,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
+	private boolean moving;
 
 	private float skipHalfScreenStateLimit;
 
@@ -253,6 +256,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
+					moving = false;
 					int posY = getViewY();
 					if (!centered) {
 						showOnMap(menu.getLatLon(), true, false,
@@ -279,6 +283,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 						velocityY = 0;
 						maxVelocityY = 0;
 						velocity.addMovement(event);
+						moving = true;
 						break;
 
 					case MotionEvent.ACTION_MOVE:
@@ -305,6 +310,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
+						moving = false;
 						int currentY = getViewY();
 
 						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
@@ -698,14 +704,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				int newMenuTopViewHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
 				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
-				menuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
+				int newMenuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
 
 				int dy = 0;
-				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0 && menu.getCurrentMenuState() == MenuState.HEADER_ONLY) {
-					dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight);
+				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0) {
+					dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 				}
 				menuTopViewHeight = newMenuTopViewHeight;
+				menuTopShadowAllHeight = newMenuTopShadowAllHeight;
 				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight + dy;
 				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 
@@ -716,7 +723,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					origMarkerY = view.getHeight() / 2;
 				}
 
-				doLayoutMenu();
+				if (!moving) {
+					doLayoutMenu();
+				}
 			}
 
 		});

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1878,7 +1879,6 @@
     <string name="show_gpx">Ammustra GPX</string>
     <string name="saved_at_time">Sarbada resèssida in: %1$s</string>
     <string name="show_on_start">Ammustra in su cumintzu</string>
-    <string name="address_unknown">Indiritzu galu disconnotu</string>
     <string name="count_of_lines">Contu de sas lìnias</string>
     <string name="are_you_sure">Seguru ses?</string>
     <string name="unsaved_changes_will_be_lost">Totu sas modìficas non sarbadas s’ant a pèrdere. Sighire?</string>
@@ -2023,8 +2023,20 @@
     <string name="access_from_map_description">Su butone de su menù alluet su pannellu de controllu, imbetzes de su menù</string>
     <string name="access_from_map">Intra dae sa mapa</string>
     <string name="release_2_2">" • Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos\n\n • S\'ischermu de sa mapa est como postu come prima cosa a s’allumìngiu de s’aplicatzione, semper chi \'Ammustra pannellu de controllu in s\'allumìngiu\' no siet ischertadu\n\n • Como podes cunfigurare sas impostatziones pro isseberare cales sunt sas ischedas chi diant dèper’èssere ammustradas in su pannellu e comente\n\n • Brinca su pannellu de controllu, si preferis a impreare su menù pro sa gestione de s’aplicatzione\n\n • Pro iscarrigare mapas, sas regiones podent èssere ischertadas deretamente incarchende in sa mapa generale de su mundu\n\n • Sa chirca de PDI como suportat chircas prus dislindadas\n\n • Megioradas sas funtzionalidades de modìficas de PDI e OSM\n\n • Istrutura e s\'interfache de iscarrigamentu datos mapas torrada a fàghere\n\n e àteru… "</string>
-    <string name="please_specify_poi_type_only_from_list">"Dislinda sa casta curreta de PDI o brinca custa parte. "</string>
+    <string name="please_specify_poi_type_only_from_list">Dislinda sa casta curreta de PDI o brinca custa parte</string>
     <string name="routing_attr_avoid_stairs_name">Istransi sas iscalas</string>
 	<string name="routing_attr_avoid_stairs_description">Istransi sas iscalas</string>
 	<string name="routing_attr_avoid_borders_name">Istransi sa rugradura de sas fronteras</string>
-	</resources>
+	<string name="shared_string_near">A curtzu</string>
+    <string name="shared_string_hide">Cua</string>
+    <string name="av_video_quality_low">Calidade prus bassa</string>
+    <string name="av_video_quality_high">Calidade prus arta</string>
+    <string name="av_video_quality">Calidade de su vìdeo</string>
+    <string name="av_video_quality_descr">Ischerta sa calidade de su vìdeo</string>
+    <string name="av_audio_format">Formadu de s’àudio</string>
+    <string name="av_audio_format_descr">Ischerta su formadu de essida de s’àudio</string>
+    <string name="av_audio_bitrate">Bitrate àudio</string>
+    <string name="av_audio_bitrate_descr">Ischerta su bitrate de s’àudio</string>
+    <string name="no_address_found">Perunu indiritzu agatadu</string> 
+	<string name="looking_up_address">Chirchende s’indiritzu</string>
+    </resources>

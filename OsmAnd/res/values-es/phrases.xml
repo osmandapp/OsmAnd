@@ -2566,4 +2566,6 @@
 
 
 <string name="poi_health_specialty_herbalism_yes">Especialidad médica: herbolaria</string>
-	</resources>
+	<string name="poi_building_type_pyramid">Tipo de edificio: pirámide</string>
+
+</resources>

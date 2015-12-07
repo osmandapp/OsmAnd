@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="no_address_found">Keine Adresse bekannt</string>
 	<string name="shared_string_near">Nähe</string>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
@@ -2055,7 +2056,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="si_min_m">Minuten pro Meile</string>
     <string name="si_nm_h">Nautische Meilen pro Stunde (Knoten)</string>
     <string name="shared_string_navigation">Navigation</string>
-    <string name="address_unknown">Adresse noch unbekannt</string>
+    <string name="looking_up_address">Adresse wird gesucht</string>
     <string name="favourites_context_menu_add">Favorit hinzufügen</string>
 	<string name="poi_action_delete">löschen</string>
 	<string name="show_on_start">Beim Start anzeigen</string>
@@ -2135,13 +2136,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="feedback">Feedback</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
-    <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht Menü</string>
+    <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="release_2_2">" • Neue Kontext-bezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Dashboard kann umgangen werden, falls menü-basierte App-Steuerung gewünscht ist\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr … "</string>
-    <string name="osm_save_offline">offline speichern</string>
+    <string name="osm_save_offline">Offline speichern</string>
     <string name="osm_edit_modified_poi">geänderter OSM-POI</string>
-    <string name="osm_edit_deleted_poi">OSM-POI löschen</string>
+    <string name="osm_edit_deleted_poi">Gelöschter OSM-POI</string>
     <string name="context_menu_item_open_note">OSM-Notiz erstellen</string>
     <string name="osm_edit_reopened_note">Wiedereröffnete OSM-Notiz</string>
     <string name="osm_edit_commented_note">Kommentierte OSM-Notiz</string>
@@ -2159,7 +2160,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="context_menu_item_delete_waypoint">GPX-Wegpunkt löschen?</string>
     <string name="context_menu_item_edit_waypoint">GPX-Wegpunkt bearbeiten</string>
     <string name="lang_fy">Westfriesisch</string>
-    <string name="lang_als">Albanisch (Tosk)</string>
+    <string name="lang_als">Albanisch (Toskisch)</string>
     <string name="poi_dialog_reopen">Wieder öffnen</string>
 	<string name="tab_title_basic">Basis</string>
 	<string name="tab_title_advanced">Fortgeschritten</string>
@@ -2187,7 +2188,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="favorite_category_add_new">neu erstellen</string>
     <string name="next_proceed">Weiter</string>
 	<string name="file_size_in_mb">%.1f MB</string>
-    <string name="please_specify_poi_type_only_from_list">"Bitte eine gültige POI-Art auswählen oder überspringen. "</string>
+    <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ auswählen oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM Bearbeitung mit OsmAnd geteilt</string>
     <string name="av_locations_descr">GPX Datei mit Audio/Video-Daten</string>
     <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads</string>
@@ -2198,8 +2199,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	
     <string name="av_locations">Positionen</string>
     <string name="shared_string_hide">verbergen</string>
-    <string name="av_video_quality_low">Niedrigste Auflösung</string>
-    <string name="av_video_quality_high">Höchste Auflösung</string>
+    <string name="av_video_quality_low">Niedrigste Qualität</string>
+    <string name="av_video_quality_high">Höchste Qualität</string>
     <string name="av_video_quality">Video Qualität</string>
     <string name="av_video_quality_descr">Wähle Video Qualität</string>
     <string name="av_audio_format">Audio Ausgabeformat</string>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -89,7 +90,7 @@
   <string name="local_index_transport_data">Dane transportu publicznego</string>
   <string name="local_index_map_data">Dane mapy</string>
   <string name="local_indexes_cat_backup">Kopia zapasowa</string>
-  <string name="local_indexes_cat_tts">Komunikaty głosowe (TTS)</string>
+  <string name="local_indexes_cat_tts">Komunikaty głosowe (syntezowane)</string>
   <string name="local_indexes_cat_voice">Komunikaty głosowe (nagrane)</string>
   
   <string name="local_indexes_cat_tile">Mapy online i buforowane kafelki</string>
@@ -783,7 +784,7 @@
   <string name="index_name_other">Mapy świata i tematyczne</string>
   <string name="index_name_wiki">Wikipedia dla POI</string>
   <string name="index_name_voice">Komunikaty głosowe (nagrane, ograniczone możliwości)</string>
-  <string name="index_name_tts_voice">Komunikaty głosowe (TTS, zalecane)</string>
+  <string name="index_name_tts_voice">Komunikaty głosowe (syntezowane, zalecane)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Własne</string>
   <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Zastąpić go?</string>
@@ -867,7 +868,7 @@
   
   <string name="show_cameras">Fotoradary</string>
   <string name="show_traffic_warnings">Ostrzeżenia</string>
-  <string name="avoid_toll_roads">Unikaj dróg płatnych</string>
+  <string name="avoid_toll_roads">Omijanie płatnych dróg</string>
   
   <string name="map_widget_top_text">Ulica</string>
   <string name="map_widget_config">Skonfiguruj ekran</string>
@@ -903,8 +904,8 @@
   <string name="layer_map_appearance">Skonfiguruj ekran</string>
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
-  <string name="avoid_in_routing_title">Unikaj…</string>
-  <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
+  <string name="avoid_in_routing_title">Omijanie…</string>
+  <string name="avoid_in_routing_descr">Wyznacza trasy omijając drogi płatne, nieutwardzone, promy</string>
   <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
   <string name="show_warnings_descr">Wyświetla ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
   
@@ -1339,14 +1340,14 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
 	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
 	<string name="routing_attr_short_way_description">Używa najkrótszej drogi</string>
-	<string name="routing_attr_avoid_toll_name">Unikanie płatnych dróg</string>
-	<string name="routing_attr_avoid_toll_description">Unikanie płatnych dróg</string>
-	<string name="routing_attr_avoid_unpaved_name">Unikanie nieutwardzonych dróg</string>
-	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
-	<string name="routing_attr_avoid_ferries_name">Unikanie przepraw promowych</string>
-	<string name="routing_attr_avoid_ferries_description">Unikanie przepraw promowych</string>
-	<string name="routing_attr_avoid_motorway_name">Unikanie autostrad</string>
-	<string name="routing_attr_avoid_motorway_description">Unikanie autostrad</string>
+	<string name="routing_attr_avoid_toll_name">Omijanie płatnych dróg</string>
+	<string name="routing_attr_avoid_toll_description">Omijanie płatnych dróg</string>
+	<string name="routing_attr_avoid_unpaved_name">Omijanie nieutwardzonych dróg</string>
+	<string name="routing_attr_avoid_unpaved_description">Omijanie nieutwardzonych dróg</string>
+	<string name="routing_attr_avoid_ferries_name">Omijanie przepraw promowych</string>
+	<string name="routing_attr_avoid_ferries_description">Omijanie przepraw promowych</string>
+	<string name="routing_attr_avoid_motorway_name">Omijanie autostrad</string>
+	<string name="routing_attr_avoid_motorway_description">Omijanie autostrad</string>
 	<string name="routing_attr_weight_name">Limit wagi</string>
 	<string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
     <string name="select_gpx">Wybierz GPX…</string>
@@ -1696,7 +1697,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="wake_on_voice">Włączanie ekranu</string>
     <string name="wake_on_voice_descr">Włącza ekran urządzenia podczas zbliżania się do zakrętu</string>
     
-    <string name="impassable_road">Unikaj dróg…</string>
+    <string name="impassable_road">Omijanie dróg…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
     
     <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów</string>
@@ -1746,7 +1747,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
 	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
 	<string name="show_pedestrian_warnings">Przejścia dla pieszych</string>
-    <string name="speak_pedestrian">Unikaj przejść dla pieszych</string>
+    <string name="speak_pedestrian">Omijanie przejść dla pieszych</string>
     
 	<string name="gps_status">Status GPS</string>
     <string name="version_settings_descr">Pobierz nocne kompilacje</string>
@@ -1873,7 +1874,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
     
-	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
+	<string name="routing_attr_avoid_borders_description">Omija przejścia graniczne z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
@@ -1962,8 +1963,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="error_message_pattern">Błąd: {0}</string>
 <string name="av_locations">Położenia</string>
     <string name="plugin_settings">Wtyczki</string>
-	<string name="routing_attr_avoid_shuttle_train_name">Unikaj pociągów wahadłowych</string>
-	<string name="routing_attr_avoid_shuttle_train_description">Unikanie pociągów wahadłowych</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Omijanie pociągów wahadłowych</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Omijanie pociągów wahadłowych</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
     <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
 	<string name="dahboard_options_dialog_title">Opcje kokpitu</string>
@@ -1999,7 +2000,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="show_gpx">Wyświetlanie GPX</string>
 <string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
 	<string name="count_of_lines">Liczba linii</string>
-<string name="address_unknown">Adres nie jest jeszcze znany</string>
     <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
 <string name="are_you_sure">Czy na pewno?</string>
 	<string name="shared_string_navigation">Nawigacja</string>
@@ -2072,7 +2072,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
     <string name="share_geo">wsp:</string>
     <string name="confirm_download_roadmaps">Pobrać mapę samochodową, nawet jeśli pobrano już zwykłą mapę?</string>
-    <string name="free_downloads_used_description">Możesz ustawić ile razy pobrań użyłeś</string>
+    <string name="free_downloads_used_description">Wyświetla ilość zużytych darmowych pobrań</string>
 
     <string name="show_on_start_description">\'Wyłącz\' bezpośrednio uruchamia ekran mapy</string>
     <string name="new_version">Nowa wersja</string>
@@ -2136,5 +2136,17 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_als">Albański (Tosk)</string>
     <string name="rendering_attr_roadStyle_description">Styl drogowy</string>
     <string name="poi_context_menu_modify_osm_change">Modyfikacja zmian OSM</string>
-    <string name="dashboard_or_drawer_title">Panel lub menu</string>
-    </resources>
+    <string name="dashboard_or_drawer_title">Kokpit lub menu</string>
+    <string name="av_video_quality_low">Najniższa rozdzielczość</string>
+    <string name="av_video_quality_high">Najwyższa rozdzielczość</string>
+    <string name="av_video_quality">Jakość video</string>
+    <string name="av_video_quality_descr">Proszę wybrać jakość wyjściowego nagrania video</string>
+    <string name="av_audio_format">Format dźwięku</string>
+    <string name="av_audio_format_descr">Proszę wybrać format wyjściowego nagrania dźwięku</string>
+    <string name="av_audio_bitrate">Przepływność dźwięku</string>
+    <string name="av_audio_bitrate_descr">Proszę wybrać wartość przepływności dźwięku</string>
+    <string name="shared_string_near">Obok</string>
+    <string name="routing_attr_avoid_stairs_name">Omijanie schodów</string>
+	<string name="routing_attr_avoid_stairs_description">Omijanie schodów</string>
+	<string name="routing_attr_avoid_borders_name">Omijanie przejść granicznych</string>
+	</resources>

@@ -91,8 +91,8 @@ public class CurrentPositionHelper {
 		double minBuildingDistance = 0;
 		for (GeocodingResult r : res) {
 			Collection<RegionAddressRepository> rar = app.getResourceManager().getAddressRepositories();
-			RegionAddressRepository  foundRepo = null;
-			for(RegionAddressRepository repo : rar) {
+			RegionAddressRepository foundRepo = null;
+			for (RegionAddressRepository repo : rar) {
 				BinaryMapIndexReader reader = repo.getFile();
 				for (RouteRegion rb : reader.getRoutingIndexes()) {
 					if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
@@ -100,15 +100,15 @@ public class CurrentPositionHelper {
 						break;
 					}
 				}
-				if(foundRepo != null) {
+				if (foundRepo != null) {
 					break;
 				}
 			}
 			if (foundRepo != null) {
 				List<GeocodingResult> justified = foundRepo.justifyReverseGeocodingSearch(r, minBuildingDistance);
-				if(!justified.isEmpty()) {
+				if (!justified.isEmpty()) {
 					double md = justified.get(0).getDistance();
-					if(minBuildingDistance == 0){
+					if (minBuildingDistance == 0) {
 						minBuildingDistance = md;
 					} else {
 						minBuildingDistance = Math.min(md, minBuildingDistance);
@@ -120,14 +120,12 @@ public class CurrentPositionHelper {
 			}
 		}
 		Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
-		if(complete.size() > 0) {
-			final GeocodingResult rts = complete.get(0);
-			app.runInUIThread(new Runnable() {
-				public void run() {
-					result.publish(rts);
-				}
-			});
-		}
+		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
+		app.runInUIThread(new Runnable() {
+			public void run() {
+				result.publish(rts);
+			}
+		});
 	}
 
 	private static double getOrthogonalDistance(RouteDataObject r, Location loc){

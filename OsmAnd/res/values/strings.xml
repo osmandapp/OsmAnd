@@ -9,18 +9,18 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
+    <string name="no_address_found">No address determined</string>
     <string name="shared_string_near">Near</string>
     <string name="shared_string_hide">Hide</string>
-    <string name="av_video_quality_low">Lowest resolution</string>
-    <string name="av_video_quality_high">Highest resolution</string>
+    <string name="av_video_quality_low">Lowest quality</string>
+    <string name="av_video_quality_high">Highest quality</string>
     <string name="av_video_quality">Video output quality</string>
     <string name="av_video_quality_descr">Select video output quality</string>
     <string name="av_audio_format">Audio output format</string>
     <string name="av_audio_format_descr">Select audio output format</string>
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Select audio bitrate</string>
-    <string name="please_specify_poi_type_only_from_list">Please specify the correct POI type or skip it. </string>
+    <string name="please_specify_poi_type_only_from_list">Please specify the correct POI type or skip it</string>
     <string name="access_from_map_description">Menu button launches dashboard, not menu</string>
     <string name="access_from_map">Access from map</string>
     <string name="show_on_start_description">\'Off\' directly launches the map screen</string>
@@ -117,7 +117,7 @@
     <string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
     <string name="simulate_your_location_descr">Simulate using a calculated route or a recorded GPX</string>
-    <string name="address_unknown">Address is not known yet</string>
+    <string name="looking_up_address">Looking up address</string>
     <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
@@ -441,7 +441,7 @@
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Northing</string>
     <string name="navigate_point_easting">Easting</string>
-    <string name="download_tab_downloads">All Downloads</string>
+    <string name="download_tab_downloads">All Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
     <string name="no_internet_connection">Downloading not possible, please check your Internet connection.</string>
