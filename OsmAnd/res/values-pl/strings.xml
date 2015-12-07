@@ -1037,7 +1037,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="shared_string_control_start">Start</string>
+    <string name="shared_string_control_start">Rozpocznij</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1131,7 +1131,7 @@
     <string name="shared_string_do_not_show_again">Nie pokazuj ponownie</string>
     <string name="distance_measurement_start_editing">Rozpocznij edycję</string>
     <string name="distance_measurement_finish_editing">Zakończ edycję</string>
-    <string name="distance_measurement_finish_subtrack">Rozpocznij nową podścieżkę</string>
+    <string name="distance_measurement_finish_subtrack">Rozpocznij nową podrzędną ścieżkę</string>
     <string name="distance_measurement_clear_route">Wyczyść punkty</string>
     
     <string name="distance_measurement_load_gpx">Otwórz plik GPX</string>
