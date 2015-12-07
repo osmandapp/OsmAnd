@@ -2029,4 +2029,5 @@
     <string name="av_audio_bitrate_descr">Välj ljudsamplingshastighet</string>
     <string name="no_address_found">Ingen adress angiven</string>
 	<string name="looking_up_address">Slår upp adressen</string>
+    <string name="rendering_attr_horseRoutes_name">Hästleder</string>
     </resources>
