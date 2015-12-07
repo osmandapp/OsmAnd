@@ -2028,4 +2028,5 @@
     <string name="shared_string_near">附近</string>
     <string name="no_address_found">沒有確定地址</string>
 	<string name="looking_up_address">查尋地址</string>
+    <string name="rendering_attr_horseRoutes_name">馬道</string>
     </resources>
