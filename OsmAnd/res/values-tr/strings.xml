@@ -1645,7 +1645,7 @@
 	<string name="layer_underlay">Underlay haritası …</string>
 	<string name="select_tile_source_to_install">Seç (kiremit) yüklemek veya güncellemek haritalar</string>
 	<string name="create_poi_link_to_osm_doc">&lt;u&gt; Online OSM &lt;/ u&gt; görüntüleri ile harita sınıflandırma<u>Online OSM</u> map classification with images</string>
-	<string name="search_offline_geo_error">Coğrafi niyet ayrıştırılamadı \'% s\'</string>
+	<string name="search_offline_geo_error">Coğrafi niyet ayrıştırılamadı \'%s\'</string>
 	<string name="unit_of_length">Ölçü birimi</string>
 	<string name="keep_informing_never">Sadece elle (musluk ok)</string>
     <string name="keep_informing_descr">Yeniden duyurmak düzenli aralıklarla navigasyon talimatları</string>
@@ -1654,6 +1654,6 @@
 	<string name="shared_string_others">Diğerleri</string>
 	<string name="vector_data_missing">Gemide (\'offline\') veri SD kart üzerinde eksik. Haritalar çevrimdışı kullanmak için indirmek için düşünün lütfen.</string>
 	<string name="shared_string_release">Çıkış</string>
-	<string name="local_index_action_do">Siz 1 $ s% 2 $ s kalem (ler)% üzeresiniz. Devam?</string>
+	<string name="local_index_action_do">Siz %1$s %2$s kalem (ler) üzeresiniz. Devam?</string>
 	<string name="index_name_netherlands">Avrupa - Hollanda</string>
 	</resources>
