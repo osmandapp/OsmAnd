@@ -2517,7 +2517,7 @@
 
 <string name="poi_internet_access_type_yes">Med internetadgang</string>
 
-	<string name="poi_health_specialty_general_yes">Sundhedsspeciale: alment praktiserende læge</string>
+	<string name="poi_health_specialty_general_yes">Sundhedsspeciale: praktiserende læge</string>
 	<string name="poi_health_specialty_ophthalmology_yes">Sundhedsspeciale: oftalmologi</string>
 	<string name="poi_health_specialty_gynaecology_yes">Sundhedsspeciale: gynækologi</string>
 	<string name="poi_health_specialty_internal_medicine_yes">Sundhedsspeciale: intern medicin</string>
