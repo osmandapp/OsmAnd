@@ -161,7 +161,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			@Override
 			public void uploadUpdated(OsmPoint point) {
 				super.uploadUpdated(point);
-				if (!DashOsmEditsFragment.this.isDetached()) {
+				if (DashOsmEditsFragment.this.isAdded()) {
 					onOpenDash();
 				}
 			}
@@ -169,7 +169,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			@Override
 			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
 				super.uploadEnded(loadErrorsMap);
-				if (!DashOsmEditsFragment.this.isDetached()) {
+				if (DashOsmEditsFragment.this.isAdded()) {
 					onOpenDash();
 				}
 			}
