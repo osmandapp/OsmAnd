@@ -105,7 +105,7 @@
 	<string name="poi_motorcycle">Revenda de motocicletas</string>
 	<string name="poi_musical_instrument">Loja de instrumentos musicais</string>
 	<string name="poi_newsagent">Agência de notícias</string>
-	<string name="poi_optician">Optometrista</string>
+	<string name="poi_optician">Ótica</string>
 	<string name="poi_organic">Produtos orgânicos</string>
 	<string name="poi_outdoor">Loja de esporte/aventura</string>
 	<string name="poi_paint">Loja de tintas</string>
@@ -381,7 +381,7 @@
 	<string name="poi_village">Povoado</string>
 	<string name="poi_hamlet">Lugarejo</string>
 	<string name="poi_isolated_dwelling">Moradia isolada</string>
-	<string name="poi_suburb">Subúrbio</string>
+	<string name="poi_suburb">Bairro</string>
 	<string name="poi_quarter">Quarteirão</string>
 	<string name="poi_residential">Área residencial</string>
 
@@ -621,7 +621,7 @@
 	<string name="poi_cafe">Cafeteria</string>
 	<string name="poi_biergarten">Biergarten</string>
 	<string name="poi_restaurant">Restaurante</string>
-	<string name="poi_fast_food">Fast-food</string>
+	<string name="poi_fast_food">Lanchonete</string>
 	<string name="poi_bar">Bar</string>
 	<string name="poi_pub">Pub</string>
 	<string name="poi_food_court">Praça de alimentação</string>

@@ -1173,7 +1173,7 @@
 	<string name="voice_is_not_available_title">Nenhuma orientação por voz selecionada</string>
 	<string name="fav_saved_sucessfully">Favoritos salvos em {0}</string>
 	<string name="no_fav_to_save">Nenhum favorito para salvar</string>
-	<string name="layer_osm_bugs">Notas no OSM (online)</string>
+	<string name="layer_osm_bugs">Notas do OSM (online)</string>
 	<string name="context_menu_item_search_poi">Pesquisar POI</string>
 	
 	<string name="where_am_i">Onde estou?</string>
@@ -1293,11 +1293,11 @@
 	<string name="overlay_transparency">Transparência da sobreposição</string>
 	<string name="map_transparency_descr">Modificar transparência do mapa base</string>
 	<string name="map_transparency">Transparência do mapa base</string>
-	<string name="layer_underlay">Mapa subjacente…</string>
-	<string name="map_underlay">Mapa subjacente</string>
+	<string name="layer_underlay">Camada inferior…</string>
+	<string name="map_underlay">Mapa da camada inferior</string>
 	<string name="map_underlay_descr">Escolher mapa da camada inferior</string>
-	<string name="layer_overlay">Mapa sobreposto…</string>
-	<string name="map_overlay">Mapa sobreposto</string>
+	<string name="layer_overlay">Camada superior…</string>
+	<string name="map_overlay">Mapa da camada superior</string>
 	<string name="map_overlay_descr">Escolher mapa da camada superior</string>
 	<string name="tile_source_already_installed">Mapa já está instalado, as configurações serão atualizadas</string>
 	<string name="select_tile_source_to_install">Selecione os mapas (quadrículas) para instalar ou atualizar</string>
@@ -1824,7 +1824,7 @@
     <string name="osm_edit_removed_note">Nota no OSM apagada</string>
 	<string name="osm_edit_created_note">Nota no OSM criada</string>
 	<string name="osn_bug_name">Nota no OSM</string>
-	<string name="osn_add_dialog_title">Nota criada</string>
+	<string name="osn_add_dialog_title">Criar nota</string>
 	<string name="osn_comment_dialog_title">Adicionar comentário</string>
 	<string name="osn_reopen_dialog_title">Reabrir nota</string>
 	<string name="osn_close_dialog_title">Fechar nota</string>
