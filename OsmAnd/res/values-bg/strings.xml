@@ -1804,7 +1804,7 @@
     <string name="osm_edit_modified_poi">Модифицирани OSM POI</string>
     <string name="osm_edit_deleted_poi">Изтрити OSM POI</string>
     <string name="context_menu_item_open_note">Отвори OSM бележка</string>
-    <string name="please_specify_poi_type_only_from_list">"Моля, задайте правилния тип POI или пропуснете. "</string>
+    <string name="please_specify_poi_type_only_from_list">Моля, задайте правилния тип POI или пропуснете</string>
     <string name="access_from_map_description">Бутонът \'Меню\' стартира таблото за управление</string>
     <string name="access_from_map">Достъп от картата</string>
     <string name="show_on_start_description">Ако е изключено се стартира с екрана на картата</string>
@@ -1992,8 +1992,8 @@
 <string name="osmo_auto_send_locations_descr">Автоматично стартиране на тракер сесия и изпращане на данни</string>
     <string name="shared_string_near">Близо</string>
     <string name="shared_string_hide">Скрий</string>
-    <string name="av_video_quality_low">Най-ниска резолюция</string>
-    <string name="av_video_quality_high">Най-висока резолюция</string>
+    <string name="av_video_quality_low">Най-ниско качество</string>
+    <string name="av_video_quality_high">Най-високо качество</string>
     <string name="av_video_quality">Качество на видеото</string>
     <string name="av_video_quality_descr">Изберете качество на видеото</string>
     <string name="av_audio_format">Формат за аудио изход</string>
