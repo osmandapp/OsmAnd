@@ -123,7 +123,7 @@
     <string name="index_name_openmaps">AB Açık haritası</string>
     
     
-    <string name="precise_routing_mode_descr">Hatasız hassas rotaları hesaplamak için hassas yönlendirmeyi etkinleştirin. Bu mesafe çok sınırlıdır ve yerel kitaplık kullanmaz.</string>
+    <string name="precise_routing_mode_descr">Glitches olmadan kesin yolları hesaplamak için etkinleştirin. Yine uzaktan sınırlı ve yavaş.</string>
     <string name="av_use_external_camera_descr">Fotoğraf için dahili uygulamayı kullan</string>
     <string name="av_use_external_camera">Kamera uygulamasını kullan</string>
     <string name="recording_is_recorded">Ses/Video kayıt ediliyor. Durdurmak için bu AV ikonuna basın.</string>
@@ -725,7 +725,7 @@
 	<string name="internet_connection_required_for_online_route">Çevrimiçi navigasyon seçildi ancak İnternet bağlantısı kullanılabilir değil.</string>
 	<string name="layer_hillshade">Tepe gölgesi katmanı</string>
     <string name="map_widget_fps_info">FPS hata ayıklama bilgisi</string>
-	<string name="driving_region_descr">Sürüş Bölgesi Seçimi : Amerika, Avrupa, Birleşik Krallık, Asya ve Diğerleri</string>
+	<string name="driving_region_descr">Sürüş bölgeyi seçin: ABD Avrupa, İngiltere, Asya ve Diğerleri</string>
 	<string name="driving_region">Sürüş Bölgesi</string>
 	<string name="driving_region_japan">Japonya</string>
 	<string name="driving_region_us">Amerika</string>
@@ -736,13 +736,13 @@
     
     <string name="speak_title">Duyuru…</string>
 	<string name="speak_descr">Sokak isimleri, trafik uyarıları (mecburi duruşlar, tümsekler), hız kamerası uyarıları, hız sınırları bildirimlerini ayarla</string>
-	<string name="speak_street_names">Sokak isimlerini bildir</string>
-    <string name="speak_speed_limit">Hız sınırlarını bildir</string>
-    <string name="speak_cameras">Hız kameralarını bildir</string>
-	<string name="speak_traffic_warnings">Trafik uyarılarını bildir</string>
+	<string name="speak_street_names">Sokak isimleri(TTS)</string>
+    <string name="speak_speed_limit">Hız sınırları</string>
+    <string name="speak_cameras">Hız kameraları</string>
+	<string name="speak_traffic_warnings">Trafik uyarıları</string>
     <string name="osb_author_or_password_not_specified">Lütfen OSM kullanıcı adı ve şifrenizi Ayarlar bölümünde belirtin</string>
-    <string name="context_menu_item_directions_to">Varış yeri</string>
-    <string name="context_menu_item_directions_from">Hareket yeri</string>
+    <string name="context_menu_item_directions_to">Yol tarifi</string>
+    <string name="context_menu_item_directions_from">Yol tarifi</string>
     <string name="route_descr_map_location">Harita: </string>
     <string name="route_to">Buraya:</string>
     <string name="route_via">Üzerinden:</string>
@@ -783,7 +783,7 @@
     <string name="cancel_navigation">Navigasyonu durdur</string>
     <string name="clear_destination">Varış noktasını temizle</string>
     <string name="download_using_mobile_internet">Şuanda Wifi ağına bağlı değil. Mevcut internet bağlantısı ile indirilsin mi?</string>
-    <string name="street_name">Sokak</string>
+    <string name="street_name">Sokak Adı</string>
 	<string name="hno">Bina numarası</string>
     <string name="website">İnternet sitesi</string>
 	<string name="monitoring_settings">Seyahat kaydetme</string>
@@ -797,7 +797,7 @@
     <string name="favourites_list_activity">Favoriyi seç</string>
     <string name="local_openstreetmap_act_title">OSM değişiklikleri</string>
     <string name="shared_string_more_actions">Diğer komutlar</string>
-    <string name="local_indexes_cat_srtm">Çevreleme çizgileri verisi</string>
+    <string name="local_indexes_cat_srtm">Kontür çizgileri</string>
     <string name="announce_gpx_waypoints">GPX yol işaretlerini söyle</string>
     <string name="about_version">Sürüm :</string>
     <string name="shared_string_about">Hakkında</string>
@@ -824,7 +824,7 @@
         * Daha fazla eylem için ölçüm aracına tıklayın.</string>
     <string name="files_limit">%1$d dosya kaldı</string>
     <string name="available_downloads_left">%1$d dosya indirmek için uygun</string>
-    <string name="osmand_background_plugin_description">Uyku (ekran kapalı) kipinde zaman zaman GPS aygıtını uyandırarak takibi ve gezintiyi etkinleştirmek için ayarları göster.</string>
+    <string name="osmand_background_plugin_description">Periyodik GPS cihazı uyanma aracılığıyla arka planda izleme ve navigasyon (kapalı ekranı) modunu etkinleştirmek için ayarları gösterir.</string>
     <string name="get_directions">Yol Tarifleri</string>
 	<string name="menu_layers">Harita katmanları</string>
 	
@@ -1048,21 +1048,21 @@
 	<string name="routing_attr_short_way_name">Kısa yol</string>
 	<string name="routing_attr_avoid_toll_name">Ücretli yolları kaçının</string>
 	<string name="routing_attr_avoid_toll_description">Ücretli yolları kaçının</string>
-	<string name="routing_attr_avoid_unpaved_name">Asfalt olmayan yollar kaçınmak</string>
+	<string name="routing_attr_avoid_unpaved_name">Asfalt olmayan yollardan kaçınmak</string>
 	<string name="routing_attr_avoid_unpaved_description">Asfalt olmayan yollar kaçınmak</string>
-	<string name="routing_attr_avoid_ferries_name">Geçişleri kaçınmak</string>
+	<string name="routing_attr_avoid_ferries_name">Feribotları kaçının</string>
 	<string name="routing_attr_avoid_ferries_description">Geçişleri kaçınmak</string>
-	<string name="routing_attr_avoid_motorway_name">Road motosiklet kaçınmak</string>
+	<string name="routing_attr_avoid_motorway_name">Otoyollardan kaçının</string>
 	<string name="routing_attr_avoid_motorway_description">Road motosiklet kaçınmak</string>
-	<string name="routing_attr_weight_name">ağır</string>
-	<string name="routing_attr_weight_description">Ağırsınırı belirlemek</string>
-    <string name="copying_osmand_files">Osmand dosya kopyalandı</string>
+	<string name="routing_attr_weight_name">Ağırlık sınırı</string>
+	<string name="routing_attr_weight_description">Aracın ağırlığını belirtin güzergahlarda izin verilecek</string>
+    <string name="copying_osmand_files">Kopyalama Osmand veri dosyaları …</string>
     <string name="calculate_osmand_route_gpx">Çevrimdışı yol hesaplama Osmand</string>
     <string name="app_mode_truck">kamyon</string>
-    <string name="routing_attr_short_way_description">Kısa yoldan git</string>
+    <string name="routing_attr_short_way_description">En kısa yolu kullanın</string>
 	
     <string name="copying_osmand_one_file_descr">Şimdidosya ($1%s ) Yeni Geliş kopyalamak …</string>
-    <string name="copying_osmand_files_descr">Osmandyeni hedefedosyaları kopyalamak ( $1%s )</string>
+    <string name="copying_osmand_files_descr">Yeni hedef (% s) için Osmand veri dosyaları kopyalanıyor …</string>
     <string name="guidance_preferences_descr">öncelikli navigasyon</string>
     <string name="routing_preferences_descr">Öncelikli yönlendirme</string>
     <string name="speech_rate_descr">TTS için ayarlanmış hoparlörler</string>
@@ -1074,16 +1074,16 @@
     <string name="amenity_type_seamark">Mark Deniz</string>
     <string name="app_modes_choose_descr">Profil görüntüle seçili</string>
     <string name="app_modes_choose">programın Profil</string>
-	<string name="map_widget_map_rendering">Haritayı Rendering :</string>
+	<string name="map_widget_map_rendering">Harita oluşturma</string>
     <string name="app_mode_hiking">yürüyüş</string>
     <string name="app_mode_motorcycle">Motosikletler</string>
     <string name="app_mode_boat">tekne</string>
     <string name="app_mode_aircraft">düzlem</string>
     
     
-    <string name="local_osm_changes_delete_all_confirm">Siz %1$d osm değişiklikleri kaldırmak üzeresiniz .Emin misin ?</string>
+    <string name="local_osm_changes_delete_all_confirm">Sen% 1 $ d OSM değişiklikleri silmek için gidiyoruz. Emin misiniz?</string>
     <string name="shared_string_delete_all">Tümünü sil</string>
-    <string name="animate_routing_route_not_calculated">Şimdi rotayı hesaplamak Lütfen</string>
+    <string name="animate_routing_route_not_calculated">Lütfen ilk rotayı hesapla</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
     <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
     <string name="shared_string_remember_my_choice">Seçimimi hatırla</string>
@@ -1650,4 +1650,20 @@
     <string name="interrupt_music_descr">Duyuruyu yapma Kesme müzik</string>
 	<string name="interrupt_music">Müzik Kesme</string>
 	<string name="osmand_extended_description_4000_chars">" Osmand (OSM Otomatik Navigasyon Yol) ücretsiz, dünyada ve kaliteli OpenStreetMap (OSM) verilerine erişimi olan bir harita ve navigasyon uygulamasıdır. Tüm harita verileri çevrimdışı kullanım için cihazınızın hafıza kartında saklanabilir. Cihazınızın GPS ile, Osmand araba, bisiklet ve yaya için, optik ve sesli yönlendirme ile, yönlendirme sunuyor. Tüm ana işlevleri çevrimiçi ve çevrimdışı (gerekli hiçbir internet) hem çalışır. Önemli özelliklerinden bazıları: Navigasyon - Online İşleri (hızlı) veya çevrimdışı (hayır yurt dışında olduğunuzda dolaşım ücretleri) - Turn-by-turn sesli yönlendirme (kayıtlı ve sesler sentezlenen) - İsteğe bağlı şeritli rehberlik, cadde adı ekranı ve tahmini süre varış - Otomatik yeniden yönlendirme size rotadan ne zaman - - senin güzergah üzerinde ara noktaları destekler türüne göre, adresine göre yerleri arayın: Görüntüleme haritada (örneğin restoran, otel, benzin istasyonu, müze), veya coğrafi koordinatlara göre - Ekran harita üzerinde konumu ve yönelimi - Sık olarak en önemli yerleri kaydedin - - Ekran POI (ilgi noktası) çevrenizdeki - İsteğe bağlı pusula veya hareket yönünüz göre haritayı hizalamak uzman online kiremit haritaları görüntüleyebilir miyim - uydu görünümüne Can (Bing) - turne / navigasyon GPX parça ve özelleştirilebilir şeffaflık ile ek haritalar gibi farklı bindirmeleri görüntüleyebilir miyim - İngilizce, yerel, ya da fonetik yazım Kullanım OpenStreetMap ve Wikipedia Veri ekran yer isimleri İsteğe bağlı: - en iyi işbirliği projelerinden Yüksek kaliteli bilgilerini Dünya - ülkenizde veya bölgenizde başına kullanılabilir OpenStreetMap Global haritalar, - Sınırsız ücretsiz indirmek, doğrudan uygulama (ücretsiz sürümü indir sınırı 16 harita dosyalarından) den - - Vikipedi POI (ücretsiz sürümü mevcut değildir) gezi için büyük yukarı Daima (ayda en az bir kez güncellenir) güncel haritalar - Kompakt çevrimdışı vektör haritaları - tam harita verileri ve adil bir yol ağı arasında seçin (örnek: Japonya tamamı 700 MB veya tek yol ağı için 200 MB) - Ayrıca, çevrimiçi destek veya önbelleğe alınmış fayans Emniyet Özellikleri haritalar - İsteğe bağlı otomatik gündüz / gece görünümü değiştirme - İsteğe bağlı hız sınırı göstergesi, hatırlatma ile bunu aşarsa - İsteğe bağlı hıza bağlı harita yakınlaştırmayı - Arkadaşlarınızın size Bisiklet ve Yaya Özellikleri bulabilirsiniz böylece konumunuzu paylaşın - Yerel GPX dosya veya çevrimiçi hizmet Opsiyonel gezi kaydı - Özel yönlendirme ve bisiklet ve yaya için görüntüleme modları - - İsteğe bağlı toplu taşıma durakları (otobüs, tramvay, tren) hattı adları dahil haritalar ayak, yürüyüş ve bisiklet yolları, açık hava etkinlikleri için harika dahil - İsteğe bağlı hız ve irtifa gösterge - (Ek eklenti yoluyla) kontur hatları ve hillshades Ekran Doğrudan OpenStreetMap katkıda - Rapor haritası notlar - Yükle GPX doğrudan app OSM izler - İÇN ekleyin ve doğrudan OSM yükleyin (veya daha sonra çevrimdışı ise ) - Cihaz uyku modundayken de arka plan modunda İsteğe gezi kaydı () Osmand açık kaynak ve aktif olarak geliştirilmektedir olduğunu. Herkes, notları raporlama çevirileri iyileştirilmesi veya yeni özellikler kodlama uygulamaya katkıda bulunabilir. Proje geliştirici ve kullanıcı etkileşimi tüm bu formları tarafından sürekli iyileştirme canlı durumda. Proje ilerleme de yeni işlevler geliştirme, kodlama, test ve finanse etmek için mali katkıları dayanır. Uygulamayı yardım + Osmand satın alarak daha müthiş olmak! Bu özel yeni özellikler fon veya osmand.net üzerinde genel bağış yapmak da mümkündür. Yaklaşık harita kapsama alanı ve kalite: - Batı Avrupa: **** - Doğu Avrupa: *** - Rusya: *** - Kuzey Amerika: *** - Güney Amerika: ** - Asya: ** - Japonya ve Kore: *** - Orta Doğu: ** - Afrika: ** - Antarktika: * ülkelerin listesi destekli (temelde dünya çapında!): Afganistan, Arnavutluk, Cezayir, Andorra, Angola, Anguilla, Antigua ve Barbuda, Arjantin, Ermenistan, Aruba Avustralya, Avusturya, Azerbaycan, Bahamalar, Bahreyn, Bangladeş, Barbados, Beyaz Rusya, Belçika, Belize, Benin, Bermuda, Bhutan, Bolivya, Bonaire, Bosna Hersek, Botswana, Brezilya, İngiliz Virgin Adaları, Brunei, Bulgaristan, Burkina Faso, Burundi, Kamboçya, Kamerun, Kanada, Cape Verde, Orta Afrika Cumhuriyeti, Çad, Şili, Çin, Kolombiya, Komor Adaları, Kongo, Kosta Rika, Fildişi Sahilleri, Hırvatistan, Küba, Curaçao, Kıbrıs, Çek Cumhuriyeti, Danimarka, Cibuti, Dominika, Dominik Cumhuriyeti, Ekvator, Mısır, El Salvador, Ekvator Ginesi, Eritre, Estonya, Etiyopya, Fiji, Finlandiya, Fransa, Fransız Guyanası, Fransız Polinezyası, Gabon, Gambiya, Gürcistan, Almanya, Gana, Cebelitarık, Yunanistan, Grönland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Gine, Gine-Bissau, Guyana, Haiti, Vatikan, Honduras, Hong Kong, Macaristan, İzlanda, Hindistan, Endonezya, İran, Irak, İrlanda, Man, İsrail, İtalya, Jamaika, Japonya Adası, Jersey, Ürdün, Kazakistan, Kenya, Kiribati, Kuzey Kore ve Güney Kore, Kuveyt, Kırgızistan, Laos, Letonya, Lübnan, Lesotho, Liberya, Libya, Lihtenştayn, Litvanya, Lüksemburg, Makao, Makedonya, Madagaskar, Malavi, Malezya, Maldivler, Mali, Malta, Martinik, Moritanya, Mauritius, Mayotte, Meksika, Mikronezya, Moldova, Monako, Moğolistan, Karadağ, Montserrat, Fas, Mozambik, Myanmar, Namibya, Nauru, Nepal, Hollanda, Hollanda Antilleri, Yeni Kaledonya, Yeni Zelanda, Nikaragua , Nijer, Nijerya, Norveç, Umman, Pakistan, Palau, Filistin Toprakları, Panama, Papua Yeni Gine, Paraguay, Peru, Filipinler, Polonya, Portekiz, Porto Riko, Katar, Romanya, Rusya, Ruanda, Aziz Barthelemy, Saint Helena Saint Kitts ve Nevis Saint Lucia, Saint Martin, Saint Pierre ve Miquelon Saint Vincent ve Grenadinler, Samoa, San Marino, Suudi Arabistan, Senegal, Sırbistan, Seyşeller, Sierra Leone, Singapur, Slovakya, Slovenya, Somali, Güney Afrika, Güney Gürcistan, Güney Sudan, İspanya, Sri Lanka, Sudan, Surinam, Swaziland, İsveç, İsviçre, Suriye, Tayvan, Tacikistan, Tanzanya, Tayland, Doğu Timor, Togo, Tokelau, Tonga, Trinidad ve Tobago, Tunus, Türkiye, Türkmenistan, Tuvalu, Uganda, Ukrayna, Birleşik Arap Emirlikleri, Birleşik Krallık (UK), Amerika (ABD), Uruguay, Özbekistan, Vanuatu, Venezuela, Vietnam, Wallis ve Futuna, Batı Sahara, Yemen, Zambiya, Zimbabve Birleşik Devletleri. "</string>
-	</resources>
+	<string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="use_displayed_track_for_navigation">Navigasyon için görüntülenen parçayı kullanmak istiyor musunuz?</string>
+    <string name="keep_and_add_destination_point">Varış noktası olarak ekle</string>
+    <string name="select_gpx">GPX Seçiniz …</string>
+    <string name="route_descr_select_destination">Hedef Seç</string>
+    <string name="route_preferences">Güzergah tercihleri</string>
+    <string name="route_info">Güzergah bilgileri</string>
+    <string name="routing_attr_avoid_stairs_name">Merdivenlerden kaçının</string>
+    <string name="routing_attr_avoid_stairs_description">Merdivenlerden kaçının</string>
+    <string name="routing_attr_avoid_borders_name">Sınır kapılarından kaçının</string>
+    <string name="routing_attr_avoid_borders_description">Başka bir ülkeye sınır kapısı kaçının</string>
+    <string name="routing_attr_height_name">Yükseklik sınırı</string>
+    <string name="routing_attr_height_description">Araç yüksekliği belirtin güzergahlarda izin verilecek</string>
+    <string name="edit_tilesource_minzoom">En az yakınlaştırma</string>
+    <string name="route_descr_destination">Varış yeri</string>
+    <string name="local_osm_changes_backup">OSM değişiklik olarak yedekleme</string>
+    </resources>
