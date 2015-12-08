@@ -10,9 +10,9 @@
 	<string name="gps_not_available">Lütfen GPS i ayarlardan açık konuma getirin</string>
     <string name="map_widget_monitoring_services">Log servisi</string>
 	<string name="no_route">Rota yok</string>
-	<string name="delete_target_point">Ara noktayı kaldır</string>
+	<string name="delete_target_point">Hedef kaldırmak</string>
 	<string name="target_point">Ara nokta %1$s</string>
-    <string name="intermediate_point">Ara nokta %1$s</string>
+    <string name="intermediate_point">Hedef %1$ s</string>
     <string name="context_menu_item_last_intermediate_point">Son ara nokta olarak ekle</string>
     <string name="context_menu_item_first_intermediate_point">İlk ara nokta olarak ekle</string>
     <string name="add_as_last_destination_point">Son ara nokta olarak ekle</string>
@@ -95,7 +95,7 @@
     
 	<string name="local_indexes_cat_av">Ses/Video verisi</string>
     <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinizden emin misiniz?</string>
-    <string name="clear_dest_confirm">Varış noktasını temizlemek istediğinizden emin misiniz?</string>
+    <string name="clear_dest_confirm">Hedef ppint (ve ara hedefler) temizlemek istediğinizden emin misiniz?</string>
     <string name="precise_routing_mode">Hassas yönlendirme (alfa)</string>
     <string name="recording_context_menu_show">Göster</string>
     <string name="recording_photo_description">%2$s fotoğrafın %1$s cisi</string>
@@ -813,10 +813,10 @@
     <string name="edit_tilesource_choose_existing">Varolanı seçin…</string>
     <string name="edit_tilesource_name">İsim</string>
     <string name="maps_define_edit">Tanımla/Düzenle…</string>
-	<string name="clear_intermediate_points">Ara noktaları temizle</string>
-    <string name="keep_intermediate_points">Ara noktaları sakla</string>
+	<string name="clear_intermediate_points">Açık ara hedefler</string>
+    <string name="keep_intermediate_points">Ara hedefler tutun</string>
     <string name="new_directions_point_dialog">Zaten ara noktaları belirlemişsiniz.</string>
-    <string name="intermediate_items_sort_return">Ara yol noktaları varış noktası yolundaki düzeni en uygun hale getirir.</string>
+    <string name="intermediate_items_sort_return">Ara hedefler sıralarına hedef geçerli konumdan giden yolda en iyi duruma getirmek için başvurdu.</string>
     <string name="gpx_saved_sucessfully">GPX dosyası {0} yerine başarıyla kaydedildi</string>
     <string name="use_distance_measurement_help">* Nokta belirlemek için basın.\n 
         * Önceki noktayı silmek için basılı tutun.\n
@@ -1090,7 +1090,7 @@
     
     <string name="shared_string_and">ve</string>
     <string name="shared_string_or">veya</string>
-	<string name="route_is_too_long">OsmAnd isimli yönlendirme fazla 200km ayrı noktalarda için çok uzun ( ya da bazen çalışmıyor ) alabilir .Daha iyi performans için ara rota noktası eklemek isteyebilirsiniz .</string>
+	<string name="route_is_too_long">Çevrimdışı yönlendirme çok uzun sürer (ya da bazen işe) için OsmAnd fazla 200 km ayrı puan. Daha iyi performans için ara hedefler eklemek isteyebilirsiniz.</string>
 	<string name="auto_zoom_none">Otomatik odaklama Kapalı</string>
 	<string name="auto_zoom_close">yakın</string>
 	<string name="auto_zoom_far">menzil</string>
@@ -1765,7 +1765,7 @@
     <string name="osmo_connect_to_device_name">Kullanıcı adı</string>
     <string name="osmo_connect_to_group_id">Grup kimliği</string>
     <string name="osmo_group_name">Grup ismi</string>
-    <string name="select_destination_and_intermediate_points">Gezi seçin</string>
+    <string name="select_destination_and_intermediate_points">Ara hedefler seçin</string>
     <string name="layer_amenity_label">Nokta etiketleri</string>
     <string name="loading_smth">%1$s yükleniyor …</string>
     <string name="map_widget_plain_time">Şimdiki zaman</string>
@@ -1978,4 +1978,15 @@
     <string name="live_monitoring_stop">Online izleme durdurun</string>
     <string name="gpx_monitoring_start">GPX günlüğü başlat</string>
     <string name="gpx_monitoring_stop">Dur GPX günlüğü</string>
+    <string name="gpx_start_new_segment">Yeni bir segment başlat</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Olmayan araç otoyolları gizle</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Ahşap ve scrubs gizle</string>
+    <string name="rendering_attr_buildings15zoom_name">Binalar üzerinde yakınlaştırma 15</string>
+    <string name="rendering_attr_hideAccess_name">Erişim kısıtlamaları gizle</string>
+    <string name="rendering_attr_showAccess_name">Erişim kısıtlamaları göster</string>
+    <string name="rendering_attr_showSurfaces_name">Yol yüzeyi göster</string>
+    <string name="rendering_attr_showCycleRoutes_name">Döngüsü yolları göster</string>
+    <string name="osmo_auth_error_short">Yetkilendirme başarısız oldu</string>
+    <string name="osmo_auth_error">OsMo yetkilendirme hata oluştu: %1$ s.\nAşağı bir geçici olarak hizmet olabilir veya kayıt süresi.\nYeni kayıt devam etmek istiyor musunuz?</string>
+    <string name="osmo_group_information_desc">" -Tüm oluşturulan grupları genel! Anonim olmak istiyorsan, izci kimlikleri üzerinden doğrudan aygıtlarını bağlayın.\n-Özel gruplar için 8 kişi sınırlıdır\nHareketsizlik ya da 2 hafta için sadece 1 kişi faaliyet-grup-ecek var olmak silmek.\n-Sadece davet, ama kontrol grubuna yönetici konsolu için gitmek gerekir gibi grup giriş, sınırlayabilirsiniz.\n-Bir grup oluşturun, ancak diğer koşulları ile lütfen http://osmo.mobi başvurun gerekiyorsa"</string>
     </resources>
