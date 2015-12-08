@@ -20,10 +20,10 @@
     <string name="replace_destination_point">Hedef noktasını değiştir</string>
     <string name="new_destination_point_dialog">Hedef konumları zaten bulunmaktadır.</string>
     <string name="target_points">Ara noktalar</string>
-    <string name="intermediate_point_too_far">%1$s ara noktası en yakın yola çok fazla uzakta.</string>
-    <string name="arrived_at_intermediate_point">Ara noktaya vardınız</string>
-    <string name="context_menu_item_intermediate_point">Ara nokta olarak ekle</string>
-    <string name="map_widget_intermediate_distance">Ara nokta</string>
+    <string name="intermediate_point_too_far">Ara hedef %1$ s çok uzak en yakın yol var.</string>
+    <string name="arrived_at_intermediate_point">Ara hedefinize ulaştınız</string>
+    <string name="context_menu_item_intermediate_point">Ara hedef olarak eklemek</string>
+    <string name="map_widget_intermediate_distance">Ara hedef</string>
     <string name="ending_point_too_far">Bitiş noktası en yakın yola çok fazla uzaklıkta.</string>
     <string name="add_tag">Etiket Ekle</string>
     <string name="btn_advanced_mode">Gelişmiş Kip…</string>
