@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/map_route_preparation_layout"
     android:layout_gravity="bottom"
     android:background="?attr/bottom_menu_view_bg"
     android:clickable="true"

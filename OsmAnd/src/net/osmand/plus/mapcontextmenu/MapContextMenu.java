@@ -259,6 +259,10 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
+	public void showMinimized(LatLon latLon, PointDescription pointDescription, Object object) {
+		init(latLon, pointDescription, object);
+	}
+
 	public void close() {
 		if (active) {
 			active = false;

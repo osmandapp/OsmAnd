@@ -19,9 +19,6 @@
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="1dp"
         android:background="@color/osmand_orange"
         android:focusable="false" />
 

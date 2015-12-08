@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.views.controls.MapRouteInfoControl;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoControl;
 import net.osmand.util.Algorithms;
 import android.content.Intent;
 import android.net.Uri;

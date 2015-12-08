@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="?attr/bottom_menu_view_bg"
-    android:orientation="vertical" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="?attr/left_menu_view_bg"
+              android:orientation="vertical" >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="0dp" 
+        android:layout_height="0dp"
         android:layout_weight="1">
     </ListView>
 
@@ -71,5 +71,5 @@
         android:focusable="false"/>
 
     <include layout="@layout/map_route_prepare_bottom" />
-    
+
 </LinearLayout>

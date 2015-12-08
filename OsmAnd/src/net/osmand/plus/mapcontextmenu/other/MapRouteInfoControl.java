@@ -1,4 +1,4 @@
-package net.osmand.plus.views.controls;
+package net.osmand.plus.mapcontextmenu.other;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -42,7 +42,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.MapRoutePreferencesControl.RoutePrepareDialog;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -82,7 +81,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 			} else {
 				getTargets().setStartPoint(latlon, true, null);
 			}
-			contextMenu.show(latlon, null, null);
+			contextMenu.showMinimized(latlon, null, null);
 			showDialog();
 			return true;
 		}
@@ -120,7 +119,6 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	}
 	
 	private void updateInfo(final View main) {
-		updateWptBtn(main);
 		updateViaView(main);
 		updateFromSpinner(main);
 		updateToSpinner(main);
@@ -148,22 +146,6 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		} else{
 			main.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
 		}
-	}
-
-	private void updateWptBtn(final View parentView) {
-		ImageView wptBtn = (ImageView) parentView.findViewById(R.id.waypoints);
-		wptBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache()
-				.getContentIcon(R.drawable.map_action_waypoints));
-		wptBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (getTargets().checkPointToNavigateShort()) {
-					hideDialog();
-					mapActivity.getMapActions().openIntermediatePointsDialog();
-				}
-			}
-
-		});
 	}
 
 	private void updateApplicationModes(final View parentView) {
@@ -339,9 +321,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 						if (routingHelper.getRouteDirections().size() > directionInfo) {
 							RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 							net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-							contextMenu.show(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
-//							contextMenuLayer.setLocation(new LatLon(l.getLatitude(), l.getLongitude()),
-//									info.getDescriptionRoute(ctx));
+							contextMenu.showMinimized(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
 							mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(),
 									mapView.getZoom(), true);
 						}
@@ -364,8 +344,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 					directionInfo++;
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-					contextMenu.show(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
-//					contextMenuLayer.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
+					contextMenu.showMinimized(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
 					mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), mapView.getZoom(), true);
 				}
 				mapView.refreshMap();
@@ -550,10 +529,10 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	public void hideDialog() {
 		Dialog dialog = this.dialog;
 		if (dialog != null) {
-			if(dialog instanceof RoutePrepareDialog && 
-				((RoutePrepareDialog) dialog).getListener() != null) {
-				((RoutePrepareDialog) dialog).getListener().onDismiss(dialog);
-				((RoutePrepareDialog) dialog).cancelDismissListener();
+			if(dialog instanceof MapRoutePreferencesControl.RoutePrepareDialog &&
+				((MapRoutePreferencesControl.RoutePrepareDialog) dialog).getListener() != null) {
+				((MapRoutePreferencesControl.RoutePrepareDialog) dialog).getListener().onDismiss(dialog);
+				((MapRoutePreferencesControl.RoutePrepareDialog) dialog).cancelDismissListener();
 			}
 			dialog.dismiss();
 			this.dialog = null;

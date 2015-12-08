@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/plan_route_info"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="?attr/bottom_menu_view_bg"
-    android:orientation="vertical" >
+              android:id="@+id/plan_route_info"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="?attr/left_menu_view_bg"
+              android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/ModesLayout"
@@ -60,7 +60,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" 
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -219,9 +219,15 @@
                         android:src="@drawable/ic_next" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/dashboard_divider"
+                    android:focusable="false" />
+
             </LinearLayout>
         </LinearLayout>
-        
+
     </ScrollView>
 
     <View

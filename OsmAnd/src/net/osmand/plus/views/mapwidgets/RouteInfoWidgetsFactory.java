@@ -30,7 +30,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.views.controls.MapRouteInfoControl;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoControl;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;

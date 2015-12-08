@@ -1,4 +1,4 @@
-package net.osmand.plus.views.controls;
+package net.osmand.plus.mapcontextmenu.other;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,6 +36,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -150,15 +152,15 @@ public class MapRoutePreferencesControl {
 		public OnDismissListener getListener() {
 			return listener;
 		}
-		
+
 		@Override
 		public void setOnDismissListener(OnDismissListener l) {
 			this.listener = l;
 			super.setOnDismissListener(new OnDismissListener() {
-				
+
 				@Override
 				public void onDismiss(DialogInterface dialog) {
-					if(listener != null) {
+					if (listener != null) {
 						listener.onDismiss(dialog);
 					}
 				}
@@ -188,13 +190,14 @@ public class MapRoutePreferencesControl {
 			lp.width = (int) mapActivity.getResources().getDimension(R.dimen.map_route_planning_land_width);
 			lp.gravity = Gravity.LEFT;
 		}
-		dialog.getContext().setTheme(R.style.Dialog_Fullscreen);
+		//dialog.getContext().setTheme(R.style.Dialog_Fullscreen);
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
 				portrait ? WindowManager.LayoutParams.WRAP_CONTENT : WindowManager.LayoutParams.MATCH_PARENT));
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setAttributes(lp);
+		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		if (maxHeight != -1) {
 			ll.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 				boolean wrap = true;
