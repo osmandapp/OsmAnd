@@ -1151,8 +1151,8 @@
     <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
 
     <string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
-    <string name="clear_intermediate_points">Slet mellemliggende punkter</string>
-    <string name="keep_intermediate_points">Behold mellemliggende punkter</string>
+    <string name="clear_intermediate_points">Slet mellemliggende destinationer</string>
+    <string name="keep_intermediate_points">Behold mellemliggende destinationer</string>
     <string name="new_directions_point_dialog">Der er allerede mellemliggende punkter.</string>
     <string name="context_menu_item_directions_to">Rutevejledning til</string>
     <string name="context_menu_item_directions_from">Rutevejledning fra</string>
@@ -1197,7 +1197,7 @@
 
     <string name="map_magnifier">Kortlup</string>
 
-    <string name="route_is_too_long">OsmAnd offline ruteplanlægning kan tage meget lang tid (eller nogle gange ikke virker) for punkter mere end 200 km fra hinanden. Man kan tilføje mellemliggende rutepunkter for bedre ydelse.</string>
+    <string name="route_is_too_long">OsmAnd offline ruteplanlægning kan tage meget lang tid (eller nogle gange ikke virker) for punkter mere end 200 km fra hinanden. Man kan tilføje mellemliggende destinationer for bedre ydeevne.</string>
     <string name="auto_zoom_none">Ingen autozoom</string>
     <string name="auto_zoom_far">Middelafstand</string>
     <string name="auto_zoom_farthest">Lange afstande</string>
@@ -1445,7 +1445,7 @@
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
     <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
-    <string name="select_destination_and_intermediate_points">Vælg rutepunkter</string>
+    <string name="select_destination_and_intermediate_points">Vælg mellemliggende destinationer</string>
     <string name="layer_amenity_label">Punktetiketter</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation</string>
@@ -2126,4 +2126,5 @@
     <string name="shared_string_near">I nærheden af</string>
     <string name="no_address_found">Kan ikke bestemme adresse</string>
 	<string name="looking_up_address">Søger efter adressen</string>
+    <string name="rendering_attr_horseRoutes_name">Hesteruter</string>
     </resources>
