@@ -698,7 +698,7 @@
     <string name="add_as_first_destination_point">Afegeix com la primera fita</string>
     <string name="replace_destination_point">Substitueix el punt de destinació</string>
     <string name="new_destination_point_dialog">Ja teniu definit el punt de destinació.</string>
-    <string name="target_point">Destinació %1$ s</string>
+    <string name="target_point">Destinació %1$s</string>
     <string name="target_points">Destinacions</string>
     <string name="intermediate_point_too_far">La fita %1$s és massa lluny de la carretera més propera.</string>
     <string name="arrived_at_intermediate_point">Heu arribat a la vostra fita</string>
