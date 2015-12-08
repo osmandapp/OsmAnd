@@ -161,7 +161,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if(current == null || current.getStatus() == AsyncTask.Status.FINISHED ||
 				current.isCancelled() || current.getResult() != null) {
 			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute(getActivity());
+			asyncLoader.execute();
 		}
 	}
 
@@ -277,12 +277,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 
-	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
+	public class LoadLocalIndexTask extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>> {
 
 		private List<LocalIndexInfo> result;
 
 		@Override
-		protected List<LocalIndexInfo> doInBackground(Activity... params) {
+		protected List<LocalIndexInfo> doInBackground(Void... params) {
 			LocalIndexHelper helper = new LocalIndexHelper(getMyApplication());
 			return helper.getLocalIndexData(this);
 		}
@@ -888,7 +888,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			LocalIndexInfoViewHolder viewHolder;
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
-				convertView = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
+				convertView = inflater.inflate(R.layout.local_index_list_item, parent, false);
 				viewHolder = new LocalIndexInfoViewHolder(convertView);
 				convertView.setTag(viewHolder);
 			} else {
