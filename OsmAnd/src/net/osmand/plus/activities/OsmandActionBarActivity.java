@@ -50,4 +50,8 @@ public class OsmandActionBarActivity extends AppCompatActivity {
 			setupHomeButton();
 		}
     }
+
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication) getApplication();
+	}
 }

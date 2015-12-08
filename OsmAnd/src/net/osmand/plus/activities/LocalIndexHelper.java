@@ -12,7 +12,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.download.ui.LocalIndexesFragment.LoadLocalIndexTask;
+import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 
@@ -90,7 +90,7 @@ public class LocalIndexHelper {
 	}
 
 
-	public List<LocalIndexInfo> getLocalIndexData(LoadLocalIndexTask loadTask){
+	public List<LocalIndexInfo> getLocalIndexData(AbstractLoadLocalIndexTask loadTask){
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<>();
 		
@@ -105,9 +105,16 @@ public class LocalIndexHelper {
 		
 		return result;
 	}
-	
 
-	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
+	public List<LocalIndexInfo> getLocalFullMaps(AbstractLoadLocalIndexTask loadTask) {
+		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
+		List<LocalIndexInfo> result = new ArrayList<>();
+		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, loadTask, loadedMaps);
+
+		return result;
+	}
+
+	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
@@ -139,7 +146,7 @@ public class LocalIndexHelper {
 		}
 	}
 	
-	private void loadTilesData(File tilesPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
+	private void loadTilesData(File tilesPath, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (tilesPath.canRead()) {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile() && tileFile.getName().endsWith(SQLiteTileSource.EXT)) {
@@ -171,7 +178,7 @@ public class LocalIndexHelper {
 	}
 
 	
-	private void loadSrtmData(File mapPath, List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
+	private void loadSrtmData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
@@ -184,7 +191,7 @@ public class LocalIndexHelper {
 		}
 	}
 	
-	private void loadWikiData(File mapPath, List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
+	private void loadWikiData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
@@ -197,7 +204,7 @@ public class LocalIndexHelper {
 		}
 	}
 	
-	private void loadObfData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask, Map<String, String> loadedMaps) {
+	private void loadObfData(File mapPath, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask, Map<String, String> loadedMaps) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
