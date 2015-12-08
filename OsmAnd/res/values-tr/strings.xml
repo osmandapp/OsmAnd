@@ -1943,4 +1943,8 @@
     <string name="save_track_to_gpx_globally_headline">İsteğe bağlı olarak günlük takip</string>
     <string name="save_track_to_gpx_globally_descr">GPX dosyası günlüğü Genel pozisyon veya harita ekranında GPX günlük Widget kullanarak kapalı olabilir</string>
     <string name="save_current_track_descr">Şimdi SD geçerli parçayı kaydet</string>
+    <string name="save_current_track">Geçerli GPX parçayı kaydet</string>
+    <string name="save_track_to_gpx">Navigasyon sırasında GPX dosyası parça Log</string>
+    <string name="save_track_to_gpx_descrp">Parçalar navigasyon sırasında parça klasörüne kaydedilecektir</string>
+    <string name="save_track_interval_globally">Günlük aralığı</string>
     </resources>
