@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -959,7 +960,7 @@
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="poi_filter_sightseeing">Bezienswaardigheden</string>
 
-    <string name="context_menu_item_last_intermediate_point">Zet als laatste routepunt</string>
+    <string name="context_menu_item_last_intermediate_point">Toevoegen als laatste routepunt</string>
     <string name="context_menu_item_first_intermediate_point">Zet als eerste routepunt</string>
     <string name="add_as_last_destination_point">Voeg toe als laatste routepunt</string>
     <string name="add_as_first_destination_point">Voeg toe als eerste routepunt</string>
@@ -1397,8 +1398,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="routing_attr_avoid_ferries_description">Vermijd veerboten</string>
 	<string name="routing_attr_avoid_motorway_name">Vermijd autowegen</string>
 	<string name="routing_attr_avoid_motorway_description">Vermijd autowegen</string>
-	<string name="routing_attr_weight_description">Geef het gewicht van het voertuig voor de routeplanning</string>
-    <string name="routing_attr_weight_name">Gewicht voertuig</string>
+	<string name="routing_attr_weight_description">Geef het gewicht dat minimaal toegestaan moet zijn op de route</string>
+    <string name="routing_attr_weight_name">Gewicht van het voertuig</string>
 	<string name="select_gpx">GPX-bestand kiezen…</string>
     <string name="route_descr_select_destination">Bestemming kiezen</string>
     <string name="route_preferences">Route-voorkeuren</string>
@@ -1634,7 +1635,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreeuws</string>
     <string name="forward">Vooruit</string>
-    <string name="home">Overzicht</string>
+    <string name="home">Dashboard</string>
     <string name="live_monitoring_m_descr">Stuur tracking-data naar een webservice als een GPX-track wordt gemaakt.</string>
 	<string name="live_monitoring_m">Online tracking (GPX vereist)</string>
     <string name="live_monitoring_start">Start online tracking</string>
@@ -1682,7 +1683,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="waypoints">Routepunt(en)</string>
     <string name="targets">Bestemming(en)</string>
-    <string name="way_alarms">Filemeldingen</string>
+    <string name="way_alarms">Meldingen onderweg</string>
     <string name="speak_favorites">Favorieten in de buurt</string>
     <string name="speak_poi">Interessepunt in de buurt</string>
     <string name="shared_string_all">Alle</string>
@@ -1705,7 +1706,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="traffic_warning_stop">Stopbord</string>
     <string name="traffic_warning_calming">Verkeersdrempel</string>
     <string name="traffic_warning_speed_camera">Snelheidscontrole</string>
-    <string name="traffic_warning">Filemelding</string>
+    <string name="traffic_warning">Meldingen onderweg</string>
 	<string name="local_index_description">Tik om details te bekijken; houd ingedrukt om uit te schakelen of te verwijderen. Huidige gegevens op het toestel (%1$s beschikbaar):</string>
 	<string name="text_size_descr">De grootte van tekst op de kaart instellen.</string>
     <string name="text_size">Tekstgrootte</string>
@@ -1716,7 +1717,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="fav_point_emoticons_message">Favoriet bewaard als %1s omdat vreemde tekens niet opgeslagen kunnen worden in een bestand.</string>
     <string name="print_route">Route afdrukken</string>
     <string name="speed_limit_exceed">Te hoge snelheid melden bij…</string>
-	<string name="speed_limit_exceed_message">Hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>
+	<string name="speed_limit_exceed_message">Kies hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>
 	<string name="rendering_category_transport">Openbaar vervoer</string>
     <string name="rendering_category_others">Overige kaart attributen</string>
     <string name="map_widget_appearance_rem">Resterende onderdelen</string>
@@ -1932,7 +1933,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_my_location">Mijn positie</string>
 	<string name="shared_string_my_favorites">Mijn Favorieten</string>
 	<string name="shared_string_my_tracks">Mijn Routes</string>
-	<string name="shared_string_currently_recording_track">Opnemen van route</string>
+	<string name="shared_string_currently_recording_track">Huidige route opnemen</string>
 	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijzigingen ophalen. Weet je dat zeker?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
@@ -1976,14 +1977,14 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="index_name_netherlands">Europa - Nederland</string>
 	
 	<string name="routing_attr_avoid_borders_description">Vermijd het oversteken van landsgrenzen</string>
-	<string name="routing_attr_height_name">Hoogtelimiet</string>
-	<string name="routing_attr_height_description">Geef de massa van het voertuig dat toegestaan moet zijn op de routes</string>
+	<string name="routing_attr_height_name">Hoogte van het voertuig</string>
+	<string name="routing_attr_height_description">Geef de hoogte die minimaal toegestaan moet zijn op de route</string>
     <string name="use_fast_recalculation">Slim opnieuw berekenen van routes</string>
 	<string name="use_fast_recalculation_desc">Herbereken alleen het begin van de route voor lange trajecten</string>
 <string name="osm_edit_context_menu_delete">Verwijder OSM-wijziging</string>
     <string name="rendering_value_disabled_name">Uitgeschakeld</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Gekleurd naar afstandscategorie</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Gekleurd volgens OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kleuren naar afstandscategorie</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Kleuring volgens OSMC</string>
     <string name="osmo_share_my_location">Deel mijn positie</string>
     <string name="shared_string_logoff">Uitloggen</string>
     <string name="gps_network_not_enabled">Locatiedienst is niet ingeschakeld. Wil je ze aanzetten?</string>
@@ -2075,8 +2076,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="srtm_plugin_disabled">Hoogtelijnen uitgeschakeld</string>
     <string name="favorite_category_add_new">Categorie toevoegen</string>
     <string name="favorite_category_select">Kies categorie</string>
-    <string name="default_speed_system_descr">Systeem om snelheid te meten</string>
-    <string name="default_speed_system">Snelheidsmeting</string>
+    <string name="default_speed_system_descr">Eenheid voor de snelheid instellen</string>
+    <string name="default_speed_system">Snelheid weergeven in ...</string>
     <string name="nm">nm</string>
     <string name="si_nm">Zeemijlen</string>
     <string name="si_kmh">Kilometer per uur</string>
@@ -2123,7 +2124,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="favourites_context_menu_add">Favoriet toevoegen</string>
 	<string name="poi_action_delete">wissen</string>
 	<string name="dahboard_options_dialog_title">Configureer dashboard</string>
-	<string name="show_on_start">Bij start tonen</string>
+	<string name="show_on_start">Na opstarten tonen</string>
 	<string name="shared_string_card_was_hidden">Kaart was verborgen</string>
 	<string name="shared_string_undo">Ongedaan maken</string>
 	<string name="shared_string_skip">Overslaan</string>
@@ -2218,7 +2219,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="dashboard_or_drawer_description">Kies tussen het flexibele dashboard of een vast menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
-    <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Mogelijkheid menu te grbuiken in plaats van het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer… "</string>
+    <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Mogelijkheid menu te gebruiken in plaats van het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer… "</string>
     <string name="shared_string_commit">Verstuur</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX routepunt wissen?</string>
@@ -2234,12 +2235,25 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="poi_context_menu_modify_osm_change">Verander OSM-wijziging</string>
     
     <string name="dashboard_or_drawer_title">Kies tussen dashboard of menu</string>
-    <string name="please_specify_poi_type_only_from_list">"Geef een correct type POI of sla dit over. "</string>
-    <string name="access_from_map_description">Menu-knop toont dashboard in plaats van menu</string>
-    <string name="access_from_map">Toegang vanaf kaart</string>
+    <string name="please_specify_poi_type_only_from_list">Geef het juiste type-POI of sla dit over</string>
+    <string name="access_from_map_description">Menu-knop opent dashboard in plaats van menu</string>
+    <string name="access_from_map">Openen vanaf de kaart</string>
     <string name="use_dashboard_btn">Gebruik dashboard</string>
     <string name="use_drawer_btn">Gebruik menu</string>
     <string name="routing_attr_avoid_stairs_name">Vermijd trappen</string>
 	<string name="routing_attr_avoid_stairs_description">Vermijd trappen</string>
 	<string name="routing_attr_avoid_borders_name">Vermijd grensovergangen</string>
-	</resources>
+	<string name="shared_string_near">Nabij</string>
+    <string name="no_address_found">Geen adres gevonden</string>
+    <string name="shared_string_hide">Verbergen</string>
+    <string name="av_video_quality_low">Laagste kwaliteit</string>
+    <string name="av_video_quality_high">Hoogste kwaliteit</string>
+    <string name="av_video_quality">Video kwaliteit</string>
+    <string name="av_video_quality_descr">Kies video-kwaliteit</string>
+    <string name="av_audio_format">Audio uitvoer-formaat</string>
+    <string name="av_audio_format_descr">Kies audio uitvoer-formaat</string>
+    <string name="av_audio_bitrate">Audio bitrate</string>
+    <string name="av_audio_bitrate_descr">Kies audio bitrate</string>
+    <string name="looking_up_address">Adres wordt gezocht</string>
+    <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
+    </resources>

@@ -27,19 +27,20 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
@@ -527,11 +528,10 @@ public class OsmEditsFragment extends OsmAndListFragment
 	}
 
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
-		ProgressDialog dialog = ProgressImplementation.createProgressDialog(
-				getActivity(),
-				getString(R.string.uploading),
-				getString(R.string.local_openstreetmap_uploading),
-				ProgressDialog.STYLE_HORIZONTAL).getDialog();
+		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
+				R.string.uploading,
+				R.string.local_openstreetmap_uploading,
+				ProgressDialog.STYLE_HORIZONTAL);
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getActivity(),
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
@@ -545,11 +545,10 @@ public class OsmEditsFragment extends OsmAndListFragment
 				listAdapter.notifyDataSetChanged();
 			}
 		};
+		dialog.show(getActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				dialog, listener, plugin, points.length, closeChangeSet);
 		uploadTask.execute(points);
-
-		dialog.show();
 	}
 
 

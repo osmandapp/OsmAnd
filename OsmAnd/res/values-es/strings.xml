@@ -1985,20 +1985,21 @@
     <string name="use_drawer_btn">Usar menú</string>
     <string name="access_from_map_description">El botón del menú, muestra el panel de control, en lugar del menú</string>
     <string name="access_from_map">Acceso desde el mapa</string>
-    <string name="please_specify_poi_type_only_from_list">"Especifique el tipo de PDI correcto u omítelo. "</string>
+    <string name="please_specify_poi_type_only_from_list">Indique el tipo de PDI correcto u omítelo</string>
     <string name="routing_attr_avoid_stairs_name">Evitar escaleras</string>
 	<string name="routing_attr_avoid_stairs_description">Evitar pasar por escaleras</string>
 	<string name="routing_attr_avoid_borders_name">Evitar cruces fronterizos</string>
 	<string name="shared_string_near">Cerca de</string>
     <string name="shared_string_hide">Ocultar</string>
-    <string name="av_video_quality_low">Baja resolución</string>
-    <string name="av_video_quality_high">Alta resolución</string>
+    <string name="av_video_quality_low">Baja calidad</string>
+    <string name="av_video_quality_high">Alta calidad</string>
     <string name="av_video_quality">Calidad del video</string>
-    <string name="av_video_quality_descr">Seleccionar calidad del vídeo</string>
+    <string name="av_video_quality_descr">Seleccione la calidad de salida del vídeo</string>
     <string name="av_audio_format">Formato del audio</string>
     <string name="av_audio_format_descr">Selecciones el formato de salida del audio</string>
     <string name="av_audio_bitrate">Bitrate del audio</string>
     <string name="av_audio_bitrate_descr">Seleccionar la tasa de bits del audio</string>
     <string name="no_address_found">Dirección indeterminada</string>
 	<string name="looking_up_address">Buscando dirección</string>
+    <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
     </resources>

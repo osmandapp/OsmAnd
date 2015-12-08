@@ -1037,7 +1037,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="shared_string_control_start">Start</string>
+    <string name="shared_string_control_start">Nagr</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1056,7 +1056,7 @@
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
-    <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
+    <string name="stop_routing_confirm">Zatrzymać nawigację?</string>
     <string name="clear_dest_confirm">Usunąć cel podróży (oraz punkty trasy)?</string>
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz obliczanie precyzyjnych tras w nawigacji. Funkcja dość powolna, nadal jest ograniczona odległością.</string>
@@ -1131,7 +1131,7 @@
     <string name="shared_string_do_not_show_again">Nie pokazuj ponownie</string>
     <string name="distance_measurement_start_editing">Rozpocznij edycję</string>
     <string name="distance_measurement_finish_editing">Zakończ edycję</string>
-    <string name="distance_measurement_finish_subtrack">Rozpocznij nową podścieżkę</string>
+    <string name="distance_measurement_finish_subtrack">Rozpocznij nową podrzędną ścieżkę</string>
     <string name="distance_measurement_clear_route">Wyczyść punkty</string>
     
     <string name="distance_measurement_load_gpx">Otwórz plik GPX</string>
@@ -2117,7 +2117,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="use_drawer_btn">Używaj menu</string>
     <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
-    <string name="please_specify_poi_type_only_from_list">"Proszę określić rodzaj POI lub pominąć go. "</string>
+    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj POI lub pominąć go.</string>
     <string name="osm_edit_modified_poi">Zmodyfikowano POI OSM</string>
     <string name="osm_edit_deleted_poi">Usunięto POI OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
@@ -2137,8 +2137,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_roadStyle_description">Styl drogowy</string>
     <string name="poi_context_menu_modify_osm_change">Modyfikacja zmian OSM</string>
     <string name="dashboard_or_drawer_title">Kokpit lub menu</string>
-    <string name="av_video_quality_low">Najniższa rozdzielczość</string>
-    <string name="av_video_quality_high">Najwyższa rozdzielczość</string>
+    <string name="av_video_quality_low">Najniższa jakość</string>
+    <string name="av_video_quality_high">Najwyższa jakość</string>
     <string name="av_video_quality">Jakość video</string>
     <string name="av_video_quality_descr">Proszę wybrać jakość wyjściowego nagrania video</string>
     <string name="av_audio_format">Format dźwięku</string>

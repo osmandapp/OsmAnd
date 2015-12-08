@@ -2015,6 +2015,10 @@
     <string name="osm_save_offline">Išsaugoti įrenginyje</string>
     <string name="lang_nds">Vokiečių žemaičių</string>
     <string name="shared_string_hide">Slėpti</string>
-    <string name="av_video_quality_low">Žemiausia raiška</string>
-    <string name="av_video_quality_high">Aukščiausia raiška</string>
+    <string name="av_video_quality_low">Žemiausia kokybė</string>
+    <string name="av_video_quality_high">Aukščiausia kokybė</string>
+    <string name="no_address_found">Adresas nerastas</string>
+    <string name="av_audio_format">Garso formatas</string>
+    <string name="av_audio_format_descr">Pasirinkite garso formatą</string>
+    <string name="av_video_quality_descr">Pasirinkite vaizdo kokybę</string>
     </resources>

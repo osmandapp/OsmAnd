@@ -1932,7 +1932,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="access_from_map">Prístup z mapy</string>
     <string name="use_dashboard_btn">Použiť úvodný panel</string>
     <string name="use_drawer_btn">Použiť menu</string>
-    <string name="please_specify_poi_type_only_from_list">"Prosím zadajte správny typ POI alebo ho preskočte. "</string>
+    <string name="please_specify_poi_type_only_from_list">Prosím zadajte správny typ POI alebo ho preskočte</string>
     <string name="routing_attr_avoid_stairs_name">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
@@ -1940,8 +1940,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="color_purple">fialová</string>
 	<string name="shared_string_near">Blízko</string>
     <string name="shared_string_hide">Skryť</string>
-    <string name="av_video_quality_low">Najnižšie rozlíšenie</string>
-    <string name="av_video_quality_high">Najvyššie rozlíšenie</string>
+    <string name="av_video_quality_low">Najnižšia kvalita</string>
+    <string name="av_video_quality_high">Najvyššia kvalita</string>
     <string name="av_video_quality">Kvalita videovýstupu</string>
     <string name="av_video_quality_descr">Zvoľte kvalitu videa</string>
     <string name="av_audio_format">Formát zvukového výstupu</string>
@@ -1950,4 +1950,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="av_audio_bitrate_descr">Zvoľte bitovú rýchlosť zvuku</string>
     <string name="no_address_found">Nenašla sa adresa</string>
 	<string name="looking_up_address">Hľadá sa adresa</string>
+    <string name="rendering_attr_horseRoutes_name">Trasy pre kone</string>
     </resources>

@@ -7,10 +7,6 @@ import android.widget.ProgressBar;
 
 import net.osmand.plus.R;
 
-/**
- * Created by Denis
- * on 23.01.15.
- */
 public class ActionBarProgressActivity extends OsmandActionBarActivity {
 
 	@Override
