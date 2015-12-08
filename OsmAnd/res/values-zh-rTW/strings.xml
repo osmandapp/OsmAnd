@@ -1694,7 +1694,7 @@
     <string name="parking_place_limited">停車場時限到</string>
     <string name="your_edits">您的編輯</string>
     <string name="action_create">行動建立</string>
-    <string name="action_modify">行動修改</string>
+    <string name="action_modify">修改</string>
     <string name="action_delete">行動刪除</string>
     <string name="osmand_parking_overdue">已過時</string>
     <string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間</string>
