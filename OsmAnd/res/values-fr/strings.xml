@@ -922,7 +922,7 @@
     <string name="target_point">Étape %1$s</string>
     <string name="target_points">Itinéraire</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>
-    <string name="arrived_at_intermediate_point">Vous avez atteint la fin de l\'étape</string>
+    <string name="arrived_at_intermediate_point">Vous avez atteint l\'étape intermédiaire</string>
     <string name="context_menu_item_intermediate_point">Ajouter comme étape</string>
     <string name="map_widget_intermediate_distance">Étape</string>
     <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
@@ -937,7 +937,7 @@
     <string name="poi_filter_accomodation">Hébergement</string>
     <string name="map_widget_monitoring_services">Services de suivi</string>
     <string name="no_route">Pas de route</string>
-    <string name="delete_target_point">Souhaitez-vous supprimer ce point ?</string>
+    <string name="delete_target_point">Effacer la destination</string>
     <string name="intermediate_point">Étape %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
     <string name="map_widget_show_destination_arrow">Direction de la destination</string>
@@ -1227,7 +1227,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="maps_define_edit">Définir/Éditer…</string>
     <string name="announce_gpx_waypoints">Points de passage GPX</string>
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
-    <string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires</string>
+    <string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires.</string>
     <string name="context_menu_item_directions_to">Itinéraire vers</string>
     <string name="context_menu_item_directions_from">Itinéraire depuis</string>
     <string name="route_descr_map_location">Carte : </string>
@@ -1257,7 +1257,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 
     <string name="shared_string_and">et</string>
     <string name="shared_string_or">ou</string>
-    <string name="route_is_too_long">Le calcul d’itinéraire par OsmAnd peut prendre beaucoup de temps (et peut même parfois ne pas aboutir) pour des points séparés de plus de 200 km. Veuillez ajouter des étapes intermédiaires pour une meilleure performance.</string>
+    <string name="route_is_too_long">Le calcul d’itinéraire peut prendre beaucoup de temps (et peut même parfois ne pas aboutir) lorsque les points sont séparés de plus de 200 km. Veuillez ajouter des étapes intermédiaires pour un meilleur résultat.</string>
     <string name="auto_zoom_none">Pas de zoom automatique</string>
     <string name="auto_zoom_close">Pour agrandir</string>
     <string name="auto_zoom_far">Modéré</string>
@@ -1515,7 +1515,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="map_widget_plain_time">Heure actuelle</string>
     <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
-    <string name="select_destination_and_intermediate_points">Sélectionnez les points de passage</string>
+    <string name="select_destination_and_intermediate_points">Sélectionnez les étapes intermédiaires</string>
     <string name="layer_amenity_label">Libellés de point</string>
     <string name="route_descr_destination">Destination</string>
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation</string>
