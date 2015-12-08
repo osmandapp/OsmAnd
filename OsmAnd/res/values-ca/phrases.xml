@@ -2051,4 +2051,9 @@
 	<string name="poi_social_facility_workshop">Equipament social: taller</string>
 	<string name="poi_historic_aircraft">Avió històric</string>
 
+	<string name="poi_service_bicycle_pump_no">Inflat de rodes de bicicleta: no</string>
+	<string name="poi_service_bicycle_cleaning_yes">Neteja de bicicletes: sí</string>
+	<string name="poi_service_bicycle_cleaning_no">Neteja de bicicletes: no</string>
+	<string name="poi_wildlife_hide">Lloc d\'observació de fauna en llibertat</string>
+
 	</resources>
