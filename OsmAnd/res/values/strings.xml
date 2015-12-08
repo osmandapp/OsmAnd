@@ -606,7 +606,7 @@
     <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation</string>
     <string name="show_zoom_buttons_navigation">Show zoom buttons</string>
     <string name="save_as_favorites_points">Save as group of favorites</string>
-    <string name="select_destination_and_intermediate_points">Select waypoints</string>
+    <string name="select_destination_and_intermediate_points">Select intermediate destinations</string>
     <string name="layer_amenity_label">Point labels</string>
     <string name="loading_smth">Loading %1$s…</string>
     <string name="map_widget_plain_time">Current time</string>
@@ -820,7 +820,7 @@
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
-    <string name="route_is_too_long">OsmAnd offline routing may take very long (or sometimes not work) for points more than 200km apart. You may want to add intermediate waypoints for better performance.</string>
+    <string name="route_is_too_long">OsmAnd offline routing may take very long (or sometimes not work) for points more than 200km apart. You may want to add intermediate destinations for better performance.</string>
     <string name="auto_zoom_none">No auto zoom</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
@@ -860,9 +860,9 @@
     <string name="speak_cameras">Speed cameras</string>
     <string name="speak_traffic_warnings">Traffic warnings</string>
     <string name="osb_author_or_password_not_specified">Please specify OSM user and password in Settings</string>
-    <string name="clear_intermediate_points">Clear intermediate points</string>
-    <string name="keep_intermediate_points">Keep intermediate points</string>
-    <string name="new_directions_point_dialog">You already have intermediate points set.</string>
+    <string name="clear_intermediate_points">Clear intermediate destinations</string>
+    <string name="keep_intermediate_points">Keep intermediate destinations</string>
+    <string name="new_directions_point_dialog">You already have intermediate destinations set.</string>
     <string name="context_menu_item_directions_to">Directions to</string>
     <string name="context_menu_item_directions_from">Directions from</string>
     <string name="route_descr_map_location">Map: </string>
@@ -880,7 +880,7 @@
     <string name="context_menu_item_destination_point">Set as destination</string>
     <string name="please_select_address">Select city or street first</string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
-    <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way from current location to the destination.</string>
+    <string name="intermediate_items_sort_return">Intermediate destinations resorted to optimize their order on the way from current location to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort door-to-door</string>
     <string name="local_osm_changes_backup_successful">OSM change file successfully generated %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup OSM changes failed</string>
@@ -943,7 +943,7 @@
     <string name="local_indexes_cat_srtm">Contour lines</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
-    <string name="clear_dest_confirm">Are you sure you want to clear your destination point (and waypoints)?</string>
+    <string name="clear_dest_confirm">Are you sure you want to clear your destination ppint (and intermediate destinations)?</string>
     <string name="precise_routing_mode_descr">Enable to calculate precise routes without glitches. Still distance-limited and slow.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
     <string name="recording_context_menu_show">Show</string>
@@ -1020,21 +1020,21 @@
     <string name="gps_not_available">Please enable GPS in the settings</string>
     <string name="map_widget_monitoring_services">Logging services</string>
     <string name="no_route">No route</string>
-    <string name="delete_target_point">Remove waypoint</string>
-    <string name="target_point">Waypoint %1$s</string>
-    <string name="intermediate_point">Waypoint %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Add as last waypoint</string>
-    <string name="context_menu_item_first_intermediate_point">Add as first waypoint</string>
-    <string name="add_as_last_destination_point">Add as last waypoint</string>
-    <string name="add_as_first_destination_point">Add as first waypoint</string>
+    <string name="delete_target_point">Remove destination</string>
+    <string name="target_point">Destination %1$s</string>
+    <string name="intermediate_point">Destination %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Add as last intermediate destination</string>
+    <string name="context_menu_item_first_intermediate_point">Add as first intermediate destination</string>
+    <string name="add_as_last_destination_point">Add as last intermediate destination</string>
+    <string name="add_as_first_destination_point">Add as first intermediate destination</string>
 
     <string name="replace_destination_point">Replace destination point</string>
     <string name="new_destination_point_dialog">You already have the destination point set.</string>
-    <string name="target_points">Waypoints</string>
-    <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
-    <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
-    <string name="context_menu_item_intermediate_point">Add as waypoint</string>
-    <string name="map_widget_intermediate_distance">Waypoint</string>
+    <string name="target_points">Destinations</string>
+    <string name="intermediate_point_too_far">Intermediate destination %1$s is too far from the nearest road.</string>
+    <string name="arrived_at_intermediate_point">You have arrived at your intermediate destination</string>
+    <string name="context_menu_item_intermediate_point">Add as intermediate destination</string>
+    <string name="map_widget_intermediate_distance">Intermediate destination</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
     <string name="add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode…</string>
@@ -1095,7 +1095,7 @@ Navigation
  - Works online (fast) or offline (no roaming charges when you are abroad)
  - Turn-by-turn voice guidance (recorded and synthesized voices)
  - Optional lane guidance, street name display, and estimated time of arrival
- - Supports intermediate points on your itinerary
+ - Supports intermediate destinations on your itinerary
  - Automatic re-routing whenever you deviate from the route
  - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
 
@@ -1191,7 +1191,7 @@ Navigation
  - Works online (fast) or offline (no roaming charges when you are abroad)
  - Turn-by-turn voice guidance (recorded and synthesized voices)
  - Optional lane guidance, street name display, and estimated time of arrival
- - Supports intermediate points on your itinerary
+ - Supports intermediate destinations on your itinerary
  - Automatic re-routing whenever you deviate from the route
  - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
 
