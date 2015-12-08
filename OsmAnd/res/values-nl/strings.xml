@@ -945,10 +945,10 @@
 
 <string name="snap_to_road_descr">Positie op de weg uitlijnen tijdens navigatie</string>
 <string name="snap_to_road">Positie op de weg uitlijnen</string>
-<string name="intermediate_point_too_far">Routepunt %1$s te ver van dichtstbijzijnde weg.</string>
-<string name="arrived_at_intermediate_point">Je bent aangekomen op je routepunt</string>
-<string name="context_menu_item_intermediate_point">Als routepunt\ntoevoegen</string>
-<string name="map_widget_intermediate_distance">Routepunt</string>
+<string name="intermediate_point_too_far">Tussenpunt %1$s te ver van dichtstbijzijnde weg.</string>
+<string name="arrived_at_intermediate_point">Je bent aangekomen op je tussenpunt</string>
+<string name="context_menu_item_intermediate_point">Als tussenpunt toevoegen</string>
+<string name="map_widget_intermediate_distance">Tussenpunt</string>
 <string name="ending_point_too_far">Eindpunt te ver van dichtstbijzijnde weg.</string>
 <string name="add_tag">Tag toevoegen</string>
 <string name="btn_advanced_mode">Geavanceerde modus…</string>
@@ -960,18 +960,18 @@
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="poi_filter_sightseeing">Bezienswaardigheden</string>
 
-    <string name="context_menu_item_last_intermediate_point">Toevoegen als laatste routepunt</string>
-    <string name="context_menu_item_first_intermediate_point">Zet als eerste routepunt</string>
-    <string name="add_as_last_destination_point">Voeg toe als laatste routepunt</string>
-    <string name="add_as_first_destination_point">Voeg toe als eerste routepunt</string>
-    <string name="replace_destination_point">Vervang het bestemmingspunt</string>
-    <string name="new_destination_point_dialog">Er is al een bestemmingspunt gekozen.</string>
-    <string name="target_point">Routepunt %1$s</string>
-    <string name="target_points">Routepunten</string>
+    <string name="context_menu_item_last_intermediate_point">Toevoegen als laatste tussenpunt</string>
+    <string name="context_menu_item_first_intermediate_point">Toevoegen als eerste tussenpunt</string>
+    <string name="add_as_last_destination_point">Voeg toe als laatste tussenpunt</string>
+    <string name="add_as_first_destination_point">Voeg toe als eerste tussenpunt</string>
+    <string name="replace_destination_point">Vervang de bestemming</string>
+    <string name="new_destination_point_dialog">Er is al een bestemming gekozen.</string>
+    <string name="target_point">Bestemming %1$s</string>
+    <string name="target_points">Bestemmingen</string>
     <string name="map_widget_monitoring_services">Registratiediensten</string>
 	<string name="no_route">Geen route</string>
-	<string name="delete_target_point">Verwijder routepunt</string>
-	<string name="intermediate_point">Routepunt %1$s</string>
+	<string name="delete_target_point">Verwijder bestemming</string>
+	<string name="intermediate_point">"Tussenpunt  %1$s"</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     <string name="map_widget_show_destination_arrow">Toon richting van de bestemming</string>
     <string name="enable_plugin_monitoring_services">Activeer de tracking-plugin om de afgelegde weg vast te leggen (GPX-spoor, online tracking)</string>
@@ -1087,143 +1087,9 @@
     <string name="map_widget_gps_info">GPS info</string>
     <string name="layer_hillshade">Reliëfweergave</string>
     <string name="osmand_play_title_30_chars">OsmAnd Kaarten &amp; Navigatie</string>
-	<string name="osmand_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger. De belangrijkste functies werken online en offline (geen internet nodig).
-
-Enkele van de eigenschappen:
-
-Navigatie
-- Werkt online (snel) of offline (geen datakosten in het buitenland)
-- Realtime navigatie met opgenomen stem of spraaksynthese
-- Rijstrookaanduiding, straatnamen en tijd van aankomst
-- Ondersteunt tussengelegen punten op de route en herberekent automatisch als wordt afgeweken van de route
-- Vind plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten
-
-Kaart bekijken
-- Toon positie en richting op de kaart
-- Kan de kaart richten naar noorden,  bewegingsrichting of kompasrichting
-- Kan satellietbeelden weergeven (van Bing)
-- Kan overlays weergeven zoals GPX-tracks en extra kaarten met instelbare transparantie
-- Plaatsnamen weergegeven in Engels, lokale of fonetische weergave
-
-Gebruik gegevens van OpenStreetMap en Wikipedia
-- Uitstekende informatie van de beste samenwerkingsprojecten ter wereld
-- Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden
-- Wikipedia-interessepunten, fantastisch voor toerisme (niet in de gratis versie)
-- Onbeperkt gratis downloaden en gebruiken van kaarten (beperkt tot 16 kaartbestanden in de gratis versie)
-- Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie)
-- Compacte downloads van vectorkaarten
-- Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet)
-- Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk
-
-Veiligheid
-- Instelbaar: automatisch schakelen tussen dag- en nachtweergave
-- Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding
-- Instelbaar: automatisch zoomen naar gelang de snelheid
-- Deel je locatie zodat vrienden je kunnen vinden
-
-Functies voor fietsers en voetgangers
-- De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten
-- Speciale navigatie en weergave voor fietsers en voetgangers
-- Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers
-- Kan afgelegde pad bewaren als GPX-bestand of online
-- Kan snelheid en hoogte weergeven
-- Kan hoogtelijnen en reliëf weergeven (met extra plugin)
-
-Direct bijdragen aan OpenStreetMap
-- Meld fouten in de kaart
-- Upload GPX-tracks naar OpenStreetMap in de app
-- Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline)
-- Kan reis vastleggen op de achtergrond (toestel in slaapstand)
-
-OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maakt u dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net.
-
-
-Indicatie van kaartkwaliteit en -compleetheid:
-- West-Europa ****
-- Oost-Europa: ***
-- Rusland: ***
-- Noord-Amerika: ***
-- Zuid-Amerika: **
-- Azie: **
-- Japan &amp; Korea: ***
-- Midden-Oosten: **
-- Afrika: **
-- Antarctica: *
-
-Lijst van ondersteunde landen (praktisch de hele wereld!):
-Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus,  Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak,  Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru,  Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland.
-	</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger. De belangrijkste functies werken online en offline (geen internet nodig). Enkele van de eigenschappen: Navigatie - Werkt online (snel) of offline (geen datakosten in het buitenland) - Realtime navigatie met opgenomen stem of spraaksynthese - Rijstrookaanduiding, straatnamen en tijd van aankomst - Ondersteunt tussenpunten op de route en herberekent automatisch als wordt afgeweken van de route - Vind plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten Kaart bekijken - Toon positie en richting op de kaart - Kan de kaart richten naar noorden, bewegingsrichting of kompasrichting - Kan satellietbeelden weergeven (van Bing) - Kan overlays weergeven zoals GPX-tracks en extra kaarten met instelbare transparantie - Plaatsnamen weergegeven in Engels, lokale of fonetische weergave Gebruik gegevens van OpenStreetMap en Wikipedia - Uitstekende informatie van de beste samenwerkingsprojecten ter wereld - Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden - Wikipedia-interessepunten, fantastisch voor toerisme (niet in de gratis versie) - Onbeperkt gratis downloaden en gebruiken van kaarten (beperkt tot 16 kaartbestanden in de gratis versie) - Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie) - Compacte downloads van vectorkaarten - Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet) - Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk Veiligheid - Instelbaar: automatisch schakelen tussen dag- en nachtweergave - Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding - Instelbaar: automatisch zoomen naar gelang de snelheid - Deel je locatie zodat vrienden je kunnen vinden Functies voor fietsers en voetgangers - De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten - Speciale navigatie en weergave voor fietsers en voetgangers - Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers - Kan afgelegde pad bewaren als GPX-bestand of online - Kan snelheid en hoogte weergeven - Kan hoogtelijnen en reliëf weergeven (met extra plugin) Direct bijdragen aan OpenStreetMap - Meld fouten in de kaart - Upload GPX-tracks naar OpenStreetMap in de app - Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline) - Kan reis vastleggen op de achtergrond (toestel in slaapstand) OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maakt u dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net. Indicatie van kaartkwaliteit en -compleetheid: - West-Europa **** - Oost-Europa: *** - Rusland: *** - Noord-Amerika: *** - Zuid-Amerika: ** - Azie: ** - Japan &amp; Korea: *** - Midden-Oosten: ** - Afrika: ** - Antarctica: * Lijst van ondersteunde landen (praktisch de hele wereld!): Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus, Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak, Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland. "</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarten &amp; Navigatie</string>
-	<string name="osmand_plus_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger. De belangrijkste functies werken online en offline (geen internet nodig).
-
-OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.
-
-Enkele van de eigenschappen:
-
-Navigatie
-- Werkt online (snel) of offline (geen datakosten in het buitenland)
-- Realtime navigatie met opgenomen stem of spraaksynthese
-- Rijstrookaanduiding, straatnamen en tijd van aankomst
-- Ondersteunt tussengelegen punten op de route en herberekent automatisch als wordt afgeweken van de route
-- Vind plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten
-
-Kaart bekijken
-- Toon positie en richting op de kaart
-- Kan de kaart richten naar noorden,  bewegingsrichting of kompasrichting
-- Kan satellietbeelden weergeven (van Bing)
-- Kan overlays weergeven zoals GPX-tracks en extra kaarten met instelbare transparantie
-- Plaatsnamen weergegeven in Engels, lokale of fonetische weergave
-
-Gebruik gegevens van OpenStreetMap en Wikipedia
-- Uitstekende informatie van de beste samenwerkingsprojecten ter wereld
-- Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden
-- Wikipedia-interessepunten, fantastisch voor toerisme
-- Onbeperkt gratis downloaden en gebruiken van kaarten
-- Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie)
-- Compacte downloads van vectorkaarten
-- Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet)
-- Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk
-
-Veiligheid
-- Instelbaar: automatisch schakelen tussen dag- en nachtweergave
-- Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding
-- Instelbaar: automatisch zoomen naar gelang de snelheid
-- Deel je locatie zodat vrienden je kunnen vinden
-
-Functies voor fietsers en voetgangers
-- De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten
-- Speciale navigatie en weergave voor fietsers en voetgangers
-- Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers
-- Kan afgelegde pad bewaren als GPX-bestand of online
-- Kan snelheid en hoogte weergeven
-- Kan hoogtelijnen en reliëf weergeven (met extra plugin)
-
-Direct bijdragen aan OpenStreetMap
-- Meld fouten in de kaart
-- Upload GPX-tracks naar OpenStreetMap in de app
-- Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline)
-- Kan reis vastleggen op de achtergrond (toestel in slaapstand)
-
-OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maak je dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net.
-
-
-Indicatie van kaartkwaliteit en -compleetheid:
-- West-Europa ****
-- Oost-Europa: ***
-- Rusland: ***
-- Noord-Amerika: ***
-- Zuid-Amerika: **
-- Azie: **
-- Japan &amp; Korea: ***
-- Midden-Oosten: **
-- Afrika: **
-- Antarctica: *
-
-Lijst van ondersteunde landen (praktisch de hele wereld!):
-Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus,  Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak,  Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru,  Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland.
-	</string>
+	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger. De belangrijkste functies werken online en offline (geen internet nodig). OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates. Enkele van de eigenschappen: Navigatie - Werkt online (snel) of offline (geen datakosten in het buitenland) - Realtime navigatie met opgenomen stem of spraaksynthese - Rijstrookaanduiding, straatnamen en tijd van aankomst - Ondersteunt tussenpunten op de route en herberekent automatisch als wordt afgeweken van de route - Vind plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten Kaart bekijken - Toon positie en richting op de kaart - Kan de kaart richten naar noorden, bewegingsrichting of kompasrichting - Kan satellietbeelden weergeven (van Bing) - Kan overlays weergeven zoals GPX-tracks en extra kaarten met instelbare transparantie - Plaatsnamen weergegeven in Engels, lokale of fonetische weergave Gebruik gegevens van OpenStreetMap en Wikipedia - Uitstekende informatie van de beste samenwerkingsprojecten ter wereld - Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden - Wikipedia-interessepunten, fantastisch voor toerisme - Onbeperkt gratis downloaden en gebruiken van kaarten - Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie) - Compacte downloads van vectorkaarten - Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet) - Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk Veiligheid - Instelbaar: automatisch schakelen tussen dag- en nachtweergave - Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding - Instelbaar: automatisch zoomen naar gelang de snelheid - Deel je locatie zodat vrienden je kunnen vinden Functies voor fietsers en voetgangers - De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten - Speciale navigatie en weergave voor fietsers en voetgangers - Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers - Kan afgelegde pad bewaren als GPX-bestand of online - Kan snelheid en hoogte weergeven - Kan hoogtelijnen en reliëf weergeven (met extra plugin) Direct bijdragen aan OpenStreetMap - Meld fouten in de kaart - Upload GPX-tracks naar OpenStreetMap in de app - Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline) - Kan reis vastleggen op de achtergrond (toestel in slaapstand) OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maak je dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net. Indicatie van kaartkwaliteit en -compleetheid: - West-Europa **** - Oost-Europa: *** - Rusland: *** - Noord-Amerika: *** - Zuid-Amerika: ** - Azie: ** - Japan &amp; Korea: *** - Midden-Oosten: ** - Afrika: ** - Antarctica: * Lijst van ondersteunde landen (praktisch de hele wereld!): Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus, Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak, Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland. "</string>
 	
     
 	<string name="hno">Huisnummer</string>
@@ -1276,7 +1142,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="local_osm_changes_backup">Backup als OSM-wijziging</string>
     
     <string name="search_street_in_neighborhood_cities">Zoek straat in nabijgelegen plaatsen</string>
-    <string name="intermediate_items_sort_return">De tussenliggende routepunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw bestemming.</string>
+    <string name="intermediate_items_sort_return">De tussenpunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw eindbestemming.</string>
     <string name="intermediate_items_sort_by_distance">Sorteer kortste afstand</string>
     <string name="please_select_address">Kies eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
@@ -1303,7 +1169,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osb_author_or_password_not_specified">Specificeer OSM-gebruikersnaam en -wachtwoord in Instellingen</string>
     <string name="clear_intermediate_points">Wis tussenpunten</string>
     <string name="keep_intermediate_points">Bewaar tussenpunten</string>
-    <string name="new_directions_point_dialog">Er zijn al tussenpunten gemaakt.</string>
+    <string name="new_directions_point_dialog">"Er zijn al tussenpunten  gemaakt."</string>
     <string name="context_menu_item_directions_to">Aanwijzingen naar</string>
     <string name="context_menu_item_directions_from">Aanwijzingen vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
@@ -1348,7 +1214,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	
     <string name="base_world_map">Basis-wereldkaart</string>
     <string name="map_magnifier">Kaartvergrootglas</string>
-    <string name="route_is_too_long">"De afstand tot de bestemming is meer dan 200 km. De routeberekening kan hierdoor erg lang duren (of zelfs  mislukken). Door tussenliggende routepunten toe te voegen, wordt de routeberekening sneller."</string>
+    <string name="route_is_too_long">"De afstand tot de bestemming is meer dan 200 km. De routeberekening kan hierdoor erg lang duren (of zelfs  mislukken). Door tussenpunten toe te voegen, wordt de routeberekening sneller."</string>
     <string name="auto_zoom_none">Geen automatische zoom</string>
     <string name="auto_zoom_close">Zoom naar close-up</string>
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
@@ -1404,7 +1270,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="route_descr_select_destination">Bestemming kiezen</string>
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
-    <string name="keep_and_add_destination_point">Toevoegen als bestemming</string>
+    <string name="keep_and_add_destination_point">Toevoegen als eindbestemming</string>
     <string name="use_displayed_track_for_navigation">De getoonde GPX route gebruiken voor navigatie?</string>
     
     <string name="calculate_osmand_route_without_internet">Bereken een OsmAnd routesegment zonder internet</string>
@@ -1589,7 +1455,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
     <string name="loading_smth">Laad %1$s…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
-    <string name="select_destination_and_intermediate_points">Routepunten kiezen</string>
+    <string name="select_destination_and_intermediate_points">Kies bestemmingen</string>
     <string name="layer_amenity_label">Namen van interessepunten</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
@@ -1670,7 +1536,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
     <string name="arrival_distance_factor_normally">Op tijd</string>
     <string name="arrival_distance_factor_late">Laat</string>
-    <string name="arrival_distance_factor_at_last">Als bestemming bijna is bereikt</string>
+    <string name="arrival_distance_factor_at_last">Een paar meter voor de bestemming</string>
     
 <string name="av_camera_pic_size">Foto-formaat</string>
 	<string name="av_camera_pic_size_descr">Kies de grootte van de foto\'s</string>
