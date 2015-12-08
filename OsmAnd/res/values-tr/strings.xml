@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -14,7 +14,7 @@
 	<string name="target_point">Ara nokta %1$s</string>
     <string name="intermediate_point">Hedef %1$ s</string>
     <string name="context_menu_item_last_intermediate_point">Son ara nokta olarak ekle</string>
-    <string name="context_menu_item_first_intermediate_point">İlk ara nokta olarak ekle</string>
+    <string name="context_menu_item_first_intermediate_point">İlk ara hedef eklemek</string>
     <string name="add_as_last_destination_point">Son ara nokta olarak ekle</string>
     <string name="add_as_first_destination_point">İlk ara nokta olarak ekle</string>
     <string name="replace_destination_point">Hedef noktasını değiştir</string>
