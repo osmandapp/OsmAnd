@@ -267,7 +267,7 @@
     <string name="sort_by_name">Ordenar por nombre</string>
     <string name="show_zoom_buttons_navigation_descr">Muestre los botones de ampliación durante la navegación</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de ampliación</string>
-    <string name="select_destination_and_intermediate_points">Elige puntos de ruta</string>
+    <string name="select_destination_and_intermediate_points">Elige los destinos intermedios</string>
     <string name="layer_amenity_label">Etiquetas de punto</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
@@ -601,7 +601,7 @@
     <string name="animate_routing_route_not_calculated">Primero calcule la ruta</string>
     <string name="animate_routing_route">"Simular, usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
-    <string name="route_is_too_long">El cálculo de ruta sin conexión de OsmAnd, podría tardar mucho tiempo (o a veces no funcionar) para tramos mayores de 200km. Tal vez quieras añadir puntos de ruta intermedios para un mejor rendimiento.</string>
+    <string name="route_is_too_long">El cálculo de ruta sin conexión de OsmAnd, podría tardar mucho tiempo (o a veces no funcionar) para tramos mayores de 200km. Tal vez quieras añadir destinos intermedios para un mejor rendimiento.</string>
     <string name="auto_zoom_none">Sin ampliación automático</string>
     <string name="auto_zoom_close">Para corto alcance</string>
     <string name="auto_zoom_far">Para mediano alcance</string>
@@ -641,9 +641,9 @@
     <string name="speak_cameras">Radares</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
-    <string name="clear_intermediate_points">Quitar puntos intermedios</string>
-    <string name="keep_intermediate_points">Mantener puntos intermedios</string>
-    <string name="new_directions_point_dialog">Ya definió puntos intermedios.</string>
+    <string name="clear_intermediate_points">Quitar destinos intermedios</string>
+    <string name="keep_intermediate_points">Mantener destinos intermedios</string>
+    <string name="new_directions_point_dialog">Ya definió destinos intermedios.</string>
     <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
     <string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_descr_map_location">"Mapa: "</string>
@@ -660,7 +660,7 @@
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Elige primero la ciudad o calle</string>
     <string name="search_street_in_neighborhood_cities">Buscar la calle en ciudades vecinas</string>
-    <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en el camino desde la ubicación actual hasta el destino.</string>
+    <string name="intermediate_items_sort_return">Los destinos intermedios, se reordenados, para optimizar su recorrido en el camino desde la ubicación actual hasta el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar puerta a puerta</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM generado con éxito %1$s</string>
     <string name="local_osm_changes_backup_failed">Falló la copia local de cambios OSM</string>
@@ -719,7 +719,7 @@
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Seguro que quiere parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Quiere quitar su punto de destino (y los puntos de ruta)?</string>
+    <string name="clear_dest_confirm">¿Quiere quitar su punto de destino (y los destinos intermedios)?</string>
     <string name="precise_routing_mode_descr">Habilite para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -795,20 +795,20 @@
     <string name="gps_not_available">Habilite el GPS en ajustes</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>
     <string name="no_route">Sin ruta</string>
-    <string name="delete_target_point">Quitar el punto de ruta</string>
-    <string name="target_point">Punto de ruta %1$s</string>
-    <string name="intermediate_point">Punto de ruta %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Añadir como último punto de ruta</string>
-    <string name="context_menu_item_first_intermediate_point">Añadir como primer punto de ruta</string>
-    <string name="add_as_last_destination_point">Añadir como último punto de ruta</string>
-    <string name="add_as_first_destination_point">Añadir como primer punto de ruta</string>
+    <string name="delete_target_point">Quitar el destino</string>
+    <string name="target_point">Destino %1$s</string>
+    <string name="intermediate_point">Destino %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Añadir como último destino intermedio</string>
+    <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
+    <string name="add_as_last_destination_point">Añadir como último destino intermedio</string>
+    <string name="add_as_first_destination_point">Añadir como primer destino intermedio</string>
     <string name="replace_destination_point">Sustituir punto de destino</string>
     <string name="new_destination_point_dialog">Ya fijó el punto de destino.</string>
-    <string name="target_points">Puntos de ruta</string>
-    <string name="intermediate_point_too_far">Punto de ruta %1$s demasiado lejos del camino más cercano.</string>
-    <string name="arrived_at_intermediate_point">Llegó a su punto de ruta</string>
-    <string name="context_menu_item_intermediate_point">Añadir como punto de ruta</string>
-    <string name="map_widget_intermediate_distance">Punto de ruta</string>
+    <string name="target_points">Destinos</string>
+    <string name="intermediate_point_too_far">Destino intermedio, %1$s demasiado lejos del camino.</string>
+    <string name="arrived_at_intermediate_point">Llegó a su destino intermedio</string>
+    <string name="context_menu_item_intermediate_point">Añadir como destino intermedio</string>
+    <string name="map_widget_intermediate_distance">destino intermedio</string>
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
     <string name="add_tag">Añadir Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
@@ -844,7 +844,7 @@
 \n\n- Funciona conectado (rápido) o sin conexión (sin cargos de roaming cuando está en el extranjero)
 \n- Indicaciones por voz giro-a-giro (grabadas y voces sintetizadas)
 \n- Indicaciones opcionales de carril, mostrado de nombre de las calles y tiempo estimado de llegada
-\n- Soporta puntos intermedios en su itinerario (ruta)
+\n- Soporta destinos intermedios en su itinerario (ruta)
 \n- Recalcula automáticamente la ruta cada vez que se desvía
 \n- Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
 \n\n* Visualización del mapa:
@@ -905,7 +905,7 @@
 \n\n- Funciona conectado (rápido) o sin conexión (sin cargos de roaming cuando está en el extranjero)
 \n- Indicaciones por voz giro-a-giro (grabadas y voces sintetizadas)
 \n- Opcionalmente provee indicaciones de carril, visualización de nombre de calles y tiempo estimado de llegada
-\n- Soporta puntos intermedios en su itinerario (ruta)
+\n- Soporta destinos intermedios en su itinerario (ruta)
 \n- Recalcula automáticamente la ruta cada vez que se desvía
 \n- Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
 \n\n* Visualización del mapa:
@@ -2002,4 +2002,5 @@
     <string name="av_audio_bitrate_descr">Elige la tasa de bits del audio</string>
     <string name="no_address_found">Dirección indeterminada</string>
 	<string name="looking_up_address">Buscando dirección</string>
+    <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
     </resources>
