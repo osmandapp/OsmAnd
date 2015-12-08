@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -475,7 +475,7 @@
 	<string name="osmand_parking_choose_type">Park etme türü seç</string>
 	<string name="osmand_parking_time_no_limit">Zaman-sınırsız park et</string>
 	<string name="osmand_parking_position_description_add">De arabayı almak için:</string>
-	<string name="osmand_parking_plugin_description">Park pozisyonu eklentisi araç park halindeyken ve ne kadar otopark zamanı kaldığında (bir zaman sınırı varsa) ezberlemek sağlar.\nHem yeri ve zamanı Osmand torpido yanı sıra harita ekranında widget görebilir. Bir alarm hatırlatıcı olarak Android takvimine eklenebilir.\n  Kopyala → ↵ ... \"\" \'--- Çeviri</string>
+	<string name="osmand_parking_plugin_description">Arabanı park ne zaman sen ezberlemek Park pozisyonu eklenti sağlar ve (Eğer bir zaman sınırı) ne kadar Park zaman bırakılır.\nYer ve zaman OsmAnd gösterge paneli üzerinde de olduğu gibi widget harita ekranda görülebilir. Bir alarm Android takvime bir hatırlatma olarak eklenebilir.</string>
 	<string name="osmand_parking_plugin_name">Park Etme Konumu</string>
 	<string name="context_menu_item_delete_parking_point">Bir park etme işareti sil</string>
 	<string name="gpxup_public">Halk</string>
@@ -1476,8 +1476,8 @@
 	<string name="downloads_left_template">%1$s indirme sol</string>
 	<string name="shared_string_near">Yakın</string>
     <string name="shared_string_hide">Gizlemek</string>
-    <string name="av_video_quality_low">Düşük çözünürlük</string>
-    <string name="av_video_quality_high">En yüksek çözünürlük</string>
+    <string name="av_video_quality_low">En düşük kalite</string>
+    <string name="av_video_quality_high">En yüksek kalite</string>
     <string name="av_video_quality">Video çıkış kalitesi</string>
     <string name="av_video_quality_descr">Seçin video çıkış kalitesi</string>
     <string name="av_audio_format">Ses çıkış biçimi</string>
@@ -1573,7 +1573,7 @@
 	<string name="context_menu_item_update_poi">Güncelleme POI</string>
 	<string name="fav_imported_sucessfully">Favoriler başarıyla içe aktarıldı</string>
 	<string name="import_file_favourites">GPX dosyası olarak puan kaydedin veya sık bunları ithal?</string>
-	<string name="fav_file_to_load_not_found">GPX dosyası olarak puan kaydedin veya sık bunları ithal?</string>
+	<string name="fav_file_to_load_not_found">Sık Kullanılanlar içeren GPX dosyası {0} bulunamadı</string>
 	<string name="share_fav_subject">Sık Osmand üzerinden paylaşılan</string>
 	<string name="layer_osm_bugs">(Çevrimiçi) OSM Notları</string>
 	<string name="use_trackball_descr">Haritayı hareket ettirmek için parmağınızı kaydırın kullanın</string>
