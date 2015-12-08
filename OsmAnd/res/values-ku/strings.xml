@@ -28,4 +28,10 @@
     <string name="regions">Herêman</string>
     <string name="world_maps">Nexşa Cîhane</string>
     <string name="traffic_warning_hazard">Tirs</string>
+    <string name="rendering_attr_horseRoutes_name">Riya Haspa</string>
+    <string name="shared_string_hide">Veşere</string>
+    <string name="contact_us">Ji me re binivîsin</string>
+    <string name="feedback">Gotine wa</string>
+    <string name="search_on_the_map_item">Lêgerîn Nexşa</string>
+    <string name="other_menu_group">Adin</string>
     </resources>
