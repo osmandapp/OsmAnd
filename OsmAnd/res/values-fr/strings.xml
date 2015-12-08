@@ -1443,7 +1443,7 @@
     <string name="map_widget_plain_time">Heure actuelle</string>
     <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
-    <string name="select_destination_and_intermediate_points">Sélectionnez les étapes intermédiaires</string>
+    <string name="select_destination_and_intermediate_points">Sélectionnez les étapes</string>
     <string name="layer_amenity_label">Libellés de point</string>
     <string name="route_descr_destination">Destination</string>
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation</string>
