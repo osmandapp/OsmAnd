@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -1825,11 +1825,11 @@
     <string name="osmo_group_by_invite">Tarafından davet girin</string>
     <string name="osmo_group_information">Bir grup oluşturmadan önce lütfen okuyunuz!</string>
     <string name="osmo_not_signed_in">Osmo giriş başarısız</string>
-    <string name="osmo_gpx_points_downloaded">Osmo% 1 $ s Yüklenme işaret ediyor.</string>
+    <string name="osmo_gpx_points_downloaded">Osmo %1$s Yüklenme işaret ediyor.</string>
     <string name="osmo_auto_connect_descr">Otomatik olarak uygulama başlatma işleminden sonra servise bağlanmak</string>
     <string name="osmo_auto_connect">Otomatik bağlanma</string>
     <string name="osmo_start_service">Osmo hizmeti</string>
-    <string name="osmo_gpx_track_downloaded">Osmo parça% 1 $ s indirilen.</string>
+    <string name="osmo_gpx_track_downloaded">Osmo parça %1$s indirilen.</string>
     <string name="no_index_file_to_download">Dosyalar bulunamadı, internet bağlantınızı kontrol ediniz.</string>
     <string name="none_selected_gpx">Hiçbir GPX dosyaları seçilmedi. Amacıyla seçmek için ve mevcut yolda tutun.</string>
     <string name="local_index_select_gpx_file">Göstermek için seçin</string>
@@ -1868,9 +1868,9 @@
     <string name="plugin_ski_descr">"Osmand Bu eklenti, küresel yokuş aşağı kayak pistleri, kros kayak pistleri, Alp kayak yolları, teleferik ve telesiyej sizin parmaklarınızın ayrıntıları koyar. Rotalar ve pistler renk kodlu zorluk tarafından gösterilen ve kar renkli kış manzara özümlediği özel \'Kış\' harita tarzında tasvir edilmektedir.\n\nBu görünüm etkinleştirilmesi kış koşullarında tüm peyzaj özellikler gösteren, \'Kış ve kayak\' harita stilini değiştirir. Bu görünüm, ya tekrar buraya de aktive ya da istediğiniz gibi \'Yapılandırma haritası\' başlığı altında \'Harita stilini\' değiştirilerek tarafından geri alınabilir. "</string>
     <string name="osmand_distance_planning_plugin_description">Bu eklenti bir gezi planı ve nokta arasındaki mesafeyi ölçmek için, mevcut GPX dosyalarını harita üzerinde dokunarak yolları oluşturmak veya kullanmak veya değiştirmek için izin veren bir harita ekranı widget\'ı sağlar. Sonuçlar daha sonra rehberlik için kullanılabilecek bir GPX dosyası olarak kaydedilebilir.</string>
     <string name="rename_failed">Yeniden adlandırma başarısız oldu.</string>
-    <string name="location_on_map">Yer:\nLat% 1 $ s\nLon% 2 $ s</string>
+    <string name="location_on_map">Yer:\nLat %1$s\nLon %2$s</string>
     <string name="rendering_attr_pisteRoutes_name">Kayak pistleri</string>
-    <string name="free">"Ücretsiz% 1 $ s "</string>
+    <string name="free">"Ücretsiz %1$s"</string>
     <string name="rendering_attr_pisteGrooming_name">Pist tımar</string>
     <string name="world_ski_missing">Kayak haritaları görüntülemek için, özel çevrimdışı harita indirimek gerekiyor</string>
     <string name="nautical_maps_missing">Deniz haritaları görüntülemek için, özel çevrimdışı harita indirimek gerekiyor</string>
@@ -1906,7 +1906,7 @@
     <string name="rendering_attr_publicTransportMode_name">Otobüs, troleybüs, mekik yolları</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvay ve tren yolları</string>
     <string name="rendering_attr_subwayMode_name">Metro yolları</string>
-    <string name="lock_screen_request_explanation">% 1 $ s ihtiyaçları güç tasarrufu özelliği ekranını kapatmak için bu izni.</string>
+    <string name="lock_screen_request_explanation">%1$s ihtiyaçları güç tasarrufu özelliği ekranını kapatmak için bu izni.</string>
     <string name="wake_on_voice">Ekranı açın</string>
     <string name="wake_on_voice_descr">Bir dönüşe yaklaşırken cihaz ekranında (kapalı ise) açın</string>
     <string name="impassable_road">Yolları kaçının …</string>
@@ -1924,12 +1924,12 @@
     <string name="osmo_no_connection_msg">Osmo hizmeti kullanılabilir değil:\n- Bağlantısını kontrol edin;\n- Ayarları kontrol edin;\n- Check out bizim Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Bir anonim kullanıcı olamaz:\n- Grupları oluşturmak;\n- Sunucuyla grupları ve cihazları senkronize;\n- Özel ofiste grupları ve aygıtları yönetmek.</string>
     <string name="anonymous_user">Anonim Kullanıcı</string>
-    <string name="logged_as">% 1 $ s olarak giriş</string>
+    <string name="logged_as">%1$s olarak giriş</string>
     <string name="speed_limit_exceed_message">Bir sesli uyarı alırsınız yukarıda seç hız limiti tolerans marjı.</string>
-    <string name="fav_point_emoticons_message">Favori noktası adı bir dosyaya ifadeleri ile dize tasarrufu düzgün kolaylaştırmak için% 1 $ s için modifiye edilmiştir.</string>
+    <string name="fav_point_emoticons_message">Favori noktası adı bir dosyaya ifadeleri ile dize tasarrufu düzgün kolaylaştırmak için %1$s için modifiye edilmiştir.</string>
     <string name="print_route">Yazdırma yolu</string>
     <string name="fav_point_dublicate">Favori noktası adı yinelenen</string>
-    <string name="fav_point_dublicate_message">Belirtilen favori isim zaten kullanımda , tekrarından kaçınmak için% 1 $ s değiştirildi.</string>
+    <string name="fav_point_dublicate_message">Belirtilen favori isim zaten kullanımda , tekrarından kaçınmak için %1$s değiştirildi.</string>
     <string name="traffic_warning_border_control">Sınır kontrolü</string>
     <string name="traffic_warning_payment">Gişe</string>
     <string name="traffic_warning_calming">Trafik Sakinleştirici</string>
@@ -1961,10 +1961,10 @@
     <string name="shared_string_all">Tüm</string>
     <string name="waypoints">Yol işaretleri</string>
     <string name="targets">Hedefleri</string>
-    <string name="download_additional_maps">Eksik haritalar %1$ s (%2$ d MB) indirilsinmi?</string>
+    <string name="download_additional_maps">Eksik haritalar %1$s (%2$ d MB) indirilsinmi?</string>
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>
     <string name="rendering_attr_coloredBuildings_name">Binalar türüne göre renk kodu</string>
-    <string name="osmo_leave_confirmation_msg">Grup% 1 $ s ayrılmak istiyor musunuz?</string>
+    <string name="osmo_leave_confirmation_msg">Grup %1$s ayrılmak istiyor musunuz?</string>
     <string name="osmo_specify_tracker_id">Lütfen kimlik belirtin</string>
     <string name="keep_navigation_service">Devam et</string>
     <string name="map_preferred_locale_descr">Harita üzerinde etiket için tercih edilen dil (yerel adlarıyla İngilizce veya geçecektir mevcut değilse)</string>
