@@ -918,9 +918,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			if (group.getSubfolder() != null) {
 				name.append(" ").append(group.getSubfolder());
 			}
-			if (group.isBackupedData()) {
-				ctx.getString(R.string.local_indexes_cat_backup);
-			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
 			TextView sizeView = ((TextView) v.findViewById(R.id.section_description));
 			List<LocalIndexInfo> list = data.get(group);
