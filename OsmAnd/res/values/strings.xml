@@ -606,7 +606,7 @@
     <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation</string>
     <string name="show_zoom_buttons_navigation">Show zoom buttons</string>
     <string name="save_as_favorites_points">Save as group of favorites</string>
-    <string name="select_destination_and_intermediate_points">Select intermediate destinations</string>
+    <string name="select_destination_and_intermediate_points">Select destinations</string>
     <string name="layer_amenity_label">Point labels</string>
     <string name="loading_smth">Loading %1$s…</string>
     <string name="map_widget_plain_time">Current time</string>
