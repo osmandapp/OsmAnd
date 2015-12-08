@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -20,7 +20,7 @@
     <string name="replace_destination_point">Hedef noktasını değiştir</string>
     <string name="new_destination_point_dialog">Hedef konumları zaten bulunmaktadır.</string>
     <string name="target_points">Ara noktalar</string>
-    <string name="intermediate_point_too_far">Ara hedef %1$ s çok uzak en yakın yol var.</string>
+    <string name="intermediate_point_too_far">Ara hedef %1$s çok uzak en yakın yol var.</string>
     <string name="arrived_at_intermediate_point">Ara hedefinize ulaştınız</string>
     <string name="context_menu_item_intermediate_point">Ara hedef olarak eklemek</string>
     <string name="map_widget_intermediate_distance">Ara hedef</string>
@@ -1961,7 +1961,7 @@
     <string name="shared_string_all">Tüm</string>
     <string name="waypoints">Yol işaretleri</string>
     <string name="targets">Hedefleri</string>
-    <string name="download_additional_maps">Eksik haritalar %1$s (%2$ d MB) indirilsinmi?</string>
+    <string name="download_additional_maps">Eksik haritalar %1$s (%2$d MB) indirilsinmi?</string>
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>
     <string name="rendering_attr_coloredBuildings_name">Binalar türüne göre renk kodu</string>
     <string name="osmo_leave_confirmation_msg">Grup %1$s ayrılmak istiyor musunuz?</string>
