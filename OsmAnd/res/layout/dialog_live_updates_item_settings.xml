@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dashboard_blue"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flevoland"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Netherlands"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update: 4 Dec 2015, 14:41"/>
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="fill_horizontal"
+            android:text="Live update"/>
+        <Switch/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="fill_horizontal"
+            android:text="Only download over WiFi"
+            android:layout_row="2"
+            android:layout_column="0"/>
+        <Switch/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_gravity="fill_horizontal"
+            android:text="Live update"
+            android:layout_row="3"
+            android:layout_column="0"/>
+        <Spinner/>
+    </GridLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_white"/>
+</LinearLayout>

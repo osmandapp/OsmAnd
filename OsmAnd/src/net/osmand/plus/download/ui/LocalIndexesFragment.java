@@ -161,7 +161,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if(current == null || current.getStatus() == AsyncTask.Status.FINISHED ||
 				current.isCancelled() || current.getResult() != null) {
 			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute(getActivity());
+			asyncLoader.execute();
 		}
 	}
 
@@ -277,16 +277,18 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 
-	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
+	public class LoadLocalIndexTask extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
+			implements AbstractLoadLocalIndexTask {
 
 		private List<LocalIndexInfo> result;
 
 		@Override
-		protected List<LocalIndexInfo> doInBackground(Activity... params) {
+		protected List<LocalIndexInfo> doInBackground(Void... params) {
 			LocalIndexHelper helper = new LocalIndexHelper(getMyApplication());
 			return helper.getLocalIndexData(this);
 		}
 
+		@Override
 		public void loadFile(LocalIndexInfo... loaded) {
 			publishProgress(loaded);
 		}
@@ -888,7 +890,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			LocalIndexInfoViewHolder viewHolder;
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
-				convertView = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
+				convertView = inflater.inflate(R.layout.local_index_list_item, parent, false);
 				viewHolder = new LocalIndexInfoViewHolder(convertView);
 				convertView.setTag(viewHolder);
 			} else {
@@ -917,9 +919,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			StringBuilder name = new StringBuilder(group.getType().getHumanString(ctx));
 			if (group.getSubfolder() != null) {
 				name.append(" ").append(group.getSubfolder());
-			}
-			if (group.isBackupedData()) {
-				ctx.getString(R.string.local_indexes_cat_backup);
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
 			TextView sizeView = ((TextView) v.findViewById(R.id.section_description));

@@ -8,9 +8,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.ActionBarProgressActivity;
 
-public class LivieUpdatesActivity extends OsmandActionBarActivity {
+public class LivieUpdatesActivity extends ActionBarProgressActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class LivieUpdatesActivity extends OsmandActionBarActivity {
 
 	public static class MyAdapter extends FragmentPagerAdapter {
 		private final Fragment[] fragments = new Fragment[]{new LiveUpdatesFragment()};
-		private final String[] titles = new String[] {LiveUpdatesFragment.TITILE};
+		private final String[] titles = new String[]{LiveUpdatesFragment.TITILE};
 
 		public MyAdapter(FragmentManager fm) {
 			super(fm);

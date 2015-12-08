@@ -208,10 +208,6 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		return localIndexInfos;
 	}
 
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
-	}
-
 	@Override
 	public void onPause() {
 		super.onPause();
