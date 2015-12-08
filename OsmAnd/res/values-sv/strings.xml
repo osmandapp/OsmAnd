@@ -533,14 +533,14 @@
     <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
     <string name="specified_dir_doesnt_exist">Kan inte hitta den angivna mappen.</string>
 
-    <string name="context_menu_item_last_intermediate_point">Lägg till som sista waypoint</string>
-    <string name="context_menu_item_first_intermediate_point">Lägg till som första waypoint</string>
-    <string name="add_as_last_destination_point">Lägg till som sista waypoint</string>
-    <string name="add_as_first_destination_point">Lägg till som första waypoint</string>
+    <string name="context_menu_item_last_intermediate_point">Lägg till som sista mellanliggande destination</string>
+    <string name="context_menu_item_first_intermediate_point">Lägg till som första mellanliggande destination</string>
+    <string name="add_as_last_destination_point">Lägg till som sista mellanliggande destination</string>
+    <string name="add_as_first_destination_point">Lägg till som första mellanliggande destination</string>
     <string name="replace_destination_point">Byt destination</string>
     <string name="new_destination_point_dialog">Du har redan en angiven destination.</string>
-    <string name="target_point">Waypoint %1$s</string>
-    <string name="target_points">Waypoints</string>
+    <string name="target_point">Destination %1$s</string>
+    <string name="target_points">Destinationer</string>
     <string name="intermediate_point_too_far">Waypointen %1$s för långt från närmaste väg.</string>
     <string name="arrived_at_intermediate_point">Du har anlänt till din waypoint</string>
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
@@ -868,7 +868,7 @@
 
     <string name="local_indexes_cat_av">Audio-/videodata</string>
     <string name="stop_routing_confirm">Är det säkert att du vill avbryta navigeringen?</string>
-    <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt (samt waypoints)?</string>
+    <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt (samt mellanliggande destinationer)?</string>
     <string name="recording_context_menu_show">Visa</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
@@ -893,8 +893,8 @@
     <string name="recording_error">Ett fel uppstod under inspelningen </string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
     <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems). "</string>
-    <string name="delete_target_point">Ta bort waypoint</string>
-    <string name="intermediate_point">Waypoint %1$s</string>
+    <string name="delete_target_point">Ta bort destination</string>
+    <string name="intermediate_point">Destination %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="local_index_descr_title">Hantera kartfiler</string>
     <string name="incomplete_locale">ofullständig</string>
@@ -1035,7 +1035,7 @@
     <string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
 
     <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
-    <string name="intermediate_items_sort_return">Mellanliggande waypoints ordnade för att optimera deras ordning från aktuell position till destinationen.</string>
+    <string name="intermediate_items_sort_return">Mellanliggande mål ordnade för att optimera deras ordning från aktuell position till destinationen.</string>
     <string name="intermediate_items_sort_by_distance">Sortera dörr-till-dörr</string>
     <string name="local_osm_changes_backup_failed">Säkerhetskopieringen av OSM-ändringar misslyckades</string>
     <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
@@ -1068,9 +1068,9 @@
     <string name="plugin_distance_point_hdop">noggrannhet</string>
 
     <string name="osb_author_or_password_not_specified">Ange OSM-användare och -lösenord i inställningarna</string>
-    <string name="clear_intermediate_points">Ta bort mellanliggande punkter</string>
-    <string name="keep_intermediate_points">Behåll mellanliggande punkter</string>
-    <string name="new_directions_point_dialog">Du har redan angivit mellanliggande punkter.</string>
+    <string name="clear_intermediate_points">Ta bort mellanliggande mål</string>
+    <string name="keep_intermediate_points">Behåll mellanliggande mål</string>
+    <string name="new_directions_point_dialog">Du har redan angivit mellanliggande mål.</string>
     <string name="context_menu_item_directions_to">Vägvisning till</string>
     <string name="context_menu_item_directions_from">Vägvisning från</string>
     <string name="route_descr_map_location">Karta: </string>
@@ -1128,7 +1128,7 @@
 
 
     <string name="map_magnifier">Kartförstoring</string>
-    <string name="route_is_too_long">OsmAnd offline-ruttning kan ta väldigt lång tid (eller ibland inte fungera alls) för punkter mer än 200 km från varandra. Lägg till en eller flera mellanliggande waypoints för bättre prestanda.</string>
+    <string name="route_is_too_long">OsmAnd offline-ruttning kan ta väldigt lång tid (eller ibland inte fungera alls) för punkter mer än 200 km från varandra. Lägg till en eller flera mellanliggande mål för bättre prestanda.</string>
     <string name="auto_zoom_none">Ingen auto-zoom</string>
     <string name="auto_zoom_close">Nära</string>
     <string name="auto_zoom_far">Medelavstånd</string>
@@ -1365,7 +1365,7 @@
     <string name="gpx_selection_track">%1$s \nSpår %2$s</string>
 
     <string name="save_as_favorites_points">Spara som grupp med favoriter</string>
-    <string name="select_destination_and_intermediate_points">Välj waypoints</string>
+    <string name="select_destination_and_intermediate_points">Välj mål</string>
     <string name="layer_amenity_label">Namn på punkter</string>
     <string name="show_zoom_buttons_navigation_descr">Visa zoom-knappar under navigering</string>
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
