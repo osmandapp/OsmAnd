@@ -44,7 +44,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.liveupdates.LivieUpdatesActivity;
+import net.osmand.plus.liveupdates.LiveUpdatesActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -650,7 +650,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						Intent intent = new Intent(mapActivity, LivieUpdatesActivity.class);
+						Intent intent = new Intent(mapActivity, LiveUpdatesActivity.class);
 						mapActivity.startActivity(intent);
 						return false;
 					}

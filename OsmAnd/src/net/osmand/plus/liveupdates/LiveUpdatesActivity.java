@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 
-public class LivieUpdatesActivity extends ActionBarProgressActivity {
+public class LiveUpdatesActivity extends ActionBarProgressActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
