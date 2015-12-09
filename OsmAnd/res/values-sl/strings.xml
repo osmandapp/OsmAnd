@@ -82,7 +82,7 @@
     <string name="context_menu_item_last_intermediate_point">Dodaj kot zadnji vmesni cilj</string>
     <string name="add_as_last_destination_point">Dodaj kot zadnji vmesni cilj</string>
     <string name="add_as_first_destination_point">Dodaj kot prvo vmesni cilj</string>
-    <string name="replace_destination_point">Zamenjaj ciljno točko</string>
+    <string name="replace_destination_point">Zamenjaj cilj</string>
     <string name="new_destination_point_dialog">Ciljna točka je že določena.</string>
     <string name="context_menu_item_intermediate_point">Dodaj kot vmesni cilj</string>
     <string name="arrived_at_intermediate_point">Prispeli ste do vmesnega cilja</string>
@@ -1172,7 +1172,7 @@
     <string name="base_world_map">Osnovni zemljevid sveta</string>
     <string name="shared_string_and">in</string>
     <string name="shared_string_or">ali</string>
-    <string name="route_is_too_long">Usmerjanje brez povezave za točke, ki so oddaljene več kot 200 km, lahko traja zelo dolgo (ali včasih celo ne deluje). Za natančnejše določanje je priporočljivo dodati cilje na poti.</string>
+    <string name="route_is_too_long">Usmerjanje brez povezave za točke, ki so oddaljene več kot 200 km, lahko traja zelo dolgo (ali včasih celo ne deluje). Za natančnejše določanje je priporočljivo dodati vmesne cilje na poti.</string>
     <string name="auto_zoom_none">Ne omogoči samodejnega približevanja</string>
     <string name="auto_zoom_farthest">Na dolge razdalje</string>
     <string name="map_magnifier">Velikost zemljevida</string>
@@ -1666,8 +1666,8 @@
     <string name="track_segments">Odsek sledi</string>
     <string name="track_points">Točke sledi</string>
     <string name="action_create">Ustvarjanje dejanja</string>
-    <string name="action_modify">Spreminjanje dejanja</string>
-    <string name="action_delete">Brisanje dejanja</string>
+    <string name="action_modify">Spremenjeno</string>
+    <string name="action_delete">Izbrisano</string>
     <string name="osm_edits">Urejanje OSM</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
@@ -1687,7 +1687,7 @@
     <string name="shared_string_unexpected_error">Prišlo je do nepričakovane napake</string>
     <string name="shared_string_action_template">Dejanje {0}</string>
     <string name="shared_string_collapse">Zloži</string>
-    <string name="shared_string_currently_recording_track">Trenutno beležena sled</string>
+    <string name="shared_string_currently_recording_track">Beleženje sledi</string>
     <string name="shared_string_audio">Zvok</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Fotografija</string>

@@ -2183,4 +2183,7 @@
     <string name="no_address_found">Kan ikke bestemme adresse</string>
 	<string name="looking_up_address">Søger efter adressen</string>
     <string name="rendering_attr_horseRoutes_name">Hesteruter</string>
-    </resources>
+    <string name="update_every">Opdater hver</string>
+    <string name="only_download_over_wifi">Hent kun over WiFi</string>
+    <string name="live_update">Realtids opdatering</string>
+</resources>
