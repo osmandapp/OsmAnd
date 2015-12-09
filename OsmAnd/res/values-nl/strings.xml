@@ -155,7 +155,7 @@
   <string name="user_name_descr">Nodig voor openstreetmap.org aanmelding</string>
   <string name="user_password">OSM wachtwoord</string>
   <string name="user_password_descr">Nodig voor openstreetmap.org aanmelding</string>
-  <string name="osmand_service">Achtergrondstand</string>
+  <string name="osmand_service">Achtergrondmodus</string>
   <string name="osmand_service_descr">OsmAnd werkt op de achtergrond als het scherm uit is</string>
   
   
@@ -252,7 +252,7 @@
   <string name="local_indexes_cat_tts">Gesproken aanwijzingen (TTS)</string>
   <string name="local_indexes_cat_voice">Gesproken aanwijzingen (opgenomen)</string>
   
-  <string name="local_indexes_cat_tile">Online en bewaarde tegelkaarten</string>
+  <string name="local_indexes_cat_tile">Online en opgeslagen tegelkaarten</string>
   <string name="local_indexes_cat_map">Normale kaarten (vector)</string>
   <string name="local_indexes_cat_poi">Interessepunt-gegevens</string>
   <string name="ttsvoice">Stemmen van spraaksynthese</string>
@@ -1513,7 +1513,7 @@
 	<string name="stop_navigation_service">Onderbreek</string>
 	<string name="enable_sleep_mode">GPS slaapstand inschakelen</string>
 	<string name="gps_wake_up_timer">GPS ontwaak-interval</string>
-	<string name="sleep_mode_stop_dialog">Onderbreek GPS achtergond-stand?</string>
+	<string name="sleep_mode_stop_dialog">Onderbreek GPS op achtergrond?</string>
 	<string name="lang_fa">Perzisch</string>
 	<string name="lang_al">Albanees</string>
 	<string name="lang_ar">Arabisch</string>
@@ -1818,7 +1818,7 @@
     <string name="filter_poi_hint">Filter op naam</string>
     <string name="search_poi_category_hint">Tik om alles te doorzoeken</string>
     <string name="shared_string_open">Open</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">OSM cartografie-assistent</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM kaart-assistent</string>
 	<string name="shared_string_manage">Beheer</string>
 	<string name="shared_string_edit">Bewerk</string>
 	<string name="shared_string_places">Plaatsen</string>
@@ -1832,7 +1832,7 @@
     <string name="specified_directiory_not_writeable">In de opgegeven directory kunnen geen kaarten opgeslagen worden</string>
 	<string name="copying_osmand_file_failed">Het kopiëren van bestanden is niet gelukt</string>    
     <string name="storage_directory_external">Externe opslag</string>
-    <string name="storage_directory_multiuser">Opslag voor meer gebruikers</string>
+    <string name="storage_directory_multiuser">Opslag voor meerdere gebruikers</string>
     <string name="storage_directory_internal_app">Intern applicatie-geheugen</string>
     <string name="storage_directory_manual">Handmatig opgegeven</string>
     <string name="storage_directory_default">Interne opslag</string>
@@ -1909,7 +1909,7 @@
     <string name="traffic_warning_hazard">Gevaar</string>
     <string name="rendering_value_boldOutline_name">Dik omlijnd</string>
     <string name="no_updates_available">Geen updates beschikbaar</string>
-    <string name="download_live_updates">Automatische updates</string>
+    <string name="download_live_updates">Live Updates</string>
 	<string name="lang_os">Ossetisch</string>
     <string name="lang_nb">Noors (Bokmål)</string>
     <string name="lang_vo">Volapük</string>
@@ -1928,7 +1928,7 @@
 	<string name="user_hates_app_get_feedback_long">Vertel ons wat u veranderd wilt hebben in deze app.</string>
 	<string name="failed_to_upload">Uploaden mislukt</string>
 	<string name="delete_change">Verwijder wijziging</string>
-	<string name="successfully_uploaded_pattern">Succesvol geupload {0}/{1}</string>
+	<string name="successfully_uploaded_pattern">Succesvol geüpload {0}/{1}</string>
 	<string name="try_again">Probeer het opnieuw</string>
 	<string name="error_message_pattern">Fout: {0}</string>
 <string name="rate_this_app_long">Wilt u OsmAnd beoordelen op Google Play? Alvast heel erg bedankt.</string>
@@ -1957,10 +1957,10 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
-    <string name="shared_string_trip_recording">Spoor registreren</string>
+    <string name="shared_string_trip_recording">GPX-Track opnemen</string>
     <string name="shared_string_navigation">Navigatie</string>
-    <string name="favourites_edit_dialog_title">Eigenschappen van favoriet</string>
-    <string name="simulate_your_location_stop_descr">Stop simuleren van positie</string>
+    <string name="favourites_edit_dialog_title">Informatie over favoriet</string>
+    <string name="simulate_your_location_stop_descr">Stop simulatie</string>
     <string name="simulate_your_location_descr">Simuleer met een GPX-spoor of een berekende route</string>
     <string name="av_locations_descr">GPX-bestand met aantekeningen</string>
     <string name="av_locations">Locaties</string>
@@ -2057,7 +2057,7 @@
     <string name="contact_us">Neem contact op</string>
     <string name="map_legend">Legenda</string>
 <string name="read_more">Meer lezen</string>
-    <string name="whats_new">Wat is nieuw in</string>
+    <string name="whats_new">Wat is er nieuw in</string>
     <string name="rendering_attr_hideProposed_name">Verberg voorgestelde objecten</string>
     <string name="share_osm_edits_subject">Via OsmAnd gedeelde OSM-bewerkingen</string>
     <string name="lang_nds">Nederduits</string>
@@ -2086,7 +2086,7 @@
     <string name="dashboard_or_drawer_description">Kies tussen het flexibele dashboard of een vast menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
     <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Mogelijkheid menu te gebruiken in plaats van het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer… "</string>
-    <string name="shared_string_commit">Verstuur</string>
+    <string name="shared_string_commit">Bijdrage versturen</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX routepunt wissen?</string>
     <string name="context_menu_item_edit_waypoint">GPX routepunt bewerken</string>
