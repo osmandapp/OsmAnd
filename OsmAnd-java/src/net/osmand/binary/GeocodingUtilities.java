@@ -151,7 +151,7 @@ public class GeocodingUtilities {
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		rp.findRouteSegment(lat, lon, ctx, listR);
-		double dist = 0;
+		double distSquare = 0;
 		TLongHashSet set = new TLongHashSet();
 		Set<String> streetNames = new HashSet<String>();
 		for(RouteSegmentPoint p : listR) {
@@ -161,8 +161,8 @@ public class GeocodingUtilities {
 			}
 			boolean emptyName = Algorithms.isEmpty(road.getName()) && Algorithms.isEmpty(road.getRef()) ;
 			if(!emptyName) {
-				if(dist == 0 || dist > p.dist) {
-					dist = p.dist;
+				if(distSquare == 0 || distSquare > p.distSquare) {
+					distSquare = p.distSquare;
 				}
 				GeocodingResult sr = new GeocodingResult();
 				sr.searchPoint = new LatLon(lat, lon);
@@ -175,11 +175,11 @@ public class GeocodingUtilities {
 					lst.add(sr);
 				}
 			}
-			if(p.dist > STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS && 
-					dist != 0 && p.dist > THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER * dist ) {
+			if(p.distSquare > STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS && 
+					distSquare != 0 && p.distSquare > THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER * distSquare ) {
 				break;
 			}
-			if(p.dist > STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS*STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS) {
+			if(p.distSquare > STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS*STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS) {
 				break;
 			}
 		}
