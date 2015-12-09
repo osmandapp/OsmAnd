@@ -126,7 +126,7 @@ public class TargetPointsHelper {
 	public List<TargetPoint> getIntermediatePointsNavigation() {
 		List<TargetPoint> intermediatePoints = new ArrayList<>();
 		if (settings.USE_INTERMEDIATE_POINTS_NAVIGATION.get()) {
-			for (TargetPoint t : intermediatePoints) {
+			for (TargetPoint t : this.intermediatePoints) {
 				intermediatePoints.add(t);
 			}
 		}
@@ -135,7 +135,7 @@ public class TargetPointsHelper {
 	
 	public List<LatLon> getIntermediatePointsLatLon() {
 		List<LatLon> intermediatePointsLatLon = new ArrayList<LatLon>();
-		for (TargetPoint t : intermediatePoints) {
+		for (TargetPoint t : this.intermediatePoints) {
 			intermediatePointsLatLon.add(t.point);
 		}
 		return intermediatePointsLatLon;
@@ -144,7 +144,7 @@ public class TargetPointsHelper {
 	public List<LatLon> getIntermediatePointsLatLonNavigation() {
 		List<LatLon> intermediatePointsLatLon = new ArrayList<LatLon>();
 		if (settings.USE_INTERMEDIATE_POINTS_NAVIGATION.get()) {
-			for (TargetPoint t : intermediatePoints) {
+			for (TargetPoint t : this.intermediatePoints) {
 				intermediatePointsLatLon.add(t.point);
 			}
 		}
@@ -153,7 +153,7 @@ public class TargetPointsHelper {
 
 	public List<TargetPoint> getIntermediatePointsWithTarget() {
 		List<TargetPoint> res = new ArrayList<TargetPoint>();
-		res.addAll(intermediatePoints);
+		res.addAll(this.intermediatePoints);
 		if(pointToNavigate != null) {
 			res.add(pointToNavigate);
 		}
