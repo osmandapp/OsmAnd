@@ -835,12 +835,12 @@ public class BinaryRoutePlanner {
 	}
 	
 	public static class RouteSegmentPoint extends RouteSegment {
-		public RouteSegmentPoint(RouteDataObject road, int segmentStart, double dist) {
+		public RouteSegmentPoint(RouteDataObject road, int segmentStart, double distSquare) {
 			super(road, segmentStart);
-			this.dist = dist;
+			this.distSquare = distSquare;
 		}
 
-		public double dist;
+		public double distSquare;
 		public int preciseX;
 		public int preciseY;
 		public List<RouteSegmentPoint> others;
