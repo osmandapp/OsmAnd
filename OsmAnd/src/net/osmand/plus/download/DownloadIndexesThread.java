@@ -124,7 +124,7 @@ public class DownloadIndexesThread {
 				}
 				contentText.append(i.getVisibleName(app, app.getRegions()));
 			}
-			bld.setContentTitle(msg).setSmallIcon(R.drawable.ic_action_import).
+			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download).
 				setContentText(contentText.toString()).
 				setContentIntent(contentPendingIntent).setOngoing(true);
 			int progress = getCurrentDownloadingItemProgress();
