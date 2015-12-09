@@ -2540,4 +2540,7 @@
 
 	<string name="poi_building_type_pyramid">Тип здания: пирамида</string>
 
+	<string name="poi_fitness_centre">Фитнес-центр</string>
+	<string name="poi_fitness">Фитнес</string>
+
 </resources>

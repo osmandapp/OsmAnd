@@ -2559,4 +2559,7 @@
 	<string name="poi_site_type_hut_circle">Tipo: círculo de cabana</string>
 	<string name="poi_fortification_type_ring_ditch">Tipo de fortificação: vala circular</string>
 
-	</resources>
+	<string name="poi_fitness_centre">Academia de ginástica</string>
+	<string name="poi_fitness">Fitness</string>
+
+</resources>
