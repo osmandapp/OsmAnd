@@ -89,7 +89,7 @@ public class RoutePlannerFrontEnd {
 
 			@Override
 			public int compare(RouteSegmentPoint o1, RouteSegmentPoint o2) {
-				return Double.compare(o1.dist, o2.dist);
+				return Double.compare(o1.distSquare, o2.distSquare);
 			}
 		});
 		if(list.size() > 0) {
