@@ -671,7 +671,7 @@ public class OsmandSettings {
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
 			if(val != null) {
-				((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(val.defMetrics);
+				METRIC_SYSTEM.set(val.defMetrics);
 			}
 			return super.setValue(prefs, val);
 		};
@@ -1855,8 +1855,11 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED  = 
 			new LongPreference("agps_data_downloaded", 0).makeGlobal();
-	
-	
+
+	// Live Updates
+	public final OsmandPreference<Boolean> IS_LIVE_UPDATES_ON =
+			new BooleanPreference("IS_LIVE_UPDATES_ON", false).makeGlobal();
+
 	// UI boxes
 	public final CommonPreference<Boolean> TRANSPARENT_MAP_THEME = 
 			new BooleanPreference("transparent_map_theme", true).makeProfile();

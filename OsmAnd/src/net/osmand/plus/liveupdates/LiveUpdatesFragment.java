@@ -9,16 +9,20 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.LocalIndexHelper;
@@ -43,6 +47,27 @@ public class LiveUpdatesFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
+
+		final OsmandSettings settings = getMyActivity().getMyApplication().getSettings();
+
+		final TextView onOffTextView = (TextView) header.findViewById(R.id.onOffTextView);
+		int liveUpdatesStateId = settings.IS_LIVE_UPDATES_ON.get()
+				? R.string.shared_string_on : R.string.shared_string_off;
+		onOffTextView.setText(liveUpdatesStateId);
+
+		SwitchCompat liveUpdatesSwitch = (SwitchCompat) header.findViewById(R.id.liveUpdatesSwitch);
+		liveUpdatesSwitch.setChecked(settings.IS_LIVE_UPDATES_ON.get());
+		liveUpdatesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				settings.IS_LIVE_UPDATES_ON.set(isChecked);
+				int liveUpdatesStateId = isChecked ? R.string.shared_string_on
+						: R.string.shared_string_off;
+				onOffTextView.setText(liveUpdatesStateId);
+
+			}
+		});
+
 		listView.addHeaderView(header);
 		LiveUpdatesAdapter adapter = new LiveUpdatesAdapter(this);
 		listView.setAdapter(adapter);
@@ -159,11 +184,28 @@ public class LiveUpdatesFragment extends Fragment {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			View view = LayoutInflater.from(getActivity())
 					.inflate(R.layout.dialog_live_updates_item_settings, null);
+
 			builder.setView(view)
 					.setPositiveButton("SAVE", null)
 					.setNegativeButton("CANCEL", null)
 					.setNeutralButton("UPDATE NOW", null);
 			return builder.create();
+		}
+
+		private void initSwitch(ToggleButton toggleButton, String idPostfix, LocalIndexInfo item) {
+			final OsmandApplication myApplication = ((OsmandActionBarActivity) this.getActivity()).getMyApplication();
+			final OsmandSettings settings = myApplication.getSettings();
+			final String settingId = item.getFileName() + idPostfix;
+			final OsmandSettings.CommonPreference<Boolean> preference =
+					settings.registerBooleanPreference(settingId, false);
+			boolean initialValue = preference.get();
+			toggleButton.setChecked(initialValue);
+			toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					preference.set(isChecked);
+				}
+			});
 		}
 	}
 }
