@@ -317,7 +317,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				if (loc != null && loc.hasAltitude()) {
 					double alt = loc.getAltitude();
 					String altString = (int) (Math.abs(alt) * 100.0) + "/100";
-					System.err.println(altString);
 					setAttribute.invoke(exInstance, "GPSAltitude", altString);
 					setAttribute.invoke(exInstance, "GPSAltitudeRef", alt < 0 ? "1" : "0");
 				}

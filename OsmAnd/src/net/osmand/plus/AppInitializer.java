@@ -289,7 +289,7 @@ public class AppInitializer implements IProgress {
 						return app.getString(in);
 					}
 				} catch (Exception e) {
-					System.err.println(e.getMessage());
+					System.err.println("No translation for "+ type.getIconKeyName() + " " + e.getMessage());
 				}
 				return null;
 			}
