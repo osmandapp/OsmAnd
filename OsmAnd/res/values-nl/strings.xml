@@ -2022,7 +2022,7 @@
 	<string name="roads">Wegen</string>
     <string name="downloading_number_of_files">Downloaden - %1$d bestand</string>
     <string name="show_free_version_banner">Toon de balk \"Gratis Versie\"</string>
-    <string name="show_free_version_banner_description">Ook als u betaald heeft kunt u nog steeds de balk \"Gratis Versie\" tonen</string>
+    <string name="show_free_version_banner_description">In de betaalde versie toch de balk \"Gratis Versie\" tonen</string>
     <string name="buy">Kopen</string>
     <string name="later">Later</string>
     <string name="downloads">Downloads</string>
