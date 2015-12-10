@@ -1166,8 +1166,8 @@
 	<string name="poi_trade_tile">Venta de azulejos</string>
 
 	<string name="poi_population">Población</string>
-	<string name="poi_parking_underground">Subterráneo</string>
-	<string name="poi_parking_multi_storey">Varios pisos</string>
+	<string name="poi_parking_underground">Tipo: Subterráneo</string>
+	<string name="poi_parking_multi_storey">Tipo: De varios pisos</string>
 
 	<string name="poi_bicycle_parking_stands">Anclajes</string>
 	<string name="poi_bicycle_parking_wall_loops">Anclajes de pared</string>
@@ -2504,7 +2504,7 @@
 	<string name="poi_health_specialty_radiology_yes">Especialidad médica: Radiología</string>
 	<string name="poi_health_specialty_psychiatry_yes">Especialidad médica: Psiquiatría</string>
 	<string name="poi_health_specialty_neurology_yes">Especialidad médica: Neurología</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Especialidad médica: Dermato-venereología</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Especialidad médica: Dermatovenereología</string>
 	<string name="poi_health_specialty_cardiology_yes">Especialidad médica: Cardiología</string>
 	<string name="poi_health_specialty_trauma_yes">Especialidad médica: Traumatología</string>
 	<string name="poi_health_specialty_biology_yes">Especialidad médica: Biología clínica</string>
@@ -2568,5 +2568,30 @@
 	<string name="poi_fitness">Educación física</string>
 
 	<string name="poi_billiards">Billar</string>
+
+<string name="poi_microwave_oven_yes">Con horno de microondas</string>
+	<string name="poi_microwave_oven_no">Sin horno de microondas</string>
+	<string name="poi_water_heater_yes">Con calentador de agua</string>
+	<string name="poi_water_heater_no">Sin calentador de agua</string>
+
+	<string name="poi_parking_surface">Tipo: En superficie</string>
+	<string name="poi_parking_garage_boxes">Tipo: Cochera comunitaria individual</string>
+	<string name="poi_parking_carports">Tipo: Cochera abierta</string>
+
+	<string name="poi_dojo">Dojo</string>
+
+	<string name="poi_gaelic_games">Juegos gaélicos</string>
+	<string name="poi_running">Correr</string>
+	<string name="poi_netball">Baloncesto (Netball)</string>
+	<string name="poi_karting">Karting</string>
+	<string name="poi_badminton">Bádminton</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_disc_golf">Disco golf</string>
+	<string name="poi_futsal">Fútbol de salón</string>
+	<string name="poi_rc_car">Automóvil de carrera a radio control</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_shuffleboard">Tejo</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_boxing">Boxeo</string>
 
 </resources>
