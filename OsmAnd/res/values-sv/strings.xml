@@ -2033,4 +2033,5 @@
     <string name="update_every">Uppdatera varje</string>
     <string name="only_download_over_wifi">Hämta endast via WiFi</string>
     <string name="live_update">Direktuppdatering</string>
+<string name="update_now">Uppdatera nu</string>
 </resources>
