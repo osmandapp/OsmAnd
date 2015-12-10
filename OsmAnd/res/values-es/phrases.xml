@@ -2568,4 +2568,7 @@
 <string name="poi_health_specialty_herbalism_yes">Especialidad médica: herbolaria</string>
 	<string name="poi_building_type_pyramid">Tipo de edificio: pirámide</string>
 
+<string name="poi_fitness_centre">Gimnasio</string>
+	<string name="poi_fitness">Gimnasio (deporte)</string>
+
 </resources>

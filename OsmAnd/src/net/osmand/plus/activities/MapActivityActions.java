@@ -646,15 +646,7 @@ public class MapActivityActions implements DialogProvider {
 						return false;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.download_live_updates).iconColor(R.drawable.ic_configure_screen_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						Intent intent = new Intent(mapActivity, LiveUpdatesActivity.class);
-						mapActivity.startActivity(intent);
-						return false;
-					}
-				}).reg();
+
 		String d = getString(R.string.index_settings);
 		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
 			List<IndexItem> updt = app.getDownloadThread().getIndexes().getItemsToUpdate();
@@ -674,6 +666,15 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
+		optionsMenuHelper.item(R.string.download_live_updates).iconColor(R.drawable.ic_configure_screen_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						Intent intent = new Intent(mapActivity, LiveUpdatesActivity.class);
+						mapActivity.startActivity(intent);
+						return false;
+					}
+				}).reg();
 
 		optionsMenuHelper.item(R.string.prefs_plugins).iconColor(R.drawable.ic_extension_dark)
 				.listen(new OnContextMenuClick() {

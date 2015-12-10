@@ -1,5 +1,9 @@
 package net.osmand.binary;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
@@ -50,6 +54,15 @@ public class BinaryMapDataObject {
 	
 	public TIntObjectHashMap<String> getObjectNames() {
 		return objectNames;
+	}
+	
+	public Map<Integer, String> getOrderedObjectNames() {
+		LinkedHashMap<Integer, String> lm = new LinkedHashMap<Integer, String> ();
+		for (int i = 0; i < namesOrder.size(); i++) {
+			int nm = namesOrder.get(i);
+			lm.put(nm, objectNames.get(nm));
+		}
+		return lm;
 	}
 	
 	public void putObjectName(int type, String name){

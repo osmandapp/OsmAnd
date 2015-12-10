@@ -3,8 +3,11 @@ package net.osmand.plus.views;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -33,6 +36,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	private MapTextLayer textLayer;
 	private Paint paintIcon;
 	private Bitmap pointSmall;
+	private int defaultColor;
 
 	private OsmandSettings settings;
 	
@@ -60,6 +64,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
+		defaultColor = view.getResources().getColor(R.color.color_favorite);
 	}
 	
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -101,6 +106,8 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+						int col = o.getColor() == 0 || o.getColor() == Color.BLACK ? defaultColor : o.getColor();
+						paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
 						canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 					} else {
 						fullObjects.add(o);

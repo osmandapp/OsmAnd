@@ -72,10 +72,10 @@ public class RoutePlannerFrontEnd {
 				for (int j = 1; j < r.getPointsLength(); j++) {
 					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1), 
 							r.getPoint31YTile(j - 1), r.getPoint31XTile(j ), r.getPoint31YTile(j ));
-					double currentsDist = squareDist((int) pr.x, (int)pr.y, px, py);
-					if (road == null || currentsDist < road.dist) {
+					double currentsDistSquare = squareDist((int) pr.x, (int)pr.y, px, py);
+					if (road == null || currentsDistSquare < road.distSquare) {
 						RouteDataObject ro = new RouteDataObject(r);
-						road = new RouteSegmentPoint(ro, j, currentsDist);
+						road = new RouteSegmentPoint(ro, j, currentsDistSquare);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
 					}
@@ -89,7 +89,7 @@ public class RoutePlannerFrontEnd {
 
 			@Override
 			public int compare(RouteSegmentPoint o1, RouteSegmentPoint o2) {
-				return Double.compare(o1.dist, o2.dist);
+				return Double.compare(o1.distSquare, o2.distSquare);
 			}
 		});
 		if(list.size() > 0) {

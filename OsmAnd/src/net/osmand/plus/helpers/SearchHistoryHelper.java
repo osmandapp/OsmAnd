@@ -433,7 +433,7 @@ public class SearchHistoryHelper {
 							st.put(p, e);
 						} while (query.moveToNext());
 						if(reinsert) {
-							System.err.println("Reinsert all values");
+							System.err.println("Reinsert all values for search history");
 							db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME); //$NON-NLS-1$
 							entries.clear();
 							entries.addAll(st.values());

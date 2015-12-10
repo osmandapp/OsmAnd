@@ -41,7 +41,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoControl;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRoutePreferencesControl;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -76,7 +76,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private OsmandSettings settings;
 
 	private MapRoutePreferencesControl optionsRouteControlDialog;
-	private MapRouteInfoControl mapRouteInfoControlDialog;
+	private MapRouteInfoMenu mapRouteInfoMenu;
 	private MapHudButton backToLocationControl;
 	private MapHudButton menuControl;
 	private MapHudButton compassHud;
@@ -101,6 +101,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		app = activity.getMyApplication();
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
+	}
+
+	public MapRouteInfoMenu getMapRouteInfoMenu() {
+		return mapRouteInfoMenu;
 	}
 
 	@Override
@@ -217,7 +221,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initRouteControls() {
-		mapRouteInfoControlDialog = new MapRouteInfoControl(mapActivity, this);
+		mapRouteInfoMenu = new MapRouteInfoMenu(mapActivity, this);
 		optionsRouteControlDialog = new MapRoutePreferencesControl(mapActivity, this);
 	}
 
@@ -252,8 +256,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
 		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_myloc_distance), null, null, null);
-		routeGoButton.setText(AndroidUiHelper.isOrientationPortrait(mapActivity) ?
-				mapActivity.getString(R.string.shared_string_go) : "");
+		routeGoButton.setText(/*AndroidUiHelper.isOrientationPortrait(mapActivity) ?*/
+				mapActivity.getString(R.string.shared_string_go) /*: ""*/);
 		routeGoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -274,25 +278,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	protected void clickRouteParams() {
 		notifyClicked();
-		mapRouteInfoControlDialog.hideDialog();
-		optionsRouteControlDialog.showAndHideDialog();
+		if (optionsRouteControlDialog.isDialogVisible()) {
+			optionsRouteControlDialog.hideDialog();
+			mapRouteInfoMenu.showHideMenu();
+		} else {
+			mapRouteInfoMenu.hide();
+			optionsRouteControlDialog.showAndHideDialog();
+		}
 	}
 
 	protected void clickRouteWaypoints() {
 		if (getTargets().checkPointToNavigateShort()) {
 			notifyClicked();
-			if (optionsRouteControlDialog.isDialogVisible()) {
-				optionsRouteControlDialog.hideDialog();
-			} else if (mapRouteInfoControlDialog.isDialogVisible()) {
-				mapRouteInfoControlDialog.hideDialog();
-			}
 			mapActivity.getMapActions().openIntermediatePointsDialog();
 		}
 	}
 
 	protected void clickRouteCancel() {
 		notifyClicked();
-		mapRouteInfoControlDialog.hideDialog();
+		mapRouteInfoMenu.hide();
 		optionsRouteControlDialog.hideDialog();
 		if (mapActivity.getRoutingHelper().isFollowingMode()) {
 			mapActivity.getMapActions().stopNavigationActionConfirm();
@@ -303,7 +307,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	protected void clickRouteGo() {
 		notifyClicked();
-		mapRouteInfoControlDialog.hideDialog();
+		mapRouteInfoMenu.hide();
 		optionsRouteControlDialog.hideDialog();
 //		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 //		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
@@ -315,11 +319,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showRouteInfoControlDialog() {
-		mapRouteInfoControlDialog.showHideDialog();
+		mapRouteInfoMenu.showHideMenu();
 	}
 
 	public void showDialog() {
-		mapRouteInfoControlDialog.setShowDialog();
+		mapRouteInfoMenu.setShowMenu();
 	}
 
 	private void initControls() {
@@ -462,7 +466,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			switchToRouteFollowingLayout();
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
-				mapRouteInfoControlDialog.showDialog();
+				mapRouteInfoMenu.show();
 			} else {
 				touchEvent = 0;
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
@@ -531,7 +535,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
 		if (shadowColor != shadw) {
 			shadowColor = shadw;
-			// TODO
+			// TODOnightMode
 			// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
 		}
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -544,7 +548,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean dialogOpened = optionsRouteControlDialog.isDialogVisible() || mapRouteInfoControlDialog.isDialogVisible();
+		boolean dialogOpened = optionsRouteControlDialog.isDialogVisible() || mapRouteInfoMenu.isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);
@@ -581,7 +585,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 
-		mapRouteInfoControlDialog.setVisible(showRouteCalculationControls);
+		mapRouteInfoMenu.setVisible(showRouteCalculationControls);
 		if (showRouteCalculationControls) {
 			if (!mapActivity.getRoutingHelper().isFollowingMode()
 					&& !mapActivity.getRoutingHelper().isPauseNavigation()) {
@@ -634,7 +638,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if (mapRouteInfoControlDialog.onSingleTap(point, tileBox)) {
+		if (mapRouteInfoMenu.onSingleTap(point, tileBox)) {
 			return true;
 		}
 		stopCounter();
@@ -933,14 +937,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_ADDRESS_SELECT && resultCode == SearchAddressFragment.SELECT_ADDRESS_POINT_RESULT_OK) {
 			String name = data.getStringExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY);
-			boolean target = data.getBooleanExtra(MapRouteInfoControl.TARGET_SELECT, true);
+			boolean target = data.getBooleanExtra(MapRouteInfoMenu.TARGET_SELECT, true);
 			LatLon latLon = new LatLon(
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LAT, 0),
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LON, 0));
 			if (name != null) {
-				mapRouteInfoControlDialog.selectAddress(name, latLon, target);
+				mapRouteInfoMenu.selectAddress(name, latLon, target);
 			} else {
-				mapRouteInfoControlDialog.selectAddress("", latLon, target);
+				mapRouteInfoMenu.selectAddress("", latLon, target);
 			}
 		}
 	}

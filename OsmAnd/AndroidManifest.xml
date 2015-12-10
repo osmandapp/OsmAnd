@@ -1,479 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="net.osmand.plus"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:installLocation="auto"
-          android:versionCode="231"
-          android:versionName="@string/app_version">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	android:installLocation="auto" 
+	android:versionName="@string/app_version" 
+	android:versionCode="231"
+	package="net.osmand.plus">
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21"/>
+	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="com.android.vending.BILLING"/>
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.camera.autofocus"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.microphone"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.wifi"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.location"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.location.network"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.sensor.light"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.sensor.compass"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.sensor.accelerometer"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.sensor.gyroscope"
-        android:required="false"/>
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="com.android.vending.BILLING" />
+	
 
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true"/>
 
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-feature android:name="android.hardware.camera" android:required="false" />
+	<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+	<uses-feature android:name="android.hardware.microphone" android:required="false" />
+	<uses-feature android:name="android.hardware.wifi" android:required="false" />
+	<uses-feature android:name="android.hardware.location" android:required="false" />
+	<uses-feature android:name="android.hardware.location.network" android:required="false" />
+	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.light" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
+	<uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
-    <!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
-    <application
-        android:name=".OsmandApplication"
-        android:allowBackup="true"
-        android:backupAgent=".OsmandBackupAgent"
-        android:configChanges="locale"
-        android:icon="@drawable/icon"
-        android:label="@string/app_name"
-        android:largeHeap="true"
-        android:restoreAnyVersion="true"
-        android:theme="@style/OsmandDarkTheme">
-        <meta-data
-            android:name="com.google.android.backup.api_key"
-            android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A"/>
-        <meta-data
-            android:name="com.sec.android.support.multiwindow"
-            android:value="true"/>
-        <meta-data
-            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W"
-            android:resource="@dimen/app_defaultsize_w"
-            android:value=""/>
-        <meta-data
-            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H"
-            android:resource="@dimen/app_defaultsize_h"
-            android:value=""/>
-        <meta-data
-            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W"
-            android:resource="@dimen/app_minimumsize_w"
-            android:value=""/>
-        <meta-data
-            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
-            android:resource="@dimen/app_minimumsize_h"
-            android:value=""/>
-        <meta-data
-            android:name="com.sec.minimode.icon.portrait.normal"
-            android:resource="@drawable/icon"
-            android:value=""/>
-        <meta-data
-            android:name="com.sec.minimode.icon.landscape.normal"
-            android:resource="@drawable/icon"
-            android:value=""/>
 
-        <activity android:name=".activities.HelpActivity"/>
-        <activity android:name=".activities.ExitActivity"/>
+	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
+		android:xlargeScreens="true" android:anyDensity="true" />
 
+
+	<!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
+	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.OsmandBackupAgent"
+		android:icon="@drawable/icon" android:label="@string/app_name"
+		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
+		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true">
+
+		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
+		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:resource="@dimen/app_defaultsize_w" android:value="" />
+		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" android:value="" />
+		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" android:value="" />
+		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@drawable/icon" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@drawable/icon" android:value="" />
+        <activity android:name="net.osmand.plus.activities.HelpActivity" />
+        <activity android:name="net.osmand.plus.activities.ExitActivity" />
+        
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="net.osmand.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths"/>
+                android:resource="@xml/paths" />
         </provider>
 
-        <activity
-            android:name=".activities.MapActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:screenOrientation="unspecified">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <action android:name="android.intent.action.SEND"/>
+		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name"
+			android:screenOrientation="unspecified" android:launchMode="singleTop">
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="content" android:host="*" android:mimeType="binary/octet-stream" />
+				<data android:scheme="content" android:host="*" android:mimeType="application/octet-stream" />
+			</intent-filter>
 
-                <category android:name="android.intent.category.DEFAULT"/>
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+			</intent-filter>
 
-                <data
-                    android:host="*"
-                    android:mimeType="binary/octet-stream"
-                    android:scheme="content"/>
-                <data
-                    android:host="*"
-                    android:mimeType="application/octet-stream"
-                    android:scheme="content"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+			<intent-filter>
+				<data android:scheme="http" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/go" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+			
+			<intent-filter>
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/go" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+			
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER"/>
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="http"/>
-                <data android:host="osmand.net"/>
-                <data android:pathPrefix="/go"/>
+			<!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i-->
+			<!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.gpx" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\.gpx" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.gpx" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.kml" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\.kml" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.kml" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.kml" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kml" />
+			</intent-filter>
 
-                <action android:name="android.intent.action.VIEW"/>
+			<!-- google navigation intent -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="google.navigation" />
+				<data android:scheme="osmand.navigation" />
+			</intent-filter>
+		</activity>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.APP_MAPS"/>
-                <category android:name="android.intent.category.CAR_MODE"/>
-                <category android:name="android.intent.category.CAR_DOCK"/>
-                <category android:name="android.intent.category.DESK_DOCK"/>
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="https"/>
-                <data android:host="osmand.net"/>
-                <data android:pathPrefix="/go"/>
+		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.CAMERA_BUTTON" />
+				<action android:name="android.intent.action.MEDIA_BUTTON" />
+			</intent-filter>
+		</receiver>
 
-                <action android:name="android.intent.action.VIEW"/>
+		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/shared_string_settings" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.routepointsnavigation.RoutePointsActivity" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.APP_MAPS"/>
-                <category android:name="android.intent.category.CAR_MODE"/>
-                <category android:name="android.intent.category.CAR_DOCK"/>
-                <category android:name="android.intent.category.DESK_DOCK"/>
-            </intent-filter>
+		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation" />
 
-            <!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i -->
-            <!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
+		<activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route" />
+		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
+		<activity android:name=".myplaces.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
+		<activity android:name="net.osmand.plus.activities.TrackActivity"/>
+		<activity android:name="net.osmand.plus.activities.PluginsActivity" />
+		<activity android:name="net.osmand.plus.activities.PluginActivity" />
+		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
 
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.gpx"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\.gpx"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\.gpx"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.gpx"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.kml"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\.kml"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\.kml"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\.kml"
-                    android:scheme="file"/>
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kml"
-                    android:scheme="file"/>
-            </intent-filter>
+		<activity android:name="net.osmand.plus.osmo.SettingsOsMoActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.osmo.OsMoGroupsActivity">
+			<intent-filter>
+				<data android:scheme="http" android:host="z.osmo.mobi" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+		</activity>
 
-            <!-- google navigation intent -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+		<activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity" />
+		<activity android:name="net.osmand.plus.activities.search.SearchAddressActivity" android:label="@string/select_address_activity" />
+		<activity android:name="net.osmand.plus.activities.search.SearchCityByNameActivity" />
+		<activity android:name="net.osmand.plus.activities.search.SearchRegionByNameActivity" />
+		<activity android:name="net.osmand.plus.activities.search.SearchStreetByNameActivity" />
+		<activity android:name="net.osmand.plus.activities.search.SearchStreet2ByNameActivity" />
+		<activity android:name="net.osmand.plus.activities.search.SearchBuildingByNameActivity" />
+		<activity android:name="net.osmand.plus.sherpafy.TourViewActivity" android:exported="true"
+			android:launchMode= "singleInstance" android:label="Sherpafy" />
+		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data android:scheme="google.navigation"/>
-                <data android:scheme="osmand.navigation"/>
-            </intent-filter>
-        </activity>
-
-        <receiver android:name=".audionotes.MediaRemoteControlReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.CAMERA_BUTTON"/>
-                <action android:name="android.intent.action.MEDIA_BUTTON"/>
-            </intent-filter>
-        </receiver>
-
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/shared_string_settings"/>
-        <activity
-            android:name=".activities.SettingsGeneralActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity
-            android:name=".activities.SettingsNavigationActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity
-            android:name=".monitoring.SettingsMonitoringActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity
-            android:name=".rastermaps.SettingsRasterMapsActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".routepointsnavigation.RoutePointsActivity"/>
-        <activity
-            android:name=".osmedit.SettingsOsmEditingActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity
-            android:name=".development.SettingsDevelopmentActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity
-            android:name=".audionotes.SettingsAudioVideoActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity
-            android:name="net.osmand.access.SettingsAccessibilityActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity
-            android:name=".activities.search.SearchActivity"
-            android:label="@string/search_activity"/>
-        <activity
-            android:name=".activities.ShowRouteInfoActivity"
-            android:label="@string/show_route"/>
-        <activity
-            android:name=".activities.FavoritesListActivity"
-            android:label="@string/favourites_list_activity"/>
-        <activity
-            android:name=".myplaces.FavoritesActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activities.TrackActivity"/>
-        <activity android:name=".activities.PluginsActivity"/>
-        <activity android:name=".activities.PluginActivity"/>
-        <activity
-            android:name=".activities.ContributionVersionActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/contribution_activity"/>
-        <activity
-            android:name=".osmo.SettingsOsMoActivity"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".osmo.OsMoGroupsActivity">
-            <intent-filter>
-                <data
-                    android:host="z.osmo.mobi"
-                    android:scheme="http"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activities.search.SearchPOIActivity"
-            android:label="@string/searchpoi_activity"/>
-        <activity
-            android:name=".activities.search.SearchAddressActivity"
-            android:label="@string/select_address_activity"/>
-        <activity android:name=".activities.search.SearchCityByNameActivity"/>
-        <activity android:name=".activities.search.SearchRegionByNameActivity"/>
-        <activity android:name=".activities.search.SearchStreetByNameActivity"/>
-        <activity android:name=".activities.search.SearchStreet2ByNameActivity"/>
-        <activity android:name=".activities.search.SearchBuildingByNameActivity"/>
-        <activity
-            android:name=".sherpafy.TourViewActivity"
-            android:exported="true"
-            android:label="Sherpafy"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".activities.EditPOIFilterActivity"/>
-        <activity
-            android:name=".activities.search.GeoIntentActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <data android:scheme="osmand.geo"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="geo"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="http"/>
-                <data android:scheme="https"/>
-                <data android:host="maps.google.com"/>
-                <data android:host="maps.yandex.ru"/>
-                <data android:host="maps.yandex.com"/>
-                <data android:host="www.openstreetmap.org"/>
-                <data android:host="openstreetmap.org"/>
-                <data android:host="osm.org"/>
-                <data android:host="map.baidu.cn"/>
-                <data android:host="map.baidu.com"/>
-                <data android:host="wb.amap.com"/>
-                <data android:host="www.amap.com"/>
-                <data android:host="here.com"/>
-                <data android:host="www.here.com"/>
-                <data android:host="share.here.com"/>
-                <data android:host="map.wap.qq.com"/>
-                <data android:host="map.qq.com"/>
-                <data android:host="maps.apple.com"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-            </intent-filter>
-            <intent-filter>
-                <data
-                    android:host="www.google.com"
-                    android:pathPrefix="/maps"
-                    android:scheme="http"/>
-                <data
-                    android:host="www.google.com"
-                    android:pathPrefix="/maps"
-                    android:scheme="https"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-            </intent-filter>
-            <intent-filter>
-                <data
-                    android:host="openstreetmap.de"
-                    android:pathPrefix="/karte"
-                    android:scheme="http"/>
-                <data
-                    android:host="openstreetmap.de"
-                    android:pathPrefix="/karte"
-                    android:scheme="https"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-            </intent-filter>
-            <intent-filter>
-                <data
-                    android:host="download.osmand.net"
-                    android:pathPrefix="/go"
-                    android:scheme="http"/>
-                <data
-                    android:host="download.osmand.net"
-                    android:pathPrefix="go"
-                    android:scheme="http"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.APP_MAPS"/>
-                <category android:name="android.intent.category.CAR_MODE"/>
-                <category android:name="android.intent.category.CAR_DOCK"/>
-                <category android:name="android.intent.category.DESK_DOCK"/>
-            </intent-filter>
-            <!-- requires read permission -->
-            <!--
+		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity" android:label="@string/app_name">
+			<intent-filter>
+				<data android:scheme="osmand.geo" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="geo" />
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="maps.google.com" />
+				<data android:host="maps.yandex.ru" />
+				<data android:host="maps.yandex.com" />
+				<data android:host="www.openstreetmap.org" />
+				<data android:host="openstreetmap.org" />
+				<data android:host="osm.org" />
+				<data android:host="map.baidu.cn" />
+				<data android:host="map.baidu.com" />
+				<data android:host="wb.amap.com" />
+				<data android:host="www.amap.com" />
+				<data android:host="here.com" />
+				<data android:host="www.here.com" />
+				<data android:host="share.here.com" />
+				<data android:host="map.wap.qq.com" />
+				<data android:host="map.qq.com" />
+				<data android:host="maps.apple.com" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="http" android:host="www.google.com" android:pathPrefix="/maps" />
+				<data android:scheme="https" android:host="www.google.com" android:pathPrefix="/maps" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="http" android:host="openstreetmap.de" android:pathPrefix="/karte" />
+				<data android:scheme="https" android:host="openstreetmap.de" android:pathPrefix="/karte" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="http" android:host="download.osmand.net" android:pathPrefix="/go" />
+				<data android:scheme="http" android:host="download.osmand.net" android:pathPrefix="go" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+			<!-- requires read permission -->
+			<!--
 			<intent-filter android:label="OsmAnd">
 			<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
 			</intent-filter>
-            -->
-        </activity>
-        <activity android:name=".development.TestVoiceActivity"/>
-        <activity
-            android:name=".download.DownloadActivity"
-            android:label=""/>
+			-->
+		</activity>
 
-        <!-- keep android:process on a separate line !! -->
-        <service
-            android:name=".NavigationService"
-            android:label="@string/process_navigation_service"
-            android:process="net.osmand.plus"
-            android:stopWithTask="false">
-            <intent-filter>
-                <action android:name="net.osmand.plus.NavigationService"/>
-            </intent-filter>
-        </service>
+		<activity android:name="net.osmand.plus.development.TestVoiceActivity" />
+		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="" />
 
-        <receiver android:name=".OnNavigationServiceAlarmReceiver"/>
+		<!-- keep android:process on a separate line !! -->
+		<service
+		    android:process="net.osmand.plus" 
+		    android:label="@string/process_navigation_service"
+			android:name="net.osmand.plus.NavigationService"
+			android:stopWithTask="false">
+			<intent-filter>
+				<action android:name="net.osmand.plus.NavigationService" />
+			</intent-filter>
+		</service>
 
-        <activity android:name=".activities.PrintDialogActivity"/>
+		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver" />
+		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
+		
+		<receiver
+			android:name="net.osmand.plus.DeviceAdminRecv"
+			android:label="@string/app_name"
+			android:permission="android.permission.BIND_DEVICE_ADMIN" >
+			<meta-data
+				android:name="android.app.device_admin"
+				android:resource="@xml/device_admin" />
 
-        <receiver
-            android:name=".DeviceAdminRecv"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data
-                android:name="android.app.device_admin"
-                android:resource="@xml/device_admin"/>
-
-            <intent-filter>
-                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
-                <action android:name="android.app.action.DEVICE_ADMIN_DISABLED"/>
-            </intent-filter>
-        </receiver>
-
-        <activity android:name=".liveupdates.LiveUpdatesActivity">
-        </activity>
-    </application>
-
-</manifest>
+			<intent-filter>
+				<action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+				<action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
+			</intent-filter>
+		</receiver>
+</application>
+</manifest> 

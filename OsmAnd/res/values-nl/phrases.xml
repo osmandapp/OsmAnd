@@ -747,8 +747,8 @@
 	<string name="poi_tomb">Graf</string>
 	<string name="poi_hanami">Hanami</string>
 	<string name="poi_wine_cellar">Wijnkelder</string>
-	<string name="poi_piste_downhill">Alpijns skiën</string>
-	<string name="poi_piste_hike">Wandelen</string>
+	<string name="poi_piste_downhill">Skipiste</string>
+	<string name="poi_piste_hike">Winterwandelweg</string>
 	<string name="poi_piste_sleigh"/>
 	<string name="poi_piste_ice_skate">Schaatsen</string>
 	<string name="poi_ski_rental">Skiverhuur</string>
@@ -835,7 +835,7 @@
 	<string name="poi_recycling_paper_packaging">Papieren verpakkingen</string>
 	<string name="poi_recycling_small_appliances">Kleine apparaten</string>
 	<string name="poi_recycling_wood">Hout</string>
-	<string name="poi_recycling_books"/>
+	<string name="poi_recycling_books">Boeken</string>
 	<string name="poi_recycling_shoes">Schoenen</string>
 	<string name="poi_recycling_aluminium">Aluminium</string>
 	<string name="poi_recycling_organic">Organische materialen</string>
@@ -880,7 +880,7 @@
 	<string name="poi_recycling_diapers">Luiers</string>
 	<string name="poi_recycling_car_batteries">Accu\'s</string>
 	<string name="poi_recycling_cars">Auto \'s</string>
-	<string name="poi_recycling_bicycles"/>
+	<string name="poi_recycling_bicycles">Fietsen</string>
 
 	<string name="poi_landfill_waste_nuclear">Nucleair afval</string>
 	<string name="poi_basin">Waterbekken</string>
@@ -971,4 +971,15 @@
 	<string name="poi_denomination_georgian_orthodox">Georgisch Orthodox</string>
 	<string name="poi_denomination_scientist">Scientisme</string>
 	<string name="poi_denomination_romanian_orthodox">Roemeens Orthodox</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Ethiopisch Orthodox</string>
+	<string name="poi_denomination_unitarian">Unitarisch</string>
+	<string name="poi_denomination_coptic_orthodox">Koptisch-orthodox</string>
+	<string name="poi_denomination_wesleyan">Wesleyan</string>
+	<string name="poi_denomination_shaktism">Shaktisme</string>
+	<string name="poi_internet_access_yes">Internettoegang: ja</string>
+	<string name="poi_internet_access_no">Internettoegang: nee</string>
+
+	<string name="poi_piste">Piste</string>
+	<string name="poi_piste_nordic">Langlaufpiste</string>
+	<string name="poi_piste_skitour">Tourski piste</string>
 	</resources>
