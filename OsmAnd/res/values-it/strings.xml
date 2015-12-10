@@ -2096,4 +2096,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_horseRoutes_name">Percorsi a cavallo</string>
     <string name="no_address_found">Nessun indirizzo trovato</string>
     <string name="looking_up_address">Ricerca in corso dell\'indirizzo</string>
+    <string name="routing_attr_avoid_borders_name">Non superare i confini</string>
     </resources>
