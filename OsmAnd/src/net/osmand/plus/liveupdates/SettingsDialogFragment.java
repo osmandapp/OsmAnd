@@ -28,9 +28,9 @@ public class SettingsDialogFragment extends DialogFragment {
 				.inflate(R.layout.dialog_live_updates_item_settings, null);
 		final LocalIndexInfo localIndexInfo = getArguments().getParcelable(LOCAL_INDEX);
 		builder.setView(view)
-				.setPositiveButton("SAVE", null)
-				.setNegativeButton("CANCEL", null)
-				.setNeutralButton("UPDATE NOW", new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.shared_string_save, null)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setNeutralButton(R.string.update_now, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						getLiveUpdatesFragment().runLiveUpdate(localIndexInfo);

@@ -2113,4 +2113,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="update_every">Update every</string>
     <string name="only_download_over_wifi">Only download over WiFi</string>
     <string name="live_update">Live update</string>
+    <string name="update_now">Update now</string>
 </resources>
