@@ -1422,7 +1422,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="delay_navigation_start">Avvia la navigazione passo per passo automaticamente</string>
     <string name="map_widget_plain_time">Orario attuale</string>
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
-    <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
+    <string name="select_destination_and_intermediate_points">Scegli le destinazioni</string>
     <string name="layer_amenity_label">Etichette dei punti</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
@@ -2095,4 +2095,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="av_audio_bitrate_descr">Scegli il bitrate dell\'audio</string>
     <string name="rendering_attr_horseRoutes_name">Percorsi a cavallo</string>
     <string name="no_address_found">Nessun indirizzo trovato</string>
+    <string name="looking_up_address">Ricerca in corso dell\'indirizzo</string>
     </resources>
