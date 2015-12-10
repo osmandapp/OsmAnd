@@ -2186,4 +2186,5 @@
     <string name="update_every">Opdater hver</string>
     <string name="only_download_over_wifi">Hent kun over WiFi</string>
     <string name="live_update">Realtids opdatering</string>
+<string name="update_now">Opdater nu</string>
 </resources>
