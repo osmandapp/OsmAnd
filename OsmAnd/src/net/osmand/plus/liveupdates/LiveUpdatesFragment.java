@@ -40,6 +40,7 @@ import java.util.List;
 
 public class LiveUpdatesFragment extends Fragment {
 	public static final String TITILE = "Live Updates";
+	public static final String LIVE_UPDATES_ON_POSTFIX = "_live_updates_on";
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
 		@Override
 		public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
@@ -92,6 +93,10 @@ public class LiveUpdatesFragment extends Fragment {
 		return (AbstractDownloadActivity) getActivity();
 	}
 
+	public void notifyLiveUpdatesChanged() {
+		adapter.notifyLiveUpdatesChanged();
+	}
+
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
 		final ArrayList<LocalIndexInfo> dataShouldUpdate = new ArrayList<>();
 		final ArrayList<LocalIndexInfo> dataShouldNotUpdate = new ArrayList<>();
@@ -104,7 +109,33 @@ public class LiveUpdatesFragment extends Fragment {
 		}
 
 		public void add(LocalIndexInfo info) {
-			dataShouldNotUpdate.add(info);
+			OsmandSettings.CommonPreference<Boolean> preference =
+					preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, info);
+			if (preference.get()) {
+				dataShouldUpdate.add(info);
+			} else {
+				dataShouldNotUpdate.add(info);
+			}
+		}
+
+		public void notifyLiveUpdatesChanged() {
+			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
+				OsmandSettings.CommonPreference<Boolean> preference =
+						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
+				if (!preference.get()) {
+					dataShouldUpdate.remove(localIndexInfo);
+					dataShouldNotUpdate.add(localIndexInfo);
+				}
+			}
+			for (LocalIndexInfo localIndexInfo : dataShouldNotUpdate) {
+				OsmandSettings.CommonPreference<Boolean> preference =
+						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
+				if (preference.get()) {
+					dataShouldUpdate.add(localIndexInfo);
+					dataShouldNotUpdate.remove(localIndexInfo);
+				}
+			}
+			notifyDataSetChanged();
 		}
 
 		public void sort() {
@@ -215,6 +246,13 @@ public class LiveUpdatesFragment extends Fragment {
 			return true;
 		}
 
+		private OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(String idPostfix,
+																				 LocalIndexInfo item) {
+			final OsmandApplication myApplication = fragment.getMyActivity().getMyApplication();
+			final OsmandSettings settings = myApplication.getSettings();
+			final String settingId = item.getFileName() + idPostfix;
+			return settings.registerBooleanPreference(settingId, false);
+		}
 	}
 
 	private void expandAllGroups() {
@@ -340,5 +378,4 @@ public class LiveUpdatesFragment extends Fragment {
 			adapter.sort();
 		}
 	}
-
 }

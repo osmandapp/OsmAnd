@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.ToggleButton;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -24,11 +23,24 @@ public class SettingsDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		final LocalIndexInfo localIndexInfo = getArguments().getParcelable(LOCAL_INDEX);
+
 		View view = LayoutInflater.from(getActivity())
 				.inflate(R.layout.dialog_live_updates_item_settings, null);
-		final LocalIndexInfo localIndexInfo = getArguments().getParcelable(LOCAL_INDEX);
+		final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
+
+		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
+				preferenceForLocalIndex(LiveUpdatesFragment.LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
+		liveUpdatesSwitch.setChecked(liveUpdatePreference.get());
+
 		builder.setView(view)
-				.setPositiveButton(R.string.shared_string_save, null)
+				.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+						getLiveUpdatesFragment().notifyLiveUpdatesChanged();
+					}
+				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setNeutralButton(R.string.update_now, new DialogInterface.OnClickListener() {
 					@Override
@@ -43,20 +55,12 @@ public class SettingsDialogFragment extends DialogFragment {
 		return (LiveUpdatesFragment) getParentFragment();
 	}
 
-	private void initSwitch(ToggleButton toggleButton, String idPostfix, LocalIndexInfo item) {
+	private OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(String idPostfix,
+																			 LocalIndexInfo item) {
 		final OsmandApplication myApplication = ((OsmandActionBarActivity) this.getActivity()).getMyApplication();
 		final OsmandSettings settings = myApplication.getSettings();
 		final String settingId = item.getFileName() + idPostfix;
-		final OsmandSettings.CommonPreference<Boolean> preference =
-				settings.registerBooleanPreference(settingId, false);
-		boolean initialValue = preference.get();
-		toggleButton.setChecked(initialValue);
-		toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				preference.set(isChecked);
-			}
-		});
+		return settings.registerBooleanPreference(settingId, false);
 	}
 
 	public static SettingsDialogFragment createInstance(LocalIndexInfo localIndexInfo) {
