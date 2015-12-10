@@ -33,7 +33,7 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoControl;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 
@@ -237,8 +237,8 @@ public class MapInfoWidgetsFactory {
 						}
 					}
 				} else {
-					int di = MapRouteInfoControl.getDirectionInfo();
-					if (di >= 0 && MapRouteInfoControl.isControlVisible() &&
+					int di = MapRouteInfoMenu.getDirectionInfo();
+					if (di >= 0 && MapRouteInfoMenu.isControlVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
 						showNextTurn = true;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);

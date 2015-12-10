@@ -1,242 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/plan_route_info"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="?attr/left_menu_view_bg"
-              android:orientation="vertical" >
+<FrameLayout android:id="@+id/plan_route_info"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:clickable="true"
+             android:background="@color/color_transparent">
 
     <LinearLayout
-        android:id="@+id/ModesLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/list_item_height"
+        android:id="@+id/main_view"
+        android:layout_width="@dimen/map_route_planning_land_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:background="?attr/left_menu_view_bg"
+        android:clickable="true"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ModesLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/list_item_height"
+            android:orientation="vertical">
 
-            <View
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="bottom"
-                android:background="?attr/dashboard_divider"
-                android:focusable="false"/>
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="bottom"
+                    android:background="?attr/dashboard_divider"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/app_modes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:orientation="horizontal"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/list_content_padding"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/waypoints"
+                            android:layout_width="@dimen/list_item_height"
+                            android:layout_height="@dimen/list_item_height"
+                            android:background="?attr/dashboard_button"
+                            android:scaleType="center"
+                            android:src="@drawable/map_action_waypoints"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/app_modes"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:orientation="horizontal"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/list_content_padding"
-                    android:visibility="gone"
+                    android:id="@+id/FromLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/list_item_height"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/waypoints"
-                        android:layout_width="@dimen/list_item_height"
-                        android:layout_height="@dimen/list_item_height"
-                        android:background="?attr/dashboard_button"
-                        android:scaleType="center"
-                        android:src="@drawable/map_action_waypoints"/>
+                        android:id="@+id/fromIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/list_content_padding"
+                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:src="@drawable/map_default_location"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/route_from"
+                            android:textSize="@dimen/default_sub_text_size"/>
+
+                        <Spinner
+                            android:id="@+id/FromSpinner"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="-8dp"
+                            android:background="@null"
+                            android:textSize="@dimen/default_list_text_size"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/fromDropDownIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/list_header_text_left_margin"
+                        android:src="@drawable/ic_action_arrow_drop_down"/>
+
+
                 </LinearLayout>
-            </LinearLayout>
-        </FrameLayout>
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:id="@+id/FromLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/list_item_height"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/list_content_padding"
-                    android:layout_marginRight="@dimen/list_content_padding"
-                    android:layout_marginTop="3dp"
-                    android:text="@string/route_from"
-                    android:textSize="@dimen/default_sub_text_size" />
-
-                <Spinner
-                    android:id="@+id/FromSpinner"
-                    android:layout_width="fill_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginLeft="@dimen/list_content_padding"
-                    android:layout_marginRight="@dimen/list_content_padding"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/default_list_text_size" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?attr/dashboard_divider"
-                    android:focusable="false" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ViaLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/ViaSubView"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="@dimen/list_content_padding"
-                    android:layout_marginRight="@dimen/list_content_padding"
-                    android:layout_marginTop="3dp"
-                    android:gravity="left"
-                    android:text="@string/route_via"
-                    android:textSize="@dimen/default_sub_text_size" />
-
-                <TextView
-                    android:id="@+id/ViaView"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="@dimen/list_content_padding"
-                    android:layout_marginRight="@dimen/list_content_padding"
-                    android:layout_marginTop="3dp"
-                    android:gravity="left"
-                    android:textSize="@dimen/default_desc_text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"
-                    android:focusable="false" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ToLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/list_item_height"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/list_content_padding"
-                    android:layout_marginRight="@dimen/list_content_padding"
-                    android:layout_marginTop="3dp"
-                    android:text="@string/route_to"
-                    android:textSize="@dimen/default_sub_text_size" >
-                </TextView>
-
-                <Spinner
-                    android:id="@+id/ToSpinner"
-                    android:layout_width="fill_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginLeft="@dimen/list_content_padding"
-                    android:layout_marginRight="@dimen/list_content_padding"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/default_list_text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"
-                    android:focusable="false" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/RouteInfoControls"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                    android:focusable="false"/>
 
                 <LinearLayout
-                    android:id="@+id/Info"
+                    android:id="@+id/ViaLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/list_item_height"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/viaIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/list_content_padding"
+                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:src="@drawable/map_default_location"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/ViaSubView"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="left"
+                            android:text="@string/route_via"
+                            android:textSize="@dimen/default_sub_text_size"/>
+
+                        <TextView
+                            android:id="@+id/ViaView"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="@dimen/default_list_text_size"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/viaLayoutDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/dashboard_divider"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:id="@+id/ToLayout"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/list_item_height"
-                    android:background="?attr/dashboard_button"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/Prev"
-                        android:layout_width="@dimen/list_item_height"
-                        android:layout_height="@dimen/list_item_height"
-                        android:background="?attr/dashboard_button"
-                        android:contentDescription="@string/shared_string_previous"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_prev" />
+                        android:id="@+id/toIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/list_content_padding"
+                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:src="@drawable/map_default_location"/>
 
-                    <ImageView
-                        android:id="@+id/InfoIcon"
-                        android:layout_width="@dimen/list_item_height"
-                        android:layout_height="@dimen/list_item_height"
-                        android:layout_gravity="center_vertical"
-                        android:contentDescription="@string/info_button"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_info_dark" />
-
-                    <TextView
-                        android:id="@+id/InfoTextView"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="@dimen/default_desc_text_size" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/route_to"
+                            android:textSize="@dimen/default_sub_text_size">
+                        </TextView>
+
+                        <Spinner
+                            android:id="@+id/ToSpinner"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="-8dp"
+                            android:background="@null"
+                            android:textSize="@dimen/default_list_text_size"/>
+
+                    </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/Next"
-                        android:layout_width="@dimen/list_item_height"
-                        android:layout_height="@dimen/list_item_height"
-                        android:layout_marginLeft="5dp"
-                        android:background="?attr/dashboard_button"
-                        android:contentDescription="@string/shared_string_next"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_next" />
+                        android:id="@+id/toDropDownIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/list_header_text_left_margin"
+                        android:src="@drawable/ic_action_arrow_drop_down"/>
+
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?attr/dashboard_divider"
-                    android:focusable="false" />
+                    android:focusable="false"/>
 
+                <LinearLayout
+                    android:id="@+id/RouteInfoControls"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/Info"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/list_item_height"
+                        android:background="?attr/dashboard_button"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/Prev"
+                            android:layout_width="@dimen/list_item_height"
+                            android:layout_height="@dimen/list_item_height"
+                            android:background="?attr/dashboard_button"
+                            android:contentDescription="@string/shared_string_previous"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_prev"/>
+
+                        <ImageView
+                            android:id="@+id/InfoIcon"
+                            android:layout_width="@dimen/list_item_height"
+                            android:layout_height="@dimen/list_item_height"
+                            android:layout_gravity="center_vertical"
+                            android:contentDescription="@string/info_button"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_action_info_dark"/>
+
+                        <TextView
+                            android:id="@+id/InfoTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/default_desc_text_size"/>
+
+                        <ImageView
+                            android:id="@+id/Next"
+                            android:layout_width="@dimen/list_item_height"
+                            android:layout_height="@dimen/list_item_height"
+                            android:layout_marginLeft="5dp"
+                            android:background="?attr/dashboard_button"
+                            android:contentDescription="@string/shared_string_next"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_next"/>
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </ScrollView>
+        </ScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:background="?attr/dashboard_divider"
-        android:focusable="false"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="?attr/dashboard_divider"
+            android:focusable="false"/>
 
-    <include layout="@layout/map_route_prepare_bottom" />
+        <include layout="@layout/map_route_prepare_bottom"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
