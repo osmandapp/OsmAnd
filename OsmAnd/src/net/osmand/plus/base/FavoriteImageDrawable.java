@@ -13,7 +13,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
+
 import net.osmand.plus.R;
 
 import java.util.TreeMap;
@@ -35,41 +35,33 @@ public class FavoriteImageDrawable extends Drawable {
 		this.withShadow = withShadow;
 		this.resources = ctx.getResources();
 		this.color = color;
-		paintIcon = new Paint();
-		int col = color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color;
-		paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN));
 		paintBackground = new Paint();
+		int col = color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color;
+		paintBackground.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
+		paintIcon = new Paint();
 		favIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_favorite);
 		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_favorite_shield);
-		
-		
 		listDrawable = getResources().getDrawable(R.drawable.ic_action_fav_dark).mutate();
-		listDrawable.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN));
-		DisplayMetrics metrics = getResources().getDisplayMetrics();
+
 		paintOuter = new Paint();
 		paintOuter.setAntiAlias(true);
 		paintOuter.setStyle(Style.FILL_AND_STROKE);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
-		if(metrics != null && metrics.density > 0) {
-			paintOuter.setStrokeWidth(metrics.density * 1);
-		} else {
-			paintOuter.setStrokeWidth(1);
-		}
-//		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
-		paintOuter.setColor(0xffbbbbbb);
-		paintInnerCircle.setColor(Color.WHITE);
+		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
+		paintInnerCircle.setColor(color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite)
+				: color);
 		paintInnerCircle.setAntiAlias(true);
 	}
-	
+
 	@Override
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
-		
+
 		if (!withShadow) {
 			Rect bs = new Rect(bounds);
-			 //bs.inset((int) (4 * density), (int) (4 * density));
-			bs.inset(bs.width() / 4, (int) bs.height() / 4);
+			//bs.inset((int) (4 * density), (int) (4 * density));
+			bs.inset(bs.width() / 4, bs.height() / 4);
 			listDrawable.setBounds(bs);
 		}
 	}
@@ -100,8 +92,8 @@ public class FavoriteImageDrawable extends Drawable {
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
 		} else {
 			int min = Math.min(bs.width(), bs.height());
-			int r = (int) (min * 4 / 10);
-			int rs = (int) (r - 1);
+			int r = (min * 4 / 10);
+			int rs = (r - 1);
 			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
 			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
 			listDrawable.draw(canvas);
