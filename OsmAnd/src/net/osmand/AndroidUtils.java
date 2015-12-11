@@ -3,8 +3,10 @@ package net.osmand;
 
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewParent;
@@ -63,5 +65,16 @@ public class AndroidUtils {
 		}
 
 		return null;
+	}
+
+	@SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
+	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			view.setBackground(ctx.getResources().getDrawable(night ? darkResId : lightResId,
+					ctx.getTheme()));
+		} else {
+			view.setBackgroundDrawable(ctx.getResources().getDrawable(night ? darkResId : lightResId));
+		}
 	}
 }

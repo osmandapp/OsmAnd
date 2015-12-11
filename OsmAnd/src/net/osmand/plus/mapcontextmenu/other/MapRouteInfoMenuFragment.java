@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -54,8 +57,17 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (menu != null) {
+			menu.onDismiss();
+		}
+	}
+
 	public void updateInfo() {
 		menu.updateInfo(mainView);
+		applyDayNightMode();
 	}
 
 	public void show(MapActivity mapActivity) {
@@ -79,6 +91,81 @@ public class MapRouteInfoMenuFragment extends Fragment {
 				//
 			}
 		}
+	}
+
+	public void applyDayNightMode() {
+		MapActivity ctx = getMapActivity();
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(ctx);
+		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightMode();
+		if (portrait) {
+			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		} else {
+			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+		}
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerModesLayout), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerToDropDown), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn1), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn2), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn3), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+
+		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.primary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.primary_text_light));
+		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+
+		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+
+		((TextView) mainView.findViewById(R.id.fromTitle)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+
+		((TextView) mainView.findViewById(R.id.InfoTextView)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.FromLayout), nightMode,
+				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.ViaLayout), nightMode,
+				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.ToLayout), nightMode,
+				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.Info), nightMode,
+				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.Next), nightMode,
+				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.Prev), nightMode,
+				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+
+		((TextView) mainView.findViewById(R.id.DistanceText)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.primary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.primary_text_light));
+		((TextView) mainView.findViewById(R.id.DistanceTitle)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+		((TextView) mainView.findViewById(R.id.DurationText)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.primary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.primary_text_light));
+		((TextView) mainView.findViewById(R.id.DurationTitle)).setTextColor(nightMode ?
+				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
+				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {

@@ -15,9 +15,10 @@
         android:src="@drawable/ic_action_test_light" />
 
     <View
+        android:id="@+id/dividerBtn1"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="?attr/dashboard_divider"/>
+        android:background="@color/dashboard_divider_dark"/>
 
     <ImageButton
         android:id="@+id/map_waypoints_route_button"
@@ -28,9 +29,10 @@
         android:src="@drawable/ic_action_test_light" />
 
     <View
+        android:id="@+id/dividerBtn2"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="?attr/dashboard_divider"/>
+        android:background="@color/dashboard_divider_dark"/>
 
     <ImageButton
         android:id="@+id/map_options_route_button"
@@ -41,9 +43,10 @@
         android:src="@drawable/ic_action_test_light" />
 
     <View
+        android:id="@+id/dividerBtn3"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="?attr/dashboard_divider"/>
+        android:background="@color/dashboard_divider_dark"/>
 
     <TextView
         android:id="@+id/map_go_route_button"
