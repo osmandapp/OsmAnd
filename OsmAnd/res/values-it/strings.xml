@@ -2102,4 +2102,5 @@
 <string name="lang_fy">Frisone occidentale</string>
     <string name="lang_als">Albanese (Tosco)</string>
     <string name="update_now">Aggiorna ora</string>
-</resources>
+<string name="route_distance">Distanza:</string>
+    </resources>
