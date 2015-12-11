@@ -2187,4 +2187,6 @@
     <string name="only_download_over_wifi">Hent kun med WiFi</string>
     <string name="live_update">Realtidsopdatering</string>
 <string name="update_now">Opdater nu</string>
-</resources>
+<string name="route_distance">Afstand:</string>
+    <string name="route_duration">Rejsetid:</string>
+    </resources>
