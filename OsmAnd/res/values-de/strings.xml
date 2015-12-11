@@ -2076,4 +2076,5 @@
 <string name="update_now">Jetzt aktualisieren</string>
 <string name="route_distance">Entfernung:</string>
     <string name="route_duration">Reisezeit:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">Die App hat keine Berichtigung die SD-Karte zu nutzen</string>
+</resources>
