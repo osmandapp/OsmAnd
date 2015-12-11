@@ -1471,7 +1471,7 @@
     <string name="back_to_map">Назад към картата</string>
     <string name="share_note">Сподели бележката</string>
     <string name="location_on_map">Позиция:\n шир: %1$s\n дълж: %2$s</string>
-    <string name="watch">Гледай</string>
+    <string name="watch">Виж</string>
     <string name="notes">Бележки</string>
     <string name="online_map">Онлайн карта</string>
     <string name="roads_only">Само пътища</string>
@@ -1674,7 +1674,7 @@
     <string name="osmo_plugin_description">"Това разширение добавя функционалност за наблюдение на OsMo в реално време, за справка http://osmo.mobi.\nМожете да следите всички устройства от дадена група в реално време и да общувате помежду си. Разширението предлага различни възможности за проследяване по време на връзката или постоянно.\nАнонимните групи могат да бъдат създадени временно за определен брой дни и имат ограничени възможности, например без отдалечено управление и администратор. Пълноценните групи, от друга страна, могат да се създават на сайта и само регистрираните потребители имат достъп до тях. "</string>
     <string name="plugin_nautical_descr">"Добавката обогатява приложението OsmAnd карти и навигация като създава карти за гребане, ветроходство и други водни спортове.\n\nСпециалната добавка за карти на OsmAnd добавя морски навигационни символи и диаграми за вътрешна и крайбрежна навигация. Описанието на всеки навигационен символ показва подробностите, необходими за разпознаването и значението му (категория, фигура, цвят, последователност, препратка и др.).\n\nЗа да се върнете към някой от обикновените режими на картите на OsmAnd, просто изключете добавката или сменете \"Стил на картата\" в менюто \"Настройка на картата\". "</string>
     <string name="plugin_settings">Добавки</string>
-    <string name="rendering_attr_currentTrackColor_name">GPX цвят</string>
+    <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
     <string name="osmo_settings">OsMo</string>
     <string name="lang_zh">Китайски</string>
@@ -1761,7 +1761,7 @@
     <string name="go_to_map">Преминете към картата</string>
     <string name="simulate_initial_startup_descr">Установява маркер, който показва първо стартиране на приложението; всички други настройки остават непроменени</string>
     <string name="simulate_initial_startup">Симулиране на първото стартиране на приложение</string>
-    <string name="share_geo">Гео:</string>
+    <string name="share_geo">geo:</string>
     <string name="share_menu_location">Споделяне на местоположението</string>
     <string name="shared_string_send">Изпрати</string>
     <string name="favorite_category_dublicate_message">Съществува категория със същото име. Моля, посочете друго име.</string>
@@ -1821,7 +1821,7 @@
     <string name="osn_add_dialog_error">Възникна грешка: Бележката не беше създадена</string>
     <string name="osn_close_dialog_success">Бележката беше успешно затворена</string>
     <string name="osn_close_dialog_error">Възникна грешка: Бележката не беше затворена успешно</string>
-    <string name="shared_string_commit">Запиши</string>
+    <string name="shared_string_commit">Изпращане на данни до OSM</string>
 
     <string name="context_menu_item_delete_waypoint">Изтриване на GPX точка?</string>
     <string name="context_menu_item_edit_waypoint">Редактиране на GPX точка</string>
@@ -1931,7 +1931,7 @@
     <string name="osmo_mode_on">Спиране на OsMo сесия</string>
     <string name="osmo_mode_off">Стартиране на OsMo сесия</string>
     <string name="route_descr_destination">Крайна цел</string>
-    <string name="rendering_attr_alpineHiking_name">Скала на Алпийски туризъм (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Трудност по скалата на SAC</string>
     <string name="rendering_attr_alpineHiking_description">Оцветяване на пътеките по скалата на SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Наслагване на туристически символи</string>
     <string name="interrupt_music_descr">Прекъсване на музиката при гласово анонсиране</string>
