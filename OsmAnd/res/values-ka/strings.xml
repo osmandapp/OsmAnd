@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -1272,4 +1273,24 @@
     <string name="lang_ceb">ჩებუანური</string>
     <string name="archive_wikipedia_data">თქვენ გაქვთ ძველი, შეუთავსებელი მონაცემები ვიკიპედიიდან. გნებავთ მათი დაარქივება?</string>
     <string name="download_wikipedia_files">გნებავთ ვიკიპედიიდან დამატებითი მონაცემების ჩამოტვირთვა (%1$s მბ) ?</string>
+    <string name="rendering_attr_horseRoutes_name">საცხენოსნო გზები</string>
+    <string name="no_address_found">მისამართის მოძებნა შეუძლებელია</string>
+    <string name="shared_string_near">ახლოს</string>
+    <string name="shared_string_hide">დამალვა</string>
+    <string name="av_video_quality_low">დაბალი ხარისხი</string>
+    <string name="av_video_quality_high">მაღალი ხარისხი</string>
+    <string name="av_video_quality">ვიდეოს ჩვენების ხარისხი</string>
+    <string name="av_video_quality_descr">აირჩიეთ ვიდეოს ჩვენების ხარისხი</string>
+    <string name="av_audio_format">აუდიო ფორმატი</string>
+    <string name="av_audio_format_descr">აირჩიეთ ხმის ფორმატი</string>
+    <string name="av_audio_bitrate">ხმის ბიტრეიტი</string>
+    <string name="av_audio_bitrate_descr">აირჩიეთ ხმის ბიტრეიტი</string>
+    <string name="please_specify_poi_type_only_from_list">გთხოვთ აირჩიოთ სწორი POI-ს ტიპი ან გამოტოვოთ</string>
+    <string name="access_from_map_description">მენიუს ღილაკი უშვებს სამართავ პანელს და არა მენიუს</string>
+    <string name="access_from_map">წვდომა რუკიდან</string>
+    <string name="show_on_start">გაშვებისას ჩვენება</string>
+    <string name="copied_to_clipboard">კოპირებულია გაცვლის ბუფერში</string>
+    <string name="osm_save_offline">გათიშულად ჩაწერა</string>
+    <string name="osm_edit_modified_poi">OSM POI-ს შეცვლა</string>
+    <string name="osm_edit_deleted_poi">OSM POI წაშლილია</string>
     </resources>
