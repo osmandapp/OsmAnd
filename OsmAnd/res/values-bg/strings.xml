@@ -2011,4 +2011,6 @@
     <string name="only_download_over_wifi">Сваляне само през WiFi</string>
     <string name="live_update">Актуализиране на момента</string>
     <string name="update_now">Актуализирай сега</string>
-</resources>
+<string name="route_distance">Разстояние:</string>
+    <string name="route_duration">Време за пътуване:</string>
+    </resources>
