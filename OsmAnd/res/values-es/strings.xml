@@ -1991,8 +1991,8 @@
 	<string name="routing_attr_avoid_borders_name">Evitar cruces fronterizos</string>
 	<string name="shared_string_near">Cerca de</string>
     <string name="shared_string_hide">Ocultar</string>
-    <string name="av_video_quality_low">Baja calidad</string>
-    <string name="av_video_quality_high">Alta calidad</string>
+    <string name="av_video_quality_low">Menor calidad</string>
+    <string name="av_video_quality_high">Mayor calidad</string>
     <string name="av_video_quality">Calidad del video</string>
     <string name="av_video_quality_descr">Seleccione la calidad de salida del vídeo</string>
     <string name="av_audio_format">Formato del audio</string>
@@ -2006,4 +2006,6 @@
     <string name="only_download_over_wifi">Descargar sólo por WiFi</string>
     <string name="live_update">Actualización en vivo</string>
 <string name="update_now">Actualizar ahora</string>
-</resources>
+<string name="route_distance">Distancia:</string>
+    <string name="route_duration">Duración:</string>
+    </resources>
