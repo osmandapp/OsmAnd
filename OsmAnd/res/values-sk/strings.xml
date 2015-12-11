@@ -13,7 +13,7 @@
     <string name="add_as_first_destination_point">Pridať ako prvý prechodný bod</string>
     <string name="replace_destination_point">Nahradiť cieľový bod</string>
     <string name="new_destination_point_dialog">Už máte určený cieľový bod.</string>
-    <string name="target_point">Cieľový bod %1$s</string>
+    <string name="target_point">Cieľ %1$s</string>
     <string name="target_points">Ciele</string>
     <string name="intermediate_point_too_far">Prechodný bod %1$s je príliš ďaleko od najbližšej cesty.</string>
     <string name="arrived_at_intermediate_point">Dorazili ste k Vášmu prechodnému bodu</string>
@@ -815,8 +815,8 @@
     <string name="gps_not_available">Povoľte v nastaveniach GPS</string>
     <string name="map_widget_monitoring_services">Monitorovacie služby</string>
     <string name="no_route">Žiadna cesta</string>
-    <string name="delete_target_point">Odstrániť cieľový bod</string>
-    <string name="intermediate_point">Prechodný bod %1$s</string>
+    <string name="delete_target_point">Odstrániť cieľ</string>
+    <string name="intermediate_point">Cieľ %1$s</string>
     <string name="map_widget_show_destination_arrow">Zobraziť smer k cieľu</string>
     <string name="rendering_attr_roadColors_description">Vyberte farebnú schému pre cesty:</string>
     <string name="rendering_attr_roadColors_name">Farebná schéma ciest</string>
@@ -1312,7 +1312,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="gpx_selection_points">%1$s \nBody</string>
     <string name="gpx_selection_track">%1$s \nStopa %2$s</string>
     <string name="save_as_favorites_points">Uložiť ako skupinu obľúbených</string>
-    <string name="select_destination_and_intermediate_points">Vybrať prechodné body</string>
+    <string name="select_destination_and_intermediate_points">Vybrať ciele</string>
     <string name="layer_amenity_label">Popisy bodov</string>
     <string name="show_zoom_buttons_navigation_descr">Zobraziť tlačidlá priblíženia počas navigácie</string>
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
@@ -1951,4 +1951,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="no_address_found">Nenašla sa adresa</string>
 	<string name="looking_up_address">Hľadá sa adresa</string>
     <string name="rendering_attr_horseRoutes_name">Trasy pre kone</string>
+    <string name="route_distance">Vzdialenosť:</string>
+    <string name="route_duration">Čas cesty:</string>
+    <string name="update_now">Aktualizovať teraz</string>
+<string name="update_every">Aktualizovať každých</string>
+    <string name="only_download_over_wifi">Sťahovať iba cez WiFi</string>
+    <string name="live_update">Okamžité aktualizácie</string>
     </resources>
