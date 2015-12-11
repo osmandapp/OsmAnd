@@ -2128,4 +2128,5 @@
 <string name="update_now">Nu bijwerken</string>
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Reistijd:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">OsmAnd heeft geen toestemmingde externe SD-kaart te gebruiken</string>
+</resources>
