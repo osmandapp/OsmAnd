@@ -2126,4 +2126,6 @@
     <string name="only_download_over_wifi">"Alleen downloaden via  WiFi"</string>
     <string name="live_update">Live Update</string>
 <string name="update_now">Nu bijwerken</string>
-</resources>
+<string name="route_distance">Afstand:</string>
+    <string name="route_duration">Reistijd:</string>
+    </resources>
