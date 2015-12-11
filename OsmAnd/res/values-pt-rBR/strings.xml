@@ -1957,4 +1957,5 @@
 <string name="update_now">Atualizar agora</string>
 <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo de viagem:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">App não tem permissão para usar o cartão SD</string>
+</resources>
