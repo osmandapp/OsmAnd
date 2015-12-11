@@ -1955,4 +1955,6 @@
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
 <string name="update_now">Atualizar agora</string>
-</resources>
+<string name="route_distance">Distância:</string>
+    <string name="route_duration">Tempo de viagem:</string>
+    </resources>
