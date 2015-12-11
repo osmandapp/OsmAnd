@@ -2033,4 +2033,6 @@
     <string name="only_download_over_wifi">只在 WiFi 連線下載</string>
     <string name="live_update">即時更新</string>
 <string name="update_now">立即更新</string>
-</resources>
+<string name="route_distance">距離：</string>
+    <string name="route_duration">行駛時間：</string>
+    </resources>
