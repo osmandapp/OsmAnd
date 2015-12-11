@@ -102,6 +102,9 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();
 				List<LocationPoint> fullObjects = new ArrayList<>();
 				for (LocationPoint o : getPoints()) {
+					if (!o.isVisible()) {
+						continue;
+					}
 					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
