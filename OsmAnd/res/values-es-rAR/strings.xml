@@ -2007,4 +2007,6 @@
     <string name="only_download_over_wifi">Descargar sólo por WiFi</string>
     <string name="live_update">Actualización en vivo</string>
     <string name="update_now">Actualizar ahora</string>
-</resources>
+<string name="route_distance">Distancia:</string>
+    <string name="route_duration">Duración del viaje:</string>
+    </resources>
