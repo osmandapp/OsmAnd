@@ -2104,4 +2104,5 @@
     <string name="update_now">Aggiorna ora</string>
 <string name="route_distance">Distanza:</string>
     <string name="route_duration">Durata del viaggio:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">L\'app non ha l\'autorizzazione per usare la SD card</string>
+</resources>
