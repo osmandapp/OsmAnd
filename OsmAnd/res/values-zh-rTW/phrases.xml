@@ -2412,4 +2412,8 @@
 	<string name="poi_health_specialty_paediatrics_no">醫療專業：小兒科：無</string>
 	<string name="poi_health_specialty_dermatology_yes">醫療專業：皮膚科</string>
 	<string name="poi_health_specialty_urology_yes">醫療專業：泌尿科</string>
+	<string name="poi_health_specialty_surgery_yes">醫療專業：一般外科</string>
+	<string name="poi_health_specialty_radiology_yes">醫療專業：放射科</string>
+	<string name="poi_health_specialty_psychiatry_yes">醫療專業：精神科</string>
+	<string name="poi_health_specialty_neurology_yes">醫療專業：神經科</string>
 	</resources>
