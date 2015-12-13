@@ -749,7 +749,7 @@
 	<string name="poi_wine_cellar">Wijnkelder</string>
 	<string name="poi_piste_downhill">Skipiste</string>
 	<string name="poi_piste_hike">Winterwandelweg</string>
-	<string name="poi_piste_sleigh"/>
+	<string name="poi_piste_sleigh">Arreslee-piste</string>
 	<string name="poi_piste_ice_skate">Schaatsen</string>
 	<string name="poi_ski_rental">Skiverhuur</string>
 
@@ -764,7 +764,7 @@
 		<string name="poi_cabin">Hut</string>
 	<string name="poi_winery">Wijnhandel</string>
 
-	<string name="poi_piste_playground">Speeltuin</string>
+	<string name="poi_piste_playground">Kinderskiweide</string>
 	<string name="poi_personal_transport">Persoonlijk vervoer</string>
 		<string name="poi_node_networks">Wandel/fiets knooppunten</string>
 		<string name="poi_hiking_routes">Wandelroutes</string>
@@ -982,4 +982,259 @@
 	<string name="poi_piste">Piste</string>
 	<string name="poi_piste_nordic">Langlaufpiste</string>
 	<string name="poi_piste_skitour">Tourski piste</string>
+	<string name="poi_billiards">Biljart</string>
+
+<string name="poi_fitness">Fitness</string>
+
+	<string name="poi_water_supply">Wateraansluiting</string>
+		<string name="poi_groyne">Krib</string>
+
+	<string name="poi_denomination_shingon_shu">Shingon shu</string>
+	<string name="poi_denomination_maronite">Maronieten</string>
+	<string name="poi_denomination_mahayana">Mahayana</string>
+
+	<string name="poi_religious">Religieus gebied</string>
+	<string name="poi_piste_sled">Rodelpiste</string>
+	<string name="poi_piste_snow_park">Sneeuwpark</string>
+	<string name="poi_ski_resort">Skigebied</string>
+	<string name="poi_village_green">Dorpsweide</string>
+	<string name="poi_trail_riding_station">Ruiterhotel</string>
+
+	<string name="poi_cutline">Tra</string>
+	<string name="poi_shower">Douche</string>
+	<string name="poi_payment_terminal">Betaalautomaat</string>
+	<string name="poi_tree">Boom</string>
+	<string name="poi_military_office">Militair Bureau</string>
+	<string name="poi_wiki_place">Wikipedia</string>
+	<string name="poi_wiki_lang_en">Engelse Wiki</string>
+	<string name="poi_wiki_lang_ar">Arabische Wiki</string>
+	<string name="poi_wiki_lang_be">Wit-Russische Wiki</string>
+	<string name="poi_wiki_lang_bg">Bulgaarse Wiki</string>
+	<string name="poi_wiki_lang_ca">Catalaanse Wiki</string>
+	<string name="poi_wiki_lang_ceb">Cebuano Wiki</string>
+	<string name="poi_wiki_lang_cs">Tsjechische Wiki</string>
+	<string name="poi_wiki_lang_da">Deense Wiki</string>
+	<string name="poi_wiki_lang_de">Duitse Wiki</string>
+	<string name="poi_wiki_lang_el">Griekse Wiki</string>
+	<string name="poi_wiki_lang_et">Estse Wiki</string>
+	<string name="poi_wiki_lang_es">Spaanse Wiki</string>
+	<string name="poi_wiki_lang_fi">Finse Wiki</string>
+	<string name="poi_wiki_lang_fr">Franse Wiki</string>
+	<string name="poi_wiki_lang_gl">Gallicische Wiki</string>
+	<string name="poi_wiki_lang_he">Hebreeuwse Wiki</string>
+	<string name="poi_wiki_lang_hi">Hindi Wiki</string>
+	<string name="poi_wiki_lang_hr">Kroatische Wiki</string>
+	<string name="poi_wiki_lang_ht">Haïtiaanse Wiki</string>
+	<string name="poi_wiki_lang_hu">Hongaarse Wiki</string>
+	<string name="poi_wiki_lang_id">Indonesische Wiki</string>
+	<string name="poi_wiki_lang_it">Italiaanse Wiki</string>
+	<string name="poi_wiki_lang_ja">Japanse Wiki</string>
+	<string name="poi_wiki_lang_ko">Koreaanse Wiki</string>
+	<string name="poi_wiki_lang_lt">Litouwse Wiki</string>
+	<string name="poi_wiki_lang_lv">Letse Wiki</string>
+	<string name="poi_wiki_lang_ms">Maleise Wiki</string>
+	<string name="poi_wiki_lang_new">Newar Wiki</string>
+	<string name="poi_wiki_lang_nl">Nederlandse Wiki</string>
+	<string name="poi_wiki_lang_nn">Noorse Nynorsk Wiki</string>
+	<string name="poi_wiki_lang_no">Noorse Wiki</string>
+	<string name="poi_wiki_lang_pl">Poolse Wiki</string>
+	<string name="poi_wiki_lang_pt">Portugese Wiki</string>
+	<string name="poi_wiki_lang_ro">Roemeense Wiki</string>
+	<string name="poi_wiki_lang_ru">Russische Wiki</string>
+	<string name="poi_wiki_lang_sk">Slowaakse Wiki</string>
+	<string name="poi_wiki_lang_sl">Sloveense Wiki</string>
+	<string name="poi_wiki_lang_sr">Servische Wiki</string>
+	<string name="poi_wiki_lang_sv">Zweedse Wiki</string>
+	<string name="poi_wiki_lang_sw">Swahili Wiki</string>
+	<string name="poi_wiki_lang_te">Telugu Wiki</string>
+	<string name="poi_wiki_lang_th">Thaise Wiki</string>
+	<string name="poi_wiki_lang_tr">Turkse Wiki</string>
+	<string name="poi_wiki_lang_uk">Oekraïense Wiki</string>
+	<string name="poi_wiki_lang_vi">Vietnamese Wiki</string>
+	<string name="poi_wiki_lang_vo">Volapük Wiki</string>
+	<string name="poi_wiki_lang_zh">Chinese Wiki</string>
+
+	<string name="poi_bollard">Paaltje</string>
+	<string name="poi_cycle_barrier">Slingerhek</string>
+	<string name="poi_motorcycle_barrier">Motorhek</string>
+	<string name="poi_block">Blokkade</string>
+	<string name="poi_bus_trap">Bussluis</string>
+	<string name="poi_cattle_grid">Veerooster</string>
+	<string name="poi_full_height_turnstile">Draaikruis</string>
+	<string name="poi_bump_gate">Zwaaihek</string>
+	<string name="poi_general_barrier">Barriere</string>
+	<string name="poi_stile">Hekoverstap</string>
+	<string name="poi_debris">Aarden wal</string>
+	<string name="poi_jersey_barrier">Jersey Barriere</string>
+	<string name="poi_height_restrictor">Hoogtebeperker</string>
+	<string name="poi_horse_stile">Hekoverstap voor paarden</string>
+	<string name="poi_kissing_gate">Voetgangershek</string>
+	<string name="poi_sally_port">Stadspoort</string>
+	<string name="poi_swing_gate">Horizontale slagboom</string>
+	<string name="poi_turnstile">Tourniquet</string>
+	<string name="poi_kent_carriage_gap">Koetsdoorgang</string>
+	<string name="poi_barrier_entrance">Doorgang</string>
+	<string name="poi_entrance_main">Hoofdingang</string>
+	<string name="poi_entrance">Ingang</string>
+	<string name="poi_entrance_exit">Uitgang</string>
+
+	<string name="poi_highway_crossing">Voetgangersoversteekplaats</string>
+
+	<string name="poi_icn_ref">Internationaal fietsknooppunt</string>
+	<string name="poi_ncn_ref">Nationaal fietsknooppunt</string>
+	<string name="poi_rcn_ref">Regionaal fietsknooppunt</string>
+	<string name="poi_lcn_ref">Lokaal fietsknooppunt</string>
+	<string name="poi_iwn_ref">Internationaal wandelknooppunt</string>
+	<string name="poi_nwn_ref">Nationaal wandelknooppunt</string>
+	<string name="poi_rwn_ref">Regionaal wandelknooppunt</string>
+	<string name="poi_lwn_ref">Lokaal wandelknooppunt</string>
+
+	<string name="poi_route_hiking_iwn_poi">Internationale wandelroute</string>
+	<string name="poi_route_hiking_nwn_poi">Nationale wandelroute</string>
+	<string name="poi_route_hiking_rwn_poi">Regionale wandelroute</string>
+	<string name="poi_route_hiking_lwn_poi">Lokale wandelroute</string>
+	<string name="poi_route_hiking_ref_poi">Wandelroutenummer</string>
+
+	<string name="poi_opening_hours">Openingstijden</string>
+	<string name="poi_collection_times">Lichtingstijden</string>
+	<string name="poi_description">Omschrijving</string>
+	<string name="poi_phone">Telefoon</string>
+	<string name="poi_website">Website</string>
+	<string name="poi_email">Email</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_mobile">Mobiel</string>
+	<string name="poi_service_times">Aanvangstijd</string>
+	<string name="poi_maxheight">Maximale hoogte</string>
+	<string name="poi_maxweight">Maximaal gewicht</string>
+	<string name="poi_height">Hoogte</string>
+	<string name="poi_ele">Hoogte boven zeeniveau</string>
+	<string name="poi_abandoned">Verlaten</string>
+	<string name="poi_abandoned_poi">Verlaten object</string>
+	<string name="poi_disused">Buiten gebruik</string>
+
+	<string name="poi_operator">Exploitant</string>
+	<string name="poi_brand">Merk</string>
+	<string name="poi_fee_yes">Betaald</string>
+	<string name="poi_fee_no">Gratis</string>
+	<string name="poi_drinking_water_yes">Drinkwater</string>
+	<string name="poi_drinking_water_no">Geen drinkwater</string>
+	<string name="poi_supervised_yes">Onder toezicht</string>
+	<string name="poi_supervised_no">Zonder toezicht</string>
+	<string name="poi_seasonal_yes">Seizoensgebonden</string>
+	<string name="poi_seasonal_no">Niet seizoensgebonden</string>
+	<string name="poi_seasonal_dry_season">Droogteseizoen</string>
+	<string name="poi_seasonal_wet_season">Natte seizoen</string>
+	<string name="poi_seasonal_spring">Voorjaar</string>
+	<string name="poi_seasonal_summer">Zomer</string>
+	<string name="poi_seasonal_autumn">Najaar</string>
+	<string name="poi_seasonal_winter">Winter</string>
+	<string name="poi_crossing_traffic_signals">Met verkeerslichten</string>
+	<string name="poi_crossing_uncontrolled">Zonder verkeerslichten</string>
+	<string name="poi_crossing_unmarked">Ongemarkeerd</string>
+	<string name="poi_start_date">Begindatum</string>
+	<string name="poi_wheelchair">Rolstoeltoegankelijk</string>
+	<string name="poi_wheelchair_no">Niet rolstoeltoegankelijk</string>
+	<string name="poi_wheelchair_limited">Beperkt rolstoeltoegankelijk</string>
+	<string name="poi_wholesale">Groothandel</string>
+
+	<string name="poi_access_private">Toegang: privé</string>
+	<string name="poi_access_no">Geen toegang</string>
+	<string name="poi_access_destination">Toegang: Bestemmingsverkeer</string>
+	<string name="poi_access_permissive">Toegang: toegelaten</string>
+	<string name="poi_access_customers">Toegang: klanten</string>
+	<string name="poi_access_delivery">Toegang: laden en lossen</string>
+	<string name="poi_access_agricultural">Toegang: landbouwverkeer</string>
+
+	<string name="poi_content_silage">Inhoud: kuilvoer</string>
+	<string name="poi_content_water">Inhoud: water</string>
+	<string name="poi_content_slurry">Inhoud: drijfmest</string>
+	<string name="poi_content_oil">Inhoud: olie</string>
+	<string name="poi_content_fuel">Inhoud: brandstof</string>
+	<string name="poi_content_manure">Inhoud: mest</string>
+	<string name="poi_content_wine">Inhoud: wijn</string>
+	<string name="poi_content_sewage">Inhoud: Rioolwater</string>
+	<string name="poi_content_gas">Inhoud: gas</string>
+	<string name="poi_content_biomass">Inhoud: biomassa</string>
+	<string name="poi_content_wastewater">Inhoud: afvalwater</string>
+	<string name="poi_content_crop">Inhoud: oogst</string>
+	<string name="poi_content_fodder">Inhoud: voedergewassen</string>
+	<string name="poi_content_beer">Inhoud: bier</string>
+	<string name="poi_content_salt">Inhoud: zout</string>
+	<string name="poi_content_grain">Inhoud: graan</string>
+
+	<string name="poi_nudism_yes">Naaktrecreatie toegestaan</string>
+	<string name="poi_nudism_no">Naaktrecreatie niet toegestaan</string>
+	<string name="poi_nudism_obligatory">Naaktrecreatie verplicht</string>
+	<string name="poi_nudism_customary">Naaktrecreatie gebruikelijk</string>
+	<string name="poi_nudism_permissive">Naaktrecreatie toegelaten</string>
+
+	<string name="poi_trade_building_supplies">Bouwmaterialen</string>
+	<string name="poi_trade_plumbing">Loodgietersmaterialen</string>
+	<string name="poi_trade_wood">Houthandel</string>
+	<string name="poi_trade_agricultural_supplies">Landbouwbenodigheden</string>
+	<string name="poi_trade_tile">Tegelhandel</string>
+
+	<string name="poi_population">Inwoneraantal</string>
+	<string name="poi_parking_underground">Ondergrondse parkeergarage</string>
+	<string name="poi_parking_multi_storey">Parkeergarage (meerdere verdiepingen)</string>
+
+	<string name="poi_bicycle_parking_anchors">Ankers</string>
+	<string name="poi_bicycle_parking_stands">Fietsenhekken</string>
+	<string name="poi_bicycle_parking_wall_loops">Fietsenrekken</string>
+	<string name="poi_bicycle_parking_rack">Rek</string>
+	<string name="poi_bicycle_parking_building">Afgesloten ruimte</string>
+	<string name="poi_bicycle_parking_shed">Fietsenschuur</string>
+	<string name="poi_bicycle_parking_bollard">Paal</string>
+	<string name="poi_bicycle_parking_informal">Informeel</string>
+
+	<string name="poi_leaf_type_broadleaved">Loofbomen</string>
+	<string name="poi_leaf_type_needleleaved">Naaldbomen</string>
+	<string name="poi_leaf_type_mixed">Gemengd bos</string>
+	<string name="poi_leaf_type_leafless">Bladerloos</string>
+	<string name="poi_species">Soort</string>
+	<string name="poi_genus">Geslacht</string>
+	<string name="poi_taxon">Taxon</string>
+
+	<string name="poi_trees_olive">Olijfboom</string>
+	<string name="poi_trees_apple">Appelboom</string>
+	<string name="poi_trees_oil">Oliepalm</string>
+	<string name="poi_trees_orange">Sinaasappelboom</string>
+	<string name="poi_trees_almond">Amandelboom</string>
+	<string name="poi_trees_banana">Bananenboom</string>
+	<string name="poi_trees_hazel">Hazelaar</string>
+	<string name="poi_trees_coconut">Kokospalm</string>
+	<string name="poi_trees_persimmon">Persimmon</string>
+	<string name="poi_trees_cherry">Kersenboom</string>
+	<string name="poi_trees_walnut">Walnoot</string>
+	<string name="poi_trees_plum">Pruim</string>
+	<string name="poi_trees_peach">Perzik</string>
+	<string name="poi_trees_tea">Theestruik</string>
+	<string name="poi_trees_coca">Cocaboom</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Weideboomgaard</string>
+	<string name="poi_trees_nectorine">Nectarine</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Rubberboom</string>
+	<string name="poi_trees_date">Dadelpalm</string>
+	<string name="poi_trees_coffea">Koffieplant</string>
+	<string name="poi_trees_pomegranate">Granaatappel</string>
+
+	<string name="poi_urban">Stedelijk</string>
+	<string name="poi_rural">Landelijk</string>
+
+	<string name="poi_enforcement_traffic_signals">Roodlichtcontrole</string>
+	<string name="poi_enforcement_maxspeed">Snelheidscontrole</string>
+	<string name="poi_enforcement_maxheight">Hoogtecontrole</string>
+	<string name="poi_enforcement_mindistance">Afstandecontrole</string>
+	<string name="poi_enforcement_check">Controlepost</string>
+	<string name="poi_enforcement_access">Toegangscontrole</string>
+	<string name="poi_enforcement_toll">Tolcontrole</string>
+
 	</resources>
