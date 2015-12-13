@@ -2085,4 +2085,7 @@
     <string name="live_update">Uaktualniaj na bieżąco</string>
     <string name="update_now">Aktualizuj teraz</string>
 <string name="update_every">Aktualizacja co</string>
+    <string name="route_distance">Odległość:</string>
+    <string name="route_duration">Czas podróży:</string>
+    <string name="looking_up_address">Wyszukiwanie adresu</string>
     </resources>
