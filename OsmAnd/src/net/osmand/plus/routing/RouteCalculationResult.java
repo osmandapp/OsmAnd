@@ -173,8 +173,8 @@ public class RouteCalculationResult {
 
 	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
 		int[] pointTypes = res.getObject().getPointTypes(intId);
-		RouteRegion reg = res.getObject().region;
 		if (pointTypes != null) {
+			RouteRegion reg = res.getObject().region;
 			for (int r = 0; r < pointTypes.length; r++) {
 				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 				int x31 = res.getObject().getPoint31XTile(intId);
@@ -261,6 +261,12 @@ public class RouteCalculationResult {
 
                 String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
 						info.getRef(), info.getDestinationName());
+                String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
+                if(pointNames != null) {
+					for (int t = 0; t < pointNames.length; t++) {
+						description += " " + pointNames[t];
+					}
+                }
 				info.setDescriptionRoute(description);
 				info.routePointOffset = prevLocationSize;
 				if(directions.size() > 0 && prevDirectionTime > 0 && prevDirectionDistance > 0) {
