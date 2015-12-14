@@ -218,9 +218,9 @@ public class LiveUpdatesFragment extends Fragment {
 		@Override
 		public String getGroup(int groupPosition) {
 			if (groupPosition == 0) {
-				return "Live updates on";
+				return getString(R.string.live_updates_on);
 			} else if (groupPosition == 1) {
-				return "Love updates off";
+				return getString(R.string.live_updates_off);
 			} else {
 				throw new IllegalArgumentException("unexpected group position:" + groupPosition);
 			}
