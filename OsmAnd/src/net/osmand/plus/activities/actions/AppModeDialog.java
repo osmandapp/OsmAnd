@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
@@ -20,7 +21,7 @@ import android.widget.LinearLayout.LayoutParams;
 public class AppModeDialog {
 
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
-			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
+			ViewGroup parent, final boolean singleSelection, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		if(!showDefault) {
@@ -29,21 +30,21 @@ public class AppModeDialog {
 		if (showDefault || settings.getApplicationMode() != ApplicationMode.DEFAULT) {
 			selected.add(settings.getApplicationMode());
 		}
-		return prepareAppModeView(a, values, selected, parent, singleSelection, false, onClickListener);
+		return prepareAppModeView(a, values, selected, parent, singleSelection, false, useMapTheme, onClickListener);
 	}
 
 	//special method for drawer menu
 	//needed because if there's more than 4 items  - the don't fit in drawer
 	public static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final Set<ApplicationMode> selected, ContextMenuAdapter.BooleanResult allModes,
-			final View.OnClickListener onClickListener) {
+												boolean useMapTheme, final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		selected.add(settings.getApplicationMode());
-		return prepareAppModeView(a, values, selected, null, true, true, onClickListener);
+		return prepareAppModeView(a, values, selected, null, true, true, useMapTheme, onClickListener);
 	}
 	
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
-				ViewGroup parent, final boolean singleSelection, boolean drawer, final View.OnClickListener onClickListener) {
+				ViewGroup parent, final boolean singleSelection, boolean drawer, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		final View[] buttons = new View[values.size()];
 		int k = 0;
@@ -52,7 +53,7 @@ public class AppModeDialog {
 		}
 		for (int i = 0; i < buttons.length; i++) {
 			updateButtonState((OsmandApplication) a.getApplication(), values, selected, onClickListener, buttons, i,
-					singleSelection);
+					singleSelection, useMapTheme);
 		}
 		return ll;
 	}
@@ -60,7 +61,7 @@ public class AppModeDialog {
 
 	private static void updateButtonState(final OsmandApplication ctx, final List<ApplicationMode> visible,
 			final Set<ApplicationMode> selected, final View.OnClickListener onClickListener, final View[] buttons,
-			int i, final boolean singleChoice) {
+			int i, final boolean singleChoice, final boolean useMapTheme) {
 		if (buttons[i] != null) {
 			View tb = buttons[i];
 			final ApplicationMode mode = visible.get(i);
@@ -70,7 +71,13 @@ public class AppModeDialog {
 				iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.osmand_orange));
 				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
 			} else {
-				iv.setImageDrawable(ctx.getIconsCache().getContentIcon(mode.getSmallIconDark()));
+				if (useMapTheme) {
+					boolean nightMode = ctx.getDaynightHelper().isNightMode();
+					iv.setImageDrawable(ctx.getIconsCache().getContentIcon(mode.getSmallIconDark(), !nightMode));
+					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+				} else {
+					iv.setImageDrawable(ctx.getIconsCache().getContentIcon(mode.getSmallIconDark()));
+				}
 				tb.findViewById(R.id.selection).setVisibility(View.INVISIBLE);
 			}
 			iv.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +101,7 @@ public class AppModeDialog {
 						onClickListener.onClick(null);
 					}
 					for(int i = 0; i < visible.size(); i++) {
-						updateButtonState(ctx, visible, selected, onClickListener, buttons, i, singleChoice);
+						updateButtonState(ctx, visible, selected, onClickListener, buttons, i, singleChoice, useMapTheme);
 					}
 				}
 			});

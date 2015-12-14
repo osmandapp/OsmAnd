@@ -2073,4 +2073,7 @@
     <string name="update_every">Aktualisierungsintervall</string>
     <string name="only_download_over_wifi">Nur über WLAN herunterladen</string>
     <string name="live_update">Live Aktualisierung</string>
-</resources>
+<string name="update_now">Jetzt aktualisieren</string>
+<string name="route_distance">Entfernung:</string>
+    <string name="route_duration">Reisezeit:</string>
+    </resources>

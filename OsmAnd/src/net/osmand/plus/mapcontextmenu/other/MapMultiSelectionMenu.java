@@ -74,10 +74,6 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		}
 
 		@Override
-		protected void refreshMenuTitle() {
-		}
-
-		@Override
 		protected boolean needStreetName() {
 			return false;
 		}

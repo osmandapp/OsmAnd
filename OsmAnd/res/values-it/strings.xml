@@ -2080,7 +2080,7 @@
     <string name="please_specify_poi_type_only_from_list">Specifica il corretto tipo di PDI o salta questo passaggio</string>
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
 	<string name="routing_attr_avoid_stairs_description">Evita le scale</string>
-	<string name="release_2_2">" • Nuova interfaccia utente variabile in base al contesto per le località selezionate sulla mappa e negli altri schermi\n\n • La schermata della mappa è avviata direttamente se non è selezionato \"Mostra il pannello di controllo all\'avvio\"\n\n • Configura quali e come vengono visualizzate le voci nel pannello di controllo\n\n • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menu\n\n • Per scaricare mappe, regioni è possibile selezionarle direttamente tappando sulla mappa mondiale\n\n • La ricerca di PDI ora supporta interrogazioni più specifiche POI\n\n • Migliorata la modifica di PDI e dati OSM\n\n • Struttura e interfaccia di download dei dati della mappa rivista\n\n e altro… "</string>
+	<string name="release_2_2">" • Nuova interfaccia utente sensibile al contesto per le località selezionate sulla mappa e negli altri schermi\n\n • La schermata della mappa è avviata direttamente se non è selezionato \"Mostra il pannello di controllo all\'avvio\"\n\n • Configura quali e come vengono visualizzate le voci nel pannello di controllo\n\n • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menu\n\n • Per scaricare mappe, regioni è possibile selezionarle direttamente tappando sulla mappa mondiale\n\n • La ricerca di PDI ora supporta richieste più specifiche\n\n • Migliorata la funzionalità modifica di PDI e OSM\n\n • Riviste la struttura e l\'interfaccia di download dei dati della mappa\n\n e altro… "</string>
     <string name="dashboard_or_drawer_description">C\'è una nuova scelta per controllare l\'app attraverso il personalizzabile pannello di controllo o tramite il menu statico. La tua scelta può sempre essere cambiata nelle impostazioni del pannello di controllo.</string>
 <string name="shared_string_near">Vicino</string>
     <string name="shared_string_hide">Nascondi</string>
@@ -2099,4 +2099,9 @@
     <string name="update_every">Aggiorna ogni</string>
     <string name="only_download_over_wifi">Scarica solo da rete WiFi</string>
     <string name="live_update">Aggiornamenti in tempo reale</string>
-</resources>
+<string name="lang_fy">Frisone occidentale</string>
+    <string name="lang_als">Albanese (Tosco)</string>
+    <string name="update_now">Aggiorna ora</string>
+<string name="route_distance">Distanza:</string>
+    <string name="route_duration">Durata del viaggio:</string>
+    </resources>

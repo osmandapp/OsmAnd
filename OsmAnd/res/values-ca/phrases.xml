@@ -1186,7 +1186,7 @@
 	<string name="poi_internet_access_yes">Accés a Internet: sí</string>
 	<string name="poi_internet_access_no">Accés a Internet: no</string>
 
-	<string name="poi_wheelchair_no">Cadira de rodes: no permesa</string>
+	<string name="poi_wheelchair_no">Cadira de rodes: no accessible</string>
 	<string name="poi_wheelchair_limited">Cadira de rodes: restringida</string>
 	<string name="poi_content_fuel">Contingut: carburant</string>
 	<string name="poi_content_gas">Contingut: gas</string>
@@ -1212,7 +1212,7 @@
 	<string name="poi_memorial_stone">Roc</string>
 	<string name="poi_memorial_statue">Estàtua</string>
 	<string name="poi_memorial_bust">Bust</string>
-	<string name="poi_memorial_cross">Creu</string>
+	<string name="poi_memorial_cross">En forma de creu</string>
 	<string name="poi_memorial_plaque">Placa</string>
 	<string name="poi_memorial_war">Memorial de guerra</string>
 	<string name="poi_vending_bread">Pa</string>
@@ -1734,7 +1734,7 @@
 	<string name="poi_drive_in_yes">Servei dins el vehicle: sí</string>
 	<string name="poi_drive_in_no">Servei dins el vehicle: no</string>
 	<string name="poi_drive_through_yes">Cua per vehicles: sí</string>
-	<string name="poi_drive_through_no">Cua per vehicles: sí</string>
+	<string name="poi_drive_through_no">Cua per vehicles: no</string>
 
 	<string name="poi_takeaway_yes">Per emportar-se</string>
 	<string name="poi_takeaway_no">No es pot emportar</string>
@@ -1840,7 +1840,7 @@
 	<string name="poi_internet_access_type_wired">Tipus d\'accés d\'Internet: per cable</string>
 	<string name="poi_internet_access_type_public">Tipus d\'accés d\'Internet: públic</string>
 	<string name="poi_internet_access_type_service">Tipus d\'accés d\'Internet: servei</string>
-	<string name="poi_internet_access_type_no">Tipus d\'accés d\'Internet: cap</string>
+	<string name="poi_internet_access_type_no">Sense accés a Internet</string>
 
 	<string name="poi_maxwidth">Amplada màxima</string>
 	<string name="poi_iata">Codi IATA</string>
@@ -2056,4 +2056,27 @@
 	<string name="poi_service_bicycle_cleaning_no">Neteja de bicicletes: no</string>
 	<string name="poi_wildlife_hide">Lloc d\'observació de fauna en llibertat</string>
 
+	<string name="poi_clothes_underwear">Roba interior</string>
+	<string name="poi_building_type_pyramid">Tipus d\'edifici: piràmide</string>
+
+	<string name="poi_fitness_centre">Gimnàs</string>
+	<string name="poi_fitness">Fitness</string>
+
+	<string name="poi_billiards">Billar</string>
+
+<string name="poi_health_specialty_behavior_yes">Especialitat mèdica: comportament</string>
+
+	<string name="poi_wiki_lang_bs">Wiki bosniana</string>
+	<string name="poi_wiki_lang_cy">Wiki gal·lesa</string>
+	<string name="poi_wiki_lang_eo">Wiki en esperanto</string>
+	<string name="poi_wiki_lang_eu">Wiki basca</string>
+	<string name="poi_wiki_lang_fy">Wiki frisona</string>
+	<string name="poi_wiki_lang_ga">Wiki irlandesa</string>
+	<string name="poi_wiki_lang_hy">Wiki armènia</string>
+	<string name="poi_wiki_lang_is">Wiki islandesa</string>
+	<string name="poi_wiki_lang_ka">Wiki georgiana</string>
+	<string name="poi_wiki_lang_ku">Wiki kurda</string>
+	<string name="poi_wiki_lang_la">Wiki en llatí</string>
+	<string name="poi_wiki_lang_lb">Wiki luxemburguesa</string>
+	<string name="poi_wiki_lang_mk">Wiki macedònica</string>
 	</resources>

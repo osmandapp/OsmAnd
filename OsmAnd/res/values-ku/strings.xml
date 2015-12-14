@@ -34,4 +34,9 @@
     <string name="feedback">Gotine wa</string>
     <string name="search_on_the_map_item">Lêgerîn Nexşa</string>
     <string name="other_menu_group">Adin</string>
+    <string name="route_distance">:Dûrahî</string>
+    <string name="route_duration">:Wexte Rêwîtî</string>
+    <string name="show_on_start">Peşi Şan Bide</string>
+    <string name="map_viewing_item">Naxşe Şan Bide</string>
+    <string name="navigation_item_description">Awakira Navigasyone</string>
     </resources>

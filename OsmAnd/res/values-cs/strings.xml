@@ -1873,4 +1873,8 @@
     <string name="av_audio_bitrate_descr">Vybrat bitrate zvuku</string>
     <string name="no_address_found">Adresa nebyla určena</string>
 	<string name="looking_up_address">Vyhledávání adres</string>
+    <string name="route_distance">Vzdálenost:</string>
+    <string name="route_duration">Potřebný čas:</string>
+    <string name="rendering_attr_horseRoutes_name">Stezka pro koně</string>
+    <string name="only_download_over_wifi">Stahovat jen z WiFi</string>
     </resources>

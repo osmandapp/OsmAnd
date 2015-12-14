@@ -26,7 +26,7 @@
 	<string name="poi_baby_goods">Товари для дітей</string>
 	<string name="poi_bag">Сумки, валізи</string>
 	<string name="poi_bathroom_furnishing">Все для ванної кімнати</string>
-	<string name="poi_bed">Все для спальні</string>
+	<string name="poi_bed">Магазин постільної білизни</string>
 	<string name="poi_boutique">Бутік</string>
 	<string name="poi_carpet">Килими</string>
 	<string name="poi_chemist">Аптека</string>
@@ -196,7 +196,7 @@
 	<string name="poi_fuel_octane_98">А-98</string>
 	<string name="poi_fuel_octane_100">А-100</string>
 	<string name="poi_fuel_cng">Метан</string>
-	<string name="poi_fuel_1_25">1:25 fuel</string>
+	<string name="poi_fuel_1_25">Паливо 1:25</string>
 	<string name="poi_fuel_ethanol">Етанол</string>
 	<string name="poi_fuel_methanol">Метанол</string>
 	<string name="poi_fuel_svo">Рослинне пальне(олія)</string>
@@ -274,4 +274,73 @@
 
 	<string name="poi_lighthouse">Маяк</string>
 
+	<string name="poi_hiking_routes">Туристичні маршрути</string>
+		<string name="poi_traffic_enforcement">Контроль ПДР</string>
+	<string name="poi_ferry_terminal">Причал порому</string>
+	<string name="poi_aerialway_station">Станція канатної дороги</string>
+	<string name="poi_aerialway_t_bar">Т-подібний підйомник</string>
+	<string name="poi_aerialway_j_bar">J-подібний підйомник</string>
+	<string name="poi_aerialway_mixed_lift">Підйомник замішаного типу</string>
+	<string name="poi_aerialway_goods">Вантажний підйомник</string>
+	<string name="poi_water_works">Водозабір</string>
+	<string name="poi_wastewater_plant">Очисні споруди</string>
+	<string name="poi_water_tower">Водонапірна башта</string>
+	<string name="poi_lock_gate">Ворота шлюзу</string>
+	<string name="poi_dam">Дамба</string>
+	<string name="poi_watermill">Водяний млин</string>
+	<string name="poi_breakwater">Хвилеріз</string>
+	<string name="poi_power_substation">Підстанція</string>
+	<string name="poi_power_transformer">Трансформатор</string>
+	<string name="poi_power_cable_distribution_cabinet">Кабельна розподільна шафа</string>
+	<string name="poi_power_plant">Електростанція</string>
+	<string name="poi_power_generator">Електрогенератор</string>
+	<string name="poi_power_tower">Опора лінії електропередач</string>
+	<string name="poi_power_pole">Стовп лінії електропередач</string>
+
+	<string name="poi_post_office">Пошта</string>
+	<string name="poi_post_box">Поштова скринька</string>
+	<string name="poi_telephone">Телефон</string>
+	<string name="poi_bell_tower">Дзвіниця</string>
+	<string name="poi_telephone_exchange">АТС</string>
+
+	<string name="poi_recycling">Переробка відходів</string>
+
+	<string name="poi_recycling_centre">Тип: приймальний пункт</string>
+	<string name="poi_recycling_container">Тип: контейнер</string>
+	<string name="poi_recycling_glass">Скло</string>
+	<string name="poi_recycling_paper">Папір</string>
+	<string name="poi_recycling_clothes">Одежа</string>
+	<string name="poi_recycling_glass_bottles">Скляні пляшки</string>
+	<string name="poi_recycling_plastic">Пластик</string>
+	<string name="poi_recycling_scrap_metal">Металобрухт</string>
+	<string name="poi_recycling_batteries">Батарейки</string>
+	<string name="poi_recycling_plastic_bottles">Пластикові пляшки</string>
+	<string name="poi_recycling_waste">Сміття (чорні пакети)</string>
+	<string name="poi_recycling_plastic_packaging">Пластикова тара</string>
+	<string name="poi_recycling_newspaper">Газети</string>
+	<string name="poi_recycling_cartons">Картон</string>
+	<string name="poi_recycling_cardboard">Пакувальний картон</string>
+	<string name="poi_recycling_magazines">Журнали (глянцеві)</string>
+	<string name="poi_recycling_paper_packaging">Пакувальний папір</string>
+	<string name="poi_recycling_small_appliances">Дрібна побутова техніка</string>
+	<string name="poi_recycling_wood">Деревина</string>
+	<string name="poi_recycling_books">Книги</string>
+	<string name="poi_recycling_shoes">Взуття</string>
+	<string name="poi_recycling_aluminium">Алюміній</string>
+	<string name="poi_recycling_organic">Органіка</string>
+	<string name="poi_recycling_beverage_cartons">Картоні коробки</string>
+	<string name="poi_recycling_garden_waste">Садове сміття</string>
+	<string name="poi_recycling_low_energy_bulbs">Енерго-зберігаючі лампи</string>
+	<string name="poi_recycling_fluorescent_tubes">Люмінесцентні лампи</string>
+	<string name="poi_recycling_metal">Метал</string>
+	<string name="poi_recycling_electrical_items">Крупна побутова техніка</string>
+	<string name="poi_recycling_cooking_oil">Олія для смаження</string>
+	<string name="poi_recycling_engine_oil">Машинне мастило</string>
+	<string name="poi_recycling_plastic_bags">Пластикові мішки</string>
+	<string name="poi_recycling_hazardous_waste">Небезпечні відходи</string>
+	<string name="poi_recycling_mobile_phones">Мобільні телефони</string>
+	<string name="poi_recycling_hydrargyrum">Ртуть</string>
+	<string name="poi_recycling_computers">Комп\'ютери</string>
+	<string name="poi_recycling_tyres">Покришки</string>
+	<string name="poi_recycling_tv_monitor">Телевізори, монітори</string>
 	</resources>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?attr/bottom_menu_view_bg"
+        android:background="@drawable/bg_bottom_menu_dark"
         android:clickable="true"
         android:orientation="vertical">
 
@@ -26,10 +26,11 @@
                 android:layout_height="wrap_content">
 
                 <View
+                    android:id="@+id/dividerModesLayout"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="bottom"
-                    android:background="?attr/dashboard_divider"
+                    android:background="@color/dashboard_divider_dark"
                     android:focusable="false"/>
 
                 <LinearLayout
@@ -85,7 +86,7 @@
 
                     <ImageView
                         android:id="@+id/fromIcon"
-                        android:layout_width="24dp"
+                        android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
@@ -98,6 +99,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/fromTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="3dp"
@@ -127,9 +129,10 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/dividerFromDropDown"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"
+                    android:background="@color/dashboard_divider_dark"
                     android:focusable="false"/>
 
                 <LinearLayout
@@ -140,7 +143,7 @@
 
                     <ImageView
                         android:id="@+id/viaIcon"
-                        android:layout_width="24dp"
+                        android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
@@ -180,7 +183,7 @@
                     android:id="@+id/viaLayoutDivider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"
+                    android:background="@color/dashboard_divider_dark"
                     android:focusable="false"/>
 
                 <LinearLayout
@@ -191,7 +194,7 @@
 
                     <ImageView
                         android:id="@+id/toIcon"
-                        android:layout_width="24dp"
+                        android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
@@ -204,6 +207,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/toTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="3dp"
@@ -232,9 +236,10 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/dividerToDropDown"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"
+                    android:background="@color/dashboard_divider_dark"
                     android:focusable="false"/>
 
                 <LinearLayout
@@ -246,7 +251,8 @@
                     <LinearLayout
                         android:id="@+id/Info"
                         android:layout_width="fill_parent"
-                        android:layout_height="@dimen/list_item_height"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/list_item_height"
                         android:background="?attr/dashboard_button"
                         android:orientation="horizontal">
 
@@ -261,12 +267,83 @@
 
                         <ImageView
                             android:id="@+id/InfoIcon"
-                            android:layout_width="@dimen/list_item_height"
-                            android:layout_height="@dimen/list_item_height"
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/list_content_padding"
+                            android:layout_marginRight="@dimen/list_content_padding"
                             android:layout_gravity="center_vertical"
                             android:contentDescription="@string/info_button"
                             android:scaleType="center"
                             android:src="@drawable/ic_action_info_dark"/>
+
+                        <LinearLayout
+                            android:id="@+id/InfoDistance"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/DistanceTitle"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_marginTop="5dp"
+                                android:gravity="left"
+                                android:text="@string/route_distance"
+                                android:textSize="@dimen/default_sub_text_size"/>
+
+                            <TextView
+                                android:id="@+id/DistanceText"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/list_content_padding"
+                                android:gravity="left"
+                                android:singleLine="true"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/DurationIcon"
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/list_content_padding"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:layout_gravity="center_vertical"
+                            android:contentDescription="@string/info_button"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_action_time"/>
+
+                        <LinearLayout
+                            android:id="@+id/InfoDuration"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/DurationTitle"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="3dp"
+                                android:layout_marginTop="5dp"
+                                android:gravity="left"
+                                android:text="@string/route_duration"
+                                android:textSize="@dimen/default_sub_text_size"/>
+
+                            <TextView
+                                android:id="@+id/DurationText"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/list_content_padding"
+                                android:gravity="left"
+                                android:singleLine="true"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size"/>
+
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/InfoTextView"
@@ -293,10 +370,11 @@
         </ScrollView>
 
         <View
+            android:id="@+id/dividerButtons"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="?attr/dashboard_divider"
+            android:background="@color/dashboard_divider_dark"
             android:focusable="false"/>
 
         <include layout="@layout/map_route_prepare_bottom"/>

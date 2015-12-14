@@ -74,7 +74,6 @@ public class Reshaper {
 		}
 
 	}
-	/*
 	public static void main(String[] args) {
 //		char[] c = new char[] {'א', 'ד','ם', ' ', '1', '2'} ;
 //		String reshape = "אדם";
@@ -83,6 +82,16 @@ public class Reshaper {
 		for(int i=0; i < reshape.length(); i++) {
 			System.out.println(reshape.charAt(i));
 		}
-	}*/
+		test2();
+	}
+
+	private static void test2() {
+		String s = "گچ پژ نمکی باللغة العربي";
+		String reshape = reshape(s);
+
+		if (!reshape.equals("ﻲﺑﺮﻌﻟﺍ ﺔﻐﻠﻟﺎﺑ ﯽﮑﻤﻧ ﮋﭘ ﭻﮔ")) {
+			throw new IllegalArgumentException("BUG!!!");
+		}
+	}
 
 }

@@ -44,9 +44,9 @@
 	<string name="speak_traffic_warnings">Перасьцярогі руху</string>
     
     <string name="osb_author_or_password_not_specified">Калі ласка, пазначце карыстальніка OSM і ягоны пароль у наладах</string>
-    <string name="clear_intermediate_points">Ачысьціць прамежкавыя кропкі</string>
-    <string name="keep_intermediate_points">Захаваць прамежкавыя кропкі</string>
-    <string name="new_directions_point_dialog">У вас ужо ёсьць набор прамежкавых кропак.</string>
+    <string name="clear_intermediate_points">Ачысьціць прамежкавыя пункты прызначэньня</string>
+    <string name="keep_intermediate_points">Захаваць прамежкавыя пункты прызначэньня</string>
+    <string name="new_directions_point_dialog">У вас ужо ёсьць набор прамежкавых пунктаў прызначэньня.</string>
     <string name="context_menu_item_directions_to">Маршрут да</string>
     <string name="context_menu_item_directions_from">Маршрут адсюль</string>
     <string name="route_descr_map_location">Мапа: </string>
@@ -65,7 +65,7 @@
     <string name="please_select_address">Абярыце спачатку горад ці вуліцу</string>
     
     <string name="search_street_in_neighborhood_cities">Пошук вуліцы ў суседніх гарадах</string>
-    <string name="intermediate_items_sort_return">Прамежкавыя пункты шляху адсартаваныя аптымальным чынам ад бягучага становішча да месца прызначэньня.</string>
+    <string name="intermediate_items_sort_return">Прамежкавыя пункты прызначэньня адсартаваныя аптымальным чынам ад бягучага становішча да месца прызначэньня.</string>
     <string name="intermediate_items_sort_by_distance">Упарадкаваць ад дзьвярэй да дзьвярэй</string>
     <string name="local_osm_changes_backup_successful">Файл зьмен OSM пасьпяхова створаны ў %1$s</string>
     <string name="local_osm_changes_backup_failed">Збой рэзервовага капіяваньня файлу зьмен OSM</string>
@@ -138,7 +138,7 @@
     <string name="local_indexes_cat_srtm">Ізалініі вышынь</string>
     <string name="local_indexes_cat_av">Аўдыё/відэа зьвесткі</string>
     <string name="stop_routing_confirm">Сапраўды спыніць навігацыю?</string>
-    <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і кропкі шляху)?</string>
+    <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і правежкавыя пункты прызначэньня)?</string>
     <string name="precise_routing_mode_descr">Дазволіць дакладную навігацыю каб шукаць шлях без памылак. Усё яшчэ абмежавана адлегласцю і павольная.</string>
     <string name="precise_routing_mode">Дакладны маршрут (эксп.)</string>
     <string name="recording_context_menu_show">Паказаць</string>
@@ -224,20 +224,20 @@
     
 	<string name="map_widget_monitoring_services">Службы адсочваньня</string>
 	<string name="no_route">Няма маршруту</string>
-	<string name="delete_target_point">Выдаліць шляхавую кропку</string>
-	<string name="target_point">Кропка шляху %1$s</string>
-    <string name="intermediate_point">Кропка шляху %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Дадаць апошняй кропкай шляху</string>
-    <string name="context_menu_item_first_intermediate_point">Дадаць першай кропкай шляху</string>
-    <string name="add_as_last_destination_point">Дадаць апошняй кропкай шляху</string>
-    <string name="add_as_first_destination_point">Дадаць першай кропкай шляху</string>
+	<string name="delete_target_point">Выдаліць пункт прызначэньня</string>
+	<string name="target_point">Пункт прызначэньня %1$s</string>
+    <string name="intermediate_point">Пункт прызначэньня %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Дадаць апошнім пунктам прызначэньня</string>
+    <string name="context_menu_item_first_intermediate_point">Дадаць першым пунктам прызначэньня</string>
+    <string name="add_as_last_destination_point">Дадаць апошнім прамежкавым пунктам прызначэньня</string>
+    <string name="add_as_first_destination_point">Дадаць першым прамежкавым пунктам прызначэньня</string>
     <string name="replace_destination_point">Замяніць пункт прызначэньня</string>
     <string name="new_destination_point_dialog">Вы ўжо абралі пункт прызначэньня.</string>
-    <string name="target_points">Кропкі шляху</string>
-    <string name="intermediate_point_too_far">Кропка %1$s занадта далёка ад бліжэйшай дарогі.</string>
-    <string name="arrived_at_intermediate_point">Вы дасягнулі прамежкавай кропкі</string>
-    <string name="context_menu_item_intermediate_point">Дадаць як кропку шляху</string>
-    <string name="map_widget_intermediate_distance">Кропка шляху</string>
+    <string name="target_points">Пункты прызначэньня</string>
+    <string name="intermediate_point_too_far">Прамежкавы пункт прызначэньня %1$s занадта далёка ад бліжэйшай дарогі.</string>
+    <string name="arrived_at_intermediate_point">Вы дасягнулі прамежкавага пункта прызначэньня</string>
+    <string name="context_menu_item_intermediate_point">Дадаць прамежкавым пунктам прызначэньня</string>
+    <string name="map_widget_intermediate_distance">Прамежкавы пункт прызначэньня</string>
     <string name="ending_point_too_far">Канчатковая кропка занадта далёка ад бліжэйшай дарогі.</string>
     <string name="add_tag">Дадаць адзнаку</string>
     <string name="btn_advanced_mode">Пашыраны рэжым…</string>
@@ -1240,7 +1240,7 @@
     
     <string name="android_19_location_disabled">З версіі 4.4 Android (KitKat) вы ня можаце загружаць і абнаўляць мапу ў папярэднім каталогу захоўваньня (%s). Вы хочаце зьмяніць каталог на дазволены і скапіяваць усе файлы OsmAnd туды?\n Заўвага 1: Вашы старыя файлы застануцца некранутымі (вы можаце выдаліць іх самастойна).         
 \n Заўвага 2: У новым месцы захоўваньня будзе немагчыма адначасова выкарыстоўваць файлы ў OsmAnd і OsmAnd+.</string>
-    <string name="route_is_too_long">Пазасеціўная маршрутызацыя OsmAnd можа заняць вельмі шмат часу (а часам і не спрацаваць) для кропак на адлегласьці больш чым у 200 км адзін ад адной. Вы можаце дадаць прамежкавыя шляхавыя кропкі для падвышэньня прадукцыйнасьці.</string>
+    <string name="route_is_too_long">Пазасеціўная маршрутызацыя OsmAnd можа заняць вельмі шмат часу (а часам і не спрацаваць) для кропак на адлегласьці больш чым у 200 км адзін ад адной. Вы можаце дадаць прамежкавыя пункты прызначэньня для падвышэньня прадукцыйнасьці.</string>
 	
     <string name="app_modes_choose_descr">Выберыце профілі карыстаньня бачныя ў праграме</string>
     <string name="voice_pref_title">Голас</string>
@@ -1391,7 +1391,7 @@
     <string name="delay_navigation_start">Аўтаматычна пачаць навігацыю</string>
     <string name="gpx_info_diff_altitude">Перапад вышынь: %1$s</string>
 	<string name="save_as_favorites_points">Захаваць як групу упадабаных</string>
-    <string name="select_destination_and_intermediate_points">Абраць пункты шляху</string>
+    <string name="select_destination_and_intermediate_points">Выберыце прызначэньне</string>
     <string name="layer_amenity_label">Назвы пунктаў</string>
     <string name="show_zoom_buttons_navigation">Паказваць кнопкі маштабаваньня</string>
     <string name="show_zoom_buttons_navigation_descr">Паказваць кнопкі маштабаваньня падчас навігацыі</string>
@@ -2061,4 +2061,11 @@
     <string name="no_address_found">Адрэса ня вызначаная</string> 
 	<string name="shared_string_near">Недалёка</string>
     <string name="looking_up_address">Пошук адрэсы</string>
-    </resources>
+    <string name="route_distance">Адлегласьць:</string>
+    <string name="route_duration">Час у дарозе:</string>
+    <string name="rendering_attr_horseRoutes_name">Конныя маршруты</string>
+    <string name="update_every">Абнавіць кожны</string>
+    <string name="only_download_over_wifi">Сьцягваць толькі праз WiFi</string>
+    <string name="live_update">Бягучае абнаўленьне</string>
+    <string name="update_now">Абнавіць зараз</string>
+</resources>
