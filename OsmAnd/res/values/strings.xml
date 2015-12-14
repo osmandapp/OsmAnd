@@ -16,6 +16,10 @@
         <item>Once a day</item>
         <item>Weekly</item>
     </string-array>
+    <string-array name="update_times_of_day">
+        <item>Morning</item>
+        <item>Evening</item>
+    </string-array>
     <string name="rendering_attr_horseRoutes_name">Horse routes</string>
     <string name="no_address_found">No address determined</string>
     <string name="shared_string_near">Near</string>

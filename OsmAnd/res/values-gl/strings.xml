@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -178,9 +178,9 @@
 	
 	<string name="rendering_value_brown_name">marrón</string>
 	
-	<string name="color_lightblue">azul claro</string>
 	
-	<string name="color_green">verde</string>
+	
+	
 	
     <string name="osmo_edit_device">Cambiar as propiedades do usuario</string>
     <string name="osmo_edit_color">Cor da pantalla</string>

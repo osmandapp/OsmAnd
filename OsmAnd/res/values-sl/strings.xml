@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -1328,9 +1327,9 @@
     
     <string name="rendering_value_brown_name">rjava</string>
     
-    <string name="color_lightblue">svetlo modra</string>
     
-    <string name="color_green">zelena</string>
+    
+    
 
     <string name="osmo_edit_device">Spremeni nastavitve uporabnika</string>
     <string name="osmo_edit_color">Barva oznake točke:</string>

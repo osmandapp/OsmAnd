@@ -70,9 +70,9 @@
 	
 	<string name="rendering_value_brown_name">brun</string>
 	
-	<string name="color_lightblue">lyseblå</string>
 	
-	<string name="color_green">grøn</string>
+	
+	
 	
     <string name="osmo_edit_device">Endra brukareigenskapar</string>
     <string name="osmo_edit_color">Vis fargar</string>

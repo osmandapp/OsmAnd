@@ -1452,9 +1452,9 @@ POIの更新は利用できません</string>
 	
 	<string name="rendering_value_brown_name">ブラウン</string>
 	
-	<string name="color_lightblue">ライトブルー</string>
 	
-	<string name="color_green">グリーン</string>
+	
+	
 	
     <string name="osmo_edit_device">ユーザープロパティの変更</string>
     <string name="osmo_edit_color">表示色</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="av_locations">Allugamientos</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="av_locations">Allugamientos</string>
     <string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
     <string name="download_live_updates">Anovamientos en direuto</string>

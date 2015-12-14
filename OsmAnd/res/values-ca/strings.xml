@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1251,9 +1250,9 @@
     
     <string name="rendering_value_brown_name">marró</string>
     
-    <string name="color_lightblue">blau clar</string>
     
-    <string name="color_green">verd</string>
+    
+    
     <string name="osmo_edit_device">Canvia les propietats de l\'usuari</string>
     <string name="osmo_edit_color">Mostra el color</string>
     <string name="gpx_file_is_empty">La traça GPX és buida</string>

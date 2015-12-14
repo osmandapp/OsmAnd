@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_my_places">Meus locais</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
@@ -466,9 +465,9 @@
 	
 	<string name="rendering_value_brown_name">marrom</string>
 	
-	<string name="color_lightblue">azul claro</string>
 	
-	<string name="color_green">verde</string>
+	
+	
 	
     <string name="osmo_edit_device">Alterar as propriedades do usuário</string>
     <string name="osmo_edit_color">Mostrar cor</string>

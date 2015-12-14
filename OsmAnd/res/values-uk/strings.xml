@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -1406,9 +1405,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	
 	<string name="rendering_value_brown_name">коричневий</string>
 	
-	<string name="color_lightblue">блакитний</string>
 	
-	<string name="color_green">зелений</string>
+	
+	
 	
     <string name="osmo_edit_device">Змінити властивості користувача</string>
     <string name="osmo_edit_color">Колір</string>
