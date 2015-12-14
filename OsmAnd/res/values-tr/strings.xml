@@ -1992,4 +1992,7 @@
     <string name="update_every">Bütün Güncellemler</string>
     <string name="only_download_over_wifi">Sadece WiFi üzerinden İndir</string>
     <string name="live_update">Canlı güncelleştirme</string>
+<string name="route_distance">Mesafe:</string>
+    <string name="route_duration">Yolculuk süresi:</string>
+    <string name="update_now">Şimdi güncelle</string>
 </resources>

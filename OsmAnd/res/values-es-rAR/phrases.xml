@@ -2564,4 +2564,9 @@
 
 <string name="poi_building_type_pyramid">Pirámide</string>
 
+<string name="poi_fitness_centre">Gimnasio</string>
+	<string name="poi_fitness">Educación física</string>
+
+	<string name="poi_billiards">Billar</string>
+
 </resources>

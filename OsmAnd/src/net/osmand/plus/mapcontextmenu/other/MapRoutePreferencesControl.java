@@ -461,7 +461,7 @@ public class MapRoutePreferencesControl {
 		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
 		selected.add(settings.APPLICATION_MODE.get());
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
-				(ViewGroup) settingsDlg.findViewById(R.id.app_modes), true, new View.OnClickListener() {
+				(ViewGroup) settingsDlg.findViewById(R.id.app_modes), true, false, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (selected.size() > 0) {

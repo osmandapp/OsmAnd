@@ -555,7 +555,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			if (mapLabelToShow != null && !mapLabelToShow.contextMenuDisabled()) {
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setMapPosition(mapView.getMapPosition());
-				mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
+				if (mapLayers.getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
+					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
+					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
+				} else {
+					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
+				}
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),

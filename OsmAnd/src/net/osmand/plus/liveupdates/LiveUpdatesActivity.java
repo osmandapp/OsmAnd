@@ -8,9 +8,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.download.AbstractDownloadActivity;
 
-public class LiveUpdatesActivity extends ActionBarProgressActivity {
+public class LiveUpdatesActivity extends AbstractDownloadActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +18,8 @@ public class LiveUpdatesActivity extends ActionBarProgressActivity {
 		setContentView(R.layout.activity_livie_updates);
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-		String basicTitle = getResources().getString(R.string.tab_title_basic);
-		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
-		final MyAdapter pagerAdapter = new MyAdapter(getSupportFragmentManager());
+		final LiveUpdatesFragmentPagerAdapter pagerAdapter =
+				new LiveUpdatesFragmentPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(pagerAdapter);
 
 		final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -28,11 +27,11 @@ public class LiveUpdatesActivity extends ActionBarProgressActivity {
 		tabLayout.setupWithViewPager(viewPager);
 	}
 
-	public static class MyAdapter extends FragmentPagerAdapter {
+	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
 		private final Fragment[] fragments = new Fragment[]{new LiveUpdatesFragment()};
 		private final String[] titles = new String[]{LiveUpdatesFragment.TITILE};
 
-		public MyAdapter(FragmentManager fm) {
+		public LiveUpdatesFragmentPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
@@ -50,7 +49,5 @@ public class LiveUpdatesActivity extends ActionBarProgressActivity {
 		public CharSequence getPageTitle(int position) {
 			return titles[position];
 		}
-
-
 	}
 }

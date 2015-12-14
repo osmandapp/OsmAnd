@@ -30,7 +30,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoControl;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -583,8 +583,8 @@ public class RouteInfoWidgetsFactory {
 						dist = r.distanceTo;
 					}
 				} else {
-					int di = MapRouteInfoControl.getDirectionInfo();
-					if (di >= 0 && MapRouteInfoControl.isControlVisible()
+					int di = MapRouteInfoMenu.getDirectionInfo();
+					if (di >= 0 && MapRouteInfoMenu.isControlVisible()
 							&& di < rh.getRouteDirections().size()) {
 						RouteDirectionInfo next = rh.getRouteDirections().get(di);
 						if (next != null) {

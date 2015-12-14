@@ -330,7 +330,7 @@ public class ContextMenuAdapter {
 			Integer lid = getLayoutId(position);
 			if (lid == R.layout.mode_toggles) {
 				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-				return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, new View.OnClickListener() {
+				return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, false, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						if (selected.size() > 0) {

@@ -23,6 +23,7 @@ public abstract class MenuTitleController {
 	protected Drawable secondLineTypeIcon;
 	protected String streetStr = "";
 	protected String addressNotKnownStr;
+	protected boolean searchingAddress;
 
 	public abstract MapActivity getMapActivity();
 
@@ -131,6 +132,7 @@ public abstract class MenuTitleController {
 	}
 
 	protected void acquireStreetName() {
+		searchingAddress = true;
 		Location ll = new Location("");
 		ll.setLatitude(getLatLon().getLatitude());
 		ll.setLongitude(getLatLon().getLongitude());
@@ -183,9 +185,10 @@ public abstract class MenuTitleController {
 								nameStr = streetStr;
 								getPointDescription().setName(nameStr);
 							}
+							searchingAddress = false;
 							getMapActivity().runOnUiThread(new Runnable() {
 								public void run() {
-									refreshMenuTitle();
+									onSearchAddressDone();
 								}
 							});
 						}
@@ -195,12 +198,14 @@ public abstract class MenuTitleController {
 
 					@Override
 					public boolean isCancelled() {
+						searchingAddress = false;
 						return false;
 					}
 
 				});
 	}
 
-	protected abstract void refreshMenuTitle();
+	protected void onSearchAddressDone() {
+	}
 
 }

@@ -10,6 +10,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.NonNull;
@@ -294,6 +295,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
 
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+							boolean visit = isPointVisited(o);
+							int col = visit ? visitedColor : o.getColor(fcolor);
+							paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
 							canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 						} else {
 							fullObjects.add(o);

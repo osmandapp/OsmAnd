@@ -1,40 +1,54 @@
 package net.osmand.plus.liveupdates;
 
-
-import android.app.Dialog;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.download.AbstractDownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.util.Algorithms;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class LiveUpdatesFragment extends Fragment {
 	public static final String TITILE = "Live Updates";
+	public static final String LIVE_UPDATES_ON_POSTFIX = "_live_updates_on";
+	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
+		@Override
+		public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
+			return lhs.getName().compareTo(rhs.getName());
+		}
+	};
+	private ExpandableListView listView;
+	private LocalIndexesAdapter adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +59,7 @@ public class LiveUpdatesFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
 
 		final OsmandSettings settings = getMyActivity().getMyApplication().getSettings();
@@ -69,35 +83,227 @@ public class LiveUpdatesFragment extends Fragment {
 		});
 
 		listView.addHeaderView(header);
-		LiveUpdatesAdapter adapter = new LiveUpdatesAdapter(this);
+		adapter = new LocalIndexesAdapter(this);
 		listView.setAdapter(adapter);
-		new LoadLocalIndexTask(adapter, (ActionBarProgressActivity) getActivity()).execute();
+		new LoadLocalIndexTask(adapter, this).execute();
 		return view;
 	}
 
-	private OsmandActionBarActivity getMyActivity() {
-		return (OsmandActionBarActivity) getActivity();
+	private AbstractDownloadActivity getMyActivity() {
+		return (AbstractDownloadActivity) getActivity();
 	}
 
-	private static class LiveUpdatesAdapter extends ArrayAdapter<LocalIndexInfo> {
+	public void notifyLiveUpdatesChanged() {
+		adapter.notifyLiveUpdatesChanged();
+	}
+
+	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
+		final ArrayList<LocalIndexInfo> dataShouldUpdate = new ArrayList<>();
+		final ArrayList<LocalIndexInfo> dataShouldNotUpdate = new ArrayList<>();
 		final LiveUpdatesFragment fragment;
-		public LiveUpdatesAdapter(LiveUpdatesFragment fragment) {
-			super(fragment.getActivity(), R.layout.local_index_list_item, R.id.nameTextView);
+		final Context ctx;
+
+		public LocalIndexesAdapter(LiveUpdatesFragment fragment) {
 			this.fragment = fragment;
+			ctx = fragment.getActivity();
+		}
+
+		public void add(LocalIndexInfo info) {
+			OsmandSettings.CommonPreference<Boolean> preference =
+					preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, info);
+			if (preference.get()) {
+				dataShouldUpdate.add(info);
+			} else {
+				dataShouldNotUpdate.add(info);
+			}
+		}
+
+		public void notifyLiveUpdatesChanged() {
+			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
+				OsmandSettings.CommonPreference<Boolean> preference =
+						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
+				if (!preference.get()) {
+					dataShouldUpdate.remove(localIndexInfo);
+					dataShouldNotUpdate.add(localIndexInfo);
+				}
+			}
+			for (LocalIndexInfo localIndexInfo : dataShouldNotUpdate) {
+				OsmandSettings.CommonPreference<Boolean> preference =
+						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
+				if (preference.get()) {
+					dataShouldUpdate.add(localIndexInfo);
+					dataShouldNotUpdate.remove(localIndexInfo);
+				}
+			}
+			notifyDataSetChanged();
+		}
+
+		public void sort() {
+			Collections.sort(dataShouldUpdate, LOCAL_INDEX_INFO_COMPARATOR);
+			Collections.sort(dataShouldNotUpdate, LOCAL_INDEX_INFO_COMPARATOR);
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = convertView;
-			if (view == null) {
-				LayoutInflater inflater = LayoutInflater.from(getContext());
-				view = inflater.inflate(R.layout.local_index_list_item, parent, false);
-				view.setTag(new LocalFullMapsViewHolder(view, fragment));
+		public LocalIndexInfo getChild(int groupPosition, int childPosition) {
+			if (groupPosition == 0) {
+				return dataShouldUpdate.get(childPosition);
+			} else if (groupPosition == 1) {
+				return dataShouldNotUpdate.get(childPosition);
+			} else {
+				throw new IllegalArgumentException("unexpected group position:" + groupPosition);
 			}
-			LocalFullMapsViewHolder viewHolder = (LocalFullMapsViewHolder) view.getTag();
-			viewHolder.bindLocalIndexInfo(getItem(position));
-			return view;
 		}
+
+		@Override
+		public long getChildId(int groupPosition, int childPosition) {
+			// it would be unusable to have 10000 local indexes
+			return groupPosition * 10000 + childPosition;
+		}
+
+		@Override
+		public View getChildView(final int groupPosition, final int childPosition,
+								 boolean isLastChild, View convertView, ViewGroup parent) {
+			LocalFullMapsViewHolder viewHolder;
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(ctx);
+				convertView = inflater.inflate(R.layout.local_index_list_item, parent, false);
+				viewHolder = new LocalFullMapsViewHolder(convertView, fragment);
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (LocalFullMapsViewHolder) convertView.getTag();
+			}
+			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition));
+			return convertView;
+		}
+
+
+		private String getNameToDisplay(LocalIndexInfo child) {
+			String mapName = FileNameTranslationHelper.getFileName(ctx,
+					fragment.getMyActivity().getMyApplication().getResourceManager().getOsmandRegions(),
+					child.getFileName());
+			return mapName;
+		}
+
+		@Override
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+			View v = convertView;
+			String group = getGroup(groupPosition);
+			if (v == null) {
+				LayoutInflater inflater = LayoutInflater.from(ctx);
+				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
+			}
+			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			nameView.setText(group);
+
+			v.setOnClickListener(null);
+
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = ctx.getTheme();
+			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			v.setBackgroundColor(typedValue.data);
+			return v;
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			if (groupPosition == 0) {
+				return dataShouldUpdate.size();
+			} else if (groupPosition == 1) {
+				return dataShouldNotUpdate.size();
+			} else {
+				throw new IllegalArgumentException("unexpected group position:" + groupPosition);
+			}
+		}
+
+		@Override
+		public String getGroup(int groupPosition) {
+			if (groupPosition == 0) {
+				return "Live updates on";
+			} else if (groupPosition == 1) {
+				return "Love updates off";
+			} else {
+				throw new IllegalArgumentException("unexpected group position:" + groupPosition);
+			}
+		}
+
+		@Override
+		public int getGroupCount() {
+			return 2;
+		}
+
+		@Override
+		public long getGroupId(int groupPosition) {
+			return groupPosition;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return false;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return true;
+		}
+
+		private OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(String idPostfix,
+																				 LocalIndexInfo item) {
+			final OsmandApplication myApplication = fragment.getMyActivity().getMyApplication();
+			final OsmandSettings settings = myApplication.getSettings();
+			final String settingId = item.getFileName() + idPostfix;
+			return settings.registerBooleanPreference(settingId, false);
+		}
+	}
+
+	private void expandAllGroups() {
+		for (int i = 0; i < adapter.getGroupCount(); i++) {
+			listView.expandGroup(i);
+		}
+	}
+
+	void runLiveUpdate(final LocalIndexInfo info) {
+		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
+		new AsyncTask<Object, Object, IncrementalChangesManager.IncrementalUpdateList>() {
+
+			protected void onPreExecute() {
+				getMyActivity().setSupportProgressBarIndeterminateVisibility(true);
+
+			}
+
+			@Override
+			protected IncrementalChangesManager.IncrementalUpdateList doInBackground(Object... params) {
+				final OsmandApplication myApplication = getMyActivity().getMyApplication();
+				IncrementalChangesManager cm = myApplication.getResourceManager().getChangesManager();
+				return cm.getUpdatesByMonth(fnExt);
+			}
+
+			protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
+				getMyActivity().setSupportProgressBarIndeterminateVisibility(false);
+				if (result.errorMessage != null) {
+					Toast.makeText(getActivity(), result.errorMessage, Toast.LENGTH_SHORT).show();
+				} else {
+					List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
+					if (ll.isEmpty()) {
+						Toast.makeText(getActivity(), R.string.no_updates_available, Toast.LENGTH_SHORT).show();
+					} else {
+						int i = 0;
+						IndexItem[] is = new IndexItem[ll.size()];
+						for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
+							IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
+									iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
+							is[i++] = ii;
+						}
+						getMyActivity().startDownload(is);
+					}
+				}
+
+			}
+
+		}.execute(new Object[]{fnExt});
+	}
+
+	LocalIndexInfo getLocalIndexInfo(int groupPosition, int childPosition) {
+		return adapter.getChild(groupPosition, childPosition);
 	}
 
 	private static class LocalFullMapsViewHolder {
@@ -115,7 +321,7 @@ public class LiveUpdatesFragment extends Fragment {
 			this.fragment = context;
 		}
 
-		public void bindLocalIndexInfo(LocalIndexInfo item) {
+		public void bindLocalIndexInfo(final LocalIndexInfo item) {
 			nameTextView.setText(item.getName());
 			descriptionTextView.setText(item.getDescription());
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
@@ -124,7 +330,7 @@ public class LiveUpdatesFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					final FragmentManager fragmentManager = fragment.getChildFragmentManager();
-					new SettingsDialogFragment().show(fragmentManager, "settings");
+					SettingsDialogFragment.createInstance(item).show(fragmentManager, "settings");
 				}
 			});
 		}
@@ -135,18 +341,18 @@ public class LiveUpdatesFragment extends Fragment {
 			implements AbstractLoadLocalIndexTask {
 
 		private List<LocalIndexInfo> result;
-		private ArrayAdapter<LocalIndexInfo> adapter;
-		private ActionBarProgressActivity activity;
+		private LocalIndexesAdapter adapter;
+		private LiveUpdatesFragment fragment;
 
-		public LoadLocalIndexTask(ArrayAdapter<LocalIndexInfo> adapter,
-								  ActionBarProgressActivity activity) {
+		public LoadLocalIndexTask(LocalIndexesAdapter adapter,
+								  LiveUpdatesFragment fragment) {
 			this.adapter = adapter;
-			this.activity = activity;
+			this.fragment = fragment;
 		}
 
 		@Override
 		protected List<LocalIndexInfo> doInBackground(Void... params) {
-			LocalIndexHelper helper = new LocalIndexHelper(activity.getMyApplication());
+			LocalIndexHelper helper = new LocalIndexHelper(fragment.getMyActivity().getMyApplication());
 			return helper.getLocalIndexData(this);
 		}
 
@@ -163,49 +369,13 @@ public class LiveUpdatesFragment extends Fragment {
 				}
 			}
 			adapter.notifyDataSetChanged();
+			fragment.expandAllGroups();
 		}
 
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
-			adapter.sort(new Comparator<LocalIndexInfo>() {
-				@Override
-				public int compare(@NonNull LocalIndexInfo lhs, @NonNull LocalIndexInfo rhs) {
-					return lhs.getName().compareTo(rhs.getName());
-				}
-			});
-		}
-	}
-
-	public static class SettingsDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			View view = LayoutInflater.from(getActivity())
-					.inflate(R.layout.dialog_live_updates_item_settings, null);
-
-			builder.setView(view)
-					.setPositiveButton("SAVE", null)
-					.setNegativeButton("CANCEL", null)
-					.setNeutralButton("UPDATE NOW", null);
-			return builder.create();
-		}
-
-		private void initSwitch(ToggleButton toggleButton, String idPostfix, LocalIndexInfo item) {
-			final OsmandApplication myApplication = ((OsmandActionBarActivity) this.getActivity()).getMyApplication();
-			final OsmandSettings settings = myApplication.getSettings();
-			final String settingId = item.getFileName() + idPostfix;
-			final OsmandSettings.CommonPreference<Boolean> preference =
-					settings.registerBooleanPreference(settingId, false);
-			boolean initialValue = preference.get();
-			toggleButton.setChecked(initialValue);
-			toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					preference.set(isChecked);
-				}
-			});
+			adapter.sort();
 		}
 	}
 }

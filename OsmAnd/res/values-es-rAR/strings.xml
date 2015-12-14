@@ -1992,8 +1992,8 @@
 	<string name="routing_attr_avoid_borders_name">Evitar cruces fronterizos</string>
 	<string name="shared_string_near">Cerca de</string>
     <string name="shared_string_hide">Ocultar</string>
-    <string name="av_video_quality_low">Baja calidad</string>
-    <string name="av_video_quality_high">Alta calidad</string>
+    <string name="av_video_quality_low">Menor calidad</string>
+    <string name="av_video_quality_high">Mayor calidad</string>
     <string name="av_video_quality">Calidad del video</string>
     <string name="av_video_quality_descr">Elige la calidad de salida del video</string>
     <string name="av_audio_format">Formato de audio</string>
@@ -2003,4 +2003,10 @@
     <string name="no_address_found">Dirección indeterminada</string>
 	<string name="looking_up_address">Buscando dirección</string>
     <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
+    <string name="update_every">Actualizar cada</string>
+    <string name="only_download_over_wifi">Descargar sólo por WiFi</string>
+    <string name="live_update">Actualización en vivo</string>
+    <string name="update_now">Actualizar ahora</string>
+<string name="route_distance">Distancia:</string>
+    <string name="route_duration">Duración del viaje:</string>
     </resources>

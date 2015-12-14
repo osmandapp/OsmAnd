@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -56,6 +57,8 @@ public class MapContextMenu extends MenuTitleController {
 	private boolean inLocationUpdate = false;
 
 	private int favActionIconId;
+
+	private MenuAction searchDoneAction;
 
 	@Override
 	public MapActivity getMapActivity() {
@@ -333,10 +336,19 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	@Override
-	public void refreshMenuTitle() {
+	public void onSearchAddressDone() {
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null)
 			fragmentRef.get().refreshTitle();
+
+		if (searchDoneAction != null) {
+			if (searchDoneAction.dlg != null) {
+				searchDoneAction.dlg.dismiss();
+				searchDoneAction.dlg = null;
+			}
+			searchDoneAction.run();
+			searchDoneAction = null;
+		}
 	}
 
 	public WeakReference<MapContextMenuFragment> findMenuFragment() {
@@ -406,8 +418,22 @@ public class MapContextMenu extends MenuTitleController {
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
 		} else {
-			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
-					pointDescription);
+			MenuAction addAsTargetAction = new MenuAction() {
+				@Override
+				public void run() {
+					mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
+							pointDescription);
+				}
+			};
+
+			if (searchingAddress) {
+				addAsTargetAction.dlg = ProgressDialog.show(mapActivity,
+						"",
+						addressNotKnownStr);
+				searchDoneAction = addAsTargetAction;
+			} else {
+				addAsTargetAction.run();
+			}
 		}
 		close();
 	}
@@ -667,5 +693,9 @@ public class MapContextMenu extends MenuTitleController {
 				}
 			}
 		});
+	}
+
+	private abstract class MenuAction implements Runnable {
+		protected ProgressDialog dlg;
 	}
 }

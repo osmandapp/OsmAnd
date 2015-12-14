@@ -41,7 +41,6 @@ import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
@@ -68,7 +67,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-public class DownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
+public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 
 	public static final int UPDATES_TAB_NUMBER = 2;
@@ -98,7 +97,6 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	private String filterGroup;
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
 	private DownloadIndexesThread downloadThread;
-	private DownloadValidationManager downloadValidationManager;
 	protected WorldRegion downloadItem;
 
 	private boolean srtmDisabled;
@@ -110,7 +108,6 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		downloadValidationManager = new DownloadValidationManager(getMyApplication());
 		downloadThread = getMyApplication().getDownloadThread();
 		DownloadResources indexes = getDownloadThread().getIndexes();
 		if (!indexes.isDownloadedFromInternet) {
@@ -163,14 +160,6 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 
 	public DownloadIndexesThread getDownloadThread() {
 		return downloadThread;
-	}
-
-	public void startDownload(IndexItem... indexItem) {
-		downloadValidationManager.startDownload(this, indexItem);
-	}
-
-	public void makeSureUserCancelDownload(IndexItem item) {
-		downloadValidationManager.makeSureUserCancelDownload(this, item);
 	}
 
 	@Override

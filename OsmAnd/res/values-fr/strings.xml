@@ -2073,4 +2073,7 @@
     <string name="only_download_over_wifi">Télécharger uniquement en WIFI</string>
     <string name="live_update">Mise à jour en temps réel</string>
 <string name="rendering_attr_horseRoutes_name">Randonnée à cheval</string>
+    <string name="update_now">Effectuer la mise à jour maintenant</string>
+<string name="route_distance">Distance :</string>
+    <string name="route_duration">Durée du trajet :</string>
     </resources>

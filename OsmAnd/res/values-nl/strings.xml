@@ -2125,4 +2125,7 @@
     <string name="update_every">Update elke</string>
     <string name="only_download_over_wifi">"Alleen downloaden via  WiFi"</string>
     <string name="live_update">Live Update</string>
-</resources>
+<string name="update_now">Nu bijwerken</string>
+<string name="route_distance">Afstand:</string>
+    <string name="route_duration">Reistijd:</string>
+    </resources>
