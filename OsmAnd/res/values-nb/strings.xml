@@ -6,20 +6,20 @@
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
     <string name="map_widget_monitoring_services">Loggingstjenester</string>
     <string name="no_route">Ingen rute</string>
-    <string name="delete_target_point">Fjern rutepunkt</string>
-    <string name="target_point">Rutepunkt %1$s</string>
-    <string name="intermediate_point">Rutepunkt %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Sett som siste rutepunkt</string>
-    <string name="context_menu_item_first_intermediate_point">Sett som første rutepunkt</string>
-    <string name="add_as_last_destination_point">Legg til som siste rutepunkt</string>
-    <string name="add_as_first_destination_point">Legg til som første rutepunkt</string>
+    <string name="delete_target_point">Fjern reisemål</string>
+    <string name="target_point">Reisemål %1$s</string>
+    <string name="intermediate_point">Reisemål %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Legg til som siste mellomliggende reisemål</string>
+    <string name="context_menu_item_first_intermediate_point">Legg til som første mellomliggende reisemål</string>
+    <string name="add_as_last_destination_point">Legg til som siste mellomliggende reisemål</string>
+    <string name="add_as_first_destination_point">Legg til som første mellomliggende reisemål</string>
     <string name="replace_destination_point">Erstatt reisemålpunkt</string>
     <string name="new_destination_point_dialog">Du har allerede satt reisemålpunktet.</string>
-    <string name="target_points">Rutepunkter</string>
-    <string name="intermediate_point_too_far">Rutepunkt %1$s for langt fra nærmeste vei.</string>
-    <string name="arrived_at_intermediate_point">Du har kommet til ditt rutepunkt</string>
-    <string name="context_menu_item_intermediate_point">Legg til som rutepunkt</string>
-    <string name="map_widget_intermediate_distance">Rutepunkt</string>
+    <string name="target_points">Reisemål</string>
+    <string name="intermediate_point_too_far">Mellomliggende reisemål %1$s er for langt fra den nærmeste veien.</string>
+    <string name="arrived_at_intermediate_point">Du har kommet til ditt mellomliggende reisemål</string>
+    <string name="context_menu_item_intermediate_point">Legg til som mellomliggende reisemål</string>
+    <string name="map_widget_intermediate_distance">Mellomliggende reisemål</string>
     <string name="ending_point_too_far">Sluttpunkt for langt fra nærmeste vei.</string>
     <string name="add_tag">Legg til merke</string>
     <string name="btn_advanced_mode">Avansert modus…</string>
@@ -1439,7 +1439,7 @@
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="feedback">Tilbakemelding</string>
     <string name="map_legend">Kartforklaring</string>
-    <string name="please_specify_poi_type_only_from_list">"Spesifiser korrekt interessepunkttype eller hopp over. "</string>
+    <string name="please_specify_poi_type_only_from_list">Spesifiser korrekt interessepunkttype eller hopp over</string>
     <string name="access_from_map_description">Menyknapp viser dashbord, ikke meny</string>
     <string name="access_from_map">Tilgang fra kart</string>
     <string name="show_on_start">Vis ved start</string>
@@ -1478,4 +1478,6 @@
 	<string name="navigation_item_description">Still inn navigering</string>
     <string name="free_downloads_used_description">Viser de benyttede gratis nedlastingene</string>
 
+    <string name="route_distance">Avstand:</string>
+    <string name="route_duration">Reisetid:</string>
     </resources>
