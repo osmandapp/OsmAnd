@@ -2188,4 +2188,5 @@
 <string name="update_now">Opdater nu</string>
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Rejsetid:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">App\'en har ikke tilladelse til at bruge SD-kortet</string>
+</resources>
