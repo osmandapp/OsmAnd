@@ -2068,4 +2068,5 @@
     <string name="only_download_over_wifi">Сьцягваць толькі праз WiFi</string>
     <string name="live_update">Бягучае абнаўленьне</string>
     <string name="update_now">Абнавіць зараз</string>
+<string name="missing_write_external_storage_permission">Праграма не мае дазволу на выкарыстаньне SD карткі</string>
 </resources>
