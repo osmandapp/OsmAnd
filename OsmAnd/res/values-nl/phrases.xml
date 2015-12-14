@@ -650,7 +650,7 @@
 	<string name="poi_buoy_safe_water">Midvaarwaterboei</string>
 	<string name="poi_buoy_special_purpose">Speciale betonning</string>
 	<string name="poi_daymark">Dagmerk</string>
-	<string name="poi_distance_mark">Afstand markering</string>
+	<string name="poi_distance_mark">Afstandsmarkering</string>
 	<string name="poi_dry_dock">Drookdok</string>
 	<string name="poi_floating_dock">Drijvend dok</string>
 	<string name="poi_fog_signal">Misthoorn</string>
@@ -1232,7 +1232,7 @@
 	<string name="poi_enforcement_traffic_signals">Roodlichtcontrole</string>
 	<string name="poi_enforcement_maxspeed">Snelheidscontrole</string>
 	<string name="poi_enforcement_maxheight">Hoogtecontrole</string>
-	<string name="poi_enforcement_mindistance">Afstandecontrole</string>
+	<string name="poi_enforcement_mindistance">Afstandscontrole</string>
 	<string name="poi_enforcement_check">Controlepost</string>
 	<string name="poi_enforcement_access">Toegangscontrole</string>
 	<string name="poi_enforcement_toll">Tolcontrole</string>
