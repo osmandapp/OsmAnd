@@ -1519,11 +1519,11 @@
     <string name="dash_download_manage">Управление</string>
     <string name="map_locale">Език на картата</string>
     <string name="download_tab_downloads">Всички</string>
-    <string name="download_tab_local">Местни</string>
+    <string name="download_tab_local">Свалени</string>
     <string name="no_internet_connection">Свалянето не е възможно, моля проверете Вашата интернет връзка.</string>
     <string name="everything_up_to_date">Всички файлове са актуални</string>
     <string name="use_opengl_render">OpenGL изчертаване</string>
-    <string name="use_opengl_render_descr">Използване на хардуерно ускорено OpenGL изчертаване (може да не работи на някои устройства)</string>
+    <string name="use_opengl_render_descr">Използване на хардуерно ускорено OpenGL изчертаване (възможно е да не работи на някои устройства)</string>
     <string name="error_avoid_specific_road">Няма намерен заобиколен път</string>
     <string name="home_button">Начало</string>
     <string name="osmo_use_https_descr">Използвайте защитена връзка към сървър</string>
