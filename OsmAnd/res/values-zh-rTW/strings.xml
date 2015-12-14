@@ -2035,4 +2035,5 @@
 <string name="update_now">立即更新</string>
 <string name="route_distance">距離：</string>
     <string name="route_duration">行駛時間：</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">應用程式無權限使用 SD 卡</string>
+</resources>
