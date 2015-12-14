@@ -2013,4 +2013,5 @@
     <string name="update_now">Актуализирай сега</string>
 <string name="route_distance">Разстояние:</string>
     <string name="route_duration">Време за пътуване:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">Приложението няма разрешение да използва SD картата</string>
+</resources>
