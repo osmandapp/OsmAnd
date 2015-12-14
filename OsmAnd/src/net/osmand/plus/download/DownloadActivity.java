@@ -1,7 +1,9 @@
 package net.osmand.plus.download;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,9 +11,11 @@ import android.os.StatFs;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.Space;
 import android.text.method.LinkMovementMethod;
@@ -66,13 +70,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents {
+public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
+		ActivityCompat.OnRequestPermissionsResultCallback{
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 
 	public static final int UPDATES_TAB_NUMBER = 2;
 	public static final int LOCAL_TAB_NUMBER = 1;
 	public static final int DOWNLOAD_TAB_NUMBER = 0;
+	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
 
 
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
@@ -583,10 +591,50 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(this);
 		final boolean externalExists =
 				getMyApplication().getSettings().getSecondaryStorage() != null;
-		if (firstTime && externalExists && DataStoragePlaceDialogFragment.isInterestedInFirstTime) {
+		if (firstTime && (externalExists || !hasPermissionToWriteExternalStorage())
+				&& DataStoragePlaceDialogFragment.isInterestedInFirstTime) {
+			if (!hasPermissionToWriteExternalStorage()) {
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+						PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+
+			} else {
+				chooseDataStorage();
+			}
+		}
+	}
+
+	private void chooseDataStorage() {
+		if (getMyApplication().getSettings().getSecondaryStorage() != null) {
 			new DataStoragePlaceDialogFragment().show(getSupportFragmentManager(), null);
 		}
 	}
+
+	private boolean hasPermissionToWriteExternalStorage() {
+		return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				== PackageManager.PERMISSION_GRANTED;
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+				&& grantResults.length > 0
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					chooseDataStorage();
+				}
+			}, 1);
+		} else {
+			AccessibleToast.makeText(this,
+					R.string.missing_write_external_storage_permission,
+					Toast.LENGTH_LONG).show();
+		}
+		return;
+	}
+
 
 	public String getFilterAndClear() {
 		String res = filter;
@@ -785,7 +833,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 									regionCenter.getLongitude(),
 									5,
 									new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION_SHOW_ON_MAP, ""));
-							
+
 							dismiss();
 							MapActivity.launchMapActivityMoveToTop(getActivity());
 						}

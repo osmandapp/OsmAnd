@@ -2116,4 +2116,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="only_download_over_wifi">Only download over WiFi</string>
     <string name="live_update">Live update</string>
     <string name="update_now">Update now</string>
+    <string name="missing_write_external_storage_permission">App have no permission to use SD card</string>
 </resources>
