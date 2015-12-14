@@ -1016,19 +1016,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void takePhoto(final double lat, final double lon, final MapActivity mapActivity) {
-		if (AV_EXTERNAL_PHOTO_CAM.get()) {
-			takePhotoExternal(lat, lon, mapActivity);
+		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA)
+				== PackageManager.PERMISSION_GRANTED) {
+			takePhotoInternalOrExternal(lat, lon, mapActivity);
 		} else {
-			if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA)
-					== PackageManager.PERMISSION_GRANTED) {
-				takePhotoInternalOrExternal(lat, lon, mapActivity);
-			} else {
-				actionLat = lat;
-				actionLon = lon;
-				ActivityCompat.requestPermissions(mapActivity,
-						new String[]{Manifest.permission.CAMERA},
-						CAMERA_FOR_PHOTO_REQUEST_CODE);
-			}
+			actionLat = lat;
+			actionLon = lon;
+			ActivityCompat.requestPermissions(mapActivity,
+					new String[]{Manifest.permission.CAMERA},
+					CAMERA_FOR_PHOTO_REQUEST_CODE);
 		}
 	}
 
