@@ -288,5 +288,7 @@
 				<action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
 			</intent-filter>
 		</receiver>
+        <activity android:name=".liveupdates.LiveUpdatesActivity"/>
+        <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
 </application>
 </manifest> 
