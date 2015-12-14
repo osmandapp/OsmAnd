@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,52 +119,24 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn3), nightMode,
 				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
 
-		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.primary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.primary_text_light));
-		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaView), nightMode);
+		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaSubView), nightMode);
+		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.toTitle), nightMode);
+		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.fromTitle), nightMode);
+		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.InfoTextView), nightMode);
 
-		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.FromLayout), nightMode);
+		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ViaLayout), nightMode);
+		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ToLayout), nightMode);
+		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Info), nightMode);
 
-		((TextView) mainView.findViewById(R.id.fromTitle)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
+		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Next), nightMode);
+		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Prev), nightMode);
 
-		((TextView) mainView.findViewById(R.id.InfoTextView)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
-
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.FromLayout), nightMode,
-				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.ViaLayout), nightMode,
-				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.ToLayout), nightMode,
-				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.Info), nightMode,
-				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
-
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.Next), nightMode,
-				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.Prev), nightMode,
-				R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
-
-		((TextView) mainView.findViewById(R.id.DistanceText)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.primary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.primary_text_light));
-		((TextView) mainView.findViewById(R.id.DistanceTitle)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
-		((TextView) mainView.findViewById(R.id.DurationText)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.primary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.primary_text_light));
-		((TextView) mainView.findViewById(R.id.DurationTitle)).setTextColor(nightMode ?
-				ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_dark)
-				: ContextCompat.getColorStateList(ctx, android.R.color.secondary_text_light));
-
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceText), nightMode);
+		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceTitle), nightMode);
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.DurationText), nightMode);
+		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DurationTitle), nightMode);
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {

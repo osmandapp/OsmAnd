@@ -53,7 +53,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
 							int textColor, boolean isWiki, boolean isText, boolean needLinks,
 							boolean isPhoneNumber, boolean isUrl) {
-		boolean light = app.getSettings().isLightContent();
 
 		if (!isFirstRow()) {
 			buildRowDivider(view, false);

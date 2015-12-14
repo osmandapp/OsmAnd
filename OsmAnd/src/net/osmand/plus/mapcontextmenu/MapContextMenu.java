@@ -644,6 +644,14 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
+	public boolean isNightMode() {
+		if (menuController != null) {
+			return !menuController.isLight();
+		} else {
+			return mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+		}
+	}
+
 	public boolean hasHiddenBottomInfo() {
 		return getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
