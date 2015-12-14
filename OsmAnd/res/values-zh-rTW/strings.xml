@@ -138,7 +138,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">停車地點</string>
-    <string name="osmand_parking_plugin_description">停車位置外掛元件讓您記住停車地點和還剩多少停車時間（如果有時間限制）。\n在地圖螢幕上，位置和時間這兩者均可見於 OsmAnd 儀表板的小工具。警報可以增加到 Android 的日曆作為提醒。</string>
+    <string name="osmand_parking_plugin_description">停車位置外掛元件，讓您記住停車地點和還剩多少停車時間（如果有時間限制）。\n在地圖螢幕上，位置和時間這兩者均可見於 OsmAnd 儀表板的小工具。警報可以增加到 Android 的日曆作為提醒。</string>
     <string name="osmand_parking_plugin_name">停車地點</string>
     <string name="context_menu_item_add_parking_point">標記為停車地點</string>
     <string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -155,7 +155,7 @@
     <string name="rendering_attr_noPolygons_name">隱藏多邊形</string>
     <string name="rendering_attr_appMode_name">繪製模式</string>
     <string name="rendering_attr_appMode_description">為地圖最佳化</string>
-    <string name="rendering_attr_contourLines_description">顯示縮放比級別(需要輪廓資料)：</string>
+    <string name="rendering_attr_contourLines_description">顯示縮放比級別(需要等高線資料)：</string>
     <string name="rendering_attr_contourLines_name">顯示等高線</string>
     <string name="rendering_attr_hmRendered_description">增加地圖顯示詳細的資訊量</string>
     <string name="rendering_attr_hmRendered_name">顯示更多地圖細節</string>
@@ -189,7 +189,7 @@
     <string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網絡（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
+	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網上（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
 \n\n地圖圖磚可以直接透過線上資料來源獲得，或著可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 sqlite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
     <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景模式下(螢幕關閉)顯示設定，以啟用追蹤與導航。</string>
     <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
@@ -336,7 +336,7 @@
 
 
     <string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
-    <string name="download_files_question_space">目前可用空間剩下 {2} MB！ 要下載 {0} 個檔 ({1} MB)？</string>
+    <string name="download_files_question_space">目前可用空間剩下 {2} MB！要下載 {0} 個檔 ({1} MB) 嗎？</string>
 
 
     <string name="use_transparent_map_theme">透明主題</string>
@@ -383,7 +383,7 @@
     <string name="select_search_position">起點：</string>
     <string name="context_menu_item_search">查尋這附近</string>
     <string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
-    <string name="filename_input">檔名： </string>
+    <string name="filename_input">"檔案名稱： "</string>
     <string name="file_with_name_already_exist">已有同檔名存在。</string>
     <string name="local_index_upload_gpx_description">上傳 GPX 到 OSM 社群，這些將有助於改善地圖。</string>
     <string name="local_index_items_uploaded">%2$d 項中的 %1$d 項已上傳成功。</string>
@@ -530,7 +530,7 @@
     <string name="version_index_is_not_supported">這版本的 \'\'{0}\'\' 索引不支援</string>
     <string name="use_osmand_routing_service">OsmAnd 導航 &gt; 20公里</string>
     <string name="use_osmand_routing_service_descr">使用 OsmAnd 離線導航僅適用于路線 &gt; 20 公里(實驗性的)</string>
-    <string name="osmand_routing_experimental">OsmAndd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
+    <string name="osmand_routing_experimental">OsmAnd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
     <string name="application_dir">資料存儲器資料夾</string>
 
@@ -1267,7 +1267,7 @@
     <string name="osmo_auto_send_locations_descr">自動開始追蹤連線階段和發送位置之後啟動應用程式</string>
     <string name="osmo_auto_send_locations">自動開始追蹤連線階段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
-    <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。          使用追蹤 ID 連線的裝置將能夠監控該裝置的所有動作！ 要斷開選擇恢復選項。</string>
+    <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。使用追蹤 ID 連線的裝置將能夠監控該裝置的所有動作！要斷開選擇恢復選項。</string>
     <string name="osmo_session_token">連線階段標記：%1$s</string>
     <string name="osmo_auth_pending">等候授權…</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
