@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.ShareItem;
@@ -39,6 +40,18 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.share_menu_fragment, container, false);
+
+		View mainView = view.findViewById(R.id.main_view);
+		if (menu.isLandscapeLayout()) {
+			AndroidUtils.setBackground(view.getContext(), mainView, !menu.isLight(),
+					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+		} else {
+			AndroidUtils.setBackground(view.getContext(), mainView, !menu.isLight(),
+					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		}
+
+		TextView headerCaption = (TextView) view.findViewById(R.id.header_caption);
+		AndroidUtils.setTextSecondaryColor(view.getContext(), headerCaption, !menu.isLight());
 
 		ListView listView = (ListView) view.findViewById(R.id.list);
 		listAdapter = createAdapter();
@@ -88,11 +101,13 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 				if (v == null) {
 					v = menu.getMapActivity().getLayoutInflater().inflate(R.layout.share_list_item, null);
 				}
+				AndroidUtils.setBackground(v.getContext(), v, !menu.isLight(), R.drawable.expandable_list_item_background_light, R.drawable.expandable_list_item_background_dark);
 				final ShareItem item = getItem(position);
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				icon.setImageDrawable(menu.getMapActivity().getMyApplication()
-						.getIconsCache().getContentIcon(item.getIconResourceId()));
+						.getIconsCache().getContentIcon(item.getIconResourceId(), menu.isLight()));
 				TextView name = (TextView) v.findViewById(R.id.name);
+				AndroidUtils.setTextPrimaryColor(v.getContext(), name, !menu.isLight());
 				name.setText(getContext().getText(item.getTitleResourceId()));
 				return v;
 			}

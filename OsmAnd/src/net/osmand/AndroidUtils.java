@@ -96,4 +96,11 @@ public class AndroidUtils {
 				ctx.getResources().getColor(R.color.secondary_text_dark)
 				: ctx.getResources().getColor(R.color.secondary_text_light));
 	}
+
+	public static void setHintTextSecondaryColor(Context ctx, TextView textView, boolean night) {
+		textView.setHintTextColor(night ?
+				ctx.getResources().getColor(R.color.secondary_text_dark)
+				: ctx.getResources().getColor(R.color.secondary_text_light));
+	}
+
 }

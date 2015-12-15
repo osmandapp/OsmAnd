@@ -50,6 +50,7 @@
         </android.support.v7.widget.Toolbar>
 
         <ScrollView
+            android:id="@+id/editor_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/ctx_menu_info_view_bg"
@@ -211,6 +212,7 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
+                        android:id="@+id/description_info_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:baselineAligned="false"
