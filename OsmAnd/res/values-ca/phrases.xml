@@ -2079,4 +2079,10 @@
 	<string name="poi_wiki_lang_la">Wiki en llatí</string>
 	<string name="poi_wiki_lang_lb">Wiki luxemburguesa</string>
 	<string name="poi_wiki_lang_mk">Wiki macedònica</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilització: egípcia romana i bizantina</string>
+	<string name="poi_historic_civilization_helladic">Civilització: hel·làdica</string>
+	<string name="poi_historic_civilization_cycladic">Civilització: ciclàdica</string>
+	<string name="poi_historic_civilization_minoan">Civilització: minoica</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilització: tiwanaku</string>
+
 	</resources>
