@@ -523,13 +523,21 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private void applyDayNightMode() {
 		if (nightMode) {
-			listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));
-			Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_light));
+			if (listBackgroundView != null) {
+				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));
+			} else {
+				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));
+			}
+			Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_dark));
 			listView.setDivider(d);
 			listView.setDividerHeight(dpToPx(1f));
 		} else {
-			listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_light));
-			Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_dark));
+			if (listBackgroundView != null) {
+				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_light));
+			} else {
+				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_light));
+			}
+			Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_light));
 			listView.setDivider(d);
 			listView.setDividerHeight(dpToPx(1f));
 		}
