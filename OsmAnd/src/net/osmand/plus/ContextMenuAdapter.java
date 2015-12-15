@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -330,7 +331,7 @@ public class ContextMenuAdapter {
 			Integer lid = getLayoutId(position);
 			if (lid == R.layout.mode_toggles) {
 				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-				return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, false, new View.OnClickListener() {
+				return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, true, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						if (selected.size() > 0) {
@@ -348,6 +349,9 @@ public class ContextMenuAdapter {
 				convertView.setTag(lid);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
+			if (!isCategory(position)) {
+				AndroidUtils.setTextPrimaryColor(ctx, tv, !holoLight);
+			}
 			tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
 
 			if (layoutId == R.layout.simple_list_menu_item) {

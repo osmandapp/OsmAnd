@@ -56,6 +56,32 @@ public abstract class PointEditorFragment extends Fragment {
 
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
 
+		getEditor().updateNightMode();
+		if (getEditor().isLandscapeLayout()) {
+			AndroidUtils.setBackground(view.getContext(), view, !getEditor().isLight(),
+					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+		} else {
+			AndroidUtils.setBackground(view.getContext(), view.findViewById(R.id.title_view), !getEditor().isLight(),
+					R.drawable.bg_point_editor_view_light, R.drawable.bg_point_editor_view_dark);
+		}
+
+		View editorScrollView = view.findViewById(R.id.editor_scroll_view);
+		if (editorScrollView != null) {
+			if (getEditor().isLight()) {
+				editorScrollView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_light));
+			} else {
+				editorScrollView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
+			}
+		}
+		View descriptionInfoView = view.findViewById(R.id.description_info_view);
+		if (descriptionInfoView != null) {
+			if (getEditor().isLight()) {
+				descriptionInfoView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_light));
+			} else {
+				descriptionInfoView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
+			}
+		}
+
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
@@ -99,15 +125,21 @@ public abstract class PointEditorFragment extends Fragment {
 		}
 
 		TextView headerCaption = (TextView) view.findViewById(R.id.header_caption);
+		AndroidUtils.setTextPrimaryColor(view.getContext(), headerCaption, !getEditor().isLight());
 		headerCaption.setText(getHeaderCaption());
 		TextView nameCaption = (TextView) view.findViewById(R.id.name_caption);
+		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption, !getEditor().isLight());
 		nameCaption.setText(getNameCaption());
 		TextView categoryCaption = (TextView) view.findViewById(R.id.category_caption);
+		AndroidUtils.setTextSecondaryColor(view.getContext(), categoryCaption, !getEditor().isLight());
 		categoryCaption.setText(getCategoryCaption());
 
 		nameEdit = (EditText) view.findViewById(R.id.name_edit);
+		AndroidUtils.setTextPrimaryColor(view.getContext(), nameEdit, !getEditor().isLight());
+		AndroidUtils.setHintTextSecondaryColor(view.getContext(), nameEdit, !getEditor().isLight());
 		nameEdit.setText(getNameInitValue());
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
+		AndroidUtils.setTextPrimaryColor(view.getContext(), categoryEdit, !getEditor().isLight());
 		categoryEdit.setText(getCategoryInitValue());
 		categoryEdit.setFocusable(false);
 		categoryEdit.setOnTouchListener(new View.OnTouchListener() {
@@ -124,6 +156,8 @@ public abstract class PointEditorFragment extends Fragment {
 		});
 
 		EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
+		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, !getEditor().isLight());
+		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, !getEditor().isLight());
 		if (getDescriptionInitValue() != null) {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
@@ -143,9 +177,8 @@ public abstract class PointEditorFragment extends Fragment {
 
 	public Drawable getRowIcon(int iconId) {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
-		boolean light = getMyApplication().getSettings().isLightContent();
 		return iconsCache.getIcon(iconId,
-				light ? R.color.icon_color : R.color.icon_color_light);
+				getEditor().isLight() ? R.color.icon_color : R.color.icon_color_light);
 	}
 
 	@Override

@@ -3,13 +3,14 @@
              xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="350dp"
              android:layout_height="match_parent"
-             android:background="?attr/left_menu_view_bg">
+             android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/main_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
+        android:background="?attr/left_menu_view_bg"
         android:clickable="true"
         android:orientation="vertical">
 

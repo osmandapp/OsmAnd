@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.data.FavouritePoint;
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
@@ -59,10 +59,12 @@ public class WaypointDialogHelper {
 	}
 
 	public static void updatePointInfoView(final OsmandApplication app, final Activity activity,
-											View localView, final LocationPointWrapper ps, final boolean mapCenter) {
+											View localView, final LocationPointWrapper ps,
+										   final boolean mapCenter, final boolean nightMode) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
+		AndroidUtils.setTextPrimaryColor(activity, text, nightMode);
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		localView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -112,7 +114,7 @@ public class WaypointDialogHelper {
 
 	public ArrayAdapter<Object> getWaypointsDrawerAdapter(
 			final boolean edit, final List<LocationPointWrapper> deletedPoints,
-			final MapActivity ctx, final int[] running, final boolean flat) {
+			final MapActivity ctx, final int[] running, final boolean flat, final boolean nightMode) {
 		final List<Object> points;
 		if(flat) {
 			points = new ArrayList<Object>(waypointHelper.getAllPoints());
@@ -130,12 +132,12 @@ public class WaypointDialogHelper {
 				boolean labelView = (getItem(position) instanceof Integer);
 				if (getItem(position) instanceof RadiusItem) {
 					final int type = ((RadiusItem) getItem(position)).type;
-					v = createItemForRadiusProximity(ctx, type, running, position, thisAdapter);
+					v = createItemForRadiusProximity(ctx, type, running, position, thisAdapter, nightMode);
 				} else if (labelView) {
-					v = createItemForCategory(ctx, (Integer) getItem(position), running, position, thisAdapter);
+					v = createItemForCategory(ctx, (Integer) getItem(position), running, position, thisAdapter, nightMode);
 				} else {
 					LocationPointWrapper point = (LocationPointWrapper) getItem(position);
-					v = updateWaypointItemView(edit, deletedPoints, app, ctx, v, point, this);
+					v = updateWaypointItemView(edit, deletedPoints, app, ctx, v, point, this, nightMode);
 				}
 				return v;
 			}
@@ -148,18 +150,18 @@ public class WaypointDialogHelper {
 	
 	public static View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
 			final OsmandApplication app, final Activity ctx, View v, final LocationPointWrapper point,
-			final ArrayAdapter adapter) {
+			final ArrayAdapter adapter, final boolean nightMode) {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 		}
-		updatePointInfoView(app, ctx, v, point, true);
+		updatePointInfoView(app, ctx, v, point, true, nightMode);
 		View remove = v.findViewById(R.id.info_close);
 		if (!edit) {
 			remove.setVisibility(View.GONE);
 		} else {
 			remove.setVisibility(View.VISIBLE);
 			((ImageButton) remove).setImageDrawable(app.getIconsCache().getContentIcon(
-							R.drawable.ic_action_gremove_dark));
+							R.drawable.ic_action_gremove_dark, !nightMode));
 			remove.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -178,12 +180,13 @@ public class WaypointDialogHelper {
 	
 
 	protected View createItemForRadiusProximity(final FragmentActivity ctx, final int type, final int[] running,
-												final int position, final ArrayAdapter<Object> thisAdapter) {
+												final int position, final ArrayAdapter<Object> thisAdapter, boolean nightMode) {
 		View v;
 		IconsCache iconsCache  = app.getIconsCache();
 		v = ctx.getLayoutInflater().inflate(R.layout.drawer_list_radius, null);
+		AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.title), nightMode);
 		final TextView radius = (TextView) v.findViewById(R.id.description);
-		((ImageView) v.findViewById(R.id.waypoint_icon)).setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_poi_radius_dark));
+		((ImageView) v.findViewById(R.id.waypoint_icon)).setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_poi_radius_dark, !nightMode));
 		radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
 		radius.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -196,7 +199,7 @@ public class WaypointDialogHelper {
 	}
 
 	protected View createItemForCategory(final FragmentActivity ctx, final int type, final int[] running,
-										 final int position, final ArrayAdapter<Object> thisAdapter) {
+										 final int position, final ArrayAdapter<Object> thisAdapter, boolean nightMode) {
 		View v;
 		v = ctx.getLayoutInflater().inflate(R.layout.waypoint_header, null);
 		final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
@@ -222,6 +225,7 @@ public class WaypointDialogHelper {
 		});
 
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
+		AndroidUtils.setTextPrimaryColor(mapActivity, tv, nightMode);
 		tv.setText(getHeader(type, checked, ctx));
 		v.setOnClickListener(new View.OnClickListener() {
 			@Override

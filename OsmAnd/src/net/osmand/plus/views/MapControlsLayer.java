@@ -255,8 +255,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
 		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_myloc_distance), null, null, null);
 		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go));
-		routeGoButton.setTextColor(nightMode ?
-				ContextCompat.getColorStateList(mapActivity, android.R.color.secondary_text_dark) : ContextCompat.getColorStateList(mapActivity, android.R.color.secondary_text_light));
+		AndroidUtils.setTextSecondaryColor(mapActivity, routeGoButton, nightMode);
 		AndroidUtils.setBackground(mapActivity, routeGoButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		routeGoButton.setOnClickListener(new View.OnClickListener() {
 			@Override

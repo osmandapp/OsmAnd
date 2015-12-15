@@ -763,6 +763,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			mapLayers.getMapInfoLayer().recreateControls();
 		}
 		mapLayers.updateLayers(mapView);
+		mapActions.updateDrawerMenu();
 		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
 

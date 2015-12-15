@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,6 +45,13 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		menu = ((MapActivity) getActivity()).getContextMenu().getMultiSelectionMenu();
 
 		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
+		if (menu.isLandscapeLayout()) {
+			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
+					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+		} else {
+			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
+					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		}
 
 		ListView listView = (ListView) view.findViewById(R.id.list);
 		listAdapter = createAdapter();
@@ -134,6 +142,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 
 	private void buildHeader(View view, MenuObject item, MapActivity mapActivity) {
 
+		AndroidUtils.setBackground(mapActivity, view, !menu.isLight(), R.drawable.expandable_list_item_background_light, R.drawable.expandable_list_item_background_dark);
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
@@ -152,10 +161,12 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 
 		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+		AndroidUtils.setTextPrimaryColor(mapActivity, line1, !menu.isLight());
 		line1.setText(item.getTitleStr());
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+		AndroidUtils.setTextSecondaryColor(mapActivity, line2, !menu.isLight());
 		line2.setText(item.getTypeStr());
 		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
