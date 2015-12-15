@@ -21,13 +21,23 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.util.Algorithms;
 
-public class SettingsDialogFragment extends DialogFragment {
-	public static final String LOCAL_INDEX = "local_index";
-	public static final int UPDATE_HOURLY = 0;
-	public static final int UPDATE_DAILY = 1;
-	public static final int UPDATE_WEEKLY = 2;
-	public static final String UPDATE_TIMES = "_update_times";
+import java.io.File;
+import java.util.Calendar;
+
+public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
+	public static final String LOCAL_INDEX_INFO = "local_index_info";
+
+	private static final String LOCAL_INDEX = "local_index";
+	private static final int UPDATE_HOURLY = 0;
+	private static final int UPDATE_DAILY = 1;
+	private static final int UPDATE_WEEKLY = 2;
+	private static final String UPDATE_TIMES = "_update_times";
+	private static final String TIME_OF_DAY_TO_UPDATE = "_time_of_day_to_update";
+	private static final int MORNING_UPDATE_TIME = 8;
+	private static final int NIGHT_UPDATE_TIME = 21;
+	private static final int SHIFT = 1000;
 
 	@NonNull
 	@Override
@@ -43,8 +53,10 @@ public class SettingsDialogFragment extends DialogFragment {
 
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo);
-		final OsmandSettings.CommonPreference<Integer> updateFrequencies =
+		final OsmandSettings.CommonPreference<Integer> updateFrequencePreference =
 				preferenceUpdateTimes(localIndexInfo);
+		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
+				preferenceTimeOfDayToUpdate(localIndexInfo);
 		liveUpdatesSwitch.setChecked(liveUpdatePreference.get());
 
 		builder.setView(view)
@@ -52,25 +64,47 @@ public class SettingsDialogFragment extends DialogFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						final int updateFrequencyInt = updateFrequencySpinner.getSelectedItemPosition();
-						updateFrequencies.set(updateFrequencyInt);
+						updateFrequencePreference.set(updateFrequencyInt);
+						UpdateFrequencies updateFrequency = UpdateFrequencies.values()[updateFrequencyInt];
+
 						AlarmManager alarmMgr = (AlarmManager) getActivity()
 								.getSystemService(Context.ALARM_SERVICE);
-
 						Intent intent = new Intent(getActivity(), LiveUpdatesAlarmReceiver.class);
+						final File file = new File(localIndexInfo.getFileName());
+						final String fileName = Algorithms.getFileNameWithoutExtension(file);
+//						intent.putExtra(LOCAL_INDEX_INFO, fileName);
+						intent.setAction(fileName);
 						PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
 
-						UpdateFrequencies updateFrequency = UpdateFrequencies.values()[updateFrequencyInt];
+						final int timeOfDayInt = updateTimesOfDaySpinner.getSelectedItemPosition();
+						timeOfDayPreference.set(timeOfDayInt);
+						TimesOfDay timeOfDayToUpdate = TimesOfDay.values()[timeOfDayInt];
+						long timeOfFirstUpdate;
+						long updateInterval;
 						switch (updateFrequency) {
 							case HOURLY:
-								alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
-										1000, 60 * 60 * 1000, alarmIntent);
+								timeOfFirstUpdate = System.currentTimeMillis() + SHIFT;
+								updateInterval = AlarmManager.INTERVAL_HOUR;
 								break;
 							case DAILY:
-							case WEEKLY:
-								updateTimesOfDaySpinner.setVisibility(View.VISIBLE);
+								timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
+								updateInterval = AlarmManager.INTERVAL_DAY;
 								break;
+							case WEEKLY:
+								timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
+								updateInterval = AlarmManager.INTERVAL_DAY * 7;
+								break;
+							default:
+								throw new IllegalStateException("Unexpected update frequency:"
+										+ updateFrequency);
 						}
+
 						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+						alarmMgr.cancel(alarmIntent);
+						if (liveUpdatesSwitch.isChecked()) {
+							alarmMgr.setInexactRepeating(AlarmManager.RTC,
+									timeOfFirstUpdate, updateInterval, alarmIntent);
+						}
 						getLiveUpdatesFragment().notifyLiveUpdatesChanged();
 					}
 				})
@@ -82,7 +116,7 @@ public class SettingsDialogFragment extends DialogFragment {
 					}
 				});
 
-		updateFrequencySpinner.setSelection(updateFrequencies.get());
+		updateFrequencySpinner.setSelection(updateFrequencePreference.get());
 		updateFrequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -107,6 +141,18 @@ public class SettingsDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
+	private long getNextUpdateTime(TimesOfDay timeOfDayToUpdate) {
+		Calendar calendar = Calendar.getInstance();
+		if (timeOfDayToUpdate == TimesOfDay.MORNING) {
+			calendar.add(Calendar.DATE, 1);
+			calendar.set(Calendar.HOUR_OF_DAY, MORNING_UPDATE_TIME);
+		} else if (timeOfDayToUpdate == TimesOfDay.NIGHT) {
+			calendar.add(Calendar.DATE, 1);
+			calendar.set(Calendar.HOUR_OF_DAY, NIGHT_UPDATE_TIME);
+		}
+		return calendar.getTimeInMillis();
+	}
+
 	private LiveUpdatesFragment getLiveUpdatesFragment() {
 		return (LiveUpdatesFragment) getParentFragment();
 	}
@@ -121,6 +167,11 @@ public class SettingsDialogFragment extends DialogFragment {
 		return getSettings().registerIntPreference(settingId, UpdateFrequencies.HOURLY.ordinal());
 	}
 
+	private OsmandSettings.CommonPreference<Integer> preferenceTimeOfDayToUpdate(LocalIndexInfo item) {
+		final String settingId = item.getFileName() + TIME_OF_DAY_TO_UPDATE;
+		return getSettings().registerIntPreference(settingId, TimesOfDay.NIGHT.ordinal());
+	}
+
 	private OsmandSettings getSettings() {
 		return getMyApplication().getSettings();
 	}
@@ -129,8 +180,8 @@ public class SettingsDialogFragment extends DialogFragment {
 		return ((OsmandActionBarActivity) this.getActivity()).getMyApplication();
 	}
 
-	public static SettingsDialogFragment createInstance(LocalIndexInfo localIndexInfo) {
-		SettingsDialogFragment fragment = new SettingsDialogFragment();
+	public static LiveUpdatesSettingsDialogFragment createInstance(LocalIndexInfo localIndexInfo) {
+		LiveUpdatesSettingsDialogFragment fragment = new LiveUpdatesSettingsDialogFragment();
 		Bundle args = new Bundle();
 		args.putParcelable(LOCAL_INDEX, localIndexInfo);
 		fragment.setArguments(args);
