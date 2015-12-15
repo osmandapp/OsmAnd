@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
     <string name="av_video_quality_low">Низкое качество</string>
@@ -913,10 +914,10 @@
     <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Вы уже установили пункт назначения.</string>
-    <string name="target_point">Пункт назначения %1$s</string>
+    <string name="target_point">Путевая точка %1$s</string>
     <string name="target_points">Цели</string>
     <string name="intermediate_point">Путевая точка %1$s</string>
-    <string name="delete_target_point">Удалить точку назначения</string>
+    <string name="delete_target_point">Удалить путевую точку</string>
     <string name="map_widget_monitoring_services">Службы мониторинга</string>
     <string name="no_route">Нет маршрута</string>
     <string name="gps_not_available">Включите GPS в настройках</string>
@@ -942,7 +943,7 @@
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="local_indexes_cat_av">Аудио/Видео данные</string>
     <string name="stop_routing_confirm">Вы уверены, что хотите остановить навигацию?</string>
-    <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения?</string>
+    <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения (и путевые точки)?</string>
     <string name="precise_routing_mode">Точный маршрут (alpha)</string>
     <string name="support_new_features_descr">Пожертвуйте, чтобы увидеть новые опции реализованными в приложении</string>
     <string name="precise_routing_mode_descr">Включите, для расчёта точных маршрутов без затруднений. Всё ещё ограниченн расстоянием и медленный.</string>
@@ -998,7 +999,7 @@
     <string name="gpx_file_name">Имя файла GPX</string>
     <string name="gpx_saved_sucessfully">Файл GPX успешно сохранён в {0}</string>
     <string name="osmand_distance_planning_plugin_name">Инструмент расчёта дистанции и планирования</string>
-    <string name="intermediate_items_sort_return">Промежуточные точки выстроены в оптимальный маршрут от текущего местоположения до точки назначения.</string>
+    <string name="intermediate_items_sort_return">Промежуточные путевые точки выстроены в оптимальный маршрут от текущего местоположения до пункта назначения.</string>
     <string name="local_osm_changes_backup_failed">Запись OsmChange-файла не удалась</string>
     <string name="local_osm_changes_backup">Сохранение POI в OsmChange-файл</string>
     <string name="plugin_distance_point_ele">высота</string>
@@ -1032,11 +1033,11 @@
     <string name="speak_cameras">Камеры контроля скорости</string>
     <string name="speak_traffic_warnings">Дорожные предупреждения</string>
     <string name="clear_intermediate_points">Очистить промежуточные точки</string>
-    <string name="keep_intermediate_points">Оставить промежуточные точки</string>
+    <string name="keep_intermediate_points">Оставить промежуточные путевые точки</string>
     <string name="route_to">К:</string>
     <string name="route_via">Через:</string>
     <string name="route_from">Из:</string>
-    <string name="new_directions_point_dialog">У Вас уже установлены промежуточные точки.</string>
+    <string name="new_directions_point_dialog">У Вас уже установлены промежуточные путевые точки.</string>
     <string name="speak_street_names">Названия улиц (TTS)</string>
     <string name="speak_title">Объявлять…</string>
     <string name="speak_descr">Настройка озвучивания названий улиц, предупреждений (лежачих полицейских, знаков \"Движение без остановки запрещено\"), камер контроля скорости, ограничений скорости</string>
@@ -1070,7 +1071,7 @@
     <string name="local_index_tile_data_name">Данные о тайлах: %1$s</string>
     <string name="base_world_map">Обзорная карта мира</string>
     <string name="edit_tilesource_expiration_time">Время действия (в минутах)</string>
-    <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте одну или более промежуточных точек на маршруте.</string>
+    <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте одну или более промежуточных путевых точек на маршруте.</string>
     <string name="app_mode_aircraft">Самолёт</string>
     <string name="app_mode_boat">Лодка</string>
     <string name="app_mode_hiking">Пеший туризм</string>
@@ -1856,4 +1857,13 @@
 <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
+    <string name="route_distance">Расстояние:</string>
+    <string name="route_duration">Время в пути:</string>
+    <string name="access_from_map_description">Кнопка меню открывает домашнюю страницу</string>
+    <string name="access_from_map">Доступ с карты</string>
+    <string name="context_menu_item_delete_waypoint">Удалить точку GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Редактировать точку GPX</string>
+    <string name="routing_attr_avoid_stairs_name">Избегать лестниц</string>
+    <string name="routing_attr_avoid_stairs_description">Избегать лестниц</string>
+    <string name="routing_attr_avoid_borders_name">Избегать пересечение бордюра</string>
     </resources>
