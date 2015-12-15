@@ -782,9 +782,9 @@
     <string name="renderer_load_exception">Възникна грешка: програмата за изчертаване не беше заредена</string>
     <string name="renderers">Векторни програми за изчертаване</string>
     <string name="renderers_descr">Изберете вида на изчертаването</string>
-    <string name="poi_context_menu_website">Покажи уеб сайта посочен в POI</string>
+    <string name="poi_context_menu_website">Отвори уеб сайта посочен в POI</string>
     <string name="poi_context_menu_call">Покажи телефона в POI</string>
-    <string name="download_type_to_filter">въведете за филтриране</string>
+    <string name="download_type_to_filter">въведете за филтър</string>
     <string name="use_high_res_maps">Висока резолюция</string>
     <string name="use_high_res_maps_descr">Да не се разтягат (съответно замъгляват) картите на HD екрани</string>
 
@@ -2012,4 +2012,5 @@
     <string name="update_now">Актуализирай сега</string>
 <string name="route_distance">Разстояние:</string>
     <string name="route_duration">Време за пътуване:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">Приложението няма разрешение да използва SD картата</string>
+</resources>

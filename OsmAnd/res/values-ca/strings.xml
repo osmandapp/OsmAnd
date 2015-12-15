@@ -1879,6 +1879,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="only_download_over_wifi">Baixades només amb WIFI</string>
     <string name="live_update">Actualitza al moment</string>
     <string name="update_now">Actualitza ara</string>
-<string name="route_distance">Distància:</string>
+ 	<string name="route_distance">Distància:</string>
     <string name="route_duration">Durada del viatge:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">L\'aplicació no té autorització per utilitzar la memòria SD</string>
+</resources>

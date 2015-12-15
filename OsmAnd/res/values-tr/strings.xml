@@ -1994,4 +1994,5 @@
 <string name="route_distance">Mesafe:</string>
     <string name="route_duration">Yolculuk süresi:</string>
     <string name="update_now">Şimdi güncelle</string>
+<string name="missing_write_external_storage_permission">App var SD kart kullanma iznine</string>
 </resources>

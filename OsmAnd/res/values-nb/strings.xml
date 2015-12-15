@@ -1,24 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
     <string name="map_widget_monitoring_services">Loggingstjenester</string>
     <string name="no_route">Ingen rute</string>
-    <string name="delete_target_point">Fjern rutepunkt</string>
-    <string name="target_point">Rutepunkt %1$s</string>
-    <string name="intermediate_point">Rutepunkt %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Sett som siste rutepunkt</string>
-    <string name="context_menu_item_first_intermediate_point">Sett som første rutepunkt</string>
-    <string name="add_as_last_destination_point">Legg til som siste rutepunkt</string>
-    <string name="add_as_first_destination_point">Legg til som første rutepunkt</string>
+    <string name="delete_target_point">Fjern reisemål</string>
+    <string name="target_point">Reisemål %1$s</string>
+    <string name="intermediate_point">Reisemål %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Legg til som siste mellomliggende reisemål</string>
+    <string name="context_menu_item_first_intermediate_point">Legg til som første mellomliggende reisemål</string>
+    <string name="add_as_last_destination_point">Legg til som siste mellomliggende reisemål</string>
+    <string name="add_as_first_destination_point">Legg til som første mellomliggende reisemål</string>
     <string name="replace_destination_point">Erstatt reisemålpunkt</string>
     <string name="new_destination_point_dialog">Du har allerede satt reisemålpunktet.</string>
-    <string name="target_points">Rutepunkter</string>
-    <string name="intermediate_point_too_far">Rutepunkt %1$s for langt fra nærmeste vei.</string>
-    <string name="arrived_at_intermediate_point">Du har kommet til ditt rutepunkt</string>
-    <string name="context_menu_item_intermediate_point">Legg til som rutepunkt</string>
-    <string name="map_widget_intermediate_distance">Rutepunkt</string>
+    <string name="target_points">Reisemål</string>
+    <string name="intermediate_point_too_far">Mellomliggende reisemål %1$s er for langt fra den nærmeste veien.</string>
+    <string name="arrived_at_intermediate_point">Du har kommet til ditt mellomliggende reisemål</string>
+    <string name="context_menu_item_intermediate_point">Legg til som mellomliggende reisemål</string>
+    <string name="map_widget_intermediate_distance">Mellomliggende reisemål</string>
     <string name="ending_point_too_far">Sluttpunkt for langt fra nærmeste vei.</string>
     <string name="add_tag">Legg til merke</string>
     <string name="btn_advanced_mode">Avansert modus…</string>
@@ -596,9 +597,9 @@
     <string name="speak_traffic_warnings">Trafikkvarsler</string>
 
     <string name="osb_author_or_password_not_specified">Oppgi OSM brukernavn og passord i Innstillinger</string>
-    <string name="clear_intermediate_points">Slett mellomliggende rutepunkter</string>
-    <string name="keep_intermediate_points">Behold mellomliggende rutepunkter</string>
-    <string name="new_directions_point_dialog">Mellomliggende rutepunkter er allerede angitt.</string>
+    <string name="clear_intermediate_points">Slett mellomliggende reisemål</string>
+    <string name="keep_intermediate_points">Behold mellomliggende reisemål</string>
+    <string name="new_directions_point_dialog">Mellomliggende reisemål er allerede angitt.</string>
     <string name="context_menu_item_directions_to">Anvisninger til</string>
     <string name="context_menu_item_directions_from">Anvisninger fra</string>
     <string name="route_descr_map_location">Kart: </string>
@@ -627,7 +628,7 @@
     <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
     <string name="edit_tilesource_name">Navn</string>
     <string name="maps_define_edit">Definer/rediger…</string>
-    <string name="route_is_too_long">OsmAnd offline ruteplanlegging kan ta veldig lang tid (eller ikke virke noen ganger) for punkter mere enn 200km fra hverandre. Man kan da legge til mellomliggende rutepunkter for bedre ytelse.</string>
+    <string name="route_is_too_long">OsmAnd offline ruteplanlegging kan ta veldig lang tid (eller ikke virke noen ganger) for punkter mere enn 200km fra hverandre. Man kan da legge til mellomliggende reisemål for bedre ytelse.</string>
     <string name="auto_zoom_none">Ingen auto-zoom</string>
     <string name="auto_zoom_close">Nært hold</string>
     <string name="auto_zoom_far">Middels hold</string>
@@ -791,7 +792,7 @@
     <string name="rendering_attr_showAccess_name">Vis adgangsrestriksjoner</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis veikvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis veidekke</string>
-    <string name="select_destination_and_intermediate_points">Velg rutepunkter</string>
+    <string name="select_destination_and_intermediate_points">Velg reisemål</string>
     <string name="layer_amenity_label">Punktnavn</string>
     <string name="gpx_wpt">Rutepunkt</string>
     <string name="voice_pref_title">Tale</string>
@@ -826,7 +827,7 @@
     <string name="clear_destination">Slett reisemål</string>
     <string name="street_name">Gatenavn</string>
     <string name="choose_osmand_theme">Tema</string>
-    <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemålpunktet (og rutepunkter)?</string>
+    <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemålpunktet (og mellomliggende reisemål)?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
     <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
     <string name="safe_mode">Sikker modus</string>
@@ -1438,7 +1439,7 @@
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="feedback">Tilbakemelding</string>
     <string name="map_legend">Kartforklaring</string>
-    <string name="please_specify_poi_type_only_from_list">"Spesifiser korrekt interessepunkttype eller hopp over. "</string>
+    <string name="please_specify_poi_type_only_from_list">Spesifiser korrekt interessepunkttype eller hopp over</string>
     <string name="access_from_map_description">Menyknapp viser dashbord, ikke meny</string>
     <string name="access_from_map">Tilgang fra kart</string>
     <string name="show_on_start">Vis ved start</string>
@@ -1477,4 +1478,6 @@
 	<string name="navigation_item_description">Still inn navigering</string>
     <string name="free_downloads_used_description">Viser de benyttede gratis nedlastingene</string>
 
+    <string name="route_distance">Avstand:</string>
+    <string name="route_duration">Reisetid:</string>
     </resources>

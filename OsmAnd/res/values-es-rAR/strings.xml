@@ -2007,5 +2007,6 @@
     <string name="live_update">Actualización en vivo</string>
     <string name="update_now">Actualizar ahora</string>
 <string name="route_distance">Distancia:</string>
-    <string name="route_duration">Duración del viaje:</string>
-    </resources>
+    <string name="route_duration">Duración:</string>
+    <string name="missing_write_external_storage_permission">La aplicación no tiene permiso para usar la tarjeta SD</string>
+</resources>

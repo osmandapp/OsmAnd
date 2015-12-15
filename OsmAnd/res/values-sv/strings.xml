@@ -2035,4 +2035,5 @@
 <string name="update_now">Uppdatera nu</string>
 <string name="route_distance">Avstånd:</string>
     <string name="route_duration">Restid:</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">Appen har inte tillåtelse att använda SD-kortet</string>
+</resources>

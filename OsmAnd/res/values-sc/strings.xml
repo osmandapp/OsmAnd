@@ -2045,4 +2045,5 @@
     <string name="only_download_over_wifi">Iscàrriga petzi pro mèdiu de una retza WiFi</string>
     <string name="live_update">Agiornamentos in tempus reale</string>
     <string name="update_now">Agiorna como</string>
+<string name="missing_write_external_storage_permission">S’aplicatzione no est autorizada a impreare s’ischeda SD</string>
 </resources>

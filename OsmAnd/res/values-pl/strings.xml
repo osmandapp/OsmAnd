@@ -2087,4 +2087,5 @@
     <string name="route_distance">Odległość:</string>
     <string name="route_duration">Czas podróży:</string>
     <string name="looking_up_address">Wyszukiwanie adresu</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">Aplikacja nie posiada uprawnień do użycia karty SD</string>
+</resources>
