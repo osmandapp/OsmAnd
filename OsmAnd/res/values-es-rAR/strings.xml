@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -2009,4 +2010,7 @@
 <string name="route_distance">Distancia:</string>
     <string name="route_duration">Duración:</string>
     <string name="missing_write_external_storage_permission">La aplicación no tiene permiso para usar la tarjeta SD</string>
-</resources>
+<string name="no_location_permission">La aplicación no tiene permiso para acceder a los datos de ubicación.</string>
+    <string name="no_camera_permission">La aplicación no tiene permiso para acceder a la cámara.</string>
+    <string name="no_microphone_permission">La aplicación no tiene permiso para acceder al micrófono.</string>
+    </resources>
