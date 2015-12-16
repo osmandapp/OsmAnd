@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -1324,7 +1323,7 @@
     
     <string name="rendering_value_brown_name">marrón</string>
     
-    <string name="color_lightblue">azul claro</string>
+    
     
     <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
     <string name="osmo_edit_color">Mostrar color</string>

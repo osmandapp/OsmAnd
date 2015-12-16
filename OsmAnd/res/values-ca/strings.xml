@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1251,9 +1250,9 @@
     
     <string name="rendering_value_brown_name">marró</string>
     
-    <string name="color_lightblue">blau clar</string>
     
-    <string name="color_green">verd</string>
+    
+    
     <string name="osmo_edit_device">Canvia les propietats de l\'usuari</string>
     <string name="osmo_edit_color">Mostra el color</string>
     <string name="gpx_file_is_empty">La traça GPX és buida</string>
@@ -1880,7 +1879,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="only_download_over_wifi">Baixades només amb WIFI</string>
     <string name="live_update">Actualitza al moment</string>
     <string name="update_now">Actualitza ara</string>
-<string name="route_distance">Distància:</string>
+ 	<string name="route_distance">Distància:</string>
     <string name="route_duration">Durada del viatge:</string>
     <string name="missing_write_external_storage_permission">L\'aplicació no té autorització per utilitzar la memòria SD</string>
 </resources>

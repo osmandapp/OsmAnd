@@ -1163,8 +1163,8 @@
 	<string name="poi_trade_tile">Tile supplies</string>
 
 	<string name="poi_population">Population</string>
-	<string name="poi_parking_underground">Underground</string>
-	<string name="poi_parking_multi_storey">Multi-storey</string>
+	<string name="poi_parking_underground">Type: underground</string>
+	<string name="poi_parking_multi_storey">Type: multi-storey</string>
 
 	<string name="poi_bicycle_parking_anchors">Anchors</string>
 	<string name="poi_bicycle_parking_stands">Stands</string>
@@ -2538,5 +2538,16 @@
 	<string name="poi_fitness">Fitness</string>
 
 	<string name="poi_billiards">Billiards</string>
+
+	<string name="poi_microwave_oven_yes">Microwave oven: yes</string>
+	<string name="poi_microwave_oven_no">Microwave oven: no</string>
+	<string name="poi_water_heater_yes">Water heater: yes</string>
+	<string name="poi_water_heater_no">Water heater: no</string>
+
+	<string name="poi_parking_surface">Type: surface</string>
+	<string name="poi_parking_garage_boxes">Type: garage boxes</string>
+	<string name="poi_parking_carports">Type: carports</string>
+
+	<string name="poi_dojo">Dojo</string>
 
 </resources>

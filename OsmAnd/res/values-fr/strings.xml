@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -1384,7 +1383,7 @@
     
     <string name="rendering_value_brown_name">Brun</string>
     
-    <string name="color_lightblue">Bleu clair</string>
+    
     
 
 

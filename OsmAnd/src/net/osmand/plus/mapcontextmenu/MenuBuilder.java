@@ -34,7 +34,7 @@ public class MenuBuilder {
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	private boolean firstRow;
-	private boolean light;
+	protected boolean light;
 
 	public class PlainMenuItem {
 		private int iconId;
@@ -64,6 +64,10 @@ public class MenuBuilder {
 		this.app = app;
 		plainMenuItems = new LinkedList<>();
 		light = app.getSettings().isLightContent();
+	}
+
+	public void setLight(boolean light) {
+		this.light = light;
 	}
 
 	public void build(View view) {

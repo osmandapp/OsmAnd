@@ -382,7 +382,6 @@
 	<string name="poi_studio">Студия звукозаписи, телестудия</string>
 	<string name="poi_bookmaker">Букмекерская контора</string>
 	<string name="poi_office_religion">Офис религиозной организации</string>
-	<string name="poi_association">Офис общества, ассоциации</string>
 	<string name="poi_financial">Финансовая контора</string>
 	<string name="poi_political_party">Офис политической партии</string>
 	<string name="poi_notary">Нотариус</string>
@@ -918,8 +917,8 @@
 	<string name="poi_wheelchair_no">Недоступно для инвалидных кресел</string>
 	<string name="poi_wheelchair_limited">Инвалидные кресла: ограничено</string>
 	<string name="poi_wholesale">Опт</string>
-	<string name="poi_parking_underground">Подземный(ая)</string>
-	<string name="poi_parking_multi_storey">Многоэтажный(ая)</string>
+	<string name="poi_parking_underground">Тип: подземная</string>
+	<string name="poi_parking_multi_storey">Тип: многоэтажная</string>
 
 	<string name="poi_bicycle_parking_anchors">Закреплённое кольцо</string>
 	<string name="poi_bicycle_parking_stands">Стойка</string>
@@ -1122,7 +1121,7 @@
 	<string name="poi_farmland">Сельскохозяйственные угодья</string>
 	<string name="poi_logging">Вырубка</string>
 	<string name="poi_sand">Песок</string>
-	<string name="poi_village_green">Общественная территория в центре населённого пункта</string>
+	<string name="poi_village_green">Общественная территория</string>
 	<string name="poi_brownfield">Земли под застройку (использованные ранее)</string>
 	<string name="poi_greenfield">Земли под застройку</string>
 	<string name="poi_bunker_silo">Сооружение для хранения силоса</string>
@@ -2544,5 +2543,16 @@
 	<string name="poi_fitness">Фитнес</string>
 
 	<string name="poi_billiards">Бильярд</string>
+
+	<string name="poi_microwave_oven_yes">Микроволновая печь: присутствует</string>
+	<string name="poi_microwave_oven_no">Микроволновая печь: отсутствует</string>
+	<string name="poi_water_heater_yes">Водонагреватель: присутствует</string>
+	<string name="poi_water_heater_no">Водонагреватель: отсутствует</string>
+
+	<string name="poi_parking_surface">Тип: на поверхности</string>
+	<string name="poi_parking_garage_boxes">Тип: гаражи</string>
+	<string name="poi_parking_carports">Тип: навес</string>
+
+	<string name="poi_dojo">Додзё</string>
 
 </resources>

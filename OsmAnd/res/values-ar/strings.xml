@@ -1148,9 +1148,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	
 	<string name="rendering_value_brown_name">بني</string>
 	
-	<string name="color_lightblue">أزرق فاتح</string>
 	
-	<string name="color_green">أخضر</string>
+	
+	
 	
     <string name="osmo_share_current_session">شارك الجلسة الحالية في المتصفح</string>
     <string name="hours_ago">ساعة</string>

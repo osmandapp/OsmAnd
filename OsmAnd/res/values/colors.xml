@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="primary_text_light">#de000000</color>
+	<color name="secondary_text_light">#8a000000</color>
+	<color name="primary_text_dark">#ffffffff</color>
+	<color name="secondary_text_dark">#b3ffffff</color>
+
 	<color name="audio_video_icon_color">#128a89</color>
     <color name="created_poi_icon_color">#4caf50</color>
     <color name="osm_bug_unresolved_icon_color">#d44a4a</color>

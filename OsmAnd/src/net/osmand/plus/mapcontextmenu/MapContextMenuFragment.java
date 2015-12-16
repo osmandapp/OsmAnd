@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -90,6 +91,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int origMarkerY;
 	private boolean customMapCenter;
 	private boolean moving;
+	private boolean nightMode;
 
 	private float skipHalfScreenStateLimit;
 
@@ -149,6 +151,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (!menu.isActive()) {
 			return view;
 		}
+		nightMode = menu.isNightMode();
 		mainView = view.findViewById(R.id.context_menu_main);
 
 		leftTitleButtonController = menu.getLeftTitleButtonController();
@@ -173,7 +176,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 
 		IconsCache iconsCache = getMyApplication().getIconsCache();
-		boolean light = getMyApplication().getSettings().isLightContent();
 
 		// Left title button
 		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
@@ -212,7 +214,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (titleProgressController != null) {
 			final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
 			progressButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
-					light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 			progressButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -333,6 +335,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		View topShadowView = view.findViewById(R.id.context_menu_top_shadow);
 		topShadowView.setOnTouchListener(slideTouchListener);
 		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
+		AndroidUtils.setBackground(getMapActivity(), topShadowAllView, nightMode, R.drawable.bg_map_context_menu_light,
+				R.drawable.bg_map_context_menu_dark);
 		topShadowAllView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -344,6 +348,25 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		buildHeader();
+
+		AndroidUtils.setTextPrimaryColor(getMapActivity(),
+				(TextView) view.findViewById(R.id.context_menu_line1), nightMode);
+		AndroidUtils.setTextSecondaryColor(getMapActivity(),
+				(TextView) view.findViewById(R.id.context_menu_line2), nightMode);
+		((Button) view.findViewById(R.id.title_button_top_right))
+				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
+		AndroidUtils.setTextSecondaryColor(getMapActivity(),
+				(TextView) view.findViewById(R.id.distance), nightMode);
+
+		((Button) view.findViewById(R.id.title_button))
+				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
+		AndroidUtils.setTextSecondaryColor(getMapActivity(),
+				(TextView) view.findViewById(R.id.title_button_right_text), nightMode);
+		((Button) view.findViewById(R.id.title_button_right))
+				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
+
+		AndroidUtils.setTextSecondaryColor(getMapActivity(),
+				(TextView) view.findViewById(R.id.progressTitle), nightMode);
 
 		// FAB
 		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
@@ -363,17 +386,27 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			fabView.setVisibility(View.GONE);
 		}
 
+		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
+		AndroidUtils.setBackground(getMapActivity(), buttonsTopBorder, nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
 		if (!menu.buttonsVisible()) {
-			View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
 			View buttons = view.findViewById(R.id.context_menu_buttons);
 			buttonsTopBorder.setVisibility(View.GONE);
 			buttons.setVisibility(View.GONE);
 		}
 
+		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_1), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_2), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(getMapActivity(), mainView.findViewById(R.id.divider_hor_3), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+
 		// Action buttons
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
 		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
-				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonFavorite, nightMode);
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -383,7 +416,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_flag_dark,
-				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonWaypoint, nightMode);
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -393,7 +427,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
 		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_gshare_dark,
-				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonShare, nightMode);
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -403,7 +438,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
 		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.map_overflow_menu_white,
-				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonMore, nightMode);
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -412,6 +448,11 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		buildBottomView();
+
+		view.findViewById(R.id.context_menu_bottom_scroll).setBackgroundColor(nightMode ?
+				getResources().getColor(R.color.ctx_menu_info_view_bg_dark) : getResources().getColor(R.color.ctx_menu_info_view_bg_light));
+		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(nightMode ?
+				getResources().getColor(R.color.ctx_menu_info_view_bg_dark) : getResources().getColor(R.color.ctx_menu_info_view_bg_light));
 
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
@@ -606,7 +647,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private void buildHeader() {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
-		boolean light = getMyApplication().getSettings().isLightContent();
 
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
@@ -617,7 +657,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			iconLayout.setVisibility(View.VISIBLE);
 		} else if (iconId != 0) {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
+					!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
 			iconLayout.setVisibility(View.VISIBLE);
 		} else {
 			iconLayout.setVisibility(View.GONE);
@@ -669,10 +709,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public void rebuildMenu() {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
-		boolean light = getMyApplication().getSettings().isLightContent();
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
 		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
-				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 
 		buildHeader();
 

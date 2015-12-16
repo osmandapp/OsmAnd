@@ -895,9 +895,9 @@
     
     <string name="rendering_value_brown_name">brun</string>
     
-    <string name="color_lightblue">lyseblå</string>
     
-    <string name="color_green">grønn</string>
+    
+    
 
     <string name="osmo_group_info">Info</string>
     <string name="osmo_track_interval">Loggeintervall</string>

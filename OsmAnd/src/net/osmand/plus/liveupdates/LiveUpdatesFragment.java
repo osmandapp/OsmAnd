@@ -36,7 +36,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LiveUpdatesFragment extends Fragment {
 	public static final String TITILE = "Live Updates";
@@ -119,22 +121,26 @@ public class LiveUpdatesFragment extends Fragment {
 		}
 
 		public void notifyLiveUpdatesChanged() {
+			Set<LocalIndexInfo> changedSet = new HashSet<>();
 			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
 						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
 				if (!preference.get()) {
-					dataShouldUpdate.remove(localIndexInfo);
-					dataShouldNotUpdate.add(localIndexInfo);
+					changedSet.add(localIndexInfo);
 				}
 			}
+			dataShouldUpdate.removeAll(changedSet);
+			dataShouldNotUpdate.addAll(changedSet);
+			changedSet.clear();
 			for (LocalIndexInfo localIndexInfo : dataShouldNotUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
 						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
 				if (preference.get()) {
-					dataShouldUpdate.add(localIndexInfo);
-					dataShouldNotUpdate.remove(localIndexInfo);
+					changedSet.add(localIndexInfo);
 				}
 			}
+			dataShouldUpdate.addAll(changedSet);
+			dataShouldNotUpdate.removeAll(changedSet);
 			notifyDataSetChanged();
 		}
 
@@ -263,43 +269,7 @@ public class LiveUpdatesFragment extends Fragment {
 
 	void runLiveUpdate(final LocalIndexInfo info) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new AsyncTask<Object, Object, IncrementalChangesManager.IncrementalUpdateList>() {
-
-			protected void onPreExecute() {
-				getMyActivity().setSupportProgressBarIndeterminateVisibility(true);
-
-			}
-
-			@Override
-			protected IncrementalChangesManager.IncrementalUpdateList doInBackground(Object... params) {
-				final OsmandApplication myApplication = getMyActivity().getMyApplication();
-				IncrementalChangesManager cm = myApplication.getResourceManager().getChangesManager();
-				return cm.getUpdatesByMonth(fnExt);
-			}
-
-			protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
-				getMyActivity().setSupportProgressBarIndeterminateVisibility(false);
-				if (result.errorMessage != null) {
-					Toast.makeText(getActivity(), result.errorMessage, Toast.LENGTH_SHORT).show();
-				} else {
-					List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
-					if (ll.isEmpty()) {
-						Toast.makeText(getActivity(), R.string.no_updates_available, Toast.LENGTH_SHORT).show();
-					} else {
-						int i = 0;
-						IndexItem[] is = new IndexItem[ll.size()];
-						for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
-							IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
-									iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
-							is[i++] = ii;
-						}
-						getMyActivity().startDownload(is);
-					}
-				}
-
-			}
-
-		}.execute(new Object[]{fnExt});
+		new PerformLiveUpdateAsyncTask(getMyActivity()).execute(new String[]{fnExt});
 	}
 
 	LocalIndexInfo getLocalIndexInfo(int groupPosition, int childPosition) {
@@ -330,7 +300,7 @@ public class LiveUpdatesFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					final FragmentManager fragmentManager = fragment.getChildFragmentManager();
-					SettingsDialogFragment.createInstance(item).show(fragmentManager, "settings");
+					LiveUpdatesSettingsDialogFragment.createInstance(item).show(fragmentManager, "settings");
 				}
 			});
 		}
@@ -376,6 +346,48 @@ public class LiveUpdatesFragment extends Fragment {
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
 			adapter.sort();
+		}
+	}
+
+	public static class PerformLiveUpdateAsyncTask
+			extends AsyncTask<String, Object, IncrementalChangesManager.IncrementalUpdateList> {
+		private final AbstractDownloadActivity activity;
+
+		public PerformLiveUpdateAsyncTask(AbstractDownloadActivity activity) {
+			this.activity = activity;
+		}
+
+		protected void onPreExecute() {
+			activity.setSupportProgressBarIndeterminateVisibility(true);
+
+		}
+
+		@Override
+		protected IncrementalChangesManager.IncrementalUpdateList doInBackground(String... params) {
+			final OsmandApplication myApplication = activity.getMyApplication();
+			IncrementalChangesManager cm = myApplication.getResourceManager().getChangesManager();
+			return cm.getUpdatesByMonth(params[0]);
+		}
+
+		protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
+			activity.setSupportProgressBarIndeterminateVisibility(false);
+			if (result.errorMessage != null) {
+				Toast.makeText(activity, result.errorMessage, Toast.LENGTH_SHORT).show();
+			} else {
+				List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
+				if (ll.isEmpty()) {
+					Toast.makeText(activity, R.string.no_updates_available, Toast.LENGTH_SHORT).show();
+				} else {
+					int i = 0;
+					IndexItem[] is = new IndexItem[ll.size()];
+					for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
+						IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
+								iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
+						is[i++] = ii;
+					}
+					activity.startDownload(is);
+				}
+			}
 		}
 	}
 }

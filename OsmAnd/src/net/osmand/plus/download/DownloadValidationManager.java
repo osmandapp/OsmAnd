@@ -39,15 +39,15 @@ public class DownloadValidationManager {
 		return downloadThread;
 	}
 
-	public void startDownload(FragmentActivity activity, IndexItem... items) {
-		downloadFilesWithAllChecks(activity, items);
+	public void startDownload(Context context, IndexItem... items) {
+		downloadFilesWithAllChecks(context, items);
 	}
 
 	public OsmandApplication getMyApplication() {
 		return app;
 	}
 
-	public void downloadFilesCheck_3_ValidateSpace(final FragmentActivity activity, final IndexItem... items) {
+	public void downloadFilesCheck_3_ValidateSpace(final Context context, final IndexItem... items) {
 		long szLong = 0;
 		int i = 0;
 		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
@@ -62,65 +62,68 @@ public class DownloadValidationManager {
 		// get availabile space
 		double asz = downloadThread.getAvailableSpace();
 		if (asz != -1 && asz > 0 && sz / asz > 0.4) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-			builder.setMessage(MessageFormat.format(activity.getString(R.string.download_files_question_space), i, sz, asz));
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_question_space), i, sz, asz));
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					downloadFileCheck_Final_Run(activity, items);
+					downloadFileCheck_Final_Run(context, items);
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
-			downloadFileCheck_Final_Run(activity, items);
+			downloadFileCheck_Final_Run(context, items);
 		}
 	}
 
-	private void downloadFileCheck_Final_Run(FragmentActivity activity, IndexItem[] items) {
+	private void downloadFileCheck_Final_Run(Context context, IndexItem[] items) {
 		downloadThread.runDownloadFiles(items);
-		if (activity instanceof DownloadEvents) {
-			((DownloadEvents) activity).downloadInProgress();
+		if (context instanceof DownloadEvents) {
+			((DownloadEvents) context).downloadInProgress();
 		}
 	}
 
 
-	protected void downloadFilesWithAllChecks(FragmentActivity activity, IndexItem[] items) {
-		downloadFilesCheck_1_FreeVersion(activity, items);
+	protected void downloadFilesWithAllChecks(Context context, IndexItem[] items) {
+		downloadFilesCheck_1_FreeVersion(context, items);
 	}
 
-	protected void downloadFilesCheck_1_FreeVersion(FragmentActivity activity, IndexItem[] items) {
+	protected void downloadFilesCheck_1_FreeVersion(Context context, IndexItem[] items) {
 		if (Version.isFreeVersion(getMyApplication())) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
-				new InstallPaidVersionDialogFragment()
-						.show(activity.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
+				if (context instanceof FragmentActivity) {
+					FragmentActivity activity = (FragmentActivity) context;
+					new InstallPaidVersionDialogFragment()
+							.show(activity.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
+				}
 			} else {
-				downloadFilesCheck_2_Internet(activity, items);
+				downloadFilesCheck_2_Internet(context, items);
 			}
 		} else {
-			downloadFilesCheck_2_Internet(activity, items);
+			downloadFilesCheck_2_Internet(context, items);
 		}
 	}
 
-	protected void downloadFilesCheck_2_Internet(final FragmentActivity activity, final IndexItem[] items) {
+	protected void downloadFilesCheck_2_Internet(final Context context, final IndexItem[] items) {
 		if (!getMyApplication().getSettings().isWifiConnected()) {
 			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-				builder.setMessage(activity.getString(R.string.download_using_mobile_internet));
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setMessage(context.getString(R.string.download_using_mobile_internet));
 				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						downloadFilesCheck_3_ValidateSpace(activity, items);
+						downloadFilesCheck_3_ValidateSpace(context, items);
 					}
 				});
 				builder.setNegativeButton(R.string.shared_string_no, null);
 				builder.show();
 			} else {
-				AccessibleToast.makeText(activity, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(context, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
 			}
 		} else {
-			downloadFilesCheck_3_ValidateSpace(activity, items);
+			downloadFilesCheck_3_ValidateSpace(context, items);
 		}
 	}
 

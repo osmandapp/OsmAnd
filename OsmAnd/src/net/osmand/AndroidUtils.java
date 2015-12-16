@@ -1,8 +1,6 @@
 package net.osmand;
 
 
-import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -11,6 +9,11 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+
+import net.osmand.plus.R;
+
+import java.util.Date;
 
 public class AndroidUtils {
 
@@ -77,4 +80,27 @@ public class AndroidUtils {
 			view.setBackgroundDrawable(ctx.getResources().getDrawable(night ? darkResId : lightResId));
 		}
 	}
+
+	public static void setDashButtonBackground(Context ctx, View view, boolean night) {
+		setBackground(ctx, view, night, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+	}
+
+	public static void setTextPrimaryColor(Context ctx, TextView textView, boolean night) {
+		textView.setTextColor(night ?
+				ctx.getResources().getColor(R.color.primary_text_dark)
+				: ctx.getResources().getColor(R.color.primary_text_light));
+	}
+
+	public static void setTextSecondaryColor(Context ctx, TextView textView, boolean night) {
+		textView.setTextColor(night ?
+				ctx.getResources().getColor(R.color.secondary_text_dark)
+				: ctx.getResources().getColor(R.color.secondary_text_light));
+	}
+
+	public static void setHintTextSecondaryColor(Context ctx, TextView textView, boolean night) {
+		textView.setHintTextColor(night ?
+				ctx.getResources().getColor(R.color.secondary_text_dark)
+				: ctx.getResources().getColor(R.color.secondary_text_light));
+	}
+
 }

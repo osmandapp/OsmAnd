@@ -162,6 +162,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 
 		this.latLon = latLon;
 		createCollection(selectedObjects);
+		updateNightMode();
 		MapMultiSelectionMenuFragment.showInstance(getMapActivity());
 		getMapActivity().refreshMap();
 	}

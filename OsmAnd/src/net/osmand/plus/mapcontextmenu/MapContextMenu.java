@@ -7,16 +7,19 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import net.osmand.CallbackWithObject;
+import net.osmand.StateChangedListener;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -35,7 +38,7 @@ import net.osmand.util.MapUtils;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class MapContextMenu extends MenuTitleController {
+public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode> {
 
 	private MapActivity mapActivity;
 	private MapMultiSelectionMenu mapMultiSelectionMenu;
@@ -55,6 +58,8 @@ public class MapContextMenu extends MenuTitleController {
 	private LatLon myLocation;
 	private Float heading;
 	private boolean inLocationUpdate = false;
+	private boolean appModeChanged;
+	private boolean appModeListenerAdded;
 
 	private int favActionIconId;
 
@@ -67,6 +72,10 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		if (!appModeListenerAdded) {
+			mapActivity.getMyApplication().getSettings().APPLICATION_MODE.addListener(this);
+			appModeListenerAdded = true;
+		}
 
 		if (mapMultiSelectionMenu == null) {
 			mapMultiSelectionMenu = new MapMultiSelectionMenu(mapActivity);
@@ -199,6 +208,7 @@ public class MapContextMenu extends MenuTitleController {
 		}
 
 		boolean needAcquireMenuController = menuController == null
+				|| appModeChanged
 				|| !update
 				|| this.object == null && object != null
 				|| this.object != null && object == null
@@ -208,6 +218,7 @@ public class MapContextMenu extends MenuTitleController {
 		this.object = object;
 
 		active = true;
+		appModeChanged = false;
 
 		if (needAcquireMenuController) {
 			acquireMenuController();
@@ -232,7 +243,11 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void show() {
 		if (!isVisible()) {
-			if (!MapContextMenuFragment.showInstance(this, mapActivity)) {
+			boolean wasInit = true;
+			if (appModeChanged) {
+				wasInit = init(latLon, pointDescription, object);
+			}
+			if (wasInit && !MapContextMenuFragment.showInstance(this, mapActivity)) {
 				active = false;
 			}
 		}
@@ -293,6 +308,11 @@ public class MapContextMenu extends MenuTitleController {
 		if (fragmentRef != null) {
 			fragmentRef.get().updateMenu();
 		}
+	}
+
+	@Override
+	public void stateChanged(ApplicationMode change) {
+		appModeChanged = active;
 	}
 
 	private void clearSelectedObject(Object object) {
@@ -641,6 +661,14 @@ public class MapContextMenu extends MenuTitleController {
 	public void buildCustomAddressLine(LinearLayout ll) {
 		if (menuController != null) {
 			menuController.buildCustomAddressLine(ll);
+		}
+	}
+
+	public boolean isNightMode() {
+		if (menuController != null) {
+			return !menuController.isLight();
+		} else {
+			return mapActivity.getMyApplication().getDaynightHelper().isNightMode();
 		}
 	}
 

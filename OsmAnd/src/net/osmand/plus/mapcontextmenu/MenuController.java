@@ -65,6 +65,7 @@ public abstract class MenuController extends BaseMenuController {
 		this.pointDescription = pointDescription;
 		this.builder = builder;
 		this.currentMenuState = getInitialMenuState();
+		this.builder.setLight(isLight());
 	}
 
 	public void build(View rootView) {
@@ -287,7 +288,7 @@ public abstract class MenuController extends BaseMenuController {
 
 		public Drawable getLeftIcon() {
 			if (leftIconId != 0) {
-				return getIcon(leftIconId, getResIdFromAttribute(R.attr.contextMenuButtonColor));
+				return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
 			} else {
 				return null;
 			}

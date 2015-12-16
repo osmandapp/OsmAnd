@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -1240,7 +1239,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     
     <string name="rendering_value_brown_name">hnedá</string>
     
-    <string name="color_lightblue">svetlomodrá</string>
+    
     
     <string name="osmo_edit_device">Zmeniť vlastnosti používateľa</string>
     <string name="osmo_edit_color">Zobrazovaná farba</string>
@@ -1937,7 +1936,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
 	
-	<string name="color_purple">fialová</string>
+	
 	<string name="shared_string_near">Blízko</string>
     <string name="shared_string_hide">Skryť</string>
     <string name="av_video_quality_low">Najnižšia kvalita</string>

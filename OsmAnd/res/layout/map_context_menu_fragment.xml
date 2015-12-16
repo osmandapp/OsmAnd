@@ -298,6 +298,7 @@
                     android:src="@drawable/map_action_fav_dark"/>
 
                 <View
+                    android:id="@+id/divider_hor_1"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="?attr/dashboard_divider"/>
@@ -313,6 +314,7 @@
                     android:src="@drawable/map_action_flag_dark"/>
 
                 <View
+                    android:id="@+id/divider_hor_2"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="?attr/dashboard_divider"/>
@@ -328,6 +330,7 @@
                     android:src="@drawable/map_action_gshare_dark"/>
 
                 <View
+                    android:id="@+id/divider_hor_3"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="?attr/dashboard_divider"/>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1324,7 +1323,7 @@
     
     <string name="rendering_value_brown_name">barna</string>
     
-    <string name="color_lightblue">világoskék</string>
+    
     
 
 

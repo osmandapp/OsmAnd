@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -1397,9 +1396,9 @@
     
     <string name="rendering_value_brown_name">ruda</string>
     
-    <string name="color_lightblue">žydra</string>
     
-    <string name="color_green">žalia</string>
+    
+    
 
     <string name="osmo_edit_device">Pakeisti vartotojo nustatymus</string>
     <string name="osmo_edit_color">Rodoma spalva</string>

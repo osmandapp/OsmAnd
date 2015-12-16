@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -537,9 +536,9 @@
     
     <string name="rendering_value_brown_name">castàngiu</string>
     
-    <string name="color_lightblue">blu lepiu</string>
     
-    <string name="color_green">birde</string>
+    
+    
 
     <string name="osmo_edit_device">Muda sas propriedades de s’impitadore</string>
     <string name="osmo_edit_color">Colore visualizzau</string>

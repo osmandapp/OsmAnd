@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -324,7 +323,7 @@
     <string name="vector_data">Mappe vettoriali offline</string>
     <string name="transport_context_menu">Cerca un trasporto pubblico alla fermata</string>
 
-    
+
     <string name="poi_context_menu_modify">Modifica PDI</string>
     <string name="poi_context_menu_delete">Elimina PDI</string>
     <string name="rotate_map_compass_opt">Con bussola</string>
@@ -580,7 +579,7 @@
     <string name="search_tabs_location">Posizione</string>
 
     <string name="context_menu_item_update_map">Aggiorna la mappa</string>
-    
+
     <string name="context_menu_item_create_poi">Crea PDI</string>
     <string name="add_favorite_dialog_top_text">Inserisci il nome del preferito</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferito</string>
@@ -589,21 +588,21 @@
     <string name="favourites_context_menu_delete">Elimina preferito</string>
     <string name="favourites_remove_dialog_msg">Eliminare il punto preferito \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Il punto preferito {0} è stato eliminato.</string>
-    
-    
-    
-    
+
+
+
+
     <string name="osb_comment_dialog_message">Messaggio</string>
     <string name="osb_comment_dialog_author">Nome autore</string>
-    
-    
+
+
     <string name="osb_comment_dialog_success">Il commento è stato aggiunto correttamente</string>
     <string name="osb_comment_dialog_error">Si è verificata un\'eccezione: il commento non è stato aggiunto</string>
-    
-    
-    
-    
-    
+
+
+
+
+
     <string name="poi_edit_title">Modifica PDI</string>
     <string name="poi_create_title">Crea PDI</string>
     <string name="poi_error_poi_not_found">Il nodo non è stato trovato o l\'amenità non è un nodo singolo</string>
@@ -1173,7 +1172,7 @@
 
 
     <string name="map_magnifier">Ingrandimento mappa</string>
-    
+
     <string name="route_is_too_long">Il calcolo del percorso offline di OsmAnd potrebbe richiedere molto tempo (o talvolta non funzionare) su distanze più lunghe di 200 km. Si consiglia di aggiungere uno o più destinazioni per migliorarne le prestazioni.</string>
     <string name="auto_zoom_none">No zoom automatico</string>
     <string name="auto_zoom_close">A corto raggio</string>
@@ -1362,13 +1361,13 @@
 
     <string name="import_file_favourites">Salvare i punti come file GPX o importarli nei favoriti?</string>
 
-    
+
     <string name="rendering_value_pink_name">rosa</string>
-    
+
     <string name="rendering_value_brown_name">marrone</string>
-    
-    <string name="color_lightblue">blu chiaro</string>
-    
+
+
+
 
 
     <string name="osmo_edit_device">Cambia le proprietà dell\'utilizzatore</string>
@@ -1384,7 +1383,7 @@
     <string name="osmo_use_server_name">Nome registrato</string>
     <string name="osmo_connect_to_my_nickname">Mio nickname</string>
     <string name="osmo_user_name">Utente</string>
-    
+
 
     <string name="osmo_follow">Segui</string>
     <string name="osmo_user_joined">L\'utente %1$s è entrato nel gruppo %2$s</string>
@@ -1811,7 +1810,7 @@
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Nascondi i numeri civici</string>
-    
+
     <string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione</string>
     <string name="routing_attr_height_name">Limite di altezza</string>
     <string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
@@ -1921,8 +1920,8 @@
     <string name="closing_at">Chiude alle</string>
     <string name="av_locations_descr">File GPX con note locali</string>
     <string name="av_locations">Posizioni</string>
-    
-    
+
+
     <string name="contact_info">Informazioni di contatto</string>
     <string name="description">Descrizione</string>
     <string name="add_opening_hours">Aggiungi orari di apertura</string>
@@ -2000,7 +1999,7 @@
 
     <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe.</string>
     <string name="osm_edit_created_poi">POI OSM creato</string>
-    
+
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Mappa scaricata</string>
     <string name="map_downloaded_descr">Mappa di %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
@@ -2021,9 +2020,9 @@
     <string name="map_viewing_item">Visualizzazione mappa</string>
     <string name="search_on_the_map_item">Ricerca sulla mappa</string>
     <string name="planning_trip_item">Pianifica un viaggio</string>
-    
-    
-    
+
+
+
     <string name="instalation_troubleshooting_item">Installazione e soluzione dei problemi</string>
     <string name="techical_articles_item">Articoli tecnici</string>
     <string name="versions_item">Versioni</string>
@@ -2034,9 +2033,9 @@
 <string name="shared_string_upload">Carica</string>
     <string name="feedback">Feedback</string>
     <string name="shared_string_update">Aggiorna</string>
-    
-    
-    
+
+
+
     <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
     <string name="read_more">Altro</string>
     <string name="whats_new">Novità nella versione</string>
@@ -2069,7 +2068,7 @@
 	<string name="osn_close_dialog_success">La nota è stata chiusa con successo</string>
 	<string name="osn_close_dialog_error">È stato generato un errore: la nota non è stata chiusa</string>
 	<string name="shared_string_commit">Sottoponi</string>
-	
+
     <string name="rendering_attr_currentTrackColor_description">Colore del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Larghezza del GPX</string>
     <string name="rendering_attr_roadStyle_description">Stile delle strade</string>

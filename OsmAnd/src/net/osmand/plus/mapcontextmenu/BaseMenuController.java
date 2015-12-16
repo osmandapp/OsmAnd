@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
-import android.util.TypedValue;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
@@ -15,7 +14,7 @@ public abstract class BaseMenuController {
 	private MapActivity mapActivity;
 	private boolean portraitMode;
 	private boolean largeDevice;
-	private boolean light;
+	private boolean nightMode;
 
 	public BaseMenuController(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -25,7 +24,7 @@ public abstract class BaseMenuController {
 	private void init() {
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
-		light = mapActivity.getMyApplication().getSettings().isLightContent();
+		updateNightMode();
 	}
 
 	public MapActivity getMapActivity() {
@@ -38,7 +37,11 @@ public abstract class BaseMenuController {
 	}
 
 	public boolean isLight() {
-		return light;
+		return !nightMode;
+	}
+
+	public void updateNightMode() {
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode();
 	}
 
 	public boolean isLandscapeLayout() {
@@ -75,7 +78,7 @@ public abstract class BaseMenuController {
 	}
 
 	protected Drawable getIcon(int iconId) {
-		return getIcon(iconId, R.color.icon_color, R.color.icon_color_light);
+		return getIcon(iconId, isLight() ? R.color.icon_color : R.color.icon_color_light);
 	}
 
 	protected Drawable getIcon(int iconId, int colorId) {
@@ -92,13 +95,4 @@ public abstract class BaseMenuController {
 		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
 		return iconsCache.getIcon(iconId, isLight() ? colorLightId : colorDarkId);
 	}
-
-	protected int getResIdFromAttribute(final int attr) {
-		if (attr == 0)
-			return 0;
-		final TypedValue typedvalueattr = new TypedValue();
-		getMapActivity().getTheme().resolveAttribute(attr, typedvalueattr, true);
-		return typedvalueattr.resourceId;
-	}
-
 }

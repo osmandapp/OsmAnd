@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -797,15 +799,19 @@ public class MapActivityActions implements DialogProvider {
 		menu.show();
 	}
 
-
-
 	protected void updateDrawerMenu() {
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightMode();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
+		if (nightMode) {
+			menuItemsListView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));
+		} else {
+			menuItemsListView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_light));
+		}
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
 		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
 		final ArrayAdapter<?> simpleListAdapter = contextMenuAdapter.createListAdapter(mapActivity,
-				settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME);
+				!nightMode);
 		menuItemsListView.setAdapter(simpleListAdapter);
 		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override

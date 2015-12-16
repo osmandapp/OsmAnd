@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -1580,9 +1579,9 @@
     <string name="osmo_user_name">Потребител</string>
     <string name="rendering_value_brown_name">кафяв</string>
 
-    <string name="color_lightblue">светло синьо</string>
+    
 
-    <string name="color_green">зелен</string>
+    
 
     <string name="osmo_edit_device">Промяна на свойствата на потребителя</string>
     <string name="osmo_edit_color">Цвят на показване</string>
