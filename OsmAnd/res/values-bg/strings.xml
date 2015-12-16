@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -2013,4 +2014,7 @@
 <string name="route_distance">Разстояние:</string>
     <string name="route_duration">Време за пътуване:</string>
     <string name="missing_write_external_storage_permission">Приложението няма разрешение да използва SD картата</string>
-</resources>
+<string name="no_location_permission">Приложението няма разрешение да ползва данни за местоположение.</string>
+    <string name="no_camera_permission">Приложението няма разрешение да ползва камерата.</string>
+    <string name="no_microphone_permission">Приложението няма разрешение да ползва микрофона.</string>
+    </resources>
