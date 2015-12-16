@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="no_location_permission">App have no permission to access location data.</string>
+    <string name="no_camera_permission">App have no permission to access camera.</string>
+    <string name="no_microphone_permission">App have no permission to access microphone.</string>
     <string name="route_distance">Distance:</string>
     <string name="route_duration">Travelling time:</string>
     <string-array name="update_frequencies_array">
