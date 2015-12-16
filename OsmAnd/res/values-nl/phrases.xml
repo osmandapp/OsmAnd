@@ -1237,4 +1237,17 @@
 	<string name="poi_enforcement_access">Toegangscontrole</string>
 	<string name="poi_enforcement_toll">Tolcontrole</string>
 
+	<string name="poi_intermittent">Wisselend</string>
+
+	<string name="poi_building">Gebouw</string>
+	<string name="poi_int_name">Internationale naam</string>
+	<string name="poi_nat_name">Nationale naam</string>
+	<string name="poi_reg_name">Regionale naam</string>
+	<string name="poi_loc_name">Lokale naam</string>
+	<string name="poi_old_name">Voormalige naam</string>
+	<string name="poi_alt_name">Alternatieve naam</string>
+
+	<string name="poi_pump_manual">Handpomp</string>
+	<string name="poi_pump_yes">Pomp</string>
+
 	</resources>
