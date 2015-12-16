@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
     <string name="av_video_quality_low">Низкое качество</string>
@@ -260,7 +261,7 @@
     <string name="tts_missing_language_data_title">Данные отсутствуют</string>
     <string name="tts_missing_language_data">Для данного языка отсутствуют данные TTS. Хотите загрузить их из Google Play?</string>
     <string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
-    <string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
+    <string name="gpx_option_destination_point">Использовать текущий пункт назначения</string>
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
     <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите в \"Меню\" → \"Настройка карты\" → \"Источник карты…\" → \"Векторные карты\".</string>
     <string name="choose_audio_stream">Голосовые инструкции</string>
@@ -403,8 +404,8 @@
     <string name="use_high_res_maps_descr">Не растягивать (с размытием) растровые карты на дисплеях высокого разрешения</string>
     <string name="context_menu_item_search_transport">Искать общественный транспорт</string>
     <string name="transport_context_menu">Искать транспорт на остановке</string>
-    <string name="transport_searching_transport">Результат поиска транспорта (нет цели):</string>
-    <string name="transport_searching_route">Результ поиска транспорта (до цели {0}):</string>
+    <string name="transport_searching_transport">Результат поиска транспорта (нет пункта назначения):</string>
+    <string name="transport_searching_route">Результат поиска транспорта (до пункта {0}):</string>
     <string name="transport_search_again">Искать транспорт заново</string>
     <string name="voice">Голосовые данные (запись)</string>
     <string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
@@ -550,7 +551,7 @@
     <string name="only_show">Только показать</string>
     <string name="follow">Следовать</string>
     <string name="recalculate_route_to_your_location">Вид транспорта:</string>
-    <string name="mark_final_location_first">Отметьте сначала точку назначения</string>
+    <string name="mark_final_location_first">Сначала выберите пункт назначения</string>
     <string name="get_directions">Маршрут</string>
     <string name="gps_status_app_not_found">Приложение \"Статус GPS\" не найдено. Искать в Google Play?</string>
     <string name="opening_hours">Рабочие часы</string>
@@ -849,7 +850,7 @@
     <string name="map_widget_parking">Парковка</string>
     <string name="map_widget_monitoring">Запись GPX</string>
     <string name="map_widget_speed">Скорость</string>
-    <string name="map_widget_distance">Цель</string>
+    <string name="map_widget_distance">Пункт назначения</string>
     <string name="map_widget_altitude">Высота</string>
     <string name="map_widget_time">Время в пути</string>
     <string name="map_widget_next_turn">След. поворот</string>
@@ -893,10 +894,10 @@
     <string name="avoid_motorway">Избегать автомагистралей</string>
     <string name="snap_to_road_descr">Привязывать текущую позицию к дороге</string>
     <string name="snap_to_road">Привязка к дороге</string>
-    <string name="intermediate_point_too_far">Промежуточная точка %1$s слишком далеко от ближайшей дороги.</string>
+    <string name="intermediate_point_too_far">Промежуточный пункт %1$s слишком далеко от ближайшей дороги.</string>
     <string name="arrived_at_intermediate_point">Вы достигли промежуточного пункта</string>
-    <string name="context_menu_item_intermediate_point">Добавить промежуточную точку</string>
-    <string name="map_widget_intermediate_distance">Промежуточная точка</string>
+    <string name="context_menu_item_intermediate_point">Добавить промежуточный пункт</string>
+    <string name="map_widget_intermediate_distance">Промежуточный пункт</string>
     <string name="ending_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
     <string name="add_tag">Добавить тег</string>
     <string name="btn_advanced_mode">Расширенный режим…</string>
@@ -907,20 +908,20 @@
     <string name="poi_filter_accomodation">Жильё</string>
     <string name="poi_filter_restaurants">Рестораны</string>
     <string name="poi_filter_sightseeing">Достопримечательности</string>
-    <string name="context_menu_item_last_intermediate_point">Последний пункт назначения</string>
-    <string name="context_menu_item_first_intermediate_point">Первый пункт назначения</string>
+    <string name="context_menu_item_last_intermediate_point">Добавить как последний промежуточный пункт</string>
+    <string name="context_menu_item_first_intermediate_point">Добавить как первый промежуточный пункт</string>
     <string name="add_as_last_destination_point">Добавить как последний промежуточный пункт</string>
     <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Вы уже установили пункт назначения.</string>
-    <string name="target_point">Пункт назначения %1$s</string>
-    <string name="target_points">Цели</string>
-    <string name="intermediate_point">Путевая точка %1$s</string>
-    <string name="delete_target_point">Удалить точку назначения</string>
+    <string name="target_point">Пункт %1$s</string>
+    <string name="target_points">Пункты назначения</string>
+    <string name="intermediate_point">Пункт %1$s</string>
+    <string name="delete_target_point">Удалить пункт</string>
     <string name="map_widget_monitoring_services">Службы мониторинга</string>
     <string name="no_route">Нет маршрута</string>
     <string name="gps_not_available">Включите GPS в настройках</string>
-    <string name="map_widget_show_destination_arrow">Отображать направление к точке назначения</string>
+    <string name="map_widget_show_destination_arrow">Отображать направление к пункту назначения</string>
     <string name="enable_plugin_monitoring_services">"Включите плагин \"Запись поездки\" для использования сервисов мониторинга  (запись GPX, сопровождение в реальном времени)"</string>
     <string name="rendering_attr_roadColors_description">Выберите цветовую схему дорог:</string>
     <string name="rendering_attr_roadColors_name">Цветовая схема дорог</string>
@@ -942,7 +943,7 @@
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="local_indexes_cat_av">Аудио/Видео данные</string>
     <string name="stop_routing_confirm">Вы уверены, что хотите остановить навигацию?</string>
-    <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения?</string>
+    <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения (и промежуточные пункты)?</string>
     <string name="precise_routing_mode">Точный маршрут (alpha)</string>
     <string name="support_new_features_descr">Пожертвуйте, чтобы увидеть новые опции реализованными в приложении</string>
     <string name="precise_routing_mode_descr">Включите, для расчёта точных маршрутов без затруднений. Всё ещё ограниченн расстоянием и медленный.</string>
@@ -977,7 +978,7 @@
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
     <string name="cancel_navigation">Прекратить навигацию</string>
     <string name="use_magnetic_sensor">Использовать датчик магнитного поля</string>
-    <string name="delete_point">Удалить Точку</string>
+    <string name="delete_point">Удалить пункт</string>
     <string name="plugin_distance_point_time">время</string>
     <string name="plugin_distance_point_speed">скорость</string>
     <string name="plugin_distance_point_hdop">точность</string>
@@ -998,7 +999,7 @@
     <string name="gpx_file_name">Имя файла GPX</string>
     <string name="gpx_saved_sucessfully">Файл GPX успешно сохранён в {0}</string>
     <string name="osmand_distance_planning_plugin_name">Инструмент расчёта дистанции и планирования</string>
-    <string name="intermediate_items_sort_return">Промежуточные точки выстроены в оптимальный маршрут от текущего местоположения до точки назначения.</string>
+    <string name="intermediate_items_sort_return">Промежуточные пункты выстроены в оптимальный маршрут от текущего местоположения до пункта назначения.</string>
     <string name="local_osm_changes_backup_failed">Запись OsmChange-файла не удалась</string>
     <string name="local_osm_changes_backup">Сохранение POI в OsmChange-файл</string>
     <string name="plugin_distance_point_ele">высота</string>
@@ -1013,7 +1014,7 @@
     <string name="local_indexes_cat_srtm">Контурные линии</string>
     <string name="shared_string_downloading">Загрузка</string>
     <string name="osmand_distance_planning_plugin_description">Плагин добавляет виджет на экран карты, позволяющий создавать маршруты, нажав на карте, а также использовать или изменять существующие файлы GPX, планировать поездку и измерять расстояние между точками. Результаты могут быть сохранены в виде файла GPX, который впоследствии может быть использован для навигации.</string>
-    <string name="context_menu_item_destination_point">Пункт назначения</string>
+    <string name="context_menu_item_destination_point">Установить как пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
     <string name="av_camera_focus">Режим фокусировки камеры</string>
@@ -1031,12 +1032,12 @@
     <string name="speak_speed_limit">Ограничение скорости</string>
     <string name="speak_cameras">Камеры контроля скорости</string>
     <string name="speak_traffic_warnings">Дорожные предупреждения</string>
-    <string name="clear_intermediate_points">Очистить промежуточные точки</string>
-    <string name="keep_intermediate_points">Оставить промежуточные точки</string>
+    <string name="clear_intermediate_points">Очистить промежуточные пункты</string>
+    <string name="keep_intermediate_points">Оставить промежуточные пункты</string>
     <string name="route_to">К:</string>
     <string name="route_via">Через:</string>
     <string name="route_from">Из:</string>
-    <string name="new_directions_point_dialog">У Вас уже установлены промежуточные точки.</string>
+    <string name="new_directions_point_dialog">У вас уже установлены промежуточные пункты.</string>
     <string name="speak_street_names">Названия улиц (TTS)</string>
     <string name="speak_title">Объявлять…</string>
     <string name="speak_descr">Настройка озвучивания названий улиц, предупреждений (лежачих полицейских, знаков \"Движение без остановки запрещено\"), камер контроля скорости, ограничений скорости</string>
@@ -1070,7 +1071,7 @@
     <string name="local_index_tile_data_name">Данные о тайлах: %1$s</string>
     <string name="base_world_map">Обзорная карта мира</string>
     <string name="edit_tilesource_expiration_time">Время действия (в минутах)</string>
-    <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте одну или более промежуточных точек на маршруте.</string>
+    <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте один или более промежуточных пунктов на маршруте.</string>
     <string name="app_mode_aircraft">Самолёт</string>
     <string name="app_mode_boat">Лодка</string>
     <string name="app_mode_hiking">Пеший туризм</string>
@@ -1254,7 +1255,7 @@
     
     <string name="osmo_create_groups_confirm">Чтобы создавать группы Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
-    <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Вы уверены, что хотите пересоздать персональные ID? Все устройства, связанные с Вами, больше не будут отслеживать Вас.</string>
     <string name="osmo_regenerate_login_ids">Регенерировать ID пользователя</string>
     <string name="osmo_use_server_name">Зарегистрированное имя</string>
     <string name="osmo_connect_to_my_nickname">Мой ник</string>
@@ -1292,7 +1293,7 @@
     <string name="gpx_split_interval">Интервал разбиения</string>
     <string name="delay_navigation_start">Старт навигации автоматически</string>
     <string name="save_as_favorites_points">Сохранить как группу избранных</string>
-    <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
+    <string name="select_destination_and_intermediate_points">Выберите пункты назначения</string>
     <string name="layer_amenity_label">Метки точек</string>
     <string name="selected_gpx_info_show">\n\nНажать и удерживать для просмотра на карте</string>
     <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
@@ -1410,7 +1411,7 @@
     <string name="traffic_warning_speed_camera">Скоростной радар</string>
     <string name="traffic_warning">Ограничение скорости</string>
     <string name="speed_limit_exceed_message">Выберите допустимое значение превышения скорости выше которого вы получите голосовое предупреждение.</string>
-    <string name="speed_limit_exceed">Допустимое значение превышения скорости</string>
+    <string name="speed_limit_exceed">Допустимое превышение скорости</string>
     <string name="fav_point_emoticons_message">Название избранной точки было изменено на %1$s для возможности сохранения строки со смайликом в файл.</string>
     <string name="print_route">Печать маршрута</string>
     <string name="fav_point_dublicate">Дублирование названия избранной точки</string>
@@ -1856,4 +1857,17 @@
 <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
-    </resources>
+    <string name="route_distance">Расстояние:</string>
+    <string name="route_duration">Время в пути:</string>
+    <string name="access_from_map_description">Кнопка меню открывает домашнюю страницу</string>
+    <string name="access_from_map">Доступ с карты</string>
+    <string name="context_menu_item_delete_waypoint">Удалить точку GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Редактировать точку GPX</string>
+    <string name="routing_attr_avoid_stairs_name">Избегать лестниц</string>
+    <string name="routing_attr_avoid_stairs_description">Избегать лестниц</string>
+    <string name="routing_attr_avoid_borders_name">Избегать пересечение бордюра</string>
+    <string name="update_every">Обновлять каждые</string>
+    <string name="only_download_over_wifi">Загружать только через WiFi</string>
+    <string name="update_now">Обновить сейчас</string>
+    <string name="missing_write_external_storage_permission">Приложению не разрешена запись на карту памяти</string>
+</resources>

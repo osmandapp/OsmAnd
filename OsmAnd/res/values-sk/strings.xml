@@ -1956,4 +1956,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="update_every">Aktualizovať každých</string>
     <string name="only_download_over_wifi">Sťahovať iba cez WiFi</string>
     <string name="live_update">Okamžité aktualizácie</string>
-    </resources>
+    <string name="missing_write_external_storage_permission">Aplikácia nemá oprávnenia použiť SD kartu</string>
+</resources>

@@ -2043,4 +2043,11 @@
     <string name="rendering_attr_horseRoutes_name">Konjske poti</string>
     <string name="no_address_found">Naslov ni določen</string>
     <string name="looking_up_address">Iskanje naslova</string>
-    </resources>
+    <string name="route_distance">Razdalja:</string>
+    <string name="route_duration">Čas potovanja:</string>
+    <string name="update_every">Posodobi vsakih</string>
+    <string name="only_download_over_wifi">Prejmi le preko WiFi</string>
+    <string name="live_update">Posodobitev v živo</string>
+    <string name="update_now">Posodobi takoj</string>
+    <string name="missing_write_external_storage_permission">Dovoljenja onemogočajo programu uporabo kartice SD</string>
+</resources>

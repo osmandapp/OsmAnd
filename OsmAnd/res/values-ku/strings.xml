@@ -38,4 +38,16 @@
     <string name="show_on_start">Peşi Şan Bide</string>
     <string name="map_viewing_item">Naxşe Şan Bide</string>
     <string name="navigation_item_description">Awakira Navigasyone</string>
+    <string name="downloads">Barkırın</string>
+    <string name="later">Biştre</string>
+    <string name="buy">Bi Kire</string>
+    <string name="roads">Riyan</string>
+    <string name="features_menu_group">Taybetmendî</string>
+    <string name="enter_country_name">Nave Welat Bi Nivisenin</string>
+    <string name="are_you_sure">Bawerî ku dixwazî</string>
+    <string name="show_gpx">"GPX  nîşan bide"</string>
+    <string name="working_days">Roje Kar</string>
+    <string name="poi_dialog_poi_type">Cureyê POİ</string>
+    <string name="description">Daxuyanî</string>
+    <string name="next_proceed">Dû re</string>
     </resources>
