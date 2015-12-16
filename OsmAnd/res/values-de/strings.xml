@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 	<string name="no_address_found">Keine Adresse bekannt</string>
 	<string name="shared_string_near">Nähe</string>
 	<string name="regions">Regionen</string>
@@ -2076,4 +2077,7 @@
 <string name="route_distance">Entfernung:</string>
     <string name="route_duration">Reisezeit:</string>
     <string name="missing_write_external_storage_permission">Die App hat keine Berichtigung die SD-Karte zu nutzen</string>
-</resources>
+<string name="no_location_permission">Die App hat keine Berechtigung auf Positionsdaten zuzugreifen.</string>
+    <string name="no_camera_permission">Die App hat keine Berechtigung auf die Kamera zuzugreifen.</string>
+    <string name="no_microphone_permission">Die App hat keine Berechtigung auf das Mikrofon zuzugreifen.</string>
+    </resources>
