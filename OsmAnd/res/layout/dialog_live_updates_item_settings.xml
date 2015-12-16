@@ -53,7 +53,7 @@
             android:text="@string/only_download_over_wifi"/>
 
         <android.support.v7.widget.SwitchCompat
-            android:id="@+id/downloadOnlyOverWiFi"
+            android:id="@+id/downloadOverWiFiSwitch"
             android:layout_gravity="right"/>
 
         <TextView

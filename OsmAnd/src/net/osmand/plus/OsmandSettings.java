@@ -1858,7 +1858,9 @@ public class OsmandSettings {
 
 	// Live Updates
 	public final OsmandPreference<Boolean> IS_LIVE_UPDATES_ON =
-			new BooleanPreference("IS_LIVE_UPDATES_ON", false).makeGlobal();
+			new BooleanPreference("is_live_updates_on", false).makeGlobal();
+	public final OsmandPreference<Integer> LIVE_UPDATES_RETRIES =
+			new IntPreference("live_updates_retryes", 2).makeGlobal();
 
 	// UI boxes
 	public final CommonPreference<Boolean> TRANSPARENT_MAP_THEME = 
