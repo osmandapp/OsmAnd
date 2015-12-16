@@ -1185,7 +1185,7 @@
 
 	<string name="poi_population">Befolkning</string>
 
-	<string name="poi_parking_multi_storey">P-hus</string>
+	<string name="poi_parking_multi_storey">Type: P-hus</string>
 
 	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
 	<string name="poi_bicycle_parking_wall_loops">Vægmonteret cykelparkering</string>
@@ -1223,7 +1223,7 @@
 	<string name="poi_trees_coffea">Kaffetræ</string>
 	<string name="poi_trees_pomegranate">Granatæble</string>
 
-	<string name="poi_parking_underground">Párkeringskælder</string>
+	<string name="poi_parking_underground">Type: parkeringskælder</string>
 	<string name="poi_bicycle_parking_rack">Cykelsstativ</string>
 	<string name="poi_nudism_yes">Naturisme: tilladt</string>
 	<string name="poi_nudism_no">Naturisme: forbudt</string>
@@ -2595,5 +2595,16 @@
 	<string name="poi_fitness">Fitness</string>
 
 <string name="poi_billiards">Billard</string>
+
+<string name="poi_microwave_oven_yes">Mikrobølgeovn: ja</string>
+	<string name="poi_microwave_oven_no">Mikrobølgeovn: nej</string>
+	<string name="poi_water_heater_yes">Vandvarmer: ja</string>
+	<string name="poi_water_heater_no">Vandvarmer: nej</string>
+
+	<string name="poi_parking_surface">Type: overflade</string>
+	<string name="poi_parking_garage_boxes">Type: garagebokse</string>
+	<string name="poi_parking_carports">Type: carporte</string>
+
+	<string name="poi_dojo">Dojo</string>
 
 </resources>
