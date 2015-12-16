@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -1416,7 +1417,7 @@
     <string name="show_zoom_buttons_navigation_descr">Rodyti mąstelio mygtukus navigacijos metu</string>
     <string name="show_zoom_buttons_navigation">Rodyti mąstelio mygtukus</string>
     <string name="save_as_favorites_points">Išsaugoti kaip grupę įsimintų vietų</string>
-    <string name="select_destination_and_intermediate_points">Pasirinkti tarpinius kelionės taškus</string>
+    <string name="select_destination_and_intermediate_points">Pasirinkti kelionės taškus</string>
     <string name="layer_amenity_label">Taškų pavadinimai</string>
     <string name="loading_smth">Įkeliama %1$s …</string>
     <string name="map_widget_plain_time">Dabartinis laikas</string>
@@ -2020,4 +2021,39 @@
     <string name="av_audio_format">Garso formatas</string>
     <string name="av_audio_format_descr">Pasirinkite garso formatą</string>
     <string name="av_video_quality_descr">Pasirinkite vaizdo kokybę</string>
+    <string name="route_distance">Atstumas:</string>
+    <string name="route_duration">Kelionės trukmė:</string>
+    <string name="rendering_attr_horseRoutes_name">Arklių maršrutas</string>
+    <string name="osn_close_dialog_success">Pastaba sėkmingai uždaryta</string>
+    <string name="osn_close_dialog_error">Klaida: pastabos nepavyko uždaryti</string>
+    <string name="shared_string_commit">Patvirtinti</string>
+
+    <string name="context_menu_item_delete_waypoint">Ar ištrinti GPX tašką?</string>
+    <string name="context_menu_item_edit_waypoint">Redaguoti GPX tašką</string>
+    <string name="looking_up_address">Adresas ieškomas</string>
+    <string name="routing_attr_avoid_stairs_name">Vengti laiptų</string>
+    <string name="routing_attr_avoid_stairs_description">Vengti laiptų</string>
+    <string name="poi_dialog_reopen">Atidaryti iš naujo</string>
+    <string name="poi_context_menu_modify_osm_change">Redaguoti LV</string>
+    <string name="update_every">Atnaujinti kas</string>
+    <string name="only_download_over_wifi">Atsisiųsti tik naudojant Wi-Fi</string>
+    <string name="update_now">Atnaujinti tuoj pat</string>
+    <string name="missing_write_external_storage_permission">Programėlė neturi teisių įrašyti į atminties kortelę</string>
+<string name="no_camera_permission">Programėlė neturi teisių naudoti kamerą.</string>
+    <string name="no_microphone_permission">Programėlė neturi teisių naudoti mikrofoną.</string>
+    <string name="av_video_quality">Vaizdo kokybė</string>
+    <string name="please_specify_poi_type_only_from_list">Prašome parinkti teisingą LV tipą iš sąrašo arba palikti lauką neužpildytą</string>
+    <string name="osm_edit_modified_poi">OSM LV redaguota</string>
+    <string name="context_menu_item_open_note">Pridėti OSM pastabą</string>
+    <string name="osm_edit_reopened_note">OSM pastaba iš naujo atidaryta</string>
+    <string name="osm_edit_commented_note">OSM pastaba papildyta komentaru</string>
+    <string name="osm_edit_removed_note">OSM pastaba ištrinta</string>
+    <string name="osm_edit_created_note">OSM pastaba sukurta</string>
+    <string name="osn_bug_name">OSM pastaba</string>
+    <string name="osn_reopen_dialog_title">Iš naujo atidaryti pastabą</string>
+    <string name="osn_close_dialog_title">Uždaryti pastabą</string>
+    <string name="osn_add_dialog_success">Pastaba sėkmingai sukurta</string>
+    <string name="osn_add_dialog_error">Klaida: pastabos sukurti nepavyko</string>
+    <string name="lang_fy">Vakarų fryzų</string>
+    <string name="lang_als">Albanų (toskų)</string>
     </resources>
