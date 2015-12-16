@@ -2591,4 +2591,11 @@
 	<string name="poi_badminton">Bádminton</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_disc_golf">Disco golf</string>
-	</resources>
+	<string name="poi_futsal">Fútbol de salón</string>
+	<string name="poi_rc_car">Automóvil de carrera a radio control</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_shuffleboard">Tejo</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_boxing">Boxeo</string>
+
+</resources>
