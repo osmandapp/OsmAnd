@@ -2523,4 +2523,15 @@
 
 <string name="poi_billiards">Billard</string>
 
+<string name="poi_microwave_oven_yes">Mikrowelle: Ja</string>
+	<string name="poi_microwave_oven_no">Mikrowelle: Nein</string>
+	<string name="poi_water_heater_yes">Wasserkocher: Ja</string>
+	<string name="poi_water_heater_no">Wasserkocher: Nein</string>
+
+	<string name="poi_parking_surface">Oberfläche</string>
+	<string name="poi_parking_garage_boxes">Garagen</string>
+	<string name="poi_parking_carports">Carport</string>
+
+	<string name="poi_dojo">Dojo</string>
+
 </resources>
