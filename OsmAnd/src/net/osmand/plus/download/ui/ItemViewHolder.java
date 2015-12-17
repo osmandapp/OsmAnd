@@ -367,7 +367,7 @@ public class ItemViewHolder {
 						tp = indexItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
 								: LocalIndexType.VOICE_DATA;
 					}
-					final LocalIndexInfo info = new LocalIndexInfo(tp, fl, false, worldRegion);
+					final LocalIndexInfo info = new LocalIndexInfo(tp, fl, false, context.getMyApplication());
 					AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 					confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 						@Override

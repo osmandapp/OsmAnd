@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 
 import java.io.File;
@@ -26,6 +27,7 @@ public class LocalIndexInfo implements Parcelable {
 	private boolean singleFile;
 	private int kbSize = -1;
 
+	@NonNull
 	private final WorldRegion worldRegion;
 
 	// UI state expanded
@@ -34,8 +36,7 @@ public class LocalIndexInfo implements Parcelable {
 	private GPXFile gpxFile;
 
 	public LocalIndexInfo(@NonNull LocalIndexType type, @NonNull File f, boolean backuped,
-						  @NonNull WorldRegion worldRegion) {
-		this.worldRegion = worldRegion;
+						  @NonNull OsmandApplication app) {
 		pathToData = f.getAbsolutePath();
 		fileName = f.getName();
 		name = formatName(f.getName());
@@ -45,6 +46,10 @@ public class LocalIndexInfo implements Parcelable {
 			kbSize = (int) ((f.length() + 512) >> 10);
 		}
 		this.backupedData = backuped;
+
+		final String baseName = getBaseName();
+		WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
+		this.worldRegion = worldRegion;
 	}
 
 	private String formatName(String name) {
@@ -57,10 +62,13 @@ public class LocalIndexInfo implements Parcelable {
 
 	// Special domain object represents category
 	public LocalIndexInfo(@NonNull LocalIndexType type, boolean backup, @NonNull String subfolder,
-						  @NonNull WorldRegion worldRegion) {
+						  @NonNull OsmandApplication app) {
 		this.type = type;
 		backupedData = backup;
 		this.subfolder = subfolder;
+
+		final String baseName = getBaseName();
+		WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
 		this.worldRegion = worldRegion;
 	}
 
@@ -109,11 +117,15 @@ public class LocalIndexInfo implements Parcelable {
 			this.loaded = false;
 		}
 	}
-	
+
 	public void setSubfolder(String subfolder) {
 		this.subfolder = subfolder;
 	}
-	
+
+	public WorldRegion getWorldRegion() {
+		return worldRegion;
+	}
+
 	public String getSubfolder() {
 		return subfolder;
 	}
@@ -133,7 +145,7 @@ public class LocalIndexInfo implements Parcelable {
 	public LocalIndexType getType() {
 		return backupedData ? LocalIndexType.DEACTIVATED : type;
 	}
-	
+
 	public LocalIndexType getOriginalType() {
 		return type;
 	}
@@ -164,6 +176,10 @@ public class LocalIndexInfo implements Parcelable {
 
 	public String getFileName() {
 		return fileName;
+	}
+
+	public String getBaseName() {
+		return type.getBasename(this);
 	}
 
 	@Override

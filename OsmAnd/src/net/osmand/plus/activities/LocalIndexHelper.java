@@ -9,7 +9,6 @@ import android.support.annotation.StringRes;
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -122,9 +121,7 @@ public class LocalIndexHelper {
 				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF) && (Build.VERSION.SDK_INT >= 4)) {
 					LocalIndexInfo info = null;
 					if (TTSCommandPlayerImpl.isMyData(voiceF)) {
-						final String baseName = voiceF.getName();
-						WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
-						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, worldRegion);
+						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					}
 					if(info != null) {
 						updateDescription(info);
@@ -138,7 +135,7 @@ public class LocalIndexHelper {
 			for (File voiceF : listFilesSorted(voiceDir)) {
 				if (voiceF.isDirectory() && MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
-					info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, worldRegion);
+					info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, app);
 					if(info != null){
 						updateDescription(info);
 						result.add(info);
@@ -153,13 +150,13 @@ public class LocalIndexHelper {
 		if (tilesPath.canRead()) {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile() && tileFile.getName().endsWith(SQLiteTileSource.EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, worldRegion);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, app);
 					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
 				} else if (tileFile.isDirectory()) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, worldRegion);
-					
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, app);
+
 					if(!TileSourceManager.isTileSourceMetaInfoExist(tileFile)){
 						info.setCorrupted(true);
 					}
@@ -185,7 +182,7 @@ public class LocalIndexHelper {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.SRTM_DATA, mapFile, false, worldRegion);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.SRTM_DATA, mapFile, false, app);
 					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
@@ -198,7 +195,7 @@ public class LocalIndexHelper {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.WIKI_DATA, mapFile, false, worldRegion);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.WIKI_DATA, mapFile, false, app);
 					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
@@ -217,7 +214,7 @@ public class LocalIndexHelper {
 					} else if(mapFile.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 						lt = LocalIndexType.WIKI_DATA;
 					}
-					LocalIndexInfo info = new LocalIndexInfo(lt, mapFile, backup, worldRegion);
+					LocalIndexInfo info = new LocalIndexInfo(lt, mapFile, backup, app);
 					if(loadedMaps.containsKey(mapFile.getName()) && !backup){
 						info.setLoaded(true);
 					}
@@ -276,6 +273,29 @@ public class LocalIndexHelper {
 		}
 		public int getIconResource() {
 			return iconResource;
+		}
+		public String getBasename(LocalIndexInfo localIndexInfo) {
+			String fileName = localIndexInfo.getFileName();
+			if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
+				return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
+			}
+			if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+				return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
+			}
+			if (this == VOICE_DATA) {
+				int l = fileName.lastIndexOf('_');
+				if (l == -1) {
+					l = fileName.length();
+				}
+				return fileName.substring(0, l);
+			}
+			int ls = fileName.lastIndexOf('_');
+			if (ls >= 0) {
+				return fileName.substring(0, ls);
+			} else if(fileName.indexOf('.') > 0){
+				return fileName.substring(0, fileName.indexOf('.'));
+			}
+			return fileName;
 		}
 	}
 
