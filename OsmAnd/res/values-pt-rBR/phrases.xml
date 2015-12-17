@@ -2568,4 +2568,6 @@
 	<string name="poi_water_heater_no">Aquecedor de água: não</string>
 
 	<string name="poi_parking_surface">Tipo: superfície</string>
+	<string name="poi_microwave_oven_yes">Forno microondas: sim</string>
+	<string name="poi_microwave_oven_no">Forno microondas: não</string>
 	</resources>
