@@ -328,7 +328,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				} else {
 					ActivityCompat.requestPermissions(mapActivity,
-							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+							new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
 							OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 				}
 			}
