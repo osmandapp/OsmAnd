@@ -72,6 +72,7 @@ public class MapRenderRepositories {
 	private final static Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
 	private final static int zoomOnlyForBasemaps = 11;
+
 	static int zoomForBaseRouteRendering  = 14;
 	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
@@ -710,7 +711,12 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = requestedBox.getPixWidth();
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
-			currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
+			if(requestedBox.getZoom() <= zoomOnlyForBasemaps && 
+					"".equals(prefs.MAP_PREFERRED_LOCALE.get())) {
+				currentRenderingContext.preferredLocale = app.getLanguage();
+			} else {
+				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
+			}
 			final float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			//Text/icon scales according to mapDensity (so text is size of road)

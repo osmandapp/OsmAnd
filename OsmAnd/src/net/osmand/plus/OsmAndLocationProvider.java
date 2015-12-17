@@ -929,7 +929,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public static boolean isLocationPermissionAvailable(Context context) {
 		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
 				!= PackageManager.PERMISSION_GRANTED) {
-			Toast.makeText(context, R.string.no_location_permission, Toast.LENGTH_LONG).show();
 			return false;
 		}
 		return true;

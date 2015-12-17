@@ -2550,4 +2550,18 @@
 
 	<string name="poi_dojo">Dojo</string>
 
+	<string name="poi_gaelic_games">Gaelic games</string>
+	<string name="poi_running">Running</string>
+	<string name="poi_netball">Netball</string>
+	<string name="poi_karting">Karting</string>
+	<string name="poi_badminton">Badminton</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_disc_golf">Disc golf</string>
+	<string name="poi_futsal">Futsal</string>
+	<string name="poi_rc_car">Radio-controlled car racing</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_boxing">Boxing</string>
+
 </resources>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -2068,4 +2069,7 @@
     <string name="live_update">Бягучае абнаўленьне</string>
     <string name="update_now">Абнавіць зараз</string>
 <string name="missing_write_external_storage_permission">Праграма не мае дазволу на выкарыстаньне SD карткі</string>
-</resources>
+<string name="no_location_permission">Праграма не мае дазволу на выкарыстаньне GPS.</string>
+    <string name="no_camera_permission">Праграма не мае дазволу на выкарыстаньне камэры.</string>
+    <string name="no_microphone_permission">Праграма не мае дазволу на выкарыстаньне мікрафону.</string>
+    </resources>

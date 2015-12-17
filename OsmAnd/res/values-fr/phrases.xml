@@ -1425,7 +1425,7 @@
 	<string name="poi_internet_access_type_wired">Type d\'accès Internet : filaire</string>
 	<string name="poi_internet_access_type_public">Type d\'accès Internet : public</string>
 	<string name="poi_internet_access_type_service">Type d\'accès Internet : service</string>
-	<string name="poi_internet_access_type_no">Type d\'accès Internet : aucun</string>
+	<string name="poi_internet_access_type_no">Sans accès Internet</string>
 
 	<string name="poi_delivery_yes">Avec livraison</string>
 	<string name="poi_delivery_no">Sans livraison</string>
@@ -1805,4 +1805,21 @@
 	<string name="poi_sauna_yes">Sauna</string>
 	<string name="poi_solarium_yes">Solarium</string>
 
+	<string name="poi_dojo">Dojo</string>
+
+<string name="poi_bench_yes">Avec banc</string>
+	<string name="poi_bench_no">Sans banc</string>
+	<string name="poi_waste_basket_yes">Avec panier</string>
+	<string name="poi_waste_basket_no">Sans panier</string>
+
+	<string name="poi_internet_access_type_yes">Avec accès Internet</string>
+
+	<string name="poi_fitness_centre">Salle de sport</string>
+	<string name="poi_billiards">Billards</string>
+
+	<string name="poi_microwave_oven_yes">Four micro-ondes : oui</string>
+	<string name="poi_microwave_oven_no">Four micro-ondes : non</string>
+	<string name="poi_parking_carports">Type : abri pour véhicules</string>
+
+	<string name="poi_parking_garage_boxes">Type : garages fermés</string>
 	</resources>

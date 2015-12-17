@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -2128,4 +2129,7 @@
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Reistijd:</string>
     <string name="missing_write_external_storage_permission">OsmAnd heeft geen toestemmingde externe SD-kaart te gebruiken</string>
-</resources>
+<string name="no_location_permission">OsmAnd heeft geen toestemming de locatie-gegevens te gebruiken.</string>
+    <string name="no_camera_permission">"OsmAnd heeft geen toestemming de camera  te gebruiken."</string>
+    <string name="no_microphone_permission">OsmAnd heeft geen toestemming de microfoon te gebruiken.</string>
+    </resources>

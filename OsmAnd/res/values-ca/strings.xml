@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1882,4 +1883,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
  	<string name="route_distance">Distància:</string>
     <string name="route_duration">Durada del viatge:</string>
     <string name="missing_write_external_storage_permission">L\'aplicació no té autorització per utilitzar la memòria SD</string>
-</resources>
+<string name="no_location_permission">L\'aplicació no té autorització per utilitzar les dades d\'ubicació.</string>
+    <string name="no_camera_permission">L\'aplicació no té autorització per utilitzar la càmera.</string>
+    <string name="no_microphone_permission">L\'aplicació no té autorització per utilitzar el micròfon.</string>
+    </resources>

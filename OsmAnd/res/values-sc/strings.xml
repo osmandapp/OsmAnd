@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -2046,4 +2047,7 @@
     <string name="live_update">Agiornamentos in tempus reale</string>
     <string name="update_now">Agiorna como</string>
 <string name="missing_write_external_storage_permission">S’aplicatzione no est autorizada a impreare s’ischeda SD</string>
-</resources>
+<string name="no_location_permission">S’aplicatzione no est autorizada a atzèdere a sos datos de positzione.</string>
+    <string name="no_camera_permission">S’aplicatzione no est autorizada a impreare sa fotocàmera.</string>
+    <string name="no_microphone_permission">S’aplicatzione no est autorizada a impreare su micròfonu.</string>
+    </resources>
