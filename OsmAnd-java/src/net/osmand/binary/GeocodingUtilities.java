@@ -46,8 +46,10 @@ public class GeocodingUtilities {
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
 	public static final float DISTANCE_BULDING_PROXIMITY = 100;
 	
-	public static final String[] SUFFIXES = new String[] {"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
-	public static final String[] DEFAULT_SUFFIXES = new String[] {"str.", "street", "улица", "ул."};
+	public static final String[] SUFFIXES = new String[] {
+		"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
+	public static final String[] DEFAULT_SUFFIXES = new String[] {
+		"str.", "street", "улица", "ул.", "вулица", "вул.", "вулиця"};
 	private static Set<String> SET_DEF_SUFFIXES = null;
 	private static Set<String> SET_SUFFIXES = null;
 	
@@ -159,6 +161,7 @@ public class GeocodingUtilities {
 			if(!set.add(road.getId())) {
 				continue;
 			}
+//			System.out.println(road.toString() +  " " + Math.sqrt(p.distSquare));
 			boolean emptyName = Algorithms.isEmpty(road.getName()) && Algorithms.isEmpty(road.getRef()) ;
 			if(!emptyName) {
 				if(distSquare == 0 || distSquare > p.distSquare) {
