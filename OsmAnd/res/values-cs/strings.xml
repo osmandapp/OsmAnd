@@ -993,7 +993,7 @@
     <string name="context_menu_item_destination_point">Nastavit jako cíl</string>
     <string name="please_select_address">Zvolte nejprve město nebo ulici</string>
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
-    <string name="intermediate_items_sort_return">Pořadí mezicílů bylo utříděno, pro optimální pořadí na cestě z aktuálního místa do místa určení.</string>
+    <string name="intermediate_items_sort_return">Mezicíle byly uspořádány podle optimálního pořadí na cestě ze současné pozice do cíle.</string>
     <string name="intermediate_items_sort_by_distance">Utřídit ode dveří ke dveřím</string>
     <string name="osb_author_or_password_not_specified">Prosím zadejte v Nastaveních uživatelské jméno a heslo pro vstup do OSM</string>
     <string name="clear_intermediate_points">Smazat mezicíle</string>
@@ -1052,7 +1052,7 @@
     <string name="auto_zoom_farthest">Na velkou vzdálenost</string>
     <string name="auto_zoom_close">Na malou vzdálenost</string>
     <string name="auto_zoom_far">Na střední vzdálenost</string>
-    <string name="route_is_too_long">Offline navigace vyžaduje pro svoji správnou funkci, aby cíle nebyly vzdáleny více než 200km. Prosím přidejte jeden nebo více mezicílů cesty.</string>
+    <string name="route_is_too_long">Pro správnou funkci offline navigace je potřeba, aby cíle nebyly vzdáleny více než 200 km. Prosím přidejte jeden nebo více mezicílů cesty.</string>
     <string name="local_index_tile_data_zooms">Stažené přiblížení: %1$s</string>
     <string name="local_index_tile_data_name">Data dlaždic: %1$s</string>
     <string name="edit_tilesource_successfully">Zdroj dlaždic %1$s byl úspěšně uložen</string>
@@ -1876,9 +1876,9 @@
     <string name="route_distance">Vzdálenost:</string>
     <string name="route_duration">Potřebný čas:</string>
     <string name="rendering_attr_horseRoutes_name">Stezka pro koně</string>
-    <string name="only_download_over_wifi">Stahovat jen z WiFi</string>
+    <string name="only_download_over_wifi">Stahovat jen přes WiFi</string>
     <string name="no_location_permission">Aplikace nemá povolen přístup k poloze.</string>
-    <string name="no_camera_permission">Aplikace nemá povolen přístup k foťáku.</string>
+    <string name="no_camera_permission">Aplikace nemá povolen přístup k fotoaparátu.</string>
     <string name="no_microphone_permission">Aplikace nemá povolen přístup k mikrofonu.</string>
     <string name="update_every">Aktualizovat každých</string>
     <string name="live_update">Okamžité aktualizace</string>

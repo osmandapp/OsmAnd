@@ -1389,8 +1389,8 @@
 	<string name="poi_shelter_type_picnic_shelter">Přístřešek pro: piknik</string>
 	<string name="poi_shelter_type_weather_shelter">Přístřešek pro: špatné počasí</string>
 	<string name="poi_internet_access_type_wlan">Připojení k internetu: kabel</string>
-	<string name="poi_internet_access_type_no">Bez internetu</string>
-	<string name="poi_internet_access_type_yes">S nternetem</string>
+	<string name="poi_internet_access_type_no">Bez přístupu k internetu</string>
+	<string name="poi_internet_access_type_yes">S přístupem k internetu</string>
 
 	<string name="poi_tunnel_car">Silniční tunel</string>
 	<string name="poi_tunnel_pedestrian">Podchod</string>
@@ -1474,7 +1474,7 @@
 	<string name="poi_building_type_basilica">Budova: bazilika</string>
 	<string name="poi_building_type_synagogue">Budova: synagoga</string>
 	<string name="poi_cross">Kříž</string>
-	<string name="poi_piste_grooming_scooter">Úprava trati: skůtr</string>
+	<string name="poi_piste_grooming_scooter">Úprava trati: skútr</string>
 	<string name="poi_piste_grooming_no">Trať bez úpravy</string>
 	<string name="poi_piste_grooming_mogul">Úprava trati: boule</string>
 
@@ -1489,12 +1489,12 @@
 
 	<string name="poi_capacity">Kapacita</string>
 	<string name="poi_capacity_disabled_yes">Určeno pro postižené</string>
-	<string name="poi_capacity_disabled_no">Nevhodné pro postížené</string>
+	<string name="poi_capacity_disabled_no">Nevhodné pro postižené</string>
 	<string name="poi_aerialway_occupancy">Kapacita kabinky/křesla/vozidla</string>
 	<string name="poi_aerialway_capacity">Kapacita za hodinu</string>
 	<string name="poi_aerialway_access_entry">Jen pro vstup</string>
 	<string name="poi_aerialway_access_exit">Jen východ</string>
-	<string name="poi_aerialway_access_both">Vstup a výstup</string>
+	<string name="poi_aerialway_access_both">Vstup a východ</string>
 	<string name="poi_brewery_additional">Značka piva</string>
 	<string name="poi_microbrewery_yes">Minipivovar</string>
 	<string name="poi_microbrewery_no">Bez minipivovaru</string>
@@ -1533,9 +1533,9 @@
 	<string name="poi_aerialway_bubble_no">Bez krytu</string>
 	<string name="poi_aerialway_heating_yes">Topení</string>
 	<string name="poi_aerialway_heating_no">Bez topení</string>
-	<string name="poi_aerialway_bicycle_yes">Kola: povolené</string>
-	<string name="poi_aerialway_bicycle_no">Kola: nepovolené</string>
-	<string name="poi_aerialway_bicycle_summer">Kola: povolené jen v létě</string>
+	<string name="poi_aerialway_bicycle_yes">Kola: povolená</string>
+	<string name="poi_aerialway_bicycle_no">Kola: nepovolená</string>
+	<string name="poi_aerialway_bicycle_summer">Kola: povolená jen v létě</string>
 	<string name="poi_aerialway_summer_access_entry">Letní přístup: jen vstup</string>
 	<string name="poi_aerialway_summer_access_exit">Letní přístup: jen východ</string>
 	<string name="poi_aerialway_summer_access_both">Letní přístup: vstup a východ</string>
@@ -1615,8 +1615,8 @@
 	<string name="poi_payment_routex_no">Nepřijímá Routex palivové karty</string>
 	<string name="poi_payment_bancomat_yes">Přijímá Bancomat</string>
 	<string name="poi_payment_bancomat_no">Nepřijímá Bancomat</string>
-	<string name="poi_payment_icsf_yes">Přijímá karty IC s předplaceném jízdném</string>
-	<string name="poi_payment_icsf_no">Nepřijímá karty IC s předplaceném jízdném</string>
+	<string name="poi_payment_icsf_yes">Přijímá karty IC s předplaceným jízdným</string>
+	<string name="poi_payment_icsf_no">Nepřijímá karty IC s předplaceným jízdným</string>
 	<string name="poi_payment_prepaid_ticket_yes">Přijímá předplacené lístky</string>
 	<string name="poi_payment_jcb_yes">Přijímá JCB karty</string>
 	<string name="poi_payment_jcb_no">Nepřijímá JCB karty</string>
@@ -1654,4 +1654,11 @@
 	<string name="poi_payment_ep_minipay_no">Nepřijímá Minipay</string>
 	<string name="poi_payment_ep_minicash_yes">Přijímá MiniCash</string>
 	<string name="poi_payment_ep_minicash_no">Nepřijímá MiniCash</string>
+	<string name="poi_internet_access_type_wired">Přístup k internetu: drátový</string>
+	<string name="poi_internet_access_type_terminal">Přístup k internetu: terminál</string>
+	<string name="poi_internet_access_type_public">Přístup k internetu: veřejný</string>
+	<string name="poi_internet_access_type_service">Přístup k internetu: služební</string>
+	<string name="poi_denomination_anglican">Anglikánské</string>
+	<string name="poi_denomination_presbyterian">Presbyteriánství</string>
+	<string name="poi_denomination_episcopal">Episkopální</string>
 	</resources>

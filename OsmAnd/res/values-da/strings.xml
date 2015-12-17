@@ -2190,7 +2190,7 @@
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Rejsetid:</string>
     <string name="missing_write_external_storage_permission">App\'en har ikke tilladelse til at bruge SD-kortet</string>
-<string name="no_location_permission">App\'en har ikke tilladelse til lokaliseringsdata.</string>
-    <string name="no_camera_permission">App\'en har ikke tilladelse til kamera.</string>
-    <string name="no_microphone_permission">App\'en har ikke tilladelse til mikrofonen.</string>
+<string name="no_location_permission">App\'en har ikke tilladelse til at bruge lokaliseringsdata.</string>
+    <string name="no_camera_permission">App\'en har ikke tilladelse til at bruge kamera.</string>
+    <string name="no_microphone_permission">App\'en har ikke tilladelse til at bruge mikrofonen.</string>
     </resources>

@@ -2602,20 +2602,20 @@
 	<string name="poi_water_heater_no">Vandvarmer: nej</string>
 
 	<string name="poi_parking_surface">Type: overflade</string>
-	<string name="poi_parking_garage_boxes">Type: garagebokse</string>
+	<string name="poi_parking_garage_boxes">Type: garage</string>
 	<string name="poi_parking_carports">Type: carporte</string>
 
 	<string name="poi_dojo">Dojo</string>
 
-<string name="poi_gaelic_games">Gælisk spil</string>
+<string name="poi_gaelic_games">Gælisk sport</string>
 	<string name="poi_running">Løb</string>
-	<string name="poi_netball">Netball</string>
-	<string name="poi_karting">Karting</string>
+	<string name="poi_netball">Netbold</string>
+	<string name="poi_karting">Gokart</string>
 	<string name="poi_badminton">Badminton</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_disc_golf">Disc golf</string>
 	<string name="poi_futsal">Futsal</string>
-	<string name="poi_rc_car">Radiostyret bil racing</string>
+	<string name="poi_rc_car">RC bil race</string>
 	<string name="poi_squash">Squash</string>
 	<string name="poi_shuffleboard">Shuffleboard</string>
 	<string name="poi_lacrosse">Lacrosse</string>

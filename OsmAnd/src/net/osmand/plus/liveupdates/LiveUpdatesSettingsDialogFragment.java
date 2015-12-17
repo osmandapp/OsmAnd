@@ -30,11 +30,12 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	public static final String LOCAL_INDEX_INFO = "local_index_info";
 
 	private static final String LOCAL_INDEX = "local_index";
-	private static final String UPDATE_TIMES = "_update_times";
-	private static final String TIME_OF_DAY_TO_UPDATE = "_time_of_day_to_update";
+	public static final String UPDATE_TIMES_POSTFIX = "_update_times";
+	private static final String TIME_OF_DAY_TO_UPDATE_POSTFIX = "_time_of_day_to_update";
 	private static final int MORNING_UPDATE_TIME = 8;
 	private static final int NIGHT_UPDATE_TIME = 21;
 	private static final int SHIFT = 1000;
+	public static final String DOWNLOAD_VIA_WIFI_POSTFIX = "_download_via_wifi";
 
 	@NonNull
 	@Override
@@ -45,16 +46,20 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		View view = LayoutInflater.from(getActivity())
 				.inflate(R.layout.dialog_live_updates_item_settings, null);
 		final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
+		final SwitchCompat downloadOverWiFiSwitch = (SwitchCompat) view.findViewById(R.id.downloadOverWiFiSwitch);
 		final Spinner updateFrequencySpinner = (Spinner) view.findViewById(R.id.updateFrequencySpinner);
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
 
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo);
+		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
+				preferenceDownloadViaWiFi(localIndexInfo);
 		final OsmandSettings.CommonPreference<Integer> updateFrequencePreference =
 				preferenceUpdateTimes(localIndexInfo);
 		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
 				preferenceTimeOfDayToUpdate(localIndexInfo);
 		liveUpdatesSwitch.setChecked(liveUpdatePreference.get());
+		downloadOverWiFiSwitch.setChecked(downloadViaWiFiPreference.get());
 
 		builder.setView(view)
 				.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
@@ -69,7 +74,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						Intent intent = new Intent(getActivity(), LiveUpdatesAlarmReceiver.class);
 						final File file = new File(localIndexInfo.getFileName());
 						final String fileName = Algorithms.getFileNameWithoutExtension(file);
-//						intent.putExtra(LOCAL_INDEX_INFO, fileName);
+						intent.putExtra(LOCAL_INDEX_INFO, localIndexInfo);
 						intent.setAction(fileName);
 						PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
 
@@ -97,6 +102,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						}
 
 						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+						downloadViaWiFiPreference.set(downloadOverWiFiSwitch.isChecked());
 						alarmMgr.cancel(alarmIntent);
 						if (liveUpdatesSwitch.isChecked()) {
 							alarmMgr.setInexactRepeating(AlarmManager.RTC,
@@ -159,13 +165,18 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		return getSettings().registerBooleanPreference(settingId, false);
 	}
 
+	private OsmandSettings.CommonPreference<Boolean> preferenceDownloadViaWiFi(LocalIndexInfo item) {
+		final String settingId = item.getFileName() + DOWNLOAD_VIA_WIFI_POSTFIX;
+		return getSettings().registerBooleanPreference(settingId, false);
+	}
+
 	private OsmandSettings.CommonPreference<Integer> preferenceUpdateTimes(LocalIndexInfo item) {
-		final String settingId = item.getFileName() + UPDATE_TIMES;
+		final String settingId = item.getFileName() + UPDATE_TIMES_POSTFIX;
 		return getSettings().registerIntPreference(settingId, UpdateFrequencies.HOURLY.ordinal());
 	}
 
 	private OsmandSettings.CommonPreference<Integer> preferenceTimeOfDayToUpdate(LocalIndexInfo item) {
-		final String settingId = item.getFileName() + TIME_OF_DAY_TO_UPDATE;
+		final String settingId = item.getFileName() + TIME_OF_DAY_TO_UPDATE_POSTFIX;
 		return getSettings().registerIntPreference(settingId, TimesOfDay.NIGHT.ordinal());
 	}
 
