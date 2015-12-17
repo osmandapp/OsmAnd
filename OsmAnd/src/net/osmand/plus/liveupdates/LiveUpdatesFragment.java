@@ -282,12 +282,14 @@ public class LiveUpdatesFragment extends Fragment {
 		private final TextView descriptionTextView;
 		private final ImageButton options;
 		private final LiveUpdatesFragment fragment;
+		private final View view;
 
 		private LocalFullMapsViewHolder(View view, LiveUpdatesFragment context) {
 			icon = (ImageView) view.findViewById(R.id.icon);
 			nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 			descriptionTextView = (TextView) view.findViewById(R.id.descriptionTextView);
 			options = (ImageButton) view.findViewById(R.id.options);
+			this.view = view;
 			this.fragment = context;
 		}
 
@@ -296,13 +298,15 @@ public class LiveUpdatesFragment extends Fragment {
 			descriptionTextView.setText(item.getDescription());
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
 			icon.setImageDrawable(context.getIconsCache().getContentIcon(R.drawable.ic_map));
-			options.setOnClickListener(new View.OnClickListener() {
+			final View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					final FragmentManager fragmentManager = fragment.getChildFragmentManager();
 					LiveUpdatesSettingsDialogFragment.createInstance(item).show(fragmentManager, "settings");
 				}
-			});
+			};
+			options.setOnClickListener(clickListener);
+			view.setOnClickListener(clickListener);
 		}
 	}
 
