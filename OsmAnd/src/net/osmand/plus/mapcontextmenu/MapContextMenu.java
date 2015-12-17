@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
@@ -396,13 +397,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void fabPressed() {
 		hide();
 		final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
-		if(targets.getIntermediatePoints().isEmpty()) {
+		if (targets.getIntermediatePoints().isEmpty()) {
 			targets.navigateToPoint(latLon, true, -1, getPointDescription());
 			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 		} else {
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			bld.setTitle(R.string.new_directions_point_dialog);
-			final int[] defaultVls = new int[] {0};
+			final int[] defaultVls = new int[]{0};
 			bld.setSingleChoiceItems(new String[]{
 					mapActivity.getString(R.string.clear_intermediate_points),
 					mapActivity.getString(R.string.keep_intermediate_points)
@@ -417,7 +418,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if(defaultVls[0] == 0) {
+					if (defaultVls[0] == 0) {
 						targets.removeAllWayPoints(false);
 						targets.navigateToPoint(latLon, true, -1, getPointDescription());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
@@ -428,7 +429,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					}
 				}
 			});
-			bld.setNegativeButton(R.string.shared_string_cancel,null);
+			bld.setNegativeButton(R.string.shared_string_cancel, null);
 			bld.show();
 		}
 //		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
@@ -447,9 +448,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			};
 
 			if (searchingAddress) {
-				addAsTargetAction.dlg = ProgressDialog.show(mapActivity,
-						"",
-						addressNotKnownStr);
+				addAsTargetAction.dlg = new ProgressDialog(mapActivity);
+				addAsTargetAction.dlg.setTitle("");
+				addAsTargetAction.dlg.setMessage(addressNotKnownStr);
+				addAsTargetAction.dlg.setButton(Dialog.BUTTON_NEGATIVE, mapActivity.getResources().getString(R.string.shared_string_skip), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						cancelSearch = true;
+					}
+				});
+				addAsTargetAction.dlg.show();
 				searchDoneAction = addAsTargetAction;
 			} else {
 				addAsTargetAction.run();
@@ -668,7 +675,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (menuController != null) {
 			return !menuController.isLight();
 		} else {
-			return mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+			return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		}
 	}
 

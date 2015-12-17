@@ -69,9 +69,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 	
 	@Override
-	public synchronized List<GeocodingResult> justifyReverseGeocodingSearch(GeocodingResult r, double minBuildingDistance) {
+	public synchronized List<GeocodingResult> justifyReverseGeocodingSearch(GeocodingResult r, double minBuildingDistance, final ResultMatcher<GeocodingResult> result) {
 		try {
-			return new GeocodingUtilities().justifyReverseGeocodingSearch(r, file, minBuildingDistance);
+			return new GeocodingUtilities().justifyReverseGeocodingSearch(r, file, minBuildingDistance, result);
 		} catch(IOException e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}

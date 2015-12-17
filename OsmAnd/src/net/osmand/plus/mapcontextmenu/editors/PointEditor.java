@@ -43,7 +43,7 @@ public abstract class PointEditor {
 	}
 
 	public void updateNightMode() {
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	public int getSlideInAnimation() {

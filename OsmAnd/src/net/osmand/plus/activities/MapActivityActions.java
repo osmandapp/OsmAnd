@@ -742,6 +742,10 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS_EDIT);
 	}
 
+	public void openRoutePreferencesDialog() {
+		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.ROUTE_PREFERENCES);
+	}
+
 	private TargetPointsHelper getTargets() {
 		return mapActivity.getMyApplication().getTargetPointsHelper();
 	}
@@ -800,7 +804,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	protected void updateDrawerMenu() {
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
 		if (nightMode) {
 			menuItemsListView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));

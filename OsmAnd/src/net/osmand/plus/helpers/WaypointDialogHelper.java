@@ -436,6 +436,7 @@ public class WaypointDialogHelper {
 			}
 			if(ctx.getDashboard().isVisible()) {
 				ctx.getDashboard().hideDashboard();
+				ctx.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
 				ctx.getContextMenu().show(
 						new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
 						locationPoint.getPointDescription(ctx),

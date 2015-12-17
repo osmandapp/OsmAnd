@@ -54,6 +54,8 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
+import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -144,7 +146,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		CONFIGURE_SCREEN,
 		CONFIGURE_MAP,
 		LIST_MENU,
-		ROUTE_SETTINGS,
+		ROUTE_PREFERENCES,
 		DASHBOARD
 	}
 
@@ -239,6 +241,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			tv.setText(R.string.configure_map);
 		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 			tv.setText(R.string.layer_map_appearance);
+		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
+			tv.setText(R.string.shared_string_settings);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -369,7 +373,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		navigateButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
 				hideDashboard();
 			}
 		};
@@ -385,7 +389,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				|| type == DashboardType.LIST_MENU
 				|| type == DashboardType.CONFIGURE_SCREEN) {
 			button = actionButtons.get(DashboardActionButtonType.MY_LOCATION);
-		} else if (type == DashboardType.ROUTE_SETTINGS) {
+		} else if (type == DashboardType.ROUTE_PREFERENCES) {
 			button = actionButtons.get(DashboardActionButtonType.NAVIGATE);
 		}
 
@@ -455,7 +459,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		if (visible == this.visible && type == visibleType) {
 			return;
 		}
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		this.previousVisibleType = prevItem;
 		this.visible = visible;
 		boolean refresh = this.visibleType == type;
@@ -575,6 +579,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				cm = new ConfigureMapMenu().createListAdapter(mapActivity);
 			} else if (DashboardType.LIST_MENU == visibleType) {
 				cm = mapActivity.getMapActions().createMainOptionsMenu();
+			} else if (DashboardType.ROUTE_PREFERENCES == visibleType) {
+				RoutePreferencesMenu routePreferencesMenu = new RoutePreferencesMenu(mapActivity);
+				ArrayAdapter<LocalRoutingParameter> listAdapter = routePreferencesMenu.getRoutePreferencesDrawerAdapter(nightMode);
+				OnItemClickListener listener = routePreferencesMenu.getItemClickListener(listAdapter);
+				updateListAdapter(listAdapter, listener);
 			}
 			if (cm != null) {
 				updateListAdapter(cm);
@@ -583,7 +592,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public void updateListAdapter(ContextMenuAdapter cm) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (this.nightMode != nightMode) {
 			this.nightMode = nightMode;
  			applyDayNightMode();
@@ -597,7 +606,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_EDIT
 				|| force) {
 			updateListAdapter();
-		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
+		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
 			View v = listView.getChildAt(0);
 			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());
@@ -857,7 +866,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private boolean isActionButtonVisible() {
 		return visibleType == DashboardType.DASHBOARD
 				|| visibleType == DashboardType.LIST_MENU
-				|| visibleType == DashboardType.ROUTE_SETTINGS
+				|| visibleType == DashboardType.ROUTE_PREFERENCES
 				|| visibleType == DashboardType.CONFIGURE_SCREEN;
 	}
 

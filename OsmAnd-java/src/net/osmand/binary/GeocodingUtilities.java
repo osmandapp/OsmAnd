@@ -222,7 +222,7 @@ public class GeocodingUtilities {
 	}
 	
 	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult road, BinaryMapIndexReader reader,
-			double knownMinBuidlingDistance) throws IOException {
+			double knownMinBuidlingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		// test address index search
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
 		final List<String> streetNamePacked = prepareStreetName(road.streetName);
@@ -262,7 +262,7 @@ public class GeocodingUtilities {
 
 						@Override
 						public boolean isCancelled() {
-							return false;
+							return result.isCancelled();
 						}
 					}, mainWord);
 			reader.searchAddressDataByName(req);

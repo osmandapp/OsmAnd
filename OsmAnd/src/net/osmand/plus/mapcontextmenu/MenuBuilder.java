@@ -63,7 +63,6 @@ public class MenuBuilder {
 	public MenuBuilder(OsmandApplication app) {
 		this.app = app;
 		plainMenuItems = new LinkedList<>();
-		light = app.getSettings().isLightContent();
 	}
 
 	public void setLight(boolean light) {
@@ -259,7 +258,6 @@ public class MenuBuilder {
 
 	public Drawable getRowIcon(int iconId) {
 		IconsCache iconsCache = app.getIconsCache();
-		boolean light = app.getSettings().isLightContent();
 		return iconsCache.getIcon(iconId,
 				light ? R.color.icon_color : R.color.icon_color_light);
 	}
@@ -267,7 +265,6 @@ public class MenuBuilder {
 	public Drawable getRowIcon(Context ctx, String fileName) {
 		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
 		if (d != null) {
-			boolean light = app.getSettings().isLightContent();
 			d.setColorFilter(app.getResources()
 					.getColor(light ? R.color.icon_color : R.color.icon_color_light), PorterDuff.Mode.SRC_IN);
 			return d;

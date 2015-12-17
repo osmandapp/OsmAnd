@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginTop="5dp"
+    android:gravity="center_vertical"
     android:minHeight="40dp"
-    android:layout_marginRight="3dp">
+    android:orientation="horizontal">
 
     <ProgressBar
+        android:id="@+id/ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:id="@+id/ProgressBar"
-        android:layout_marginLeft="4dp" />
+        android:layout_marginLeft="4dp"/>
 
     <TextView
         android:id="@+id/header_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:singleLine="true"
-        android:ellipsize="end"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
         android:layout_weight="1"
-        android:textSize="@dimen/default_list_text_size_large" />
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="@dimen/default_list_text_size_large"/>
 
-    <include layout="@layout/check_item_rel" />
+    <include layout="@layout/check_item_rel"/>
 
 </LinearLayout>

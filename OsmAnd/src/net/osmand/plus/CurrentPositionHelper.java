@@ -62,14 +62,14 @@ public class CurrentPositionHelper {
 						final List<GeocodingResult> gr = runUpdateInThread(loc.getLatitude(), loc.getLongitude());
 						if (storeFound) {
 							lastAskedLocation = loc;
-							lastFound = gr.isEmpty() ? null : gr.get(0).point.getRoad();
+							lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
 						} else if(geoCoding != null) {
 							justifyResult(gr, geoCoding);
 						} else if(result != null) {
 							app.runInUIThread(new Runnable() {
 								@Override
 								public void run() {
-									result.publish(gr.isEmpty() ? null : gr.get(0).point.getRoad());
+									result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad());
 								}
 							});
 						}
@@ -78,12 +78,14 @@ public class CurrentPositionHelper {
 					}
 				}
 			};
-			app.getRoutingHelper().startTaskInRouteThreadIfPossible(run);
+			if (!app.getRoutingHelper().startTaskInRouteThreadIfPossible(run) && result != null) {
+				result.publish(null);
+			}
 		}
 	}
 	
 	protected void justifyResult(List<GeocodingResult> res, final ResultMatcher<GeocodingResult> result) {
-		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
+		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
 		for (GeocodingResult r : res) {
 			Collection<RegionAddressRepository> rar = app.getResourceManager().getAddressRepositories();
@@ -95,13 +97,18 @@ public class CurrentPositionHelper {
 						foundRepo = repo;
 						break;
 					}
+					if (result.isCancelled()) {
+						break;
+					}
 				}
-				if (foundRepo != null) {
+				if (foundRepo != null || result.isCancelled()) {
 					break;
 				}
 			}
-			if (foundRepo != null) {
-				List<GeocodingResult> justified = foundRepo.justifyReverseGeocodingSearch(r, minBuildingDistance);
+			if (result.isCancelled()) {
+				break;
+			} else if (foundRepo != null) {
+				List<GeocodingResult> justified = foundRepo.justifyReverseGeocodingSearch(r, minBuildingDistance, result);
 				if (!justified.isEmpty()) {
 					double md = justified.get(0).getDistance();
 					if (minBuildingDistance == 0) {
@@ -114,6 +121,14 @@ public class CurrentPositionHelper {
 			} else {
 				complete.add(r);
 			}
+		}
+		if (result.isCancelled()) {
+			app.runInUIThread(new Runnable() {
+				public void run() {
+					result.publish(null);
+				}
+			});
+			return;
 		}
 		Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
 		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();

@@ -9,8 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="impassable_road_desc">Select roads you want to avoid during navigation</string>
+    <string name="shared_string_sound">Sound</string>
     <string name="route_distance">Distance:</string>
-    <string name="route_duration">Travelling time:</string>
+    <string name="route_duration">Time:</string>
     <string-array name="update_frequencies_array">
         <item>Every Hour</item>
         <item>Once a day</item>

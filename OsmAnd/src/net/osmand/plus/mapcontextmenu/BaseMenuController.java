@@ -41,7 +41,7 @@ public abstract class BaseMenuController {
 	}
 
 	public void updateNightMode() {
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	public boolean isLandscapeLayout() {
