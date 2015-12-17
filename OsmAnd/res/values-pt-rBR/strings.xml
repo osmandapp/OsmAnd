@@ -1958,7 +1958,7 @@
 <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo de viagem:</string>
     <string name="missing_write_external_storage_permission">App não tem permissão para usar o cartão SD</string>
-<string name="no_location_permission">App não tem permissão para acessar dados de localização.</string>
+<string name="no_location_permission">App não tem permissão para acessar os dados de localização.</string>
     <string name="no_camera_permission">App não tem permissão para acessar a câmera.</string>
-    <string name="no_microphone_permission">App não tem permissão para acessar microfone.</string>
+    <string name="no_microphone_permission">App não tem permissão para acessar o microfone.</string>
     </resources>
