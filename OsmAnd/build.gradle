@@ -324,6 +324,13 @@ tasks.withType(JavaCompile) {
 	compileTask -> compileTask.dependsOn << [collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore]
 }
 
+task appStart(type: Exec) {
+    // linux 
+    commandLine 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
+    // windows
+    // commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
+}
+
 clean.dependsOn 'cleanNoTranslate'
 
 task cleanNoTranslate() {

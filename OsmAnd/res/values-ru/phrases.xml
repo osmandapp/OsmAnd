@@ -2,7 +2,7 @@
 <resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
-	<string name="poi_convenience">Продуктовый магазин</string>
+	<string name="poi_convenience">Продукты</string>
 	<string name="poi_mall">Торговый центр</string>
 	<string name="poi_beverages">Напитки</string>
 	<string name="poi_butcher">Мясная лавка</string>
@@ -792,7 +792,7 @@
 		<string name="poi_internet_access">Доступ в Интернет</string>
 	<string name="poi_club">Клуб</string>
 	<string name="poi_cafe_and_restaurant">Кафе и ресторан</string>
-	<string name="poi_shop_food">Продовольственный магазин</string>
+	<string name="poi_shop_food">Продуктовый магазин</string>
 	<string name="poi_filling_station">Заправочная станция</string>
 		<string name="poi_aerialway_transport">Канатный транспорт</string>
 	<string name="poi_transport_construction">Транспортное сооружение</string>
@@ -2554,5 +2554,19 @@
 	<string name="poi_parking_carports">Тип: навес</string>
 
 	<string name="poi_dojo">Додзё</string>
+
+	<string name="poi_gaelic_games">Гэльские игры</string>
+	<string name="poi_running">Бег</string>
+	<string name="poi_netball">Нетбол</string>
+	<string name="poi_karting">Картинг</string>
+	<string name="poi_badminton">Бадминтон</string>
+	<string name="poi_judo">Дзюдо</string>
+	<string name="poi_disc_golf">Диск-гольф</string>
+	<string name="poi_futsal">Мини-футбол</string>
+	<string name="poi_rc_car">Гонки на радиоуправляемых автомоделях</string>
+	<string name="poi_squash">Сквош</string>
+	<string name="poi_shuffleboard">Шаффлборд</string>
+	<string name="poi_lacrosse">Лакросс</string>
+	<string name="poi_boxing">Boxing</string>
 
 </resources>

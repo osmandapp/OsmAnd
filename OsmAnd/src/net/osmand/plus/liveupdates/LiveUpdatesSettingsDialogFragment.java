@@ -30,9 +30,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	public static final String LOCAL_INDEX_INFO = "local_index_info";
 
 	private static final String LOCAL_INDEX = "local_index";
-	private static final int UPDATE_HOURLY = 0;
-	private static final int UPDATE_DAILY = 1;
-	private static final int UPDATE_WEEKLY = 2;
 	public static final String UPDATE_TIMES_POSTFIX = "_update_times";
 	private static final String TIME_OF_DAY_TO_UPDATE_POSTFIX = "_time_of_day_to_update";
 	private static final int MORNING_UPDATE_TIME = 8;

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -2218,4 +2219,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="share_osm_edits_subject">OSM правки, поширені через OsmAnd</string>
     <string name="rendering_attr_hideProposed_name">Приховати заплановані об\'єкти</string>
     <string name="save_poi_without_poi_type_message">Ви дійсно хочете зберегти POI, не вказавши його тип?</string>
+    <string name="no_location_permission">Додаток не має дозволу до місце-розташування.</string>
+    <string name="no_camera_permission">Додаток не має дозволу на використання камери.</string>
+    <string name="no_microphone_permission">Додаток не має дозволу на використання мікрофону.</string>
+    <string name="route_distance">Відстань:</string>
+    <string name="route_duration">Час в дорозі:</string>
     </resources>

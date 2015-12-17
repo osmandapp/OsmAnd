@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -2104,4 +2105,7 @@
 <string name="route_distance">Distanza:</string>
     <string name="route_duration">Durata del viaggio:</string>
     <string name="missing_write_external_storage_permission">L\'app non ha l\'autorizzazione per usare la SD card</string>
-</resources>
+<string name="no_location_permission">"L\'app non ha i permessi per accedere ai dati della  posizione."</string>
+    <string name="no_camera_permission">L\'app non ha i permessi per accedere alla fotocamera.</string>
+    <string name="no_microphone_permission">L\'app non ha i permessi per accedere al microfono.</string>
+    </resources>
