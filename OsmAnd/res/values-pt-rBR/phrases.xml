@@ -2570,4 +2570,6 @@
 	<string name="poi_parking_surface">Tipo: superfície</string>
 	<string name="poi_microwave_oven_yes">Forno microondas: sim</string>
 	<string name="poi_microwave_oven_no">Forno microondas: não</string>
+	<string name="poi_badminton">Badminton</string>
+	<string name="poi_judo">Judô</string>
 	</resources>
