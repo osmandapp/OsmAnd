@@ -17,6 +17,7 @@ out/
 use/
 osmand.properties
 osmand.xml
+assets/style.css
 assets/help/*.html
 assets/help/images
 assets/help/screens
