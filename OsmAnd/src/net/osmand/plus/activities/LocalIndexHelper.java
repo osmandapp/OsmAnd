@@ -9,6 +9,7 @@ import android.support.annotation.StringRes;
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -121,7 +122,9 @@ public class LocalIndexHelper {
 				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF) && (Build.VERSION.SDK_INT >= 4)) {
 					LocalIndexInfo info = null;
 					if (TTSCommandPlayerImpl.isMyData(voiceF)) {
-						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup);
+						final String baseName = voiceF.getName();
+						WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
+						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, worldRegion);
 					}
 					if(info != null) {
 						updateDescription(info);
@@ -135,7 +138,7 @@ public class LocalIndexHelper {
 			for (File voiceF : listFilesSorted(voiceDir)) {
 				if (voiceF.isDirectory() && MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
-					info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup);
+					info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, worldRegion);
 					if(info != null){
 						updateDescription(info);
 						result.add(info);
@@ -150,12 +153,12 @@ public class LocalIndexHelper {
 		if (tilesPath.canRead()) {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile() && tileFile.getName().endsWith(SQLiteTileSource.EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, worldRegion);
 					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
 				} else if (tileFile.isDirectory()) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, worldRegion);
 					
 					if(!TileSourceManager.isTileSourceMetaInfoExist(tileFile)){
 						info.setCorrupted(true);
@@ -182,7 +185,7 @@ public class LocalIndexHelper {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.SRTM_DATA, mapFile, false);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.SRTM_DATA, mapFile, false, worldRegion);
 					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
@@ -195,7 +198,7 @@ public class LocalIndexHelper {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.WIKI_DATA, mapFile, false);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.WIKI_DATA, mapFile, false, worldRegion);
 					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
@@ -214,7 +217,7 @@ public class LocalIndexHelper {
 					} else if(mapFile.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 						lt = LocalIndexType.WIKI_DATA;
 					}
-					LocalIndexInfo info = new LocalIndexInfo(lt, mapFile, backup);
+					LocalIndexInfo info = new LocalIndexInfo(lt, mapFile, backup, worldRegion);
 					if(loadedMaps.containsKey(mapFile.getName()) && !backup){
 						info.setLoaded(true);
 					}

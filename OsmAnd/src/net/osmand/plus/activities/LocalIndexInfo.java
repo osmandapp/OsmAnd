@@ -2,7 +2,9 @@ package net.osmand.plus.activities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 
@@ -24,12 +26,16 @@ public class LocalIndexInfo implements Parcelable {
 	private boolean singleFile;
 	private int kbSize = -1;
 
+	private final WorldRegion worldRegion;
+
 	// UI state expanded
 	private boolean expanded;
 
 	private GPXFile gpxFile;
 
-	public LocalIndexInfo(LocalIndexType type, File f, boolean backuped) {
+	public LocalIndexInfo(@NonNull LocalIndexType type, @NonNull File f, boolean backuped,
+						  @NonNull WorldRegion worldRegion) {
+		this.worldRegion = worldRegion;
 		pathToData = f.getAbsolutePath();
 		fileName = f.getName();
 		name = formatName(f.getName());
@@ -50,10 +56,12 @@ public class LocalIndexInfo implements Parcelable {
 	}
 
 	// Special domain object represents category
-	public LocalIndexInfo(LocalIndexType type, boolean backup, String subfolder) {
+	public LocalIndexInfo(@NonNull LocalIndexType type, boolean backup, @NonNull String subfolder,
+						  @NonNull WorldRegion worldRegion) {
 		this.type = type;
 		backupedData = backup;
 		this.subfolder = subfolder;
+		this.worldRegion = worldRegion;
 	}
 
 	public void setCorrupted(boolean corrupted) {
@@ -177,6 +185,7 @@ public class LocalIndexInfo implements Parcelable {
 		dest.writeString(this.fileName);
 		dest.writeByte(singleFile ? (byte) 1 : (byte) 0);
 		dest.writeInt(this.kbSize);
+		dest.writeSerializable(this.worldRegion);
 		dest.writeByte(expanded ? (byte) 1 : (byte) 0);
 	}
 
@@ -194,10 +203,11 @@ public class LocalIndexInfo implements Parcelable {
 		this.fileName = in.readString();
 		this.singleFile = in.readByte() != 0;
 		this.kbSize = in.readInt();
+		this.worldRegion = (WorldRegion) in.readSerializable();
 		this.expanded = in.readByte() != 0;
 	}
 
-	public static final Parcelable.Creator<LocalIndexInfo> CREATOR = new Parcelable.Creator<LocalIndexInfo>() {
+	public static final Creator<LocalIndexInfo> CREATOR = new Creator<LocalIndexInfo>() {
 		public LocalIndexInfo createFromParcel(Parcel source) {
 			return new LocalIndexInfo(source);
 		}

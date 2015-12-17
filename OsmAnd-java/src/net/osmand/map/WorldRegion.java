@@ -1,12 +1,13 @@
 package net.osmand.map;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 
-public class WorldRegion {
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+
+public class WorldRegion implements Serializable {
 
 	public static final String WORLD_BASEMAP = "world_basemap";
 	public static final String AFRICA_REGION_ID = "africa";

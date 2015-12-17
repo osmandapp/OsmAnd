@@ -327,7 +327,7 @@ public class LiveUpdatesFragment extends Fragment {
 		@Override
 		protected List<LocalIndexInfo> doInBackground(Void... params) {
 			LocalIndexHelper helper = new LocalIndexHelper(fragment.getMyActivity().getMyApplication());
-			return helper.getLocalIndexData(this);
+			return helper.getLocalFullMaps(this);
 		}
 
 		@Override

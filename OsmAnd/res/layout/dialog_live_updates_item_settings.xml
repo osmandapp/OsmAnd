@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
@@ -12,14 +13,18 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/regionNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Flevoland"/>
+            tools:text="Flevoland"/>
 
         <TextView
+            android:id="@+id/countryNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The Netherlands"/>
+            tools:visibility="visible"
+            android:visibility="gone"
+            tools:text="The Netherlands"/>
 
         <View
             android:layout_width="match_parent"
@@ -73,10 +78,10 @@
             android:id="@+id/updateTimesOfDaySpinner"
             android:layout_width="wrap_content"
             android:layout_column="1"
-            android:layout_row="4"
             android:layout_gravity="right"
-            android:visibility="gone"
-            android:entries="@array/update_times_of_day"/>
+            android:layout_row="4"
+            android:entries="@array/update_times_of_day"
+            android:visibility="gone"/>
 
     </GridLayout>
 

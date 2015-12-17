@@ -787,7 +787,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					return i;
 				}
 			}
-			LocalIndexInfo newCat = new LocalIndexInfo(val.getType(), backuped, val.getSubfolder());
+			LocalIndexInfo newCat = new LocalIndexInfo(val.getType(), backuped, val.getSubfolder(), worldRegion);
 			category.add(newCat);
 			data.put(newCat, new ArrayList<LocalIndexInfo>());
 			return newCat;
@@ -864,7 +864,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 			if (found == -1) {
 				found = category.size();
-				category.add(new LocalIndexInfo(info.getType(), info.isBackupedData(), info.getSubfolder()));
+				category.add(new LocalIndexInfo(info.getType(), info.isBackupedData(), info.getSubfolder(), worldRegion));
 			}
 			if (!data.containsKey(category.get(found))) {
 				data.put(category.get(found), new ArrayList<LocalIndexInfo>());

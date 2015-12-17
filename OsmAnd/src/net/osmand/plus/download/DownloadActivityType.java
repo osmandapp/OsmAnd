@@ -334,7 +334,7 @@ public class DownloadActivityType {
 		}
 		return fileName;
 	}
-	
+
 
 	public String getBasename(IndexItem indexItem) {
 		String fileName = indexItem.fileName;

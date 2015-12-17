@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -45,11 +46,14 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 		View view = LayoutInflater.from(getActivity())
 				.inflate(R.layout.dialog_live_updates_item_settings, null);
+		final TextView regionNameTextView = (TextView) view.findViewById(R.id.regionNameTextView);
+		final TextView countryNameTextView = (TextView) view.findViewById(R.id.countryNameTextView);
 		final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
 		final SwitchCompat downloadOverWiFiSwitch = (SwitchCompat) view.findViewById(R.id.downloadOverWiFiSwitch);
 		final Spinner updateFrequencySpinner = (Spinner) view.findViewById(R.id.updateFrequencySpinner);
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
 
+		regionNameTextView.setText(localIndexInfo.getName());
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo);
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
