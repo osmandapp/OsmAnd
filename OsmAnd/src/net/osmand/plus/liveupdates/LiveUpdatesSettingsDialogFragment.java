@@ -54,6 +54,8 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
 
 		regionNameTextView.setText(localIndexInfo.getName());
+		// countryNameTextView.setText(localIndexInfo.getWorldRegion().getLocaleName());
+		countryNameTextView.setVisibility(View.VISIBLE);
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo);
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =

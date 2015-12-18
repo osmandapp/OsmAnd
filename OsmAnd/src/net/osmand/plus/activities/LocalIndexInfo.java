@@ -47,7 +47,7 @@ public class LocalIndexInfo implements Parcelable {
 		}
 		this.backupedData = backuped;
 
-		final String baseName = getBaseName();
+		final String baseName = getBaseName().toLowerCase();
 		WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
 		this.worldRegion = worldRegion;
 	}
@@ -67,7 +67,7 @@ public class LocalIndexInfo implements Parcelable {
 		backupedData = backup;
 		this.subfolder = subfolder;
 
-		final String baseName = getBaseName();
+		final String baseName = getBaseName().toLowerCase();
 		WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
 		this.worldRegion = worldRegion;
 	}
