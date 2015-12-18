@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -92,6 +93,9 @@ public class RoutePreferencesMenu {
 	private static class MuteSoundRoutingParameter extends LocalRoutingParameter {
 	}
 
+	private static class InterruptMusicRoutingParameter extends LocalRoutingParameter {
+	}
+
 	private static class VoiceGuidanceRoutingParameter extends LocalRoutingParameter {
 	}
 
@@ -137,63 +141,88 @@ public class RoutePreferencesMenu {
 		routingHelper.getVoiceRouter().setMute(mt);
 	}
 
+	private void switchMusic() {
+		boolean mt = !settings.INTERRUPT_MUSIC.get();
+		settings.INTERRUPT_MUSIC.set(mt);
+	}
+
 	private void selectRestrictedRoads() {
 		mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
 		controlsLayer.getMapRouteInfoMenu().hide();
 		app.getAvoidSpecificRoads().showDialog(mapActivity);
 	}
 
-	private void selectVoiceGuidance() {
+	public static void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
 
 		String[] entries;
 		final String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles();
+		Set<String> voiceFiles = getVoiceFiles(mapActivity);
 		entries = new String[voiceFiles.size() + 2];
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
+		int selected = -1;
+		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.get();
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
-		entries[k] = getString(R.string.shared_string_do_not_use);
+		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
 		adapter.item(entries[k]).reg();
+		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(selectedValue)) {
+			selected = k;
+		}
 		k++;
 		for (String s : voiceFiles) {
-			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
+			entries[k] = (s.contains("tts") ?  mapActivity.getResources().getString(R.string.ttsvoice) + " " : "") +
 					FileNameTranslationHelper.getVoiceName(mapActivity, s);
 			entrieValues[k] = s;
 			adapter.item(entries[k]).reg();
+			if (s.equals(selectedValue)) {
+				selected = k;
+			}
 			k++;
 		}
 		entrieValues[k] = MORE_VALUE;
-		entries[k] = getString(R.string.install_more);
+		entries[k] =  mapActivity.getResources().getString(R.string.install_more);
 		adapter.item(entries[k]).reg();
 
-		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		final ArrayAdapter<?> listAdapter =
-				adapter.createListAdapter(mapActivity, settings.isLightContent());
-		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+		AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
+		bld.setSingleChoiceItems(entries, selected, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String value = entrieValues[which];
 				if (MORE_VALUE.equals(value)) {
-					// listPref.set(oldValue); // revert the change..
 					final Intent intent = new Intent(mapActivity, DownloadActivity.class);
 					intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 					intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 					mapActivity.startActivity(intent);
 				} else {
-					settings.VOICE_PROVIDER.set(value);
-					app.showDialogInitializingCommandPlayer(mapActivity, false);
-					updateParameters();
+					if (callback != null) {
+						callback.processResult(value);
+					}
 				}
+				dialog.dismiss();
 			}
 		});
-		builder.create().show();
+		bld.show();
 	}
 
-	private Set<String> getVoiceFiles() {
+	public static String getVoiceProviderName(Context ctx, String value) {
+		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(value)) {
+			return ctx.getResources().getString(R.string.shared_string_do_not_use);
+		} else {
+			return (value.contains("tts") ? ctx.getResources().getString(R.string.ttsvoice) + " " : "") +
+					FileNameTranslationHelper.getVoiceName(ctx, value);
+		}
+	}
+
+	public static void applyVoiceProvider(MapActivity mapActivity, String provider) {
+		mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.set(provider);
+		mapActivity.getMyApplication().showDialogInitializingCommandPlayer(mapActivity, false);
+	}
+
+	private static Set<String> getVoiceFiles(MapActivity mapActivity) {
 		// read available voice data
-		File extStorage = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		File extStorage = mapActivity.getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		Set<String> setFiles = new LinkedHashSet<>();
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
@@ -219,6 +248,9 @@ public class RoutePreferencesMenu {
 					btn.performClick();
 				} else if (obj instanceof VoiceGuidanceRoutingParameter) {
 					final TextView btn = (TextView) view.findViewById(R.id.select_button);
+					btn.performClick();
+				} else if (obj instanceof InterruptMusicRoutingParameter) {
+					final CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
 					btn.performClick();
 				} else if (obj instanceof AvoidRoadsRoutingParameter) {
 					selectRestrictedRoads();
@@ -305,13 +337,43 @@ public class RoutePreferencesMenu {
 					btn.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							selectVoiceGuidance();
+							selectVoiceGuidance(mapActivity, new CallbackWithObject<String>() {
+								@Override
+								public boolean processResult(String result) {
+									applyVoiceProvider(mapActivity, result);
+									updateParameters();
+									return true;
+								}
+							});
 						}
 					});
 
 					TextView tv = (TextView) v.findViewById(R.id.header_text);
 					AndroidUtils.setTextPrimaryColor(mapActivity, tv, nightMode);
 					tv.setText(getString(R.string.voice_provider));
+
+					return v;
+				}
+				if (parameter instanceof InterruptMusicRoutingParameter) {
+					View v = mapActivity.getLayoutInflater().inflate(R.layout.switch_select_list_item, null);
+					v.findViewById(R.id.select_button).setVisibility(View.GONE);
+					v.findViewById(R.id.icon).setVisibility(View.GONE);
+					final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
+					btn.setVisibility(View.VISIBLE);
+					btn.setChecked(settings.INTERRUPT_MUSIC.get());
+					btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							switchMusic();
+						}
+					});
+
+					TextView tv = (TextView) v.findViewById(R.id.header_text);
+					AndroidUtils.setTextPrimaryColor(mapActivity, tv, nightMode);
+					tv.setText(getString(R.string.interrupt_music));
+					TextView tvDesc = (TextView) v.findViewById(R.id.description_text);
+					AndroidUtils.setTextSecondaryColor(mapActivity, tvDesc, nightMode);
+					tvDesc.setText(getString(R.string.interrupt_music_descr));
 
 					return v;
 				}
@@ -433,7 +495,8 @@ public class RoutePreferencesMenu {
 		List<LocalRoutingParameter> list = getRoutingParametersInner(am);
 		list.add(0, new MuteSoundRoutingParameter());
 		list.add(1, new VoiceGuidanceRoutingParameter());
-		list.add(2, new AvoidRoadsRoutingParameter());
+		list.add(2, new InterruptMusicRoutingParameter());
+		list.add(3, new AvoidRoadsRoutingParameter());
 		list.add(new GpxLocalRoutingParameter());
 		list.add(new OtherSettingsRoutingParameter());
 		return list;

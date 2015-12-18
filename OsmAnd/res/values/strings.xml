@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="select_voice_provider">Select voice guidance</string>
+    <string name="select_voice_provider_descr">Select or download voice guidance for your language</string>
     <string name="impassable_road_desc">Select roads you want to avoid during navigation</string>
     <string name="shared_string_sound">Sound</string>
     <string name="no_location_permission">App have no permission to access location data.</string>

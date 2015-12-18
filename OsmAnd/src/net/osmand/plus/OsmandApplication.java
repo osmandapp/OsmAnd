@@ -17,18 +17,15 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
@@ -36,14 +33,15 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.ExitActivity;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.RendererRegistry;
@@ -104,7 +102,8 @@ public class OsmandApplication extends MultiDexApplication {
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
-	
+
+	private String firstSelectedVoiceProvider;
 	
 	// Typeface
 	
@@ -346,44 +345,46 @@ public class OsmandApplication extends MultiDexApplication {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
-				AlertDialog.Builder builder = new AccessibleAlertBuilder(uiContext);
-				LinearLayout ll = new LinearLayout(uiContext);
-				ll.setOrientation(LinearLayout.VERTICAL);
-				final TextView tv = new TextView(uiContext);
-				tv.setPadding(7, 3, 7, 0);
-				tv.setText(R.string.voice_is_not_available_msg);
-				tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 19);
-				ll.addView(tv);
-				
-				final CheckBox cb = new CheckBox(uiContext);
-				cb.setText(R.string.shared_string_remember_my_choice);
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				lp.setMargins(7, 10, 7, 0);
-				cb.setLayoutParams(lp);
-				ll.addView(cb);
-				
+				final AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
+
+				View view = uiContext.getLayoutInflater().inflate(R.layout.select_voice_first, null);
+
+				((ImageView) view.findViewById(R.id.icon))
+						.setImageDrawable(getIconsCache().getContentIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
+
+				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(final View v) {
+						RoutePreferencesMenu.selectVoiceGuidance((MapActivity) uiContext, new CallbackWithObject<String>() {
+							@Override
+							public boolean processResult(String result) {
+								boolean acceptableValue = !RoutePreferencesMenu.MORE_VALUE.equals(firstSelectedVoiceProvider);
+								if (acceptableValue) {
+									((TextView) v.findViewById(R.id.selectText))
+											.setText(RoutePreferencesMenu.getVoiceProviderName(uiContext, result));
+									firstSelectedVoiceProvider = result;
+								}
+								return acceptableValue;
+							}
+						});
+					}
+				});
+
+				((ImageView) view.findViewById(R.id.dropDownIcon))
+						.setImageDrawable(getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
+
 				builder.setCancelable(true);
-				builder.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
+				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if(cb.isChecked()) {
-							osmandSettings.VOICE_PROVIDER.set(OsmandSettings.VOICE_PROVIDER_NOT_USE);
+						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
+							RoutePreferencesMenu.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider);
 						}
 					}
 				});
-				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(uiContext, SettingsActivity.class);
-						intent.putExtra(SettingsActivity.INTENT_KEY_SETTINGS_SCREEN, SettingsActivity.SCREEN_GENERAL_SETTINGS);
-						uiContext.startActivity(intent);
-					}
-				});
-				
-				
-				builder.setTitle(R.string.voice_is_not_available_title);
-				builder.setView(ll);
-				//builder.setMessage(R.string.voice_is_not_available_msg);
+
+				builder.setView(view);
 				builder.show();
 			}
 

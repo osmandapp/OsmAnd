@@ -4,8 +4,10 @@ package net.osmand;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.text.format.DateFormat;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import net.osmand.plus.R;
 
 import java.util.Date;
+
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AndroidUtils {
 
@@ -101,6 +105,15 @@ public class AndroidUtils {
 		textView.setHintTextColor(night ?
 				ctx.getResources().getColor(R.color.secondary_text_dark)
 				: ctx.getResources().getColor(R.color.secondary_text_light));
+	}
+
+	public static int dpToPx(Context ctx, float dp) {
+		Resources r = ctx.getResources();
+		return (int) TypedValue.applyDimension(
+				COMPLEX_UNIT_DIP,
+				dp,
+				r.getDisplayMetrics()
+		);
 	}
 
 }
