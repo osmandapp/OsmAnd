@@ -2006,15 +2006,15 @@
     <string name="map_downloaded_descr">Mappa di %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
     <string name="go_to_map">Vai alla mappa</string>
     <string name="show_on_start_description">\'Spegni\' lancia direttamente la schermata della mappa</string>
-    <string name="enter_country_name">Immetti il nome della nazione</string>
-    <string name="new_version">Versione nuova</string>
+    <string name="enter_country_name">Inserisci il nome della nazione</string>
+    <string name="new_version">Nuova versione</string>
     <string name="begin_with_osmand_menu_group">Primi passi con OsmAnd</string>
     <string name="features_menu_group">Caratteristiche</string>
     <string name="help_us_to_improve_menu_group">Aiutaci a migliorare OsmAnd</string>
     <string name="other_menu_group">Altro</string>
     <string name="plugins_menu_group">Componenti aggiuntivi</string>
     <string name="first_usage_item">Primo utilizzo</string>
-    <string name="first_usage_item_description">Come scaricare le mappe, imposta le impostazioni di baae</string>
+    <string name="first_usage_item_description">Come scaricare le mappe, imposta le impostazioni di base</string>
     <string name="navigation_item_description">Impostazioni di navigazione</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Domande frequenti</string>
@@ -2024,7 +2024,7 @@
 
 
 
-    <string name="instalation_troubleshooting_item">Installazione e soluzione dei problemi</string>
+    <string name="instalation_troubleshooting_item">Installazione e risoluzione dei problemi</string>
     <string name="techical_articles_item">Articoli tecnici</string>
     <string name="versions_item">Versioni</string>
     <string name="contact_us">Contattaci</string>
@@ -2041,12 +2041,12 @@
     <string name="read_more">Altro</string>
     <string name="whats_new">Novità nella versione</string>
     <string name="share_osm_edits_subject">Modifiche OSM condivise tramite OsmAnd</string>
-    <string name="lang_nds">Bassa Germania</string>
+    <string name="lang_nds">Basso sassone</string>
     <string name="lang_mk">Macedone</string>
     <string name="save_poi_without_poi_type_message">Vuoi davvero salvare il PDI senza specificarne il tipo?</string>
     <string name="context_menu_item_delete_waypoint">Cancellare il waypoint del GPX?</string>
     <string name="context_menu_item_edit_waypoint">Modifica il waypoint del GPX</string>
-    <string name="shared_string_location">Localizzazione</string>
+    <string name="shared_string_location">Posizione</string>
     <string name="poi_context_menu_modify_osm_change">Modifica gli edit OSM</string>
     <string name="access_from_map_description">"Il pulsante  del menu apre il pannello di controllo, non il menu"</string>
     <string name="access_from_map">Accedi dalla mappa</string>
@@ -2081,7 +2081,7 @@
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
 	<string name="routing_attr_avoid_stairs_description">Evita le scale</string>
 	<string name="release_2_2">" • Nuova interfaccia utente sensibile al contesto per le località selezionate sulla mappa e negli altri schermi\n\n • La schermata della mappa è avviata direttamente se non è selezionato \"Mostra il pannello di controllo all\'avvio\"\n\n • Configura quali e come vengono visualizzate le voci nel pannello di controllo\n\n • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menu\n\n • Per scaricare mappe, regioni è possibile selezionarle direttamente tappando sulla mappa mondiale\n\n • La ricerca di PDI ora supporta richieste più specifiche\n\n • Migliorata la funzionalità modifica di PDI e OSM\n\n • Riviste la struttura e l\'interfaccia di download dei dati della mappa\n\n e altro… "</string>
-    <string name="dashboard_or_drawer_description">C\'è una nuova scelta per controllare l\'app attraverso il personalizzabile pannello di controllo o tramite il menu statico. La tua scelta può sempre essere cambiata nelle impostazioni del pannello di controllo.</string>
+    <string name="dashboard_or_drawer_description">C\'è una nuova scelta per controllare l\'app attraverso il pannello di controllo personalizzabile o tramite il menù statico. La tua scelta può sempre essere modificata nelle impostazioni del pannello di controllo.</string>
 <string name="shared_string_near">Vicino</string>
     <string name="shared_string_hide">Nascondi</string>
     <string name="av_video_quality_low">Qualità minima</string>
@@ -2094,7 +2094,7 @@
     <string name="av_audio_bitrate_descr">Scegli il bitrate dell\'audio</string>
     <string name="rendering_attr_horseRoutes_name">Percorsi a cavallo</string>
     <string name="no_address_found">Nessun indirizzo trovato</string>
-    <string name="looking_up_address">Ricerca in corso dell\'indirizzo</string>
+    <string name="looking_up_address">Ricerca dell\'indirizzo in corso</string>
     <string name="routing_attr_avoid_borders_name">Non superare i confini</string>
     <string name="update_every">Aggiorna ogni</string>
     <string name="only_download_over_wifi">Scarica solo da rete WiFi</string>
@@ -2103,7 +2103,7 @@
     <string name="lang_als">Albanese (Tosco)</string>
     <string name="update_now">Aggiorna ora</string>
 <string name="route_distance">Distanza:</string>
-    <string name="route_duration">Durata:</string>
+    <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">L\'app non ha l\'autorizzazione per usare la SD card</string>
 <string name="no_location_permission">"L\'app non ha i permessi per accedere ai dati della  posizione."</string>
     <string name="no_camera_permission">L\'app non ha i permessi per accedere alla fotocamera.</string>
