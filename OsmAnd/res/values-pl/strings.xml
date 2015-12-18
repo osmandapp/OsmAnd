@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -2085,7 +2086,14 @@
     <string name="update_now">Aktualizuj teraz</string>
 <string name="update_every">Aktualizacja co</string>
     <string name="route_distance">Odległość:</string>
-    <string name="route_duration">Czas podróży:</string>
+    <string name="route_duration">Czas:</string>
     <string name="looking_up_address">Wyszukiwanie adresu</string>
     <string name="missing_write_external_storage_permission">Aplikacja nie posiada uprawnień do użycia karty SD</string>
-</resources>
+<string name="select_voice_provider">Wybierz wskazówki głosowe</string>
+    <string name="select_voice_provider_descr">Wybierz lub ściągnij wskazówki głosowe dla twojego języka</string>
+    <string name="impassable_road_desc">Wybierz drogi, które chcesz unikać podczas nawigacji</string>
+    <string name="shared_string_sound">Dźwięk</string>
+    <string name="no_location_permission">Aplikacja nie ma uprawnień do danych o lokalizacji.</string>
+    <string name="no_camera_permission">Aplikacja nie ma uprawnień do aparatu.</string>
+    <string name="no_microphone_permission">Aplikacja nie ma uprawnień dostępu do mikrofonu.</string>
+    </resources>
