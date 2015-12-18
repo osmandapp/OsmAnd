@@ -175,6 +175,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						if (selected.size() > 0) {
 							ApplicationMode next = selected.iterator().next();
 							settings.APPLICATION_MODE.set(next);
+							updateMenu();
 							mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 						}
 					}

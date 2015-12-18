@@ -320,6 +320,8 @@ public class RoutePreferencesMenu {
 					AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.GPXRouteTitle), nightMode);
 					final TextView gpxSpinner = (TextView) v.findViewById(R.id.GPXRouteSpinner);
 					AndroidUtils.setTextPrimaryColor(mapActivity, gpxSpinner, nightMode);
+					((ImageView) v.findViewById(R.id.dropDownIcon))
+							.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
 					updateSpinnerItems(gpxSpinner);
 					return v;
 				}
