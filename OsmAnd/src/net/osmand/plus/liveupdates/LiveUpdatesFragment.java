@@ -40,9 +40,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+
 public class LiveUpdatesFragment extends Fragment {
 	public static final String TITILE = "Live Updates";
-	public static final String LIVE_UPDATES_ON_POSTFIX = "_live_updates_on";
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
 		@Override
 		public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
@@ -62,33 +65,16 @@ public class LiveUpdatesFragment extends Fragment {
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
-		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
+//		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
 
-		final OsmandSettings settings = getMyActivity().getMyApplication().getSettings();
-
-		final TextView onOffTextView = (TextView) header.findViewById(R.id.onOffTextView);
-		int liveUpdatesStateId = settings.IS_LIVE_UPDATES_ON.get()
-				? R.string.shared_string_on : R.string.shared_string_off;
-		onOffTextView.setText(liveUpdatesStateId);
-
-		SwitchCompat liveUpdatesSwitch = (SwitchCompat) header.findViewById(R.id.liveUpdatesSwitch);
-		liveUpdatesSwitch.setChecked(settings.IS_LIVE_UPDATES_ON.get());
-		liveUpdatesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				settings.IS_LIVE_UPDATES_ON.set(isChecked);
-				int liveUpdatesStateId = isChecked ? R.string.shared_string_on
-						: R.string.shared_string_off;
-				onOffTextView.setText(liveUpdatesStateId);
-
-			}
-		});
-
-		listView.addHeaderView(header);
 		adapter = new LocalIndexesAdapter(this);
 		listView.setAdapter(adapter);
 		new LoadLocalIndexTask(adapter, this).execute();
 		return view;
+	}
+
+	private OsmandSettings getSettings() {
+		return getMyActivity().getMyApplication().getSettings();
 	}
 
 	private AbstractDownloadActivity getMyActivity() {
@@ -100,6 +86,8 @@ public class LiveUpdatesFragment extends Fragment {
 	}
 
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
+		public static final int SHOULD_UPDATE_GROUP_POSITION = 0;
+		public static final int SHOULD_NOT_UPDATE_GROUP_POSITION = 1;
 		final ArrayList<LocalIndexInfo> dataShouldUpdate = new ArrayList<>();
 		final ArrayList<LocalIndexInfo> dataShouldNotUpdate = new ArrayList<>();
 		final LiveUpdatesFragment fragment;
@@ -111,8 +99,8 @@ public class LiveUpdatesFragment extends Fragment {
 		}
 
 		public void add(LocalIndexInfo info) {
-			OsmandSettings.CommonPreference<Boolean> preference =
-					preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, info);
+			OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(info,
+					getSettings());
 			if (preference.get()) {
 				dataShouldUpdate.add(info);
 			} else {
@@ -124,7 +112,7 @@ public class LiveUpdatesFragment extends Fragment {
 			Set<LocalIndexInfo> changedSet = new HashSet<>();
 			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
-						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
+						preferenceLiveUpdatesOn(localIndexInfo, getSettings());
 				if (!preference.get()) {
 					changedSet.add(localIndexInfo);
 				}
@@ -134,7 +122,7 @@ public class LiveUpdatesFragment extends Fragment {
 			changedSet.clear();
 			for (LocalIndexInfo localIndexInfo : dataShouldNotUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
-						preferenceForLocalIndex(LIVE_UPDATES_ON_POSTFIX, localIndexInfo);
+						preferenceLiveUpdatesOn(localIndexInfo, getSettings());
 				if (preference.get()) {
 					changedSet.add(localIndexInfo);
 				}
@@ -172,7 +160,7 @@ public class LiveUpdatesFragment extends Fragment {
 			LocalFullMapsViewHolder viewHolder;
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
-				convertView = inflater.inflate(R.layout.local_index_list_item, parent, false);
+				convertView = inflater.inflate(R.layout.local_index_live_updates_list_item, parent, false);
 				viewHolder = new LocalFullMapsViewHolder(convertView, fragment);
 				convertView.setTag(viewHolder);
 			} else {
@@ -181,7 +169,6 @@ public class LiveUpdatesFragment extends Fragment {
 			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition));
 			return convertView;
 		}
-
 
 		private String getNameToDisplay(LocalIndexInfo child) {
 			String mapName = FileNameTranslationHelper.getFileName(ctx,
@@ -196,7 +183,7 @@ public class LiveUpdatesFragment extends Fragment {
 			String group = getGroup(groupPosition);
 			if (v == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
-				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
+				v = inflater.inflate(R.layout.list_group_title_with_switch, parent, false);
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
 			nameView.setText(group);
@@ -207,14 +194,32 @@ public class LiveUpdatesFragment extends Fragment {
 			Resources.Theme theme = ctx.getTheme();
 			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
+
+			SwitchCompat liveUpdatesSwitch = (SwitchCompat) v.findViewById(R.id.liveUpdatesSwitch);
+			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
+				liveUpdatesSwitch.setVisibility(View.VISIBLE);
+				OsmandApplication application = (OsmandApplication) ctx.getApplicationContext();
+				final OsmandSettings settings = application.getSettings();
+				liveUpdatesSwitch.setChecked(settings.IS_LIVE_UPDATES_ON.get());
+				liveUpdatesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						settings.IS_LIVE_UPDATES_ON.set(isChecked);
+						int liveUpdatesStateId = isChecked ? R.string.shared_string_on
+								: R.string.shared_string_off;
+					}
+				});
+			} else {
+				liveUpdatesSwitch.setVisibility(View.GONE);
+			}
 			return v;
 		}
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			if (groupPosition == 0) {
+			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				return dataShouldUpdate.size();
-			} else if (groupPosition == 1) {
+			} else if (groupPosition == SHOULD_NOT_UPDATE_GROUP_POSITION) {
 				return dataShouldNotUpdate.size();
 			} else {
 				throw new IllegalArgumentException("unexpected group position:" + groupPosition);
@@ -223,9 +228,9 @@ public class LiveUpdatesFragment extends Fragment {
 
 		@Override
 		public String getGroup(int groupPosition) {
-			if (groupPosition == 0) {
+			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				return getString(R.string.live_updates_on);
-			} else if (groupPosition == 1) {
+			} else if (groupPosition == SHOULD_NOT_UPDATE_GROUP_POSITION) {
 				return getString(R.string.live_updates_off);
 			} else {
 				throw new IllegalArgumentException("unexpected group position:" + groupPosition);
@@ -252,13 +257,17 @@ public class LiveUpdatesFragment extends Fragment {
 			return true;
 		}
 
-		private OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(String idPostfix,
-																				 LocalIndexInfo item) {
-			final OsmandApplication myApplication = fragment.getMyActivity().getMyApplication();
-			final OsmandSettings settings = myApplication.getSettings();
-			final String settingId = item.getFileName() + idPostfix;
-			return settings.registerBooleanPreference(settingId, false);
-		}
+
+	}
+
+	private static OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(
+			String idPostfix,
+			LocalIndexInfo item,
+			LiveUpdatesFragment fragment) {
+		final OsmandApplication myApplication = fragment.getMyActivity().getMyApplication();
+		final OsmandSettings settings = myApplication.getSettings();
+		final String settingId = item.getFileName() + idPostfix;
+		return settings.registerBooleanPreference(settingId, false);
 	}
 
 	private void expandAllGroups() {
@@ -279,6 +288,7 @@ public class LiveUpdatesFragment extends Fragment {
 	private static class LocalFullMapsViewHolder {
 		private final ImageView icon;
 		private final TextView nameTextView;
+		private final TextView subheaderTextView;
 		private final TextView descriptionTextView;
 		private final ImageButton options;
 		private final LiveUpdatesFragment fragment;
@@ -287,6 +297,7 @@ public class LiveUpdatesFragment extends Fragment {
 		private LocalFullMapsViewHolder(View view, LiveUpdatesFragment context) {
 			icon = (ImageView) view.findViewById(R.id.icon);
 			nameTextView = (TextView) view.findViewById(R.id.nameTextView);
+			subheaderTextView = (TextView) view.findViewById(R.id.subheaderTextView);
 			descriptionTextView = (TextView) view.findViewById(R.id.descriptionTextView);
 			options = (ImageButton) view.findViewById(R.id.options);
 			this.view = view;
@@ -294,10 +305,21 @@ public class LiveUpdatesFragment extends Fragment {
 		}
 
 		public void bindLocalIndexInfo(final LocalIndexInfo item) {
-			nameTextView.setText(item.getName());
-			descriptionTextView.setText(item.getDescription());
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
+			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
+					preferenceLiveUpdatesOn(item, fragment.getSettings());
+
+			nameTextView.setText(item.getName());
+			if (shouldUpdatePreference.get()) {
+				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
+				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
+				subheaderTextView.setText(frequency.toString());
+			} else {
+				subheaderTextView.setText(item.getSize() + "");
+			}
+			descriptionTextView.setText(item.getDescription());
 			icon.setImageDrawable(context.getIconsCache().getContentIcon(R.drawable.ic_map));
+
 			final View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

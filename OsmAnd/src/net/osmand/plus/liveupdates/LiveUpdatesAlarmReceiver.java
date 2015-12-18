@@ -25,6 +25,10 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+
 public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesAlarmReceiver.class);
 
@@ -93,10 +97,10 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 	private static void tryRescheduleDownload(Context context, OsmandSettings settings,
 											  LocalIndexInfo localIndexInfo) {
 		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
-				preferenceUpdateTimes(localIndexInfo, settings);
+				preferenceUpdateFrequency(localIndexInfo, settings);
 		final Integer frequencyOrdinal = updateFrequencyPreference.get();
-		if (LiveUpdatesSettingsDialogFragment.UpdateFrequencies.values()[frequencyOrdinal]
-				== LiveUpdatesSettingsDialogFragment.UpdateFrequencies.HOURLY) {
+		if (UpdateFrequency.values()[frequencyOrdinal]
+				== UpdateFrequency.HOURLY) {
 			return;
 		}
 		final Integer retriesLeft = settings.LIVE_UPDATES_RETRIES.get();
@@ -117,20 +121,5 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 		} else {
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
 		}
-	}
-
-	private static OsmandSettings.CommonPreference<Boolean> preferenceDownloadViaWiFi(
-			LocalIndexInfo item, OsmandSettings settings) {
-		final String settingId = item.getFileName()
-				+ LiveUpdatesSettingsDialogFragment.DOWNLOAD_VIA_WIFI_POSTFIX;
-		return settings.registerBooleanPreference(settingId, false);
-	}
-
-	private static OsmandSettings.CommonPreference<Integer> preferenceUpdateTimes(
-			LocalIndexInfo item, OsmandSettings settings) {
-		final String settingId = item.getFileName()
-				+ LiveUpdatesSettingsDialogFragment.UPDATE_TIMES_POSTFIX;
-		return settings.registerIntPreference(settingId,
-				LiveUpdatesSettingsDialogFragment.UpdateFrequencies.HOURLY.ordinal());
 	}
 }

@@ -27,16 +27,21 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.Calendar;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimesOfDay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+
 public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
+	private static final String LOCAL_INDEX = "local_index";
 	public static final String LOCAL_INDEX_INFO = "local_index_info";
 
-	private static final String LOCAL_INDEX = "local_index";
-	public static final String UPDATE_TIMES_POSTFIX = "_update_times";
-	private static final String TIME_OF_DAY_TO_UPDATE_POSTFIX = "_time_of_day_to_update";
+
 	private static final int MORNING_UPDATE_TIME = 8;
 	private static final int NIGHT_UPDATE_TIME = 21;
 	private static final int SHIFT = 1000;
-	public static final String DOWNLOAD_VIA_WIFI_POSTFIX = "_download_via_wifi";
 
 	@NonNull
 	@Override
@@ -57,13 +62,13 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		// countryNameTextView.setText(localIndexInfo.getWorldRegion().getLocaleName());
 		countryNameTextView.setVisibility(View.VISIBLE);
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
-				preferenceForLocalIndex(localIndexInfo);
+				preferenceForLocalIndex(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
-				preferenceDownloadViaWiFi(localIndexInfo);
+				preferenceDownloadViaWiFi(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Integer> updateFrequencePreference =
-				preferenceUpdateTimes(localIndexInfo);
+				preferenceUpdateFrequency(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
-				preferenceTimeOfDayToUpdate(localIndexInfo);
+				preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
 		liveUpdatesSwitch.setChecked(liveUpdatePreference.get());
 		downloadOverWiFiSwitch.setChecked(downloadViaWiFiPreference.get());
 
@@ -73,7 +78,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					public void onClick(DialogInterface dialog, int which) {
 						final int updateFrequencyInt = updateFrequencySpinner.getSelectedItemPosition();
 						updateFrequencePreference.set(updateFrequencyInt);
-						UpdateFrequencies updateFrequency = UpdateFrequencies.values()[updateFrequencyInt];
+						UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
 
 						AlarmManager alarmMgr = (AlarmManager) getActivity()
 								.getSystemService(Context.ALARM_SERVICE);
@@ -129,7 +134,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		updateFrequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				UpdateFrequencies updateFrequency = UpdateFrequencies.values()[position];
+				UpdateFrequency updateFrequency = UpdateFrequency.values()[position];
 				switch (updateFrequency) {
 					case HOURLY:
 						updateTimesOfDaySpinner.setVisibility(View.GONE);
@@ -166,26 +171,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		return (LiveUpdatesFragment) getParentFragment();
 	}
 
-	private OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(LocalIndexInfo item) {
-		final String settingId = item.getFileName() + LiveUpdatesFragment.LIVE_UPDATES_ON_POSTFIX;
-		return getSettings().registerBooleanPreference(settingId, false);
-	}
-
-	private OsmandSettings.CommonPreference<Boolean> preferenceDownloadViaWiFi(LocalIndexInfo item) {
-		final String settingId = item.getFileName() + DOWNLOAD_VIA_WIFI_POSTFIX;
-		return getSettings().registerBooleanPreference(settingId, false);
-	}
-
-	private OsmandSettings.CommonPreference<Integer> preferenceUpdateTimes(LocalIndexInfo item) {
-		final String settingId = item.getFileName() + UPDATE_TIMES_POSTFIX;
-		return getSettings().registerIntPreference(settingId, UpdateFrequencies.HOURLY.ordinal());
-	}
-
-	private OsmandSettings.CommonPreference<Integer> preferenceTimeOfDayToUpdate(LocalIndexInfo item) {
-		final String settingId = item.getFileName() + TIME_OF_DAY_TO_UPDATE_POSTFIX;
-		return getSettings().registerIntPreference(settingId, TimesOfDay.NIGHT.ordinal());
-	}
-
 	private OsmandSettings getSettings() {
 		return getMyApplication().getSettings();
 	}
@@ -200,16 +185,5 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		args.putParcelable(LOCAL_INDEX, localIndexInfo);
 		fragment.setArguments(args);
 		return fragment;
-	}
-
-	public static enum UpdateFrequencies {
-		HOURLY,
-		DAILY,
-		WEEKLY
-	}
-
-	public static enum TimesOfDay {
-		MORNING,
-		NIGHT
 	}
 }

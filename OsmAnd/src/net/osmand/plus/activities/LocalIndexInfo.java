@@ -27,8 +27,7 @@ public class LocalIndexInfo implements Parcelable {
 	private boolean singleFile;
 	private int kbSize = -1;
 
-	@NonNull
-	private final WorldRegion worldRegion;
+	private WorldRegion worldRegion;
 
 	// UI state expanded
 	private boolean expanded;
@@ -46,10 +45,6 @@ public class LocalIndexInfo implements Parcelable {
 			kbSize = (int) ((f.length() + 512) >> 10);
 		}
 		this.backupedData = backuped;
-
-		final String baseName = getBaseName().toLowerCase();
-		WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
-		this.worldRegion = worldRegion;
 	}
 
 	private String formatName(String name) {
@@ -66,10 +61,6 @@ public class LocalIndexInfo implements Parcelable {
 		this.type = type;
 		backupedData = backup;
 		this.subfolder = subfolder;
-
-		final String baseName = getBaseName().toLowerCase();
-		WorldRegion worldRegion = app.getRegions().getRegionDataByDownloadName(baseName);
-		this.worldRegion = worldRegion;
 	}
 
 	public void setCorrupted(boolean corrupted) {
