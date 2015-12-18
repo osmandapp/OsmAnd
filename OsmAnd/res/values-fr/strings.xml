@@ -2075,9 +2075,11 @@
 <string name="rendering_attr_horseRoutes_name">Randonnée à cheval</string>
     <string name="update_now">Effectuer la mise à jour maintenant</string>
 <string name="route_distance">Distance :</string>
-    <string name="route_duration">Durée du trajet :</string>
+    <string name="route_duration">Durée :</string>
     <string name="missing_write_external_storage_permission">L\'application n\'est pas autorisée à utiliser la carte SD</string>
 <string name="no_location_permission">L\'application n\'est pas autorisée à utiliser les données de positionnement.</string>
     <string name="no_camera_permission">L\'application n\'est pas autorisée à utiliser l\'appareil photo.</string>
     <string name="no_microphone_permission">L\'application n\'est pas autorisée à utiliser le microphone.</string>
+    <string name="impassable_road_desc">Sélectionnez les routes à éviter</string>
+    <string name="shared_string_sound">Son</string>
     </resources>
