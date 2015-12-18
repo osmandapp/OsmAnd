@@ -1166,8 +1166,8 @@
 
 	<string name="poi_population">人口數</string>
 
-	<string name="poi_parking_underground">地下</string>
-	<string name="poi_parking_multi_storey">多層</string>
+	<string name="poi_parking_underground">類型：地下</string>
+	<string name="poi_parking_multi_storey">類型：多層</string>
 
 	<string name="poi_bicycle_parking_stands">立台</string>
 	<string name="poi_bicycle_parking_wall_loops">壁掛架</string>
