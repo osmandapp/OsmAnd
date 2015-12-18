@@ -2110,4 +2110,6 @@
     <string name="no_microphone_permission">L\'app non ha i permessi per accedere al microfono.</string>
     <string name="impassable_road_desc">Seleziona le strade che vuoi evitare nella navigazione</string>
     <string name="shared_string_sound">Suono</string>
+    <string name="select_voice_provider">Selezionare la guida vocale</string>
+    <string name="select_voice_provider_descr">Seleziona o scarica la guida vocale per la tua lingua</string>
     </resources>
