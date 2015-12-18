@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -1951,10 +1952,15 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="looking_up_address">Hľadá sa adresa</string>
     <string name="rendering_attr_horseRoutes_name">Trasy pre kone</string>
     <string name="route_distance">Vzdialenosť:</string>
-    <string name="route_duration">Čas cesty:</string>
+    <string name="route_duration">Čas:</string>
     <string name="update_now">Aktualizovať teraz</string>
 <string name="update_every">Aktualizovať každých</string>
     <string name="only_download_over_wifi">Sťahovať iba cez WiFi</string>
     <string name="live_update">Okamžité aktualizácie</string>
     <string name="missing_write_external_storage_permission">Aplikácia nemá oprávnenia použiť SD kartu</string>
-</resources>
+<string name="impassable_road_desc">Vyberte cesty, ktoré majú byť pri navigácii obídené</string>
+    <string name="shared_string_sound">Zvuk</string>
+    <string name="no_location_permission">Aplikácia nemá oprávnenia na prístup k údajom o polohe.</string>
+    <string name="no_camera_permission">Aplikácia nemá oprávnenia na prístup k fotoaparátu.</string>
+    <string name="no_microphone_permission">Aplikácia nemá oprávnenia na prístup k mikrofónu.</string>
+    </resources>
