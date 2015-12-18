@@ -2082,4 +2082,5 @@
     <string name="no_microphone_permission">Die App hat keine Berechtigung auf das Mikrofon zuzugreifen.</string>
     <string name="impassable_road_desc">Straßen auswählen, welche während der Navigation vermieden werden sollen</string>
     <string name="shared_string_sound">Ton</string>
+    <string name="select_voice_provider">Sprachansage auswählen</string>
     </resources>
