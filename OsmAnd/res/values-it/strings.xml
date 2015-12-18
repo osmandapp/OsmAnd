@@ -2103,9 +2103,11 @@
     <string name="lang_als">Albanese (Tosco)</string>
     <string name="update_now">Aggiorna ora</string>
 <string name="route_distance">Distanza:</string>
-    <string name="route_duration">Durata del viaggio:</string>
+    <string name="route_duration">Durata:</string>
     <string name="missing_write_external_storage_permission">L\'app non ha l\'autorizzazione per usare la SD card</string>
 <string name="no_location_permission">"L\'app non ha i permessi per accedere ai dati della  posizione."</string>
     <string name="no_camera_permission">L\'app non ha i permessi per accedere alla fotocamera.</string>
     <string name="no_microphone_permission">L\'app non ha i permessi per accedere al microfono.</string>
+    <string name="impassable_road_desc">Seleziona le strade che vuoi evitare nella navigazione</string>
+    <string name="shared_string_sound">Suono</string>
     </resources>
