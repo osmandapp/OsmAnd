@@ -265,7 +265,7 @@ public class GeocodingUtilities {
 
 						@Override
 						public boolean isCancelled() {
-							return result.isCancelled();
+							return result != null && result.isCancelled();
 						}
 					}, mainWord);
 			reader.searchAddressDataByName(req);
