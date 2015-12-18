@@ -1037,7 +1037,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="shared_string_control_start">Nagr</string>
+    <string name="shared_string_control_start">Nagraj</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1999,7 +1999,7 @@
     <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
     
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
-    <string name="share_geo">wsp:</string>
+    <string name="share_geo">geo:</string>
     <string name="confirm_download_roadmaps">Pobrać mapę samochodową, nawet jeśli pobrano już zwykłą mapę?</string>
     <string name="free_downloads_used_description">Wyświetla ilość zużytych darmowych pobrań</string>
 
@@ -2046,7 +2046,7 @@
     <string name="use_drawer_btn">Używaj menu</string>
     <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
-    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj POI lub pominąć go.</string>
+    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj POI lub pominąć go</string>
     <string name="osm_edit_modified_poi">Zmodyfikowano POI OSM</string>
     <string name="osm_edit_deleted_poi">Usunięto POI OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
