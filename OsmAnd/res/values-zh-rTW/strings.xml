@@ -2034,9 +2034,11 @@
     <string name="live_update">即時更新</string>
 <string name="update_now">立即更新</string>
 <string name="route_distance">距離：</string>
-    <string name="route_duration">行駛時間：</string>
+    <string name="route_duration">時間：</string>
     <string name="missing_write_external_storage_permission">應用程式無權限使用 SD 卡</string>
 <string name="no_location_permission">應用程式沒有權限存取所在地資料。</string>
     <string name="no_camera_permission">應用程式沒有權限存取相機。</string>
     <string name="no_microphone_permission">應用程式沒有權限存取麥克風。</string>
+    <string name="impassable_road_desc">選擇在導航期間您想要避開的道路</string>
+    <string name="shared_string_sound">語音</string>
     </resources>
