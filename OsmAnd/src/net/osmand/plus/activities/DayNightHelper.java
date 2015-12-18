@@ -56,7 +56,14 @@ public class DayNightHelper implements SensorEventListener {
 	private long lastTime = 0;
 	private boolean lastNightMode = false;
 	private StateChangedListener<Boolean> sensorStateListener;
-	
+
+	public boolean isNightModeForMapControls() {
+		if (osmandApplication.getSettings().isLightContent()) {
+			return isNightMode();
+		} else {
+			return true;
+		}
+	}
 
 	/**
 	 * @return null if could not be determined (in case of error)

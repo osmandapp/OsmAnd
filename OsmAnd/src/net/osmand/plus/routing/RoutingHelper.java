@@ -1,12 +1,6 @@
 package net.osmand.plus.routing;
 
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
@@ -29,6 +23,11 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import java.lang.ref.WeakReference;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class RoutingHelper {
 	
@@ -891,7 +890,7 @@ public class RoutingHelper {
 		}
 	}
 	
-	public Thread startTaskInRouteThreadIfPossible(final Runnable r) {
+	public boolean startTaskInRouteThreadIfPossible(final Runnable r) {
 		if (currentRunningJob == null) {
 			synchronized (this) {
 				currentRunningJob = new Thread(new Runnable() {
@@ -907,9 +906,10 @@ public class RoutingHelper {
 					}
 				}, "Calculating position"); //$NON-NLS-1$
 				currentRunningJob.start();
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 	
 	

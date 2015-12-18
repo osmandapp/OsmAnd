@@ -125,7 +125,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public void updateInfo(final View main) {
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		updateViaView(main);
 		updateFromSpinner(main);
 		updateToSpinner(main);
@@ -148,6 +148,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			ImageView iconView = (ImageView) main.findViewById(R.id.InfoIcon);
 			main.findViewById(R.id.Prev).setVisibility(View.GONE);
 			main.findViewById(R.id.Next).setVisibility(View.GONE);
+			main.findViewById(R.id.InfoIcon).setVisibility(View.GONE);
+			main.findViewById(R.id.DurationIcon).setVisibility(View.GONE);
+			main.findViewById(R.id.InfoDistance).setVisibility(View.GONE);
+			main.findViewById(R.id.InfoDuration).setVisibility(View.GONE);
 			textView.setText(R.string.route_is_too_long);
 			textView.setVisibility(View.VISIBLE);
 			iconView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_warning, isLight()));
@@ -171,6 +175,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						if (selected.size() > 0) {
 							ApplicationMode next = selected.iterator().next();
 							settings.APPLICATION_MODE.set(next);
+							updateMenu();
 							mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 						}
 					}

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -1934,4 +1935,36 @@
     <string name="plugin_touringview_name">Vista de mapa turístico</string>
 	<string name="plugin_touringview_descr">"Ao activar esta vista cámbiase o estilo do mapa de OsmAnd a «Vista turística», que é unha vista especial moi detallada para viaxeiros e condutores profesionais.\n\nEsta vista fornece, en todas as ampliacións do mapa, o nivel máximo de detalles de viaxe dispoñíbeis cos datos do mapa (en concreto, estradas, pistas, camiños e marcas de orientación).\n\nTamén mostra claramente todos os tipos de estrada, distinguíndoas sen ambigüidades pola súa cor, o que é útil especialmente cando se conducen vehículos grandes.\n\nTamén fornece opcións de turismo especiais, como rutas de ciclismo ou rutas de montaña.\n\nNon se precisa descargar ningún mapa especial, xa que a vista se crea a partir dos mapas normais.\n\nPódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa» en «Configurar o mapa» como se desexe. "</string>
 	<string name="plugin_nautical_descr">"Este engadido enriquece o aplicativo de mapas de navegación OsmAnd para que mostre tamén mapas náuticos para viaxes en barco e outros tipos de deportes acuáticos.\n\nUnha extensión de mapas especial para OsmAnd fornece todas as marcas náuticas e símbolos das cartas para a navegación en augas interiores e de cabotaxe. A descrición de cada marca de navegación fornece os detalles precisos para identificala, así como o seu significado (categoría, forma, cor, secuencia, referencia, etc.).\n\nPara volver a un dos estilos de mapa convencionais de OsmAnd, simplemente hai que desactivar este engadido de novo ou cambiar o «Estilo de mapa» en «Configurar o mapa» como se desexe. "</string>
-	</resources>
+	<string name="impassable_road_desc">Seleccione as estradas que desexe evitar durante a navegación</string>
+    <string name="shared_string_sound">Son</string>
+    <string name="no_location_permission">O aplicativo non ten permiso para acceder aos datos de localización.</string>
+    <string name="no_camera_permission">O aplicativo non ten permiso para acceder á cámara.</string>
+    <string name="no_microphone_permission">O aplicativo non ten permiso para acceder ao micrófono.</string>
+    <string name="route_distance">Distancia:</string>
+    <string name="route_duration">Hora:</string>
+    <string name="no_address_found">Non se especificou ningún enderezo</string>
+    <string name="shared_string_near">Preto</string>
+    <string name="shared_string_hide">Agochar</string>
+    <string name="av_video_quality_low">Calidade inferior</string>
+    <string name="av_video_quality_high">Calidade superior</string>
+    <string name="av_video_quality">Calidade da saída de vídeo</string>
+    <string name="av_video_quality_descr">Seleccione a calidade da saída de vídeo</string>
+    <string name="av_audio_format">Formato de saída do son</string>
+    <string name="av_audio_format_descr">Seleccione o formato de saída do son</string>
+    <string name="av_audio_bitrate">Taxa de bits do son</string>
+    <string name="av_audio_bitrate_descr">Seleccione a taxa de bits o son</string>
+    <string name="please_specify_poi_type_only_from_list">Indique o tipo de PDE correcto ou omítao</string>
+    <string name="access_from_map_description">O botón do menú inicia a pantalla principal, non o menú</string>
+    <string name="access_from_map">Acceso desde o mapa</string>
+    <string name="copied_to_clipboard">Copiado ao portapapeis</string>
+    <string name="context_menu_item_open_note">Abrir nota de OSM</string>
+    <string name="osm_edit_reopened_note">Reabriuse a nota de OSM</string>
+    <string name="osm_edit_commented_note">Nota de OSM comentada</string>
+    <string name="osm_edit_removed_note">Nota de OSM eliminada</string>
+    <string name="osm_edit_created_note">Nota de OSM creada</string>
+    <string name="osn_bug_name">Nota de OSM</string>
+    <string name="osn_add_dialog_title">Crear unha nota</string>
+    <string name="osn_comment_dialog_title">Engadir un comentario</string>
+    <string name="osn_reopen_dialog_title">Reabrir nota</string>
+    <string name="osn_close_dialog_title">Pechar a nota</string>
+    </resources>

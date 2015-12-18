@@ -2012,4 +2012,6 @@
 <string name="no_location_permission">La aplicación no tiene permiso para acceder a los datos de ubicación.</string>
     <string name="no_camera_permission">La aplicación no tiene permiso para acceder a la cámara.</string>
     <string name="no_microphone_permission">La aplicación no tiene permiso para acceder al micrófono.</string>
+    <string name="impassable_road_desc">Seleccione carreteras a evitar durante la navegación</string>
+    <string name="shared_string_sound">Sonido</string>
     </resources>

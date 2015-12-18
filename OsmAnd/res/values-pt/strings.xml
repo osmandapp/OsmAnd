@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -1818,7 +1819,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_navigation">Navegação</string>
     <string name="nm">mn</string>
     <string name="shared_string_update">Atualizar</string>
-    <string name="please_specify_poi_type_only_from_list">"Escolha o tipo correcto de POI (ou ignore). "</string>
+    <string name="please_specify_poi_type_only_from_list">Escolha o tipo correcto de POI (ou ignore)</string>
     <string name="access_from_map_description">O botão de Menu lança o Dashboard, em vez do Menu</string>
     <string name="access_from_map">Aceder a partir do mapa</string>
     <string name="show_on_start_description">\'Desligado\' lança directamente para a vista do mapa</string>
@@ -1828,4 +1829,55 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 \n\ne mais… "</string>
     <string name="osm_save_offline">Guardar off-line</string>
     <string name="osm_edit_modified_poi">Ponto de Interesse OSM modificado</string>
+    <string name="impassable_road_desc">Escolha as estradas que quer evitar durante a navegação</string>
+    <string name="shared_string_sound">Som</string>
+    <string name="no_location_permission">A aplicação não tem permissão para aceder à localização.</string>
+    <string name="no_camera_permission">A aplicação não tem permissão para aceder à camera.</string>
+    <string name="no_microphone_permission">A aplicação não tem permissão para aceder ao microfone.</string>
+    <string name="route_distance">Distância:</string>
+    <string name="route_duration">Tempo:</string>
+    <string name="rendering_attr_horseRoutes_name">Rotas de Cavalos</string>
+    <string name="no_address_found">Nenhum endereço definido</string>
+    <string name="shared_string_near">Perto</string>
+    <string name="shared_string_hide">Ocultar</string>
+    <string name="av_video_quality_low">Baixa Qualidade</string>
+    <string name="av_video_quality_high">Alta Qualidade</string>
+    <string name="av_video_quality">Qualidade de saída de Vídeo</string>
+    <string name="av_video_quality_descr">Escolha a qualidade de saída de vídeo</string>
+    <string name="av_audio_format">Formato de saída de Áudio</string>
+    <string name="av_audio_format_descr">Escolha o formato de saída de áudio</string>
+    <string name="av_audio_bitrate">Taxa bit de Áudio</string>
+    <string name="av_audio_bitrate_descr">Escolha a taxa bit de áudio</string>
+    <string name="osm_edit_deleted_poi">POI OSM apagado</string>
+    <string name="context_menu_item_open_note">Abrir Nota OSM</string>
+    <string name="osm_edit_reopened_note">Re-abrir Nota OSM</string>
+    <string name="osm_edit_commented_note">Nota OSM comentada</string>
+    <string name="osm_edit_removed_note">Nota OSM apagada</string>
+    <string name="osm_edit_created_note">Nota OSM adicionada</string>
+    <string name="osn_bug_name">Nota OSM</string>
+    <string name="osn_add_dialog_title">Adicionar Nota OSM</string>
+    <string name="osn_comment_dialog_title">Adicionar comentário</string>
+    <string name="osn_reopen_dialog_title">Re-abrir Nota</string>
+    <string name="osn_close_dialog_title">Fechar Nota</string>
+    <string name="osn_add_dialog_success">Nota adicionada com sucesso</string>
+    <string name="osn_add_dialog_error">Erro: Nota não foi adicionada</string>
+    <string name="osn_close_dialog_success">Nota encerrada com sucesso</string>
+    <string name="osn_close_dialog_error">Erro: Nota não foi encerrada</string>
+    <string name="shared_string_commit">Enviar</string>
+
+    <string name="context_menu_item_delete_waypoint">Apagar ponto GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Editar ponto GPX</string>
+    <string name="shared_string_location">Localização</string>
+    <string name="share_osm_edits_subject">Edições OSM partilhadas via OsmAnd</string>
+    <string name="read_more">Ler mais</string>
+    <string name="whats_new">Novidades</string>
+    <string name="rendering_attr_hideProposed_name">Ocultar objectos propostos</string>
+    <string name="shared_string_upload">Enviar</string>
+    <string name="osm_edit_created_poi">POI OSM adicionado</string>
+
+    <string name="world_map_download_descr">"Mapa base mundial (que abrange o mundo inteiro) está ausente ou desactualizado. Por favor, considere fazer download do \'Mapa base mundial\'  para um ambiente de mapa completo."</string>
+    <string name="shared_string_qr_code">Código QR</string>
+    <string name="map_downloaded_descr">Mapa de %1$s obtido com sucesso. Volte ao mapa para o usar.</string>
+    <string name="map_downloaded">Mapa obtido com sucesso</string>
+    <string name="go_to_map">Voltar ao mapa</string>
     </resources>

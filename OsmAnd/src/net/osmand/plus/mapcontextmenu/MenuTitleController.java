@@ -24,6 +24,7 @@ public abstract class MenuTitleController {
 	protected String streetStr = "";
 	protected String addressNotKnownStr;
 	protected boolean searchingAddress;
+	protected boolean cancelSearch;
 
 	public abstract MapActivity getMapActivity();
 
@@ -133,13 +134,14 @@ public abstract class MenuTitleController {
 
 	protected void acquireStreetName() {
 		searchingAddress = true;
+		cancelSearch = false;
 		Location ll = new Location("");
 		ll.setLatitude(getLatLon().getLatitude());
 		ll.setLongitude(getLatLon().getLongitude());
 		getMapActivity().getMyApplication().getLocationProvider()
 				.getGeocodingResult(ll, new ResultMatcher<GeocodingResult>() {
 
-					@Override	
+					@Override
 					public boolean publish(GeocodingResult object) {
 						if (object != null) {
 							OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
@@ -185,21 +187,20 @@ public abstract class MenuTitleController {
 								nameStr = streetStr;
 								getPointDescription().setName(nameStr);
 							}
-							searchingAddress = false;
-							getMapActivity().runOnUiThread(new Runnable() {
-								public void run() {
-									onSearchAddressDone();
-								}
-							});
 						}
 
+						searchingAddress = false;
+						getMapActivity().runOnUiThread(new Runnable() {
+							public void run() {
+								onSearchAddressDone();
+							}
+						});
 						return true;
 					}
 
 					@Override
 					public boolean isCancelled() {
-						searchingAddress = false;
-						return false;
+						return cancelSearch;
 					}
 
 				});

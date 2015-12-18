@@ -90,6 +90,6 @@ public interface RegionAddressRepository {
 		}
 	}
 
-	public List<GeocodingResult> justifyReverseGeocodingSearch(GeocodingResult r, double minBuildingDistance);
+	public List<GeocodingResult> justifyReverseGeocodingSearch(GeocodingResult r, double minBuildingDistance, final ResultMatcher<GeocodingResult> result);
 
 }

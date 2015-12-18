@@ -1881,9 +1881,11 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="live_update">Actualitza al moment</string>
     <string name="update_now">Actualitza ara</string>
  	<string name="route_distance">Distància:</string>
-    <string name="route_duration">Durada del viatge:</string>
+    <string name="route_duration">Durada:</string>
     <string name="missing_write_external_storage_permission">L\'aplicació no té autorització per utilitzar la memòria SD</string>
 <string name="no_location_permission">L\'aplicació no té autorització per utilitzar les dades d\'ubicació.</string>
     <string name="no_camera_permission">L\'aplicació no té autorització per utilitzar la càmera.</string>
     <string name="no_microphone_permission">L\'aplicació no té autorització per utilitzar el micròfon.</string>
+    <string name="impassable_road_desc">Indiqueu les vies que voleu evitar en la navegació</string>
+    <string name="shared_string_sound">So</string>
     </resources>

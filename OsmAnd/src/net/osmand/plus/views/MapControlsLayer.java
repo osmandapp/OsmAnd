@@ -13,7 +13,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,7 +41,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRoutePreferencesControl;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -75,7 +73,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private static CommonPreference<Integer> settingsToTransparency;
 	private OsmandSettings settings;
 
-	private MapRoutePreferencesControl optionsRouteControlDialog;
 	private MapRouteInfoMenu mapRouteInfoMenu;
 	private MapHudButton backToLocationControl;
 	private MapHudButton menuControl;
@@ -216,11 +213,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initRouteControls() {
 		mapRouteInfoMenu = new MapRouteInfoMenu(mapActivity, this);
-		optionsRouteControlDialog = new MapRoutePreferencesControl(mapActivity, this);
 	}
 
 	public void updateRouteButtons(View main, boolean routeInfo) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ImageView cancelRouteButton = (ImageView) main.findViewById(R.id.map_cancel_route_button);
 		cancelRouteButton.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_action_cancel, !nightMode));
 		AndroidUtils.setBackground(mapActivity, cancelRouteButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
@@ -276,13 +272,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	protected void clickRouteParams() {
-		if (optionsRouteControlDialog.isDialogVisible()) {
-			optionsRouteControlDialog.hideDialog();
-			mapRouteInfoMenu.showHideMenu();
-		} else {
-			mapRouteInfoMenu.hide();
-			optionsRouteControlDialog.showAndHideDialog();
-		}
+		mapActivity.getMapActions().openRoutePreferencesDialog();
 	}
 
 	protected void clickRouteWaypoints() {
@@ -293,7 +283,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	protected void clickRouteCancel() {
 		mapRouteInfoMenu.hide();
-		optionsRouteControlDialog.hideDialog();
 		if (mapActivity.getRoutingHelper().isFollowingMode()) {
 			mapActivity.getMapActions().stopNavigationActionConfirm();
 		} else {
@@ -303,7 +292,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	protected void clickRouteGo() {
 		mapRouteInfoMenu.hide();
-		optionsRouteControlDialog.hideDialog();
 		startNavigation();
 	}
 
@@ -328,7 +316,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				} else {
 					ActivityCompat.requestPermissions(mapActivity,
-							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+							new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
 							OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 				}
 			}
@@ -379,6 +367,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		});
+	}
+
+	public void doNavigate() {
+		mapRouteInfoMenu.hide();
+		startNavigation();
 	}
 
 	private void onNavigationClick() {
@@ -490,7 +483,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean dialogOpened = optionsRouteControlDialog.isDialogVisible() || mapRouteInfoMenu.isVisible();
+		boolean dialogOpened = mapRouteInfoMenu.isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);

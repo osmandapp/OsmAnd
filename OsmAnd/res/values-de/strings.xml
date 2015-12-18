@@ -2075,9 +2075,11 @@
     <string name="live_update">Live Aktualisierung</string>
 <string name="update_now">Jetzt aktualisieren</string>
 <string name="route_distance">Entfernung:</string>
-    <string name="route_duration">Reisezeit:</string>
+    <string name="route_duration">Dauer:</string>
     <string name="missing_write_external_storage_permission">Die App hat keine Berichtigung die SD-Karte zu nutzen</string>
 <string name="no_location_permission">Die App hat keine Berechtigung auf Positionsdaten zuzugreifen.</string>
     <string name="no_camera_permission">Die App hat keine Berechtigung auf die Kamera zuzugreifen.</string>
     <string name="no_microphone_permission">Die App hat keine Berechtigung auf das Mikrofon zuzugreifen.</string>
+    <string name="impassable_road_desc">Straßen auswählen, welche während der Navigation vermieden werden sollen</string>
+    <string name="shared_string_sound">Ton</string>
     </resources>

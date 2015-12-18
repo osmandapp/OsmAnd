@@ -95,7 +95,7 @@ public class MapRouteInfoMenuFragment extends Fragment {
 	public void applyDayNightMode() {
 		MapActivity ctx = getMapActivity();
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(ctx);
-		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (portrait) {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		} else {
@@ -123,7 +123,7 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaSubView), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.toTitle), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.fromTitle), nightMode);
-		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.InfoTextView), nightMode);
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.InfoTextView), nightMode);
 
 		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.FromLayout), nightMode);
 		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ViaLayout), nightMode);

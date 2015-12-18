@@ -72,7 +72,7 @@ public class AppModeDialog {
 				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
 			} else {
 				if (useMapTheme) {
-					boolean nightMode = ctx.getDaynightHelper().isNightMode();
+					boolean nightMode = ctx.getDaynightHelper().isNightModeForMapControls();
 					iv.setImageDrawable(ctx.getIconsCache().getContentIcon(mode.getSmallIconDark(), !nightMode));
 					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 				} else {

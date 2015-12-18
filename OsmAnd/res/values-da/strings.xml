@@ -2188,9 +2188,11 @@
     <string name="live_update">Realtidsopdatering</string>
 <string name="update_now">Opdater nu</string>
 <string name="route_distance">Afstand:</string>
-    <string name="route_duration">Rejsetid:</string>
+    <string name="route_duration">Varighed:</string>
     <string name="missing_write_external_storage_permission">App\'en har ikke tilladelse til at bruge SD-kortet</string>
 <string name="no_location_permission">App\'en har ikke tilladelse til at bruge lokaliseringsdata.</string>
     <string name="no_camera_permission">App\'en har ikke tilladelse til at bruge kamera.</string>
     <string name="no_microphone_permission">App\'en har ikke tilladelse til at bruge mikrofonen.</string>
+    <string name="impassable_road_desc">Vælg veje du vil undgå under navigation</string>
+    <string name="shared_string_sound">Lyd</string>
     </resources>
