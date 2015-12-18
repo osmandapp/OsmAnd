@@ -2132,4 +2132,8 @@
 <string name="no_location_permission">OsmAnd heeft geen toestemming de locatie-gegevens te gebruiken.</string>
     <string name="no_camera_permission">"OsmAnd heeft geen toestemming de camera  te gebruiken."</string>
     <string name="no_microphone_permission">OsmAnd heeft geen toestemming de microfoon te gebruiken.</string>
+    <string name="select_voice_provider">Kies stembegeleiding</string>
+    <string name="select_voice_provider_descr">Kies of download stembegeleiding voor uw taal</string>
+    <string name="impassable_road_desc">Kies wegen die vermeden moeten worden</string>
+    <string name="shared_string_sound">Stembegeleiding</string>
     </resources>
