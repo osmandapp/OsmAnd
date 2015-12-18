@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +17,11 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -27,6 +31,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider;
@@ -37,15 +43,20 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RoutePreferencesMenu {
+
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	private MapActivity mapActivity;
 	private MapControlsLayer controlsLayer;
 	private RoutingHelper routingHelper;
 	private ArrayAdapter<LocalRoutingParameter> listAdapter;
+
+	public static final String MORE_VALUE = "MORE_VALUE";
 
 	public RoutePreferencesMenu(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -133,9 +144,65 @@ public class RoutePreferencesMenu {
 	}
 
 	private void selectVoiceGuidance() {
-		mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-		controlsLayer.getMapRouteInfoMenu().hide();
-		app.getAvoidSpecificRoads().showDialog(mapActivity);
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
+
+		String[] entries;
+		final String[] entrieValues;
+		Set<String> voiceFiles = getVoiceFiles();
+		entries = new String[voiceFiles.size() + 2];
+		entrieValues = new String[voiceFiles.size() + 2];
+		int k = 0;
+		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
+		entries[k] = getString(R.string.shared_string_do_not_use);
+		adapter.item(entries[k]).reg();
+		k++;
+		for (String s : voiceFiles) {
+			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
+					FileNameTranslationHelper.getVoiceName(mapActivity, s);
+			entrieValues[k] = s;
+			adapter.item(entries[k]).reg();
+			k++;
+		}
+		entrieValues[k] = MORE_VALUE;
+		entries[k] = getString(R.string.install_more);
+		adapter.item(entries[k]).reg();
+
+		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		final ArrayAdapter<?> listAdapter =
+				adapter.createListAdapter(mapActivity, settings.isLightContent());
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String value = entrieValues[which];
+				if (MORE_VALUE.equals(value)) {
+					// listPref.set(oldValue); // revert the change..
+					final Intent intent = new Intent(mapActivity, DownloadActivity.class);
+					intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+					intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
+					mapActivity.startActivity(intent);
+				} else {
+					settings.VOICE_PROVIDER.set(value);
+					app.showDialogInitializingCommandPlayer(mapActivity, false);
+					updateParameters();
+				}
+			}
+		});
+		builder.create().show();
+	}
+
+	private Set<String> getVoiceFiles() {
+		// read available voice data
+		File extStorage = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		Set<String> setFiles = new LinkedHashSet<>();
+		if (extStorage.exists()) {
+			for (File f : extStorage.listFiles()) {
+				if (f.isDirectory()) {
+					setFiles.add(f.getName());
+				}
+			}
+		}
+		return setFiles;
 	}
 
 	public OnItemClickListener getItemClickListener(final ArrayAdapter<?> listAdapter) {
@@ -179,7 +246,7 @@ public class RoutePreferencesMenu {
 					v.findViewById(R.id.description_text).setVisibility(View.GONE);
 					v.findViewById(R.id.select_button).setVisibility(View.GONE);
 					((ImageView) v.findViewById(R.id.icon))
-							.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_volume_up, !nightMode));
+							.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_volume_up, !nightMode));
 					final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
 					btn.setVisibility(View.VISIBLE);
 					btn.setChecked(!routingHelper.getVoiceRouter().isMute());
@@ -198,7 +265,7 @@ public class RoutePreferencesMenu {
 				if (parameter instanceof AvoidRoadsRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.switch_select_list_item, null);
 					((ImageView) v.findViewById(R.id.icon))
-							.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_road_works_dark, !nightMode));
+							.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_road_works_dark, !nightMode));
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
 					final TextView btn = (TextView) v.findViewById(R.id.select_button);
 					btn.setTextColor(btn.getLinkTextColors());
@@ -227,7 +294,12 @@ public class RoutePreferencesMenu {
 					final TextView btn = (TextView) v.findViewById(R.id.select_button);
 					btn.setTextColor(btn.getLinkTextColors());
 					String voiceProvider = settings.VOICE_PROVIDER.get();
-					String voiceProviderStr = FileNameTranslationHelper.getVoiceName(mapActivity, voiceProvider);
+					String voiceProviderStr;
+					if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+						voiceProviderStr = getString(R.string.shared_string_do_not_use);
+					} else {
+						voiceProviderStr = FileNameTranslationHelper.getVoiceName(mapActivity, voiceProvider);
+					}
 					voiceProviderStr += voiceProvider.contains("tts") ? " TTS" : "";
 					btn.setText(voiceProviderStr);
 					btn.setOnClickListener(new View.OnClickListener() {
@@ -254,7 +326,7 @@ public class RoutePreferencesMenu {
 				if (parameter instanceof OtherSettingsRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 					final ImageView icon = (ImageView) v.findViewById(R.id.icon);
-					icon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.map_action_settings, !nightMode));
+					icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_action_settings, !nightMode));
 					icon.setVisibility(View.VISIBLE);
 					TextView titleView = (TextView) v.findViewById(R.id.title);
 					titleView.setText(R.string.routing_settings_2);
@@ -308,7 +380,7 @@ public class RoutePreferencesMenu {
 		if (rp != null) {
 			if (gpxParam.id == R.string.gpx_option_reverse_route) {
 				rp.setReverse(selected);
-				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
+				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints();
 				if (ps.size() > 0) {
 					Location first = ps.get(0);
@@ -358,7 +430,7 @@ public class RoutePreferencesMenu {
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
 		List<LocalRoutingParameter> list = getRoutingParametersInner(am);
 		list.add(0, new MuteSoundRoutingParameter());
-		//list.add(1, new VoiceGuidanceRoutingParameter());
+		list.add(1, new VoiceGuidanceRoutingParameter());
 		list.add(2, new AvoidRoadsRoutingParameter());
 		list.add(new GpxLocalRoutingParameter());
 		list.add(new OtherSettingsRoutingParameter());
@@ -424,7 +496,7 @@ public class RoutePreferencesMenu {
 			@Override
 			public boolean processResult(GPXUtilities.GPXFile[] result) {
 				mapActivity.getMapActions().setGPXRouteParams(result[0]);
-				mapActivity.getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
+				app.getTargetPointsHelper().updateRouteAndReferesh(true);
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();
 				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
