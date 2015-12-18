@@ -1479,5 +1479,6 @@
     <string name="free_downloads_used_description">Viser de benyttede gratis nedlastingene</string>
 
     <string name="route_distance">Avstand:</string>
-    <string name="route_duration">Reisetid:</string>
+    <string name="route_duration">Tid:</string>
+    <string name="shared_string_sound">Lyd</string>
     </resources>
