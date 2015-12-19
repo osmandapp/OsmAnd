@@ -25,6 +25,7 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.AbstractDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
@@ -170,13 +171,6 @@ public class LiveUpdatesFragment extends Fragment {
 			return convertView;
 		}
 
-		private String getNameToDisplay(LocalIndexInfo child) {
-			String mapName = FileNameTranslationHelper.getFileName(ctx,
-					fragment.getMyActivity().getMyApplication().getResourceManager().getOsmandRegions(),
-					child.getFileName());
-			return mapName;
-		}
-
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View v = convertView;
@@ -229,9 +223,9 @@ public class LiveUpdatesFragment extends Fragment {
 		@Override
 		public String getGroup(int groupPosition) {
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
-				return getString(R.string.live_updates_on);
+				return getString(R.string.live_updates);
 			} else if (groupPosition == SHOULD_NOT_UPDATE_GROUP_POSITION) {
-				return getString(R.string.live_updates_off);
+				return getString(R.string.available_maps);
 			} else {
 				throw new IllegalArgumentException("unexpected group position:" + groupPosition);
 			}
@@ -279,6 +273,7 @@ public class LiveUpdatesFragment extends Fragment {
 	void runLiveUpdate(final LocalIndexInfo info) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
 		new PerformLiveUpdateAsyncTask(getMyActivity()).execute(new String[]{fnExt});
+		adapter.notifyLiveUpdatesChanged();
 	}
 
 	LocalIndexInfo getLocalIndexInfo(int groupPosition, int childPosition) {
@@ -293,6 +288,7 @@ public class LiveUpdatesFragment extends Fragment {
 		private final ImageButton options;
 		private final LiveUpdatesFragment fragment;
 		private final View view;
+		private final int secondaryColor;
 
 		private LocalFullMapsViewHolder(View view, LiveUpdatesFragment context) {
 			icon = (ImageView) view.findViewById(R.id.icon);
@@ -302,6 +298,11 @@ public class LiveUpdatesFragment extends Fragment {
 			options = (ImageButton) view.findViewById(R.id.options);
 			this.view = view;
 			this.fragment = context;
+
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = context.getActivity().getTheme();
+			theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
+			secondaryColor = typedValue.data;
 		}
 
 		public void bindLocalIndexInfo(final LocalIndexInfo item) {
@@ -309,16 +310,34 @@ public class LiveUpdatesFragment extends Fragment {
 			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
 
-			nameTextView.setText(item.getName());
+			nameTextView.setText(getNameToDisplay(item));
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
 				subheaderTextView.setText(frequency.toString());
+				subheaderTextView.setTextColor(fragment.getActivity().getResources()
+						.getColor(R.color.dashboard_blue));
+				icon.setImageDrawable(context.getIconsCache().getContentIcon(R.drawable.ic_map));
+				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.dashboard_blue));
+				options.setImageResource(R.drawable.ic_overflow_menu_white);
 			} else {
-				subheaderTextView.setText(item.getSize() + "");
+				String size;
+				if (item.getSize() > 100) {
+					size = DownloadActivity.formatMb.format(new Object[]{(float) item.getSize() / (1 << 10)});
+				} else {
+					size = item.getSize() + " KB";
+				}
+				subheaderTextView.setText(size);
+				subheaderTextView.setTextColor(secondaryColor);
+				icon.setImageDrawable(context.getIconsCache().getPaintedContentIcon(R.drawable.ic_map, secondaryColor));
+				options.setImageResource(R.drawable.ic_action_plus);
 			}
-			descriptionTextView.setText(item.getDescription());
-			icon.setImageDrawable(context.getIconsCache().getContentIcon(R.drawable.ic_map));
+			IncrementalChangesManager cm = context.getResourceManager().getChangesManager();
+			final String fileNameWithoutExtension =
+					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
+			final long timestamp = cm.getTimestamp(fileNameWithoutExtension);
+			String formattedDate = LiveUpdatesFragment.formatDateTime(fragment.getActivity(), timestamp);
+			descriptionTextView.setText(context.getString(R.string.last_update, formattedDate));
 
 			final View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
@@ -329,6 +348,13 @@ public class LiveUpdatesFragment extends Fragment {
 			};
 			options.setOnClickListener(clickListener);
 			view.setOnClickListener(clickListener);
+		}
+
+		private String getNameToDisplay(LocalIndexInfo child) {
+			String mapName = FileNameTranslationHelper.getFileName(fragment.getActivity(),
+					fragment.getMyActivity().getMyApplication().getResourceManager().getOsmandRegions(),
+					child.getFileName());
+			return mapName;
 		}
 	}
 
@@ -360,7 +386,8 @@ public class LiveUpdatesFragment extends Fragment {
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
 			for (LocalIndexInfo localIndexInfo : values) {
-				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA) {
+				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
+						&& localIndexInfo.getFileName().toLowerCase().contains("world")) {
 					adapter.add(localIndexInfo);
 				}
 			}
@@ -415,5 +442,11 @@ public class LiveUpdatesFragment extends Fragment {
 				}
 			}
 		}
+	}
+
+	private static String formatDateTime(Context ctx, long dateTime) {
+		java.text.DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
+		java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
+		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 	}
 }

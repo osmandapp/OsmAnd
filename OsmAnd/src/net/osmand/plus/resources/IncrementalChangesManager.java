@@ -1,5 +1,15 @@
 package net.osmand.plus.resources;
 
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -12,16 +22,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 public class IncrementalChangesManager {
 
@@ -319,15 +319,7 @@ public class IncrementalChangesManager {
 			iul.errorMessage = resourceManager.getContext().getString(R.string.no_updates_available);
 			return iul;
 		}
-		long timestamp = ruf.mainFileInit;
-		for (RegionUpdate ru : ruf.monthUpdates.values()) {
-			timestamp = Math.max(ru.obfCreated, timestamp);
-		}
-		for (List<RegionUpdate> l : ruf.dayUpdates.values()) {
-			for (RegionUpdate ru : l) {
-				timestamp = Math.max(ru.obfCreated, timestamp);
-			}
-		}
+		long timestamp = getTimestamp(ruf);
 		try {
 			List<IncrementalUpdate> lst = getIncrementalUpdates(fileName, timestamp);
 			for(IncrementalUpdate iu : lst) {
@@ -341,5 +333,23 @@ public class IncrementalChangesManager {
 		return iul;
 	}
 
-	
+	public long getTimestamp(String fileName) {
+		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		return getTimestamp(ruf);
+	}
+
+	private long getTimestamp(RegionUpdateFiles ruf) {
+		long timestamp = ruf.mainFileInit;
+		for (RegionUpdate ru : ruf.monthUpdates.values()) {
+			timestamp = Math.max(ru.obfCreated, timestamp);
+		}
+		for (List<RegionUpdate> l : ruf.dayUpdates.values()) {
+			for (RegionUpdate ru : l) {
+				timestamp = Math.max(ru.obfCreated, timestamp);
+			}
+		}
+		return timestamp;
+	}
+
+
 }

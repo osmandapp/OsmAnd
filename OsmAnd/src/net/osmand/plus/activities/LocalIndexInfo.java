@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
@@ -26,8 +25,6 @@ public class LocalIndexInfo implements Parcelable {
 	private String fileName;
 	private boolean singleFile;
 	private int kbSize = -1;
-
-	private WorldRegion worldRegion;
 
 	// UI state expanded
 	private boolean expanded;
@@ -113,10 +110,6 @@ public class LocalIndexInfo implements Parcelable {
 		this.subfolder = subfolder;
 	}
 
-	public WorldRegion getWorldRegion() {
-		return worldRegion;
-	}
-
 	public String getSubfolder() {
 		return subfolder;
 	}
@@ -192,7 +185,6 @@ public class LocalIndexInfo implements Parcelable {
 		dest.writeString(this.fileName);
 		dest.writeByte(singleFile ? (byte) 1 : (byte) 0);
 		dest.writeInt(this.kbSize);
-		dest.writeSerializable(this.worldRegion);
 		dest.writeByte(expanded ? (byte) 1 : (byte) 0);
 	}
 
@@ -210,7 +202,6 @@ public class LocalIndexInfo implements Parcelable {
 		this.fileName = in.readString();
 		this.singleFile = in.readByte() != 0;
 		this.kbSize = in.readInt();
-		this.worldRegion = (WorldRegion) in.readSerializable();
 		this.expanded = in.readByte() != 0;
 	}
 

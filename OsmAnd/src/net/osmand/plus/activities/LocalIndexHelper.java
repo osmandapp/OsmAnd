@@ -36,11 +36,12 @@ public class LocalIndexHelper {
 	
 	
 	public String getInstalledDate(File f){
-		return getInstalledDateEdition(f.lastModified(), null);
+		return android.text.format.DateFormat.getMediumDateFormat(app).format(getInstalationDate(f));
 	}
-	
-	public String getInstalledDateEdition(long t, TimeZone timeZone){
-		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
+
+	public Date getInstalationDate(File f) {
+		final long t = f.lastModified();
+		return new Date(t);
 	}
 
 	public String getInstalledDate(long t, TimeZone timeZone){
