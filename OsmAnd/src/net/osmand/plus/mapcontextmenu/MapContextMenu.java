@@ -248,15 +248,20 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (appModeChanged) {
 				wasInit = init(latLon, pointDescription, object);
 			}
-			if (wasInit && !MapContextMenuFragment.showInstance(this, mapActivity)) {
+			if (wasInit && !MapContextMenuFragment.showInstance(this, mapActivity, true)) {
 				active = false;
+			}
+		} else {
+			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+			if (fragmentRef != null) {
+				fragmentRef.get().centerMarkerLocation();
 			}
 		}
 	}
 
 	public void show(LatLon latLon, PointDescription pointDescription, Object object) {
 		if (init(latLon, pointDescription, object)) {
-			if (!MapContextMenuFragment.showInstance(this, mapActivity)) {
+			if (!MapContextMenuFragment.showInstance(this, mapActivity, false)) {
 				active = false;
 			}
 		}
