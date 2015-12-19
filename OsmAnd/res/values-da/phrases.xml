@@ -2621,4 +2621,6 @@
 	<string name="poi_lacrosse">Lacrosse</string>
 	<string name="poi_boxing">Boksning</string>
 
+<string name="poi_official_name">Officielle navn</string>
+
 </resources>
