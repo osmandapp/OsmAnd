@@ -387,7 +387,7 @@ public class LiveUpdatesFragment extends Fragment {
 		protected void onProgressUpdate(LocalIndexInfo... values) {
 			for (LocalIndexInfo localIndexInfo : values) {
 				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
-						&& localIndexInfo.getFileName().toLowerCase().contains("world")) {
+						&& !(localIndexInfo.getFileName().toLowerCase().contains("world"))) {
 					adapter.add(localIndexInfo);
 				}
 			}
