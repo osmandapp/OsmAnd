@@ -2017,4 +2017,7 @@
     <string name="shared_string_sound">Sonido</string>
     <string name="select_voice_provider">Elija el aviso de voz</string>
     <string name="select_voice_provider_descr">Elija o descargue el aviso de voz para su idioma</string>
-    </resources>
+    <string name="live_updates">Actualizaciones en vivo</string>
+    <string name="available_maps">Mapas disponibles</string>
+    <string name="last_update">Última actualización: %s</string>
+</resources>
