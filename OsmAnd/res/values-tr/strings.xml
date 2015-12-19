@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -1995,4 +1996,9 @@
     <string name="route_duration">Yolculuk süresi:</string>
     <string name="update_now">Şimdi güncelle</string>
 <string name="missing_write_external_storage_permission">App var SD kart kullanma iznine</string>
-</resources>
+<string name="select_voice_provider">Sesli rehberlik Seç</string>
+    <string name="select_voice_provider_descr">Dil Seçin veya sesli yönlendirmeyi karşıdan Yükleyin</string>
+    <string name="impassable_road_desc">Yol seçimini navigasyon sırasında önlemek istiyorsanız</string>
+    <string name="shared_string_sound">Ses</string>
+    <string name="no_location_permission">App konum verilere erişmek için izniniz yok.</string>
+    </resources>
