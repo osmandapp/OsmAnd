@@ -2040,7 +2040,7 @@
     <string name="no_address_found">Perunu indiritzu agatadu</string> 
 	<string name="looking_up_address">Chirchende s’indiritzu</string>
     <string name="route_distance">Distàntzia:</string>
-    <string name="route_duration">Longària de su biàgiu:</string>
+    <string name="route_duration">Tempus:</string>
     <string name="rendering_attr_horseRoutes_name">Àndalas a caddu</string>
     <string name="update_every">Agiorna cada</string>
     <string name="only_download_over_wifi">Iscàrriga petzi pro mèdiu de una retza WiFi</string>
@@ -2050,4 +2050,8 @@
 <string name="no_location_permission">S’aplicatzione no est autorizada a atzèdere a sos datos de positzione.</string>
     <string name="no_camera_permission">S’aplicatzione no est autorizada a impreare sa fotocàmera.</string>
     <string name="no_microphone_permission">S’aplicatzione no est autorizada a impreare su micròfonu.</string>
+    <string name="select_voice_provider">Ischerta sa boghe de ghia</string>
+    <string name="select_voice_provider_descr">Ischerta o iscàrriga sa boghe de ghia pro sa limba tua</string>
+    <string name="impassable_road_desc">Ischerta sas istradas chi cheres istransire durante su nàvigu</string>
+    <string name="shared_string_sound">Sonu</string>
     </resources>

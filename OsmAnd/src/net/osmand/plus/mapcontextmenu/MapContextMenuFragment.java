@@ -92,6 +92,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private boolean customMapCenter;
 	private boolean moving;
 	private boolean nightMode;
+	private boolean centered;
 
 	private float skipHalfScreenStateLimit;
 
@@ -252,7 +253,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			private float maxVelocityY;
 
 			private boolean hasMoved;
-			private boolean centered;
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -261,9 +261,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					moving = false;
 					int posY = getViewY();
 					if (!centered) {
-						showOnMap(menu.getLatLon(), true, false,
-								map.getCurrentRotatedTileBox().getPixHeight() / 2 < posY - markerPaddingPx);
-						centered = true;
+						centerMarkerLocation();
 					}
 					if (hasMoved) {
 						applyPosY(posY, false, false, 0, 0);
@@ -541,7 +539,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 						.start();
 
 				if (needMapAdjust) {
-					adjustMapPosition(posY, true);
+					adjustMapPosition(posY, true, centered);
 				}
 			} else {
 				setViewY(posY, false, needMapAdjust);
@@ -689,6 +687,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (menu.displayDistanceDirection()) {
 			getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
 		}
+		if (centered) {
+			centerMarkerLocation();
+		}
 	}
 
 	@Override
@@ -770,7 +771,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef, boolean needMove) {
+	public void centerMarkerLocation() {
+		centered = true;
+		showOnMap(menu.getLatLon(), true, false, true, false);
+	}
+
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef, boolean needMove, boolean alreadyAdjusted) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
 		int fZoom = map.getZoom();
 		double flat = latLon.getLatitude();
@@ -791,6 +797,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			menu.setMapCenter(mapCenter);
 			origMarkerX = cp.getCenterPixelX();
 			origMarkerY = cp.getCenterPixelY();
+		}
+
+		if (!alreadyAdjusted) {
+			LatLon adjustedLatLon = getAdjustedMarkerLocation(getPosY(), new LatLon(flat, flon), true);
+			flat = adjustedLatLon.getLatitude();
+			flon = adjustedLatLon.getLongitude();
 		}
 
 		if (needMove) {
@@ -921,51 +933,69 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 		if (!customMapCenter) {
 			if (adjustMapPos) {
-				adjustMapPosition(y, animated);
+				adjustMapPosition(y, animated, centered);
 			}
 		} else {
 			customMapCenter = false;
 		}
 	}
 
-	private void adjustMapPosition(int y, boolean animated) {
-		double markerLat = menu.getLatLon().getLatitude();
-		double markerLon = menu.getLatLon().getLongitude();
-		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
-
-		LatLon latlon = mapCenter;
-		if (menu.isLandscapeLayout()) {
-			int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
-			int x = dpToPx(menu.getLandscapeWidthDp());
-			if (markerX - markerPaddingXPx < x || markerX > origMarkerX) {
-				int dx = (x + markerPaddingXPx) - markerX;
-				if (markerX - dx <= origMarkerX) {
-					QuadPoint cp = box.getCenterPixelPoint();
-					latlon = box.getLatLonFromPixel(cp.x - dx, cp.y);
-				} else {
-					latlon = box.getCenterLatLon();
-				}
-			}
-		} else {
-			int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
-			if (markerY + markerPaddingPx > y || markerY < origMarkerY) {
-				int dy = markerY - (y - markerPaddingPx);
-				if (markerY - dy <= origMarkerY) {
-					QuadPoint cp = box.getCenterPixelPoint();
-					latlon = box.getLatLonFromPixel(cp.x + 0, cp.y + dy);
-				}
-			}
-		}
+	private void adjustMapPosition(int y, boolean animated, boolean center) {
+		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center);
 
 		if (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude()) {
 			return;
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true, true);
+			showOnMap(latlon, false, true, true, true);
 		} else {
 			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
+	}
+
+	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center) {
+		double markerLat = reqMarkerLocation.getLatitude();
+		double markerLon = reqMarkerLocation.getLongitude();
+		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+
+		LatLon latlon;
+		if (center) {
+			latlon = reqMarkerLocation;
+		} else {
+			latlon = mapCenter;
+		}
+		if (menu.isLandscapeLayout()) {
+			int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
+			int x = dpToPx(menu.getLandscapeWidthDp());
+			if (markerX - markerPaddingXPx < x || markerX > origMarkerX) {
+				int dx = (x + markerPaddingXPx) - markerX;
+				int dy = 0;
+				QuadPoint cp = box.getCenterPixelPoint();
+				if (center) {
+					int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+					dy = (int)cp.y - markerY;
+				}
+				if (dx > 0 || center) {
+					latlon = box.getLatLonFromPixel(cp.x - dx, cp.y - dy);
+				}
+			}
+		} else {
+			int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+			if (markerY + markerPaddingPx > y || markerY < origMarkerY) {
+				int dx = 0;
+				int dy = markerY - (y - markerPaddingPx);
+				if (markerY - dy <= origMarkerY) {
+					QuadPoint cp = box.getCenterPixelPoint();
+					if (center) {
+						int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
+						dx = markerX - (int)cp.x;
+					}
+					latlon = box.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+				}
+			}
+		}
+		return latlon;
 	}
 
 	private int getFabY(int y) {
@@ -984,6 +1014,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		final int posY = getPosY();
 		setViewY(posY, true, true);
 		updateMainViewLayout(posY);
+//		centering = false;
 	}
 
 	public void dismissMenu() {
@@ -1004,7 +1035,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void setFragmentVisibility(boolean visible) {
 		if (visible) {
 			view.setVisibility(View.VISIBLE);
-			adjustMapPosition(getPosY(), true);
+			adjustMapPosition(getPosY(), true, false);
 		} else {
 			view.setVisibility(View.GONE);
 		}
@@ -1017,7 +1048,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity) {
+	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
+									   final boolean centered) {
 		try {
 
 			if (menu.getLatLon() == null) {
@@ -1033,6 +1065,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			}
 
 			MapContextMenuFragment fragment = new MapContextMenuFragment();
+			fragment.centered = centered;
 			mapActivity.getSupportFragmentManager().beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.fragmentContainer, fragment, TAG)
@@ -1062,12 +1095,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void updateOnDownload() {
-		boolean wasProgressVisible = menu.getTitleProgressController() != null && menu.getTitleProgressController().visible;
-		menu.updateData();
-		boolean progressVisible = menu.getTitleProgressController() != null && menu.getTitleProgressController().visible;
-		updateButtonsAndProgress();
-		if (wasProgressVisible != progressVisible) {
-			runLayoutListener();
+		if (menu != null) {
+			boolean wasProgressVisible = menu.getTitleProgressController() != null && menu.getTitleProgressController().visible;
+			menu.updateData();
+			boolean progressVisible = menu.getTitleProgressController() != null && menu.getTitleProgressController().visible;
+			updateButtonsAndProgress();
+			if (wasProgressVisible != progressVisible) {
+				runLayoutListener();
+			}
 		}
 	}
 

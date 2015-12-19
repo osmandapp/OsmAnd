@@ -846,12 +846,12 @@
 	<string name="poi_model">Modelarski</string>
 	<string name="poi_weapons">Sklep z bronią</string>
 
-	<string name="poi_highway_crossing">przejście autostradowe</string>
+	<string name="poi_highway_crossing">Przejście autostradowe</string>
 
 <string name="poi_entrance">Wejście</string>
 	<string name="poi_entrance_exit">Wyjście</string>
 
-	<string name="poi_barrier_entrance">Wejście</string>
+	<string name="poi_barrier_entrance">Przejście</string>
 	<string name="poi_entrance_main">Wejście główne</string>
 	<string name="poi_height_restrictor">Ogranicznik wysokości</string>
 	<string name="poi_religious">Obszar religijny</string>
@@ -938,7 +938,7 @@
 	<string name="poi_perfumery">Perfumeria</string>
 
 	<string name="poi_recycling_centre">Centrum recyklingu</string>
-	<string name="poi_recycling_container">Pojemnik</string>
+	<string name="poi_recycling_container">Typ: kontener</string>
 	<string name="poi_recycling_glass">Szkło</string>
 	<string name="poi_recycling_paper">Papier</string>
 	<string name="poi_recycling_clothes">Odzież</string>
@@ -1160,4 +1160,19 @@
 	<string name="poi_traffic_calming_island">Wysepka spowalniająca</string>
 	<string name="poi_power_tower">Wieża trakcji elektrycznej</string>
 	<string name="poi_denomination_greek_catholic">Grekokatolicki</string>
+	<string name="poi_power_cable_distribution_cabinet">Rozdzielcza szafa kablowa</string>
+	<string name="poi_recycling_fridge_and_freezer">Lodówka z zamrażarką</string>
+	<string name="poi_monitoring_station">Stacja monitoringu</string>
+	<string name="poi_office_religion">Biuro religijne</string>
+	<string name="poi_highway_steps">Schody</string>
+	<string name="poi_political_party">Biuro partii</string>
+	<string name="poi_foundation">Biuro fundacji</string>
+	<string name="poi_tax_advisor">Biuro doradcy podatkowego</string>
+
+	<string name="poi_tourism_yes">Obiekt turystyczny</string>
+	<string name="poi_denomination_church_of_england">Kościół anglikański</string>
+	<string name="poi_denomination_church_of_scotland">Kościół Szkocji</string>
+	<string name="poi_denomination_salvation_army">Armia Zbawienia</string>
+	<string name="poi_denomination_bulgarian_orthodox">Bułgarski ortodoksyjny</string>
+	<string name="poi_denomination_united_methodist">Zjednoczeni metodyści</string>
 	</resources>

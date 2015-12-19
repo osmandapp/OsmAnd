@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -1036,7 +1037,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="shared_string_control_start">Nagr</string>
+    <string name="shared_string_control_start">Nagraj</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1998,7 +1999,7 @@
     <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
     
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
-    <string name="share_geo">wsp:</string>
+    <string name="share_geo">geo:</string>
     <string name="confirm_download_roadmaps">Pobrać mapę samochodową, nawet jeśli pobrano już zwykłą mapę?</string>
     <string name="free_downloads_used_description">Wyświetla ilość zużytych darmowych pobrań</string>
 
@@ -2045,7 +2046,7 @@
     <string name="use_drawer_btn">Używaj menu</string>
     <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
-    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj POI lub pominąć go.</string>
+    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj POI lub pominąć go</string>
     <string name="osm_edit_modified_poi">Zmodyfikowano POI OSM</string>
     <string name="osm_edit_deleted_poi">Usunięto POI OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
@@ -2085,7 +2086,14 @@
     <string name="update_now">Aktualizuj teraz</string>
 <string name="update_every">Aktualizacja co</string>
     <string name="route_distance">Odległość:</string>
-    <string name="route_duration">Czas podróży:</string>
+    <string name="route_duration">Czas:</string>
     <string name="looking_up_address">Wyszukiwanie adresu</string>
     <string name="missing_write_external_storage_permission">Aplikacja nie posiada uprawnień do użycia karty SD</string>
-</resources>
+<string name="select_voice_provider">Wybierz wskazówki głosowe</string>
+    <string name="select_voice_provider_descr">Wybierz lub ściągnij wskazówki głosowe dla twojego języka</string>
+    <string name="impassable_road_desc">Wybierz drogi, które chcesz unikać podczas nawigacji</string>
+    <string name="shared_string_sound">Dźwięk</string>
+    <string name="no_location_permission">Aplikacja nie ma uprawnień do danych o lokalizacji.</string>
+    <string name="no_camera_permission">Aplikacja nie ma uprawnień do aparatu.</string>
+    <string name="no_microphone_permission">Aplikacja nie ma uprawnień dostępu do mikrofonu.</string>
+    </resources>

@@ -2015,4 +2015,6 @@
     <string name="no_microphone_permission">La aplicación no tiene permiso para acceder al micrófono.</string>
     <string name="impassable_road_desc">Elige caminos a evitar durante la navegación</string>
     <string name="shared_string_sound">Sonido</string>
+    <string name="select_voice_provider">Elija el aviso de voz</string>
+    <string name="select_voice_provider_descr">Elija o descargue el aviso de voz para su idioma</string>
     </resources>
