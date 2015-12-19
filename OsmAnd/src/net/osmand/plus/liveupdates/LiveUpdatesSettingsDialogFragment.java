@@ -73,7 +73,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		downloadOverWiFiSwitch.setChecked(downloadViaWiFiPreference.get());
 
 		builder.setView(view)
-				.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						final int updateFrequencyInt = updateFrequencySpinner.getSelectedItemPosition();
