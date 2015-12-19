@@ -69,7 +69,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				preferenceUpdateFrequency(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
 				preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
-		liveUpdatesSwitch.setChecked(liveUpdatePreference.get());
+		liveUpdatesSwitch.setChecked(true);
 		downloadOverWiFiSwitch.setChecked(downloadViaWiFiPreference.get());
 
 		builder.setView(view)

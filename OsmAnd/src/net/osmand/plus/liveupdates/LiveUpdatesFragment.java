@@ -316,9 +316,9 @@ public class LiveUpdatesFragment extends Fragment {
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
 				subheaderTextView.setText(frequency.toString());
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()
-						.getColor(R.color.dashboard_blue));
+						.getColor(R.color.osmand_orange));
 				icon.setImageDrawable(context.getIconsCache().getContentIcon(R.drawable.ic_map));
-				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.dashboard_blue));
+				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.osmand_orange));
 				options.setImageResource(R.drawable.ic_overflow_menu_white);
 			} else {
 				String size;
