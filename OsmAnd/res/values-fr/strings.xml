@@ -2084,4 +2084,7 @@
     <string name="shared_string_sound">Son</string>
     <string name="select_voice_provider">Sélectionnez la voix de guidage</string>
     <string name="select_voice_provider_descr">Sélectionnez et téléchargez la voix de guidage pour votre langue</string>
-    </resources>
+    <string name="live_updates">Mises à jour en temps réel</string>
+    <string name="available_maps">Cartes disponibles</string>
+    <string name="last_update">Dernière mise à jour : %s</string>
+</resources>
