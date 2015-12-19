@@ -2044,4 +2044,7 @@
     <string name="select_voice_provider_descr">Välj eller hämta röstvägledning för ditt språk</string>
     <string name="impassable_road_desc">Välj de vägar du vill undvika under navigering</string>
     <string name="shared_string_sound">Ljud</string>
-    </resources>
+    <string name="live_updates">Live-uppdateringar</string>
+    <string name="available_maps">Tillgängliga kartor</string>
+    <string name="last_update">Senaste uppdateringen: %s</string>
+</resources>
