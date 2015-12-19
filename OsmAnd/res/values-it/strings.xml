@@ -2112,4 +2112,7 @@
     <string name="shared_string_sound">Suono</string>
     <string name="select_voice_provider">Selezionare la guida vocale</string>
     <string name="select_voice_provider_descr">Seleziona o scarica la guida vocale per la tua lingua</string>
-    </resources>
+    <string name="live_updates">Live updates</string>
+    <string name="available_maps">Mappe disponibili</string>
+    <string name="last_update">Ultimo aggiornamento: %s</string>
+</resources>
