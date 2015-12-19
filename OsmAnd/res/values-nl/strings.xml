@@ -2136,4 +2136,7 @@
     <string name="select_voice_provider_descr">Stembegeleiding voor uw taal kiezen of downloaden</string>
     <string name="impassable_road_desc">Kies wegen die vermeden moeten worden</string>
     <string name="shared_string_sound">Stembegeleiding</string>
-    </resources>
+    <string name="live_updates">Live Updates</string>
+    <string name="available_maps">Bescikbare Kaarten</string>
+    <string name="last_update">Laatste update: %s</string>
+</resources>
