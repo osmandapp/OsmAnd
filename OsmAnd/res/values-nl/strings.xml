@@ -633,7 +633,7 @@
   <string name="save_current_track_descr">Huidige GPX-track nu opslaan</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
   <string name="save_track_interval">Registratie-interval bij navigatie</string>
-  <string name="save_track_interval_descr">Kies logging-interval voor trackregistratie tijdens navigatie</string>
+  <string name="save_track_interval_descr">Kies logging-interval voor GPX-track-opname tijdens navigatie</string>
   <string name="save_track_to_gpx_descrp">Tijdens het navigeren worden tracks gemaakt en opgeslagen</string>
   <string name="save_track_to_gpx">Track registreren tijdens navigatie</string>
   <string name="update_tile">Kaart bijwerken</string>
@@ -869,7 +869,7 @@
   
   
   <string name="map_widget_parking">Parkeren</string>
-  <string name="map_widget_monitoring">Trackregistratie</string>
+  <string name="map_widget_monitoring">GPX-Track opnemen</string>
   <string name="map_widget_speed">Snelheid</string>
   <string name="map_widget_distance">Afstand tot bestemming</string>
   <string name="map_widget_altitude">Hoogte</string>
@@ -1033,7 +1033,7 @@
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Maak een audionotitie</string>
     <string name="recording_context_menu_vrecord">Maak een videonotitie</string>
-    <string name="layer_recordings">Opnamelaag</string>
+    <string name="layer_recordings">Audio/Video-Notities</string>
     <string name="recording_can_not_be_played">Opname kan niet worden afgespeeld</string>
     <string name="recording_context_menu_delete">Wis opname</string>
     <string name="recording_context_menu_play">Afspelen</string>
@@ -1094,7 +1094,7 @@
     
 	<string name="hno">Huisnummer</string>
     
-    <string name="monitoring_settings">Trip-registratie</string>
+    <string name="monitoring_settings">GPX-track</string>
     <string name="monitoring_settings_descr">Configureer: hoe uw trips op te nemen</string>
     
     <string name="street_name">Straatnaam</string>
@@ -1917,7 +1917,7 @@
     <string name="lang_nn">Noors (Nynorsk)</string>
     <string name="lang_new">Newari / Nepalbhasa</string>
     <string name="lang_ms">Maleis</string>
-    <string name="lang_ht">Haïtiaans Creools</string>
+    <string name="lang_ht">Haïtiaans</string>
     <string name="lang_gl">Galicisch</string>
     <string name="lang_et">Estisch</string>
     <string name="lang_ceb">Cebuano</string>
@@ -1962,7 +1962,7 @@
     <string name="favourites_edit_dialog_title">Informatie over favoriet</string>
     <string name="simulate_your_location_stop_descr">Stop simulatie</string>
     <string name="simulate_your_location_descr">Routesimulatie met de berekende route of een GPX-track</string>
-    <string name="av_locations_descr">GPX-bestand met aantekeningen</string>
+    <string name="av_locations_descr">GPX-bestand met Audio/Video-notities</string>
     <string name="av_locations">Locaties</string>
     <string name="plugin_settings">Plugins</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Vermijd autotreinen</string>
