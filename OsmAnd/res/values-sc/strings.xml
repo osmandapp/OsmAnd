@@ -2054,4 +2054,7 @@
     <string name="select_voice_provider_descr">Ischerta o iscàrriga sa boghe de ghia pro sa limba tua</string>
     <string name="impassable_road_desc">Ischerta sas istradas chi cheres istransire durante su nàvigu</string>
     <string name="shared_string_sound">Sonu</string>
-    </resources>
+    <string name="live_updates">Agiornamentos in tempus reale</string>
+    <string name="available_maps">Mapas disponìbiles</string>
+    <string name="last_update">Ùrtimu agiornamentu: %s</string>
+</resources>
