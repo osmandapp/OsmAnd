@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -2053,4 +2054,18 @@
     <string name="only_download_over_wifi">Letöltés csak WiFi kapcsolaton</string>
     <string name="live_update">Élő frissítés</string>
     <string name="update_now">Frissítés most</string>
+<string name="live_updates">Élő frissítések</string>
+    <string name="available_maps">Elérhető térképek</string>
+    <string name="select_voice_provider">Hangutasítás kiválasztása</string>
+    <string name="select_voice_provider_descr">Válaszd ki és töltsd le a nyelvednek megfelelő hangutasítást</string>
+    <string name="impassable_road_desc">Válaszd ki azokat az utakat, amiket el szeretnél kerülni</string>
+    <string name="shared_string_sound">Hang</string>
+    <string name="no_location_permission">Az alkalmazásnak nincs jogosultsága elérni a helyadatokat.</string>
+    <string name="no_camera_permission">Az alkalmazásnak nincs jogosultsága elérni a kamerát.</string>
+    <string name="no_microphone_permission">Az alkalmazásnak nincs jogosultsága elérni a mikrofont.</string>
+    <string name="route_distance">Távolság:</string>
+    <string name="route_duration">Idő:</string>
+    <string name="update_every">Frissítési gyakoriság</string>
+    <string name="missing_write_external_storage_permission">Az alkalmazásnak nincs jogosultsága elérni az SD kártyát.</string>
+    <string name="last_update">Utolsó frissítés: %s</string>
 </resources>
