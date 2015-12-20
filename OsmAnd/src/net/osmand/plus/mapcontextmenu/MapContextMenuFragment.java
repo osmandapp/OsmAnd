@@ -773,21 +773,17 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public void centerMarkerLocation() {
 		centered = true;
-		showOnMap(menu.getLatLon(), true, false, true, false);
+		showOnMap(menu.getLatLon(), true, true, false);
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef, boolean needMove, boolean alreadyAdjusted) {
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
 		int fZoom = map.getZoom();
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
-		if (ignoreCoef) {
-			cp.setCenterLocation(0.5f, 0.5f);
-		} else {
-			cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
-		}
+		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
@@ -948,7 +944,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true, true, true);
+			showOnMap(latlon, false, true, true);
 		} else {
 			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
@@ -958,40 +954,53 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+		box.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		int markerMapCenterX = (int)box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		int markerMapCenterY = (int)box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		float cpyOrig = box.getCenterPixelPoint().y;
+
+		box.setCenterLocation(0.5f, 0.5f);
+		int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
+		int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+		QuadPoint cp = box.getCenterPixelPoint();
+		float cpx = cp.x;
+		float cpy = cp.y;
+
+		float cpyDelta = menu.isLandscapeLayout() ? 0 : cpyOrig - cpy;
+
+		markerY += cpyDelta;
+		y += cpyDelta;
+		float origMarkerY = this.origMarkerY + cpyDelta;
 
 		LatLon latlon;
 		if (center) {
 			latlon = reqMarkerLocation;
 		} else {
-			latlon = mapCenter;
+			latlon = box.getLatLonFromPixel(markerMapCenterX, markerMapCenterY);
 		}
 		if (menu.isLandscapeLayout()) {
-			int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
 			int x = dpToPx(menu.getLandscapeWidthDp());
 			if (markerX - markerPaddingXPx < x || markerX > origMarkerX) {
 				int dx = (x + markerPaddingXPx) - markerX;
 				int dy = 0;
-				QuadPoint cp = box.getCenterPixelPoint();
 				if (center) {
-					int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
-					dy = (int)cp.y - markerY;
+					dy = (int)cpy - markerY;
+				} else {
+					cpy = cpyOrig;
 				}
 				if (dx > 0 || center) {
-					latlon = box.getLatLonFromPixel(cp.x - dx, cp.y - dy);
+					latlon = box.getLatLonFromPixel(cpx - dx, cpy - dy);
 				}
 			}
 		} else {
-			int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
 			if (markerY + markerPaddingPx > y || markerY < origMarkerY) {
 				int dx = 0;
 				int dy = markerY - (y - markerPaddingPx);
 				if (markerY - dy <= origMarkerY) {
-					QuadPoint cp = box.getCenterPixelPoint();
 					if (center) {
-						int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
-						dx = markerX - (int)cp.x;
+						dx = markerX - (int)cpx;
 					}
-					latlon = box.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+					latlon = box.getLatLonFromPixel(cpx + dx, cpy + dy);
 				}
 			}
 		}

@@ -56,7 +56,9 @@ public abstract class PointEditorFragment extends Fragment {
 
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
 
+		getEditor().updateLandscapePortrait();
 		getEditor().updateNightMode();
+
 		if (getEditor().isLandscapeLayout()) {
 			AndroidUtils.setBackground(view.getContext(), view, !getEditor().isLight(),
 					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
