@@ -1965,4 +1965,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="no_microphone_permission">Aplikácia nemá oprávnenia na prístup k mikrofónu.</string>
     <string name="select_voice_provider">Zvoľte hlasové pokyny</string>
     <string name="select_voice_provider_descr">Vyberte alebo stiahnite hlasové pokyny pre váš jazyk</string>
-    </resources>
+    <string name="live_updates">Okamžité aktualizácie</string>
+    <string name="available_maps">Dostupné mapy</string>
+    <string name="last_update">Posledná aktualizácia: %s</string>
+</resources>
