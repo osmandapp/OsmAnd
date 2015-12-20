@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -398,7 +399,7 @@
     <string name="av_audio_format_descr">Изаберите облик за звучни излаз</string>
     <string name="av_audio_bitrate">Битски проток звука</string>
     <string name="av_audio_bitrate_descr">Изаберите битски проток звука</string>
-    <string name="please_specify_poi_type_only_from_list">"Молим, изаберите тачну врсту тачке занимања или је прескочите. "</string>
+    <string name="please_specify_poi_type_only_from_list">Молим, изаберите тачну врсту тачке занимања или је прескочите</string>
     <string name="access_from_map_description">Дугме изборника не покреће изборник, већ плочу полетника</string>
     <string name="access_from_map">Приступ са карте</string>
     <string name="show_on_start_description">„Искључи“ покреће екран мапе</string>
@@ -707,4 +708,34 @@
     <string name="osmo_group_by_invite">Уђи по позиву</string>
     <string name="osmo_group_information">Молим, прочитајте пре стварања скупа</string>
     <string name="gpx_wpt">Пролазна тачка</string>
+    <string name="available_maps">Доступне карте</string>
+    <string name="select_voice_provider">Изаберите гласовно навођење</string>
+    <string name="select_voice_provider_descr">Изаберите или преузмите гласовно навођење свог језика</string>
+    <string name="impassable_road_desc">Изаберите које путеве желите да избегавате током навођења</string>
+    <string name="shared_string_sound">Звук</string>
+    <string name="no_location_permission">Програм нема дозволу да приступи подацима о положају</string>
+    <string name="no_camera_permission">Програм нема дозволу да приступи камери.</string>
+    <string name="no_microphone_permission">Програм нема дозволу да приступи микрофону.</string>
+    <string name="route_distance">Растојање:</string>
+    <string name="route_duration">Време:</string>
+    <string name="shared_string_near">Близу</string>
+    <string name="live_updates">Надоградње уживо</string>
+    <string name="no_address_found">Није одређена адреса</string>
+    <string name="av_video_quality_low">Најнижа каквоћа</string>
+    <string name="av_video_quality_high">Највиша каквоћа</string>
+    <string name="av_video_quality">Каквоћа излаза слике</string>
+    <string name="av_video_quality_descr">Изаберите својства излазног приказа</string>
+    <string name="osm_edit_created_note">Направи белешку ОСМ-а</string>
+    <string name="context_menu_item_delete_waypoint">Да ли избрисати пролазну тачку ГПИкс-а?</string>
+    <string name="context_menu_item_edit_waypoint">Уреди пролазну тачку ГПИкс-а</string>
+    <string name="share_osm_edits_subject">Уредбе ОСМ-а дељене на Османду</string>
+    <string name="osm_edit_created_poi">Тачка занимања ОСМ-а је направљена</string>
+
+    <string name="nm">nm</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    <string name="routing_attr_avoid_shuttle_train_description"/>
+    <string name="routing_attr_avoid_shuttle_train_name"></string>
     </resources>
