@@ -2043,4 +2043,7 @@
     <string name="shared_string_sound">語音</string>
     <string name="select_voice_provider">選擇語音指引</string>
     <string name="select_voice_provider_descr">為您的語言選擇或下載語音指引</string>
-    </resources>
+    <string name="live_updates">即時更新</string>
+    <string name="available_maps">可用地圖</string>
+    <string name="last_update">最近的更新：%s</string>
+</resources>
