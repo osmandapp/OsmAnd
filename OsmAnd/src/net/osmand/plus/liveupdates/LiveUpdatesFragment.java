@@ -72,6 +72,10 @@ public class LiveUpdatesFragment extends Fragment {
 
 		adapter = new LocalIndexesAdapter(this);
 		listView.setAdapter(adapter);
+		View topShadowView = inflater.inflate(R.layout.shadow_top, listView, false);
+		listView.addHeaderView(topShadowView);
+		View bottomShadowView = inflater.inflate(R.layout.shadow_bottom, listView, false);
+		listView.addFooterView(bottomShadowView);
 		new LoadLocalIndexTask(adapter, this).execute();
 		return view;
 	}
@@ -192,7 +196,9 @@ public class LiveUpdatesFragment extends Fragment {
 			v.setBackgroundColor(typedValue.data);
 
 			SwitchCompat liveUpdatesSwitch = (SwitchCompat) v.findViewById(R.id.liveUpdatesSwitch);
+			View topShadowView = v.findViewById(R.id.bottomShadowView);
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
+				topShadowView.setVisibility(View.GONE);
 				liveUpdatesSwitch.setVisibility(View.VISIBLE);
 				OsmandApplication application = (OsmandApplication) ctx.getApplicationContext();
 				final OsmandSettings settings = application.getSettings();
@@ -206,6 +212,7 @@ public class LiveUpdatesFragment extends Fragment {
 					}
 				});
 			} else {
+				topShadowView.setVisibility(View.VISIBLE);
 				liveUpdatesSwitch.setVisibility(View.GONE);
 			}
 			return v;
