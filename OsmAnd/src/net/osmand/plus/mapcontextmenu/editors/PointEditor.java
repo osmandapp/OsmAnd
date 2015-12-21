@@ -21,8 +21,8 @@ public abstract class PointEditor {
 	public PointEditor(MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
 		this.mapActivity = mapActivity;
-		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
+		updateLandscapePortrait();
 		updateNightMode();
 	}
 
@@ -40,6 +40,10 @@ public abstract class PointEditor {
 
 	public boolean isLight() {
 		return !nightMode;
+	}
+
+	public void updateLandscapePortrait() {
+		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
 	public void updateNightMode() {

@@ -2084,4 +2084,7 @@
     <string name="shared_string_sound">Ton</string>
     <string name="select_voice_provider">Sprachansage auswählen</string>
     <string name="select_voice_provider_descr">Sprachansage für deine Sprache auswählen oder herunterladen</string>
-    </resources>
+    <string name="live_updates">Live Aktualisierungen</string>
+    <string name="available_maps">Verfügbare Karten</string>
+    <string name="last_update">Letzte Aktualisierung: %s</string>
+</resources>

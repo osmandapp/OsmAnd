@@ -2012,9 +2012,16 @@
     <string name="live_update">Актуализиране на момента</string>
     <string name="update_now">Актуализирай сега</string>
 <string name="route_distance">Разстояние:</string>
-    <string name="route_duration">Време за пътуване:</string>
+    <string name="route_duration">Продължителност:</string>
     <string name="missing_write_external_storage_permission">Приложението няма разрешение да използва SD картата</string>
 <string name="no_location_permission">Приложението няма разрешение да ползва данни за местоположение.</string>
     <string name="no_camera_permission">Приложението няма разрешение да ползва камерата.</string>
     <string name="no_microphone_permission">Приложението няма разрешение да ползва микрофона.</string>
-    </resources>
+    <string name="live_updates">Актуализации онлайн</string>
+    <string name="available_maps">Достъпни карти</string>
+    <string name="select_voice_provider">Изберете гласов пакет</string>
+    <string name="select_voice_provider_descr">Изберете или свалете гласов пакет на Вашия език</string>
+    <string name="impassable_road_desc">Изберете пътищата, които да се избегнат при навигация</string>
+    <string name="shared_string_sound">Звук</string>
+    <string name="last_update">Последна актуализация: %s</string>
+</resources>

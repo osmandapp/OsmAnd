@@ -25,7 +25,7 @@
   <string name="native_rendering">Interne kaartgeneratie</string>
   
   <string name="test_voice_prompts">Test stem-instructies</string>
-  <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Kaartbeheer), of overschakelen naar online kaarten; activeer hiervoor de "online maps" plugin.</string>
+  <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Kaartbeheer), of overschakelen naar online kaarten; activeer hiervoor de Online Kaarten-plugin.</string>
   
   <string name="send_files_to_osm">GPX-bestanden naar openstreetmap sturen?</string>
   <string name="gpx_visibility_txt">Zichtbaarheid</string>
@@ -514,7 +514,7 @@
   <string name="route_tshl">Sla scherp linksaf en volg</string>
   <string name="route_tsll">Sla licht linksaf en volg</string>
   <string name="route_tu">Keer om en volg</string>
-  <string name="route_head">Koers</string>
+  <string name="route_head">Volg</string>
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
   <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\') of deze zelf aanmaken. Daarna kan je de kaart bekijken, navigeren en adressen, interessepunten en openbaar vervoer opzoeken.</string>
@@ -550,7 +550,7 @@
   <string name="update_poi_is_not_available_for_zoom">Het vernieuwen van interessepunten is niet beschikbaar bij lage zoomniveaus</string>
   <string name="context_menu_item_update_poi">Interessepunt bijwerken</string>
   <string name="context_menu_item_update_map_confirm">Lokale gegevens via internet bijwerken?</string>
-  <string name="search_history_city">Stad: {0}</string>
+  <string name="search_history_city">Plaats: {0}</string>
   <string name="search_history_street">Straat: {0}, {1}</string>
   <string name="search_history_int_streets">Kruispunt: {0} x {1} in {2}</string>
   <string name="search_history_building">Gebouw: {0}, {1}, {2}</string>
@@ -561,7 +561,7 @@
   <string name="searching">Bezig met zoeken…</string>
   <string name="searching_address">Adres wordt gezocht…</string>
   <string name="search_osm_nominatim">Zoek adres met OSM Nominatim</string>
-  <string name="hint_search_online">Online zoeken: Huisnummer, straat, stad</string>
+  <string name="hint_search_online">Online zoeken: Huisnummer, Straat, Plaats</string>
   <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max. online zoom</string>
@@ -646,9 +646,9 @@
   <string name="use_english_names">Gebruik Engelse namen</string>
   <string name="app_settings">Programma-instellingen</string>
   <string name="search_address">Zoek adres</string>
-  <string name="choose_building">Selecteer gebouw</string>
-  <string name="choose_street">Selecteer straat</string>
-  <string name="choose_city">Selecteer stad</string>
+  <string name="choose_building">Kies Huisnummer</string>
+  <string name="choose_street">Kies Straat</string>
+  <string name="choose_city">Kies Plaats</string>
   <string name="ChooseCountry">Kies land</string>
   
   
@@ -673,13 +673,13 @@
   
   <string name="search_button">Zoeken</string>
   <string name="search_activity">Zoeken</string>
-  <string name="searchpoi_activity">Selecteer interessepunt</string>
+  <string name="searchpoi_activity">Kies Interessepunt</string>
   <string name="search_POI_level_btn">Zoek meer</string>
-  <string name="incremental_search_city">Zoek stad incrementeel</string>
+  <string name="incremental_search_city">Zoek plaats</string>
   <string name="incremental_search_street">Zoek naar straatnaam</string>
   <string name="incremental_search_building">Zoek naar gebouw</string>
   <string name="choose_available_region">Kies een regio</string>
-  <string name="choose_intersected_street">Selecteer zijstraat</string>
+  <string name="choose_intersected_street">Kies Zijstraat</string>
   <string name="Closest_Amenities">Dichtstbijzijnde voorzieningen</string>
   <string name="app_mode_default">Kaart bekijken</string>
   <string name="app_mode_car">Auto</string>
@@ -696,12 +696,12 @@
   
   <string name="search_address_top_text">Adres kiezen</string>
   <string name="search_address_region">Regio</string>
-  <string name="search_address_city">Stad</string>
+  <string name="search_address_city">Plaats</string>
   <string name="search_address_street">Straat</string>
   <string name="search_address_building">Huisnummer</string>
   <string name="search_address_building_option">Gebouw</string>
   <string name="search_address_street_option">Zijstraat</string>
-  <string name="search_tabs_location">Locatie</string>
+  <string name="search_tabs_location">Coördinaten</string>
   
   
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
@@ -762,7 +762,7 @@
   <string name="confirm_interrupt_download">Downloaden afbreken?</string>
   <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
   
-  <string name="map_online_plugin_is_not_installed">Activeer de online kaarten-plugin om andere kaartbronnen te kunnen selecteren</string>
+  <string name="map_online_plugin_is_not_installed">Activeer de Online Kaarten-plugin om andere kaartbronnen te kunnen selecteren</string>
   <string name="map_online_data">Online (raster-) kaarten</string>
   <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart)</string>
   <string name="shared_string_online_maps">Online kaarten</string>
@@ -775,8 +775,8 @@
   
   
   
-  <string name="osmand_development_plugin_description">Deze plug-in toont de instellingen voor ontwikkel- en debug-opties, zoals route test en simulatie, schermweergave-prestaties, en spraaksturing. Deze instellingen zijn bedoeld voor programmeurs die OsmAnd willen verbeteren en zijn niet nodig voor normaal gebruik.</string>
-  <string name="plugins_screen">Plugin-manager</string>
+  <string name="osmand_development_plugin_description">Deze plugin toont de instellingen voor ontwikkel- en debug-opties, zoals routetest en -simulatie, schermweergave-prestaties, en spraaksturing. Deze instellingen zijn bedoeld voor programmeurs die OsmAnd willen verbeteren en zijn niet nodig voor normaal gebruik.</string>
+  <string name="plugins_screen">Plugins beheren</string>
   
   <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen</string>
   <string name="prefs_plugins">Plugin-manager</string>
@@ -974,7 +974,7 @@
 	<string name="intermediate_point">"Tussenpunt  %1$s"</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     <string name="map_widget_show_destination_arrow">Toon richting van de bestemming</string>
-    <string name="enable_plugin_monitoring_services">Activeer de GPX-track-plugin om de afgelegde weg vast te leggen (GPX-track, online tracking)</string>
+    <string name="enable_plugin_monitoring_services">Activeer de GPX-Track opnemen- Plugin om de afgelegde weg vast te leggen (GPX-track, online tracking)</string>
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Kies kleurschema voor wegen:</string>
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
@@ -1014,8 +1014,8 @@
     <string name="download_srtm_maps">Hoogtelijnen</string>
     
 	
-<string name="audionotes_plugin_description">De Audio/video notes plug-in bied de mogelijkheden voor het maken van audio-, foto- en videonotities tijdens een reis, direct via de knop in de kaartweergave, of via het menu voor een zelfgekozen punt op de kaart.</string>
-    <string name="audionotes_plugin_name">Audio/video-notities</string>
+<string name="audionotes_plugin_description">De Audio/Video-Notities Plugin biedt de mogelijkheid voor het maken van audio-, foto- en videonotities tijdens een reis, direct via de knop in de kaartweergave, of via het menu bij een locatie op de kaart.</string>
+    <string name="audionotes_plugin_name">Audio/Video-Notities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
     <string name="osmand_srtm_long_description_1000_chars">"Toon contourlijnen en een reliëflaag over de normale kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
     
@@ -1039,7 +1039,7 @@
     <string name="recording_context_menu_play">Afspelen</string>
     <string name="recording_description">Opname %1$s %3$s %2$s</string>
     <string name="recording_default_name">Opname</string>
-    <string name="map_widget_av_notes">Audio/video-notities</string>
+    <string name="map_widget_av_notes">Audio/Video-Notities</string>
     <string name="av_def_action_video">Video opnemen</string>
     <string name="av_def_action_audio">Audio opnemen</string>
     <string name="av_widget_action_descr">Kies standaardactie voor widget</string>
@@ -1053,11 +1053,11 @@
     <string name="recording_error">Fout opgetreden bij opnemen </string>
     <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
     <string name="srtm_paid_version_msg">Overweeg om de hoogtelijnen-plugin (\"Contour lines\") te kopen in de Play-store om verdere ontwikkeling te ondersteunen.</string>
-    <string name="srtm_paid_version_title">Hoogtelijnen-plugin</string>
+    <string name="srtm_paid_version_title">Hoogtelijnen-Plugin</string>
     
     <string name="intermediate_points_change_order">Volgorde wijzigen</string>
-    <string name="dropbox_plugin_description">De Dropbox-plugin kan tracks en audio/video-notities synchroniseren met je Dropbox-account.</string>
-    <string name="dropbox_plugin_name">Dropbox-plugin</string>
+    <string name="dropbox_plugin_description">De Dropbox-Plugin kan tracks en Audio/Video-notities synchroniseren met je Dropbox-account.</string>
+    <string name="dropbox_plugin_name">Dropbox-Plugin</string>
     <string name="recording_context_menu_show">Toon</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Neem een foto</string>
@@ -1144,7 +1144,7 @@
     <string name="search_street_in_neighborhood_cities">Zoek straat in nabijgelegen plaatsen</string>
     <string name="intermediate_items_sort_return">De tussenpunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw eindbestemming.</string>
     <string name="intermediate_items_sort_by_distance">Sorteer kortste afstand</string>
-    <string name="please_select_address">Kies eerst een stad of straat</string>
+    <string name="please_select_address">Kies eerst een plaats of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
     <string name="destination_point">Bestemming %1$s</string>
     
@@ -1402,9 +1402,9 @@
 	<string name="import_file_favourites">Punten bewaren als GPX-bestand of importeren in favorieten?</string>
 	
 	
-	<string name="rendering_value_pink_name">roze</string>
+	<string name="rendering_value_pink_name">Roze</string>
 	
-	<string name="rendering_value_brown_name">bruin</string>
+	<string name="rendering_value_brown_name">Bruin</string>
 	
 	
 	
@@ -1467,7 +1467,7 @@
     <string name="sort_by_distance">Sorteer op afstand</string>
     <string name="sort_by_name">Sorteer op naam</string>
     
-    <string name="none_selected_gpx">Geen GPX bestanden geselecteerd. Selecteer de gewenste track door er lang op te drukken.</string>
+    <string name="none_selected_gpx">Geen GPX-bestanden geselecteerd. Selecteer de gewenste GPX-track door er lang op te drukken.</string>
     
     <string name="local_index_select_gpx_file">Selecteer om te bekijken</string>
     <string name="route_descr_destination">Bestemming</string>
@@ -1564,7 +1564,7 @@
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
 	<string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en pendeltaxilijnen</string>
 	<string name="confirm_every_run">Altijd vragen</string>
-	<string name="save_global_track_interval_descr">Selecteer de loggings-interval voor de standaard track opname (te starten via de GPX opname widget op het kaartscherm)</string>
+	<string name="save_global_track_interval_descr">Selecteer het loggings-interval voor de GPX-track-opname (te starten via de GPX-opname widget op het kaartscherm)</string>
 	<string name="save_global_track_interval">Standaard loggings-interval</string>
 	<string name="traffic_warning_speed_limit">Maximum snelheid</string>
     <string name="traffic_warning_border_control">Grenscontrole</string>
@@ -1690,7 +1690,7 @@
 	<string name="plugin_touringview_descr">"Verandert de kaartstijl in \'Touring-weergave (meer contrast en detail)\'. Dit is een speciale, meer gedetailleerde weergave voor reizigers en professionele chauffeurs.\n\nDeze weergave biedt, op ieder zoom niveau van de kaart, de maximale hoeveelheid aan reisgegevens die beschikbaar is in de kaart (met name wegen, onverharde wegen, paden, en oriëntatiepunten).\n\nAlle soorten wegen zijn goed te herkennen door een eenduidige kleurcodering, wat bijvoorbeeld handig is bij het besturen van een groot voertuig.\n\nOok zijn er speciale touring-opties zoals fietsroutes en bergwandelpaden.\n\nEen speciale kaart downloaden is niet nodig; de weergave wordt gecreëerd van de gewone kaartgegevens.\n\nDeze weergave kan worden aan- en uitgezet door het kiezen van \'Touring-weergave (meer contrast en detail)\' onder \'Kaart instellen\' en dan \'Kaartstijl\'. "</string>
 	<string name="plugin_nautical_descr">"Toon nautische gegevens op de kaart voor varen, zeilen, en andere vormen van watersport. Download ook het kaartbestand \'Zeebakens (wereld)\' om deze plugin te gebruiken.\n\nDeze plugin biedt alle nautische navigatietekens en kaartsymbolen voor de binnenvaart en voor navigatie bij de kust. In de beschrijving van elke navigatieteken staat de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.\n\nOm weer de gewone kaart te zien kunt u de plugin uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen. "</string>
 	<string name="plugin_ski_name">Ski kaartweergave</string>
-	<string name="plugin_ski_descr">"Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap.\n\nHet activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggedraaid door het de-activeren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'. "</string>
+	<string name="plugin_ski_descr">"Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap.\n\nHet activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggedraaid door het de-activeren van de plugin, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'. "</string>
 	
 	
 	<string name="rename_failed">Hernoemen mislukt.</string>
@@ -1698,7 +1698,7 @@
 	<string name="share_note">Deel opmerking</string>
 	
     <string name="location_on_map">Locatie:\n Lat %1$s\n Lon %2$s</string>
-	<string name="notes">Opmerkingen</string>
+	<string name="notes">AV-Notities</string>
 	<string name="online_map">Online kaart</string>
 	<string name="roads_only">Alleen wegen</string>
     <string name="free">"Vrij %1$s "</string>
@@ -1768,7 +1768,7 @@
 	<string name="shared_string_favorites">Favorieten</string>
 	<string name="shared_string_add_to_favorites">Voeg toe aan Favorieten</string>
 	
-	<string name="shared_string_my_places">Mijn plaatsen</string>
+	<string name="shared_string_my_places">Mijn Plaatsen</string>
 	
 	
 	
@@ -1797,8 +1797,8 @@
 	<string name="shared_string_clear_all">Wis alles</string>
 	<string name="shared_string_collapse">Inklappen</string>
 	<string name="shared_string_my_location">Mijn positie</string>
-	<string name="shared_string_my_favorites">Mijn Favorieten</string>
-	<string name="shared_string_my_tracks">Mijn GPX-tracks</string>
+	<string name="shared_string_my_favorites">Favorieten</string>
+	<string name="shared_string_my_tracks">GPX-tracks</string>
 	<string name="shared_string_currently_recording_track">Huidige GPX-track</string>
 	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijzigingen ophalen. Weet je dat zeker?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
@@ -1901,7 +1901,7 @@
     <string name="rendering_value_translucent_blue_name">Doorschijnend blauw</string>
     <string name="rendering_value_purple_name">Paars</string>
     <string name="rendering_value_translucent_purple_name">Doorschijnend paars</string>
-    <string name="restart_is_required">Om alle veranderingen op te slaan, moet de applicatie handmatig herstart worden.</string>
+    <string name="restart_is_required">"OsmAnd wordt opnieuw opgestart,  om de wijzigingen toe te passen."</string>
     <string name="lang_bn">Bengaals</string>
     <string name="lang_pms">Piëmontees</string>
     <string name="lang_bpy">Bishnupriya</string>
@@ -2095,7 +2095,7 @@
     <string name="rendering_attr_roadStyle_description">Stijl van wegen</string>
     <string name="poi_dialog_reopen">Heropenen</string>
 	<string name="activate_seamarks_plugin">Activeer de Zeebakens-plugin</string>
-    <string name="activate_srtm_plugin">Activeer de SRTM-plugin</string>
+    <string name="activate_srtm_plugin">Activeer de Hoogtelijnen-plugin</string>
     <string name="get_full_version">Volledige versie</string>
     <string name="save_poi_without_poi_type_message">Deze POI echt bewaren zonder het type aan te geven?</string>
     <string name="poi_context_menu_modify_osm_change">Verander OSM-wijziging</string>
@@ -2136,4 +2136,7 @@
     <string name="select_voice_provider_descr">Stembegeleiding voor uw taal kiezen of downloaden</string>
     <string name="impassable_road_desc">Kies wegen die vermeden moeten worden</string>
     <string name="shared_string_sound">Stembegeleiding</string>
-    </resources>
+    <string name="live_updates">Live Updates</string>
+    <string name="available_maps">Beschikbare Kaarten</string>
+    <string name="last_update">Laatste update: %s</string>
+</resources>
