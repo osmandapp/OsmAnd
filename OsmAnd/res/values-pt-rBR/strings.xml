@@ -1963,4 +1963,9 @@
     <string name="no_microphone_permission">App não tem permissão para acessar o microfone.</string>
     <string name="impassable_road_desc">Escolha as vias que quer evitar durante a navegação</string>
     <string name="shared_string_sound">Som</string>
-    </resources>
+    <string name="live_updates">Atualização ao vivo</string>
+    <string name="available_maps">Mapas disponíveis</string>
+    <string name="select_voice_provider">Selecione a orientação por voz</string>
+    <string name="select_voice_provider_descr">Selecione ou baixe a instrução por voz para o seu idioma</string>
+    <string name="last_update">Última atualização: %s</string>
+</resources>
