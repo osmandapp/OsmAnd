@@ -1888,4 +1888,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="no_microphone_permission">L\'aplicació no té autorització per utilitzar el micròfon.</string>
     <string name="impassable_road_desc">Indiqueu les vies que voleu evitar en la navegació</string>
     <string name="shared_string_sound">So</string>
-    </resources>
+    <string name="live_updates">Actualitzacions al moment</string>
+    <string name="available_maps">Mapes disponibles</string>
+    <string name="select_voice_provider">Seleccioneu guiatge de veu</string>
+    <string name="select_voice_provider_descr">Seleccioneu o baixeu el guiatge de veu per al vostre idioma</string>
+    <string name="last_update">Darrera actualització: %s</string>
+</resources>
