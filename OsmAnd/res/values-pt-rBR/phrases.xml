@@ -2589,4 +2589,6 @@
 	<string name="poi_lacrosse">Lacrosse</string>
 	<string name="poi_boxing">Pugilismo</string>
 
+<string name="poi_official_name">Nome oficial</string>
+
 </resources>
