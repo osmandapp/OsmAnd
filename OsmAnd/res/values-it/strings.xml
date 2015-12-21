@@ -2068,7 +2068,7 @@
 	<string name="osn_add_dialog_error">C\'è stato un errore: la nota non è stata creata</string>
 	<string name="osn_close_dialog_success">La nota è stata chiusa con successo</string>
 	<string name="osn_close_dialog_error">È stato generato un errore: la nota non è stata chiusa</string>
-	<string name="shared_string_commit">Sottoponi</string>
+	<string name="shared_string_commit">Invia</string>
 
     <string name="rendering_attr_currentTrackColor_description">Colore del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Larghezza del GPX</string>
