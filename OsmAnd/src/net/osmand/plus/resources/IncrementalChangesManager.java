@@ -333,6 +333,20 @@ public class IncrementalChangesManager {
 		return iul;
 	}
 
+	public long getUpdatesSize(String fileName){
+		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		long size = 0;
+		for (List<RegionUpdate> regionUpdates : ruf.dayUpdates.values()) {
+			for (RegionUpdate regionUpdate : regionUpdates) {
+				size += regionUpdate.file.length();
+			}
+		}
+		for (RegionUpdate regionUpdate : ruf.monthUpdates.values()) {
+			size += regionUpdate.file.length();
+		}
+		return size;
+	}
+
 	public long getTimestamp(String fileName) {
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
 		return getTimestamp(ruf);
@@ -350,6 +364,4 @@ public class IncrementalChangesManager {
 		}
 		return timestamp;
 	}
-
-
 }
