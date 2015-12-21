@@ -688,9 +688,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (menu.displayDistanceDirection()) {
 			getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
 		}
-		if (centered) {
-			centerMarkerLocation();
-		}
 	}
 
 	@Override
@@ -765,6 +762,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					origMarkerY = view.getHeight() / 2;
 				}
 
+				if (initLayout && centered) {
+					centerMarkerLocation();
+				}
 				if (!moving) {
 					doLayoutMenu();
 				}
