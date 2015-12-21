@@ -20,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.NotificationCompat;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -176,8 +177,17 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 
-		mapView = new OsmandMapTileView(this, getWindow().getDecorView().getWidth(),
-				getWindow().getDecorView().getHeight());
+		int statusBarHeight = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+		}
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int w = dm.widthPixels;
+		int h = dm.heightPixels - statusBarHeight;
+
+		mapView = new OsmandMapTileView(this, w, h);
 		if (app.getAppInitializer().checkAppVersionChanged(this)) {
 			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
 		}
@@ -552,22 +562,24 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
+			// remember if map should come back to isMapLinkedToLocation=true
+			mapViewTrackingUtilities.setMapLinkedToLocation(false);
+
 			if (mapLabelToShow != null && !mapLabelToShow.contextMenuDisabled()) {
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setMapPosition(mapView.getMapPosition());
+				mapContextMenu.setCenterMarker(true);
+				mapContextMenu.setMapZoom(settings.getMapZoomToShow());
 				if (mapLayers.getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
-			}
-			if (!latLonToShow.equals(cur)) {
+			} else if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
 						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
 			}
-			// remember if map should come back to isMapLinkedToLocation=true
-			mapViewTrackingUtilities.setMapLinkedToLocation(false);
 		}
 	}
 
