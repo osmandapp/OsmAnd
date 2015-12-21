@@ -10,6 +10,7 @@
     tools:context="net.osmand.plus.osmedit.EditPoiDialogFragment">
 
     <android.support.design.widget.TabLayout
+        android:theme="?attr/appbar_layout_theme"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -317,9 +317,8 @@ public class LiveUpdatesFragment extends Fragment {
 				subheaderTextView.setText(frequency.toString());
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()
 						.getColor(R.color.osmand_orange));
-				icon.setImageDrawable(context.getIconsCache().getContentIcon(R.drawable.ic_map));
 				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.osmand_orange));
-				options.setImageResource(R.drawable.ic_overflow_menu_white);
+				options.setImageDrawable(context.getIconsCache().getPaintedContentIcon(R.drawable.ic_overflow_menu_white, secondaryColor));
 			} else {
 				String size;
 				if (item.getSize() > 100) {
@@ -330,7 +329,7 @@ public class LiveUpdatesFragment extends Fragment {
 				subheaderTextView.setText(size);
 				subheaderTextView.setTextColor(secondaryColor);
 				icon.setImageDrawable(context.getIconsCache().getPaintedContentIcon(R.drawable.ic_map, secondaryColor));
-				options.setImageResource(R.drawable.ic_action_plus);
+				options.setImageDrawable(context.getIconsCache().getPaintedContentIcon(R.drawable.ic_action_plus, secondaryColor));
 			}
 			IncrementalChangesManager cm = context.getResourceManager().getChangesManager();
 			final String fileNameWithoutExtension =
