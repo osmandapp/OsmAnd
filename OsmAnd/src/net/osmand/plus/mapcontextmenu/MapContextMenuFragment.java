@@ -93,6 +93,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private boolean moving;
 	private boolean nightMode;
 	private boolean centered;
+	private boolean initLayout = true;
 
 	private float skipHalfScreenStateLimit;
 
@@ -705,6 +706,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
 		}
 		menu.setMapCenter(null);
+		menu.setMapZoom(0);
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
@@ -766,6 +768,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				if (!moving) {
 					doLayoutMenu();
 				}
+				initLayout = false;
 			}
 
 		});
@@ -776,15 +779,24 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		showOnMap(menu.getLatLon(), true, true, false);
 	}
 
+	private int getZoom() {
+		int zoom = menu.getMapZoom();
+		if (zoom == 0) {
+			zoom = map.getZoom();
+		}
+		return zoom;
+	}
+
 	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-		int fZoom = map.getZoom();
+		int fZoom = getZoom();
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
 		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
+		cp.setZoom(fZoom);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 
@@ -796,7 +808,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 
 		if (!alreadyAdjusted) {
-			LatLon adjustedLatLon = getAdjustedMarkerLocation(getPosY(), new LatLon(flat, flon), true);
+			LatLon adjustedLatLon = getAdjustedMarkerLocation(getPosY(), new LatLon(flat, flon), true, fZoom);
 			flat = adjustedLatLon.getLatitude();
 			flon = adjustedLatLon.getLongitude();
 		}
@@ -937,7 +949,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void adjustMapPosition(int y, boolean animated, boolean center) {
-		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center);
+		map.getAnimatedDraggingThread().stopAnimatingSync();
+		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center, getZoom());
 
 		if (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude()) {
 			return;
@@ -950,11 +963,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 	}
 
-	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center) {
+	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center, int zoom) {
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 		box.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		box.setZoom(zoom);
 		int markerMapCenterX = (int)box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
 		int markerMapCenterY = (int)box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
 		float cpyOrig = box.getCenterPixelPoint().y;
@@ -1021,9 +1035,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private void doLayoutMenu() {
 		final int posY = getPosY();
-		setViewY(posY, true, true);
+		setViewY(posY, true, !initLayout || !centered);
 		updateMainViewLayout(posY);
-//		centering = false;
 	}
 
 	public void dismissMenu() {

@@ -55,6 +55,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private LatLon mapCenter;
 	private int mapPosition = 0;
+	private boolean centerMarker;
+	private int mapZoom;
 
 	private LatLon myLocation;
 	private Float heading;
@@ -147,6 +149,18 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void setMapCenter(LatLon mapCenter) {
 		this.mapCenter = mapCenter;
+	}
+
+	public void setCenterMarker(boolean centerMarker) {
+		this.centerMarker = centerMarker;
+	}
+
+	public int getMapZoom() {
+		return mapZoom;
+	}
+
+	public void setMapZoom(int mapZoom) {
+		this.mapZoom = mapZoom;
 	}
 
 	public void updateMapCenter(LatLon mapCenter) {
@@ -261,9 +275,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void show(LatLon latLon, PointDescription pointDescription, Object object) {
 		if (init(latLon, pointDescription, object)) {
-			if (!MapContextMenuFragment.showInstance(this, mapActivity, false)) {
+			if (!MapContextMenuFragment.showInstance(this, mapActivity, centerMarker)) {
 				active = false;
 			}
+			centerMarker = false;
 		}
 	}
 
