@@ -19,6 +19,7 @@ import org.apache.commons.logging.Log;
 
 public class WhatsNewDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(WhatsNewDialogFragment.class);
+	public static boolean SHOW = true;
 
 	@NonNull
 	@Override
@@ -33,6 +34,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 			builder.setPositiveButton(R.string.read_more, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					SHOW = false;
 					Intent i = new Intent(Intent.ACTION_VIEW);
 					i.setData(Uri.parse(AppInitializer.LATEST_CHANGES_URL));
 					startActivity(i);
