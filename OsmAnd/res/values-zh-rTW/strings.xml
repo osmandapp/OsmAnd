@@ -2049,4 +2049,5 @@
 <string name="update_date_pattern">更新：%s</string>
     <string name="update_time">更新時間</string>
 <string name="size_pattern">大小：%s</string>
+<string name="updates_size_pattern">更新：%s</string>
 </resources>
