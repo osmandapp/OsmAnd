@@ -1,11 +1,12 @@
 package net.osmand.plus.liveupdates;
 
+import android.content.Context;
+
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 
-/**
- * Created by GaidamakUA on 12/18/15.
- */
 public class LiveUpdatesHelper {
 	private static final String UPDATE_TIMES_POSTFIX = "_update_times";
 	private static final String TIME_OF_DAY_TO_UPDATE_POSTFIX = "_time_of_day_to_update";
@@ -41,6 +42,19 @@ public class LiveUpdatesHelper {
 			LocalIndexInfo item, OsmandSettings settings) {
 		final String settingId = item.getFileName() + TIME_OF_DAY_TO_UPDATE_POSTFIX;
 		return settings.registerIntPreference(settingId, TimesOfDay.NIGHT.ordinal());
+	}
+
+	public static String getNameToDisplay(LocalIndexInfo child, OsmandActionBarActivity activity) {
+		String mapName = FileNameTranslationHelper.getFileName(activity,
+				activity.getMyApplication().getResourceManager().getOsmandRegions(),
+				child.getFileName());
+		return mapName;
+	}
+
+	public static String formatDateTime(Context ctx, long dateTime) {
+		java.text.DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
+		java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
+		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 	}
 
 	public static enum TimesOfDay {

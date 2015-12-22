@@ -119,7 +119,7 @@ public class IncrementalChangesManager {
 	}
 	
 	protected static String formatSize(long vl) {
-		return (float) ((vl * 1000 / (1 << 20l)) / 1000.0f) + "";
+		return (vl * 1000 / (1 << 20l)) / 1000.0f + "";
 	}
 	
 	public static long calculateSize(List<IncrementalUpdate> list) {
@@ -345,6 +345,18 @@ public class IncrementalChangesManager {
 			size += regionUpdate.file.length();
 		}
 		return size;
+	}
+
+	public void deleteUpdates(String fileName){
+		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		for (List<RegionUpdate> regionUpdates : ruf.dayUpdates.values()) {
+			for (RegionUpdate regionUpdate : regionUpdates) {
+				regionUpdate.file.delete();
+			}
+		}
+		for (RegionUpdate regionUpdate : ruf.monthUpdates.values()) {
+			regionUpdate.file.delete();
+		}
 	}
 
 	public long getTimestamp(String fileName) {

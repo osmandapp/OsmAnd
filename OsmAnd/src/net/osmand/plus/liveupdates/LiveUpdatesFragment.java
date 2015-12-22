@@ -18,7 +18,6 @@ import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -28,10 +27,7 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
@@ -44,6 +40,8 @@ import java.util.List;
 import java.util.Set;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 
@@ -263,30 +261,10 @@ public class LiveUpdatesFragment extends Fragment {
 
 	}
 
-	private static OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(
-			String idPostfix,
-			LocalIndexInfo item,
-			LiveUpdatesFragment fragment) {
-		final OsmandApplication myApplication = fragment.getMyActivity().getMyApplication();
-		final OsmandSettings settings = myApplication.getSettings();
-		final String settingId = item.getFileName() + idPostfix;
-		return settings.registerBooleanPreference(settingId, false);
-	}
-
 	private void expandAllGroups() {
 		for (int i = 0; i < adapter.getGroupCount(); i++) {
 			listView.expandGroup(i);
 		}
-	}
-
-	void runLiveUpdate(final LocalIndexInfo info) {
-		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new PerformLiveUpdateAsyncTask(getMyActivity()).execute(new String[]{fnExt});
-		adapter.notifyLiveUpdatesChanged();
-	}
-
-	LocalIndexInfo getLocalIndexInfo(int groupPosition, int childPosition) {
-		return adapter.getChild(groupPosition, childPosition);
 	}
 
 	private static class LocalFullMapsViewHolder {
@@ -322,7 +300,7 @@ public class LiveUpdatesFragment extends Fragment {
 			final String fileNameWithoutExtension =
 					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
 
-			nameTextView.setText(getNameToDisplay(item));
+			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity()));
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
@@ -347,7 +325,7 @@ public class LiveUpdatesFragment extends Fragment {
 			}
 
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
-			String formattedDate = LiveUpdatesFragment.formatDateTime(fragment.getActivity(), timestamp);
+			String formattedDate = formatDateTime(fragment.getActivity(), timestamp);
 			descriptionTextView.setText(context.getString(R.string.last_update, formattedDate));
 
 			final View.OnClickListener clickListener = new View.OnClickListener() {
@@ -364,13 +342,6 @@ public class LiveUpdatesFragment extends Fragment {
 		private Drawable getSecondaryColorPaintedIcon(@DrawableRes int drawable) {
 			return fragment.getMyActivity().getMyApplication().getIconsCache()
 					.getPaintedContentIcon(drawable, secondaryColor);
-		}
-
-		private String getNameToDisplay(LocalIndexInfo child) {
-			String mapName = FileNameTranslationHelper.getFileName(fragment.getActivity(),
-					fragment.getMyActivity().getMyApplication().getResourceManager().getOsmandRegions(),
-					child.getFileName());
-			return mapName;
 		}
 	}
 
@@ -416,53 +387,5 @@ public class LiveUpdatesFragment extends Fragment {
 			this.result = result;
 			adapter.sort();
 		}
-	}
-
-	public static class PerformLiveUpdateAsyncTask
-			extends AsyncTask<String, Object, IncrementalChangesManager.IncrementalUpdateList> {
-		private final AbstractDownloadActivity activity;
-
-		public PerformLiveUpdateAsyncTask(AbstractDownloadActivity activity) {
-			this.activity = activity;
-		}
-
-		protected void onPreExecute() {
-			activity.setSupportProgressBarIndeterminateVisibility(true);
-
-		}
-
-		@Override
-		protected IncrementalChangesManager.IncrementalUpdateList doInBackground(String... params) {
-			final OsmandApplication myApplication = activity.getMyApplication();
-			IncrementalChangesManager cm = myApplication.getResourceManager().getChangesManager();
-			return cm.getUpdatesByMonth(params[0]);
-		}
-
-		protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
-			activity.setSupportProgressBarIndeterminateVisibility(false);
-			if (result.errorMessage != null) {
-				Toast.makeText(activity, result.errorMessage, Toast.LENGTH_SHORT).show();
-			} else {
-				List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
-				if (ll.isEmpty()) {
-					Toast.makeText(activity, R.string.no_updates_available, Toast.LENGTH_SHORT).show();
-				} else {
-					int i = 0;
-					IndexItem[] is = new IndexItem[ll.size()];
-					for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
-						IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
-								iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
-						is[i++] = ii;
-					}
-					activity.startDownload(is);
-				}
-			}
-		}
-	}
-
-	private static String formatDateTime(Context ctx, long dateTime) {
-		java.text.DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
-		java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
-		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 	}
 }
