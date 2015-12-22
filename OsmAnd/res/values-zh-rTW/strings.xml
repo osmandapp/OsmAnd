@@ -2046,4 +2046,6 @@
     <string name="live_updates">即時更新</string>
     <string name="available_maps">可用地圖</string>
     <string name="last_update">最近的更新：%s</string>
+<string name="update_date_pattern">更新：%s</string>
+    <string name="update_time">更新時間</string>
 </resources>

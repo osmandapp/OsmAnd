@@ -712,4 +712,23 @@
 	<string name="poi_fuel_methanol">Metanolo</string>
 	<string name="poi_observation_tower">Torre di osservazione</string>
 	<string name="poi_landuse_railway">Area ferroviaria</string>
+	<string name="poi_recycling_printer_cartridges">Cartucce da stampante</string>
+	<string name="poi_recycling_cds">CD</string>
+	<string name="poi_recycling_tyres">Pneumatici</string>
+	<string name="poi_recycling_computers">Computer</string>
+	<string name="poi_recycling_hydrargyrum">Mercurio</string>
+	<string name="poi_recycling_tv_monitor">Tv, monitor</string>
+	<string name="poi_recycling_tetrapak">Tetrapak</string>
+	<string name="poi_recycling_waste_oil">Olio esausto</string>
+	<string name="poi_recycling_bottles">Bottiglie</string>
+	<string name="poi_recycling_drugs">Medicinali</string>
+	<string name="poi_recycling_christmas_trees">Alberi di Natale</string>
+	<string name="poi_recycling_light_bulbs">Lampadine</string>
+	<string name="poi_mini_roundabout">Mini rotonda</string>
+	<string name="poi_services">Area di servizio</string>
+	<string name="poi_railway_crossing">Passaggio a livello</string>
+	<string name="poi_railway_level_crossing">Passaggio a livello</string>
+	<string name="poi_parish">Ufficio parrocchiale</string>
+	<string name="poi_street_lamp">Lampione</string>
+
 	</resources>
