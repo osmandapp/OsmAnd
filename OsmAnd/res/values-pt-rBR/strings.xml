@@ -1970,4 +1970,5 @@
     <string name="last_update">Última atualização: %s</string>
 <string name="update_date_pattern">Atualização: %s</string>
     <string name="update_time">Tempo de atualização</string>
+<string name="updates_size_pattern">Atualizações: %s</string>
 </resources>
