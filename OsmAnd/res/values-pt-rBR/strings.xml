@@ -1968,4 +1968,6 @@
     <string name="select_voice_provider">Selecione a orientação por voz</string>
     <string name="select_voice_provider_descr">Selecione ou baixe a instrução por voz para o seu idioma</string>
     <string name="last_update">Última atualização: %s</string>
+<string name="update_date_pattern">Atualização: %s</string>
+    <string name="update_time">Tempo de atualização</string>
 </resources>
