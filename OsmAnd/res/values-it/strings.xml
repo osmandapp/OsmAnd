@@ -2014,7 +2014,7 @@
     <string name="other_menu_group">Altro</string>
     <string name="plugins_menu_group">Componenti aggiuntivi</string>
     <string name="first_usage_item">Primo utilizzo</string>
-    <string name="first_usage_item_description">Come scaricare le mappe, imposta le impostazioni di base</string>
+    <string name="first_usage_item_description">Come scaricare le mappe, imposta la configurazione di base</string>
     <string name="navigation_item_description">Impostazioni di navigazione</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Domande frequenti</string>
@@ -2081,7 +2081,7 @@
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
 	<string name="routing_attr_avoid_stairs_description">Evita le scale</string>
 	<string name="release_2_2">" • Nuova interfaccia utente sensibile al contesto per le località selezionate sulla mappa e negli altri schermi\n\n • La schermata della mappa è avviata direttamente se non è selezionato \"Mostra il pannello di controllo all\'avvio\"\n\n • Configura quali e come vengono visualizzate le voci nel pannello di controllo\n\n • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menu\n\n • Per scaricare mappe, regioni è possibile selezionarle direttamente tappando sulla mappa mondiale\n\n • La ricerca di PDI ora supporta richieste più specifiche\n\n • Migliorata la funzionalità modifica di PDI e OSM\n\n • Riviste la struttura e l\'interfaccia di download dei dati della mappa\n\n e altro… "</string>
-    <string name="dashboard_or_drawer_description">C\'è una nuova scelta per controllare l\'app attraverso il pannello di controllo personalizzabile o tramite il menù statico. La tua scelta può sempre essere modificata nelle impostazioni del pannello di controllo.</string>
+    <string name="dashboard_or_drawer_description">C\'è una nuova opzione per controllare l\'app attraverso il pannello di controllo personalizzabile o tramite il menù statico. La tua scelta può sempre essere modificata nelle impostazioni del pannello di controllo.</string>
 <string name="shared_string_near">Vicino</string>
     <string name="shared_string_hide">Nascondi</string>
     <string name="av_video_quality_low">Qualità minima</string>
@@ -2112,7 +2112,7 @@
     <string name="shared_string_sound">Suono</string>
     <string name="select_voice_provider">Selezionare la guida vocale</string>
     <string name="select_voice_provider_descr">Seleziona o scarica la guida vocale per la tua lingua</string>
-    <string name="live_updates">Live updates</string>
+    <string name="live_updates">Aggiornamenti</string>
     <string name="available_maps">Mappe disponibili</string>
     <string name="last_update">Ultimo aggiornamento: %s</string>
 </resources>
