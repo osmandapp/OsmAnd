@@ -2131,4 +2131,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="update_now">Update now</string>
     <string name="missing_write_external_storage_permission">App have no permission to use SD card</string>
     <string name="last_update">Last update: %s</string>
+    <string name="update_date_pattern">"Update: %s"</string>
+    <string name="update_time">Update time</string>
 </resources>
