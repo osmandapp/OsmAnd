@@ -1301,7 +1301,7 @@
 	<string name="poi_covered_yes">Cubierto</string>
 	<string name="poi_covered_no">Descubierto</string>
 
-	<string name="poi_smoking_no">No fumar</string>
+	<string name="poi_smoking_no">Prohibido fumar</string>
 	<string name="poi_smoking_outside">Sólo permitido fumar afuera</string>
 	<string name="poi_smoking_yes">Permitido fumar</string>
 	<string name="poi_smoking_separated">Permitido fumar en sala separada</string>
@@ -1381,13 +1381,13 @@
 	<string name="poi_capacity_disabled_yes">Lugar reservado para discapacitados</string>
 	<string name="poi_capacity_disabled_no">Sin lugar reservado para discapacitados</string>
 	<string name="poi_capacity_disabled">Lugares para discapacitados</string>
-	<string name="poi_capacity_women_yes">Lugares reservados para mujeres</string>
-	<string name="poi_capacity_women_no">Sin lugar dedicado para mujeres</string>
+	<string name="poi_capacity_women_yes">Lugar reservado para mujeres</string>
+	<string name="poi_capacity_women_no">Sin lugar reservado para mujeres</string>
 	<string name="poi_capacity_women">Lugares reservados para mujeres</string>
-	<string name="poi_capacity_pupils">Lugares reservados para estudiantes</string>
-	<string name="poi_capacity_teachers">Lugares reservados para profesores</string>
-	<string name="poi_capacity_parent_yes">Lugares reservados para padres</string>
-	<string name="poi_capacity_parent_no">Sin lugares reservados para padres</string>
+	<string name="poi_capacity_pupils">Lugar reservado para estudiantes</string>
+	<string name="poi_capacity_teachers">Lugar reservado para profesores</string>
+	<string name="poi_capacity_parent_yes">Lugar reservado para padres</string>
+	<string name="poi_capacity_parent_no">Sin lugar reservado para padres</string>
 	<string name="poi_capacity_parent">Lugares reservados para padres</string>
 
 	<string name="poi_aerialway_occupancy">Capacidad de cabina/silla/coche</string>
@@ -1910,29 +1910,29 @@
 	<string name="poi_lit_yes">Iluminado</string>
 	<string name="poi_lit_no">No iluminado</string>
 
-	<string name="poi_surface_unpaved">Superficie: Sin pavimento</string>
-	<string name="poi_surface_paved">Superficie: Pavimentado</string>
-	<string name="poi_surface_asphalt">Superficie: Asfaltado</string>
-	<string name="poi_surface_concrete">Superficie: Hormigón</string>
-	<string name="poi_surface_sett">Superficie: Adoquín</string>
-	<string name="poi_surface_cobblestone">Superficie: Empedrado (adoquín)</string>
-	<string name="poi_surface_paving_stones">Superficie: Adoquín prefabricado</string>
-	<string name="poi_surface_pebblestone">Superficie: Empedrado (canto rodado)</string>
-	<string name="poi_surface_stone">Superficie: Piedras</string>
-	<string name="poi_surface_metal">Superficie: Metalizado</string>
-	<string name="poi_surface_wood">Superficie: Madera</string>
-	<string name="poi_surface_gravel">Superficie: Ripio</string>
-	<string name="poi_surface_fine_gravel">Superficie: Ripio fino</string>
-	<string name="poi_surface_compacted">Superficie: Compactado</string>
-	<string name="poi_surface_sand">Superficie: Arenoso</string>
-	<string name="poi_surface_grass">Superficie: Césped</string>
-	<string name="poi_surface_grass_paver">Superficie: Césped pavimentado</string>
-	<string name="poi_surface_ground">Superficie: Tierra</string>
-	<string name="poi_surface_dirt">Superficie: Lodoso</string>
-	<string name="poi_surface_mud">Superficie: Sobre hojas</string>
-	<string name="poi_surface_ice">Superficie: Hielo</string>
-	<string name="poi_surface_salt">Superficie: Sal</string>
-	<string name="poi_surface_snow">Superficie: Nieve</string>
+	<string name="poi_surface_unpaved">Superficie sin pavimentar</string>
+	<string name="poi_surface_paved">Superficie pavimentada</string>
+	<string name="poi_surface_asphalt">Superficie asfaltada</string>
+	<string name="poi_surface_concrete">Superficie de hormigón</string>
+	<string name="poi_surface_sett">Superficie adoquinada</string>
+	<string name="poi_surface_cobblestone">Superficie empedrada (adoquín)</string>
+	<string name="poi_surface_paving_stones">Superficie de adoquín prefabricado</string>
+	<string name="poi_surface_pebblestone">Superficie empedrada (canto rodado)</string>
+	<string name="poi_surface_stone">Superficie de piedras</string>
+	<string name="poi_surface_metal">Superficie metalizada</string>
+	<string name="poi_surface_wood">Superficie de madera</string>
+	<string name="poi_surface_gravel">Superficie de ripio</string>
+	<string name="poi_surface_fine_gravel">Superficie de ripio fino</string>
+	<string name="poi_surface_compacted">Superficie de tierra compactada</string>
+	<string name="poi_surface_sand">Superficie arenosa</string>
+	<string name="poi_surface_grass">Superficie de césped</string>
+	<string name="poi_surface_grass_paver">Superficie de césped pavimentado</string>
+	<string name="poi_surface_ground">Superficie de tierra</string>
+	<string name="poi_surface_dirt">Superficie lodosa</string>
+	<string name="poi_surface_mud">Superficie con hojas</string>
+	<string name="poi_surface_ice">Superficie congelada</string>
+	<string name="poi_surface_salt">Superficie de sal</string>
+	<string name="poi_surface_snow">Superficie nevada</string>
 
 	<string name="poi_route_bus_ref">Autobús</string>
 	<string name="poi_route_share_taxi_ref">Taxi compartido</string>
@@ -2001,7 +2001,7 @@
 	<string name="poi_industrial_depot">Tipo: Depósito</string>
 
 	<string name="poi_note">Nota</string>
-	<string name="poi_watering_place">Lugar de riego</string>
+	<string name="poi_watering_place">Abrevadero</string>
 	<string name="poi_animal_boarding">Alojamiento de animales</string>
 	<string name="poi_animal_boarding_dog">Alojamiento canino</string>
 	<string name="poi_animal_boarding_cat">Alojamiento gatuno</string>
