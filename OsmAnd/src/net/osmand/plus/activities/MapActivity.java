@@ -188,7 +188,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		int h = dm.heightPixels - statusBarHeight;
 
 		mapView = new OsmandMapTileView(this, w, h);
-		if (app.getAppInitializer().checkAppVersionChanged(this)) {
+		if (app.getAppInitializer().checkAppVersionChanged(this) && WhatsNewDialogFragment.SHOW) {
 			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
 		}
 		mapActions = new MapActivityActions(this);
@@ -250,7 +250,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		}
 		mapView.refreshMap(true);
 
-		if (getMyApplication().getAppInitializer().isFirstTime(this)) {
+		if (getMyApplication().getAppInitializer().isFirstTime(this) && FirstUsageFragment.TO_SHOW) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageFragment(),
 							FirstUsageFragment.TAG).commit();
