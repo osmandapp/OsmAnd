@@ -2087,4 +2087,6 @@
     <string name="live_updates">Mises à jour en temps réel</string>
     <string name="available_maps">Cartes disponibles</string>
     <string name="last_update">Dernière mise à jour : %s</string>
+<string name="update_date_pattern">Mise à jour : %s</string>
+    <string name="update_time">Heure de mise à jour</string>
 </resources>
