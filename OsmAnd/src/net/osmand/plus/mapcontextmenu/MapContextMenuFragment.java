@@ -93,6 +93,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private boolean moving;
 	private boolean nightMode;
 	private boolean centered;
+	private boolean initLayout = true;
 
 	private float skipHalfScreenStateLimit;
 
@@ -687,9 +688,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (menu.displayDistanceDirection()) {
 			getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
 		}
-		if (centered) {
-			centerMarkerLocation();
-		}
 	}
 
 	@Override
@@ -705,6 +703,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
 		}
 		menu.setMapCenter(null);
+		menu.setMapZoom(0);
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
@@ -763,9 +762,13 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					origMarkerY = view.getHeight() / 2;
 				}
 
+				if (initLayout && centered) {
+					centerMarkerLocation();
+				}
 				if (!moving) {
 					doLayoutMenu();
 				}
+				initLayout = false;
 			}
 
 		});
@@ -773,22 +776,27 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public void centerMarkerLocation() {
 		centered = true;
-		showOnMap(menu.getLatLon(), true, false, true, false);
+		showOnMap(menu.getLatLon(), true, true, false);
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef, boolean needMove, boolean alreadyAdjusted) {
+	private int getZoom() {
+		int zoom = menu.getMapZoom();
+		if (zoom == 0) {
+			zoom = map.getZoom();
+		}
+		return zoom;
+	}
+
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-		int fZoom = map.getZoom();
+		int fZoom = getZoom();
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
-		if (ignoreCoef) {
-			cp.setCenterLocation(0.5f, 0.5f);
-		} else {
-			cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
-		}
+		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
+		cp.setZoom(fZoom);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 
@@ -800,7 +808,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 
 		if (!alreadyAdjusted) {
-			LatLon adjustedLatLon = getAdjustedMarkerLocation(getPosY(), new LatLon(flat, flon), true);
+			LatLon adjustedLatLon = getAdjustedMarkerLocation(getPosY(), new LatLon(flat, flon), true, fZoom);
 			flat = adjustedLatLon.getLatitude();
 			flon = adjustedLatLon.getLongitude();
 		}
@@ -941,57 +949,72 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void adjustMapPosition(int y, boolean animated, boolean center) {
-		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center);
+		map.getAnimatedDraggingThread().stopAnimatingSync();
+		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center, getZoom());
 
 		if (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude()) {
 			return;
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true, true, true);
+			showOnMap(latlon, false, true, true);
 		} else {
 			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
 	}
 
-	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center) {
+	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center, int zoom) {
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+		box.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		box.setZoom(zoom);
+		int markerMapCenterX = (int)box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		int markerMapCenterY = (int)box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		float cpyOrig = box.getCenterPixelPoint().y;
+
+		box.setCenterLocation(0.5f, 0.5f);
+		int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
+		int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+		QuadPoint cp = box.getCenterPixelPoint();
+		float cpx = cp.x;
+		float cpy = cp.y;
+
+		float cpyDelta = menu.isLandscapeLayout() ? 0 : cpyOrig - cpy;
+
+		markerY += cpyDelta;
+		y += cpyDelta;
+		float origMarkerY = this.origMarkerY + cpyDelta;
 
 		LatLon latlon;
 		if (center) {
 			latlon = reqMarkerLocation;
 		} else {
-			latlon = mapCenter;
+			latlon = box.getLatLonFromPixel(markerMapCenterX, markerMapCenterY);
 		}
 		if (menu.isLandscapeLayout()) {
-			int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
 			int x = dpToPx(menu.getLandscapeWidthDp());
 			if (markerX - markerPaddingXPx < x || markerX > origMarkerX) {
 				int dx = (x + markerPaddingXPx) - markerX;
 				int dy = 0;
-				QuadPoint cp = box.getCenterPixelPoint();
 				if (center) {
-					int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
-					dy = (int)cp.y - markerY;
+					dy = (int)cpy - markerY;
+				} else {
+					cpy = cpyOrig;
 				}
 				if (dx > 0 || center) {
-					latlon = box.getLatLonFromPixel(cp.x - dx, cp.y - dy);
+					latlon = box.getLatLonFromPixel(cpx - dx, cpy - dy);
 				}
 			}
 		} else {
-			int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
 			if (markerY + markerPaddingPx > y || markerY < origMarkerY) {
 				int dx = 0;
 				int dy = markerY - (y - markerPaddingPx);
 				if (markerY - dy <= origMarkerY) {
-					QuadPoint cp = box.getCenterPixelPoint();
 					if (center) {
-						int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
-						dx = markerX - (int)cp.x;
+						dx = markerX - (int)cpx;
 					}
-					latlon = box.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+					latlon = box.getLatLonFromPixel(cpx + dx, cpy + dy);
 				}
 			}
 		}
@@ -1012,9 +1035,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private void doLayoutMenu() {
 		final int posY = getPosY();
-		setViewY(posY, true, true);
+		setViewY(posY, true, !initLayout || !centered);
 		updateMainViewLayout(posY);
-//		centering = false;
 	}
 
 	public void dismissMenu() {
@@ -1035,6 +1057,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void setFragmentVisibility(boolean visible) {
 		if (visible) {
 			view.setVisibility(View.VISIBLE);
+			if (mapCenter != null) {
+				map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+			}
 			adjustMapPosition(getPosY(), true, false);
 		} else {
 			view.setVisibility(View.GONE);

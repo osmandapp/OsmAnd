@@ -2003,7 +2003,7 @@
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="release_2_2">" • Neue Kontext-bezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Dashboard kann umgangen werden, falls menü-basierte App-Steuerung gewünscht ist\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr … "</string>
     <string name="osm_save_offline">Offline speichern</string>
-    <string name="osm_edit_modified_poi">geänderter OSM-POI</string>
+    <string name="osm_edit_modified_poi">Geänderter OSM-POI</string>
     <string name="osm_edit_deleted_poi">Gelöschter OSM-POI</string>
     <string name="context_menu_item_open_note">OSM-Notiz erstellen</string>
     <string name="osm_edit_reopened_note">Wiedereröffnete OSM-Notiz</string>
@@ -2084,4 +2084,7 @@
     <string name="shared_string_sound">Ton</string>
     <string name="select_voice_provider">Sprachansage auswählen</string>
     <string name="select_voice_provider_descr">Sprachansage für deine Sprache auswählen oder herunterladen</string>
-    </resources>
+    <string name="live_updates">Live Aktualisierungen</string>
+    <string name="available_maps">Verfügbare Karten</string>
+    <string name="last_update">Letzte Aktualisierung: %s</string>
+</resources>

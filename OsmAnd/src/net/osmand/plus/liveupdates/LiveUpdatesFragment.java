@@ -2,8 +2,10 @@ package net.osmand.plus.liveupdates;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
@@ -309,6 +311,9 @@ public class LiveUpdatesFragment extends Fragment {
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
 			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
+			IncrementalChangesManager changesManager = context.getResourceManager().getChangesManager();
+			final String fileNameWithoutExtension =
+					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
 
 			nameTextView.setText(getNameToDisplay(item));
 			if (shouldUpdatePreference.get()) {
@@ -316,26 +321,25 @@ public class LiveUpdatesFragment extends Fragment {
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
 				subheaderTextView.setText(frequency.toString());
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()
-						.getColor(R.color.dashboard_blue));
-				icon.setImageDrawable(context.getIconsCache().getContentIcon(R.drawable.ic_map));
-				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.dashboard_blue));
-				options.setImageResource(R.drawable.ic_overflow_menu_white);
+						.getColor(R.color.osmand_orange));
+				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.osmand_orange));
+				options.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_overflow_menu_white));
 			} else {
 				String size;
-				if (item.getSize() > 100) {
-					size = DownloadActivity.formatMb.format(new Object[]{(float) item.getSize() / (1 << 10)});
+				long updatesSize = changesManager.getUpdatesSize(fileNameWithoutExtension);
+				updatesSize /= (1 << 10);
+				if (updatesSize > 100) {
+					size = DownloadActivity.formatMb.format(new Object[]{(float) updatesSize / (1 << 10)});
 				} else {
-					size = item.getSize() + " KB";
+					size = updatesSize + " KB";
 				}
 				subheaderTextView.setText(size);
 				subheaderTextView.setTextColor(secondaryColor);
-				icon.setImageDrawable(context.getIconsCache().getPaintedContentIcon(R.drawable.ic_map, secondaryColor));
-				options.setImageResource(R.drawable.ic_action_plus);
+				icon.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_map));
+				options.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_action_plus));
 			}
-			IncrementalChangesManager cm = context.getResourceManager().getChangesManager();
-			final String fileNameWithoutExtension =
-					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
-			final long timestamp = cm.getTimestamp(fileNameWithoutExtension);
+
+			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 			String formattedDate = LiveUpdatesFragment.formatDateTime(fragment.getActivity(), timestamp);
 			descriptionTextView.setText(context.getString(R.string.last_update, formattedDate));
 
@@ -348,6 +352,11 @@ public class LiveUpdatesFragment extends Fragment {
 			};
 			options.setOnClickListener(clickListener);
 			view.setOnClickListener(clickListener);
+		}
+
+		private Drawable getSecondaryColorPaintedIcon(@DrawableRes int drawable) {
+			return fragment.getMyActivity().getMyApplication().getIconsCache()
+					.getPaintedContentIcon(drawable, secondaryColor);
 		}
 
 		private String getNameToDisplay(LocalIndexInfo child) {

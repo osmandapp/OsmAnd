@@ -97,7 +97,7 @@ public class AmenityMenuController extends MenuController {
 			if (resId == 0) {
 				resId = R.drawable.ic_action_folder_stroke;
 			}
-			addPlainMenuItem(resId, typeStr, false);
+			addPlainMenuItem(resId, typeStr, false, false);
 		}
 	}
 }

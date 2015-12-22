@@ -2,9 +2,11 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.text.ClipboardManager;
 import android.text.util.Linkify;
 import android.util.TypedValue;
@@ -40,11 +42,13 @@ public class MenuBuilder {
 		private int iconId;
 		private String text;
 		private boolean needLinks;
+		private boolean url;
 
-		public PlainMenuItem(int iconId, String text, boolean needLinks) {
+		public PlainMenuItem(int iconId, String text, boolean needLinks, boolean url) {
 			this.iconId = iconId;
 			this.text = text;
 			this.needLinks = needLinks;
+			this.url = url;
 		}
 
 		public int getIconId() {
@@ -57,6 +61,10 @@ public class MenuBuilder {
 
 		public boolean isNeedLinks() {
 			return needLinks;
+		}
+
+		public boolean isUrl() {
+			return url;
 		}
 	}
 
@@ -80,7 +88,7 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks(), 0);
+			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks(), 0, item.isUrl());
 		}
 	}
 
@@ -103,11 +111,11 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	protected View buildRow(View view, int iconId, String text, int textColor, boolean needLinks, int textLinesLimit) {
-		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit);
+	protected View buildRow(View view, int iconId, String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl) {
+		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit, isUrl);
 	}
 
-	protected View buildRow(final View view, Drawable icon, final String text, int textColor, boolean needLinks, int textLinesLimit) {
+	protected View buildRow(final View view, Drawable icon, final String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view, false);
@@ -154,7 +162,9 @@ public class MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		if (needLinks) {
+		if (isUrl) {
+			textView.setTextColor(textView.getLinkTextColors());
+		} else if (needLinks) {
 			textView.setAutoLinkMask(Linkify.ALL);
 			textView.setLinksClickable(true);
 		}
@@ -172,6 +182,17 @@ public class MenuBuilder {
 		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
 		llText.setLayoutParams(llTextViewParams);
 		llText.addView(textView);
+
+		if (isUrl) {
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(text));
+					v.getContext().startActivity(intent);
+				}
+			});
+		}
 
 		((LinearLayout) view).addView(ll);
 
@@ -248,8 +269,8 @@ public class MenuBuilder {
 	public void buildCustomAddressLine(LinearLayout ll) {
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {
-		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks));
+	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl) {
+		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks, isUrl));
 	}
 
 	public void clearPlainMenuItems() {

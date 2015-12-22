@@ -15,6 +15,7 @@ public class LiveUpdatesActivity extends AbstractDownloadActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_livie_updates);
 

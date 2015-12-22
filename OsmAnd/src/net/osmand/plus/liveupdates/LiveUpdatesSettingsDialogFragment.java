@@ -69,11 +69,11 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				preferenceUpdateFrequency(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
 				preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
-		liveUpdatesSwitch.setChecked(liveUpdatePreference.get());
+		liveUpdatesSwitch.setChecked(true);
 		downloadOverWiFiSwitch.setChecked(downloadViaWiFiPreference.get());
 
 		builder.setView(view)
-				.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						final int updateFrequencyInt = updateFrequencySpinner.getSelectedItemPosition();
