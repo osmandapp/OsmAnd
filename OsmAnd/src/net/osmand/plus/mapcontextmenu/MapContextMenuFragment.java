@@ -1057,6 +1057,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void setFragmentVisibility(boolean visible) {
 		if (visible) {
 			view.setVisibility(View.VISIBLE);
+			if (mapCenter != null) {
+				map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+			}
 			adjustMapPosition(getPosY(), true, false);
 		} else {
 			view.setVisibility(View.GONE);
