@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount='2'
-        android:padding="24dp">
+        android:paddingLeft="24dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,7 +72,8 @@
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/liveUpdatesSwitch"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            android:layout_marginRight="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,7 +85,8 @@
 
         <CheckBox
             android:id="@+id/downloadOverWiFiSwitch"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            android:layout_marginRight="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,8 +103,9 @@
             android:layout_height="54dp"
             android:layout_column="1"
             android:layout_gravity="right"
+            android:layout_marginRight="16dp"
             android:entries="@array/update_frequencies_array"
-            android:gravity="left"
+            android:gravity="right"
             android:paddingLeft="0dp"/>
 
         <TextView
@@ -121,9 +124,10 @@
             android:layout_height="54dp"
             android:layout_column="1"
             android:layout_gravity="right"
+            android:layout_marginRight="16dp"
             android:layout_row="4"
             android:entries="@array/update_times_of_day"
-            android:gravity="left"
+            android:gravity="right"
             android:paddingLeft="0dp"/>
 
         <TextView
@@ -141,6 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_column="1"
             android:layout_gravity="right"
+            android:layout_marginRight="24dp"
             android:layout_row="5"
             android:gravity="right|center_vertical"
             android:text="@string/shared_string_clear"/>
