@@ -2203,4 +2203,5 @@
 <string name="update_date_pattern">Opdateret: %s</string>
     <string name="update_time">Opdateringstid</string>
 <string name="size_pattern">Størrelse: %s</string>
+<string name="updates_size_pattern">Opdateringer: %s</string>
 </resources>
