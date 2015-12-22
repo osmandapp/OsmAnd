@@ -19,6 +19,7 @@ import org.apache.commons.logging.Log;
 
 public class WhatsNewDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(WhatsNewDialogFragment.class);
+	public static boolean SHOW = true;
 
 	@NonNull
 	@Override
