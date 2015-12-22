@@ -184,8 +184,8 @@ public class MapDataMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (indexItem != null) {
-			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getType().getString(getMapActivity()), false);
-			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getSizeDescription(getMapActivity()), false);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getType().getString(getMapActivity()), false, false);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getSizeDescription(getMapActivity()), false, false);
 		}
 		if (!Algorithms.isEmpty(mapObject.getWorldRegion().getParams().getWikiLink())) {
 			String[] items = mapObject.getWorldRegion().getParams().getWikiLink().split(":");
@@ -195,11 +195,11 @@ public class MapDataMenuController extends MenuController {
 			} else {
 				url = "https://wikipedia.org/wiki/" + items[0].replace(' ', '_');
 			}
-			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, true);
+			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, false, true);
 		}
 		if (indexItem != null) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getMapActivity());
-			addPlainMenuItem(R.drawable.ic_action_data, indexItem.getRemoteDate(dateFormat), false);
+			addPlainMenuItem(R.drawable.ic_action_data, indexItem.getRemoteDate(dateFormat), false, false);
 		}
 	}
 

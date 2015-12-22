@@ -21,6 +21,7 @@ import net.osmand.plus.download.DownloadActivity;
 
 public class FirstUsageFragment extends Fragment {
 	public static final String TAG = "FirstUsageFragment";
+	public static boolean SHOW = true;
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

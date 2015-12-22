@@ -34,7 +34,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 		String description = GpxUiHelper.getDescription(app, item.analysis, false);
 		String[] lines = description.split("\n");
 		for (String line : lines) {
-			buildRow(view, R.drawable.ic_action_info_dark, line, 0, false, 0);
+			buildRow(view, R.drawable.ic_action_info_dark, line, 0, false, 0, false);
 		}
 	}
 

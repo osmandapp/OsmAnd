@@ -34,23 +34,23 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(wpt.time);
 			buildRow(view, R.drawable.ic_action_data,
-					dateFormat.format(date) + " — " + timeFormat.format(date), 0, false, 0);
+					dateFormat.format(date) + " — " + timeFormat.format(date), 0, false, 0, false);
 		}
 		if (wpt.speed > 0) {
 			buildRow(view, R.drawable.ic_action_speed,
-					OsmAndFormatter.getFormattedSpeed((float)wpt.speed, app), 0, false, 0);
+					OsmAndFormatter.getFormattedSpeed((float)wpt.speed, app), 0, false, 0, false);
 		}
 		if (!Double.isNaN(wpt.ele)) {
 			buildRow(view, R.drawable.ic_action_altitude,
-					OsmAndFormatter.getFormattedDistance((float) wpt.ele, app), 0, false, 0);
+					OsmAndFormatter.getFormattedDistance((float) wpt.ele, app), 0, false, 0, false);
 		}
 		if (!Double.isNaN(wpt.hdop)) {
 			buildRow(view, R.drawable.ic_action_gps_info,
 					Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": "
-							+ OsmAndFormatter.getFormattedDistance((float)wpt.hdop, app), 0, false, 0);
+							+ OsmAndFormatter.getFormattedDistance((float)wpt.hdop, app), 0, false, 0, false);
 		}
 		if (!Algorithms.isEmpty(wpt.desc)) {
-			final View row = buildRow(view, R.drawable.ic_action_note_dark, wpt.desc, 0, true, 10);
+			final View row = buildRow(view, R.drawable.ic_action_note_dark, wpt.desc, 0, true, 10, false);
 			row.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

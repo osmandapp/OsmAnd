@@ -2051,7 +2051,7 @@
 	<string name="rendering_attr_horseRoutes_name">Lovaglóutak</string>
     <string name="no_address_found">Ismeretlen cím</string>
     <string name="looking_up_address">Cím keresése</string>
-    <string name="only_download_over_wifi">Letöltés csak WiFi kapcsolaton</string>
+    <string name="only_download_over_wifi">Letöltés csak WiFi-n</string>
     <string name="live_update">Élő frissítés</string>
     <string name="update_now">Frissítés most</string>
 <string name="live_updates">Élő frissítések</string>
