@@ -2200,4 +2200,6 @@
     <string name="live_updates">Realtidsopdateringer</string>
     <string name="available_maps">Tilgængelige kort</string>
     <string name="last_update">Sidst opdateret: %s</string>
+<string name="update_date_pattern">Opdater: %s</string>
+    <string name="update_time">Opdateringstid</string>
 </resources>
