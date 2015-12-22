@@ -21,8 +21,7 @@ import net.osmand.plus.download.DownloadActivity;
 
 public class FirstUsageFragment extends Fragment {
 	public static final String TAG = "FirstUsageFragment";
-	public static boolean TO_SHOW = true;
-	
+	public static boolean SHOW = true;
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +40,6 @@ public class FirstUsageFragment extends Fragment {
 		skipButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TO_SHOW = false;
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.remove(FirstUsageFragment.this).commit();
 			}
@@ -50,7 +48,6 @@ public class FirstUsageFragment extends Fragment {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				if (hasFocus) {
-					TO_SHOW = false;
 					getActivity().getSupportFragmentManager().beginTransaction()
 							.remove(FirstUsageFragment.this).commit();
 					final Intent intent = new Intent(getActivity(), DownloadActivity.class);
