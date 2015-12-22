@@ -185,4 +185,8 @@
 	<color name="region_updateable">#55FF8F00</color>
 	<color name="region_selected">#55FFFF00</color>
 	<color name="region_downloading">#44FF61FF</color>
+
+    <!-- Dialog Live Updates Settings -->
+    <color name="white_50_transparent">#8FFF</color>
+    <color name="white_80_transparent">#CFFF</color>
 </resources>

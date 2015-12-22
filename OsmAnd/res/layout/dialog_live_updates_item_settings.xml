@@ -3,48 +3,71 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:theme="@style/OsmandLightTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="125dp"
         android:background="@color/dashboard_blue"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp">
 
         <TextView
             android:id="@+id/regionNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/color_white"
             tools:text="Flevoland"/>
 
         <TextView
             android:id="@+id/countryNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:visibility="visible"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white_80_transparent"
+            android:textSize="12sp"
             android:visibility="gone"
-            tools:text="The Netherlands"/>
+            tools:text="The Netherlands"
+            tools:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_white"/>
+            android:background="@color/white_50_transparent"/>
 
         <TextView
+            android:id="@+id/lastUpdateTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update: 4 Dec 2015, 14:41"/>
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:textSize="12sp"
+            tools:text="Update: 4 Dec 2015, 14:41"/>
     </LinearLayout>
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:columnCount='2'
+        android:padding="24dp">
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="54dp"
             android:layout_column="0"
             android:layout_row="1"
+            android:gravity="center"
             android:text="@string/live_update"/>
 
         <android.support.v7.widget.SwitchCompat
@@ -53,40 +76,79 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="54dp"
             android:layout_column="0"
             android:layout_row="2"
+            android:gravity="center"
             android:text="@string/only_download_over_wifi"/>
 
-        <android.support.v7.widget.SwitchCompat
+        <CheckBox
             android:id="@+id/downloadOverWiFiSwitch"
             android:layout_gravity="right"/>
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="54dp"
             android:layout_column="0"
             android:layout_row="3"
+            android:gravity="center"
             android:text="@string/update_every"/>
 
         <Spinner
             android:id="@+id/updateFrequencySpinner"
+            style="@style/OsmandLightTheme.Spinner"
             android:layout_width="wrap_content"
+            android:layout_height="54dp"
             android:layout_column="1"
             android:layout_gravity="right"
-            android:entries="@array/update_frequencies_array"/>
+            android:entries="@array/update_frequencies_array"
+            android:gravity="left"
+            android:paddingLeft="0dp"/>
+
+        <TextView
+            android:id="@+id/updateTimesOfDayLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_column="0"
+            android:layout_row="4"
+            android:gravity="center"
+            android:text="@string/update_time"/>
 
         <Spinner
             android:id="@+id/updateTimesOfDaySpinner"
+            style="@style/OsmandLightTheme.Spinner"
             android:layout_width="wrap_content"
+            android:layout_height="54dp"
             android:layout_column="1"
             android:layout_gravity="right"
             android:layout_row="4"
             android:entries="@array/update_times_of_day"
-            android:visibility="gone"/>
+            android:gravity="left"
+            android:paddingLeft="0dp"/>
+
+        <TextView
+            android:id="@+id/sizeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_column="0"
+            android:layout_row="5"
+            android:gravity="center"
+            tools:text="Updates: 65NB"/>
+
+        <Button
+            android:id="@+id/removeUpdatesButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="right"
+            android:layout_row="5"
+            android:gravity="right|center_vertical"
+            android:text="@string/shared_string_clear"/>
 
     </GridLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/color_white"/>
+        android:background="?attr/divider_color"/>
 </LinearLayout>
