@@ -2139,4 +2139,6 @@
     <string name="live_updates">Live Updates</string>
     <string name="available_maps">Beschikbare Kaarten</string>
     <string name="last_update">Laatste update: %s</string>
+<string name="update_date_pattern">Update: %s</string>
+    <string name="update_time">Tijd van update</string>
 </resources>
