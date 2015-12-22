@@ -2123,12 +2123,12 @@
     <string name="looking_up_address">Adres wordt gezocht</string>
     <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
     <string name="update_every">Update elke</string>
-    <string name="only_download_over_wifi">"Alleen downloaden via  WiFi"</string>
+    <string name="only_download_over_wifi">Alleen downloaden via WiFi</string>
     <string name="live_update">Live Update</string>
 <string name="update_now">Nu bijwerken</string>
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Reistijd:</string>
-    <string name="missing_write_external_storage_permission">OsmAnd heeft geen toestemmingde externe SD-kaart te gebruiken</string>
+    <string name="missing_write_external_storage_permission">OsmAnd heeft geen toestemming om de SD-kaart te gebruiken</string>
 <string name="no_location_permission">OsmAnd heeft geen toestemming de locatie-gegevens te gebruiken.</string>
     <string name="no_camera_permission">"OsmAnd heeft geen toestemming de camera  te gebruiken."</string>
     <string name="no_microphone_permission">OsmAnd heeft geen toestemming de microfoon te gebruiken.</string>
