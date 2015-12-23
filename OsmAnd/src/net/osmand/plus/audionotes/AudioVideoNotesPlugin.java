@@ -1770,10 +1770,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public synchronized void shootAgain() {
 		cancelPhotoTimer();
+		cam.cancelAutoFocus();
 		photoRawData = null;
 
-		cam.startPreview();
-		internalShoot();
+		try {
+			cam.stopPreview();
+			cam.startPreview();
+			internalShoot();
+
+		} catch (Exception e) {
+			logErr(e);
+			closeRecordingMenu();
+			closeCamera();
+			finishRecording();
+			e.printStackTrace();
+		}
 	}
 
 	public synchronized void finishPhotoRecording(boolean cancel) {
