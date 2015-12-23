@@ -2049,4 +2049,5 @@
     <string name="last_update">Senaste uppdateringen: %s</string>
 <string name="update_time">Uppdateringstid</string>
 <string name="update_date_pattern">Uppdatering: %s</string>
-    </resources>
+    <string name="size_pattern">Storlek: %s</string>
+</resources>
