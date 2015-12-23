@@ -207,7 +207,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		} else {
 			size = updatesSize + " KB";
 		}
-		sizeTextView.setText(getString(R.string.size_pattern, size));
+		sizeTextView.setText(getString(R.string.updates_size_pattern, size));
 	}
 
 	private long getNextUpdateTime(TimesOfDay timeOfDayToUpdate) {
