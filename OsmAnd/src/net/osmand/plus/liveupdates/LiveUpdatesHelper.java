@@ -12,7 +12,8 @@ public class LiveUpdatesHelper {
 	private static final String TIME_OF_DAY_TO_UPDATE_POSTFIX = "_time_of_day_to_update";
 	private static final String DOWNLOAD_VIA_WIFI_POSTFIX = "_download_via_wifi";
 	private static final String LIVE_UPDATES_ON_POSTFIX = "_live_updates_on";
-
+	private static final String LAST_UPDATE_ATTEMPT_ON_POSTFIX = "_last_update_attempt";
+	public static final int DEFAULT_LAST_CHECK = -1;
 
 	public static OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(
 			LocalIndexInfo item, OsmandSettings settings) {
@@ -42,6 +43,12 @@ public class LiveUpdatesHelper {
 			LocalIndexInfo item, OsmandSettings settings) {
 		final String settingId = item.getFileName() + TIME_OF_DAY_TO_UPDATE_POSTFIX;
 		return settings.registerIntPreference(settingId, TimesOfDay.NIGHT.ordinal());
+	}
+
+	public static OsmandSettings.CommonPreference<Long> preferenceLastCheck(
+			LocalIndexInfo item, OsmandSettings settings) {
+		final String settingId = item.getFileName() + LAST_UPDATE_ATTEMPT_ON_POSTFIX;
+		return settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK);
 	}
 
 	public static String getNameToDisplay(LocalIndexInfo child, OsmandActionBarActivity activity) {

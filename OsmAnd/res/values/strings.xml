@@ -2133,4 +2133,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="last_update">Last update: %s</string>
     <string name="update_date_pattern">"Update: %s"</string>
     <string name="update_time">Update time</string>
+    <string name="size_pattern">"Size: %s"</string>
 </resources>

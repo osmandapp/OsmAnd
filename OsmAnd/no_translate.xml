@@ -27,4 +27,5 @@
     <string name="hint_value">Value</string>
     <string name="live_updates_on">Live updates on</string>
     <string name="live_updates_off">Live updates off</string>
+    <string name="last_check_date">"Last check date: %s"</string>
 </resources>

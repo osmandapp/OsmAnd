@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -27,6 +28,8 @@ import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.Calendar;
@@ -37,10 +40,12 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 
 public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
+	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesAlarmReceiver.class);
 	private static final String LOCAL_INDEX = "local_index";
 	public static final String LOCAL_INDEX_INFO = "local_index_info";
 
@@ -58,10 +63,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		View view = LayoutInflater.from(getActivity())
 				.inflate(R.layout.dialog_live_updates_item_settings, null);
 		final TextView regionNameTextView = (TextView) view.findViewById(R.id.regionNameTextView);
-		final TextView countryNameTextView = (TextView) view.findViewById(R.id.countryNameTextView);
+		final TextView lastCheckTextView = (TextView) view.findViewById(R.id.lastCheckTextView);
 		final TextView lastUpdateTextView = (TextView) view.findViewById(R.id.lastUpdateTextView);
 		final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
-		final CheckBox downloadOverWiFiSwitch = (CheckBox) view.findViewById(R.id.downloadOverWiFiSwitch);
+		final CheckBox downloadOverWiFiCheckBox = (CheckBox) view.findViewById(R.id.downloadOverWiFiSwitch);
 		final Spinner updateFrequencySpinner = (Spinner) view.findViewById(R.id.updateFrequencySpinner);
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
 		final TextView updateTimesOfDayTextView = (TextView) view.findViewById(R.id.updateTimesOfDayLabel);
@@ -73,8 +78,12 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				Algorithms.getFileNameWithoutExtension(new File(localIndexInfo.getFileName()));
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
-		String formattedDate = formatDateTime(getActivity(), timestamp);
-		lastUpdateTextView.setText(getString(R.string.update_date_pattern, formattedDate));
+		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
+		OsmandSettings.CommonPreference<Long> lastCheckPreference = preferenceLastCheck(localIndexInfo, getSettings());
+		String lastCheckDate = formatDateTime(getActivity(), lastCheckPreference.get());
+		String lastCheck = lastCheckPreference.get() != -1 ? lastCheckDate : lastUpdateDate;
+		lastCheckTextView.setText(getString(R.string.last_check_date, lastCheck));
+		lastUpdateTextView.setText(getString(R.string.update_date_pattern, lastUpdateDate));
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
@@ -83,8 +92,8 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				preferenceUpdateFrequency(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
 				preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
-		liveUpdatesSwitch.setChecked(true);
-		downloadOverWiFiSwitch.setChecked(downloadViaWiFiPreference.get());
+
+		downloadOverWiFiCheckBox.setChecked(!liveUpdatePreference.get() || downloadViaWiFiPreference.get());
 
 		updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
 
@@ -161,7 +170,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						}
 
 						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
-						downloadViaWiFiPreference.set(downloadOverWiFiSwitch.isChecked());
+						downloadViaWiFiPreference.set(downloadOverWiFiCheckBox.isChecked());
 						alarmMgr.cancel(alarmIntent);
 						if (liveUpdatesSwitch.isChecked()) {
 							alarmMgr.setInexactRepeating(AlarmManager.RTC,
@@ -183,7 +192,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 	void runLiveUpdate(final LocalIndexInfo info) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new PerformLiveUpdateAsyncTask(getMyActivity()).execute(new String[]{fnExt});
+		new PerformLiveUpdateAsyncTask(getActivity(), info).execute(new String[]{fnExt});
 		getLiveUpdatesFragment().notifyLiveUpdatesChanged();
 	}
 
@@ -198,7 +207,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		} else {
 			size = updatesSize + " KB";
 		}
-		sizeTextView.setText(size);
+		sizeTextView.setText(getString(R.string.size_pattern, size));
 	}
 
 	private long getNextUpdateTime(TimesOfDay timeOfDayToUpdate) {

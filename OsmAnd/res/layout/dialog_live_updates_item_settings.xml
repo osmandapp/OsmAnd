@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:background="@color/dashboard_blue"
+        android:background="@color/color_dialog_buttons"
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
@@ -23,27 +23,20 @@
             android:textColor="@color/color_white"
             tools:text="Flevoland"/>
 
-        <TextView
-            android:id="@+id/countryNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/white_80_transparent"
-            android:textSize="12sp"
-            android:visibility="gone"
-            tools:text="The Netherlands"
-            tools:visibility="visible"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/white_50_transparent"/>
+
+        <TextView
+            android:id="@+id/lastCheckTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:textSize="12sp"
+            tools:text="Last check: 4 Dec 2015, 14:41"/>
 
         <TextView
             android:id="@+id/lastUpdateTextView"
@@ -63,6 +56,7 @@
         android:paddingLeft="24dp">
 
         <TextView
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:layout_column="0"
@@ -73,9 +67,11 @@
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/liveUpdatesSwitch"
             android:layout_gravity="right"
+            android:checked="true"
             android:layout_marginRight="24dp"/>
 
         <TextView
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:layout_column="0"
@@ -85,10 +81,13 @@
 
         <CheckBox
             android:id="@+id/downloadOverWiFiSwitch"
+            android:textSize="16sp"
             android:layout_gravity="right"
+            android:checked="true"
             android:layout_marginRight="24dp"/>
 
         <TextView
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:layout_column="0"
@@ -109,6 +108,7 @@
             android:paddingLeft="0dp"/>
 
         <TextView
+            android:textSize="16sp"
             android:id="@+id/updateTimesOfDayLabel"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
@@ -131,6 +131,7 @@
             android:paddingLeft="0dp"/>
 
         <TextView
+            android:textSize="16sp"
             android:id="@+id/sizeTextView"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
