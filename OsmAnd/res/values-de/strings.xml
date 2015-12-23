@@ -2087,4 +2087,6 @@
     <string name="live_updates">Live Aktualisierungen</string>
     <string name="available_maps">Verfügbare Karten</string>
     <string name="last_update">Letzte Aktualisierung: %s</string>
+<string name="update_date_pattern">Aktualisierung: %s</string>
+    <string name="update_time">Aktualisierungszeitpunkt</string>
 </resources>

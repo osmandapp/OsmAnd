@@ -2115,4 +2115,5 @@
     <string name="live_updates">Aggiornamenti</string>
     <string name="available_maps">Mappe disponibili</string>
     <string name="last_update">Ultimo aggiornamento: %s</string>
-</resources>
+<string name="update_date_pattern">Aggiornamento: %s</string>
+    </resources>

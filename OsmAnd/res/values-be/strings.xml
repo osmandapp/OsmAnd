@@ -2062,7 +2062,7 @@
 	<string name="shared_string_near">Недалёка</string>
     <string name="looking_up_address">Пошук адрэсы</string>
     <string name="route_distance">Адлегласьць:</string>
-    <string name="route_duration">Час у дарозе:</string>
+    <string name="route_duration">Час:</string>
     <string name="rendering_attr_horseRoutes_name">Конныя маршруты</string>
     <string name="update_every">Абнавіць кожны</string>
     <string name="only_download_over_wifi">Сьцягваць толькі праз WiFi</string>
@@ -2072,4 +2072,13 @@
 <string name="no_location_permission">Праграма не мае дазволу на выкарыстаньне GPS.</string>
     <string name="no_camera_permission">Праграма не мае дазволу на выкарыстаньне камэры.</string>
     <string name="no_microphone_permission">Праграма не мае дазволу на выкарыстаньне мікрафону.</string>
-    </resources>
+    <string name="available_maps">Даступныя мапы</string>
+    <string name="shared_string_sound">Гук</string>
+    <string name="last_update">Апошняе абнаўленьне: %s</string>
+    <string name="live_updates">Бягучыя абнаўленьні</string>
+    <string name="select_voice_provider">Выберыце галасавыя ўказаньні</string>
+    <string name="select_voice_provider_descr">Выберыце ці сьцягніце галасавыя ўказаньні для вашай мовы</string>
+    <string name="impassable_road_desc">Выберыце дарогі, якія вы хочаце пазьбягаць падчас навігацыі</string>
+    <string name="update_date_pattern">Абнаўленьне: %s</string>
+    <string name="update_time">Час абнаўленьня</string>
+</resources>
