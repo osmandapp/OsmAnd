@@ -307,6 +307,7 @@ public class LiveUpdatesFragment extends Fragment {
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
+				subheaderTextView.setVisibility(View.VISIBLE);
 				subheaderTextView.setText(frequency.toString());
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()
 						.getColor(R.color.osmand_orange));
