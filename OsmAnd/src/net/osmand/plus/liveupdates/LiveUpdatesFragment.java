@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
@@ -26,7 +27,6 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.AbstractDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
@@ -268,6 +268,8 @@ public class LiveUpdatesFragment extends Fragment {
 	}
 
 	private static class LocalFullMapsViewHolder {
+		public static final int UPDATES_ENABLED_ITEM_HEIGHT = 72;
+		public static final int UPDATES_DISABLED_ITEM_HEIGHT = 50;
 		private final ImageView icon;
 		private final TextView nameTextView;
 		private final TextView subheaderTextView;
@@ -301,6 +303,7 @@ public class LiveUpdatesFragment extends Fragment {
 					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
 
 			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity()));
+			AbsListView.LayoutParams layoutParams = (AbsListView.LayoutParams) view.getLayoutParams();
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
@@ -309,20 +312,14 @@ public class LiveUpdatesFragment extends Fragment {
 						.getColor(R.color.osmand_orange));
 				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.osmand_orange));
 				options.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_overflow_menu_white));
+				layoutParams.height = (int) dpToPx(view.getContext(), UPDATES_ENABLED_ITEM_HEIGHT);
 			} else {
-				String size;
-				long updatesSize = changesManager.getUpdatesSize(fileNameWithoutExtension);
-				updatesSize /= (1 << 10);
-				if (updatesSize > 100) {
-					size = DownloadActivity.formatMb.format(new Object[]{(float) updatesSize / (1 << 10)});
-				} else {
-					size = updatesSize + " KB";
-				}
-				subheaderTextView.setText(size);
-				subheaderTextView.setTextColor(secondaryColor);
+				subheaderTextView.setVisibility(View.GONE);
 				icon.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_map));
 				options.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_action_plus));
+				layoutParams.height = (int) dpToPx(view.getContext(), UPDATES_DISABLED_ITEM_HEIGHT);
 			}
+			view.setLayoutParams(layoutParams);
 
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 			String formattedDate = formatDateTime(fragment.getActivity(), timestamp);
@@ -387,5 +384,9 @@ public class LiveUpdatesFragment extends Fragment {
 			this.result = result;
 			adapter.sort();
 		}
+	}
+
+	public static float dpToPx(final Context context, final float dp) {
+		return dp * context.getResources().getDisplayMetrics().density;
 	}
 }

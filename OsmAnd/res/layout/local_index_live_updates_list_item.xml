@@ -40,6 +40,7 @@
             android:layout_marginRight="7dp"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
+            tools:visibility="gone"
             tools:text="11.1 MB"/>
 
         <TextView

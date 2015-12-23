@@ -351,11 +351,17 @@ public class IncrementalChangesManager {
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
 		for (List<RegionUpdate> regionUpdates : ruf.dayUpdates.values()) {
 			for (RegionUpdate regionUpdate : regionUpdates) {
-				regionUpdate.file.delete();
+				boolean successful = Algorithms.removeAllFiles(regionUpdate.file);
+				if (successful) {
+					resourceManager.closeFile(regionUpdate.file.getName());
+				}
 			}
 		}
 		for (RegionUpdate regionUpdate : ruf.monthUpdates.values()) {
-			regionUpdate.file.delete();
+			boolean successful = Algorithms.removeAllFiles(regionUpdate.file);
+			if (successful) {
+				resourceManager.closeFile(regionUpdate.file.getName());
+			}
 		}
 	}
 
