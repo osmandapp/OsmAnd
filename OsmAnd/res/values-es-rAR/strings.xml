@@ -2020,4 +2020,7 @@
     <string name="live_updates">Actualizaciones en vivo</string>
     <string name="available_maps">Mapas disponibles</string>
     <string name="last_update">Última actualización: %s</string>
+<string name="update_date_pattern">Actualización: %s</string>
+    <string name="update_time">Tiempo de actualización</string>
+    <string name="size_pattern">Tamaño: %s</string>
 </resources>
