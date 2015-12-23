@@ -2056,4 +2056,11 @@
     <string name="no_location_permission">Ni ustreznih dovoljenj za dostop do podatkov GPS.</string>
     <string name="no_camera_permission">Ni ustreznih dovoljenj za dostop do kamere.</string>
     <string name="no_microphone_permission">Ni ustreznih dovoljenj za dostop do mikrofona.</string>
-    </resources>
+    <string name="live_updates">Posodobitve v živo</string>
+    <string name="available_maps">Razpoložljivi zemljevidi</string>
+    <string name="select_voice_provider">Izbor glasu za vodenje</string>
+    <string name="select_voice_provider_descr">Izbor ali prejem glasu za vodenje v želenem jeziku</string>
+    <string name="last_update">Zadnja posodobitev: %s</string>
+    <string name="update_date_pattern">Posodobitev: %s</string>
+    <string name="update_time">Čas posodobitve</string>
+</resources>
