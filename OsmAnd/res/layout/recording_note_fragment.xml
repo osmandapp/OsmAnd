@@ -42,7 +42,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/showHideView"
+                android:id="@+id/leftButtonView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -56,7 +56,7 @@
                     android:gravity="left|center_vertical">
 
                     <ImageView
-                        android:id="@+id/showHideIcon"
+                        android:id="@+id/leftButtonIcon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
@@ -64,7 +64,7 @@
                         tools:src="@drawable/ic_action_minimize"/>
 
                     <TextView
-                        android:id="@+id/showHideText"
+                        android:id="@+id/leftButtonText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -79,7 +79,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/recView"
+                android:id="@+id/centerButtonView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -92,7 +92,7 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/recIcon"
+                        android:id="@+id/centerButtonIcon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
@@ -100,7 +100,45 @@
                         tools:src="@drawable/ic_action_rec_stop"/>
 
                     <TextView
-                        android:id="@+id/recText"
+                        android:id="@+id/centerButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/shared_string_control_stop"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_list_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rightButtonView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/rightButtonIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="center"
+                        tools:src="@drawable/ic_action_rec_stop"/>
+
+                    <TextView
+                        android:id="@+id/rightButtonText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

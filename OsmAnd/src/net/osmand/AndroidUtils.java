@@ -2,11 +2,13 @@ package net.osmand;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewParent;
@@ -114,6 +116,21 @@ public class AndroidUtils {
 				dp,
 				r.getDisplayMetrics()
 		);
+	}
+
+	public static int getStatusBarHeight(Context ctx) {
+		int result = 0;
+		int resourceId = ctx.getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = ctx.getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
+	}
+
+	public static int getScreenHeight(Activity activity) {
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
 	}
 
 }

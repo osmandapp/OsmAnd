@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -139,10 +138,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		screenHeight = getScreenHeight();
+		screenHeight = AndroidUtils.getScreenHeight(getActivity());
 		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
 
-		viewHeight = screenHeight - getStatusBarHeight();
+		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
 
 		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
@@ -1148,21 +1147,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				dp,
 				r.getDisplayMetrics()
 		);
-	}
-
-	private int getScreenHeight() {
-		DisplayMetrics dm = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-		return dm.heightPixels;
-	}
-
-	public int getStatusBarHeight() {
-		int result = 0;
-		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-		if (resourceId > 0) {
-			result = getResources().getDimensionPixelSize(resourceId);
-		}
-		return result;
 	}
 
 	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {

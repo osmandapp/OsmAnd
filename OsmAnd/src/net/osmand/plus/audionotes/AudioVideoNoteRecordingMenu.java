@@ -1,8 +1,7 @@
 package net.osmand.plus.audionotes;
 
-import android.content.res.Resources;
 import android.os.Handler;
-import android.util.TypedValue;
+import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -21,42 +21,84 @@ import net.osmand.util.Algorithms;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-
 public class AudioVideoNoteRecordingMenu {
 
-	private View view;
-	private LinearLayout viewfinder;
-	private AudioVideoNotesPlugin plugin;
-	private long startTime;
-	private Handler handler;
-	private boolean portraitMode;
-	private boolean largeDevice;
-	private Timer recTimer;
+	protected View view;
+	protected LinearLayout viewfinder;
+
+	protected AudioVideoNotesPlugin plugin;
+	protected long startTime;
+	protected Handler handler;
+	protected boolean portraitMode;
+	protected boolean largeDevice;
+	protected Timer recTimer;
+
+	protected double lat;
+	protected double lon;
+
+	private int screenHeight;
+	private int buttonsHeight;
+	private int statusBarHeight;
 
 	public static boolean showViewfinder = true;
 
-	public AudioVideoNoteRecordingMenu(AudioVideoNotesPlugin plugin) {
+	public AudioVideoNoteRecordingMenu(AudioVideoNotesPlugin plugin, double lat, double lon) {
 		this.plugin = plugin;
+		this.lat = lat;
+		this.lon = lon;
 		handler = new Handler();
 
 		MapActivity mapActivity = plugin.getMapActivity();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
 
-		view = mapActivity.findViewById(R.id.recording_note_layout);
+		initView(mapActivity);
 		viewfinder = (LinearLayout) view.findViewById(R.id.viewfinder);
 		showViewfinder = true;
+
+		screenHeight = AndroidUtils.getScreenHeight(getMapActivity());
+		statusBarHeight = AndroidUtils.getStatusBarHeight(getMapActivity());
+		buttonsHeight = getMapActivity().getResources().getDimensionPixelSize(R.dimen.map_route_buttons_height);
 
 		update();
 	}
 
+	public MapActivity getMapActivity() {
+		return plugin.getMapActivity();
+	}
+
+	protected void initView(MapActivity mapActivity) {
+		view = mapActivity.findViewById(R.id.recording_note_layout);
+	}
+
 	public SurfaceView prepareSurfaceView() {
+		return prepareSurfaceView(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+	}
+
+	public SurfaceView prepareSurfaceView(int width, int height) {
+		int w = width;
+		int h = height;
+		if (w != ViewGroup.LayoutParams.MATCH_PARENT && h != ViewGroup.LayoutParams.MATCH_PARENT) {
+			int vfw = getViewfinderWidth();
+			int vfh = getViewfinderHeight();
+			float vfRatio = vfw / (float) vfh;
+			float sourceRatio;
+			if (vfRatio > 1) {
+				sourceRatio = width / (float) height;
+			} else {
+				sourceRatio = height / (float) width;
+			}
+			if (sourceRatio > vfRatio) {
+				w = vfw;
+				h = (int) (w / sourceRatio);
+			} else {
+				h = vfh;
+				w = (int) (h * sourceRatio);
+			}
+		}
 		viewfinder.removeAllViews();
 		SurfaceView surfaceView = new SurfaceView(viewfinder.getContext());
-		surfaceView.setLayoutParams(new LinearLayout.LayoutParams(
-				ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT));
+		surfaceView.setLayoutParams(new LinearLayout.LayoutParams(w, h));
 
 		surfaceView.setZOrderMediaOverlay(true);
 		viewfinder.addView(surfaceView);
@@ -85,29 +127,29 @@ public class AudioVideoNoteRecordingMenu {
 		CurrentRecording recording = plugin.getCurrentRecording();
 		IconsCache iconsCache = plugin.getMapActivity().getMyApplication().getIconsCache();
 
-		ImageView showHideIcon = (ImageView) view.findViewById(R.id.showHideIcon);
-		View showHideView = view.findViewById(R.id.showHideView);
+		ImageView leftButtonIcon = (ImageView) view.findViewById(R.id.leftButtonIcon);
+		View leftButtonView = view.findViewById(R.id.leftButtonView);
 		if (recording.getType() != AVActionType.REC_AUDIO) {
-			showHideIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_minimize));
-			TextView showHideText = (TextView) view.findViewById(R.id.showHideText);
+			leftButtonIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_minimize));
+			TextView showHideText = (TextView) view.findViewById(R.id.leftButtonText);
 			showHideText.setText(showViewfinder ?
 					view.getResources().getString(R.string.shared_string_hide) : view.getResources().getString(R.string.shared_string_show));
-			showHideView.setVisibility(View.VISIBLE);
+			leftButtonView.setVisibility(View.VISIBLE);
 			viewfinder.setVisibility(showViewfinder ? View.VISIBLE : View.GONE);
 		} else {
-			showHideView.setVisibility(View.INVISIBLE);
+			leftButtonView.setVisibility(View.INVISIBLE);
 			viewfinder.setVisibility(View.GONE);
 		}
-		showHideView.setOnClickListener(new View.OnClickListener() {
+		leftButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				showHideViewfinder();
 			}
 		});
 
-		View recView = view.findViewById(R.id.recView);
-		ImageView recIcon = (ImageView) view.findViewById(R.id.recIcon);
-		TextView recText = (TextView) view.findViewById(R.id.recText);
+		View centerButtonView = view.findViewById(R.id.centerButtonView);
+		ImageView recIcon = (ImageView) view.findViewById(R.id.centerButtonIcon);
+		TextView recText = (TextView) view.findViewById(R.id.centerButtonText);
 		View timeView = view.findViewById(R.id.timeView);
 		switch (recording.getType()) {
 			case REC_AUDIO:
@@ -124,7 +166,7 @@ public class AudioVideoNoteRecordingMenu {
 				timeView.setVisibility(View.INVISIBLE);
 				break;
 		}
-		recView.setOnClickListener(new View.OnClickListener() {
+		centerButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				rec(plugin.getMapActivity());
@@ -139,7 +181,7 @@ public class AudioVideoNoteRecordingMenu {
 		timeText.setText(Algorithms.formatDuration(duration));
 	}
 
-	private void applyViewfinderVisibility() {
+	protected void applyViewfinderVisibility() {
 		MapActivity mapActivity = plugin.getMapActivity();
 		CurrentRecording recording = plugin.getCurrentRecording();
 		boolean show = showViewfinder && recording != null && recording.getType() != AVActionType.REC_AUDIO;
@@ -147,7 +189,7 @@ public class AudioVideoNoteRecordingMenu {
 			int buttonsHeight = view.findViewById(R.id.buttonsContainer).getHeight();
 			int tileBoxHeight = mapActivity.getMapView().getCurrentRotatedTileBox().getPixHeight();
 			int h = show ? tileBoxHeight : buttonsHeight;
-			view.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(320f, mapActivity), h));
+			view.setLayoutParams(new LinearLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 320f), h));
 			view.requestLayout();
 		}
 		viewfinder.setVisibility(show ? View.VISIBLE : View.GONE);
@@ -155,17 +197,43 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void showHideViewfinder() {
 		showViewfinder = !showViewfinder;
-		TextView showHideText = (TextView) view.findViewById(R.id.showHideText);
+		TextView showHideText = (TextView) view.findViewById(R.id.leftButtonText);
 		showHideText.setText(showViewfinder ? view.getResources().getString(R.string.shared_string_hide) : view.getResources().getString(R.string.shared_string_show));
 		applyViewfinderVisibility();
 	}
 
 	public int getViewfinderWidth() {
-		return viewfinder.getWidth();
+		int res;
+		CurrentRecording recording = plugin.getCurrentRecording();
+		if (recording.getType() == AVActionType.REC_PHOTO) {
+			DisplayMetrics dm = new DisplayMetrics();
+			getMapActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+			res = dm.widthPixels;
+		} else {
+			if (isLandscapeLayout()) {
+				res = AndroidUtils.dpToPx(getMapActivity(), 320 - 16f);
+			} else {
+				res = AndroidUtils.dpToPx(getMapActivity(), 240f);
+			}
+		}
+		return res;
 	}
 
 	public int getViewfinderHeight() {
-		return viewfinder.getHeight();
+		int res;
+		CurrentRecording recording = plugin.getCurrentRecording();
+		if (recording.getType() == AVActionType.REC_PHOTO) {
+			DisplayMetrics dm = new DisplayMetrics();
+			getMapActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+			res = dm.heightPixels;
+		} else {
+			if (isLandscapeLayout()) {
+				res = screenHeight - statusBarHeight - buttonsHeight;
+			} else {
+				res = AndroidUtils.dpToPx(getMapActivity(), 240f);
+			}
+		}
+		return res;
 	}
 
 	public void rec(final MapActivity mapActivity) {
@@ -183,6 +251,21 @@ public class AudioVideoNoteRecordingMenu {
 				}
 			}
 		}, 200);
+	}
+
+	public void recExternal(final MapActivity mapActivity) {
+		stopCounter();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				CurrentRecording recording = plugin.getCurrentRecording();
+				if (recording != null) {
+					if (recording.getType() == AVActionType.REC_PHOTO) {
+						plugin.takePhotoExternal(lat, lon, mapActivity);
+					}
+				}
+			}
+		}, 20);
 	}
 
 	private void startCounter() {
@@ -212,14 +295,5 @@ public class AudioVideoNoteRecordingMenu {
 			recTimer.cancel();
 			recTimer = null;
 		}
-	}
-
-	private int dpToPx(float dp, MapActivity mapActivity) {
-		Resources r = mapActivity.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
 	}
 }
