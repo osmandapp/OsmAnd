@@ -2057,4 +2057,7 @@
     <string name="live_updates">Agiornamentos in tempus reale</string>
     <string name="available_maps">Mapas disponìbiles</string>
     <string name="last_update">Ùrtimu agiornamentu: %s</string>
+<string name="update_date_pattern">Agiornamentu: %s</string>
+    <string name="update_time">Tempus de agiornamentu</string>
+    <string name="updates_size_pattern">Agiornamentos: %s</string>
 </resources>
