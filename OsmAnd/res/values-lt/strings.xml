@@ -909,7 +909,7 @@
 
     <string name="osmand_parking_event">Pasiimti automobilį iš stovėjimo vietos</string>
 
-    <string name="context_menu_item_last_intermediate_point">Nustatyti paskutinį tarpinį tikslą</string>
+    <string name="context_menu_item_last_intermediate_point">Pridėti paskutinį tarpinį tikslą</string>
     <string name="context_menu_item_first_intermediate_point">Nustatyti pirmą tarpinį tikslą</string>
     <string name="add_as_last_destination_point">Pridėti kaip paskutinį tarpinį tikslą</string>
     <string name="add_as_first_destination_point">Pridėti kaip pirmą tarpinį tikslą</string>
@@ -2022,7 +2022,7 @@
     <string name="av_audio_format_descr">Pasirinkite garso formatą</string>
     <string name="av_video_quality_descr">Pasirinkite vaizdo kokybę</string>
     <string name="route_distance">Atstumas:</string>
-    <string name="route_duration">Kelionės trukmė:</string>
+    <string name="route_duration">Trukmė:</string>
     <string name="rendering_attr_horseRoutes_name">Arklių maršrutas</string>
     <string name="osn_close_dialog_success">Pastaba sėkmingai uždaryta</string>
     <string name="osn_close_dialog_error">Klaida: pastabos nepavyko uždaryti</string>
@@ -2056,4 +2056,15 @@
     <string name="osn_add_dialog_error">Klaida: pastabos sukurti nepavyko</string>
     <string name="lang_fy">Vakarų fryzų</string>
     <string name="lang_als">Albanų (toskų)</string>
-    </resources>
+    <string name="available_maps">Galimi žemėlapiai</string>
+    <string name="impassable_road_desc">Pasirinkite keliu, kurių norite išvengti kelionėje</string>
+    <string name="shared_string_sound">Garsas</string>
+    <string name="share_osm_edits_subject">OSM redagavimai atlikti OsmAnd pagalba</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX spalva</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX plotis</string>
+    <string name="use_drawer_btn">Naudoti meniu</string>
+    <string name="dashboard_or_drawer_title">Dashboard arba meniu valdymas</string>
+    <string name="last_update">Paskutinįkart atnaujinta: %s</string>
+    <string name="update_date_pattern">Atnaujinta: %s</string>
+    <string name="update_time">Atnaujinimo laikas</string>
+</resources>
