@@ -2116,4 +2116,5 @@
     <string name="available_maps">Mappe disponibili</string>
     <string name="last_update">Ultimo aggiornamento: %s</string>
 <string name="update_date_pattern">Aggiornamento: %s</string>
-    </resources>
+    <string name="size_pattern">Dimensione: %s</string>
+</resources>
