@@ -13,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.IncrementalChangesManager;
@@ -33,6 +34,7 @@ public class PerformLiveUpdateAsyncTask
 		this.localIndexInfo = localIndexInfo;
 	}
 
+	@Override
 	protected void onPreExecute() {
 		if (context instanceof AbstractDownloadActivity) {
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
@@ -52,6 +54,7 @@ public class PerformLiveUpdateAsyncTask
 		return cm.getUpdatesByMonth(params[0]);
 	}
 
+	@Override
 	protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
 		if (context instanceof AbstractDownloadActivity) {
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
@@ -78,6 +81,10 @@ public class PerformLiveUpdateAsyncTask
 				}
 				DownloadValidationManager downloadValidationManager =
 						new DownloadValidationManager(application);
+				if (context instanceof DownloadIndexesThread.DownloadEvents) {
+					downloadValidationManager.getDownloadThread()
+							.setUiActivity((DownloadIndexesThread.DownloadEvents) context);
+				}
 				downloadValidationManager.startDownload(context, is);
 			}
 		}

@@ -8,10 +8,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.download.AbstractDownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread;
 
-public class LiveUpdatesActivity extends AbstractDownloadActivity {
+import org.apache.commons.logging.Log;
+
+public class LiveUpdatesActivity extends AbstractDownloadActivity
+		implements DownloadIndexesThread.DownloadEvents{
+	private final static Log LOG = PlatformUtil.getLog(LiveUpdatesActivity.class);
+	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +27,7 @@ public class LiveUpdatesActivity extends AbstractDownloadActivity {
 		setContentView(R.layout.activity_livie_updates);
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-		final LiveUpdatesFragmentPagerAdapter pagerAdapter =
-				new LiveUpdatesFragmentPagerAdapter(getSupportFragmentManager());
+		pagerAdapter = new LiveUpdatesFragmentPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(pagerAdapter);
 
 		final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -38,6 +44,21 @@ public class LiveUpdatesActivity extends AbstractDownloadActivity {
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void newDownloadIndexes() {
+
+	}
+
+	@Override
+	public void downloadInProgress() {
+
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		((LiveUpdatesFragment) pagerAdapter.fragments[0]).notifyLiveUpdatesChanged();
 	}
 
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
