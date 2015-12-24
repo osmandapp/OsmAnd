@@ -2204,5 +2204,5 @@
     <string name="update_time">Opdateringstid</string>
 <string name="size_pattern">Størrelse: %s</string>
 <string name="updates_size_pattern">Opdateringer: %s</string>
-<string name="last_map_change">Sidste kortændring: %s</string>
+<string name="last_map_change">Sidste ændring af kort: %s</string>
 </resources>
