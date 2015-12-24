@@ -62,7 +62,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		View view = LayoutInflater.from(getActivity())
 				.inflate(R.layout.dialog_live_updates_item_settings, null);
 		final TextView regionNameTextView = (TextView) view.findViewById(R.id.regionNameTextView);
-		final TextView lastCheckTextView = (TextView) view.findViewById(R.id.lastCheckTextView);
+		final TextView lastMapChangeTextView = (TextView) view.findViewById(R.id.lastMapChangeTextView);
 		final TextView lastUpdateTextView = (TextView) view.findViewById(R.id.lastUpdateTextView);
 		final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
 		final CheckBox downloadOverWiFiCheckBox = (CheckBox) view.findViewById(R.id.downloadOverWiFiSwitch);
@@ -80,8 +80,8 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
 		final long mapTimestamp = changesManager.getMapTimestamp(fileNameWithoutExtension);
 		String lastCheckDate = formatDateTime(getActivity(), mapTimestamp);
-		lastCheckTextView.setText(getString(R.string.map_update_date, lastCheckDate));
-		lastUpdateTextView.setText(getString(R.string.update_date_pattern, lastUpdateDate));
+		lastMapChangeTextView.setText(getString(R.string.last_map_change, lastCheckDate));
+		lastUpdateTextView.setText(getString(R.string.last_update, lastUpdateDate));
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =

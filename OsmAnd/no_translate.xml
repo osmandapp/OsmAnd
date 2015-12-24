@@ -25,7 +25,4 @@
     <string name="tag_poi_name">name</string>
     <string name="hint_tag">Tag</string>
     <string name="hint_value">Value</string>
-    <string name="live_updates_on">Live updates on</string>
-    <string name="live_updates_off">Live updates off</string>
-    <string name="map_update_date">"Map update date: %s"</string>
 </resources>
