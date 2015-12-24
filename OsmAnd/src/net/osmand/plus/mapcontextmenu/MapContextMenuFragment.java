@@ -349,8 +349,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		AndroidUtils.setTextPrimaryColor(getMapActivity(),
 				(TextView) view.findViewById(R.id.context_menu_line1), nightMode);
-		AndroidUtils.setTextSecondaryColor(getMapActivity(),
-				(TextView) view.findViewById(R.id.context_menu_line2), nightMode);
+		View menuLine2 = view.findViewById(R.id.context_menu_line2);
+		if (menuLine2 != null) {
+			AndroidUtils.setTextSecondaryColor(getMapActivity(), (TextView) menuLine2, nightMode);
+		}
 		((Button) view.findViewById(R.id.title_button_top_right))
 				.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue) : getResources().getColor(R.color.osmand_orange));
 		AndroidUtils.setTextSecondaryColor(getMapActivity(),
