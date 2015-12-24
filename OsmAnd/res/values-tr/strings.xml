@@ -1993,7 +1993,7 @@
     <string name="only_download_over_wifi">Sadece WiFi üzerinden İndir</string>
     <string name="live_update">Canlı güncelleştirme</string>
 <string name="route_distance">Mesafe:</string>
-    <string name="route_duration">Yolculuk süresi:</string>
+    <string name="route_duration">Zaman:</string>
     <string name="update_now">Şimdi güncelle</string>
 <string name="missing_write_external_storage_permission">App var SD kart kullanma iznine</string>
 <string name="select_voice_provider">Sesli rehberlik Seç</string>
@@ -2001,4 +2001,11 @@
     <string name="impassable_road_desc">Yol seçimini navigasyon sırasında önlemek istiyorsanız</string>
     <string name="shared_string_sound">Ses</string>
     <string name="no_location_permission">App konum verilere erişmek için izniniz yok.</string>
+    <string name="live_updates">Canlı güncellemeler</string>
+    <string name="available_maps">Mevcut haritalar</string>
+    <string name="no_camera_permission">App kameraya erişmek için izniniz yok.</string>
+    <string name="no_microphone_permission">App mikrofonu erişmek için izniniz yok.</string>
+    <string name="last_update">Son güncelleme:% s</string>
+    <string name="update_date_pattern">Güncelleme:% s</string>
+    <string name="update_time">Güncelleme zamanı</string>
     </resources>
