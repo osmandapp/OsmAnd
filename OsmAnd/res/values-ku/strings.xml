@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
@@ -34,7 +35,7 @@
     <string name="search_on_the_map_item">Lêgerîn Nexşa</string>
     <string name="other_menu_group">Adin</string>
     <string name="route_distance">:Dûrahî</string>
-    <string name="route_duration">:Wexte Rêwîtî</string>
+    <string name="route_duration">:Wext</string>
     <string name="show_on_start">Peşi Şan Bide</string>
     <string name="map_viewing_item">Naxşe Şan Bide</string>
     <string name="navigation_item_description">Awakira Navigasyone</string>
@@ -50,4 +51,7 @@
     <string name="poi_dialog_poi_type">Cureyê POİ</string>
     <string name="description">Daxuyanî</string>
     <string name="next_proceed">Dû re</string>
+    <string name="shared_string_sound">Deng</string>
+    <string name="osb_author_dialog_password">Şîfre OSM</string>
+    <string name="share_geo">:Cih</string>
     </resources>
