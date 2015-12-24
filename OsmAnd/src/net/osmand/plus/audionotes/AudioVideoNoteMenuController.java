@@ -3,6 +3,7 @@ package net.osmand.plus.audionotes;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 
 import net.osmand.access.AccessibleAlertBuilder;
@@ -13,11 +14,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.util.Algorithms;
-
-import java.lang.ref.WeakReference;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording recording;
@@ -146,23 +144,25 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public void share(LatLon latLon, String title) {
-		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-		if (recording.isPhoto()) {
-			Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("image/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-		} else if (recording.isAudio()) {
-			Uri audioUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("audio/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
-		} else if (recording.isVideo()) {
-			Uri videoUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("video/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
-		}
-		WeakReference<MapContextMenuFragment> fragmentRef = getMapActivity().getContextMenu().findMenuFragment();
-		if (fragmentRef != null) {
-			fragmentRef.get().startActivity(Intent.createChooser(sharingIntent, getMapActivity().getString(R.string.share_note)));
-		}
+		String path = recording.getFile().getAbsolutePath();
+		MediaScannerConnection.scanFile(getMapActivity(), new String[]{path},
+				null, new MediaScannerConnection.OnScanCompletedListener() {
+					public void onScanCompleted(String path, Uri uri) {
+						Intent shareIntent = new Intent(
+								android.content.Intent.ACTION_SEND);
+						if (recording.isPhoto()) {
+							shareIntent.setType("image/*");
+						} else if (recording.isAudio()) {
+							shareIntent.setType("audio/*");
+						} else if (recording.isVideo()) {
+							shareIntent.setType("video/*");
+						}
+						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+						shareIntent
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+						getMapActivity().startActivity(Intent.createChooser(shareIntent,
+								getMapActivity().getString(R.string.share_note)));
+					}
+				});
 	}
 }
