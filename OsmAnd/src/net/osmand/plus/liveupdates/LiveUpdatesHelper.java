@@ -42,7 +42,7 @@ public class LiveUpdatesHelper {
 	public static OsmandSettings.CommonPreference<Integer> preferenceTimeOfDayToUpdate(
 			LocalIndexInfo item, OsmandSettings settings) {
 		final String settingId = item.getFileName() + TIME_OF_DAY_TO_UPDATE_POSTFIX;
-		return settings.registerIntPreference(settingId, TimesOfDay.NIGHT.ordinal());
+		return settings.registerIntPreference(settingId, TimeOfDay.NIGHT.ordinal());
 	}
 
 	public static OsmandSettings.CommonPreference<Long> preferenceLastCheck(
@@ -64,7 +64,7 @@ public class LiveUpdatesHelper {
 		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 	}
 
-	public static enum TimesOfDay {
+	public static enum TimeOfDay {
 		MORNING,
 		NIGHT
 	}

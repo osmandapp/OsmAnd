@@ -34,7 +34,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Calendar;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimesOfDay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
@@ -146,7 +146,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 						final int timeOfDayInt = updateTimesOfDaySpinner.getSelectedItemPosition();
 						timeOfDayPreference.set(timeOfDayInt);
-						TimesOfDay timeOfDayToUpdate = TimesOfDay.values()[timeOfDayInt];
+						TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
 						long timeOfFirstUpdate;
 						long updateInterval;
 						switch (updateFrequency) {
@@ -207,12 +207,12 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		sizeTextView.setText(getString(R.string.updates_size_pattern, size));
 	}
 
-	private long getNextUpdateTime(TimesOfDay timeOfDayToUpdate) {
+	private long getNextUpdateTime(TimeOfDay timeOfDayToUpdate) {
 		Calendar calendar = Calendar.getInstance();
-		if (timeOfDayToUpdate == TimesOfDay.MORNING) {
+		if (timeOfDayToUpdate == TimeOfDay.MORNING) {
 			calendar.add(Calendar.DATE, 1);
 			calendar.set(Calendar.HOUR_OF_DAY, MORNING_UPDATE_TIME);
-		} else if (timeOfDayToUpdate == TimesOfDay.NIGHT) {
+		} else if (timeOfDayToUpdate == TimeOfDay.NIGHT) {
 			calendar.add(Calendar.DATE, 1);
 			calendar.set(Calendar.HOUR_OF_DAY, NIGHT_UPDATE_TIME);
 		}

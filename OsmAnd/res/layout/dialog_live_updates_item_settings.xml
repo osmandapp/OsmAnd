@@ -7,12 +7,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="wrap_content"
         android:background="@color/color_dialog_buttons"
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="24dp">
+        android:paddingTop="15dp">
 
         <TextView
             android:id="@+id/regionNameTextView"
@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/color_white"
+            android:layout_marginBottom="27dp"
             tools:text="Flevoland"/>
 
         <View
@@ -30,7 +31,8 @@
         <TextView
             android:id="@+id/lastMapChangeTextView"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:gravity="center"
             android:textColor="@color/color_white"
@@ -55,6 +57,7 @@
         android:layout_marginRight="24dp">
 
         <TextView
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -77,6 +80,7 @@
         android:layout_marginRight="24dp">
 
         <TextView
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -101,6 +105,7 @@
         android:layout_marginRight="16dp">
 
         <TextView
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -124,6 +129,7 @@
         android:layout_marginRight="16dp">
 
         <TextView
+            android:textColor="?android:attr/textColorPrimary"
             android:id="@+id/updateTimesOfDayLabel"
             android:layout_width="0dp"
             android:layout_height="54dp"
@@ -150,6 +156,7 @@
         android:layout_marginRight="16dp">
 
         <TextView
+            android:textColor="?android:attr/textColorPrimary"
             android:id="@+id/sizeTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"

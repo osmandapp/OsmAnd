@@ -39,10 +39,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 
 public class LiveUpdatesFragment extends Fragment {
@@ -68,12 +70,12 @@ public class LiveUpdatesFragment extends Fragment {
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 //		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
 
-		adapter = new LocalIndexesAdapter(this);
-		listView.setAdapter(adapter);
 		View topShadowView = inflater.inflate(R.layout.shadow_top, listView, false);
 		listView.addHeaderView(topShadowView);
 		View bottomShadowView = inflater.inflate(R.layout.shadow_bottom, listView, false);
 		listView.addFooterView(bottomShadowView);
+		adapter = new LocalIndexesAdapter(this);
+		listView.setAdapter(adapter);
 		new LoadLocalIndexTask(adapter, this).execute();
 		return view;
 	}
@@ -306,9 +308,15 @@ public class LiveUpdatesFragment extends Fragment {
 			AbsListView.LayoutParams layoutParams = (AbsListView.LayoutParams) view.getLayoutParams();
 			if (shouldUpdatePreference.get()) {
 				final Integer frequencyId = preferenceUpdateFrequency(item, fragment.getSettings()).get();
+				final Integer timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(item, fragment.getSettings()).get();
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
+				final TimeOfDay timeOfDay = TimeOfDay.values()[timeOfDateToUpdateId];
 				subheaderTextView.setVisibility(View.VISIBLE);
-				subheaderTextView.setText(frequency.toString());
+				String subheaderText = frequency.toString();
+				if (frequency != UpdateFrequency.HOURLY) {
+					subheaderText += " • " + timeOfDay.toString();
+				}
+				subheaderTextView.setText(subheaderText);
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()
 						.getColor(R.color.osmand_orange));
 				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.osmand_orange));
