@@ -193,7 +193,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	void runLiveUpdate(final LocalIndexInfo info) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
 		new PerformLiveUpdateAsyncTask(getActivity(), info).execute(new String[]{fnExt});
-		getLiveUpdatesFragment().notifyLiveUpdatesChanged();
 	}
 
 	private void updateSize(String fileNameWithoutExtension,
