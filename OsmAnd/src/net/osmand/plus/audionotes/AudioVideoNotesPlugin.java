@@ -1143,7 +1143,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						parameters.setPictureSize(selectedCamPicSize.width, selectedCamPicSize.height);
 						log.debug("takePhotoWithCamera() set Picture size: width=" + selectedCamPicSize.width
 								+ " height=" + selectedCamPicSize.height);
-
+/*
 						// camera focus type
 						autofocus = true;
 						parameters.setGpsLatitude(lat);
@@ -1186,7 +1186,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								&& parameters.getSupportedFlashModes().contains(Parameters.FLASH_MODE_AUTO)) {
 							parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 						}
-
+*/
+						autofocus = false;
 						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
 						//cam.setDisplayOrientation(cameraOrientation);
 						parameters.set("rotation", cameraOrientation);
