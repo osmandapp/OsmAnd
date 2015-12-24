@@ -367,7 +367,7 @@
 	<string name="first_time_continue">Sonra</string>
 	<string name="search_poi_location">Sinyal aranıyor…</string>
 	<string name="transport_Routes">Rotalar</string>
-	<string name="shared_string_ok">Tamam</string>
+	<string name="shared_string_ok">Ok</string>
 	<string name="shared_string_clear_all">Hepsini temizle</string>
 	<string name="searching">Aranıyor…</string>
 	<string name="searching_address">Adres aranıyor…</string>
@@ -432,7 +432,7 @@
 	<string name="context_menu_item_update_map">Haritayı güncelle</string>
 	<string name="context_menu_item_create_poi">POI oluştur</string>
 	<string name="shared_string_yes">Evet</string>
-	<string name="shared_string_cancel">İptal et</string>
+	<string name="shared_string_cancel">İptal</string>
 	<string name="shared_string_apply">Uygula</string>
 	<string name="shared_string_add">Ekle</string>
 	<string name="shared_string_no">Hayır</string>
@@ -1118,7 +1118,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM haritalama yardımcısı</string>
 	<string name="agps_info">A-GPS bilgisi</string>
 	<string name="shared_string_manage">Yönet</string>
-	<string name="shared_string_edit">Düzenle</string>
+	<string name="shared_string_edit">Düzenleme</string>
 	<string name="shared_string_places">Yerler</string>
 	<string name="shared_string_search">Ara</string>
 	<string name="shared_string_show_description">Açıklama göster</string>
@@ -1345,7 +1345,7 @@
     <string name="drawer">Düz liste</string>
     <string name="short_location_on_map">Enl %1$s\nBoyl %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-	<string name="shared_string_dismiss">Vazgeç</string>
+	<string name="shared_string_dismiss">Görevden</string>
 	<string name="shared_string_selected_lowercase">seçili</string>
 	<string name="shared_string_deselect">Seçimini kaldırın</string>
 	<string name="shared_string_deselect_all">Tüm Seçimleri Kaldır</string>
