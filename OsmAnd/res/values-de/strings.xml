@@ -2091,4 +2091,11 @@
     <string name="update_time">Aktualisierungszeitpunkt</string>
 <string name="updates_size_pattern">Aktualisierungen: %s</string>
 <string name="last_map_change">Letzte Kartenänderung: %s</string>
-</resources>
+<string name="rec_split_storage_size_desc">Menge an Speicherplatz , die von allen aufgezeichneten Clips belegt werden kann</string>
+    <string name="rec_split_desc">Clips neu schreiben, wenn der benutzte Platz den Speicherplatz überstreitet</string>
+    <string name="rec_split_clip_length">Cliplänge</string>
+    <string name="rec_split_clip_length_desc">Die Länge jedes ausgezeichneten Clips wird nicht länger sein, als der festgelegt Zeitinterval</string>
+    <string name="rec_split_storage_size">Speicherplatz</string>
+    <string name="rec_split">Automatische Trennung</string>
+    <string name="rec_split_title">Automatische Trennung nutzen</string>
+    </resources>
