@@ -887,7 +887,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 
 					int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
-					//cam.setDisplayOrientation(cameraOrientation);
+					cam.setDisplayOrientation(cameraOrientation);
 					parameters.set("rotation", cameraOrientation);
 					if (mPreviewSize != null) {
 						parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
@@ -1143,7 +1143,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						parameters.setPictureSize(selectedCamPicSize.width, selectedCamPicSize.height);
 						log.debug("takePhotoWithCamera() set Picture size: width=" + selectedCamPicSize.width
 								+ " height=" + selectedCamPicSize.height);
-/*
+
 						// camera focus type
 						autofocus = true;
 						parameters.setGpsLatitude(lat);
@@ -1177,7 +1177,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								log.info("Osmand:AudioNotes set camera FOCUS_MODE_AUTO");
 								break;
 						}
-
+						/*
 						if (parameters.getSupportedWhiteBalance() != null
 								&& parameters.getSupportedWhiteBalance().contains(Parameters.WHITE_BALANCE_AUTO)) {
 							parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
@@ -1186,10 +1186,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								&& parameters.getSupportedFlashModes().contains(Parameters.FLASH_MODE_AUTO)) {
 							parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 						}
-*/
-						autofocus = false;
+						*/
 						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
-						//cam.setDisplayOrientation(cameraOrientation);
+						cam.setDisplayOrientation(cameraOrientation);
 						parameters.set("rotation", cameraOrientation);
 						if (mPreviewSize != null) {
 							parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
