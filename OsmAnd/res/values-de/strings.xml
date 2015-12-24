@@ -2090,4 +2090,5 @@
 <string name="update_date_pattern">Aktualisierung: %s</string>
     <string name="update_time">Aktualisierungszeitpunkt</string>
 <string name="updates_size_pattern">Aktualisierungen: %s</string>
+<string name="last_map_change">Letzte Kartenänderung: %s</string>
 </resources>
