@@ -2142,4 +2142,5 @@
 <string name="update_date_pattern">Update: %s</string>
     <string name="update_time">Tijd van update</string>
 <string name="updates_size_pattern">Updates: %s</string>
+<string name="last_map_change">Laatste wijziging van kaart: %s</string>
 </resources>
