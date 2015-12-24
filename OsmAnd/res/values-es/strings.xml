@@ -2022,4 +2022,13 @@
 <string name="update_date_pattern">Actualización: %s</string>
     <string name="update_time">Tiempo de actualización</string>
 <string name="size_pattern">Tamaño: %s</string>
-</resources>
+<string name="rec_split_storage_size">Tamaño del almacenamiento</string>
+    <string name="updates_size_pattern">Actualizaciones: %s</string>
+    <string name="last_map_change">Último cambio de mapa: %*s</string>
+<string name="rec_split">Dividir grabación</string>
+    <string name="rec_split_title">Usar la división de grabación</string>
+    <string name="rec_split_desc">Reescribir clips al exceder el espacio de almacenamiento utilizado</string>
+    <string name="rec_split_clip_length">Longitud del clip</string>
+    <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el tiempo de intervalo determinado</string>
+    <string name="rec_split_storage_size_desc">La cantidad de espacio que pueden ocupar todos los clips grabados</string>
+    </resources>
