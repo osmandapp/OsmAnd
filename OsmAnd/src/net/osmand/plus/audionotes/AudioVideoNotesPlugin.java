@@ -142,6 +142,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public final CommonPreference<Integer> AV_DEFAULT_ACTION;
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
+	public static final int CLIP_LENGTH_DEFAULT = 5;
+	public static final int STORAGE_SIZE_DEFAULT = 5;
+	public final CommonPreference<Boolean> AV_RECORDER_SPLIT;
+	public final CommonPreference<Integer> AV_RS_CLIP_LENGTH;
+	public final CommonPreference<Integer> AV_RS_STORAGE_SIZE;
+
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
 	private Map<String, Recording> recordingByFileName = new LinkedHashMap<>();
 	private AudioNotesLayer audioNotesLayer;
@@ -498,6 +504,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_PHOTO_PLAY_SOUND = settings.registerBooleanPreference("av_photo_play_sound", true).makeGlobal();
 
 		SHOW_RECORDINGS = settings.registerBooleanPreference("show_recordings", true).makeGlobal();
+
+		AV_RECORDER_SPLIT = settings.registerBooleanPreference("av_recorder_split", false).makeGlobal();
+		AV_RS_CLIP_LENGTH = settings.registerIntPreference("av_rs_clip_length", CLIP_LENGTH_DEFAULT).makeGlobal();
+		AV_RS_STORAGE_SIZE = settings.registerIntPreference("av_rs_storage_size", STORAGE_SIZE_DEFAULT).makeGlobal();
 	}
 
 	@Override
@@ -1146,8 +1156,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 						// camera focus type
 						autofocus = true;
-						parameters.setGpsLatitude(lat);
-						parameters.setGpsLongitude(lon);
+						//parameters.setGpsLatitude(lat);
+						//parameters.setGpsLongitude(lon);
 						switch (AV_CAMERA_FOCUS_TYPE.get()) {
 							case AV_CAMERA_FOCUS_HIPERFOCAL:
 								parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
@@ -1177,7 +1187,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								log.info("Osmand:AudioNotes set camera FOCUS_MODE_AUTO");
 								break;
 						}
-						/*
+
 						if (parameters.getSupportedWhiteBalance() != null
 								&& parameters.getSupportedWhiteBalance().contains(Parameters.WHITE_BALANCE_AUTO)) {
 							parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
@@ -1186,7 +1196,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								&& parameters.getSupportedFlashModes().contains(Parameters.FLASH_MODE_AUTO)) {
 							parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 						}
-						*/
+
 						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
 						cam.setDisplayOrientation(cameraOrientation);
 						parameters.set("rotation", cameraOrientation);
