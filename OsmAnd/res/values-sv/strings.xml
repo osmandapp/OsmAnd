@@ -2051,4 +2051,5 @@
 <string name="update_date_pattern">Uppdatering: %s</string>
     <string name="size_pattern">Storlek: %s</string>
 <string name="updates_size_pattern">Uppdateringar: %s</string>
+<string name="last_map_change">Senaste kartändring: %s</string>
 </resources>
