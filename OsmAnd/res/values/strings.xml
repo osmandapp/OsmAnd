@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rec_split">Recorder Split</string>
+    <string name="rec_split_title">Use Recorder Split</string>
+    <string name="rec_split_desc">Rewrite clips when used space exceeds the storage size</string>
+    <string name="rec_split_clip_length">Clip length</string>
+    <string name="rec_split_clip_length_desc">Length of every recorded clip will not be longer specified time interval</string>
+    <string name="rec_split_storage_size">Storage size</string>
+    <string name="rec_split_storage_size_desc">Amount of space that can be occupied by all recorded clips</string>
     <string name="live_updates">Live updates</string>
     <string name="available_maps">Available maps</string>
     <string name="select_voice_provider">Select voice guidance</string>

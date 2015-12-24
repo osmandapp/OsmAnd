@@ -6,6 +6,7 @@ import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StatFs;
 import android.preference.ListPreference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -18,8 +19,11 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AUDIO_BITRATE_DEFAULT;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
@@ -228,20 +232,76 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 					R.string.av_video_quality_descr);
 			video.addPreference(lp);
 
+			// Recorder Split settings
+			PreferenceCategory recSplit = new PreferenceCategory(this);
+			recSplit.setTitle(R.string.rec_split);
+			grp.addPreference(recSplit);
+
+			recSplit.addPreference(createCheckBoxPreference(p.AV_RECORDER_SPLIT, R.string.rec_split_title,
+					R.string.rec_split_desc));
+
+			intValues = new Integer[]{1, 2, 3, 4, 5, 7, 10, 15, 20, 25, 30};
+			entries = new String[intValues.length];
+			int i = 0;
+			String minStr = getString(R.string.int_min);
+			for (int v : intValues) {
+				entries[i++] = String.valueOf(v) + " " + minStr;
+			}
+			lp = createListPreference(p.AV_RS_CLIP_LENGTH, entries, intValues,
+					R.string.rec_split_clip_length,
+					R.string.rec_split_clip_length_desc);
+			recSplit.addPreference(lp);
+
+			File dir = getMyApplication().getAppPath("").getParentFile();
+			long size = 0;
+			if (dir.canRead()) {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				size = ((long) fs.getBlockSize() * (long) fs.getBlockCount()) / (1 << 30);
+			}
+			if (size > 0) {
+				int value = 1;
+				ArrayList<Integer> gbList = new ArrayList<>();
+				while (value < size) {
+					gbList.add(value);
+					if (value < 5) {
+						value++;
+					} else {
+						value += 5;
+					}
+				}
+				if (value != size) {
+					gbList.add((int) size);
+				}
+				MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
+				entries = new String[gbList.size()];
+				intValues = new Integer[gbList.size()];
+				i = 0;
+				for (int v : gbList) {
+					intValues[i] = v;
+					entries[i] = formatGb.format(new Object[]{(float) v});
+					i++;
+				}
+
+				lp = createListPreference(p.AV_RS_STORAGE_SIZE, entries, intValues,
+						R.string.rec_split_storage_size,
+						R.string.rec_split_storage_size_desc);
+				recSplit.addPreference(lp);
+			}
+
 			// audio settings
 			PreferenceCategory audio = new PreferenceCategory(this);
 			audio.setTitle(R.string.shared_string_audio);
 			grp.addPreference(audio);
 
-			entries = new String[] { "Default", "AAC" };
-			intValues = new Integer[] { MediaRecorder.AudioEncoder.DEFAULT, MediaRecorder.AudioEncoder.AAC };
+			entries = new String[]{"Default", "AAC"};
+			intValues = new Integer[]{MediaRecorder.AudioEncoder.DEFAULT, MediaRecorder.AudioEncoder.AAC};
 			lp = createListPreference(p.AV_AUDIO_FORMAT, entries, intValues,
 					R.string.av_audio_format,
 					R.string.av_audio_format_descr);
 			audio.addPreference(lp);
 
-			entries = new String[] { "Default", "16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps" };
-			intValues = new Integer[] { AUDIO_BITRATE_DEFAULT, 16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024 };
+			entries = new String[]{"Default", "16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
+			intValues = new Integer[]{AUDIO_BITRATE_DEFAULT, 16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
 			lp = createListPreference(p.AV_AUDIO_BITRATE, entries, intValues,
 					R.string.av_audio_bitrate,
 					R.string.av_audio_bitrate_descr);
