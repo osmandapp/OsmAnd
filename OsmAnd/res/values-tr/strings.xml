@@ -2008,4 +2008,5 @@
     <string name="last_update">Son güncelleme:% s</string>
     <string name="update_date_pattern">Güncelleme:% s</string>
     <string name="update_time">Güncelleme zamanı</string>
-    </resources>
+    <string name="updates_size_pattern">Güncellemeler:% s</string>
+</resources>
