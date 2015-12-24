@@ -887,7 +887,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 
 					int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
-					cam.setDisplayOrientation(cameraOrientation);
+					//cam.setDisplayOrientation(cameraOrientation);
 					parameters.set("rotation", cameraOrientation);
 					if (mPreviewSize != null) {
 						parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
@@ -1177,18 +1177,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								log.info("Osmand:AudioNotes set camera FOCUS_MODE_AUTO");
 								break;
 						}
-						// parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
-						// parameters.set("auto-exposure-lock", "true");
-						// }
 
-						parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
-						parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
+						if (parameters.getSupportedWhiteBalance() != null
+								&& parameters.getSupportedWhiteBalance().contains(Parameters.WHITE_BALANCE_AUTO)) {
+							parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
+						}
+						if (parameters.getSupportedFlashModes() != null
+								&& parameters.getSupportedFlashModes().contains(Parameters.FLASH_MODE_AUTO)) {
+							parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
+						}
 
 						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
-						cam.setDisplayOrientation(cameraOrientation);
+						//cam.setDisplayOrientation(cameraOrientation);
 						parameters.set("rotation", cameraOrientation);
 						if (mPreviewSize != null) {
-							//parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+							parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
 						}
 						cam.setParameters(parameters);
 						cam.setPreviewDisplay(holder);
