@@ -370,6 +370,11 @@ public class IncrementalChangesManager {
 		return getTimestamp(ruf);
 	}
 
+	public long getMapTimestamp(String fileName) {
+		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		return ruf.mainFileInit;
+	}
+
 	private long getTimestamp(RegionUpdateFiles ruf) {
 		long timestamp = ruf.mainFileInit;
 		for (RegionUpdate ru : ruf.monthUpdates.values()) {

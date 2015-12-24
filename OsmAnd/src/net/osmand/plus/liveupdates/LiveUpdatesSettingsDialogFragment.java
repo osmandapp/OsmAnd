@@ -40,7 +40,6 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 
@@ -79,10 +78,9 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
-		OsmandSettings.CommonPreference<Long> lastCheckPreference = preferenceLastCheck(localIndexInfo, getSettings());
-		String lastCheckDate = formatDateTime(getActivity(), lastCheckPreference.get());
-		String lastCheck = lastCheckPreference.get() != -1 ? lastCheckDate : lastUpdateDate;
-		lastCheckTextView.setText(getString(R.string.last_check_date, lastCheck));
+		final long mapTimestamp = changesManager.getMapTimestamp(fileNameWithoutExtension);
+		String lastCheckDate = formatDateTime(getActivity(), mapTimestamp);
+		lastCheckTextView.setText(getString(R.string.map_update_date, lastCheckDate));
 		lastUpdateTextView.setText(getString(R.string.update_date_pattern, lastUpdateDate));
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo, getSettings());
