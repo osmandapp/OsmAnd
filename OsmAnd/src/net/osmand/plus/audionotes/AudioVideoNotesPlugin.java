@@ -1188,7 +1188,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						cam.setDisplayOrientation(cameraOrientation);
 						parameters.set("rotation", cameraOrientation);
 						if (mPreviewSize != null) {
-							parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+							//parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
 						}
 						cam.setParameters(parameters);
 						cam.setPreviewDisplay(holder);
