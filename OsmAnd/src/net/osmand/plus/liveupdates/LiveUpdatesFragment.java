@@ -70,8 +70,6 @@ public class LiveUpdatesFragment extends Fragment {
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 //		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
 
-		View topShadowView = inflater.inflate(R.layout.shadow_top, listView, false);
-		listView.addHeaderView(topShadowView);
 		View bottomShadowView = inflater.inflate(R.layout.shadow_bottom, listView, false);
 		listView.addFooterView(bottomShadowView);
 		adapter = new LocalIndexesAdapter(this);
@@ -179,24 +177,24 @@ public class LiveUpdatesFragment extends Fragment {
 
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-			View v = convertView;
+			View view = convertView;
 			String group = getGroup(groupPosition);
-			if (v == null) {
+			if (view == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
-				v = inflater.inflate(R.layout.list_group_title_with_switch, parent, false);
+				view = inflater.inflate(R.layout.list_group_title_with_switch, parent, false);
 			}
-			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			TextView nameView = ((TextView) view.findViewById(R.id.section_name));
 			nameView.setText(group);
 
-			v.setOnClickListener(null);
+			view.setOnClickListener(null);
 
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = ctx.getTheme();
 			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
-			v.setBackgroundColor(typedValue.data);
+			view.setBackgroundColor(typedValue.data);
 
-			SwitchCompat liveUpdatesSwitch = (SwitchCompat) v.findViewById(R.id.liveUpdatesSwitch);
-			View topShadowView = v.findViewById(R.id.bottomShadowView);
+			SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
+			View topShadowView = view.findViewById(R.id.bottomShadowView);
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				topShadowView.setVisibility(View.GONE);
 				liveUpdatesSwitch.setVisibility(View.VISIBLE);
@@ -215,7 +213,7 @@ public class LiveUpdatesFragment extends Fragment {
 				topShadowView.setVisibility(View.VISIBLE);
 				liveUpdatesSwitch.setVisibility(View.GONE);
 			}
-			return v;
+			return view;
 		}
 
 		@Override

@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
               android:layout_height="72dp"
-              android:background="?attr/expandable_list_item_background"
+              android:background="?attr/bg_color"
               android:descendantFocusability="blocksDescendants"
               android:minHeight="@dimen/list_item_height"
               android:orientation="horizontal"
