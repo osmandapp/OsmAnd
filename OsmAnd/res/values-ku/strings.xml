@@ -54,4 +54,14 @@
     <string name="shared_string_sound">Deng</string>
     <string name="osb_author_dialog_password">Şîfre OSM</string>
     <string name="share_geo">:Cih</string>
+    <string name="shared_string_ok">Ere</string>
+    <string name="shared_string_cancel">Betalka</string>
+    <string name="shared_string_no">Na</string>
+    <string name="shared_string_yes">Ere</string>
+    <string name="shared_string_save">Qeyd kirin</string>
+    <string name="shared_string_delete">jêbirin</string>
+    <string name="shared_string_add">Telêkirin</string>
+    <string name="shared_string_or">An Je</string>
+    <string name="shared_string_and">û</string>
+    <string name="shared_string_edit">Sazkirin</string>
     </resources>
