@@ -14,12 +14,12 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
@@ -41,15 +41,19 @@ public class PerformLiveUpdateAsyncTask
 			activity.setSupportProgressBarIndeterminateVisibility(true);
 			OsmandSettings settings = activity.getMyApplication().getSettings();
 		}
-		final OsmandApplication myApplication = (OsmandApplication) context.getApplicationContext();
+		final OsmandApplication myApplication = getMyApplication();
 		OsmandSettings.CommonPreference<Long> lastCheckPreference =
 				LiveUpdatesHelper.preferenceLastCheck(localIndexInfo, myApplication.getSettings());
 		lastCheckPreference.set(System.currentTimeMillis());
 	}
 
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication) context.getApplicationContext();
+	}
+
 	@Override
 	protected IncrementalChangesManager.IncrementalUpdateList doInBackground(String... params) {
-		final OsmandApplication myApplication = (OsmandApplication) context.getApplicationContext();
+		final OsmandApplication myApplication = getMyApplication();
 		IncrementalChangesManager cm = myApplication.getResourceManager().getChangesManager();
 		return cm.getUpdatesByMonth(params[0]);
 	}
@@ -60,7 +64,7 @@ public class PerformLiveUpdateAsyncTask
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
 			activity.setSupportProgressBarIndeterminateVisibility(false);
 		}
-		final OsmandApplication application = (OsmandApplication) context.getApplicationContext();
+		final OsmandApplication application = getMyApplication();
 		final OsmandSettings settings = application.getSettings();
 		if (result.errorMessage != null) {
 			Toast.makeText(context, result.errorMessage, Toast.LENGTH_SHORT).show();
@@ -71,21 +75,44 @@ public class PerformLiveUpdateAsyncTask
 			if (ll.isEmpty()) {
 				Toast.makeText(context, R.string.no_updates_available, Toast.LENGTH_SHORT).show();
 			} else {
-				int i = 0;
-				IndexItem[] is = new IndexItem[ll.size()];
+				ArrayList<IndexItem> itemsToDownload = new ArrayList<>(ll.size());
 				for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
-					IndexItem ii = new IndexItem(iu.fileName, "Incremental update",
+					IndexItem indexItem = new IndexItem(iu.fileName, "Incremental update",
 							iu.timestamp, iu.sizeText, iu.contentSize,
 							iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
-					is[i++] = ii;
+					itemsToDownload.add(indexItem);
 				}
-				DownloadValidationManager downloadValidationManager =
-						new DownloadValidationManager(application);
+				DownloadIndexesThread downloadThread = application.getDownloadThread();
 				if (context instanceof DownloadIndexesThread.DownloadEvents) {
-					downloadValidationManager.getDownloadThread()
-							.setUiActivity((DownloadIndexesThread.DownloadEvents) context);
+					downloadThread.setUiActivity((DownloadIndexesThread.DownloadEvents) context);
 				}
-				downloadValidationManager.startDownload(context, is);
+				boolean downloadViaWiFi =
+						LiveUpdatesHelper.preferenceDownloadViaWiFi(localIndexInfo, settings).get();
+				if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
+					if (settings.isWifiConnected() || downloadViaWiFi) {
+						long szLong = 0;
+						int i = 0;
+						for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
+							szLong += es.getContentSize();
+							i++;
+						}
+						for (IndexItem es : itemsToDownload) {
+							szLong += es.getContentSize();
+							i++;
+						}
+						double sz = ((double) szLong) / (1 << 20);
+						// get availabile space
+						double asz = downloadThread.getAvailableSpace();
+						if (asz == -1 || asz <= 0 || sz / asz <= 0.4) {
+							IndexItem[] itemsArray = new IndexItem[itemsToDownload.size()];
+							itemsArray = itemsToDownload.toArray(itemsArray);
+							downloadThread.runDownloadFiles(itemsArray);
+							if (context instanceof DownloadIndexesThread.DownloadEvents) {
+								((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -104,7 +131,7 @@ public class PerformLiveUpdateAsyncTask
 			Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
 			final File file = new File(localIndexInfo.getFileName());
 			final String fileName = Algorithms.getFileNameWithoutExtension(file);
-			intent.putExtra(LiveUpdatesSettingsDialogFragment.LOCAL_INDEX_INFO, localIndexInfo);
+			intent.putExtra(LiveUpdatesHelper.LOCAL_INDEX_INFO, localIndexInfo);
 			intent.setAction(fileName);
 			PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 

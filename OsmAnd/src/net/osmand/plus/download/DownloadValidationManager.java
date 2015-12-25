@@ -2,7 +2,6 @@ package net.osmand.plus.download;
 
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,7 +38,7 @@ public class DownloadValidationManager {
 		return downloadThread;
 	}
 
-	public void startDownload(Context context, IndexItem... items) {
+	public void startDownload(FragmentActivity context, IndexItem... items) {
 		downloadFilesWithAllChecks(context, items);
 	}
 
@@ -47,7 +46,7 @@ public class DownloadValidationManager {
 		return app;
 	}
 
-	public void downloadFilesCheck_3_ValidateSpace(final Context context, final IndexItem... items) {
+	public void downloadFilesCheck_3_ValidateSpace(final FragmentActivity context, final IndexItem... items) {
 		long szLong = 0;
 		int i = 0;
 		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
@@ -77,7 +76,7 @@ public class DownloadValidationManager {
 		}
 	}
 
-	private void downloadFileCheck_Final_Run(Context context, IndexItem[] items) {
+	private void downloadFileCheck_Final_Run(FragmentActivity context, IndexItem[] items) {
 		downloadThread.runDownloadFiles(items);
 		if (context instanceof DownloadEvents) {
 			((DownloadEvents) context).downloadInProgress();
@@ -85,16 +84,16 @@ public class DownloadValidationManager {
 	}
 
 
-	protected void downloadFilesWithAllChecks(Context context, IndexItem[] items) {
+	protected void downloadFilesWithAllChecks(FragmentActivity context, IndexItem[] items) {
 		downloadFilesCheck_1_FreeVersion(context, items);
 	}
 
-	protected void downloadFilesCheck_1_FreeVersion(Context context, IndexItem[] items) {
+	protected void downloadFilesCheck_1_FreeVersion(FragmentActivity context, IndexItem[] items) {
 		if (Version.isFreeVersion(getMyApplication())) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 				if (context instanceof FragmentActivity) {
-					FragmentActivity activity = (FragmentActivity) context;
+					FragmentActivity activity = context;
 					new InstallPaidVersionDialogFragment()
 							.show(activity.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
 				}
@@ -106,7 +105,7 @@ public class DownloadValidationManager {
 		}
 	}
 
-	protected void downloadFilesCheck_2_Internet(final Context context, final IndexItem[] items) {
+	protected void downloadFilesCheck_2_Internet(final FragmentActivity context, final IndexItem[] items) {
 		if (!getMyApplication().getSettings().isWifiConnected()) {
 			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -128,7 +127,7 @@ public class DownloadValidationManager {
 	}
 
 
-	public void makeSureUserCancelDownload(Context ctx, final IndexItem item) {
+	public void makeSureUserCancelDownload(FragmentActivity ctx, final IndexItem item) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setTitle(ctx.getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);

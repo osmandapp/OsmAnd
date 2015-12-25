@@ -1,11 +1,19 @@
 package net.osmand.plus.liveupdates;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.util.Calendar;
 
 public class LiveUpdatesHelper {
 	private static final String UPDATE_TIMES_POSTFIX = "_update_times";
@@ -13,6 +21,13 @@ public class LiveUpdatesHelper {
 	private static final String DOWNLOAD_VIA_WIFI_POSTFIX = "_download_via_wifi";
 	private static final String LIVE_UPDATES_ON_POSTFIX = "_live_updates_on";
 	private static final String LAST_UPDATE_ATTEMPT_ON_POSTFIX = "_last_update_attempt";
+	public static final String LOCAL_INDEX_INFO = "local_index_info";
+
+
+	private static final int MORNING_UPDATE_TIME = 8;
+	private static final int NIGHT_UPDATE_TIME = 21;
+	private static final int SHIFT = 1000;
+
 	public static final int DEFAULT_LAST_CHECK = -1;
 
 	public static OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(
@@ -64,14 +79,83 @@ public class LiveUpdatesHelper {
 		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 	}
 
-	public static enum TimeOfDay {
-		MORNING,
-		NIGHT
+	public static PendingIntent getPendingIntent(Context context, LocalIndexInfo localIndexInfo) {
+		Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
+		final File file = new File(localIndexInfo.getFileName());
+		final String fileName = Algorithms.getFileNameWithoutExtension(file);
+		intent.putExtra(LOCAL_INDEX_INFO, localIndexInfo);
+		intent.setAction(fileName);
+		return PendingIntent.getBroadcast(context, 0, intent, 0);
 	}
 
-	public enum UpdateFrequency {
-		HOURLY,
-		DAILY,
-		WEEKLY
+	public static void setAlarmForPendingIntent(PendingIntent alarmIntent, AlarmManager alarmMgr, UpdateFrequency updateFrequency, TimeOfDay timeOfDayToUpdate) {
+		long timeOfFirstUpdate;
+		long updateInterval;
+		switch (updateFrequency) {
+			case HOURLY:
+				timeOfFirstUpdate = System.currentTimeMillis() + SHIFT;
+				updateInterval = AlarmManager.INTERVAL_HOUR;
+				break;
+			case DAILY:
+				timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
+				updateInterval = AlarmManager.INTERVAL_DAY;
+				break;
+			case WEEKLY:
+				timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
+				updateInterval = AlarmManager.INTERVAL_DAY * 7;
+				break;
+			default:
+				throw new IllegalStateException("Unexpected update frequency:"
+						+ updateFrequency);
+		}
+		alarmMgr.setInexactRepeating(AlarmManager.RTC,
+				timeOfFirstUpdate, updateInterval, alarmIntent);
+	}
+
+	private static long getNextUpdateTime(TimeOfDay timeOfDayToUpdate) {
+		Calendar calendar = Calendar.getInstance();
+		if (timeOfDayToUpdate == TimeOfDay.MORNING) {
+			calendar.add(Calendar.DATE, 1);
+			calendar.set(Calendar.HOUR_OF_DAY, MORNING_UPDATE_TIME);
+		} else if (timeOfDayToUpdate == TimeOfDay.NIGHT) {
+			calendar.add(Calendar.DATE, 1);
+			calendar.set(Calendar.HOUR_OF_DAY, NIGHT_UPDATE_TIME);
+		}
+		return calendar.getTimeInMillis();
+	}
+
+	public static enum TimeOfDay {
+		MORNING(R.string.morning),
+		NIGHT(R.string.Night);
+		private final int localizedId;
+
+		TimeOfDay(int localizedId) {
+			this.localizedId = localizedId;
+		}
+
+		public int getLocalizedId() {
+			return localizedId;
+		}
+
+
+		@Override
+		public String toString() {
+			return super.toString();
+		}
+	}
+
+	public static enum UpdateFrequency {
+		HOURLY(R.string.hourly),
+		DAILY(R.string.daily),
+		WEEKLY(R.string.weekly);
+		private final int localizedId;
+
+		UpdateFrequency(int localizedId) {
+			this.localizedId = localizedId;
+		}
+
+		public int getLocalizedId() {
+			return localizedId;
+		}
 	}
 }

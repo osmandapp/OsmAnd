@@ -1,5 +1,7 @@
 package net.osmand.plus.liveupdates;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -43,9 +45,11 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesFragment extends Fragment {
 	public static final String TITILE = "Live Updates";
@@ -70,8 +74,6 @@ public class LiveUpdatesFragment extends Fragment {
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 //		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
 
-		View topShadowView = inflater.inflate(R.layout.shadow_top, listView, false);
-		listView.addHeaderView(topShadowView);
 		View bottomShadowView = inflater.inflate(R.layout.shadow_bottom, listView, false);
 		listView.addFooterView(bottomShadowView);
 		adapter = new LocalIndexesAdapter(this);
@@ -179,24 +181,24 @@ public class LiveUpdatesFragment extends Fragment {
 
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-			View v = convertView;
+			View view = convertView;
 			String group = getGroup(groupPosition);
-			if (v == null) {
+			if (view == null) {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
-				v = inflater.inflate(R.layout.list_group_title_with_switch, parent, false);
+				view = inflater.inflate(R.layout.list_group_title_with_switch, parent, false);
 			}
-			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			TextView nameView = ((TextView) view.findViewById(R.id.section_name));
 			nameView.setText(group);
 
-			v.setOnClickListener(null);
+			view.setOnClickListener(null);
 
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = ctx.getTheme();
 			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
-			v.setBackgroundColor(typedValue.data);
+			view.setBackgroundColor(typedValue.data);
 
-			SwitchCompat liveUpdatesSwitch = (SwitchCompat) v.findViewById(R.id.liveUpdatesSwitch);
-			View topShadowView = v.findViewById(R.id.bottomShadowView);
+			SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
+			View topShadowView = view.findViewById(R.id.bottomShadowView);
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				topShadowView.setVisibility(View.GONE);
 				liveUpdatesSwitch.setVisibility(View.VISIBLE);
@@ -207,15 +209,30 @@ public class LiveUpdatesFragment extends Fragment {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						settings.IS_LIVE_UPDATES_ON.set(isChecked);
-						int liveUpdatesStateId = isChecked ? R.string.shared_string_on
-								: R.string.shared_string_off;
+						AlarmManager alarmMgr = (AlarmManager) getActivity()
+								.getSystemService(Context.ALARM_SERVICE);
+						for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
+							PendingIntent alarmIntent = getPendingIntent(getActivity(),
+									localIndexInfo);
+							if(isChecked) {
+								final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
+										preferenceUpdateFrequency(localIndexInfo, getSettings());
+								final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
+										preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
+								UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
+								TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
+								setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+							} else {
+								alarmMgr.cancel(alarmIntent);
+							}
+						}
 					}
 				});
 			} else {
 				topShadowView.setVisibility(View.VISIBLE);
 				liveUpdatesSwitch.setVisibility(View.GONE);
 			}
-			return v;
+			return view;
 		}
 
 		@Override
@@ -312,9 +329,9 @@ public class LiveUpdatesFragment extends Fragment {
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
 				final TimeOfDay timeOfDay = TimeOfDay.values()[timeOfDateToUpdateId];
 				subheaderTextView.setVisibility(View.VISIBLE);
-				String subheaderText = frequency.toString();
+				String subheaderText = fragment.getString(frequency.getLocalizedId());
 				if (frequency != UpdateFrequency.HOURLY) {
-					subheaderText += " • " + timeOfDay.toString();
+					subheaderText += " • " + fragment.getString(timeOfDay.getLocalizedId());
 				}
 				subheaderTextView.setText(subheaderText);
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()

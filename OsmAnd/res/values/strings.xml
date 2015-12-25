@@ -2141,4 +2141,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="update_time">Update time</string>
     <string name="updates_size_pattern">"Updates: %s"</string>
     <string name="last_map_change">"Last map change: %s"</string>
+    <string name="hourly">Hourly</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="morning">Morning</string>
+    <string name="Night">Night</string>
 </resources>
