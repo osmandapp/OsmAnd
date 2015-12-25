@@ -488,7 +488,7 @@
 	<string name="rendering_attr_appMode_name">işleme modu</string>
 	<string name="rendering_attr_appMode_description">Için haritayı optimize et</string>
 	<string name="rendering_attr_contourLines_description">Yakınlaştırma düzeyindenekran(gerektirir kontur veriler):</string>
-	<string name="rendering_attr_contourLines_name">Kontür çizgilerini göster</string>
+	<string name="rendering_attr_contourLines_name">Göster kontur çizgileri</string>
 	<string name="rendering_attr_hmRendered_description">Gösterilen haritanın detay miktarını artırın</string>
 	<string name="local_index_routing_data">Rota edilen veri</string>
 	<string name="navigate_point_format">Biçim</string>
@@ -1115,7 +1115,7 @@
     <string name="filter_poi_hint">Ada göre süz</string>
     <string name="search_poi_category_hint">Tümünü aramak için yazın</string>
     <string name="shared_string_open">Aç</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">OSM haritalama yardımcısı</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM Eşleştiricisi Yardımcısı</string>
 	<string name="agps_info">A-GPS bilgisi</string>
 	<string name="shared_string_manage">Yönet</string>
 	<string name="shared_string_edit">Düzenleme</string>
@@ -1166,7 +1166,7 @@
     <string name="download_wikipedia_files">Ekstra Wikipedia verisi indirmek ister misiniz? (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Konum servisi devre dışı. Ektinleştirmek ister misiniz?</string>
     <string name="shared_string_show_details">Detayları göster</string>
-    <string name="rendering_value_disabled_name">Devre dışı</string>
+    <string name="rendering_value_disabled_name">Engelli</string>
     <string name="osmo_share_my_location">Konumumu paylaş</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ev numaralarını gizle</string>
     <string name="confirm_usage_speed_cameras">Bazı ülkelerde (Almanya, Fransa, İtalya ve diğerleri) hız kamerası uyarılarının kullanımı yasaktır. OsmAnd yasaları çiğnemeniz durumunda sorumluluk kabul etmez. Eğer bu özellik sizin için uygunsa evet\'e tıklayın.</string>
@@ -1218,9 +1218,9 @@
     <string name="parking_place">Park yeri</string>
     <string name="gps_status">GPS durumu</string>
     <string name="points">Noktalar</string>
-	<string name="rendering_attr_roadStyle_name">Yol tipi</string>
+	<string name="rendering_attr_roadStyle_name">Yol tarzı</string>
     <string name="rendering_value__name">Varsayılan</string>
-    <string name="rendering_value_default_name">Varsayılan</string>
+    <string name="rendering_value_default_name">Standart</string>
     <string name="traffic_warning_pedestrian">Yaya geçidi</string>
 	<string name="show_pedestrian_warnings">Yaya geçitlerini göster</string>
     <string name="dash_download_msg_none">Çevrimdışı haritaları indirmek istiyor musunuz?</string>
@@ -1251,7 +1251,7 @@
 	<string name="confirm_every_run">Her zaman sor</string>
 	<string name="shared_string_import2osmand">OsmAnd\'a Aktar</string>
     <string name="read_full_article">Tüm metni oku (çevrimiçi)</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC\'ye göre renklendiriliyor</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC göre olan boyama</string>
     <string name="local_recordings_delete_all_confirm">%1$d notu silmek üzeresiniz. Emin misiniz?</string>
 	<string name="local_osm_changes_upload_all_confirm">%1%d düzenlemeyi OSM\'ye yüklemek üzeresiniz? Emin misiniz?</string>
     <string name="plugin_nautical_name">Deniz haritası görünümü</string>
@@ -1272,9 +1272,9 @@
     <string name="home">Pano</string>
     <string name="rendering_attr_hideBuildings_name">Binaları gizle</string>
     <string name="rendering_attr_hideText_name">Yazıları gizle</string>
-    <string name="rendering_attr_moreDetailed_name">Daha fazla ayrıntı</string>
+    <string name="rendering_attr_moreDetailed_name">Daha fazla bilgi</string>
     <string name="rendering_attr_lessDetailed_name">Daza az ayrıntı</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Yol kalitesini göster</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Yol kalitesi göster</string>
     <string name="sort_by_distance">Mesafeye göre sırala</string>
     <string name="sort_by_name">İsme göre sırala</string>
     <string name="gpx_info_average_speed">"Ortalama hız: %1$s "</string>
@@ -1329,7 +1329,7 @@
     <string name="routing_attr_avoid_shuttle_train_name">Mekik treninden kaçın</string>
 	<string name="local_indexes_cat_wiki">Vikipedi</string>
     <string name="osm_edit_context_menu_delete">OSM Düzeltmesini Sil</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Rota kapsamına göre boyama</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Rota kapsamına göre Boyama</string>
     <string name="shared_string_logoff">Çıkış yap</string>
     <string name="application_dir_change_warning3">OsmAnd\'ın verileri ayrıca yeni hedefe de kopyalamasını ister misiniz?</string>
     <string name="welcome_select_region">Doğru trafik işaretleri ve düzenlemeleri yansıtmak için sürüş bölgenizi seçin:</string>
@@ -1877,7 +1877,7 @@
     <string name="remove_the_tag">Etiketi Kaldır</string>
     <string name="version_settings_descr">Yenilemesini indir</string>
     <string name="version_settings">kurar</string>
-    <string name="rendering_attr_streetLighting_name">Sokak aydınlatması</string>
+    <string name="rendering_attr_streetLighting_name">Sokak Aydınlatma</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Bir proxy internet iletişim Kurulumu</string>
     <string name="settings_privacy">Gizlilik</string>
@@ -1905,7 +1905,7 @@
     <string name="search_for">Arama</string>
     <string name="rendering_attr_publicTransportMode_name">Otobüs, troleybüs, mekik yolları</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvay ve tren yolları</string>
-    <string name="rendering_attr_subwayMode_name">Metro yolları</string>
+    <string name="rendering_attr_subwayMode_name">Metro güzergah</string>
     <string name="lock_screen_request_explanation">%1$s ihtiyaçları güç tasarrufu özelliği ekranını kapatmak için bu izni.</string>
     <string name="wake_on_voice">Ekranı açın</string>
     <string name="wake_on_voice_descr">Bir dönüşe yaklaşırken cihaz ekranında (kapalı ise) açın</string>
@@ -1916,8 +1916,8 @@
     <string name="rendering_attr_trolleybusRoutes_name">Troleybüs güzergah</string>
     <string name="rendering_attr_busRoutes_name">Otobüs güzergahları</string>
     <string name="rendering_category_hide">Gizle</string>
-    <string name="rendering_category_routes">Güzergâhlar</string>
-    <string name="rendering_category_transport">Ulaşım</string>
+    <string name="rendering_category_routes">Güzergah</string>
+    <string name="rendering_category_transport">Taşıma</string>
     <string name="rendering_category_others">Diğer harita özellikleri</string>
     <string name="map_widget_appearance_rem">Kalan unsurlar</string>
     <string name="search_radius_proximity">Yakınında</string>
@@ -1983,7 +1983,7 @@
     <string name="rendering_attr_hideWoodScrubs_name">Ahşap ve scrubs gizle</string>
     <string name="rendering_attr_buildings15zoom_name">Binalar üzerinde yakınlaştırma 15</string>
     <string name="rendering_attr_hideAccess_name">Erişim kısıtlamaları gizle</string>
-    <string name="rendering_attr_showAccess_name">Erişim kısıtlamaları göster</string>
+    <string name="rendering_attr_showAccess_name">Show erişim kısıtlamaları</string>
     <string name="rendering_attr_showSurfaces_name">Yol yüzeyi göster</string>
     <string name="rendering_attr_showCycleRoutes_name">Döngüsü yolları göster</string>
     <string name="osmo_auth_error_short">Yetkilendirme başarısız oldu</string>
