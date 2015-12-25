@@ -2117,4 +2117,9 @@
     <string name="last_update">Ultimo aggiornamento: %s</string>
 <string name="update_date_pattern">Aggiornamento: %s</string>
     <string name="size_pattern">Dimensione: %s</string>
-</resources>
+<string name="rec_split_desc">Sovrascrivi le note quando lo spazio disponibile è esaurito</string>
+    <string name="rec_split_clip_length">Lunghezza della nota</string>
+    <string name="rec_split_clip_length_desc">Tutte le note registrate non supereranno la durata impostata</string>
+    <string name="rec_split_storage_size">Dimensione della memoria</string>
+    <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupato dal totale delle note</string>
+    </resources>
