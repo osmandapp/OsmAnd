@@ -125,7 +125,12 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+						if (liveUpdatePreference.get() != liveUpdatesSwitch.isChecked()) {
+							liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+							if (liveUpdatesSwitch.isChecked()) {
+								runLiveUpdate(localIndexInfo);
+							}
+						}
 						downloadViaWiFiPreference.set(downloadOverWiFiCheckBox.isChecked());
 
 						final int updateFrequencyInt = updateFrequencySpinner.getSelectedItemPosition();
