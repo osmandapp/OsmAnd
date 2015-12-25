@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
     	 Disclaimer:
@@ -1296,7 +1296,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_widget_fluorescent">Fluorescent routes</string>
     <string name="map_widget_show_ruler">Ruler</string>
     <string name="map_widget_view_direction">Viewing direction</string>
-    <string name="map_widget_transparent">Transparent skin</string>
+    <string name="map_widget_transparent">Transparent widgets</string>
     <string name="bg_service_sleep_mode_off">Run\n app in background</string>
     <string name="bg_service_sleep_mode_on">Stop\n running in background</string>
     <string name="gps_wakeup_interval">GPS wake-up interval: %s</string>

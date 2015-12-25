@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="no_address_found">Keine Adresse bekannt</string>
 	<string name="shared_string_near">Nähe</string>
@@ -1054,7 +1054,7 @@
 	
 	<string name="map_widget_view_direction">Blickrichtung einblenden</string>
 	<string name="map_widget_map_rendering">Kartendarstellung</string>
-	<string name="map_widget_transparent">Transparentes Layout</string>
+	<string name="map_widget_transparent">Transparente Widgets</string>
 
 	<string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
 	<string name="int_continuosly">Kontinuierlich</string>
