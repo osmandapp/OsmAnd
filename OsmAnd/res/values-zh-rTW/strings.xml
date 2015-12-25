@@ -2051,4 +2051,10 @@
 <string name="size_pattern">大小：%s</string>
 <string name="updates_size_pattern">更新：%s</string>
 <string name="last_map_change">上次地圖的更改：%s</string>
-</resources>
+<string name="rec_split">錄製分割</string>
+    <string name="rec_split_title">使用錄製分割</string>
+    <string name="rec_split_clip_length">剪輯長度</string>
+    <string name="rec_split_storage_size">存儲大小</string>
+    <string name="rec_split_desc">當重寫剪輯時，使用的空間超過記憶體大小</string>
+    <string name="rec_split_storage_size_desc">被所有錄製的剪輯可以佔用的空間總量</string>
+    </resources>
