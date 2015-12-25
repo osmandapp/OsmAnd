@@ -192,11 +192,6 @@ public class LiveUpdatesFragment extends Fragment {
 
 			view.setOnClickListener(null);
 
-			TypedValue typedValue = new TypedValue();
-			Resources.Theme theme = ctx.getTheme();
-			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
-			view.setBackgroundColor(typedValue.data);
-
 			SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
 			View topShadowView = view.findViewById(R.id.bottomShadowView);
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {

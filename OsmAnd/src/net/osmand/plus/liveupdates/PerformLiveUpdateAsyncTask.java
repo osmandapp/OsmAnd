@@ -89,7 +89,7 @@ public class PerformLiveUpdateAsyncTask
 				boolean downloadViaWiFi =
 						LiveUpdatesHelper.preferenceDownloadViaWiFi(localIndexInfo, settings).get();
 				if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
-					if (settings.isWifiConnected() || downloadViaWiFi) {
+					if (settings.isWifiConnected() || !downloadViaWiFi) {
 						long szLong = 0;
 						int i = 0;
 						for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
