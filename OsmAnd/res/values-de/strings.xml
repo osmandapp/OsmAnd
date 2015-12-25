@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="no_address_found">Keine Adresse bekannt</string>
 	<string name="shared_string_near">Nähe</string>
@@ -2098,4 +2098,9 @@
     <string name="rec_split_storage_size">Speicherplatz</string>
     <string name="rec_split">Automatische Trennung</string>
     <string name="rec_split_title">Automatische Trennung nutzen</string>
-    </resources>
+    <string name="hourly">Stündlich</string>
+    <string name="daily">Täglich</string>
+    <string name="weekly">Wöchentlich</string>
+    <string name="morning">Morgens</string>
+    <string name="Night">Nachts</string>
+</resources>
