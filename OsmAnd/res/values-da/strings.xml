@@ -167,7 +167,7 @@
     <string name="map_widget_show_ruler">Målestok</string>
 
     <string name="map_widget_view_direction">Synsretning</string>
-    <string name="map_widget_transparent">Gennemsigtig layout</string>
+    <string name="map_widget_transparent">Gennemsigtige moduler</string>
 
 
     <string name="bg_service_sleep_mode_off">Kør\ni baggrunden</string>
