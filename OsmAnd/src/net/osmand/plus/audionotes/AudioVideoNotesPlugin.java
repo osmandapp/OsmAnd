@@ -1156,8 +1156,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 						// camera focus type
 						autofocus = true;
-						//parameters.setGpsLatitude(lat);
-						//parameters.setGpsLongitude(lon);
+						parameters.removeGpsData();
+						String locProvider = mapActivity.getMapViewTrackingUtilities().getLocationProvider();
+						if (!Algorithms.isEmpty(locProvider)) {
+							parameters.setGpsLatitude(lat);
+							parameters.setGpsLongitude(lon);
+							parameters.setGpsProcessingMethod(locProvider.toUpperCase());
+						}
 						switch (AV_CAMERA_FOCUS_TYPE.get()) {
 							case AV_CAMERA_FOCUS_HIPERFOCAL:
 								parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
