@@ -2212,4 +2212,9 @@
     <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
     <string name="rec_split_storage_size">Opbevaring størrelse</string>
     <string name="rec_split_storage_size_desc">Mængden af plads, der kan være besat af alle optagede klip</string>
-    </resources>
+    <string name="hourly">Time</string>
+    <string name="daily">Daglig</string>
+    <string name="weekly">Ugentlig</string>
+    <string name="morning">Morgen</string>
+    <string name="Night">Nat</string>
+</resources>
