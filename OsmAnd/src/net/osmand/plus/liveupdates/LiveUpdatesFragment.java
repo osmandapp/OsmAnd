@@ -1,5 +1,7 @@
 package net.osmand.plus.liveupdates;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -43,9 +45,11 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesFragment extends Fragment {
 	public static final String TITILE = "Live Updates";
@@ -205,8 +209,23 @@ public class LiveUpdatesFragment extends Fragment {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						settings.IS_LIVE_UPDATES_ON.set(isChecked);
-						int liveUpdatesStateId = isChecked ? R.string.shared_string_on
-								: R.string.shared_string_off;
+						AlarmManager alarmMgr = (AlarmManager) getActivity()
+								.getSystemService(Context.ALARM_SERVICE);
+						for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
+							PendingIntent alarmIntent = getPendingIntent(getActivity(),
+									localIndexInfo);
+							if(isChecked) {
+								final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
+										preferenceUpdateFrequency(localIndexInfo, getSettings());
+								final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
+										preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
+								UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
+								TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
+								setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+							} else {
+								alarmMgr.cancel(alarmIntent);
+							}
+						}
 					}
 				});
 			} else {

@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -32,26 +31,21 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.Calendar;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesAlarmReceiver.class);
 	private static final String LOCAL_INDEX = "local_index";
-	public static final String LOCAL_INDEX_INFO = "local_index_info";
-
-
-	private static final int MORNING_UPDATE_TIME = 8;
-	private static final int NIGHT_UPDATE_TIME = 21;
-	private static final int SHIFT = 1000;
 
 	@NonNull
 	@Override
@@ -86,7 +80,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				preferenceForLocalIndex(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
 				preferenceDownloadViaWiFi(localIndexInfo, getSettings());
-		final OsmandSettings.CommonPreference<Integer> updateFrequencePreference =
+		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
 				preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
@@ -95,7 +89,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 		updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
 
-		updateFrequencySpinner.setSelection(updateFrequencePreference.get());
+		updateFrequencySpinner.setSelection(updateFrequencyPreference.get());
 		updateFrequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -131,48 +125,25 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+						downloadViaWiFiPreference.set(downloadOverWiFiCheckBox.isChecked());
+
 						final int updateFrequencyInt = updateFrequencySpinner.getSelectedItemPosition();
-						updateFrequencePreference.set(updateFrequencyInt);
-						UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
+						updateFrequencyPreference.set(updateFrequencyInt);
 
 						AlarmManager alarmMgr = (AlarmManager) getActivity()
 								.getSystemService(Context.ALARM_SERVICE);
-						Intent intent = new Intent(getActivity(), LiveUpdatesAlarmReceiver.class);
-						final File file = new File(localIndexInfo.getFileName());
-						final String fileName = Algorithms.getFileNameWithoutExtension(file);
-						intent.putExtra(LOCAL_INDEX_INFO, localIndexInfo);
-						intent.setAction(fileName);
-						PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+						PendingIntent alarmIntent = getPendingIntent(getActivity(), localIndexInfo);
 
 						final int timeOfDayInt = updateTimesOfDaySpinner.getSelectedItemPosition();
 						timeOfDayPreference.set(timeOfDayInt);
-						TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
-						long timeOfFirstUpdate;
-						long updateInterval;
-						switch (updateFrequency) {
-							case HOURLY:
-								timeOfFirstUpdate = System.currentTimeMillis() + SHIFT;
-								updateInterval = AlarmManager.INTERVAL_HOUR;
-								break;
-							case DAILY:
-								timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
-								updateInterval = AlarmManager.INTERVAL_DAY;
-								break;
-							case WEEKLY:
-								timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
-								updateInterval = AlarmManager.INTERVAL_DAY * 7;
-								break;
-							default:
-								throw new IllegalStateException("Unexpected update frequency:"
-										+ updateFrequency);
-						}
 
-						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
-						downloadViaWiFiPreference.set(downloadOverWiFiCheckBox.isChecked());
-						alarmMgr.cancel(alarmIntent);
-						if (liveUpdatesSwitch.isChecked()) {
-							alarmMgr.setInexactRepeating(AlarmManager.RTC,
-									timeOfFirstUpdate, updateInterval, alarmIntent);
+						if (liveUpdatesSwitch.isChecked() && getSettings().IS_LIVE_UPDATES_ON.get()) {
+							UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
+							TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
+							setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+						} else {
+							alarmMgr.cancel(alarmIntent);
 						}
 						getLiveUpdatesFragment().notifyLiveUpdatesChanged();
 					}
@@ -205,18 +176,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 			size = updatesSize + " KB";
 		}
 		sizeTextView.setText(getString(R.string.updates_size_pattern, size));
-	}
-
-	private long getNextUpdateTime(TimeOfDay timeOfDayToUpdate) {
-		Calendar calendar = Calendar.getInstance();
-		if (timeOfDayToUpdate == TimeOfDay.MORNING) {
-			calendar.add(Calendar.DATE, 1);
-			calendar.set(Calendar.HOUR_OF_DAY, MORNING_UPDATE_TIME);
-		} else if (timeOfDayToUpdate == TimeOfDay.NIGHT) {
-			calendar.add(Calendar.DATE, 1);
-			calendar.set(Calendar.HOUR_OF_DAY, NIGHT_UPDATE_TIME);
-		}
-		return calendar.getTimeInMillis();
 	}
 
 	private LiveUpdatesFragment getLiveUpdatesFragment() {
