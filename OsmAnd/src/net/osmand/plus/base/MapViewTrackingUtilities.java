@@ -109,7 +109,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	@Override
 	public void updateLocation(Location location) {
 		showViewAngle = false;
-		locationProvider = location.getProvider();
+		if (location != null) {
+			locationProvider = location.getProvider();
+		}
 		if (mapView != null) {
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 			if (isMapLinkedToLocation() && location != null) {
