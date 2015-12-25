@@ -310,9 +310,9 @@ public class LiveUpdatesFragment extends Fragment {
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
 				final TimeOfDay timeOfDay = TimeOfDay.values()[timeOfDateToUpdateId];
 				subheaderTextView.setVisibility(View.VISIBLE);
-				String subheaderText = frequency.toString();
+				String subheaderText = fragment.getString(frequency.getLocalizedId());
 				if (frequency != UpdateFrequency.HOURLY) {
-					subheaderText += " • " + timeOfDay.toString();
+					subheaderText += " • " + fragment.getString(timeOfDay.getLocalizedId());
 				}
 				subheaderTextView.setText(subheaderText);
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()

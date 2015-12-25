@@ -3,6 +3,7 @@ package net.osmand.plus.liveupdates;
 import android.content.Context;
 
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -65,13 +66,37 @@ public class LiveUpdatesHelper {
 	}
 
 	public static enum TimeOfDay {
-		MORNING,
-		NIGHT
+		MORNING(R.string.morning),
+		NIGHT(R.string.Night);
+		private final int localizedId;
+
+		TimeOfDay(int localizedId) {
+			this.localizedId = localizedId;
+		}
+
+		public int getLocalizedId() {
+			return localizedId;
+		}
+
+
+		@Override
+		public String toString() {
+			return super.toString();
+		}
 	}
 
 	public enum UpdateFrequency {
-		HOURLY,
-		DAILY,
-		WEEKLY
+		HOURLY(R.string.hourly),
+		DAILY(R.string.daily),
+		WEEKLY(R.string.weekly);
+		private final int localizedId;
+
+		UpdateFrequency(int localizedId) {
+			this.localizedId = localizedId;
+		}
+
+		public int getLocalizedId() {
+			return localizedId;
+		}
 	}
 }
