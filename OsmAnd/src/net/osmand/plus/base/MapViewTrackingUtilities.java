@@ -42,6 +42,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean routePlanningMode;
 	private boolean showViewAngle = false;
 	private boolean isUserZoomed = false;
+	private String locationProvider;
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -73,7 +74,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			mapView.setMapLocationListener(this);
 		}
 	}
-	
+
+	public String getLocationProvider() {
+		return locationProvider;
+	}
+
 	@Override
 	public void updateCompassValue(float val) {
 		if (mapView != null) {
@@ -104,6 +109,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	@Override
 	public void updateLocation(Location location) {
 		showViewAngle = false;
+		locationProvider = location.getProvider();
 		if (mapView != null) {
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 			if (isMapLinkedToLocation() && location != null) {
