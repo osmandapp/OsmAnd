@@ -266,7 +266,7 @@
     <string name="map_widget_show_ruler">Линийка</string>
 
     <string name="map_widget_view_direction">Посока на изгледа</string>
-    <string name="map_widget_transparent">Прозрачна кожа</string>
+    <string name="map_widget_transparent">Прозрачни икони</string>
 
 
     <string name="bg_service_sleep_mode_off">Работа\n във фонов режим</string>
@@ -2024,4 +2024,11 @@
     <string name="impassable_road_desc">Изберете пътищата, които да се избегнат при навигация</string>
     <string name="shared_string_sound">Звук</string>
     <string name="last_update">Последна актуализация: %s</string>
+<string name="rec_split">Записване на раздели</string>
+    <string name="rec_split_clip_length">Дължина на клипа</string>
+    <string name="rec_split_clip_length_desc">Всеки записан видео клип ще бъде ограничен от този размер</string>
+    <string name="rec_split_storage_size">Място за съхранение</string>
+    <string name="rec_split_storage_size_desc">Големина на определената за видео клипове памет</string>
+    <string name="updates_size_pattern">Актуализации: %s</string>
+    <string name="last_map_change">Последна промяна на картата: %s</string>
 </resources>
