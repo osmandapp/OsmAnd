@@ -865,7 +865,7 @@
     <string name="map_widget_show_ruler">Scala grafica</string>
 
     <string name="map_widget_view_direction">﻿Direzione della visuale</string>
-    <string name="map_widget_transparent">Aspetto trasparente</string>
+    <string name="map_widget_transparent">Widgets trasparenti</string>
 
 
     <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
@@ -2122,4 +2122,12 @@
     <string name="rec_split_clip_length_desc">Tutte le note registrate non supereranno la durata impostata</string>
     <string name="rec_split_storage_size">Dimensione della memoria</string>
     <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupato dal totale delle note</string>
-    </resources>
+    <string name="update_time">Ora di aggiornamento</string>
+    <string name="updates_size_pattern">Aggiornamenti: %s</string>
+    <string name="last_map_change">Ultimo cambiamento della mappa: %s</string>
+    <string name="hourly">Orario</string>
+    <string name="daily">Giornaliero</string>
+    <string name="weekly">Settimanale</string>
+    <string name="morning">Mattina</string>
+    <string name="Night">Notte</string>
+</resources>
