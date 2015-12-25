@@ -46,7 +46,7 @@
     <string name="map_widget_show_ruler">Linjal</string>
 
     <string name="map_widget_view_direction">Färdriktning</string>
-    <string name="map_widget_transparent">Genomskinligt skal</string>
+    <string name="map_widget_transparent">Genomskinliga widgetar</string>
 
 
     <string name="gps_wakeup_interval">GPS-väckningsintervall: %s</string>
