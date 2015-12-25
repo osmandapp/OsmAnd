@@ -2205,11 +2205,11 @@
 <string name="size_pattern">Størrelse: %s</string>
 <string name="updates_size_pattern">Opdateringer: %s</string>
 <string name="last_map_change">Sidste ændring af kort: %s</string>
-<string name="rec_split">Optager Split</string>
-    <string name="rec_split_title">Brug optager Split</string>
-    <string name="rec_split_desc">Omskrive klip når brugt plads overstiger opbevaring størrelse</string>
-    <string name="rec_split_clip_length">Kliplængden</string>
-    <string name="rec_split_clip_length_desc">Længden af hver optagede klip bliver ikke længere angivne tidsinterval</string>
+<string name="rec_split">Optager opdel</string>
+    <string name="rec_split_title">Brug optager opdel</string>
+    <string name="rec_split_desc">Omskriv klip når den brugte plads overstiger opbevaring størrelse</string>
+    <string name="rec_split_clip_length">Kliplængde</string>
+    <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
     <string name="rec_split_storage_size">Opbevaring størrelse</string>
     <string name="rec_split_storage_size_desc">Mængden af plads, der kan være besat af alle optagede klip</string>
     </resources>
