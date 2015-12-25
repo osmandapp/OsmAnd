@@ -74,7 +74,7 @@
     <string name="map_widget_show_ruler">比例尺</string>
 
     <string name="map_widget_view_direction">目視方向</string>
-    <string name="map_widget_transparent">透明面版</string>
+    <string name="map_widget_transparent">透明小工具</string>
 
 
     <string name="bg_service_sleep_mode_off">運行\n 應用程式在背景運轉</string>
@@ -2057,4 +2057,5 @@
     <string name="rec_split_storage_size">存儲大小</string>
     <string name="rec_split_desc">當重寫剪輯時，使用的空間超過記憶體大小</string>
     <string name="rec_split_storage_size_desc">被所有錄製的剪輯可以佔用的空間總量</string>
+    <string name="rec_split_clip_length_desc">每個錄製的剪輯長度不會更長於指定的時間間隔</string>
     </resources>
