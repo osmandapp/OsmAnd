@@ -2122,7 +2122,7 @@
     <string name="av_audio_bitrate_descr">Kies audio bitrate</string>
     <string name="looking_up_address">Adres wordt gezocht</string>
     <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
-    <string name="update_every">Update elke</string>
+    <string name="update_every">Hoe vaak Updaten?</string>
     <string name="only_download_over_wifi">Alleen downloaden via WiFi</string>
     <string name="live_update">Live Update</string>
 <string name="update_now">Nu bijwerken</string>
@@ -2142,7 +2142,7 @@
 <string name="update_date_pattern">Update: %s</string>
     <string name="update_time">Tijd van update</string>
 <string name="updates_size_pattern">Updates: %s</string>
-<string name="last_map_change">Laatste wijziging van kaart: %s</string>
+<string name="last_map_change">Laatste complete kaart: %s</string>
 <string name="rec_split">Video-opname automatisch splitsen</string>
     <string name="rec_split_title">Gebruik automatische splitsing</string>
     <string name="rec_split_desc">Videoclips overschrijven als opslagruimte vol is</string>
