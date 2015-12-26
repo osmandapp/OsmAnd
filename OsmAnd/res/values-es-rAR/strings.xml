@@ -973,7 +973,7 @@
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
     <string name="map_widget_view_direction">Dirección de visualización</string>
-    <string name="map_widget_transparent">Apecto transparente</string>
+    <string name="map_widget_transparent">Controles transparente</string>
     <string name="bg_service_sleep_mode_off">Correr\n aplicación en segundo plano</string>
     <string name="bg_service_sleep_mode_on">Parar\n servicio en segundo plano</string>
     <string name="gps_wakeup_interval">Intervalo de activación del GPS: %s</string>
@@ -2023,4 +2023,18 @@
 <string name="update_date_pattern">Actualización: %s</string>
     <string name="update_time">Tiempo de actualización</string>
     <string name="size_pattern">Tamaño: %s</string>
+<string name="rec_split">Dividir grabación</string>
+    <string name="rec_split_title">Usar la división de grabación</string>
+    <string name="rec_split_desc">Reescribir clips al exceder el espacio de almacenamiento utilizado</string>
+    <string name="rec_split_clip_length">Duración del clip</string>
+    <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el tiempo de intervalo determinado</string>
+    <string name="rec_split_storage_size">Tamaño de almacenamiento</string>
+    <string name="rec_split_storage_size_desc">La cantidad de espacio que pueden ocupar todos los clips grabados</string>
+    <string name="updates_size_pattern">Actualizaciones: %s</string>
+    <string name="last_map_change">Último cambio de mapa: %s</string>
+    <string name="hourly">Cada hora</string>
+    <string name="daily">Diariamente</string>
+    <string name="weekly">Semanalmente</string>
+    <string name="morning">Mañana</string>
+    <string name="Night">Noche</string>
 </resources>
