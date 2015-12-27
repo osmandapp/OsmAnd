@@ -21,7 +21,7 @@
 	<string name="poi_vending_machine">Verkoopautomaat</string>
 
 	<string name="poi_books">Boekhandel</string>
-	<string name="poi_bicycle">Fietswinkel</string>
+	<string name="poi_bicycle">Fietsenmaker</string>
 	<string name="poi_anime">Animewinkel</string>
 	<string name="poi_antiques">Antiekwinkel</string>
 	<string name="poi_art">Galerie</string>
@@ -1250,4 +1250,166 @@
 	<string name="poi_pump_manual">Handpomp</string>
 	<string name="poi_pump_yes">Pomp</string>
 
+	<string name="poi_information_bicyclemap">Fietskaart</string>
+	<string name="poi_aerialway_bicycle_yes">Fiets: toegestaan</string>
+	<string name="poi_aerialway_bicycle_no">Fiets: niet toegestaan</string>
+	<string name="poi_aerialway_bicycle_summer">Fiets: alleen \'s-zomers toegestaan</string>
+	<string name="poi_vending_bicycle_tube">Fietsbanden</string>
+	<string name="poi_bridge_bicycle">Fietsbrug</string>
+	<string name="poi_animal_shelter">Dierenasiel</string>
+	<string name="poi_animal_shelter_dog">Hondenasiel</string>
+	<string name="poi_animal_shelter_cat">Kattenasiel</string>
+	<string name="poi_animal_shelter_dog_cat">Honden- en kattenasiel</string>
+	<string name="poi_animal_shelter_bird">Vogelopvang</string>
+
+	<string name="poi_seats">Zitplaatsen</string>
+	<string name="poi_backrest_yes">Met rugleuning</string>
+	<string name="poi_backrest_no">Zonder rugleuning</string>
+
+	<string name="poi_generator_source_coal">Energiebron: kolen</string>
+	<string name="poi_generator_source_gas">Energiebron: gas</string>
+	<string name="poi_generator_source_nuclear">Energiebron: nucleair</string>
+	<string name="poi_generator_source_solar">Energiebron: zon</string>
+	<string name="poi_generator_source_hydro">Energiebron: waterkracht</string>
+	<string name="poi_generator_source_wind">Energiebron: wind</string>
+	<string name="poi_generator_source_geothermal">Energiebron: geothermisch</string>
+	<string name="poi_generator_source_oil">Energiebron: olie</string>
+	<string name="poi_generator_source_diesel">Energiebron: diesel</string>
+
+	<string name="poi_pump_powered">Motorpomp</string>
+	<string name="poi_pump_no">Zonder pomp</string>
+	<string name="poi_water_characteristic_mineral">Soort water: mineraal</string>
+	<string name="poi_water_characteristic_mud">Soort water: modderig</string>
+	<string name="poi_water_characteristic_sulfuric">Soort water: zwavelhoudend</string>
+
+	<string name="poi_water_point">Watertappunt</string>
+
+	<string name="poi_cuisine">Keuken</string>
+
+	<string name="poi_information_guidepost">Wegwijzer</string>
+	<string name="poi_information_board">Informatiebord</string>
+	<string name="poi_information_map">Informatiekaart</string>
+	<string name="poi_information_office">Toeristenbureau</string>
+	<string name="poi_information_trail_blaze">Markering</string>
+	<string name="poi_information_terminal">Informatieterminal</string>
+	<string name="poi_information_route_marker">Routemarkering</string>
+	<string name="poi_information_hikingmap">Wandelkaart</string>
+	<string name="poi_information_nature">Natuurinformatie</string>
+	<string name="poi_information_wildlife">Dieren/planten informatie</string>
+	<string name="poi_information_history">Historische informatie</string>
+	<string name="poi_information_sign">Bordje</string>
+	<string name="poi_information_audioguide">Audio-info</string>
+	<string name="poi_information_tactile_model">Tastbaar model</string>
+	<string name="poi_information_tactile_map">Tastbare kaart</string>
+	<string name="poi_board_type_notice">Aanplakbord</string>
+	<string name="poi_board_type_plants">Planten</string>
+	<string name="poi_board_type_geology">Geologische informatie</string>
+	<string name="poi_board_type_public_transport">Openbaar Vervoer informatie</string>
+	<string name="poi_board_type_technology">Technologische informatie</string>
+	<string name="poi_board_type_astronomy">Astronomische informatie</string>
+
+	<string name="poi_commercial">Bedrijfsterrein</string>
+	<string name="poi_retail">Winkelgebied</string>
+
+	<string name="poi_fireplace_yes">Met vuurplaats</string>
+	<string name="poi_fireplace_no">Geen vuurplaats</string>
+
+	<string name="poi_covered_yes">Overdekt</string>
+	<string name="poi_covered_no">Niet overdekt</string>
+
+	<string name="poi_smoking_no">Niet roken</string>
+	<string name="poi_smoking_outside">Roken alleen buiten toegestaan</string>
+	<string name="poi_smoking_yes">Roken toegestaan</string>
+	<string name="poi_smoking_separated">Roken toegestaan in een aparte ruimte</string>
+	<string name="poi_smoking_isolated">Roken toegestaan in een afgesloten ruimte</string>
+	<string name="poi_smoking_dedicated">Speciaal voor rokers</string>
+
+	<string name="poi_toll_yes">Tol</string>
+	<string name="poi_toll_no">Geen tol</string>
+	<string name="poi_toll_hgv_yes">Tol voor vrachtwagens</string>
+	<string name="poi_tactile_paving_yes">Met blindengeleidestrook</string>
+	<string name="poi_tactile_paving_no">Zonder blindengeleidestrook</string>
+	<string name="poi_traffic_signals_sound_yes">met geluidssignaal</string>
+	<string name="poi_traffic_signals_sound_no">zonder geluidssignaal</string>
+	<string name="poi_traffic_signals_sound_walk">Geluidssignaal als oversteken veilig is</string>
+
+	<string name="poi_rescue_station">Reddingstation</string>
+
+	<string name="poi_services">Verzorgingsplaats</string>
+	<string name="poi_mini_roundabout">Mini-rotonde</string>
+	<string name="poi_railway_crossing">Spoorwegovergang voor voetgangers</string>
+	<string name="poi_railway_level_crossing">Spoorwegovergang</string>
+	<string name="poi_bird_hide">Vogelobservatiepunt</string>
+	<string name="poi_horse_riding">Paardrijden</string>
+	<string name="poi_leisure_common">Vrijetijdsactiviteiten toegestaan</string>
+	<string name="poi_garden">Tuin</string>
+
+	<string name="poi_heath">Heide</string>
+	<string name="poi_grass">Gras</string>
+	<string name="poi_grassland">Grasland</string>
+	<string name="poi_scrub">Struikgewas</string>
+	<string name="poi_farmland">Landbouwgrond</string>
+	<string name="poi_logging">Houtvesterij</string>
+	<string name="poi_sand">Zand</string>
+
+	<string name="poi_windfall">Bos met stormschade</string>
+	<string name="poi_dead_wood">Bos met dode bomen</string>
+
+	<string name="poi_passing_place">Uitwijkplaats</string>
+	<string name="poi_level">Verdieping</string>
+	<string name="poi_rtsa_scale">RTSA-schaal</string>
+
+	<string name="poi_piste_difficulty_easy">Makkelijke piste</string>
+	<string name="poi_piste_difficulty_intermediate">Gemiddelde piste</string>
+	<string name="poi_piste_difficulty_advanced">Moeilijke piste</string>
+	<string name="poi_piste_difficulty_novice">Beginnerspiste</string>
+	<string name="poi_piste_difficulty_expert">Piste voor experts</string>
+	<string name="poi_piste_difficulty_freeride">Freeride-piste</string>
+	<string name="poi_piste_grooming_classic">Pistepreparatie: klassiek</string>
+	<string name="poi_piste_grooming_classic_skating">Pistepreparatie: klassiek en skating</string>
+	<string name="poi_piste_grooming_backcountry">Pistepreparatie: alleen sporen</string>
+	<string name="poi_piste_grooming_scooter">Pistepreparatie: smal spoor</string>
+	<string name="poi_piste_grooming_skating">Pistepreparatie: skating</string>
+	<string name="poi_piste_grooming_no">Geen pistepreparatie</string>
+	<string name="poi_piste_grooming_mogul">Pistepreparatie: buckels</string>
+
+	<string name="poi_garden_type_residential">Tuin bij woonhuis</string>
+	<string name="poi_garden_type_community">Gemeenschappelijke tuin</string>
+	<string name="poi_garden_type_private">Privé-tuin</string>
+	<string name="poi_garden_type_botanical">Botanische tuin</string>
+
+	<string name="poi_garden_style_kitchen">Moestuin</string>
+	<string name="poi_garden_style_rosarium">Rosarium</string>
+	<string name="poi_garden_style_french">Franse tuin</string>
+	<string name="poi_garden_style_english">Engelse tuin</string>
+	<string name="poi_garden_style_japanese">Japanse tuin</string>
+
+	<string name="poi_capacity">Capaciteit</string>
+	<string name="poi_capacity_disabled_yes">Plaatsen voor gehandicapten</string>
+	<string name="poi_capacity_disabled_no">Geen speciale plaatsen voor gehandicapten</string>
+	<string name="poi_capacity_disabled">Aantal plaatsen voor gehandicapten</string>
+	<string name="poi_capacity_women_yes">Speciale plaatsen voor vrouwen</string>
+	<string name="poi_capacity_women_no">Geen speciale plaatsen voor vrouwen</string>
+	<string name="poi_capacity_women">Aantal speciale plaatsen voor vrouwen</string>
+	<string name="poi_capacity_pupils">Speciale plaatsen voor studenten</string>
+	<string name="poi_capacity_teachers">Speciale plaatsen voor docenten</string>
+	<string name="poi_capacity_parent_yes">Speciale plaatsen voor ouders</string>
+	<string name="poi_capacity_parent_no">Geen speciale plaatsen voor ouders</string>
+	<string name="poi_capacity_parent">Aantal speciale plaatsen voor ouders</string>
+
+	<string name="poi_aerialway_occupancy">Aantal personen</string>
+	<string name="poi_aerialway_capacity">Capaciteit per uur</string>
+	<string name="poi_aerialway_duration">Gemiddelde reistijd in minuten</string>
+	<string name="poi_aerialway_bubble_yes">Met beschermkap</string>
+	<string name="poi_aerialway_bubble_no">Geen beschermkap</string>
+	<string name="poi_aerialway_heating_yes">Met stoelverwarming</string>
+	<string name="poi_aerialway_heating_no">Geen stoelverwarming</string>
+	<string name="poi_aerialway_access_entry">Alleen ingang</string>
+	<string name="poi_aerialway_access_exit">Alleen uitgang</string>
+	<string name="poi_aerialway_access_both">Ingang en uitgang</string>
+	<string name="poi_aerialway_summer_access_entry">Zomer: alleen ingang</string>
+	<string name="poi_aerialway_summer_access_exit">Zomer: alleen uitgang</string>
+	<string name="poi_aerialway_summer_access_both">Zomer: ingang en uitgang</string>
+
+	<string name="poi_stars_1">1 Sterren-hotel</string>
 	</resources>
