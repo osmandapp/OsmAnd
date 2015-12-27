@@ -846,7 +846,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Local de estacionamento</string>
-  <string name="osmand_parking_plugin_description">Este plugin permite armazenar a localização do seu estacionamento.</string>
+  <string name="osmand_parking_plugin_description">Este plugin permite armazenar a localização do seu estacionamento, e quanto tempo resta de parquímetro (se houver limite de tempo).\nTanto a localização como o tempo são visíveis no \'Dashboard\', bem como no widget do mapa. Um lembrete de alarme pode ser adicionado ao calendário Android.</string>
   <string name="osmand_parking_plugin_name">Local de estacionamento</string>
   <string name="context_menu_item_add_parking_point">Marcar como local de estacionamento</string>
   <string name="context_menu_item_delete_parking_point">Apagar um marcador de estacionamento</string>
@@ -1125,7 +1125,7 @@
     <string name="gpx_file_name">Nome do arquivo GPX</string>
     <string name="gpx_saved_sucessfully">Arquivo GPX guardado com sucesso em {0}</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de Distância e Ferramenta de Planeamento</string>
-    <string name="osmand_distance_planning_plugin_description">"Criar caminhos (ou usar / modificar arquivos GPX existentes) para medir a distância entre  pontos. Se guardar como GPX, pode usar para planear rotas GPX."</string>
+    <string name="osmand_distance_planning_plugin_description">Este plugin fornece um widget na tela do mapa que permite criar caminhos ao tocar no mapa, ou usar/modificar arquivos GPX existentes, para planear uma viagem e medir a distância entre os pontos. Os resultados podem ser guardados como um arquivo GPX, que pode ser usado posteriormente para orientação.</string>
     
 	<string name="driving_region_descr">Selecione região: EUA, Europa, RU, Ásia e outros</string>
 	<string name="driving_region">Região</string>
@@ -1912,4 +1912,26 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="restart_is_required">Para aplicar completamente as alterações, requer uma reinicialização da aplicação.</string>
     <string name="light_theme">Claro</string>
     <string name="dark_theme">Escuro</string>
+    <string name="rec_split_desc">Sobrescrever ficheiros quando o espaço utilizado exceder o armazenamento disponível</string>
+    <string name="rec_split_storage_size">Espaço de armazenamento</string>
+    <string name="rec_split_storage_size_desc">Total de espaço que pode ser ocupado por todos os clips gravados</string>
+    <string name="available_maps">Mapas disponíveis</string>
+    <string name="select_voice_provider">Escolher orientação por voz</string>
+    <string name="select_voice_provider_descr">Escolher ou fazer download de \'orientação por voz\' para a sua linguagem</string>
+    <string name="Night">Noite</string>
+<string name="dashboard_or_drawer_description">Há uma nova opção para controlar principalmente o aplicativo através do painel flexível (Dashboard) ou um menu estático. A sua escolha pode sempre ser alterada nas configurações do painel.</string>
+    <string name="dashboard_or_drawer_title">Dashboard ou menu de controle</string>
+    <string name="update_every">Actualizar em cada</string>
+    <string name="only_download_over_wifi">Apenas download com WiFi</string>
+    <string name="live_update">Actualização sincronizada</string>
+    <string name="update_now">Actualizar agora</string>
+    <string name="missing_write_external_storage_permission">App não tem permissão para usar o cartão SD</string>
+    <string name="last_update">Última atualização: %s</string>
+    <string name="update_time">Horário de actualização</string>
+    <string name="updates_size_pattern">Actualizações: %s</string>
+    <string name="last_map_change">Última alteração de mapa: %s</string>
+    <string name="hourly">Hora</string>
+    <string name="daily">Dia</string>
+    <string name="weekly">Semana</string>
+    <string name="morning">Manhã</string>
     </resources>
