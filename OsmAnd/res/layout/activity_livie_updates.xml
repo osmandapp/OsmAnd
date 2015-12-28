@@ -14,11 +14,8 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
         app:layout_scrollFlags="scroll"
-        app:tabIndicatorColor="?attr/pstsIndicatorColor"
-        app:tabSelectedTextColor="?attr/pstsIndicatorColor"
-        app:tabTextColor="@android:color/darker_gray"/>
+        android:background="@color/osmand_orange"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:orientation="vertical"
-    android:background="?attr/bg_color">
+    android:orientation="vertical">
 
     <include layout="@layout/shadow_bottom"/>
 
@@ -17,11 +16,10 @@
     <include layout="@layout/shadow_top"/>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
+        android:background="?attr/bg_color"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="16dp"

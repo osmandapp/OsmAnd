@@ -32,6 +32,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
@@ -39,6 +40,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
@@ -72,10 +74,12 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
-		final long mapTimestamp = changesManager.getMapTimestamp(fileNameWithoutExtension);
-		String lastCheckDate = formatDateTime(getActivity(), mapTimestamp);
-		lastMapChangeTextView.setText(getString(R.string.last_map_change, lastCheckDate));
-		lastUpdateTextView.setText(getString(R.string.last_update, lastUpdateDate));
+		final long lastCheck = preferenceLastCheck(localIndexInfo, getSettings()).get();
+		String lastCheckDate = formatDateTime(getActivity(), lastCheck != DEFAULT_LAST_CHECK
+				? lastCheck : timestamp);
+		lastMapChangeTextView.setText(getString(R.string.last_map_change, lastUpdateDate));
+		lastUpdateTextView.setText(getString(R.string.last_update, lastCheckDate));
+
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo, getSettings());
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
@@ -125,7 +129,12 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+						if (liveUpdatePreference.get() != liveUpdatesSwitch.isChecked()) {
+							liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
+							if (liveUpdatesSwitch.isChecked()) {
+								runLiveUpdate(localIndexInfo);
+							}
+						}
 						downloadViaWiFiPreference.set(downloadOverWiFiCheckBox.isChecked());
 
 						final int updateFrequencyInt = updateFrequencySpinner.getSelectedItemPosition();

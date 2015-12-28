@@ -31,6 +31,8 @@
             android:layout_height="wrap_content"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
+            android:lines="1"
+            android:ellipsize="end"
             tools:text="Belarus"/>
 
         <TextView
