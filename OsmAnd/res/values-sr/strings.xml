@@ -713,7 +713,7 @@
     <string name="select_voice_provider_descr">Изаберите или преузмите гласовно навођење свог језика</string>
     <string name="impassable_road_desc">Изаберите које путеве желите да избегавате током навођења</string>
     <string name="shared_string_sound">Звук</string>
-    <string name="no_location_permission">Програм нема дозволу да приступи подацима о положају</string>
+    <string name="no_location_permission">Програм нема дозволу да приступи подацима о положају.</string>
     <string name="no_camera_permission">Програм нема дозволу да приступи камери.</string>
     <string name="no_microphone_permission">Програм нема дозволу да приступи микрофону.</string>
     <string name="route_distance">Растојање:</string>
@@ -737,5 +737,14 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="routing_attr_avoid_shuttle_train_description"/>
-    <string name="routing_attr_avoid_shuttle_train_name"></string>
+    <string name="routing_attr_avoid_shuttle_train_name"/>
+    <string name="rec_split">Сецкање снимања</string>
+    <string name="rec_split_title">Користи сецкање снимака</string>
+    <string name="rec_split_desc">Преписује снимке када се препуни место за њихово складиштење</string>
+    <string name="rec_split_clip_length">Дужина одсечка снимка</string>
+    <string name="rec_split_clip_length_desc">Сваки одсечак снимка неће бити дужи од одабраног времена</string>
+    <string name="rec_split_storage_size">Величина оставе</string>
+    <string name="rec_split_storage_size_desc">Величина заузећа свих снимљених одсечака</string>
+    <string name="Night">Ноћ</string>
+<string name="shared_string_go">Иди</string>
     </resources>

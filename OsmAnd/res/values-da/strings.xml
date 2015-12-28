@@ -2183,7 +2183,7 @@
     <string name="no_address_found">Kan ikke bestemme adresse</string>
 	<string name="looking_up_address">Søger efter adressen</string>
     <string name="rendering_attr_horseRoutes_name">Rideruter</string>
-    <string name="update_every">Opdater hver</string>
+    <string name="update_every">Opdateringsinterval</string>
     <string name="only_download_over_wifi">Hent kun med WiFi</string>
     <string name="live_update">Realtidsopdatering</string>
 <string name="update_now">Opdater nu</string>
@@ -2201,10 +2201,10 @@
     <string name="available_maps">Tilgængelige kort</string>
     <string name="last_update">Sidst opdateret: %s</string>
 <string name="update_date_pattern">Opdateret: %s</string>
-    <string name="update_time">Opdateringstid</string>
+    <string name="update_time">Opdateringstidspunkt</string>
 <string name="size_pattern">Størrelse: %s</string>
 <string name="updates_size_pattern">Opdateringer: %s</string>
-<string name="last_map_change">Sidste ændring af kort: %s</string>
+<string name="last_map_change">Sidste kortændring: %s</string>
 <string name="rec_split">Optager opdel</string>
     <string name="rec_split_title">Brug optager opdel</string>
     <string name="rec_split_desc">Omskriv klip når den brugte plads overstiger opbevaring størrelse</string>
@@ -2212,4 +2212,9 @@
     <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
     <string name="rec_split_storage_size">Opbevaring størrelse</string>
     <string name="rec_split_storage_size_desc">Mængden af plads, der kan være besat af alle optagede klip</string>
-    </resources>
+    <string name="hourly">Time</string>
+    <string name="daily">Daglig</string>
+    <string name="weekly">Ugentlig</string>
+    <string name="morning">Morgen</string>
+    <string name="Night">Aften</string>
+</resources>

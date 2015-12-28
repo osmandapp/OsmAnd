@@ -1155,17 +1155,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
-		if (info.getType() == LocalIndexType.MAP_DATA && getMyApplication().getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
-			item = optionsMenu.getMenu().add("Live updates")
-					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_refresh_dark));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					runLiveUpdate(info);
-					return true;
-				}
-			});
-		}
+		
 
 		optionsMenu.show();
 	}

@@ -2058,4 +2058,9 @@
     <string name="rec_split_desc">當重寫剪輯時，使用的空間超過記憶體大小</string>
     <string name="rec_split_storage_size_desc">被所有錄製的剪輯可以佔用的空間總量</string>
     <string name="rec_split_clip_length_desc">每個錄製的剪輯長度不會更長於指定的時間間隔</string>
-    </resources>
+    <string name="hourly">每小時</string>
+    <string name="daily">每日</string>
+    <string name="weekly">每週</string>
+    <string name="morning">早上</string>
+    <string name="Night">夜間</string>
+</resources>

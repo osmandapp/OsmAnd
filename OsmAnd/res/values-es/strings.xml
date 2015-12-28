@@ -12,7 +12,7 @@
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
     <string name="map_widget_view_direction">Dirección de la vista</string>
-    <string name="map_widget_transparent">Aspecto transparente</string>
+    <string name="map_widget_transparent">Controles transparentes</string>
     <string name="use_fluorescent_overlays">Utilizar superpuestos fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas</string>
     <string name="offline_edition">Edición sin conexión</string>
@@ -2031,4 +2031,9 @@
     <string name="rec_split_clip_length">Duración del clip</string>
     <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el tiempo de intervalo determinado</string>
     <string name="rec_split_storage_size_desc">La cantidad de espacio que pueden ocupar todos los clips grabados</string>
-    </resources>
+    <string name="hourly">Cada hora</string>
+    <string name="daily">Diario</string>
+    <string name="weekly">Semanal</string>
+    <string name="morning">Por la mañana</string>
+    <string name="Night">Por la noche</string>
+</resources>
