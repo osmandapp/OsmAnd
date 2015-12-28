@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+       android:insetLeft="56dp">
+    <shape android:shape="rectangle">
+        <size android:height="1dp"/>
+        <solid android:color="#F00"/>
+        <!--<solid android:color="@color/dashboard_divider_light"/>-->
+    </shape>
+</inset>
