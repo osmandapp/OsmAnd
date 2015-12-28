@@ -1334,7 +1334,7 @@
 	<string name="interrupt_music_descr">Musikwiedergabe bei Navigationsanweisung unterbrechen</string>
 	<string name="always_center_position_on_map">Position immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
-	<string name="misc_pref_title">Verschiedene</string>
+	<string name="misc_pref_title">Verschiedenes</string>
 	<string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
 	<string name="share_route_subject">Route über OsmAnd teilen</string>
 	<string name="localization_pref_title">Ländereinstellungen</string>
