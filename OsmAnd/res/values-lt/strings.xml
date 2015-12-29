@@ -886,7 +886,7 @@
     <string name="map_widget_fluorescent">Fluorescenciniai maršrutai</string>
 
     <string name="map_widget_view_direction">Žiūrėjimo kryptis</string>
-    <string name="map_widget_transparent">Permatomas apvalkalas</string>
+    <string name="map_widget_transparent">Permatomi įrankiai</string>
 
 
     <string name="filterpoi_activity">Sukurti LV filtrą</string>
@@ -934,7 +934,7 @@
     <string name="map_widget_monitoring_services">Stebėjimo paslaugos</string>
     <string name="no_route">Nėra maršruto</string>
     <string name="delete_target_point">Pašalinti tikslą</string>
-    <string name="intermediate_point">Tarpinis tikslas %1$s</string>
+    <string name="intermediate_point">Tikslas %1$s</string>
     <string name="map_widget_show_destination_arrow">Rodyti kryptį į kelionės tikslą</string>
     <string name="enable_plugin_monitoring_services">Jei norite naudoti sekimo paslaugas (sekimo ir sekimo gyvai), įjunkite Kelionės sekimo įskiepį</string>
     <string name="non_optimal_route_calculation">Apskaičiuoti (tikėtinai) neoptimalų ilgo nuotolio maršrutą</string>
@@ -1029,7 +1029,7 @@
     <string name="av_def_action_picture">Fotografuoti</string>
     <string name="recording_context_menu_precord">Fotografuoti</string>
     <string name="stop_routing_confirm">Ar tikrai norite sustabdyti navigaciją?</string>
-    <string name="clear_dest_confirm">Ar tikrai norite panaikinti savo kelionės tikslą?</string>
+    <string name="clear_dest_confirm">Ar tikrai norite panaikinti savo kelionės tikslą (ir tarpinius taškus)?</string>
     <string name="precise_routing_mode_descr">Igalinti tikslų maršruto skaičiavimą be trikdžių. Jis naudotinas labai ribotam atstumui ir veikia lėtai.</string>
     <string name="precise_routing_mode">Tikslus maršruto skaičiavias (alpha)</string>
 
@@ -1111,7 +1111,7 @@
 
     <string name="distance_measurement_load_gpx">Atidaryti egzistuojantį GPX failą</string>
     <string name="search_street_in_neighborhood_cities">Ieškoti gatvės gretimuose miestuose</string>
-    <string name="intermediate_items_sort_return">Taškai sudėlioti optimaliu maršrutu pakeliui iš esamos vietos į kelionės tikslą.</string>
+    <string name="intermediate_items_sort_return">TArpiniai taškai sudėlioti optimaliu maršrutu pakeliui iš esamos vietos į kelionės tikslą.</string>
     <string name="intermediate_items_sort_by_distance">Rūšiuoti nuo durų iki durų</string>
 
     <string name="please_select_address">Pasirinkit pirmiausia miestą ar gatvę</string>
@@ -1138,7 +1138,7 @@
     <string name="osb_author_or_password_not_specified">Įveskite OSM vartotoją ir slaptažodį Nustatymuose</string>
     <string name="clear_intermediate_points">Panaikinti tarpinius taškus</string>
     <string name="keep_intermediate_points">Palikti tarpinius taškus</string>
-    <string name="new_directions_point_dialog">Jūs jau nurodėte tarpinius taškus.</string>
+    <string name="new_directions_point_dialog">Tarpiniai taškai jau nustatyti.</string>
     <string name="context_menu_item_directions_to">Kelio nuorodos iki</string>
     <string name="context_menu_item_directions_from">Kelio nuorodos nuo</string>
     <string name="route_descr_map_location">Žemėlapis: </string>
@@ -2043,7 +2043,7 @@
     <string name="no_microphone_permission">Programėlė neturi teisių naudoti mikrofoną.</string>
     <string name="av_video_quality">Vaizdo kokybė</string>
     <string name="please_specify_poi_type_only_from_list">Prašome parinkti teisingą LV tipą iš sąrašo arba palikti lauką neužpildytą</string>
-    <string name="osm_edit_modified_poi">OSM LV redaguota</string>
+    <string name="osm_edit_modified_poi">Redaguota OSM LV</string>
     <string name="context_menu_item_open_note">Pridėti OSM pastabą</string>
     <string name="osm_edit_reopened_note">OSM pastaba iš naujo atidaryta</string>
     <string name="osm_edit_commented_note">OSM pastaba papildyta komentaru</string>
@@ -2063,9 +2063,23 @@
     <string name="rendering_attr_currentTrackColor_description">GPX spalva</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX plotis</string>
     <string name="use_drawer_btn">Naudoti meniu</string>
-    <string name="dashboard_or_drawer_title">Dashboard arba meniu valdymas</string>
+    <string name="dashboard_or_drawer_title">Valdymo skydelio arba meniu valdymas</string>
     <string name="last_update">Paskutinįkart atnaujinta: %s</string>
     <string name="update_date_pattern">Atnaujinta: %s</string>
     <string name="update_time">Atnaujinimo laikas</string>
 <string name="shared_string_not_selected">Nepasirinkta</string>
+    <string name="rec_split">Įrašo dalijimas</string>
+    <string name="rec_split_title">Naudoti įrašo dalijimą</string>
+    <string name="rec_split_desc">Perrašyti klipus kai naudojama vieta didesnė nei saugyklos dydis</string>
+    <string name="rec_split_clip_length">Klipo ilgis</string>
+    <string name="rec_split_clip_length_desc">Kiekvieno klipo ilgis nebus didesnis nei nurodytas laiko intervalas</string>
+    <string name="rec_split_storage_size">Saugyklos vieta</string>
+    <string name="rec_split_storage_size_desc">Maksimalus saugyklos kurią gali užimti įrašyti klipai dydis</string>
+    <string name="live_updates">Tiesioginiai atnaujinimai</string>
+    <string name="select_voice_provider">Pasirinkti balso nurodymus</string>
+    <string name="select_voice_provider_descr">Pasirinkti arba parsiųsti balso nurodymus jūsų kalbai</string>
+    <string name="no_location_permission">Programai neleista gauti jūsų vietos informacijos.</string>
+    <string name="shared_string_near">Netoliese</string>
+    <string name="av_audio_bitrate">Audio bitų sparta</string>
+    <string name="av_audio_bitrate_descr">Pasirinkite audio bitų spartą</string>
     </resources>
