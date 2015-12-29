@@ -157,7 +157,7 @@
 	<string name="poi_dam">Dam</string>
 	<string name="poi_power_plant">Elektriciteitscentrale</string>
 	<string name="poi_post_office">Postkantoor</string>
-	<string name="poi_post_box">Postbus</string>
+	<string name="poi_post_box">Brievenbus</string>
 	<string name="poi_telephone">Telefoon</string>
 	<string name="poi_communication_tower">Communicatietoren</string>
 	<string name="poi_pier">Pier</string>
