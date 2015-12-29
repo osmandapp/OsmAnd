@@ -13,6 +13,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -64,7 +65,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final CheckBox downloadOverWiFiCheckBox = (CheckBox) view.findViewById(R.id.downloadOverWiFiSwitch);
 		final Spinner updateFrequencySpinner = (Spinner) view.findViewById(R.id.updateFrequencySpinner);
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
-		final TextView updateTimesOfDayTextView = (TextView) view.findViewById(R.id.updateTimesOfDayLabel);
+		final View updateTimesOfDayList = view.findViewById(R.id.updateTimesOfDayList);
 		final TextView sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
 		final Button removeUpdatesButton = (Button) view.findViewById(R.id.removeUpdatesButton);
 
@@ -75,10 +76,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
 		final long lastCheck = preferenceLastCheck(localIndexInfo, getSettings()).get();
-		String lastCheckDate = formatDateTime(getActivity(), lastCheck != DEFAULT_LAST_CHECK
+		String lastCheckString = formatDateTime(getActivity(), lastCheck != DEFAULT_LAST_CHECK
 				? lastCheck : timestamp);
 		lastMapChangeTextView.setText(getString(R.string.last_map_change, lastUpdateDate));
-		lastUpdateTextView.setText(getString(R.string.last_update, lastCheckDate));
+		lastUpdateTextView.setText(getString(R.string.last_update, lastCheckString));
 
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo, getSettings());
@@ -93,6 +94,13 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 		updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
 
+		updateTimesOfDaySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
+				R.layout.action_spinner_item,
+				getResources().getStringArray(R.array.update_times_of_day)));
+
+		updateFrequencySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
+				R.layout.action_spinner_item,
+				getResources().getStringArray(R.array.update_frequencies_array)));
 		updateFrequencySpinner.setSelection(updateFrequencyPreference.get());
 		updateFrequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -100,13 +108,11 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				UpdateFrequency updateFrequency = UpdateFrequency.values()[position];
 				switch (updateFrequency) {
 					case HOURLY:
-						updateTimesOfDaySpinner.setVisibility(View.GONE);
-						updateTimesOfDayTextView.setVisibility(View.GONE);
+						updateTimesOfDayList.setVisibility(View.GONE);
 						break;
 					case DAILY:
 					case WEEKLY:
-						updateTimesOfDaySpinner.setVisibility(View.VISIBLE);
-						updateTimesOfDayTextView.setVisibility(View.VISIBLE);
+						updateTimesOfDayList.setVisibility(View.VISIBLE);
 						break;
 				}
 			}

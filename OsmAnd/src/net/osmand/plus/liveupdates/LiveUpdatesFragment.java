@@ -41,11 +41,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
@@ -343,8 +345,10 @@ public class LiveUpdatesFragment extends Fragment {
 			view.setLayoutParams(layoutParams);
 
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
-			String formattedDate = formatDateTime(fragment.getActivity(), timestamp);
-			descriptionTextView.setText(context.getString(R.string.last_update, formattedDate));
+			final long lastCheck = preferenceLastCheck(item, fragment.getSettings()).get();
+			String lastCheckString = formatDateTime(fragment.getActivity(),
+					lastCheck != DEFAULT_LAST_CHECK ? lastCheck : timestamp);
+			descriptionTextView.setText(context.getString(R.string.last_update, lastCheckString));
 
 			final View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
