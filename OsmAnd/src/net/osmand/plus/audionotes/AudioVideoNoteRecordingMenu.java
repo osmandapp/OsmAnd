@@ -2,6 +2,7 @@ package net.osmand.plus.audionotes;
 
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,6 +119,7 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	public void hide() {
+		stopCounter();
 		view.setVisibility(View.GONE);
 		plugin.stopCamera();
 		viewfinder.removeAllViews();
@@ -169,16 +171,34 @@ public class AudioVideoNoteRecordingMenu {
 		centerButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				rec(plugin.getMapActivity());
+				rec(plugin.getMapActivity(), false);
 			}
 		});
 		applyViewfinderVisibility();
 	}
 
+	public boolean restartRecordingIfNeeded() {
+		boolean restart = false;
+		CurrentRecording recording = plugin.getCurrentRecording();
+		if (recording != null
+				&& recording.getType() == AVActionType.REC_VIDEO
+				&& plugin.AV_RECORDER_SPLIT.get()) {
+			int clipLength = plugin.AV_RS_CLIP_LENGTH.get() * 60;
+			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
+			restart = duration >= clipLength;
+			if (restart) {
+				rec(getMapActivity(), true);
+			}
+		}
+		return restart;
+	}
+
 	public void updateDuration() {
-		TextView timeText = (TextView) view.findViewById(R.id.timeText);
-		int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
-		timeText.setText(Algorithms.formatDuration(duration));
+		if (plugin.getCurrentRecording() != null) {
+			TextView timeText = (TextView) view.findViewById(R.id.timeText);
+			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
+			timeText.setText(Algorithms.formatDuration(duration));
+		}
 	}
 
 	protected void applyViewfinderVisibility() {
@@ -236,21 +256,30 @@ public class AudioVideoNoteRecordingMenu {
 		return res;
 	}
 
-	public void rec(final MapActivity mapActivity) {
+	public void rec(final MapActivity mapActivity, final boolean restart) {
 		stopCounter();
+		final CurrentRecording recording = plugin.getCurrentRecording();
+		int delay;
+		if (recording != null && recording.getType() == AVActionType.REC_PHOTO) {
+			delay = 200;
+		} else {
+			delay = 1;
+		}
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				CurrentRecording recording = plugin.getCurrentRecording();
 				if (recording != null) {
 					if (recording.getType() == AVActionType.REC_PHOTO) {
 						plugin.shoot();
 					} else {
-						plugin.stopRecording(mapActivity);
+						plugin.stopRecording(mapActivity, restart);
+						if (restart) {
+							startCounter();
+						}
 					}
 				}
 			}
-		}, 200);
+		}, delay);
 	}
 
 	public void recExternal(final MapActivity mapActivity) {
@@ -270,7 +299,7 @@ public class AudioVideoNoteRecordingMenu {
 
 	private void startCounter() {
 		startTime = System.currentTimeMillis();
-
+		Log.e("111", "START");
 		if (recTimer != null) {
 			recTimer.cancel();
 		}
@@ -282,7 +311,9 @@ public class AudioVideoNoteRecordingMenu {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-						updateDuration();
+						if (!restartRecordingIfNeeded()) {
+							updateDuration();
+						}
 					}
 				});
 			}
@@ -291,6 +322,7 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	private void stopCounter() {
+		Log.e("111", "STOP");
 		if (recTimer != null) {
 			recTimer.cancel();
 			recTimer = null;

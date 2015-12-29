@@ -21,6 +21,7 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
+import android.os.StatFs;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.view.Display;
@@ -72,10 +73,12 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -782,7 +785,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityScreenOff(MapActivity activity) {
-		stopCameraRecording(activity);
+		stopRecording(activity, false);
 	}
 
 	@Override
@@ -803,7 +806,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				finishPhotoRecording(false);
 			} else {
 				activity.getContextMenu().close();
-				stopRecording(activity);
+				if (currentRecording.getType() == AVActionType.REC_VIDEO && AV_RECORDER_SPLIT.get()) {
+					runAction = AV_DEFAULT_ACTION_VIDEO;
+					LatLon latLon = getNextRecordingLocation();
+					actionLat = latLon.getLatitude();
+					actionLon = latLon.getLongitude();
+				}
+				stopRecording(activity, false);
 			}
 			finishRecording();
 		}
@@ -854,21 +863,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public void recordVideoCamera(final double lat, final double lon, final MapActivity mapActivity) {
 		final CamcorderProfile p = CamcorderProfile.get(AV_VIDEO_QUALITY.get());
-		final Camera.Size mPreviewSize;
-		if (mSupportedPreviewSizes != null) {
-			int width;
-			int height;
-			if (recordingMenu.isLandscapeLayout()) {
-				width = p.videoFrameWidth;
-				height = p.videoFrameHeight;
-			} else {
-				height = p.videoFrameWidth;
-				width = p.videoFrameHeight;
-			}
-			mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
-		} else {
-			mPreviewSize = null;
-		}
+		final Camera.Size mPreviewSize = getPreviewSize();
 
 		final SurfaceView view;
 		if (mPreviewSize != null) {
@@ -888,23 +883,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 				MediaRecorder mr = new MediaRecorder();
 				try {
-					Parameters parameters = cam.getParameters();
-
-					// camera focus type
-					List<String> sfm = parameters.getSupportedFocusModes();
-					if (sfm.contains("continuous-video")) {
-						parameters.setFocusMode("continuous-video");
-					}
-
-					int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
-					cam.setDisplayOrientation(cameraOrientation);
-					parameters.set("rotation", cameraOrientation);
-					if (mPreviewSize != null) {
-						parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
-					}
-					cam.setParameters(parameters);
-					cam.setPreviewDisplay(holder);
-					cam.startPreview();
+					startCamera(mPreviewSize, holder);
 
 					cam.unlock();
 					mr.setCamera(cam);
@@ -917,27 +896,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					return;
 				}
 
-
-				String ext = MPEG4_EXTENSION;
-//				if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
-//					ext = THREEGP_EXTENSION;
-//				}
-				final File f = getBaseFileName(lat, lon, app, ext);
-
-				mr.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
-				mr.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-//				if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
-//					mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-//				} else {
-//					mr.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-//				}
-
-				giveMediaRecorderHintRotatedScreen(mapActivity, mr);
-				//mr.setPreviewDisplay(holder.getSurface());
-
-				mr.setProfile(p);
-				mr.setOutputFile(f.getAbsolutePath());
+				final File f = getBaseFileName(lat, lon, app, MPEG4_EXTENSION);
+				initMediaRecorder(mr, p, f);
 				try {
+					if (AV_RECORDER_SPLIT.get()) {
+						cleanupSpace();
+					}
 					runMediaRecorder(mapActivity, mr, f);
 				} catch (Exception e) {
 					logErr(e);
@@ -949,6 +913,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		});
 		recordingMenu.show();
+	}
+
+	private void initMediaRecorder(MediaRecorder mr, CamcorderProfile p, File f) {
+		mr.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+		mr.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+
+		giveMediaRecorderHintRotatedScreen(mapActivity, mr);
+		//mr.setPreviewDisplay(holder.getSurface());
+
+		mr.setProfile(p);
+		mr.setOutputFile(f.getAbsolutePath());
 	}
 
 	private void giveMediaRecorderHintRotatedScreen(final MapActivity mapActivity, final MediaRecorder mr) {
@@ -1013,6 +988,48 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mapActivity.setRequestedOrientation(requestedOrientation);
 	}
 
+	private Camera.Size getPreviewSize() {
+		final CamcorderProfile p = CamcorderProfile.get(AV_VIDEO_QUALITY.get());
+		final Camera.Size mPreviewSize;
+		if (mSupportedPreviewSizes != null) {
+			int width;
+			int height;
+			if (recordingMenu.isLandscapeLayout()) {
+				width = p.videoFrameWidth;
+				height = p.videoFrameHeight;
+			} else {
+				height = p.videoFrameWidth;
+				width = p.videoFrameHeight;
+			}
+			mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
+		} else {
+			mPreviewSize = null;
+		}
+		return mPreviewSize;
+	}
+
+	protected void startCamera(Camera.Size mPreviewSize, SurfaceHolder holder) throws IOException {
+		Parameters parameters = cam.getParameters();
+
+		// camera focus type
+		List<String> sfm = parameters.getSupportedFocusModes();
+		if (sfm.contains("continuous-video")) {
+			parameters.setFocusMode("continuous-video");
+		}
+
+		int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
+		cam.setDisplayOrientation(cameraOrientation);
+		parameters.set("rotation", cameraOrientation);
+		if (mPreviewSize != null) {
+			parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+		}
+		cam.setParameters(parameters);
+		if (holder != null) {
+			cam.setPreviewDisplay(holder);
+		}
+		cam.startPreview();
+	}
+
 	protected void stopCamera() {
 		try {
 			if (cam != null) {
@@ -1027,18 +1044,44 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void stopCameraRecording(final MapActivity mapActivity) {
+	private boolean stopCameraRecording(boolean restart) {
+		boolean res = true;
 		if (mediaRec != null) {
 			mediaRec.stop();
+			AVActionType type = currentRecording.type;
+			indexFile(true, mediaRecFile);
 			mediaRec.release();
 			mediaRec = null;
-			indexFile(true, mediaRecFile);
 			mediaRecFile = null;
-			stopCamera();
+
+			if (restart) {
+				try {
+					cam.lock();
+					if (AV_RECORDER_SPLIT.get()) {
+						cleanupSpace();
+					}
+
+					currentRecording = new CurrentRecording(type);
+					MediaRecorder mr = new MediaRecorder();
+					LatLon latLon = getNextRecordingLocation();
+					final File f = getBaseFileName(latLon.getLatitude(), latLon.getLongitude(), app, MPEG4_EXTENSION);
+
+					cam.unlock();
+					mr.setCamera(cam);
+					initMediaRecorder(mr, CamcorderProfile.get(AV_VIDEO_QUALITY.get()), f);
+					mr.prepare();
+					mr.start();
+					mediaRec = mr;
+					mediaRecFile = f;
+
+				} catch (Exception e) {
+					AccessibleToast.makeText(app, e.getMessage(), Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+					res = false;
+				}
+			}
 		}
-		if (recordControl != null) {
-			setRecordListener(recordControl, mapActivity);
-		}
+		return res;
 	}
 
 	public void recordAudio(double lat, double lon, final MapActivity mapActivity) {
@@ -1162,6 +1205,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 							parameters.setGpsLatitude(lat);
 							parameters.setGpsLongitude(lon);
 							parameters.setGpsProcessingMethod(locProvider.toUpperCase());
+							parameters.setGpsTimestamp(System.currentTimeMillis() / 1000);
 						}
 						switch (AV_CAMERA_FOCUS_TYPE.get()) {
 							case AV_CAMERA_FOCUS_HIPERFOCAL:
@@ -1353,6 +1397,69 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
+	private void cleanupSpace() {
+		File[] files = app.getAppPath(IndexConstants.AV_INDEX_DIR).listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String filename) {
+				return filename.endsWith("." + MPEG4_EXTENSION);
+			}
+		});
+
+		if (files != null) {
+			double usedSpace = 0;
+			for (File f : files) {
+				usedSpace += f.length();
+			}
+			usedSpace /= (1 << 30); // gigabytes
+
+			final CamcorderProfile p = CamcorderProfile.get(AV_VIDEO_QUALITY.get());
+			double bitrate = (((p.videoBitRate + p.audioBitRate) / 8f) * 60f) / (1 << 30); // gigabytes per minute
+			double clipSpace = bitrate * AV_RS_CLIP_LENGTH.get();
+			double storageSize = AV_RS_STORAGE_SIZE.get();
+
+			double availableSpace = storageSize;
+			File dir = app.getAppPath("").getParentFile();
+			if (dir.canRead()) {
+				StatFs fs = new StatFs(dir.getAbsolutePath());
+				availableSpace = (double) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) - clipSpace;
+			}
+
+			if (usedSpace + clipSpace > storageSize || clipSpace > availableSpace) {
+				Arrays.sort(files, new Comparator<File>() {
+					@Override
+					public int compare(File lhs, File rhs) {
+						return lhs.lastModified() < rhs.lastModified() ? -1 : (lhs.lastModified() == rhs.lastModified() ? 0 : 1);
+					}
+				});
+				boolean wasAnyDeleted = false;
+				ArrayList<File> arr = new ArrayList<>(Arrays.asList(files));
+				while (arr.size() > 0
+						&& (usedSpace + clipSpace > storageSize || clipSpace > availableSpace)) {
+					File f = arr.remove(0);
+					double length = ((double) f.length()) / (1 << 30);
+					Recording r = recordingByFileName.get(f.getName());
+					if (r != null) {
+						deleteRecording(r, false);
+						wasAnyDeleted = true;
+						usedSpace -= length;
+						availableSpace += length;
+					} else if (f.delete()) {
+						usedSpace -= length;
+						availableSpace += length;
+					}
+				}
+				if (wasAnyDeleted) {
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							mapActivity.refreshMap();
+						}
+					}, 20);
+				}
+			}
+		}
+	}
+
 	private void runMediaRecorder(final MapActivity mapActivity, MediaRecorder mr, final File f) throws IOException {
 		mr.prepare();
 		mr.start();
@@ -1375,24 +1482,40 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				stopRecording(mapActivity);
+				stopRecording(mapActivity, false);
 			}
 		});
 	}
 
-	public void stopRecording(final MapActivity mapActivity) {
+	public void stopRecording(final MapActivity mapActivity, boolean restart) {
 		if (!recordingDone) {
-			recordingDone = true;
-			if (!recordControl.isVisible()) {
-				recordControl.setExplicitlyVisible(false);
-				mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
+			if (!restart || !stopCameraRecording(true)) {
+				recordingDone = true;
+				if (!recordControl.isVisible()) {
+					recordControl.setExplicitlyVisible(false);
+					mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
+				}
+				stopCameraRecording(false);
+				if (recordControl != null) {
+					setRecordListener(recordControl, mapActivity);
+				}
+				SHOW_RECORDINGS.set(true);
+				mapActivity.getMapView().refreshMap();
+				updateWidgetIcon(recordControl);
+				closeRecordingMenu();
 			}
-			stopCameraRecording(mapActivity);
-			SHOW_RECORDINGS.set(true);
-			mapActivity.getMapView().refreshMap();
-			updateWidgetIcon(recordControl);
-			closeRecordingMenu();
 		}
+	}
+
+	private LatLon getNextRecordingLocation() {
+		double lat = mapActivity.getMapLocation().getLatitude();
+		double lon = mapActivity.getMapLocation().getLongitude();
+		Location loc = app.getLocationProvider().getLastKnownLocation();
+		if (loc != null) {
+			lat = loc.getLatitude();
+			lon = loc.getLongitude();
+		}
+		return new LatLon(lat, lon);
 	}
 
 	private void updateContextMenu(Recording rec) {
@@ -1450,14 +1573,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordingByFileName = newMap;
 
 		if (isRecording()) {
+			AVActionType type = currentRecording.type;
 			finishRecording();
-			final Recording recordingForMenu = r;
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					updateContextMenu(recordingForMenu);
-				}
-			}, 200);
+			if (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO) {
+				final Recording recordingForMenu = r;
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						updateContextMenu(recordingForMenu);
+					}
+				}, 200);
+			}
 		}
 
 		return true;
@@ -1527,14 +1653,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void deleteRecording(Recording r) {
+	public void deleteRecording(Recording r, boolean updateUI) {
 		recordings.unregisterObject(r.lat, r.lon, r);
 		Map<String, Recording> newMap = new LinkedHashMap<>(recordingByFileName);
 		newMap.remove(r.file.getName());
 		recordingByFileName = newMap;
 		Algorithms.removeAllFiles(r.file);
-		if (mapActivity != null) {
-			mapActivity.getContextMenu().close();
+		if (mapActivity != null && updateUI) {
+			if (mapActivity.getContextMenu().getObject() == r) {
+				mapActivity.getContextMenu().close();
+			}
 			mapActivity.getMapView().refreshMap();
 		}
 	}
