@@ -327,12 +327,16 @@ public class RoutePreferencesMenu {
 					btn.setTextColor(btn.getLinkTextColors());
 					String voiceProvider = settings.VOICE_PROVIDER.get();
 					String voiceProviderStr;
-					if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-						voiceProviderStr = getString(R.string.shared_string_do_not_use);
+					if (voiceProvider != null) {
+						if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+							voiceProviderStr = getString(R.string.shared_string_do_not_use);
+						} else {
+							voiceProviderStr = FileNameTranslationHelper.getVoiceName(mapActivity, voiceProvider);
+						}
+						voiceProviderStr += voiceProvider.contains("tts") ? " TTS" : "";
 					} else {
-						voiceProviderStr = FileNameTranslationHelper.getVoiceName(mapActivity, voiceProvider);
+						voiceProviderStr = getString(R.string.shared_string_not_selected);
 					}
-					voiceProviderStr += voiceProvider.contains("tts") ? " TTS" : "";
 					btn.setText(voiceProviderStr);
 					btn.setOnClickListener(new View.OnClickListener() {
 						@Override
