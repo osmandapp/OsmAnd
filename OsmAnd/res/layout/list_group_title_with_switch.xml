@@ -30,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Live updates"/>
 
         <android.support.v7.widget.SwitchCompat

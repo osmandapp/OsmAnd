@@ -177,7 +177,9 @@
 	<color name="osmand_orange_dark">#e68200</color>
 	<color name="divider_color">#ccc</color>
 
-	<color name="color_dialog_buttons">#2f7af5</color>
+	<color name="color_dialog_buttons_light">#2f7af5</color>
+    <color name="color_dialog_buttons_dark">#ff8800</color>
+
 	<color name="dialog_inactive_text_color_dark">#78909c</color>
 
 	<!-- DownloadedRegionsLayer -->
