@@ -177,7 +177,7 @@ public class LiveUpdatesFragment extends Fragment {
 			} else {
 				viewHolder = (LocalFullMapsViewHolder) convertView.getTag();
 			}
-			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition));
+			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition), isLastChild);
 			return convertView;
 		}
 
@@ -294,6 +294,7 @@ public class LiveUpdatesFragment extends Fragment {
 		private final LiveUpdatesFragment fragment;
 		private final View view;
 		private final int secondaryColor;
+		private final View divider;
 
 		private LocalFullMapsViewHolder(View view, LiveUpdatesFragment context) {
 			icon = (ImageView) view.findViewById(R.id.icon);
@@ -308,9 +309,10 @@ public class LiveUpdatesFragment extends Fragment {
 			Resources.Theme theme = context.getActivity().getTheme();
 			theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 			secondaryColor = typedValue.data;
+			divider = view.findViewById(R.id.divider);
 		}
 
-		public void bindLocalIndexInfo(final LocalIndexInfo item) {
+		public void bindLocalIndexInfo(final LocalIndexInfo item, boolean isLastChild) {
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
 			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
@@ -359,6 +361,12 @@ public class LiveUpdatesFragment extends Fragment {
 			};
 			options.setOnClickListener(clickListener);
 			view.setOnClickListener(clickListener);
+
+			if(isLastChild) {
+				divider.setVisibility(View.GONE);
+			}else {
+				divider.setVisibility(View.VISIBLE);
+			}
 		}
 
 		private Drawable getSecondaryColorPaintedIcon(@DrawableRes int drawable) {
