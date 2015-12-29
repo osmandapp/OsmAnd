@@ -246,7 +246,7 @@ public class LiveUpdatesFragment extends Fragment {
 		@Override
 		public String getGroup(int groupPosition) {
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
-				return getString(R.string.live_updates);
+				return getString(R.string.download_live_updates);
 			} else if (groupPosition == SHOULD_NOT_UPDATE_GROUP_POSITION) {
 				return getString(R.string.available_maps);
 			} else {
