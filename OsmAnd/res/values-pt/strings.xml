@@ -914,7 +914,7 @@
 \nPôr-do-sol: %2$s</string>
 <string name="day_night_info">Dia/noite Informações</string>
 <string name="map_widget_day_night">Modo Dia/noite</string>
-<string name="map_widget_vector_attributes">Atributos de renderização:</string>
+<string name="map_widget_vector_attributes">Atributos de renderização</string>
 <string name="map_widget_renderer">Estilo de renderização</string>
 
 
@@ -1604,7 +1604,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     
 	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
     
-	<string name="speak_pedestrian">Anunciar faixas de pedestre</string>
+	<string name="speak_pedestrian">Passadeiras</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
     <string name="rendering_value_default_name">Predefinido</string>
     <string name="rendering_value_orange_name">Laranja</string>
@@ -1955,4 +1955,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_logoff">Sair</string>
     <string name="local_recordings_delete_all_confirm">Vai apagar %1$d nota(s). Continuar?</string>
     <string name="plugin_touringview_descr">"Esta opção muda o estilo de mapa do Osmand para a \"visão Touring \', uma visão especial de alto detalhe, para viajantes e motoristas profissionais.\n\nEsta exibição fornece, em qualquer zoom de mapa, a quantidade máxima de informação de viagem disponível no mapa (particularmente estradas, trilhas, caminhos, e marcas de orientação).\n\nTambém separa claramente todos os tipos de estradas de forma inequívoca com um código de cores, que se revela útil para a condução de veículos grandes (por exemplo).\n\nOferece opções especiais de turismo, como mostrar ciclovias ou rotas alpinas de montanha.\n\nNão é necessário fazer download dum mapa especial, a exibição é feita a partir dos mapas padrão.\n\nEssa visão pode ser revertida, basta desactiva-la, ou alterar o estilo de mapa em \'Configurar mapa\'. "</string>
+    <string name="rendering_attr_roadStyle_description">Estilo de estrada</string>
+    <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
+    <string name="osmo_use_https_descr">Usar ligação segura ao servidor</string>
+    <string name="wake_on_voice_descr">Acender o visor do dispositivo (se desligado) ao aproximar duma curva</string>
+    <string name="map_widget_top">Barra de estado</string>
+    <string name="map_widget_right">Painel direito</string>
+    <string name="map_widget_left">Painel esquerdo</string>
+    <string name="search_radius_proximity">Na proximidade de</string>
+    <string name="osmo_device_not_found">Aparelho não encontrado</string>
+    <string name="osmo_no_connection_msg">Serviço Osmo não está disponível:\n- Verifique a ligação;\n- Verifique as configurações;\n- Verifique o nosso Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Um utilizador anónimo não pode:\n- Criar grupos;\n- Sincronizar grupos e dispositivos com o servidor;\n- Gerir grupos e dispositivos num escritório privado.</string>
+    <string name="anonymous_user">Utilizador anónimo</string>
+    <string name="logged_as">Ligado como %1$s</string>
     </resources>
