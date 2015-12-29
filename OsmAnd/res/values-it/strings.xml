@@ -2130,4 +2130,5 @@
     <string name="weekly">Settimanale</string>
     <string name="morning">Mattina</string>
     <string name="Night">Notte</string>
-</resources>
+<string name="shared_string_not_selected">Non selezionato</string>
+    </resources>

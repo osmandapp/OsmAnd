@@ -957,7 +957,7 @@
 	<string name="map_widget_show_ruler">Linijka</string>
 	
 	<string name="map_widget_view_direction">Kierunek patrzenia</string>
-	<string name="map_widget_transparent">Przezroczysty interfejs</string>
+	<string name="map_widget_transparent">Przezroczyste widget</string>
 	
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
@@ -2096,4 +2096,8 @@
     <string name="no_location_permission">Aplikacja nie ma uprawnień do danych o lokalizacji.</string>
     <string name="no_camera_permission">Aplikacja nie ma uprawnień do aparatu.</string>
     <string name="no_microphone_permission">Aplikacja nie ma uprawnień dostępu do mikrofonu.</string>
+    <string name="available_maps">Dostępne mapy</string>
+    <string name="last_update">Ostatnia aktualizacja: %s</string>
+    <string name="update_time">Czas aktualizacj</string>
+    <string name="updates_size_pattern">Aktualizacje: %s</string>
     </resources>

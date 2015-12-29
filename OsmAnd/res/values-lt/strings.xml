@@ -2067,4 +2067,5 @@
     <string name="last_update">Paskutinįkart atnaujinta: %s</string>
     <string name="update_date_pattern">Atnaujinta: %s</string>
     <string name="update_time">Atnaujinimo laikas</string>
-</resources>
+<string name="shared_string_not_selected">Nepasirinkta</string>
+    </resources>

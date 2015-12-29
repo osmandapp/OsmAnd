@@ -774,7 +774,7 @@
     <string name="map_widget_compass">Brújula</string>
     <string name="map_widget_reset">Restablecer a los valores predeterminados</string>
     <string name="map_widget_parking">Aparcamiento</string>
-    <string name="map_widget_monitoring">Registrando GPX</string>
+    <string name="map_widget_monitoring">Registro GPX</string>
     <string name="map_widget_speed">Velocidad</string>
     <string name="map_widget_distance">Destino</string>
     <string name="map_widget_altitude">Altitud</string>

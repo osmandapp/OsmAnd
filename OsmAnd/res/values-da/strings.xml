@@ -2217,4 +2217,5 @@
     <string name="weekly">Ugentlig</string>
     <string name="morning">Morgen</string>
     <string name="Night">Aften</string>
-</resources>
+<string name="shared_string_not_selected">Ikke markeret</string>
+    </resources>

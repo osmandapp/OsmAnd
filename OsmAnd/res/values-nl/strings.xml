@@ -2122,10 +2122,10 @@
     <string name="av_audio_bitrate_descr">Kies audio bitrate</string>
     <string name="looking_up_address">Adres wordt gezocht</string>
     <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
-    <string name="update_every">Hoe vaak Updaten?</string>
+    <string name="update_every">Controle op Update</string>
     <string name="only_download_over_wifi">Alleen downloaden via WiFi</string>
     <string name="live_update">Live Update</string>
-<string name="update_now">Nu bijwerken</string>
+<string name="update_now">Nu Controleren</string>
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Reistijd:</string>
     <string name="missing_write_external_storage_permission">OsmAnd heeft geen toestemming om de SD-kaart te gebruiken</string>
@@ -2138,11 +2138,11 @@
     <string name="shared_string_sound">Stembegeleiding</string>
     <string name="live_updates">Live Updates</string>
     <string name="available_maps">Beschikbare Kaarten</string>
-    <string name="last_update">Laatste update: %s</string>
+    <string name="last_update">Laatste controle: %s</string>
 <string name="update_date_pattern">Update: %s</string>
-    <string name="update_time">Tijd van update</string>
+    <string name="update_time">Controle-tijdstip</string>
 <string name="updates_size_pattern">Updates: %s</string>
-<string name="last_map_change">Laatste complete kaart: %s</string>
+<string name="last_map_change">Laatste kaart-update: %s</string>
 <string name="rec_split">Video-opname automatisch splitsen</string>
     <string name="rec_split_title">Gebruik automatische splitsing</string>
     <string name="rec_split_desc">Videoclips overschrijven als opslagruimte vol is</string>

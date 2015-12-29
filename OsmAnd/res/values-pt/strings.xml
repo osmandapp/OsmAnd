@@ -430,7 +430,7 @@
   <string name="poi_dialog_comment_default">Alterar POI</string>
   <string name="poi_dialog_other_tags_message">Todos os outros valores serão preservados</string>
   <string name="default_buttons_commit">Enviar</string>
-  <string name="shared_string_clear">Limpar</string>
+  <string name="shared_string_clear">Apagar</string>
   <string name="filter_current_poiButton">Filtro</string>
   
   <string name="edit_filter_save_as_menu_item">Salvar como</string>
@@ -1417,7 +1417,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_settings">OsMo OpenStreetMap Monitorização (beta)</string>
     <string name="osmo_plugin_description">"Este plugin fornece a funcionalidade para OsMo (monitoramento avançado ao vivo), veja mais em http://osmo.mobi.
 \n\nVocê pode rastrear todos os dispositivos de um grupo em que participe, em tempo real, e comunicarem entre si. Tem várias opções para o rastreamento de sessão ou permanente.\n\nGrupos anónimos podem ser criados espontaneamente por um número específico de dias, e tem recursos limitados definidos, ou seja, não há controle remoto nem administrador de grupo. Por outro lado, grupos totalmente funcionais podem ser criados no website, aos quais apenas utilizadores registados podem ter acesso. "</string>
-    <string name="osmo_plugin_name">OsMO (rastreamento avançado ao vivo)</string>
+    <string name="osmo_plugin_name">OsMo (Monitorização OSM)</string>
    	<string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Vários</string>
@@ -1934,4 +1934,25 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="daily">Dia</string>
     <string name="weekly">Semana</string>
     <string name="morning">Manhã</string>
+    <string name="live_updates">Actualizações sincronizadas</string>
+    <string name="lang_ga">Irlandês</string>
+    <string name="lang_la">Latim</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="archive_wikipedia_data">Tem dados antigos Wikipédia incompatíveis guardados. Quer arquivá-los?</string>
+    <string name="download_wikipedia_files">Quer baixar dados Wikipédia adicionais (%1$s MB)?</string>
+    <string name="gps_network_not_enabled">Serviço de localização não está activado. Quer ligá-lo?</string>
+    <string name="disable_recording_once_app_killed_descrp">Irá pausar o registo GPX quando o aplicativo é encerrado (via aplicativos recentes). (A indicação de serviço em segundo plano de Osmand desaparece da barra de notificação Android.)</string>
+    <string name="shared_string_import2osmand">Importar para Osmand</string>
+    <string name="read_full_article">Ler o artigo completo (on-line)</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Mostrar detalhes</string>
+    <string name="osm_edit_context_menu_delete">Apagar edição OSM</string>
+    <string name="rendering_value_disabled_name">Desactivado</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorir de acordo com o estilo de rota</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorir de acordo com a OSMC</string>
+    <string name="osmo_share_my_location">Partilhar a minha posição</string>
+    <string name="shared_string_logoff">Sair</string>
+    <string name="local_recordings_delete_all_confirm">Vai apagar %1$d nota(s). Continuar?</string>
+    <string name="plugin_touringview_descr">"Esta opção muda o estilo de mapa do Osmand para a \"visão Touring \', uma visão especial de alto detalhe, para viajantes e motoristas profissionais.\n\nEsta exibição fornece, em qualquer zoom de mapa, a quantidade máxima de informação de viagem disponível no mapa (particularmente estradas, trilhas, caminhos, e marcas de orientação).\n\nTambém separa claramente todos os tipos de estradas de forma inequívoca com um código de cores, que se revela útil para a condução de veículos grandes (por exemplo).\n\nOferece opções especiais de turismo, como mostrar ciclovias ou rotas alpinas de montanha.\n\nNão é necessário fazer download dum mapa especial, a exibição é feita a partir dos mapas padrão.\n\nEssa visão pode ser revertida, basta desactiva-la, ou alterar o estilo de mapa em \'Configurar mapa\'. "</string>
     </resources>

@@ -1984,4 +1984,5 @@
     <string name="weekly">Semanalmente</string>
     <string name="morning">Pela manhã</string>
     <string name="Night">À noite</string>
-</resources>
+<string name="shared_string_not_selected">Nada selecionado</string>
+    </resources>
