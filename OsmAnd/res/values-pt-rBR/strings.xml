@@ -1226,7 +1226,7 @@
 	<string name="map_version_changed_info">Servidor contém arquivos de mapa incompatíveis com sua versão atual do Osmand. Para baixar e usá-los, por favor atualize o Osmand para a versão mais recente.</string>
 	<string name="poi_filter_nominatim">Nominatim on-line</string>
 	<string name="search_position_current_location_search">Procurando posição…</string>
-	<string name="search_position_current_location_found">Posição (encontrada)</string>
+	<string name="search_position_current_location_found">Minha Posição (encontrada)</string>
 	<string name="search_position_address">Endereço…</string>
 	<string name="search_position_favorites">Favoritos…</string>
 	<string name="search_position_undefined">Indefinido</string>
