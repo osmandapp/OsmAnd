@@ -476,7 +476,7 @@
     <string name="button_upgrade_osmandplus">Opgrader OsmAnd+</string>
 
     <string name="search_position_current_location_search">Søger position…</string>
-    <string name="search_position_current_location_found">Position (fundet)</string>
+    <string name="search_position_current_location_found">Positionen (fundet)</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favoritter…</string>
     <string name="search_position_undefined">Ikke defineret</string>
