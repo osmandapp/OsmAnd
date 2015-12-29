@@ -50,7 +50,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (plugin != null) {
-							plugin.deleteRecording(getRecording());
+							plugin.deleteRecording(getRecording(), true);
 							getMapActivity().getContextMenu().close();
 						}
 					}

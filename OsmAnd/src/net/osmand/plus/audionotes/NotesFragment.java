@@ -213,7 +213,7 @@ public class NotesFragment extends OsmAndListFragment {
 				Iterator<Recording> it = selected.iterator();
 				while (it.hasNext()) {
 					Recording pnt = it.next();
-					plugin.deleteRecording(pnt);
+					plugin.deleteRecording(pnt, true);
 					it.remove();
 					listAdapter.delete(pnt);
 				}
@@ -505,7 +505,7 @@ public class NotesFragment extends OsmAndListFragment {
 				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						plugin.deleteRecording(recording);
+						plugin.deleteRecording(recording, true);
 						listAdapter.remove(recording);
 					}
 				});
