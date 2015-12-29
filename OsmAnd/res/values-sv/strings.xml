@@ -2057,4 +2057,5 @@
     <string name="daily">Varje dag</string>
     <string name="weekly">Varje vecka</string>
     <string name="morning">Morgon</string>
+    <string name="shared_string_not_selected">Inte markerad</string>
     </resources>
