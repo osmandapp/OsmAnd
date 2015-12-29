@@ -250,6 +250,8 @@ public class BasicEditPoiFragment extends Fragment
 			TextView daysTextView = (TextView) view.findViewById(R.id.daysTextView);
 			LinearLayout timeListContainer = (LinearLayout) view.findViewById(R.id.timeListContainer);
 
+			ImageButton deleteItemImageButton = (ImageButton) view.findViewById(R.id.deleteItemImageButton);
+
 			if (openingHours.getRules().get(position) instanceof BasicOpeningHourRule) {
 				final OpeningHoursParser.BasicOpeningHourRule rule =
 						(BasicOpeningHourRule) openingHours.getRules().get(position);
@@ -266,8 +268,8 @@ public class BasicEditPoiFragment extends Fragment
 					}
 				});
 
-				TIntArrayList startTimes = rule.getStartTimes();
-				TIntArrayList endTimes = rule.getEndTimes();
+				final TIntArrayList startTimes = rule.getStartTimes();
+				final TIntArrayList endTimes = rule.getEndTimes();
 				for (int i = 0; i < startTimes.size(); i++) {
 					View timeFromToLayout = LayoutInflater.from(linearLayout.getContext())
 							.inflate(R.layout.time_from_to_layout, timeListContainer, false);
@@ -297,22 +299,41 @@ public class BasicEditPoiFragment extends Fragment
 									.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
 						}
 					});
+
+					ImageButton deleteTimespanImageButton = (ImageButton) timeFromToLayout
+							.findViewById(R.id.deleteTimespanImageButton);
+					deleteTimespanImageButton.setImageDrawable(deleteDrawable);
+					final int timespanPosition = i;
+					deleteTimespanImageButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (startTimes.size() == 1) {
+								openingHours.getRules().remove(position);
+								updateViews();
+							} else {
+								rule.deleteTimeRange(timespanPosition);
+								updateViews();
+							}
+						}
+					});
 					timeListContainer.addView(timeFromToLayout);
 				}
+
+				deleteItemImageButton.setVisibility(View.GONE);
 			} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
 				daysTextView.setText(openingHours.getRules().get(position).toRuleString(false));
 				timeListContainer.removeAllViews();
-			}
 
-			ImageButton deleteItemImageButton = (ImageButton) view.findViewById(R.id.deleteItemImageButton);
-			deleteItemImageButton.setImageDrawable(deleteDrawable);
-			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openingHours.getRules().remove(position);
-					updateViews();
-				}
-			});
+				deleteItemImageButton.setVisibility(View.VISIBLE);
+				deleteItemImageButton.setImageDrawable(deleteDrawable);
+				deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						openingHours.getRules().remove(position);
+						updateViews();
+					}
+				});
+			}
 			return view;
 		}
 	}

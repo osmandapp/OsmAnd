@@ -222,14 +222,14 @@ public class OpeningHoursParser {
 
 		/**
 		 * represents the list on which month it is open.
-		 * Day number 0 is JANUAR.
+		 * Day number 0 is JANUARY.
 		 */
 		private boolean[] months = new boolean[12];
 
 		/**
 		 * lists of equal size representing the start and end times
 		 */
-		private int[] startTimes = new int[0], endTimes = new int[0];
+		private TIntArrayList startTimes = new TIntArrayList(), endTimes = new TIntArrayList();
 		
 		/**
 		 * return an array representing the days of the rule
@@ -252,20 +252,20 @@ public class OpeningHoursParser {
 		 * @param s startTime to set
 		 */
 		public void setStartTime(int s) {
-			startTimes = new int[]{s};
-			if(endTimes.length != 1) {
-				endTimes = new int[]{0};
+			setSingleValueForArrayList(startTimes, s);
+			if(endTimes.size() != 1) {
+				setSingleValueForArrayList(endTimes, 0);
 			}
 		}
-		
+
 		/**
 		 * set a single end time, erase all previously added end times
 		 * @param e endTime to set
 		 */
 		public void setEndTime(int e) {
-			endTimes = new int[]{e};
-			if(startTimes.length != 1) {
-				startTimes = new int[]{0};
+			setSingleValueForArrayList(endTimes, e);
+			if(startTimes.size() != 1) {
+				setSingleValueForArrayList(startTimes, 0);
 			}
 		}
 
@@ -279,14 +279,11 @@ public class OpeningHoursParser {
 		 * @param position - position to add
 		 */
 		public void setStartTime(int s, int position) {
-			if (position > startTimes.length) {
-				throw new IllegalArgumentException("It is possible to only create 1 new " +
-						"position. Size=" + startTimes.length + ", position=" + position);
-			} else if (position == startTimes.length) {
-				startTimes = addValueToArray(startTimes, s);
-				endTimes = addValueToArray(endTimes, 0);
+			if (position == startTimes.size()) {
+				startTimes.add(s);
+				endTimes.add(0);
 			} else {
-				startTimes[position] = s;
+				startTimes.set(position, s);
 			}
 		}
 
@@ -300,14 +297,11 @@ public class OpeningHoursParser {
 		 * @param position - position to add
 		 */
 		public void setEndTime(int s, int position) {
-			if (position > endTimes.length) {
-				throw new IllegalArgumentException("It is possible to create only 1 new position." +
-						" Size=" + endTimes.length + ", position=" + position);
-			} else if (position == endTimes.length) {
-				endTimes = addValueToArray(endTimes, s);
-				startTimes = addValueToArray(startTimes, 0);
+			if (position == startTimes.size()) {
+				endTimes.add(s);
+				startTimes.add(0);
 			} else {
-				endTimes[position] = s;
+				endTimes.set(position, s);
 			}
 		}
 		
@@ -316,10 +310,10 @@ public class OpeningHoursParser {
 		 * @return a single start time
 		 */
 		public int getStartTime() {
-			if(startTimes.length == 0) {
+			if(startTimes.size() == 0) {
 				return 0;
 			}
-			return startTimes[0];
+			return startTimes.get(0);
 		}
 
 		/**
@@ -328,7 +322,7 @@ public class OpeningHoursParser {
 		 * @return a single start time
 		 */
 		public int getStartTime(int position) {
-			return startTimes[position];
+			return startTimes.get(position);
 		}
 		
 		/**
@@ -336,10 +330,10 @@ public class OpeningHoursParser {
 		 * @return a single end time
 		 */
 		public int getEndTime() {
-			if(endTimes.length == 0) {
+			if(endTimes.size() == 0) {
 				return 0;
 			}
-			return endTimes[0];
+			return endTimes.get(0);
 		}
 
 		/**
@@ -348,7 +342,7 @@ public class OpeningHoursParser {
 		 * @return a single end time
 		 */
 		public int getEndTime(int position) {
-			return endTimes[position];
+			return endTimes.get(position);
 		}
 
 		/**
@@ -428,9 +422,9 @@ public class OpeningHoursParser {
 				p += 7;
 			}
 			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE); // Time in minutes
-			for (i = 0; i < startTimes.length; i++) {
-				int startTime = this.startTimes[i];
-				int endTime = this.endTimes[i];
+			for (i = 0; i < startTimes.size(); i++) {
+				int startTime = this.startTimes.get(i);
+				int endTime = this.endTimes.get(i);
 				if (startTime < endTime || endTime == -1) {
 					// one day working like 10:00-20:00 (not 20:00-04:00)
 					if (days[d] && !checkPrevious) {
@@ -492,12 +486,12 @@ public class OpeningHoursParser {
 			}
 			appendDaysString(b);
 			// Time
-			if (startTimes == null || startTimes.length == 0){
+			if (startTimes == null || startTimes.size() == 0){
 				b.append(" off ");
 			} else {
-				for (int i = 0; i<startTimes.length; i++) {
-					int startTime = startTimes[i];
-					int endTime = endTimes[i];
+				for (int i = 0; i<startTimes.size(); i++) {
+					int startTime = startTimes.get(i);
+					int endTime = endTimes.get(i);
 					if (open24_7 && startTime == 0 && endTime / 60 == 24) {
 						return "24/7";
 					}
@@ -549,25 +543,20 @@ public class OpeningHoursParser {
 		 * @param endTime endTime to add
 		 */
 		public void addTimeRange(int startTime, int endTime) {
-			int l = startTimes.length;
-			int[] newStartTimes = new int[l + 1];
-			int[] newEndTimes   = new int[l + 1];
-			for (int i = 0; i < l; i++) {
-				newStartTimes[i] = startTimes[i];
-				newEndTimes[i]   = endTimes[i];
-			}
-			newStartTimes[l] = startTime;
-			newEndTimes[l]   = endTime;
-
-			startTimes = newStartTimes;
-			endTimes   = newEndTimes;
+			startTimes.add(startTime);
+			endTimes.add(endTime);
 		}
 
-		private int[] addValueToArray(int[] src, int newValue) {
-			final int[] dest = new int[startTimes.length + 1];
-			System.arraycopy(startTimes, 0, dest, 0, startTimes.length);
-			dest[startTimes.length] = newValue;
-			return dest;
+		public void deleteTimeRange(int position) {
+			startTimes.removeAt(position);
+			endTimes.removeAt(position);
+		}
+
+		private static void setSingleValueForArrayList(TIntArrayList arrayList, int s) {
+			if (arrayList.size() > 0) {
+				arrayList.remove(0, arrayList.size());
+			}
+			arrayList.add(s);
 		}
 	}
 

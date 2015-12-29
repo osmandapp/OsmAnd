@@ -531,14 +531,9 @@ public class Algorithms {
 		if (minutes < 60) {
 			return String.valueOf(minutes);
 		} else {
-			String min;
-			if (minutes % 60 < 10) {
-				min = "0" + (minutes % 60);
-			} else {
-				min = (minutes % 60) + "";
-			}
+			int min = minutes % 60;
 			int hours = minutes / 60;
-			return hours + ":" + min;
+			return String.format("%02d:%02d", hours, min);
 		}
 	}
 	
