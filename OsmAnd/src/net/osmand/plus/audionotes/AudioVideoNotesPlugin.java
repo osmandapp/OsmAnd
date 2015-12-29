@@ -1200,12 +1200,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						// camera focus type
 						autofocus = true;
 						parameters.removeGpsData();
-						String locProvider = mapActivity.getMapViewTrackingUtilities().getLocationProvider();
-						if (!Algorithms.isEmpty(locProvider)) {
+						if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 							parameters.setGpsLatitude(lat);
 							parameters.setGpsLongitude(lon);
-							parameters.setGpsProcessingMethod(locProvider.toUpperCase());
-							parameters.setGpsTimestamp(System.currentTimeMillis() / 1000);
 						}
 						switch (AV_CAMERA_FOCUS_TYPE.get()) {
 							case AV_CAMERA_FOCUS_HIPERFOCAL:

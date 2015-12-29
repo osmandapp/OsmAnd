@@ -7,8 +7,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_dialog_buttons"
+        android:layout_height="125dp"
+        android:background="@color/color_dialog_buttons_light"
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
@@ -18,9 +18,9 @@
             android:id="@+id/regionNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="27dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/color_white"
-            android:layout_marginBottom="27dp"
             tools:text="Flevoland"/>
 
         <View
@@ -31,9 +31,9 @@
         <TextView
             android:id="@+id/lastMapChangeTextView"
             android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:textColor="@color/color_white"
             android:textSize="12sp"
@@ -42,8 +42,9 @@
         <TextView
             android:id="@+id/lastUpdateTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:textColor="@color/color_white"
             android:textSize="12sp"
@@ -57,12 +58,12 @@
         android:layout_marginRight="24dp">
 
         <TextView
-            android:textColor="?android:attr/textColorPrimary"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/live_update"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"/>
 
         <android.support.v7.widget.SwitchCompat
@@ -80,12 +81,12 @@
         android:layout_marginRight="24dp">
 
         <TextView
-            android:textColor="?android:attr/textColorPrimary"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/only_download_over_wifi"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             tools:text="Only download over WiFi long text like really long"/>
 
@@ -105,14 +106,15 @@
         android:layout_marginRight="16dp">
 
         <TextView
-            android:textColor="?android:attr/textColorPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:text="@string/update_every"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"/>
 
+        <!--style="@style/OsmandLightTheme.Spinner"-->
         <Spinner
             android:id="@+id/updateFrequencySpinner"
             style="@style/OsmandLightTheme.Spinner"
@@ -123,20 +125,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/updateTimesOfDayList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="16dp">
 
         <TextView
-            android:textColor="?android:attr/textColorPrimary"
-            android:id="@+id/updateTimesOfDayLabel"
             android:layout_width="0dp"
-            android:layout_height="54dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/update_time"
-            android:layout_gravity="center_vertical"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"/>
 
         <Spinner
@@ -156,12 +158,12 @@
         android:layout_marginRight="16dp">
 
         <TextView
-            android:textColor="?android:attr/textColorPrimary"
             android:id="@+id/sizeTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             tools:text="Updates: 65NB"/>
 
@@ -172,6 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
             android:gravity="center_vertical|right"
+            android:textColor="?attr/color_dialog_buttons"
             android:text="@string/shared_string_clear"/>
     </LinearLayout>
 
@@ -179,5 +182,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/divider_color"/>
+        android:layout_marginTop="24dp"
+        android:background="?attr/dashboard_divider"/>
 </LinearLayout>

@@ -117,6 +117,7 @@
         <item name="android:textColorSecondary">@color/icon_color</item>
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>
 
+        <item name="color_dialog_buttons">@color/color_dialog_buttons_light</item>
     </style>
 
     <style name="OsmandLightTheme.NoActionbar">
@@ -151,6 +152,7 @@
         <item name="android:dropDownSelector">?android:selectableItemBackground</item>
         <item name="android:divider">@null</item>
         <item name="overlapAnchor">true</item>
+        <item name="android:textColorPrimary">@color/color_dialog_buttons_light</item>
     </style>
 
     <style name="OsmandDarkTheme.DarkActionbar">
@@ -235,6 +237,7 @@
         <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
+        <item name="color_dialog_buttons">@color/color_dialog_buttons_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
