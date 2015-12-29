@@ -299,7 +299,6 @@ public class AudioVideoNoteRecordingMenu {
 
 	private void startCounter() {
 		startTime = System.currentTimeMillis();
-		Log.e("111", "START");
 		if (recTimer != null) {
 			recTimer.cancel();
 		}
@@ -322,7 +321,6 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	private void stopCounter() {
-		Log.e("111", "STOP");
 		if (recTimer != null) {
 			recTimer.cancel();
 			recTimer = null;
