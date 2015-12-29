@@ -2079,4 +2079,5 @@
     <string name="morning">Morgens</string>
     <string name="Night">Nachts</string>
 <string name="shared_string_not_selected">Nicht ausgewählt</string>
-    </resources>
+    <string name="osm_live">OSM live</string>
+</resources>
