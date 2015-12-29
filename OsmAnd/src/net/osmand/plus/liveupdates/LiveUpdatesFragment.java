@@ -141,6 +141,7 @@ public class LiveUpdatesFragment extends Fragment {
 			dataShouldUpdate.addAll(changedSet);
 			dataShouldNotUpdate.removeAll(changedSet);
 			notifyDataSetChanged();
+			expandAllGroups();
 		}
 
 		public void sort() {
@@ -211,7 +212,7 @@ public class LiveUpdatesFragment extends Fragment {
 						for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
 							PendingIntent alarmIntent = getPendingIntent(getActivity(),
 									localIndexInfo);
-							if(isChecked) {
+							if (isChecked) {
 								final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
 										preferenceUpdateFrequency(localIndexInfo, getSettings());
 								final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
@@ -256,7 +257,7 @@ public class LiveUpdatesFragment extends Fragment {
 
 		@Override
 		public int getGroupCount() {
-			return 2;
+			return dataShouldNotUpdate.size() == 0 ? 1 : 2;
 		}
 
 		@Override
@@ -362,9 +363,9 @@ public class LiveUpdatesFragment extends Fragment {
 			options.setOnClickListener(clickListener);
 			view.setOnClickListener(clickListener);
 
-			if(isLastChild) {
+			if (isLastChild) {
 				divider.setVisibility(View.GONE);
-			}else {
+			} else {
 				divider.setVisibility(View.VISIBLE);
 			}
 		}
