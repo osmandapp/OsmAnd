@@ -2023,4 +2023,5 @@
     <string name="weekly">Haftalık</string>
     <string name="morning">Sabah</string>
     <string name="Night">Gece</string>
+<string name="osm_live">OSM Canlı</string>
 </resources>
