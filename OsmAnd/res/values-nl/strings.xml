@@ -27,7 +27,7 @@
   <string name="test_voice_prompts">Test stem-instructies</string>
   <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Kaartbeheer), of overschakelen naar online kaarten; activeer hiervoor de Online Kaarten-plugin.</string>
   
-  <string name="send_files_to_osm">GPX-bestanden naar openstreetmap sturen?</string>
+  <string name="send_files_to_osm">GPX-bestanden naar OpenStreetMap sturen?</string>
   <string name="gpx_visibility_txt">Zichtbaarheid</string>
   <string name="gpx_tags_txt">Tags</string>
   <string name="gpx_description_txt">Beschrijving</string>
@@ -105,7 +105,7 @@
   
   <string name="local_openstreetmap_upload">Upload wijziging naar OSM</string>
   <string name="local_openstreetmap_delete">Wis de wijziging</string>
-  <string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap wijziging:</string>
+  <string name="local_openstreetmap_descr_title">OpenStreetMap asynchroon wijzigen:</string>
   <string name="local_openstreetmap_settings">Lokaal opgeslagen OSM Interessepunten/Notities</string>
   <string name="local_openstreetmap_settings_descr">Beheer OSM Interessepunten/Notities die lokaal zijn bewaard</string>
   
@@ -152,9 +152,9 @@
   <string name="general_settings_descr">Kaartweergave en algemene instellingen</string>
   <string name="global_app_settings">Algemene instellingen</string>
   <string name="user_name">OSM gebruikersnaam</string>
-  <string name="user_name_descr">Nodig voor openstreetmap.org aanmelding</string>
+  <string name="user_name_descr">Nodig voor OpenStreetMap.org aanmelding</string>
   <string name="user_password">OSM wachtwoord</string>
-  <string name="user_password_descr">Nodig voor openstreetmap.org aanmelding</string>
+  <string name="user_password_descr">Nodig voor OpenStreetMap.org aanmelding</string>
   <string name="osmand_service">Achtergrondmodus</string>
   <string name="osmand_service_descr">OsmAnd werkt op de achtergrond als het scherm uit is</string>
   
@@ -212,7 +212,7 @@
   <string name="filename_input">Bestandsnaam: </string>
   <string name="file_with_name_already_exist">Er bestaat al een bestand met dezelfde naam.</string>
   
-  <string name="local_index_upload_gpx_description">Upload GPX-bestanden naar Openstreetmap. Ze worden gebruikt om de kaarten te verbeteren.</string>
+  <string name="local_index_upload_gpx_description">Stuur GPX-bestanden naar OpenStreetMap. Ze worden gebruikt om de kaarten te verbeteren.</string>
   <string name="local_index_items_uploaded">%1$d of %2$d bestanden succesvol ge-upload.</string>
   <string name="local_index_mi_upload_gpx">Stuur naar OpenStreetMap</string>
   <string name="show_more_map_detail">Toon meer kaartdetails</string>
@@ -361,7 +361,7 @@
   <string name="amenity_type_sport">Sport</string>
   <string name="amenity_type_sustenance">Restaurant/cafe</string>
   <string name="amenity_type_tourism">Toerisme</string>
-  <string name="amenity_type_transportation">Openbaar vervoer</string>
+  <string name="amenity_type_transportation">Openbaar Vervoer</string>
   <string name="indexing_address">Adres wordt geïndexeerd…</string>
   <string name="indexing_map">Kaart wordt geïndexeerd…</string>
   <string name="indexing_poi">Interessepunten worden geïndexeerd…</string>
@@ -429,11 +429,11 @@
   <string name="use_high_res_maps_descr">Rasterkaarten niet rekken op hoge-resolutie beeldschermen</string>
   <string name="unknown_location">Positie nog niet bekend</string>
   
-  <string name="context_menu_item_search_transport">Zoek openbaar vervoer</string>
-  <string name="transport_searching_transport">Openbaar vervoer-resultaten (geen bestemming):</string>
-  <string name="transport_searching_route">Openbaar vervoer-resultaten ({0} naar bestemming):</string>
+  <string name="context_menu_item_search_transport">Zoek Openbaar Vervoer</string>
+  <string name="transport_searching_transport">Openbaar Vervoer-resultaten (geen bestemming):</string>
+  <string name="transport_searching_route">Openbaar Vervoer-resultaten ({0} naar bestemming):</string>
   
-  <string name="transport_search_again">Opnieuw openbaar vervoer zoeken</string>
+  <string name="transport_search_again">Opnieuw Openbaar Vervoer zoeken</string>
   
   <string name="voice">Opgenomen stem</string>
   <string name="no_vector_map_loaded">Geen vectorkaarten geladen</string>
@@ -442,7 +442,7 @@
   <string name="layer_gpx_layer">GPX-track…</string>
   <string name="error_reading_gpx">Fout bij het lezen van GPX-gegevens</string>
   <string name="vector_data">Offline vectorkaarten</string>
-  <string name="transport_context_menu">Zoek openbaar vervoer op halte</string>
+  <string name="transport_context_menu">Zoek Openbaar Vervoer op halte</string>
   
   
   <string name="poi_context_menu_modify">Wijzig interessepunt</string>
@@ -463,11 +463,11 @@
   <string name="none_region_found">Geen offline-gegevens voor regio gevonden op de SD kaart. Download regio\'s van het internet.</string>
   <string name="poi_namefinder_query_empty">Type een zoekwoord om een interessepunt te vinden</string>
   <string name="any_poi">Alle</string>
-  <string name="layer_transport_route">Openbaar vervoer-verbindingen</string>
+  <string name="layer_transport_route">Openbaar Vervoer-verbindingen</string>
   <string name="thanks_yandex_traffic">Met dank aan Yandex voor de verkeersinformatie.</string>
   <string name="layer_yandex_traffic">Yandex Traffic</string>
   <string name="layer_route">Route</string>
-  <string name="layer_osm_bugs">OSM Notities (online)</string>
+  <string name="layer_osm_bugs">OSM-Opmerkingen (online)</string>
   <string name="layer_transport">OV-haltes</string>
   <string name="layer_poi">Interessepunt…</string>
   <string name="layer_map">Kaartbron…</string>
@@ -539,9 +539,9 @@
   <string name="transport_to_go_before">Voorafgaande afstand</string>
   <string name="transport_stops_to_pass">Aantal haltes te gaan</string>
   <string name="transport_route_distance">Lengte van route</string>
-  <string name="transport">Openbaar vervoer</string>
-  <string name="show_transport_over_map_description">Toon haltes openbaar vervoer op kaart</string>
-  <string name="show_transport_over_map">Toon haltes openbaar vervoer</string>
+  <string name="transport">Openbaar Vervoer</string>
+  <string name="show_transport_over_map_description">Toon Haltes Openbaar Vervoer op kaart</string>
+  <string name="show_transport_over_map">Toon Haltes Openbaar Vervoer</string>
   <string name="hello">Navigatieprogamma OsmAnd</string>
   <string name="update_poi_success">Interessepunt-gegevens succesvol vernieuwd ({0} geladen)</string>
   <string name="update_poi_error_local">Fout bij het vernieuwen van de interessepunten</string>
@@ -622,11 +622,11 @@
   
   <string name="use_online_routing_descr">Gebruik internet voor routeberekening</string>
   <string name="use_online_routing">Gebruik online routeberekening</string>
-  <string name="osm_settings_descr">Instellingen voor Openstreetmap.org (OSM)</string>
+  <string name="osm_settings_descr">Instellingen voor OpenStreetMap.org (OSM)</string>
   <string name="data_settings_descr">Specificeer taal, download gegevens</string>
   <string name="data_settings">Gegevens</string>
   
-  <string name="osm_settings">Openstreetmap bewerken</string>
+  <string name="osm_settings">OpenStreetMap bewerken</string>
   <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang de snelheid</string>
   <string name="auto_zoom_map">Kaart automatisch zoomen</string>
   <string name="additional_settings">Extra instellingen</string>
@@ -706,7 +706,7 @@
   
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
   
-  <string name="context_menu_item_create_poi">Maak interessepunt in OSM</string>
+  <string name="context_menu_item_create_poi">OSM-Interessepunt aanmaken</string>
   <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
   <string name="add_favorite_dialog_favourite_added_template">Favoriet \'\'{0}\'\' is toegevoegd.</string>
@@ -730,7 +730,7 @@
   
   
   <string name="poi_edit_title">Bewerk interessepunt</string>
-  <string name="poi_create_title">Maak interessepunt</string>
+  <string name="poi_create_title">OSM-Interessepunt aanmaken</string>
   <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening is niet een enkel punt</string>
   <string name="poi_remove_confirm_template">Verwijderen {0} (geef commentaar)?</string>
   <string name="poi_remove_title">Verwijder interessepunt</string>
@@ -781,7 +781,7 @@
   <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen</string>
   <string name="prefs_plugins">Plugin-manager</string>
   
-  <string name="osm_editing_plugin_description">Gebruik deze plugin om bij te dragen aan Openstreetmap (OSM), bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-bugs, en door GPX-tracks te uploaden. OSM is een wereldwijd community-driven project om een wereldwijde kaart te maken. Voor details zie http://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM aanmeldgegevens zijn ingevuld in de app.</string>
+  <string name="osm_editing_plugin_description">Gebruik deze plugin om bij te dragen aan OpenStreetMap (OSM), bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-opmerkingen, en door GPX-tracks te uploaden. OSM is een wereldwijd community-driven project om een wereldwijde kaart te maken. Voor details zie http://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM-aanmeldgegevens zijn ingevuld in de app.</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken…</string>
   <string name="search_position_current_location_found">Positie (Gevonden)</string>
@@ -794,7 +794,7 @@
   <string name="poi_search_desc">Zoek interessepunt (POI)</string>
   <string name="address_search_desc">Adres zoeken</string>
   <string name="navpoint_search_desc">Coördinaten</string>
-  <string name="transport_search_desc">Openbaar vervoer zoeken</string>
+  <string name="transport_search_desc">Openbaar Vervoer zoeken</string>
   <string name="favourites_search_desc">Favorieten zoeken</string>
   
   <string name="asap">z.s.m.</string>
@@ -806,7 +806,7 @@
   <string name="rendering_attr_noPolygons_name">Verberg vlakken</string>
   <string name="rendering_attr_appMode_name">Weergave-modus</string>
   <string name="rendering_attr_appMode_description">Kaartoptimalisatie voor profiel</string>
-  <string name="rendering_attr_contourLines_description">Toon vanaf schaal (hoogtekaart moet aanwezig zijn):</string>
+  <string name="rendering_attr_contourLines_description">Hoogtelijnen tonen vanaf schaal (Kaart met Hoogtelijnen moet aanwezig zijn):</string>
   <string name="rendering_attr_contourLines_name">Toon hoogtelijnen</string>
   <string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string>
   <string name="rendering_attr_hmRendered_name">Toon meer details</string>
@@ -946,24 +946,24 @@
 <string name="snap_to_road_descr">Positie op de weg uitlijnen tijdens navigatie</string>
 <string name="snap_to_road">Positie op de weg uitlijnen</string>
 <string name="intermediate_point_too_far">Tussenpunt %1$s te ver van dichtstbijzijnde weg.</string>
-<string name="arrived_at_intermediate_point">Je bent aangekomen op je tussenpunt</string>
-<string name="context_menu_item_intermediate_point">Als tussenpunt toevoegen</string>
+<string name="arrived_at_intermediate_point">Je bent aangekomen op je Tussenpunt</string>
+<string name="context_menu_item_intermediate_point">Als Tussenpunt toevoegen</string>
 <string name="map_widget_intermediate_distance">Tussenpunt</string>
 <string name="ending_point_too_far">Eindpunt te ver van dichtstbijzijnde weg.</string>
 <string name="add_tag">Tag toevoegen</string>
 <string name="btn_advanced_mode">Geavanceerde modus…</string>
 <string name="poi_filter_parking">Parkeren</string>
 <string name="poi_filter_emergency">Hulpdiensten</string>
-<string name="poi_filter_public_transport">Openbaar vervoer</string>
+<string name="poi_filter_public_transport">Openbaar Vervoer</string>
 <string name="poi_filter_entertainment">Amusement</string>
 <string name="poi_filter_accomodation">Onderkomen</string>
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="poi_filter_sightseeing">Bezienswaardigheden</string>
 
-    <string name="context_menu_item_last_intermediate_point">Toevoegen als laatste tussenpunt</string>
-    <string name="context_menu_item_first_intermediate_point">Toevoegen als eerste tussenpunt</string>
-    <string name="add_as_last_destination_point">Voeg toe als laatste tussenpunt</string>
-    <string name="add_as_first_destination_point">Voeg toe als eerste tussenpunt</string>
+    <string name="context_menu_item_last_intermediate_point">Toevoegen als laatste Tussenpunt</string>
+    <string name="context_menu_item_first_intermediate_point">Toevoegen als eerste Tussenpunt</string>
+    <string name="add_as_last_destination_point">Voeg toe als laatste Tussenpunt</string>
+    <string name="add_as_first_destination_point">Voeg toe als eerste Tussenpunt</string>
     <string name="replace_destination_point">Vervang de bestemming</string>
     <string name="new_destination_point_dialog">Er is al een bestemming gekozen.</string>
     <string name="target_point">Bestemming %1$s</string>
@@ -1014,7 +1014,7 @@
     <string name="download_srtm_maps">Hoogtelijnen</string>
     
 	
-<string name="audionotes_plugin_description">De Audio/Video-Notities Plugin biedt de mogelijkheid voor het maken van audio-, foto- en videonotities tijdens een reis, direct via de knop in de kaartweergave, of via het menu bij een locatie op de kaart.</string>
+<string name="audionotes_plugin_description">De Audio/Video-Notities Plugin biedt de mogelijkheid voor het maken van Foto-, Audio- en VideoNotities tijdens een reis, direct via de knop in de kaartweergave, of via het menu bij een locatie op de kaart.</string>
     <string name="audionotes_plugin_name">Audio/Video-Notities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
     <string name="osmand_srtm_long_description_1000_chars">"Toon contourlijnen en een reliëflaag over de normale kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
@@ -1031,8 +1031,8 @@
     <string name="recording_delete_confirm">Wil je deze opname verwijderen?</string>
     
     <string name="recording_unavailable">niet beschikbaar</string>
-    <string name="recording_context_menu_arecord">Maak een audionotitie</string>
-    <string name="recording_context_menu_vrecord">Maak een videonotitie</string>
+    <string name="recording_context_menu_arecord">AudioNotitie opnemen</string>
+    <string name="recording_context_menu_vrecord">VideoNotitie opnemen</string>
     <string name="layer_recordings">Audio/Video-Notities</string>
     <string name="recording_can_not_be_played">Opname kan niet worden afgespeeld</string>
     <string name="recording_context_menu_delete">Wis opname</string>
@@ -1060,10 +1060,10 @@
     <string name="dropbox_plugin_name">Dropbox-Plugin</string>
     <string name="recording_context_menu_show">Toon</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
-    <string name="av_def_action_picture">Neem een foto</string>
-    <string name="recording_context_menu_precord">Neem een foto</string>
+    <string name="av_def_action_picture">Foto maken</string>
+    <string name="recording_context_menu_precord">Foto maken</string>
     <string name="stop_routing_confirm">Navigatie stoppen?</string>
-    <string name="clear_dest_confirm">Bestemming (en tussenpunten) wissen?</string>
+    <string name="clear_dest_confirm">Bestemming (en Tussenpunten) wissen?</string>
     <string name="precise_routing_mode_descr">Schakel nauwkeurige routeberekening in om precieze routes te berekenen zonder fouten. Nog beperkt in afstand en langzaam.</string>
     <string name="precise_routing_mode">Nauwkeurige routeberekening (alpha)</string>
     <string name="local_indexes_cat_av">Audio/video-gegevens</string>
@@ -1072,7 +1072,7 @@
 	
     <string name="download_hillshade_maps">Reliëfschaduwkaarten</string>
     
-    <string name="av_use_external_camera_descr">Gebruik de systeemapplicatie voor foto\'s</string>
+    <string name="av_use_external_camera_descr">Gebruik de systeemapplicatie voor Foto\'s</string>
     <string name="av_use_external_camera">Gebruik de camera-applicatie</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
     
@@ -1142,14 +1142,14 @@
     <string name="local_osm_changes_backup">Backup als OSM-wijziging</string>
     
     <string name="search_street_in_neighborhood_cities">Zoek straat in nabijgelegen plaatsen</string>
-    <string name="intermediate_items_sort_return">De tussenpunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw eindbestemming.</string>
+    <string name="intermediate_items_sort_return">De Tussenpunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw eindbestemming.</string>
     <string name="intermediate_items_sort_by_distance">Sorteer kortste afstand</string>
     <string name="please_select_address">Kies eerst een plaats of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
     <string name="destination_point">Bestemming %1$s</string>
     
 	
-	<string name="av_photo_play_sound">Geluid bij het maken van foto</string>
+	<string name="av_photo_play_sound">Geluid bij het maken van Foto</string>
 	<string name="av_camera_focus">Scherpstelmethode</string>
 	<string name="av_camera_focus_descr">Kies scherpstelmethode voor de camera</string>
 	<string name="av_camera_focus_auto">Automatisch scherpstellen</string>
@@ -1158,7 +1158,7 @@
 	<string name="av_camera_focus_infinity">Scherpstellen op oneindig</string>
 	<string name="av_camera_focus_macro">Macromodus (dichtbij scherpstellen)</string>
 	<string name="av_camera_focus_continuous">Voortdurend blijven scherpstellen</string>
-	<string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld bij het nemen van foto\'s</string>
+	<string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld bij het maken van Foto\'s</string>
 
 	
     <string name="speak_speed_limit">Snelheidsbeperking</string>
@@ -1167,9 +1167,9 @@
 	<string name="route_from">Van:</string>
     
     <string name="osb_author_or_password_not_specified">Specificeer OSM-gebruikersnaam en -wachtwoord in Instellingen</string>
-    <string name="clear_intermediate_points">Wis tussenpunten</string>
-    <string name="keep_intermediate_points">Bewaar tussenpunten</string>
-    <string name="new_directions_point_dialog">"Er zijn al tussenpunten  gemaakt."</string>
+    <string name="clear_intermediate_points">Wis Tussenpunten</string>
+    <string name="keep_intermediate_points">Bewaar Tussenpunten</string>
+    <string name="new_directions_point_dialog">"Er zijn al Tussenpunten  gemaakt."</string>
     <string name="context_menu_item_directions_to">Aanwijzingen naar</string>
     <string name="context_menu_item_directions_from">Aanwijzingen vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
@@ -1214,7 +1214,7 @@
 	
     <string name="base_world_map">Basis-wereldkaart</string>
     <string name="map_magnifier">Kaartvergrootglas</string>
-    <string name="route_is_too_long">"De afstand tot de bestemming is meer dan 200 km. De routeberekening kan hierdoor erg lang duren (of zelfs  mislukken). Door tussenpunten toe te voegen, wordt de routeberekening sneller."</string>
+    <string name="route_is_too_long">"De afstand tot de bestemming is meer dan 200 km. De routeberekening kan hierdoor erg lang duren (of zelfs  mislukken). Door Tussenpunten toe te voegen, wordt de routeberekening sneller."</string>
     <string name="auto_zoom_none">Geen automatische zoom</string>
     <string name="auto_zoom_close">Zoom naar close-up</string>
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
@@ -1395,7 +1395,7 @@
     <string name="osmo_connect">Verbind met</string>
     <string name="osmo_create_group">Maak een nieuwe groep</string>
     <string name="osmo_server_operation_failed">OsMo server probleem</string>
-    <string name="osmo_activity">OpenStreetMap monitoring (OsMo)</string>
+    <string name="osmo_activity">OpenStreetMap Monitoring (OsMo)</string>
     <string name="osmo_enable_tracker">Verstuur mijn posities</string>
     <string name="osmo_control">OsMo snelle toegang</string>
     
@@ -1509,8 +1509,8 @@
 	<string name="gpx_monitoring_start">Start GPX-opname</string>
 	<string name="gpx_monitoring_stop">Stop GPX-opname</string>
     <string name="gpx_start_new_segment">Start nieuw segment</string>
-    <string name="keep_navigation_service">Houden</string>
-	<string name="stop_navigation_service">Onderbreek</string>
+    <string name="keep_navigation_service">Behouden</string>
+	<string name="stop_navigation_service">Onderbreken</string>
 	<string name="enable_sleep_mode">GPS slaapstand inschakelen</string>
 	<string name="gps_wake_up_timer">GPS ontwaak-interval</string>
 	<string name="sleep_mode_stop_dialog">Onderbreek GPS op achtergrond?</string>
@@ -1525,9 +1525,9 @@
  	<string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine wandelschaal (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Render paden volgens SAC schaal</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes tonen</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Render paden volgens OSMC sporen</string>
+    <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes Kleuren</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
     <string name="osmo_invite">Uitnodiging voor…</string>
@@ -1539,7 +1539,7 @@
     <string name="arrival_distance_factor_at_last">Een paar meter voor de bestemming</string>
     
 <string name="av_camera_pic_size">Foto-formaat</string>
-	<string name="av_camera_pic_size_descr">Kies de grootte van de foto\'s</string>
+	<string name="av_camera_pic_size_descr">Kies de grootte van de Foto\'s</string>
     
 <string name="rendering_value_browse_map_name">Bekijk kaart</string>  
     <string name="rendering_value_car_name">Auto</string>
@@ -1584,7 +1584,7 @@
     <string name="print_route">Route afdrukken</string>
     <string name="speed_limit_exceed">Te hoge snelheid melden bij…</string>
 	<string name="speed_limit_exceed_message">Kies hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>
-	<string name="rendering_category_transport">Openbaar vervoer</string>
+	<string name="rendering_category_transport">Openbaar Vervoer</string>
     <string name="rendering_category_others">Overige kaart attributen</string>
     <string name="map_widget_appearance_rem">Resterende onderdelen</string>
     <string name="map_widget_top">Statusbalk</string>
@@ -1695,7 +1695,7 @@
 	
 	<string name="rename_failed">Hernoemen mislukt.</string>
 	<string name="back_to_map">Terug naar kaart</string>
-	<string name="share_note">Deel opmerking</string>
+	<string name="share_note">Deel Opmerking</string>
 	
     <string name="location_on_map">Locatie:\n Lat %1$s\n Lon %2$s</string>
 	<string name="notes">AV-Notities</string>
@@ -1818,7 +1818,7 @@
     <string name="filter_poi_hint">Filter op naam</string>
     <string name="search_poi_category_hint">Tik om alles te doorzoeken</string>
     <string name="shared_string_open">Open</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">OSM kaart-assistent</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM-kaart: [fixme] tonen</string>
 	<string name="shared_string_manage">Beheer</string>
 	<string name="shared_string_edit">Bewerk</string>
 	<string name="shared_string_places">Plaatsen</string>
@@ -1982,7 +1982,7 @@
     
     
     <string name="shared_string_upload">Upload</string>
-    <string name="osm_edit_created_poi">POI in OSM gemaakt</string>
+    <string name="osm_edit_created_poi">Interessepunt in OSM aangemaakt</string>
     
     <string name="simulate_initial_startup_descr">Laat de app de volgende keer starten alsof deze net is geïnstalleerd. De instellingen blijven wel behouden.</string>
     <string name="simulate_initial_startup">Simuleer eerste start van de app</string>
@@ -2067,18 +2067,18 @@
     <string name="shared_string_location">Locatie</string>
     <string name="osm_edit_modified_poi">Gewijzigde OSM POI</string>
     <string name="osm_edit_deleted_poi">Gewiste OSM POI</string>
-    <string name="context_menu_item_open_note">Open OSM-opmerking</string>
-    <string name="osm_edit_reopened_note">Heropende OSM-opmerking</string>
-    <string name="osm_edit_commented_note">OSM-opmerking met commentaar</string>
-    <string name="osm_edit_removed_note">OSM-opmerking gewist</string>
-	<string name="osm_edit_created_note">OSM-opmerking gemaakt</string>
-	<string name="osn_bug_name">OSM-opmerking</string>
-	<string name="osn_add_dialog_title">Maak opmerking</string>
+    <string name="context_menu_item_open_note">OSM-Opmerking aanmaken</string>
+    <string name="osm_edit_reopened_note">Heropende OSM-Opmerking</string>
+    <string name="osm_edit_commented_note">OSM-Opmerking met commentaar</string>
+    <string name="osm_edit_removed_note">OSM-Opmerking gewist</string>
+	<string name="osm_edit_created_note">OSM-Opmerking gemaakt</string>
+	<string name="osn_bug_name">OSM-Opmerking</string>
+	<string name="osn_add_dialog_title">OSM-Opmerking aanmaken</string>
 	<string name="osn_comment_dialog_title">Voeg commentaar toe</string>
 	<string name="osn_reopen_dialog_title">Heropen notitie</string>
 	<string name="osn_close_dialog_title">Sluit notitie</string>
-	<string name="osn_add_dialog_success">Notitie aangemaakt</string>
-	<string name="osn_add_dialog_error">Er was een probleem: notitie niet aangemaakt</string>
+	<string name="osn_add_dialog_success">OSM-Opmerking aangemaakt</string>
+	<string name="osn_add_dialog_error">Er was een probleem: OSM-Opmerking niet aangemaakt</string>
 	<string name="osn_close_dialog_success">Notitie is gesloten</string>
 	<string name="osn_close_dialog_error">Er was een probleem: notitie is niet afgesloten</string>
 	<string name="osm_save_offline">Bewaar voor off-line gebruik</string>
@@ -2102,7 +2102,7 @@
     
     <string name="dashboard_or_drawer_title">Kies tussen dashboard of menu</string>
     <string name="please_specify_poi_type_only_from_list">Geef het juiste type-POI of sla dit over</string>
-    <string name="access_from_map_description">Menu-knop opent dashboard in plaats van menu</string>
+    <string name="access_from_map_description">Menu-knop opent Dashboard in plaats van Menu</string>
     <string name="access_from_map">Openen vanaf de kaart</string>
     <string name="use_dashboard_btn">Gebruik dashboard</string>
     <string name="use_drawer_btn">Gebruik menu</string>
