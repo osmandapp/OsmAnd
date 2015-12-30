@@ -373,7 +373,7 @@
     <string name="map_version_changed_info">伺服器現有的地圖與您目前的程式版本不相容，請先更新成最新的版本再下載使用它們。</string>
     <string name="poi_filter_nominatim">線上 Nominatim</string>
     <string name="search_position_current_location_search">位置查尋中…</string>
-    <string name="search_position_current_location_found">位置 (已找到)</string>
+    <string name="search_position_current_location_found">我的位置 (找到)</string>
     <string name="search_position_address">地址…</string>
     <string name="search_position_favorites">我的最愛…</string>
     <string name="search_position_undefined">未定義</string>
