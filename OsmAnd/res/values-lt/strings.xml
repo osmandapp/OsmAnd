@@ -2057,7 +2057,7 @@
     <string name="lang_fy">Vakarų fryzų</string>
     <string name="lang_als">Albanų (toskų)</string>
     <string name="available_maps">Galimi žemėlapiai</string>
-    <string name="impassable_road_desc">Pasirinkite keliu, kurių norite išvengti kelionėje</string>
+    <string name="impassable_road_desc">Pasirinkite kelius, kurių norite išvengti kelionėje</string>
     <string name="shared_string_sound">Garsas</string>
     <string name="share_osm_edits_subject">OSM redagavimai atlikti OsmAnd pagalba</string>
     <string name="rendering_attr_currentTrackColor_description">GPX spalva</string>
@@ -2073,8 +2073,8 @@
     <string name="rec_split_desc">Perrašyti klipus kai naudojama vieta didesnė nei saugyklos dydis</string>
     <string name="rec_split_clip_length">Klipo ilgis</string>
     <string name="rec_split_clip_length_desc">Kiekvieno klipo ilgis nebus didesnis nei nurodytas laiko intervalas</string>
-    <string name="rec_split_storage_size">Saugyklos vieta</string>
-    <string name="rec_split_storage_size_desc">Maksimalus saugyklos kurią gali užimti įrašyti klipai dydis</string>
+    <string name="rec_split_storage_size">Saugyklos dydis</string>
+    <string name="rec_split_storage_size_desc">Maksimalus saugyklos, kurią gali užimti įrašyti klipai, dydis</string>
     <string name="live_updates">Tiesioginiai atnaujinimai</string>
     <string name="select_voice_provider">Pasirinkti balso nurodymus</string>
     <string name="select_voice_provider_descr">Pasirinkti arba parsiųsti balso nurodymus jūsų kalbai</string>
@@ -2082,4 +2082,15 @@
     <string name="shared_string_near">Netoliese</string>
     <string name="av_audio_bitrate">Audio bitų sparta</string>
     <string name="av_audio_bitrate_descr">Pasirinkite audio bitų spartą</string>
+    <string name="release_2_2">" • New context-sensitive UI for tapping locations on the map and on other screens\n\n • Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n • Configure which and how cards are displayed on the dashboard\n\n • Bypass the dashboard if you like menu-based app control\n\n • To download maps, regions can be directly selected by tapping on the world map\n\n • POI Search now supports more specific queries\n\n • Pagerintas LV ir OSM redagavimo funkcionalumas\n\n • Perdaryti žemėlapio atsisiuntimo struktūra bei sąsaja\n\n ir dar daugiau… "</string>
+    <string name="access_from_map_description">Meniu mygtukas aktyvuoja duomenų skydelį, ne meniu</string>
+    <string name="use_dashboard_btn">Naudoti duomenų skydelį</string>
+    <string name="dashboard_or_drawer_description">Sukurta nauja galimybė naudoti programėlę duomenų skydelio arba statinio meniu pagalba. Savo pasirinkimą galite bet kada pakeisti duomenų skydelio nustatymuose.</string>
+    <string name="updates_size_pattern">Atnaujinimai: %s</string>
+    <string name="last_map_change">Paskutinįkart žemėlapis keistas: %s</string>
+    <string name="hourly">Kas valandą</string>
+    <string name="daily">Kasdien</string>
+    <string name="weekly">Kas savaitę</string>
+    <string name="morning">Rytą</string>
+    <string name="Night">Naktį</string>
     </resources>
