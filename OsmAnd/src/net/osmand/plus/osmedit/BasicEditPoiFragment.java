@@ -251,6 +251,7 @@ public class BasicEditPoiFragment extends Fragment
 			LinearLayout timeListContainer = (LinearLayout) view.findViewById(R.id.timeListContainer);
 
 			ImageButton deleteItemImageButton = (ImageButton) view.findViewById(R.id.deleteItemImageButton);
+			Button addTimeSpanButton = (Button) view.findViewById(R.id.addTimeSpanButton);
 
 			if (openingHours.getRules().get(position) instanceof BasicOpeningHourRule) {
 				final OpeningHoursParser.BasicOpeningHourRule rule =
@@ -320,6 +321,15 @@ public class BasicEditPoiFragment extends Fragment
 				}
 
 				deleteItemImageButton.setVisibility(View.GONE);
+				addTimeSpanButton.setVisibility(View.VISIBLE);
+				addTimeSpanButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						OpeningHoursHoursDialogFragment.createInstance(rule, position, true,
+								startTimes.size()).show(getChildFragmentManager(),
+								"TimePickerDialogFragment");
+					}
+				});
 			} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
 				daysTextView.setText(openingHours.getRules().get(position).toRuleString(false));
 				timeListContainer.removeAllViews();
@@ -333,6 +343,7 @@ public class BasicEditPoiFragment extends Fragment
 						updateViews();
 					}
 				});
+				addTimeSpanButton.setVisibility(View.GONE);
 			}
 			return view;
 		}

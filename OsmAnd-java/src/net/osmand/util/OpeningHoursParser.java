@@ -547,6 +547,10 @@ public class OpeningHoursParser {
 			endTimes.add(endTime);
 		}
 
+		public int timesSize() {
+			return startTimes.size();
+		}
+
 		public void deleteTimeRange(int position) {
 			startTimes.removeAt(position);
 			endTimes.removeAt(position);

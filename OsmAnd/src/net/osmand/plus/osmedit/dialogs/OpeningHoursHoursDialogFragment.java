@@ -33,9 +33,12 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		final int rulePosition = args.getInt(RULE_POSITION);
 		final int timePosition = args.getInt(TIME_POSITION);
 
-		final boolean createNew = rulePosition == -1;
-		AlertDialog.Builder builder =
-				new AlertDialog.Builder(getActivity());
+		boolean newTimeSpan = timePosition == item.timesSize();
+		if (newTimeSpan) {
+			item.addTimeRange(9 * 60, 18 * 60);
+		}
+		final boolean createNew = rulePosition == -1 || newTimeSpan;
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 		int time = isStart ? item.getStartTime(timePosition) : item.getEndTime(timePosition);
 		int hour = time / 60;
