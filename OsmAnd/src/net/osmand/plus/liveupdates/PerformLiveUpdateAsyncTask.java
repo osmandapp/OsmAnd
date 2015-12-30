@@ -28,10 +28,13 @@ public class PerformLiveUpdateAsyncTask
 		extends AsyncTask<String, Object, IncrementalChangesManager.IncrementalUpdateList> {
 	private final Context context;
 	private final LocalIndexInfo localIndexInfo;
+	private final boolean forceUpdate;
 
-	public PerformLiveUpdateAsyncTask(Context context, LocalIndexInfo localIndexInfo) {
+	public PerformLiveUpdateAsyncTask(Context context, LocalIndexInfo localIndexInfo,
+									  boolean forceUpdate) {
 		this.context = context;
 		this.localIndexInfo = localIndexInfo;
+		this.forceUpdate = forceUpdate;
 	}
 
 	@Override
@@ -89,7 +92,7 @@ public class PerformLiveUpdateAsyncTask
 				boolean downloadViaWiFi =
 						LiveUpdatesHelper.preferenceDownloadViaWiFi(localIndexInfo, settings).get();
 				if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
-					if (settings.isWifiConnected() || !downloadViaWiFi) {
+					if (forceUpdate || settings.isWifiConnected() || !downloadViaWiFi) {
 						long szLong = 0;
 						int i = 0;
 						for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {

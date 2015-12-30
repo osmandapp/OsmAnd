@@ -64,7 +64,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final CheckBox downloadOverWiFiCheckBox = (CheckBox) view.findViewById(R.id.downloadOverWiFiSwitch);
 		final Spinner updateFrequencySpinner = (Spinner) view.findViewById(R.id.updateFrequencySpinner);
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
-		final View updateTimesOfDayList = view.findViewById(R.id.updateTimesOfDayList);
+		final View updateTimesOfDayLayout = view.findViewById(R.id.updateTimesOfDayLayout);
 		final TextView sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
 //		final Button removeUpdatesButton = (Button) view.findViewById(R.id.removeUpdatesButton);
 
@@ -96,6 +96,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		updateTimesOfDaySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
 				R.layout.action_spinner_item,
 				getResources().getStringArray(R.array.update_times_of_day)));
+		updateTimesOfDaySpinner.setSelection(timeOfDayPreference.get());
 
 		updateFrequencySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
 				R.layout.action_spinner_item,
@@ -107,11 +108,11 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				UpdateFrequency updateFrequency = UpdateFrequency.values()[position];
 				switch (updateFrequency) {
 					case HOURLY:
-						updateTimesOfDayList.setVisibility(View.GONE);
+						updateTimesOfDayLayout.setVisibility(View.GONE);
 						break;
 					case DAILY:
 					case WEEKLY:
-						updateTimesOfDayList.setVisibility(View.VISIBLE);
+						updateTimesOfDayLayout.setVisibility(View.VISIBLE);
 						break;
 				}
 			}
@@ -126,6 +127,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 //			public void onClick(View v) {
 //				changesManager.deleteUpdates(fileNameWithoutExtension);
 //				getLiveUpdatesFragment().notifyLiveUpdatesChanged();
+//				preferenceLastCheck(localIndexInfo, getSettings()).resetToDefault();
 //				updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
 //			}
 //		});
@@ -137,7 +139,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						if (liveUpdatePreference.get() != liveUpdatesSwitch.isChecked()) {
 							liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
 							if (liveUpdatesSwitch.isChecked()) {
-								runLiveUpdate(localIndexInfo);
+								runLiveUpdate(localIndexInfo, false);
 							}
 						}
 						downloadViaWiFiPreference.set(downloadOverWiFiCheckBox.isChecked());
@@ -166,16 +168,16 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				.setNeutralButton(R.string.update_now, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						runLiveUpdate(localIndexInfo);
+						runLiveUpdate(localIndexInfo, true);
 						updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
 					}
 				});
 		return builder.create();
 	}
 
-	void runLiveUpdate(final LocalIndexInfo info) {
+	void runLiveUpdate(final LocalIndexInfo info, boolean forceUpdate) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new PerformLiveUpdateAsyncTask(getActivity(), info).execute(new String[]{fnExt});
+		new PerformLiveUpdateAsyncTask(getActivity(), info, forceUpdate).execute(new String[]{fnExt});
 	}
 
 	private void updateSize(String fileNameWithoutExtension,

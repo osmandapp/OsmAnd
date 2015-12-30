@@ -28,7 +28,7 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 		final OsmandSettings settings = application.getSettings();
 
 		if (!preferenceDownloadViaWiFi(localIndexInfo, settings).get() || wifi.isWifiEnabled()) {
-			new PerformLiveUpdateAsyncTask(context, localIndexInfo).execute(fileName);
+			new PerformLiveUpdateAsyncTask(context, localIndexInfo, false).execute(fileName);
 		} else {
 			PerformLiveUpdateAsyncTask.tryRescheduleDownload(context, settings, localIndexInfo);
 		}

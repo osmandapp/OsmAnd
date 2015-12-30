@@ -127,7 +127,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/updateTimesOfDayList"
+        android:id="@+id/updateTimesOfDayLayout"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginLeft="24dp"
