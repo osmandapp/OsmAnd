@@ -2065,7 +2065,7 @@
     <string name="no_microphone_permission">Az alkalmazásnak nincs jogosultsága elérni a mikrofont.</string>
     <string name="route_distance">Távolság:</string>
     <string name="route_duration">Idő:</string>
-    <string name="update_every">Frissítési gyakoriság</string>
+    <string name="update">Frissítési gyakoriság</string>
     <string name="missing_write_external_storage_permission">Az alkalmazásnak nincs jogosultsága elérni az SD kártyát.</string>
     <string name="last_update">Utolsó frissítés: %s</string>
 </resources>

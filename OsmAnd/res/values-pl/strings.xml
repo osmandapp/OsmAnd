@@ -2084,7 +2084,7 @@
     <string name="only_download_over_wifi">Pobieraj tylko przez WiFi</string>
     <string name="live_update">Uaktualniaj na bieżąco</string>
     <string name="update_now">Aktualizuj teraz</string>
-<string name="update_every">Aktualizacja co</string>
+<string name="update">Aktualizacja co</string>
     <string name="route_distance">Odległość:</string>
     <string name="route_duration">Czas:</string>
     <string name="looking_up_address">Wyszukiwanie adresu</string>

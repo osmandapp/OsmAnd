@@ -2002,7 +2002,7 @@
     <string name="no_address_found">Dirección indeterminada</string>
 	<string name="looking_up_address">Buscando dirección</string>
     <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
-    <string name="update_every">Actualizar cada</string>
+    <string name="update">Actualizar cada</string>
     <string name="only_download_over_wifi">Descargar sólo por WiFi</string>
     <string name="live_update">Actualización en vivo</string>
 <string name="update_now">Actualizar ahora</string>

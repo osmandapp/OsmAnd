@@ -80,6 +80,16 @@ public class LiveUpdatesFragment extends Fragment {
 		listView.addFooterView(bottomShadowView);
 		adapter = new LocalIndexesAdapter(this);
 		listView.setAdapter(adapter);
+		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+				final FragmentManager fragmentManager = getChildFragmentManager();
+				LiveUpdatesSettingsDialogFragment
+						.createInstance(adapter.getChild(groupPosition, childPosition))
+						.show(fragmentManager, "settings");
+				return true;
+			}
+		});
 		new LoadLocalIndexTask(adapter, this).execute();
 		return view;
 	}
@@ -93,7 +103,9 @@ public class LiveUpdatesFragment extends Fragment {
 	}
 
 	public void notifyLiveUpdatesChanged() {
-		adapter.notifyLiveUpdatesChanged();
+		if (adapter != null) {
+			adapter.notifyLiveUpdatesChanged();
+		}
 	}
 
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
@@ -318,8 +330,6 @@ public class LiveUpdatesFragment extends Fragment {
 			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
 			IncrementalChangesManager changesManager = context.getResourceManager().getChangesManager();
-			final String fileNameWithoutExtension =
-					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
 
 			nameTextView.setText(getNameToDisplay(item, fragment.getMyActivity()));
 			AbsListView.LayoutParams layoutParams = (AbsListView.LayoutParams) view.getLayoutParams();
@@ -347,6 +357,8 @@ public class LiveUpdatesFragment extends Fragment {
 			}
 			view.setLayoutParams(layoutParams);
 
+			final String fileNameWithoutExtension =
+					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 			final long lastCheck = preferenceLastCheck(item, fragment.getSettings()).get();
 			String lastCheckString = formatDateTime(fragment.getActivity(),
@@ -361,7 +373,6 @@ public class LiveUpdatesFragment extends Fragment {
 				}
 			};
 			options.setOnClickListener(clickListener);
-			view.setOnClickListener(clickListener);
 
 			if (isLastChild) {
 				divider.setVisibility(View.GONE);

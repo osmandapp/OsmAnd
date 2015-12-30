@@ -2133,7 +2133,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="use_drawer_btn">Use menu</string>
     <string name="dashboard_or_drawer_title">Dashboard or menu control</string>
     <string name="dashboard_or_drawer_description">There is a new choice to primarily control the app via the flexible dashboard or a static menu. Your choice can always be changed in the dashboard settings.</string>
-    <string name="update_every">Update every</string>
+    <string name="update">Update</string>
     <string name="only_download_over_wifi">Only download over WiFi</string>
     <string name="live_update">Live update</string>
     <string name="update_now">Update now</string>

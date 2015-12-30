@@ -2030,7 +2030,7 @@
     <string name="no_address_found">Ingen adress angiven</string>
 	<string name="looking_up_address">Slår upp adressen</string>
     <string name="rendering_attr_horseRoutes_name">Hästleder</string>
-    <string name="update_every">Uppdatera varje</string>
+    <string name="update">Uppdatera varje</string>
     <string name="only_download_over_wifi">Hämta endast via WiFi</string>
     <string name="live_update">Direktuppdatering</string>
 <string name="update_now">Uppdatera nu</string>

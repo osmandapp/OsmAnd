@@ -133,7 +133,6 @@
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="android:textColorSecondary">@color/inactive_item_orange</item>
         <item name="android:textColorHint">@color/inactive_item_orange</item>
-        <item name="pstsIndicatorColor">@color/osmand_orange</item>
         <item name="colorAccent">@color/color_white</item>
         <!--<item name="actionMenuTextColor">@color/color_white</item>-->
     </style>

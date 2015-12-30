@@ -2069,7 +2069,7 @@
     <string name="av_audio_bitrate_descr">Sélectionnez le bitrate audio</string>
     <string name="no_address_found">Impossible de déterminer l\'adresse</string>
 	<string name="looking_up_address">Recherche de l\'adresse</string>
-    <string name="update_every">Mettre à jour tout les</string>
+    <string name="update">Mettre à jour tout les</string>
     <string name="only_download_over_wifi">Télécharger uniquement en WIFI</string>
     <string name="live_update">Mise à jour en temps réel</string>
 <string name="rendering_attr_horseRoutes_name">Randonnée à cheval</string>

@@ -1951,7 +1951,7 @@
     <string name="no_address_found">Sem endereço determinado</string>
 	<string name="looking_up_address">Endereço procurado</string>
     <string name="rendering_attr_horseRoutes_name">Rotas a cavalo</string>
-    <string name="update_every">Atualizar tudo</string>
+    <string name="update">Atualizar tudo</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
 <string name="update_now">Atualizar agora</string>

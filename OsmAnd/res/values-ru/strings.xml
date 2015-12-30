@@ -1866,7 +1866,7 @@
     <string name="routing_attr_avoid_stairs_name">Избегать лестниц</string>
     <string name="routing_attr_avoid_stairs_description">Избегать лестниц</string>
     <string name="routing_attr_avoid_borders_name">Избегать пересечение бордюра</string>
-    <string name="update_every">Обновлять каждые</string>
+    <string name="update">Обновлять каждые</string>
     <string name="only_download_over_wifi">Загружать только через WiFi</string>
     <string name="update_now">Обновить сейчас</string>
     <string name="missing_write_external_storage_permission">Приложению не разрешена запись на карту памяти</string>

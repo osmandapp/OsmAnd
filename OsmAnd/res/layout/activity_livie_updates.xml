@@ -10,12 +10,13 @@
     tools:context="net.osmand.plus.osmedit.EditPoiDialogFragment">
 
     <android.support.design.widget.TabLayout
-        android:theme="?attr/appbar_layout_theme"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/pstsTabBackground"
+        android:theme="?attr/appbar_layout_theme"
         app:layout_scrollFlags="scroll"
-        android:background="?attr/pstsTabBackground"/>
+        app:tabIndicatorColor="?attr/pstsIndicatorColor"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

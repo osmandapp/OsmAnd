@@ -1876,7 +1876,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="av_audio_bitrate">Taxa de bits de l\'àudio</string>
     <string name="av_audio_bitrate_descr">Seleccioneu la taxa de bits de l\'àudio</string>
     <string name="looking_up_address">Consulta per adreça</string>
-    <string name="update_every">Actualitza tots</string>
+    <string name="update">Actualitza tots</string>
     <string name="only_download_over_wifi">Baixades només amb WIFI</string>
     <string name="live_update">Actualitza al moment</string>
     <string name="update_now">Actualitza ara</string>

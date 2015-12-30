@@ -2035,7 +2035,7 @@
     <string name="routing_attr_avoid_stairs_description">Vengti laiptų</string>
     <string name="poi_dialog_reopen">Atidaryti iš naujo</string>
     <string name="poi_context_menu_modify_osm_change">Redaguoti LV</string>
-    <string name="update_every">Atnaujinti kas</string>
+    <string name="update">Atnaujinti kas</string>
     <string name="only_download_over_wifi">Atsisiųsti tik naudojant Wi-Fi</string>
     <string name="update_now">Atnaujinti tuoj pat</string>
     <string name="missing_write_external_storage_permission">Programėlė neturi teisių įrašyti į atminties kortelę</string>
