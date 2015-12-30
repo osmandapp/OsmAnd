@@ -2083,4 +2083,10 @@
     <string name="update_time">Час абнаўленьня</string>
 <string name="updates_size">Абнаўленьні: %s</string>
     <string name="last_map_change">Апошняя зьмена мапы: %s</string>
-</resources>
+<string name="shared_string_not_selected">Ня выбрана</string>
+    <string name="hourly">Штогадзінна</string>
+    <string name="daily">Штодзённа</string>
+    <string name="weekly">Штотыднёва</string>
+    <string name="morning">Раніца</string>
+    <string name="Night">Ноч</string>
+    </resources>
