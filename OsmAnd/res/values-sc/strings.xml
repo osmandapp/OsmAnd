@@ -603,7 +603,7 @@
     <string name="map_widget_fluorescent">Camineras fluorescentes</string>
     <string name="map_widget_show_ruler">Iscala gràfica</string>
     <string name="map_widget_view_direction">Diretzione de sa visuale</string>
-    <string name="map_widget_transparent">Bisura trasparente</string>
+    <string name="map_widget_transparent">Butones trasparentes</string>
     <string name="bg_service_sleep_mode_off">Abìlita\n modalidade \"de isfundu\"</string>
     <string name="bg_service_sleep_mode_on">Firma\n modalidade \"de isfundu\"</string>
     <string name="gps_wakeup_interval">Intervallu de ischidada GPS: %s</string>
@@ -2060,4 +2060,17 @@
 <string name="update_date_pattern">Agiornamentu: %s</string>
     <string name="update_time">Tempus de agiornamentu</string>
     <string name="updates_size_pattern">Agiornamentos: %s</string>
+<string name="shared_string_not_selected">Non ischertadu</string>
+    <string name="rec_split_desc">Torra a iscrìere sas notas si non b\'est logu bastante in sa memòria</string>
+    <string name="rec_split_clip_length">"Longària  de sa nota"</string>
+    <string name="rec_split_clip_length_desc">Totu sas notas no ant a barigare sa longària impostada</string>
+    <string name="rec_split_storage_size">Mannària de sa memòria</string>
+    <string name="rec_split_storage_size_desc">Cantidade de memòria chi podet èssere impreada dae su totale de sas notas</string>
+    <string name="last_map_change">Ùrtima modìfica de sa mapa: %s</string>
+    <string name="hourly">Cada ora</string>
+    <string name="daily">Cada die</string>
+    <string name="weekly">Cada chida</string>
+    <string name="morning">Mangianu</string>
+    <string name="Night">Note</string>
+    <string name="osm_live">OSM Live</string>
 </resources>

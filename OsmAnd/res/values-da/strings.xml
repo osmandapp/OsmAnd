@@ -2218,4 +2218,5 @@
     <string name="morning">Morgen</string>
     <string name="Night">Aften</string>
 <string name="shared_string_not_selected">Ikke markeret</string>
-    </resources>
+    <string name="osm_live">OSM Live</string>
+</resources>

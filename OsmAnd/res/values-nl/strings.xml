@@ -2155,4 +2155,6 @@
     <string name="weekly">Elke week</string>
     <string name="morning">\'s ochtends</string>
     <string name="Night">\'s avonds</string>
+<string name="shared_string_not_selected">Niet geselecteerd</string>
+    <string name="osm_live">OSM Live</string>
 </resources>
