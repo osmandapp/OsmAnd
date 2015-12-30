@@ -1412,4 +1412,7 @@
 	<string name="poi_aerialway_summer_access_both">Zomer: ingang en uitgang</string>
 
 	<string name="poi_stars_1">1 Sterren-hotel</string>
+	<string name="poi_rooms">Kamers</string>
+
+	<string name="poi_payment_none">Gratis</string>
 	</resources>
