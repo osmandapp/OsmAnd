@@ -103,8 +103,8 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/bg_color"
                 app:layout_scrollFlags="scroll"
-                app:tabIndicatorColor="?attr/pstsIndicatorColor"
-                app:tabSelectedTextColor="?attr/pstsIndicatorColor"
+                app:tabIndicatorColor="@color/osmand_orange"
+                app:tabSelectedTextColor="@color/osmand_orange"
                 app:tabTextColor="@android:color/darker_gray"/>
         </android.support.design.widget.AppBarLayout>
 

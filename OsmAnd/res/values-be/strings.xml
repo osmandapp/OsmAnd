@@ -2064,7 +2064,7 @@
     <string name="route_distance">Адлегласьць:</string>
     <string name="route_duration">Час:</string>
     <string name="rendering_attr_horseRoutes_name">Конныя маршруты</string>
-    <string name="update_every">Абнавіць кожны</string>
+    <string name="update">Абнавіць кожны</string>
     <string name="only_download_over_wifi">Сьцягваць толькі праз WiFi</string>
     <string name="live_update">Бягучае абнаўленьне</string>
     <string name="update_now">Абнавіць зараз</string>

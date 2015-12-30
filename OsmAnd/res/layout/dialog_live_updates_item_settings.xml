@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="wrap_content"
         android:background="@color/color_dialog_buttons_light"
         android:orientation="vertical"
         android:paddingLeft="24dp"
@@ -18,7 +18,7 @@
             android:id="@+id/regionNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="27dp"
+            android:layout_marginBottom="8dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/color_white"
             tools:text="Flevoland"/>
@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:textColor="@color/color_white"
             android:textSize="12sp"
@@ -110,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="@string/update_every"
+            android:text="@string/update"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"/>
 
@@ -120,6 +121,7 @@
             style="@style/OsmandLightTheme.Spinner"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="right"
             android:entries="@array/update_frequencies_array"
             android:paddingLeft="0dp"/>
     </LinearLayout>
@@ -167,15 +169,6 @@
             android:textSize="16sp"
             tools:text="Updates: 65NB"/>
 
-        <Button
-            android:id="@+id/removeUpdatesButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:gravity="center_vertical|right"
-            android:textColor="?attr/color_dialog_buttons"
-            android:text="@string/shared_string_clear"/>
     </LinearLayout>
 
 

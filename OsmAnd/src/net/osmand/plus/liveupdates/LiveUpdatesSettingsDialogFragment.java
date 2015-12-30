@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -67,7 +66,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
 		final View updateTimesOfDayList = view.findViewById(R.id.updateTimesOfDayList);
 		final TextView sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
-		final Button removeUpdatesButton = (Button) view.findViewById(R.id.removeUpdatesButton);
+//		final Button removeUpdatesButton = (Button) view.findViewById(R.id.removeUpdatesButton);
 
 		regionNameTextView.setText(getNameToDisplay(localIndexInfo, getMyActivity()));
 		final String fileNameWithoutExtension =
@@ -122,14 +121,14 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 			}
 		});
-		removeUpdatesButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				changesManager.deleteUpdates(fileNameWithoutExtension);
-				getLiveUpdatesFragment().notifyLiveUpdatesChanged();
-				updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
-			}
-		});
+//		removeUpdatesButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				changesManager.deleteUpdates(fileNameWithoutExtension);
+//				getLiveUpdatesFragment().notifyLiveUpdatesChanged();
+//				updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
+//			}
+//		});
 
 		builder.setView(view)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {

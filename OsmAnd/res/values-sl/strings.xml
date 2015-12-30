@@ -2046,7 +2046,7 @@
     <string name="looking_up_address">Iskanje naslova</string>
     <string name="route_distance">Razdalja:</string>
     <string name="route_duration">Čas:</string>
-    <string name="update_every">Posodobi vsakih</string>
+    <string name="update">Posodobi vsakih</string>
     <string name="only_download_over_wifi">Prejmi le preko WiFi</string>
     <string name="live_update">Posodobitev v živo</string>
     <string name="update_now">Posodobi takoj</string>

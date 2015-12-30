@@ -2122,7 +2122,7 @@
     <string name="av_audio_bitrate_descr">Kies audio bitrate</string>
     <string name="looking_up_address">Adres wordt gezocht</string>
     <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
-    <string name="update_every">Controle op Update</string>
+    <string name="update">Controle op Update</string>
     <string name="only_download_over_wifi">Alleen downloaden via WiFi</string>
     <string name="live_update">Live Update</string>
 <string name="update_now">Nu Controleren</string>

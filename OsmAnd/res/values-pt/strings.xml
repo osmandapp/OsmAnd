@@ -1921,7 +1921,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="Night">Noite</string>
 <string name="dashboard_or_drawer_description">Há uma nova opção para controlar principalmente o aplicativo através do painel flexível (Dashboard) ou um menu estático. A sua escolha pode sempre ser alterada nas configurações do painel.</string>
     <string name="dashboard_or_drawer_title">Dashboard ou menu de controle</string>
-    <string name="update_every">Actualizar em cada</string>
+    <string name="update">Actualizar em cada</string>
     <string name="only_download_over_wifi">Apenas download com WiFi</string>
     <string name="live_update">Actualização sincronizada</string>
     <string name="update_now">Actualizar agora</string>

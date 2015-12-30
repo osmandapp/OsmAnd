@@ -2215,7 +2215,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="show_free_version_banner">Показати банер безкоштовної версії</string>
     <string name="use_dashboard_btn">Використовувати домашню сторінку</string>
     <string name="use_drawer_btn">Використовувати меню</string>
-    <string name="update_every">Оновлювати кожні</string>
+    <string name="update">Оновлювати кожні</string>
     <string name="share_osm_edits_subject">OSM правки, поширені через OsmAnd</string>
     <string name="rendering_attr_hideProposed_name">Приховати заплановані об\'єкти</string>
     <string name="save_poi_without_poi_type_message">Ви дійсно хочете зберегти POI, не вказавши його тип?</string>

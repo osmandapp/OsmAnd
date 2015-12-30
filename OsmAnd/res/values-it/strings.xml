@@ -2096,7 +2096,7 @@
     <string name="no_address_found">Nessun indirizzo trovato</string>
     <string name="looking_up_address">Ricerca dell\'indirizzo in corso</string>
     <string name="routing_attr_avoid_borders_name">Non superare i confini</string>
-    <string name="update_every">Aggiorna ogni</string>
+    <string name="update">Aggiorna ogni</string>
     <string name="only_download_over_wifi">Scarica solo da rete WiFi</string>
     <string name="live_update">Aggiornamenti in tempo reale</string>
 <string name="lang_fy">Frisone occidentale</string>

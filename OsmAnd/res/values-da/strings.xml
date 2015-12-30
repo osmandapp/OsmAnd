@@ -2183,7 +2183,7 @@
     <string name="no_address_found">Kan ikke bestemme adresse</string>
 	<string name="looking_up_address">Søger efter adressen</string>
     <string name="rendering_attr_horseRoutes_name">Rideruter</string>
-    <string name="update_every">Opdateringsinterval</string>
+    <string name="update">Opdateringsinterval</string>
     <string name="only_download_over_wifi">Hent kun med WiFi</string>
     <string name="live_update">Realtidsopdatering</string>
 <string name="update_now">Opdater nu</string>

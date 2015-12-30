@@ -2042,7 +2042,7 @@
     <string name="route_distance">Distàntzia:</string>
     <string name="route_duration">Tempus:</string>
     <string name="rendering_attr_horseRoutes_name">Àndalas a caddu</string>
-    <string name="update_every">Agiorna cada</string>
+    <string name="update">Agiorna cada</string>
     <string name="only_download_over_wifi">Iscàrriga petzi pro mèdiu de una retza WiFi</string>
     <string name="live_update">Agiornamentos in tempus reale</string>
     <string name="update_now">Agiorna como</string>

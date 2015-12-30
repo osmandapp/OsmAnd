@@ -2007,7 +2007,7 @@
 	<string name="number_of_rows_in_dash">Брой редове %1$s</string>
 	<string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Вашият избор може да бъде променен по-късно.</string>
 <string name="rendering_attr_horseRoutes_name">Пътеки за конна езда</string>
-    <string name="update_every">Обновяване на всеки</string>
+    <string name="update">Обновяване на всеки</string>
     <string name="only_download_over_wifi">Сваляне само през WiFi</string>
     <string name="live_update">Актуализиране на момента</string>
     <string name="update_now">Актуализирай сега</string>

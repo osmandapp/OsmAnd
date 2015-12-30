@@ -9,4 +9,5 @@
     android:groupIndicator="@null"
     android:headerDividersEnabled="false"
     android:orientation="vertical"
+    android:drawSelectorOnTop="true"
     tools:context=".liveupdates.LiveUpdatesFragment"/>

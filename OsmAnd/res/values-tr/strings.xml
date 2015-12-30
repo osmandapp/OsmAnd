@@ -1989,7 +1989,7 @@
     <string name="osmo_auth_error_short">Yetkilendirme başarısız oldu</string>
     <string name="osmo_auth_error">OsMo yetkilendirme hata oluştu: %1$s.\nAşağı bir geçici olarak hizmet olabilir veya kayıt süresi.\nYeni kayıt devam etmek istiyor musunuz?</string>
     <string name="osmo_group_information_desc">" -Tüm oluşturulan grupları genel! Anonim olmak istiyorsan, izci kimlikleri üzerinden doğrudan aygıtlarını bağlayın.\n-Özel gruplar için 8 kişi sınırlıdır\nHareketsizlik ya da 2 hafta için sadece 1 kişi faaliyet-grup-ecek var olmak silmek.\n-Sadece davet, ama kontrol grubuna yönetici konsolu için gitmek gerekir gibi grup giriş, sınırlayabilirsiniz.\n-Bir grup oluşturun, ancak diğer koşulları ile lütfen http://osmo.mobi başvurun gerekiyorsa"</string>
-    <string name="update_every">Bütün Güncellemler</string>
+    <string name="update">Bütün Güncellemler</string>
     <string name="only_download_over_wifi">Sadece WiFi üzerinden İndir</string>
     <string name="live_update">Canlı güncelleştirme</string>
 <string name="route_distance">Mesafe:</string>

@@ -2029,7 +2029,7 @@
     <string name="no_address_found">沒有確定地址</string>
 	<string name="looking_up_address">查尋地址</string>
     <string name="rendering_attr_horseRoutes_name">馬道</string>
-    <string name="update_every">更新全部</string>
+    <string name="update">更新全部</string>
     <string name="only_download_over_wifi">只在 WiFi 連線下載</string>
     <string name="live_update">即時更新</string>
 <string name="update_now">立即更新</string>
