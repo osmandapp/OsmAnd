@@ -2064,4 +2064,5 @@
     <string name="morning">早上</string>
     <string name="Night">夜間</string>
 <string name="shared_string_not_selected">未選取</string>
-    </resources>
+    <string name="osm_live">即時 OSM</string>
+</resources>

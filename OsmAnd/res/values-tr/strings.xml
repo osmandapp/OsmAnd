@@ -205,7 +205,7 @@
 	<string name="map_widget_fluorescent">Floresan rotalar</string>
 	<string name="map_widget_show_ruler">Cetvel</string>
 	
-	<string name="map_widget_transparent">Şeffaf skin</string>
+	<string name="map_widget_transparent">Şeffaf widget</string>
 	
 	<string name="gps_wakeup_interval">GPS uyandırma aralığı:%1$s</string>
 	<string name="map_widget_config">Ekranı ayarla</string>
@@ -2009,4 +2009,19 @@
     <string name="update_date_pattern">Güncelleme:% s</string>
     <string name="update_time">Güncelleme zamanı</string>
     <string name="updates_size_pattern">Güncellemeler:% s</string>
+<string name="shared_string_not_selected">Seçilmedi</string>
+    <string name="rec_split">Kaydedici Bölünmüş</string>
+    <string name="rec_split_title">Kullanım Kaydedici Bölünmüş</string>
+    <string name="rec_split_desc">Kullanılan alan depolama boyutu aştığında klipleri yeniden yazmak</string>
+    <string name="rec_split_clip_length">klip uzunluğu</string>
+    <string name="rec_split_clip_length_desc">Kaydedilen her klibin uzunluğunu artık bu belirtilen zaman aralığı olmayacak</string>
+    <string name="rec_split_storage_size">Depolama boyutu</string>
+    <string name="rec_split_storage_size_desc">Tüm kaydedilen kliplerin tarafından işgal edilebilir alan miktarı</string>
+    <string name="last_map_change">Son harita değişikliği:% s</string>
+    <string name="hourly">Saatlik</string>
+    <string name="daily">Günlük</string>
+    <string name="weekly">Haftalık</string>
+    <string name="morning">Sabah</string>
+    <string name="Night">Gece</string>
+<string name="osm_live">OSM Canlı</string>
 </resources>
