@@ -784,7 +784,7 @@
   <string name="osm_editing_plugin_description">Gebruik deze plugin om bij te dragen aan OpenStreetMap (OSM), bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-opmerkingen, en door GPX-tracks te uploaden. OSM is een wereldwijd community-driven project om een wereldwijde kaart te maken. Voor details zie http://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM-aanmeldgegevens zijn ingevuld in de app.</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken…</string>
-  <string name="search_position_current_location_found">Positie (Gevonden)</string>
+  <string name="search_position_current_location_found">Mijn positie (gevonden)</string>
   <string name="search_position_address">Adres…</string>
   <string name="search_position_favorites">Favorieten…</string>
   <string name="search_position_undefined">Ongedefinieerd</string>
