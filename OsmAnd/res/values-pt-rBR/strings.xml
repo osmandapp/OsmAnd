@@ -1970,7 +1970,7 @@
     <string name="last_update">Última atualização: %s</string>
 <string name="update_date_pattern">Atualização: %s</string>
     <string name="update_time">Tempo de atualização</string>
-<string name="updates_size_pattern">Atualizações: %s</string>
+<string name="updates_size">Atualizações: %s</string>
 <string name="rec_split">Dividir gravação</string>
     <string name="rec_split_title">Usar o separador de gravação</string>
     <string name="rec_split_desc">Sobrescrever clipes quando o espaço usado exceder o limite de armazenamento</string>

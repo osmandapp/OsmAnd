@@ -2089,7 +2089,7 @@
     <string name="last_update">Dernière mise à jour : %s</string>
 <string name="update_date_pattern">Mise à jour : %s</string>
     <string name="update_time">Heure de mise à jour</string>
-<string name="updates_size_pattern">Mises à jour : %s</string>
+<string name="updates_size">Mises à jour : %s</string>
 <string name="last_map_change">Dernier carte modifiée : %s</string>
 <string name="shared_string_not_selected">Non sélectionné</string>
     </resources>

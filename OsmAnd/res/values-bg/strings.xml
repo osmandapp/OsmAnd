@@ -2029,6 +2029,6 @@
     <string name="rec_split_clip_length_desc">Всеки записан видео клип ще бъде ограничен от този размер</string>
     <string name="rec_split_storage_size">Място за съхранение</string>
     <string name="rec_split_storage_size_desc">Големина на определената за видео клипове памет</string>
-    <string name="updates_size_pattern">Актуализации: %s</string>
+    <string name="updates_size">Актуализации: %s</string>
     <string name="last_map_change">Последна промяна на картата: %s</string>
 </resources>

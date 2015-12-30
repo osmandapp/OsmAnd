@@ -2023,7 +2023,7 @@
     <string name="update_time">Tiempo de actualización</string>
 <string name="size_pattern">Tamaño: %s</string>
 <string name="rec_split_storage_size">Tamaño del almacenamiento</string>
-    <string name="updates_size_pattern">Actualizaciones: %s</string>
+    <string name="updates_size">Actualizaciones: %s</string>
     <string name="last_map_change">Último cambio de mapa: %s</string>
 <string name="rec_split">Dividir grabación</string>
     <string name="rec_split_title">Usar la división de grabación</string>

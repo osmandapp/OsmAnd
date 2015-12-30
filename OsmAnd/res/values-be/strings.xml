@@ -2081,6 +2081,6 @@
     <string name="impassable_road_desc">Выберыце дарогі, якія вы хочаце пазьбягаць падчас навігацыі</string>
     <string name="update_date_pattern">Абнаўленьне: %s</string>
     <string name="update_time">Час абнаўленьня</string>
-<string name="updates_size_pattern">Абнаўленьні: %s</string>
+<string name="updates_size">Абнаўленьні: %s</string>
     <string name="last_map_change">Апошняя зьмена мапы: %s</string>
 </resources>

@@ -2030,7 +2030,7 @@
     <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el tiempo de intervalo determinado</string>
     <string name="rec_split_storage_size">Tamaño de almacenamiento</string>
     <string name="rec_split_storage_size_desc">La cantidad de espacio que pueden ocupar todos los clips grabados</string>
-    <string name="updates_size_pattern">Actualizaciones: %s</string>
+    <string name="updates_size">Actualizaciones: %s</string>
     <string name="last_map_change">Último cambio de mapa: %s</string>
     <string name="hourly">Cada hora</string>
     <string name="daily">Diariamente</string>

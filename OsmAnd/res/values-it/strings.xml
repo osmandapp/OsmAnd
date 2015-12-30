@@ -2123,7 +2123,7 @@
     <string name="rec_split_storage_size">Dimensione della memoria</string>
     <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupato dal totale delle note</string>
     <string name="update_time">Ora di aggiornamento</string>
-    <string name="updates_size_pattern">Aggiornamenti: %s</string>
+    <string name="updates_size">Aggiornamenti: %s</string>
     <string name="last_map_change">Ultimo cambiamento della mappa: %s</string>
     <string name="hourly">Orario</string>
     <string name="daily">Giornaliero</string>

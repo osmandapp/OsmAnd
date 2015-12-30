@@ -2050,7 +2050,7 @@
 <string name="update_time">Uppdateringstid</string>
 <string name="update_date_pattern">Uppdatering: %s</string>
     <string name="size_pattern">Storlek: %s</string>
-<string name="updates_size_pattern">Uppdateringar: %s</string>
+<string name="updates_size">Uppdateringar: %s</string>
 <string name="last_map_change">Senaste kartändring: %s</string>
 <string name="Night">Natt</string>
 <string name="hourly">Varje timma</string>

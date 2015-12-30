@@ -2064,7 +2064,7 @@
     <string name="last_update">Letzte Aktualisierung: %s</string>
 <string name="update_date_pattern">Aktualisierung: %s</string>
     <string name="update_time">Aktualisierungszeitpunkt</string>
-<string name="updates_size_pattern">Aktualisierungen: %s</string>
+<string name="updates_size">Aktualisierungen: %s</string>
 <string name="last_map_change">Letzte Kartenänderung: %s</string>
 <string name="rec_split_storage_size_desc">Menge des Speicherplatzes, der von allen aufgezeichneten Clips belegt werden kann</string>
     <string name="rec_split_desc">Clips neu schreiben, wenn der benutzte Platz den Speicherplatz überschreitet</string>

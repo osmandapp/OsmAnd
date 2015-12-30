@@ -2140,7 +2140,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="missing_write_external_storage_permission">App have no permission to use SD card</string>
     <string name="last_update">Last update: %s</string>
     <string name="update_time">Update time</string>
-    <string name="updates_size_pattern">"Updates: %s"</string>
+    <string name="updates_size">Update size</string>
     <string name="last_map_change">"Last map change: %s"</string>
     <string name="hourly">Hourly</string>
     <string name="daily">Daily</string>

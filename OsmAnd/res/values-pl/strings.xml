@@ -2099,5 +2099,5 @@
     <string name="available_maps">Dostępne mapy</string>
     <string name="last_update">Ostatnia aktualizacja: %s</string>
     <string name="update_time">Czas aktualizacj</string>
-    <string name="updates_size_pattern">Aktualizacje: %s</string>
+    <string name="updates_size">Aktualizacje: %s</string>
     </resources>

@@ -1893,7 +1893,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="select_voice_provider">Seleccioneu guiatge de veu</string>
     <string name="select_voice_provider_descr">Seleccioneu o baixeu el guiatge de veu per al vostre idioma</string>
     <string name="last_update">Darrera actualització: %s</string>
-<string name="updates_size_pattern">Actualitzacions: %s</string>
+<string name="updates_size">Actualitzacions: %s</string>
     <string name="last_map_change">Darrer canvi del mapa: %s</string>
 <string name="rec_split_storage_size">Mida per l\'emmagatzematge</string>
     </resources>

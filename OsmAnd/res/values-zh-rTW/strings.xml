@@ -2049,7 +2049,7 @@
 <string name="update_date_pattern">更新：%s</string>
     <string name="update_time">更新時間</string>
 <string name="size_pattern">大小：%s</string>
-<string name="updates_size_pattern">更新：%s</string>
+<string name="updates_size">更新：%s</string>
 <string name="last_map_change">上次地圖的更改：%s</string>
 <string name="rec_split">錄製分割</string>
     <string name="rec_split_title">使用錄製分割</string>

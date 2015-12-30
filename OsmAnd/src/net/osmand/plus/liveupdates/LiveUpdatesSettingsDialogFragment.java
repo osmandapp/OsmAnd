@@ -66,7 +66,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
 		final View updateTimesOfDayLayout = view.findViewById(R.id.updateTimesOfDayLayout);
 		final TextView sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
-//		final Button removeUpdatesButton = (Button) view.findViewById(R.id.removeUpdatesButton);
 
 		regionNameTextView.setText(getNameToDisplay(localIndexInfo, getMyActivity()));
 		final String fileNameWithoutExtension =
@@ -91,7 +90,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 		downloadOverWiFiCheckBox.setChecked(!liveUpdatePreference.get() || downloadViaWiFiPreference.get());
 
-		updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
+		sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
 
 		updateTimesOfDaySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
 				R.layout.action_spinner_item,
@@ -122,15 +121,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 			}
 		});
-//		removeUpdatesButton.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				changesManager.deleteUpdates(fileNameWithoutExtension);
-//				getLiveUpdatesFragment().notifyLiveUpdatesChanged();
-//				preferenceLastCheck(localIndexInfo, getSettings()).resetToDefault();
-//				updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
-//			}
-//		});
 
 		builder.setView(view)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
@@ -140,6 +130,12 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 							liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
 							if (liveUpdatesSwitch.isChecked()) {
 								runLiveUpdate(localIndexInfo, false);
+							} else {
+								long updatesSize = changesManager.getUpdatesSize(fileNameWithoutExtension);
+								if (updatesSize != 0) {
+									ClearUpdatesDialogFragment.createInstance(localIndexInfo)
+											.show(getParentFragment().getChildFragmentManager(), null);
+								}
 							}
 						}
 						downloadViaWiFiPreference.set(downloadOverWiFiCheckBox.isChecked());
@@ -169,7 +165,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						runLiveUpdate(localIndexInfo, true);
-						updateSize(fileNameWithoutExtension, changesManager, sizeTextView);
+						sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
 					}
 				});
 		return builder.create();
@@ -180,9 +176,8 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		new PerformLiveUpdateAsyncTask(getActivity(), info, forceUpdate).execute(new String[]{fnExt});
 	}
 
-	private void updateSize(String fileNameWithoutExtension,
-							IncrementalChangesManager changesManager,
-							TextView sizeTextView) {
+	private static String getUpdatesSize(String fileNameWithoutExtension,
+										 IncrementalChangesManager changesManager) {
 		String size;
 		long updatesSize = changesManager.getUpdatesSize(fileNameWithoutExtension);
 		updatesSize /= (1 << 10);
@@ -191,7 +186,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		} else {
 			size = updatesSize + " KB";
 		}
-		sizeTextView.setText(getString(R.string.updates_size_pattern, size));
+		return size;
 	}
 
 	private LiveUpdatesFragment getLiveUpdatesFragment() {
@@ -216,5 +211,41 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		args.putParcelable(LOCAL_INDEX, localIndexInfo);
 		fragment.setArguments(args);
 		return fragment;
+	}
+
+	public static class ClearUpdatesDialogFragment extends DialogFragment {
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			final LocalIndexInfo localIndexInfo = getArguments().getParcelable(LOCAL_INDEX);
+			final IncrementalChangesManager changesManager =
+					getMyApplication().getResourceManager().getChangesManager();
+			final String fileNameWithoutExtension =
+					Algorithms.getFileNameWithoutExtension(new File(localIndexInfo.getFileName()));
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setMessage(getString(R.string.clear_updates_proposition_message)
+					+ getUpdatesSize(fileNameWithoutExtension, changesManager))
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							changesManager.deleteUpdates(fileNameWithoutExtension);
+							preferenceLastCheck(localIndexInfo, getMyApplication().getSettings()).resetToDefault();
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+			return builder.create();
+		}
+
+		private OsmandApplication getMyApplication() {
+			return (OsmandApplication) getActivity().getApplication();
+		}
+
+		public static ClearUpdatesDialogFragment createInstance(LocalIndexInfo localIndexInfo) {
+			ClearUpdatesDialogFragment fragment = new ClearUpdatesDialogFragment();
+			Bundle args = new Bundle();
+			args.putParcelable(LOCAL_INDEX, localIndexInfo);
+			fragment.setArguments(args);
+			return fragment;
+		}
 	}
 }

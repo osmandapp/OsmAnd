@@ -157,17 +157,24 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="24dp">
 
         <TextView
-            android:id="@+id/sizeTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
-            tools:text="Updates: 65NB"/>
+            android:text="@string/updates_size"/>
+        <TextView
+            android:id="@+id/sizeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:text="64NB"
+            android:gravity="center_vertical"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"/>
 
     </LinearLayout>
 

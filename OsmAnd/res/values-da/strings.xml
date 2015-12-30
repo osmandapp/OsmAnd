@@ -2203,7 +2203,7 @@
 <string name="update_date_pattern">Opdateret: %s</string>
     <string name="update_time">Opdateringstidspunkt</string>
 <string name="size_pattern">Størrelse: %s</string>
-<string name="updates_size_pattern">Opdateringer: %s</string>
+<string name="updates_size">Opdateringer: %s</string>
 <string name="last_map_change">Sidste kortændring: %s</string>
 <string name="rec_split">Optager opdel</string>
     <string name="rec_split_title">Brug optager opdel</string>
