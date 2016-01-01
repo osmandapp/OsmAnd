@@ -1129,8 +1129,8 @@
 	<string name="poi_trade_tile">Kachličky</string>
 
 	<string name="poi_population">Počet obyvateľov</string>
-	<string name="poi_parking_underground">Podzemné</string>
-	<string name="poi_parking_multi_storey">Poschodové</string>
+	<string name="poi_parking_underground">Typ: podzemné</string>
+	<string name="poi_parking_multi_storey">Typ: poschodové</string>
 
 	<string name="poi_bicycle_parking_stands">Stojany</string>
 	<string name="poi_bicycle_parking_wall_loops">Držiaky na kolesá</string>
@@ -1317,7 +1317,7 @@
 <string name="poi_internet_access_yes">Internetové pripojenie: áno</string>
 	<string name="poi_internet_access_no">Internetové pripojenie: nie</string>
 
-	<string name="poi_wheelchair_no">Invalidný vozík: nepovolený</string>
+	<string name="poi_wheelchair_no">Invalidný vozík: neprístupné</string>
 	<string name="poi_wheelchair_limited">Invalidný vozík: obmedzene</string>
 	<string name="poi_pump_yes">Čerpadlo</string>
 
