@@ -70,7 +70,7 @@ public abstract class MenuTitleController {
 		if (menuController != null && menuController.needStreetName()) {
 			// Special case for "My Position" context: Display "Looking up address..." status
 			//if (typeStr.equals(getMapActivity().getString(R.string.shared_string_my_location)) && searchingAddress) {
-			if (typeStr.equals(getMapActivity().getString(R.string.shared_string_my_location))) {
+			if (searchingAddress) {
 				return addressNotKnownStr;
 			} else {
 				return streetStr;
