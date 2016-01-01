@@ -816,7 +816,7 @@
 	<string name="search_address_building">Hausnummer</string>
 	<string name="search_address_building_option">Hausnummer</string>
 	<string name="search_address_street_option">Querstraße</string>
-	<string name="search_tabs_location">Position</string>
+	<!-- string name="search_tabs_location">Position</string -->
 	
 	<string name="context_menu_item_update_map">Karte aktualisieren</string>
 	
