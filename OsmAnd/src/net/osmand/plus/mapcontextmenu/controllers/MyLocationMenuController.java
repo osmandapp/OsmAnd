@@ -27,8 +27,7 @@ public class MyLocationMenuController  extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		//return getPointDescription().getTypeName();
-		return "";
+		return getPointDescription().getTypeName();
 	}
 
 	@Override
