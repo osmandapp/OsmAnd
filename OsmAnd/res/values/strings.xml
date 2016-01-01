@@ -895,7 +895,7 @@
     <string name="context_menu_item_directions_from">Directions from</string>
     <string name="route_descr_map_location">Map: </string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
-    <string name="route_descr_current_location">Current position</string>
+    <!-- string name="route_descr_current_location">Current position</string -->
     <string name="route_descr_destination">Destination</string>
     <string name="route_to">To:</string>
     <string name="route_via">Via:</string>
@@ -1574,11 +1574,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_current_location_search">Searching position…</string>
-    <string name="search_position_current_location_found">Position (found)</string>
+    <string name="search_position_current_location_found">My Position (found)</string>
     <string name="search_position_address">Address…</string>
     <string name="search_position_favorites">Favorites…</string>
     <string name="search_position_undefined">Undefined</string>
-    <string name="search_position_current_location">Current position…</string>
+    <!-- string name="search_position_current_location">Current position…</string -->
     <string name="search_position_map_view">Current map center</string>
     <string name="select_search_position">Origin:</string>
     <string name="context_menu_item_search">Search near here</string>
