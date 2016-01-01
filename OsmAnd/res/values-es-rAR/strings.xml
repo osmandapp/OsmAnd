@@ -1246,7 +1246,7 @@
     <string name="map_version_changed_info">El servidor contiene archivos de mapas incompatibles con la versión actual de la aplicación. Para descargarlos y usarlos, actualice la aplicación a una versión más reciente.</string>
     <string name="poi_filter_nominatim">Nominatim en línea</string>
     <string name="search_position_current_location_search">Buscando ubicación…</string>
-    <string name="search_position_current_location_found">Ubicación (Encontrada)</string>
+    <string name="search_position_current_location_found">Mi ubicación (Encontrada)</string>
     <string name="search_position_address">Dirección…</string>
     <string name="search_position_favorites">Favoritos…</string>
     <string name="search_position_undefined">Indefinido</string>
@@ -2037,4 +2037,6 @@
     <string name="weekly">Semanalmente</string>
     <string name="morning">Mañana</string>
     <string name="Night">Noche</string>
+<string name="shared_string_not_selected">No seleccionado</string>
+    <string name="osm_live">OSM en vivo</string>
 </resources>
