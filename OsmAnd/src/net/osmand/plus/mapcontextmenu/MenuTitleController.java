@@ -80,6 +80,8 @@ public abstract class MenuTitleController {
 		acquireNameAndType();
 		if (needStreetName()) {
 			acquireStreetName();
+		else if (nameStr.equals(addressNotKnownStr)) {
+			nameStr = "";
 		}
 	}
 
