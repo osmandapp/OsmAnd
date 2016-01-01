@@ -95,7 +95,7 @@
 
     <string name="poi_filter_nominatim">Nominatim online</string>
     <string name="search_position_current_location_search">Ricerca posizione…</string>
-    <string name="search_position_current_location_found">Posizione [trovata]</string>
+    <string name="search_position_current_location_found">La mia posizione (trovata)</string>
     <string name="search_position_address">Indirizzo…</string>
     <string name="search_position_favorites">Preferiti…</string>
     <string name="search_position_undefined">Non definito</string>
@@ -865,7 +865,7 @@
     <string name="map_widget_show_ruler">Scala grafica</string>
 
     <string name="map_widget_view_direction">﻿Direzione della visuale</string>
-    <string name="map_widget_transparent">Widgets trasparenti</string>
+    <string name="map_widget_transparent">Widget trasparenti</string>
 
 
     <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
@@ -2131,5 +2131,5 @@
     <string name="morning">Mattina</string>
     <string name="Night">Notte</string>
 <string name="shared_string_not_selected">Non selezionato</string>
-    <string name="osm_live"/>
+    <string name="osm_live">OSM Live</string>
 </resources>
