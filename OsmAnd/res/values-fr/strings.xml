@@ -109,7 +109,7 @@
 
     <string name="poi_filter_nominatim">Recherche OSM en ligne</string>
     <string name="search_position_current_location_search">Recherche de la position…</string>
-    <string name="search_position_current_location_found">Position trouvée</string>
+    <string name="search_position_current_location_found">Ma position</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favori…</string>
     <string name="search_position_undefined">Non défini</string>
@@ -2092,4 +2092,10 @@
 <string name="updates_size">Mises à jour : %s</string>
 <string name="last_map_change">Dernier carte modifiée : %s</string>
 <string name="shared_string_not_selected">Non sélectionné</string>
-    </resources>
+    <string name="hourly">Horaire</string>
+    <string name="daily">Quotidien</string>
+    <string name="weekly">Hebdomadaire</string>
+    <string name="morning">Matin</string>
+    <string name="Night">Nuit</string>
+    <string name="osm_live">OSM Live</string>
+</resources>
