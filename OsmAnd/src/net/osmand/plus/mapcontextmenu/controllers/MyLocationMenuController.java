@@ -36,6 +36,11 @@ public class MyLocationMenuController  extends MenuController {
 	}
 
 	@Override
+	public boolean needStreetName() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		ApplicationMode appMode = getMapActivity().getMyApplication().getSettings().getApplicationMode();
 		return getMapActivity().getResources().getDrawable(appMode.getResourceLocationDay());
