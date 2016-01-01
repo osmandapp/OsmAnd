@@ -191,7 +191,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.spinner_item,
 				new ArrayList<String>(Arrays.asList(new String[]{
 						getString(R.string.search_position_undefined),
-						getString(R.string.search_position_current_location),
+						getString(R.string.shared_string_my_location) + getString(R.string.shared_string_ellipsis),
 						getString(R.string.search_position_map_view),
 						getString(R.string.search_position_favorites),
 						getString(R.string.search_position_address)

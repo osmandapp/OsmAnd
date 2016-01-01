@@ -532,7 +532,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private Spinner setupFromSpinner(View view) {
 		ArrayList<RouteSpinnerRow> fromActions = new ArrayList<>();
 		fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_get_my_location,
-				mapActivity.getString(R.string.route_descr_current_location)));
+				mapActivity.getString(R.string.shared_string_my_location)));
 		fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_fav_dark,
 				mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis)));
 		fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_marker_dark,
