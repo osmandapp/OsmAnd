@@ -30,10 +30,10 @@ public class MyLocationMenuController  extends MenuController {
 		return getPointDescription().getTypeName();
 	}
 
-	@Override
-	public String getCommonTypeStr() {
-		return getMapActivity().getString(R.string.shared_string_location);
-	}
+//	@Override
+//	public String getCommonTypeStr() {
+//		return getMapActivity().getString(R.string.shared_string_location);
+//	}
 
 	@Override
 	public Drawable getLeftIcon() {
