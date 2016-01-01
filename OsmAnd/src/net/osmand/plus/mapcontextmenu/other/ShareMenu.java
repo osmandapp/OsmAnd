@@ -86,7 +86,7 @@ public class ShareMenu extends BaseMenuController {
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
 		}
-		sb.append(getMapActivity().getString(R.string.search_tabs_location)).append(": ");
+		sb.append(getMapActivity().getString(R.string.shared_string_location)).append(": ");
 		sb.append(geoUrl).append("\n").append(httpUrl);
 		String sms = sb.toString();
 		switch (item) {
