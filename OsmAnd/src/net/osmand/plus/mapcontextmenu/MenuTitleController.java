@@ -72,8 +72,7 @@ public abstract class MenuTitleController {
 			if (typeStr.equals(getMapActivity().getString(R.string.shared_string_my_location)) && searchingAddress) {
 				return addressNotKnownStr;
 			} else {
-//				return streetStr;
-				return addressNotKnownStr;
+				return streetStr;
 			}
 		} else {
 			return "";
