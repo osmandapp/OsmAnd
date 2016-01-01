@@ -904,7 +904,7 @@
     <string name="shared_string_control_stop">Parar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
-    <string name="av_def_action_video">Grabar vídeo</string>
+    <string name="av_def_action_video">Grabar video</string>
     <string name="av_def_action_audio">Grabar audio</string>
     <string name="av_widget_action">Acción del control predeterminado</string>
     <string name="av_widget_action_descr">Seleccione la acción del control predeterminado</string>
@@ -1682,7 +1682,7 @@
     <string name="shared_string_unexpected_error">Se produjo un error inesperado</string>
     <string name="shared_string_action_template">Acción {0}</string>
     <string name="shared_string_collapse">Contraer</string>
-    <string name="shared_string_video">Vídeo</string>
+    <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
     <string name="route_points">Puntos de la ruta</string>
     <string name="shared_string_release">Liberado</string>
@@ -2025,12 +2025,12 @@
 <string name="rec_split_storage_size">Tamaño del almacenamiento</string>
     <string name="updates_size">Actualizaciones: %s</string>
     <string name="last_map_change">Último cambio de mapa: %s</string>
-<string name="rec_split">Dividir grabación</string>
+<string name="rec_split">División de grabación</string>
     <string name="rec_split_title">Usar la división de grabación</string>
-    <string name="rec_split_desc">Reescribir clips al exceder el espacio de almacenamiento utilizado</string>
+    <string name="rec_split_desc">Sobrescribir clips al exceder el espacio de almacenamiento utilizado</string>
     <string name="rec_split_clip_length">Duración del clip</string>
-    <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el tiempo de intervalo determinado</string>
-    <string name="rec_split_storage_size_desc">La cantidad de espacio que pueden ocupar todos los clips grabados</string>
+    <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el tiempo de intervalo establecido</string>
+    <string name="rec_split_storage_size_desc">Cantidad de espacio que pueden ocupar todos los clips grabados</string>
     <string name="hourly">Cada hora</string>
     <string name="daily">Diario</string>
     <string name="weekly">Semanal</string>
