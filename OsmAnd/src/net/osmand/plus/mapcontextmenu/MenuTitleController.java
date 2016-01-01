@@ -73,6 +73,7 @@ public abstract class MenuTitleController {
 				return addressNotKnownStr;
 			} else {
 				return streetStr;
+			}
 		} else {
 			return "";
 		}
