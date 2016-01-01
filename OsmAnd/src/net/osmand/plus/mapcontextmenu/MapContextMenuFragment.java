@@ -842,7 +842,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			}
 			if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
 				if (line2Str.length() > 0) {
-					line2Str.append(", ");
+					line2Str.append(": ");
 				}
 				line2Str.append(streetStr);
 			}
