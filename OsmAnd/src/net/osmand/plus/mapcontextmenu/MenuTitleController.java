@@ -37,7 +37,11 @@ public abstract class MenuTitleController {
 	public abstract MenuController getMenuController();
 
 	public String getTitleStr() {
-		return nameStr;
+		if (Algorithms.isEmpty(nameStr) && searchingAddress) {
+			return addressNotKnownStr;
+		} else {
+			return nameStr;
+		}
 	}
 
 	public int getLeftIconId() {
@@ -85,8 +89,6 @@ public abstract class MenuTitleController {
 		acquireNameAndType();
 		if (needStreetName()) {
 			acquireStreetName();
-		} else if (nameStr.equals(addressNotKnownStr)) {
-			nameStr = "";
 		}
 	}
 
@@ -127,13 +129,8 @@ public abstract class MenuTitleController {
 		}
 
 		if (Algorithms.isEmpty(nameStr)) {
-			if (!Algorithms.isEmpty(typeStr)) {
-				nameStr = typeStr;
-				typeStr = commonTypeStr;
-			} else {
-				nameStr = addressNotKnownStr;
-				typeStr = commonTypeStr;
-			}
+			nameStr = typeStr;
+			typeStr = commonTypeStr;
 		} else if (Algorithms.isEmpty(typeStr)) {
 			typeStr = commonTypeStr;
 		}
