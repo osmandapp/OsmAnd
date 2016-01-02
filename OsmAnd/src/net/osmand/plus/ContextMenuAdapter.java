@@ -346,6 +346,7 @@ public class ContextMenuAdapter {
 			}
 			if (convertView == null || (!lid.equals(convertView.getTag()))) {
 				convertView = activity.getLayoutInflater().inflate(lid, parent, false);
+				AndroidUtils.setListItemBackground(ctx, convertView, !holoLight);
 				convertView.setTag(lid);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);

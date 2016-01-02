@@ -154,7 +154,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	public enum DashboardActionButtonType {
 		MY_LOCATION,
-		NAVIGATE
+		NAVIGATE,
+		ROUTE
 	}
 
 	private class DashboardActionButton {
@@ -191,13 +192,26 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mFlexibleBlurSpaceHeight = mapActivity.getResources().getDimensionPixelSize(
 					R.dimen.dashboard_map_toolbar);
 			// Set padding view for ListView. This is the flexible space.
-			paddingView = new View(mapActivity);
+			paddingView = new FrameLayout(mapActivity);
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
 					mFlexibleSpaceImageHeight);
 			paddingView.setLayoutParams(lp);
 			// This is required to disable header's list selector effect
 			paddingView.setClickable(true);
 			paddingView.setOnClickListener(listener);
+
+			FrameLayout shadowContainer = new FrameLayout(mapActivity);
+			FrameLayout.LayoutParams fl = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+					FrameLayout.LayoutParams.MATCH_PARENT);
+			fl.gravity = Gravity.BOTTOM;
+			shadowContainer.setLayoutParams(fl);
+			ImageView shadow = new ImageView(mapActivity);
+			shadow.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.bg_shadow_onmap));
+			shadow.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+					FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM));
+			shadow.setScaleType(ScaleType.FIT_XY);
+			shadowContainer.addView(shadow);
+			((FrameLayout)paddingView).addView(shadowContainer);
 			listView.addHeaderView(paddingView);
 			listBackgroundView = mapActivity.findViewById(R.id.dash_list_background);
 		}
@@ -378,8 +392,19 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			}
 		};
 
+		DashboardActionButton routeButton = new DashboardActionButton();
+		routeButton.icon = mapActivity.getResources().getDrawable(R.drawable.map_directions);
+		routeButton.onClickListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.getMapLayers().getMapControlsLayer().doRoute();
+				hideDashboard();
+			}
+		};
+
 		actionButtons.put(DashboardActionButtonType.MY_LOCATION, myLocationButton);
 		actionButtons.put(DashboardActionButtonType.NAVIGATE, navigateButton);
+		actionButtons.put(DashboardActionButtonType.ROUTE, routeButton);
 	}
 
 	private void setActionButton(DashboardType type) {
@@ -391,6 +416,21 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			button = actionButtons.get(DashboardActionButtonType.MY_LOCATION);
 		} else if (type == DashboardType.ROUTE_PREFERENCES) {
 			button = actionButtons.get(DashboardActionButtonType.NAVIGATE);
+		} else if (type == DashboardType.WAYPOINTS || type == DashboardType.WAYPOINTS_EDIT || type == DashboardType.WAYPOINTS_FLAT) {
+			boolean routePlanningMode = false;
+			RoutingHelper rh = mapActivity.getRoutingHelper();
+			if (rh.isRoutePlanningMode()) {
+				routePlanningMode = true;
+			} else if ((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) && !rh.isFollowingMode()) {
+				routePlanningMode = true;
+			}
+			boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
+
+			if (routePlanningMode || routeFollowingMode) {
+				button = actionButtons.get(DashboardActionButtonType.NAVIGATE);
+			} else {
+				button = actionButtons.get(DashboardActionButtonType.ROUTE);
+			}
 		}
 
 		if (button != null) {
@@ -528,22 +568,30 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private void applyDayNightMode() {
 		if (nightMode) {
 			if (listBackgroundView != null) {
-				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));
+				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
 			} else {
-				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));
+				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
 			}
-			Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_dark));
-			listView.setDivider(d);
-			listView.setDividerHeight(dpToPx(1f));
+			if (visibleType != DashboardType.WAYPOINTS) {
+				Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_dark));
+				listView.setDivider(d);
+				listView.setDividerHeight(dpToPx(1f));
+			} else {
+				listView.setDivider(null);
+			}
 		} else {
 			if (listBackgroundView != null) {
-				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_light));
+				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light));
 			} else {
-				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_light));
+				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light));
 			}
-			Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_light));
-			listView.setDivider(d);
-			listView.setDividerHeight(dpToPx(1f));
+			if (visibleType != DashboardType.WAYPOINTS) {
+				Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_light));
+				listView.setDivider(d);
+				listView.setDividerHeight(dpToPx(1f));
+			} else {
+				listView.setDivider(null);
+			}
 		}
 	}
 
@@ -865,6 +913,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private boolean isActionButtonVisible() {
 		return visibleType == DashboardType.DASHBOARD
+				|| visibleType == DashboardType.WAYPOINTS
+				|| visibleType == DashboardType.WAYPOINTS_EDIT
+				|| visibleType == DashboardType.WAYPOINTS_FLAT
 				|| visibleType == DashboardType.LIST_MENU
 				|| visibleType == DashboardType.ROUTE_PREFERENCES
 				|| visibleType == DashboardType.CONFIGURE_SCREEN;

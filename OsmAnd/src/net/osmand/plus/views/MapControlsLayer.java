@@ -358,15 +358,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-					onNavigationClick();
-				} else {
-					ActivityCompat.requestPermissions(mapActivity,
-							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-							REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION);
-				}
+				doRoute();
 			}
 		});
+	}
+
+	public void doRoute() {
+		if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+			onNavigationClick();
+		} else {
+			ActivityCompat.requestPermissions(mapActivity,
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION);
+		}
 	}
 
 	public void doNavigate() {
