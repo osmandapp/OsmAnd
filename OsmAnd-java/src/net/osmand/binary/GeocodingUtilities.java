@@ -128,7 +128,7 @@ public class GeocodingUtilities {
 		public double getDistanceP() {
 			if(point != null && searchPoint != null) {
 				//return MapUtils.getDistance(point, searchPoint);
-				return Math.sqrt(point.distSquare));
+				return Math.sqrt(point.distSquare);
 			} else {
 				return -1;
 			}
