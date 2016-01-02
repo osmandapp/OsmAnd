@@ -1,4 +1,4 @@
-﻿package net.osmand.binary;
+package net.osmand.binary;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
