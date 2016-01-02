@@ -37,7 +37,9 @@ public abstract class MenuTitleController {
 	public abstract MenuController getMenuController();
 
 	public String getTitleStr() {
-		if (Algorithms.isEmpty(nameStr) && searchingAddress) {
+		//if (Algorithms.isEmpty(nameStr) && searchingAddress) {
+		// searchingAddress did not work here once search was interrupted by a new search
+		if (Algorithms.isEmpty(nameStr) && needStreetName()) {
 			return addressNotKnownStr;
 		} else {
 			return nameStr;
