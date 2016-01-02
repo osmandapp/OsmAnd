@@ -328,7 +328,7 @@
     <string name="map_widget_show_ruler">Merilo</string>
 
     <string name="map_widget_view_direction">Smer gledanja</string>
-    <string name="map_widget_transparent">Prosojni bočni pult</string>
+    <string name="map_widget_transparent">Prosojni gradniki</string>
     <string name="use_transparent_map_theme">Prosojna tema</string>
     <string name="bg_service_sleep_mode_off">Omogoči\n ozadnji način delovanja</string>
     <string name="bg_service_sleep_mode_on">Zaustavi\n ozadnji način delovanja</string>
@@ -2063,4 +2063,19 @@
     <string name="last_update">Zadnja posodobitev: %s</string>
     <string name="update_date_pattern">Posodobitev: %s</string>
     <string name="update_time">Čas posodobitve</string>
-</resources>
+<string name="shared_string_not_selected">Ni izbrano</string>
+    <string name="rec_split_clip_length">Dolžina posnetka</string>
+    <string name="rec_split_clip_length_desc">Dolžina posnetka ne bo daljša od navedene časovne omejitve</string>
+    <string name="rec_split_storage_size">Velikost skladišča posnetkov</string>
+    <string name="rec_split_storage_size_desc">Velikost prostora, ki je namenjen shranjenim posnetkom</string>
+    <string name="updates_size">Velikost posodobitve</string>
+    <string name="last_map_change">Zadnja sprememba zemljevida: %s</string>
+    <string name="hourly">Vsako uro</string>
+    <string name="daily">Dnevno</string>
+    <string name="weekly">Tedensko</string>
+    <string name="morning">Zjutraj</string>
+    <string name="Night">Zvečer</string>
+<string name="rec_split">Razdelilnik posnetkov</string>
+    <string name="rec_split_title">Uporabi razdelilnik posnetkov</string>
+    <string name="rec_split_desc">Prepiši starejše posnetke, ko velikost posnetka preseže omejitev</string>
+    </resources>
