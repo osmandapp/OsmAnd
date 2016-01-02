@@ -224,9 +224,6 @@ public abstract class MenuTitleController {
 
 					@Override
 					public boolean isCancelled() {
-						if (cancelSearch) {
-							searchingAddress = false;
-						}
 						return cancelSearch;
 					}
 
