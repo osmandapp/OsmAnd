@@ -141,7 +141,6 @@ public abstract class MenuTitleController {
 	protected void acquireStreetName() {
 		if (searchingAddress) {
 			cancelSearch = true;
-			searchingAddress = false;
 			getMapActivity().getMyApplication().runInUIThread(new Runnable() {
 				@Override
 				public void run() {
@@ -225,6 +224,9 @@ public abstract class MenuTitleController {
 
 					@Override
 					public boolean isCancelled() {
+						if (cancelSearch) {
+							searchingAddress = false;
+						}
 						return cancelSearch;
 					}
 
