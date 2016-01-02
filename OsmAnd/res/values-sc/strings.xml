@@ -828,7 +828,7 @@
 
     <string name="poi_filter_nominatim">Nominatim in lìnia</string>
     <string name="search_position_current_location_search">Chirchende sa positzione…</string>
-    <string name="search_position_current_location_found">Positzione (agatada)</string>
+    <string name="search_position_current_location_found">Positzione mea (agatada)</string>
     <string name="search_position_address">Indiritzu…</string>
     <string name="search_position_favorites">Preferidos…</string>
     <string name="select_search_position">Chirca a curtzu de:</string>
@@ -2072,5 +2072,6 @@
     <string name="weekly">Cada chida</string>
     <string name="morning">Mangianu</string>
     <string name="Night">Note</string>
-    <string name="osm_live">OSM Live</string>
-</resources>
+    <string name="osm_live">OSM Live (in dereta)</string>
+<string name="updates_size">Mannària agiornamentos</string>
+    </resources>
