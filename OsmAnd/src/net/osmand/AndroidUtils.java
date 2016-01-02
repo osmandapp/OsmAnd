@@ -91,6 +91,14 @@ public class AndroidUtils {
 		setBackground(ctx, view, night, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 	}
 
+	public static void setBackgroundColor(Context ctx, View view, boolean night, int lightResId, int darkResId) {
+		view.setBackgroundColor(ctx.getResources().getColor(night ? darkResId : lightResId));
+	}
+
+	public static void setListItemBackground(Context ctx, View view, boolean night) {
+		setBackgroundColor(ctx, view, night, R.color.bg_color_light, R.color.bg_color_dark);
+	}
+
 	public static void setTextPrimaryColor(Context ctx, TextView textView, boolean night) {
 		textView.setTextColor(night ?
 				ctx.getResources().getColor(R.color.primary_text_dark)

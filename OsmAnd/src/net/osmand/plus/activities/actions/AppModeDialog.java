@@ -46,6 +46,13 @@ public class AppModeDialog {
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
 				ViewGroup parent, final boolean singleSelection, boolean drawer, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
+		if (useMapTheme) {
+			AndroidUtils.setListItemBackground(a, ll,
+					((OsmandApplication) a.getApplication()).getDaynightHelper().isNightModeForMapControls());
+		} else {
+			AndroidUtils.setListItemBackground(a, ll,
+					!((OsmandApplication) a.getApplication()).getSettings().isLightContent());
+		}
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		for(ApplicationMode ma : values) {
