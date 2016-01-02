@@ -1,4 +1,4 @@
-package net.osmand.binary;
+﻿package net.osmand.binary;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -124,7 +124,15 @@ public class GeocodingUtilities {
 			}
 			return dist;
 		}
-		
+
+		public double getDistanceP() {
+			if(point != null && searchPoint != null) {
+				return MapUtils.getDistance(point, searchPoint);
+			} else {
+				return -1;
+			}
+		}
+
 		@Override
 		public String toString() {
 			StringBuilder bld = new StringBuilder();

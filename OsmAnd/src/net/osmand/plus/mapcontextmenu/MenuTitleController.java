@@ -164,6 +164,8 @@ public abstract class MenuTitleController {
 							OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
 							String lang = settings.MAP_PREFERRED_LOCALE.get();
 							String geocodingResult = "";
+							double relevantDistance = -1;
+
 							if (object.building != null) {
 								String bldName = object.building.getName(lang);
 								if (!Algorithms.isEmpty(object.buildingInterpolation)) {
@@ -173,6 +175,7 @@ public abstract class MenuTitleController {
 										+ object.city.getName(lang);
 							} else if (object.street != null) {
 								geocodingResult = object.street.getName(lang) + ", " + object.city.getName(lang);
+								relevantDistance = object.getDistanceP();
 							} else if (object.city != null) {
 								geocodingResult = object.city.getName(lang);
 							} else if (object.point != null) {
@@ -189,11 +192,15 @@ public abstract class MenuTitleController {
 									sname += ref;
 								}
 								geocodingResult = sname;
+								relevantDistance = object.getDistanceP();
 							}
 
 							streetStr = geocodingResult;
+							if (relevantDistance == -1) {
+								relevantDistance = object.getDistance();
+							}
 
-							if (!Algorithms.isEmpty(streetStr) && object.getDistance() > 100) {
+							if (!Algorithms.isEmpty(streetStr) && relevantDistance > 100) {
 								streetStr = getMapActivity().getString(R.string.shared_string_near) + " " + streetStr;
 							} else if (Algorithms.isEmpty(streetStr)) {
 								streetStr = getMapActivity().getString(R.string.no_address_found);
