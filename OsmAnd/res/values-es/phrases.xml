@@ -155,7 +155,7 @@
 	<string name="poi_lighthouse">Faro</string>
 
 	<string name="poi_bicycle_rental">Alquiler de bicicletas</string>
-	<string name="poi_bicycle_parking">Bicicletero/Guardería</string>
+	<string name="poi_bicycle_parking">Aparcamiento de bicicletas</string>
 
 	<string name="poi_aerialway_gondola">Góndola</string>
 	<string name="poi_tunnel">Túnel</string>
@@ -195,7 +195,7 @@
 	<string name="poi_reservoir">Embalse</string>
 	<string name="poi_gasometer">Gasómetro</string>
 	<string name="poi_silo">Silo</string>
-	<string name="poi_college">Colegio</string>
+	<string name="poi_college">Instituto</string>
 	<string name="poi_driving_school">Autoescuela</string>
 	<string name="poi_kindergarten">Jardín infantil</string>
 	<string name="poi_school">Escuela</string>
@@ -229,7 +229,7 @@
 	<string name="poi_company">Empresa</string>
 	<string name="poi_estate_agent">Inmobiliaria</string>
 	<string name="poi_lawyer">Abogado</string>
-	<string name="poi_townhall">Municipalidad</string>
+	<string name="poi_townhall">Municipalidad/Ayuntamiento</string>
 	<string name="poi_employment_agency">Oficina de empleo</string>
 	<string name="poi_studio">Estudio</string>
 	<string name="poi_stadium">Estadio</string>
@@ -257,7 +257,7 @@
 	<string name="poi_sport_multi">Deportes múltiples</string>
 	<string name="poi_sport_motor">Deporte de motor</string>
 	<string name="poi_rugby_league">Liga de rugby</string>
-	<string name="poi_skateboard">Patineta</string>
+	<string name="poi_skateboard">Patineta/Monopatín</string>
 	<string name="poi_soccer">Fútbol</string>
 	<string name="poi_swimming">Natación</string>
 	<string name="poi_table_tennis">Tenis de mesa</string>
@@ -324,8 +324,8 @@
 	<string name="poi_stripclub">Club de striptease</string>
 	<string name="poi_dog_park">Parque canino</string>
 	<string name="poi_leisure_fishing">Lugar de pesca</string>
-	<string name="poi_harbour">Puerto</string>
-	<string name="poi_marina">Marina</string>
+	<string name="poi_harbour">Puerto marítimo</string>
+	<string name="poi_marina">Marina/Puerto deportivo</string>
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_bench">Banco (asiento)</string>
 	<string name="poi_water_park">Parque acuático</string>
@@ -496,12 +496,12 @@
 
 	<string name="poi_training">Centro de capacitación</string>
 	<string name="poi_social_facility">Centro social</string>
-	<string name="poi_register_office">Registro civil</string>
+	<string name="poi_register_office">Oficina de registro civil</string>
 	<string name="poi_government">Gubernamental</string>
 	<string name="poi_prosecutor">Fiscal</string>
 	<string name="poi_pension_fund">Fondo de pensiones</string>
 	<string name="poi_tax_inspection">Inspecciones fiscales</string>
-	<string name="poi_customs">Aduanas</string>
+	<string name="poi_customs">Aduana</string>
 	<string name="poi_isolated_dwelling">Vivienda aislada</string>
 	<string name="poi_place_allotments">Huertos comunitarios</string>
 	<string name="poi_first_aid">Primeros auxilios</string>
@@ -552,7 +552,7 @@
 	<string name="poi_rune_stone">Piedra rúnica</string>
 	<string name="poi_wreck">Pecio</string>
 	<string name="poi_attraction_animal">Animal (atracción)</string>
-	<string name="poi_attraction_carousel">Carrusel</string>
+	<string name="poi_attraction_carousel">Carrusel/Tiovivo</string>
 	<string name="poi_attraction_maze">Laberinto</string>
 	<string name="poi_attraction_water_slide">Tobogán de agua</string>
 
@@ -629,7 +629,7 @@
 	<string name="poi_car_sharing">Coche compartido</string>
 	<string name="poi_boat_sharing">Barco compartido</string>
 	<string name="poi_dock">Dársena</string>
-	<string name="poi_toilets">Baño</string>
+	<string name="poi_toilets">Baños</string>
 	<string name="poi_internet_cafe">Cibercafé</string>
 
 	<string name="poi_payment_terminal">Terminal de pago</string>
@@ -671,7 +671,7 @@
 	<string name="poi_harbour_basin">Cuenca portuaria</string>
 	<string name="poi_seamark_harbour">Puerto</string>
 	<string name="poi_baby_hatch">Escotilla de bebé</string>
-	<string name="poi_speech_therapist">Fonoaudiólogo</string>
+	<string name="poi_speech_therapist">Logopeda</string>
 	<string name="poi_newspaper">Oficina de periódico</string>
 	<string name="poi_bookmaker">Casa de apuestas</string>
 
@@ -691,7 +691,7 @@
 	<string name="poi_boundary_stone">Mojón</string>
 	<string name="poi_attraction_amusement_ride">Atracción de feria</string>
 	<string name="poi_attraction_big_wheel">Noria</string>
-	<string name="poi_attraction_swing_carousel">Carrusel de oscilación</string>
+	<string name="poi_attraction_swing_carousel">Carrusel/Tiovivo oscilante</string>
 	<string name="poi_religion_jewish">Judaísmo</string>
 	<string name="poi_internet_access_service">Servicio de Internet</string>
 	
@@ -729,7 +729,7 @@
 	<string name="poi_craft_tiler">Alicatador</string>
 	<string name="poi_craft_window_construction">Fábrica de ventanas</string>
 
-	<string name="poi_craft_computer">Montaje de computadoras</string>
+	<string name="poi_craft_computer">Montaje de computadoras/ordenadores</string>
 	<string name="poi_saddle">Collado</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_anchor_berth">Fondeadero</string>
@@ -891,7 +891,7 @@
 	<string name="poi_cutline">Cortafuegos forestal</string>
 	<string name="poi_tree">Árbol</string>
 	<string name="poi_icn_ref">Nodo de red internacional de ciclismo</string>
-	<string name="poi_opening_hours">Horario de atención</string>
+	<string name="poi_opening_hours">Horario de apertura</string>
 	<string name="poi_collection_times">Horario de recolección</string>
 	<string name="poi_description">Descripción</string>
 	<string name="poi_phone">Teléfono</string>
@@ -1037,7 +1037,7 @@
 	<string name="poi_seasonal_spring">Primavera</string>
 	<string name="poi_seasonal_summer">Verano</string>
 	<string name="poi_seasonal_autumn">Otoño</string>
-	<string name="poi_seasonal_winter">Inverno</string>
+	<string name="poi_seasonal_winter">Invierno</string>
 	<string name="poi_crossing_traffic_signals">Semaforizado</string>
 	<string name="poi_crossing_uncontrolled">No controlado</string>
 	<string name="poi_crossing_unmarked">Desmarcado</string>
@@ -1139,7 +1139,7 @@
 	<string name="poi_landfill_waste_nuclear">Reciduos nucleares</string>
 	<string name="poi_bunker_silo">Silo bunker</string>
 	<string name="poi_start_date">Fecha de inicio</string>
-	<string name="poi_wheelchair">Adaptado para silla de rueda</string>
+	<string name="poi_wheelchair">Adaptado para silla de ruedas</string>
 
 	<string name="poi_content_silage">Contenido: Ensilaje</string>
 	<string name="poi_content_water">Contenido: Agua</string>
@@ -1165,7 +1165,7 @@
 	<string name="poi_trade_building_supplies">Materiales de construcción</string>
 	<string name="poi_trade_plumbing">Herramientas de fontanería/plomería</string>
 	<string name="poi_trade_wood">Venta de madera</string>
-	<string name="poi_trade_agricultural_supplies">Insumos agrícolas</string>
+	<string name="poi_trade_agricultural_supplies">Suministros agrícolas</string>
 	<string name="poi_trade_tile">Azulejos</string>
 
 	<string name="poi_population">Población</string>
@@ -1417,8 +1417,8 @@
 	<string name="poi_stars_3s">Estrellas: 3S (Confortable Superior)</string>
 	<string name="poi_stars_4">Estrellas: 4 (Primera Clase)</string>
 	<string name="poi_stars_4s">Estrellas: 4S (Primera Clase Superior)</string>
-	<string name="poi_stars_5">Estrellas: 5 (Lujurioso)</string>
-	<string name="poi_stars_5s">Estrellas: 5S (Lujurioso Superior)</string>
+	<string name="poi_stars_5">Estrellas: 5 (Lujoso)</string>
+	<string name="poi_stars_5s">Estrellas: 5S (Lujoso Superior)</string>
 	<string name="poi_stars_6">Estrellas: 6</string>
 	<string name="poi_stars_7">Estrellas: 7</string>
 	<string name="poi_rooms">Habitaciones</string>
