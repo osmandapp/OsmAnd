@@ -684,7 +684,7 @@
 	<string name="button_upgrade_osmandplus">OsmAnd+\'a Yükselt</string>
 	<string name="map_version_changed_info">Sunucuda yüklü haritalar uygulamanın versiyonuyla uyumlu değil. Bunları kullanabilmek için uygulama sürümünüzü yükseltmelisiniz.</string>
 	<string name="search_position_current_location_search">Konum aranıyor…</string>
-	<string name="search_position_current_location_found">Konum (bulundu)</string>
+	<string name="search_position_current_location_found">Benim Konum (bulundu)</string>
 	<string name="search_position_undefined">Tanımlanmamış</string>
 	
 	<string name="search_position_map_view">Güncel harita merkezi</string>
@@ -2024,4 +2024,5 @@
     <string name="morning">Sabah</string>
     <string name="Night">Gece</string>
 <string name="osm_live">OSM Canlı</string>
-</resources>
+<string name="updates_size">Güncelleme boyutu</string>
+    </resources>
