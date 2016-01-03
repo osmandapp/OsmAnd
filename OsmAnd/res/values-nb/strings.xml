@@ -35,7 +35,7 @@
     <string name="poi_filter_for_tourists">For turister</string>
     <string name="poi_filter_fuel">Drivstoff</string>
     <string name="show_warnings_title">Vis varsler…</string>
-    <string name="show_warnings_descr">Still inn trafikkvarsler (fartsgrenser, tvungne stopp, fartsdumper), fotoboksvarsler og kjørefeltinformasjon</string>
+    <string name="show_warnings_descr">Innstilling av trafikkvarsler (fartsgrenser, tvungne stopp, fartsdumper), fotoboksvarsler og kjørefeltinformasjon</string>
     <string name="use_compass_navigation_descr">Bruk kompass hvis det ikke er mulig med annen retningsfastsettelse</string>
     <string name="use_compass_navigation">Bruk kompass</string>
     <string name="avoid_motorway">Unngå motorveier</string>
@@ -52,7 +52,7 @@
     <string name="map_widget_day_night">Dag/natt-kart</string>
     <string name="map_widget_vector_attributes">Opptegningsattributter</string>
     <string name="map_widget_renderer">Kartstil</string>
-    <string name="layer_map_appearance">Still inn skjerm</string>
+    <string name="layer_map_appearance">Skjerminnstilling</string>
     <string name="show_lanes">Vis kjørefelt</string>
     <string name="avoid_unpaved">Unngå uasfalterte veier</string>
     <string name="avoid_ferries">Unngå ferger</string>
@@ -62,7 +62,7 @@
     <string name="map_widget_show_ruler">Målestokk</string>
 
     <string name="map_widget_top_text">Gatenavn</string>
-    <string name="map_widget_config">Still inn skjerm</string>
+    <string name="map_widget_config">Skjerminnstilling</string>
 
     <string name="map_widget_back_to_loc">Hvor er jeg</string>
     <string name="map_widget_lock_screen">Lås skjerm</string>
@@ -247,7 +247,7 @@
     <string name="button_upgrade_osmandplus">Oppgrader OsmAnd+</string>
     <string name="map_version_changed_info">Server inneholder kartfiler som ikke er kompatible med din gjeldende versjon av programmet. For å laste ned og bruke dem, oppgrader programmet til nyere versjon.</string>
     <string name="search_position_current_location_search">Søker posisjon…</string>
-    <string name="search_position_current_location_found">Posisjon (funnet)</string>
+    <string name="search_position_current_location_found">Min posisjon (funnet)</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favoritter…</string>
     <string name="search_position_undefined">Udefinert</string>
@@ -298,7 +298,7 @@
     <string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte Android TTS (tekst-til-tale)-motoren. Vil du gå til markedet for å se etter en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
 	<string name="switch_to_vector_map_to_see">Offline-vektorkart foreligger for dette stedet.
-\n\t\n\tFor å bruke aktiver \'Meny\' → \'Still inn kart\' → \'Kartkilde…\' → \'Offline vektorkart\'.</string>
+\n\t\n\tFor å bruke aktiver \'Meny\' → \'Kartinnstilling\' → \'Kartkilde…\' → \'Offline vektorkart\'.</string>
     <string name="install_more">Installer flere…</string>
 
 
@@ -590,7 +590,7 @@
 
     <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
     <string name="speak_title">Meld om…</string>
-    <string name="speak_descr">Still inn for å meddele gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser</string>
+    <string name="speak_descr">Innstilling for å meddele gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser</string>
     <string name="speak_street_names">Gatenavn (TTS)</string>
     <string name="speak_speed_limit">Fartsgrense</string>
     <string name="speak_cameras">Fotobokser</string>
@@ -736,7 +736,7 @@
     <string name="rendering_category_transport">Transport</string>
     <string name="map_widget_right">Høyre panel</string>
     <string name="map_widget_left">Venstre panel</string>
-    <string name="configure_map">Still inn kart</string>
+    <string name="configure_map">Kartinnstilling</string>
     <string name="osmo_device_not_found">Enhet ikke funnet</string>
     <string name="speed_limit_exceed">Toleranse for fartsgrense</string>
     <string name="text_size_descr">Sett tekststørrelsen på kartet.</string>
@@ -1363,7 +1363,7 @@
     <string name="successfully_uploaded_pattern">Vellykket lastet opp {0}/{1}</string>
     <string name="try_again">Prøv igjen</string>
     <string name="error_message_pattern">Feil: {0}</string>
-    <string name="dahboard_options_dialog_title">Still inn dashbord</string>
+    <string name="dahboard_options_dialog_title">Dashbord-innstilling</string>
     <string name="shared_string_undo">Angre</string>
     <string name="shared_string_skip">Hopp over</string>
     <string name="app_name_osmand">OsmAnd</string>
@@ -1475,10 +1475,20 @@
 	<string name="other_menu_group">Annet</string>
     <string name="instalation_troubleshooting_item">Installering og problemløsing</string>
     <string name="osn_comment_dialog_title">Legg til kommentar</string>
-	<string name="navigation_item_description">Still inn navigering</string>
+	<string name="navigation_item_description">Navigeringsoppsett</string>
     <string name="free_downloads_used_description">Viser de benyttede gratis nedlastingene</string>
 
     <string name="route_distance">Avstand:</string>
     <string name="route_duration">Tid:</string>
     <string name="shared_string_sound">Lyd</string>
+    <string name="available_maps">Tilgjengelige kart</string>
+    <string name="impassable_road_desc">Velg veier du vil unngå under navigering</string>
+    <string name="daily">Daglig</string>
+    <string name="weekly">Ukentlig</string>
+    <string name="hourly">Hver time</string>
+    <string name="last_map_change">Siste kartendring: %s</string>
+    <string name="last_update">Siste oppdatering: %s</string>
+    <string name="update_time">Oppdateringstidspunkt</string>
+    <string name="updates_size">Oppdateringsstørrelse</string>
+    <string name="update_now">Oppdater nå</string>
     </resources>
