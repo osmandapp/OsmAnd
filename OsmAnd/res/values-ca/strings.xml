@@ -1896,4 +1896,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="updates_size">Actualitzacions: %s</string>
     <string name="last_map_change">Darrer canvi del mapa: %s</string>
 <string name="rec_split_storage_size">Mida per l\'emmagatzematge</string>
+    <string name="shared_string_not_selected">No seleccionat</string>
     </resources>
