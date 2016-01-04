@@ -75,7 +75,9 @@ public abstract class MenuTitleController {
 		MenuController menuController = getMenuController();
 		if (menuController != null && menuController.needStreetName()) {
 			// Display "Looking up address..." status
-			if (searchingAddress) {
+			//if (searchingAddress) {
+			// Again here searchingAddress does not work for case of search interrupted by new searcj, so:
+			if (Algorithms.isEmpty(streetStr)) {
 				return addressNotKnownStr;
 			} else {
 				return streetStr;
