@@ -38,7 +38,7 @@
   
   <string name="poi_filter_nominatim">Nominatim Online</string>
   <string name="search_position_current_location_search">Ustalanie pozycji…</string>
-  <string name="search_position_current_location_found">Pozycja (ustalona)</string>
+  <string name="search_position_current_location_found">Moja pozycja (ustalona)</string>
   <string name="search_position_address">Adres…</string>
   <string name="search_position_favorites">Ulubione…</string>
   <string name="search_position_undefined">Niezdefiniowane</string>
@@ -2100,4 +2100,5 @@
     <string name="last_update">Ostatnia aktualizacja: %s</string>
     <string name="update_time">Czas aktualizacj</string>
     <string name="updates_size">Aktualizacje: %s</string>
+    <string name="last_map_change">Ostatnia zmiana mapy: %s</string>
     </resources>
