@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="shared_string_my_places">Meus locais</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
@@ -1984,4 +1985,5 @@
     <string name="morning">Pela manhã</string>
     <string name="Night">À noite</string>
 <string name="shared_string_not_selected">Nada selecionado</string>
-    </resources>
+    <string name="select_month_and_country">Selecione o mês e o país</string>
+</resources>
