@@ -291,7 +291,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 		ImageView fromIcon = (ImageView) parentView.findViewById(R.id.fromIcon);
 		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
-		if (targets.getPointToStart() = null) {
+		if (targets.getPointToStart() == null) {
 			fromIcon.setImageDrawable(mapActivity.getResources().getDrawable(appMode.getResourceLocationDay()));
 		} else {
 			fromIcon.setImageDrawable(getIconOrig(R.drawable.ic_action_marker_dark));
