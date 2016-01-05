@@ -321,6 +321,10 @@ public class OsmandSettings {
 			if(defaultValues != null && defaultValues.containsKey(mode)){
 				return defaultValues.get(mode);
 			}
+			ApplicationMode pt = mode.getParent();
+			if(pt != null){
+				return getProfileDefaultValue(pt);
+			}
 			if(settingsAPI.contains(defaultProfilePreferences, getId())) {
 				return getValue(defaultProfilePreferences, defaultValue);
 			} else {
@@ -887,12 +891,19 @@ public class OsmandSettings {
 	
 	public final CommonPreference<Boolean> BETA_TESTING_LIVE_UPDATES = new BooleanPreference("live_updates_beta", false).makeGlobal();
 	
-	public final OsmandPreference<Boolean> SHOW_TRAFFIC_WARNINGS = new BooleanPreference("show_traffic_warnings", true).makeProfile().cache();
-	public final CommonPreference<Boolean> SHOW_PEDESTRIAN = new BooleanPreference("show_pedestrian", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", false).makeProfile().cache();
-	public final CommonPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", true).makeProfile().cache();
+	public final CommonPreference<Boolean> SHOW_TRAFFIC_WARNINGS = new BooleanPreference("show_traffic_warnings", false).makeProfile().cache();
 	{
-		SHOW_LANES.setModeDefaultValue(ApplicationMode.DEFAULT, false);
+		SHOW_TRAFFIC_WARNINGS.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+	public final CommonPreference<Boolean> SHOW_PEDESTRIAN = new BooleanPreference("show_pedestrian", false).makeProfile().cache();
+	{
+		SHOW_PEDESTRIAN.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", false).makeProfile().cache();
+	public final CommonPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", false).makeProfile().cache();
+	{
+		SHOW_LANES.setModeDefaultValue(ApplicationMode.CAR, true);
+		SHOW_LANES.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 	}
 	public final OsmandPreference<Boolean> SHOW_WPT = new BooleanPreference("show_gpx_wpt", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORITES = new BooleanPreference("show_nearby_favorites", false).makeGlobal().cache();
