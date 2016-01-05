@@ -214,8 +214,10 @@ public class DownloadIndexesThread {
 				return;
 			}	
 		}
-		for(IndexItem i : items) {
-			indexItemDownloading.add(i);
+		for(IndexItem item : items) {
+			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
+				indexItemDownloading.add(item);
+			}
 		}
 		if (currentDownloadingItem == null) {
 			execute(new DownloadIndexesAsyncTask());
