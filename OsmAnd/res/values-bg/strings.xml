@@ -576,7 +576,7 @@
 
     <string name="poi_filter_nominatim">Онлайн Nominatim</string>
     <string name="search_position_current_location_search">Търсене на място…</string>
-    <string name="search_position_current_location_found">Позиция (намерена)</string>
+    <string name="search_position_current_location_found">Моето място (намерено)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Любими…</string>
     <string name="search_position_undefined">Неопределена</string>
@@ -2031,4 +2031,13 @@
     <string name="rec_split_storage_size_desc">Големина на определената за видео клипове памет</string>
     <string name="updates_size">Актуализации: %s</string>
     <string name="last_map_change">Последна промяна на картата: %s</string>
+<string name="shared_string_not_selected">Няма избран</string>
+    <string name="rec_split_desc">Презаписване върху стари клипове при недостиг на място</string>
+    <string name="rec_split_title">Разделяне на клиповете чрез камерата</string>
+    <string name="update_time">Дата/час на актуализация</string>
+    <string name="hourly">На всеки час</string>
+    <string name="daily">Всеки ден</string>
+    <string name="weekly">Всяка седмица</string>
+    <string name="morning">Сутрин</string>
+    <string name="Night">През нощта</string>
 </resources>
