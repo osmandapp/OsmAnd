@@ -595,6 +595,11 @@ public class OpeningHoursParser {
 		public String toRuleString(boolean avoidMonths) {
 			return ruleString;
 		}
+
+		@Override
+		public String toString() {
+			return toRuleString(false);
+		}
 	}
 
 
@@ -607,6 +612,7 @@ public class OpeningHoursParser {
 		// replace words "sunrise" and "sunset" by real hours
 		final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
 		final String[] monthsStr = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+		final String[] holidayStr = new String[] {"PH", "SH"};
 		String sunrise = "07:00";
 		String sunset = "21:00";
 		String endOfDay = "24:00";
@@ -704,6 +710,14 @@ public class OpeningHoursParser {
 							months[m] = true;
 						}
 						previousMonth = m;
+					}
+					if (previousMonth == -1) {
+						int h = 0;
+						for(String s : holidayStr){
+							if(s.charAt(0) == ch && s.charAt(1) == r.charAt(k+1)){
+								return new UnparseableRule(r);
+							}
+						}
 					}
 				}
 			} else {
@@ -858,10 +872,20 @@ public class OpeningHoursParser {
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(time));
 		boolean calculated = hours.isOpenedForTime(cal);
 		System.out.printf("  %sok: Expected %s: %b = %b (rule %s)\n",
-			((calculated != expected) ? "NOT " : ""), time, expected, calculated, hours.getCurrentRuleTime(cal));
+				((calculated != expected) ? "NOT " : ""), time, expected, calculated, hours.getCurrentRuleTime(cal));
         if(calculated != expected) {
             throw new IllegalArgumentException("BUG!!!");
         }
+	}
+
+	private static void testParsedAndAssembledCorrectly(String timeString, OpeningHours hours) {
+		String assembledString = hours.toStringNoMonths();
+		boolean isCorrect = assembledString.equals(timeString);
+		System.out.printf("  %sok: Expected: \"%s\" got: \"%s\"\n",
+				(isCorrect ? "NOT " : ""), timeString, assembledString);
+		if (!isCorrect) {
+			throw new IllegalArgumentException("BUG!!!");
+		}
 	}
 	
 	public static void main(String[] args) throws ParseException {
@@ -1010,5 +1034,10 @@ public class OpeningHoursParser {
 		testOpened("02.12.2015 16:00", hours, true);
 
 		testOpened("05.12.2015 16:00", hours, false);
+
+		// Test holidays
+		String hoursString = "Mo-Fr 11:00-21:00; PH off";
+		hours = parseOpenedHoursHandleErrors(hoursString);
+		testParsedAndAssembledCorrectly(hoursString, hours);
 	}
 }
