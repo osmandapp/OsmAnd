@@ -104,7 +104,7 @@
 	<string name="poi_kiosk">Quiosco</string>
 	<string name="poi_kitchen">Muebles de cocina</string>
 	<string name="poi_medical_supply">Artículos médicos</string>
-	<string name="poi_mobile_phone">Telefonía celular</string>
+	<string name="poi_mobile_phone">Telefonía móvil</string>
 	<string name="poi_motorcycle">Motos</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
 	<string name="poi_newsagent">Diariería</string>
@@ -950,7 +950,7 @@
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
-	<string name="poi_mobile">Celular</string>
+	<string name="poi_mobile">Telefonía móvil</string>
 	<string name="poi_animal_shelter_dog">Refugio canino</string>
 	<string name="poi_animal_shelter_cat">Refugio gatuno</string>
 	<string name="poi_animal_shelter_dog_cat">Refugio canino y gatuno</string>
@@ -991,7 +991,7 @@
 	<string name="poi_recycling_engine_oil">Aceite de motor</string>
 	<string name="poi_recycling_plastic_bags">Bolsas de plástico</string>
 	<string name="poi_recycling_hazardous_waste">Residuos peligrosos</string>
-	<string name="poi_recycling_mobile_phones">Celulares</string>
+	<string name="poi_recycling_mobile_phones">Teléfonos móviles</string>
 	<string name="poi_recycling_computers">Computadoras</string>
 	<string name="poi_recycling_tyres">Llantas</string>
 	<string name="poi_recycling_tv_monitor">TV, monitores</string>
