@@ -2147,7 +2147,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="weekly">Weekly</string>
     <string name="morning">Morning</string>
     <string name="Night">Night</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_month_and_country">Select month and country</string>
 </resources>

@@ -54,7 +54,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesFragment extends Fragment {
-	public static final String TITILE = "Live Updates";
+	public static final String TITLE = "Live Updates";
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
 		@Override
 		public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {

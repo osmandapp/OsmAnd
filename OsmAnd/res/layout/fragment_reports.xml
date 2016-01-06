@@ -1,12 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="net.osmand.plus.liveupdates.ReportsFragment">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="net.osmand.plus.liveupdates.ReportsFragment">
+
+    <include layout="@layout/shadow_top"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="wrap_content"
+        android:text="@string/select_month_and_country"/>
 
-</FrameLayout>
+    <include layout="@layout/shadow_bottom"/>
+
+</LinearLayout>

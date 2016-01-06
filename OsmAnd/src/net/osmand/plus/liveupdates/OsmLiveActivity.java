@@ -64,8 +64,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
 		private final Fragment[] fragments = new Fragment[]{new LiveUpdatesFragment(),
 				new ReportsFragment()};
-		private final String[] titles = new String[]{LiveUpdatesFragment.TITILE,
-				LiveUpdatesFragment.TITILE};
+		private final String[] titles = new String[]{LiveUpdatesFragment.TITLE,
+				ReportsFragment.TITLE};
 
 		public LiveUpdatesFragmentPagerAdapter(FragmentManager fm) {
 			super(fm);
