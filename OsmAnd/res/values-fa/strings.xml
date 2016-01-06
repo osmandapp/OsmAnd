@@ -71,7 +71,7 @@
 	<string name="rendering_attr_noAdminboundaries_name">مخفی کردن محدوده‌ها</string>
 	<string name="map_widget_max_speed">سرعت مجاز</string>
     <string name="route_descr_lat_lon">طول جغرافیایی %1$.3f, عرض جغرافیایی %2$.3f</string>
-    <string name="route_descr_current_location">موقعیت فعلی</string>
+    
     <string name="no_buildings_found">ساختمانی یافت نشد.</string>
     <string name="search_villages_and_postcodes">جستجوی روستاها/کد پستی</string>
 	<string name="replace_destination_point">جایگزین مقصد کن</string>
@@ -252,7 +252,7 @@
 	<string name="search_address_building">ساختمان</string>
 	<string name="search_address_building_option">ساختمان</string>
 	<string name="search_address_street_option">تقاطع</string>
-	<string name="search_tabs_location">محل</string>
+	
 	
 	<string name="context_menu_item_update_map">به روز رسانی نقشه</string>
 	
@@ -388,7 +388,7 @@
 	<string name="favourites_edit_dialog_name">نام</string>
 	<string name="favourites_edit_dialog_category">دسته بندی</string>
 	<string name="shared_string_no_thanks">نه، متشکرم</string>
-	<string name="search_position_current_location">موقعیت فعلی…</string>
+	
 	<string name="shared_string_rename">تغییر نام</string>
 	
 	<string name="search_position_current_location_search">درحال جستجوی موقعیت…</string>

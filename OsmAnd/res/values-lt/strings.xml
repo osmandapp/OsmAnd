@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -272,7 +271,7 @@
     <string name="search_position_favorites">Įsimintos…</string>
     <string name="search_position_undefined">Nenurodyta</string>
 
-    <string name="search_position_current_location">Esama vieta…</string>
+    
     <string name="search_position_map_view">Esamo žemėlapio centras</string>
     <string name="select_search_position">Pradžia:</string>
     <string name="context_menu_item_search">Ieškoti netoliese nuo čia</string>
@@ -765,7 +764,7 @@
     <string name="search_address_building">Pastatas</string>
     <string name="search_address_building_option">Pastatas</string>
     <string name="search_address_street_option">Susikertanti gatvė</string>
-    <string name="search_tabs_location">Vieta</string>
+    
 
     <string name="context_menu_item_update_map">Atnaujinti žemėlapį</string>
     
@@ -949,7 +948,7 @@
     <string name="background_service_is_enabled_question">OsmAnd foninis režimas vis dar veikia. Ar norite ir jį nutraukti?</string>
 
     <string name="route_descr_lat_lon">Plat. %1$.3f ilg. %2$.3f</string>
-    <string name="route_descr_current_location">Dabartinė buvimo vieta</string>
+    
 
 
     <string name="no_buildings_found">Pastatų nerasta.</string>
@@ -2065,7 +2064,7 @@
     <string name="use_drawer_btn">Naudoti meniu</string>
     <string name="dashboard_or_drawer_title">Valdymo skydelio arba meniu valdymas</string>
     <string name="last_update">Paskutinįkart atnaujinta: %s</string>
-    <string name="update_date_pattern">Atnaujinta: %s</string>
+    
     <string name="update_time">Atnaujinimo laikas</string>
 <string name="shared_string_not_selected">Nepasirinkta</string>
     <string name="rec_split">Įrašo dalijimas</string>
@@ -2086,7 +2085,7 @@
     <string name="access_from_map_description">Meniu mygtukas aktyvuoja duomenų skydelį, ne meniu</string>
     <string name="use_dashboard_btn">Naudoti duomenų skydelį</string>
     <string name="dashboard_or_drawer_description">Sukurta nauja galimybė naudoti programėlę duomenų skydelio arba statinio meniu pagalba. Savo pasirinkimą galite bet kada pakeisti duomenų skydelio nustatymuose.</string>
-    <string name="updates_size_pattern">Atnaujinimai: %s</string>
+    
     <string name="last_map_change">Paskutinįkart žemėlapis keistas: %s</string>
     <string name="hourly">Kas valandą</string>
     <string name="daily">Kasdien</string>

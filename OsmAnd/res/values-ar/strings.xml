@@ -64,7 +64,7 @@
     <string name="download_regular_maps">الخرائط العادية</string>
     <string name="rendering_attr_noAdminboundaries_name">اخفِ الحدود</string>
 	<string name="map_widget_max_speed">حدّ السرعة</string>
-    <string name="route_descr_current_location">الموقع الحالي</string>
+    
     
     
     <string name="no_buildings_found">لم أعثر على أي مبنى.</string>
@@ -282,7 +282,7 @@
 	<string name="search_address_building">بناء</string>
 	<string name="search_address_building_option">بناء</string>
 	<string name="search_address_street_option">المتقاطعة الشارع</string>
-	<string name="search_tabs_location">موقع</string>
+	
 	
 	
 	<string name="context_menu_item_create_poi">إنشاء POI</string>
@@ -938,7 +938,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="search_position_favorites">المفضلة…</string>
 	<string name="search_position_undefined">غير محدد</string>
 	
-	<string name="search_position_current_location">الموقع الحالي…</string>
+	
 	<string name="search_position_map_view">مركز الخريطة الحالي</string>
 	<string name="select_search_position">المنطلق:</string>
 	<string name="context_menu_item_search">بحث بالقرب من هنا</string>

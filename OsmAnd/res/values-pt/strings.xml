@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -379,7 +378,7 @@
   <string name="search_address_building">Edifício</string>
   <string name="search_address_building_option">Edifício</string>
   <string name="search_address_street_option">Rua transversal</string>
-  <string name="search_tabs_location">Localização</string>
+  
   
   <string name="context_menu_item_update_map">Atualizar mapa</string>
   
@@ -657,7 +656,7 @@
   <string name="search_position_favorites">Favoritos…</string>
   <string name="search_position_undefined">Sem definir</string>
   
-  <string name="search_position_current_location">Posição atual…</string>
+  
   <string name="search_position_map_view">Última vista do mapa</string>
   <string name="select_search_position">Pesquisar próximo a:</string>
   <string name="context_menu_item_search">Pesquisar aqui perto</string>
@@ -991,7 +990,7 @@
     <string name="native_library_not_running">O aplicativo está sendo executado em modo seguro (desabilite em Configurações).</string>
     <string name="background_service_is_enabled_question">Serviço em segundo plano ainda em execução. Deseja cancelá-lo?</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
-	<string name="route_descr_current_location">Posição atual</string>
+	
     
     
     <string name="search_villages_and_postcodes">Pesquisa por CEP</string>
@@ -1928,7 +1927,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="missing_write_external_storage_permission">App não tem permissão para usar o cartão SD</string>
     <string name="last_update">Última atualização: %s</string>
     <string name="update_time">Horário de actualização</string>
-    <string name="updates_size_pattern">Actualizações: %s</string>
+    
     <string name="last_map_change">Última alteração de mapa: %s</string>
     <string name="hourly">Hora</string>
     <string name="daily">Dia</string>

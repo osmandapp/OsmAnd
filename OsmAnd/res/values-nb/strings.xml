@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -252,7 +251,7 @@
     <string name="search_position_favorites">Favoritter…</string>
     <string name="search_position_undefined">Udefinert</string>
 
-    <string name="search_position_current_location">Gjeldende posisjon…</string>
+    
     <string name="search_position_map_view">Gjeldende kartsenter</string>
     <string name="select_search_position">Utgangspunkt:</string>
     <string name="context_menu_item_search">Søk nær her</string>
@@ -534,7 +533,7 @@
     <string name="search_address_building">Bygning</string>
     <string name="search_address_building_option">Bygning</string>
     <string name="search_address_street_option">Kryssende gate</string>
-    <string name="search_tabs_location">Posisjon</string>
+    
 
     <string name="context_menu_item_update_map">Oppdater kart</string>
     
@@ -604,7 +603,7 @@
     <string name="context_menu_item_directions_from">Anvisninger fra</string>
     <string name="route_descr_map_location">Kart: </string>
     <string name="route_descr_lat_lon">Br %1$.3f, Le %2$.3f</string>
-    <string name="route_descr_current_location">Gjeldende posisjon</string>
+    
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Fra:</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -185,7 +184,7 @@
     <string name="search_position_favorites">Kedvencek…</string>
     <string name="search_position_undefined">Meghatározatlan</string>
 
-    <string name="search_position_current_location">Jelenlegi pozíció…</string>
+    
     <string name="search_position_map_view">Jelenlegi térkép középpont</string>
     <string name="select_search_position">Eredet:</string>
     <string name="context_menu_item_search">Keresés itt</string>
@@ -683,7 +682,7 @@
     <string name="search_address_building">Házszám</string>
     <string name="search_address_building_option">Épület</string>
     <string name="search_address_street_option">Keresztező utca</string>
-    <string name="search_tabs_location">Koordináta</string>
+    
 
     <string name="context_menu_item_update_map">Térkép frissítése</string>
     
@@ -957,7 +956,7 @@
     <string name="no_buildings_found">Nem található épület.</string>
     <string name="search_villages_and_postcodes">További települések/irányítószám keresése</string>
     <string name="route_descr_lat_lon">szél. %1$.3f, hossz. %2$.3f</string>
-    <string name="route_descr_current_location">Jelenlegi pozíció</string>
+    
 
 
     <string name="map_widget_max_speed">Megengedett sebesség</string>

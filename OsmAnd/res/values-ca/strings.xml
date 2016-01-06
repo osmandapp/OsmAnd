@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -229,7 +228,7 @@
     <string name="search_position_current_location_found">La meva posició (trobada)</string>
     <string name="search_position_address">Adreça…</string>
     <string name="search_position_undefined">Indefinida</string>
-    <string name="search_position_current_location">Posició actual…</string>
+    
     <string name="context_menu_item_search">Cerca prop d\'aquí</string>
     <string name="shared_string_save_as_gpx">Desa la ruta com una traça GPX</string>
     <string name="route_successfully_saved_at">La ruta s\'ha desat correctament com a «%1$s».</string>
@@ -772,7 +771,7 @@
     <string name="app_description">Aplicació de navegació</string>
     <string name="shared_string_show_on_map">Mostra al mapa</string>
     <string name="search_address_street_option">Intersecció de carrers</string>
-    <string name="search_tabs_location">Localització</string>
+    
     <string name="add_favorite_dialog_top_text">Introducció del nom del preferit</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferit</string>
     <string name="add_favorite_dialog_favourite_added_template">El punt preferit «{0}» s\'ha afegit correctament.</string>
@@ -849,7 +848,7 @@
     <string name="rendering_attr_noAdminboundaries_description">No mostra els límits administratius regionals (nivells 5 a 9)</string>
     <string name="map_widget_max_speed">Límit de velocitat</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="route_descr_current_location">Posició actual</string>
+    
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el destí</string>

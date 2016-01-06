@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -173,7 +172,7 @@
     <string name="context_menu_item_directions_from">Indicatziones dae</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
-    <string name="route_descr_current_location">Positzione atuale</string>
+    
     <string name="route_to">A:</string>
     <string name="route_via">Pro:</string>
     <string name="route_from">Dae:</string>
@@ -982,7 +981,7 @@
     <string name="shared_string_rename">Càmbia su nùmene</string>
     <string name="search_position_undefined">Non dessinidu</string>
 
-    <string name="search_position_current_location">Positzione currente…</string>
+    
     <string name="search_position_map_view">Tzentru atuale de sa mapa</string>
     <string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
     <string name="favourites_delete_multiple_succesful">Puntu/os preferidu/os burradu/os.</string>
@@ -1431,7 +1430,7 @@
     <string name="search_address_building">Tzìvicu</string>
     <string name="search_address_building_option">Tzìvicu</string>
     <string name="search_address_street_option">Rucrada</string>
-    <string name="search_tabs_location">Positzione</string>
+    
 
     <string name="context_menu_item_update_map">Agiorna sa mapa</string>
     
@@ -2057,9 +2056,9 @@
     <string name="live_updates">Agiornamentos in tempus reale</string>
     <string name="available_maps">Mapas disponìbiles</string>
     <string name="last_update">Ùrtimu agiornamentu: %s</string>
-<string name="update_date_pattern">Agiornamentu: %s</string>
+
     <string name="update_time">Tempus de agiornamentu</string>
-    <string name="updates_size_pattern">Agiornamentos: %s</string>
+    
 <string name="shared_string_not_selected">Non ischertadu</string>
     <string name="rec_split_desc">Torra a iscrìere sas notas si non b\'est logu bastante in sa memòria</string>
     <string name="rec_split_clip_length">"Longària  de sa nota"</string>
@@ -2072,6 +2071,6 @@
     <string name="weekly">Cada chida</string>
     <string name="morning">Mangianu</string>
     <string name="Night">Note</string>
-    <string name="osm_live">OSM Live (in dereta)</string>
+    
 <string name="updates_size">Mannària agiornamentos</string>
     </resources>

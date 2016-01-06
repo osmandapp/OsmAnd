@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -50,7 +49,7 @@
     <string name="context_menu_item_directions_from">Упутства од</string>
     <string name="route_descr_map_location">Карта : </string>
     <string name="route_descr_lat_lon">Шир %1$.3f, дуж %2$.3f</string>
-    <string name="route_descr_current_location">Тренутна позиција</string>
+    
     <string name="route_to">До:</string>
     <string name="route_via">Преко:</string>
     <string name="route_from">Из:</string>
@@ -258,7 +257,7 @@
 <string name="search_position_current_location_search">Претрага положаја…</string>
 	<string name="search_position_current_location_found">Положај (пронађен)</string>
 	<string name="search_position_favorites">Омиљено…</string>
-	<string name="search_position_current_location">Тренутни положај…</string>
+	
 	<string name="search_position_map_view">Средиште тренутне мапе</string>
 	<string name="select_search_position">Извор:</string>
 	<string name="context_menu_item_search">Тражи оближње</string>

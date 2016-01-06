@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -174,7 +173,7 @@
     <string name="map_widget_max_speed">Ограничение на скоростта</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Ширина %1$.3f, дължина %2$.3f</string>
-    <string name="route_descr_current_location">Текуща позиция</string>
+    
 
     <string name="no_buildings_found">Няма намерени номера.</string>
     <string name="incremental_search_city">Търсене на град възходящо</string>
@@ -581,7 +580,7 @@
     <string name="search_position_favorites">Любими…</string>
     <string name="search_position_undefined">Неопределена</string>
 
-    <string name="search_position_current_location">Текуща позиция…</string>
+    
     <string name="search_position_map_view">Текущ център на картата</string>
     <string name="select_search_position">Начална точка:</string>
     <string name="context_menu_item_search">Търси близо до това място</string>
@@ -1057,7 +1056,7 @@
     <string name="search_address_building">Номер</string>
     <string name="search_address_building_option">Номер</string>
     <string name="search_address_street_option">Пресичаща улица</string>
-    <string name="search_tabs_location">Място</string>
+    
 
     <string name="context_menu_item_update_map">Обнови картата</string>
 

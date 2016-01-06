@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -41,7 +40,7 @@
     <string name="context_menu_item_create_poi">Ustvari točko POI</string>
     
     <string name="context_menu_item_update_map">Osveži zemljevid</string>
-    <string name="search_tabs_location">Mesto</string>
+    
     <string name="add_favorite_dialog_default_favourite_name">Priljubljena točka</string>
     <string name="add_favorite_dialog_top_text">Vnesite ime priljubljene točke</string>
     <string name="favourites_context_menu_edit">Uredi priljubljeno točko</string>
@@ -474,7 +473,7 @@
     <string name="fast_route_mode_descr">"Izbrana možnost določa izbor najhitrejše poti, neizbrana pa po razdalji najkrajše. "</string>
     <string name="search_position_undefined">Nedoločeno</string>
 
-    <string name="search_position_current_location">Trenutno mesto …</string>
+    
     <string name="search_position_map_view">Trenutna sredina zemljevida</string>
     <string name="search_position_address">Naslov …</string>
     <string name="city_type_city">Mesto</string>
@@ -604,7 +603,7 @@
 
 
     <string name="route_descr_lat_lon">ZD (λ) %1$.3f; ZŠ (β) %2$.3f</string>
-    <string name="route_descr_current_location">Trenutno mesto</string>
+    
     <string name="first_time_msg">Zahvaljujemo se vam za uporabo programa OsmAnd. Za različne možnosti programa je treba naložiti krajevne podatke. Urejevalnik je na voljo med \'Nastavitvami\' → \'Upravljanje s podatki\'. Po namestitvi bo mogoče pregledovati zemljevid, iskati naslove in zanimive točke POI ter načrtovati možne poti javnega prevoza kraja.</string>
     <string name="local_indexes_cat_tile">Spletni in shranjeni zemljevidi</string>
     <string name="map_online_data">Spletni in shranjeni zemljevidi</string>
@@ -2061,7 +2060,7 @@
     <string name="select_voice_provider">Izbor glasu za vodenje</string>
     <string name="select_voice_provider_descr">Izbor ali prejem glasu za vodenje v želenem jeziku</string>
     <string name="last_update">Zadnja posodobitev: %s</string>
-    <string name="update_date_pattern">Posodobitev: %s</string>
+    
     <string name="update_time">Čas posodobitve</string>
 <string name="shared_string_not_selected">Ni izbrano</string>
     <string name="rec_split_clip_length">Dolžina posnetka</string>

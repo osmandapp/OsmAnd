@@ -230,7 +230,7 @@
   <string name="search_position_favorites">რჩეულები…</string>
   <string name="search_position_undefined">არააღწერილი</string>
   
-  <string name="search_position_current_location">მიმდინარე მდებარეობა…</string>
+  
   <string name="search_position_map_view">უკანასკნელად ნანახი რუკის ხედი</string>
   <string name="select_search_position">ძებნა ახლოს :</string>
   <string name="context_menu_item_search">ახლოს ძებნა</string>
@@ -743,7 +743,7 @@
   <string name="search_address_building">შენობა</string>
   <string name="search_address_building_option">შენობა</string>
   <string name="search_address_street_option">მკვეთი ქუჩა</string>
-  <string name="search_tabs_location">მდებარეობა</string>
+  
   
   <string name="context_menu_item_update_map">რუკის განახლება</string>
   
@@ -1049,7 +1049,7 @@
     <string name="map_widget_max_speed">სიჩქარის ლიმიტი</string>
     <string name="monitoring_control_start">GPX დევნა</string>
     <string name="route_descr_lat_lon">გან %1$.3f, გრძ %2$.3f</string>
-    <string name="route_descr_current_location">მიმინარე მდებარეობა</string>
+    
     
     
     <string name="osmand_plus_short_description_80_chars">OsmAnd წარმოადგენს აპლიკაციას ღია კოდით გათიშული და მიმდინარე რუკებით ნავიგაციისათვის</string>

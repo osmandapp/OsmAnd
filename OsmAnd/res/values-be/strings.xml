@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -51,7 +50,7 @@
     <string name="context_menu_item_directions_from">Маршрут адсюль</string>
     <string name="route_descr_map_location">Мапа: </string>
     <string name="route_descr_lat_lon">%1$.3f шыр., %2$.3f даў.</string>
-    <string name="route_descr_current_location">Бягучае становішча</string>
+    
     <string name="route_to">Да:</string>
     <string name="route_via">Праз:</string>
     <string name="route_from">З:</string>
@@ -605,7 +604,7 @@
 	<string name="search_position_favorites">Упадабаныя…</string>
 	<string name="search_position_undefined">Нявызначана</string>
 	
-	<string name="search_position_current_location">Бягучае становішча…</string>
+	
 	<string name="search_position_map_view">Бягучы цэнтар мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
@@ -1069,7 +1068,7 @@
 	<string name="search_address_building">Будынак</string>
 	<string name="search_address_building_option">Дом</string>
 	<string name="search_address_street_option">Перакрыжаваньне</string>
-	<string name="search_tabs_location">Каардынаты</string>
+	
 	
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
 	
@@ -2079,7 +2078,7 @@
     <string name="select_voice_provider">Выберыце галасавыя ўказаньні</string>
     <string name="select_voice_provider_descr">Выберыце ці сьцягніце галасавыя ўказаньні для вашай мовы</string>
     <string name="impassable_road_desc">Выберыце дарогі, якія вы хочаце пазьбягаць падчас навігацыі</string>
-    <string name="update_date_pattern">Абнаўленьне: %s</string>
+    
     <string name="update_time">Час абнаўленьня</string>
 <string name="updates_size">Абнаўленьні: %s</string>
     <string name="last_map_change">Апошняя зьмена мапы: %s</string>

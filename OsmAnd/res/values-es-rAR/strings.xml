@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -648,7 +647,7 @@
     <string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
-    <string name="route_descr_current_location">Posición actual</string>
+    
     <string name="route_descr_destination">Destino</string>
     <string name="route_to">Hacia:</string>
     <string name="route_via">Vía:</string>
@@ -1250,7 +1249,7 @@
     <string name="search_position_address">Dirección…</string>
     <string name="search_position_favorites">Favoritos…</string>
     <string name="search_position_undefined">Indefinido</string>
-    <string name="search_position_current_location">Ubicación actual…</string>
+    
     <string name="search_position_map_view">Vista actual del mapa</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>
@@ -1662,7 +1661,7 @@
     <string name="search_address_building">Edificio</string>
     <string name="search_address_building_option">Edificio</string>
     <string name="search_address_street_option">Intersección de calle</string>
-    <string name="search_tabs_location">Ubicación</string>
+    
     <string name="context_menu_item_update_map">Actualizar mapa</string>
     
     <string name="context_menu_item_create_poi">Crear PDI</string>
@@ -2020,9 +2019,9 @@
     <string name="live_updates">Actualizaciones en vivo</string>
     <string name="available_maps">Mapas disponibles</string>
     <string name="last_update">Última actualización: %s</string>
-<string name="update_date_pattern">Actualización: %s</string>
+
     <string name="update_time">Tiempo de actualización</string>
-    <string name="size_pattern">Tamaño: %s</string>
+    
 <string name="rec_split">Dividir grabación</string>
     <string name="rec_split_title">Usar la división de grabación</string>
     <string name="rec_split_desc">Reescribir clips al exceder el espacio de almacenamiento utilizado</string>
@@ -2038,5 +2037,5 @@
     <string name="morning">Mañana</string>
     <string name="Night">Noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
-    <string name="osm_live">OSM en vivo</string>
+    
 </resources>

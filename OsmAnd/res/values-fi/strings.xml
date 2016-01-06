@@ -206,7 +206,7 @@
 	<string name="search_position_address">Osoite…</string>
 	<string name="search_position_favorites">Suosikit…</string>
 	<string name="search_position_undefined">Määrittelemätön</string>
-	<string name="search_position_current_location">Nykyinen sijainti…</string>
+	
 	<string name="select_search_position">Etsi läheltä:</string>
 	<string name="shared_string_save">Tallenna</string>
 	
@@ -405,7 +405,7 @@
 	<string name="search_address_building">Rakennus</string>
 	<string name="search_address_building_option">Rakennus</string>
 	<string name="search_address_street_option">Risteävä katu</string>
-	<string name="search_tabs_location">Sijainti</string>
+	
 	
 	<string name="context_menu_item_update_map">Päivitä kartta</string>
 	<string name="shared_string_cancel">Peruuta</string>
@@ -576,7 +576,7 @@
 	<string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>
 	
 	<string name="osb_comment_dialog_author">Tekijän nimi</string>
-	<string name="route_descr_current_location">Nykyinen sijainti</string>
+	
     <string name="download_roads_only_item">"Tiet "</string>
     <string name="download_regular_maps">Tavalliset kartat</string>
     

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -43,7 +42,7 @@
   <string name="search_position_favorites">Ulubione…</string>
   <string name="search_position_undefined">Niezdefiniowane</string>
   
-  <string name="search_position_current_location">Obecna pozycja…</string>
+  
   <string name="search_position_map_view">Aktualny środek mapy</string>
   <string name="select_search_position">Źródło:</string>
   <string name="context_menu_item_search">Szukaj w pobliżu</string>
@@ -581,7 +580,7 @@
   <string name="search_address_building">Budynek</string>
   <string name="search_address_building_option">Budynek</string>
   <string name="search_address_street_option">Skrzyżowanie</string>
-  <string name="search_tabs_location">Lokalizacja</string>
+  
   
   <string name="context_menu_item_update_map">Uaktualnij mapę</string>
   
@@ -973,7 +972,7 @@
     <string name="no_buildings_found">Nie odnaleziono budynków.</string>
     <string name="search_villages_and_postcodes">Szukaj więcej wsi/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
-    <string name="route_descr_current_location">Bieżące położenie</string>
+    
     
     
     <string name="rendering_attr_showRoadMaps_description">Wybierz kiedy wyświetlać tylko mapy samochodowe:</string>

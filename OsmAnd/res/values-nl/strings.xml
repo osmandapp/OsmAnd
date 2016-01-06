@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -203,7 +202,7 @@
   <string name="map_version_changed_info">Op de server staan kaartbestanden die niet compatibel zijn met de huidige programmaversie. Je moet eerst OsmAnd updaten voordat je kaarten kan downloaden en gebruiken.</string>
   
   <string name="poi_filter_nominatim">Online (Nominatim)</string>
-  <string name="search_position_current_location">Huidige positie…</string>
+  
   <string name="search_position_map_view">Midden van kaart</string>
   <string name="select_search_position">Startpunt:</string>
   <string name="context_menu_item_search">Zoek hier dichtbij</string>
@@ -701,7 +700,7 @@
   <string name="search_address_building">Huisnummer</string>
   <string name="search_address_building_option">Gebouw</string>
   <string name="search_address_street_option">Zijstraat</string>
-  <string name="search_tabs_location">Coördinaten</string>
+  
   
   
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
@@ -994,7 +993,7 @@
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
     <string name="search_villages_and_postcodes">Zoek verder (dorp of postcode vinden)</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
-    <string name="route_descr_current_location">Huidige positie</string>
+    
     
     
     <string name="map_widget_max_speed">Snelheidslimiet</string>
@@ -2139,7 +2138,7 @@
     <string name="live_updates">Live Updates</string>
     <string name="available_maps">Beschikbare Kaarten</string>
     <string name="last_update">Laatste controle: %s</string>
-<string name="update_date_pattern">Update: %s</string>
+
     <string name="update_time">Controle-tijdstip</string>
 <string name="updates_size">Updates: %s</string>
 <string name="last_map_change">Laatste kaart-update: %s</string>
@@ -2156,5 +2155,5 @@
     <string name="morning">\'s ochtends</string>
     <string name="Night">\'s avonds</string>
 <string name="shared_string_not_selected">Niet geselecteerd</string>
-    <string name="osm_live">OSM Live</string>
+    
 </resources>

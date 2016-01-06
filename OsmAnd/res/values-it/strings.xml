@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -100,7 +99,7 @@
     <string name="search_position_favorites">Preferiti…</string>
     <string name="search_position_undefined">Non definito</string>
 
-    <string name="search_position_current_location">Posizione corrente…</string>
+    
     <string name="search_position_map_view">Attuale centro della mappa</string>
     <string name="select_search_position">Origine:</string>
     <string name="context_menu_item_search">Cerca nelle vicinanze</string>
@@ -577,7 +576,7 @@
     <string name="search_address_building">Civico</string>
     <string name="search_address_building_option">Civico</string>
     <string name="search_address_street_option">Incrocio</string>
-    <string name="search_tabs_location">Posizione</string>
+    
 
     <string name="context_menu_item_update_map">Aggiorna la mappa</string>
 
@@ -946,7 +945,7 @@
     <string name="background_service_is_enabled_question">Il servizio OsmAnd è ancora in esecuzione in background. Si desidera arrestarlo?</string>
 
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
-    <string name="route_descr_current_location">Posizione attuale</string>
+    
 
 
     <string name="no_buildings_found">Nessun edificio trovato.</string>
@@ -2115,7 +2114,7 @@
     <string name="live_updates">Aggiornamenti</string>
     <string name="available_maps">Mappe disponibili</string>
     <string name="last_update">Ultimo aggiornamento: %s</string>
-<string name="update_date_pattern">Aggiornamento: %s</string>
+
     <string name="size_pattern">Dimensione: %s</string>
 <string name="rec_split_desc">Sovrascrivi le note quando lo spazio disponibile è esaurito</string>
     <string name="rec_split_clip_length">Lunghezza della nota</string>
@@ -2131,5 +2130,5 @@
     <string name="morning">Mattina</string>
     <string name="Night">Notte</string>
 <string name="shared_string_not_selected">Non selezionato</string>
-    <string name="osm_live">OSM Live</string>
+    
 </resources>

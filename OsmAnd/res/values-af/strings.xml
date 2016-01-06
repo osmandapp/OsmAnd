@@ -291,7 +291,7 @@
   <string name="search_position_favorites">Gunstelinge…</string>
   <string name="search_position_undefined">ongedefinieerd</string>
   
-  <string name="search_position_current_location">Huidige posisie…</string>
+  
   <string name="search_position_map_view">Laaste kaart uitsig</string>
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
@@ -793,7 +793,7 @@
   <string name="search_address_building">Gebou</string>
   <string name="search_address_building_option">Gebou</string>
   <string name="search_address_street_option">Kruisende straat</string>
-  <string name="search_tabs_location">Ligging</string>
+  
   
   <string name="context_menu_item_update_map">opgradeer kaart</string>
   
@@ -1062,7 +1062,7 @@
     
 	
     <string name="route_descr_lat_lon">Breedtegraad %1$.3f, lengtegraad %2$.3f</string>
-    <string name="route_descr_current_location">Huidige posisie</string>
+    
     
     
     <string name="background_service_is_enabled_question">OsmAnd slaapwyse diens is nog aan. Wil jy dit afskakel?</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -111,7 +110,7 @@
     <string name="search_position_address">Dirección…</string>
     <string name="search_position_favorites">Favoritos…</string>
     <string name="search_position_undefined">Indefinido</string>
-    <string name="search_position_current_location">Posición actual…</string>
+    
     <string name="search_position_map_view">Centro del mapa actual</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>
@@ -567,7 +566,7 @@
     <string name="search_address_building">Edificio</string>
     <string name="search_address_building_option">Edificio</string>
     <string name="search_address_street_option">Intersección de calle</string>
-    <string name="search_tabs_location">Ubicación</string>
+    
     <string name="context_menu_item_update_map">Actualizar mapa</string>
     <string name="context_menu_item_create_poi">Crear PDI</string>
     <string name="shared_string_yes">Sí</string>
@@ -868,7 +867,7 @@
     <string name="download_roads_only_maps">Mapa sólo de carreteras</string>
     <string name="incomplete_locale">incompleto</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
-    <string name="route_descr_current_location">Posición actual</string>
+    
     <string name="no_buildings_found">No se encontraron edificios.</string>
     <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
@@ -2019,9 +2018,9 @@
     <string name="live_updates">Actualizaciones en vivo</string>
     <string name="available_maps">Mapas disponibles</string>
     <string name="last_update">Última actualización: %s</string>
-<string name="update_date_pattern">Actualización: %s</string>
+
     <string name="update_time">Tiempo de actualización</string>
-<string name="size_pattern">Tamaño: %s</string>
+
 <string name="rec_split_storage_size">Tamaño del almacenamiento</string>
     <string name="updates_size">Actualizaciones: %s</string>
     <string name="last_map_change">Último cambio de mapa: %s</string>
@@ -2037,5 +2036,5 @@
     <string name="morning">Por la mañana</string>
     <string name="Night">Por la noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
-    <string name="osm_live">OSM en vivo</string>
+    
 </resources>

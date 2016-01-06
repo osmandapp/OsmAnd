@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -114,7 +113,7 @@
     <string name="search_position_favorites">Favori…</string>
     <string name="search_position_undefined">Non défini</string>
 
-    <string name="search_position_current_location">Position actuelle</string>
+    
     <string name="search_position_map_view">Centre de la carte</string>
     <string name="select_search_position">Autour de :</string>
     <string name="context_menu_item_search">Rechercher autour de ce point</string>
@@ -608,7 +607,7 @@
     <string name="search_address_building">Numéro</string>
     <string name="search_address_building_option">Numéro</string>
     <string name="search_address_street_option">Intersection</string>
-    <string name="search_tabs_location">Position</string>
+    
 
     <string name="context_menu_item_update_map">Mettre à jour la carte</string>
     
@@ -961,7 +960,7 @@
     <string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
     <string name="search_villages_and_postcodes">Rechercher plus de villages et codes postaux</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
-    <string name="route_descr_current_location">Position actuelle</string>
+    
 
 
     <string name="map_widget_max_speed">Limite de vitesse</string>
@@ -2087,7 +2086,7 @@
     <string name="live_updates">Mises à jour en temps réel</string>
     <string name="available_maps">Cartes disponibles</string>
     <string name="last_update">Dernière mise à jour : %s</string>
-<string name="update_date_pattern">Mise à jour : %s</string>
+
     <string name="update_time">Heure de mise à jour</string>
 <string name="updates_size">Mises à jour : %s</string>
 <string name="last_map_change">Dernier carte modifiée : %s</string>
@@ -2097,5 +2096,5 @@
     <string name="weekly">Hebdomadaire</string>
     <string name="morning">Matin</string>
     <string name="Night">Nuit</string>
-    <string name="osm_live">OSM Live</string>
+    
 </resources>
