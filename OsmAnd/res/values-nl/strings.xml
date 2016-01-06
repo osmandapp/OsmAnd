@@ -2140,7 +2140,7 @@
     <string name="last_update">Laatste controle: %s</string>
 
     <string name="update_time">Controle-tijdstip</string>
-<string name="updates_size">Updates: %s</string>
+<string name="updates_size">Updates: grootte totaal</string>
 <string name="last_map_change">Laatste kaart-update: %s</string>
 <string name="rec_split">Video-opname automatisch splitsen</string>
     <string name="rec_split_title">Gebruik automatische splitsing</string>
