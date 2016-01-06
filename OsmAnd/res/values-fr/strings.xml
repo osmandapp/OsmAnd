@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -2097,4 +2098,5 @@
     <string name="morning">Matin</string>
     <string name="Night">Nuit</string>
     
+<string name="select_month_and_country">Choisissez un mois et un pays</string>
 </resources>
