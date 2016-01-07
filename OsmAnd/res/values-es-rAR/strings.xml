@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -2032,10 +2033,11 @@
     <string name="updates_size">Actualizaciones: %s</string>
     <string name="last_map_change">Último cambio de mapa: %s</string>
     <string name="hourly">Cada hora</string>
-    <string name="daily">Diariamente</string>
-    <string name="weekly">Semanalmente</string>
+    <string name="daily">Diario</string>
+    <string name="weekly">Semanal</string>
     <string name="morning">Mañana</string>
     <string name="Night">Noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
     
+<string name="select_month_and_country">Elige mes y país</string>
 </resources>
