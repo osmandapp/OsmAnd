@@ -1828,7 +1828,7 @@
     <string name="offline_maps_and_navigation">Mapas y navegación
 \nsin conexión</string>
     <string name="commit_poi">Enviar PDI</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes de enlace</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
