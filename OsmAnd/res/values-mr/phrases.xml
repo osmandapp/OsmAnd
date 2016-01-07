@@ -36,4 +36,32 @@
 	<string name="poi_curtain">पडद्याचे दुकान</string>
 	<string name="poi_florist">फुलांचे दुकान</string>
 	<string name="poi_furniture">फर्निचर</string>
+	<string name="poi_judo">ज्युदो</string>
+	<string name="poi_badminton">बॅडमिंटन</string>
+	<string name="poi_microwave_oven_yes">मायक्रोव्हेव ओवन: हो</string>
+	<string name="poi_microwave_oven_no">मायक्रोव्हेव ओवन: नाही</string>
+	<string name="poi_billiards">बिलियर्डस</string>
+
+	<string name="poi_sustenance">खाद्य</string>
+	<string name="poi_finance">आर्थिक</string>
+	<string name="poi_military">सैन्य</string>
+	<string name="poi_confectionery">मिठाई</string>
+	<string name="poi_ice_cream">आइसक्रीम पार्लर</string>
+	<string name="poi_shoes">चपलांचे दुकान</string>
+	<string name="poi_candles">मेणबत्त्यांचे दुकान</string>
+	<string name="poi_doors">दरवाजे</string>
+	<string name="poi_gift">भेटवस्तूंचे दुकान</string>
+	<string name="poi_herbalist">वनौषधी दुकान</string>
+	<string name="poi_hunting">शिकारीचे साहित्य</string>
+	<string name="poi_jewelry">दागिन्याचे दुकान</string>
+	<string name="poi_medical_supply">वैद्यकीय पुरवठा</string>
+	<string name="poi_musical_instrument">वाद्ये</string>
+	<string name="poi_music">संगीत दुकान</string>
+	<string name="poi_paint">रंगाचे दुकान</string>
+	<string name="poi_pet">पाळीव प्राण्यांचे दुकान</string>
+	<string name="poi_toys">खेळण्यांचे दुकान</string>
+	<string name="poi_cosmetics">सौंदर्य प्रसाधने</string>
+	<string name="poi_watches">घड्याळांचे दुकान</string>
+	<string name="poi_weapons">शस्त्रांचे दुकान</string>
+	<string name="poi_police">पोलिस</string>
 	</resources>
