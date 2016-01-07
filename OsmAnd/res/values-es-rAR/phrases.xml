@@ -202,17 +202,17 @@
 	<string name="poi_parking_entrance">Entrada del estacionamiento</string>
 	<string name="poi_garages">Garajes</string>
 
-	<string name="poi_public_transport_platform">Andén de transporte público</string>
-	<string name="poi_public_transport_platform_bus">Andén de colectivo</string>
-	<string name="poi_public_transport_platform_trolleybus">Andén de trolebús</string>
+	<string name="poi_public_transport_platform">Parada de transporte público</string>
+	<string name="poi_public_transport_platform_bus">Parada de colectivo</string>
+	<string name="poi_public_transport_platform_trolleybus">Parada de trolebús</string>
 	<string name="poi_bus_stop">Parada de colectivo</string>
 	<string name="poi_public_transport_stop_position">Punto de detención de transporte público</string>
-	<string name="poi_public_transport_platform_tram">Andén de tranvía</string>
+	<string name="poi_public_transport_platform_tram">Parada de tranvía</string>
 	<string name="poi_tram_stop">Parada de tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
 	<string name="poi_bus_station">Estación de colectivo</string>
 	<string name="poi_railway_station">Estación de tren</string>
-	<string name="poi_railway_platform">Andén de tren</string>
+	<string name="poi_railway_platform">Parada de tren</string>
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_subway_entrance">Entrada de subte</string>
 	<string name="poi_subway_station">Estación de subte</string>
@@ -1017,8 +1017,8 @@
 	<string name="poi_recycling_fridge_and_freezer">Heladeras y congeladores</string>
 	<string name="poi_recycling_furniture">Muebles</string>
 	<string name="poi_recycling_diapers">Pañales</string>
-	<string name="poi_recycling_car_batteries">Baterías de autos</string>
-	<string name="poi_recycling_cars">Autos</string>
+	<string name="poi_recycling_car_batteries">Baterías de automóviles</string>
+	<string name="poi_recycling_cars">Automóviles</string>
 	<string name="poi_recycling_bicycles">Bicicletas</string>
 
 	<string name="poi_shower">Duchas</string>
@@ -1659,7 +1659,7 @@
 	<string name="poi_diaper_no">Sin cambiador de pañales</string>
 	<string name="poi_diaper_room">Habitación para cambio de pañales</string>
 
-<string name="poi_car_wash_no">Lavado de autos: No</string>
+<string name="poi_car_wash_no">Sin lavadero de automóviles</string>
 
 	<string name="poi_maxstay">Estadía máxima</string>
 
@@ -1944,8 +1944,8 @@
 	<string name="poi_service_bicycle_rental_no">No alquila bicicletas</string>
 	<string name="poi_service_bicycle_pump_yes">Infla de bicicletas</string>
 	<string name="poi_service_bicycle_pump_no">No infla bicicletas</string>
-	<string name="poi_service_bicycle_diy_yes">Autoservicio para bicicletas</string>
-	<string name="poi_service_bicycle_diy_no">Sin autoservicio de herramientas para bicicletas</string>
+	<string name="poi_service_bicycle_diy_yes">Con autoservicio para bicicletas</string>
+	<string name="poi_service_bicycle_diy_no">Sin autoservicio para bicicletas</string>
 	<string name="poi_service_bicycle_cleaning_yes">Limpia bicicletas</string>
 	<string name="poi_service_bicycle_cleaning_no">No limpia bicicletas</string>
 	<string name="poi_service_bicycle_chaintool_yes">Con herramientas para cadenas de bicicletas</string>
