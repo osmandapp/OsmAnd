@@ -2039,4 +2039,6 @@
 <string name="shared_string_not_selected">No seleccionado</string>
     
 <string name="select_month_and_country">Seleccione mes y país</string>
-</resources>
+<string name="shared_string_type">Tipo</string>
+    <string name="starting_point">Punto de partida</string>
+    </resources>
