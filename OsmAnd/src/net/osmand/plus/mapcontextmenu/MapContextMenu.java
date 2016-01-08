@@ -474,7 +474,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				addAsTargetAction.dlg.setButton(Dialog.BUTTON_NEGATIVE, mapActivity.getResources().getString(R.string.shared_string_skip), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						cancelSearch = true;
-						searchingAddress = false;
 					}
 				});
 				addAsTargetAction.dlg.show();
