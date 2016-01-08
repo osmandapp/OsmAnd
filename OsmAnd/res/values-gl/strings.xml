@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -119,7 +120,7 @@
     <string name="show_zoom_buttons_navigation_descr">Mostrar os botósn de ampliación durante a navegación</string>
     <string name="show_zoom_buttons_navigation">Mostrar os botóns de ampliación</string>
     <string name="save_as_favorites_points">Gardar como grupo de favoritos</string>
-    <string name="select_destination_and_intermediate_points">Seleccionar puntos de pasaxe</string>
+    <string name="select_destination_and_intermediate_points">Seleccionar destinos</string>
     <string name="layer_amenity_label">Nomes dos puntos</string>
     <string name="loading_smth">A cargar %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
@@ -358,7 +359,7 @@
     
     <string name="shared_string_and">e</string>
     <string name="shared_string_or">ou</string>
-	<string name="route_is_too_long">O cálculo de rutas sen conexión de OsmAnd pode levar moito tempo (e ás veces non funcionar) para puntos que fiquen a máis de 200 km entre si. Habitualmente axuda engadir puntos de pasaxe intermedios.</string>
+	<string name="route_is_too_long">O cálculo de rutas sen conexión de OsmAnd pode levar moito tempo (e ás veces non funcionar) para puntos que fiquen a máis de 200 km entre si. Habitualmente axuda engadir destinos intermedios.</string>
 	<string name="auto_zoom_none">Sen ampliación automática</string>
 	<string name="auto_zoom_close">A primeiro plano</string>
 	<string name="auto_zoom_far">A media distancia</string>
@@ -408,9 +409,9 @@
 	<string name="speak_traffic_warnings">Avisos de tráfico</string>
     
     <string name="osb_author_or_password_not_specified">Indique o usuario e contrasinal en OSM en Configuración</string>
-    <string name="clear_intermediate_points">Limpar os puntos intermedios</string>
-    <string name="keep_intermediate_points">Manter os puntos intermedios</string>
-    <string name="new_directions_point_dialog">Xa hai puntos intermedios.</string>
+    <string name="clear_intermediate_points">Limpar os destinos intermedios</string>
+    <string name="keep_intermediate_points">Manter os destinos intermedios</string>
+    <string name="new_directions_point_dialog">Xa hai destinos intermedios.</string>
     <string name="context_menu_item_directions_to">Indicacións para</string>
     <string name="context_menu_item_directions_from">Indicacións desde</string>
     <string name="route_descr_map_location">"Mapa: "</string>
@@ -428,7 +429,7 @@
     <string name="please_select_address">Seleccione primeiro a cidade ou rúa</string>
     
     <string name="search_street_in_neighborhood_cities">Buscar a rúa nas poboacións viciñas</string>
-    <string name="intermediate_items_sort_return">Os puntos de pasaxe intermedios foron reordenados para optimizar a ordenación de camiño ao destino.</string>
+    <string name="intermediate_items_sort_return">Os destinos intermedios foron reordenados para optimizar a ordenación de camiño ao destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar porta a porta</string>
     <string name="local_osm_changes_backup_successful">O ficheiro de cambios de OSM foi xerado correctamente %1$s</string>
     <string name="local_osm_changes_backup_failed">Fallou a creación da copia de seguranza dos cambios de OSM</string>
@@ -500,7 +501,7 @@
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos de son/vídeo</string>
     <string name="stop_routing_confirm">Confirma que desexa parar a navegación?</string>
-    <string name="clear_dest_confirm">Confirma que desexa limpar o punto de destino (e os puntos de pasaxe)?</string>
+    <string name="clear_dest_confirm">Confirma que desexa limpar o punto de destino (e os destinos intermedios)?</string>
     <string name="precise_routing_mode_descr">Permitir calcular rutas precisas sen fallo. Aínda se ve limitado polas distancias e é lento.</string>
     <string name="precise_routing_mode">Cálculo de rutas preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -596,8 +597,8 @@
     
 	<string name="map_widget_monitoring_services">Servizos de rexistro</string>
 	<string name="no_route">Sen itinerario</string>
-	<string name="delete_target_point">Retirar o punto de pasaxe</string>
-	<string name="target_point">Punto de pasaxe %1$s</string>
+	<string name="delete_target_point">Retirar o destino</string>
+	<string name="target_point">Destino %1$s</string>
     <string name="intermediate_point">Punto de pasaxe %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Engadir como punto de pasaxe final</string>
     <string name="context_menu_item_first_intermediate_point">Engadir como primeiro punto de pasaxe</string>
