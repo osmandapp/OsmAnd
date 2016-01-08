@@ -74,7 +74,7 @@ public class AvoidSpecificRoads {
 				ImageButton remove = (ImageButton) v.findViewById(R.id.info_close);
 				remove.setVisibility(View.VISIBLE);
 				remove.setImageDrawable(app.getIconsCache().getContentIcon(
-						R.drawable.ic_action_gremove_dark));
+						R.drawable.ic_action_remove_dark));
 				remove.setOnClickListener(new View.OnClickListener() {
 
 					@Override

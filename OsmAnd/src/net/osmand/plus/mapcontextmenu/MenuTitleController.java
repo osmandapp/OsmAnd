@@ -144,7 +144,7 @@ public abstract class MenuTitleController {
 				public void run() {
 					acquireStreetName();
 				}
-			}, 50);
+			}, 100);
 			return;
 		}
 

@@ -52,13 +52,13 @@
                 android:layout_gravity="start"
                 android:visibility="gone" >
 
-                <com.github.ksoichiro.android.observablescrollview.ObservableListView
+                <net.osmand.plus.views.controls.DynamicListView
                     android:id="@+id/dash_list_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="?attr/bg_color"
                     android:fadeScrollbars="true" >
-                </com.github.ksoichiro.android.observablescrollview.ObservableListView>
+                </net.osmand.plus.views.controls.DynamicListView>
             </FrameLayout>
         </LinearLayout>
 

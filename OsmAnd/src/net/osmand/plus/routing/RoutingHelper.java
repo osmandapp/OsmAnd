@@ -609,20 +609,21 @@ public class RoutingHelper {
 				voiceRouter.newRouteIsCalculated(newRoute);
 			}
 		}
-		
+		app.getWaypointHelper().setNewRoute(res);
+
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
 				ValueHolder<Boolean> showToast = new ValueHolder<Boolean>();
 				showToast.value = true;
 				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-				while(it.hasNext()) {
+				while (it.hasNext()) {
 					WeakReference<IRouteInformationListener> ref = it.next();
 					IRouteInformationListener l = ref.get();
-					if(l == null) {
+					if (l == null) {
 						it.remove();
 					} else {
-						l.newRouteIsCalculated(newRoute, showToast);	
+						l.newRouteIsCalculated(newRoute, showToast);
 					}
 				}
 				if (showToast.value) {
@@ -635,9 +636,6 @@ public class RoutingHelper {
 				}
 			}
 		});
-
-		
-		app.getWaypointHelper().setNewRoute(res);
 	}
 	
 	public int getLeftDistance(){

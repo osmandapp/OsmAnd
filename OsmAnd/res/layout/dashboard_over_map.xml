@@ -61,12 +61,12 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/bg_color" />
 
-            <com.github.ksoichiro.android.observablescrollview.ObservableListView
+            <net.osmand.plus.views.controls.DynamicListView
                 android:id="@+id/dash_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fadeScrollbars="true" >
-            </com.github.ksoichiro.android.observablescrollview.ObservableListView>
+            </net.osmand.plus.views.controls.DynamicListView>
         </FrameLayout>
 
         <include layout="@layout/dashboard_toolbar"/>
