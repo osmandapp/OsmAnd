@@ -2023,7 +2023,7 @@
 
     <string name="update_time">Tiempo de actualización</string>
     
-<string name="rec_split">Dividir grabación</string>
+<string name="rec_split">División de grabación</string>
     <string name="rec_split_title">Usar la división de grabación</string>
     <string name="rec_split_desc">Reescribir clips al exceder el espacio de almacenamiento utilizado</string>
     <string name="rec_split_clip_length">Duración del clip</string>
