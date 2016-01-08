@@ -2220,4 +2220,6 @@
 <string name="shared_string_not_selected">Ikke markeret</string>
     
 <string name="select_month_and_country">Vælg måned og land</string>
-</resources>
+<string name="shared_string_type">Type</string>
+    <string name="starting_point">Udgangspunkt</string>
+    </resources>
