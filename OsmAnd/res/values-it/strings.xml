@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -2131,4 +2132,7 @@
     <string name="Night">Notte</string>
 <string name="shared_string_not_selected">Non selezionato</string>
     
+<string name="shared_string_type">Tipo</string>
+    <string name="starting_point">Punto di partenza</string>
+    <string name="select_month_and_country">Scegli il mese e lo stato</string>
 </resources>
