@@ -1986,4 +1986,6 @@
     <string name="Night">À noite</string>
 <string name="shared_string_not_selected">Nada selecionado</string>
     <string name="select_month_and_country">Selecione o mês e o país</string>
-</resources>
+<string name="shared_string_type">Tipo</string>
+    <string name="starting_point">Ponto de partida</string>
+    </resources>
