@@ -143,13 +143,12 @@ public abstract class MenuTitleController {
 	protected void acquireStreetName() {
 		if (searchingAddress) {
 			cancelSearch = true;
-			searchingAddress = false;
 			getMapActivity().getMyApplication().runInUIThread(new Runnable() {
 				@Override
 				public void run() {
 					acquireStreetName();
 				}
-			}, 50);
+			}, 100);
 			return;
 		}
 

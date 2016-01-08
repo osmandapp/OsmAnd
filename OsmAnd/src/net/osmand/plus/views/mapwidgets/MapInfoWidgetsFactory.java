@@ -321,7 +321,7 @@ public class MapInfoWidgetsFactory {
 				boolean updated = updateVisibility(waypointInfoBar, true);
 				// pass top bar to make it clickable
 				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar,
-						pnt, true, !map.getMyApplication().getSettings().isLightContent());
+						pnt, true, !map.getMyApplication().getSettings().isLightContent(), false);
 				if (updated || changed) {
 					ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 					ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);

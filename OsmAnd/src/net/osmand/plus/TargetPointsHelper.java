@@ -29,7 +29,8 @@ public class TargetPointsHelper {
 		private PointDescription pointDescription;
 		public int index;
 		public boolean intermediate;
-		
+		public boolean start;
+
 		public TargetPoint(LatLon point, PointDescription name) {
 			this.point = point;
 			this.pointDescription = name;
@@ -66,7 +67,15 @@ public class TargetPointsHelper {
 			}
 			return null;
 		}
-		
+
+		public static TargetPoint createStartPoint(LatLon point, PointDescription name) {
+			if (point != null) {
+				TargetPoint target = new TargetPoint(point, name);
+				target.start = true;
+				return target;
+			}
+			return null;
+		}
 
 		public double getLatitude() {
 			return point.getLatitude();
@@ -97,7 +106,7 @@ public class TargetPointsHelper {
 
 	private void readFromSettings(OsmandSettings settings) {
 		pointToNavigate = TargetPoint.create(settings.getPointToNavigate(), settings.getPointNavigateDescription());
-		pointToStart = TargetPoint.create(settings.getPointToStart(), settings.getStartPointDescription());
+		pointToStart = TargetPoint.createStartPoint(settings.getPointToStart(), settings.getStartPointDescription());
 		intermediatePoints.clear();
 		List<LatLon> ips = settings.getIntermediatePoints();
 		List<String> desc = settings.getIntermediatePointDescriptions(ips.size());
@@ -285,7 +294,7 @@ public class TargetPointsHelper {
 	}
 
 
-	public void reorderAllTargetPoints(List<TargetPoint> point, boolean updateRoute){
+	public void reorderAllTargetPoints(List<TargetPoint> point, boolean updateRoute) {
 		settings.clearPointToNavigate();
 		if (point.size() > 0) {
 			List<TargetPoint> subList = point.subList(0, point.size() - 1);

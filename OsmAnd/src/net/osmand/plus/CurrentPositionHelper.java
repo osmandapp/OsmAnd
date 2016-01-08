@@ -83,8 +83,13 @@ public class CurrentPositionHelper {
 					}
 				}
 			};
-			if (!app.getRoutingHelper().startTaskInRouteThreadIfPossible(run) && result != null) {
-				result.publish(null);
+			if (!app.getRoutingHelper().startTaskInRouteThreadIfPossible(run)) {
+				if (result != null) {
+					result.publish(null);
+				}
+				if (geoCoding != null) {
+					geoCoding.publish(null);
+				}
 			}
 		}
 	}
