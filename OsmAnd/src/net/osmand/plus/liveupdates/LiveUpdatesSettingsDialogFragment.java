@@ -128,9 +128,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					public void onClick(DialogInterface dialog, int which) {
 						if (liveUpdatePreference.get() != liveUpdatesSwitch.isChecked()) {
 							liveUpdatePreference.set(liveUpdatesSwitch.isChecked());
-							if (liveUpdatesSwitch.isChecked()) {
-								runLiveUpdate(localIndexInfo, false);
-							} else {
+							if (!liveUpdatesSwitch.isChecked()) {
 								long updatesSize = changesManager.getUpdatesSize(fileNameWithoutExtension);
 								if (updatesSize != 0) {
 									ClearUpdatesDialogFragment.createInstance(localIndexInfo)
@@ -151,6 +149,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						timeOfDayPreference.set(timeOfDayInt);
 
 						if (liveUpdatesSwitch.isChecked() && getSettings().IS_LIVE_UPDATES_ON.get()) {
+							runLiveUpdate(localIndexInfo, false);
 							UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
 							TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
 							setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);

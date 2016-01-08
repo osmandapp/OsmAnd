@@ -660,7 +660,7 @@
     <string name="context_menu_item_directions_to">Direções para</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat. %1$.3f, Lon. %2$.3f</string>
-    <string name="route_descr_current_location">Posição atual</string>
+    
     <string name="route_descr_destination">Destino</string>
     <string name="route_to">Para:</string>
     <string name="clear_dest_confirm">Confirma que deseja remover o destino (inclusive os intermediários)?</string>
@@ -1226,11 +1226,11 @@
 	<string name="map_version_changed_info">Servidor contém arquivos de mapa incompatíveis com sua versão atual do Osmand. Para baixar e usá-los, por favor atualize o Osmand para a versão mais recente.</string>
 	<string name="poi_filter_nominatim">Nominatim on-line</string>
 	<string name="search_position_current_location_search">Procurando posição…</string>
-	<string name="search_position_current_location_found">Posição (encontrada)</string>
+	<string name="search_position_current_location_found">Minha Posição (encontrada)</string>
 	<string name="search_position_address">Endereço…</string>
 	<string name="search_position_favorites">Favoritos…</string>
 	<string name="search_position_undefined">Indefinido</string>
-	<string name="search_position_current_location">Posição atual…</string>
+	
 	<string name="search_position_map_view">Centro atual do mapa</string>
 	<string name="select_search_position">Próximo a:</string>
 	<string name="route_successfully_saved_at">Rota salva como \'%1$s\'.</string>
@@ -1603,7 +1603,7 @@
 	<string name="search_address_building">Número</string>
 	<string name="search_address_building_option">Número</string>
 	<string name="search_address_street_option">Rua transversal</string>
-	<string name="search_tabs_location">Posição</string>
+	
 	<string name="context_menu_item_update_map">Atualizar mapa</string>
 	<string name="context_menu_item_create_poi">Criar POI</string>
 	<string name="add_favorite_dialog_top_text">Digite o nome do favorito</string>
@@ -1968,7 +1968,7 @@
     <string name="select_voice_provider">Selecione a orientação por voz</string>
     <string name="select_voice_provider_descr">Selecione ou baixe a instrução por voz para o seu idioma</string>
     <string name="last_update">Última atualização: %s</string>
-<string name="update_date_pattern">Atualização: %s</string>
+
     <string name="update_time">Tempo de atualização</string>
 <string name="updates_size">Atualizações: %s</string>
 <string name="rec_split">Dividir gravação</string>
@@ -1985,4 +1985,5 @@
     <string name="morning">Pela manhã</string>
     <string name="Night">À noite</string>
 <string name="shared_string_not_selected">Nada selecionado</string>
-    </resources>
+    <string name="select_month_and_country">Selecione o mês e o país</string>
+</resources>

@@ -179,7 +179,7 @@
     
     
     <string name="route_descr_map_location">Kart:</string>
-    <string name="route_descr_current_location">Gjeldande posisjon</string>
+    
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Frå:</string>

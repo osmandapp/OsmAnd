@@ -542,7 +542,7 @@ POIの更新は利用できません</string>
 <string name="search_address_building">建物</string>
 <string name="search_address_building_option">建物</string>
 <string name="search_address_street_option">交差する通り</string>
-<string name="search_tabs_location">位置</string>
+
 
 <string name="context_menu_item_update_map">マップを更新</string>
 
@@ -669,7 +669,7 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_directions_from">ここから出発</string>
     <string name="route_descr_map_location">マップ: </string>
     <string name="route_descr_lat_lon">緯 %1$.3f, 経 %2$.3f</string>
-    <string name="route_descr_current_location">現在位置</string>
+    
     <string name="route_to">到着：</string>
     <string name="route_via">経由：</string>
     <string name="route_from">出発：</string>
@@ -1189,7 +1189,7 @@ POIの更新は利用できません</string>
 	<string name="search_position_favorites">お気に入り…</string>
 	<string name="search_position_undefined">未定義</string>
 	
-	<string name="search_position_current_location">現在位置…</string>
+	
 	<string name="search_position_map_view">マップ中心に表示</string>
 	<string name="select_search_position">ここを起点に検索:</string>
 	<string name="context_menu_item_search">ここの近くで検索</string>

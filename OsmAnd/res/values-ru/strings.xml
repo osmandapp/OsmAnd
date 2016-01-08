@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
     <string name="av_video_quality_low">Низкое качество</string>
@@ -209,7 +208,7 @@
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
     <string name="search_position_undefined">Неопределенно</string>
-    <string name="search_position_current_location">Текущее местоположение…</string>
+    
     <string name="search_position_map_view">Текущий центр карты</string>
     <string name="select_search_position">Начало:</string>
     <string name="context_menu_item_search">Искать рядом</string>
@@ -651,7 +650,7 @@
     <string name="search_address_building">Дом</string>
     <string name="search_address_building_option">Дом</string>
     <string name="search_address_street_option">Пересечение улиц</string>
-    <string name="search_tabs_location">Координаты</string>
+    
     <string name="context_menu_item_update_map">Обновить карту</string>
     
     <string name="context_menu_item_create_poi">Добавить POI</string>
@@ -925,7 +924,7 @@
     <string name="enable_plugin_monitoring_services">"Включите плагин \"Запись поездки\" для использования сервисов мониторинга  (запись GPX, сопровождение в реальном времени)"</string>
     <string name="rendering_attr_roadColors_description">Выберите цветовую схему дорог:</string>
     <string name="rendering_attr_roadColors_name">Цветовая схема дорог</string>
-    <string name="route_descr_current_location">Текущая позиция</string>
+    
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
     <string name="incomplete_locale">незавершенное</string>
     <string name="map_widget_max_speed">Ограничение скорости</string>

@@ -173,7 +173,7 @@
 	
     <string name="map_widget_max_speed">Hız limiti</string>
     <string name="route_descr_lat_lon">Enlem %1$.3f, boylam %2$.3f</string>
-    <string name="route_descr_current_location">Geçerli konum</string>
+    
     
     
     <string name="no_buildings_found">Bina bulunmadı.</string>
@@ -277,7 +277,7 @@
 	
 	<string name="search_position_address">Adres…</string>
 	<string name="search_position_favorites">Favoriler…</string>
-	<string name="search_position_current_location">Geçerli konum…</string>
+	
 	<string name="file_with_name_already_exist">Aynı isimli dosya zaten var.</string>
 	<string name="shared_string_save">Kaydet</string>
 	<string name="favorite_home_category">Ev</string>
@@ -427,7 +427,7 @@
 	<string name="shared_string_show_on_map">Haritada göster</string>
 	
 	<string name="search_address_top_text">Adres seç</string>
-	<string name="search_tabs_location">Konum</string>
+	
 	
 	<string name="context_menu_item_update_map">Haritayı güncelle</string>
 	<string name="context_menu_item_create_poi">POI oluştur</string>
@@ -684,7 +684,7 @@
 	<string name="button_upgrade_osmandplus">OsmAnd+\'a Yükselt</string>
 	<string name="map_version_changed_info">Sunucuda yüklü haritalar uygulamanın versiyonuyla uyumlu değil. Bunları kullanabilmek için uygulama sürümünüzü yükseltmelisiniz.</string>
 	<string name="search_position_current_location_search">Konum aranıyor…</string>
-	<string name="search_position_current_location_found">Konum (bulundu)</string>
+	<string name="search_position_current_location_found">Benim Konum (bulundu)</string>
 	<string name="search_position_undefined">Tanımlanmamış</string>
 	
 	<string name="search_position_map_view">Güncel harita merkezi</string>
@@ -2006,9 +2006,9 @@
     <string name="no_camera_permission">App kameraya erişmek için izniniz yok.</string>
     <string name="no_microphone_permission">App mikrofonu erişmek için izniniz yok.</string>
     <string name="last_update">Son güncelleme:% s</string>
-    <string name="update_date_pattern">Güncelleme:% s</string>
+    
     <string name="update_time">Güncelleme zamanı</string>
-    <string name="updates_size_pattern">Güncellemeler:% s</string>
+    
 <string name="shared_string_not_selected">Seçilmedi</string>
     <string name="rec_split">Kaydedici Bölünmüş</string>
     <string name="rec_split_title">Kullanım Kaydedici Bölünmüş</string>
@@ -2023,5 +2023,7 @@
     <string name="weekly">Haftalık</string>
     <string name="morning">Sabah</string>
     <string name="Night">Gece</string>
-<string name="osm_live">OSM Canlı</string>
+
+<string name="updates_size">Güncelleme boyutu</string>
+    <string name="select_month_and_country">Ayı ve ülke seçin</string>
 </resources>

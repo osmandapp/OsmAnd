@@ -399,7 +399,7 @@
 	<string name="search_position_favorites">מועדפים…</string>
 	<string name="search_position_undefined">בלתי מוגדר</string>
 	
-	<string name="search_position_current_location">המיקום הנוכחי…</string>
+	
 	<string name="search_position_map_view">תצוגת המפה אחרונה</string>
 	<string name="select_search_position">חיפוש ליד :</string>
 	<string name="context_menu_item_search">חיפוש באזור הזה</string>
@@ -902,7 +902,7 @@
 	<string name="search_address_building">בניין</string>
 	<string name="search_address_building_option">בניין</string>
 	<string name="search_address_street_option">רחוב חוצה</string>
-	<string name="search_tabs_location">מיקום</string>
+	
 	
 	<string name="context_menu_item_update_map">עדכון המפה</string>
 	
@@ -975,7 +975,7 @@
 	<string name="search_villages_and_postcodes">חיפוש כפרים/מיקוד</string>
 	<string name="no_buildings_found">לא נמצאו בניינים.</string>
     <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
-    <string name="route_descr_current_location">המיקום הנוכחי</string>
+    
     
     
     <string name="map_widget_max_speed">מהירות מותרת</string>

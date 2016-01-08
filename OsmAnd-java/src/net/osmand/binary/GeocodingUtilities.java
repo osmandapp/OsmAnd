@@ -124,7 +124,16 @@ public class GeocodingUtilities {
 			}
 			return dist;
 		}
-		
+
+		public double getDistanceP() {
+			if(point != null && searchPoint != null) {
+				// Need distance between searchPoint and nearest RouteSegmentPoint here, to approximate distance from neareest named road
+				return Math.sqrt(point.distSquare);
+			} else {
+				return -1;
+			}
+		}
+
 		@Override
 		public String toString() {
 			StringBuilder bld = new StringBuilder();

@@ -15,9 +15,9 @@ import net.osmand.plus.download.DownloadIndexesThread;
 
 import org.apache.commons.logging.Log;
 
-public class LiveUpdatesActivity extends AbstractDownloadActivity
+public class OsmLiveActivity extends AbstractDownloadActivity
 		implements DownloadIndexesThread.DownloadEvents{
-	private final static Log LOG = PlatformUtil.getLog(LiveUpdatesActivity.class);
+	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 
 	@Override
@@ -62,8 +62,10 @@ public class LiveUpdatesActivity extends AbstractDownloadActivity
 	}
 
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
-		private final Fragment[] fragments = new Fragment[]{new LiveUpdatesFragment()};
-		private final String[] titles = new String[]{LiveUpdatesFragment.TITILE};
+		private final Fragment[] fragments = new Fragment[]{new LiveUpdatesFragment(),
+				new ReportsFragment()};
+		private final String[] titles = new String[]{LiveUpdatesFragment.TITLE,
+				ReportsFragment.TITLE};
 
 		public LiveUpdatesFragmentPagerAdapter(FragmentManager fm) {
 			super(fm);

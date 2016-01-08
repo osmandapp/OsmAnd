@@ -57,7 +57,7 @@
 
 
     <string name="map_widget_max_speed">Hastighedsgrænse</string>
-    <string name="route_descr_current_location">Aktuel position</string>
+    
 
 
     <string name="no_buildings_found">Ingen bygninger fundet.</string>
@@ -481,7 +481,7 @@
     <string name="search_position_favorites">Favoritter…</string>
     <string name="search_position_undefined">Ikke defineret</string>
 
-    <string name="search_position_current_location">Aktuel position…</string>
+    
     <string name="search_position_map_view">Nuværende kortcenter</string>
     <string name="select_search_position">Udgangspunkt:</string>
     <string name="context_menu_item_search">Søg i nærheden</string>
@@ -942,7 +942,7 @@
     <string name="context_menu_item_create_poi">Opret interessepunkt</string>
     <string name="context_menu_item_update_map">Opdater kort</string>
 
-    <string name="search_tabs_location">Placering</string>
+    
     <string name="search_address_street_option">Krydsende vej</string>
     <string name="search_address_building_option">Bygning</string>
     <string name="search_address_building">Bygning</string>
@@ -2200,9 +2200,9 @@
     <string name="live_updates">Realtidsopdateringer</string>
     <string name="available_maps">Tilgængelige kort</string>
     <string name="last_update">Sidst opdateret: %s</string>
-<string name="update_date_pattern">Opdateret: %s</string>
+
     <string name="update_time">Opdateringstidspunkt</string>
-<string name="size_pattern">Størrelse: %s</string>
+
 <string name="updates_size">Opdateringer: %s</string>
 <string name="last_map_change">Sidste kortændring: %s</string>
 <string name="rec_split">Optager opdel</string>
@@ -2218,5 +2218,6 @@
     <string name="morning">Morgen</string>
     <string name="Night">Aften</string>
 <string name="shared_string_not_selected">Ikke markeret</string>
-    <string name="osm_live">OSM Live</string>
+    
+<string name="select_month_and_country">Vælg måned og land</string>
 </resources>

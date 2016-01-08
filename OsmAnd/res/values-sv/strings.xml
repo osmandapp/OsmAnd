@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -78,7 +77,7 @@
     <string name="search_address_building">Byggnad</string>
     <string name="search_address_building_option">Byggnad</string>
     <string name="search_address_street_option">Korsande gata</string>
-    <string name="search_tabs_location">Plats</string>
+    
 
     <string name="context_menu_item_update_map">Uppdatera kartan</string>
     
@@ -378,7 +377,7 @@
     <string name="search_position_favorites">Favoriter …</string>
     <string name="search_position_undefined">Odefinierad</string>
 
-    <string name="search_position_current_location">Nuvarande position …</string>
+    
     <string name="search_position_map_view">Aktuell kartmitt</string>
     <string name="select_search_position">Ursprung:</string>
     <string name="context_menu_item_search">Sök i närheten</string>
@@ -858,7 +857,7 @@
 
 
     <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd platsen …\" för att knyta en anteckning till den angivna platsen</string>
-    <string name="route_descr_current_location">Aktuell position</string>
+    
 
 
     <string name="close_changeset">Stäng changeset</string>
@@ -2048,7 +2047,7 @@
     <string name="available_maps">Tillgängliga kartor</string>
     <string name="last_update">Senaste uppdateringen: %s</string>
 <string name="update_time">Uppdateringstid</string>
-<string name="update_date_pattern">Uppdatering: %s</string>
+
     <string name="size_pattern">Storlek: %s</string>
 <string name="updates_size">Uppdateringar: %s</string>
 <string name="last_map_change">Senaste kartändring: %s</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -416,7 +415,7 @@
     <string name="context_menu_item_directions_from">Indicacións desde</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
-    <string name="route_descr_current_location">Posición actual</string>
+    
     <string name="route_to">Para:</string>
     <string name="route_via">Pasando por:</string>
     <string name="route_from">Desde:</string>
@@ -987,7 +986,7 @@
 	<string name="search_position_favorites">Favoritos…</string>
 	<string name="search_position_undefined">Sen definir</string>
 	
-	<string name="search_position_current_location">Posición actual…</string>
+	
 	<string name="search_position_map_view">Centro do mapa actual</string>
 	<string name="select_search_position">Orixe:</string>
 	<string name="context_menu_item_search">Buscar preto de aquí</string>
@@ -1465,7 +1464,7 @@
 	<string name="search_address_building">Edificio</string>
 	<string name="search_address_building_option">Edificio</string>
 	<string name="search_address_street_option">Rúa transversal</string>
-	<string name="search_tabs_location">Situación</string>
+	
 	
 	<string name="context_menu_item_update_map">Actualizar o mapa</string>
 	

@@ -378,7 +378,7 @@
     <string name="search_position_favorites">我的最愛…</string>
     <string name="search_position_undefined">未定義</string>
 
-    <string name="search_position_current_location">目前位置…</string>
+    
     <string name="search_position_map_view">目前的地圖中心</string>
     <string name="select_search_position">起點：</string>
     <string name="context_menu_item_search">查尋這附近</string>
@@ -834,7 +834,7 @@
     <string name="search_address_building">建築物</string>
     <string name="search_address_building_option">建築物</string>
     <string name="search_address_street_option">交叉路口</string>
-    <string name="search_tabs_location">位置</string>
+    
 
     <string name="context_menu_item_update_map">更新地圖</string>
     
@@ -1015,7 +1015,7 @@
 
     <string name="map_widget_max_speed">速限</string>
     <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
-    <string name="route_descr_current_location">目前位置</string>
+    
 
 
     <string name="no_buildings_found">未找到建築物。</string>
@@ -2046,9 +2046,9 @@
     <string name="live_updates">即時更新</string>
     <string name="available_maps">可用地圖</string>
     <string name="last_update">最近的更新：%s</string>
-<string name="update_date_pattern">更新：%s</string>
+
     <string name="update_time">更新時間</string>
-<string name="size_pattern">大小：%s</string>
+
 <string name="updates_size">更新：%s</string>
 <string name="last_map_change">上次地圖的更改：%s</string>
 <string name="rec_split">錄製分割</string>
@@ -2064,5 +2064,6 @@
     <string name="morning">早上</string>
     <string name="Night">夜間</string>
 <string name="shared_string_not_selected">未選取</string>
-    <string name="osm_live">即時 OSM</string>
+    
+<string name="select_month_and_country">選擇月份與國家</string>
 </resources>

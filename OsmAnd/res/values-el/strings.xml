@@ -370,7 +370,7 @@
 	<string name="search_position_favorites">Αγαπημένα…</string>
 	<string name="search_position_undefined">Ακαθόριστο</string>
 	
-	<string name="search_position_current_location">Τρέχουσα θέση…</string>
+	
 	<string name="search_position_map_view">Τρέχον κέντρο χάρτη</string>
 	<string name="select_search_position">Πηγή:</string>
 	<string name="context_menu_item_search">Αναζήτηση εδώ κοντά</string>
@@ -845,7 +845,7 @@
 	<string name="search_address_building">Κτήριο</string>
 	<string name="search_address_building_option">Κτήριο</string>
 	<string name="search_address_street_option">Διασταυρούμενη οδός</string>
-	<string name="search_tabs_location">Τοποθεσία</string>
+	
 	
 	<string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
 	
@@ -942,7 +942,7 @@
 	<string name="search_villages_and_postcodes">Αναζήτηση χωριών/ταχ. κωδικών</string>
 	<string name="no_buildings_found">Δεν βρέθηκαν κτήρια.</string>
     <string name="route_descr_lat_lon">Πλ %1$.3f μήκ %2$.3f</string>
-    <string name="route_descr_current_location">Τρέχουσα θέση</string>
+    
     
     
     <string name="map_widget_max_speed">Όριο ταχύτητας</string>

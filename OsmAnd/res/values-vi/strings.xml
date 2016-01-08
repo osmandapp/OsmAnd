@@ -42,7 +42,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="search_position_favorites">Ưa thích…</string>
 	<string name="search_position_undefined">Chưa rõ</string>
 	
-	<string name="search_position_current_location">Vị trí hiện tại…</string>
+	
 	<string name="search_position_map_view">Lần hiển thị bản đồ trước</string>
 	
 	<string name="select_search_position">Tìm kiếm gần:</string>
@@ -587,7 +587,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 <string name="search_address_building">Tòa nhà</string>
 <string name="search_address_building_option">Tòa nhà</string>
 <string name="search_address_street_option">Điểm giao cắt</string>
-<string name="search_tabs_location">Khu vực</string>
+
 
 <string name="context_menu_item_update_map">Cập nhật bản đồ</string>
 

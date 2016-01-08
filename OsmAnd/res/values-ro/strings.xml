@@ -405,7 +405,7 @@
 	<string name="search_position_favorites">Favorite…</string>
 	<string name="search_position_undefined">Necunoscută</string>
 	
-	<string name="search_position_current_location">Poziția curentă…</string>
+	
 	<string name="search_position_map_view">Ultima afișare a hărții</string>
 	<string name="select_search_position">Origine:</string>
 	<string name="context_menu_item_search">Căutare în împrejurimi</string>
@@ -906,7 +906,7 @@
 	<string name="search_address_building">Număr</string>
 	<string name="search_address_building_option">Număr</string>
 	<string name="search_address_street_option">Intersecție</string>
-	<string name="search_tabs_location">Poziție</string>
+	
 	
 	<string name="context_menu_item_update_map">Actualizează hartă</string>
 	
@@ -978,7 +978,7 @@
 	<string name="search_villages_and_postcodes">Caută sate/cod poștal</string>
 	<string name="no_buildings_found">Număr negăsit.</string>
     <string name="route_descr_lat_lon">Lat %1$.3f Long %2$.3f</string>
-    <string name="route_descr_current_location">Poziția curentă</string>
+    
     
     
     <string name="map_widget_max_speed">Limita de viteză</string>

@@ -202,7 +202,7 @@
   <string name="search_position_favorites">Izlase…</string>
   <string name="search_position_undefined">Nedefinēts</string>
   
-  <string name="search_position_current_location">Pašreizējā vieta…</string>
+  
   <string name="search_position_map_view">Pašreizējais kartes centrs</string>
   <string name="select_search_position">Tuvumā:</string>
   <string name="context_menu_item_search">Meklēt apkārtnē</string>
@@ -721,7 +721,7 @@
   <string name="search_address_building">Ēka</string>
   <string name="search_address_building_option">Ēka</string>
   <string name="search_address_street_option">Krustojums</string>
-  <string name="search_tabs_location">Atrašanās vieta</string>
+  
   
   <string name="context_menu_item_update_map">Atjaunot karti</string>
   
@@ -1048,7 +1048,7 @@
     <string name="context_menu_item_directions_from">Norādes no</string>
     <string name="route_descr_map_location">Karte: </string>
     <string name="route_descr_lat_lon">Plat %1$.3f, gar %2$.3f</string>
-    <string name="route_descr_current_location">Patreizējā pozīcija</string>
+    
     <string name="route_to">Uz:</string>
     <string name="route_via">Caur:</string>
     <string name="route_from">No:</string>

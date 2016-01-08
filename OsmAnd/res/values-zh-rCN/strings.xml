@@ -18,7 +18,7 @@
     <string name="download_select_map_types">其他地圖</string>
     <string name="map_widget_max_speed">速度極限</string>
     <string name="monitoring_control_start">開始</string>
-    <string name="route_descr_current_location">您现在的位置</string>
+    
     <string name="safe_mode">“安全模式”</string>
     <string name="no_route">沒有路由</string>
 	<string name="delete_target_point">刪除航點</string>
@@ -384,7 +384,7 @@
 	<string name="search_address_building">大厦</string>
 	<string name="search_address_building_option">大厦</string>
 	<string name="search_address_street_option">相交的街道</string>
-	<string name="search_tabs_location">位置</string>
+	
 	<string name="shared_string_yes">是</string>
 	<string name="shared_string_cancel">取消</string>
 	<string name="shared_string_apply">申请</string>
@@ -656,7 +656,7 @@
 	<string name="search_position_address">地址…</string>
 	<string name="search_position_favorites">收藏夹…</string>
 	<string name="search_position_undefined">未定义</string>
-	<string name="search_position_current_location">当前位置…</string>
+	
 	<string name="search_position_map_view">上次地图显示位置</string>
 	<string name="route_successfully_saved_at">路线已成功保存为 \'%1$s\'。</string>
 	<string name="filename_input">文件名： </string>

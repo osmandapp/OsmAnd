@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -236,7 +235,7 @@
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Obľúbené miesta…</string>
     <string name="search_position_undefined">Neurčené</string>
-    <string name="search_position_current_location">Aktuálne umiestnenie…</string>
+    
     <string name="search_position_map_view">Stred mapy teraz</string>
     <string name="select_search_position">Východzí bod:</string>
     <string name="context_menu_item_search">Hľadať</string>
@@ -676,7 +675,7 @@
     <string name="search_address_building">Číslo</string>
     <string name="search_address_building_option">Popisné číslo</string>
     <string name="search_address_street_option">Pretínajúca ulica</string>
-    <string name="search_tabs_location">Pozícia</string>
+    
     <string name="context_menu_item_update_map">Aktualizovať mapu</string>
     
     <string name="context_menu_item_create_poi">Vytvoriť POI</string>
@@ -835,7 +834,7 @@
     <string name="no_buildings_found">Neboli nájdené žiadne budovy.</string>
     <string name="search_villages_and_postcodes">Hľadať viac obcí/PSČ</string>
     <string name="route_descr_lat_lon">Šírka %1$.3f dĺžka %2$.3f</string>
-    <string name="route_descr_current_location">Aktuálna pozícia</string>
+    
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
@@ -1914,5 +1913,5 @@
     <string name="weekly">Raz za týždeň</string>
     <string name="morning">Ráno</string>
     <string name="Night">V noci</string>
-    <string name="osm_live">OSM naživo</string>
+    
 </resources>

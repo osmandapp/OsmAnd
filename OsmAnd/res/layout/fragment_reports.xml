@@ -1,0 +1,64 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="net.osmand.plus.liveupdates.ReportsFragment">
+
+    <include layout="@layout/shadow_top"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:background="?attr/bg_color">
+
+        <TextView
+            android:layout_columnSpan="2"
+            android:text="@string/select_month_and_country"/>
+        <View
+            android:layout_columnSpan="2"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+        <ImageView
+            android:src="@drawable/widget_time"/>
+        <Spinner android:layout_gravity="fill_horizontal"/>
+        <View
+            android:layout_column="1"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+        <ImageView
+            android:src="@drawable/ic_world_globe_dark"
+            android:layout_rowSpan="2"/>
+        <TextView
+            android:text="Report for:"/>
+        <Spinner android:layout_gravity="fill_horizontal"/>
+        <View
+            android:layout_columnSpan="2"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+        <ImageView
+            android:src="@drawable/ic_world_globe_dark"
+            android:layout_rowSpan="2"/>
+        <TextView
+            android:text="Number of contributors"/>
+        <TextView
+            android:text="65"/>
+        <View
+            android:layout_column="1"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+
+        <ImageView
+            android:src="@drawable/ic_world_globe_dark"
+            android:layout_rowSpan="2"/>
+        <TextView
+            android:text="Number of edits"/>
+        <TextView
+            android:text="1125"/>
+    </GridLayout>
+
+    <include layout="@layout/shadow_bottom"/>
+
+</LinearLayout>

@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
     <string name="map_widget_show_ruler">Mostra el regle</string>
-    <string name="map_widget_transparent">Aparença amb transparència</string>
+    <string name="map_widget_transparent">Ginys transparents</string>
     <string name="map_widget_top_text">Nom del carrer</string>
     <string name="map_widget_back_to_loc">On sou</string>
     <string name="map_widget_reset">Reinicia els valors per defecte</string>
@@ -226,10 +225,10 @@
     <string name="poi_filter_by_name">Cerca pel nom</string>
     <string name="poi_filter_nominatim">Nominatim en línia</string>
     <string name="search_position_current_location_search">S\'està cercant la posició…</string>
-    <string name="search_position_current_location_found">Posició (trobada)</string>
+    <string name="search_position_current_location_found">La meva posició (trobada)</string>
     <string name="search_position_address">Adreça…</string>
     <string name="search_position_undefined">Indefinida</string>
-    <string name="search_position_current_location">Posició actual…</string>
+    
     <string name="context_menu_item_search">Cerca prop d\'aquí</string>
     <string name="shared_string_save_as_gpx">Desa la ruta com una traça GPX</string>
     <string name="route_successfully_saved_at">La ruta s\'ha desat correctament com a «%1$s».</string>
@@ -772,7 +771,7 @@
     <string name="app_description">Aplicació de navegació</string>
     <string name="shared_string_show_on_map">Mostra al mapa</string>
     <string name="search_address_street_option">Intersecció de carrers</string>
-    <string name="search_tabs_location">Localització</string>
+    
     <string name="add_favorite_dialog_top_text">Introducció del nom del preferit</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferit</string>
     <string name="add_favorite_dialog_favourite_added_template">El punt preferit «{0}» s\'ha afegit correctament.</string>
@@ -849,7 +848,7 @@
     <string name="rendering_attr_noAdminboundaries_description">No mostra els límits administratius regionals (nivells 5 a 9)</string>
     <string name="map_widget_max_speed">Límit de velocitat</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="route_descr_current_location">Posició actual</string>
+    
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el destí</string>
@@ -1896,4 +1895,15 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="updates_size">Actualitzacions: %s</string>
     <string name="last_map_change">Darrer canvi del mapa: %s</string>
 <string name="rec_split_storage_size">Mida per l\'emmagatzematge</string>
-    </resources>
+    <string name="shared_string_not_selected">No seleccionat</string>
+    <string name="rec_split_desc">Sobreescriu fragments quan l\'espai utilitzat assoleixi la mida per l\'emmagatzematge</string>
+    <string name="rec_split_clip_length">Durada del fragment</string>
+    <string name="rec_split_clip_length_desc">La durada de qualsevol dels fragments registrats no pot superar l\'interval de temps especificat</string>
+    <string name="rec_split_storage_size_desc">Mida de l\'espai que pot utilitzar el conjunt de fragments registrats</string>
+    <string name="update_time">Temps d\'actualització</string>
+    <string name="hourly">Cada hora</string>
+    <string name="daily">Cada dia</string>
+    <string name="weekly">Cada setmana</string>
+    <string name="morning">Matí</string>
+    <string name="Night">Nit</string>
+</resources>

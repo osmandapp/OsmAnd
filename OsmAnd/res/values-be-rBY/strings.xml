@@ -489,7 +489,7 @@
     <string name="context_menu_item_directions_from">Maršrut ad</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">%1$.3f šyr., %2$.3f daŭ.</string>
-    <string name="route_descr_current_location">Hetaje miesca</string>
+    
     <string name="route_descr_destination">Punkt pryznačeńnia</string>
     <string name="route_to">Da:</string>
     <string name="route_via">Praz:</string>
@@ -1058,7 +1058,7 @@
 	<string name="search_position_favorites">Upadabanyja…</string>
 	<string name="search_position_undefined">Niavyznačana</string>
 	
-	<string name="search_position_current_location">Biahučaje miescaznachodžańnie…</string>
+	
 	<string name="search_position_map_view">Apošnі vyhliad mapy</string>
 	<string name="select_search_position">Šukać blіzu:</string>
 	<string name="context_menu_item_search">Šukać navokal</string>
@@ -1537,7 +1537,7 @@
 	<string name="search_address_building">Budynak</string>
 	<string name="search_address_building_option">Dom</string>
 	<string name="search_address_street_option">Pierakryžavańnie</string>
-	<string name="search_tabs_location">Miesca</string>
+	
 	
 	<string name="context_menu_item_update_map">Abnavіć mapu</string>
 	

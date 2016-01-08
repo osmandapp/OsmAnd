@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -249,7 +248,7 @@
   <string name="search_position_favorites">Закладки…</string>
   <string name="search_position_undefined">Невизначено</string>
   
-  <string name="search_position_current_location">Поточна позиція…</string>
+  
   <string name="search_position_map_view">Поточний центр мапи</string>
   <string name="select_search_position">Початок:</string>
   <string name="context_menu_item_search">Шукати поруч</string>
@@ -757,7 +756,7 @@
   <string name="search_address_building">Будинок</string>
   <string name="search_address_building_option">Будинок</string>
   <string name="search_address_street_option">Перехрестя</string>
-  <string name="search_tabs_location">Координати</string>
+  
   
   <string name="context_menu_item_update_map">Оновити мапу</string>
   
@@ -978,7 +977,7 @@
 	
 	<string name="map_widget_max_speed">Обмеження швидкості</string>
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
-    <string name="route_descr_current_location">Поточна позиція</string>
+    
     
     
     <string name="no_buildings_found">Будівлі не знайдено.</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -50,7 +49,7 @@
     <string name="context_menu_item_directions_from">Упутства од</string>
     <string name="route_descr_map_location">Карта : </string>
     <string name="route_descr_lat_lon">Шир %1$.3f, дуж %2$.3f</string>
-    <string name="route_descr_current_location">Тренутна позиција</string>
+    
     <string name="route_to">До:</string>
     <string name="route_via">Преко:</string>
     <string name="route_from">Из:</string>
@@ -258,7 +257,7 @@
 <string name="search_position_current_location_search">Претрага положаја…</string>
 	<string name="search_position_current_location_found">Положај (пронађен)</string>
 	<string name="search_position_favorites">Омиљено…</string>
-	<string name="search_position_current_location">Тренутни положај…</string>
+	
 	<string name="search_position_map_view">Средиште тренутне мапе</string>
 	<string name="select_search_position">Извор:</string>
 	<string name="context_menu_item_search">Тражи оближње</string>
@@ -747,4 +746,19 @@
     <string name="rec_split_storage_size_desc">Величина заузећа свих снимљених одсечака</string>
     <string name="Night">Ноћ</string>
 <string name="shared_string_go">Иди</string>
+    <string name="shared_string_not_selected">Није означено</string>
+    <string name="osmand_parking_hour">h</string>
+    <string name="osmand_parking_minute">min</string>
+    <string name="traffic_warning_calming">Смиривање саобраћаја</string>
+    <string name="way_alarms">Упозорења о гужвама у саобраћају</string>
+    <string name="background_service_is_enabled_question">Позадинске услуге Османда и даље дејствују. Да ли желите да и њих прекинете?</string>
+    <string name="sleep_mode_stop_dialog">Да ли прекинути рад позадинског ГПС-а?</string>
+    <string name="stop_navigation_service">Прекини</string>
+    <string name="confirm_every_run">Увек питај</string>
+    <string name="save_global_track_interval_descr">Изаберите међувреме пријаве ради снимања путања (које су омогућене пријавом преко справице ГПИкс-а на карти)</string>
+    <string name="save_global_track_interval">Међувреме опште пријаве</string>
+    <string name="background_service_int">Међувреме буђења ГПИкс-а</string>
+    <string name="enable_sleep_mode">Омогући рад у позадини ГПИкс-а</string>
+    <string name="save_track_to_gpx_globally">Уписуј путању у датотеку ГПИкс-а</string>
+    <string name="save_track_to_gpx_globally_headline">Праћење путање по захтеву</string>
     </resources>

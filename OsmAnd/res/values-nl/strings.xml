@@ -99,15 +99,15 @@
   
   <string name="update_poi_does_not_change_indexes">Wijzigingen aan interessepunten hebben geen invloed op de gedownloade kaartbestanden, maar worden opgeslagen in een lokaal bestand.</string>
   <string name="local_openstreetmap_uploading">Uploaden…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} Interessepunten/Notities zijn ge-upload</string>
+  <string name="local_openstreetmap_were_uploaded">"{0} Interessepunten/Opmerkingen  zijn ge-upload"</string>
   <string name="local_openstreetmap_uploadall">Upload alle</string>
   
   
   <string name="local_openstreetmap_upload">Upload wijziging naar OSM</string>
   <string name="local_openstreetmap_delete">Wis de wijziging</string>
   <string name="local_openstreetmap_descr_title">OpenStreetMap asynchroon wijzigen:</string>
-  <string name="local_openstreetmap_settings">Lokaal opgeslagen OSM Interessepunten/Notities</string>
-  <string name="local_openstreetmap_settings_descr">Beheer OSM Interessepunten/Notities die lokaal zijn bewaard</string>
+  <string name="local_openstreetmap_settings">Lokaal opgeslagen OSM-Interessepunten/Opmerkingen</string>
+  <string name="local_openstreetmap_settings_descr">"Beheer OSM-Interessepunten/Opmerkingen  die lokaal zijn bewaard"</string>
   
   
   <string name="live_monitoring_interval_descr">Specificeer interval voor online tracking</string>
@@ -203,7 +203,7 @@
   <string name="map_version_changed_info">Op de server staan kaartbestanden die niet compatibel zijn met de huidige programmaversie. Je moet eerst OsmAnd updaten voordat je kaarten kan downloaden en gebruiken.</string>
   
   <string name="poi_filter_nominatim">Online (Nominatim)</string>
-  <string name="search_position_current_location">Huidige positie…</string>
+  
   <string name="search_position_map_view">Midden van kaart</string>
   <string name="select_search_position">Startpunt:</string>
   <string name="context_menu_item_search">Zoek hier dichtbij</string>
@@ -337,7 +337,7 @@
   <string name="send_location_sms_pattern">Locatie: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Om de locatie te zien: volg de weblink %1$s of android intent link %2$s</string>
   <string name="send_location">Stuur locatie</string>
-  <string name="context_menu_item_share_location">Deel locatie</string>
+  <string name="context_menu_item_share_location">Deel Locatie</string>
   <string name="add_waypoint_dialog_added">GPX-routepunt \'\'{0}\'\' succesvol toegevoegd</string>
   <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
   <string name="context_menu_item_add_waypoint">Opslaan als routepunt in GPX-track</string>
@@ -415,7 +415,7 @@
   <string name="continuous_rendering">Continue kaartgeneratie</string>
   <string name="continuous_rendering_descr">Continue kaartgeneratie inplaats van eenmalige generatie van de hele kaart</string>
   <string name="rendering_exception">Fout opgetreden bij kaartgeneratie van het geselecteerde gebied</string>
-  <string name="show_point_options">Gebruik locatie…</string>
+  <string name="show_point_options">Gebruik Locatie…</string>
   <string name="renderer_load_sucess">Kaartgenerator succesvol geladen</string>
   <string name="renderer_load_exception">Fout opgetreden: kaartgenerator niet geladen</string>
   <string name="renderers">Kaartstijl</string>
@@ -445,8 +445,8 @@
   <string name="transport_context_menu">Zoek Openbaar Vervoer op halte</string>
   
   
-  <string name="poi_context_menu_modify">Wijzig interessepunt</string>
-  <string name="poi_context_menu_delete">Verwijder interessepunt</string>
+  <string name="poi_context_menu_modify">Wijzig Interessepunt</string>
+  <string name="poi_context_menu_delete">Verwijder Interessepunt</string>
   <string name="rotate_map_compass_opt">Volgens kompas</string>
   <string name="rotate_map_bearing_opt">In beweegrichting</string>
   <string name="rotate_map_none_opt">Niet roteren (noorden boven)</string>
@@ -472,7 +472,7 @@
   <string name="layer_poi">Interessepunt…</string>
   <string name="layer_map">Kaartbron…</string>
   <string name="menu_layers">Kaartlagen</string>
-  <string name="context_menu_item_search_poi">Zoek interessepunt</string>
+  <string name="context_menu_item_search_poi">Zoek Interessepunt</string>
   
   <string name="use_trackball_descr">Gebruik trackball om de kaart te verschuiven</string>
   <string name="use_trackball">Gebruik trackball</string>
@@ -657,12 +657,12 @@
   <string name="map_view_3d_descr">Activeer 3D kaartbeeld</string>
   <string name="map_view_3d">Kaartbeeld 3D</string>
   <string name="show_poi_over_map_description">Toon interessepunten op kaart (met laatst gebruikte filter)</string>
-  <string name="show_poi_over_map">Toon interessepunten</string>
+  <string name="show_poi_over_map">Toon Interessepunten</string>
   <string name="map_tile_source_descr">Kies de bron van online of offline kaartsegmenten</string>
   <string name="map_tile_source">Kaartsegment bron</string>
   <string name="map_source">Kaartbron</string>
   <string name="use_internet">Gebruik internet</string>
-  <string name="show_location">Toon je positie</string>
+  <string name="show_location">Toon Huidige Positie</string>
   
   
   <string name="show_gps_coordinates_text">Toon GPS-coördinaten op kaart</string>
@@ -701,7 +701,7 @@
   <string name="search_address_building">Huisnummer</string>
   <string name="search_address_building_option">Gebouw</string>
   <string name="search_address_street_option">Zijstraat</string>
-  <string name="search_tabs_location">Coördinaten</string>
+  
   
   
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
@@ -729,11 +729,11 @@
   
   
   
-  <string name="poi_edit_title">Bewerk interessepunt</string>
+  <string name="poi_edit_title">Bewerk Interessepunt</string>
   <string name="poi_create_title">OSM-Interessepunt aanmaken</string>
   <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening is niet een enkel punt</string>
   <string name="poi_remove_confirm_template">Verwijderen {0} (geef commentaar)?</string>
-  <string name="poi_remove_title">Verwijder interessepunt</string>
+  <string name="poi_remove_title">Verwijder Interessepunt</string>
   <string name="poi_remove_success">Interessepunt is verwijderd</string>
   <string name="poi_action_add">voeg toe</string>
   <string name="poi_action_change">wijzigen</string>
@@ -784,14 +784,14 @@
   <string name="osm_editing_plugin_description">Gebruik deze plugin om bij te dragen aan OpenStreetMap (OSM), bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-opmerkingen, en door GPX-tracks te uploaden. OSM is een wereldwijd community-driven project om een wereldwijde kaart te maken. Voor details zie http://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM-aanmeldgegevens zijn ingevuld in de app.</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken…</string>
-  <string name="search_position_current_location_found">Positie (Gevonden)</string>
+  <string name="search_position_current_location_found">Huidige Positie (gevonden)</string>
   <string name="search_position_address">Adres…</string>
   <string name="search_position_favorites">Favorieten…</string>
   <string name="search_position_undefined">Ongedefinieerd</string>
   
   <string name="local_index_routing_data">Navigatiedata</string>
   <string name="navigate_point_format">Formaat</string>
-  <string name="poi_search_desc">Zoek interessepunt (POI)</string>
+  <string name="poi_search_desc">Zoek Interessepunt (POI)</string>
   <string name="address_search_desc">Adres zoeken</string>
   <string name="navpoint_search_desc">Coördinaten</string>
   <string name="transport_search_desc">Openbaar Vervoer zoeken</string>
@@ -994,7 +994,7 @@
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
     <string name="search_villages_and_postcodes">Zoek verder (dorp of postcode vinden)</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
-    <string name="route_descr_current_location">Huidige positie</string>
+    
     
     
     <string name="map_widget_max_speed">Snelheidslimiet</string>
@@ -1456,7 +1456,7 @@
     <string name="loading_smth">Laad %1$s…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Kies bestemmingen</string>
-    <string name="layer_amenity_label">Namen van interessepunten</string>
+    <string name="layer_amenity_label">Namen van Interessepunten</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie automatisch</string>
@@ -1746,7 +1746,7 @@
 	<string name="shared_string_control_start">Start</string>
 	<string name="shared_string_control_stop">Stop</string>
 	<string name="shared_string_import">Importeer</string>
-	<string name="shared_string_export">Exporteer</string>
+	<string name="shared_string_export">Export naar OSM</string>
 	<string name="shared_string_more">Meer…</string>
 	<string name="shared_string_more_actions">Meer acties</string>
 	<string name="shared_string_do_not_show_again">Toon niet meer</string>
@@ -1796,7 +1796,7 @@
     <string name="general_settings_2">Algemene instellingen</string>
 	<string name="shared_string_clear_all">Wis alles</string>
 	<string name="shared_string_collapse">Inklappen</string>
-	<string name="shared_string_my_location">Mijn positie</string>
+	<string name="shared_string_my_location">Huidige Positie</string>
 	<string name="shared_string_my_favorites">Favorieten</string>
 	<string name="shared_string_my_tracks">GPX-tracks</string>
 	<string name="shared_string_currently_recording_track">Huidige GPX-track</string>
@@ -1851,7 +1851,7 @@
     <string name="rendering_value_disabled_name">Uitgeschakeld</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kleuren naar afstandscategorie</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kleuring volgens OSMC</string>
-    <string name="osmo_share_my_location">Deel mijn positie</string>
+    <string name="osmo_share_my_location">Deel Huidige Positie</string>
     <string name="shared_string_logoff">Uitloggen</string>
     <string name="gps_network_not_enabled">Locatiedienst is niet ingeschakeld. Wil je ze aanzetten?</string>
     <string name="read_full_article">Lees volledig artikel (online)</string>
@@ -1963,13 +1963,13 @@
     <string name="simulate_your_location_stop_descr">Stop simulatie</string>
     <string name="simulate_your_location_descr">Routesimulatie met de berekende route of een GPX-track</string>
     <string name="av_locations_descr">GPX-bestand met Audio/Video-notities</string>
-    <string name="av_locations">Locaties</string>
+    <string name="av_locations">Locaties van geselecteerde AV-Notities</string>
     <string name="plugin_settings">Plugins</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Vermijd autotreinen</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Vermijd autotreinen</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="share_geo">geo:</string>
-    <string name="share_menu_location">Deel locatie</string>
+    <string name="share_menu_location">Deel Locatie</string>
     <string name="shared_string_send">Verzenden</string>
     <string name="osmand_running_in_background">Op achtergrond actief</string>
     <string name="shared_string_qr_code">QR-code</string>
@@ -2064,7 +2064,7 @@
     <string name="lang_mk">Macedonisch</string>
     <string name="lang_fy">Fries</string>
     <string name="lang_als">Toskisch (Albanees)</string>
-    <string name="shared_string_location">Locatie</string>
+    <string name="shared_string_location">Coördinaten</string>
     <string name="osm_edit_modified_poi">Gewijzigde OSM POI</string>
     <string name="osm_edit_deleted_poi">Gewiste OSM POI</string>
     <string name="context_menu_item_open_note">OSM-Opmerking aanmaken</string>
@@ -2139,9 +2139,9 @@
     <string name="live_updates">Live Updates</string>
     <string name="available_maps">Beschikbare Kaarten</string>
     <string name="last_update">Laatste controle: %s</string>
-<string name="update_date_pattern">Update: %s</string>
+
     <string name="update_time">Controle-tijdstip</string>
-<string name="updates_size">Updates: %s</string>
+<string name="updates_size">Updates: grootte totaal</string>
 <string name="last_map_change">Laatste kaart-update: %s</string>
 <string name="rec_split">Video-opname automatisch splitsen</string>
     <string name="rec_split_title">Gebruik automatische splitsing</string>
@@ -2156,5 +2156,6 @@
     <string name="morning">\'s ochtends</string>
     <string name="Night">\'s avonds</string>
 <string name="shared_string_not_selected">Niet geselecteerd</string>
-    <string name="osm_live">OSM Live</string>
+    
+<string name="select_month_and_country">Kies maand en kaart</string>
 </resources>

@@ -1,16 +1,17 @@
 package net.osmand.plus.osmedit;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-
-import net.osmand.osm.edit.Node;
-import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import net.osmand.osm.edit.Node;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
 
 public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 

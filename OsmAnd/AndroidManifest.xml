@@ -289,7 +289,7 @@
 				<action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
 			</intent-filter>
 		</receiver>
-        <activity android:name=".liveupdates.LiveUpdatesActivity"
+        <activity android:name=".liveupdates.OsmLiveActivity"
             android:label="@string/osm_live"/>
         <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
 </application>

@@ -183,7 +183,7 @@
 	<string name="search_position_favorites">즐겨찾기…</string>
 	<string name="search_position_undefined">정의되지 않음</string>
 	
-	<string name="search_position_current_location">현재 위치…</string>
+	
 	<string name="search_position_map_view">현재 지도 센터링</string>
 	
 	<string name="select_search_position">원점 :</string>
@@ -713,7 +713,7 @@
 <string name="search_address_building">빌딩</string>
 <string name="search_address_building_option">빌딩</string>
 <string name="search_address_street_option">교차로</string>
-<string name="search_tabs_location">좌표</string>
+
 
 <string name="context_menu_item_update_map">지도 업데이트</string>
 
@@ -933,7 +933,7 @@
     <string name="context_menu_item_directions_from">여기부터 출발</string>
     <string name="route_descr_map_location">지도 : </string>
     <string name="route_descr_lat_lon">위도 %1$.3f, 경도 %2$.3f</string>
-    <string name="route_descr_current_location">현재 위치</string>
+    
     <string name="route_to">~까지:</string>
     <string name="route_via">경유하여:</string>
     <string name="route_from">~부터 :</string>

@@ -112,7 +112,7 @@
   <string name="search_position_current_location_found">स्थान (सापडले)</string>
   <string name="search_position_address">पत्ता …</string>
   <string name="search_position_favorites">आवडती ठिकाणे…</string>
-  <string name="search_position_current_location">सध्याचे स्थान…</string>
+  
   <string name="select_search_position">ह्याच्या जवळ शोधा :</string>
   <string name="context_menu_item_search">इथे जवळ शोधा</string>
   <string name="filename_input">फाइलचे नाव : </string>
@@ -304,7 +304,7 @@
   <string name="search_address_street">रस्ता</string>
   <string name="search_address_building">इमारत</string>
   <string name="search_address_building_option">इमारत</string>
-  <string name="search_tabs_location">स्थान</string>
+  
   
   <string name="context_menu_item_update_map">नकाशा अपडेट करा</string>
   <string name="context_menu_item_create_poi">पिओआय तयार करा</string>
@@ -391,7 +391,7 @@
 	<string name="map_widget_max_speed">वेग मर्यादा</string>
     <string name="monitoring_control_start">जिपिएक्स</string>
     <string name="route_descr_lat_lon">अक्षांश %1$.3f, रेखांश %2$.3f</string>
-    <string name="route_descr_current_location">सध्याची स्थिती</string>
+    
     
     
     <string name="no_buildings_found">इमारत सापडली नाही.</string>
