@@ -2158,4 +2158,6 @@
 <string name="shared_string_not_selected">Niet geselecteerd</string>
     
 <string name="select_month_and_country">Kies maand en kaart</string>
-</resources>
+<string name="starting_point">Startpunt</string>
+    <string name="shared_string_type">Type</string>
+    </resources>
