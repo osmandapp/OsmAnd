@@ -2075,4 +2075,6 @@
     
 <string name="updates_size">Mannària agiornamentos</string>
     <string name="select_month_and_country">Ischerta mese e istadu</string>
-</resources>
+<string name="shared_string_type">Casta</string>
+    <string name="starting_point">Puntu de incumintzu</string>
+    </resources>
