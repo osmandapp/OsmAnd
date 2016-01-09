@@ -1993,4 +1993,6 @@
 <string name="shared_string_not_selected">Nicht ausgewählt</string>
     
 <string name="select_month_and_country">Wähle Monat und Land</string>
-</resources>
+<string name="shared_string_type">Typ</string>
+    <string name="starting_point">Startpunkt</string>
+    </resources>
