@@ -205,7 +205,7 @@
     <string name="map_version_changed_info">На сервере данных были найдены файлы, не совместимые с данной версией программы. Для их использования, пожалуйста, обновите приложение.</string>
     <string name="poi_filter_nominatim">Nominatim (Интернет)</string>
     <string name="search_position_current_location_search">Поиск позиции…</string>
-    <string name="search_position_current_location_found">Моя позиция [Найдена]</string>
+    <string name="search_position_current_location_found">Моя позиция (найдена)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
     <string name="search_position_undefined">Неопределенно</string>
@@ -875,7 +875,7 @@
     <string name="show_warnings_title">Показывать сигналы…</string>
     <string name="map_widget_show_ruler">Линейка</string>
     <string name="map_widget_view_direction">Направление взгляда</string>
-    <string name="map_widget_transparent">Прозрачность</string>
+    <string name="map_widget_transparent">Прозрачные виджеты</string>
     <string name="int_continuosly">Постоянно</string>
     <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
     <string name="map_widget_day_night">Дневной/ночной режим</string>
@@ -1858,7 +1858,7 @@
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
     <string name="route_distance">Расстояние:</string>
-    <string name="route_duration">Время в пути:</string>
+    <string name="route_duration">Время:</string>
     <string name="access_from_map_description">Кнопка меню открывает домашнюю страницу</string>
     <string name="access_from_map">Доступ с карты</string>
     <string name="context_menu_item_delete_waypoint">Удалить точку GPX?</string>
@@ -1884,4 +1884,6 @@
     <string name="daily">Ежедневно</string>
     <string name="weekly">Еженедельно</string>
     <string name="select_month_and_country">Выберите месяц и страну</string>
-</resources>
+<string name="poi_dialog_reopen">Открыть повторно</string>
+    <string name="impassable_road_desc">Выберите дороги, которых следует избегать при навигации</string>
+    </resources>
