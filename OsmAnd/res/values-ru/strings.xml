@@ -205,7 +205,7 @@
     <string name="map_version_changed_info">На сервере данных были найдены файлы, не совместимые с данной версией программы. Для их использования, пожалуйста, обновите приложение.</string>
     <string name="poi_filter_nominatim">Nominatim (Интернет)</string>
     <string name="search_position_current_location_search">Поиск позиции…</string>
-    <string name="search_position_current_location_found">Точка [Найдена]</string>
+    <string name="search_position_current_location_found">Моя позиция [Найдена]</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
     <string name="search_position_undefined">Неопределенно</string>
@@ -1807,7 +1807,7 @@
     <string name="downloads">Загрузки</string>
     <string name="show_free_version_banner">Показывать баннер бесплатной версии</string>
     <string name="show_free_version_banner_description">Даже если у вас купленная версия вы также можете видеть баннер для бесплатной версии</string>
-    <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, даже если у вас есть полная карта?</string>
+    <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, хотя у вас уже есть стандартная (полная) карта?</string>
     <string name="value_downloaded_of_max">%1$.1f из %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Обновить все (%1$s МБ)</string>
@@ -1877,4 +1877,11 @@
     <string name="shared_string_sound">Звук</string>
     <string name="no_location_permission">У приложения нет доступа к информации о местоположении.</string>
     <string name="no_camera_permission">У приложения нет доступа к камере.</string>
-    </resources>
+    <string name="no_microphone_permission">У приложения нет доступа к микрофону.</string>
+    <string name="last_update">Последнее обновление: %s</string>
+    <string name="last_map_change">Последнее изменение карты: %s</string>
+    <string name="hourly">Каждый час</string>
+    <string name="daily">Ежедневно</string>
+    <string name="weekly">Еженедельно</string>
+    <string name="select_month_and_country">Выберите месяц и страну</string>
+</resources>
