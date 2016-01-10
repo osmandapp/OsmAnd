@@ -683,7 +683,6 @@ public class WaypointHelper {
 				IconsCache iconsCache = app.getIconsCache();
 				if (((TargetPoint) point).start) {
 					ApplicationMode appMode = app.getSettings().getApplicationMode();
-					//return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
 					if (app.getTargetPointsHelper().getPointToStart() == null) {
 						return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
 					} else {
