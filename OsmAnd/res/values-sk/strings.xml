@@ -1918,4 +1918,7 @@
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Východzí bod</string>
     <string name="select_month_and_country">Zvoľte mesiac a krajinu</string>
-</resources>
+<string name="item_deleted">Položka vymazaná</string>
+    <string name="n_items_deleted">položiek vymazaných</string>
+    <string name="shared_string_undo_all">VŠETKO VRÁTIŤ SPÄŤ</string>
+    </resources>
