@@ -2106,9 +2106,9 @@
     <string name="rec_split">Intervalle d\'enregistrement</string>
     <string name="rec_split_title">Utiliser un intervalle d\'enregistrement</string>
     <string name="rec_split_desc">Écraser les enregistrements quand l\'espace utilisé dépasse la capacité de stockage</string>
-    <string name="rec_split_clip_length">Longueur de l\'enregistrement</string>
+    <string name="rec_split_clip_length">Durée de l\'enregistrement</string>
     <string name="rec_split_clip_length_desc">La longueur de chaque enregistrement ne sera plus par intervalle de temps</string>
     <string name="rec_split_storage_size">Espace de stockage</string>
-    <string name="rec_split_storage_size_desc">Quantité d\'espace qui peut être utilisé par tous les enregistrements</string>
+    <string name="rec_split_storage_size_desc">Espace maximum alloué pour tous les enregistrements</string>
     <string name="shared_string_type">Type</string>
     </resources>
