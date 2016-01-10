@@ -1657,4 +1657,8 @@
     <string name="favorite_category_add_new_title">Adaugă o categorie</string>
     <string name="regions">Regiuni</string>
     <string name="region_maps">Hărțile regiunilor</string>
+    <string name="world_maps">Hărțile lumii</string>
+    <string name="hillshade_layer_disabled">Vizualizarea umbrelor de relief e dezactivată</string>
+    <string name="srtm_plugin_disabled">Vizualizarea liniilor de contur e dezactivată</string>
+    <string name="favorite_category_add_new">Adaugă categorie favorită</string>
     </resources>
