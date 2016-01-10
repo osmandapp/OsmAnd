@@ -1822,4 +1822,14 @@
 	<string name="poi_parking_carports">Type : abri pour véhicules</string>
 
 	<string name="poi_parking_garage_boxes">Type : garages fermés</string>
+	<string name="poi_node_networks">Réseaux de randonnée/de cyclisme</string>
+		<string name="poi_ford_stepping_stones">Pierres de gué</string>
+	<string name="poi_traffic_calming_island">Îlot central</string>
+	<string name="poi_aerialway_pylon">Pylône de remontée mécanique</string>
+
+	<string name="poi_power_tower">Pylône électrique</string>
+	<string name="poi_power_pole">Poteau de ligne électrique</string>
+
+	<string name="poi_cooling_tower">Tour de refroidissement</string>
+	<string name="poi_lighting_tower">Pylône d\'éclairage</string>
 	</resources>
