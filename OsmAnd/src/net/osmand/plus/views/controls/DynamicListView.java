@@ -455,6 +455,24 @@ public class DynamicListView extends ObservableListView {
 			if (android.os.Build.VERSION.SDK_INT < 12) {
 				finishTouch();
 			} else {
+				/**
+				 * This TypeEvaluator is used to animate the BitmapDrawable back to its
+				 * final location when the user lifts his finger by modifying the
+				 * BitmapDrawable's bounds.
+				 */
+				TypeEvaluator<Rect> sBoundEvaluator = new TypeEvaluator<Rect>() {
+					public Rect evaluate(float fraction, Rect startValue, Rect endValue) {
+						return new Rect(interpolate(startValue.left, endValue.left, fraction),
+								interpolate(startValue.top, endValue.top, fraction),
+								interpolate(startValue.right, endValue.right, fraction),
+								interpolate(startValue.bottom, endValue.bottom, fraction));
+					}
+
+					public int interpolate(int start, int end, float fraction) {
+						return (int) (start + fraction * (end - start));
+					}
+				};
+
 				ObjectAnimator hoverViewAnimator = ObjectAnimator.ofObject(mHoverCell, "bounds",
 						sBoundEvaluator, mHoverCellCurrentBounds);
 				hoverViewAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -513,24 +531,6 @@ public class DynamicListView extends ObservableListView {
 			}
 		}
 	}
-
-	/**
-	 * This TypeEvaluator is used to animate the BitmapDrawable back to its
-	 * final location when the user lifts his finger by modifying the
-	 * BitmapDrawable's bounds.
-	 */
-	private final static TypeEvaluator<Rect> sBoundEvaluator = new TypeEvaluator<Rect>() {
-		public Rect evaluate(float fraction, Rect startValue, Rect endValue) {
-			return new Rect(interpolate(startValue.left, endValue.left, fraction),
-					interpolate(startValue.top, endValue.top, fraction),
-					interpolate(startValue.right, endValue.right, fraction),
-					interpolate(startValue.bottom, endValue.bottom, fraction));
-		}
-
-		public int interpolate(int start, int end, float fraction) {
-			return (int) (start + fraction * (end - start));
-		}
-	};
 
 	/**
 	 * Determines whether this listview is in a scrolling state invoked
