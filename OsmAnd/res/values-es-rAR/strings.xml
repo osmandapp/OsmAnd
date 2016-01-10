@@ -52,7 +52,7 @@
     <string name="waypoint_visit_after">Visitar luego</string>
     <string name="waypoint_visit_before">Visitar antes</string>
     <string name="simulate_your_location">Simular su ubicación</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
     <string name="general_settings_2">Ajustes generales</string>
