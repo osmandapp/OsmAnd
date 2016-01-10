@@ -1643,4 +1643,11 @@
     <string name="shared_string_upload">Încarcă (upload)</string>
     <string name="osm_edit_created_poi">Crează punct de interes OSM (OSM POI)</string>
 
+    <string name="world_map_download_descr">World basemap (harta de bază a lumii ce acoperă întreaga lume fară detalii) lipsește sau învechită. Luați în considerare descărcarea harții World basemap.</string>
+    <string name="shared_string_qr_code">Cod QR</string>
+    <string name="map_downloaded">Hartă descarcată</string>
+    <string name="map_downloaded_descr">Harta pentru %1$s a fost descărcată. Navigați înapoi la vizualizarea hărții pentru a o folosi.</string>
+    <string name="go_to_map">Mergi la hartă</string>
+    <string name="shared_string_send">Trimite</string>
+    <string name="favorite_category_dublicate_message">Numele categoriei specificate există deja. Definiți alt nume.</string>
     </resources>
