@@ -1538,7 +1538,7 @@
 	<string name="routing_attr_avoid_shuttle_train_name">Evită transfer tren</string>
 	<string name="traffic_warning_hazard">Pericol</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evită transfer tren</string>
-    <string name="no_updates_available">Nu sunt disponibile update-uri.</string>
+    <string name="no_updates_available">Nu sunt disponibile actualizări.</string>
     <string name="rendering_attr_currentTrackWidth_name">Lățime GPX</string>
     <string name="download_live_updates">Update-uri in timp real</string>
 	<string name="rendering_value_boldOutline_name">Bold contur</string>
@@ -1613,4 +1613,34 @@
     <string name="av_audio_bitrate_descr">Selectează bitrate-ul audio</string>
     <string name="please_specify_poi_type_only_from_list">Selectează tipul corect al punctului de interes sau ignoră-l</string>
     <string name="access_from_map_description">Butonul de meniu lansează panoul frontal, nu meniul propriu-zis</string>
+    <string name="show_on_start_description">\'Închide\' Lansează harta direct pe ecran</string>
+    <string name="copied_to_clipboard">Copiat în clipboard</string>
+    <string name="release_2_2">" • O interfață nouă cu context sensibil la atingere locațiilor pe hartă și alte ecrane\n\n • Harta este lansată direct, doar dacă nu este selectată \'Afișează panoul frontal la pornire\'\n\n • Configurează ce elemente să fie afișate pe panoul frontal\n\n • Ignoră panoul frontal dacă dorești utilizarea meniurilor în aplicație\n\n • Descărcarea hărților sau a regiunilor se poate face direct prin atingere pe harta lumii\n\n • Căutarea punctelor de interes (POI) suportă mai multe criterii\n\n • Îmbunatățirea editarării punctelor de interes (POI) și OSM\n\n • Refăcută structura de descărcare a hărților și a interfeței\n\n și multe altele... "</string>
+    <string name="osm_edit_commented_note">Comentați nota OSM</string>
+    <string name="osm_edit_removed_note">Nota OSM ștearsă</string>
+    <string name="osm_edit_created_note">Creată nota OSM</string>
+    <string name="osn_bug_name">Notă OSM</string>
+    <string name="osn_add_dialog_title">Crează notă</string>
+    <string name="osn_comment_dialog_title">Adaugă comentariu</string>
+    <string name="osn_reopen_dialog_title">Redeschide nota</string>
+    <string name="osn_close_dialog_title">Închide nota</string>
+    <string name="osn_add_dialog_success">Notă creată cu succes</string>
+    <string name="osn_add_dialog_error">S-a produs o excepție: nota nu a fost creată</string>
+    <string name="osn_close_dialog_success">Nota a fost închisă cu succes</string>
+    <string name="osn_close_dialog_error">S-a produs o excepție: nota nu a fost închisă</string>
+    <string name="shared_string_commit">Comite</string>
+
+    <string name="context_menu_item_delete_waypoint">Ștergi punctul de referință GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Editează punctul de referință GPX</string>
+    <string name="shared_string_location">Locație</string>
+    <string name="share_osm_edits_subject">Editări OSM împărțite prin OsmAnd</string>
+    <string name="lang_nds">Low German</string>
+    <string name="lang_mk">Macedonian</string>
+    <string name="read_more">Citește mai multe</string>
+    <string name="whats_new">Ce-i nou în</string>
+    <string name="rendering_attr_hideProposed_name">Ascunde obiectele propuse</string>
+    <string name="shared_string_update">Actualizează</string>
+    <string name="shared_string_upload">Încarcă (upload)</string>
+    <string name="osm_edit_created_poi">Crează punct de interes OSM (OSM POI)</string>
+
     </resources>
