@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
     <string name="av_video_quality_low">Низкое качество</string>
@@ -1869,4 +1870,5 @@
     <string name="only_download_over_wifi">Загружать только через WiFi</string>
     <string name="update_now">Обновить сейчас</string>
     <string name="missing_write_external_storage_permission">Приложению не разрешена запись на карту памяти</string>
-</resources>
+<string name="available_maps">Доступные карты</string>
+    </resources>
