@@ -1716,4 +1716,26 @@
     <string name="lang_et">Estoniană</string>
     <string name="lang_ceb">Limba Cebuano</string>
     <string name="disable_recording_once_app_killed">Previne logarea automată</string>
+    <string name="disable_recording_once_app_killed_descrp">Logarea punctelor GPX este oprita cand aplicația este distrusă (folosind lista aplicațiilor recente). (Indicatorul ce indică funcționarea în fundal a OsmAnd dispare din bara de notificări a Android-ului)</string>
+    <string name="shared_string_import2osmand">Importă în OsmAnd</string>
+    <string name="read_full_article">Citește tot articolul (online)</string>
+    <string name="shared_string_wikipedia">Wikipedia (wiki)</string>
+    <string name="local_indexes_cat_wiki">Wikipedia (wiki)</string>
+    <string name="shared_string_show_details">Arată detalii</string>
+    <string name="osm_edit_context_menu_delete">Șterge editarea OSM</string>
+    <string name="rendering_value_disabled_name">Dezactivată</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorează în funcție de destinația calătoriei</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorează în funcție de OSMC</string>
+    <string name="osmo_share_my_location">Împărtășește poziția mea</string>
+    <string name="shared_string_logoff">Deconectare</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Ascunde numarul casei</string>
+    <string name="application_dir_change_warning3">Dorești ca OsmAnd să copie de asemenea și fișierele de date la noua destinție?</string>
+    <string name="specified_directiory_not_writeable">Hărțile nu pot fi create în directorul selectat</string>
+    <string name="copying_osmand_file_failed">Copierea fișierelor a eșuat</string>
+    <string name="storage_directory_external">Memoria externă</string>
+    <string name="storage_directory_multiuser">Stocare pentru utilizatori multipli</string>
+    <string name="storage_directory_internal_app">Memoria internă aplicației</string>
+    <string name="storage_directory_manual">Manual specificată</string>
+    <string name="storage_directory_default">Memoria internă</string>
+    <string name="storage_directory">Locația hărților</string>
     </resources>
