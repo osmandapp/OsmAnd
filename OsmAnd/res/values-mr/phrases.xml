@@ -64,4 +64,25 @@
 	<string name="poi_watches">घड्याळांचे दुकान</string>
 	<string name="poi_weapons">शस्त्रांचे दुकान</string>
 	<string name="poi_police">पोलिस</string>
+	<string name="poi_village">गाव</string>
+	<string name="poi_town">तालुका</string>
+	<string name="poi_city">शहर</string>
+	<string name="poi_fireworks">फटाक्यांचे दुकान</string>
+
+	<string name="poi_aerialway_length">लांबी</string>
+
+	<string name="poi_wiki_lang_ne">नेपाळी विकि</string>
+	<string name="poi_wiki_lang_gu">गुजराती विकि</string>
+	<string name="poi_wiki_lang_pnb">पंजाबी विकि</string>
+	<string name="poi_wiki_lang_ur">उर्दु विकि</string>
+	<string name="poi_wiki_lang_ta">तामिळ विकि</string>
+	<string name="poi_wiki_lang_ml">मल्ल्याळम विकि</string>
+	<string name="poi_wiki_lang_mr">मराठी विकि</string>
+	<string name="poi_wiki_lang_la">लॅटिन विकि</string>
+	<string name="poi_wiki_lang_bn">बंगाली विकि</string>
+	<string name="poi_temperature">तापमान</string>
+	<string name="poi_building_type_church">इमारत प्रकार: चर्च</string>
+	<string name="poi_building_type_mosque">इमारत प्रकार: मशिद</string>
+	<string name="poi_building_type_temple">इमारत प्रकार: मंदिर</string>
+	<string name="poi_square">चौक</string>
 	</resources>
