@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     
 	
     <string name="close_changeset">Închide setul de modificări</string>
@@ -1542,7 +1543,7 @@
     <string name="download_live_updates">Update-uri in timp real</string>
 	<string name="rendering_value_boldOutline_name">Bold contur</string>
     <string name="av_locations">Locații</string>
-    <string name="av_locations_descr">Fișier GPX cu notări locații</string>
+    <string name="av_locations_descr">Fișier GPX cu locații cu notițe</string>
     <string name="rendering_value_red_name">Roșu</string>
     <string name="rendering_value_translucent_red_name">Roșu transparent</string>
     <string name="rendering_value_translucent_orange_name">Portocaliu transparent</string>
@@ -1574,4 +1575,42 @@
     <string name="osm_edit_deleted_poi">OSM POI sters</string>
     <string name="context_menu_item_open_note">Deschideti OSM Notite</string>
     <string name="osm_edit_reopened_note">OSM Notite redeschis</string>
+    <string name="item_deleted">Articol șters</string>
+    <string name="n_items_deleted">articole șterse</string>
+    <string name="shared_string_undo_all">Restaurează toate</string>
+    <string name="shared_string_type">Tip</string>
+    <string name="starting_point">Punct de plecare</string>
+    <string name="shared_string_not_selected">Neselectat</string>
+    <string name="rec_split">Înregistrări divizate</string>
+    <string name="rec_split_title">Utilizează înregistrări divizate</string>
+    <string name="rec_split_desc">Suprascrie clipurile când spațiul utilizat depășește memoria de stocare</string>
+    <string name="rec_split_clip_length">Lungime clip</string>
+    <string name="rec_split_clip_length_desc">Lungimea fiecărei înregistrări nu va mai specifica intervalul de timp</string>
+    <string name="rec_split_storage_size">Mărimea memoriei de stocare</string>
+    <string name="rec_split_storage_size_desc">Dimensiunea spațiului de stocare pentru toate clipurile înregistrate</string>
+    <string name="live_updates">Actualizări live</string>
+    <string name="available_maps">Hărți disponibile</string>
+    <string name="select_voice_provider">Selectează vocea pentru ghidare</string>
+    <string name="select_voice_provider_descr">Selectează sau descarcă vocea pentru ghidări pentru limba ta</string>
+    <string name="impassable_road_desc">Selectează drumurile pe care dorești sa le eviți pe perioada navigării</string>
+    <string name="shared_string_sound">Sunet</string>
+    <string name="no_location_permission">Aplicația nu are permisiunea de a accesa datele de localizare.</string>
+    <string name="no_camera_permission">Aplicația nu are permisiunea de a accesa camera.</string>
+    <string name="no_microphone_permission">Aplicația nu are permisiunea de a accesa microfonul.</string>
+    <string name="route_distance">Distanța:</string>
+    <string name="route_duration">Timp:</string>
+    <string name="rendering_attr_horseRoutes_name">Rute pentru călărie</string>
+    <string name="no_address_found">Nici o adresă determinată</string>
+    <string name="shared_string_near">Apropiere</string>
+    <string name="shared_string_hide">Ascunde</string>
+    <string name="av_video_quality_low">Calitate slabă</string>
+    <string name="av_video_quality_high">Calitate mare</string>
+    <string name="av_video_quality">Calitate înregistrării video</string>
+    <string name="av_video_quality_descr">Selectează calitatea înregistrării video</string>
+    <string name="av_audio_format">Format audio</string>
+    <string name="av_audio_format_descr">Selectează formatul audio</string>
+    <string name="av_audio_bitrate">Bitrate audio</string>
+    <string name="av_audio_bitrate_descr">Selectează bitrate-ul audio</string>
+    <string name="please_specify_poi_type_only_from_list">Selectează tipul corect al punctului de interes sau ignoră-l</string>
+    <string name="access_from_map_description">Butonul de meniu lansează panoul frontal, nu meniul propriu-zis</string>
     </resources>
