@@ -1650,4 +1650,11 @@
     <string name="go_to_map">Mergi la hartă</string>
     <string name="shared_string_send">Trimite</string>
     <string name="favorite_category_dublicate_message">Numele categoriei specificate există deja. Definiți alt nume.</string>
+    <string name="simulate_initial_startup_descr">Simulează ca și când aplicația ar fi pentru prima oară lansată, celelalte setari rămân neschimbate</string>
+    <string name="simulate_initial_startup">Simulează lansarea inițială</string>
+    <string name="share_menu_location">Împărtășește locația</string>
+    <string name="favorite_category_name">Numele categoriei</string>
+    <string name="favorite_category_add_new_title">Adaugă o categorie</string>
+    <string name="regions">Regiuni</string>
+    <string name="region_maps">Hărțile regiunilor</string>
     </resources>
