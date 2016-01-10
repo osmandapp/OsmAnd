@@ -52,9 +52,6 @@ public class EntityParser {
 			}
 		}
 		if (mo.getName().length() == 0) {
-			setNameFromOperator(mo, tags);
-		}
-		if (mo.getName().length() == 0) {
 			setNameFromRef(mo, tags);
 		}
 	}
