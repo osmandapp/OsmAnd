@@ -493,7 +493,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateMyLocation(rh, dialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode);
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
-		if (routePlanningMode || routeFollowingMode) {
+		if ((routePlanningMode || routeFollowingMode) && mapActivity.getMyApplication().getTargetPointsHelper().getPointToNavigate() != null) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
 			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
 		} else {
