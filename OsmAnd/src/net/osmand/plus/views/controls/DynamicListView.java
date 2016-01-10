@@ -28,6 +28,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -278,8 +279,11 @@ public class DynamicListView extends ObservableListView {
 								selectedView.setVisibility(INVISIBLE);
 
 								mCellIsMobile = true;
-
 								updateNeighborViewsForID(mMobileItemId);
+
+								if (dCallbacks != null) {
+									dCallbacks.onItemSwapping(position);
+								}
 							}
 						}
 					}
@@ -393,10 +397,16 @@ public class DynamicListView extends ObservableListView {
 
 					switchView.setTranslationY(delta);
 
-					ObjectAnimator animator = ObjectAnimator.ofFloat(switchView,
-							View.TRANSLATION_Y, 0);
-					animator.setDuration(MOVE_DURATION);
-					animator.start();
+					if (android.os.Build.VERSION.SDK_INT < 12) {
+						ViewCompat.animate(switchView)
+								.translationY(0)
+								.setDuration(MOVE_DURATION);
+					} else {
+						ObjectAnimator animator = ObjectAnimator.ofFloat(switchView,
+								View.TRANSLATION_Y, 0);
+						animator.setDuration(MOVE_DURATION);
+						animator.start();
+					}
 
 					return true;
 				}
@@ -442,33 +452,30 @@ public class DynamicListView extends ObservableListView {
 
 			mHoverCellCurrentBounds.offsetTo(mHoverCellOriginalBounds.left, mobileView.getTop());
 
-			ObjectAnimator hoverViewAnimator = ObjectAnimator.ofObject(mHoverCell, "bounds",
-					sBoundEvaluator, mHoverCellCurrentBounds);
-			hoverViewAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-				@Override
-				public void onAnimationUpdate(ValueAnimator valueAnimator) {
-					invalidate();
-				}
-			});
-			hoverViewAnimator.addListener(new AnimatorListenerAdapter() {
-				@Override
-				public void onAnimationStart(Animator animation) {
-					setEnabled(false);
-				}
+			if (android.os.Build.VERSION.SDK_INT < 12) {
+				finishTouch();
+			} else {
+				ObjectAnimator hoverViewAnimator = ObjectAnimator.ofObject(mHoverCell, "bounds",
+						sBoundEvaluator, mHoverCellCurrentBounds);
+				hoverViewAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+					@Override
+					public void onAnimationUpdate(ValueAnimator valueAnimator) {
+						invalidate();
+					}
+				});
+				hoverViewAnimator.addListener(new AnimatorListenerAdapter() {
+					@Override
+					public void onAnimationStart(Animator animation) {
+						setEnabled(false);
+					}
 
-				@Override
-				public void onAnimationEnd(Animator animation) {
-					mAboveItemId = INVALID_ID;
-					mMobileItemId = INVALID_ID;
-					mBelowItemId = INVALID_ID;
-					setAllVisible();
-					mHoverCell = null;
-					setEnabled(true);
-					invalidate();
-					processSwapped();
-				}
-			});
-			hoverViewAnimator.start();
+					@Override
+					public void onAnimationEnd(Animator animation) {
+						finishTouch();
+					}
+				});
+				hoverViewAnimator.start();
+			}
 		} else {
 			touchEventsCancelled();
 		}
@@ -479,18 +486,23 @@ public class DynamicListView extends ObservableListView {
 	 */
 	private void touchEventsCancelled() {
 		if (mCellIsMobile) {
-			mAboveItemId = INVALID_ID;
-			mMobileItemId = INVALID_ID;
-			mBelowItemId = INVALID_ID;
-			setAllVisible();
-			mHoverCell = null;
-			invalidate();
-			processSwapped();
+			finishTouch();
 		}
 
 		mCellIsMobile = false;
 		mIsMobileScrolling = false;
 		mActivePointerId = INVALID_POINTER_ID;
+	}
+
+	private void finishTouch() {
+		mAboveItemId = INVALID_ID;
+		mMobileItemId = INVALID_ID;
+		mBelowItemId = INVALID_ID;
+		setAllVisible();
+		mHoverCell = null;
+		setEnabled(true);
+		invalidate();
+		processSwapped();
 	}
 
 	private void processSwapped() {
@@ -685,5 +697,13 @@ public class DynamicListView extends ObservableListView {
 		}
 
 		return vXY;
+	}
+
+	@Override
+	protected void onWindowVisibilityChanged(int visibility) {
+		super.onWindowVisibilityChanged(visibility);
+		if (dCallbacks != null) {
+			dCallbacks.onWindowVisibilityChanged(visibility);
+		}
 	}
 }

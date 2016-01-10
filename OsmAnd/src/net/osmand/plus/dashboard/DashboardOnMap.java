@@ -64,6 +64,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.DynamicListViewCallbacks;
 import net.osmand.plus.views.controls.StableArrayAdapter;
+import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
+import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -111,7 +113,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener listAdapterOnClickListener;
-
+	private SwipeDismissListViewTouchListener swipeDismissListener;
 
 	private boolean visible = false;
 	private DashboardType visibleType;
@@ -178,7 +180,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
-		View.OnClickListener listener = new View.OnClickListener() {
+		final View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				hideDashboard();
@@ -189,6 +191,72 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		((DynamicListView) listView).setDynamicListViewCallbacks(this);
+
+		// Create a ListView-specific touch listener. ListViews are given special treatment because
+		// by default they handle touches for their list items... i.e. they're in charge of drawing
+		// the pressed state (the list selector), handling list item clicks, etc.
+		swipeDismissListener = new SwipeDismissListViewTouchListener(
+						listView,
+						new SwipeDismissListViewTouchListener.DismissCallbacks() {
+							@Override
+							public boolean canDismiss(int position) {
+								boolean res = false;
+								if (listAdapter instanceof StableArrayAdapter) {
+									List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
+									Object obj = listAdapter.getItem(position);
+									res = activeObjects.contains(obj);
+								}
+								return res;
+							}
+
+							@Override
+							public Undoable onDismiss(final int position) {
+								final Object item;
+								final StableArrayAdapter stableAdapter;
+								final int activeObjPos;
+								if (listAdapter instanceof StableArrayAdapter) {
+									stableAdapter = (StableArrayAdapter) listAdapter;
+									item = stableAdapter.getItem(position);
+
+									stableAdapter.setNotifyOnChange(false);
+									stableAdapter.remove(item);
+									stableAdapter.getObjects().remove(item);
+									activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
+									stableAdapter.getActiveObjects().remove(item);
+									stableAdapter.notifyDataSetChanged();
+
+								} else {
+									item = null;
+									stableAdapter = null;
+									activeObjPos = 0;
+								}
+
+								return new Undoable() {
+									@Override
+									public void undo() {
+										if (item != null) {
+											stableAdapter.setNotifyOnChange(false);
+											stableAdapter.insert(item, position);
+											stableAdapter.getObjects().add(position, item);
+											stableAdapter.getActiveObjects().add(activeObjPos, item);
+											stableAdapter.updateIdMap();
+
+											onItemsSwapped(stableAdapter.getActiveObjects());
+										}
+									}
+								};
+							}
+
+							@Override
+							public void onHidePopup() {
+								if (listAdapter instanceof StableArrayAdapter) {
+									StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+									stableAdapter.updateIdMap();
+									onItemsSwapped(stableAdapter.getActiveObjects());
+								}
+							}
+						});
+
 		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
@@ -541,6 +609,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
 		} else {
+			if (swipeDismissListener != null) {
+				swipeDismissListener.discardUndo();
+			}
 			mapActivity.getRoutingHelper().removeListener(this);
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
@@ -1083,6 +1154,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	@Override
+	public void onItemSwapping(int position) {
+		if (swipeDismissListener != null) {
+			swipeDismissListener.setEnabled(false);
+		}
+	}
+
+	@Override
 	public void onItemsSwapped(final List<Object> items) {
 		getMyApplication().runInUIThread(new Runnable() {
 			@Override
@@ -1109,6 +1187,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, false);
 					newRouteIsCalculated(false, null);
 					getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
+
+					if (swipeDismissListener != null) {
+						swipeDismissListener.setEnabled(true);
+					}
 				}
 			}
 		}, 50);
@@ -1130,5 +1212,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	@Override
 	public void routeWasCancelled() {
+	}
+
+	@Override
+	public void onWindowVisibilityChanged(int visibility) {
+		if (visibility != View.VISIBLE && swipeDismissListener != null) {
+			swipeDismissListener.discardUndo();
+		}
 	}
 }

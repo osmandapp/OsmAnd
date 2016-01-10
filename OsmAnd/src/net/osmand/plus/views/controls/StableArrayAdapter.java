@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,7 +35,10 @@ public class StableArrayAdapter extends ArrayAdapter<Object> {
 	public void updateObjects(List<Object> objects, List<Object> activeObjects) {
 		this.objects = objects;
 		this.activeObjects = activeObjects;
+		updateIdMap();
+	}
 
+	public void updateIdMap() {
 		HashMap<Object, Integer> idMap = new HashMap<>();
 		for (int i = 0; i < objects.size(); ++i) {
 			idMap.put(objects.get(i), i);

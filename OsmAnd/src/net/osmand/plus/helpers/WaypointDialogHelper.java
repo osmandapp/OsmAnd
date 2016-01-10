@@ -261,6 +261,7 @@ public class WaypointDialogHelper {
 
 					deletedPoints.add(point);
 					if (adapter != null) {
+						adapter.setNotifyOnChange(false);
 						adapter.remove(point);
 						adapter.notifyDataSetChanged();
 					}
@@ -451,6 +452,7 @@ public class WaypointDialogHelper {
 	}
 
 	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
+		listAdapter.setNotifyOnChange(false);
 		listAdapter.clear();
 		List<Object> points = getPoints();
 		for (Object point : points) {
