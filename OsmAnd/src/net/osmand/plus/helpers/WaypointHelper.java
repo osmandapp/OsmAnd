@@ -684,7 +684,7 @@ public class WaypointHelper {
 				if (((TargetPoint) point).start) {
 					ApplicationMode appMode = app.getSettings().getApplicationMode();
 					//return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
-					if (app.getTargetPointsHelper().getTargets().getPointToStart() == null) {
+					if (app.getTargetPointsHelper().getPointToStart() == null) {
 						return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
 					} else {
 						return iconsCache.getContentIcon(R.drawable.ic_action_marker_dark, !nightMode);
