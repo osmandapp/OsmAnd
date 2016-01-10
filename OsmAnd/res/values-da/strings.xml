@@ -2222,4 +2222,7 @@
 <string name="select_month_and_country">Vælg måned og land</string>
 <string name="shared_string_type">Type</string>
     <string name="starting_point">Udgangspunkt</string>
+    <string name="item_deleted">Element slettet</string>
+    <string name="n_items_deleted">elementer slettet</string>
+    <string name="shared_string_undo_all">FORTRYD ALLE</string>
     </resources>
