@@ -1871,4 +1871,10 @@
     <string name="update_now">Обновить сейчас</string>
     <string name="missing_write_external_storage_permission">Приложению не разрешена запись на карту памяти</string>
 <string name="available_maps">Доступные карты</string>
+    <string name="starting_point">Начальный пункт</string>
+    <string name="shared_string_not_selected">Не выбрано</string>
+    <string name="rec_split_storage_size">Размер хранилища</string>
+    <string name="shared_string_sound">Звук</string>
+    <string name="no_location_permission">У приложения нет доступа к информации о местоположении.</string>
+    <string name="no_camera_permission">У приложения нет доступа к камере.</string>
     </resources>
