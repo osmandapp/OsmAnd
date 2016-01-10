@@ -2061,4 +2061,7 @@
     <string name="select_month_and_country">Välj månad och land</string>
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
+    <string name="item_deleted">post raderad</string>
+    <string name="n_items_deleted">poster raderade</string>
+    <string name="shared_string_undo_all">ÅNGRA ALLA</string>
     </resources>
