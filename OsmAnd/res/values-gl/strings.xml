@@ -77,7 +77,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreo</string>
     <string name="forward">Adiante</string>
-    <string name="home">Inicio</string>
+    <string name="home">Pantalla principal</string>
     <string name="live_monitoring_m_descr">Enviar o seguimento a un servizo web indicado se a gravación de GPX estiver activada.</string>
 	<string name="live_monitoring_m">Seguimento con conexión (requírese GPX)</string>
     <string name="live_monitoring_start">Iniciar o seguimento con conexión</string>
@@ -1166,7 +1166,7 @@
 	<string name="loading_builds">A cargar as compilacións de OsmAnd…</string>
 	<string name="select_build_to_install">Seleccione a compilación de OsmAnd que desexe instalar</string>
 	<string name="gps_status_app_not_found">O aplicativo de estado do GPS non está instalado. Desexa buscalo no Market?</string>
-	<string name="voice_is_not_available_msg">A orientación por voz non está dispoñíbel. Vaia á «Configuración» → «Xeral» →«Indicacións con voz» e seleccione ou descargue un paquete de datos de voz.</string>
+	<string name="voice_is_not_available_msg">A orientación por voz non está dispoñíbel. Vaia a «Configuración» → «Xeral» →«Indicacións con voz» e seleccione ou descargue un paquete de datos de voz.</string>
 	<string name="voice_is_not_available_title">A orientación por voz non está seleccionada</string>
 	<string name="daynight_mode_day">Diúrno</string>
 	<string name="daynight_mode_night">Nocturno</string>
@@ -1346,7 +1346,7 @@
 	<string name="sd_dir_not_accessible">O cartafol de almacenamento de datos do cartón SD non é accesíbel!</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Xa existen datos sen conexión para {0} ({1}). Desexa actualizalos ({2}) ?</string>
-	<string name="address">Address</string>
+	<string name="address">Enderezo</string>
 	<string name="shared_string_download_successful">A descarga foi correcta</string>
 	
 	<string name="shared_string_downloading">A descargar</string>
@@ -1452,14 +1452,14 @@
 	<string name="position_on_map_bottom">Abaixo</string>
 	<string name="navigate_point_top_text">Introduza a latitude e a lonxitude no formato seleccionado (D - graos, M - minutos, S - segundos)</string>
 	<string name="navigate_point_latitude">Latitude</string>
-	<string name="navigate_point_longitude">Longitude</string>
+	<string name="navigate_point_longitude">Lonxitude</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="shared_string_show_on_map">Mostrar no mapa</string>
 	
 	<string name="search_address_top_text">Seleccionar o enderezo</string>
-	<string name="search_address_region">Region</string>
+	<string name="search_address_region">Rexión</string>
 	<string name="search_address_city">Cidade</string>
 	<string name="search_address_street">Rúa</string>
 	<string name="search_address_building">Edificio</string>
@@ -1987,4 +1987,39 @@
     <string name="share_osm_edits_subject">Edicións de OSM compartidas a través de OsmAnd</string>
     <string name="lang_nds">Baixo alemán</string>
     <string name="lang_mk">Macedonio</string>
-    </resources>
+    <string name="world_map_download_descr">Falta o mapa base mundial (que cubre o mundo enteiro en ampliacións pequenas) ou está anticuado. Debería descargar o mapa base mundial para ter un ambiente completo.</string>
+    <string name="simulate_initial_startup">Simular o primeiro inicio do aplicativo</string>
+    <string name="looking_up_address">A consultar o enderezo</string>
+    <string name="rendering_attr_currentTrackColor_description">Cor de GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Largo do GPX</string>
+    <string name="free">"Libre %s1$s "</string>
+    <string name="rendering_attr_roadStyle_description">Estilo de estrada</string>
+    <string name="routing_attr_avoid_stairs_name">Evitar escaleiras</string>
+    <string name="routing_attr_avoid_stairs_description">Evitar escaleiras</string>
+    <string name="routing_attr_avoid_borders_name">Evitar cruzar fronteiras</string>
+    <string name="shared_string_others">Outros</string>
+    <string name="poi_dialog_reopen">Reabrir</string>
+    <string name="shared_string_card_was_hidden">A tarxeta estaba oculta</string>
+    <string name="free_downloads_used_description">Mostra as descargas libres empregadas</string>
+
+    <string name="save_poi_without_poi_type_message">Confirma que desexa gardar o PdI sen un tipo de PdI?</string>
+    <string name="use_dashboard_btn">Empregar a pantalla principal</string>
+    <string name="use_drawer_btn">Empregar o menú</string>
+    <string name="dashboard_or_drawer_title">Control coa pantalla principal ou co menú</string>
+    <string name="dashboard_or_drawer_description">Hai unha escolla nova para controlar o aplicativo principalmente mediante a flexíbel pantalla principal ou mediante un menú estático. O que escolla pode ser cambiado en calquera momento na configuración da pantalla principal.</string>
+    <string name="update">Actualizar</string>
+    <string name="only_download_over_wifi">Descargar só se hai rede sen fíos</string>
+    <string name="live_update">Actualización ao vivo</string>
+    <string name="update_now">Actualizar agora</string>
+    <string name="missing_write_external_storage_permission">O aplicativo carece de permiso para empregar a tarxeta SD</string>
+    <string name="last_update">Última actualización: %s</string>
+    <string name="update_time">Hora da actualización</string>
+    <string name="updates_size">Tamaño da actualización</string>
+    <string name="last_map_change">Último cambio do mapa: %s</string>
+    <string name="hourly">Cada hora</string>
+    <string name="daily">Cada día</string>
+    <string name="weekly">Cada semana</string>
+    <string name="morning">Mañá</string>
+    <string name="Night">Noite</string>
+    <string name="select_month_and_country">Seleccione o mes e o país</string>
+</resources>
