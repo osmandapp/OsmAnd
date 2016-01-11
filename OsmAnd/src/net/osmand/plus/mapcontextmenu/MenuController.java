@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -21,6 +22,7 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.GpxItemMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.ImpassibleRoadsMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
@@ -105,6 +107,9 @@ public abstract class MenuController extends BaseMenuController {
 				} else if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(app, mapActivity, pointDescription);
 				}
+			} else if (object instanceof RouteDataObject) {
+				menuController = new ImpassibleRoadsMenuController(app, mapActivity,
+						pointDescription, (RouteDataObject) object);
 			}
 		}
 		if (menuController == null) {
