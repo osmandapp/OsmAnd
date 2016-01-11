@@ -28,4 +28,5 @@
     <string name="hint_value">Value</string>
     <string name="clear_updates_proposition_message">"You can remove downloaded updates and free "</string>
     <string name="add_time_span">Add time span</string>
+    <string name="road_blocked">Road blocked</string>
 </resources>
