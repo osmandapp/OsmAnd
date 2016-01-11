@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -159,7 +160,7 @@
     <string name="shared_string_rename">Přejmenovat</string>
     <string name="poi_filter_nominatim">Online POI filtr \'Nominatim\'</string>
     <string name="search_position_current_location_search">Hledané polohy…</string>
-    <string name="search_position_current_location_found">Poloha [nalezeno]</string>
+    <string name="search_position_current_location_found">Moje poloha [nalezeno]</string>
     <string name="search_position_address">Adresy…</string>
     <string name="search_position_favorites">Oblíbených…</string>
     <string name="search_position_undefined">Nedefinováno</string>
@@ -791,7 +792,7 @@
     <string name="show_warnings_title">Dopravní upozornění…</string>
     <string name="show_warnings_descr">Zobrazit omezení rychlosti, rychlostní radary, retardéry a řazení do pruhů</string>
     <string name="map_widget_show_ruler">Měřítko</string>
-    <string name="map_widget_transparent">Průhledné ovládání</string>
+    <string name="map_widget_transparent">Průhledné nástroje</string>
     <string name="email">E-mail</string>
     <string name="layer_map_appearance">Nastavení obrazovky</string>
     <string name="int_continuosly">Souvisle</string>
@@ -1873,7 +1874,7 @@
     <string name="no_address_found">Adresa nebyla určena</string>
 	<string name="looking_up_address">Vyhledávání adres</string>
     <string name="route_distance">Vzdálenost:</string>
-    <string name="route_duration">Potřebný čas:</string>
+    <string name="route_duration">Čas:</string>
     <string name="rendering_attr_horseRoutes_name">Stezka pro koně</string>
     <string name="only_download_over_wifi">Stahovat jen přes WiFi</string>
     <string name="no_location_permission">Aplikace nemá povolen přístup k poloze.</string>
@@ -1883,4 +1884,33 @@
     <string name="live_update">Okamžité aktualizace</string>
     <string name="update_now">Aktualizovat nyní</string>
     <string name="missing_write_external_storage_permission">Aplikace nemá povolen přístup k SD kartě</string>
+<string name="item_deleted">Položka smazána</string>
+    <string name="n_items_deleted">vymazaných položek</string>
+    <string name="shared_string_undo_all">VRÁTIT ZPĚT VŠE</string>
+    <string name="shared_string_type">Typ</string>
+    <string name="starting_point">Počáteční bod</string>
+    <string name="shared_string_not_selected">Nevybrané</string>
+    <string name="rec_split">Rozdělení nahrávky</string>
+    <string name="rec_split_title">Použít rozdělení nahrávání</string>
+    <string name="rec_split_desc">Přepsat záznamy když použité místo přesáhne velikost úložiště</string>
+    <string name="rec_split_clip_length">Délka záznamu</string>
+    <string name="rec_split_clip_length_desc">Délka každého záznamu nebude delší než zadaný interval</string>
+    <string name="rec_split_storage_size">Velikost úložiště</string>
+    <string name="rec_split_storage_size_desc">Velikost prostoru, který může být použit nahranými záznamy</string>
+    <string name="live_updates">Okamžité aktualizace</string>
+    <string name="available_maps">Dostupné mapy</string>
+    <string name="select_voice_provider">Zvolte hlasové pokyny</string>
+    <string name="select_voice_provider_descr">Vyberte nebo stáhněte hlasové pokyny pro váš jazyk</string>
+    <string name="impassable_road_desc">Vyberte cesty, které chcete vynechat při navigaci</string>
+    <string name="shared_string_sound">Zvuk</string>
+    <string name="last_update">Poslední aktualizace: %s</string>
+    <string name="update_time">Čas aktualizace</string>
+    <string name="updates_size">Velikost aktualizace</string>
+    <string name="last_map_change">Poslední změna mapy: %s</string>
+    <string name="hourly">Každou hodinu</string>
+    <string name="daily">Každý den</string>
+    <string name="weekly">Jednou týdně</string>
+    <string name="morning">Ráno</string>
+    <string name="Night">V noci</string>
+    <string name="select_month_and_country">Vyberte měsíc a krajinu</string>
 </resources>
