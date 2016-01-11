@@ -454,7 +454,9 @@ public class RoutingHelper {
 		}
 		
 		// 2. check if intermediate found
-		if(route.getIntermediatePointsToPass()  > 0 && route.getDistanceToNextIntermediate(lastFixedLocation) < POSITION_TOLERANCE * 2) {
+		if(route.getIntermediatePointsToPass()  > 0
+				&& route.getDistanceToNextIntermediate(lastFixedLocation) < POSITION_TOLERANCE * 2
+				&& !isRoutePlanningMode) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -485,7 +487,9 @@ public class RoutingHelper {
 
 		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < (((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get())) {
+		if (currentRoute > routeNodes.size() - 3
+				&& currentLocation.distanceTo(lastPoint) < (((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get())
+				&& !isRoutePlanningMode) {
 			showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			TargetPoint tp = targets.getPointToNavigate();
