@@ -35,6 +35,7 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.FavoritesLayer;
 import net.osmand.plus.views.GPXLayer;
+import net.osmand.plus.views.ImpassableRoadsLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTextLayer;
@@ -71,6 +72,7 @@ public class MapActivityLayers {
 	private TransportInfoLayer transportInfoLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
+	private ImpassableRoadsLayer impassableRoadsLayer;
 	private MapInfoLayer mapInfoLayer;
 	private MapTextLayer mapTextLayer;
 	private ContextMenuLayer contextMenuLayer;
@@ -79,7 +81,7 @@ public class MapActivityLayers {
 	private MapWidgetRegistry mapWidgetRegistry;
 
 	private StateChangedListener<Integer> transparencyListener;
-	
+
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
 		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication().getSettings());
@@ -141,6 +143,9 @@ public class MapActivityLayers {
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(activity);
 		mapView.addLayer(navigationLayer, 7);
+		// 7.5 Impassible roads
+		impassableRoadsLayer = new ImpassableRoadsLayer(activity);
+		mapView.addLayer(impassableRoadsLayer, 7.5f);
 		// 8. context menu layer 
 		contextMenuLayer = new ContextMenuLayer(activity);
 		mapView.addLayer(contextMenuLayer, 8);
@@ -421,7 +426,11 @@ public class MapActivityLayers {
 	public PointNavigationLayer getNavigationLayer() {
 		return navigationLayer;
 	}
-	
+
+	public ImpassableRoadsLayer getImpassableRoadsLayer() {
+		return impassableRoadsLayer;
+	}
+
 	public GPXLayer getGpxLayer() {
 		return gpxLayer;
 	}

@@ -1,15 +1,6 @@
 package net.osmand.router;
 
-import gnu.trove.set.hash.TLongHashSet;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -19,6 +10,15 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 public class RoutingConfiguration {
 	
@@ -55,12 +55,12 @@ public class RoutingConfiguration {
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
-		private TLongHashSet impassableRoadIds = new TLongHashSet();
+		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
 		private List<RouteDataObject> impassableRoads = new ArrayList<RouteDataObject>();  
 		
 		// Example
 //		{
-//			impassableRoadIds.add(23000069L);
+//			impassableRoadLocations.add(23000069L);
 //		}
 
 		public RoutingConfiguration build(String router, int memoryLimitMB) {
@@ -87,7 +87,7 @@ public class RoutingConfiguration {
 			i.initialDirection = direction;
 			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance) ;
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
-			i.router.addImpassableRoads(impassableRoadIds);
+			i.router.addImpassableRoads(impassableRoadLocations.keySet());
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
@@ -109,14 +109,14 @@ public class RoutingConfiguration {
 			return impassableRoads;
 		}
 		
-		public TLongHashSet getImpassableRoadIds() {
-			return impassableRoadIds;
+		public Map<Long, Location> getImpassableRoadLocations() {
+			return impassableRoadLocations;
 		}
 		
-		public void addImpassableRoad(RouteDataObject r) {
-			if (!impassableRoadIds.contains(r.id)){
-				impassableRoadIds.add(r.id);
-				impassableRoads.add(r);
+		public void addImpassableRoad(RouteDataObject route, Location location) {
+			if (!impassableRoadLocations.containsKey(route.id)){
+				impassableRoadLocations.put(route.id, location);
+				impassableRoads.add(route);
 			}
 		}
 		
@@ -139,7 +139,7 @@ public class RoutingConfiguration {
 		}
 
 		public void removeImpassableRoad(RouteDataObject obj) {
-			impassableRoadIds.remove(obj.id);
+			impassableRoadLocations.remove(obj.id);
 			impassableRoads.remove(obj);
 			
 		}

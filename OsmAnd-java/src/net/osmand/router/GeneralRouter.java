@@ -1,6 +1,11 @@
 package net.osmand.router;
 
-import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -14,12 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
+import gnu.trove.set.hash.TLongHashSet;
 
 public class GeneralRouter implements VehicleRouter {
 	
@@ -875,7 +875,7 @@ public class GeneralRouter implements VehicleRouter {
 		
 	}
 
-	public void addImpassableRoads(TLongHashSet impassableRoads) {
+	public void addImpassableRoads(Set<Long> impassableRoads) {
 		if (impassableRoads != null && !impassableRoads.isEmpty()) {
 			if (this.impassableRoads == null) {
 				this.impassableRoads = new TLongHashSet();
