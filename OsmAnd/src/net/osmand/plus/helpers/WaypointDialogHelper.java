@@ -177,6 +177,23 @@ public class WaypointDialogHelper {
 				R.layout.waypoint_reached, R.id.title, points, activePoints) {
 
 			@Override
+			public boolean isEnabled(int position) {
+				Object obj = getItem(position);
+				boolean labelView = (obj instanceof Integer);
+				boolean topDividerView = (obj instanceof Boolean) && ((Boolean) obj);
+				boolean bottomDividerView = (obj instanceof Boolean) && !((Boolean) obj);
+
+				boolean enabled = !labelView && !topDividerView && !bottomDividerView;
+
+				if (enabled && obj instanceof RadiusItem) {
+					int type = ((RadiusItem) obj).type;
+					enabled = type != WaypointHelper.POI;
+				}
+
+				return enabled;
+			}
+
+			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
@@ -284,7 +301,7 @@ public class WaypointDialogHelper {
 			((TextView) v.findViewById(R.id.titleEx)).setText(ctx.getString(R.string.shared_string_type) + ":");
 			final TextView radiusEx = (TextView) v.findViewById(R.id.descriptionEx);
 			radiusEx.setText(descEx);
-			radiusEx.setOnClickListener(new View.OnClickListener() {
+			v.findViewById(R.id.secondCellContainer).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					running[0] = position;
@@ -301,20 +318,30 @@ public class WaypointDialogHelper {
 				}
 
 			});
+			AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.title), nightMode);
+			final TextView radius = (TextView) v.findViewById(R.id.description);
+			radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
+			v.findViewById(R.id.firstCellContainer).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					selectDifferentRadius(type, running, position, thisAdapter, mapActivity);
+				}
+
+			});
 		} else {
 			v = ctx.getLayoutInflater().inflate(R.layout.drawer_list_radius, null);
 			((TextView) v.findViewById(R.id.title)).setText(ctx.getString(R.string.search_radius_proximity));
-		}
-		AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.title), nightMode);
-		final TextView radius = (TextView) v.findViewById(R.id.description);
-		radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
-		radius.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				selectDifferentRadius(type, running, position, thisAdapter, mapActivity);
-			}
+			AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.title), nightMode);
+			final TextView radius = (TextView) v.findViewById(R.id.description);
+			radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
+			radius.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					selectDifferentRadius(type, running, position, thisAdapter, mapActivity);
+				}
 
-		});
+			});
+		}
 		return v;
 	}
 

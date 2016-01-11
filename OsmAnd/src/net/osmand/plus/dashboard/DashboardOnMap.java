@@ -189,7 +189,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		toolbar = ((Toolbar) dashboardView.findViewById(R.id.toolbar));
 		ObservableScrollView scrollView = ((ObservableScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
-		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		//listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		listView.setDrawSelectorOnTop(true);
 		((DynamicListView) listView).setDynamicListViewCallbacks(this);
 
 		// Create a ListView-specific touch listener. ListViews are given special treatment because

@@ -10,10 +10,12 @@
               android:layout_marginBottom="5dp">
 
     <LinearLayout
+        android:id="@+id/firstCellContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
         android:orientation="vertical">
 
         <TextView
@@ -39,10 +41,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/secondCellContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
         android:orientation="vertical">
 
         <TextView
