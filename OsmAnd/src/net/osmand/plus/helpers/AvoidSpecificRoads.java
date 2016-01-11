@@ -144,7 +144,7 @@ public class AvoidSpecificRoads {
 		});
 	}
 	private void findRoad(final MapActivity activity, final LatLon loc) {
-		Location ll = new Location("");
+		final Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
 		app.getLocationProvider().getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
@@ -154,7 +154,7 @@ public class AvoidSpecificRoads {
 				if(object == null) {
 					Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
 				} else {
-					getBuilder().addImpassableRoad(object);
+					getBuilder().addImpassableRoad(object, ll);
 					RoutingHelper rh = app.getRoutingHelper();
 					if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
 						rh.recalculateRouteDueToSettingsChange();

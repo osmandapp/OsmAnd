@@ -701,7 +701,7 @@
 	<string name="poi_wiki_lang_vo">Wiki en volapük</string>
 	<string name="poi_wiki_lang_zh">Wiki en chinés</string>
 
-	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_barrier_entrance">Pasaxe nun muro ou valado</string>
 	<string name="poi_entrance_main">Entrada principal</string>
 	<string name="poi_entrance">Entrada</string>
 	<string name="poi_entrance_exit">Saída</string>
@@ -727,8 +727,8 @@
 	<string name="poi_disused">En desuso</string>
 
 	<string name="poi_brand">Marca</string>
-	<string name="poi_drinking_water_yes">Auga potábel</string>
-	<string name="poi_drinking_water_no">Auga non potábel</string>
+	<string name="poi_drinking_water_yes">Auga potábel: si</string>
+	<string name="poi_drinking_water_no">Auga potábel: non</string>
 	<string name="poi_supervised_yes">Vixiado</string>
 	<string name="poi_supervised_no">Non vixiado</string>
 	<string name="poi_seasonal_yes">Temporal</string>
@@ -739,7 +739,7 @@
 	<string name="poi_seasonal_summer">Verán</string>
 	<string name="poi_seasonal_autumn">Outono</string>
 	<string name="poi_seasonal_winter">Inverno</string>
-	<string name="poi_crossing_traffic_signals">Con sinais de tráfico</string>
+	<string name="poi_crossing_traffic_signals">Con semáforo</string>
 	<string name="poi_crossing_uncontrolled">Sen control</string>
 	<string name="poi_crossing_unmarked">Sen marcas</string>
 	<string name="poi_start_date">Data de inicio</string>
@@ -752,14 +752,14 @@
 	<string name="poi_access_delivery">Acceso para entregas</string>
 	<string name="poi_access_agricultural">Acceso agrícola</string>
 
-	<string name="poi_content_water">Auga (contido)</string>
-	<string name="poi_content_fuel">Combustíbel (contido)</string>
-	<string name="poi_content_wine">Viño (contido)</string>
-	<string name="poi_content_biomass">Biomasa (contido)</string>
-	<string name="poi_content_crop">Colleita (contido)</string>
-	<string name="poi_content_fodder">Forraxe (contido)</string>
-	<string name="poi_content_beer">Cervexa (contido)</string>
-	<string name="poi_content_salt">Sal (contido)</string>
+	<string name="poi_content_water">Contido: auga</string>
+	<string name="poi_content_fuel">Contido: combustíbel</string>
+	<string name="poi_content_wine">Contido: viño</string>
+	<string name="poi_content_biomass">Contido: biomasa</string>
+	<string name="poi_content_crop">Contido: colleita</string>
+	<string name="poi_content_fodder">Contido: foraxe</string>
+	<string name="poi_content_beer">Contido: cervexa</string>
+	<string name="poi_content_salt">Contido: sal</string>
 	<string name="poi_scuba_diving_shop">Tenda de materiais de mergullo con botella</string>
 	<string name="poi_car_repair">Taller de automoción</string>
 	<string name="poi_recycling_low_energy_bulbs">Lámpadas de baixo consumo</string>
@@ -770,7 +770,7 @@
 	<string name="poi_collection_times">Horario de recollida</string>
 	<string name="poi_building">Edificio</string>
 
-<string name="poi_content_grain">Gran (contido)</string>
+<string name="poi_content_grain">Contido: gran</string>
 
 	<string name="poi_animal_shelter_dog">Canceira</string>
 	<string name="poi_animal_shelter_cat">Refuxio para gatos</string>
@@ -816,4 +816,62 @@
 	<string name="poi_glaziery">Tenda de vidro</string>
 	<string name="poi_tableware">Tenda de vaixela</string>
 	<string name="poi_ticket">Billeteira</string>
+	<string name="poi_window_blind">Tenda de persianas</string>
+	<string name="poi_car">Concesionario de automóbiles</string>
+	<string name="poi_swimming_pool_shop">Tenda de material de piscina</string>
+	<string name="poi_gate">Cancela</string>
+	<string name="poi_traffic_signals">Semáforo</string>
+
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_runway">Pista de aterraxe</string>
+	<string name="poi_junction">Encrucillada</string>
+	<string name="poi_power_tower">Torre eléctrica</string>
+	<string name="poi_power_pole">Poste eléctrico</string>
+
+	<string name="poi_telephone_exchange">Central telefónica</string>
+
+	<string name="poi_recycling_small_appliances">Electrodomésticos pequenos</string>
+	<string name="poi_recycling_garden_waste">Residuos de xardín</string>
+	<string name="poi_recycling_hazardous_waste">Residuos perigosos</string>
+	<string name="poi_recycling_light_bulbs">Lámpadas eléctricas</string>
+	<string name="poi_recycling_polyester">Poliéster</string>
+	<string name="poi_school">Centro educativo</string>
+	<string name="poi_college">Universidade</string>
+	<string name="poi_paediatrics">Pediatría</string>
+
+	<string name="poi_archery">Tiro con arco</string>
+	<string name="poi_shooting">Salón de tiro</string>
+	<string name="poi_tourism_yes">Obxecto turístico</string>
+	<string name="poi_attraction_animal">Animal (atracción)</string>
+	<string name="poi_attraction_water_slide">Tobogán de auga</string>
+
+	<string name="poi_wilderness_hut">Refuxio</string>
+	<string name="poi_hunting_lodge">Refuxio de caza</string>
+
+	<string name="poi_religion_unitarian_universalist">Universalismo unitario</string>
+	<string name="poi_wine_cellar">Adega</string>
+	<string name="poi_piste_snow_park">Parque de neve</string>
+	<string name="poi_craft_bookbinder">Encadernación</string>
+	<string name="poi_craft_window_construction">Carpintaría de aluminio</string>
+
+	<string name="poi_military_bunker">Búnker militar</string>
+	<string name="poi_bollard">Bolardo</string>
+	<string name="poi_cycle_barrier">Barreira para bicicletas</string>
+	<string name="poi_motorcycle_barrier">Barreira para motos</string>
+	<string name="poi_service_times">Horario de funcionamento</string>
+	<string name="poi_height">Altura</string>
+	<string name="poi_ele">Elevación sobre o nivel do mar</string>
+	<string name="poi_wheelchair_no">Cadeira de rodas: inaccesíbel</string>
+	<string name="poi_wheelchair_limited">Cadeira de rodas: limitado</string>
+	<string name="poi_content_oil">Contido: aceite</string>
+	<string name="poi_content_gas">Contido: gas</string>
+	<string name="poi_content_wastewater">Contido: augas residuais</string>
+	<string name="poi_nudism_yes">Nudismo: permitido</string>
+	<string name="poi_nudism_no">Nudismo: prohibido</string>
+	<string name="poi_nudism_obligatory">Nudismo: obrigatorio</string>
+	<string name="poi_nudism_customary">Nudismo: tradicional</string>
+	<string name="poi_nudism_permissive">Nudismo: permisivo</string>
+
 	</resources>
