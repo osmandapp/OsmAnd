@@ -1187,7 +1187,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 						}
 					}
 					getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, false);
-					newRouteIsCalculated(false, null);
+					newRouteIsCalculated(false, new ValueHolder<Boolean>());
 					getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
 
 					if (swipeDismissListener != null) {
@@ -1210,6 +1210,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				dynamicListView.setActiveItemsList(stableAdapter.getActiveObjects());
 			}
 		}
+		showToast.value = false;
 	}
 
 	@Override
