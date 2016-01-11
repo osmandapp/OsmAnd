@@ -490,7 +490,7 @@
     <string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>
 
     <string name="local_index_upload_gpx_description">Send GPX-filer til OSM netværket. De vil blive brugt til at forbedre kort.</string>
-    <string name="local_index_items_uploaded">%1$d af %2$d poster overført.</string>
+    <string name="local_index_items_uploaded">%1$d af %2$d emner overført.</string>
     <string name="local_index_mi_upload_gpx">Send til OSM</string>
     <string name="show_more_map_detail">Vis flere kortdetaljer</string>
     <string name="favorite_home_category">Hjem</string>
@@ -779,7 +779,7 @@
     <string name="amenity_type_landuse">Arealanvendelse</string>
     <string name="amenity_type_sustenance">Mad og drikke</string>
     <string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger\' → \'Generelt\' → \'Stemmevejledning\' og vælg eller hent en stemmevejledning.</string>
-    <string name="items_were_selected">{0} enheder valgt</string>
+    <string name="items_were_selected">{0} emner valgt</string>
     <string name="filter_existing_indexes">Hentet</string>
     <string name="fast_route_mode">Hurtigste rute</string>
     <string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>
@@ -1614,7 +1614,7 @@
     <string name="traffic_warning_calming">Trafikdæmpning</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning">Trafikadvarsel</string>
-    <string name="local_index_description">Klik på et eksisterende element for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
+    <string name="local_index_description">Klik på et eksisterende emne for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
     <string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
     <string name="fav_point_dublicate">Favoritnavn dublet</string>
@@ -2222,7 +2222,7 @@
 <string name="select_month_and_country">Vælg måned og land</string>
 <string name="shared_string_type">Type</string>
     <string name="starting_point">Udgangspunkt</string>
-    <string name="item_deleted">Element slettet</string>
-    <string name="n_items_deleted">elementer slettet</string>
+    <string name="item_deleted">Emne slettet</string>
+    <string name="n_items_deleted">Emner slettet</string>
     <string name="shared_string_undo_all">FORTRYD ALLE</string>
     </resources>
