@@ -682,8 +682,12 @@ public class WaypointHelper {
 			} else if (type == TARGETS) {
 				IconsCache iconsCache = app.getIconsCache();
 				if (((TargetPoint) point).start) {
-					ApplicationMode appMode = app.getSettings().getApplicationMode();
-					return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
+					if (app.getTargetPointsHelper().getPointToStart() == null) {
+						ApplicationMode appMode = app.getSettings().getApplicationMode();
+						return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
+					} else {
+						return iconsCache.getContentIcon(R.drawable.ic_action_marker_dark, !nightMode);
+					}
 				} else if (((TargetPoint) point).intermediate) {
 					if (!nightMode) {
 						return iconsCache.getIcon(R.drawable.widget_intermediate_day, 0, 0f);

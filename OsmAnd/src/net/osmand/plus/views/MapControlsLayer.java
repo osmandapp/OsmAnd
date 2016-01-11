@@ -508,7 +508,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		compassHud.updateVisibility(!dialogOpened);
 		layersHud.updateVisibility(!dialogOpened);
 
-		if (routeFollowingMode || routePlanningMode) {
+		if (routePlanningMode || routeFollowingMode) {
 			mapAppModeShadow.setVisibility(View.GONE);
 		} else {
 			if (mapView.isZooming()) {

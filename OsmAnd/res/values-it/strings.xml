@@ -2135,4 +2135,7 @@
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto di partenza</string>
     <string name="select_month_and_country">Scegli il mese e lo stato</string>
-</resources>
+<string name="item_deleted">Oggetto cancellato</string>
+    <string name="n_items_deleted">oggetti cancellati</string>
+    <string name="shared_string_undo_all">Annulla tutto</string>
+    </resources>

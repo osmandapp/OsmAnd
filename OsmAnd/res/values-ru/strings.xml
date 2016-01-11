@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
     <string name="av_video_quality_low">Низкое качество</string>
@@ -204,7 +205,7 @@
     <string name="map_version_changed_info">На сервере данных были найдены файлы, не совместимые с данной версией программы. Для их использования, пожалуйста, обновите приложение.</string>
     <string name="poi_filter_nominatim">Nominatim (Интернет)</string>
     <string name="search_position_current_location_search">Поиск позиции…</string>
-    <string name="search_position_current_location_found">Точка [Найдена]</string>
+    <string name="search_position_current_location_found">Моя позиция (найдена)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
     <string name="search_position_undefined">Неопределенно</string>
@@ -874,7 +875,7 @@
     <string name="show_warnings_title">Показывать сигналы…</string>
     <string name="map_widget_show_ruler">Линейка</string>
     <string name="map_widget_view_direction">Направление взгляда</string>
-    <string name="map_widget_transparent">Прозрачность</string>
+    <string name="map_widget_transparent">Прозрачные виджеты</string>
     <string name="int_continuosly">Постоянно</string>
     <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
     <string name="map_widget_day_night">Дневной/ночной режим</string>
@@ -1806,7 +1807,7 @@
     <string name="downloads">Загрузки</string>
     <string name="show_free_version_banner">Показывать баннер бесплатной версии</string>
     <string name="show_free_version_banner_description">Даже если у вас купленная версия вы также можете видеть баннер для бесплатной версии</string>
-    <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, даже если у вас есть полная карта?</string>
+    <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, хотя у вас уже есть стандартная (полная) карта?</string>
     <string name="value_downloaded_of_max">%1$.1f из %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Обновить все (%1$s МБ)</string>
@@ -1857,7 +1858,7 @@
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
     <string name="route_distance">Расстояние:</string>
-    <string name="route_duration">Время в пути:</string>
+    <string name="route_duration">Время:</string>
     <string name="access_from_map_description">Кнопка меню открывает домашнюю страницу</string>
     <string name="access_from_map">Доступ с карты</string>
     <string name="context_menu_item_delete_waypoint">Удалить точку GPX?</string>
@@ -1869,4 +1870,20 @@
     <string name="only_download_over_wifi">Загружать только через WiFi</string>
     <string name="update_now">Обновить сейчас</string>
     <string name="missing_write_external_storage_permission">Приложению не разрешена запись на карту памяти</string>
-</resources>
+<string name="available_maps">Доступные карты</string>
+    <string name="starting_point">Начальный пункт</string>
+    <string name="shared_string_not_selected">Не выбрано</string>
+    <string name="rec_split_storage_size">Размер хранилища</string>
+    <string name="shared_string_sound">Звук</string>
+    <string name="no_location_permission">У приложения нет доступа к информации о местоположении.</string>
+    <string name="no_camera_permission">У приложения нет доступа к камере.</string>
+    <string name="no_microphone_permission">У приложения нет доступа к микрофону.</string>
+    <string name="last_update">Последнее обновление: %s</string>
+    <string name="last_map_change">Последнее изменение карты: %s</string>
+    <string name="hourly">Каждый час</string>
+    <string name="daily">Ежедневно</string>
+    <string name="weekly">Еженедельно</string>
+    <string name="select_month_and_country">Выберите месяц и страну</string>
+<string name="poi_dialog_reopen">Открыть повторно</string>
+    <string name="impassable_road_desc">Выберите дороги, которых следует избегать при навигации</string>
+    </resources>

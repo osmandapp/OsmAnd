@@ -1995,4 +1995,5 @@
 <string name="select_month_and_country">Wähle Monat und Land</string>
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
+    <string name="shared_string_undo_all">Alles rückgängig machen</string>
     </resources>
