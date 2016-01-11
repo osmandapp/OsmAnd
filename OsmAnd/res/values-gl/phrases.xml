@@ -802,4 +802,18 @@
 	<string name="poi_aeroway_terminal">Terminal aeroportuaria</string>
 	<string name="poi_water_works">Obras hidráulicas</string>
 	<string name="poi_cooling_tower">Torre de refrixeración</string>
+	<string name="poi_trash_disposal">Eliminación de lixo</string>
+		<string name="poi_landuse">Uso do solo</string>
+	<string name="poi_accomodation">Aloxamento</string>
+		<string name="poi_farm">Produtos agrícolas polos labregos</string>
+	<string name="poi_greengrocer">Tenda de verduras</string>
+	<string name="poi_confectionery">Pastelaría</string>
+	<string name="poi_pastry">Confeitaría</string>
+	<string name="poi_vending_machine">Máquina vendedora</string>
+	<string name="poi_baby_goods">Produtos de bebés</string>
+	<string name="poi_furnace">Tenda de calefacción</string>
+	<string name="poi_garden_furniture">Mobiliario do xardín</string>
+	<string name="poi_glaziery">Tenda de vidro</string>
+	<string name="poi_tableware">Tenda de vaixela</string>
+	<string name="poi_ticket">Billeteira</string>
 	</resources>

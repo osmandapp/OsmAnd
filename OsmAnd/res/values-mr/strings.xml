@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
   <string name="local_indexes_cat_tile">ऑनलाइन नकाशे (टाइल्स)</string>
-  <string name="local_indexes_cat_map">ऑफलाइन नकाशे (वेक्टर)</string>
+  <string name="local_indexes_cat_map">साधारण नकाशे (वेक्टर)</string>
   <string name="map_online_data">ऑनलाइन नकाशे (टाइल्स)</string>
   <string name="map_online_data_descr">ऑनलाइन नकाशे वापरा (डाउनलोड करून एसडी कार्ड वार साठवा)</string>
   <string name="shared_string_online_maps">ऑनलाइन नकाशे</string>
@@ -78,10 +79,10 @@
   <string name="index_name_europe">युरोप</string>
   <string name="index_name_france">युरोप - फ्रान्स</string>
   <string name="index_name_germany">युरोप - जर्मनी</string>
-  <string name="index_name_russia">युरोप/आशिया - रशिया</string>
+  <string name="index_name_russia">रशिया</string>
   <string name="index_name_africa">अफ्रिका</string>
   <string name="index_name_asia">आशिया</string>
-  <string name="index_name_oceania">ओशेनिया</string>
+  <string name="index_name_oceania">ऑस्ट्रेलिया आणि ओशेनिया</string>
   <string name="amenity_type_osmwiki">विकिपेडिया (ऑफलाइन)</string>
   
   <string name="routing_settings">दिशादर्शन</string>
@@ -109,7 +110,7 @@
   <string name="shared_string_rename">नाव बदला</string>
   
   <string name="search_position_current_location_search">स्थान शोधत आहे …</string>
-  <string name="search_position_current_location_found">स्थान (सापडले)</string>
+  <string name="search_position_current_location_found">माझे स्थान (सापडले)</string>
   <string name="search_position_address">पत्ता …</string>
   <string name="search_position_favorites">आवडती ठिकाणे…</string>
   
@@ -353,7 +354,7 @@
 	<string name="please_select_address">प्रथम शहर किंवा रस्ता निवडा</string>
     <string name="plugin_distance_point_time">वेळ</string>
     <string name="plugin_distance_point_hdop">अचूकपणा</string>
-    <string name="street_name">रस्ता</string>
+    <string name="street_name">रस्त्याचे नाव</string>
 	<string name="hno">घर क्रमांक</string>
     <string name="select_address_activity">पत्ता निवडा</string>
     <string name="map_widget_gps_info">जिपिएस माहिती</string>
@@ -384,8 +385,8 @@
     
     <string name="download_select_map_types">इतर नकाशे</string>
     <string name="download_roads_only_item">फक्त रस्ते</string>
-    <string name="download_regular_maps">साधारण नकाशे</string>
-    <string name="download_roads_only_maps">फक्त रस्त्याचे नकाशे</string>
+    <string name="download_regular_maps">साधारण नकाशा</string>
+    <string name="download_roads_only_maps">फक्त रस्त्याचा नकाशा</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">सीमा लपवा</string>
 	<string name="map_widget_max_speed">वेग मर्यादा</string>

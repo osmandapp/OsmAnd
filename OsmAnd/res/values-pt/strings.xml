@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -1967,4 +1968,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="anonymous_user_hint">Um utilizador anónimo não pode:\n- Criar grupos;\n- Sincronizar grupos e dispositivos com o servidor;\n- Gerir grupos e dispositivos num escritório privado.</string>
     <string name="anonymous_user">Utilizador anónimo</string>
     <string name="logged_as">Ligado como %1$s</string>
+    <string name="shared_string_not_selected">Não seleccionado</string>
+    <string name="select_month_and_country">Escolha Mês e País</string>
+<string name="updates_size">Tamanho das actualizações</string>
+    <string name="poi_context_menu_modify_osm_change">Modificar edição OSM</string>
+    <string name="use_dashboard_btn">Usar Painel</string>
+    <string name="use_drawer_btn">Usar Menú</string>
     </resources>

@@ -96,7 +96,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			View dv = getActivity().getLayoutInflater().inflate(R.layout.divider, null);
 			favorites.addView(dv);
 			View v = WaypointDialogHelper.updateWaypointItemView(false, null, getMyApplication(),
-					getActivity(), null, ps, null, !getMyApplication().getSettings().isLightContent());
+					getActivity(), null, ps, null, !getMyApplication().getSettings().isLightContent(), true);
 			favorites.addView(v);
 
 		}
@@ -142,7 +142,21 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			view.findViewById(R.id.group_image).setVisibility(View.GONE);
 
 			boolean target = helper.getPointToNavigate() == point;
-			int id = target ? R.drawable.list_destination : R.drawable.list_intermediate;
+			int id;
+			if (!target) {
+				if (getMyApplication().getSettings().isLightContent()) {
+					id = R.drawable.widget_intermediate_day;
+				} else {
+					id = R.drawable.widget_intermediate_night;
+				}
+			} else {
+				if (getMyApplication().getSettings().isLightContent()) {
+					id = R.drawable.widget_target_day;
+				} else {
+					id = R.drawable.widget_target_night;
+				}
+			}
+
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(getMyApplication().getIconsCache()
 					.getIcon(id, 0));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),

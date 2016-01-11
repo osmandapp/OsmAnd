@@ -102,11 +102,11 @@ public class MapActivityActions implements DialogProvider {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1,
 				pd);
-		openIntermediateEditPointsDialog();
+		openIntermediatePointsDialog();
 	}
 
 	public void editWaypoints() {
-		openIntermediateEditPointsDialog();
+		openIntermediatePointsDialog();
 	}
 
 	private Bundle enhance(Bundle aBundle, double latitude, double longitude, String name) {

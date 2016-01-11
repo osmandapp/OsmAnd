@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:minHeight="40dp"
+    android:minHeight="48dp"
     android:layout_marginBottom="5dp">
 
     <ImageView
@@ -24,15 +24,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:textSize="@dimen/default_list_text_size" />
+        android:textSize="@dimen/default_desc_text_size" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/default_list_text_size"
-        android:textColor="@color/sherpafy_selection"
+        android:textStyle="bold"
+        android:textSize="@dimen/default_desc_text_size"
+        android:textColor="@color/color_myloc_distance"
         android:layout_gravity="center_vertical"
-        android:layout_marginRight="8dp" />
+        android:layout_marginRight="16dp" />
 
 </LinearLayout>

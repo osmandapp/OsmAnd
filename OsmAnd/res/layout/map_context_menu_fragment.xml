@@ -11,7 +11,6 @@
         android:id="@+id/context_menu_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
         android:orientation="vertical">
 
         <LinearLayout
@@ -26,6 +25,7 @@
             android:id="@+id/context_menu_top_shadow_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:background="?attr/bg_map_context_menu"
             android:orientation="vertical">
 

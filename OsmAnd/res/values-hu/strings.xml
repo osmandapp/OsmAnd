@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -179,7 +180,7 @@
 
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_current_location_search">Pozíció keresése…</string>
-    <string name="search_position_current_location_found">Pozíció [Megtalálva]</string>
+    <string name="search_position_current_location_found">Pozícióm (megtalálva)</string>
     <string name="search_position_address">Cím…</string>
     <string name="search_position_favorites">Kedvencek…</string>
     <string name="search_position_undefined">Meghatározatlan</string>
@@ -878,7 +879,7 @@
     <string name="map_widget_show_ruler">Lépték</string>
 
     <string name="map_widget_view_direction">Látómező</string>
-    <string name="map_widget_transparent">Átlátszó téma</string>
+    <string name="map_widget_transparent">Átlátszó gombok</string>
 
 
     <string name="gps_wakeup_interval">GPS helymeghatározási időköz: %s</string>
@@ -2067,4 +2068,14 @@
     <string name="update">Frissítési gyakoriság</string>
     <string name="missing_write_external_storage_permission">Az alkalmazásnak nincs jogosultsága elérni az SD kártyát.</string>
     <string name="last_update">Utolsó frissítés: %s</string>
+<string name="shared_string_not_selected">Nincs kiválasztva</string>
+    <string name="update_time">Frissítés ideje</string>
+    <string name="updates_size">Frissítés mérete</string>
+    <string name="last_map_change">Utolsó térképmódosítás: %s</string>
+    <string name="hourly">Óránként</string>
+    <string name="daily">Naponta</string>
+    <string name="weekly">Hetente</string>
+    <string name="morning">Reggel</string>
+    <string name="Night">Este</string>
+    <string name="select_month_and_country">Hónap és ország kiválasztása</string>
 </resources>

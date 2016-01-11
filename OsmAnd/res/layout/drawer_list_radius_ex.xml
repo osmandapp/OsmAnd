@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:minHeight="50dp"
+              android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:id="@+id/firstCellContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:text="@string/search_radius_proximity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/default_desc_text_size" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_desc_text_size"
+            android:textColor="@color/color_myloc_distance"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            android:text="500 m"
+            android:layout_marginRight="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondCellContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleEx"
+            android:text="@string/shared_string_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/default_desc_text_size" />
+
+        <TextView
+            android:id="@+id/descriptionEx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_desc_text_size"
+            android:textColor="@color/color_myloc_distance"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            android:text="Cinema"
+            android:layout_marginRight="16dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

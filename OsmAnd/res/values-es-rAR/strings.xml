@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -51,7 +52,7 @@
     <string name="waypoint_visit_after">Visitar luego</string>
     <string name="waypoint_visit_before">Visitar antes</string>
     <string name="simulate_your_location">Simular su ubicación</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
     <string name="general_settings_2">Ajustes generales</string>
@@ -1827,7 +1828,7 @@
     <string name="offline_maps_and_navigation">Mapas y navegación
 \nsin conexión</string>
     <string name="commit_poi">Enviar PDI</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes de enlace</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
@@ -2022,7 +2023,7 @@
 
     <string name="update_time">Tiempo de actualización</string>
     
-<string name="rec_split">Dividir grabación</string>
+<string name="rec_split">División de grabación</string>
     <string name="rec_split_title">Usar la división de grabación</string>
     <string name="rec_split_desc">Reescribir clips al exceder el espacio de almacenamiento utilizado</string>
     <string name="rec_split_clip_length">Duración del clip</string>
@@ -2032,10 +2033,16 @@
     <string name="updates_size">Actualizaciones: %s</string>
     <string name="last_map_change">Último cambio de mapa: %s</string>
     <string name="hourly">Cada hora</string>
-    <string name="daily">Diariamente</string>
-    <string name="weekly">Semanalmente</string>
+    <string name="daily">Diario</string>
+    <string name="weekly">Semanal</string>
     <string name="morning">Mañana</string>
     <string name="Night">Noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
     
-</resources>
+<string name="select_month_and_country">Elige mes y país</string>
+<string name="shared_string_type">Tipo</string>
+    <string name="starting_point">Punto de partida</string>
+    <string name="item_deleted">Elemento borrado</string>
+    <string name="n_items_deleted">elementos borrados</string>
+    <string name="shared_string_undo_all">DESHACER TODO</string>
+    </resources>

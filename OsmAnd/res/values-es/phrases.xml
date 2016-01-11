@@ -75,7 +75,7 @@
 	<string name="poi_kitchen">Muebles de cocina</string>
 	<string name="poi_medical_supply">Artículos médicos</string>
 	<string name="poi_mobile_phone">Tienda de telefonía móvil</string>
-	<string name="poi_motorcycle">Motocicletas</string>
+	<string name="poi_motorcycle">Tienda de motocicletas</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
 	<string name="poi_newsagent">Agencia de noticias</string>
 	<string name="poi_optician">Óptica</string>
@@ -378,7 +378,7 @@
 	<string name="poi_greengrocer">Verdulería</string>
 	<string name="poi_dairy">Alimentos frescos</string>
 	<string name="poi_vending_machine">Máquina expendedora</string>
-	<string name="poi_bicycle">Bicicletería</string>
+	<string name="poi_bicycle">Tienda de bicicletas</string>
 	<string name="poi_chemist">Higiene personal y del hogar</string>
 	<string name="poi_anime">Tienda de anime</string>
 	<string name="poi_boutique">Boutique de moda</string>
@@ -392,7 +392,7 @@
 	<string name="poi_clothes_children">Ropa infantil</string>
 	<string name="poi_shoes">Zapatería</string>
 	<string name="poi_copyshop">Tienda de fotocopiado</string>
-	<string name="poi_curtain">Cortinas</string>
+	<string name="poi_curtain">Tienda de cortinas</string>
 	<string name="poi_doityourself">Mejoras para el hogar</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_frame">Tienda de marcos</string>
@@ -403,7 +403,7 @@
 	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
 	<string name="poi_tobacco">Tabaquería</string>
 	<string name="poi_vacuum_cleaner">Aspiradoras</string>
-	<string name="poi_sewing">Costuras</string>
+	<string name="poi_sewing">Tienda de telas</string>
 
 	<string name="poi_grit_bin">Contenedor de arena</string>
 	<string name="poi_traffic_calming_cushion">Cojín</string>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -2097,4 +2098,17 @@
     <string name="morning">Matin</string>
     <string name="Night">Nuit</string>
     
-</resources>
+<string name="select_month_and_country">Choisissez un mois et un pays</string>
+<string name="item_deleted">Élément supprimé</string>
+    <string name="n_items_deleted">Éléments supprimés</string>
+    <string name="shared_string_undo_all">Tout annuler</string>
+    <string name="starting_point">Point de départ</string>
+    <string name="rec_split">Intervalle d\'enregistrement</string>
+    <string name="rec_split_title">Utiliser un intervalle d\'enregistrement</string>
+    <string name="rec_split_desc">Écraser les enregistrements quand l\'espace utilisé dépasse la capacité de stockage</string>
+    <string name="rec_split_clip_length">Durée de l\'enregistrement</string>
+    <string name="rec_split_clip_length_desc">La longueur de chaque enregistrement ne sera plus par intervalle de temps</string>
+    <string name="rec_split_storage_size">Espace de stockage</string>
+    <string name="rec_split_storage_size_desc">Espace maximum alloué pour tous les enregistrements</string>
+    <string name="shared_string_type">Type</string>
+    </resources>

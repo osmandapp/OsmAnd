@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -2037,4 +2038,10 @@
     <string name="Night">Por la noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
     
-</resources>
+<string name="select_month_and_country">Seleccione mes y país</string>
+<string name="shared_string_type">Tipo</string>
+    <string name="starting_point">Punto de partida</string>
+    <string name="item_deleted">Elemento eliminado</string>
+    <string name="n_items_deleted">elementos eliminados</string>
+    <string name="shared_string_undo_all">DESHACER TODO</string>
+    </resources>

@@ -18,7 +18,7 @@
 	<string name="poi_ambulance_station">Station d\'ambulances</string>
 	<string name="poi_archaeological_site">Site archéologique</string>
 	<string name="poi_archery">Tir à l\'arc</string>
-	<string name="poi_architect">Architecte</string>
+	<string name="poi_architect">Cabinet d\'architecte</string>
 	<string name="poi_arts_centre">Centre artistique</string>
 	<string name="poi_artwork">Œuvre d’art</string>
 	<string name="poi_athletics">Athlétisme</string>
@@ -820,7 +820,7 @@
 	<string name="poi_wiki_lang_th">Wiki thaïlandais</string>
 	<string name="poi_camera">Appareils photos et lentilles</string>
 	<string name="poi_religious">Lieu de culte</string>
-	<string name="poi_barrier_entrance">Entrée</string>
+	<string name="poi_barrier_entrance">Passage ouvert dans un mur ou une barrière</string>
 	<string name="poi_entrance_main">Entrée principale</string>
 	<string name="poi_entrance">Entrée</string>
 	<string name="poi_entrance_exit">Sortie</string>
@@ -874,7 +874,7 @@
 	<string name="poi_height_restrictor">Limiteur de hauteur</string>
 	<string name="poi_horse_stile">Échalier à chevaux</string>
 	<string name="poi_stile">Échalier</string>
-	<string name="poi_kissing_gate">Portillon à chicane</string>
+	<string name="poi_kissing_gate">Barrière sélective</string>
 	<string name="poi_sally_port">Poterne</string>
 	<string name="poi_swing_gate">Portillon pivotant</string>
 	<string name="poi_icn_ref">Noeud du réseau cycliste international</string>
@@ -967,7 +967,7 @@
 	<string name="poi_seasonal_summer">Eté</string>
 	<string name="poi_seasonal_autumn">Automne</string>
 	<string name="poi_seasonal_winter">Hiver</string>
-	<string name="poi_animal_shelter_dog">Refuge pour chiens (chenil)</string>
+	<string name="poi_animal_shelter_dog">Refuge pour chiens</string>
 	<string name="poi_animal_shelter_cat">Refuge pour chats</string>
 	<string name="poi_animal_shelter_dog_cat">Refuge pour chiens et chats</string>
 	<string name="poi_animal_shelter_bird">Refuge pour oiseaux</string>
@@ -1087,7 +1087,7 @@
 	<string name="poi_ele">Hauteur au dessus du niveau de la mer</string>
 	<string name="poi_start_date">Date de début</string>
 	<string name="poi_wheelchair">Fauteuil roulant</string>
-	<string name="poi_wheelchair_no">Fauteuil roulant interdit</string>
+	<string name="poi_wheelchair_no">Non accessible en fauteuil roulant</string>
 	<string name="poi_wheelchair_limited">Fauteuil roulant partiel</string>
 	<string name="poi_wholesale">Vente en gros</string>
 
@@ -1217,10 +1217,10 @@
 	<string name="poi_internet_access_yes">Accès Internet : Oui</string>
 	<string name="poi_internet_access_no">Accès Internet : Non</string>
 
-	<string name="poi_content_water">Contenu : Eau</string>
-	<string name="poi_content_oil">Contenu : Pétrole</string>
-	<string name="poi_content_fuel">Contenu : Fioul</string>
-	<string name="poi_content_biomass">Contenu : Biomasse</string>
+	<string name="poi_content_water">Contenu : eau</string>
+	<string name="poi_content_oil">Contenu : pétrole</string>
+	<string name="poi_content_fuel">Contenu : fioul</string>
+	<string name="poi_content_biomass">Contenu : biomasse</string>
 	<string name="poi_trade_agricultural_supplies">Fournitures agricoles</string>
 	<string name="poi_trade_building_supplies">Fournitures pour la construction</string>
 	<string name="poi_inscription">Inscription</string>
@@ -1324,8 +1324,8 @@
 	<string name="poi_diet_halal_only">Repas halal uniquement</string>
 	<string name="poi_diet_halal_yes">Plats halals</string>
 	<string name="poi_diet_halal_no">Plats halals : Non</string>
-	<string name="poi_takeaway_yes">A emporter</string>
-	<string name="poi_takeaway_only">A emporter uniquement</string>
+	<string name="poi_takeaway_yes">À emporter</string>
+	<string name="poi_takeaway_only">À emporter uniquement</string>
 
 	<string name="poi_cocktails_yes">Cocktails</string>
 
@@ -1569,7 +1569,7 @@
 	<string name="poi_microbrewery_yes">Micro brasserie</string>
 	<string name="poi_microbrewery_no">Pas de micro brasserie</string>
 
-	<string name="poi_takeaway_no">Pas de vente à emporter</string>
+	<string name="poi_takeaway_no">Sur place</string>
 	<string name="poi_outdoor_seating_yes">Terrasse</string>
 	<string name="poi_outdoor_seating_no">Pas de terrasse</string>
 	<string name="poi_car_wash_no">Lavage auto : non</string>
@@ -1822,4 +1822,54 @@
 	<string name="poi_parking_carports">Type : abri pour véhicules</string>
 
 	<string name="poi_parking_garage_boxes">Type : garages fermés</string>
+	<string name="poi_node_networks">Réseaux de randonnée/de cyclisme</string>
+		<string name="poi_ford_stepping_stones">Pierres de gué</string>
+	<string name="poi_traffic_calming_island">Îlot central</string>
+	<string name="poi_aerialway_pylon">Pylône de remontée mécanique</string>
+
+	<string name="poi_power_tower">Pylône électrique</string>
+	<string name="poi_power_pole">Poteau de ligne électrique</string>
+
+	<string name="poi_cooling_tower">Tour de refroidissement</string>
+	<string name="poi_lighting_tower">Pylône d\'éclairage</string>
+	<string name="poi_recycling_organic">Organique</string>
+	<string name="poi_recycling_white_goods">Produits blancs</string>
+	<string name="poi_recycling_hydrargyrum">Mercure</string>
+	<string name="poi_recycling_styrofoam">Mousse de polystyrène</string>
+	<string name="poi_recycling_plasterboard">Plaque de plâtre</string>
+	<string name="poi_brownfield">Friche industrielle</string>
+	<string name="poi_greenfield">Zone verte</string>
+	<string name="poi_bunker_silo">Silo couloir</string>
+	<string name="poi_paediatrics">Pédiatrie</string>
+
+	<string name="poi_tourism_yes">Objet touristique</string>
+	<string name="poi_religion_unitarian_universalist">Universaliste unitarien</string>
+	<string name="poi_religion_multifaith">Multiconfessionnelle</string>
+	<string name="poi_religion_jain">Jaïniste</string>
+	<string name="poi_religion_bahai">Bahaïste</string>
+	<string name="poi_religion_tenrikyo">Tenrikyō</string>
+	<string name="poi_religion_zoroastrian">Zoroastrisme</string>
+
+	<string name="poi_denomination_sunni">Sunnisme</string>
+	<string name="poi_denomination_shia">Chiisme</string>
+	<string name="poi_denomination_uniting">Unifiée</string>
+	<string name="poi_denomination_mennonite">Mennonitisme</string>
+	<string name="poi_denomination_nondenominational">Sans dénomination</string>
+	<string name="poi_denomination_congregational">Congrégationaliste</string>
+	<string name="poi_denomination_dutch_reformed">Église réformée néerlandaise</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Église éthiopienne orthodoxe</string>
+	<string name="poi_denomination_unitarian">Unitariste</string>
+	<string name="poi_denomination_coptic_orthodox">Église copte orthodoxe</string>
+	<string name="poi_denomination_wesleyan">Wesleyaniste</string>
+	<string name="poi_denomination_shaktism">Shakti</string>
+	<string name="poi_denomination_shingon_shu">Shingon</string>
+	<string name="poi_denomination_mahayana">Bouddhiste mahāyāna</string>
+
+	<string name="poi_debris">Gravats</string>
+	<string name="poi_jersey_barrier">Mur Jersey</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_content_silage">Contenu : ensilage</string>
+	<string name="poi_content_manure">Contenu : fumier</string>
+	<string name="poi_nudism_permissive">Nudisme autorisé</string>
+
 	</resources>

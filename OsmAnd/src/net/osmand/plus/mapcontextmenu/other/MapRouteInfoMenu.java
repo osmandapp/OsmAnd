@@ -65,6 +65,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private boolean selectFromMapForTarget;
 
 	private boolean showMenu = false;
+	private boolean visible;
 	private MapActivity mapActivity;
 	private MapControlsLayer mapControlsLayer;
 	public static final String TARGET_SELECT = "TARGET_SELECT";
@@ -290,8 +291,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		});
 
 		ImageView fromIcon = (ImageView) parentView.findViewById(R.id.fromIcon);
-		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
 		if (targets.getPointToStart() == null) {
+			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
 			fromIcon.setImageDrawable(mapActivity.getResources().getDrawable(appMode.getResourceLocationDay()));
 		} else {
 			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_marker_dark, isLight()));
@@ -375,7 +376,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public boolean isVisible() {
-		return findMenuFragment() != null;
+		return visible;
 	}
 
 	public WeakReference<MapRouteInfoMenuFragment> findMenuFragment() {
@@ -602,29 +603,34 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public void onDismiss() {
+		visible = false;
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
 		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), false);
 		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), true);
 		if (switched) {
 			mapControlsLayer.switchToRouteFollowingLayout();
 		}
 	}
 
 	public void show() {
+		visible = true;
 		switched = mapControlsLayer.switchToRoutePlanningLayout();
+		boolean refreshMap = !switched;
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		if (!portrait) {
 			mapActivity.getMapView().setMapPositionX(1);
-			mapActivity.getMapView().refreshMap();
+			refreshMap = true;
+		}
+
+		if (refreshMap) {
+			mapActivity.refreshMap();
 		}
 
 		MapRouteInfoMenuFragment.showInstance(mapActivity);
 
 		if (!AndroidUiHelper.isXLargeDevice(mapActivity)) {
 			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), false);
-			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), false);
 		}
 		if (!portrait) {
 			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), true);
@@ -635,6 +641,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().dismiss();
+		} else {
+			visible = false;
 		}
 	}
 
@@ -677,7 +685,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			label.setText(row.text);
 			Drawable icon = mapActivity.getMyApplication().getIconsCache().getContentIcon(row.iconId);
 			label.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			label.setCompoundDrawablePadding(dpToPx(12f));
+			label.setCompoundDrawablePadding(dpToPx(16f));
+			label.setPadding(dpToPx((16f)), 0, 0, 0);
 
 			return label;
 		}

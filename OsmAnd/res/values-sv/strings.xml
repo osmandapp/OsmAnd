@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -2057,4 +2058,10 @@
     <string name="weekly">Varje vecka</string>
     <string name="morning">Morgon</string>
     <string name="shared_string_not_selected">Inte markerad</string>
+    <string name="select_month_and_country">Välj månad och land</string>
+<string name="shared_string_type">Typ</string>
+    <string name="starting_point">Startpunkt</string>
+    <string name="item_deleted">post raderad</string>
+    <string name="n_items_deleted">poster raderade</string>
+    <string name="shared_string_undo_all">ÅNGRA ALLA</string>
     </resources>

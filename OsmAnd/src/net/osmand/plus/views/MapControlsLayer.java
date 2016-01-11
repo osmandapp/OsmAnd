@@ -492,7 +492,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode);
-		routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
+		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (routePlanningMode || routeFollowingMode) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
 			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
@@ -508,7 +508,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		compassHud.updateVisibility(!dialogOpened);
 		layersHud.updateVisibility(!dialogOpened);
 
-		if (routeFollowingMode || routePlanningMode) {
+		if (routePlanningMode || routeFollowingMode) {
 			mapAppModeShadow.setVisibility(View.GONE);
 		} else {
 			if (mapView.isZooming()) {
@@ -534,7 +534,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateCompass(isNight);
 
 		for (MapHudButton mc : controls) {
-			mc.update(mapActivity.getMyApplication(), nightMode != null && nightMode.isNightMode());
+			mc.update(mapActivity.getMyApplication(), isNight);
 		}
 	}
 

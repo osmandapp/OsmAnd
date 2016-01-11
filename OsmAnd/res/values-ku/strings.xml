@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
@@ -64,4 +65,6 @@
     <string name="shared_string_and">û</string>
     <string name="shared_string_edit">Sazkirin</string>
     <string name="available_maps">Nexeyen kû hane</string>
+    <string name="rendering_category_details">Berfireh</string>
+    <string name="rendering_category_hide">Veşera</string>
     </resources>

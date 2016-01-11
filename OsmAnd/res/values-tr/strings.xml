@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -2024,4 +2025,5 @@
     <string name="Night">Gece</string>
 
 <string name="updates_size">Güncelleme boyutu</string>
-    </resources>
+    <string name="select_month_and_country">Ayı ve ülke seçin</string>
+</resources>

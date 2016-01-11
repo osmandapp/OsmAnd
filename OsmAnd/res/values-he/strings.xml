@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
@@ -1103,7 +1104,7 @@
     <string name="use_kalman_filter_compass_descr">ניתן להשתמש במסנן קלמן למניעת סטיות מצפן</string>
     <string name="local_indexes_cat_srtm">נתוני קווי מתאר</string>
     <string name="wait_current_task_finished">נא להמתין להשלמת המשימה הנוכחית</string>
-    <string name="shared_string_downloading">"בהורדה …"</string>
+    <string name="shared_string_downloading">בהורדה</string>
 	<string name="delete_point">מחיקת נקודה</string>
     <string name="plugin_distance_point_time">זמן</string>
     <string name="plugin_distance_point_hdop">דיוק</string>
@@ -1132,4 +1133,44 @@
     <string name="please_select_address">נא לבחור בעיר או ברחוב תחילה</string>
     <string name="context_menu_item_destination_point">הגדרה כיעד</string>
     <string name="destination_point">יעד %1$s</string>
+    <string name="available_maps">מפות זמינות</string>
+    <string name="item_deleted">הפריט נמחק</string>
+    <string name="n_items_deleted">פריטים נמחקו</string>
+    <string name="shared_string_type">סוג</string>
+    <string name="starting_point">נקודת המוצא</string>
+    <string name="shared_string_not_selected">לא נבחר</string>
+    <string name="rec_split_clip_length">אורך סרטון</string>
+    <string name="rec_split_clip_length_desc">האורך של כל סרטון מוקלט לא יהיה גדול ממרווח הזמן המוגדר</string>
+    <string name="rec_split_storage_size_desc">כמות המקום המותרת לאחסון כל הסרטונים המוקלטים</string>
+    <string name="live_updates">עדכונים חיים</string>
+    <string name="select_voice_provider">בחירת הנחיה קולית</string>
+    <string name="select_voice_provider_descr">יש לבחור או להוריד הנחיה קולית עבור שפתך</string>
+    <string name="impassable_road_desc">בחירת דרכים מהן יש להמנע במהלך הניווט</string>
+    <string name="shared_string_sound">קול</string>
+    <string name="no_location_permission">ליישום אין הרשאה להשתמש במידע מיקום.</string>
+    <string name="no_camera_permission">ליישום אין הרשאה להשתמש במצלמה.</string>
+    <string name="no_microphone_permission">ליישום אין הרשאה להשתמש במיקרופון.</string>
+    <string name="route_distance">מרחק:</string>
+    <string name="route_duration">זמן:</string>
+    <string name="shared_string_near">ליד</string>
+    <string name="shared_string_undo_all">ביטול הכל</string>
+    <string name="rec_split">פיצול הקלטות</string>
+    <string name="rec_split_title">שימוש בפיצול הקלטות</string>
+    <string name="rec_split_desc">דרוס סרטונים קיימים אם המקום הנדרש עולה על כמות המקום המוקצה</string>
+    <string name="rec_split_storage_size">הקצאת מקום</string>
+    <string name="no_address_found">לא נקבעה כתובת</string>
+    <string name="shared_string_hide">הסתרה</string>
+    <string name="av_video_quality_low">איכות וידאו נמוכה</string>
+    <string name="av_video_quality_high">איכות וידאו גבוהה</string>
+    <string name="av_video_quality">איכות וידאו</string>
+    <string name="av_video_quality_descr">בחירה רמת האיכות לוידאו</string>
+    <string name="av_audio_format">פורמט שמע</string>
+    <string name="av_audio_format_descr">בחירת הפורמט להקלטת שמע</string>
+    <string name="av_audio_bitrate">קצב סיביות להקלטת שמע</string>
+    <string name="av_audio_bitrate_descr">בחירת קצב הסיביות להקלטת שמע</string>
+    <string name="please_specify_poi_type_only_from_list">נא לבחור את סוג נקודת העניין מהרשימה</string>
+    <string name="access_from_map_description">כפתור התפריט מציג את לוח המחוונים ולא את התפריט</string>
+    <string name="access_from_map">גישה מתצוגת המפה</string>
+    <string name="show_on_start_description">במצב כבוי תוצג המפה מיד עם הכניסה ליישום</string>
+    <string name="show_on_start">תצוגה בכניסה ליישום</string>
     </resources>

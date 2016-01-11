@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -2073,4 +2074,7 @@
     <string name="Night">Note</string>
     
 <string name="updates_size">Mannària agiornamentos</string>
+    <string name="select_month_and_country">Ischerta mese e istadu</string>
+<string name="shared_string_type">Casta</string>
+    <string name="starting_point">Puntu de incumintzu</string>
     </resources>
