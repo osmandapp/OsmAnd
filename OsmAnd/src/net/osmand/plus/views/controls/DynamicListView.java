@@ -27,6 +27,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
@@ -245,6 +246,51 @@ public class DynamicListView extends ObservableListView {
 		if (mHoverCell != null) {
 			mHoverCell.draw(canvas);
 		}
+
+		// Draw dividers
+		StableArrayAdapter stableAdapter = getStableAdapter();
+		if (stableAdapter != null && stableAdapter.hasDividers()) {
+			List<Drawable> dividers = stableAdapter.getDividers();
+
+			final int count = getChildCount();
+			final int first = getFirstVisiblePosition();
+			final int headerCount = getHeaderViewsCount();
+			final int itemCount = getCount();
+			final int footerLimit = (itemCount - getFooterViewsCount());
+
+			final Rect bounds = new Rect();
+			bounds.left = getPaddingLeft();
+			bounds.right = getRight() - getLeft() - getPaddingRight();
+
+			final int listBottom = getBottom() - getTop() + getScrollY();
+			for (int i = 0; i < count; i++) {
+				final int itemIndex = (first + i);
+				final boolean isHeader = (itemIndex < headerCount);
+				final boolean isFooter = (itemIndex >= footerLimit);
+				if (!isHeader && !isFooter && itemIndex < dividers.size()) {
+					Drawable divider = dividers.get(itemIndex - headerCount);
+					if (divider != null) {
+						final View child = getChildAt(i);
+						int bottom = child.getBottom();
+						final boolean isLastItem = (i == (count - 1));
+
+						if (bottom < listBottom && !isLastItem) {
+							final int nextIndex = (itemIndex + 1);
+							if (nextIndex >= headerCount && nextIndex < footerLimit) {
+								bounds.top = bottom;
+								bounds.bottom = bottom + divider.getIntrinsicHeight();
+								drawDivider(canvas, divider, bounds);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void drawDivider(Canvas canvas, Drawable divider, Rect bounds) {
+		divider.setBounds(bounds);
+		divider.draw(canvas);
 	}
 
 	@Override

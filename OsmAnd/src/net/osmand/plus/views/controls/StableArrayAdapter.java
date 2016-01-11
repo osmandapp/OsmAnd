@@ -1,6 +1,7 @@
 package net.osmand.plus.views.controls;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 
@@ -17,6 +18,7 @@ public class StableArrayAdapter extends ArrayAdapter<Object> {
 	List<Object> objects;
 	List<Object> activeObjects;
 	HashMap<Object, Integer> mIdMap = new HashMap<>();
+	protected List<Drawable> dividers;
 
 	public StableArrayAdapter(Context context, int textViewResourceId, int titleId,
 							  List<Object> objects, List<Object> activeObjects) {
@@ -32,18 +34,34 @@ public class StableArrayAdapter extends ArrayAdapter<Object> {
 		return activeObjects;
 	}
 
+	public List<Drawable> getDividers() {
+		return dividers;
+	}
+
+	public boolean hasDividers() {
+		return dividers != null && dividers.size() > 0;
+	}
+
 	public void updateObjects(List<Object> objects, List<Object> activeObjects) {
 		this.objects = objects;
 		this.activeObjects = activeObjects;
-		updateIdMap();
+		refreshData();
 	}
 
-	public void updateIdMap() {
+	private void updateIdMap() {
 		HashMap<Object, Integer> idMap = new HashMap<>();
 		for (int i = 0; i < objects.size(); ++i) {
 			idMap.put(objects.get(i), i);
 		}
 		mIdMap = idMap;
+	}
+
+	public void refreshData() {
+		updateIdMap();
+		buildDividers();
+	}
+
+	public void buildDividers() {
 	}
 
 	@Override
