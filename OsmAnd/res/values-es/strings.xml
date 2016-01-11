@@ -2023,7 +2023,7 @@
     <string name="update_time">Tiempo de actualización</string>
 
 <string name="rec_split_storage_size">Tamaño del almacenamiento</string>
-    <string name="updates_size">Actualizaciones: %s</string>
+    <string name="updates_size">Tamaño de la actualización</string>
     <string name="last_map_change">Último cambio de mapa: %s</string>
 <string name="rec_split">División de grabación</string>
     <string name="rec_split_title">Usar la división de grabación</string>
@@ -2032,8 +2032,8 @@
     <string name="rec_split_clip_length_desc">La duración de cada clip grabado no excederá el tiempo de intervalo establecido</string>
     <string name="rec_split_storage_size_desc">Cantidad de espacio que pueden ocupar todos los clips grabados</string>
     <string name="hourly">Cada hora</string>
-    <string name="daily">Diario</string>
-    <string name="weekly">Semanal</string>
+    <string name="daily">A diario</string>
+    <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="Night">Por la noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
