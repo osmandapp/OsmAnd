@@ -224,6 +224,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 									stableAdapter.getObjects().remove(item);
 									activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
 									stableAdapter.getActiveObjects().remove(item);
+									stableAdapter.refreshData();
 									stableAdapter.notifyDataSetChanged();
 
 								} else {
@@ -240,7 +241,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 											stableAdapter.insert(item, position);
 											stableAdapter.getObjects().add(position, item);
 											stableAdapter.getActiveObjects().add(activeObjPos, item);
-											stableAdapter.updateIdMap();
+											stableAdapter.refreshData();
 
 											onItemsSwapped(stableAdapter.getActiveObjects());
 										}
@@ -252,7 +253,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							public void onHidePopup() {
 								if (listAdapter instanceof StableArrayAdapter) {
 									StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
-									stableAdapter.updateIdMap();
+									stableAdapter.refreshData();
 									onItemsSwapped(stableAdapter.getActiveObjects());
 								}
 							}
@@ -1186,7 +1187,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 						}
 					}
 					getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, false);
-					newRouteIsCalculated(false, null);
+					newRouteIsCalculated(false, new ValueHolder<Boolean>());
 					getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
 
 					if (swipeDismissListener != null) {
@@ -1209,6 +1210,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				dynamicListView.setActiveItemsList(stableAdapter.getActiveObjects());
 			}
 		}
+		showToast.value = false;
 	}
 
 	@Override

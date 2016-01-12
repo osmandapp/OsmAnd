@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -599,7 +600,7 @@
 	
 	<string name="poi_filter_nominatim">Сеткавы Nominatim</string>
 	<string name="search_position_current_location_search">Вызначэньне становішча…</string>
-	<string name="search_position_current_location_found">Становішча (знойдзена)</string>
+	<string name="search_position_current_location_found">Маё становішча (знойдзена)</string>
 	<string name="search_position_address">Адрас…</string>
 	<string name="search_position_favorites">Упадабаныя…</string>
 	<string name="search_position_undefined">Нявызначана</string>
@@ -2088,4 +2089,9 @@
     <string name="weekly">Штотыднёва</string>
     <string name="morning">Раніца</string>
     <string name="Night">Ноч</string>
-    </resources>
+    <string name="shared_string_type">Тып</string>
+    <string name="starting_point">Пачатковы пункт</string>
+    <string name="shared_string_undo_all">ВЯРНУЦЬ УСЁ</string>
+    <string name="rec_split_storage_size">Памер сховішча</string>
+    <string name="select_month_and_country">Выберыце месяц і краіну</string>
+</resources>

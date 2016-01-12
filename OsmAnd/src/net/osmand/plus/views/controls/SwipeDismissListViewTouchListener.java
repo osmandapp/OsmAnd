@@ -460,10 +460,10 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 			undoable.discard();
 		}
 		mUndoActions.clear();
-		if (mCallbacks != null) {
-			mCallbacks.onHidePopup();
-		}
 		if (mUndoPopup.isShowing()) {
+			if (mCallbacks != null) {
+				mCallbacks.onHidePopup();
+			}
 			mUndoPopup.dismiss();
 		}
 	}

@@ -287,40 +287,43 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 						break;
 
 					case MotionEvent.ACTION_MOVE:
-						hasMoved = true;
-						float y = event.getY();
-						float newY = getViewY() + (y - dy);
-						setViewY((int) newY, false, false);
+						if (moving) {
+							hasMoved = true;
+							float y = event.getY();
+							float newY = getViewY() + (y - dy);
+							setViewY((int) newY, false, false);
 
-						menuFullHeight = view.getHeight() - (int) newY + 10;
-						if (!oldAndroid()) {
-							ViewGroup.LayoutParams lp = mainView.getLayoutParams();
-							lp.height = Math.max(menuFullHeight, menuTitleHeight);
-							mainView.setLayoutParams(lp);
-							mainView.requestLayout();
+							menuFullHeight = view.getHeight() - (int) newY + 10;
+							if (!oldAndroid()) {
+								ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+								lp.height = Math.max(menuFullHeight, menuTitleHeight);
+								mainView.setLayoutParams(lp);
+								mainView.requestLayout();
+							}
+
+							velocity.addMovement(event);
+							velocity.computeCurrentVelocity(1000);
+							velocityY = Math.abs(velocity.getYVelocity());
+							if (velocityY > maxVelocityY)
+								maxVelocityY = velocityY;
 						}
-
-						velocity.addMovement(event);
-						velocity.computeCurrentVelocity(1000);
-						velocityY = Math.abs(velocity.getYVelocity());
-						if (velocityY > maxVelocityY)
-							maxVelocityY = velocityY;
 
 						break;
 
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
-						moving = false;
-						int currentY = getViewY();
+						if (moving) {
+							moving = false;
+							int currentY = getViewY();
 
-						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
-						slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
+							slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
+							slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
 
-						velocity.recycle();
+							velocity.recycle();
 
-						boolean skipHalfScreenState = Math.abs(currentY - dyMain) > skipHalfScreenStateLimit;
-						changeMenuState(currentY, skipHalfScreenState, slidingUp, slidingDown);
-
+							boolean skipHalfScreenState = Math.abs(currentY - dyMain) > skipHalfScreenStateLimit;
+							changeMenuState(currentY, skipHalfScreenState, slidingUp, slidingDown);
+						}
 						break;
 
 				}

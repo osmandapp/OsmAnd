@@ -1,9 +1,14 @@
 package net.osmand.plus.helpers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +35,7 @@ import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -161,6 +167,85 @@ public class WaypointDialogHelper {
 		return activePoints;
 	}
 
+	private List<Drawable> getCustomDividers(Context ctx, List<Object> points, boolean nightMode) {
+		int color;
+		int pointColor;
+		if (nightMode) {
+			color = ctx.getResources().getColor(R.color.dashboard_divider_dark);
+			pointColor = ctx.getResources().getColor(R.color.dashboard_divider_dark);
+		} else {
+			color = ctx.getResources().getColor(R.color.dashboard_divider_light);
+			pointColor = ctx.getResources().getColor(R.color.ctx_menu_info_divider_light);
+		}
+
+		Shape fullDividerShape = new ListDividerShape(color, 0);
+		Shape halfDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(ctx, 56f));
+		Shape halfPointDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(ctx, 56f),
+				pointColor, AndroidUtils.dpToPx(ctx, 1.5f), true);
+		Shape headerDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(ctx, 16f));
+
+		final ShapeDrawable fullDivider = new ShapeDrawable(fullDividerShape);
+		final ShapeDrawable halfDivider = new ShapeDrawable(halfDividerShape);
+		final ShapeDrawable halfPointDivider = new ShapeDrawable(halfPointDividerShape);
+		final ShapeDrawable headerDivider = new ShapeDrawable(headerDividerShape);
+		final Drawable startingPointDivider = app.getIconsCache().getIcon(R.drawable.bg_shadow_list_bottom);
+
+		int divHeight = AndroidUtils.dpToPx(ctx, 1f);
+		fullDivider.setIntrinsicHeight(divHeight);
+		halfDivider.setIntrinsicHeight(divHeight);
+		halfPointDivider.setIntrinsicHeight(divHeight);
+		headerDivider.setIntrinsicHeight(divHeight);
+
+		List<Drawable> res = new ArrayList<>();
+		for (int i = 0; i < points.size(); i++) {
+			Object obj = points.get(i);
+			Object objNext = i + 1 < points.size() ? points.get(i + 1) : null;
+
+			if (objNext == null) {
+				break;
+			}
+
+			boolean labelView = (obj instanceof Integer);
+			boolean bottomDividerViewNext = (objNext instanceof Boolean) && !((Boolean) objNext);
+
+			boolean locationPoint = (obj instanceof LocationPointWrapper);
+			boolean locationPointNext = (objNext instanceof LocationPointWrapper);
+
+			Drawable d = null;
+
+			if (locationPointNext) {
+				if (locationPoint) {
+					LocationPointWrapper w = (LocationPointWrapper) obj;
+					if (w.type == WaypointHelper.TARGETS && ((TargetPoint) w.point).start) {
+						d = startingPointDivider; // starting point divider
+					} else {
+						if (w.type == WaypointHelper.TARGETS) {
+							d = halfPointDivider;
+						} else {
+							d = halfDivider;
+						}
+					}
+				} else {
+					LocationPointWrapper w = (LocationPointWrapper) objNext;
+					if (w.type == WaypointHelper.TARGETS) {
+						if (!((TargetPoint) w.point).start) {
+							d = fullDivider;
+						}
+					} else {
+						d = fullDivider;
+					}
+				}
+			} else if (objNext instanceof RadiusItem && labelView) {
+				d = headerDivider;
+			} else if (locationPoint && !bottomDividerViewNext) {
+				d = fullDivider;
+			}
+
+			res.add(d);
+		}
+		return res;
+	}
+
 	public StableArrayAdapter getWaypointsDrawerAdapter(
 			final boolean edit, final List<LocationPointWrapper> deletedPoints,
 			final MapActivity ctx, final int[] running, final boolean flat, final boolean nightMode) {
@@ -175,6 +260,11 @@ public class WaypointDialogHelper {
 
 		return new StableArrayAdapter(ctx,
 				R.layout.waypoint_reached, R.id.title, points, activePoints) {
+
+			@Override
+			public void buildDividers() {
+				dividers = getCustomDividers(ctx, getObjects(), nightMode);
+			}
 
 			@Override
 			public boolean isEnabled(int position) {
