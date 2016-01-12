@@ -22,24 +22,31 @@
             android:layout_height="1dp"
             android:background="?attr/dashboard_divider"/>
         <ImageView
-            android:src="@drawable/widget_time"/>
-        <Spinner android:layout_gravity="fill_horizontal"/>
+            android:id="@+id/calendarImageView"
+            android:src="@drawable/ic_action_data"/>
+        <Spinner
+            android:id="@+id/montReportsSpinner"
+            android:layout_gravity="fill_horizontal"/>
         <View
             android:layout_column="1"
             android:layout_height="1dp"
             android:background="?attr/dashboard_divider"/>
         <ImageView
+            android:id="@+id/regionIconImageView"
             android:src="@drawable/ic_world_globe_dark"
             android:layout_rowSpan="2"/>
         <TextView
             android:text="Report for:"/>
-        <Spinner android:layout_gravity="fill_horizontal"/>
+        <Spinner
+            android:id="@+id/regionReportsSpinner"
+            android:layout_gravity="fill_horizontal"/>
         <View
             android:layout_columnSpan="2"
             android:layout_height="1dp"
             android:background="?attr/dashboard_divider"/>
         <ImageView
-            android:src="@drawable/ic_world_globe_dark"
+            android:id="@+id/numberOfContributorsIcon"
+            android:src="@drawable/ic_group"
             android:layout_rowSpan="2"/>
         <TextView
             android:text="Number of contributors"/>
@@ -51,7 +58,8 @@
             android:background="?attr/dashboard_divider"/>
 
         <ImageView
-            android:src="@drawable/ic_world_globe_dark"
+            android:id="@+id/numberOfEditsIcon"
+            android:src="@drawable/ic_group"
             android:layout_rowSpan="2"/>
         <TextView
             android:text="Number of edits"/>

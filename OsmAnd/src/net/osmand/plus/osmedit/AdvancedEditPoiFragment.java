@@ -6,7 +6,6 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,8 +27,8 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -39,7 +38,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class AdvancedEditPoiFragment extends Fragment
+public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		implements EditPoiDialogFragment.OnFragmentActivatedListener {
 	private static final String TAG = "AdvancedEditPoiFragment";
 	private static final Log LOG = PlatformUtil.getLog(AdvancedEditPoiFragment.class);
@@ -68,16 +67,15 @@ public class AdvancedEditPoiFragment extends Fragment
 		int height = size.y;
 		view.findViewById(R.id.screenFiller).setMinimumHeight(height);
 
-		deleteDrawable = ((OsmandApplication) getActivity().getApplication()).getIconsCache()
-				.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-						getActivity().getResources().getColor(R.color.dash_search_icon_dark));
+		deleteDrawable = getPaintedContentIcon(R.drawable.ic_action_remove_dark,
+				getActivity().getResources().getColor(R.color.dash_search_icon_dark));
 		nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 		amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
 		amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
 		LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
-		final MapPoiTypes mapPoiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
+		final MapPoiTypes mapPoiTypes = getMyApplication().getPoiTypes();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		Map<String, PoiType> translatedTypes = getData().getAllTranslatedSubTypes();

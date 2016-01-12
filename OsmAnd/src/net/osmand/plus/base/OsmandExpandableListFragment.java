@@ -1,12 +1,9 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.base;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,17 +12,16 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-public abstract class OsmandExpandableListFragment extends Fragment
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+
+public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 		implements OnChildClickListener {
 	
 	
 	protected ExpandableListView listView;
 	protected ExpandableListAdapter adapter;
-
-
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
 	
 	@Override
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {

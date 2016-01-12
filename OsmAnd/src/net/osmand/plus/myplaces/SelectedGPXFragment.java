@@ -41,9 +41,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
 

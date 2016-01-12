@@ -5,7 +5,6 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -23,9 +22,8 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.osmedit.dialogs.OpeningHoursDaysDialogFragment;
 import net.osmand.plus.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.util.Algorithms;
@@ -36,7 +34,7 @@ import org.apache.commons.logging.Log;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class BasicEditPoiFragment extends Fragment
+public class BasicEditPoiFragment extends BaseOsmAndFragment
 		implements EditPoiDialogFragment.OnFragmentActivatedListener {
 	private static final Log LOG = PlatformUtil.getLog(BasicEditPoiFragment.class);
 	private static final String OPENING_HOURS = "opening_hours";
@@ -63,26 +61,24 @@ public class BasicEditPoiFragment extends Fragment
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		int iconColor = typedValue.data;
 
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-
 		ImageView streetImageView = (ImageView) view.findViewById(R.id.streetImageView);
 		streetImageView.setImageDrawable(
-				iconsCache.getPaintedContentIcon(R.drawable.ic_action_street_name, iconColor));
+				getPaintedContentIcon(R.drawable.ic_action_street_name, iconColor));
 		ImageView houseNumberImageView = (ImageView) view.findViewById(R.id.houseNumberImageView);
 		houseNumberImageView.setImageDrawable(
-				iconsCache.getPaintedContentIcon(R.drawable.ic_action_building_number, iconColor));
+				getPaintedContentIcon(R.drawable.ic_action_building_number, iconColor));
 		ImageView phoneImageView = (ImageView) view.findViewById(R.id.phoneImageView);
 		phoneImageView.setImageDrawable(
-				iconsCache.getPaintedContentIcon(R.drawable.ic_action_call_dark, iconColor));
+				getPaintedContentIcon(R.drawable.ic_action_call_dark, iconColor));
 		ImageView webSiteImageView = (ImageView) view.findViewById(R.id.webSiteImageView);
 		webSiteImageView.setImageDrawable(
-				iconsCache.getPaintedContentIcon(R.drawable.ic_world_globe_dark, iconColor));
+				getPaintedContentIcon(R.drawable.ic_world_globe_dark, iconColor));
 		ImageView descriptionImageView = (ImageView) view.findViewById(R.id.descriptionImageView);
 		descriptionImageView.setImageDrawable(
-				iconsCache.getPaintedContentIcon(R.drawable.ic_action_description, iconColor));
+				getPaintedContentIcon(R.drawable.ic_action_description, iconColor));
 		ImageView openingHoursImageView = (ImageView) view.findViewById(R.id.openingHoursImageView);
 		openingHoursImageView.setImageDrawable(
-				iconsCache.getPaintedContentIcon(R.drawable.ic_action_time, iconColor));
+				getPaintedContentIcon(R.drawable.ic_action_time, iconColor));
 
 		streetEditText = (EditText) view.findViewById(R.id.streetEditText);
 		houseNumberEditText = (EditText) view.findViewById(R.id.houseNumberEditText);
@@ -106,10 +102,8 @@ public class BasicEditPoiFragment extends Fragment
 			}
 		});
 		LinearLayout openHoursContainer = (LinearLayout) view.findViewById(R.id.openHoursContainer);
-		Drawable clockDrawable = iconsCache
-				.getPaintedContentIcon(R.drawable.ic_action_time, iconColor);
-		Drawable deleteDrawable = iconsCache
-				.getPaintedContentIcon(R.drawable.ic_action_remove_dark, iconColor);
+		Drawable clockDrawable = getPaintedContentIcon(R.drawable.ic_action_time, iconColor);
+		Drawable deleteDrawable = getPaintedContentIcon(R.drawable.ic_action_remove_dark, iconColor);
 		if (savedInstanceState != null && savedInstanceState.containsKey(OPENING_HOURS)) {
 			mOpeningHoursAdapter = new OpeningHoursAdapter(
 					(OpeningHoursParser.OpeningHours) savedInstanceState.getSerializable(OPENING_HOURS),
@@ -121,10 +115,6 @@ public class BasicEditPoiFragment extends Fragment
 		}
 		onFragmentActivated();
 		return view;
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	protected void addTextWatcher(final String tag, final EditText e) {
