@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.TspAnt;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -31,6 +33,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -52,7 +55,9 @@ public class WaypointDialogHelper {
 	private OsmandApplication app;
 	private WaypointHelper waypointHelper;
 	private PointDeleteCallback dCallback;
+
 	private boolean flat;
+	private List<LocationPointWrapper> deletedPoints;
 
 	public interface PointDeleteCallback {
 		void deleteWaypoint(int position);
@@ -272,6 +277,7 @@ public class WaypointDialogHelper {
 			final MapActivity ctx, final int[] running, final boolean flat, final boolean nightMode) {
 
 		this.flat = flat;
+		this.deletedPoints = deletedPoints;
 
 		final List<Object> points = getPoints();
 		List<Object> activePoints = getActivePoints(points);
@@ -372,8 +378,8 @@ public class WaypointDialogHelper {
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								// sort
-								//IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
+								// sort door-to-door
+								sortAllTargets(app, ctx);
 								return true;
 							}
 						});
@@ -433,10 +439,10 @@ public class WaypointDialogHelper {
 	}
 
 	public static void deletePoint(final OsmandApplication app, final ArrayAdapter adapter,
-								  final WaypointDialogHelper helper,
-								  final Object item,
-								  final List<LocationPointWrapper> deletedPoints,
-								  final boolean needCallback) {
+								   final WaypointDialogHelper helper,
+								   final Object item,
+								   final List<LocationPointWrapper> deletedPoints,
+								   final boolean needCallback) {
 
 		if (item instanceof LocationPointWrapper && adapter != null) {
 			LocationPointWrapper point = (LocationPointWrapper) item;
@@ -454,6 +460,11 @@ public class WaypointDialogHelper {
 
 				adapter.setNotifyOnChange(false);
 				adapter.remove(point);
+				if (adapter instanceof StableArrayAdapter) {
+					StableArrayAdapter stableAdapter = (StableArrayAdapter) adapter;
+					stableAdapter.getObjects().remove(item);
+					stableAdapter.refreshData();
+				}
 				adapter.notifyDataSetChanged();
 			}
 		}
@@ -650,6 +661,8 @@ public class WaypointDialogHelper {
 	}
 
 	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
+		mapActivity.getMyApplication().getWaypointHelper().removeVisibleLocationPoint(deletedPoints);
+
 		listAdapter.setNotifyOnChange(false);
 		listAdapter.clear();
 		List<Object> points = getPoints();
@@ -783,4 +796,88 @@ public class WaypointDialogHelper {
 		*/
 	}
 
+	public static void sortAllTargets(final OsmandApplication app, final Activity activity) {
+
+		new AsyncTask<Void, Void, int[]>() {
+
+			ProgressDialog dlg = null;
+			long startDialogTime = 0;
+			List<TargetPoint> intermediates;
+
+			protected void onPreExecute() {
+				startDialogTime = System.currentTimeMillis();
+				dlg = new ProgressDialog(activity);
+				dlg.setTitle("");
+				dlg.setMessage(activity.getResources().getString(R.string.intermediate_items_sort_by_distance));
+				dlg.show();
+			}
+
+			protected int[] doInBackground(Void[] params) {
+
+				TargetPointsHelper targets = app.getTargetPointsHelper();
+				intermediates = targets.getIntermediatePointsWithTarget();
+
+				Location cll = app.getLocationProvider().getLastKnownLocation();
+				ArrayList<TargetPoint> lt = new ArrayList<>(intermediates);
+				TargetPoint start;
+
+				if (cll != null) {
+					LatLon ll = new LatLon(cll.getLatitude(), cll.getLongitude());
+					start = TargetPoint.create(ll, null);
+				} else if (app.getTargetPointsHelper().getPointToStart() != null) {
+					TargetPoint ps = app.getTargetPointsHelper().getPointToStart();
+					LatLon ll = new LatLon(ps.getLatitude(), ps.getLongitude());
+					start = TargetPoint.create(ll, null);
+				} else {
+					start = lt.get(0);
+				}
+				TargetPoint end = lt.remove(lt.size() - 1);
+				ArrayList<LatLon> al = new ArrayList<>();
+				for (TargetPoint p : lt) {
+					al.add(p.point);
+				}
+				return new TspAnt().readGraph(al, start.point, end.point).solve();
+			}
+
+			protected void onPostExecute(int[] result) {
+				if (dlg != null) {
+					long t = System.currentTimeMillis();
+					if (t - startDialogTime < 500) {
+						app.runInUIThread(new Runnable() {
+							@Override
+							public void run() {
+								dlg.dismiss();
+							}
+						}, 500 - (t - startDialogTime));
+					} else {
+						dlg.dismiss();
+					}
+				}
+
+				List<TargetPoint> alocs = new ArrayList<>();
+				for (int i : result) {
+					if (i > 0) {
+						TargetPoint loc = intermediates.get(i - 1);
+						alocs.add(loc);
+					}
+				}
+				intermediates.clear();
+				intermediates.addAll(alocs);
+
+				TargetPointsHelper targets = app.getTargetPointsHelper();
+				List<TargetPoint> cur = targets.getIntermediatePointsWithTarget();
+				boolean eq = true;
+				for (int j = 0; j < cur.size() && j < intermediates.size(); j++) {
+					if (cur.get(j) != intermediates.get(j)) {
+						eq = false;
+						break;
+					}
+				}
+				if (!eq) {
+					targets.reorderAllTargetPoints(intermediates, true);
+				}
+			}
+
+		}.execute();
+	}
 }

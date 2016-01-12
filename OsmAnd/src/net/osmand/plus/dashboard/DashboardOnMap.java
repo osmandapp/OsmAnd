@@ -1198,7 +1198,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		if ((DashboardType.WAYPOINTS == visibleType || DashboardType.WAYPOINTS_FLAT == visibleType)
 				&& listAdapter != null && listAdapter instanceof StableArrayAdapter) {
 			StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
-			getMyApplication().getWaypointHelper().removeVisibleLocationPoint(deletedPoints);
 			waypointDialogHelper.reloadListAdapter(stableAdapter);
 			if (listView instanceof DynamicListView) {
 				DynamicListView dynamicListView = (DynamicListView) listView;
