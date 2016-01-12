@@ -13,10 +13,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmedit.OsmNotesPoint;
-import net.osmand.plus.osmedit.OsmPoint;
 
 import java.util.List;
 import java.util.Map;
@@ -129,35 +125,19 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof OsmPoint) {
-			return new LatLon(((OsmPoint)o).getLatitude(),((OsmPoint)o).getLongitude());
-		}
 		return null;
 	}
 
 	@Override
 	public String getObjectDescription(Object o) {
-		if(o instanceof OsmPoint) {
-			OsmPoint point =  (OsmPoint) o;
-			return OsmEditingPlugin.getEditName(point);
-		}
 		return null;
 	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof OsmPoint) {
-			OsmPoint point =  (OsmPoint) o;
-			String name = "";
-			String type = "";
-			if (point.getGroup() == OsmPoint.Group.POI){
-				name = ((OpenstreetmapPoint) point).getName();
-				type = PointDescription.POINT_TYPE_OSM_NOTE;
-			} else if (point.getGroup() == OsmPoint.Group.BUG) {
-				name = ((OsmNotesPoint) point).getText();
-				type = PointDescription.POINT_TYPE_OSM_BUG;
-			}
-			return new PointDescription(type, name);
+		if(o instanceof RouteDataObject) {
+			RouteDataObject route =  (RouteDataObject) o;
+			return new PointDescription(PointDescription.POINT_TYPE_BLOCKED_ROAD, route.getName());
 		}
 		return null;
 	}
