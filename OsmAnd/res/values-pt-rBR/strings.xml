@@ -1992,4 +1992,5 @@
     <string name="n_items_deleted">itens apagados</string>
     <string name="shared_string_undo_all">DESFAZER TUDO</string>
     <string name="rendering_attr_hideIcons_name">Ocultar ícones</string>
+    <string name="switch_start_finish">Alternar iniciar e finalizar</string>
     </resources>
