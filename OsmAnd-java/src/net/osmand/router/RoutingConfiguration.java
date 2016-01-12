@@ -55,7 +55,7 @@ public class RoutingConfiguration {
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
-		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
+		private HashMap<Long, Location> impassableRoadLocations = new HashMap<Long, Location>();
 		private List<RouteDataObject> impassableRoads = new ArrayList<RouteDataObject>();  
 		
 		// Example
