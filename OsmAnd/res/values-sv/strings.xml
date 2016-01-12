@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -2049,7 +2048,7 @@
     <string name="last_update">Senaste uppdateringen: %s</string>
 <string name="update_time">Uppdateringstid</string>
 
-    <string name="size_pattern">Storlek: %s</string>
+    
 <string name="updates_size">Uppdateringar: %s</string>
 <string name="last_map_change">Senaste kartändring: %s</string>
 <string name="Night">Natt</string>

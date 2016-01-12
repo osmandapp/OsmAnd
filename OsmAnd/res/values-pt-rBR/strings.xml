@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_my_places">Meus locais</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>

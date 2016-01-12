@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -977,5 +976,5 @@
     <string name="osmand_parking_warning">Упозорење</string>
     <string name="release_2_2">" • Ново сучеље осетљиво на положај тапкања по карти или другим површима\n\n • Приказ карте се сада покреће непосредно осим ако је означено „Приказуј полетника при покретању“\n\n • Подешава се која карта и како се приказује у полетнику\n\n • Премошћава се полетник ако Вам се више свиђа управљање програмом изборником\n\n • За преузимање карата, области се могу непосредно изабрати тапкањем по светској карти\n\n • Претрага тачака занимања сада подржава одређеније упите\n\n • Побољшане су могућности тачака занимања и уређивања ОСМ-а\n\n • Прерађен је склоп преузимања карата и његово сучеље\n\n и још којешта... "</string>
     <string name="hillshade_layer_disabled">Слој сенчења падина је онемогућен</string>
-    <string name="traffic_warning_hazard"></string>
+    <string name="traffic_warning_hazard"/>
     </resources>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>    
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
@@ -45,7 +44,7 @@
     <string name="roads">Riyan</string>
     <string name="features_menu_group">Taybetmendî</string>
     <string name="enter_country_name">Nave Welat Bi Nivisenin</string>
-    <string name="are_you_sure">?Bawerî ku dixwazî</string>
+    <string name="are_you_sure">"?Bawerî ku dixwazî"</string>
     <string name="show_gpx">"GPX  nîşan bide"</string>
     <string name="working_days">Roje Kar</string>
     <string name="poi_dialog_poi_type">Cureyê POİ</string>
@@ -82,7 +81,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="shared_string_undo">UNDO</string>
     <string name="error_message_pattern">{0} :Kêmasî</string>
-    <string name="do_you_like_osmand">?Ma wa ji OsmAnd e hez jê kir</string>
+    <string name="do_you_like_osmand">"?Ma wa ji OsmAnd e hez jê kir"</string>
     <string name="plugin_description_title">Daxuyanî</string>
     <string name="email">E-Peyamê</string>
     <string name="edit_filter_save_as_menu_item">Ciyawaz tênivîsîn</string>

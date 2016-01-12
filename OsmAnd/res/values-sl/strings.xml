@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 

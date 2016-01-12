@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
