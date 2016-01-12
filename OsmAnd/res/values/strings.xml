@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_hideIcons_name">Hide icons</string>
     <string name="item_deleted">Item deleted</string>
     <string name="n_items_deleted">items deleted</string>
     <string name="shared_string_undo_all">UNDO ALL</string>
