@@ -86,7 +86,7 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 	}
 
-
+	/*
 	public void addAsWaypoint(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		boolean destination = (targets.getPointToNavigate() == null);
@@ -97,7 +97,8 @@ public class MapActivityActions implements DialogProvider {
 
 		openIntermediateEditPointsDialog();
 	}
-	
+	*/
+
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1,
@@ -736,9 +737,11 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 	}
 
+	/*
 	public void openIntermediateEditPointsDialog() {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS_EDIT);
 	}
+	*/
 
 	public void openRoutePreferencesDialog() {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.ROUTE_PREFERENCES);
@@ -758,6 +761,7 @@ public class MapActivityActions implements DialogProvider {
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		mapActivity.updateApplicationModeSettings();
+		mapActivity.getDashboard().clearDeletedPoints();
 	}
 
 	public AlertDialog stopNavigationActionConfirm() {

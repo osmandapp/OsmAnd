@@ -96,7 +96,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			View dv = getActivity().getLayoutInflater().inflate(R.layout.divider, null);
 			favorites.addView(dv);
 			View v = WaypointDialogHelper.updateWaypointItemView(false, null, getMyApplication(),
-					getActivity(), null, ps, null, !getMyApplication().getSettings().isLightContent(), true);
+					getActivity(), null, null, ps, null, !getMyApplication().getSettings().isLightContent(), true);
 			favorites.addView(v);
 
 		}

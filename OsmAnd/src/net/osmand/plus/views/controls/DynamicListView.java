@@ -32,6 +32,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +48,6 @@ import java.util.List;
 
 public class DynamicListView extends ObservableListView {
 
-	public final String TAG_DRAG_ICON = "DragIcon";
 	protected final int SMOOTH_SCROLL_AMOUNT_AT_EDGE = 15;
 	protected final int MOVE_DURATION = 150;
 
@@ -82,6 +83,13 @@ public class DynamicListView extends ObservableListView {
 	private boolean mIsWaitingForScrollFinish = false;
 	private int mScrollState = OnScrollListener.SCROLL_STATE_IDLE;
 
+	private GestureDetector singleTapDetector;
+	private DragIcon tag;
+
+	public interface DragIcon {
+		void onClick();
+	}
+
 	public DynamicListView(Context context) {
 		super(context);
 		init(context);
@@ -101,6 +109,7 @@ public class DynamicListView extends ObservableListView {
 		setOnScrollListener(mScrollListener);
 		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
 		mSmoothScrollAmountAtEdge = (int) (SMOOTH_SCROLL_AMOUNT_AT_EDGE / metrics.density);
+		singleTapDetector = new GestureDetector(context, new SingleTapConfirm());
 	}
 
 	public void setDynamicListViewCallbacks(DynamicListViewCallbacks callbacks) {
@@ -249,7 +258,7 @@ public class DynamicListView extends ObservableListView {
 
 		// Draw dividers
 		StableArrayAdapter stableAdapter = getStableAdapter();
-		if (stableAdapter != null && stableAdapter.hasDividers()) {
+		if (getDivider() == null && stableAdapter != null && stableAdapter.hasDividers()) {
 			List<Drawable> dividers = stableAdapter.getDividers();
 
 			final int count = getChildCount();
@@ -296,20 +305,28 @@ public class DynamicListView extends ObservableListView {
 	@Override
 	public boolean onTouchEvent(@NonNull MotionEvent event) {
 
+		if (singleTapDetector.onTouchEvent(event)) {
+			if (tag != null) {
+				tag.onClick();
+			}
+			touchEventsCancelled();
+			return true;
+		}
+
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {
 			case MotionEvent.ACTION_DOWN:
 				if (!mCellIsMobile && mHoverCell == null) {
-					mDownX = (int) event.getX();
-					mDownY = (int) event.getY();
-					mActivePointerId = event.getPointerId(0);
-
 					// Find the view that the user pressed their finger down on.
-					View v = findViewAtPositionWithTag(getRootView(), (int) event.getRawX(), (int) event.getRawY(), TAG_DRAG_ICON);
+					View v = findViewAtPositionWithDragIconTag(getRootView(), (int) event.getRawX(), (int) event.getRawY());
 
-					// If the view contains a tag set to "DragIcon", it means that the user wants to
+					// If the view contains a tag set to "DragIcon" class, it means that the user wants to
 					// reorder the list item.
-					if ((v != null) && (v.getTag() != null) && (v.getTag().equals(TAG_DRAG_ICON))) {
+					if ((v != null) && (v.getTag() != null) && (v.getTag() instanceof DragIcon)) {
+						mDownX = (int) event.getX();
+						mDownY = (int) event.getY();
+						mActivePointerId = event.getPointerId(0);
 						mTotalOffset = 0;
+						tag = (DragIcon) v.getTag();
 
 						int position = pointToPosition(mDownX, mDownY);
 						if (position != INVALID_POSITION) {
@@ -564,6 +581,7 @@ public class DynamicListView extends ObservableListView {
 		mBelowItemId = INVALID_ID;
 		setAllVisible();
 		mHoverCell = null;
+		tag = null;
 		setEnabled(true);
 		invalidate();
 		processSwapped();
@@ -718,7 +736,7 @@ public class DynamicListView extends ObservableListView {
 	 * @param y The Y location to be tested.
 	 * @return Returns the most inner view that contains the XY coordinate or null if no view could be found.
 	 */
-	private View findViewAtPositionWithTag(View v, int x, int y, String tag) {
+	private View findViewAtPositionWithDragIconTag(View v, int x, int y) {
 		View vXY = null;
 
 		if (v instanceof ViewGroup) {
@@ -732,9 +750,9 @@ public class DynamicListView extends ObservableListView {
 
 				if ((x >= loc[0] && (x <= (loc[0] + c.getWidth()))) && (y >= loc[1] && (y <= (loc[1] + c.getHeight())))) {
 					vXY = c;
-					View viewAtPosition = findViewAtPositionWithTag(c, x, y, tag);
+					View viewAtPosition = findViewAtPositionWithDragIconTag(c, x, y);
 
-					if ((viewAtPosition != null) && (viewAtPosition.getTag() != null) && viewAtPosition.getTag().equals(tag)) {
+					if ((viewAtPosition != null) && (viewAtPosition.getTag() != null) && viewAtPosition.getTag() instanceof DragIcon) {
 						vXY = viewAtPosition;
 						break;
 					}
