@@ -2225,4 +2225,5 @@
     <string name="item_deleted">Emne slettet</string>
     <string name="n_items_deleted">Emner slettet</string>
     <string name="shared_string_undo_all">FORTRYD ALLE</string>
+    <string name="rendering_attr_hideIcons_name">Skjul ikoner</string>
     </resources>

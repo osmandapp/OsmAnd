@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -2116,7 +2115,7 @@
     <string name="available_maps">Mappe disponibili</string>
     <string name="last_update">Ultimo aggiornamento: %s</string>
 
-    <string name="size_pattern">Dimensione: %s</string>
+    
 <string name="rec_split_desc">Sovrascrivi le note quando lo spazio disponibile è esaurito</string>
     <string name="rec_split_clip_length">Lunghezza della nota</string>
     <string name="rec_split_clip_length_desc">Tutte le note registrate non supereranno la durata impostata</string>

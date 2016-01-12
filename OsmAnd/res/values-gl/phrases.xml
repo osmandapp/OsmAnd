@@ -772,10 +772,10 @@
 
 <string name="poi_content_grain">Contido: gran</string>
 
-	<string name="poi_animal_shelter_dog">Canceira</string>
-	<string name="poi_animal_shelter_cat">Refuxio para gatos</string>
-	<string name="poi_animal_shelter_dog_cat">Refuxio para cans e gatos</string>
-	<string name="poi_animal_shelter_bird">Refuxio para aves</string>
+	<string name="poi_animal_shelter_dog">To de refuxio: can</string>
+	<string name="poi_animal_shelter_cat">To de refuxio: gato</string>
+	<string name="poi_animal_shelter_dog_cat">To de refuxio: can, gato</string>
+	<string name="poi_animal_shelter_bird">To de refuxio: ave</string>
 
 	<string name="poi_service">Servizo</string>
 		<string name="poi_wine">Enoteca</string>
@@ -874,4 +874,192 @@
 	<string name="poi_nudism_customary">Nudismo: tradicional</string>
 	<string name="poi_nudism_permissive">Nudismo: permisivo</string>
 
+	<string name="poi_population">Poboación</string>
+	<string name="poi_species">Especie</string>
+	<string name="poi_genus">Xénero</string>
+	<string name="poi_taxon">Taxon</string>
+
+	<string name="poi_trees_apple">Mazá</string>
+	<string name="poi_trees_olive">Oliva</string>
+	<string name="poi_trees_oil">Aceite de palma</string>
+	<string name="poi_trees_orange">Laranxa</string>
+	<string name="poi_trees_almond">Améndoa</string>
+	<string name="poi_trees_banana">Banana</string>
+	<string name="poi_trees_hazel">Abelá</string>
+	<string name="poi_trees_coconut">Coco</string>
+	<string name="poi_trees_cherry">Cereixa</string>
+	<string name="poi_trees_walnut">Noz</string>
+	<string name="poi_trees_plum">Ameixa</string>
+	<string name="poi_trees_peach">Pexego</string>
+	<string name="poi_trees_tea">Té</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_nectorine">Nectarina</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Goma</string>
+	<string name="poi_trees_date">Dátil</string>
+	<string name="poi_trees_coffea">Café</string>
+	<string name="poi_trees_pomegranate">Granada</string>
+
+	<string name="poi_rural">Rural</string>
+
+	<string name="poi_urban">Urbano</string>
+	<string name="poi_animal_shelter">Refuxio para animais</string>
+	<string name="poi_seats">Asentos</string>
+	<string name="poi_intermittent">Intermitente</string>
+
+	<string name="poi_generator_source_coal">Fonte de enerxía: carbón</string>
+	<string name="poi_generator_source_gas">Fonte de enerxía: gas</string>
+	<string name="poi_generator_source_nuclear">Fonte de enerxía: nuclear</string>
+	<string name="poi_generator_source_solar">Fonte de enerxía: solar</string>
+	<string name="poi_generator_source_hydro">Fonte de enerxía: hidroeléctrica</string>
+	<string name="poi_generator_source_wind">Fonte de enerxía: vento</string>
+	<string name="poi_generator_source_geothermal">Fonte de enerxía: xeotérmica</string>
+	<string name="poi_generator_source_oil">Fonte de enerxía: petróleo</string>
+	<string name="poi_generator_source_diesel">Fonte de enerxía: diesel</string>
+
+	<string name="poi_int_name">Nome internacional</string>
+	<string name="poi_nat_name">Nome nacional</string>
+	<string name="poi_reg_name">Nome rexional</string>
+	<string name="poi_loc_name">Nome local</string>
+	<string name="poi_old_name">Nome antigo</string>
+	<string name="poi_alt_name">Nome alternativo</string>
+
+	<string name="poi_pump_manual">Bomba manual</string>
+	<string name="poi_pump_powered">Bomba automática</string>
+	<string name="poi_pump_no">Sen bomba</string>
+	<string name="poi_pump_yes">Bomba</string>
+
+	<string name="poi_water_characteristic_mineral">Característica da auga: mineral</string>
+	<string name="poi_water_characteristic_sulfuric">Característica da auga: sulfurosa</string>
+
+	<string name="poi_information_board">Taboleiro informativo</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Oficina de información</string>
+	<string name="poi_information_sign">Sinal</string>
+	<string name="poi_information_audioguide">Audioguía</string>
+	<string name="poi_board_type_notice">Taboleiro de anuncios</string>
+	<string name="poi_horse_track">Hipódromo</string>
+	<string name="poi_resort">Lugar turístico</string>
+	<string name="poi_winery">Vinoteca</string>
+
+	<string name="poi_pawnbroker">Prestamista</string>
+	<string name="poi_information_nature">Marcador informativo: natureza</string>
+	<string name="poi_information_wildlife">Marcador informativo: vida salvaxe</string>
+	<string name="poi_information_history">Marcador informativo: historia</string>
+	<string name="poi_information_bicyclemap">Mapa ciclista</string>
+	<string name="poi_information_tactile_map">Mapa táctil</string>
+	<string name="poi_board_type_plants">Marcador informativo: plantas</string>
+	<string name="poi_board_type_geology">Marcador informativo: xeoloxía</string>
+	<string name="poi_board_type_public_transport">Marcador informativo: transporte público</string>
+	<string name="poi_board_type_technology">Marcador informativo: tecnoloxía</string>
+	<string name="poi_board_type_astronomy">Marcador informativo: astronomía</string>
+
+	<string name="poi_smoking_no">Prohibido fumar</string>
+	<string name="poi_smoking_outside">Só está permitido fumar no exterior</string>
+	<string name="poi_smoking_yes">Permítese fumar</string>
+	<string name="poi_smoking_separated">Permítese fumar nunha dependencia separada</string>
+	<string name="poi_smoking_isolated">Permítese fumar nunha dependencia illada</string>
+	<string name="poi_smoking_dedicated">Dedicado a fumadores</string>
+
+	<string name="poi_toll_yes">Portaxe</string>
+	<string name="poi_toll_no">Sen portaxe</string>
+	<string name="poi_traffic_signals_sound_yes">Con son</string>
+	<string name="poi_traffic_signals_sound_no">Sen son</string>
+	<string name="poi_services">Área de servizo</string>
+	<string name="poi_bird_hide">Lugar para observar paxaros</string>
+	<string name="poi_farmland">Agras</string>
+	<string name="poi_sand">Area</string>
+
+	<string name="poi_level">Nivel</string>
+	<string name="poi_piste_difficulty_easy">Dificultade da pista: fácil</string>
+	<string name="poi_piste_difficulty_intermediate">Dificultade da pista: intermedia</string>
+	<string name="poi_piste_difficulty_advanced">Dificultade da pista: avanzada</string>
+	<string name="poi_piste_difficulty_novice">Dificultade da pista: novatos</string>
+	<string name="poi_piste_difficulty_expert">Dificultade da pista: expertos</string>
+	<string name="poi_piste_difficulty_freeride">Dificultade da pista: libre</string>
+	<string name="poi_piste_grooming_classic">Coidado da pista: clásico</string>
+	<string name="poi_piste_grooming_classic_skating">Coidado da pista: clásico e patinaxe</string>
+	<string name="poi_piste_grooming_skating">Coidado da pista: patinaxe</string>
+	<string name="poi_piste_grooming_no">Coidado da pista: non</string>
+	<string name="poi_garden_type_residential">Tipo de xardín: residencial</string>
+	<string name="poi_garden_type_community">Tipo de xardín: comunitario</string>
+	<string name="poi_garden_type_private">Tipo de xardín: privado</string>
+	<string name="poi_garden_type_botanical">Tipo de xardín: botánico</string>
+
+	<string name="poi_garden_style_kitchen">Tipo de xardín: cociña</string>
+	<string name="poi_garden_style_french">Tipo de xardín: francés</string>
+	<string name="poi_garden_style_english">Tipo de xardín: inglés</string>
+	<string name="poi_garden_style_japanese">Tipo de xardín: xaponés</string>
+
+	<string name="poi_capacity">Capacidade</string>
+	<string name="poi_capacity_women_yes">Lugares reservados para mulleres</string>
+	<string name="poi_capacity_women_no">Sen lugares reservados para mulleres</string>
+	<string name="poi_capacity_women">Lugares reservados para mulleres</string>
+	<string name="poi_capacity_pupils">Lugares reservados para estudantes</string>
+	<string name="poi_capacity_teachers">Lugares reservados para profesorado</string>
+	<string name="poi_capacity_parent_yes">Lugares reservados para familias</string>
+	<string name="poi_capacity_parent_no">Sen lugares reservados para familias</string>
+	<string name="poi_capacity_parent">Lugares reservados para familias</string>
+
+	<string name="poi_aerialway_capacity">Capacidade por hora</string>
+	<string name="poi_aerialway_duration">Tempo medio de viaxe, minutos</string>
+	<string name="poi_aerialway_heating_yes">Calefacción</string>
+	<string name="poi_aerialway_heating_no">Sen calefación</string>
+	<string name="poi_aerialway_bicycle_yes">Bicicleta: permitida</string>
+	<string name="poi_aerialway_bicycle_no">Bicicleta: non permitida</string>
+	<string name="poi_aerialway_bicycle_summer">Bicicleta: permitida só no verán</string>
+	<string name="poi_aerialway_access_entry">Só entrada</string>
+	<string name="poi_aerialway_access_exit">Só saída</string>
+	<string name="poi_aerialway_access_both">Entrada e saída</string>
+	<string name="poi_aerialway_summer_access_entry">Acceso no verán: só entrada</string>
+	<string name="poi_aerialway_summer_access_exit">Acceso no verán: só saida</string>
+	<string name="poi_aerialway_summer_access_both">Acceso no verán: entrada e saída</string>
+
+	<string name="poi_stars_1">Estrelas: 1 (Turista)</string>
+	<string name="poi_stars_1s">Estrelas: 1S (Turista superior)</string>
+	<string name="poi_stars_2">Estrelas: 2 (Normal)</string>
+	<string name="poi_stars_2s">Estrelas: 2S (Normal superior)</string>
+	<string name="poi_stars_3">Estrelas: 3 (Comfort)</string>
+	<string name="poi_stars_3s">Estrelas: 3S (Comfort superior)</string>
+	<string name="poi_stars_4">Estrelas: 4 (Primeira clase)</string>
+	<string name="poi_stars_4s">Estrelas: 4S (Primeira clase superior)</string>
+	<string name="poi_stars_5">Estrelas: 5 (Luxo)</string>
+	<string name="poi_stars_5s">Estrelas: 5S (Luxo superior)</string>
+	<string name="poi_stars_6">Estrelas: 6</string>
+	<string name="poi_stars_7">Estrelas: 7</string>
+	<string name="poi_rooms">Cuartos</string>
+
+	<string name="poi_payment_coins_yes">Acéptanse moedas</string>
+	<string name="poi_payment_coins_no">Non se aceptan moedas</string>
+	<string name="poi_payment_coins_50c12">Acéptanse moedas de 50c, 1€ e 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Acéptanse tarxetas de teléfono</string>
+	<string name="poi_payment_telephone_cards_no">Non se aceptan tarxetas de teléfono</string>
+	<string name="poi_payment_credit_cards_yes">Acéptanse tarxetas de crédito</string>
+	<string name="poi_payment_credit_cards_no">Non se aceptan tarxetas de crédito</string>
+	<string name="poi_payment_notes_yes">Acéptanse billetes</string>
+	<string name="poi_payment_notes_no">Non se aceptan billetes</string>
+	<string name="poi_payment_electronic_purses_yes">Acéptanse moedeiros electrónicos</string>
+	<string name="poi_payment_electronic_purses_no">Non se aceptan moedeiros electrónicos</string>
+	<string name="poi_payment_cash_yes">Acéptase metálico</string>
+	<string name="poi_payment_cash_no">Non se acepta metálico</string>
+	<string name="poi_payment_debit_cards_yes">Acéptanse tarxetas de débito</string>
+	<string name="poi_payment_debit_cards_no">Non se aceptan tarxetas de débito</string>
+	<string name="poi_payment_bitcoin_yes">Acéptase bitcoin</string>
+	<string name="poi_payment_bitcoin_no">Non se acepta bitcoin</string>
+	<string name="poi_payment_visa_yes">Acéptanse tarxetas Visa</string>
+	<string name="poi_payment_visa_no">Non se aceptan tarxetas Visa</string>
+	<string name="poi_payment_mastercard_yes">Acéptase MasterCard</string>
+	<string name="poi_payment_mastercard_no">Non se acepta MasterCard</string>
+	<string name="poi_payment_none">Gratis</string>
+	<string name="poi_payment_maestro_yes">Acéptanse tarxetas Maestro</string>
+	<string name="poi_payment_maestro_no">Non se aceptan tarxetas Maestro</string>
+	<string name="poi_payment_american_express_yes">Acéptanse tarxetas American Expres (AMEX)</string>
+	<string name="poi_payment_american_express_no">Non se aceptan tarxetas American Expres (AMEX)</string>
+	<string name="poi_payment_diners_club_yes">Acéptanse tarxetas Diners Club</string>
+	<string name="poi_payment_diners_club_no">Non se aceptan tarxetas Diners Club</string>
+	<string name="poi_payment_visa_electron_yes">Acéptanse tarxetas Visa Electron</string>
+	<string name="poi_payment_visa_electron_no">Non se aceptan tarxetas Visa Electron</string>
+	<string name="poi_payment_others_yes">Acéptanse outros métodos de pagamento</string>
+	<string name="poi_payment_others_no">Non se aceptan outros métodos de pagamento</string>
 	</resources>

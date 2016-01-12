@@ -2071,4 +2071,5 @@
     <string name="item_deleted">項目已刪除</string>
     <string name="n_items_deleted">項目已刪除</string>
     <string name="shared_string_undo_all">全部取消</string>
+    <string name="rendering_attr_hideIcons_name">隱藏圖示</string>
     </resources>

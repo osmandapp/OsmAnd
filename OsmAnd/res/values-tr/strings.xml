@@ -1328,7 +1328,7 @@
     
     <string name="routing_attr_avoid_shuttle_train_name">Mekik treninden kaçın</string>
 	<string name="local_indexes_cat_wiki">Vikipedi</string>
-    <string name="osm_edit_context_menu_delete">OSM Düzeltmesini Sil</string>
+    <string name="osm_edit_context_menu_delete">OSM düzeltmesini sil</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Rota kapsamına göre Boyama</string>
     <string name="shared_string_logoff">Çıkış yap</string>
     <string name="application_dir_change_warning3">OsmAnd\'ın verileri ayrıca yeni hedefe de kopyalamasını ister misiniz?</string>
@@ -2026,4 +2026,9 @@
 
 <string name="updates_size">Güncelleme boyutu</string>
     <string name="select_month_and_country">Ayı ve ülke seçin</string>
-</resources>
+<string name="item_deleted">Öğe silindi</string>
+    <string name="n_items_deleted">öğe silindi</string>
+    <string name="shared_string_undo_all">UNDO TÜM</string>
+    <string name="shared_string_type">Tip</string>
+    <string name="starting_point">Başlangıç noktası</string>
+    </resources>

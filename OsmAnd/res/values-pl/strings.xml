@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -2070,4 +2069,17 @@
     <string name="last_map_change">Ostatnia zmiana mapy: %s</string>
     <string name="rec_split_clip_length">Długość nagrania</string>
     <string name="shared_string_not_selected">Nie wybrane</string>
+<string name="item_deleted">Pozycja usunięta</string>
+    <string name="n_items_deleted">Pozycje usunięta</string>
+    <string name="shared_string_undo_all">COFNIJ WSZYSTKO</string>
+    <string name="shared_string_type">Typ</string>
+    <string name="starting_point">Punkt początkowy</string>
+    <string name="rec_split_storage_size">Wielkość pamięci</string>
+    <string name="live_updates">Aktualizacje na żywo</string>
+    <string name="hourly">Cogodzinny</string>
+    <string name="daily">Dzienny</string>
+    <string name="weekly">Tygodniowo</string>
+    <string name="morning">Rano</string>
+    <string name="Night">Noc</string>
+    <string name="select_month_and_country">Wybierz miesiąc i kraj</string>
 </resources>
