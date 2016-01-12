@@ -2591,4 +2591,18 @@
 
 <string name="poi_official_name">Nome oficial</string>
 
+<string name="poi_seamark_dyke">Dique náutico</string>
+	<string name="poi_inscription_n">Inscrição: N</string>
+	<string name="poi_inscription_nw">Inscrição: NO</string>
+	<string name="poi_inscription_w">Inscrição: O</string>
+	<string name="poi_inscription_sw">Inscrição: SO</string>
+	<string name="poi_inscription_s">Inscrição: S</string>
+	<string name="poi_inscription_se">Inscrição: SE</string>
+	<string name="poi_inscription_e">Inscrição: E</string>
+	<string name="poi_inscription_ne">Inscrição: NE</string>
+
+	<string name="poi_construction_yes">Em construção</string>
+	<string name="poi_atm_yes">ATM: sim</string>
+	<string name="poi_atm_no">ATM: não</string>
+
 </resources>
