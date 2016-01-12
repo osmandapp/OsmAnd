@@ -401,7 +401,7 @@ public class WaypointDialogHelper {
 				move.setVisibility(View.VISIBLE);
 				more.setVisibility(View.GONE);
 				((ImageView) move).setImageDrawable(app.getIconsCache().getContentIcon(
-						R.drawable.ic_flat_list_dark, !nightMode));
+						R.drawable.ic_action_reorder, !nightMode));
 				move.setTag(new DragIcon() {
 					@Override
 					public void onClick() {
