@@ -2164,4 +2164,5 @@
     <string name="n_items_deleted">items verwijderd</string>
     <string name="shared_string_undo_all">Alles terugzetten</string>
     <string name="rendering_attr_hideIcons_name">Verberg iconen</string>
+    <string name="switch_start_finish">Verwissel start en einde</string>
     </resources>
