@@ -472,20 +472,18 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	 * Delete the list item at the specified position. This will animate the item sliding out of the
 	 * list and then collapsing until it vanished (same as if the user slides out an item).
 	 * <p/>
-	 * NOTE: If you are using list headers, be aware, that the position argument must take care of
-	 * them. Meaning 0 references the first list header. So if you want to delete the first list
-	 * item, you have to pass the number of list headers as {@code position}. Most of the times
-	 * that shouldn't be a problem, since you most probably will evaluate the position which should
-	 * be deleted in a way, that respects the list headers.
 	 */
 	public void delete(int position) {
 		if (mCallbacks == null) {
 			throw new IllegalStateException("You must set an OnDismissCallback, before deleting items.");
 		}
-		if (position < 0 || position >= mListView.getCount()) {
-			throw new IndexOutOfBoundsException(String.format("Tried to delete item %d. #items in list: %d", position, mListView.getCount()));
+
+		int pos = position + mListView.getHeaderViewsCount();
+
+		if (pos < 0 || pos >= mListView.getCount()) {
+			throw new IndexOutOfBoundsException(String.format("Tried to delete item %d. #items in list: %d", pos, mListView.getCount()));
 		}
-		View childView = mListView.getChildAt(position - mListView.getFirstVisiblePosition());
+		View childView = mListView.getChildAt(pos - mListView.getFirstVisiblePosition());
 		View view = null;
 		if (mSwipingLayout > 0) {
 			view = childView.findViewById(mSwipingLayout);
