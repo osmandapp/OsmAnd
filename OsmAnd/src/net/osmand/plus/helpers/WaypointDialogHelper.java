@@ -114,7 +114,7 @@ public class WaypointDialogHelper {
 
 				case WaypointHelper.FAVORITES:
 					FavouritePoint favPoint = (FavouritePoint) ps.point;
-					pointDescription = favPoint.getCategory();
+					pointDescription = Algorithms.isEmpty(favPoint.getCategory()) ? activity.getResources().getString(R.string.shared_string_favorites) : favPoint.getCategory();
 					break;
 			}
 		}
