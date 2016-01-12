@@ -125,6 +125,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
+		if(o instanceof RouteDataObject) {
+			RouteDataObject route =  (RouteDataObject) o;
+			Location location = missingRoadLocations.get(route.getId());
+			return new LatLon(location.getLatitude(), location.getLongitude());
+		}
 		return null;
 	}
 
