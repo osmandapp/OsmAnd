@@ -2581,5 +2581,7 @@
 	<string name="poi_inscription_ne">Inscription:NE</string>
 
 	<string name="poi_construction_yes">Under construction</string>
+	<string name="poi_atm_yes">Atm: yes</string>
+	<string name="poi_atm_no">Atm: no</string>
 
 </resources>
