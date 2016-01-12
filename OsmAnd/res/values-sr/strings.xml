@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -977,4 +978,45 @@
     <string name="release_2_2">" • Ново сучеље осетљиво на положај тапкања по карти или другим површима\n\n • Приказ карте се сада покреће непосредно осим ако је означено „Приказуј полетника при покретању“\n\n • Подешава се која карта и како се приказује у полетнику\n\n • Премошћава се полетник ако Вам се више свиђа управљање програмом изборником\n\n • За преузимање карата, области се могу непосредно изабрати тапкањем по светској карти\n\n • Претрага тачака занимања сада подржава одређеније упите\n\n • Побољшане су могућности тачака занимања и уређивања ОСМ-а\n\n • Прерађен је склоп преузимања карата и његово сучеље\n\n и још којешта... "</string>
     <string name="hillshade_layer_disabled">Слој сенчења падина је онемогућен</string>
     <string name="traffic_warning_hazard"/>
+    <string name="lang_al">Албански</string>
+    <string name="lang_ar">Арапски</string>
+    <string name="lang_eu">Баскијски</string>
+    <string name="lang_be">Белоруски</string>
+    <string name="lang_bg">Бугарски</string>
+    <string name="lang_hr">Хрватски</string>
+    <string name="lang_cs">Чешки</string>
+    <string name="lang_da">Дански</string>
+    <string name="lang_fi">Фински</string>
+    <string name="lang_fr">Француски</string>
+    <string name="lang_de">Германски</string>
+    <string name="lang_el">Грчки</string>
+    <string name="lang_hu">Мађарски</string>
+    <string name="lang_id">Индонезијски</string>
+    <string name="lang_it">Италијански</string>
+    <string name="lang_ja">Јапански</string>
+    <string name="lang_ko">Корејски</string>
+    <string name="lang_no">Норвешки</string>
+    <string name="lang_fa">Персијски</string>
+    <string name="lang_pl">Пољски</string>
+    <string name="lang_pt">Португалски</string>
+    <string name="lang_ro">Румунски</string>
+    <string name="lang_ru">Руски</string>
+    <string name="lang_sk">Словачки</string>
+    <string name="lang_es">Шпански</string>
+    <string name="lang_sv">Шведски</string>
+    <string name="lang_tr">Турски</string>
+    <string name="lang_uk">Украјински</string>
+    <string name="lang_vi">Вијетнамски</string>
+    <string name="index_name_canada">Северна Америка - Канада</string>
+    <string name="index_name_italy">Европа - Италија</string>
+    <string name="index_name_gb">Европа - Велика Британија</string>
+    <string name="calculate_osmand_route_without_internet">Рачунај одсечак стазе Османда без приступа мрежи</string>
+    <string name="gpx_option_calculate_first_last_segment">Рачунај од првог до последњег осдечка стазе Османда</string>
+    <string name="use_displayed_track_for_navigation">Да ли желите приказ стазе за навођење?</string>
+    <string name="select_gpx">Изаберите ГПИкс…</string>
+    <string name="routing_attr_avoid_toll_description">Избегавај путеве са наплатним станицама</string>
+    <string name="routing_attr_avoid_toll_name">Избегавај путеве са наплатним станицама</string>
+    <string name="routing_attr_avoid_unpaved_name">Избегавај неасвалтиране путеве</string>
+    <string name="routing_attr_avoid_unpaved_description">Избегавај неасвалтиране путеве</string>
+    <string name="maps_define_edit">Одреди/уреди…</string>
     </resources>
