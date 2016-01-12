@@ -2571,4 +2571,19 @@
 
 	<string name="poi_official_name">Официальное имя</string>
 
+	<string name="poi_dyke">Насыпь для сдерживания потока воды</string>
+
+	<string name="poi_forestry_compartment">Указатель: квартальный столб</string>
+	<string name="poi_forestry_allotment">Указатель: деляночный столб</string>
+	<string name="poi_inscription_n">Надпись:С</string>
+	<string name="poi_inscription_nw">Надпись:СВ</string>
+	<string name="poi_inscription_w">Надпись:В</string>
+	<string name="poi_inscription_sw">Надпись:ЮВ</string>
+	<string name="poi_inscription_s">Надпись:Ю</string>
+	<string name="poi_inscription_se">Надпись:ЮЗ</string>
+	<string name="poi_inscription_e">Надпись:З</string>
+	<string name="poi_inscription_ne">Надпись:СЗ</string>
+
+	<string name="poi_construction_yes">В процессе строительства</string>
+
 </resources>
