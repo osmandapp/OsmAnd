@@ -2026,4 +2026,9 @@
 
 <string name="updates_size">Güncelleme boyutu</string>
     <string name="select_month_and_country">Ayı ve ülke seçin</string>
-</resources>
+<string name="item_deleted">Öğe silindi</string>
+    <string name="n_items_deleted">öğe silindi</string>
+    <string name="shared_string_undo_all">UNDO TÜM</string>
+    <string name="shared_string_type">Tip</string>
+    <string name="starting_point">Başlangıç noktası</string>
+    </resources>
