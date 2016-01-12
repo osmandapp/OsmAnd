@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.liveupdates.network.GetJsonAsyncTask;
+import net.osmand.plus.liveupdates.network.Protocol;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ import java.util.Locale;
  */
 public class ReportsFragment extends BaseOsmAndFragment {
 	public static final String TITLE = "Report";
+	public static final String TOTAL_CHANGES_BY_MONTH_URL = "http://builder.osmand.net/reports/total_changes_by_month.php?month=";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +45,7 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		Spinner regionReportsSpinner = (Spinner) view.findViewById(R.id.regionReportsSpinner);
 		ArrayAdapter<String> regionsForReportsAdapter =
 				new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
-						new String[] {"Worldwide"});
+						new String[]{"Worldwide"});
 		regionsForReportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		regionReportsSpinner.setAdapter(regionsForReportsAdapter);
 
@@ -50,6 +54,23 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		setThemedDrawable(view, R.id.regionIconImageView, R.drawable.ic_world_globe_dark);
 		setThemedDrawable(view, R.id.numberOfContributorsIcon, R.drawable.ic_group);
 		setThemedDrawable(view, R.id.numberOfEditsIcon, R.drawable.ic_group);
+
+		final TextView contributorsTextView = (TextView) view.findViewById(R.id.contributorsTextView);
+		final TextView editsTextView = (TextView) view.findViewById(R.id.editsTextView);
+
+		GetJsonAsyncTask<Protocol.TotalChangesByMonthResponse> totalChangesByMontAsyncTask =
+				new GetJsonAsyncTask<>(Protocol.TotalChangesByMonthResponse.class);
+		totalChangesByMontAsyncTask.setOnResponseListener(
+				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
+					@Override
+					public void onResponse(Protocol.TotalChangesByMonthResponse response) {
+						contributorsTextView.setText(String.valueOf(response.users));
+						editsTextView.setText(String.valueOf(response.changes));
+					}
+				});
+		int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
+		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
+		totalChangesByMontAsyncTask.execute(TOTAL_CHANGES_BY_MONTH_URL + monthUrlString);
 		return view;
 	}
 
@@ -81,23 +102,4 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		}
 	}
 
-//	public static class GetJsonAsyncTask<Protocol> extends AsyncTask<String, Void, Protocol> {
-//		private static final Log LOG = PlatformUtil.getLog(GetJsonAsyncTask.class);
-//		private final Class<Protocol> protocolClass;
-//
-//		public GetJsonAsyncTask(Class<Protocol> protocolClass) {
-//			this.protocolClass = protocolClass;
-//		}
-//
-//		@Override
-//		protected Protocol doInBackground(String... params) {
-//			StringBuilder response = new StringBuilder();
-//			String error = NetworkUtils.sendGetRequest(params[0], null, response);
-//			if (error != null) {
-//				return
-//			}
-//			LOG.error(error);
-//			return null;
-//		}
-//	}
 }

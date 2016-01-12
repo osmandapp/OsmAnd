@@ -51,6 +51,7 @@
         <TextView
             android:text="Number of contributors"/>
         <TextView
+            android:id="@+id/contributorsTextView"
             android:text="65"/>
         <View
             android:layout_column="1"
@@ -64,6 +65,7 @@
         <TextView
             android:text="Number of edits"/>
         <TextView
+            android:id="@+id/editsTextView"
             android:text="1125"/>
     </GridLayout>
 
