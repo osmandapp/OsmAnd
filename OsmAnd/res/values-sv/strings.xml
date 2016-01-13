@@ -2066,4 +2066,7 @@
     <string name="shared_string_undo_all">ÅNGRA ALLA</string>
     <string name="rendering_attr_hideIcons_name">Dölj POI-ikoner</string>
     <string name="switch_start_finish">Skifta startpunkt och destination</string>
-    </resources>
+    <string name="number_of_contributors">Antal bidragsgivare</string>
+    <string name="number_of_edits">Antal redigeringar</string>
+    <string name="reports_for">Rapport för:</string>
+</resources>
