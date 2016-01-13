@@ -227,7 +227,7 @@ public class TargetPointsHelper {
 	}
 
 	public void updateRouteAndReferesh(boolean updateRoute) {
-		//Issue 2136
+		//Fix for Issue 2136(b-d) (i.e. after Destination has been deleted)
 		if (pointToNavigate == null) {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
