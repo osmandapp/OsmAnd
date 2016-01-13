@@ -7,11 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.liveupdates.network.GetJsonAsyncTask;
@@ -34,44 +34,75 @@ public class ReportsFragment extends BaseOsmAndFragment {
 	public static final String TITLE = "Report";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL = "http://builder.osmand.net/reports/total_changes_by_month.php?month=";
 
+	private TextView contributorsTextView;
+	private TextView editsTextView;
+
+	private Spinner montReportsSpinner;
+	private Spinner regionReportsSpinner;
+	private MonthsForReportsAdapter monthsForReportsAdapter;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_reports, container, false);
-		Spinner montReportsSpinner = (Spinner) view.findViewById(R.id.montReportsSpinner);
-		MonthsForReportsAdapter monthsForReportsAdapter = new MonthsForReportsAdapter(getActivity());
+		montReportsSpinner = (Spinner) view.findViewById(R.id.montReportsSpinner);
+		monthsForReportsAdapter = new MonthsForReportsAdapter(getActivity());
 		montReportsSpinner.setAdapter(monthsForReportsAdapter);
 
-		Spinner regionReportsSpinner = (Spinner) view.findViewById(R.id.regionReportsSpinner);
+		regionReportsSpinner = (Spinner) view.findViewById(R.id.regionReportsSpinner);
 		ArrayAdapter<String> regionsForReportsAdapter =
 				new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
 						new String[]{"Worldwide"});
 		regionsForReportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		regionReportsSpinner.setAdapter(regionsForReportsAdapter);
 
-		IconsCache iconsCache = getMyApplication().getIconsCache();
 		setThemedDrawable(view, R.id.calendarImageView, R.drawable.ic_action_data);
 		setThemedDrawable(view, R.id.regionIconImageView, R.drawable.ic_world_globe_dark);
 		setThemedDrawable(view, R.id.numberOfContributorsIcon, R.drawable.ic_group);
 		setThemedDrawable(view, R.id.numberOfEditsIcon, R.drawable.ic_group);
 
-		final TextView contributorsTextView = (TextView) view.findViewById(R.id.contributorsTextView);
-		final TextView editsTextView = (TextView) view.findViewById(R.id.editsTextView);
+		contributorsTextView = (TextView) view.findViewById(R.id.contributorsTextView);
+		editsTextView = (TextView) view.findViewById(R.id.editsTextView);
 
-		GetJsonAsyncTask<Protocol.TotalChangesByMonthResponse> totalChangesByMontAsyncTask =
-				new GetJsonAsyncTask<>(Protocol.TotalChangesByMonthResponse.class);
-		totalChangesByMontAsyncTask.setOnResponseListener(
+		requestAndUpdateUi();
+
+		AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				requestAndUpdateUi();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		};
+		montReportsSpinner.setOnItemSelectedListener(onItemSelectedListener);
+		regionReportsSpinner.setOnItemSelectedListener(onItemSelectedListener);
+		return view;
+	}
+
+	private void requestAndUpdateUi() {
+		int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
+		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
+		String regionUrlString = regionReportsSpinner.getSelectedItem().toString();
+		GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener =
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override
 					public void onResponse(Protocol.TotalChangesByMonthResponse response) {
 						contributorsTextView.setText(String.valueOf(response.users));
 						editsTextView.setText(String.valueOf(response.changes));
 					}
-				});
-		int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
-		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
+				};
+		requestData(monthUrlString, regionUrlString, onResponseListener);
+	}
+
+	private void requestData(String monthUrlString, String regionUrlString,
+							 GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener) {
+		GetJsonAsyncTask<Protocol.TotalChangesByMonthResponse> totalChangesByMontAsyncTask =
+				new GetJsonAsyncTask<>(Protocol.TotalChangesByMonthResponse.class);
+		totalChangesByMontAsyncTask.setOnResponseListener(onResponseListener);
 		totalChangesByMontAsyncTask.execute(TOTAL_CHANGES_BY_MONTH_URL + monthUrlString);
-		return view;
 	}
 
 	private static class MonthsForReportsAdapter extends ArrayAdapter<String> {
