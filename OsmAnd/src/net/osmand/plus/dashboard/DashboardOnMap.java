@@ -1185,6 +1185,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					newRouteIsCalculated(false, new ValueHolder<Boolean>());
 					getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
 
+					//Issue 2136(b)
+					if (mapActivity.getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
+						mapActivity.getMapActions().stopNavigationWithoutConfirm();
+					}
+
 					if (swipeDismissListener != null) {
 						swipeDismissListener.setEnabled(true);
 					}
@@ -1223,10 +1228,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void deleteWaypoint(int position) {
 		if (swipeDismissListener != null) {
 			swipeDismissListener.delete(position);
-			//Issue 2136(b)
-			if (mapActivity.getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
-				mapActivity.getMapActions().stopNavigationWithoutConfirm();
-			}
 		}
 	}
 }
