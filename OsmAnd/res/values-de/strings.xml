@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="no_address_found">Keine Adresse bekannt</string>
 	<string name="shared_string_near">Nähe</string>
 	<string name="regions">Regionen</string>
@@ -1995,4 +1995,5 @@
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
     <string name="shared_string_undo_all">Alles rückgängig machen</string>
-    </resources>
+    <string name="switch_start_finish">Startpunkt und Ziel vertauschen</string>
+</resources>
