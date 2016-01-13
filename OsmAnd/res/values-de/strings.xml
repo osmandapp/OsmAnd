@@ -1997,5 +1997,5 @@
     <string name="starting_point">Startpunkt</string>
     <string name="shared_string_undo_all">Alles rückgängig machen</string>
     <string name="rendering_attr_hideIcons_name">Symbole ausblenden</string>
-    <string name="switch_start_finish">Tausche Start &amp; Ende</string>
-    </resources>
+    <string name="switch_start_finish">Startpunkt und Ziel vertauschen</string>
+</resources>
