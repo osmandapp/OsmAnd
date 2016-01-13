@@ -99,7 +99,6 @@
         android:clickable="false"
         android:scaleType="center"
         android:src="@drawable/ic_flat_list_dark"
-        android:tag="DragIcon"
         android:visibility="gone"/>
 
 </LinearLayout>

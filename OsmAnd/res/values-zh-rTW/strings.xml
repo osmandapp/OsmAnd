@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -2070,4 +2071,6 @@
     <string name="item_deleted">項目已刪除</string>
     <string name="n_items_deleted">項目已刪除</string>
     <string name="shared_string_undo_all">全部取消</string>
+    <string name="rendering_attr_hideIcons_name">隱藏圖示</string>
+    <string name="switch_start_finish">切換開始以及結束</string>
     </resources>

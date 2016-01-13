@@ -953,7 +953,7 @@
 	<string name="poi_daymark">Daymark</string>
 	<string name="poi_distance_mark">Distance mark</string>
 	<string name="poi_dry_dock">Dry dock</string>
-	<string name="poi_dyke">Dyke</string>
+	<string name="poi_seamark_dyke">Seamark dyke</string>
 	<string name="poi_floating_dock">Floating dock</string>
 	<string name="poi_fog_signal">Fog signal</string>
 	<string name="poi_harbour_basin">Harbour basin</string>
@@ -2565,5 +2565,23 @@
 	<string name="poi_boxing">Boxing</string>
 
 	<string name="poi_official_name">Official name</string>
+
+	<string name="poi_dyke">Dyke</string>
+	<string name="poi_dolphin">Dolphin</string>
+
+	<string name="poi_forestry_compartment">Signpost: forestry compartment</string>
+	<string name="poi_forestry_allotment">Signpost: forestry allotment</string>
+	<string name="poi_inscription_n">Inscription:N</string>
+	<string name="poi_inscription_nw">Inscription:NW</string>
+	<string name="poi_inscription_w">Inscription:W</string>
+	<string name="poi_inscription_sw">Inscription:SW</string>
+	<string name="poi_inscription_s">Inscription:S</string>
+	<string name="poi_inscription_se">Inscription:SE</string>
+	<string name="poi_inscription_e">Inscription:E</string>
+	<string name="poi_inscription_ne">Inscription:NE</string>
+
+	<string name="poi_construction_yes">Under construction</string>
+	<string name="poi_atm_yes">Atm: yes</string>
+	<string name="poi_atm_no">Atm: no</string>
 
 </resources>
