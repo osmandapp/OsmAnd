@@ -1,0 +1,42 @@
+package net.osmand.plus.base;
+
+import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.ImageView;
+
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+
+/**
+ * Created by GaidamakUA on 1/12/16.
+ */
+public class BaseOsmAndFragment extends Fragment {
+	private IconsCache iconsCache;
+
+	protected OsmandApplication getMyApplication() {
+		return (OsmandApplication) getActivity().getApplication();
+	}
+
+	protected IconsCache getIconsCache() {
+		if (iconsCache == null) {
+			iconsCache = getMyApplication().getIconsCache();
+		}
+		return iconsCache;
+	}
+
+	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color){
+		return getIconsCache().getPaintedContentIcon(id, color);
+	}
+
+	protected Drawable getContentIcon(@DrawableRes int id){
+		return getIconsCache().getContentIcon(id);
+	}
+
+	protected void setThemedDrawable(View parent, @IdRes int viewId, @DrawableRes int iconId) {
+		((ImageView) parent.findViewById(viewId)).setImageDrawable(getContentIcon(iconId));
+	}
+}

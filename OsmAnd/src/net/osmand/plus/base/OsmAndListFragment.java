@@ -1,10 +1,11 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.base;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.widget.ArrayAdapter;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 public abstract class OsmAndListFragment extends ListFragment {
 	
