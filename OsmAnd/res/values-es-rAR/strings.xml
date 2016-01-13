@@ -2045,6 +2045,9 @@
     <string name="item_deleted">Elemento borrado</string>
     <string name="n_items_deleted">elementos borrados</string>
     <string name="shared_string_undo_all">DESHACER TODO</string>
-    <string name="rendering_attr_hideIcons_name">Ocultar iconos</string>
-    <string name="switch_start_finish">Cambiar inicio y final</string>
-    </resources>
+    <string name="rendering_attr_hideIcons_name">Ocultar iconos de PDI</string>
+    <string name="switch_start_finish">Invertir puntos de partida y destino</string>
+    <string name="number_of_contributors">Número de contribuidores</string>
+    <string name="number_of_edits">Número de editores</string>
+    <string name="reports_for">Reporte para:</string>
+</resources>
