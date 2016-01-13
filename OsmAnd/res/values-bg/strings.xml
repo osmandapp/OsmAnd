@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -2039,4 +2040,15 @@
     <string name="weekly">Всяка седмица</string>
     <string name="morning">Сутрин</string>
     <string name="Night">През нощта</string>
+<string name="switch_start_finish">Размяна на началната с крайна точка</string>
+    <string name="rendering_attr_hideIcons_name">Скриване на POI иконите</string>
+    <string name="item_deleted">Изтрито</string>
+    <string name="n_items_deleted">изтрити елемента</string>
+    <string name="shared_string_undo_all">ВРЪЩАНЕ НА ВСИЧКО</string>
+    <string name="shared_string_type">Тип</string>
+    <string name="starting_point">Начална точка</string>
+    <string name="select_month_and_country">Изберете месец и държава</string>
+    <string name="number_of_contributors">Брой участници</string>
+    <string name="number_of_edits">Брой редакции</string>
+    <string name="reports_for">Отчет за:</string>
 </resources>
