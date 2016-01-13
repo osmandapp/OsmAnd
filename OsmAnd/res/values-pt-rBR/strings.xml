@@ -1991,6 +1991,9 @@
     <string name="item_deleted">Item apagado</string>
     <string name="n_items_deleted">itens apagados</string>
     <string name="shared_string_undo_all">DESFAZER TUDO</string>
-    <string name="rendering_attr_hideIcons_name">Ocultar ícones</string>
-    <string name="switch_start_finish">Alternar iniciar e finalizar</string>
-    </resources>
+    <string name="rendering_attr_hideIcons_name">Ocultar ícones dos POIs</string>
+    <string name="switch_start_finish">Inverter pontos de partida e destino</string>
+    <string name="number_of_contributors">Número de contribuidores</string>
+    <string name="number_of_edits">Número de edições</string>
+    <string name="reports_for">Relatório para:</string>
+</resources>
