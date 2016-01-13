@@ -474,7 +474,7 @@ public class RoutePreferencesMenu {
 						update = true;
 					}
 					if (update) {
-						tg.updateRouteAndReferesh(true);
+						tg.updateRouteAndRefresh(true);
 					}
 				}
 			} else if (gpxParam.id == R.string.gpx_option_calculate_first_last_segment) {
@@ -572,7 +572,7 @@ public class RoutePreferencesMenu {
 			@Override
 			public boolean processResult(GPXUtilities.GPXFile[] result) {
 				mapActivity.getMapActions().setGPXRouteParams(result[0]);
-				app.getTargetPointsHelper().updateRouteAndReferesh(true);
+				app.getTargetPointsHelper().updateRouteAndRefresh(true);
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();
 				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();

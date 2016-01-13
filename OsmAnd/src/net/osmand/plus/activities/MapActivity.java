@@ -457,7 +457,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		if (routingHelper.isFollowingMode()
 				&& (!Algorithms.objectEquals(targets.getPointToNavigate().point, routingHelper.getFinalLocation()) || !Algorithms
 				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
-			targets.updateRouteAndReferesh(true);
+			targets.updateRouteAndRefresh(true);
 		}
 		app.getLocationProvider().resumeAllUpdates();
 
