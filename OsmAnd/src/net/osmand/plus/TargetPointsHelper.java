@@ -11,6 +11,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapUtils;
 import android.content.Context;
 
@@ -226,6 +227,11 @@ public class TargetPointsHelper {
 	}
 
 	public void updateRouteAndReferesh(boolean updateRoute) {
+		//Issue 2136
+		if (pointToNavigate == null) {
+			mapActivity.getMapActions().stopNavigationWithoutConfirm();
+		}
+
 		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
 				routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
 			updateRoutingHelper();
