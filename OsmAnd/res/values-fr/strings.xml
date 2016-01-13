@@ -2113,4 +2113,7 @@
     <string name="shared_string_type">Type</string>
     <string name="switch_start_finish">Inverser Départ et Destination</string>
     <string name="rendering_attr_hideIcons_name">Masquer les icônes des PI</string>
-    </resources>
+    <string name="number_of_contributors">Nombre de contributeurs</string>
+    <string name="number_of_edits">Nombre de modifications</string>
+    <string name="reports_for">Signaler pour :</string>
+</resources>
