@@ -1185,11 +1185,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					newRouteIsCalculated(false, new ValueHolder<Boolean>());
 					getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
 
-					//Fix for Issue 2136(b), but see more global fix in TargetPointsHelper
-					//if (mapActivity.getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
-					//	mapActivity.getMapActions().stopNavigationWithoutConfirm();
-					//}
-
 					if (swipeDismissListener != null) {
 						swipeDismissListener.setEnabled(true);
 					}
