@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -2110,4 +2111,6 @@
     <string name="rec_split_storage_size">Taille de l\'espace de stockage</string>
     <string name="rec_split_storage_size_desc">Espace maximum alloué pour tous les enregistrements</string>
     <string name="shared_string_type">Type</string>
+    <string name="switch_start_finish">Inverser Départ et Destination</string>
+    <string name="rendering_attr_hideIcons_name">Masquer les icônes de PI</string>
     </resources>
