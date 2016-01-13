@@ -6,7 +6,6 @@
               android:layout_height="match_parent"
               android:gravity="center"
               android:paddingRight="0dp"
-              android:background="@drawable/abc_spinner_mtrl_am_alpha"
               style="?android:attr/spinnerItemStyle">
 
     <TextView
