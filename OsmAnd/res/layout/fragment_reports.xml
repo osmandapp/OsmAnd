@@ -18,9 +18,10 @@
         <TextView
             android:layout_height="48dp"
             android:layout_columnSpan="2"
-            android:gravity="center_vertical"
             android:layout_marginRight="16dp"
-            android:text="@string/select_month_and_country"/>
+            android:gravity="center_vertical"
+            android:text="@string/select_month_and_country"
+            android:textColor="?android:textColorPrimary"/>
 
         <View
             android:layout_height="1dp"
@@ -76,13 +77,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number of contributors"/>
+                android:text="@string/number_of_contributors"
+                android:textSize="@dimen/default_sub_text_size"/>
 
             <TextView
                 android:id="@+id/contributorsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="65"/>
+                android:textColor="?android:textColorPrimary"
+                tools:text="65"/>
         </LinearLayout>
 
         <View
@@ -105,13 +108,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number of edits"/>
+                android:text="@string/number_of_edits"
+                android:textSize="@dimen/default_sub_text_size"/>
 
             <TextView
                 android:id="@+id/editsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1125"/>
+                android:textColor="?android:textColorPrimary"
+                tools:text="1125"/>
         </LinearLayout>
     </GridLayout>
 
