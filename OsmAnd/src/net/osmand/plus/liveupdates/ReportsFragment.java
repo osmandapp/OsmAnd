@@ -12,14 +12,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.liveupdates.network.GetJsonAsyncTask;
 import net.osmand.plus.liveupdates.network.Protocol;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -52,7 +56,7 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		regionReportsSpinner = (Spinner) view.findViewById(R.id.regionReportsSpinner);
 		ArrayAdapter<String> regionsForReportsAdapter =
 				new ArrayAdapter<String>(getActivity(), R.layout.reports_for_spinner_item,
-						android.R.id.text1, new String[]{"Worldwide"});
+						android.R.id.text1, getCountriesList(getMyApplication()));
 		regionsForReportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		regionReportsSpinner.setAdapter(regionsForReportsAdapter);
 
@@ -137,4 +141,24 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private static List<String> getCountriesList(OsmandApplication ctx) {
+		DownloadResources root = ctx.getDownloadThread().getIndexes();
+		ArrayList<String> namesList = new ArrayList<>();
+		processGroup(root, namesList, ctx);
+		return namesList;
+	}
+
+	private static void processGroup(DownloadResourceGroup group, List<String> nameList,
+									 Context context) {
+		if (group.getType().isScreen() && group.getParentGroup() != null
+				&& group.getParentGroup().getParentGroup() != null) {
+			nameList.add(group.getName(context));
+		}
+
+		if (group.getGroups() != null) {
+			for (DownloadResourceGroup g : group.getGroups()) {
+				processGroup(g, nameList, context);
+			}
+		}
+	}
 }
