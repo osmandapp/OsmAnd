@@ -51,8 +51,8 @@ public class ReportsFragment extends BaseOsmAndFragment {
 
 		regionReportsSpinner = (Spinner) view.findViewById(R.id.regionReportsSpinner);
 		ArrayAdapter<String> regionsForReportsAdapter =
-				new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
-						new String[]{"Worldwide"});
+				new ArrayAdapter<String>(getActivity(), R.layout.reports_for_spinner_item,
+						android.R.id.text1, new String[]{"Worldwide"});
 		regionsForReportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		regionReportsSpinner.setAdapter(regionsForReportsAdapter);
 
@@ -90,8 +90,12 @@ public class ReportsFragment extends BaseOsmAndFragment {
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override
 					public void onResponse(Protocol.TotalChangesByMonthResponse response) {
-						contributorsTextView.setText(String.valueOf(response.users));
-						editsTextView.setText(String.valueOf(response.changes));
+						if (contributorsTextView != null) {
+							contributorsTextView.setText(String.valueOf(response.users));
+						}
+						if (editsTextView != null) {
+							editsTextView.setText(String.valueOf(response.changes));
+						}
 					}
 				};
 		requestData(monthUrlString, regionUrlString, onResponseListener);

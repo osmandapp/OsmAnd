@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:paddingRight="0dp"
+              android:background="@drawable/abc_spinner_mtrl_am_alpha"
+              style="?android:attr/spinnerItemStyle">
+
+    <TextView
+        android:text="Report for:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_gravity="fill_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Worldwide"/>
+
+</LinearLayout>
