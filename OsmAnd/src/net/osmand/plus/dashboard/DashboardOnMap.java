@@ -1223,6 +1223,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void deleteWaypoint(int position) {
 		if (swipeDismissListener != null) {
 			swipeDismissListener.delete(position);
+			//Issue 2136(b)
+			if (mapActivity.getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
+				mapActivity.getMapActions().stopNavigationWithoutConfirm();
+			}
 		}
 	}
 }
