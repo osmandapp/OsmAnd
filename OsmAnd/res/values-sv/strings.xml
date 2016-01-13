@@ -2064,5 +2064,6 @@
     <string name="item_deleted">post raderad</string>
     <string name="n_items_deleted">poster raderade</string>
     <string name="shared_string_undo_all">ÅNGRA ALLA</string>
-    <string name="rendering_attr_hideIcons_name">Dölj ikonerna</string>
+    <string name="rendering_attr_hideIcons_name">Dölj POI-ikoner</string>
+    <string name="switch_start_finish">Skifta startpunkt och destination</string>
     </resources>
