@@ -1997,5 +1997,8 @@
     <string name="starting_point">Startpunkt</string>
     <string name="shared_string_undo_all">Alles rückgängig machen</string>
     <string name="rendering_attr_hideIcons_name">POI Symbole ausblenden</string>
-    <string name="switch_start_finish">Startpunkt und Ziel vertauschen</string>
+    <string name="switch_start_finish">Startpunkt und Ziel tauschen</string>
+<string name="number_of_edits">Anzahl der Bearbeitungen</string>
+    <string name="number_of_contributors">Anzahl der Mitwirkenden</string>
+    <string name="reports_for">Bericht für:</string>
 </resources>
