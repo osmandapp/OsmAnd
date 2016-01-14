@@ -25,10 +25,8 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.animation.AnimatorCompatHelper;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -568,8 +566,6 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				if (mSwipePaused) {
 					return false;
 				}
-
-				// TODO: ensure this is a finger, and set a flag
 
 				// Find the child view that was touched (perform a hit test)
 				Rect rect = new Rect();
