@@ -611,11 +611,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (switched) {
 			mapControlsLayer.switchToRouteFollowingLayout();
 		}
-		//Fix for Issue 2136(a)
-		//commented out for now, because it inhibits automatic route calcluation after destination is selected by "Select on map" method
-		//if (getTargets().getPointToNavigate() == null) {
-		//	mapActivity.getMapActions().stopNavigationWithoutConfirm();
-		//}
+		if (getTargets().getPointToNavigate() == null && !selectFromMapTouch) {
+			mapActivity.getMapActions().stopNavigationWithoutConfirm();
+		}
 	}
 
 	public void show() {
