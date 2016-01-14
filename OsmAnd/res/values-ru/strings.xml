@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
-    <string name="rendering_attr_hideIcons_name">Скрыть значки</string>
+    <string name="rendering_attr_hideIcons_name">Скрыть значки POI</string>
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
     <string name="av_video_quality_low">Низкое качество</string>
     <string name="av_video_quality_high">Высокое качество</string>
@@ -1812,8 +1813,8 @@
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Обновить все (%1$s МБ)</string>
     <string name="free_downloads_used">Использовано бесплатных загрузок</string>
-    <string name="free_downloads_used_description">Вы можете посмотреть сколько бесплатных загрузок вы использовали</string>
-    <string name="share_geo">гео:</string>
+    <string name="free_downloads_used_description">Отображать сколько бесплатных загрузок использовано</string>
+    <string name="share_geo"/>
     <string name="share_menu_location">Поделиться местоположением</string>
     <string name="shared_string_send">Отправить</string>
     <string name="application_dir_description">Выберите, где вы хотите сохранить файлы карт.</string>
@@ -1886,4 +1887,12 @@
     <string name="select_month_and_country">Выберите месяц и страну</string>
 <string name="poi_dialog_reopen">Открыть повторно</string>
     <string name="impassable_road_desc">Выберите дороги, которых следует избегать при навигации</string>
+    <string name="shared_string_undo_all">ОТМЕНИТЬ ВСЁ</string>
+    <string name="shared_string_type">Тип</string>
+    <string name="share_osm_edits_subject">OSM правки отправлены через OsmAnd</string>
+    <string name="update_time">Время обновления</string>
+    <string name="number_of_contributors">Количество участников</string>
+    <string name="number_of_edits">Количество правок</string>
+    <string name="Night">Ночь</string>
+    <string name="morning">Утро</string>
     </resources>
