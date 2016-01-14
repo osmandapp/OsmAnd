@@ -1646,7 +1646,7 @@
     <string name="rendering_attr_pisteGrooming_name">Piste da fondo</string>
     <string name="free">"Libera %1$s "</string>
     <string name="device_memory">Memoria dispositivo</string>
-    <string name="rendering_attr_pisteRoutes_name">Discese sciistiche</string>
+    <string name="rendering_attr_pisteRoutes_name">Piste da sci</string>
     <string name="roads_only">Solo strade</string>
     <string name="watch">Guarda</string>
     <string name="notes">Note</string>
@@ -2141,4 +2141,5 @@
     <string name="switch_start_finish">Inverti punti di partenza e destinazione</string>
     <string name="rendering_attr_hideIcons_name">Nascondi le icone dei PDI</string>
     <string name="number_of_edits">Numero di modifiche</string>
+    <string name="number_of_contributors">Numero di contributori</string>
     </resources>

@@ -1872,4 +1872,40 @@
 	<string name="poi_content_manure">Contenu : fumier</string>
 	<string name="poi_nudism_permissive">Nudisme autorisé</string>
 
+	<string name="poi_construction_yes">En cours de construction</string>
+	<string name="poi_dolphin">Duc-d’Albe</string>
+
+	<string name="poi_official_name">Nom officiel</string>
+
+	<string name="poi_rc_car">Courses de voitures radio-commandées</string>
+	<string name="poi_futsal">Football en salle</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_badminton">Badminton</string>
+	<string name="poi_karting">Karting</string>
+	<string name="poi_fitness">Remise en forme</string>
+
+	<string name="poi_water_heater_yes">Chauffe-eau : Oui</string>
+	<string name="poi_water_heater_no">Chauffe-eau : non</string>
+
+	<string name="poi_parking_surface">Type : surface</string>
+	<string name="poi_historic_civilization_prehistoric">Civilisation : préhistorique</string>
+	<string name="poi_historic_civilization_roman">Civilisation : romaine</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilisation : ancienne égypte (jusqu\'en 332 av. J.-C.)</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilisations : grecque égyptienne (332 av. J.C. – 30 av. J.C.)</string>
+	<string name="poi_animal_training">Formation animale</string>
+	<string name="poi_animal_training_dog">Dressage de chiens</string>
+	<string name="poi_animal_training_horse">Entrainement de chevaux</string>
+
+	<string name="poi_surveillance_public">Surveillance : publique</string>
+
+	<string name="poi_historic_manor">Manoir historique</string>
+	<string name="poi_castle_type_kremlin">Type de château : kremlin</string>
+	<string name="poi_sanitary_dump_station_yes">Station de vidange sanitaire : oui</string>
+	<string name="poi_sanitary_dump_station_no">Station de vidange sanitaire : non</string>
+	<string name="poi_sanitary_dump_station_customers">Station de vidange sanitaire : clients uniquement</string>
+	<string name="poi_refugee_no">Réfugiés : non</string>
+
+	<string name="poi_product_charcoal">Produit : charbon</string>
+	<string name="poi_tomb_war_grave">Type : tombe de guerre</string>
+	<string name="poi_surface_paving_stones">Surface : pavés</string>
 	</resources>

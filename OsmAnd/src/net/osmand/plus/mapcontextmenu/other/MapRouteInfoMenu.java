@@ -611,8 +611,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (switched) {
 			mapControlsLayer.switchToRouteFollowingLayout();
 		}
-		//Fix for Issue 2136(a)
-		if (getTargets().getPointToNavigate() == null) {
+		if (getTargets().getPointToNavigate() == null && !selectFromMapTouch) {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
 	}

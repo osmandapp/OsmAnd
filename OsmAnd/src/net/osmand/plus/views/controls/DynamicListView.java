@@ -310,7 +310,7 @@ public class DynamicListView extends ObservableListView {
 				tag.onClick();
 			}
 			touchEventsCancelled();
-			return true;
+			return super.onTouchEvent(event);
 		}
 
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {

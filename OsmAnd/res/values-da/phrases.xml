@@ -2642,4 +2642,7 @@
 <string name="poi_atm_yes">Hæveautomat: ja</string>
 	<string name="poi_atm_no">Hæveautomat: nej</string>
 
+<string name="poi_firepit">Bålplads</string>
+	<string name="poi_street_cabinet">Gadeskab</string>
+
 </resources>
