@@ -29,7 +29,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	
 	private OsmandMapTileView view;
 	private float[] calculations = new float[2];
-	
+
+	private Bitmap startPoint;
 	private Bitmap targetPoint;
 	private Bitmap intermediatePoint;
 	private Bitmap arrowToDestination;
@@ -59,6 +60,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		textPaint.setTextSize(sp * 18);
 		textPaint.setTextAlign(Align.CENTER);
 		textPaint.setAntiAlias(true);
+		startPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_intermediate_point);
 		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_target_point);
 		intermediatePoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_intermediate_point);
 		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
@@ -79,8 +81,21 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		if(tb.getZoom() < 3) {
 			return;
 		}
-		int index = 0;
+
 		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
+		TargetPoint pointToStart = targetPoints.getPointToStart();
+		if (pointToStart != null) {
+			if (isLocationVisible(tb, pointToStart)) {
+				int marginX = startPoint.getWidth() / 6;
+				int marginY = startPoint.getHeight();
+				int locationX = tb.getPixXFromLonNoRot(pointToStart.getLongitude());
+				int locationY = tb.getPixYFromLatNoRot(pointToStart.getLatitude());
+				canvas.rotate(-tb.getRotate(), locationX, locationY);
+				canvas.drawBitmap(startPoint, locationX - marginX, locationY - marginY, bitmapPaint);
+			}
+		}
+
+		int index = 0;
 		for (TargetPoint ip : targetPoints.getIntermediatePoints()) {
 			index ++;
 			if (isLocationVisible(tb, ip)) {
@@ -95,6 +110,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
+
 		TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
 		if (isLocationVisible(tb, pointToNavigate)) {
 			int marginX = targetPoint.getWidth() / 6;
@@ -104,6 +120,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			canvas.rotate(-tb.getRotate(), locationX, locationY);
 			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, bitmapPaint);
 		} 
+
 		Iterator<TargetPoint> it = targetPoints.getIntermediatePoints().iterator();
 		if(it.hasNext()) {
 			pointToNavigate = it.next();
