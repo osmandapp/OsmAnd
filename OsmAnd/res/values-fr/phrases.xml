@@ -1872,7 +1872,7 @@
 	<string name="poi_content_manure">Contenu : fumier</string>
 	<string name="poi_nudism_permissive">Nudisme autorisé</string>
 
-	<string name="poi_construction_yes">En cours de construction</string>
+	<string name="poi_construction_yes">En construction</string>
 	<string name="poi_dolphin">Duc-d’Albe</string>
 
 	<string name="poi_official_name">Nom officiel</string>
@@ -1884,13 +1884,13 @@
 	<string name="poi_karting">Karting</string>
 	<string name="poi_fitness">Remise en forme</string>
 
-	<string name="poi_water_heater_yes">Chauffe-eau : Oui</string>
+	<string name="poi_water_heater_yes">Chauffe-eau : oui</string>
 	<string name="poi_water_heater_no">Chauffe-eau : non</string>
 
 	<string name="poi_parking_surface">Type : surface</string>
 	<string name="poi_historic_civilization_prehistoric">Civilisation : préhistorique</string>
 	<string name="poi_historic_civilization_roman">Civilisation : romaine</string>
-	<string name="poi_historic_civilization_ancient_egyptian">Civilisation : ancienne égypte (jusqu\'en 332 av. J.-C.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilisation : Égypte antique (jusqu\'en 332 av. J.-C.)</string>
 	<string name="poi_historic_civilization_greek_egyptian">Civilisations : grecque égyptienne (332 av. J.C. – 30 av. J.C.)</string>
 	<string name="poi_animal_training">Formation animale</string>
 	<string name="poi_animal_training_dog">Dressage de chiens</string>
