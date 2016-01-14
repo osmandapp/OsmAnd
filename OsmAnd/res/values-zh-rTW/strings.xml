@@ -2073,4 +2073,7 @@
     <string name="shared_string_undo_all">全部取消</string>
     <string name="rendering_attr_hideIcons_name">隱藏 POI 圖示</string>
     <string name="switch_start_finish">起始點與目的地對調</string>
-    </resources>
+    <string name="number_of_contributors">貢獻者數</string>
+    <string name="number_of_edits">編輯次數</string>
+    <string name="reports_for">報告：</string>
+</resources>
