@@ -2609,4 +2609,7 @@
 	<string name="poi_forestry_allotment">Pôster: loteamento florestal</string>
 	<string name="poi_dolphin">Dolphin (náutico)</string>
 
-	</resources>
+	<string name="poi_firepit">Pira</string>
+	<string name="poi_street_cabinet">Gabinete de rua</string>
+
+</resources>
