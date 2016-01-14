@@ -2227,7 +2227,7 @@
     <string name="shared_string_undo_all">FORTRYD ALLE</string>
     <string name="rendering_attr_hideIcons_name">Skjul IP ikoner</string>
     <string name="switch_start_finish">Byt om på startpunkt og destination</string>
-    <string name="number_of_contributors">Antallet af bidragydere</string>
+    <string name="number_of_contributors">Antal bidragydere</string>
     <string name="number_of_edits">Antal redigeringer</string>
     <string name="reports_for">Rapport for:</string>
 </resources>
