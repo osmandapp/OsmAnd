@@ -760,6 +760,7 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper.setRoutePlanningMode(false);
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+		getMyApplication().getTargetPointsHelper().clearStartPoint(false);
 		mapActivity.updateApplicationModeSettings();
 		mapActivity.getDashboard().clearDeletedPoints();
 	}

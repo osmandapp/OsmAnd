@@ -390,6 +390,21 @@ public class WaypointDialogHelper {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
 								// switch start & finish
+								TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+								TargetPoint start =	targetPointsHelper.getPointToStart();
+								TargetPoint finish = targetPointsHelper.getPointToNavigate();
+								targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
+										finish.getLongitude()), false, finish.getPointDescription(ctx));
+								if (start == null) {
+									Location loc = app.getLocationProvider().getLastKnownLocation();
+									if (loc != null) {
+										targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
+												loc.getLongitude()), true, -1);
+									}
+								} else {
+									targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
+											start.getLongitude()), true, -1, start.getPointDescription(ctx));
+								}
 								return true;
 							}
 						});
