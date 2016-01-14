@@ -108,9 +108,7 @@ public class AlarmInfo implements LocationPoint {
 			alarmInfo = new AlarmInfo(AlarmInfoType.HAZARD, locInd);
 		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {
 			alarmInfo = new AlarmInfo(AlarmInfoType.RAILWAY, locInd);
-		// Issue 2141
-		//} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())){
-		} else if ("crossing".equals(ruleType.getTag()) && !"traffic_signals".equals(ruleType.getValue())){
+		} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())){
 			alarmInfo = new AlarmInfo(AlarmInfoType.PEDESTRIAN, locInd);
 		}
 		if(alarmInfo != null) {
