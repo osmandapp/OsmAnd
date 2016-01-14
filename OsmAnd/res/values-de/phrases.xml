@@ -2550,4 +2550,25 @@
 	<string name="poi_lacrosse">Lacrosse</string>
 	<string name="poi_official_name">Offizieller Name</string>
 
+<string name="poi_seamark_dyke">Seezeichen Deich</string>
+	<string name="poi_dolphin">Dalbe</string>
+
+	<string name="poi_forestry_compartment">Wegweiser: Forstwirtschaft</string>
+	<string name="poi_forestry_allotment">Wegweiser: Forstwirtschaft Zuteilung</string>
+	<string name="poi_inscription_n">Inschrift: N</string>
+	<string name="poi_inscription_nw">Inschrift: NW</string>
+	<string name="poi_inscription_w">Inschrift: W</string>
+	<string name="poi_inscription_sw">Inschrift: SW</string>
+	<string name="poi_inscription_s">Inschrift: S</string>
+	<string name="poi_inscription_se">Inschrift: SO</string>
+	<string name="poi_inscription_e">Inschrift: O</string>
+	<string name="poi_inscription_ne">Inschrift: NO</string>
+
+	<string name="poi_construction_yes">Im Bau</string>
+	<string name="poi_atm_yes">Geldautomat: Ja</string>
+	<string name="poi_atm_no">Geldautomat: Nein</string>
+
+	<string name="poi_firepit">Feuergrube</string>
+	<string name="poi_street_cabinet">Verteilerkasten</string>
+
 </resources>
