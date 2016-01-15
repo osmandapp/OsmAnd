@@ -246,6 +246,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 											onItemsSwapped(stableAdapter.getActiveObjects());
 										}
 									}
+
+									@Override
+									public String getTitle() {
+										if (visibleType == DashboardType.WAYPOINTS
+												&& (getMyApplication().getRoutingHelper().isRoutePlanningMode() || getMyApplication().getRoutingHelper().isFollowingMode())
+												&& item != null
+												&& stableAdapter.getActiveObjects().size() == 0) {
+											return mapActivity.getResources().getString(R.string.cancel_navigation);
+										} else {
+											return null;
+										}
+									}
 								};
 							}
 
@@ -255,6 +267,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 									StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
 									stableAdapter.refreshData();
 									onItemsSwapped(stableAdapter.getActiveObjects());
+									if (stableAdapter.getActiveObjects().size() == 0) {
+										hideDashboard();
+										mapActivity.getMapActions().stopNavigationWithoutConfirm();
+										mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
+									}
 								}
 							}
 						});

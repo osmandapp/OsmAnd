@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1906,4 +1907,15 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="weekly">Cada setmana</string>
     <string name="morning">Matí</string>
     <string name="Night">Nit</string>
+<string name="switch_start_finish">Intercanvi entre punts origen i destinació</string>
+    <string name="rendering_attr_hideIcons_name">Amaga les icones dels PDI</string>
+    <string name="item_deleted">Element suprimit</string>
+    <string name="n_items_deleted">elements suprimits</string>
+    <string name="shared_string_undo_all">DESFÉS-HO TOT</string>
+    <string name="shared_string_type">Tipus</string>
+    <string name="starting_point">Punt d\'inici</string>
+    <string name="select_month_and_country">Seleccioneu el mes i el país</string>
+    <string name="number_of_contributors">Nombre de col·laboradors</string>
+    <string name="number_of_edits">Nombre d\'edicions</string>
+    <string name="reports_for">Informe per:</string>
 </resources>
