@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -2081,4 +2082,9 @@
     <string name="shared_string_undo_all">ANNUDDA TOTU</string>
     <string name="rec_split">Intervallu de registratzione</string>
     <string name="rec_split_title">Imprea un’intervallu de registratzione</string>
-    </resources>
+    <string name="switch_start_finish">Furria puntos de incumintzu e destinatzione</string>
+    <string name="rendering_attr_hideIcons_name">Cua sas iconas de sos PDI</string>
+    <string name="number_of_contributors">Nùmeru de cuntribuidores</string>
+    <string name="number_of_edits">Nùmeru de modìficas</string>
+    <string name="reports_for">Sinnala pro:</string>
+</resources>
