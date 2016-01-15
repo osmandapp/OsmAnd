@@ -2645,8 +2645,8 @@
 <string name="poi_firepit">Bålplads</string>
 	<string name="poi_street_cabinet">Gadeskab</string>
 
-<string name="poi_fair_trade_yes">Fair trade: ja</string>
-	<string name="poi_fair_trade_no">Fair trade: nej</string>
+<string name="poi_fair_trade_yes">Fairtrade: ja</string>
+	<string name="poi_fair_trade_no">Fairtrade: nej</string>
 	<string name="poi_fair_trade_only">Kun fairtrade-produkter</string>
 
 </resources>
