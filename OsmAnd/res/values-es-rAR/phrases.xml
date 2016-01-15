@@ -2617,4 +2617,8 @@
 <string name="poi_firepit">Lugar para fogata</string>
 	<string name="poi_street_cabinet">Gabinete exterior</string>
 
+<string name="poi_fair_trade_yes">Comercio justo: Sí</string>
+	<string name="poi_fair_trade_no">Comercio justo: No</string>
+	<string name="poi_fair_trade_only">Sólo productos de comercio justo</string>
+
 </resources>
