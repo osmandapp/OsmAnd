@@ -667,7 +667,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
-		optionsMenuHelper.item(R.string.osm_live).iconColor(R.drawable.ic_configure_screen_dark)
+		optionsMenuHelper.item(R.string.osm_live).iconColor(R.drawable.ic_action_osm_live)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
