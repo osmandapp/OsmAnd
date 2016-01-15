@@ -146,6 +146,17 @@ public class RoutePreferencesMenu {
 		settings.INTERRUPT_MUSIC.set(mt);
 	}
 
+	private void doSelectVoiceGuidance() {
+		selectVoiceGuidance(mapActivity, new CallbackWithObject<String>() {
+			@Override
+			public boolean processResult(String result) {
+				applyVoiceProvider(mapActivity, result);
+				updateParameters();
+				return true;
+			}
+		});
+	}
+
 	private void selectRestrictedRoads() {
 		mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
 		controlsLayer.getMapRouteInfoMenu().hide();
@@ -247,8 +258,7 @@ public class RoutePreferencesMenu {
 					final CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
 					btn.performClick();
 				} else if (obj instanceof VoiceGuidanceRoutingParameter) {
-					final TextView btn = (TextView) view.findViewById(R.id.select_button);
-					btn.performClick();
+					doSelectVoiceGuidance();
 				} else if (obj instanceof InterruptMusicRoutingParameter) {
 					final CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
 					btn.performClick();
@@ -344,14 +354,7 @@ public class RoutePreferencesMenu {
 					btn.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							selectVoiceGuidance(mapActivity, new CallbackWithObject<String>() {
-								@Override
-								public boolean processResult(String result) {
-									applyVoiceProvider(mapActivity, result);
-									updateParameters();
-									return true;
-								}
-							});
+							doSelectVoiceGuidance();
 						}
 					});
 
