@@ -730,7 +730,7 @@
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="srtm_paid_version_msg">Considere la compra del complemento de curvas de nivel en la Tienda para apoyar desarrollos adicionales.</string>
-    <string name="av_def_action_choose">Elige a petición</string>
+    <string name="av_def_action_choose">Elegir a petición</string>
     <string name="av_def_action_video">Grabar video</string>
     <string name="av_def_action_audio">Grabar audio</string>
     <string name="av_widget_action_descr">Elige la acción predeterminada</string>
@@ -808,7 +808,7 @@
     <string name="intermediate_point_too_far">Destino intermedio, %1$s demasiado lejos del camino.</string>
     <string name="arrived_at_intermediate_point">Llegó a su destino intermedio</string>
     <string name="context_menu_item_intermediate_point">Añadir como destino intermedio</string>
-    <string name="map_widget_intermediate_distance">destino intermedio</string>
+    <string name="map_widget_intermediate_distance">Destino intermedio</string>
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
     <string name="add_tag">Añadir Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
