@@ -1928,4 +1928,22 @@
 	<string name="poi_payment_cryptocurrencies_no">Cryptomonnaies non acceptées</string>
 	<string name="poi_payment_others_yes">Autres modes de paiement acceptés</string>
 	<string name="poi_payment_others_no">Autres modes de paiement non acceptés</string>
+	<string name="poi_trees_persimmon">Plaqueminier</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_nectorine">Pêcher</string>
+	<string name="poi_trees_pomegranate">Grenadier</string>
+
+	<string name="poi_animal_shelter">Refuge pour animaux</string>
+	<string name="poi_watering_place">Abreuvoir</string>
+	<string name="poi_animal_boarding">Pension animale</string>
+	<string name="poi_fuel_wood">Combustible : bois</string>
+	<string name="poi_fuel_charcoal">Combustible : charbon de bois</string>
+	<string name="poi_fuel_coal">Combustible : charbon</string>
+
+	<string name="poi_crop_corn">Cultures : maïs</string>
+	<string name="poi_crop_soy">Culture : soja</string>
+	<string name="poi_crop_hop">Culture : houblon</string>
+	<string name="poi_crop_cranberry">Culture : canneberge</string>
+	<string name="poi_social_facility_food_bank">Service social: Banque alimentaire</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilisation : Grèce antique</string>
 	</resources>
