@@ -1021,7 +1021,7 @@
 	<string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen</string>
 	<string name="shared_string_control_stop">Stopp</string>
 	<string name="av_settings">Audio/Video-Einstellungen</string>
-	<string name="shared_string_control_start">Starte</string>
+	<string name="shared_string_control_start">Starten</string>
 	<string name="av_def_action_picture">Foto aufnehmen</string>
 	<string name="av_use_external_camera_descr">Externe Systemkamera für Fotoaufnahmen verwenden</string>
 	<string name="av_use_external_camera">Systemkamera</string>
@@ -1204,7 +1204,7 @@
 	<string name="routing_attr_short_way_description">Kürzeste Strecke benutzen</string>
 	<string name="routing_attr_avoid_toll_name">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_toll_description">Mautstraßen vermeiden</string>
-	<string name="routing_attr_avoid_unpaved_name">Unbefestigte Wege meiden</string>
+	<string name="routing_attr_avoid_unpaved_name">Unbefestigte Wege vermeiden</string>
 	<string name="routing_attr_avoid_unpaved_description">Unbefestigte Wege meiden</string>
 	<string name="routing_attr_avoid_ferries_name">Fähren vermeiden</string>
 	<string name="routing_attr_avoid_ferries_description">Fähren vermeiden</string>

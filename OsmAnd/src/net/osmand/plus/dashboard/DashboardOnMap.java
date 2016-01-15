@@ -1200,7 +1200,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					}
 					getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, false);
 					newRouteIsCalculated(false, new ValueHolder<Boolean>());
-					getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
+					getMyApplication().getTargetPointsHelper().updateRouteAndRefresh(true);
 
 					if (swipeDismissListener != null) {
 						swipeDismissListener.setEnabled(true);

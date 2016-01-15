@@ -47,7 +47,7 @@
 	<string name="poi_bakery">Bäckerei</string>
 	<string name="poi_bank">Bank</string>
 	<string name="poi_bar">Bar</string>
-	<string name="poi_barbecue">Barbecue</string>
+	<string name="poi_barbecue">Grillplatz</string>
 	<string name="poi_baseball">Baseball</string>
 	<string name="poi_craft_basket_maker">Korbflechter</string>
 	<string name="poi_basketball">Basketball</string>
@@ -126,26 +126,26 @@
 	<string name="poi_club_astronomy">Sternkundeverein</string>
 	<string name="poi_club_automobile">Automobilklub</string>
 	<string name="poi_club_board_games">Brettspielverein</string>
-	<string name="poi_club_charity">Wohltätigkeitsklub</string>
-	<string name="poi_club_chess">Schachklub</string>
+	<string name="poi_club_charity">Wohlfahrtsverein</string>
+	<string name="poi_club_chess">Schachverein</string>
 	<string name="poi_club_cinema">Kino</string>
 	<string name="poi_club_computer">Computer-Klub</string>
 	<string name="poi_club_ethnic">Folklore</string>
 	<string name="poi_club_fan">Fanklub</string>
-	<string name="poi_club_fishing">Fischklub</string>
+	<string name="poi_club_fishing">Fischereiverein</string>
 	<string name="poi_club_game">Spielklub</string>
 	<string name="poi_club_history">Geschichtsklub</string>
-	<string name="poi_club_hunting">Jagdtverein</string>
-	<string name="poi_club_linux">Linux Klub</string>
-	<string name="poi_club_motorcycle">Motorrad</string>
-	<string name="poi_club_music">Musikladen</string>
+	<string name="poi_club_hunting">Jagdverein</string>
+	<string name="poi_club_linux">Linux-Verein</string>
+	<string name="poi_club_motorcycle">Motorradverein</string>
+	<string name="poi_club_music">Musikverein</string>
 	<string name="poi_club_nature">Naturverein</string>
 	<string name="poi_club_photography">Fotographieklub</string>
-	<string name="poi_club_shooting">Sportschießen</string>
+	<string name="poi_club_shooting">Schützenverein</string>
 	<string name="poi_club_sport">Sportverein</string>
-	<string name="poi_club_theatre">Theaterklub</string>
+	<string name="poi_club_theatre">Theaterverein</string>
 	<string name="poi_club_tourism">Tourismusverein</string>
-	<string name="poi_club_veterans">Veteranenklub</string>
+	<string name="poi_club_veterans">Veteranenverein</string>
 	<string name="poi_college">Hochschule</string>
 	<string name="poi_communication_tower">Kommunikationsturm</string>
 	<string name="poi_community_centre">Gemeindezentrum</string>
@@ -240,7 +240,7 @@
 	<string name="poi_hamlet">Weiler</string>
 	<string name="poi_handball">Handball</string>
 	<string name="poi_craft_handicraft">Kunsthandwerk</string>
-	<string name="poi_hardware">Eisenhandlung</string>
+	<string name="poi_hardware">Eisenwarenhandlung</string>
 	<string name="poi_healthcare_alternative">Alternativmedizin</string>
 	<string name="poi_healthcare_centre">Gesundheitszentrum</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitation</string>
@@ -258,14 +258,14 @@
 	<string name="poi_hot_spring">Heiße Quellen</string>
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_houseware">Haushaltsgeräteladen</string>
-	<string name="poi_hunting">Jagdtausrüstung</string>
+	<string name="poi_hunting">Jagdausrüstung</string>
 	<string name="poi_hunting_stand">Jägerstand</string>
 	<string name="poi_craft_hvac">Heizung, Lüftung und Klimatisierung</string>
 	<string name="poi_ice_cream">Eisdiele</string>
 	<string name="poi_ice_rink">Eislaufbahn</string>
 	<string name="poi_ice_skating">Eislaufen</string>
 	<string name="poi_ice_stock">Eisstockschießen</string>
-	<string name="poi_craft_insulation">Schutz</string>
+	<string name="poi_craft_insulation">Gebäudedämmung</string>
 	<string name="poi_insurance">Versicherung</string>
 	<string name="poi_interior_decoration">Innenausstatter</string>
 	<string name="poi_internet_cafe">Internet Cafe</string>
@@ -322,9 +322,9 @@
 	<string name="poi_mountain_pass">Passstraße</string>
 	<string name="poi_sport_multi">Multi-Sport</string>
 	<string name="poi_museum">Museum</string>
-	<string name="poi_musical_instrument">Musikgeschäft</string>
+	<string name="poi_musical_instrument">Musikinstrumentegeschäft</string>
 	<string name="poi_nature_reserve">Naturschutzgebiet</string>
-	<string name="poi_neighbourhood">Wohngegend</string>
+	<string name="poi_neighbourhood">Nachbarschaft</string>
 	<string name="poi_newsagent">Nachrichtenagentur</string>
 	<string name="poi_newspaper">Zeitungsbüro</string>
 	<string name="poi_ngo">NGO</string>
@@ -347,7 +347,7 @@
 	<string name="poi_park">Park</string>
 	<string name="poi_parking">Parkplatz</string>
 	<string name="poi_parking_entrance">Parkeinfahrt</string>
-	<string name="poi_craft_parquet_layer">Parkettläger</string>
+	<string name="poi_craft_parquet_layer">Parkettleger</string>
 	<string name="poi_pawnbroker">Pfandleiher</string>
 	<string name="poi_peak">Berggipfel</string>
 	<string name="poi_pelota">Pelota</string>
@@ -404,7 +404,7 @@
 	<string name="poi_recycling">Abfallverwertung</string>
 	<string name="poi_reef">Riff</string>
 	<string name="poi_register_office">Standesamt</string>
-	<string name="poi_research">Forschungszentrum</string>
+	<string name="poi_research">Forschungseinrichtung</string>
 	<string name="poi_resort">Urlaubsort</string>
 	<string name="poi_restaurant">Restaurant</string>
 	<string name="poi_ridge">Bergrücken</string>
@@ -498,14 +498,14 @@
 	<string name="poi_sports">Sportartikel</string>
 	<string name="poi_spring">Quelle</string>
 	<string name="poi_stadium">Stadion</string>
-	<string name="poi_craft_stand_builder">Baumeister</string>
+	<string name="poi_craft_stand_builder">Messebauer</string>
 	<string name="poi_standpipe">Brunnen</string>
 	<string name="poi_stationery">Bürobedarf</string>
 	<string name="poi_stone">Auffallender Stein</string>
 	<string name="poi_craft_stonemason">Steinmetz</string>
 	<string name="poi_strait">Straße</string>
 	<string name="poi_stream">Bach</string>
-	<string name="poi_stripclub">Stripclub</string>
+	<string name="poi_stripclub">Striplokal</string>
 	<string name="poi_studio">Studio</string>
 	<string name="poi_suburb">Stadtteil</string>
 	<string name="poi_subway_entrance">U-Bahnhofeingang</string>
@@ -749,7 +749,7 @@
 	<string name="poi_fee_yes">Gebühr</string>
 
 	<string name="poi_brand">Marke</string>
-	<string name="poi_maxweight">Maximalgewicht</string>
+	<string name="poi_maxweight">Höchstgewicht</string>
 	<string name="poi_operator">Betreiber</string>
 	<string name="poi_disused">Eingestellt</string>
 
@@ -1104,7 +1104,7 @@
 	<string name="poi_genus">Gattung</string>
 	<string name="poi_trees_olive">Olivenbaum</string>
 	<string name="poi_trees_apple">Apfelbaum</string>
-	<string name="poi_trees_oil">Palmölbaum</string>
+	<string name="poi_trees_oil">Ölpalmen</string>
 	<string name="poi_trees_orange">Orangenbaum</string>
 	<string name="poi_trees_almond">Mandel</string>
 	<string name="poi_trees_banana">Banane</string>
@@ -1181,7 +1181,7 @@
 	<string name="poi_icao">ICAO Code</string>
 	<string name="poi_faa">FAA Code</string>
 	
-	<string name="poi_width">Weite</string>
+	<string name="poi_width">Breite</string>
 
 	<string name="poi_architect_name">Architekt</string>
 
@@ -1203,17 +1203,17 @@
 	<string name="poi_fuel_100ll">100LL Kraftstoff</string>
 	<string name="poi_fuel_autogas">Autogas</string>
 	<string name="poi_fuel_jeta1">Flugzeug A-1 Kraftstoff</string>
-	<string name="poi_fuel_adblue">AdBlue Kraftstoff</string>
+	<string name="poi_fuel_adblue">AdBlue (Harnstoff)</string>
 
 	<string name="poi_fuel_wood">Kraftstoff: Holz</string>
 	<string name="poi_street_lamp">Strassenlaterne</string>
 
-	<string name="poi_clothes_women">Frauenkleidung</string>
+	<string name="poi_clothes_women">Damenbekleidung</string>
 	<string name="poi_clothes_underwear">Unterwäsche</string>
-	<string name="poi_clothes_men">Herrenkleidung</string>
-	<string name="poi_clothes_wedding">Hochzeitskleidung</string>
-	<string name="poi_clothes_sports">Sportkleidung</string>
-	<string name="poi_clothes_babies">Kinderkleidung</string>
+	<string name="poi_clothes_men">Herrenbekleidung</string>
+	<string name="poi_clothes_wedding">Hochzeitsbekleidung</string>
+	<string name="poi_clothes_sports">Sportbekleidung</string>
+	<string name="poi_clothes_babies">Babybekleidung</string>
 	<string name="poi_clothes_workwear">Arbeitskleidung</string>
 	<string name="poi_clothes_hats">Hüte</string>
 	<string name="poi_clothes_leather">Leder</string>
@@ -1222,7 +1222,7 @@
 	<string name="poi_clothes_suits">Anzüge</string>
 	<string name="poi_clothes_oversize">Übergrößen</string>
 	<string name="poi_clothes_schoolwear">Schulkleidung</string>
-	<string name="poi_clothes_swimwear">Schwimmkleidung</string>
+	<string name="poi_clothes_swimwear">Bademode</string>
 	<string name="poi_clothes_socks">Socken</string>
 	<string name="poi_clothes_dance">Tanzkleidung</string>
 	<string name="poi_clothes_military">Militärkleidung</string>
@@ -1316,7 +1316,7 @@
 
 	<string name="poi_historic_railway_station">Historische Eisenbahnstation</string>
 
-	<string name="poi_club_sailing">Segelclub</string>
+	<string name="poi_club_sailing">Segelverein</string>
 	<string name="poi_historic_railway">Historische Eisenbahn</string>
 
 	<string name="poi_artist_name">Künstler</string>
@@ -1387,7 +1387,7 @@
 	<string name="poi_information_wildlife">Informationspunkt: Wildleben</string>
 	<string name="poi_information_history">Informationspunkt: Historie</string>
 	<string name="poi_information_sign">Schild</string>
-	<string name="poi_information_audioguide">Audioerklärung</string>
+	<string name="poi_information_audioguide">Sprachführer</string>
 	<string name="poi_information_bicyclemap">Fahrradkarte</string>
 	<string name="poi_board_type_plants">Informationspunkt: Pflanzen</string>
 	<string name="poi_board_type_geology">Informationspunkt: geologisch</string>
@@ -1607,7 +1607,7 @@
 
 	<string name="poi_historic_farm">Historischer Bauernhof</string>
 	<string name="poi_club_freemasonry">Freimaurerloge</string>
-	<string name="poi_club_scout">Scout-Club</string>
+	<string name="poi_club_scout">Pfadfinderverein</string>
 
 	<string name="poi_historic_threshing_floor">Historische Tenne</string>
 	<string name="poi_historic_gallows">Historischer Galgen</string>
@@ -1735,7 +1735,7 @@
 	<string name="poi_toll_hgv_yes">LKW Maut</string>
 	<string name="poi_tactile_paving_yes">Mit Blindenleitsystem</string>
 	<string name="poi_tactile_paving_no">Ohne Blindenleitsystem</string>
-	<string name="poi_traffic_signals_sound_walk">Ton signalisiert sicheres weitergehen</string>
+	<string name="poi_traffic_signals_sound_walk">Mit akustischem Freigabesignal</string>
 
 	<string name="poi_services">Raststätte</string>
 	<string name="poi_railway_level_crossing">Bahnübergang</string>
@@ -2046,7 +2046,7 @@
 	<string name="poi_memorial_prasat">Prasat</string>
 
 	<string name="poi_resource_barite">Baryt</string>
-	<string name="poi_wetland_string_bog">Springmoor</string>
+	<string name="poi_wetland_string_bog">Strangmoor</string>
 	<string name="poi_artwork_type_sculpture">Kunstart: Skulptur</string>
 	<string name="poi_artwork_type_statue">Kunstart: Statue</string>
 	<string name="poi_artwork_type_mural">Kunstart: Wandgemälde</string>
@@ -2097,7 +2097,7 @@
 	<string name="poi_bridge_structure_log">Brückenaufbau: Baumstamm</string>
 	<string name="poi_bridge_type_movable">Brückentyp: bewegliche</string>
 	<string name="poi_bridge_movable_bascule">Beweglicher Brückentyp: Klapbrücke</string>
-	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: Schwingbar</string>
+	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: schwenkbar</string>
 	<string name="poi_bridge_movable_lift">Beweglicher Brückentyp: Hochklappbar</string>
 	<string name="poi_bridge_movable_drawbridge">Beweglicher Brückentyp: Zugbrücke</string>
 	<string name="poi_bridge_movable_submersible">Beweglicher Brückentyp: Tauchbrücke</string>
@@ -2111,7 +2111,7 @@
 	<string name="poi_surface_paved">Oberfläche: befestigte</string>
 	<string name="poi_surface_asphalt">Oberfläche: Asphalt</string>
 	<string name="poi_surface_concrete">Oberfläche: Beton</string>
-	<string name="poi_surface_sett">Oberfläche: Bau</string>
+	<string name="poi_surface_sett">Oberfläche: Pflasterstein (behauen)</string>
 	<string name="poi_surface_cobblestone">Oberfläche: Kopfsteinpflaster</string>
 	<string name="poi_surface_paving_stones">Oberfläche: Pflastersteine</string>
 	<string name="poi_surface_pebblestone">Oberfläche: Kiesel</string>
@@ -2161,8 +2161,8 @@
 	<string name="poi_service_bicycle_cleaning_no">Fahrradreinigung: Nein</string>
 	<string name="poi_service_bicycle_chaintool_yes">FFahrradwerkzeugkette: Ja</string>
 	<string name="poi_service_bicycle_chaintool_no">Fahrradwerkzeugkette: Nein</string>
-	<string name="poi_service_bicycle_second_hand_yes">Einzelhandel mit Second-Hand-Fahrräder: Ja</string>
-	<string name="poi_service_bicycle_second_hand_no">Einzelhandel mit Second-Hand-Fahrräder: Nein</string>
+	<string name="poi_service_bicycle_second_hand_yes">Verkauf von Gebrauchtfahrräder: Ja</string>
+	<string name="poi_service_bicycle_second_hand_no">Verkauf von Gebrauchtfahrrädern: Nein</string>
 
 	<string name="poi_wildlife_hide">Wildbeobachtungsplatz</string>
 
@@ -2251,13 +2251,13 @@
 	<string name="poi_surveillance_outdoor">Überwachung: Außen</string>
 	<string name="poi_surveillance_public">Überwachung: offentlich</string>
 
-	<string name="poi_clothes_denim">Bekleidung aus Jeansstoff</string>
+	<string name="poi_clothes_denim">Jeansbekleidung</string>
 	<string name="poi_clothes_fur">Pelz</string>
-	<string name="poi_clothes_maternity">Schwangerschaftkleidung</string>
+	<string name="poi_clothes_maternity">Umstandsmode</string>
 	<string name="poi_clothes_vintage">Historische Bekleidung</string>
 	<string name="poi_clothes_shirts">Hemden</string>
 	<string name="poi_historic_manor">Historischer Gutshof</string>
-	<string name="poi_castle_type_stately">Burgtyp: stattlich</string>
+	<string name="poi_castle_type_stately">Burgtyp: Schloss</string>
 	<string name="poi_castle_type_defensive">Burgtyp: Verteidigung</string>
 	<string name="poi_castle_type_fortress">Burgtyp: Festung</string>
 	<string name="poi_castle_type_palace">Burgtyp: Palast</string>
@@ -2549,5 +2549,26 @@
 	<string name="poi_futsal">Futsal</string>
 	<string name="poi_lacrosse">Lacrosse</string>
 	<string name="poi_official_name">Offizieller Name</string>
+
+<string name="poi_seamark_dyke">Seezeichen Deich</string>
+	<string name="poi_dolphin">Dalbe</string>
+
+	<string name="poi_forestry_compartment">Wegweiser: Forstfach</string>
+	<string name="poi_forestry_allotment">Wegweiser: Forstwirtschaft Zuteilung</string>
+	<string name="poi_inscription_n">Inschrift: N</string>
+	<string name="poi_inscription_nw">Inschrift: NW</string>
+	<string name="poi_inscription_w">Inschrift: W</string>
+	<string name="poi_inscription_sw">Inschrift: SW</string>
+	<string name="poi_inscription_s">Inschrift: S</string>
+	<string name="poi_inscription_se">Inschrift: SO</string>
+	<string name="poi_inscription_e">Inschrift: O</string>
+	<string name="poi_inscription_ne">Inschrift: NO</string>
+
+	<string name="poi_construction_yes">Im Bau</string>
+	<string name="poi_atm_yes">Geldautomat: Ja</string>
+	<string name="poi_atm_no">Geldautomat: Nein</string>
+
+	<string name="poi_firepit">Feuergrube</string>
+	<string name="poi_street_cabinet">Verteilerkasten</string>
 
 </resources>

@@ -20,7 +20,10 @@ public class WorldRegion implements Serializable {
 	public static final String JAPAN_REGION_ID = "japan_asia";
 	public static final String SOUTH_AMERICA_REGION_ID = "southamerica";
 	protected static final String WORLD = "world";
-	
+
+	// Just a string constant
+	public static final String UNITED_KINGDOM_REGION_ID = "gb_europe";
+
 	// Hierarchy
 	protected WorldRegion superregion;
 	protected List<WorldRegion> subregions;

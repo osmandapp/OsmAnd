@@ -1,8 +1,7 @@
 package net.osmand.plus;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Context;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -11,9 +10,10 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapUtils;
-import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TargetPointsHelper {
 
@@ -188,7 +188,7 @@ public class TargetPointsHelper {
 		pointToStart = null;
 		intermediatePoints.clear();
 		readFromSettings(settings);
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class TargetPointsHelper {
 				pointToNavigate.pointDescription);
 		pointToNavigate.intermediate = false;
 		settings.deleteIntermediatePoint(index);
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
 	public void removeWayPoint(boolean updateRoute, int index){
@@ -223,10 +223,10 @@ public class TargetPointsHelper {
 				tp.index = ind++;
 			}
 		}
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
-	public void updateRouteAndReferesh(boolean updateRoute) {
+	public void updateRouteAndRefresh(boolean updateRoute) {
 		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
 				routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
 			updateRoutingHelper();
@@ -285,13 +285,13 @@ public class TargetPointsHelper {
 		settings.clearIntermediatePoints();
 		intermediatePoints.clear();
 		readFromSettings(settings);
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
 	public void clearStartPoint(boolean updateRoute) {
 		settings.clearPointToStart();
 		readFromSettings(settings);
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
 
@@ -312,7 +312,7 @@ public class TargetPointsHelper {
 			settings.clearIntermediatePoints();
 		}
 		readFromSettings(settings);
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
 
@@ -360,7 +360,7 @@ public class TargetPointsHelper {
 			settings.clearIntermediatePoints();
 		}
 		readFromSettings(settings);
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
 	public void setStartPoint(LatLon startPoint, boolean updateRoute, PointDescription name) {
@@ -370,7 +370,7 @@ public class TargetPointsHelper {
 			settings.clearPointToStart();
 		}
 		readFromSettings(settings);
-		updateRouteAndReferesh(updateRoute);
+		updateRouteAndRefresh(updateRoute);
 	}
 
 	public boolean checkPointToNavigate(){

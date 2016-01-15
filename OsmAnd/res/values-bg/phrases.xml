@@ -142,7 +142,7 @@
 	<string name="poi_mobile_phone">Магазин за мобилни телефони</string>
 	<string name="poi_motorcycle">Магазин за мотоциклети</string>
 	<string name="poi_musical_instrument">Музикални инструменти</string>
-	<string name="poi_newsagent">Информационна агенция</string>
+	<string name="poi_newsagent">Будка за вестници</string>
 	<string name="poi_optician">Очен лекар</string>
 	<string name="poi_tableware">Магазин за кухненски съдове</string>
 	<string name="poi_trade">Търговски пункт</string>
@@ -258,7 +258,7 @@
 	<string name="poi_recycling_plastic_bottles">Пластмасови бутилки</string>
 	<string name="poi_recycling_waste">Отпадък (черни пликове)</string>
 	<string name="poi_recycling_plastic_packaging">Пластмасови опаковки</string>
-	<string name="poi_recycling_newspaper">Вестник</string>
+	<string name="poi_recycling_newspaper">Хартия</string>
 	<string name="poi_recycling_magazines">Списания</string>
 	<string name="poi_recycling_paper_packaging">Хартиени опаковки</string>
 	<string name="poi_recycling_wood">Дърво</string>
@@ -403,4 +403,17 @@
 	<string name="poi_sculptor">Скулптор</string>
 
 	<string name="poi_square">Площад</string>
+	<string name="poi_townhall">Община</string>
+	<string name="poi_employment_agency">Служба по заетостта</string>
+	<string name="poi_it">ИТ офис</string>
+	<string name="poi_advertising_agency">Рекламна агенция</string>
+	<string name="poi_studio">Студио</string>
+	<string name="poi_bookmaker">Букмейкър</string>
+	<string name="poi_association">Асоциация</string>
+	<string name="poi_financial">Финансов офис</string>
+	<string name="poi_political_party">Клуб на политическа партия</string>
+	<string name="poi_notary">Нотариус</string>
+	<string name="poi_foundation">Фондация</string>
+	<string name="poi_tax_advisor">Данъчен съветник</string>
+
 	</resources>
