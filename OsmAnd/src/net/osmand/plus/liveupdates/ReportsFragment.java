@@ -12,17 +12,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmandApplication;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.liveupdates.network.GetJsonAsyncTask;
 import net.osmand.plus.liveupdates.network.Protocol;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,7 +37,8 @@ import java.util.Locale;
  */
 public class ReportsFragment extends BaseOsmAndFragment {
 	public static final String TITLE = "Report";
-	public static final String TOTAL_CHANGES_BY_MONTH_URL = "http://builder.osmand.net/reports/total_changes_by_month.php?month=";
+	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = "http://download.osmand.net/" +
+			"reports/query_report.php?report=total_changes_by_month&month=%s&region=%s";
 
 	private TextView contributorsTextView;
 	private TextView editsTextView;
@@ -44,6 +46,7 @@ public class ReportsFragment extends BaseOsmAndFragment {
 	private Spinner montReportsSpinner;
 	private Spinner regionReportsSpinner;
 	private MonthsForReportsAdapter monthsForReportsAdapter;
+	private RegionsForReportsAdapter regionsForReportsAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,9 +57,7 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		montReportsSpinner.setAdapter(monthsForReportsAdapter);
 
 		regionReportsSpinner = (Spinner) view.findViewById(R.id.regionReportsSpinner);
-		ArrayAdapter<String> regionsForReportsAdapter =
-				new ArrayAdapter<String>(getActivity(), R.layout.reports_for_spinner_item,
-						android.R.id.text1, getCountriesList(getMyApplication()));
+		regionsForReportsAdapter = new RegionsForReportsAdapter(getMyActivity());
 		regionsForReportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		regionReportsSpinner.setAdapter(regionsForReportsAdapter);
 
@@ -86,10 +87,11 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
-	private void requestAndUpdateUi() {
+	public void requestAndUpdateUi() {
 		int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
 		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
-		String regionUrlString = regionReportsSpinner.getSelectedItem().toString();
+		int regionItemPosition = regionReportsSpinner.getSelectedItemPosition();
+		String regionUrlString = regionsForReportsAdapter.getQueryString(regionItemPosition);
 		GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener =
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override
@@ -110,7 +112,8 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		GetJsonAsyncTask<Protocol.TotalChangesByMonthResponse> totalChangesByMontAsyncTask =
 				new GetJsonAsyncTask<>(Protocol.TotalChangesByMonthResponse.class);
 		totalChangesByMontAsyncTask.setOnResponseListener(onResponseListener);
-		totalChangesByMontAsyncTask.execute(TOTAL_CHANGES_BY_MONTH_URL + monthUrlString);
+		String finalUrl = String.format(TOTAL_CHANGES_BY_MONTH_URL_PATTERN, monthUrlString, regionUrlString);
+		totalChangesByMontAsyncTask.execute(finalUrl);
 	}
 
 	private static class MonthsForReportsAdapter extends ArrayAdapter<String> {
@@ -125,13 +128,13 @@ public class ReportsFragment extends BaseOsmAndFragment {
 			Calendar startDate = Calendar.getInstance();
 			startDate.set(Calendar.MONTH, Calendar.JUNE);
 			startDate.set(Calendar.YEAR, 2015);
+			startDate.set(Calendar.DAY_OF_MONTH, 1);
+			startDate.set(Calendar.HOUR_OF_DAY, 0);
 			Calendar endDate = Calendar.getInstance();
-			endDate.set(Calendar.DAY_OF_MONTH, endDate.getActualMaximum(Calendar.DAY_OF_MONTH));
-			endDate.set(Calendar.HOUR_OF_DAY, endDate.getActualMaximum(Calendar.HOUR_OF_DAY));
 			while (startDate.before(endDate)) {
-				queryString.add(queryFormat.format(startDate.getTime()));
-				add(humanFormat.format(startDate.getTime()));
-				startDate.add(Calendar.MONTH, 1);
+				queryString.add(queryFormat.format(endDate.getTime()));
+				add(humanFormat.format(endDate.getTime()));
+				endDate.add(Calendar.MONTH, -1);
 			}
 			setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		}
@@ -141,23 +144,42 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private static List<String> getCountriesList(OsmandApplication ctx) {
-		DownloadResources root = ctx.getDownloadThread().getIndexes();
-		ArrayList<String> namesList = new ArrayList<>();
-		processGroup(root, namesList, ctx);
-		return namesList;
-	}
+	private static class RegionsForReportsAdapter extends ArrayAdapter<String> {
+		ArrayList<String> queryRegionNames = new ArrayList<>();
 
-	private static void processGroup(DownloadResourceGroup group, List<String> nameList,
-									 Context context) {
-		if (group.getType().isScreen() && group.getParentGroup() != null
-				&& group.getParentGroup().getParentGroup() != null) {
-			nameList.add(group.getName(context));
+		public RegionsForReportsAdapter(final OsmandActionBarActivity context) {
+			super(context, R.layout.reports_for_spinner_item, android.R.id.text1);
+
+			WorldRegion root = context.getMyApplication().getRegions().getWorldRegion();
+			ArrayList<WorldRegion> groups = new ArrayList<>();
+			processGroup(root, groups, context);
+			Collections.sort(groups, new Comparator<WorldRegion>() {
+				@Override
+				public int compare(WorldRegion lhs, WorldRegion rhs) {
+					return lhs.getLocaleName().compareTo(rhs.getLocaleName());
+				}
+			});
+			for (WorldRegion group : groups) {
+				add(group.getLocaleName());
+				queryRegionNames.add(group.getRegionDownloadName());
+			}
 		}
 
-		if (group.getGroups() != null) {
-			for (DownloadResourceGroup g : group.getGroups()) {
-				processGroup(g, nameList, context);
+		public String getQueryString(int position) {
+			return queryRegionNames.get(position);
+		}
+
+		private static void processGroup(WorldRegion group,
+										 List<WorldRegion> nameList,
+										 Context context) {
+			if (group.isRegionMapDownload()) {
+				nameList.add(group);
+			}
+
+			if (group.getSubregions() != null) {
+				for (WorldRegion g : group.getSubregions()) {
+					processGroup(g, nameList, context);
+				}
 			}
 		}
 	}

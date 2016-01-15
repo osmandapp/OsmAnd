@@ -10,15 +10,17 @@ import android.widget.ImageView;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 
-/**
- * Created by GaidamakUA on 1/12/16.
- */
 public class BaseOsmAndFragment extends Fragment {
 	private IconsCache iconsCache;
 
 	protected OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
+	}
+
+	protected OsmandActionBarActivity getMyActivity() {
+		return (OsmandActionBarActivity) getActivity();
 	}
 
 	protected IconsCache getIconsCache() {

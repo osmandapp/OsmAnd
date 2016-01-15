@@ -1,18 +1,19 @@
 package net.osmand.plus.download;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import android.annotation.SuppressLint;
+import android.content.Context;
 
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import android.annotation.SuppressLint;
-import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 @SuppressLint("DefaultLocale")
 public class DownloadResourceGroup {
@@ -333,4 +334,7 @@ public class DownloadResourceGroup {
 		return parentGroup.getUniqueId() + "#" + id;
 	}
 
+	public String getId() {
+		return id;
+	}
 }
