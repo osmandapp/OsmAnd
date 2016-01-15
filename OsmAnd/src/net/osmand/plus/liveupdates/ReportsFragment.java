@@ -92,6 +92,7 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 		int regionItemPosition = regionReportsSpinner.getSelectedItemPosition();
 		String regionUrlString = regionsForReportsAdapter.getQueryString(regionItemPosition);
+		regionUrlString = regionUrlString == null ? "" : regionUrlString;
 		GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener =
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override
@@ -150,19 +151,50 @@ public class ReportsFragment extends BaseOsmAndFragment {
 		public RegionsForReportsAdapter(final OsmandActionBarActivity context) {
 			super(context, R.layout.reports_for_spinner_item, android.R.id.text1);
 
-			WorldRegion root = context.getMyApplication().getRegions().getWorldRegion();
+			final WorldRegion root = context.getMyApplication().getRegions().getWorldRegion();
 			ArrayList<WorldRegion> groups = new ArrayList<>();
+			groups.add(root);
 			processGroup(root, groups, context);
 			Collections.sort(groups, new Comparator<WorldRegion>() {
 				@Override
 				public int compare(WorldRegion lhs, WorldRegion rhs) {
-					return lhs.getLocaleName().compareTo(rhs.getLocaleName());
+					if (lhs == root) {
+						return -1;
+					}
+					if (rhs == root) {
+						return 1;
+					}
+					return getHumanReadableName(lhs).compareTo(getHumanReadableName(rhs));
 				}
 			});
 			for (WorldRegion group : groups) {
-				add(group.getLocaleName());
+				String name = getHumanReadableName(group);
+				add(name);
 				queryRegionNames.add(group.getRegionDownloadName());
 			}
+		}
+
+		private static String getHumanReadableName(WorldRegion group) {
+			String name;
+			if(group.getLevel() > 2 || (group.getLevel() == 2
+					&& group.getSuperregion().getRegionId().equals(WorldRegion.RUSSIA_REGION_ID))) {
+				WorldRegion parent = group.getSuperregion();
+				WorldRegion parentsParent = group.getSuperregion().getSuperregion();
+				if(group.getLevel() == 3) {
+					if(parentsParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
+						name = parentsParent.getLocaleName() + " " + group.getLocaleName();
+					} else if (!parent.getRegionId().equals(WorldRegion.UNITED_KINGDOM_REGION_ID)) {
+						name = parent.getLocaleName() + " " + group.getLocaleName();
+					} else {
+						name = group.getLocaleName();
+					}
+				} else {
+					name = parent.getLocaleName() + " " + group.getLocaleName();
+				}
+			} else {
+				name = group.getLocaleName();
+			}
+			return name;
 		}
 
 		public String getQueryString(int position) {

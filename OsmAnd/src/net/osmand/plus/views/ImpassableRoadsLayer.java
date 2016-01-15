@@ -51,7 +51,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 				float x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 				float y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 				float left = x - roadWorkIcon.getWidth() / 2;
-				float top = y - roadWorkIcon.getHeight() / 2;
+				float top = y - roadWorkIcon.getHeight();
 				canvas.drawBitmap(roadWorkIcon, left, top, paint);
 			}
 		}
