@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -53,14 +52,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-
 public class MapRouteInfoMenu implements IRouteInformationListener {
 	public static int directionInfo = -1;
 	public static boolean controlVisible = false;
 	private final MapContextMenu contextMenu;
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
+	private boolean selectFromFav;
+	private boolean selectFromAddress;
 	private boolean selectFromMapTouch;
 	private boolean selectFromMapForTarget;
 
@@ -71,6 +70,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public static final String TARGET_SELECT = "TARGET_SELECT";
 	private boolean nightMode;
 	private boolean switched;
+
+	private static final long SPINNER_MY_LOCATION_ID = 1;
+	private static final long SPINNER_FAV_ID = 2;
+	private static final long SPINNER_MAP_ID = 3;
+	private static final long SPINNER_ADDRESS_ID = 4;
+	private static final long SPINNER_START_ID = 5;
+	private static final long SPINNER_FINISH_ID = 6;
+	private static final long SPINNER_HINT_ID = 100;
 
 	public MapRouteInfoMenu(MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
 		this.mapActivity = mapActivity;
@@ -218,11 +225,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if (position == 1) {
+				if (id == SPINNER_FAV_ID) {
 					selectFavorite(parentView, true);
-				} else if (position == 2) {
+				} else if (id == SPINNER_MAP_ID) {
 					selectOnScreen(true);
-				} else if (position == 3) {
+				} else if (id == SPINNER_ADDRESS_ID) {
 					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					intent.putExtra(TARGET_SELECT, true);
@@ -262,15 +269,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if (position == 0) {
+				if (id == SPINNER_MY_LOCATION_ID) {
 					if (targets.getPointToStart() != null) {
 						targets.clearStartPoint(true);
 					}
-				} else if (position == 1) {
+				} else if (id == SPINNER_FAV_ID) {
 					selectFavorite(parentView, false);
-				} else if (position == 2) {
+				} else if (id == SPINNER_MAP_ID) {
 					selectOnScreen(false);
-				} else if (position == 3) {
+				} else if (id == SPINNER_ADDRESS_ID) {
 					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					intent.putExtra(TARGET_SELECT, false);
@@ -315,8 +322,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			getTargets().setStartPoint(l, true, pd);
 		}
+		selectFromAddress = true;
 		hide();
 		show();
+		selectFromAddress = false;
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
@@ -365,8 +374,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					dlg[0].dismiss();
 				}
 				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
+				selectFromFav = true;
 				hide();
 				show();
+				selectFromFav = false;
 			}
 		};
 	}
@@ -536,20 +547,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private Spinner setupFromSpinner(View view) {
 		ArrayList<RouteSpinnerRow> fromActions = new ArrayList<>();
-		fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_get_my_location,
+		fromActions.add(new RouteSpinnerRow(SPINNER_MY_LOCATION_ID, R.drawable.ic_action_get_my_location,
 				mapActivity.getString(R.string.shared_string_my_location)));
-		fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_fav_dark,
+		fromActions.add(new RouteSpinnerRow(SPINNER_FAV_ID, R.drawable.ic_action_fav_dark,
 				mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis)));
-		fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_marker_dark,
+		fromActions.add(new RouteSpinnerRow(SPINNER_MAP_ID, R.drawable.ic_action_marker_dark,
 				mapActivity.getString(R.string.shared_string_select_on_map)));
-		fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_home_dark,
+		fromActions.add(new RouteSpinnerRow(SPINNER_ADDRESS_ID, R.drawable.ic_action_home_dark,
 				mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis)));
 
 		TargetPoint start = getTargets().getPointToStart();
 		if (start != null) {
 			String oname = start.getOnlyName().length() > 0 ? start.getOnlyName()
 					: (mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
-			fromActions.add(new RouteSpinnerRow(R.drawable.ic_action_get_my_location, oname));
+			fromActions.add(new RouteSpinnerRow(SPINNER_START_ID, R.drawable.ic_action_get_my_location, oname));
 		}
 		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
 		RouteSpinnerArrayAdapter fromAdapter = new RouteSpinnerArrayAdapter(view.getContext());
@@ -571,19 +582,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		final TargetPointsHelper targets = getTargets();
 		ArrayList<RouteSpinnerRow> toActions = new ArrayList<>();
 		if (targets.getPointToNavigate() != null) {
-			toActions.add(new RouteSpinnerRow(R.drawable.ic_action_get_my_location,
+			toActions.add(new RouteSpinnerRow(SPINNER_FINISH_ID, R.drawable.ic_action_get_my_location,
 					getRoutePointDescription(targets.getPointToNavigate().point,
 							targets.getPointToNavigate().getOnlyName())));
 		} else {
 			toSpinner.setPromptId(R.string.route_descr_select_destination);
-			toActions.add(new RouteSpinnerRow(R.drawable.ic_action_get_my_location,
+			toActions.add(new RouteSpinnerRow(SPINNER_HINT_ID, R.drawable.ic_action_get_my_location,
 					mapActivity.getString(R.string.route_descr_select_destination)));
 		}
-		toActions.add(new RouteSpinnerRow(R.drawable.ic_action_fav_dark,
+		toActions.add(new RouteSpinnerRow(SPINNER_FAV_ID, R.drawable.ic_action_fav_dark,
 				mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis)));
-		toActions.add(new RouteSpinnerRow(R.drawable.ic_action_marker_dark,
+		toActions.add(new RouteSpinnerRow(SPINNER_MAP_ID, R.drawable.ic_action_marker_dark,
 				mapActivity.getString(R.string.shared_string_select_on_map)));
-		toActions.add(new RouteSpinnerRow(R.drawable.ic_action_home_dark,
+		toActions.add(new RouteSpinnerRow(SPINNER_ADDRESS_ID, R.drawable.ic_action_home_dark,
 				mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis)));
 
 		RouteSpinnerArrayAdapter toAdapter = new RouteSpinnerArrayAdapter(view.getContext());
@@ -611,7 +622,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (switched) {
 			mapControlsLayer.switchToRouteFollowingLayout();
 		}
-		if (getTargets().getPointToNavigate() == null && !selectFromMapTouch) {
+		if (getTargets().getPointToNavigate() == null
+				&& !selectFromMapTouch && !selectFromFav && !selectFromAddress) {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
 	}
@@ -654,10 +666,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	private class RouteSpinnerRow {
+		long id;
 		int iconId;
 		String text;
 
-		public RouteSpinnerRow(int iconId, String text) {
+		public RouteSpinnerRow(long id, int iconId, String text) {
+			this.id = id;
 			this.iconId = iconId;
 			this.text = text;
 		}
@@ -668,6 +682,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		public RouteSpinnerArrayAdapter(Context context) {
 			super(context, android.R.layout.simple_spinner_item);
 			setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return true;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			RouteSpinnerRow row = getItem(position);
+			return row.id;
+		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			return getItemId(position) != SPINNER_HINT_ID;
 		}
 
 		@Override
@@ -685,22 +715,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			TextView label = (TextView) super.getDropDownView(position, convertView, parent);
 
 			RouteSpinnerRow row = getItem(position);
+			long id = getItemId(position);
 			label.setText(row.text);
-			Drawable icon = mapActivity.getMyApplication().getIconsCache().getContentIcon(row.iconId);
-			label.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			label.setCompoundDrawablePadding(dpToPx(16f));
-			label.setPadding(dpToPx((16f)), 0, 0, 0);
+			if (id != SPINNER_HINT_ID) {
+				Drawable icon = mapActivity.getMyApplication().getIconsCache().getContentIcon(row.iconId);
+				label.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				label.setCompoundDrawablePadding(AndroidUtils.dpToPx(mapActivity, 16f));
+			} else {
+				label.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+				label.setCompoundDrawablePadding(0);
+
+			}
+			label.setPadding(AndroidUtils.dpToPx(mapActivity, 16f), 0, 0, 0);
 
 			return label;
-		}
-
-		private int dpToPx(float dp) {
-			Resources r = mapActivity.getResources();
-			return (int) TypedValue.applyDimension(
-					COMPLEX_UNIT_DIP,
-					dp,
-					r.getDisplayMetrics()
-			);
 		}
 	}
 }
