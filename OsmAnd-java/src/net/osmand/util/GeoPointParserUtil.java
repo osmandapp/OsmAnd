@@ -195,6 +195,16 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon, z, qname));
 
+		// geo:0,0?q=50.45%2C%2030.5233
+		z = GeoParsedPoint.NO_ZOOM;
+		qlat = 50.4513;
+		qlon = 30.5699;
+
+		url = "geo:0,0?q=" + qlat + "%2C%20" + qlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon, z, null));
+
 		// http://download.osmand.net/go?lat=34&lon=-106&z=11
 		url = "http://download.osmand.net/go?lat=" + ilat + "&lon=" + ilon + "&z=" + z;
 		System.out.println("url: " + url);
@@ -1153,7 +1163,7 @@ public class GeoPointParserUtil {
 			}
 
 			final Pattern positionPattern = Pattern.compile(
-					"([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)");
+					"([+-]?\\d+(?:\\.\\d+)?),\\s?([+-]?\\d+(?:\\.\\d+)?)");
 			final Matcher positionMatcher = positionPattern.matcher(positionPart);
 			if (!positionMatcher.find()) {
 				return null;
@@ -1444,6 +1454,5 @@ public class GeoPointParserUtil {
 			return isGeoPoint() ? "GeoParsedPoint [lat=" + lat + ", lon=" + lon + ", zoom=" + zoom
 					+ ", label=" + label + "]" : "GeoParsedPoint [query=" + query;
 		}
-
 	}
 }
