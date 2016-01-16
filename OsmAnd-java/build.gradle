@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = "net.osmand.util.OpeningHoursParser"
+mainClassName = "net.osmand.util.GeoPointParserUtil"
 
 sourceSets {
 	main {
