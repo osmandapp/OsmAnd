@@ -2571,4 +2571,8 @@
 	<string name="poi_firepit">Feuergrube</string>
 	<string name="poi_street_cabinet">Verteilerkasten</string>
 
+<string name="poi_fair_trade_yes">Fairer Handel: Ja</string>
+	<string name="poi_fair_trade_no">Fairer Handel: Nein</string>
+	<string name="poi_fair_trade_only">Nur fairer Handel Produkte</string>
+
 </resources>
