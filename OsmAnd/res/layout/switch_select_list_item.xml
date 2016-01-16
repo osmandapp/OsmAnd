@@ -54,7 +54,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="Select"
+        android:text="@string/shared_string_select"
         android:textSize="@dimen/default_list_text_size"/>
 
 </LinearLayout>
