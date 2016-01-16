@@ -2142,4 +2142,6 @@
     <string name="rendering_attr_hideIcons_name">Nascondi le icone dei PDI</string>
     <string name="number_of_edits">Numero di modifiche</string>
     <string name="number_of_contributors">Numero di contributori</string>
-    </resources>
+    <string name="shared_string_select">Scegli</string>
+    <string name="reports_for">Rapporto per:</string>
+</resources>
