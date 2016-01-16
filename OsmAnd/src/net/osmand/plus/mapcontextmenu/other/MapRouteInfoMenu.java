@@ -58,8 +58,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private final MapContextMenu contextMenu;
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
-	private boolean selectFromFav;
-	private boolean selectFromAddress;
 	private boolean selectFromMapTouch;
 	private boolean selectFromMapForTarget;
 
@@ -130,6 +128,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null)
 			fragmentRef.get().updateInfo();
+	}
+
+	public void updateFromIcon() {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().updateFromIcon();
 	}
 
 	public void updateInfo(final View main) {
@@ -249,18 +253,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
+		updateToIcon(parentView);
+
+		ImageView toDropDownIcon = (ImageView) parentView.findViewById(R.id.toDropDownIcon);
+		toDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
+	}
+
+	private void updateToIcon(View parentView) {
 		ImageView toIcon = (ImageView) parentView.findViewById(R.id.toIcon);
 		if (isLight()) {
 			toIcon.setImageDrawable(getIconOrig(R.drawable.widget_target_day));
 		} else {
 			toIcon.setImageDrawable(getIconOrig(R.drawable.widget_target_night));
 		}
-
-		ImageView toDropDownIcon = (ImageView) parentView.findViewById(R.id.toDropDownIcon);
-		toDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
 	}
 
-	@SuppressWarnings("deprecation")
 	private void updateFromSpinner(final View parentView) {
 		final TargetPointsHelper targets = getTargets();
 		final Spinner fromSpinner = setupFromSpinner(parentView);
@@ -273,6 +280,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					if (targets.getPointToStart() != null) {
 						targets.clearStartPoint(true);
 					}
+					updateFromIcon(parentView);
 				} else if (id == SPINNER_FAV_ID) {
 					selectFavorite(parentView, false);
 				} else if (id == SPINNER_MAP_ID) {
@@ -297,6 +305,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
+		updateFromIcon(parentView);
+
+		ImageView fromDropDownIcon = (ImageView) parentView.findViewById(R.id.fromDropDownIcon);
+		fromDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
+	}
+
+	@SuppressWarnings("deprecation")
+	public void updateFromIcon(View parentView) {
+		TargetPointsHelper targets = getTargets();
 		ImageView fromIcon = (ImageView) parentView.findViewById(R.id.fromIcon);
 		if (targets.getPointToStart() == null) {
 			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
@@ -304,9 +321,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_marker_dark, isLight()));
 		}
-
-		ImageView fromDropDownIcon = (ImageView) parentView.findViewById(R.id.fromDropDownIcon);
-		fromDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
 	}
 
 	protected void selectOnScreen(boolean target) {
@@ -322,10 +336,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			getTargets().setStartPoint(l, true, pd);
 		}
-		selectFromAddress = true;
-		hide();
-		show();
-		selectFromAddress = false;
+		updateMenu();
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
@@ -373,11 +384,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				if (dlg != null && dlg.length > 0 && dlg[0] != null) {
 					dlg[0].dismiss();
 				}
-				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
-				selectFromFav = true;
-				hide();
-				show();
-				selectFromFav = false;
+				updateFromIcon();
 			}
 		};
 	}
@@ -622,33 +629,34 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (switched) {
 			mapControlsLayer.switchToRouteFollowingLayout();
 		}
-		if (getTargets().getPointToNavigate() == null
-				&& !selectFromMapTouch && !selectFromFav && !selectFromAddress) {
+		if (getTargets().getPointToNavigate() == null && !selectFromMapTouch) {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
 	}
 
 	public void show() {
-		visible = true;
-		switched = mapControlsLayer.switchToRoutePlanningLayout();
-		boolean refreshMap = !switched;
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		if (!portrait) {
-			mapActivity.getMapView().setMapPositionX(1);
-			refreshMap = true;
-		}
+		if (!visible) {
+			visible = true;
+			switched = mapControlsLayer.switchToRoutePlanningLayout();
+			boolean refreshMap = !switched;
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			if (!portrait) {
+				mapActivity.getMapView().setMapPositionX(1);
+				refreshMap = true;
+			}
 
-		if (refreshMap) {
-			mapActivity.refreshMap();
-		}
+			if (refreshMap) {
+				mapActivity.refreshMap();
+			}
 
-		MapRouteInfoMenuFragment.showInstance(mapActivity);
+			MapRouteInfoMenuFragment.showInstance(mapActivity);
 
-		if (!AndroidUiHelper.isXLargeDevice(mapActivity)) {
-			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), false);
-		}
-		if (!portrait) {
-			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), true);
+			if (!AndroidUiHelper.isXLargeDevice(mapActivity)) {
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), false);
+			}
+			if (!portrait) {
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), true);
+			}
 		}
 	}
 

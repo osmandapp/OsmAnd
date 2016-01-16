@@ -69,6 +69,10 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		applyDayNightMode();
 	}
 
+	public void updateFromIcon() {
+		menu.updateFromIcon(mainView);
+	}
+
 	public void show(MapActivity mapActivity) {
 		int slideInAnim = R.anim.slide_in_bottom;
 		int slideOutAnim = R.anim.slide_out_bottom;
