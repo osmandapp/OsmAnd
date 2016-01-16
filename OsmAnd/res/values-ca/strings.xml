@@ -1918,4 +1918,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="number_of_contributors">Nombre de col·laboradors</string>
     <string name="number_of_edits">Nombre d\'edicions</string>
     <string name="reports_for">Informe per:</string>
-</resources>
+<string name="shared_string_select">Selecciona</string>
+    </resources>
