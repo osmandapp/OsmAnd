@@ -373,14 +373,6 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
-	public boolean checkPointToNavigate(){
-    	if(pointToNavigate == null){
-    		ctx.showToastMessage(R.string.mark_final_location_first);
-			return false;
-		}
-    	return true;
-    }
-
 	public boolean checkPointToNavigateShort(){
     	if(pointToNavigate == null){
     		ctx.showShortToastMessage(R.string.mark_final_location_first);

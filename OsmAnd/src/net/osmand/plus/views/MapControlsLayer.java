@@ -291,7 +291,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	protected void clickRouteGo() {
-		mapRouteInfoMenu.hide();
+		if (app.getTargetPointsHelper().getPointToNavigate() != null) {
+			mapRouteInfoMenu.hide();
+		}
 		startNavigation();
 	}
 
