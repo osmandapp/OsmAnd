@@ -102,11 +102,13 @@ public class ReportsFragment extends BaseOsmAndFragment {
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override
 					public void onResponse(Protocol.TotalChangesByMonthResponse response) {
-						if (contributorsTextView != null) {
-							contributorsTextView.setText(String.valueOf(response.users));
-						}
-						if (editsTextView != null) {
-							editsTextView.setText(String.valueOf(response.changes));
+						if (response != null) {
+							if (contributorsTextView != null) {
+								contributorsTextView.setText(String.valueOf(response.users));
+							}
+							if (editsTextView != null) {
+								editsTextView.setText(String.valueOf(response.changes));
+							}
 						}
 					}
 				};
