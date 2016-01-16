@@ -285,6 +285,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 					if (!isDescription && icon == null) {
 						icon = getRowIcon(view.getContext(), pType.getIconKeyName());
+						if (isText && icon != null) {
+							textPrefix = "";
+						}
 					}
 					if (icon == null && isText) {
 						iconId = R.drawable.ic_action_note_dark;
