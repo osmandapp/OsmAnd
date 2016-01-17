@@ -1,4 +1,4 @@
-package net.osmand.plus.liveupdates.network;
+package net.osmand.plus.liveupdates;
 
 /**
  * Created by GaidamakUA on 1/12/16.

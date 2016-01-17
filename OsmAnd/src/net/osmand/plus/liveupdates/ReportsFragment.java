@@ -1,7 +1,25 @@
 package net.osmand.plus.liveupdates;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
+
+import net.osmand.PlatformUtil;
+import net.osmand.map.WorldRegion;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+
+import org.apache.commons.logging.Log;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,20 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import net.osmand.map.WorldRegion;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.liveupdates.network.GetJsonAsyncTask;
-import net.osmand.plus.liveupdates.network.Protocol;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import com.google.gson.Gson;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -215,4 +220,42 @@ public class ReportsFragment extends BaseOsmAndFragment {
 			}
 		}
 	}
+	
+	public static class GetJsonAsyncTask<P> extends AsyncTask<String, Void, P> {
+		private static final Log LOG = PlatformUtil.getLog(GetJsonAsyncTask.class);
+		private final Class<P> protocolClass;
+		private final Gson gson = new Gson();
+		private OnResponseListener<P> onResponseListener;
+
+		public GetJsonAsyncTask(Class<P> protocolClass) {
+			this.protocolClass = protocolClass;
+		}
+
+		@Override
+		protected P doInBackground(String... params) {
+			StringBuilder response = new StringBuilder();
+			String error = NetworkUtils.sendGetRequest(params[0], null, response);
+			if (error == null) {
+				return gson.fromJson(response.toString(), protocolClass);
+			}
+			LOG.error(error);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(P protocol) {
+			if (onResponseListener != null) {
+				onResponseListener.onResponse(protocol);
+			}
+		}
+
+		public void setOnResponseListener(OnResponseListener<P> onResponseListener) {
+			this.onResponseListener = onResponseListener;
+		}
+
+		public interface OnResponseListener<Protocol> {
+			void onResponse(Protocol response);
+		}
+	}
+
 }
