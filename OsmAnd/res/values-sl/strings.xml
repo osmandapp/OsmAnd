@@ -2079,7 +2079,7 @@
     <string name="rec_split_title">Uporabi razdelilnik posnetkov</string>
     <string name="rec_split_desc">Prepiši starejše posnetke, ko velikost posnetka preseže omejitev</string>
     <string name="item_removed">Predmet je izbrisan</string>
-    <string name="n_items_deleted">izbrisanih predmetov</string>
+    <string name="n_items_removed">izbrisanih predmetov</string>
     <string name="shared_string_undo_all">Razveljavi vse</string>
     <string name="shared_string_type">Vrsta</string>
     <string name="starting_point">Začetna točka</string>

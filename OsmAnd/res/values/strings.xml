@@ -16,8 +16,8 @@
     <string name="shared_string_select">Select</string>
     <string name="switch_start_finish">Reverse starting point &amp; destination</string>
     <string name="rendering_attr_hideIcons_name">Hide POI icons</string>
-    <string name="item_removed">Item deleted</string>
-    <string name="n_items_deleted">items deleted</string>
+    <string name="item_removed">Item removed</string>
+    <string name="n_items_deleted">items removed</string>
     <string name="shared_string_undo_all">UNDO ALL</string>
     <string name="shared_string_type">Type</string>
     <string name="starting_point">Starting point</string>

@@ -763,7 +763,7 @@
     <string name="save_track_to_gpx_globally">Уписуј путању у датотеку ГПИкс-а</string>
     <string name="save_track_to_gpx_globally_headline">Праћење путање по захтеву</string>
     <string name="item_removed">Избрисана ставка</string>
-    <string name="n_items_deleted">избрисане ставке</string>
+    <string name="n_items_removed">избрисане ставке</string>
     <string name="shared_string_undo_all">ОПОЗОВИ СВЕ</string>
     <string name="shared_string_type">Врста</string>
     <string name="starting_point">Почетна тачка</string>

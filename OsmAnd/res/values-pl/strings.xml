@@ -2070,7 +2070,7 @@
     <string name="rec_split_clip_length">Długość nagrania</string>
     <string name="shared_string_not_selected">Nie wybrane</string>
 <string name="item_removed">Pozycja usunięta</string>
-    <string name="n_items_deleted">Pozycje usunięta</string>
+    <string name="n_items_removed">Pozycje usunięta</string>
     <string name="shared_string_undo_all">COFNIJ WSZYSTKO</string>
     <string name="shared_string_type">Typ</string>
     <string name="starting_point">Punkt początkowy</string>

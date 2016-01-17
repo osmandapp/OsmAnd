@@ -1910,7 +1910,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="switch_start_finish">Intercanvi entre punts origen i destinació</string>
     <string name="rendering_attr_hideIcons_name">Amaga les icones dels PDI</string>
     <string name="item_removed">Element suprimit</string>
-    <string name="n_items_deleted">elements suprimits</string>
+    <string name="n_items_removed">elements suprimits</string>
     <string name="shared_string_undo_all">DESFÉS-HO TOT</string>
     <string name="shared_string_type">Tipus</string>
     <string name="starting_point">Punt d\'inici</string>

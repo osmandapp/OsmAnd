@@ -2043,7 +2043,7 @@
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
     <string name="item_removed">Elemento borrado</string>
-    <string name="n_items_deleted">elementos borrados</string>
+    <string name="n_items_removed">elementos borrados</string>
     <string name="shared_string_undo_all">DESHACER TODO</string>
     <string name="rendering_attr_hideIcons_name">Ocultar iconos de PDI</string>
     <string name="switch_start_finish">Invertir puntos de partida y destino</string>

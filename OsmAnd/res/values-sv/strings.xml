@@ -2062,7 +2062,7 @@
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
     <string name="item_removed">post raderad</string>
-    <string name="n_items_deleted">poster raderade</string>
+    <string name="n_items_removed">poster raderade</string>
     <string name="shared_string_undo_all">ÅNGRA ALLA</string>
     <string name="rendering_attr_hideIcons_name">Dölj POI-ikoner</string>
     <string name="switch_start_finish">Skifta startpunkt och destination</string>

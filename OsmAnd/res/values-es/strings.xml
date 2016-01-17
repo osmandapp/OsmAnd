@@ -2041,6 +2041,6 @@
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
     <string name="item_removed">Elemento eliminado</string>
-    <string name="n_items_deleted">elementos eliminados</string>
+    <string name="n_items_removed">elementos eliminados</string>
     <string name="shared_string_undo_all">DESHACER TODO</string>
     </resources>

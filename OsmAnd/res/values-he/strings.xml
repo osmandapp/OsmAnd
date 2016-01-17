@@ -1134,7 +1134,7 @@
     <string name="destination_point">יעד %1$s</string>
     <string name="available_maps">מפות זמינות</string>
     <string name="item_removed">הפריט נמחק</string>
-    <string name="n_items_deleted">פריטים נמחקו</string>
+    <string name="n_items_removed">פריטים נמחקו</string>
     <string name="shared_string_type">סוג</string>
     <string name="starting_point">נקודת המוצא</string>
     <string name="shared_string_not_selected">לא נבחר</string>

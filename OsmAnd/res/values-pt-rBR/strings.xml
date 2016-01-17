@@ -1989,7 +1989,7 @@
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Ponto de partida</string>
     <string name="item_removed">Item apagado</string>
-    <string name="n_items_deleted">itens apagados</string>
+    <string name="n_items_removed">itens apagados</string>
     <string name="shared_string_undo_all">DESFAZER TUDO</string>
     <string name="rendering_attr_hideIcons_name">Ocultar ícones dos POIs</string>
     <string name="switch_start_finish">Inverter pontos de partida e destino</string>
