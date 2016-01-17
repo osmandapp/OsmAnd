@@ -85,11 +85,13 @@ public class WaypointDialogHelper {
 	public static void updatePointInfoView(final OsmandApplication app, final Activity activity,
 										   View localView, final LocationPointWrapper ps,
 										   final boolean mapCenter, final boolean nightMode,
-										   final boolean edit) {
+										   final boolean edit, final boolean topBar) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
-		AndroidUtils.setTextPrimaryColor(activity, text, nightMode);
+		if (!topBar) {
+			AndroidUtils.setTextPrimaryColor(activity, text, nightMode);
+		}
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		if (!edit) {
 			localView.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +140,7 @@ public class WaypointDialogHelper {
 		if (dist > 0) {
 			String dd = OsmAndFormatter.getFormattedDistance(dist, app);
 			if (ps.deviationDistance > 0) {
-				dd += "  +" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
+				dd += (topBar ? "\n" : "  ") + "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 			}
 			textDist.setText(dd);
 			if (!Algorithms.isEmpty(pointDescription)) {
@@ -351,7 +353,7 @@ public class WaypointDialogHelper {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 		}
-		updatePointInfoView(app, ctx, v, point, true, nightMode, edit);
+		updatePointInfoView(app, ctx, v, point, true, nightMode, edit, false);
 		final View more = v.findViewById(R.id.all_points);
 		final View move = v.findViewById(R.id.info_move);
 		final View remove = v.findViewById(R.id.info_close);
