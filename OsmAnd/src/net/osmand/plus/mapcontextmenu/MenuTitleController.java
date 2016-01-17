@@ -46,6 +46,11 @@ public abstract class MenuTitleController {
 		}
 	}
 
+	public boolean hasKnownTitle() {
+		String title = getTitleStr();
+		return getMapActivity().getString(R.string.no_address_found).equals(title) || addressNotKnownStr.equals(title);
+	}
+
 	public int getLeftIconId() {
 		return leftIconId;
 	}

@@ -116,6 +116,19 @@ public class WaypointDialogHelper {
 			}
 		}
 
+		String descr;
+		PointDescription pd = point.getPointDescription(app);
+		if (Algorithms.isEmpty(pd.getName())) {
+			descr = pd.getTypeName();
+		} else {
+			descr = pd.getName();
+		}
+
+		if (textShadow != null) {
+			textShadow.setText(descr);
+		}
+		text.setText(descr);
+
 		String pointDescription = "";
 		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
 		if (descText != null) {
@@ -137,6 +150,10 @@ public class WaypointDialogHelper {
 			}
 		}
 
+		if (descr.equals(pointDescription)) {
+			pointDescription = "";
+		}
+
 		if (dist > 0) {
 			String dd = OsmAndFormatter.getFormattedDistance(dist, app);
 			if (ps.deviationDistance > 0) {
@@ -153,23 +170,6 @@ public class WaypointDialogHelper {
 		if (descText != null) {
 			descText.setText(pointDescription);
 		}
-
-		String descr;
-		PointDescription pd = point.getPointDescription(app);
-		if (Algorithms.isEmpty(pd.getName())) {
-			descr = pd.getTypeName();
-		} else {
-			descr = pd.getName();
-		}
-
-		if (textShadow != null) {
-			textShadow.setText(descr);
-		}
-		text.setText(descr);
-
-//			((Spannable) text.getText()).setSpan(
-//					new ForegroundColorSpan(ctx.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
-//					0);
 	}
 
 	private List<Object> getPoints() {

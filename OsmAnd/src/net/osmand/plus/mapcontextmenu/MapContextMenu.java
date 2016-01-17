@@ -31,7 +31,6 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -422,7 +421,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				hide();
 				final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 				if (targets.getIntermediatePoints().isEmpty()) {
-					targets.navigateToPoint(latLon, true, -1, getPointDescription());
+					targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 					mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 				} else {
 					Builder bld = new AlertDialog.Builder(mapActivity);
@@ -431,7 +430,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					bld.setSingleChoiceItems(new String[]{
 							mapActivity.getString(R.string.clear_intermediate_points),
 							mapActivity.getString(R.string.keep_intermediate_points)
-//					mapActivity.getString(R.string.keep_and_add_destination_point)
 					}, 0, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -444,11 +442,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						public void onClick(DialogInterface dialog, int which) {
 							if (defaultVls[0] == 0) {
 								targets.removeAllWayPoints(false);
-								targets.navigateToPoint(latLon, true, -1, getPointDescription());
+								targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 								mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 							} else {
-								//targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, getPointDescription());
-								targets.navigateToPoint(latLon, true, -1, getPointDescription());
+								targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 								mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 							}
 						}
@@ -468,7 +465,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				@Override
 				public void run() {
 					mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
-							pointDescription);
+							getPointDescriptionForTarget());
 				}
 			});
 		}
@@ -528,13 +525,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	private PointDescription getPointDescriptionForTarget() {
+		return hasKnownTitle() ? null : pointDescription;
+	}
+
 	public void addAsLastIntermediate() {
 		callMenuAction(true, new MenuAction() {
 			@Override
 			public void run() {
 				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(latLon,
 						true, mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size(),
-						pointDescription);
+						getPointDescriptionForTarget());
 				close();
 			}
 		});
@@ -544,7 +545,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		callMenuAction(true, new MenuAction() {
 			@Override
 			public void run() {
-				mapActivity.getMyApplication().getTargetPointsHelper().setStartPoint(latLon, true, pointDescription);
+				mapActivity.getMyApplication().getTargetPointsHelper().setStartPoint(latLon, true,
+						getPointDescriptionForTarget());
 				if (openRouteInfoMenu) {
 					mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().show();
 				}
@@ -556,7 +558,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		callMenuAction(true, new MenuAction() {
 			@Override
 			public void run() {
-				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(latLon, true, -1, pointDescription);
+				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(latLon, true, -1,
+						getPointDescriptionForTarget());
 				if (openRouteInfoMenu) {
 					mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().show();
 				}
