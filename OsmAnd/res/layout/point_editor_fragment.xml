@@ -1,262 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:id="@+id/point_edit_layout"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@android:color/transparent">
+<FrameLayout
+    android:id="@+id/point_edit_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/dashboard_map_toolbar"
-        android:background="@drawable/gradient_toolbar"
-        android:minHeight="@dimen/dashboard_map_toolbar"
-        android:theme="?attr/toolbar_theme"
-        app:contentInsetLeft="72dp"
-        app:contentInsetStart="72dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/delete_button"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_delete_dark"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dashboard_map_toolbar"
+            android:background="@drawable/gradient_toolbar"
+            android:minHeight="@dimen/dashboard_map_toolbar"
+            android:theme="?attr/toolbar_theme"
+            app:contentInsetLeft="72dp"
+            app:contentInsetStart="72dp">
 
-        <ImageButton
-            android:id="@+id/ok_button"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_done"/>
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_action_delete_dark"/>
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:drawableLeft="@drawable/ic_action_done"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:background="@android:color/transparent"
-            android:text="@string/shared_string_save"/>
+            <ImageButton
+                android:id="@+id/ok_button"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_action_done"/>
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_action_done"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/shared_string_save"/>
 
 
         </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/main_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:clickable="true"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/title_view"
+        <ScrollView
+            android:id="@+id/editor_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/bg_point_editor_view"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp">
-
-                <TextView
-                    android:id="@+id/header_caption"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_gravity="center_vertical"
-                    tools:text="Point info"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="@dimen/default_list_text_size"/>
-
-                <Button
-                    android:id="@+id/button_replace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:textColor="?attr/contextMenuButtonColor"
-                    android:text="@string/update_existing"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="42dp"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/name_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginStart="12dp"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_building_number"/>
+                    android:id="@+id/editor_scroll_view_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="550dp"
+                    android:orientation="vertical">
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/main_view"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_weight="1"
+                    android:layout_gravity="bottom"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/name_caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:text="@string/favourites_edit_dialog_name"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_list_text_size"/>
-
-                    <EditText
-                        android:id="@+id/name_edit"
+                    <LinearLayout
+                        android:id="@+id/title_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="?android:textColorPrimary"
-                        android:textColorHint="?android:textColorSecondary"
-                        tools:text="Name"
-                        android:imeOptions="actionDone"
-                        android:inputType="text"/>
+                        android:background="?attr/bg_point_editor_view"
+                        android:orientation="vertical">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp">
+
+                            <TextView
+                                android:id="@+id/header_caption"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_weight="1"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size"
+                                tools:text="Point info"/>
+
+                            <Button
+                                android:id="@+id/button_replace"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="?attr/selectableItemBackground"
+                                android:text="@string/update_existing"
+                                android:textColor="?attr/contextMenuButtonColor"
+                                android:visibility="gone"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="42dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/name_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_marginTop="2dp"
+                                    android:scaleType="center"
+                                    android:src="@drawable/ic_action_building_number"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/name_caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginRight="12dp"
+                                    android:text="@string/favourites_edit_dialog_name"
+                                    android:textColor="?android:textColorSecondary"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                                <EditText
+                                    android:id="@+id/name_edit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_marginTop="8dp"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="text"
+                                    android:textColor="?android:textColorPrimary"
+                                    android:textColorHint="?android:textColorSecondary"
+                                    tools:text="Name"/>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="42dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/category_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_marginTop="2dp"
+                                    android:scaleType="center"
+                                    android:src="@drawable/ic_action_building_number"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/category_caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginRight="12dp"
+                                    android:text="@string/favourites_edit_dialog_name"
+                                    android:textColor="?android:textColorSecondary"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                                <net.osmand.plus.widgets.AutoCompleteTextViewEx
+                                    android:id="@+id/category_edit"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_marginTop="8dp"
+                                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                                    android:editable="false"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/description_info_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/ctx_menu_info_view_bg"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="42dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/description_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_marginTop="10dp"
+                                    android:scaleType="center"
+                                    android:src="@drawable/ic_action_note_dark"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/description_edit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="16dp"
+                                    android:inputType="textMultiLine"
+                                    android:maxLines="8"
+                                    android:textColor="?android:textColorPrimary"
+                                    android:textColorHint="?android:textColorSecondary"/>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </FrameLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="42dp"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/category_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginStart="12dp"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_building_number"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/category_caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:text="@string/favourites_edit_dialog_name"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_list_text_size"/>
-
-                    <net.osmand.plus.widgets.AutoCompleteTextViewEx
-                        android:id="@+id/category_edit"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginLeft="8dp"
-                        android:editable="false"
-                        android:drawableRight="@drawable/ic_action_arrow_drop_down"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/description_info_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:background="?attr/ctx_menu_info_view_bg"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="42dp"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/description_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="10dp"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_note_dark"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/description_edit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginLeft="8dp"
-                        android:maxLines="8"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="?android:textColorPrimary"
-                        android:textColorHint="?android:textColorSecondary"
-                        android:inputType="textMultiLine"/>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </FrameLayout>
+        </ScrollView>
 
     </LinearLayout>
 

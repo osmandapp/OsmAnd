@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,8 +38,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-
 public abstract class PointEditorFragment extends Fragment {
 
 	private View view;
@@ -68,7 +65,7 @@ public abstract class PointEditorFragment extends Fragment {
 		}
 
 		View editorScrollView = view.findViewById(R.id.editor_scroll_view);
-		if (editorScrollView != null) {
+		if (editorScrollView != null && getEditor().isLandscapeLayout()) {
 			if (getEditor().isLight()) {
 				editorScrollView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_light));
 			} else {
@@ -94,6 +91,16 @@ public abstract class PointEditorFragment extends Fragment {
 				dismiss();
 			}
 		});
+
+		View scrollViewHeader = view.findViewById(R.id.editor_scroll_view_header);
+		if (scrollViewHeader != null) {
+			scrollViewHeader.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dismiss();
+				}
+			});
+		}
 
 		Button saveButton = (Button) toolbar.findViewById(R.id.save_button);
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +231,7 @@ public abstract class PointEditorFragment extends Fragment {
 		RotatedTileBox box = map.getCurrentRotatedTileBox();
 		int origMarkerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
 
-		int markerPaddingPx = dpToPx(MapContextMenuFragment.MARKER_PADDING_DP);
+		int markerPaddingPx = AndroidUtils.dpToPx(getMapActivity(), MapContextMenuFragment.MARKER_PADDING_DP);
 
 		int y = view.getHeight() - mainViewHeight;
 
@@ -272,10 +279,22 @@ public abstract class PointEditorFragment extends Fragment {
 				} else {
 					obs.removeGlobalOnLayoutListener(this);
 				}
+				updateScrollHeaderHeight();
 				adjustMapPosition(true);
 			}
 
 		});
+	}
+
+	private void updateScrollHeaderHeight() {
+		View scrollViewHeader = view.findViewById(R.id.editor_scroll_view_header);
+		if (scrollViewHeader != null) {
+			View scrollView = view.findViewById(R.id.editor_scroll_view);
+			int headerHeight = scrollView.getHeight() - mainViewHeight;
+			ViewGroup.LayoutParams p = scrollViewHeader.getLayoutParams();
+			p.height = headerHeight;
+			scrollViewHeader.setLayoutParams(p);
+		}
 	}
 
 	private void hideKeyboard() {
@@ -383,16 +402,6 @@ public abstract class PointEditorFragment extends Fragment {
 		EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
 		String res = descriptionEdit.getText().toString().trim();
 		return Algorithms.isEmpty(res) ? null : res;
-	}
-
-	// Utils
-	private int dpToPx(float dp) {
-		Resources r = getActivity().getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
 	}
 
 	protected Drawable getPaintedIcon(int iconId, int color) {
