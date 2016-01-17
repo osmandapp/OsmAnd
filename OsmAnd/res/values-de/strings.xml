@@ -2,7 +2,7 @@
 <resources>
 	<string name="shared_string_remove">Entfernen</string>
 	<string name="item_removed">Eintrag entfernt</string>
-	<string name="n_items_deleted">Einträge entfernt</string>
+	<string name="n_items_removed">Einträge entfernt</string>
 	<string name="no_address_found">Keine Adresse bekannt</string>
 	<string name="shared_string_near">Nähe</string>
 	<string name="regions">Regionen</string>
