@@ -1012,7 +1012,7 @@
     <string name="recording_is_recorded">Audio/video is being recorded. To stop it press the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
-    <string name="recording_delete_confirm">Do you want to remove this recording?</string>
+    <string name="recording_delete_confirm">Do you want to delete this recording?</string>
     <string name="recording_unavailable">unavailable</string>
     <string name="recording_context_menu_arecord">Take an audio note</string>
     <string name="recording_context_menu_vrecord">Take a video note</string>
@@ -1355,7 +1355,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmand_parking_warning">Warning</string>
     <string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>
     <string name="osmand_parking_time_limit_title">Set the time limit of parking</string>
-    <string name="osmand_parking_delete_confirm">Do you want to remove the location of the parked car?</string>
+    <string name="osmand_parking_delete_confirm">Do you want to delete the parking location marker?</string>
     <string name="osmand_parking_delete">Delete a parking marker</string>
     <string name="osmand_parking_choose_type">Choose the type of parking</string>
     <string name="osmand_parking_lim_text">Time-limited</string>
@@ -2012,7 +2012,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="favourites_context_menu_add">Add favorite</string>
     <string name="favourites_context_menu_edit">Edit favorite</string>
     <string name="favourites_context_menu_delete">Delete favorite</string>
-    <string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Delete favorite point \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>
     <string name="poi_edit_title">Edit POI</string>
     <string name="poi_create_title">Create POI</string>
