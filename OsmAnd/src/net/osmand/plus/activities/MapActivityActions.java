@@ -296,9 +296,7 @@ public class MapActivityActions implements DialogProvider {
 				if (click != null) {
 					click.onContextMenuClick(listAdapter, standardId, which, false);
 				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
-					getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(latitude, longitude), 
-							true, getMyApplication().getTargetPointsHelper().getIntermediatePoints().size(),
-							mapActivity.getContextMenu().getPointDescription());
+					mapActivity.getContextMenu().addAsLastIntermediate();
 				} else if (standardId == R.string.context_menu_item_search) {
 					Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
 					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);

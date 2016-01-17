@@ -31,6 +31,7 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -415,72 +416,61 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void fabPressed() {
-		hide();
-		final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
-		if (targets.getIntermediatePoints().isEmpty()) {
-			targets.navigateToPoint(latLon, true, -1, getPointDescription());
-			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
-		} else {
-			Builder bld = new AlertDialog.Builder(mapActivity);
-			bld.setTitle(R.string.new_directions_point_dialog);
-			final int[] defaultVls = new int[]{0};
-			bld.setSingleChoiceItems(new String[]{
-					mapActivity.getString(R.string.clear_intermediate_points),
-					mapActivity.getString(R.string.keep_intermediate_points)
+		callMenuAction(true, new MenuAction() {
+			@Override
+			public void run() {
+				hide();
+				final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+				if (targets.getIntermediatePoints().isEmpty()) {
+					targets.navigateToPoint(latLon, true, -1, getPointDescription());
+					mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+				} else {
+					Builder bld = new AlertDialog.Builder(mapActivity);
+					bld.setTitle(R.string.new_directions_point_dialog);
+					final int[] defaultVls = new int[]{0};
+					bld.setSingleChoiceItems(new String[]{
+							mapActivity.getString(R.string.clear_intermediate_points),
+							mapActivity.getString(R.string.keep_intermediate_points)
 //					mapActivity.getString(R.string.keep_and_add_destination_point)
-			}, 0, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					defaultVls[0] = which;
-				}
-			});
-			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					}, 0, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							defaultVls[0] = which;
+						}
+					});
+					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if (defaultVls[0] == 0) {
-						targets.removeAllWayPoints(false);
-						targets.navigateToPoint(latLon, true, -1, getPointDescription());
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
-					} else {
-						//targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, getPointDescription());
-						targets.navigateToPoint(latLon, true, -1, getPointDescription());
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
-					}
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (defaultVls[0] == 0) {
+								targets.removeAllWayPoints(false);
+								targets.navigateToPoint(latLon, true, -1, getPointDescription());
+								mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+							} else {
+								//targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, getPointDescription());
+								targets.navigateToPoint(latLon, true, -1, getPointDescription());
+								mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+							}
+						}
+					});
+					bld.setNegativeButton(R.string.shared_string_cancel, null);
+					bld.show();
 				}
-			});
-			bld.setNegativeButton(R.string.shared_string_cancel, null);
-			bld.show();
-		}
-//		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+			}
+		});
 	}
 
 	public void buttonWaypointPressed() {
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
 		} else {
-			MenuAction addAsTargetAction = new MenuAction() {
+			callMenuAction(true, new MenuAction() {
 				@Override
 				public void run() {
 					mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
 							pointDescription);
 				}
-			};
-
-			if (searchingAddress) {
-				addAsTargetAction.dlg = new ProgressDialog(mapActivity);
-				addAsTargetAction.dlg.setTitle("");
-				addAsTargetAction.dlg.setMessage(addressNotKnownStr);
-				addAsTargetAction.dlg.setButton(Dialog.BUTTON_NEGATIVE, mapActivity.getResources().getString(R.string.shared_string_skip), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						cancelSearch = true;
-					}
-				});
-				addAsTargetAction.dlg.show();
-				searchDoneAction = addAsTargetAction;
-			} else {
-				addAsTargetAction.run();
-			}
+			});
 		}
 		close();
 	}
@@ -489,11 +479,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (object != null && object instanceof FavouritePoint) {
 			getFavoritePointEditor().edit((FavouritePoint) object);
 		} else {
-			String title = getTitleStr();
-			if (pointDescription.isFavorite() || title.equals(addressNotKnownStr)) {
-				title = "";
-			}
-			getFavoritePointEditor().add(latLon, title);
+			callMenuAction(true, new MenuAction() {
+				@Override
+				public void run() {
+					String title = getTitleStr();
+					if (pointDescription.isFavorite() || title.equals(addressNotKnownStr)) {
+						title = "";
+					}
+					getFavoritePointEditor().add(latLon, title);
+				}
+			});
 		}
 	}
 
@@ -514,6 +509,59 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, object);
+	}
+
+	private void callMenuAction(boolean waitForAddress, MenuAction addAsTargetAction) {
+		if (searchingAddress && waitForAddress) {
+			addAsTargetAction.dlg = new ProgressDialog(mapActivity);
+			addAsTargetAction.dlg.setTitle("");
+			addAsTargetAction.dlg.setMessage(addressNotKnownStr);
+			addAsTargetAction.dlg.setButton(Dialog.BUTTON_NEGATIVE, mapActivity.getResources().getString(R.string.shared_string_skip), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					cancelSearch = true;
+				}
+			});
+			addAsTargetAction.dlg.show();
+			searchDoneAction = addAsTargetAction;
+		} else {
+			addAsTargetAction.run();
+		}
+	}
+
+	public void addAsLastIntermediate() {
+		callMenuAction(true, new MenuAction() {
+			@Override
+			public void run() {
+				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(latLon,
+						true, mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size(),
+						pointDescription);
+				close();
+			}
+		});
+	}
+
+	public void setAsStartPoint(final boolean openRouteInfoMenu) {
+		callMenuAction(true, new MenuAction() {
+			@Override
+			public void run() {
+				mapActivity.getMyApplication().getTargetPointsHelper().setStartPoint(latLon, true, pointDescription);
+				if (openRouteInfoMenu) {
+					mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().show();
+				}
+			}
+		});
+	}
+
+	public void setAsTargetPoint(final boolean openRouteInfoMenu) {
+		callMenuAction(true, new MenuAction() {
+			@Override
+			public void run() {
+				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(latLon, true, -1, pointDescription);
+				if (openRouteInfoMenu) {
+					mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().show();
+				}
+			}
+		});
 	}
 
 	public void addWptPt() {
