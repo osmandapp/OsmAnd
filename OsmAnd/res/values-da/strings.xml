@@ -225,7 +225,7 @@
     <string name="osmand_parking_warning">Advarsel</string>
     <string name="osmand_parking_warning_text">Påmindelse om at afhente bil blev tidligere tilføjet til kalender. Den forblive der, indtil den slettes manuelt.</string>
     <string name="osmand_parking_time_limit_title">Indstil tidsgrænsen for parkering</string>
-    <string name="osmand_parking_delete_confirm">Skal placeringen af den parkerede bil slettes?</string>
+    <string name="osmand_parking_delete_confirm">Slet parkeringsmarkør?</string>
     <string name="osmand_parking_delete">Slet P-plads markør</string>
     <string name="osmand_parking_choose_type">Vælg parkeringstype</string>
     <string name="osmand_parking_lim_text">Tidsbegrænset</string>
@@ -892,7 +892,7 @@
     <string name="osb_comment_dialog_message">Meddelelse</string>
     
     <string name="favourites_remove_dialog_success">Favoritpunkt {0} blev slettet.</string>
-    <string name="favourites_remove_dialog_msg">Fjern favoritpunkt \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Slet favoritpunkt \'%s\'?</string>
     <string name="favourites_context_menu_delete">Slet</string>
     <string name="favourites_context_menu_edit">Rediger</string>
     <string name="amenity_type_emergency">Nødsituation</string>
