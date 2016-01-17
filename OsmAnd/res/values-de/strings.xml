@@ -2001,4 +2001,7 @@
 <string name="number_of_edits">Anzahl der Bearbeitungen</string>
     <string name="number_of_contributors">Anzahl der Mitwirkenden</string>
     <string name="reports_for">Bericht für:</string>
-</resources>
+<string name="add_time_span">Zeitspanne hinzufügen</string>
+    <string name="road_blocked">Straße blockiert</string>
+    <string name="shared_string_select">Auswählen</string>
+    </resources>
