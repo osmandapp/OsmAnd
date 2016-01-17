@@ -90,13 +90,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			selectFromMapTouch = false;
-			if (selectFromMapForTarget) {
-				getTargets().navigateToPoint(latlon, true, -1);
-			} else {
-				getTargets().setStartPoint(latlon, true, null);
-			}
 			contextMenu.showMinimized(latlon, null, null);
-			show();
+			if (selectFromMapForTarget) {
+				contextMenu.setAsTargetPoint(true);
+			} else {
+				contextMenu.setAsStartPoint(true);
+			}
 			return true;
 		}
 		return false;
