@@ -828,14 +828,14 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	private void changePopupText() {
 		String msg = null;
 		if (mUndoActions.size() > 1) {
-			msg = mUndoActions.size() + " " + mListView.getResources().getString(R.string.n_items_deleted);
+			msg = mUndoActions.size() + " " + mListView.getResources().getString(R.string.n_items_removed);
 		} else if (mUndoActions.size() >= 1) {
 			// Set title from single undoable or when no multiple deletion string
 			// is given
 			msg = mUndoActions.get(mUndoActions.size() - 1).getTitle();
 
 			if (msg == null) {
-				msg = mListView.getResources().getString(R.string.item_deleted);
+				msg = mListView.getResources().getString(R.string.item_removed);
 			}
 		}
 		mUndoPopupTextView.setText(msg);

@@ -426,7 +426,7 @@ public class WaypointDialogHelper {
 						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 						MenuItem item;
 						item = optionsMenu.getMenu().add(
-								R.string.shared_string_delete).setIcon(app.getIconsCache().
+								R.string.shared_string_remove).setIcon(app.getIconsCache().
 								getContentIcon(R.drawable.ic_action_remove_dark));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override

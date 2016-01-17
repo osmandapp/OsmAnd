@@ -1574,8 +1574,8 @@
     <string name="osm_edit_deleted_poi">OSM POI sters</string>
     <string name="context_menu_item_open_note">Deschideti OSM Notite</string>
     <string name="osm_edit_reopened_note">OSM Notite redeschis</string>
-    <string name="item_deleted">Articol șters</string>
-    <string name="n_items_deleted">articole șterse</string>
+    <string name="item_removed">Articol șters</string>
+    <string name="n_items_removed">articole șterse</string>
     <string name="shared_string_undo_all">Restaurează toate</string>
     <string name="shared_string_type">Tip</string>
     <string name="starting_point">Punct de plecare</string>

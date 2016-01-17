@@ -2068,8 +2068,8 @@
 <string name="select_month_and_country">選擇月份與國家</string>
 <string name="shared_string_type">類型</string>
     <string name="starting_point">起始標點</string>
-    <string name="item_deleted">項目已刪除</string>
-    <string name="n_items_deleted">項目已刪除</string>
+    <string name="item_removed">項目已刪除</string>
+    <string name="n_items_removed">項目已刪除</string>
     <string name="shared_string_undo_all">全部取消</string>
     <string name="rendering_attr_hideIcons_name">隱藏 POI 圖示</string>
     <string name="switch_start_finish">起始點與目的地對調</string>

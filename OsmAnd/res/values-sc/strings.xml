@@ -2077,8 +2077,8 @@
     <string name="select_month_and_country">Ischerta mese e istadu</string>
 <string name="shared_string_type">Casta</string>
     <string name="starting_point">Puntu de incumintzu</string>
-    <string name="item_deleted">Elementu burradu</string>
-    <string name="n_items_deleted">elementos burrados</string>
+    <string name="item_removed">Elementu burradu</string>
+    <string name="n_items_removed">elementos burrados</string>
     <string name="shared_string_undo_all">ANNUDDA TOTU</string>
     <string name="rec_split">Intervallu de registratzione</string>
     <string name="rec_split_title">Imprea un’intervallu de registratzione</string>

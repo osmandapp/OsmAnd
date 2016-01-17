@@ -278,7 +278,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			}
 		}
 		item = optionsMenu.getMenu().add(
-				R.string.shared_string_delete).setIcon(getMyApplication().getIconsCache().
+				R.string.shared_string_remove).setIcon(getMyApplication().getIconsCache().
 						getContentIcon(R.drawable.ic_action_remove_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

@@ -349,7 +349,7 @@ public class ItemViewHolder {
 		
 		final File fl = indexItem.getTargetFile(context.getMyApplication());
 		if (fl.exists()) {
-			item = optionsMenu.getMenu().add(R.string.shared_string_delete).setIcon(
+			item = optionsMenu.getMenu().add(R.string.shared_string_remove).setIcon(
 							context.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override

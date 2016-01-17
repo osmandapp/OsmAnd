@@ -2042,8 +2042,8 @@
     <string name="Night">През нощта</string>
 <string name="switch_start_finish">Размяна на началната с крайна точка</string>
     <string name="rendering_attr_hideIcons_name">Скриване на POI иконите</string>
-    <string name="item_deleted">Изтрито</string>
-    <string name="n_items_deleted">изтрити елемента</string>
+    <string name="item_removed">Изтрито</string>
+    <string name="n_items_removed">изтрити елемента</string>
     <string name="shared_string_undo_all">ВРЪЩАНЕ НА ВСИЧКО</string>
     <string name="shared_string_type">Тип</string>
     <string name="starting_point">Начална точка</string>

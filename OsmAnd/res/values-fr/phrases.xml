@@ -1838,7 +1838,7 @@
 	<string name="poi_recycling_styrofoam">Mousse de polystyrène</string>
 	<string name="poi_recycling_plasterboard">Plaque de plâtre</string>
 	<string name="poi_brownfield">Friche industrielle</string>
-	<string name="poi_greenfield">Zone verte</string>
+	<string name="poi_greenfield">Espace vert</string>
 	<string name="poi_bunker_silo">Silo couloir</string>
 	<string name="poi_paediatrics">Pédiatrie</string>
 
@@ -1946,4 +1946,6 @@
 	<string name="poi_crop_cranberry">Culture : canneberge</string>
 	<string name="poi_social_facility_food_bank">Service social: Banque alimentaire</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation : Grèce antique</string>
+	<string name="poi_payment_pro100_no">Cartes PRO100 non acceptées</string>
+	<string name="poi_payment_pro100_yes">Cartes PRO100 acceptées</string>
 	</resources>

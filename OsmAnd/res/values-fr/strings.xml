@@ -2099,8 +2099,8 @@
     <string name="Night">Nuit</string>
     
 <string name="select_month_and_country">Choisissez un mois et un pays</string>
-<string name="item_deleted">Élément supprimé</string>
-    <string name="n_items_deleted">Éléments supprimés</string>
+<string name="item_removed">Élément supprimé</string>
+    <string name="n_items_removed">Éléments supprimés</string>
     <string name="shared_string_undo_all">Tout annuler</string>
     <string name="starting_point">Point de départ</string>
     <string name="rec_split">Intervalle d\'enregistrement</string>
