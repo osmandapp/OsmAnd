@@ -2061,7 +2061,7 @@
     <string name="select_month_and_country">Välj månad och land</string>
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
-    <string name="item_removed">post raderad</string>
+    <string name="item_removed">Post borttagen</string>
     <string name="n_items_removed">poster raderade</string>
     <string name="shared_string_undo_all">ÅNGRA ALLA</string>
     <string name="rendering_attr_hideIcons_name">Dölj POI-ikoner</string>
@@ -2070,4 +2070,8 @@
     <string name="number_of_edits">Antal redigeringar</string>
     <string name="reports_for">Rapport för:</string>
 <string name="shared_string_select">Välj</string>
+    <string name="shared_string_remove">Ta bort</string>
+    <string name="clear_updates_proposition_message">Du kan ta bort hämtade uppdateringar och få tillbaka originalkartan</string>
+    <string name="add_time_span">Lägg till tidsspann</string>
+    <string name="road_blocked">Blockerad väg</string>
     </resources>
