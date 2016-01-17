@@ -797,7 +797,7 @@
     <string name="no_route">Sin ruta</string>
     <string name="delete_target_point">Quitar el destino</string>
     <string name="target_point">Destino %1$s</string>
-    <string name="intermediate_point">Destino %1$s</string>
+    <string name="intermediate_point">Destino intermedio %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Añadir como último destino intermedio</string>
     <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
     <string name="add_as_last_destination_point">Añadir como último destino intermedio</string>
