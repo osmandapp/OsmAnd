@@ -2160,7 +2160,7 @@
 <string name="select_month_and_country">Kies maand en kaart</string>
 <string name="starting_point">Startpunt</string>
     <string name="shared_string_type">Type</string>
-    <string name="item_deleted">Item verwijderd</string>
+    <string name="item_removed">Item verwijderd</string>
     <string name="n_items_deleted">items verwijderd</string>
     <string name="shared_string_undo_all">Alles terugzetten</string>
     <string name="rendering_attr_hideIcons_name">Verberg POI-iconen</string>

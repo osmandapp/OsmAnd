@@ -835,7 +835,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 			msg = mUndoActions.get(mUndoActions.size() - 1).getTitle();
 
 			if (msg == null) {
-				msg = mListView.getResources().getString(R.string.item_deleted);
+				msg = mListView.getResources().getString(R.string.item_removed);
 			}
 		}
 		mUndoPopupTextView.setText(msg);

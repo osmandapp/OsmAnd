@@ -1883,7 +1883,7 @@
     <string name="live_update">Okamžité aktualizace</string>
     <string name="update_now">Aktualizovat nyní</string>
     <string name="missing_write_external_storage_permission">Aplikace nemá povolen přístup k SD kartě</string>
-<string name="item_deleted">Položka smazána</string>
+<string name="item_removed">Položka smazána</string>
     <string name="n_items_deleted">vymazaných položek</string>
     <string name="shared_string_undo_all">VRÁTIT ZPĚT VŠE</string>
     <string name="shared_string_type">Typ</string>

@@ -2135,7 +2135,7 @@
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto di partenza</string>
     <string name="select_month_and_country">Scegli il mese e lo stato</string>
-<string name="item_deleted">Oggetto cancellato</string>
+<string name="item_removed">Oggetto cancellato</string>
     <string name="n_items_deleted">oggetti cancellati</string>
     <string name="shared_string_undo_all">Annulla tutto</string>
     <string name="switch_start_finish">Inverti punti di partenza e destinazione</string>

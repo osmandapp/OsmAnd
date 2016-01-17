@@ -31,7 +31,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
 		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 	}
 

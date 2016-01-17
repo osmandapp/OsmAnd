@@ -199,7 +199,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	private void selectModelOptions(final HistoryEntry model, View v) {
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		MenuItem item = optionsMenu.getMenu().add(
-				R.string.shared_string_delete).setIcon(
+				R.string.shared_string_remove).setIcon(
 				getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
