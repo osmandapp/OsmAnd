@@ -834,7 +834,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
 	<string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 	<string name="favourites_context_menu_delete">Favorit löschen</string>
-	<string name="favourites_remove_dialog_msg">Wollen Sie den Punkt \'%s\' wirklich löschen?</string>
+	<string name="favourites_remove_dialog_msg">Wollen Sie den Favoritenpunkt \'%s\' wirklich löschen?</string>
 	<string name="favourites_remove_dialog_success">Der Punkt {0} wurde erfolgreich gelöscht.</string>
 	
 	<string name="osb_comment_dialog_message">Nachricht</string>
@@ -2007,4 +2007,5 @@
 <string name="add_time_span">Zeitspanne hinzufügen</string>
     <string name="road_blocked">Straße blockiert</string>
     <string name="shared_string_select">Auswählen</string>
+    <string name="clear_updates_proposition_message">Kartenaktualisierungen können gelöscht werden um zur orginal Karte zurückzukehren</string>
     </resources>
