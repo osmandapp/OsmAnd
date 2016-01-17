@@ -43,7 +43,7 @@ public class TargetPointMenuController extends MenuController {
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.cancel_navigation);
 			leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
 		} else {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
 			leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 		}
 	}

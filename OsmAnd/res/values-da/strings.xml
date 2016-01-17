@@ -2222,7 +2222,7 @@
 <string name="select_month_and_country">Vælg måned og land</string>
 <string name="shared_string_type">Type</string>
     <string name="starting_point">Udgangspunkt</string>
-    <string name="item_deleted">Emne slettet</string>
+    <string name="item_removed">Emne slettet</string>
     <string name="n_items_deleted">Emner slettet</string>
     <string name="shared_string_undo_all">FORTRYD ALLE</string>
     <string name="rendering_attr_hideIcons_name">Skjul IP ikoner</string>
