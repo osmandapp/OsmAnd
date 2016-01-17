@@ -46,6 +46,7 @@ public class WorldRegion implements Serializable {
 		protected String regionMetric;
 		protected String regionRoadSigns;
 		protected String wikiLink;
+		protected String population;
 
 		public String getRegionLeftHandDriving() {
 			return regionLeftHandDriving;
@@ -65,6 +66,10 @@ public class WorldRegion implements Serializable {
 
 		public String getWikiLink() {
 			return wikiLink;
+		}
+
+		public String getPopulation() {
+			return population;
 		}
 	}
 

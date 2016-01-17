@@ -48,6 +48,7 @@ public class OsmandRegions {
 	public static final String FIELD_ROAD_SIGNS = "region_road_signs";
 	public static final String FIELD_LEFT_HAND_DRIVING = "region_left_hand_navigation";
 	public static final String FIELD_WIKI_LINK = "region_wiki_link";
+	public static final String FIELD_POPULATION = "region_population";
 
 	private BinaryMapIndexReader reader;
 	private String locale = "en";
@@ -76,6 +77,7 @@ public class OsmandRegions {
 		Integer leftHandDrivingType = null;
 		Integer roadSignsType = null;
 		Integer wikiLinkType = null;
+		Integer populationType = null;
 
 		public String get(Integer tp, BinaryMapDataObject object) {
 			if(tp == null) {
@@ -396,6 +398,7 @@ public class OsmandRegions {
 		rd.params.regionMetric = mapIndexFields.get(mapIndexFields.metricType, object);
 		rd.params.regionRoadSigns = mapIndexFields.get(mapIndexFields.roadSignsType, object);
 		rd.params.wikiLink = mapIndexFields.get(mapIndexFields.wikiLinkType, object);
+		rd.params.population = mapIndexFields.get(mapIndexFields.populationType, object);
 		rd.regionSearchText = getSearchIndex(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
 		return rd;
@@ -513,6 +516,7 @@ public class OsmandRegions {
 			mapIndexFields.leftHandDrivingType = object.getMapIndex().getRule(FIELD_LEFT_HAND_DRIVING, null);
 			mapIndexFields.roadSignsType = object.getMapIndex().getRule(FIELD_ROAD_SIGNS, null);
 			mapIndexFields.wikiLinkType = object.getMapIndex().getRule(FIELD_WIKI_LINK, null);
+			mapIndexFields.populationType = object.getMapIndex().getRule(FIELD_POPULATION, null);
 			mapIndexFields.nameType = object.getMapIndex().getRule(FIELD_NAME, null);
 		}
 	}

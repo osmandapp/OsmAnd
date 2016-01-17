@@ -197,6 +197,21 @@ public class MapDataMenuController extends MenuController {
 			}
 			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, false, true);
 		}
+		if (!Algorithms.isEmpty(mapObject.getWorldRegion().getParams().getPopulation())) {
+			String population = mapObject.getWorldRegion().getParams().getPopulation();
+			StringBuilder b = new StringBuilder();
+			int k = 0;
+			for (int i = population.length() - 1; i >= 0; i--) {
+				if (k == 3) {
+					b.insert(0, " ");
+					k = 0;
+				}
+				b.insert(0, population.charAt(i));
+				k++;
+			}
+			addPlainMenuItem(R.drawable.ic_action_info_dark, getMapActivity().getResources().getString(R.string.poi_population)
+					+ ": " + b, false, false);
+		}
 		if (indexItem != null) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getMapActivity());
 			addPlainMenuItem(R.drawable.ic_action_data, indexItem.getRemoteDate(dateFormat), false, false);
