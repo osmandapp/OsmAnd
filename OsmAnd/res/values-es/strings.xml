@@ -2001,7 +2001,7 @@
     <string name="no_address_found">Dirección indeterminada</string>
 	<string name="looking_up_address">Buscando dirección</string>
     <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
-    <string name="update">Actualizar cada</string>
+    <string name="update">Actualizar</string>
     <string name="only_download_over_wifi">Descargar sólo por WiFi</string>
     <string name="live_update">Actualización en vivo</string>
 <string name="update_now">Actualizar ahora</string>
@@ -2019,7 +2019,7 @@
     <string name="available_maps">Mapas disponibles</string>
     <string name="last_update">Última actualización: %s</string>
 
-    <string name="update_time">Tiempo de actualización</string>
+    <string name="update_time">Hora de la actualización</string>
 
 <string name="rec_split_storage_size">Tamaño del almacenamiento</string>
     <string name="updates_size">Tamaño de la actualización</string>
@@ -2031,7 +2031,7 @@
     <string name="rec_split_clip_length_desc">La duración de cada clip grabado no excederá el tiempo de intervalo establecido</string>
     <string name="rec_split_storage_size_desc">Cantidad de espacio que pueden ocupar todos los clips grabados</string>
     <string name="hourly">Cada hora</string>
-    <string name="daily">A diario</string>
+    <string name="daily">Cada día</string>
     <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="Night">Por la noche</string>
