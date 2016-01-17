@@ -59,6 +59,7 @@ import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -74,7 +75,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
-		ActivityCompat.OnRequestPermissionsResultCallback{
+		ActivityCompat.OnRequestPermissionsResultCallback {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 
 	public static final int UPDATES_TAB_NUMBER = 2;
@@ -106,6 +107,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
 	private DownloadIndexesThread downloadThread;
 	protected WorldRegion downloadItem;
+	protected String downloadTargetFileName;
 
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
@@ -219,12 +221,18 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (downloadItem != null && downloadItem != getMyApplication().getRegions().getWorldRegion()
 				&& !WorldRegion.WORLD_BASEMAP.equals(downloadItem.getRegionDownloadNameLC())) {
 
-			boolean firstMap = !getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
-			if (firstMap) {
-				initSettingsFirstMap(downloadItem);
+			if (!Algorithms.isEmpty(downloadTargetFileName)) {
+				File f = new File(downloadTargetFileName);
+				if (f.exists() && f.lastModified() > System.currentTimeMillis() - 10000) {
+					boolean firstMap = !getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
+					if (firstMap) {
+						initSettingsFirstMap(downloadItem);
+					}
+					showGoToMap(downloadItem);
+				}
 			}
-			showGoToMap(downloadItem);
 			downloadItem = null;
+			downloadTargetFileName = null;
 		}
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
@@ -558,11 +566,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 	}
 
-	public void setDownloadItem(WorldRegion region) {
+	public void setDownloadItem(WorldRegion region, String targetFileName) {
 		if (downloadItem == null) {
 			downloadItem = region;
+			downloadTargetFileName = targetFileName;
 		} else if (region == null) {
 			downloadItem = null;
+			downloadTargetFileName = null;
 		}
 	}
 
@@ -817,7 +827,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				@Override
 				public void onClick(View v) {
 					if (getActivity() instanceof DownloadActivity) {
-						((DownloadActivity) getActivity()).setDownloadItem(null);
+						((DownloadActivity) getActivity()).setDownloadItem(null, null);
 					}
 					dismiss();
 				}

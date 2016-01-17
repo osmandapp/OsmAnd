@@ -211,7 +211,7 @@ public class ItemViewHolder {
 		boolean handled = false;
 		if(parentOptional != null) {
 			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
-			context.setDownloadItem(region);
+			context.setDownloadItem(region, indexItem.getTargetFile(context.getMyApplication()).getAbsolutePath());
 		}
 		if (indexItem.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
 			for (IndexItem ii : parentOptional.getIndividualResources()) {
