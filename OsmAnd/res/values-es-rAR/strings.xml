@@ -2050,4 +2050,8 @@
     <string name="number_of_contributors">Número de contribuidores</string>
     <string name="number_of_edits">Número de ediciones</string>
     <string name="reports_for">Reporte para:</string>
-</resources>
+<string name="clear_updates_proposition_message">Puedes quitar actualizaciones descargadas y volver a la edición del mapa original</string>
+    <string name="add_time_span">Añadir lapso de tiempo</string>
+    <string name="road_blocked">Camino bloqueado</string>
+    <string name="shared_string_select">Elegir</string>
+    </resources>
