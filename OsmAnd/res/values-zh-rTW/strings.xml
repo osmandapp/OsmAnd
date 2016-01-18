@@ -786,7 +786,7 @@
     <string name="search_address">地址查詢</string>
     <string name="choose_building">選取建築物</string>
     <string name="choose_street">選擇道路</string>
-    <string name="choose_city">選擇縣市</string>
+    <string name="choose_city">選擇縣市或郵遞區號</string>
     <string name="ChooseCountry">選擇國家</string>
     <string name="show_view_angle">顯示目視方向</string>
     <string name="map_view_3d_descr">啟用 3D 檢視地圖</string>
