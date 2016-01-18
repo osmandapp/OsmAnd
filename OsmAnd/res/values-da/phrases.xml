@@ -2649,4 +2649,7 @@
 	<string name="poi_fair_trade_no">Fairtrade: nej</string>
 	<string name="poi_fair_trade_only">Kun fairtrade-produkter</string>
 
+<string name="poi_ice_hockey">Ishockey</string>
+	<string name="poi_bandy">Bandy</string>
+
 </resources>
