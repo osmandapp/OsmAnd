@@ -931,7 +931,7 @@
     <string name="map_widget_monitoring_services">Servizi di registrazione</string>
     <string name="no_route">Nessun percorso</string>
     <string name="delete_target_point">Rimuovi la destinazione</string>
-    <string name="intermediate_point">Punto intermedio %1$s</string>
+    <string name="intermediate_point">Destinazione intermedia %1$s</string>
     <string name="gps_not_available">Attiva il GPS nelle impostazioni</string>
     <string name="map_widget_show_destination_arrow">Visualizza la direzione della destinazione</string>
     <string name="non_optimal_route_calculation">Calcola un percorso, eventualmente anche non ottimale, su lunghe distanze</string>
