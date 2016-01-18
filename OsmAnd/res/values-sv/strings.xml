@@ -113,7 +113,7 @@
     <string name="osmand_parking_warning">Varning</string>
     <string name="osmand_parking_warning_text">Notifiering om att hämta din bil har tidigare lagts till i din kalender. Den kommer att finnas där tills du tar bort den manuellt.</string>
     <string name="osmand_parking_time_limit_title">Ange tidsgränsen för parkering</string>
-    <string name="osmand_parking_delete_confirm">Vill du ta bort platsen för den parkerade bilen?</string>
+    <string name="osmand_parking_delete_confirm">Vill du ta bort markören för parkeringsplatsen?</string>
     <string name="osmand_parking_delete">Ta bort P-markering</string>
     <string name="osmand_parking_choose_type">Välj typ av parkering</string>
     <string name="osmand_parking_lim_text">Tidsbegränsad</string>
@@ -894,7 +894,7 @@
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
     <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems). "</string>
     <string name="delete_target_point">Ta bort destination</string>
-    <string name="intermediate_point">Destination %1$s</string>
+    <string name="intermediate_point">Mellanliggande destination %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="local_index_descr_title">Hantera kartfiler</string>
     <string name="incomplete_locale">ofullständig</string>
