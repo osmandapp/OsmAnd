@@ -2074,7 +2074,7 @@
     <string name="daily">Dnevno</string>
     <string name="weekly">Tedensko</string>
     <string name="morning">Zjutraj</string>
-    <string name="Night">Zvečer</string>
+    <string name="night">Zvečer</string>
 <string name="rec_split">Razdelilnik posnetkov</string>
     <string name="rec_split_title">Uporabi razdelilnik posnetkov</string>
     <string name="rec_split_desc">Prepiši starejše posnetke, ko velikost posnetka preseže omejitev</string>

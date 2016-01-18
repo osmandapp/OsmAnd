@@ -2080,6 +2080,6 @@
     <string name="daily">Dzienny</string>
     <string name="weekly">Tygodniowo</string>
     <string name="morning">Rano</string>
-    <string name="Night">Noc</string>
+    <string name="night">Noc</string>
     <string name="select_month_and_country">Wybierz miesiąc i kraj</string>
 </resources>

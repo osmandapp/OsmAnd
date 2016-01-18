@@ -2019,6 +2019,6 @@
     <string name="daily">Cada día</string>
     <string name="weekly">Cada semana</string>
     <string name="morning">Mañá</string>
-    <string name="Night">Noite</string>
+    <string name="night">Noite</string>
     <string name="select_month_and_country">Seleccione o mes e o país</string>
 </resources>

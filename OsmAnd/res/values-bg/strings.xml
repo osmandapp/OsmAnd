@@ -2039,7 +2039,7 @@
     <string name="daily">Всеки ден</string>
     <string name="weekly">Всяка седмица</string>
     <string name="morning">Сутрин</string>
-    <string name="Night">През нощта</string>
+    <string name="night">През нощта</string>
 <string name="switch_start_finish">Размяна на началната с крайна точка</string>
     <string name="rendering_attr_hideIcons_name">Скриване на POI иконите</string>
     <string name="item_removed">Изтрито</string>

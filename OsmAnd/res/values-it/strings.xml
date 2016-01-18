@@ -2129,7 +2129,7 @@
     <string name="daily">Giornaliero</string>
     <string name="weekly">Settimanale</string>
     <string name="morning">Mattina</string>
-    <string name="Night">Notte</string>
+    <string name="night">Notte</string>
 <string name="shared_string_not_selected">Non selezionato</string>
     
 <string name="shared_string_type">Tipo</string>

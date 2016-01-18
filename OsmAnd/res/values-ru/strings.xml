@@ -1894,6 +1894,6 @@
     <string name="update_time">Время обновления</string>
     <string name="number_of_contributors">Количество участников</string>
     <string name="number_of_edits">Количество правок</string>
-    <string name="Night">Ночь</string>
+    <string name="night">Ночь</string>
     <string name="morning">Утро</string>
     </resources>

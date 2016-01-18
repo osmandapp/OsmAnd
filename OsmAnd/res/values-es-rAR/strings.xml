@@ -2036,7 +2036,7 @@
     <string name="daily">Diario</string>
     <string name="weekly">Semanal</string>
     <string name="morning">Por la mañana</string>
-    <string name="Night">Por la noche</string>
+    <string name="night">Por la noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
     
 <string name="select_month_and_country">Elige mes y país</string>

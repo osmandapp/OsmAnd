@@ -40,15 +40,6 @@
     <string name="no_microphone_permission">App have no permission to access microphone.</string>
     <string name="route_distance">Distance:</string>
     <string name="route_duration">Time:</string>
-    <string-array name="update_frequencies_array">
-        <item>Every Hour</item>
-        <item>Once a day</item>
-        <item>Weekly</item>
-    </string-array>
-    <string-array name="update_times_of_day">
-        <item>Morning</item>
-        <item>Night</item>
-    </string-array>
     <string name="rendering_attr_horseRoutes_name">Horse routes</string>
     <string name="no_address_found">No address determined</string>
     <string name="shared_string_near">Near</string>
@@ -2158,7 +2149,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
     <string name="morning">Morning</string>
-    <string name="Night">Night</string>
+    <string name="night">Night</string>
     <string name="select_month_and_country">Select month and country</string>
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>

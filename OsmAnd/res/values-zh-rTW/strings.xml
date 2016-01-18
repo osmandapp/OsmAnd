@@ -2062,7 +2062,7 @@
     <string name="daily">每日</string>
     <string name="weekly">每週</string>
     <string name="morning">早上</string>
-    <string name="Night">夜間</string>
+    <string name="night">夜間</string>
 <string name="shared_string_not_selected">未選取</string>
     
 <string name="select_month_and_country">選擇月份與國家</string>

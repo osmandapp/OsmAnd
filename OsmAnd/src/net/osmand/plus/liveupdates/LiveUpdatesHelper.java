@@ -126,7 +126,7 @@ public class LiveUpdatesHelper {
 
 	public static enum TimeOfDay {
 		MORNING(R.string.morning),
-		NIGHT(R.string.Night);
+		NIGHT(R.string.night);
 		private final int localizedId;
 
 		TimeOfDay(int localizedId) {

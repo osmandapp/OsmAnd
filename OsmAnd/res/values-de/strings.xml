@@ -1992,7 +1992,7 @@
     <string name="daily">Täglich</string>
     <string name="weekly">Wöchentlich</string>
     <string name="morning">Morgens</string>
-    <string name="Night">Nachts</string>
+    <string name="night">Nachts</string>
 <string name="shared_string_not_selected">Nicht ausgewählt</string>
     
 <string name="select_month_and_country">Wähle Monat und Land</string>

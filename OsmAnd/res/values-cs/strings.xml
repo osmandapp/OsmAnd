@@ -1910,6 +1910,6 @@
     <string name="daily">Každý den</string>
     <string name="weekly">Jednou týdně</string>
     <string name="morning">Ráno</string>
-    <string name="Night">V noci</string>
+    <string name="night">V noci</string>
     <string name="select_month_and_country">Vyberte měsíc a krajinu</string>
 </resources>

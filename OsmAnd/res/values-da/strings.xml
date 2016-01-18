@@ -2216,7 +2216,7 @@
     <string name="daily">Daglig</string>
     <string name="weekly">Ugentlig</string>
     <string name="morning">Morgen</string>
-    <string name="Night">Aften</string>
+    <string name="night">Aften</string>
 <string name="shared_string_not_selected">Ikke markeret</string>
     
 <string name="select_month_and_country">Vælg måned og land</string>

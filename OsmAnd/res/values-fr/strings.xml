@@ -2096,7 +2096,7 @@
     <string name="daily">Quotidien</string>
     <string name="weekly">Hebdomadaire</string>
     <string name="morning">Matin</string>
-    <string name="Night">Nuit</string>
+    <string name="night">Nuit</string>
     
 <string name="select_month_and_country">Choisissez un mois et un pays</string>
 <string name="item_removed">Élément supprimé</string>
