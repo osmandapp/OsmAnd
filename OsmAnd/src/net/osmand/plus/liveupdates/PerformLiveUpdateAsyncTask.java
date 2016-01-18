@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -75,9 +74,7 @@ public class PerformLiveUpdateAsyncTask
 		} else {
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
 			List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
-			if (ll.isEmpty()) {
-				Toast.makeText(context, R.string.no_updates_available, Toast.LENGTH_SHORT).show();
-			} else {
+			if (!ll.isEmpty()) {
 				ArrayList<IndexItem> itemsToDownload = new ArrayList<>(ll.size());
 				for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
 					IndexItem indexItem = new IndexItem(iu.fileName, "Incremental update",
