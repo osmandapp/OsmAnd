@@ -770,7 +770,7 @@
 	<string name="search_address">Adresse suchen</string>
 	<string name="choose_building">Hausnummer wählen</string>
 	<string name="choose_street">Straße wählen</string>
-	<string name="choose_city">Ort wählen</string>
+	<string name="choose_city">Ort oder Postleitzahl wählen</string>
 	<string name="ChooseCountry">Land wählen</string>
 	
 	<string name="show_view_angle">Blickrichtung einblenden</string>
