@@ -11,7 +11,7 @@
     <string name="no_route">沒有路線</string>
     <string name="delete_target_point">移除目的地</string>
     <string name="target_point">目的地 %1$s</string>
-    <string name="intermediate_point">航點 %1$s</string>
+    <string name="intermediate_point">中間節點 %1$s</string>
 
     <string name="context_menu_item_last_intermediate_point">增為最後一個的中途標點</string>
     <string name="context_menu_item_first_intermediate_point">增為第一個中途標點</string>
