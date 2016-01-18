@@ -1068,7 +1068,7 @@
     <string name="search_address">Søg adresse</string>
     <string name="choose_building">Vælg bygning</string>
     <string name="choose_street">Vælg gade</string>
-    <string name="choose_city">Vælg by</string>
+    <string name="choose_city">Vælg by eller postnummer</string>
     <string name="ChooseCountry">Vælg land</string>
     <string name="show_view_angle">Vis synsretning</string>
     <string name="map_view_3d_descr">Aktiver 3D-visning af kortet</string>
