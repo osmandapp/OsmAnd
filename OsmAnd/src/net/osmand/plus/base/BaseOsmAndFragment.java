@@ -2,6 +2,7 @@ package net.osmand.plus.base;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,10 @@ public class BaseOsmAndFragment extends Fragment {
 
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color){
 		return getIconsCache().getPaintedContentIcon(id, color);
+	}
+
+	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId){
+		return getIconsCache().getIcon(id, colorId);
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int id){
