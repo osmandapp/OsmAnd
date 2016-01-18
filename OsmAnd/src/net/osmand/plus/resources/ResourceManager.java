@@ -1,20 +1,15 @@
 package net.osmand.plus.resources;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.HandlerThread;
+import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
@@ -58,15 +53,20 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.HandlerThread;
-import android.text.format.DateFormat;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -620,10 +620,8 @@ public class ResourceManager {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		
-		if(context.getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
-			changesManager.collectChangesFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		}
-		
+		changesManager.collectChangesFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+
 		Collections.sort(files, Algorithms.getFileVersionComparator());
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
