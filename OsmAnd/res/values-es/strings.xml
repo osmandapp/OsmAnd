@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -579,7 +580,7 @@
     <string name="add_favorite_dialog_favourite_added_template">El favorito \'\'{0}\'\' se añadió correctamente.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
     <string name="favourites_context_menu_delete">Borrar favorito</string>
-    <string name="favourites_remove_dialog_msg">¿Quitar el favorito \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">¿Eliminar el punto favorito \'%s\'?</string>
     <string name="favourites_remove_dialog_success">El favorito {0} se borró correctamente.</string>
     <string name="osb_comment_dialog_message">Mensaje</string>
     <string name="osb_comment_dialog_author">Nombre del autor</string>
@@ -732,7 +733,7 @@
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">La notificación para recoger su automóvil, fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>
     <string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del aparcamiento</string>
-    <string name="osmand_parking_delete_confirm">¿Quiere eliminar la ubicación del automóvil aparcado?</string>
+    <string name="osmand_parking_delete_confirm">¿Quiere eliminar el marcador de posición de aparcamiento?</string>
     <string name="osmand_parking_delete">Eliminar un marcador de aparcamiento</string>
     <string name="osmand_parking_choose_type">Elija el tipo de aparcamiento</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
@@ -847,7 +848,7 @@
     <string name="map_widget_monitoring_services">Servicios de registro</string>
     <string name="no_route">Sin ruta</string>
     <string name="delete_target_point">Quitar destino</string>
-    <string name="intermediate_point">Destino %1$s</string>
+    <string name="intermediate_point">Destino intermedio %1$s</string>
     <string name="gps_not_available">Active el GPS en los ajustes</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
     <string name="enable_plugin_monitoring_services">Activa el complemento de grabación de viajes, para que use el servicio de registro de posición (registro GPX, seguimiento en línea)</string>
@@ -891,7 +892,7 @@
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="recording_is_recorded">Grabando un audio/vídeo. Para pararlo, pulse el control AV.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
-    <string name="recording_delete_confirm">¿Quiere quitar esta grabación?</string>
+    <string name="recording_delete_confirm">¿Quiere eliminar esta grabación?</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Grabar nota de audio</string>
     <string name="recording_context_menu_vrecord">Grabar nota de vídeo</string>
@@ -2040,7 +2041,17 @@
 <string name="select_month_and_country">Seleccione mes y país</string>
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
-    <string name="item_removed">Elemento eliminado</string>
+    <string name="item_removed">Elemento quitado</string>
     <string name="n_items_removed">elementos eliminados</string>
     <string name="shared_string_undo_all">DESHACER TODO</string>
-    </resources>
+    <string name="shared_string_remove">Quitar</string>
+    <string name="clear_updates_proposition_message">Puede quitar las actualizaciones descargadas y volver a la edición original del mapa</string>
+    <string name="add_time_span">Añadir intervalo de tiempo</string>
+    <string name="road_blocked">Carretera bloqueada</string>
+    <string name="shared_string_select">Seleccionar</string>
+    <string name="switch_start_finish">Invertir inicio y destino</string>
+    <string name="rendering_attr_hideIcons_name">Ocultar iconos de PDI</string>
+    <string name="number_of_contributors">Número de colaboradores</string>
+    <string name="number_of_edits">Número de ediciones</string>
+    <string name="reports_for">Informe para:</string>
+</resources>
