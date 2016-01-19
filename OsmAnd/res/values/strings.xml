@@ -1951,7 +1951,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="search_address">Search address</string>
     <string name="choose_building">Choose building</string>
     <string name="choose_street">Choose street</string>
-    <string name="choose_city">Choose city</string>
+    <string name="choose_city">Choose city or postcode</string>
     <string name="ChooseCountry">Choose country</string>
     <string name="show_view_angle">Display viewing direction</string>
     <string name="map_view_3d_descr">Enable 3D view of the map</string>
