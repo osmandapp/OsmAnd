@@ -2,7 +2,7 @@
 <resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
-    <string name="choose_city">Välj stad</string>
+    <string name="choose_city">Välj stad eller postnummer</string>
     <string name="choose_building">Välj byggnad</string>
     <string name="choose_street">Välj gata</string>
     <string name="map_widget_top_text">Gatunamn</string>
