@@ -62,6 +62,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 	};
 	private ExpandableListView listView;
 	private LocalIndexesAdapter adapter;
+	private AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>> loadLocalIndexesTask;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,12 +90,14 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 				return true;
 			}
 		});
-		new LoadLocalIndexTask(adapter, this).execute();
+		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
 		return view;
 	}
 
-	private OsmandSettings getSettings() {
-		return getMyActivity().getMyApplication().getSettings();
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		loadLocalIndexesTask.cancel(true);
 	}
 
 	public void notifyLiveUpdatesChanged() {
@@ -389,16 +392,17 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 		private List<LocalIndexInfo> result;
 		private LocalIndexesAdapter adapter;
 		private LiveUpdatesFragment fragment;
+		private LocalIndexHelper helper;
 
 		public LoadLocalIndexTask(LocalIndexesAdapter adapter,
 								  LiveUpdatesFragment fragment) {
 			this.adapter = adapter;
 			this.fragment = fragment;
+			helper = new LocalIndexHelper(fragment.getMyActivity().getMyApplication());
 		}
 
 		@Override
 		protected List<LocalIndexInfo> doInBackground(Void... params) {
-			LocalIndexHelper helper = new LocalIndexHelper(fragment.getMyActivity().getMyApplication());
 			return helper.getLocalFullMaps(this);
 		}
 
