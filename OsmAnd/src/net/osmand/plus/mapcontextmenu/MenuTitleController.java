@@ -2,14 +2,10 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
+import net.osmand.plus.GeocodingLookupService;
+import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
@@ -22,9 +18,11 @@ public abstract class MenuTitleController {
 	protected String commonTypeStr = "";
 	protected Drawable secondLineTypeIcon;
 	protected String streetStr = "";
-	protected String addressNotKnownStr;
-	protected boolean searchingAddress;
-	protected boolean cancelSearch;
+
+	private AddressLookupRequest addressLookupRequest;
+
+	protected String searchAddressStr;
+	protected String addressNotFoundStr;
 
 	public abstract MapActivity getMapActivity();
 
@@ -37,18 +35,34 @@ public abstract class MenuTitleController {
 	public abstract MenuController getMenuController();
 
 	public String getTitleStr() {
-		//if (Algorithms.isEmpty(nameStr) && searchingAddress) {
-		// searchingAddress did not work here once search was interrupted by a new search
-		if (Algorithms.isEmpty(nameStr) && needStreetName()) {
-			return addressNotKnownStr;
+		if (displayStreetNameInTitle() && searchingAddress()) {
+			return searchAddressStr;
 		} else {
 			return nameStr;
 		}
 	}
 
-	public boolean hasKnownTitle() {
+	public boolean searchingAddress() {
+		return addressLookupRequest != null;
+	}
+
+	public void cancelSearchAddress() {
+		if (addressLookupRequest != null) {
+			getMapActivity().getMyApplication().getGeocodingLookupService().cancel(addressLookupRequest);
+			addressLookupRequest = null;
+			onSearchAddressDone();
+		}
+	}
+
+	public boolean displayStreetNameInTitle() {
+		MenuController menuController = getMenuController();
+		return menuController != null && menuController.displayStreetNameInTitle();
+	}
+
+	// Has title which does not equal to "Looking up address" and "No address determined"
+	public boolean hasValidTitle() {
 		String title = getTitleStr();
-		return getMapActivity().getString(R.string.no_address_found).equals(title) || addressNotKnownStr.equals(title);
+		return !addressNotFoundStr.equals(title) && !searchAddressStr.equals(title);
 	}
 
 	public int getLeftIconId() {
@@ -72,18 +86,10 @@ public abstract class MenuTitleController {
 		}
 	}
 
-	public String getCommonTypeStr() {
-		return commonTypeStr;
-	}
-
 	public String getStreetStr() {
-		MenuController menuController = getMenuController();
-		if (menuController != null && menuController.needStreetName()) {
-			// Display "Looking up address..." status
-			//if (searchingAddress) {
-			// Again here searchingAddress does not work for case of search interrupted by new searcj, so:
-			if (Algorithms.isEmpty(streetStr)) {
-				return addressNotKnownStr;
+		if (needStreetName()) {
+			if (searchingAddress()) {
+				return searchAddressStr;
 			} else {
 				return streetStr;
 			}
@@ -93,7 +99,13 @@ public abstract class MenuTitleController {
 	}
 
 	protected void initTitle() {
-		addressNotKnownStr = getMapActivity().getString(R.string.looking_up_address) + getMapActivity().getString(R.string.shared_string_ellipsis);
+		searchAddressStr = PointDescription.getSearchAddressStr(getMapActivity());
+		addressNotFoundStr = PointDescription.getAddressNotFoundStr(getMapActivity());
+
+		if (searchingAddress()) {
+			cancelSearchAddress();
+		}
+
 		acquireIcons();
 		acquireNameAndType();
 		if (needStreetName()) {
@@ -146,95 +158,30 @@ public abstract class MenuTitleController {
 	}
 
 	protected void acquireStreetName() {
-		if (searchingAddress) {
-			cancelSearch = true;
-			getMapActivity().getMyApplication().runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					acquireStreetName();
+		addressLookupRequest = new AddressLookupRequest(getLatLon(), new GeocodingLookupService.OnAddressLookupResult() {
+			@Override
+			public void geocodingDone(String address) {
+				addressLookupRequest = null;
+			    if (Algorithms.isEmpty(address)) {
+					streetStr = PointDescription.getAddressNotFoundStr(getMapActivity());
+				} else {
+					streetStr = address;
 				}
-			}, 100);
-			return;
-		}
 
-		searchingAddress = true;
-		cancelSearch = false;
-		Location ll = new Location("");
-		ll.setLatitude(getLatLon().getLatitude());
-		ll.setLongitude(getLatLon().getLongitude());
-		getMapActivity().getMyApplication().getLocationProvider()
-				.getGeocodingResult(ll, new ResultMatcher<GeocodingResult>() {
+				if (displayStreetNameInTitle()) {
+					nameStr = streetStr;
+					getPointDescription().setName(nameStr);
+				}
+				onSearchAddressDone();
+			}
+		}, new GeocodingLookupService.OnAddressLookupProgress() {
+			@Override
+			public void geocodingInProgress() {
+				// animate three dots
+			}
+		});
 
-					@Override
-					public boolean publish(GeocodingResult object) {
-						if (object != null) {
-							OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
-							String lang = settings.MAP_PREFERRED_LOCALE.get();
-							String geocodingResult = "";
-							double relevantDistance = -1;
-
-							if (object.building != null) {
-								String bldName = object.building.getName(lang);
-								if (!Algorithms.isEmpty(object.buildingInterpolation)) {
-									bldName = object.buildingInterpolation;
-								}
-								geocodingResult = object.street.getName(lang) + " " + bldName + ", "
-										+ object.city.getName(lang);
-							} else if (object.street != null) {
-								geocodingResult = object.street.getName(lang) + ", " + object.city.getName(lang);
-								relevantDistance = object.getDistanceP();
-							} else if (object.city != null) {
-								geocodingResult = object.city.getName(lang);
-							} else if (object.point != null) {
-								RouteDataObject rd = object.point.getRoad();
-								String sname = rd.getName(lang);
-								if (Algorithms.isEmpty(sname)) {
-									sname = "";
-								}
-								String ref = rd.getRef();
-								if (!Algorithms.isEmpty(ref)) {
-									if (!Algorithms.isEmpty(sname)) {
-										sname += ", ";
-									}
-									sname += ref;
-								}
-								geocodingResult = sname;
-								relevantDistance = object.getDistanceP();
-							}
-
-							streetStr = geocodingResult;
-							if (relevantDistance == -1) {
-								relevantDistance = object.getDistance();
-							}
-
-							if (!Algorithms.isEmpty(streetStr) && relevantDistance > 100) {
-								streetStr = getMapActivity().getString(R.string.shared_string_near) + " " + streetStr;
-							} else if (Algorithms.isEmpty(streetStr)) {
-								streetStr = getMapActivity().getString(R.string.no_address_found);
-							}
-
-							MenuController menuController = getMenuController();
-							if (menuController == null || menuController.displayStreetNameInTitle()) {
-								nameStr = streetStr;
-								getPointDescription().setName(nameStr);
-							}
-						}
-
-						searchingAddress = false;
-						getMapActivity().runOnUiThread(new Runnable() {
-							public void run() {
-								onSearchAddressDone();
-							}
-						});
-						return true;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return cancelSearch;
-					}
-
-				});
+		getMapActivity().getMyApplication().getGeocodingLookupService().lookupAddress(addressLookupRequest);
 	}
 
 	protected void onSearchAddressDone() {

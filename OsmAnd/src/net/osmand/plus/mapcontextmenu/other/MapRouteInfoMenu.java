@@ -25,6 +25,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GeocodingLookupService;
+import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -58,6 +60,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private final MapContextMenu contextMenu;
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
+	private GeocodingLookupService geocodingLookupService;
 	private boolean selectFromMapTouch;
 	private boolean selectFromMapForTarget;
 
@@ -68,6 +71,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public static final String TARGET_SELECT = "TARGET_SELECT";
 	private boolean nightMode;
 	private boolean switched;
+
+	private AddressLookupRequest startPointRequest;
+	private AddressLookupRequest targetPointRequest;
 
 	private static final long SPINNER_MY_LOCATION_ID = 1;
 	private static final long SPINNER_FAV_ID = 2;
@@ -84,21 +90,37 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		routingHelper = mapActivity.getRoutingHelper();
 		mapView = mapActivity.getMapView();
 		routingHelper.addListener(this);
+		geocodingLookupService = mapActivity.getMyApplication().getGeocodingLookupService();
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			selectFromMapTouch = false;
-			contextMenu.showMinimized(latlon, null, null);
 			if (selectFromMapForTarget) {
-				contextMenu.setAsTargetPoint(true);
+				getTargets().navigateToPoint(latlon, true, -1);
 			} else {
-				contextMenu.setAsStartPoint(true);
+				getTargets().setStartPoint(latlon, true, null);
 			}
+			contextMenu.showMinimized(latlon, null, null);
+			show();
 			return true;
 		}
 		return false;
+	}
+
+	private void cancelStartPointAddressRequest() {
+		if (startPointRequest != null) {
+			geocodingLookupService.cancel(startPointRequest);
+			startPointRequest = null;
+		}
+	}
+
+	private void cancelTargetPointAddressRequest() {
+		if (targetPointRequest != null) {
+			geocodingLookupService.cancel(targetPointRequest);
+			targetPointRequest = null;
+		}
 	}
 
 	public void setVisible(boolean visible) {
@@ -532,7 +554,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			if (i > 0) {
 				via.append(" ");
 			}
-			via.append(getRoutePointDescription(points.get(i).point, points.get(i).getOnlyName()));
+			String description = points.get(i).getOnlyName();
+			via.append(getRoutePointDescription(points.get(i).point, description));
+			boolean needAddress = new PointDescription(PointDescription.POINT_TYPE_LOCATION, description).isSearchingAddress(mapActivity);
+			if (needAddress) {
+				AddressLookupRequest lookupRequest = new AddressLookupRequest(points.get(i).point, new GeocodingLookupService.OnAddressLookupResult() {
+					@Override
+					public void geocodingDone(String address) {
+						updateMenu();
+					}
+				}, null);
+				geocodingLookupService.lookupAddress(lookupRequest);
+			}
 		}
 		return via.toString();
 	}
@@ -567,6 +600,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			String oname = start.getOnlyName().length() > 0 ? start.getOnlyName()
 					: (mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
 			fromActions.add(new RouteSpinnerRow(SPINNER_START_ID, R.drawable.ic_action_get_my_location, oname));
+
+			final LatLon latLon = start.point;
+			final PointDescription pointDescription = start.getOriginalPointDescription();
+			boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
+			cancelStartPointAddressRequest();
+			if (needAddress) {
+				startPointRequest = new AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
+					@Override
+					public void geocodingDone(String address) {
+						startPointRequest = null;
+						updateMenu();
+					}
+				}, null);
+				geocodingLookupService.lookupAddress(startPointRequest);
+			}
 		}
 		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
 		RouteSpinnerArrayAdapter fromAdapter = new RouteSpinnerArrayAdapter(view.getContext());
@@ -587,10 +635,28 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
 		final TargetPointsHelper targets = getTargets();
 		ArrayList<RouteSpinnerRow> toActions = new ArrayList<>();
-		if (targets.getPointToNavigate() != null) {
+
+		TargetPoint finish = getTargets().getPointToNavigate();
+		if (finish != null) {
 			toActions.add(new RouteSpinnerRow(SPINNER_FINISH_ID, R.drawable.ic_action_get_my_location,
 					getRoutePointDescription(targets.getPointToNavigate().point,
 							targets.getPointToNavigate().getOnlyName())));
+
+			final LatLon latLon = finish.point;
+			final PointDescription pointDescription = finish.getOriginalPointDescription();
+			boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
+			cancelTargetPointAddressRequest();
+			if (needAddress) {
+				targetPointRequest = new AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
+					@Override
+					public void geocodingDone(String address) {
+						targetPointRequest = null;
+						updateMenu();
+					}
+				}, null);
+				geocodingLookupService.lookupAddress(targetPointRequest);
+			}
+
 		} else {
 			toSpinner.setPromptId(R.string.route_descr_select_destination);
 			toActions.add(new RouteSpinnerRow(SPINNER_HINT_ID, R.drawable.ic_action_get_my_location,

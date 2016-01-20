@@ -30,6 +30,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -286,7 +287,7 @@ public class WaypointDialogHelper {
 
 		final WaypointDialogHelper helper = this;
 
-		return new StableArrayAdapter(ctx,
+		final StableArrayAdapter listAdapter = new StableArrayAdapter(ctx,
 				R.layout.waypoint_reached, R.id.title, points, activePoints) {
 
 			@Override
@@ -341,6 +342,29 @@ public class WaypointDialogHelper {
 				return v;
 			}
 		};
+
+		for (Object p : points) {
+			if (p instanceof LocationPointWrapper) {
+				LocationPointWrapper w = (LocationPointWrapper) p;
+				if (w.type == WaypointHelper.TARGETS) {
+					final TargetPoint t = (TargetPoint) w.point;
+					if (t.getOriginalPointDescription() != null
+							&& t.getOriginalPointDescription().isSearchingAddress(mapActivity)) {
+						GeocodingLookupService.AddressLookupRequest lookupRequest
+								= new GeocodingLookupService.AddressLookupRequest(t.point, new GeocodingLookupService.OnAddressLookupResult() {
+							@Override
+							public void geocodingDone(String address) {
+								reloadListAdapter(listAdapter);
+							}
+						}, null);
+						app.getGeocodingLookupService().lookupAddress(lookupRequest);
+					}
+
+				}
+			}
+		}
+
+		return listAdapter;
 	}
 
 

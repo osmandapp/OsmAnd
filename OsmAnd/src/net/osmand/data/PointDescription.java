@@ -235,6 +235,18 @@ public class PointDescription {
 //		return o.getPointDescription(ctx).getFullPlainName(ctx, o.getLatitude(), o.getLongitude());
 	}
 
+	public boolean isSearchingAddress(Context ctx) {
+		return !Algorithms.isEmpty(name) && isLocation() && name.equals(getSearchAddressStr(ctx));
+	}
+
+	public static String getSearchAddressStr(Context ctx) {
+		return ctx.getString(R.string.looking_up_address) + ctx.getString(R.string.shared_string_ellipsis);
+	}
+
+	public static String getAddressNotFoundStr(Context ctx) {
+		return ctx.getString(R.string.no_address_found);
+	}
+
 	public static String serializeToString(PointDescription p) {
 		if (p == null) {
 			return "";

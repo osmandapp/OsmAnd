@@ -96,7 +96,7 @@ public class OsmandApplication extends MultiDexApplication {
 	AvoidSpecificRoads avoidSpecificRoads;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
-
+	GeocodingLookupService geocodingLookupService;
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -327,6 +327,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public RoutingHelper getRoutingHelper() {
 		return routingHelper;
+	}
+
+	public GeocodingLookupService getGeocodingLookupService() {
+		return geocodingLookupService;
 	}
 
 	public CommandPlayer getPlayer() {

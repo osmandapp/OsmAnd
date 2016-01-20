@@ -57,7 +57,8 @@ public class CurrentPositionHelper {
 	
 	
 	
-	private void scheduleRouteSegmentFind(final Location loc, final boolean storeFound, final ResultMatcher<GeocodingResult> geoCoding, final ResultMatcher<RouteDataObject> result) {
+	private boolean scheduleRouteSegmentFind(final Location loc, final boolean storeFound, final ResultMatcher<GeocodingResult> geoCoding, final ResultMatcher<RouteDataObject> result) {
+		boolean res = false;
 		if (loc != null) {
 			Runnable run = new Runnable() {
 				@Override
@@ -83,15 +84,9 @@ public class CurrentPositionHelper {
 					}
 				}
 			};
-			if (!app.getRoutingHelper().startTaskInRouteThreadIfPossible(run)) {
-				if (result != null) {
-					result.publish(null);
-				}
-				if (geoCoding != null) {
-					geoCoding.publish(null);
-				}
-			}
+			res = app.getRoutingHelper().startTaskInRouteThreadIfPossible(run);
 		}
+		return res;
 	}
 	
 	protected void justifyResult(List<GeocodingResult> res, final ResultMatcher<GeocodingResult> result) {
@@ -171,12 +166,12 @@ public class CurrentPositionHelper {
 		return d;
 	}
 	
-	public void getRouteSegment(Location loc, ResultMatcher<RouteDataObject> result) {
-		scheduleRouteSegmentFind(loc, false, null, result);
+	public boolean getRouteSegment(Location loc, ResultMatcher<RouteDataObject> result) {
+		return scheduleRouteSegmentFind(loc, false, null, result);
 	}
 	
-	public void getGeocodingResult(Location loc, ResultMatcher<GeocodingResult> result) {
-		scheduleRouteSegmentFind(loc, false, result, null);
+	public boolean getGeocodingResult(Location loc, ResultMatcher<GeocodingResult> result) {
+		return scheduleRouteSegmentFind(loc, false, result, null);
 	}
 	
 	public RouteDataObject getLastKnownRouteSegment(Location loc) {

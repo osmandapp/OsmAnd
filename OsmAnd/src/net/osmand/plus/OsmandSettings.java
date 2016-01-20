@@ -1551,12 +1551,23 @@ public class OsmandSettings {
 		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, PointDescription.serializeToString(historyDescription));
-		if (historyDescription != null) {
+		if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
 		}
 		return saveIntermediatePoints(ps,ds);
 	}
-	
+
+	public boolean updateIntermediatePoint(double latitude, double longitude, PointDescription historyDescription) {
+		List<LatLon> ps = getIntermediatePoints();
+		List<String> ds = getIntermediatePointDescriptions(ps.size());
+		int i = ps.indexOf(new LatLon(latitude, longitude));
+		ds.set(i, PointDescription.serializeToString(historyDescription));
+		if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+		}
+		return saveIntermediatePoints(ps,ds);
+	}
+
 	public boolean deleteIntermediatePoint( int index) {
 		List<LatLon> ps = getIntermediatePoints();
 		List<String> ds = getIntermediatePointDescriptions(ps.size());
@@ -1603,7 +1614,7 @@ public class OsmandSettings {
 		boolean add = settingsAPI.edit(globalPreferences).putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		if(add){
-			if(p != null){
+			if(p != null && !p.isSearchingAddress(ctx)){
 				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p);
 			}
 		}

@@ -142,11 +142,6 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
-	}
-
-	@Override
 	public boolean needTypeStr() {
 		return true;
 	}
