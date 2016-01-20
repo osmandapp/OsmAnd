@@ -62,7 +62,7 @@ public abstract class SearchSelectionFragment extends BaseOsmAndDialogFragment {
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				searchEditText.setText(null);
+				dismiss();
 			}
 		});
 		return view;
