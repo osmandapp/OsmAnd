@@ -2022,7 +2022,7 @@
     <string name="daily">Günlük</string>
     <string name="weekly">Haftalık</string>
     <string name="morning">Sabah</string>
-    <string name="Night">Gece</string>
+    <string name="night">Gece</string>
 
 <string name="updates_size">Güncelleme boyutu</string>
     <string name="select_month_and_country">Ayı ve ülke seçin</string>

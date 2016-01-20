@@ -90,26 +90,20 @@ public class LiveUpdatesHelper {
 
 	public static void setAlarmForPendingIntent(PendingIntent alarmIntent, AlarmManager alarmMgr, UpdateFrequency updateFrequency, TimeOfDay timeOfDayToUpdate) {
 		long timeOfFirstUpdate;
-		long updateInterval;
 		switch (updateFrequency) {
 			case HOURLY:
 				timeOfFirstUpdate = System.currentTimeMillis() + SHIFT;
-				updateInterval = AlarmManager.INTERVAL_HOUR;
 				break;
 			case DAILY:
-				timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
-				updateInterval = AlarmManager.INTERVAL_DAY;
-				break;
 			case WEEKLY:
 				timeOfFirstUpdate = getNextUpdateTime(timeOfDayToUpdate);
-				updateInterval = AlarmManager.INTERVAL_DAY * 7;
 				break;
 			default:
 				throw new IllegalStateException("Unexpected update frequency:"
 						+ updateFrequency);
 		}
 		alarmMgr.setInexactRepeating(AlarmManager.RTC,
-				timeOfFirstUpdate, updateInterval, alarmIntent);
+				timeOfFirstUpdate, updateFrequency.getTime(), alarmIntent);
 	}
 
 	private static long getNextUpdateTime(TimeOfDay timeOfDayToUpdate) {
@@ -126,7 +120,7 @@ public class LiveUpdatesHelper {
 
 	public static enum TimeOfDay {
 		MORNING(R.string.morning),
-		NIGHT(R.string.Night);
+		NIGHT(R.string.night);
 		private final int localizedId;
 
 		TimeOfDay(int localizedId) {
@@ -145,17 +139,27 @@ public class LiveUpdatesHelper {
 	}
 
 	public static enum UpdateFrequency {
-		HOURLY(R.string.hourly),
-		DAILY(R.string.daily),
-		WEEKLY(R.string.weekly);
+		HOURLY(R.string.hourly, AlarmManager.INTERVAL_HOUR),
+		DAILY(R.string.daily, AlarmManager.INTERVAL_DAY),
+		WEEKLY(R.string.weekly, AlarmManager.INTERVAL_DAY * 7);
 		private final int localizedId;
+		private final long time;
 
-		UpdateFrequency(int localizedId) {
+		UpdateFrequency(int localizedId, long time) {
 			this.localizedId = localizedId;
+			this.time = time;
 		}
 
 		public int getLocalizedId() {
 			return localizedId;
 		}
+		public long getTime() {
+			return time;
+		}
+	}
+
+	public static void runLiveUpdate(Context context, final LocalIndexInfo info, boolean forceUpdate) {
+		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
+		new PerformLiveUpdateAsyncTask(context, info, forceUpdate).execute(new String[]{fnExt});
 	}
 }

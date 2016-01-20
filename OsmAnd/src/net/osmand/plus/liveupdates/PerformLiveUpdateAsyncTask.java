@@ -5,11 +5,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -17,6 +16,8 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 
 public class PerformLiveUpdateAsyncTask
 		extends AsyncTask<String, Object, IncrementalChangesManager.IncrementalUpdateList> {
+	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
+
 	private final Context context;
 	private final LocalIndexInfo localIndexInfo;
 	private final boolean forceUpdate;
@@ -42,7 +45,6 @@ public class PerformLiveUpdateAsyncTask
 		if (context instanceof AbstractDownloadActivity) {
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
 			activity.setSupportProgressBarIndeterminateVisibility(true);
-			OsmandSettings settings = activity.getMyApplication().getSettings();
 		}
 		final OsmandApplication myApplication = getMyApplication();
 		OsmandSettings.CommonPreference<Long> lastCheckPreference =
@@ -70,14 +72,12 @@ public class PerformLiveUpdateAsyncTask
 		final OsmandApplication application = getMyApplication();
 		final OsmandSettings settings = application.getSettings();
 		if (result.errorMessage != null) {
-			Toast.makeText(context, result.errorMessage, Toast.LENGTH_SHORT).show();
+			LOG.info(result.errorMessage);
 			tryRescheduleDownload(context, settings, localIndexInfo);
 		} else {
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
 			List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
-			if (ll.isEmpty()) {
-				Toast.makeText(context, R.string.no_updates_available, Toast.LENGTH_SHORT).show();
-			} else {
+			if (!ll.isEmpty()) {
 				ArrayList<IndexItem> itemsToDownload = new ArrayList<>(ll.size());
 				for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
 					IndexItem indexItem = new IndexItem(iu.fileName, "Incremental update",
@@ -121,7 +121,7 @@ public class PerformLiveUpdateAsyncTask
 	}
 
 	public static void tryRescheduleDownload(Context context, OsmandSettings settings,
-											  LocalIndexInfo localIndexInfo) {
+											 LocalIndexInfo localIndexInfo) {
 		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(localIndexInfo, settings);
 		final Integer frequencyOrdinal = updateFrequencyPreference.get();

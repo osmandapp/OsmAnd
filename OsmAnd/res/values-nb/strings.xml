@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -7,7 +8,7 @@
     <string name="no_route">Ingen rute</string>
     <string name="delete_target_point">Fjern reisemål</string>
     <string name="target_point">Reisemål %1$s</string>
-    <string name="intermediate_point">Reisemål %1$s</string>
+    <string name="intermediate_point">Mellomliggende reisemål %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Legg til som siste mellomliggende reisemål</string>
     <string name="context_menu_item_first_intermediate_point">Legg til som første mellomliggende reisemål</string>
     <string name="add_as_last_destination_point">Legg til som siste mellomliggende reisemål</string>
@@ -546,7 +547,7 @@
     <string name="add_favorite_dialog_favourite_added_template">Favorittpunkt \'\'{0}\'\' ble vellykket lagt til.</string>
     <string name="favourites_context_menu_edit">Rediger favoritt</string>
     <string name="favourites_context_menu_delete">Slett favoritt</string>
-    <string name="favourites_remove_dialog_msg">Fjerne favorittpunkt \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Slette favorittpunkt \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Favorittpunkt {0} ble vellykket slettet.</string>
     
     <string name="osb_comment_dialog_message">Melding</string>
@@ -1490,4 +1491,11 @@
     <string name="update_time">Oppdateringstidspunkt</string>
     <string name="updates_size">Oppdateringsstørrelse</string>
     <string name="update_now">Oppdater nå</string>
+    <string name="shared_string_remove">Fjern</string>
+    <string name="clear_updates_proposition_message">Du kan fjerne nedlastede oppdateringer og gå tilbake til den originale kartutgaven</string>
+    <string name="road_blocked">Vei blokkert</string>
+    <string name="shared_string_select">Velg</string>
+    <string name="rendering_attr_hideIcons_name">Skjul interessepunktikoner</string>
+    <string name="shared_string_type">Type</string>
+    <string name="starting_point">Startpunkt</string>
     </resources>

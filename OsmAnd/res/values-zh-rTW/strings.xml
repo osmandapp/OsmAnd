@@ -11,7 +11,7 @@
     <string name="no_route">沒有路線</string>
     <string name="delete_target_point">移除目的地</string>
     <string name="target_point">目的地 %1$s</string>
-    <string name="intermediate_point">目的地 %1$s</string>
+    <string name="intermediate_point">中間節點 %1$s</string>
 
     <string name="context_menu_item_last_intermediate_point">增為最後一個的中途標點</string>
     <string name="context_menu_item_first_intermediate_point">增為第一個中途標點</string>
@@ -125,7 +125,7 @@
     <string name="osmand_parking_warning">警示</string>
     <string name="osmand_parking_warning_text">取車通知在先前已加到您的行事曆中。它會一直保留在那裡，直到您手動刪除它。</string>
     <string name="osmand_parking_time_limit_title">設定停車時限</string>
-    <string name="osmand_parking_delete_confirm">您要移除停車位置嗎？</string>
+    <string name="osmand_parking_delete_confirm">您要刪除停車位置標記嗎？</string>
     <string name="osmand_parking_delete">刪除停車位置標記</string>
     <string name="osmand_parking_choose_type">選擇停車場種類</string>
     <string name="osmand_parking_lim_text">時限</string>
@@ -786,7 +786,7 @@
     <string name="search_address">地址查詢</string>
     <string name="choose_building">選取建築物</string>
     <string name="choose_street">選擇道路</string>
-    <string name="choose_city">選擇縣市</string>
+    <string name="choose_city">選擇縣市或郵遞區號</string>
     <string name="ChooseCountry">選擇國家</string>
     <string name="show_view_angle">顯示目視方向</string>
     <string name="map_view_3d_descr">啟用 3D 檢視地圖</string>
@@ -847,7 +847,7 @@
     <string name="add_favorite_dialog_favourite_added_template">我的最愛標點 \'\'{0}\'\' 新增成功。</string>
     <string name="favourites_context_menu_edit">編輯我的最愛</string>
     <string name="favourites_context_menu_delete">刪除我的最愛</string>
-    <string name="favourites_remove_dialog_msg">移除我的最愛標點 \'%s\'？</string>
+    <string name="favourites_remove_dialog_msg">刪除我的最愛標點 \'%s\'？</string>
     <string name="favourites_remove_dialog_success">我的最愛標點 {0} 刪除成功。</string>
     
     
@@ -977,7 +977,7 @@
     <string name="recording_camera_not_available">相機失效</string>
     <string name="recording_playing">從已指定的錄音開始播放音訊。\n%1$s</string>
     <string name="recording_open_external_player">開啟外部播放</string>
-    <string name="recording_delete_confirm">您想移除此錄製嗎？</string>
+    <string name="recording_delete_confirm">您想刪除此錄製嗎？</string>
     <string name="recording_unavailable">無法使用</string>
     <string name="recording_context_menu_arecord">錄取音訊注解</string>
     <string name="destination_point">目的地 ％1$S</string>
@@ -2062,13 +2062,13 @@
     <string name="daily">每日</string>
     <string name="weekly">每週</string>
     <string name="morning">早上</string>
-    <string name="Night">夜間</string>
+    <string name="night">夜間</string>
 <string name="shared_string_not_selected">未選取</string>
     
 <string name="select_month_and_country">選擇月份與國家</string>
 <string name="shared_string_type">類型</string>
     <string name="starting_point">起始標點</string>
-    <string name="item_removed">項目已刪除</string>
+    <string name="item_removed">項目已移除</string>
     <string name="n_items_removed">項目已刪除</string>
     <string name="shared_string_undo_all">全部取消</string>
     <string name="rendering_attr_hideIcons_name">隱藏 POI 圖示</string>
@@ -2077,4 +2077,8 @@
     <string name="number_of_edits">編輯次數</string>
     <string name="reports_for">報告：</string>
 <string name="shared_string_select">選擇</string>
+    <string name="shared_string_remove">移除</string>
+    <string name="clear_updates_proposition_message">您可以移除已下載的更新和回到原來的地圖版本</string>
+    <string name="add_time_span">增加時間跨度</string>
+    <string name="road_blocked">道路堵塞</string>
     </resources>

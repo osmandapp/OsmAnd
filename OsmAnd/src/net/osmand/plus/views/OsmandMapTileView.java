@@ -1,10 +1,33 @@
 package net.osmand.plus.views;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.PointF;
+import android.graphics.RectF;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
+import android.util.DisplayMetrics;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.InputDevice;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
@@ -30,32 +53,10 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.PointF;
-import android.graphics.RectF;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
-import android.util.DisplayMetrics;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.InputDevice;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -160,6 +161,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private Paint paintImg;
 
 	private boolean afterTwoFingerTap = false;
+	private DoubleTapScaleDetector doubleTapScaleDetector;
 	TwoFingerTapDetector twoFingerTapDetector = new TwoFingerTapDetector() {
 		@Override
 		public void onTwoFingerTap() {
@@ -211,6 +213,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		gestureDetector = new GestureDetector(ctx, new MapExplorer(this, new MapTileViewOnGestureListener()));
 		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
+		doubleTapScaleDetector = new DoubleTapScaleDetector(ctx, new MapTileViewMultiTouchZoomListener());
 
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -573,7 +576,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		if (showMapPosition || animatedDraggingThread.isAnimatingZoom()) {
 			drawMapPosition(canvas, c.x, c.y);
-		} else if(multiTouchSupport.isInZoomMode()) {
+		} else if(multiTouchSupport.isInZoomMode() || doubleTapScaleDetector.isInZoomMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
 		}
 	}
@@ -767,9 +770,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				return true;
 			}
 		}
-		if (!multiTouchSupport.onTouchEvent(event)) {
+		if (!doubleTapScaleDetector.onTouchEvent(event)) {
+			if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */
-			gestureDetector.onTouchEvent(event);
+				gestureDetector.onTouchEvent(event);
+			}
 		}
 		return true;
 	}
@@ -820,7 +825,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 
-	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener {
+	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener,
+			DoubleTapScaleDetector.DoubleTapZoomListener {
 		private PointF initialMultiTouchCenterPoint;
 		private RotatedTileBox initialViewport;
 		private float x1;
@@ -988,6 +994,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final double lat = tb.getLatFromPixel(e.getX(), e.getY());
 			final double lon = tb.getLonFromPixel(e.getX(), e.getY());
 			getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
+			return true;
+		}
+	}
+
+	private class MapOnScaleGestureListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+		private double scaleFactor;
+
+		@Override
+		public boolean onScaleBegin(ScaleGestureDetector detector) {
+			scaleFactor = 1;
+			return true;
+		}
+
+		@Override
+		public boolean onScale(ScaleGestureDetector detector) {
+			log.debug("Scale factor=" + detector.getScaleFactor());
+			scaleFactor *= detector.getScaleFactor();
+			getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
 			return true;
 		}
 	}

@@ -2075,6 +2075,6 @@
     <string name="daily">Naponta</string>
     <string name="weekly">Hetente</string>
     <string name="morning">Reggel</string>
-    <string name="Night">Este</string>
+    <string name="night">Este</string>
     <string name="select_month_and_country">Hónap és ország kiválasztása</string>
 </resources>

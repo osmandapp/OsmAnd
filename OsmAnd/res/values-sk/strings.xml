@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -231,7 +232,7 @@
     <string name="map_version_changed_info">Na serveri sú mapové súbory nekompatibilné s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_current_location_search">Hľadám umiestnenie…</string>
-    <string name="search_position_current_location_found">Umiestnenie [Nájdené]</string>
+    <string name="search_position_current_location_found">Moja poloha (nájdená)</string>
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Obľúbené miesta…</string>
     <string name="search_position_undefined">Neurčené</string>
@@ -634,7 +635,7 @@
     <string name="search_address">Hľadať adresu</string>
     <string name="choose_building">Vybrať popisné číslo</string>
     <string name="choose_street">Vybrať ulicu</string>
-    <string name="choose_city">Vybrať mesto</string>
+    <string name="choose_city">Vybrať mesto alebo PSČ</string>
     <string name="ChooseCountry">Vybrať krajinu</string>
     <string name="show_view_angle">Zobraziť uhol pohľadu</string>
     <string name="map_view_3d_descr">Zapnutie 3D zobrazenia mapy</string>
@@ -684,7 +685,7 @@
     <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod "{0}" bol úspešne pridaný.</string>
     <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
     <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
-    <string name="favourites_remove_dialog_msg">Odstrániť obľúbený bod "%s"?</string>
+    <string name="favourites_remove_dialog_msg">Zmazať obľúbený bod \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Obľúbený bod {0} bol úspešne zmazaný.</string>
     
     
@@ -761,7 +762,7 @@
     <string name="osmand_parking_warning">Upozornenie</string>
     <string name="osmand_parking_warning_text">Predošle bola pridaná do kalendára pripomienka na vyzdvihnutie Vášho auta. Zostane tam, pokiaľ ju ručne nezmažete.</string>
     <string name="osmand_parking_time_limit_title">Nastavte časový limit parkovania</string>
-    <string name="osmand_parking_delete_confirm">Chcete odstrániť umiestnenie zaparkovaného auta?</string>
+    <string name="osmand_parking_delete_confirm">Chcete zmazať značku parkovacieho miesta?</string>
     <string name="osmand_parking_delete">Zmazať parkovaciu značku</string>
     <string name="osmand_parking_choose_type">Zvoľte typ parkovania</string>
     <string name="osmand_parking_lim_text">Časovo obmedzené</string>
@@ -1912,12 +1913,22 @@
     <string name="daily">Každý deň</string>
     <string name="weekly">Raz za týždeň</string>
     <string name="morning">Ráno</string>
-    <string name="Night">V noci</string>
+    <string name="night">V noci</string>
     
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Východzí bod</string>
     <string name="select_month_and_country">Zvoľte mesiac a krajinu</string>
-<string name="item_removed">Položka vymazaná</string>
+<string name="item_removed">Položka odstránená</string>
     <string name="n_items_removed">položiek vymazaných</string>
     <string name="shared_string_undo_all">VŠETKO VRÁTIŤ SPÄŤ</string>
-    </resources>
+    <string name="shared_string_remove">Odstrániť</string>
+    <string name="clear_updates_proposition_message">Môžete odstrániť stiahnuté aktualizácie a vrátiť sa späť k pôvodnej verzii mapy</string>
+    <string name="add_time_span">Pridať časový rozsah</string>
+    <string name="road_blocked">Cesta zablokovaná</string>
+    <string name="shared_string_select">Vybrať</string>
+    <string name="switch_start_finish">Vymeniť východzí a cieľový bod</string>
+    <string name="rendering_attr_hideIcons_name">Skryť ikony bodov záujmu (POI)</string>
+    <string name="number_of_contributors">Počet prispievateľov</string>
+    <string name="number_of_edits">Počet zmien</string>
+    <string name="reports_for">Výkaz pre:</string>
+</resources>

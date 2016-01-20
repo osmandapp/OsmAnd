@@ -1917,7 +1917,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="available_maps">Mapas disponíveis</string>
     <string name="select_voice_provider">Escolher orientação por voz</string>
     <string name="select_voice_provider_descr">Escolher ou fazer download de \'orientação por voz\' para a sua linguagem</string>
-    <string name="Night">Noite</string>
+    <string name="night">Noite</string>
 <string name="dashboard_or_drawer_description">Há uma nova opção para controlar principalmente o aplicativo através do painel flexível (Dashboard) ou um menu estático. A sua escolha pode sempre ser alterada nas configurações do painel.</string>
     <string name="dashboard_or_drawer_title">Dashboard ou menu de controle</string>
     <string name="update">Actualizar em cada</string>

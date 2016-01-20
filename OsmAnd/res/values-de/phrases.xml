@@ -2575,4 +2575,13 @@
 	<string name="poi_fair_trade_no">Fairer Handel: Nein</string>
 	<string name="poi_fair_trade_only">Nur fairer Handel Produkte</string>
 
-</resources>
+<string name="poi_ice_hockey">Eishockey</string>
+	<string name="poi_bandy">Bandy</string>
+
+<string name="poi_protected_area">Geschütztes Gebiet</string>
+	<string name="poi_protection_object_historic">Geschütztes Objekt: historisch</string>
+	<string name="poi_protection_object_nature">Geschütztes Objekt: Natur</string>
+	<string name="poi_protection_object_water">Geschütztes Objekt: Wasser</string>
+
+<string name="poi_protection_object_habitat">Geschütztes Objekt: Lebensraum</string>
+	</resources>

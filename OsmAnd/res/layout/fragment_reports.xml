@@ -51,12 +51,13 @@
             android:layout_height="60dp"
             android:src="@drawable/ic_world_globe_dark"/>
 
-        <Spinner
-            android:id="@+id/regionReportsSpinner"
-            android:layout_gravity="fill_horizontal|fill_vertical"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="42dp"
-            android:gravity="center_vertical"/>
+        <include
+            android:id="@+id/reportsButton"
+            layout="@layout/reports_for_spinner_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"/>
 
         <View
             android:layout_height="1dp"

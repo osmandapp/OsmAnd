@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
 import android.util.TypedValue;
@@ -28,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.download.AbstractDownloadActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
@@ -53,7 +52,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayT
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
-public class LiveUpdatesFragment extends Fragment {
+public class LiveUpdatesFragment extends BaseOsmAndFragment {
 	public static final String TITLE = "Live Updates";
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
 		@Override
@@ -63,6 +62,7 @@ public class LiveUpdatesFragment extends Fragment {
 	};
 	private ExpandableListView listView;
 	private LocalIndexesAdapter adapter;
+	private AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>> loadLocalIndexesTask;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -90,16 +90,14 @@ public class LiveUpdatesFragment extends Fragment {
 				return true;
 			}
 		});
-		new LoadLocalIndexTask(adapter, this).execute();
+		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
 		return view;
 	}
 
-	private OsmandSettings getSettings() {
-		return getMyActivity().getMyApplication().getSettings();
-	}
-
-	private AbstractDownloadActivity getMyActivity() {
-		return (AbstractDownloadActivity) getActivity();
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		loadLocalIndexesTask.cancel(true);
 	}
 
 	public void notifyLiveUpdatesChanged() {
@@ -346,7 +344,7 @@ public class LiveUpdatesFragment extends Fragment {
 				subheaderTextView.setText(subheaderText);
 				subheaderTextView.setTextColor(fragment.getActivity().getResources()
 						.getColor(R.color.osmand_orange));
-				icon.setImageDrawable(context.getIconsCache().getIcon(R.drawable.ic_map, R.color.osmand_orange));
+				icon.setImageDrawable(fragment.getIcon(R.drawable.ic_map, R.color.osmand_orange));
 				options.setImageDrawable(getSecondaryColorPaintedIcon(R.drawable.ic_overflow_menu_white));
 				layoutParams.height = (int) dpToPx(view.getContext(), UPDATES_ENABLED_ITEM_HEIGHT);
 			} else {
@@ -394,16 +392,17 @@ public class LiveUpdatesFragment extends Fragment {
 		private List<LocalIndexInfo> result;
 		private LocalIndexesAdapter adapter;
 		private LiveUpdatesFragment fragment;
+		private LocalIndexHelper helper;
 
 		public LoadLocalIndexTask(LocalIndexesAdapter adapter,
 								  LiveUpdatesFragment fragment) {
 			this.adapter = adapter;
 			this.fragment = fragment;
+			helper = new LocalIndexHelper(fragment.getMyActivity().getMyApplication());
 		}
 
 		@Override
 		protected List<LocalIndexInfo> doInBackground(Void... params) {
-			LocalIndexHelper helper = new LocalIndexHelper(fragment.getMyActivity().getMyApplication());
 			return helper.getLocalFullMaps(this);
 		}
 

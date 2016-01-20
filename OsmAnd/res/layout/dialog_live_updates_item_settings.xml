@@ -122,7 +122,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="right"
-            android:entries="@array/update_frequencies_array"
             android:paddingLeft="0dp"/>
     </LinearLayout>
 
@@ -148,7 +147,6 @@
             style="@style/OsmandLightTheme.Spinner"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:entries="@array/update_times_of_day"
             android:gravity="right"
             android:paddingLeft="0dp"/>
     </LinearLayout>

@@ -1,32 +1,5 @@
 package net.osmand.plus.liveupdates;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-
-import java.io.File;
-
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.download.AbstractDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
-import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
@@ -44,6 +17,34 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.AbstractDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
+import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesAlarmReceiver.class);
@@ -92,14 +93,23 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 		sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
 
+		TimeOfDay[] timeOfDays = TimeOfDay.values();
+		String[] timeOfDaysStrings = new String[timeOfDays.length];
+		for (int i = 0; i < timeOfDays.length; i++) {
+			timeOfDaysStrings[i] = getString(timeOfDays[i].getLocalizedId());
+		}
 		updateTimesOfDaySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
-				R.layout.action_spinner_item,
-				getResources().getStringArray(R.array.update_times_of_day)));
+				R.layout.action_spinner_item, timeOfDaysStrings));
 		updateTimesOfDaySpinner.setSelection(timeOfDayPreference.get());
 
+		UpdateFrequency[] updateFrequencies = UpdateFrequency.values();
+		String[] updateFrequenciesStrings = new String[updateFrequencies.length];
+		for (int i = 0; i < updateFrequencies.length; i++) {
+			updateFrequenciesStrings[i] = getString(updateFrequencies[i].getLocalizedId());
+		}
+
 		updateFrequencySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
-				R.layout.action_spinner_item,
-				getResources().getStringArray(R.array.update_frequencies_array)));
+				R.layout.action_spinner_item, updateFrequenciesStrings));
 		updateFrequencySpinner.setSelection(updateFrequencyPreference.get());
 		updateFrequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -149,7 +159,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						timeOfDayPreference.set(timeOfDayInt);
 
 						if (liveUpdatesSwitch.isChecked() && getSettings().IS_LIVE_UPDATES_ON.get()) {
-							runLiveUpdate(localIndexInfo, false);
+							runLiveUpdate(getActivity(), localIndexInfo, false);
 							UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
 							TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
 							setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
@@ -163,16 +173,11 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				.setNeutralButton(R.string.update_now, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						runLiveUpdate(localIndexInfo, true);
+						runLiveUpdate(getActivity(), localIndexInfo, true);
 						sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
 					}
 				});
 		return builder.create();
-	}
-
-	void runLiveUpdate(final LocalIndexInfo info, boolean forceUpdate) {
-		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new PerformLiveUpdateAsyncTask(getActivity(), info, forceUpdate).execute(new String[]{fnExt});
 	}
 
 	private static String getUpdatesSize(String fileNameWithoutExtension,

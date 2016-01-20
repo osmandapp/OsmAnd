@@ -2096,7 +2096,7 @@
     <string name="daily">Quotidien</string>
     <string name="weekly">Hebdomadaire</string>
     <string name="morning">Matin</string>
-    <string name="Night">Nuit</string>
+    <string name="night">Nuit</string>
     
 <string name="select_month_and_country">Choisissez un mois et un pays</string>
 <string name="item_removed">Élément supprimé</string>
@@ -2117,4 +2117,8 @@
     <string name="number_of_edits">Nombre de modifications</string>
     <string name="reports_for">Signaler pour :</string>
 <string name="shared_string_select">Sélectionner</string>
+    <string name="shared_string_remove">Supprimer</string>
+    <string name="clear_updates_proposition_message">Vous pouvez supprimer les mises à jour et retrouver la carte précédente</string>
+    <string name="road_blocked">Route barrée</string>
+    <string name="add_time_span">Ajouter un laps de temps</string>
     </resources>

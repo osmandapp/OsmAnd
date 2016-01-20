@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -1646,7 +1647,7 @@
     <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Chcete ji aktivovat?</string>
     <string name="disable_recording_once_app_killed">Zabránit samostatnému logování</string>
     <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam GPX trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí ze stavového řádku Androidu.)</string>
-    <string name="download_live_updates">Živé aktualizace</string>
+    <string name="download_live_updates">Okamžité aktualizace</string>
     <string name="no_updates_available">Nejsou dostupné žádné aktualizace</string>
     <string name="traffic_warning_hazard">Nebezpečí</string>
     <string name="rendering_value_boldOutline_name">Tučný obrys</string>
@@ -1910,6 +1911,11 @@
     <string name="daily">Každý den</string>
     <string name="weekly">Jednou týdně</string>
     <string name="morning">Ráno</string>
-    <string name="Night">V noci</string>
+    <string name="night">V noci</string>
     <string name="select_month_and_country">Vyberte měsíc a krajinu</string>
-</resources>
+<string name="shared_string_remove">Odstranit</string>
+    <string name="rendering_attr_hideIcons_name">Skrýt ikonu POI</string>
+    <string name="shared_string_select">Zvolit</string>
+    <string name="road_blocked">Cesta je blokovaná</string>
+    <string name="switch_start_finish">Zaměnit počáteční a cílový bod</string>
+    </resources>

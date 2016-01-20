@@ -52,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
+            android:ellipsize="end"
+            android:lines="1"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
             tools:text="Last Update: 1 Dec 2015"/>

@@ -745,7 +745,7 @@
     <string name="rec_split_clip_length_desc">Сваки одсечак снимка неће бити дужи од одабраног времена</string>
     <string name="rec_split_storage_size">Величина оставе</string>
     <string name="rec_split_storage_size_desc">Величина заузећа свих снимљених одсечака</string>
-    <string name="Night">Ноћ</string>
+    <string name="night">Ноћ</string>
 <string name="shared_string_go">Иди</string>
     <string name="shared_string_not_selected">Није означено</string>
     <string name="osmand_parking_hour">h</string>

@@ -139,7 +139,7 @@
 
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Long %2$.3f</string>
-    <string name="intermediate_point">Destination %1$s</string>
+    <string name="intermediate_point">Mellemliggende destination %1$s</string>
     <string name="snap_to_road_descr">Hold position til vejen under navigation</string>
     <string name="snap_to_road">Fastgør til vejen</string>
     <string name="osmand_short_description_80_chars">Globale mobilkort &amp; navigation til offline og online OSM kort</string>
@@ -225,7 +225,7 @@
     <string name="osmand_parking_warning">Advarsel</string>
     <string name="osmand_parking_warning_text">Påmindelse om at afhente bil blev tidligere tilføjet til kalender. Den forblive der, indtil den slettes manuelt.</string>
     <string name="osmand_parking_time_limit_title">Indstil tidsgrænsen for parkering</string>
-    <string name="osmand_parking_delete_confirm">Skal placeringen af den parkerede bil slettes?</string>
+    <string name="osmand_parking_delete_confirm">Slet parkeringsmarkør?</string>
     <string name="osmand_parking_delete">Slet P-plads markør</string>
     <string name="osmand_parking_choose_type">Vælg parkeringstype</string>
     <string name="osmand_parking_lim_text">Tidsbegrænset</string>
@@ -892,7 +892,7 @@
     <string name="osb_comment_dialog_message">Meddelelse</string>
     
     <string name="favourites_remove_dialog_success">Favoritpunkt {0} blev slettet.</string>
-    <string name="favourites_remove_dialog_msg">Fjern favoritpunkt \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Slet favoritpunkt \'%s\'?</string>
     <string name="favourites_context_menu_delete">Slet</string>
     <string name="favourites_context_menu_edit">Rediger</string>
     <string name="amenity_type_emergency">Nødsituation</string>
@@ -1068,7 +1068,7 @@
     <string name="search_address">Søg adresse</string>
     <string name="choose_building">Vælg bygning</string>
     <string name="choose_street">Vælg gade</string>
-    <string name="choose_city">Vælg by</string>
+    <string name="choose_city">Vælg by eller postnummer</string>
     <string name="ChooseCountry">Vælg land</string>
     <string name="show_view_angle">Vis synsretning</string>
     <string name="map_view_3d_descr">Aktiver 3D-visning af kortet</string>
@@ -2203,26 +2203,26 @@
 
     <string name="update_time">Opdateringstidspunkt</string>
 
-<string name="updates_size">Opdateringer: %s</string>
+<string name="updates_size">Opdateringsstørrelse</string>
 <string name="last_map_change">Sidste kortændring: %s</string>
-<string name="rec_split">Optager opdel</string>
-    <string name="rec_split_title">Brug optager opdel</string>
-    <string name="rec_split_desc">Omskriv klip når den brugte plads overstiger opbevaring størrelse</string>
+<string name="rec_split">Optagelse automatisk opdelt</string>
+    <string name="rec_split_title">"Brug  automatisk opdeling"</string>
+    <string name="rec_split_desc">Overskriv klip når lagerpladsen er fuld</string>
     <string name="rec_split_clip_length">Kliplængde</string>
     <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
     <string name="rec_split_storage_size">Lagerplads</string>
-    <string name="rec_split_storage_size_desc">Mængden af lagerplads, der kan være optaget af alle optagne klip</string>
+    <string name="rec_split_storage_size_desc">Lagerplads, der kan bruges af alle optagne klip</string>
     <string name="hourly">Time</string>
     <string name="daily">Daglig</string>
     <string name="weekly">Ugentlig</string>
     <string name="morning">Morgen</string>
-    <string name="Night">Aften</string>
+    <string name="night">Aften</string>
 <string name="shared_string_not_selected">Ikke markeret</string>
     
 <string name="select_month_and_country">Vælg måned og land</string>
 <string name="shared_string_type">Type</string>
     <string name="starting_point">Udgangspunkt</string>
-    <string name="item_removed">Emne slettet</string>
+    <string name="item_removed">Emne fjernet</string>
     <string name="n_items_removed">Emner slettet</string>
     <string name="shared_string_undo_all">FORTRYD ALLE</string>
     <string name="rendering_attr_hideIcons_name">Skjul IP ikoner</string>
@@ -2231,7 +2231,8 @@
     <string name="number_of_edits">Antal redigeringer</string>
     <string name="reports_for">Rapport for:</string>
 <string name="shared_string_select">Vælg</string>
-    <string name="clear_updates_proposition_message">Du kan fjerne de overførte opdateringer og vende tilbage til den oprindelige kort udgave</string>
+    <string name="clear_updates_proposition_message">Man kan fjerne de hentede opdateringer og vende tilbage til det oprindelige kort</string>
     <string name="add_time_span">Tilføj tidsinterval</string>
-    <string name="road_blocked">Vej er spærret</string>
+    <string name="road_blocked">Spærret vej</string>
+    <string name="shared_string_remove">Fjern</string>
     </resources>

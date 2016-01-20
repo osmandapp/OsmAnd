@@ -47,7 +47,7 @@
     <string name="favourites_context_menu_edit">Uredi priljubljeno točko</string>
     <string name="favourites_context_menu_delete">Izbriši priljubljeno točko</string>
     <string name="add_favorite_dialog_favourite_added_template">Točka \'\'{0}\'\' je uspešno dodana med priljubljene.</string>
-    <string name="favourites_remove_dialog_msg">Odstrani priljubljeno točko \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Ali res želite izbrisati priljubljeno točko \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Priljubljena točka {0} je uspešno izbrisana.</string>
     <string name="poi_edit_title">Uredi točko POI</string>
     <string name="poi_create_title">Ustvari točko POI</string>
@@ -111,7 +111,7 @@
     <string name="app_description">Program za navigacijo</string>
     <string name="use_internet">Uporabi internet</string>
     <string name="show_poi_over_map">Prikaži točke POI</string>
-    <string name="choose_city">Izbor mesta</string>
+    <string name="choose_city">Izbor mesta ali poštne številke</string>
     <string name="choose_building">Izbor hišne številke</string>
     <string name="choose_street">Izbor ulice</string>
     <string name="ChooseCountry">Izbor države</string>
@@ -296,7 +296,7 @@
     <string name="no_route">Ni določene poti</string>
     <string name="delete_target_point">Odstrani cilj</string>
     <string name="target_point">Ciljna točka %1$s</string>
-    <string name="intermediate_point">Cilj %1$s</string>
+    <string name="intermediate_point">Vmesni cilj %1$s</string>
     <string name="target_points">Cilji</string>
     <string name="poi_filter_emergency">Pomoč v sili</string>
     <string name="poi_filter_car_aid">Pomoč na cesti</string>
@@ -365,7 +365,7 @@
     <string name="osmand_parking_event">Odpeljite vozilo s parkirišča</string>
     <string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo s parkirišča, je bilo prej dodano v koledar. Ostalo bo zapisano, dokler ga ne izbrišete ročno.</string>
     <string name="osmand_parking_time_limit_title">Nastavi časovno omejitev parkiranja</string>
-    <string name="osmand_parking_delete_confirm">Ali želite odstraniti mesto, kjer je vozilo parkirano?</string>
+    <string name="osmand_parking_delete_confirm">Ali želite izbrisati oznako mesta, kjer je vozilo parkirano?</string>
     <string name="osmand_parking_delete">Izbriši mesto parkiranja</string>
     <string name="osmand_parking_choose_type">Izbira vrste parkiranja</string>
     <string name="osmand_parking_lim_text">Časovno omejeno</string>
@@ -979,7 +979,7 @@
     <string name="download_srtm_maps">Podatki izohips</string>
     <string name="recording_playing">Predvajanje zvoka iz izbranega posnetka.\n%1$s</string>
     <string name="recording_open_external_player">Odpri zunanji predvajalnik</string>
-    <string name="recording_delete_confirm">Ali želite odstraniti ta posnetek?</string>
+    <string name="recording_delete_confirm">Ali želite izbrisati ta posnetek?</string>
 
     <string name="recording_unavailable">ni na voljo</string>
     <string name="recording_context_menu_arecord">Posnemi zvočni zaznamek</string>
@@ -2074,11 +2074,11 @@
     <string name="daily">Dnevno</string>
     <string name="weekly">Tedensko</string>
     <string name="morning">Zjutraj</string>
-    <string name="Night">Zvečer</string>
+    <string name="night">Zvečer</string>
 <string name="rec_split">Razdelilnik posnetkov</string>
     <string name="rec_split_title">Uporabi razdelilnik posnetkov</string>
     <string name="rec_split_desc">Prepiši starejše posnetke, ko velikost posnetka preseže omejitev</string>
-    <string name="item_removed">Predmet je izbrisan</string>
+    <string name="item_removed">Predmet je odstranjen</string>
     <string name="n_items_removed">izbrisanih predmetov</string>
     <string name="shared_string_undo_all">Razveljavi vse</string>
     <string name="shared_string_type">Vrsta</string>
@@ -2090,4 +2090,8 @@
     <string name="number_of_contributors">Število sodelujočih</string>
     <string name="number_of_edits">Število urejanj</string>
     <string name="reports_for">Poročilo za:</string>
-</resources>
+<string name="shared_string_remove">Odstrani</string>
+    <string name="clear_updates_proposition_message">Posodobitve zemljevidov je mogoče izbrisati in povrniti stanje na izvorni zemljevid.</string>
+    <string name="add_time_span">Dodaj časovni razmik</string>
+    <string name="road_blocked">Cesta je zaprta</string>
+    </resources>

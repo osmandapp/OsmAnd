@@ -748,7 +748,7 @@
     <string name="recording_is_recorded">Grabando audio/video. Para pararlo, pulsa el control AV.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
-    <string name="recording_delete_confirm">¿Quiere quitar esta grabación?</string>
+    <string name="recording_delete_confirm">¿Quiere borrar esta grabación?</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Grabar nota de audio</string>
     <string name="recording_context_menu_vrecord">Grabar nota de video</string>
@@ -797,7 +797,7 @@
     <string name="no_route">Sin ruta</string>
     <string name="delete_target_point">Quitar el destino</string>
     <string name="target_point">Destino %1$s</string>
-    <string name="intermediate_point">Destino %1$s</string>
+    <string name="intermediate_point">Destino intermedio %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Añadir como último destino intermedio</string>
     <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
     <string name="add_as_last_destination_point">Añadir como último destino intermedio</string>
@@ -1018,7 +1018,7 @@
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">La notificación para recoger su auto fue previamente añadida al calendario. Permanecerá allí hasta que la borre manualmente.</string>
     <string name="osmand_parking_time_limit_title">Definir el límite de tiempo del estacionamiento</string>
-    <string name="osmand_parking_delete_confirm">¿Quitar ubicación del auto estacionado?</string>
+    <string name="osmand_parking_delete_confirm">¿Borrar el marcador de ubicación del estacionamiento?</string>
     <string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
     <string name="osmand_parking_choose_type">Elija el tipo de estacionamiento</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
@@ -1620,7 +1620,7 @@
     <string name="search_address">Buscar dirección</string>
     <string name="choose_building">Elija el edificio</string>
     <string name="choose_street">Elija la calle</string>
-    <string name="choose_city">Elija la ciudad</string>
+    <string name="choose_city">Elija la ciudad o el código postal</string>
     <string name="ChooseCountry">Elija el país</string>
     <string name="show_view_angle">Mostrar dirección de visualización</string>
     <string name="map_view_3d_descr">Active la vista 3D del mapa</string>
@@ -1671,7 +1671,7 @@
     <string name="add_favorite_dialog_favourite_added_template">El punto favorito \'\'{0}\'\' se añadió correctamente.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
     <string name="favourites_context_menu_delete">Borrar favorito</string>
-    <string name="favourites_remove_dialog_msg">¿Quitar el favorito \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">¿Borrar el favorito \'%s\'?</string>
     <string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
     
     
@@ -2036,13 +2036,13 @@
     <string name="daily">Diario</string>
     <string name="weekly">Semanal</string>
     <string name="morning">Por la mañana</string>
-    <string name="Night">Por la noche</string>
+    <string name="night">Por la noche</string>
 <string name="shared_string_not_selected">No seleccionado</string>
     
 <string name="select_month_and_country">Elige mes y país</string>
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
-    <string name="item_removed">Elemento borrado</string>
+    <string name="item_removed">Elemento quitado</string>
     <string name="n_items_removed">elementos borrados</string>
     <string name="shared_string_undo_all">DESHACER TODO</string>
     <string name="rendering_attr_hideIcons_name">Ocultar iconos de PDI</string>
@@ -2054,4 +2054,5 @@
     <string name="add_time_span">Añadir lapso de tiempo</string>
     <string name="road_blocked">Camino bloqueado</string>
     <string name="shared_string_select">Elegir</string>
+    <string name="shared_string_remove">Quitar</string>
     </resources>

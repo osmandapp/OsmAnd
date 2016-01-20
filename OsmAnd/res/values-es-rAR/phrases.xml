@@ -2012,7 +2012,7 @@
 	<string name="poi_office_camping">Oficina del campamento</string>
 	<string name="poi_model_aerodrome">Aeródromo a escala</string>
 	<string name="poi_guide">Oficina del guía</string>
-	<string name="poi_quango">ONG casi autónoma</string>
+	<string name="poi_quango">ONG cuasi-autónoma</string>
 	<string name="poi_consulting">Oficina de consultoría</string>
 	<string name="poi_cooperative">Oficina de cooperativa</string>
 	<string name="poi_office_forestry">Oficina forestal</string>
@@ -2620,5 +2620,15 @@
 <string name="poi_fair_trade_yes">Comercio justo: Sí</string>
 	<string name="poi_fair_trade_no">Comercio justo: No</string>
 	<string name="poi_fair_trade_only">Sólo productos de comercio justo</string>
+
+<string name="poi_ice_hockey">Hockey sobre hielo</string>
+	<string name="poi_bandy">Bandy</string>
+
+<string name="poi_protected_area">Área protegida</string>
+	<string name="poi_protection_title">Título de protección</string>
+	<string name="poi_protection_object_historic">Protección de objeto: Histórico</string>
+	<string name="poi_protection_object_nature">Protección de objeto: Naturaleza</string>
+	<string name="poi_protection_object_habitat">Protección de objeto: Hábitat</string>
+	<string name="poi_protection_object_water">Protección de objeto: Agua</string>
 
 </resources>

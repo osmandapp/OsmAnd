@@ -526,7 +526,7 @@
     <string name="search_address">Cerca indirizzo</string>
     <string name="choose_building">Scegli numero civico</string>
     <string name="choose_street">Scegli la strada</string>
-    <string name="choose_city">Scegli la città</string>
+    <string name="choose_city">Scegli la città o il cap</string>
     <string name="ChooseCountry">Scegli la nazione</string>
 
 
@@ -777,7 +777,7 @@
     <string name="osmand_parking_warning">Attenzione</string>
     <string name="osmand_parking_warning_text">Precedentemente è stata aggiunta al tuo calendario la notifica di recuperare l\'auto. Ci rimarrà finché non la eliminerai manualmente.</string>
     <string name="osmand_parking_time_limit_title">Imposta il limite d\'orario del parcheggio</string>
-    <string name="osmand_parking_delete_confirm">Vuoi rimuovere la posizione dell\'auto parcheggiata?</string>
+    <string name="osmand_parking_delete_confirm">Vuoi cancellare il marcatore della posizione del parcheggio dell\'auto?</string>
     <string name="osmand_parking_delete">Elimina un marcatore di parcheggio</string>
     <string name="osmand_parking_choose_type">Scegli il tipo di parcheggio</string>
     <string name="osmand_parking_lim_text">A tempo</string>
@@ -931,7 +931,7 @@
     <string name="map_widget_monitoring_services">Servizi di registrazione</string>
     <string name="no_route">Nessun percorso</string>
     <string name="delete_target_point">Rimuovi la destinazione</string>
-    <string name="intermediate_point">Destinazione %1$s</string>
+    <string name="intermediate_point">Destinazione intermedia %1$s</string>
     <string name="gps_not_available">Attiva il GPS nelle impostazioni</string>
     <string name="map_widget_show_destination_arrow">Visualizza la direzione della destinazione</string>
     <string name="non_optimal_route_calculation">Calcola un percorso, eventualmente anche non ottimale, su lunghe distanze</string>
@@ -1000,7 +1000,7 @@
     <string name="recording_is_recorded">L\'audio/video sta per essere registrato. Per fermarlo seleziona il widget AV.</string>
     <string name="recording_playing">L\'audio della registrazione specificata sta per essere riprodotto.\n%1$s</string>
     <string name="recording_open_external_player">Apri riproduttore esterno</string>
-    <string name="recording_delete_confirm">Vuoi rimuovere questa registrazione?</string>
+    <string name="recording_delete_confirm">Vuoi cancellare questa registrazione?</string>
 
     <string name="recording_unavailable">non disponibile</string>
     <string name="recording_context_menu_arecord">Prendi una nota audio</string>
@@ -2129,13 +2129,13 @@
     <string name="daily">Giornaliero</string>
     <string name="weekly">Settimanale</string>
     <string name="morning">Mattina</string>
-    <string name="Night">Notte</string>
+    <string name="night">Notte</string>
 <string name="shared_string_not_selected">Non selezionato</string>
     
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto di partenza</string>
     <string name="select_month_and_country">Scegli il mese e lo stato</string>
-<string name="item_removed">Oggetto cancellato</string>
+<string name="item_removed">Oggetto rimosso</string>
     <string name="n_items_removed">oggetti cancellati</string>
     <string name="shared_string_undo_all">Annulla tutto</string>
     <string name="switch_start_finish">Inverti punti di partenza e destinazione</string>
@@ -2144,4 +2144,8 @@
     <string name="number_of_contributors">Numero di contributori</string>
     <string name="shared_string_select">Scegli</string>
     <string name="reports_for">Rapporto per:</string>
-</resources>
+<string name="shared_string_remove">Rimuovi</string>
+    <string name="clear_updates_proposition_message">Puoi eliminare gli aggiornamenti scaricati e avere la mappa originale</string>
+    <string name="road_blocked">Strada bloccata</string>
+    <string name="add_time_span">Aggiungi durata</string>
+    </resources>

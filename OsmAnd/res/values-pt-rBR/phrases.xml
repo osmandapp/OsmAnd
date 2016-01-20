@@ -2612,4 +2612,18 @@
 	<string name="poi_firepit">Pira</string>
 	<string name="poi_street_cabinet">Gabinete de rua</string>
 
+<string name="poi_fair_trade_yes">Comércio justo: sim</string>
+	<string name="poi_fair_trade_no">Comércio justo: não</string>
+	<string name="poi_fair_trade_only">Somento produtos de comércio justo</string>
+
+	<string name="poi_ice_hockey">Hóquei no gelo</string>
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_protected_area">Área protegida</string>
+	<string name="poi_protection_title">Tipo de proteção</string>
+	<string name="poi_protection_object_historic">Objeto de proteção: histórico</string>
+	<string name="poi_protection_object_nature">Objeto de proteção: natureza</string>
+	<string name="poi_protection_object_habitat">Objeto de proteção: habitat</string>
+	<string name="poi_protection_object_water">Objeto de proteção: água</string>
+
 </resources>
