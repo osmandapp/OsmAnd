@@ -775,7 +775,7 @@
     <string name="recording_is_recorded">Áudio/vídeo está sendo gravado. Para parar toque o widget AV.</string>
     <string name="recording_playing">Reproduzindo áudio da gravação especificada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reprodutor externo</string>
-    <string name="recording_delete_confirm">Quer apagar esta gravação?</string>
+    <string name="recording_delete_confirm">Você quer excluir esta gravação?</string>
     
     <string name="recording_unavailable">Indisponível</string>
     <string name="recording_context_menu_arecord">Tomar uma nota de áudio</string>
@@ -803,7 +803,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9)</string>
 	
 	<string name="target_point">Destino %1$s</string>
-    <string name="intermediate_point">Destino %1$s</string>
+    <string name="intermediate_point">Destino intermediário %1$s</string>
     <string name="map_widget_intermediate_distance">Destino intermediário</string>
     <string name="use_compass_navigation">Usar bússola</string>
 	<string name="avoid_motorway">Evitar auto-estradas</string>
@@ -950,7 +950,7 @@
 	<string name="osmand_parking_warning">Alerta</string>
 	<string name="osmand_parking_warning_text">Notificação para buscar seu carro foi adicionada ao seu calendário. Ela permanecerá até que você a apague manualmente.</string>    
 	<string name="osmand_parking_time_limit_title">Definir o limite de tempo de estacionamento</string>
-	<string name="osmand_parking_delete_confirm">Remover o local de estacionamento?</string>
+	<string name="osmand_parking_delete_confirm">Você quer apagar o marcardor da posição de estacionamento?</string>
 	<string name="osmand_parking_delete">Apagar um marcador de estacionamento</string>
 	<string name="osmand_parking_choose_type">Escolher o tipo de estacionamento</string>
 	<string name="osmand_parking_no_lim_text">Tempo ilimitado</string>
@@ -1563,7 +1563,7 @@
 	<string name="search_address">Pesquisar endereço</string>
 	<string name="choose_building">Escolher número</string>
 	<string name="choose_street">Escolher rua</string>
-	<string name="choose_city">Escolher cidade</string>
+	<string name="choose_city">Escolher cidade ou código postal</string>
 	<string name="ChooseCountry">Escolher país</string>
 	<string name="show_view_angle">Mostrar ângulo de visão</string>
 	<string name="map_view_3d_descr">Ativar a visualização em 3D do mapa</string>
@@ -1988,7 +1988,7 @@
     <string name="select_month_and_country">Selecione o mês e o país</string>
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Ponto de partida</string>
-    <string name="item_removed">Item apagado</string>
+    <string name="item_removed">Item excluído</string>
     <string name="n_items_removed">itens apagados</string>
     <string name="shared_string_undo_all">DESFAZER TUDO</string>
     <string name="rendering_attr_hideIcons_name">Ocultar ícones dos POIs</string>
@@ -1996,4 +1996,9 @@
     <string name="number_of_contributors">Número de contribuidores</string>
     <string name="number_of_edits">Número de edições</string>
     <string name="reports_for">Relatório para:</string>
-</resources>
+<string name="shared_string_remove">Excluir</string>
+    <string name="clear_updates_proposition_message">Você pode excluir atualizações baixadas e voltar para a versão original do mapa</string>
+    <string name="add_time_span">Adicionar intervalo de tempo</string>
+    <string name="road_blocked">Estrada bloqueada</string>
+    <string name="shared_string_select">Selecionar</string>
+    </resources>
