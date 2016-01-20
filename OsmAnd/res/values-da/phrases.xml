@@ -2652,4 +2652,11 @@
 <string name="poi_ice_hockey">Ishockey</string>
 	<string name="poi_bandy">Bandy</string>
 
+<string name="poi_protected_area">Beskyttet område</string>
+	<string name="poi_protection_title">Beskyttet titel</string>
+	<string name="poi_protection_object_historic">Beskyttet objekt: historisk</string>
+	<string name="poi_protection_object_nature">Beskyttet objekt: natur</string>
+	<string name="poi_protection_object_habitat">Beskyttet objekt: levested</string>
+	<string name="poi_protection_object_water">Beskyttet objekt: vand</string>
+
 </resources>
