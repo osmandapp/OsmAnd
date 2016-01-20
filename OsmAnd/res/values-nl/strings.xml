@@ -1278,10 +1278,10 @@
     <string name="index_name_gb">Europa - Groot-Brittannië</string>
     <string name="index_item_nation_addresses">Adressen in het hele land</string>
 	<string name="index_item_world_altitude_correction">Wereldwijde hoogtecorrectie</string>
-	<string name="index_item_world_seamarks">Zeebakens (wereld)</string>
-	<string name="index_item_world_bitcoin_payments">Betalen met Bitcoin (wereld)</string>
+	<string name="index_item_world_seamarks">Zeebakens (wereldwijd)</string>
+	<string name="index_item_world_bitcoin_payments">Betalen met Bitcoin (wereldwijd)</string>
 	<string name="index_item_world_basemap">Wereld-overzichtskaart</string>
-    <string name="index_item_world_ski">Skikaart (wereld)</string>
+    <string name="index_item_world_ski">Skikaart (wereldwijd)</string>
     <string name="lang_hr">Kroatisch</string>
     <string name="lang_zh">Chinees</string>
     <string name="lang_pt_br">Portugees (Brazilië)</string>
@@ -1609,7 +1609,7 @@
     <string name="wake_on_voice">Zet het scherm aan</string>
     <string name="wake_on_voice_descr">Zet het scherm aan (indien het uit staat) bij het naderen van een bocht</string>
     
-    <string name="impassable_road">Vermijd wegen…</string>
+    <string name="impassable_road">Blokkeer wegen…</string>
     <string name="rendering_category_hide">Verberg</string>
     <string name="lock_screen_request_explanation">%1$s heeft toestemming nodig om het scherm uit te kunnen schakelen (als onderdeel van de stroombesparende functie).</string>
     
@@ -1909,7 +1909,7 @@
     <string name="traffic_warning_hazard">Gevaar</string>
     <string name="rendering_value_boldOutline_name">Dik omlijnd</string>
     <string name="no_updates_available">Geen updates beschikbaar</string>
-    <string name="download_live_updates">Live Updates</string>
+    <string name="download_live_updates">Automatisch controleren op update?</string>
 	<string name="lang_os">Ossetisch</string>
     <string name="lang_nb">Noors (Bokmål)</string>
     <string name="lang_vo">Volapük</string>
@@ -2124,7 +2124,7 @@
     <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
     <string name="update">Controle op Update</string>
     <string name="only_download_over_wifi">Alleen downloaden via WiFi</string>
-    <string name="live_update">Live Update</string>
+    <string name="live_update">Automatisch controleren</string>
 <string name="update_now">Nu Controleren</string>
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Reistijd:</string>
@@ -2134,7 +2134,7 @@
     <string name="no_microphone_permission">OsmAnd heeft geen toestemming de microfoon te gebruiken.</string>
     <string name="select_voice_provider">Kies stembegeleiding</string>
     <string name="select_voice_provider_descr">Stembegeleiding voor uw taal kiezen of downloaden</string>
-    <string name="impassable_road_desc">Kies wegen die vermeden moeten worden</string>
+    <string name="impassable_road_desc">Kies wegen die niet gebruikt mogen worden</string>
     <string name="shared_string_sound">Stembegeleiding</string>
     <string name="live_updates">Live Updates</string>
     <string name="available_maps">Beschikbare Kaarten</string>
@@ -2147,7 +2147,7 @@
     <string name="rec_split_title">Gebruik automatische splitsing</string>
     <string name="rec_split_desc">Videoclips overschrijven als opslagruimte vol is</string>
     <string name="rec_split_clip_length">Cliplengte</string>
-    <string name="rec_split_clip_length_desc">De lengte van eenvideoclip is nooit langer als opgegeven</string>
+    <string name="rec_split_clip_length_desc">De lengte van een videoclip is nooit langer als opgegeven</string>
     <string name="rec_split_storage_size">Maximale opslag voor video</string>
     <string name="rec_split_storage_size_desc">Geheugen dat maximaal voor alle videoclips gebruikt wordt</string>
     <string name="hourly">Elk uur</string>
@@ -2165,12 +2165,12 @@
     <string name="shared_string_undo_all">Alles terugzetten</string>
     <string name="rendering_attr_hideIcons_name">Verberg POI-iconen</string>
     <string name="switch_start_finish">Verwissel start en bestemming</string>
-    <string name="number_of_contributors">Aantal bijdragers</string>
+    <string name="number_of_contributors">Aantal Medewerkers</string>
     <string name="number_of_edits">Aantal bewerkingen</string>
     <string name="shared_string_remove">Verwijder</string>
     <string name="clear_updates_proposition_message">Je kunt de gedownloade updates verwijderen en terugkeren naar de originele kaart</string>
     <string name="add_time_span">Periode toevoegen</string>
     <string name="road_blocked">Weg geblokkeerd</string>
-    <string name="shared_string_select">Blokkeer</string>
+    <string name="shared_string_select">Blokkeer...</string>
     <string name="reports_for">Verslag voor:</string>
 </resources>
