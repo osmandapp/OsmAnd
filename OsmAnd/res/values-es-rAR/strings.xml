@@ -1620,7 +1620,7 @@
     <string name="search_address">Buscar dirección</string>
     <string name="choose_building">Elija el edificio</string>
     <string name="choose_street">Elija la calle</string>
-    <string name="choose_city">Elija la ciudad</string>
+    <string name="choose_city">Elija la ciudad o el código postal</string>
     <string name="ChooseCountry">Elija el país</string>
     <string name="show_view_angle">Mostrar dirección de visualización</string>
     <string name="map_view_3d_descr">Active la vista 3D del mapa</string>

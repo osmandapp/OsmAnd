@@ -111,7 +111,7 @@
     <string name="app_description">Program za navigacijo</string>
     <string name="use_internet">Uporabi internet</string>
     <string name="show_poi_over_map">Prikaži točke POI</string>
-    <string name="choose_city">Izbor mesta</string>
+    <string name="choose_city">Izbor mesta ali poštne številke</string>
     <string name="choose_building">Izbor hišne številke</string>
     <string name="choose_street">Izbor ulice</string>
     <string name="ChooseCountry">Izbor države</string>
@@ -296,7 +296,7 @@
     <string name="no_route">Ni določene poti</string>
     <string name="delete_target_point">Odstrani cilj</string>
     <string name="target_point">Ciljna točka %1$s</string>
-    <string name="intermediate_point">Cilj %1$s</string>
+    <string name="intermediate_point">Vmesni cilj %1$s</string>
     <string name="target_points">Cilji</string>
     <string name="poi_filter_emergency">Pomoč v sili</string>
     <string name="poi_filter_car_aid">Pomoč na cesti</string>

@@ -60,6 +60,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
 import net.osmand.util.Algorithms;
@@ -73,7 +74,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EditPoiDialogFragment extends DialogFragment {
+public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "EditPoiDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);
 
@@ -103,9 +104,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		OsmandSettings settings = getMyApplication().getSettings();
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
+		if (getSettings().OFFLINE_EDITION.get()
+				|| !getSettings().isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
 		} else {
 			mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
@@ -116,22 +117,10 @@ public class EditPoiDialogFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		boolean isLightTheme = ((OsmandApplication) getActivity().getApplication())
-				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-		getActivity().getWindow()
-				.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-	}
-
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
-		final OsmandSettings settings = getMyApplication().getSettings();
-		boolean isLightTheme = settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		boolean isLightTheme = getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 
 		if (savedInstanceState != null) {
 			@SuppressWarnings("unchecked")
@@ -204,8 +193,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 		final int colorId = isLightTheme ? R.color.inactive_item_orange : R.color.dash_search_icon_dark;
 		final int color = getResources().getColor(colorId);
-		onlineDocumentationButton.setImageDrawable(getMyApplication().getIconsCache()
-				.getPaintedContentIcon(R.drawable.ic_action_help, color));
+		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, color));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -546,10 +534,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 		if (!subCategories.containsKey(key.toLowerCase())) {
 			subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(key), v);
 		}
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
