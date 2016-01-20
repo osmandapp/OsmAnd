@@ -648,7 +648,7 @@
   <string name="search_address">Zoek adres</string>
   <string name="choose_building">Kies Huisnummer</string>
   <string name="choose_street">Kies Straat</string>
-  <string name="choose_city">Kies Plaats</string>
+  <string name="choose_city">Kies Plaats of Postcode</string>
   <string name="ChooseCountry">Kies land</string>
   
   
@@ -819,7 +819,7 @@
   <string name="osmand_parking_warning">Waarschuwing</string>
   <string name="osmand_parking_warning_text">Er staat nog een notitie voor het ophalen van de auto in de kalender. Deze blijft staan tot je hem zelf verwijdert.</string>
   <string name="osmand_parking_time_limit_title">Stel de parkeertijd-limiet in</string>
-  <string name="osmand_parking_delete_confirm">De locatie van de geparkeerde auto verwijderen?</string>
+  <string name="osmand_parking_delete_confirm">De locatie van de geparkeerde auto wissen?</string>
   <string name="osmand_parking_delete">Verwijder parkeerlocatie</string>
   <string name="osmand_parking_choose_type">Kies het type parkeerplaats</string>
   <string name="osmand_parking_lim_text">Met tijdslimiet</string>
@@ -1028,7 +1028,7 @@
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, druk op de AV-widget.</string>
     <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>
     <string name="recording_open_external_player">Open externe speler</string>
-    <string name="recording_delete_confirm">Wil je deze opname verwijderen?</string>
+    <string name="recording_delete_confirm">Wil je deze opname wissen?</string>
     
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">AudioNotitie opnemen</string>
@@ -2167,4 +2167,10 @@
     <string name="switch_start_finish">Verwissel start en bestemming</string>
     <string name="number_of_contributors">Aantal bijdragers</string>
     <string name="number_of_edits">Aantal bewerkingen</string>
-    </resources>
+    <string name="shared_string_remove">Verwijder</string>
+    <string name="clear_updates_proposition_message">Je kunt de gedownloade updates verwijderen en terugkeren naar de originele kaart</string>
+    <string name="add_time_span">Periode toevoegen</string>
+    <string name="road_blocked">Weg geblokkeerd</string>
+    <string name="shared_string_select">Blokkeer</string>
+    <string name="reports_for">Verslag voor:</string>
+</resources>
