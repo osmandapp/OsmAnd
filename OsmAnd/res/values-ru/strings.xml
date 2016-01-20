@@ -1902,4 +1902,5 @@
     <string name="rec_split">Разбиение на клипы</string>
     <string name="rec_split_title">Использовать разбиение на клипы</string>
     <string name="rec_split_desc">Циклическая перезапись клипов при превышении заданного объема хранилища</string>
+    <string name="switch_start_finish">Поменять местами пункт отправления и пункт назначения</string>
     </resources>
