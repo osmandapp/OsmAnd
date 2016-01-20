@@ -2203,7 +2203,7 @@
 
     <string name="update_time">Opdateringstidspunkt</string>
 
-<string name="updates_size">Opdateringer: %s</string>
+<string name="updates_size">Opdateringsstørrelse</string>
 <string name="last_map_change">Sidste kortændring: %s</string>
 <string name="rec_split">Optagelse automatisk opdelt</string>
     <string name="rec_split_title">"Brug  automatisk opdeling"</string>
@@ -2211,7 +2211,7 @@
     <string name="rec_split_clip_length">Kliplængde</string>
     <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
     <string name="rec_split_storage_size">Lagerplads</string>
-    <string name="rec_split_storage_size_desc">Lagerplads, der kan være bruges af alle optagne klip</string>
+    <string name="rec_split_storage_size_desc">Lagerplads, der kan bruges af alle optagne klip</string>
     <string name="hourly">Time</string>
     <string name="daily">Daglig</string>
     <string name="weekly">Ugentlig</string>
