@@ -169,7 +169,7 @@
     <string name="recording_is_recorded">Аўдыё/відэа запісваецца. Каб спыніць, націсьніце на віджэт AV.</string>
     <string name="recording_playing">Прайграецца аўдыё з абранага запісу.\n%1$s</string>
     <string name="recording_open_external_player">Адкрыць зьнешні прайгравальнік</string>
-    <string name="recording_delete_confirm">Вы хочаце выдаліць гэты запіс?</string>
+    <string name="recording_delete_confirm">Вы хочаце зьнішчыць гэты запіс?</string>
     <string name="recording_unavailable">недаступны</string>
     <string name="recording_context_menu_arecord">Запісаць аўдыё-нататку</string>
     <string name="recording_context_menu_vrecord">Запісаць відэа-нататку</string>
@@ -1021,7 +1021,7 @@
 	<string name="search_address">Пошук адраса</string>
 	<string name="choose_building">Абраць будынак</string>
 	<string name="choose_street">Абраць вуліцу</string>
-	<string name="choose_city">Абраць горад</string>
+	<string name="choose_city">Абраць горад ці паштовы індэкс</string>
 	<string name="ChooseCountry">Абраць краіну</string>
 	<string name="show_view_angle">Адлюстроўваць напрамак позірку</string>
 	<string name="map_view_3d_descr">Уключыць 3D выгляд для мапы</string>
@@ -2096,4 +2096,15 @@
     <string name="select_month_and_country">Выберыце месяц і краіну</string>
 <string name="shared_string_select">Абраць</string>
     <string name="shared_string_remove">Выдаліць</string>
+    <string name="road_blocked">Дарога заблякаваная</string>
+    <string name="switch_start_finish">Памяняць месцамі пункт адпраўленьня і пункт прызначэньня</string>
+    <string name="rendering_attr_hideIcons_name">Схаваць значкі POI</string>
+    <string name="rec_split">Разьбіцьцё на кліпы</string>
+    <string name="rec_split_title">Выкарыстоўваць разьбіцьцё на кліпы</string>
+    <string name="rec_split_desc">Цыклічны перазапіс кліпаў пры перавышэньні зададзенага аб\'ёму сховішча</string>
+    <string name="rec_split_clip_length">Працягласьць відэакліпа</string>
+    <string name="rec_split_clip_length_desc">Працягласьць кожнага запісанага кліпа ня будзе больш абранага значэньня</string>
+    <string name="rec_split_storage_size_desc">Аб\'ём памяці, які можа быць заняты ўсімі відэакліпамі</string>
+    <string name="number_of_contributors">Колькасьць удзельнікаў</string>
+    <string name="number_of_edits">Колькасьць правак</string>
     </resources>
