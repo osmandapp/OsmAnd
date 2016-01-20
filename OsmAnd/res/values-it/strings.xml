@@ -526,7 +526,7 @@
     <string name="search_address">Cerca indirizzo</string>
     <string name="choose_building">Scegli numero civico</string>
     <string name="choose_street">Scegli la strada</string>
-    <string name="choose_city">Scegli la città</string>
+    <string name="choose_city">Scegli la città o il cap</string>
     <string name="ChooseCountry">Scegli la nazione</string>
 
 
@@ -2147,4 +2147,5 @@
 <string name="shared_string_remove">Rimuovi</string>
     <string name="clear_updates_proposition_message">Puoi eliminare gli aggiornamenti scaricati e avere la mappa originale</string>
     <string name="road_blocked">Strada bloccata</string>
+    <string name="add_time_span">Aggiungi durata</string>
     </resources>
