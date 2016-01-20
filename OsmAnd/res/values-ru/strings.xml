@@ -1896,4 +1896,10 @@
     <string name="number_of_edits">Количество правок</string>
     <string name="night">Ночь</string>
     <string name="morning">Утро</string>
+    <string name="rec_split_storage_size_desc">Объём памяти, который может быть занят всеми видеоклипами</string>
+    <string name="rec_split_clip_length">Продолжительность видеоклипа</string>
+    <string name="rec_split_clip_length_desc">Продолжительность каждого записанного клипа не будет больше выбранного значения</string>
+    <string name="rec_split">Разбиение на клипы</string>
+    <string name="rec_split_title">Использовать разбиение на клипы</string>
+    <string name="rec_split_desc">Циклическая перезапись клипов при превышении заданного объема хранилища</string>
     </resources>
