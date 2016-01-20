@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,10 +20,14 @@ import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -51,6 +57,14 @@ import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+
 /**
  */
 public class AppInitializer implements IProgress {
@@ -58,7 +72,7 @@ public class AppInitializer implements IProgress {
 	private static final int VERSION_2_2 = 22;
 	private static final int CURRENT_VERSION_FOR_UGPRADE = VERSION_2_2;
 
-	
+
 	public static final boolean TIPS_AND_TRICKS = false;
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
@@ -74,7 +88,7 @@ public class AppInitializer implements IProgress {
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 	private OsmandApplication app;
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(AppInitializer.class);
-	
+
 	private boolean initSettings = false;
 	private boolean firstTime;
 	private boolean activityChangesShowed = false;
@@ -86,36 +100,36 @@ public class AppInitializer implements IProgress {
 	private String taskName;
 	private List<AppInitializeListener> listeners = new ArrayList<>();
 	private SharedPreferences startPrefs;
-	
+
 	public enum InitEvents {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
 		NATIVE_OPEN_GLINITIALIZED,
 		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
 		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS
 	}
-	
+
 	public interface AppInitializeListener {
-		
+
 		void onProgress(AppInitializer init, InitEvents event);
-		
+
 		void onFinish(AppInitializer init);
 	}
-	
-	
+
+
 	public AppInitializer(OsmandApplication app) {
 		this.app = app;
 	}
-	
-	
+
+
 	public List<String> getWarnings() {
 		return warnings;
 	}
-	
+
 	public boolean isAppInitializing() {
 		return appInitializing;
 	}
-	
-	
+
+
 	private void initUiVars(Activity activity) {
 		if(initSettings) {
 			return;
@@ -146,27 +160,27 @@ public class AppInitializer implements IProgress {
 		}
 		initSettings = true;
 	}
-	
+
 	public int getNumberOfStarts() {
 		if(startPrefs == null) {
 			return 0;
 		}
 		return startPrefs.getInt(NUMBER_OF_STARTS, 1);
 	}
-	
+
 	public long getFirstInstalled() {
 		if(startPrefs == null) {
 			return 0;
 		}
 		return startPrefs.getLong(FIRST_INSTALLED, 0);
 	}
-	
+
 	public void resetFirstTimeRun() {
 		if(startPrefs != null) {
 			startPrefs.edit().remove(FIRST_TIME_APP_RUN).commit();
 		}
 	}
-	
+
 	public boolean isFirstTime(Activity activity) {
 		initUiVars(activity);
 		return firstTime;
@@ -184,10 +198,10 @@ public class AppInitializer implements IProgress {
 
 		return false;
 	}
-	
+
 	private void checkMapUpdates() {
 		long diff = System.currentTimeMillis() - app.getSettings().LAST_CHECKED_UPDATES.get();
-		if(diff >= 2 * 24 * 60 * 60l  && new Random().nextInt(5) == 0 && 
+		if(diff >= 2 * 24 * 60 * 60l  && new Random().nextInt(5) == 0 &&
 				app.getSettings().isInternetConnectionAvailable()) {
 			app.getDownloadThread().runReloadIndexFiles();
 		} else if(Version.isDeveloperVersion(app)) {
@@ -259,7 +273,7 @@ public class AppInitializer implements IProgress {
 							new FileOutputStream(file));
 				}
 				app.regions.prepareFile(file.getAbsolutePath());
-				
+
 			}
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
@@ -267,7 +281,7 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-	
+
 	private void initPoiTypes() {
 		if(app.getAppPath("poi_types.xml").exists()) {
 			app.poiTypes.init(app.getAppPath("poi_types.xml").getAbsolutePath());
@@ -275,8 +289,8 @@ public class AppInitializer implements IProgress {
 			app.poiTypes.init();
 		}
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
-			
-			
+
+
 			@Override
 			public String getTranslation(AbstractPoiType type) {
 				if(type.getBaseLangType() != null) {
@@ -297,7 +311,6 @@ public class AppInitializer implements IProgress {
 	}
 
 
-
 	public void onCreateApplication() {
 		// always update application mode to default
 		OsmandSettings osmandSettings = app.getSettings();
@@ -311,7 +324,7 @@ public class AppInitializer implements IProgress {
 			e.printStackTrace();
 		}
 		app.applyTheme(app);
-		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class); 
+		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
 		app.resourceManager = startupInit(new ResourceManager(app), ResourceManager.class);
 		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
@@ -333,7 +346,7 @@ public class AppInitializer implements IProgress {
 
 	private void updateRegionVars() {
 		app.regions.setTranslator(new RegionTranslation() {
-			
+
 			@Override
 			public String getTranslation(String id) {
 				if(WorldRegion.AFRICA_REGION_ID.equals(id)){
@@ -360,7 +373,6 @@ public class AppInitializer implements IProgress {
 	}
 
 
-
 	private <T> T startupInit(T object, Class<T> class1) {
 		long t = System.currentTimeMillis();
 		if(t - startTime > 7) {
@@ -369,7 +381,6 @@ public class AppInitializer implements IProgress {
 		startTime = t;
 		return object;
 	}
-
 
 
 	public net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
@@ -392,7 +403,7 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
-	
+
 
 
 
@@ -400,7 +411,7 @@ public class AppInitializer implements IProgress {
 		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, app.getString(R.string.loading_data),
 				app.getString(R.string.voice_data_initializing)) : null;
 		new Thread(new Runnable() {
-			
+
 			public CommandPlayer createCommandPlayer(String voiceProvider, OsmandApplication osmandApplication, Activity ctx)
 					throws CommandPlayerException {
 				if (voiceProvider != null) {
@@ -442,7 +453,7 @@ public class AppInitializer implements IProgress {
 			}
 		}).start();
 	}
-	
+
 	private void startApplicationBackground() {
 		try {
 			startBgTime = System.currentTimeMillis();
@@ -452,7 +463,7 @@ public class AppInitializer implements IProgress {
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
-			
+
 			app.getRendererRegistry().initRenderers(this);
 			notifyEvent(InitEvents.INIT_RENDERERS);
 			// native depends on renderers
@@ -460,7 +471,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
 			app.poiFilters.reloadAllPoiFilters();
-			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);			
+			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			indexRegionsBoundaries(warnings);
 			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);
 			app.selectedGpxHelper.loadGPXTracks(this);
@@ -470,6 +481,8 @@ public class AppInitializer implements IProgress {
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
+			checkLiveUpdatesAlerts();
+			LocalIndexHelper helper = new LocalIndexHelper(app);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());
@@ -482,9 +495,37 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
+	private void checkLiveUpdatesAlerts() {
+		OsmandSettings settings = app.getSettings();
+		if (!settings.IS_LIVE_UPDATES_ON.get()) {
+			return;
+		}
+		LocalIndexHelper helper = new LocalIndexHelper(app);
+		List<LocalIndexInfo> fullMaps = helper.getLocalFullMaps(new AbstractLoadLocalIndexTask() {
+			@Override
+			public void loadFile(LocalIndexInfo... loaded) {
+			}
+		});
+		AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
+		for (LocalIndexInfo fullMap : fullMaps) {
+			if (!preferenceLiveUpdatesOn(fullMap, settings).get()) {
+				continue;
+			}
+			int updateFrequencyOrd = preferenceUpdateFrequency(fullMap, settings).get();
+			LiveUpdatesHelper.UpdateFrequency updateFrequency =
+					LiveUpdatesHelper.UpdateFrequency.values()[updateFrequencyOrd];
+			long lastCheck = preferenceLastCheck(fullMap, settings).get();
 
-	
-
+			if (System.currentTimeMillis() - lastCheck > updateFrequency.getTime() * 2) {
+				runLiveUpdate(app, fullMap, false);
+				PendingIntent alarmIntent = getPendingIntent(app, fullMap);
+				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fullMap, settings).get();
+				LiveUpdatesHelper.TimeOfDay timeOfDayToUpdate =
+						LiveUpdatesHelper.TimeOfDay.values()[timeOfDayOrd];
+				setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+			}
+		}
+	}
 
 	private void restoreBackupForFavoritesFiles() {
 		final File appDir = app.getAppPath(null);
@@ -555,12 +596,12 @@ public class AppInitializer implements IProgress {
 					File ls = app.getAppPath("fonts");
 					lib.loadFontData(ls);
 				}
-				
+
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}
 	}
-	
+
 
 	private StringBuilder formatWarnings(List<String> warnings) {
 		final StringBuilder b = new StringBuilder();
@@ -579,7 +620,7 @@ public class AppInitializer implements IProgress {
 
 	public void notifyFinish() {
 		app.uiHandler.post(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				for(AppInitializeListener l : listeners) {
@@ -595,11 +636,11 @@ public class AppInitializer implements IProgress {
 			startBgTime = time;
 		}
 		app.uiHandler.post(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				for(AppInitializeListener l : listeners) {
-					l.onProgress(AppInitializer.this, event);			
+					l.onProgress(AppInitializer.this, event);
 				}
 			}
 		});
@@ -634,7 +675,7 @@ public class AppInitializer implements IProgress {
 		taskName = null;
 		notifyEvent(InitEvents.TASK_CHANGED);
 	}
-	
+
 	public String getCurrentInitTaskName() {
 		return taskName;
 	}
@@ -653,7 +694,7 @@ public class AppInitializer implements IProgress {
 
 
 	private boolean applicationBgInitializing = false;
-	
+
 
 	public synchronized void startApplication() {
 		if (applicationBgInitializing) {
@@ -686,5 +727,4 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	
 }

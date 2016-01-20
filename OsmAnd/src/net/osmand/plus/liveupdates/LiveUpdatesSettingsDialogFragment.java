@@ -43,6 +43,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIn
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
@@ -158,7 +159,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						timeOfDayPreference.set(timeOfDayInt);
 
 						if (liveUpdatesSwitch.isChecked() && getSettings().IS_LIVE_UPDATES_ON.get()) {
-							runLiveUpdate(localIndexInfo, false);
+							runLiveUpdate(getActivity(), localIndexInfo, false);
 							UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
 							TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
 							setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
@@ -172,16 +173,11 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				.setNeutralButton(R.string.update_now, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						runLiveUpdate(localIndexInfo, true);
+						runLiveUpdate(getActivity(), localIndexInfo, true);
 						sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
 					}
 				});
 		return builder.create();
-	}
-
-	void runLiveUpdate(final LocalIndexInfo info, boolean forceUpdate) {
-		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new PerformLiveUpdateAsyncTask(getActivity(), info, forceUpdate).execute(new String[]{fnExt});
 	}
 
 	private static String getUpdatesSize(String fileNameWithoutExtension,
