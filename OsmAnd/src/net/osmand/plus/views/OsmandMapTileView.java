@@ -161,7 +161,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private Paint paintImg;
 
 	private boolean afterTwoFingerTap = false;
-	private ScaleGestureDetector scaleDetector;
+	private DoubleTapScaleDetector doubleTapScaleDetector;
 	TwoFingerTapDetector twoFingerTapDetector = new TwoFingerTapDetector() {
 		@Override
 		public void onTwoFingerTap() {
@@ -211,9 +211,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		handler = new Handler();
 		baseHandler = new Handler(application.getResourceManager().getRenderingBufferImageThread().getLooper());
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
-		scaleDetector = new ScaleGestureDetector(ctx, new MapOnScaleGestureListener());
 		gestureDetector = new GestureDetector(ctx, new MapExplorer(this, new MapTileViewOnGestureListener()));
 		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
+		doubleTapScaleDetector = new DoubleTapScaleDetector(ctx, new MapTileViewMultiTouchZoomListener());
 
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -576,7 +576,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		if (showMapPosition || animatedDraggingThread.isAnimatingZoom()) {
 			drawMapPosition(canvas, c.x, c.y);
-		} else if(multiTouchSupport.isInZoomMode()) {
+		} else if(multiTouchSupport.isInZoomMode() || doubleTapScaleDetector.isInZoomMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
 		}
 	}
@@ -758,8 +758,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				mapRenderer.resumeSymbolsUpdate();
 			}
 		}
-//		scaleDetector.onTouchEvent(event);
-//		if (scaleDetector.isInProgress()) {
 		if (twoFingerTapDetector.onTouchEvent(event)) {
 			return true;
 		}
@@ -772,9 +770,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				return true;
 			}
 		}
-		if (!multiTouchSupport.onTouchEvent(event)) {
+		if (!doubleTapScaleDetector.onTouchEvent(event)) {
+			if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */
-			gestureDetector.onTouchEvent(event);
+				gestureDetector.onTouchEvent(event);
+			}
 		}
 		return true;
 	}
@@ -825,7 +825,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 
-	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener {
+	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener,
+			DoubleTapScaleDetector.DoubleTapZoomListener {
 		private PointF initialMultiTouchCenterPoint;
 		private RotatedTileBox initialViewport;
 		private float x1;
