@@ -2578,4 +2578,9 @@
 <string name="poi_ice_hockey">Eishockey</string>
 	<string name="poi_bandy">Bandy</string>
 
+<string name="poi_protected_area">Geschütztes Gebiet</string>
+	<string name="poi_protection_object_historic">Geschütztes Objekt: historisch</string>
+	<string name="poi_protection_object_nature">Geschütztes Objekt: Natur</string>
+	<string name="poi_protection_object_water">Geschütztes Objekt: Wasser</string>
+
 </resources>
