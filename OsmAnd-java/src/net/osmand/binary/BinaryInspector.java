@@ -952,7 +952,7 @@ public class BinaryInspector {
 		if(point) {
 			float lon= (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
 			float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
-			b.append("<node id = '" + OSM_ID++ + "' lat='" +lat+"' lon='"+lon+"' >\n" );
+			b.append("<node id = '" + OSM_ID++ + "' version='1' lat='" +lat+"' lon='"+lon+"' >\n" );
 			b.append(tags);
 			b.append("</node>\n");
 		} else {
@@ -962,7 +962,7 @@ public class BinaryInspector {
 				float lon = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
 				float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
 				int id = OSM_ID++;
-				b.append("\t<node id = '" + id + "' lat='" +lat+"' lon='"+lon+"' />\n" );
+				b.append("\t<node id = '" + id + "' version='1' lat='" +lat+"' lon='"+lon+"' />\n" );
 				ids.add(id);
 			}
 			long outerId = printWay(ids, b, multipolygon ? null : tags);
@@ -974,13 +974,13 @@ public class BinaryInspector {
 						float lon = (float) MapUtils.get31LongitudeX(polygonInnerCoordinates[j][i]);
 						float lat = (float) MapUtils.get31LatitudeY(polygonInnerCoordinates[j][i + 1]);
 						int id = OSM_ID++;
-						b.append("<node id = '" + id + "' lat='" + lat + "' lon='" + lon + "' />\n");
+						b.append("<node id = '" + id + "' version='1' lat='" + lat + "' lon='" + lon + "' />\n");
 						ids.add(id);
 					}
 					innerIds.add(printWay(ids, b, null));
 				}
 				int id = OSM_ID++;
-				b.append("<relation id = '" + id + "'>\n" );
+				b.append("<relation id = '" + id + "' version='1'>\n" );
 				b.append(tags);
 				b.append("\t<member type='way' role='outer' ref= '" + outerId + "'/>\n" );
 				TLongIterator it = innerIds.iterator();
@@ -995,7 +995,7 @@ public class BinaryInspector {
 
 	private  long printWay(TLongArrayList ids, StringBuilder b , StringBuilder tags){
 		int id = OSM_ID++;
-		b.append("<way id = '" + id + "'>\n" );
+		b.append("<way id = '" + id + "' version='1'>\n" );
 		if(tags != null) {
 			b.append(tags);
 		}
