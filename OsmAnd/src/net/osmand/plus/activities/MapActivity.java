@@ -333,17 +333,29 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
+		final View pbExtView = findViewById(R.id.progress_layout_external);
+		final ProgressBar pbExt = (ProgressBar) findViewById(R.id.map_horizontal_progress_external);
+
 		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
 
 			@Override
 			public void updateProgress(int progress) {
-				pb.setVisibility(View.VISIBLE);
-				pb.setProgress(progress);
-				pb.requestLayout();
+				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
+					pbExtView.setVisibility(View.GONE);
+					pb.setVisibility(View.VISIBLE);
+					pb.setProgress(progress);
+					pb.requestLayout();
+				} else {
+					pb.setVisibility(View.GONE);
+					pbExtView.setVisibility(View.VISIBLE);
+					pbExt.setProgress(progress);
+					pbExt.requestLayout();
+				}
 			}
 
 			@Override
 			public void finish() {
+				pbExtView.setVisibility(View.GONE);
 				pb.setVisibility(View.GONE);
 			}
 		});

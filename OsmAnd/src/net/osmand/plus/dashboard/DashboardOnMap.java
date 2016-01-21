@@ -620,6 +620,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			}
 			mapActivity.findViewById(R.id.toolbar_back).setVisibility(isBackButtonVisible() ? View.VISIBLE : View.GONE);
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			if (!portrait) {
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), true);
+				mapActivity.getMapView().setMapPositionX(1);
+				mapActivity.refreshMap();
+			}
 
 			updateToolbarActions();
 			//fabButton.showFloatingActionButton();
@@ -634,6 +640,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapActivity.getRoutingHelper().removeListener(this);
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
+
+			if (!mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), false);
+				mapActivity.getMapView().setMapPositionX(0);
+				mapActivity.getMapView().refreshMap();
+			}
+
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 			hideActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
