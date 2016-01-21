@@ -1,7 +1,9 @@
 package net.osmand.plus.liveupdates;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -26,10 +29,10 @@ public abstract class SearchSelectionFragment extends BaseOsmAndDialogFragment {
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_search_list, container, false);
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
-		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyActivity(), android.R.layout.simple_list_item_1);
+		final ArrayAdapter<String> adapter = new ListAdapter(getActivity(), getListItemIcon());
 		if (getArray() != null) {
 			adapter.addAll(getArray());
-		} else if (getList() != null){
+		} else if (getList() != null) {
 			adapter.addAll(getList());
 		} else {
 			throw new RuntimeException("Either getArray() or getList() must return non null value.");
@@ -89,6 +92,11 @@ public abstract class SearchSelectionFragment extends BaseOsmAndDialogFragment {
 		return null;
 	}
 
+	@DrawableRes
+	protected int getListItemIcon() {
+		return -1;
+	}
+
 	@Override
 	public void onDetach() {
 		super.onDetach();
@@ -97,5 +105,22 @@ public abstract class SearchSelectionFragment extends BaseOsmAndDialogFragment {
 
 	public interface OnFragmentInteractionListener {
 		void onSearchResult(String name);
+	}
+
+	private class ListAdapter extends ArrayAdapter<String> {
+		private final Drawable drawableLeft;
+
+		public ListAdapter(Context context, @DrawableRes int drawableLeftId) {
+			super(getMyActivity(), android.R.layout.simple_list_item_1);
+			this.drawableLeft = drawableLeftId == -1 ? null : getContentIcon(drawableLeftId);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			TextView view = (TextView) super.getView(position, convertView, parent);
+			view.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
+			view.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.list_content_padding));
+			return view;
+		}
 	}
 }
