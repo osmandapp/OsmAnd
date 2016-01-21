@@ -119,6 +119,10 @@ public class PerformLiveUpdateAsyncTask
 						}
 					}
 				}
+			} else {
+				if (context instanceof DownloadIndexesThread.DownloadEvents) {
+					((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
+				}
 			}
 		}
 	}

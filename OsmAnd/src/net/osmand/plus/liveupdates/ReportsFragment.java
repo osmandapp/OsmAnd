@@ -153,7 +153,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 		for (WorldRegion group : groups) {
 			String name = getHumanReadableName(group);
 			regionNames.add(name);
-			queryRegionNames.put(name, group.getRegionDownloadName());
+			queryRegionNames.put(name, group == root ? "" : group.getRegionDownloadName());
 		}
 	}
 
