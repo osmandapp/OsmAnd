@@ -22,6 +22,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
@@ -32,6 +33,7 @@ import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.MapUtils;
@@ -414,10 +416,23 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	public int getFabIconId() {
+		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+			return R.drawable.map_action_flag_dark;
+		} else {
+			return R.drawable.map_directions;
+		}
+	}
+
 	public void fabPressed() {
 		hide();
 		final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
-		if (targets.getIntermediatePoints().isEmpty()) {
+		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+			DirectionsDialogs.addWaypointDialogAndLaunchMap(mapActivity, latLon.getLatitude(),
+					latLon.getLongitude(), getPointDescriptionForTarget());
+		} else if (targets.getIntermediatePoints().isEmpty()) {
 			targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 		} else {
