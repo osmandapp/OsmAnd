@@ -27,7 +27,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 
 public class PerformLiveUpdateAsyncTask
 		extends AsyncTask<String, Object, IncrementalChangesManager.IncrementalUpdateList> {
-	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
+	private final static Log LOG = PlatformUtil.getLog(PerformLiveUpdateAsyncTask.class);
 
 	private final Context context;
 	private final LocalIndexInfo localIndexInfo;
@@ -42,6 +42,7 @@ public class PerformLiveUpdateAsyncTask
 
 	@Override
 	protected void onPreExecute() {
+		LOG.debug("onPreExecute");
 		if (context instanceof AbstractDownloadActivity) {
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
 			activity.setSupportProgressBarIndeterminateVisibility(true);
@@ -58,6 +59,7 @@ public class PerformLiveUpdateAsyncTask
 
 	@Override
 	protected IncrementalChangesManager.IncrementalUpdateList doInBackground(String... params) {
+		LOG.debug("doInBackground");
 		final OsmandApplication myApplication = getMyApplication();
 		IncrementalChangesManager cm = myApplication.getResourceManager().getChangesManager();
 		return cm.getUpdatesByMonth(params[0]);
@@ -65,6 +67,7 @@ public class PerformLiveUpdateAsyncTask
 
 	@Override
 	protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
+		LOG.debug("onPostExecute");
 		if (context instanceof AbstractDownloadActivity) {
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
 			activity.setSupportProgressBarIndeterminateVisibility(false);
