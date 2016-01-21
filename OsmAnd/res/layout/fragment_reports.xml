@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/bg_color"
-        android:columnCount="2"
-        android:paddingLeft="16dp">
+        android:columnCount="2">
 
         <TextView
             android:layout_height="48dp"
             android:layout_columnSpan="2"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:gravity="center_vertical"
             android:text="@string/select_month_and_country"
@@ -31,14 +31,15 @@
         <ImageView
             android:id="@+id/calendarImageView"
             android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
             android:src="@drawable/ic_action_data"/>
 
-        <!-- 24 is magic number + margin 16 = 42-->
+        <!-- 40 is magic number + margin 16 = 56-->
         <Spinner
             android:id="@+id/montReportsSpinner"
             android:layout_gravity="fill_horizontal|fill_vertical"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="42dp"
+            android:layout_marginRight="56dp"
             android:gravity="center_vertical"/>
 
         <View
@@ -49,6 +50,7 @@
         <ImageView
             android:id="@+id/regionIconImageView"
             android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
             android:src="@drawable/ic_world_globe_dark"/>
 
         <include
@@ -57,7 +59,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="56dp"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_height="8dp"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginRight="40dp"
+            android:padding="0dp"
+            android:indeterminate="true"
+            tools:progress="50"
+            tools:visibility="visible"
+            android:visibility="invisible"/>
 
         <View
             android:layout_height="1dp"
@@ -67,6 +83,7 @@
         <ImageView
             android:id="@+id/numberOfContributorsIcon"
             android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
             android:src="@drawable/ic_group"/>
 
         <LinearLayout
@@ -76,6 +93,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/numberOfContributorsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/number_of_contributors"
@@ -86,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
-                tools:text="65"/>
+                android:text="0"/>
         </LinearLayout>
 
         <View
@@ -95,9 +113,9 @@
             android:background="?attr/dashboard_divider"/>
 
         <ImageView
-
             android:id="@+id/numberOfEditsIcon"
             android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
             android:src="@drawable/ic_group"/>
 
         <LinearLayout
@@ -107,6 +125,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/numberOfEditsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/number_of_edits"
@@ -117,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
-                tools:text="1125"/>
+                android:text="0"/>
         </LinearLayout>
     </GridLayout>
 

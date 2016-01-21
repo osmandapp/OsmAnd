@@ -2,13 +2,19 @@ package net.osmand.plus.liveupdates;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.AttrRes;
+import android.support.annotation.ColorInt;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -49,6 +55,16 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 	HashMap<String, String> queryRegionNames = new HashMap<>();
 	ArrayList<String> regionNames = new ArrayList<>();
 
+	private ImageView numberOfContributorsIcon;
+	private ImageView numberOfEditsIcon;
+	private TextView numberOfContributorsTitle;
+	private TextView numberOfEditsTitle;
+	private ProgressBar progressBar;
+
+	private int inactiveColor;
+	private int textColorPrimary;
+	private int textColorSecondary;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -74,8 +90,13 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 
 		setThemedDrawable(view, R.id.calendarImageView, R.drawable.ic_action_data);
 		setThemedDrawable(view, R.id.regionIconImageView, R.drawable.ic_world_globe_dark);
-		setThemedDrawable(view, R.id.numberOfContributorsIcon, R.drawable.ic_group);
-		setThemedDrawable(view, R.id.numberOfEditsIcon, R.drawable.ic_group);
+		numberOfContributorsIcon = (ImageView) view.findViewById(R.id.numberOfContributorsIcon);
+		setThemedDrawable(numberOfContributorsIcon, R.drawable.ic_group);
+		numberOfEditsIcon = (ImageView) view.findViewById(R.id.numberOfEditsIcon);
+		setThemedDrawable(numberOfEditsIcon, R.drawable.ic_map);
+		numberOfContributorsTitle = (TextView) view.findViewById(R.id.numberOfContributorsTitle);
+		numberOfEditsTitle = (TextView) view.findViewById(R.id.numberOfEditsTitle);
+		progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
 		contributorsTextView = (TextView) view.findViewById(R.id.contributorsTextView);
 		editsTextView = (TextView) view.findViewById(R.id.editsTextView);
@@ -94,6 +115,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 			}
 		};
 		montReportsSpinner.setOnItemSelectedListener(onItemSelectedListener);
+
+		inactiveColor = getColorFromAttr(R.attr.plugin_details_install_header_bg);
+		textColorPrimary = getColorFromAttr(android.R.attr.textColorPrimary);
+		textColorSecondary = getColorFromAttr(android.R.attr.textColorSecondary);
+
 		return view;
 	}
 
@@ -101,6 +127,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 		int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
 		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 		String countryUrlString = queryRegionNames.get(countryNameTextView.getText().toString());
+
+		tryUpdateData(monthUrlString, countryUrlString);
+	}
+
+	private void tryUpdateData(String monthUrlString, String regionUrlString) {
 		GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener =
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override
@@ -113,13 +144,10 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 								editsTextView.setText(String.valueOf(response.changes));
 							}
 						}
+						disableProgress();
 					}
 				};
-		requestData(monthUrlString, countryUrlString, onResponseListener);
-	}
-
-	private void requestData(String monthUrlString, String regionUrlString,
-							 GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener) {
+		enableProgress();
 		GetJsonAsyncTask<Protocol.TotalChangesByMonthResponse> totalChangesByMontAsyncTask =
 				new GetJsonAsyncTask<>(Protocol.TotalChangesByMonthResponse.class);
 		totalChangesByMontAsyncTask.setOnResponseListener(onResponseListener);
@@ -271,5 +299,38 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 		protected ArrayList<String> getList() {
 			return ((ReportsFragment) getParentFragment()).regionNames;
 		}
+
+		@Override
+		protected int getListItemIcon() {
+			return R.drawable.ic_map;
+		}
+	}
+
+	private void enableProgress() {
+		numberOfContributorsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
+		numberOfEditsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_map, inactiveColor));
+		numberOfContributorsTitle.setTextColor(inactiveColor);
+		numberOfEditsTitle.setTextColor(inactiveColor);
+		progressBar.setVisibility(View.VISIBLE);
+		contributorsTextView.setTextColor(inactiveColor);
+		editsTextView.setTextColor(inactiveColor);
+	}
+
+	private void disableProgress() {
+		numberOfContributorsIcon.setImageDrawable(getContentIcon(R.drawable.ic_group));
+		numberOfEditsIcon.setImageDrawable(getContentIcon(R.drawable.ic_map));
+		numberOfContributorsTitle.setTextColor(textColorSecondary);
+		numberOfEditsTitle.setTextColor(textColorSecondary);
+		progressBar.setVisibility(View.INVISIBLE);
+		contributorsTextView.setTextColor(textColorPrimary);
+		editsTextView.setTextColor(textColorPrimary);
+	}
+
+	@ColorInt
+	private int getColorFromAttr(@AttrRes int colorAttribute) {
+		TypedValue typedValue = new TypedValue();
+		Resources.Theme theme = getActivity().getTheme();
+		theme.resolveAttribute(colorAttribute, typedValue, true);
+		return typedValue.data;
 	}
 }
