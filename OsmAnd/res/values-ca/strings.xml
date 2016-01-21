@@ -47,7 +47,7 @@
     <string name="bg_service_screen_lock_toast">La pantalla està bloquejada</string>
     <string name="native_app_allocated_memory">Memòria nativa total</string>
     <string name="osmand_parking_warning">Avís</string>
-    <string name="osmand_parking_delete_confirm">Desitgeu suprimir la localització del cotxe aparcat?</string>
+    <string name="osmand_parking_delete_confirm">Voleu treure el marcador amb la localització del cotxe aparcat?</string>
     <string name="osmand_parking_delete">Suprimeix un marcador d\'aparcament</string>
     <string name="osmand_parking_lim_text">Temps limitat</string>
     <string name="osmand_parking_no_lim_text">Temps il·limitat</string>
@@ -589,7 +589,7 @@
     <string name="shared_string_add_to_favorites">Afegeix a Preferits</string>
     <string name="ChooseCountry">Trieu el país</string>
     <string name="choose_street">Trieu el carrer</string>
-    <string name="choose_city">Trieu la ciutat</string>
+    <string name="choose_city">Trieu la ciutat o el codi postal</string>
     <string name="show_poi_over_map">Mostra el PDI</string>
     <string name="show_location">Mostra la vostra ubicació</string>
     <string name="searchpoi_activity">Escull un PDI</string>
@@ -895,7 +895,7 @@
     <string name="download_hillshade_maps">Ombres de relleu</string>
     <string name="precise_routing_mode_descr">Activeu per calcular itineraris precisos sense errades. Encara és lent i de distància limitada.</string>
     <string name="precise_routing_mode">Encaminament precís (alfa)</string>
-    <string name="intermediate_point">Fita %1$s</string>
+    <string name="intermediate_point">Punt de pas %1$s</string>
     <string name="support_new_features_descr">Feu un donatiu per veure noves funcionalitats implementades a l\'aplicació</string>
     <string name="direction_style_sidewise">Lateral (8 sectors)</string>
     <string name="direction_style_clockwise">Sentit horari (12 sectors)</string>
@@ -1909,7 +1909,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="night">Nit</string>
 <string name="switch_start_finish">Intercanvi entre punts origen i destinació</string>
     <string name="rendering_attr_hideIcons_name">Amaga les icones dels PDI</string>
-    <string name="item_removed">Element suprimit</string>
+    <string name="item_removed">Element esborrat</string>
     <string name="n_items_removed">elements suprimits</string>
     <string name="shared_string_undo_all">DESFÉS-HO TOT</string>
     <string name="shared_string_type">Tipus</string>
@@ -1919,4 +1919,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="number_of_edits">Nombre d\'edicions</string>
     <string name="reports_for">Informe per:</string>
 <string name="shared_string_select">Selecciona</string>
+    <string name="shared_string_remove">Esborra</string>
+    <string name="clear_updates_proposition_message">Podeu esborrar les actualitzacions baixades i tornar a l\'edició original del mapa</string>
     </resources>
