@@ -418,7 +418,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		hide();
 		final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 		if (targets.getIntermediatePoints().isEmpty()) {
-			targets.navigateToPoint(latLon, true, -1, pointDescription);
+			targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 		} else {
 			Builder bld = new AlertDialog.Builder(mapActivity);
@@ -439,10 +439,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				public void onClick(DialogInterface dialog, int which) {
 					if (defaultVls[0] == 0) {
 						targets.removeAllWayPoints(false);
-						targets.navigateToPoint(latLon, true, -1, pointDescription);
+						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 					} else {
-						targets.navigateToPoint(latLon, true, -1, pointDescription);
+						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 					}
 				}
@@ -457,7 +457,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			mapActivity.getMapActions().editWaypoints();
 		} else {
 			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
-					pointDescription);
+					getPointDescriptionForTarget());
 		}
 		close();
 	}
@@ -518,7 +518,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addAsLastIntermediate() {
 		mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(latLon,
 				true, mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size(),
-				pointDescription);
+				getPointDescriptionForTarget());
 		close();
 	}
 
@@ -560,6 +560,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		};
 
 		return GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
+	}
+
+	private PointDescription getPointDescriptionForTarget() {
+		if (pointDescription.isLocation()
+				&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
+			return new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+		} else {
+			return pointDescription;
+		}
 	}
 
 	public void setBaseFragmentVisibility(boolean visible) {

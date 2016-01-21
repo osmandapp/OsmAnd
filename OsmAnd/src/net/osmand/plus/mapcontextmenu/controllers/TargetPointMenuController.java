@@ -24,27 +24,29 @@ public class TargetPointMenuController extends MenuController {
 		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
 		RoutingHelper routingHelper = getMapActivity().getMyApplication().getRoutingHelper();
 		final boolean nav = routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode();
-		leftTitleButtonController = new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
-				TargetPoint tp = getTargetPoint();
-				if(tp.intermediate) {
-					targetPointsHelper.removeWayPoint(true, tp.index);
-				} else {
-					targetPointsHelper.removeWayPoint(true, -1);
+		if (!targetPoint.start) {
+			leftTitleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					TargetPoint tp = getTargetPoint();
+					if (tp.intermediate) {
+						targetPointsHelper.removeWayPoint(true, tp.index);
+					} else {
+						targetPointsHelper.removeWayPoint(true, -1);
+					}
+					getMapActivity().getContextMenu().close();
+					if (nav && intermediatePointsCount == 0) {
+						getMapActivity().getMapActions().stopNavigationWithoutConfirm();
+					}
 				}
-				getMapActivity().getContextMenu().close();
-				if (nav && intermediatePointsCount == 0) {
-					getMapActivity().getMapActions().stopNavigationWithoutConfirm();
-				}
+			};
+			if (nav && intermediatePointsCount == 0) {
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.cancel_navigation);
+				leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
+			} else {
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
+				leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 			}
-		};
-		if (nav && intermediatePointsCount == 0) {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.cancel_navigation);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
-		} else {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 		}
 	}
 
@@ -76,7 +78,9 @@ public class TargetPointMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		if (!targetPoint.intermediate) {
+		if (targetPoint.start) {
+			return getIconOrig(R.drawable.list_startpoint);
+		} else if (!targetPoint.intermediate) {
 			if (isLight()) {
 				return getIconOrig(R.drawable.widget_target_day);
 			} else {
@@ -93,7 +97,11 @@ public class TargetPointMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		return targetPoint.getPointDescription(getMapActivity()).getTypeName();
+		if (targetPoint.start) {
+			return getMapActivity().getString(R.string.starting_point);
+		} else {
+			return targetPoint.getPointDescription(getMapActivity()).getTypeName();
+		}
 	}
 
 	@Override

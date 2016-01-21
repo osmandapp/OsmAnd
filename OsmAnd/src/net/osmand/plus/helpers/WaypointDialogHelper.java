@@ -55,12 +55,13 @@ public class WaypointDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private WaypointHelper waypointHelper;
-	private PointDeleteCallback dCallback;
+	private WaypointDialogHelperCallbacks helperCallbacks;
 
 	private boolean flat;
 	private List<LocationPointWrapper> deletedPoints;
 
-	public interface PointDeleteCallback {
+	public interface WaypointDialogHelperCallbacks {
+		void reloadAdapter();
 		void deleteWaypoint(int position);
 	}
 
@@ -72,8 +73,8 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	public void setPointDeleteCallback(PointDeleteCallback callback) {
-		this.dCallback = callback;
+	public void setWaypointDialogHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
+		this.helperCallbacks = callbacks;
 	}
 
 	public WaypointDialogHelper(MapActivity mapActivity) {
@@ -354,7 +355,11 @@ public class WaypointDialogHelper {
 								= new GeocodingLookupService.AddressLookupRequest(t.point, new GeocodingLookupService.OnAddressLookupResult() {
 							@Override
 							public void geocodingDone(String address) {
-								reloadListAdapter(listAdapter);
+								if (helperCallbacks != null) {
+									helperCallbacks.reloadAdapter();
+								} else {
+									reloadListAdapter(listAdapter);
+								}
 							}
 						}, null);
 						app.getGeocodingLookupService().lookupAddress(lookupRequest);
@@ -395,46 +400,58 @@ public class WaypointDialogHelper {
 				more.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
+						boolean hasActivePoints = false;
+						if (adapter instanceof StableArrayAdapter) {
+							hasActivePoints = ((StableArrayAdapter) adapter).getActiveObjects().size() > 0;
+						}
+
 						final PopupMenu optionsMenu = new PopupMenu(ctx, more);
 						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 						MenuItem item;
-						item = optionsMenu.getMenu().add(
-								R.string.intermediate_items_sort_by_distance).setIcon(app.getIconsCache().
-								getContentIcon(R.drawable.ic_sort_waypoint_dark));
-						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								// sort door-to-door
-								sortAllTargets(app, ctx);
-								return true;
-							}
-						});
-						item = optionsMenu.getMenu().add(
-								R.string.switch_start_finish).setIcon(app.getIconsCache().
-								getContentIcon(R.drawable.ic_action_undo_dark));
-						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								// switch start & finish
-								TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-								TargetPoint start =	targetPointsHelper.getPointToStart();
-								TargetPoint finish = targetPointsHelper.getPointToNavigate();
-								targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
-										finish.getLongitude()), false, finish.getPointDescription(ctx));
-								if (start == null) {
-									Location loc = app.getLocationProvider().getLastKnownLocation();
-									if (loc != null) {
-										targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
-												loc.getLongitude()), true, -1);
-									}
-								} else {
-									targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
-											start.getLongitude()), true, -1, start.getPointDescription(ctx));
+						if (hasActivePoints) {
+							item = optionsMenu.getMenu().add(
+									R.string.intermediate_items_sort_by_distance).setIcon(app.getIconsCache().
+									getContentIcon(R.drawable.ic_sort_waypoint_dark));
+							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+								@Override
+								public boolean onMenuItemClick(MenuItem item) {
+									// sort door-to-door
+									sortAllTargets(app, ctx, helper);
+									return true;
 								}
-								return true;
-							}
-						});
-						optionsMenu.show();
+							});
+							item = optionsMenu.getMenu().add(
+									R.string.switch_start_finish).setIcon(app.getIconsCache().
+									getContentIcon(R.drawable.ic_action_undo_dark));
+							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+								@Override
+								public boolean onMenuItemClick(MenuItem item) {
+									// switch start & finish
+									TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+									TargetPoint start = targetPointsHelper.getPointToStart();
+									TargetPoint finish = targetPointsHelper.getPointToNavigate();
+									targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
+											finish.getLongitude()), false, finish.getPointDescription(ctx));
+									if (start == null) {
+										Location loc = app.getLocationProvider().getLastKnownLocation();
+										if (loc != null) {
+											targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
+													loc.getLongitude()), true, -1);
+										}
+									} else {
+										targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
+												start.getLongitude()), true, -1, start.getPointDescription(ctx));
+									}
+									if (helper.helperCallbacks != null) {
+										helper.helperCallbacks.reloadAdapter();
+									}
+									return true;
+								}
+							});
+						}
+						if (optionsMenu.getMenu().size() > 0) {
+							optionsMenu.show();
+						}
 					}
 				});
 			} else {
@@ -489,8 +506,8 @@ public class WaypointDialogHelper {
 			LocationPointWrapper point = (LocationPointWrapper) item;
 			if (point.type == WaypointHelper.TARGETS && adapter instanceof StableArrayAdapter) {
 				StableArrayAdapter stableAdapter = (StableArrayAdapter) adapter;
-				if (helper != null && helper.dCallback != null && needCallback) {
-					helper.dCallback.deleteWaypoint(stableAdapter.getPosition(item));
+				if (helper != null && helper.helperCallbacks != null && needCallback) {
+					helper.helperCallbacks.deleteWaypoint(stableAdapter.getPosition(item));
 				}
 			} else {
 				ArrayList<LocationPointWrapper> arr = new ArrayList<>();
@@ -633,7 +650,11 @@ public class WaypointDialogHelper {
 
 			protected void onPostExecute(Void result) {
 				running[0] = -1;
-				reloadListAdapter(listAdapter);
+				if (helperCallbacks != null) {
+					helperCallbacks.reloadAdapter();
+				} else {
+					reloadListAdapter(listAdapter);
+				}
 			}
 		}.execute((Void) null);
 	}
@@ -696,7 +717,11 @@ public class WaypointDialogHelper {
 
 			protected void onPostExecute(Void result) {
 				running[0] = -1;
-				reloadListAdapter(listAdapter);
+				if (helperCallbacks != null) {
+					helperCallbacks.reloadAdapter();
+				} else {
+					reloadListAdapter(listAdapter);
+				}
 			}
 		}.execute((Void) null);
 	}
@@ -750,7 +775,7 @@ public class WaypointDialogHelper {
 					points.add(true);
 				}
 				points.add(i);
-				if (i == WaypointHelper.TARGETS && rc) {
+				if (i == WaypointHelper.TARGETS) {
 					TargetPoint start = app.getTargetPointsHelper().getPointToStart();
 					if (start == null) {
 						LatLon latLon;
@@ -837,7 +862,8 @@ public class WaypointDialogHelper {
 		*/
 	}
 
-	public static void sortAllTargets(final OsmandApplication app, final Activity activity) {
+	public static void sortAllTargets(final OsmandApplication app, final Activity activity,
+									  final WaypointDialogHelper helper) {
 
 		new AsyncTask<Void, Void, int[]>() {
 
@@ -916,6 +942,9 @@ public class WaypointDialogHelper {
 				}
 				if (!eq) {
 					targets.reorderAllTargetPoints(intermediates, true);
+				}
+				if (helper.helperCallbacks != null) {
+					helper.helperCallbacks.reloadAdapter();
 				}
 			}
 

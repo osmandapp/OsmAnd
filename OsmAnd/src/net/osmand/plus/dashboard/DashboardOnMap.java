@@ -54,7 +54,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointDialogHelper.PointDeleteCallback;
+import net.osmand.plus.helpers.WaypointDialogHelper.WaypointDialogHelperCallbacks;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
@@ -81,7 +81,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 /**
  */
 public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicListViewCallbacks,
-		IRouteInformationListener, PointDeleteCallback {
+		IRouteInformationListener, WaypointDialogHelperCallbacks {
 	private static final org.apache.commons.logging.Log LOG =
 			PlatformUtil.getLog(DashboardOnMap.class);
 	private static final String TAG = "DashboardOnMap";
@@ -179,7 +179,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void createDashboardView() {
 		baseColor = mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		waypointDialogHelper.setPointDeleteCallback(this);
+		waypointDialogHelper.setWaypointDialogHelperCallbacks(this);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		final View.OnClickListener listener = new View.OnClickListener() {
@@ -1212,16 +1212,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		if ((DashboardType.WAYPOINTS == visibleType || DashboardType.WAYPOINTS_FLAT == visibleType)
-				&& listAdapter != null && listAdapter instanceof StableArrayAdapter) {
-			StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
-			waypointDialogHelper.reloadListAdapter(stableAdapter);
-			if (listView instanceof DynamicListView) {
-				DynamicListView dynamicListView = (DynamicListView) listView;
-				dynamicListView.setItemsList(stableAdapter.getObjects());
-				dynamicListView.setActiveItemsList(stableAdapter.getActiveObjects());
-			}
-		}
+		reloadAdapter();
 		showToast.value = false;
 	}
 
@@ -1233,6 +1224,20 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void onWindowVisibilityChanged(int visibility) {
 		if (visibility != View.VISIBLE && swipeDismissListener != null) {
 			swipeDismissListener.discardUndo();
+		}
+	}
+
+	@Override
+	public void reloadAdapter() {
+		if ((DashboardType.WAYPOINTS == visibleType || DashboardType.WAYPOINTS_FLAT == visibleType)
+				&& listAdapter != null && listAdapter instanceof StableArrayAdapter) {
+			StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+			waypointDialogHelper.reloadListAdapter(stableAdapter);
+			if (listView instanceof DynamicListView) {
+				DynamicListView dynamicListView = (DynamicListView) listView;
+				dynamicListView.setItemsList(stableAdapter.getObjects());
+				dynamicListView.setActiveItemsList(stableAdapter.getActiveObjects());
+			}
 		}
 	}
 

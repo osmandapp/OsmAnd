@@ -340,7 +340,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
 			fromIcon.setImageDrawable(mapActivity.getResources().getDrawable(appMode.getResourceLocationDay()));
 		} else {
-			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_marker_dark, isLight()));
+			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.list_startpoint, 0, 0f));
 		}
 	}
 

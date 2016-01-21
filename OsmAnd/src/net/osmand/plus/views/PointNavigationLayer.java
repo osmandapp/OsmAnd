@@ -60,7 +60,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		textPaint.setTextSize(sp * 18);
 		textPaint.setTextAlign(Align.CENTER);
 		textPaint.setAntiAlias(true);
-		startPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_intermediate_point);
+		startPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_start_point);
 		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_target_point);
 		intermediatePoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_intermediate_point);
 		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
@@ -175,7 +175,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
-		List<TargetPoint> intermediatePoints = tg.getIntermediatePointsWithTarget();
+		List<TargetPoint> intermediatePoints = tg.getAllPoints();
 		int r = getRadiusPoi(tileBox);
 		for (int i = 0; i < intermediatePoints.size(); i++) {
 			TargetPoint tp = intermediatePoints.get(i);

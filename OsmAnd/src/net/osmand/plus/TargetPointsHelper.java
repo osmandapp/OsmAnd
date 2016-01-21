@@ -229,6 +229,18 @@ public class TargetPointsHelper {
 		return intermediatePointsLatLon;
 	}
 
+	public List<TargetPoint> getAllPoints() {
+		List<TargetPoint> res = new ArrayList<TargetPoint>();
+		if(pointToStart != null) {
+			res.add(pointToStart);
+		}
+		res.addAll(this.intermediatePoints);
+		if(pointToNavigate != null) {
+			res.add(pointToNavigate);
+		}
+		return res;
+	}
+
 	public List<TargetPoint> getIntermediatePointsWithTarget() {
 		List<TargetPoint> res = new ArrayList<TargetPoint>();
 		res.addAll(this.intermediatePoints);
