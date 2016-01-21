@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -266,7 +267,7 @@
 
     <string name="poi_filter_nominatim">Nominatim įrankis internete</string>
     <string name="search_position_current_location_search">Ieškoma vietos…</string>
-    <string name="search_position_current_location_found">Vieta (rasta)</string>
+    <string name="search_position_current_location_found">Mano vieta (rasta)</string>
     <string name="search_position_address">Adresas…</string>
     <string name="search_position_favorites">Įsimintos…</string>
     <string name="search_position_undefined">Nenurodyta</string>
@@ -711,7 +712,7 @@
     <string name="search_address">Ieškoti adreso</string>
     <string name="choose_building">Pasirinkti namą</string>
     <string name="choose_street">Pasirinkti gatvę</string>
-    <string name="choose_city">Pasirinkti miestą</string>
+    <string name="choose_city">Pasirinkti miestą arba pašto kodą</string>
     <string name="ChooseCountry">Pasirinkti šalį</string>
 
 
@@ -2092,4 +2093,15 @@
     <string name="weekly">Kas savaitę</string>
     <string name="morning">Rytą</string>
     <string name="night">Naktį</string>
-    </resources>
+    <string name="shared_string_remove">Pašalinti</string>
+    <string name="shared_string_select">Pasirinkti</string>
+    <string name="rendering_attr_hideIcons_name">Paslėpti LV piktogramas</string>
+    <string name="item_removed">Objektas pašalintas</string>
+    <string name="n_items_removed">objektai pašalinti</string>
+    <string name="shared_string_undo_all">ATŠAUKTI VISKĄ</string>
+    <string name="shared_string_type">Tipas</string>
+    <string name="updates_size">Naujinio dydis</string>
+    <string name="select_month_and_country">Pasirinkite mėnesį bei šalį</string>
+    <string name="number_of_edits">Pataisymų kiekis</string>
+    <string name="reports_for">Pranešti apie:</string>
+</resources>
