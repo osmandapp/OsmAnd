@@ -780,7 +780,7 @@ public class BinaryInspector {
 		final MapStats mapObjectStats = new MapStats();
 		if(vInfo.osm){
 			printToFile("<?xml version='1.0' encoding='UTF-8'?>\n" +
-					"<osm version='0.5'>\n");
+					"<osm version='0.6'>\n");
 		}
 		if(vInfo.isVStats()) {
 			BinaryMapIndexReader.READ_STATS = true;
