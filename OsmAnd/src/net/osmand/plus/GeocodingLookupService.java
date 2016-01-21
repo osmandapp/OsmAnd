@@ -98,6 +98,15 @@ public class GeocodingLookupService {
 		}
 	}
 
+	public void cancel(LatLon latLon) {
+		synchronized (this) {
+			List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
+			if (requests != null && requests.size() > 0) {
+				requests.clear();
+			}
+		}
+	}
+
 	private boolean hasAnyRequest(LatLon latLon) {
 		synchronized (this) {
 			List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);

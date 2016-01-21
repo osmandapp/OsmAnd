@@ -340,8 +340,8 @@ public class AppInitializer implements IProgress {
 		updateRegionVars();
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
-		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
+		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
 	}
 
 
