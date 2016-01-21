@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 public class DoubleTapScaleDetector {
 	private static final Log LOG = PlatformUtil.getLog(DoubleTapScaleDetector.class);
 	private static final int DOUBLE_TAPPING_DELTA = ViewConfiguration.getTapTimeout() + 100;
-	private static final int DP_PER_1X = 100;
+	private static final int DP_PER_1X = 200;
 
 	private final DoubleTapZoomListener listener;
 	protected final Context ctx;
@@ -23,6 +23,7 @@ public class DoubleTapScaleDetector {
 	private boolean isDoubleTapping = false;
 	private float startX;
 	private float startY;
+	private float scale;
 
 	public DoubleTapScaleDetector(Context ctx, DoubleTapZoomListener listener) {
 		this.ctx = ctx;
@@ -37,7 +38,7 @@ public class DoubleTapScaleDetector {
 		if (event.getAction() == MotionEvent.ACTION_UP) {
 			if (isDoubleTapping) {
 				isDoubleTapping = false;
-				listener.onZoomEnded(1, 0);
+				listener.onZoomEnded(scale, 0);
 				return true;
 			} else {
 				startTime = currentTime;
@@ -55,7 +56,7 @@ public class DoubleTapScaleDetector {
 			if (isDoubleTapping) {
 				float delta = convertPxToDp((int) (startY - event.getY()));
 				float scaleDelta = delta / DP_PER_1X;
-				float scale = 1 - scaleDelta;
+				scale = 1 - scaleDelta;
 				listener.onZoomingOrRotating(scale, 0);
 				return true;
 			} else {
