@@ -2093,4 +2093,5 @@
     <string name="add_time_span">Annanghe intervallu de tempus</string>
     <string name="road_blocked">Àndala blocada</string>
     <string name="shared_string_select">Ischerta</string>
+    <string name="rendering_attr_hideUnderground_name">Cua ogetos suta de terra</string>
     </resources>
