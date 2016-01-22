@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -2077,4 +2078,5 @@
     <string name="morning">Reggel</string>
     <string name="night">Este</string>
     <string name="select_month_and_country">Hónap és ország kiválasztása</string>
-</resources>
+<string name="shared_string_remove">Eltávolítás</string>
+    </resources>
