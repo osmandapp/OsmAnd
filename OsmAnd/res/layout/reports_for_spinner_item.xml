@@ -5,14 +5,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
-              android:paddingRight="0dp"
-              style="?android:attr/spinnerItemStyle">
+              android:background="@android:drawable/list_selector_background">
 
     <TextView
         android:text="@string/reports_for"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/default_sub_text_size"/>
+        android:textSize="@dimen/default_sub_text_size"
+        android:textColor="?android:textColorSecondary"/>
 
     <TextView
         android:textColor="?android:textColorPrimary"

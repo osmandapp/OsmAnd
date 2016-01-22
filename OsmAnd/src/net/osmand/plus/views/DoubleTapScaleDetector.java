@@ -1,7 +1,9 @@
 package net.osmand.plus.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -15,10 +17,12 @@ public class DoubleTapScaleDetector {
 	private static final Log LOG = PlatformUtil.getLog(DoubleTapScaleDetector.class);
 	private static final int DOUBLE_TAP_TIMEOUT = ViewConfiguration.getDoubleTapTimeout();
 	private static final int DOUBLE_TAP_MIN_TIME = 40;
-	private static final int DP_PER_1X = 200;
+	private static final int SCALE_PER_SCREEN = 8;
 
 	private final DoubleTapZoomListener listener;
 	protected final Context ctx;
+
+	private int displayHeightPx;
 
 	private boolean isDoubleTapping = false;
 	private float scale;
@@ -26,10 +30,12 @@ public class DoubleTapScaleDetector {
 	private MotionEvent firstUp;
 	private int mDoubleTapSlopSquare;
 
-	public DoubleTapScaleDetector(Context ctx, DoubleTapZoomListener listener) {
+	public DoubleTapScaleDetector(Activity ctx, DoubleTapZoomListener listener) {
 		this.ctx = ctx;
 		this.listener = listener;
-
+		Point size = new Point();
+		ctx.getWindowManager().getDefaultDisplay().getSize(size);
+		displayHeightPx = size.x;
 		final ViewConfiguration configuration = ViewConfiguration.get(ctx);
 		int doubleTapSlop = configuration.getScaledTouchSlop();
 		mDoubleTapSlopSquare = doubleTapSlop * doubleTapSlop;
@@ -63,7 +69,7 @@ public class DoubleTapScaleDetector {
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 				if (isDoubleTapping) {
 					float delta = convertPxToDp((int) (firstDown.getY() - event.getY()));
-					float scaleDelta = delta / DP_PER_1X;
+					float scaleDelta = delta / (displayHeightPx / SCALE_PER_SCREEN);
 					scale = 1 - scaleDelta;
 					listener.onZoomingOrRotating(scale, 0);
 					return true;
@@ -97,6 +103,14 @@ public class DoubleTapScaleDetector {
 		int squared = deltaX * deltaX + deltaY * deltaY;
 		boolean toReturn = squared < mDoubleTapSlopSquare;
 		return toReturn;
+	}
+
+	public float getCenterX() {
+		return firstUp.getX();
+	}
+
+	public float getCenterY() {
+		return firstUp.getY();
 	}
 
 	public interface DoubleTapZoomListener {
