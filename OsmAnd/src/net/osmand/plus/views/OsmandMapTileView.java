@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Handler;
@@ -170,13 +171,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	};
 
+	private int displayHeightPx;
+
 	public OsmandMapTileView(Activity activity, int w, int h) {
 		this.activity = activity;
 		init(activity, w, h);
 	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void init(Context ctx, int w, int h) {
+	public void init(Activity ctx, int w, int h) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
 
@@ -213,7 +216,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		gestureDetector = new GestureDetector(ctx, new MapExplorer(this, new MapTileViewOnGestureListener()));
 		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
-		doubleTapScaleDetector = new DoubleTapScaleDetector(ctx, new MapTileViewMultiTouchZoomListener());
+		doubleTapScaleDetector = new DoubleTapScaleDetector(activity, new MapTileViewMultiTouchZoomListener());
 
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -224,6 +227,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				setPixelDimensions(w, h).build();
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
+
+		Point size = new Point();
+		ctx.getWindowManager().getDefaultDisplay().getSize(size);
+		displayHeightPx = size.x;
 	}
 
 	public void setView(View view) {
@@ -576,14 +583,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		if (showMapPosition || animatedDraggingThread.isAnimatingZoom()) {
 			drawMapPosition(canvas, c.x, c.y);
-		} else if (multiTouchSupport.isInZoomMode() || doubleTapScaleDetector.isInZoomMode()) {
+		} else if (multiTouchSupport.isInZoomMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
+		} else if (doubleTapScaleDetector.isInZoomMode()) {
+			drawScale(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
 		}
 	}
 
 	protected void drawMapPosition(Canvas canvas, float x, float y) {
 		canvas.drawCircle(x, y, 3 * dm.density, paintCenter);
 		canvas.drawCircle(x, y, 7 * dm.density, paintCenter);
+	}
+
+	protected void drawScale(Canvas canvas, float x, float y) {
+		canvas.drawLine(x - 10, y, x + 10, y, paintCenter);
+		canvas.drawLine(x, y + 200, x, y -200, paintCenter);
 	}
 
 	private void refreshBufferImage(final DrawSettings drawSettings) {
@@ -773,7 +787,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */
 			doubleTapScaleDetector.onTouchEvent(event);
-			gestureDetector.onTouchEvent(event);
+			if (!doubleTapScaleDetector.isInZoomMode()) {
+				gestureDetector.onTouchEvent(event);
+			}
 		}
 		return true;
 	}
