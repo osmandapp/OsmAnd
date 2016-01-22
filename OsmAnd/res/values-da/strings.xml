@@ -2236,4 +2236,5 @@
     <string name="road_blocked">Spærret vej</string>
     <string name="shared_string_remove">Fjern</string>
     <string name="data_is_not_available">Data er ikke tilgængelig</string>
+    <string name="rendering_attr_hideUnderground_name">Skjul underjordiske objekter</string>
     </resources>
