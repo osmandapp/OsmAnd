@@ -1,15 +1,5 @@
 package net.osmand.plus.activities.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +7,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+
+import net.osmand.AndroidUtils;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class AppModeDialog {
 

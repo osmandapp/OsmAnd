@@ -8,118 +8,140 @@
 
     <include layout="@layout/shadow_top"/>
 
-    <GridLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
-        android:columnCount="2"
-        android:paddingLeft="16dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_height="48dp"
-            android:layout_columnSpan="2"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical"
-            android:text="@string/select_month_and_country"
-            android:textColor="?android:textColorPrimary"/>
-
-        <View
-            android:layout_height="1dp"
-            android:layout_columnSpan="2"
-            android:background="?attr/dashboard_divider"/>
-
-        <ImageView
-            android:id="@+id/calendarImageView"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_action_data"/>
-
-        <!-- 24 is magic number + margin 16 = 42-->
-        <Spinner
-            android:id="@+id/montReportsSpinner"
-            android:layout_gravity="fill_horizontal|fill_vertical"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="42dp"
-            android:gravity="center_vertical"/>
-
-        <View
-            android:layout_height="1dp"
-            android:layout_column="1"
-            android:background="?attr/dashboard_divider"/>
-
-        <ImageView
-            android:id="@+id/regionIconImageView"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_world_globe_dark"/>
-
-        <include
-            android:id="@+id/reportsButton"
-            layout="@layout/reports_for_spinner_item"
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"/>
-
-        <View
-            android:layout_height="1dp"
-            android:layout_columnSpan="2"
-            android:background="?attr/dashboard_divider"/>
-
-        <ImageView
-            android:id="@+id/numberOfContributorsIcon"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_group"/>
-
-        <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="vertical">
+            android:background="?attr/bg_color"
+            android:columnCount="2">
 
             <TextView
+                android:layout_height="48dp"
+                android:layout_columnSpan="2"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/select_month_and_country"
+                android:textColor="?android:textColorPrimary"/>
+
+            <View
+                android:layout_height="1dp"
+                android:layout_columnSpan="2"
+                android:background="?attr/dashboard_divider"/>
+
+            <ImageView
+                android:id="@+id/calendarImageView"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_action_data"/>
+
+            <!-- 40 is magic number + margin 16 = 56-->
+            <Spinner
+                android:id="@+id/montReportsSpinner"
+                android:layout_gravity="fill_horizontal|fill_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="56dp"
+                android:gravity="center_vertical"/>
+
+            <View
+                android:layout_height="1dp"
+                android:layout_column="1"
+                android:background="?attr/dashboard_divider"/>
+
+            <ImageView
+                android:id="@+id/regionIconImageView"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_world_globe_dark"/>
+
+            <include
+                android:id="@+id/reportsButton"
+                layout="@layout/reports_for_spinner_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/number_of_contributors"
-                android:textSize="@dimen/default_sub_text_size"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="56dp"/>
 
-            <TextView
-                android:id="@+id/contributorsTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?android:textColorPrimary"
-                tools:text="65"/>
-        </LinearLayout>
+            <View
+                android:layout_height="1dp"
+                android:layout_columnSpan="2"
+                android:background="?attr/dashboard_divider"/>
 
-        <View
-            android:layout_height="1dp"
-            android:layout_column="1"
-            android:background="?attr/dashboard_divider"/>
+            <ImageView
+                android:id="@+id/numberOfContributorsIcon"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_group"/>
 
-        <ImageView
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
 
-            android:id="@+id/numberOfEditsIcon"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_group"/>
+                <TextView
+                    android:id="@+id/numberOfContributorsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_of_contributors"
+                    android:textSize="@dimen/default_sub_text_size"/>
 
-        <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="vertical">
+                <TextView
+                    android:id="@+id/contributorsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="?android:textColorPrimary"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/number_of_edits"
-                android:textSize="@dimen/default_sub_text_size"/>
+            <View
+                android:layout_height="1dp"
+                android:layout_column="1"
+                android:background="?attr/dashboard_divider"/>
 
-            <TextView
-                android:id="@+id/editsTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?android:textColorPrimary"
-                tools:text="1125"/>
-        </LinearLayout>
-    </GridLayout>
+            <ImageView
+                android:id="@+id/numberOfEditsIcon"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_group"/>
+
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/numberOfEditsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_of_edits"
+                    android:textSize="@dimen/default_sub_text_size"/>
+
+                <TextView
+                    android:id="@+id/editsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="?android:textColorPrimary"/>
+            </LinearLayout>
+        </GridLayout>
+        <!-- 48 + 1 + 60 + 1 + 60 = 170-->
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_gravity="top"
+            android:layout_marginTop="167dp"
+            android:indeterminate="true"
+            android:padding="0dp"
+            tools:progress="50"/>
+    </FrameLayout>
 
     <include layout="@layout/shadow_bottom"/>
 
