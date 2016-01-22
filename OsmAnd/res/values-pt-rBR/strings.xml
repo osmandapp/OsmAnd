@@ -1995,10 +1995,11 @@
     <string name="switch_start_finish">Inverter pontos de partida e destino</string>
     <string name="number_of_contributors">Número de contribuidores</string>
     <string name="number_of_edits">Número de edições</string>
-    <string name="reports_for">Relatório para:</string>
+    <string name="reports_for">Relatório para</string>
 <string name="shared_string_remove">Excluir</string>
     <string name="clear_updates_proposition_message">Você pode excluir atualizações baixadas e voltar para a versão original do mapa</string>
     <string name="add_time_span">Adicionar intervalo de tempo</string>
     <string name="road_blocked">Estrada bloqueada</string>
     <string name="shared_string_select">Selecionar</string>
+    <string name="data_is_not_available">Dados indisponíveis</string>
     </resources>
