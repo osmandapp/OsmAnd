@@ -2603,4 +2603,41 @@
 	<string name="poi_protection_object_habitat">Объект охраны: среда обитания</string>
 	<string name="poi_protection_object_water">Объект охраны: вода</string>
 
+	<string name="poi_nuclear_explosion_country">Страна, произведшая взрыв</string>
+	<string name="poi_nuclear_explosion_site">Название места взрыва</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Тип взрыва: подземный, шахта</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Тип взрыва: подземный, туннель</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Тип взрыва: атмосферный</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Тип взрыва: атмосферный, сброс с самолёта</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Тип взрыва: атмосферный, на поверхности (башня)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Тип взрыва: атмосферный, на воздушном шаре</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Тип взрыва: атмосферный (на поверхности)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Тип взрыва: атмосферный (поверхность воды, баржа)</string>
+	<string name="poi_nuclear_explosion_type_underground">Тип взрыва: подземный</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Тип взрыва: неглубокого заложения</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Тип взрыва: атмосферный (ракета)</string>
+	<string name="poi_nuclear_explosion_type_space">Тип взрыва: космический (высота более 80км)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Тип взрыва: подводный</string>
+	<string name="poi_nuclear_explosion_date_utc">Дата взрыва (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Кодовое имя (англ)</string>
+	<string name="poi_nuclear_explosion_series">Серия</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Цель взрыва: испытания ядерного оружия</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Цель взрыва: эффект оружия</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Цель взрыва: изучение безопасности</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Цель взрыва: исследования для мирных применений</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Цель взрыва: фундаментальная наука</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Цель взрыва: промышленное применение, создание полостей</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Цель взрыва: промышленное применение, сейсмическое зондирование</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Цель взрыва: промышленное применение, стимуляция притока нефти</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Цель взрыва: промышленное применение</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Цель взрыва: промышленное применение, сдвиг земляных пластов</string>
+	<string name="poi_nuclear_explosion_time_utc">Время взрыва (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Мощность взрыва</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Высота взрыва (от поверхности)</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Высота эпицентра над уровнем моря</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Магнитуда землетрясения</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Диаметр кратера</string>
+	<string name="poi_nuclear_explosion_warhead">Боеголовка</string>
+	<string name="poi_nuclear_explosion_device">Устройство</string>
+
 </resources>

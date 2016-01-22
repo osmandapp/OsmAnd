@@ -2601,4 +2601,44 @@
 	<string name="poi_protection_object_habitat">Protection object: habitat</string>
 	<string name="poi_protection_object_water">Protection object: water</string>
 
+	<string name="poi_nuclear_explosion_country">Explosion: country</string>
+	<string name="poi_nuclear_explosion_site">Explosion: site</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Explosion type: underground, shaft</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Explosion type: underground, tunnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Explosion type: atmospheric</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Explosion type: atmospheric, airdrop</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Explosion type: atmospheric, surface, tower</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Explosion type: atmospheric, balloon</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Explosion type: atmospheric, surface</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Explosion type: atmospheric, water surface, barge</string>
+	<string name="poi_nuclear_explosion_type_underground">Explosion type: underground</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Explosion type: cratering burst (shallow subsurface)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Explosion type: atmospheric, rocket or missile</string>
+	<string name="poi_nuclear_explosion_type_space">Explosion type: space (altitude over 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Explosion type: underwater</string>
+	<string name="poi_nuclear_explosion_date_utc">Explosion date (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Shot name (en)</string>
+	<string name="poi_nuclear_explosion_series">Explosion series</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Explosion purpose: nuclear weapons related</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Explosion purpose: weapons effects</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Explosion purpose: safety experiment</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Explosion purpose: research for peaceful applications</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Explosion purpose: fundamental science</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Explosion purpose: industrial application, cavity excavation</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Explosion purpose: industrial application, seismic sounding</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Explosion purpose: industrial application, oil stimulation</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Explosion purpose: industrial application</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Explosion purpose: industrial application, earth-moving</string>
+	<string name="poi_nuclear_explosion_time_utc">Explosion time (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Explosion yield</string>
+	<string name="poi_nuclear_explosion_hole">Explosion hole</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Height of burst</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Ground zero altitude</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Body wave magnitude</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Explosion salvo: first detonation of a salvo test</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosion salvo: second or later detonation of a salvo test</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Explosion: crater diameter</string>
+	<string name="poi_nuclear_explosion_warhead">Explosion: warhead</string>
+	<string name="poi_nuclear_explosion_device">Explosion: device</string>
+
 </resources>
