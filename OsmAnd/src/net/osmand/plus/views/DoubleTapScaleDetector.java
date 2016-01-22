@@ -18,7 +18,7 @@ public class DoubleTapScaleDetector {
 	private static final int DOUBLE_TAP_TIMEOUT = ViewConfiguration.getDoubleTapTimeout();
 	private static final int TAP_TIMEOUT = ViewConfiguration.getTapTimeout();
 	private static final int DOUBLE_TAP_MIN_TIME = 40;
-	public static final int SCALE_PER_SCREEN = 8;
+	public static final int SCALE_PER_SCREEN = 4;
 
 	private final DoubleTapZoomListener listener;
 	protected final Context ctx;
