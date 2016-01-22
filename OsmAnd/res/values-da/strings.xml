@@ -2229,10 +2229,11 @@
     <string name="switch_start_finish">Byt om på startpunkt og destination</string>
     <string name="number_of_contributors">Antal bidragydere</string>
     <string name="number_of_edits">Antal redigeringer</string>
-    <string name="reports_for">Rapport for:</string>
+    <string name="reports_for">Rapport for</string>
 <string name="shared_string_select">Vælg</string>
     <string name="clear_updates_proposition_message">Man kan fjerne de hentede opdateringer og vende tilbage til det oprindelige kort</string>
     <string name="add_time_span">Tilføj tidsinterval</string>
     <string name="road_blocked">Spærret vej</string>
     <string name="shared_string_remove">Fjern</string>
+    <string name="data_is_not_available">Data er ikke tilgængelig</string>
     </resources>
