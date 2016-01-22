@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="56dp"/>
 
             <View
@@ -88,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/number_of_contributors"
+                    android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"/>
 
                 <TextView
@@ -120,6 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/number_of_edits"
+                    android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"/>
 
                 <TextView
