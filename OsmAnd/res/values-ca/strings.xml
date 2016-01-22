@@ -1921,4 +1921,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="shared_string_select">Selecciona</string>
     <string name="shared_string_remove">Esborra</string>
     <string name="clear_updates_proposition_message">Podeu esborrar les actualitzacions baixades i tornar a l\'edició original del mapa</string>
+    <string name="road_blocked">Via tallada</string>
     </resources>
