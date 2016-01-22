@@ -2089,4 +2089,7 @@
 	<string name="poi_wiki_lang_az">Wiki en àzeri</string>
 	<string name="poi_boxing">Boxa</string>
 
-</resources>
+<string name="poi_protected_area">Àrea protegida</string>
+	<string name="poi_fair_trade_no">Comerç just: no</string>
+	<string name="poi_fair_trade_yes">Comerç just: sí</string>
+	</resources>
