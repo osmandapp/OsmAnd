@@ -147,10 +147,24 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 						disableProgress();
 					}
 				};
+		GetJsonAsyncTask.OnErrorListener onErrorListener =
+				new GetJsonAsyncTask.OnErrorListener() {
+					@Override
+					public void onError(String error) {
+						if (contributorsTextView != null) {
+							contributorsTextView.setText(R.string.data_is_not_available);
+						}
+						if (editsTextView != null) {
+							editsTextView.setText(R.string.data_is_not_available);
+						}
+						disableProgress();
+					}
+				};
 		enableProgress();
 		GetJsonAsyncTask<Protocol.TotalChangesByMonthResponse> totalChangesByMontAsyncTask =
 				new GetJsonAsyncTask<>(Protocol.TotalChangesByMonthResponse.class);
 		totalChangesByMontAsyncTask.setOnResponseListener(onResponseListener);
+		totalChangesByMontAsyncTask.setOnErrorListener(onErrorListener);
 		String finalUrl = String.format(TOTAL_CHANGES_BY_MONTH_URL_PATTERN, monthUrlString, regionUrlString);
 		totalChangesByMontAsyncTask.execute(finalUrl);
 	}
@@ -262,6 +276,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 		private final Class<P> protocolClass;
 		private final Gson gson = new Gson();
 		private OnResponseListener<P> onResponseListener;
+		private OnErrorListener onErrorListener;
+		private volatile String error;
 
 		public GetJsonAsyncTask(Class<P> protocolClass) {
 			this.protocolClass = protocolClass;
@@ -270,7 +286,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 		@Override
 		protected P doInBackground(String... params) {
 			StringBuilder response = new StringBuilder();
-			String error = NetworkUtils.sendGetRequest(params[0], null, response);
+			error = NetworkUtils.sendGetRequest(params[0], null, response);
 			if (error == null) {
 				return gson.fromJson(response.toString(), protocolClass);
 			}
@@ -280,8 +296,10 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 
 		@Override
 		protected void onPostExecute(P protocol) {
-			if (onResponseListener != null) {
+			if (protocol != null) {
 				onResponseListener.onResponse(protocol);
+			} else {
+				onErrorListener.onError(error);
 			}
 		}
 
@@ -289,8 +307,16 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 			this.onResponseListener = onResponseListener;
 		}
 
+		public void setOnErrorListener(OnErrorListener onErrorListener) {
+			this.onErrorListener = onErrorListener;
+		}
+
 		public interface OnResponseListener<Protocol> {
 			void onResponse(Protocol response);
+		}
+
+		public interface OnErrorListener {
+			void onError(String error);
 		}
 	}
 

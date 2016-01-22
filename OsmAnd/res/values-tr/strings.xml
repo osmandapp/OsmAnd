@@ -12,7 +12,7 @@
 	<string name="no_route">Rota yok</string>
 	<string name="delete_target_point">Hedef kaldırmak</string>
 	<string name="target_point">Ara nokta %1$s</string>
-    <string name="intermediate_point">Intermediate hedef % 1 $ s</string>
+    <string name="intermediate_point">Intermediate hedef %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Son ara nokta olarak ekle</string>
     <string name="context_menu_item_first_intermediate_point">İlk ara hedef eklemek</string>
     <string name="add_as_last_destination_point">Son ara nokta olarak ekle</string>
