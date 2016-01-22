@@ -134,7 +134,7 @@
     <string name="recording_is_recorded">Записва се аудио/видео. За спиране натиснете стоп.</string>
     <string name="recording_playing">Избраният аудио запис се изпълнява.\n%1$s</string>
     <string name="recording_open_external_player">Отваряне на външен плеър</string>
-    <string name="recording_delete_confirm">Искате ли да премахнете този запис?</string>
+    <string name="recording_delete_confirm">Искате ли да изтриете този запис?</string>
 
     <string name="recording_unavailable">недостъпно</string>
     <string name="recording_context_menu_arecord">Направи аудио бележка</string>
@@ -1008,7 +1008,7 @@
     <string name="search_address">Търси адрес</string>
     <string name="choose_building">Изберете номер</string>
     <string name="choose_street">Изберете улица</string>
-    <string name="choose_city">Изберете град</string>
+    <string name="choose_city">Изберете град или пощенски код</string>
     <string name="ChooseCountry">Изберете държава</string>
     <string name="show_view_angle">Показване на посоката на изгледа</string>
     <string name="map_view_3d_descr">Включване на 3D изглед на картата</string>
@@ -2042,7 +2042,7 @@
     <string name="night">През нощта</string>
 <string name="switch_start_finish">Размяна на началната с крайна точка</string>
     <string name="rendering_attr_hideIcons_name">Скриване на POI иконите</string>
-    <string name="item_removed">Изтрито</string>
+    <string name="item_removed">Изтрит елемент</string>
     <string name="n_items_removed">изтрити елемента</string>
     <string name="shared_string_undo_all">ВРЪЩАНЕ НА ВСИЧКО</string>
     <string name="shared_string_type">Тип</string>
@@ -2050,5 +2050,11 @@
     <string name="select_month_and_country">Изберете месец и държава</string>
     <string name="number_of_contributors">Брой участници</string>
     <string name="number_of_edits">Брой редакции</string>
-    <string name="reports_for">Отчет за:</string>
-</resources>
+    <string name="reports_for">Отчет за</string>
+<string name="data_is_not_available">Данните не са достъпни</string>
+    <string name="road_blocked">Блокиран път</string>
+    <string name="shared_string_select">Изберете</string>
+    <string name="clear_updates_proposition_message">Можете да премахнете свалените актуализации и да възстановите оригиналната карта</string>
+    <string name="add_time_span">Добавете времеви интервал</string>
+    <string name="shared_string_remove">Премахване</string>
+    </resources>
