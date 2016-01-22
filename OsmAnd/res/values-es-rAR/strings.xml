@@ -2056,4 +2056,5 @@
     <string name="shared_string_select">Elegir</string>
     <string name="shared_string_remove">Quitar</string>
     <string name="data_is_not_available">Datos no disponibles</string>
+    <string name="rendering_attr_hideUnderground_name">Ocultar objetos subterráneos</string>
     </resources>
