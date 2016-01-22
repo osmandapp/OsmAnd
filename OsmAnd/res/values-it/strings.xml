@@ -2148,4 +2148,5 @@
     <string name="clear_updates_proposition_message">Puoi eliminare gli aggiornamenti scaricati e avere la mappa originale</string>
     <string name="road_blocked">Strada bloccata</string>
     <string name="add_time_span">Aggiungi durata</string>
+    <string name="data_is_not_available">Il dato non è disponibile</string>
     </resources>
