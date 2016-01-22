@@ -2659,4 +2659,44 @@
 	<string name="poi_protection_object_habitat">Beskyttet objekt: levested</string>
 	<string name="poi_protection_object_water">Beskyttet objekt: vand</string>
 
+<string name="poi_nuclear_explosion_country">Eksplosion: land</string>
+	<string name="poi_nuclear_explosion_site">Eksplosion: sted</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Eksplosionstype: under jorden, skakt</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Eksplosionstype: under jorden, tunnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Eksplosionstype: atmosfærisk</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Eksplosionstype: atmosfærisk, nedkastning</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Eksplosionstype: atmosfærisk, overflade, tårn</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Eksplosionstype: atmosfærisk, ballon</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Eksplosionstype: atmosfærisk, overflade</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Eksplosionstype: atmosfærisk, vandoverflade, pram</string>
+	<string name="poi_nuclear_explosion_type_underground">Eksplosionstype: underjordisk</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Eksplosionstype: kraterdannelse byge (lavvandet underjordisk)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Eksplosionstype: atmosfærisk, raket eller missil</string>
+	<string name="poi_nuclear_explosion_type_space">Eksplosionstype: rummet (højde over 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Eksplosionstype: undersøisk</string>
+	<string name="poi_nuclear_explosion_date_utc">Eksplosionsdato (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Shot navnet (en)</string>
+	<string name="poi_nuclear_explosion_series">Eksplosionsserie</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Eksplosionsformål: atomvåben relateret</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Eksplosionsformål: våben effekt</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Eksplosionsformål: sikkerhedseksperiment</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Eksplosionsformål: forskning for fredelige anvendelser</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Eksplosionsformål: grundlæggende videnskab</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Eksplosionsformål: industriel anvendelse, hulrum udgravning</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Eksplosionsformål: industriel anvendelse, seismiske pejlinger</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Eksplosionsformål: industriel anvendelse, olie stimulation</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Eksplosionsformål: industriel anvendelse</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Eksplosionsformål: industriel anvendelse, jordflytning</string>
+	<string name="poi_nuclear_explosion_time_utc">Eksplosionstidpunkt (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Eksplosion udbytte</string>
+	<string name="poi_nuclear_explosion_hole">Eksplosion hul</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Højden af eksplosionen</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Jordoverfladenshøjde</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">bølge størrelsesorden</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Eksplosionssalve: første detonation af en salvetest</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Eksplosionssalve: anden eller senere detonation af en salvetest</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Eksplosion: kraterdiameter</string>
+	<string name="poi_nuclear_explosion_warhead">Eksplosion: sprænghoved</string>
+	<string name="poi_nuclear_explosion_device">Eksplosion: enhed</string>
+
 </resources>
