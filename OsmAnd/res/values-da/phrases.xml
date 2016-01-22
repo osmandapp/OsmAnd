@@ -2699,4 +2699,6 @@
 	<string name="poi_nuclear_explosion_warhead">Eksplosion: sprænghoved</string>
 	<string name="poi_nuclear_explosion_device">Eksplosion: enhed</string>
 
+<string name="poi_addr_housename">Huset navn</string>
+
 </resources>
