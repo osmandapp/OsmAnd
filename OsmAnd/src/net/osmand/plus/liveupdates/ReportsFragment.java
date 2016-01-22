@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
@@ -253,7 +254,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 		public MonthsForReportsAdapter(Context context) {
 			super(context, android.R.layout.simple_spinner_item);
 			Calendar startDate = Calendar.getInstance();
-			startDate.set(Calendar.MONTH, Calendar.JUNE);
+			startDate.set(Calendar.MONTH, Calendar.SEPTEMBER);
 			startDate.set(Calendar.YEAR, 2015);
 			startDate.set(Calendar.DAY_OF_MONTH, 1);
 			startDate.set(Calendar.HOUR_OF_DAY, 0);
@@ -288,7 +289,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 			StringBuilder response = new StringBuilder();
 			error = NetworkUtils.sendGetRequest(params[0], null, response);
 			if (error == null) {
-				return gson.fromJson(response.toString(), protocolClass);
+				try {
+					return gson.fromJson(response.toString(), protocolClass);
+				} catch (JsonSyntaxException e) {
+					error = e.getLocalizedMessage();
+				}
 			}
 			LOG.error(error);
 			return null;
