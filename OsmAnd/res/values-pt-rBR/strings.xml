@@ -2002,4 +2002,5 @@
     <string name="road_blocked">Estrada bloqueada</string>
     <string name="shared_string_select">Selecionar</string>
     <string name="data_is_not_available">Dados indisponíveis</string>
+    <string name="rendering_attr_hideUnderground_name">Ocultar objetos subterrâneos</string>
     </resources>
