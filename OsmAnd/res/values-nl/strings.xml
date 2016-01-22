@@ -2166,11 +2166,12 @@
     <string name="rendering_attr_hideIcons_name">Verberg POI-iconen</string>
     <string name="switch_start_finish">Verwissel start en bestemming</string>
     <string name="number_of_contributors">Aantal Medewerkers</string>
-    <string name="number_of_edits">Aantal bewerkingen</string>
+    <string name="number_of_edits">Aantal Bewerkingen</string>
     <string name="shared_string_remove">Verwijder</string>
     <string name="clear_updates_proposition_message">Je kunt de gedownloade updates verwijderen en terugkeren naar de originele kaart</string>
     <string name="add_time_span">Periode toevoegen</string>
     <string name="road_blocked">Weg geblokkeerd</string>
     <string name="shared_string_select">Blokkeer...</string>
     <string name="reports_for">Verslag voor:</string>
-</resources>
+<string name="data_is_not_available">Gegevens niet beschikbaar</string>
+    </resources>
