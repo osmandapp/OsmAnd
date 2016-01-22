@@ -303,7 +303,7 @@
     <string name="recording_is_recorded">S’àudio/vìdeo istat pro èssere registrau. Pro lu firmare carca su widget AV.</string>
     <string name="recording_playing">S’àudio de sa registratzione isseberada istat pro èssere reprodotu.\n%1$s</string>
     <string name="recording_open_external_player">Abèri reprodutòre esternu</string>
-    <string name="recording_delete_confirm">Bòles burrare custa registratzione?</string>
+    <string name="recording_delete_confirm">Boles burrare custa registratzione?</string>
 
     <string name="recording_unavailable">non disponìbile</string>
     <string name="recording_context_menu_arecord">Registra una nota àudio</string>
@@ -370,7 +370,7 @@
     <string name="no_route">Peruna àndala</string>
     <string name="delete_target_point">Burra sa tapa intermèdia</string>
     <string name="target_point">Tapa intermèdia %1$s</string>
-    <string name="intermediate_point">Tapa intermèdia %1$s</string>
+    <string name="intermediate_point">Destinatzione intermèdia %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Annanghela comente ùrtima tapa intermèdia</string>
     <string name="context_menu_item_first_intermediate_point">Annanghe·la comente prima tapa intermèdia</string>
     <string name="add_as_last_destination_point">Annanghe·la comente ùrtima tapa intermèdia</string>
@@ -850,7 +850,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Istratu sìmbulos escursionisticos</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disinna sas camineras sighinde sas rastas OSMC</string>
 
-    <string name="osmand_parking_delete_confirm">Boles remòvere sa positzione de sa màchina parchegiada?</string>
+    <string name="osmand_parking_delete_confirm">Boles burrare su marcadore de sa positzione de sa màchina parchegiada?</string>
     <string name="osmand_parking_delete">Burra su marcadore de parchègiu</string>
     <string name="osmand_parking_position_description_add">Recùpera sa màchina pro sas:</string>
     <string name="context_menu_item_delete_parking_point">Burra unu marcadore de parchègiu</string>
@@ -1383,7 +1383,7 @@
     <string name="search_address">Chirca indiritzu</string>
     <string name="choose_building">Issèbera nùmeru tzìvicu</string>
     <string name="choose_street">Issèbera s’istrada</string>
-    <string name="choose_city">Issèbera sa tzitade</string>
+    <string name="choose_city">Issèbera sa tzitade o su cap</string>
     <string name="ChooseCountry">Issèbera s’istadu</string>
     <string name="map_view_3d_descr">Abìlita sa bisura 3D de sa mapa</string>
     <string name="map_view_3d">Bisura mapa 3D</string>
@@ -2077,7 +2077,7 @@
     <string name="select_month_and_country">Ischerta mese e istadu</string>
 <string name="shared_string_type">Casta</string>
     <string name="starting_point">Puntu de incumintzu</string>
-    <string name="item_removed">Elementu burradu</string>
+    <string name="item_removed">Elementu bogadu</string>
     <string name="n_items_removed">elementos burrados</string>
     <string name="shared_string_undo_all">ANNUDDA TOTU</string>
     <string name="rec_split">Intervallu de registratzione</string>
@@ -2086,6 +2086,11 @@
     <string name="rendering_attr_hideIcons_name">Cua sas iconas de sos PDI</string>
     <string name="number_of_contributors">Nùmeru de cuntribuidores</string>
     <string name="number_of_edits">Nùmeru de modìficas</string>
-    <string name="reports_for">Sinnala pro:</string>
+    <string name="reports_for">Sinnala pro</string>
 <string name="shared_string_remove">Boga</string>
+    <string name="data_is_not_available">Su datu no est disponìbile</string>
+    <string name="clear_updates_proposition_message">Podes burrare sos agiornamentos iscarrigados e torrare a s’editzione originale de sa mapa</string>
+    <string name="add_time_span">Annanghe intervallu de tempus</string>
+    <string name="road_blocked">Àndala blocada</string>
+    <string name="shared_string_select">Ischerta</string>
     </resources>
