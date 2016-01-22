@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -2082,4 +2083,5 @@
     <string name="morning">Rano</string>
     <string name="night">Noc</string>
     <string name="select_month_and_country">Wybierz miesiąc i kraj</string>
-</resources>
+<string name="shared_string_remove">Usuń</string>
+    </resources>
