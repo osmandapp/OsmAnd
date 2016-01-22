@@ -230,7 +230,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		Point size = new Point();
 		ctx.getWindowManager().getDefaultDisplay().getSize(size);
-		displayHeightPx = size.x;
+		displayHeightPx = size.y;
 	}
 
 	public void setView(View view) {
@@ -596,8 +596,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	protected void drawScale(Canvas canvas, float x, float y) {
-		canvas.drawLine(x - 10, y, x + 10, y, paintCenter);
-		canvas.drawLine(x, y + 200, x, y -200, paintCenter);
+		float height = displayHeightPx / 2;
+		float width = height / 40;
+		canvas.drawLine(x, y + height, x, y - height, paintCenter);
+		for (int i = 0; i < DoubleTapScaleDetector.SCALE_PER_SCREEN; i++) {
+			float deltaY = displayHeightPx / DoubleTapScaleDetector.SCALE_PER_SCREEN;
+			float markY = y - height + deltaY * i;
+			canvas.drawLine(x - width, markY, x + width, markY, paintCenter);
+		}
 	}
 
 	private void refreshBufferImage(final DrawSettings drawSettings) {
@@ -952,7 +958,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onLongPress(MotionEvent e) {
-			if (multiTouchSupport.isInZoomMode() || afterTwoFingerTap) {
+			if (multiTouchSupport.isInZoomMode()
+					|| doubleTapScaleDetector.isInZoomMode()
+					|| afterTwoFingerTap) {
 				afterTwoFingerTap = false;
 				return;
 			}

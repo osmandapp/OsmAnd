@@ -16,8 +16,9 @@ import org.apache.commons.logging.Log;
 public class DoubleTapScaleDetector {
 	private static final Log LOG = PlatformUtil.getLog(DoubleTapScaleDetector.class);
 	private static final int DOUBLE_TAP_TIMEOUT = ViewConfiguration.getDoubleTapTimeout();
+	private static final int TAP_TIMEOUT = ViewConfiguration.getTapTimeout();
 	private static final int DOUBLE_TAP_MIN_TIME = 40;
-	private static final int SCALE_PER_SCREEN = 8;
+	public static final int SCALE_PER_SCREEN = 8;
 
 	private final DoubleTapZoomListener listener;
 	protected final Context ctx;
@@ -28,6 +29,7 @@ public class DoubleTapScaleDetector {
 	private float scale;
 	private MotionEvent firstDown;
 	private MotionEvent firstUp;
+	private MotionEvent secondDown;
 	private int mDoubleTapSlopSquare;
 
 	public DoubleTapScaleDetector(Activity ctx, DoubleTapZoomListener listener) {
@@ -35,7 +37,7 @@ public class DoubleTapScaleDetector {
 		this.listener = listener;
 		Point size = new Point();
 		ctx.getWindowManager().getDefaultDisplay().getSize(size);
-		displayHeightPx = size.x;
+		displayHeightPx = size.y;
 		final ViewConfiguration configuration = ViewConfiguration.get(ctx);
 		int doubleTapSlop = configuration.getScaledTouchSlop();
 		mDoubleTapSlopSquare = doubleTapSlop * doubleTapSlop;
@@ -47,6 +49,7 @@ public class DoubleTapScaleDetector {
 		}
 		long currentTime = System.currentTimeMillis();
 		if (event.getAction() == MotionEvent.ACTION_UP) {
+			secondDown = null;
 			if (isDoubleTapping) {
 				isDoubleTapping = false;
 				listener.onZoomEnded(scale, 0);
@@ -57,7 +60,7 @@ public class DoubleTapScaleDetector {
 		} else {
 			if (event.getAction() == MotionEvent.ACTION_DOWN && !isDoubleTapping) {
 				if (isConsideredDoubleTap(firstDown, firstUp, event)) {
-					isDoubleTapping = true;
+					secondDown = MotionEvent.obtain(event);
 					float x = event.getX();
 					float y = event.getY();
 					listener.onGestureInit(x, y, x, y);
@@ -67,6 +70,9 @@ public class DoubleTapScaleDetector {
 					firstDown = MotionEvent.obtain(event);
 				}
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+				if (isConfirmedScale(secondDown, event)) {
+					isDoubleTapping = true;
+				}
 				if (isDoubleTapping) {
 					float delta = convertPxToDp((int) (firstDown.getY() - event.getY()));
 					float scaleDelta = delta / (displayHeightPx / SCALE_PER_SCREEN);
@@ -103,6 +109,14 @@ public class DoubleTapScaleDetector {
 		int squared = deltaX * deltaX + deltaY * deltaY;
 		boolean toReturn = squared < mDoubleTapSlopSquare;
 		return toReturn;
+	}
+
+	private static final boolean isConfirmedScale(MotionEvent secondDown,
+										   MotionEvent moveEvent) {
+		if (secondDown == null || moveEvent == null) {
+			return false;
+		}
+		return moveEvent.getEventTime() - secondDown.getEventTime() > TAP_TIMEOUT - 50;
 	}
 
 	public float getCenterX() {
