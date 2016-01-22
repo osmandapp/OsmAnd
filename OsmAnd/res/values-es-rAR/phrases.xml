@@ -2631,4 +2631,40 @@
 	<string name="poi_protection_object_habitat">Protección de objeto: Hábitat</string>
 	<string name="poi_protection_object_water">Protección de objeto: Agua</string>
 
+<string name="poi_nuclear_explosion_country">Explosión: País</string>
+	<string name="poi_nuclear_explosion_site">Explosión: Sitio</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo de explosión: subterráneo, pozo</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo de explosión: subterráneo, túnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Tipo de explosión: Atmosférica</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo de explosión: Atmosférica, con paracaídas</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipo de explosión: Atmosférica, en superficie, torre</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo de explosión: Atmosférica, en globo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipo de explosión: Atmosférica, en superficie</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo de explosión: Atmosférica, en superficie del agua, barcaza</string>
+	<string name="poi_nuclear_explosion_type_underground">Tipo de explosión: Subterráneo</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Tipo de explosión: Estallido de cráter (subsuelo poco profundo)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipo de explosión: Atmosférica, cohete o misil</string>
+	<string name="poi_nuclear_explosion_type_space">Tipo de explosión: Espacial (altitud &gt; 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Tipo de explosión: Submarina</string>
+	<string name="poi_nuclear_explosion_date_utc">Fecha de explosión (UTC)</string>
+	<string name="poi_nuclear_explosion_series">Series de explosiones</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Propósito de explosión: Relacionado con armas nucleares</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Propósito de explosión: Efectos de las armas</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Propósito de explosión: Experimento de seguridad</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Propósito de explosión: Investigación para aplicaciones pacíficas</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Propósito de explosión: Ciencia fundamental</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Propósito de explosión: Aplicación industrial, excavación de cavidad</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Propósito de explosión: Aplicación industrial, sondeo sísmico</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Propósito de explosión: Aplicación industrial, estimulación petrolero</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Propósito de explosión: Aplicación industrial</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Propósito de explosión: Aplicación industrial, movimiento de tierra</string>
+	<string name="poi_nuclear_explosion_time_utc">Hora de la explosión (UTC)</string>
+	<string name="poi_nuclear_explosion_hole">Agujero de la explosión</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Altura del estallido</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitud de la zona cero</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitud de las ondas de cuerpo</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Explosión: Diámetro del cráter</string>
+	<string name="poi_nuclear_explosion_warhead">Explosión: Ojiva de guerra</string>
+	<string name="poi_nuclear_explosion_device">Explosión: Dispositivo</string>
+
 </resources>
