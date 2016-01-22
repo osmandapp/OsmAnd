@@ -2075,10 +2075,11 @@
     <string name="switch_start_finish">起始點與目的地對調</string>
     <string name="number_of_contributors">貢獻者數</string>
     <string name="number_of_edits">編輯次數</string>
-    <string name="reports_for">報告：</string>
+    <string name="reports_for">報告</string>
 <string name="shared_string_select">選擇</string>
     <string name="shared_string_remove">移除</string>
     <string name="clear_updates_proposition_message">您可以移除已下載的更新和回到原來的地圖版本</string>
     <string name="add_time_span">增加時間跨度</string>
     <string name="road_blocked">道路堵塞</string>
+    <string name="data_is_not_available">無法獲得資料</string>
     </resources>
