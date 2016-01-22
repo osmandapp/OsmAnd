@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -2237,4 +2238,5 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="last_map_change">Остання зміна мапи: %s</string>
     <string name="hourly">Щогодинно</string>
     <string name="daily">Щоденно</string>
+    <string name="shared_string_remove">Вилучити</string>
     </resources>
