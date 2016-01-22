@@ -12,7 +12,7 @@
 	<string name="no_route">Rota yok</string>
 	<string name="delete_target_point">Hedef kaldırmak</string>
 	<string name="target_point">Ara nokta %1$s</string>
-    <string name="intermediate_point">Hedef %1$s</string>
+    <string name="intermediate_point">Intermediate hedef % 1 $ s</string>
     <string name="context_menu_item_last_intermediate_point">Son ara nokta olarak ekle</string>
     <string name="context_menu_item_first_intermediate_point">İlk ara hedef eklemek</string>
     <string name="add_as_last_destination_point">Son ara nokta olarak ekle</string>
@@ -129,7 +129,7 @@
     <string name="recording_is_recorded">Ses/Video kayıt ediliyor. Durdurmak için bu AV ikonuna basın.</string>
     <string name="recording_playing">Belirtilen kayıttan bir ses çalınıyor.\n%1$s</string>
     <string name="recording_open_external_player">Harici oynatıcı aç</string>
-    <string name="recording_delete_confirm">Bu kaydı kaldırmak istiyor musunuz?</string>
+    <string name="recording_delete_confirm">Bu kaydı silmek istiyor musunuz?</string>
     
     <string name="recording_unavailable">kullanılamaz</string>
     <string name="recording_context_menu_arecord">Sesli bir not al</string>
@@ -220,7 +220,7 @@
     <string name="email">e-posta</string>
 <string name="osmand_parking_position_description_add_time">Araba park edilmiş</string>
 	<string name="starting_point_too_far">Başlangıç noktası en yakın yoldan çok uzakta.</string>
-	<string name="osmand_parking_delete_confirm">Arabayı park ettiğiniz konumu kaldırmak istiyor musunuz?</string>
+	<string name="osmand_parking_delete_confirm">Arabayı park ettiğiniz konumu silmek istiyor musunuz?</string>
 	<string name="osmand_parking_lim_text">Zaman-sınırlı</string>
 	<string name="osmand_parking_no_lim_text">Zaman-sınırsız</string>
 	<string name="osmand_parking_time_limit">Süresi kısıtlı park</string>
@@ -999,7 +999,7 @@
 	<string name="search_address">Adres ara</string>
 	<string name="choose_building">Bina seç</string>
 	<string name="choose_street">Sokak seç</string>
-	<string name="choose_city">Şehir seç</string>
+	<string name="choose_city">Şehir veya posta kodu seçin</string>
 	<string name="ChooseCountry">Ülke seç</string>
 	<string name="map_view_3d">3B Harita Görüntüsü</string>
 	<string name="show_gps_coordinates_text">Harita üzerinde GPS koordinatlarını göster</string>
@@ -1541,7 +1541,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">En sevdiğim nokta \'\' {0} \'başarıyla eklendi.</string>
 	<string name="favourites_context_menu_add">Sık kullanılanlara ekle</string>
 	<string name="favourites_context_menu_edit">Düzenleme favori</string>
-	<string name="favourites_remove_dialog_msg">Favori nokta \'%s\' kaldırılsın mı?</string>
+	<string name="favourites_remove_dialog_msg">Favori nokta \'% s\' Sil ?</string>
 	<string name="favourites_remove_dialog_success">En sevdiğim nokta {0} başarıyla silindi.</string>
 	<string name="poi_error_poi_not_found">Düğüm bulunamadı ya da başlıca tek bir düğüm değil, olabilir</string>
 	<string name="poi_remove_confirm_template">Sil {0} (Yorumunuzu Girin)?</string>
@@ -2026,9 +2026,19 @@
 
 <string name="updates_size">Güncelleme boyutu</string>
     <string name="select_month_and_country">Ayı ve ülke seçin</string>
-<string name="item_removed">Öğe silindi</string>
+<string name="item_removed">Öğe kaldırıldı</string>
     <string name="n_items_removed">öğe silindi</string>
     <string name="shared_string_undo_all">UNDO TÜM</string>
     <string name="shared_string_type">Tip</string>
     <string name="starting_point">Başlangıç noktası</string>
-    </resources>
+    <string name="shared_string_remove">Kaldır</string>
+    <string name="clear_updates_proposition_message">İndirilen güncelleştirmeleri kaldırmak ve özgün harita sürümünü geri alabilirsiniz</string>
+    <string name="add_time_span">Zaman aralığı ekle</string>
+    <string name="road_blocked">Yol bloke</string>
+    <string name="shared_string_select">Seçin</string>
+    <string name="switch_start_finish">Ters bir başlangıç noktası ve hedef</string>
+    <string name="rendering_attr_hideIcons_name">POI simgeleri gizle</string>
+    <string name="number_of_contributors">Prim ödeyenlerin sayısı</string>
+    <string name="number_of_edits">Değişiklik sayısı</string>
+    <string name="reports_for">Rapor için:</string>
+</resources>
