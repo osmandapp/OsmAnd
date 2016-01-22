@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
@@ -85,4 +86,5 @@
     <string name="plugin_description_title">Daxuyanî</string>
     <string name="email">E-Peyamê</string>
     <string name="edit_filter_save_as_menu_item">Ciyawaz tênivîsîn</string>
+    <string name="shared_string_remove">Helanîn</string>
     </resources>
