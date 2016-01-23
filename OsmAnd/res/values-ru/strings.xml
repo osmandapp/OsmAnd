@@ -1904,5 +1904,6 @@
     <string name="rec_split_desc">Циклическая перезапись клипов при превышении заданного объема хранилища</string>
     <string name="switch_start_finish">Поменять местами пункт отправления и пункт назначения</string>
     <string name="shared_string_remove">Удалить</string>
+    <string name="rendering_attr_hideUnderground_name">Скрыть подземные объекты</string>
 
     </resources>
