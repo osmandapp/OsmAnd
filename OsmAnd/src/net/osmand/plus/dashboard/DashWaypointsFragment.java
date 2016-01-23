@@ -144,17 +144,9 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			boolean target = helper.getPointToNavigate() == point;
 			int id;
 			if (!target) {
-				if (getMyApplication().getSettings().isLightContent()) {
-					id = R.drawable.widget_intermediate_day;
-				} else {
-					id = R.drawable.widget_intermediate_night;
-				}
+				id = R.drawable.list_intermediate;
 			} else {
-				if (getMyApplication().getSettings().isLightContent()) {
-					id = R.drawable.widget_target_day;
-				} else {
-					id = R.drawable.widget_target_night;
-				}
+				id = R.drawable.list_destination;
 			}
 
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(getMyApplication().getIconsCache()

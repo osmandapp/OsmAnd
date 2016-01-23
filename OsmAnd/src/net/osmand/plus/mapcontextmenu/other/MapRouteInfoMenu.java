@@ -237,11 +237,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		});
 
 		ImageView viaIcon = (ImageView) parentView.findViewById(R.id.viaIcon);
-		if (isLight()) {
-			viaIcon.setImageDrawable(getIconOrig(R.drawable.widget_intermediate_day));
-		} else {
-			viaIcon.setImageDrawable(getIconOrig(R.drawable.widget_intermediate_night));
-		}
+		viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
 	}
 
 	private void updateToSpinner(final View parentView) {
@@ -282,11 +278,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private void updateToIcon(View parentView) {
 		ImageView toIcon = (ImageView) parentView.findViewById(R.id.toIcon);
-		if (isLight()) {
-			toIcon.setImageDrawable(getIconOrig(R.drawable.widget_target_day));
-		} else {
-			toIcon.setImageDrawable(getIconOrig(R.drawable.widget_target_night));
-		}
+		toIcon.setImageDrawable(getIconOrig(R.drawable.list_destination));
 	}
 
 	private void updateFromSpinner(final View parentView) {

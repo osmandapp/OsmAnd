@@ -38,6 +38,7 @@ public class Amenity extends MapObject  {
 	
 	public static class AmenityRoutePoint {
 		public double deviateDistance;
+		public boolean deviationDirectionRight;
 		public Location pointA;
 		public Location pointB;
 	}

@@ -118,6 +118,38 @@ public class WaypointDialogHelper {
 			}
 		}
 
+		if (dist > 0) {
+			textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+		} else {
+			textDist.setText("");
+		}
+
+		TextView textDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
+		if (textDeviation != null) {
+			if (dist > 0 && ps.deviationDistance > 0) {
+				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
+				textDeviation.setText(devStr);
+				int colorId = R.color.wpt_distance_color;
+				if (!topBar) {
+					colorId = nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light;
+					AndroidUtils.setTextSecondaryColor(activity, textDeviation, nightMode);
+				}
+				if (ps.deviationDirectionRight) {
+					textDeviation.setCompoundDrawablesWithIntrinsicBounds(
+							app.getIconsCache().getIcon(R.drawable.ic_small_turn_right, colorId),
+							null, null, null);
+				} else {
+					textDeviation.setCompoundDrawablesWithIntrinsicBounds(
+							app.getIconsCache().getIcon(R.drawable.ic_small_turn_left, colorId),
+							null, null, null);
+				}
+				textDeviation.setVisibility(View.VISIBLE);
+			} else {
+				textDeviation.setText("");
+				textDeviation.setVisibility(View.GONE);
+			}
+		}
+
 		String descr;
 		PointDescription pd = point.getPointDescription(app);
 		if (Algorithms.isEmpty(pd.getName())) {
@@ -155,20 +187,9 @@ public class WaypointDialogHelper {
 		if (descr.equals(pointDescription)) {
 			pointDescription = "";
 		}
-
-		if (dist > 0) {
-			String dd = OsmAndFormatter.getFormattedDistance(dist, app);
-			if (ps.deviationDistance > 0) {
-				dd += (topBar ? "\n" : "  ") + "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
-			}
-			textDist.setText(dd);
-			if (!Algorithms.isEmpty(pointDescription)) {
-				pointDescription = "  •  " + pointDescription;
-			}
-		} else {
-			textDist.setText("");
+		if (dist > 0 && !Algorithms.isEmpty(pointDescription)) {
+			pointDescription = "  •  " + pointDescription;
 		}
-
 		if (descText != null) {
 			descText.setText(pointDescription);
 		}

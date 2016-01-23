@@ -81,17 +81,9 @@ public class TargetPointMenuController extends MenuController {
 		if (targetPoint.start) {
 			return getIconOrig(R.drawable.list_startpoint);
 		} else if (!targetPoint.intermediate) {
-			if (isLight()) {
-				return getIconOrig(R.drawable.widget_target_day);
-			} else {
-				return getIconOrig(R.drawable.widget_target_night);
-			}
+			return getIconOrig(R.drawable.list_destination);
 		} else {
-			if (isLight()) {
-				return getIconOrig(R.drawable.widget_intermediate_day);
-			} else {
-				return getIconOrig(R.drawable.widget_intermediate_night);
-			}
+			return getIconOrig(R.drawable.list_intermediate);
 		}
 	}
 
