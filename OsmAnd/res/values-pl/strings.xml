@@ -38,7 +38,7 @@
 
     <string name="poi_filter_nominatim">Nominatim Online</string>
     <string name="search_position_current_location_search">Ustalanie pozycji…</string>
-    <string name="search_position_current_location_found">Moja pozycja (ustalona)</string>
+    <string name="search_position_current_location_found">Aktualne położenie (ustalone)</string>
     <string name="search_position_address">Adres…</string>
     <string name="search_position_favorites">Ulubione…</string>
     <string name="search_position_undefined">Niezdefiniowane</string>
@@ -95,7 +95,7 @@
     <string name="local_indexes_cat_tile">Mapy online i buforowane kafelki</string>
     <string name="local_indexes_cat_map">Mapy standardowe (wektorowe)</string>
     <string name="local_indexes_cat_poi">Dane POI</string>
-    <string name="ttsvoice">Głos TTS</string>
+    <string name="ttsvoice">Głos syntezowany</string>
     <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
     <string name="map_text_size_descr">Wybierz rozmiar tekstu dla nazw na mapie</string>
     <string name="map_text_size">Rozmiar tekstu</string>
@@ -106,7 +106,7 @@
     <string name="installing_new_resources">Rozpakowywanie nowych danych…</string>
     <string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem.</string>
     <string name="tts_language_not_supported_title">Nieobsługiwany język</string>
-    <string name="tts_language_not_supported">Wybrany język jest niewspierany przez zainstalowany mechanizm TTS (text-to-speech). Czy chcesz odwiedzić Android Market, by poszukać innego silnika TTS? W innym przypadku zostanie użyty bieżący język.</string>
+    <string name="tts_language_not_supported">Wybrany język nie jest obsługiwany przez zainstalowany moduł syntezy mowy. Odwiedzić Android Market, w poszukiwaniu innego mechanizmu syntezy mowy? W przeciwnym przypadku zostanie użyty aktualny język.</string>
     <string name="tts_missing_language_data_title">Brakujące dane</string>
     <string name="tts_missing_language_data">Brak danych dla wybranego języka. Czy chcesz odwiedzić Android Market, by zainstalować?</string>
     <string name="gpx_option_reverse_route">Odwróć kierunek GPX</string>
@@ -629,7 +629,7 @@
 
     <string name="osmand_rastermaps_plugin_description">"Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych uniwersalnych, map klimatycznych, map geologicznych, warstw cieniowania rzeźby terenu itp.\n\nKażda z tych map może być wykorzystana jako główna (podstawa) mapa wyświetlana na ekranie mapy OsmAnd lub jako nakładka lub podkład do innej mapy bazowej (jak zwykłe mapy offline OsmAnd). W celu zwiększenia widoczności mapy bazowej, niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu „Konfiguracja mapy” zgodnie z zapotrzebowaniem.\n\nMapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do katalogu danych OsmAnd) jako bazy danych sqlite, które mogą być przygotowane przez niezależnych dostawców map. "</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
-    <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Wykorzystuje np. dostosowanie szybkości mowy głosów TTS, konfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany powiększenia lub wsparcie TTS, jak choćby automatyczne podawanie pozycji.</string>
+    <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala na np. dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub użycie syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
 
 
     <string name="osmand_development_plugin_description">Wyświetla ustawienia dotyczące rozwoju i diagnozowania błędów. Dodaje możliwość symulacji nawigacji, wyświetlania informacji o wydajności renderowania, czy też testowania wskazówek głosowych. Te funkcje oraz ustawienia przeznaczone są dla twórców oprogramowania. Zwykły użytkownik nie potrzebuje ich do prawidłowego działania programu.</string>
@@ -802,7 +802,7 @@
     <string name="osmand_parking_warning">Uwaga</string>
     <string name="osmand_parking_warning_text">Powiadomienie o odebraniu samochodu zostało wcześniej dodane do kalendarza. Pozostanie ono tam, dopóki nie usuniesz go ręcznie.</string>
     <string name="osmand_parking_time_limit_title">Ustaw limit czasu parkowania</string>
-    <string name="osmand_parking_delete_confirm">Chcesz usunąć lokalizację zaparkowanego samochodu?</string>
+    <string name="osmand_parking_delete_confirm">Usunąć oznaczenie położenia zaparkowanego samochodu?</string>
     <string name="osmand_parking_delete">Usuń znacznik parkowania</string>
     <string name="osmand_parking_choose_type">Wybierz typ parkingu</string>
     <string name="osmand_parking_lim_text">Ograniczony czasowo</string>
@@ -919,7 +919,7 @@
     <string name="poi_filter_accomodation">Zakwaterowanie</string>
     <string name="poi_filter_restaurants">Restauracje</string>
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatyczne Nawigowanie Do celu) OsmAnd jest programem open source do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również funkcjonalność routingu w trybie offline i online zawierającą zapowiedzi głosowe. Niektóre z podstawowych funkcji: - Funkcjonalnowanie w trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia) - Dostępne kompaktowe mapy w trybie offlinie dla całego świata - Pobieranie map kraju lub regionu bezpośrednio z aplikacji - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością - Wyszukiwanie Offline adresów i miejsc (POI) - Wyznaczanie w trybie Offline tras na krótkich dystansach (eksperymentalne) - Tryby samochodowy, rowerowy i pieszy z: - opcjonalnym automatycznym przełączaniem widoku dzień/noc - opcjonalnie skalowanie map w zależności od prędkości - opcjonalne wyrównanie map według kompasu lub kierunku ruchu - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, głosy nagrane i głowy TTS. "</string>
+    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatyczne Nawigowanie Do celu) OsmAnd jest programem open source do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również funkcjonalność routingu w trybie offline i online zawierającą zapowiedzi głosowe. Niektóre z podstawowych funkcji: - Funkcjonalnowanie w trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia) - Dostępne kompaktowe mapy w trybie offlinie dla całego świata - Pobieranie map kraju lub regionu bezpośrednio z aplikacji - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością - Wyszukiwanie Offline adresów i miejsc (POI) - Wyznaczanie w trybie Offline tras na krótkich dystansach (eksperymentalne) - Tryby samochodowy, rowerowy i pieszy z: - opcjonalnym automatycznym przełączaniem widoku dzień/noc - opcjonalnie skalowanie map w zależności od prędkości - opcjonalne wyrównanie map według kompasu lub kierunku ruchu - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, nagrane i syntezowane komunikaty głosowe. "</string>
     <string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 
 
@@ -927,7 +927,7 @@
     <string name="map_widget_show_ruler">Linijka</string>
 
     <string name="map_widget_view_direction">Kierunek patrzenia</string>
-    <string name="map_widget_transparent">Przezroczyste widget</string>
+    <string name="map_widget_transparent">Przezroczyste widżety</string>
 
     <string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
     <string name="int_continuosly">Ciągły</string>
@@ -995,7 +995,7 @@
     <string name="recording_is_recorded">Dźwięk/obraz jest nagrywany. Aby zatrzymać naciśnij przycisk stop na widżecie.</string>
     <string name="recording_playing">Dźwięk z wybranego nagrania jest odtwarzany.\n%1$s</string>
     <string name="recording_open_external_player">Otwórz zewnętrzny odtwarzacz</string>
-    <string name="recording_delete_confirm">Czy chcesz usunąć to nagranie?</string>
+    <string name="recording_delete_confirm">Usunąć to nagranie?</string>
 
     <string name="recording_unavailable">niedostępne</string>
     <string name="layer_recordings">Warstwa nagrywania</string>
@@ -1145,7 +1145,7 @@
     <string name="osb_author_dialog_password">Hasło OSM (opcjonalne)</string>
     <string name="speak_title">Zapowiadanie…</string>
     <string name="speak_descr">Konfiguruje zapowiadanie nazw ulic, ostrzeżeń o ruchu (przymusowe przystanki, progi zwalniające), fotoradarów, ograniczeń prędkości</string>
-    <string name="speak_street_names">Nazwy ulic (TTS)</string>
+    <string name="speak_street_names">Nazwy ulic (syntezowane)</string>
     <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
 
 
@@ -1216,7 +1216,7 @@
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
 
 
-    <string name="speech_rate_descr">Określa tempo odtwarzania komunikatów głosowych TTS</string>
+    <string name="speech_rate_descr">Określa tempo odtwarzania syntezowanych komunikatów głosowych</string>
     <string name="speech_rate">Szybkość mowy</string>
 
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
@@ -1309,9 +1309,9 @@
     <string name="index_item_nation_addresses">Adresy krajowe</string>
     <string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Wstrzymuj odtwarzanie muzyki podczas komunikatów</string>
+    <string name="interrupt_music_descr">Wstrzymuje odtwarzanie muzyki podczas komunikatów</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
-    <string name="always_center_position_on_map">Pozycja w centrum wyświetlacza</string>
+    <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
     <string name="localization_pref_title">Lokalizacja</string>
@@ -1648,7 +1648,7 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Skonfiguruj ustawienia proxy</string>
     <string name="settings_privacy">Prywatność</string>
-    <string name="shared_string_my_location">Moja Pozycja</string>
+    <string name="shared_string_my_location">Aktualne położenie</string>
 
     <string name="shared_string_disabled">Wyłączone</string>
     <string name="shared_string_enabled">Włączone</string>
@@ -2056,9 +2056,9 @@
     <string name="route_duration">Czas:</string>
     <string name="looking_up_address">Wyszukiwanie adresu</string>
     <string name="missing_write_external_storage_permission">Aplikacja nie posiada uprawnień do użycia karty SD</string>
-    <string name="select_voice_provider">Wybierz wskazówki głosowe</string>
-    <string name="select_voice_provider_descr">Wybierz lub pobierz komunikaty głosowe dla twojego języka</string>
-    <string name="impassable_road_desc">Wybierz drogi, które chcesz unikać podczas nawigacji</string>
+    <string name="select_voice_provider">Wybór komunikatów głosowych</string>
+    <string name="select_voice_provider_descr">Wskazuje lub pobiera komunikaty głosowe właściwe dla danego języka</string>
+    <string name="impassable_road_desc">Wskazuje drogi, które należy unikać podczas nawigowania</string>
     <string name="shared_string_sound">Dźwięk</string>
     <string name="no_location_permission">Program nie ma uprawnień dostępu do danych o lokalizacji.</string>
     <string name="no_camera_permission">Program nie ma uprawnień dostępu do aparatu.</string>
@@ -2076,7 +2076,7 @@
     <string name="shared_string_type">Typ</string>
     <string name="starting_point">Punkt początkowy</string>
     <string name="rec_split_storage_size">Wielkość pamięci</string>
-    <string name="live_updates">Aktualizacje na żywo</string>
+    <string name="live_updates">Aktualizowanie na bieżąco</string>
     <string name="hourly">Cogodzinny</string>
     <string name="daily">Dzienny</string>
     <string name="weekly">Tygodniowo</string>
@@ -2084,4 +2084,10 @@
     <string name="night">Noc</string>
     <string name="select_month_and_country">Wybierz miesiąc i kraj</string>
 <string name="shared_string_remove">Usuń</string>
+    <string name="data_is_not_available">Data nie jest dostępna</string>
+    <string name="shared_string_select">Wybierz</string>
+    <string name="clear_updates_proposition_message">Można usunąć pobrane uaktualnienia i przywrócić pierwotną wersję mapy</string>
+    <string name="number_of_edits">Liczba edycji</string>
+    <string name="reports_for">Raport dla</string>
+<string name="number_of_contributors">Liczba współtwórców</string>
     </resources>
