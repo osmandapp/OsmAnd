@@ -272,7 +272,7 @@
   <string name="tts_missing_language_data_title">Ontbrekende gegevens</string>
   <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar de Play-store gaan om deze te installeren?</string>
   <string name="gpx_option_reverse_route">Keer richting van GPX-track om</string>
-  <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
+  <string name="gpx_option_destination_point">Gebruik huidige Bestemming</string>
   <string name="gpx_option_from_start_point">Volg de gehele track</string>
   <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie.
 \n\t\n\tOm deze te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
@@ -339,7 +339,7 @@
   <string name="send_location">Stuur locatie</string>
   <string name="context_menu_item_share_location">Deel Locatie</string>
   <string name="add_waypoint_dialog_added">GPX-routepunt \'\'{0}\'\' succesvol toegevoegd</string>
-  <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
+  <string name="add_waypoint_dialog_title">Routepunt aan de opgenomen GPX-track toevoegen</string>
   <string name="context_menu_item_add_waypoint">Opslaan als routepunt in GPX-track</string>
   <string name="amenity_type_administrative">Overheid</string>
   <string name="amenity_type_barrier">Blokkade</string>
@@ -527,7 +527,7 @@
   <string name="map_screen_orientation">Kaartscherm-oriëntatie</string>
   <string name="map_screen_orientation_descr">Scherm-oriëntatie: staand, liggend of apparaatinstelling</string>
   <string name="opening_hours_not_supported">Openingstijden kunnen niet gewijzigd worden</string>
-  <string name="add_new_rule">Voeg nieuwe regel toe</string>
+  <string name="add_new_rule">Nieuwe regel toevoegen</string>
   <string name="transport_Routes">Routes</string>
   <string name="transport_Stop">Halte</string>
   <string name="transport_stops">Haltes</string>
@@ -586,7 +586,7 @@
   <string name="only_show">Toon route</string>
   <string name="follow">Start navigatie</string>
   <string name="recalculate_route_to_your_location">Soort vervoer:</string>
-  <string name="mark_final_location_first">Kies eerst een bestemming</string>
+  <string name="mark_final_location_first">Kies eerst een Bestemming</string>
   <string name="get_directions">Aanwijzingen</string>
   
   <string name="opening_hours">Openingstijden</string>
@@ -608,7 +608,7 @@
   <string name="error_calculating_route_occured">Fout bij routeberekening</string>
   <string name="empty_route_calculated">Fout: berekende route is leeg</string>
   <string name="new_route_calculated_dist">Nieuwe route berekend, afstand</string>
-  <string name="arrived_at_destination">Je bestemming is bereikt</string>
+  <string name="arrived_at_destination">De Bestemming is bereikt</string>
   <string name="invalid_locations">Coördinaten zijn ongeldig!</string>
   <string name="go_back_to_osmand">Ga terug naar de OsmAnd-kaart</string>
   <string name="loading_data">Gegevens worden geladen…</string>
@@ -824,7 +824,7 @@
   <string name="osmand_parking_choose_type">Kies het type parkeerplaats</string>
   <string name="osmand_parking_lim_text">Met tijdslimiet</string>
   <string name="osmand_parking_no_lim_text">Zonder tijdslimiet</string>
-  <string name="osmand_parking_add_event">Voeg een notificatie toe aan de kalender</string>
+  <string name="osmand_parking_add_event">Een notificatie aan de kalender toevoegen</string>
   <string name="osmand_parking_time_limit">parkeren met tijdslimiet</string>
   <string name="osmand_parking_time_no_limit">parkeren zonder tijdslimiet</string>
   <string name="osmand_parking_position_description">De positie van de geparkeerde auto. %1$s</string>
@@ -871,7 +871,7 @@
   <string name="map_widget_parking">Parkeren</string>
   <string name="map_widget_monitoring">GPX-Track opnemen</string>
   <string name="map_widget_speed">Snelheid</string>
-  <string name="map_widget_distance">Afstand tot bestemming</string>
+  <string name="map_widget_distance">Afstand tot Bestemming</string>
   <string name="map_widget_altitude">Hoogte</string>
   <string name="map_widget_time">Resterende tijd</string>
   <string name="map_widget_next_turn">Volgende bocht</string>
@@ -960,20 +960,20 @@
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="poi_filter_sightseeing">Bezienswaardigheden</string>
 
-    <string name="context_menu_item_last_intermediate_point">Toevoegen als laatste Tussenpunt</string>
-    <string name="context_menu_item_first_intermediate_point">Toevoegen als eerste Tussenpunt</string>
-    <string name="add_as_last_destination_point">Voeg toe als laatste Tussenpunt</string>
-    <string name="add_as_first_destination_point">Voeg toe als eerste Tussenpunt</string>
-    <string name="replace_destination_point">Vervang de bestemming</string>
-    <string name="new_destination_point_dialog">Er is al een bestemming gekozen.</string>
+    <string name="context_menu_item_last_intermediate_point">Als laatste Tussenpunt toevoegen</string>
+    <string name="context_menu_item_first_intermediate_point">Als eerste Tussenpunt toevoegen</string>
+    <string name="add_as_last_destination_point">Als laatste Tussenpunt toevoegen</string>
+    <string name="add_as_first_destination_point">Als eerste Tussenpunt toevoegen</string>
+    <string name="replace_destination_point">Bestemming vervangen</string>
+    <string name="new_destination_point_dialog">Er is al een Bestemming gekozen.</string>
     <string name="target_point">Bestemming %1$s</string>
     <string name="target_points">Bestemmingen</string>
     <string name="map_widget_monitoring_services">Registratiediensten</string>
 	<string name="no_route">Geen route</string>
-	<string name="delete_target_point">Verwijder bestemming</string>
+	<string name="delete_target_point">Verwijder Bestemming</string>
 	<string name="intermediate_point">"Tussenpunt  %1$s"</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
-    <string name="map_widget_show_destination_arrow">Toon richting van de bestemming</string>
+    <string name="map_widget_show_destination_arrow">Toon richting van de Bestemming</string>
     <string name="enable_plugin_monitoring_services">Activeer de GPX-Track opnemen- Plugin om de afgelegde weg vast te leggen (GPX-track, online tracking)</string>
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Kies kleurschema voor wegen:</string>
@@ -1112,7 +1112,7 @@
     <string name="install_paid">Volledige versie</string>
     <string name="cancel_route">Annuleer route</string>
     <string name="cancel_navigation">Stop navigatie</string>
-    <string name="clear_destination">Wis bestemming</string>
+    <string name="clear_destination">Wis Bestemming</string>
     <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor voor het kompas</string>
     <string name="use_magnetic_sensor">Gebruik magnetische sensor</string>
     <string name="use_kalman_filter_compass_descr">Verminder storingen in het kompas (maakt de kompasweergave langzamer)</string>
@@ -1145,7 +1145,7 @@
     <string name="intermediate_items_sort_return">De Tussenpunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw eindbestemming.</string>
     <string name="intermediate_items_sort_by_distance">Sorteer kortste afstand</string>
     <string name="please_select_address">Kies eerst een plaats of straat</string>
-    <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
+    <string name="context_menu_item_destination_point">Als Bestemming\ninstellen</string>
     <string name="destination_point">Bestemming %1$s</string>
     
 	
@@ -1270,7 +1270,7 @@
     <string name="route_descr_select_destination">Bestemming kiezen</string>
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
-    <string name="keep_and_add_destination_point">Toevoegen als eindbestemming</string>
+    <string name="keep_and_add_destination_point">Als Eindbestemming toevoegen</string>
     <string name="use_displayed_track_for_navigation">De getoonde GPX-track gebruiken voor navigatie.?</string>
     
     <string name="calculate_osmand_route_without_internet">Bereken een OsmAnd routesegment zonder internet</string>
@@ -1343,8 +1343,8 @@
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
-	<string name="arrival_distance">Aankondigen van de bestemming</string>
-    <string name="arrival_distance_descr">Wanneer melden dat de bestemming bereikt is?</string>
+	<string name="arrival_distance">Aankondigen van de Bestemming</string>
+    <string name="arrival_distance_descr">Wanneer melden dat de Bestemming bereikt is?</string>
     <string name="osmo_io_error">OsMo verbindingsprobleem: </string>
     <string name="osmo_mode_on">Stop OsMo sessie</string>    
     <string name="osmo_mode_off">Start OsMo</string>
@@ -1455,7 +1455,7 @@
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
     <string name="loading_smth">Laad %1$s…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
-    <string name="select_destination_and_intermediate_points">Kies bestemmingen</string>
+    <string name="select_destination_and_intermediate_points">Kies Bestemmingen</string>
     <string name="layer_amenity_label">Namen van Interessepunten</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
@@ -1536,7 +1536,7 @@
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
     <string name="arrival_distance_factor_normally">Op tijd</string>
     <string name="arrival_distance_factor_late">Laat</string>
-    <string name="arrival_distance_factor_at_last">Een paar meter voor de bestemming</string>
+    <string name="arrival_distance_factor_at_last">Een paar meter voor de Bestemming</string>
     
 <string name="av_camera_pic_size">Foto-formaat</string>
 	<string name="av_camera_pic_size_descr">Kies de grootte van de Foto\'s</string>
@@ -1766,7 +1766,7 @@
 	<string name="shared_string_map">Kaart</string>
 	<string name="shared_string_favorite">Favoriet</string>
 	<string name="shared_string_favorites">Favorieten</string>
-	<string name="shared_string_add_to_favorites">Voeg toe aan Favorieten</string>
+	<string name="shared_string_add_to_favorites">Aan Favorieten toevoegen</string>
 	
 	<string name="shared_string_my_places">Mijn Plaatsen</string>
 	
@@ -2164,11 +2164,11 @@
     <string name="n_items_removed">items verwijderd</string>
     <string name="shared_string_undo_all">Alles terugzetten</string>
     <string name="rendering_attr_hideIcons_name">Verberg POI-iconen</string>
-    <string name="switch_start_finish">Verwissel start en bestemming</string>
+    <string name="switch_start_finish">Start en Bestemming verwisselen</string>
     <string name="number_of_contributors">Aantal Medewerkers</string>
     <string name="number_of_edits">Aantal Bewerkingen</string>
     <string name="shared_string_remove">Verwijder</string>
-    <string name="clear_updates_proposition_message">Je kunt de gedownloade updates verwijderen en terugkeren naar de originele kaart</string>
+    <string name="clear_updates_proposition_message">Gedownloade updates kunnen verwijderen worden: terug naar de originele kaart</string>
     <string name="add_time_span">Periode toevoegen</string>
     <string name="road_blocked">Weg geblokkeerd</string>
     <string name="shared_string_select">Blokkeer...</string>
