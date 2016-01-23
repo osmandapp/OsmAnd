@@ -167,7 +167,7 @@ public class MapUtils {
 	}
 	
 	public static double get31LatitudeY(int tileY){
-		return MapUtils.getLatitudeFromTile(21, tileY /1024f);
+		return MapUtils.getLatitudeFromTile(21, tileY / 1024f);
 	}
 	
 	
@@ -501,6 +501,16 @@ public class MapUtils {
 		return multiple;
 	}
 
+	public static boolean rightSide(double lat, double lon,
+												  double aLat, double aLon,
+												  double bLat, double bLon) {
+		double ax = aLon - lon;
+		double ay = aLat - lat;
+		double bx = bLon - lon;
+		double by = bLat - lat;
+		double sa = ax * by - bx * ay;
+		return sa < 0;
+	}
 
 }
 

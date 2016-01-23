@@ -67,16 +67,37 @@
                 android:layout_marginRight="@dimen/map_button_margin"
                 android:src="@drawable/ic_action_test_light"/>
 
-            <TextView
-                android:id="@+id/waypoint_dist"
-                android:layout_width="60dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="4dp"
-                android:maxLines="2"
-                android:textColor="@color/wpt_distance_color"
-                android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"/>
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/waypoint_dist"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:maxLines="2"
+                    android:textColor="@color/wpt_distance_color"
+                    android:textSize="@dimen/default_desc_text_size"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/waypoint_deviation"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="4dp"
+                    android:drawablePadding="2dp"
+                    android:maxLines="1"
+                    android:textColor="@color/wpt_distance_color"
+                    android:textSize="@dimen/default_sub_text_size"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="0dp"

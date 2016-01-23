@@ -10,6 +10,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import net.osmand.FloatMath;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -485,7 +486,7 @@ public class WaypointHelper {
 		}
 	}
 
-	private float dist(LocationPoint l, List<Location> locations, int[] ind) {
+	private float dist(LocationPoint l, List<Location> locations, int[] ind, boolean[] devDirRight) {
 		float dist = Float.POSITIVE_INFINITY;
 		// Special iterations because points stored by pairs!
 		for (int i = 1; i < locations.size(); i++) {
@@ -500,6 +501,14 @@ public class WaypointHelper {
 				dist = (float) ld;
 			}
 		}
+
+		if (ind != null && dist < Float.POSITIVE_INFINITY) {
+			int i = ind[0];
+			devDirRight[0] = MapUtils.rightSide(l.getLatitude(), l.getLongitude(),
+					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(),
+					locations.get(i).getLatitude(), locations.get(i).getLongitude());
+		}
+
 		return dist;
 	}
 
@@ -539,6 +548,7 @@ public class WaypointHelper {
 				if (i >= 0) {
 					LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a),
 							(float) rp.deviateDistance, i);
+					lwp.deviationDirectionRight = rp.deviationDirectionRight;
 					lwp.setAnnounce(announcePOI());
 					locationPoints.add(lwp);
 				}
@@ -582,11 +592,13 @@ public class WaypointHelper {
 									List<? extends LocationPoint> points, boolean announce) {
 		List<Location> immutableAllLocations = rt.getImmutableAllLocations();
 		int[] ind = new int[1];
+		boolean[] devDirRight = new boolean[1];
 		for (LocationPoint p : points) {
-			float dist = dist(p, immutableAllLocations, ind);
+			float dist = dist(p, immutableAllLocations, ind, devDirRight);
 			int rad = getSearchDeviationRadius(type);
 			if (dist <= rad) {
 				LocationPointWrapper lpw = new LocationPointWrapper(rt, type, p, dist, ind[0]);
+				lpw.deviationDirectionRight = devDirRight[0];
 				lpw.setAnnounce(announce);
 				locationPoints.add(lpw);
 			}
@@ -635,6 +647,7 @@ public class WaypointHelper {
 	public static class LocationPointWrapper {
 		LocationPoint point;
 		float deviationDistance;
+		boolean deviationDirectionRight;
 		int routeIndex;
 		boolean announce = true;
 		RouteCalculationResult route;
@@ -657,6 +670,10 @@ public class WaypointHelper {
 
 		public float getDeviationDistance() {
 			return deviationDistance;
+		}
+
+		public boolean isDeviationDirectionRight() {
+			return deviationDirectionRight;
 		}
 
 		public LocationPoint getPoint() {
@@ -689,17 +706,9 @@ public class WaypointHelper {
 						return iconsCache.getIcon(R.drawable.list_startpoint, 0, 0f);
 					}
 				} else if (((TargetPoint) point).intermediate) {
-					if (!nightMode) {
-						return iconsCache.getIcon(R.drawable.widget_intermediate_day, 0, 0f);
-					} else {
-						return iconsCache.getIcon(R.drawable.widget_intermediate_night, 0, 0f);
-					}
+					return iconsCache.getIcon(R.drawable.list_intermediate, 0, 0f);
 				} else {
-					if (!nightMode) {
-						return iconsCache.getIcon(R.drawable.widget_target_day, 0, 0f);
-					} else {
-						return iconsCache.getIcon(R.drawable.widget_target_night, 0, 0f);
-					}
+					return iconsCache.getIcon(R.drawable.list_destination, 0, 0f);
 				}
 
 			} else if (type == FAVORITES || type == WAYPOINTS) {

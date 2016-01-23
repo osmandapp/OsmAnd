@@ -645,6 +645,11 @@ public class BinaryMapPoiReaderAdapter {
 				arp.pointB = locations.get(i);
 			}
 		}
+		if (arp != null && arp.deviateDistance != 0 && arp.pointA != null && arp.pointB != null) {
+			arp.deviationDirectionRight = MapUtils.rightSide(l.getLatitude(), l.getLongitude(),
+					arp.pointA.getLatitude(), arp.pointA.getLongitude(),
+					arp.pointB.getLatitude(), arp.pointB.getLongitude());
+		}
 		return arp;
 	}
 	private Amenity readPoiPoint(int left31, int right31, int top31, int bottom31, 
