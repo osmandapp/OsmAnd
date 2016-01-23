@@ -570,7 +570,7 @@
     <string name="search_address">Hledat adresu</string>
     <string name="choose_building">Zvolte budovu</string>
     <string name="choose_street">Zvolte ulici</string>
-    <string name="choose_city">Zvolte město</string>
+    <string name="choose_city">Zvolte město nebo PSČ</string>
     <string name="ChooseCountry">Zvolte zemi</string>
     <string name="show_view_angle">Zorné pole</string>
     <string name="map_view_3d_descr">Zapnout 3D pohled na mapu</string>
@@ -627,7 +627,7 @@
     <string name="add_favorite_dialog_favourite_added_template">Oblíbené místo \'\'{0}\'\' bylo přidáno.</string>
     <string name="favourites_context_menu_edit">Upravit oblíbené</string>
     <string name="favourites_context_menu_delete">Smazat oblíbené</string>
-    <string name="favourites_remove_dialog_msg">Opravdu chcete odstranit oblíbené místo \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Opravdu odstranit oblíbené místo \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Oblíbené místo {0} bylo vymazáno.</string>
     
     
@@ -727,7 +727,7 @@
     <string name="osmand_parking_warning">Upozornění</string>
     <string name="osmand_parking_warning_text">Upozornění k vyzvednutí vašeho auta bylo již přidáno do vašeho kalendáře. Zůstane dokud ho ručně nesmažete.</string>
     <string name="osmand_parking_time_limit_title">Nastavte maximální povolenou dobu parkování</string>
-    <string name="osmand_parking_delete_confirm">Chcete smazat označení místa, kde jste zaparkovali auto?</string>
+    <string name="osmand_parking_delete_confirm">Chcete smazat označení místa, kde jste zaparkovali?</string>
     <string name="osmand_parking_delete">Smazat místo parkování</string>
     <string name="osmand_parking_choose_type">Vyberte typ stání</string>
     <string name="osmand_parking_lim_text">Časově omezené</string>
@@ -842,7 +842,7 @@
     <string name="map_widget_monitoring_services">Sledování polohy</string>
     <string name="no_route">Žádná cesta</string>
     <string name="delete_target_point">Smazat cíl</string>
-    <string name="intermediate_point">Cíl %1$s</string>
+    <string name="intermediate_point">Mezicíl %1$s</string>
     <string name="map_widget_show_destination_arrow">Zobrazit směr do cíle</string>
     <string name="enable_plugin_monitoring_services">Zapněte modul \"služba na pozadí\" pro záznam trasy a přímý přenos souřadnic (GPX logování, online sledování)</string>
     <string name="non_optimal_route_calculation">Počítat možná méně výhodnou trasu na dlouhé vzdálenosti</string>
@@ -879,7 +879,7 @@
     <string name="map_widget_audionotes">Audio poznámky</string>
     <string name="recording_is_recorded">Nahrávám audio/video. Stiskněte tlačítko \"stop\" pro zastavení.</string>
     <string name="recording_open_external_player">Otevřít externí přehrávač</string>
-    <string name="recording_delete_confirm">Chcete tuto nahrávku smazat?</string>
+    <string name="recording_delete_confirm">Chcete smazat tuto nahrávku?</string>
     <string name="recording_context_menu_arecord">Nahrát zvukovou poznámku</string>
     <string name="recording_context_menu_vrecord">Nahrát video poznámku</string>
     <string name="recording_can_not_be_played">Záznam nelze přehrát</string>
@@ -1884,7 +1884,7 @@
     <string name="live_update">Okamžité aktualizace</string>
     <string name="update_now">Aktualizovat nyní</string>
     <string name="missing_write_external_storage_permission">Aplikace nemá povolen přístup k SD kartě</string>
-<string name="item_removed">Položka smazána</string>
+<string name="item_removed">Položka odstraněna</string>
     <string name="n_items_removed">vymazaných položek</string>
     <string name="shared_string_undo_all">VRÁTIT ZPĚT VŠE</string>
     <string name="shared_string_type">Typ</string>
@@ -1918,4 +1918,10 @@
     <string name="shared_string_select">Zvolit</string>
     <string name="road_blocked">Cesta je blokovaná</string>
     <string name="switch_start_finish">Zaměnit počáteční a cílový bod</string>
-    </resources>
+    <string name="data_is_not_available">Data nejsou dostupná</string>
+    <string name="clear_updates_proposition_message">Můžete smazat stažené aktualizace a vrátit se k výchozí edici map</string>
+    <string name="add_time_span">Přidat časový interval</string>
+    <string name="number_of_contributors">Počet přispěvatelů</string>
+    <string name="number_of_edits">Počet úprav</string>
+    <string name="reports_for">Report za</string>
+</resources>
