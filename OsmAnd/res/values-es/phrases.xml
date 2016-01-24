@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="poi_shop">Compras</string>
+<resources><string name="poi_shop">Tienda</string>
 		<string name="poi_shop_food">Tienda de alimentación</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
@@ -44,7 +44,7 @@
 
 	<string name="poi_bakery">Panadería</string>
 	<string name="poi_alcohol">Licorería</string>
-	<string name="poi_convenience">Tienda</string>
+	<string name="poi_convenience">Supermercado de barrio</string>
 	<string name="poi_mall">Centro comercial</string>
 	<string name="poi_beverages">Tienda de bebidas</string>
 	<string name="poi_butcher">Carnicería</string>
@@ -301,7 +301,7 @@
 	<string name="poi_travel_agent">Agente de viajes</string>
 	<string name="poi_viewpoint">Mirador</string>
 	<string name="poi_camp_site">Campamento</string>
-	<string name="poi_picnic_site">Merendero</string>
+	<string name="poi_picnic_site">Picnic/Merendero</string>
 	<string name="poi_cemetery">Cementerio</string>
 	<string name="poi_tomb">Tumba</string>
 	<string name="poi_shelter">Refugio</string>
@@ -401,7 +401,7 @@
 	<string name="poi_hifi">Equipos de audio</string>
 	<string name="poi_hunting">Equipo de caza</string>
 	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
-	<string name="poi_tobacco">Tabaquería</string>
+	<string name="poi_tobacco">Tabaquería/Estanco</string>
 	<string name="poi_vacuum_cleaner">Aspiradoras</string>
 	<string name="poi_sewing">Tienda de telas</string>
 
@@ -623,7 +623,7 @@
 	<string name="poi_craft_tailor">Sastre</string>
 	<string name="poi_craft_tinsmith">Hojalatero</string>
 	<string name="poi_craft_upholsterer">Tapicero</string>
-	<string name="poi_craft_watchmaker">Relojero (watchmaker)</string>
+	<string name="poi_craft_watchmaker">Relojero</string>
 	<string name="poi_beauty_salon_nails">Salón de manicura</string>
 	<string name="poi_dry_cleaning">Tintorería</string>
 	<string name="poi_car_sharing">Coche compartido</string>
@@ -715,7 +715,7 @@
 	<string name="poi_resort">Complejo turístico</string>
 
 	<string name="poi_biergarten">Terraza</string>
-	<string name="poi_craft_carpet_layer">Instalador de alfombras</string>
+	<string name="poi_craft_carpet_layer">Instalador de alfombras/moqueta</string>
 	<string name="poi_craft_glaziery">Vidriero</string>
 	<string name="poi_craft_hvac">Climatización</string>
 	<string name="poi_craft_key_cutter">Duplicación de llaves</string>
@@ -2627,5 +2627,42 @@
 	<string name="poi_protection_object_nature">Objeto de protección: naturaleza</string>
 	<string name="poi_protection_object_habitat">Objeto de protección: hábitat</string>
 	<string name="poi_protection_object_water">Objeto de protección: agua</string>
+
+<string name="poi_nuclear_explosion_country">Explosión: país</string>
+	<string name="poi_nuclear_explosion_site">"Explosión:  lugar"</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo de explosión: subterránea, eje</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo de explosión: subterránea, túnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Tipo de explosión: atmosférica</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">"Tipo de explosión:  atmosférica, superficie, torre"</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo de explosión: atmosférica, globo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipo de explosión: atmosferica, superficie</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo de explosión: atmosférica, superficie del agua, barcaza</string>
+	<string name="poi_nuclear_explosion_type_underground">"Tipo de explosión:  subterránea"</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">"Tipo de explosión: explosión  formando cráter (subsuperficial somera)"</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipo de explosión: atmosférica, cohete o misil</string>
+	<string name="poi_nuclear_explosion_type_space">Tipo de explosión: espacial (más de 80 km de altitud)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Tipo de explosión: submarina</string>
+	<string name="poi_nuclear_explosion_date_utc">Fecha de la explosión (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Nombre del disparo (en)</string>
+	<string name="poi_nuclear_explosion_series">Serie de explosiones</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Propósito de la explosión: relacionado con armas nucleares</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Propósito de la explosión: efectos de las armas</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Propósito de la explosión: experimento de seguridad</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Propósito de la explosión: investigación para aplicaciones pacíficas</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Propósito de la explosión: ciencia fundamental</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Propósito de la explosión: aplicación industrial, excavación de cavidad</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Propósito de la explosión: aplicación industrial, sondeo sísmico</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Propósito de la explosión: aplicación industrial, estimulación de petróleo</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Propósito de la explosión: aplicación industrial</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Propósito de la explosión: aplicación industrial, movimiento de tierras</string>
+	<string name="poi_nuclear_explosion_time_utc">Hora de la explosión (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Rendimiento de la explosión</string>
+	<string name="poi_nuclear_explosion_hole">Agujero de la explosión</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Altura del estallido</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitud de la zona cero</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitud de las ondas de propagación</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Explosión: diámetro del cráter</string>
+	<string name="poi_nuclear_explosion_warhead">Explosión: ojiva</string>
+	<string name="poi_nuclear_explosion_device">Explosión: dispositivo</string>
 
 </resources>
