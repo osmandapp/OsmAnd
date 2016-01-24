@@ -20,6 +20,10 @@
         android:paddingRight="8dp"
         android:paddingTop="16dp">
 
+        <LinearLayout 
+            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,32 +32,46 @@
         <net.osmand.plus.widgets.TextViewEx
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Subscription"
+            android:text="@string/osm_live_subscription"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size"
             android:textStyle="bold"
             app:typeface="@string/font_roboto_regular"/>
-
+	</LinearLayout>
         <net.osmand.plus.widgets.TextViewEx
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Every OSM contributer can be registered as a recipient. He just need to provide a valid Bitcoin address in the form below.\nEvery OsmAnd user who wants to get live updates needs to subscribe to that service. After Google and Bank deductions the whole sum is split into 2 parts (30% OsmAnd and 70%"
+            android:text="@string/osm_live_header"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_desc_text_size"
             app:typeface="@string/font_roboto_regular"/>
 
-        <Button
-            android:id="@+id/subscription_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+	        android:layout_height="wrap_content" 
             android:layout_gravity="bottom|right"
-            android:layout_marginTop="32dp"
-            android:textColor="@color/color_white"
-            android:background="@drawable/btn_round_transparent"
-            android:text="Subscribe"/>
-
+            android:gravity="right"
+            android:layout_marginTop="16dp">
+	        <Button
+	            android:id="@+id/read_more_button"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/color_white"
+	            android:background="@drawable/btn_round_transparent"
+	            android:text="@string/shared_string_read_more"/>
+	        
+	        <Button
+	            android:id="@+id/subscription_button"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+				android:layout_marginLeft="32dp"
+	            android:textColor="@color/color_white"
+	            android:background="@drawable/btn_round_transparent"
+	            android:text="@string/osm_live_subscribe_btn"/>
+		</LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -75,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:text="Subscription"
+                android:text="@string/osm_live_subscription"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_desc_text_size"
                 app:typeface="@string/font_roboto_regular"/>
@@ -87,7 +105,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="4dp"
-                android:text="25 days left"
+                android:text="Active"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_desc_text_size"
                 app:textAllCapsCompat="true"
@@ -123,7 +141,79 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="4dp"
-                android:text="Ukraine"
+                android:text="World"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_desc_text_size"
+                app:typeface="@string/font_roboto_medium"/>
+
+        </LinearLayout>
+        
+         <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="44dp">
+
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="Email"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_desc_text_size"
+                app:typeface="@string/font_roboto_regular"/>
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="4dp"
+                android:text="my@email.com"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_desc_text_size"
+                app:typeface="@string/font_roboto_medium"/>
+
+        </LinearLayout>
+        
+         <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="44dp">
+
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="Visible Name"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_desc_text_size"
+                app:typeface="@string/font_roboto_regular"/>
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="4dp"
+                android:text="None"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_desc_text_size"
                 app:typeface="@string/font_roboto_medium"/>
@@ -134,6 +224,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?attr/dashboard_divider"/>
+        
+        
 
         <LinearLayout
             android:layout_width="match_parent"
