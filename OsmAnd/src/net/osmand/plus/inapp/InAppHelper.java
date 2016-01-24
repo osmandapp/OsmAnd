@@ -13,6 +13,7 @@ import net.osmand.plus.inapp.util.IabHelper;
 import net.osmand.plus.inapp.util.IabResult;
 import net.osmand.plus.inapp.util.Inventory;
 import net.osmand.plus.inapp.util.Purchase;
+import net.osmand.plus.inapp.util.SkuDetails;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -31,6 +32,7 @@ public class InAppHelper {
 	static final String TAG = "InAppHelper";
 
 	private static boolean mSubscribedToLiveUpdates = false;
+	private static String mLiveUpdatesPrice;
 
 	public static final String SKU_LIVE_UPDATES = "osm_live_subscription_1";
 
@@ -61,6 +63,10 @@ public class InAppHelper {
 
 	public static boolean isSubscribedToLiveUpdates() {
 		return mSubscribedToLiveUpdates;
+	}
+
+	public static String getLiveUpdatesPrice() {
+		return mLiveUpdatesPrice;
 	}
 
 	public InAppHelper(OsmandApplication ctx, InAppCallbacks callbacks) {
@@ -158,6 +164,11 @@ public class InAppHelper {
 					verifyDeveloperPayload(liveUpdatesPurchase));
 			Log.d(TAG, "User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
+
+			if (inventory.hasDetails(SKU_LIVE_UPDATES)) {
+				SkuDetails liveUpdatesDetails = inventory.getSkuDetails(SKU_LIVE_UPDATES);
+				mLiveUpdatesPrice = liveUpdatesDetails.getPrice();
+			}
 
 			if (callbacks != null) {
 				callbacks.showHideProgress(false);

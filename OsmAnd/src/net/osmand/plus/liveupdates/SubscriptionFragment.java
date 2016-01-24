@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.WorldRegion;
@@ -104,6 +105,8 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			}
 		});
 
+		updatePrice();
+
 		Button subscribeButton = (Button) view.findViewById(R.id.subscribeButton);
 		subscribeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -166,7 +169,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 	@Override
 	public void onGetItems() {
-
+		updatePrice();
 	}
 
 	@Override
@@ -198,6 +201,16 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			EditText selectCountryEdit = (EditText) view.findViewById(R.id.selectCountryEdit);
 			if (selectCountryEdit != null) {
 				selectCountryEdit.setText(name);
+			}
+		}
+	}
+
+	private void updatePrice() {
+		View view = getView();
+		if (view != null) {
+			TextView priceTextView = (TextView) view.findViewById(R.id.priceTextView);
+			if (InAppHelper.getLiveUpdatesPrice() != null) {
+				priceTextView.setText(InAppHelper.getLiveUpdatesPrice());
 			}
 		}
 	}
