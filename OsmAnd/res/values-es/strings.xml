@@ -2042,14 +2042,14 @@
 <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
     <string name="item_removed">Elemento quitado</string>
-    <string name="n_items_removed">elementos eliminados</string>
+    <string name="n_items_removed">elementos quitados</string>
     <string name="shared_string_undo_all">DESHACER TODO</string>
     <string name="shared_string_remove">Quitar</string>
     <string name="clear_updates_proposition_message">Puede quitar las actualizaciones descargadas y volver a la edición original del mapa</string>
     <string name="add_time_span">Añadir intervalo de tiempo</string>
     <string name="road_blocked">Carretera bloqueada</string>
     <string name="shared_string_select">Seleccionar</string>
-    <string name="switch_start_finish">Invertir inicio y destino</string>
+    <string name="switch_start_finish">Invertir punto de partida y destino</string>
     <string name="rendering_attr_hideIcons_name">Ocultar iconos de PDI</string>
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de ediciones</string>
