@@ -1912,5 +1912,5 @@
     <string name="road_blocked">Дорога перекрыта</string>
     <string name="nm">нм</string>
     <string name="nm_h">нм/ч</string>
-    <string name="downloads_left_template">Осталось %1$ загрузок</string>
+    <string name="downloads_left_template">Осталось %1$s загрузок</string>
     </resources>
