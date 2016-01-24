@@ -2089,9 +2089,11 @@
     <string name="rendering_attr_hideIcons_name">Skrij ikone točk POI</string>
     <string name="number_of_contributors">Število sodelujočih</string>
     <string name="number_of_edits">Število urejanj</string>
-    <string name="reports_for">Poročilo za:</string>
+    <string name="reports_for">Poročilo za</string>
 <string name="shared_string_remove">Odstrani</string>
     <string name="clear_updates_proposition_message">Posodobitve zemljevidov je mogoče izbrisati in povrniti stanje na izvorni zemljevid.</string>
     <string name="add_time_span">Dodaj časovni razmik</string>
     <string name="road_blocked">Cesta je zaprta</string>
+    <string name="rendering_attr_hideUnderground_name">Skrij podzemne zgradbe</string>
+    <string name="data_is_not_available">Podatki niso na voljo.</string>
     </resources>
