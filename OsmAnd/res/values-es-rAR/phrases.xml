@@ -2631,9 +2631,9 @@
 	<string name="poi_protection_object_habitat">Protección de objeto: Hábitat</string>
 	<string name="poi_protection_object_water">Protección de objeto: Agua</string>
 
-<string name="poi_nuclear_explosion_country">Explosión: País</string>
-	<string name="poi_nuclear_explosion_site">Explosión: Sitio</string>
-	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo de explosión: subterráneo, pozo</string>
+<string name="poi_nuclear_explosion_country">País autor de la explosión</string>
+	<string name="poi_nuclear_explosion_site">Lugar de la explosión</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo de explosión: subterráneo, excavación</string>
 	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo de explosión: subterráneo, túnel</string>
 	<string name="poi_nuclear_explosion_type_atmospheric">Tipo de explosión: Atmosférica</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo de explosión: Atmosférica, con paracaídas</string>
