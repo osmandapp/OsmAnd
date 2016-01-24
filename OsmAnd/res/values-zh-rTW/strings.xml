@@ -2083,4 +2083,5 @@
     <string name="road_blocked">道路堵塞</string>
     <string name="data_is_not_available">無法獲得資料</string>
     <string name="rendering_attr_hideUnderground_name">隱藏地面下的物件</string>
+    <string name="shared_string_read_more">讀取更多</string>
     </resources>
