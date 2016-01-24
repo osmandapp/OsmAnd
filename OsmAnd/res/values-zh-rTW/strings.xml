@@ -296,7 +296,7 @@
     <string name="live_monitoring_url">線上即時追蹤網路地址</string>
     <string name="gpx_monitoring_disabled_warn">記錄軌跡使用 GPX 小工具或透過 \'錄製旅程\'的設定。</string>
     <string name="show_current_gpx_title">顯示目前軌跡</string>
-    <string name="free_version_message">此 OsmAnd 免費版，有下載 %1$s 次限制，且不支援離線維基百科的文章資料。</string>
+    <string name="free_version_message">此 OsmAnd 免費版有下載限制，還剩 %1$s 次，且不支援離線維基百科的文章資料。</string>
     <string name="free_version_title">免費版</string>
     <string name="poi_context_menu_showdescription">顯示興趣點記述</string>
     <string name="index_name_north_america">北美洲</string>
@@ -553,7 +553,7 @@
     <string name="daynight">日/夜間模式</string>
     <string name="download_files_question">下載{0}個檔({1} MB)？</string>
     <string name="items_were_selected">已選{0}項</string>
-    <string name="filter_existing_indexes">已下載的</string>
+    <string name="filter_existing_indexes">已下載</string>
 
 
     <string name="fast_route_mode">最快路線</string>
@@ -2082,4 +2082,5 @@
     <string name="add_time_span">增加時間跨度</string>
     <string name="road_blocked">道路堵塞</string>
     <string name="data_is_not_available">無法獲得資料</string>
+    <string name="rendering_attr_hideUnderground_name">隱藏地面下的物件</string>
     </resources>
