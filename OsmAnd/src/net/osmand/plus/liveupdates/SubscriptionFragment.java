@@ -137,6 +137,8 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		setThemedDrawable((ImageView) view.findViewById(R.id.userNameIcon), R.drawable.ic_person);
 		setThemedDrawable((ImageView) view.findViewById(R.id.emailIcon), R.drawable.ic_action_message);
 		setThemedDrawable((ImageView) view.findViewById(R.id.countryIcon), R.drawable.ic_world_globe_dark);
+		selectCountryEdit.setCompoundDrawablesWithIntrinsicBounds(
+				null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 
 		dlg = new ProgressDialog(getActivity());
 		dlg.setTitle("");

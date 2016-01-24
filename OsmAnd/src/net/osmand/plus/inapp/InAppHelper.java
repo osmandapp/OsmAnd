@@ -194,14 +194,12 @@ public class InAppHelper {
 
 			@Override
 			protected String doInBackground(Void... params) {
-				//download.osmand.net/subscription?email=AAA&visibleName=BBB&preferredCountry&status=new
-				//{ “userId”:”rewerw”, “email”, ...
 				userId = ctx.getSettings().BILLING_USER_ID.get();
 				if (Algorithms.isEmpty(userId)) {
 					return sendRequest("http://download.osmand.net/subscription/register?email=" + email
 									+ "&visibleName=" + userName + "&preferredCountry=" + country
 									+ (Algorithms.isEmpty(userId) ? "&status=new" : ""),
-							"GET", "Requesting userId...");
+							"POST", "Requesting userId...");
 				} else {
 					return null;
 				}
