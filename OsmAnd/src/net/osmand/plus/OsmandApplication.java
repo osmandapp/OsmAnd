@@ -41,6 +41,7 @@ import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -132,6 +133,13 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
+
+		//Check inapps
+		if (osmandSettings.isInternetConnectionAvailable()) {
+			InAppHelper inAppHelper = new InAppHelper(this, null);
+			inAppHelper.start(true);
+		}
+
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();

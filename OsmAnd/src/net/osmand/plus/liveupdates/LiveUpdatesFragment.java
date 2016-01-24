@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
@@ -29,6 +30,7 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
@@ -60,6 +62,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 			return lhs.getName().compareTo(rhs.getName());
 		}
 	};
+	private View subscriptionHeader;
 	private ExpandableListView listView;
 	private LocalIndexesAdapter adapter;
 	private AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>> loadLocalIndexesTask;
@@ -90,8 +93,41 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 				return true;
 			}
 		});
+
+		subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
+		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
+		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
+		Button subscriptionButton = (Button) subscriptionHeader.findViewById(R.id.subscription_button);
+		subscriptionButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+				subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+			}
+		});
+		if (InAppHelper.isSubscribedToLiveUpdates()) {
+			subscriptionBanner.setVisibility(View.GONE);
+			subscriptionInfo.setVisibility(View.VISIBLE);
+		} else {
+			subscriptionBanner.setVisibility(View.VISIBLE);
+			subscriptionInfo.setVisibility(View.GONE);
+		}
+		listView.addHeaderView(subscriptionHeader);
+
 		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
 		return view;
+	}
+
+	public void updateSubscriptionBanner() {
+		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
+		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
+		if (InAppHelper.isSubscribedToLiveUpdates()) {
+			subscriptionBanner.setVisibility(View.GONE);
+			subscriptionInfo.setVisibility(View.VISIBLE);
+		} else {
+			subscriptionBanner.setVisibility(View.VISIBLE);
+			subscriptionInfo.setVisibility(View.GONE);
+		}
 	}
 
 	@Override
