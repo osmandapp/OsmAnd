@@ -1,5 +1,6 @@
 package net.osmand.plus.liveupdates;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.inapp.InAppHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -19,6 +21,11 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 		implements DownloadIndexesThread.DownloadEvents{
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
+	private InAppHelper inAppHelper;
+
+	public void setInAppHelper(InAppHelper inAppHelper) {
+		this.inAppHelper = inAppHelper;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,17 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// Pass on the activity result to the helper for handling
+		if (inAppHelper == null || !inAppHelper.onActivityResultHandled(requestCode, resultCode, data)) {
+			// not handled, so handle it ourselves (here's where you'd
+			// perform any handling of activity results not related to in-app
+			// billing...
+			super.onActivityResult(requestCode, resultCode, data);
+		}
 	}
 
 	@Override
