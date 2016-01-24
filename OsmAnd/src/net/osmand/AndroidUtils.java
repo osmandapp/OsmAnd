@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -141,4 +142,7 @@ public class AndroidUtils {
 		return dm.heightPixels;
 	}
 
+	public static boolean isValidEmail(CharSequence target) {
+		return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+	}
 }

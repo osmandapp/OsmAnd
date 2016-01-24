@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/spinnerListBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -32,6 +33,127 @@
     </LinearLayout>
 
     <include layout="@layout/shadow_bottom"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/userNameIcon"
+                android:layout_width="56dp"
+                android:layout_height="48dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_person"/>
+
+            <EditText
+                android:id="@+id/userNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:hint="Visible name"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/emailIcon"
+                android:layout_width="56dp"
+                android:layout_height="48dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_action_message"/>
+
+            <EditText
+                android:id="@+id/emailEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:hint="E-mail address"
+                android:inputType="textEmailAddress"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:text="We need your email address to send you reports, information about money spending"
+            android:textColor="?android:attr/textColorSecondary"/>
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:text="Don't show my address in reports"
+            android:textColor="?android:attr/textColorPrimary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/countryIcon"
+                android:layout_width="56dp"
+                android:layout_height="48dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_world_globe_dark"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Prefered country"
+                    android:textColor="?android:attr/textColorSecondary"/>
+
+                <net.osmand.plus.widgets.AutoCompleteTextViewEx
+                    android:id="@+id/selectCountryEdit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Select country"
+                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                    android:editable="false"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -82,25 +204,25 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
             android:background="?attr/divider_color"/>
 
         <Button
             android:id="@+id/subscribeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="6dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="right"
-            android:textColor="?attr/color_dialog_buttons"
             android:background="?attr/selectableItemBackground"
-            android:text="Subscribe"/>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Subscribe"
+            android:textColor="?attr/color_dialog_buttons"/>
 
     </LinearLayout>
 
