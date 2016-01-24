@@ -2626,4 +2626,44 @@
 	<string name="poi_protection_object_habitat">Objeto de proteção: habitat</string>
 	<string name="poi_protection_object_water">Objeto de proteção: água</string>
 
+<string name="poi_nuclear_explosion_country">Explosão: país</string>
+	<string name="poi_nuclear_explosion_site">Explosão: local</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo de explosão: subterrânea, escavação</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo de explosão: subterrânea, túnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Tipo de explosão: atmosférica</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo de explosão: atmosférica, lançamento aéreo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipo de explosão: atmosférica, superfície, torre</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo de explosão: atmosférica, balão</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipo de explosão: atmosférica, superfície</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo de explosão: atmosférica, superfície d\'água, barca</string>
+	<string name="poi_nuclear_explosion_type_underground">Tipo de explosão: subterrânea</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Tipo de explosão: erupção de cratera (subsolo raso)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipo de explosão: atmosférica, foguete ou míssil</string>
+	<string name="poi_nuclear_explosion_type_space">Tipo de explosão: espacial (mais de 80 km de altitude)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Tipo de explosão: subaquática</string>
+	<string name="poi_nuclear_explosion_date_utc">Data da explosão (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Nome do disparo (en)</string>
+	<string name="poi_nuclear_explosion_series">Série de explosões</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Propósito da explosão: relacionado com armas nucleares</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Propósito da explosão: efeito das armas</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Propósito da explosão: experimento de segurança</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Propósito da explosão: investigação para aplicações pacíficas</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Propósito da explosão: ciência básica</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Propósito da explosão: aplicação industrial, escavação de cavidade</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Propósito da explosão: aplicação industrial, sondagem sísmica</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Propósito da explosão: aplicação industrial, estimulação de petróleo</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Propósito da explosão: aplicação industrial</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Propósito da explosão: aplicação industrial, movimentação de terra</string>
+	<string name="poi_nuclear_explosion_time_utc">Hora da explosão (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Produto da explosão</string>
+	<string name="poi_nuclear_explosion_hole">Buraco da explosão</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Altura da erupção</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitude do marco zero</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitude da conda do corpo</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Salva de explosão: primeira detonação de um teste de salva</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Salva de explosão: segunda ou posterior detonação de um teste de salva</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Explosão: diâmetro de cratera</string>
+	<string name="poi_nuclear_explosion_warhead">Explosão: ogiva</string>
+	<string name="poi_nuclear_explosion_device">Explosão: dispositivo</string>
+
 </resources>
