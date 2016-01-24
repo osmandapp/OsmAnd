@@ -59,11 +59,21 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:hint="Visible name"
+                android:hint="Public Name"
                 android:inputType="text"/>
 
+            
         </LinearLayout>
-
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Don't show my name in reports"
+            android:textColor="?android:attr/textColorPrimary"/>
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,15 +108,6 @@
             android:text="We need your email address to send you reports, information about money spending"
             android:textColor="?android:attr/textColorSecondary"/>
 
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="72dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="12dp"
-            android:text="Don't show my address in reports"
-            android:textColor="?android:attr/textColorPrimary"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,15 +129,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="Prefered country"
-                    android:textColor="?android:attr/textColorSecondary"/>
 
                 <net.osmand.plus.widgets.AutoCompleteTextViewEx
                     android:id="@+id/selectCountryEdit"
@@ -145,7 +137,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="4dp"
-                    android:hint="Select country"
+                    android:hint="Support region"
                     android:drawableRight="@drawable/ic_action_arrow_drop_down"
                     android:editable="false"/>
 
@@ -183,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="€9,99"
+                android:text="@string/osm_live_default_price"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_list_text_size_large"
                 android:textStyle="bold"

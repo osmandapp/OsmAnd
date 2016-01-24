@@ -29,6 +29,8 @@
     <!-- DEVELOPMENT -->
     <string name="osm_live_subscription">OSM Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
+    <string name="osm_live_default_price">€1,49</string>
+    
     <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
         Major part of the income goes back to OSM community and is paid out per each OSM contribution. 
         In case you love OsmAnd and OSM and want to support it, this is a perfect way to do it.</string>
