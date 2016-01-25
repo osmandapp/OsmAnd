@@ -25,7 +25,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URLEncoder;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InAppHelper {
 	// Debug tag, for logging
@@ -125,7 +128,9 @@ public class InAppHelper {
 
 				// IAB is fully set up. Now, let's get an inventory of stuff we own.
 				Log.d(TAG, "Setup successful. Querying inventory.");
-				mHelper.queryInventoryAsync(mGotInventoryListener);
+				List<String> skus = new ArrayList<>();
+				skus.add(SKU_LIVE_UPDATES);
+				mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
 			}
 		});
 	}
@@ -207,10 +212,15 @@ public class InAppHelper {
 			protected String doInBackground(Void... params) {
 				userId = ctx.getSettings().BILLING_USER_ID.get();
 				if (Algorithms.isEmpty(userId)) {
-					return sendRequest("http://download.osmand.net/subscription/register?email=" + email
-									+ "&visibleName=" + userName + "&preferredCountry=" + country
-									+ (Algorithms.isEmpty(userId) ? "&status=new" : ""),
-							"POST", "Requesting userId...");
+					try {
+						return sendRequest("http://download.osmand.net/subscription/register?email=" + URLEncoder.encode(email, "UTF-8")
+										+ "&visibleName=" + URLEncoder.encode(userName, "UTF-8") + "&preferredCountry=" + URLEncoder.encode(country, "UTF-8")
+										+ (Algorithms.isEmpty(userId) ? "&status=new" : ""),
+								"POST", "Requesting userId...");
+					} catch (Exception e) {
+						Log.e(TAG, e.getMessage());
+						return null;
+					}
 				} else {
 					return null;
 				}
@@ -349,7 +359,17 @@ public class InAppHelper {
 			Log.d(TAG, "Purchase successful.");
 
 			if (purchase.getSku().equals(SKU_LIVE_UPDATES)) {
-				// bought the infinite gas subscription
+				// bought live updates
+				String userId = ctx.getSettings().BILLING_USER_ID.get();
+				try {
+					sendRequest("http://download.osmand.net/subscription/purchased?userid=" + URLEncoder.encode(userId, "UTF-8")
+									+ "&sku=" + URLEncoder.encode(SKU_LIVE_UPDATES, "UTF-8")
+									+ "&purchaseToken=" + URLEncoder.encode(purchase.getToken(), "UTF-8"),
+							"POST", "Sending purchase info...");
+				} catch (Exception e) {
+					Log.e(TAG, e.getMessage());
+				}
+
 				Log.d(TAG, "Live updates subscription purchased.");
 				showToast("Thank you for subscribing to live updates!");
 				mSubscribedToLiveUpdates = true;
