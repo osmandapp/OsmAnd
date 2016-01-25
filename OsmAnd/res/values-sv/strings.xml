@@ -2077,4 +2077,5 @@
     <string name="data_is_not_available">Inga data tillgängliga</string>
     <string name="rendering_attr_hideUnderground_name">Dölj underjordiska objekt</string>
     <string name="shared_string_read_more">Läs mer</string>
+    <string name="rec_split_storage_size">Lagringsutrymme</string>
     </resources>
