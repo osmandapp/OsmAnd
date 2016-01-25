@@ -2238,31 +2238,30 @@
     <string name="data_is_not_available">Data er ikke tilgængelig</string>
     <string name="rendering_attr_hideUnderground_name">Skjul underjordiske objekter</string>
     <string name="shared_string_read_more">Læs mere</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - lav ruter og find steder på kortet uden en internetforbindelse. Hent et kort for et land, før du går på en tur til at finde steder og ruter i et ukendt område.
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - lav ruter og find steder på kortet uden en internetforbindelse. Hent et kort for et land, før du går på en rejse til at finde steder og ruter i et ukendt område.
 \n\nGrundlæggende indstillinger:
 \n• Detaljerede kort over 200 lande
-\n• Offline navigator med stemme beder
-\n• Adressesøgning i offline mode
+\n• Offline navigator med stemmevejledning\n• Adressesøgning i offline mode
 \n• Info om steder på kortet: steder af interesse, caféer, parkeringspladser, butikker
 \n• Tlføj steder til foretrukne
-\n• kørsel-, cykling- og fodgængernavigation
+\n• Kørsel-, cykling- og fodgængernavigation
 \n\nYderligere indstillinger:
-\n• evne til at se og optage GPX sporer
-\n• Wikipedia beskrivelse af IP\n• Tilføj foto-, audio-, og videonoter til kort
-\n• Dag og nat kort tilstande for mere praktisk kørsel
-\n• Oplysninger om offentlige transportruter og stoppesteder\n• Cykel- og gangstier
-\n• Walking stier for turisme over hele verden
+\n• Mulighed for at vise og optage GPX spor\n• Wikipedia beskrivelse af IP\n• Tilføj foto-, audio-, og videonoter til kort
+\n• Dag- og natkort tilstand for mere praktisk kørsel
+\n• Oplysninger om offentlig transport og stoppesteder\n• Cykel- og gangstier
+\n• Vandreruter for turisme over hele verden
 \n• Online kort fra adskillige kilder
-\n• Info om vej fortovet kvalitet og gadebelysning
+\n• Info om vej- og fortovskvalitet og gadebelysning
 \n• Tilføj, rediger og sletning af IP (for OpenStreetMap.org brugere)
 \n• OsMo - live overvågning af andre enheder
-\n\nFå en pålidelig navigator i dit land - enten det er Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller nogen anden stat.
+\n\nFå pålidelig navigation i dit land - enten det er Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller et andet land.
 \n\nUdvidelser:
 \n• kontur kort og terræn skygge https://goo.gl/7mojP8 højdekurver data og terræn visualisering tilføjet til grundlæggende OsmAnd kortet.
-\n• Skikort info om ski pister, langrend spor, kabel jernbaner og skilifterne-https://goo.gl/pX6DxJ.
-\n• Søkort https://goo.gl/0hEdxm særlige kortstil til visning af nautiske navigation tegn for arteriel og offshore marine navigation.
-\n• Parkering position, https://goo.gl/6JxQXF hjælper dig med at markere placeringen af din parkerede bil og se hvor meget tid tilbage, hvis parkering er tidsbegrænset.
-\n\nStay tuned!
-\nTwitter:, https://twitter.com/osmandapp
-\nFacebook: https://www.facebook.com/osmandapp\nHjemmeside: http://osmand.net hvis du har brug for hjælp med OsmAnd, bedes du kontakte vores supportteam: support@osmand.net. "</string>
+\n• Skikort info om skipister, langrendsløjper, tovbaner og skilifterne-https://goo.gl/pX6DxJ.
+\n• Søkort https://goo.gl/0hEdxm særlig kortstil til visning af nautiske navigation tegn for arteriel og offshore marine navigation.
+\n• Parkeringposition https://goo.gl/6JxQXF hjælper dig med at markere placeringen af din parkerede bil og se hvor meget tid tilbage, hvis parkering er tidsbegrænset.
+\n\nFølg med på!
+\nTwitter: https://twitter.com/osmandapp
+\nFacebook: https://www.facebook.com/osmandapp\nHjemmeside: http://osmand.net
+\n\nEr der brug for hjælp med OsmAnd, kontakt da supportteamet: support@osmand.net. "</string>
     </resources>
