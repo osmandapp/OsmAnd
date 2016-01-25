@@ -143,10 +143,6 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		selectCountryEdit.setCompoundDrawablesWithIntrinsicBounds(
 				null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 
-		dlg = new ProgressDialog(getActivity());
-		dlg.setTitle("");
-		dlg.setMessage(getString(R.string.wait_current_task_finished));
-
 		return view;
 	}
 
@@ -186,11 +182,21 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	@Override
-	public void showHideProgress(boolean show) {
-		if (show) {
-			dlg.show();
-		} else {
-			dlg.hide();
+	public void showProgress() {
+		if (dlg != null) {
+			dlg.dismiss();
+		}
+		dlg = new ProgressDialog(getActivity());
+		dlg.setTitle("");
+		dlg.setMessage(getString(R.string.wait_current_task_finished));
+		dlg.show();
+	}
+
+	@Override
+	public void dismissProgress() {
+		if (dlg != null) {
+			dlg.dismiss();
+			dlg = null;
 		}
 	}
 

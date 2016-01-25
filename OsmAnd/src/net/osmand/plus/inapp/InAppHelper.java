@@ -61,7 +61,8 @@ public class InAppHelper {
 		void onGetItems();
 		void onItemPurchased(String sku);
 
-		void showHideProgress(boolean show);
+		void showProgress();
+		void dismissProgress();
 	}
 
 	public static boolean isSubscribedToLiveUpdates() {
@@ -175,8 +176,12 @@ public class InAppHelper {
 				mLiveUpdatesPrice = liveUpdatesDetails.getPrice();
 			}
 
+			if (liveUpdatesPurchase != null && !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()) {
+				sendToken(liveUpdatesPurchase.getToken());
+			}
+
 			if (callbacks != null) {
-				callbacks.showHideProgress(false);
+				callbacks.dismissProgress();
 				callbacks.onGetItems();
 			}
 			if (stopAfterResult) {
@@ -201,7 +206,7 @@ public class InAppHelper {
 		}
 
 		if (callbacks != null) {
-			callbacks.showHideProgress(true);
+			callbacks.showProgress();
 		}
 
 		new AsyncTask<Void, Void, String>() {
@@ -214,11 +219,11 @@ public class InAppHelper {
 				if (Algorithms.isEmpty(userId)) {
 					try {
 						return sendRequest("http://download.osmand.net/subscription/register?email=" + URLEncoder.encode(email, "UTF-8")
-										+ "&visibleName=" + URLEncoder.encode(userName, "UTF-8") + "&preferredCountry=" + URLEncoder.encode(country, "UTF-8")
+										+ "&visibleName=" + URLEncoder.encode(userName, "UTF-8")
+										+ "&preferredCountry=" + URLEncoder.encode(country, "UTF-8")
 										+ (Algorithms.isEmpty(userId) ? "&status=new" : ""),
 								"POST", "Requesting userId...");
 					} catch (Exception e) {
-						Log.e(TAG, e.getMessage());
 						return null;
 					}
 				} else {
@@ -232,7 +237,7 @@ public class InAppHelper {
 					Log.d(TAG, "Response=" + response);
 					if (response == null) {
 						if (callbacks != null) {
-							callbacks.showHideProgress(false);
+							callbacks.dismissProgress();
 							callbacks.onError("Cannot retrieve userId from server.");
 						}
 						if (stopAfterResult) {
@@ -248,8 +253,9 @@ public class InAppHelper {
 							Log.d(TAG, "UserId=" + userId);
 						} catch (JSONException e) {
 							if (callbacks != null) {
-								callbacks.showHideProgress(false);
-								callbacks.onError("JSON parsing error: " + e.getMessage());
+								callbacks.dismissProgress();
+								callbacks.onError("JSON parsing error: "
+										+ (e.getMessage() == null ? "unknown" : e.getMessage()));
 							}
 							if (stopAfterResult) {
 								stop();
@@ -258,15 +264,19 @@ public class InAppHelper {
 					}
 				}
 
+				if (callbacks != null) {
+					callbacks.dismissProgress();
+				}
 				if (!Algorithms.isEmpty(userId)) {
 					Log.d(TAG, "Launching purchase flow for live updates subscription for userId=" + userId);
 					String payload = userId;
-					mHelper.launchPurchaseFlow(activity,
-							SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
-							RC_REQUEST, mPurchaseFinishedListener, payload);
+					if (mHelper != null) {
+						mHelper.launchPurchaseFlow(activity,
+								SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
+								RC_REQUEST, mPurchaseFinishedListener, payload);
+					}
 				} else {
 					if (callbacks != null) {
-						callbacks.showHideProgress(false);
 						callbacks.onError("Empty userId");
 					}
 					if (stopAfterResult) {
@@ -288,8 +298,7 @@ public class InAppHelper {
 			// billing...
 			//super.onActivityResult(requestCode, resultCode, data);
 			return false;
-		}
-		else {
+		} else {
 			Log.d(TAG, "onActivityResult handled by IABUtil.");
 			return true;
 		}
@@ -336,7 +345,7 @@ public class InAppHelper {
 			if (result.isFailure()) {
 				complain("Error purchasing: " + result);
 				if (callbacks != null) {
-					callbacks.showHideProgress(false);
+					callbacks.dismissProgress();
 					callbacks.onError("Error purchasing: " + result);
 				}
 				if (stopAfterResult) {
@@ -347,7 +356,7 @@ public class InAppHelper {
 			if (!verifyDeveloperPayload(purchase)) {
 				complain("Error purchasing. Authenticity verification failed.");
 				if (callbacks != null) {
-					callbacks.showHideProgress(false);
+					callbacks.dismissProgress();
 					callbacks.onError("Error purchasing. Authenticity verification failed.");
 				}
 				if (stopAfterResult) {
@@ -360,21 +369,13 @@ public class InAppHelper {
 
 			if (purchase.getSku().equals(SKU_LIVE_UPDATES)) {
 				// bought live updates
-				String userId = ctx.getSettings().BILLING_USER_ID.get();
-				try {
-					sendRequest("http://download.osmand.net/subscription/purchased?userid=" + URLEncoder.encode(userId, "UTF-8")
-									+ "&sku=" + URLEncoder.encode(SKU_LIVE_UPDATES, "UTF-8")
-									+ "&purchaseToken=" + URLEncoder.encode(purchase.getToken(), "UTF-8"),
-							"POST", "Sending purchase info...");
-				} catch (Exception e) {
-					Log.e(TAG, e.getMessage());
-				}
+				sendToken(purchase.getToken());
 
 				Log.d(TAG, "Live updates subscription purchased.");
 				showToast("Thank you for subscribing to live updates!");
 				mSubscribedToLiveUpdates = true;
 				if (callbacks != null) {
-					callbacks.showHideProgress(false);
+					callbacks.dismissProgress();
 					callbacks.onItemPurchased(SKU_LIVE_UPDATES);
 				}
 				if (stopAfterResult) {
@@ -393,12 +394,32 @@ public class InAppHelper {
 		}
 	}
 
-	void complain(String message) {
+	private void sendToken(String token) {
+		String userId = ctx.getSettings().BILLING_USER_ID.get();
+		String email = ctx.getSettings().BILLING_USER_EMAIL.get();
+		try {
+			sendRequestAsync("http://download.osmand.net/subscription/purchased?userid=" + URLEncoder.encode(userId, "UTF-8")
+							+ "&sku=" + URLEncoder.encode(SKU_LIVE_UPDATES, "UTF-8")
+							+ "&purchaseToken=" + URLEncoder.encode(token, "UTF-8")
+							+ "&email=" + URLEncoder.encode(email, "UTF-8"),
+					"POST", "Sending purchase info...", new OnRequestResultListener() {
+						@Override
+						public void onResult(String result) {
+							if (result != null && result.trim().toLowerCase().equals("ok")) {
+								ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.set(true);
+							}
+						}
+					});
+		} catch (Exception e) {
+		}
+	}
+
+	private void complain(String message) {
 		Log.e(TAG, "**** InAppHelper Error: " + message);
 		showToast("Error: " + message);
 	}
 
-	void showToast(final String message) {
+	private void showToast(final String message) {
 		ctx.showToastMessage(message);
 	}
 
@@ -438,7 +459,6 @@ public class InAppHelper {
 						in.close();
 						i.close();
 					} catch (Exception e) {
-						Log.d(TAG, e.getMessage());
 					}
 				}
 				return responseBody.toString();
@@ -460,5 +480,32 @@ public class InAppHelper {
 		}
 
 		return null;
+	}
+
+	private void sendRequestAsync(final String url, final String requestMethod, final String userOperation, final OnRequestResultListener listener) {
+
+		new AsyncTask<Void, Void, String>() {
+
+			@Override
+			protected String doInBackground(Void... params) {
+				try {
+					return sendRequest(url, requestMethod, userOperation);
+				} catch (Exception e) {
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(String response) {
+				if (listener != null) {
+					listener.onResult(response);
+				}
+			}
+
+		}.execute((Void) null);
+	}
+
+	private interface OnRequestResultListener {
+		void onResult(String result);
 	}
 }
