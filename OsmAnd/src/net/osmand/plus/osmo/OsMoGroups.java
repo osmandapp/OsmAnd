@@ -1,13 +1,6 @@
 package net.osmand.plus.osmo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.google.gson.Gson;
 
 import net.osmand.Location;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -23,6 +16,15 @@ import net.osmand.util.Algorithms;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
@@ -47,6 +49,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private ArrayList<OsMoGroupsUIListener> uiListeners = new ArrayList<>();
 	private OsMoPlugin plugin;
 	private OsmandApplication app;
+
+	private Gson gson = new Gson();
 	
 	public interface OsMoGroupsUIListener {
 		
@@ -423,17 +427,10 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	
 	public String createGroup(String groupName, boolean onlyByInvite, String description, String policy) {
-		JSONObject obj = new JSONObject();
-		try {
-			obj.put("name", groupName);
-			obj.put("onlyByInvite", onlyByInvite);
-			obj.put("description", description);
-			obj.put("policy", policy);
-			service.pushCommand("GROUP_CREATE|" + obj.toString());
-			return "GROUP_CREATE";
-		} catch (JSONException e) {
-			throw new RuntimeException(e);
-		}
+		Protocol.CreateGroupData obj = new Protocol.CreateGroupData(groupName,
+				onlyByInvite, description, policy);
+		service.pushCommand("GROUP_CREATE|" + gson.toJson(obj));
+		return "GROUP_CREATE";
 	}
 	
 	
