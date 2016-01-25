@@ -929,7 +929,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setLatLon(r.getLatitude(), r.getLongitude());
 			int baseZoom = initialViewport.getZoom();
-			LOG.debug("baseZoom=" + baseZoom);
 			while (initialViewport.getZoomFloatPart() + dz > 1) {
 				dz--;
 				if (baseZoom < mainLayer.getMaximumShownMapZoom()) {
@@ -942,7 +941,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					baseZoom--;
 				}
 			}
-			LOG.debug("baseZoom=" + baseZoom);
 			zoomToAnimate(baseZoom, dz, true);
 			rotateToAnimate(calcRotate);
 		}
