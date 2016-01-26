@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -106,6 +107,29 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 			}
 		});
 		if (InAppHelper.isSubscribedToLiveUpdates()) {
+			TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
+			TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
+			TextView emailTextView = (TextView) subscriptionHeader.findViewById(R.id.emailTextView);
+			TextView userNameTextView = (TextView) subscriptionHeader.findViewById(R.id.userNameTextView);
+
+			if (InAppHelper.isSubscribedToLiveUpdates()) {
+				statusTextView.setText(getString(R.string.osm_live_active));
+			} else {
+				statusTextView.setText(getString(R.string.osm_live_not_active));
+			}
+
+			OsmandSettings settings = getMyApplication().getSettings();
+
+			String countryName = settings.BILLING_USER_COUNTRY.get();
+			if (Algorithms.isEmpty(countryName)) {
+				WorldRegion world = getMyApplication().getRegions().getWorldRegion();
+				countryName = world.getLocaleName();
+			}
+			regionNameTextView.setText(countryName);
+
+			emailTextView.setText(settings.BILLING_USER_EMAIL.get());
+			userNameTextView.setText(settings.BILLING_USER_NAME.get());
+
 			subscriptionBanner.setVisibility(View.GONE);
 			subscriptionInfo.setVisibility(View.VISIBLE);
 		} else {
