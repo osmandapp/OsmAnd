@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="Subscription form"
+            android:text="@string/osm_live_subscription"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
@@ -63,7 +63,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:hint="E-mail address"
+                    android:hint="@string/shared_string_email_address"
                     android:inputType="textEmailAddress"/>
 
             </LinearLayout>
@@ -74,7 +74,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="72dp"
                 android:layout_marginRight="16dp"
-                android:text="We need it to provide you information about contributions"
+                android:text="@string/osm_live_email_desc"
                 android:textColor="?android:attr/textColorSecondary"/>
 
 
@@ -103,20 +103,21 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:hint="Public Name"
+                        android:hint="@string/osm_live_user_public_name"
                         android:inputType="text"/>
 
 
                 </LinearLayout>
 
                 <CheckBox
+                    android:id="@+id/hideUserNameCheckbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:layout_marginLeft="72dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Don't show my name in reports"
+                    android:text="@string/osm_live_hide_user_name"
                     android:textColor="?android:attr/textColorPrimary"/>
 
                 <LinearLayout
@@ -149,7 +150,7 @@
                             android:layout_marginTop="4dp"
                             android:drawableRight="@drawable/ic_action_arrow_drop_down"
                             android:editable="false"
-                            android:hint="Support region"/>
+                            android:hint="@string/osm_live_support_region"/>
 
                     </LinearLayout>
 
@@ -174,22 +175,21 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Month cost"
+                        android:text="@string/osm_live_month_cost"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_list_text_size_large"
-                        android:textStyle="bold"
-                        app:typeface="@string/font_roboto_regular"/>
+                        android:textStyle="bold"/>
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/priceTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
                         android:gravity="right"
                         android:text="@string/osm_live_default_price"
                         android:textColor="?attr/color_dialog_buttons"
                         android:textSize="@dimen/default_list_text_size_large"
-                        android:textStyle="bold"
-                        app:typeface="@string/font_roboto_regular"/>
+                        android:textStyle="bold"/>
 
                 </LinearLayout>
 
@@ -198,10 +198,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="Monthly payment"
+                    android:text="@string/osm_live_month_cost_desc"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    app:typeface="@string/font_roboto_regular"/>
+                    android:textSize="@dimen/default_desc_text_size"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -223,7 +222,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Subscribe"
+                    android:text="@string/osm_live_subscribe_btn"
                     android:textColor="?attr/color_dialog_buttons"/>
 
             </LinearLayout>

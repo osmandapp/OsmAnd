@@ -19,16 +19,20 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InAppHelper {
 	// Debug tag, for logging
@@ -58,10 +62,13 @@ public class InAppHelper {
 
 	public interface InAppCallbacks {
 		void onError(String error);
+
 		void onGetItems();
+
 		void onItemPurchased(String sku);
 
 		void showProgress();
+
 		void dismissProgress();
 	}
 
@@ -80,8 +87,8 @@ public class InAppHelper {
 
 	public void start(final boolean stopAfterResult) {
 		this.stopAfterResult = stopAfterResult;
-        /* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
-         * (that you got from the Google Play developer console). This is not your
+		/* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
+		 * (that you got from the Google Play developer console). This is not your
          * developer public key, it's the *app-specific* public key.
          *
          * Instead of just storing the entire literal string here embedded in the
@@ -159,15 +166,14 @@ public class InAppHelper {
 			Log.d(TAG, "Query inventory was successful.");
 
             /*
-             * Check for items we own. Notice that for each purchase, we check
+			 * Check for items we own. Notice that for each purchase, we check
              * the developer payload to see if it's correct! See
              * verifyDeveloperPayload().
              */
 
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
-			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null &&
-					verifyDeveloperPayload(liveUpdatesPurchase));
+			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null);
 			Log.d(TAG, "User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
 
@@ -193,7 +199,7 @@ public class InAppHelper {
 	};
 
 	public void purchaseLiveUpdates(final Activity activity, final String email, final String userName,
-									final String country) {
+									final String countryDownloadName) {
 		if (!mHelper.subscriptionsSupported()) {
 			complain("Subscriptions not supported on your device yet. Sorry!");
 			if (callbacks != null) {
@@ -218,12 +224,17 @@ public class InAppHelper {
 				userId = ctx.getSettings().BILLING_USER_ID.get();
 				if (Algorithms.isEmpty(userId)) {
 					try {
-						return sendRequest("http://download.osmand.net/subscription/register?email=" + URLEncoder.encode(email, "UTF-8")
-										+ "&visibleName=" + URLEncoder.encode(userName, "UTF-8")
-										+ "&preferredCountry=" + URLEncoder.encode(country, "UTF-8")
-										+ (Algorithms.isEmpty(userId) ? "&status=new" : ""),
-								"POST", "Requesting userId...");
+						Map<String, String> parameters = new HashMap<>();
+						parameters.put("visibleName", userName);
+						parameters.put("preferredCountry", countryDownloadName);
+						parameters.put("email", email);
+						parameters.put("status", "new");
+
+						return sendRequest("http://download.osmand.net/subscription/register.php",
+								parameters, "Requesting userId...");
+
 					} catch (Exception e) {
+						Log.e(TAG, "sendRequest Error", e);
 						return null;
 					}
 				} else {
@@ -236,6 +247,7 @@ public class InAppHelper {
 				if (Algorithms.isEmpty(userId)) {
 					Log.d(TAG, "Response=" + response);
 					if (response == null) {
+						complain("Cannot retrieve userId from server.");
 						if (callbacks != null) {
 							callbacks.dismissProgress();
 							callbacks.onError("Cannot retrieve userId from server.");
@@ -252,10 +264,12 @@ public class InAppHelper {
 							ctx.getSettings().BILLING_USER_ID.set(userId);
 							Log.d(TAG, "UserId=" + userId);
 						} catch (JSONException e) {
+							String message = "JSON parsing error: "
+									+ (e.getMessage() == null ? "unknown" : e.getMessage());
+							complain(message);
 							if (callbacks != null) {
 								callbacks.dismissProgress();
-								callbacks.onError("JSON parsing error: "
-										+ (e.getMessage() == null ? "unknown" : e.getMessage()));
+								callbacks.onError(message);
 							}
 							if (stopAfterResult) {
 								stop();
@@ -304,36 +318,6 @@ public class InAppHelper {
 		}
 	}
 
-	/** Verifies the developer payload of a purchase. */
-	private boolean verifyDeveloperPayload(Purchase p) {
-		String payload = p.getDeveloperPayload();
-
-        /*
-         * TODO: verify that the developer payload of the purchase is correct. It will be
-         * the same one that you sent when initiating the purchase.
-         *
-         * WARNING: Locally generating a random string when starting a purchase and
-         * verifying it here might seem like a good approach, but this will fail in the
-         * case where the user purchases an item on one device and then uses your app on
-         * a different device, because on the other device you will not have access to the
-         * random string you originally generated.
-         *
-         * So a good developer payload has these characteristics:
-         *
-         * 1. If two different users purchase an item, the payload is different between them,
-         *    so that one user's purchase can't be replayed to another user.
-         *
-         * 2. The payload must be such that you can verify it even when the app wasn't the
-         *    one who initiated the purchase flow (so that items purchased by the user on
-         *    one device work on other devices owned by the user).
-         *
-         * Using your own server to store and verify developer payloads across app
-         * installations is recommended.
-         */
-
-		return true;
-	}
-
 	// Callback for when a purchase is finished
 	private IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
 		public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
@@ -347,17 +331,6 @@ public class InAppHelper {
 				if (callbacks != null) {
 					callbacks.dismissProgress();
 					callbacks.onError("Error purchasing: " + result);
-				}
-				if (stopAfterResult) {
-					stop();
-				}
-				return;
-			}
-			if (!verifyDeveloperPayload(purchase)) {
-				complain("Error purchasing. Authenticity verification failed.");
-				if (callbacks != null) {
-					callbacks.dismissProgress();
-					callbacks.onError("Error purchasing. Authenticity verification failed.");
 				}
 				if (stopAfterResult) {
 					stop();
@@ -398,11 +371,14 @@ public class InAppHelper {
 		String userId = ctx.getSettings().BILLING_USER_ID.get();
 		String email = ctx.getSettings().BILLING_USER_EMAIL.get();
 		try {
-			sendRequestAsync("http://download.osmand.net/subscription/purchased?userid=" + URLEncoder.encode(userId, "UTF-8")
-							+ "&sku=" + URLEncoder.encode(SKU_LIVE_UPDATES, "UTF-8")
-							+ "&purchaseToken=" + URLEncoder.encode(token, "UTF-8")
-							+ "&email=" + URLEncoder.encode(email, "UTF-8"),
-					"POST", "Sending purchase info...", new OnRequestResultListener() {
+			Map<String, String> parameters = new HashMap<>();
+			parameters.put("userId", userId);
+			parameters.put("sku", SKU_LIVE_UPDATES);
+			parameters.put("purchaseToken", token);
+			parameters.put("email", email);
+
+			sendRequestAsync("http://download.osmand.net/subscription/purchased.php",
+					parameters, "Sending purchase info...", new OnRequestResultListener() {
 						@Override
 						public void onResult(String result) {
 							if (result != null && result.trim().toLowerCase().equals("ok")) {
@@ -411,6 +387,7 @@ public class InAppHelper {
 						}
 					});
 		} catch (Exception e) {
+			Log.e(TAG, "sendToken Error", e);
 		}
 	}
 
@@ -423,33 +400,63 @@ public class InAppHelper {
 		ctx.showToastMessage(message);
 	}
 
-	private String sendRequest(String url, String requestMethod, String userOperation) {
+	private String sendRequest(String url, Map<String, String> parameters, String userOperation) {
 		Log.d(TAG, "Sending request " + url); //$NON-NLS-1$
+		HttpURLConnection connection = null;
 		try {
-			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
+			connection = NetworkUtils.getHttpURLConnection(url);
 
+			connection.setRequestProperty("Accept-Charset", "UTF-8");
+			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
 			connection.setConnectTimeout(15000);
-			connection.setRequestMethod(requestMethod);
-			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
-			StringBuilder responseBody = new StringBuilder();
-			connection.connect();
+
+			if (parameters != null && parameters.size() > 0) {
+				StringBuilder sb = new StringBuilder();
+				for (Map.Entry<String, String> entry : parameters.entrySet()) {
+					if (sb.length() > 0) {
+						sb.append("&");
+					}
+					sb.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				}
+				String params = sb.toString();
+
+				connection.setDoInput(true);
+				connection.setDoOutput(true);
+				connection.setUseCaches(false);
+				connection.setRequestMethod("POST");
+
+				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+				connection.setRequestProperty("Content-Length", String.valueOf(params.getBytes("UTF-8").length));
+				connection.setFixedLengthStreamingMode(params.getBytes("UTF-8").length);
+
+				OutputStream output = new BufferedOutputStream(connection.getOutputStream());
+				output.write(params.getBytes("UTF-8"));
+				output.flush();
+				output.close();
+
+			} else {
+				connection.setRequestMethod("GET");
+				connection.connect();
+			}
+
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				String msg = userOperation
-						+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage(); //$NON-NLS-1$//$NON-NLS-2$
+						+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage();
 				Log.e(TAG, msg);
 				showToast(msg);
 			} else {
-				Log.d(TAG, "Response : " + connection.getResponseMessage()); //$NON-NLS-1$
+				Log.d(TAG, "Response : " + connection.getResponseMessage());
 				// populate return fields.
+				StringBuilder responseBody = new StringBuilder();
 				responseBody.setLength(0);
 				InputStream i = connection.getInputStream();
 				if (i != null) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
+					BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256);
 					String s;
 					boolean f = true;
 					while ((s = in.readLine()) != null) {
 						if (!f) {
-							responseBody.append("\n"); //$NON-NLS-1$
+							responseBody.append("\n");
 						} else {
 							f = false;
 						}
@@ -459,37 +466,42 @@ public class InAppHelper {
 						in.close();
 						i.close();
 					} catch (Exception e) {
+						Log.e(TAG, "sendRequest", e);
 					}
 				}
 				return responseBody.toString();
 			}
-			connection.disconnect();
+
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			String msg = ctx.getString(R.string.auth_failed);
 			Log.e(TAG, msg, e);
 			showToast(msg);
 		} catch (MalformedURLException e) {
-			Log.e(TAG, userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
+			Log.e(TAG, userOperation + " " + ctx.getString(R.string.failed_op), e);
 			showToast(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
 		} catch (IOException e) {
-			Log.e(TAG, userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
+			Log.e(TAG, userOperation + " " + ctx.getString(R.string.failed_op), e);
 			showToast(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 					+ ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
 		}
 
 		return null;
 	}
 
-	private void sendRequestAsync(final String url, final String requestMethod, final String userOperation, final OnRequestResultListener listener) {
+	private void sendRequestAsync(final String url, final Map<String, String> parameters, final String userOperation, final OnRequestResultListener listener) {
 
 		new AsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					return sendRequest(url, requestMethod, userOperation);
+					return sendRequest(url, parameters, userOperation);
 				} catch (Exception e) {
 					return null;
 				}
