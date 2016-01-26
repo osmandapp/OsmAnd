@@ -859,7 +859,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private static final float ANGLE_THRESHOLD = 15;
 
 		@Override
-		public void onZoomEnded(double relativeToStart, float angleRelative) {
+		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			// 1.5 works better even on dm.density=1 devices
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2)) * 1.5f;
 			setIntZoom(Math.round(dz) + initialViewport.getZoom());
@@ -879,6 +879,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 			}
 		}
+
+		@Override
+		public void onZoomEnded(double relativeToStart) {
+			// 1.5 works better even on dm.density=1 devices
+			float dz = (float) ((relativeToStart - 1) * DoubleTapScaleDetector.SCALE_PER_SCREEN);
+			setIntZoom(Math.round(dz) + initialViewport.getZoom());
+			final int newZoom = getZoom();
+			if (application.accessibilityEnabled()) {
+				if (newZoom != initialViewport.getZoom()) {
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
+				} else {
+					final LatLon p1 = initialViewport.getLatLonFromPixel(x1, y1);
+					final LatLon p2 = initialViewport.getLatLonFromPixel(x2, y2);
+					showMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), application));
+				}
+			}
+		}
+
 
 		@Override
 		public void onGestureInit(float x1, float y1, float x2, float y2) {
@@ -912,7 +930,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (dz != 0 || relAngle != 0) {
 				changeZoomPosition((float) dz, relAngle);
 			}
+		}
 
+		@Override
+		public void onZooming(double relativeToStart) {
+			double dz = (relativeToStart - 1) * DoubleTapScaleDetector.SCALE_PER_SCREEN;
+			changeZoomPosition((float) dz, 0);
 		}
 
 		private void changeZoomPosition(float dz, float angle) {
