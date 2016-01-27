@@ -2265,4 +2265,6 @@
 \nFacebook: https://www.facebook.com/osmandapp\nHjemmeside: http://osmand.net
 \n\nEr der brug for hjælp med OsmAnd, kontakt da supportteamet: support@osmand.net. "</string>
     <string name="shared_string_email_address">Email adresse</string>
+    <string name="shared_string_status">Status</string>
+    <string name="shared_string_save_changes">Gem ændringer</string>
     </resources>
