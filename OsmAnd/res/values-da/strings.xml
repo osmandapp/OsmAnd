@@ -1535,7 +1535,7 @@
     <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
-    <string name="rendering_attr_showCycleRoutes_name">Vis cykelruter</string>
+    <string name="rendering_attr_showCycleRoutes_name">Cykelruter</string>
     <string name="local_map_names">Lokale navne</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebræisk</string>
