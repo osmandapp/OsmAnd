@@ -16,11 +16,12 @@
         <ImageButton
             android:id="@+id/closeButton"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:src="@drawable/ic_action_remove_dark"/>
 
         <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -142,21 +143,36 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
                         android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/osm_live_support_region"/>
 
                         <net.osmand.plus.widgets.AutoCompleteTextViewEx
                             android:id="@+id/selectCountryEdit"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginTop="4dp"
                             android:paddingLeft="2dp"
                             android:paddingRight="0dp"
                             android:drawableRight="@drawable/ic_action_arrow_drop_down"
                             android:editable="false"
-                            android:hint="@string/osm_live_support_region"/>
+                            android:text="Ukraine"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/osm_live_region_desc"/>
+
 
                     </LinearLayout>
 
@@ -165,11 +181,35 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/editModeBottomView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/saveChangesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/color_white"
+                    android:background="@drawable/btn_round_blue"
+                    android:text="@string/shared_string_save_changes"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/purchaseCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="?attr/bg_card"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
