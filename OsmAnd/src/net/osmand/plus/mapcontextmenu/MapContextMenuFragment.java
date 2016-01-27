@@ -76,6 +76,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
 	private int menuFullHeightMax;
+	private int menuTopViewHeightExcludingTitle;
+	private int menuTitleTopBottomPadding;
 
 	private int screenHeight;
 	private int viewHeight;
@@ -717,8 +719,19 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
 
 				int dy = 0;
-				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0) {
-					dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
+				if (!menu.isLandscapeLayout()) {
+					TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+					if (menuTopViewHeight != 0) {
+						int titleHeight = line1.getLineCount() * line1.getLineHeight() + menuTitleTopBottomPadding;
+						if (titleHeight < line1.getMeasuredHeight()) {
+							titleHeight = line1.getMeasuredHeight();
+						}
+						newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight;
+						dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
+					} else {
+						menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight();
+						menuTitleTopBottomPadding = line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight();
+					}
 				}
 				menuTopViewHeight = newMenuTopViewHeight;
 				menuTopShadowAllHeight = newMenuTopShadowAllHeight;
