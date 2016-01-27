@@ -79,6 +79,9 @@ android {
 		free {
 			manifest.srcFile "AndroidManifest-free.xml"
 		}
+		freedev {
+			manifest.srcFile "AndroidManifest-freedev.xml"
+		}
 
 		legacy {
 			jniLibs.srcDirs = ["libgnustl"]
@@ -117,6 +120,10 @@ android {
 		}
 
 		// Version
+		freedev {
+			flavorDimension "version"
+			applicationId "net.osmand.dev"
+		}
 		free {
 			flavorDimension "version"
 			applicationId "net.osmand"
