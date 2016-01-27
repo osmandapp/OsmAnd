@@ -392,9 +392,12 @@ public class InAppHelper {
 									JSONObject obj = new JSONObject(result);
 									if (!obj.has("error")) {
 										ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.set(true);
+									} else {
+										complain("SendToken Error: " + obj.getString("error"));
 									}
 								} catch (JSONException e) {
 									logError("sendToken", e);
+									complain("SendToken Error: " + (e.getMessage() != null ? e.getMessage() : "JSONException"));
 								}
 							}
 						}
