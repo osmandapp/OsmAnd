@@ -1925,4 +1925,5 @@
     <string name="number_of_edits">Počet úprav</string>
     <string name="reports_for">Report za</string>
 <string name="rendering_attr_hideUnderground_name">Skrýt objekty v pozadí</string>
+    <string name="shared_string_email_address">Email</string>
     </resources>
