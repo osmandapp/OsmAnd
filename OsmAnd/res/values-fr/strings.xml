@@ -2125,4 +2125,6 @@
     <string name="rendering_attr_hideUnderground_name">Cacher les objets souterrains</string>
     <string name="shared_string_read_more">Lire la suite</string>
     <string name="shared_string_email_address">Adresse email</string>
+    <string name="shared_string_status">Statut</string>
+    <string name="shared_string_save_changes">Enregistrer les modifications</string>
     </resources>
