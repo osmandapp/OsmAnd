@@ -13,7 +13,7 @@
         android:id="@+id/subscription_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/osmand_orange"
+        android:background="@drawable/bg_card_orange"
         android:orientation="vertical"
         android:paddingBottom="8dp"
         android:paddingLeft="24dp"
@@ -60,7 +60,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textColor="@color/color_white"
-	            android:background="@drawable/btn_round_transparent"
+	            android:background="@drawable/btn_round_shade"
 	            android:text="@string/shared_string_read_more"/>
 	        
 	        <Button
@@ -69,7 +69,7 @@
 	            android:layout_height="wrap_content"
 				android:layout_marginLeft="32dp"
 	            android:textColor="@color/color_white"
-	            android:background="@drawable/btn_round_transparent"
+	            android:background="@drawable/btn_round_shade"
 	            android:text="@string/osm_live_subscribe_btn"/>
 		</LinearLayout>
     </LinearLayout>

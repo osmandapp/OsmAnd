@@ -63,6 +63,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
+                    android:paddingLeft="2dp"
                     android:hint="@string/shared_string_email_address"
                     android:inputType="textEmailAddress"/>
 
@@ -72,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:paddingLeft="2dp"
                 android:layout_marginLeft="72dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/osm_live_email_desc"
@@ -103,6 +105,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
+                        android:paddingLeft="2dp"
                         android:hint="@string/osm_live_user_public_name"
                         android:inputType="text"/>
 
@@ -117,6 +120,7 @@
                     android:layout_marginLeft="72dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
+                    android:paddingLeft="2dp"
                     android:text="@string/osm_live_hide_user_name"
                     android:textColor="?android:attr/textColorPrimary"/>
 
@@ -148,6 +152,8 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
                             android:layout_marginTop="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="0dp"
                             android:drawableRight="@drawable/ic_action_arrow_drop_down"
                             android:editable="false"
                             android:hint="@string/osm_live_support_region"/>
