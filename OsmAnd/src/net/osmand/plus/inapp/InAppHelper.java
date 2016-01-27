@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import net.osmand.osm.io.NetworkUtils;
+import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -19,16 +20,6 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URLEncoder;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +28,7 @@ import java.util.Map;
 public class InAppHelper {
 	// Debug tag, for logging
 	static final String TAG = "InAppHelper";
+	boolean mDebugLog = false;
 
 	private static boolean mSubscribedToLiveUpdates = false;
 	private static String mLiveUpdatesPrice;
@@ -112,7 +104,7 @@ public class InAppHelper {
 				"YTjh1H/ZgqIHy5ZluahINuDE76qdLYMXrDMQIDAQAB";
 
 		// Create the helper, passing it our context and the public key to verify signatures with
-		Log.d(TAG, "Creating InAppHelper.");
+		logDebug("Creating InAppHelper.");
 		mHelper = new IabHelper(ctx, base64EncodedPublicKey);
 
 		// enable debug logging (for a production application, you should set this to false).
@@ -120,10 +112,10 @@ public class InAppHelper {
 
 		// Start setup. This is asynchronous and the specified listener
 		// will be called once setup completes.
-		Log.d(TAG, "Starting setup.");
+		logDebug("Starting setup.");
 		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
 			public void onIabSetupFinished(IabResult result) {
-				Log.d(TAG, "Setup finished.");
+				logDebug("Setup finished.");
 
 				if (!result.isSuccess()) {
 					// Oh noes, there was a problem.
@@ -141,7 +133,7 @@ public class InAppHelper {
 				if (mHelper == null) return;
 
 				// IAB is fully set up. Now, let's get an inventory of stuff we own.
-				Log.d(TAG, "Setup successful. Querying inventory.");
+				logDebug("Setup successful. Querying inventory.");
 				List<String> skus = new ArrayList<>();
 				skus.add(SKU_LIVE_UPDATES);
 				mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
@@ -152,7 +144,7 @@ public class InAppHelper {
 	// Listener that's called when we finish querying the items and subscriptions we own
 	private IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
 		public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-			Log.d(TAG, "Query inventory finished.");
+			logDebug("Query inventory finished.");
 
 			// Have we been disposed of in the meantime? If so, quit.
 			if (mHelper == null) return;
@@ -169,7 +161,7 @@ public class InAppHelper {
 				return;
 			}
 
-			Log.d(TAG, "Query inventory was successful.");
+			logDebug("Query inventory was successful.");
 
             /*
 			 * Check for items we own. Notice that for each purchase, we check
@@ -180,7 +172,7 @@ public class InAppHelper {
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
 			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null);
-			Log.d(TAG, "User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
+			logDebug("User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
 
 			if (inventory.hasDetails(SKU_LIVE_UPDATES)) {
@@ -200,12 +192,12 @@ public class InAppHelper {
 				stop();
 			}
 
-			Log.d(TAG, "Initial inapp query finished");
+			logDebug("Initial inapp query finished");
 		}
 	};
 
 	public void purchaseLiveUpdates(final Activity activity, final String email, final String userName,
-									final String countryDownloadName) {
+									final String countryDownloadName, final boolean hideUserName) {
 		if (!mHelper.subscriptionsSupported()) {
 			complain("Subscriptions not supported on your device yet. Sorry!");
 			if (callbacks != null) {
@@ -228,58 +220,55 @@ public class InAppHelper {
 			@Override
 			protected String doInBackground(Void... params) {
 				userId = ctx.getSettings().BILLING_USER_ID.get();
-				if (Algorithms.isEmpty(userId)) {
-					try {
-						Map<String, String> parameters = new HashMap<>();
-						parameters.put("visibleName", userName);
-						parameters.put("preferredCountry", countryDownloadName);
-						parameters.put("email", email);
+				try {
+					Map<String, String> parameters = new HashMap<>();
+					parameters.put("visibleName", hideUserName ? "" : userName);
+					parameters.put("preferredCountry", countryDownloadName);
+					parameters.put("email", email);
+					if (Algorithms.isEmpty(userId)) {
 						parameters.put("status", "new");
-
-						return sendRequest("http://download.osmand.net/subscription/register.php",
-								parameters, "Requesting userId...");
-
-					} catch (Exception e) {
-						Log.e(TAG, "sendRequest Error", e);
-						return null;
 					}
-				} else {
+
+					return AndroidNetworkUtils.sendRequest(ctx,
+							"http://download.osmand.net/subscription/register.php",
+							parameters, "Requesting userId...");
+
+				} catch (Exception e) {
+					logError("sendRequest Error", e);
 					return null;
 				}
 			}
 
 			@Override
 			protected void onPostExecute(String response) {
-				if (Algorithms.isEmpty(userId)) {
-					Log.d(TAG, "Response=" + response);
-					if (response == null) {
-						complain("Cannot retrieve userId from server.");
+				logDebug("Response=" + response);
+				if (response == null) {
+					complain("Cannot retrieve userId from server.");
+					if (callbacks != null) {
+						callbacks.dismissProgress();
+						callbacks.onError("Cannot retrieve userId from server.");
+					}
+					if (stopAfterResult) {
+						stop();
+					}
+					return;
+
+				} else {
+					try {
+						JSONObject obj = new JSONObject(response);
+						userId = obj.getString("userid");
+						ctx.getSettings().BILLING_USER_ID.set(userId);
+						logDebug("UserId=" + userId);
+					} catch (JSONException e) {
+						String message = "JSON parsing error: "
+								+ (e.getMessage() == null ? "unknown" : e.getMessage());
+						complain(message);
 						if (callbacks != null) {
 							callbacks.dismissProgress();
-							callbacks.onError("Cannot retrieve userId from server.");
+							callbacks.onError(message);
 						}
 						if (stopAfterResult) {
 							stop();
-						}
-						return;
-
-					} else {
-						try {
-							JSONObject obj = new JSONObject(response);
-							userId = obj.getString("userid");
-							ctx.getSettings().BILLING_USER_ID.set(userId);
-							Log.d(TAG, "UserId=" + userId);
-						} catch (JSONException e) {
-							String message = "JSON parsing error: "
-									+ (e.getMessage() == null ? "unknown" : e.getMessage());
-							complain(message);
-							if (callbacks != null) {
-								callbacks.dismissProgress();
-								callbacks.onError(message);
-							}
-							if (stopAfterResult) {
-								stop();
-							}
 						}
 					}
 				}
@@ -288,7 +277,7 @@ public class InAppHelper {
 					callbacks.dismissProgress();
 				}
 				if (!Algorithms.isEmpty(userId)) {
-					Log.d(TAG, "Launching purchase flow for live updates subscription for userId=" + userId);
+					logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
 					String payload = userId;
 					if (mHelper != null) {
 						mHelper.launchPurchaseFlow(activity,
@@ -308,26 +297,31 @@ public class InAppHelper {
 	}
 
 	public boolean onActivityResultHandled(int requestCode, int resultCode, Intent data) {
-		Log.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
+		logDebug("onActivityResult(" + requestCode + "," + resultCode + "," + data);
 		if (mHelper == null) return false;
 
-		// Pass on the activity result to the helper for handling
-		if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
-			// not handled, so handle it ourselves (here's where you'd
-			// perform any handling of activity results not related to in-app
-			// billing...
-			//super.onActivityResult(requestCode, resultCode, data);
+		try {
+			// Pass on the activity result to the helper for handling
+			if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+				// not handled, so handle it ourselves (here's where you'd
+				// perform any handling of activity results not related to in-app
+				// billing...
+				//super.onActivityResult(requestCode, resultCode, data);
+				return false;
+			} else {
+				logDebug("onActivityResult handled by IABUtil.");
+				return true;
+			}
+		} catch (Exception e) {
+			logError("onActivityResultHandled", e);
 			return false;
-		} else {
-			Log.d(TAG, "onActivityResult handled by IABUtil.");
-			return true;
 		}
 	}
 
 	// Callback for when a purchase is finished
 	private IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
 		public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-			Log.d(TAG, "Purchase finished: " + result + ", purchase: " + purchase);
+			logDebug("Purchase finished: " + result + ", purchase: " + purchase);
 
 			// if we were disposed of in the meantime, quit.
 			if (mHelper == null) return;
@@ -344,15 +338,17 @@ public class InAppHelper {
 				return;
 			}
 
-			Log.d(TAG, "Purchase successful.");
+			logDebug("Purchase successful.");
 
 			if (purchase.getSku().equals(SKU_LIVE_UPDATES)) {
 				// bought live updates
 				sendToken(purchase.getToken());
 
-				Log.d(TAG, "Live updates subscription purchased.");
-				showToast("Thank you for subscribing to live updates!");
+				logDebug("Live updates subscription purchased.");
+				showToast(ctx.getString(R.string.osm_live_thanks));
 				mSubscribedToLiveUpdates = true;
+				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+
 				if (callbacks != null) {
 					callbacks.dismissProgress();
 					callbacks.onItemPurchased(SKU_LIVE_UPDATES);
@@ -366,7 +362,7 @@ public class InAppHelper {
 
 	// Do not forget call stop() when helper is not needed anymore
 	public void stop() {
-		Log.d(TAG, "Destroying helper.");
+		logDebug("Destroying helper.");
 		if (mHelper != null) {
 			mHelper.dispose();
 			mHelper = null;
@@ -378,27 +374,35 @@ public class InAppHelper {
 		String email = ctx.getSettings().BILLING_USER_EMAIL.get();
 		try {
 			Map<String, String> parameters = new HashMap<>();
-			parameters.put("userId", userId);
+			parameters.put("userid", userId);
 			parameters.put("sku", SKU_LIVE_UPDATES);
 			parameters.put("purchaseToken", token);
 			parameters.put("email", email);
 
-			sendRequestAsync("http://download.osmand.net/subscription/purchased.php",
+			AndroidNetworkUtils.sendRequestAsync(ctx,
+					"http://download.osmand.net/subscription/purchased.php",
 					parameters, "Sending purchase info...", new OnRequestResultListener() {
 						@Override
 						public void onResult(String result) {
-							if (result != null && result.trim().toLowerCase().equals("ok")) {
-								ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.set(true);
+							if (result != null) {
+								try {
+									JSONObject obj = new JSONObject(result);
+									if (!obj.has("error")) {
+										ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.set(true);
+									}
+								} catch (JSONException e) {
+									logError("sendToken", e);
+								}
 							}
 						}
 					});
 		} catch (Exception e) {
-			Log.e(TAG, "sendToken Error", e);
+			logError("sendToken Error", e);
 		}
 	}
 
 	private void complain(String message) {
-		Log.e(TAG, "**** InAppHelper Error: " + message);
+		logError("**** InAppHelper Error: " + message);
 		showToast("Error: " + message);
 	}
 
@@ -406,124 +410,16 @@ public class InAppHelper {
 		ctx.showToastMessage(message);
 	}
 
-	private String sendRequest(String url, Map<String, String> parameters, String userOperation) {
-		Log.d(TAG, "Sending request " + url);
-		HttpURLConnection connection = null;
-		try {
-			connection = NetworkUtils.getHttpURLConnection(url);
-
-			connection.setRequestProperty("Accept-Charset", "UTF-8");
-			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
-			connection.setConnectTimeout(15000);
-
-			if (parameters != null && parameters.size() > 0) {
-				StringBuilder sb = new StringBuilder();
-				for (Map.Entry<String, String> entry : parameters.entrySet()) {
-					if (sb.length() > 0) {
-						sb.append("&");
-					}
-					sb.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-				}
-				String params = sb.toString();
-
-				connection.setDoInput(true);
-				connection.setDoOutput(true);
-				connection.setUseCaches(false);
-				connection.setRequestMethod("POST");
-
-				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-				connection.setRequestProperty("Content-Length", String.valueOf(params.getBytes("UTF-8").length));
-				connection.setFixedLengthStreamingMode(params.getBytes("UTF-8").length);
-
-				OutputStream output = new BufferedOutputStream(connection.getOutputStream());
-				output.write(params.getBytes("UTF-8"));
-				output.flush();
-				output.close();
-
-			} else {
-				connection.setRequestMethod("GET");
-				connection.connect();
-			}
-
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				String msg = userOperation
-						+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage();
-				Log.e(TAG, msg);
-				showToast(msg);
-			} else {
-				Log.d(TAG, "Response : " + connection.getResponseMessage());
-				// populate return fields.
-				StringBuilder responseBody = new StringBuilder();
-				responseBody.setLength(0);
-				InputStream i = connection.getInputStream();
-				if (i != null) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256);
-					String s;
-					boolean f = true;
-					while ((s = in.readLine()) != null) {
-						if (!f) {
-							responseBody.append("\n");
-						} else {
-							f = false;
-						}
-						responseBody.append(s);
-					}
-					try {
-						in.close();
-						i.close();
-					} catch (Exception e) {
-						Log.e(TAG, "sendRequest", e);
-					}
-				}
-				return responseBody.toString();
-			}
-
-		} catch (NullPointerException e) {
-			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-			String msg = ctx.getString(R.string.auth_failed);
-			Log.e(TAG, msg, e);
-			showToast(msg);
-		} catch (MalformedURLException e) {
-			Log.e(TAG, userOperation + " " + ctx.getString(R.string.failed_op), e);
-			showToast(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
-		} catch (IOException e) {
-			Log.e(TAG, userOperation + " " + ctx.getString(R.string.failed_op), e);
-			showToast(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
-		} finally {
-			if (connection != null) {
-				connection.disconnect();
-			}
-		}
-
-		return null;
+	void logDebug(String msg) {
+		if (mDebugLog) Log.d(TAG, msg);
 	}
 
-	private void sendRequestAsync(final String url, final Map<String, String> parameters, final String userOperation, final OnRequestResultListener listener) {
-
-		new AsyncTask<Void, Void, String>() {
-
-			@Override
-			protected String doInBackground(Void... params) {
-				try {
-					return sendRequest(url, parameters, userOperation);
-				} catch (Exception e) {
-					return null;
-				}
-			}
-
-			@Override
-			protected void onPostExecute(String response) {
-				if (listener != null) {
-					listener.onResult(response);
-				}
-			}
-
-		}.execute((Void) null);
+	void logError(String msg) {
+		Log.e(TAG, "Error: " + msg);
 	}
 
-	private interface OnRequestResultListener {
-		void onResult(String result);
+	void logError(String msg, Throwable e) {
+		Log.e(TAG, "Error: " + msg, e);
 	}
+
 }

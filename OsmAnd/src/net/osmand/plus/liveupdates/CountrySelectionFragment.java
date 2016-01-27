@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.util.Algorithms;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -185,7 +186,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		return name;
 	}
 
-	public static class CountryItem {
+	public static class CountryItem implements Serializable {
 		private String localName;
 		private String downloadName;
 
