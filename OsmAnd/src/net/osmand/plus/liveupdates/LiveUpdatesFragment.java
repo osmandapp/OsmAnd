@@ -78,7 +78,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
-//		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
 
 		View bottomShadowView = inflater.inflate(R.layout.shadow_bottom, listView, false);
 		listView.addFooterView(bottomShadowView);

@@ -172,7 +172,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	@Override
 	public void onItemPurchased(String sku) {
 
-		if (InAppHelper.SKU_LIVE_UPDATES.equals(sku)) {
+		if (InAppHelper.getSkuLiveUpdates().equals(sku)) {
 			Fragment parentFragment = getParentFragment();
 			if (parentFragment instanceof LiveUpdatesFragment) {
 				((LiveUpdatesFragment) parentFragment).updateSubscriptionBanner();
@@ -190,6 +190,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		dlg = new ProgressDialog(getActivity());
 		dlg.setTitle("");
 		dlg.setMessage(getString(R.string.wait_current_task_finished));
+		dlg.setCancelable(false);
 		dlg.show();
 	}
 
