@@ -143,7 +143,11 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		});
 		for (WorldRegion group : groups) {
 			String name = getHumanReadableName(group);
-			countryItems.add(new CountryItem(name, group.getRegionDownloadName()));
+			if (group == root) {
+				countryItems.add(new CountryItem(name, ""));
+			} else {
+				countryItems.add(new CountryItem(name, group.getRegionDownloadName()));
+			}
 		}
 	}
 
