@@ -172,6 +172,9 @@ public class InAppHelper {
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
 			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null);
+			if (mSubscribedToLiveUpdates) {
+				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+			}
 			logDebug("User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
 
