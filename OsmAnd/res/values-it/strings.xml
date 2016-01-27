@@ -2151,4 +2151,5 @@
     <string name="data_is_not_available">Il dato non è disponibile</string>
     <string name="rendering_attr_hideUnderground_name">Nascondi gli oggetti sotterranei</string>
     <string name="shared_string_read_more">Approfondisci</string>
+    <string name="shared_string_email_address">Indirizzo email</string>
     </resources>
