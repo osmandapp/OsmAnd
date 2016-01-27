@@ -41,14 +41,9 @@ public class InAppHelper {
 	private static boolean mSubscribedToLiveUpdates = false;
 	private static String mLiveUpdatesPrice;
 
-	public static final String SKU_LIVE_UPDATES = "osm_live_subscription_1";
-
-	// Static test
-	//public static final String SKU_LIVE_UPDATES = "android.test.purchased";
-	//public static final String SKU_LIVE_UPDATES = "android.test.canceled";
-	//public static final String SKU_LIVE_UPDATES = "android.test.refunded";
-	//public static final String SKU_LIVE_UPDATES = "android.test.item_unavailable";
-
+	private static final String SKU_LIVE_UPDATES_FULL = "osm_live_subscription_2";
+	private static final String SKU_LIVE_UPDATES_FREE = "osm_free_live_subscription_2";
+	private static String SKU_LIVE_UPDATES;
 
 	// (arbitrary) request code for the purchase flow
 	private static final int RC_REQUEST = 10001;
@@ -80,9 +75,20 @@ public class InAppHelper {
 		return mLiveUpdatesPrice;
 	}
 
+	public static String getSkuLiveUpdates() {
+		return SKU_LIVE_UPDATES;
+	}
+
 	public InAppHelper(OsmandApplication ctx, InAppCallbacks callbacks) {
 		this.ctx = ctx;
 		this.callbacks = callbacks;
+		if (SKU_LIVE_UPDATES == null) {
+			if (Version.isFreeVersion(ctx)) {
+				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FREE;
+			} else {
+				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FULL;
+			}
+		}
 	}
 
 	public void start(final boolean stopAfterResult) {
@@ -110,7 +116,7 @@ public class InAppHelper {
 		mHelper = new IabHelper(ctx, base64EncodedPublicKey);
 
 		// enable debug logging (for a production application, you should set this to false).
-		mHelper.enableDebugLogging(true);
+		mHelper.enableDebugLogging(false);
 
 		// Start setup. This is asynchronous and the specified listener
 		// will be called once setup completes.
@@ -401,7 +407,7 @@ public class InAppHelper {
 	}
 
 	private String sendRequest(String url, Map<String, String> parameters, String userOperation) {
-		Log.d(TAG, "Sending request " + url); //$NON-NLS-1$
+		Log.d(TAG, "Sending request " + url);
 		HttpURLConnection connection = null;
 		try {
 			connection = NetworkUtils.getHttpURLConnection(url);
