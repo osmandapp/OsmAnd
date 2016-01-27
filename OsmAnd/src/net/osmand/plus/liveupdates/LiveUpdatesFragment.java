@@ -108,7 +108,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 		//getSettings().LIVE_UPDATES_PURCHASED.set(true);
 
 		subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
-		updateHeader();
+		updateSubscriptionHeader();
 
 		listView.addHeaderView(subscriptionHeader);
 
@@ -116,7 +116,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
-	public void updateHeader() {
+	public void updateSubscriptionHeader() {
 		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
 		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
 		if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
@@ -171,18 +171,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 				}
 			});
 
-			subscriptionBanner.setVisibility(View.VISIBLE);
-			subscriptionInfo.setVisibility(View.GONE);
-		}
-	}
-
-	public void updateSubscriptionBanner() {
-		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
-		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
-		if (InAppHelper.isSubscribedToLiveUpdates()) {
-			subscriptionBanner.setVisibility(View.GONE);
-			subscriptionInfo.setVisibility(View.VISIBLE);
-		} else {
 			subscriptionBanner.setVisibility(View.VISIBLE);
 			subscriptionInfo.setVisibility(View.GONE);
 		}
