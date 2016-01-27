@@ -303,7 +303,7 @@
 
     <string name="error_occurred_loading_gpx">Wystąpił błąd podczas wczytywania GPX</string>
     <string name="send_report">Wyślij zgłoszenie</string>
-    <string name="none_region_found">Brak danych offline na karcie SD. Pobierz je z Internetu.</string>
+    <string name="none_region_found">Brak danych offline na karcie SD. Proszę pobrać je z sieci.</string>
     <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>
     <string name="any_poi">Jakiekolwiek</string>
     <string name="layer_transport_route">Trasa transportu publicznego</string>
@@ -2069,7 +2069,7 @@
     <string name="updates_size">Aktualizacje: %s</string>
     <string name="last_map_change">Ostatnia zmiana mapy: %s</string>
     <string name="rec_split_clip_length">Długość nagrania</string>
-    <string name="shared_string_not_selected">Nie wybrane</string>
+    <string name="shared_string_not_selected">Nie wybrany</string>
 <string name="item_removed">Pozycja usunięta</string>
     <string name="n_items_removed">Pozycje usunięta</string>
     <string name="shared_string_undo_all">COFNIJ WSZYSTKO</string>
@@ -2090,4 +2090,6 @@
     <string name="number_of_edits">Liczba edycji</string>
     <string name="reports_for">Raport dla</string>
 <string name="number_of_contributors">Liczba współtwórców</string>
+    <string name="shared_string_read_more">Przeczytaj więcej</string>
+    <string name="rendering_attr_hideUnderground_name">Ukrycie podziemnych obiektów</string>
     </resources>

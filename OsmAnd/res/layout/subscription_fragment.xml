@@ -16,15 +16,16 @@
         <ImageButton
             android:id="@+id/closeButton"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:src="@drawable/ic_action_remove_dark"/>
 
         <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="Subscription form"
+            android:text="@string/osm_live_subscription"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
@@ -33,192 +34,247 @@
     </LinearLayout>
 
     <include layout="@layout/shadow_bottom"/>
-    
-    
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="56dp"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/emailIcon"
-                android:layout_width="56dp"
-                android:layout_height="48dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_action_message"/>
-
-            <EditText
-                android:id="@+id/emailEdit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="E-mail address"
-                android:inputType="textEmailAddress"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="72dp"
-            android:layout_marginRight="16dp"
-            android:text="We need it to provide you information about contributions"
-            android:textColor="?android:attr/textColorSecondary"/>
-
-    
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="56dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/userNameIcon"
-                android:layout_width="56dp"
-                android:layout_height="48dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_person"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="56dp"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/userNameEdit"
+                <ImageView
+                    android:id="@+id/emailIcon"
+                    android:layout_width="56dp"
+                    android:layout_height="48dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_action_message"/>
+
+                <EditText
+                    android:id="@+id/emailEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingLeft="2dp"
+                    android:hint="@string/shared_string_email_address"
+                    android:inputType="textEmailAddress"/>
+
+            </LinearLayout>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
+                android:paddingLeft="2dp"
+                android:layout_marginLeft="72dp"
                 android:layout_marginRight="16dp"
-                android:hint="Public Name"
-                android:inputType="text"/>
+                android:text="@string/osm_live_email_desc"
+                android:textColor="?android:attr/textColorSecondary"/>
 
-            
-        </LinearLayout>
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="72dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Don't show my name in reports"
-            android:textColor="?android:attr/textColorPrimary"/>
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="56dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/countryIcon"
-                android:layout_width="56dp"
-                android:layout_height="48dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_world_globe_dark"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:orientation="horizontal">
 
-                <net.osmand.plus.widgets.AutoCompleteTextViewEx
-                    android:id="@+id/selectCountryEdit"
-                    android:layout_width="fill_parent"
+                    <ImageView
+                        android:id="@+id/userNameIcon"
+                        android:layout_width="56dp"
+                        android:layout_height="48dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_person"/>
+
+                    <EditText
+                        android:id="@+id/userNameEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:paddingLeft="2dp"
+                        android:hint="@string/osm_live_user_public_name"
+                        android:inputType="text"/>
+
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/hideUserNameCheckbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:paddingLeft="2dp"
+                    android:text="@string/osm_live_hide_user_name"
+                    android:textColor="?android:attr/textColorPrimary"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="4dp"
+                    android:minHeight="56dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/countryIcon"
+                        android:layout_width="56dp"
+                        android:layout_height="48dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_world_globe_dark"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/osm_live_support_region"/>
+
+                        <net.osmand.plus.widgets.AutoCompleteTextViewEx
+                            android:id="@+id/selectCountryEdit"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="0dp"
+                            android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                            android:editable="false"
+                            android:text="Ukraine"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/osm_live_region_desc"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editModeBottomView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/saveChangesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/color_white"
+                    android:background="@drawable/btn_round_blue"
+                    android:text="@string/shared_string_save_changes"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/purchaseCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="?attr/bg_card"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:orientation="horizontal">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/osm_live_month_cost"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/default_list_text_size_large"
+                        android:textStyle="bold"/>
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/priceTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="right"
+                        android:text="@string/osm_live_default_price"
+                        android:textColor="?attr/color_dialog_buttons"
+                        android:textSize="@dimen/default_list_text_size_large"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="4dp"
-                    android:hint="Support region"
-                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
-                    android:editable="false"/>
+                    android:text="@string/osm_live_month_cost_desc"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="?attr/divider_color"/>
+
+                <Button
+                    android:id="@+id/subscribeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="6dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/osm_live_subscribe_btn"
+                    android:textColor="?attr/color_dialog_buttons"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="?attr/bg_card"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:orientation="horizontal">
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Month cost"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/default_list_text_size_large"
-                android:textStyle="bold"
-                app:typeface="@string/font_roboto_regular"/>
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/priceTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="@string/osm_live_default_price"
-                android:textColor="?attr/color_dialog_buttons"
-                android:textSize="@dimen/default_list_text_size_large"
-                android:textStyle="bold"
-                app:typeface="@string/font_roboto_regular"/>
-
-        </LinearLayout>
-
-        <net.osmand.plus.widgets.TextViewEx
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Monthly payment"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="@dimen/default_desc_text_size"
-            app:typeface="@string/font_roboto_regular"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="?attr/divider_color"/>
-
-        <Button
-            android:id="@+id/subscribeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="6dp"
-            android:background="?attr/selectableItemBackground"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="Subscribe"
-            android:textColor="?attr/color_dialog_buttons"/>
-
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

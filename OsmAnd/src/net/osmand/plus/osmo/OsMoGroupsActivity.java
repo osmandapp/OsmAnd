@@ -617,9 +617,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if (!checkOperationIsNotRunning()) {
 			return;
 		}
-		String operation = osMoPlugin.getGroups().leaveGroup((OsMoGroup) selectedObject);
+		String operation = osMoPlugin.getGroups().leaveGroup(selectedObject);
 		startLongRunningOperation(operation);
-		adapter.update((OsMoGroup) selectedObject);
+		adapter.update(selectedObject);
 		adapter.notifyDataSetChanged();
 
 	}
@@ -1037,7 +1037,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 
 	public void hideProgressBar() {
-		OsMoGroupsActivity.this.operation = null;
+		this.operation = null;
 		setSupportProgressBarIndeterminateVisibility(false);
 	}
 	
@@ -1210,7 +1210,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			View v = (View) row.findViewById(R.id.settings);
+			View v = row.findViewById(R.id.settings);
 			if(model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
@@ -1383,7 +1383,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			Message msg = Message.obtain(uiHandler, new Runnable() {
 				@Override
 				public void run() {
-					adapter.notifyDataSetInvalidated();
+					adapter.notifyDataSetChanged();
 					updateStatus();
 				}
 			});

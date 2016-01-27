@@ -2671,4 +2671,7 @@
 	<string name="poi_nuclear_explosion_yield">Rendimiento de la explosión</string>
 	<string name="poi_nuclear_explosion_salvo_first_detonation">Explosión de salva: Primera detonación de prueba</string>
 	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosión de salva: Segunda o posterior detonación de prueba</string>
-	</resources>
+	<string name="poi_addr_housename">Nombre de casa</string>
+	<string name="poi_religion">Artículos religiosos</string>
+
+</resources>

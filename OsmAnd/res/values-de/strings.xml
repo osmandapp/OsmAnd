@@ -2010,4 +2010,5 @@
     <string name="clear_updates_proposition_message">Kartenaktualisierungen können gelöscht werden um zur orginal Karte zurückzukehren</string>
     <string name="data_is_not_available">Daten nicht verfügbar</string>
     <string name="rendering_attr_hideUnderground_name">Unterirdische Objekt verbergen</string>
+    <string name="shared_string_read_more">Mehr lesen</string>
     </resources>

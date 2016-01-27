@@ -111,7 +111,7 @@ public abstract class SearchSelectionFragment extends BaseOsmAndDialogFragment {
 		private final Drawable drawableLeft;
 
 		public ListAdapter(Context context, @DrawableRes int drawableLeftId) {
-			super(getMyActivity(), android.R.layout.simple_list_item_1);
+			super(getMyActivity(), R.layout.osmand_simple_list_item_1);
 			this.drawableLeft = drawableLeftId == -1 ? null : getContentIcon(drawableLeftId);
 		}
 

@@ -3,15 +3,23 @@ package net.osmand.plus.liveupdates;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SwitchCompat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -22,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -56,6 +65,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIn
 
 public class LiveUpdatesFragment extends BaseOsmAndFragment {
 	public static final String TITLE = "Live Updates";
+	private static final int SUBSCRIPTION_SETTINGS = 5;
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
 		@Override
 		public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
@@ -70,6 +80,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 	}
 
 	@Override
@@ -77,7 +88,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
-//		View header = inflater.inflate(R.layout.live_updates_header, listView, false);
 
 		View bottomShadowView = inflater.inflate(R.layout.shadow_bottom, listView, false);
 		listView.addFooterView(bottomShadowView);
@@ -94,37 +104,73 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 			}
 		});
 
+		//test
+		//getSettings().LIVE_UPDATES_PURCHASED.set(true);
+
 		subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
-		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
-		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
-		Button subscriptionButton = (Button) subscriptionHeader.findViewById(R.id.subscription_button);
-		subscriptionButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-				subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
-			}
-		});
-		if (InAppHelper.isSubscribedToLiveUpdates()) {
-			subscriptionBanner.setVisibility(View.GONE);
-			subscriptionInfo.setVisibility(View.VISIBLE);
-		} else {
-			subscriptionBanner.setVisibility(View.VISIBLE);
-			subscriptionInfo.setVisibility(View.GONE);
-		}
+		updateSubscriptionHeader();
+
 		listView.addHeaderView(subscriptionHeader);
 
 		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
 		return view;
 	}
 
-	public void updateSubscriptionBanner() {
+	public void updateSubscriptionHeader() {
 		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
 		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
-		if (InAppHelper.isSubscribedToLiveUpdates()) {
+		if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
+			ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
+			TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
+			TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
+
+			if (InAppHelper.isSubscribedToLiveUpdates()) {
+				statusTextView.setText(getString(R.string.osm_live_active));
+				statusIcon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_done));
+			} else {
+				statusTextView.setText(getString(R.string.osm_live_not_active));
+				statusIcon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
+			}
+
+			OsmandSettings settings = getMyApplication().getSettings();
+
+			String countryName = settings.BILLING_USER_COUNTRY.get();
+			if (Algorithms.isEmpty(countryName)) {
+				WorldRegion world = getMyApplication().getRegions().getWorldRegion();
+				countryName = world.getLocaleName();
+			}
+			regionNameTextView.setText(countryName);
+
+			Button subscribeButton = (Button) subscriptionHeader.findViewById(R.id.subscribeButton);
+			subscribeButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+					subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+				}
+			});
+
 			subscriptionBanner.setVisibility(View.GONE);
 			subscriptionInfo.setVisibility(View.VISIBLE);
 		} else {
+			Button readMoreBtn = (Button) subscriptionHeader.findViewById(R.id.read_more_button);
+			readMoreBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Uri uri = Uri.parse("http://osmand.net/osm_live.php");
+					Intent goToOsmLive = new Intent(Intent.ACTION_VIEW, uri);
+					startActivity(goToOsmLive);
+				}
+			});
+			Button subscriptionButton = (Button) subscriptionHeader.findViewById(R.id.subscription_button);
+			subscriptionButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+					subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+				}
+			});
+
 			subscriptionBanner.setVisibility(View.VISIBLE);
 			subscriptionInfo.setVisibility(View.GONE);
 		}
@@ -140,6 +186,34 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 		if (adapter != null) {
 			adapter.notifyLiveUpdatesChanged();
 		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
+			ActionBar actionBar = getMyActivity().getSupportActionBar();
+			if (actionBar != null) {
+				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+			}
+
+			SubMenu split = menu.addSubMenu(R.string.shared_string_more_actions);
+			split.setIcon(R.drawable.ic_overflow_menu_white);
+			MenuItemCompat.setShowAsAction(split.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			MenuItem item = split.add(0, SUBSCRIPTION_SETTINGS, 0, R.string.osm_live_subscription_settings);
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == SUBSCRIPTION_SETTINGS) {
+			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+			subscriptionFragment.setEditMode(true);
+			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
@@ -359,6 +433,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 			divider = view.findViewById(R.id.divider);
 		}
 
+		@SuppressWarnings("deprecation")
 		public void bindLocalIndexInfo(final LocalIndexInfo item, boolean isLastChild) {
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
 			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
@@ -425,7 +500,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 			extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
 			implements AbstractLoadLocalIndexTask {
 
-		private List<LocalIndexInfo> result;
+		//private List<LocalIndexInfo> result;
 		private LocalIndexesAdapter adapter;
 		private LiveUpdatesFragment fragment;
 		private LocalIndexHelper helper;
@@ -461,7 +536,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
-			this.result = result;
+			//this.result = result;
 			adapter.sort();
 		}
 	}

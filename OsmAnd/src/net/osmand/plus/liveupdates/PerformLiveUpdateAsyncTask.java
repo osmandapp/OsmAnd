@@ -80,7 +80,7 @@ public class PerformLiveUpdateAsyncTask
 		} else {
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
 			List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
-			if (!ll.isEmpty()) {
+			if (ll != null && !ll.isEmpty()) {
 				ArrayList<IndexItem> itemsToDownload = new ArrayList<>(ll.size());
 				for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
 					IndexItem indexItem = new IndexItem(iu.fileName, "Incremental update",

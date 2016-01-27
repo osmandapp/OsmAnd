@@ -2092,4 +2092,7 @@
 <string name="poi_protected_area">Àrea protegida</string>
 	<string name="poi_fair_trade_no">Comerç just: no</string>
 	<string name="poi_fair_trade_yes">Comerç just: sí</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Motiu de l\'explosió: aplicació industrial, moviment de terres</string>
+	<string name="poi_nuclear_explosion_time_utc">Hora de la explosió (UTC)</string>
+	<string name="poi_nuclear_explosion_hole">Cràter de l\'explosió</string>
 	</resources>

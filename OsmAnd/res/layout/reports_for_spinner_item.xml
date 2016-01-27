@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
-              android:background="@android:drawable/list_selector_background">
+              android:background="?attr/expandable_list_item_background">
 
     <TextView
         android:text="@string/reports_for"

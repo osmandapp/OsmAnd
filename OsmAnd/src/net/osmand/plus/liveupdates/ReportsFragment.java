@@ -22,23 +22,19 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import net.osmand.PlatformUtil;
-import net.osmand.map.WorldRegion;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 
 import org.apache.commons.logging.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
-public class ReportsFragment extends BaseOsmAndFragment implements SearchSelectionFragment.OnFragmentInteractionListener {
+public class ReportsFragment extends BaseOsmAndFragment implements CountrySelectionFragment.OnFragmentInteractionListener {
 	public static final String TITLE = "Report";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = "http://download.osmand.net/" +
 			"reports/query_report.php?report=total_changes_by_month&month=%s&region=%s";
@@ -50,11 +46,9 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 	private Spinner montReportsSpinner;
 	private MonthsForReportsAdapter monthsForReportsAdapter;
 
-	CountrySearchSelectionFragment searchSelectionFragment = new CountrySearchSelectionFragment();
+	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
 	private TextView countryNameTextView;
-
-	HashMap<String, String> queryRegionNames = new HashMap<>();
-	ArrayList<String> regionNames = new ArrayList<>();
+	private CountryItem selectedCountryItem;
 
 	private ImageView numberOfContributorsIcon;
 	private ImageView numberOfEditsIcon;
@@ -69,7 +63,6 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		initCountries();
 		View view = inflater.inflate(R.layout.fragment_reports, container, false);
 		montReportsSpinner = (Spinner) view.findViewById(R.id.montReportsSpinner);
 		monthsForReportsAdapter = new MonthsForReportsAdapter(getActivity());
@@ -79,15 +72,15 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 		regionReportsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SearchSelectionFragment countrySearchSelectionFragment =
-						searchSelectionFragment;
-				countrySearchSelectionFragment
-						.show(getChildFragmentManager(), "CountriesSearchSelectionFragment");
+				countrySelectionFragment.show(getChildFragmentManager(), "CountriesSearchSelectionFragment");
 			}
 		});
 
+		countrySelectionFragment.initCountries(getMyApplication());
+		selectedCountryItem = countrySelectionFragment.getCountryItems().get(0);
+
 		countryNameTextView = (TextView) regionReportsButton.findViewById(android.R.id.text1);
-		countryNameTextView.setText(regionNames.get(0));
+		countryNameTextView.setText(selectedCountryItem.getLocalName());
 
 		setThemedDrawable(view, R.id.calendarImageView, R.drawable.ic_action_data);
 		setThemedDrawable(view, R.id.regionIconImageView, R.drawable.ic_world_globe_dark);
@@ -127,7 +120,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 	public void requestAndUpdateUi() {
 		int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
 		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
-		String countryUrlString = queryRegionNames.get(countryNameTextView.getText().toString());
+		String countryUrlString = selectedCountryItem.getDownloadName();
 
 		tryUpdateData(monthUrlString, countryUrlString);
 	}
@@ -171,77 +164,10 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 	}
 
 	@Override
-	public void onSearchResult(String name) {
-		countryNameTextView.setText(name);
+	public void onSearchResult(CountryItem item) {
+		selectedCountryItem = item;
+		countryNameTextView.setText(item.getLocalName());
 		requestAndUpdateUi();
-	}
-
-	private void initCountries() {
-		final WorldRegion root = getMyApplication().getRegions().getWorldRegion();
-		ArrayList<WorldRegion> groups = new ArrayList<>();
-		groups.add(root);
-		processGroup(root, groups, getActivity());
-		Collections.sort(groups, new Comparator<WorldRegion>() {
-			@Override
-			public int compare(WorldRegion lhs, WorldRegion rhs) {
-				if (lhs == root) {
-					return -1;
-				}
-				if (rhs == root) {
-					return 1;
-				}
-				return getHumanReadableName(lhs).compareTo(getHumanReadableName(rhs));
-			}
-		});
-		for (WorldRegion group : groups) {
-			String name = getHumanReadableName(group);
-			regionNames.add(name);
-			queryRegionNames.put(name, group == root ? "" : group.getRegionDownloadName());
-		}
-	}
-
-	private static String getHumanReadableName(WorldRegion group) {
-		String name;
-		if (group.getLevel() > 2 || (group.getLevel() == 2
-				&& group.getSuperregion().getRegionId().equals(WorldRegion.RUSSIA_REGION_ID))) {
-			WorldRegion parent = group.getSuperregion();
-			WorldRegion parentsParent = group.getSuperregion().getSuperregion();
-			if (group.getLevel() == 3) {
-				if (parentsParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
-					name = parentsParent.getLocaleName() + " " + group.getLocaleName();
-				} else if (!parent.getRegionId().equals(WorldRegion.UNITED_KINGDOM_REGION_ID)) {
-					name = parent.getLocaleName() + " " + group.getLocaleName();
-				} else {
-					name = group.getLocaleName();
-				}
-			} else {
-				name = parent.getLocaleName() + " " + group.getLocaleName();
-			}
-		} else {
-			name = group.getLocaleName();
-		}
-		if (name == null) {
-			name = "";
-		}
-		return name;
-	}
-
-	public String getQueryString(int position) {
-		return queryRegionNames.get(position);
-	}
-
-	private static void processGroup(WorldRegion group,
-									 List<WorldRegion> nameList,
-									 Context context) {
-		if (group.isRegionMapDownload()) {
-			nameList.add(group);
-		}
-
-		if (group.getSubregions() != null) {
-			for (WorldRegion g : group.getSubregions()) {
-				processGroup(g, nameList, context);
-			}
-		}
 	}
 
 	private static class MonthsForReportsAdapter extends ArrayAdapter<String> {
@@ -322,18 +248,6 @@ public class ReportsFragment extends BaseOsmAndFragment implements SearchSelecti
 
 		public interface OnErrorListener {
 			void onError(String error);
-		}
-	}
-
-	public static class CountrySearchSelectionFragment extends SearchSelectionFragment {
-		@Override
-		protected ArrayList<String> getList() {
-			return ((ReportsFragment) getParentFragment()).regionNames;
-		}
-
-		@Override
-		protected int getListItemIcon() {
-			return R.drawable.ic_map;
 		}
 	}
 

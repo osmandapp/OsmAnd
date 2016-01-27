@@ -2057,4 +2057,6 @@
     <string name="clear_updates_proposition_message">Можете да премахнете свалените актуализации и да възстановите оригиналната карта</string>
     <string name="add_time_span">Добавете времеви интервал</string>
     <string name="shared_string_remove">Премахване</string>
+    <string name="rendering_attr_hideUnderground_name">Скрий подземните обекти</string>
+    <string name="shared_string_read_more">Прочети още</string>
     </resources>

@@ -29,6 +29,7 @@ public class RenderingRuleStorageProperties {
 	public static final String SHIELD = "shield";
 	public static final String SHADOW_RADIUS = "shadowRadius";
 	public static final String SHADOW_COLOR = "shadowColor";
+	public static final String ONEWAY_ARROWS_COLOR = "onewayArrowsColor";
 	public static final String SHADER = "shader";
 	public static final String CAP_5 = "cap_5";
 	public static final String CAP_4 = "cap_4";
@@ -103,6 +104,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_SHADOW_RADIUS;
 	public RenderingRuleProperty R_SHADOW_COLOR;
 	public RenderingRuleProperty R_SHADER;
+	public RenderingRuleProperty R_ONEWAY_ARROWS_COLOR;
 	public RenderingRuleProperty R_CAP_5;
 	public RenderingRuleProperty R_CAP_4;
 	public RenderingRuleProperty R_CAP_3;
@@ -288,6 +290,8 @@ public class RenderingRuleStorageProperties {
 
 		R_SHADOW_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(SHADOW_COLOR));
 		R_SHADOW_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(SHADOW_RADIUS));
+
+		R_ONEWAY_ARROWS_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(ONEWAY_ARROWS_COLOR));
 	}
 
 	public RenderingRuleProperty get(String name) {

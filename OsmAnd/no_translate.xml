@@ -30,7 +30,20 @@
     <string name="osm_live_subscription">OSM Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
     <string name="osm_live_default_price">€1,49</string>
-    
+    <string name="osm_live_email_desc">We need it to provide you information about contributions</string>
+    <string name="osm_live_user_public_name">Public Name</string>
+    <string name="osm_live_hide_user_name">Don\'t show my name in reports</string>
+    <string name="osm_live_support_region">Support region</string>
+    <string name="osm_live_month_cost">Month cost</string>
+    <string name="osm_live_month_cost_desc">Monthly payment</string>
+    <string name="osm_live_active">Active</string>
+    <string name="osm_live_not_active">Inactive</string>
+    <string name="osm_live_enter_email">Please enter valid E-mail address</string>
+    <string name="osm_live_enter_user_name">Please enter Public Name</string>
+    <string name="osm_live_thanks">Thank you for subscribing to live updates!</string>
+    <string name="osm_live_region_desc">Part your donation will be sent to OSM users who submit changes to the map in that region</string>
+    <string name="osm_live_subscription_settings">Subscription settings</string>
+
     <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
         Major part of the income goes back to OSM community and is paid out per each OSM contribution. 
         In case you love OsmAnd and OSM and want to support it, this is a perfect way to do it.</string>

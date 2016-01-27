@@ -2640,4 +2640,7 @@
 	<string name="poi_nuclear_explosion_warhead">Боеголовка</string>
 	<string name="poi_nuclear_explosion_device">Устройство</string>
 
+	<string name="poi_addr_housename">Название дома</string>
+	<string name="poi_religion">Религиозный магазин</string>
+
 </resources>

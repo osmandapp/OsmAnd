@@ -714,7 +714,7 @@
     <string name="left_side_navigation">Ghia a manca</string>
     <string name="left_side_navigation_descr">Abìlita in sos istados in ue si ghiat mantenende sa manca</string>
     <string name="unknown_from_location">Sa positzione de tzucada no est istada galu determinata</string>
-    <string name="unknown_location">Positzione calu non connota</string>
+    <string name="unknown_location">Positzione galu disconnota</string>
     <string name="modify_transparency">Muda sa trasparèntzia (0 - trasparente, 255 - annapau)</string>
     <string name="confirm_interrupt_download">Boles firmare s’isgarrigamentu de sos documentos?</string>
     <string name="local_indexes_cat_tile">Mapas in lìnia e in cache a tasseddos</string>
@@ -2094,4 +2094,5 @@
     <string name="road_blocked">Àndala blocada</string>
     <string name="shared_string_select">Ischerta</string>
     <string name="rendering_attr_hideUnderground_name">Cua ogetos suta de terra</string>
+    <string name="shared_string_read_more">Leghe àteru</string>
     </resources>
