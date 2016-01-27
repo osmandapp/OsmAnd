@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -226,7 +225,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 													Fragment parent = getParentFragment();
 													if (parent != null && parent instanceof LiveUpdatesFragment) {
-														((LiveUpdatesFragment) parent).updateHeader();
+														((LiveUpdatesFragment) parent).updateSubscriptionHeader();
 													}
 
 													dismiss();
@@ -330,7 +329,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		if (InAppHelper.getSkuLiveUpdates().equals(sku)) {
 			Fragment parentFragment = getParentFragment();
 			if (parentFragment instanceof LiveUpdatesFragment) {
-				((LiveUpdatesFragment) parentFragment).updateSubscriptionBanner();
+				((LiveUpdatesFragment) parentFragment).updateSubscriptionHeader();
 			}
 		}
 
