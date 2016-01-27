@@ -1,15 +1,15 @@
 package net.osmand.plus.views;
 
-import java.lang.reflect.Method;
-
-import net.osmand.PlatformUtil;
-
-import net.osmand.util.MapUtils;
-import org.apache.commons.logging.Log;
-
 import android.content.Context;
 import android.graphics.PointF;
 import android.view.MotionEvent;
+
+import net.osmand.PlatformUtil;
+import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
+
+import java.lang.reflect.Method;
 
 
 public class MultiTouchSupport {
@@ -29,7 +29,7 @@ public class MultiTouchSupport {
     	
     	public void onZoomingOrRotating(double relativeToStart, float angle);
     	
-    	public void onZoomEnded(double relativeToStart, float angleRelative);
+    	public void onZoomOrRotationEnded(double relativeToStart, float angleRelative);
     	
     	public void onGestureInit(float x1, float y1, float x2, float y2);
     	
@@ -87,7 +87,7 @@ public class MultiTouchSupport {
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if(pointCount < 2){
 				if(inZoomMode){
-					listener.onZoomEnded(zoomRelative, angleRelative);
+					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 				}
 				return false;
 			}
@@ -112,7 +112,7 @@ public class MultiTouchSupport {
 				return true;
 			} else if(actionCode == ACTION_POINTER_UP){
 				if(inZoomMode){
-					listener.onZoomEnded(zoomRelative, angleRelative);
+					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
 				}
 				return true;

@@ -52,7 +52,7 @@ public class DoubleTapScaleDetector {
 			secondDown = null;
 			if (isDoubleTapping) {
 				isDoubleTapping = false;
-				listener.onZoomEnded(scale, 0);
+				listener.onZoomEnded(scale);
 				return true;
 			} else {
 				firstUp = MotionEvent.obtain(event);
@@ -77,7 +77,7 @@ public class DoubleTapScaleDetector {
 					float delta = convertPxToDp((int) (firstDown.getY() - event.getY()));
 					float scaleDelta = delta / (displayHeightPx / SCALE_PER_SCREEN);
 					scale = 1 - scaleDelta;
-					listener.onZoomingOrRotating(scale, 0);
+					listener.onZooming(scale);
 					return true;
 				}
 			}
@@ -130,9 +130,9 @@ public class DoubleTapScaleDetector {
 	public interface DoubleTapZoomListener {
 		public void onZoomStarted(PointF centerPoint);
 
-		public void onZoomingOrRotating(double relativeToStart, float angle);
+		public void onZooming(double relativeToStart);
 
-		public void onZoomEnded(double relativeToStart, float angleRelative);
+		public void onZoomEnded(double relativeToStart);
 
 		public void onGestureInit(float x1, float y1, float x2, float y2);
 	}

@@ -1383,7 +1383,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			Message msg = Message.obtain(uiHandler, new Runnable() {
 				@Override
 				public void run() {
-					adapter.notifyDataSetInvalidated();
+					adapter.notifyDataSetChanged();
 					updateStatus();
 				}
 			});
