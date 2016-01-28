@@ -386,7 +386,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_flag_dark,
+		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoint,
 				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonWaypoint, nightMode);
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
@@ -721,16 +721,18 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				int dy = 0;
 				if (!menu.isLandscapeLayout()) {
 					TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+					TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
 					if (menuTopViewHeight != 0) {
-						int titleHeight = line1.getLineCount() * line1.getLineHeight() + menuTitleTopBottomPadding;
-						if (titleHeight < line1.getMeasuredHeight()) {
-							titleHeight = line1.getMeasuredHeight();
+						int titleHeight = line1.getLineCount() * line1.getLineHeight() + line2.getLineCount() * line2.getLineHeight() + menuTitleTopBottomPadding;
+						if (titleHeight < line1.getMeasuredHeight() + line2.getMeasuredHeight()) {
+							titleHeight = line1.getMeasuredHeight() + line2.getMeasuredHeight();
 						}
 						newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight;
 						dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 					} else {
-						menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight();
-						menuTitleTopBottomPadding = line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight();
+						menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2.getMeasuredHeight();
+						menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
+						+ (line2.getMeasuredHeight() - line2.getLineCount() * line2.getLineHeight());
 					}
 				}
 				menuTopViewHeight = newMenuTopViewHeight;
@@ -985,7 +987,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				} else {
 					cpy = cpyOrig;
 				}
-				if (dx > 0 || center) {
+				if (dx >= 0 || center) {
 					latlon = box.getLatLonFromPixel(cpx - dx, cpy - dy);
 				}
 			}

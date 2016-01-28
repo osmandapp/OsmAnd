@@ -182,6 +182,7 @@
             android:background="?attr/dashboard_divider"/>
 
         <LinearLayout
+            android:id="@+id/subscribeButtonRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right|center_vertical"
