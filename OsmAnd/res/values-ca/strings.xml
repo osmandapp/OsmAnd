@@ -1925,4 +1925,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_attr_hideUnderground_name">Amaga elements soterrats</string>
     <string name="data_is_not_available">No es disposa de dades</string>
     <string name="shared_string_read_more">Llegeix més</string>
+    <string name="shared_string_status">Estatus</string>
+    <string name="shared_string_save_changes">Desa els canvis</string>
+    <string name="shared_string_email_address">Adreça de correu electrònic</string>
     </resources>
