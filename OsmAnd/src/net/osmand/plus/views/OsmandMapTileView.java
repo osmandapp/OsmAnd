@@ -970,7 +970,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				baseZoom--;
 			}
 			if (!isZoomingAllowed(baseZoom, dz)) {
-				dz = 0;
+				dz = Math.signum(dz);
 			}
 			zoomToAnimate(baseZoom, dz, true);
 			rotateToAnimate(calcRotate);
@@ -982,13 +982,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (baseZoom > maxZoom) {
 			return false;
 		}
-		if (baseZoom >= maxZoom - 2 && dz > 1) {
+		if (baseZoom > maxZoom - 1 && dz > 1) {
 			return false;
 		}
 		if (baseZoom < minZoom) {
 			return false;
 		}
-		if (baseZoom <= minZoom + 2 && dz < -1) {
+		if (baseZoom < minZoom + 1 && dz < -1) {
 			return false;
 		}
 		return true;
@@ -1082,5 +1082,4 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public Context getContext() {
 		return activity;
 	}
-
 }
