@@ -1064,7 +1064,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
-			if (isZoomingAllowed(getZoom(), 1)) {
+			if (isZoomingAllowed(getZoom(), 1.1f)) {
 				final RotatedTileBox tb = getCurrentRotatedTileBox();
 				final double lat = tb.getLatFromPixel(e.getX(), e.getY());
 				final double lon = tb.getLonFromPixel(e.getX(), e.getY());
