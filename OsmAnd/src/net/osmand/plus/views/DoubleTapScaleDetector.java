@@ -108,8 +108,8 @@ public class DoubleTapScaleDetector {
 		int deltaYDown = (int) firstDown.getY() - (int) secondDown.getY();
 		int squaredDown = deltaXDown * deltaXDown + deltaYDown * deltaYDown;
 
-		int deltaXUp = (int) firstDown.getX() - (int) secondDown.getX();
-		int deltaYUp = (int) firstDown.getY() - (int) secondDown.getY();
+		int deltaXUp = (int) firstUp.getX() - (int) secondDown.getX();
+		int deltaYUp = (int) firstUp.getY() - (int) secondDown.getY();
 		int squaredUp = deltaXUp * deltaXUp + deltaYUp * deltaYUp;
 
 		return squaredDown < mDoubleTapSlopSquare && squaredUp < mDoubleTapSlopSquare;
