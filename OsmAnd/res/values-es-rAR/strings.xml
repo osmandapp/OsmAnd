@@ -2076,4 +2076,7 @@
 \nFacebook: https://www.facebook.com/osmandapp
 \nSitio web: http://osmand.net
 \nSi necesita ayuda con la aplicación OsmAnd, contacte con nuestro equipo de soporte: support@osmand.net. "</string>
+    <string name="shared_string_status">Estado</string>
+    <string name="shared_string_save_changes">Guardar cambios</string>
+    <string name="shared_string_email_address">Correo electrónico</string>
     </resources>
