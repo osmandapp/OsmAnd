@@ -982,13 +982,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (baseZoom > maxZoom) {
 			return false;
 		}
-		if (baseZoom == maxZoom - 2 && dz > 1) {
+		if (baseZoom >= maxZoom - 2 && dz > 1) {
 			return false;
 		}
 		if (baseZoom < minZoom) {
 			return false;
 		}
-		if (baseZoom == minZoom + 2 && dz < -1) {
+		if (baseZoom <= minZoom + 2 && dz < -1) {
 			return false;
 		}
 		return true;
@@ -1064,6 +1064,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
+			LOG.debug("onDoubleTap getZoom()");
 			if (isZoomingAllowed(getZoom(), 1.1f)) {
 				final RotatedTileBox tb = getCurrentRotatedTileBox();
 				final double lat = tb.getLatFromPixel(e.getX(), e.getY());
