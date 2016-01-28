@@ -1894,14 +1894,14 @@
     <string name="rec_split_title">Použít rozdělení nahrávání</string>
     <string name="rec_split_desc">Přepsat záznamy když použité místo přesáhne velikost úložiště</string>
     <string name="rec_split_clip_length">Délka záznamu</string>
-    <string name="rec_split_clip_length_desc">Délka každého záznamu nebude delší než zadaný interval</string>
+    <string name="rec_split_clip_length_desc">Délka každého záznamu nebude větší než zadaný interval</string>
     <string name="rec_split_storage_size">Velikost úložiště</string>
     <string name="rec_split_storage_size_desc">Velikost prostoru, který může být použit nahranými záznamy</string>
     <string name="live_updates">Okamžité aktualizace</string>
     <string name="available_maps">Dostupné mapy</string>
     <string name="select_voice_provider">Zvolte hlasové pokyny</string>
     <string name="select_voice_provider_descr">Vyberte nebo stáhněte hlasové pokyny pro váš jazyk</string>
-    <string name="impassable_road_desc">Vyberte cesty, které chcete vynechat při navigaci</string>
+    <string name="impassable_road_desc">Vyberte cesty, kterým se má navigace vyhnout</string>
     <string name="shared_string_sound">Zvuk</string>
     <string name="last_update">Poslední aktualizace: %s</string>
     <string name="update_time">Čas aktualizace</string>
@@ -1914,16 +1914,16 @@
     <string name="night">V noci</string>
     <string name="select_month_and_country">Vyberte měsíc a krajinu</string>
 <string name="shared_string_remove">Odstranit</string>
-    <string name="rendering_attr_hideIcons_name">Skrýt ikonu POI</string>
+    <string name="rendering_attr_hideIcons_name">Skrýt ikony POI</string>
     <string name="shared_string_select">Zvolit</string>
     <string name="road_blocked">Cesta je blokovaná</string>
     <string name="switch_start_finish">Zaměnit počáteční a cílový bod</string>
     <string name="data_is_not_available">Data nejsou dostupná</string>
-    <string name="clear_updates_proposition_message">Můžete smazat stažené aktualizace a vrátit se k výchozí edici map</string>
+    <string name="clear_updates_proposition_message">Můžete smazat stažené aktualizace a vrátit se k původní verzi mapy</string>
     <string name="add_time_span">Přidat časový interval</string>
     <string name="number_of_contributors">Počet přispěvatelů</string>
     <string name="number_of_edits">Počet úprav</string>
     <string name="reports_for">Report za</string>
-<string name="rendering_attr_hideUnderground_name">Skrýt objekty v pozadí</string>
-    <string name="shared_string_email_address">Email</string>
+<string name="rendering_attr_hideUnderground_name">Skrýt podzemní objekty</string>
+    <string name="shared_string_email_address">E-mail</string>
     </resources>
