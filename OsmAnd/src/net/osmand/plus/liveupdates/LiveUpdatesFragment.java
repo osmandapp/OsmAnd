@@ -141,14 +141,20 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 			}
 			regionNameTextView.setText(countryName);
 
-			Button subscribeButton = (Button) subscriptionHeader.findViewById(R.id.subscribeButton);
-			subscribeButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-					subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
-				}
-			});
+			View subscribeButtonRow = subscriptionHeader.findViewById(R.id.subscribeButtonRow);
+			if (InAppHelper.isSubscribedToLiveUpdates()) {
+				subscribeButtonRow.setVisibility(View.GONE);
+			} else {
+				subscribeButtonRow.setVisibility(View.VISIBLE);
+				Button subscribeButton = (Button) subscriptionHeader.findViewById(R.id.subscribeButton);
+				subscribeButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+					}
+				});
+			}
 
 			subscriptionBanner.setVisibility(View.GONE);
 			subscriptionInfo.setVisibility(View.VISIBLE);

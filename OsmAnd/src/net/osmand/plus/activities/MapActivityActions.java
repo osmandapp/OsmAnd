@@ -564,7 +564,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.waypoints).iconColor(R.drawable.ic_action_flage_dark)
+		optionsMenuHelper.item(R.string.waypoints).iconColor(R.drawable.ic_action_waypoint)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
