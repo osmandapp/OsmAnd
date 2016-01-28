@@ -1,12 +1,9 @@
 package net.osmand.plus.osmedit;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Display;
@@ -270,20 +267,6 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 												 final ArrayAdapter<String> adapter) {
 		textView.setAdapter(adapter);
 		textView.setThreshold(1);
-		textView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-				builder.setAdapter(adapter, new Dialog.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						textView.setText(adapter.getItem(which));
-					}
-
-				});
-				builder.create().show();
-			}
-		});
 		textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
