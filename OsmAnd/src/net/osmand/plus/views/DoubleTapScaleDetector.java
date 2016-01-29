@@ -104,11 +104,15 @@ public class DoubleTapScaleDetector {
 			return false;
 		}
 
-		int deltaX = (int) firstDown.getX() - (int) secondDown.getX();
-		int deltaY = (int) firstDown.getY() - (int) secondDown.getY();
-		int squared = deltaX * deltaX + deltaY * deltaY;
-		boolean toReturn = squared < mDoubleTapSlopSquare;
-		return toReturn;
+		int deltaXDown = (int) firstDown.getX() - (int) secondDown.getX();
+		int deltaYDown = (int) firstDown.getY() - (int) secondDown.getY();
+		int squaredDown = deltaXDown * deltaXDown + deltaYDown * deltaYDown;
+
+		int deltaXUp = (int) firstUp.getX() - (int) secondDown.getX();
+		int deltaYUp = (int) firstUp.getY() - (int) secondDown.getY();
+		int squaredUp = deltaXUp * deltaXUp + deltaYUp * deltaYUp;
+
+		return squaredDown < mDoubleTapSlopSquare && squaredUp < mDoubleTapSlopSquare;
 	}
 
 	private static final boolean isConfirmedScale(MotionEvent secondDown,
