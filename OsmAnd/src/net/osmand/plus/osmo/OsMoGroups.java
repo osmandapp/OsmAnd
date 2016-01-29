@@ -372,9 +372,11 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				gr.groupTracks.clear();
 				for (int i = 0; i < a.length; i++) {
 					a[i] = (JSONObject) ar.get(i);
-					String track = a[i].getString("name") + ".gpx";
-					gr.groupTracks.add(track);
-					toDeleteT.remove(track);
+					if (!a[i].has(DELETED)) {
+						String track = a[i].getString("name") + ".gpx";
+						gr.groupTracks.add(track);
+						toDeleteT.remove(track);
+					}
 				}
 				plugin.getDownloadGpxTask(true).execute(a);
 				disableGroupTracks(gr, toDeleteT);
