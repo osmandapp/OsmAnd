@@ -171,7 +171,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	@Override
 	public void mapActivityPause(MapActivity activity) {
 		groups.removeUiListener(olayer);
-		mapActivity = activity;
+		mapActivity = null;
 	}
 	
 	@Override
@@ -179,7 +179,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 		if (olayer != null) {
 			groups.addUiListeners(olayer);
 		}
-		mapActivity = null;
+		mapActivity = activity;
 	}
 	
 	/**
@@ -445,18 +445,25 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						t += s + "\n";
 					}
 					app.showToastMessage(t.trim());
+					refreshMap();
 				}
 			};
 			
 			@Override
 			protected void onPostExecute(String result) {
 				if(result.length() > 0) {
-					app.showToastMessage(app.getString(R.string.osmo_io_error)+ result);
+					app.showToastMessage(app.getString(R.string.osmo_io_error) + result);
 				}
 			}
 			
 		};
 		
+	}
+
+	public void refreshMap() {
+		if (mapActivity != null) {
+			mapActivity.getMapView().refreshMap();
+		}
 	}
 
 	@Override

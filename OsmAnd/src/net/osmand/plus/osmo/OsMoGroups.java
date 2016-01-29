@@ -281,8 +281,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					helper.selectGpxFile(sg.getGpxFile(), false, false);
 				}
 			}
+			plugin.refreshMap();
 		}
-
 	}
 
 	private OsMoGroup parseGroup(JSONObject obj) throws JSONException {
@@ -367,18 +367,19 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 			if (obj.has(TRACK)) {
 				JSONArray ar = obj.getJSONArray(TRACK);
-				JSONObject[] a = new JSONObject[ar.length()];
+				List<JSONObject> a = new ArrayList<>(ar.length());
 				Set<String> toDeleteT = new HashSet<String>(gr.groupTracks);
 				gr.groupTracks.clear();
-				for (int i = 0; i < a.length; i++) {
-					a[i] = (JSONObject) ar.get(i);
-					if (!a[i].has(DELETED)) {
-						String track = a[i].getString("name") + ".gpx";
+				for (int i = 0; i < ar.length(); i++) {
+					JSONObject trackJson = (JSONObject) ar.get(i);
+					if (!trackJson.has(DELETED)) {
+						String track = trackJson.getString("name") + ".gpx";
 						gr.groupTracks.add(track);
 						toDeleteT.remove(track);
+						a.add(trackJson);
 					}
 				}
-				plugin.getDownloadGpxTask(true).execute(a);
+				plugin.getDownloadGpxTask(true).execute(a.toArray(new JSONObject[a.size()]));
 				disableGroupTracks(gr, toDeleteT);
 			}
 
