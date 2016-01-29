@@ -32,11 +32,13 @@ public class InAppHelper {
 
 	private static boolean mSubscribedToLiveUpdates = false;
 	private static String mLiveUpdatesPrice;
+	private static long lastValidationCheckTime;
 
 	private static final String SKU_LIVE_UPDATES_FULL = "osm_live_subscription_2";
 	private static final String SKU_LIVE_UPDATES_FREE = "osm_free_live_subscription_2";
 	private static String SKU_LIVE_UPDATES;
 
+	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 	// (arbitrary) request code for the purchase flow
 	private static final int RC_REQUEST = 10001;
 
@@ -45,9 +47,9 @@ public class InAppHelper {
 	private boolean stopAfterResult = false;
 
 	private OsmandApplication ctx;
-	private InAppCallbacks callbacks;
+	private List<InAppListener> listeners = new ArrayList<>();
 
-	public interface InAppCallbacks {
+	public interface InAppListener {
 		void onError(String error);
 
 		void onGetItems();
@@ -71,15 +73,18 @@ public class InAppHelper {
 		return SKU_LIVE_UPDATES;
 	}
 
-	public InAppHelper(OsmandApplication ctx, InAppCallbacks callbacks) {
+	public InAppHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
-		this.callbacks = callbacks;
 		if (SKU_LIVE_UPDATES == null) {
 			if (Version.isFreeVersion(ctx)) {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FREE;
 			} else {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FULL;
 			}
+		}
+		if (Version.isDeveloperVersion(ctx)) {
+			mSubscribedToLiveUpdates = true;
+			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 		}
 	}
 
@@ -120,9 +125,7 @@ public class InAppHelper {
 				if (!result.isSuccess()) {
 					// Oh noes, there was a problem.
 					complain("Problem setting up in-app billing: " + result);
-					if (callbacks != null) {
-						callbacks.onError(result.getMessage());
-					}
+					notifyError(result.getMessage());
 					if (stopAfterResult) {
 						stop();
 					}
@@ -132,11 +135,16 @@ public class InAppHelper {
 				// Have we been disposed of in the meantime? If so, quit.
 				if (mHelper == null) return;
 
-				// IAB is fully set up. Now, let's get an inventory of stuff we own.
-				logDebug("Setup successful. Querying inventory.");
-				List<String> skus = new ArrayList<>();
-				skus.add(SKU_LIVE_UPDATES);
-				mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
+				// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
+				if (!mSubscribedToLiveUpdates
+						|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
+						|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC) {
+
+					logDebug("Setup successful. Querying inventory.");
+					List<String> skus = new ArrayList<>();
+					skus.add(SKU_LIVE_UPDATES);
+					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
+				}
 			}
 		});
 	}
@@ -152,9 +160,7 @@ public class InAppHelper {
 			// Is it a failure?
 			if (result.isFailure()) {
 				complain("Failed to query inventory: " + result);
-				if (callbacks != null) {
-					callbacks.onError(result.getMessage());
-				}
+				notifyError(result.getMessage());
 				if (stopAfterResult) {
 					stop();
 				}
@@ -171,10 +177,11 @@ public class InAppHelper {
 
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
-			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null);
+			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null) || Version.isDeveloperVersion(ctx);
 			if (mSubscribedToLiveUpdates) {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
+			lastValidationCheckTime = System.currentTimeMillis();
 			logDebug("User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
 
@@ -187,10 +194,8 @@ public class InAppHelper {
 				sendToken(liveUpdatesPurchase.getToken());
 			}
 
-			if (callbacks != null) {
-				callbacks.dismissProgress();
-				callbacks.onGetItems();
-			}
+			notifyDismissProgress();
+			notifyGetItems();
 			if (stopAfterResult) {
 				stop();
 			}
@@ -203,18 +208,14 @@ public class InAppHelper {
 									final String countryDownloadName, final boolean hideUserName) {
 		if (!mHelper.subscriptionsSupported()) {
 			complain("Subscriptions not supported on your device yet. Sorry!");
-			if (callbacks != null) {
-				callbacks.onError("Subscriptions not supported on your device yet. Sorry!");
-			}
+			notifyError("Subscriptions not supported on your device yet. Sorry!");
 			if (stopAfterResult) {
 				stop();
 			}
 			return;
 		}
 
-		if (callbacks != null) {
-			callbacks.showProgress();
-		}
+		notifyShowProgress();
 
 		new AsyncTask<Void, Void, String>() {
 
@@ -247,10 +248,8 @@ public class InAppHelper {
 				logDebug("Response=" + response);
 				if (response == null) {
 					complain("Cannot retrieve userId from server.");
-					if (callbacks != null) {
-						callbacks.dismissProgress();
-						callbacks.onError("Cannot retrieve userId from server.");
-					}
+					notifyDismissProgress();
+					notifyError("Cannot retrieve userId from server.");
 					if (stopAfterResult) {
 						stop();
 					}
@@ -266,19 +265,15 @@ public class InAppHelper {
 						String message = "JSON parsing error: "
 								+ (e.getMessage() == null ? "unknown" : e.getMessage());
 						complain(message);
-						if (callbacks != null) {
-							callbacks.dismissProgress();
-							callbacks.onError(message);
-						}
+						notifyDismissProgress();
+						notifyError(message);
 						if (stopAfterResult) {
 							stop();
 						}
 					}
 				}
 
-				if (callbacks != null) {
-					callbacks.dismissProgress();
-				}
+				notifyDismissProgress();
 				if (!Algorithms.isEmpty(userId)) {
 					logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
 					String payload = userId;
@@ -288,9 +283,7 @@ public class InAppHelper {
 								RC_REQUEST, mPurchaseFinishedListener, payload);
 					}
 				} else {
-					if (callbacks != null) {
-						callbacks.onError("Empty userId");
-					}
+					notifyError("Empty userId");
 					if (stopAfterResult) {
 						stop();
 					}
@@ -331,10 +324,8 @@ public class InAppHelper {
 
 			if (result.isFailure()) {
 				complain("Error purchasing: " + result);
-				if (callbacks != null) {
-					callbacks.dismissProgress();
-					callbacks.onError("Error purchasing: " + result);
-				}
+				notifyDismissProgress();
+				notifyError("Error purchasing: " + result);
 				if (stopAfterResult) {
 					stop();
 				}
@@ -352,10 +343,8 @@ public class InAppHelper {
 				mSubscribedToLiveUpdates = true;
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 
-				if (callbacks != null) {
-					callbacks.dismissProgress();
-					callbacks.onItemPurchased(SKU_LIVE_UPDATES);
-				}
+				notifyDismissProgress();
+				notifyItemPurchased(SKU_LIVE_UPDATES);
 				if (stopAfterResult) {
 					stop();
 				}
@@ -405,6 +394,44 @@ public class InAppHelper {
 		} catch (Exception e) {
 			logError("sendToken Error", e);
 		}
+	}
+
+	private void notifyError(String message) {
+		for (InAppListener l : listeners) {
+			l.onError(message);
+		}
+	}
+
+	private void notifyGetItems() {
+		for (InAppListener l : listeners) {
+			l.onGetItems();
+		}
+	}
+
+	private void notifyItemPurchased(String sku) {
+		for (InAppListener l : listeners) {
+			l.onItemPurchased(sku);
+		}
+	}
+
+	private void notifyShowProgress() {
+		for (InAppListener l : listeners) {
+			l.showProgress();
+		}
+	}
+
+	private void notifyDismissProgress() {
+		for (InAppListener l : listeners) {
+			l.dismissProgress();
+		}
+	}
+
+	public void addListener(InAppListener listener) {
+		this.listeners.add(listener);
+	}
+
+	public void removeListener(InAppListener listener) {
+		this.listeners.remove(listener);
 	}
 
 	private void complain(String message) {

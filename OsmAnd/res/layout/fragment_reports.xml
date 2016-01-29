@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="net.osmand.plus.liveupdates.ReportsFragment">
 
-    <include layout="@layout/shadow_top"/>
+    <include layout="@layout/card_top_divider"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -145,6 +145,6 @@
             tools:progress="50"/>
     </FrameLayout>
 
-    <include layout="@layout/shadow_bottom"/>
+    <include layout="@layout/card_bottom_divider"/>
 
 </LinearLayout>

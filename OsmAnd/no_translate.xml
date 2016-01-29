@@ -43,6 +43,7 @@
     <string name="osm_live_thanks">Thank you for subscribing to live updates!</string>
     <string name="osm_live_region_desc">Part your donation will be sent to OSM users who submit changes to the map in that region</string>
     <string name="osm_live_subscription_settings">Subscription settings</string>
+    <string name="osm_live_ask_for_purchase">Please purchase OSM Live subscription first</string>
 
     <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
         Major part of the income goes back to OSM community and is paid out per each OSM contribution. 

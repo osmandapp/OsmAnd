@@ -6,14 +6,14 @@
     android:layout_height="64dp"
     android:orientation="vertical">
 
-    <include layout="@layout/shadow_bottom"/>
+    <include layout="@layout/card_bottom_divider"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <include layout="@layout/shadow_top"/>
+    <include layout="@layout/card_top_divider"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,10 +40,5 @@
             android:visibility="gone"
             tools:visibility="visible"/>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
 
 </LinearLayout>

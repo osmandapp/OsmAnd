@@ -23,8 +23,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 	private InAppHelper inAppHelper;
 
-	public void setInAppHelper(InAppHelper inAppHelper) {
-		this.inAppHelper = inAppHelper;
+	public InAppHelper getInAppHelper() {
+		return inAppHelper;
 	}
 
 	@Override
@@ -32,6 +32,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_livie_updates);
+
+		inAppHelper = new InAppHelper(getMyApplication());
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 		pagerAdapter = new LiveUpdatesFragmentPagerAdapter(getSupportFragmentManager());
@@ -61,6 +63,14 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 			// perform any handling of activity results not related to in-app
 			// billing...
 			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (inAppHelper != null) {
+			inAppHelper.stop();
 		}
 	}
 
