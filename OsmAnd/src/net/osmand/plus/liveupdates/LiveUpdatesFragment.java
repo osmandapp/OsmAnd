@@ -1,5 +1,6 @@
 package net.osmand.plus.liveupdates;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -28,6 +29,7 @@ import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.map.WorldRegion;
@@ -40,6 +42,7 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.inapp.InAppHelper.InAppListener;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
@@ -63,7 +66,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayT
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
-public class LiveUpdatesFragment extends BaseOsmAndFragment {
+public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppListener {
 	public static final String TITLE = "Live Updates";
 	private static final int SUBSCRIPTION_SETTINGS = 5;
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
@@ -77,10 +80,30 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 	private LocalIndexesAdapter adapter;
 	private AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>> loadLocalIndexesTask;
 
+	private ProgressBar progressBar;
+	private boolean processing;
+
+	public InAppHelper getInAppHelper() {
+		Activity activity = getActivity();
+		if (activity instanceof OsmLiveActivity) {
+			return ((OsmLiveActivity) activity).getInAppHelper();
+		} else {
+			return null;
+		}
+	}
+
+	private boolean isProcessing() {
+		return processing;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		InAppHelper helper = getInAppHelper();
+		if (helper != null) {
+			helper.addListener(this);
+		}
 	}
 
 	@Override
@@ -89,7 +112,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 
-		View bottomShadowView = inflater.inflate(R.layout.shadow_bottom, listView, false);
+		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
 		listView.addFooterView(bottomShadowView);
 		adapter = new LocalIndexesAdapter(this);
 		listView.setAdapter(adapter);
@@ -103,6 +126,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 				return true;
 			}
 		});
+
+		progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
 		//test
 		//getSettings().LIVE_UPDATES_PURCHASED.set(true);
@@ -123,43 +148,21 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 			ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
 			TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
 			TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
+			statusTextView.setText(getString(R.string.osm_live_active));
+			statusIcon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_done));
 
-			if (InAppHelper.isSubscribedToLiveUpdates()) {
-				statusTextView.setText(getString(R.string.osm_live_active));
-				statusIcon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_done));
-			} else {
-				statusTextView.setText(getString(R.string.osm_live_not_active));
-				statusIcon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
-			}
-
-			OsmandSettings settings = getMyApplication().getSettings();
-
-			String countryName = settings.BILLING_USER_COUNTRY.get();
+			String countryName = getSettings().BILLING_USER_COUNTRY.get();
 			if (Algorithms.isEmpty(countryName)) {
 				WorldRegion world = getMyApplication().getRegions().getWorldRegion();
 				countryName = world.getLocaleName();
 			}
 			regionNameTextView.setText(countryName);
 
-			View subscribeButtonRow = subscriptionHeader.findViewById(R.id.subscribeButtonRow);
-			if (InAppHelper.isSubscribedToLiveUpdates()) {
-				subscribeButtonRow.setVisibility(View.GONE);
-			} else {
-				subscribeButtonRow.setVisibility(View.VISIBLE);
-				Button subscribeButton = (Button) subscriptionHeader.findViewById(R.id.subscribeButton);
-				subscribeButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
-					}
-				});
-			}
-
 			subscriptionBanner.setVisibility(View.GONE);
 			subscriptionInfo.setVisibility(View.VISIBLE);
 		} else {
 			Button readMoreBtn = (Button) subscriptionHeader.findViewById(R.id.read_more_button);
+			readMoreBtn.setEnabled(!processing);
 			readMoreBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -169,6 +172,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 				}
 			});
 			Button subscriptionButton = (Button) subscriptionHeader.findViewById(R.id.subscription_button);
+			subscriptionButton.setEnabled(!processing);
 			subscriptionButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -183,9 +187,28 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		InAppHelper helper = getInAppHelper();
+		if (helper != null) {
+			enableProgress();
+			helper.start(false);
+		}
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		loadLocalIndexesTask.cancel(true);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		InAppHelper helper = getInAppHelper();
+		if (helper != null) {
+			helper.removeListener(this);
+		}
 	}
 
 	public void notifyLiveUpdatesChanged() {
@@ -321,7 +344,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 
 			view.setOnClickListener(null);
 
-			SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
+			final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
 			View topShadowView = view.findViewById(R.id.bottomShadowView);
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				topShadowView.setVisibility(View.GONE);
@@ -329,26 +352,21 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 				OsmandApplication application = (OsmandApplication) ctx.getApplicationContext();
 				final OsmandSettings settings = application.getSettings();
 				liveUpdatesSwitch.setChecked(settings.IS_LIVE_UPDATES_ON.get());
+				liveUpdatesSwitch.setEnabled(!processing);
 				liveUpdatesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						settings.IS_LIVE_UPDATES_ON.set(isChecked);
-						AlarmManager alarmMgr = (AlarmManager) getActivity()
-								.getSystemService(Context.ALARM_SERVICE);
-						for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
-							PendingIntent alarmIntent = getPendingIntent(getActivity(),
-									localIndexInfo);
-							if (isChecked) {
-								final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
-										preferenceUpdateFrequency(localIndexInfo, getSettings());
-								final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
-										preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
-								UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
-								TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
-								setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+						if (isChecked) {
+							if (InAppHelper.isSubscribedToLiveUpdates()) {
+								settings.IS_LIVE_UPDATES_ON.set(true);
+								enableLiveUpdates(true);
 							} else {
-								alarmMgr.cancel(alarmIntent);
+								liveUpdatesSwitch.setChecked(false);
+								getMyApplication().showToastMessage(getString(R.string.osm_live_ask_for_purchase));
 							}
+						} else {
+							settings.IS_LIVE_UPDATES_ON.set(false);
+							enableLiveUpdates(false);
 						}
 					}
 				});
@@ -357,6 +375,26 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 				liveUpdatesSwitch.setVisibility(View.GONE);
 			}
 			return view;
+		}
+
+		private void enableLiveUpdates(boolean enable) {
+			AlarmManager alarmMgr = (AlarmManager) getActivity()
+					.getSystemService(Context.ALARM_SERVICE);
+			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
+				PendingIntent alarmIntent = getPendingIntent(getActivity(),
+						localIndexInfo);
+				if (enable) {
+					final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
+							preferenceUpdateFrequency(localIndexInfo, getSettings());
+					final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
+							preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
+					UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
+					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
+					setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+				} else {
+					alarmMgr.cancel(alarmIntent);
+				}
+			}
 		}
 
 		@Override
@@ -487,6 +525,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 					LiveUpdatesSettingsDialogFragment.createInstance(item).show(fragmentManager, "settings");
 				}
 			};
+			options.setEnabled(!fragment.isProcessing());
 			options.setOnClickListener(clickListener);
 
 			if (isLastChild) {
@@ -547,7 +586,55 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private void enableProgress() {
+		processing = true;
+		progressBar.setVisibility(View.VISIBLE);
+		updateSubscriptionHeader();
+		adapter.notifyDataSetChanged();
+		listView.setEnabled(false);
+	}
+
+	private void disableProgress() {
+		processing = false;
+		progressBar.setVisibility(View.INVISIBLE);
+		updateSubscriptionHeader();
+		adapter.notifyDataSetChanged();
+		listView.setEnabled(true);
+	}
+
 	public static float dpToPx(final Context context, final float dp) {
 		return dp * context.getResources().getDisplayMetrics().density;
+	}
+
+	@Override
+	public void onError(String error) {
+		disableProgress();
+	}
+
+	@Override
+	public void onGetItems() {
+		getSettings().LIVE_UPDATES_PURCHASED.set(InAppHelper.isSubscribedToLiveUpdates());
+		if (!InAppHelper.isSubscribedToLiveUpdates()) {
+			getSettings().IS_LIVE_UPDATES_ON.set(false);
+			adapter.enableLiveUpdates(false);
+		}
+		disableProgress();
+	}
+
+	@Override
+	public void onItemPurchased(String sku) {
+		if (InAppHelper.getSkuLiveUpdates().equals(sku)) {
+			updateSubscriptionHeader();
+		}
+	}
+
+	@Override
+	public void showProgress() {
+		enableProgress();
+	}
+
+	@Override
+	public void dismissProgress() {
+		disableProgress();
 	}
 }

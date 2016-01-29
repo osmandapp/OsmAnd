@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingTop="8dp">
+    android:paddingTop="16dp">
 
     <LinearLayout
         android:id="@+id/subscription_banner"
@@ -173,32 +173,6 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
                 app:typeface="@string/font_roboto_medium"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"/>
-
-        <LinearLayout
-            android:id="@+id/subscribeButtonRow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
-            android:minHeight="48dp">
-
-            <Button
-                android:id="@+id/subscribeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="6dp"
-                android:background="?attr/selectableItemBackground"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/osm_live_subscribe_btn"
-                android:textColor="?attr/color_dialog_buttons"/>
 
         </LinearLayout>
 

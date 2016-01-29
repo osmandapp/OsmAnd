@@ -1,13 +1,30 @@
-<ExpandableListView
-    android:id="@android:id/list"
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="@null"
-    android:footerDividersEnabled="false"
-    android:groupIndicator="@null"
-    android:headerDividersEnabled="false"
-    android:orientation="vertical"
-    android:drawSelectorOnTop="true"
-    tools:context=".liveupdates.LiveUpdatesFragment"/>
+    android:layout_height="match_parent">
+
+    <ExpandableListView
+        android:id="@android:id/list"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:drawSelectorOnTop="true"
+        android:footerDividersEnabled="false"
+        android:groupIndicator="@null"
+        android:headerDividersEnabled="false"
+        android:orientation="vertical"
+        tools:context=".liveupdates.LiveUpdatesFragment"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_gravity="top"
+        android:indeterminate="true"
+        android:padding="0dp"
+        android:visibility="invisible"/>
+
+</FrameLayout>

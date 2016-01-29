@@ -22,7 +22,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppHelper;
-import net.osmand.plus.inapp.InAppHelper.InAppCallbacks;
+import net.osmand.plus.inapp.InAppHelper.InAppListener;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.util.Algorithms;
@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SubscriptionFragment extends BaseOsmAndDialogFragment implements InAppCallbacks, OnFragmentInteractionListener {
+public class SubscriptionFragment extends BaseOsmAndDialogFragment implements InAppListener, OnFragmentInteractionListener {
 
 	public static final String TAG = "SubscriptionFragment";
 	private static final String EDIT_MODE_ID = "edit_mode_id";
@@ -42,7 +42,6 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	private static final String COUNTRY_ITEM_ID = "country_id";
 	private static final String HIDE_USER_NAME_ID = "hide_user_name_id";
 
-	private InAppHelper inAppHelper;
 	private OsmandSettings settings;
 	private ProgressDialog dlg;
 	private boolean editMode;
@@ -54,6 +53,15 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 	public void setEditMode(boolean editMode) {
 		this.editMode = editMode;
+	}
+
+	public InAppHelper getInAppHelper() {
+		Activity activity = getActivity();
+		if (activity instanceof OsmLiveActivity) {
+			return ((OsmLiveActivity) activity).getInAppHelper();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -86,19 +94,16 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 		settings = getMyApplication().getSettings();
 		prevEmail = settings.BILLING_USER_EMAIL.get();
-		if (!editMode) {
-			inAppHelper = new InAppHelper(getMyApplication(), this);
-			Activity activity = getActivity();
-			if (activity instanceof OsmLiveActivity) {
-				((OsmLiveActivity) activity).setInAppHelper(inAppHelper);
-			}
-			inAppHelper.start(false);
-		}
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+
+		InAppHelper helper = getInAppHelper();
+		if (helper != null) {
+			helper.addListener(this);
+		}
 
 		String userName = settings.BILLING_USER_NAME.get();
 		String email = settings.BILLING_USER_EMAIL.get();
@@ -253,11 +258,12 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			subscribeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (inAppHelper != null) {
+					InAppHelper helper = getInAppHelper();
+					if (helper != null) {
 						if (applySettings(userNameEdit.getText().toString().trim(),
 								emailEdit.getText().toString().trim(), hideUserNameCheckbox.isChecked())) {
 
-							inAppHelper.purchaseLiveUpdates(getActivity(),
+							helper.purchaseLiveUpdates(getActivity(),
 									settings.BILLING_USER_EMAIL.get(),
 									settings.BILLING_USER_NAME.get(),
 									settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
@@ -280,15 +286,12 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (inAppHelper != null) {
-			inAppHelper.stop();
+		InAppHelper helper = getInAppHelper();
+		if (helper != null) {
+			helper.removeListener(this);
 		}
 		if (dlg != null && dlg.isShowing()) {
 			dlg.hide();
-		}
-		Activity activity = getActivity();
-		if (activity instanceof OsmLiveActivity) {
-			((OsmLiveActivity) activity).setInAppHelper(null);
 		}
 	}
 
@@ -325,14 +328,6 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 	@Override
 	public void onItemPurchased(String sku) {
-
-		if (InAppHelper.getSkuLiveUpdates().equals(sku)) {
-			Fragment parentFragment = getParentFragment();
-			if (parentFragment instanceof LiveUpdatesFragment) {
-				((LiveUpdatesFragment) parentFragment).updateSubscriptionHeader();
-			}
-		}
-
 		dismiss();
 	}
 
