@@ -419,7 +419,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public int getFabIconId() {
 		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-			return R.drawable.map_action_flag_dark;
+			return R.drawable.map_action_waypoint;
 		} else {
 			return R.drawable.map_directions;
 		}
