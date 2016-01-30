@@ -127,7 +127,9 @@ public class MapDataMenuController extends MenuController {
 		};
 
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			downloadThread.runReloadIndexFiles();
+			if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
+				downloadThread.runReloadIndexFiles();
+			}
 		}
 
 		updateData();
@@ -255,8 +257,10 @@ public class MapDataMenuController extends MenuController {
 		rightTitleButtonController.visible = indexItem != null && indexItem.isDownloaded();
 		topRightTitleButtonController.visible = otherIndexItems.size() > 0;
 
-		boolean downloadIndexes = !downloadThread.getIndexes().isDownloadedFromInternet
+		boolean downloadIndexes = getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()
+				&& !downloadThread.getIndexes().isDownloadedFromInternet
 				&& !downloadThread.getIndexes().downloadFromInternetFailed;
+		
 		boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 		if (isDownloading) {
 			titleProgressController.setMapDownloadMode();
