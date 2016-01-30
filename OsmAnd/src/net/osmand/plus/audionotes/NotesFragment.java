@@ -53,9 +53,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Denis on 18.02.2015.
- */
 public class NotesFragment extends OsmAndListFragment {
 	private static final Log LOG = PlatformUtil.getLog(NotesFragment.class);
 
@@ -170,9 +167,12 @@ public class NotesFragment extends OsmAndListFragment {
 	
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		getView().findViewById(R.id.select_all).setVisibility(selectionMode? View.VISIBLE : View.GONE);
-		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode &&
-				AndroidUiHelper.isOrientationPortrait(getActivity()));
+		View view = getView();
+		if (view != null) {
+			view.findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
+					AndroidUiHelper.isOrientationPortrait(getActivity()));
+		}
 	}
 	
 	private void updateSelectionTitle(ActionMode m){
