@@ -416,7 +416,9 @@ public class MapActivityActions implements DialogProvider {
 		app.getRoutingHelper().setFollowingMode(false);
 		app.getRoutingHelper().setRoutePlanningMode(true);
 		// reset start point
-		targets.setStartPoint(from, false, fromName);
+		if (targets.getPointToStart() == null) {
+			targets.setStartPoint(from, false, fromName);
+		}
 		// then set gpx
 		setGPXRouteParams(gpxFile);
 		// then update start and destination point  
@@ -758,7 +760,7 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper.setRoutePlanningMode(false);
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-		getMyApplication().getTargetPointsHelper().clearStartPoint(false);
+		//getMyApplication().getTargetPointsHelper().clearStartPoint(false);
 		mapActivity.updateApplicationModeSettings();
 		mapActivity.getDashboard().clearDeletedPoints();
 	}
