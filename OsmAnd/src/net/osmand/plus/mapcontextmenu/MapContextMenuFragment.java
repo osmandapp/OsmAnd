@@ -95,6 +95,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private boolean nightMode;
 	private boolean centered;
 	private boolean initLayout = true;
+	private boolean wasDrawerDisabled;
 
 	private float skipHalfScreenStateLimit;
 
@@ -657,14 +658,21 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			return;
 		}
 		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
-		if (menu.displayDistanceDirection()) {
-			getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
+		getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
+		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+		wasDrawerDisabled = getMapActivity().isDrawerDisabled();
+		if (!wasDrawerDisabled) {
+			getMapActivity().disableDrawer();
 		}
 	}
 
 	@Override
 	public void onPause() {
 		getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
+		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+		if (!wasDrawerDisabled) {
+			getMapActivity().enableDrawer();
+		}
 		super.onPause();
 	}
 

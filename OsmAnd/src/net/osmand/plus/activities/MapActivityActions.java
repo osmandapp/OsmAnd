@@ -416,9 +416,7 @@ public class MapActivityActions implements DialogProvider {
 		app.getRoutingHelper().setFollowingMode(false);
 		app.getRoutingHelper().setRoutePlanningMode(true);
 		// reset start point
-		if (targets.getPointToStart() == null) {
-			targets.setStartPoint(from, false, fromName);
-		}
+		targets.setStartPoint(from, false, fromName);
 		// then set gpx
 		setGPXRouteParams(gpxFile);
 		// then update start and destination point  

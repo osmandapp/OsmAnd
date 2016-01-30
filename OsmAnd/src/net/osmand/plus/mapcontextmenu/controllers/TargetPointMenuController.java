@@ -24,29 +24,30 @@ public class TargetPointMenuController extends MenuController {
 		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
 		RoutingHelper routingHelper = getMapActivity().getMyApplication().getRoutingHelper();
 		final boolean nav = routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode();
-		if (!targetPoint.start) {
-			leftTitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					TargetPoint tp = getTargetPoint();
-					if (tp.intermediate) {
-						targetPointsHelper.removeWayPoint(true, tp.index);
-					} else {
-						targetPointsHelper.removeWayPoint(true, -1);
-					}
-					getMapActivity().getContextMenu().close();
-					if (nav && intermediatePointsCount == 0) {
-						getMapActivity().getMapActions().stopNavigationWithoutConfirm();
-					}
+		leftTitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				TargetPoint tp = getTargetPoint();
+				if (tp.start) {
+					getMapActivity().getMyApplication().getTargetPointsHelper().clearStartPoint(true);
+				} else if (tp.intermediate) {
+					targetPointsHelper.removeWayPoint(true, tp.index);
+				} else {
+					targetPointsHelper.removeWayPoint(true, -1);
 				}
-			};
-			if (nav && intermediatePointsCount == 0) {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.cancel_navigation);
-				leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
-			} else {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
-				leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+				getMapActivity().getContextMenu().close();
+				if (nav && intermediatePointsCount == 0 && !tp.start) {
+					getMapActivity().getMapActions().stopNavigationWithoutConfirm();
+					getMapActivity().getMyApplication().getTargetPointsHelper().clearStartPoint(false);
+				}
 			}
+		};
+		if (nav && intermediatePointsCount == 0 && !targetPoint.start) {
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.cancel_navigation);
+			leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
+		} else {
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
+			leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 		}
 	}
 

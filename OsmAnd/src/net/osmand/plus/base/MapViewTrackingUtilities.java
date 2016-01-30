@@ -1,6 +1,7 @@
 package net.osmand.plus.base;
 
-import java.util.List;
+import android.content.Context;
+import android.view.WindowManager;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -16,7 +17,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
@@ -24,8 +24,8 @@ import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
-import android.content.Context;
-import android.view.WindowManager;
+
+import java.util.List;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener, OsmAndCompassListener, IRouteInformationListener {
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4; 
@@ -272,7 +272,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		app.runMessageInUIThreadAndCancelPrevious(AUTO_FOLLOW_MSG_ID, new Runnable() {
 			@Override
 			public void run() {
-				if (mapView != null && !isMapLinkedToLocation()) {
+				if (mapView != null && !isMapLinkedToLocation() && contextMenu == null) {
 					app.showToastMessage(R.string.auto_follow_location_enabled);
 					backToLocationImpl();
 				}
@@ -285,9 +285,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 	
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
-		if(!isMapLinkedToLocation){
+		if (!isMapLinkedToLocation) {
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0 && app.getRoutingHelper().isFollowingMode() && !routePlanningMode){
+			if (autoFollow > 0 && app.getRoutingHelper().isFollowingMode() && !routePlanningMode) {
 				backToLocationWithDelay(autoFollow);
 			}
 		}

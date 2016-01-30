@@ -143,6 +143,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
+	private boolean drawerDisabled;
 
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -1034,11 +1035,17 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	}
 
 	public void disableDrawer() {
+		drawerDisabled = true;
 		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 	}
 
 	public void enableDrawer() {
+		drawerDisabled = false;
 		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+	}
+
+	public boolean isDrawerDisabled() {
+		return drawerDisabled;
 	}
 
 	public void closeDrawer() {

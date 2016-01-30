@@ -168,7 +168,9 @@ public class FailSafeFuntions {
 			app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
 		}
 		routingHelper.setGpxParams(gpxRoute);
-		app.getTargetPointsHelper().setStartPoint(null, false, null);
+		if (app.getTargetPointsHelper().getPointToStart() == null) {
+			app.getTargetPointsHelper().setStartPoint(null, false, null);
+		}
 		app.getSettings().FOLLOW_THE_ROUTE.set(true);
 		routingHelper.setFollowingMode(true);
 		app.getTargetPointsHelper().updateRouteAndRefresh(true);
