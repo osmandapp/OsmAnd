@@ -980,7 +980,7 @@
 	<string name="poi_recycling_shoes">Calzados</string>
 	<string name="poi_recycling_aluminium">Aluminio</string>
 	<string name="poi_recycling_organic">Orgánico</string>
-	<string name="poi_recycling_beverage_cartons">Cajas de cartón</string>
+	<string name="poi_recycling_beverage_cartons">Cartones de bebida</string>
 	<string name="poi_recycling_garden_waste">Residuos de jardín</string>
 	<string name="poi_recycling_low_energy_bulbs">Bombillas de bajo consumo</string>
 	<string name="poi_recycling_fluorescent_tubes">Tubos fluorescentes</string>
@@ -993,7 +993,7 @@
 	<string name="poi_recycling_hazardous_waste">Residuos peligrosos</string>
 	<string name="poi_recycling_mobile_phones">Teléfonos móviles</string>
 	<string name="poi_recycling_computers">Computadoras</string>
-	<string name="poi_recycling_tyres">Llantas</string>
+	<string name="poi_recycling_tyres">Neumáticos</string>
 	<string name="poi_recycling_tv_monitor">TV, monitores</string>
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_hydrargyrum">Mercurio</string>
