@@ -105,7 +105,7 @@
     <string name="shared_string_download_successful">Descarga exitosa</string>
     <string name="shared_string_unexpected_error">Ocurrió un error inesperado</string>
     <string name="shared_string_action_template">Acción {0}</string>
-    <string name="shared_string_close">Resolver</string>
+    <string name="shared_string_close">Cerrar</string>
     <string name="shared_string_exit">Salir</string>
     <string name="shared_string_show">Mostrar</string>
     <string name="shared_string_show_all">Mostrar todo</string>
