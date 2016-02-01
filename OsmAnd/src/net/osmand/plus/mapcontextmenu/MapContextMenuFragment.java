@@ -730,17 +730,25 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				if (!menu.isLandscapeLayout()) {
 					TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
 					TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+					int line2LineCount = 0;
+					int line2LineHeight = 0;
+					int line2MeasuredHeight = 0;
+					if (line2 != null) {
+						line2LineCount = line2.getLineCount();
+						line2LineHeight = line2.getLineHeight();
+						line2MeasuredHeight = line2.getMeasuredHeight();
+					}
 					if (menuTopViewHeight != 0) {
-						int titleHeight = line1.getLineCount() * line1.getLineHeight() + line2.getLineCount() * line2.getLineHeight() + menuTitleTopBottomPadding;
-						if (titleHeight < line1.getMeasuredHeight() + line2.getMeasuredHeight()) {
-							titleHeight = line1.getMeasuredHeight() + line2.getMeasuredHeight();
+						int titleHeight = line1.getLineCount() * line1.getLineHeight() + line2LineCount * line2LineHeight + menuTitleTopBottomPadding;
+						if (titleHeight < line1.getMeasuredHeight() + line2MeasuredHeight) {
+							titleHeight = line1.getMeasuredHeight() + line2MeasuredHeight;
 						}
 						newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight;
 						dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 					} else {
-						menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2.getMeasuredHeight();
+						menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight;
 						menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
-						+ (line2.getMeasuredHeight() - line2.getLineCount() * line2.getLineHeight());
+						+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
 					}
 				}
 				menuTopViewHeight = newMenuTopViewHeight;

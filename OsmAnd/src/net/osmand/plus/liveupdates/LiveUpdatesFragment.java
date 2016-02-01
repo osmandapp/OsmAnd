@@ -119,11 +119,15 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				final FragmentManager fragmentManager = getChildFragmentManager();
-				LiveUpdatesSettingsDialogFragment
-						.createInstance(adapter.getChild(groupPosition, childPosition))
-						.show(fragmentManager, "settings");
-				return true;
+				if (!processing && InAppHelper.isSubscribedToLiveUpdates()) {
+					final FragmentManager fragmentManager = getChildFragmentManager();
+					LiveUpdatesSettingsDialogFragment
+							.createInstance(adapter.getChild(groupPosition, childPosition))
+							.show(fragmentManager, "settings");
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
 
@@ -236,7 +240,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == SUBSCRIPTION_SETTINGS) {
+		if (item.getItemId() == SUBSCRIPTION_SETTINGS && !processing) {
 			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
 			subscriptionFragment.setEditMode(true);
 			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
@@ -518,15 +522,19 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 					lastCheck != DEFAULT_LAST_CHECK ? lastCheck : timestamp);
 			descriptionTextView.setText(context.getString(R.string.last_update, lastCheckString));
 
-			final View.OnClickListener clickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final FragmentManager fragmentManager = fragment.getChildFragmentManager();
-					LiveUpdatesSettingsDialogFragment.createInstance(item).show(fragmentManager, "settings");
-				}
-			};
-			options.setEnabled(!fragment.isProcessing());
-			options.setOnClickListener(clickListener);
+			if (!fragment.isProcessing() && InAppHelper.isSubscribedToLiveUpdates()) {
+				final View.OnClickListener clickListener = new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						final FragmentManager fragmentManager = fragment.getChildFragmentManager();
+						LiveUpdatesSettingsDialogFragment.createInstance(item).show(fragmentManager, "settings");
+					}
+				};
+				options.setOnClickListener(clickListener);
+				options.setEnabled(true);
+			} else {
+				options.setEnabled(false);
+			}
 
 			if (isLastChild) {
 				divider.setVisibility(View.GONE);
@@ -591,7 +599,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		progressBar.setVisibility(View.VISIBLE);
 		updateSubscriptionHeader();
 		adapter.notifyDataSetChanged();
-		listView.setEnabled(false);
 	}
 
 	private void disableProgress() {
@@ -599,7 +606,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		progressBar.setVisibility(View.INVISIBLE);
 		updateSubscriptionHeader();
 		adapter.notifyDataSetChanged();
-		listView.setEnabled(true);
 	}
 
 	public static float dpToPx(final Context context, final float dp) {

@@ -260,7 +260,7 @@ public class MapDataMenuController extends MenuController {
 		boolean downloadIndexes = getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()
 				&& !downloadThread.getIndexes().isDownloadedFromInternet
 				&& !downloadThread.getIndexes().downloadFromInternetFailed;
-		
+
 		boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 		if (isDownloading) {
 			titleProgressController.setMapDownloadMode();

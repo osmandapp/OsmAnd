@@ -8,13 +8,18 @@ import android.util.Log;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.util.IabHelper;
+import net.osmand.plus.inapp.util.IabHelper.OnIabPurchaseFinishedListener;
+import net.osmand.plus.inapp.util.IabHelper.QueryInventoryFinishedListener;
 import net.osmand.plus.inapp.util.IabResult;
 import net.osmand.plus.inapp.util.Inventory;
 import net.osmand.plus.inapp.util.Purchase;
 import net.osmand.plus.inapp.util.SkuDetails;
+import net.osmand.plus.liveupdates.CountrySelectionFragment;
+import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -45,6 +50,8 @@ public class InAppHelper {
 	// The helper object
 	private IabHelper mHelper;
 	private boolean stopAfterResult = false;
+	private boolean isDeveloperVersion = false;
+	private String token = "";
 
 	private OsmandApplication ctx;
 	private List<InAppListener> listeners = new ArrayList<>();
@@ -59,6 +66,10 @@ public class InAppHelper {
 		void showProgress();
 
 		void dismissProgress();
+	}
+
+	public String getToken() {
+		return token;
 	}
 
 	public static boolean isSubscribedToLiveUpdates() {
@@ -82,7 +93,8 @@ public class InAppHelper {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FULL;
 			}
 		}
-		if (Version.isDeveloperVersion(ctx)) {
+		isDeveloperVersion = Version.isDeveloperVersion(ctx);
+		if (isDeveloperVersion) {
 			mSubscribedToLiveUpdates = true;
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 		}
@@ -136,21 +148,27 @@ public class InAppHelper {
 				if (mHelper == null) return;
 
 				// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
-				if (!mSubscribedToLiveUpdates
-						|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
-						|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC) {
+				if (!isDeveloperVersion &&
+						(!mSubscribedToLiveUpdates
+								|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
+								|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC)) {
 
 					logDebug("Setup successful. Querying inventory.");
 					List<String> skus = new ArrayList<>();
 					skus.add(SKU_LIVE_UPDATES);
 					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
+				} else {
+					notifyDismissProgress();
+					if (stopAfterResult) {
+						stop();
+					}
 				}
 			}
 		});
 	}
 
 	// Listener that's called when we finish querying the items and subscriptions we own
-	private IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+	private QueryInventoryFinishedListener mGotInventoryListener = new QueryInventoryFinishedListener() {
 		public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
 			logDebug("Query inventory finished.");
 
@@ -177,7 +195,7 @@ public class InAppHelper {
 
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
-			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null) || Version.isDeveloperVersion(ctx);
+			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
 			if (mSubscribedToLiveUpdates) {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
@@ -190,17 +208,44 @@ public class InAppHelper {
 				mLiveUpdatesPrice = liveUpdatesDetails.getPrice();
 			}
 
-			if (liveUpdatesPurchase != null && !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()) {
-				sendToken(liveUpdatesPurchase.getToken());
+			boolean needSendToken = false;
+			if (liveUpdatesPurchase != null) {
+				OsmandSettings settings = ctx.getSettings();
+				if (Algorithms.isEmpty(settings.BILLING_USER_ID.get())
+						&& !Algorithms.isEmpty(liveUpdatesPurchase.getDeveloperPayload())) {
+					String payload = liveUpdatesPurchase.getDeveloperPayload();
+					if (!Algorithms.isEmpty(payload)) {
+						String[] arr = payload.split(" ");
+						if (arr.length > 0) {
+							settings.BILLING_USER_ID.set(arr[0]);
+						}
+						if (arr.length > 1) {
+							token = arr[1];
+						}
+					}
+				}
+				if (!settings.BILLING_PURCHASE_TOKEN_SENT.get()) {
+					needSendToken = true;
+				}
 			}
 
-			notifyDismissProgress();
-			notifyGetItems();
-			if (stopAfterResult) {
-				stop();
-			}
+			final OnRequestResultListener listener = new OnRequestResultListener() {
+				@Override
+				public void onResult(String result) {
+					notifyDismissProgress();
+					notifyGetItems();
+					if (stopAfterResult) {
+						stop();
+					}
+					logDebug("Initial inapp query finished");
+				}
+			};
 
-			logDebug("Initial inapp query finished");
+			if (needSendToken) {
+				sendToken(liveUpdatesPurchase.getToken(), listener);
+			} else {
+				listener.onResult("OK");
+			}
 		}
 	};
 
@@ -259,6 +304,7 @@ public class InAppHelper {
 					try {
 						JSONObject obj = new JSONObject(response);
 						userId = obj.getString("userid");
+						token = obj.getString("token");
 						ctx.getSettings().BILLING_USER_ID.set(userId);
 						logDebug("UserId=" + userId);
 					} catch (JSONException e) {
@@ -276,7 +322,7 @@ public class InAppHelper {
 				notifyDismissProgress();
 				if (!Algorithms.isEmpty(userId)) {
 					logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
-					String payload = userId;
+					String payload = userId + " " + token;
 					if (mHelper != null) {
 						mHelper.launchPurchaseFlow(activity,
 								SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
@@ -315,7 +361,7 @@ public class InAppHelper {
 	}
 
 	// Callback for when a purchase is finished
-	private IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+	private OnIabPurchaseFinishedListener mPurchaseFinishedListener = new OnIabPurchaseFinishedListener() {
 		public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
 			logDebug("Purchase finished: " + result + ", purchase: " + purchase);
 
@@ -336,18 +382,21 @@ public class InAppHelper {
 
 			if (purchase.getSku().equals(SKU_LIVE_UPDATES)) {
 				// bought live updates
-				sendToken(purchase.getToken());
-
 				logDebug("Live updates subscription purchased.");
-				showToast(ctx.getString(R.string.osm_live_thanks));
-				mSubscribedToLiveUpdates = true;
-				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+				sendToken(purchase.getToken(), new OnRequestResultListener() {
+					@Override
+					public void onResult(String result) {
+						showToast(ctx.getString(R.string.osm_live_thanks));
+						mSubscribedToLiveUpdates = true;
+						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 
-				notifyDismissProgress();
-				notifyItemPurchased(SKU_LIVE_UPDATES);
-				if (stopAfterResult) {
-					stop();
-				}
+						notifyDismissProgress();
+						notifyItemPurchased(SKU_LIVE_UPDATES);
+						if (stopAfterResult) {
+							stop();
+						}
+					}
+				});
 			}
 		}
 	};
@@ -361,15 +410,16 @@ public class InAppHelper {
 		}
 	}
 
-	private void sendToken(String token) {
+	private void sendToken(String purchaseToken, final OnRequestResultListener listener) {
 		String userId = ctx.getSettings().BILLING_USER_ID.get();
 		String email = ctx.getSettings().BILLING_USER_EMAIL.get();
 		try {
 			Map<String, String> parameters = new HashMap<>();
 			parameters.put("userid", userId);
 			parameters.put("sku", SKU_LIVE_UPDATES);
-			parameters.put("purchaseToken", token);
+			parameters.put("purchaseToken", purchaseToken);
 			parameters.put("email", email);
+			parameters.put("token", token);
 
 			AndroidNetworkUtils.sendRequestAsync(ctx,
 					"http://download.osmand.net/subscription/purchased.php",
@@ -381,18 +431,50 @@ public class InAppHelper {
 									JSONObject obj = new JSONObject(result);
 									if (!obj.has("error")) {
 										ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.set(true);
+										if (obj.has("visibleName") && !Algorithms.isEmpty(obj.getString("visibleName"))) {
+											ctx.getSettings().BILLING_USER_NAME.set(obj.getString("visibleName"));
+											ctx.getSettings().BILLING_HIDE_USER_NAME.set(false);
+										} else {
+											ctx.getSettings().BILLING_HIDE_USER_NAME.set(true);
+										}
+										if (obj.has("preferredCountry")) {
+											String prefferedCountry = obj.getString("preferredCountry");
+											if (!ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(prefferedCountry)) {
+												ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(prefferedCountry);
+												CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
+												countrySelectionFragment.initCountries(ctx);
+												CountryItem countryItem;
+												if (Algorithms.isEmpty(prefferedCountry)) {
+													countryItem = countrySelectionFragment.getCountryItems().get(0);
+												} else {
+													countryItem = countrySelectionFragment.getCountryItem(prefferedCountry);
+												}
+												if (countryItem != null) {
+													ctx.getSettings().BILLING_USER_COUNTRY.set(countryItem.getLocalName());
+												}
+											}
+										}
+										if (obj.has("email")) {
+											ctx.getSettings().BILLING_USER_EMAIL.set(obj.getString("email"));
+										}
 									} else {
 										complain("SendToken Error: " + obj.getString("error"));
 									}
 								} catch (JSONException e) {
-									logError("sendToken", e);
+									logError("SendToken", e);
 									complain("SendToken Error: " + (e.getMessage() != null ? e.getMessage() : "JSONException"));
 								}
+							}
+							if (listener != null) {
+								listener.onResult("OK");
 							}
 						}
 					});
 		} catch (Exception e) {
-			logError("sendToken Error", e);
+			logError("SendToken Error", e);
+			if (listener != null) {
+				listener.onResult("Error");
+			}
 		}
 	}
 

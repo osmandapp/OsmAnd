@@ -17,8 +17,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -43,6 +45,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean showViewAngle = false;
 	private boolean isUserZoomed = false;
 	private String locationProvider;
+	private boolean showRouteFinishDialog = false;
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -184,7 +187,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
 					&& !routePlanningMode
-					&& !settings.CENTER_POSITION_ON_MAP.get() ? 
+					&& !settings.CENTER_POSITION_ON_MAP.get() ?
 					OsmandSettings.BOTTOM_CONSTANT : OsmandSettings.CENTER_CONSTANT);
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation());
@@ -361,6 +364,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void routeWasCancelled() {
+	}
+
+	@Override
+	public void routeWasFinished() {
+		showRouteFinishDialog = (mapView == null);
+	}
+
+	public boolean getShowRouteFinishDialog() {
+		return showRouteFinishDialog;
+	}
+
+	public void setShowRouteFinishDialog(boolean showRouteFinishDialog) {
+		this.showRouteFinishDialog = showRouteFinishDialog;
 	}
 
 	public void setZoomTime(long time) {

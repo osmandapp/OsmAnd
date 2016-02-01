@@ -89,7 +89,7 @@ public class DownloadValidationManager {
 	}
 
 	protected void downloadFilesCheck_1_FreeVersion(FragmentActivity context, IndexItem[] items) {
-		if (Version.isFreeVersion(getMyApplication())) {
+		if (Version.isFreeVersion(getMyApplication()) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 				if (context instanceof FragmentActivity) {

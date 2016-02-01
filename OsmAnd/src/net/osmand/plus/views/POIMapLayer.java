@@ -533,6 +533,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public void routeWasCancelled() {
 	}
 
+	@Override
+	public void routeWasFinished() {
+	}
+
 	public static int dpToPx(Context ctx, float dp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
