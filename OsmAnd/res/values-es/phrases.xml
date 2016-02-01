@@ -180,7 +180,7 @@
 	<string name="poi_waste_disposal">Contenedor de basura</string>
 	<string name="poi_industrial">Área industrial</string>
 	<string name="poi_orchard">Huerto</string>
-	<string name="poi_farmyard">Granja</string>
+	<string name="poi_farmyard">Corral</string>
 	<string name="poi_meadow">Prado</string>
 	<string name="poi_canal">Canal</string>
 	<string name="poi_surveillance">Vigilancia</string>
@@ -346,7 +346,7 @@
 	<string name="poi_craft_handicraft">Artesano</string>
 	<string name="poi_craft_jeweller">Joyero</string>
 	<string name="poi_craft_locksmith">Cerrajero</string>
-	<string name="poi_craft_optician">Oculista</string>
+	<string name="poi_craft_optician">Óptico</string>
 	<string name="poi_craft_painter">Pintor</string>
 	<string name="poi_craft_photographer">Fotógrafo</string>
 	<string name="poi_craft_photographic_laboratory">Laboratorio fotográfico</string>
@@ -968,12 +968,12 @@
 	<string name="poi_recycling_glass_bottles">Botellas de vidrio</string>
 	<string name="poi_recycling_plastic">Plásticos</string>
 	<string name="poi_recycling_scrap_metal">Chatarra</string>
-	<string name="poi_recycling_batteries">Baterias</string>
+	<string name="poi_recycling_batteries">Baterías</string>
 	<string name="poi_recycling_plastic_bottles">Botellas de plástico</string>
 	<string name="poi_recycling_green_waste">Residuos verdes</string>
 	<string name="poi_recycling_waste">Residuos (bolsas negras)</string>
 	<string name="poi_recycling_plastic_packaging">Envases de plástico</string>
-	<string name="poi_recycling_newspaper">Diarios</string>
+	<string name="poi_recycling_newspaper">Periódicos</string>
 	<string name="poi_recycling_cartons">Cartones</string>
 	<string name="poi_recycling_cardboard">Cartón</string>
 	<string name="poi_recycling_magazines">Revistas</string>
@@ -984,7 +984,7 @@
 	<string name="poi_recycling_shoes">Calzados</string>
 	<string name="poi_recycling_aluminium">Aluminio</string>
 	<string name="poi_recycling_organic">Orgánico</string>
-	<string name="poi_recycling_beverage_cartons">Cajas de cartón</string>
+	<string name="poi_recycling_beverage_cartons">Cartones de bebidas</string>
 	<string name="poi_recycling_garden_waste">Residuos de jardín</string>
 	<string name="poi_recycling_low_energy_bulbs">Bombillas de bajo consumo</string>
 	<string name="poi_recycling_fluorescent_tubes">Tubos fluorescentes</string>
@@ -997,15 +997,15 @@
 	<string name="poi_recycling_hazardous_waste">Residuos peligrosos</string>
 	<string name="poi_recycling_mobile_phones">Teléfonos móviles</string>
 	<string name="poi_recycling_hydrargyrum">Mercurio</string>
-	<string name="poi_recycling_computers">Computadoras</string>
-	<string name="poi_recycling_tyres">Llantas</string>
+	<string name="poi_recycling_computers">Computadoras/Ordenadores</string>
+	<string name="poi_recycling_tyres">Neumáticos</string>
 	<string name="poi_recycling_tv_monitor">TV, monitores</string>
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_rubble">Escombros</string>
 	<string name="poi_recycling_cds">CDs</string>
 	<string name="poi_recycling_waste_oil">Aceite usado</string>
 	<string name="poi_recycling_bottles">Botellas</string>
-	<string name="poi_recycling_cork">Corchos</string>
+	<string name="poi_recycling_cork">Corcho</string>
 	<string name="poi_recycling_printer_cartridges">Cartuchos de impresora</string>
 	<string name="poi_recycling_sheet_metal">Chapas</string>
 	<string name="poi_recycling_foil">Papel de aluminio</string>
@@ -1021,8 +1021,8 @@
 	<string name="poi_recycling_fridge_and_freezer">Frigoríficos y congeladores</string>
 	<string name="poi_recycling_furniture">Muebles</string>
 	<string name="poi_recycling_diapers">Pañales</string>
-	<string name="poi_recycling_car_batteries">Baterías de autos</string>
-	<string name="poi_recycling_cars">Autos</string>
+	<string name="poi_recycling_car_batteries">Baterías de automóvil</string>
+	<string name="poi_recycling_cars">Automóviles</string>
 	<string name="poi_recycling_bicycles">Bicicletas</string>
 
 	<string name="poi_shower">Duchas</string>
@@ -1395,7 +1395,7 @@
 	<string name="poi_aerialway_duration">Tiempo de viaje promedio, minutos</string>
 	<string name="poi_aerialway_bubble_yes">Burbuja</string>
 	<string name="poi_aerialway_bubble_no">Sin burbuja</string>
-	<string name="poi_aerialway_heating_yes">Calefaccionado</string>
+	<string name="poi_aerialway_heating_yes">Con calefacción</string>
 	<string name="poi_aerialway_heating_no">Sin calefacción</string>
 	<string name="poi_aerialway_bicycle_yes">Bicicletas permitidas</string>
 	<string name="poi_aerialway_bicycle_no">Bicicletas no permitidas</string>
@@ -2601,7 +2601,7 @@
 <string name="poi_official_name">Nombre oficial</string>
 
 <string name="poi_seamark_dyke">Señal ďe Dique</string>
-	<string name="poi_dolphin">Delfín</string>
+	<string name="poi_dolphin">Duque de alba</string>
 
 	<string name="poi_inscription_n">Inscripción: N</string>
 	<string name="poi_inscription_nw">Inscripción: NO</string>
