@@ -97,6 +97,7 @@ public class GPXUtilities {
 		public double ele = Double.NaN;
 		public double speed = 0;
 		public double hdop = Double.NaN;
+		public boolean deleted = false;
 
 		public WptPt() {
 		}
