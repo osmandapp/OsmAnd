@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -38,6 +39,8 @@ public class RoutingHelper {
 		public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast);
 		
 		public void routeWasCancelled();
+
+		public void routeWasFinished();
 	}
 	
 	private static final float POSITION_TOLERANCE = 60;
@@ -182,7 +185,25 @@ public class RoutingHelper {
 			setFollowingMode(false);
 		}
 	}
-	
+
+	private synchronized void finishCurrentRoute() {
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+				while(it.hasNext()) {
+					WeakReference<IRouteInformationListener> ref = it.next();
+					IRouteInformationListener l = ref.get();
+					if(l == null) {
+						it.remove();
+					} else {
+						l.routeWasFinished();
+					}
+				}
+			}
+		});
+	}
+
 	public GPXRouteParamsBuilder getCurrentGPXRoute() {
 		return currentGPXRoute;
 	}
@@ -490,7 +511,7 @@ public class RoutingHelper {
 		if (currentRoute > routeNodes.size() - 3
 				&& currentLocation.distanceTo(lastPoint) < (((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get())
 				&& !isRoutePlanningMode) {
-			showMessage(app.getString(R.string.arrived_at_destination));
+			//showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			TargetPoint tp = targets.getPointToNavigate();
 			String description = tp == null ? "" : tp.getOnlyName(); 
@@ -509,6 +530,7 @@ public class RoutingHelper {
 						settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 					}
 				});
+				finishCurrentRoute();
 				// targets.clearPointToNavigate(false);
 				return true;
 			}

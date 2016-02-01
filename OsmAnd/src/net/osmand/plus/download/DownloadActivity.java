@@ -349,7 +349,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			laterButton = freeVersionBanner.findViewById(R.id.laterButton);
 			freeVersionBannerTitle = freeVersionBanner.findViewById(R.id.freeVersionBannerTitle);
 
-			shouldShowFreeVersionBanner = Version.isFreeVersion(application)
+			shouldShowFreeVersionBanner =
+					(Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get())
 					|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
 
 			initFreeVersionBanner();

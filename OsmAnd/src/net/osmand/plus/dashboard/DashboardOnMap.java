@@ -1234,6 +1234,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	@Override
+	public void routeWasFinished() {
+	}
+
+	@Override
 	public void onWindowVisibilityChanged(int visibility) {
 		if (visibility != View.VISIBLE && swipeDismissListener != null) {
 			swipeDismissListener.discardUndo();

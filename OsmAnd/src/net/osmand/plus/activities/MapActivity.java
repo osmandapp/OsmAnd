@@ -35,6 +35,7 @@ import android.widget.Toast;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.ValueHolder;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
@@ -72,9 +73,11 @@ import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
+import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -98,7 +101,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MapActivity extends AccessibleActivity implements DownloadEvents,
-		ActivityCompat.OnRequestPermissionsResultCallback {
+		ActivityCompat.OnRequestPermissionsResultCallback, IRouteInformationListener {
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -525,6 +528,13 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 		app.getDownloadThread().setUiActivity(this);
 
+		if (mapViewTrackingUtilities.getShowRouteFinishDialog()) {
+			DestinationReachedMenu.show(this);
+			mapViewTrackingUtilities.setShowRouteFinishDialog(false);
+		}
+
+		routingHelper.addListener(this);
+
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
@@ -757,6 +767,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	@Override
 	protected void onPause() {
+		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
@@ -1111,5 +1122,18 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
 		}
 
+	}
+
+	@Override
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+	}
+
+	@Override
+	public void routeWasCancelled() {
+	}
+
+	@Override
+	public void routeWasFinished() {
+		DestinationReachedMenu.show(this);
 	}
 }

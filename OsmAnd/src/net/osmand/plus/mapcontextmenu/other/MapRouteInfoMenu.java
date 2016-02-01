@@ -677,6 +677,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		// do not hide fragment (needed for use case entering Planning mode without destination)
 	}
 
+	@Override
+	public void routeWasFinished() {
+	}
+
 	public void onDismiss() {
 		visible = false;
 		mapActivity.getMapView().setMapPositionX(0);

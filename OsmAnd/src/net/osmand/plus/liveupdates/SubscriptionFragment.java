@@ -200,6 +200,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 						parameters.put("email", settings.BILLING_USER_EMAIL.get());
 						parameters.put("cemail", prevEmail);
 						parameters.put("userid", settings.BILLING_USER_ID.get());
+						parameters.put("token", getInAppHelper().getToken());
 
 						showProgress();
 

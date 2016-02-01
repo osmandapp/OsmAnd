@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/share_fragment_layout"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:clickable="true"
+             android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/main_view"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:background="?attr/left_menu_view_bg"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/titleIconImageView"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:scaleType="center"
+                        android:src="@drawable/list_destination"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/titleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginTop="16dp"
+                            android:paddingRight="8dp"
+                            android:text="@string/arrived_at_destination"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="@dimen/dialog_header_text_size"/>
+
+                        <ImageButton
+                            android:id="@+id/closeImageButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="top"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:src="@drawable/ic_action_remove_dark"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/removeDestButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:drawableLeft="@drawable/ic_action_delete_dark"
+                        android:drawablePadding="12dp"
+                        android:gravity="left|center_vertical"
+                        android:textColor="?android:textColorPrimary"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="@string/delete_target_point"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <Button
+                        android:id="@+id/findParkingButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:drawableLeft="@drawable/ic_action_parking_dark"
+                        android:drawablePadding="12dp"
+                        android:gravity="left|center_vertical"
+                        android:textColor="?android:textColorPrimary"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="@string/find_parking"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
