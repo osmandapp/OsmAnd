@@ -2003,7 +2003,7 @@
     <string name="no_address_found">Dirección indeterminada</string>
 	<string name="looking_up_address">Buscando dirección</string>
     <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
-    <string name="update">Actualizar cada</string>
+    <string name="update">Actualizar</string>
     <string name="only_download_over_wifi">Descargar sólo por WiFi</string>
     <string name="live_update">Actualización en vivo</string>
     <string name="update_now">Actualizar ahora</string>
@@ -2079,4 +2079,5 @@
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Guardar cambios</string>
     <string name="shared_string_email_address">Correo electrónico</string>
+    <string name="find_parking">Encontrar estacionamiento</string>
     </resources>
