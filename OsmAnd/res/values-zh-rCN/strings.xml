@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="email">電子郵件</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="email">電子郵件</string>
 <string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
@@ -814,7 +815,7 @@
 	<string name="download_question_exist">{0} 的离线数据已经存在({1})。是否要更新它({2})？</string>
 	<string name="address">地址</string>
 	
-	<string name="shared_string_downloading">正在下载 …</string>
+	<string name="shared_string_downloading">正在下载</string>
 	
 	<string name="downloading_list_indexes">正在下载可用区域的列表…</string>
 	<string name="list_index_files_was_not_loaded">区域列表未能从 osmand.net 获取。</string>
@@ -935,4 +936,7 @@
     <string name="monitoring_settings_descr">配置如何记录旅程以及启用睡眠模式</string>
     <string name="lang_zh_CN">简体中文</string>
 	<string name="lang_zh_TW">繁体中文</string>
-	</resources>
+	<string name="find_parking">找到一个停车位</string>
+    <string name="shared_string_status">状态</string>
+    <string name="shared_string_save_changes">保存更改</string>
+    </resources>
