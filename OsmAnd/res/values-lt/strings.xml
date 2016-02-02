@@ -934,7 +934,7 @@
     <string name="map_widget_monitoring_services">Stebėjimo paslaugos</string>
     <string name="no_route">Nėra maršruto</string>
     <string name="delete_target_point">Pašalinti tikslą</string>
-    <string name="intermediate_point">Tikslas %1$s</string>
+    <string name="intermediate_point">Tarpinis tikslas %1$s</string>
     <string name="map_widget_show_destination_arrow">Rodyti kryptį į kelionės tikslą</string>
     <string name="enable_plugin_monitoring_services">Jei norite naudoti sekimo paslaugas (sekimo ir sekimo gyvai), įjunkite Kelionės sekimo įskiepį</string>
     <string name="non_optimal_route_calculation">Apskaičiuoti (tikėtinai) neoptimalų ilgo nuotolio maršrutą</string>
@@ -2082,7 +2082,7 @@
     <string name="shared_string_near">Netoliese</string>
     <string name="av_audio_bitrate">Audio bitų sparta</string>
     <string name="av_audio_bitrate_descr">Pasirinkite audio bitų spartą</string>
-    <string name="release_2_2">" • New context-sensitive UI for tapping locations on the map and on other screens\n\n • Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n • Configure which and how cards are displayed on the dashboard\n\n • Bypass the dashboard if you like menu-based app control\n\n • To download maps, regions can be directly selected by tapping on the world map\n\n • POI Search now supports more specific queries\n\n • Pagerintas LV ir OSM redagavimo funkcionalumas\n\n • Perdaryti žemėlapio atsisiuntimo struktūra bei sąsaja\n\n ir dar daugiau… "</string>
+    <string name="release_2_2">" • New context-sensitive UI for tapping locations on the map and on other screens\n\n • Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n • Configure which and how cards are displayed on the dashboard\n\n • Bypass the dashboard if you like menu-based app control\n\n • Tam, kad būtų atsiųsti žemėlapiai, pakanka paliesti regioną pasaulio žemėlapyje\n\n • POI Search now supports more specific queries\n\n • Pagerintas LV ir OSM redagavimo funkcionalumas\n\n • Perdaryti žemėlapio atsisiuntimo struktūra bei sąsaja\n\n ir dar daugiau… "</string>
     <string name="access_from_map_description">Meniu mygtukas aktyvuoja duomenų skydelį, ne meniu</string>
     <string name="use_dashboard_btn">Naudoti duomenų skydelį</string>
     <string name="dashboard_or_drawer_description">Sukurta nauja galimybė naudoti programėlę duomenų skydelio arba statinio meniu pagalba. Savo pasirinkimą galite bet kada pakeisti duomenų skydelio nustatymuose.</string>
@@ -2103,5 +2103,11 @@
     <string name="updates_size">Naujinio dydis</string>
     <string name="select_month_and_country">Pasirinkite mėnesį bei šalį</string>
     <string name="number_of_edits">Pataisymų kiekis</string>
-    <string name="reports_for">Pranešti apie:</string>
-</resources>
+    <string name="reports_for">Pranešti apie</string>
+<string name="shared_string_status">Statusas</string>
+    <string name="shared_string_save_changes">Išsaugoti pakeitimus</string>
+    <string name="shared_string_email_address">E. pašto adresas</string>
+    <string name="rendering_attr_hideUnderground_name">Slėpti požeminius objektus</string>
+    <string name="data_is_not_available">Duomenys nepasiekiami</string>
+    <string name="find_parking">Surasti parkavimo vietą</string>
+    </resources>
