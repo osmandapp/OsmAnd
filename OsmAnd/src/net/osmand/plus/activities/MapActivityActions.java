@@ -600,7 +600,9 @@ public class MapActivityActions implements DialogProvider {
 						if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 							newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 						}
-						newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						//newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						//newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
 						return true;
 					}
@@ -612,7 +614,7 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getFavoritesActivity());
-						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
 						return true;
 					}

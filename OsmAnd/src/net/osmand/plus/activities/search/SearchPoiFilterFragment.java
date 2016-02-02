@@ -243,6 +243,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	private void showFilterActivity(String filterId) {
 		final Intent newIntent = new Intent(getActivity(), SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filterId);
+		newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		updateIntentToLaunch(newIntent);
 		startActivityForResult(newIntent, 0);
 	}

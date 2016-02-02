@@ -530,10 +530,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		super.onPause();
 		if (searchNearBy) {
 			app.getLocationProvider().pauseAllUpdates();
-			if (!app.accessibilityEnabled()) {
-				app.getLocationProvider().removeCompassListener(this);
-			}
 			app.getLocationProvider().removeLocationListener(this);
+		}
+		if (!app.accessibilityEnabled()) {
+			app.getLocationProvider().removeCompassListener(this);
 		}
 	}
 

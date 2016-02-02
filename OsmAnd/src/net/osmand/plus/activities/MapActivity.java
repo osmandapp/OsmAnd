@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -405,6 +406,8 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		setIntent(intent);
 	}
 
+	private static Intent prevActivityIntent = null;
+
 	@Override
 	public void onBackPressed() {
 		if (dashboardOnMap.onBackPressed()) {
@@ -414,7 +417,14 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			closeDrawer();
 			return;
 		}
-		super.onBackPressed();
+
+		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
+			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			this.startActivity(prevActivityIntent);
+			prevActivityIntent = null;
+		} else {
+			super.onBackPressed();
+		}
 	}
 
 	@Override
@@ -1008,12 +1018,16 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			}
 			((MapActivity) activity).readLocationToShow();
 		} else {
+			prevActivityIntent = new Intent(((Activity) activity).getIntent());
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			activity.startActivity(newIntent);
 		}
 	}
+
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
