@@ -2095,4 +2095,8 @@
     <string name="shared_string_select">Ischerta</string>
     <string name="rendering_attr_hideUnderground_name">Cua ogetos suta de terra</string>
     <string name="shared_string_read_more">Leghe àteru</string>
+    <string name="find_parking">Agata unu parchègiu</string>
+    <string name="shared_string_status">Istadu</string>
+    <string name="shared_string_save_changes">Sarba sas modìficas</string>
+    <string name="shared_string_email_address">Indiritzu de posta eletrònica</string>
     </resources>
