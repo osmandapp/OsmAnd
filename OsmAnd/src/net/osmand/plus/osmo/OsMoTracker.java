@@ -9,11 +9,26 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.FieldPosition;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class OsMoTracker implements OsMoReactor {
+	// 130.5143667 Maximum is 8 digits and minimum 1
+	private static final DecimalFormat floatingPointFormat = new DecimalFormat("0.0#######");
+	private static final DecimalFormat twoDigitsFormat = new DecimalFormat("0.0#");
+	private static final DecimalFormat integerFormat = new DecimalFormat("0");
+	static {
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.ENGLISH);
+		floatingPointFormat.setDecimalFormatSymbols(symbols);
+		twoDigitsFormat.setDecimalFormatSymbols(symbols);
+		integerFormat.setDecimalFormatSymbols(symbols);
+	}
+
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
 	private OsMoService service;
 	private int locationsSent = 0;
@@ -95,22 +110,30 @@ public class OsMoTracker implements OsMoReactor {
 	}
 
 	public static String formatLocation(Location loc) {
-		StringBuilder cmd = new StringBuilder();
-		cmd.append("L").append((float) loc.getLatitude()).append(":").append((float) loc.getLongitude());
+		StringBuffer cmd = new StringBuffer();
+		cmd.append("L");
+		floatingPointFormat.format(loc.getLatitude(), cmd, new FieldPosition(cmd.length()));
+		cmd.append(":");
+		floatingPointFormat.format(loc.getLongitude(), cmd, new FieldPosition(cmd.length()));
 		if (loc.hasAccuracy()) {
-			cmd.append("H").append((int) loc.getAccuracy());
+			cmd.append("H");
+			integerFormat.format(loc.getAccuracy(), cmd, new FieldPosition(cmd.length()));
 		}
 		if (loc.hasAltitude()) {
-			cmd.append("A").append((int) loc.getAltitude());
+			cmd.append("A");
+			integerFormat.format(loc.getAltitude(), cmd, new FieldPosition(cmd.length()));
 		}
 		if (loc.hasSpeed() && (int) (loc.getSpeed() * 100) != 0) {
-			cmd.append("S").append((float) ((int) (loc.getSpeed() * 100)) / 100f);
+			cmd.append("S");
+			twoDigitsFormat.format(loc.getSpeed(), cmd, new FieldPosition(cmd.length()));
 		}
 		if (loc.hasBearing()) {
-			cmd.append("C").append((int) loc.getBearing());
+			cmd.append("C");
+			integerFormat.format(loc.getBearing(), cmd, new FieldPosition(cmd.length()));
 		}
 		if ((System.currentTimeMillis() - loc.getTime()) > 30000 && loc.getTime() != 0) {
-			cmd.append("T").append(loc.getTime());
+			cmd.append("T");
+			integerFormat.format(loc.getTime(), cmd, new FieldPosition(cmd.length()));
 		}
 		LOG.debug("formatLocation cmd=" + cmd);
 		return cmd.toString();

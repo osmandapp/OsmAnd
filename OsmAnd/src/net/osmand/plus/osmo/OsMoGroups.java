@@ -164,7 +164,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		if (command.equalsIgnoreCase("GP")) {
 			group = storage.getGroup(gid);
 			if (group != null && gid.length() > 0) {
-				List<OsMoDevice> delta = mergeGroup(group, obj, false);
+				List<OsMoDevice> delta = mergeGroup(group, obj, false, false);
 				String mygid = service.getMyGroupTrackerId();
 				StringBuilder b = new StringBuilder();
 				for (OsMoDevice d : delta) {
@@ -197,7 +197,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		} else if (command.equalsIgnoreCase("GROUP_CONNECT")) {
 			group = storage.getGroup(gid);
 			if (group != null) {
-				mergeGroup(group, obj, true);
+				mergeGroup(group, obj, true, true);
 				group.active = true;
 				// connect to enabled devices in group
 				for (OsMoDevice d : group.getGroupUsers(null)) {
@@ -326,7 +326,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 
 
-	private List<OsMoDevice> mergeGroup(OsMoGroup gr, JSONObject obj, boolean deleteUsers) {
+	private List<OsMoDevice> mergeGroup(OsMoGroup gr, JSONObject obj, boolean deleteUsers,
+										boolean isGroupConnect) {
 		List<OsMoDevice> delta = new ArrayList<OsMoDevice>();
 		try {
 			if (obj.has("group")) {
@@ -392,27 +393,35 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					a[i] = (JSONObject) ar.get(i);
 					final JSONObject jobj = a[i];
 					WptPt pt = new WptPt();
-					pt.lat = a[i].getDouble("lat");
-					pt.lon = a[i].getDouble("lon");
-					if (jobj.has("name")) {
-						pt.name = jobj.getString("name");
+					if (jobj.has("deleted")) {
+						pt.deleted = true;
+					} else {
+						pt.lat = a[i].getDouble("lat");
+						pt.lon = a[i].getDouble("lon");
+						if (jobj.has("name")) {
+							pt.name = jobj.getString("name");
+						}
+						if (jobj.has("color")) {
+							pt.setColor(Algorithms.parseColor(jobj.getString("color")));
+						}
+						if (jobj.has("description")) {
+							pt.desc = jobj.getString("description");
+						}
+						if (jobj.has("created")) {
+							pt.getExtensionsToWrite().put("created", a[i].getLong("created") + "");
+						}
+						if (jobj.has("visible")) {
+							pt.getExtensionsToWrite().put("visible", a[i].getBoolean("visible") + "");
+						}
 					}
-					if (jobj.has("color")) {
-						pt.setColor(Algorithms.parseColor(jobj.getString("color")));
-					}
-					if (jobj.has("description")) {
-						pt.desc = jobj.getString("description");
-					}
-					if (jobj.has("created")) {
-						pt.getExtensionsToWrite().put("created", a[i].getLong("created") + "");
-					}
-					if (jobj.has("visible")) {
-						pt.getExtensionsToWrite().put("visible", a[i].getBoolean("visible") + "");
+					if (jobj.has("u")) {
+						pt.getExtensionsToWrite().put("u", String.valueOf(a[i].getLong("u")));
 					}
 					points.add(pt);
 				}
 				if (points.size() > 0) {
-					plugin.getSaveGpxTask(gr.name + " points", modify, false).execute(points.toArray(new WptPt[points.size()]));
+					plugin.getSaveGpxTask(gr.name + " points", modify, false, isGroupConnect)
+							.execute(points.toArray(new WptPt[points.size()]));
 				}
 			}
 			if (deleteUsers) {
