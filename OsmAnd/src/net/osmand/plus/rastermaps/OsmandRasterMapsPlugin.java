@@ -31,6 +31,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -215,14 +216,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, mapActivity);
 					}
 				} else if(itemId == R.string.layer_underlay){
-					if(underlayLayer.getMap() != null){
-						settings.MAP_UNDERLAY.set(null);
-						updateMapLayers(mapView, null, layers);
-						layers.getMapControlsLayer().hideTransparencyBar(settings.MAP_TRANSPARENCY);
-					} else {
-						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY,
-								mapActivity);
-					}
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.UNDERLAY_MAP);
+					return false;
 				}
 				return true;
 			}
@@ -230,7 +225,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		
 		adapter.item(R.string.layer_overlay).selected(overlayLayer != null && overlayLayer.getMap() != null ? 1 : 0).
 				iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
-		adapter.item(R.string.layer_underlay).selected(underlayLayer != null && underlayLayer.getMap() != null ? 1 : 0) 
+		adapter.item(R.string.layer_underlay)
 				.iconColor(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
 	}
 	

@@ -51,6 +51,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.UnderlayMapMenu;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -155,7 +156,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		CONFIGURE_MAP,
 		LIST_MENU,
 		ROUTE_PREFERENCES,
-		DASHBOARD
+		DASHBOARD,
+		UNDERLAY_MAP
 	}
 
 	private Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -350,6 +352,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.layer_map_appearance);
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
 			tv.setText(R.string.shared_string_settings);
+		} else if (visibleType == DashboardType.UNDERLAY_MAP) {
+			tv.setText(R.string.map_underlay);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -689,11 +693,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private int dpToPx(float dp) {
 		Resources r = mapActivity.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
+		return (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
 	}
 
 	private void updateListAdapter() {
@@ -722,6 +722,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				ArrayAdapter<LocalRoutingParameter> listAdapter = routePreferencesMenu.getRoutePreferencesDrawerAdapter(nightMode);
 				OnItemClickListener listener = routePreferencesMenu.getItemClickListener(listAdapter);
 				updateListAdapter(listAdapter, listener);
+			} else if (DashboardType.UNDERLAY_MAP == visibleType) {
+				cm = UnderlayMapMenu.createListAdapter(mapActivity);
 			}
 			if (cm != null) {
 				updateListAdapter(cm);
