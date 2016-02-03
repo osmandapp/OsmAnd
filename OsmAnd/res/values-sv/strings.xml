@@ -2082,4 +2082,6 @@
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Spara ändringar</string>
     <string name="find_parking">Hitta en parkeringsplats</string>
+    <string name="show_polygons">Visa polygoner</string>
+    <string name="underlay_transparency">Underläggstransparens</string>
     </resources>
