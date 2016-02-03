@@ -2062,4 +2062,6 @@
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Guardar los cambios</string>
     <string name="find_parking">Encontrar un aparcamiento</string>
+    <string name="show_polygons">Mostrar polígonos</string>
+    <string name="underlay_transparency">Transparencia de subyacente</string>
     </resources>
