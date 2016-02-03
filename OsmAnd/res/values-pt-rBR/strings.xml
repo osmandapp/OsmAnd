@@ -2008,4 +2008,6 @@
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Salvar alterações</string>
     <string name="find_parking">Encontrar estacionamento</string>
+    <string name="show_polygons">Mostrar polígonos de áreas</string>
+    <string name="underlay_transparency">Transparência da subcamada</string>
     </resources>
