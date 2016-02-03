@@ -2127,4 +2127,6 @@
     <string name="shared_string_email_address">Adresse email</string>
     <string name="shared_string_status">Statut</string>
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
+    <string name="show_polygons">Afficher les polygones</string>
+    <string name="find_parking">Rechercher un stationnement</string>
     </resources>
