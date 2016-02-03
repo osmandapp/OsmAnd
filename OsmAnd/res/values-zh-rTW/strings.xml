@@ -2089,4 +2089,6 @@
     <string name="shared_string_status">狀態</string>
     <string name="shared_string_save_changes">儲存更改</string>
     <string name="find_parking">找停車場</string>
+    <string name="show_polygons">顯示多邊形</string>
+    <string name="underlay_transparency">襯底透明度</string>
     </resources>
