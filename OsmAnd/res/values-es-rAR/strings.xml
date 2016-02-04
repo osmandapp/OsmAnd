@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
@@ -1720,7 +1720,7 @@
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
     <string name="av_camera_focus_infinity">Enfoque al infinito</string>
     <string name="av_camera_focus_macro">Modo de enfoque macro (primer plano)</string>
-    <string name="av_camera_focus_continuous">La cámara intenta enfocar continuamente</string>
+    <string name="av_camera_focus_continuous">Enfoque continuo</string>
     <string name="av_photo_play_sound">Sonido al fotografiar</string>
     <string name="av_photo_play_sound_descr">Elige si reproducir sonido al fotografiar</string>
     <string name="av_camera_pic_size">Tamaño de foto</string>
