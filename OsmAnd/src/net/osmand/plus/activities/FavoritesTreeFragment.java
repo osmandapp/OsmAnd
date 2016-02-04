@@ -911,9 +911,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	public void showOnMap(final FavouritePoint point) {
+		getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.FAV_TAB);
+
 		final OsmandSettings settings = getMyApplication().getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
 				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()),

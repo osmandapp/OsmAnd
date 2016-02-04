@@ -848,12 +848,31 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == DELETE_FILTER) {
-			removePoiFilter();
-			return true;
-		} else if (item.getItemId() == SAVE_FILTER) {
-			savePoiFilter();
-			return true;
+		int itemId = item.getItemId();
+		switch (itemId) {
+			case android.R.id.home:
+				if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
+					Intent newIntent = new Intent(this, app.getAppCustomization().getSearchActivity());
+					if (location != null) {
+						newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
+						newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
+						if (searchNearBy) {
+							newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+						}
+					}
+					newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					startActivity(newIntent);
+					finish();
+					return true;
+				}
+				break;
+			case DELETE_FILTER:
+				removePoiFilter();
+				return true;
+			case SAVE_FILTER:
+				savePoiFilter();
+				return true;
+
 		}
 		return super.onOptionsItemSelected(item);
 	}

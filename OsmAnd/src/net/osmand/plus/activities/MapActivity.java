@@ -103,6 +103,8 @@ import java.util.regex.Pattern;
 
 public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		ActivityCompat.OnRequestPermissionsResultCallback, IRouteInformationListener {
+	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
+
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -420,6 +422,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			LatLon loc = getMapLocation();
+			prevActivityIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+			prevActivityIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
+				prevActivityIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+			}
 			this.startActivity(prevActivityIntent);
 			prevActivityIntent = null;
 		} else {
@@ -1019,9 +1027,10 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			((MapActivity) activity).readLocationToShow();
 		} else {
 			prevActivityIntent = new Intent(((Activity) activity).getIntent());
+			prevActivityIntent.putExtra(INTENT_KEY_PARENT_MAP_ACTIVITY, true);
+
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
-
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			activity.startActivity(newIntent);
 		}
