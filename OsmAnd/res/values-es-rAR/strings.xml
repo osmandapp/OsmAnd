@@ -2080,4 +2080,6 @@
     <string name="shared_string_save_changes">Guardar cambios</string>
     <string name="shared_string_email_address">Correo electrónico</string>
     <string name="find_parking">Encontrar estacionamiento</string>
+    <string name="show_polygons">Mostrar polígonos</string>
+    <string name="underlay_transparency">Transparencia subyacente</string>
     </resources>
