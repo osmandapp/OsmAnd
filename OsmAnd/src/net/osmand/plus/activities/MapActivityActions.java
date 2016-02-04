@@ -593,15 +593,12 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getSearchActivity());
-						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						LatLon loc = mapActivity.getMapLocation();
 						newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 						newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 						if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 							newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 						}
-						//newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						//newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
 						return true;
