@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><!-- Language: Vietnamese; Language code: vi
-Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Language: Vietnamese; Language code: vi
+Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
+<resources>
 	
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
 	<string name="auto_follow_route_never">Không bao giờ</string>
@@ -661,4 +663,22 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
     
     <string name="rendering_attr_trainLightrailRoutes_name">Đào tạo và lightrail tuyến</string>
     <string name="rendering_attr_tramRoutes_name">Định tuyến xe điện</string>
+    <string name="find_parking">Tìm bải đậu xe</string>
+    <string name="shared_string_save_changes">Lưu thay đổi</string>
+    <string name="shared_string_email_address">Địa chỉ E-mail</string>
+    <string name="rendering_attr_hideUnderground_name">Ẩn vật dưới đất</string>
+    <string name="data_is_not_available">Dữ liệu không tồn tại</string>
+    <string name="shared_string_remove">Gỡ bỏ</string>
+    <string name="shared_string_read_more">Đọc thêm</string>
+    <string name="add_time_span">Thêm khoảng thời gian</string>
+    <string name="road_blocked">Đường bị chặn</string>
+    <string name="shared_string_select">Chọn</string>
+    <string name="switch_start_finish">Đảo ngược điểm xuất phát và đích đến</string>
+    <string name="rendering_attr_hideIcons_name">Ẩn biểu tượng POI</string>
+    <string name="item_removed">Mục đã bị xoá</string>
+    <string name="n_items_removed">Mục đã bị xoá</string>
+    <string name="shared_string_undo_all">HOÀN TÁC TẤT CẢ</string>
+    <string name="shared_string_type">Loại</string>
+    <string name="starting_point">Điểm xuất phát</string>
+    <string name="shared_string_not_selected">Chưa được chọn</string>
     </resources>
