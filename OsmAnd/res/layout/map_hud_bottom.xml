@@ -63,29 +63,6 @@
         </FrameLayout>
 
         <LinearLayout
-            android:id="@+id/map_transparency_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="@dimen/map_button_size"
-            android:orientation="horizontal">
-
-            <SeekBar
-                android:id="@+id/map_transparency_seekbar"
-                android:layout_width="@dimen/map_trans_seek_size"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-
-            <ImageButton
-                android:id="@+id/map_transparency_hide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/btn_circle_transparent"
-                android:src="@drawable/headliner_close"/>
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
