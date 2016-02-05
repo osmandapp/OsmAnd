@@ -9,6 +9,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapMarkersActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -67,7 +68,10 @@ public class OsmAndAppCustomization {
 		return FavoritesActivity.class;
 	}
 
-	
+	public Class<MapMarkersActivity> getMapMarkersActivity(){
+		return MapMarkersActivity.class;
+	}
+
 	public Class<? extends Activity> getDownloadIndexActivity() {
 		return DownloadActivity.class;
 	}

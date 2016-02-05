@@ -12,7 +12,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
@@ -22,7 +21,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 	private OsmandMapTileView view;
 
 	private Paint bitmapPaint;
-	private Bitmap markerBitmap;
+	private Bitmap markerBitmapBlue;
+	private Bitmap markerBitmapGreen;
+	private Bitmap markerBitmapOrange;
+	private Bitmap markerBitmapRed;
+	private Bitmap markerBitmapYellow;
 
 	public MapMarkersLayer(MapActivity map) {
 		this.map = map;
@@ -33,7 +36,28 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		bitmapPaint.setDither(true);
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setFilterBitmap(true);
-		markerBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_intermediate_point);
+		markerBitmapBlue = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_blue);
+		markerBitmapGreen = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_green);
+		markerBitmapOrange = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_orange);
+		markerBitmapRed = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
+		markerBitmapYellow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_yellow);
+	}
+
+	private Bitmap getMapMarkerBitmap(int colorIndex) {
+		switch (colorIndex) {
+			case 0:
+				return markerBitmapBlue;
+			case 1:
+				return markerBitmapGreen;
+			case 2:
+				return markerBitmapOrange;
+			case 3:
+				return markerBitmapRed;
+			case 4:
+				return markerBitmapYellow;
+			default:
+				return markerBitmapBlue;
+		}
 	}
 
 	@Override
@@ -49,16 +73,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		}
 
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
-		int index = 0;
 		for (MapMarker marker : markersHelper.getActiveMapMarkers()) {
-			index++;
 			if (isLocationVisible(tb, marker)) {
-				int marginX = markerBitmap.getWidth() / 6;
-				int marginY = markerBitmap.getHeight();
+				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
+				int marginX = bmp.getWidth() / 6;
+				int marginY = bmp.getHeight();
 				int locationX = tb.getPixXFromLonNoRot(marker.getLongitude());
 				int locationY = tb.getPixYFromLatNoRot(marker.getLatitude());
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
-				canvas.drawBitmap(markerBitmap, locationX - marginX, locationY - marginY, bitmapPaint);
+				canvas.drawBitmap(bmp, locationX - marginX, locationY - marginY, bitmapPaint);
 				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
@@ -119,7 +142,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 	}
 
 	public int getRadiusPoi(RotatedTileBox tb) {
-		int r = 0;
+		int r;
 		final double zoom = tb.getZoom();
 		if (zoom <= 15) {
 			r = 10;
