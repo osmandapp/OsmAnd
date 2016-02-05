@@ -53,6 +53,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
+		addMapMarkersListener(app);
 		app.getRoutingHelper().addListener(this);
 	}
 
@@ -67,7 +68,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		});
 	}
-	
+
+	private void addMapMarkersListener(OsmandApplication app) {
+		app.getMapMarkersHelper().addListener(new StateChangedListener<Void>() {
+
+			@Override
+			public void stateChanged(Void change) {
+				if(mapView != null) {
+					mapView.refreshMap();
+				}
+			}
+		});
+	}
+
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
 		if(mapView != null) {

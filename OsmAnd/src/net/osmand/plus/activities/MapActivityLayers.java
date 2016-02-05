@@ -38,6 +38,7 @@ import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.ImpassableRoadsLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapMarkersLayer;
 import net.osmand.plus.views.MapTextLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -72,6 +73,7 @@ public class MapActivityLayers {
 	private TransportInfoLayer transportInfoLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
+	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
 	private MapInfoLayer mapInfoLayer;
 	private MapTextLayer mapTextLayer;
@@ -143,6 +145,9 @@ public class MapActivityLayers {
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(activity);
 		mapView.addLayer(navigationLayer, 7);
+		// 7.3 map markers layer
+		mapMarkersLayer = new MapMarkersLayer(activity);
+		mapView.addLayer(mapMarkersLayer, 7.3f);
 		// 7.5 Impassible roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(activity);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);

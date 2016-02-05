@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="active_markers">Active markers</string>
+    <string name="map_markers">Map markers</string>
+    <string name="map_marker">Map marker</string>
     <string name="show_polygons">Show polygons</string>
     <string name="underlay_transparency">Underlay transparency</string>
     <string name="find_parking">Find a parking</string>
