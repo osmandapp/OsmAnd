@@ -1472,8 +1472,19 @@ public class OsmandSettings {
 	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
 	public final static String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
 	public final static String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
+
 	public final static String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
+	private IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage();
+
+	public final static String MAP_MARKERS_POINT = "map_markers_point"; //$NON-NLS-1$
+	public final static String MAP_MARKERS_COLOR = "map_markers_color"; //$NON-NLS-1$
+	public final static String MAP_MARKERS_DESCRIPTION = "map_markers_description"; //$NON-NLS-1$
+	public final static String MAP_MARKERS_HISTORY_POINT = "map_markers_history_point"; //$NON-NLS-1$
+	public final static String MAP_MARKERS_HISTORY_COLOR = "map_markers_history_color"; //$NON-NLS-1$
+	public final static String MAP_MARKERS_HISTORY_DESCRIPTION = "map_markers_history_description"; //$NON-NLS-1$
+	private MapMarkersStorage mapMarkersStorage = new MapMarkersStorage();
+	private MapMarkersHistoryStorage mapMarkersHistoryStorage = new MapMarkersHistoryStorage();
 
 	public LatLon getPointToNavigate() {
 		float lat = settingsAPI.getFloat(globalPreferences,POINT_NAVIGATE_LAT, 0);
@@ -1521,91 +1532,310 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> USE_INTERMEDIATE_POINTS_NAVIGATION =
 			new BooleanPreference("use_intermediate_points_navigation", false).makeGlobal().cache();
 
+
+	private class IntermediatePointsStorage extends MapPointsStorage {
+
+		public IntermediatePointsStorage() {
+			pointsKey = INTERMEDIATE_POINTS;
+			descriptionsKey = INTERMEDIATE_POINTS_DESCRIPTION;
+		}
+	}
+
+	private class MapMarkersHistoryStorage extends MapMarkersStorage {
+
+		public MapMarkersHistoryStorage() {
+			pointsKey = MAP_MARKERS_HISTORY_POINT;
+			descriptionsKey = MAP_MARKERS_HISTORY_DESCRIPTION;
+			colorsKey = MAP_MARKERS_HISTORY_COLOR;
+		}
+	}
+
+	private class MapMarkersStorage extends MapPointsStorage {
+
+		protected String colorsKey;
+
+		public MapMarkersStorage() {
+			pointsKey = MAP_MARKERS_POINT;
+			descriptionsKey = MAP_MARKERS_DESCRIPTION;
+			colorsKey = MAP_MARKERS_COLOR;
+		}
+
+		public List<Integer> getColors(int sz) {
+			List<Integer> list = new ArrayList<>();
+			String ip = settingsAPI.getString(globalPreferences, colorsKey, "");
+			if (ip.trim().length() > 0) {
+				StringTokenizer tok = new StringTokenizer(ip, ",");
+				while (tok.hasMoreTokens()) {
+					String colorStr = tok.nextToken();
+					list.add(Integer.parseInt(colorStr));
+				}
+			}
+			return list;
+		}
+
+		public boolean insertPoint(double latitude, double longitude,
+								   PointDescription historyDescription, int color, int index) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			List<Integer> cs = getColors(ps.size());
+			ps.add(index, new LatLon(latitude, longitude));
+			ds.add(index, PointDescription.serializeToString(historyDescription));
+			cs.add(index, color);
+			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+			}
+			return savePoints(ps, ds, cs);
+		}
+
+		public boolean updatePoint(double latitude, double longitude,
+								   PointDescription historyDescription, int color) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			List<Integer> cs = getColors(ps.size());
+			int i = ps.indexOf(new LatLon(latitude, longitude));
+			ds.set(i, PointDescription.serializeToString(historyDescription));
+			cs.set(i, color);
+			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+			}
+			return savePoints(ps, ds, cs);
+		}
+
+		@Override
+		public boolean deletePoint(int index) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			List<Integer> cs = getColors(ps.size());
+			ps.remove(index);
+			ds.remove(index);
+			cs.remove(index);
+			return savePoints(ps, ds, cs);
+		}
+
+		public boolean savePoints(List<LatLon> ps, List<String> ds, List<Integer> cs) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < ps.size(); i++) {
+				if (i > 0) {
+					sb.append(",");
+				}
+				sb.append(((float) ps.get(i).getLatitude() + "")).append(",").append(((float) ps.get(i).getLongitude() + ""));
+			}
+			StringBuilder tb = new StringBuilder();
+			for (int i = 0; i < ds.size(); i++) {
+				if (i > 0) {
+					tb.append("--");
+				}
+				if (ds.get(i) == null) {
+					tb.append("");
+				} else {
+					tb.append(ds.get(i));
+				}
+			}
+			StringBuilder cb = new StringBuilder();
+			for (int i = 0; i < cs.size(); i++) {
+				if (i > 0) {
+					cb.append(",");
+				}
+				cb.append(Integer.toString(cs.get(i)));
+			}
+			return settingsAPI.edit(globalPreferences)
+					.putString(pointsKey, sb.toString())
+					.putString(descriptionsKey, tb.toString())
+					.putString(colorsKey, cb.toString())
+					.commit();
+		}
+
+		@Override
+		public boolean insertPoint(double latitude, double longitude, PointDescription historyDescription, int index) {
+			return false;
+		}
+
+		@Override
+		public boolean updatePoint(double latitude, double longitude, PointDescription historyDescription) {
+			return false;
+		}
+
+		@Override
+		public boolean savePoints(List<LatLon> ps, List<String> ds) {
+			return false;
+		}
+	}
+
+	private abstract class MapPointsStorage {
+
+		protected String pointsKey;
+		protected String descriptionsKey;
+
+		public MapPointsStorage() {
+		}
+
+		public List<String> getPointDescriptions(int sz) {
+			List<String> list = new ArrayList<>();
+			String ip = settingsAPI.getString(globalPreferences, descriptionsKey, "");
+			if (ip.trim().length() > 0) {
+				list.addAll(Arrays.asList(ip.split("--")));
+			}
+			while (list.size() > sz) {
+				list.remove(list.size() - 1);
+			}
+			while (list.size() < sz) {
+				list.add("");
+			}
+			return list;
+		}
+
+		public List<LatLon> getPoints() {
+			List<LatLon> list = new ArrayList<>();
+			String ip = settingsAPI.getString(globalPreferences, pointsKey, "");
+			if (ip.trim().length() > 0) {
+				StringTokenizer tok = new StringTokenizer(ip, ",");
+				while (tok.hasMoreTokens()) {
+					String lat = tok.nextToken();
+					if (!tok.hasMoreTokens()) {
+						break;
+					}
+					String lon = tok.nextToken();
+					list.add(new LatLon(Float.parseFloat(lat), Float.parseFloat(lon)));
+				}
+			}
+			return list;
+		}
+
+		public boolean insertPoint(double latitude, double longitude, PointDescription historyDescription, int index) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			ps.add(index, new LatLon(latitude, longitude));
+			ds.add(index, PointDescription.serializeToString(historyDescription));
+			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+			}
+			return savePoints(ps, ds);
+		}
+
+		public boolean updatePoint(double latitude, double longitude, PointDescription historyDescription) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			int i = ps.indexOf(new LatLon(latitude, longitude));
+			ds.set(i, PointDescription.serializeToString(historyDescription));
+			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+			}
+			return savePoints(ps, ds);
+		}
+
+		public boolean deletePoint(int index) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			ps.remove(index);
+			ds.remove(index);
+			return savePoints(ps, ds);
+		}
+
+		public boolean savePoints(List<LatLon> ps, List<String> ds) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < ps.size(); i++) {
+				if (i > 0) {
+					sb.append(",");
+				}
+				sb.append(((float) ps.get(i).getLatitude() + "")).append(",").append(((float) ps.get(i).getLongitude() + ""));
+			}
+			StringBuilder tb = new StringBuilder();
+			for (int i = 0; i < ds.size(); i++) {
+				if (i > 0) {
+					tb.append("--");
+				}
+				if (ds.get(i) == null) {
+					tb.append("");
+				} else {
+					tb.append(ds.get(i));
+				}
+			}
+			return settingsAPI.edit(globalPreferences)
+					.putString(pointsKey, sb.toString())
+					.putString(descriptionsKey, tb.toString())
+					.commit();
+		}
+	}
+
+
 	public List<String> getIntermediatePointDescriptions(int sz) {
-		List<String> list = new ArrayList<String>();
-		String ip = settingsAPI.getString(globalPreferences,INTERMEDIATE_POINTS_DESCRIPTION, "");
-		if (ip.trim().length() > 0) {
-			list.addAll(Arrays.asList(ip.split("--")));
-		}
-		while(list.size() > sz) {
-			list.remove(list.size() - 1);
-		}
-		while(list.size() < sz) {
-			list.add("");
-		}
-		return list;
+		return intermediatePointsStorage.getPointDescriptions(sz);
 	}
 
 	public List<LatLon> getIntermediatePoints() {
-		List<LatLon> list = new ArrayList<LatLon>();
-		String ip = settingsAPI.getString(globalPreferences,INTERMEDIATE_POINTS, "");
-		if (ip.trim().length() > 0) {
-			StringTokenizer tok = new StringTokenizer(ip, ",");
-			while (tok.hasMoreTokens()) {
-				String lat = tok.nextToken();
-				if (!tok.hasMoreTokens()) {
-					break;
-				}
-				String lon = tok.nextToken();
-				list.add(new LatLon(Float.parseFloat(lat), Float.parseFloat(lon)));
-			}
-		}
-		return list;
+		return intermediatePointsStorage.getPoints();
 	}
 
 	public boolean insertIntermediatePoint(double latitude, double longitude, PointDescription historyDescription, int index) {
-		List<LatLon> ps = getIntermediatePoints();
-		List<String> ds = getIntermediatePointDescriptions(ps.size());
-		ps.add(index, new LatLon(latitude, longitude));
-		ds.add(index, PointDescription.serializeToString(historyDescription));
-		if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-		}
-		return saveIntermediatePoints(ps,ds);
+		return intermediatePointsStorage.insertPoint(latitude, longitude, historyDescription, index);
 	}
 
 	public boolean updateIntermediatePoint(double latitude, double longitude, PointDescription historyDescription) {
-		List<LatLon> ps = getIntermediatePoints();
-		List<String> ds = getIntermediatePointDescriptions(ps.size());
-		int i = ps.indexOf(new LatLon(latitude, longitude));
-		ds.set(i, PointDescription.serializeToString(historyDescription));
-		if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-		}
-		return saveIntermediatePoints(ps,ds);
+		return intermediatePointsStorage.updatePoint(latitude, longitude, historyDescription);
 	}
 
-	public boolean deleteIntermediatePoint( int index) {
-		List<LatLon> ps = getIntermediatePoints();
-		List<String> ds = getIntermediatePointDescriptions(ps.size());
-		ps.remove(index);
-		ds.remove(index);
-		return saveIntermediatePoints(ps,ds);
+	public boolean deleteIntermediatePoint(int index) {
+		return intermediatePointsStorage.deletePoint(index);
 	}
 
 	public boolean saveIntermediatePoints(List<LatLon> ps, List<String> ds) {
-		StringBuilder sb = new StringBuilder();
-		for(int i=0; i<ps.size(); i++) {
-			if(i > 0){
-				sb.append(",");
-			}
-			sb.append(((float)ps.get(i).getLatitude()+"")).append(",").append(((float)ps.get(i).getLongitude()+""));
-		}
-		StringBuilder tb = new StringBuilder();
-		for (int i = 0; i < ds.size(); i++) {
-			if (i > 0) {
-				tb.append("--");
-			}
-			if (ds.get(i) == null) {
-				tb.append("");
-			} else {
-				tb.append(ds.get(i));
-			}
-		}
-		return settingsAPI.edit(globalPreferences).putString(INTERMEDIATE_POINTS, sb.toString()).
-				putString(INTERMEDIATE_POINTS_DESCRIPTION, tb.toString()).
-				commit();
+		return intermediatePointsStorage.savePoints(ps, ds);
 	}
+
+
+	public List<String> getMapMarkersPointDescriptions(int sz) {
+		return mapMarkersStorage.getPointDescriptions(sz);
+	}
+
+	public List<LatLon> getMapMarkersPoints() {
+		return mapMarkersStorage.getPoints();
+	}
+
+	public boolean insertMapMarker(double latitude, double longitude,
+								   PointDescription historyDescription, int color, int index) {
+		return mapMarkersStorage.insertPoint(latitude, longitude, historyDescription, color, index);
+	}
+
+	public boolean updateMapMarker(double latitude, double longitude,
+								   PointDescription historyDescription, int color) {
+		return mapMarkersStorage.updatePoint(latitude, longitude, historyDescription, color);
+	}
+
+	public boolean deleteMapMarker(int index) {
+		return mapMarkersStorage.deletePoint(index);
+	}
+
+	public boolean saveMapMarkers(List<LatLon> ps, List<String> ds, List<Integer> cs) {
+		return mapMarkersStorage.savePoints(ps, ds, cs);
+	}
+
+
+	public List<String> getMapMarkersHistoryPointDescriptions(int sz) {
+		return mapMarkersHistoryStorage.getPointDescriptions(sz);
+	}
+
+	public List<LatLon> getMapMarkersHistoryPoints() {
+		return mapMarkersHistoryStorage.getPoints();
+	}
+
+	public boolean insertMapMarkerHistory(double latitude, double longitude,
+										  PointDescription historyDescription, int color, int index) {
+		return mapMarkersHistoryStorage.insertPoint(latitude, longitude, historyDescription, color, index);
+	}
+
+	public boolean updateMapMarkerHistory(double latitude, double longitude,
+										  PointDescription historyDescription, int color) {
+		return mapMarkersHistoryStorage.updatePoint(latitude, longitude, historyDescription, color);
+	}
+
+	public boolean deleteMapMarkerHistory(int index) {
+		return mapMarkersHistoryStorage.deletePoint(index);
+	}
+
+	public boolean saveMapMarkersHistory(List<LatLon> ps, List<String> ds, List<Integer> cs) {
+		return mapMarkersHistoryStorage.savePoints(ps, ds, cs);
+	}
+
 
 	public boolean clearPointToNavigate() {
 		return settingsAPI.edit(globalPreferences).remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).
