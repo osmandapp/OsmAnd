@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -35,6 +36,10 @@ public class ContextMenuAdapter {
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
 		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+	}
+
+	public interface OnIntegerValueChangedListener {
+		public boolean onIntegerValueChangedListener(int newValue);
 	}
 
 	public static abstract class OnRowItemClick implements OnContextMenuClick {
@@ -73,8 +78,10 @@ public class ContextMenuAdapter {
 	final TIntArrayList items = new TIntArrayList();
 	final TIntArrayList isCategory = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
-	final ArrayList<OnContextMenuClick> checkListeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
+	final ArrayList<OnContextMenuClick> checkListeners = new ArrayList<>();
+	final ArrayList<OnIntegerValueChangedListener> integerListeners = new ArrayList<>();
 	final TIntArrayList selectedList = new TIntArrayList();
+	final TIntArrayList progressList = new TIntArrayList();
 	final TIntArrayList loadingList = new TIntArrayList();
 	final TIntArrayList layoutIds = new TIntArrayList();
 	final TIntArrayList iconList = new TIntArrayList();
@@ -114,6 +121,10 @@ public class ContextMenuAdapter {
 		return checkListeners.get(i);
 	}
 
+	public OnIntegerValueChangedListener getIntegerLister(int i) {
+		return integerListeners.get(i);
+	}
+
 	public String getItemName(int pos) {
 		return itemNames.get(pos);
 	}
@@ -134,12 +145,20 @@ public class ContextMenuAdapter {
 		return selectedList.get(pos);
 	}
 
+	public int getProgress(int pos) {
+		return progressList.get(pos);
+	}
+
 	public int getLoading(int pos) {
 		return loadingList.get(pos);
 	}
 
 	public void setSelection(int pos, int s) {
 		selectedList.set(pos, s);
+	}
+
+	public void setProgress(int pos, int s) {
+		progressList.set(pos, s);
 	}
 
 
@@ -189,12 +208,14 @@ public class ContextMenuAdapter {
 		int id;
 		String name;
 		int selected = -1;
+		int progress = -1;
 		int layout = -1;
 		int loading = -1;
 		boolean cat;
 		int pos = -1;
 		String description = "";
 		private OnContextMenuClick checkBoxListener;
+		private OnIntegerValueChangedListener integerListener;
 
 		private Item() {
 		}
@@ -220,6 +241,11 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
+		public Item progress(int progress) {
+			this.progress = progress;
+			return this;
+		}
+
 		public Item loading(int loading) {
 			this.loading = loading;
 			return this;
@@ -240,6 +266,11 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
+		public Item listenInteger(OnIntegerValueChangedListener l) {
+			this.integerListener = l;
+			return this;
+		}
+
 		public void reg() {
 			if (pos >= items.size() || pos < 0) {
 				pos = items.size();
@@ -248,11 +279,13 @@ public class ContextMenuAdapter {
 			itemNames.add(pos, name);
 			itemDescription.add(pos, description);
 			selectedList.insert(pos, selected);
+			progressList.insert(pos, progress);
 			loadingList.insert(pos, loading);
 			layoutIds.insert(pos, layout);
 			iconList.insert(pos, icon);
 			iconListLight.insert(pos, lightIcon);
 			checkListeners.add(pos, checkBoxListener);
+			integerListeners.add(pos, integerListener);
 			isCategory.insert(pos, cat ? 1 : 0);
 		}
 
@@ -276,9 +309,11 @@ public class ContextMenuAdapter {
 		items.removeAt(pos);
 		itemNames.remove(pos);
 		selectedList.removeAt(pos);
+		progressList.removeAt(pos);
 		iconList.removeAt(pos);
 		iconListLight.removeAt(pos);
 		checkListeners.remove(pos);
+		integerListeners.remove(pos);
 		isCategory.removeAt(pos);
 		layoutIds.removeAt(pos);
 		loadingList.removeAt(pos);
@@ -405,6 +440,34 @@ public class ContextMenuAdapter {
 					ch.setVisibility(View.VISIBLE);
 				} else if (ch != null) {
 					ch.setVisibility(View.GONE);
+				}
+			}
+
+			if (convertView.findViewById(R.id.seekbar) != null) {
+				SeekBar seekBar = (SeekBar) convertView.findViewById(R.id.seekbar);
+				if(progressList.get(position) != -1) {
+					seekBar.setProgress(getProgress(position));
+					seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+						@Override
+						public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+							OnIntegerValueChangedListener listener = getIntegerLister(position);
+							progressList.set(position, progress);
+							if (listener != null && fromUser) {
+								listener.onIntegerValueChangedListener(progress);
+							}
+						}
+
+						@Override
+						public void onStartTrackingTouch(SeekBar seekBar) {
+						}
+
+						@Override
+						public void onStopTrackingTouch(SeekBar seekBar) {
+						}
+					});
+					seekBar.setVisibility(View.VISIBLE);
+				} else if (seekBar != null) {
+					seekBar.setVisibility(View.GONE);
 				}
 			}
 
