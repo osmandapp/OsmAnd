@@ -410,6 +410,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	}
 
 	@Override
+	public void startActivity(Intent intent) {
+		clearPrevActivityIntent();
+		super.startActivity(intent);
+	}
+
+	@Override
 	public void onBackPressed() {
 		if (dashboardOnMap.onBackPressed()) {
 			return;
@@ -1035,7 +1041,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		}
 	}
 
-
+	public static void clearPrevActivityIntent() {
+		prevActivityIntent = null;
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

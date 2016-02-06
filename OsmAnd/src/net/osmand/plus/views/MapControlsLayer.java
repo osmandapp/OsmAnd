@@ -187,6 +187,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
 			}
 		});
@@ -329,6 +330,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				MapActivity.clearPrevActivityIntent();
 				if (dash) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 				} else {
@@ -375,6 +377,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void onNavigationClick() {
+		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 			mapActivity.getMapActions().enterRoutePlanningMode(null, null);
