@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="shared_string_remove">Entfernen</string>
 	<string name="item_removed">Eintrag entfernt</string>
@@ -2015,4 +2015,6 @@
     <string name="shared_string_save_changes">Änderungen speichern</string>
     <string name="shared_string_email_address">E-Mail-Adresse speichern</string>
     <string name="find_parking">Parkplatz finden</string>
+    <string name="show_polygons">Polygone anzeigen</string>
+    <string name="underlay_transparency">Underlay-Karte Transparenz</string>
     </resources>
