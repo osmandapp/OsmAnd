@@ -995,7 +995,7 @@
 	<string name="unknown_from_location">Precisa definir um ponto de partida</string>
 	<string name="unknown_location">Posição ainda desconhecida</string>
 	<string name="modify_transparency">Modificar transparência (0 - transparente, 255 - opaco)</string>
-	<string name="confirm_interrupt_download">Você quer cancelar a transferência de arquivos?</string>
+	<string name="confirm_interrupt_download">Você quer cancelar a transferência do arquivo?</string>
 	<string name="basemap_was_selected_to_download">O Mapa Base é necessário para o funcionamento adequado do aplicativo e foi selecionado para baixar.</string>
 	<string name="local_indexes_cat_tile">Quadrículas de mapa online e em cache</string>
 	<string name="local_indexes_cat_map">Mapa padrão (vectorial)</string>
