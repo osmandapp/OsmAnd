@@ -280,7 +280,7 @@ public class MapActivityActions implements DialogProvider {
 		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null && 
 				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
 			adapter.item(R.string.context_menu_item_last_intermediate_point).iconColor(
-					R.drawable.ic_action_flage_dark).reg();
+					R.drawable.ic_action_waypoint).reg();
 		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
@@ -565,7 +565,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.waypoints).iconColor(R.drawable.ic_action_waypoint)
+		optionsMenuHelper.item(R.string.waypoints).iconColor(R.drawable.ic_action_intermediate)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
