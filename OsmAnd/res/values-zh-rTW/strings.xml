@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
@@ -174,7 +174,7 @@
     <string name="unknown_from_location">起始標點尚未決定</string>
     <string name="unknown_location">未知地理位置</string>
     <string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
-    <string name="confirm_interrupt_download">您要中斷下載中的檔案嗎？</string>
+    <string name="confirm_interrupt_download">您要取消下載中的檔案嗎？</string>
     <string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及尋找大眾運輸工具。</string>
     <string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
     <string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
@@ -1025,7 +1025,7 @@
     <string name="safe_mode_description">應用程式執行在安全模式下(使用較慢的 Android 而非原生碼)。</string>
     <string name="safe_mode">安全模式</string>
     <string name="native_library_not_running">應用程式在安全模式中執行(在設定裡停用它)。</string>
-    <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行，您想要中斷嗎？</string>
+    <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行，您想要中止嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
     <string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
@@ -1422,10 +1422,10 @@
     <string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
     <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，傳送軌跡資料到指定的 web 服務。</string>
     <string name="keep_navigation_service">保持</string>
-    <string name="stop_navigation_service">中斷</string>
+    <string name="stop_navigation_service">中止</string>
     <string name="enable_sleep_mode">啟用 GPS 背景模式</string>
     <string name="gps_wake_up_timer">GPS 喚醒間隔</string>
-    <string name="sleep_mode_stop_dialog">要中斷 GPS 背景模式嗎？</string>
+    <string name="sleep_mode_stop_dialog">要中止 GPS 背景模式嗎？</string>
     <string name="lang_al">阿爾巴尼亞</string>
     <string name="lang_ar">阿拉伯</string>
     <string name="lang_sc">薩丁尼亞島</string>
