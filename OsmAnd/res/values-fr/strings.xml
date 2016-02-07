@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
@@ -672,7 +672,7 @@
     <string name="left_side_navigation_descr">Activer dans les pays où l\'on conduit à gauche</string>
 
     <string name="unknown_from_location">Point de départ inconnu</string>
-    <string name="confirm_interrupt_download">Voulez-vous interrompre le téléchargement ?</string>
+    <string name="confirm_interrupt_download">Souhaitez-vous annuler le téléchargement ?</string>
     <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement.</string>
 
     <string name="map_online_plugin_is_not_installed">Activez le greffon \"Cartes en ligne\" pour sélectionner différentes sources de cartes</string>
@@ -1467,7 +1467,7 @@
     <string name="osmo_auth_error_short">Échec de l\'autorisation</string>
     <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est momentanément inutilisable ou votre inscription a expiré.\n Voulez-vous procéder à une nouvelle inscription ?</string>
     <string name="keep_navigation_service">Conserver</string>
-    <string name="stop_navigation_service">Interrompre</string>
+    <string name="stop_navigation_service">Arrêter</string>
     <string name="enable_sleep_mode">Démarrer l’exécution de la tâche de fond GPS ?</string>
     <string name="gps_wake_up_timer">Intervalle de réveil du GPS</string>
     <string name="sleep_mode_stop_dialog">Arrêter l’exécution de la tâche de fond GPS ?</string>
@@ -2115,7 +2115,7 @@
     <string name="rendering_attr_hideIcons_name">Masquer les icônes des PI</string>
     <string name="number_of_contributors">Nombre de contributeurs</string>
     <string name="number_of_edits">Nombre de modifications</string>
-    <string name="reports_for">Signaler pour :</string>
+    <string name="reports_for">Signaler pour</string>
 <string name="shared_string_select">Sélectionner</string>
     <string name="shared_string_remove">Supprimer</string>
     <string name="clear_updates_proposition_message">Vous pouvez supprimer les mises à jour et retrouver la carte précédente</string>
