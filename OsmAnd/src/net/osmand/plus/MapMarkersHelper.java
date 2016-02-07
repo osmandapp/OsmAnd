@@ -10,11 +10,15 @@ import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapMarkersHelper {
+	public static final int MAP_MARKERS_COLORS_COUNT = 5;
+	public static final int MAP_MARKERS_HISTORY_LIMIT = 30;
+
 	private List<MapMarker> mapMarkers = new ArrayList<>();
 	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
 	private OsmandSettings settings;
@@ -176,7 +180,7 @@ public class MapMarkersHelper {
 	public void removeActiveMarkers() {
 		cancelAddressRequests();
 
-		settings.clearIntermediatePoints();
+		settings.clearActiveMapMarkers();
 		mapMarkers.clear();
 		readFromSettings();
 		refresh();
@@ -185,8 +189,32 @@ public class MapMarkersHelper {
 	public void removeMarkersHistory() {
 		cancelAddressRequests();
 
-		settings.clearIntermediatePoints();
+		settings.clearMapMarkersHistory();
 		mapMarkersHistory.clear();
+		readFromSettings();
+		refresh();
+	}
+
+	public void addMapMarker(final LatLon point, PointDescription historyName) {
+		if (point != null) {
+			final PointDescription pointDescription;
+			if (historyName == null) {
+				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+			} else {
+				pointDescription = historyName;
+			}
+			if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
+				pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
+			}
+			int colorIndex;
+			if (mapMarkers.size() > 0) {
+				colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+			} else {
+				colorIndex = 0;
+			}
+			settings.insertMapMarker(point.getLatitude(), point.getLongitude(),
+					pointDescription, colorIndex, mapMarkers.size());
+		}
 		readFromSettings();
 		refresh();
 	}

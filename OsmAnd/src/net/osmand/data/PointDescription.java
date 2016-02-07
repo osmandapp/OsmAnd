@@ -192,6 +192,10 @@ public class PointDescription {
 		return POINT_TYPE_TARGET.equals(type);
 	}
 
+	public boolean isMapMarker() {
+		return POINT_TYPE_MAP_MARKER.equals(type);
+	}
+
 	public boolean isParking() {
 		return POINT_TYPE_PARKING_MARKER.equals(type);
 	}

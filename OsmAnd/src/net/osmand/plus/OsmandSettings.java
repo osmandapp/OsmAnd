@@ -1529,6 +1529,20 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
 	}
 
+	public boolean clearActiveMapMarkers() {
+		return settingsAPI.edit(globalPreferences)
+				.remove(MAP_MARKERS_POINT)
+				.remove(MAP_MARKERS_DESCRIPTION)
+				.remove(MAP_MARKERS_COLOR).commit();
+	}
+
+	public boolean clearMapMarkersHistory() {
+		return settingsAPI.edit(globalPreferences)
+				.remove(MAP_MARKERS_HISTORY_POINT)
+				.remove(MAP_MARKERS_HISTORY_DESCRIPTION)
+				.remove(MAP_MARKERS_HISTORY_COLOR).commit();
+	}
+
 	public final CommonPreference<Boolean> USE_INTERMEDIATE_POINTS_NAVIGATION =
 			new BooleanPreference("use_intermediate_points_navigation", false).makeGlobal().cache();
 

@@ -21,19 +21,23 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.views.controls.DynamicListView;
+import net.osmand.plus.views.controls.DynamicListViewCallbacks;
 import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
+import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapMarkersActivity extends OsmandListActivity {
+public class MapMarkersActivity extends OsmandListActivity implements DynamicListViewCallbacks {
 
 	public static final int ACTIVE_MARKERS = 0;
 	public static final int MARKERS_HISTORY = 1;
 
+	private SwipeDismissListViewTouchListener swipeDismissListener;
 	private boolean nightMode;
 
 	@Override
@@ -42,6 +46,56 @@ public class MapMarkersActivity extends OsmandListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_markers);
 		getSupportActionBar().setTitle(R.string.map_markers);
+
+		((DynamicListView) getListView()).setDynamicListViewCallbacks(this);
+		swipeDismissListener = new SwipeDismissListViewTouchListener(getListView(),
+				new SwipeDismissListViewTouchListener.DismissCallbacks() {
+					@Override
+					public boolean canDismiss(int position) {
+						List<Object> activeObjects = getListAdapter().getActiveObjects();
+						Object obj = getListAdapter().getItem(position);
+						return activeObjects.contains(obj);
+					}
+
+					@Override
+					public SwipeDismissListViewTouchListener.Undoable onDismiss(final int position) {
+						final Object item;
+						final StableArrayAdapter stableAdapter = getListAdapter();
+						final int activeObjPos;
+						item = stableAdapter.getItem(position);
+
+						stableAdapter.setNotifyOnChange(false);
+						stableAdapter.remove(item);
+						stableAdapter.getObjects().remove(item);
+						activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
+						stableAdapter.getActiveObjects().remove(item);
+						stableAdapter.refreshData();
+						stableAdapter.notifyDataSetChanged();
+
+						return new SwipeDismissListViewTouchListener.Undoable() {
+							@Override
+							public void undo() {
+								if (item != null) {
+									stableAdapter.setNotifyOnChange(false);
+									stableAdapter.insert(item, position);
+									stableAdapter.getObjects().add(position, item);
+									stableAdapter.getActiveObjects().add(activeObjPos, item);
+									stableAdapter.refreshData();
+								}
+							}
+						};
+					}
+
+					@Override
+					public void onHidePopup() {
+						StableArrayAdapter stableAdapter = getListAdapter();
+						stableAdapter.refreshData();
+						// do delete
+						if (stableAdapter.getActiveObjects().size() == 0) {
+							finish();
+						}
+					}
+				});
 
 		//nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		nightMode = !getMyApplication().getSettings().isLightContent();
@@ -55,8 +109,10 @@ public class MapMarkersActivity extends OsmandListActivity {
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		getListAdapter().getItem(position);
-		//
+		Object obj = getListAdapter().getItem(position);
+		if (obj instanceof MapMarker) {
+			showOnMap((MapMarker) obj);
+		}
 	}
 
 	@Override
@@ -76,6 +132,12 @@ public class MapMarkersActivity extends OsmandListActivity {
 			@Override
 			public void buildDividers() {
 				dividers = getCustomDividers(getObjects());
+			}
+
+			@Override
+			public boolean isEnabled(int position) {
+				Object obj = getItem(position);
+				return obj instanceof MapMarker;
 			}
 
 			@Override
@@ -176,18 +238,21 @@ public class MapMarkersActivity extends OsmandListActivity {
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 		v.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 
-		final Button btn = (Button) v.findViewById(R.id.header_button);
-		btn.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue)
-				: getResources().getColor(R.color.osmand_orange));
-		btn.setText(getString(R.string.shared_string_clear));
-		btn.setVisibility(View.VISIBLE);
-		btn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getListAdapter().notifyDataSetInvalidated();
-				reloadListAdapter();
-			}
-		});
+		if (type == MARKERS_HISTORY) {
+			final Button btn = (Button) v.findViewById(R.id.header_button);
+			btn.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue)
+					: getResources().getColor(R.color.osmand_orange));
+			btn.setText(getString(R.string.shared_string_clear));
+			btn.setVisibility(View.VISIBLE);
+			btn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					getListAdapter().notifyDataSetInvalidated();
+					getMyApplication().getMapMarkersHelper().removeMarkersHistory();
+					reloadListAdapter();
+				}
+			});
+		}
 
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
 		AndroidUtils.setTextPrimaryColor(this, tv, nightMode);
@@ -214,26 +279,19 @@ public class MapMarkersActivity extends OsmandListActivity {
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		AndroidUtils.setTextPrimaryColor(this, text, nightMode);
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
-		localView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				showOnMap(marker);
-			}
-		});
-
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
 		((ImageView) localView.findViewById(R.id.waypoint_icon))
-				.setImageDrawable(getMapMarkerIcon(marker.colorIndex));
+				.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
 
 		LatLon lastKnownMapLocation = app.getSettings().getLastKnownMapLocation();
 		int dist = (int) (MapUtils.getDistance(marker.getLatitude(), marker.getLongitude(),
 				lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 
-		if (dist > 0) {
-			textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
-		} else {
-			textDist.setText("");
-		}
+		//if (dist > 0) {
+		textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+		//} else {
+		//	textDist.setText("");
+		//}
 
 		localView.findViewById(R.id.waypoint_deviation).setVisibility(View.GONE);
 
@@ -250,6 +308,8 @@ public class MapMarkersActivity extends OsmandListActivity {
 		}
 		text.setText(descr);
 
+		localView.findViewById(R.id.waypoint_desc_text).setVisibility(View.GONE);
+		/*
 		String pointDescription = "";
 		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
 		if (descText != null) {
@@ -266,6 +326,7 @@ public class MapMarkersActivity extends OsmandListActivity {
 		if (descText != null) {
 			descText.setText(pointDescription);
 		}
+		*/
 	}
 
 	public void showOnMap(MapMarker marker) {
@@ -332,8 +393,8 @@ public class MapMarkersActivity extends OsmandListActivity {
 		return activeObjects;
 	}
 
-	private Drawable getMapMarkerIcon(int colorIndex) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+	public static Drawable getMapMarkerIcon(OsmandApplication app, int colorIndex) {
+		IconsCache iconsCache = app.getIconsCache();
 		switch (colorIndex) {
 			case 0:
 				return iconsCache.getIcon(R.drawable.map_marker_blue);
@@ -348,5 +409,20 @@ public class MapMarkersActivity extends OsmandListActivity {
 			default:
 				return iconsCache.getIcon(R.drawable.map_marker_blue);
 		}
+	}
+
+	@Override
+	public void onWindowVisibilityChanged(int visibility) {
+		if (visibility != View.VISIBLE && swipeDismissListener != null) {
+			swipeDismissListener.discardUndo();
+		}
+	}
+
+	@Override
+	public void onItemsSwapped(List<Object> items) {
+	}
+
+	@Override
+	public void onItemSwapping(int position) {
 	}
 }

@@ -8,6 +8,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapMarkersActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.util.Algorithms;
@@ -59,7 +60,7 @@ public class MapMarkerMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIconOrig(R.drawable.list_intermediate);
+		return MapMarkersActivity.getMapMarkerIcon(getMapActivity().getMyApplication(), mapMarker.colorIndex);
 	}
 
 	@Override

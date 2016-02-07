@@ -470,9 +470,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void buttonWaypointPressed() {
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
+		} else if (pointDescription.isMapMarker()) {
+			mapActivity.getMapActions().openMapMarkersActivity();
 		} else {
-			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
-					getPointDescriptionForTarget());
+			mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
+					pointDescription);
 		}
 		close();
 	}
