@@ -69,7 +69,7 @@
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
-    <string name="background_service_is_enabled_question">OsmAnd kører stadig i baggrunden. Skal den også afbrydes?</string>
+    <string name="background_service_is_enabled_question">OsmAnd kører stadig i baggrunden. Skal den også stoppes?</string>
 
     <string name="close_changeset">Luk ændringspost</string>
     <string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Play butik?</string>
@@ -278,7 +278,7 @@
     <string name="unknown_from_location">Startpunkt er endnu ikke fastlagt</string>
     <string name="unknown_location">Position endnu ikke kendt</string>
     <string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
-    <string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
+    <string name="confirm_interrupt_download">Annuller filhentning?</string>
     <string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og kolllektivtrafik.</string>
     <string name="basemap_was_selected_to_download">Grundkort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
     <string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
@@ -1551,10 +1551,10 @@
     <string name="lang_fa">Persisk</string>
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
-    <string name="stop_navigation_service">Afbryd</string>
+    <string name="stop_navigation_service">Stop</string>
     <string name="enable_sleep_mode">Aktiver GPS baggrundstjenesten</string>
     <string name="gps_wake_up_timer">GPS vågn-op interval</string>
-    <string name="sleep_mode_stop_dialog">Afbryd GPS baggrundstjenesten?</string>
+    <string name="sleep_mode_stop_dialog">Stop GPS baggrundstjenesten?</string>
     <string name="keep_navigation_service">Hold</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
