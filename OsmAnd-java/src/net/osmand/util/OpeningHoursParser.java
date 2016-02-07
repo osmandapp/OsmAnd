@@ -608,11 +608,12 @@ public class OpeningHoursParser {
 	 * @param r the string to parse
 	 * @return BasicRule if the String is successfully parsed and UnparseableRule otherwise
 	 */
-	public static OpeningHoursParser.OpeningHoursRule parseRule(final String r){
+	public static OpeningHoursParser.OpeningHoursRule parseRule(String r){
 		// replace words "sunrise" and "sunset" by real hours
-		final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
-		final String[] monthsStr = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-		final String[] holidayStr = new String[] {"PH", "SH"};
+		r = r.toLowerCase();
+		final String[] daysStr = new String[] {"mo", "tu", "we", "th", "fr", "sa", "su"};
+		final String[] monthsStr = new String[] {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
+		final String[] holidayStr = new String[] {"ph", "sh"};
 		String sunrise = "07:00";
 		String sunset = "21:00";
 		String endOfDay = "24:00";
@@ -889,12 +890,14 @@ public class OpeningHoursParser {
 	}
 	
 	public static void main(String[] args) throws ParseException {
-
+		
 		// Test basic case
 		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40" ); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
+		hours = parseOpenedHours("mo-fr 07:00-19:00; sa 12:00-18:00");
+		System.out.println(hours);
 		
 		hours = parseOpenedHours("Mo-Fr 11:30-15:00,17:30-23:00; Sa-Su,PH 11:30-23:00");
 		System.out.println(hours);
@@ -1036,7 +1039,7 @@ public class OpeningHoursParser {
 		testOpened("05.12.2015 16:00", hours, false);
 
 		// Test holidays
-		String hoursString = "Mo-Fr 11:00-21:00; PH off";
+		String hoursString = "mo-fr 11:00-21:00; ph off";
 		hours = parseOpenedHoursHandleErrors(hoursString);
 		testParsedAndAssembledCorrectly(hoursString, hours);
 	}
