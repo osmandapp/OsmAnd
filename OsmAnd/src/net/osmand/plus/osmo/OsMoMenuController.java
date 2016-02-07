@@ -1,4 +1,4 @@
-﻿package net.osmand.plus.osmo;
+package net.osmand.plus.osmo;
 
 import android.graphics.drawable.Drawable;
 
