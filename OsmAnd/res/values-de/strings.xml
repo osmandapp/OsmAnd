@@ -892,7 +892,7 @@
 	<string name="osmand_parking_warning">Warnung</string>
 	<string name="osmand_parking_warning_text">Hinweis zum Abholen des Fahrzeugs wurde vormals zum Kalender hinzugefügt. Hinweis besteht solange, bis dieser manuell gelöscht wird.</string>
 	<string name="osmand_parking_time_limit_title">Zeitlimit für Parken setzen</string>
-	<string name="osmand_parking_delete_confirm">Soll der Standort des geparkten Fahrzeugs gelöscht werden?</string>
+	<string name="osmand_parking_delete_confirm">Soll der Standorthinweis des geparkten Fahrzeugs gelöscht werden?</string>
 	<string name="osmand_parking_delete">Parkplatz-Marker löschen</string>
 	<string name="osmand_parking_choose_type">Parkplatz-Eigenschaft wählen</string>
 	<string name="osmand_parking_lim_text">zeitlich beschränkt</string>
@@ -985,7 +985,7 @@
 	<string name="context_menu_item_intermediate_point">Als Zwischenziel setzen</string>
 	<string name="map_widget_intermediate_distance">Zwischenziel</string>
 	<string name="ending_point_too_far">Endpunkt zu weit von der nächsten Straße entfernt.</string>
-	<string name="intermediate_point_too_far">Zwischenziel %1$s zu weit von der nächsten Straße entfernt.</string>
+	<string name="intermediate_point_too_far">Zwischenziel %1$s ist zu weit von der nächsten Straße entfernt.</string>
 	<string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel setzen</string>
 	<string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel setzen</string>
 	<string name="target_point">Ziel %1$s</string>
