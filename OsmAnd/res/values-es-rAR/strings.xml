@@ -220,7 +220,7 @@
     <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PDI cercanos</string>
     <string name="way_alarms">Avisos de tráfico</string>
-    <string name="stop_navigation_service">Interrumpir</string>
+    <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Preguntar siempre</string>
     <string name="enable_sleep_mode">Activa el modo reposo del GPS</string>
     <string name="save_current_track_descr">Guarde ahora la traza actual en la SD</string>
@@ -494,8 +494,8 @@
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">El nombre del favorito elegido ya está en uso, se cambió a %1$s para evitar duplicación.</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
-    <string name="background_service_is_enabled_question">El servicio de fondo, aún está funcionando. ¿Quiere interrumpirlo también?</string>
-    <string name="sleep_mode_stop_dialog">¿Interrumpir el modo reposo del GPS?</string>
+    <string name="background_service_is_enabled_question">El servicio de fondo, aún está funcionando. ¿Quiere pararlo también?</string>
+    <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
     <string name="save_global_track_interval_descr">Elige el intervalo de registro para la grabación de trazas general (activar mediante el control de grabación GPX en el mapa)</string>
     <string name="save_global_track_interval">Intervalo general de guardado</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
@@ -1065,7 +1065,7 @@
     <string name="unknown_from_location">El punto de partida todavía no se determinó</string>
     <string name="unknown_location">Ubicación desconocida</string>
     <string name="modify_transparency">Modificar transparencia (0 - transparente, 255 - opaco)</string>
-    <string name="confirm_interrupt_download">¿Interrumpir la descarga del archivo?</string>
+    <string name="confirm_interrupt_download">¿Cancelar la descarga del archivo?</string>
     <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas funciones de la aplicación, necesita algunos datos regionales sin conexión que puedes descargar mediante \'Ajustes\' → \'Gestionar mapas\'. Luego será capaz de ver los mapas, ubicar direcciones, buscar PDIs y transporte público.</string>
     <string name="basemap_was_selected_to_download">Para el correcto funcionamiento de la aplicación, se necesita el mapa base (World Basemap) y se seleccionó para su descarga.</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
