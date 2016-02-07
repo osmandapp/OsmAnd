@@ -1483,6 +1483,7 @@ public class OsmandSettings {
 	public final static String MAP_MARKERS_HISTORY_POINT = "map_markers_history_point"; //$NON-NLS-1$
 	public final static String MAP_MARKERS_HISTORY_COLOR = "map_markers_history_color"; //$NON-NLS-1$
 	public final static String MAP_MARKERS_HISTORY_DESCRIPTION = "map_markers_history_description"; //$NON-NLS-1$
+	public final static int MAP_MARKERS_HISTORY_LIMIT = 30;
 	private MapMarkersStorage mapMarkersStorage = new MapMarkersStorage();
 	private MapMarkersHistoryStorage mapMarkersHistoryStorage = new MapMarkersHistoryStorage();
 
@@ -1561,6 +1562,16 @@ public class OsmandSettings {
 			pointsKey = MAP_MARKERS_HISTORY_POINT;
 			descriptionsKey = MAP_MARKERS_HISTORY_DESCRIPTION;
 			colorsKey = MAP_MARKERS_HISTORY_COLOR;
+		}
+
+		@Override
+		public boolean savePoints(List<LatLon> ps, List<String> ds, List<Integer> cs) {
+			if (ps.size() > MAP_MARKERS_HISTORY_LIMIT) {
+				ps.remove(ps.size() - 1);
+				ds.remove(ds.size() - 1);
+				cs.remove(cs.size() - 1);
+			}
+			return super.savePoints(ps, ds, cs);
 		}
 	}
 

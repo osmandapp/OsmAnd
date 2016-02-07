@@ -110,7 +110,7 @@ public class MapActivityActions implements DialogProvider {
 	public void addMapMarker(double latitude, double longitude, PointDescription pd) {
 		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
 		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd);
-		openMapMarkersActivity();
+		//openMapMarkersActivity();
 	}
 
 	public void editWaypoints() {
@@ -572,7 +572,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.map_markers).iconColor(R.drawable.ic_action_waypoint)
+		optionsMenuHelper.item(R.string.map_markers).iconColor(R.drawable.ic_action_flag_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
