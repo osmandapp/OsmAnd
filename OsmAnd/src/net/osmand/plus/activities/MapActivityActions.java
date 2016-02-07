@@ -280,7 +280,7 @@ public class MapActivityActions implements DialogProvider {
 		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null && 
 				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
 			adapter.item(R.string.context_menu_item_last_intermediate_point).iconColor(
-					R.drawable.ic_action_waypoint).reg();
+					R.drawable.ic_action_intermediate).reg();
 		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
