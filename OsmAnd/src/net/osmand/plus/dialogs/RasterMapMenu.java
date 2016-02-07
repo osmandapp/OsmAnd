@@ -67,7 +67,9 @@ public class RasterMapMenu {
 					}
 				};
 		// android:max="255" in layout is expected
-		adapter.item(R.string.underlay_transparency).layout(R.layout.progress_list_item)
+		//adapter.item(R.string.underlay_transparency).layout(R.layout.progress_list_item)
+		// Please note this does not modify the transparency of the underlay map, but of the base map, of course!
+		adapter.item(R.string.map_transparency).layout(R.layout.progress_list_item)
 				.progress(mapTransparencyPreference.get()).listenInteger(integerListener).reg();
 		adapter.item(R.string.map_underlay).layout(R.layout.two_line_list_item).listen(l).reg();
 		adapter.item(R.string.show_polygons).listen(l).reg();
