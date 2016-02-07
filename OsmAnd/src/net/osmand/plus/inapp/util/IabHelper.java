@@ -270,6 +270,7 @@ public class IabHelper {
         }
         else {
             // no service available to handle that Intent
+            mServiceConn = null;
             if (listener != null) {
                 listener.onIabSetupFinished(
                         new IabResult(BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE,
