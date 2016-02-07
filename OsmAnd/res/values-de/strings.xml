@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+﻿<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="shared_string_remove">Entfernen</string>
 	<string name="item_removed">Eintrag entfernt</string>
@@ -31,7 +31,7 @@
 	<string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Positionsaufzeichnung (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm)</string>
 	<string name="save_global_track_interval">Generelles Aufzeichnungsintervall</string>
 	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
-	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst unterbrechen?</string>
+	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst stoppen?</string>
 	<string name="bg_service_sleep_mode_off">Hintergrunddienst\n einschalten</string>
 	<string name="bg_service_sleep_mode_on">Hintergrunddienst\n ausschalten</string>
 	<string name="background_router_service_descr">Aktiviere OsmAnd-Hintergrunddienst für Funktionalitäten bei ausgeschalteter Anzeige</string>
@@ -58,7 +58,7 @@
 	<string name="continue_navigation">Navigation fortsetzen</string>
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv erhalten</string>
-	<string name="stop_navigation_service">Unterbrechen</string>
+	<string name="stop_navigation_service">Abbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
 	<string name="rendering_attr_hikingRoutesOSMC_name">Wandersymboleinblendung</string>
@@ -98,7 +98,7 @@
 	<string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (Verwendung für langsamere Android-Versionen).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Anwendung läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
-	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er auch unterbrochen werden?</string>
+	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er auch gestoppt werden?</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen …</string>
@@ -875,7 +875,7 @@
 	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
 	
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
-	<string name="confirm_interrupt_download">Möchten Sie das Herunterladen der Datei unterbrechen?</string>
+	<string name="confirm_interrupt_download">Möchten Sie das Herunterladen der Datei abbrechen?</string>
 	<string name="basemap_was_selected_to_download">Die Basiskarte wird für die korrekte Funktionsweise der Anwendung benötigt und ist für das Herunterladen vorausgewählt.</string>
 	
 	<string name="local_index_routing_data">Routing-Daten</string>
