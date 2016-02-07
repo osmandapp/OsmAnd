@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -2179,4 +2179,7 @@
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Wijzigingen opslaan</string>
     <string name="shared_string_email_address">Emailadres</string>
+    <string name="show_polygons">Toon polygonen</string>
+    <string name="underlay_transparency">Underlay transparantie</string>
+    <string name="find_parking">Zoek parkeerplaats</string>
     </resources>

@@ -51,7 +51,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.dialogs.UnderlayMapMenu;
+import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -59,6 +59,7 @@ import net.osmand.plus.helpers.WaypointDialogHelper.WaypointDialogHelperCallback
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.DownloadedRegionsLayer;
@@ -157,6 +158,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		LIST_MENU,
 		ROUTE_PREFERENCES,
 		DASHBOARD,
+		OVERLAY_MAP,
 		UNDERLAY_MAP
 	}
 
@@ -354,6 +356,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.shared_string_settings);
 		} else if (visibleType == DashboardType.UNDERLAY_MAP) {
 			tv.setText(R.string.map_underlay);
+		} else if (visibleType == DashboardType.OVERLAY_MAP) {
+			tv.setText(R.string.map_overlay);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -723,7 +727,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				OnItemClickListener listener = routePreferencesMenu.getItemClickListener(listAdapter);
 				updateListAdapter(listAdapter, listener);
 			} else if (DashboardType.UNDERLAY_MAP == visibleType) {
-				cm = UnderlayMapMenu.createListAdapter(mapActivity);
+				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.UNDERLAY);
+			} else if (DashboardType.OVERLAY_MAP == visibleType) {
+				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.OVERLAY);
 			}
 			if (cm != null) {
 				updateListAdapter(cm);

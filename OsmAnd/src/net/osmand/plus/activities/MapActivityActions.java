@@ -559,6 +559,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						MapActivity.clearPrevActivityIntent();
 						mapActivity.closeDrawer();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 						return true;
@@ -568,17 +569,16 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
-								.getMapMarkersActivity());
-						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						mapActivity.startActivity(newIntent);
-						return true;
+						MapActivity.clearPrevActivityIntent();
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+						return false;
 					}
 				}).reg();
 		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						MapActivity.clearPrevActivityIntent();
 						if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 							enterRoutePlanningMode(null, null);
 						} else {
@@ -625,6 +625,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						MapActivity.clearPrevActivityIntent();
 						mapActivity.getMapLayers().getContextMenuLayer().showContextMenu(mapView.getLatitude(), mapView.getLongitude(), true);
 						return true;
 					}
@@ -634,6 +635,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						MapActivity.clearPrevActivityIntent();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
 						return false;
 					}
@@ -643,6 +645,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						MapActivity.clearPrevActivityIntent();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
 						return false;
 					}
@@ -661,7 +664,7 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getDownloadActivity());
-						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
 						return true;
 					}
@@ -672,6 +675,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(intent);
 						return false;
 					}
@@ -683,7 +687,7 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getPluginsActivity());
-						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
 						return true;
 					}
@@ -696,6 +700,7 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization()
 								.getSettingsActivity());
+						settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(settings);
 						return true;
 					}
@@ -704,7 +709,9 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						mapActivity.startActivity(new Intent(mapActivity, HelpActivity.class));
+						Intent intent = new Intent(mapActivity, HelpActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						mapActivity.startActivity(intent);
 						return true;
 					}
 				}).reg();

@@ -113,6 +113,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
+	private static Intent prevActivityIntent = null;
 
 	private BroadcastReceiver screenOffReceiver;
 
@@ -408,7 +409,11 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		setIntent(intent);
 	}
 
-	private static Intent prevActivityIntent = null;
+	@Override
+	public void startActivity(Intent intent) {
+		clearPrevActivityIntent();
+		super.startActivity(intent);
+	}
 
 	@Override
 	public void onBackPressed() {
@@ -1036,7 +1041,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		}
 	}
 
-
+	public static void clearPrevActivityIntent() {
+		prevActivityIntent = null;
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_palaeontological_site">Jaciment paleontològic</string>
 
 	<string name="poi_bakery">Fleca</string>
@@ -2095,4 +2095,15 @@
 	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Motiu de l\'explosió: aplicació industrial, moviment de terres</string>
 	<string name="poi_nuclear_explosion_time_utc">Hora de la explosió (UTC)</string>
 	<string name="poi_nuclear_explosion_hole">Cràter de l\'explosió</string>
+	<string name="poi_bridge_ref">Codi de referència del pont</string>
+	<string name="poi_tunnel_ref">Codi de referència del túnel</string>
+
+	<string name="poi_ref">Codi de referència</string>
+
+	<string name="poi_cargo_passengers">Càrrega: passatgers</string>
+	<string name="poi_cargo_vehicle">Càrrega: vehicles</string>
+	<string name="poi_cargo_bicycle">Càrrega: bicicletes</string>
+	<string name="poi_cargo_container">Càrrega: contenidors</string>
+	<string name="poi_cargo_hgv">Càrrega: vehicles pesants</string>
+
 	</resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
@@ -1938,4 +1938,6 @@
     <string name="rendering_attr_hideUnderground_name">Skryť podzemné objekty</string>
     <string name="shared_string_read_more">Prečítať viac</string>
     <string name="find_parking">Nájsť parkovanie</string>
+    <string name="show_polygons">Zobraziť polygóny</string>
+    <string name="underlay_transparency">Priehľadnosť v podkladovej vrstve</string>
     </resources>
