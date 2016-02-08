@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/osmand_orange"
+        android:background="?attr/pstsTabBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
