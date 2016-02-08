@@ -193,7 +193,7 @@ public class ContextMenuAdapter {
 		i.name = name;
 		return i;
 	}
-	
+
 
 	public Item item(int resId) {
 		Item i = new Item();
@@ -229,7 +229,7 @@ public class ContextMenuAdapter {
 			this.lightIcon = icon;
 			return this;
 		}
-		
+
 
 		public Item position(int pos) {
 			this.pos = pos;
@@ -293,7 +293,7 @@ public class ContextMenuAdapter {
 			cat = b;
 			return this;
 		}
-		
+
 		public Item name(String name) {
 			this.name = name;
 			return this;
@@ -351,6 +351,7 @@ public class ContextMenuAdapter {
 		private OsmandApplication app;
 		private boolean holoLight;
 		private int layoutId;
+
 		public ContextMenuArrayAdapter(Activity context, int resource, int textViewResourceId,
 									   String[] objects, OsmandApplication app, boolean holoLight) {
 			super(context, resource, textViewResourceId, objects);
@@ -445,7 +446,7 @@ public class ContextMenuAdapter {
 
 			if (convertView.findViewById(R.id.seekbar) != null) {
 				SeekBar seekBar = (SeekBar) convertView.findViewById(R.id.seekbar);
-				if(progressList.get(position) != -1) {
+				if (progressList.get(position) != -1) {
 					seekBar.setProgress(getProgress(position));
 					seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 						@Override

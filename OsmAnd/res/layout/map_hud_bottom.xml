@@ -196,6 +196,7 @@
         android:layout_height="wrap_content">
 
         <include layout="@layout/recording_note_fragment"/>
+
         <LinearLayout
             android:id="@+id/map_context_menu_layout"
             android:layout_width="match_parent"
