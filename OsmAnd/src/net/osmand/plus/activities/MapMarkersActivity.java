@@ -288,15 +288,15 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 		v.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 
-		if (type == MARKERS_HISTORY) {
-			final Button btn = (Button) v.findViewById(R.id.header_button);
-			btn.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue)
-					: getResources().getColor(R.color.osmand_orange));
-			btn.setText(getString(R.string.shared_string_clear));
-			btn.setVisibility(View.VISIBLE);
-			btn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+		final Button btn = (Button) v.findViewById(R.id.header_button);
+		btn.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue)
+				: getResources().getColor(R.color.osmand_orange));
+		btn.setText(getString(R.string.shared_string_clear));
+		btn.setVisibility(View.VISIBLE);
+		btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (type == MARKERS_HISTORY) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(MapMarkersActivity.this);
 					builder.setMessage(getString(R.string.clear_markers_history_q))
 							.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -309,9 +309,22 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 							})
 							.setNegativeButton(R.string.shared_string_no, null)
 							.show();
+				} else if (type == ACTIVE_MARKERS) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(MapMarkersActivity.this);
+					builder.setMessage(getString(R.string.clear_active_markers_q))
+							.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									getListAdapter().notifyDataSetInvalidated();
+									getMyApplication().getMapMarkersHelper().removeActiveMarkers();
+									reloadListAdapter();
+								}
+							})
+							.setNegativeButton(R.string.shared_string_no, null)
+							.show();
 				}
-			});
-		}
+			}
+		});
 
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
 		AndroidUtils.setTextPrimaryColor(this, tv, nightMode);

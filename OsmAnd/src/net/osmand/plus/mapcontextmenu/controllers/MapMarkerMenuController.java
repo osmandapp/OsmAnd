@@ -25,6 +25,7 @@ public class MapMarkerMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				markersHelper.removeMapMarker(getMapMarker().index);
+				markersHelper.addMapMarkerHistory(getMapMarker());
 				getMapActivity().getContextMenu().close();
 			}
 		};
