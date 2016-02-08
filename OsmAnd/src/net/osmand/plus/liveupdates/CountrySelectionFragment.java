@@ -1,11 +1,14 @@
 package net.osmand.plus.liveupdates;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -215,10 +218,16 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 
 	private class ListAdapter extends ArrayAdapter<CountryItem> {
 		private final Drawable drawableLeft;
+		@ColorInt
+		private final int textColor;
 
 		public ListAdapter(@DrawableRes int drawableLeftId) {
 			super(getMyActivity(), android.R.layout.simple_list_item_1);
 			this.drawableLeft = drawableLeftId == -1 ? null : getContentIcon(drawableLeftId);
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = getActivity().getTheme();
+			theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+			textColor = typedValue.data;
 		}
 
 		@Override
@@ -226,6 +235,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 			CountryItem item = getItem(position);
 			TextView view = (TextView) super.getView(position, convertView, parent);
 			view.setText(item.localName);
+			view.setTextColor(textColor);
 			view.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
 			view.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.list_content_padding));
 			return view;
