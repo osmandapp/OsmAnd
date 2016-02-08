@@ -78,7 +78,7 @@
     <string name="shared_string_help">Ayuda</string>
     <string name="shared_string_settings">Ajustes</string>
     <string name="shared_string_history">Historial</string>
-    <string name="shared_string_select_on_map">Seleccione en el mapa</string>
+    <string name="shared_string_select_on_map">Eligir en el mapa</string>
     <string name="shared_string_select_all">Seleccionar todo</string>
     <string name="shared_string_deselect">Deseleccionar</string>
     <string name="shared_string_deselect_all">Deseleccionar todo</string>
@@ -602,7 +602,7 @@
     <string name="animate_routing_route">"Simular, usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
     <string name="route_is_too_long">El cálculo de ruta sin conexión de OsmAnd, podría tardar mucho tiempo (o a veces no funcionar) para tramos mayores de 200km. Tal vez quieras añadir destinos intermedios para un mejor rendimiento.</string>
-    <string name="auto_zoom_none">Sin ampliación automático</string>
+    <string name="auto_zoom_none">Sin ampliación automática</string>
     <string name="auto_zoom_close">Para corto alcance</string>
     <string name="auto_zoom_far">Para mediano alcance</string>
     <string name="auto_zoom_farthest">Para largo alcance</string>
