@@ -2271,4 +2271,5 @@
     <string name="find_parking">Find en parkeringsplads</string>
     <string name="show_polygons">Vis polygoner</string>
     <string name="underlay_transparency">Underlejringsgennemsigtighed</string>
+    <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
     </resources>
