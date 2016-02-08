@@ -634,7 +634,7 @@
     <string name="left_side_navigation_descr">Abilita nei paesi in cui si guida tenendo la sinistra</string>
 
     <string name="unknown_from_location">La posizione di partenza non è ancora stata determinata</string>
-    <string name="confirm_interrupt_download">Vuoi eliminare i file in download?</string>
+    <string name="confirm_interrupt_download">Vuoi lo scaricamento dei file?</string>
     <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
 
     <string name="map_online_plugin_is_not_installed">Abilita il plugin Mappe Online per scegliere altre sorgenti di mappe</string>
@@ -777,7 +777,7 @@
     <string name="osmand_parking_warning">Attenzione</string>
     <string name="osmand_parking_warning_text">Precedentemente è stata aggiunta al tuo calendario la notifica di recuperare l\'auto. Ci rimarrà finché non la eliminerai manualmente.</string>
     <string name="osmand_parking_time_limit_title">Imposta il limite d\'orario del parcheggio</string>
-    <string name="osmand_parking_delete_confirm">Vuoi cancellare il marcatore della posizione del parcheggio dell\'auto?</string>
+    <string name="osmand_parking_delete_confirm">Vuoi cancellare il marcatore della posizione di parcheggio?</string>
     <string name="osmand_parking_delete">Elimina un marcatore di parcheggio</string>
     <string name="osmand_parking_choose_type">Scegli il tipo di parcheggio</string>
     <string name="osmand_parking_lim_text">A tempo</string>
@@ -2137,7 +2137,7 @@
     <string name="select_month_and_country">Scegli il mese e lo stato</string>
 <string name="item_removed">Oggetto rimosso</string>
     <string name="n_items_removed">oggetti cancellati</string>
-    <string name="shared_string_undo_all">Annulla tutto</string>
+    <string name="shared_string_undo_all">ANNULLA TUTTO</string>
     <string name="switch_start_finish">Inverti punti di partenza e destinazione</string>
     <string name="rendering_attr_hideIcons_name">Nascondi le icone dei PDI</string>
     <string name="number_of_edits">Numero di modifiche</string>
@@ -2145,10 +2145,10 @@
     <string name="shared_string_select">Scegli</string>
     <string name="reports_for">Rapporto per</string>
 <string name="shared_string_remove">Rimuovi</string>
-    <string name="clear_updates_proposition_message">Puoi eliminare gli aggiornamenti scaricati e avere la mappa originale</string>
+    <string name="clear_updates_proposition_message">Puoi eliminare gli aggiornamenti scaricati e tornare alla mappa originale</string>
     <string name="road_blocked">Strada bloccata</string>
     <string name="add_time_span">Aggiungi durata</string>
-    <string name="data_is_not_available">Il dato non è disponibile</string>
+    <string name="data_is_not_available">Dati non disponibili</string>
     <string name="rendering_attr_hideUnderground_name">Nascondi gli oggetti sotterranei</string>
     <string name="shared_string_read_more">Approfondisci</string>
     <string name="shared_string_email_address">Indirizzo email</string>
@@ -2156,4 +2156,5 @@
     <string name="shared_string_save_changes">Salva le modifiche</string>
     <string name="show_polygons">Mostra i poligoni</string>
     <string name="find_parking">Cerca un parcheggio</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - crea percorsi e trova luoghi sulla mappa senza connessione a Internet. Scarica la mappa di una nazione prima di partire per un viaggio per trovare luoghi e percorsi in un luogo sconosciuto. Opzioni base: • Mappe dettagliate di 200 nazioni • Navigatore offline con istruzioni vocali • Ricerca degli indirizzi in modalità offline • Informazioni sui luoghi della mappa: punti d\'interesse, bar, parcheggi, negozi • Aggiunta di luoghi ai preferiti • Navigazione per guida, ciclisti e pedoni Opzioni aggiuntive: • Possibilità di vedere e registrare tracciati GPX • Descrizioni Wikipedia dei PDI • Aggiunta di note audio, video e foto alla mappa • Modalità notturna e diurna della mappa per una guida più confortevole • Informazioni sui percorsi e le fermate dei trasporti pubblici • Piste ciclabili e percorsi pedonali • Sentieri turistici in tutto il mondo • Mappe online da numerose fonti • Informazioni sulla qualità del fondo stradale e sull\'illuminazione • Aggiunta, modifica e cancellazione dei PDI (per gli utenti di OpenStreetMap.org) • OsMo - monitoraggio in tempo reale degli altri dispositivi Usa un navigatore affidabile nella tua nazione - che sia Francia, Germania, Messico, Regno Unito, Spagna, Olanda, USA, Russia, Brasile qualunque altro stato. Plugin: • Curve di livello e ombreggiatura del terreno https://goo.gl/7mojP8 Visualizzazione delle curve di livello e dell\'ombreggiatura del terreno in aggiunta alla mappa base OsmAnd. • Mappe sci https://goo.gl/pX6DxJ Informazioni sulle piste da sci, sui percorsi da sci di fondo, cross-country, funivie e skilift. • Mappe nautiche https://goo.gl/0hEdxm Stile speciale della mappa per mostrare i simboli per la navigazione nautica marine a lungo o breve raggio. • Posizione di parcheggio https://goo.gl/6JxQXF Ti aiuta a segnare la posizione del tuo veicolo parcheggiato e vedere quanto tempo manca se il parcheggio ha limiti di tempo. Resta sintonizzato! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sito: http://osmand.net Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di supporto: support@osmand.net. "</string>
     </resources>
