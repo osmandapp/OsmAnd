@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Loja</string>
 		<string name="poi_shop_food">Mercearia</string>
 	<string name="poi_emergency">Emergência</string>
@@ -104,7 +104,7 @@
 	<string name="poi_mobile_phone">Loja de celulares</string>
 	<string name="poi_motorcycle">Revenda de motocicletas</string>
 	<string name="poi_musical_instrument">Loja de instrumentos musicais</string>
-	<string name="poi_newsagent">Agência de notícias</string>
+	<string name="poi_newsagent">Banca de revistas</string>
 	<string name="poi_optician">Ótica</string>
 	<string name="poi_organic">Produtos orgânicos</string>
 	<string name="poi_outdoor">Loja de esporte/aventura</string>
@@ -595,7 +595,7 @@
 	<string name="poi_arts_centre">Centro de artes</string>
 	<string name="poi_cinema">Cinema</string>
 	<string name="poi_casino">Cassino</string>
-	<string name="poi_community_centre">Centro Comunitário</string>
+	<string name="poi_community_centre">Centro comunitário</string>
 	<string name="poi_social_centre">Centro social</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_circus">Circo</string>
@@ -852,7 +852,7 @@
 	<string name="poi_sally_port">Portão de fortaleza</string>
 	<string name="poi_swing_gate">Swing gate</string>
 	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
-	<string name="poi_highway_crossing">Cruzamento de estrada</string>
+	<string name="poi_highway_crossing">Travessia de pedestres</string>
 
 <string name="poi_cheese">Queijaria</string>
 	<string name="poi_chocolate">Chocolateria</string>
