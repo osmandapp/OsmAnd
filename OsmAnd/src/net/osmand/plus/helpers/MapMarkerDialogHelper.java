@@ -1,14 +1,14 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.helpers;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,152 +23,62 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.views.controls.DynamicListView;
-import net.osmand.plus.views.controls.DynamicListViewCallbacks;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
-import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class MapMarkersActivity extends OsmandListActivity implements DynamicListViewCallbacks {
-
+public class MapMarkerDialogHelper {
 	public static final int ACTIVE_MARKERS = 0;
 	public static final int MARKERS_HISTORY = 1;
 
-	private SwipeDismissListViewTouchListener swipeDismissListener;
+	private MapActivity mapActivity;
+	private OsmandApplication app;
+	private boolean sorted;
 	private boolean nightMode;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		getMyApplication().applyTheme(this);
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map_markers);
-		getSupportActionBar().setTitle(R.string.map_markers);
-
-		((DynamicListView) getListView()).setDynamicListViewCallbacks(this);
-		swipeDismissListener = new SwipeDismissListViewTouchListener(getListView(),
-				new SwipeDismissListViewTouchListener.DismissCallbacks() {
-
-					private List<Object> deletedMarkers = new ArrayList<>();
-
-					@Override
-					public boolean canDismiss(int position) {
-						List<Object> activeObjects = getListAdapter().getActiveObjects();
-						Object obj = getListAdapter().getItem(position);
-						return activeObjects.contains(obj);
-					}
-
-					@Override
-					public SwipeDismissListViewTouchListener.Undoable onDismiss(final int position) {
-						final StableArrayAdapter stableAdapter = getListAdapter();
-						final int activeObjPos;
-						final Object item = stableAdapter.getItem(position);
-						if (item != null) {
-							if (!((MapMarker) item).history) {
-								deletedMarkers.add(item);
-							}
-
-							stableAdapter.setNotifyOnChange(false);
-							stableAdapter.remove(item);
-							stableAdapter.getObjects().remove(item);
-							activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
-							stableAdapter.getActiveObjects().remove(item);
-							stableAdapter.refreshData();
-							stableAdapter.notifyDataSetChanged();
-
-							return new SwipeDismissListViewTouchListener.Undoable() {
-								@Override
-								public void undo() {
-									stableAdapter.setNotifyOnChange(false);
-									stableAdapter.insert(item, position);
-									stableAdapter.getObjects().add(position, item);
-									stableAdapter.getActiveObjects().add(activeObjPos, item);
-									stableAdapter.refreshData();
-									deletedMarkers.remove(item);
-									updateMapMarkers(stableAdapter.getActiveObjects());
-									reloadListAdapter();
-								}
-							};
-						} else {
-							return null;
-						}
-					}
-
-					@Override
-					public void onHidePopup() {
-						StableArrayAdapter stableAdapter = getListAdapter();
-						stableAdapter.refreshData();
-						updateMapMarkers(stableAdapter.getActiveObjects());
-						if (stableAdapter.getActiveObjects().size() == 0) {
-							finish();
-						} else {
-							reloadListAdapter();
-						}
-					}
-
-					private void updateMapMarkers(List<Object> objects) {
-						List<MapMarker> markers = new ArrayList<>();
-						List<MapMarker> markersHistory = new ArrayList<>();
-
-						for (Object obj : objects) {
-							MapMarker marker = (MapMarker) obj;
-							if (!marker.history) {
-								markers.add(marker);
-							} else {
-								markersHistory.add(marker);
-							}
-						}
-
-						for (int i = deletedMarkers.size() - 1; i >= 0; i--) {
-							markersHistory.add(0, (MapMarker) deletedMarkers.get(i));
-						}
-						deletedMarkers.clear();
-
-						getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, markersHistory);
-					}
-				});
-
-		//nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		nightMode = !getMyApplication().getSettings().isLightContent();
-		setListAdapter(getMapMarkersListAdapter());
+	public MapMarkerDialogHelper(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		app = mapActivity.getMyApplication();
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		if (nightMode) {
-			getListView().setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
-		} else {
-			getListView().setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-		}
+	public boolean isNightMode() {
+		return nightMode;
 	}
 
-	@Override
-	public StableArrayAdapter getListAdapter() {
-		return (StableArrayAdapter) super.getListAdapter();
+	public void setNightMode(boolean nightMode) {
+		this.nightMode = nightMode;
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Object obj = getListAdapter().getItem(position);
-		if (obj instanceof MapMarker) {
-			MapMarker marker = (MapMarker) obj;
-			if (!marker.history) {
-				showOnMap(marker);
-			} else {
-				showHistoryOnMap(marker);
+	public boolean isSorted() {
+		return sorted;
+	}
+
+	public void setSorted(boolean sorted) {
+		this.sorted = sorted;
+	}
+
+	public AdapterView.OnItemClickListener getItemClickListener(final ArrayAdapter<Object> listAdapter) {
+		return new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
+				Object obj = listAdapter.getItem(item);
+				if (obj instanceof MapMarker) {
+					MapMarker marker = (MapMarker) obj;
+					if (!marker.history) {
+						showOnMap(marker);
+					} else {
+						showHistoryOnMap(marker);
+					}
+				}
 			}
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		getListAdapter().notifyDataSetChanged();
+		};
 	}
 
 	public StableArrayAdapter getMapMarkersListAdapter() {
@@ -176,7 +86,7 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 		final List<Object> objects = getListObjects();
 		List<Object> activeObjects = getActiveObjects(objects);
 
-		final StableArrayAdapter listAdapter = new StableArrayAdapter(getMyApplication(),
+		final StableArrayAdapter listAdapter = new StableArrayAdapter(mapActivity,
 				R.layout.waypoint_reached, R.id.title, objects, activeObjects) {
 
 			@Override
@@ -199,16 +109,16 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 				boolean topDividerView = (obj instanceof Boolean) && ((Boolean) obj);
 				boolean bottomDividerView = (obj instanceof Boolean) && !((Boolean) obj);
 				if (labelView) {
-					v = createItemForCategory((Integer) obj);
-					AndroidUtils.setListItemBackground(MapMarkersActivity.this, v, nightMode);
+					v = createItemForCategory(this, (Integer) obj);
+					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 				} else if (topDividerView) {
-					v = getLayoutInflater().inflate(R.layout.card_top_divider, null);
+					v = mapActivity.getLayoutInflater().inflate(R.layout.card_top_divider, null);
 				} else if (bottomDividerView) {
-					v = getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
+					v = mapActivity.getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
 				} else if (obj instanceof MapMarker) {
 					MapMarker marker = (MapMarker) obj;
 					v = updateMapMarkerItemView(v, marker);
-					AndroidUtils.setListItemBackground(MapMarkersActivity.this, v, nightMode);
+					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 				}
 				return v;
 			}
@@ -218,15 +128,15 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 			if (p instanceof MapMarker) {
 				final MapMarker marker = (MapMarker) p;
 				if (marker.getOriginalPointDescription() != null
-						&& marker.getOriginalPointDescription().isSearchingAddress(this)) {
+						&& marker.getOriginalPointDescription().isSearchingAddress(mapActivity)) {
 					GeocodingLookupService.AddressLookupRequest lookupRequest
 							= new GeocodingLookupService.AddressLookupRequest(marker.point, new GeocodingLookupService.OnAddressLookupResult() {
 						@Override
 						public void geocodingDone(String address) {
-							reloadListAdapter();
+							reloadListAdapter(listAdapter);
 						}
 					}, null);
-					getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+					app.getGeocodingLookupService().lookupAddress(lookupRequest);
 				}
 			}
 		}
@@ -237,18 +147,18 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 	private List<Drawable> getCustomDividers(List<Object> points) {
 		int color;
 		if (nightMode) {
-			color = getResources().getColor(R.color.dashboard_divider_dark);
+			color = mapActivity.getResources().getColor(R.color.dashboard_divider_dark);
 		} else {
-			color = getResources().getColor(R.color.dashboard_divider_light);
+			color = mapActivity.getResources().getColor(R.color.dashboard_divider_light);
 		}
 
 		Shape fullDividerShape = new ListDividerShape(color, 0);
-		Shape halfDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(this, 56f));
+		Shape halfDividerShape = new ListDividerShape(color, AndroidUtils.dpToPx(mapActivity, 56f));
 
 		final ShapeDrawable fullDivider = new ShapeDrawable(fullDividerShape);
 		final ShapeDrawable halfDivider = new ShapeDrawable(halfDividerShape);
 
-		int divHeight = AndroidUtils.dpToPx(this, 1f);
+		int divHeight = AndroidUtils.dpToPx(mapActivity, 1f);
 		fullDivider.setIntrinsicHeight(divHeight);
 		halfDivider.setIntrinsicHeight(divHeight);
 
@@ -283,41 +193,41 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 		return res;
 	}
 
-	protected View createItemForCategory(final int type) {
-		View v = getLayoutInflater().inflate(R.layout.waypoint_header, null);
+	protected View createItemForCategory(final ArrayAdapter<Object> listAdapter, final int type) {
+		View v = mapActivity.getLayoutInflater().inflate(R.layout.waypoint_header, null);
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 		v.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 
 		final Button btn = (Button) v.findViewById(R.id.header_button);
-		btn.setTextColor(!nightMode ? getResources().getColor(R.color.map_widget_blue)
-				: getResources().getColor(R.color.osmand_orange));
-		btn.setText(getString(R.string.shared_string_clear));
+		btn.setTextColor(!nightMode ? mapActivity.getResources().getColor(R.color.map_widget_blue)
+				: mapActivity.getResources().getColor(R.color.osmand_orange));
+		btn.setText(mapActivity.getString(R.string.shared_string_clear));
 		btn.setVisibility(View.VISIBLE);
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (type == MARKERS_HISTORY) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(MapMarkersActivity.this);
-					builder.setMessage(getString(R.string.clear_markers_history_q))
+					AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+					builder.setMessage(mapActivity.getString(R.string.clear_markers_history_q))
 							.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									getListAdapter().notifyDataSetInvalidated();
-									getMyApplication().getMapMarkersHelper().removeMarkersHistory();
-									reloadListAdapter();
+									listAdapter.notifyDataSetInvalidated();
+									app.getMapMarkersHelper().removeMarkersHistory();
+									reloadListAdapter(listAdapter);
 								}
 							})
 							.setNegativeButton(R.string.shared_string_no, null)
 							.show();
 				} else if (type == ACTIVE_MARKERS) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(MapMarkersActivity.this);
-					builder.setMessage(getString(R.string.clear_active_markers_q))
+					AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+					builder.setMessage(mapActivity.getString(R.string.clear_active_markers_q))
 							.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									getListAdapter().notifyDataSetInvalidated();
-									getMyApplication().getMapMarkersHelper().removeActiveMarkers();
-									reloadListAdapter();
+									listAdapter.notifyDataSetInvalidated();
+									app.getMapMarkersHelper().removeActiveMarkers();
+									reloadListAdapter(listAdapter);
 								}
 							})
 							.setNegativeButton(R.string.shared_string_no, null)
@@ -327,14 +237,14 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 		});
 
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
-		AndroidUtils.setTextPrimaryColor(this, tv, nightMode);
+		AndroidUtils.setTextPrimaryColor(mapActivity, tv, nightMode);
 		tv.setText(getHeader(type));
 		return v;
 	}
 
 	protected View updateMapMarkerItemView(View v, final MapMarker marker) {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
-			v = getLayoutInflater().inflate(R.layout.waypoint_reached, null);
+			v = mapActivity.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 		}
 		updateMapMarkerInfoView(v, marker);
 		final View more = v.findViewById(R.id.all_points);
@@ -347,26 +257,23 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 	}
 
 	protected void updateMapMarkerInfoView(View localView, final MapMarker marker) {
-		OsmandApplication app = getMyApplication();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
 		if (!marker.history) {
 			((ImageView) localView.findViewById(R.id.waypoint_icon))
 					.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
-			AndroidUtils.setTextPrimaryColor(this, text, nightMode);
-			textDist.setTextColor(getResources().getColor(R.color.color_myloc_distance));
+			AndroidUtils.setTextPrimaryColor(mapActivity, text, nightMode);
+			textDist.setTextColor(mapActivity.getResources().getColor(R.color.color_myloc_distance));
 		} else {
 			((ImageView) localView.findViewById(R.id.waypoint_icon))
-					.setImageDrawable(getMyApplication().getIconsCache()
+					.setImageDrawable(app.getIconsCache()
 							.getContentIcon(R.drawable.ic_action_flag_dark, !nightMode));
-			AndroidUtils.setTextSecondaryColor(this, text, nightMode);
-			AndroidUtils.setTextSecondaryColor(this, textDist, nightMode);
+			AndroidUtils.setTextSecondaryColor(mapActivity, text, nightMode);
+			AndroidUtils.setTextSecondaryColor(mapActivity, textDist, nightMode);
 		}
 
-		LatLon lastKnownMapLocation = app.getSettings().getLastKnownMapLocation();
-		int dist = (int) (MapUtils.getDistance(marker.getLatitude(), marker.getLongitude(),
-				lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+		int dist = marker.dist;
 
 		//if (dist > 0) {
 		textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
@@ -411,62 +318,81 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 	}
 
 	public void showOnMap(MapMarker marker) {
-		getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-				15, marker.getPointDescription(this), true, marker);
-		MapActivity.launchMapActivityMoveToTop(this);
+		app.getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
+				15, marker.getPointDescription(mapActivity), true, marker);
+		MapActivity.launchMapActivityMoveToTop(mapActivity);
 	}
 
 	public void showHistoryOnMap(MapMarker marker) {
-		getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-				15, new PointDescription(PointDescription.POINT_TYPE_LOCATION, marker.getPointDescription(this).getName()),
+		app.getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
+				15, new PointDescription(PointDescription.POINT_TYPE_LOCATION,
+						marker.getPointDescription(mapActivity).getName()),
 				false, null);
-		MapActivity.launchMapActivityMoveToTop(this);
+		MapActivity.launchMapActivityMoveToTop(mapActivity);
 	}
 
 	protected String getHeader(int type) {
-		String str = getString(R.string.map_markers);
+		String str = mapActivity.getString(R.string.map_markers);
 		switch (type) {
 			case ACTIVE_MARKERS:
-				str = getString(R.string.active_markers);
+				str = mapActivity.getString(R.string.active_markers);
 				break;
 			case MARKERS_HISTORY:
-				str = getString(R.string.shared_string_history);
+				str = mapActivity.getString(R.string.shared_string_history);
 				break;
 		}
 		return str;
 	}
-
-	public void reloadListAdapter() {
-		StableArrayAdapter listAdapter = getListAdapter();
+	
+	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
 		listAdapter.setNotifyOnChange(false);
 		listAdapter.clear();
 		List<Object> objects = getListObjects();
 		for (Object point : objects) {
 			listAdapter.add(point);
 		}
-		listAdapter.updateObjects(objects, getActiveObjects(objects));
+		if (listAdapter instanceof StableArrayAdapter) {
+			((StableArrayAdapter) listAdapter).updateObjects(objects, getActiveObjects(objects));
+		}
 		listAdapter.notifyDataSetChanged();
+	}
 
-		DynamicListView dynamicListView = (DynamicListView) getListView();
-		dynamicListView.setItemsList(listAdapter.getObjects());
-		dynamicListView.setActiveItemsList(listAdapter.getActiveObjects());
+	public void calcDistance(LatLon anchor, List<MapMarker> markers) {
+		for (MapMarker m : markers) {
+			m.dist = (int) (MapUtils.getDistance(m.getLatitude(), m.getLongitude(),
+					anchor.getLatitude(), anchor.getLongitude()));
+		}
 	}
 
 	protected List<Object> getListObjects() {
 		final List<Object> objects = new ArrayList<>();
-		final MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 
-		List<MapMarker> activeMarkers = markersHelper.getActiveMapMarkers();
+		LatLon mapLocation =
+				new LatLon(mapActivity.getMapView().getLatitude(), mapActivity.getMapView().getLongitude());
+
+		List<MapMarker> activeMarkers = new ArrayList<>(markersHelper.getActiveMapMarkers());
+		calcDistance(mapLocation, activeMarkers);
+		if (sorted) {
+			Collections.sort(activeMarkers, new Comparator<MapMarker>() {
+				@Override
+				public int compare(MapMarker lhs, MapMarker rhs) {
+					return lhs.dist < rhs.dist ? -1 : (lhs.dist == rhs.dist ? 0 : 1);
+				}
+			});
+		}
 		if (activeMarkers.size() > 0) {
-			objects.add(true);
 			objects.add(ACTIVE_MARKERS);
 			objects.addAll(activeMarkers);
 			objects.add(false);
 		}
 
-		List<MapMarker> markersHistory = markersHelper.getMapMarkersHistory();
+		List<MapMarker> markersHistory = new ArrayList<>(markersHelper.getMapMarkersHistory());
+		calcDistance(mapLocation, markersHistory);
 		if (markersHistory.size() > 0) {
-			objects.add(true);
+			if (activeMarkers.size() > 0) {
+				objects.add(true);
+			}
 			objects.add(MARKERS_HISTORY);
 			objects.addAll(markersHistory);
 			objects.add(false);
@@ -501,20 +427,5 @@ public class MapMarkersActivity extends OsmandListActivity implements DynamicLis
 			default:
 				return iconsCache.getIcon(R.drawable.map_marker_blue);
 		}
-	}
-
-	@Override
-	public void onWindowVisibilityChanged(int visibility) {
-		if (visibility != View.VISIBLE && swipeDismissListener != null) {
-			swipeDismissListener.discardUndo();
-		}
-	}
-
-	@Override
-	public void onItemsSwapped(List<Object> items) {
-	}
-
-	@Override
-	public void onItemSwapping(int position) {
 	}
 }

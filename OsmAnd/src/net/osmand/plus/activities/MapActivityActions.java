@@ -577,8 +577,8 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						MapActivity.clearPrevActivityIntent();
-						openMapMarkersActivity();
-						return true;
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MARKERS);
+						return false;
 					}
 				}).reg();
 		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
@@ -744,13 +744,6 @@ public class MapActivityActions implements DialogProvider {
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
-	}
-
-	public void openMapMarkersActivity() {
-		Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
-				.getMapMarkersActivity());
-		newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		mapActivity.startActivity(newIntent);
 	}
 
 	public void openIntermediatePointsDialog() {

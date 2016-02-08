@@ -30,6 +30,7 @@ public class MapMarkersHelper {
 		public int colorIndex;
 		public int index;
 		public boolean history;
+		public int dist;
 
 		public MapMarker(LatLon point, PointDescription name, int colorIndex, int index) {
 			this.point = point;

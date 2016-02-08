@@ -22,6 +22,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -471,7 +472,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
 		} else if (pointDescription.isMapMarker()) {
-			mapActivity.getMapActions().openMapMarkersActivity();
+			hide();
+			MapActivity.clearPrevActivityIntent();
+			mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
 		} else {
 			mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
 					pointDescription);

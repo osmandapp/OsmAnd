@@ -1,15 +1,11 @@
 package net.osmand.plus;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import android.app.Activity;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapMarkersActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -20,7 +16,11 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.app.Activity;
+
+import java.io.File;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class OsmAndAppCustomization {
 	
@@ -66,10 +66,6 @@ public class OsmAndAppCustomization {
 	
 	public Class<FavoritesActivity> getFavoritesActivity(){
 		return FavoritesActivity.class;
-	}
-
-	public Class<MapMarkersActivity> getMapMarkersActivity(){
-		return MapMarkersActivity.class;
 	}
 
 	public Class<? extends Activity> getDownloadIndexActivity() {
