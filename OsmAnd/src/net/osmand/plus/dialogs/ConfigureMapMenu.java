@@ -399,7 +399,12 @@ public class ConfigureMapMenu {
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
-			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>(renderer.PROPS.getCustomRules());
+			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>();
+			for(RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
+				if(!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())){ 
+					customRules.add(p);
+				}
+			}
 			
 			createProperties(customRules, R.string.rendering_category_transport, "transport",
 					adapter, activity);

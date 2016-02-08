@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -470,12 +471,13 @@ public class RenderingRulesStorage {
 	public static void main(String[] args) throws XmlPullParserException, IOException {
 		STORE_ATTTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
-		String defaultFile = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
+		final String loc = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/";
+		String defaultFile = loc + "UniRS.render.xml";
 		if(args.length > 0) {
 			defaultFile = args[0];
 		}
-		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
-		InputStream is = new FileInputStream(defaultFile);
+		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
+		InputStream is = new FileInputStream(loc + "default.render.xml");
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
@@ -498,8 +500,9 @@ public class RenderingRulesStorage {
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
-				RenderingRulesStorage depends = new RenderingRulesStorage(name, null);
-				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref);
+				RenderingRulesStorage depends = new RenderingRulesStorage(name, renderingConstants);
+//				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref);
+				depends.parseRulesFromXmlInputStream(new FileInputStream(loc + name + ".render.xml"), ref);
 				return depends;
 			}
 		};
@@ -508,9 +511,10 @@ public class RenderingRulesStorage {
 		
 //		storage = new RenderingRulesStorage("", null);
 //		new DefaultRenderingRulesStorage().createStyle(storage);
-		
-		
-		printAllRules(storage);
+		for (RenderingRuleProperty p :  storage.PROPS.getCustomRules()) {
+			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
+		}
+//		printAllRules(storage);
 //		testSearch(storage);
 		
 	}
