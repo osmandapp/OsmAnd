@@ -101,10 +101,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		InAppHelper helper = getInAppHelper();
-		if (helper != null) {
-			helper.addListener(this);
-		}
 	}
 
 	@Override
@@ -207,6 +203,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		InAppHelper helper = getInAppHelper();
 		if (helper != null) {
 			enableProgress();
+			helper.addListener(this);
 			helper.start(false);
 		}
 	}
