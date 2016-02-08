@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.MapTileLayer;
 
@@ -50,6 +51,12 @@ public class RasterMapMenu {
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				Log.v(TAG, "onContextMenuClick(" + "adapter=" + adapter + ", itemId=" + itemId + ", pos=" + pos + ", isChecked=" + isChecked + ")");
 				if (itemId == R.string.shared_string_show) {
+					MapActivityLayers mapLayers = mapActivity.getMapLayers();
+					if (isChecked) {
+						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+					} else {
+						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
+					}
 					plugin.toggleUnderlayState(mapActivity, type);
 				}
 				return false;
