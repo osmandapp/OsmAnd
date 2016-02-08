@@ -620,9 +620,17 @@ public class MapRenderRepositories {
 				if (customProp.isBoolean()) {
 					if(customProp.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
 						renderingReq.setBooleanFilter(customProp, true);
+					} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
+						renderingReq.setBooleanFilter(customProp, false);
 					} else {
 						CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
 						renderingReq.setBooleanFilter(customProp, pref.get());
+					}
+				} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
+					if (customProp.isString()) {
+						renderingReq.setStringFilter(customProp, "");
+					} else {
+						renderingReq.setIntFilter(customProp, 0);
 					}
 				} else {
 					CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
