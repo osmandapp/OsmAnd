@@ -2091,4 +2091,5 @@
     <string name="find_parking">找停車場</string>
     <string name="show_polygons">顯示多邊形</string>
     <string name="underlay_transparency">襯底透明度</string>
+    <string name="rendering_attr_showMtbRoutes_name">顯示 MTB 路線</string>
     </resources>
