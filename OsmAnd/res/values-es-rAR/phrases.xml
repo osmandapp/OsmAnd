@@ -88,7 +88,7 @@
 	<string name="poi_florist">Florería</string>
 	<string name="poi_frame">Tienda de marcos</string>
 	<string name="poi_furniture">Mueblería</string>
-	<string name="poi_garden_centre">Centro de jardinería</string>
+	<string name="poi_garden_centre">Vivero (venta)</string>
 	<string name="poi_gas">Gas líquido</string>
 	<string name="poi_general">Pulpería</string>
 	<string name="poi_gift">Regalería</string>
@@ -859,7 +859,7 @@
 	<string name="poi_pasta">Fábrica de pastas</string>
 	<string name="poi_pastry">Pastelería</string>
 	<string name="poi_furnace">Artículos de calefacción</string>
-	<string name="poi_garden_furniture">Almacén de jardinería</string>
+	<string name="poi_garden_furniture">Muebles de jardín</string>
 	<string name="poi_leather">Marroquinería</string>
 	<string name="poi_tyres">Neumáticos</string>
 	<string name="poi_watches">Relojería</string>
@@ -2674,6 +2674,6 @@
 	<string name="poi_addr_housename">Nombre de casa</string>
 	<string name="poi_religion">Artículos religiosos</string>
 
-<string name="poi_plant_nursery">Vivero de plantas</string>
+<string name="poi_plant_nursery">Vivero (cultivo)</string>
 
 </resources>
