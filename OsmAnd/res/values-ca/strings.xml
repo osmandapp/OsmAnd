@@ -81,7 +81,7 @@
     <string name="bg_service_sleep_mode_off">Activa\n…el mode en segon pla</string>
     <string name="bg_service_sleep_mode_on">Atura\n…el mode en segon pla</string>
     <string name="offline_navigation_not_available">La navegació fora de línia de l\'OsmAnd no està disponible temporalment.</string>
-    <string name="confirm_interrupt_download">Voleu interrompre la baixada del fitxer?</string>
+    <string name="confirm_interrupt_download">Voleu cancel·lar la baixada del fitxer?</string>
     <string name="select_index_file_to_download">No s\'ha trobat res. Si no trobeu la vostra regió, podeu crear-la vosaltres mateixos (vegeu http://osmand.net).</string>
     <string name="local_indexes_cat_tile">Mapes de tessel·les en línia i cau</string>
     <string name="local_indexes_cat_map">Mapes estàndards (vectorials)</string>
@@ -814,7 +814,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Amaga els límits administratius</string>
     <string name="download_roads_only_maps">Mapa només de carreteres</string>
     <string name="safe_mode">Mode segur</string>
-    <string name="background_service_is_enabled_question">El mode en segon pla encara s\'està executant. També el voleu interrompre?</string>
+    <string name="background_service_is_enabled_question">El mode en segon pla encara s\'està executant. També el voleu aturar?</string>
     <string name="close_changeset">Tanca el conjunt de canvis</string>
     <string name="native_library_not_running">L\'aplicació encara s\'està executant en mode segur(desactiveu-lo a «Preferències»).</string>
     <string name="rendering_attr_showRoadMaps_name">Mapes amb només carreteres</string>
@@ -1338,10 +1338,10 @@
     <string name="gpx_start_new_segment">Inicia un segment nou</string>
     <string name="lang_fa">Persa</string>
     <string name="keep_navigation_service">Mantén</string>
-    <string name="stop_navigation_service">Interromp</string>
+    <string name="stop_navigation_service">Atura</string>
     <string name="enable_sleep_mode">Activa el mode en segon pla del GPS</string>
     <string name="gps_wake_up_timer">Interval d\'activació del GPS</string>
-    <string name="sleep_mode_stop_dialog">Voleu interrompre el mode en segon pla del GPS?</string>
+    <string name="sleep_mode_stop_dialog">Voleu aturar el mode en segon pla del GPS?</string>
     <string name="lang_al">Albanès</string>
     <string name="lang_ar">Àrab</string>
     <string name="lang_sc">Sard</string>
