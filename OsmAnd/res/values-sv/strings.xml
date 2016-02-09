@@ -136,7 +136,7 @@
 
     <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
     <string name="unknown_location">Positionen är ännu inte känd</string>
-    <string name="confirm_interrupt_download">Vill du avbryta nedladdningen?</string>
+    <string name="confirm_interrupt_download">Vill du avbryta nedladdningen av filen?</string>
     <string name="local_indexes_cat_tile">Online-kartor och mellanlagrade kartbitar (tiles)</string>
     <string name="local_indexes_cat_map">Standardkartor (vektor)</string>
 
