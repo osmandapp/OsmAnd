@@ -1,5 +1,6 @@
 package net.osmand.plus.dialogs;
 
+import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -33,13 +34,23 @@ public class RasterMapMenu {
 		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
 		final MapTileLayer rasterMapLayer;
 		final OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
+		final OsmandSettings.CommonPreference<String> mapTypePreference;
+		@StringRes final int mapTypeString;
 		if (type == OsmandRasterMapsPlugin.RasterMapType.OVERLAY) {
 			rasterMapLayer = plugin.getOverlayLayer();
 			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
-		} else {
+			mapTypePreference = settings.MAP_OVERLAY;
+			mapTypeString = R.string.map_overlay;
+		} else if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY){
 			rasterMapLayer = plugin.getUnderlayLayer();
 			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
+			mapTypePreference = settings.MAP_UNDERLAY;
+			mapTypeString = R.string.map_underlay;
+		} else {
+			throw new RuntimeException("Unexpected raster map type");
 		}
+		final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
+				mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
@@ -58,6 +69,8 @@ public class RasterMapMenu {
 						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
 					}
 					plugin.toggleUnderlayState(mapActivity, type);
+				} else if (itemId == R.string.show_polygons) {
+					hidePolygonsPref.set(!isChecked);
 				}
 				return false;
 			}
@@ -74,11 +87,10 @@ public class RasterMapMenu {
 					}
 				};
 		// android:max="255" in layout is expected
-		//adapter.item(R.string.underlay_transparency).layout(R.layout.progress_list_item)
 		// Please note this does not modify the transparency of the underlay map, but of the base map, of course!
 		adapter.item(R.string.map_transparency).layout(R.layout.progress_list_item)
 				.progress(mapTransparencyPreference.get()).listenInteger(integerListener).reg();
-		adapter.item(R.string.map_underlay).layout(R.layout.two_line_list_item).listen(l).reg();
-		adapter.item(R.string.show_polygons).listen(l).reg();
+		adapter.item(mapTypeString).layout(R.layout.two_line_list_item).description(mapTypePreference.get()).reg();
+		adapter.item(R.string.show_polygons).listen(l).selected(hidePolygonsPref.get() ? 0 : 1).reg();
 	}
 }

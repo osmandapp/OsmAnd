@@ -46,34 +46,36 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	
+
 	private MapTileLayer overlayLayer;
 	private MapTileLayer underlayLayer;
 	private StateChangedListener<Integer> overlayLayerListener;
-	
+
 	public OsmandRasterMapsPlugin(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_world_globe_dark;
 	}
-	
+
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.online_maps;
 	}
-	
+
 	@Override
 	public String getId() {
 		return ID;
 	}
+
 	@Override
 	public String getDescription() {
 		return app.getString(R.string.osmand_rastermaps_plugin_description);
 	}
+
 	@Override
 	public String getName() {
 		return app.getString(R.string.shared_string_online_maps);
@@ -102,26 +104,26 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		// mapView.addLayer(overlayLayer, 0.7f);
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
-	
+
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		updateMapLayers(mapView, null, activity.getMapLayers());
 	}
-	
-	
+
+
 	public void updateMapLayers(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap,
-			final MapActivityLayers layers) {
-		if(overlayLayer == null) {
+								final MapActivityLayers layers) {
+		if (overlayLayer == null) {
 			createLayers();
 		}
 		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
-		if(isActive()) {
+		if (isActive()) {
 			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(overlayLayer);
 			overlayLayer.setMap(null);
 		}
-		if(isActive()) {
+		if (isActive()) {
 			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(underlayLayer);
@@ -129,12 +131,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		layers.updateMapSource(mapView, settingsToWarnAboutMap);
 	}
-	
+
 	public void updateLayer(OsmandMapTileView mapView, OsmandSettings settings,
-			MapTileLayer layer, CommonPreference<String> preference, float layerOrder, boolean warnWhenSelected) {
+							MapTileLayer layer, CommonPreference<String> preference, float layerOrder, boolean warnWhenSelected) {
 		ITileSource overlay = settings.getTileSourceByName(preference.get(), warnWhenSelected);
-		if(!Algorithms.objectEquals(overlay, layer.getMap())){
-			if(overlay == null){
+		if (!Algorithms.objectEquals(overlay, layer.getMap())) {
+			if (overlay == null) {
 				mapView.removeLayer(layer);
 			} else if (mapView.getMapRenderer() == null) {
 				mapView.addLayer(layer, layerOrder);
@@ -143,10 +145,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			mapView.refreshMap();
 		}
 	}
-	
-	public void selectMapOverlayLayer(final OsmandMapTileView mapView, 
-			final CommonPreference<String> mapPref,
-			final MapActivity activity){
+
+	public void selectMapOverlayLayer(final OsmandMapTileView mapView,
+									  final CommonPreference<String> mapPref,
+									  final MapActivity activity) {
 		final OsmandSettings settings = app.getSettings();
 		final MapActivityLayers layers = activity.getMapLayers();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
@@ -154,10 +156,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final String[] items = new String[entriesMap.size() + 1];
 		int i = 0;
-		for(String it : entriesMap.values()){
+		for (String it : entriesMap.values()) {
 			items[i++] = it;
 		}
-		
+
 		items[i] = app.getString(R.string.install_more);
 		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
 			@Override
@@ -198,7 +200,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		});
 		builder.show();
 	}
-	
+
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView,
 												ContextMenuAdapter adapter,
@@ -209,27 +211,27 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_map) {
 					layers.selectMapLayer(mapView);
-				} else if(itemId == R.string.layer_overlay){
+				} else if (itemId == R.string.layer_overlay) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP);
 					return false;
-				} else if(itemId == R.string.layer_underlay){
+				} else if (itemId == R.string.layer_underlay) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP);
 					return false;
 				}
 				return true;
 			}
 		};
-		
+
 		adapter.item(R.string.layer_overlay).
 				iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
 		adapter.item(R.string.layer_underlay)
 				.iconColor(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
 	}
-	
-	
+
+
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
-			Object selectedObj) {
+											  Object selectedObj) {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
 			OnContextMenuClick listener = new OnContextMenuClick() {
@@ -250,14 +252,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					.listen(listener).reg();
 		}
 	}
-	
+
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsRasterMapsActivity.class;
 	}
 
-	
-	
+
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
@@ -271,6 +272,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			protected List<TileSourceTemplate> doInBackground(Void... params) {
 				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app));
 			}
+
 			protected void onPostExecute(final java.util.List<TileSourceTemplate> downloaded) {
 				if (downloaded == null || downloaded.isEmpty()) {
 					AccessibleToast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
@@ -327,9 +329,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries(false);
-		TileSourceTemplate ts = new TileSourceTemplate("NewMapnik","http://mapnik.osmand.net/{0}/{1}/{2}.png", 
+		TileSourceTemplate ts = new TileSourceTemplate("NewMapnik", "http://mapnik.osmand.net/{0}/{1}/{2}.png",
 				"png", 17, 5, 256, 16, 32000);
-		final TileSourceTemplate[] result = new TileSourceTemplate[] { ts };
+		final TileSourceTemplate[] result = new TileSourceTemplate[]{ts};
 		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		View view = activity.getLayoutInflater().inflate(R.layout.editing_tile_source, null);
 		final EditText name = (EditText) view.findViewById(R.id.Name);
@@ -340,14 +342,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final EditText expire = (EditText) view.findViewById(R.id.ExpirationTime);
 		final CheckBox elliptic = (CheckBox) view.findViewById(R.id.EllipticMercator);
 		updateTileSourceEditView(ts, name, urlToLoad, minZoom, maxZoom, expire, elliptic);
-		
+
 		final ArrayList<String> templates = new ArrayList<String>(entriesMap.keySet());
 		templates.add(0, "");
-	
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_item, 
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
+				android.R.layout.simple_spinner_item,
 				templates
-				);
+		);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		existing.setAdapter(adapter);
 		existing.setSelection(0);
@@ -369,17 +371,17 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
-		
+
 		bld.setView(view);
 		bld.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				TileSourceTemplate r = result[0];
 				try {
 					r.setName(name.getText().toString());
-					r.setExpirationTimeMinutes(expire.getText().length() == 0 ? - 1 : 
-						Integer.parseInt(expire.getText().toString()));
+					r.setExpirationTimeMinutes(expire.getText().length() == 0 ? -1 :
+							Integer.parseInt(expire.getText().toString()));
 					r.setMinZoom(Integer.parseInt(minZoom.getText().toString()));
 					r.setMaxZoom(Integer.parseInt(maxZoom.getText().toString()));
 					r.setEllipticYTile(elliptic.isChecked());
@@ -402,13 +404,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	private static void updateTileSourceEditView(TileSourceTemplate ts, EditText name, final EditText urlToLoad, final EditText minZoom,
-			final EditText maxZoom, EditText expire, final CheckBox elliptic) {
-		minZoom.setText(ts.getMinimumZoomSupported()+"");
-		maxZoom.setText(ts.getMaximumZoomSupported()+"");
+												 final EditText maxZoom, EditText expire, final CheckBox elliptic) {
+		minZoom.setText(ts.getMinimumZoomSupported() + "");
+		maxZoom.setText(ts.getMaximumZoomSupported() + "");
 		name.setText(ts.getName());
 		expire.setText(ts.getExpirationTimeMinutes() < 0 ? "" : ts.getExpirationTimeMinutes() + "");
-		urlToLoad.setText(ts.getUrlTemplate() == null? "" : 
-			ts.getUrlTemplate().replace("{$x}", "{1}").replace("{$y}", "{2}").replace("{$z}", "{0}"));
+		urlToLoad.setText(ts.getUrlTemplate() == null ? "" :
+				ts.getUrlTemplate().replace("{$x}", "{1}").replace("{$y}", "{2}").replace("{$z}", "{0}"));
 		elliptic.setChecked(ts.isEllipticYTile());
 	}
 

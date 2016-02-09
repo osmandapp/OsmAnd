@@ -203,82 +203,82 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		// by default they handle touches for their list items... i.e. they're in charge of drawing
 		// the pressed state (the list selector), handling list item clicks, etc.
 		swipeDismissListener = new SwipeDismissListViewTouchListener(
-						listView,
-						new SwipeDismissListViewTouchListener.DismissCallbacks() {
-							@Override
-							public boolean canDismiss(int position) {
-								boolean res = false;
-								if (visibleType == DashboardType.WAYPOINTS && listAdapter instanceof StableArrayAdapter) {
-									List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
-									Object obj = listAdapter.getItem(position);
-									res = activeObjects.contains(obj);
-								}
-								return res;
-							}
+				listView,
+				new SwipeDismissListViewTouchListener.DismissCallbacks() {
+					@Override
+					public boolean canDismiss(int position) {
+						boolean res = false;
+						if (visibleType == DashboardType.WAYPOINTS && listAdapter instanceof StableArrayAdapter) {
+							List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
+							Object obj = listAdapter.getItem(position);
+							res = activeObjects.contains(obj);
+						}
+						return res;
+					}
 
-							@Override
-							public Undoable onDismiss(final int position) {
-								final Object item;
-								final StableArrayAdapter stableAdapter;
-								final int activeObjPos;
-								if (listAdapter instanceof StableArrayAdapter) {
-									stableAdapter = (StableArrayAdapter) listAdapter;
-									item = stableAdapter.getItem(position);
+					@Override
+					public Undoable onDismiss(final int position) {
+						final Object item;
+						final StableArrayAdapter stableAdapter;
+						final int activeObjPos;
+						if (listAdapter instanceof StableArrayAdapter) {
+							stableAdapter = (StableArrayAdapter) listAdapter;
+							item = stableAdapter.getItem(position);
 
+							stableAdapter.setNotifyOnChange(false);
+							stableAdapter.remove(item);
+							stableAdapter.getObjects().remove(item);
+							activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
+							stableAdapter.getActiveObjects().remove(item);
+							stableAdapter.refreshData();
+							stableAdapter.notifyDataSetChanged();
+
+						} else {
+							item = null;
+							stableAdapter = null;
+							activeObjPos = 0;
+						}
+						return new Undoable() {
+							@Override
+							public void undo() {
+								if (item != null) {
 									stableAdapter.setNotifyOnChange(false);
-									stableAdapter.remove(item);
-									stableAdapter.getObjects().remove(item);
-									activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
-									stableAdapter.getActiveObjects().remove(item);
-									stableAdapter.refreshData();
-									stableAdapter.notifyDataSetChanged();
-
-								} else {
-									item = null;
-									stableAdapter = null;
-									activeObjPos = 0;
-								}
-								return new Undoable() {
-									@Override
-									public void undo() {
-										if (item != null) {
-											stableAdapter.setNotifyOnChange(false);
-											stableAdapter.insert(item, position);
-											stableAdapter.getObjects().add(position, item);
-											stableAdapter.getActiveObjects().add(activeObjPos, item);
-											stableAdapter.refreshData();
-											onItemsSwapped(stableAdapter.getActiveObjects());
-										}
-									}
-
-									@Override
-									public String getTitle() {
-										if (visibleType == DashboardType.WAYPOINTS
-												&& (getMyApplication().getRoutingHelper().isRoutePlanningMode() || getMyApplication().getRoutingHelper().isFollowingMode())
-												&& item != null
-												&& stableAdapter.getActiveObjects().size() == 0) {
-											return mapActivity.getResources().getString(R.string.cancel_navigation);
-										} else {
-											return null;
-										}
-									}
-								};
-							}
-
-							@Override
-							public void onHidePopup() {
-								if (listAdapter instanceof StableArrayAdapter) {
-									StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+									stableAdapter.insert(item, position);
+									stableAdapter.getObjects().add(position, item);
+									stableAdapter.getActiveObjects().add(activeObjPos, item);
 									stableAdapter.refreshData();
 									onItemsSwapped(stableAdapter.getActiveObjects());
-									if (stableAdapter.getActiveObjects().size() == 0) {
-										hideDashboard();
-										mapActivity.getMapActions().stopNavigationWithoutConfirm();
-										mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
-									}
 								}
 							}
-						});
+
+							@Override
+							public String getTitle() {
+								if (visibleType == DashboardType.WAYPOINTS
+										&& (getMyApplication().getRoutingHelper().isRoutePlanningMode() || getMyApplication().getRoutingHelper().isFollowingMode())
+										&& item != null
+										&& stableAdapter.getActiveObjects().size() == 0) {
+									return mapActivity.getResources().getString(R.string.cancel_navigation);
+								} else {
+									return null;
+								}
+							}
+						};
+					}
+
+					@Override
+					public void onHidePopup() {
+						if (listAdapter instanceof StableArrayAdapter) {
+							StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+							stableAdapter.refreshData();
+							onItemsSwapped(stableAdapter.getActiveObjects());
+							if (stableAdapter.getActiveObjects().size() == 0) {
+								hideDashboard();
+								mapActivity.getMapActions().stopNavigationWithoutConfirm();
+								mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
+							}
+						}
+					}
+				});
 
 		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {

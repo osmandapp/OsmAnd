@@ -55,14 +55,14 @@ import java.util.List;
 import java.util.Map.Entry;
 
 /**
- * Object is responsible to maintain layers using by map activity 
+ * Object is responsible to maintain layers using by map activity
  */
 public class MapActivityLayers {
 
 	private final MapActivity activity;
-	
+
 	// the order of layer should be preserved ! when you are inserting new layer
-	private MapTileLayer mapTileLayer; 
+	private MapTileLayer mapTileLayer;
 	private MapVectorLayer mapVectorLayer;
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
@@ -86,18 +86,18 @@ public class MapActivityLayers {
 		this.activity = activity;
 		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication().getSettings());
 	}
-	
+
 	public MapWidgetRegistry getMapWidgetRegistry() {
 		return mapWidgetRegistry;
 	}
 
-	public OsmandApplication getApplication(){
+	public OsmandApplication getApplication() {
 		return (OsmandApplication) activity.getApplication();
 	}
-	
-	
-	public void createLayers(final OsmandMapTileView mapView){
-		
+
+
+	public void createLayers(final OsmandMapTileView mapView) {
+
 		OsmandApplication app = (OsmandApplication) getApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		// first create to make accessible
@@ -108,7 +108,7 @@ public class MapActivityLayers {
 		mapTileLayer = new MapTileLayer(true);
 		mapView.addLayer(mapTileLayer, 0.0f);
 		mapView.setMainLayer(mapTileLayer);
-		
+
 		// 0.5 layer
 		mapVectorLayer = new MapVectorLayer(mapTileLayer, false);
 		mapView.addLayer(mapVectorLayer, 0.5f);
@@ -119,11 +119,11 @@ public class MapActivityLayers {
 		// 0.9 gpx layer
 		gpxLayer = new GPXLayer();
 		mapView.addLayer(gpxLayer, 0.9f);
-		
+
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
-		
+
 		// 2. osm bugs layer
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer(activity);
@@ -155,7 +155,7 @@ public class MapActivityLayers {
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
-		
+
 		transparencyListener = new StateChangedListener<Integer>() {
 			@Override
 			public void stateChanged(Integer change) {
@@ -165,18 +165,18 @@ public class MapActivityLayers {
 			}
 		};
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
-		
+
 		OsmandPlugin.createLayers(mapView, activity);
 		app.getAppCustomization().createLayers(mapView, activity);
 	}
 
-	
-	public void updateLayers(OsmandMapTileView mapView){
+
+	public void updateLayers(OsmandMapTileView mapView) {
 		OsmandSettings settings = getApplication().getSettings();
 		updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 		boolean showStops = settings.getCustomRenderBooleanProperty(OsmandSettings.TRANSPORT_STOPS_OVER_MAP).get();
-		if(mapView.getLayers().contains(transportStopsLayer) != showStops){
-			if(showStops){
+		if (mapView.getLayers().contains(transportStopsLayer) != showStops) {
+			if (showStops) {
 				mapView.addLayer(transportStopsLayer, 5);
 			} else {
 				mapView.removeLayer(transportStopsLayer);
@@ -184,15 +184,15 @@ public class MapActivityLayers {
 		}
 		OsmandPlugin.refreshLayers(mapView, activity);
 	}
-	
-	public void updateMapSource(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap){
+
+	public void updateMapSource(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = getApplication().getSettings();
-		
+
 		// update transparency
 		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 : settings.MAP_TRANSPARENCY.get();
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
-		
+
 		ITileSource newSource = settings.getMapTileSource(settings.MAP_TILE_SOURCES == settingsToWarnAboutMap);
 		ITileSource oldMap = mapTileLayer.getMap();
 		if (newSource != oldMap) {
@@ -201,18 +201,18 @@ public class MapActivityLayers {
 			}
 			mapTileLayer.setMap(newSource);
 		}
-		
+
 		boolean vectorData = !settings.MAP_ONLINE_DATA.get();
 		mapTileLayer.setVisible(!vectorData);
 		mapVectorLayer.setVisible(vectorData);
-		if(vectorData){
+		if (vectorData) {
 			mapView.setMainLayer(mapVectorLayer);
 		} else {
 			mapView.setMainLayer(mapTileLayer);
 		}
 	}
 
-	
+
 	public AlertDialog showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
 		final OsmandSettings settings = getApplication().getSettings();
 		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -253,7 +253,7 @@ public class MapActivityLayers {
 	}
 
 
-	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiUIFilter[] selected){
+	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiUIFilter[] selected) {
 		OsmandApplication app = (OsmandApplication) getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
@@ -263,15 +263,15 @@ public class MapActivityLayers {
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f);
 		}
-		
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
-		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				PoiUIFilter pf = list.get(which);
 				String filterId = pf.getFilterId();
-				if(filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)){
+				if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
 					Intent search = new Intent(activity, SearchActivity.class);
 					search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
@@ -283,12 +283,12 @@ public class MapActivityLayers {
 					}
 					getApplication().getSettings().SELECTED_POI_FILTER_FOR_MAP.set(filterId);
 					mapView.refreshMap();
-					if(selected != null && selected.length > 0) {
+					if (selected != null && selected.length > 0) {
 						selected[0] = pf;
 					}
 				}
 			}
-			
+
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		return builder.show();
@@ -305,36 +305,36 @@ public class MapActivityLayers {
 		it.reg();
 	}
 
-	public void selectMapLayer(final OsmandMapTileView mapView){
-		if(OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
+	public void selectMapLayer(final OsmandMapTileView mapView) {
+		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 			AccessibleToast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();
 			return;
 		}
 		final OsmandSettings settings = getApplication().getSettings();
-		
+
 		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<String, String>();
-		
-		
+
+
 		final String layerOsmVector = "LAYER_OSM_VECTOR";
 		final String layerInstallMore = "LAYER_INSTALL_MORE";
 		final String layerEditInstall = "LAYER_EDIT";
-		
+
 		entriesMap.put(layerOsmVector, getString(R.string.vector_data));
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
 		entriesMap.put(layerEditInstall, getString(R.string.maps_define_edit));
-		
+
 		final List<Entry<String, String>> entriesMapList = new ArrayList<Entry<String, String>>(entriesMap.entrySet());
-		
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		
-		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();		
+
+		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();
 
 		int selectedItem = -1;
 		if (!settings.MAP_ONLINE_DATA.get()) {
 			selectedItem = 0;
 		} else {
-		
+
 			Entry<String, String> selectedEntry = null;
 			for (Entry<String, String> entry : entriesMap.entrySet()) {
 				if (entry.getKey().equals(selectedTileSourceKey)) {
@@ -348,14 +348,14 @@ public class MapActivityLayers {
 				entriesMapList.add(0, selectedEntry);
 			}
 		}
-		
+
 		final String[] items = new String[entriesMapList.size()];
 		int i = 0;
 		for (Entry<String, String> entry : entriesMapList) {
 			items[i++] = entry.getValue();
 		}
-		
-		builder.setSingleChoiceItems(items, selectedItem, new DialogInterface.OnClickListener(){
+
+		builder.setSingleChoiceItems(items, selectedItem, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String layerKey = entriesMapList.get(which).getKey();
@@ -377,16 +377,17 @@ public class MapActivityLayers {
 						public boolean isCancelled() {
 							return false;
 						}
-						
+
 					});
 				} else if (layerKey.equals(layerInstallMore)) {
 					OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
 						TileSourceTemplate template = null;
 						int count = 0;
+
 						@Override
 						public boolean publish(TileSourceTemplate object) {
-							if(object == null){
-								if(count == 1){
+							if (object == null) {
+								if (count == 1) {
 									settings.MAP_TILE_SOURCES.set(template.getName());
 									settings.MAP_ONLINE_DATA.set(true);
 									updateMapSource(mapView, settings.MAP_TILE_SOURCES);
@@ -394,12 +395,12 @@ public class MapActivityLayers {
 									selectMapLayer(mapView);
 								}
 							} else {
-								count ++;
+								count++;
 								template = object;
 							}
 							return false;
 						}
-						
+
 						@Override
 						public boolean isCancelled() {
 							return false;
@@ -413,12 +414,12 @@ public class MapActivityLayers {
 
 				dialog.dismiss();
 			}
-			
+
 		});
 		builder.show();
 	}
 
-	
+
 	private String getString(int resId) {
 		return activity.getString(resId);
 	}
@@ -434,44 +435,44 @@ public class MapActivityLayers {
 	public GPXLayer getGpxLayer() {
 		return gpxLayer;
 	}
-	
+
 	public ContextMenuLayer getContextMenuLayer() {
 		return contextMenuLayer;
 	}
-	
+
 	public FavoritesLayer getFavoritesLayer() {
 		return favoritesLayer;
 	}
-	
+
 	public MapTextLayer getMapTextLayer() {
 		return mapTextLayer;
 	}
-	
+
 	public PointLocationLayer getLocationLayer() {
 		return locationLayer;
 	}
-	
+
 	public MapInfoLayer getMapInfoLayer() {
 		return mapInfoLayer;
 	}
-	
+
 	public MapControlsLayer getMapControlsLayer() {
 		return mapControlsLayer;
 	}
-	
-	
+
+
 	public MapTileLayer getMapTileLayer() {
 		return mapTileLayer;
 	}
-	
+
 	public MapVectorLayer getMapVectorLayer() {
 		return mapVectorLayer;
 	}
-	
+
 	public POIMapLayer getPoiMapLayer() {
 		return poiMapLayer;
 	}
-	
+
 	public TransportInfoLayer getTransportInfoLayer() {
 		return transportInfoLayer;
 	}
