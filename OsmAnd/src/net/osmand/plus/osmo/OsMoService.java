@@ -30,19 +30,16 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
 
 public class OsMoService implements OsMoReactor {
 	private static final String HTTP_API_PREPARE = "http://api.osmo.mobi/prepare";
@@ -237,7 +234,7 @@ public class OsMoService implements OsMoReactor {
 			final JSONObject obj = new JSONObject(r);
 			if(obj.has("error")) {
 				lastRegistrationError = obj.getString("error");
-				throw new RuntimeException(obj.getString("error"));
+				throw new OsMoConnectionException(obj.getString("error"));
 			}
 			app.getSettings().OSMO_DEVICE_KEY.set(obj.getString("key"));
 			return obj.getString("key");
@@ -403,7 +400,7 @@ public class OsMoService implements OsMoReactor {
 
 
 	public void showErrorMessage(String string) {
-		app.showToastMessage(app.getString(R.string.osmo_io_error) +  string);		
+		app.showToastMessage(app.getString(R.string.osmo_io_error) + string);
 	}
 	
 	
@@ -474,5 +471,9 @@ public class OsMoService implements OsMoReactor {
 		String psswd = app.getSettings().OSMO_USER_PWD.get();
 		String userName = app.getSettings().OSMO_USER_NAME.get();
 		return ((!TextUtils.isEmpty(psswd) && !TextUtils.isEmpty(userName)));
+	}
+
+	public OsmandApplication getMyApplication() {
+		return app;
 	}
 }

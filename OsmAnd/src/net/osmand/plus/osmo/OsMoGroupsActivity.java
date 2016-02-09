@@ -134,8 +134,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private Paint white;
 	private View header;
 	private View footer;
-	
-	
+	private CompoundButton srvc;
+
+	private int connections = 0;
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		// This has to be called before setContentView and you must use the
@@ -213,7 +215,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		});
 		updateTrackerButton();
 		
-		CompoundButton srvc = (CompoundButton) header.findViewById(R.id.enable_service);
+		srvc = (CompoundButton) header.findViewById(R.id.enable_service);
 		srvc.setChecked(osMoPlugin.getService().isEnabled());
 		srvc.setText(R.string.osmo_start_service);
 		srvc.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -1537,11 +1539,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	public void handleConnect() {
 		app.runInUIThread(new Runnable() {
-			
 			@Override
 			public void run() {
+				connections++;
 				if (getExpandableListView().getFooterViewsCount() > 0) {
-					getExpandableListView().removeFooterView(footer);	
+					getExpandableListView().removeFooterView(footer);
 				}
 				updateStatus();
 			}
@@ -1553,13 +1555,18 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			
 			@Override
 			public void run() {
-				if (!TextUtils.isEmpty(msg)) {
+				if (!TextUtils.isEmpty(msg) && connections > 0) {
 					CompoundButton srvc = (CompoundButton) header.findViewById(R.id.enable_service);
 					if (srvc.isChecked()) {
-						if (getExpandableListView().getFooterViewsCount() == 0) {
-							getExpandableListView().addFooterView(footer);	
+						if (connections == 1) {
+							if (getExpandableListView().getFooterViewsCount() == 0) {
+								getExpandableListView().addFooterView(footer);
+							}
+							adapter.clear();
+							connections--;
+						} else {
+							connections = 1;
 						}
-						adapter.clear();
 					}
 					updateStatus();
 				}
