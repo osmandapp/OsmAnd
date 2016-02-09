@@ -2082,4 +2082,5 @@
     <string name="find_parking">Encontrar estacionamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
     <string name="underlay_transparency">Transparencia subyacente</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas de BTT</string>
     </resources>
