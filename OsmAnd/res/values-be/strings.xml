@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
@@ -211,7 +211,7 @@
     <string name="safe_mode_description">Працаваць у бясьпечным рэжыме (трохі павольней але бяз свойскіх бібліятэк).</string>
     <string name="safe_mode">Бясьпечны рэжым</string>
     <string name="native_library_not_running">Праграма працуе ў бясьпечным рэжыме (адключыць яго ў наладах).</string>
-    <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Хочаце прыпыніць яго?</string>
+    <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Хочаце спыніць яго?</string>
     
     <string name="close_changeset">Зачыніць мноства зьмен</string>
 	<string name="zxing_barcode_scanner_not_found">Праграма ZXing Barcode Scanner не ўстаноўлена. Шукаць у Market?</string>
@@ -226,7 +226,7 @@
 	<string name="no_route">Няма маршруту</string>
 	<string name="delete_target_point">Выдаліць пункт прызначэньня</string>
 	<string name="target_point">Пункт прызначэньня %1$s</string>
-    <string name="intermediate_point">Пункт прызначэньня %1$s</string>
+    <string name="intermediate_point">Прамежкавы пункт %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Дадаць апошнім пунктам прызначэньня</string>
     <string name="context_menu_item_first_intermediate_point">Дадаць першым пунктам прызначэньня</string>
     <string name="add_as_last_destination_point">Дадаць апошнім прамежкавым пунктам прызначэньня</string>
@@ -344,7 +344,7 @@
 	<string name="osmand_parking_warning">Папярэджаньне</string>
 	<string name="osmand_parking_warning_text">Напамін аб абмежаваньні часу паркоўкі аўтамабіля ўжо дададзены ў каляндар. Вам будзе неабходна яго выдаліць ўручную.</string>    
 	<string name="osmand_parking_time_limit_title">Задайце абмежаваньне часу стаянкі</string>
-	<string name="osmand_parking_delete_confirm">Вы хочаце выдаліць месцазнаходжаньне прыпаркаванага аўтамабіля?</string>
+	<string name="osmand_parking_delete_confirm">Вы хочаце выдаліць маркер прыпаркаванага аўтамабіля?</string>
 	<string name="osmand_parking_delete">Выдаліць маркер стаянкі</string>
 	<string name="osmand_parking_choose_type">Выберыце тып паркоўкі</string>
 	<string name="osmand_parking_lim_text">З абмежаваньнем па часе</string>
@@ -393,7 +393,7 @@
 	<string name="unknown_from_location">Першапачатковае месцазнаходжаньне не вызначана</string>
 	<string name="unknown_location">Становішча пакуль ня вызначанае</string>
 	<string name="modify_transparency">Зьмяніць празрыстасьць (0 - празрысты, 255 - непразрысты)</string>
-	<string name="confirm_interrupt_download">Перапыніць cьцягваньне файла?</string>
+	<string name="confirm_interrupt_download">Скасаваць cьцягваньне файлу?</string>
 	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі праграмы, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна cьцягнуць праз \'Налады\' → \'Кіраваць файламі мапаў\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць POI і грамадзкі транспарт.</string>    
 	<string name="basemap_was_selected_to_download">Базавая мапа неабходная для карэктнай працы праграмы і аўтаматычна была абраная для cьцягваньня.</string>
 	<string name="select_index_file_to_download">Нічога не знойдзена. Калі вы не знайшлі свой рэгіён, вы можаце стварыць мапу самастойна (гл. http://osmand.net).</string>
@@ -1079,7 +1079,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">Упадабанае месца \'\'{0}\'\' было дададзенае.</string>
 	<string name="favourites_context_menu_edit">Рэдагаваньне ўпадабанага</string>
 	<string name="favourites_context_menu_delete">Выдаліць упадабанае</string>
-	<string name="favourites_remove_dialog_msg">Вы сапраўды хочаце выдаліць кропку \'%s\' з закладак?</string>
+	<string name="favourites_remove_dialog_msg">Выдаліць кропку \'%s\' з закладак?</string>
 	<string name="favourites_remove_dialog_success">Кропка {0} была паспяхова выдаленая з закладак.</string>
 	
 	
@@ -1429,7 +1429,7 @@
     <string name="rendering_attr_showSurfaceGrade_name">Адлюстроўваць якасьць дарог</string>
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцьця</string>
     <string name="rendering_attr_showCycleRoutes_name">Паказаць веламаршруты</string>
-    <string name="stop_navigation_service">Прыпыніць</string>
+    <string name="stop_navigation_service">Спыніць</string>
 	<string name="enable_sleep_mode">Уключыць фонавы рэжым GPS</string>
 	<string name="gps_wake_up_timer">Iнтэрвал абуджэньня GPS</string>
 	<string name="lang_sw">суахілі</string>
@@ -1437,7 +1437,7 @@
     <string name="gpx_monitoring_start">Пачаць запіс GPX</string>
 	<string name="gpx_start_new_segment">Пачаць новы адрэзак</string>
     <string name="lang_fa">пэрсійдзкая</string>
-	<string name="sleep_mode_stop_dialog">Прыпыніць фонавы рэжым GPS?</string>
+	<string name="sleep_mode_stop_dialog">Спыніць фонавы рэжым GPS?</string>
 	<string name="map_preferred_locale_descr">Пажаданая мова надпісаў на мапе (калі не даступна, то будуць выкарыстны ангельскія ці мясцовыя назвы)</string>
     <string name="map_preferred_locale">Пажаданая мова мапы</string>
     <string name="local_map_names">Мясцовыя назвы</string>
@@ -2107,4 +2107,18 @@
     <string name="rec_split_storage_size_desc">Аб\'ём памяці, які можа быць заняты ўсімі відэакліпамі</string>
     <string name="number_of_contributors">Колькасьць удзельнікаў</string>
     <string name="number_of_edits">Колькасьць правак</string>
+    <string name="show_polygons">Паказаць палігоны</string>
+    <string name="find_parking">Знайсьці паркоўку</string>
+    <string name="shared_string_status">Стан</string>
+    <string name="shared_string_save_changes">Захаваць зьмены</string>
+    <string name="shared_string_email_address">E-mail адрас</string>
+    <string name="rendering_attr_hideUnderground_name">Схаваць падземныя аб\'екты</string>
+    <string name="data_is_not_available">Зьвесткі недаступныя</string>
+    <string name="shared_string_read_more">Чытаць далей</string>
+    <string name="clear_updates_proposition_message">Вы можаце выдаліць сьцягнутыя абнаўленьні і вярнуцца да першапачатковай рэдакцыі мапы</string>
+    <string name="add_time_span">Дадаць часавы прамежак</string>
+    <string name="item_removed">Элемэнт выдалены</string>
+    <string name="n_items_removed">Элемэнты выдалены</string>
+    <string name="reports_for">Паведаміць</string>
+<string name="osmand_plus_extended_description_4000_chars_v2">" Мапы й навігацыя OsmAnd - пракладайце маршруты і шукайце мясьціны на мапе без падлучэньня да Інтэрнэту. Сьцягвайце мапу краіны, перш чым адправіцца ў падарожжа, каб адшукаць мясьціны й маршруты ў незнаёмай мясцовасьці. Асноўныя магчымасьці: • Падрабязныя мапы 200 краін • Offline навігатар з галасавымі падказкамі • Адрасны пошук у аўтаномным рэжыме • Інфармацыя пра мясьціны на мапе: славутасьці, кафэ, аўтастаянкі, крамы • Даданьне мясьцін ў абранае • Аўта, роварная і пешаходная навігацыйныя • Дадатковыя опцыі: • Магчымасьць прагляду і запісу GPX сьлядоў • Апісаньне зь Вікіпедыі аб POI • Даданне фота, аўдыё і відэа нататак на мапу • Дзённы і начны рэжымы мапы для больш зручнага кіраваньня • Інфармацыя аб маршрутах грамадзкага транспарту і прыпынках • Роварныя і пешаходныя дарожкі • Пешаходныя маршруты для турызму па ўсім сьвеце • Інтэрнэт мапы са шматлікіх крыніц • Інфармацыя аб якасьці дарожнага пакрыцьця і асьвятленьні вуліц • Даданне, рэдагаванне і выдаленне POI (для карыстальнікаў OpenStreetMap.org) • OsMo - маніторынг у рэальным часе іншых прыстасаваньняў • Надзейны навігатар ў вашай краіне - няхай гэта будзе Францыя, Германія, Мэксіка, Вялікабрытанія, Гішпанія, Нідэрлянды, ЗША, РФ, Бразілія або любая іншая дзяржава. • Ізалініі вышынь і рэльеф мясцовасьці https://goo.gl/7mojP8 • Ізалініі вышынь і рэльеф мясцовасьці дадаецца да асноўнай мапы OsmAnd. • Лыжныя мапы https://goo.gl/pX6DxJ Інфармацыя аб гарналыжных трасах, трасах для бегавых лыж, фунікулёры і пад\'ёмнікі. • Марскія мапы https://goo.gl/0hEdxm Спецыяльны стыль мапы для прагляду марскіх навігацыйных знакаў для артэрыяльнай і прыбярэжнай марской навігацыі. • Месца паркоўкі https://goo.gl/6JxQXF Дапамагае адзначыць месцазнаходжаньне вашага аўтамабіля, прыпаркаванага і паглядзець, колькі часу засталося, калі паркоўка абмежаваная па часе. Сачыце за абнаўленнямі! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Сайт: http://osmand.net Калі вам патрэбна дапамога з ужываннем OsmAnd, звярніцеся ў нашу службу падтрымкі: support@osmand.net. "</string>
     </resources>
