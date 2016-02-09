@@ -2106,4 +2106,13 @@
 	<string name="poi_cargo_container">Càrrega: contenidors</string>
 	<string name="poi_cargo_hgv">Càrrega: vehicles pesants</string>
 
+	<string name="poi_clothes_swimwear">Vestits de bany</string>
+	<string name="poi_clothes_shirts">Camises</string>
+	<string name="poi_clothes_dance">Vestits per ballar</string>
+	<string name="poi_historic_milestone">Fita històrica</string>
+
+	<string name="poi_shoes_children">Sabates per nens</string>
+	<string name="poi_shoes_sport">Sabatilles esportives</string>
+	<string name="poi_shoes_orthopedic">Sabates ortopèdiques</string>
+
 	</resources>
