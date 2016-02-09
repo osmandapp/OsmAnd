@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Compras</string>
 		<string name="poi_shop_food">Alimentación</string>
 	<string name="poi_emergency">Emergencia</string>
@@ -88,7 +88,7 @@
 	<string name="poi_florist">Florería</string>
 	<string name="poi_frame">Tienda de marcos</string>
 	<string name="poi_furniture">Mueblería</string>
-	<string name="poi_garden_centre">Vivero</string>
+	<string name="poi_garden_centre">Centro de jardinería</string>
 	<string name="poi_gas">Gas líquido</string>
 	<string name="poi_general">Pulpería</string>
 	<string name="poi_gift">Regalería</string>
@@ -2673,5 +2673,7 @@
 	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosión de salva: Segunda o posterior detonación de prueba</string>
 	<string name="poi_addr_housename">Nombre de casa</string>
 	<string name="poi_religion">Artículos religiosos</string>
+
+<string name="poi_plant_nursery">Vivero de plantas</string>
 
 </resources>
