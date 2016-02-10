@@ -983,7 +983,7 @@
 	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt langzamere Android-code in plaats van native code).</string>
     <string name="safe_mode">Veilige modus</string>
     <string name="native_library_not_running">Het programma werkt in veilige modus (uitzetten via Instellingen).</string>
-    <string name="background_service_is_enabled_question">OsmAnd achtergrond-service staat nog aan. Deze ook uitschakelen?</string>
+    <string name="background_service_is_enabled_question">OsmAnd achtergrond-service staat nog aan. Die ook uitschakelen?</string>
     
     <string name="rendering_attr_showRoadMaps_description">Kies wanneer wegenkaarten (zonder details) moeten worden weergegeven:</string>
 	<string name="rendering_attr_showRoadMaps_name">Wegenkaarten</string>
@@ -1510,10 +1510,10 @@
 	<string name="gpx_monitoring_stop">Stop GPX-opname</string>
     <string name="gpx_start_new_segment">Start nieuw segment</string>
     <string name="keep_navigation_service">Behouden</string>
-	<string name="stop_navigation_service">Onderbreken</string>
+	<string name="stop_navigation_service">Stoppen</string>
 	<string name="enable_sleep_mode">GPS slaapstand inschakelen</string>
 	<string name="gps_wake_up_timer">GPS ontwaak-interval</string>
-	<string name="sleep_mode_stop_dialog">Onderbreek GPS op achtergrond?</string>
+	<string name="sleep_mode_stop_dialog">Stop GPS op achtergrond?</string>
 	<string name="lang_fa">Perzisch</string>
 	<string name="lang_al">Albanees</string>
 	<string name="lang_ar">Arabisch</string>
