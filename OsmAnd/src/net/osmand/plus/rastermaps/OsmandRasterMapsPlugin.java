@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
@@ -146,9 +147,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void selectMapOverlayLayer(final OsmandMapTileView mapView,
-									  final CommonPreference<String> mapPref,
-									  final MapActivity activity) {
+	public void selectMapOverlayLayer(@NonNull final OsmandMapTileView mapView,
+									  @NonNull final CommonPreference<String> mapPref,
+									  @NonNull final MapActivity activity,
+									  @Nullable final OnMapSelectedCallback callback) {
 		final OsmandSettings settings = app.getSettings();
 		final MapActivityLayers layers = activity.getMapLayers();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
@@ -174,9 +176,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							if (object == null) {
 								if (count == 1) {
 									mapPref.set(template.getName());
+									if (callback != null) {
+										callback.onMapSelected();
+									}
 									updateMapLayers(mapView, mapPref, layers);
 								} else {
-									selectMapOverlayLayer(mapView, mapPref, activity);
+									selectMapOverlayLayer(mapView, mapPref, activity, null);
 								}
 							} else {
 								count++;
@@ -192,6 +197,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					});
 				} else {
 					mapPref.set(keys.get(which));
+					if (callback != null) {
+						callback.onMapSelected();
+					}
 					updateMapLayers(mapView, mapPref, layers);
 				}
 				dialog.dismiss();
@@ -422,7 +430,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return overlayLayer;
 	}
 
-	public void toggleUnderlayState(@NonNull MapActivity mapActivity, @NonNull RasterMapType type) {
+	public void toggleUnderlayState(@NonNull MapActivity mapActivity,
+									@NonNull RasterMapType type,
+									@Nullable OnMapSelectedCallback callback) {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		CommonPreference<String> mapTypePreference;
 		ITileSource map;
@@ -436,16 +446,20 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		if (map != null) {
 			mapTypePreference.set(null);
+			callback.onMapSelected();
 			MapActivityLayers mapLayers = mapActivity.getMapLayers();
 			updateMapLayers(mapView, null, mapLayers);
 		} else {
-			selectMapOverlayLayer(mapView, mapTypePreference,
-					mapActivity);
+			selectMapOverlayLayer(mapView, mapTypePreference, mapActivity, callback);
 		}
 	}
 
 	public enum RasterMapType {
 		OVERLAY,
 		UNDERLAY
+	}
+
+	public interface OnMapSelectedCallback {
+		void onMapSelected();
 	}
 }

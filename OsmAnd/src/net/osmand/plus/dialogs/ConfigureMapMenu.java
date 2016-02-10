@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.core.android.MapRendererContext;
@@ -38,7 +39,6 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -73,14 +73,6 @@ public class ConfigureMapMenu {
 		});
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
-//		adapter.item(R.string.layer_map_appearance).
-//			iconColor(R.drawable.ic_configure_screen_dark).listen(new OnContextMenuClick() {
-//				@Override
-//				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-//					ma.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
-//					return false;
-//				}
-//			}).reg();
 		
 		return adapter;
 	}
@@ -649,5 +641,4 @@ public class ConfigureMapMenu {
 			}
 		}
 	}
-
 }
