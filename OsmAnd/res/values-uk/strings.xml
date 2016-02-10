@@ -29,7 +29,7 @@
   <string name="unknown_location">Позиція ще не визначена</string>
   <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
   <string name="confirm_interrupt_download">Перервати завантаження файлу?</string>
-  <string name="first_time_msg">Дякуємо вам за використання OsmAnd. Для роботи більшості основних можливостей програми потрібні детальні мапи регіонів, які можна завантажити з Інтернету за допомогою пункту меню \'Налаштування\' → \'Управління мапами\'. Після завантаження цих мап Ви зможете здійснювати пошук за адресою, POI і зупинкам громадського транспорту.</string>
+  <string name="first_time_msg">Дякуємо вам за використання OsmAnd. Для роботи більшості основних можливостей програми потрібні детальні мапи регіонів, які можна завантажити з Інтернету за допомогою пункту меню \'Налаштування\' → \'Управління мапами\'. Після завантаження цих мап Ви зможете здійснювати пошук за адресою, POI і зупинками громадського транспорту.</string>
   <string name="basemap_was_selected_to_download">Базова мапа необхідна для коректної роботи програми і автоматично була вибрана для завантаження.</string>
   <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити карту самостійно (див. http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн та кешовані растрові мапи</string>
@@ -69,7 +69,7 @@
   <string name="gpx_visibility_txt">Видимість</string>
   <string name="gpx_tags_txt">Теги</string>
   <string name="gpx_description_txt">Опис</string>
-  <string name="validate_gpx_upload_name_pwd">Будь ласка, вкажіть ім\'я користувача і пароль в OSM для завантаження GPX файлів в OSM.</string>
+  <string name="validate_gpx_upload_name_pwd">Будь ласка, вкажіть ім’я користувача і пароль в OSM для завантаження GPX файлів в OSM.</string>
   <string name="default_buttons_support">Підтримка</string>
   <string name="support_new_features">Підтримати розробку нових функцій</string>
   <string name="show_ruler_level">Відображати масштаб</string>
@@ -123,10 +123,10 @@
   <string name="settings_direction_style_descr">Виберіть стиль вказівника відносних напрямків під час руху</string>
   <string name="auto_announce_on">Увімкнути автоповідомлення</string>
   <string name="auto_announce_off">Вимкнути автоповідомлення</string>
-  <string name="scroll_map_by_gestures_descr">Сувати карту жестами на сенсорному екрані</string>
+  <string name="scroll_map_by_gestures_descr">Пересувати карту жестами на сенсорному екрані</string>
   <string name="scroll_map_by_gestures">Звичайне управління картою</string>
   <string name="i_am_here">Я тут</string>
-  <string name="zoom_by_trackball_descr">Змінювати масштаб горизонтальних рухом трекбола</string>
+  <string name="zoom_by_trackball_descr">Змінювати масштаб горизонтальним рухом трекбола</string>
   <string name="zoom_by_trackball">Використовувати трекбол для зміни масштабу</string>
   <string name="use_short_object_names_descr">Використовувати короткі назви для об’єктів при огляді мапи</string>
   <string name="use_short_object_names">Використовувати короткі назви для об’єктів</string>
@@ -187,7 +187,7 @@
   <string name="global_settings">Загальні налаштування</string>
   <string name="index_settings">Управління мапами</string>
   <string name="general_settings">Загальні</string>
-  <string name="general_settings_descr">Налаштування екрану, локалізації, одиниці вимірювання і ін</string>
+  <string name="general_settings_descr">Налаштування екрану, локалізації, одиниці вимірювання тощо</string>
   <string name="global_app_settings">Загальні налаштування</string>
   <string name="user_name">Ім’я користувача</string>
   <string name="user_name_descr">Вкажіть ім’я користувача для роботи з OSM</string>
@@ -284,7 +284,7 @@
   <string name="local_index_items_deleted">%1$d з %2$d об’єктів успішно вилучено.</string>
   <string name="local_index_items_restored">%1$d з %2$d об’єктів успішно активовано.</string>
   <string name="local_index_no_items_to_do">Нема об’єктів в %1$s</string>
-  <string name="local_index_action_do">Ви дійсно хочете вилучити %1$s %2$s об\'єктів?</string>
+  <string name="local_index_action_do">Ви дійсно хочете вилучити %1$s %2$s об’єктів?</string>
   <string name="local_index_descr_title">Управління мапами</string>
   <string name="local_index_mi_restore">Активувати</string>
   <string name="local_index_mi_backup">Деактивувати</string>
@@ -424,7 +424,7 @@
   <string name="poi_filter_fuel">Заправки</string>
   <string name="poi_filter_namefinder">NameFinder (інтернет)</string>
   <string name="reading_cached_tiles">Зчитування кешованих растрових мап…</string>
-  <string name="version_index_is_big_for_memory">Недостатньо пам\'яті для локальної мапи \'\'{0}\'\'</string>
+  <string name="version_index_is_big_for_memory">Недостатньо пам’яті для локальної мапи \'\'{0}\'\'</string>
   <string name="version_index_is_not_supported">Версія локальної мапи \'\'{0}\'\' не підтримується</string>
   <string name="use_osmand_routing_service">Автономна навігація &gt; 20км</string>
   <string name="use_osmand_routing_service_descr">Використовувати OsmAnd оффлайн навігацію на відстані &gt; 20 км (експериментально)</string>
@@ -592,7 +592,7 @@
   <string name="show_transport_over_map_description">Показувати зупинки громадського транспорту</string>
   <string name="show_transport_over_map">Показувати зупинки транспорту</string>
   <string name="hello">Навігаційна програма OsmAnd</string>
-  <string name="update_poi_success">POI дані успішно оновлено ({0} об\'єктів завантажено)</string>
+  <string name="update_poi_success">POI дані успішно оновлено ({0} об’єктів завантажено)</string>
   <string name="update_poi_error_local">Помилка оновлення POI даних</string>
   <string name="update_poi_error_loading">Помилка завантаження даних із сервера</string>
   <string name="update_poi_no_offline_poi_index">Для цієї місцевості відсутні локальні дані про POI</string>
@@ -1840,7 +1840,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="download_tab_downloads">Всі завантаження</string>
     <string name="download_tab_updates">Оновлення</string>
     <string name="download_tab_local">Локальні</string>
-	<string name="no_internet_connection">Завантаження неможливе. Перевірте з’єднання з Интернет.</string>
+	<string name="no_internet_connection">Завантаження неможливе. Перевірте з’єднання з Інтернет.</string>
     <string name="everything_up_to_date">Всі файли оновлені</string>
     <string name="use_opengl_render">Використовувати OpenGL для візуалізації</string>
     <string name="use_opengl_render_descr">Використовувати апаратне прискорення OpenGL для візуалізації (може не працювати на деяких пристроях)</string>
@@ -1860,7 +1860,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="shared_string_disable">Вимкнути</string>
 	<string name="plugin_description_title">Опис</string>
 	
-	<string name="plugin_install_needs_network">Для встановлення цього втулку вам потрібне з’єднання з Інтерент.</string>
+	<string name="plugin_install_needs_network">Для встановлення цього втулку вам потрібне з’єднання з Інтернет.</string>
 	<string name="get_plugin">Отримати</string>
 	<string name="plugin_nautical_descr">Активація цього стилю змінює вигляд мапи на Морську, на якій показуються всі навігаційні знаки та символи.
 		\n\nФайл з даними містить всі навігаційні символи, у вигляди єдиного файлу з назвою \'World seamarks\'.
@@ -1935,7 +1935,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 \n\nУ разі активації цього виду, стиль мапи змінюється на \"Winter and ski\", показуючи всі деталі пейзажу так, як вони виглядають взимку. Цей (зимовий) вид може бути де-активований тут, або якщо ви поміняєте \"Стиль мапи\" в меню \"Налаштування мапи\" на бажаний вид. "</string>
 	<string name="rendering_attr_hideHouseNumbers_name">Приховати номери будинків</string>
     <string name="application_dir_change_warning3">Ви хочете, щоб OsmAnd також перемістив свої файли даних по новому призначенню?</string>
-    <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказанії теці</string>
+    <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
 	<string name="copying_osmand_file_failed">Не вдалося скопіювати файли</string>    
     <string name="storage_directory_external">Зовнішнє сховище</string>
     <string name="storage_directory_multiuser">Толочне сховище</string>
@@ -1953,11 +1953,11 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="routing_attr_avoid_borders_description">Уникати перетину кордону з іншою країною</string>
 	<string name="routing_attr_height_name">Обмеження висоти</string>
 	<string name="routing_attr_height_description">Вкажіть висоту автівки, щоб враховувати її під час прокладання маршрутів</string>
-    <string name="use_fast_recalculation">Інтелектуальне переобчисленя маршруту</string>
+    <string name="use_fast_recalculation">Інтелектуальне переобчислення маршруту</string>
 	<string name="use_fast_recalculation_desc">Переобчислення тільки початкової частини маршруту для тривалих поїздок</string>
 <string name="light_theme">Світла</string>
     <string name="dark_theme">Темна</string>
-    <string name="lang_pms">П\'ємондський</string>
+    <string name="lang_pms">П’ємонтський</string>
     <string name="rendering_attr_currentTrackColor_name">Колір GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Ширина GPX</string>
     <string name="rendering_value_red_name">Червоний</string>
@@ -1974,7 +1974,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_translucent_blue_name">Напівпрозорий синій</string>
     <string name="rendering_value_purple_name">Пурпурний</string>
     <string name="rendering_value_translucent_purple_name">Напівпрозорий пурпурний</string>
-    <string name="restart_is_required">Для того щоб повністю застосувати зміни потрібно перезавантажити застосунок.</string>
+    <string name="restart_is_required">Для того, щоб повністю застосувати зміни, потрібно перезавантажити застосунок.</string>
     <string name="lang_bn">Бенгальська</string>
     <string name="lang_tl">Тагальська</string>
     <string name="lang_sh">Сербсько-Хорватьська</string>
@@ -2004,7 +2004,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="lang_gl">Галійська</string>
     <string name="lang_et">Естонська</string>
     <string name="lang_ceb">Себуанська</string>
-    <string name="archive_wikipedia_data">У Вас завантажені старі, несумісні данні з Вікіпедії, Ви хочете їх заархівувати?</string>
+    <string name="archive_wikipedia_data">У Вас завантажені старі, несумісні дані з Вікіпедії, Ви хочете їх заархівувати?</string>
     <string name="download_wikipedia_files">Ви хочете завантажити додаткові дані з Вікіпедії (%1$s Мб) ?</string>
     <string name="gps_network_not_enabled">Сервіс локації вимкнений. Бажаєте його ввімкнути?</string>
     <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
@@ -2196,8 +2196,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="instalation_troubleshooting_item">Встановлення та вирішення проблем</string>
     <string name="techical_articles_item">Технічні статті</string>
     <string name="versions_item">Версії</string>
-    <string name="feedback">Зворотній зв\'язок</string>
-    <string name="contact_us">Зв\'язатися з нами</string>
+    <string name="feedback">Зворотній зв’язок</string>
+    <string name="contact_us">Зв’язатися з нами</string>
     <string name="map_legend">Легенда мапи</string>
     <string name="poi_context_menu_modify_osm_change">Редагувати OSM зміни</string>
     <string name="only_download_over_wifi">Завантажувати лише через Wi-Fi</string>
@@ -2217,7 +2217,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="use_drawer_btn">Використовувати меню</string>
     <string name="update">Оновлювати кожні</string>
     <string name="share_osm_edits_subject">OSM правки, поширені через OsmAnd</string>
-    <string name="rendering_attr_hideProposed_name">Приховати заплановані об\'єкти</string>
+    <string name="rendering_attr_hideProposed_name">Приховати заплановані об’єкти</string>
     <string name="save_poi_without_poi_type_message">Ви дійсно хочете зберегти POI, не вказавши його тип?</string>
     <string name="no_location_permission">Додаток не має дозволу до місце-розташування.</string>
     <string name="no_camera_permission">Додаток не має дозволу на використання камери.</string>
@@ -2239,7 +2239,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="hourly">Щогодинно</string>
     <string name="daily">Щоденно</string>
     <string name="shared_string_remove">Вилучити</string>
-    <string name="rendering_attr_hideUnderground_name">Приховати підземні об\'єкти</string>
+    <string name="rendering_attr_hideUnderground_name">Приховати підземні об’єкти</string>
     <string name="data_is_not_available">Дані недоступні</string>
     <string name="add_time_span">Додати часовий проміжок</string>
     <string name="road_blocked">Дорога перекрита</string>
@@ -2254,7 +2254,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
     <string name="nm">nm</string>
-    <string name="nm_h"></string>
+    <string name="nm_h"/>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
     <string name="weekly">Щотижня</string>
@@ -2274,7 +2274,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rec_split_title">Використовувати розбиття на кліпи</string>
     <string name="rec_split_desc">Циклічно перезаписувати кліпи, коли недостатньо місця на сховищі</string>
     <string name="rec_split_clip_length_desc">Тривалість записаного кліпу не буде перевищувати вказаного значення</string>
-    <string name="rec_split_storage_size_desc">Обсяг пам\'яті, який може бути зайнятий всіма кліпами</string>
+    <string name="rec_split_storage_size_desc">Обсяг пам’яті, який може бути зайнятий всіма кліпами</string>
     <string name="dashboard_or_drawer_title">Стільниця або меню керування</string>
     <string name="live_update">Оновлення</string>
     <string name="reports_for">Відзвітувати</string>
