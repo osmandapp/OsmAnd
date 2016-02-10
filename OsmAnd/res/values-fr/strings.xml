@@ -2129,4 +2129,5 @@
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
     <string name="show_polygons">Afficher les polygones</string>
     <string name="find_parking">Rechercher un stationnement</string>
+    <string name="rendering_attr_showMtbRoutes_name">Afficher les chemins pour VTT</string>
     </resources>
