@@ -13,7 +13,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.RouteLayer;
 
 public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
@@ -26,7 +28,7 @@ public class RasterMapMenu {
 		return adapter;
 	}
 
-	private static void createLayersItems(ContextMenuAdapter adapter,
+	private static void createLayersItems(final ContextMenuAdapter contextMenuAdapter,
 										  final MapActivity mapActivity,
 										  final OsmandRasterMapsPlugin.RasterMapType type) {
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -59,7 +61,8 @@ public class RasterMapMenu {
 			}
 
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<?> adapter,
+											  int itemId, int pos, boolean isChecked) {
 				Log.v(TAG, "onContextMenuClick(" + "adapter=" + adapter + ", itemId=" + itemId + ", pos=" + pos + ", isChecked=" + isChecked + ")");
 				if (itemId == R.string.shared_string_show) {
 					MapActivityLayers mapLayers = mapActivity.getMapLayers();
@@ -68,14 +71,21 @@ public class RasterMapMenu {
 					} else {
 						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
 					}
-					plugin.toggleUnderlayState(mapActivity, type);
+					plugin.toggleUnderlayState(mapActivity, type, new OsmandRasterMapsPlugin.OnMapSelectedCallback() {
+						@Override
+						public void onMapSelected() {
+							mapActivity.getDashboard().refreshContent(true);
+						}
+					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
+					refreshMapComplete(mapActivity);
 				}
 				return false;
 			}
 		};
-		adapter.item(R.string.shared_string_show).listen(l).selected(rasterMapLayer != null && rasterMapLayer.getMap() != null ? 1 : 0).reg();
+		int selected = mapTypePreference.get() != null ? 1 : 0;
+		contextMenuAdapter.item(R.string.shared_string_show).listen(l).selected(selected).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		ContextMenuAdapter.OnIntegerValueChangedListener integerListener =
 				new ContextMenuAdapter.OnIntegerValueChangedListener() {
@@ -88,9 +98,23 @@ public class RasterMapMenu {
 				};
 		// android:max="255" in layout is expected
 		// Please note this does not modify the transparency of the underlay map, but of the base map, of course!
-		adapter.item(R.string.map_transparency).layout(R.layout.progress_list_item)
+		contextMenuAdapter.item(R.string.map_transparency).layout(R.layout.progress_list_item)
 				.progress(mapTransparencyPreference.get()).listenInteger(integerListener).reg();
-		adapter.item(mapTypeString).layout(R.layout.two_line_list_item).description(mapTypePreference.get()).reg();
-		adapter.item(R.string.show_polygons).listen(l).selected(hidePolygonsPref.get() ? 0 : 1).reg();
+		contextMenuAdapter.item(mapTypeString).layout(R.layout.two_line_list_item).description(mapTypePreference.get()).reg();
+		contextMenuAdapter.item(R.string.show_polygons).listen(l).selected(hidePolygonsPref.get() ? 0 : 1).reg();
+	}
+
+	private static void refreshMapComplete(final MapActivity activity) {
+		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
+		activity.updateMapSettings();
+		GPXLayer gpx = activity.getMapView().getLayerByClass(GPXLayer.class);
+		if(gpx != null) {
+			gpx.updateLayerStyle();
+		}
+		RouteLayer rte = activity.getMapView().getLayerByClass(RouteLayer.class);
+		if(rte != null) {
+			rte.updateLayerStyle();
+		}
+		activity.getMapView().refreshMap(true);
 	}
 }
