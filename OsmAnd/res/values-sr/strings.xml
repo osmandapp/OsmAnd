@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
@@ -525,7 +525,7 @@
     <string name="shared_string_show_details">Прикажи појединости</string>
     <string name="osm_edit_context_menu_delete">Избриши уредбе ОСМ-а</string>
     <string name="rendering_value_disabled_name">Онемогућено</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Бојење према углу прегледа путање</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Бојење према врсти пута</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Бојење према ОСМЦ-у</string>
     <string name="osmo_share_my_location">Дели мој положај</string>
     <string name="shared_string_logoff">Одјави се</string>
@@ -754,7 +754,7 @@
     <string name="way_alarms">Упозорења о гужвама у саобраћају</string>
     <string name="background_service_is_enabled_question">Позадинске услуге Османда и даље дејствују. Да ли желите да и њих прекинете?</string>
     <string name="sleep_mode_stop_dialog">Да ли прекинути рад позадинског ГПС-а?</string>
-    <string name="stop_navigation_service">Прекини</string>
+    <string name="stop_navigation_service">Заустави</string>
     <string name="confirm_every_run">Увек питај</string>
     <string name="save_global_track_interval_descr">Изаберите међувреме пријаве ради снимања путања (које су омогућене пријавом преко справице ГПИкс-а на карти)</string>
     <string name="save_global_track_interval">Међувреме опште пријаве</string>
@@ -1069,4 +1069,15 @@
     <string name="use_compass_navigation">Користи компас</string>
     <string name="use_compass_navigation_descr">Користи компас када правац није препознат на други начин</string>
     <string name="avoid_motorway">Избегавај путеве за моторна возила</string>
+    <string name="find_parking">Пронађи паркиралиште</string>
+    <string name="shared_string_status">Стање</string>
+    <string name="shared_string_save_changes">Сачувај измене</string>
+    <string name="shared_string_email_address">Адреса е-поште</string>
+    <string name="rendering_attr_hideUnderground_name">Сакриј подземне предмете</string>
+    <string name="data_is_not_available">Нема доступних података</string>
+    <string name="shared_string_remove">Уклони</string>
+    <string name="shared_string_read_more">Сазнајте више</string>
+    <string name="clear_updates_proposition_message">Можете уклонити преузете надоградње и вратити се на изворну карту</string>
+    <string name="shared_string_select">Означи</string>
+    <string name="osmand_rastermaps_plugin_description"/>
     </resources>
