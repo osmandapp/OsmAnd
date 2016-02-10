@@ -2084,4 +2084,5 @@
     <string name="find_parking">Hitta en parkeringsplats</string>
     <string name="show_polygons">Visa polygoner</string>
     <string name="underlay_transparency">Underläggstransparens</string>
+    <string name="rendering_attr_showMtbRoutes_name">Visa MTB-rutter</string>
     </resources>
