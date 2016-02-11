@@ -307,14 +307,14 @@
   <string name="map_text_size_descr">Виберіть розмір шрифту для позначень на мапі</string>
   <string name="map_text_size">Розмір тексту</string>
   <string name="trace_rendering">Налагоджувальна інформація про рендеринг</string>
-  <string name="trace_rendering_descr">Відобаражає продуктивність рендерингу</string>
+  <string name="trace_rendering_descr">Відображає продуктивність рендерингу</string>
   
   
   
   <string name="installing_new_resources">Розпаковуються нові дані…</string>
   <string name="internet_connection_required_for_online_route">Ви хочете використовувати Інтернет-сервіси, але у вас немає активного Інтернет з’єднання.</string>
   <string name="tts_language_not_supported_title">Мова не підтримується</string>
-  <string name="tts_language_not_supported">Вибрана мова не підтримуються встановленими рушієм Android TTS (перетворення тексту в мову). Ви бажаєте пошукати інший рушій TTS? Якщо, ні, буде використовуватись інша встановлена мова рушія TTS.</string>
+  <string name="tts_language_not_supported">Вибрана мова не підтримується встановленим рушієм Android TTS (перетворення тексту в мову). Ви бажаєте пошукати інший рушій TTS? Якщо ні, буде використовуватись інша встановлена мова рушія TTS.</string>
   <string name="tts_missing_language_data_title">Дані відсутні</string>
   <string name="tts_missing_language_data">Для даної мови відсутні дані TTS. Завантажити дані з Маркету?</string>
   <string name="gpx_option_reverse_route">Виберіть зворотній напрямок</string>
@@ -380,7 +380,7 @@
   <string name="mile">мл</string>
   <string name="send_location_way_choose_title">Поділитись, використовуючи</string>
   <string name="send_location_sms_pattern">Координати: %1$s\n%2$s</string>
-  <string name="send_location_email_pattern">Для того, щоб побачити місцерозташування натисніть на посилання %1$s або android посилання %2$s</string>
+  <string name="send_location_email_pattern">Для того, щоб побачити місцерозташування, натисніть на посилання %1$s або android посилання %2$s</string>
   <string name="send_location">Надіслати місцезнаходження</string>
   <string name="context_menu_item_share_location">Поділитись місцезнаходженням</string>
   <string name="add_waypoint_dialog_added">Точка GPX \'\'{0}\'\' успішно додана</string>
@@ -461,13 +461,13 @@
   <string name="select_max_zoom_preload_area">Вибрати максимальний масштаб для завантаження</string>
   <string name="maps_could_not_be_downloaded">Дана мапа не може бути завантажена</string>
   <string name="continuous_rendering">Безперервний рендеринг</string>
-  <string name="continuous_rendering_descr">Виберіть спосіб рендеринга мапи</string>
+  <string name="continuous_rendering_descr">Виберіть спосіб рендерингу мапи</string>
   <string name="rendering_exception">Під час відображення мапи сталась невідома помилка</string>
   <string name="show_point_options">Контекстне меню …</string>
   <string name="renderer_load_sucess">Рендер завантажено</string>
   <string name="renderer_load_exception">Виникла помилка: рендер не завантажено</string>
   <string name="renderers">Векторний рендер</string>
-  <string name="renderers_descr">Виберіть зовнішній вигляд рендеринга</string>
+  <string name="renderers_descr">Виберіть зовнішній вигляд рендерингу</string>
   <string name="poi_context_menu_website">Показати сайт POI</string>
   <string name="poi_context_menu_call">Показати телефон POI</string>
   <string name="website">веб-сайт</string>
@@ -501,7 +501,7 @@
   <string name="rotate_map_to_bearing">Орієнтація мапи</string>
   <string name="show_route">Деталі маршруту</string>
   <string name="fav_imported_sucessfully">Точки успішно імпортовано</string>
-  <string name="fav_file_to_load_not_found">GPX файл, що містить точки не знайдено в {0}</string>
+  <string name="fav_file_to_load_not_found">Файл GPX, що містить точки, не знайдено в {0}</string>
   <string name="fav_saved_sucessfully">Закладки збережено в {0}</string>
   <string name="no_fav_to_save">Нема точок для збереження</string>
   <string name="shared_string_import">Імпортувати</string>
@@ -721,7 +721,7 @@
   
   <string name="show_gps_coordinates_text">Показати GPS координати на мапі</string>
   <string name="use_internet_to_download_tile">Використовувати інтернет для завантаження відсутніх частин мапи</string>
-  <string name="app_description">Навікаційна програма</string>
+  <string name="app_description">Навігаційна програма</string>
   <string name="shared_string_exit">Вихід</string>
   
   
@@ -907,7 +907,7 @@
     
     <string name="local_indexes_cat_av">Аудіо/Відео дані</string>
     <string name="stop_routing_confirm">Ви впевнені, що хочете зупинити навігацію?</string>
-    <string name="clear_dest_confirm">Ви впевнені, що хочете вилучити пункт призначення(і проміжні точки)?</string>
+    <string name="clear_dest_confirm">Ви впевнені, що хочете вилучити пункт призначення (і проміжні точки)?</string>
     <string name="recording_context_menu_show">Показати</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="av_def_action_picture">Сфотографувати</string>
@@ -1374,8 +1374,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_auto_send_locations_descr">Автоматично запускати сесію трекера та надсилати місцезнаходження після запуску застосунку</string>
     <string name="osmo_auto_send_locations">Автоматично запускати моніторинг</string>
     <string name="osmo_tracker_id">Персональний ID трекера</string>
-    <string name="osmo_tracker_id_descr">Натисніть щоб подивитись або подітись ID трекера
-	Використовуючи ID трекера можна відстежувати пересування цього пристрою! Для відключення скористайтесь опцією Перестворити.</string>
+    <string name="osmo_tracker_id_descr">Натисніть, щоб подивитись або поділитись ID трекера. Використовуючи ID трекера, можна відстежувати пересування цього пристрою! Для відключення скористайтесь опцією Перестворити.</string>
     <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
     <string name="osmo_activity">OpenStreetMap Моніторинг</string>
     <string name="osmo_control">OsMo швидкий доступ</string>
@@ -1537,7 +1536,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="index_item_world_altitude_correction">Всесвітня корекція висоти</string>
 	<string name="index_item_world_seamarks">Всесвітні морські навігаційні знаки</string>
 	<string name="index_item_world_basemap">Всесвітня оглядова мапа</string>
-    <string name="index_item_world_ski">Всесвітні лижна мапа</string>
+    <string name="index_item_world_ski">Всесвітня лижна мапа</string>
     <string name="lang_hr">Хорватська</string>
     <string name="lang_zh">Китайська</string>
     <string name="lang_pt_br">Португальська (Бразилія)</string>
@@ -1757,7 +1756,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="search_radius_proximity">Поруч з</string>
     <string name="osmo_device_not_found">Пристрій не знайдено</string>
     <string name="osmo_no_connection_msg">Сервіс OsMo не доступний:\n- перевірте з’єднання;\n- перевірте налаштування;\n- перевірте наш Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Анонімний користувач не в змозі:\n- створювати групи;\n- синхронізувати грипу та пристрої з сервером;\n- керувати групами та пристроями в особистому кабінеті.</string>
+    <string name="anonymous_user_hint">Анонімний користувач не в змозі:\n- створювати групи;\n- синхронізувати групи та пристрої з сервером;\n- керувати групами та пристроями в особистому кабінеті.</string>
     <string name="anonymous_user">Анонімний користувач</string>
     <string name="logged_as">Ви увійшли як %1$s</string>
 	<string name="speed_limit_exceed">Допустиме перевищення швидкості</string>
@@ -1820,7 +1819,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     
 	<string name="speak_pedestrian">Пішохідні переходи</string>
     <string name="rendering_attr_roadStyle_name">Стиль доріг</string>
-    <string name="rendering_value_default_name">За замовчуваням</string>
+    <string name="rendering_value_default_name">За замовчуванням</string>
     <string name="rendering_value_orange_name">Помаранчевий</string>
     <string name="rendering_value_germanRoadAtlas_name">Атлас доріг Німеччини</string>
 	<string name="traffic_warning_railways">Залізничний переїзд</string>
@@ -1877,7 +1876,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="waypoint_visit_before">Відвідати, перш ніж</string>
     <string name="simulate_your_location">Моделювати ваше місце розташування</string>
     <string name="drawer">Суцільним списком</string>
-    <string name="short_location_on_map">"Шир %1$s ↵\n  Дов %2$s"</string>
+    <string name="short_location_on_map">"Шир %1$s↵\n  Дов %2$s"</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше</string>
     <string name="routing_settings_2">Параметри навігації</string>
     <string name="general_settings_2">Загальні налаштування</string>
