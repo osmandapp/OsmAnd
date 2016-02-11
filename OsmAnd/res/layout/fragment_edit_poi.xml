@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/poi_dialog_name"
                         android:imeOptions="actionNext"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         tools:text="@string/lorem_ipsum"/>
 
                 </android.support.design.widget.TextInputLayout>
