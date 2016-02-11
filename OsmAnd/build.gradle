@@ -43,7 +43,7 @@ android {
 
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		//versionName already assigned in code
-		//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
+		versionName System.getenv("APK_VERSION") ? System.getenv("APK_VERSION").toString(): versionName
 	}
 
 	lintOptions {
@@ -184,6 +184,24 @@ task updateNoTranslate(type: Copy) {
 	into 'res/values/'
 }
 
+
+android.applicationVariants.all { variant ->
+	variant.outputs.each { output ->
+		output.processManifest.doLast {
+			replaceInManifest(output,
+					'2.2.4',
+					'14.88')
+
+		}
+	}
+}
+
+def replaceInManifest(output, fromString, toString) {
+	def updatedContent = output.processManifest.manifestOutputFile.getText('UTF-8')
+			.replaceAll(fromString, toString)
+	output.processManifest.manifestOutputFile.write(updatedContent, 'UTF-8')
+}
+
 task validateTranslate {
 	println "Validating translations"
 
@@ -232,7 +250,7 @@ task collectHelpContentsAssets(type: Copy) {
 		include "technical-articles.html"
 		include "map-legend.html"
 	}
-	from("../../help/website/feature_articles"){
+	from("../../help/website/feature_articles") {
 		include "*.html"
 	}
 
