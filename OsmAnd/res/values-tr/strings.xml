@@ -90,7 +90,7 @@
 	<string name="safe_mode_description">Uygulamayı güvenli modda çalıştır (sisteme özgü kod yerine yavaş Android kodu kullanılarak).</string>
     <string name="safe_mode">Güvenli mod</string>
     <string name="native_library_not_running">Uygulama güvenli modda çalışıyor (Ayarlar menüsünden kapatabilirsiniz).</string>
-    <string name="background_service_is_enabled_question">Arka plan servisi hala çalışıyor. İptal etmek ister misiniz?</string>
+    <string name="background_service_is_enabled_question">Osmand arka plan hizmeti hala çalışıyor. Sen de bunu durdurmak istiyor musunuz?</string>
     
     
 	<string name="local_indexes_cat_av">Ses/Video verisi</string>
@@ -235,7 +235,7 @@
 	
 	<string name="unknown_from_location">Başlangıç noktası henüz belirtilmedi</string>
 	<string name="unknown_location">Konum henüz bilinmiyor</string>
-	<string name="confirm_interrupt_download">Dosya indirmesini durdurmak istiyor musunuz?</string>
+	<string name="confirm_interrupt_download">Dosya indirirken iptal etmek istiyor musunuz?</string>
 	<string name="select_index_file_to_download">Hiçbir şey bulunamadı. Eğer bölgenizi bulamıyorsanız, kendiniz yapabilirsiniz (bakınız: http://osmand.net).</string>
 	<string name="local_indexes_cat_map">Standart haritalar (vektör)</string>
 	<string name="shared_string_online_maps">Çevrimiçi haritalar</string>
@@ -1933,8 +1933,8 @@
     <string name="traffic_warning_border_control">Sınır kontrolü</string>
     <string name="traffic_warning_payment">Gişe</string>
     <string name="traffic_warning_calming">Trafik Sakinleştirici</string>
-    <string name="sleep_mode_stop_dialog">Kesme GPS arka plan modunda?</string>
-    <string name="stop_navigation_service">Kesme</string>
+    <string name="sleep_mode_stop_dialog">GPS arka plan modunu durdur?</string>
+    <string name="stop_navigation_service">Dur</string>
     <string name="save_global_track_interval_descr">(Haritada GPX günlüğü widget üzerinden etkin) kayıt genel pist için oturum aralığını seçin</string>
     <string name="save_global_track_interval">Genel günlüğü aralığı</string>
     <string name="background_service_int">GPS Uyandırma aralık</string>
@@ -2051,4 +2051,5 @@
     <string name="show_polygons">Çokgenleri göster</string>
     <string name="underlay_transparency">Şeffaflık altına koymak</string>
     <string name="find_parking">Bir park yeri bulmak</string>
+    <string name="rendering_attr_showMtbRoutes_name">MTB yolları göster</string>
     </resources>
