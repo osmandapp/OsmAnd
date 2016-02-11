@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.Iterator;
@@ -78,7 +79,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		if(tb.getZoom() < 3) {
+		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
+		if (tb.getZoom() < 3 || (!routingHelper.isRoutePlanningMode() && !routingHelper.isFollowingMode())) {
 			return;
 		}
 
@@ -126,7 +128,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			pointToNavigate = it.next();
 		}
 		if (pointToNavigate != null && !isLocationVisible(tb, pointToNavigate)) {
-			boolean show = !view.getApplication().getRoutingHelper().isRouteCalculated();
+			boolean show = !routingHelper.isRouteCalculated();
 			if(view.getSettings().SHOW_DESTINATION_ARROW.isSet()) {
 				show = view.getSettings().SHOW_DESTINATION_ARROW.get();
 			}

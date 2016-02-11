@@ -462,6 +462,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		} else if (targets.getIntermediatePoints().isEmpty()) {
 			targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+			close();
 		} else {
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			bld.setTitle(R.string.new_directions_point_dialog);
@@ -483,9 +484,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						targets.removeAllWayPoints(false);
 						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+						close();
 					} else {
 						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+						close();
 					}
 				}
 			});
