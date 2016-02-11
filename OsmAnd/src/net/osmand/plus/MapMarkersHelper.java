@@ -2,14 +2,9 @@ package net.osmand.plus;
 
 import android.content.Context;
 
-import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -21,8 +16,13 @@ public class MapMarkersHelper {
 	private List<MapMarker> mapMarkers = new ArrayList<>();
 	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
 	private OsmandSettings settings;
-	private List<StateChangedListener<Void>> listeners = new ArrayList<StateChangedListener<Void>>();
+	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private OsmandApplication ctx;
+
+	public interface MapMarkerChangedListener {
+		void onMapMarkerChanged(MapMarker mapMarker);
+		void onMapMarkersChanged();
+	}
 
 	public static class MapMarker implements LocationPoint {
 		public LatLon point;
@@ -112,7 +112,11 @@ public class MapMarkersHelper {
 			GeocodingLookupService.AddressLookupRequest lookupRequest = new GeocodingLookupService.AddressLookupRequest(mapMarker.point, new GeocodingLookupService.OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
-					mapMarker.pointDescription.setName(address);
+					if (Algorithms.isEmpty(address)) {
+						mapMarker.pointDescription.setName(PointDescription.getAddressNotFoundStr(ctx));
+					} else {
+						mapMarker.pointDescription.setName(address);
+					}
 					if (history) {
 						settings.updateMapMarkerHistory(mapMarker.point.getLatitude(), mapMarker.point.getLongitude(),
 								mapMarker.pointDescription, mapMarker.colorIndex);
@@ -120,7 +124,7 @@ public class MapMarkersHelper {
 						settings.updateMapMarker(mapMarker.point.getLatitude(), mapMarker.point.getLongitude(),
 								mapMarker.pointDescription, mapMarker.colorIndex);
 					}
-					refresh();
+					updateMarker(mapMarker);
 				}
 			}, null);
 			ctx.getGeocodingLookupService().lookupAddress(lookupRequest);
@@ -260,18 +264,30 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void addListener(StateChangedListener<Void> l) {
-		listeners.add(l);
+	public void addListener(MapMarkerChangedListener l) {
+		if (!listeners.contains(l)) {
+			listeners.add(l);
+		}
 	}
 
-	private void updateListeners() {
-		for (StateChangedListener<Void> l : listeners) {
-			l.stateChanged(null);
+	public void removeListener(MapMarkerChangedListener l) {
+		listeners.remove(l);
+	}
+
+	private void updateMarker(MapMarker marker) {
+		for (MapMarkerChangedListener l : listeners) {
+			l.onMapMarkerChanged(marker);
+		}
+	}
+
+	private void updateMarkers() {
+		for (MapMarkerChangedListener l : listeners) {
+			l.onMapMarkersChanged();
 		}
 	}
 
 	public void refresh() {
-		updateListeners();
+		updateMarkers();
 	}
 
 	private void cancelAddressRequests() {

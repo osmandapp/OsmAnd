@@ -110,7 +110,6 @@ public class MapActivityActions implements DialogProvider {
 	public void addMapMarker(double latitude, double longitude, PointDescription pd) {
 		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
 		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd);
-		//openMapMarkersActivity();
 	}
 
 	public void editWaypoints() {

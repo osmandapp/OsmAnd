@@ -19,6 +19,8 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -42,7 +44,8 @@ import net.osmand.util.MapUtils;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode> {
+public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
+		MapMarkerChangedListener {
 
 	private MapActivity mapActivity;
 	private MapMultiSelectionMenu mapMultiSelectionMenu;
@@ -256,6 +259,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 		mapActivity.refreshMap();
 
+		if (object instanceof MapMarker) {
+			mapActivity.getMyApplication().getMapMarkersHelper().addListener(this);
+		}
+
 		return true;
 	}
 
@@ -308,6 +315,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void close() {
 		if (active) {
 			active = false;
+			if (object instanceof MapMarker) {
+				mapActivity.getMyApplication().getMapMarkersHelper().removeListener(this);
+			}
 			if (this.object != null) {
 				clearSelectedObject(this.object);
 			}
@@ -332,6 +342,22 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().updateMenu();
 		}
+	}
+
+	@Override
+	public void onMapMarkerChanged(MapMarker mapMarker) {
+		if (object == mapMarker) {
+			String address = ((MapMarker) object).getOnlyName();
+			nameStr = address;
+			pointDescription.setName(address);
+			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+			if (fragmentRef != null)
+				fragmentRef.get().refreshTitle();
+		}
+	}
+
+	@Override
+	public void onMapMarkersChanged() {
 	}
 
 	@Override
@@ -477,7 +503,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
 		} else {
 			mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-					pointDescription);
+					getPointDescriptionForTarget());
 		}
 		close();
 	}

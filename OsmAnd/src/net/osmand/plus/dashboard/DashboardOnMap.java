@@ -43,6 +43,7 @@ import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -87,7 +88,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 /**
  */
 public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicListViewCallbacks,
-		IRouteInformationListener, WaypointDialogHelperCallbacks {
+		IRouteInformationListener, WaypointDialogHelperCallbacks, MapMarkerChangedListener {
 	private static final org.apache.commons.logging.Log LOG =
 			PlatformUtil.getLog(DashboardOnMap.class);
 	private static final String TAG = "DashboardOnMap";
@@ -210,128 +211,128 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		// by default they handle touches for their list items... i.e. they're in charge of drawing
 		// the pressed state (the list selector), handling list item clicks, etc.
 		swipeDismissListener = new SwipeDismissListViewTouchListener(
-						listView,
-						new DismissCallbacks() {
+				listView,
+				new DismissCallbacks() {
 
-							private List<Object> deletedMarkers = new ArrayList<>();
+					private List<Object> deletedMarkers = new ArrayList<>();
 
-							@Override
-							public boolean canDismiss(int position) {
-								boolean res = false;
-								if (listAdapter instanceof StableArrayAdapter) {
-									List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
-									Object obj = listAdapter.getItem(position);
-									res = activeObjects.contains(obj);
+					@Override
+					public boolean canDismiss(int position) {
+						boolean res = false;
+						if (listAdapter instanceof StableArrayAdapter) {
+							List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
+							Object obj = listAdapter.getItem(position);
+							res = activeObjects.contains(obj);
+						}
+						return res;
+					}
+
+					@Override
+					public Undoable onDismiss(final int position) {
+						final Object item;
+						final StableArrayAdapter stableAdapter;
+						final int activeObjPos;
+						if (listAdapter instanceof StableArrayAdapter) {
+							stableAdapter = (StableArrayAdapter) listAdapter;
+							item = stableAdapter.getItem(position);
+
+							if (visibleType == DashboardType.MAP_MARKERS) {
+								if (!((MapMarker) item).history) {
+									deletedMarkers.add(item);
 								}
-								return res;
 							}
 
+							stableAdapter.setNotifyOnChange(false);
+							stableAdapter.remove(item);
+							stableAdapter.getObjects().remove(item);
+							activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
+							stableAdapter.getActiveObjects().remove(item);
+							stableAdapter.refreshData();
+							stableAdapter.notifyDataSetChanged();
+
+						} else {
+							item = null;
+							stableAdapter = null;
+							activeObjPos = 0;
+						}
+						return new Undoable() {
 							@Override
-							public Undoable onDismiss(final int position) {
-								final Object item;
-								final StableArrayAdapter stableAdapter;
-								final int activeObjPos;
-								if (listAdapter instanceof StableArrayAdapter) {
-									stableAdapter = (StableArrayAdapter) listAdapter;
-									item = stableAdapter.getItem(position);
-
-									if (visibleType == DashboardType.MAP_MARKERS) {
-										if (!((MapMarker) item).history) {
-											deletedMarkers.add(item);
-										}
-									}
-
+							public void undo() {
+								if (item != null) {
 									stableAdapter.setNotifyOnChange(false);
-									stableAdapter.remove(item);
-									stableAdapter.getObjects().remove(item);
-									activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
-									stableAdapter.getActiveObjects().remove(item);
-									stableAdapter.refreshData();
-									stableAdapter.notifyDataSetChanged();
-
-								} else {
-									item = null;
-									stableAdapter = null;
-									activeObjPos = 0;
-								}
-								return new Undoable() {
-									@Override
-									public void undo() {
-										if (item != null) {
-											stableAdapter.setNotifyOnChange(false);
-											stableAdapter.insert(item, position);
-											stableAdapter.getObjects().add(position, item);
-											stableAdapter.getActiveObjects().add(activeObjPos, item);
-											stableAdapter.refreshData();
-											if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
-												onItemsSwapped(stableAdapter.getActiveObjects());
-											} else if (visibleType == DashboardType.MAP_MARKERS) {
-												deletedMarkers.remove(item);
-												updateMapMarkers(stableAdapter.getActiveObjects());
-												reloadAdapter();
-											}
-										}
-									}
-
-									@Override
-									public String getTitle() {
-										if ((visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT)
-												&& (getMyApplication().getRoutingHelper().isRoutePlanningMode() || getMyApplication().getRoutingHelper().isFollowingMode())
-												&& item != null
-												&& stableAdapter.getActiveObjects().size() == 0) {
-											return mapActivity.getResources().getString(R.string.cancel_navigation);
-										} else {
-											return null;
-										}
-									}
-								};
-							}
-
-							@Override
-							public void onHidePopup() {
-								if (listAdapter instanceof StableArrayAdapter) {
-									StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+									stableAdapter.insert(item, position);
+									stableAdapter.getObjects().add(position, item);
+									stableAdapter.getActiveObjects().add(activeObjPos, item);
 									stableAdapter.refreshData();
 									if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
 										onItemsSwapped(stableAdapter.getActiveObjects());
 									} else if (visibleType == DashboardType.MAP_MARKERS) {
+										deletedMarkers.remove(item);
 										updateMapMarkers(stableAdapter.getActiveObjects());
-									}
-									if (stableAdapter.getActiveObjects().size() == 0) {
-										hideDashboard();
-										if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
-											mapActivity.getMapActions().stopNavigationWithoutConfirm();
-											mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
-										}
-									} else {
-										if (visibleType == DashboardType.MAP_MARKERS) {
-											reloadAdapter();
-										}
+										reloadAdapter();
 									}
 								}
 							}
 
-							private void updateMapMarkers(List<Object> objects) {
-								List<MapMarker> markers = new ArrayList<>();
-								List<MapMarker> markersHistory = new ArrayList<>();
-
-								for (Object obj : objects) {
-									MapMarker marker = (MapMarker) obj;
-									if (!marker.history) {
-										markers.add(marker);
-									} else {
-										markersHistory.add(marker);
-									}
+							@Override
+							public String getTitle() {
+								if ((visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT)
+										&& (getMyApplication().getRoutingHelper().isRoutePlanningMode() || getMyApplication().getRoutingHelper().isFollowingMode())
+										&& item != null
+										&& stableAdapter.getActiveObjects().size() == 0) {
+									return mapActivity.getResources().getString(R.string.cancel_navigation);
+								} else {
+									return null;
 								}
-
-								for (int i = deletedMarkers.size() - 1; i >= 0; i--) {
-									markersHistory.add(0, (MapMarker) deletedMarkers.get(i));
-								}
-								deletedMarkers.clear();
-
-								getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, markersHistory);
 							}
-						});
+						};
+					}
+
+					@Override
+					public void onHidePopup() {
+						if (listAdapter instanceof StableArrayAdapter) {
+							StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+							stableAdapter.refreshData();
+							if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
+								onItemsSwapped(stableAdapter.getActiveObjects());
+							} else if (visibleType == DashboardType.MAP_MARKERS) {
+								updateMapMarkers(stableAdapter.getActiveObjects());
+							}
+							if (stableAdapter.getActiveObjects().size() == 0) {
+								hideDashboard();
+								if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
+									mapActivity.getMapActions().stopNavigationWithoutConfirm();
+									mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
+								}
+							} else {
+								if (visibleType == DashboardType.MAP_MARKERS) {
+									reloadAdapter();
+								}
+							}
+						}
+					}
+
+					private void updateMapMarkers(List<Object> objects) {
+						List<MapMarker> markers = new ArrayList<>();
+						List<MapMarker> markersHistory = new ArrayList<>();
+
+						for (Object obj : objects) {
+							MapMarker marker = (MapMarker) obj;
+							if (!marker.history) {
+								markers.add(marker);
+							} else {
+								markersHistory.add(marker);
+							}
+						}
+
+						for (int i = deletedMarkers.size() - 1; i >= 0; i--) {
+							markersHistory.add(0, (MapMarker) deletedMarkers.get(i));
+						}
+						deletedMarkers.clear();
+
+						getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, markersHistory);
+					}
+				});
 
 		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
@@ -373,6 +374,16 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		dashboardView.addView(actionButton);
 	}
 
+	@Override
+	public void onMapMarkerChanged(MapMarker mapMarker) {
+		if (visible && visibleType == DashboardType.MAP_MARKERS) {
+			mapMarkerDialogHelper.updateMarkerView(listView, mapMarker);
+		}
+	}
+
+	@Override
+	public void onMapMarkersChanged() {
+	}
 
 	private void updateListBackgroundHeight() {
 
@@ -682,6 +693,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					updateListBackgroundHeight();
 				}
 				applyDayNightMode();
+
+				if (visibleType == DashboardType.MAP_MARKERS) {
+					getMyApplication().getMapMarkersHelper().addListener(this);
+				}
 			}
 			mapActivity.findViewById(R.id.toolbar_back).setVisibility(isBackButtonVisible() ? View.VISIBLE : View.GONE);
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
@@ -699,6 +714,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
 		} else {
+			if (visibleType == DashboardType.MAP_MARKERS) {
+				getMyApplication().getMapMarkersHelper().removeListener(this);
+			}
 			if (swipeDismissListener != null) {
 				swipeDismissListener.discardUndo();
 			}
@@ -1011,6 +1029,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					if (df.get() instanceof DashLocationFragment) {
 						((DashLocationFragment) df.get()).updateLocation(centerChanged, locationChanged, compassChanged);
 					}
+				}
+				if (visibleType == DashboardType.MAP_MARKERS) {
+					mapMarkerDialogHelper.updateLocation(listView, compassChanged);
 				}
 			}
 		});

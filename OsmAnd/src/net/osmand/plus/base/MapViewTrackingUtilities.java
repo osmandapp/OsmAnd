@@ -8,6 +8,8 @@ import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -17,10 +19,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -29,7 +29,8 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener, OsmAndCompassListener, IRouteInformationListener {
+public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
+		OsmAndCompassListener, IRouteInformationListener, MapMarkerChangedListener {
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4; 
 	
 	private long lastTimeAutoZooming = 0;
@@ -70,15 +71,18 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void addMapMarkersListener(OsmandApplication app) {
-		app.getMapMarkersHelper().addListener(new StateChangedListener<Void>() {
+		app.getMapMarkersHelper().addListener(this);
+	}
 
-			@Override
-			public void stateChanged(Void change) {
-				if(mapView != null) {
-					mapView.refreshMap();
-				}
-			}
-		});
+	@Override
+	public void onMapMarkerChanged(MapMarkersHelper.MapMarker mapMarker) {
+	}
+
+	@Override
+	public void onMapMarkersChanged() {
+		if (mapView != null) {
+			mapView.refreshMap();
+		}
 	}
 
 	public void setMapView(OsmandMapTileView mapView) {

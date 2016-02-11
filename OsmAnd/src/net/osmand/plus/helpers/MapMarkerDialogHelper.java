@@ -11,19 +11,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.util.Algorithms;
@@ -40,12 +43,21 @@ public class MapMarkerDialogHelper {
 
 	private MapActivity mapActivity;
 	private OsmandApplication app;
+	private MapMarkersHelper markersHelper;
 	private boolean sorted;
 	private boolean nightMode;
+
+	private boolean useCenter;
+	private LatLon loc;
+	private Float heading;
+	private int screenOrientation;
+	private boolean reloading;
+	private long lastUpdateTime;
 
 	public MapMarkerDialogHelper(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
+		markersHelper = app.getMapMarkersHelper();
 	}
 
 	public boolean isNightMode() {
@@ -83,11 +95,14 @@ public class MapMarkerDialogHelper {
 
 	public StableArrayAdapter getMapMarkersListAdapter() {
 
+		screenOrientation = DashLocationFragment.getScreenOrientation(mapActivity);
+		calculateLocationParams();
+
 		final List<Object> objects = getListObjects();
 		List<Object> activeObjects = getActiveObjects(objects);
 
 		final StableArrayAdapter listAdapter = new StableArrayAdapter(mapActivity,
-				R.layout.waypoint_reached, R.id.title, objects, activeObjects) {
+				R.layout.map_marker_item, R.id.title, objects, activeObjects) {
 
 			@Override
 			public void buildDividers() {
@@ -123,23 +138,6 @@ public class MapMarkerDialogHelper {
 				return v;
 			}
 		};
-
-		for (Object p : objects) {
-			if (p instanceof MapMarker) {
-				final MapMarker marker = (MapMarker) p;
-				if (marker.getOriginalPointDescription() != null
-						&& marker.getOriginalPointDescription().isSearchingAddress(mapActivity)) {
-					GeocodingLookupService.AddressLookupRequest lookupRequest
-							= new GeocodingLookupService.AddressLookupRequest(marker.point, new GeocodingLookupService.OnAddressLookupResult() {
-						@Override
-						public void geocodingDone(String address) {
-							reloadListAdapter(listAdapter);
-						}
-					}, null);
-					app.getGeocodingLookupService().lookupAddress(lookupRequest);
-				}
-			}
-		}
 
 		return listAdapter;
 	}
@@ -213,8 +211,12 @@ public class MapMarkerDialogHelper {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									listAdapter.notifyDataSetInvalidated();
-									app.getMapMarkersHelper().removeMarkersHistory();
-									reloadListAdapter(listAdapter);
+									markersHelper.removeMarkersHistory();
+									if (markersHelper.getActiveMapMarkers().size() == 0) {
+										mapActivity.getDashboard().hideDashboard();
+									} else {
+										reloadListAdapter(listAdapter);
+									}
 								}
 							})
 							.setNegativeButton(R.string.shared_string_no, null)
@@ -226,8 +228,12 @@ public class MapMarkerDialogHelper {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									listAdapter.notifyDataSetInvalidated();
-									app.getMapMarkersHelper().removeActiveMarkers();
-									reloadListAdapter(listAdapter);
+									markersHelper.removeActiveMarkers();
+									if (markersHelper.getMapMarkersHistory().size() == 0) {
+										mapActivity.getDashboard().hideDashboard();
+									} else {
+										reloadListAdapter(listAdapter);
+									}
 								}
 							})
 							.setNegativeButton(R.string.shared_string_no, null)
@@ -244,7 +250,7 @@ public class MapMarkerDialogHelper {
 
 	protected View updateMapMarkerItemView(View v, final MapMarker marker) {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
-			v = mapActivity.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
+			v = mapActivity.getLayoutInflater().inflate(R.layout.map_marker_item, null);
 		}
 		updateMapMarkerInfoView(v, marker);
 		final View more = v.findViewById(R.id.all_points);
@@ -260,20 +266,56 @@ public class MapMarkerDialogHelper {
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		if (!marker.history) {
-			((ImageView) localView.findViewById(R.id.waypoint_icon))
-					.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
-			AndroidUtils.setTextPrimaryColor(mapActivity, text, nightMode);
-			textDist.setTextColor(mapActivity.getResources().getColor(R.color.color_myloc_distance));
+		ImageView arrow = (ImageView) localView.findViewById(R.id.direction);
+		ImageView waypointIcon = (ImageView) localView.findViewById(R.id.waypoint_icon);
+		TextView waypointDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
+		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
+		if (text == null || textDist == null || arrow == null || waypointIcon == null
+				|| waypointDeviation == null || descText == null) {
+			return;
+		}
+		float[] mes = new float[2];
+		if (loc != null && marker.point != null) {
+			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
+		}
+		boolean newImage = false;
+		int arrowResId = R.drawable.ic_destination_arrow_white;
+		DirectionDrawable dd;
+		if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
+			newImage = true;
+			dd = new DirectionDrawable(mapActivity, arrow.getWidth(), arrow.getHeight());
 		} else {
-			((ImageView) localView.findViewById(R.id.waypoint_icon))
-					.setImageDrawable(app.getIconsCache()
-							.getContentIcon(R.drawable.ic_action_flag_dark, !nightMode));
+			dd = (DirectionDrawable) arrow.getDrawable();
+		}
+		if (!marker.history) {
+			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
+		} else {
+			dd.setImage(arrowResId, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light);
+		}
+		if (loc == null || heading == null || marker.point == null) {
+			dd.setAngle(0);
+		} else {
+			dd.setAngle(mes[1] - heading + 180 + screenOrientation);
+		}
+		if (newImage) {
+			arrow.setImageDrawable(dd);
+		}
+		arrow.setVisibility(View.VISIBLE);
+		arrow.invalidate();
+
+		if (!marker.history) {
+			waypointIcon.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
+			AndroidUtils.setTextPrimaryColor(mapActivity, text, nightMode);
+			textDist.setTextColor(mapActivity.getResources()
+					.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
+		} else {
+			waypointIcon.setImageDrawable(app.getIconsCache()
+					.getContentIcon(R.drawable.ic_action_flag_dark, !nightMode));
 			AndroidUtils.setTextSecondaryColor(mapActivity, text, nightMode);
 			AndroidUtils.setTextSecondaryColor(mapActivity, textDist, nightMode);
 		}
 
-		int dist = marker.dist;
+		int dist = (int) mes[0];
 
 		//if (dist > 0) {
 		textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
@@ -281,7 +323,7 @@ public class MapMarkerDialogHelper {
 		//	textDist.setText("");
 		//}
 
-		localView.findViewById(R.id.waypoint_deviation).setVisibility(View.GONE);
+		waypointDeviation.setVisibility(View.GONE);
 
 		String descr;
 		PointDescription pd = marker.getPointDescription(app);
@@ -296,10 +338,9 @@ public class MapMarkerDialogHelper {
 		}
 		text.setText(descr);
 
-		localView.findViewById(R.id.waypoint_desc_text).setVisibility(View.GONE);
+		descText.setVisibility(View.GONE);
 		/*
 		String pointDescription = "";
-		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
 		if (descText != null) {
 			AndroidUtils.setTextSecondaryColor(this, descText, nightMode);
 			pointDescription = marker.getPointDescription(this).getTypeName();
@@ -315,6 +356,44 @@ public class MapMarkerDialogHelper {
 			descText.setText(pointDescription);
 		}
 		*/
+	}
+
+	protected void updateMapMarkerArrowDistanceView(View localView, final MapMarker marker) {
+		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
+		ImageView arrow = (ImageView) localView.findViewById(R.id.direction);
+		if (textDist == null || arrow == null) {
+			return;
+		}
+		float[] mes = new float[2];
+		if (loc != null && marker.point != null) {
+			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
+		}
+		boolean newImage = false;
+		int arrowResId = R.drawable.ic_destination_arrow_white;
+		DirectionDrawable dd;
+		if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
+			newImage = true;
+			dd = new DirectionDrawable(mapActivity, arrow.getWidth(), arrow.getHeight());
+		} else {
+			dd = (DirectionDrawable) arrow.getDrawable();
+		}
+		if (!marker.history) {
+			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
+		} else {
+			dd.setImage(arrowResId, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light);
+		}
+		if (loc == null || heading == null || marker.point == null) {
+			dd.setAngle(0);
+		} else {
+			dd.setAngle(mes[1] - heading + 180 + screenOrientation);
+		}
+		if (newImage) {
+			arrow.setImageDrawable(dd);
+		}
+		arrow.invalidate();
+
+		int dist = (int) mes[0];
+		textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 	}
 
 	public void showOnMap(MapMarker marker) {
@@ -343,8 +422,9 @@ public class MapMarkerDialogHelper {
 		}
 		return str;
 	}
-	
+
 	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
+		reloading = true;
 		listAdapter.setNotifyOnChange(false);
 		listAdapter.clear();
 		List<Object> objects = getListObjects();
@@ -355,6 +435,7 @@ public class MapMarkerDialogHelper {
 			((StableArrayAdapter) listAdapter).updateObjects(objects, getActiveObjects(objects));
 		}
 		listAdapter.notifyDataSetChanged();
+		reloading = false;
 	}
 
 	public void calcDistance(LatLon anchor, List<MapMarker> markers) {
@@ -366,7 +447,6 @@ public class MapMarkerDialogHelper {
 
 	protected List<Object> getListObjects() {
 		final List<Object> objects = new ArrayList<>();
-		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 
 		LatLon mapLocation =
 				new LatLon(mapActivity.getMapView().getLatitude(), mapActivity.getMapView().getLongitude());
@@ -412,20 +492,78 @@ public class MapMarkerDialogHelper {
 	}
 
 	public static Drawable getMapMarkerIcon(OsmandApplication app, int colorIndex) {
-		IconsCache iconsCache = app.getIconsCache();
+		int colorId;
 		switch (colorIndex) {
 			case 0:
-				return iconsCache.getIcon(R.drawable.map_marker_blue);
+				colorId = R.color.marker_blue;
+				break;
 			case 1:
-				return iconsCache.getIcon(R.drawable.map_marker_green);
+				colorId = R.color.marker_green;
+				break;
 			case 2:
-				return iconsCache.getIcon(R.drawable.map_marker_orange);
+				colorId = R.color.marker_orange;
+				break;
 			case 3:
-				return iconsCache.getIcon(R.drawable.map_marker_red);
+				colorId = R.color.marker_red;
+					break;
 			case 4:
-				return iconsCache.getIcon(R.drawable.map_marker_yellow);
+				colorId = R.color.marker_lt_green;
+				break;
 			default:
-				return iconsCache.getIcon(R.drawable.map_marker_blue);
+				colorId = R.color.marker_blue;
 		}
+		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, colorId);
+	}
+
+	public void updateLocation(ListView listView, boolean compassChanged) {
+		if ((compassChanged && !mapActivity.getDashboard().isMapLinkedToLocation())
+				|| reloading || System.currentTimeMillis() - lastUpdateTime < 100) {
+			return;
+		}
+
+		lastUpdateTime = System.currentTimeMillis();
+
+		try {
+			calculateLocationParams();
+
+			for (int i = listView.getFirstVisiblePosition(); i <= listView.getLastVisiblePosition(); i++) {
+				Object obj = listView.getItemAtPosition(i);
+				View v = listView.getChildAt(i - listView.getFirstVisiblePosition());
+				if (obj instanceof MapMarker && v != null) {
+					updateMapMarkerArrowDistanceView(v, (MapMarker) obj);
+				}
+			}
+		} catch (Exception e) {
+		}
+	}
+
+	public void updateMarkerView(ListView listView, MapMarker marker) {
+		try {
+			for (int i = listView.getFirstVisiblePosition(); i <= listView.getLastVisiblePosition(); i++) {
+				Object obj = listView.getItemAtPosition(i);
+				View v = listView.getChildAt(i - listView.getFirstVisiblePosition());
+				if (obj == marker) {
+					updateMapMarkerInfoView(v, (MapMarker) obj);
+				}
+			}
+		} catch (Exception e) {
+		}
+	}
+
+	private void calculateLocationParams() {
+		DashboardOnMap d = mapActivity.getDashboard();
+		if (d == null) {
+			return;
+		}
+
+		float head = d.getHeading();
+		float mapRotation = d.getMapRotation();
+		LatLon mw = d.getMapViewLocation();
+		Location l = d.getMyLocation();
+		boolean mapLinked = d.isMapLinkedToLocation() && l != null;
+		LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
+		useCenter = !mapLinked;
+		loc = (useCenter ? mw : myLoc);
+		heading = useCenter ? -mapRotation : head;
 	}
 }

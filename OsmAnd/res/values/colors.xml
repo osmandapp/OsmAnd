@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="marker_blue">#2196f3</color>
+	<color name="marker_green">#73b825</color>
+	<color name="marker_orange">#ff9800</color>
+	<color name="marker_red">#e53935</color>
+	<color name="marker_lt_green">#d7eb23</color>
+
 	<color name="popup_bg_color">#EE666666</color>
 	<color name="popup_separator_color">#BBBBBB</color>
 	<color name="popup_text_color">#FFFFFF</color>
