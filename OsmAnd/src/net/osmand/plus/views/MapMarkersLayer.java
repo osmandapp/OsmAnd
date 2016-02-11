@@ -5,18 +5,24 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+	protected final static int DIST_TO_SHOW = 80;
+
 	private final MapActivity map;
 	private OsmandMapTileView view;
 
@@ -26,6 +32,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 	private Bitmap markerBitmapOrange;
 	private Bitmap markerBitmapRed;
 	private Bitmap markerBitmapYellow;
+
+	private Paint bitmapPaintDestBlue;
+	private Paint bitmapPaintDestGreen;
+	private Paint bitmapPaintDestOrange;
+	private Paint bitmapPaintDestRed;
+	private Paint bitmapPaintDestLtGreen;
+	private Bitmap arrowToDestination;
+	private float[] calculations = new float[2];
 
 	public MapMarkersLayer(MapActivity map) {
 		this.map = map;
@@ -41,6 +55,40 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		markerBitmapOrange = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_orange);
 		markerBitmapRed = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
 		markerBitmapYellow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_yellow);
+
+		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
+		bitmapPaintDestBlue = createPaintDest(R.color.marker_blue);
+		bitmapPaintDestGreen = createPaintDest(R.color.marker_green);
+		bitmapPaintDestOrange = createPaintDest(R.color.marker_orange);
+		bitmapPaintDestRed = createPaintDest(R.color.marker_red);
+		bitmapPaintDestLtGreen = createPaintDest(R.color.marker_lt_green);
+	}
+
+	private Paint createPaintDest(int colorId) {
+		Paint paint = new Paint();
+		paint.setDither(true);
+		paint.setAntiAlias(true);
+		paint.setFilterBitmap(true);
+		int color = map.getResources().getColor(colorId);
+		paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+		return paint;
+	}
+
+	private Paint getMarkerDestPaint(int colorIndex) {
+		switch (colorIndex) {
+			case 0:
+				return bitmapPaintDestBlue;
+			case 1:
+				return bitmapPaintDestGreen;
+			case 2:
+				return bitmapPaintDestOrange;
+			case 3:
+				return bitmapPaintDestRed;
+			case 4:
+				return bitmapPaintDestLtGreen;
+			default:
+				return bitmapPaintDestBlue;
+		}
 	}
 
 	private Bitmap getMapMarkerBitmap(int colorIndex) {
@@ -72,6 +120,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 			return;
 		}
 
+		List<MapMarker> hiddenMarkers = new ArrayList<>();
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		for (MapMarker marker : markersHelper.getActiveMapMarkers()) {
 			if (isLocationVisible(tb, marker)) {
@@ -83,6 +132,24 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
 				canvas.drawBitmap(bmp, locationX - marginX, locationY - marginY, bitmapPaint);
 				canvas.rotate(tb.getRotate(), locationX, locationY);
+			} else {
+				hiddenMarkers.add(marker);
+			}
+		}
+
+		for (MapMarker marker : hiddenMarkers) {
+			boolean show = true;
+			if (show) {
+				canvas.save();
+				net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(),
+						marker.getLatitude(), marker.getLongitude(), calculations);
+				float bearing = calculations[1] - 90;
+				float radiusBearing = DIST_TO_SHOW * tb.getDensity();
+				final QuadPoint cp = tb.getCenterPixelPoint();
+				canvas.rotate(bearing, cp.x, cp.y);
+				canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
+				canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
+				canvas.restore();
 			}
 		}
 	}
