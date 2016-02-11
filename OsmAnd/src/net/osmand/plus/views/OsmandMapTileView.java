@@ -595,24 +595,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else if (multiTouchSupport.isInZoomMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
 		} else if (doubleTapScaleDetector.isInZoomMode()) {
-			drawScale(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
+			drawMapPosition(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
 		}
 	}
 
 	protected void drawMapPosition(Canvas canvas, float x, float y) {
 		canvas.drawCircle(x, y, 3 * dm.density, paintCenter);
 		canvas.drawCircle(x, y, 7 * dm.density, paintCenter);
-	}
-
-	protected void drawScale(Canvas canvas, float x, float y) {
-		float height = displayHeightPx / 2;
-		float width = height / 40;
-		canvas.drawLine(x, y + height, x, y - height, paintCenter);
-		for (int i = 0; i < DoubleTapScaleDetector.SCALE_PER_SCREEN; i++) {
-			float deltaY = displayHeightPx / DoubleTapScaleDetector.SCALE_PER_SCREEN;
-			float markY = y - height + deltaY * i;
-			canvas.drawLine(x - width, markY, x + width, markY, paintCenter);
-		}
 	}
 
 	private void refreshBufferImage(final DrawSettings drawSettings) {

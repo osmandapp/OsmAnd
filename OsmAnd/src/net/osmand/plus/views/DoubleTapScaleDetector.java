@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
@@ -35,9 +37,14 @@ public class DoubleTapScaleDetector {
 	public DoubleTapScaleDetector(Activity ctx, DoubleTapZoomListener listener) {
 		this.ctx = ctx;
 		this.listener = listener;
-		Point size = new Point();
-		ctx.getWindowManager().getDefaultDisplay().getSize(size);
-		displayHeightPx = size.y;
+		Display defaultDisplay = ctx.getWindowManager().getDefaultDisplay();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+			Point size = new Point();
+			defaultDisplay.getSize(size);
+			displayHeightPx = size.y;
+		} else {
+			displayHeightPx = defaultDisplay.getHeight();
+		}
 		final ViewConfiguration configuration = ViewConfiguration.get(ctx);
 		int doubleTapSlop = configuration.getScaledTouchSlop();
 		mDoubleTapSlopSquare = doubleTapSlop * doubleTapSlop;
