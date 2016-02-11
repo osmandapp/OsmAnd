@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -615,7 +615,7 @@
     <string name="left_side_navigation">Conducción por la izquierda</string>
     <string name="left_side_navigation_descr">Seleccione en países con tráfico por la izquierda</string>
     <string name="unknown_from_location">Todavía no se determinó el punto de partida</string>
-    <string name="confirm_interrupt_download">¿Quiere interrumpir la descarga de archivos?</string>
+    <string name="confirm_interrupt_download">"¿Quieres  cancelar la descarga del archivo?"</string>
     <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
     <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para seleccionar diferentes fuentes de mapas</string>
     <string name="map_online_data">Mapas en línea y teselas</string>
@@ -857,7 +857,7 @@
     <string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
-    <string name="background_service_is_enabled_question">El servicio de fondo de OsmAnd aún está funcionando. ¿También quiere interrumpirlo?</string>
+    <string name="background_service_is_enabled_question">El servicio de fondo de OsmAnd aún está funcionando. ¿Quieres pararlo también?</string>
     <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (utilizando código Android más lento en lugar del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
@@ -1448,10 +1448,10 @@
     <string name="osmo_start_service">Servicio OsMo</string>
     <string name="osmo_gpx_track_downloaded">Traza OsMo %1$s descargada.</string>
     <string name="keep_navigation_service">Mantener</string>
-    <string name="stop_navigation_service">Interrumpir</string>
+    <string name="stop_navigation_service">Parar</string>
     <string name="enable_sleep_mode">Activa el modo de fondo del GPS</string>
     <string name="gps_wake_up_timer">Intervalo de activación del GPS</string>
-    <string name="sleep_mode_stop_dialog">¿Interrumpir el modo de fondo del GPS?</string>
+    <string name="sleep_mode_stop_dialog">¿Parar el modo de GPS de fondo?</string>
     <string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
@@ -2064,4 +2064,5 @@
     <string name="find_parking">Encontrar un aparcamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
     <string name="underlay_transparency">Transparencia de subyacente</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas MTB</string>
     </resources>
