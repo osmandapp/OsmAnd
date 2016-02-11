@@ -441,7 +441,7 @@
   <string name="gpx_files_not_found">Geen GPX-bestanden gevonden in de tracks-map</string>
   <string name="layer_gpx_layer">GPX-track…</string>
   <string name="error_reading_gpx">Fout bij het lezen van GPX-gegevens</string>
-  <string name="vector_data">Offline vectorkaarten</string>
+  <string name="vector_data">OsmAnd Offline vectorkaart</string>
   <string name="transport_context_menu">Zoek Openbaar Vervoer op halte</string>
   
   
@@ -470,7 +470,7 @@
   <string name="layer_osm_bugs">OSM-Opmerkingen (online)</string>
   <string name="layer_transport">OV-haltes</string>
   <string name="layer_poi">Interessepunt…</string>
-  <string name="layer_map">Kaartbron…</string>
+  <string name="layer_map">Basiskaart…</string>
   <string name="menu_layers">Kaartlagen</string>
   <string name="context_menu_item_search_poi">Zoek Interessepunt</string>
   
@@ -1995,7 +1995,7 @@
 	<string name="shared_string_undo">Ongedaan maken</string>
 	<string name="shared_string_skip">Overslaan</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="offline_maps_and_navigation">Offline kaarten\nen navigatie</string>
+	<string name="offline_maps_and_navigation">Offline Kaarten\n&amp; Navigatie</string>
 	<string name="commit_poi">POI vastleggen</string>
 	<string name="tab_title_basic">Basis</string>
 	<string name="tab_title_advanced">Geavanceerd</string>
@@ -2179,7 +2179,8 @@
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Wijzigingen opslaan</string>
     <string name="shared_string_email_address">Emailadres</string>
-    <string name="show_polygons">Toon polygonen</string>
+    <string name="show_polygons">Toon vlakken van vectorkaart</string>
     <string name="underlay_transparency">Underlay transparantie</string>
     <string name="find_parking">Zoek parkeerplaats</string>
+    <string name="rendering_attr_showMtbRoutes_name">Toon MTB-routes</string>
     </resources>
