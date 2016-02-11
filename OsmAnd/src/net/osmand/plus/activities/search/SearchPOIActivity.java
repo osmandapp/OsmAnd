@@ -316,12 +316,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 	
 	private void changeFilter(CharSequence s) {
+		String queue = s.toString().trim();
 		// if (!isNameSearch() ) {
-		amenityAdapter.getFilter().filter(s);
+		amenityAdapter.getFilter().filter(queue);
 		String cfilter = filter == null || filter.getFilterByName() == null  ? "" : 
 			filter.getFilterByName().toLowerCase();
-		if(!isNameSearch() && !s.toString().toLowerCase().startsWith(cfilter)) {
-			filter.setFilterByName(s.toString());
+		if(!isNameSearch() && !queue.toString().toLowerCase().startsWith(cfilter)) {
+			filter.setFilterByName(queue.toString());
 			runNewSearchQuery(location, SEARCH_AGAIN);
 		}
 		updateButtonState();

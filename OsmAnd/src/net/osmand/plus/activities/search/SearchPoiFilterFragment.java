@@ -157,8 +157,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 					filters.add(pf);
 				}
 			}
-			List<AbstractPoiType> res = 
-					app.getPoiTypes().getAllTypesTranslatedNames(new CollatorStringMatcher(s, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+			List<AbstractPoiType> res = app.getPoiTypes().getAllTypesTranslatedNames(
+					new CollatorStringMatcher(s, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 			final Collator inst = Collator.getInstance();
 			Collections.sort(res, new Comparator<AbstractPoiType>() {
 				@Override
