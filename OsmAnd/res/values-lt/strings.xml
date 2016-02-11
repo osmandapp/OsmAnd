@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
@@ -2110,4 +2110,8 @@
     <string name="rendering_attr_hideUnderground_name">Slėpti požeminius objektus</string>
     <string name="data_is_not_available">Duomenys nepasiekiami</string>
     <string name="find_parking">Surasti parkavimo vietą</string>
+    <string name="rendering_attr_showMtbRoutes_name">Rodyti MTB maršrutus</string>
+    <string name="road_blocked">Kelias blokuojamas</string>
+    <string name="starting_point">Pradžios taškas</string>
+    <string name="number_of_contributors">Dalyvių skaičius</string>
     </resources>
