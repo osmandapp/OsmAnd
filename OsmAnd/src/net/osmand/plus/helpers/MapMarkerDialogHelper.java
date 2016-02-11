@@ -507,7 +507,13 @@ public class MapMarkerDialogHelper {
 				colorId = R.color.marker_red;
 					break;
 			case 4:
-				colorId = R.color.marker_lt_green;
+				colorId = R.color.marker_yellow;
+				break;
+			case 5:
+				colorId = R.color.marker_teal;
+				break;
+			case 6:
+				colorId = R.color.marker_purple;
 				break;
 			default:
 				colorId = R.color.marker_blue;

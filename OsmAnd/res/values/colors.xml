@@ -5,7 +5,9 @@
 	<color name="marker_green">#73b825</color>
 	<color name="marker_orange">#ff9800</color>
 	<color name="marker_red">#e53935</color>
-	<color name="marker_lt_green">#d7eb23</color>
+	<color name="marker_yellow">#FDD835</color>
+    <color name="marker_teal">#26a69a</color>
+    <color name="marker_purple">#ab47bc</color>
 
 	<color name="popup_bg_color">#EE666666</color>
 	<color name="popup_separator_color">#BBBBBB</color>

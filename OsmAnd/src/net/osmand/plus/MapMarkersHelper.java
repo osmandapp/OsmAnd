@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapMarkersHelper {
-	public static final int MAP_MARKERS_COLORS_COUNT = 5;
+	public static final int MAP_MARKERS_COLORS_COUNT = 7;
 
 	private List<MapMarker> mapMarkers = new ArrayList<>();
 	private List<MapMarker> mapMarkersHistory = new ArrayList<>();

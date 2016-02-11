@@ -32,12 +32,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 	private Bitmap markerBitmapOrange;
 	private Bitmap markerBitmapRed;
 	private Bitmap markerBitmapYellow;
+	private Bitmap markerBitmapTeal;
+	private Bitmap markerBitmapPurple;
 
 	private Paint bitmapPaintDestBlue;
 	private Paint bitmapPaintDestGreen;
 	private Paint bitmapPaintDestOrange;
 	private Paint bitmapPaintDestRed;
-	private Paint bitmapPaintDestLtGreen;
+	private Paint bitmapPaintDestYellow;
+	private Paint bitmapPaintDestTeal;
+	private Paint bitmapPaintDestPurple;
 	private Bitmap arrowToDestination;
 	private float[] calculations = new float[2];
 
@@ -55,13 +59,17 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		markerBitmapOrange = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_orange);
 		markerBitmapRed = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
 		markerBitmapYellow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_yellow);
+		markerBitmapTeal = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
+		markerBitmapPurple = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_green);
 
 		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
 		bitmapPaintDestBlue = createPaintDest(R.color.marker_blue);
 		bitmapPaintDestGreen = createPaintDest(R.color.marker_green);
 		bitmapPaintDestOrange = createPaintDest(R.color.marker_orange);
 		bitmapPaintDestRed = createPaintDest(R.color.marker_red);
-		bitmapPaintDestLtGreen = createPaintDest(R.color.marker_lt_green);
+		bitmapPaintDestYellow = createPaintDest(R.color.marker_yellow);
+		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
+		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
 	}
 
 	private Paint createPaintDest(int colorId) {
@@ -85,7 +93,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 			case 3:
 				return bitmapPaintDestRed;
 			case 4:
-				return bitmapPaintDestLtGreen;
+				return bitmapPaintDestYellow;
+			case 5:
+				return bitmapPaintDestTeal;
+			case 6:
+				return bitmapPaintDestPurple;
 			default:
 				return bitmapPaintDestBlue;
 		}
@@ -103,6 +115,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 				return markerBitmapRed;
 			case 4:
 				return markerBitmapYellow;
+			case 5:
+				return markerBitmapTeal;
+			case 6:
+				return markerBitmapPurple;
 			default:
 				return markerBitmapBlue;
 		}
