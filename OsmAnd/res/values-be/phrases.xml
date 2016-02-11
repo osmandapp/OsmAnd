@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Вінна-гарэлкавая крама</string>
 	<string name="poi_convenience">Крама</string>
@@ -1126,13 +1126,13 @@
 	<string name="poi_lighting_tower">Асвятляльная вежа</string>
 	<string name="poi_rescue_station">Выратавальная станцыя</string>
 
-<string name="poi_traffic_signals_sound_walk">З гукавым сігналам толькі калі пераход дазволены</string>
+<string name="poi_traffic_signals_sound_walk">З гукавым сігналам, калі пераход дазволены</string>
 
 	<string name="poi_traffic_signals_sound_no">Без гукавага сігналу</string>
 	<string name="poi_traffic_signals_sound_yes">З гукавым сігналам</string>
 	<string name="poi_tactile_paving_no">Без тактыльнага пакрыцьця</string>
 	<string name="poi_tactile_paving_yes">З тактыльным пакрыцьцём</string>
-	<string name="poi_toll_hgv_yes">Аплата за праезд спаганяецца з грузавых аўтамабіляў</string>
+	<string name="poi_toll_hgv_yes">Платна для грузавых аўтамабіляў</string>
 	<string name="poi_toll_no">Аплата за праезд не спаганяецца</string>
 	<string name="poi_information_tactile_map">Тактыльныя мапа</string>
 	<string name="poi_board_type_notice">Дошка з аб\'явамі</string>
@@ -1432,4 +1432,95 @@
 	<string name="poi_bridge_car">Аўтамабільны мост</string>
 	<string name="poi_craft_electronics">Рамонт электронікі</string>
 
-</resources>
+<string name="poi_mini_roundabout">Міні кругавы рух</string>
+	<string name="poi_railway_crossing">Чыгуначны пераход</string>
+	<string name="poi_railway_level_crossing">Чыгуначны пераезд</string>
+	<string name="poi_bird_hide">Месца для назіраньня за птушкамі</string>
+	<string name="poi_horse_riding">Язда на конях</string>
+	<string name="poi_leisure_common">Агульнадаступная пляцоўка для адпачынку</string>
+	<string name="poi_windfall">Ветравал</string>
+	<string name="poi_piste_difficulty_easy">Складанасьць трасы: нізкая</string>
+	<string name="poi_piste_difficulty_intermediate">Складанасьць трасы: сярэдняя</string>
+	<string name="poi_piste_difficulty_advanced">Складанасьць трасы: высокая</string>
+	<string name="poi_piste_difficulty_novice">Складанасьць трасы: найпростая</string>
+	<string name="poi_piste_difficulty_expert">Складанасьць трасы: экспэрт</string>
+	<string name="poi_piste_difficulty_freeride">Складанасьць трасы: фрырайд</string>
+	<string name="poi_piste_grooming_classic">Абслугоўваньне трасы: клясіка</string>
+	<string name="poi_piste_grooming_classic_skating">Абслугоўваньне трасы: клясіка+канёк</string>
+	<string name="poi_piste_grooming_backcountry">Абслугоўваньне трасы: крос-кантры</string>
+	<string name="poi_piste_grooming_scooter">Абслугоўваньне трасы: сьнежны скутэр</string>
+	<string name="poi_piste_grooming_skating">Абслугоўваньне трасы: канёк</string>
+	<string name="poi_piste_grooming_no">Абслугоўваньне трасы: няма</string>
+	<string name="poi_piste_grooming_mogul">Абслугоўваньне трасы: могул</string>
+
+	<string name="poi_garden_type_residential">Тып саду: дваровы</string>
+	<string name="poi_garden_type_community">Тып саду: грамадзкі</string>
+	<string name="poi_garden_type_private">Тып саду: прыватны</string>
+	<string name="poi_garden_type_botanical">Тып саду: батанічны</string>
+
+	<string name="poi_garden_style_kitchen">Стыль саду: кухня</string>
+	<string name="poi_garden_style_rosarium">Стыль саду: ружоўнік</string>
+	<string name="poi_garden_style_french">Стыль саду: французкі</string>
+	<string name="poi_garden_style_english">Стыль саду: англійскі</string>
+	<string name="poi_garden_style_japanese">Стыль саду: японскі</string>
+
+	<string name="poi_capacity">Ёмістасьць</string>
+	<string name="poi_capacity_disabled_yes">Месцы для інвалідаў</string>
+	<string name="poi_capacity_disabled_no">Няма выдзеленых месцаў для інвалідаў</string>
+	<string name="poi_capacity_disabled">Месцы для інвалідаў</string>
+	<string name="poi_capacity_women_yes">Месцы для жанчын</string>
+	<string name="poi_capacity_women_no">Няма выдзеленых месцаў для жанчын</string>
+	<string name="poi_capacity_women">Месцы для жанчын</string>
+	<string name="poi_capacity_pupils">Месцы для студэнтаў</string>
+	<string name="poi_capacity_teachers">Месцы для настаўнікаў</string>
+	<string name="poi_capacity_parent_yes">Месцы для бацькоў з дзецьмі</string>
+	<string name="poi_capacity_parent_no">Няма выдзеленых месцаў для бацькоў зь дзецьмі</string>
+	<string name="poi_capacity_parent">Месцы для бацькоў зь дзецьмі</string>
+
+	<string name="poi_aerialway_occupancy">Ёмістасьць кабінкі</string>
+	<string name="poi_aerialway_capacity">Прапускная здольнасьць, у гадзіну</string>
+	<string name="poi_aerialway_duration">Сярэдні час руху, хвілін</string>
+	<string name="poi_aerialway_bubble_yes">Шкленьне</string>
+	<string name="poi_payment_coins_yes">Прымаюцца манэты</string>
+	<string name="poi_payment_coins_no">Манэты не прымаюцца</string>
+	<string name="poi_payment_coins_0.5">Прымаюцца манэты па $ 0.5</string>
+	<string name="poi_payment_coins_50c12">Прымаюцца манэты па 50c, 1€ і 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Прымаюцца тэлефонныя карткі</string>
+	<string name="poi_payment_telephone_cards_no">Тэлефонныя карткі не прымаюцца</string>
+	<string name="poi_payment_credit_cards_yes">Прымаюцца крэдытныя карткі</string>
+	<string name="poi_payment_credit_cards_no">Крэдытныя карткі не прымаюцца</string>
+	<string name="poi_payment_notes_yes">Прымаюцца банкноты</string>
+	<string name="poi_payment_notes_no">Банкноты не прымаюцца</string>
+	<string name="poi_payment_electronic_purses_yes">Прымаюцца электронныя кашалькі</string>
+	<string name="poi_payment_electronic_purses_no">Электронныя кашалькі не прымаюцца</string>
+	<string name="poi_payment_cash_yes">Прымаюцца наяўныя</string>
+	<string name="poi_payment_cash_no">Наяўныя не прымаюцца</string>
+	<string name="poi_payment_debit_cards_yes">Прымаюцца дэбетавыя карткі</string>
+	<string name="poi_payment_debit_cards_no">Дэбетавыя карткі не прымаюцца</string>
+	<string name="poi_payment_bitcoin_yes">Прымаюцца біткойны</string>
+	<string name="poi_payment_bitcoin_no">Біткойны не прымаюцца</string>
+	<string name="poi_payment_visa_yes">Прымаюцца карткі Visa</string>
+	<string name="poi_payment_visa_no">Карткі Visa не прымаюцца</string>
+	<string name="poi_payment_mastercard_yes">Прымаюцца карткі MasterCard</string>
+	<string name="poi_payment_mastercard_no">Карткі MasterCard не прымаюцца</string>
+	<string name="poi_payment_none">Бясплатна</string>
+	<string name="poi_payment_maestro_yes">Прымаюцца карткі Maestro</string>
+	<string name="poi_payment_maestro_no">Карткі Maestro не прымаюцца</string>
+	<string name="poi_payment_american_express_yes">Прымаюцца карткі American Express (AMEX)</string>
+	<string name="poi_payment_american_express_no">Карткі American Express (AMEX) не прымаюцца</string>
+	<string name="poi_payment_diners_club_yes">Прымаюцца карткі Diners Club</string>
+	<string name="poi_payment_diners_club_no">Карткі Diners Club не прымаюцца</string>
+	<string name="poi_payment_dkv_yes">Прымаюцца DKV</string>
+	<string name="poi_payment_dkv_no">DKV не прымаюцца</string>
+	<string name="poi_payment_uta_yes">Прымаюцца карткі UTA</string>
+	<string name="poi_payment_uta_no">Карткі UTA не прымаюцца</string>
+	<string name="poi_diet_vegan_no">Веганскае харчаваньне не прапануецца</string>
+	<string name="poi_diet_gluten_free_only">Толькі безглютэнавае харчаваньне</string>
+	<string name="poi_diet_gluten_free_yes">Безглютэнавае харчаванне</string>
+	<string name="poi_resource_stone">Камень (рэсурс)</string>
+	<string name="poi_resource_uranium">Уран</string>
+	<string name="poi_resource_water">Вада (рэсурс)</string>
+	<string name="poi_resource_zinc">Цынк</string>
+	<string name="poi_resource_zircon">Цыркон</string>
+
+	</resources>
