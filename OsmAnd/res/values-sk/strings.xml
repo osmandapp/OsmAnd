@@ -1940,4 +1940,5 @@
     <string name="find_parking">Nájsť parkovanie</string>
     <string name="show_polygons">Zobraziť polygóny</string>
     <string name="underlay_transparency">Priehľadnosť v podkladovej vrstve</string>
+    <string name="rendering_attr_showMtbRoutes_name">Zobraziť trasy pre horské bicykle</string>
     </resources>
