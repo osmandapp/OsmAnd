@@ -44,13 +44,13 @@ public class RasterMapMenu {
 			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
 			mapTypeString = R.string.map_overlay;
-			mapTypeString = R.string.overlay_transparency;
+			mapTypeStringTransparency = R.string.overlay_transparency;
 		} else if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY){
 			rasterMapLayer = plugin.getUnderlayLayer();
 			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
 			mapTypePreference = settings.MAP_UNDERLAY;
 			mapTypeString = R.string.map_underlay;
-			mapTypeString = R.string.map_transparency;
+			mapTypeStringTransparency = R.string.map_transparency;
 		} else {
 			throw new RuntimeException("Unexpected raster map type");
 		}
