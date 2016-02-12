@@ -122,7 +122,7 @@ public class AlarmInfo implements LocationPoint {
 			return Integer.MAX_VALUE;
 		}
 		// 1 level of priorities
-		if (time < 8 || distance < 100 || type == AlarmInfoType.SPEED_LIMIT) {
+		if (time < 6 || distance < 75 || type == AlarmInfoType.SPEED_LIMIT) {
 			return type.getPriority();
 		}
 		if (type == AlarmInfoType.SPEED_CAMERA && (time < 15 || distance < 150)) {
