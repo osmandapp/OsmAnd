@@ -97,7 +97,7 @@ public class RasterMapMenu {
 					}
 				};
 		// android:max="255" in layout is expected
-		// Please note this does not modify the transparency of the underlay map, but of the base map, of course!
+		// FIXME: For case of "Overlay menu" string needs to display overlay_transparency, for case of "Underlay menu" string needs to be map_transparency, as this then modifies the base map transparency, of course!
 		contextMenuAdapter.item(R.string.map_transparency).layout(R.layout.progress_list_item)
 				.progress(mapTransparencyPreference.get()).listenInteger(integerListener).reg();
 		contextMenuAdapter.item(mapTypeString).layout(R.layout.two_line_list_item).description(mapTypePreference.get()).reg();
