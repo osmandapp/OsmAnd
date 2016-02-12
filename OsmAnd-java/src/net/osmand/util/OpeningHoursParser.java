@@ -2,11 +2,13 @@ package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
 import java.io.Serializable;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Locale;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -18,9 +20,20 @@ import gnu.trove.list.array.TIntArrayList;
  * if the OSM feature is open at a certain time.
  */
 public class OpeningHoursParser {
-	private static final String[] daysStr = new String[]{"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+	private static final String[] daysStr;
+	private static final String[] localDaysStr;
+	private static final String[] monthsStr;
+	private static final String[] localMothsStr;
 
-	private static final String[] monthsStr = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	static {
+		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
+		monthsStr = dateFormatSymbols.getShortMonths();
+		daysStr = getTwoLettersStringArray(dateFormatSymbols.getShortWeekdays());
+		dateFormatSymbols = DateFormatSymbols.getInstance();
+		localMothsStr = dateFormatSymbols.getShortMonths();
+		localDaysStr = getTwoLettersStringArray(dateFormatSymbols.getShortWeekdays());
+	}
+
 	/**
 	 * Default values for sunrise and sunset. Might be computed afterwards, not final.
 	 */
@@ -33,6 +46,33 @@ public class OpeningHoursParser {
 	 * OsmAnd needs to show a value, so there is some arbitrary default value chosen.
 	 */
 	private static String endOfDay = "24:00";
+
+	private static String[] getTwoLettersStringArray(String[] strings) {
+		String[] newStrings = new String[strings.length];
+		for (int i = 0; i < strings.length; i++) {
+			if (strings[i] != null) {
+				if (strings[i].length() > 2) {
+					newStrings[i] = strings[i].substring(0, 2);
+				} else {
+					newStrings[i] = strings[i];
+				}
+			}
+		}
+		return newStrings;
+	}
+
+	private static int getDayIndex(int i) {
+		switch (i) {
+			case 0: return Calendar.MONDAY;
+			case 1: return Calendar.TUESDAY;
+			case 2: return Calendar.WEDNESDAY;
+			case 3: return Calendar.THURSDAY;
+			case 4: return Calendar.FRIDAY;
+			case 5: return Calendar.SATURDAY;
+			case 6: return Calendar.SUNDAY;
+			default: return -1;
+		}
+	}
 
 	/**
 	 * This class contains the entire OpeningHours schema and
@@ -164,6 +204,18 @@ public class OpeningHoursParser {
 			return s.substring(0, s.length() - 2);
 		}
 
+		public String toLocalStringNoMonths() {
+			StringBuilder s = new StringBuilder();
+			if (rules.isEmpty()) {
+				return "";
+			}
+
+			for (OpeningHoursRule r : rules) {
+				s.append(r.toLocalRuleString()).append("; ");
+			}
+
+			return s.substring(0, s.length() - 2);
+		}
 	}
 
 	/**
@@ -210,6 +262,8 @@ public class OpeningHoursParser {
 
 
 		public String toRuleString(boolean avoidMonths);
+
+		public String toLocalRuleString();
 	}
 
 	/**
@@ -466,6 +520,10 @@ public class OpeningHoursParser {
 
 		@Override
 		public String toRuleString(boolean avoidMonths) {
+			return toRuleString(avoidMonths, daysStr, monthsStr);
+		}
+
+		private String toRuleString(boolean avoidMonths, String[] dayNames, String[] monthNames) {
 			StringBuilder b = new StringBuilder(25);
 			// Month
 			boolean dash = false;
@@ -485,7 +543,7 @@ public class OpeningHoursParser {
 						} else if (!dash) {
 							b.append(", "); //$NON-NLS-1$
 						}
-						b.append(monthsStr[i]);
+						b.append(monthNames[i]);
 						dash = false;
 					}
 				}
@@ -501,7 +559,7 @@ public class OpeningHoursParser {
 					break;
 				}
 			}
-			appendDaysString(b);
+			appendDaysString(b, dayNames);
 			// Time
 			if (startTimes == null || startTimes.size() == 0) {
 				b.append(" off ");
@@ -527,11 +585,20 @@ public class OpeningHoursParser {
 		}
 
 		@Override
+		public String toLocalRuleString() {
+			return toRuleString(true, localDaysStr, localMothsStr);
+		}
+
+		@Override
 		public String toString() {
 			return toRuleString(false);
 		}
 
 		public void appendDaysString(StringBuilder builder) {
+			appendDaysString(builder, daysStr);
+		}
+
+		public void appendDaysString(StringBuilder builder, String[] daysNames) {
 			boolean dash = false;
 			boolean first = true;
 			for (int i = 0; i < 7; i++) {
@@ -548,7 +615,7 @@ public class OpeningHoursParser {
 					} else if (!dash) {
 						builder.append(", "); //$NON-NLS-1$
 					}
-					builder.append(daysStr[i]);
+					builder.append(daysNames[getDayIndex(i)]);
 					dash = false;
 				}
 			}
@@ -612,6 +679,11 @@ public class OpeningHoursParser {
 		@Override
 		public String toRuleString(boolean avoidMonths) {
 			return ruleString;
+		}
+
+		@Override
+		public String toLocalRuleString() {
+			return toRuleString(false);
 		}
 
 		@Override
@@ -891,7 +963,7 @@ public class OpeningHoursParser {
 	 */
 	private static void testOpened(String time, OpeningHours hours, boolean expected) throws ParseException {
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(time));
+		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US).parse(time));
 		boolean calculated = hours.isOpenedForTime(cal);
 		System.out.printf("  %sok: Expected %s: %b = %b (rule %s)\n",
 				((calculated != expected) ? "NOT " : ""), time, expected, calculated, hours.getCurrentRuleTime(cal));
@@ -902,7 +974,7 @@ public class OpeningHoursParser {
 
 	private static void testParsedAndAssembledCorrectly(String timeString, OpeningHours hours) {
 		String assembledString = hours.toStringNoMonths();
-		boolean isCorrect = assembledString.equals(timeString);
+		boolean isCorrect = assembledString.equalsIgnoreCase(timeString);
 		System.out.printf("  %sok: Expected: \"%s\" got: \"%s\"\n",
 				(isCorrect ? "NOT " : ""), timeString, assembledString);
 		if (!isCorrect) {
