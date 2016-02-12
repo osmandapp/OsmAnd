@@ -14,10 +14,12 @@ import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.InputDevice;
@@ -233,9 +235,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
 
-		Point size = new Point();
-		ctx.getWindowManager().getDefaultDisplay().getSize(size);
-		displayHeightPx = size.y;
+		Display defaultDisplay = ctx.getWindowManager().getDefaultDisplay();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+			Point size = new Point();
+			defaultDisplay.getSize(size);
+			displayHeightPx = size.y;
+		} else {
+			displayHeightPx = defaultDisplay.getHeight();
+		}
 	}
 
 	public void setView(View view) {
