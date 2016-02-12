@@ -154,7 +154,7 @@
   <string name="live_monitoring_interval">Інтервал надсилання даних</string>
   <string name="live_monitoring_url_descr">Вкажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
-  <string name="gpx_monitoring_disabled_warn">Записувати треки використовуючи GPX віджет або вибравши „Запис поїздки“ в Налаштуваннях.</string>
+  <string name="gpx_monitoring_disabled_warn">Записувати треки, використовуючи GPX віджет або вибравши «Запис подорожей» в Налаштуваннях.</string>
   <string name="show_current_gpx_title">Відображати пройдений шлях</string>
   <string name="free_version_message">Безкоштовна версія OsmAnd обмежена %1$s завантаженнями і не підтримує геостатті з Вікіпедії.</string>
   <string name="free_version_title">Безкоштовна версія</string>
@@ -2231,7 +2231,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="impassable_road_desc">Виберіть дороги, яких ви бажаєте уникати під час навігації</string>
     <string name="shared_string_sound">Звук</string>
     <string name="poi_deleted_localy">POI буде видалено після того, як ви завантажите ваші зміни</string>
-    <string name="confirm_download_roadmaps">Ви впевнені, що бажаєте завантажити карти доріг при наяаності стандартної (повної) мапи?</string>
+    <string name="confirm_download_roadmaps">Ви впевнені, що бажаєте завантажити карти доріг при наявності стандартної (повної) мапи?</string>
     <string name="missing_write_external_storage_permission">Додаток не має дозволу для запису на SD-карту</string>
     <string name="last_update">Останнє оновлення: %s</string>
     <string name="last_map_change">Остання зміна мапи: %s</string>
@@ -2277,4 +2277,6 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="dashboard_or_drawer_title">Стільниця або меню керування</string>
     <string name="live_update">Оновлення</string>
     <string name="reports_for">Відзвітувати</string>
-</resources>
+<string name="rendering_attr_showMtbRoutes_name">Відображати MTB-маршрути</string>
+    <string name="show_on_start_description">Якщо вимкнено, при запуску відразу відображає екран мапи</string>
+    </resources>
