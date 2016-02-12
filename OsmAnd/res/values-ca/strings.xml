@@ -1932,4 +1932,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="show_polygons">Mostra els polígons</string>
     <string name="underlay_transparency">Transparència de la capa inferior</string>
     <string name="find_parking">Troba un aparcament</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mostra les rutes BTT</string>
     </resources>
