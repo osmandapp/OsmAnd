@@ -297,13 +297,6 @@
                         android:background="?attr/dashboard_button"
                         android:src="@drawable/ic_action_done"/>
 
-                    <ImageButton
-                        android:id="@+id/marker_btn_more_2nd"
-                        android:layout_width="50dp"
-                        android:layout_height="48dp"
-                        android:background="?attr/dashboard_button"
-                        android:src="@drawable/ic_overflow_menu_white"/>
-
                 </LinearLayout>
 
             </FrameLayout>

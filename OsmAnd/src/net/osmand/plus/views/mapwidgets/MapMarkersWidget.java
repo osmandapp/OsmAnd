@@ -14,6 +14,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.views.DirectionDrawable;
@@ -46,7 +47,7 @@ public class MapMarkersWidget {
 	private ImageButton moreButton;
 	private ImageButton moreButton2nd;
 
-	public MapMarkersWidget(MapActivity map) {
+	public MapMarkersWidget(final MapActivity map) {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
 		screenOrientation = DashLocationFragment.getScreenOrientation(map);
@@ -82,8 +83,28 @@ public class MapMarkersWidget {
 		});
 
 		IconsCache iconsCache = map.getMyApplication().getIconsCache();
-		moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
-		moreButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
+		if (isLandscapeLayout()) {
+			moreButton.setVisibility(View.GONE);
+		} else {
+			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
+			moreButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity.clearPrevActivityIntent();
+					map.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+				}
+			});
+		}
+		if (moreButton2nd != null) {
+			moreButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
+			moreButton2nd.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity.clearPrevActivityIntent();
+					map.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+				}
+			});
+		}
 		okButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
