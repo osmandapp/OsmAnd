@@ -195,7 +195,7 @@ public class MapMarkersWidget {
 			descr = pd.getName();
 		}
 		if (!firstLine && !isLandscapeLayout()) {
-			descr = " — " + descr;
+			descr = "  •  " + descr;
 		}
 
 		addressText.setText(descr);
