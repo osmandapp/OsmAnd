@@ -74,7 +74,7 @@ public class OsMoMenuController extends MenuController {
 			leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
 		} else {
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_point);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_flag_dark;
+			leftTitleButtonController.leftIconId = R.drawable.ic_action_intermediate;
 		}
 	}
 

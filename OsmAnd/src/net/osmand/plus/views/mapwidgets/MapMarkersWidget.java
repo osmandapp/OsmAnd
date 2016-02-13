@@ -14,6 +14,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.Algorithms;
@@ -27,6 +28,8 @@ public class MapMarkersWidget {
 	private final MapActivity map;
 	private MapMarkersHelper helper;
 	private int screenOrientation;
+	private boolean portraitMode;
+	private boolean largeDevice;
 
 	private View topBar;
 	private View topBar2nd;
@@ -47,6 +50,8 @@ public class MapMarkersWidget {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
 		screenOrientation = DashLocationFragment.getScreenOrientation(map);
+		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
+		largeDevice = AndroidUiHelper.isXLargeDevice(map);
 
 		topBar = map.findViewById(R.id.map_markers_top_bar);
 		topBar2nd = map.findViewById(R.id.map_markers_top_bar_2nd);
@@ -189,9 +194,15 @@ public class MapMarkersWidget {
 		} else {
 			descr = pd.getName();
 		}
-		if (!firstLine) {
+		if (!firstLine && !isLandscapeLayout()) {
 			descr = " — " + descr;
 		}
+
 		addressText.setText(descr);
 	}
+
+	public boolean isLandscapeLayout() {
+		return !portraitMode && !largeDevice;
+	}
+
 }

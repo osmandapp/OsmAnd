@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
@@ -299,9 +299,9 @@
 	
 	
 	
-	<string name="background_service_is_enabled_question">O serviço OsmAnd ainda está em execução em segundo plano. Você quer interrompê-lo, também?</string>
-	<string name="sleep_mode_stop_dialog">Interromper o modo em segundo plano do GPS?</string>
-	<string name="stop_navigation_service">Interrupção</string>
+	<string name="background_service_is_enabled_question">O serviço OsmAnd ainda está rodando em segundo plano. Você quer pará-lo, também?</string>
+	<string name="sleep_mode_stop_dialog">Parar o modo em segundo plano do GPS?</string>
+	<string name="stop_navigation_service">Parar</string>
 	<string name="confirm_every_run">Sempre perguntar</string>
 	<string name="save_global_track_interval_descr">Escolher o intervalo geral de registro para a gravação de trilha (habilitado através do widget de registro de GPX no mapa)</string>
 	<string name="save_global_track_interval">Intervalo de registro geral</string>
@@ -995,7 +995,7 @@
 	<string name="unknown_from_location">Precisa definir um ponto de partida</string>
 	<string name="unknown_location">Posição ainda desconhecida</string>
 	<string name="modify_transparency">Modificar transparência (0 - transparente, 255 - opaco)</string>
-	<string name="confirm_interrupt_download">Quer interromper a transferência de arquivos?</string>
+	<string name="confirm_interrupt_download">Você quer cancelar a transferência de arquivos?</string>
 	<string name="basemap_was_selected_to_download">O Mapa Base é necessário para o funcionamento adequado do aplicativo e foi selecionado para baixar.</string>
 	<string name="local_indexes_cat_tile">Quadrículas de mapa online e em cache</string>
 	<string name="local_indexes_cat_map">Mapa padrão (vectorial)</string>

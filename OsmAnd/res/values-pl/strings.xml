@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -2092,4 +2092,6 @@
 <string name="number_of_contributors">Liczba współtwórców</string>
     <string name="shared_string_read_more">Przeczytaj więcej</string>
     <string name="rendering_attr_hideUnderground_name">Ukrycie podziemnych obiektów</string>
+    <string name="shared_string_save_changes">Zapisz zmiany</string>
+    <string name="shared_string_email_address">Adres e-mail</string>
     </resources>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class RenderingRuleStorageProperties {
 
+	public static final String UI_CATEGORY_HIDDEN = "ui_hidden";
 	public static final String A_ENGINE_V1 = "engine_v1";
 	public static final String A_APP_MODE= "appMode";
 	
@@ -307,12 +308,17 @@ public class RenderingRuleStorageProperties {
 	}
 	
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
-		if(get(p.getAttrName()) == null) {
-			properties.put(p.getAttrName(), p);
+		RenderingRuleProperty existing = get(p.getAttrName());
+		properties.put(p.getAttrName(), p);
+		if(existing == null) {
 			p.setId(rules.size());
 			rules.add(p);
+		} else {
+			p.setId(existing.getId());
+			rules.set(existing.getId(), p);
+			customRules.remove(existing);
 		}
-		return get(p.getAttrName());
+		return p;
 	}
 
 	public RenderingRuleProperty registerRule(RenderingRuleProperty p) {

@@ -24,6 +24,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
@@ -100,10 +101,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		InAppHelper helper = getInAppHelper();
-		if (helper != null) {
-			helper.addListener(this);
-		}
 	}
 
 	@Override
@@ -140,6 +137,16 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		updateSubscriptionHeader();
 
 		listView.addHeaderView(subscriptionHeader);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (position == 0 && !processing && InAppHelper.isSubscribedToLiveUpdates()) {
+					SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+					subscriptionFragment.setEditMode(true);
+					subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+				}
+			}
+		});
 
 		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
 		return view;
@@ -196,6 +203,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		InAppHelper helper = getInAppHelper();
 		if (helper != null) {
 			enableProgress();
+			helper.addListener(this);
 			helper.start(false);
 		}
 	}

@@ -180,7 +180,7 @@
 	<string name="poi_dog_park">Hundepark</string>
 	<string name="poi_dog_racing">Hunderennen</string>
 	<string name="poi_doityourself">Baumarkt</string>
-	<string name="poi_craft_dressmaker">Schneider</string>
+	<string name="poi_craft_dressmaker">Damenschneider</string>
 	<string name="poi_drinking_water">Trinkwasser</string>
 	<string name="poi_driving_school">Fahrschule</string>
 	<string name="poi_dry_cleaning">Chemische Reinigung</string>
@@ -194,7 +194,7 @@
 	<string name="poi_equestrian">Reiter</string>
 	<string name="poi_erotic">Sex-Shop</string>
 	<string name="poi_estate_agent">Immobilienmakler</string>
-	<string name="poi_fabric">Werksverkauf</string>
+	<string name="poi_fabric">Gardinenladen</string>
 	<string name="poi_fast_food">Fast Food</string>
 	<string name="poi_ferry_terminal">Fährhafen</string>
 	<string name="poi_fire_extinguisher">Feuerlöscher</string>
@@ -380,7 +380,7 @@
 	<string name="poi_post_box">Briefkasten</string>
 	<string name="poi_post_office">Post</string>
 	<string name="poi_craft_pottery">Töpferei</string>
-	<string name="poi_power_generator">Stromerzeuger</string>
+	<string name="poi_power_generator">Generator</string>
 	<string name="poi_power_plant">Kraftwerk</string>
 	<string name="poi_power_substation">Umspannstation</string>
 	<string name="poi_power_transformer">Transformator</string>
@@ -475,7 +475,7 @@
 	<string name="poi_second_hand">Gebrauchtwaren</string>
 	<string name="poi_service_tyres">Reifenhändler</string>
 	<string name="poi_ses_station">SES-Station</string>
-	<string name="poi_sewing">Textilwaren</string>
+	<string name="poi_sewing">Schneiderei</string>
 	<string name="poi_shelter">Schutzraum</string>
 	<string name="poi_ship_chandler">Schiffsausrüster</string>
 	<string name="poi_historic_ship">Historisches Schiff</string>
@@ -493,7 +493,7 @@
 	<string name="poi_social_centre">Sozialzentrum</string>
 	<string name="poi_social_facility">Soziale Einrichtung</string>
 	<string name="poi_speech_therapist">Sprachtherapeut</string>
-	<string name="poi_speed_camera">Blitzgerät</string>
+	<string name="poi_speed_camera">Blitzer</string>
 	<string name="poi_sports_centre">Sportzentrum</string>
 	<string name="poi_sports">Sportartikel</string>
 	<string name="poi_spring">Quelle</string>
@@ -540,7 +540,7 @@
 	<string name="poi_town">Kleinstadt</string>
 	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
-	<string name="poi_trade">Geschäftszentrum</string>
+	<string name="poi_trade">Handelszentrum</string>
 	<string name="poi_traffic_calming_bump">Bodenwelle</string>
 	<string name="poi_traffic_calming_chicane">Schikane</string>
 	<string name="poi_traffic_calming_choker">Fahrbahnverengung</string>
@@ -828,7 +828,7 @@
 	<string name="poi_swimming_pool_shop">Poolzubehörgeschäft</string>
 	<string name="poi_games">Spiele</string>
 	<string name="poi_model">Modellbau</string>
-	<string name="poi_trophy">Trophäen und Preise</string>
+	<string name="poi_trophy">Pokalgeschäft</string>
 	<string name="poi_video_games">Videospiele</string>
 	<string name="poi_pyrotechnics">Feuerwerk</string>
 	<string name="poi_weapons">Waffengeschäft</string>
@@ -1032,7 +1032,7 @@
 	<string name="poi_doors">Türen</string>
 	<string name="poi_traffic_calming_island">Verkehrsinsel</string>
 	<string name="poi_cooling_tower">Kühlturm</string>
-	<string name="poi_lighting_tower">Leuchtturm</string>
+	<string name="poi_lighting_tower">Flutlichtmast</string>
 	<string name="poi_recycling_small_appliances">Kleingeräte</string>
 	<string name="poi_landfill_waste_nuclear">Atommüll</string>
 	<string name="poi_bunker_silo">Silo</string>
