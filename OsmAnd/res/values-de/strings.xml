@@ -1840,7 +1840,7 @@
     
     <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung für den ganzen Planeten bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Für eine korrekte Darstellung sollte die Basis-Weltkarte heruntergeladen werden.</string>
     <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert</string>
-    <string name="simulate_initial_startup">Simuliere den ersten App-Start</string>
+    <string name="simulate_initial_startup">Ersten App-Start simulieren</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Position teilen</string>
     <string name="shared_string_send">Senden</string>
@@ -1995,7 +1995,7 @@
     <string name="night">Nachts</string>
 <string name="shared_string_not_selected">Nicht ausgewählt</string>
     
-<string name="select_month_and_country">Wähle Monat und Land</string>
+<string name="select_month_and_country">Monat und Land auswählen</string>
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
     <string name="shared_string_undo_all">Alles rückgängig machen</string>
@@ -2009,7 +2009,7 @@
     <string name="shared_string_select">Auswählen</string>
     <string name="clear_updates_proposition_message">Kartenaktualisierungen können gelöscht werden, um zur Originalkarte zurückzukehren</string>
     <string name="data_is_not_available">Daten nicht verfügbar</string>
-    <string name="rendering_attr_hideUnderground_name">Unterirdische Objekt verbergen</string>
+    <string name="rendering_attr_hideUnderground_name">Unterirdische Objekte ausblenden</string>
     <string name="shared_string_read_more">Mehr lesen</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Änderungen speichern</string>
@@ -2017,5 +2017,5 @@
     <string name="find_parking">Parkplatz finden</string>
     <string name="show_polygons">Polygone anzeigen</string>
     <string name="underlay_transparency">Underlay-Karte Transparenz</string>
-    <string name="rendering_attr_showMtbRoutes_name">MTB Routen anzeigen</string>
+    <string name="rendering_attr_showMtbRoutes_name">MTB-Routen anzeigen</string>
     </resources>
