@@ -84,7 +84,7 @@ public class MapMarkerDialogHelper {
 				if (obj instanceof MapMarker) {
 					MapMarker marker = (MapMarker) obj;
 					if (!marker.history) {
-						showOnMap(marker);
+						showMarkerOnMap(mapActivity, marker);
 					} else {
 						showHistoryOnMap(marker);
 					}
@@ -316,12 +316,7 @@ public class MapMarkerDialogHelper {
 		}
 
 		int dist = (int) mes[0];
-
-		//if (dist > 0) {
 		textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
-		//} else {
-		//	textDist.setText("");
-		//}
 
 		waypointDeviation.setVisibility(View.GONE);
 
@@ -396,8 +391,8 @@ public class MapMarkerDialogHelper {
 		textDist.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 	}
 
-	public void showOnMap(MapMarker marker) {
-		app.getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
+	public static void showMarkerOnMap(MapActivity mapActivity, MapMarker marker) {
+		mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
 				15, marker.getPointDescription(mapActivity), true, marker);
 		MapActivity.launchMapActivityMoveToTop(mapActivity);
 	}
@@ -492,6 +487,10 @@ public class MapMarkerDialogHelper {
 	}
 
 	public static Drawable getMapMarkerIcon(OsmandApplication app, int colorIndex) {
+		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, getMapMarkerColorId(colorIndex));
+	}
+
+	public static int getMapMarkerColorId(int colorIndex) {
 		int colorId;
 		switch (colorIndex) {
 			case 0:
@@ -505,7 +504,7 @@ public class MapMarkerDialogHelper {
 				break;
 			case 3:
 				colorId = R.color.marker_red;
-					break;
+				break;
 			case 4:
 				colorId = R.color.marker_yellow;
 				break;
@@ -518,7 +517,7 @@ public class MapMarkerDialogHelper {
 			default:
 				colorId = R.color.marker_blue;
 		}
-		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, colorId);
+		return colorId;
 	}
 
 	public void updateLocation(ListView listView, boolean compassChanged) {

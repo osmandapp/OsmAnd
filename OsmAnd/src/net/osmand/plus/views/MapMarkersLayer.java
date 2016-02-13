@@ -16,6 +16,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.mapwidgets.MapMarkersWidget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	private final MapActivity map;
 	private OsmandMapTileView view;
+
+	private MapMarkersWidget widget;
 
 	private Paint bitmapPaint;
 	private Bitmap markerBitmapBlue;
@@ -70,6 +73,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		bitmapPaintDestYellow = createPaintDest(R.color.marker_yellow);
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
+
+		widget = new MapMarkersWidget(map);
 	}
 
 	private Paint createPaintDest(int colorId) {
@@ -132,6 +137,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+
+		widget.updateInfo(tb.getZoom());
+
 		if (tb.getZoom() < 3) {
 			return;
 		}

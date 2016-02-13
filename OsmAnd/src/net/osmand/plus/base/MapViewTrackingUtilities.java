@@ -3,6 +3,7 @@ package net.osmand.plus.base;
 import android.content.Context;
 import android.view.WindowManager;
 
+import net.osmand.FloatMath;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -47,10 +48,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean isUserZoomed = false;
 	private String locationProvider;
 	private boolean showRouteFinishDialog = false;
+	private Location myLocation;
+	private Float heading;
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
 		settings = app.getSettings();
+		myLocation = app.getLocationProvider().getLastKnownLocation();
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
@@ -95,12 +99,21 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
+	public Location getMyLocation() {
+		return myLocation;
+	}
+
+	public Float getHeading() {
+		return heading;
+	}
+
 	public String getLocationProvider() {
 		return locationProvider;
 	}
 
 	@Override
 	public void updateCompassValue(float val) {
+		heading = val;
 		if (mapView != null) {
 			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1) {
@@ -128,6 +141,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void updateLocation(Location location) {
+		myLocation = location;
 		showViewAngle = false;
 		if (location != null) {
 			locationProvider = location.getProvider();

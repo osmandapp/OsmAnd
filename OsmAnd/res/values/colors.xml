@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="markers_top_bar_background">#145256</color>
+    <color name="markers_top_bar_2nd_background">#0e3b3e</color>
+    <color name="marker_top_2nd_line_color">#588689</color>
+
 	<color name="marker_blue">#2196f3</color>
 	<color name="marker_green">#73b825</color>
 	<color name="marker_orange">#ff9800</color>
