@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
@@ -40,7 +40,7 @@
     <string name="lang_lt">Lituanu</string>
     <string name="lang_mr">Marathi</string>
     <string name="lang_no">Norvegesu</string>
-    <string name="lang_pl">Polaccu</string>
+    <string name="lang_pl">Polacu</string>
     <string name="lang_pt">Portughesu</string>
     <string name="lang_ro">Rumenu</string>
     <string name="lang_ru">Russu</string>
@@ -354,7 +354,7 @@
     <string name="safe_mode_description">Allue s’aplicatzione in modalidade segura (impreende Android, prus lentu, imbetzes de su còdighe nativu).</string>
     <string name="safe_mode">Modalidade segura</string>
     <string name="native_library_not_running">S’aplicatzione est traballende in modalidade segura (la podes disabilitare in sas Impostatziones).</string>
-    <string name="background_service_is_enabled_question">Su servitziu OsmAnd de isfundu est galu in esecutzione. Lu boles firmare?</string>
+    <string name="background_service_is_enabled_question">Su servitziu OsmAnd de isfundu est galu in esecutzione. Boles firmare fintzas custu?</string>
 
 
     <string name="close_changeset">Serra sas modìficas</string>
@@ -716,7 +716,7 @@
     <string name="unknown_from_location">Sa positzione de tzucada no est istada galu determinata</string>
     <string name="unknown_location">Positzione galu disconnota</string>
     <string name="modify_transparency">Muda sa trasparèntzia (0 - trasparente, 255 - annapau)</string>
-    <string name="confirm_interrupt_download">Boles firmare s’isgarrigamentu de sos documentos?</string>
+    <string name="confirm_interrupt_download">Boles firmare s’iscarrigamentu de su documentu?</string>
     <string name="local_indexes_cat_tile">Mapas in lìnia e in cache a tasseddos</string>
     <string name="local_indexes_cat_map">Mapas regulares (vetoriales)</string>
     <string name="map_online_data">Mapas in lìnia e a tasseddos</string>
@@ -2099,4 +2099,7 @@
     <string name="shared_string_status">Istadu</string>
     <string name="shared_string_save_changes">Sarba sas modìficas</string>
     <string name="shared_string_email_address">Indiritzu de posta eletrònica</string>
+    <string name="rendering_attr_showMtbRoutes_name">Ammustra sas àndalas MTB</string>
+    <string name="show_polygons">Ammustra sos polìgonos</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Mapas &amp; Nàvigu - cuncorda àndalas e agata logos in sa mapa chene una cunnessione ìnternet. Iscàrriga sa mapa de un’istadu in antis de incumintzare unu biàgiu pro agatare logos e àndalas in un’àrea disconnota. Optziones de base: • Mapas a sa minuda de prus de 200 natziones • Navigadore chene lìnia cun ghia vocale • Chirca de indiritzos in modalidade chene lìnia • Informatziones chi pertocant sos logos in sa mapa: puntos de interesse, cafes, parchègios, butegas • Possibilidade de annanghere logos a sos preferidos • Nàvigu pro màchinas, tziclistas e pedones Optziones agiuntivas: • Abilidade de bìere e registrare rastas GPX • Descritziones Wikipedia de sos PDI • Possibilidade de annanghere fotos e notas àudio e vìdeo a sa mapa • Modalidades mapa Die e Note pro una ghia prus discansosa • Informatziones chi pertocant sas àndalas e sas firmadas de sos trasportos pùblicos • Carreras e coladòrgios tziclàbiles e pedonales • Àndalas turìsticas pro totu su mundu • Mapas in lìnia dae medas mitzas • Informatziones chi pertocant sa casta de pamentu e de illuminatzione istradale • Possibilidade de annanghere, modificare e burrare PDI (pro impreadores OpenStreetMap.org) • OsMo - compidada in lìnia de àteros dispositivos Imprea unu navigadore afidàbile in sa natzione tua - chi siat sa Frantza, sa Germània, su Mèssicu, su Regnu Unidu, s’Ispàgna, s’Olanda, sos Istados Unidos, sa Rùssia, su Brasile o calesisiat àteru istadu. Estensiones: • Curvas de livellu e umbraduras de sos rilievos https://goo.gl/7mojP8 Datos pro ammustrare sas lìnias de livellu e sas umbraduras de sos rilievos, de annaghere a sa mapa OsmAnd de base. • Mapas pro iscì https://goo.gl/pX6DxJ Informatziones chi pertocant sas pistas pro iscì, pistas pro iscì de fundu, funivias e isciovias. • Mapas nàuticas https://goo.gl/0hEdxm Mapas ispetziales pro ammustrare sos sìmbulos e sos sinnales pro su nàvigu nàuticu curtzu (Nàvigu costieru) o longu (nàvigu arteriale). • Positzione de parchègiu https://goo.gl/6JxQXF T’agiudat a sinnare su logu in ue as parchegiadu sa màchina e bìere cantu tempus t\'abarrat si su parchègiu est a tempus limitadu. Mantenne·ti informadu! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Giassu/Situ: http://osmand.net Si tenes bisòngiu de agiudu cun s\'aplicatzione OsmAnd, pro piaghere cuntata su grupu de suportu nostru: support@osmand.net. "</string>
     </resources>
