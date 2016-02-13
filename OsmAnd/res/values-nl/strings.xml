@@ -2168,7 +2168,7 @@
     <string name="number_of_contributors">Aantal Medewerkers</string>
     <string name="number_of_edits">Aantal Bewerkingen</string>
     <string name="shared_string_remove">Verwijder</string>
-    <string name="clear_updates_proposition_message">Gedownloade updates kunnen verwijderen worden: terug naar de originele kaart</string>
+    <string name="clear_updates_proposition_message">Je kan gedownloade updates verwijderen en terugkeren naar de originele kaart</string>
     <string name="add_time_span">Periode toevoegen</string>
     <string name="road_blocked">Weg geblokkeerd</string>
     <string name="shared_string_select">Blokkeer...</string>
@@ -2178,7 +2178,7 @@
     <string name="shared_string_read_more">Lees meer...</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Wijzigingen opslaan</string>
-    <string name="shared_string_email_address">Emailadres</string>
+    <string name="shared_string_email_address">E-mailadres</string>
     <string name="show_polygons">Toon vlakken van vectorkaart</string>
     <string name="underlay_transparency">Underlay transparantie</string>
     <string name="find_parking">Zoek parkeerplaats</string>
