@@ -214,14 +214,14 @@
                         android:id="@+id/marker_btn_ok"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="?attr/dashboard_button"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_action_done"/>
 
                     <ImageButton
                         android:id="@+id/marker_btn_more"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="?attr/dashboard_button"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_overflow_menu_white"/>
 
                 </LinearLayout>
@@ -295,7 +295,7 @@
                         android:id="@+id/marker_btn_ok_2dn"
                         android:layout_width="50dp"
                         android:layout_height="48dp"
-                        android:background="?attr/dashboard_button"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_action_done"/>
 
                 </LinearLayout>

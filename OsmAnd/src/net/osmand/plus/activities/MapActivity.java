@@ -54,6 +54,9 @@ import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FirstUsageFragment;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -102,7 +105,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MapActivity extends AccessibleActivity implements DownloadEvents,
-		ActivityCompat.OnRequestPermissionsResultCallback, IRouteInformationListener {
+		ActivityCompat.OnRequestPermissionsResultCallback, IRouteInformationListener,
+		MapMarkerChangedListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
@@ -557,6 +561,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		}
 
 		routingHelper.addListener(this);
+		app.getMapMarkersHelper().addListener(this);
 
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 		if (System.currentTimeMillis() - tm > 50) {
@@ -790,6 +795,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	@Override
 	protected void onPause() {
+		app.getMapMarkersHelper().removeListener(this);
 		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
 		if (atlasMapRendererView != null) {
@@ -1143,6 +1149,16 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		}
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+
+	@Override
+	public void onMapMarkerChanged(MapMarker mapMarker) {
+		refreshMap();
+	}
+
+	@Override
+	public void onMapMarkersChanged() {
+		refreshMap();
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

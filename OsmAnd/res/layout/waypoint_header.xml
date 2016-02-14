@@ -5,7 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="5dp"
-    android:paddingRight="16dp"
     android:layout_marginTop="5dp"
     android:gravity="center_vertical"
     android:minHeight="48dp"
@@ -30,14 +29,28 @@
         style="@style/DashboardSubHeader"
         osmand:typeface="@string/font_roboto_medium"/>
 
-    <include layout="@layout/check_item_rel"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp">
+
+        <include layout="@layout/check_item_rel"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/image_button"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_overflow_menu_white"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/header_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:layout_marginRight="-16dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="@string/shared_string_clear"

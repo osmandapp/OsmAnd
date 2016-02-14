@@ -5,11 +5,14 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
@@ -26,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
@@ -196,15 +201,15 @@ public class MapMarkerDialogHelper {
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 		v.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 
-		final Button btn = (Button) v.findViewById(R.id.header_button);
-		btn.setTextColor(!nightMode ? mapActivity.getResources().getColor(R.color.map_widget_blue)
-				: mapActivity.getResources().getColor(R.color.osmand_orange));
-		btn.setText(mapActivity.getString(R.string.shared_string_clear));
-		btn.setVisibility(View.VISIBLE);
-		btn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (type == MARKERS_HISTORY) {
+		if (type == MARKERS_HISTORY) {
+			final Button btn = (Button) v.findViewById(R.id.header_button);
+			btn.setTextColor(!nightMode ? mapActivity.getResources().getColor(R.color.map_widget_blue)
+					: mapActivity.getResources().getColor(R.color.osmand_orange));
+			btn.setText(mapActivity.getString(R.string.shared_string_clear));
+			btn.setVisibility(View.VISIBLE);
+			btn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 					builder.setMessage(mapActivity.getString(R.string.clear_markers_history_q))
 							.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -221,26 +226,71 @@ public class MapMarkerDialogHelper {
 							})
 							.setNegativeButton(R.string.shared_string_no, null)
 							.show();
-				} else if (type == ACTIVE_MARKERS) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-					builder.setMessage(mapActivity.getString(R.string.clear_active_markers_q))
-							.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									listAdapter.notifyDataSetInvalidated();
-									markersHelper.removeActiveMarkers();
-									if (markersHelper.getMapMarkersHistory().size() == 0) {
-										mapActivity.getDashboard().hideDashboard();
-									} else {
-										reloadListAdapter(listAdapter);
-									}
-								}
-							})
-							.setNegativeButton(R.string.shared_string_no, null)
-							.show();
 				}
-			}
-		});
+			});
+
+		} else if (type == ACTIVE_MARKERS) {
+			final ImageButton btn = (ImageButton) v.findViewById(R.id.image_button);
+			btn.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white, !nightMode));
+			btn.setVisibility(View.VISIBLE);
+			btn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					IconsCache iconsCache = app.getIconsCache();
+					final PopupMenu optionsMenu = new PopupMenu(mapActivity, v);
+					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+					MenuItem item;
+					item = optionsMenu.getMenu().add(R.string.shared_string_clear)
+							.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark, !nightMode));
+					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+							builder.setMessage(mapActivity.getString(R.string.clear_active_markers_q))
+									.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											listAdapter.notifyDataSetInvalidated();
+											markersHelper.removeActiveMarkers();
+											if (markersHelper.getMapMarkersHistory().size() == 0) {
+												mapActivity.getDashboard().hideDashboard();
+											} else {
+												reloadListAdapter(listAdapter);
+											}
+										}
+									})
+									.setNegativeButton(R.string.shared_string_no, null)
+									.show();
+							return true;
+						}
+					});
+
+					item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
+							iconsCache.getContentIcon(R.drawable.ic_action_undo_dark, !nightMode));
+					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							markersHelper.reverseActiveMarkersOrder();
+							reloadListAdapter(listAdapter);
+							return true;
+						}
+					});
+
+					item = optionsMenu.getMenu().add(R.string.shared_string_save_as_gpx).setIcon(
+							iconsCache.getContentIcon(R.drawable.ic_action_save, !nightMode));
+					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							//
+							return true;
+						}
+					});
+
+					optionsMenu.show();
+				}
+			});
+		}
 
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
 		AndroidUtils.setTextPrimaryColor(mapActivity, tv, nightMode);

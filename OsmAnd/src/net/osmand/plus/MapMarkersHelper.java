@@ -166,6 +166,20 @@ public class MapMarkersHelper {
 		return list;
 	}
 
+	public void reverseActiveMarkersOrder() {
+		cancelAddressRequests();
+
+		List<MapMarker> markers = new ArrayList<>(mapMarkers.size());
+		for (int i = mapMarkers.size() - 1; i >= 0; i--) {
+			MapMarker marker = mapMarkers.get(i);
+			markers.add(marker);
+		}
+		mapMarkers = markers;
+		saveMapMarkers(mapMarkers, mapMarkersHistory);
+		readFromSettings();
+		refresh();
+	}
+
 	public void removeActiveMarkers() {
 		cancelAddressRequests();
 
