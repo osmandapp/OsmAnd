@@ -2083,4 +2083,12 @@
     <string name="show_polygons">Mostrar polígonos</string>
     <string name="underlay_transparency">Transparencia subyacente</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas de BTT</string>
+    <string name="shared_string_reverse_order">Invertir orden</string>
+    <string name="show_map_markers">Marcadores del mapa</string>
+    <string name="show_map_markers_description">Activar función de Marcadores del mapa</string>
+    <string name="clear_active_markers_q">¿Quieres borrar todos los marcadores activos?</string>
+    <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores?</string>
+    <string name="active_markers">Marcadores activos</string>
+    <string name="map_markers">Marcadores del mapa</string>
+    <string name="map_marker">Marcador del mapa</string>
     </resources>
