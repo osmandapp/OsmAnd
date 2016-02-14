@@ -2279,4 +2279,5 @@
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kortmarkører</string>
     <string name="map_marker">Kortmarkør</string>
+    <string name="shared_string_reverse_order">Omvendt rækkefølge</string>
     </resources>
