@@ -6,6 +6,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
+import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -28,6 +33,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -37,10 +43,14 @@ import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MapMarkerDialogHelper {
 	public static final int ACTIVE_MARKERS = 0;
@@ -282,7 +292,7 @@ public class MapMarkerDialogHelper {
 					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
-							//
+							generateGPX(markersHelper.getActiveMapMarkers());
 							return true;
 						}
 					});
@@ -620,5 +630,32 @@ public class MapMarkerDialogHelper {
 		useCenter = !mapLinked;
 		loc = (useCenter ? mw : myLoc);
 		heading = useCenter ? -mapRotation : head;
+	}
+
+	private void generateGPX(List<MapMarker> markers) {
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map points");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		Date date = new Date();
+		String fileName = DateFormat.format("yyyy-MM-dd", date).toString() + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(date);
+		File fout = new File(dir, fileName + ".gpx");
+		int ind = 1;
+		while (fout.exists()) {
+			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
+		}
+		GPXFile file = new GPXFile();
+		for (MapMarker marker : markersHelper.getActiveMapMarkers()) {
+			WptPt wpt = new WptPt();
+			wpt.lat = marker.getLatitude();
+			wpt.lon = marker.getLongitude();
+			wpt.setColor(mapActivity.getResources().getColor(getMapMarkerColorId(marker.colorIndex)));
+			//wpt.name = desc;
+			//wpt.link = r.getFileName();
+			//wpt.time = r.getFile().lastModified();
+			//wpt.category = r.getSearchHistoryType();
+			file.points.add(wpt);
+		}
+		GPXUtilities.writeGpxFile(fout, file, app);
 	}
 }
