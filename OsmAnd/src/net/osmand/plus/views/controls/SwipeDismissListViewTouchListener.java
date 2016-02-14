@@ -102,6 +102,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	//private List<PendingDismissData> mPendingDismisses = new ArrayList<PendingDismissData>();
 	private int mDismissAnimationRefCount = 0;
 	private float mDownX;
+	private float mDownY;
 	private boolean mSwiping;
 	private VelocityTracker mVelocityTracker;
 	private int mDownPosition;
@@ -601,6 +602,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 					int position = mListView.getPositionForView(mSwipeDownView) - mListView.getHeaderViewsCount();
 					if (mCallbacks == null || mCallbacks.canDismiss(position)) {
 						mDownX = ev.getRawX();
+						mDownY = ev.getRawY();
 						mDownPosition = position;
 
 						mVelocityTracker = VelocityTracker.obtain();
@@ -629,6 +631,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				mVelocityTracker.recycle();
 				mVelocityTracker = null;
 				mDownX = 0;
+				mDownY = 0;
 				mSwipeDownView = mSwipeDownChild = null;
 				mDownPosition = ListView.INVALID_POSITION;
 				mSwiping = false;
@@ -669,6 +672,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				}
 				mVelocityTracker = null;
 				mDownX = 0;
+				mDownY = 0;
 				mSwipeDownView = null;
 				mSwipeDownChild = null;
 				mDownPosition = AbsListView.INVALID_POSITION;
@@ -683,6 +687,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 
 				mVelocityTracker.addMovement(ev);
 				float deltaX = ev.getRawX() - mDownX;
+				float deltaY = ev.getRawY() - mDownY;
 				// Only start swipe in correct direction
 				if (isSwipeDirectionValid(deltaX)) {
 					ViewParent parent = mListView.getParent();
@@ -691,7 +696,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 						// otherwise swipe would not be working.
 						parent.requestDisallowInterceptTouchEvent(true);
 					}
-					if (Math.abs(deltaX) > mSlop) {
+					if (Math.abs(deltaX) > mSlop && Math.abs(deltaY) < Math.abs(deltaX) / 2) {
 						mSwiping = true;
 						mListView.requestDisallowInterceptTouchEvent(true);
 

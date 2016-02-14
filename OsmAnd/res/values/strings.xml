@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
     	 Disclaimer:
@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="show_map_markers">Map Markers</string>
+    <string name="show_map_markers_description">Activate Map Markers feature</string>
+    <string name="clear_active_markers_q">Do you want to delete all active markers?</string>
+    <string name="clear_markers_history_q">Do you want to clear markers history?</string>
+    <string name="active_markers">Active markers</string>
+    <string name="map_markers">Map markers</string>
+    <string name="map_marker">Map marker</string>
     <string name="rendering_attr_showMtbRoutes_name">Show MTB routes</string>
     <string name="show_polygons">Show polygons</string>
     <!-- string name="underlay_transparency">Underlay transparency</string -->

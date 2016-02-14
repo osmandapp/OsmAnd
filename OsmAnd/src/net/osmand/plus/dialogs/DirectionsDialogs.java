@@ -61,13 +61,17 @@ public class DirectionsDialogs {
 						public void onClick(DialogInterface dialog, int which) {
 							if (which == 0) {
 								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
+								closeContextMenu(act);
 							} else if (which == 1) {
 								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 
 										targetPointsHelper.getIntermediatePoints().size() + 1, name);
+								closeContextMenu(act);
 							} else if (which == 2) {
 								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 0, name);
+								closeContextMenu(act);
 							} else {
 								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size(), name);
+								closeContextMenu(act);
 							}
 							MapActivity.launchMapActivityMoveToTop(act);
 						}
@@ -75,7 +79,14 @@ public class DirectionsDialogs {
 			builder.show();
 		} else {
 			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
+			closeContextMenu(act);
 			MapActivity.launchMapActivityMoveToTop(act);
+		}
+	}
+
+	private static void closeContextMenu(Activity act) {
+		if (act instanceof MapActivity) {
+			((MapActivity) act).getContextMenu().close();
 		}
 	}
 

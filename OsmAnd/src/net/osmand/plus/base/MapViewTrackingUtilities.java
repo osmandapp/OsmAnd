@@ -3,11 +3,14 @@ package net.osmand.plus.base;
 import android.content.Context;
 import android.view.WindowManager;
 
+import net.osmand.FloatMath;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -17,10 +20,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -29,7 +30,8 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener, OsmAndCompassListener, IRouteInformationListener {
+public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
+		OsmAndCompassListener, IRouteInformationListener, MapMarkerChangedListener {
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4; 
 	
 	private long lastTimeAutoZooming = 0;
@@ -46,13 +48,17 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean isUserZoomed = false;
 	private String locationProvider;
 	private boolean showRouteFinishDialog = false;
+	private Location myLocation;
+	private Float heading;
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
 		settings = app.getSettings();
+		myLocation = app.getLocationProvider().getLastKnownLocation();
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
+		addMapMarkersListener(app);
 		app.getRoutingHelper().addListener(this);
 	}
 
@@ -67,7 +73,22 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		});
 	}
-	
+
+	private void addMapMarkersListener(OsmandApplication app) {
+		app.getMapMarkersHelper().addListener(this);
+	}
+
+	@Override
+	public void onMapMarkerChanged(MapMarkersHelper.MapMarker mapMarker) {
+	}
+
+	@Override
+	public void onMapMarkersChanged() {
+		if (mapView != null) {
+			mapView.refreshMap();
+		}
+	}
+
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
 		if(mapView != null) {
@@ -78,12 +99,21 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
+	public Location getMyLocation() {
+		return myLocation;
+	}
+
+	public Float getHeading() {
+		return heading;
+	}
+
 	public String getLocationProvider() {
 		return locationProvider;
 	}
 
 	@Override
 	public void updateCompassValue(float val) {
+		heading = val;
 		if (mapView != null) {
 			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1) {
@@ -111,6 +141,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void updateLocation(Location location) {
+		myLocation = location;
 		showViewAngle = false;
 		if (location != null) {
 			locationProvider = location.getProvider();

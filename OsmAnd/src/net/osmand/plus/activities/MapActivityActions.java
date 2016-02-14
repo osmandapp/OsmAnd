@@ -33,6 +33,7 @@ import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -98,12 +99,17 @@ public class MapActivityActions implements DialogProvider {
 		openIntermediateEditPointsDialog();
 	}
 	*/
-
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1,
 				pd);
 		openIntermediatePointsDialog();
+	}
+
+
+	public void addMapMarker(double latitude, double longitude, PointDescription pd) {
+		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd);
 	}
 
 	public void editWaypoints() {
@@ -565,15 +571,27 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.waypoints).iconColor(R.drawable.ic_action_intermediate)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						MapActivity.clearPrevActivityIntent();
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
-						return false;
-					}
-				}).reg();
+		if (settings.USE_MAP_MARKERS.get()) {
+			optionsMenuHelper.item(R.string.map_markers).iconColor(R.drawable.ic_action_flag_dark)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							MapActivity.clearPrevActivityIntent();
+							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MARKERS);
+							return false;
+						}
+					}).reg();
+		} else {
+			optionsMenuHelper.item(R.string.waypoints).iconColor(R.drawable.ic_action_intermediate)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							MapActivity.clearPrevActivityIntent();
+							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+							return false;
+						}
+					}).reg();
+		}
 		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -739,16 +757,9 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-
 	public void openIntermediatePointsDialog() {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 	}
-
-	/*
-	public void openIntermediateEditPointsDialog() {
-		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS_EDIT);
-	}
-	*/
 
 	public void openRoutePreferencesDialog() {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.ROUTE_PREFERENCES);

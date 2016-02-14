@@ -2,12 +2,8 @@ package net.osmand.plus.views.controls;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 

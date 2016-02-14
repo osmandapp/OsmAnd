@@ -19,9 +19,13 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -41,9 +45,11 @@ import net.osmand.util.MapUtils;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode> {
+public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
+		MapMarkerChangedListener {
 
 	private MapActivity mapActivity;
+	private OsmandSettings settings;
 	private MapMultiSelectionMenu mapMultiSelectionMenu;
 
 	private FavoritePointEditor favoritePointEditor;
@@ -77,6 +83,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		settings = mapActivity.getMyApplication().getSettings();
 		if (!appModeListenerAdded) {
 			mapActivity.getMyApplication().getSettings().APPLICATION_MODE.addListener(this);
 			appModeListenerAdded = true;
@@ -255,6 +262,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 		mapActivity.refreshMap();
 
+		if (object instanceof MapMarker) {
+			mapActivity.getMyApplication().getMapMarkersHelper().addListener(this);
+		}
+
 		return true;
 	}
 
@@ -307,6 +318,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void close() {
 		if (active) {
 			active = false;
+			if (object instanceof MapMarker) {
+				mapActivity.getMyApplication().getMapMarkersHelper().removeListener(this);
+			}
 			if (this.object != null) {
 				clearSelectedObject(this.object);
 			}
@@ -331,6 +345,22 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().updateMenu();
 		}
+	}
+
+	@Override
+	public void onMapMarkerChanged(MapMarker mapMarker) {
+		if (object == mapMarker) {
+			String address = ((MapMarker) object).getOnlyName();
+			nameStr = address;
+			pointDescription.setName(address);
+			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+			if (fragmentRef != null)
+				fragmentRef.get().refreshTitle();
+		}
+	}
+
+	@Override
+	public void onMapMarkersChanged() {
 	}
 
 	@Override
@@ -435,6 +465,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		} else if (targets.getIntermediatePoints().isEmpty()) {
 			targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+			close();
 		} else {
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			bld.setTitle(R.string.new_directions_point_dialog);
@@ -456,9 +487,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						targets.removeAllWayPoints(false);
 						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+						close();
 					} else {
 						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+						close();
 					}
 				}
 			});
@@ -470,6 +503,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void buttonWaypointPressed() {
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
+		} else if (settings.USE_MAP_MARKERS.get()) {
+			if (pointDescription.isMapMarker()) {
+				hide();
+				MapActivity.clearPrevActivityIntent();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+			} else {
+				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
+						getPointDescriptionForTarget());
+			}
 		} else {
 			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
 					getPointDescriptionForTarget());
