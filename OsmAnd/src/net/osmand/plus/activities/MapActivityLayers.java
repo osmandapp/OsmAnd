@@ -146,8 +146,10 @@ public class MapActivityLayers {
 		navigationLayer = new PointNavigationLayer(activity);
 		mapView.addLayer(navigationLayer, 7);
 		// 7.3 map markers layer
-		mapMarkersLayer = new MapMarkersLayer(activity);
-		mapView.addLayer(mapMarkersLayer, 7.3f);
+		if (app.getSettings().USE_MAP_MARKERS.get()) {
+			mapMarkersLayer = new MapMarkersLayer(activity);
+			mapView.addLayer(mapMarkersLayer, 7.3f);
+		}
 		// 7.5 Impassible roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(activity);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
@@ -463,8 +465,11 @@ public class MapActivityLayers {
 	public MapControlsLayer getMapControlsLayer() {
 		return mapControlsLayer;
 	}
-	
-	
+
+	public MapMarkersLayer getMapMarkersLayer() {
+		return mapMarkersLayer;
+	}
+
 	public MapTileLayer getMapTileLayer() {
 		return mapTileLayer;
 	}

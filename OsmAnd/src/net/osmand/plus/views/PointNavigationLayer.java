@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -16,7 +17,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.Iterator;
@@ -79,8 +79,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
-		if (tb.getZoom() < 3 || (!routingHelper.isRoutePlanningMode() && !routingHelper.isFollowingMode())) {
+		if (tb.getZoom() < 3) {
 			return;
 		}
 
@@ -128,7 +127,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			pointToNavigate = it.next();
 		}
 		if (pointToNavigate != null && !isLocationVisible(tb, pointToNavigate)) {
-			boolean show = !routingHelper.isRouteCalculated();
+			boolean show = !view.getApplication().getRoutingHelper().isRouteCalculated();
 			if(view.getSettings().SHOW_DESTINATION_ARROW.isSet()) {
 				show = view.getSettings().SHOW_DESTINATION_ARROW.get();
 			}

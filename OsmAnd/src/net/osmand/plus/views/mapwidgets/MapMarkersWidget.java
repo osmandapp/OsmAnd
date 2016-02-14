@@ -205,8 +205,12 @@ public class MapMarkersWidget {
 		arrowImg.invalidate();
 
 		int dist = (int) mes[0];
-		distText.setText(OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication()));
-		updateVisibility(okButton, dist < MIN_DIST_OK_VISIBLE);
+		if (loc != null) {
+			distText.setText(OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication()));
+		} else {
+			distText.setText("— " + map.getString(R.string.m));
+		}
+		updateVisibility(okButton, loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
 		PointDescription pd = marker.getPointDescription(map);

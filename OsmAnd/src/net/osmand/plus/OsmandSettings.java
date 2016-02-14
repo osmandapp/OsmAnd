@@ -1101,6 +1101,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference("should_show_free_version_banner", false).makeGlobal().cache();
 
+	public final OsmandPreference<Boolean> USE_MAP_MARKERS = new BooleanPreference("use_map_markers", false).makeGlobal().cache();
+
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
 		String tileName = MAP_TILE_SOURCES.get();
 		if (tileName != null) {

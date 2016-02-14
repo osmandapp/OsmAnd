@@ -98,14 +98,14 @@ public class MapActivityActions implements DialogProvider {
 
 		openIntermediateEditPointsDialog();
 	}
-
+	*/
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1,
 				pd);
 		openIntermediatePointsDialog();
 	}
-	*/
+
 
 	public void addMapMarker(double latitude, double longitude, PointDescription pd) {
 		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
@@ -286,7 +286,7 @@ public class MapActivityActions implements DialogProvider {
 		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null && 
 				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
 			adapter.item(R.string.context_menu_item_last_intermediate_point).iconColor(
-					R.drawable.ic_action_flage_dark).reg();
+					R.drawable.ic_action_intermediate).reg();
 		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
@@ -571,15 +571,27 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.map_markers).iconColor(R.drawable.ic_action_flag_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						MapActivity.clearPrevActivityIntent();
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MARKERS);
-						return false;
-					}
-				}).reg();
+		if (settings.USE_MAP_MARKERS.get()) {
+			optionsMenuHelper.item(R.string.map_markers).iconColor(R.drawable.ic_action_flag_dark)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							MapActivity.clearPrevActivityIntent();
+							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MARKERS);
+							return false;
+						}
+					}).reg();
+		} else {
+			optionsMenuHelper.item(R.string.waypoints).iconColor(R.drawable.ic_action_intermediate)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							MapActivity.clearPrevActivityIntent();
+							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+							return false;
+						}
+					}).reg();
+		}
 		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
 				.listen(new OnContextMenuClick() {
 					@Override

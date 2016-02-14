@@ -21,6 +21,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -48,6 +49,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MapMarkerChangedListener {
 
 	private MapActivity mapActivity;
+	private OsmandSettings settings;
 	private MapMultiSelectionMenu mapMultiSelectionMenu;
 
 	private FavoritePointEditor favoritePointEditor;
@@ -81,6 +83,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		settings = mapActivity.getMyApplication().getSettings();
 		if (!appModeListenerAdded) {
 			mapActivity.getMyApplication().getSettings().APPLICATION_MODE.addListener(this);
 			appModeListenerAdded = true;
@@ -500,12 +503,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void buttonWaypointPressed() {
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
-		} else if (pointDescription.isMapMarker()) {
-			hide();
-			MapActivity.clearPrevActivityIntent();
-			mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+		} else if (settings.USE_MAP_MARKERS.get()) {
+			if (pointDescription.isMapMarker()) {
+				hide();
+				MapActivity.clearPrevActivityIntent();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+			} else {
+				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
+						getPointDescriptionForTarget());
+			}
 		} else {
-			mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
+			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
 					getPointDescriptionForTarget());
 		}
 		close();
