@@ -91,6 +91,7 @@ public class OsmandApplication extends MultiDexApplication {
 	NotificationHelper notificationHelper;
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
+	MapMarkersHelper mapMarkersHelper;
 	WaypointHelper waypointHelper;
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidSpecificRoads avoidSpecificRoads;
@@ -538,6 +539,10 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public TargetPointsHelper getTargetPointsHelper() {
 		return targetPointsHelper;
+	}
+
+	public MapMarkersHelper getMapMarkersHelper() {
+		return mapMarkersHelper;
 	}
 
 	public void showShortToastMessage(final int msgId, final Object... args) {

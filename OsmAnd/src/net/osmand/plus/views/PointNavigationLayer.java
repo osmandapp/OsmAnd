@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -78,7 +79,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		if(tb.getZoom() < 3) {
+		if (tb.getZoom() < 3) {
 			return;
 		}
 

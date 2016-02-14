@@ -38,6 +38,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_MY_LOCATION = "my_location";
 	public static final String POINT_TYPE_ALARM = "alarm";
 	public static final String POINT_TYPE_TARGET = "destination";
+	public static final String POINT_TYPE_MAP_MARKER = "map_marker";
 	public static final String POINT_TYPE_OSM_BUG = "bug";
 	public static final String POINT_TYPE_WORLD_REGION = "world_region";
 	public static final String POINT_TYPE_GPX_ITEM = "gpx_item";
@@ -189,6 +190,10 @@ public class PointDescription {
 
 	public boolean isDestination() {
 		return POINT_TYPE_TARGET.equals(type);
+	}
+
+	public boolean isMapMarker() {
+		return POINT_TYPE_MAP_MARKER.equals(type);
 	}
 
 	public boolean isParking() {

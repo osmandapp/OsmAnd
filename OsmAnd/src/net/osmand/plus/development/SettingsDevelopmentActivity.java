@@ -63,7 +63,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
 		firstRunPreference.setSelectable(true);
 		firstRunPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-		@Override
+			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				getMyApplication().getAppInitializer().resetFirstTimeRun();
 				getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
@@ -76,6 +76,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
+
+		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,
+				R.string.show_map_markers,
+				R.string.show_map_markers_description));
 
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;
