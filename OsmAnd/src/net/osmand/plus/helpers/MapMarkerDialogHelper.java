@@ -650,7 +650,7 @@ public class MapMarkerDialogHelper {
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();
 			wpt.setColor(mapActivity.getResources().getColor(getMapMarkerColorId(marker.colorIndex)));
-			//wpt.name = desc;
+			wpt.name = marker.getOnlyName();
 			//wpt.link = r.getFileName();
 			//wpt.time = r.getFile().lastModified();
 			//wpt.category = r.getSearchHistoryType();
