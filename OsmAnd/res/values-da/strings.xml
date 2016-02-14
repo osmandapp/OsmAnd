@@ -2272,4 +2272,11 @@
     <string name="show_polygons">Vis polygoner</string>
     <string name="underlay_transparency">Underlejringsgennemsigtighed</string>
     <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
+    <string name="show_map_markers">Kortmarkører</string>
+    <string name="show_map_markers_description">Aktivér kortmarkører funktion</string>
+    <string name="clear_active_markers_q">Vil du slette alle aktive markører?</string>
+    <string name="clear_markers_history_q">Vil du slette markører historie?</string>
+    <string name="active_markers">Aktive markører</string>
+    <string name="map_markers">Kortmarkører</string>
+    <string name="map_marker">Kortmarkør</string>
     </resources>
