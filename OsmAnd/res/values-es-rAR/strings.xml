@@ -2091,4 +2091,5 @@
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
+    <string name="select_map_markers">Elegir marcadores de mapa</string>
     </resources>
