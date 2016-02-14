@@ -197,12 +197,12 @@ public class MapMarkersHelper {
 			}
 			int colorIndex;
 			if (mapMarkers.size() > 0) {
-				colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+				colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 			} else {
 				colorIndex = 0;
 			}
 			settings.insertMapMarker(point.getLatitude(), point.getLongitude(),
-					pointDescription, colorIndex, mapMarkers.size());
+					pointDescription, colorIndex, 0);
 
 			readFromSettings();
 			refresh();

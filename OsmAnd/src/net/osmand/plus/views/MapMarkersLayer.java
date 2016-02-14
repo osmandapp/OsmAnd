@@ -62,8 +62,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		markerBitmapOrange = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_orange);
 		markerBitmapRed = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
 		markerBitmapYellow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_yellow);
-		markerBitmapTeal = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
-		markerBitmapPurple = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_green);
+		markerBitmapTeal = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_teal);
+		markerBitmapPurple = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_purple);
 
 		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
 		bitmapPaintDestBlue = createPaintDest(R.color.marker_blue);
@@ -182,9 +182,18 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		if (marker == null || tb == null) {
 			return false;
 		}
-		return tb.containsLatLon(marker.getLatitude(), marker.getLongitude());
+		return containsLatLon(tb, marker.getLatitude(), marker.getLongitude());
 	}
 
+	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon) {
+		double widgetHeight = 0;
+		if (widget.isTopBarVisible()) {
+			widgetHeight = widget.getTopBarHeight();
+		}
+		double tx = tb.getPixXFromLatLon(lat, lon);
+		double ty = tb.getPixYFromLatLon(lat, lon);
+		return tx >= 0 && tx <= tb.getPixWidth() && ty >= widgetHeight && ty <= tb.getPixHeight();
+	}
 
 	@Override
 	public void destroyLayer() {

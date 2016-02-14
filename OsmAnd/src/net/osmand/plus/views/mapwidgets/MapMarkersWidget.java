@@ -24,7 +24,7 @@ import java.util.List;
 
 public class MapMarkersWidget {
 
-	public static final int MIN_DIST_OK_VISIBLE = 50;
+	public static final int MIN_DIST_OK_VISIBLE = 40;
 
 	private final MapActivity map;
 	private MapMarkersHelper helper;
@@ -153,9 +153,18 @@ public class MapMarkersWidget {
 		return false;
 	}
 
+	public int getTopBarHeight() {
+		return topBar.getHeight();
+	}
+
+	public boolean isTopBarVisible() {
+		return topBar.getVisibility() == View.VISIBLE;
+	}
+
 	public void updateInfo(int zoom) {
 		List<MapMarker> markers = helper.getActiveMapMarkers();
 		if (zoom < 3 || markers.size() == 0 || map.getMyApplication().getRoutingHelper().isFollowingMode()
+				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
 				|| map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
 			updateVisibility(false);
 			return;
@@ -194,9 +203,7 @@ public class MapMarkersWidget {
 			dd = (DirectionDrawable) arrowImg.getDrawable();
 		}
 		dd.setImage(R.drawable.map_arrow_to_destination, MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex));
-		if (loc == null || heading == null || marker.point == null) {
-			dd.setAngle(0);
-		} else {
+		if (heading != null && loc != null) {
 			dd.setAngle(mes[1] - heading + 90 + screenOrientation);
 		}
 		if (newImage) {
