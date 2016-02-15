@@ -205,7 +205,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				dialog.dismiss();
 			}
 
-		});
+		})
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						callback.onMapSelected();
+					}
+				});
 		builder.show();
 	}
 
@@ -217,6 +224,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				if (itemId == R.string.layer_map) {
 					layers.selectMapLayer(mapView);
 				} else if (itemId == R.string.layer_overlay) {
@@ -230,9 +238,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 		};
 
-		adapter.item(R.string.layer_overlay).
-				iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
-		adapter.item(R.string.layer_underlay)
+		String overlayMapDescr = settings.MAP_OVERLAY.get();
+		overlayMapDescr = overlayMapDescr != null ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
+		adapter.item(R.string.layer_overlay).layout(R.layout.two_line_list_item).description(overlayMapDescr)
+				.iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
+		String underlayMapDescr = settings.MAP_UNDERLAY.get();
+		underlayMapDescr = underlayMapDescr != null ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
+		adapter.item(R.string.layer_underlay).layout(R.layout.two_line_list_item).description(underlayMapDescr)
 				.iconColor(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
 	}
 
