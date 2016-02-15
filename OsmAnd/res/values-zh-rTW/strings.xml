@@ -2092,4 +2092,13 @@
     <string name="show_polygons">顯示多邊形</string>
     <string name="underlay_transparency">襯底透明度</string>
     <string name="rendering_attr_showMtbRoutes_name">顯示 MTB 路線</string>
+    <string name="select_map_markers">選擇地圖標記</string>
+    <string name="shared_string_reverse_order">順序相反</string>
+    <string name="show_map_markers">地圖標記</string>
+    <string name="show_map_markers_description">啟動地圖標記功能</string>
+    <string name="clear_active_markers_q">您想要刪除所有的活動標記嗎？</string>
+    <string name="clear_markers_history_q">您想清除標記履歷嗎？</string>
+    <string name="active_markers">啟動標記</string>
+    <string name="map_markers">地圖標記</string>
+    <string name="map_marker">地圖標記</string>
     </resources>
