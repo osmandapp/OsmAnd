@@ -659,7 +659,7 @@
     <string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Elige primero la ciudad o calle</string>
-    <string name="search_street_in_neighborhood_cities">Buscar la calle en ciudades vecinas</string>
+    <string name="search_street_in_neighborhood_cities">Buscar calle en ciudades vecinas</string>
     <string name="intermediate_items_sort_return">Los destinos intermedios, se reordenados, para optimizar su recorrido en el camino desde la ubicación actual hasta el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar puerta a puerta</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM generado con éxito %1$s</string>
@@ -673,7 +673,7 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
-    <string name="use_distance_measurement_help">* Toque para marcar un punto.\n * Mantenga pulsado el mapa para quitar el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
+    <string name="use_distance_measurement_help">* Pulse para marcar un punto.\n * Mantenga pulsado el mapa para quitar el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
@@ -782,7 +782,7 @@
     <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
     <string name="rendering_attr_showRoadMaps_description">Elije cuando mostrar mapas viales:</string>
     <string name="rendering_attr_showRoadMaps_name">Mapas viales</string>
-    <string name="safe_mode_description">Ejecute la aplicación en modo seguro (usando código de Android, más lento, en vez del nativo).</string>
+    <string name="safe_mode_description">Ejecutar aplicación en modo seguro (usando código de Android, más lento, en vez del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
@@ -830,7 +830,7 @@
     <string name="avoid_motorway">Evitar autopistas</string>
     <string name="auto_zoom_map_descr">Ampliación automática del mapa, según la velocidad (mientras el mapa se sincroniza con la ubicación actual)</string>
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
-    <string name="snap_to_road_descr">﻿Ajusta la posición a los caminos durante la navegación</string>
+    <string name="snap_to_road_descr">﻿Ajustar posición a los caminos durante la navegación</string>
     <string name="snap_to_road">Ajustar a caminos</string>
     <string name="interrupt_music_descr">Interrumpe la música al hacer avisos</string>
     <string name="interrupt_music">Interrumpir música</string>
