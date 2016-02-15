@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="poi_palaeontological_site">Палеонтологічний місце</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_palaeontological_site">Палеонтологічний об’єкт</string>
 
 	<string name="poi_bakery">Булочна</string>
 	<string name="poi_alcohol">Спиртні напої</string>
@@ -22,7 +22,7 @@
 	<string name="poi_bicycle">Веломагазин</string>
 	<string name="poi_anime">Магазин аніме</string>
 	<string name="poi_antiques">Антикваріат</string>
-	<string name="poi_art">Витвори мистетства</string>
+	<string name="poi_art">Витвори мистецтва</string>
 	<string name="poi_baby_goods">Товари для дітей</string>
 	<string name="poi_bag">Сумки, валізи</string>
 	<string name="poi_bathroom_furnishing">Все для ванної кімнати</string>
@@ -34,7 +34,7 @@
 	<string name="poi_clothes_children">Дитячий одяг</string>
 	<string name="poi_shoes">Магазин взуття</string>
 	<string name="poi_computer">Комп’ютерний магазин</string>
-	<string name="poi_copyshop">Копіювальні послуги, полігрфафія</string>
+	<string name="poi_copyshop">Копіювальні послуги, поліграфія</string>
 	<string name="poi_curtain">Салон штор</string>
 	<string name="poi_fabric">Тканини</string>
 	<string name="poi_bedding">Постільна білизна</string>
@@ -53,7 +53,7 @@
 	<string name="poi_hardware">Будівельний магазин</string>
 	<string name="poi_hearing_aids">Слухові апарати</string>
 	<string name="poi_herbalist">Трави</string>
-	<string name="poi_hifi">HiFi апаратура</string>
+	<string name="poi_hifi">Hi-Fi апаратура</string>
 	<string name="poi_houseware">Господарські товари</string>
 	<string name="poi_hunting">Мисливське спорядження</string>
 	<string name="poi_interior_decoration">Внутрішнє оздоблення</string>
@@ -81,10 +81,10 @@
 	<string name="poi_trade">Факторія</string>
 	<string name="poi_vacuum_cleaner">Пилососи</string>
 	<string name="poi_variety_store">Універсальний магазин</string>
-	<string name="poi_video">Відео-прокат</string>
+	<string name="poi_video">Відеопрокат</string>
 	<string name="poi_window_blind">Жалюзі, віконниці, маркізи</string>
 	<string name="poi_department_store">Універмаг</string>
-	<string name="poi_electronics">Електороніка</string>
+	<string name="poi_electronics">Електроніка</string>
 	<string name="poi_car">Автосалон</string>
 	<string name="poi_car_parts">Автозапчастини</string>
 	<string name="poi_atv">Квадроцикли</string>
@@ -93,7 +93,7 @@
 	<string name="poi_sewing">Галантерея</string>
 
 	<string name="poi_police">Міліція/Поліція</string>
-	<string name="poi_fire_station">Пожежна частиниа</string>
+	<string name="poi_fire_station">Пожежна частина</string>
 	<string name="poi_emergency_phone">Аварійний телефон</string>
 	<string name="poi_fire_hydrant">Пожежний гідрант</string>
 	<string name="poi_fire_extinguisher">Вогнегасник</string>
@@ -156,7 +156,7 @@
 
 	<string name="poi_charity">Благодійний магазин</string>
 	<string name="poi_medical_supply">Медичне постачання</string>
-	<string name="poi_photo">Фото магазин</string>
+	<string name="poi_photo">Фотомагазин</string>
 	<string name="poi_traffic_calming_bump">Лежачий поліцейський</string>
 	<string name="poi_traffic_calming_hump">Горб</string>
 	<string name="poi_traffic_calming_chicane">Шикана</string>
@@ -169,7 +169,7 @@
 	<string name="poi_games">Ігри</string>
 	<string name="poi_model">Іграшкові моделі</string>
 	<string name="poi_trophy">Нагороди, призи</string>
-	<string name="poi_video_games">Комп\'ютерні ігри</string>
+	<string name="poi_video_games">Комп’ютерні ігри</string>
 	<string name="poi_pyrotechnics">Піротехніка</string>
 	<string name="poi_weapons">Магазин зброї</string>
 
@@ -179,7 +179,7 @@
 	<string name="poi_traffic_calming_choker">Звуження дороги</string>
 	<string name="poi_traffic_signals">Світлофор</string>
 
-	<string name="poi_car_repair">Ремонт машин(СТО)</string>
+	<string name="poi_car_repair">Ремонт машин (СТО)</string>
 	<string name="poi_service_tyres">Шини</string>
 	<string name="poi_vehicle_inspection">Огляд автомобіля</string>
 	<string name="poi_car_wash">Мийка автомобіля</string>
@@ -199,10 +199,10 @@
 	<string name="poi_fuel_1_25">Паливо 1:25</string>
 	<string name="poi_fuel_ethanol">Етанол</string>
 	<string name="poi_fuel_methanol">Метанол</string>
-	<string name="poi_fuel_svo">Рослинне пальне(олія)</string>
-	<string name="poi_fuel_e10">10% Біоетанолу(Е10)</string>
-	<string name="poi_fuel_e20">20% Етанолу(Е20)</string>
-	<string name="poi_fuel_e85">85% Етанолу(Е85)</string>
+	<string name="poi_fuel_svo">Рослинне пальне (олія)</string>
+	<string name="poi_fuel_e10">10% Біоетанолу (Е10)</string>
+	<string name="poi_fuel_e20">20% Етанолу (Е20)</string>
+	<string name="poi_fuel_e85">85% Етанолу (Е85)</string>
 	<string name="poi_fuel_lh2">Рідкий водень</string>
 	<string name="poi_fuel_electricity">Електроенергія</string>
 	<string name="poi_charging_station">Станція зарядки</string>
@@ -210,14 +210,14 @@
 	<string name="poi_compressed_air">Стиснене повітря</string>
 	<string name="poi_parking">Стоянка</string>
 	<string name="poi_motorcycle_parking">Стоянка для мотоциклів</string>
-	<string name="poi_parking_entrance">В\'їзд на стоянку</string>
+	<string name="poi_parking_entrance">В’їзд на стоянку</string>
 	<string name="poi_garages">Гаражі</string>
 
 	<string name="poi_public_transport_platform">Зупинка громадського транспорту</string>
 	<string name="poi_public_transport_platform_bus">Автобусна зупинка</string>
 	<string name="poi_public_transport_platform_trolleybus">Тролейбусна зупинка</string>
 	<string name="poi_bus_stop">Автобусна зупинка</string>
-	<string name="poi_public_transport_stop_position">Щупинка громадського транспорту</string>
+	<string name="poi_public_transport_stop_position">Зупинка громадського транспорту</string>
 	<string name="poi_public_transport_platform_tram">Трамвайна зупинка</string>
 	<string name="poi_tram_stop">Трамвайна зупинка</string>
 	<string name="poi_public_transport_station">Станція громадського транспорту</string>
@@ -259,7 +259,7 @@
 
 	<string name="poi_speed_camera">Камера контролю швидкості</string>
 	<string name="poi_turning_circle">Круговий рух</string>
-	<string name="poi_junction">З\'єднання</string>
+	<string name="poi_junction">З’єднання</string>
 	<string name="poi_motorway_junction">Автобан</string>
 	<string name="poi_rest_area">Зона відпочинку</string>
 
@@ -280,7 +280,7 @@
 	<string name="poi_aerialway_station">Станція канатної дороги</string>
 	<string name="poi_aerialway_t_bar">Т-подібний підйомник</string>
 	<string name="poi_aerialway_j_bar">J-подібний підйомник</string>
-	<string name="poi_aerialway_mixed_lift">Підйомник замішаного типу</string>
+	<string name="poi_aerialway_mixed_lift">Підйомник змішаного типу</string>
 	<string name="poi_aerialway_goods">Вантажний підйомник</string>
 	<string name="poi_water_works">Водозабір</string>
 	<string name="poi_wastewater_plant">Очисні споруди</string>
@@ -309,7 +309,7 @@
 	<string name="poi_recycling_container">Тип: контейнер</string>
 	<string name="poi_recycling_glass">Скло</string>
 	<string name="poi_recycling_paper">Папір</string>
-	<string name="poi_recycling_clothes">Одежа</string>
+	<string name="poi_recycling_clothes">Одяг</string>
 	<string name="poi_recycling_glass_bottles">Скляні пляшки</string>
 	<string name="poi_recycling_plastic">Пластик</string>
 	<string name="poi_recycling_scrap_metal">Металобрухт</string>
@@ -328,9 +328,9 @@
 	<string name="poi_recycling_shoes">Взуття</string>
 	<string name="poi_recycling_aluminium">Алюміній</string>
 	<string name="poi_recycling_organic">Органіка</string>
-	<string name="poi_recycling_beverage_cartons">Картоні коробки</string>
+	<string name="poi_recycling_beverage_cartons">Картонні коробки</string>
 	<string name="poi_recycling_garden_waste">Садове сміття</string>
-	<string name="poi_recycling_low_energy_bulbs">Енерго-зберігаючі лампи</string>
+	<string name="poi_recycling_low_energy_bulbs">Енергозберігаючі лампи</string>
 	<string name="poi_recycling_fluorescent_tubes">Люмінесцентні лампи</string>
 	<string name="poi_recycling_metal">Метал</string>
 	<string name="poi_recycling_electrical_items">Крупна побутова техніка</string>
@@ -340,8 +340,8 @@
 	<string name="poi_recycling_hazardous_waste">Небезпечні відходи</string>
 	<string name="poi_recycling_mobile_phones">Мобільні телефони</string>
 	<string name="poi_recycling_hydrargyrum">Ртуть</string>
-	<string name="poi_recycling_computers">Комп\'ютери</string>
+	<string name="poi_recycling_computers">Комп’ютери</string>
 	<string name="poi_recycling_tyres">Покришки</string>
 	<string name="poi_recycling_tv_monitor">Телевізори, монітори</string>
-	<string name="poi_node_networks">Пішохідні/велосипедні вузли маршрутів</string>
+	<string name="poi_node_networks">Вузли пішохідних/велосипедних маршрутів</string>
 		</resources>
