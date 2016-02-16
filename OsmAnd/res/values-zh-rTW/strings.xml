@@ -60,7 +60,7 @@
     <string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
     <string name="day_night_info">日/夜資訊</string>
     <string name="map_widget_day_night">日/夜地圖</string>
-    <string name="map_widget_vector_attributes">繪製屬性</string>
+    <string name="map_widget_vector_attributes">著色演算屬性</string>
     <string name="map_widget_renderer">地圖樣式</string>
 
 
@@ -153,7 +153,7 @@
     <string name="route_kr">靠右行走</string>
     <string name="rendering_attr_noPolygons_description">讓地圖上所有的陸地區域特徵具透明性</string>
     <string name="rendering_attr_noPolygons_name">隱藏多邊形</string>
-    <string name="rendering_attr_appMode_name">繪製模式</string>
+    <string name="rendering_attr_appMode_name">著色演算模式</string>
     <string name="rendering_attr_appMode_description">為地圖最佳化</string>
     <string name="rendering_attr_contourLines_description">顯示縮放比級別(需要等高線資料)：</string>
     <string name="rendering_attr_contourLines_name">顯示等高線</string>
@@ -195,7 +195,7 @@
     <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
 
 
-    <string name="osmand_development_plugin_description">這個外掛元件顯示開發與除錯功能的設定，如測試或模擬路線、螢幕繪製效能或語音提示。這些設定適用于開發人員，普通使用者並不需要。</string>
+    <string name="osmand_development_plugin_description">這個外掛元件顯示開發與除錯功能的設定，如測試或模擬路線、著色演算效能或語音提示。這些設定適用于開發人員，普通使用者並不需要。</string>
     <string name="plugins_screen">外掛元件管理</string>
 
     <string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
@@ -204,7 +204,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
     <string name="play_commands_of_currently_selected_voice">用所選擇的語音播放指令</string>
     <string name="debugging_and_development">OsmAnd 開發</string>
-    <string name="native_rendering">原生繪製</string>
+    <string name="native_rendering">原生著色演算</string>
     <string name="test_voice_prompts">測試語音提示</string>
     <string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(管理地圖檔案)或切換成線上地圖(啟用線上地圖外掛元件)。</string>
     <string name="send_files_to_osm">傳送 GPX 檔案到 OSM 嗎？</string>
@@ -348,7 +348,7 @@
     <string name="auto_follow_route_navigation">只有導航時自動置中</string>
     <string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
     <string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
-    <string name="pref_vector_rendering">向量繪圖專用選項</string>
+    <string name="pref_vector_rendering">向量著色演算專用選項</string>
     <string name="pref_overlay">上圖層 / 下圖層</string>
     <string name="pref_raster_map">地圖來源設定</string>
     <string name="pref_vector_map">向量地圖設定</string>
@@ -427,8 +427,8 @@
     <string name="search_offline_clear_search">新的查尋</string>
     <string name="map_text_size_descr">選擇地圖上名稱的文字大小</string>
     <string name="map_text_size">地圖字型大小</string>
-    <string name="trace_rendering">繪製除錯資訊</string>
-    <string name="trace_rendering_descr">顯示繪製效能</string>
+    <string name="trace_rendering">著色演算除錯資訊</string>
+    <string name="trace_rendering_descr">顯示著色演算效能</string>
 
 
     <string name="installing_new_resources">安裝新資料…</string>
@@ -562,14 +562,14 @@
     <string name="shared_string_download_map">下載地圖</string>
     <string name="select_max_zoom_preload_area">選擇要預載的最大縮放級別</string>
     <string name="maps_could_not_be_downloaded">此地圖無法下載</string>
-    <string name="continuous_rendering">連續繪製</string>
-    <string name="continuous_rendering_descr">顯示連續繪製代替立即圖像</string>
-    <string name="rendering_exception">在繪製已選擇的地區時發生錯誤</string>
+    <string name="continuous_rendering">連續著色演算</string>
+    <string name="continuous_rendering_descr">顯示連續著色演算代替立即圖像</string>
+    <string name="rendering_exception">在演算已選擇的地區時發生錯誤</string>
     <string name="show_point_options">使用位置 …</string>
-    <string name="renderer_load_sucess">繪製器已成功載入</string>
-    <string name="renderer_load_exception">發生異常：繪製器未載入</string>
-    <string name="renderers">向量繪製器</string>
-    <string name="renderers_descr">選擇繪製外觀</string>
+    <string name="renderer_load_sucess">著色演算器已成功載入</string>
+    <string name="renderer_load_exception">發生異常：著色演算器未載入</string>
+    <string name="renderers">向量著色演算器</string>
+    <string name="renderers_descr">選擇著色演算外觀</string>
     <string name="poi_context_menu_website">顯示興趣點網站</string>
     <string name="poi_context_menu_call">顯示興趣點電話</string>
     <string name="website">網站</string>
@@ -1140,7 +1140,7 @@
     <string name="app_mode_motorcycle">機車</string>
     <string name="app_mode_boat">船</string>
     <string name="app_mode_aircraft">飛航</string>
-    <string name="map_widget_map_rendering">地圖繪製</string>
+    <string name="map_widget_map_rendering">地圖著色演算</string>
     <string name="app_modes_choose_descr">在應用程式中選取現有的設定檔</string>
     <string name="app_modes_choose">應用設定檔</string>
     <string name="amenity_type_seamark">航線標識</string>
@@ -1440,8 +1440,8 @@
     <string name="osmo_specify_tracker_id">請指定 ID</string>
     <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 （SAC）</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">徒步符號層</string>
-    <string name="rendering_attr_alpineHiking_description">依據 SAC 比例繪製路徑</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑</string>
+    <string name="rendering_attr_alpineHiking_description">依據 SAC 比例演算路徑</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡演算路徑</string>
 
     <string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
@@ -1532,8 +1532,8 @@
     <string name="home_button">首頁</string>
     <string name="error_avoid_specific_road">沒發現支道</string>
     <string name="everything_up_to_date">全部都是最新的檔案</string>
-    <string name="use_opengl_render">使用 OpenGL 繪製</string>
-    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
+    <string name="use_opengl_render">使用 OpenGL 著色演算</string>
+    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 著色演算（可能在某些裝置上無法工作）</string>
     <string name="no_internet_connection">不能下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">可更新</string>
