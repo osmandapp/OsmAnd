@@ -371,6 +371,7 @@ public class OsMoService implements OsMoReactor {
 			PendingIntent intent = PendingIntent.getBroadcast(app, 0, notificationIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
 			android.support.v4.app.NotificationCompat.Builder bld = new NotificationCompat.Builder(app);
+			bld.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 			bld.setContentInfo(app.getString(R.string.osmo_auth_error, error));
 			bld.setContentIntent(intent);
 			bld.setContentTitle(app.getString(R.string.osmo_auth_error_short));
