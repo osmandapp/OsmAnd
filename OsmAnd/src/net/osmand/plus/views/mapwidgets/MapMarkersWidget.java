@@ -162,6 +162,10 @@ public class MapMarkersWidget {
 	}
 
 	public void updateInfo(int zoom) {
+		if (!map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
+			return;
+		}
+
 		List<MapMarker> markers = helper.getActiveMapMarkers();
 		if (zoom < 3 || markers.size() == 0 || map.getMyApplication().getRoutingHelper().isFollowingMode()
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()

@@ -146,10 +146,8 @@ public class MapActivityLayers {
 		navigationLayer = new PointNavigationLayer(activity);
 		mapView.addLayer(navigationLayer, 7);
 		// 7.3 map markers layer
-		if (app.getSettings().USE_MAP_MARKERS.get()) {
-			mapMarkersLayer = new MapMarkersLayer(activity);
-			mapView.addLayer(mapMarkersLayer, 7.3f);
-		}
+		mapMarkersLayer = new MapMarkersLayer(activity);
+		mapView.addLayer(mapMarkersLayer, 7.3f);
 		// 7.5 Impassible roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(activity);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);

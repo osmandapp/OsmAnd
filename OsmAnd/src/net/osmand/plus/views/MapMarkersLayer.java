@@ -140,7 +140,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 		widget.updateInfo(tb.getZoom());
 
-		if (tb.getZoom() < 3) {
+		if (tb.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
 
