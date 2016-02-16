@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
 
+    <string name="show_polygons">Отображать полигоны</string>
     <string name="rendering_attr_showMtbRoutes_name">Отображать MTB маршруты</string>
     <string name="shared_string_select">Выбрать</string>
     <string name="rendering_attr_hideIcons_name">Скрыть значки POI</string>
