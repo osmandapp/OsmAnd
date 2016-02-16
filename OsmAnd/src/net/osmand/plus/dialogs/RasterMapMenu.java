@@ -1,7 +1,6 @@
 package net.osmand.plus.dialogs;
 
 import android.support.annotation.StringRes;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -76,7 +75,6 @@ public class RasterMapMenu {
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
-				Log.v(TAG, "onRowItemClick(" + "adapter=" + adapter + ", view=" + view + ", itemId=" + itemId + ", pos=" + pos + ")");
 				if (itemId == mapTypeString) {
 					if (selected) {
 						plugin.selectMapOverlayLayer(mapActivity.getMapView(), mapTypePreference,
@@ -108,7 +106,8 @@ public class RasterMapMenu {
 		int selectedCode = selected ? 1 : 0;
 		mapTypeDescr = selected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
 		contextMenuAdapter.item(toggleActionStringId).listen(l).selected(selectedCode).reg();
-		contextMenuAdapter.item(mapTypeString).listen(l).layout(R.layout.two_line_list_item).description(mapTypeDescr).reg();
+		contextMenuAdapter.item(mapTypeString).listen(l).layout(R.layout.two_line_list_item)
+				.description(mapTypeDescr).reg();
 		ContextMenuAdapter.OnIntegerValueChangedListener integerListener =
 				new ContextMenuAdapter.OnIntegerValueChangedListener() {
 					@Override
@@ -119,10 +118,14 @@ public class RasterMapMenu {
 					}
 				};
 		// android:max="255" in layout is expected
-		contextMenuAdapter.item(mapTypeStringTransparency).layout(R.layout.progress_list_item)
-				.progress(mapTransparencyPreference.get()).listenInteger(integerListener).reg();
+		contextMenuAdapter.item(mapTypeStringTransparency)
+				.layout(R.layout.progress_list_item)
+				.iconColor(R.drawable.ic_action_opacity)
+				.progress(mapTransparencyPreference.get())
+				.listenInteger(integerListener).reg();
 		if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
-			contextMenuAdapter.item(R.string.show_polygons).listen(l).selected(hidePolygonsPref.get() ? 0 : 1).reg();
+			contextMenuAdapter.item(R.string.show_polygons).listen(l)
+					.selected(hidePolygonsPref.get() ? 0 : 1).reg();
 		}
 	}
 

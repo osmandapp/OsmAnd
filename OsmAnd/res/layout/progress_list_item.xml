@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="74dp"
     android:descendantFocusability="blocksDescendants"
     android:gravity="center_vertical"
     android:minHeight="@dimen/list_item_height"
@@ -13,24 +13,30 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"
         tools:text="Germany"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
         <ImageView
-            android:src="@drawable/ic_action_opacity"
+            android:id="@+id/icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:src="@drawable/ic_action_opacity"/>
+
         <SeekBar
             android:id="@+id/seekbar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:max="255"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:max="255"/>
     </LinearLayout>
 
 </LinearLayout>
