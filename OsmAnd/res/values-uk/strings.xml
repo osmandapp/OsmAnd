@@ -2253,7 +2253,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
     <string name="nm">nm</string>
-    <string name="nm_h"/>
+    <string name="nm_h">нм/г</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
     <string name="weekly">Щотижня</string>
@@ -2279,4 +2279,20 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="reports_for">Відзвітувати</string>
 <string name="rendering_attr_showMtbRoutes_name">Відображати MTB-маршрути</string>
     <string name="show_on_start_description">Якщо вимкнено, при запуску відразу відображає екран мапи</string>
+    <string name="add_points_to_map_markers_q">Бажаєте додати всі точки до Позначок Мапи?</string>
+    <string name="shared_string_add_to_map_markers">Додати до Позначок Мапи</string>
+    <string name="select_map_markers">Обрати Позначки Мапи</string>
+    <string name="shared_string_reverse_order">Зворотній порядок</string>
+    <string name="show_map_markers">Позначки Мапи</string>
+    <string name="show_map_markers_description">Показати елементи з Позначок Мапи</string>
+    <string name="clear_active_markers_q">Вилучити всі активні позначки?</string>
+    <string name="clear_markers_history_q">Очистити історію позначок?</string>
+    <string name="active_markers">Поточні позназчки</string>
+    <string name="map_markers">Позначки мапи</string>
+    <string name="map_marker">Позначка мапи</string>
+    <string name="consider_turning_polygons_off">Рекомендується вимкнути показ полігонів.</string>
+    <string name="av_locations_descr">Файл GPX з координатами нотаток</string>
+    <string name="show_free_version_banner_description">Навіть, якщо ви придбали платну версію, ви все ще можете бачити банер для безкоштовної версії</string>
+    <string name="dashboard_or_drawer_description">У вас зараз є вибір керувати застосунком через гнучку панель керування або через звичайне мені. Ваші вподобання завжди можна змінити в параметрах панелі керування.</string>
+    <string name="release_2_2">" • Нові елементи інтерфейсу, що залежат від потоного стану, для вибору місця на мапи та на інших екранах\n\n • Екран з мапою відкривається під час запуску, якщо тільки не активовано функцію \'Показувати панель керування під час запуску\'\n\n • Налаштування того, які і як елементи будуть показуватись на панелі керування\n\n • Оминання панелі керування, якщо ви надаєте перевагу керуванню роботою через меню\n\n • Для завантаження мапи, територію можна обрати безпосередньо на мапі світу\n\n • Пошук ПОІ тепер підтримує більш конкретні запити\n\n • Покращено функції редагування ПОІ та додавання даних в OSM\n\n • Перероблено інтерфейс та структуру завантаження мап\n\n та багато іншого … "</string>
     </resources>
