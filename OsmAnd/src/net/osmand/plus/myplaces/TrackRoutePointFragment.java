@@ -33,5 +33,17 @@ public class TrackRoutePointFragment extends SelectedGPXFragment {
 					}
 				});
 		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+
+		if (app.getSettings().USE_MAP_MARKERS.get()) {
+			item = menu.add(R.string.shared_string_add_to_map_markers).setIcon(R.drawable.ic_action_flag_dark)
+					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							saveAsMapMarkers(GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS);
+							return true;
+						}
+					});
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
 	}
 }

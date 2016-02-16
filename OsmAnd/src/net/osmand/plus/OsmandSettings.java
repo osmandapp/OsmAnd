@@ -1614,6 +1614,27 @@ public class OsmandSettings {
 			return savePoints(ps, ds, cs);
 		}
 
+		public boolean insertPoints(double[] latitudes, double[] longitudes,
+								   List<PointDescription> historyDescriptions, int[] colorIndexes, int[] indexes) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			List<Integer> cs = getColors(ps.size());
+			for (int i = 0; i < latitudes.length; i++) {
+				double latitude = latitudes[i];
+				double longitude = longitudes[i];
+				PointDescription historyDescription = historyDescriptions.get(i);
+				int colorIndex = colorIndexes[i];
+				int index = indexes[i];
+				ps.add(index, new LatLon(latitude, longitude));
+				ds.add(index, PointDescription.serializeToString(historyDescription));
+				cs.add(index, colorIndex);
+				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+				}
+			}
+			return savePoints(ps, ds, cs);
+		}
+
 		public boolean updatePoint(double latitude, double longitude,
 								   PointDescription historyDescription, int colorIndex) {
 			List<LatLon> ps = getPoints();
@@ -1825,6 +1846,11 @@ public class OsmandSettings {
 	public boolean insertMapMarker(double latitude, double longitude,
 								   PointDescription historyDescription, int colorIndex, int index) {
 		return mapMarkersStorage.insertPoint(latitude, longitude, historyDescription, colorIndex, index);
+	}
+
+	public boolean insertMapMarkers(double[] latitudes, double[] longitudes,
+								   List<PointDescription> historyDescriptions, int[] colorIndexes, int[] indexes) {
+		return mapMarkersStorage.insertPoints(latitudes, longitudes, historyDescriptions, colorIndexes, indexes);
 	}
 
 	public boolean updateMapMarker(double latitude, double longitude,

@@ -38,6 +38,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -222,7 +223,24 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				saveFavoritesImpl(flatten(gs), editText.getText().toString());
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();
+	}
 
+	protected void saveAsMapMarkers(final GpxDisplayItemType gpxDisplayItemType) {
+		AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
+		final List<GpxDisplayGroup> gs = filterGroups(gpxDisplayItemType, getMyActivity(), getArguments());
+		if (gs.size() == 0) {
+			return;
+		}
+		b.setMessage(R.string.add_points_to_map_markers_q);
+		b.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				saveMapMarkersImpl(flatten(gs));
 			}
 		});
 		b.setNegativeButton(R.string.shared_string_cancel, null);
@@ -239,6 +257,19 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			}
 		}
 		fdb.saveCurrentPointsIntoFile();
+	}
+
+	protected void saveMapMarkersImpl(List<GpxDisplayItem> modifiableList) {
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		List<LatLon> points = new ArrayList<>();
+		List<PointDescription> names = new ArrayList<>();
+		for(GpxDisplayItem i : modifiableList) {
+			if (i.locationStart != null) {
+				points.add(new LatLon(i.locationStart.lat, i.locationStart.lon));
+				names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
+			}
+		}
+		markersHelper.addMapMarkers(points, names);
 	}
 
 	@Override

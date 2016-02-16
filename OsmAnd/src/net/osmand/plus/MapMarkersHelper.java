@@ -21,6 +21,7 @@ public class MapMarkersHelper {
 
 	public interface MapMarkerChangedListener {
 		void onMapMarkerChanged(MapMarker mapMarker);
+
 		void onMapMarkersChanged();
 	}
 
@@ -199,25 +200,50 @@ public class MapMarkersHelper {
 	}
 
 	public void addMapMarker(LatLon point, PointDescription historyName) {
-		if (point != null) {
-			final PointDescription pointDescription;
-			if (historyName == null) {
-				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
-			} else {
-				pointDescription = historyName;
-			}
-			if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
-				pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
-			}
-			int colorIndex;
-			if (mapMarkers.size() > 0) {
-				colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
-			} else {
-				colorIndex = 0;
-			}
-			settings.insertMapMarker(point.getLatitude(), point.getLongitude(),
-					pointDescription, colorIndex, 0);
+		List<LatLon> points = new ArrayList<>(1);
+		List<PointDescription> historyNames = new ArrayList<>(1);
+		points.add(point);
+		historyNames.add(historyName);
+		addMapMarkers(points, historyNames);
+	}
 
+	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames) {
+		if (points.size() > 0) {
+			int colorIndex = -1;
+			double[] latitudes = new double[points.size()];
+			double[] longitudes = new double[points.size()];
+			List<PointDescription> pointDescriptions = new ArrayList<>();
+			int[] colorIndexes = new int[points.size()];
+			int[] indexes = new int[points.size()];
+			for (int i = 0; i < points.size(); i++) {
+				LatLon point = points.get(i);
+				PointDescription historyName = historyNames.get(i);
+				final PointDescription pointDescription;
+				if (historyName == null) {
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+				} else {
+					pointDescription = historyName;
+				}
+				if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
+					pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
+				}
+				if (colorIndex == -1) {
+					if (mapMarkers.size() > 0) {
+						colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+					} else {
+						colorIndex = 0;
+					}
+				} else {
+					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+				}
+
+				latitudes[i] = point.getLatitude();
+				longitudes[i] = point.getLongitude();
+				pointDescriptions.add(pointDescription);
+				colorIndexes[i] = colorIndex;
+				indexes[i] = 0;
+			}
+			settings.insertMapMarkers(latitudes, longitudes, pointDescriptions, colorIndexes, indexes);
 			readFromSettings();
 			refresh();
 		}

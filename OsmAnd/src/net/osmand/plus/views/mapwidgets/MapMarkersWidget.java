@@ -83,7 +83,7 @@ public class MapMarkersWidget {
 		});
 
 		IconsCache iconsCache = map.getMyApplication().getIconsCache();
-		if (isLandscapeLayout()) {
+		if (isLandscapeLayout() && helper.getActiveMapMarkers().size() > 1) {
 			moreButton.setVisibility(View.GONE);
 		} else {
 			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
