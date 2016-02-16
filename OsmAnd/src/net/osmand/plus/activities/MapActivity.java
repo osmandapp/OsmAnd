@@ -54,7 +54,6 @@ import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FirstUsageFragment;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
@@ -167,6 +166,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 //				pi);
 		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
 		final Builder noti = new NotificationCompat.Builder(this).setContentTitle(Version.getAppName(app))
+				.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 				.setContentText(getString(R.string.go_back_to_osmand))
 				.setSmallIcon(smallIcon)
 //	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))

@@ -20,6 +20,7 @@
     <string name="active_markers">Active markers</string>
     <string name="map_markers">Map markers</string>
     <string name="map_marker">Map marker</string>
+    <string name="consider_turning_polygons_off">It is recommended to turn off rendering of polygons.</string>
     <string name="rendering_attr_showMtbRoutes_name">Show MTB routes</string>
     <string name="show_polygons">Show polygons</string>
     <!-- string name="underlay_transparency">Underlay transparency</string -->

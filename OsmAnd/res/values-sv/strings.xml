@@ -2085,4 +2085,13 @@
     <string name="show_polygons">Visa polygoner</string>
     <string name="underlay_transparency">Underläggstransparens</string>
     <string name="rendering_attr_showMtbRoutes_name">Visa MTB-rutter</string>
+    <string name="select_map_markers">Välj kartmarkörer</string>
+    <string name="shared_string_reverse_order">Omvänd ordning</string>
+    <string name="show_map_markers">Kartmarkörer</string>
+    <string name="show_map_markers_description">Aktivera kartmarkörer</string>
+    <string name="clear_active_markers_q">Vill du ta bort alla aktiva markörer?</string>
+    <string name="clear_markers_history_q">Vill du radera markörhistoriken?</string>
+    <string name="active_markers">Aktiva markörer</string>
+    <string name="map_markers">Kartmarkörer</string>
+    <string name="map_marker">Kartmarkör</string>
     </resources>

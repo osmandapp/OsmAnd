@@ -124,9 +124,10 @@ public class DownloadIndexesThread {
 				}
 				contentText.append(i.getVisibleName(app, app.getRegions()));
 			}
-			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download).
-				setContentText(contentText.toString()).
-				setContentIntent(contentPendingIntent).setOngoing(true);
+			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download)
+					.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+					.setContentText(contentText.toString())
+					.setContentIntent(contentPendingIntent).setOngoing(true);
 			int progress = getCurrentDownloadingItemProgress();
 			bld.setProgress(100, Math.max(progress, 0), progress < 0);
 			notification = bld.build();

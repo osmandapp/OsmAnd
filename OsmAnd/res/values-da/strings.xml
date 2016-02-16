@@ -2274,11 +2274,12 @@
     <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
     <string name="show_map_markers">Kortmarkører</string>
     <string name="show_map_markers_description">Aktivér kortmarkører funktion</string>
-    <string name="clear_active_markers_q">Vil du slette alle aktive markører?</string>
-    <string name="clear_markers_history_q">Vil du slette markører historie?</string>
+    <string name="clear_active_markers_q">Slet alle aktive markører?</string>
+    <string name="clear_markers_history_q">Slet markørhistoriken?</string>
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kortmarkører</string>
     <string name="map_marker">Kortmarkør</string>
     <string name="shared_string_reverse_order">Omvendt rækkefølge</string>
     <string name="select_map_markers">Vælg kortmarkører</string>
+    <string name="consider_turning_polygons_off">Det anbefales at deaktivere rendering af polygoner.</string>
     </resources>
