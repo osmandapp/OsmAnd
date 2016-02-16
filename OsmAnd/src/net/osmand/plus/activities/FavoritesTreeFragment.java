@@ -421,10 +421,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		if(!favoritesSelected.isEmpty()) {
 			if (getSettings().USE_MAP_MARKERS.get()) {
 				MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+				List<LatLon> points = new ArrayList<>(favoritesSelected.size());
+				List<PointDescription> names = new ArrayList<>(favoritesSelected.size());
 				for (FavouritePoint fp : favoritesSelected) {
-					markersHelper.addMapMarker(new LatLon(fp.getLatitude(), fp.getLongitude()),
-							new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
+					points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
+					names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
 				}
+				markersHelper.addMapMarkers(points, names);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else {
 				final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
