@@ -2092,4 +2092,7 @@
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
     <string name="select_map_markers">Elegir marcadores de mapa</string>
+    <string name="add_points_to_map_markers_q">¿Añadir todos los puntos a los marcadores del mapa?</string>
+    <string name="shared_string_add_to_map_markers">Añadir a los marcadores del mapa</string>
+    <string name="consider_turning_polygons_off">Se recomienda ocultar la visualización de polígonos.</string>
     </resources>
