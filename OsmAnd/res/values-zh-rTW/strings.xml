@@ -2101,4 +2101,7 @@
     <string name="active_markers">啟動標記</string>
     <string name="map_markers">地圖標記</string>
     <string name="map_marker">地圖標記</string>
+    <string name="add_points_to_map_markers_q">您想要將所有的標點都加到地圖標記嗎？</string>
+    <string name="shared_string_add_to_map_markers">增加地圖標記</string>
+    <string name="consider_turning_polygons_off">建議關閉多邊形的著色演算。</string>
     </resources>
