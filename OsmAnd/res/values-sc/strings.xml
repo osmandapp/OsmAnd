@@ -2111,4 +2111,7 @@
     <string name="active_markers">Marcadores ativos</string>
     <string name="map_markers">Marcadores mapa</string>
     <string name="map_marker">Marcadore mapa</string>
+    <string name="add_points_to_map_markers_q">Boles annanghere totu sos puntos a sos Marcadores Mapa?</string>
+    <string name="shared_string_add_to_map_markers">Annanghe a sos Marcadores Mapa</string>
+    <string name="consider_turning_polygons_off">Ti cussigiamus de istudare sa renderizatzione de sos polìgonos.</string>
     </resources>
