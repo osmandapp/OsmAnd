@@ -2094,4 +2094,7 @@
     <string name="active_markers">Aktiva markörer</string>
     <string name="map_markers">Kartmarkörer</string>
     <string name="map_marker">Kartmarkör</string>
+    <string name="add_points_to_map_markers_q">Vill du lägga till alla punkter till Kartmarkörer?</string>
+    <string name="shared_string_add_to_map_markers">Lägg till i Kartmarkörer</string>
+    <string name="consider_turning_polygons_off">Rekommendationen är att slå av rendering av polygoner.</string>
     </resources>
