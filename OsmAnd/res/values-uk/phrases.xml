@@ -268,7 +268,7 @@
 	<string name="poi_highway_crossing">Переїзд</string>
 
 <string name="poi_energy">Енергетичний магазин</string>
-	<string name="poi_fuel_1_50">Паливо 1:50</string>
+	<string name="poi_fuel_1_50">Суміш 1:50</string>
 	<string name="poi_doors">Двері</string>
 	<string name="poi_perfumery">Парфумерія</string>
 
@@ -344,4 +344,65 @@
 	<string name="poi_recycling_tyres">Покришки</string>
 	<string name="poi_recycling_tv_monitor">Телевізори, монітори</string>
 	<string name="poi_node_networks">Вузли пішохідних/велосипедних маршрутів</string>
-		</resources>
+		<string name="poi_railway_buffer_stop">Залізничний буфер</string>
+	<string name="poi_slipway">Суднопідіймальний елінг</string>
+	<string name="poi_aerialway_pylon">Опора канатної дороги</string>
+
+	<string name="poi_groyne">Хвилеріз</string>
+
+	<string name="poi_recycling_waste_oil">Відпрацьоване масло</string>
+	<string name="poi_recycling_bottles">Пляшки</string>
+	<string name="poi_recycling_cork">Корки від вина</string>
+	<string name="poi_recycling_printer_cartridges">Картриджі для принтерів</string>
+	<string name="poi_recycling_foil">Фольга</string>
+	<string name="poi_recycling_paint">Фарба</string>
+	<string name="poi_recycling_styrofoam">Пінополістирол</string>
+	<string name="poi_recycling_compost">Компост</string>
+	<string name="poi_recycling_christmas_trees">Новорічні ялинки</string>
+	<string name="poi_recycling_chipboard">ДСП</string>
+	<string name="poi_recycling_polyester">Поліестер</string>
+	<string name="poi_recycling_plasterboard">Гіпсокартон</string>
+	<string name="poi_recycling_furniture">Меблі</string>
+	<string name="poi_recycling_diapers">Підгузки</string>
+	<string name="poi_recycling_car_batteries">Акумулятори автомобільні</string>
+	<string name="poi_recycling_cars">Автомобілі</string>
+	<string name="poi_recycling_bicycles">Велосипеди</string>
+
+	<string name="poi_landfill">Звалище</string>
+	<string name="poi_industrial">Промислова зона</string>
+	<string name="poi_quarry">Карʼєр</string>
+	<string name="poi_vineyard">Виноградник</string>
+	<string name="poi_orchard">Фруктовий сад</string>
+	<string name="poi_canal">Канал</string>
+	<string name="poi_pier">Пірс</string>
+	<string name="poi_surveillance">Спостереження</string>
+	<string name="poi_observatory">Обсерваторія</string>
+	<string name="poi_astronomical_observatory">Астрономічна обсерваторія</string>
+	<string name="poi_tower">Вежа</string>
+	<string name="poi_mast">Щогла</string>
+	<string name="poi_radar">Радар</string>
+	<string name="poi_crane">Кран</string>
+	<string name="poi_construction">Будівництво</string>
+	<string name="poi_adit">Штольня</string>
+	<string name="poi_windmill">Вітряк</string>
+	<string name="poi_reservoir">Водосховище</string>
+	<string name="poi_college">Коледж</string>
+	<string name="poi_driving_school">Курси водіння, автошкола</string>
+	<string name="poi_kindergarten">Дитячий садок</string>
+	<string name="poi_school">Школа</string>
+	<string name="poi_training">Навчальний центр</string>
+	<string name="poi_university">Університет</string>
+
+	<string name="poi_prison">Вʼязниця</string>
+	<string name="poi_register_office">РАГС</string>
+	<string name="poi_embassy">Посольство</string>
+	<string name="poi_pension_fund">Пенсійний фонд</string>
+	<string name="poi_customs">Митниця</string>
+	<string name="poi_country">Країна</string>
+	<string name="poi_city">Місто</string>
+	<string name="poi_village">Село</string>
+	<string name="poi_quarter">Квартал</string>
+	<string name="poi_place_farm">Ферма</string>
+	<string name="poi_hospital">Лікарня</string>
+	<string name="poi_dentist">Стоматолог</string>
+	</resources>
