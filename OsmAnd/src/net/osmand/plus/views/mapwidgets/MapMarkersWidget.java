@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
@@ -161,7 +162,7 @@ public class MapMarkersWidget {
 		return topBar.getVisibility() == View.VISIBLE;
 	}
 
-	public void updateInfo(int zoom) {
+	public void updateInfo(LatLon customLocation, int zoom) {
 		if (!map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
 		}
@@ -174,7 +175,15 @@ public class MapMarkersWidget {
 			return;
 		}
 
-		Location loc = map.getMapViewTrackingUtilities().getMyLocation();
+		LatLon loc = null;
+		if (customLocation != null) {
+			loc = customLocation;
+		} else {
+			Location l = map.getMapViewTrackingUtilities().getMyLocation();
+			if (l != null) {
+				loc = new LatLon(l.getLatitude(), l.getLongitude());
+			}
+		}
 		Float heading = map.getMapViewTrackingUtilities().getHeading();
 
 		MapMarker marker = markers.get(0);
@@ -191,7 +200,7 @@ public class MapMarkersWidget {
 		updateVisibility(true);
 	}
 
-	private void updateUI(Location loc, Float heading, MapMarker marker, ImageView arrowImg,
+	private void updateUI(LatLon loc, Float heading, MapMarker marker, ImageView arrowImg,
 						  TextView distText, ImageButton okButton, TextView addressText, boolean firstLine) {
 		float[] mes = new float[2];
 		if (loc != null && marker.point != null) {
