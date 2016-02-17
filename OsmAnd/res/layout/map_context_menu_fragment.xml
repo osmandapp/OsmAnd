@@ -208,7 +208,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
-                    android:drawableLeft="@drawable/ic_action_delete_dark"
                     android:gravity="center"
                     android:paddingLeft="@dimen/context_menu_button_padding_x"
                     android:paddingRight="@dimen/context_menu_button_padding_x"

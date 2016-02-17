@@ -136,8 +136,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			menu.setMapCenter(mapCenter);
 			double markerLat = menu.getLatLon().getLatitude();
 			double markerLon = menu.getLatLon().getLongitude();
-			origMarkerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
-			origMarkerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+			origMarkerX = (int) box.getPixXFromLatLon(markerLat, markerLon);
+			origMarkerY = (int) box.getPixYFromLatLon(markerLat, markerLon);
 		} else {
 			mapCenter = menu.getMapCenter();
 			origMarkerX = box.getCenterPixelX();
@@ -340,7 +340,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				(TextView) view.findViewById(R.id.progressTitle), nightMode);
 
 		// FAB
-		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
+		fabView = (ImageView) view.findViewById(R.id.context_menu_fab_view);
 		if (menu.fabVisible()) {
 			fabView.setImageDrawable(iconsCache.getIcon(menu.getFabIconId(), 0, 0f));
 			if (menu.isLandscapeLayout()) {
@@ -442,15 +442,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public void openMenuHalfScreen() {
 		int oldMenuState = menu.getCurrentMenuState();
-		if(oldMenuState == MenuState.HEADER_ONLY) {
+		if (oldMenuState == MenuState.HEADER_ONLY) {
 			changeMenuState(getViewY(), false, true, false);
-		} else if(oldMenuState == MenuState.FULL_SCREEN && !menu.isLandscapeLayout()) {
+		} else if (oldMenuState == MenuState.FULL_SCREEN && !menu.isLandscapeLayout()) {
 			changeMenuState(getViewY(), false, false, true);
 		}
 	}
 
 	private void changeMenuState(int currentY, boolean skipHalfScreenState,
-								boolean slidingUp, boolean slidingDown) {
+								 boolean slidingUp, boolean slidingDown) {
 		boolean needCloseMenu = false;
 
 		int oldMenuState = menu.getCurrentMenuState();
@@ -581,10 +581,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			rightTitleButton.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable leftIcon = rightTitleButtonController.getLeftIcon();
-			if (leftIcon != null) {
-				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				rightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
-			}
+			rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+			rightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
 		} else {
 			rightTitleButton.setVisibility(View.GONE);
 		}
@@ -596,10 +594,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			topRightTitleButton.setVisibility(topRightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable leftIcon = topRightTitleButtonController.getLeftIcon();
-			if (leftIcon != null) {
-				topRightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				topRightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
-			}
+			topRightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+			topRightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
 		} else {
 			topRightTitleButton.setVisibility(View.GONE);
 		}
@@ -700,7 +696,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		buildHeader();
 
-		LinearLayout bottomLayout = (LinearLayout)view.findViewById(R.id.context_menu_bottom_view);
+		LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);
 		bottomLayout.removeAllViews();
 		buildBottomView();
 
@@ -753,7 +749,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					} else {
 						menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight;
 						menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
-						+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
+								+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
 					}
 				}
 				menuTopViewHeight = newMenuTopViewHeight;
@@ -895,7 +891,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		int minHalfY;
 		if (menu.isExtended()) {
 			destinationState = menu.getCurrentMenuState();
-			minHalfY = viewHeight - (int)(viewHeight * menu.getHalfScreenMaxHeightKoef());
+			minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		} else {
 			destinationState = MenuState.HEADER_ONLY;
 			minHalfY = viewHeight;
@@ -931,7 +927,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private int getViewY() {
 		if (!oldAndroid()) {
-			return (int)mainView.getY();
+			return (int) mainView.getY();
 		} else {
 			return mainView.getPaddingTop();
 		}
@@ -975,13 +971,13 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 		box.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		box.setZoom(zoom);
-		int markerMapCenterX = (int)box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
-		int markerMapCenterY = (int)box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		int markerMapCenterX = (int) box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		int markerMapCenterY = (int) box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
 		float cpyOrig = box.getCenterPixelPoint().y;
 
 		box.setCenterLocation(0.5f, 0.5f);
-		int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
-		int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+		int markerX = (int) box.getPixXFromLatLon(markerLat, markerLon);
+		int markerY = (int) box.getPixYFromLatLon(markerLat, markerLon);
 		QuadPoint cp = box.getCenterPixelPoint();
 		float cpx = cp.x;
 		float cpy = cp.y;
@@ -1004,7 +1000,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				int dx = (x + markerPaddingXPx) - markerX;
 				int dy = 0;
 				if (center) {
-					dy = (int)cpy - markerY;
+					dy = (int) cpy - markerY;
 				} else {
 					cpy = cpyOrig;
 				}
@@ -1018,7 +1014,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				int dy = markerY - (y - markerPaddingPx);
 				if (markerY - dy <= origMarkerY) {
 					if (center) {
-						dx = markerX - (int)cpx;
+						dx = markerX - (int) cpx;
 					}
 					latlon = box.getLatLonFromPixel(cpx + dx, cpy + dy);
 				}
@@ -1144,7 +1140,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private MapActivity getMapActivity() {
-		return (MapActivity)getActivity();
+		return (MapActivity) getActivity();
 	}
 
 	private int dpToPx(float dp) {
