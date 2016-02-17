@@ -2104,4 +2104,9 @@
     <string name="add_points_to_map_markers_q">您想要將所有的標點都加到地圖標記嗎？</string>
     <string name="shared_string_add_to_map_markers">增加地圖標記</string>
     <string name="consider_turning_polygons_off">建議關閉多邊形的著色演算。</string>
+    <string name="show_map_markers_topbar">顯示地圖標記頂列</string>
+    <string name="map_marker_1st">第一個地圖標記</string>
+    <string name="map_marker_2nd">第二個地圖標記</string>
+    <string name="shared_string_toolbar">工具列</string>
+    <string name="shared_string_widgets">小工具</string>
     </resources>
