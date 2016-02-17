@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:id="@+id/messageEditTextLabel"
-        android:text="@string/osb_comment_dialog_message"/>
+	<TextView
+		android:id="@+id/messageEditTextLabel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:text="@string/osb_comment_dialog_message" />
 
-    <EditText
-        android:id="@+id/messageEditText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:inputType="textMultiLine"
-        android:minLines="1"/>
+	<EditText
+		android:id="@+id/messageEditText"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp"
+		android:inputType="textMultiLine"
+		android:minLines="1" />
 
-    <CheckBox
-        android:id="@+id/closeChangeSetCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="@string/close_changeset"/>
+	<CheckBox
+		android:id="@+id/closeChangeSetCheckBox"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:text="@string/close_changeset" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="@string/user_name"/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:text="@string/user_name" />
 
-    <EditText
-        android:id="@+id/userNameEditText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"/>
+	<EditText
+		android:id="@+id/userNameEditText"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="@string/user_password"/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:text="@string/user_password" />
 
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:inputType="textPassword"/>
+	<EditText
+		android:id="@+id/passwordEditText"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp"
+		android:inputType="textPassword" />
 </LinearLayout>

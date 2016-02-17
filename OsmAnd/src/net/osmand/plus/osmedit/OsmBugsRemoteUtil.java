@@ -40,12 +40,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		this.app = app;
 		settings = app.getSettings();
 	}
-	
+
 	@Override
 	public OsmBugResult commit(OsmNotesPoint point, String text, Action action) {
 		StringBuilder b = new StringBuilder();
 		String msg = "";
-		if(action == OsmPoint.Action.CREATE) {
+		if (action == OsmPoint.Action.CREATE) {
 			b.append(getNotesApi()).append("?"); //$NON-NLS-1$
 			b.append("lat=").append(point.getLatitude()); //$NON-NLS-1$
 			b.append("&lon=").append(point.getLongitude()); //$NON-NLS-1$
@@ -54,19 +54,19 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		} else {
 			b.append(getNotesApi()).append("/");
 			b.append(point.getId()); //$NON-NLS-1$
-			if(action == OsmPoint.Action.REOPEN) {
+			if (action == OsmPoint.Action.REOPEN) {
 				b.append("/reopen");
 				msg = "reopen note";
-			} else if(action == OsmPoint.Action.MODIFY) {
+			} else if (action == OsmPoint.Action.MODIFY) {
 				b.append("/comment");
 				msg = "adding comment";
-			} else if(action == OsmPoint.Action.DELETE) {
+			} else if (action == OsmPoint.Action.DELETE) {
 				b.append("/close");
 				msg = "close note";
 			}
 			b.append("?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
 		}
-		return editingPOI(b.toString(), "POST", msg); 
+		return editingPOI(b.toString(), "POST", msg);
 	}
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation) {
@@ -104,13 +104,13 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {
-				r.warning =  msg + "\n" + responseBody;
+				r.warning = msg + "\n" + responseBody;
 			}
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			String msg = app.getString(R.string.auth_failed);
 			log.error(msg, e);
-			r.warning =  app.getString(R.string.auth_failed) + "";
+			r.warning = app.getString(R.string.auth_failed) + "";
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
 			r.warning = e.getMessage() + "";
