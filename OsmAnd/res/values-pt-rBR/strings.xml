@@ -2010,4 +2010,17 @@
     <string name="find_parking">Encontrar estacionamento</string>
     <string name="show_polygons">Mostrar polígonos de áreas</string>
     <string name="underlay_transparency">Transparência da subcamada</string>
+    <string name="add_points_to_map_markers_q">Você quer adicionar todos os pontos aos Marcadores de Mapa?</string>
+    <string name="shared_string_add_to_map_markers">Adicionar aos Marcadores de Mapa</string>
+    <string name="select_map_markers">Selecionar Marcadores de Mapa</string>
+    <string name="shared_string_reverse_order">Ordem inversa</string>
+    <string name="show_map_markers">Marcadores de Mapa</string>
+    <string name="show_map_markers_description">Ativar o recurso Marcadores de Mapa</string>
+    <string name="clear_active_markers_q">Você quer apagar todos os marcadores ativos?</string>
+    <string name="clear_markers_history_q">Você quer limpar o histórico de marcadores?</string>
+    <string name="map_markers">Marcadores de mapa</string>
+    <string name="map_marker">Marcador de mapa</string>
+    <string name="consider_turning_polygons_off">É recomendável desativar a visualização de polígonos.</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mostrar rotas MTB</string>
+    <string name="active_markers">Ativar marcadores</string>
     </resources>
