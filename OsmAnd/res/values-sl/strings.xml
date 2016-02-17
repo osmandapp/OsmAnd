@@ -2112,4 +2112,12 @@
     <string name="map_marker">Oznaka zemljevida</string>
     <string name="rendering_attr_showMtbRoutes_name">Pokaži poti MTB</string>
     <string name="show_polygons">Pokaži poligone</string>
+    <string name="show_map_markers_topbar">Pokaži orodno vrstico oznak zemljevida</string>
+    <string name="map_marker_1st">Prva oznaka zemljevida</string>
+    <string name="map_marker_2nd">Druga oznaka zemljevida</string>
+    <string name="shared_string_toolbar">Orodna vrstica</string>
+    <string name="shared_string_widgets">Gradniki</string>
+    <string name="add_points_to_map_markers_q">Ali želite dodati vse točke k oznakam zemljevida?</string>
+    <string name="shared_string_add_to_map_markers">Dodaj med oznake zemljevida</string>
+    <string name="consider_turning_polygons_off">Priporočljivo je onemogočiti izrisovanje poligonov.</string>
     </resources>
