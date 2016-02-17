@@ -21,12 +21,14 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection {
 	protected static final int DIST_TO_SHOW = 80;
 	protected static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
@@ -380,5 +382,29 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 			return ((MapMarker) o).getPointDescription(view.getContext());
 		}
 		return null;
+	}
+
+	@Override
+	public int getOrder(Object o) {
+		return 0;
+	}
+
+	@Override
+	public void setSelectedObject(Object o) {
+		if (o instanceof MapMarker) {
+			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+			MapMarker marker = (MapMarker) o;
+			List<MapMarker> sortedMarkers = markersHelper.getSortedMapMarkers();
+			int i = sortedMarkers.indexOf(marker);
+			if (i != -1) {
+				sortedMarkers.remove(i);
+				sortedMarkers.add(0, marker);
+				markersHelper.normalizePositions();
+			}
+		}
+	}
+
+	@Override
+	public void clearSelectedObject() {
 	}
 }

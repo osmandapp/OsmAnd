@@ -16,7 +16,7 @@ public class MapMarkersHelper {
 	public static final int MAP_MARKERS_COLORS_COUNT = 7;
 
 	private List<MapMarker> mapMarkers = new ArrayList<>();
-	private List<MapMarker> mapMarkersPositions = new ArrayList<>();
+	private List<MapMarker> sortedMapMarkers = new ArrayList<>();
 	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
 	private OsmandSettings settings;
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
@@ -113,7 +113,7 @@ public class MapMarkersHelper {
 			lookupAddress(mapMarker, false);
 		}
 
-		updatePositionArray();
+		updateSortedArray();
 
 		ips = settings.getMapMarkersHistoryPoints();
 		desc = settings.getMapMarkersHistoryPointDescriptions(ips.size());
@@ -127,10 +127,10 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void updatePositionArray() {
-		mapMarkersPositions.clear();
-		mapMarkersPositions.addAll(mapMarkers);
-		Collections.sort(mapMarkersPositions, new Comparator<MapMarker>() {
+	private void updateSortedArray() {
+		sortedMapMarkers.clear();
+		sortedMapMarkers.addAll(mapMarkers);
+		Collections.sort(sortedMapMarkers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker lhs, MapMarker rhs) {
 				return lhs.pos < rhs.pos ? -1 : (lhs.pos == rhs.pos ? 0 : 1);
@@ -139,8 +139,8 @@ public class MapMarkersHelper {
 	}
 
 	public void normalizePositions() {
-		for (int i = 0; i < mapMarkersPositions.size(); i++) {
-			MapMarker marker = mapMarkersPositions.get(i);
+		for (int i = 0; i < sortedMapMarkers.size(); i++) {
+			MapMarker marker = sortedMapMarkers.get(i);
 			marker.pos = i;
 		}
 		saveMapMarkers(mapMarkers, null);
@@ -179,7 +179,7 @@ public class MapMarkersHelper {
 		for (MapMarker marker : mapMarkers) {
 			marker.index = ind++;
 		}
-		updatePositionArray();
+		updateSortedArray();
 		refresh();
 	}
 
@@ -187,8 +187,8 @@ public class MapMarkersHelper {
 		return mapMarkers;
 	}
 
-	public List<MapMarker> getMapMarkersPositions() {
-		return mapMarkersPositions;
+	public List<MapMarker> getSortedMapMarkers() {
+		return sortedMapMarkers;
 	}
 
 	public List<MapMarker> getMapMarkersHistory() {

@@ -658,6 +658,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		DashboardOnMap.staticVisibleType = type;
 		mapActivity.enableDrawer();
 		if (visible) {
+			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
 			mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();

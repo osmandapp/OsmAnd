@@ -857,8 +857,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void setFirstMapMarkerAsTarget() {
-		if (getMyApplication().getMapMarkersHelper().getMapMarkersPositions().size() > 0) {
-			MapMarkersHelper.MapMarker marker = getMyApplication().getMapMarkersHelper().getMapMarkersPositions().get(0);
+		if (getMyApplication().getMapMarkersHelper().getSortedMapMarkers().size() > 0) {
+			MapMarkersHelper.MapMarker marker = getMyApplication().getMapMarkersHelper().getSortedMapMarkers().get(0);
 			PointDescription pointDescription = marker.getOriginalPointDescription();
 			if (pointDescription.isLocation()
 					&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {

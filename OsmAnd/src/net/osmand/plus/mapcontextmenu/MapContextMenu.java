@@ -124,6 +124,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return findMenuFragment() != null;
 	}
 
+	public void hideMenues() {
+		if (isVisible()) {
+			hide();
+		} else if (mapMultiSelectionMenu.isVisible()) {
+			mapMultiSelectionMenu.hide();
+		}
+	}
+
 	public FavoritePointEditor getFavoritePointEditor() {
 		if (favoritePointEditor == null) {
 			favoritePointEditor = new FavoritePointEditor(mapActivity);
