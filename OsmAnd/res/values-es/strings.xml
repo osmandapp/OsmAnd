@@ -883,7 +883,7 @@
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="audionotes_plugin_description">Este complemento, proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier posición en el mapa.</string>
-    <string name="audionotes_plugin_name">Notas multimedia</string>
+    <string name="audionotes_plugin_name">Notas audio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel en línea</string>
     <string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
