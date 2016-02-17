@@ -21,7 +21,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.mapwidgets.MapMarkersWidget;
+import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 	private final MapActivity map;
 	private OsmandMapTileView view;
 
-	private MapMarkersWidget widget;
+	private MapMarkersWidgetsFactory widgetsFactory;
 
 	private Paint bitmapPaint;
 	private Bitmap markerBitmapBlue;
@@ -66,6 +66,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		this.map = map;
 	}
 
+	public MapMarkersWidgetsFactory getWidgetsFactory() {
+		return widgetsFactory;
+	}
+
 	private void initUI() {
 		bitmapPaint = new Paint();
 		bitmapPaint.setDither(true);
@@ -88,7 +92,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
 
-		widget = new MapMarkersWidget(map);
+		widgetsFactory = new MapMarkersWidgetsFactory(map);
 	}
 
 	private Paint createPaintDest(int colorId) {
@@ -184,7 +188,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 
-		widget.updateInfo(useFingerLocation ? fingerLocation : null, tb.getZoom());
+		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tb.getZoom());
 
 		if (tb.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
@@ -237,8 +241,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon) {
 		double widgetHeight = 0;
-		if (widget.isTopBarVisible()) {
-			widgetHeight = widget.getTopBarHeight();
+		if (widgetsFactory.isTopBarVisible()) {
+			widgetHeight = widgetsFactory.getTopBarHeight();
 		}
 		double tx = tb.getPixXFromLatLon(lat, lon);
 		double ty = tb.getPixYFromLatLon(lat, lon);

@@ -11,6 +11,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
+import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
@@ -76,12 +77,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public void registerSideWidget(TextInfoWidget widget, int drawableMenu, 
+	public void registerSideWidget(TextInfoWidget widget, int drawableMenu,
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
 	}
-	
+
 	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {
 		return mapInfoControls.getSideWidget(cl);
 	}
@@ -93,6 +94,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void registerAllControls(){
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
+		MapMarkersWidgetsFactory mwf = map.getMapLayers().getMapMarkersLayer().getWidgetsFactory();
 		OsmandApplication app = view.getApplication();
 		lanesControl = ric.createLanesControl(map, view);
 		
@@ -107,7 +109,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		// register left stack
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
-		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
+		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, "next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
 		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
 				10);
@@ -120,6 +122,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map);
 		registerSideWidget(time, R.drawable.ic_action_time, R.string.map_widget_time, "time", false, 10);
+
+		if (settings.USE_MAP_MARKERS.get()) {
+			TextInfoWidget marker = mwf.createMapMarkerControl(map);
+			registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 11);
+			TextInfoWidget marker2nd = mwf.createMapMarkerControl2nd(map);
+			registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 12);
+		}
+
 		TextInfoWidget speed = ric.createSpeedControl(map);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);

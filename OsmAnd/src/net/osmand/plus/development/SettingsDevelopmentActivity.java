@@ -78,7 +78,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.show_free_version_banner_description));
 
 		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,
-				R.string.show_map_markers,
+				R.string.map_markers,
 				R.string.show_map_markers_description));
 
 		Preference pref = new Preference(this);

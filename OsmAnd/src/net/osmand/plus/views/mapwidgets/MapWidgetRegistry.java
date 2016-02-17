@@ -255,7 +255,9 @@ public class MapWidgetRegistry {
 		if(mode != ApplicationMode.DEFAULT) {
 			addControlId(map, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
 		}
-		
+		if (settings.USE_MAP_MARKERS.get()) {
+			addControlId(map, cm, R.string.show_map_markers_topbar, settings.SHOW_MAP_MARKERS_TOOLBAR);
+		}
 	}
 
 	private void addControlId(final MapActivity map, ContextMenuAdapter cm, int stringId, OsmandPreference<Boolean> pref) {
