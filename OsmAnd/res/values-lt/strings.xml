@@ -2114,4 +2114,8 @@
     <string name="road_blocked">Kelias blokuojamas</string>
     <string name="starting_point">Pradžios taškas</string>
     <string name="number_of_contributors">Dalyvių skaičius</string>
+    <string name="shared_string_toolbar">Įrankių juosta</string>
+    <string name="show_polygons">Rodyti daugiakampius</string>
+    <string name="shared_string_read_more">Daugiau</string>
+    <string name="add_time_span">Pridėti laiko intervalą</string>
     </resources>
