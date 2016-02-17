@@ -2284,4 +2284,9 @@
     <string name="consider_turning_polygons_off">Det anbefales at deaktivere optegning af polygoner.</string>
     <string name="add_points_to_map_markers_q">Skal alle punkter tilføjes til kortmarkører?</string>
     <string name="shared_string_add_to_map_markers">Tilføj til kortmarkører</string>
+    <string name="show_map_markers_topbar">Vis kortmarkører topbar</string>
+    <string name="map_marker_1st">Første kortmarkør</string>
+    <string name="map_marker_2nd">Anden kortmarkør</string>
+    <string name="shared_string_toolbar">Værktøjslinie</string>
+    <string name="shared_string_widgets">Moduler</string>
     </resources>
