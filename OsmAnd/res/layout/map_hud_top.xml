@@ -161,7 +161,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/map_address_height"
+                android:minHeight="60dp"
                 android:background="@color/markers_top_bar_background">
 
                 <LinearLayout
@@ -171,20 +171,20 @@
                     android:background="?attr/selectableItemBackground"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/map_marker_arrow"
-                        android:layout_width="60dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/map_arrow_to_destination"/>
+                        android:layout_width="66dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_arrow_marker_diretion"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -200,7 +200,6 @@
                             android:id="@+id/map_marker_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
                             android:textColor="@color/marker_top_2nd_line_color"
                             android:textStyle="bold"
                             android:maxLines="1"
@@ -233,7 +232,7 @@
                 android:id="@+id/map_markers_top_bar_2nd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/map_address_height"
+                android:minHeight="50dp"
                 android:background="@color/markers_top_bar_2nd_background"
                 android:visibility="visible">
 
@@ -254,9 +253,9 @@
 
                     <ImageView
                         android:id="@+id/map_marker_arrow_2nd"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/map_arrow_to_destination"/>
+                        android:layout_width="66dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_arrow_marker_diretion"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
