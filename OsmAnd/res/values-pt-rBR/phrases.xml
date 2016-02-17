@@ -2670,4 +2670,15 @@
 
 <string name="poi_religion">Artigos religiosos</string>
 
-</resources>
+<string name="poi_compressed_air_yes">Ar comprimido: sim</string>
+	<string name="poi_compressed_air_no">Ar comprimido: não</string>
+
+	<string name="poi_car_wash_yes">Lavagem de carro: sim</string>
+
+	<string name="poi_vacuum_cleaner_yes">Aspirador de pó: sim</string>
+	<string name="poi_vacuum_cleaner_no">Aspirador de pó: não</string>
+	<string name="poi_amenity_vacuum_cleaner">Aspirador de pó</string>
+
+<string name="poi_plant_nursery">Viveiro de plantas</string>
+
+	</resources>
