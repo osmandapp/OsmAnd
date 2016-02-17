@@ -2131,4 +2131,7 @@
     <string name="find_parking">Rechercher un stationnement</string>
     <string name="rendering_attr_showMtbRoutes_name">Afficher les chemins pour VTT</string>
     <string name="shared_string_reverse_order">Inverser l\'ordre</string>
+    <string name="shared_string_toolbar">Barre d\'outils</string>
+    <string name="shared_string_widgets">Widgets</string>
+    <string name="consider_turning_polygons_off">Il est recommandé de désactiver le rendu des polygones.</string>
     </resources>
