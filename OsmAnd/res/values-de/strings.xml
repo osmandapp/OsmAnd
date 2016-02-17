@@ -2018,8 +2018,8 @@
     <string name="show_polygons">Polygone anzeigen</string>
     <string name="underlay_transparency">Underlay-Karte Transparenz</string>
     <string name="rendering_attr_showMtbRoutes_name">MTB-Routen anzeigen</string>
-    <string name="shared_string_reverse_order">Umgekehrt Reihenfolge</string>
-    <string name="map_marker_1st">Erster Kartenmarkierung</string>
+    <string name="shared_string_reverse_order">Reihenfolge umkehren</string>
+    <string name="map_marker_1st">Erste Kartenmarkierung</string>
     <string name="map_marker_2nd">Zweite Kartenmarkierung</string>
     <string name="shared_string_toolbar">Werkzeugleiste</string>
     <string name="add_points_to_map_markers_q">"Wollen sie alle Punkte zu  den Kartenmarkierungen hinzufügen?"</string>
