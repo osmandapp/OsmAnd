@@ -2074,4 +2074,7 @@
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores de mapa</string>
     <string name="map_marker">Marcador de mapa</string>
+    <string name="add_points_to_map_markers_q">¿Quieres añadir todos los puntos a Marcadores de Mapa?</string>
+    <string name="shared_string_add_to_map_markers">Añadir a Marcadores de Mapa</string>
+    <string name="consider_turning_polygons_off">Se recomienda desactivar la reproducción de polígonos.</string>
     </resources>
