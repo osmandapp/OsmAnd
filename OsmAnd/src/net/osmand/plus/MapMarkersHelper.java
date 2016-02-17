@@ -8,12 +8,15 @@ import net.osmand.data.PointDescription;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MapMarkersHelper {
 	public static final int MAP_MARKERS_COLORS_COUNT = 7;
 
 	private List<MapMarker> mapMarkers = new ArrayList<>();
+	private List<MapMarker> mapMarkersPositions = new ArrayList<>();
 	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
 	private OsmandSettings settings;
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
@@ -29,14 +32,16 @@ public class MapMarkersHelper {
 		public LatLon point;
 		private PointDescription pointDescription;
 		public int colorIndex;
+		public int pos;
 		public int index;
 		public boolean history;
 		public int dist;
 
-		public MapMarker(LatLon point, PointDescription name, int colorIndex, int index) {
+		public MapMarker(LatLon point, PointDescription name, int colorIndex, int pos, int index) {
 			this.point = point;
 			this.pointDescription = name;
 			this.colorIndex = colorIndex;
+			this.pos = pos;
 			this.index = index;
 		}
 
@@ -89,22 +94,56 @@ public class MapMarkersHelper {
 		List<LatLon> ips = settings.getMapMarkersPoints();
 		List<String> desc = settings.getMapMarkersPointDescriptions(ips.size());
 		List<Integer> colors = settings.getMapMarkersColors(ips.size());
+		List<Integer> positions = settings.getMapMarkersPositions(ips.size());
+		int colorIndex = 0;
+		int pos = 0;
 		for (int i = 0; i < ips.size(); i++) {
+			if (colors.size() > i) {
+				colorIndex = colors.get(i);
+			}
+			if (positions.size() > i) {
+				pos = positions.get(i);
+			} else {
+				pos++;
+			}
 			MapMarker mapMarker = new MapMarker(ips.get(i),
-					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colors.get(i), i);
+					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colorIndex,
+					pos, i);
 			mapMarkers.add(mapMarker);
 			lookupAddress(mapMarker, false);
 		}
+
+		updatePositionArray();
+
 		ips = settings.getMapMarkersHistoryPoints();
 		desc = settings.getMapMarkersHistoryPointDescriptions(ips.size());
 		colors = settings.getMapMarkersHistoryColors(ips.size());
 		for (int i = 0; i < ips.size(); i++) {
 			MapMarker mapMarker = new MapMarker(ips.get(i),
-					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colors.get(i), i);
+					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colors.get(i), 0, i);
 			mapMarker.history = true;
 			mapMarkersHistory.add(mapMarker);
 			lookupAddress(mapMarker, true);
 		}
+	}
+
+	private void updatePositionArray() {
+		mapMarkersPositions.clear();
+		mapMarkersPositions.addAll(mapMarkers);
+		Collections.sort(mapMarkersPositions, new Comparator<MapMarker>() {
+			@Override
+			public int compare(MapMarker lhs, MapMarker rhs) {
+				return lhs.pos < rhs.pos ? -1 : (lhs.pos == rhs.pos ? 0 : 1);
+			}
+		});
+	}
+
+	public void normalizePositions() {
+		for (int i = 0; i < mapMarkersPositions.size(); i++) {
+			MapMarker marker = mapMarkersPositions.get(i);
+			marker.pos = i;
+		}
+		saveMapMarkers(mapMarkers, null);
 	}
 
 	private void lookupAddress(final MapMarker mapMarker, final boolean history) {
@@ -123,7 +162,7 @@ public class MapMarkersHelper {
 								mapMarker.pointDescription, mapMarker.colorIndex);
 					} else {
 						settings.updateMapMarker(mapMarker.point.getLatitude(), mapMarker.point.getLongitude(),
-								mapMarker.pointDescription, mapMarker.colorIndex);
+								mapMarker.pointDescription, mapMarker.colorIndex, mapMarker.pos);
 					}
 					updateMarker(mapMarker);
 				}
@@ -140,11 +179,16 @@ public class MapMarkersHelper {
 		for (MapMarker marker : mapMarkers) {
 			marker.index = ind++;
 		}
+		updatePositionArray();
 		refresh();
 	}
 
 	public List<MapMarker> getActiveMapMarkers() {
 		return mapMarkers;
+	}
+
+	public List<MapMarker> getMapMarkersPositions() {
+		return mapMarkersPositions;
 	}
 
 	public List<MapMarker> getMapMarkersHistory() {
@@ -176,25 +220,19 @@ public class MapMarkersHelper {
 			markers.add(marker);
 		}
 		mapMarkers = markers;
-		saveMapMarkers(mapMarkers, mapMarkersHistory);
-		readFromSettings();
-		refresh();
+		saveMapMarkers(mapMarkers, null);
 	}
 
 	public void removeActiveMarkers() {
 		cancelAddressRequests();
-
 		settings.clearActiveMapMarkers();
-		mapMarkers.clear();
 		readFromSettings();
 		refresh();
 	}
 
 	public void removeMarkersHistory() {
 		cancelAddressRequests();
-
 		settings.clearMapMarkersHistory();
-		mapMarkersHistory.clear();
 		readFromSettings();
 		refresh();
 	}
@@ -214,6 +252,7 @@ public class MapMarkersHelper {
 			double[] longitudes = new double[points.size()];
 			List<PointDescription> pointDescriptions = new ArrayList<>();
 			int[] colorIndexes = new int[points.size()];
+			int[] positions = new int[points.size()];
 			int[] indexes = new int[points.size()];
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
@@ -241,11 +280,12 @@ public class MapMarkersHelper {
 				longitudes[i] = point.getLongitude();
 				pointDescriptions.add(pointDescription);
 				colorIndexes[i] = colorIndex;
+				positions[i] = -1 - i;
 				indexes[i] = 0;
 			}
-			settings.insertMapMarkers(latitudes, longitudes, pointDescriptions, colorIndexes, indexes);
+			settings.insertMapMarkers(latitudes, longitudes, pointDescriptions, colorIndexes, positions, indexes);
 			readFromSettings();
-			refresh();
+			normalizePositions();
 		}
 	}
 
@@ -278,12 +318,14 @@ public class MapMarkersHelper {
 			List<LatLon> ls = new ArrayList<>(markers.size());
 			List<String> names = new ArrayList<>(markers.size());
 			List<Integer> colors = new ArrayList<>(markers.size());
+			List<Integer> positions = new ArrayList<>(markers.size());
 			for (MapMarker marker : markers) {
 				ls.add(marker.point);
 				names.add(PointDescription.serializeToString(marker.pointDescription));
 				colors.add(marker.colorIndex);
+				positions.add(marker.pos);
 			}
-			settings.saveMapMarkers(ls, names, colors);
+			settings.saveMapMarkers(ls, names, colors, positions);
 		}
 
 		if (markersHistory != null) {

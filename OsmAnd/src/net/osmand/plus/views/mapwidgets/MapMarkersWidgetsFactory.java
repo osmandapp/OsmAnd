@@ -90,7 +90,7 @@ public class MapMarkersWidgetsFactory {
 		});
 
 		IconsCache iconsCache = map.getMyApplication().getIconsCache();
-		if (isLandscapeLayout() && helper.getActiveMapMarkers().size() > 1) {
+		if (isLandscapeLayout() && helper.getMapMarkersPositions().size() > 1) {
 			moreButton.setVisibility(View.GONE);
 		} else {
 			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
@@ -129,16 +129,16 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	private void removeMarker(int index) {
-		if (helper.getActiveMapMarkers().size() > index) {
-			MapMarker marker = helper.getActiveMapMarkers().get(index);
+		if (helper.getMapMarkersPositions().size() > index) {
+			MapMarker marker = helper.getMapMarkersPositions().get(index);
 			helper.removeMapMarker(marker.index);
 			helper.addMapMarkerHistory(marker);
 		}
 	}
 
 	private void showMarkerOnMap(int index) {
-		if (helper.getActiveMapMarkers().size() > index) {
-			MapMarker marker = helper.getActiveMapMarkers().get(index);
+		if (helper.getMapMarkersPositions().size() > index) {
+			MapMarker marker = helper.getMapMarkersPositions().get(index);
 			MapMarkerDialogHelper.showMarkerOnMap(map, marker);
 		}
 	}
@@ -173,7 +173,7 @@ public class MapMarkersWidgetsFactory {
 			return;
 		}
 
-		List<MapMarker> markers = helper.getActiveMapMarkers();
+		List<MapMarker> markers = helper.getMapMarkersPositions();
 		if (zoom < 3 || markers.size() == 0
 				|| !map.getMyApplication().getSettings().SHOW_MAP_MARKERS_TOOLBAR.get()
 				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
@@ -223,9 +223,9 @@ public class MapMarkersWidgetsFactory {
 		} else {
 			dd = (DirectionDrawable) arrowImg.getDrawable();
 		}
-		dd.setImage(R.drawable.map_arrow_to_destination, MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex));
+		dd.setImage(R.drawable.ic_arrow_marker_diretion, MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex));
 		if (heading != null && loc != null) {
-			dd.setAngle(mes[1] - heading + 90 + screenOrientation);
+			dd.setAngle(mes[1] - heading + 180 + screenOrientation);
 		}
 		if (newImage) {
 			arrowImg.setImageDrawable(dd);
