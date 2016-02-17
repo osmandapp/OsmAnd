@@ -2065,16 +2065,21 @@
     <string name="show_polygons">Mostrar polígonos</string>
     <string name="underlay_transparency">Transparencia de subyacente</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas MTB</string>
-    <string name="select_map_markers">Seleccionar Marcadores de Mapa</string>
+    <string name="select_map_markers">Seleccionar Marcadores de mapa</string>
     <string name="shared_string_reverse_order">Orden inverso</string>
     <string name="show_map_markers">Marcadores de mapa</string>
-    <string name="show_map_markers_description">Activa la característica de marcadores del mapa</string>
+    <string name="show_map_markers_description">Activa la característica de Marcadores de mapa</string>
     <string name="clear_active_markers_q">"¿Quieres eliminar todos los marcadores  activos?"</string>
     <string name="clear_markers_history_q">¿Quieres borrar el historial de marcadores?</string>
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores de mapa</string>
     <string name="map_marker">Marcador de mapa</string>
-    <string name="add_points_to_map_markers_q">¿Quieres añadir todos los puntos a Marcadores de Mapa?</string>
-    <string name="shared_string_add_to_map_markers">Añadir a Marcadores de Mapa</string>
+    <string name="add_points_to_map_markers_q">¿Quieres añadir todos los puntos a Marcadores de mapa?</string>
+    <string name="shared_string_add_to_map_markers">Añadir a Marcadores de mapa</string>
     <string name="consider_turning_polygons_off">Se recomienda desactivar la reproducción de polígonos.</string>
+    <string name="show_map_markers_topbar">Mostrar la barra superior de Marcadores de mapa</string>
+    <string name="map_marker_1st">Primer marcador de mapa</string>
+    <string name="map_marker_2nd">Segundo marcador de mapa</string>
+    <string name="shared_string_toolbar">Barra de herramientas</string>
+    <string name="shared_string_widgets">Controles</string>
     </resources>
