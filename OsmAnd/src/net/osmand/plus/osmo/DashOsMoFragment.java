@@ -17,7 +17,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -53,6 +52,33 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	private Handler uiHandler = new Handler();
 
 	OsMoPlugin plugin;
+	private CompoundButton trackr;
+
+	CompoundButton.OnCheckedChangeListener trackerCheckedChatgedListener = new CompoundButton.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			plugin.getService().connect(true);
+
+			if (isChecked) {
+				if (plugin != null && plugin.getTracker() != null) {
+					plugin.getTracker().enableTracker();
+				}
+				getMyApplication().startNavigationService(NavigationService.USED_BY_LIVE);
+				//interval setting not needed here, handled centrally in app.startNavigationService
+				//app.getSettings().SERVICE_OFF_INTERVAL.set(0);
+			} else {
+				if (plugin != null && plugin.getTracker() != null) {
+					plugin.getTracker().disableTracker();
+				}
+				if (getMyApplication().getNavigationService() != null) {
+					getMyApplication().getNavigationService()
+							.stopIfNeeded(getMyApplication(), NavigationService.USED_BY_LIVE);
+				}
+			}
+
+			updateStatus();
+		}
+	};
 
 	@Override
 	public void onCloseDash() {
@@ -85,9 +111,11 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		if (plugin != null) {
 			plugin.getGroups().addUiListeners(this);
 			plugin.setGroupsActivity(getActivity());
+
+			trackr.setChecked(plugin.getTracker().isEnabledTracker());
+			trackr.setOnCheckedChangeListener(trackerCheckedChatgedListener);
 		}
 		setupOsMoView();
-
 	}
 
 	@Override
@@ -120,39 +148,8 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	}
 
 	private void setupHader(final View header) {
-		CompoundButton enableService = (CompoundButton)header.findViewById(R.id.header_layout).findViewById(R.id.check_item);
-		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.card_content).findViewById(R.id.check_item);
+		trackr = (CompoundButton) header.findViewById(R.id.card_content).findViewById(R.id.check_item);
 
-		enableService.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				plugin.getService().connect(true);
-			}
-		});
-
-		final OsmandApplication app = getMyApplication();
-		trackr.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					if (plugin != null && plugin.getTracker() != null) {
-						plugin.getTracker().enableTracker();
-					}
-					app.startNavigationService(NavigationService.USED_BY_LIVE);
-					//interval setting not needed here, handled centrally in app.startNavigationService
-					//app.getSettings().SERVICE_OFF_INTERVAL.set(0);
-				} else {
-					if (plugin != null && plugin.getTracker() != null) {
-						plugin.getTracker().disableTracker();
-					}
-					if (app.getNavigationService() != null) {
-						app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_LIVE);
-					}
-				}
-				updateStatus();
-			}
-		});
 		ImageButton share = (ImageButton) header.findViewById(R.id.share);
 		IconsCache cache = getMyApplication().getIconsCache();
 		share.setImageDrawable(cache.getContentIcon(R.drawable.ic_action_gshare_dark));
@@ -273,7 +270,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 
 	private void setupDeviceViews(LinearLayout contentList, List<OsMoGroupsStorage.OsMoDevice> devices) {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		List<DashLocationFragment.DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
+		List<DashLocationFragment.DashLocationView> distances = new ArrayList<>();
 		for (final OsMoGroupsStorage.OsMoDevice device : devices) {
 			View v = inflater.inflate(R.layout.dash_osmo_item, null, false);
 			v.findViewById(R.id.people_icon).setVisibility(View.GONE);
