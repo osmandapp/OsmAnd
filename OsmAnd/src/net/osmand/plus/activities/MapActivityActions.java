@@ -598,6 +598,9 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						MapActivity.clearPrevActivityIntent();
 						if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+							if (settings.USE_MAP_MARKERS.get()) {
+								setFirstMapMarkerAsTarget();
+							}
 							enterRoutePlanningMode(null, null);
 						} else {
 							mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
@@ -853,4 +856,17 @@ public class MapActivityActions implements DialogProvider {
 		});
 	}
 
+	public void setFirstMapMarkerAsTarget() {
+		if (getMyApplication().getMapMarkersHelper().getMapMarkersPositions().size() > 0) {
+			MapMarkersHelper.MapMarker marker = getMyApplication().getMapMarkersHelper().getMapMarkersPositions().get(0);
+			PointDescription pointDescription = marker.getOriginalPointDescription();
+			if (pointDescription.isLocation()
+					&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
+				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+			}
+			TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
+			targets.navigateToPoint(new LatLon(marker.getLatitude(), marker.getLongitude()),
+					true, targets.getIntermediatePoints().size() + 1, pointDescription);
+		}
+	}
 }
