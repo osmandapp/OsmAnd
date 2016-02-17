@@ -1721,8 +1721,12 @@ public class OsmandSettings {
 			List<Integer> ns = getPositions(ps.size());
 			ps.remove(index);
 			ds.remove(index);
-			cs.remove(index);
-			ns.remove(index);
+			if (cs.size() > index) {
+				cs.remove(index);
+			}
+			if (ns.size() > index) {
+				ns.remove(index);
+			}
 			return savePoints(ps, ds, cs, ns);
 		}
 

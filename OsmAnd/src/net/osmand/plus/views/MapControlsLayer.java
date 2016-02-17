@@ -28,8 +28,11 @@ import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -386,6 +389,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			if (settings.USE_MAP_MARKERS.get()) {
+				mapActivity.getMapActions().setFirstMapMarkerAsTarget();
+			}
 			mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 		} else {
 			showRouteInfoControlDialog();
