@@ -9,12 +9,16 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="add_points_to_map_markers_q">Do you want to add all points to Map Markers?</string>
-    <string name="shared_string_add_to_map_markers">Add to Map Markers</string>
-    <string name="select_map_markers">Select Map Markers</string>
+    <string name="show_map_markers_topbar">Show Map markers topbar</string>
+    <string name="map_marker_1st">First Map marker</string>
+    <string name="map_marker_2nd">Second Map marker</string>
+    <string name="shared_string_toolbar">Toolbar</string>
+    <string name="shared_string_widgets">Widgets</string>
+    <string name="add_points_to_map_markers_q">Do you want to add all points to Map markers?</string>
+    <string name="shared_string_add_to_map_markers">Add to Map markers</string>
+    <string name="select_map_markers">Select Map markers</string>
     <string name="shared_string_reverse_order">Reverse order</string>
-    <string name="show_map_markers">Map Markers</string>
-    <string name="show_map_markers_description">Activate Map Markers feature</string>
+    <string name="show_map_markers_description">Activate Map markers feature</string>
     <string name="clear_active_markers_q">Do you want to delete all active markers?</string>
     <string name="clear_markers_history_q">Do you want to clear markers history?</string>
     <string name="active_markers">Active markers</string>
