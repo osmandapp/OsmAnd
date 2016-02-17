@@ -2094,7 +2094,12 @@
     <string name="active_markers">Aktiva markörer</string>
     <string name="map_markers">Kartmarkörer</string>
     <string name="map_marker">Kartmarkör</string>
-    <string name="add_points_to_map_markers_q">Vill du lägga till alla punkter till Kartmarkörer?</string>
+    <string name="add_points_to_map_markers_q">Vill du lägga till alla punkter i Kartmarkörer?</string>
     <string name="shared_string_add_to_map_markers">Lägg till i Kartmarkörer</string>
     <string name="consider_turning_polygons_off">Rekommendationen är att slå av rendering av polygoner.</string>
+    <string name="map_marker_1st">Första kartmarkör</string>
+    <string name="map_marker_2nd">Andra kartmarkör</string>
+    <string name="shared_string_toolbar">Verktygsfält</string>
+    <string name="shared_string_widgets">Widgetar</string>
+    <string name="show_map_markers_topbar">Visa kartmarkörsfält</string>
     </resources>
