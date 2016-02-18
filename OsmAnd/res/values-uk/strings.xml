@@ -1819,7 +1819,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     
 	<string name="speak_pedestrian">Пішохідні переходи</string>
     <string name="rendering_attr_roadStyle_name">Стиль доріг</string>
-    <string name="rendering_value_default_name">За замовчуванням</string>
+    <string name="rendering_value_default_name">Типово</string>
     <string name="rendering_value_orange_name">Помаранчевий</string>
     <string name="rendering_value_germanRoadAtlas_name">Атлас доріг Німеччини</string>
 	<string name="traffic_warning_railways">Залізничний переїзд</string>
@@ -2038,7 +2038,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="av_audio_bitrate">Бітова швидкість аудіо</string>
     <string name="av_audio_bitrate_descr">Виберіть бітову швидкість аудіо</string>
     <string name="please_specify_poi_type_only_from_list">Будь ласка, вкажіть коректний тип POI з переліку, або пропустіть його</string>
-    <string name="show_on_start">Показувати під час старту</string>
+    <string name="show_on_start">Показувати після старту</string>
     <string name="copied_to_clipboard">Скопійовано до буферу обміну</string>
     <string name="osm_save_offline">Зберегти локально</string>
     <string name="osm_edit_modified_poi">OSM POI відредаговано</string>
@@ -2231,7 +2231,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="impassable_road_desc">Виберіть дороги, яких ви бажаєте уникати під час навігації</string>
     <string name="shared_string_sound">Звук</string>
     <string name="poi_deleted_localy">POI буде видалено після того, як ви завантажите ваші зміни</string>
-    <string name="confirm_download_roadmaps">Ви впевнені, що бажаєте завантажити карти доріг при наявності стандартної (повної) мапи?</string>
+    <string name="confirm_download_roadmaps">Ви впевнені, що бажаєте завантажити мапу з дорогами, хоча ви вже маєете стандартну (повну) мапу?</string>
     <string name="missing_write_external_storage_permission">Додаток не має дозволу для запису на SD-карту</string>
     <string name="last_update">Останнє оновлення: %s</string>
     <string name="last_map_change">Остання зміна мапи: %s</string>
@@ -2252,7 +2252,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="starting_point">Початкова точка</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
-    <string name="nm">nm</string>
+    <string name="nm">нм</string>
     <string name="nm_h">нм/г</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
@@ -2277,8 +2277,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="dashboard_or_drawer_title">Стільниця або меню керування</string>
     <string name="live_update">Оновлення</string>
     <string name="reports_for">Відзвітувати</string>
-<string name="rendering_attr_showMtbRoutes_name">Відображати MTB-маршрути</string>
-    <string name="show_on_start_description">Якщо вимкнено, при запуску відразу відображає екран мапи</string>
+<string name="rendering_attr_showMtbRoutes_name">Показувати MTB-маршрути</string>
+    <string name="show_on_start_description">Якщо вимкнено, відразу показує мапу після запуску</string>
     <string name="add_points_to_map_markers_q">Бажаєте додати всі точки до Позначок мапи?</string>
     <string name="shared_string_add_to_map_markers">Додати до Позначок мапи</string>
     <string name="select_map_markers">Обрати Позначки мапи</string>
