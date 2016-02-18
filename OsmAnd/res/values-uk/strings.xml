@@ -10,7 +10,7 @@
   <string name="rendering_attr_appMode_name">Режим відображення</string>
   <string name="rendering_attr_appMode_description">Оптимізувати мапу</string>
   <string name="rendering_attr_contourLines_description">Мінімальний рівень масштабу з відображенням ізоліній висот:</string>
-  <string name="rendering_attr_contourLines_name">Відображати контурні лінії</string>
+  <string name="rendering_attr_contourLines_name">Показувати ізолінії</string>
   <string name="rendering_attr_hmRendered_description">Відображати більше деталей на мапі</string>
   <string name="rendering_attr_hmRendered_name">Більше деталей</string>
   <string name="local_index_routing_data">Дані роутингу</string>
@@ -824,24 +824,24 @@
   <string name="osmand_parking_warning">Попередження</string>
   <string name="osmand_parking_warning_text">Нагадування про обмеження часу паркування автомобіля вже додано в календар. Вам необхідно його вилучити вручну.</string>
   <string name="osmand_parking_time_limit_title">Вкажіть максимальний час стоянки</string>
-  <string name="osmand_parking_delete_confirm">Вилучити маркер розташування паркування?</string>
-  <string name="osmand_parking_delete">Вилучити маркер місця стоянки</string>
-  <string name="osmand_parking_choose_type">Виберіть тип паркування</string>
+  <string name="osmand_parking_delete_confirm">Вилучити позначку місця стоянки?</string>
+  <string name="osmand_parking_delete">Вилучити позначку місця стоянки</string>
+  <string name="osmand_parking_choose_type">Виберіть тип стоянки</string>
   <string name="osmand_parking_lim_text">З обмеженням по часу</string>
   <string name="osmand_parking_no_lim_text">Без обмеження по часу</string>
   <string name="osmand_parking_add_event">Додати нагадування в календар</string>
-  <string name="osmand_parking_time_limit">Час паркування обмежено</string>
-  <string name="osmand_parking_time_no_limit">Час паркування необмежений</string>
+  <string name="osmand_parking_time_limit">Обмежений час стоянки</string>
+  <string name="osmand_parking_time_no_limit">Час стоянки необмежений</string>
   <string name="osmand_parking_position_description">Розташування припаркованого автомобіля. %1$s</string>
   <string name="osmand_parking_position_description_add">Забрати автомобіль о:</string>
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
-  <string name="osmand_parking_position_name">Місце паркування</string>
+  <string name="osmand_parking_position_name">Місце стоянки</string>
   <string name="osmand_parking_plugin_description">Втулок “Місце стоянки” дозволить вам запам’ятати, коли ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом.
 \n\nВи можете знайти місце стоянки та час на панелі керування та на відповідному віджеті на мапі. Також він додає нагадування в календар, якщо ви бажаєте отримати нагадування.</string>
   <string name="osmand_parking_plugin_name">Місце стоянки</string>
-  <string name="context_menu_item_add_parking_point">Відмітити місце паркування</string>
-  <string name="context_menu_item_delete_parking_point">Вилучити маркер місця стоянки</string>
+  <string name="context_menu_item_add_parking_point">Відмітити місце стоянки</string>
+  <string name="context_menu_item_delete_parking_point">Вилучити позначку місця стоянки</string>
   <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги.</string>
   <string name="shared_location">Загальні місця</string>
   
@@ -875,7 +875,7 @@
   <string name="map_widget_reset">Скидання налаштувань</string>
   
   
-  <string name="map_widget_parking">Паркування</string>
+  <string name="map_widget_parking">Стоянка</string>
   <string name="map_widget_monitoring">GPX логування</string>
   <string name="map_widget_speed">Швидкість</string>
   <string name="map_widget_distance">Пункт призначення</string>
@@ -916,7 +916,7 @@
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
     
     <string name="intermediate_points_change_order">Змінити порядок</string>
-    <string name="srtm_paid_version_msg">Розгляньте, будь ласка, можливість придбання втулку «Ізолінії висот» на Маркеті, це підтримає його подальшу розробку.</string>
+    <string name="srtm_paid_version_msg">Розгляньте, будь ласка, можливість придбання втулка «Ізолінії висот» на Маркеті, це підтримає його подальшу розробку.</string>
     <string name="srtm_paid_version_title">Втулок Ізолінії висот</string>
     <string name="av_def_action_video">Запис відео</string>
     <string name="av_def_action_audio">Запис аудіо</string>
@@ -1037,7 +1037,7 @@
 	<string name="incomplete_locale">незавершена</string>
 	<string name="rendering_attr_noAdminboundaries_description">Приховати регіональні кордони (рівні 5-9)</string>
     
-    <string name="enable_plugin_monitoring_services">Активуйте плагін запису подорожей щоб використовувати сервіси логування місцезнаходження (логування GPX, онлайн моніторинг)</string>
+    <string name="enable_plugin_monitoring_services">Активуйте втулок запису подорожей, щоб використовувати сервіси запису місцезнаходження (запис GPX, онлайн моніторинг)</string>
     <string name="filterpoi_activity">Створити фільтр POI</string>
 	<string name="select_navigation_mode">Виберіть режим пересування</string>
 	<string name="day_night_info_description">Схід: %1$s
@@ -2087,7 +2087,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="region_maps">Регіональні мапи</string>
     <string name="world_maps">Мапи світу</string>
     <string name="hillshade_layer_disabled">Шар рельєфу місцевості вимкнено</string>
-    <string name="srtm_plugin_disabled">Контурні лінії вимкнено</string>
+    <string name="srtm_plugin_disabled">Ізолінії висот вимкнено</string>
     <string name="favorite_category_add_new">Додати нову</string>
     <string name="favorite_category_select">Виберіть категорію</string>
     <string name="default_speed_system_descr">Визначте одиниці виміру швидкості</string>
@@ -2164,8 +2164,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="downloads_left_template">%1$s завантажень лишилось</string>
     <string name="roads">Дороги</string>
     <string name="buy">Придбати</string>
-    <string name="activate_seamarks_plugin">Будь ласка, активуйте втулок морські навігаційні знаки</string>
-    <string name="activate_srtm_plugin">Будь ласка, активувати втулок SRTM</string>
+    <string name="activate_seamarks_plugin">Будь ласка, активуйте втулок з морськими навігаційними знаками</string>
+    <string name="activate_srtm_plugin">Будь ласка, увімкніть втулок SRTM</string>
     <string name="later">Пізніше</string>
     <string name="get_full_version">Повна версія</string>
     <string name="downloads">Завантаження</string>
@@ -2263,7 +2263,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="number_of_contributors">Кількість учасників</string>
     <string name="number_of_edits">Кількість правок</string>
     <string name="show_polygons">Показати полігони</string>
-    <string name="find_parking">Знайти парковку</string>
+    <string name="find_parking">Знайти стоянку</string>
     <string name="shared_string_status">Статус</string>
     <string name="shared_string_save_changes">Зберегти зміни</string>
     <string name="shared_string_email_address">E-mail адреси</string>
@@ -2279,12 +2279,12 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="reports_for">Відзвітувати</string>
 <string name="rendering_attr_showMtbRoutes_name">Відображати MTB-маршрути</string>
     <string name="show_on_start_description">Якщо вимкнено, при запуску відразу відображає екран мапи</string>
-    <string name="add_points_to_map_markers_q">Бажаєте додати всі точки до Позначок Мапи?</string>
-    <string name="shared_string_add_to_map_markers">Додати до Позначок Мапи</string>
-    <string name="select_map_markers">Обрати Позначки Мапи</string>
+    <string name="add_points_to_map_markers_q">Бажаєте додати всі точки до Позначок мапи?</string>
+    <string name="shared_string_add_to_map_markers">Додати до Позначок мапи</string>
+    <string name="select_map_markers">Обрати Позначки мапи</string>
     <string name="shared_string_reverse_order">Зворотній порядок</string>
     <string name="show_map_markers">Позначки Мапи</string>
-    <string name="show_map_markers_description">Показати елементи з Позначок Мапи</string>
+    <string name="show_map_markers_description">Показати елементи з Позначок мапи</string>
     <string name="clear_active_markers_q">Вилучити всі активні позначки?</string>
     <string name="clear_markers_history_q">Очистити історію позначок?</string>
     <string name="active_markers">Поточні позназчки</string>
@@ -2295,4 +2295,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="show_free_version_banner_description">Навіть, якщо ви придбали платну версію, ви все ще можете бачити банер для безкоштовної версії</string>
     <string name="dashboard_or_drawer_description">У вас зараз є вибір керувати застосунком через гнучку панель керування або через звичайне мені. Ваші вподобання завжди можна змінити в параметрах панелі керування.</string>
     <string name="release_2_2">" • Нові елементи інтерфейсу, що залежат від потоного стану, для вибору місця на мапи та на інших екранах\n\n • Екран з мапою відкривається під час запуску, якщо тільки не активовано функцію \'Показувати панель керування під час запуску\'\n\n • Налаштування того, які і як елементи будуть показуватись на панелі керування\n\n • Оминання панелі керування, якщо ви надаєте перевагу керуванню роботою через меню\n\n • Для завантаження мапи, територію можна обрати безпосередньо на мапі світу\n\n • Пошук ПОІ тепер підтримує більш конкретні запити\n\n • Покращено функції редагування ПОІ та додавання даних в OSM\n\n • Перероблено інтерфейс та структуру завантаження мап\n\n та багато іншого … "</string>
+    <string name="show_map_markers_topbar">Показувати Позначки мапи на панелі зверху</string>
+    <string name="map_marker_1st">Перша Позначка мапи</string>
+    <string name="map_marker_2nd">Друга Позначка мапи</string>
+    <string name="shared_string_toolbar">Панель інструментів</string>
+    <string name="shared_string_widgets">ВІджети</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Мапи та навігація – виконує прокладання маршрутів та пошук не вимагачи наявності зʼєднання з Інтернтом. Завантажте мапу країни перед подорожжю для того, щоб виконувати пошук та прокладати маршрути в незнайомому місці. Основні можливості: • Докладні мапи 200 країн • Офлайн навігація з голосовим супроводженням • Пошук адрес в без інтерента • Інформація про обʼкти на мапі: ПОІ, кафе, стоянки, магазини • Додавання місць в закладки • Автомобільна, пішохідна та вело навігація Додаткові можливості: запис та перегляд треків GPX • Отримання опису ПОІ з Вікіпедії • Додавання фото, аудіо та відео нотаток до мапи • Денний та нічний режими для більш зручного використання за кермом • Інформація про маршрути та зупинки громадського транспорта • Велодоріжки та тротуари • Пішохідні туристичні маршрути по всьому світу • Онлайн мапи з різних джерел • Інформація про дорожне покриття та освітлення • Додавання, редагування та вилучення ПОІ (для учасників OpenStreetMap) • OsMo – онлайн стеження за іншими пристроями Отримайте надійну навігацію для вашої країни – Франції, Номеччини, Мексики, Великобританії, Іспанії, Нідерландів, США, Росії, Бразилії, України та інших країн. Втулки: • Ізолінії та рельєф https://goo.gl/7mojP8 Додає ізолінії та візуалізацію рельєфу до основної мапи OsmAnd. • Лижні мапи https://goo.gl/pX6DxJ Інформація про лижні траси, маршрути, підйомники. • Морські мапи https://goo.gl/0hEdxm Спеціальний стиль для перегляду навігаційний знаків для артеріальної і прибережної морської навігації. • Місце стоянки https://goo.gl/6JxQXF Допомагає вам позначти місце стоянки вашого автомобіля та стежити за часом, що залишився до кінця стоянки. Залишайтесь на зʼязку! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Сайт: http://osmand.net Якщо у вас є питання, щодо використання OsmAnd, звертайтесь до нас: support@osmand.net. "</string>
     </resources>
