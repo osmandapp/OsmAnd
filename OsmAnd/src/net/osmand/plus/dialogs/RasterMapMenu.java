@@ -59,8 +59,8 @@ public class RasterMapMenu {
 
 		String mapTypeDescr = mapTypePreference.get();
 		final boolean selected = mapTypeDescr != null;
-		final int toggleActionStringId = selected ? R.string.shared_string_enable
-				: R.string.shared_string_disable;
+		final int toggleActionStringId = selected ? R.string.shared_string_enabled
+				: R.string.shared_string_disabled;
 
 		final OsmandRasterMapsPlugin.OnMapSelectedCallback onMapSelectedCallback =
 				new OsmandRasterMapsPlugin.OnMapSelectedCallback() {
