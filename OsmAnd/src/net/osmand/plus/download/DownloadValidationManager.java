@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 
+import java.io.File;
 import java.text.MessageFormat;
 
 public class DownloadValidationManager {
@@ -46,23 +47,50 @@ public class DownloadValidationManager {
 		return app;
 	}
 
+	private long getExistingFileSize(File file) {
+		if (file != null) {
+			if (file.canRead()) {
+				return file.length();
+			}
+		}
+		return 0;
+	}
+
 	public void downloadFilesCheck_3_ValidateSpace(final FragmentActivity context, final IndexItem... items) {
-		long szLong = 0;
+		long szChangeLong = 0;
+		long szMaxTempLong = 0;
 		int i = 0;
 		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
-			szLong += es.contentSize;
+			final long szExistingLong = getExistingFileSize(es.getTargetFile(getMyApplication()));
+			long change = es.contentSize - szExistingLong;
+			szChangeLong += change;
+			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
 			i++;
 		}
 		for (IndexItem es : items) {
-			szLong += es.contentSize;
+			final long szExistingLong = getExistingFileSize(es.getTargetFile(getMyApplication()));
+			long change = es.contentSize - szExistingLong;
+			szChangeLong += change;
+			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
 			i++;
 		}
-		double sz = ((double) szLong) / (1 << 20);
+		double szChange = ((double) szChangeLong) / (1 << 20);
+		double szMaxTemp = szChange + ((double) szMaxTempLong) / (1 << 20);
+
 		// get availabile space
 		double asz = downloadThread.getAvailableSpace();
-		if (asz != -1 && asz > 0 && sz / asz > 0.4) {
+		if (asz != -1 && asz > 0 && (szMaxTemp > asz)) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
-			builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_question_space), i, sz, asz));
+			builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_error_not_enough_space), i, szChange, asz, szMaxTemp));
+			builder.setNegativeButton(R.string.shared_string_no, null);
+			builder.show();
+		} else if (asz != -1 && asz > 0 && (szChange / asz > 0.8 || szMaxTemp / asz > 0.9)) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			if (szChange != szMaxTemp) {
+				builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_question_space_with_temp), i, szChange, asz, szMaxTemp));
+			} else {
+				builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_question_space), i, szChange, asz));
+			}
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
