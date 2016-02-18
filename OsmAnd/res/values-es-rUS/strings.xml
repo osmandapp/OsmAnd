@@ -2092,4 +2092,12 @@
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
     <string name="select_map_markers">Elegir marcadores de mapa</string>
+    <string name="show_map_markers_topbar">Mostrar barra superior de Marcadores de mapa</string>
+    <string name="map_marker_1st">Primer Marcador de mapa</string>
+    <string name="map_marker_2nd">Segundo Marcador de mapa</string>
+    <string name="shared_string_toolbar">Barra de herramientas</string>
+    <string name="shared_string_widgets">Controles</string>
+    <string name="add_points_to_map_markers_q">¿Desea añadir todos los puntos a Marcadores de mapa?</string>
+    <string name="shared_string_add_to_map_markers">Añadir a Marcadores de mapa</string>
+    <string name="consider_turning_polygons_off">Se recomienda desactivar la representación de polígonos.</string>
     </resources>
