@@ -22,12 +22,22 @@ public class UploadOpenstreetmapPointAsyncTask
 	private OsmEditsUploadListener listener;
 	private OsmEditingPlugin plugin;
 	private final boolean closeChangeSet;
+	private final boolean loadAnonymous;
 
 	public UploadOpenstreetmapPointAsyncTask(ProgressDialogFragment progress,
 											 OsmEditsUploadListener listener,
 											 OsmEditingPlugin plugin,
 											 int listSize,
 											 boolean closeChangeSet) {
+		this(progress, listener, plugin, listSize, closeChangeSet, false);
+	}
+
+	public UploadOpenstreetmapPointAsyncTask(ProgressDialogFragment progress,
+											 OsmEditsUploadListener listener,
+											 OsmEditingPlugin plugin,
+											 int listSize,
+											 boolean closeChangeSet,
+											 boolean loadAnonymous) {
 		this.progress = progress;
 		this.plugin = plugin;
 		this.remotepoi = plugin.getPoiModificationRemoteUtil();
@@ -35,6 +45,7 @@ public class UploadOpenstreetmapPointAsyncTask
 		this.listSize = listSize;
 		this.listener = listener;
 		this.closeChangeSet = closeChangeSet;
+		this.loadAnonymous = loadAnonymous;
 	}
 
 	@Override
@@ -62,7 +73,7 @@ public class UploadOpenstreetmapPointAsyncTask
 				loadErrorsMap.put(point, n != null ? null : "Unknown problem");
 			} else if (point.getGroup() == OsmPoint.Group.BUG) {
 				OsmNotesPoint p = (OsmNotesPoint) point;
-				String errorMessage = remotebug.commit(p, p.getText(), p.getAction()).warning;
+				String errorMessage = remotebug.commit(p, p.getText(), p.getAction(), loadAnonymous).warning;
 				if (errorMessage == null) {
 					plugin.getDBBug().deleteAllBugModifications(p);
 					publishProgress(p);

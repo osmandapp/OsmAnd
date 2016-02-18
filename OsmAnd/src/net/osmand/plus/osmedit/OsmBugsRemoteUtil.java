@@ -13,7 +13,9 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
@@ -21,6 +23,8 @@ import java.net.URLEncoder;
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsRemoteUtil.class);
+	private static final String GET = "GET";
+	private static final String POST = "POST";
 
 	static String getNotesApi() {
 		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -29,6 +33,17 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			RETURN_API = "https://api.openstreetmap.org/api/0.6/notes";
 		} else {
 			RETURN_API = "http://api.openstreetmap.org/api/0.6/notes";
+		}
+		return RETURN_API;
+	}
+
+	static String getUserDetailsApi() {
+		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
+		String RETURN_API;
+		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
+			RETURN_API = "https://api.openstreetmap.org/api/0.6/user/details";
+		} else {
+			RETURN_API = "http://api.openstreetmap.org/api/0.6/user/details";
 		}
 		return RETURN_API;
 	}
@@ -43,30 +58,44 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	@Override
 	public OsmBugResult commit(OsmNotesPoint point, String text, Action action) {
+		return commit(point, text, action, true);
+	}
+
+	public OsmBugResult commit(OsmNotesPoint point, String text, Action action, boolean anonymous) {
 		StringBuilder b = new StringBuilder();
 		String msg = "";
-		if (action == OsmPoint.Action.CREATE) {
-			b.append(getNotesApi()).append("?"); //$NON-NLS-1$
-			b.append("lat=").append(point.getLatitude()); //$NON-NLS-1$
-			b.append("&lon=").append(point.getLongitude()); //$NON-NLS-1$
-			b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
-			msg = "creating bug";
-		} else {
-			b.append(getNotesApi()).append("/");
-			b.append(point.getId()); //$NON-NLS-1$
-			if (action == OsmPoint.Action.REOPEN) {
-				b.append("/reopen");
-				msg = "reopen note";
-			} else if (action == OsmPoint.Action.MODIFY) {
-				b.append("/comment");
-				msg = "adding comment";
-			} else if (action == OsmPoint.Action.DELETE) {
-				b.append("/close");
-				msg = "close note";
+		try {
+			if (action == OsmPoint.Action.CREATE) {
+				b.append(getNotesApi()).append("?"); //$NON-NLS-1$
+				b.append("lat=").append(point.getLatitude()); //$NON-NLS-1$
+				b.append("&lon=").append(point.getLongitude()); //$NON-NLS-1$
+				b.append("&text=").append(URLEncoder.encode(text, "UTF-8")); //$NON-NLS-1$
+				msg = "creating bug";
+			} else {
+				b.append(getNotesApi()).append("/");
+				b.append(point.getId()); //$NON-NLS-1$
+				if (action == OsmPoint.Action.REOPEN) {
+					b.append("/reopen");
+					msg = "reopen note";
+				} else if (action == OsmPoint.Action.MODIFY) {
+					b.append("/comment");
+					msg = "adding comment";
+				} else if (action == OsmPoint.Action.DELETE) {
+					b.append("/close");
+					msg = "close note";
+				}
+				b.append("?text=").append(URLEncoder.encode(text, "UTF-8")); //$NON-NLS-1$
 			}
-			b.append("?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
 		}
-		return editingPOI(b.toString(), "POST", msg);
+		if (!anonymous) {
+			OsmBugResult loginResult = editingPOI(getUserDetailsApi(), GET, "validate_login");
+			if (loginResult.warning != null) {
+				return loginResult;
+			}
+		}
+		return editingPOI(b.toString(), POST, msg);
 	}
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation) {
@@ -77,23 +106,11 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			connection.setConnectTimeout(15000);
 			connection.setRequestMethod(requestMethod);
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
-			if (true) {
-				String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
-				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			}
+
+			String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
+			connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
 			connection.setDoInput(true);
-			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				// connection.setDoOutput(true);
-				//				connection.setRequestProperty("Content-type", "text/xml"); //$NON-NLS-1$ //$NON-NLS-2$
-				// OutputStream out = connection.getOutputStream();
-				// String requestBody = null;
-				// if (requestBody != null) {
-				//					BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"), 1024); //$NON-NLS-1$
-				// bwr.write(requestBody);
-				// bwr.flush();
-				// }
-				// out.close();
-			}
 			connection.connect();
 			String msg = connection.getResponseMessage();
 			boolean ok = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
@@ -106,7 +123,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			if (!ok) {
 				r.warning = msg + "\n" + responseBody;
 			}
-		} catch (NullPointerException e) {
+		} catch (FileNotFoundException | NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			String msg = app.getString(R.string.auth_failed);
 			log.error(msg, e);
