@@ -2115,4 +2115,13 @@
 	<string name="poi_shoes_sport">Sabatilles esportives</string>
 	<string name="poi_shoes_orthopedic">Sabates ortopèdiques</string>
 
+	<string name="poi_badminton">Bàdminton</string>
+	<string name="poi_judo">*Judo</string>
+	<string name="poi_disc_golf">Disc golf</string>
+	<string name="poi_futsal">Futbol sala</string>
+	<string name="poi_rc_car">Curses de cotxes teledirigits</string>
+	<string name="poi_squash">Esquaix</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_official_name">Nom oficial</string>
+
 	</resources>
