@@ -114,6 +114,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
+        android:layout_marginRight="2dp"
         android:focusable="false"
         android:clickable="false"
         android:scaleType="center"

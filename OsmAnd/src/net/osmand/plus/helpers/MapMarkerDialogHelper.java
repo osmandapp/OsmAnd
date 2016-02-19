@@ -237,6 +237,8 @@ public class MapMarkerDialogHelper {
 									markersHelper.removeMarkersHistory();
 									if (markersHelper.getActiveMapMarkers().size() == 0) {
 										mapActivity.getDashboard().hideDashboard();
+									} else if (helperCallbacks != null) {
+										helperCallbacks.reloadAdapter();
 									} else {
 										reloadListAdapter(listAdapter);
 									}
@@ -273,6 +275,8 @@ public class MapMarkerDialogHelper {
 											markersHelper.removeActiveMarkers();
 											if (markersHelper.getMapMarkersHistory().size() == 0) {
 												mapActivity.getDashboard().hideDashboard();
+											} else if (helperCallbacks != null) {
+												helperCallbacks.reloadAdapter();
 											} else {
 												reloadListAdapter(listAdapter);
 											}
@@ -290,7 +294,11 @@ public class MapMarkerDialogHelper {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
 							markersHelper.reverseActiveMarkersOrder();
-							reloadListAdapter(listAdapter);
+							if (helperCallbacks != null) {
+								helperCallbacks.reloadAdapter();
+							} else {
+								reloadListAdapter(listAdapter);
+							}
 							return true;
 						}
 					});
@@ -671,7 +679,7 @@ public class MapMarkerDialogHelper {
 	}
 
 	private void generateGPX(List<MapMarker> markers) {
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map points");
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
