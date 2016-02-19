@@ -42,8 +42,7 @@ android {
 		targetSdkVersion 23
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		multiDexEnabled true
-		//versionName already assigned in code
-		//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
+		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 	}
 
 	lintOptions {
