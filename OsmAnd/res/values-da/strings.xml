@@ -2291,7 +2291,7 @@
     <string name="shared_string_widgets">Moduler</string>
     <string name="download_files_error_not_enough_space">Ikke nok plads! Dette skulle {3} MB midlertidigt og {1} MB permanent. I øjeblikket, er der kun {2} MB tilgængelig.</string>
     <string name="download_files_question_space_with_temp">Virkelig hente {0} fil(er)? Dette kræver {3} MB midlertidigt og {1} MB permanent? I øjeblikket, er der {2} MB til rådighed.</string>
-    <string name="upload_osm_note">Uploade OSM Bemærk</string>
+    <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
 <string name="upload_osm_note_description">Du kan overføre din OSM Note anonymt af youse din OpenStreetMap.org profil.</string>
     </resources>
