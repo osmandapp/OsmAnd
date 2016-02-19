@@ -1934,4 +1934,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="find_parking">Troba un aparcament</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostra les rutes BTT</string>
     <string name="shared_string_reverse_order">Inverteix l\'ordre</string>
+    <string name="shared_string_toolbar">Barra d\'eines</string>
+    <string name="shared_string_widgets">Ginys</string>
+    <string name="consider_turning_polygons_off">És recomanable desactivar la renderització de polígons.</string>
     </resources>
