@@ -184,24 +184,6 @@ task updateNoTranslate(type: Copy) {
 	into 'res/values/'
 }
 
-
-android.applicationVariants.all { variant ->
-	variant.outputs.each { output ->
-		output.processManifest.doLast {
-			replaceInManifest(output,
-					'2.2.4',
-					'14.88')
-
-		}
-	}
-}
-
-def replaceInManifest(output, fromString, toString) {
-	def updatedContent = output.processManifest.manifestOutputFile.getText('UTF-8')
-			.replaceAll(fromString, toString)
-	output.processManifest.manifestOutputFile.write(updatedContent, 'UTF-8')
-}
-
 task validateTranslate {
 	println "Validating translations"
 
