@@ -374,7 +374,7 @@
 	<string name="poi_healthcare_yes">Centro médico</string>
 
 	<string name="poi_company">Empresa</string>
-	<string name="poi_insurance">Seguros</string>
+	<string name="poi_insurance">Aseguradora</string>
 	<string name="poi_estate_agent">Inmobiliaria</string>
 	<string name="poi_lawyer">Abogado</string>
 	<string name="poi_office_telecommunication">Oficina de telecomunicaciones</string>
