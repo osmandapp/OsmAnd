@@ -280,8 +280,12 @@ public class MapMarkersHelper {
 				longitudes[i] = point.getLongitude();
 				pointDescriptions.add(pointDescription);
 				colorIndexes[i] = colorIndex;
-				positions[i] = -1 - i;
+				positions[i] = 0 - i;
 				indexes[i] = 0;
+			}
+			if (sortedMapMarkers.size() > 0) {
+				MapMarker firstMarker = sortedMapMarkers.get(0);
+				settings.updateMapMarker(firstMarker.getLatitude(), firstMarker.getLongitude(), firstMarker.pointDescription, firstMarker.colorIndex, -points.size());
 			}
 			settings.insertMapMarkers(latitudes, longitudes, pointDescriptions, colorIndexes, positions, indexes);
 			readFromSettings();

@@ -21,12 +21,14 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 
 public class MapMarkersWidgetsFactory {
 
-	public static final int MIN_DIST_OK_VISIBLE = 40;
+	public static final int MIN_DIST_OK_VISIBLE = 40; // meters
+	public static final int MIN_DIST_2ND_ROW_SHOW = 150; // meters
 
 	private final MapActivity map;
 	private MapMarkersHelper helper;
@@ -195,11 +197,21 @@ public class MapMarkersWidgetsFactory {
 		Float heading = map.getMapViewTrackingUtilities().getHeading();
 
 		MapMarker marker = markers.get(0);
-		updateUI(loc, heading, marker, arrowImg, distText, okButton, addressText, true);
+		updateUI(loc, heading, marker, arrowImg, distText, okButton, addressText, true, customLocation != null);
 
 		if (markers.size() > 1) {
 			marker = markers.get(1);
-			updateUI(loc, heading, marker, arrowImg2nd, distText2nd, okButton2nd, addressText2nd, false);
+			if (loc != null) {
+				for (int i = 1; i < markers.size(); i++) {
+					MapMarker m = markers.get(i);
+					m.dist = (int) (MapUtils.getDistance(m.getLatitude(), m.getLongitude(),
+							loc.getLatitude(), loc.getLongitude()));
+					if (m.dist < MIN_DIST_2ND_ROW_SHOW && marker.dist > m.dist) {
+						marker = m;
+					}
+				}
+			}
+			updateUI(loc, heading, marker, arrowImg2nd, distText2nd, okButton2nd, addressText2nd, false, customLocation != null);
 			updateVisibility(topBar2nd, true);
 		} else {
 			updateVisibility(topBar2nd, false);
@@ -209,7 +221,8 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	private void updateUI(LatLon loc, Float heading, MapMarker marker, ImageView arrowImg,
-						  TextView distText, ImageButton okButton, TextView addressText, boolean firstLine) {
+						  TextView distText, ImageButton okButton, TextView addressText,
+						  boolean firstLine, boolean customLocation) {
 		float[] mes = new float[2];
 		if (loc != null && marker.point != null) {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
@@ -240,7 +253,7 @@ public class MapMarkersWidgetsFactory {
 			txt = "— " + map.getString(R.string.m);
 		}
 		distText.setText(txt);
-		updateVisibility(okButton, loc != null && dist < MIN_DIST_OK_VISIBLE);
+		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
 		PointDescription pd = marker.getPointDescription(map);
