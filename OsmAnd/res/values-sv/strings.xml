@@ -2104,4 +2104,6 @@
     <string name="show_map_markers_topbar">Visa kartmarkörsfält</string>
     <string name="download_files_error_not_enough_space">Inte tillräckligt med utrymme! Detta skulle kräva {3} MB temporärt och {1} MB permanent. För tillfället finns det bara {2} MB tillgängligt.</string>
     <string name="download_files_question_space_with_temp">Verkligen hämta {0} fil(er)? Detta kräver {3} MB temporärt och {1} MB permanent. För tillfället finns det bara {2} MB tillgängligt.</string>
-    </resources>
+    <string name="upload_osm_note">Ladda upp OSM-anteckning</string>
+    <string name="upload_anonymously">Ladda upp anonymt</string>
+</resources>
