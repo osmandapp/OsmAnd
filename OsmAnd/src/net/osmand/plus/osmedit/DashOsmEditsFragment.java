@@ -80,6 +80,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	private void setupEditings() {
 		View mainView = getView();
+		assert mainView != null;
 		if (plugin == null) {
 			mainView.setVisibility(View.GONE);
 			return;
@@ -144,14 +145,15 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				showProgressDialog(new OsmPoint[] {point}, false);
+				showProgressDialog(new OsmPoint[] {point}, false, false);
 			}
 		});
 		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
 	}
 
-	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
+	@Override
+	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
 		OsmPoint[] toUpload = points;
 		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(R.string.uploading,
 				R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
@@ -175,7 +177,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		};
 		dialog.show(getChildFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
-				listener, plugin, toUpload.length, closeChangeSet);
+				listener, plugin, toUpload.length, closeChangeSet, anonymously);
 		uploadTask.execute(toUpload);
 	}
 

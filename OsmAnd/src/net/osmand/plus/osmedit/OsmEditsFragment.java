@@ -99,7 +99,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 	
 	public android.widget.ArrayAdapter<?> getAdapter() {
 		return listAdapter;
-	};
+	}
 	
 	private void selectAll() {
 		for (int i = 0; i < listAdapter.getCount(); i++) {
@@ -143,7 +143,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				new BackupOpenstreetmapPointAsyncTask().execute(
-						listAdapter.dataPoints.toArray(new OsmPoint[0]));
+						listAdapter.dataPoints.toArray(new OsmPoint[listAdapter.dataPoints.size()]));
 				return true;
 			}
 		});
@@ -170,7 +170,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						uploadItems(osmEditsSelected.toArray(new OsmPoint[0]));
+						uploadItems(osmEditsSelected.toArray(new OsmPoint[osmEditsSelected.size()]));
 						mode.finish();
 						return true;
 					}
@@ -285,6 +285,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
+		//noinspection ConstantConditions
 		getView().findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
 				AndroidUiHelper.isOrientationPortrait(getActivity()));
@@ -485,9 +486,9 @@ public class OsmEditsFragment extends OsmAndListFragment
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				ArrayList<OsmPoint> points = new ArrayList<OsmPoint>();
+				ArrayList<OsmPoint> points = new ArrayList<>();
 				points.add(info);
-				deleteItems(new ArrayList<OsmPoint>(points));
+				deleteItems(new ArrayList<>(points));
 				return true;
 
 			}
@@ -527,7 +528,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 //				UploadOsmEditsConfirmDialogFragment.TAG);
 	}
 
-	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
+	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
 		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
 				R.string.uploading,
 				R.string.local_openstreetmap_uploading,
@@ -547,7 +548,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		};
 		dialog.show(getActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, listener, plugin, points.length, closeChangeSet);
+				dialog, listener, plugin, points.length, closeChangeSet, anonymously);
 		uploadTask.execute(points);
 	}
 
@@ -687,10 +688,12 @@ public class OsmEditsFragment extends OsmAndListFragment
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			final OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
 			final OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+			@SuppressWarnings("unchecked")
 			final ArrayList<OsmPoint> points =
 					(ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			assert points != null;
 			builder.setMessage(getString(R.string.local_osm_changes_delete_all_confirm,
 					points.size()));
 			builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
@@ -699,6 +702,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 					Iterator<OsmPoint> it = points.iterator();
 					while (it.hasNext()) {
 						OsmPoint osmPoint = it.next();
+						assert plugin != null;
 						if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 							plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
 						} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {

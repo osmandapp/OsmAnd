@@ -91,7 +91,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 				ProgressDialog.STYLE_HORIZONTAL);
 		dialog.show(activity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, helper, plugin, toUpload.length, false);
+				dialog, helper, plugin, toUpload.length, false, false);
 		uploadTask.execute(toUpload);
 	}
 
@@ -115,6 +115,8 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 								public void onClick(@Nullable DialogInterface dialog, int id) {
 									OsmEditingPlugin plugin =
 											OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+									assert point != null;
+									assert plugin != null;
 									if (point.getGroup() == OsmPoint.Group.BUG) {
 										plugin.getDBBug().deleteAllBugModifications(
 												(OsmNotesPoint) point);
@@ -150,6 +152,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			boolean[] hasErrors = arguments.getBooleanArray(HAS_ERROR);
 			final OsmPoint[] points = (OsmPoint[]) arguments.getSerializable(POINTS_WITH_ERRORS);
 			int successfulUploads = 0;
+			assert hasErrors != null;
 			for (boolean hasError : hasErrors) {
 				if (!hasError) {
 					successfulUploads++;
@@ -237,7 +240,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 		@Override
 		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 			View row = convertView;
-			PointHolder holder = null;
+			PointHolder holder;
 
 			if (row == null) {
 				LayoutInflater inflater = context.getLayoutInflater();
