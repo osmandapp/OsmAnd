@@ -9,6 +9,15 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="download_files_error_not_enough_space">Not enough space!
+        This would need {3} MB temporarily and {1} MB permanently.
+        Currently, there are only {2} MB available.</string>
+    <string name="download_files_question_space_with_temp">Really download {0} file(s)?
+        This needs {3} MB temporarily and {1} MB permanently?
+        Currently, there are {2} MB available.</string>
+    <string name="download_files_question_space">Really download {0} file(s)?
+        This needs {1} MB permanently?
+        Currently, there are {2} MB available.</string>
     <string name="show_map_markers_topbar">Show Map markers topbar</string>
     <string name="map_marker_1st">First Map marker</string>
     <string name="map_marker_2nd">Second Map marker</string>
@@ -1612,7 +1621,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="osmand_service">Background mode</string>
     <string name="osmand_service_descr">OsmAnd runs in background while screen is off</string>
     <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
-    <string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
     <string name="use_transparent_map_theme">Transparent theme</string>
     <string name="native_library_not_supported">Native library is not supported on this device.</string>
     <string name="init_native_library">Initializing native library…</string>
