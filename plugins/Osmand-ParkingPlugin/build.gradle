@@ -64,4 +64,5 @@ repositories {
 }
 
 dependencies {
+	compile project(":eclipse-compile:appcompat")
 }
