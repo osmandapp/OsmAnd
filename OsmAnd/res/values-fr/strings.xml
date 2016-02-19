@@ -2134,4 +2134,7 @@
     <string name="shared_string_toolbar">Barre d\'outils</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="consider_turning_polygons_off">Il est recommandé de désactiver le rendu des polygones.</string>
+    <string name="upload_anonymously">Envoyer de manière anonyme</string>
+<string name="upload_osm_note_description">Vous pouvez soit envoyer les Notes OSM en anonyme soit utiliser votre compte OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Envoyer la Note OSM</string>
     </resources>
