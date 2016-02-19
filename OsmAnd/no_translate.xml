@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">OsmAnd~</string>
-    <string name="app_version">2.2.4</string>
+    <string name="app_version">2.2.0</string>
     <!--
     Note: For our dev build apk's, the above "app_version" is provided (via osmand/build.xml) as the base version prefix to our build number in the format:
              X.X.X#YYYYZ , where
@@ -14,7 +14,7 @@
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
     <string name="ga_debug">true</string>
-    <string name="versionFeatures">-play_market -amazon -blackberry</string>
+    <string name="versionFeatures">+play_market -amazon -blackberry</string>
     <string name="next_tips_and_tricks_not_translate"></string>
     <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="about_content">Data is powered by OpenStreetMap ODbL, &#169; <a href="http://www.openstreetmap.org/copyright">http://www.openstreetmap.org/copyright</a>.
