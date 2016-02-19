@@ -337,7 +337,7 @@
 
 
     <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (ledigt: %2$s).</string>
-    <string name="download_files_question_space">Tillgängligt utrymme nu {2} MB! Ladda ner {0} fil(er) ({1} MB)?</string>
+    <string name="download_files_question_space">Verkligen ladda ner {0} fil(er)? Detta kräver {1} MB permanent. För tillfället finns det {2} MB ledigt.</string>
 
 
     <string name="use_transparent_map_theme">Genomskinligt tema</string>
@@ -2102,4 +2102,6 @@
     <string name="shared_string_toolbar">Verktygsfält</string>
     <string name="shared_string_widgets">Widgetar</string>
     <string name="show_map_markers_topbar">Visa kartmarkörsfält</string>
+    <string name="download_files_error_not_enough_space">Inte tillräckligt med utrymme! Detta skulle kräva {3} MB temporärt och {1} MB permanent. För tillfället finns det bara {2} MB tillgängligt.</string>
+    <string name="download_files_question_space_with_temp">Verkligen hämta {0} fil(er)? Detta kräver {3} MB temporärt och {1} MB permanent. För tillfället finns det bara {2} MB tillgängligt.</string>
     </resources>

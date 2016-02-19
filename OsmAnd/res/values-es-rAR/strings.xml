@@ -1209,7 +1209,7 @@
     <string name="osmand_service">Modo reposo</string>
     <string name="osmand_service_descr">Ejecutar OsmAnd en segundo plano, mientras la pantalla este apagada</string>
     <string name="download_files_not_enough_space">Sin espacio suficiente para descargar %1$s MB (disponible: %2$s).</string>
-    <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
+    <string name="download_files_question_space">¿Descargar realmente {0} archivo(s)? Se necesitará {1} MB constantemente. Actualmente, hay disponible {2} MB.</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
@@ -2100,4 +2100,6 @@
     <string name="shared_string_toolbar">Barra de herramientas</string>
     <string name="shared_string_widgets">Controles</string>
     <string name="show_map_markers_topbar">Mostrar barra superior de Marcadores del mapa</string>
+    <string name="download_files_error_not_enough_space">¡Sin espacio suficiente! Se necesita {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible sólo {2} MB.</string>
+    <string name="download_files_question_space_with_temp">¿Descargar realmente {0} archivo(s)? Se necesitará {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible {2} MB.</string>
     </resources>

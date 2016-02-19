@@ -72,7 +72,7 @@
     <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano mientras la pantalla está apagada</string>
     <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial presente descargado para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa en línea (para esto active el complemento mapas en línea).</string>
     <string name="download_files_not_enough_space">No hay suficiente espacio para descargar %1$s MB (disponible: %2$s).</string>
-    <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
+    <string name="download_files_question_space">¿Realmente quieres descargar {0} archivos? Esto necesita {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
@@ -2082,4 +2082,6 @@
     <string name="map_marker_2nd">Segundo marcador de mapa</string>
     <string name="shared_string_toolbar">Barra de herramientas</string>
     <string name="shared_string_widgets">Controles</string>
+    <string name="download_files_error_not_enough_space">No hay suficiente espacio! Necesitaría {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay solo {2} MB disponibles.</string>
+    <string name="download_files_question_space_with_temp">¿Realmente quieres descargar {0} archivos? Esto necesita {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
     </resources>

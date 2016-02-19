@@ -41,7 +41,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.IconsCache;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmandApplication;
@@ -58,6 +57,7 @@ import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
+import net.osmand.plus.helpers.MapMarkerDialogHelper.MapMarkersDialogHelperCallbacks;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.WaypointDialogHelperCallbacks;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
@@ -88,7 +88,8 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 /**
  */
 public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicListViewCallbacks,
-		IRouteInformationListener, WaypointDialogHelperCallbacks, MapMarkerChangedListener {
+		IRouteInformationListener, WaypointDialogHelperCallbacks, MapMarkersDialogHelperCallbacks,
+		MapMarkerChangedListener {
 	private static final org.apache.commons.logging.Log LOG =
 			PlatformUtil.getLog(DashboardOnMap.class);
 	private static final String TAG = "DashboardOnMap";
@@ -190,8 +191,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void createDashboardView() {
 		baseColor = mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		waypointDialogHelper.setWaypointDialogHelperCallbacks(this);
+		waypointDialogHelper.setHelperCallbacks(this);
 		mapMarkerDialogHelper = new MapMarkerDialogHelper(mapActivity);
+		mapMarkerDialogHelper.setHelperCallbacks(this);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		final View.OnClickListener listener = new View.OnClickListener() {
@@ -220,9 +222,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					public boolean canDismiss(int position) {
 						boolean res = false;
 						if (listAdapter instanceof StableArrayAdapter) {
-							List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
-							Object obj = listAdapter.getItem(position);
-							res = activeObjects.contains(obj);
+							if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
+								List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
+								Object obj = listAdapter.getItem(position);
+								res = activeObjects.contains(obj);
+							} else if (visibleType == DashboardType.MAP_MARKERS) {
+								Object obj = listAdapter.getItem(position);
+								res = obj instanceof MapMarker;
+							}
 						}
 						return res;
 					}
@@ -785,10 +792,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			OnItemClickListener listener = waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
 					listAdapter);
 
-			DynamicListView dynamicListView = (DynamicListView) listView;
-			dynamicListView.setItemsList(listAdapter.getObjects());
-			dynamicListView.setActiveItemsList(listAdapter.getActiveObjects());
-
+			setDynamicListItems((DynamicListView) listView, listAdapter);
 			updateListAdapter(listAdapter, listener);
 
 		} else if (DashboardType.MAP_MARKERS == visibleType) {
@@ -797,10 +801,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			StableArrayAdapter listAdapter = mapMarkerDialogHelper.getMapMarkersListAdapter();
 			OnItemClickListener listener = mapMarkerDialogHelper.getItemClickListener(listAdapter);
 
-			DynamicListView dynamicListView = (DynamicListView) listView;
-			dynamicListView.setItemsList(listAdapter.getObjects());
-			dynamicListView.setActiveItemsList(listAdapter.getActiveObjects());
-
+			setDynamicListItems((DynamicListView) listView, listAdapter);
 			updateListAdapter(listAdapter, listener);
 
 		} else {
@@ -852,6 +853,21 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 	}
 
+	private void setDynamicListItems(DynamicListView listView, StableArrayAdapter listAdapter) {
+		listView.setItemsList(listAdapter.getObjects());
+
+		if (DashboardType.WAYPOINTS == visibleType || DashboardType.WAYPOINTS_FLAT == visibleType) {
+			listView.setActiveItemsList(listAdapter.getActiveObjects());
+		} else if (DashboardType.MAP_MARKERS == visibleType) {
+			List<Object> activeMarkers = new ArrayList<>();
+			for (Object obj : listAdapter.getActiveObjects()) {
+				if (obj instanceof MapMarker && !((MapMarker) obj).history) {
+					activeMarkers.add(obj);
+				}
+			}
+			listView.setActiveItemsList(activeMarkers);
+		}
+	}
 
 	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
 															  final ArrayAdapter<?> listAdapter) {
@@ -1288,6 +1304,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onItemsSwapped(final List<Object> items) {
 		getMyApplication().runInUIThread(new Runnable() {
@@ -1316,9 +1333,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					newRouteIsCalculated(false, new ValueHolder<Boolean>());
 					getMyApplication().getTargetPointsHelper().updateRouteAndRefresh(true);
 
-					if (swipeDismissListener != null) {
-						swipeDismissListener.setEnabled(true);
-					}
+				} else if (visibleType == DashboardType.MAP_MARKERS) {
+					List<MapMarker> markers = (List<MapMarker>)(Object)items;
+					getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, null);
+				}
+
+				if (swipeDismissListener != null) {
+					swipeDismissListener.setEnabled(true);
 				}
 			}
 		}, 50);
@@ -1355,17 +1376,24 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				mapMarkerDialogHelper.reloadListAdapter(stableAdapter);
 			}
 			if (listView instanceof DynamicListView) {
-				DynamicListView dynamicListView = (DynamicListView) listView;
-				dynamicListView.setItemsList(stableAdapter.getObjects());
-				dynamicListView.setActiveItemsList(stableAdapter.getActiveObjects());
+				setDynamicListItems((DynamicListView) listView, stableAdapter);
 			}
+		}
+	}
+
+	private void deleteSwipeItem(int position) {
+		if (swipeDismissListener != null) {
+			swipeDismissListener.delete(position);
 		}
 	}
 
 	@Override
 	public void deleteWaypoint(int position) {
-		if (swipeDismissListener != null) {
-			swipeDismissListener.delete(position);
-		}
+		deleteSwipeItem(position);
+	}
+
+	@Override
+	public void deleteMapMarker(int position) {
+		deleteSwipeItem(position);
 	}
 }

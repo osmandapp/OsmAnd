@@ -33,11 +33,11 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.views.DirectionDrawable;
+import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.util.Algorithms;
@@ -59,6 +59,7 @@ public class MapMarkerDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private MapMarkersHelper markersHelper;
+	private MapMarkersDialogHelperCallbacks helperCallbacks;
 	private boolean sorted;
 	private boolean nightMode;
 
@@ -69,10 +70,19 @@ public class MapMarkerDialogHelper {
 	private boolean reloading;
 	private long lastUpdateTime;
 
+	public interface MapMarkersDialogHelperCallbacks {
+		void reloadAdapter();
+		void deleteMapMarker(int position);
+	}
+
 	public MapMarkerDialogHelper(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
 		markersHelper = app.getMapMarkersHelper();
+	}
+
+	public void setHelperCallbacks(MapMarkersDialogHelperCallbacks helperCallbacks) {
+		this.helperCallbacks = helperCallbacks;
 	}
 
 	public boolean isNightMode() {
@@ -116,7 +126,7 @@ public class MapMarkerDialogHelper {
 		final List<Object> objects = getListObjects();
 		List<Object> activeObjects = getActiveObjects(objects);
 
-		final StableArrayAdapter listAdapter = new StableArrayAdapter(mapActivity,
+		return new StableArrayAdapter(mapActivity,
 				R.layout.map_marker_item, R.id.title, objects, activeObjects) {
 
 			@Override
@@ -147,14 +157,12 @@ public class MapMarkerDialogHelper {
 					v = mapActivity.getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
 				} else if (obj instanceof MapMarker) {
 					MapMarker marker = (MapMarker) obj;
-					v = updateMapMarkerItemView(v, marker);
+					v = updateMapMarkerItemView(this, v, marker);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 				}
 				return v;
 			}
 		};
-
-		return listAdapter;
 	}
 
 	private List<Drawable> getCustomDividers(List<Object> points) {
@@ -229,6 +237,8 @@ public class MapMarkerDialogHelper {
 									markersHelper.removeMarkersHistory();
 									if (markersHelper.getActiveMapMarkers().size() == 0) {
 										mapActivity.getDashboard().hideDashboard();
+									} else if (helperCallbacks != null) {
+										helperCallbacks.reloadAdapter();
 									} else {
 										reloadListAdapter(listAdapter);
 									}
@@ -265,6 +275,8 @@ public class MapMarkerDialogHelper {
 											markersHelper.removeActiveMarkers();
 											if (markersHelper.getMapMarkersHistory().size() == 0) {
 												mapActivity.getDashboard().hideDashboard();
+											} else if (helperCallbacks != null) {
+												helperCallbacks.reloadAdapter();
 											} else {
 												reloadListAdapter(listAdapter);
 											}
@@ -282,7 +294,11 @@ public class MapMarkerDialogHelper {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
 							markersHelper.reverseActiveMarkersOrder();
-							reloadListAdapter(listAdapter);
+							if (helperCallbacks != null) {
+								helperCallbacks.reloadAdapter();
+							} else {
+								reloadListAdapter(listAdapter);
+							}
 							return true;
 						}
 					});
@@ -308,7 +324,7 @@ public class MapMarkerDialogHelper {
 		return v;
 	}
 
-	protected View updateMapMarkerItemView(View v, final MapMarker marker) {
+	protected View updateMapMarkerItemView(final StableArrayAdapter adapter, View v, final MapMarker marker) {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = mapActivity.getLayoutInflater().inflate(R.layout.map_marker_item, null);
 		}
@@ -317,8 +333,38 @@ public class MapMarkerDialogHelper {
 		final View move = v.findViewById(R.id.info_move);
 		final View remove = v.findViewById(R.id.info_close);
 		remove.setVisibility(View.GONE);
-		move.setVisibility(View.GONE);
 		more.setVisibility(View.GONE);
+		if (!marker.history) {
+			move.setVisibility(View.VISIBLE);
+			((ImageView) move).setImageDrawable(app.getIconsCache().getContentIcon(
+					R.drawable.ic_action_reorder, !nightMode));
+			move.setTag(new DynamicListView.DragIcon() {
+				@Override
+				public void onClick() {
+					final PopupMenu optionsMenu = new PopupMenu(mapActivity, move);
+					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+					MenuItem item;
+					item = optionsMenu.getMenu().add(
+							R.string.shared_string_remove).setIcon(app.getIconsCache().
+							getContentIcon(R.drawable.ic_action_remove_dark));
+					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							if (helperCallbacks != null) {
+								int pos = adapter.getPosition(marker);
+								if (pos != -1) {
+									helperCallbacks.deleteMapMarker(pos);
+								}
+							}
+							return true;
+						}
+					});
+					optionsMenu.show();
+				}
+			});
+		} else {
+			move.setVisibility(View.GONE);
+		}
 		return v;
 	}
 
@@ -633,7 +679,7 @@ public class MapMarkerDialogHelper {
 	}
 
 	private void generateGPX(List<MapMarker> markers) {
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map points");
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
