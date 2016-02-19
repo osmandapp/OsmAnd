@@ -1706,7 +1706,9 @@ public class OsmandSettings {
 			int index = ps.indexOf(new LatLon(latitude, longitude));
 			ds.set(index, PointDescription.serializeToString(historyDescription));
 			cs.set(index, colorIndex);
-			ns.set(index, pos);
+			if (ns.size() > index) {
+				ns.set(index, pos);
+			}
 			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
 				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
 			}

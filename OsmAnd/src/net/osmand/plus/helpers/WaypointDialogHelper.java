@@ -73,7 +73,7 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	public void setWaypointDialogHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
+	public void setHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
 		this.helperCallbacks = callbacks;
 	}
 
