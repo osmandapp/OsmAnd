@@ -33,7 +33,7 @@ public class EditPOIMenuController extends MenuController {
 
 		poiUploader = new ProgressDialogPoiUploader() {
 			@Override
-			public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
+			public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
 				ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
 						R.string.uploading,
 						R.string.local_openstreetmap_uploading,
@@ -53,7 +53,7 @@ public class EditPOIMenuController extends MenuController {
 				};
 				dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 				UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-						dialog, listener, plugin, points.length, closeChangeSet);
+						dialog, listener, plugin, points.length, closeChangeSet, anonymously);
 				uploadTask.execute(points);
 			}
 		};

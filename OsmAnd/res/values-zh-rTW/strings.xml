@@ -2109,4 +2109,5 @@
     <string name="map_marker_2nd">第二個地圖標記</string>
     <string name="shared_string_toolbar">工具列</string>
     <string name="shared_string_widgets">小工具</string>
+    <string name="download_files_error_not_enough_space">沒有足夠的空間！這會需要暫時空間 {3} MB 和 {1} MB 的永久空間。目前只有 {2} MB 可用。</string>
     </resources>

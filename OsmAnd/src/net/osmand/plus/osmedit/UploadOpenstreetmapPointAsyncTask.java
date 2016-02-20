@@ -28,14 +28,6 @@ public class UploadOpenstreetmapPointAsyncTask
 											 OsmEditsUploadListener listener,
 											 OsmEditingPlugin plugin,
 											 int listSize,
-											 boolean closeChangeSet) {
-		this(progress, listener, plugin, listSize, closeChangeSet, false);
-	}
-
-	public UploadOpenstreetmapPointAsyncTask(ProgressDialogFragment progress,
-											 OsmEditsUploadListener listener,
-											 OsmEditingPlugin plugin,
-											 int listSize,
 											 boolean closeChangeSet,
 											 boolean loadAnonymous) {
 		this.progress = progress;

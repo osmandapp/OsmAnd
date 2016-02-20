@@ -20,6 +20,8 @@
     <string name="download_files_question_space">Really download {0} file(s)?
         This needs {1} MB permanently?
         Currently, there are {2} MB available.</string>
+    <string name="upload_osm_note_description">You can upload your OSM Note anonymously of youse your OpenStreetMap.org profile.</string>
+    <string name="upload_osm_note">Upload OSM Note</string>
     <string name="show_map_markers_topbar">Show Map markers topbar</string>
     <string name="map_marker_1st">First Map marker</string>
     <string name="map_marker_2nd">Second Map marker</string>
@@ -2237,4 +2239,5 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
+    <string name="upload_anonymously">Upload anonymously</string>
 </resources>

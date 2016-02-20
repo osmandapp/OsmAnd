@@ -58,7 +58,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	@Override
 	public OsmBugResult commit(OsmNotesPoint point, String text, Action action) {
-		return commit(point, text, action, true);
+		return commit(point, text, action, false);
 	}
 
 	public OsmBugResult commit(OsmNotesPoint point, String text, Action action, boolean anonymous) {
