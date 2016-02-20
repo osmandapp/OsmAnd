@@ -69,7 +69,7 @@
 
 
     <string name="download_files_not_enough_space">Il n\'y a pas suffisamment d\'espace pour télécharger %1$s MB (disponible : %2$s).</string>
-    <string name="download_files_question_space">Espace actuellement disponible : {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
+    <string name="download_files_question_space">Souhaitez-vous télécharger {0} fichier(s) qui occuperont {1} MB ? Actuellement {2} MB sont disponibles.</string>
 
 
     <string name="use_transparent_map_theme">Thème de transparence</string>
@@ -2137,4 +2137,7 @@
     <string name="upload_anonymously">Envoyer de manière anonyme</string>
 <string name="upload_osm_note_description">Vous pouvez soit envoyer les Notes OSM en anonyme soit utiliser votre compte OpenStreetMap.org.</string>
     <string name="upload_osm_note">Envoyer la Note OSM</string>
+    <string name="download_files_error_not_enough_space">Espace insuffisant ! Cette opération requiert temporairement {3} MB et {1} MB seront utilisés de manière permanente. Actuellement {2} MB sont disponibles.</string>
+    <string name="download_files_question_space_with_temp">Souhaitez-vous télécharger {0} fichier(s) ? Cette opération requiert temporairement {3} MB et {1} MB seront utilisés de manière permanente. Actuellement {2} MB sont disponibles.</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation vous guide pendant un itinéraire et vous permet de visualiser des cartes, le tout sans connexion Internet ! Commencez par télécharger une carte.\nBasic options: • Detailed maps of 200 countries • Offline navigator with voice prompts • Address search in offline mode • Info about locations on the map: places of interest, cafes, parking lots, shops • Adding locations to favorites • Driving, cycling and pedestrian navigation Additional options: • Ability to view and record GPX tracks • Wikipedia description of POI • Adding photo, audio, and video notes to the map • Day and Night map modes for more convenient driving • Information about public transport routes and stops • Bicycle paths and footpaths • Walking trails for tourism all over the world • Online maps from numerous sources • Info about road pavement quality and street lighting • Adding, editing and deleting POI (for OpenStreetMap.org users) • OsMo - live monitoring of other devices Get a reliable navigator in your country - be it France, Germany, Mexico, United Kingdom, Spain, the Netherlands, USA, Russia, Brazil or any other state. Plugins: • Contour maps and terrain shading https://goo.gl/7mojP8 Contour lines data and terrain visualization added to the basic OsmAnd map. • Ski maps https://goo.gl/pX6DxJ The info about ski pistes, cross-country skiing tracks, cable railways and ski lifts. • Nautical map https://goo.gl/0hEdxm Special map style for viewing nautical navigation signs for arterial and nearshore marine navigation. • Parking position https://goo.gl/6JxQXF Helps you mark the location of your parked vehicle and see how much time left if the parking is time-limited. Stay tuned! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Site: http://osmand.net If you need help with OsmAnd application, please contact our support team: support@osmand.net. "</string>
     </resources>
