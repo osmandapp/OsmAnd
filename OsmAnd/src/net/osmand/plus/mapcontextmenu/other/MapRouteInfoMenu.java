@@ -28,6 +28,8 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -41,7 +43,9 @@ import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.activities.search.SearchAddressActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -82,6 +86,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private static final long SPINNER_START_ID = 5;
 	private static final long SPINNER_FINISH_ID = 6;
 	private static final long SPINNER_HINT_ID = 100;
+	private static final long SPINNER_MAP_MARKER_1_ID = 301;
+	private static final long SPINNER_MAP_MARKER_2_ID = 302;
+	private static final long SPINNER_MAP_MARKER_3_ID = 303;
+	private static final long SPINNER_MAP_MARKER_MORE_ID = 350;
 
 	public MapRouteInfoMenu(MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
 		this.mapActivity = mapActivity;
@@ -255,6 +263,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					intent.putExtra(TARGET_SELECT, true);
 					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
+				} else if (id == SPINNER_MAP_MARKER_MORE_ID) {
+					selectMapMarker(parentView, -1, true);
+				} else if (id == SPINNER_MAP_MARKER_1_ID) {
+					selectMapMarker(parentView, 0, true);
+				} else if (id == SPINNER_MAP_MARKER_2_ID) {
+					selectMapMarker(parentView, 1, true);
+				} else if (id == SPINNER_MAP_MARKER_3_ID) {
+					selectMapMarker(parentView, 2, true);
 				}
 			}
 
@@ -303,6 +319,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					intent.putExtra(TARGET_SELECT, false);
 					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
+				} else if (id == SPINNER_MAP_MARKER_MORE_ID) {
+					selectMapMarker(parentView, -1, false);
+				} else if (id == SPINNER_MAP_MARKER_1_ID) {
+					selectMapMarker(parentView, 0, false);
+				} else if (id == SPINNER_MAP_MARKER_2_ID) {
+					selectMapMarker(parentView, 1, false);
+				} else if (id == SPINNER_MAP_MARKER_3_ID) {
+					selectMapMarker(parentView, 2, false);
 				}
 			}
 
@@ -356,7 +380,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication()
 				.getFavorites().getFavouritePoints(), false);
 		Dialog[] dlgHolder = new Dialog[1];
-		OnItemClickListener click = getOnClickListener(target, favouritesAdapter, dlgHolder);
+		OnItemClickListener click = getOnFavoriteClickListener(target, favouritesAdapter, dlgHolder);
 		OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
 
 			@Override
@@ -372,6 +396,43 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		FavoriteDialogs.showFavoritesDialog(mapActivity, favouritesAdapter, click, dismissListener, dlgHolder, true);
 	}
 
+	private void selectMapMarker(final View parentView, final int index, final boolean target) {
+		if (index != -1) {
+			MapMarker m = mapActivity.getMyApplication().getMapMarkersHelper().getActiveMapMarkers().get(index);
+			LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
+			if (target) {
+				getTargets().navigateToPoint(point, true, -1, m.getPointDescription(mapActivity));
+			} else {
+				getTargets().setStartPoint(point, true, m.getPointDescription(mapActivity));
+			}
+			updateFromIcon();
+
+		} else {
+			OnItemClickListener click = new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					selectMapMarker(parentView, position, target);
+				}
+			};
+			OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
+
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					if (target) {
+						setupToSpinner(parentView);
+					} else {
+						setupFromSpinner(parentView);
+					}
+				}
+			};
+
+			MapMarkerSelectionFragment selectionFragment = new MapMarkerSelectionFragment();
+			selectionFragment.setClickListener(click);
+			selectionFragment.setDismissListener(dismissListener);
+			selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
+		}
+	}
+
 	private boolean isLight() {
 		return !nightMode;
 	}
@@ -381,8 +442,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		return iconsCache.getIcon(iconId, 0, 0f);
 	}
 
-	private OnItemClickListener getOnClickListener(final boolean target, final FavouritesAdapter favouritesAdapter,
-												   final Dialog[] dlg) {
+	private OnItemClickListener getOnFavoriteClickListener(final boolean target, final FavouritesAdapter favouritesAdapter,
+														   final Dialog[] dlg) {
 		return new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -577,7 +638,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	private Spinner setupFromSpinner(View view) {
-		ArrayList<RouteSpinnerRow> fromActions = new ArrayList<>();
+		List<RouteSpinnerRow> fromActions = new ArrayList<>();
 		fromActions.add(new RouteSpinnerRow(SPINNER_MY_LOCATION_ID, R.drawable.ic_action_get_my_location,
 				mapActivity.getString(R.string.shared_string_my_location)));
 		fromActions.add(new RouteSpinnerRow(SPINNER_FAV_ID, R.drawable.ic_action_fav_dark,
@@ -608,6 +669,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				geocodingLookupService.lookupAddress(startPointRequest);
 			}
 		}
+
+		addMarkersToSpinner(fromActions);
+
 		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
 		RouteSpinnerArrayAdapter fromAdapter = new RouteSpinnerArrayAdapter(view.getContext());
 		fromAdapter.addAll(fromActions);
@@ -626,7 +690,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private Spinner setupToSpinner(View view) {
 		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
 		final TargetPointsHelper targets = getTargets();
-		ArrayList<RouteSpinnerRow> toActions = new ArrayList<>();
+		List<RouteSpinnerRow> toActions = new ArrayList<>();
 
 		TargetPoint finish = getTargets().getPointToNavigate();
 		if (finish != null) {
@@ -661,10 +725,39 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		toActions.add(new RouteSpinnerRow(SPINNER_ADDRESS_ID, R.drawable.ic_action_home_dark,
 				mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis)));
 
+		addMarkersToSpinner(toActions);
+
 		RouteSpinnerArrayAdapter toAdapter = new RouteSpinnerArrayAdapter(view.getContext());
 		toAdapter.addAll(toActions);
 		toSpinner.setAdapter(toAdapter);
 		return toSpinner;
+	}
+
+	private void addMarkersToSpinner(List<RouteSpinnerRow> actions) {
+		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		List<MapMarker> markers = markersHelper.getActiveMapMarkers();
+		if (markers.size() > 0) {
+			MapMarker m = markers.get(0);
+			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_1_ID,
+					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
+					m.getOnlyName()));
+		}
+		if (markers.size() > 1) {
+			MapMarker m = markers.get(1);
+			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_2_ID,
+					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
+					m.getOnlyName()));
+		}
+		if (markers.size() > 2) {
+			MapMarker m = markers.get(2);
+			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_3_ID,
+					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
+					m.getOnlyName()));
+		}
+		if (markers.size() > 3) {
+			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_MORE_ID, 0,
+					mapActivity.getString(R.string.map_markers_other)));
+		}
 	}
 
 	private TargetPointsHelper getTargets() {
@@ -737,11 +830,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private class RouteSpinnerRow {
 		long id;
 		int iconId;
+		Drawable icon;
 		String text;
+
+		public RouteSpinnerRow(long id) {
+			this.id = id;
+		}
 
 		public RouteSpinnerRow(long id, int iconId, String text) {
 			this.id = id;
 			this.iconId = iconId;
+			this.text = text;
+		}
+
+		public RouteSpinnerRow(long id, Drawable icon, String text) {
+			this.id = id;
+			this.icon = icon;
 			this.text = text;
 		}
 	}
@@ -766,7 +870,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 		@Override
 		public boolean isEnabled(int position) {
-			return getItemId(position) != SPINNER_HINT_ID;
+			long id = getItemId(position);
+			return id != SPINNER_HINT_ID;
 		}
 
 		@Override
@@ -781,19 +886,31 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 		@Override
 		public View getDropDownView(int position, View convertView, ViewGroup parent) {
+			long id = getItemId(position);
 			TextView label = (TextView) super.getDropDownView(position, convertView, parent);
 
 			RouteSpinnerRow row = getItem(position);
-			long id = getItemId(position);
 			label.setText(row.text);
 			if (id != SPINNER_HINT_ID) {
-				Drawable icon = mapActivity.getMyApplication().getIconsCache().getContentIcon(row.iconId);
+				Drawable icon = null;
+				if (row.icon != null) {
+					icon = row.icon;
+				} else if (row.iconId > 0) {
+					icon = mapActivity.getMyApplication().getIconsCache().getContentIcon(row.iconId);
+				}
 				label.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 				label.setCompoundDrawablePadding(AndroidUtils.dpToPx(mapActivity, 16f));
 			} else {
 				label.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 				label.setCompoundDrawablePadding(0);
+			}
 
+			if (id == SPINNER_MAP_MARKER_MORE_ID) {
+				label.setTextColor(!mapActivity.getMyApplication().getSettings().isLightContent() ?
+						mapActivity.getResources().getColor(R.color.color_dialog_buttons_dark) : mapActivity.getResources().getColor(R.color.color_dialog_buttons_light));
+			} else {
+				label.setTextColor(!mapActivity.getMyApplication().getSettings().isLightContent() ?
+						ContextCompat.getColorStateList(mapActivity, android.R.color.primary_text_dark) : ContextCompat.getColorStateList(mapActivity, android.R.color.primary_text_light));
 			}
 			label.setPadding(AndroidUtils.dpToPx(mapActivity, 16f), 0, 0, 0);
 

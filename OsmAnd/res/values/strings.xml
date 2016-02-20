@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="select_map_marker">Select Map marker</string>
+    <string name="map_markers_other">Other markers</string>
     <string name="download_files_error_not_enough_space">Not enough space!
         This would need {3} MB temporarily and {1} MB permanently.
         Currently, there are only {2} MB available.</string>
