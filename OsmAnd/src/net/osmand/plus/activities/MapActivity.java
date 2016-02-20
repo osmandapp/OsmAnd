@@ -1037,8 +1037,17 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			}
 			((MapActivity) activity).readLocationToShow();
 		} else {
-			prevActivityIntent = new Intent(((Activity) activity).getIntent());
-			prevActivityIntent.putExtra(INTENT_KEY_PARENT_MAP_ACTIVITY, true);
+			if (activity instanceof Activity) {
+				Intent intent = ((Activity) activity).getIntent();
+				if (intent != null) {
+					prevActivityIntent = new Intent(intent);
+					prevActivityIntent.putExtra(INTENT_KEY_PARENT_MAP_ACTIVITY, true);
+				} else {
+					prevActivityIntent = null;
+				}
+			} else {
+				prevActivityIntent = null;
+			}
 
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
