@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -328,7 +329,7 @@ public class MapMarkerDialogHelper {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = mapActivity.getLayoutInflater().inflate(R.layout.map_marker_item, null);
 		}
-		updateMapMarkerInfoView(v, marker);
+		updateMapMarkerInfoView(mapActivity, v, loc, heading, useCenter, nightMode, screenOrientation, marker);
 		final View more = v.findViewById(R.id.all_points);
 		final View move = v.findViewById(R.id.info_move);
 		final View remove = v.findViewById(R.id.info_close);
@@ -368,7 +369,9 @@ public class MapMarkerDialogHelper {
 		return v;
 	}
 
-	protected void updateMapMarkerInfoView(View localView, final MapMarker marker) {
+	public static void updateMapMarkerInfoView(Context ctx, View localView, LatLon loc,
+										   Float heading, boolean useCenter, boolean nightMode,
+										   int screenOrientation, final MapMarker marker) {
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
@@ -389,7 +392,7 @@ public class MapMarkerDialogHelper {
 		DirectionDrawable dd;
 		if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
 			newImage = true;
-			dd = new DirectionDrawable(mapActivity, arrow.getWidth(), arrow.getHeight());
+			dd = new DirectionDrawable(ctx, arrow.getWidth(), arrow.getHeight());
 		} else {
 			dd = (DirectionDrawable) arrow.getDrawable();
 		}
@@ -409,16 +412,18 @@ public class MapMarkerDialogHelper {
 		arrow.setVisibility(View.VISIBLE);
 		arrow.invalidate();
 
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+
 		if (!marker.history) {
 			waypointIcon.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
-			AndroidUtils.setTextPrimaryColor(mapActivity, text, nightMode);
-			textDist.setTextColor(mapActivity.getResources()
+			AndroidUtils.setTextPrimaryColor(ctx, text, nightMode);
+			textDist.setTextColor(ctx.getResources()
 					.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
 		} else {
 			waypointIcon.setImageDrawable(app.getIconsCache()
 					.getContentIcon(R.drawable.ic_action_flag_dark, !nightMode));
-			AndroidUtils.setTextSecondaryColor(mapActivity, text, nightMode);
-			AndroidUtils.setTextSecondaryColor(mapActivity, textDist, nightMode);
+			AndroidUtils.setTextSecondaryColor(ctx, text, nightMode);
+			AndroidUtils.setTextSecondaryColor(ctx, textDist, nightMode);
 		}
 
 		int dist = (int) mes[0];
@@ -654,7 +659,7 @@ public class MapMarkerDialogHelper {
 				Object obj = listView.getItemAtPosition(i);
 				View v = listView.getChildAt(i - listView.getFirstVisiblePosition());
 				if (obj == marker) {
-					updateMapMarkerInfoView(v, (MapMarker) obj);
+					updateMapMarkerInfoView(mapActivity, v, loc, heading, useCenter, nightMode, screenOrientation, marker);
 				}
 			}
 		} catch (Exception e) {

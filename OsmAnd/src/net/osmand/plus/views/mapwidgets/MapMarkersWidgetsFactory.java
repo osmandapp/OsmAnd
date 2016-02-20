@@ -250,7 +250,7 @@ public class MapMarkersWidgetsFactory {
 		if (loc != null) {
 			txt = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
 		} else {
-			txt = "— " + map.getString(R.string.m);
+			txt = "—";
 		}
 		distText.setText(txt);
 		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
