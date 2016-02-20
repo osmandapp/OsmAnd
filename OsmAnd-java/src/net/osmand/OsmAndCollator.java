@@ -7,6 +7,7 @@ public class OsmAndCollator {
 	public static net.osmand.Collator primaryCollator() {
 		// romanian locale encounters diacritics as different symbols
 		final java.text.Collator instance = Locale.getDefault().getLanguage().equals("ro")  ||
+				Locale.getDefault().getLanguage().equals("cs") ||
 				Locale.getDefault().getLanguage().equals("sk")? java.text.Collator.getInstance(Locale.US)
 				: java.text.Collator.getInstance();
 		instance.setStrength(java.text.Collator.PRIMARY);
