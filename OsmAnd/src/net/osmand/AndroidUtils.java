@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -14,6 +15,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
@@ -98,6 +100,10 @@ public class AndroidUtils {
 
 	public static void setListItemBackground(Context ctx, View view, boolean night) {
 		setBackgroundColor(ctx, view, night, R.color.bg_color_light, R.color.bg_color_dark);
+	}
+
+	public static void setListBackground(Context ctx, View view, boolean night) {
+		setBackgroundColor(ctx, view, night, R.color.ctx_menu_info_view_bg_light, R.color.ctx_menu_info_view_bg_dark);
 	}
 
 	public static void setTextPrimaryColor(Context ctx, TextView textView, boolean night) {

@@ -3,8 +3,6 @@ package net.osmand.plus.mapmarkers;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -27,7 +25,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
-import net.osmand.plus.views.controls.ListDividerShape;
 
 import java.util.List;
 
@@ -84,18 +81,6 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		});
 
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
-		int color;
-		if (nightMode) {
-			color = mapActivity.getResources().getColor(R.color.dashboard_divider_dark);
-		} else {
-			color = mapActivity.getResources().getColor(R.color.dashboard_divider_light);
-		}
-		Shape dividerShape = new ListDividerShape(color, 0);
-		final ShapeDrawable divider = new ShapeDrawable(dividerShape);
-		int divHeight = AndroidUtils.dpToPx(getContext(), 1f);
-		divider.setIntrinsicHeight(divHeight);
-		listView.setDivider(divider);
-
 		final ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
 		List<MapMarker> markers = getMyApplication().getMapMarkersHelper().getActiveMapMarkers();
 		if (markers.size() > 0) {

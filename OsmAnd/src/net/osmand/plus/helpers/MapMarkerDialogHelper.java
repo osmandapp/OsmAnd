@@ -154,8 +154,10 @@ public class MapMarkerDialogHelper {
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 				} else if (topDividerView) {
 					v = mapActivity.getLayoutInflater().inflate(R.layout.card_top_divider, null);
+					AndroidUtils.setListBackground(mapActivity, v, nightMode);
 				} else if (bottomDividerView) {
 					v = mapActivity.getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
+					AndroidUtils.setListBackground(mapActivity, v, nightMode);
 				} else if (obj instanceof MapMarker) {
 					MapMarker marker = (MapMarker) obj;
 					v = updateMapMarkerItemView(this, v, marker);
