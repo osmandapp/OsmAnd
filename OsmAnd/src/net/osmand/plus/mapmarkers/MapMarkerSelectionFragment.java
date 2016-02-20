@@ -120,7 +120,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 				convertView = getMapActivity().getLayoutInflater().inflate(R.layout.map_marker_item, null);
 			}
 			MapMarkerDialogHelper.updateMapMarkerInfoView(getContext(), convertView, loc, heading,
-					useCenter, nightMode, screenOrientation, marker);
+					useCenter, nightMode, screenOrientation, false, marker);
 			final View remove = convertView.findViewById(R.id.info_close);
 			remove.setVisibility(View.GONE);
 			AndroidUtils.setListItemBackground(getMapActivity(), convertView, nightMode);

@@ -208,9 +208,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		//listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setDrawSelectorOnTop(true);
 		((DynamicListView) listView).setDynamicListViewCallbacks(this);
-		listView.setOverscrollFooter(new ColorDrawable(
-				nightMode ? mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark)
-						: mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light)));
 
 		// Create a ListView-specific touch listener. ListViews are given special treatment because
 		// by default they handle touches for their list items... i.e. they're in charge of drawing
@@ -779,6 +776,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				listView.setDivider(null);
 			}
 		}
+		/*
+		listView.setOverscrollFooter(new ColorDrawable(
+					nightMode ? mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark)
+							: mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light)));
+		*/
 	}
 
 	private int dpToPx(float dp) {
