@@ -2106,4 +2106,6 @@
     <string name="download_files_question_space_with_temp">Verkligen hämta {0} fil(er)? Detta kräver {3} MB temporärt och {1} MB permanent. För tillfället finns det bara {2} MB tillgängligt.</string>
     <string name="upload_osm_note">Ladda upp OSM-anteckning</string>
     <string name="upload_anonymously">Ladda upp anonymt</string>
-</resources>
+<string name="select_map_marker">Välj kartmarkör</string>
+    <string name="map_markers_other">Andra markörer</string>
+    </resources>
