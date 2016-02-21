@@ -444,7 +444,7 @@
     <string name="routing_settings">Navigation</string>
 
     <string name="download_files_not_enough_space">Der er ikke ledig plads nok til at hente %1$s MB (Ledig: %2$s).</string>
-    <string name="download_files_question_space">Virkelig hente {0} fil(er)? Dette krævet {1} MB permanent? I øjeblikket, er der {2} MB til rådighed.</string>
+    <string name="download_files_question_space">Virkelig hente {0} fil(er)? Dette krævet {1} MB permanent. I øjeblikket, er der {2} MB til rådighed.</string>
 
     <string name="use_transparent_map_theme">Gennemsigtigt tema</string>
     <string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
@@ -2290,10 +2290,10 @@
     <string name="shared_string_toolbar">Værktøjslinie</string>
     <string name="shared_string_widgets">Moduler</string>
     <string name="download_files_error_not_enough_space">Ikke nok plads! Dette skulle {3} MB midlertidigt og {1} MB permanent. I øjeblikket, er der kun {2} MB tilgængelig.</string>
-    <string name="download_files_question_space_with_temp">Virkelig hente {0} fil(er)? Dette kræver {3} MB midlertidigt og {1} MB permanent? I øjeblikket, er der {2} MB til rådighed.</string>
+    <string name="download_files_question_space_with_temp">Virkelig hente {0} fil(er)? Dette kræver {3} MB midlertidigt og {1} MB permanent. I øjeblikket, er der {2} MB til rådighed.</string>
     <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
-<string name="upload_osm_note_description">Du kan overføre din OSM Note anonymt eller bruge din OpenStreetMap.org profil.</string>
+<string name="upload_osm_note_description">Du kan overføre din OSM Note anonymt hvis du bruger din OpenStreetMap.org profil.</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
     <string name="map_markers_other">Andre markører</string>
     </resources>
