@@ -2036,4 +2036,9 @@
     <string name="shared_string_widgets">Widgets</string>
     <string name="download_files_error_not_enough_space">Nicht genug Speicher! Es werden temporär {3} MB benötigt und {1} MB permanent. Aktuell sind nur {2} MB verfügbar.</string>
     <string name="download_files_question_space_with_temp">Wirklich {0} Datei(en) herunterladen? Dies benötigt temporär {3} MB und permanent {1} MB? Aktuell sind {2} MB verfügbar.</string>
-    </resources>
+    <string name="select_map_marker">Kartenmarkierung auswählen</string>
+    <string name="map_markers_other">Andere Markierungen</string>
+    <string name="upload_osm_note_description">Sie können ihre OSM Notizen anonym hochladen oder ihr OpenStreetMap.org Profil nutzen.</string>
+    <string name="upload_osm_note">OSM Notiz hochladen</string>
+    <string name="upload_anonymously">Anonym hochladen</string>
+</resources>
