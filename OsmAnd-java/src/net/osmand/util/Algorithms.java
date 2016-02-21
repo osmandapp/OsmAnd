@@ -280,6 +280,16 @@ public class Algorithms {
 		return "";
 	}
 	
+	public static String extractOnlyIntegerSuffix(String s) {
+		int k = 0;
+		for (; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				return s.substring(k);
+			}
+		}
+		return "";
+	}
+	
 	public static String extractIntegerSuffix(String s) {
 		int k = 0;
 		for (; k < s.length(); k++) {
