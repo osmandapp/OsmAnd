@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_bakery">Piekarnia</string>
 	<string name="poi_alcohol">Sklep monopolowy</string>
 	<string name="poi_convenience">Sklep ogólnospożywczy</string>
@@ -1175,4 +1175,10 @@
 	<string name="poi_denomination_salvation_army">Armia Zbawienia</string>
 	<string name="poi_denomination_bulgarian_orthodox">Bułgarski ortodoksyjny</string>
 	<string name="poi_denomination_united_methodist">Zjednoczeni metodyści</string>
+	<string name="poi_power_pole">Słup energetyczny</string>
+
+	<string name="poi_brownfield">Tereny przemysłowe</string>
+	<string name="poi_association">Biura stowarzyszenia</string>
+	<string name="poi_financial">Biuro finansowe</string>
+	<string name="poi_denomination_episcopal">Biskupi</string>
 	</resources>
