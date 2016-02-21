@@ -198,7 +198,7 @@
     <string name="global_settings">Globálne nastavenia</string>
     <string name="global_app_settings">Globálne nastavenia aplikácie</string>
     <string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
-    <string name="download_files_question_space">Aktuálne je voľných {2} MB! Stiahnuť {0} súbor(y/ov) ({1} MB)?</string>
+    <string name="download_files_question_space">Naozaj stiahnuť {0} súbor(ov)? To trvalo vyžaduje {1} MB. V súčasnosti je voľných len {2} MB.</string>
     <string name="use_transparent_map_theme">Priehľadná téma</string>
     <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
     <string name="init_native_library">Inicializácia natívnej knižnice…</string>
@@ -1941,4 +1941,27 @@
     <string name="show_polygons">Zobraziť polygóny</string>
     <string name="underlay_transparency">Priehľadnosť v podkladovej vrstve</string>
     <string name="rendering_attr_showMtbRoutes_name">Zobraziť trasy pre horské bicykle</string>
-    </resources>
+    <string name="select_map_marker">Zvoľte mapovú značku</string>
+    <string name="map_markers_other">Iné značky</string>
+    <string name="download_files_error_not_enough_space">Nedostatok miesta! Činnosť by dočasne potrebovala {3} MB a natrvalo {1} MB. V súčasnosti je voľných len {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Naozaj stiahnuť {0} súbor(ov)? To by dočasne potrebovalo {3} MB a natrvalo {1} MB. V súčasnosti je voľných len {2} MB.</string>
+    <string name="upload_osm_note_description">OSM poznámku môžete odoslať anonymne ak použijete svoj účet na OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Odoslať OSM poznámku</string>
+    <string name="show_map_markers_topbar">Zobraziť horný panel mapových značiek</string>
+    <string name="map_marker_1st">Prvá mapová značka</string>
+    <string name="map_marker_2nd">Druhá mapová značka</string>
+    <string name="shared_string_toolbar">Panel nástrojov</string>
+    <string name="shared_string_widgets">Nástroje</string>
+    <string name="add_points_to_map_markers_q">Chcete pridať všetky body do mapových značiek?</string>
+    <string name="shared_string_add_to_map_markers">Pridať do mapových značiek</string>
+    <string name="select_map_markers">Zvoliť mapové značky</string>
+    <string name="shared_string_reverse_order">Obrátené poradie</string>
+    <string name="show_map_markers_description">Aktivovať funkciu mapových značiek</string>
+    <string name="clear_active_markers_q">Chcete vymazať všetky aktívne značky?</string>
+    <string name="clear_markers_history_q">Chcete vymazať históriu značiek?</string>
+    <string name="active_markers">Aktívne značky</string>
+    <string name="map_markers">Mapové značky</string>
+    <string name="map_marker">Mapová značka</string>
+    <string name="consider_turning_polygons_off">Odporúča sa vypnúť zobrazovanie polygónov.</string>
+    <string name="upload_anonymously">Odoslať anonymne</string>
+</resources>
