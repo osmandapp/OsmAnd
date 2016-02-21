@@ -2183,4 +2183,5 @@
     <string name="underlay_transparency">Underlay transparantie</string>
     <string name="find_parking">Zoek parkeerplaats</string>
     <string name="rendering_attr_showMtbRoutes_name">Toon MTB-routes</string>
+    <string name="shared_string_reverse_order">Volgorde omdraaien</string>
     </resources>
