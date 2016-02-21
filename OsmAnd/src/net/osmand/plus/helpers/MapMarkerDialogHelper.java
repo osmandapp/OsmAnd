@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -63,6 +64,7 @@ public class MapMarkerDialogHelper {
 	private MapMarkersDialogHelperCallbacks helperCallbacks;
 	private boolean sorted;
 	private boolean nightMode;
+	private boolean selectionMode;
 
 	private boolean useCenter;
 	private LatLon loc;
@@ -73,6 +75,7 @@ public class MapMarkerDialogHelper {
 
 	public interface MapMarkersDialogHelperCallbacks {
 		void reloadAdapter();
+
 		void deleteMapMarker(int position);
 	}
 
@@ -84,6 +87,14 @@ public class MapMarkerDialogHelper {
 
 	public void setHelperCallbacks(MapMarkersDialogHelperCallbacks helperCallbacks) {
 		this.helperCallbacks = helperCallbacks;
+	}
+
+	public boolean isSelectionMode() {
+		return selectionMode;
+	}
+
+	public void setSelectionMode(boolean selectionMode) {
+		this.selectionMode = selectionMode;
 	}
 
 	public boolean isNightMode() {
@@ -154,8 +165,10 @@ public class MapMarkerDialogHelper {
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 				} else if (topDividerView) {
 					v = mapActivity.getLayoutInflater().inflate(R.layout.card_top_divider, null);
+					AndroidUtils.setListBackground(mapActivity, v, nightMode);
 				} else if (bottomDividerView) {
 					v = mapActivity.getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
+					AndroidUtils.setListBackground(mapActivity, v, nightMode);
 				} else if (obj instanceof MapMarker) {
 					MapMarker marker = (MapMarker) obj;
 					v = updateMapMarkerItemView(this, v, marker);
@@ -329,7 +342,8 @@ public class MapMarkerDialogHelper {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = mapActivity.getLayoutInflater().inflate(R.layout.map_marker_item, null);
 		}
-		updateMapMarkerInfoView(mapActivity, v, loc, heading, useCenter, nightMode, screenOrientation, marker);
+		updateMapMarkerInfoView(mapActivity, v, loc, heading, useCenter, nightMode, screenOrientation,
+				selectionMode, marker);
 		final View more = v.findViewById(R.id.all_points);
 		final View move = v.findViewById(R.id.info_move);
 		final View remove = v.findViewById(R.id.info_close);
@@ -370,8 +384,9 @@ public class MapMarkerDialogHelper {
 	}
 
 	public static void updateMapMarkerInfoView(Context ctx, View localView, LatLon loc,
-										   Float heading, boolean useCenter, boolean nightMode,
-										   int screenOrientation, final MapMarker marker) {
+											   Float heading, boolean useCenter, boolean nightMode,
+											   int screenOrientation, boolean selectionMode,
+											   final MapMarker marker) {
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
@@ -379,10 +394,13 @@ public class MapMarkerDialogHelper {
 		ImageView waypointIcon = (ImageView) localView.findViewById(R.id.waypoint_icon);
 		TextView waypointDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
 		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
+		CheckBox checkBox = (CheckBox) localView.findViewById(R.id.checkbox);
+
 		if (text == null || textDist == null || arrow == null || waypointIcon == null
 				|| waypointDeviation == null || descText == null) {
 			return;
 		}
+
 		float[] mes = new float[2];
 		if (loc != null && marker.point != null) {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
@@ -445,6 +463,13 @@ public class MapMarkerDialogHelper {
 		text.setText(descr);
 
 		descText.setVisibility(View.GONE);
+
+		if (selectionMode) {
+			checkBox.setVisibility(View.VISIBLE);
+		} else {
+			checkBox.setVisibility(View.GONE);
+		}
+
 		/*
 		String pointDescription = "";
 		if (descText != null) {
@@ -659,7 +684,8 @@ public class MapMarkerDialogHelper {
 				Object obj = listView.getItemAtPosition(i);
 				View v = listView.getChildAt(i - listView.getFirstVisiblePosition());
 				if (obj == marker) {
-					updateMapMarkerInfoView(mapActivity, v, loc, heading, useCenter, nightMode, screenOrientation, marker);
+					updateMapMarkerInfoView(mapActivity, v, loc, heading, useCenter, nightMode,
+							screenOrientation, selectionMode, marker);
 				}
 			}
 		} catch (Exception e) {

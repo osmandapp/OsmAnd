@@ -353,8 +353,10 @@ public class WaypointDialogHelper {
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 				} else if (topDividerView) {
 					v = ctx.getLayoutInflater().inflate(R.layout.card_top_divider, null);
+					AndroidUtils.setListBackground(mapActivity, v, nightMode);
 				} else if (bottomDividerView) {
 					v = ctx.getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
+					AndroidUtils.setListBackground(mapActivity, v, nightMode);
 				} else if (obj instanceof LocationPointWrapper) {
 					LocationPointWrapper point = (LocationPointWrapper) obj;
 					v = updateWaypointItemView(edit, deletedPoints, app, ctx, helper, v, point, this,

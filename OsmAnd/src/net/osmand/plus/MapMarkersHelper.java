@@ -35,13 +35,16 @@ public class MapMarkersHelper {
 		public int pos;
 		public int index;
 		public boolean history;
+		public boolean selected;
 		public int dist;
 
-		public MapMarker(LatLon point, PointDescription name, int colorIndex, int pos, int index) {
+		public MapMarker(LatLon point, PointDescription name, int colorIndex, int pos,
+						 boolean selected, int index) {
 			this.point = point;
 			this.pointDescription = name;
 			this.colorIndex = colorIndex;
 			this.pos = pos;
+			this.selected = selected;
 			this.index = index;
 		}
 
@@ -56,10 +59,6 @@ public class MapMarkersHelper {
 
 		public String getOnlyName() {
 			return pointDescription == null ? "" : pointDescription.getName();
-		}
-
-		public boolean isSearchingAddress(Context ctx) {
-			return pointDescription != null && pointDescription.isSearchingAddress(ctx);
 		}
 
 		public double getLatitude() {
@@ -95,6 +94,7 @@ public class MapMarkersHelper {
 		List<String> desc = settings.getMapMarkersPointDescriptions(ips.size());
 		List<Integer> colors = settings.getMapMarkersColors(ips.size());
 		List<Integer> positions = settings.getMapMarkersPositions(ips.size());
+		List<Boolean> selections = settings.getMapMarkersSelections(ips.size());
 		int colorIndex = 0;
 		int pos = 0;
 		for (int i = 0; i < ips.size(); i++) {
@@ -108,7 +108,7 @@ public class MapMarkersHelper {
 			}
 			MapMarker mapMarker = new MapMarker(ips.get(i),
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colorIndex,
-					pos, i);
+					pos, selections.get(i), i);
 			mapMarkers.add(mapMarker);
 			lookupAddress(mapMarker, false);
 		}
@@ -117,10 +117,9 @@ public class MapMarkersHelper {
 
 		ips = settings.getMapMarkersHistoryPoints();
 		desc = settings.getMapMarkersHistoryPointDescriptions(ips.size());
-		colors = settings.getMapMarkersHistoryColors(ips.size());
 		for (int i = 0; i < ips.size(); i++) {
 			MapMarker mapMarker = new MapMarker(ips.get(i),
-					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colors.get(i), 0, i);
+					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), 0, 0, false, i);
 			mapMarker.history = true;
 			mapMarkersHistory.add(mapMarker);
 			lookupAddress(mapMarker, true);
@@ -162,7 +161,7 @@ public class MapMarkersHelper {
 								mapMarker.pointDescription, mapMarker.colorIndex);
 					} else {
 						settings.updateMapMarker(mapMarker.point.getLatitude(), mapMarker.point.getLongitude(),
-								mapMarker.pointDescription, mapMarker.colorIndex, mapMarker.pos);
+								mapMarker.pointDescription, mapMarker.colorIndex, mapMarker.pos, mapMarker.selected);
 					}
 					updateMarker(mapMarker);
 				}
@@ -253,6 +252,7 @@ public class MapMarkersHelper {
 			List<PointDescription> pointDescriptions = new ArrayList<>();
 			int[] colorIndexes = new int[points.size()];
 			int[] positions = new int[points.size()];
+			boolean[] selections = new boolean[points.size()];
 			int[] indexes = new int[points.size()];
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
@@ -280,14 +280,19 @@ public class MapMarkersHelper {
 				longitudes[i] = point.getLongitude();
 				pointDescriptions.add(pointDescription);
 				colorIndexes[i] = colorIndex;
-				positions[i] = 0 - i;
+				positions[i] = -1 - i;
+				selections[i] = false;
 				indexes[i] = 0;
 			}
+			/*
 			if (sortedMapMarkers.size() > 0) {
 				MapMarker firstMarker = sortedMapMarkers.get(0);
-				settings.updateMapMarker(firstMarker.getLatitude(), firstMarker.getLongitude(), firstMarker.pointDescription, firstMarker.colorIndex, -points.size());
+				settings.updateMapMarker(firstMarker.getLatitude(), firstMarker.getLongitude(),
+						firstMarker.pointDescription, firstMarker.colorIndex, -points.size(), firstMarker.selected);
 			}
-			settings.insertMapMarkers(latitudes, longitudes, pointDescriptions, colorIndexes, positions, indexes);
+			*/
+			settings.insertMapMarkers(latitudes, longitudes, pointDescriptions, colorIndexes, positions,
+					selections, indexes);
 			readFromSettings();
 			normalizePositions();
 		}
@@ -323,13 +328,15 @@ public class MapMarkersHelper {
 			List<String> names = new ArrayList<>(markers.size());
 			List<Integer> colors = new ArrayList<>(markers.size());
 			List<Integer> positions = new ArrayList<>(markers.size());
+			List<Boolean> selections = new ArrayList<>(markers.size());
 			for (MapMarker marker : markers) {
 				ls.add(marker.point);
 				names.add(PointDescription.serializeToString(marker.pointDescription));
 				colors.add(marker.colorIndex);
 				positions.add(marker.pos);
+				selections.add(marker.selected);
 			}
-			settings.saveMapMarkers(ls, names, colors, positions);
+			settings.saveMapMarkers(ls, names, colors, positions, selections);
 		}
 
 		if (markersHistory != null) {
