@@ -2293,7 +2293,7 @@
     <string name="download_files_question_space_with_temp">Virkelig hente {0} fil(er)? Dette kræver {3} MB midlertidigt og {1} MB permanent? I øjeblikket, er der {2} MB til rådighed.</string>
     <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
-<string name="upload_osm_note_description">Du kan overføre din OSM Note anonymt af youse din OpenStreetMap.org profil.</string>
+<string name="upload_osm_note_description">Du kan overføre din OSM Note anonymt eller bruge din OpenStreetMap.org profil.</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
     <string name="map_markers_other">Andre markører</string>
     </resources>
