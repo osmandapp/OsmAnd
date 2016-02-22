@@ -298,6 +298,17 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void updateMapMarker(MapMarker marker, boolean refresh) {
+		if (marker != null) {
+			settings.updateMapMarker(marker.getLatitude(), marker.getLongitude(),
+					marker.pointDescription, marker.colorIndex, marker.pos, marker.selected);
+			if (refresh) {
+				readFromSettings();
+				refresh();
+			}
+		}
+	}
+
 	public void removeMapMarker(MapMarker marker) {
 		if (marker != null) {
 			settings.deleteMapMarker(marker.index);

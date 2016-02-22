@@ -204,7 +204,7 @@ public class MapMarkersWidgetsFactory {
 
 		if (markers.size() > 1) {
 			marker = markers.get(1);
-			if (loc != null) {
+			if (loc != null && customLocation == null) {
 				for (int i = 1; i < markers.size(); i++) {
 					MapMarker m = markers.get(i);
 					m.dist = (int) (MapUtils.getDistance(m.getLatitude(), m.getLongitude(),
@@ -292,7 +292,7 @@ public class MapMarkersWidgetsFactory {
 					boolean res = false;
 					if (markerColorIndex != cachedMarkerColorIndex) {
 						setImageDrawable(map.getMyApplication().getIconsCache()
-								.getIcon(R.drawable.widget_intermediate_day,
+								.getIcon(R.drawable.widget_marker_day,
 										MapMarkerDialogHelper.getMapMarkerColorId(markerColorIndex)));
 						res = true;
 					}
@@ -336,7 +336,7 @@ public class MapMarkersWidgetsFactory {
 					boolean res = false;
 					if (markerColorIndex2nd != cachedMarkerColorIndex) {
 						setImageDrawable(map.getMyApplication().getIconsCache()
-								.getIcon(R.drawable.widget_intermediate_day,
+								.getIcon(R.drawable.widget_marker_day,
 										MapMarkerDialogHelper.getMapMarkerColorId(markerColorIndex2nd)));
 						res = true;
 					}

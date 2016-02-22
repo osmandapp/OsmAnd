@@ -12,6 +12,7 @@ import android.os.Message;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -25,7 +26,6 @@ import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection {
@@ -196,7 +196,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		List<MapMarker> hiddenMarkers = new ArrayList<>();
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getActiveMapMarkers();
 		for (int i = 0; i < activeMapMarkers.size(); i++) {
@@ -210,26 +209,30 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
 				canvas.drawBitmap(bmp, locationX - marginX, locationY - marginY, bitmapPaint);
 				canvas.rotate(tb.getRotate(), locationX, locationY);
-			} else if (i < 2) {
-				hiddenMarkers.add(marker);
 			}
 		}
 
 		boolean show = useFingerLocation && map.getMyApplication().getSettings().SHOW_DESTINATION_ARROW.get();
 		if (show && fingerLocation != null) {
-			for (MapMarker marker : hiddenMarkers) {
-				canvas.save();
-				net.osmand.Location.distanceBetween(fingerLocation.getLatitude(), fingerLocation.getLongitude(),
-						marker.getLatitude(), marker.getLongitude(), calculations);
-				//net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(),
-				//		marker.getLatitude(), marker.getLongitude(), calculations);
-				float bearing = calculations[1] - 90;
-				float radiusBearing = DIST_TO_SHOW * tb.getDensity();
-				final QuadPoint cp = tb.getCenterPixelPoint();
-				canvas.rotate(bearing, cp.x, cp.y);
-				canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
-				canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
-				canvas.restore();
+			List<MapMarker> sortedMapMarkers = markersHelper.getSortedMapMarkers();
+			int i = 0;
+			for (MapMarker marker : sortedMapMarkers) {
+				if (!isLocationVisible(tb, marker)) {
+					canvas.save();
+					net.osmand.Location.distanceBetween(fingerLocation.getLatitude(), fingerLocation.getLongitude(),
+							marker.getLatitude(), marker.getLongitude(), calculations);
+					float bearing = calculations[1] - 90;
+					float radiusBearing = DIST_TO_SHOW * tb.getDensity();
+					final QuadPoint cp = tb.getCenterPixelPoint();
+					canvas.rotate(bearing, cp.x, cp.y);
+					canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
+					canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
+					canvas.restore();
+				}
+				i++;
+				if (i > 1) {
+					break;
+				}
 			}
 		}
 	}

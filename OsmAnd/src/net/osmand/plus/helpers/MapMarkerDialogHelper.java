@@ -120,10 +120,17 @@ public class MapMarkerDialogHelper {
 				Object obj = listAdapter.getItem(item);
 				if (obj instanceof MapMarker) {
 					MapMarker marker = (MapMarker) obj;
-					if (!marker.history) {
-						showMarkerOnMap(mapActivity, marker);
+					if (selectionMode) {
+						CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkbox);
+						checkBox.setChecked(!checkBox.isChecked());
+						marker.selected = checkBox.isChecked();
+						markersHelper.updateMapMarker(marker, false);
 					} else {
-						showHistoryOnMap(marker);
+						if (!marker.history) {
+							showMarkerOnMap(mapActivity, marker);
+						} else {
+							showHistoryOnMap(marker);
+						}
 					}
 				}
 			}
@@ -397,7 +404,7 @@ public class MapMarkerDialogHelper {
 		ImageView waypointIcon = (ImageView) localView.findViewById(R.id.waypoint_icon);
 		TextView waypointDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
 		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
-		CheckBox checkBox = (CheckBox) localView.findViewById(R.id.checkbox);
+		final CheckBox checkBox = (CheckBox) localView.findViewById(R.id.checkbox);
 
 		if (text == null || textDist == null || arrow == null || waypointIcon == null
 				|| waypointDeviation == null || descText == null) {
@@ -433,7 +440,7 @@ public class MapMarkerDialogHelper {
 		arrow.setVisibility(View.VISIBLE);
 		arrow.invalidate();
 
-		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		final OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 
 		if (!marker.history) {
 			waypointIcon.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
@@ -468,9 +475,18 @@ public class MapMarkerDialogHelper {
 		descText.setVisibility(View.GONE);
 
 		if (selectionMode) {
+			checkBox.setChecked(marker.selected);
 			checkBox.setVisibility(View.VISIBLE);
+			checkBox.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					marker.selected = checkBox.isChecked();
+					app.getMapMarkersHelper().updateMapMarker(marker, false);
+				}
+			});
 		} else {
 			checkBox.setVisibility(View.GONE);
+			checkBox.setOnClickListener(null);
 		}
 
 		/*
@@ -601,15 +617,17 @@ public class MapMarkerDialogHelper {
 			objects.add(false);
 		}
 
-		List<MapMarker> markersHistory = new ArrayList<>(markersHelper.getMapMarkersHistory());
-		calcDistance(mapLocation, markersHistory);
-		if (markersHistory.size() > 0) {
-			if (activeMarkers.size() > 0) {
-				objects.add(true);
+		if (!selectionMode) {
+			List<MapMarker> markersHistory = new ArrayList<>(markersHelper.getMapMarkersHistory());
+			calcDistance(mapLocation, markersHistory);
+			if (markersHistory.size() > 0) {
+				if (activeMarkers.size() > 0) {
+					objects.add(true);
+				}
+				objects.add(MARKERS_HISTORY);
+				objects.addAll(markersHistory);
+				objects.add(false);
 			}
-			objects.add(MARKERS_HISTORY);
-			objects.addAll(markersHistory);
-			objects.add(false);
 		}
 
 		return objects;

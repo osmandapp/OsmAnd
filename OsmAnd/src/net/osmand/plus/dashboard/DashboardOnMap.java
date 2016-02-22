@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
@@ -397,23 +398,40 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private void updateListBackgroundHeight() {
+		if (listBackgroundView != null) {
+			final View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+			ViewTreeObserver vto = contentView.getViewTreeObserver();
+			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
-		if (listBackgroundView == null || listBackgroundView.getHeight() > 0) {
-			return;
-		}
-		final View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
-		if (contentView.getHeight() > 0) {
-			listBackgroundView.getLayoutParams().height = contentView.getHeight();
-		} else {
-			contentView.post(new Runnable() {
 				@Override
-				public void run() {
-					// mListBackgroundView's should fill its parent vertically
-					// but the height of the content view is 0 on 'onCreate'.
-					// So we should get it with post().
+				public void onGlobalLayout() {
+
+					ViewTreeObserver obs = contentView.getViewTreeObserver();
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						obs.removeOnGlobalLayoutListener(this);
+					} else {
+						obs.removeGlobalOnLayoutListener(this);
+					}
 					listBackgroundView.getLayoutParams().height = contentView.getHeight();
 				}
 			});
+
+
+			/*
+			if (contentView.getHeight() > 0) {
+				listBackgroundView.getLayoutParams().height = contentView.getHeight();
+			} else {
+				contentView.post(new Runnable() {
+					@Override
+					public void run() {
+						// mListBackgroundView's should fill its parent vertically
+						// but the height of the content view is 0 on 'onCreate'.
+						// So we should get it with post().
+						listBackgroundView.getLayoutParams().height = contentView.getHeight();
+					}
+				});
+			}
+			*/
 		}
 	}
 
@@ -725,8 +743,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					refreshContent(false);
 				} else {
 					updateListAdapter();
-					updateListBackgroundHeight();
 				}
+				updateListBackgroundHeight();
 				applyDayNightMode();
 
 				if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
@@ -1159,7 +1177,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				|| visibleType == DashboardType.WAYPOINTS_FLAT
 				|| visibleType == DashboardType.LIST_MENU
 				|| visibleType == DashboardType.ROUTE_PREFERENCES
-				|| visibleType == DashboardType.CONFIGURE_SCREEN;
+				|| visibleType == DashboardType.CONFIGURE_SCREEN
+				|| visibleType == DashboardType.MAP_MARKERS
+				|| visibleType == DashboardType.MAP_MARKERS_SELECTION;
 	}
 
 	private boolean isBackButtonVisible() {
