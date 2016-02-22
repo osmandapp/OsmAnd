@@ -154,7 +154,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final OsmandSettings settings = app.getSettings();
 		final MapActivityLayers layers = activity.getMapLayers();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
-		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
+		final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final String[] items = new String[entriesMap.size() + 1];
 		int i = 0;
@@ -210,7 +210,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setOnDismissListener(new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
-						callback.onMapSelected();
+						if (callback != null) {
+							callback.onMapSelected();
+						}
 					}
 				});
 		builder.show();
@@ -240,11 +242,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		overlayMapDescr = overlayMapDescr != null ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.item(R.string.layer_overlay).layout(R.layout.two_line_list_item).description(overlayMapDescr)
+		adapter.item(R.string.layer_overlay).layout(R.layout.drawer_list_doubleitem).description(overlayMapDescr)
 				.iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		underlayMapDescr = underlayMapDescr != null ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.item(R.string.layer_underlay).layout(R.layout.two_line_list_item).description(underlayMapDescr)
+		adapter.item(R.string.layer_underlay).layout(R.layout.drawer_list_doubleitem).description(underlayMapDescr)
 				.iconColor(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
 	}
 
@@ -319,7 +321,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
+						List<TileSourceTemplate> toInstall = new ArrayList<>();
 						for (int i = 0; i < selected.length; i++) {
 							if (selected[i]) {
 								toInstall.add(downloaded.get(i));
@@ -342,7 +344,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				builder.show();
 			}
 		};
-		t.execute(new Void[0]);
+		t.execute();
 	}
 
 	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher) {
@@ -363,10 +365,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final CheckBox elliptic = (CheckBox) view.findViewById(R.id.EllipticMercator);
 		updateTileSourceEditView(ts, name, urlToLoad, minZoom, maxZoom, expire, elliptic);
 
-		final ArrayList<String> templates = new ArrayList<String>(entriesMap.keySet());
+		final ArrayList<String> templates = new ArrayList<>(entriesMap.keySet());
 		templates.add(0, "");
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(),
 				android.R.layout.simple_spinner_item,
 				templates
 		);
@@ -407,7 +409,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					r.setEllipticYTile(elliptic.isChecked());
 					r.setUrlToLoad(urlToLoad.getText().toString().equals("") ? null : urlToLoad.getText().toString().replace("{$x}", "{1}")
 							.replace("{$y}", "{2}").replace("{$z}", "{0}"));
-					if (r != null && r.getName().length() > 0) {
+					if (r.getName().length() > 0) {
 						if (settings.installTileSource(r)) {
 							AccessibleToast.makeText(activity, activity.getString(R.string.edit_tilesource_successfully, r.getName()),
 									Toast.LENGTH_SHORT).show();
@@ -458,7 +460,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		if (map != null) {
 			mapTypePreference.set(null);
-			callback.onMapSelected();
+			if (callback != null) {
+				callback.onMapSelected();
+			}
 			MapActivityLayers mapLayers = mapActivity.getMapLayers();
 			updateMapLayers(mapView, null, mapLayers);
 		} else {
