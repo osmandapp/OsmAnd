@@ -72,6 +72,7 @@ public class MapMarkerDialogHelper {
 	private int screenOrientation;
 	private boolean reloading;
 	private long lastUpdateTime;
+	private boolean allSelected;
 
 	public interface MapMarkersDialogHelperCallbacks {
 		void reloadAdapter();
@@ -144,6 +145,15 @@ public class MapMarkerDialogHelper {
 
 		final List<Object> objects = getListObjects();
 		List<Object> activeObjects = getActiveObjects(objects);
+
+		allSelected = true;
+		List<MapMarker> activeMarkers = new ArrayList<>(markersHelper.getActiveMapMarkers());
+		for (MapMarker m : activeMarkers) {
+			if (!m.selected) {
+				allSelected = false;
+				break;
+			}
+		}
 
 		return new StableArrayAdapter(mapActivity,
 				R.layout.map_marker_item, R.id.title, objects, activeObjects) {
@@ -271,74 +281,102 @@ public class MapMarkerDialogHelper {
 			});
 
 		} else if (type == ACTIVE_MARKERS) {
-			final ImageButton btn = (ImageButton) v.findViewById(R.id.image_button);
-			btn.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white, !nightMode));
-			btn.setVisibility(View.VISIBLE);
-			btn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-
-					IconsCache iconsCache = app.getIconsCache();
-					final PopupMenu optionsMenu = new PopupMenu(mapActivity, v);
-					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					MenuItem item;
-					item = optionsMenu.getMenu().add(R.string.shared_string_clear)
-							.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark, !nightMode));
-					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-							builder.setMessage(mapActivity.getString(R.string.clear_active_markers_q))
-									.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											listAdapter.notifyDataSetInvalidated();
-											markersHelper.removeActiveMarkers();
-											if (markersHelper.getMapMarkersHistory().size() == 0) {
-												mapActivity.getDashboard().hideDashboard();
-											} else if (helperCallbacks != null) {
-												helperCallbacks.reloadAdapter();
-											} else {
-												reloadListAdapter(listAdapter);
-											}
-										}
-									})
-									.setNegativeButton(R.string.shared_string_no, null)
-									.show();
-							return true;
+			if (selectionMode) {
+				final Button btn = (Button) v.findViewById(R.id.header_button);
+				btn.setTextColor(!nightMode ? mapActivity.getResources().getColor(R.color.map_widget_blue)
+						: mapActivity.getResources().getColor(R.color.osmand_orange));
+				if (allSelected) {
+					btn.setText(mapActivity.getString(R.string.shared_string_deselect_all));
+				} else {
+					btn.setText(mapActivity.getString(R.string.shared_string_select_all));
+				}
+				btn.setVisibility(View.VISIBLE);
+				btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						List<MapMarker> markers = markersHelper.getActiveMapMarkers();
+						for (MapMarker marker : markers) {
+							marker.selected = !allSelected;
 						}
-					});
+						allSelected = !allSelected;
+						if (helperCallbacks != null) {
+							helperCallbacks.reloadAdapter();
+						} else {
+							reloadListAdapter(listAdapter);
+						}
+					}
+				});
 
-					if (!sorted) {
-						item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
-								iconsCache.getContentIcon(R.drawable.ic_action_undo_dark, !nightMode));
+			} else {
+				final ImageButton btn = (ImageButton) v.findViewById(R.id.image_button);
+				btn.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white, !nightMode));
+				btn.setVisibility(View.VISIBLE);
+				btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+
+						IconsCache iconsCache = app.getIconsCache();
+						final PopupMenu optionsMenu = new PopupMenu(mapActivity, v);
+						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+						MenuItem item;
+						item = optionsMenu.getMenu().add(R.string.shared_string_clear)
+								.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark, !nightMode));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								markersHelper.reverseActiveMarkersOrder();
-								if (helperCallbacks != null) {
-									helperCallbacks.reloadAdapter();
-								} else {
-									reloadListAdapter(listAdapter);
-								}
+								AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+								builder.setMessage(mapActivity.getString(R.string.clear_active_markers_q))
+										.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												listAdapter.notifyDataSetInvalidated();
+												markersHelper.removeActiveMarkers();
+												if (markersHelper.getMapMarkersHistory().size() == 0) {
+													mapActivity.getDashboard().hideDashboard();
+												} else if (helperCallbacks != null) {
+													helperCallbacks.reloadAdapter();
+												} else {
+													reloadListAdapter(listAdapter);
+												}
+											}
+										})
+										.setNegativeButton(R.string.shared_string_no, null)
+										.show();
 								return true;
 							}
 						});
-					}
 
-					item = optionsMenu.getMenu().add(R.string.shared_string_save_as_gpx).setIcon(
-							iconsCache.getContentIcon(R.drawable.ic_action_save, !nightMode));
-					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							generateGPX(markersHelper.getActiveMapMarkers());
-							return true;
+						if (!sorted) {
+							item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
+									iconsCache.getContentIcon(R.drawable.ic_action_undo_dark, !nightMode));
+							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+								@Override
+								public boolean onMenuItemClick(MenuItem item) {
+									markersHelper.reverseActiveMarkersOrder();
+									if (helperCallbacks != null) {
+										helperCallbacks.reloadAdapter();
+									} else {
+										reloadListAdapter(listAdapter);
+									}
+									return true;
+								}
+							});
 						}
-					});
 
-					optionsMenu.show();
-				}
-			});
+						item = optionsMenu.getMenu().add(R.string.shared_string_save_as_gpx).setIcon(
+								iconsCache.getContentIcon(R.drawable.ic_action_save, !nightMode));
+						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								generateGPX(markersHelper.getActiveMapMarkers());
+								return true;
+							}
+						});
+
+						optionsMenu.show();
+					}
+				});
+			}
 		}
 
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
