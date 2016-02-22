@@ -268,8 +268,9 @@ public class ConfigureMapMenu {
 						view.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
 						refreshMapComplete(activity);
 						dialog.dismiss();
-						adapter.setItemDescription(pos, getDayNightDescr(activity));
-						ad.notifyDataSetInvalidated();
+						activity.getDashboard().refreshContent(true);
+						//adapter.setItemDescription(pos, getDayNightDescr(activity));
+						//ad.notifyDataSetInvalidated();
 					}
 				});
 				bld.show();

@@ -89,7 +89,7 @@ public class MapMarkerDialogHelper {
 		this.helperCallbacks = helperCallbacks;
 	}
 
-	public boolean isSelectionMode() {
+	public boolean isInSelectionMode() {
 		return selectionMode;
 	}
 
@@ -302,20 +302,22 @@ public class MapMarkerDialogHelper {
 						}
 					});
 
-					item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
-							iconsCache.getContentIcon(R.drawable.ic_action_undo_dark, !nightMode));
-					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							markersHelper.reverseActiveMarkersOrder();
-							if (helperCallbacks != null) {
-								helperCallbacks.reloadAdapter();
-							} else {
-								reloadListAdapter(listAdapter);
+					if (!sorted) {
+						item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
+								iconsCache.getContentIcon(R.drawable.ic_action_undo_dark, !nightMode));
+						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								markersHelper.reverseActiveMarkersOrder();
+								if (helperCallbacks != null) {
+									helperCallbacks.reloadAdapter();
+								} else {
+									reloadListAdapter(listAdapter);
+								}
+								return true;
 							}
-							return true;
-						}
-					});
+						});
+					}
 
 					item = optionsMenu.getMenu().add(R.string.shared_string_save_as_gpx).setIcon(
 							iconsCache.getContentIcon(R.drawable.ic_action_save, !nightMode));
@@ -349,7 +351,7 @@ public class MapMarkerDialogHelper {
 		final View remove = v.findViewById(R.id.info_close);
 		remove.setVisibility(View.GONE);
 		more.setVisibility(View.GONE);
-		if (!marker.history) {
+		if (!marker.history && !sorted) {
 			move.setVisibility(View.VISIBLE);
 			((ImageView) move).setImageDrawable(app.getIconsCache().getContentIcon(
 					R.drawable.ic_action_reorder, !nightMode));
@@ -379,6 +381,7 @@ public class MapMarkerDialogHelper {
 			});
 		} else {
 			move.setVisibility(View.GONE);
+			move.setTag(null);
 		}
 		return v;
 	}

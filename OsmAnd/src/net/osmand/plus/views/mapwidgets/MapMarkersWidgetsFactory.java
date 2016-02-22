@@ -37,6 +37,7 @@ public class MapMarkersWidgetsFactory {
 	private boolean largeDevice;
 
 	private View topBar;
+	private View addressTopBar;
 	private View topBar2nd;
 	private View rowView;
 	private View rowView2nd;
@@ -63,6 +64,7 @@ public class MapMarkersWidgetsFactory {
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
 		largeDevice = AndroidUiHelper.isXLargeDevice(map);
 
+		addressTopBar = map.findViewById(R.id.map_top_bar);
 		topBar = map.findViewById(R.id.map_markers_top_bar);
 		topBar2nd = map.findViewById(R.id.map_markers_top_bar_2nd);
 		rowView = map.findViewById(R.id.map_marker_row);
@@ -180,7 +182,8 @@ public class MapMarkersWidgetsFactory {
 				|| !map.getMyApplication().getSettings().SHOW_MAP_MARKERS_TOOLBAR.get()
 				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
-				|| map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
+				|| map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()
+				|| addressTopBar.getVisibility() == View.VISIBLE) {
 			updateVisibility(false);
 			return;
 		}
