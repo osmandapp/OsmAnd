@@ -2108,4 +2108,5 @@
     <string name="upload_anonymously">Ladda upp anonymt</string>
 <string name="select_map_marker">Välj kartmarkör</string>
     <string name="map_markers_other">Andra markörer</string>
+    <string name="upload_osm_note_description">Du kan ladda upp din OSM-anteckning anonymt om du använder din profil på OpenStreetMap.org.</string>
     </resources>
