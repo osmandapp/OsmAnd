@@ -64,9 +64,6 @@ public class ApplicationMode {
 		regWidget("next_next_turn", exceptPedestrianAndDefault);
 		
 		// right		
-		regWidget("intermediate_distance", all);
-		regWidget("distance", all);
-		regWidget("time", all);
 		regWidget("speed", exceptPedestrianAndDefault);
 		regWidget("max_speed", CAR);
 		regWidget("gps_info", none);
