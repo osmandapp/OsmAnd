@@ -655,7 +655,7 @@
     <string name="daynight_descr">Izberi način svetlobnega učinka za izris zemljevida (dnevni/nočni način)</string>
 
     <string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB (prosto: %2$s).</string>
-    <string name="download_files_question_space">Na voljo je {2} MB! Ali želite prejeti datoteke ({0}/{1}MB)?</string>
+    <string name="download_files_question_space">Ali res želite prejeti datoteke ({0} datotek)? Datoteke zahtevajo {1} MB pomnilnika, na voljo pa ga je le {2} MB.</string>
 
 
     <string name="native_library_not_supported">Izvorna knjižnica na tej napravi ni podprta.</string>
@@ -2120,4 +2120,11 @@
     <string name="add_points_to_map_markers_q">Ali želite dodati vse točke k oznakam zemljevida?</string>
     <string name="shared_string_add_to_map_markers">Dodaj med oznake zemljevida</string>
     <string name="consider_turning_polygons_off">Priporočljivo je onemogočiti izrisovanje poligonov.</string>
-    </resources>
+    <string name="select_map_marker">Izbor oznake zemljevida</string>
+    <string name="map_markers_other">Druge oznake</string>
+    <string name="download_files_error_not_enough_space">Ni dovolj prostora! Možnost zahteva {3} MB začasnega in {1} MB trajnega pomnilnika. Trenutno je na voljo le {2} MB prostora.</string>
+    <string name="download_files_question_space_with_temp"/>
+    <string name="upload_osm_note_description">Opombo OSM je mogoče poslati brezimno, v kolikor uporabljate profil OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Pošlji Opombo OSM</string>
+    <string name="upload_anonymously">Pošlji brezimno</string>
+</resources>
