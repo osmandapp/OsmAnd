@@ -2110,10 +2110,10 @@
     <string name="shared_string_toolbar">工具列</string>
     <string name="shared_string_widgets">小工具</string>
     <string name="download_files_error_not_enough_space">沒有足夠的空間！這會需要 {3} MB 的暫存空間和 {1} MB 的永久空間。目前只有 {2} MB 可用空間。</string>
-    <string name="download_files_question_space_with_temp">真的要下載 {0} 個檔案嗎？這需要 {3} MB 的暫存空間和 {1} MB 的永久空間？目前有 {2} MB 可用空間。</string>
+    <string name="download_files_question_space_with_temp">真的要下載 {0} 個檔案嗎？這需要 {3} MB 的暫存空間和 {1} MB 的永久空間。目前有 {2} MB 可用空間。</string>
     <string name="upload_osm_note">上傳 OSM 附註</string>
     <string name="upload_anonymously">匿名上傳</string>
 <string name="select_map_marker">選擇地圖標記</string>
     <string name="map_markers_other">其它標記</string>
-    <string name="upload_osm_note_description">您可以匿名自行上傳 OSM 註解至您的 OpenStreetMap.org 個人資料。</string>
+    <string name="upload_osm_note_description">如果您使用您的 OpenStreetMap.org 個人資料，您可以匿名上傳 OSM 註解。</string>
     </resources>
