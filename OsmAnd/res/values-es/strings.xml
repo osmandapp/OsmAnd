@@ -2084,4 +2084,9 @@
     <string name="shared_string_widgets">Controles</string>
     <string name="download_files_error_not_enough_space">No hay suficiente espacio! Necesitaría {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay solo {2} MB disponibles.</string>
     <string name="download_files_question_space_with_temp">¿Realmente quieres descargar {0} archivos? Esto necesita {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
-    </resources>
+    <string name="select_map_marker">Seleccionar Marcador de mapa</string>
+    <string name="map_markers_other">Otros marcadores</string>
+    <string name="upload_osm_note_description">Puedes subir tu nota de OSM anónimamente si utilizas tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Subir nota OSM</string>
+    <string name="upload_anonymously">Subir anónimamente</string>
+</resources>
