@@ -37,6 +37,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -128,6 +129,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private boolean visible = false;
 	private DashboardType visibleType;
 	private DashboardType previousVisibleType;
+	private ApplicationMode previousAppMode;
 	private boolean landscape;
 	private List<WeakReference<DashBaseFragment>> fragList = new LinkedList<>();
 	private net.osmand.Location myLocation;
@@ -659,7 +661,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		this.previousVisibleType = prevItem;
 		this.visible = visible;
-		boolean refresh = this.visibleType == type;
+		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
+		boolean appModeChanged = currentAppMode != previousAppMode;
+
+		boolean refresh = this.visibleType == type && !appModeChanged;
+		previousAppMode = currentAppMode;
 		this.visibleType = type;
 		DashboardOnMap.staticVisible = visible;
 		DashboardOnMap.staticVisibleType = type;
