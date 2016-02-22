@@ -169,7 +169,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		DASHBOARD,
 		OVERLAY_MAP,
 		UNDERLAY_MAP,
-		MAP_MARKERS
+		MAP_MARKERS,
+		MAP_MARKERS_SELECTION
 	}
 
 	private Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -177,7 +178,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public enum DashboardActionButtonType {
 		MY_LOCATION,
 		NAVIGATE,
-		ROUTE
+		ROUTE,
+		MARKERS_SELECTION
 	}
 
 	private class DashboardActionButton {
@@ -228,7 +230,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 								List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
 								Object obj = listAdapter.getItem(position);
 								res = activeObjects.contains(obj);
-							} else if (visibleType == DashboardType.MAP_MARKERS) {
+							} else if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 								Object obj = listAdapter.getItem(position);
 								res = obj instanceof MapMarker;
 							}
@@ -245,7 +247,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							stableAdapter = (StableArrayAdapter) listAdapter;
 							item = stableAdapter.getItem(position);
 
-							if (visibleType == DashboardType.MAP_MARKERS) {
+							if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 								if (!((MapMarker) item).history) {
 									deletedMarkers.add(item);
 								}
@@ -275,7 +277,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 									stableAdapter.refreshData();
 									if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
 										onItemsSwapped(stableAdapter.getActiveObjects());
-									} else if (visibleType == DashboardType.MAP_MARKERS) {
+									} else if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 										deletedMarkers.remove(item);
 										updateMapMarkers(stableAdapter.getActiveObjects());
 										reloadAdapter();
@@ -304,7 +306,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							stableAdapter.refreshData();
 							if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
 								onItemsSwapped(stableAdapter.getActiveObjects());
-							} else if (visibleType == DashboardType.MAP_MARKERS) {
+							} else if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 								updateMapMarkers(stableAdapter.getActiveObjects());
 							}
 							if (stableAdapter.getActiveObjects().size() == 0) {
@@ -314,7 +316,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 									mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
 								}
 							} else {
-								if (visibleType == DashboardType.MAP_MARKERS) {
+								if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 									reloadAdapter();
 								}
 							}
@@ -385,7 +387,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	@Override
 	public void onMapMarkerChanged(MapMarker mapMarker) {
-		if (visible && visibleType == DashboardType.MAP_MARKERS) {
+		if (visible && visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 			mapMarkerDialogHelper.updateMarkerView(listView, mapMarker);
 		}
 	}
@@ -433,6 +435,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.map_overlay);
 		} else if (visibleType == DashboardType.MAP_MARKERS) {
 			tv.setText(R.string.map_markers);
+		} else if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
+			tv.setText(R.string.select_map_markers);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -475,7 +479,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			}
 		}
 
-		if (visibleType == DashboardType.MAP_MARKERS
+		if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION
 				&& getMyApplication().getMapMarkersHelper().getActiveMapMarkers().size() > 0) {
 			sort.setVisibility(View.VISIBLE);
 			sort.setOnClickListener(new View.OnClickListener() {
@@ -561,9 +565,19 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			}
 		};
 
+		DashboardActionButton markersSelectionButton = new DashboardActionButton();
+		markersSelectionButton.icon = mapActivity.getResources().getDrawable(R.drawable.map_start_navigation);
+		markersSelectionButton.onClickListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setDashboardVisibility(true, DashboardType.MAP_MARKERS_SELECTION);
+			}
+		};
+
 		actionButtons.put(DashboardActionButtonType.MY_LOCATION, myLocationButton);
 		actionButtons.put(DashboardActionButtonType.NAVIGATE, navigateButton);
 		actionButtons.put(DashboardActionButtonType.ROUTE, routeButton);
+		actionButtons.put(DashboardActionButtonType.MARKERS_SELECTION, markersSelectionButton);
 	}
 
 	private void setActionButton(DashboardType type) {
@@ -576,26 +590,33 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		} else if (type == DashboardType.ROUTE_PREFERENCES) {
 			button = actionButtons.get(DashboardActionButtonType.NAVIGATE);
 		} else if (type == DashboardType.WAYPOINTS || type == DashboardType.WAYPOINTS_FLAT) {
-			boolean routePlanningMode = false;
-			RoutingHelper rh = mapActivity.getRoutingHelper();
-			if (rh.isRoutePlanningMode()) {
-				routePlanningMode = true;
-			} else if ((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) && !rh.isFollowingMode()) {
-				routePlanningMode = true;
-			}
-			boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-
-			if (routePlanningMode || routeFollowingMode) {
+			if (isInRouteOrPlannigMode()) {
 				button = actionButtons.get(DashboardActionButtonType.NAVIGATE);
 			} else {
 				button = actionButtons.get(DashboardActionButtonType.ROUTE);
 			}
+		} else if (type == DashboardType.MAP_MARKERS) {
+			button = actionButtons.get(DashboardActionButtonType.MARKERS_SELECTION);
+		} else if (type == DashboardType.MAP_MARKERS_SELECTION) {
+			button = actionButtons.get(DashboardActionButtonType.ROUTE);
 		}
 
 		if (button != null) {
 			actionButton.setImageDrawable(button.icon);
 			actionButton.setOnClickListener(button.onClickListener);
 		}
+	}
+
+	private boolean isInRouteOrPlannigMode() {
+		boolean routePlanningMode = false;
+		RoutingHelper rh = mapActivity.getRoutingHelper();
+		if (rh.isRoutePlanningMode()) {
+			routePlanningMode = true;
+		} else if ((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) && !rh.isFollowingMode()) {
+			routePlanningMode = true;
+		}
+		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
+		return routePlanningMode || routeFollowingMode;
 	}
 
 	private void hideActionButton() {
@@ -708,7 +729,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				}
 				applyDayNightMode();
 
-				if (visibleType == DashboardType.MAP_MARKERS) {
+				if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 					getMyApplication().getMapMarkersHelper().addListener(this);
 				}
 			}
@@ -728,7 +749,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
 		} else {
-			if (visibleType == DashboardType.MAP_MARKERS) {
+			if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 				getMyApplication().getMapMarkersHelper().removeListener(this);
 			}
 			if (swipeDismissListener != null) {
@@ -761,7 +782,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			} else {
 				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
 			}
-			if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS) {
+			if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS
+					&& visibleType != DashboardType.MAP_MARKERS_SELECTION) {
 				Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_dark));
 				listView.setDivider(d);
 				listView.setDividerHeight(dpToPx(1f));
@@ -774,7 +796,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			} else {
 				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light));
 			}
-			if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS) {
+			if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS
+					&& visibleType != DashboardType.MAP_MARKERS_SELECTION) {
 				Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_light));
 				listView.setDivider(d);
 				listView.setDividerHeight(dpToPx(1f));
@@ -806,8 +829,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			setDynamicListItems((DynamicListView) listView, listAdapter);
 			updateListAdapter(listAdapter, listener);
 
-		} else if (DashboardType.MAP_MARKERS == visibleType) {
+		} else if (DashboardType.MAP_MARKERS == visibleType || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 
+			mapMarkerDialogHelper.setSelectionMode(visibleType == DashboardType.MAP_MARKERS_SELECTION);
 			mapMarkerDialogHelper.setNightMode(nightMode);
 			StableArrayAdapter listAdapter = mapMarkerDialogHelper.getMapMarkersListAdapter();
 			OnItemClickListener listener = mapMarkerDialogHelper.getItemClickListener(listAdapter);
@@ -851,7 +875,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.MAP_MARKERS || force) {
+		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.MAP_MARKERS
+				|| visibleType == DashboardType.MAP_MARKERS_SELECTION || force) {
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
@@ -869,7 +894,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 		if (DashboardType.WAYPOINTS == visibleType || DashboardType.WAYPOINTS_FLAT == visibleType) {
 			listView.setActiveItemsList(listAdapter.getActiveObjects());
-		} else if (DashboardType.MAP_MARKERS == visibleType) {
+		} else if (DashboardType.MAP_MARKERS == visibleType || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 			List<Object> activeMarkers = new ArrayList<>();
 			for (Object obj : listAdapter.getActiveObjects()) {
 				if (obj instanceof MapMarker && !((MapMarker) obj).history) {
@@ -1058,7 +1083,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 						((DashLocationFragment) df.get()).updateLocation(centerChanged, locationChanged, compassChanged);
 					}
 				}
-				if (visibleType == DashboardType.MAP_MARKERS) {
+				if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 					mapMarkerDialogHelper.updateLocation(listView, compassChanged);
 				}
 			}
@@ -1344,8 +1369,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					newRouteIsCalculated(false, new ValueHolder<Boolean>());
 					getMyApplication().getTargetPointsHelper().updateRouteAndRefresh(true);
 
-				} else if (visibleType == DashboardType.MAP_MARKERS) {
-					List<MapMarker> markers = (List<MapMarker>)(Object)items;
+				} else if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
+					List<MapMarker> markers = (List<MapMarker>) (Object) items;
 					getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, null);
 				}
 
@@ -1383,7 +1408,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
 			if (DashboardType.WAYPOINTS == visibleType || DashboardType.WAYPOINTS_FLAT == visibleType) {
 				waypointDialogHelper.reloadListAdapter(stableAdapter);
-			} else if (DashboardType.MAP_MARKERS == visibleType) {
+			} else if (DashboardType.MAP_MARKERS == visibleType || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 				mapMarkerDialogHelper.reloadListAdapter(stableAdapter);
 			}
 			if (listView instanceof DynamicListView) {
