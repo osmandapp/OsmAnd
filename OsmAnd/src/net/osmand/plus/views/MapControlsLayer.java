@@ -630,6 +630,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				transparencyBarLayout.setVisibility(View.GONE);
+				settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.set(false);
 				hideTransparencyBar(settingsToTransparency);
 			}
 		});
