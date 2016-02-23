@@ -64,6 +64,22 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		}
 	}
 
+	public int getHeight() {
+		if (mainView != null) {
+			return mainView.getHeight();
+		} else {
+			return 0;
+		}
+	}
+
+	public int getWidth() {
+		if (mainView != null) {
+			return mainView.getWidth();
+		} else {
+			return 0;
+		}
+	}
+
 	public void updateInfo() {
 		menu.updateInfo(mainView);
 		applyDayNightMode();
@@ -98,9 +114,11 @@ public class MapRouteInfoMenuFragment extends Fragment {
 
 	public void applyDayNightMode() {
 		MapActivity ctx = getMapActivity();
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(ctx);
+		boolean portraitMode = AndroidUiHelper.isOrientationPortrait(ctx);
+		boolean largeDevice = AndroidUiHelper.isXLargeDevice(ctx);
+		boolean landscapeLayout = !portraitMode && !largeDevice;
 		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		if (portrait) {
+		if (!landscapeLayout) {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		} else {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);

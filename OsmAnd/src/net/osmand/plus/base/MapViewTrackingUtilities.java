@@ -3,7 +3,6 @@ package net.osmand.plus.base;
 import android.content.Context;
 import android.view.WindowManager;
 
-import net.osmand.FloatMath;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -19,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
@@ -27,8 +25,6 @@ import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
-
-import java.util.List;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, IRouteInformationListener, MapMarkerChangedListener {
@@ -358,39 +354,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		RoutingHelper rh = app.getRoutingHelper();
-		if(newRoute && rh.isRoutePlanningMode() && mapView != null) {
-			RotatedTileBox rt = mapView.getCurrentRotatedTileBox();
-			Location lt = rh.getLastProjection();
-			if(lt == null) {
-				lt = app.getTargetPointsHelper().getPointToStartLocation();
-			}
-			if(lt != null) {
-				double left = lt.getLongitude(), right = lt.getLongitude();
-				double top = lt.getLatitude(), bottom = lt.getLatitude();
-				List<TargetPoint> list = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for(TargetPoint l : list) {
-					left = Math.min(left, l.getLongitude());
-					right = Math.max(right, l.getLongitude());
-					top = Math.max(top, l.getLatitude());
-					bottom = Math.min(bottom, l.getLatitude());
-				}
-				RotatedTileBox tb = new RotatedTileBox(rt);
-				
-				tb.setPixelDimensions(5 * tb.getPixWidth() / 6, 5 * tb.getPixHeight() / 6);
-				double clat = 5 * bottom / 4 - top / 4;
-				double clon = left / 2 + right / 2;
-				// TODO for landscape menu
-//				double clat = bottom / 2 + top / 2;
-//				double clon = 5 * left / 4 - right / 4;
-				tb.setLatLonCenter(clat, clon);
-				while(tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
-					tb.setZoom(tb.getZoom() - 1);
-				}
-				mapView.getAnimatedDraggingThread().startMoving(clat, clon, tb.getZoom(),
-						true);
-			}
-		}
 	}
 
 	@Override
