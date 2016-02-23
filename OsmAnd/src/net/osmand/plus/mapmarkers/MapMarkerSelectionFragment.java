@@ -58,15 +58,17 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			screenOrientation = DashLocationFragment.getScreenOrientation(mapActivity);
 
 			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
-			float head = trackingUtils.getHeading();
-			float mapRotation = mapActivity.getMapRotate();
-			LatLon mw = mapActivity.getMapLocation();
-			Location l = trackingUtils.getMyLocation();
-			boolean mapLinked = trackingUtils.isMapLinkedToLocation() && l != null;
-			LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
-			useCenter = !mapLinked;
-			loc = (useCenter ? mw : myLoc);
-			heading = useCenter ? -mapRotation : head;
+			if (trackingUtils != null) {
+				float head = trackingUtils.getHeading();
+				float mapRotation = mapActivity.getMapRotate();
+				LatLon mw = mapActivity.getMapLocation();
+				Location l = trackingUtils.getMyLocation();
+				boolean mapLinked = trackingUtils.isMapLinkedToLocation() && l != null;
+				LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
+				useCenter = !mapLinked;
+				loc = (useCenter ? mw : myLoc);
+				heading = useCenter ? -mapRotation : head;
+			}
 		}
 		nightMode = !app.getSettings().isLightContent();
 

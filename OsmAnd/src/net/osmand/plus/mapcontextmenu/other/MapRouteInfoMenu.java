@@ -649,9 +649,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis)));
 
 		TargetPoint start = getTargets().getPointToStart();
+		int startPos = -1;
 		if (start != null) {
 			String oname = start.getOnlyName().length() > 0 ? start.getOnlyName()
 					: (mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
+			startPos = fromActions.size();
 			fromActions.add(new RouteSpinnerRow(SPINNER_START_ID, R.drawable.ic_action_get_my_location, oname));
 
 			final LatLon latLon = start.point;
@@ -677,7 +679,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		fromAdapter.addAll(fromActions);
 		fromSpinner.setAdapter(fromAdapter);
 		if (start != null) {
-			fromSpinner.setSelection(fromActions.size() - 1);
+			fromSpinner.setSelection(startPos);
 		} else {
 			if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() == null) {
 				fromSpinner.setPromptId(R.string.search_poi_location);
