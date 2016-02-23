@@ -3,7 +3,6 @@ package net.osmand.plus.dialogs;
 import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
@@ -14,7 +13,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.GPXLayer;
-import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.RouteLayer;
 
 public class RasterMapMenu {
@@ -34,19 +32,16 @@ public class RasterMapMenu {
 		OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
-		final MapTileLayer rasterMapLayer;
 		final OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
 		final OsmandSettings.CommonPreference<String> mapTypePreference;
 		@StringRes final int mapTypeString;
 		@StringRes final int mapTypeStringTransparency;
 		if (type == OsmandRasterMapsPlugin.RasterMapType.OVERLAY) {
-			rasterMapLayer = plugin.getOverlayLayer();
 			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
 			mapTypeString = R.string.map_overlay;
 			mapTypeStringTransparency = R.string.overlay_transparency;
 		} else if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
-			rasterMapLayer = plugin.getUnderlayLayer();
 			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
 			mapTypePreference = settings.MAP_UNDERLAY;
 			mapTypeString = R.string.map_underlay;
@@ -67,9 +62,6 @@ public class RasterMapMenu {
 					@Override
 					public void onMapSelected() {
 						mapActivity.getDashboard().refreshContent(true);
-						if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY && selected) {
-							Toast.makeText(mapActivity, R.string.consider_turning_polygons_off, Toast.LENGTH_SHORT).show();
-						}
 					}
 				};
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
@@ -96,6 +88,10 @@ public class RasterMapMenu {
 						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
 					}
 					plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
+					if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
+						hidePolygonsPref.set(isChecked);
+						mapActivity.getDashboard().refreshContent(true);
+					}
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
 					refreshMapComplete(mapActivity);

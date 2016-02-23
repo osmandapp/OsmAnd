@@ -14,7 +14,7 @@
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginRight="4dp"
+		android:layout_marginRight="3dp"
 		tools:src="@drawable/ic_world_globe_dark"/>
 
 	<TextView
