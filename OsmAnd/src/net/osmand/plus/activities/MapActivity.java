@@ -1190,7 +1190,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
 		RoutingHelper rh = app.getRoutingHelper();
 		if (newRoute && rh.isRoutePlanningMode() && mapView != null) {
-			RotatedTileBox rt = mapView.getCurrentRotatedTileBox();
 			Location lt = rh.getLastProjection();
 			if (lt == null) {
 				lt = app.getTargetPointsHelper().getPointToStartLocation();
@@ -1198,51 +1197,29 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			if (lt != null) {
 				double left = lt.getLongitude(), right = lt.getLongitude();
 				double top = lt.getLatitude(), bottom = lt.getLatitude();
-				List<TargetPoint> list = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for (TargetPoint l : list) {
+				List<Location> list = rh.getCurrentCalculatedRoute();
+				for (Location l : list) {
 					left = Math.min(left, l.getLongitude());
 					right = Math.max(right, l.getLongitude());
 					top = Math.max(top, l.getLatitude());
 					bottom = Math.min(bottom, l.getLatitude());
 				}
-				RotatedTileBox tb = new RotatedTileBox(rt);
 
-				double border = 0.8;
-				int dy = 0;
+				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+				int tileBoxWidthPx = 0;
+				int tileBoxHeightPx = 0;
 
 				MapRouteInfoMenu routeInfoMenu = mapLayers.getMapControlsLayer().getMapRouteInfoMenu();
-				boolean routeMenuVisible = false;
-				int tbw = (int) (tb.getPixWidth() * border);
-				int tbh = (int) (tb.getPixHeight() * border);
 				WeakReference<MapRouteInfoMenuFragment> fragmentRef = routeInfoMenu.findMenuFragment();
 				if (fragmentRef != null) {
-					routeMenuVisible = true;
 					MapRouteInfoMenuFragment f = fragmentRef.get();
 					if (landscapeLayout) {
-						tbw = (int) ((tb.getPixWidth() - f.getWidth()) * border);
+						tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
 					} else {
-						tbh = (int) ((tb.getPixHeight() - f.getHeight()) * border);
-						dy = f.getHeight() - tbh / 2;
+						tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
 					}
 				}
-				tb.setPixelDimensions(tbw, tbh);
-
-				double clat = bottom / 2 + top / 2;
-				//double clat = 5 * bottom / 4 - top / 4;
-				double clon = left / 2 + right / 2;
-				// landscape mode
-//				double clat = bottom / 2 + top / 2;
-//				double clon = 5 * left / 4 - right / 4;
-				tb.setLatLonCenter(clat, clon);
-				while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
-					tb.setZoom(tb.getZoom() - 1);
-				}
-				if (!landscapeLayout && routeMenuVisible) {
-					clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
-					clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
-				}
-				mapView.getAnimatedDraggingThread().startMoving(clat, clon, tb.getZoom(),
-						true);
+				mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
 			}
 		}
 	}
