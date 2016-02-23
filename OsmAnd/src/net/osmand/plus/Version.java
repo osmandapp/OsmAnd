@@ -37,7 +37,7 @@ public class Version {
 		return ctx.getString(R.string.versionFeatures).contains("+amazon");
 	}
 	
-	private static boolean isGooglePlayEnabled(OsmandApplication ctx) {
+	public static boolean isGooglePlayEnabled(OsmandApplication ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+play_market");
 	}
 	

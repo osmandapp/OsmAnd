@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.inapp.InAppHelper;
@@ -34,6 +35,9 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 		setContentView(R.layout.activity_livie_updates);
 
 		inAppHelper = new InAppHelper(getMyApplication());
+		if (Version.isDeveloperVersion(getMyApplication())) {
+			inAppHelper = null;
+		}
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 		pagerAdapter = new LiveUpdatesFragmentPagerAdapter(getSupportFragmentManager());

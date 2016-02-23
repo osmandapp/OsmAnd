@@ -52,8 +52,10 @@ public class MapMarkersWidgetsFactory {
 	private ImageButton moreButton;
 	private ImageButton moreButton2nd;
 
+	private MapMarker marker;
 	private int markerColorIndex = -1;
 	private String markerDistText;
+	private MapMarker marker2nd;
 	private int markerColorIndex2nd = -1;
 	private String markerDistText2nd;
 
@@ -249,13 +251,17 @@ public class MapMarkersWidgetsFactory {
 		arrowImg.invalidate();
 
 		int dist = (int) mes[0];
-		String txt;
+		String txt = null;
 		if (loc != null) {
 			txt = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
 		} else {
-			txt = "—";
+			if ((firstLine && marker != this.marker) || (!firstLine && marker != this.marker2nd)) {
+				txt = "—";
+			}
 		}
-		distText.setText(txt);
+		if (txt != null) {
+			distText.setText(txt);
+		}
 		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
@@ -272,11 +278,17 @@ public class MapMarkersWidgetsFactory {
 		addressText.setText(descr);
 
 		if (firstLine) {
+			this.marker = marker;
 			markerColorIndex = marker.colorIndex;
-			markerDistText = txt;
+			if (txt != null) {
+				markerDistText = txt;
+			}
 		} else {
+			this.marker2nd = marker;
 			markerColorIndex2nd = marker.colorIndex;
-			markerDistText2nd = txt;
+			if (txt != null) {
+				markerDistText2nd = txt;
+			}
 		}
 
 	}
@@ -294,6 +306,7 @@ public class MapMarkersWidgetsFactory {
 						setImageDrawable(map.getMyApplication().getIconsCache()
 								.getIcon(R.drawable.widget_marker_day,
 										MapMarkerDialogHelper.getMapMarkerColorId(markerColorIndex)));
+						cachedMarkerColorIndex = markerColorIndex;
 						res = true;
 					}
 					if (!markerDistText.equals(cachedMarkerDistText)) {
@@ -303,11 +316,13 @@ public class MapMarkersWidgetsFactory {
 						} else {
 							setText(markerDistText.substring(0, ls), markerDistText.substring(ls + 1));
 						}
+						cachedMarkerDistText = markerDistText;
 						res = true;
 					}
 					return res;
 
 				} else if (cachedMarkerDistText != null) {
+					cachedMarkerColorIndex = -1;
 					cachedMarkerDistText = null;
 					setText(null, null);
 					return true;
@@ -338,6 +353,7 @@ public class MapMarkersWidgetsFactory {
 						setImageDrawable(map.getMyApplication().getIconsCache()
 								.getIcon(R.drawable.widget_marker_day,
 										MapMarkerDialogHelper.getMapMarkerColorId(markerColorIndex2nd)));
+						cachedMarkerColorIndex = markerColorIndex2nd;
 						res = true;
 					}
 					if (!markerDistText2nd.equals(cachedMarkerDistText)) {
@@ -347,11 +363,13 @@ public class MapMarkersWidgetsFactory {
 						} else {
 							setText(markerDistText2nd.substring(0, ls), markerDistText2nd.substring(ls + 1));
 						}
+						cachedMarkerDistText = markerDistText2nd;
 						res = true;
 					}
 					return res;
 
 				} else if (cachedMarkerDistText != null) {
+					cachedMarkerColorIndex = -1;
 					cachedMarkerDistText = null;
 					setText(null, null);
 					return true;

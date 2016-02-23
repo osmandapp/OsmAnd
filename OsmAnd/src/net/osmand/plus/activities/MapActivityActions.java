@@ -40,6 +40,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -691,16 +692,18 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
-		optionsMenuHelper.item(R.string.osm_live).iconColor(R.drawable.ic_action_osm_live)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
-						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						mapActivity.startActivity(intent);
-						return false;
-					}
-				}).reg();
+		if (Version.isGooglePlayEnabled(app)) {
+			optionsMenuHelper.item(R.string.osm_live).iconColor(R.drawable.ic_action_osm_live)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							mapActivity.startActivity(intent);
+							return false;
+						}
+					}).reg();
+		}
 
 		optionsMenuHelper.item(R.string.prefs_plugins).iconColor(R.drawable.ic_extension_dark)
 				.listen(new OnContextMenuClick() {

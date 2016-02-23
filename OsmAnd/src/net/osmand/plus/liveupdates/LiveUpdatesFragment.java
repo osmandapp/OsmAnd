@@ -37,6 +37,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -130,23 +131,22 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 
 		progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
-		//test
-		//getSettings().LIVE_UPDATES_PURCHASED.set(true);
+		if (!Version.isDeveloperVersion(getMyApplication())) {
+			subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
+			updateSubscriptionHeader();
 
-		subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
-		updateSubscriptionHeader();
-
-		listView.addHeaderView(subscriptionHeader);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (position == 0 && !processing && InAppHelper.isSubscribedToLiveUpdates()) {
-					SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-					subscriptionFragment.setEditMode(true);
-					subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+			listView.addHeaderView(subscriptionHeader);
+			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					if (position == 0 && !processing && InAppHelper.isSubscribedToLiveUpdates()) {
+						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+						subscriptionFragment.setEditMode(true);
+						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+					}
 				}
-			}
-		});
+			});
+		}
 
 		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
 		return view;
@@ -232,7 +232,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
+		if (getSettings().LIVE_UPDATES_PURCHASED.get() && !Version.isDeveloperVersion(getMyApplication())) {
 			ActionBar actionBar = getMyActivity().getSupportActionBar();
 			if (actionBar != null) {
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
