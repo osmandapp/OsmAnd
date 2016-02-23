@@ -56,7 +56,7 @@
 
 
     <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
-    <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
+    <string name="download_files_question_space">Scaricare {0} file(s)? Servirebbero {3} MB temporaneamente e {1} MB permanentemente. Ora, sono disponibili solo {2} MB.</string>
 
 
     <string name="use_transparent_map_theme">Tema trasparente</string>
@@ -2161,7 +2161,7 @@
     <string name="select_map_markers">Scegli i marcatori della Mappa</string>
     <string name="shared_string_reverse_order">Inverti l\'ordine</string>
     <string name="show_map_markers">Marcatori mappa</string>
-    <string name="show_map_markers_description">Attiva la funzionalità Marcatori Mappa</string>
+    <string name="show_map_markers_description">Attiva la funzionalità marcatori Mappa</string>
     <string name="clear_active_markers_q">Vuoi eliminare tutti i marcatori attivi?</string>
     <string name="clear_markers_history_q">Vuoi eliminare la cronologia dei marcatori?</string>
     <string name="active_markers">Marcatori attivi</string>
@@ -2175,4 +2175,10 @@
     <string name="map_marker_2nd">Second Marcatore Mappa</string>
     <string name="shared_string_toolbar">Barra strumenti</string>
     <string name="shared_string_widgets">Widgets</string>
+    <string name="select_map_marker">Scegli marcatore mappa</string>
+    <string name="map_markers_other">Altri marcatori</string>
+    <string name="download_files_error_not_enough_space">Manca spazio! Servirebbero {3} MB temporaneamente e {1} MB permanentemente. Ora, sono disponibili solo {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Scaricare veramente {0} file(s)? Servirebbero {3} MB temporaneamente e {1} MB permanentemente. Ora, sono disponibili solo {2} MB.</string>
+    <string name="upload_osm_note_description">Puoi inviare le tue Note OSM anonimamente se utilizzi il tuo profilo OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Invia Nota OSM</string>
     </resources>
