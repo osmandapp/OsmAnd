@@ -149,10 +149,20 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	public void selectMapOverlayLayer(@NonNull final OsmandMapTileView mapView,
 									  @NonNull final CommonPreference<String> mapPref,
+									  @NonNull final CommonPreference<String> exMapPref,
+									  boolean force,
 									  @NonNull final MapActivity activity,
 									  @Nullable final OnMapSelectedCallback callback) {
-		final OsmandSettings settings = app.getSettings();
 		final MapActivityLayers layers = activity.getMapLayers();
+		if (!force && exMapPref.get() != null) {
+			mapPref.set(exMapPref.get());
+			if (callback != null) {
+				callback.onMapSelected();
+			}
+			updateMapLayers(mapView, mapPref, layers);
+			return;
+		}
+		final OsmandSettings settings = app.getSettings();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -176,12 +186,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							if (object == null) {
 								if (count == 1) {
 									mapPref.set(template.getName());
+									exMapPref.set(template.getName());
 									if (callback != null) {
 										callback.onMapSelected();
 									}
 									updateMapLayers(mapView, mapPref, layers);
 								} else {
-									selectMapOverlayLayer(mapView, mapPref, activity, null);
+									selectMapOverlayLayer(mapView, mapPref, exMapPref, false, activity, null);
 								}
 							} else {
 								count++;
@@ -197,6 +208,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					});
 				} else {
 					mapPref.set(keys.get(which));
+					exMapPref.set(keys.get(which));
 					if (callback != null) {
 						callback.onMapSelected();
 					}
@@ -449,12 +461,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 									@Nullable OnMapSelectedCallback callback) {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		CommonPreference<String> mapTypePreference;
+		CommonPreference<String> exMapTypePreference;
 		ITileSource map;
 		if (type == RasterMapType.OVERLAY) {
 			mapTypePreference = settings.MAP_OVERLAY;
+			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
 			map = overlayLayer.getMap();
 		} else {
+			// Underlay expected
 			mapTypePreference = settings.MAP_UNDERLAY;
+			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
 			map = underlayLayer.getMap();
 		}
 
@@ -466,7 +482,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			MapActivityLayers mapLayers = mapActivity.getMapLayers();
 			updateMapLayers(mapView, null, mapLayers);
 		} else {
-			selectMapOverlayLayer(mapView, mapTypePreference, mapActivity, callback);
+			selectMapOverlayLayer(mapView, mapTypePreference, exMapTypePreference, false, mapActivity, callback);
 		}
 	}
 

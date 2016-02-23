@@ -35,16 +35,19 @@ public class RasterMapMenu {
 		assert plugin != null;
 		final OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
 		final OsmandSettings.CommonPreference<String> mapTypePreference;
+		final OsmandSettings.CommonPreference<String> exMapTypePreference;
 		@StringRes final int mapTypeString;
 		@StringRes final int mapTypeStringTransparency;
 		if (type == OsmandRasterMapsPlugin.RasterMapType.OVERLAY) {
 			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
+			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
 			mapTypeString = R.string.map_overlay;
 			mapTypeStringTransparency = R.string.overlay_transparency;
 		} else if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
 			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
 			mapTypePreference = settings.MAP_UNDERLAY;
+			exMapTypePreference = settings.MAP_UNDERLAY_PREVIOUS;
 			mapTypeString = R.string.map_underlay;
 			mapTypeStringTransparency = R.string.map_transparency;
 		} else {
@@ -71,7 +74,7 @@ public class RasterMapMenu {
 				if (itemId == mapTypeString) {
 					if (selected) {
 						plugin.selectMapOverlayLayer(mapActivity.getMapView(), mapTypePreference,
-								mapActivity, onMapSelectedCallback);
+								exMapTypePreference, true, mapActivity, onMapSelectedCallback);
 					}
 					return false;
 				}

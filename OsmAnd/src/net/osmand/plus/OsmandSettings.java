@@ -1135,6 +1135,10 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_LAYER_TRANSPARENCY_SEEKBAR =
 			new BooleanPreference("show_layer_transparency_seekbar", false).makeGlobal();
 
+	public final CommonPreference<String> MAP_OVERLAY_PREVIOUS = new StringPreference("map_overlay_previous", null).makeGlobal().cache();
+
+	public final CommonPreference<String> MAP_UNDERLAY_PREVIOUS = new StringPreference("map_underlay_previous", null).makeGlobal().cache();
+
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference("previous_installed_version", "").makeGlobal();
 
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference("should_show_free_version_banner", false).makeGlobal().cache();
