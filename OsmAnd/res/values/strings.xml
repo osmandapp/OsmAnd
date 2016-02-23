@@ -11,6 +11,8 @@
     -->
     <string name="select_map_marker">Select Map marker</string>
     <string name="map_markers_other">Other markers</string>
+    <string name="upload_anonymously">Upload anonymously</string>
+    <string name="show_transparency_seekbar">Show transparency seekbar</string>
     <string name="download_files_error_not_enough_space">Not enough space!
         This would need {3} MB temporarily and {1} MB permanently.
         Currently, there are only {2} MB available.</string>
@@ -2239,5 +2241,4 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
-    <string name="upload_anonymously">Upload anonymously</string>
 </resources>

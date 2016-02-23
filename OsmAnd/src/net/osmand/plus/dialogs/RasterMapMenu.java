@@ -96,6 +96,8 @@ public class RasterMapMenu {
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
 					refreshMapComplete(mapActivity);
+				} else if (itemId == R.string.show_transparency_seekbar) {
+					settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.set(isChecked);
 				}
 				return false;
 			}
@@ -125,6 +127,8 @@ public class RasterMapMenu {
 				contextMenuAdapter.item(R.string.show_polygons).listen(l)
 						.selected(hidePolygonsPref.get() ? 0 : 1).reg();
 			}
+			contextMenuAdapter.item(R.string.show_transparency_seekbar).listen(l)
+					.selected(settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get() ? 0 : 1).reg();
 		}
 	}
 

@@ -1132,6 +1132,8 @@ public class OsmandSettings {
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeGlobal();
 
+	public final CommonPreference<Boolean> SHOW_LAYER_TRANSPARENCY_SEEKBAR =
+			new BooleanPreference("show_layer_transparency_seekbar", false).makeGlobal();
 
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference("previous_installed_version", "").makeGlobal();
 
