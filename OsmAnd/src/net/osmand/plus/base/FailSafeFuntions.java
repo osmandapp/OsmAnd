@@ -183,6 +183,9 @@ public class FailSafeFuntions {
 	private static void notRestoreRoutingMode(MapActivity ma, OsmandApplication app){
 		ma.updateApplicationModeSettings();
 		app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
+		if (app.getSettings().USE_MAP_MARKERS.get()) {
+			app.getTargetPointsHelper().removeAllWayPoints(false);
+		}
 		ma.refreshMap();
 	}
 
