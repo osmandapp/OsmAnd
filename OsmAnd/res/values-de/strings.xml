@@ -1,5 +1,52 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="osmand_plus_extended_description_4000_chars_v2">
+OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Interbetverbindung. Dazu einfach Landkarten für beliebuge Länder herunterladen, bevor man sich auf Reisen begibt.
+
+Basisfunktionen:
+• Detailierte Karten von 200 Ländern
+• Offline-Navigation mit Sprachansagen
+• Addresssuche im Offline-Modus
+• Offline-Informationen über Sehenswürdigketen, Cafes, Parkplätze, Läden, usw.
+• Orte als Lesezeichen vormerken
+• Auto-, Fahrrad- und Fussgängernavigation
+
+Zusatzoptionen:
+• Anzeige und Aufnahme von GPX-Dateien
+• Wikipedia Beschreibungen von Orten und Points of Interest (offline)
+• Aufzeichung von Foto-, Audio- oder Video-Notizen zu beliebigen Orten
+• Tag- und Nacht-Anzeigemodus für Landkarten, für sicheres Autofahren
+• Informationen über öffentlichen Personennahverkehr, wie Linien und Haltestellen
+• Rad- und Fußwege
+• Touristische Stadtrundgänge weltweit
+• Online-Karten aus verschiedenen Quellen
+• Information über Straßenbelag, Straßenqualität und Straßenbeleuchtung
+• Hinzufügen, Bearbeiten und Löschen von Points of Interest (POI) (für OpenStreetMap.org User)
+• OsMo - Live-Verfolgung von Partnergeräten
+
+Eine verläßliche Navigationsanwendung für Ihr Land, ob Deutschland, Frankreich, Mexiko, das Vereinigte Königreich, Spanien, die Niederlande, USA, Russland, Brasilien, oder jedes andere Land weltweit.
+
+Zusatzmodule:
+• Höhenlinien und Reliefanzeige https://goo.gl/7mojP8
+  Höhenlinien und das Relief des Terrains werden zu den Standard-OsmAndkarten hinzugeblendet.
+
+• Skikarten https://goo.gl/pX6DxJ
+  Informationen über Skiabfahrten, Langlaufloipen, Bergbahnen und Skilifte.
+
+• Seekarten https://goo.gl/0hEdxm
+  Ein spezieller Kartenstil zur Anzeige von nautischen Navigationszeichen für die Binnen- und Küstenschiffahrt.
+
+• Parkplatzposition https://goo.gl/6JxQXF
+  Markiert den Standort des geparkten Fahrzeuges und zeigt die verbleibende Restparkzeit der Parkuhr (für zeitlich begrenztes Parken) an.
+
+Weitere Funktionen in Vorbereitung!
+
+Twitter: https://twitter.com/osmandapp
+Facebook: https://www.facebook.com/osmandapp
+Webseite: http://osmand.net
+
+Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter support@osmand.net.        
+    </string>
 	<string name="shared_string_remove">Entfernen</string>
 	<string name="item_removed">Eintrag entfernt</string>
 	<string name="n_items_removed">Einträge entfernt</string>
