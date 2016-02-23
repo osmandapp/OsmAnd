@@ -12,6 +12,8 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -181,7 +183,7 @@ public class MapMarkersWidgetsFactory {
 
 		List<MapMarker> markers = helper.getSortedMapMarkers();
 		if (zoom < 3 || markers.size() == 0
-				|| !map.getMyApplication().getSettings().SHOW_MAP_MARKERS_TOOLBAR.get()
+				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
 				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
 				|| map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()

@@ -24,7 +24,6 @@
         Currently, there are {2} MB available.</string>
     <string name="upload_osm_note_description">You can upload your OSM Note anonymously if you use your OpenStreetMap.org profile.</string>
     <string name="upload_osm_note">Upload OSM Note</string>
-    <string name="show_map_markers_topbar">Show Map markers topbar</string>
     <string name="map_marker_1st">First Map marker</string>
     <string name="map_marker_2nd">Second Map marker</string>
     <string name="shared_string_toolbar">Toolbar</string>
