@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
   <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -196,15 +197,15 @@
   <string name="shared_string_rename">Pārsaukt</string>
   
   <string name="poi_filter_nominatim">Tiešaistes POI - Nominatim</string>
-  <string name="search_position_current_location_search">Nosaka atrašanās vietu…</string>
-  <string name="search_position_current_location_found">Vieta noteikta</string>
+  <string name="search_position_current_location_search">Meklē atrašanos…</string>
+  <string name="search_position_current_location_found">Mana vieta (atrasta)</string>
   <string name="search_position_address">Adrese…</string>
   <string name="search_position_favorites">Izlase…</string>
   <string name="search_position_undefined">Nedefinēts</string>
   
   
-  <string name="search_position_map_view">Pašreizējais kartes centrs</string>
-  <string name="select_search_position">Tuvumā:</string>
+  <string name="search_position_map_view">Kartes centrs</string>
+  <string name="select_search_position">Reģions:</string>
   <string name="context_menu_item_search">Meklēt apkārtnē</string>
   
   <string name="shared_string_save_as_gpx">Saglabāt maršrutu GPX trasē</string>
@@ -470,7 +471,7 @@
   
   <string name="error_occurred_loading_gpx">Kļūda ielādējot GPX</string>
   <string name="send_report">Sūtīt atskaiti</string>
-  <string name="none_region_found">Uz SD kartes nav atrastas bezsaistes reģionālās kartes. Lūdzu lejupielādējiet kartes no interneta.</string>
+  <string name="none_region_found">SD kartē nav atrasti reģionu dati. Lūdzu lejupielādējiet reģionus no interneta.</string>
   <string name="poi_namefinder_query_empty">Ievadiet atslēgvārdus POI meklēšanai</string>
   <string name="any_poi">Jebkurš</string>
   <string name="layer_transport_route">Transporta maršruts</string>
@@ -498,11 +499,11 @@
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Uzstādiet gps ieslēgšanas intervālu pozīcijas noteikšanai miega režīmā</string>
   <string name="background_service_int">GPS pamošanās intervāls</string>
-  <string name="background_service_provider_descr">Izvēlieties gps signāla devēju  miega režīmam</string>
+  <string name="background_service_provider_descr">Izvēlēties vietas noteicēju miega režīmam</string>
   <string name="background_service_provider">Vietas noteicējs</string>
   <string name="background_router_service_descr">Darbina OsmAnd fonā, lai sekotu jūsu atrašanās vietai, kamēr ekrāns ir izslēgts</string>
   <string name="background_router_service">Darbināt fonā</string>
-  <string name="off_router_service_no_gps_available">Maršruta sekošanai fonā ir nepieciešams ieslēgt gps.</string>
+  <string name="off_router_service_no_gps_available">Navigàcijas darbībai fonā ir nepieciešams iespējot atrašanās vietu.</string>
   <string name="hide_poi_filter">Nerādīt filtru</string>
   <string name="show_poi_filter">Rādīt filtru</string>
   <string name="search_poi_filter">Filtrs</string>
@@ -586,7 +587,7 @@
   <string name="sd_dir_not_accessible">SD kartē nav pieejama glabātuves mape!</string>
   <string name="download_question">Lejupielādēt {0} - {1} ?</string>
   <string name="download_question_exist">{0} bezsaistes dati jau eksistē ({1}). Vai vēlaties atjaunināt? ({2}) ?</string>
-  <string name="address">Adreses</string>
+  <string name="address">Adrese</string>
   <string name="shared_string_download_successful">Lejupielāde ir veiksmīga</string>
   
   
@@ -601,7 +602,7 @@
   <string name="only_show">Parādīt maršrutu</string>
   <string name="follow">Sākt navigāciju</string>
   <string name="recalculate_route_to_your_location">Pārvietošanās veids:</string>
-  <string name="mark_final_location_first">Vispirms lūdzu izvēlieties galamērķi</string>
+  <string name="mark_final_location_first">Vispirms izvēlaties galamērķi</string>
   <string name="get_directions">Norādes</string>
   
   <string name="opening_hours">Darba laiks</string>
@@ -832,7 +833,7 @@
   <string name="osmand_parking_warning">Brīdinājums</string>
   <string name="osmand_parking_warning_text">Kalendārā jau ir pievienota norāde par auto izņemšanu no stāvvietas. Tā paliks līdz brīdim, kamēr jūs to neizdzēsīsiet.</string>
   <string name="osmand_parking_time_limit_title">Uzstādīt noparkošanas laika limitu</string>
-  <string name="osmand_parking_delete_confirm">Vai vēlieties noņemt noparkotā auto atrašanās vietu uz kartes?</string>
+  <string name="osmand_parking_delete_confirm">Vai noņemt parkošanās marķieri uz kartes?</string>
   <string name="osmand_parking_delete">Noņemt parkošanās marķieri</string>
   <string name="osmand_parking_choose_type">Izvēlieties parkošanās veidu</string>
   <string name="osmand_parking_lim_text">Uz ierobežotu laiku</string>
@@ -1081,7 +1082,7 @@
     <string name="use_kalman_filter_compass">Lietot Kalmana filtru</string>
     <string name="use_magnetic_sensor_descr">Lietot magnētisko sensoru orientācijas sensora vietā, lai noteiktu kompasa stāvokli</string>
     <string name="use_magnetic_sensor">Lietot magnētisko sensoru</string>
-    <string name="other_location">Citas vietas</string>
+    <string name="other_location">Cits</string>
     <string name="files_limit">%1$d faili palikuši</string>
     <string name="available_downloads_left">Lejupielādei pieejami %1$d faili</string>
     <string name="install_paid">Pilnā versija</string>
@@ -1197,7 +1198,7 @@
     <string name="background_service_is_enabled_question">OsmAnd fona serviss turpinās darboties. Vai vēlaties to izslēgt?</string>
     <string name="app_modes_choose">Lietotāja režīmi</string>
 	
-    <string name="access_mark_final_location_first">Pieejamības režīms: lūdzu izvēlieties galamērķi</string> 
+    <string name="access_mark_final_location_first">Pieejamības režīms: lūdzu vispirms izvēlieties galamērķi</string> 
     <string name="app_modes_choose_descr">Izvēlētos lietotāja režīmus varēs lietot aplikācijā</string>
     <string name="app_mode_hiking">Iet kājām</string>
     <string name="app_mode_boat">Ūdens transports</string>
@@ -1543,7 +1544,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="minutes_ago">minūtes atpakaļ</string>
     <string name="osmo_connected_devices">Savienotās ierīces</string>
     <string name="osmo_groups">OsMo grupas/ierīces</string>
-    <string name="osmo_auto_send_locations_descr">Automātiski sākt sekošanas sesiju un sūtīt atrašanās vietas tūlīt pēc aplikācijas palaišanas</string>
+    <string name="osmo_auto_send_locations_descr">Automātiski sākt sekošanas sesiju un sūtīt atrašanās vietu pēc aplikācijas palaišanas</string>
     <string name="osmo_auto_send_locations">Automātiski sākt sekošanas sesiju</string>
     <string name="osmo_tracker_id">Personīgais sekošanas ID</string>
     <string name="osmo_tracker_id_descr">Nospiediet, lai redzētu vai kopīgotu sekošanas id.
@@ -1829,7 +1830,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="shared_string_unexpected_error">Radās negaidīta kļūme</string>
 	<string name="shared_string_action_template">Darbība {0}</string>
 	<string name="shared_string_collapse">Kollapss</string>
-	<string name="shared_string_my_location">Mana atrašanās vieta</string>
+	<string name="shared_string_my_location">Mana pozīcija</string>
 	<string name="shared_string_currently_recording_track">Tiek ierakstīts treks</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
@@ -1944,7 +1945,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_show_details">Rādīt detaļas</string>
     <string name="osm_edit_context_menu_delete">Dzēst OSM labojumu</string>
     <string name="shared_string_logoff">Izlogoties</string>
-    <string name="shared_string_address">Adreses</string>
+    <string name="shared_string_address">Adrese</string>
 	<string name="rendering_value__name">Noklusētais</string>
     <string name="rendering_value_highContrastRoads_name">Kontrastaināki ceļi</string>
 	<string name="plugin_settings">Spraudņi</string>
@@ -1957,4 +1958,26 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="rendering_value_lightblue_name">Gaiši zils</string>
     <string name="rendering_value_blue_name">Zils</string>
     <string name="restart_is_required">Lai izmaiņas stātos spēkā, nepieciešams pārstartēt aplikāciju.</string>
+    <string name="shared_string_toolbar">Rīkjosla</string>
+    <string name="shared_string_widgets">Logrīki</string>
+    <string name="shared_string_save_changes">Saglabāt izmaiņas</string>
+    <string name="shared_string_email_address">E-pasta adrese</string>
+    <string name="shared_string_status">Statuss</string>
+    <string name="shared_string_read_more">Lasīt vairāk</string>
+    <string name="clear_updates_proposition_message">Jūs varat noņemt saņemtos atjauninājumus un atgriezties pie oriğinālās kartes</string>
+    <string name="road_blocked">Ceļš bloķēts</string>
+    <string name="shared_string_remove">Noņemt</string>
+    <string name="shared_string_select">Atzīmēt</string>
+    <string name="rendering_attr_hideIcons_name">Slēpt POI ikonas</string>
+    <string name="shared_string_undo_all">Atcelt visu</string>
+    <string name="available_maps">Pieejamās kartes</string>
+    <string name="shared_string_sound">Skaņa</string>
+    <string name="enter_country_name">Izvēlēties valsti</string>
+    <string name="shared_string_skip">Izlaist</string>
+    <string name="get_full_version">Pilnā versija</string>
+    <string name="later">Vēlāk</string>
+    <string name="downloads">Lejupielādes</string>
+    <string name="buy">Pirkt</string>
+    <string name="regions">Reģions</string>
+    <string name="downloads_left_template">Pieejamas %1$s lejupielādes</string>
     </resources>
