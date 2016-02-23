@@ -760,6 +760,42 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	}
 
+	public void fitRectToMap(double left, double right, double top, double bottom,
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+		RotatedTileBox tb = currentViewport.copy();
+		double border = 0.8;
+		int dy = 0;
+
+		int tbw = (int) (tb.getPixWidth() * border);
+		int tbh = (int) (tb.getPixHeight() * border);
+		if (tileBoxWidthPx > 0) {
+			tbw = (int) (tileBoxWidthPx * border);
+		} else if (tileBoxHeightPx > 0) {
+			tbh = (int) (tileBoxHeightPx * border);
+			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
+		}
+		tb.setPixelDimensions(tbw, tbh);
+
+		double clat = bottom / 2 + top / 2;
+		//double clat = 5 * bottom / 4 - top / 4;
+		double clon = left / 2 + right / 2;
+		// landscape mode
+//				double clat = bottom / 2 + top / 2;
+//				double clon = 5 * left / 4 - right / 4;
+		tb.setLatLonCenter(clat, clon);
+		while (tb.getZoom() < 17 && tb.containsLatLon(top, left) && tb.containsLatLon(bottom, right)) {
+			tb.setZoom(tb.getZoom() + 1);
+		}
+		while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
+			tb.setZoom(tb.getZoom() - 1);
+		}
+		if (dy != 0) {
+			clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
+			clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+		}
+		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
+	}
+
 	public boolean onGenericMotionEvent(MotionEvent event) {
 		if ((event.getSource() & InputDevice.SOURCE_CLASS_POINTER) != 0 &&
 				event.getAction() == MotionEvent.ACTION_SCROLL &&
