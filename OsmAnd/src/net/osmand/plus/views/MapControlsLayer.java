@@ -28,11 +28,8 @@ import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -74,6 +71,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private SeekBar transparencyBar;
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> settingsToTransparency;
+	private boolean isTransparencyBarEnabled = true;
 	private OsmandSettings settings;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
@@ -639,7 +637,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference) {
 		MapControlsLayer.settingsToTransparency = transparenPreference;
-		transparencyBarLayout.setVisibility(View.VISIBLE);
+		if (isTransparencyBarEnabled) {
+			transparencyBarLayout.setVisibility(View.VISIBLE);
+		}
 		transparencyBar.setProgress(transparenPreference.get());
 	}
 
@@ -647,6 +647,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (settingsToTransparency == transparentPreference) {
 			transparencyBarLayout.setVisibility(View.GONE);
 			settingsToTransparency = null;
+		}
+	}
+
+	public void setTransparencyBarEnabled(boolean isTransparencyBarEnabled) {
+		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
+		if (settingsToTransparency != null) {
+			if(isTransparencyBarEnabled) {
+				transparencyBarLayout.setVisibility(View.VISIBLE);
+			} else {
+				transparencyBarLayout.setVisibility(View.GONE);
+			}
 		}
 	}
 

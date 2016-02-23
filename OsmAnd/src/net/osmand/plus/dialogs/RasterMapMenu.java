@@ -81,8 +81,8 @@ public class RasterMapMenu {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<?> adapter,
 											  int itemId, int pos, boolean isChecked) {
+				MapActivityLayers mapLayers = mapActivity.getMapLayers();
 				if (itemId == toggleActionStringId) {
-					MapActivityLayers mapLayers = mapActivity.getMapLayers();
 					if (isChecked) {
 						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
 					} else {
@@ -98,6 +98,7 @@ public class RasterMapMenu {
 					refreshMapComplete(mapActivity);
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.set(isChecked);
+					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
 				}
 				return false;
 			}
@@ -128,7 +129,7 @@ public class RasterMapMenu {
 						.selected(hidePolygonsPref.get() ? 0 : 1).reg();
 			}
 			contextMenuAdapter.item(R.string.show_transparency_seekbar).listen(l)
-					.selected(settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get() ? 0 : 1).reg();
+					.selected(settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get() ? 1 : 0).reg();
 		}
 	}
 
