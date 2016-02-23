@@ -50,6 +50,7 @@ public class ApplicationMode {
 			icon(R.drawable.ic_truck, R.drawable.ic_action_truck_dark).reg();
 	
 	static {
+		ApplicationMode[] exceptDefault = new ApplicationMode[] { CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT };
 		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[] { CAR, BICYCLE, BOAT, AIRCRAFT };
 		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[] { CAR, BICYCLE, PEDESTRIAN };
 		ApplicationMode[] pedestrian = new ApplicationMode[] { PEDESTRIAN };
@@ -63,7 +64,10 @@ public class ApplicationMode {
 		regWidget("next_turn_small", pedestrian);
 		regWidget("next_next_turn", exceptPedestrianAndDefault);
 		
-		// right		
+		// right
+		regWidget("intermediate_distance", exceptDefault);
+		regWidget("distance", exceptDefault);
+		regWidget("time", exceptDefault);
 		regWidget("speed", exceptPedestrianAndDefault);
 		regWidget("max_speed", CAR);
 		regWidget("gps_info", none);
