@@ -2102,4 +2102,10 @@
     <string name="show_map_markers_topbar">Mostrar barra superior de Marcadores del mapa</string>
     <string name="download_files_error_not_enough_space">¡Sin espacio suficiente! Se necesita {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible sólo {2} MB.</string>
     <string name="download_files_question_space_with_temp">¿Descargar realmente {0} archivo(s)? Se necesitará {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible {2} MB.</string>
+    <string name="select_map_marker">Elegir Marcador del mapa</string>
+    <string name="map_markers_other">Otros marcadores</string>
+    <string name="upload_anonymously">Subir anónimamente</string>
+    <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
+    <string name="upload_osm_note_description">Puedes subir tus notas OSM anónimamente si usas tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Subir Notas OSM</string>
     </resources>

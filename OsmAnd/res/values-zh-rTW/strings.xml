@@ -2116,4 +2116,5 @@
 <string name="select_map_marker">選擇地圖標記</string>
     <string name="map_markers_other">其它標記</string>
     <string name="upload_osm_note_description">如果您使用您的 OpenStreetMap.org 個人資料，您可以匿名上傳 OSM 註解。</string>
+    <string name="show_transparency_seekbar">顯示透明度拖動軸</string>
     </resources>
