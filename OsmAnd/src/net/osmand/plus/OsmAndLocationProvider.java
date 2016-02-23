@@ -611,8 +611,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 		@Override
 		public void onLocationChanged(Location location) {
-			// double check about use only gps
-			// that strange situation but it could happen?
 			if (!useOnlyGPS() && !locationSimulation.isRouteAnimating()) {
 				setLocation(convertLocation(location, app));
 			}
