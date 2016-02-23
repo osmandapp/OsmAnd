@@ -72,11 +72,14 @@ import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -139,7 +142,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
-	boolean firstTime;
+	private boolean landscapeLayout;
 
 	private Dialog progressDlg = null;
 
@@ -181,6 +184,10 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		settings = app.getSettings();
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		boolean portraitMode = AndroidUiHelper.isOrientationPortrait(this);
+		boolean largeDevice = AndroidUiHelper.isXLargeDevice(this);
+		landscapeLayout = !portraitMode && !largeDevice;
 
 		mapContextMenu.setMapActivity(this);
 
@@ -1181,6 +1188,63 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		RoutingHelper rh = app.getRoutingHelper();
+		if (newRoute && rh.isRoutePlanningMode() && mapView != null) {
+			RotatedTileBox rt = mapView.getCurrentRotatedTileBox();
+			Location lt = rh.getLastProjection();
+			if (lt == null) {
+				lt = app.getTargetPointsHelper().getPointToStartLocation();
+			}
+			if (lt != null) {
+				double left = lt.getLongitude(), right = lt.getLongitude();
+				double top = lt.getLatitude(), bottom = lt.getLatitude();
+				List<TargetPoint> list = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+				for (TargetPoint l : list) {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
+				RotatedTileBox tb = new RotatedTileBox(rt);
+
+				double border = 0.8;
+				int dy = 0;
+
+				MapRouteInfoMenu routeInfoMenu = mapLayers.getMapControlsLayer().getMapRouteInfoMenu();
+				boolean routeMenuVisible = false;
+				int tbw = (int) (tb.getPixWidth() * border);
+				int tbh = (int) (tb.getPixHeight() * border);
+				WeakReference<MapRouteInfoMenuFragment> fragmentRef = routeInfoMenu.findMenuFragment();
+				if (fragmentRef != null) {
+					routeMenuVisible = true;
+					MapRouteInfoMenuFragment f = fragmentRef.get();
+					if (landscapeLayout) {
+						tbw = (int) ((tb.getPixWidth() - f.getWidth()) * border);
+					} else {
+						tbh = (int) ((tb.getPixHeight() - f.getHeight()) * border);
+						dy = f.getHeight() - tbh / 2;
+					}
+				}
+				tb.setPixelDimensions(tbw, tbh);
+
+				double clat = bottom / 2 + top / 2;
+				//double clat = 5 * bottom / 4 - top / 4;
+				double clon = left / 2 + right / 2;
+				// landscape mode
+//				double clat = bottom / 2 + top / 2;
+//				double clon = 5 * left / 4 - right / 4;
+				tb.setLatLonCenter(clat, clon);
+				while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
+					tb.setZoom(tb.getZoom() - 1);
+				}
+				if (!landscapeLayout && routeMenuVisible) {
+					clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
+					clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+				}
+				mapView.getAnimatedDraggingThread().startMoving(clat, clon, tb.getZoom(),
+						true);
+			}
+		}
 	}
 
 	@Override
