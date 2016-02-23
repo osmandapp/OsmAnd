@@ -2041,4 +2041,5 @@
     <string name="upload_osm_note_description">Sie können ihre OSM Notizen anonym hochladen oder ihr OpenStreetMap.org Profil nutzen.</string>
     <string name="upload_osm_note">OSM Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
-</resources>
+<string name="show_transparency_seekbar">Transparente Suchleiste anzeigen</string>
+    </resources>
