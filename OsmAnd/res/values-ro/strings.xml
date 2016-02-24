@@ -1751,17 +1751,17 @@
     <string name="shared_string_show_description">Vezi descrierea</string>
     <string name="shared_string_message">Mesaj</string>
     <string name="agps_data_last_downloaded">Datele A-GPS ultimele descărcate: %1$s</string>
-    <string name="confirm_usage_speed_cameras">În multe țari (Germania, Franța, Italia și altele) utilizarea avertizarilor pentru camerele de viteză nu este permisă de lege. OsmAnd nu este responsabilă pentru încălcarea legii în acest sens. Apasă Da dacă ești eligibil pentru a utiliza această funcționalitate.</string>
-    <string name="welmode_download_maps">Hărți descărcate</string>
-    <string name="welcome_select_region">Pentru a reflecta corect semnele si reglementarile de trafic, alege regiunea in care conduci:</string>
-    <string name="welcome_text">OsmAnd ofera vizualizarea și navigarea offline pe hărți la nivel global!</string>
+    <string name="confirm_usage_speed_cameras">În multe țari (Germania, Franța, Italia și altele) utilizarea avertizărilor pentru camerele radar nu este permisă de lege. OsmAnd nu este responsabilă pentru încălcarea legii în acest sens. Apasă Da dacă îți asumi răspunderea pentru a utiliza această funcție.</string>
+    <string name="welmode_download_maps">Descarcă hărți</string>
+    <string name="welcome_select_region">Pentru a reflecta corect semnele si reglementările de trafic, alege regiunea în care conduci:</string>
+    <string name="welcome_text">OsmAnd oferă vizualizarea și navigarea hărții fără internet la nivel global!</string>
     <string name="welcome_header">Bun venit</string>
-    <string name="current_route">Traseul curent</string>
+    <string name="current_route">Ruta curentă</string>
     <string name="osm_changes_added_to_local_edits">Schimbările OSM adăugate in setul de schimbări locale</string>
     <string name="mark_to_delete">Marchează pentru ștergere</string>
     <string name="osmo_grop_name_length_alert">Numele grupului trebuie să aibă cel puțin 3 caractere!</string>
-    <string name="local_recordings_delete_all_confirm">Dorești ștergerea notei %1$d ?</string>
-    <string name="local_osm_changes_upload_all_confirm">Dorești încărcarea (upload) pe OSM a %1$d schimbări?</string>
+    <string name="local_recordings_delete_all_confirm">Sigur dorești ștergerea notelor %1$d?</string>
+    <string name="local_osm_changes_upload_all_confirm">Dorești încărcarea (upload) pe OSM a %1$d. Ești sigur?</string>
     <string name="confirmation_to_clear_history">Dorești ștergerea istoricului?</string>
     <string name="donations">Donații</string>
     <string name="number_of_recipients">Numărul de benecifiari</string>
@@ -1822,4 +1822,5 @@
     <string name="shared_string_select">Selectează</string>
     <string name="switch_start_finish">Inversează punctul de plecare și destinația</string>
     <string name="rendering_attr_hideIcons_name">Ascunde pictogramele POI</string>
+    <string name="delay_to_start_navigation_descr">Specifică timpul de așteptare pentru a rămâne pe ecran planificarea traseului</string>
     </resources>
