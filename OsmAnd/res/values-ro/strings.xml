@@ -1823,4 +1823,13 @@
     <string name="switch_start_finish">Inversează punctul de plecare și destinația</string>
     <string name="rendering_attr_hideIcons_name">Ascunde pictogramele POI</string>
     <string name="delay_to_start_navigation_descr">Specifică timpul de așteptare pentru a rămâne pe ecran planificarea traseului</string>
+    <string name="delay_to_start_navigation">Începe navigarea rând pe rând după…</string>
+    <string name="shared_string_go">Pleacă</string>
+    <string name="osmand_parking_overdue">Întârziat</string>
+    <string name="action_create">Action create</string>
+    <string name="action_modify">Modificat</string>
+    <string name="action_delete">Șters</string>
+    <string name="osm_edits">Editări OSM</string>
+    <string name="osmand_parking_hour">h</string>
+    <string name="osmand_parking_minute">min</string>
     </resources>
