@@ -68,6 +68,7 @@ public class RasterMapMenu {
 						mapActivity.getDashboard().refreshContent(true);
 					}
 				};
+		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
@@ -84,24 +85,28 @@ public class RasterMapMenu {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<?> adapter,
 											  int itemId, int pos, boolean isChecked) {
-				MapActivityLayers mapLayers = mapActivity.getMapLayers();
 				if (itemId == toggleActionStringId) {
 					if (isChecked) {
 						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
 					} else {
 						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
 					}
+					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
 					plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-					if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
-						hidePolygonsPref.set(isChecked);
+					if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY && !isChecked) {
+						hidePolygonsPref.set(false);
 						mapActivity.getDashboard().refreshContent(true);
 					}
+					refreshMapComplete(mapActivity);
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
 					refreshMapComplete(mapActivity);
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.set(isChecked);
 					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
+					if (isChecked) {
+						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+					}
 				}
 				return false;
 			}
@@ -131,8 +136,10 @@ public class RasterMapMenu {
 				contextMenuAdapter.item(R.string.show_polygons).listen(l)
 						.selected(hidePolygonsPref.get() ? 0 : 1).reg();
 			}
+			Boolean transparencySwitchState = settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get()
+					&& mapLayers.getMapControlsLayer().isTransparencyBarInitialized();
 			contextMenuAdapter.item(R.string.show_transparency_seekbar).listen(l)
-					.selected(settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get() ? 1 : 0).reg();
+					.selected(transparencySwitchState ? 1 : 0).reg();
 		}
 	}
 
