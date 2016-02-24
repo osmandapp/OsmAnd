@@ -515,7 +515,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean dialogOpened = mapRouteInfoMenu.isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
-				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
+				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode);
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
