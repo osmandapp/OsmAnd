@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     
 	
     <string name="close_changeset">Închide setul de modificări</string>
@@ -359,7 +360,7 @@
 	
 	
 	<string name="download_files_not_enough_space">Nu există spațiu suficient pentru descărcarea a %1$s MB (liber: %2$s).</string>
-	<string name="download_files_question_space">Spațiul liber este de {2} MB! Descărcați {0} fișier(e) ({1} MB)?</string>
+	<string name="download_files_question_space">Sigur s-au descărcat {0} fișiere? Necesită {1} MB permanent. În prezent sunt {2} MB disponibili.</string>
 	
 	 
 	
@@ -1762,4 +1763,42 @@
     <string name="local_recordings_delete_all_confirm">Dorești ștergerea notei %1$d ?</string>
     <string name="local_osm_changes_upload_all_confirm">Dorești încărcarea (upload) pe OSM a %1$d schimbări?</string>
     <string name="confirmation_to_clear_history">Dorești ștergerea istoricului?</string>
+    <string name="donations">Donații</string>
+    <string name="number_of_recipients">Numărul de benecifiari</string>
+    <string name="osm_user_stat">Modificări %1$s, grad %2$s, toate modificările %3$s</string>
+    <string name="osm_editors_ranking">Gradul modificărilor OSM</string>
+    <string name="osm_live_subscription">Semnare live OSM</string>
+    <string name="osm_live_subscribe_btn">Semnează-te</string>
+    <string name="osm_live_email_desc">Ne trebuie pentru a vă oferii informații despre contribuții</string>
+    <string name="osm_live_user_public_name">Nume Public</string>
+    <string name="osm_live_hide_user_name">Nu arăta numele meu în rapoarte</string>
+    <string name="osm_live_support_region">Suport local</string>
+    <string name="osm_live_month_cost">Cost lunar</string>
+    <string name="osm_live_month_cost_desc">Plata lunară</string>
+    <string name="osm_live_active">Activ</string>
+    <string name="osm_live_not_active">Inactiv</string>
+    <string name="osm_live_enter_email">Vă rugăm să introduceți adresa de email validă</string>
+    <string name="osm_live_enter_user_name">Vă rugăm să introduceți Numele Public</string>
+    <string name="osm_live_thanks">Vă mulțumim pentru abonarea la actualizări live!</string>
+    <string name="osm_live_region_desc">O parte din donația d-voastră va fii trimisă către utilizatorii OSM care fac modificări pe harta din zonă</string>
+    <string name="osm_live_subscription_settings">Setări de abonament</string>
+    <string name="osm_live_ask_for_purchase">Vă rugăm să achiziționați mai întâi abonamentul OSM Live</string>
+
+    <string name="osm_live_header">Acest abonament permite actualizări orare pentru toate hărțile din întreaga lume. O mare parte din venit merge înapoi la comunitate OSM și va fii plătită fiecare contribuție OSM. În cazul în care vă plac OsmAnd și OSM și doriți să le susțineți, aceasta este o modalitate perfectă să o faceți.</string>
+    
+    <string name="select_map_marker">Selectați marcatorul pe hartă</string>
+    <string name="map_markers_other">Alți marcatori</string>
+    <string name="upload_anonymously">Încarcă anonim</string>
+    <string name="show_transparency_seekbar">Arată seekbar-ul transparent</string>
+    <string name="download_files_error_not_enough_space">Spațiu insuficient! E nevoie de {3} MB temporar și {1} MB permanent. În prezent, sunt doar {2} MB disponibili.</string>
+    <string name="download_files_question_space_with_temp">Sigur sunt {0} fișier(e) descărcate? Necesită {3} MB temporar și {1} MB permanent. În prezent sunt {2} MB disponibili.</string>
+    <string name="upload_osm_note_description">Nu puteți încărca anonim notele d-voastră OSM dacă folosiți profilul d-voastră OpenStreetMap.org</string>
+    <string name="upload_osm_note">Încărcați note OSM</string>
+    <string name="shared_string_toolbar">Bara de instrumente</string>
+    <string name="shared_string_widgets">Widget-uri (dispozitive mici)</string>
+    <string name="add_points_to_map_markers_q">Doriți să adăugați toate punctele la Map markers?</string>
+    <string name="shared_string_add_to_map_markers">Adaugă la Map markers</string>
+    <string name="select_map_markers">Selectează Map markers</string>
+    <string name="shared_string_reverse_order">Ordine inversă</string>
+    <string name="clear_active_markers_q">Doriți să ștergeți toate marcajele active?</string>
     </resources>
