@@ -202,7 +202,7 @@
 	<string name="online_map_settings_descr">Configurați sursele pentru hărțile online și raster</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">Arată setări pentru a configura un număr de hărți online sau hărți raster preîncărcate ca hartă de bază sau ca straturi ale hărții afișate. Aceste hărți pot fi pregătite offline și copiate în directorul Osmand data.</string>
+	<string name="osmand_rastermaps_plugin_description">"Cu acest plugin puteți accesa mai multe tipuri de hărți online(numite tile sau raster) "</string>
 	<string name="osmand_background_plugin_description">Arată setări pentru activarea navigării cu dispozitivul în standby (ecran închis/blocat) prin accesarea periodică a modulului GPS.</string>
 	<string name="osmand_accessibility_description">Arată setări pentru caracteristici speciale de accesibilitate.</string>
 	
@@ -760,7 +760,7 @@
 	<string name="search_history_int_streets">Intersecție: {0} x {1} în {2}</string>
 	<string name="search_history_building">Număr: {0}, {1}, {2}</string>
 	<string name="favorite">Favorite</string>
-	<string name="shared_string_clear_all">Șterge tot</string>
+	<string name="shared_string_clear_all">Curăță tot</string>
 	<string name="shared_string_history">Istoric</string>
 	<string name="uploading_data">Se încarcă date…</string>
 	<string name="uploading">Se încarcă…</string>
@@ -958,7 +958,7 @@
 	<string name="poi_dialog_comment_default">Editare POI</string>
 	<string name="poi_dialog_other_tags_message">Toate celelalte etichete sunt păstrate</string>
 	<string name="default_buttons_commit">Aplică</string>
-	<string name="shared_string_clear">Șterge</string>
+	<string name="shared_string_clear">Curăță</string>
 	<string name="filter_current_poiButton">Filtrează</string>
 	
 	<string name="edit_filter_save_as_menu_item">Salvează ca</string>
@@ -1184,8 +1184,8 @@
     <string name="recording_context_menu_precord">Faceți o poză</string>
     <string name="use_displayed_track_for_navigation">Doriți să utilizați traseul afișat pentru navigare?</string>
     <string name="keep_and_add_destination_point">Adaugă ca și punct destinație</string>
-    <string name="shared_string_select_on_map">Selectează pe hartă…</string>
-    <string name="shared_string_favorite">Favorite…</string>
+    <string name="shared_string_select_on_map">Selectează pe hartă</string>
+    <string name="shared_string_favorite">Favorite</string>
     <string name="routing_attr_prefer_motorway_name">Preferă autostrăzi</string>
 	<string name="routing_attr_prefer_motorway_description">Preferă autostrăzi</string>
 	<string name="routing_attr_short_way_name">Drum scurt</string>
@@ -1347,7 +1347,7 @@
     <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="points">Puncte</string>
-    <string name="shared_string_my_location">Locația mea</string>
+    <string name="shared_string_my_location">Poziția mea</string>
     
 	<string name="home_button">Acasă</string>
     
@@ -1386,7 +1386,7 @@
 	
 	<string name="map_update">Actualizări disponibile pentru %1$s hărţi</string>
 	<string name="search_for">Căutare pentru</string>
-	<string name="shared_string_show_all">ARATĂ TOATE</string>
+	<string name="shared_string_show_all">Arată tot</string>
 	<string name="coordinates">Coordonate</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Rute de tramvai și tren</string>
 	<string name="wake_on_voice">Pornește ecranul</string>
@@ -1423,7 +1423,7 @@
     <string name="gpx_timemoving">Timpul în mişcare: %1$s</string>
     <string name="gpx_file_is_empty">Traseul Gpx este gol</string>
     
-    <string name="shared_string_my_tracks">Toate traseele</string>
+    <string name="shared_string_my_tracks">Traseele mele</string>
     <string name="osmo_user_joined">Utilizatorul %1$s s-a alăturat grupului %2$s</string>
     <string name="osmo_user_left">Utilizatorul %1$s a părăsit grupul %2$s</string>
     <string name="osmo_show_group_notifications">Arată notificări ale grupului</string>
@@ -1437,7 +1437,7 @@
     
 <string name="navigation_intent_invalid">Format invalid: %s</string>
     <string name="osb_author_dialog_password">"Parolă OSM  (opţional)"</string>
-	<string name="shared_string_downloading">Se descarcă…</string>
+	<string name="shared_string_downloading">Se descarcă</string>
 	<string name="rendering_value_germanRoadAtlas_name">Atlas rutier german</string>
 	<string name="version_settings">Versiuni</string>
     <string name="rendering_attr_tramRoutes_name">Rute tramvai</string>
@@ -1832,4 +1832,36 @@
     <string name="osm_edits">Editări OSM</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
+    <string name="parking_place_limited">Timp de parcare limitat la</string>
+    <string name="osmand_parking_time_left">stânga</string>
+    <string name="your_edits">Editările tale</string>
+    <string name="waypoint_visit_after">Vizitează după</string>
+    <string name="waypoint_visit_before">Vizitează înainte</string>
+    <string name="simulate_your_location">Simulează poziția ta</string>
+    <string name="drawer">Lista lată</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">Întrebări frecvente, schimbări recente și altele</string>
+    <string name="routing_settings_2">Setări de navigație</string>
+    <string name="general_settings_2">Setări generale</string>
+    <string name="shared_string_ellipsis">…</string>
+    <string name="shared_string_do_not_use">Nu folosi</string>
+    <string name="shared_string_enable">Permite</string>
+    <string name="shared_string_disable">Dezactiv</string>
+    <string name="shared_string_enabled">Permis</string>
+    <string name="shared_string_disabled">Nepermis</string>
+    <string name="shared_string_deselect">Deselect</string>
+    <string name="shared_string_deselect_all">Deselect tot</string>
+    <string name="shared_string_share">Împărtășește</string>
+    <string name="shared_string_export">Export</string>
+    <string name="shared_string_unexpected_error">A apărut o eroare neașteptată</string>
+    <string name="shared_string_action_template">Acțiunea {0}</string>
+    <string name="shared_string_collapse">Căzut</string>
+    <string name="shared_string_address">Adresa</string>
+    <string name="shared_string_currently_recording_track">Acum se înregistrează un traseu</string>
+    <string name="shared_string_audio">Audio</string>
+    <string name="shared_string_video">Video</string>
+    <string name="shared_string_photo">Foto</string>
+    <string name="route_points">Puncte pe traseu</string>
+    <string name="track_segments">Segmente de traseu</string>
+    <string name="track_points">Puncte pe traseu</string>
     </resources>
