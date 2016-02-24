@@ -10,6 +10,28 @@ public final class Protocol {
 		public String month;
 		public RankingByMonth[] rows;
 	}
+	
+	public static class RankingUserByMonthResponse {
+		public String month;
+		public UserRankingByMonth[] rows;
+	}
+	
+	public static class RecipientsByMonth {
+		public String month;
+		public String message;
+		public float regionBtc;
+		public int regionCount;
+		public float regionPercentage;
+		public float btc;
+	}
+	
+	public static class UserRankingByMonth {
+		public String user ;
+		public int changes;
+		public int globalchanges;
+		public int rank;
+		public int grank;
+	}
 
 	// {"rank":"8","countUsers":"713","minChanges":"14","maxChanges":"18","avgChanges":"15.9845722300140252"}
 	public static class RankingByMonth {
@@ -26,4 +48,5 @@ public final class Protocol {
 		public int users;
 		public int changes;
 	}
+	
 }
