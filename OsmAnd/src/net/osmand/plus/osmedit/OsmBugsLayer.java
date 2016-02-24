@@ -251,9 +251,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			SITE_API = "http://api.openstreetmap.org/";
 		}
 	
-		List<OpenStreetNote> bugs = new ArrayList<OpenStreetNote>();
+		List<OpenStreetNote> bugs = new ArrayList<>();
 		StringBuilder b = new StringBuilder();
-		b.append(SITE_API + "api/0.6/notes?bbox="); //$NON-NLS-1$
+		b.append(SITE_API).append("api/0.6/notes?bbox="); //$NON-NLS-1$
 		b.append(leftLongitude); //$NON-NLS-1$
 		b.append(",").append(bottomLatitude); //$NON-NLS-1$
 		b.append(",").append(rightLongitude); //$NON-NLS-1$
@@ -301,15 +301,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			for (OpenStreetNote note : bugs) {
 				note.acquireDescriptionAndType();
 			}
-		} catch (IOException e) {
+		} catch (IOException | RuntimeException | XmlPullParserException e) {
 			log.warn("Error loading bugs", e); //$NON-NLS-1$
-		} catch (NumberFormatException e) {
-			log.warn("Error loading bugs", e); //$NON-NLS-1$
-		} catch (RuntimeException e) {
-			log.warn("Error loading bugs", e); //$NON-NLS-1$
-		} catch (XmlPullParserException e) {
-			log.warn("Error loading bugs", e); //$NON-NLS-1$
-		} 
+		}
 		return bugs;
 	}
 	
@@ -429,18 +423,18 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		OsmBugsUtil util = getOsmbugsUtil(bug);
 		final boolean offline =  util instanceof OsmBugsLocalUtil;
 		if(offline) {
-			view.findViewById(R.id.userNameEditText).setVisibility(View.GONE);
+			view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
 			view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
-			view.findViewById(R.id.passwordEditText).setVisibility(View.GONE);
+			view.findViewById(R.id.password_field).setVisibility(View.GONE);
 			view.findViewById(R.id.passwordEditTextLabel).setVisibility(View.GONE);
 		} else {
-			((EditText)view.findViewById(R.id.userNameEditText)).setText(getUserName());
-			((EditText)view.findViewById(R.id.passwordEditText)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
+			((EditText)view.findViewById(R.id.user_name_field)).setText(getUserName());
+			((EditText)view.findViewById(R.id.password_field)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		}
 		if(!Algorithms.isEmpty(text)) {
-			((EditText)view.findViewById(R.id.messageEditText)).setText(text);
+			((EditText)view.findViewById(R.id.message_field)).setText(text);
 		}
-		AndroidUtils.softKeyboardDelayed(view.findViewById(R.id.messageEditText));
+		AndroidUtils.softKeyboardDelayed(view.findViewById(R.id.message_field));
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View dialog) {
@@ -476,15 +470,15 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 	private String getTextAndUpdateUserPwd(final View view) {
 		String text = getMessageText(view);
-		String author = ((EditText)view.findViewById(R.id.userNameEditText)).getText().toString();
-		String pwd = ((EditText)view.findViewById(R.id.passwordEditText)).getText().toString();
+		String author = ((EditText)view.findViewById(R.id.user_name_field)).getText().toString();
+		String pwd = ((EditText)view.findViewById(R.id.password_field)).getText().toString();
 		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_NAME.set(author);
 		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_PASSWORD.set(pwd);
 		return text;
 	}
 
 	private String getMessageText(final View view) {
-		return ((EditText)view.findViewById(R.id.messageEditText)).getText().toString();
+		return ((EditText)view.findViewById(R.id.message_field)).getText().toString();
 	}
 	
 	public void refreshMap(){
@@ -553,7 +547,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		switch (id) {
 			case DIALOG_BUG:
 				prepareBugDialog(dialogBundle, dialog);
-				((EditText)dialog.findViewById(R.id.messageEditText)).setText("");
+				((EditText)dialog.findViewById(R.id.message_field)).setText("");
 				break;
 		}
 	}
@@ -567,9 +561,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		private double longitude;
 		private String description;
 		private String typeName;
-		private List<String> dates = new ArrayList<String>();
-		private List<String> comments = new ArrayList<String>();
-		private List<String> users = new ArrayList<String>();
+		private List<String> dates = new ArrayList<>();
+		private List<String> comments = new ArrayList<>();
+		private List<String> users = new ArrayList<>();
 		private long id;
 		private boolean opened;
 

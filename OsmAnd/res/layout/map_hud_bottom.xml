@@ -74,7 +74,9 @@
                 android:id="@+id/map_transparency_seekbar"
                 android:layout_width="@dimen/map_trans_seek_size"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"/>
 
             <ImageButton
                 android:id="@+id/map_transparency_hide"

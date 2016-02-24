@@ -637,11 +637,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference) {
-		MapControlsLayer.settingsToTransparency = transparenPreference;
-		if (isTransparencyBarEnabled) {
-			transparencyBarLayout.setVisibility(View.VISIBLE);
+		if (MapControlsLayer.settingsToTransparency != transparenPreference) {
+			MapControlsLayer.settingsToTransparency = transparenPreference;
+			if (isTransparencyBarEnabled) {
+				transparencyBarLayout.setVisibility(View.VISIBLE);
+			}
+			transparencyBar.setProgress(transparenPreference.get());
 		}
-		transparencyBar.setProgress(transparenPreference.get());
 	}
 
 	public void hideTransparencyBar(CommonPreference<Integer> transparentPreference) {
@@ -660,6 +662,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 				transparencyBarLayout.setVisibility(View.GONE);
 			}
 		}
+	}
+
+	public boolean isTransparencyBarInitialized() {
+		return settingsToTransparency != null;
 	}
 
 	private class MapHudButton {

@@ -439,8 +439,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	private static void updateTileSourceEditView(TileSourceTemplate ts, EditText name, final EditText urlToLoad, final EditText minZoom,
 												 final EditText maxZoom, EditText expire, final CheckBox elliptic) {
-		minZoom.setText(ts.getMinimumZoomSupported() + "");
-		maxZoom.setText(ts.getMaximumZoomSupported() + "");
+		minZoom.setText(String.valueOf(ts.getMinimumZoomSupported()));
+		maxZoom.setText(String.valueOf(ts.getMaximumZoomSupported()));
 		name.setText(ts.getName());
 		expire.setText(ts.getExpirationTimeMinutes() < 0 ? "" : ts.getExpirationTimeMinutes() + "");
 		urlToLoad.setText(ts.getUrlTemplate() == null ? "" :
@@ -470,7 +470,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		} else {
 			// Underlay expected
 			mapTypePreference = settings.MAP_UNDERLAY;
-			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
+			exMapTypePreference = settings.MAP_UNDERLAY_PREVIOUS;
 			map = underlayLayer.getMap();
 		}
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -28,7 +27,9 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -67,9 +68,24 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			Log.v(TAG, "in if1");
 			OsmPoint point = loadErrorsMap.keySet().iterator().next();
 			String message = loadErrorsMap.get(point);
-			DialogFragment dialogFragment =
-					UploadingErrorDialogFragment.getInstance(message, point);
-			dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
+			if (message.equals(activity.getString(R.string.auth_failed))) {
+				SendPoiDialogFragment dialogFragment =
+						SendPoiDialogFragment.createInstance(new OsmPoint[]{point});
+				if (activity instanceof MapActivity) {
+					dialogFragment.setPoiUploader(new SendPoiDialogFragment.SimpleProgressDialogPoiUploader() {
+						@NonNull
+						@Override
+						protected MapActivity getMapActivity() {
+							return (MapActivity) activity;
+						}
+					});
+				}
+				dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
+			} else {
+				DialogFragment dialogFragment =
+						UploadingErrorDialogFragment.getInstance(message, point);
+				dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
+			}
 		} else {
 			UploadingMultipleErrorDialogFragment dialogFragment =
 					UploadingMultipleErrorDialogFragment.createInstance(loadErrorsMap);
@@ -79,12 +95,11 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 	}
 
 	private static void showUploadItemsProgressDialog(Fragment fragment, OsmPoint[] toUpload) {
-		FragmentActivity activity = fragment.getActivity();
+		MapActivity activity = (MapActivity) fragment.getActivity();
 		OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(activity,
 				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
 
-		Resources resources = activity.getResources();
 		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
 				R.string.uploading,
 				R.string.local_openstreetmap_uploading,
@@ -111,20 +126,20 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 							getResources().getString(R.string.error_message_pattern), errorMessage))
 					.setPositiveButton(R.string.shared_string_ok, null);
 			builder.setNeutralButton(getResources().getString(R.string.delete_change),
-							new DialogInterface.OnClickListener() {
-								public void onClick(@Nullable DialogInterface dialog, int id) {
-									OsmEditingPlugin plugin =
-											OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
-									assert point != null;
-									assert plugin != null;
-									if (point.getGroup() == OsmPoint.Group.BUG) {
-										plugin.getDBBug().deleteAllBugModifications(
-												(OsmNotesPoint) point);
-									} else if (point.getGroup() == OsmPoint.Group.POI) {
-										plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
-									}
-								}
-							});
+					new DialogInterface.OnClickListener() {
+						public void onClick(@Nullable DialogInterface dialog, int id) {
+							OsmEditingPlugin plugin =
+									OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+							assert point != null;
+							assert plugin != null;
+							if (point.getGroup() == OsmPoint.Group.BUG) {
+								plugin.getDBBug().deleteAllBugModifications(
+										(OsmNotesPoint) point);
+							} else if (point.getGroup() == OsmPoint.Group.POI) {
+								plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
+							}
+						}
+					});
 			return builder.create();
 		}
 
