@@ -2117,4 +2117,20 @@
     <string name="map_markers_other">其它標記</string>
     <string name="upload_osm_note_description">如果您使用您的 OpenStreetMap.org 個人資料，您可以匿名上傳 OSM 註解。</string>
     <string name="show_transparency_seekbar">顯示透明度拖動軸</string>
+    <string name="donations">捐贈</string>
+    <string name="number_of_recipients">接受者數目</string>
+    <string name="osm_user_stat">編輯 %1$s，等級 %2$s，合計編輯 %2$s</string>
+    <string name="osm_editors_ranking">OSM 編輯排名</string>
+    <string name="osm_live_subscribe_btn">捐助</string>
+    <string name="osm_live_email_desc">我們需要它來為您提供關於捐款的資訊</string>
+    <string name="osm_live_user_public_name">公衆名稱</string>
+    <string name="osm_live_hide_user_name">不要在報告中顯示我的名稱</string>
+    <string name="osm_live_support_region">支援地區</string>
+    <string name="osm_live_month_cost">每月費用</string>
+    <string name="osm_live_month_cost_desc">每月付款</string>
+    <string name="osm_live_active">有效的</string>
+    <string name="osm_live_not_active">失效的</string>
+    <string name="osm_live_enter_email">請輸入有效的電子郵件地址</string>
+    <string name="osm_live_enter_user_name">請輸入公眾名稱</string>
+    <string name="osm_live_subscription_settings">認捐設定</string>
     </resources>
