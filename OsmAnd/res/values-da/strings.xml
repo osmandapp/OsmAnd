@@ -1440,7 +1440,7 @@
     <string name="osmo_enable_tracker">Send positioner</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
 
-    <string name="import_file_favourites">Gem punkter som en GPX-fil eller importer dem til favoritter?</string>
+    <string name="import_file_favourites">Gem data som en GPX-fil eller importer rutepunkter til Favoritter?</string>
 
     
     <string name="rendering_value_pink_name">Lyserød</string>
