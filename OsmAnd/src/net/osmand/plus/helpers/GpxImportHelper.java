@@ -67,11 +67,13 @@ public class GpxImportHelper {
 
 		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
 			handleKmlImport(intentUri, fileName, saveFile);
-		} else if (fileName != null && (fileName.contains("favourite")|| 
-				fileName.contains("favorite"))) {
-			handleFavouritesImport(intentUri, fileName, saveFile);
+//Issue 2275
+//		} else if (fileName != null && (fileName.contains("favourite")|| 
+//				fileName.contains("favorite"))) {
+//			handleFavouritesImport(intentUri, fileName, saveFile);
 		} else {
-			handleGpxImport(intentUri, fileName, saveFile);
+//			handleGpxImport(intentUri, fileName, saveFile);
+			handleFavouritesImport(intentUri, fileName, saveFile);
 		}
 	}
 
