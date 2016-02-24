@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit.dialogs;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,13 +10,24 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmBugsLayer;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.OsmEditsUploadListener;
+import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
 import net.osmand.plus.osmedit.OsmPoint;
+import net.osmand.plus.osmedit.UploadOpenstreetmapPointAsyncTask;
+
+import java.util.Map;
 
 public class SendPoiDialogFragment extends DialogFragment {
 	public static final String TAG = "SendPoiDialogFragment";
@@ -33,13 +45,15 @@ public class SendPoiDialogFragment extends DialogFragment {
 		final OsmPoint[] poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
-		final View messageEditTextLabel = view.findViewById(R.id.messageEditTextLabel);
 		final SwitchCompat uploadAnonymously = (SwitchCompat) view.findViewById(R.id.upload_anonymously_switch);
-		final EditText messageEditText = (EditText) view.findViewById(R.id.messageEditText);
-		final EditText userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
-		final EditText passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
+		final EditText messageEditText = (EditText) view.findViewById(R.id.message_field);
+		final EditText userNameEditText = (EditText) view.findViewById(R.id.user_name_field);
+		final EditText passwordEditText = (EditText) view.findViewById(R.id.password_field);
+		final View messageLabel = view.findViewById(R.id.message_label);
+		final View userNameLabel = view.findViewById(R.id.osm_user_name_label);
+		final View passwordLabel = view.findViewById(R.id.osm_user_password_label);
 		final CheckBox closeChangeSetCheckBox =
-				(CheckBox) view.findViewById(R.id.closeChangeSetCheckBox);
+				(CheckBox) view.findViewById(R.id.close_change_set_checkbox);
 		messageEditText.setText(comment);
 		final OsmandSettings settings = ((OsmandApplication) getActivity().getApplication())
 				.getSettings();
@@ -53,9 +67,18 @@ public class SendPoiDialogFragment extends DialogFragment {
 				break;
 			}
 		}
-		messageEditTextLabel.setVisibility(hasOsmPOI ? View.VISIBLE : View.GONE);
+		messageLabel.setVisibility(hasOsmPOI ? View.VISIBLE : View.GONE);
 		messageEditText.setVisibility(hasOsmPOI ? View.VISIBLE : View.GONE);
 		closeChangeSetCheckBox.setVisibility(hasOsmPOI ? View.VISIBLE : View.GONE);
+		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				userNameLabel.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+				userNameEditText.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+				passwordLabel.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+				passwordEditText.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+			}
+		});
 
 		final ProgressDialogPoiUploader progressDialogPoiUploader;
 		if (poiUploader != null) {
@@ -99,5 +122,37 @@ public class SendPoiDialogFragment extends DialogFragment {
 
 	public interface ProgressDialogPoiUploader {
 		void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously);
+	}
+
+	public static abstract class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploader {
+		@Override
+		public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
+			ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
+					R.string.uploading,
+					R.string.local_openstreetmap_uploading,
+					ProgressDialog.STYLE_HORIZONTAL);
+			final MapActivity mapActivity = getMapActivity();
+			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+			OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(mapActivity,
+					mapActivity.getString(R.string.local_openstreetmap_were_uploaded)) {
+				@Override
+				public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+					super.uploadEnded(loadErrorsMap);
+					mapActivity.getContextMenu().close();
+					OsmBugsLayer l = mapActivity.getMapView().getLayerByClass(OsmBugsLayer.class);
+					if(l != null) {
+						l.clearCache();
+						mapActivity.refreshMap();
+					}
+				}
+			};
+			dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
+			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
+					dialog, listener, plugin, points.length, closeChangeSet, anonymously);
+			uploadTask.execute(points);
+		}
+
+		@NonNull
+		abstract protected MapActivity getMapActivity();
 	}
 }

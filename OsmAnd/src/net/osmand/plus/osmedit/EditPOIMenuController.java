@@ -1,8 +1,8 @@
 package net.osmand.plus.osmedit;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.PointDescription;
@@ -10,14 +10,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
 import net.osmand.util.Algorithms;
-
-import java.util.Map;
 
 public class EditPOIMenuController extends MenuController {
 
@@ -31,30 +28,11 @@ public class EditPOIMenuController extends MenuController {
 		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
-		poiUploader = new ProgressDialogPoiUploader() {
+		poiUploader = new SendPoiDialogFragment.SimpleProgressDialogPoiUploader() {
+			@NonNull
 			@Override
-			public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
-				ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
-						R.string.uploading,
-						R.string.local_openstreetmap_uploading,
-						ProgressDialog.STYLE_HORIZONTAL);
-				OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getMapActivity(),
-						getMapActivity().getString(R.string.local_openstreetmap_were_uploaded)) {
-					@Override
-					public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
-						super.uploadEnded(loadErrorsMap);
-						getMapActivity().getContextMenu().close();
-						OsmBugsLayer l = getMapActivity().getMapView().getLayerByClass(OsmBugsLayer.class);
-						if(l != null) {
-							l.clearCache();
-							getMapActivity().refreshMap();
-						}
-					}
-				};
-				dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
-				UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-						dialog, listener, plugin, points.length, closeChangeSet, anonymously);
-				uploadTask.execute(points);
+			protected MapActivity getMapActivity() {
+				return mapActivity;
 			}
 		};
 
