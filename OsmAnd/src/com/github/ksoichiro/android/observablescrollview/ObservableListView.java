@@ -85,7 +85,20 @@ public class ObservableListView extends ListView implements Scrollable {
         init();
     }
 
-    @Override
+	public boolean isDragging() {
+		return mDragging;
+	}
+
+	public void clearParams() {
+		mPrevFirstVisiblePosition = 0;
+		mPrevFirstVisibleChildHeight = -1;
+		mPrevScrolledChildrenHeight = 0;
+		mPrevScrollY = 0;
+		mScrollY = 0;
+		mChildrenHeights = new SparseIntArray();
+	}
+
+	@Override
     public void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
         mPrevFirstVisiblePosition = ss.prevFirstVisiblePosition;
@@ -293,6 +306,7 @@ public class ObservableListView extends ListView implements Scrollable {
                     mScrollY = mPrevScrolledChildrenHeight - firstVisibleChild.getTop();
                     mPrevFirstVisiblePosition = firstVisiblePosition;
 
+					/*
                     mCallbacks.onScrollChanged(mScrollY, mFirstScroll, mDragging);
                     if (mFirstScroll) {
                         mFirstScroll = false;
@@ -306,8 +320,35 @@ public class ObservableListView extends ListView implements Scrollable {
                         mScrollState = ScrollState.STOP;
                     }
                     mPrevScrollY = mScrollY;
+                    */
                 }
             }
+        }
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (mCallbacks != null) {
+            //mScrollY = t;
+
+            mCallbacks.onScrollChanged(mScrollY + t, mFirstScroll, mDragging);
+            if (mFirstScroll) {
+                mFirstScroll = false;
+            }
+
+            if (mPrevScrollY < t) {
+                mScrollState = ScrollState.UP;
+            } else if (t < mPrevScrollY) {
+                mScrollState = ScrollState.DOWN;
+                //} else {
+                // Keep previous state while dragging.
+                // Never makes it STOP even if scrollY not changed.
+                // Before Android 4.4, onTouchEvent calls onScrollChanged directly for ACTION_MOVE,
+                // which makes mScrollState always STOP when onUpOrCancelMotionEvent is called.
+                // STOP state is now meaningless for ScrollView.
+            }
+            mPrevScrollY = t;
         }
     }
 
