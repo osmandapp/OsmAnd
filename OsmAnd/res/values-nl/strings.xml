@@ -1588,8 +1588,8 @@
     <string name="rendering_category_others">Overige kaart attributen</string>
     <string name="map_widget_appearance_rem">Resterende onderdelen</string>
     <string name="map_widget_top">Statusbalk</string>
-	<string name="map_widget_right">Rechter kolom</string>
-	<string name="map_widget_left">Linker kolom</string>
+	<string name="map_widget_right">Widgets Rechter Kolom</string>
+	<string name="map_widget_left">Widgets Linker Kolom</string>
 	<string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">In de buurt van</string>
     <string name="osmo_device_not_found">Apparaat niet gevonden</string>
@@ -2133,7 +2133,7 @@
     <string name="no_camera_permission">"OsmAnd heeft geen toestemming de camera  te gebruiken."</string>
     <string name="no_microphone_permission">OsmAnd heeft geen toestemming de microfoon te gebruiken.</string>
     <string name="select_voice_provider">Kies stembegeleiding</string>
-    <string name="select_voice_provider_descr">Stembegeleiding voor uw taal kiezen of downloaden</string>
+    <string name="select_voice_provider_descr">Stembegeleiding voor je taal kiezen of downloaden</string>
     <string name="impassable_road_desc">Kies wegen die niet gebruikt mogen worden</string>
     <string name="shared_string_sound">Stembegeleiding</string>
     <string name="live_updates">Live Updates</string>
@@ -2199,13 +2199,13 @@
     <string name="osm_live_active">Actief</string>
     <string name="osm_live_not_active">Niet Actief</string>
     <string name="osm_live_enter_email">Voer een geldig E-mailadres in</string>
-    <string name="osm_live_enter_user_name">Voer uw Openbare Naam in</string>
-    <string name="osm_live_thanks">Bedankt voor uw OSM Live Abonnement!</string>
-    <string name="osm_live_region_desc">De helft van uw bijdrage gaat naar OSM Medewerkers in deze Regio</string>
+    <string name="osm_live_enter_user_name">Voer je Openbare Naam in</string>
+    <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement!</string>
+    <string name="osm_live_region_desc">De helft van jouw bijdrage gaat naar OSM Medewerkers in deze Regio</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OSM Live Abonnement</string>
 
-    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. Een belangrijk deel van uw bijdrage gaat naar de OSM gemeenschap en wordt uitbetaald naar aantal OSM bewerkingen. Als je OsmAnd en OSM een wilt ondersteunen, is dit de perfecte manier om dat te doen.</string>
+    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. Een belangrijk deel van uw bijdrage gaat naar de OSM gemeenschap en wordt uitbetaald naar het aantal OSM bewerkingen. Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.</string>
     
     <string name="select_map_marker">Kies Markeervlaggetjes</string>
     <string name="map_markers_other">Andere Markeervlaggetjes</string>
