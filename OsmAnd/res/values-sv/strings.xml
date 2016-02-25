@@ -1378,7 +1378,7 @@
     <string name="arrival_distance_descr">Hur tidigt vill du höra ankomstmeddelandet?</string>
 
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder</string>
-    <string name="import_file_favourites">Spara punkter som GPX-fil eller importera dem till favoriter?</string>
+    <string name="import_file_favourites">Spara data som GPX-fil eller importera waypoints till favoriter?</string>
     <string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
     <string name="commiting_node">Skickar nod…</string>
     <string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned på tillgängligt spår.</string>
