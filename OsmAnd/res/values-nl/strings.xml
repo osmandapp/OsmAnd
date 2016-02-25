@@ -165,7 +165,7 @@
   
   
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
-  <string name="download_files_question_space">Vrije ruimte is nu {2} MB! Download {0} bestand(en) ({1} MB)?</string>
+  <string name="download_files_question_space">{0} bestand(en) downloaden? Hiervoor is {1} MB vrije ruimte nodig. Er is nu {2} MB beschikbaar!</string>
   
   
   <string name="use_transparent_map_theme">Transparant thema</string>
@@ -1399,7 +1399,7 @@
     <string name="osmo_enable_tracker">Verstuur mijn posities</string>
     <string name="osmo_control">OsMo snelle toegang</string>
     
-	<string name="import_file_favourites">Punten bewaren als GPX-bestand of importeren in favorieten?</string>
+	<string name="import_file_favourites">Gegevens als GPX-bestand opslaan of importeren naar Favorieten?</string>
 	
 	
 	<string name="rendering_value_pink_name">Roze</string>
@@ -2184,4 +2184,50 @@
     <string name="find_parking">Zoek parkeerplaats</string>
     <string name="rendering_attr_showMtbRoutes_name">Toon MTB-routes</string>
     <string name="shared_string_reverse_order">Volgorde omdraaien</string>
+    <string name="donations">Donaties</string>
+    <string name="number_of_recipients">Aantal Ontvangers</string>
+    <string name="osm_user_stat">%1$s bewerkingen, Rang %2$s, Wereldwijd: %3$s bewerkingen</string>
+    <string name="osm_editors_ranking">Ranking OSM Medewerkers</string>
+    <string name="osm_live_subscription">OSM Live Abonnement</string>
+    <string name="osm_live_subscribe_btn">Abonneren</string>
+    <string name="osm_live_email_desc">Om je op de hoogte te houden over je abonnement</string>
+    <string name="osm_live_user_public_name">Openbare Naam</string>
+    <string name="osm_live_hide_user_name">Naam niet weergeven in verslagen</string>
+    <string name="osm_live_support_region">Ondersteunde Regio</string>
+    <string name="osm_live_month_cost">Maandelijkse Kosten</string>
+    <string name="osm_live_month_cost_desc">Abonnementskosten per maand</string>
+    <string name="osm_live_active">Actief</string>
+    <string name="osm_live_not_active">Niet Actief</string>
+    <string name="osm_live_enter_email">Voer een geldig E-mailadres in</string>
+    <string name="osm_live_enter_user_name">Voer uw Openbare Naam in</string>
+    <string name="osm_live_thanks">Bedankt voor uw OSM Live Abonnement!</string>
+    <string name="osm_live_region_desc">De helft van uw bijdrage gaat naar OSM Medewerkers in deze Regio</string>
+    <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
+    <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OSM Live Abonnement</string>
+
+    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. Een belangrijk deel van uw bijdrage gaat naar de OSM gemeenschap en wordt uitbetaald naar aantal OSM bewerkingen. Als je OsmAnd en OSM een wilt ondersteunen, is dit de perfecte manier om dat te doen.</string>
+    
+    <string name="select_map_marker">Kies Markeervlaggetjes</string>
+    <string name="map_markers_other">Andere Markeervlaggetjes</string>
+    <string name="upload_anonymously">Anoniem Uploaden</string>
+    <string name="show_transparency_seekbar">Toon Transparantie-schuif op kaart</string>
+    <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! Tijdelijk is {3} MB nodig en permanent {1} MB. Nu is maar {2} MB beschikbaar.</string>
+    <string name="download_files_question_space_with_temp">{0} bestanden downloaden? Tijdelijk is {3} MB nodig en permanent {1} MB. Er is nu maar {2} MB beschikbaar.</string>
+    <string name="upload_osm_note_description">Je kunt OSM Opmerkingen anoniem uploaden of je OpenStreetMap.org profiel gebruiken.</string>
+    <string name="upload_osm_note">OSM Opmerking Uploaden</string>
+    <string name="map_marker_1st">Eerste Markeervlaggetje</string>
+    <string name="map_marker_2nd">Tweede Markeervlaggetje</string>
+    <string name="shared_string_toolbar">Werkbalk</string>
+    <string name="shared_string_widgets">Widgets</string>
+    <string name="add_points_to_map_markers_q">Alle Punten als Markeervlaggetje toevoegen?</string>
+    <string name="shared_string_add_to_map_markers">aan Markeervlaggetjes toevoegen</string>
+    <string name="select_map_markers">Kies Markeervlaggetjes</string>
+    <string name="show_map_markers_description">Activeer Markeervlaggetjes-toepassing</string>
+    <string name="clear_active_markers_q">Alle Actieve Markeervlaggetjes verwijderen?</string>
+    <string name="clear_markers_history_q">Geschiedenis Markeervlaggetjes verwijderen?</string>
+    <string name="active_markers">Actieve Markeervlaggetjes</string>
+    <string name="map_markers">Markeervlaggetjes</string>
+    <string name="map_marker">Markeervlaggetje</string>
+    <string name="consider_turning_polygons_off">Het wordt aanbevolen om Vlakken te verbergen.</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd+ Kaarten &amp; Navigatie - Plaatsen vinden en routes berekenen zonder internetverbinding. Eenvoudig kaarten downloaden van alle landen wereldwijd voor je op reis gaat. Basisfuncties: • Gedetailleerde kaarten van 200 landen • Offline navigatie met gesproken aanwijzingen • Offline adressen zoeken • Offline informatie over bezienswaardigheden, café\'s, parkeerplaatsen, winkels enz. • Locaties als Favoriet opslaan • Navigatie voor Auto, Fiets en Wandelen Aanvullende mogelijkheden: • GPX-tracks tonen en opnemen • Wikipedia informatie van plaatsen en interessepunten • Foto-Video en Audio-Notities maken  •   Dag en Nachtmode voor veilig autorijden • Openbaar Vervoer: haltes en lijnen tonen • Fiets en Wandelroutes • Online kaarten weergeven uit diverse bronnen • Informatie over straatkwaliteit en verlichtging • Interessepunten aanmaken, wijzigen en verwijderen door OpenStreetMap.org gebruikers • OsMo - Live andere apparaten volgen Een betrouwbare Navigatietoepassing voor uw land: Frankrijk, Duitsland, Mexico, Verenigd Koninkrijk, Spanje, Nederland, Verenigde Staten van Amerika, Rusland, Brazilië of welk ander land ook. Plugins: Hoogtelijnen en reliëf https://goo.gl/7mojP8 Hoogtelijnen en reliëfschaduw wordt aan de standaard OsmAnd-kaart toegevoegd • Ski-kaarten https://goo.gl/pX6DxJ Informatie over skipistes, langlaufen, kabelbanen en skiliften • Nautische kaarten https://goo.gl/0hEdxm Speciale kaart met nautische informatie voor binnenvaart en kustvaart • Parkeerplaats https://goo.gl/6JxQXF Markeer de locatie van je geparkeerde auto en hou de parkeertijd bij. Meer functies zijn in ontwikkeling! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Website: http://osmand.net Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support@osmand.net. "</string>
     </resources>
