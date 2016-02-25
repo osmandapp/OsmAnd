@@ -444,7 +444,7 @@
     <string name="routing_settings">Navigation</string>
 
     <string name="download_files_not_enough_space">Der er ikke ledig plads nok til at hente %1$s MB (Ledig: %2$s).</string>
-    <string name="download_files_question_space">Virkelig hente {0} fil(er)? Dette krævet {1} MB permanent. I øjeblikket, er der {2} MB til rådighed.</string>
+    <string name="download_files_question_space">Hent {0} filer? Har brug for {1} MB permanent. I øjeblikket er {2} MB til rådighed.</string>
 
     <string name="use_transparent_map_theme">Gennemsigtigt tema</string>
     <string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
@@ -2289,17 +2289,17 @@
     <string name="map_marker_2nd">Anden kortmarkør</string>
     <string name="shared_string_toolbar">Værktøjslinie</string>
     <string name="shared_string_widgets">Moduler</string>
-    <string name="download_files_error_not_enough_space">Ikke nok plads! Dette skulle {3} MB midlertidigt og {1} MB permanent. I øjeblikket, er der kun {2} MB tilgængelig.</string>
-    <string name="download_files_question_space_with_temp">Virkelig hente {0} fil(er)? Dette kræver {3} MB midlertidigt og {1} MB permanent. I øjeblikket, er der {2} MB til rådighed.</string>
+    <string name="download_files_error_not_enough_space">Ikke plads nok! Har brug for {3} MB midlertidigt og {1} MB permanent. I øjeblikket, er kun {2} MB tilgængelig.</string>
+    <string name="download_files_question_space_with_temp">Hent {0} filer? Har brug for {3} MB midlertidigt og {1} MB permanent. I øjeblikket er {2} MB til rådighed.</string>
     <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
 <string name="upload_osm_note_description">Du kan overføre din OSM Note anonymt hvis du bruger din OpenStreetMap.org profil.</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
     <string name="map_markers_other">Andre markører</string>
-    <string name="show_transparency_seekbar">Vis gennemsigtig søgefelt</string>
+    <string name="show_transparency_seekbar">Vis felt for gennemsigtig</string>
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal modtagere</string>
-    <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, samlede redigeringer %3$s</string>
+    <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
     <string name="osm_editors_ranking">OSM redaktører rangering</string>
     <string name="osm_live_subscription">OSM Live-abonnement</string>
     <string name="osm_live_subscribe_btn">Tilmeld</string>
@@ -2307,17 +2307,17 @@
     <string name="osm_live_user_public_name">Offentligt navn</string>
     <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
     <string name="osm_live_support_region">Support region</string>
-    <string name="osm_live_month_cost">Månedlig omkostning</string>
+    <string name="osm_live_month_cost">Månedlige omkostninger</string>
     <string name="osm_live_month_cost_desc">Månedlig betaling</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
-    <string name="osm_live_enter_email">Indtast gyldig email adresse</string>
+    <string name="osm_live_enter_email">Indtast gyldig e-mail adresse</string>
     <string name="osm_live_enter_user_name">Indtast offentligt navn</string>
     <string name="osm_live_thanks">Tak for at abonnere på live opdateringer!</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugerne, som sender ændringer til kortet i den pågældende region</string>
-    <string name="osm_live_subscription_settings">Abonnement indstillinger</string>
-    <string name="osm_live_ask_for_purchase">Køb ført OSM Live-abonnement</string>
+    <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
+    <string name="osm_live_ask_for_purchase">Køb først OSM Live-abonnement</string>
 
-    <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. Hvis du fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
+    <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
     
     </resources>
