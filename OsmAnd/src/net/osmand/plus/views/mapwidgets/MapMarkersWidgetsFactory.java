@@ -12,8 +12,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -22,6 +20,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.DistanceToPointInfoControl;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -55,11 +55,7 @@ public class MapMarkersWidgetsFactory {
 	private ImageButton moreButton2nd;
 
 	private MapMarker marker;
-	private int markerColorIndex = -1;
-	private String markerDistText;
 	private MapMarker marker2nd;
-	private int markerColorIndex2nd = -1;
-	private String markerDistText2nd;
 
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
@@ -281,112 +277,66 @@ public class MapMarkersWidgetsFactory {
 
 		if (firstLine) {
 			this.marker = marker;
-			markerColorIndex = marker.colorIndex;
-			if (txt != null) {
-				markerDistText = txt;
-			}
 		} else {
 			this.marker2nd = marker;
-			markerColorIndex2nd = marker.colorIndex;
-			if (txt != null) {
-				markerDistText2nd = txt;
-			}
 		}
 
 	}
 
-	public TextInfoWidget createMapMarkerControl(final MapActivity map) {
-		final TextInfoWidget mapMarkerControl = new TextInfoWidget(map) {
+	public TextInfoWidget createMapMarkerControl(final MapActivity map, final boolean firstMarker) {
+		DistanceToPointInfoControl ctrl = new DistanceToPointInfoControl(map, 0, 0) {
 			private int cachedMarkerColorIndex = -1;
-			private String cachedMarkerDistText;
 
 			@Override
-			public boolean updateInfo(DrawSettings d) {
-				if (markerColorIndex != -1 && markerDistText != null) {
-					boolean res = false;
-					if (markerColorIndex != cachedMarkerColorIndex) {
+			public LatLon getPointToNavigate() {
+				MapMarker marker = getMarker();
+				if (marker != null) {
+					return marker.point;
+				}
+				return null;
+			}
+
+			private MapMarker getMarker() {
+				List<MapMarker> markers = helper.getSortedMapMarkers();
+				if (firstMarker) {
+					if (markers.size() > 0) {
+						return markers.get(0);
+					}
+				} else {
+					if (markers.size() > 1) {
+						return markers.get(1);
+					}
+				}
+				return null;
+			}
+
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				MapMarker marker = getMarker();
+				if (marker == null) {
+					setText(null, null);
+					return false;
+				}
+				boolean res = super.updateInfo(drawSettings);
+
+				if (marker.colorIndex != -1) {
+					if (marker.colorIndex != cachedMarkerColorIndex) {
 						setImageDrawable(map.getMyApplication().getIconsCache()
 								.getIcon(R.drawable.widget_marker_day,
-										MapMarkerDialogHelper.getMapMarkerColorId(markerColorIndex)));
-						cachedMarkerColorIndex = markerColorIndex;
-						res = true;
+										MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex)));
+						cachedMarkerColorIndex = marker.colorIndex;
 					}
-					if (!markerDistText.equals(cachedMarkerDistText)) {
-						int ls = markerDistText.lastIndexOf(' ');
-						if (ls == -1) {
-							setText(markerDistText, null);
-						} else {
-							setText(markerDistText.substring(0, ls), markerDistText.substring(ls + 1));
-						}
-						cachedMarkerDistText = markerDistText;
-						res = true;
-					}
-					return res;
-
-				} else if (cachedMarkerDistText != null) {
-					cachedMarkerColorIndex = -1;
-					cachedMarkerDistText = null;
-					setText(null, null);
-					return true;
 				}
-				return false;
+				return res;
+			}
+
+			@Override
+			protected void click(OsmandMapTileView view) {
+				showMarkerOnMap(firstMarker ? 0 : 1);
 			}
 		};
-		mapMarkerControl.setText(null, null);
-		mapMarkerControl.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showMarkerOnMap(0);
-			}
-		});
-		return mapMarkerControl;
-	}
-
-	public TextInfoWidget createMapMarkerControl2nd(final MapActivity map) {
-		final TextInfoWidget mapMarkerControl = new TextInfoWidget(map) {
-			private int cachedMarkerColorIndex = -1;
-			private String cachedMarkerDistText;
-
-			@Override
-			public boolean updateInfo(DrawSettings d) {
-				if (markerColorIndex2nd != -1 && markerDistText2nd != null) {
-					boolean res = false;
-					if (markerColorIndex2nd != cachedMarkerColorIndex) {
-						setImageDrawable(map.getMyApplication().getIconsCache()
-								.getIcon(R.drawable.widget_marker_day,
-										MapMarkerDialogHelper.getMapMarkerColorId(markerColorIndex2nd)));
-						cachedMarkerColorIndex = markerColorIndex2nd;
-						res = true;
-					}
-					if (!markerDistText2nd.equals(cachedMarkerDistText)) {
-						int ls = markerDistText2nd.lastIndexOf(' ');
-						if (ls == -1) {
-							setText(markerDistText2nd, null);
-						} else {
-							setText(markerDistText2nd.substring(0, ls), markerDistText2nd.substring(ls + 1));
-						}
-						cachedMarkerDistText = markerDistText2nd;
-						res = true;
-					}
-					return res;
-
-				} else if (cachedMarkerDistText != null) {
-					cachedMarkerColorIndex = -1;
-					cachedMarkerDistText = null;
-					setText(null, null);
-					return true;
-				}
-				return false;
-			}
-		};
-		mapMarkerControl.setText(null, null);
-		mapMarkerControl.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showMarkerOnMap(1);
-			}
-		});
-		return mapMarkerControl;
+		ctrl.setAutoHide(false);
+		return ctrl;
 	}
 
 	public boolean isLandscapeLayout() {

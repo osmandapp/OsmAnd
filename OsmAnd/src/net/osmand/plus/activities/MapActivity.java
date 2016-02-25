@@ -251,7 +251,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
 			FailSafeFuntions.restoreRoutingMode(this);
 		} else if (app.getSettings().USE_MAP_MARKERS.get()
-				&& !app.getRoutingHelper().isRoutePlanningMode() && app.getTargetPointsHelper().getAllPoints().size() > 0) {
+				&& !app.getRoutingHelper().isRoutePlanningMode()
+				&& !settings.FOLLOW_THE_ROUTE.get()
+				&& app.getTargetPointsHelper().getAllPoints().size() > 0) {
 			app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
 			app.getTargetPointsHelper().removeAllWayPoints(false);
 		}

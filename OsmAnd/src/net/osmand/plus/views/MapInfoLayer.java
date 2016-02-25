@@ -124,9 +124,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(time, R.drawable.ic_action_time, R.string.map_widget_time, "time", false, 10);
 
 		if (settings.USE_MAP_MARKERS.get()) {
-			TextInfoWidget marker = mwf.createMapMarkerControl(map);
+			TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
 			registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 11);
-			TextInfoWidget marker2nd = mwf.createMapMarkerControl2nd(map);
+			TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
 			registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 12);
 		}
 
