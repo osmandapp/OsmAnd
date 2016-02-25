@@ -2128,4 +2128,6 @@
     <string name="upload_osm_note">Pošlji Opombo OSM</string>
     <string name="upload_anonymously">Pošlji brezimno</string>
 <string name="show_transparency_seekbar">Pokaži prosojno iskalno vrstico</string>
+    <string name="donations">Donacije</string>
+    <string name="osm_live_subscribe_btn">Naročanje</string>
     </resources>
