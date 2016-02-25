@@ -2273,7 +2273,7 @@
     <string name="underlay_transparency">Underlejringsgennemsigtighed</string>
     <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
     <string name="show_map_markers">Kortmarkører</string>
-    <string name="show_map_markers_description">Aktivér kortmarkører funktion</string>
+    <string name="show_map_markers_description">Aktivér kortmarkører</string>
     <string name="clear_active_markers_q">Slet alle aktive markører?</string>
     <string name="clear_markers_history_q">Slet markørhistoriken?</string>
     <string name="active_markers">Aktive markører</string>
@@ -2293,10 +2293,10 @@
     <string name="download_files_question_space_with_temp">Hent {0} filer? Har brug for {3} MB midlertidigt og {1} MB permanent. I øjeblikket er {2} MB til rådighed.</string>
     <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
-<string name="upload_osm_note_description">Du kan overføre din OSM Note anonymt hvis du bruger din OpenStreetMap.org profil.</string>
+<string name="upload_osm_note_description">Overfør OSM-noter anonymt hvis OpenStreetMap.org profilen bruges.</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
     <string name="map_markers_other">Andre markører</string>
-    <string name="show_transparency_seekbar">Vis felt for gennemsigtig</string>
+    <string name="show_transparency_seekbar">Vis glider for gennemsigtighed</string>
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal modtagere</string>
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
@@ -2314,7 +2314,7 @@
     <string name="osm_live_enter_email">Indtast gyldig e-mail adresse</string>
     <string name="osm_live_enter_user_name">Indtast offentligt navn</string>
     <string name="osm_live_thanks">Tak for at abonnere på live opdateringer!</string>
-    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugerne, som sender ændringer til kortet i den pågældende region</string>
+    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i den pågældende region</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
     <string name="osm_live_ask_for_purchase">Køb først OSM Live-abonnement</string>
 
