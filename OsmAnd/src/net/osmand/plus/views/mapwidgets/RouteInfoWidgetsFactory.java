@@ -385,11 +385,14 @@ public class RouteInfoWidgetsFactory {
 		private final OsmandMapTileView view;
 		private float[] calculations = new float[1];
 		private int cachedMeters;
+		private boolean autoHide = true;
 
 		public DistanceToPointInfoControl(MapActivity ma, int res, int resNight) {
 			super(ma);
 			this.view = ma.getMapView();
-			setIcons(res, resNight);
+			if (res != 0 && resNight != 0) {
+				setIcons(res, resNight);
+			}
 			setText(null, null);
 			setOnClickListener(new View.OnClickListener() {
 
@@ -399,7 +402,15 @@ public class RouteInfoWidgetsFactory {
 				}
 			});
 		}
-		
+
+		public boolean isAutoHide() {
+			return autoHide;
+		}
+
+		public void setAutoHide(boolean autoHide) {
+			this.autoHide = autoHide;
+		}
+
 		protected void click(final OsmandMapTileView view) {
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 			LatLon pointToNavigate = getPointToNavigate();
@@ -414,7 +425,7 @@ public class RouteInfoWidgetsFactory {
 			int d = getDistance();
 			if (distChanged(cachedMeters, d)) {
 				cachedMeters = d;
-				if (cachedMeters <= 20) {
+				if (autoHide && cachedMeters <= 20) {
 					cachedMeters = 0;
 					setText(null, null);
 				} else {
