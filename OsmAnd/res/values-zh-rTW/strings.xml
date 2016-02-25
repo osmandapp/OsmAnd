@@ -2138,4 +2138,6 @@
     <string name="osm_live_region_desc">您的捐助將發送給 OSM，使用者將送交更改到該地區的地圖</string>
     <string name="osm_live_ask_for_purchase">請先購買 OSM 即時捐助</string>
 
+    <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。收入的主要部分回到 OSM 社群和支付每個 OSM 的貢獻。假如您喜愛 OsmAnd 和 OSM 並且想要支援它，這是一個完美方式的作法。</string>
+    
     </resources>
