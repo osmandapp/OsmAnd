@@ -1164,7 +1164,7 @@
     <string name="osmo_conn_successfull">Vytvorené spojenie: %1$s </string>
     <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
     <string name="osmo_settings_debug">Informácie pre ladenie</string>
-    <string name="import_file_favourites">Uložiť body ako súbor GPX alebo ich importovať do obľúbených?</string>
+    <string name="import_file_favourites">Uložiť údaje ako súbor GPX alebo importovať body cesty do Obľúbených?</string>
     
     <string name="rendering_value_pink_name">ružová</string>
     
@@ -1964,4 +1964,28 @@
     <string name="map_marker">Mapová značka</string>
     <string name="consider_turning_polygons_off">Odporúča sa vypnúť zobrazovanie polygónov.</string>
     <string name="upload_anonymously">Odoslať anonymne</string>
-</resources>
+<string name="donations">Príspevky</string>
+    <string name="number_of_recipients">Počet príjemcov</string>
+    <string name="osm_user_stat">Počet úprav %1$s, pozícia %2$s, celkový počet úprav %3$s</string>
+    <string name="osm_editors_ranking">Pozícia medzi editormi OSM</string>
+    <string name="osm_live_subscription">Registrácia v OSM</string>
+    <string name="osm_live_subscribe_btn">Registrovať</string>
+    <string name="osm_live_email_desc">Potrebujeme to na poskytnutie informácií o príspevkoch</string>
+    <string name="osm_live_user_public_name">Verejné meno</string>
+    <string name="osm_live_hide_user_name">Nezobrazovať moje meno v reportoch</string>
+    <string name="osm_live_support_region">Región podpory</string>
+    <string name="osm_live_month_cost">Mesačná cena</string>
+    <string name="osm_live_month_cost_desc">Mesačná platba</string>
+    <string name="osm_live_active">Aktívne</string>
+    <string name="osm_live_not_active">Neaktívne</string>
+    <string name="osm_live_enter_email">Prosím zadajte platnú e-mailovú adresu</string>
+    <string name="osm_live_enter_user_name">Prosím zadajte verejné meno</string>
+    <string name="osm_live_thanks">Ďakujeme za registrovanie na okamžité aktualizácie!</string>
+    <string name="osm_live_region_desc">Časť príspevkov bude zaslaná používateľom OSM, ktorí upravujú mapu v danom regióne</string>
+    <string name="osm_live_subscription_settings">Nastavenia registrácie</string>
+    <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Naživo</string>
+
+    <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých má sveta. Veľká časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena. Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob.</string>
+    
+    <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
+    </resources>
