@@ -202,6 +202,16 @@ public class MapMarkersHelper {
 		return list;
 	}
 
+	public List<LatLon> getSelectedMarkersLatLon() {
+		List<LatLon> list = new ArrayList<>();
+		for (MapMarker m : this.mapMarkers) {
+			if (m.selected) {
+				list.add(m.point);
+			}
+		}
+		return list;
+	}
+
 	public List<LatLon> getMarkersHistoryLatLon() {
 		List<LatLon> list = new ArrayList<>();
 		for (MapMarker m : this.mapMarkersHistory) {
