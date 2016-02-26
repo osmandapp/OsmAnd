@@ -86,7 +86,9 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		final ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
 		List<MapMarker> markers = getMyApplication().getMapMarkersHelper().getActiveMapMarkers();
 		if (markers.size() > 0) {
-			adapter.addAll(markers);
+			for (MapMarker marker : markers) {
+				adapter.add(marker);
+			}
 		}
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -62,7 +62,9 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		final ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
 		if (countryItems.size() > 0) {
-			adapter.addAll(countryItems);
+			for (CountryItem item : countryItems) {
+				adapter.add(item);
+			}
 		}
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

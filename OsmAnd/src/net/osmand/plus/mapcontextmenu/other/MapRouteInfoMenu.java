@@ -676,7 +676,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
 		RouteSpinnerArrayAdapter fromAdapter = new RouteSpinnerArrayAdapter(view.getContext());
-		fromAdapter.addAll(fromActions);
+		for (RouteSpinnerRow row : fromActions) {
+			fromAdapter.add(row);
+		}
 		fromSpinner.setAdapter(fromAdapter);
 		if (start != null) {
 			fromSpinner.setSelection(startPos);
@@ -730,7 +732,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		addMarkersToSpinner(toActions);
 
 		RouteSpinnerArrayAdapter toAdapter = new RouteSpinnerArrayAdapter(view.getContext());
-		toAdapter.addAll(toActions);
+		for (RouteSpinnerRow row : toActions) {
+			toAdapter.add(row);
+		}
 		toSpinner.setAdapter(toAdapter);
 		return toSpinner;
 	}

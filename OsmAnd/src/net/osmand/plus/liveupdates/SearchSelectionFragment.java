@@ -31,9 +31,13 @@ public abstract class SearchSelectionFragment extends BaseOsmAndDialogFragment {
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		final ArrayAdapter<String> adapter = new ListAdapter(getActivity(), getListItemIcon());
 		if (getArray() != null) {
-			adapter.addAll(getArray());
+			for (String s : getArray()) {
+				adapter.add(s);
+			}
 		} else if (getList() != null) {
-			adapter.addAll(getList());
+			for (String s : getList()) {
+				adapter.add(s);
+			}
 		} else {
 			throw new RuntimeException("Either getArray() or getList() must return non null value.");
 		}

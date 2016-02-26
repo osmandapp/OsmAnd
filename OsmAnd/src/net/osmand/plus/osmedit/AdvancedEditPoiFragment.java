@@ -250,14 +250,18 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 
 		public void setTagData(String[] tags) {
 			tagAdapter.clear();
-			tagAdapter.addAll(tags);
+			for (String s : tags) {
+				tagAdapter.add(s);
+			}
 			tagAdapter.sort(String.CASE_INSENSITIVE_ORDER);
 			tagAdapter.notifyDataSetChanged();
 		}
 
 		public void setValueData(String[] values) {
 			valueAdapter.clear();
-			valueAdapter.addAll(values);
+			for (String s : values) {
+				valueAdapter.add(s);
+			}
 			valueAdapter.sort(String.CASE_INSENSITIVE_ORDER);
 			valueAdapter.notifyDataSetChanged();
 		}

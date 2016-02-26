@@ -67,7 +67,9 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 			if(items.isEmpty()) {
 				dlgFragment.dismissAllowingStateLoss();
 			}
-			addAll(context.getDownloadThread().getCurrentDownloadingItems());
+			for (IndexItem item : context.getDownloadThread().getCurrentDownloadingItems()) {
+				add(item);
+			}
 		}
 
 		@Override

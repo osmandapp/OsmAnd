@@ -41,7 +41,11 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 
 			@Override
 			public void onResponse(RankingUserByMonthResponse response) {
-				adapter.addAll(Arrays.asList(response.rows));
+				if (response != null && response.rows != null) {
+					for (UserRankingByMonth rankingByMonth : response.rows) {
+						adapter.add(rankingByMonth);
+					}
+				}
 				view.findViewById(R.id.progress).setVisibility(View.GONE);
 			}
 		});
