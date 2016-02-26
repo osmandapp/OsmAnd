@@ -483,7 +483,7 @@ public class FavouritesDbHelper {
 		cachedFavoritePoints = temp;
 	}
 	
-	private void sortAll() {
+	public void sortAll() {
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		Collections.sort(favoriteGroups, new Comparator<FavoriteGroup>() {

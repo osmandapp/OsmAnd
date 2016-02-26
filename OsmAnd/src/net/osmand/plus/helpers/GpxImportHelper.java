@@ -182,6 +182,7 @@ public class GpxImportHelper {
 					favoritesHelper.deleteFavourite(favourite, false);
 					favoritesHelper.addFavourite(favourite, false);
 				}
+				favoritesHelper.sortAll();
 				favoritesHelper.saveCurrentPointsIntoFile();
 				return null;
 			}
