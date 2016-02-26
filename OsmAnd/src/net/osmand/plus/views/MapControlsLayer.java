@@ -37,6 +37,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -90,6 +91,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapHudButton mapZoomIn;
 	private MapHudButton layersHud;
 	private long lastZoom;
+	private boolean hasTargets;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -363,12 +365,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				doRoute();
+				doRoute(false);
 			}
 		});
 	}
 
-	public void doRoute() {
+	public void doRoute(boolean hasTargets) {
+		this.hasTargets = hasTargets;
 		if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			onNavigationClick();
 		} else {
@@ -387,13 +390,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			if (settings.USE_MAP_MARKERS.get()) {
+			if (settings.USE_MAP_MARKERS.get() && !hasTargets) {
 				mapActivity.getMapActions().setFirstMapMarkerAsTarget();
 			}
-			mapActivity.getMapActions().enterRoutePlanningMode(null, null);
+			TargetPoint start = getTargets().getPointToStart();
+			if (hasTargets && start != null) {
+				mapActivity.getMapActions().enterRoutePlanningMode(
+						new LatLon(start.getLatitude(), start.getLongitude()), start.getOriginalPointDescription());
+			} else {
+				mapActivity.getMapActions().enterRoutePlanningMode(null, null);
+			}
 		} else {
 			showRouteInfoControlDialog();
 		}
+		hasTargets = false;
 	}
 
 

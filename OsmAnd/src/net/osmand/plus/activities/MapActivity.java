@@ -1210,6 +1210,13 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 					top = Math.max(top, l.getLatitude());
 					bottom = Math.min(bottom, l.getLatitude());
 				}
+				List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+				for (TargetPoint l : targetPoints) {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
 
 				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
 				int tileBoxWidthPx = 0;

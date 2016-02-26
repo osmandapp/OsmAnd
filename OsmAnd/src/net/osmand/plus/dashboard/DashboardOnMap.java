@@ -51,6 +51,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -581,8 +582,36 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		routeButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.getMapLayers().getMapControlsLayer().doRoute();
+				boolean hasTargets = false;
+				if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
+					TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
+					MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+					List<MapMarker> markers = markersHelper.getSelectedMarkers();
+					if (markers.size() > 0) {
+						int i = 0;
+						if (markersHelper.isStartFromMyLocation()) {
+							targetPointsHelper.clearStartPoint(false);
+						} else {
+							MapMarker m = markers.get(i++);
+							targetPointsHelper.setStartPoint(new LatLon(m.getLatitude(), m.getLongitude()),
+									false, m.getPointDescription(mapActivity));
+						}
+						List<TargetPoint> targetPoints = new ArrayList<>();
+						for (int k = i; k < markers.size(); k++) {
+							MapMarker m = markers.get(k);
+							TargetPoint t = new TargetPoint(new LatLon(m.getLatitude(), m.getLongitude()),
+									m.getPointDescription(mapActivity));
+							targetPoints.add(t);
+						}
+						targetPointsHelper.reorderAllTargetPoints(targetPoints, false);
+						hasTargets = true;
+					} else {
+						targetPointsHelper.clearStartPoint(false);
+						targetPointsHelper.clearPointToNavigate(false);
+					}
+				}
 				hideDashboard();
+				mapActivity.getMapLayers().getMapControlsLayer().doRoute(hasTargets);
 			}
 		};
 
@@ -700,6 +729,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		if (visible == this.visible && type == visibleType) {
 			return;
 		}
+		mapActivity.getRoutingHelper().removeListener(this);
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		this.previousVisibleType = prevItem;
 		this.visible = visible;
@@ -712,6 +742,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		DashboardOnMap.staticVisible = visible;
 		DashboardOnMap.staticVisibleType = type;
 		mapActivity.enableDrawer();
+
+		getMyApplication().getMapMarkersHelper().removeListener(this);
+		if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
+			mapActivity.refreshMap();
+		}
+		if (swipeDismissListener != null) {
+			swipeDismissListener.discardUndo();
+		}
+
 		if (visible) {
 			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
@@ -721,11 +760,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			mapActivity.disableDrawer();
 			dashboardView.setVisibility(View.VISIBLE);
-			if (visibleType == DashboardType.MAP_MARKERS || previousVisibleType == DashboardType.MAP_MARKERS_SELECTION) {
-				if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
-					mapActivity.refreshMap();
-				}
-			}
 			if (isActionButtonVisible()) {
 				setActionButton(visibleType);
 				actionButton.setVisibility(View.VISIBLE);
@@ -777,14 +811,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 //			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
 		} else {
-			if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
-				getMyApplication().getMapMarkersHelper().removeListener(this);
-				mapActivity.getMapLayers().getMapMarkersLayer().clearRoute();
-			}
-			if (swipeDismissListener != null) {
-				swipeDismissListener.discardUndo();
-			}
-			mapActivity.getRoutingHelper().removeListener(this);
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
 

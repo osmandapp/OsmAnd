@@ -84,7 +84,8 @@ public class MapMarkersHelper {
 
 	public MapMarkersHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
-		this.settings = ctx.getSettings();
+		settings = ctx.getSettings();
+		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
 		readFromSettings();
 	}
 
@@ -94,6 +95,7 @@ public class MapMarkersHelper {
 
 	public void setStartFromMyLocation(boolean startFromMyLocation) {
 		this.startFromMyLocation = startFromMyLocation;
+		settings.ROUTE_MAP_MARKERS_START_MY_LOC.set(startFromMyLocation);
 	}
 
 	private void readFromSettings() {
@@ -201,6 +203,16 @@ public class MapMarkersHelper {
 
 	public List<MapMarker> getMapMarkersHistory() {
 		return mapMarkersHistory;
+	}
+
+	public List<MapMarker> getSelectedMarkers() {
+		List<MapMarker> list = new ArrayList<>();
+		for (MapMarker m : this.mapMarkers) {
+			if (m.selected) {
+				list.add(m);
+			}
+		}
+		return list;
 	}
 
 	public List<LatLon> getActiveMarkersLatLon() {

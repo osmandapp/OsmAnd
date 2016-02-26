@@ -1156,6 +1156,8 @@ public class OsmandSettings {
 		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, MapMarkersMode.TOOLBAR);
 	}
 
+	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference("route_map_markers_start_my_loc", false).makeGlobal().cache();
+
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
 		String tileName = MAP_TILE_SOURCES.get();
 		if (tileName != null) {
