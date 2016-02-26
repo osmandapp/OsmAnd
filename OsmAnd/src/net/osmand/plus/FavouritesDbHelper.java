@@ -166,8 +166,8 @@ public class FavouritesDbHelper {
 			cachedFavoritePoints.add(p);
 		}
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
 			sortAll();
+			saveCurrentPointsIntoFile();
 		}
 
 		return true;
