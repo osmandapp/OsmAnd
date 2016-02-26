@@ -13,6 +13,7 @@ import android.os.Message;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -169,8 +170,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		route.addAll(points);
 	}
 
-	public void clearRoute() {
+	public boolean clearRoute() {
+		boolean res = route.size() > 0;
 		route.clear();
+		return res;
 	}
 
 	@Override
@@ -220,9 +223,17 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
+		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		if (route.size() > 0) {
 			path.reset();
 			boolean first = true;
+			Location myLocation = map.getMapViewTrackingUtilities().getMyLocation();
+			if (markersHelper.isStartFromMyLocation() && myLocation != null) {
+				int locationX = tb.getPixXFromLonNoRot(myLocation.getLongitude());
+				int locationY = tb.getPixYFromLatNoRot(myLocation.getLatitude());
+				path.moveTo(locationX, locationY);
+				first = false;
+			}
 			for (LatLon point : route) {
 				int locationX = tb.getPixXFromLonNoRot(point.getLongitude());
 				int locationY = tb.getPixYFromLatNoRot(point.getLatitude());
@@ -236,7 +247,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			canvas.drawPath(path, paint);
 		}
 
-		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getActiveMapMarkers();
 		for (int i = 0; i < activeMapMarkers.size(); i++) {
 			MapMarker marker = activeMapMarkers.get(i);

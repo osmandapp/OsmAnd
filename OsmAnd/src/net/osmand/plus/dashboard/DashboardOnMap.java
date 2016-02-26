@@ -721,6 +721,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			mapActivity.disableDrawer();
 			dashboardView.setVisibility(View.VISIBLE);
+			if (visibleType == DashboardType.MAP_MARKERS || previousVisibleType == DashboardType.MAP_MARKERS_SELECTION) {
+				if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
+					mapActivity.refreshMap();
+				}
+			}
 			if (isActionButtonVisible()) {
 				setActionButton(visibleType);
 				actionButton.setVisibility(View.VISIBLE);
@@ -1394,9 +1399,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				} else if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 					List<MapMarker> markers = (List<MapMarker>) (Object) items;
 					getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, null);
-					if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
-						showMarkersRouteOnMap();
-					}
+					reloadAdapter();
 				}
 
 				if (swipeDismissListener != null) {
@@ -1472,6 +1475,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			OsmandMapTileView mapView = mapActivity.getMapView();
 			double left = 0, right = 0;
 			double top = 0, bottom = 0;
+			if (getMyApplication().getMapMarkersHelper().isStartFromMyLocation() && myLocation != null) {
+				left = myLocation.getLongitude();
+				right = myLocation.getLongitude();
+				top = myLocation.getLatitude();
+				bottom = myLocation.getLatitude();
+			}
 			for (LatLon l : points) {
 				if (left == 0) {
 					left = l.getLongitude();

@@ -21,6 +21,7 @@ public class MapMarkersHelper {
 	private OsmandSettings settings;
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private OsmandApplication ctx;
+	private boolean startFromMyLocation;
 
 	public interface MapMarkerChangedListener {
 		void onMapMarkerChanged(MapMarker mapMarker);
@@ -85,6 +86,14 @@ public class MapMarkersHelper {
 		this.ctx = ctx;
 		this.settings = ctx.getSettings();
 		readFromSettings();
+	}
+
+	public boolean isStartFromMyLocation() {
+		return startFromMyLocation;
+	}
+
+	public void setStartFromMyLocation(boolean startFromMyLocation) {
+		this.startFromMyLocation = startFromMyLocation;
 	}
 
 	private void readFromSettings() {
