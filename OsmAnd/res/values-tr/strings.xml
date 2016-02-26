@@ -641,7 +641,7 @@
 		
 	
 	
-	<string name="download_files_question_space">Boş alan artık {2} MB! İndirme {0} dosya (lar) ({1} MB)?</string>
+	<string name="download_files_question_space">Gerçekten {0} dosyaları download? Bu {1} MB kalıcı olarak ihtiyacı var. Şu anda kullanılabilir (2) MB vardır.</string>
 	 
 	
 	<string name="use_transparent_map_theme">Şeffaf tema</string>
@@ -1572,7 +1572,7 @@
 	<string name="update_poi_is_not_available_for_zoom">Güncelleniyor küçük yakınlaştırma düzeyleri için geçerli değildir</string>
 	<string name="context_menu_item_update_poi">Güncelleme POI</string>
 	<string name="fav_imported_sucessfully">Favoriler başarıyla içe aktarıldı</string>
-	<string name="import_file_favourites">GPX dosyası olarak puan kaydedin veya sık bunları ithal?</string>
+	<string name="import_file_favourites">Veri GPX dosyası olarak kaydetmek veya yol işaretleri için sık kullanılanları almak?</string>
 	<string name="fav_file_to_load_not_found">Sık Kullanılanlar içeren GPX dosyası {0} bulunamadı</string>
 	<string name="share_fav_subject">Sık Osmand üzerinden paylaşılan</string>
 	<string name="layer_osm_bugs">(Çevrimiçi) OSM Notları</string>
@@ -2047,7 +2047,7 @@
     <string name="shared_string_email_address">E-mail Adresi</string>
     <string name="rendering_attr_hideUnderground_name">Yeraltı nesneleri gizle</string>
     <string name="shared_string_read_more">Daha fazla bilgi edinin</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd haritalar ve navigasyon - güzergah ve internet bağlantısı olmadan harita üzerinde konumları bulmak. Yerler ve yolları içinde yabancı bir alan bulmak için bir geziye gitmeden önce bir ülkenin bir harita yükleme. Temel seçenekleri: • 200 ülkenin detaylı haritaları • çevrimdışı Navigasyon ses ile ister çevrimdışı modu • bilgi haritada konumları hakkında • adres arama: faiz, kafeterya, otoparklar, Sık Kullanılanlar •, Bisiklet yaya sürüş için mağazaları • ekleme konumları yerlerin gezinti ek seçenekleri: • Beceri görüntülemek ve GPX kaydetmek için parça • Wikipedia açıklaması POI • ekleme fotoğraf, ses, ve harita • gündüz ve gece için video notları göster modları için daha uygun sürüş • toplu taşıma hakkında bilgi yönlendirir ve • bisiklet yolları ve patikalar • yürüyüş parkurları turizm Dünya • Online haritalar çok sayıda kaynakları • yol kaldırım kalite ve sokak aydınlatma • hakkında bilgi: her yerinde durur ekleme, düzenleme ve silme OsMo - canlı izleme diğer cihazlar olsun güvenilir bir navigasyon POI (OpenStreetMap.org kullanıcılar için) • senin ülke - Fransa olmak , Almanya, Meksika, İngiltere, İspanya, Hollanda, ABD, Rusya, Brezilya veya başka bir devlet. Eklentiler: • kontur haritaları ve arazi gölgelendirme https://goo.gl/7mojP8 kontur satır veri ve arazi görselleştirme temel OsmAnd harita ekledi. • Kayak https://goo.gl/pX6DxJ Kayak pistes, Kayak parça, kablo demiryolları ve teleferik hakkında bilgi: eşler. • Deniz harita https://goo.gl/0hEdxm kullan görüntülemek için özel harita stil arter ve nearshore deniz navigasyon için imzalar. • Https://goo.gl/6JxQXF Park pozisyonu park edilmiş aracınızın konumunu işaretlemek ve sol ne kadar zaman zaman sınırlı park yeri görmek yardımcı olur. Bizi izlemeye devam edin! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Site: http://osmand.net OsmAnd uygulama, yardıma ihtiyacınız varsa lütfen destek ekibimizle iletişime geçin: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd haritalar ve navigasyon - harita konumları bulmak ve Internet bağlantısı olmadan güzergah hesaplamak. Yerler ve yolları içinde yabancı bir alan bulmak için bir geziye gitmeden önce bir ülkenin bir harita yükleme. Temel seçenekleri: • detaylı haritalar 200 ülke • çevrimdışı Navigator ses ile ister çevrimdışı modu • bilgi haritada konumları hakkında • adres arama: faiz, kafeterya, otoparklar, Sık Kullanılanlar •, Bisiklet ve yaya sürüş için mağazaları • ekleme konumları yerlerin gezinti ek seçenekleri: • Beceri görüntülemek ve GPX kaydetmek için parça • Wikipedia açıklaması POI • ekleme fotoğraf, ses, ve harita • gündüz ve gece için video notları göster modları için daha uygun sürüş • toplu taşıma hakkında bilgi yönlendirir ve • bisiklet yolları ve patikalar • yürüyüş parkurları turizm Dünya • Online haritalar çok sayıda kaynakları • yol kaldırım kalite ve sokak aydınlatma • hakkında bilgi: her yerinde durur ekleme, düzenleme ve silme OsMo - canlı izleme diğer cihazlar olsun güvenilir bir navigator POI (OpenStreetMap.org kullanıcılar için) • senin ülke - Fransa olmak , Almanya, Meksika, İngiltere, İspanya, Hollanda, ABD, Rusya, Brezilya veya başka bir devlet. Eklentiler: • kontur haritaları ve arazi gölgelendirme https://goo.gl/7mojP8 kontur satır veri ve arazi görselleştirme temel OsmAnd harita ekledi. • Kayak https://goo.gl/pX6DxJ Kayak pistes, Kayak parça, kablo demiryolları ve teleferik hakkında bilgi: eşler. • Deniz harita https://goo.gl/0hEdxm kullan görüntülemek için özel harita stil arter ve nearshore deniz navigasyon için imzalar. • Park pozisyonu https://goo.gl/6JxQXF park edilmiş aracınızın konumunu işaretlemek ve sol ne kadar zaman zaman sınırlı park yeri görmek yardımcı olur. Bizi izlemeye devam edin! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Site: http://osmand.net OsmAnd uygulama, yardıma ihtiyacınız varsa lütfen destek ekibimizle: support@osmand.net. "</string>
     <string name="show_polygons">Çokgenleri göster</string>
     <string name="underlay_transparency">Şeffaflık altına koymak</string>
     <string name="find_parking">Bir park yeri bulmak</string>
@@ -2068,4 +2068,35 @@
     <string name="map_markers">Harita işaretleri</string>
     <string name="map_marker">Harita işareti</string>
     <string name="consider_turning_polygons_off">Bu çokgenler işleme kapalı açmak için tavsiye edilir.</string>
+    <string name="donations">Bağışlar</string>
+    <string name="number_of_recipients">Alıcıların sayısı</string>
+    <string name="osm_user_stat">% 1 $ s , rütbe % 2 $ s , toplam düzenlemeleri % 3 $ s düzenler</string>
+    <string name="osm_editors_ranking">OSM editörler sıralaması</string>
+    <string name="osm_live_subscription">OSM Live abonelik</string>
+    <string name="osm_live_subscribe_btn">Abone</string>
+    <string name="osm_live_email_desc">Katkıları hakkında bilgi sağlamak için gerek</string>
+    <string name="osm_live_user_public_name">Ortak adı</string>
+    <string name="osm_live_hide_user_name">Benim adımı raporlarda gösterme</string>
+    <string name="osm_live_support_region">Destek bölgesi</string>
+    <string name="osm_live_month_cost">Ay maliyeti</string>
+    <string name="osm_live_month_cost_desc">Aylık ödeme</string>
+    <string name="osm_live_active">Aktif</string>
+    <string name="osm_live_not_active">Etkin olmayan</string>
+    <string name="osm_live_enter_email">Geçerli e-posta adresi giriniz</string>
+    <string name="osm_live_enter_user_name">Lütfen genel adı girin</string>
+    <string name="osm_live_thanks">Canlı güncellemeler için abone için teşekkür ederiz!</string>
+    <string name="osm_live_region_desc">Bağış bu bölgede harita değişiklikleri gönder OSM kullanıcılara gönderilecek bölümü</string>
+    <string name="osm_live_subscription_settings">Abonelik ayarları</string>
+    <string name="osm_live_ask_for_purchase">Lütfen ilk olarak OSM canlı abonelik satın alın</string>
+
+    <string name="osm_live_header">Bu abonelik saat güncelleştirmek için dünyanın her yerinden tüm haritalar sağlar. Gelir büyük bir kısmını OSM topluma geri gider ve her OSM katkı ödenir. Dibi OsmAnd ve OSM seviyorum ve bu destek vermek isteyen, mükemmel bir yolu bu.</string>
+    
+    <string name="select_map_marker">Harita işaretleyiciyi seçin</string>
+    <string name="map_markers_other">Diğer işaretleri</string>
+    <string name="upload_anonymously">Anonim yükle</string>
+    <string name="show_transparency_seekbar">Şeffaflık seekbar göster</string>
+    <string name="download_files_error_not_enough_space">Yeterli alan yok! Bu kalıcı olarak {3} MB geçici olarak ve {1} MB gerekir. Şu anda, orada sadece (2 MB) mevcuttur.</string>
+    <string name="download_files_question_space_with_temp">Gerçekten {0} dosyaları download? Bu {3} MB geçici olarak ve {1} MB kalıcı olarak ihtiyacı var. Şu anda kullanılabilir (2) MB vardır.</string>
+    <string name="upload_osm_note_description">OpenStreetMap.org profil kullanıyorsanız OSM notunuzu anonim karşıya yükleyebilirsiniz.</string>
+    <string name="upload_osm_note">OSM Not yükle</string>
     </resources>
