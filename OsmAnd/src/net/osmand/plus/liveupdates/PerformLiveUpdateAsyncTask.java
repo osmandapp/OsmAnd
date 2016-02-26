@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -29,11 +30,14 @@ public class PerformLiveUpdateAsyncTask
 		extends AsyncTask<String, Object, IncrementalChangesManager.IncrementalUpdateList> {
 	private final static Log LOG = PlatformUtil.getLog(PerformLiveUpdateAsyncTask.class);
 
+	@NonNull
 	private final Context context;
+	@NonNull
 	private final LocalIndexInfo localIndexInfo;
 	private final boolean forceUpdate;
 
-	public PerformLiveUpdateAsyncTask(Context context, LocalIndexInfo localIndexInfo,
+	public PerformLiveUpdateAsyncTask(@NonNull Context context,
+									  @NonNull LocalIndexInfo localIndexInfo,
 									  boolean forceUpdate) {
 		this.context = context;
 		this.localIndexInfo = localIndexInfo;
@@ -127,8 +131,9 @@ public class PerformLiveUpdateAsyncTask
 		}
 	}
 
-	public static void tryRescheduleDownload(Context context, OsmandSettings settings,
-											 LocalIndexInfo localIndexInfo) {
+	public static void tryRescheduleDownload(@NonNull Context context,
+											 @NonNull OsmandSettings settings,
+											 @NonNull LocalIndexInfo localIndexInfo) {
 		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(localIndexInfo, settings);
 		final Integer frequencyOrdinal = updateFrequencyPreference.get();
