@@ -61,36 +61,5 @@
         android:layout_marginRight="16dp"
         android:text="@string/close_changeset"/>
 
-    <TextView
-        android:id="@+id/osm_user_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/user_name"/>
-
-    <EditText
-        android:id="@+id/user_name_field"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
-
-
-    <TextView
-        android:id="@+id/osm_user_password_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/user_password"/>
-
-    <EditText
-        android:id="@+id/password_field"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:inputType="textPassword"/>
+    <include layout="@layout/osm_user_login_details"/>
 </LinearLayout>

@@ -2070,7 +2070,7 @@
     <string name="consider_turning_polygons_off">Bu çokgenler işleme kapalı açmak için tavsiye edilir.</string>
     <string name="donations">Bağışlar</string>
     <string name="number_of_recipients">Alıcıların sayısı</string>
-    <string name="osm_user_stat">% 1 $ s , rütbe % 2 $ s , toplam düzenlemeleri % 3 $ s düzenler</string>
+    <string name="osm_user_stat">%1$s , rütbe %2$s , toplam düzenlemeleri %3$s düzenler</string>
     <string name="osm_editors_ranking">OSM editörler sıralaması</string>
     <string name="osm_live_subscription">OSM Live abonelik</string>
     <string name="osm_live_subscribe_btn">Abone</string>
