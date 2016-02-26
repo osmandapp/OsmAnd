@@ -833,8 +833,8 @@
   <string name="osmand_parking_warning">Brīdinājums</string>
   <string name="osmand_parking_warning_text">Kalendārā jau ir pievienota norāde par auto izņemšanu no stāvvietas. Tā paliks līdz brīdim, kamēr jūs to neizdzēsīsiet.</string>
   <string name="osmand_parking_time_limit_title">Uzstādīt noparkošanas laika limitu</string>
-  <string name="osmand_parking_delete_confirm">Vai noņemt parkošanās marķieri uz kartes?</string>
-  <string name="osmand_parking_delete">Noņemt parkošanās marķieri</string>
+  <string name="osmand_parking_delete_confirm">Vai noņemt stāvvietas (P) atzīmi uz kartes?</string>
+  <string name="osmand_parking_delete">Stāvvieta</string>
   <string name="osmand_parking_choose_type">Izvēlieties parkošanās veidu</string>
   <string name="osmand_parking_lim_text">Uz ierobežotu laiku</string>
   <string name="osmand_parking_no_lim_text">Uz neierobežotu laiku</string>
@@ -1096,9 +1096,9 @@
     <string name="monitoring_settings_descr">GPX failā vai sekošanai tīklā</string>
     
     
-    <string name="choose_osmand_theme_descr">Krāsu izvēle saskarsmei</string>
+    <string name="choose_osmand_theme_descr">Mainīt aplikācijas vizuālo izskatu</string>
     <string name="choose_osmand_theme">Aplikācijas motīvs</string>
-    <string name="accessibility_options">Pieejamības opcijas</string>
+    <string name="accessibility_options">Pieejamība</string>
     <string name="select_address_activity">Atlasīt adresi</string>
     <string name="favourites_list_activity">Atlasīt favorītu</string>
     <string name="local_openstreetmap_act_title">OSM modifikācijas</string>
@@ -1667,7 +1667,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_map_names">Vietējie nosaukumi</string>
     <string name="lang_sw">Svahili</string>
     <string name="forward">Uz priekšu</string>
-    <string name="home">Mājas</string>
+    <string name="home">Mana izvēlne</string>
     <string name="live_monitoring_m_descr">Sūtīt sekošanas datus uz doto tīkla servisu, ja ir iespējots GPX ieraksts.</string>
 	<string name="live_monitoring_m">Sekošana tīklā (no GPX ieraksta)</string>
     <string name="live_monitoring_start">Sākt sekošanu tīklā</string>
@@ -1856,7 +1856,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="nautical_maps_missing">Lai attēlotu kuģošanas karti, tā ir atsevišķi jālejupielādē</string>
 	<string name="edit_group">Labot grupu</string>
     <string name="parking_place">Stāvvieta</string>
-    <string name="remove_the_tag">NOŅEMT TAGU</string>
+    <string name="remove_the_tag">Dzēst atzīmi</string>
     <string name="gps_status">GPS statuss</string>
     <string name="version_settings_descr">Lejupielādēt nakts būvējumus</string>
     <string name="version_settings">Būvējumi</string>
