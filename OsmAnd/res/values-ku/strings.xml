@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
@@ -87,4 +87,9 @@
     <string name="email">E-Peyamê</string>
     <string name="edit_filter_save_as_menu_item">Ciyawaz tênivîsîn</string>
     <string name="shared_string_remove">Helanîn</string>
-    </resources>
+    <string name="donations">Bexş bike</string>
+    <string name="osm_live_subscribe_btn">Abonetiyê</string>
+    <string name="osm_live_active">Çalak</string>
+    <string name="osm_live_not_active">Neçalak e</string>
+    <string name="reports_for">Ji bo raporkirina</string>
+</resources>
