@@ -1,18 +1,5 @@
 package net.osmand.plus.liveupdates;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
-
-import org.apache.commons.logging.Log;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +23,19 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
+
+import org.apache.commons.logging.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class ReportsFragment extends BaseOsmAndFragment implements CountrySelectionFragment.OnFragmentInteractionListener {
 	public static final String TITLE = "Report";
@@ -72,13 +72,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	private TextView numberOfRecipientsTitle;
 	private TextView donationsTitle;
 	private ProgressBar progressBar;
+	private View dividerToHide;
 
 	private int inactiveColor;
 	private int textColorPrimary;
 	private int textColorSecondary;
-	
-	
-	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +87,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		montReportsSpinner.setAdapter(monthsForReportsAdapter);
 		
 		view.findViewById(R.id.show_all).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://osmand.net/osm_live"));
@@ -120,7 +118,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 			}
 		};
 		view.findViewById(R.id.numberOfContributorsLayout).setOnClickListener(listener);
-		view.findViewById(R.id.numberOfEditsLayout).setOnClickListener(listener);;
+		view.findViewById(R.id.numberOfEditsLayout).setOnClickListener(listener);
 
 		countrySelectionFragment.initCountries(getMyApplication());
 		selectedCountryItem = countrySelectionFragment.getCountryItems().get(0);
@@ -153,6 +151,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		editsTextView = (TextView) view.findViewById(R.id.editsTextView);
 		donationsTextView = (TextView) view.findViewById(R.id.donationsTextView);
 		recipientsTextView = (TextView) view.findViewById(R.id.recipientsTextView);
+
+		dividerToHide = view.findViewById(R.id.divider_to_hide);
 
 		requestAndUpdateUi();
 
@@ -352,6 +352,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		donationsTitle.setTextColor(inactiveColor);
 		
 		progressBar.setVisibility(View.VISIBLE);
+		dividerToHide.setVisibility(View.GONE);
 		
 		contributorsTextView.setTextColor(inactiveColor);
 		donationsTextView.setTextColor(inactiveColor);
@@ -370,7 +371,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfRecipientsTitle.setTextColor(textColorSecondary);
 		donationsTitle.setTextColor(textColorSecondary);
 		
-		progressBar.setVisibility(View.INVISIBLE);
+		progressBar.setVisibility(View.GONE);
+		dividerToHide.setVisibility(View.VISIBLE);
 		
 		contributorsTextView.setTextColor(textColorPrimary);
 		editsTextView.setTextColor(textColorPrimary);

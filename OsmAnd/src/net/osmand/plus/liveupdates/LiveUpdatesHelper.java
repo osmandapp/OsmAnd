@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -67,10 +68,9 @@ public class LiveUpdatesHelper {
 	}
 
 	public static String getNameToDisplay(LocalIndexInfo child, OsmandActionBarActivity activity) {
-		String mapName = FileNameTranslationHelper.getFileName(activity,
+		return FileNameTranslationHelper.getFileName(activity,
 				activity.getMyApplication().getResourceManager().getOsmandRegions(),
 				child.getFileName());
-		return mapName;
 	}
 
 	public static String formatDateTime(Context ctx, long dateTime) {
@@ -79,7 +79,8 @@ public class LiveUpdatesHelper {
 		return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 	}
 
-	public static PendingIntent getPendingIntent(Context context, LocalIndexInfo localIndexInfo) {
+	public static PendingIntent getPendingIntent(@NonNull Context context,
+												 @NonNull LocalIndexInfo localIndexInfo) {
 		Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
 		final File file = new File(localIndexInfo.getFileName());
 		final String fileName = Algorithms.getFileNameWithoutExtension(file);
@@ -118,7 +119,7 @@ public class LiveUpdatesHelper {
 		return calendar.getTimeInMillis();
 	}
 
-	public static enum TimeOfDay {
+	public enum TimeOfDay {
 		MORNING(R.string.morning),
 		NIGHT(R.string.night);
 		private final int localizedId;
@@ -138,7 +139,7 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static enum UpdateFrequency {
+	public enum UpdateFrequency {
 		HOURLY(R.string.hourly, AlarmManager.INTERVAL_HOUR),
 		DAILY(R.string.daily, AlarmManager.INTERVAL_DAY),
 		WEEKLY(R.string.weekly, AlarmManager.INTERVAL_DAY * 7);
@@ -160,6 +161,6 @@ public class LiveUpdatesHelper {
 
 	public static void runLiveUpdate(Context context, final LocalIndexInfo info, boolean forceUpdate) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new PerformLiveUpdateAsyncTask(context, info, forceUpdate).execute(new String[]{fnExt});
+		new PerformLiveUpdateAsyncTask(context, info, forceUpdate).execute(fnExt);
 	}
 }
