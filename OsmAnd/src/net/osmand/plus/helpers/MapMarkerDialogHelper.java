@@ -76,8 +76,8 @@ public class MapMarkerDialogHelper {
 
 	public interface MapMarkersDialogHelperCallbacks {
 		void reloadAdapter();
-
 		void deleteMapMarker(int position);
+		void showMarkersRouteOnMap();
 	}
 
 	public MapMarkerDialogHelper(MapActivity mapActivity) {
@@ -126,6 +126,9 @@ public class MapMarkerDialogHelper {
 						checkBox.setChecked(!checkBox.isChecked());
 						marker.selected = checkBox.isChecked();
 						markersHelper.updateMapMarker(marker, false);
+						if (helperCallbacks != null) {
+							helperCallbacks.showMarkersRouteOnMap();
+						}
 					} else {
 						if (!marker.history) {
 							showMarkerOnMap(mapActivity, marker);

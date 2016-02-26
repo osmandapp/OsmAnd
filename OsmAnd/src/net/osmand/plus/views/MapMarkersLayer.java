@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -12,7 +13,6 @@ import android.os.Message;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -26,6 +26,7 @@ import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection {
@@ -56,6 +57,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Paint bitmapPaintDestPurple;
 	private Bitmap arrowToDestination;
 	private float[] calculations = new float[2];
+
+	private Paint paint;
+	private Path path;
+	private List<LatLon> route = new ArrayList<>();
 
 	private LatLon fingerLocation;
 	private boolean hasMoved;
@@ -93,6 +98,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestYellow = createPaintDest(R.color.marker_yellow);
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
+
+		path = new Path();
+		paint = new Paint();
+		paint.setStyle(Paint.Style.STROKE);
+		paint.setStrokeWidth(7 * view.getDensity());
+		paint.setAntiAlias(true);
+		paint.setStrokeCap(Paint.Cap.ROUND);
+		paint.setStrokeJoin(Paint.Join.ROUND);
+		paint.setColor(map.getResources().getColor(R.color.marker_red));
+		paint.setAlpha(200);
 
 		widgetsFactory = new MapMarkersWidgetsFactory(map);
 	}
@@ -149,6 +164,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
+	public void setRoute(List<LatLon> points) {
+		route.clear();
+		route.addAll(points);
+	}
+
+	public void clearRoute() {
+		route.clear();
+	}
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
@@ -194,6 +218,22 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (tb.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			return;
+		}
+
+		if (route.size() > 0) {
+			path.reset();
+			boolean first = true;
+			for (LatLon point : route) {
+				int locationX = tb.getPixXFromLonNoRot(point.getLongitude());
+				int locationY = tb.getPixYFromLatNoRot(point.getLatitude());
+				if (first) {
+					path.moveTo(locationX, locationY);
+					first = false;
+				} else {
+					path.lineTo(locationX, locationY);
+				}
+			}
+			canvas.drawPath(path, paint);
 		}
 
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();

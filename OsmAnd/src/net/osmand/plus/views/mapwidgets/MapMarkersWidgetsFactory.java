@@ -169,7 +169,8 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public boolean isTopBarVisible() {
-		return topBar.getVisibility() == View.VISIBLE;
+		return topBar.getVisibility() == View.VISIBLE
+				&& map.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 	}
 
 	public void updateInfo(LatLon customLocation, int zoom) {
