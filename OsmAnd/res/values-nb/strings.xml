@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
@@ -1498,4 +1498,5 @@
     <string name="rendering_attr_hideIcons_name">Skjul interessepunktikoner</string>
     <string name="shared_string_type">Type</string>
     <string name="starting_point">Startpunkt</string>
+    <string name="select_map_marker">Velg kartmarkør</string>
     </resources>
