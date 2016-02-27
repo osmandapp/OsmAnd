@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
@@ -32,45 +31,45 @@ public class LiveUpdatesHelper {
 	public static final int DEFAULT_LAST_CHECK = -1;
 
 	public static OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(
-			String item, OsmandSettings settings) {
-		final String settingId = item + LIVE_UPDATES_ON_POSTFIX;
+			String fileName, OsmandSettings settings) {
+		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
 		return settings.registerBooleanPreference(settingId, false);
 	}
 
 	public static OsmandSettings.CommonPreference<Boolean> preferenceLiveUpdatesOn(
-			String item, OsmandSettings settings) {
-		final String settingId = item + LIVE_UPDATES_ON_POSTFIX;
+			String fileName, OsmandSettings settings) {
+		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
 		return settings.registerBooleanPreference(settingId, false);
 	}
 
 	public static OsmandSettings.CommonPreference<Boolean> preferenceDownloadViaWiFi(
-			String item, OsmandSettings settings) {
-		final String settingId = item + DOWNLOAD_VIA_WIFI_POSTFIX;
+			String fileName, OsmandSettings settings) {
+		final String settingId = fileName + DOWNLOAD_VIA_WIFI_POSTFIX;
 		return settings.registerBooleanPreference(settingId, false);
 	}
 
 	public static OsmandSettings.CommonPreference<Integer> preferenceUpdateFrequency(
-			String item, OsmandSettings settings) {
-		final String settingId = item + UPDATE_TIMES_POSTFIX;
+			String fileName, OsmandSettings settings) {
+		final String settingId = fileName + UPDATE_TIMES_POSTFIX;
 		return settings.registerIntPreference(settingId, UpdateFrequency.HOURLY.ordinal());
 	}
 
 	public static OsmandSettings.CommonPreference<Integer> preferenceTimeOfDayToUpdate(
-			String item, OsmandSettings settings) {
-		final String settingId = item + TIME_OF_DAY_TO_UPDATE_POSTFIX;
+			String fileName, OsmandSettings settings) {
+		final String settingId = fileName + TIME_OF_DAY_TO_UPDATE_POSTFIX;
 		return settings.registerIntPreference(settingId, TimeOfDay.NIGHT.ordinal());
 	}
 
 	public static OsmandSettings.CommonPreference<Long> preferenceLastCheck(
-			String item, OsmandSettings settings) {
-		final String settingId = item + LAST_UPDATE_ATTEMPT_ON_POSTFIX;
+			String fileName, OsmandSettings settings) {
+		final String settingId = fileName + LAST_UPDATE_ATTEMPT_ON_POSTFIX;
 		return settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK);
 	}
 
-	public static String getNameToDisplay(String child, OsmandActionBarActivity activity) {
+	public static String getNameToDisplay(String fileName, OsmandActionBarActivity activity) {
 		return FileNameTranslationHelper.getFileName(activity,
 				activity.getMyApplication().getResourceManager().getOsmandRegions(),
-				child);
+				fileName);
 	}
 
 	public static String formatDateTime(Context ctx, long dateTime) {
@@ -80,12 +79,12 @@ public class LiveUpdatesHelper {
 	}
 
 	public static PendingIntent getPendingIntent(@NonNull Context context,
-												 @NonNull String localIndexInfo) {
+												 @NonNull String fileName) {
 		Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
-		final File file = new File(localIndexInfo);
-		final String fileName = Algorithms.getFileNameWithoutExtension(file);
-		intent.putExtra(LOCAL_INDEX_INFO, localIndexInfo);
-		intent.setAction(fileName);
+		final File file = new File(fileName);
+		final String fileNameNoExt = Algorithms.getFileNameWithoutExtension(file);
+		intent.putExtra(LOCAL_INDEX_INFO, fileName);
+		intent.setAction(fileNameNoExt);
 		return PendingIntent.getBroadcast(context, 0, intent, 0);
 	}
 
@@ -159,8 +158,8 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static void runLiveUpdate(Context context, final String info, boolean forceUpdate) {
-		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info));
-		new PerformLiveUpdateAsyncTask(context, info, forceUpdate).execute(fnExt);
+	public static void runLiveUpdate(Context context, final String fileName, boolean forceUpdate) {
+		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
+		new PerformLiveUpdateAsyncTask(context, fileName, forceUpdate).execute(fnExt);
 	}
 }

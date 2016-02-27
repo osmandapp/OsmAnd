@@ -8,7 +8,6 @@ import android.net.wifi.WifiManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.activities.LocalIndexInfo;
 
 import org.apache.commons.logging.Log;
 
@@ -20,17 +19,17 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String fileName = intent.getAction();
-		String localIndexInfo =
+		String localIndexInfoFile =
 				intent.getStringExtra(LiveUpdatesHelper.LOCAL_INDEX_INFO);
 		WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
 		final OsmandApplication application = (OsmandApplication) context.getApplicationContext();
 		final OsmandSettings settings = application.getSettings();
 
-		if (!preferenceDownloadViaWiFi(localIndexInfo, settings).get() || wifi.isWifiEnabled()) {
-			new PerformLiveUpdateAsyncTask(context, localIndexInfo, false).execute(fileName);
+		if (!preferenceDownloadViaWiFi(localIndexInfoFile, settings).get() || wifi.isWifiEnabled()) {
+			new PerformLiveUpdateAsyncTask(context, localIndexInfoFile, false).execute(fileName);
 		} else {
-			PerformLiveUpdateAsyncTask.tryRescheduleDownload(context, settings, localIndexInfo);
+			PerformLiveUpdateAsyncTask.tryRescheduleDownload(context, settings, localIndexInfoFile);
 		}
 	}
 }

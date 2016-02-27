@@ -528,19 +528,19 @@ public class AppInitializer implements IProgress {
 		});
 		AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
 		for (LocalIndexInfo fm : fullMaps) {
-			String fullMap = fm.getFileName();
-			if (!preferenceLiveUpdatesOn(fullMap, settings).get()) {
+			String fileName = fm.getFileName();
+			if (!preferenceLiveUpdatesOn(fileName, settings).get()) {
 				continue;
 			}
-			int updateFrequencyOrd = preferenceUpdateFrequency(fullMap, settings).get();
+			int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
 			LiveUpdatesHelper.UpdateFrequency updateFrequency =
 					LiveUpdatesHelper.UpdateFrequency.values()[updateFrequencyOrd];
-			long lastCheck = preferenceLastCheck(fullMap, settings).get();
+			long lastCheck = preferenceLastCheck(fileName, settings).get();
 
 			if (System.currentTimeMillis() - lastCheck > updateFrequency.getTime() * 2) {
-				runLiveUpdate(app, fullMap, false);
-				PendingIntent alarmIntent = getPendingIntent(app, fullMap);
-				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fullMap, settings).get();
+				runLiveUpdate(app, fileName, false);
+				PendingIntent alarmIntent = getPendingIntent(app, fileName);
+				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
 				LiveUpdatesHelper.TimeOfDay timeOfDayToUpdate =
 						LiveUpdatesHelper.TimeOfDay.values()[timeOfDayOrd];
 				setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);

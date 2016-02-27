@@ -47,14 +47,15 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
-	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesAlarmReceiver.class);
-	private static final String LOCAL_INDEX = "local_index";
+	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsDialogFragment.class);
+	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		final String localIndexInfo = getArguments().getString(LOCAL_INDEX);
+		final String fileName = getArguments().getString(LOCAL_INDEX_FILE_NAME);
+		assert fileName != null;
 
 		View view = LayoutInflater.from(getActivity())
 				.inflate(R.layout.dialog_live_updates_item_settings, null);
@@ -68,19 +69,19 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final View updateTimesOfDayLayout = view.findViewById(R.id.updateTimesOfDayLayout);
 		final TextView sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
 
-		regionNameTextView.setText(getNameToDisplay(localIndexInfo, getMyActivity()));
+		regionNameTextView.setText(getNameToDisplay(fileName, getMyActivity()));
 		final String fileNameWithoutExtension =
-				Algorithms.getFileNameWithoutExtension(new File(localIndexInfo));
+				Algorithms.getFileNameWithoutExtension(new File(fileName));
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
-		final long lastCheck = preferenceLastCheck(localIndexInfo, getSettings()).get();
+		final long lastCheck = preferenceLastCheck(fileName, getSettings()).get();
 		String lastCheckString = formatDateTime(getActivity(), lastCheck != DEFAULT_LAST_CHECK
 				? lastCheck : timestamp);
 		lastMapChangeTextView.setText(getString(R.string.last_map_change, lastUpdateDate));
 
 
-		OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(localIndexInfo,
+		OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(fileName,
 				getSettings());
 		if (preference.get()) {
 			lastUpdateTextView.setText(getString(R.string.last_update, lastCheckString));
@@ -89,13 +90,13 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		}
 
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
-				preferenceForLocalIndex(localIndexInfo, getSettings());
+				preferenceForLocalIndex(fileName, getSettings());
 		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
-				preferenceDownloadViaWiFi(localIndexInfo, getSettings());
+				preferenceDownloadViaWiFi(fileName, getSettings());
 		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
-				preferenceUpdateFrequency(localIndexInfo, getSettings());
+				preferenceUpdateFrequency(fileName, getSettings());
 		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
-				preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
+				preferenceTimeOfDayToUpdate(fileName, getSettings());
 
 		downloadOverWiFiCheckBox.setChecked(!liveUpdatePreference.get() || downloadViaWiFiPreference.get());
 
@@ -116,7 +117,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 			updateFrequenciesStrings[i] = getString(updateFrequencies[i].getLocalizedId());
 		}
 
-		refreshTimeOfDayLayout(UpdateFrequency.values()[updateFrequencyPreference.get()], updateTimesOfDayLayout);
 		updateFrequencySpinner.setAdapter(new ArrayAdapter<>(getActivity(),
 				R.layout.action_spinner_item, updateFrequenciesStrings));
 		updateFrequencySpinner.setSelection(updateFrequencyPreference.get());
@@ -141,7 +141,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 							if (!liveUpdatesSwitch.isChecked()) {
 								long updatesSize = changesManager.getUpdatesSize(fileNameWithoutExtension);
 								if (updatesSize != 0) {
-									ClearUpdatesDialogFragment.createInstance(localIndexInfo)
+									ClearUpdatesDialogFragment.createInstance(fileName)
 											.show(getParentFragment().getChildFragmentManager(), null);
 								}
 							}
@@ -153,13 +153,13 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 						AlarmManager alarmMgr = (AlarmManager) getActivity()
 								.getSystemService(Context.ALARM_SERVICE);
-						PendingIntent alarmIntent = getPendingIntent(getActivity(), localIndexInfo);
+						PendingIntent alarmIntent = getPendingIntent(getActivity(), fileName);
 
 						final int timeOfDayInt = updateTimesOfDaySpinner.getSelectedItemPosition();
 						timeOfDayPreference.set(timeOfDayInt);
 
 						if (liveUpdatesSwitch.isChecked() && getSettings().IS_LIVE_UPDATES_ON.get()) {
-							runLiveUpdate(getActivity(), localIndexInfo, false);
+							runLiveUpdate(getActivity(), fileName, false);
 							UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyInt];
 							TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayInt];
 							setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
@@ -173,7 +173,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 				.setNeutralButton(R.string.update_now, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						runLiveUpdate(getActivity(), localIndexInfo, true);
+						runLiveUpdate(getActivity(), fileName, true);
 						sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
 					}
 				});
@@ -221,10 +221,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		return (AbstractDownloadActivity) this.getActivity();
 	}
 
-	public static LiveUpdatesSettingsDialogFragment createInstance(String localIndexInfo) {
+	public static LiveUpdatesSettingsDialogFragment createInstance(String fileName) {
 		LiveUpdatesSettingsDialogFragment fragment = new LiveUpdatesSettingsDialogFragment();
 		Bundle args = new Bundle();
-		args.putString(LOCAL_INDEX, localIndexInfo);
+		args.putString(LOCAL_INDEX_FILE_NAME, fileName);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -233,7 +233,9 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			final String localIndexInfo = getArguments().getString(LOCAL_INDEX);
+			final String localIndexInfo = getArguments().getString(LOCAL_INDEX_FILE_NAME);
+			assert localIndexInfo != null;
+
 			final IncrementalChangesManager changesManager =
 					getMyApplication().getResourceManager().getChangesManager();
 			final String fileNameWithoutExtension =
@@ -256,10 +258,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 			return (OsmandApplication) getActivity().getApplication();
 		}
 
-		public static ClearUpdatesDialogFragment createInstance(String localIndexInfo) {
+		public static ClearUpdatesDialogFragment createInstance(String fileName) {
 			ClearUpdatesDialogFragment fragment = new ClearUpdatesDialogFragment();
 			Bundle args = new Bundle();
-			args.putString(LOCAL_INDEX, localIndexInfo);
+			args.putString(LOCAL_INDEX_FILE_NAME, fileName);
 			fragment.setArguments(args);
 			return fragment;
 		}

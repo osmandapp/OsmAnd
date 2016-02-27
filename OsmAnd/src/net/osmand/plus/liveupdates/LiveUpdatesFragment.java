@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -270,8 +271,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		}
 
 		public void add(LocalIndexInfo info) {
-			OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(info.getFileName(),
-					getSettings());
+			OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(
+					info.getFileName(), getSettings());
 			if (preference.get()) {
 				dataShouldUpdate.add(info);
 			} else {
@@ -338,7 +339,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			} else {
 				viewHolder = (LocalFullMapsViewHolder) convertView.getTag();
 			}
-			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition), isLastChild);
+			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition).getFileName(), isLastChild);
 			return convertView;
 		}
 
@@ -392,14 +393,14 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			AlarmManager alarmMgr = (AlarmManager) getActivity()
 					.getSystemService(Context.ALARM_SERVICE);
 			for (LocalIndexInfo li : dataShouldUpdate) {
-				String localIndexInfo = li.getFileName();
+				String fileName = li.getFileName();
 				PendingIntent alarmIntent = getPendingIntent(getActivity(),
-						localIndexInfo);
+						fileName);
 				if (enable) {
 					final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
-							preferenceUpdateFrequency(localIndexInfo, getSettings());
+							preferenceUpdateFrequency(fileName, getSettings());
 					final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
-							preferenceTimeOfDayToUpdate(localIndexInfo, getSettings());
+							preferenceTimeOfDayToUpdate(fileName, getSettings());
 					UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
 					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
 					setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
@@ -489,9 +490,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			divider = view.findViewById(R.id.divider);
 		}
 
-		@SuppressWarnings("deprecation")
-		public void bindLocalIndexInfo(final LocalIndexInfo it, boolean isLastChild) {
-			final String item = it.getFileName();
+		public void bindLocalIndexInfo(@NonNull final String item, boolean isLastChild) {
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
 			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
