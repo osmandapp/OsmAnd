@@ -35,7 +35,7 @@
         Major part of the income goes back to OSM community and is paid out per each OSM contribution. 
         In case you love OsmAnd and OSM and want to support it, this is a perfect way to do it.</string>
     
-    <string name="select_map_marker">Select Map marker</string>
+    <string name="select_map_marker">Select map marker</string>
     <string name="map_markers_other">Other markers</string>
     <string name="upload_anonymously">Upload anonymously</string>
     <string name="show_transparency_seekbar">Show transparency seekbar</string>
@@ -50,15 +50,15 @@
         Currently, there are {2} MB available.</string>
     <string name="upload_osm_note_description">You can upload your OSM Note anonymously if you use your OpenStreetMap.org profile.</string>
     <string name="upload_osm_note">Upload OSM Note</string>
-    <string name="map_marker_1st">First Map marker</string>
-    <string name="map_marker_2nd">Second Map marker</string>
+    <string name="map_marker_1st">First map marker</string>
+    <string name="map_marker_2nd">Second map marker</string>
     <string name="shared_string_toolbar">Toolbar</string>
     <string name="shared_string_widgets">Widgets</string>
-    <string name="add_points_to_map_markers_q">Do you want to add all points to Map markers?</string>
-    <string name="shared_string_add_to_map_markers">Add to Map markers</string>
-    <string name="select_map_markers">Select Map markers</string>
+    <string name="add_points_to_map_markers_q">Do you want to add all points to map markers?</string>
+    <string name="shared_string_add_to_map_markers">Add to map markers</string>
+    <string name="select_map_markers">Select map markers</string>
     <string name="shared_string_reverse_order">Reverse order</string>
-    <string name="show_map_markers_description">Activate Map markers feature</string>
+    <string name="show_map_markers_description">Activate map markers feature</string>
     <string name="clear_active_markers_q">Do you want to delete all active markers?</string>
     <string name="clear_markers_history_q">Do you want to clear markers history?</string>
     <string name="active_markers">Active markers</string>
