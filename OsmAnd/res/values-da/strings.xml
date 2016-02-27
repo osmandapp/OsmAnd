@@ -1312,7 +1312,7 @@
     <string name="select_gpx">Vælg GPX…</string>
     <string name="route_preferences">Ruteindstillinger</string>
     <string name="route_descr_select_destination">Vælg destination</string>
-    <string name="keep_and_add_destination_point">Tilføj som destinationspunkt</string>
+    <string name="keep_and_add_destination_point">Tilføj som sidste destinationspunkt</string>
 
     <string name="use_displayed_track_for_navigation">Brug viste spor til navigation?</string>
     <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uden internet</string>
