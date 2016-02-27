@@ -73,26 +73,6 @@
                     </LinearLayout>
 
                     <Button
-                        android:id="@+id/removeDestButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="8dp"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:drawableLeft="@drawable/ic_action_delete_dark"
-                        android:drawablePadding="12dp"
-                        android:gravity="left|center_vertical"
-                        android:textColor="?android:textColorPrimary"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:text="@string/delete_target_point"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dashboard_divider"/>
-
-                    <Button
                         android:id="@+id/findParkingButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -106,6 +86,46 @@
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:text="@string/find_parking"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <Button
+                        android:id="@+id/recalcDestButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:drawableLeft="@drawable/ic_action_gdirections_dark"
+                        android:drawablePadding="12dp"
+                        android:gravity="left|center_vertical"
+                        android:textColor="?android:textColorPrimary"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="@string/recalculate_route"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <Button
+                        android:id="@+id/removeDestButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:drawableLeft="@drawable/ic_action_delete_dark"
+                        android:drawablePadding="12dp"
+                        android:gravity="left|center_vertical"
+                        android:textColor="?android:textColorPrimary"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="@string/delete_target_point"/>
 
                 </LinearLayout>
 

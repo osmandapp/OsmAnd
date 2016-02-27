@@ -133,6 +133,10 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
+	public static MapMarkerSelectionFragment newInstance() {
+		return new MapMarkerSelectionFragment();
+	}
+
 	public MapActivity getMapActivity() {
 		Context ctx = getContext();
 		if (ctx instanceof MapActivity) {

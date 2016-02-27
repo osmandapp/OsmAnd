@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="recalculate_route">Recalculate route</string>
     <string name="donations">Donations</string>
     <string name="number_of_recipients">Number of recipients</string>
     <string name="osm_user_stat">Edits %1$s, rank %2$s, total edits %3$s</string>

@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -74,6 +76,27 @@ public class DestinationReachedMenuFragment extends Fragment {
 			}
 		});
 
+		Button recalcDestButton = (Button) view.findViewById(R.id.recalcDestButton);
+		recalcDestButton.setCompoundDrawablesWithIntrinsicBounds(
+				iconsCache.getContentIcon(R.drawable.ic_action_gdirections_dark), null, null, null);
+		recalcDestButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TargetPointsHelper helper = getMapActivity().getMyApplication().getTargetPointsHelper();
+				TargetPoint target = helper.getPointToNavigate();
+
+				dismissMenu();
+
+				if (target != null) {
+					helper.navigateToPoint(new LatLon(target.getLatitude(), target.getLongitude()),
+							true, -1, target.getOriginalPointDescription());
+					getMapActivity().getMapActions().recalculateRoute(false);
+					getMapActivity().getMapLayers().getMapControlsLayer().startNavigation();
+				}
+			}
+		});
+
+
 		Button findParkingButton = (Button) view.findViewById(R.id.findParkingButton);
 		findParkingButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getContentIcon(R.drawable.ic_action_parking_dark), null, null, null);
@@ -131,6 +154,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 	}
 
 	public void dismissMenu() {
+		getMapActivity().getMapActions().stopNavigationWithoutConfirm();
 		getMapActivity().getSupportFragmentManager().popBackStack();
 	}
 
