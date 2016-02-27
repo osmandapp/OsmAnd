@@ -24,6 +24,7 @@
     <string name="storage_directory_readonly_desc">Currently selected Data storage folder is readonly. The storage folder was temporarily switched to Internal memory. Please choose valid storage directory.</string>
     <string name="storage_directory_shared">Shared memory</string>
     <string name="shared_string_topbar">Topbar</string>
+    <string name="full_report">Full report</string>
     <string name="recalculate_route">Recalculate route</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap login and password</string>
     <string name="donations">Donations</string>

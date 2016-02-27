@@ -51,6 +51,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 
 	private static final Log LOG = PlatformUtil.getLog(ReportsFragment.class);
+	public static final String OSM_LIVE_URL = "http://osmand.net/osm_live";
 
 	private TextView contributorsTextView;
 	private TextView editsTextView;
@@ -108,10 +109,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://osmand.net/osm_live"));
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(OSM_LIVE_URL));
 				startActivity(intent);
 			}
 		});
+		((TextView) view.findViewById(R.id.osm_live_url_label)).setText(OSM_LIVE_URL);
 
 		View regionReportsButton = view.findViewById(R.id.reportsButton);
 		regionReportsButton.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +156,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfEditsIcon = (ImageView) view.findViewById(R.id.numberOfEditsIcon);
 		numberOfRecipientsIcon = (ImageView) view.findViewById(R.id.numberOfRecipientsIcon);
 		donationsIcon = (ImageView) view.findViewById(R.id.donationsIcon);
-		setThemedDrawable(numberOfContributorsIcon, R.drawable.ic_group);
+		setThemedDrawable(numberOfContributorsIcon, R.drawable.ic_action_group2);
 		setThemedDrawable(numberOfRecipientsIcon, R.drawable.ic_group);
 		setThemedDrawable(donationsIcon, R.drawable.ic_action_bitcoin);
 		setThemedDrawable(numberOfEditsIcon, R.drawable.ic_map);
