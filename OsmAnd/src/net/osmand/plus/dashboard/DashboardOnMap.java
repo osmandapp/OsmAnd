@@ -603,7 +603,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 									m.getPointDescription(mapActivity));
 							targetPoints.add(t);
 						}
-						targetPointsHelper.reorderAllTargetPoints(targetPoints, false);
+						RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+						boolean updateRoute = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
+						targetPointsHelper.reorderAllTargetPoints(targetPoints, updateRoute);
 						hasTargets = true;
 					} else {
 						targetPointsHelper.clearStartPoint(false);
