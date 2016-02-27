@@ -715,7 +715,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				}
 
 				if (mSwiping) {
-					mSwipeDownView.setTranslationX(deltaX);
+					ViewCompat.setTranslationX(mSwipeDownView, deltaX);
 					ViewCompat.setAlpha(mSwipeDownView, Math.max(0f, Math.min(1f,
 							1f - 2f * Math.abs(deltaX) / mViewWidth)));
 					return true;
@@ -815,7 +815,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 			ViewGroup.LayoutParams lp;
 			for (PendingDismissData pendingDismiss : mPendingDismisses) {
 				ViewCompat.setAlpha(pendingDismiss.view, 1f);
-				pendingDismiss.view.setTranslationX(0);
+				ViewCompat.setTranslationX(pendingDismiss.view, 0);
 				lp = pendingDismiss.childView.getLayoutParams();
 				lp.height = originalLayoutHeight;
 				pendingDismiss.childView.setLayoutParams(lp);
