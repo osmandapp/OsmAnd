@@ -515,6 +515,13 @@ public class FavouritesDbHelper {
 				int i2 = Algorithms.extractIntegerNumber(s2);
 				String ot1 = Algorithms.extractIntegerPrefix(s1);
 				String ot2 = Algorithms.extractIntegerPrefix(s2);
+				// Next 6 lines needed for correct comparison of names with and without digits
+				if (ot1.length() == 0) {
+					ot1 = s1;
+				}
+				if (ot2.length() == 0) {
+					ot2 = s2;
+				}
 				int res = collator.compare(ot1, ot2);
 				if (res == 0) {
 					res = i1 - i2;
