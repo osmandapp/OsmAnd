@@ -22,6 +22,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
@@ -250,7 +251,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = markersHelper.getActiveMapMarkers();
 		for (int i = 0; i < activeMapMarkers.size(); i++) {
 			MapMarker marker = activeMapMarkers.get(i);
-			if (isLocationVisible(tb, marker)) {
+			if (isLocationVisible(tb, marker) && !overlappedByWaypoint(marker)) {
 				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
 				int marginX = bmp.getWidth() / 6;
 				int marginY = bmp.getHeight();
@@ -302,6 +303,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		double tx = tb.getPixXFromLatLon(lat, lon);
 		double ty = tb.getPixYFromLatLon(lat, lon);
 		return tx >= 0 && tx <= tb.getPixWidth() && ty >= widgetHeight && ty <= tb.getPixHeight();
+	}
+
+	public boolean overlappedByWaypoint(MapMarker marker) {
+		List<TargetPoint> targetPoints = map.getMyApplication().getTargetPointsHelper().getAllPoints();
+		for (TargetPoint t : targetPoints) {
+			if (t.point.equals(marker.point)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
