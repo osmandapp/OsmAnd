@@ -832,7 +832,7 @@ public class MapMarkerDialogHelper {
 				}
 			}
 
-			if (markersHelper.isStartFromMyLocation() && prevMyLoc == null && myLoc != null) {
+			if (selectionMode && markersHelper.isStartFromMyLocation() && prevMyLoc == null && myLoc != null) {
 				if (helperCallbacks != null) {
 					helperCallbacks.showMarkersRouteOnMap();
 				} else {

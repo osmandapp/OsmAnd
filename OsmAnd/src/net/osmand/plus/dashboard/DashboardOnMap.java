@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -1291,16 +1292,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 	}
 
-	@SuppressLint("NewApi")
 	private void setTranslationY(View v, int y) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			v.setTranslationY(y);
-		} else {
-			TranslateAnimation anim = new TranslateAnimation(0, 0, y, y);
-			anim.setFillAfter(true);
-			anim.setDuration(0);
-			v.startAnimation(anim);
-		}
+		ViewCompat.setTranslationY(v, y);
 	}
 
 	@SuppressLint("NewApi")
