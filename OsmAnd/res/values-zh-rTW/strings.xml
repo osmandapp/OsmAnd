@@ -328,7 +328,7 @@
     <string name="general_settings_descr">組態應用程式顯示和共通設定</string>
     <string name="global_app_settings">整體程式設定</string>
     <string name="user_name">您 OSM 的使用者名稱</string>
-    <string name="user_name_descr">需要在 openstreetmap.org 註冊</string>
+    <string name="open_street_map_login_descr">需要在 openstreetmap.org 註冊</string>
     <string name="user_password">您 OSM 的密碼</string>
     <string name="user_password_descr">需要在 openstreetmap.org 註冊</string>
     <string name="osmand_service">背景模式</string>

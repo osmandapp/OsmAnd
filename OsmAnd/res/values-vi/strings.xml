@@ -518,7 +518,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="save_track_to_gpx">Lưu track thành GPX</string>
     <string name="update_tile">Cập nhật bản đồ</string>
     <string name="reload_tile">Tải lại tile</string>
-    <string name="user_name_descr">Tài khoản tại OpenStreetMap.org (OSM)</string>
+    <string name="open_street_map_login_descr">Tài khoản tại OpenStreetMap.org (OSM)</string>
     <string name="user_name">Tài khoản OSM</string>
     <string name="mark_point">Mục tiêu</string>
     

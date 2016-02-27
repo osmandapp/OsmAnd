@@ -313,7 +313,7 @@
   <string name="save_track_to_gpx">salvar trilha GPX durante a navegação</string>
   <string name="update_tile">Atualizar mapa</string>
   <string name="reload_tile">Atualizar imagens</string>
-  <string name="user_name_descr">Nome do usuário OpenStreetMap</string>
+  <string name="open_street_map_login_descr">Nome do usuário OpenStreetMap</string>
   <string name="user_name">Nome do usuário</string>
   <string name="mark_point">Destino</string>
   

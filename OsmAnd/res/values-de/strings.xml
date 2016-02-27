@@ -344,7 +344,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
 	<string name="global_app_settings">Globale Einstellungen</string>
 	<string name="user_name">OSM-Benutzername</string>
-	<string name="user_name_descr">Benötigt für openstreetmap.org-Beiträge</string>
+	<string name="open_street_map_login_descr">Benötigt für openstreetmap.org-Beiträge</string>
 	<string name="user_password">OSM-Kennwort</string>
 	<string name="user_password_descr">Benötigt für openstreetmap.org-Beiträge</string>
 	<string name="osmand_service">Hintergrunddienst</string>

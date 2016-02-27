@@ -1122,7 +1122,7 @@
 	<string name="general_settings_descr">Configurar exibição e configurações comuns para o aplicativo</string>
 	<string name="global_app_settings">Configurações globais do aplicativo</string>
 	<string name="user_name">Seu nome de usuário OSM</string>
-	<string name="user_name_descr">Necessário para envios ao openstreetmap.org</string>
+	<string name="open_street_map_login_descr">Necessário para envios ao openstreetmap.org</string>
 	<string name="user_password">Sua senha do OSM</string>
 	<string name="user_password_descr">Necessária para envios ao openstreetmap.org</string>
 	<string name="osmand_service">Modo em segundo plano</string>

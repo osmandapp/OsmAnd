@@ -203,7 +203,7 @@
 	<string name="global_settings">全局设置</string>
 	<string name="general_settings">一般</string>
 	<string name="user_name">你的OSM用户名</string>
-	<string name="user_name_descr">为提交openstreetmap.org需要</string>
+	<string name="open_street_map_login_descr">为提交openstreetmap.org需要</string>
 	<string name="user_password">您的OSM密码</string>
 	<string name="user_password_descr">为提交openstreetmap.org需要</string>
 	<string name="osmand_service">睡眠模式功能</string>

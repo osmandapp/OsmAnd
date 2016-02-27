@@ -280,7 +280,7 @@
     <string name="routing_settings">Navigacija</string>
     <string name="user_name">Uporabniško ime OSM</string>
     <string name="user_password">Geslo OSM</string>
-    <string name="user_name_descr">Zahtevano za pošiljanje podatkov na strežnik openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Zahtevano za pošiljanje podatkov na strežnik openstreetmap.org</string>
     <string name="user_password_descr">Zahtevano za pošiljanje podatkov na openstreetmap.org</string>
     <string name="routing_settings_descr">Prilagajanje možnosti za določevanje poti in navigacijo</string>
     <string name="general_settings">Splošne nastavitve</string>

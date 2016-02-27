@@ -181,7 +181,7 @@
 	<string name="general_settings_descr">Konfiguroi globaalit asetukset</string>
 	<string name="global_app_settings">Globaalit sovellusasetukset</string>
 	<string name="user_name">OSM käyttäjänimesi</string>
-	<string name="user_name_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
+	<string name="open_street_map_login_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
 	<string name="user_password">OSM salasanasi</string>
 	<string name="user_password_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
 	

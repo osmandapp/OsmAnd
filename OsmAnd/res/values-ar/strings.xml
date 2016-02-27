@@ -554,7 +554,7 @@
 	<string name="index_settings">إدارة بيانات الخرائط</string>
 	<string name="general_settings">عام</string>
 	<string name="general_settings_descr">ضبط العرض وإعدادات عامة للتطبيق</string>
-	<string name="user_name_descr">مطلوب للمساهمة في openstreetmap.org</string>
+	<string name="open_street_map_login_descr">مطلوب للمساهمة في openstreetmap.org</string>
 	<string name="user_password_descr">مطلوبة للمساهمة في openstreetmap.org</string>
 	<string name="local_openstreetmap_uploading">يرفع …</string>
 	<string name="local_openstreetmap_uploadall">رفع الكل</string>

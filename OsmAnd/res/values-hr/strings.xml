@@ -818,7 +818,7 @@
 	<string name="user_password">Vaša OSM lozinka</string>
 	<string name="osmand_service">Mogućnosti stanja mirovanja</string>
 	<string name="osmand_service_descr">Koristite za pokretanje OsmAnd-a dok je zaslon isključen</string>
-	<string name="user_name_descr">To je potrebno za prijenos podataka na openstreetmap.org</string>
+	<string name="open_street_map_login_descr">To je potrebno za prijenos podataka na openstreetmap.org</string>
 	<string name="user_password_descr">To je potrebno za prijenos podataka na openstreetmap.org</string>
 	<string name="user_name">Vaše OSM korisničko ime</string>
 	<string name="global_app_settings">Opće postavke aplikacije</string>

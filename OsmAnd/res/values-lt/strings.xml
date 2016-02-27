@@ -219,7 +219,7 @@
     <string name="general_settings_descr">Derinkite globaliuosius nustatymus</string>
     <string name="global_app_settings">Globalūs programos nustatymai</string>
     <string name="user_name">Jūsų OSM vartotojo vardas</string>
-    <string name="user_name_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
     <string name="user_password">Jūsų OSM slaptažodis</string>
     <string name="user_password_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
     <string name="osmand_service">Foninis režimas</string>

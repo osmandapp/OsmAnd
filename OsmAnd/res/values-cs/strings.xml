@@ -119,7 +119,7 @@
     <string name="general_settings">Obecné</string>
     <string name="general_settings_descr">Nastavení displeje, jazyka, zvuku a dalších parametrů</string>
     <string name="user_name">Jméno uživatele</string>
-    <string name="user_name_descr">Vaše uživatelské jméno na openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Vaše uživatelské jméno na openstreetmap.org</string>
     <string name="user_password">Heslo</string>
     <string name="user_password_descr">Vaše heslo na openstreetmap.org</string>
     <string name="osmand_service">Služba na pozadí</string>

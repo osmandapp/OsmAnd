@@ -45,7 +45,7 @@
     <string name="general_settings_descr">Configura le impostazioni globali</string>
     <string name="global_app_settings">Impostazioni globali dell\'applicazione</string>
     <string name="user_name">Nome utente in OSM</string>
-    <string name="user_name_descr">Necessario per inviare contributi a openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Necessario per inviare contributi a openstreetmap.org</string>
     <string name="user_password">Password in OSM</string>
     <string name="user_password_descr">Necessaria per inviare contributi a openstreetmap.org</string>
     <string name="osmand_service">"Modalità  backgraund"</string>

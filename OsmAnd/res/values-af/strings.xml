@@ -231,7 +231,7 @@
   <string name="general_settings_descr">Instel van oorhoofse verstellings</string>
   <string name="global_app_settings">oorhoofse toepassing instellings</string>
   <string name="user_name">Jou OSM gebruiker naam</string>
-  <string name="user_name_descr">Vereis vir openstreetmap.org voorleggings</string>
+  <string name="open_street_map_login_descr">Vereis vir openstreetmap.org voorleggings</string>
   <string name="user_password">Jou OSM wagwoord</string>
   <string name="user_password_descr">Vereis vir openstreetmap.org voorleggings</string>
   <string name="osmand_service">Sluimertoestand Funksionaliteit</string>

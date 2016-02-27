@@ -469,7 +469,7 @@ POIの更新は利用できません</string>
  <string name="save_track_to_gpx">ナビゲーション中に経路ログをGPXに記録</string>
  <string name="update_tile">マップを更新</string>
  <string name="reload_tile">タイルをリロード</string>
- <string name="user_name_descr">あなたのOSM ユーザー名を入力します</string>
+ <string name="open_street_map_login_descr">あなたのOSM ユーザー名を入力します</string>
  <string name="user_name">OSM ユーザー名</string>
  <string name="mark_point">ターゲット</string>
  

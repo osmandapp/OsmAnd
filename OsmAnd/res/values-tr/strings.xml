@@ -631,7 +631,7 @@
 	<string name="general_settings_descr">Uygulama için ekran ve ortak ayarları yapılandırma</string>
 	<string name="global_app_settings">Genel uygulama ayarları</string>
 	<string name="user_name">OSM kullanıcı adınız</string>
-	<string name="user_name_descr">Openstreetmap.org gönderimler için gereklidir</string>
+	<string name="open_street_map_login_descr">Openstreetmap.org gönderimler için gereklidir</string>
 	<string name="user_password_descr">Openstreetmap.org gönderimler için gereklidir</string>
 	<string name="osmand_service">Arka plan modu</string>
 	<string name="osmand_service_descr">Ekran kapalı iken Osmand arka planda çalışır</string>

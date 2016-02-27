@@ -528,7 +528,7 @@
     <string name="general_settings_descr">Настройване на екрана и общите настройки на приложението</string>
     <string name="global_app_settings">Общи настройки на приложението</string>
     <string name="user_name">Вашето потребителско име в OSM</string>
-    <string name="user_name_descr">Необходимо за изпращане към openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Необходимо за изпращане към openstreetmap.org</string>
     <string name="user_password">Вашата парола в OSM</string>
     <string name="user_password_descr">Необходима за изпращане на данни към openstreetmap.org</string>
     <string name="osmand_service">Фонов режим</string>

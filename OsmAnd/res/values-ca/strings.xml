@@ -254,7 +254,7 @@
     <string name="native_app_allocated_memory_descr">Memòria nativa total assignada a l\'aplicació %1$s MB (Dalvik %2$s MB, altres %3$s MB). Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (Gestió de fitxers de mapes) o canviar per utilitzar mapes en línia (cal activar el connector de mapes en línia per fer-ho).</string>
     <string name="global_app_settings">Paràmetres globals de l\'aplicació</string>
-    <string name="user_name_descr">És necessari per a les trameses a openstreetmap.org</string>
+    <string name="open_street_map_login_descr">És necessari per a les trameses a openstreetmap.org</string>
     <string name="user_password_descr">És necessària per a les trameses a openstreetmap.org</string>
     <string name="old_poi_file_should_be_deleted">El fitxer de dades de PDI «%1$s» és redundant i serà suprimit.</string>
     <string name="search_position_favorites">Preferits…</string>

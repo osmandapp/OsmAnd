@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.DialogPreference;
@@ -12,9 +13,11 @@ import android.preference.PreferenceScreen;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 
@@ -26,6 +29,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.osm_settings);
+		@SuppressWarnings("deprecation")
 		PreferenceScreen grp = getPreferenceScreen();
 
 		DialogPreference loginDialogPreference = new OsmLoginDataDialogPreference(this, null);
@@ -64,10 +68,10 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 			setDialogLayoutResource(R.layout.osm_user_login_details);
 			setPositiveButtonText(android.R.string.ok);
 			setNegativeButtonText(android.R.string.cancel);
-			setDialogTitle("OSM Login user details");
+			setDialogTitle(R.string.open_street_map_login_and_pass);
 
-			setTitle("OSM Login user details");
-			setSummary("Needed for openstreetmap.org submissions");
+			setTitle(R.string.open_street_map_login_and_pass);
+			setSummary(R.string.open_street_map_login_descr);
 
 			setDialogIcon(null);
 		}
@@ -86,8 +90,31 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 			if (positiveResult) {
 				settings.USER_NAME.set(userNameEditText.getText().toString());
 				settings.USER_PASSWORD.set(passwordEditText.getText().toString());
+				new ValidateOsmLoginDetailsTask(SettingsOsmEditingActivity.this).execute();
 			}
 		}
 	}
 
+	private static class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugsUtil.OsmBugResult> {
+		private final Context context;
+
+		public ValidateOsmLoginDetailsTask(Context context) {
+			this.context = context;
+		}
+
+		@Override
+		protected OsmBugsUtil.OsmBugResult doInBackground(Void... params) {
+			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+			assert plugin != null;
+			OsmBugsRemoteUtil remoteUtil = plugin.getOsmNotesRemoteUtil();
+			return remoteUtil.validateLoginDetails();
+		}
+
+		@Override
+		protected void onPostExecute(OsmBugsUtil.OsmBugResult osmBugResult) {
+			if (osmBugResult.warning != null) {
+				Toast.makeText(context, osmBugResult.warning, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
 }

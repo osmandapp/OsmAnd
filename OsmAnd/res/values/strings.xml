@@ -25,6 +25,7 @@
     <string name="storage_directory_shared">Shared memory</string>
     <string name="shared_string_topbar">Topbar</string>
     <string name="recalculate_route">Recalculate route</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap login and password</string>
     <string name="donations">Donations</string>
     <string name="number_of_recipients">Number of recipients</string>
     <string name="osm_user_stat">Edits %1$s, rank %2$s, total edits %3$s</string>
@@ -1661,9 +1662,8 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="general_settings_descr">Configure display and common settings for the application</string>
     <string name="global_app_settings">Global app settings</string>
     <string name="user_name">Your OSM user name</string>
-    <string name="user_name_descr">Needed for openstreetmap.org submissions</string>
+    <string name="open_street_map_login_descr">Needed for openstreetmap.org submissions</string>
     <string name="user_password">Your OSM password</string>
-    <string name="user_password_descr">Needed for openstreetmap.org submissions</string>
     <string name="osmand_service">Background mode</string>
     <string name="osmand_service_descr">OsmAnd runs in background while screen is off</string>
     <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>

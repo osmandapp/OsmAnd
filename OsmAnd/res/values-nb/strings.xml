@@ -1135,7 +1135,7 @@
 
 
     <string name="anonymous_user">Anonym bruker</string>
-    <string name="user_name_descr">Trengs for bidrag til openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Trengs for bidrag til openstreetmap.org</string>
     <string name="user_password_descr">Trengs for bidrag til openstreetmap.org</string>
     <string name="download_files_not_enough_space">Det er ikke nok ledig plass til å laste ned %1$s MB (ledig: %2$s).</string>
     <string name="download_files_question_space">Laste ned {0} fil(er)? Dette krever {1} MB permanent. Nå er det {2} MB tilgjengelig.</string>

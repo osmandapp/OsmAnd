@@ -341,7 +341,7 @@
 	<string name="general_settings_descr">הגדרת תצורה כללית</string>
 	<string name="global_app_settings">הגדרות יישומים כלליות</string>
 	<string name="user_name">שם המשתמש שלך ב־OSM</string>
-	<string name="user_name_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org</string>
+	<string name="open_street_map_login_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org</string>
 	<string name="user_password_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org</string>
 	<string name="user_password">הססמה שלך ב־OSM</string>
 	<string name="osmand_service">תכונת מצב השינה</string>

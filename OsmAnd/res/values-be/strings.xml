@@ -547,7 +547,7 @@
 	<string name="general_settings_descr">Налады экрану і агульныя налады праграмы</string>
 	<string name="global_app_settings">Агульныя налады праграмы</string>
 	<string name="user_name">Вашае імя карыстальніка OSM</string>
-	<string name="user_name_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
+	<string name="open_street_map_login_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
 	<string name="user_password">Ваш пароль OSM</string>
 	<string name="user_password_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
 	<string name="osmand_service">Фонавы рэжым</string>

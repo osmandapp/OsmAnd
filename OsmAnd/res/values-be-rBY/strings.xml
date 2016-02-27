@@ -998,7 +998,7 @@
 	<string name="general_settings_descr">Nalady ekranu і ahuĺnyja nalady prahramy</string>
 	<string name="global_app_settings">Ahuĺnyja nalady prahramy</string>
 	<string name="user_name">Vašaje іmia karystaĺnіka OSM</string>
-	<string name="user_name_descr">Patrebna dlia pradstaŭlieńnia ŭ openstreetmap.org</string>
+	<string name="open_street_map_login_descr">Patrebna dlia pradstaŭlieńnia ŭ openstreetmap.org</string>
 	<string name="user_password">Vaš paroĺ OSM</string>
 	<string name="user_password_descr">Patrebna dlia pradstaŭlieńnia ŭ openstreetmap.org</string>
 	<string name="osmand_service">Fonavy režym</string>

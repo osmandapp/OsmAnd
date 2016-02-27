@@ -603,7 +603,7 @@
     <string name="save_track_to_gpx">Запись трека в файл GPX во время навигации</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
-    <string name="user_name_descr">Укажите имя пользователя (требуется для работы с OSM)</string>
+    <string name="open_street_map_login_descr">Укажите имя пользователя (требуется для работы с OSM)</string>
     <string name="user_name">Имя пользователя</string>
     <string name="mark_point">Цель</string>
     <string name="use_english_names_descr">Использовать английские названия вместо местных</string>

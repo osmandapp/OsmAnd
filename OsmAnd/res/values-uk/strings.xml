@@ -190,7 +190,7 @@
   <string name="general_settings_descr">Налаштування екрану, локалізації, одиниці вимірювання тощо</string>
   <string name="global_app_settings">Загальні налаштування</string>
   <string name="user_name">Ім’я користувача</string>
-  <string name="user_name_descr">Вкажіть ім’я користувача для роботи з OSM</string>
+  <string name="open_street_map_login_descr">Вкажіть ім’я користувача для роботи з OSM</string>
   <string name="user_password">Пароль</string>
   <string name="user_password_descr">Потрібно для роботи з openstreetmap.org</string>
   <string name="osmand_service">Фоновий режим</string>

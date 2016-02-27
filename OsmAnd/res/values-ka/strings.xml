@@ -170,7 +170,7 @@
   <string name="general_settings_descr">მთავარი პარამეტრების გამართვა</string>
   <string name="global_app_settings">აპლიკაციის მთავარი პარამეტრები</string>
   <string name="user_name">თქვენი OSM-ს მომხმარებლის სახელი</string>
-  <string name="user_name_descr">საჭიროა openstreetmap.org-ზე ოპერაციებისათვის</string>
+  <string name="open_street_map_login_descr">საჭიროა openstreetmap.org-ზე ოპერაციებისათვის</string>
   <string name="user_password">თქვენი OSM-ს პაროლი</string>
   <string name="user_password_descr">საჭიროა openstreetmap.org-ზე ოპერაციებისათვის</string>
   <string name="osmand_service">ფონური პარამეტრები</string>

@@ -826,7 +826,7 @@ public class OsmandSettings {
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<String> USER_NAME = new StringPreference("user_name", "NoName").makeGlobal();
+	public final OsmandPreference<String> USER_NAME = new StringPreference("user_name", "").makeGlobal();
 
 	public final OsmandPreference<String> BILLING_USER_ID = new StringPreference("billing_user_id", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_NAME = new StringPreference("billing_user_name", "").makeGlobal();

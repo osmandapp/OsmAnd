@@ -626,7 +626,7 @@
     <string name="save_track_to_gpx">Logovať stopu do GPX súboru počas navigácie</string>
     <string name="update_tile">Aktualizovať mapu</string>
     <string name="reload_tile">Znovu načítať dlaždicu</string>
-    <string name="user_name_descr">Meno potrebné pre prispievanie do openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Meno potrebné pre prispievanie do openstreetmap.org</string>
     <string name="user_name">OSM používateľské meno</string>
     <string name="mark_point">Cieľ</string>
     <string name="use_english_names_descr">Výber medzi domácimi a anglickými názvami</string>

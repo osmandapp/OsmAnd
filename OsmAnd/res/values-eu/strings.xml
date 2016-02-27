@@ -550,7 +550,7 @@
   <string name="general_settings_descr">Konfiguratu bistaratzea eta aplikazioaren ezarpen komunak</string>
   <string name="global_app_settings">Aplikazioaren ezarpen globalak</string>
   <string name="user_name">Zure OSMeko erabiltzailea</string>
-  <string name="user_name_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat</string>
+  <string name="open_street_map_login_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat</string>
   <string name="user_password">Zure OSMeko pasahitza</string>
   <string name="user_password_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat</string>
   <string name="osmand_service">Esekite moduko funtzionalitatea</string>

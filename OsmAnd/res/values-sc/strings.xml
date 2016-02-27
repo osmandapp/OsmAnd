@@ -941,7 +941,7 @@
     <string name="amenity_type_user_defined">Definidu dae s’impitadore</string>
     <string name="fav_export_confirmation">Esistint documentos cun preferidos esportados giai. Los boles remplasare?</string>
     <string name="index_settings">Amministra sos documentos de sas mapas</string>
-    <string name="user_name_descr">Netzessàriu pro imbiare contributos a openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Netzessàriu pro imbiare contributos a openstreetmap.org</string>
     <string name="user_password_descr">Netzessària pro imbiare contributos a openstreetmap.org</string>
     <string name="osmand_service">Modalidade de isfundu</string>
     <string name="osmand_service_descr">OsmAnd funtzionat in s’isfundu, cun s’ischermu mortu</string>

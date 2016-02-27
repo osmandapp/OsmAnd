@@ -47,12 +47,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	OpenstreetmapsDbHelper dbpoi;
-	OsmBugsDbHelper dbbug;
-	OpenstreetmapLocalUtil localUtil;
-	OpenstreetmapRemoteUtil remoteUtil;
-	OsmBugsRemoteUtil remoteNotesUtil;
-	OsmBugsLocalUtil localNotesUtil;
+	private OpenstreetmapsDbHelper dbpoi;
+	private OsmBugsDbHelper dbbug;
+	private OpenstreetmapLocalUtil localUtil;
+	private OpenstreetmapRemoteUtil remoteUtil;
+	private OsmBugsRemoteUtil remoteNotesUtil;
+	private OsmBugsLocalUtil localNotesUtil;
 	
 	public OsmEditingPlugin(OsmandApplication app) {
 		this.app = app;

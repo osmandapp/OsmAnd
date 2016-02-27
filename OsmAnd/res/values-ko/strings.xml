@@ -114,7 +114,7 @@
 	<string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>
 	<string name="global_app_settings">일반 앱 설정</string>
 	<string name="user_name">OSM 사용자 이름</string>
-	<string name="user_name_descr">http://openstreetmap.org 에 데이터 제출을 위해 필요합니다</string>
+	<string name="open_street_map_login_descr">http://openstreetmap.org 에 데이터 제출을 위해 필요합니다</string>
 	<string name="user_password">OSM 패스워드</string>
 	<string name="user_password_descr">http://openstreetmap.org 에 데이터를 제출하기 위해 필요합니다</string>
 	<string name="osmand_service">절전 모드</string>

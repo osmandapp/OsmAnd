@@ -129,7 +129,7 @@
     <string name="general_settings_descr">Kijelző és más általános beállítások</string>
     <string name="global_app_settings">Globális beállítások az alkalmazáshoz</string>
     <string name="user_name">OSM felhasználóneved</string>
-    <string name="user_name_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
+    <string name="open_street_map_login_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
     <string name="user_password">OSM jelszavad</string>
     <string name="user_password_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
     <string name="osmand_service">Háttér mód</string>

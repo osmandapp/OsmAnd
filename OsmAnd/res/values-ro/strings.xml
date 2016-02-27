@@ -347,7 +347,7 @@
 	<string name="general_settings_descr">Configurarea setărilor globale</string>
 	<string name="global_app_settings">Setări globale aplicație</string>
 	<string name="user_name">Numele de utilizator OSM</string>
-	<string name="user_name_descr">Necesar pentru trimiterea de date la openstreetmap.org</string>
+	<string name="open_street_map_login_descr">Necesar pentru trimiterea de date la openstreetmap.org</string>
 	<string name="user_password">Parola OSM</string>
 	<string name="user_password_descr">Necesară pentru trimiterea de date la openstreetmap.org</string>
 	<string name="osmand_service">Mod standby</string>

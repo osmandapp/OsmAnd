@@ -143,7 +143,7 @@
   <string name="general_settings_descr">Mainīt aplikācijas uzstādījumus</string>
   <string name="global_app_settings">Vispārīgie uzstādījumi</string>
   <string name="user_name">OSM lietotāja vārds</string>
-  <string name="user_name_descr">Nepieciešams, lai veiktu augšupielādes openstreetmap.org</string>
+  <string name="open_street_map_login_descr">Nepieciešams, lai veiktu augšupielādes openstreetmap.org</string>
   <string name="user_password">Jūsu OSM parole</string>
   <string name="user_password_descr">Nepieciešams, lai veiktu openstreetmap.org augšuplādi</string>
   <string name="osmand_service">Miega režīms</string>

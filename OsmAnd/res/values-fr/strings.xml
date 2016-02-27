@@ -58,7 +58,7 @@
     <string name="general_settings_descr">Configurer l\'affichage et les paramètres généraux de l\'application</string>
     <string name="global_app_settings">Paramètres globaux de l\'application</string>
     <string name="user_name">Votre identifiant OSM</string>
-    <string name="user_name_descr">Nécessaire pour les contributions openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Nécessaire pour les contributions openstreetmap.org</string>
     <string name="user_password">Votre mot de passe OSM</string>
     <string name="user_password_descr">Nécessaire pour les contributions openstreetmap.org</string>
     <string name="osmand_service">Mode tâche de fond</string>

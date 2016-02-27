@@ -493,7 +493,7 @@
     <string name="save_track_to_gpx">Zapisywanie śladu do pliku GPX podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
-    <string name="user_name_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
     <string name="user_name">Nazwa użytkownika OSM</string>
     <string name="mark_point">Cel</string>
 

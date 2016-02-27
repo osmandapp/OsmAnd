@@ -90,12 +90,16 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			throw new RuntimeException(e);
 		}
 		if (!anonymous) {
-			OsmBugResult loginResult = editingPOI(getUserDetailsApi(), GET, "validate_login");
+			OsmBugResult loginResult = validateLoginDetails();
 			if (loginResult.warning != null) {
 				return loginResult;
 			}
 		}
 		return editingPOI(b.toString(), POST, msg);
+	}
+
+	public OsmBugResult validateLoginDetails() {
+		return editingPOI(getUserDetailsApi(), GET, "validate_login");
 	}
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation) {

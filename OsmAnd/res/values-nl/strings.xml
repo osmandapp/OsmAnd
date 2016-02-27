@@ -152,7 +152,7 @@
   <string name="general_settings_descr">Kaartweergave en algemene instellingen</string>
   <string name="global_app_settings">Algemene instellingen</string>
   <string name="user_name">OSM gebruikersnaam</string>
-  <string name="user_name_descr">Nodig voor OpenStreetMap.org aanmelding</string>
+  <string name="open_street_map_login_descr">Nodig voor OpenStreetMap.org aanmelding</string>
   <string name="user_password">OSM wachtwoord</string>
   <string name="user_password_descr">Nodig voor OpenStreetMap.org aanmelding</string>
   <string name="osmand_service">Achtergrondmodus</string>

@@ -432,7 +432,7 @@
     <string name="general_settings_descr">Konfigurer visning og generelle indstillinger</string>
     <string name="global_app_settings">Globale programindstillinger</string>
     <string name="user_name">OSM-brugernavn</string>
-    <string name="user_name_descr">Nødvendige for ændringer i openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Nødvendige for ændringer i openstreetmap.org</string>
     <string name="user_password">OSM-kodeord</string>
     <string name="user_password_descr">Nødvendig for ændringer i openstreetmap.org</string>
     <string name="osmand_service">Kørsel i baggrunden</string>

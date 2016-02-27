@@ -314,7 +314,7 @@
 	<string name="general_settings_descr">Διαμόρφωση οθόνης και κοινές ρυθμίσεις για την εφαρμογή</string>
 	<string name="global_app_settings">Καθολικές ρυθμίσεις εφαρμογής</string>
 	<string name="user_name">Όνομα χρήστη OSM</string>
-	<string name="user_name_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
+	<string name="open_street_map_login_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
 	<string name="user_password">Κωδικός OSM</string>
 	<string name="user_password_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
 	<string name="osmand_service">Κατάσταση νάρκης</string>
