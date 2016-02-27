@@ -948,7 +948,7 @@
 
 
     <string name="download_files_not_enough_space">Non b\'est memòria bastante pro iscarrigare %1$s MB (lìberos: %2$s).</string>
-    <string name="download_files_question_space">Sa memòria disponìbile est de {2} MB! Iscarrigare {0} documentu(os) ({1} MB)?</string>
+    <string name="download_files_question_space">Boles a beru iscarrigare {0} documentu(os)? Tenes bisòngiu de {1} MB permanentemente. Como, bi sunt disponìbiles {2} MB ebbia.</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">Sa libreria nativa no est suportada dae custu dispositivu.</string>
     <string name="init_native_library">Inizializatzione libreria nativa…</string>
@@ -1176,7 +1176,7 @@
     <string name="rotate_map_to_bearing_descr">Isseberare s’alliniamentu de sa mapa a s’ischermu</string>
     <string name="rotate_map_to_bearing">Orientamentu de sa mapa</string>
     <string name="fav_imported_sucessfully">Importatzione de sos preferidos cumprida</string>
-    <string name="import_file_favourites">Sarbare sos puntos comente documentu GPX o importare in sos preferidos?</string>
+    <string name="import_file_favourites">Sarbare sos datos comente documentu GPX o importare sos puntos in sos preferidos?</string>
 
     <string name="fav_file_to_load_not_found">Su documentu GPX chi càbit sos preferidos no est istadu agatadu in {0}</string>
     <string name="fav_saved_sucessfully">Preferidos sarbados in {0}</string>
@@ -2115,4 +2115,38 @@
     <string name="shared_string_add_to_map_markers">Annanghe a sos Marcadores Mapa</string>
     <string name="consider_turning_polygons_off">Ti cussigiamus de istudare sa renderizatzione de sos polìgonos.</string>
     <string name="shared_string_toolbar">Barra ainas</string>
+    <string name="donations">Donatziones</string>
+    <string name="number_of_recipients">Nùmeru de destinatàrios</string>
+    <string name="osm_user_stat">Modìficas %1$s, positzione %2$s, modìficas totales %3$s</string>
+    <string name="osm_live_subscribe_btn">Abbona·ti</string>
+    <string name="osm_live_user_public_name">Nùmene pùblicu</string>
+    <string name="osm_live_hide_user_name">No ammustres su nùmene meu in sos raportos</string>
+    <string name="osm_live_month_cost">Costu pro mese</string>
+    <string name="osm_live_month_cost_desc">Pagamentu pro mese</string>
+    <string name="osm_live_active">Ativu</string>
+    <string name="osm_live_not_active">Inativu</string>
+    <string name="osm_live_enter_email">Pro praghere inserta un’indirìtzu de posta eletrònica vàlidu</string>
+    <string name="osm_live_enter_user_name">Pro praghere inserta su Nùmene Pùblicu</string>
+    <string name="osm_live_thanks">Gràtzias pro s\'abbonamentu tuo a sos agiornamentos in tempus reale!</string>
+    <string name="osm_live_region_desc">Parte de sa donatzione tua at a èssere imbiada a impitadores chi faghent modìficas in cussa regione</string>
+    <string name="osm_live_subscription_settings">Impostatziones de s’abbonamentu</string>
+    <string name="osm_live_ask_for_purchase">Pro praghere in antis còmpora s’abbonamentu OSM Live</string>
+
+    <string name="osm_editors_ranking">Classìfica Editores OSM</string>
+    <string name="osm_live_subscription">abbonamentu OSM LIve</string>
+    <string name="osm_live_email_desc">Nde tenimus bisòngiu pro ti imbiare informatziones a pitzu de sas contributziones</string>
+    <string name="osm_live_support_region">Regione de suportu</string>
+    <string name="osm_live_header">Custu abbonamentu abilitat agiornamentos ora pro ora pro totu sas mapas de su mundu. Sa parte manna de su balàngiu suportat sa comunidade OSM e est pagadu pro cada contributu OSM. Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro lu fàghere.</string>
+    
+    <string name="select_map_marker">Ischerta marcadore mapa</string>
+    <string name="map_markers_other">Àteros marcadores</string>
+    <string name="upload_anonymously">Imbia anonimamente</string>
+    <string name="show_transparency_seekbar">Ammustra sa barra de chirca trasparente</string>
+    <string name="download_files_error_not_enough_space">Non tènes ispàtziu bastante! Diant èssere netzessàrios {3} MB temporaneamente e {1} MB permanentemente. Como, sunt disponìbiles {2} MB ebbia.</string>
+    <string name="download_files_question_space_with_temp">Boles a beru iscarrigare {0} documentu(os)? Tenes bisòngiu de {3} MB temporaneamente e {1} MB permanentemente. Como, bi sunt {2} MB ebbia disponìbiles.</string>
+    <string name="upload_osm_note_description">Podes carrigare sas notas OSM tuas anonimamentes si impreas su profilu OpenStreetMap.org tuo.</string>
+    <string name="upload_osm_note">Càrriga nota OSM</string>
+    <string name="map_marker_1st">Primu marcadore mapa</string>
+    <string name="map_marker_2nd">Segundu marcadore mapa</string>
+    <string name="shared_string_widgets">Widgets</string>
     </resources>
