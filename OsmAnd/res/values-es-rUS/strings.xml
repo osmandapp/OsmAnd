@@ -2085,20 +2085,20 @@
     <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas de BTT</string>
     <string name="shared_string_reverse_order">Invertir orden</string>
     <string name="show_map_markers">Marcadores del mapa</string>
-    <string name="show_map_markers_description">Activar función de Marcadores del mapa</string>
+    <string name="show_map_markers_description">Activar función de marcadores del mapa</string>
     <string name="clear_active_markers_q">¿Quieres borrar todos los marcadores activos?</string>
-    <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores?</string>
+    <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores del mapa?</string>
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
-    <string name="select_map_markers">Elegir Marcadores del mapa</string>
+    <string name="select_map_markers">Elegir marcadores del mapa</string>
     <string name="show_map_markers_topbar">Mostrar barra superior de Marcadores de mapa</string>
-    <string name="map_marker_1st">Primer Marcador del mapa</string>
-    <string name="map_marker_2nd">Segundo Marcador del mapa</string>
+    <string name="map_marker_1st">Primer marcador del mapa</string>
+    <string name="map_marker_2nd">Segundo marcador del mapa</string>
     <string name="shared_string_toolbar">Barra de herramientas</string>
     <string name="shared_string_widgets">Controles</string>
-    <string name="add_points_to_map_markers_q">¿Añadir todos los puntos a Marcadores del mapa?</string>
-    <string name="shared_string_add_to_map_markers">Añadir a Marcadores del mapa</string>
+    <string name="add_points_to_map_markers_q">¿Añadir todos los puntos a marcadores del mapa?</string>
+    <string name="shared_string_add_to_map_markers">Añadir a marcadores del mapa</string>
     <string name="consider_turning_polygons_off">Se recomienda ocultar la visualización de polígonos.</string>
     <string name="download_files_error_not_enough_space">¡Sin espacio suficiente! Se necesita {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible sólo {2} MB.</string>
     <string name="download_files_question_space_with_temp">¿Descargar realmente {0} archivo(s)? Se necesitará {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible {2} MB.</string>
@@ -2125,10 +2125,11 @@
 
     <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo. La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM. En caso de que ames OsmAnd, OSM y quieras apoyarlo, esta sería una manera correcta de hacerlo.</string>
     
-    <string name="select_map_marker">Elegir Marcador del mapa</string>
+    <string name="select_map_marker">Elegir marcador del mapa</string>
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
     <string name="upload_osm_note_description">Puedes subir tus notas OSM anónimamente si usas tu perfil de OpenStreetMap.org.</string>
     <string name="upload_osm_note">Subir Notas OSM</string>
+    <string name="recalculate_route">Recalcular ruta</string>
     </resources>
