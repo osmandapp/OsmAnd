@@ -21,6 +21,10 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 		String fileName = intent.getAction();
 		String localIndexInfoFile =
 				intent.getStringExtra(LiveUpdatesHelper.LOCAL_INDEX_INFO);
+		if (localIndexInfoFile == null) {
+			LOG.error("Unexpected: localIndexInfoFile is null");
+			return;
+		}
 		WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
 		final OsmandApplication application = (OsmandApplication) context.getApplicationContext();
