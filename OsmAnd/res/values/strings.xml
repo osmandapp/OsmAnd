@@ -865,7 +865,7 @@
     <string name="calculate_osmand_route_without_internet">Calculate OsmAnd route segment without Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calculate OsmAnd route for first and last route segment</string>
     <string name="use_displayed_track_for_navigation">Do you want to use displayed track for navigation?</string>
-    <string name="keep_and_add_destination_point">Add as destination point</string>
+    <string name="keep_and_add_destination_point">Add as last destination point</string>
     <string name="select_gpx">Select GPX…</string>
     <string name="route_descr_select_destination">Select Destination</string>
     <string name="route_preferences">Route preferences</string>
