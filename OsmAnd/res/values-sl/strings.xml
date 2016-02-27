@@ -2123,11 +2123,31 @@
     <string name="select_map_marker">Izbor oznake zemljevida</string>
     <string name="map_markers_other">Druge oznake</string>
     <string name="download_files_error_not_enough_space">Ni dovolj prostora! Možnost zahteva {3} MB začasnega in {1} MB trajnega pomnilnika. Trenutno je na voljo le {2} MB prostora.</string>
-    <string name="download_files_question_space_with_temp"/>
+    <string name="download_files_question_space_with_temp">Ali res želite prejeti datoteke {0}? Prejem zahteva {3} MB začasnega pomnilnika in {1} MB trajnega prostora na napravi. Trenutno je na voljo {2} MB.</string>
     <string name="upload_osm_note_description">Opombo OSM je mogoče poslati brezimno, v kolikor uporabljate profil OpenStreetMap.org.</string>
     <string name="upload_osm_note">Pošlji Opombo OSM</string>
     <string name="upload_anonymously">Pošlji brezimno</string>
 <string name="show_transparency_seekbar">Pokaži prosojno iskalno vrstico</string>
     <string name="donations">Donacije</string>
     <string name="osm_live_subscribe_btn">Naročanje</string>
+    <string name="recalculate_route">Preračunaj pot</string>
+    <string name="number_of_recipients">Število prejemnikov</string>
+    <string name="osm_user_stat">Urajanj: %1$s, rang: %2$s, skupno urejanj: %3$s</string>
+    <string name="osm_editors_ranking">Rangiranje urednikov OSM</string>
+    <string name="osm_live_subscription">Naročila OSM</string>
+    <string name="osm_live_email_desc">Podatke potrebujemo za posredovanje\npodrobnosti o potrjenih objavah</string>
+    <string name="osm_live_user_public_name">Javno ime</string>
+    <string name="osm_live_hide_user_name">V poročilih ne pokaži mojega imena</string>
+    <string name="osm_live_support_region">Podpora regiji</string>
+    <string name="osm_live_month_cost">Mesečni stroški</string>
+    <string name="osm_live_month_cost_desc">Mesečno plačilo</string>
+    <string name="osm_live_active">Dejaven</string>
+    <string name="osm_live_not_active">Nedejaven</string>
+    <string name="osm_live_enter_email">Vpišite veljavni elektronski naslov</string>
+    <string name="osm_live_enter_user_name">Vpišite naziv ali ime, ki bo prikazano javno</string>
+    <string name="osm_live_thanks">Zahvaljujemo se vam za naročilo\nna sprotne posodobitve!</string>
+    <string name="osm_live_region_desc">Del donacije bo posredovan uporabnikom\nOSM, ki objavljajo spremembe zemljevidov\nv vaši najpogosteje uporabljeni regiji.</string>
+    <string name="osm_live_subscription_settings">Nastavitve naročil</string>
+    <string name="osm_live_ask_for_purchase">Najprej si kupite\nnaročilo OSM</string>
+
     </resources>
