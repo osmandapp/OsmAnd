@@ -437,6 +437,34 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
+	public void recalculateRoute(boolean showDialog) {
+		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(true);
+		OsmandApplication app = mapActivity.getMyApplication();
+		TargetPointsHelper targets = app.getTargetPointsHelper();
+
+		ApplicationMode mode = getRouteMode(null);
+		app.getSettings().APPLICATION_MODE.set(mode);
+		app.getRoutingHelper().setAppMode(mode);
+		app.initVoiceCommandPlayer(mapActivity);
+		// save application mode controls
+		settings.FOLLOW_THE_ROUTE.set(false);
+		app.getRoutingHelper().setFollowingMode(false);
+		app.getRoutingHelper().setRoutePlanningMode(true);
+		// reset start point
+		targets.setStartPoint(null, false, null);
+		// then update start and destination point
+		targets.updateRouteAndRefresh(true);
+
+		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		mapActivity.getMapView().refreshMap(true);
+		if (showDialog) {
+			mapActivity.getMapLayers().getMapControlsLayer().showDialog();
+		}
+		if (targets.hasTooLongDistanceToNavigate()) {
+			app.showToastMessage(R.string.route_is_too_long);
+		}
+	}
+
 	public ApplicationMode getRouteMode(LatLon from) {
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		ApplicationMode selected = settings.APPLICATION_MODE.get();

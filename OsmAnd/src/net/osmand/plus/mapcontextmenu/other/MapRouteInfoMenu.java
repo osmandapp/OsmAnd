@@ -426,7 +426,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				}
 			};
 
-			MapMarkerSelectionFragment selectionFragment = new MapMarkerSelectionFragment();
+			MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance();
 			selectionFragment.setClickListener(click);
 			selectionFragment.setDismissListener(dismissListener);
 			selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
