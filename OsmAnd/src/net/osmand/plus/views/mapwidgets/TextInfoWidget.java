@@ -85,10 +85,11 @@ public class TextInfoWidget  {
 		nightIcon = widgetNightIcon;
 		setImageDrawable(!isNight ? dayIcon : nightIcon);
 	}
-	
-	
-	
-	
+
+	public boolean isNight() {
+		return isNight;
+	}
+
 	public void setContentDescription(CharSequence text) {
 		if (contentTitle != null) {
 			view.setContentDescription(contentTitle + " " + text); //$NON-NLS-1$

@@ -287,6 +287,7 @@ public class MapMarkersWidgetsFactory {
 	public TextInfoWidget createMapMarkerControl(final MapActivity map, final boolean firstMarker) {
 		DistanceToPointInfoControl ctrl = new DistanceToPointInfoControl(map, 0, 0) {
 			private int cachedMarkerColorIndex = -1;
+			private Boolean cachedNightMode = null;
 
 			@Override
 			public LatLon getPointToNavigate() {
@@ -321,11 +322,14 @@ public class MapMarkersWidgetsFactory {
 				boolean res = super.updateInfo(drawSettings);
 
 				if (marker.colorIndex != -1) {
-					if (marker.colorIndex != cachedMarkerColorIndex) {
+					if (marker.colorIndex != cachedMarkerColorIndex
+							|| cachedNightMode == null || cachedNightMode != isNight()) {
 						setImageDrawable(map.getMyApplication().getIconsCache()
-								.getIcon(R.drawable.widget_marker_day,
+								.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
+										R.drawable.widget_marker_triangle,
 										MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex)));
 						cachedMarkerColorIndex = marker.colorIndex;
+						cachedNightMode = isNight();
 					}
 				}
 				return res;

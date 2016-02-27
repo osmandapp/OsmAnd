@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -76,6 +77,15 @@ public class IconsCache {
 
 	public Drawable getIcon(@DrawableRes int id, @ColorRes int colorId, float scale) {
 		return getDrawable(id, colorId, scale);
+	}
+
+	public Drawable getIcon(@DrawableRes int backgroundId, @DrawableRes int id, @ColorRes int colorId) {
+		Drawable b = getDrawable(backgroundId, 0);
+		Drawable f = getDrawable(id, colorId);
+		Drawable[] layers = new Drawable[2];
+		layers[0] = b;
+		layers[1] = f;
+		return new LayerDrawable(layers);
 	}
 
 	public Drawable getContentIcon(@DrawableRes int id) {
