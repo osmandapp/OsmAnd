@@ -2181,4 +2181,21 @@
     <string name="download_files_question_space_with_temp">Scaricare veramente {0} file(s)? Servirebbero {3} MB temporaneamente e {1} MB permanentemente. Ora, sono disponibili solo {2} MB.</string>
     <string name="upload_osm_note_description">Puoi inviare le tue Note OSM anonimamente se utilizzi il tuo profilo OpenStreetMap.org.</string>
     <string name="upload_osm_note">Invia Nota OSM</string>
+    <string name="donations">Donazioni</string>
+    <string name="number_of_recipients">Numero di destinatari</string>
+    <string name="osm_user_stat">Modifiche %1$s, posizione %2$s, modifiche totali %3$s</string>
+    <string name="osm_editors_ranking">Classifica contributori OSM</string>
+    <string name="osm_live_subscription">Sottoscrizione OSM Live</string>
+    <string name="osm_live_subscribe_btn">Sottoscrivi</string>
+    <string name="osm_live_email_desc">Ne abbiamo bisogno per fornirti informazioni sui contributi</string>
+    <string name="osm_live_user_public_name">Nome pubblico</string>
+    <string name="osm_live_hide_user_name">Non mostrare il mio nome nei rapporti</string>
+    <string name="osm_live_support_region">Sostieni la regione</string>
+    <string name="osm_live_month_cost">Costo mensile</string>
+    <string name="osm_live_month_cost_desc">Pagamento mensile</string>
+    <string name="osm_live_active">Attivo</string>
+    <string name="osm_live_not_active">Non attivo</string>
+    <string name="osm_live_enter_email">Per favore inserire un indirizzo email valida</string>
+    <string name="osm_live_enter_user_name">Prego inserire il Nome Pubblico</string>
+    <string name="osm_live_thanks">Geazie di aver sottoscritto il live updates!</string>
     </resources>
