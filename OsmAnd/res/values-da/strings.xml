@@ -2274,7 +2274,7 @@
     <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
     <string name="show_map_markers">Kortmarkører</string>
     <string name="show_map_markers_description">Aktivér kortmarkører</string>
-    <string name="clear_active_markers_q">Slet alle aktive markører?</string>
+    <string name="clear_active_markers_q">Fjern alle aktive markører?</string>
     <string name="clear_markers_history_q">Slet kortmarkørhistoriken?</string>
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kortmarkører</string>
