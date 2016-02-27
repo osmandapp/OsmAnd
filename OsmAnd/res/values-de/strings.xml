@@ -2069,12 +2069,12 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="map_marker_1st">Erste Kartenmarkierung</string>
     <string name="map_marker_2nd">Zweite Kartenmarkierung</string>
     <string name="shared_string_toolbar">Werkzeugleiste</string>
-    <string name="add_points_to_map_markers_q">"Wollen sie alle Punkte zu  den Kartenmarkierungen hinzufügen?"</string>
+    <string name="add_points_to_map_markers_q">"Wollen Sie alle Punkte zu den Kartenmarkierungen hinzufügen?"</string>
     <string name="shared_string_add_to_map_markers">Zu Kartenmarkierungen hinzufügen</string>
     <string name="select_map_markers">Kartenmarkierungen auswählen</string>
     <string name="show_map_markers_description">Kartenmarkierungen aktivieren</string>
-    <string name="clear_active_markers_q">Wollen sie alle aktiven Kartenmarkierungen löschen?</string>
-    <string name="clear_markers_history_q">Wollen sie den Verlauf der Kartenmarkierungen löschen?</string>
+    <string name="clear_active_markers_q">Wollen Sie alle aktiven Kartenmarkierungen entfernen?</string>
+    <string name="clear_markers_history_q">Wollen Sie den Verlauf der Kartenmarkierungen löschen?</string>
     <string name="active_markers">Aktive Kartenmarkierungen</string>
     <string name="map_markers">Kartenmarkierungen</string>
     <string name="map_marker">Kartenmarkierung</string>
