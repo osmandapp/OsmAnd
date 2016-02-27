@@ -2275,7 +2275,7 @@
     <string name="show_map_markers">Kortmarkører</string>
     <string name="show_map_markers_description">Aktivér kortmarkører</string>
     <string name="clear_active_markers_q">Slet alle aktive markører?</string>
-    <string name="clear_markers_history_q">Slet markørhistoriken?</string>
+    <string name="clear_markers_history_q">Slet kortmarkørhistoriken?</string>
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kortmarkører</string>
     <string name="map_marker">Kortmarkør</string>
@@ -2320,4 +2320,5 @@
 
     <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
     
+    <string name="recalculate_route">Genberegn ruten</string>
     </resources>
