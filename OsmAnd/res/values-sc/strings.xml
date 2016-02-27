@@ -959,7 +959,7 @@
 
     <string name="gpx_option_reverse_route">Furria diretzione GPX</string>
     <string name="rotate_map_bearing_opt">In sa diretzione de sa mòvida</string>
-    <string name="show_view_angle">Ammustra diretzione de osservatzione de abbaidadura</string>
+    <string name="show_view_angle">Ammustra diretzione de osservatzione de abbistadura</string>
 
 
     <string name="choose_auto_follow_route">Tzentra automaticamente sa mapa</string>
@@ -1541,7 +1541,7 @@
     <string name="osmo_device_not_found">Dispositivu no agatau</string>
     <string name="anonymous_user">Impitadore anònimu</string>
     <string name="logged_as">Identificadu comente %1$s</string>
-    <string name="osmo_no_connection_msg">Su servìtziu OsMo no est disponìbile:\n- còmpida sa connessione;\n- còmpida sas impostatziones;\n- abbàida su Twitter nostru: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Su servìtziu OsMo no est disponìbile:\n- còmpida sa connessione;\n- còmpida sas impostatziones;\n- abbista su Twitter nostru: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in un\'ufìtziu privadu.</string>
     <string name="rendering_category_details">Minujas</string>
     <string name="configure_map">Cunfigura sa mapa</string>
