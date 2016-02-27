@@ -2090,7 +2090,7 @@
     <string name="show_map_markers">Kartmarkörer</string>
     <string name="show_map_markers_description">Aktivera kartmarkörer</string>
     <string name="clear_active_markers_q">Vill du ta bort alla aktiva markörer?</string>
-    <string name="clear_markers_history_q">Vill du radera markörhistoriken?</string>
+    <string name="clear_markers_history_q">Vill du radera kartmarkörshistoriken?</string>
     <string name="active_markers">Aktiva markörer</string>
     <string name="map_markers">Kartmarkörer</string>
     <string name="map_marker">Kartmarkör</string>
@@ -2130,4 +2130,5 @@
     <string name="osm_live_ask_for_purchase">Köp OSM Live-prenumeration först</string>
 
     <string name="show_transparency_seekbar">Visa transparent sökfält</string>
+    <string name="recalculate_route">Beräkna om rutten</string>
     </resources>
