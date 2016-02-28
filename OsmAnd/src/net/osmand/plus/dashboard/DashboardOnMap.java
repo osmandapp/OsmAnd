@@ -322,10 +322,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 									mapActivity.getMapActions().stopNavigationWithoutConfirm();
 									mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
 								}
-							//} else {
-							//	if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
-							//		reloadAdapter();
-							//	}
 							}
 						}
 					}
