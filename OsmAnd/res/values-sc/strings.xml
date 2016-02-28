@@ -58,7 +58,7 @@
     <string name="calculate_osmand_route_without_internet">Càlcula un\'àndala cun OsmAnd chene impreare internet</string>
     <string name="gpx_option_calculate_first_last_segment">Càlcula un’àndala cun OsmAnd pro su primu e s’ùrtimu segmentu de sa caminera</string>
     <string name="use_displayed_track_for_navigation">Boles impreare s’àndala ammustrada pro su nàvigu?</string>
-    <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
+    <string name="keep_and_add_destination_point">Annanghe comente ùrtimu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
     <string name="shared_string_select_on_map">Ischerta in sa mapa</string>
@@ -2149,4 +2149,6 @@
     <string name="map_marker_1st">Primu marcadore mapa</string>
     <string name="map_marker_2nd">Segundu marcadore mapa</string>
     <string name="shared_string_widgets">Widgets</string>
+    <string name="recalculate_route">Torra a calculare s’àndala</string>
+    <string name="shared_string_topbar">Barra in pitzu</string>
     </resources>
