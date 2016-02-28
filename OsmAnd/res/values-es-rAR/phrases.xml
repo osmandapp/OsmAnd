@@ -980,7 +980,7 @@
 	<string name="poi_recycling_shoes">Calzados</string>
 	<string name="poi_recycling_aluminium">Aluminio</string>
 	<string name="poi_recycling_organic">Orgánico</string>
-	<string name="poi_recycling_beverage_cartons">Cartones de bebida</string>
+	<string name="poi_recycling_beverage_cartons">Envases de cartón</string>
 	<string name="poi_recycling_garden_waste">Residuos de jardín</string>
 	<string name="poi_recycling_low_energy_bulbs">Bombillas de bajo consumo</string>
 	<string name="poi_recycling_fluorescent_tubes">Tubos fluorescentes</string>
@@ -998,7 +998,7 @@
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_hydrargyrum">Mercurio</string>
 	<string name="poi_recycling_rubble">Escombros</string>
-	<string name="poi_recycling_cds">CDs</string>
+	<string name="poi_recycling_cds">Discos compactos (CD)</string>
 	<string name="poi_recycling_waste_oil">Aceite usado</string>
 	<string name="poi_recycling_bottles">Botellas</string>
 	<string name="poi_recycling_cork">Corchos</string>
@@ -1008,7 +1008,7 @@
 	<string name="poi_recycling_sheet_metal">Chapas</string>
 	<string name="poi_recycling_styrofoam">Poliestireno extruído</string>
 	<string name="poi_recycling_drugs">Medicamentos</string>
-	<string name="poi_recycling_compost">Compost</string>
+	<string name="poi_recycling_compost">Abono orgánico</string>
 	<string name="poi_recycling_christmas_trees">Árboles navideños</string>
 	<string name="poi_recycling_light_bulbs">Bombillas</string>
 	<string name="poi_recycling_polyester">Poliéster</string>
@@ -1131,7 +1131,7 @@
 	<string name="poi_denomination_quaker">Cuáquero</string>
 	<string name="poi_denomination_shaktism">Shaktismo</string>
 	<string name="poi_denomination_uniting">Uniendo</string>
-	<string name="poi_denomination_wesleyan">Wesleyan</string>
+	<string name="poi_denomination_wesleyan">Wesleyana</string>
 	<string name="poi_denomination_shingon_shu">Budismo shingon</string>
 	<string name="poi_landfill_waste_nuclear">Reciduos nucleares</string>
 	<string name="poi_start_date">Fecha de inicio</string>
