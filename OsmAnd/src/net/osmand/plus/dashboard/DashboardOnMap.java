@@ -343,7 +343,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 							}
 						}
 
-						for (int i = deletedMarkers.size() - 1; i >= 0; i--) {
+						for (int i = 0; i <= deletedMarkers.size() - 1; i++) {
 							markersHistory.add(0, (MapMarker) deletedMarkers.get(i));
 						}
 						deletedMarkers.clear();
