@@ -1,2 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="shared_string_topbar">Supra breto</string>
+    <string name="recalculate_route">Rekalkuli kurson</string>
+    <string name="donations">Donacioj</string>
+    <string name="number_of_recipients">Nombro da ricevantoj</string>
+    <string name="osm_user_stat">Redaktoj: %1$s, rango: %2$s, ĉiuj redaktoj: %3$s</string>
+    <string name="osm_editors_ranking">Ranglisto de OSM-redaktantoj</string>
+    <string name="osm_live_subscription">Abono al OSM Live</string>
+    <string name="osm_live_subscribe_btn">Ekaboni</string>
+    <string name="osm_live_email_desc">Ni bezonas tion por liveri al vi informojn pri kontribuaĵoj</string>
+    <string name="osm_live_user_public_name">Publika Nomo</string>
+    <string name="osm_live_hide_user_name">Ne montri mian nomon en raportoj</string>
+    <string name="osm_live_support_region">Subteni regionon</string>
+    <string name="osm_live_month_cost"/>
+    <string name="osm_live_active">Aktiva</string>
+    <string name="osm_live_not_active">Malaktiva</string>
+    <string name="osm_live_enter_email">Bonvolu entajpi korektan retadreson</string>
+    <string name="osm_live_enter_user_name">Bonvolu entajpi Publikan Nomon</string>
+    <string name="osm_live_thanks">Dankon al ci por aboni aŭtomatajn ĝisdatigojn!</string>
+    <string name="osm_live_region_desc">Parton de viaj donacioj oni sendos al OSM-uzantoj kiuj sendas ŝanĝojn al mapoj en tiu regiono</string>
+    <string name="osm_live_subscription_settings">Abonaj agordoj</string>
+    <string name="osm_live_ask_for_purchase">Bonvolu aĉeti abonon al OSM Live antaŭe</string>
+
+    <string name="osm_live_header">Tiu ĉi abono aktivigas ĉiuhorajn ĝisdatigojn por ĉiuj mapoj en la mondo. Plejparto de enspezo revenas al OSM komunumo kaj estas pagita por iu ajn kontribuaĵo al OSM. Se vi ŝategas OsmAnd kaj OSM kaj vi volas subteni ĝin, tio ĉi estas la plej bona kielo.</string>
+    
+    <string name="select_map_marker">Elekti mapmarkilon</string>
+    <string name="map_markers_other">Aliaj markiloj</string>
+    <string name="upload_anonymously">Alŝuti anonime</string>
+    <string name="share_geo">geo:</string>
+    <string name="m_s">m/s</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="shared_string_wikipedia">Vikipedio</string>
+    <string name="local_indexes_cat_wiki">Vikipedio</string>
+    <string name="osmand_parking_hour">h</string>
+    <string name="osmand_parking_minute">min</string>
+    <string name="show_transparency_seekbar">Montri travideblan serĉbreton</string>
+    <string name="download_files_error_not_enough_space">Mankas spacon! Tiu ĉi bezonos {3} MB dumtempe kaj {1} MB daŭre. Nuntempe estas nur {2} MB disponebla.</string>
+    <string name="download_files_question_space_with_temp">Ĉu vere elŝuti {0} dosiero(j)n? Tio ĉi bezonos {3} MB dumtempe kaj {1} MB daŭre. Nuntempe estas {2} MB disponebla.</string>
+    <string name="download_files_question_space">Ĉu vere elŝuti {0} dosiero(j)n? Tio ĉi bezonos {1} MB daŭre. Nuntempe estas {2} MB disponebla.</string>
+    <string name="upload_osm_note_description">Vi povas alŝuti vian OSM Note anonime se vi uzos vian OpenStreetMap.org profilon.</string>
+    <string name="upload_osm_note">Alŝuti na OSM Note</string>
+    <string name="shared_string_toolbar">Ilobreto</string>
+    <string name="shared_string_widgets">Fenestraĵoj</string>
+    <string name="consider_turning_polygons_off">Oni rekomendas malaktivigi bildigadon de pluranguloj.</string>
+    <string name="rendering_attr_showMtbRoutes_name">Montri montbiciklajn vojojn</string>
+    <string name="show_polygons">Montri plurangulojn</string>
+    <string name="shared_string_status">Stato</string>
+    <string name="find_parking">Trovi parkumejon</string>
+    <string name="shared_string_save_changes">Konservi ŝanĝojn</string>
+    <string name="shared_string_email_address">Retpoŝtadreso</string>
+    <string name="rendering_attr_hideUnderground_name">Kaŝi subterajn objektojn</string>
+    <string name="shared_string_remove">Forigi</string>
+    <string name="data_is_not_available">Datumoj ne disponeblaj</string>
+    <string name="shared_string_read_more">Legi pli</string>
+    <string name="shared_string_select">Elekti</string>
+    <string name="clear_updates_proposition_message">Vi povas forigi elŝutitajn ĝisdatigojn kaj rericevi originan mapon</string>
+    <string name="add_time_span">Aldoni tempospacon</string>
+    <string name="road_blocked">Vojo barita</string>
+    </resources>
