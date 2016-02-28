@@ -256,7 +256,7 @@ public class MapMarkersHelper {
 	public void removeActiveMarkers() {
 		cancelAddressRequests();
 		List<MapMarker> markers = new ArrayList<>(mapMarkers.size());
-		for (int i = 0, i<= mapMarkers.size() - 1; i++) {
+		for (int i = 0; i<= mapMarkers.size() - 1; i++) {
 			MapMarker marker = mapMarkers.get(i);
 			addMapMarkerHistory(marker);
 		}
