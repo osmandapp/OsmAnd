@@ -2321,4 +2321,5 @@
     <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
     
     <string name="recalculate_route">Genberegn ruten</string>
+    <string name="shared_string_topbar">Topbar</string>
     </resources>
