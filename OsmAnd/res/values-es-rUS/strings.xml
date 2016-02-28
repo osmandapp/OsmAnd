@@ -410,7 +410,7 @@
     <string name="index_name_canada">Norte América - Canadá</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Gran Bretaña</string>
-    <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
+    <string name="keep_and_add_destination_point">Añadir como último punto de destino</string>
     <string name="select_gpx">Elegir GPX…</string>
     <string name="route_descr_select_destination">Elige el destino</string>
     <string name="route_preferences">Preferencias de la ruta</string>
@@ -2086,7 +2086,7 @@
     <string name="shared_string_reverse_order">Invertir orden</string>
     <string name="show_map_markers">Marcadores del mapa</string>
     <string name="show_map_markers_description">Activar función de marcadores del mapa</string>
-    <string name="clear_active_markers_q">¿Quieres borrar todos los marcadores activos?</string>
+    <string name="clear_active_markers_q">¿Quieres quitar todos los marcadores activos?</string>
     <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores del mapa?</string>
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores del mapa</string>
