@@ -1185,7 +1185,7 @@
 
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>
-    <string name="keep_and_add_destination_point">Lägg till som destinationspunkt</string>
+    <string name="keep_and_add_destination_point">Lägg till som sista destinationspunkt</string>
     <string name="calculate_osmand_route_without_internet">Beräkna OsmAnd-ruttsegment utan Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Beräkna OsmAnd-rutt för första och sista ruttsegmentet</string>
     <string name="use_displayed_track_for_navigation">Vill du använda det visade spåret för navigering?</string>
