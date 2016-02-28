@@ -2119,7 +2119,7 @@
     <string name="osm_live_enter_email">Ingresa un correo electrónico válido</string>
     <string name="osm_live_enter_user_name">Ingresa un nombre público</string>
     <string name="osm_live_thanks">¡Gracias por suscribirte a las actualizaciones en vivo!</string>
-    <string name="osm_live_region_desc">Parte de tu donación será enviada a los usuarios de OSM que realicen cambios en el mapa de esa región</string>
+    <string name="osm_live_region_desc">Parte de tu donación se enviará a los usuarios de OSM que realicen cambios en el mapa de esa región</string>
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
     <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OSM en vivo</string>
 
