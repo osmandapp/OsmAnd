@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1707,4 +1708,8 @@
     <string name="navigate_point_northing">Βόρεια</string>
     <string name="navigate_point_easting">Ανατολικά</string>
     <string name="proxy_port_title">Θύρα διακομιστή μεσολάβησης</string>
-	</resources>
+	<string name="recalculate_route">Επαναυπολογισμός διαδρομής</string>
+    <string name="donations">Δωρεές</string>
+    <string name="osm_live_subscribe_btn">Εγγραφή</string>
+    <string name="osm_live_user_public_name">Δημόσιο Όνομα</string>
+    </resources>
