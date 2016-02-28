@@ -2089,4 +2089,23 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="upload_osm_note">OSM Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
 <string name="show_transparency_seekbar">Transparente Suchleiste anzeigen</string>
+    <string name="recalculate_route">Route neu berechnen</string>
+    <string name="donations">Spenden</string>
+    <string name="number_of_recipients">Anzahl der Empfänger</string>
+    <string name="osm_user_stat">Bearbeitungen %1$s, Rang %2$s, Gesamtbearbeitungen %3$s</string>
+    <string name="osm_editors_ranking">OSM Bearbeiter Rangliste</string>
+    <string name="osm_live_subscription">OSM Live Abonnement</string>
+    <string name="osm_live_subscribe_btn">Abonnieren</string>
+    <string name="osm_live_user_public_name">Öffentlicher Name</string>
+    <string name="osm_live_hide_user_name">Meinen Namen nicht in Berichten anzeigen</string>
+    <string name="osm_live_month_cost">Monatliche Kosten</string>
+    <string name="osm_live_month_cost_desc">Monatliche Zahlung</string>
+    <string name="osm_live_active">Aktive</string>
+    <string name="osm_live_not_active">Inaktiv</string>
+    <string name="osm_live_enter_email">Bitte gültige e-Mail-Adresse eingeben</string>
+    <string name="osm_live_enter_user_name">Bitte einen öffentlichen Namen eingeben</string>
+    <string name="osm_live_thanks">Vielen Dank für Ihr Abonnement von Live Aktualisierungen!</string>
+    <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
+    <string name="osm_live_ask_for_purchase">Kaufen Sie bitte zuerst ein OSM Live Abonnement</string>
+
     </resources>
