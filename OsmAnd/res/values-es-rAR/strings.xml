@@ -2132,4 +2132,5 @@
     <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo. La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM. En caso de que ames OsmAnd, OSM y quieras apoyarlo, esta sería una manera correcta de hacerlo.</string>
     
     <string name="recalculate_route">Recalcular ruta</string>
+    <string name="shared_string_topbar">Barra superior</string>
     </resources>
