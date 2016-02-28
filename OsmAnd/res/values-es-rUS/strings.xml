@@ -187,7 +187,7 @@
     <string name="osmo_use_https">Usar HTTPS</string>
     <string name="search_for">Buscar</string>
     <string name="coordinates">Coordenadas</string>
-    <string name="rendering_attr_subwayMode_name">Rutas de subte</string>
+    <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="impassable_road">Evitar carreteras…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi</string>
@@ -812,11 +812,11 @@
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
     <string name="add_tag">Añadir Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
-    <string name="poi_filter_parking">Estacionamiento</string>
+    <string name="poi_filter_parking">Estacionamientos</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte público</string>
     <string name="poi_filter_entertainment">Entretenimiento</string>
-    <string name="poi_filter_accomodation">Alojamiento</string>
+    <string name="poi_filter_accomodation">Alojamientos</string>
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
     <string name="poi_filter_car_aid">Asistencia vehicular</string>
@@ -2132,4 +2132,5 @@
     <string name="upload_osm_note_description">Puedes subir tus notas OSM anónimamente si usas tu perfil de OpenStreetMap.org.</string>
     <string name="upload_osm_note">Subir Notas OSM</string>
     <string name="recalculate_route">Recalcular ruta</string>
+    <string name="shared_string_topbar">Barra superior</string>
     </resources>
