@@ -314,6 +314,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 								onItemsSwapped(stableAdapter.getActiveObjects());
 							} else if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 								updateMapMarkers(stableAdapter.getActiveObjects());
+								reloadAdapter();
 							}
 							if (stableAdapter.getActiveObjects().size() == 0) {
 								hideDashboard();
@@ -321,10 +322,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 									mapActivity.getMapActions().stopNavigationWithoutConfirm();
 									mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
 								}
-							} else {
-								if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
-									reloadAdapter();
-								}
+							//} else {
+							//	if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION) {
+							//		reloadAdapter();
+							//	}
 							}
 						}
 					}
