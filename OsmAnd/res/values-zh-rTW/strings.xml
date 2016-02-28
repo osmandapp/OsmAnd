@@ -1183,7 +1183,7 @@
     <string name="shared_string_favorite">我的最愛</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
-    <string name="keep_and_add_destination_point">加為目的地標點</string>
+    <string name="keep_and_add_destination_point">加為最後的目的地標點</string>
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd 預計的路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
@@ -2096,8 +2096,8 @@
     <string name="shared_string_reverse_order">順序相反</string>
     <string name="show_map_markers">地圖標記</string>
     <string name="show_map_markers_description">啟動地圖標記功能</string>
-    <string name="clear_active_markers_q">您想要刪除所有的活動標記嗎？</string>
-    <string name="clear_markers_history_q">您想清除標記履歷嗎？</string>
+    <string name="clear_active_markers_q">您想要移除所有的活動標記嗎？</string>
+    <string name="clear_markers_history_q">您想清除地圖標記歷史記錄嗎？</string>
     <string name="active_markers">啟動標記</string>
     <string name="map_markers">地圖標記</string>
     <string name="map_marker">地圖標記</string>
@@ -2140,4 +2140,5 @@
 
     <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。收入的主要部分回到 OSM 社群和支付每個 OSM 的貢獻。假如您喜愛 OsmAnd 和 OSM 並且想要支援它，這是一個完美方式的作法。</string>
     
+    <string name="recalculate_route">重新計算路線</string>
     </resources>
