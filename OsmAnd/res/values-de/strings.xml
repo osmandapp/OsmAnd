@@ -2108,4 +2108,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
     <string name="osm_live_ask_for_purchase">Kaufen Sie bitte zuerst ein OSM Live Abonnement</string>
 
+    <string name="osm_live_region_desc">Teile ihrer Spende werden am OSM Mitwirkende weiter gegeben, welche diese Region bearbeiten</string>
     </resources>
