@@ -1940,4 +1940,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="donations">Donacions</string>
     <string name="number_of_recipients">Nombre de receptors</string>
     <string name="shared_string_topbar">Barra superior</string>
+    <string name="recalculate_route">Recalcula la ruta</string>
+    <string name="osm_user_stat">Edicions %1$s, posició %2$s, total d\'edicions %3$s</string>
+    <string name="osm_editors_ranking">Classificació d\'editors OSM</string>
     </resources>
