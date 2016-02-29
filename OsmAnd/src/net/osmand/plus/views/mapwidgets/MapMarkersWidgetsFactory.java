@@ -21,7 +21,6 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.DistanceToPointInfoControl;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -54,6 +53,7 @@ public class MapMarkersWidgetsFactory {
 	private ImageButton moreButton;
 	private ImageButton moreButton2nd;
 
+	private LatLon loc;
 	private MapMarker marker;
 	private MapMarker marker2nd;
 
@@ -178,6 +178,17 @@ public class MapMarkersWidgetsFactory {
 			return;
 		}
 
+		if (customLocation != null) {
+			loc = customLocation;
+		} else {
+			Location l = map.getMapViewTrackingUtilities().getMyLocation();
+			if (l != null) {
+				loc = new LatLon(l.getLatitude(), l.getLongitude());
+			} else {
+				loc = null;
+			}
+		}
+
 		List<MapMarker> markers = helper.getSortedMapMarkers();
 		if (zoom < 3 || markers.size() == 0
 				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
@@ -189,15 +200,6 @@ public class MapMarkersWidgetsFactory {
 			return;
 		}
 
-		LatLon loc = null;
-		if (customLocation != null) {
-			loc = customLocation;
-		} else {
-			Location l = map.getMapViewTrackingUtilities().getMyLocation();
-			if (l != null) {
-				loc = new LatLon(l.getLatitude(), l.getLongitude());
-			}
-		}
 		Float heading = map.getMapViewTrackingUtilities().getHeading();
 
 		MapMarker marker = markers.get(0);
@@ -285,54 +287,10 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public TextInfoWidget createMapMarkerControl(final MapActivity map, final boolean firstMarker) {
-		DistanceToPointInfoControl ctrl = new DistanceToPointInfoControl(map, 0, 0) {
-			private int cachedMarkerColorIndex = -1;
-			private Boolean cachedNightMode = null;
-
+		return new DistanceToMapMarkerControl(map, firstMarker) {
 			@Override
-			public LatLon getPointToNavigate() {
-				MapMarker marker = getMarker();
-				if (marker != null) {
-					return marker.point;
-				}
-				return null;
-			}
-
-			private MapMarker getMarker() {
-				List<MapMarker> markers = helper.getSortedMapMarkers();
-				if (firstMarker) {
-					if (markers.size() > 0) {
-						return markers.get(0);
-					}
-				} else {
-					if (markers.size() > 1) {
-						return markers.get(1);
-					}
-				}
-				return null;
-			}
-
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				MapMarker marker = getMarker();
-				if (marker == null) {
-					setText(null, null);
-					return false;
-				}
-				boolean res = super.updateInfo(drawSettings);
-
-				if (marker.colorIndex != -1) {
-					if (marker.colorIndex != cachedMarkerColorIndex
-							|| cachedNightMode == null || cachedNightMode != isNight()) {
-						setImageDrawable(map.getMyApplication().getIconsCache()
-								.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
-										R.drawable.widget_marker_triangle,
-										MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex)));
-						cachedMarkerColorIndex = marker.colorIndex;
-						cachedNightMode = isNight();
-					}
-				}
-				return res;
+			public LatLon getLatLon() {
+				return loc;
 			}
 
 			@Override
@@ -340,11 +298,114 @@ public class MapMarkersWidgetsFactory {
 				showMarkerOnMap(firstMarker ? 0 : 1);
 			}
 		};
-		ctrl.setAutoHide(false);
-		return ctrl;
 	}
 
 	public boolean isLandscapeLayout() {
 		return !portraitMode && !largeDevice;
+	}
+
+	public abstract static class DistanceToMapMarkerControl extends TextInfoWidget {
+
+		private boolean firstMarker;
+		private final OsmandMapTileView view;
+		private MapActivity map;
+		private MapMarkersHelper helper;
+		private float[] calculations = new float[1];
+		private int cachedMeters;
+		private int cachedMarkerColorIndex = -1;
+		private Boolean cachedNightMode = null;
+
+		public DistanceToMapMarkerControl(MapActivity map, boolean firstMarker) {
+			super(map);
+			this.map = map;
+			this.firstMarker = firstMarker;
+			this.view = map.getMapView();
+			helper = map.getMyApplication().getMapMarkersHelper();
+			setText(null, null);
+			setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					click(view);
+				}
+			});
+		}
+
+		protected abstract void click(OsmandMapTileView view);
+
+		public abstract LatLon getLatLon();
+
+		@Override
+		public boolean updateInfo(DrawSettings drawSettings) {
+			MapMarker marker = getMarker();
+			if (marker == null) {
+				setText(null, null);
+				return false;
+			}
+			boolean res = false;
+			int d = getDistance();
+			if (cachedMeters != d) {
+				cachedMeters = d;
+				String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, view.getApplication());
+				int ls = ds.lastIndexOf(' ');
+				if (ls == -1) {
+					setText(ds, null);
+				} else {
+					setText(ds.substring(0, ls), ds.substring(ls + 1));
+				}
+				res = true;
+			}
+
+			if (marker.colorIndex != -1) {
+				if (marker.colorIndex != cachedMarkerColorIndex
+						|| cachedNightMode == null || cachedNightMode != isNight()) {
+					setImageDrawable(map.getMyApplication().getIconsCache()
+							.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
+									R.drawable.widget_marker_triangle,
+									MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex)));
+					cachedMarkerColorIndex = marker.colorIndex;
+					cachedNightMode = isNight();
+					res = true;
+				}
+			}
+			return res;
+		}
+
+		public LatLon getPointToNavigate() {
+			MapMarker marker = getMarker();
+			if (marker != null) {
+				return marker.point;
+			}
+			return null;
+		}
+
+		private MapMarker getMarker() {
+			List<MapMarker> markers = helper.getSortedMapMarkers();
+			if (firstMarker) {
+				if (markers.size() > 0) {
+					return markers.get(0);
+				}
+			} else {
+				if (markers.size() > 1) {
+					return markers.get(1);
+				}
+			}
+			return null;
+		}
+
+		public int getDistance() {
+			int d = 0;
+			LatLon l = getPointToNavigate();
+			if (l != null) {
+				LatLon loc = getLatLon();
+				if (loc == null) {
+					Location.distanceBetween(view.getLatitude(), view.getLongitude(), l.getLatitude(), l.getLongitude(), calculations);
+				} else {
+					Location.distanceBetween(loc.getLatitude(), loc.getLongitude(), l.getLatitude(), l.getLongitude(), calculations);
+				}
+				d = (int) calculations[0];
+			}
+			return d;
+		}
 	}
 }
