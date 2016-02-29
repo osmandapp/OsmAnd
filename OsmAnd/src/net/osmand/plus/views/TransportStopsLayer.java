@@ -4,18 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.TransportIndexRepository;
 
@@ -161,13 +157,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		return null;
 	}
 	
-	private void showDescriptionDialog(TransportStop a) {
-		AlertDialog.Builder bs = new AlertDialog.Builder(view.getContext());
-		bs.setTitle(a.getName(view.getSettings().MAP_PREFERRED_LOCALE.get()));
-		bs.setMessage(getStopDescription(a, true));
-		bs.show();
-	}
-	
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof TransportStop){
@@ -199,23 +188,4 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 		return null;
 	}
-	
-	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-		if(o instanceof TransportStop){
-			final TransportStop a = (TransportStop) o;
-			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					showDescriptionDialog(a);
-					return true;
-				}
-			};
-			adapter.item(R.string.poi_context_menu_showdescription)
-			.iconColor( R.drawable.ic_action_note_dark).listen(listener).reg();
-		}
-	}
-
-
-
 }

@@ -9,6 +9,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper;
@@ -30,6 +31,7 @@ import net.osmand.plus.mapcontextmenu.controllers.MapMarkerMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.osmedit.EditPOIMenuController;
@@ -106,6 +108,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new GpxItemMenuController(app, mapActivity, pointDescription, (GpxDisplayItem) object);
 			} else if (object instanceof MapMarker) {
 				menuController = new MapMarkerMenuController(app, mapActivity, pointDescription, (MapMarker) object);
+			} else if (object instanceof TransportStop) {
+				menuController = new TransportStopController(app, mapActivity, pointDescription, (TransportStop) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
