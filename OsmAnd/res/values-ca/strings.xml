@@ -1939,4 +1939,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="consider_turning_polygons_off">És recomanable desactivar la renderització de polígons.</string>
     <string name="donations">Donacions</string>
     <string name="number_of_recipients">Nombre de receptors</string>
+    <string name="shared_string_topbar">Barra superior</string>
     </resources>
