@@ -2027,4 +2027,5 @@
     <string name="recalculate_route">Recalcular rota</string>
     <string name="donations">Doações</string>
     <string name="number_of_recipients">Número de destinatários</string>
+    <string name="osm_editors_ranking">Ranking de editores de OSM</string>
     </resources>
