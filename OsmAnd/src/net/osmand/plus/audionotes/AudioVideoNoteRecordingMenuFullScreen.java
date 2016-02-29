@@ -73,11 +73,13 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 	}
 
 	public WeakReference<AudioVideoNoteRecordingMenuFullScreenFragment> findMenuFragment() {
-		Fragment fragment = getMapActivity().getSupportFragmentManager().findFragmentByTag(AudioVideoNoteRecordingMenuFullScreenFragment.TAG);
-		if (fragment != null && !fragment.isDetached()) {
-			return new WeakReference<>((AudioVideoNoteRecordingMenuFullScreenFragment) fragment);
-		} else {
-			return null;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(AudioVideoNoteRecordingMenuFullScreenFragment.TAG);
+			if (fragment != null && !fragment.isDetached()) {
+				return new WeakReference<>((AudioVideoNoteRecordingMenuFullScreenFragment) fragment);
+			}
 		}
+		return null;
 	}
 }
