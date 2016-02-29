@@ -2186,7 +2186,7 @@
     <string name="shared_string_reverse_order">Volgorde omdraaien</string>
     <string name="donations">Donaties</string>
     <string name="number_of_recipients">Aantal Ontvangers</string>
-    <string name="osm_user_stat">%1$s bewerkingen, Rang %2$s, Wereldwijd: %3$s bewerkingen</string>
+    <string name="osm_user_stat">%1$s bewerkingen, rang %2$s, wereldwijd: %3$s bewerkingen</string>
     <string name="osm_editors_ranking">Ranking OSM Medewerkers</string>
     <string name="osm_live_subscription">OSM Live Abonnement</string>
     <string name="osm_live_subscribe_btn">Abonneren</string>
@@ -2230,4 +2230,6 @@
     <string name="map_marker">Markeervlaggetje</string>
     <string name="consider_turning_polygons_off">Het wordt aanbevolen om Vlakken te verbergen.</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd+ Kaarten &amp; Navigatie - Plaatsen vinden en routes berekenen zonder internetverbinding. Eenvoudig kaarten downloaden van alle landen wereldwijd voor je op reis gaat. Basisfuncties: • Gedetailleerde kaarten van 200 landen • Offline navigatie met gesproken aanwijzingen • Offline adressen zoeken • Offline informatie over bezienswaardigheden, café\'s, parkeerplaatsen, winkels enz. • Locaties als Favoriet opslaan • Navigatie voor Auto, Fiets en Wandelen Aanvullende mogelijkheden: • GPX-tracks tonen en opnemen • Wikipedia informatie van plaatsen en interessepunten • Foto-Video en Audio-Notities maken  •   Dag en Nachtmode voor veilig autorijden • Openbaar Vervoer: haltes en lijnen tonen • Fiets en Wandelroutes • Online kaarten weergeven uit diverse bronnen • Informatie over straatkwaliteit en verlichtging • Interessepunten aanmaken, wijzigen en verwijderen door OpenStreetMap.org gebruikers • OsMo - Live andere apparaten volgen Een betrouwbare Navigatietoepassing voor uw land: Frankrijk, Duitsland, Mexico, Verenigd Koninkrijk, Spanje, Nederland, Verenigde Staten van Amerika, Rusland, Brazilië of welk ander land ook. Plugins: Hoogtelijnen en reliëf https://goo.gl/7mojP8 Hoogtelijnen en reliëfschaduw wordt aan de standaard OsmAnd-kaart toegevoegd • Ski-kaarten https://goo.gl/pX6DxJ Informatie over skipistes, langlaufen, kabelbanen en skiliften • Nautische kaarten https://goo.gl/0hEdxm Speciale kaart met nautische informatie voor binnenvaart en kustvaart • Parkeerplaats https://goo.gl/6JxQXF Markeer de locatie van je geparkeerde auto en hou de parkeertijd bij. Meer functies zijn in ontwikkeling! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Website: http://osmand.net Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support@osmand.net. "</string>
+    <string name="recalculate_route">Route opnieuw berekenen</string>
+    <string name="shared_string_topbar">Topbalk</string>
     </resources>
