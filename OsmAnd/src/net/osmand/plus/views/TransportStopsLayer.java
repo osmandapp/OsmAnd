@@ -126,17 +126,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			objects.clear();
-			/*
-			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left,
-					latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), objects);
-			int r = 3 * getRadiusPoi(tileBox) / 4;
-			for (TransportStop o : objects) {
-				int x = tileBox.getPixXFromLonNoRot(o.getLocation().getLongitude());
-				int y = tileBox.getPixYFromLatNoRot(o.getLocation().getLatitude());
-				canvas.drawRect(x - r, y - r, x + r, y + r, pointAltUI);
-			}
-			*/
-
 
 			float iconSize = stopBus.getWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);

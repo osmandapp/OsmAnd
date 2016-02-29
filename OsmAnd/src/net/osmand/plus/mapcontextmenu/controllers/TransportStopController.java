@@ -17,29 +17,39 @@ import java.util.List;
 public class TransportStopController extends MenuController {
 
 	public enum TransportStopType {
-		BUS(R.drawable.mx_route_bus_ref),
-		FERRY(R.drawable.mx_route_ferry_ref),
-		FUNICULAR(R.drawable.mx_route_funicular_ref),
-		LIGHT_RAIL(R.drawable.mx_route_light_rail_ref),
-		MONORAIL(R.drawable.mx_route_monorail_ref),
-		RAILWAY(R.drawable.mx_route_railway_ref),
-		SHARE_TAXI(R.drawable.mx_route_share_taxi_ref),
-		TRAIN(R.drawable.mx_route_train_ref),
-		TRAM(R.drawable.mx_route_tram_ref),
-		TROLLEYBUS(R.drawable.mx_route_trolleybus_ref),
-		SUBWAY(R.drawable.mx_subway_station);
+		BUS(R.drawable.mx_route_bus_ref, R.drawable.mx_route_bus_ref),
+		FERRY(R.drawable.mx_route_ferry_ref, R.drawable.mx_route_ferry_ref),
+		FUNICULAR(R.drawable.mx_route_funicular_ref, R.drawable.mx_route_funicular_ref),
+		LIGHT_RAIL(R.drawable.mx_route_light_rail_ref, R.drawable.mx_route_light_rail_ref),
+		MONORAIL(R.drawable.mx_route_monorail_ref, R.drawable.mx_route_monorail_ref),
+		RAILWAY(R.drawable.mx_route_railway_ref, R.drawable.mx_route_railway_ref),
+		SHARE_TAXI(R.drawable.mx_route_share_taxi_ref, R.drawable.mx_route_share_taxi_ref),
+		TRAIN(R.drawable.mx_route_train_ref, R.drawable.mx_route_train_ref),
+		TRAM(R.drawable.mx_route_tram_ref, R.drawable.mx_railway_tram_stop),
+		TROLLEYBUS(R.drawable.mx_route_trolleybus_ref, R.drawable.mx_route_trolleybus_ref),
+		SUBWAY(R.drawable.mx_subway_station, R.drawable.mx_subway_station);
 
 		final static TransportStopType[] ALL_TYPES = new TransportStopType[]
 				{BUS, FERRY, FUNICULAR, LIGHT_RAIL, MONORAIL, RAILWAY, SHARE_TAXI, TRAIN, TRAM, TROLLEYBUS, SUBWAY};
 
 		final int resId;
+		final int topResId;
 
-		TransportStopType(int resId) {
+		TransportStopType(int resId, int topResId) {
 			this.resId = resId;
+			this.topResId = topResId;
 		}
 
 		public int getResourceId() {
 			return resId;
+		}
+
+		public int getTopResourceId() {
+			return topResId;
+		}
+
+		public boolean isTopType() {
+			return this == TRAM || this == SUBWAY;
 		}
 
 		public static TransportStopType findType(String typeName) {
@@ -56,7 +66,7 @@ public class TransportStopController extends MenuController {
 
 	private TransportStop transportStop;
 	private List<List<TransportStopRoute>> routes = new ArrayList<>();
-	private boolean hasTramRoute;
+	private TransportStopType topType;
 
 	public TransportStopController(OsmandApplication app, MapActivity mapActivity,
 								   PointDescription pointDescription, TransportStop transportStop) {
@@ -80,10 +90,10 @@ public class TransportStopController extends MenuController {
 
 	@Override
 	public int getLeftIconId() {
-		if (!hasTramRoute) {
+		if (topType == null) {
 			return R.drawable.mx_public_transport;
 		} else {
-			return R.drawable.mx_railway_tram_stop;
+			return topType.getTopResourceId();
 		}
 	}
 
@@ -109,10 +119,11 @@ public class TransportStopController extends MenuController {
 				if (r.type == null) {
 					addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false);
 				} else {
-					addPlainMenuItem(r.type.resId, r.desc, false, false);
+					addPlainMenuItem(r.type.getResourceId(), r.desc, false, false);
 				}
 			}
 		}
+		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 	}
 
 	private void processTransportStop() {
@@ -146,8 +157,8 @@ public class TransportStopController extends MenuController {
 								r.desc = s.substring(firstSpaceIndex + 1);
 							}
 							routeList.add(r);
-							if (!hasTramRoute && type != null && type == TransportStopType.TRAM) {
-								hasTramRoute = true;
+							if (topType == null && type != null && type.isTopType()) {
+								topType = type;
 							}
 						}
 					}
