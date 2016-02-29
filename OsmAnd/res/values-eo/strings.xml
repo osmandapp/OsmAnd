@@ -38,7 +38,7 @@
     <string name="download_files_question_space_with_temp">Ĉu vere elŝuti {0} dosiero(j)n? Tio ĉi bezonos {3} MB dumtempe kaj {1} MB daŭre. Nuntempe estas {2} MB disponebla.</string>
     <string name="download_files_question_space">Ĉu vere elŝuti {0} dosiero(j)n? Tio ĉi bezonos {1} MB daŭre. Nuntempe estas {2} MB disponebla.</string>
     <string name="upload_osm_note_description">Vi povas alŝuti vian OSM Note anonime se vi uzos vian OpenStreetMap.org profilon.</string>
-    <string name="upload_osm_note">Alŝuti na OSM Note</string>
+    <string name="upload_osm_note">Alŝuti OSM-notaĵon</string>
     <string name="shared_string_toolbar">Ilobreto</string>
     <string name="shared_string_widgets">Fenestraĵoj</string>
     <string name="consider_turning_polygons_off">Oni rekomendas malaktivigi bildigadon de pluranguloj.</string>
@@ -56,4 +56,14 @@
     <string name="clear_updates_proposition_message">Vi povas forigi elŝutitajn ĝisdatigojn kaj rericevi originan mapon</string>
     <string name="add_time_span">Aldoni tempospacon</string>
     <string name="road_blocked">Vojo barita</string>
+    <string name="lang_zh">Ĉina</string>
+    <string name="lang_pt_br">Portugala (Brazilo)</string>
+    <string name="lang_en">Angla</string>
+    <string name="lang_af">Afrikansa</string>
+    <string name="lang_cs">Ĉeĥa</string>
+    <string name="lang_pl">Pola</string>
+    <string name="lang_zh_CN">Ĉina (simpligita)</string>
+    <string name="lang_zh_TW">Ĉina (tradicia)</string>
+    <string name="lang_vo">Volapuko</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Mapoj kaj Navigado</string>
     </resources>
