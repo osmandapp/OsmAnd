@@ -2300,7 +2300,7 @@
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal modtagere</string>
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
-    <string name="osm_editors_ranking">OSM redaktører rangering</string>
+    <string name="osm_editors_ranking">Rangering af OSM bidragsydere</string>
     <string name="osm_live_subscription">OSM Live-abonnement</string>
     <string name="osm_live_subscribe_btn">Tilmeld</string>
     <string name="osm_live_email_desc">Skal bruges til at give oplysninger om bidrag</string>
@@ -2321,5 +2321,5 @@
     <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
     
     <string name="recalculate_route">Genberegn ruten</string>
-    <string name="shared_string_topbar">Topbar</string>
+    <string name="shared_string_topbar">Topbjælke</string>
     </resources>
