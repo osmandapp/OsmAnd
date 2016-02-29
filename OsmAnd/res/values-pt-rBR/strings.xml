@@ -2024,4 +2024,7 @@
     <string name="rendering_attr_showMtbRoutes_name">Mostrar rotas MTB</string>
     <string name="active_markers">Ativar marcadores</string>
     <string name="shared_string_topbar">Barra superior</string>
+    <string name="recalculate_route">Recalcular rota</string>
+    <string name="donations">Doações</string>
+    <string name="number_of_recipients">Número de destinatários</string>
     </resources>
