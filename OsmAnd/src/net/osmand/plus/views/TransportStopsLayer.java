@@ -1,6 +1,8 @@
 package net.osmand.plus.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -10,6 +12,7 @@ import android.view.WindowManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
@@ -21,22 +24,27 @@ import java.util.List;
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
 	
-	private Paint pointAltUI;
 	private OsmandMapTileView view;
-	private List<TransportStop> objects = new ArrayList<TransportStop>();
-	private DisplayMetrics dm;
-	
-	
+	private List<TransportStop> objects = new ArrayList<>();
+
+	private Paint paintIcon;
+	private Bitmap stopBus;
+	private Bitmap stopTram;
+	private Bitmap stopSmall;
+
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
+		DisplayMetrics dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
-		pointAltUI = new Paint();
-		pointAltUI.setColor(view.getResources().getColor(R.color.transport_stop));
-		pointAltUI.setAntiAlias(true);
+		paintIcon = new Paint();
+		stopBus = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bus);
+		stopTram = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_tram);
+		stopSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_small);
 	}
 	
 	public void getFromPoint(RotatedTileBox tb,PointF point, List<? super TransportStop> res) {
@@ -45,7 +53,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			int ey = (int) point.y;
 			final int rp = getRadiusPoi(tb);
 			int radius = rp * 3 / 2;
-			int small = rp;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					TransportStop n = objects.get(i);
@@ -55,7 +62,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						radius = small;
+						radius = rp;
 						res.add(n);
 					}
 				}
@@ -115,18 +122,44 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb,
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
 			DrawSettings settings) {
-		if (tb.getZoom() >= startZoom) {
+		if (tileBox.getZoom() >= startZoom) {
 			objects.clear();
-			final QuadRect latLonBounds = tb.getLatLonBounds();
+			/*
 			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left,
-					latLonBounds.bottom, latLonBounds.right, tb.getZoom(), objects);
-			int r = 3 * getRadiusPoi(tb) / 4;
+					latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), objects);
+			int r = 3 * getRadiusPoi(tileBox) / 4;
 			for (TransportStop o : objects) {
-				int x = tb.getPixXFromLonNoRot(o.getLocation().getLongitude());
-				int y = tb.getPixYFromLatNoRot(o.getLocation().getLatitude());
+				int x = tileBox.getPixXFromLonNoRot(o.getLocation().getLongitude());
+				int y = tileBox.getPixYFromLatNoRot(o.getLocation().getLatitude());
 				canvas.drawRect(x - r, y - r, x + r, y + r, pointAltUI);
+			}
+			*/
+
+
+			float iconSize = stopBus.getWidth() * 3 / 2.5f;
+			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+
+			final QuadRect latLonBounds = tileBox.getLatLonBounds();
+			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left,
+					latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), objects);
+			List<TransportStop> fullObjects = new ArrayList<>();
+			for (TransportStop o : objects) {
+				float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+
+				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+					canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2, paintIcon);
+				} else {
+					fullObjects.add(o);
+				}
+			}
+			for (TransportStop o : fullObjects) {
+				float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				Bitmap b = stopBus;
+				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 			}
 		}
 	}
