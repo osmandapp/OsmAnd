@@ -99,7 +99,7 @@ public class PointDescription {
 	@NonNull
 	public String getSimpleName(Context ctx, boolean addTypeName) {
 		if (isLocation()) {
-			if (!Algorithms.isEmpty(name)) {
+			if (!Algorithms.isEmpty(name) && !name.equals(ctx.getString(R.string.no_address_found))) {
 				return name;
 			} else {
 				return getLocationName(ctx, lat, lon, true).replace('\n', ' ');
