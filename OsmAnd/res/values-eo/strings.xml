@@ -66,4 +66,19 @@
     <string name="lang_zh_TW">Ĉina (tradicia)</string>
     <string name="lang_vo">Volapuko</string>
     <string name="osmand_play_title_30_chars">OsmAnd Mapoj kaj Navigado</string>
+    <string name="shared_string_reverse_order">Inversa ordigo</string>
+    <string name="switch_start_finish">Anstataŭigi komencpunkton per finpunkto</string>
+    <string name="rendering_attr_hideIcons_name">Kaŝi Interesejajn piktogramojn</string>
+    <string name="item_removed">Ero forigita</string>
+    <string name="n_items_removed">eroj forigitaj</string>
+    <string name="shared_string_undo_all">MALFARI ĈIUJN</string>
+    <string name="starting_point">Komencpunkto</string>
+    <string name="shared_string_not_selected">Neelektita</string>
+    <string name="shared_string_type">Speco</string>
+    <string name="rec_split">Sonregistrila Dividilo</string>
+    <string name="rec_split_title">Uzi Sonregistrilan Dividilon</string>
+    <string name="rec_split_desc">Superskribas sonaĵojn kiam uzata spaco trograndas grandecon de memorejo</string>
+    <string name="rec_split_clip_length">Sonaĵa longeco</string>
+    <string name="rec_split_clip_length_desc">Longeco de kiu ajn registrita sonaĵo ne plu estos difina tempodaŭro</string>
+    <string name="available_maps">Disponeblaj mapoj</string>
     </resources>
