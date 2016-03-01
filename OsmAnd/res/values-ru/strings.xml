@@ -1998,4 +1998,5 @@
     <string name="access_hint_enter_name">Введите имя</string>
     <string name="access_hint_enter_category">Введите категорию</string>
     <string name="access_hint_enter_description">Введите описание</string>
+    <string name="access_category_choice">Выберите категорию</string>
 </resources>

@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="access_category_choice">Choose category</string>
     <string name="access_hint_enter_name">Enter name</string>
     <string name="access_hint_enter_category">Enter category</string>
     <string name="access_hint_enter_description">Enter description</string>

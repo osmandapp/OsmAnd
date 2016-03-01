@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -105,12 +106,33 @@ public class FavoriteDialogs {
 		final EditText description = (EditText) v.findViewById(R.id.description);
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
 		List<FavoriteGroup> gs = helper.getFavoriteGroups();
-		String[] list = new String[gs.size()];
+		final String[] list = new String[gs.size()];
 		for (int i = 0; i < list.length; i++) {
 			list[i] = gs.get(i).name;
 		}
 		cat.setAdapter(new ArrayAdapter<String>(activity, R.layout.list_textview, list));
 		
+		if (((OsmandApplication)activity.getApplication()).accessibilityEnabled()) {
+			final TextView textButton = (TextView)v.findViewById(R.id.TextButton);
+			textButton.setClickable(true);
+			textButton.setFocusable(true);
+			textButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					AlertDialog.Builder b = new AlertDialog.Builder(activity);
+					b.setTitle(R.string.access_category_choice);
+					b.setItems(list, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							cat.setText(list[which]);
+						}
+					});
+					b.setNegativeButton(R.string.shared_string_cancel, null);
+					b.show();
+				}
+			});
+		}
+
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
 
