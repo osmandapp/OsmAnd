@@ -2104,7 +2104,7 @@
     <string name="download_files_question_space_with_temp">¿Descargar realmente {0} archivo(s)? Se necesitará {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible {2} MB.</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
-    <string name="osm_user_stat">Ediciones %1$s, rango %2$s, ediciones totales %3$s</string>
+    <string name="osm_user_stat">Ediciones %1$s, posición %2$s, ediciones totales %3$s</string>
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
     <string name="osm_live_subscription">Suscripción de OSM en vivo</string>
     <string name="osm_live_subscribe_btn">Suscribir</string>
