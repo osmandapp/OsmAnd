@@ -1273,7 +1273,7 @@
     <string name="localization_pref_title">Jezikovno prilagajanje</string>
     <string name="index_item_world_altitude_correction">Svetovni popravki nadmorske višine</string>
     <string name="index_item_world_seamarks">Svetovne pomorske oznake</string>
-    <string name="keep_and_add_destination_point">Dodaj kot ciljno točko</string>
+    <string name="keep_and_add_destination_point">Dodaj kot zadnjo ciljno točko</string>
     <string name="select_gpx">Izbor sledi GPX …</string>
     <string name="route_descr_select_destination">Izbor cilja</string>
     <string name="shared_string_select_on_map">Izberi na zemljevidu</string>
@@ -1415,7 +1415,7 @@
     <string name="shared_string_my_favorites">Shranjeni kraji</string>
     <string name="share_fav_subject">Priljubljene točke, ki so bile objavljene z OsmAnd</string>
     <string name="shared_string_share">Objavi</string>
-    <string name="import_file_favourites">Ali želite podatke shrani v datoteko GPX ali pa jih uvoziti med priljubljene?</string>
+    <string name="import_file_favourites">Ali želite podatke shrani v datoteko GPX ali pa jih uvoziti kot vmesne točke med priljubljene?</string>
 
     <string name="route_descr_destination">Cilj</string>
     <string name="osmo_settings_debug">Podatki razhroščevanja</string>
@@ -2105,7 +2105,7 @@
     <string name="shared_string_reverse_order">Obrni razvrstitev</string>
     <string name="show_map_markers">Oznake zemljevida</string>
     <string name="show_map_markers_description">Omogoči možnosti oznak zemljevida</string>
-    <string name="clear_active_markers_q">Ali želite izbrisati vse dejavne oznake?</string>
+    <string name="clear_active_markers_q">Ali želite odstraniti vse dejavne oznake?</string>
     <string name="clear_markers_history_q">Ali res želite počistiti zgodovino oznake?</string>
     <string name="active_markers">Dejavne oznake</string>
     <string name="map_markers">Oznake zemljevida</string>
@@ -2150,4 +2150,5 @@
     <string name="osm_live_subscription_settings">Nastavitve naročil</string>
     <string name="osm_live_ask_for_purchase">Najprej si kupite\nnaročilo OSM</string>
 
+    <string name="shared_string_topbar">Vrhnja vrstica</string>
     </resources>
