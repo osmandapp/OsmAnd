@@ -1597,7 +1597,7 @@
     <string name="error_calculating_route_occured">Ocurrió un error al calcular la ruta</string>
     <string name="empty_route_calculated">Error: La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
-    <string name="arrived_at_destination">Ha llegado a tu destino</string>
+    <string name="arrived_at_destination">Has llegado a tu destino</string>
     <string name="invalid_locations">¡Las coordenadas son inválidas!</string>
     <string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
     <string name="loading_data">Cargando datos…</string>
