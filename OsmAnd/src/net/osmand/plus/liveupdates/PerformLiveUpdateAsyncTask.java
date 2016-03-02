@@ -33,11 +33,11 @@ public class PerformLiveUpdateAsyncTask
 	@NonNull
 	private final Context context;
 	@NonNull
-	private final LocalIndexInfo localIndexInfo;
+	private final String localIndexInfo;
 	private final boolean forceUpdate;
 
 	public PerformLiveUpdateAsyncTask(@NonNull Context context,
-									  @NonNull LocalIndexInfo localIndexInfo,
+									  @NonNull String localIndexInfo,
 									  boolean forceUpdate) {
 		this.context = context;
 		this.localIndexInfo = localIndexInfo;
@@ -133,7 +133,7 @@ public class PerformLiveUpdateAsyncTask
 
 	public static void tryRescheduleDownload(@NonNull Context context,
 											 @NonNull OsmandSettings settings,
-											 @NonNull LocalIndexInfo localIndexInfo) {
+											 @NonNull String localIndexInfo) {
 		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(localIndexInfo, settings);
 		final Integer frequencyOrdinal = updateFrequencyPreference.get();
@@ -144,7 +144,7 @@ public class PerformLiveUpdateAsyncTask
 		final Integer retriesLeft = settings.LIVE_UPDATES_RETRIES.get();
 		if (retriesLeft > 0) {
 			Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
-			final File file = new File(localIndexInfo.getFileName());
+			final File file = new File(localIndexInfo);
 			final String fileName = Algorithms.getFileNameWithoutExtension(file);
 			intent.putExtra(LiveUpdatesHelper.LOCAL_INDEX_INFO, localIndexInfo);
 			intent.setAction(fileName);

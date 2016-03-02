@@ -1,16 +1,14 @@
 package net.osmand.plus.activities;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import java.io.File;
 
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import android.os.Parcel;
+import android.support.annotation.NonNull;
 
-import java.io.File;
-
-public class LocalIndexInfo implements Parcelable {
+public class LocalIndexInfo {
 
 	private LocalIndexType type;
 	private String description = "";
@@ -166,27 +164,6 @@ public class LocalIndexInfo implements Parcelable {
 		return type.getBasename(this);
 	}
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(this.type == null ? -1 : this.type.ordinal());
-		dest.writeString(this.description);
-		dest.writeString(this.name);
-		dest.writeByte(backupedData ? (byte) 1 : (byte) 0);
-		dest.writeByte(corrupted ? (byte) 1 : (byte) 0);
-		dest.writeByte(notSupported ? (byte) 1 : (byte) 0);
-		dest.writeByte(loaded ? (byte) 1 : (byte) 0);
-		dest.writeString(this.subfolder);
-		dest.writeString(this.pathToData);
-		dest.writeString(this.fileName);
-		dest.writeByte(singleFile ? (byte) 1 : (byte) 0);
-		dest.writeInt(this.kbSize);
-		dest.writeByte(expanded ? (byte) 1 : (byte) 0);
-	}
 
 	protected LocalIndexInfo(Parcel in) {
 		int tmpType = in.readInt();
@@ -205,13 +182,5 @@ public class LocalIndexInfo implements Parcelable {
 		this.expanded = in.readByte() != 0;
 	}
 
-	public static final Creator<LocalIndexInfo> CREATOR = new Creator<LocalIndexInfo>() {
-		public LocalIndexInfo createFromParcel(Parcel source) {
-			return new LocalIndexInfo(source);
-		}
-
-		public LocalIndexInfo[] newArray(int size) {
-			return new LocalIndexInfo[size];
-		}
-	};
+	
 }
