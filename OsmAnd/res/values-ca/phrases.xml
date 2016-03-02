@@ -2064,7 +2064,7 @@
 
 	<string name="poi_billiards">Billar</string>
 
-<string name="poi_health_specialty_behavior_yes">Especialitat mèdica: comportament</string>
+<string name="poi_health_specialty_behavior_yes">Especialitat mèdica: conductisme</string>
 
 	<string name="poi_wiki_lang_bs">Wiki bosniana</string>
 	<string name="poi_wiki_lang_cy">Wiki gal·lesa</string>
@@ -2124,4 +2124,37 @@
 	<string name="poi_lacrosse">Lacrosse</string>
 	<string name="poi_official_name">Nom oficial</string>
 
+	<string name="poi_health_specialty_homeopathy_yes">Especialitat mèdica: homeopatia</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Especialitat mèdica: medicina tradicional xinesa</string>
+	<string name="poi_health_specialty_reiki_yes">Especialitat mèdica: reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Especialitat mèdica: herbologia</string>
+	<string name="poi_health_specialty_acupuncture_yes">Especialitat mèdica: acupuntura</string>
+	<string name="poi_health_specialty_chiropractic_yes">Especialitat mèdica: quiropràctica</string>
+	<string name="poi_health_specialty_naturopathy_yes">Especialitat mèdica: naturopatia</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Especialitat mèdica: psicoanàlisi</string>
+	<string name="poi_health_specialty_radiology_yes">Especialitat mèdica: radiologia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Especialitat mèdica: psiquiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Especialitat mèdica: neurologia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Especialitat mèdica:dermatologia i malalties venèries</string>
+	<string name="poi_health_specialty_cardiology_yes">Especialitat mèdica: cardiologia</string>
+	<string name="poi_health_specialty_trauma_yes">Especialitat mèdica: traumatologia</string>
+	<string name="poi_health_specialty_biology_yes">Especialitat mèdica: biologia clínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Especialitat mèdica: osteopatia</string>
+	<string name="poi_health_specialty_pulmonology_yes">Especialitat mèdica: pneumologia</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Especialitat mèdica: cirurgia dental, oral i maxil·lofacial</string>
+	<string name="poi_health_specialty_maternity_yes">Especialitat mèdica: maternitat</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Especialitat mèdica:servei d\'urgències</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Especialitat mèdica: sense servei d\'urgències</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Especialitat mèdica: cirurgia plàstica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Especialitat mèdica: ortodòncia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Especialitat mèdica: psicoteràpia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Especialitat mèdica: bioquímica</string>
+	<string name="poi_health_specialty_occupational_yes">Especialitat mèdica: teràpia ocupacional</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Especialitat mèdica: psiquiatria infantil</string>
+	<string name="poi_health_specialty_physiatry_yes">Especialitat mèdica: fisioteràpia i rehabilitació</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Especialitat mèdica: cirurgia maxil·lofacial</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Especialitat mèdica: diagnòstic radiològic</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Especialitat mèdica: gastroenterologia</string>
+	<string name="poi_health_specialty_dentistry_yes">Especialitat mèdica: odontologia</string>
+	<string name="poi_health_specialty_nephrology_yes">Especialitat mèdica: nefrologia (malalties renals)</string>
 	</resources>
