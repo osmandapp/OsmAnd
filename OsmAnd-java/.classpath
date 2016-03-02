@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="libs/junidecode-0.1.jar"/>
 	<classpathentry kind="lib" path="libs/kxml2-2.3.0.jar"/>
 	<classpathentry kind="lib" path="libs/tuprolog.jar"/>
-	<classpathentry kind="lib" path="libs/icu4j-49_1_patched.jar"/>
 	<classpathentry kind="lib" path="libs/gnu-trove-osmand.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
