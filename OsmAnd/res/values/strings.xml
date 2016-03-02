@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_topbar">Topbar</string>
     <string name="recalculate_route">Recalculate route</string>
     <string name="donations">Donations</string>
     <string name="number_of_recipients">Number of recipients</string>
@@ -27,7 +28,7 @@
     <string name="osm_live_enter_email">Please enter valid E-mail address</string>
     <string name="osm_live_enter_user_name">Please enter Public Name</string>
     <string name="osm_live_thanks">Thank you for subscribing to live updates!</string>
-    <string name="osm_live_region_desc">Part your donation will be sent to OSM users who submit changes to the map in that region</string>
+    <string name="osm_live_region_desc">Part of your donation will be sent to OSM users who submit changes to the map in that region</string>
     <string name="osm_live_subscription_settings">Subscription settings</string>
     <string name="osm_live_ask_for_purchase">Please purchase OSM Live subscription first</string>
 
@@ -59,7 +60,7 @@
     <string name="select_map_markers">Select map markers</string>
     <string name="shared_string_reverse_order">Reverse order</string>
     <string name="show_map_markers_description">Activate map markers feature</string>
-    <string name="clear_active_markers_q">Do you want to delete all active markers?</string>
+    <string name="clear_active_markers_q">Do you want to remove all active markers?</string>
     <string name="clear_markers_history_q">Do you want to clear the map marker history?</string>
     <string name="active_markers">Active markers</string>
     <string name="map_markers">Map markers</string>
@@ -865,7 +866,7 @@
     <string name="calculate_osmand_route_without_internet">Calculate OsmAnd route segment without Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calculate OsmAnd route for first and last route segment</string>
     <string name="use_displayed_track_for_navigation">Do you want to use displayed track for navigation?</string>
-    <string name="keep_and_add_destination_point">Add as destination point</string>
+    <string name="keep_and_add_destination_point">Add as last destination point</string>
     <string name="select_gpx">Select GPX…</string>
     <string name="route_descr_select_destination">Select Destination</string>
     <string name="route_preferences">Route preferences</string>

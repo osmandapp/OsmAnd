@@ -202,7 +202,7 @@
   
   
   <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
-  <string name="download_files_question_space">Вільне місце {2} MB! Завантажити {0} файл(ів) ({1} MB)?</string>
+  <string name="download_files_question_space">Завантажити {0} файл(ів)? Це потребує {1} МБ. На даний момент вільно {2} МБ.</string>
   
   
   
@@ -1670,7 +1670,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="keep_informing">Повторювати навігаційні інструкціі</string>
 	
 	<string name="create_poi_link_to_osm_doc"><u>Онлайнова OSM</u> класифікація мапи із зображеннями</string>
-	<string name="import_file_favourites">Зберегти точки як файл GPX або імпортувати в закладки?</string>
+	<string name="import_file_favourites">Зберегти дані як файл GPX чи імпортувати точки маршруту в закладки?</string>
 	
 	<string name="shared_string_share">Поділитись</string>
 	<string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
@@ -2279,14 +2279,14 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="reports_for">Відзвітувати</string>
 <string name="rendering_attr_showMtbRoutes_name">Показувати MTB-маршрути</string>
     <string name="show_on_start_description">Якщо вимкнено, відразу показує мапу після запуску</string>
-    <string name="add_points_to_map_markers_q">Бажаєте додати всі точки до Позначок мапи?</string>
-    <string name="shared_string_add_to_map_markers">Додати до Позначок мапи</string>
-    <string name="select_map_markers">Обрати Позначки мапи</string>
+    <string name="add_points_to_map_markers_q">Бажаєте додати всі точки до позначок мапи?</string>
+    <string name="shared_string_add_to_map_markers">Додати до позначок мапи</string>
+    <string name="select_map_markers">Обрати позначки мапи</string>
     <string name="shared_string_reverse_order">Зворотній порядок</string>
     <string name="show_map_markers">Позначки Мапи</string>
-    <string name="show_map_markers_description">Показати елементи з Позначок мапи</string>
+    <string name="show_map_markers_description">Показати елементи з позначок мапи</string>
     <string name="clear_active_markers_q">Вилучити всі активні позначки?</string>
-    <string name="clear_markers_history_q">Очистити історію позначок?</string>
+    <string name="clear_markers_history_q">Очистити історію позначок мапи?</string>
     <string name="active_markers">Поточні позназчки</string>
     <string name="map_markers">Позначки мапи</string>
     <string name="map_marker">Позначка мапи</string>
@@ -2296,9 +2296,12 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="dashboard_or_drawer_description">У вас зараз є вибір керувати застосунком через гнучку панель керування або через звичайне мені. Ваші вподобання завжди можна змінити в параметрах панелі керування.</string>
     <string name="release_2_2">" • Нові елементи інтерфейсу, що залежат від потоного стану, для вибору місця на мапи та на інших екранах\n\n • Екран з мапою відкривається під час запуску, якщо тільки не активовано функцію \'Показувати панель керування під час запуску\'\n\n • Налаштування того, які і як елементи будуть показуватись на панелі керування\n\n • Оминання панелі керування, якщо ви надаєте перевагу керуванню роботою через меню\n\n • Для завантаження мапи, територію можна обрати безпосередньо на мапі світу\n\n • Пошук ПОІ тепер підтримує більш конкретні запити\n\n • Покращено функції редагування ПОІ та додавання даних в OSM\n\n • Перероблено інтерфейс та структуру завантаження мап\n\n та багато іншого … "</string>
     <string name="show_map_markers_topbar">Показувати Позначки мапи на панелі зверху</string>
-    <string name="map_marker_1st">Перша Позначка мапи</string>
-    <string name="map_marker_2nd">Друга Позначка мапи</string>
+    <string name="map_marker_1st">Перша позначка мапи</string>
+    <string name="map_marker_2nd">Друга позначка мапи</string>
     <string name="shared_string_toolbar">Панель інструментів</string>
     <string name="shared_string_widgets">ВІджети</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Мапи та навігація – виконує прокладання маршрутів та пошук не вимагачи наявності зʼєднання з Інтернтом. Завантажте мапу країни перед подорожжю для того, щоб виконувати пошук та прокладати маршрути в незнайомому місці. Основні можливості: • Докладні мапи 200 країн • Офлайн навігація з голосовим супроводженням • Пошук адрес в без інтерента • Інформація про обʼкти на мапі: ПОІ, кафе, стоянки, магазини • Додавання місць в закладки • Автомобільна, пішохідна та вело навігація Додаткові можливості: запис та перегляд треків GPX • Отримання опису ПОІ з Вікіпедії • Додавання фото, аудіо та відео нотаток до мапи • Денний та нічний режими для більш зручного використання за кермом • Інформація про маршрути та зупинки громадського транспорта • Велодоріжки та тротуари • Пішохідні туристичні маршрути по всьому світу • Онлайн мапи з різних джерел • Інформація про дорожне покриття та освітлення • Додавання, редагування та вилучення ПОІ (для учасників OpenStreetMap) • OsMo – онлайн стеження за іншими пристроями Отримайте надійну навігацію для вашої країни – Франції, Номеччини, Мексики, Великобританії, Іспанії, Нідерландів, США, Росії, Бразилії, України та інших країн. Втулки: • Ізолінії та рельєф https://goo.gl/7mojP8 Додає ізолінії та візуалізацію рельєфу до основної мапи OsmAnd. • Лижні мапи https://goo.gl/pX6DxJ Інформація про лижні траси, маршрути, підйомники. • Морські мапи https://goo.gl/0hEdxm Спеціальний стиль для перегляду навігаційний знаків для артеріальної і прибережної морської навігації. • Місце стоянки https://goo.gl/6JxQXF Допомагає вам позначти місце стоянки вашого автомобіля та стежити за часом, що залишився до кінця стоянки. Залишайтесь на зʼязку! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Сайт: http://osmand.net Якщо у вас є питання, щодо використання OsmAnd, звертайтесь до нас: support@osmand.net. "</string>
+    <string name="map_markers_other">Інші позначки</string>
+    <string name="download_files_error_not_enough_space">Недостатньо пам\'яті! Це потребує {3} МБ тимчасової та {1} МБ постійної пам\'яті. На разі доступно лише {2} МБ.</string>
+    <string name="download_files_question_space_with_temp">Завантажити {0} файл(їв)? Це потребує {3} МБ тимчасової та {1} МЮ постійної пам\'яті. Наразі вільно лише {2} МБ.</string>
     </resources>

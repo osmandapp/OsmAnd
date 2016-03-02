@@ -410,7 +410,7 @@
     <string name="index_name_canada">Norte América - Canadá</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Gran Bretaña</string>
-    <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
+    <string name="keep_and_add_destination_point">Añadir como último punto de destino</string>
     <string name="select_gpx">Elegir GPX…</string>
     <string name="route_descr_select_destination">Elige el destino</string>
     <string name="route_preferences">Preferencias de la ruta</string>
@@ -812,11 +812,11 @@
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
     <string name="add_tag">Añadir Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
-    <string name="poi_filter_parking">Estacionamiento</string>
+    <string name="poi_filter_parking">Estacionamientos</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte público</string>
     <string name="poi_filter_entertainment">Entretenimiento</string>
-    <string name="poi_filter_accomodation">Alojamiento</string>
+    <string name="poi_filter_accomodation">Alojamientos</string>
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
     <string name="poi_filter_car_aid">Asistencia vehicular</string>
@@ -2086,7 +2086,7 @@
     <string name="shared_string_reverse_order">Invertir orden</string>
     <string name="show_map_markers">Marcadores del mapa</string>
     <string name="show_map_markers_description">Activar función de marcadores del mapa</string>
-    <string name="clear_active_markers_q">¿Quieres borrar todos los marcadores activos?</string>
+    <string name="clear_active_markers_q">¿Quieres quitar todos los marcadores activos?</string>
     <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcador del mapa?</string>
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores del mapa</string>
@@ -2110,7 +2110,7 @@
     <string name="upload_osm_note">Subir Notas OSM</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
-    <string name="osm_user_stat">Ediciones %1$s, rango %2$s, ediciones totales %3$s</string>
+    <string name="osm_user_stat">Ediciones %1$s, posición %2$s, ediciones totales %3$s</string>
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
     <string name="osm_live_subscription">Suscripción de OSM en vivo</string>
     <string name="osm_live_subscribe_btn">Suscribir</string>
@@ -2125,11 +2125,12 @@
     <string name="osm_live_enter_email">Ingresa un correo electrónico válido</string>
     <string name="osm_live_enter_user_name">Ingresa un nombre público</string>
     <string name="osm_live_thanks">¡Gracias por suscribirte a las actualizaciones en vivo!</string>
-    <string name="osm_live_region_desc">Parte de tu donación será enviada a los usuarios de OSM que realicen cambios en el mapa de esa región</string>
+    <string name="osm_live_region_desc">Parte de tu donación se enviará a los usuarios de OSM que realicen cambios en el mapa de esa región</string>
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
     <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OSM en vivo</string>
 
     <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo. La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM. En caso de que ames OsmAnd, OSM y quieras apoyarlo, esta sería una manera correcta de hacerlo.</string>
     
     <string name="recalculate_route">Recalcular ruta</string>
+    <string name="shared_string_topbar">Barra superior</string>
     </resources>

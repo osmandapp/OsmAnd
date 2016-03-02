@@ -255,6 +255,10 @@ public class MapMarkersHelper {
 
 	public void removeActiveMarkers() {
 		cancelAddressRequests();
+		for (int i = mapMarkers.size() - 1; i>= 0; i--) {
+			MapMarker marker = mapMarkers.get(i);
+			addMapMarkerHistory(marker);
+		}
 		settings.clearActiveMapMarkers();
 		readFromSettings();
 		refresh();
@@ -315,7 +319,7 @@ public class MapMarkersHelper {
 				selections[i] = false;
 				indexes[i] = 0;
 			}
-			/*
+			/* adding map marker to second topbar's row
 			if (sortedMapMarkers.size() > 0) {
 				MapMarker firstMarker = sortedMapMarkers.get(0);
 				settings.updateMapMarker(firstMarker.getLatitude(), firstMarker.getLongitude(),

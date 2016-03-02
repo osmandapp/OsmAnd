@@ -906,7 +906,7 @@
     <string name="lang_sr">Serbisk</string>
     <string name="lang_zh_CN">Forenklet kinesisk</string>
     <string name="lang_zh_TW">Tradisjonell kinesisk</string>
-    <string name="keep_and_add_destination_point">Legg til som målpunkt</string>
+    <string name="keep_and_add_destination_point">Legg til som siste målpunkt</string>
     <string name="select_gpx">Velg GPX…</string>
 
     <string name="route_preferences">Ruteinnstillinger</string>
@@ -1508,8 +1508,8 @@
     <string name="shared_string_add_to_map_markers">Legg til i kartmarkører</string>
     <string name="select_map_markers">Velg kartmarkører</string>
     <string name="show_map_markers_description">Aktiver kartmarkørfunksjon</string>
-    <string name="clear_active_markers_q">Vil du slette alle aktive markører?</string>
-    <string name="clear_markers_history_q">Vil du slette markørhistorikken?</string>
+    <string name="clear_active_markers_q">Vil du fjerne alle aktive markører?</string>
+    <string name="clear_markers_history_q">Vil du slette kartmarkørhistorikken?</string>
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kartmarkører</string>
     <string name="map_marker">Kartmarkør</string>
@@ -1522,4 +1522,6 @@
     <string name="data_is_not_available">Data er ikke tilgjengelig</string>
     <string name="shared_string_read_more">Les mer</string>
     <string name="switch_start_finish">Bytt om på startpunkt og reisemål</string>
+    <string name="shared_string_topbar">Topplinje</string>
+    <string name="recalculate_route">Beregn rute på nytt</string>
     </resources>

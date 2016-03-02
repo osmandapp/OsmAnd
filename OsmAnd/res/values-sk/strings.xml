@@ -1066,7 +1066,7 @@
     <string name="route_descr_select_destination">Vybrať cieľ</string>
     <string name="route_preferences">Predvoľby trasy</string>
     <string name="route_info">Informácie trasy</string>
-    <string name="keep_and_add_destination_point">Pridať ako cieľový bod</string>
+    <string name="keep_and_add_destination_point">Pridať ako posledný cieľový bod</string>
     <string name="use_displayed_track_for_navigation">Chcete použiť zobrazenú trasu pre navigáciu?</string>
     <string name="calculate_osmand_route_without_internet">Vypočítať OsmAnd trasu úseku bez pripojenia na Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Vypočítať OsmAnd trasu pre prvý a posledný úsek</string>
@@ -1958,7 +1958,7 @@
     <string name="shared_string_reverse_order">Obrátené poradie</string>
     <string name="show_map_markers_description">Aktivovať funkciu mapových značiek</string>
     <string name="clear_active_markers_q">Chcete vymazať všetky aktívne značky?</string>
-    <string name="clear_markers_history_q">Chcete vymazať históriu značiek?</string>
+    <string name="clear_markers_history_q">Chcete vymazať históriu mapových značiek?</string>
     <string name="active_markers">Aktívne značky</string>
     <string name="map_markers">Mapové značky</string>
     <string name="map_marker">Mapová značka</string>
@@ -1988,4 +1988,5 @@
     <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých má sveta. Veľká časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena. Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob.</string>
     
     <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
+    <string name="recalculate_route">Prepočítať trasu</string>
     </resources>

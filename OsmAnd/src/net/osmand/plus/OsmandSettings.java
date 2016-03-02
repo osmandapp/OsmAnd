@@ -2475,7 +2475,7 @@ public class OsmandSettings {
 	}
 
 	public enum MapMarkersMode {
-		TOOLBAR(R.string.shared_string_toolbar),
+		TOOLBAR(R.string.shared_string_topbar),
 		WIDGETS(R.string.shared_string_widgets),
 		NONE(R.string.shared_string_none);
 
