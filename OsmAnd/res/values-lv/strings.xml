@@ -1980,4 +1980,26 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="buy">Pirkt</string>
     <string name="regions">Reģions</string>
     <string name="downloads_left_template">Pieejamas %1$s lejupielādes</string>
+    <string name="recalculate_route">Pārrēķināt maršrutu</string>
+    <string name="donations">Ziedojumi</string>
+    <string name="osm_live_subscribe_btn">Abonēt</string>
+    <string name="osm_live_hide_user_name">Nerādīt manu vārdu atskaitēs</string>
+    <string name="osm_live_support_region">Reģiona atbalsts</string>
+    <string name="osm_live_month_cost">Maksa par mēnesi</string>
+    <string name="osm_live_month_cost_desc">Ikmēneša maksa</string>
+    <string name="osm_live_active">Aktīvs</string>
+    <string name="osm_live_not_active">Neaktīvs</string>
+    <string name="osm_live_enter_email">Lūdzu, ievadiet derīgu epasta adresi</string>
+    <string name="osm_live_enter_user_name">Lūdzu ievadiet publiski redzamo vārdu</string>
+    <string name="osm_live_thanks">Paldies, ka pierakstījāties uz atjauninājumiem!</string>
+    <string name="osm_live_region_desc">Daļa no jūsu ziedojuma tiks nosūtīta OSM lietotājiem, kas veic labojumus apgabala kartē</string>
+    <string name="osm_live_subscription_settings">Abonomenta iestatījumi</string>
+    <string name="osm_live_ask_for_purchase">Lūdzu, vispirms nopērciet abonomentu OSM atjauninājumiem</string>
+
+    <string name="osm_live_header">Šis abonoments nodrošina regulārus karšu atjauninājumus visā pasaulē. Lielākā daļa no ienākumiem tiek sūtīta atpakaļ OSM kopienai par ieguldījumu OSM. Ja jūs vēlaties atbalstīt OsmAnd un OSM, tad šis ir īstais veids, kā to izdarīt.</string>
+    
+    <string name="select_map_marker">Atzīmēt kartes marķieri</string>
+    <string name="map_markers_other">Citi marķieri</string>
+    <string name="upload_anonymously">Augšupielādēt anonīmi</string>
+    <string name="show_transparency_seekbar">Rādīt caurspīdīgu meklētājoslu</string>
     </resources>
