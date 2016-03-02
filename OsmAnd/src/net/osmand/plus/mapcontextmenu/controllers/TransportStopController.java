@@ -29,9 +29,6 @@ public class TransportStopController extends MenuController {
 		TROLLEYBUS(R.drawable.mx_route_trolleybus_ref, R.drawable.mx_route_trolleybus_ref),
 		SUBWAY(R.drawable.mx_subway_station, R.drawable.mx_subway_station);
 
-		final static TransportStopType[] ALL_TYPES = new TransportStopType[]
-				{BUS, FERRY, FUNICULAR, LIGHT_RAIL, MONORAIL, RAILWAY, SHARE_TAXI, TRAIN, TRAM, TROLLEYBUS, SUBWAY};
-
 		final int resId;
 		final int topResId;
 
@@ -54,7 +51,7 @@ public class TransportStopController extends MenuController {
 
 		public static TransportStopType findType(String typeName) {
 			String tName = typeName.toUpperCase();
-			for (TransportStopType t : ALL_TYPES) {
+			for (TransportStopType t : values()) {
 				if (t.name().equals(tName)) {
 					return t;
 				}

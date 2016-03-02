@@ -108,22 +108,14 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 			updateFrequenciesStrings[i] = getString(updateFrequencies[i].getLocalizedId());
 		}
 
+		refreshTimeOfDayLayout(UpdateFrequency.values()[updateFrequencyPreference.get()], updateTimesOfDayLayout);
 		updateFrequencySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
 				R.layout.action_spinner_item, updateFrequenciesStrings));
 		updateFrequencySpinner.setSelection(updateFrequencyPreference.get());
 		updateFrequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				UpdateFrequency updateFrequency = UpdateFrequency.values()[position];
-				switch (updateFrequency) {
-					case HOURLY:
-						updateTimesOfDayLayout.setVisibility(View.GONE);
-						break;
-					case DAILY:
-					case WEEKLY:
-						updateTimesOfDayLayout.setVisibility(View.VISIBLE);
-						break;
-				}
+				refreshTimeOfDayLayout(UpdateFrequency.values()[position], updateTimesOfDayLayout);
 			}
 
 			@Override
@@ -178,6 +170,18 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					}
 				});
 		return builder.create();
+	}
+
+	private void refreshTimeOfDayLayout(UpdateFrequency updateFrequency, View updateTimesOfDayLayout) {
+		switch (updateFrequency) {
+			case HOURLY:
+				updateTimesOfDayLayout.setVisibility(View.GONE);
+				break;
+			case DAILY:
+			case WEEKLY:
+				updateTimesOfDayLayout.setVisibility(View.VISIBLE);
+				break;
+		}
 	}
 
 	private static String getUpdatesSize(String fileNameWithoutExtension,
