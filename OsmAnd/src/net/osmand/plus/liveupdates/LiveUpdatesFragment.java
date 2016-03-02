@@ -32,7 +32,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -120,7 +119,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 				if (!processing && InAppHelper.isSubscribedToLiveUpdates()) {
 					final FragmentManager fragmentManager = getChildFragmentManager();
 					LiveUpdatesSettingsDialogFragment
-							.createInstance(adapter.getChild(groupPosition, childPosition))
+							.createInstance(adapter.getChild(groupPosition, childPosition).getFileName())
 							.show(fragmentManager, "settings");
 					return true;
 				} else {
@@ -271,7 +270,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		}
 
 		public void add(LocalIndexInfo info) {
-			OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(info,
+			OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(info.getFileName(),
 					getSettings());
 			if (preference.get()) {
 				dataShouldUpdate.add(info);
@@ -284,7 +283,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			Set<LocalIndexInfo> changedSet = new HashSet<>();
 			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
-						preferenceLiveUpdatesOn(localIndexInfo, getSettings());
+						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), getSettings());
 				if (!preference.get()) {
 					changedSet.add(localIndexInfo);
 				}
@@ -294,7 +293,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			changedSet.clear();
 			for (LocalIndexInfo localIndexInfo : dataShouldNotUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
-						preferenceLiveUpdatesOn(localIndexInfo, getSettings());
+						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), getSettings());
 				if (preference.get()) {
 					changedSet.add(localIndexInfo);
 				}
@@ -392,7 +391,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		private void enableLiveUpdates(boolean enable) {
 			AlarmManager alarmMgr = (AlarmManager) getActivity()
 					.getSystemService(Context.ALARM_SERVICE);
-			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
+			for (LocalIndexInfo li : dataShouldUpdate) {
+				String localIndexInfo = li.getFileName();
 				PendingIntent alarmIntent = getPendingIntent(getActivity(),
 						localIndexInfo);
 				if (enable) {
@@ -490,7 +490,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		}
 
 		@SuppressWarnings("deprecation")
-		public void bindLocalIndexInfo(final LocalIndexInfo item, boolean isLastChild) {
+		public void bindLocalIndexInfo(final LocalIndexInfo it, boolean isLastChild) {
+			final String item = it.getFileName();
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
 			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
@@ -523,7 +524,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			view.setLayoutParams(layoutParams);
 
 			final String fileNameWithoutExtension =
-					Algorithms.getFileNameWithoutExtension(new File(item.getFileName()));
+					Algorithms.getFileNameWithoutExtension(new File(item));
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 			final long lastCheck = preferenceLastCheck(item, fragment.getSettings()).get();
 			String lastCheckString = formatDateTime(fragment.getActivity(),

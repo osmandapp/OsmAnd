@@ -20,8 +20,8 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String fileName = intent.getAction();
-		LocalIndexInfo localIndexInfo =
-				intent.getParcelableExtra(LiveUpdatesHelper.LOCAL_INDEX_INFO);
+		String localIndexInfo =
+				intent.getStringExtra(LiveUpdatesHelper.LOCAL_INDEX_INFO);
 		WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
 		final OsmandApplication application = (OsmandApplication) context.getApplicationContext();

@@ -509,7 +509,8 @@ public class AppInitializer implements IProgress {
 			}
 		});
 		AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-		for (LocalIndexInfo fullMap : fullMaps) {
+		for (LocalIndexInfo fm : fullMaps) {
+			String fullMap = fm.getFileName();
 			if (!preferenceLiveUpdatesOn(fullMap, settings).get()) {
 				continue;
 			}
