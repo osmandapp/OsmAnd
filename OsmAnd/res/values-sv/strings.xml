@@ -225,7 +225,7 @@
 
 <string name="osmand_rastermaps_plugin_description">"Med denna modul får man tillgång till många typer av online-kartor, från fördefinierade Openstreetmap-rutor (som Mapnik) till satellitbilder och speciella lager såsom väderkartor, klimatkartor, geologiska kartor, reliefkartor etc.
 \n\nDessa kartor kan användas antingen som huvudkarta (baskarta) och visas på kartskärmen i OsmAnd eller som ett över- eller underlägg till en annan baskarta (som OsmAnds vanliga offline-kartor). För att göra en underliggande karta tydligare kan vissa element i OsmAnds vektorkartor lätt döljas via menyn \'Konfigurera karta\'.
-\n\nKartbitar (tile maps) kan hämtas direkt online eller förberedas för användning offline (och kopieras manuellt till OsmAnds datamapp) som en sqlite-databas som kan skapas med olika tredjepartsverktyg. "</string>
+\n\nKartbitar (tile maps) kan hämtas direkt online eller förberedas för användning offline (och kopieras manuellt till OsmAnds datamapp) som en SQLite-databas som kan skapas med olika tredjepartsverktyg. "</string>
     <string name="osmand_background_plugin_description">Visa inställningarna för att aktivera spårning och navigering i bakgrundsläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 
     <string name="osmand_development_plugin_description">Denna modul visar inställningarna för utvecklings- och felsökningsfunktioner som rutt-testning och -simulering eller visning av renderingsprestanda eller röststyrning. Dessa inställningar är avsedda för utvecklare och behövs inte för den vanliga användaren.</string>
@@ -772,7 +772,7 @@
     <string name="arrived_at_destination">Du har anlänt till din destination</string>
     <string name="loading_data">Laddar data …</string>
     <string name="reading_indexes">Läser lokala data …</string>
-    <string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Vill du söka på Play Butik?</string>
+    <string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Vill du söka på Google Play?</string>
     <string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
     <string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
