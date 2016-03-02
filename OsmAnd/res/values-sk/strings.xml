@@ -76,7 +76,7 @@
     <string name="map_online_data_descr">Použitie online máp (ich stiahnutie a uloženie na SD kartu)</string>
     <string name="shared_string_online_maps">Online mapy</string>
     <string name="online_map_settings_descr">Konfigurácia online mapových zdrojov</string>
-    <string name="osmand_rastermaps_plugin_description">"S týmto modulom môžete použiť rozličné online (tiež nazývané dlaždicové alebo rastrové) mapy, od preddefinovaných OSM dlaždíc (ako Mapnik) po satelitné snímky a špeciálne vrstvy ako mapy počasia, klimatické, geologické, tieňované svahy a pod.\n\nVšetky tieto mapy môžu byť použité ako hlavná (základná) mapa na obrazovke OsmAnd alebo ako prekrývacia / podkladová mapa k inej základnej mape (napr. štandardné offline mapy z OsmAnd). Pre lepšie zviditeľnenie podkladových máp je možné vypnúť niektoré objekty z vektorových máp OsmAnd, cez menu \"Nastaviť mapu\".\n\nDlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich môžete pripraviť na použitie offline (skopírovať ručne do dátového priečinka OsmAnd) ako sqlite databázu, ktorú vedia vytvoriť viaceré programy na prípravu máp. "</string>
+    <string name="osmand_rastermaps_plugin_description">"S týmto modulom môžete použiť rozličné online (tiež nazývané dlaždicové alebo rastrové) mapy, od preddefinovaných dlaždíc OpenStreetMap (ako Mapnik) po satelitné snímky a špeciálne vrstvy ako mapy počasia, klimatické, geologické, tieňované svahy a pod.\n\nVšetky tieto mapy môžu byť použité ako hlavná (základná) mapa na obrazovke OsmAnd alebo ako prekrývacia / podkladová mapa k inej základnej mape (napr. štandardné offline mapy z OsmAnd). Pre lepšie zviditeľnenie podkladových máp je možné vypnúť niektoré objekty z vektorových máp OsmAnd, cez menu \"Nastaviť mapu\".\n\nDlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich môžete pripraviť na použitie offline (skopírovať ručne do dátového priečinka OsmAnd) ako SQLite databázu, ktorú vedia vytvoriť viaceré programy na prípravu máp. "</string>
     <string name="osmand_background_plugin_description">Zobrazí nastavenia na povolenie stopovania a navigácie v pozadí systému (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
     <string name="osmand_accessibility_description">Tento modul zobrazí funkcie uľahčenia prístupu priamo v OsmAnd. Napr. je možné zmeniť rýchlosť TTS hlasu, použiť trackball na približovanie, alebo automaticky oznamovať polohu hlasom.</string>
     <string name="osmand_development_plugin_description">Tento modul zobrazí nastavenia pre funkcie vývoja a ladenia, ako simulácia trasy, zobrazenie výkonu vykresľovania alebo hlasové oznamy. Tieto nastavenia sú určené pre vývojárov a nie sú potrebné pre bežné použitie programu.</string>
@@ -820,7 +820,7 @@
     <string name="map_widget_show_destination_arrow">Zobraziť smer k cieľu</string>
     <string name="rendering_attr_roadColors_description">Vyberte farebnú schému pre cesty:</string>
     <string name="rendering_attr_roadColors_name">Farebná schéma ciest</string>
-    <string name="zxing_barcode_scanner_not_found">Aplikácia na čítanie čiarových kódov ZXing Barcode Scanner nie je nainštalovaná. Chcete ju nájsť v Market?</string>
+    <string name="zxing_barcode_scanner_not_found">Aplikácia na čítanie čiarových kódov ZXing Barcode Scanner nie je nainštalovaná. Chcete ju nájsť v Google Play?</string>
     <string name="rendering_attr_showRoadMaps_description">Vyberte, kedy zobraziť mapy ciest:</string>
     <string name="safe_mode">Bezpečný režim</string>
     <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>
@@ -1957,7 +1957,7 @@
     <string name="select_map_markers">Zvoliť mapové značky</string>
     <string name="shared_string_reverse_order">Obrátené poradie</string>
     <string name="show_map_markers_description">Aktivovať funkciu mapových značiek</string>
-    <string name="clear_active_markers_q">Chcete vymazať všetky aktívne značky?</string>
+    <string name="clear_active_markers_q">Chcete odstrániť všetky aktívne značky?</string>
     <string name="clear_markers_history_q">Chcete vymazať históriu mapových značiek?</string>
     <string name="active_markers">Aktívne značky</string>
     <string name="map_markers">Mapové značky</string>
@@ -1981,7 +1981,7 @@
     <string name="osm_live_enter_email">Prosím zadajte platnú e-mailovú adresu</string>
     <string name="osm_live_enter_user_name">Prosím zadajte verejné meno</string>
     <string name="osm_live_thanks">Ďakujeme za registrovanie na okamžité aktualizácie!</string>
-    <string name="osm_live_region_desc">Časť príspevkov bude zaslaná používateľom OSM, ktorí upravujú mapu v danom regióne</string>
+    <string name="osm_live_region_desc">Časť z príspevku bude zaslaná používateľom OSM, ktorí upravujú mapu v danom regióne</string>
     <string name="osm_live_subscription_settings">Nastavenia registrácie</string>
     <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Naživo</string>
 
@@ -1989,4 +1989,5 @@
     
     <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
     <string name="recalculate_route">Prepočítať trasu</string>
+    <string name="shared_string_topbar">Horný panel</string>
     </resources>
