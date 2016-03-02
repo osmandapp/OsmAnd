@@ -63,7 +63,7 @@
     <string name="no_buildings_found">Ingen bygninger fundet.</string>
     <string name="incremental_search_city">Søg efter by trinvist</string>
     <string name="search_villages_and_postcodes">Søg flere landsbyer/postnummer</string>
-    <string name="dropbox_plugin_description">Dropbox udvidelse gør det muligt at synkronisere spor og audio-/videonoter med en dropbox-konto.</string>
+    <string name="dropbox_plugin_description">Dropbox udvidelse gør det muligt at synkronisere spor og audio-/videonoter med en Dropbox-konto.</string>
     <string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
     <string name="rendering_attr_showRoadMaps_name">Kort kun med veje</string>
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
@@ -72,7 +72,7 @@
     <string name="background_service_is_enabled_question">OsmAnd kører stadig i baggrunden. Skal den også stoppes?</string>
 
     <string name="close_changeset">Luk ændringspost</string>
-    <string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Play butik?</string>
+    <string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Google Play?</string>
     <string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
     <string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
@@ -2191,7 +2191,7 @@
     <string name="route_duration">Varighed:</string>
     <string name="missing_write_external_storage_permission">App\'en har ikke tilladelse til at bruge SD-kortet</string>
 <string name="no_location_permission">App\'en har ikke tilladelse til at bruge lokaliseringsdata.</string>
-    <string name="no_camera_permission">App\'en har ikke tilladelse til at bruge kamera.</string>
+    <string name="no_camera_permission">App\'en har ikke tilladelse til at bruge kameraet.</string>
     <string name="no_microphone_permission">App\'en har ikke tilladelse til at bruge mikrofonen.</string>
     <string name="impassable_road_desc">Vælg veje, der skal undgås under navigation</string>
     <string name="shared_string_sound">Lyd</string>
