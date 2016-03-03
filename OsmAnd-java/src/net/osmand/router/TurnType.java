@@ -155,9 +155,9 @@ public class TurnType {
 	}
 	
 	// lanes encoded as array of int
-	// 0 byte - 0/1 - to use or not
-	// 1-5 byte - additional turn info 
-	// 6-10 byte - secondary turn
+	// 0 bit - 0/1 - to use or not
+	// 1-5 bits - additional turn info 
+	// 6-10 bits - secondary turn
 	public void setLanes(int[] lanes) {
 		this.lanes = lanes;
 	}
