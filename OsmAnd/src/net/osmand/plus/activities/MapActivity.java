@@ -72,6 +72,7 @@ import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
@@ -207,7 +208,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		int h = dm.heightPixels - statusBarHeight;
 
 		mapView = new OsmandMapTileView(this, w, h);
-		if (app.getAppInitializer().checkAppVersionChanged(this) && WhatsNewDialogFragment.SHOW) {
+		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
 			WhatsNewDialogFragment.SHOW = false;
 			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
 		}
@@ -276,7 +277,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		}
 		mapView.refreshMap(true);
 
-		if (getMyApplication().getAppInitializer().isFirstTime(this) && FirstUsageFragment.SHOW) {
+		if (getMyApplication().getAppInitializer().isFirstTime() && FirstUsageFragment.SHOW) {
 			FirstUsageFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageFragment(),
@@ -579,6 +580,11 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+		}
+
+		if (app.isExternalStorageDirectoryReadOnly()
+				&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+			DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
 		}
 	}
 

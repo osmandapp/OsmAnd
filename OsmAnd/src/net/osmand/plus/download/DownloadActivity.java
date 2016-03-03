@@ -599,7 +599,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	private void showFirstTimeExternalStorage() {
-		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(this);
+		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime();
 		final boolean externalExists =
 				getMyApplication().getSettings().getSecondaryStorage() != null;
 		if (firstTime && (externalExists || !hasPermissionToWriteExternalStorage())
@@ -617,7 +617,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	private void chooseDataStorage() {
 		if (getMyApplication().getSettings().getSecondaryStorage() != null) {
-			new DataStoragePlaceDialogFragment().show(getSupportFragmentManager(), null);
+			DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), false);
 		}
 	}
 

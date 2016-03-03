@@ -103,6 +103,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
+	private boolean externalStorageDirectoryReadOnly;
 
 	private String firstSelectedVoiceProvider;
 	
@@ -126,7 +127,17 @@ public class OsmandApplication extends MultiDexApplication {
 		appCustomization = new OsmAndAppCustomization();
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
+		appInitializer.initVariables();
+		if (appInitializer.isAppVersionChanged() && appInitializer.getPrevAppVersion() < AppInitializer.VERSION_2_3) {
+			osmandSettings.freezeExternalStorageDirectory();
+		} else if (appInitializer.isFirstTime()) {
+			osmandSettings.initExternalStorageDirectory();
+		}
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		if (!OsmandSettings.isWritable(externalStorageDirectory)) {
+			externalStorageDirectoryReadOnly = true;
+			externalStorageDirectory = osmandSettings.getInternalAppPath();
+		}
 		
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -139,6 +150,10 @@ public class OsmandApplication extends MultiDexApplication {
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+	}
+
+	public boolean isExternalStorageDirectoryReadOnly() {
+		return externalStorageDirectoryReadOnly;
 	}
 
 	@Override
@@ -618,6 +633,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public void setExternalStorageDirectory(int type, String directory){
 		osmandSettings.setExternalStorageDirectory(type, directory);
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		externalStorageDirectoryReadOnly = false;
 		getResourceManager().resetStoreDirectory();
 	}
 
