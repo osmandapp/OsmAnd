@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
@@ -2079,4 +2079,10 @@
     <string name="night">Este</string>
     <string name="select_month_and_country">Hónap és ország kiválasztása</string>
 <string name="shared_string_remove">Eltávolítás</string>
+    <string name="storage_directory_readonly_desc">Az adatok tárolására kiválasztott könyvtár jelenleg csak olvasható. A tárolási helyet ideiglenesen a Belső memóriára állítottuk. Kérlek, válassz érvényes tárolás helyet.</string>
+    <string name="storage_directory_shared">Osztott memória</string>
+    <string name="shared_string_topbar">Felső sáv</string>
+    <string name="recalculate_route">Útvonal újraszámítása</string>
+    <string name="donations">Adományok</string>
+    <string name="number_of_recipients">Kedvezményezettek száma</string>
     </resources>
