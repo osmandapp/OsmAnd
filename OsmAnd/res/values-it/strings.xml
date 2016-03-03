@@ -2060,7 +2060,7 @@
     <string name="osm_edit_removed_note">Nota OSM eliminata</string>
 	<string name="osm_edit_created_note">Nota OSM creata</string>
 	<string name="osn_bug_name">Nota OSM</string>
-	<string name="osn_add_dialog_title">Crea una nota</string>
+	<string name="osn_add_dialog_title">Crea nota</string>
 	<string name="osn_comment_dialog_title">Aggiungi un commento</string>
 	<string name="osn_reopen_dialog_title">Riapri la nota</string>
 	<string name="osn_close_dialog_title">Chiudi la nota</string>
