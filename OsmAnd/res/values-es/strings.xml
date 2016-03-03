@@ -135,7 +135,7 @@
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
     <string name="basemap_missing">El mapa mundial base (cubriendo todo el mundo a niveles de acercamiento pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
-    <string name="vector_data_missing">No hay datos (\'descargados\') en la tarjeta SD. Considere descargarlos para utilizar los mapas sin conexión.</string>
+    <string name="vector_data_missing">"No hay datos (\'descargados\') en la tarjeta SD.  Por favor, considera descargarlos para utilizar los mapas sin conexión."</string>
     <string name="local_index_gpx_info_show">\n\nMantenga pulsado para opciones</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) correctamente desactivado(s).</string>
@@ -855,7 +855,7 @@
     <string name="non_optimal_route_calculation">Calcular una ruta posiblemente no óptima en largas distancias</string>
     <string name="rendering_attr_roadColors_description">Seleccione un esquema de color de carreteras:</string>
     <string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
-    <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
+    <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscar en Google Play?</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
     <string name="background_service_is_enabled_question">El servicio de fondo de OsmAnd aún está funcionando. ¿Quieres pararlo también?</string>
     <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (utilizando código Android más lento en lugar del nativo).</string>
@@ -920,7 +920,7 @@
     <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Considere la compra del complemento curvas de nivel en la tienda de aplicaciones para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Complemento curvas de nivel</string>
-    <string name="dropbox_plugin_description">El complemento Dropbox, permite sincronizar trazas y notas multimedia con su cuenta de Dropbox.</string>
+    <string name="dropbox_plugin_description">El complemento Dropbox te permite sincronizar trazas y notas multimedia con tu cuenta de Dropbox.</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -1946,7 +1946,7 @@
     <string name="lang_fy">Frisón</string>
     <string name="lang_als">Albano (Tosk)</string>
     <string name="share_osm_edits_subject">Ediciones OSM compartidas vía OsmAnd</string>
-    <string name="save_poi_without_poi_type_message">¿Quiere guardar el punto de interés sin especificar el tipo?</string>
+    <string name="save_poi_without_poi_type_message">¿Realmente quieres guardar el PDI sin especificar el tipo?</string>
     <string name="shared_string_location">Ubicación</string>
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
     <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
@@ -2115,4 +2115,6 @@
     <string name="osm_live_header">"Esta suscripción permite actualizaciones cada hora para  los mapas de todo el mundo. La mayor parte de los ingresos va a la comunidad OSM y se paga por cada contribución a OSM. En caso de que te gusten OsmAnd y OSM y quieras apoyarlos, ésta es una manera perfecta de hacerlo."</string>
     
     <string name="show_transparency_seekbar">Mostrar transparencia de la barra de búsqueda</string>
+    <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos seleccionada actualmente es de sólo lectura. La carpeta de almacenamiento fue cambiada temporalmente a la memoria interna. Por favor, elige directorio de almacenamiento válido.</string>
+    <string name="storage_directory_shared">Memoria compartida</string>
     </resources>
