@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Obchod</string>
 	<string name="poi_emergency">Núdzová situácia/Záchrana</string>
 	<string name="poi_transportation">Doprava</string>
@@ -591,7 +591,7 @@
 	<string name="poi_landuse_railway">Železničný pozemok</string>
 
 	<string name="poi_canal">Prieplav</string>
-	<string name="poi_bailiff"/>
+	<string name="poi_bailiff">Exekútor</string>
 	<string name="poi_prosecutor">Žalobca</string>
 	<string name="poi_residential">Obytná oblasť</string>
 
