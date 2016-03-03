@@ -941,7 +941,7 @@
     <string name="gps_not_available">Įjunkite GPS telefono nustatymuose</string>
     <string name="rendering_attr_roadColors_description">Pasirinkti kelių spalvinimo schemą:</string>
     <string name="rendering_attr_roadColors_name">Kelių spalvinimo schema</string>
-    <string name="zxing_barcode_scanner_not_found">Barkodų nuskaitymo programa ZXing neįdiegta. Ieškoti parduotuvėje?</string>
+    <string name="zxing_barcode_scanner_not_found">Barkodų nuskaitymo programa ZXing neįdiegta. Ieškoti Google Play parduotuvėje?</string>
     <string name="close_changeset">Uždaryti pakeitimus</string>
     <string name="safe_mode_description">Vykdyti programą saugiu režimu (naudoti Android kodą vietoje aparatinio).</string>
     <string name="safe_mode">Saugus režimas</string>
@@ -1244,7 +1244,7 @@
     <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą…</string>
     <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)…</string>
     <string name="copying_osmand_files">Kopijuojami OsmAnd failai…</string>
-    <string name="keep_and_add_destination_point">Įtraukti kaip kelionės tikslą</string>
+    <string name="keep_and_add_destination_point">Įtraukti kaip galutinį kelionės tikslą</string>
     <string name="select_gpx">Pasirinkti GPX…</string>
     <string name="route_descr_select_destination">Pasirinkti kelionės tikslą</string>
     <string name="shared_string_select_on_map">Pasirinkti žemėlapyje</string>
@@ -1317,7 +1317,7 @@
     <string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
     <string name="osmo_settings_uuid">Unikalus įrenginio ID</string>
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
-    <string name="osmo_plugin_description">"Pateikia OsMo - tap vadinamo pažangaus tiesioginio stebėjimo, nustatymus, daugiau http://osmo.mobi.
+    <string name="osmo_plugin_description">"Pateikia OsMo - taip vadinamo pažangaus tiesioginio stebėjimo, nustatymus, daugiau http://osmo.mobi.
 \nSuteikia galimybę stebėti visus įrenginius konkrečioje grupėje realiuoju laiku bei bendrauti tarpusavyje. Tebėti glima tik konkrečios sesijos metu arba pastoviai.\nSusikurkite anonimines grupes tik kelioms dienoms su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
     <string name="osmo_plugin_name">OsMo (OSM stebėjimas)</string>
     <string name="osmo_settings">OsMo</string>
@@ -1378,7 +1378,7 @@
     <string name="osmo_enable_tracker">Siųsti mano buvimo vietą</string>
     <string name="osmo_control">OsMo greita prieiga</string>
 
-    <string name="import_file_favourites">Išsaugoti GPX faile ar importuoti į įsimintas vietas?</string>
+    <string name="import_file_favourites">Išsaugoti duomenis GPX faile ar importuoti į įsimintas vietas?</string>
 
     <string name="osmo_follow">Sekti</string>
     <string name="osmo_sign_in">Prisijungti</string>
@@ -2118,4 +2118,17 @@
     <string name="show_polygons">Rodyti daugiakampius</string>
     <string name="shared_string_read_more">Daugiau</string>
     <string name="add_time_span">Pridėti laiko intervalą</string>
+    <string name="osm_live_subscribe_btn">Prenumeruoti</string>
+    <string name="osm_live_user_public_name">Viešas vardas</string>
+    <string name="osm_live_hide_user_name">Nerodyti mano vardo ataskaitose</string>
+    <string name="osm_live_month_cost">Mėnesio mokestis</string>
+    <string name="osm_live_month_cost_desc">Kasmėnesinis mokėjimas</string>
+    <string name="osm_live_active">Aktyvus</string>
+    <string name="osm_live_not_active">Neaktyvus</string>
+    <string name="osm_live_enter_email">Prašome įrašyti galiojantį el. pašto adresą</string>
+    <string name="osm_live_enter_user_name">Prašome įrašyti viešą vardą</string>
+    <string name="osm_live_subscription_settings">Prenumeratos nustatymai</string>
+    <string name="osm_live_ask_for_purchase">Prašome pirmiau įsigyti OSM Live prenumeratą</string>
+
+    <string name="download_files_error_not_enough_space">Nepakanka vietos! Failams reikalinga {3} MB laikinai ir {1} MB pastoviai. Šiuo metu galimi tik {2} MB vietos.</string>
     </resources>
