@@ -158,4 +158,12 @@
     <string name="map_downloaded">Mapo elŝutita</string>
     <string name="map_downloaded_descr">Mapo de %1$s estas elŝutita. Reveni al la mapo por komenci uzi ĝin.</string>
     <string name="go_to_map">Aliri al la mapo</string>
+    <string name="simulate_initial_startup_descr">Agordas flagon kiu indikas unuan starton de aplikaĵo, sed ne ŝanĝas aliajn agordojn</string>
+    <string name="simulate_initial_startup">Simuli unuan starton de aplikaĵo</string>
+    <string name="favorite_category_name">Kategoria nomo</string>
+    <string name="favorite_category_dublicate_message">Difina nomo de kategorio jam ekzistas. Bonvolu elekti alian nomon.</string>
+    <string name="favorite_category_add_new_title">Aldoni novan kategorion</string>
+    <string name="regions">Regionoj</string>
+    <string name="region_maps">Regionaj mapoj</string>
+    <string name="world_maps">Mondaj mapoj</string>
     </resources>
