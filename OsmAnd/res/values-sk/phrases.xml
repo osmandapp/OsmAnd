@@ -1517,4 +1517,45 @@
 	<string name="poi_payment_meal_voucher_no">Neprijíma stravné poukážky</string>
 	<string name="poi_payment_paypal_yes">Prijíma PayPal</string>
 	<string name="poi_payment_paypal_no">Neprijíma PayPal</string>
+	<string name="poi_seamark_dyke">Povodňová hrádza</string>
+	<string name="poi_payment_u_key_yes">Prijíma U-Key</string>
+	<string name="poi_payment_u_key_no">Neprijíma U-Key</string>
+	<string name="poi_payment_token_yes">Prijíma žetóny</string>
+	<string name="poi_payment_token_no">Neprijíma žetóny</string>
+	<string name="poi_payment_gift_card_yes">Prijíma darčekové poukážky</string>
+	<string name="poi_payment_gift_card_no">Neprijíma darčekové poukážky</string>
+	<string name="poi_payment_golden_crown_yes">Prijíma karty Golden Crown</string>
+	<string name="poi_payment_golden_crown_no">Neprijíma karty Golden Crown</string>
+	<string name="poi_payment_pro100_yes">Prijíma karty PRO100</string>
+	<string name="poi_payment_pro100_no">Neprijíma karty PRO100</string>
+	<string name="poi_payment_union_card_yes">Prijíma karty Union</string>
+	<string name="poi_payment_union_card_no">Neprijíma karty Union</string>
+	<string name="poi_payment_mtsmoney_yes">Prijíma MTS-Money</string>
+	<string name="poi_payment_mtsmoney_no">Neprijíma MTS-Money</string>
+	<string name="poi_payment_yandexmoney_yes">Prijíma Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_no">Neprijíma Yandex.Money</string>
+	<string name="poi_description_payment">Popis platby</string>
+
+	<string name="poi_internet_access_fee_yes">Prístup na internet - požadovaný poplatok</string>
+	<string name="poi_internet_access_fee_no">Prístup na internet - bez poplatku</string>
+
+	<string name="poi_diet_vegetarian_only">Len vegetariánska diéta</string>
+	<string name="poi_diet_vegetarian_yes">Vegetariánska diéta</string>
+	<string name="poi_diet_vegetarian_no">Vegetariánska diéta: nie</string>
+	<string name="poi_diet_vegetarian_few">Vegetariánska diéta: niektoré</string>
+	<string name="poi_diet_vegan_only">Len vegánska diéta</string>
+	<string name="poi_diet_vegan_yes">Vegánska diéta</string>
+	<string name="poi_diet_vegan_no">Vegánska diéta: nie</string>
+	<string name="poi_diet_gluten_free_only">Len bezgluténová diéta</string>
+	<string name="poi_diet_gluten_free_yes">Bezgluténová diéta</string>
+	<string name="poi_diet_gluten_free_no">Bezgluténová diéta: nie</string>
+	<string name="poi_diet_kosher_only">Len kóšer diéta</string>
+	<string name="poi_diet_kosher_yes">Kóšer diéta</string>
+	<string name="poi_diet_kosher_no">Kóšer diéta: nie</string>
+	<string name="poi_diet_halal_only">Len halal diéta</string>
+	<string name="poi_diet_halal_yes">Halal diéta</string>
+	<string name="poi_diet_halal_no">Halal diéta: nie</string>
+	<string name="poi_diet_lactose_free_only">Len bezlaktózová diéta</string>
+	<string name="poi_diet_lactose_free_yes">Bezlaktózová diéta</string>
+	<string name="poi_diet_lactose_free_no">Bezlaktózová diéta: nie</string>
 	</resources>
