@@ -2133,4 +2133,6 @@
     
     <string name="recalculate_route">Recalcular ruta</string>
     <string name="shared_string_topbar">Barra superior</string>
+    <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos elegida actualmente, es de sólo lectura. Esta, se cambió temporalmente a la memoria interna. Elige un directorio de almacenamiento válido.</string>
+    <string name="storage_directory_shared">Memoria compartida</string>
     </resources>
