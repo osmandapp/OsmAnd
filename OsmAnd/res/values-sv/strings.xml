@@ -2132,4 +2132,5 @@
     <string name="show_transparency_seekbar">Visa transparent sökfält</string>
     <string name="recalculate_route">Beräkna om rutten</string>
     <string name="shared_string_topbar">Toppfält</string>
+    <string name="storage_directory_shared">Delat minne</string>
     </resources>
