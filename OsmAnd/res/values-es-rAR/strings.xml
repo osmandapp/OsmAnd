@@ -786,7 +786,7 @@
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
-    <string name="zxing_barcode_scanner_not_found">Aplicación ZXing Barcode Scanner no instalada. ¿Buscarla en la Tienda?</string>
+    <string name="zxing_barcode_scanner_not_found">Aplicación ZXing Barcode Scanner no instalada. ¿Buscarla en Google Play?</string>
     <string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
     <string name="rendering_attr_roadColors_name">Esquema de color de caminos</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
@@ -1597,7 +1597,7 @@
     <string name="error_calculating_route_occured">Ocurrió un error al calcular la ruta</string>
     <string name="empty_route_calculated">Error: La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
-    <string name="arrived_at_destination">Ha llegado a tu destino</string>
+    <string name="arrived_at_destination">Has llegado a tu destino</string>
     <string name="invalid_locations">¡Las coordenadas son inválidas!</string>
     <string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
     <string name="loading_data">Cargando datos…</string>
@@ -2009,10 +2009,10 @@
     <string name="update_now">Actualizar ahora</string>
 <string name="route_distance">Distancia:</string>
     <string name="route_duration">Duración:</string>
-    <string name="missing_write_external_storage_permission">La aplicación no tiene permiso para usar la tarjeta SD</string>
-<string name="no_location_permission">La aplicación no tiene permiso para acceder a los datos de ubicación.</string>
-    <string name="no_camera_permission">La aplicación no tiene permiso para acceder a la cámara.</string>
-    <string name="no_microphone_permission">La aplicación no tiene permiso para acceder al micrófono.</string>
+    <string name="missing_write_external_storage_permission">La aplicación no tiene permiso de usar la tarjeta SD</string>
+<string name="no_location_permission">La aplicación no tiene permiso de acceso a los datos de ubicación.</string>
+    <string name="no_camera_permission">La aplicación no tiene permiso de acceso a la cámara.</string>
+    <string name="no_microphone_permission">La aplicación no tiene permiso de acceso al micrófono.</string>
     <string name="impassable_road_desc">Elige caminos a evitar durante la navegación</string>
     <string name="shared_string_sound">Sonido</string>
     <string name="select_voice_provider">Elige el aviso de voz</string>

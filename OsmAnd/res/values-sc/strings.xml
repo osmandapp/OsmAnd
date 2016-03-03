@@ -281,7 +281,7 @@
     <string name="av_def_action_picture">Iscata una foto</string>
     <string name="recording_context_menu_precord">Iscata una foto</string>
     <string name="av_use_external_camera_descr">Imprea s’aplicu de sistema pro sas fotos</string>
-    <string name="dropbox_plugin_description">S’estensione Dropbox permìttit de sincronizare sas camineras e sas notas audio/video cun su contu tuo de Dropbox.</string>
+    <string name="dropbox_plugin_description">S’estensione Dropbox ti permitit de sincronizare sas camineras e sas notas audio/video cun su contu tuo de Dropbox.</string>
     <string name="dropbox_plugin_name">Estensione Dropbox</string>
     <string name="intermediate_points_change_order">Muda s’òrdine</string>
     <string name="srtm_paid_version_msg">Pro praghere lea a cunsideru s\'acuistu de s’estensione pro sas lìnias de livellu in su Market, pro sostènnere s’isvilupu imbeniente.</string>
@@ -358,7 +358,7 @@
 
 
     <string name="close_changeset">Serra sas modìficas</string>
-    <string name="zxing_barcode_scanner_not_found">S’aplicu ZXing Barcode Scanner non est installadu. Lu boles chircare in su Market?</string>
+    <string name="zxing_barcode_scanner_not_found">S’aplicatzione ZXing Barcode Scanner non est installada. La boles chircare in su Market?</string>
     <string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sas istradas:</string>
     <string name="rendering_attr_roadColors_name">Ischema de colores de sas istradas</string>
     <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
@@ -882,7 +882,7 @@
     <string name="rendering_attr_hmRendered_description">Aumenta sa cantidade ammustrada de minujos de sa mapa</string>
 	<string name="osmand_rastermaps_plugin_description">"Cun custa estensione podes atzèdere a medas castas de màpas in lìnia (cussas connotas comente \"a tasseddos\" o \"raster\"), dae sas predefinidas de  Openstreetmap (comente Mapnik) a sas immàgines satellitares e a sos istratos pro punnas ispetziales comente sas mapas metereològicas, climàticas, geològicas, e umbradura de sos rilievos etc.
 \n\nTotu custas mapas podent èssere impreadas siat comente mapa printzipale (de base) de ammustrare in s\'ischermada mapa de OsmAnd siat comente un\'istratu se subrapositzione o de isfundu de un’àtera mapa de base (comente sas mapas regulares non in lìnia de OsmAnd). Pro permìtere una visibilidade prus manna de sas mapas de isfundu, calicunu de sos elementos de sas mapas vetoriales podet èssere cuadu, impreende su menù \'Cunfigura sa mapa\' sighinde sas netzessidades tuas.
-\n\nSas mapas a tasseddos podent èssere iscarrigadas deretamente o ammaniadas pro s\'impreu chene lìnia (e a pustis copiadas intre sa cartella de sos datos de OsmAnd) comente unu database sqlite chi podet èssere produidu dae medas ainas pro sa creatzione de mapas esternas (third-party maps). "</string>
+\n\nSas mapas a tasseddos podent èssere iscarrigadas deretamente o ammaniadas pro s\'impreu chene lìnia (e a pustis copiadas intre sa cartella de sos datos de OsmAnd) comente unu database SQLite chi podet èssere produidu dae medas ainas pro sa creatzione de mapas esternas (third-party maps). "</string>
 
 
     <string name="osm_editing_plugin_description">Custa estensione permitit de cuntribuire ad OSM creende e modifichende sos PDI de OSM, aberinde e cummentende errores de OSM e imbiende documentos GPX registrados. OSM est unu progetu pùblicu de mapadura fatu dae una comunidade globale. Pro àteras informatziones: http://openstreetmap.org. Sa partetzipatzione est apretziada, e sas cuntributziones podent èssere fatas deretamente dae OsmAnd insertende in intro de s\'aplicu sas credentziales de atzessu.</string>

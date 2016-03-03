@@ -1231,7 +1231,7 @@
 	<string name="poi_nudism_customary">Nudisme: habitual</string>
 	<string name="poi_nudism_permissive">Nudisme: permissiu</string>
 
-	<string name="poi_parking_underground">Subterrani</string>
+	<string name="poi_parking_underground">Tipus: subterrani</string>
 	<string name="poi_bicycle_parking_anchors">Ancoratges</string>
 	<string name="poi_leaf_type_leafless">Sense fulles</string>
 	<string name="poi_species">Espècies</string>
