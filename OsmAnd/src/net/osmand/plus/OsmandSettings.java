@@ -1282,12 +1282,31 @@ public class OsmandSettings {
 	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4;
 
 
+	public void freezeExternalStorageDirectory() {
+		if (Build.VERSION.SDK_INT >= 19) {
+			int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
+			if (type == -1) {
+				ValueHolder<Integer> vh = new ValueHolder<>();
+				File f = getExternalStorageDirectoryV19(vh);
+				setExternalStorageDirectoryV19(vh.value, f.getAbsolutePath());
+			}
+		}
+	}
+
+	public void initExternalStorageDirectory() {
+		if (Build.VERSION.SDK_INT < 19) {
+			setExternalStorageDirectoryPre19(getInternalAppPath().getAbsolutePath());
+		} else {
+			setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_INTERNAL_FILE, getInternalAppPath().getAbsolutePath());
+		}
+	}
+
 	public File getExternalStorageDirectory() {
 		return getExternalStorageDirectory(null);
 	}
 
 	public File getExternalStorageDirectory(ValueHolder<Integer> type) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+		if (Build.VERSION.SDK_INT < 19) {
 			return getExternalStorageDirectoryPre19();
 		} else {
 			return getExternalStorageDirectoryV19(type);
@@ -1395,7 +1414,7 @@ public class OsmandSettings {
 	@SuppressLint("NewApi")
 	@Nullable
 	public File getSecondaryStorage() {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+		if (Build.VERSION.SDK_INT < 19) {
 			return getExternalStorageDirectoryPre19();
 		} else {
 			File[] externals = ctx.getExternalFilesDirs(null);

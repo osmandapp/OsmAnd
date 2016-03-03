@@ -1,118 +1,219 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="?attr/bottom_menu_view_bg"
-            tools:context="net.osmand.plus.download.ui.DataStoragePlaceDialogFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:background="?attr/bottom_menu_view_bg"
+              android:orientation="horizontal"
+              tools:context="net.osmand.plus.download.ui.DataStoragePlaceDialogFragment">
 
-    <ImageView
-        android:id="@+id/folderIconImageView"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_row="0"
-        android:scaleType="center"
-        tools:background="@color/color_warning"
-        tools:src="@drawable/ic_action_folder"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-    <TextView
+        <ImageView
+            android:id="@+id/folderIconImageView"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_row="0"
+            android:scaleType="center"
+            tools:background="@color/color_warning"
+            tools:src="@drawable/ic_action_folder"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_columnSpan="2"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="22dp"
-        android:layout_row="0"
-        android:text="@string/application_dir"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="@dimen/dialog_header_text_size"/>
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/closeImageButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:src="@drawable/ic_action_remove_dark"
-        tools:background="@color/color_warning"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_column="1"
-        android:layout_columnSpan="2"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginBottom="24dp"
-        android:layout_row="1"
-        android:text="@string/application_dir_description"
-        android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal"
+                android:layout_weight="1"
+                android:paddingTop="22dp"
+                android:text="@string/application_dir"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/dialog_header_text_size"/>
 
-    <ImageView
-        android:id="@+id/deviceMemoryImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_column="1"
-        android:layout_row="2"
-        android:layout_rowSpan="2"
-        android:paddingRight="16dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_sdcard"
-        tools:background="@color/color_warning"/>
+            <ImageButton
+                android:id="@+id/closeImageButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_action_remove_dark"
+                tools:background="@color/color_warning"/>
 
-    <TextView
-        android:id="@+id/deviceMemoryTitle"
-        android:layout_width="0dp"
-        android:layout_column="2"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_row="2"
-        android:gravity="center_vertical"
-        android:text="@string/storage_directory_default"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/deviceMemoryDescription"
-        android:layout_width="0dp"
-        android:layout_column="2"
-        android:layout_gravity="fill_horizontal"
-        android:layout_row="3"
-        tools:text="Free: 568 Mb"/>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/application_dir_description"
+            android:textSize="16sp"/>
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_column="1"
-        android:layout_columnSpan="3"
-        android:layout_gravity="fill_horizontal"
-        android:layout_row="4"
-        android:background="@color/divider_color"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/memoryStickImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_column="1"
-        android:layout_row="5"
-        android:layout_rowSpan="2"
-        android:paddingRight="16dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_sdcard"
-        tools:background="@color/color_warning"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/memoryStickTitle"
-        android:layout_width="0dp"
-        android:layout_column="2"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_row="5"
-        android:text="@string/storage_directory_external"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                <LinearLayout
+                    android:id="@+id/deviceMemoryRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/memoryStickDescription"
-        android:layout_width="0dp"
-        android:layout_column="2"
-        android:layout_gravity="fill_horizontal"
-        android:layout_row="6"
-        tools:text="Free: 9 Gb"/>
-</GridLayout>
+                    <ImageView
+                        android:id="@+id/deviceMemoryImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:paddingRight="16dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_sdcard"
+                        tools:background="@color/color_warning"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/deviceMemoryTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_horizontal"
+                            android:gravity="center_vertical"
+                            android:text="@string/storage_directory_default"
+                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        <TextView
+                            android:id="@+id/deviceMemoryDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_horizontal"
+                            tools:text="Free: 568 Mb"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:background="@color/divider_color"/>
+
+                <LinearLayout
+                    android:id="@+id/sharedMemoryRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/sharedMemoryImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:paddingRight="16dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_sdcard"
+                        tools:background="@color/color_warning"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sharedMemoryTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_horizontal"
+                            android:text="@string/storage_directory_shared"
+                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        <TextView
+                            android:id="@+id/sharedMemoryDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_horizontal"
+                            tools:text="Free: 9 Gb"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:background="@color/divider_color"/>
+
+                <LinearLayout
+                    android:id="@+id/memoryStickRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/memoryStickImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:paddingRight="16dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_sdcard"
+                        tools:background="@color/color_warning"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/memoryStickTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_horizontal"
+                            android:text="@string/storage_directory_external"
+                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        <TextView
+                            android:id="@+id/memoryStickDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_horizontal"
+                            tools:text="Free: 9 Gb"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

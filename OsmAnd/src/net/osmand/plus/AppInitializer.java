@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -69,13 +70,14 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIn
  */
 public class AppInitializer implements IProgress {
 	// 22 - 2.2
-	private static final int VERSION_2_2 = 22;
-	private static final int CURRENT_VERSION_FOR_UGPRADE = VERSION_2_2;
+	public static final int VERSION_2_2 = 22;
+	// 23 - 2.3
+	public static final int VERSION_2_3 = 23;
 
 
 	public static final boolean TIPS_AND_TRICKS = false;
-	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	private static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
+	public static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
+	public static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
 	public static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
 	public static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
@@ -93,6 +95,7 @@ public class AppInitializer implements IProgress {
 	private boolean firstTime;
 	private boolean activityChangesShowed = false;
 	private boolean appVersionChanged;
+	private int prevAppVersion;
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
@@ -130,11 +133,14 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	private void initUiVars(Activity activity) {
+	@SuppressLint("CommitPrefEdits")
+	public void initVariables() {
 		if(initSettings) {
 			return;
 		}
-		startPrefs = activity.getPreferences(Context.MODE_WORLD_WRITEABLE);
+		startPrefs = app.getSharedPreferences(
+				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
+				Context.MODE_WORLD_WRITEABLE);
 		if(!startPrefs.contains(NUMBER_OF_STARTS)) {
 			startPrefs.edit().putInt(NUMBER_OF_STARTS, 1).commit();
 		} else {
@@ -147,13 +153,17 @@ public class AppInitializer implements IProgress {
 			firstTime = true;
 			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_2).commit();
+			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
 		} else if (!Version.getFullVersion(app).equals(startPrefs.getString(VERSION_INSTALLED, ""))) {
-			if(startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0) < VERSION_2_2) {
+			prevAppVersion = startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0);
+			if(prevAppVersion < VERSION_2_2) {
 				app.getSettings().SHOW_DASHBOARD_ON_START.set(true);
 				app.getSettings().SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
 				app.getSettings().SHOW_CARD_TO_CHOOSE_DRAWER.set(true);
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_2).commit();
+			}
+			if(prevAppVersion < VERSION_2_3) {
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
@@ -181,13 +191,21 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-	public boolean isFirstTime(Activity activity) {
-		initUiVars(activity);
+	public boolean isFirstTime() {
+		initVariables();
 		return firstTime;
 	}
 
-	public boolean checkAppVersionChanged(Activity activity) {
-		initUiVars(activity);
+	public boolean isAppVersionChanged() {
+		return appVersionChanged;
+	}
+
+	public int getPrevAppVersion() {
+		return prevAppVersion;
+	}
+
+	public boolean checkAppVersionChanged() {
+		initVariables();
 		boolean showRecentChangesDialog = !firstTime && appVersionChanged;
 //		showRecentChangesDialog = true;
 		if (showRecentChangesDialog && !activityChangesShowed) {
@@ -210,7 +228,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
-		initUiVars(activity);
+		initVariables();
 		long size = activity.getPreferences(Context.MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
@@ -729,5 +747,13 @@ public class AppInitializer implements IProgress {
 		this.listeners.remove(listener);
 	}
 
-
+	private String getLocalClassName(String cls) {
+		final String pkg = app.getPackageName();
+		int packageLen = pkg.length();
+		if (!cls.startsWith(pkg) || cls.length() <= packageLen
+				|| cls.charAt(packageLen) != '.') {
+			return cls;
+		}
+		return cls.substring(packageLen+1);
+	}
 }
