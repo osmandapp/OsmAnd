@@ -2260,7 +2260,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="confirm_download_roadmaps">Jums jau ir standarta (pilnā) karte, vai lejupielādēt arī ceļu sazarojuma karti?</string>
     <string name="value_downloaded_of_max">%1$.1f no %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
-    <string name="update_all">Atjaunināt visu (%1 $s MB)</string>
+    <string name="update_all">Atjaunināt visu (%1$s MB)</string>
     <string name="free_downloads_used">Izmantotās bezmaksas lejupielādes</string>
     <string name="free_downloads_used_description">Cik daudz brīvās lejupielādes ir izmantotas</string>
 
