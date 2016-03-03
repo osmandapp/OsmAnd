@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -1728,4 +1729,16 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="max_level_download_tile_descr">اختر مستوى التقريب الأقصى لتحميل تجانبيات/مربعات الخريطة من الإنترنت</string>
 	<string name="map_tile_source_descr">اختر مصدر تجانبيات/مربعات الخريطة على الإنترنت أو المخزنة مؤقتاً</string>
 	<string name="user_hates_app_get_feedback_long">فضلًا أخبرنا ما الذي تريد تغييره في هذا التّطبيق.</string>
-</resources>
+<string name="storage_directory_readonly_desc">مجلّد تخزين البيانات المحدّد حاليًّا للقراءة فقط. نُقل مجلّد التّخزين مؤقّتًا إلى الذّاكرة الدّاخليّة. فضلًا اختر دليل تخزين صالح.</string>
+    <string name="storage_directory_shared">الذّاكرة المشتركة</string>
+    <string name="donations">التّبرّعات</string>
+    <string name="osm_live_user_public_name">الاسم العموميّ</string>
+    <string name="osm_live_hide_user_name">لا تعرض اسمي في التّقارير</string>
+    <string name="osm_live_active">نشط</string>
+    <string name="osm_live_not_active">خامل</string>
+    <string name="osm_live_enter_email">فضلًا أدخل عنوان بريد صالح</string>
+    <string name="osm_live_enter_user_name">فضلًا أدخل اسمًا عموميًّا</string>
+    <string name="osm_live_thanks">نشكرك على اشتراكك بالتّحديثات الحيّة!</string>
+    <string name="osm_live_subscription_settings">إعدادات الاشتراك</string>
+    <string name="shared_string_widgets">الودجات</string>
+    </resources>
