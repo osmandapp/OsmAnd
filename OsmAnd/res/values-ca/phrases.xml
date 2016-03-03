@@ -2157,4 +2157,12 @@
 	<string name="poi_health_specialty_gastroenterology_yes">Especialitat mèdica: gastroenterologia</string>
 	<string name="poi_health_specialty_dentistry_yes">Especialitat mèdica: odontologia</string>
 	<string name="poi_health_specialty_nephrology_yes">Especialitat mèdica: nefrologia (malalties renals)</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Especialitat mèdica: oftalmologia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Especialitat mèdica: ginecologia</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Especialitat mèdica: ortopèdia</string>
+	<string name="poi_health_specialty_paediatrics_yes">Especialitat mèdica: pediatria</string>
+	<string name="poi_health_specialty_paediatrics_no">Especialitat mèdica: sense pediatria</string>
+	<string name="poi_health_specialty_dermatology_yes">Especialitat mèdica: dermatologia</string>
+	<string name="poi_health_specialty_urology_yes">Especialitat mèdica: urologia</string>
+	<string name="poi_health_specialty_surgery_yes">Especialitat mèdica: cirurgia general</string>
 	</resources>
