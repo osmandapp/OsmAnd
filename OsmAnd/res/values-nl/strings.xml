@@ -978,7 +978,7 @@
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Kies kleurschema voor wegen:</string>
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
-    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. In Play-store zoeken?</string>
+    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. In Google Play zoeken?</string>
 	<string name="close_changeset">Sluit changeset</string>
 	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt langzamere Android-code in plaats van native code).</string>
     <string name="safe_mode">Veilige modus</string>
@@ -2232,4 +2232,6 @@
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd+ Kaarten &amp; Navigatie - Plaatsen vinden en routes berekenen zonder internetverbinding. Eenvoudig kaarten downloaden van alle landen wereldwijd voor je op reis gaat. Basisfuncties: • Gedetailleerde kaarten van 200 landen • Offline navigatie met gesproken aanwijzingen • Offline adressen zoeken • Offline informatie over bezienswaardigheden, café\'s, parkeerplaatsen, winkels enz. • Locaties als Favoriet opslaan • Navigatie voor Auto, Fiets en Wandelen Aanvullende mogelijkheden: • GPX-tracks tonen en opnemen • Wikipedia informatie van plaatsen en interessepunten • Foto-Video en Audio-Notities maken  •   Dag en Nachtmode voor veilig autorijden • Openbaar Vervoer: haltes en lijnen tonen • Fiets en Wandelroutes • Online kaarten weergeven uit diverse bronnen • Informatie over straatkwaliteit en verlichtging • Interessepunten aanmaken, wijzigen en verwijderen door OpenStreetMap.org gebruikers • OsMo - Live andere apparaten volgen Een betrouwbare Navigatietoepassing voor uw land: Frankrijk, Duitsland, Mexico, Verenigd Koninkrijk, Spanje, Nederland, Verenigde Staten van Amerika, Rusland, Brazilië of welk ander land ook. Plugins: Hoogtelijnen en reliëf https://goo.gl/7mojP8 Hoogtelijnen en reliëfschaduw wordt aan de standaard OsmAnd-kaart toegevoegd • Ski-kaarten https://goo.gl/pX6DxJ Informatie over skipistes, langlaufen, kabelbanen en skiliften • Nautische kaarten https://goo.gl/0hEdxm Speciale kaart met nautische informatie voor binnenvaart en kustvaart • Parkeerplaats https://goo.gl/6JxQXF Markeer de locatie van je geparkeerde auto en hou de parkeertijd bij. Meer functies zijn in ontwikkeling! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Website: http://osmand.net Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support@osmand.net. "</string>
     <string name="recalculate_route">Route opnieuw berekenen</string>
     <string name="shared_string_topbar">Topbalk</string>
+    <string name="storage_directory_readonly_desc">De geselecteerde opslagmap read-only. De opslagmap is tijdelijk overgeschakeld op intern geheugen. Kies een geldige opslagmap.</string>
+    <string name="storage_directory_shared">Gedeeld geheugen</string>
     </resources>
