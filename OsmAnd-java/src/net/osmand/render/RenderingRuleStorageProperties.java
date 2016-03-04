@@ -21,6 +21,8 @@ public class RenderingRuleStorageProperties {
 	public static final String DISABLE = "disable";
 	
 	
+	public static final String INTERSECTION_MARGIN = "intersectionMargin";
+	public static final String INTERSECTION_SIZE_FACTOR = "intersectionSizeFactor";
 	public static final String TEXT_ITALIC = "textItalic";
 	public static final String TEXT_BOLD= "textBold";
 	public static final String TEXT_LENGTH = "textLength";
@@ -153,6 +155,8 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_ICON_4;
 	public RenderingRuleProperty R_ICON_5;
 	public RenderingRuleProperty R_ICON_VISIBLE_SIZE;
+	public RenderingRuleProperty R_INTERSECTION_MARGIN;
+	public RenderingRuleProperty R_INTERSECTION_SIZE_FACTOR;
 	public RenderingRuleProperty R_LAYER;
 	public RenderingRuleProperty R_ORDER;
 	public RenderingRuleProperty R_POINT;
@@ -205,6 +209,9 @@ public class RenderingRuleStorageProperties {
 		R_POINT = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(POINT));
 		R_AREA = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(AREA));
 		R_CYCLE = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(CYCLE));
+		
+		R_INTERSECTION_MARGIN = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(INTERSECTION_MARGIN));
+		R_INTERSECTION_SIZE_FACTOR = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(INTERSECTION_SIZE_FACTOR));
 		
 		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
 		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(NAME_TAG));
