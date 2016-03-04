@@ -2142,4 +2142,6 @@
     
     <string name="recalculate_route">重新計算路線</string>
     <string name="shared_string_topbar">頂端列</string>
+    <string name="storage_directory_readonly_desc">目前選取的資料存儲資料夾是唯讀的。存儲資料夾被暫時切換到內部記憶體。請選擇有效的儲存目錄。</string>
+    <string name="storage_directory_shared">共用記憶體</string>
     </resources>
