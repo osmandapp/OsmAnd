@@ -2653,4 +2653,6 @@
 	<string name="poi_vacuum_cleaner_no">Без пылесоса</string>
 	<string name="poi_amenity_vacuum_cleaner">Пылесос</string>
 
+	<string name="poi_sport_free_flying">Свободный полёт (спорт)</string>
+
 </resources>
