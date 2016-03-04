@@ -2152,4 +2152,9 @@
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
     <string name="show_transparency_seekbar">Afficher la barre de recherche transparente</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
+    <string name="storage_directory_shared">Mémoire partagée</string>
+    <string name="shared_string_topbar">Topbar</string>
+    <string name="osm_live_ask_for_purchase">Au préalable achetez un abonnement à OMS Live</string>
+
+    <string name="osm_live_region_desc">Vos dons seront distribués aux utilisateurs ayant soumis des mises à jour pour la carte de cette région</string>
     </resources>

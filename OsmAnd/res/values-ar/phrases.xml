@@ -1,2 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_shop">متجر</string>
+		<string name="poi_personal_transport">نقل خاصّ</string>
+		<string name="poi_public_transport">نقل عامّ</string>
+		<string name="poi_healthcare">مركز صحّيّ</string>
+	<string name="poi_office">مكتب</string>
+	<string name="poi_club">نادي</string>
+	<string name="poi_cafe_and_restaurant">مطعم وكافيه</string>
+	<string name="poi_finance">ماليّة</string>
+	<string name="poi_osmwiki">ويكيبيديا</string>
+	<string name="poi_chocolate">متجر شوكلاته</string>
+	<string name="poi_coffee">متجر قهوة</string>
+	<string name="poi_mall">مجمّع</string>
+	<string name="poi_butcher">متجر لحوم</string>
+	<string name="poi_bicycle">متجر درّاجات هوائيّة</string>
+	<string name="poi_kiosk">كشك</string>
+	<string name="poi_mobile_phone">متجر هواتف نقّالة</string>
+	<string name="poi_motorcycle">متجر درّاجات ناريّة</string>
+	</resources>
