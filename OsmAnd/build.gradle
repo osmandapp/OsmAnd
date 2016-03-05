@@ -358,6 +358,7 @@ dependencies {
 	compile project(path: ':OsmAnd-java', configuration: 'android')
 	compile project(':eclipse-compile:design')
 	compile project(':eclipse-compile:cardview')
+	compile project(':eclipse-compile:gridlayout')
 	//	compile project(":eclipse-compile:recyclerview")
 	compile fileTree(include: ['*.jar'], exclude: ['QtAndroid-bundled.jar', 'QtAndroidAccessibility-bundled.jar', 'OsmAndCore_android.jar', 'OsmAndCore_wrapper.jar', 'android-support-multidex.jar'], dir: 'libs')
 	// compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
