@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -165,18 +166,40 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
 		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
+		// tabLayout.setupWithViewPager(viewPager);
 		// Hack due to bug in design support library v22.2.1
 		// https://code.google.com/p/android/issues/detail?id=180462
 		// TODO remove in new version
-		if (ViewCompat.isLaidOut(tabLayout)) {
-			tabLayout.setupWithViewPager(viewPager);
+		if (Build.VERSION.SDK_INT >= 11) {
+			if (ViewCompat.isLaidOut(tabLayout)) {
+				tabLayout.setupWithViewPager(viewPager);
+			} else {
+				tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+					@Override
+					public void onLayoutChange(View v, int left, int top, int right, int bottom,
+											   int oldLeft, int oldTop, int oldRight, int oldBottom) {
+						tabLayout.setupWithViewPager(viewPager);
+						tabLayout.removeOnLayoutChangeListener(this);
+					}
+				});
+			}
 		} else {
-			tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+			ViewTreeObserver vto = view.getViewTreeObserver();
+			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
 				@Override
-				public void onLayoutChange(View v, int left, int top, int right, int bottom,
-										   int oldLeft, int oldTop, int oldRight, int oldBottom) {
-					tabLayout.setupWithViewPager(viewPager);
-					tabLayout.removeOnLayoutChangeListener(this);
+				public void onGlobalLayout() {
+
+					ViewTreeObserver obs = view.getViewTreeObserver();
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						obs.removeOnGlobalLayoutListener(this);
+					} else {
+						obs.removeGlobalOnLayoutListener(this);
+					}
+
+					if (getActivity() != null) {
+						tabLayout.setupWithViewPager(viewPager);
+					}
 				}
 			});
 		}
@@ -346,9 +369,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			} else {
 				new SaveWithAdvancedTagsDialogFragment().show(getChildFragmentManager(), "dialog");
 			}
-		} else if(editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
+		} else if (editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
-		} else if(editPoiData.getPoiTypeDefined() == null) {
+		} else if (editPoiData.getPoiTypeDefined() == null) {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type_only_from_list));
 		} else {
 			save();
@@ -372,7 +395,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					node.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
 
 				}
-				if(offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
+				if (offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
 					node.putTag(tag.getKey(), tag.getValue());
 				}
 			} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
@@ -460,7 +483,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			protected void onPostExecute(Node result) {
 				progress.dismiss();
-				if(postExecute != null) {
+				if (postExecute != null) {
 					postExecute.processResult(result);
 				}
 			}
@@ -476,9 +499,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private void setAdapterForPoiTypeEditText() {
 		final Map<String, PoiType> subCategories = new LinkedHashMap<>();
 		PoiCategory ct = editPoiData.getPoiCategory();
-		if(ct != null) {
+		if (ct != null) {
 			for (PoiType s : ct.getPoiTypes()) {
-				if(!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
+				if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
 					addMapEntryAdapter(subCategories, s.getTranslation(), s);
 					addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
 				}
@@ -663,11 +686,11 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					deleteNode(n, c, closeChangeSet);
 				}
 
-				
+
 			});
 			builder.create().show();
 		}
-		
+
 		private void deleteNode(final Node n, final String c, final boolean closeChangeSet) {
 			final boolean isLocalEdit = openstreetmapUtil instanceof OpenstreetmapLocalUtil;
 			commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(n.getId()), c, closeChangeSet,
@@ -727,7 +750,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					.setNegativeButton(R.string.shared_string_cancel, null);
 			return builder.create();
 		}
-	} 
+	}
 
 	private TextView.OnEditorActionListener mOnEditorActionListener =
 			new TextView.OnEditorActionListener() {

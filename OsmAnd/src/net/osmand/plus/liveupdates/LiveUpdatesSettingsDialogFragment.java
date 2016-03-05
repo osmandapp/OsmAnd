@@ -22,7 +22,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
@@ -41,6 +40,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
@@ -78,7 +78,15 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		String lastCheckString = formatDateTime(getActivity(), lastCheck != DEFAULT_LAST_CHECK
 				? lastCheck : timestamp);
 		lastMapChangeTextView.setText(getString(R.string.last_map_change, lastUpdateDate));
-		lastUpdateTextView.setText(getString(R.string.last_update, lastCheckString));
+
+
+		OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(localIndexInfo,
+				getSettings());
+		if (preference.get()) {
+			lastUpdateTextView.setText(getString(R.string.last_update, lastCheckString));
+		} else {
+			lastUpdateTextView.setVisibility(View.GONE);
+		}
 
 		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(localIndexInfo, getSettings());
@@ -98,7 +106,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		for (int i = 0; i < timeOfDays.length; i++) {
 			timeOfDaysStrings[i] = getString(timeOfDays[i].getLocalizedId());
 		}
-		updateTimesOfDaySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
+		updateTimesOfDaySpinner.setAdapter(new ArrayAdapter<>(getActivity(),
 				R.layout.action_spinner_item, timeOfDaysStrings));
 		updateTimesOfDaySpinner.setSelection(timeOfDayPreference.get());
 
@@ -109,7 +117,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		}
 
 		refreshTimeOfDayLayout(UpdateFrequency.values()[updateFrequencyPreference.get()], updateTimesOfDayLayout);
-		updateFrequencySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
+		updateFrequencySpinner.setAdapter(new ArrayAdapter<>(getActivity(),
 				R.layout.action_spinner_item, updateFrequenciesStrings));
 		updateFrequencySpinner.setSelection(updateFrequencyPreference.get());
 		updateFrequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

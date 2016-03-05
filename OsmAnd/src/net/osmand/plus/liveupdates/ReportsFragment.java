@@ -11,6 +11,7 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
@@ -55,7 +57,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	private TextView donationsTextView;
 	private TextView recipientsTextView;
 
-	private Spinner montReportsSpinner;
+	private Spinner monthReportsSpinner;
 	private MonthsForReportsAdapter monthsForReportsAdapter;
 
 	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
@@ -82,10 +84,26 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_reports, container, false);
-		montReportsSpinner = (Spinner) view.findViewById(R.id.montReportsSpinner);
+		monthReportsSpinner = (Spinner) view.findViewById(R.id.monthReportsSpinner);
+		final View monthButton = view.findViewById(R.id.monthButton);
+		monthReportsSpinner.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				event.offsetLocation(AndroidUtils.dpToPx(getActivity(), 48f), 0);
+				monthButton.onTouchEvent(event);
+				return true;
+			}
+		});
 		monthsForReportsAdapter = new MonthsForReportsAdapter(getActivity());
-		montReportsSpinner.setAdapter(monthsForReportsAdapter);
-		
+		monthReportsSpinner.setAdapter(monthsForReportsAdapter);
+
+		monthButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				monthReportsSpinner.performClick();
+			}
+		});
+
 		view.findViewById(R.id.show_all).setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -105,7 +123,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
+				int monthItemPosition = monthReportsSpinner.getSelectedItemPosition();
 				String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 				String countryUrlString = selectedCountryItem.getDownloadName();
 				if (countryUrlString.length() > 0) {
@@ -128,8 +146,10 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		countryNameTextView.setText(selectedCountryItem.getLocalName());
 
 		setThemedDrawable(view, R.id.calendarImageView, R.drawable.ic_action_data);
+		setThemedDrawable(view, R.id.monthDropDownIcon, R.drawable.ic_action_arrow_drop_down);
 		setThemedDrawable(view, R.id.regionIconImageView, R.drawable.ic_world_globe_dark);
-		
+		setThemedDrawable(view, R.id.countryDropDownIcon, R.drawable.ic_action_arrow_drop_down);
+
 		numberOfContributorsIcon = (ImageView) view.findViewById(R.id.numberOfContributorsIcon);
 		numberOfEditsIcon = (ImageView) view.findViewById(R.id.numberOfEditsIcon);
 		numberOfRecipientsIcon = (ImageView) view.findViewById(R.id.numberOfRecipientsIcon);
@@ -167,7 +187,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 			}
 		};
-		montReportsSpinner.setOnItemSelectedListener(onItemSelectedListener);
+		monthReportsSpinner.setOnItemSelectedListener(onItemSelectedListener);
 
 		inactiveColor = getColorFromAttr(R.attr.plugin_details_install_header_bg);
 		textColorPrimary = getColorFromAttr(android.R.attr.textColorPrimary);
@@ -177,7 +197,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	}
 
 	public void requestAndUpdateUi() {
-		int monthItemPosition = montReportsSpinner.getSelectedItemPosition();
+		int monthItemPosition = monthReportsSpinner.getSelectedItemPosition();
 		String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 		String countryUrlString = selectedCountryItem.getDownloadName();
 
@@ -260,7 +280,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	private static class MonthsForReportsAdapter extends ArrayAdapter<String> {
 		private static final SimpleDateFormat queryFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
 		@SuppressLint("SimpleDateFormat")
-		private static final SimpleDateFormat humanFormat = new SimpleDateFormat("MMMM yyyy");
+		private static final SimpleDateFormat humanFormat = new SimpleDateFormat("LLLL yyyy");
 
 		ArrayList<String> queryString = new ArrayList<>();
 
