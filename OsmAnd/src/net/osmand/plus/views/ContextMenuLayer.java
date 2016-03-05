@@ -102,7 +102,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {
 		if (menu.hasHiddenBottomInfo()) {
 			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override

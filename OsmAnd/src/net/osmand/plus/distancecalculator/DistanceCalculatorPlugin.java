@@ -635,8 +635,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 		
 		@Override
-		public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-			if(o instanceof WptPt) {
+		public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {
+			if (o != null && o instanceof WptPt) {
 				final WptPt p = (WptPt) o;
 				boolean containsPoint = false;
 				for (int i = 0; i < measurementPoints.size(); i++) {
