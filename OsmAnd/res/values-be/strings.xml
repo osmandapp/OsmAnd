@@ -2153,4 +2153,7 @@
     <string name="map_marker">Маркер</string>
     <string name="consider_turning_polygons_off">Рэкамэндуецца адключыць паказ палігонаў.</string>
     <string name="osm_live_subscription">Падпіска OSM Live</string>
+    <string name="osm_live_active">Актыўны</string>
+    <string name="osm_live_not_active">Не актыўны</string>
+    <string name="show_transparency_seekbar">Паказаць празрыстую пошукавую панэль</string>
     </resources>
