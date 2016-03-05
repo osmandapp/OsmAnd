@@ -335,6 +335,9 @@ public class IncrementalChangesManager {
 
 	public long getUpdatesSize(String fileName){
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		if(ruf == null) {
+			return 0;
+		}
 		long size = 0;
 		for (List<RegionUpdate> regionUpdates : ruf.dayUpdates.values()) {
 			for (RegionUpdate regionUpdate : regionUpdates) {
@@ -349,6 +352,9 @@ public class IncrementalChangesManager {
 
 	public void deleteUpdates(String fileName){
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		if(ruf == null) {
+			return;
+		}
 		for (List<RegionUpdate> regionUpdates : ruf.dayUpdates.values()) {
 			for (RegionUpdate regionUpdate : regionUpdates) {
 				boolean successful = Algorithms.removeAllFiles(regionUpdate.file);
@@ -367,11 +373,17 @@ public class IncrementalChangesManager {
 
 	public long getTimestamp(String fileName) {
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		if(ruf == null) {
+			return System.currentTimeMillis();
+		}
 		return getTimestamp(ruf);
 	}
 
 	public long getMapTimestamp(String fileName) {
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
+		if(ruf == null) {
+			return System.currentTimeMillis();
+		}
 		return ruf.mainFileInit;
 	}
 
