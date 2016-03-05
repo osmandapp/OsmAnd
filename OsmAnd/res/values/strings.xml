@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="avoid_road">Avoid road</string>
     <string name="storage_directory_readonly_desc">Currently selected Data storage folder is readonly. The storage folder was temporarily switched to Internal memory. Please choose valid storage directory.</string>
     <string name="storage_directory_shared">Shared memory</string>
     <string name="shared_string_topbar">Topbar</string>

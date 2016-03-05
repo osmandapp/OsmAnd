@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
@@ -16,6 +17,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 
 public abstract class OsmandMapLayer {
@@ -31,8 +33,8 @@ public abstract class OsmandMapLayer {
 	public abstract void destroyLayer();
 	
 	public void onRetainNonConfigurationInstance(Map<String, Object> map) {}
-	
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {}
+
+	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
