@@ -136,7 +136,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		donationsIcon = (ImageView) view.findViewById(R.id.donationsIcon);
 		setThemedDrawable(numberOfContributorsIcon, R.drawable.ic_group);
 		setThemedDrawable(numberOfRecipientsIcon, R.drawable.ic_group);
-		setThemedDrawable(donationsIcon, R.drawable.ic_action_message);
+		setThemedDrawable(donationsIcon, R.drawable.ic_action_bitcoin);
 		setThemedDrawable(numberOfEditsIcon, R.drawable.ic_map);
 		
 		
@@ -344,7 +344,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfContributorsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
 		numberOfEditsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_map, inactiveColor));
 		numberOfRecipientsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
-		donationsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_message, inactiveColor));
+		donationsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
 		
 		numberOfContributorsTitle.setTextColor(inactiveColor);
 		numberOfEditsTitle.setTextColor(inactiveColor);
@@ -364,7 +364,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfContributorsIcon.setImageDrawable(getContentIcon(R.drawable.ic_group));
 		numberOfEditsIcon.setImageDrawable(getContentIcon(R.drawable.ic_map));
 		numberOfRecipientsIcon.setImageDrawable(getContentIcon(R.drawable.ic_group));
-		donationsIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_message));
+		donationsIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_bitcoin));
 		
 		numberOfContributorsTitle.setTextColor(textColorSecondary);
 		numberOfEditsTitle.setTextColor(textColorSecondary);

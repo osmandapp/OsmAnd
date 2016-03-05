@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+dependencies {
+    compile files('libs/android-support-v7-gridlayout.jar')
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 23
+    }
+    sourceSets {
+        main {
+            manifest.srcFile "AndroidManifest.xml"
+            aidl.srcDirs = ["src"]
+            java.srcDirs = ["src"]
+            resources.srcDirs = ["src"]
+            renderscript.srcDirs = ["src"]
+            res.srcDirs = ["res"]
+            assets.srcDirs = ["assets"]
+        }
+    }
+
+}
