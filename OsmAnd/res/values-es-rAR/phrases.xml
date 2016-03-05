@@ -171,7 +171,7 @@
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
 	<string name="poi_car_wash">Lavadero de automóviles</string>
 	<string name="poi_fuel">Estación de servicio</string>
-	<string name="poi_fuel_diesel">Diésel</string>
+	<string name="poi_fuel_diesel">EuroDiésel</string>
 	<string name="poi_fuel_gtl_diesel">Diésel GTL</string>
 	<string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
 	<string name="poi_fuel_biodiesel">Biodiésel</string>
@@ -2685,4 +2685,5 @@
 	<string name="poi_vacuum_cleaner_no">Sin aspiradora</string>
 	<string name="poi_amenity_vacuum_cleaner">Aspiradoras</string>
 
+<string name="poi_sport_free_flying">Vuelo libre (deporte)</string>
 </resources>

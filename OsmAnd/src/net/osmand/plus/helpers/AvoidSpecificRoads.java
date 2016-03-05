@@ -20,6 +20,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -134,16 +135,17 @@ public class AvoidSpecificRoads {
 	protected void selectFromMap(final MapActivity mapActivity) {
 		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
 		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
-			
+
 			@Override
 			public boolean processResult(LatLon result) {
-				findRoad(mapActivity, result);
+				addImpassableRoad(mapActivity, result, true);
 				return true;
 			}
 
 		});
 	}
-	private void findRoad(final MapActivity activity, final LatLon loc) {
+
+	public void addImpassableRoad(final MapActivity activity, final LatLon loc, final boolean showDialog) {
 		final Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
@@ -159,7 +161,13 @@ public class AvoidSpecificRoads {
 					if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
 						rh.recalculateRouteDueToSettingsChange();
 					}
-					showDialog(activity);
+					if (showDialog) {
+						showDialog(activity);
+					}
+					MapContextMenu menu = activity.getContextMenu();
+					if (menu.isActive() && menu.getLatLon().equals(loc)) {
+						menu.close();
+					}
 				}
 				return true;
 			}

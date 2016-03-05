@@ -5,14 +5,18 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +30,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 	private Paint paint;
 	private Map<Long, Location> missingRoadLocations;
 	private List<RouteDataObject> missingRoads;
+	private RoutingHelper routingHelper;
 
 	public ImpassableRoadsLayer(MapActivity activity) {
 		this.activity = activity;
@@ -36,6 +41,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 		this.view = view;
 		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_avoid_road);
 		paint = new Paint();
+		routingHelper = activity.getRoutingHelper();
 	}
 
 	@Override
@@ -58,14 +64,14 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	public Map<Long, Location> getMissingRoadLocations() {
-		if(missingRoadLocations == null) {
+		if (missingRoadLocations == null) {
 			missingRoadLocations = activity.getMyApplication().getDefaultRoutingConfig().getImpassableRoadLocations();
 		}
 		return missingRoadLocations;
 	}
 
 	public List<RouteDataObject> getMissingRoads() {
-		if(missingRoads == null) {
+		if (missingRoads == null) {
 			missingRoads = activity.getMyApplication().getDefaultRoutingConfig().getImpassableRoads();
 		}
 		return missingRoads;
@@ -81,9 +87,9 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 		return true;
 	}
 
-	public int getRadiusPoi(RotatedTileBox tb){
+	public int getRadiusPoi(RotatedTileBox tb) {
 		int r = 0;
-		if(tb.getZoom()  < startZoom){
+		if (tb.getZoom() < startZoom) {
 			r = 0;
 		} else {
 			r = 15;
@@ -92,7 +98,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius;
 	}
 
 	@Override
@@ -125,8 +131,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof RouteDataObject) {
-			RouteDataObject route =  (RouteDataObject) o;
+		if (o instanceof RouteDataObject) {
+			RouteDataObject route = (RouteDataObject) o;
 			Location location = missingRoadLocations.get(route.getId());
 			return new LatLon(location.getLatitude(), location.getLongitude());
 		}
@@ -140,11 +146,32 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof RouteDataObject) {
-			RouteDataObject route =  (RouteDataObject) o;
+		if (o instanceof RouteDataObject) {
+			RouteDataObject route = (RouteDataObject) o;
 			return new PointDescription(PointDescription.POINT_TYPE_BLOCKED_ROAD, route.getName());
 		}
 		return null;
 	}
 
+	@Override
+	public void populateObjectContextMenu(final LatLon latLon, final Object o, ContextMenuAdapter adapter) {
+		if (latLon != null && o == null
+				&& (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode())) {
+
+			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					if (itemId == R.string.avoid_road) {
+						activity.getMyApplication().getAvoidSpecificRoads().addImpassableRoad(
+								activity, latLon, false);
+					}
+					activity.refreshMap();
+					return true;
+				}
+			};
+
+			adapter.item(R.string.avoid_road).iconColor(
+					R.drawable.ic_action_road_works_dark).listen(listener).reg();
+		}
+	}
 }

@@ -30,12 +30,6 @@
             app:typeface="@string/font_roboto_regular"/>
 
     </LinearLayout>
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progress"
-        android:indeterminate="true"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -50,6 +44,13 @@
             android:drawSelectorOnTop="true"/>
 
         <include layout="@layout/card_bottom_divider"/>
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="9dp"
+            android:id="@+id/progress"
+            android:indeterminate="true"/>
 
     </FrameLayout>
 

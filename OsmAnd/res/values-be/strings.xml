@@ -138,14 +138,14 @@
     <string name="local_indexes_cat_srtm">Ізалініі вышынь</string>
     <string name="local_indexes_cat_av">Аўдыё/відэа зьвесткі</string>
     <string name="stop_routing_confirm">Сапраўды спыніць навігацыю?</string>
-    <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і правежкавыя пункты прызначэньня)?</string>
+    <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і прамежкавыя пункты прызначэньня)?</string>
     <string name="precise_routing_mode_descr">Дазволіць дакладную навігацыю каб шукаць шлях без памылак. Усё яшчэ абмежавана адлегласцю і павольная.</string>
     <string name="precise_routing_mode">Дакладны маршрут (эксп.)</string>
     <string name="recording_context_menu_show">Паказаць</string>
     <string name="recording_photo_description">Фота %1$s %2$s</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
-    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе сынхранізаваць трэкі і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
+    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе вам сынхранізаваць трэкі і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
     <string name="dropbox_plugin_name">Модуль Dropbox</string>
     
     <string name="intermediate_points_change_order">Зьмяніць парадак</string>
@@ -214,7 +214,7 @@
     <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Хочаце спыніць яго?</string>
     
     <string name="close_changeset">Зачыніць мноства зьмен</string>
-	<string name="zxing_barcode_scanner_not_found">Праграма ZXing Barcode Scanner не ўстаноўлена. Шукаць у Market?</string>
+	<string name="zxing_barcode_scanner_not_found">Праграма ZXing Barcode Scanner не ўстаноўлена. Шукаць у Google Play?</string>
 	<string name="rendering_attr_roadColors_description">Выберыце схему колераў дарог:</string>
 	<string name="rendering_attr_roadColors_name">Схема колераў дарог</string>
     <string name="map_widget_show_destination_arrow">Паказваць напрамак да месца прызначэньня</string>
@@ -560,7 +560,7 @@
 	
 	
 	<string name="download_files_not_enough_space">Няма вольнага месца каб сьцягнуць %1$s МБ (вольна: %2$s).</string>
-	<string name="download_files_question_space">Вольнага месца зараз {2} МБ! Сьцягнуць {0} файл(аў) ({1} МБ)?</string>
+	<string name="download_files_question_space">Сьцягнуць {0} файл(аў) (патрабуе {1} МБ)? Зараз ё {2} МБ вольнага месца.</string>
 	
 	
 	
@@ -1223,7 +1223,7 @@
 	<string name="index_item_world_altitude_correction">Глябальная карэкцыя вышыні</string>
 	<string name="index_item_world_seamarks">Навігацыйныя знакі ўсяго сьвету</string>
 	<string name="index_item_world_bitcoin_payments">Bitcoin плацяжы ўсяго сьвету</string>
-	<string name="keep_and_add_destination_point">Дадаць пунктам прызначэньня</string>
+	<string name="keep_and_add_destination_point">Дадаць апошнім пунктам прызначэньня</string>
     <string name="route_descr_select_destination">Выбраць месца прызначэньня</string>
     <string name="route_preferences">Настройкі маршрута</string>
     <string name="calculate_osmand_route_gpx">Разьлічыць пазасеціўны маршрут OsmAnd</string>
@@ -1324,7 +1324,7 @@
     <string name="osmo_activity">Маніторынг OpenStreetMap</string>
     <string name="osmo_enable_tracker">Адсылаць маё месцазнаходжаньне</string>
     
-	<string name="import_file_favourites">Захаваць кропкі як GPX файл або імпартаваць у абранае?</string>
+	<string name="import_file_favourites">Захаваць зьвесткі як GPX файл або імпартаваць кропкі ў абранае?</string>
 	
 	<string name="osmo_track_interval">Інтэрвал адсылкі дадзеных</string>
 	<string name="osmo_expire_group">Тэрмін дзеяньня скончыцца праз</string>
@@ -2120,7 +2120,37 @@
     <string name="item_removed">Элемэнт выдалены</string>
     <string name="n_items_removed">Элемэнты выдалены</string>
     <string name="reports_for">Паведаміць</string>
-<string name="osmand_plus_extended_description_4000_chars_v2">" Мапы й навігацыя OsmAnd - пракладайце маршруты і шукайце мясьціны на мапе без падлучэньня да Інтэрнэту. Сьцягвайце мапу краіны, перш чым адправіцца ў падарожжа, каб адшукаць мясьціны й маршруты ў незнаёмай мясцовасьці. Асноўныя магчымасьці: • Падрабязныя мапы 200 краін • Offline навігатар з галасавымі падказкамі • Адрасны пошук у аўтаномным рэжыме • Інфармацыя пра мясьціны на мапе: славутасьці, кафэ, аўтастаянкі, крамы • Даданьне мясьцін ў абранае • Аўта, роварная і пешаходная навігацыйныя • Дадатковыя опцыі: • Магчымасьць прагляду і запісу GPX сьлядоў • Апісаньне зь Вікіпедыі аб POI • Даданне фота, аўдыё і відэа нататак на мапу • Дзённы і начны рэжымы мапы для больш зручнага кіраваньня • Інфармацыя аб маршрутах грамадзкага транспарту і прыпынках • Роварныя і пешаходныя дарожкі • Пешаходныя маршруты для турызму па ўсім сьвеце • Інтэрнэт мапы са шматлікіх крыніц • Інфармацыя аб якасьці дарожнага пакрыцьця і асьвятленьні вуліц • Даданне, рэдагаванне і выдаленне POI (для карыстальнікаў OpenStreetMap.org) • OsMo - маніторынг у рэальным часе іншых прыстасаваньняў • Надзейны навігатар ў вашай краіне - няхай гэта будзе Францыя, Германія, Мэксіка, Вялікабрытанія, Гішпанія, Нідэрлянды, ЗША, РФ, Бразілія або любая іншая дзяржава. • Ізалініі вышынь і рэльеф мясцовасьці https://goo.gl/7mojP8 • Ізалініі вышынь і рэльеф мясцовасьці дадаецца да асноўнай мапы OsmAnd. • Лыжныя мапы https://goo.gl/pX6DxJ Інфармацыя аб гарналыжных трасах, трасах для бегавых лыж, фунікулёры і пад\'ёмнікі. • Марскія мапы https://goo.gl/0hEdxm Спецыяльны стыль мапы для прагляду марскіх навігацыйных знакаў для артэрыяльнай і прыбярэжнай марской навігацыі. • Месца паркоўкі https://goo.gl/6JxQXF Дапамагае адзначыць месцазнаходжаньне вашага аўтамабіля, прыпаркаванага і паглядзець, колькі часу засталося, калі паркоўка абмежаваная па часе. Сачыце за абнаўленнямі! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Сайт: http://osmand.net Калі вам патрэбна дапамога з ужываннем OsmAnd, звярніцеся ў нашу службу падтрымкі: support@osmand.net. "</string>
+<string name="osmand_plus_extended_description_4000_chars_v2">" Мапы й навігацыя OsmAnd - шукайце мясьціны і пракладайце маршруты на мапе без падлучэньня да Інтэрнэту. Сьцягвайце мапу краіны, перш чым адправіцца ў падарожжа, каб адшукаць мясьціны й маршруты ў незнаёмай мясцовасьці. Асноўныя магчымасьці: • Падрабязныя мапы 200 краін • Offline навігатар з галасавымі падказкамі • Адрасны пошук у аўтаномным рэжыме • Інфармацыя пра мясьціны на мапе: славутасьці, кафэ, аўтастаянкі, крамы • Даданьне мясьцін ў абранае • Аўта, роварная і пешаходная навігацыйныя • Дадатковыя опцыі: • Магчымасьць прагляду і запісу GPX сьлядоў • Апісаньне зь Вікіпедыі аб POI • Даданне фота, аўдыё і відэа нататак на мапу • Дзённы і начны рэжымы мапы для больш зручнага кіраваньня • Інфармацыя аб маршрутах грамадзкага транспарту і прыпынках • Роварныя і пешаходныя дарожкі • Пешаходныя маршруты для турызму па ўсім сьвеце • Інтэрнэт мапы са шматлікіх крыніц • Інфармацыя аб якасьці дарожнага пакрыцьця і асьвятленьні вуліц • Даданне, рэдагаванне і выдаленне POI (для карыстальнікаў OpenStreetMap.org) • OsMo - маніторынг у рэальным часе іншых прыстасаваньняў • Надзейны навігатар ў вашай краіне - няхай гэта будзе Францыя, Германія, Мэксіка, Вялікабрытанія, Гішпанія, Нідэрлянды, ЗША, РФ, Бразілія або любая іншая дзяржава. • Ізалініі вышынь і рэльеф мясцовасьці https://goo.gl/7mojP8 • Ізалініі вышынь і рэльеф мясцовасьці дадаецца да асноўнай мапы OsmAnd. • Лыжныя мапы https://goo.gl/pX6DxJ Інфармацыя аб гарналыжных трасах, трасах для бегавых лыж, фунікулёры і пад\'ёмнікі. • Марскія мапы https://goo.gl/0hEdxm Спецыяльны стыль мапы для прагляду марскіх навігацыйных знакаў для артэрыяльнай і прыбярэжнай марской навігацыі. • Месца паркоўкі https://goo.gl/6JxQXF Дапамагае адзначыць месцазнаходжаньне вашага аўтамабіля, прыпаркаванага і паглядзець, колькі часу засталося, калі паркоўка абмежаваная па часе. Сачыце за абнаўленнямі! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Сайт: http://osmand.net Калі вам патрэбна дапамога з ужываннем OsmAnd, звярніцеся ў нашу службу падтрымкі: support@osmand.net. "</string>
     <string name="rendering_attr_showMtbRoutes_name">Адлюстроўваць MTB маршруты</string>
     <string name="donations">Ахвяраваньні</string>
+    <string name="storage_directory_shared">Сумесная памяць</string>
+    <string name="recalculate_route">Пералічыць маршрут</string>
+    <string name="number_of_recipients">Колькасьць атрымальнікаў</string>
+    <string name="osm_live_subscribe_btn">Падпісацца</string>
+    <string name="osm_live_hide_user_name">Не паказваць маё імя ў справаздачах</string>
+    <string name="osm_live_month_cost">Кошт на месяц</string>
+    <string name="osm_live_month_cost_desc">Штомесячны плацёж</string>
+    <string name="osm_live_enter_email">Калі ласка, увядзіце сапраўдны адрас электроннай пошты</string>
+    <string name="osm_live_subscription_settings">Парамэтры падпіскі</string>
+    <string name="osm_live_ask_for_purchase">Калі ласка, спачатку набудзьце падпіску OSM Live</string>
+
+    <string name="osm_live_header">Гэтая падпіска дазваляе атрымліваць штогадзіннае абнаўленьне для ўсіх мапаў сьвету. Асноўная частка даходаў перадаецца ў OSM супольнасць і выплачваецца за кожны ўнёсак у OSM. У выпадку, калі вы любіце OsmAnd і OSM і хочаце падтрымаць яго, гэта ідэальны спосаб зрабіць гэта.</string>
+    
+    <string name="select_map_marker">Выберыце маркер</string>
+    <string name="map_markers_other">Іншыя маркеры</string>
+    <string name="upload_anonymously">Адаслаць ананімна</string>
+    <string name="download_files_error_not_enough_space">Недастаткова памяці! Гэта патрабуе {3} ГБ часовай і {1} МБ сталай памяці. На дадзены момант даступна толькі {2} МБ.</string>
+    <string name="download_files_question_space_with_temp">Спампаваць {0} файл(аў)? Гэта патрабуе {3} МБ часовай і {1} МБ сталай памяці. Зараз свабодна толькі {2} МБ.</string>
+    <string name="map_marker_1st">Першы маркер</string>
+    <string name="map_marker_2nd">Другі маркер</string>
+    <string name="shared_string_toolbar">Панэль інструмэнтаў</string>
+    <string name="shared_string_widgets">Віджэты</string>
+    <string name="shared_string_reverse_order">Зваротны парадак</string>
+    <string name="clear_active_markers_q">Выдаліць усе актыўныя маркеры?</string>
+    <string name="clear_markers_history_q">Ачысьціць гісторыю маркераў?</string>
+    <string name="active_markers">Актыўныя маркеры</string>
+    <string name="map_markers">Маркеры</string>
+    <string name="map_marker">Маркер</string>
+    <string name="consider_turning_polygons_off">Рэкамэндуецца адключыць паказ палігонаў.</string>
+    <string name="osm_live_subscription">Падпіска OSM Live</string>
     </resources>

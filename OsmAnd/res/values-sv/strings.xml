@@ -2133,4 +2133,6 @@
     <string name="recalculate_route">Beräkna om rutten</string>
     <string name="shared_string_topbar">Toppfält</string>
     <string name="storage_directory_shared">Delat minne</string>
+    <string name="avoid_road">Undvik väg</string>
+    <string name="storage_directory_readonly_desc">Den för tillfället valda datalagringsmappen är skrivskyddad. Lagringsmappen har tillfälligt ändrats till internminnet. Välj en giltig datalagringsmapp.</string>
     </resources>

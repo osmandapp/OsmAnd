@@ -138,7 +138,7 @@
     <string name="shared_string_others">Autres</string>
     <string name="shared_string_no_thanks">Pas nécessaire</string>
     <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom). Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
-    <string name="vector_data_missing">Il n\'y a pas de cartes (\'hors-ligne\') sur la carte SD. Pensez à en télécharger pour utiliser OsmAnd hors-ligne.</string>
+    <string name="vector_data_missing">Il n\'y a aucune carte hors-ligne sur la carte SD. Pensez à télécharger des cartes pour utiliser OsmAnd hors-ligne.</string>
 
 
     <string name="local_index_installed">Version locale</string>
@@ -682,7 +682,7 @@
     <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache</string>
 
 
-    <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grande gamme de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme les tuiles Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, etc …\n\nChacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".\n\nCes cartes tuiles peuvent être obtenues directement en ligne et peuvent également être préparées grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données sqlite. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grande gamme de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme les tuiles Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, etc …\n\nChacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".\n\nCes cartes tuiles peuvent être obtenues directement en ligne et peuvent également être préparées grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite. "</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et la navigation en tâche de fond (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Ce greffon donne accès directement dans OsmAnd aux options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonce automatique de votre position).</string>
 
@@ -945,7 +945,7 @@
     <string name="non_optimal_route_calculation">Calcule un itinéraire éventuellement non optimal pour les trajets longues distances</string>
     <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
     <string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
-    <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis la boutique ?</string>
+    <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis Google Play ?</string>
     <string name="close_changeset">Clôturer les modifications</string>
     <string name="background_service_is_enabled_question">Le service OsmAnd s\'exécute toujours en tâche de fond. Voulez-vous également l\'arrêter ?</string>
 
@@ -1024,7 +1024,7 @@
 
     <string name="intermediate_points_change_order">Modifier l\'ordre</string>
     <string name="dropbox_plugin_name">Greffon Dropbox</string>
-    <string name="dropbox_plugin_description">Le greffon Dropbox permet de synchroniser des pistes et des notes audio / vidéo avec votre compte Dropbox.</string>
+    <string name="dropbox_plugin_description">Le greffon Dropbox permet de synchroniser des itinéraires et des notes audio / vidéo avec votre compte Dropbox.</string>
     <string name="recording_context_menu_show">Afficher</string>
     <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Prendre une photo</string>
@@ -2157,4 +2157,11 @@
     <string name="osm_live_ask_for_purchase">Au préalable achetez un abonnement à OMS Live</string>
 
     <string name="osm_live_region_desc">Vos dons seront distribués aux utilisateurs ayant soumis des mises à jour pour la carte de cette région</string>
+    <string name="avoid_road">Éviter la route</string>
+    <string name="osm_editors_ranking">Classement OSM</string>
+    <string name="osm_live_email_desc">Ces informations sont requises pour afficher les contributions</string>
+    <string name="osm_live_user_public_name">Nom affiché</string>
+    <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les signalements</string>
+    <string name="osm_live_support_region">Région supportée</string>
+    <string name="osm_live_enter_user_name">Merci de saisir le nom sous lequel vous souhaitez apparaître</string>
     </resources>
