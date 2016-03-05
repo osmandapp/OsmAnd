@@ -2159,4 +2159,9 @@
     <string name="osm_live_region_desc">Vos dons seront distribués aux utilisateurs ayant soumis des mises à jour pour la carte de cette région</string>
     <string name="avoid_road">Éviter la route</string>
     <string name="osm_editors_ranking">Classement OSM</string>
+    <string name="osm_live_email_desc">Ces informations sont requises pour afficher les contributions</string>
+    <string name="osm_live_user_public_name">Nom affiché</string>
+    <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les signalements</string>
+    <string name="osm_live_support_region">Région supportée</string>
+    <string name="osm_live_enter_user_name">Merci de saisir le nom sous lequel vous souhaitez apparaître</string>
     </resources>
