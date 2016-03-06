@@ -2135,4 +2135,8 @@
     <string name="shared_string_topbar">Barra superior</string>
     <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos elegida actualmente, es de sólo lectura. Esta, se cambió temporalmente a la memoria interna. Elige un directorio de almacenamiento válido.</string>
     <string name="storage_directory_shared">Memoria compartida</string>
+    <string name="shared_string_move_up">Subir</string>
+    <string name="shared_string_move_down">Bajar</string>
+    <string name="finish_navigation">Finalizar navegación</string>
+    <string name="avoid_road">Evitar carretera</string>
     </resources>
