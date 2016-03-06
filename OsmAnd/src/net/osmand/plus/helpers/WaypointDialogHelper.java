@@ -63,6 +63,7 @@ public class WaypointDialogHelper {
 	public interface WaypointDialogHelperCallbacks {
 		void reloadAdapter();
 		void deleteWaypoint(int position);
+		void exchangeWaypoints(int pos1, int pos2);
 	}
 
 	private static class RadiusItem {
@@ -488,10 +489,47 @@ public class WaypointDialogHelper {
 					public void onClick() {
 						final PopupMenu optionsMenu = new PopupMenu(ctx, move);
 						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+						List<Object> activeObjects = ((StableArrayAdapter) adapter).getActiveObjects();
+						int count = activeObjects.size();
+						int t = -1;
+						for (int i = 0; i < activeObjects.size(); i++) {
+							Object o = activeObjects.get(i);
+							if (point == o) {
+								t = i;
+								break;
+							}
+						}
+						final int index = t;
 						MenuItem item;
-						item = optionsMenu.getMenu().add(
-								R.string.shared_string_remove).setIcon(app.getIconsCache().
-								getContentIcon(R.drawable.ic_action_remove_dark));
+						if (index > 0 && count > 1) {
+							item = optionsMenu.getMenu().add(R.string.shared_string_move_up)
+									.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_up));
+							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+								@Override
+								public boolean onMenuItemClick(MenuItem item) {
+									if (helper != null && helper.helperCallbacks != null) {
+										helper.helperCallbacks.exchangeWaypoints(index, index - 1);
+									}
+									return true;
+								}
+							});
+						}
+						if (index < count - 1 && count > 1) {
+							item = optionsMenu.getMenu().add(R.string.shared_string_move_down)
+									.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down));
+							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+								@Override
+								public boolean onMenuItemClick(MenuItem item) {
+									if (helper != null && helper.helperCallbacks != null) {
+										helper.helperCallbacks.exchangeWaypoints(index, index + 1);
+									}
+									return true;
+								}
+							});
+						}
+
+						item = optionsMenu.getMenu().add(R.string.shared_string_remove)
+								.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
