@@ -320,6 +320,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 								hideDashboard();
 								if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT) {
 									mapActivity.getMapActions().stopNavigationWithoutConfirm();
+									if (getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
+										getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, true);
+									}
 									mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
 								}
 							}
@@ -1473,6 +1476,23 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	@Override
 	public void deleteWaypoint(int position) {
 		deleteSwipeItem(position);
+	}
+
+	@Override
+	public void exchangeWaypoints(int pos1, int pos2) {
+		if (swipeDismissListener != null) {
+			swipeDismissListener.discardUndo();
+		}
+		if (pos1 != -1 && pos2 != -1) {
+			StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+			Object item1 = stableAdapter.getActiveObjects().get(pos1);
+			Object item2 = stableAdapter.getActiveObjects().get(pos2);
+			stableAdapter.getActiveObjects().set(pos1, item2);
+			stableAdapter.getActiveObjects().set(pos2, item1);
+
+			stableAdapter.refreshData();
+			onItemsSwapped(stableAdapter.getActiveObjects());
+		}
 	}
 
 	@Override
