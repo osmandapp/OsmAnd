@@ -166,4 +166,25 @@
     <string name="regions">Regionoj</string>
     <string name="region_maps">Regionaj mapoj</string>
     <string name="world_maps">Mondaj mapoj</string>
+    <string name="index_name_gb">Eŭropo - Unuiĝinta Reĝlando</string>
+    <string name="index_name_italy">Eŭropo - Italujo</string>
+    <string name="index_name_canada">Nordameriko - Kanado</string>
+    <string name="driving_region_japan">Japanujo</string>
+    <string name="driving_region_us">Usono</string>
+    <string name="driving_region_canada">Kanado</string>
+    <string name="driving_region_europe_asia">Eŭropo kaj Azio</string>
+    <string name="driving_region_uk">Britujo, Barato, Aŭstralio kaj aliaj</string>
+    <string name="index_name_north_america">Nordameriko</string>
+    <string name="index_name_netherlands">Eŭropo - Nederlando</string>
+    <string name="index_name_us">Nordameriko - Usono</string>
+    <string name="index_name_central_america">Mez-Ameriko</string>
+    <string name="index_name_south_america">Sudameriko</string>
+    <string name="index_name_europe">Eŭropo</string>
+    <string name="index_name_france">Eŭropo - Francujo</string>
+    <string name="index_name_germany">Eŭropo - Germanujo</string>
+    <string name="index_name_russia">Rusujo</string>
+    <string name="index_name_africa">Afriko</string>
+    <string name="index_name_asia">Azio</string>
+    <string name="index_name_oceania">Aŭstralio kaj Oceanio</string>
+    <string name="index_name_other">Mondaj kaj temaj mapoj</string>
     </resources>
