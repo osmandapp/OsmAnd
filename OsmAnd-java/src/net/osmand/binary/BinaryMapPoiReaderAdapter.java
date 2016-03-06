@@ -451,7 +451,7 @@ public class BinaryMapPoiReaderAdapter {
 		int indexOffset = codedIS.getTotalBytesRead();
 		long time = System.currentTimeMillis();
 		TLongHashSet skipTiles = null;
-		if(req.zoom != -1){
+		if(req.zoom >= 0 && req.zoom < 16){
 			skipTiles = new TLongHashSet();
 		}
 		int length ;
