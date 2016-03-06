@@ -130,19 +130,18 @@ public class WaypointDialogHelper {
 			if (dist > 0 && ps.deviationDistance > 0) {
 				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 				textDeviation.setText(devStr);
-				int colorId = R.color.wpt_distance_color;
 				if (!topBar) {
-					colorId = nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light;
+					int colorId = nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light;
 					AndroidUtils.setTextSecondaryColor(activity, textDeviation, nightMode);
-				}
-				if (ps.deviationDirectionRight) {
-					textDeviation.setCompoundDrawablesWithIntrinsicBounds(
-							app.getIconsCache().getIcon(R.drawable.ic_small_turn_right, colorId),
-							null, null, null);
-				} else {
-					textDeviation.setCompoundDrawablesWithIntrinsicBounds(
-							app.getIconsCache().getIcon(R.drawable.ic_small_turn_left, colorId),
-							null, null, null);
+					if (ps.deviationDirectionRight) {
+						textDeviation.setCompoundDrawablesWithIntrinsicBounds(
+								app.getIconsCache().getIcon(R.drawable.ic_small_turn_right, colorId),
+								null, null, null);
+					} else {
+						textDeviation.setCompoundDrawablesWithIntrinsicBounds(
+								app.getIconsCache().getIcon(R.drawable.ic_small_turn_left, colorId),
+								null, null, null);
+					}
 				}
 				textDeviation.setVisibility(View.VISIBLE);
 			} else {

@@ -286,13 +286,13 @@
 
                 <TextView
                     android:id="@+id/waypoint_dist"
-                    android:layout_width="60dp"
+                    android:layout_width="64dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="2dp"
                     android:maxLines="2"
-                    android:textColor="@color/wpt_distance_color"
-                    android:textSize="@dimen/default_desc_text_size"
+                    android:textColor="@color/osmand_orange"
+                    android:textSize="@dimen/default_list_text_size"
                     android:textStyle="bold"/>
 
                 <FrameLayout
