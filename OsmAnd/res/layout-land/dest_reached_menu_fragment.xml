@@ -120,12 +120,12 @@
                         android:layout_marginBottom="8dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:drawableLeft="@drawable/ic_action_delete_dark"
+                        android:drawableLeft="@drawable/ic_action_done"
                         android:drawablePadding="12dp"
                         android:gravity="left|center_vertical"
                         android:textColor="?android:textColorPrimary"
                         style="@style/Widget.AppCompat.Button.Borderless"
-                        android:text="@string/delete_target_point"/>
+                        android:text="@string/finish_navigation"/>
 
                 </LinearLayout>
 

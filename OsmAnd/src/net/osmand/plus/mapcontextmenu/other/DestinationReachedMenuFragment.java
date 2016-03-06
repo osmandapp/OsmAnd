@@ -59,7 +59,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 
 		Button removeDestButton = (Button) view.findViewById(R.id.removeDestButton);
 		removeDestButton.setCompoundDrawablesWithIntrinsicBounds(
-				iconsCache.getContentIcon(R.drawable.ic_action_delete_dark), null, null, null);
+				iconsCache.getContentIcon(R.drawable.ic_action_done), null, null, null);
 		removeDestButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
