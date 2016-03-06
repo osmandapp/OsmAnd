@@ -2235,4 +2235,7 @@
     <string name="storage_directory_readonly_desc">De geselecteerde opslagmap is niet schrijfbaar. Er wordt tijdelijk intern geheugen gebruikt. Kies een geldige opslagmap.</string>
     <string name="storage_directory_shared">Gedeeld geheugen</string>
     <string name="avoid_road">Deze weg vermijden</string>
+    <string name="shared_string_move_up">Omhoog</string>
+    <string name="shared_string_move_down">Omlaag</string>
+    <string name="finish_navigation">Navigatie stoppen</string>
     </resources>
