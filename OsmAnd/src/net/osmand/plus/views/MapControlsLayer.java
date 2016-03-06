@@ -512,8 +512,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateMyLocation(rh, dialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode);
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
-		if (routePlanningMode || routeFollowingMode) {
+		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
+			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
+		} else if (routePlanningMode) {
+			routePlanningBtn.setIconResId(R.drawable.map_directions);
 			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
 		} else {
 			routePlanningBtn.setIconResId(R.drawable.map_directions);
@@ -741,9 +744,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 			return true;
 		}
 
-		public void resetIconColors() {
+		public boolean resetIconColors() {
+			if (resClrLight == R.color.icon_color && resClrDark == 0) {
+				return false;
+			}
 			resClrLight = R.color.icon_color;
 			resClrDark = 0;
+			f = true;
+			return true;
 		}
 
 		public MapHudButton setIconColorId(int clr) {
