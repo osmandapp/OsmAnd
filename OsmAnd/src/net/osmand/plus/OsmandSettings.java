@@ -1553,6 +1553,15 @@ public class OsmandSettings {
 	public final static String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
 	private IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage();
 
+	public final static String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
+	public final static String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
+	public final static String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
+	public final static String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
+	public final static String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
+	public final static String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
+
 	public final static String MAP_MARKERS_POINT = "map_markers_point"; //$NON-NLS-1$
 	public final static String MAP_MARKERS_COLOR = "map_markers_color"; //$NON-NLS-1$
 	public final static String MAP_MARKERS_DESCRIPTION = "map_markers_description"; //$NON-NLS-1$
@@ -1563,6 +1572,48 @@ public class OsmandSettings {
 	public final static int MAP_MARKERS_HISTORY_LIMIT = 30;
 	private MapMarkersStorage mapMarkersStorage = new MapMarkersStorage();
 	private MapMarkersHistoryStorage mapMarkersHistoryStorage = new MapMarkersHistoryStorage();
+
+	private void backupPointToStart() {
+		settingsAPI.edit(globalPreferences)
+				.putFloat(START_POINT_LAT_BACKUP, settingsAPI.getFloat(globalPreferences, START_POINT_LAT, 0))
+				.putFloat(START_POINT_LON_BACKUP, settingsAPI.getFloat(globalPreferences, START_POINT_LON, 0))
+				.putString(START_POINT_DESCRIPTION_BACKUP, settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""))
+				.commit();
+	}
+
+	private void backupPointToNavigate() {
+		settingsAPI.edit(globalPreferences)
+				.putFloat(POINT_NAVIGATE_LAT_BACKUP, settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LAT, 0))
+				.putFloat(POINT_NAVIGATE_LON_BACKUP, settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LON, 0))
+				.putString(POINT_NAVIGATE_DESCRIPTION_BACKUP, settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""))
+				.commit();
+	}
+
+	private void backupIntermediatePoints() {
+		settingsAPI.edit(globalPreferences)
+				.putString(INTERMEDIATE_POINTS_BACKUP, settingsAPI.getString(globalPreferences, INTERMEDIATE_POINTS, ""))
+				.putString(INTERMEDIATE_POINTS_DESCRIPTION_BACKUP, settingsAPI.getString(globalPreferences, INTERMEDIATE_POINTS_DESCRIPTION, ""))
+				.commit();
+	}
+
+	public void backupTargetPoints() {
+		backupPointToStart();
+		backupPointToNavigate();
+		backupIntermediatePoints();
+	}
+
+	public void restoreTargetPoints() {
+		settingsAPI.edit(globalPreferences)
+				.putFloat(START_POINT_LAT, settingsAPI.getFloat(globalPreferences, START_POINT_LAT_BACKUP, 0))
+				.putFloat(START_POINT_LON, settingsAPI.getFloat(globalPreferences, START_POINT_LON_BACKUP, 0))
+				.putString(START_POINT_DESCRIPTION, settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION_BACKUP, ""))
+				.putFloat(POINT_NAVIGATE_LAT, settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LAT_BACKUP, 0))
+				.putFloat(POINT_NAVIGATE_LON, settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LON_BACKUP, 0))
+				.putString(POINT_NAVIGATE_DESCRIPTION, settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION_BACKUP, ""))
+				.putString(INTERMEDIATE_POINTS, settingsAPI.getString(globalPreferences, INTERMEDIATE_POINTS_BACKUP, ""))
+				.putString(INTERMEDIATE_POINTS_DESCRIPTION, settingsAPI.getString(globalPreferences, INTERMEDIATE_POINTS_DESCRIPTION_BACKUP, ""))
+				.commit();
+	}
 
 	public LatLon getPointToNavigate() {
 		float lat = settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LAT, 0);
@@ -1634,6 +1685,13 @@ public class OsmandSettings {
 			pointsKey = INTERMEDIATE_POINTS;
 			descriptionsKey = INTERMEDIATE_POINTS_DESCRIPTION;
 		}
+
+		@Override
+		public boolean savePoints(List<LatLon> ps, List<String> ds) {
+			boolean res = super.savePoints(ps, ds);
+			backupTargetPoints();
+			return res;
+		}
 	}
 
 	private class MapMarkersHistoryStorage extends MapPointsStorage {
@@ -1641,6 +1699,15 @@ public class OsmandSettings {
 		public MapMarkersHistoryStorage() {
 			pointsKey = MAP_MARKERS_HISTORY_POINT;
 			descriptionsKey = MAP_MARKERS_HISTORY_DESCRIPTION;
+		}
+
+		@Override
+		public boolean savePoints(List<LatLon> ps, List<String> ds) {
+			while (ps.size() > MAP_MARKERS_HISTORY_LIMIT) {
+				ps.remove(ps.size() - 1);
+				ds.remove(ds.size() - 1);
+			}
+			return super.savePoints(ps, ds);
 		}
 	}
 
@@ -2103,12 +2170,14 @@ public class OsmandSettings {
 				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p);
 			}
 		}
+		backupTargetPoints();
 		return add;
 	}
 
 	public boolean setPointToStart(double latitude, double longitude, PointDescription p) {
 		boolean add = settingsAPI.edit(globalPreferences).putFloat(START_POINT_LAT, (float) latitude).putFloat(START_POINT_LON, (float) longitude).commit();
 		settingsAPI.edit(globalPreferences).putString(START_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
+		backupTargetPoints();
 		return add;
 	}
 

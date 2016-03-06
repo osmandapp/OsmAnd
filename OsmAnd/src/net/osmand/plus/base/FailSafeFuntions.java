@@ -184,7 +184,7 @@ public class FailSafeFuntions {
 		ma.updateApplicationModeSettings();
 		app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
 		if (app.getSettings().USE_MAP_MARKERS.get()) {
-			app.getTargetPointsHelper().removeAllWayPoints(false);
+			app.getTargetPointsHelper().removeAllWayPoints(false, false);
 		}
 		ma.refreshMap();
 	}

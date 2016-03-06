@@ -391,10 +391,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 			if (settings.USE_MAP_MARKERS.get() && !hasTargets) {
-				mapActivity.getMapActions().setFirstMapMarkerAsTarget();
+				getTargets().restoreTargetPoints(false);
+				if (getTargets().getPointToNavigate() == null) {
+					mapActivity.getMapActions().setFirstMapMarkerAsTarget();
+				}
 			}
 			TargetPoint start = getTargets().getPointToStart();
-			if (hasTargets && start != null) {
+			if (start != null) {
 				mapActivity.getMapActions().enterRoutePlanningMode(
 						new LatLon(start.getLatitude(), start.getLongitude()), start.getOriginalPointDescription());
 			} else {

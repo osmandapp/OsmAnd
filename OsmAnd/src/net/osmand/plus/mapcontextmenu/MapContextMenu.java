@@ -492,7 +492,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (defaultVls[0] == 0) {
-						targets.removeAllWayPoints(false);
+						targets.removeAllWayPoints(false, true);
 						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
 						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 						close();
