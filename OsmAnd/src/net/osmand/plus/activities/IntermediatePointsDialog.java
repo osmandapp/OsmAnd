@@ -283,7 +283,7 @@ public class IntermediatePointsDialog {
 			boolean changeDestinationFlag = !checkedIntermediates[checkedIntermediates.length - 1];
 			if (cnt == checkedIntermediates.length) { // there is no alternative destination if all points are to be
 														// removed?
-				app.getTargetPointsHelper().removeAllWayPoints(true);
+				app.getTargetPointsHelper().removeAllWayPoints(true, true);
 			} else {
 				for (int i = checkedIntermediates.length - 2; i >= 0; i--) { // skip the destination until a retained
 																				// waypoint is found

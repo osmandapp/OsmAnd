@@ -257,10 +257,16 @@ public class TargetPointsHelper {
 		return null;
 	}
 
-	/**
-	 * Clear the local and persistent waypoints list and destination.
-	 */
-	public void removeAllWayPoints(boolean updateRoute){
+	public void restoreTargetPoints(boolean updateRoute) {
+		settings.restoreTargetPoints();
+		readFromSettings();
+		updateRouteAndRefresh(updateRoute);
+	}
+
+		/**
+		 * Clear the local and persistent waypoints list and destination.
+		 */
+	public void removeAllWayPoints(boolean updateRoute, boolean clearBackup){
 		cancelStartPointAddressRequest();
 		cancelTargetPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();
@@ -268,6 +274,9 @@ public class TargetPointsHelper {
 		settings.clearIntermediatePoints();
 		settings.clearPointToNavigate();
 		settings.clearPointToStart();
+		if (clearBackup) {
+			settings.backupTargetPoints();
+		}
 		pointToNavigate = null;
 		pointToStart = null;
 		intermediatePoints.clear();

@@ -813,7 +813,7 @@ public class MapActivityActions implements DialogProvider {
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		if (settings.USE_MAP_MARKERS.get()) {
-			getMyApplication().getTargetPointsHelper().removeAllWayPoints(false);
+			getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, false);
 		}
 		mapActivity.updateApplicationModeSettings();
 		mapActivity.getDashboard().clearDeletedPoints();

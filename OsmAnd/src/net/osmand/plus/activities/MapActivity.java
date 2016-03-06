@@ -256,7 +256,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 				&& !settings.FOLLOW_THE_ROUTE.get()
 				&& app.getTargetPointsHelper().getAllPoints().size() > 0) {
 			app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
-			app.getTargetPointsHelper().removeAllWayPoints(false);
+			app.getTargetPointsHelper().removeAllWayPoints(false, false);
 		}
 
 		if (!settings.isLastKnownMapLocation()) {
