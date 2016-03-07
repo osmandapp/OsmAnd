@@ -349,7 +349,7 @@
 	<string name="poi_psychotherapist">Psicoterapeuta</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitación</string>
 	<string name="poi_speech_therapist">Fonoaudiólogo</string>
-	<string name="poi_healthcare_yes">Centro médico</string>
+	<string name="poi_healthcare_yes">Atención médica</string>
 	<string name="poi_company">Empresa privada</string>
 	<string name="poi_insurance">Aseguradora</string>
 	<string name="poi_estate_agent">Inmobiliaria</string>
@@ -410,7 +410,7 @@
 	<string name="poi_ice_stock">Curling bávaro</string>
 	<string name="poi_korfbal">Balonkorf</string>
 	<string name="poi_sport_motor">Deporte de motor</string>
-	<string name="poi_sport_multi">Deportes múltiples</string>
+	<string name="poi_sport_multi">Polideportivo</string>
 	<string name="poi_orienteering">Orientación</string>
 	<string name="poi_paddle_tennis">Pádel</string>
 	<string name="poi_paragliding">Parapente</string>
@@ -587,7 +587,7 @@
 	<string name="poi_pub">Pub</string>
 	<string name="poi_food_court">Patio de comidas</string>
 	<string name="poi_drinking_water">Agua potable</string>
-	<string name="poi_barbecue">Parrilla</string>
+	<string name="poi_barbecue">Barbacoa/Parrillero</string>
 	<string name="poi_craft_agricultural_engines">Motores agrícolas</string>
 	<string name="poi_craft_basket_maker">Mimbrería</string>
 	<string name="poi_craft_beekeeper">Apicultor</string>
@@ -2347,7 +2347,7 @@
 	<string name="poi_health_specialty_behavior_yes">Especialidad médica: Conducta</string>
 <string name="poi_building_type_pyramid">Pirámide</string>
 <string name="poi_fitness_centre">Gimnasio</string>
-	<string name="poi_fitness">Gimnasio (deporte)</string>
+	<string name="poi_fitness">Ejercicio físico</string>
 	<string name="poi_billiards">Billar</string>
 <string name="poi_microwave_oven_yes">Con horno de microondas</string>
 	<string name="poi_microwave_oven_no">Sin horno de microondas</string>
