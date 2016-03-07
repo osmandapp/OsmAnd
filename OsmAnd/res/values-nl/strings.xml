@@ -2165,7 +2165,7 @@
     <string name="shared_string_undo_all">Alles terugzetten</string>
     <string name="rendering_attr_hideIcons_name">Verberg POI-iconen</string>
     <string name="switch_start_finish">Start en bestemming verwisselen</string>
-    <string name="number_of_contributors">Aantal Medewerkers</string>
+    <string name="number_of_contributors">Aantal Bijdragers</string>
     <string name="number_of_edits">Aantal Bewerkingen</string>
     <string name="shared_string_remove">Verwijder</string>
     <string name="clear_updates_proposition_message">Je kan gedownloade updates verwijderen en terugkeren naar de originele kaart</string>
@@ -2187,7 +2187,7 @@
     <string name="donations">Donaties</string>
     <string name="number_of_recipients">Aantal ontvangers</string>
     <string name="osm_user_stat">%1$s bewerkingen, rang %2$s, wereldwijd: %3$s bewerkingen</string>
-    <string name="osm_editors_ranking">Ranking OSM medewerkers</string>
+    <string name="osm_editors_ranking">OSM-Bijdragers Ranglijst</string>
     <string name="osm_live_subscription">OSM Live abonnement</string>
     <string name="osm_live_subscribe_btn">Abonneren</string>
     <string name="osm_live_email_desc">Om je op de hoogte te houden over je abonnement</string>
@@ -2201,7 +2201,7 @@
     <string name="osm_live_enter_email">Voer een geldig emailadres in</string>
     <string name="osm_live_enter_user_name">Voer je Openbare Naam in</string>
     <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement!</string>
-    <string name="osm_live_region_desc">De helft van je bijdrage gaat naar OSM Medewerkers in deze regio</string>
+    <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-Bijdragers in deze regio</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OSM Live Abonnement</string>
 
