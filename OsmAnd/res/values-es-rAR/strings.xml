@@ -2139,4 +2139,6 @@
     <string name="shared_string_move_down">Bajar</string>
     <string name="finish_navigation">Finalizar navegación</string>
     <string name="avoid_road">Evitar camino</string>
+    <string name="release_2_3">" • OSM Live. Soporta contribuidores y desarrolladores del mapa y obtiene actualizaciones del mapa cada hora.
+\n\n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa.\n\n • Mayor detalle en el mapa OSM con escudos viales de países específicos y muchas nuevas características.\n\n • Mejora visual en la preparación de la ruta.\n\n • Muchas mejoras en el menú contextual del mapa, como la búsqueda contextual de direcciones.\n\n y más… "</string>
     </resources>
