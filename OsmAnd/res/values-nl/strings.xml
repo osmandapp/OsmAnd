@@ -2238,4 +2238,5 @@
     <string name="shared_string_move_up">Omhoog</string>
     <string name="shared_string_move_down">Omlaag</string>
     <string name="finish_navigation">Navigatie stoppen</string>
+    <string name="release_2_3">" • OSM Live: Ondersteun bijdragers aan de kaart en ontwikkelaars en ontvang dagelijks kaart-updates.\n\n • Markeervlaggetjes: Een nieuwe manier op snel plekken op de kaart te kiezen.\n\n • Nog meer details op de kaart met landspecifieke routeschildjes en nog veel meer nieuwe mogelijkheden.\n\n • De route-voorbereiding is vernieuwd.\n\n • Vele verbeteringen in het kaart-context-menu, zoals adres-zoek-functie.\n\n en nog meer… "</string>
     </resources>
