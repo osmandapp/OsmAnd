@@ -1558,4 +1558,88 @@
 	<string name="poi_diet_lactose_free_only">Len bezlaktózová diéta</string>
 	<string name="poi_diet_lactose_free_yes">Bezlaktózová diéta</string>
 	<string name="poi_diet_lactose_free_no">Bezlaktózová diéta: nie</string>
+	<string name="poi_drive_in_yes">Vjazd autom: áno</string>
+	<string name="poi_drive_in_no">Vjazd autom: nie</string>
+	<string name="poi_drive_through_yes">Prejazd autom: áno</string>
+	<string name="poi_drive_through_no">Prejazd autom: nie</string>
+
+	<string name="poi_brewery_additional">Názov pivovaru</string>
+	<string name="poi_microbrewery_yes">Minipivovar</string>
+	<string name="poi_microbrewery_no">Žiadny minipivovar</string>
+
+	<string name="poi_takeaway_yes">Jedlo so sebou</string>
+	<string name="poi_takeaway_no">Jedlo sa nedá odniesť</string>
+	<string name="poi_takeaway_only">Jedlo len so sebou</string>
+
+	<string name="poi_delivery_yes">Donáška</string>
+	<string name="poi_delivery_no">Bez donášky</string>
+	<string name="poi_delivery_only">Len donáška</string>
+
+	<string name="poi_outdoor_seating_yes">Vonkajšie sedenie</string>
+	<string name="poi_outdoor_seating_no">Žiadne vonkajšie sedenie</string>
+	<string name="poi_outdoor_seating_terrace">Vonkajšie sedenie: terasa</string>
+	<string name="poi_outdoor_seating_sidewalk">Vonkajšie sedenie: na chodníku</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Vonkajšie sedenie: pešia zóna</string>
+	<string name="poi_outdoor_seating_garden">Vonkajšie sedenie: v záhrade</string>
+	<string name="poi_outdoor_seating_patio">Vonkajšie sedenie: na nádvorí</string>
+
+	<string name="poi_cocktails_yes">Koktaily</string>
+
+	<string name="poi_second_hand_yes">Tovar z druhej ruky</string>
+	<string name="poi_second_hand_no">Žiadny tovar z druhej ruky</string>
+	<string name="poi_second_hand_only">Len tovar z druhej ruky</string>
+
+	<string name="poi_service_parts">Diely</string>
+	<string name="poi_service_dealer">Predajca</string>
+	<string name="poi_service_repair">Opravy</string>
+	<string name="poi_service_repair_no">Žiadne opravy</string>
+	<string name="poi_service_electrical">Oprava elektrických vozidiel</string>
+	<string name="poi_motorcycle_repair">Oprava motocyklov</string>
+	<string name="poi_self_service_yes">Samoobsluha</string>
+	<string name="poi_self_service_no">Bez samoobsluhy</string>
+	<string name="poi_automated_yes">Automatizované</string>
+	<string name="poi_automated_no">Neautomatizované</string>
+	<string name="poi_full_service_yes">Všetky služby</string>
+	<string name="poi_brushless_yes">Žiadne kefy</string>
+	<string name="poi_brushless_no">S kefami</string>
+	<string name="poi_car_wash_no">Bez autoumyvárne</string>
+
+	<string name="poi_aeroway_fuel">Čerpacia stanica pre lietadlá</string>
+	<string name="poi_public_bath">Verejná sprcha</string>
+
+	<string name="poi_male_yes">Muži</string>
+	<string name="poi_male_no">Zakázané pre mužov</string>
+	<string name="poi_female_yes">Ženy</string>
+	<string name="poi_female_no">Zakázané pre ženy</string>
+	<string name="poi_indoor_yes">V budove</string>
+	<string name="poi_indoor_no">Vonku</string>
+	<string name="poi_toilets_yes">S toaletami</string>
+	<string name="poi_toilets_no">Bez toaliet</string>
+	<string name="poi_toilets_wheelchair_yes">Prístup na toalety s vozíkom: áno</string>
+	<string name="poi_toilets_wheelchair_no">Prístup na toalety s vozíkom: nie</string>
+	<string name="poi_toilets_access_customers">Prístup na toalety: zákazníci</string>
+	<string name="poi_toilets_access_permissive">Prístup na toalety: povolený</string>
+	<string name="poi_toilets_access_community">Prístup na toalety: komunita</string>
+	<string name="poi_toilets_access_public">Prístup na toalety: verejnosť</string>
+
+	<string name="poi_diaper_yes">Stôl na výmenu plienok</string>
+	<string name="poi_diaper_no">Bez stolu na výmenu plienok</string>
+	<string name="poi_diaper_room">Miestnosť na výmenu plienok</string>
+
+	<string name="poi_maxstay">Časový limit na parkovanie</string>
+
+	<string name="poi_vending_parking_tickets">Parkovacie lístky</string>
+	<string name="poi_vending_cigarettes">Cigarety</string>
+	<string name="poi_vending_excrement_bags">Sáčky na exkrementy</string>
+	<string name="poi_vending_public_transport_tickets">Lístky na hromadnú dopravu</string>
+	<string name="poi_vending_drinks">Nápoje</string>
+	<string name="poi_vending_sweets">Sladkosti</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Vyzdvihnutie a odovzdanie balíkov</string>
+	<string name="poi_vending_condoms">Kondómy</string>
+	<string name="poi_vending_stamps">Známky</string>
+	<string name="poi_vending_bicycle_tube">Duše na bicykle</string>
+	<string name="poi_vending_food">Jedlo</string>
+	<string name="poi_vending_drinks_food">Jedlo a nápoje</string>
+	<string name="poi_vending_fuel">Palivo</string>
+	<string name="poi_vending_parcel_pickup">Vyzdvihnutie balíkov</string>
 	</resources>
