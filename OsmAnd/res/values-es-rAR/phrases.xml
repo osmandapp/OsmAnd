@@ -171,7 +171,7 @@
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
 	<string name="poi_car_wash">Lavadero de automóviles</string>
 	<string name="poi_fuel">Estación de servicio</string>
-	<string name="poi_fuel_diesel">EuroDiésel</string>
+	<string name="poi_fuel_diesel">Eurodiésel (Grado 3; Euro V)</string>
 	<string name="poi_fuel_gtl_diesel">Diésel GTL</string>
 	<string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
 	<string name="poi_fuel_biodiesel">Biodiésel</string>
@@ -179,8 +179,8 @@
 	<string name="poi_fuel_octane_80">80 octanos</string>
 	<string name="poi_fuel_octane_91">91 octanos</string>
 	<string name="poi_fuel_octane_92">92 octanos</string>
-	<string name="poi_fuel_octane_95">95 octanos</string>
-	<string name="poi_fuel_octane_98">98 octanos</string>
+	<string name="poi_fuel_octane_95">Nafta súper (grado 2)</string>
+	<string name="poi_fuel_octane_98">Nafta premium (grado 3)</string>
 	<string name="poi_fuel_octane_100">100 octanos</string>
 	<string name="poi_fuel_cng">GNC</string>
 	<string name="poi_fuel_1_25">Combustible 1:25</string>
@@ -371,7 +371,7 @@
 	<string name="poi_psychotherapist">Psicoterapeuta</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitación</string>
 	<string name="poi_speech_therapist">Fonoaudiólogo</string>
-	<string name="poi_healthcare_yes">Centro médico</string>
+	<string name="poi_healthcare_yes">Atención médica</string>
 
 	<string name="poi_company">Empresa</string>
 	<string name="poi_insurance">Aseguradora</string>
@@ -434,7 +434,7 @@
 	<string name="poi_ice_stock">Curling bávaro</string>
 	<string name="poi_korfbal">Balonkorf</string>
 	<string name="poi_sport_motor">Deporte de motor</string>
-	<string name="poi_sport_multi">Deportes múltiples</string>
+	<string name="poi_sport_multi">Polideportivo</string>
 	<string name="poi_orienteering">Orientación</string>
 	<string name="poi_paddle_tennis">Pádel</string>
 	<string name="poi_paragliding">Parapente</string>
@@ -621,7 +621,7 @@
 	<string name="poi_pub">Pub</string>
 	<string name="poi_food_court">Patio de comidas</string>
 	<string name="poi_drinking_water">Agua potable</string>
-	<string name="poi_barbecue">Parrilla</string>
+	<string name="poi_barbecue">Parrillero</string>
 
 	<string name="poi_craft_agricultural_engines">Motores agrícolas</string>
 	<string name="poi_craft_basket_maker">Mimbrería</string>
@@ -2565,7 +2565,7 @@
 <string name="poi_building_type_pyramid">Pirámide</string>
 
 <string name="poi_fitness_centre">Gimnasio</string>
-	<string name="poi_fitness">Gimnasio (deporte)</string>
+	<string name="poi_fitness">Ejercicio físico</string>
 
 	<string name="poi_billiards">Billar</string>
 
