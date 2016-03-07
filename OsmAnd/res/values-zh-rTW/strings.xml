@@ -2146,4 +2146,6 @@
     <string name="storage_directory_shared">共用記憶體</string>
     <string name="avoid_road">避開道路</string>
     <string name="finish_navigation">導航完成</string>
+    <string name="shared_string_move_up">上移</string>
+    <string name="shared_string_move_down">下移</string>
     </resources>
