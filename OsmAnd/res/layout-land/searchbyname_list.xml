@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="1dp"
+    android:paddingBottom="1dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <!--
+        ppenguin 2016-03-07: more compact layout (less padding) for landscape, to allow the maximum
+        number of lines when most area is taken up by the soft keyboard
+    -->
+
+    <TextView
+        android:id="@+id/NameLabel"
+        android:textSize="@dimen/default_list_text_size"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+</LinearLayout>
