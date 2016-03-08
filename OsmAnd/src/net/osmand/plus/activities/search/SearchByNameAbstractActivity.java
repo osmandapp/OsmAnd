@@ -113,11 +113,14 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		setListAdapter(namesAdapter);
 		
 		collator = OsmAndCollator.primaryCollator();
- 	    
-		
+
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);
 			
 		searchText = (EditText) findViewById(R.id.SearchText);
+
+		// ppenguin 2016-03-07: try to avoid full screen input in landscape mode (when softKB too large)
+		searchText.setImeOptions(searchText.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
+
 		searchText.addTextChangedListener(new TextWatcher(){
 
 			@Override
@@ -145,7 +148,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 //		filter.setOnClickListener(new OnClickListener() {
 //			}
 //		});
-		searchText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        // ppenguin 2016-03-07: try to avoid full screen input in landscape mode (when softKB too large) => IME-flags necessary here too!
+		searchText.setImeOptions(EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
 		searchText.requestFocus();
 		searchText.setOnEditorActionListener(new OnEditorActionListener() {
 	        @Override
