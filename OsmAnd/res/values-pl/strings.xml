@@ -2048,9 +2048,9 @@
     <string name="rendering_attr_horseRoutes_name">Szlaki konne</string>
     <string name="no_address_found">Brak określonego adresu</string>
     <string name="shared_string_hide">Ukryj</string>
-    <string name="only_download_over_wifi">Pobieraj tylko przez WiFi</string>
+    <string name="only_download_over_wifi">Pobieranie tylko przez WiFi</string>
     <string name="live_update">Uaktualniaj na bieżąco</string>
-    <string name="update_now">Aktualizuj teraz</string>
+    <string name="update_now">Uaktualnij</string>
     <string name="update">Aktualizacja co</string>
     <string name="route_distance">Odległość:</string>
     <string name="route_duration">Czas:</string>
