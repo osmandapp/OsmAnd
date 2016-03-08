@@ -634,7 +634,7 @@
     <string name="left_side_navigation_descr">Abilita nei paesi in cui si guida tenendo la sinistra</string>
 
     <string name="unknown_from_location">La posizione di partenza non è ancora stata determinata</string>
-    <string name="confirm_interrupt_download">Vuoi lo scaricamento dei file?</string>
+    <string name="confirm_interrupt_download">Vuoi cancellare il download del file?</string>
     <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
 
     <string name="map_online_plugin_is_not_installed">Abilita il plugin Mappe Online per scegliere altre sorgenti di mappe</string>
