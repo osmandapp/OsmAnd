@@ -2328,7 +2328,6 @@
     <string name="finish_navigation">Afslut navigation</string>
     <string name="shared_string_move_up">Flyt op</string>
     <string name="shared_string_move_down">Flyt ned</string>
-    <string name="release_2_3">" • OSM Live. Understøtter kort bidragyderne, og udviklere og få hver time kort opdateringer.
-\n\n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet.\n\n • Mere detaljerede OSM kort med land specifikke vejskiltee og masser af nye kortfunktioner.\n\n • Forbedret udseendet og fornemmelsen af rute forberedelse.
-\n\n • Mange forbedringer i kort kontekstmenu som kontekstuelle adresse opslag.\n\n og mere... "</string>
+    <string name="release_2_3">" • OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time.\n\n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet.\n\n • Mere detaljerede OSM kort med landespecifikke vejskilte og masser af nye kortfunktioner.\n\n • Forbedret udseende af ruteplanlægning.
+\n\n • Mange forbedringer i kortets kontekstmenu, såsom indholdsbestemt adresseopslag.\n\n og mere... "</string>
     </resources>
