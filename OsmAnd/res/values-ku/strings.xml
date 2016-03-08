@@ -92,4 +92,6 @@
     <string name="osm_live_active">Çalak</string>
     <string name="osm_live_not_active">Neçalak e</string>
     <string name="reports_for">Ji bo raporkirina</string>
-</resources>
+<string name="update_now">Niha Rojaneyîke</string>
+    <string name="update">Hemû rojanekirî</string>
+    </resources>
