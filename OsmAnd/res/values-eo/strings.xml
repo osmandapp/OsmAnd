@@ -11,7 +11,7 @@
     <string name="osm_live_user_public_name">Publika Nomo</string>
     <string name="osm_live_hide_user_name">Ne montri mian nomon en raportoj</string>
     <string name="osm_live_support_region">Subteni regionon</string>
-    <string name="osm_live_month_cost"/>
+    <string name="osm_live_month_cost">Monata kosto</string>
     <string name="osm_live_active">Aktiva</string>
     <string name="osm_live_not_active">Malaktiva</string>
     <string name="osm_live_enter_email">Bonvolu entajpi korektan retadreson</string>
@@ -187,4 +187,28 @@
     <string name="index_name_asia">Azio</string>
     <string name="index_name_oceania">Aŭstralio kaj Oceanio</string>
     <string name="index_name_other">Mondaj kaj temaj mapoj</string>
+    <string name="shared_string_move_up">Movi supren</string>
+    <string name="shared_string_move_down">Movi malsupren</string>
+    <string name="finish_navigation">Finigi navigadon</string>
+    <string name="avoid_road">Eviti vojon</string>
+    <string name="storage_directory_readonly_desc">Nuntempa elektita datum-konservada dosierujo estas nurlega. La konservada dosierujo estas provizore agordita je interna memorejo. Bonvolu elekti korektan konservadan dosierujon.</string>
+    <string name="storage_directory_shared">Komuna memoro</string>
+    <string name="osm_live_month_cost_desc">Monata elspezo</string>
+    <string name="map_marker_1st">Unua mapa markilo</string>
+    <string name="map_marker_2nd">Dua mapa markilo</string>
+    <string name="add_points_to_map_markers_q">Ĉu vi volas aldoni ĉiujn punktojn al mapmarkiloj?</string>
+    <string name="shared_string_add_to_map_markers">Aldoni al mapmarkiloj</string>
+    <string name="select_map_markers">Elekti mapmarkilojn</string>
+    <string name="show_map_markers_description">Ebligas uzi mapmarkilojn</string>
+    <string name="clear_active_markers_q">Ĉu vi volas forigi ĉiujn aktivajn mapmarkilojn?</string>
+    <string name="map_markers">Mapmarkiloj</string>
+    <string name="map_marker">Mapmarkilo</string>
+    <string name="clear_markers_history_q">Ĉu vi volas vakigi historion de mapmarkiloj?</string>
+    <string name="active_markers">Markiloj aktivaj</string>
+    <string name="lang_nv">Navaha</string>
+    <string name="lang_la">Latina</string>
+    <string name="lang_es_ar">Hispana (Argentina)</string>
+    <string name="welcome_header">Saluton</string>
+    <string name="shared_string_and">kaj</string>
+    <string name="shared_string_or">aŭ</string>
     </resources>
