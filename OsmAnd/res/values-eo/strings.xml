@@ -240,5 +240,11 @@
     <string name="av_locations_descr">GPX-dosiero kun notoj pri lokoj</string>
     <string name="av_locations">Lokoj</string>
     <string name="plugin_settings">Kromprogramoj</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Eviti irreiran vagonaron</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Eviti irreiran servon</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Evitas pramecan servon</string>
+    <string name="traffic_warning_hazard">Danĝero</string>
+    <string name="rendering_value_boldOutline_name">Grasaj konturoj</string>
+    <string name="no_updates_available">Nenia ĝisdatigo disponebla</string>
+    <string name="download_live_updates">Aŭtomataj ĝisdatigoj perinterretaj</string>
+    <string name="rendering_value_default13_name">Defaŭlta (13)</string>
     </resources>
