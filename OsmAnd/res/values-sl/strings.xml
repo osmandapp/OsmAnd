@@ -2152,4 +2152,9 @@
 
     <string name="shared_string_topbar">Vrhnja vrstica</string>
     <string name="avoid_road">Izogni se cesti</string>
+    <string name="shared_string_move_up">Premakni gor</string>
+    <string name="shared_string_move_down">Premakni dol</string>
+    <string name="finish_navigation">Končaj navigacijo</string>
+    <string name="storage_directory_readonly_desc">Trenutno do dovoljenja podatkovne mape le za branje, zato je začasno prestavljen na notranji pomnilnik. Izbrati je priporočljivo ustrezno in veljavno mapo za podatke.</string>
+    <string name="storage_directory_shared">Pomnilnik v souporabi</string>
     </resources>
