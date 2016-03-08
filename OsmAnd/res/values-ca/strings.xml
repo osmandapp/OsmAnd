@@ -1955,4 +1955,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="upload_anonymously">Puja anònimament</string>
     <string name="download_files_error_not_enough_space">No hi ha prou espai! Això requereix {3} MB temporals i {1} MB permanents. Ara mateix, només hi ha {2} MB disponibles.</string>
     <string name="download_files_question_space_with_temp">Voleu baixar {0} fitxer(s)? Es necessita {3} MB temporals i {1} MB permanents. Ara mateix, es disposa de {2} MB.</string>
+    <string name="shared_string_move_up">Puja</string>
+    <string name="shared_string_move_down">Baixa</string>
+    <string name="avoid_road">Evita la via</string>
+    <string name="storage_directory_readonly_desc">La carpeta d\'emmagatzemament de dades seleccionada només permet la lectura. S\'ha modificat temporalment la carpeta d\'emmagatzemament a la memòria interna . Seleccioneu un directori d\'emmagatzemament vàlid.</string>
+    <string name="storage_directory_shared">Memòria compartida</string>
     </resources>
