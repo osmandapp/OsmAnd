@@ -2164,4 +2164,7 @@
     <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les signalements</string>
     <string name="osm_live_support_region">Région supportée</string>
     <string name="osm_live_enter_user_name">Merci de saisir le nom sous lequel vous souhaitez apparaître</string>
+    <string name="shared_string_move_up">Monter</string>
+    <string name="shared_string_move_down">Descendre</string>
+    <string name="finish_navigation">Terminer la navigation</string>
     </resources>
