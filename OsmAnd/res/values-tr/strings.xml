@@ -2057,7 +2057,7 @@
     <string name="map_marker_2nd">İkinci harita işareti</string>
     <string name="shared_string_toolbar">Araç çubuğu</string>
     <string name="shared_string_widgets">widget\'ler</string>
-    <string name="add_points_to_map_markers_q">Harita işaretçileri için tüm noktaları eklemek istiyor musunuz?</string>
+    <string name="add_points_to_map_markers_q">İşaretlerini eşlemek için tüm noktaları eklemek istiyor musunuz?</string>
     <string name="shared_string_add_to_map_markers">Harita işaretleyicileri ekleyin</string>
     <string name="select_map_markers">Harita işaretleyicileri seçin</string>
     <string name="shared_string_reverse_order">Ters sırada</string>
@@ -2085,7 +2085,7 @@
     <string name="osm_live_enter_email">Geçerli e-posta adresi giriniz</string>
     <string name="osm_live_enter_user_name">Lütfen genel adı girin</string>
     <string name="osm_live_thanks">Canlı güncellemeler için abone için teşekkür ederiz!</string>
-    <string name="osm_live_region_desc">Bağış bu bölgede harita değişiklikleri gönder OSM kullanıcılara gönderilecek bölümü</string>
+    <string name="osm_live_region_desc">Bağış parçası bu bölgede harita değişiklikleri gönder OSM kullanıcılara gönderilecek</string>
     <string name="osm_live_subscription_settings">Abonelik ayarları</string>
     <string name="osm_live_ask_for_purchase">Lütfen ilk olarak OSM canlı abonelik satın alın</string>
 
@@ -2099,4 +2099,12 @@
     <string name="download_files_question_space_with_temp">Gerçekten {0} dosyaları download? Bu {3} MB geçici olarak ve {1} MB kalıcı olarak ihtiyacı var. Şu anda kullanılabilir (2) MB vardır.</string>
     <string name="upload_osm_note_description">OpenStreetMap.org profil kullanıyorsanız OSM notunuzu anonim karşıya yükleyebilirsiniz.</string>
     <string name="upload_osm_note">OSM Not yükle</string>
+    <string name="shared_string_move_up">Yukarı Taşı</string>
+    <string name="shared_string_move_down">Aşağı taşı</string>
+    <string name="finish_navigation">Son gezinti</string>
+    <string name="avoid_road">Yol önlemek</string>
+    <string name="storage_directory_readonly_desc">Seçili veri depolama klasörü salt okunur olduğunu. Depolama klasörü geçici olarak dahili hafızaya geçildi. Lütfen geçerli depolama dizini seçin.</string>
+    <string name="storage_directory_shared">Paylaşılan bellek</string>
+    <string name="shared_string_topbar">Topbar</string>
+    <string name="recalculate_route">Rota yeniden hesaplama</string>
     </resources>
