@@ -1293,8 +1293,8 @@
     <string name="interrupt_music">Interrumpir música</string>
     <string name="osmo_settings_uuid">Identificador único del dispositivo</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y configura el canal de rastreo personal</string>
-    <string name="osmo_plugin_description">"Este complemento proporciona parcialmente la función de Monitorización OpenStreetMap, ver https://osmo.mobi.
-\n\nPuedes seguir en tiempo real todos los dispositivos de un grupo en el que partícipes. También puedes ver el punto y las pistas subidas al grupo al que perteneces. "</string>
+    <string name="osmo_plugin_description">"Este extra proporciona parcialmente la funcionalidad de Monitorización OpenStreetMap, ver https://osmo.mobi\n\nPuedes rastrear en tiempo real todos los dispositivos de un grupo  en el que participes. También se pueden ver el punto y las pistas subidas al grupo al que perteneces.
+\n\nEl grupo no ha sido eliminado después de meses, armonizarla con las normas que crear grupos en el sitio web OsMo.mobi "</string>
     <string name="osmo_plugin_name">Monitorización OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
@@ -1359,7 +1359,7 @@
     <string name="osmo_auto_send_locations_descr">Inicia el viaje y envía ubicaciones automáticamente tras el arranque de la aplicación</string>
     <string name="osmo_auto_send_locations">Iniciar viaje automáticamente</string>
     <string name="osmo_tracker_id">Identificador de seguimiento</string>
-    <string name="osmo_tracker_id_descr">Pulsa para ver el identificador de seguimiento.</string>
+    <string name="osmo_tracker_id_descr">Pulsa para ver el identificador de seguimiento</string>
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
