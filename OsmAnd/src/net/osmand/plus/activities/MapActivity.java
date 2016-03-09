@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
@@ -7,8 +8,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,9 +20,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -71,6 +76,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -104,6 +110,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -584,8 +592,27 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 		if (app.isExternalStorageDirectoryReadOnly()
 				&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-			DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+			if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
+				DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+			} else {
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+						DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+			}
 		}
+	}
+
+	private void restartApp() {
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
+		bld.setMessage(R.string.storage_permission_restart_is_required);
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				android.os.Process.killProcess(android.os.Process.myPid());
+			}
+		});
+		bld.show();
 	}
 
 	private void parseNavigationIntent(final Uri data) {
@@ -1184,12 +1211,31 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
 		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
 		if (mcl != null) {
 			mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		}
+
+		if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+				&& grantResults.length > 0 && permissions.length > 0
+				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					restartApp();
+				}
+			}, 1);
+		} else {
+			AccessibleToast.makeText(this,
+					R.string.missing_write_external_storage_permission,
+					Toast.LENGTH_LONG).show();
+			DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+		}
+
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
