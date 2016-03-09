@@ -1293,10 +1293,9 @@
     <string name="interrupt_music">Interrumpir música</string>
     <string name="osmo_settings_uuid">Identificador único del dispositivo</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y configura el canal de rastreo personal</string>
-    <string name="osmo_plugin_description">"Este complemento proporciona la función de monitorización avanzada en directo llamada OsMo, ver http://osmo.mobi.
-\n\nPuede rastrear todos los dispositivos participando en un grupo en tiempo real, y comunicarse entre sí. Viene con varias opciones para el seguimiento por sesión o permanente.
-\n\nLos grupos anónimos pueden crearse espontáneamente para un número de días específico y con características limitadas, por ejemplo, no hay control remoto ni administrador del grupo. Los grupos con funcionalidad completa, por otro lado, se deben crear en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitorización OSM)</string>
+    <string name="osmo_plugin_description">"Este complemento proporciona parcialmente la función de Monitorización OpenStreetMap, ver https://osmo.mobi.
+\n\nPuedes seguir en tiempo real todos los dispositivos de un grupo en el que partícipes. También puedes ver el punto y las pistas subidas al grupo al que perteneces. "</string>
+    <string name="osmo_plugin_name">Monitorización OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
     <string name="share_route_subject">Ruta compartida vía OsmAnd</string>
@@ -1317,7 +1316,7 @@
     <string name="osmo_auth_pending">Esperando autorización…</string>
     <string name="osmo_locations_sent">"Ubicaciones enviadas %1$d (en buffer %2$d) "</string>
     <string name="osmo_conn_successfull">Conexión establecida: %1$s </string>
-    <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
+    <string name="osmo_groups">Grupos OsMo</string>
     <string name="osmo_group_info">Información</string>
     
     <string name="rendering_value_pink_name">rosa</string>
@@ -1344,11 +1343,11 @@
     <string name="osmo_group_description">Descripción</string>
     <string name="osmo_group_policy">Política</string>
     <string name="osmo_connect_to_device_tracker_id">Identificador de seguimiento</string>
-    <string name="osmo_connect_to_group_id">Id de grupo</string>
+    <string name="osmo_connect_to_group_id">Identificador de grupo</string>
     <string name="osmo_group_name">Nombre de grupo</string>
     <string name="osmo_connect_to_device">Emparejar con dispositivo</string>
     <string name="osmo_connect_to_group">Emparejar con grupo</string>
-    <string name="osmo_connect">Conectase a</string>
+    <string name="osmo_connect">Unirse</string>
     <string name="osmo_create_group">Crear grupo</string>
     <string name="osmo_server_operation_failed">Fallo de operación del servidor OsMo</string>
     <string name="osmo_activity">Monitorización OpenStreetMap</string>
@@ -1357,10 +1356,10 @@
     <string name="hours_ago">horas antes</string>
     <string name="minutes_ago">minutos antes</string>
     <string name="seconds_ago">segundos antes</string>
-    <string name="osmo_auto_send_locations_descr">Automáticamente inicia la sesión de seguimiento y envía ubicaciones después de iniciar la aplicación</string>
-    <string name="osmo_auto_send_locations">Automáticamente iniciar sesión de seguimiento</string>
-    <string name="osmo_tracker_id">Identificador de seguimiento personal</string>
-    <string name="osmo_tracker_id_descr">Clic para ver o compartir el identificador de seguimiento. ¡Utilizando el identificador de seguimiento de los dispositivos conectados podrá vigilar todos los movimientos de este dispositivo! Para desconectar seleccione la opción regenerar.</string>
+    <string name="osmo_auto_send_locations_descr">Inicia el viaje y envía ubicaciones automáticamente tras el arranque de la aplicación</string>
+    <string name="osmo_auto_send_locations">Iniciar viaje automáticamente</string>
+    <string name="osmo_tracker_id">Identificador de seguimiento</string>
+    <string name="osmo_tracker_id_descr">Pulsa para ver el identificador de seguimiento.</string>
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
@@ -1375,7 +1374,7 @@
     <string name="osmo_center_location">Centrar en la pantalla</string>
     <string name="osmo_set_moving_target">Fijar como objetivo móvil</string>
     <string name="osmo_use_server_name">Nombre registrado</string>
-    <string name="osmo_connect_to_my_nickname">Mi apodo</string>
+    <string name="osmo_connect_to_my_nickname">Apodo</string>
     <string name="osmo_user_name">Usuario</string>
     
     <string name="osmo_user_joined">El usuario %1$s se ha unido al grupo %2$s</string>
@@ -1737,7 +1736,7 @@
     <string name="rendering_value_disabled_name">Desactivado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
-    <string name="osmo_share_my_location">Compartir mi ubicación</string>
+    <string name="osmo_share_my_location">Transmitir la ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="osm_edit_context_menu_delete">Borrar edición de OSM</string>
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
@@ -2117,4 +2116,14 @@
     <string name="show_transparency_seekbar">Mostrar transparencia de la barra de búsqueda</string>
     <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos seleccionada actualmente es de sólo lectura. La carpeta de almacenamiento fue cambiada temporalmente a la memoria interna. Por favor, elige directorio de almacenamiento válido.</string>
     <string name="storage_directory_shared">Memoria compartida</string>
+    <string name="storage_permission_restart_is_required">Ahora la aplicación puede escribir en el almacenamiento externo. Se necesita un rearranque manual de la aplicación.</string>
+    <string name="release_2_3">" • OSM en vivo. Apoya a colaboradores del mapa y desarrolladores y obtén actualizaciones de mapas cada hora.
+\n\n • Marcadores de mapa. Una nueva forma de seleccionar rápidamente lugares en el mapa.\n\n • Mapas de OSM más detallados con escudos de carreteras específicos de cada país y un montón de nuevas características del mapa.\n\n • Mejor aspecto visual en la preparación de la ruta.
+\n\n • Muchas mejoras en el menú contextual del mapa como la búsqueda de direcciones contextual.\n\n y más... "</string>
+    <string name="shared_string_move_up">Mover hacia arriba</string>
+    <string name="shared_string_move_down">Mover hacia abajo</string>
+    <string name="finish_navigation">Finalizar navegación</string>
+    <string name="avoid_road">Evitar carretera</string>
+    <string name="full_report">Informe completo</string>
+    <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     </resources>
