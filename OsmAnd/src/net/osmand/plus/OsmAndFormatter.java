@@ -73,7 +73,7 @@ public class OsmAndFormatter {
 			roundDist = 0.5f;
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist ==500) {
 			roundDist = 0.25f;
-                }
+		}
 		return roundDist;
 	}
 	
