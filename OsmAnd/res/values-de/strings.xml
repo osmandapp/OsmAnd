@@ -2120,4 +2120,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 \n\n und mehr… "</string>
     <string name="full_report">Vollständiger Report</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap Zugang und Passwort</string>
+    <string name="osm_live_email_desc">Wir brauchen dies um dir Informationen über Beiträge zur Verfügung zu stellen</string>
+    <string name="osm_live_support_region">Unterstützter Region</string>
     </resources>
