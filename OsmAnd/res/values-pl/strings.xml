@@ -617,7 +617,7 @@
     <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
 
     <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
-    <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
+    <string name="confirm_interrupt_download">Anulować pobieranie pliku?</string>
     <string name="basemap_was_selected_to_download">Do pobrania została wybrana mapa bazowa wymagana do prawidłowego funkcjonowania programu.</string>
 
     <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę map online, aby wybrać inne źródła mapy</string>
@@ -1877,7 +1877,7 @@
     <string name="building_number">Numer wersji</string>
     <string name="av_locations_descr">Plik GPS z notatkami o lokalizacjach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
-    <string name="download_live_updates">Aktualizacje na żywo</string>
+    <string name="download_live_updates">Aktualizacje na bieżąco</string>
     <string name="commit_poi">Wyślij POI</string>
     <string name="tab_title_basic">Podstawowe</string>
     <string name="tab_title_advanced">Zaawansowane</string>
@@ -1922,7 +1922,7 @@
 
     <string name="shared_string_trip_recording">Nagrywanie trasy</string>
     <string name="simulate_your_location_descr">Symuluj używając wyliczonej trasy lub nagranej trasy GPX</string>
-    <string name="downloads_left_template">%1$s pozostało do pobrania</string>
+    <string name="downloads_left_template">pozostało %1$s pobrań</string>
 
     <string name="regions">Regiony</string>
 
@@ -1936,8 +1936,8 @@
     <string name="show_free_version_banner">Pokaż baner darmowej wersji</string>
     <string name="show_free_version_banner_description">Nawet jeśli posiadasz płatną wersję to nadal nadal możesz zobaczyć baner darmowej wersji</string>
     <string name="buy">KUP</string>
-    <string name="activate_seamarks_plugin">Proszę aktywuj plugin latarni morskich</string>
-    <string name="activate_srtm_plugin">Proszę aktywuj plugin SRTM</string>
+    <string name="activate_seamarks_plugin">Proszę włączyć wtyczkę latarni morskich</string>
+    <string name="activate_srtm_plugin">Proszę włączyć wtyczkę SRTM</string>
     <string name="later">Później</string>
     <string name="get_full_version">Pełna wersja</string>
     <string name="downloads">Pobierz</string>
@@ -1973,7 +1973,7 @@
     <string name="show_on_start_description">Przełącza wyświetlanie kokpitu po uruchomieniu</string>
     <string name="new_version">Nowa wersja</string>
     <string name="begin_with_osmand_menu_group">Pierwsze kroki z OsmAnd</string>
-    <string name="features_menu_group">Funkcje</string>
+    <string name="features_menu_group">Cechy</string>
     <string name="help_us_to_improve_menu_group">Pomóż udoskonalić OsmAnd</string>
     <string name="other_menu_group">Inne</string>
     <string name="plugins_menu_group">Wtyczki</string>
@@ -2009,7 +2009,7 @@
     <string name="rendering_attr_currentTrackColor_description">kolor śladu GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">grubość śladu GPX</string>
     <string name="poi_dialog_reopen">Otwórz ponownie</string>
-    <string name="use_dashboard_btn">Używaj panelu</string>
+    <string name="use_dashboard_btn">Używaj kokpitu</string>
     <string name="use_drawer_btn">Używaj menu</string>
     <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
@@ -2036,7 +2036,7 @@
     <string name="av_video_quality_low">Najniższa jakość</string>
     <string name="av_video_quality_high">Najwyższa jakość</string>
     <string name="av_video_quality">Jakość video</string>
-    <string name="av_video_quality_descr">Proszę wybrać jakość wyjściowego nagrania video</string>
+    <string name="av_video_quality_descr">Proszę wybrać jakość wyjściowego nagrania wideo</string>
     <string name="av_audio_format">Format dźwięku</string>
     <string name="av_audio_format_descr">Proszę wybrać format wyjściowego nagrania dźwięku</string>
     <string name="av_audio_bitrate">Przepływność dźwięku</string>
@@ -2051,11 +2051,11 @@
     <string name="only_download_over_wifi">Pobieranie tylko przez WiFi</string>
     <string name="live_update">Uaktualniaj na bieżąco</string>
     <string name="update_now">Uaktualnij</string>
-    <string name="update">Aktualizacja co</string>
+    <string name="update">Okres aktualizacji</string>
     <string name="route_distance">Odległość:</string>
     <string name="route_duration">Czas:</string>
     <string name="looking_up_address">Wyszukiwanie adresu</string>
-    <string name="missing_write_external_storage_permission">Aplikacja nie posiada uprawnień do użycia karty SD</string>
+    <string name="missing_write_external_storage_permission">Program nie posiada uprawnień do użycia karty SD</string>
     <string name="select_voice_provider">Wybór komunikatów głosowych</string>
     <string name="select_voice_provider_descr">Wskazuje lub pobiera komunikaty głosowe właściwe dla danego języka</string>
     <string name="impassable_road_desc">Wskazuje drogi, które należy unikać podczas nawigowania</string>
@@ -2065,8 +2065,8 @@
     <string name="no_microphone_permission">Program nie ma uprawnień dostępu do mikrofonu.</string>
     <string name="available_maps">Dostępne mapy</string>
     <string name="last_update">Ostatnia aktualizacja: %s</string>
-    <string name="update_time">Czas aktualizacj</string>
-    <string name="updates_size">Aktualizacje: %s</string>
+    <string name="update_time">Czas aktualizacji</string>
+    <string name="updates_size">Rozmiar aktualizacji</string>
     <string name="last_map_change">Ostatnia zmiana mapy: %s</string>
     <string name="rec_split_clip_length">Długość nagrania</string>
     <string name="shared_string_not_selected">Nie wybrany</string>
@@ -2077,18 +2077,18 @@
     <string name="starting_point">Punkt początkowy</string>
     <string name="rec_split_storage_size">Wielkość pamięci</string>
     <string name="live_updates">Aktualizowanie na bieżąco</string>
-    <string name="hourly">Cogodzinny</string>
-    <string name="daily">Codzienny</string>
-    <string name="weekly">Tygodniowo</string>
+    <string name="hourly">Co godzinę</string>
+    <string name="daily">Co dzień</string>
+    <string name="weekly">Co tydzień</string>
     <string name="morning">Rano</string>
     <string name="night">Noc</string>
-    <string name="select_month_and_country">Wybierz miesiąc i kraj</string>
+    <string name="select_month_and_country">Proszę wybrać miesiąc i kraj</string>
 <string name="shared_string_remove">Usuń</string>
     <string name="data_is_not_available">Data nie jest dostępna</string>
     <string name="shared_string_select">Wybierz</string>
     <string name="clear_updates_proposition_message">Można usunąć pobrane uaktualnienia i przywrócić pierwotną wersję mapy</string>
     <string name="number_of_edits">Liczba edycji</string>
-    <string name="reports_for">Raport dla</string>
+    <string name="reports_for">Region raportowania</string>
 <string name="number_of_contributors">Liczba współtwórców</string>
     <string name="shared_string_read_more">Przeczytaj więcej</string>
     <string name="rendering_attr_hideUnderground_name">Ukrycie podziemnych obiektów</string>
@@ -2106,17 +2106,17 @@
     <string name="map_marker_2nd">Drugi znacznik mapy</string>
     <string name="shared_string_toolbar">Pasek narzędzi</string>
     <string name="shared_string_widgets">Widżety</string>
-    <string name="add_points_to_map_markers_q">Czy chcesz dodać wszystkie punkty do znaczników mapy?</string>
+    <string name="add_points_to_map_markers_q">Dodać wszystkie punkty do znaczników mapy?</string>
     <string name="shared_string_add_to_map_markers">Dodaj znacznik mapy</string>
     <string name="select_map_markers">Wybierz znacznik mapy</string>
     <string name="shared_string_reverse_order">Odwróć kolejność</string>
     <string name="show_map_markers_description">Aktywuj funkcję Znaczników mapy</string>
-    <string name="clear_active_markers_q">Czy chcesz usunąć wszystkie aktywne znaczniki?</string>
-    <string name="clear_markers_history_q">Czy chcesz wyczyścić historię znaczników mapy?</string>
+    <string name="clear_active_markers_q">Usunąć wszystkie aktywne znaczniki?</string>
+    <string name="clear_markers_history_q">Wyczyścić historię znaczników mapy?</string>
     <string name="active_markers">Aktywne znaczniki</string>
     <string name="map_markers">Znaczniki mapy</string>
     <string name="map_marker">Znacznik mapy</string>
-    <string name="consider_turning_polygons_off">Zaleca się wyłączyć renderowanie wielokątów.</string>
+    <string name="consider_turning_polygons_off">Zaleca się wyłączenie renderowania wielokątów.</string>
     <string name="rendering_attr_showMtbRoutes_name">Pokaż trasy MTB</string>
     <string name="show_polygons">Pokaż wielokąty</string>
     <string name="find_parking">Znajdź parking</string>
@@ -2131,4 +2131,7 @@
     <string name="rec_split_clip_length_desc">Długość każdego nagranego pliku nie będzie dłuższa niż określony przedział czasu</string>
     <string name="rec_split_storage_size_desc">Ilość miejsca, jaka może być zajmowana przez wszystkie nagrane pliki</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Mapy i Nawigacja - wyznaczaj trasy i znajduj lokalizacje na mapie bez połączenia z Internetem. Pobierz mapę danego kraju przed wyjazdem w podróż, aby znaleźć miejsca i trasy w nieznanym obszarze. Podstawowe opcje: • Szczegółowe mapy 200 krajów • Nawigacja Offline z komunikatami głosowymi • Szukaj adresy w trybie offline • Informacje o lokalizacji na mapie: interesujących miejsc, kawiarnii, parkingów, sklepów • Dodawanie lokalizacji do ulubionych • nawigacja samochodowa, rowerowa i piesza Dodatkowe opcje: • Możliwość wyświetlania i nagrywania tras GPX • Opis Wikipedii punktów POI • Dodawanie zdjęć, nagrań i wideo notatek do mapy • Dzień i nocny tryb mapy dla wygodniejszej jazdy • Informacje o trasach transportu publicznego i przystankach • Ścieżki rowerowe i chodniki • Szlaków turystyczne do podróżowania po całym świecie • Mapy online z wielu źródeł • Informacja o jakości nawierzchni dróg i stanie oświetlenia ulicznego • Dodawanie, edycja i usuwanie POI (dla użytkowników OpenStreetMap.org) • Osmo - live monitoring innych urządzeń Pobierz niezawodny nawigator w twoim kraju - czy to Francja, Niemcy, Meksyk, Wielka Brytania, Hiszpania, Holandia, USA, Rosja, Brazylia lub inne państwo. Wtyczki: • Mapy konturowe i z cieniowaniem terenu https://goo.gl/7mojP8 Dane linii konturowych i wizualizacji terenu dodane do podstawowej mapy OsmAnd. • Mapy narciarskie https://goo.gl/pX6DxJ Informacje na temat tras zjazdowych, biegowych narciarskich, kolei linowych i wyciągów narciarskich. • Żeglarskie mapy https://goo.gl/0hEdxm Specjalne style mapy do oglądania wodnych drogowskazów nawigacyjnych dla głównych i przybrzeżnych nawigacji morskich. • Pozycja parkowania https://goo.gl/6JxQXF Pomaga oznaczyć lokalizację zaparkowanego samochodu i zobaczyć informację na temat ograniczeń czasu parkowania. Bądź na bieżąco! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Strona: http://osmand.net Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym zespołem wsparcia: support@osmand.net. "</string>
+    <string name="storage_directory_readonly_desc">Wybrany katalog przechowywania danych umożliwia tylko ich odczyt. Katalog przechowywania został tymczasowo umieszczony w pamięci wewnętrznej. Proszę wybrać prawidłowy katalog przechowywania danych.</string>
+    <string name="storage_directory_shared">Pamięć współdzielona</string>
+    <string name="osm_live_subscribe_btn">Zasubskrybuj</string>
     </resources>
