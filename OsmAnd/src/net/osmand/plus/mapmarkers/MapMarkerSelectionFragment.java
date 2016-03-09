@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -25,36 +24,46 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu.OnMarkerSelectListener;
 
 import java.util.List;
 
 public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "MapMarkerSelectionFragment";
+	private static final String TARGET_KEY = "target_key";
 
 	private LatLon loc;
 	private Float heading;
 	private boolean useCenter;
 	private boolean nightMode;
 	private int screenOrientation;
+	private boolean target;
 
-	private OnItemClickListener clickListener;
-	private OnDismissListener dismissListener;
-
-	public void setClickListener(OnItemClickListener clickListener) {
-		this.clickListener = clickListener;
-	}
-
-	public void setDismissListener(OnDismissListener dismissListener) {
-		this.dismissListener = dismissListener;
-	}
+	private OnMarkerSelectListener onClickListener;
+	private OnDismissListener onDismissListener;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+		Bundle bundle = null;
+		if (getArguments() != null) {
+			bundle = getArguments();
+		} else if (savedInstanceState != null) {
+			bundle = savedInstanceState;
+		}
+		if (bundle != null) {
+			target = bundle.getBoolean(TARGET_KEY);
+		}
+
 		MapActivity mapActivity = getMapActivity();
 		OsmandApplication app = getMyApplication();
 		if (mapActivity != null) {
+			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+			onClickListener = routeInfoMenu.getOnMarkerSelectListener();
+			onDismissListener = routeInfoMenu.getOnDismissDialogListener();
+
 			screenOrientation = DashLocationFragment.getScreenOrientation(mapActivity);
 
 			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
@@ -94,8 +103,8 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (clickListener != null) {
-					clickListener.onItemClick(parent, view, position, id);
+				if (onClickListener != null) {
+					onClickListener.onSelect(position, target);
 				}
 				dismiss();
 			}
@@ -106,9 +115,15 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onDismiss(DialogInterface dialog) {
 		super.onDismiss(dialog);
-		if (dismissListener != null) {
-			dismissListener.onDismiss(dialog);
+		if (onDismissListener != null) {
+			onDismissListener.onDismiss(dialog);
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(TARGET_KEY, target);
 	}
 
 	private class MapMarkersListAdapter extends ArrayAdapter<MapMarker> {
@@ -133,8 +148,12 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static MapMarkerSelectionFragment newInstance() {
-		return new MapMarkerSelectionFragment();
+	public static MapMarkerSelectionFragment newInstance(boolean target) {
+		MapMarkerSelectionFragment fragment = new MapMarkerSelectionFragment();
+		Bundle args = new Bundle();
+		args.putBoolean(TARGET_KEY, target);
+		fragment.setArguments(args);
+		return fragment;
 	}
 
 	public MapActivity getMapActivity() {

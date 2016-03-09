@@ -58,6 +58,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
 	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
+	public static final int ZOOM_IN_STANDARD = 15;
 
 	private View view;
 	private View mainView;
@@ -96,6 +97,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private boolean centered;
 	private boolean initLayout = true;
 	private boolean wasDrawerDisabled;
+	private boolean zoomIn;
 
 	private float skipHalfScreenStateLimit;
 
@@ -229,7 +231,21 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					moving = false;
 					int posY = getViewY();
 					if (!centered) {
+						if (!zoomIn) {
+							LatLon centerLatLon = map.getCurrentRotatedTileBox().getCenterLatLon();
+							if (centerLatLon.equals(menu.getLatLon())) {
+								zoomIn = true;
+							}
+						}
 						centerMarkerLocation();
+					} else if (!zoomIn) {
+						int fZoom = getZoom();
+						zoomIn = true;
+						if (fZoom < ZOOM_IN_STANDARD) {
+							AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+							thread.startZooming(ZOOM_IN_STANDARD,
+									map.getZoomFractionalPart(), true);
+						}
 					}
 					if (hasMoved) {
 						applyPosY(posY, false, false, 0, 0);
@@ -782,7 +798,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private int getZoom() {
-		int zoom = menu.getMapZoom();
+		int zoom;
+		if (zoomIn) {
+			zoom = ZOOM_IN_STANDARD;
+		} else {
+			zoom = menu.getMapZoom();
+		}
 		if (zoom == 0) {
 			zoom = map.getZoom();
 		}

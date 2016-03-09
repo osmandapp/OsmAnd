@@ -641,7 +641,21 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setMapPosition(mapView.getMapPosition());
 				mapContextMenu.setCenterMarker(true);
-				mapContextMenu.setMapZoom(settings.getMapZoomToShow());
+
+				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+				LatLon prevCenter = tb.getCenterLatLon();
+
+				double border = 0.8;
+				int tbw = (int) (tb.getPixWidth() * border);
+				int tbh = (int) (tb.getPixHeight() * border);
+				tb.setPixelDimensions(tbw, tbh);
+
+				tb.setLatLonCenter(latLonToShow.getLatitude(), latLonToShow.getLongitude());
+				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude())) {
+					tb.setZoom(tb.getZoom() - 1);
+				}
+				//mapContextMenu.setMapZoom(settings.getMapZoomToShow());
+				mapContextMenu.setMapZoom(tb.getZoom());
 				if (mapLayers.getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
