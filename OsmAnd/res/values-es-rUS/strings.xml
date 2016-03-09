@@ -130,7 +130,7 @@
     <string name="track_points">Puntos de la traza</string>
     <string name="shared_string_online_maps">Mapas en línea</string>
     <string name="record_plugin_name">Grabación de viaje</string>
-    <string name="osmo_plugin_name">OsMo (Rastreo OSM)</string>
+    <string name="osmo_plugin_name">Rastreo OpenStreetMap</string>
     <string name="plugin_touringview_name">Vista turística</string>
     <string name="plugin_nautical_name">Vista náutica</string>
     <string name="plugin_ski_name">Vista invernal</string>
@@ -294,12 +294,12 @@
     <string name="shared_string_none">Ninguno</string>
     <string name="shared_string_io_error">Ocurrió un error de entrada/salida</string>
     <string name="osmo_group">Grupo OsMo</string>
-    <string name="osmo_connect">Conectado a</string>
+    <string name="osmo_connect">Unirse</string>
     <string name="osmo_connect_to_group">Sincronizar con grupo</string>
     <string name="osmo_group_name">Nombre de grupo</string>
-    <string name="osmo_connect_to_group_id">Id de grupo</string>
+    <string name="osmo_connect_to_group_id">ID de grupo</string>
     <string name="osmo_connect_to_device_name">Nombre de usuario</string>
-    <string name="osmo_connect_to_device_tracker_id">Id de rastreo</string>
+    <string name="osmo_connect_to_device_tracker_id">ID de rastreo</string>
     <string name="osmo_group_policy">Política</string>
     <string name="osmo_group_description">Descripción</string>
     <string name="osmo_expire_group">Expira en</string>
@@ -321,7 +321,7 @@
     <string name="rendering_value_pink_name">rosa</string>
     
     <string name="osmo_user_name">Usuario</string>
-    <string name="osmo_connect_to_my_nickname">Mi apodo</string>
+    <string name="osmo_connect_to_my_nickname">Apodo</string>
     <string name="osmo_use_server_name">Nombre registrado</string>
     <string name="osmo_center_location">Centrar en la pantalla</string>
     <string name="osmo_regenerate_login_ids">Regenerar identificación del usuario</string>
@@ -338,8 +338,8 @@
     <string name="minutes_ago">minutos antes</string>
     <string name="seconds_ago">segundos antes</string>
     <string name="osmo_connected_devices">Dispositivos conectados</string>
-    <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
-    <string name="osmo_auto_send_locations">Iniciar sesión de rastreo automáticamente</string>
+    <string name="osmo_groups">Grupos OsMo</string>
+    <string name="osmo_auto_send_locations">Iniciar viaje automáticamente</string>
     <string name="osmo_auth_pending">Esperando autorización…</string>
     <string name="osmo_conn_successfull">"Conexión establecida: %1$s "</string>
     <string name="osmo_io_error">"Problema de conexión con OsMo: "</string>
@@ -451,9 +451,8 @@
 \n\nLos mapas de teselas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para tu uso sin conexión (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros. "</string>
     <string name="record_plugin_description">"Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente tocando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
 \n\nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden usar las trazas grabadas para seguir tus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
-    <string name="osmo_plugin_description">"Este complemento proporciona la funcionalidad para el rastreo avanzado en directo llamada OsMo, ver http://osmo.mobi.
-\n\nPuede rastrear todos los dispositivos de un grupo, participando en tiempo real y comunicándose entre sí. Tiene varias opciones para el rastreo por sesión o permanente.
-\n\nLos grupos anónimos se crean espontáneamente para un número de días específico y con funciones limitadas, por ejemplo, sin control remoto ni administrador del grupo. Los grupos con funcionalidad completa, por otro lado, se deben crear en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
+    <string name="osmo_plugin_description">"Este complemento proporciona parcialmente la funcionalidad para el rastreo en directo de OpenStreetMap, ver http://osmo.mobi
+\n\nPuede rastrear todos los dispositivos de un grupo, participando en tiempo real. También puedes ver los puntos y trazas subidas al grupo correspondiente.\n\nLos grupos no se quitarán después de meses, esto se sincroniza con las reglas de los grupos en el sitio web OsMo.mobi "</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
     <string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
@@ -562,9 +561,9 @@
     <string name="osmo_session_id_share">URL de sesión para seguir dispositivo (%1$s)</string>
     <string name="osmo_tracker_id_share">Para conectarte al dispositivo %2$s, pulsa en el enlace %3$s o indica el id de rastreo (%1$s)</string>
     <string name="osmo_server_operation_failed">Fallo de operación de Servidor OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Iniciar sesión de rastreo automáticamente y enviar ubicaciones luego de iniciar la aplicación</string>
-    <string name="osmo_tracker_id">Id de rastreo personal</string>
-    <string name="osmo_tracker_id_descr">Pulsa para ver o compartir id de rastreo. ¡Usando el id de rastreo, los dispositivos conectados podrán seguir todos los movimientos del dispositivo! Para desconectar, selecciona la opción Regenerar.</string>
+    <string name="osmo_auto_send_locations_descr">Iniciar viaje automáticamente y enviar ubicaciones luego de iniciar la aplicación</string>
+    <string name="osmo_tracker_id">ID de rastreo</string>
+    <string name="osmo_tracker_id_descr">Pulsa para ver el ID de rastreo</string>
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_locations_sent">"Ubicaciones enviadas %1$d (en memoria %2$d) "</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y el canal de rastreo personal</string>
@@ -2141,4 +2140,7 @@
     <string name="avoid_road">Evitar carretera</string>
     <string name="release_2_3">" • OSM Live. Soporta contribuidores y desarrolladores del mapa y obtiene actualizaciones del mapa cada hora.
 \n\n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa.\n\n • Mayor detalle en el mapa OSM con escudos viales de países específicos y muchas nuevas características.\n\n • Mejora visual en la preparación de la ruta.\n\n • Muchas mejoras en el menú contextual del mapa, como la búsqueda contextual de direcciones.\n\n y más… "</string>
+    <string name="storage_permission_restart_is_required">Ahora, la aplicación puede escribir en el almacenamiento externo. Se requiere reiniciar la aplicación manualmente.</string>
+    <string name="full_report">Informe completo</string>
+    <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     </resources>
