@@ -67,11 +67,12 @@ public class OsmAndFormatter {
 			}
 		}
 		//Miles exceptions
+		//FIXME (conversions missing)
 		if (mc == MetricsConstants.MILES_AND_FOOTS && point == 1 / metersInSecondUnit && roundDist == 2000) {
 			roundDist = 0.5f;
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 1000) {
 			roundDist = 0.5f;
-		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist ==500) {
+		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 500) {
 			roundDist = 0.25f;
 		}
 		return roundDist;
