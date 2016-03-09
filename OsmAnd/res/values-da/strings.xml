@@ -1398,16 +1398,16 @@
     <string name="minutes_ago">minutter siden</string>
     <string name="seconds_ago">sekunder siden</string>
     <string name="osmo_connect_to_device_name">Brugernavn</string>
-    <string name="osmo_connect_to_device_tracker_id">Sporings-id</string>
+    <string name="osmo_connect_to_device_tracker_id">Sporings-ID</string>
     <string name="osmo_connect_to_device">Sammenkæd med enheden</string>
 
 
     <string name="osmo_connected_devices">Tilsluttede enheder</string>
-    <string name="osmo_groups">OsMo grupper/enheder</string>
+    <string name="osmo_groups">OsMo grupper</string>
     <string name="osmo_auto_send_locations_descr">Start sporingssession automatisk og send placeringer efter start af programmet</string>
     <string name="osmo_auto_send_locations">Start sporingssession automatisk</string>
-    <string name="osmo_tracker_id">Personligt sporings-id</string>
-    <string name="osmo_tracker_id_descr">Klik for at se eller dele sporings-id. Med sporings-id vil tilsluttede enheder være i stand til at overvåge alle bevægelser af enheden! For at afbryde, vælg \'Forny personlig id\' mulighed.</string>
+    <string name="osmo_tracker_id">Sporings-ID</string>
+    <string name="osmo_tracker_id_descr">Klik for at se tracker-ID</string>
     <string name="osmo_session_token">Sessiontoken: %1$s</string>
     <string name="osmo_auth_pending">Venter på autorisation…</string>
     <string name="osmo_locations_sent">Placeringer sendt %1$d (i buffer %2$d) </string>
@@ -1430,10 +1430,10 @@
     <string name="osmo_expire_group">Udløber om</string>
     <string name="osmo_group_description">Beskrivelse</string>
     <string name="osmo_group_policy">Politik</string>
-    <string name="osmo_connect_to_group_id">Gruppe-id</string>
+    <string name="osmo_connect_to_group_id">Gruppe-ID</string>
     <string name="osmo_group_name">Gruppenavn</string>
     <string name="osmo_connect_to_group">Sammenkæd med gruppe</string>
-    <string name="osmo_connect">Opret forbindelse til</string>
+    <string name="osmo_connect">Deltag</string>
     <string name="osmo_create_group">Opret gruppe</string>
     <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
     <string name="osmo_activity">OpenStreetMap Overvågning</string>
