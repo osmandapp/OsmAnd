@@ -1221,19 +1221,25 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 		if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 				&& grantResults.length > 0 && permissions.length > 0
-				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])
-				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					restartApp();
-				}
-			}, 1);
-		} else {
-			AccessibleToast.makeText(this,
-					R.string.missing_write_external_storage_permission,
-					Toast.LENGTH_LONG).show();
-			DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						restartApp();
+					}
+				}, 1);
+			} else {
+				AccessibleToast.makeText(this,
+						R.string.missing_write_external_storage_permission,
+						Toast.LENGTH_LONG).show();
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+					}
+				}, 1);
+			}
 		}
 
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
