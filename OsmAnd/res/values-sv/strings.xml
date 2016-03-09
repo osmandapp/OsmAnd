@@ -2138,4 +2138,6 @@
     <string name="shared_string_move_up">Flytta upp</string>
     <string name="shared_string_move_down">Flytta ned</string>
     <string name="finish_navigation">Avsluta navigeringen</string>
+    <string name="full_report">Fullständig rapport</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap inloggning och lösenord</string>
     </resources>
