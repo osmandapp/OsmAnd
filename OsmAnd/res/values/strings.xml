@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
     	 Disclaimer:
@@ -9,6 +9,21 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_connect_to_device_tracker_id">Tracker ID</string>
+    <string name="osmo_connect_to_group_id">Group ID</string>
+    <string name="osmo_connect">Join</string>
+    <string name="osmo_groups">OsMo Groups</string>
+    <string name="osmo_auto_send_locations_descr">Automatically start trip and send locations after application startup</string>
+    <string name="osmo_auto_send_locations">Automatically start trip</string>
+    <string name="osmo_tracker_id">Tracker ID</string>
+    <string name="osmo_tracker_id_descr">Click to view tracker ID</string>
+    <string name="osmo_connect_to_my_nickname">Nick</string>
+    <string name="osmo_share_my_location">Transmit the location</string>
+    <string name="osmo_plugin_name">OpenStreetMap Monitoring</string>
+    <string name="osmo_plugin_description">This plugin partially provides the functionality of the OpenStreetMap Monitoring, see https://osmo.mobi
+    \n\nYou can track all devices of a participating group in real time. You can also see the point and tracks uploaded to the group to which you belong.
+    \n\nThe group has not been removed after months, bring it in line with the rules you create groups on the website OsMo.mobi
+    </string>
     <string name="storage_permission_restart_is_required">Now the application is allowed to write to external storage. A manual application restart is required.</string>
     <string name="release_2_3">
 	\u2022 OSM Live. Support map contributors and developers and get hourly map updates. \n\n
@@ -314,7 +329,6 @@
     <string name="rendering_value_disabled_name">Disabled</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>
-    <string name="osmo_share_my_location">Share my position</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">Hide house numbers</string>
     <string name="application_dir_change_warning3">Do you want OsmAnd to also copy its data files to the new destination?</string>
@@ -459,12 +473,6 @@
     <string name="record_plugin_name">Trip recording</string>
 	<string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map screen, or also to automatically log all of your navigation routes to a GPX file.
 		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
-	</string>
-    <string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
-	<string name="osmo_plugin_description">This plugin provides the functionality of the so-called OsMo advanced live monitoring, see http://osmo.mobi.
-		\n\nYou can track all devices of a participating group in real time, and communicate with each other. Comes with various options for session tracking or permanent tracking.
-		\n\nAnonymous groups can be created spontaneously for a specified number of days and are limited to defined features, i.e. there is no remote control and no group administrator.
-		Fully functional groups, on the other hand, can be created on the website and only registered users have access to them.
 	</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
@@ -763,7 +771,6 @@
     <string name="osmo_center_location">Center on the screen</string>
     <string name="osmo_set_moving_target">Set as moving target</string>
     <string name="osmo_use_server_name">Registered name</string>
-    <string name="osmo_connect_to_my_nickname">My nickname</string>
     <string name="osmo_user_name">User</string>
     <string name="osmo_edit_device">Change user properties</string>
     <string name="osmo_edit_color">Display color</string>
@@ -783,13 +790,10 @@
     <string name="osmo_expire_group">Expires in</string>
     <string name="osmo_group_description">Description</string>
     <string name="osmo_group_policy">Policy</string>
-    <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
     <string name="osmo_connect_to_device_name">User name</string>
-    <string name="osmo_connect_to_group_id">Group id</string>
     <string name="osmo_group_name">Group name</string>
     <string name="osmo_connect_to_device">Link with device</string>
     <string name="osmo_connect_to_group">Link with group</string>
-    <string name="osmo_connect">Connect to</string>
     <string name="osmo_create_group">Create group</string>
     <string name="osmo_server_operation_failed">OsMo Server operation failed</string>
     <string name="osmo_activity">OpenStreetMap Monitoring</string>
@@ -799,12 +803,6 @@
     <string name="minutes_ago">min ago</string>
     <string name="seconds_ago">sec ago</string>
     <string name="osmo_connected_devices">Connected devices</string>
-    <string name="osmo_groups">OsMo Groups/Devices</string>
-    <string name="osmo_auto_send_locations_descr">Automatically start tracker session and send locations after application startup</string>
-    <string name="osmo_auto_send_locations">Automatically start tracker session</string>
-    <string name="osmo_tracker_id">Personal tracker id</string>
-    <string name="osmo_tracker_id_descr">Click to view or share tracker id.
-        Using tracker id connected devices will be able to monitor all movements of this device! To disconnect select Regenerate option.</string>
     <string name="osmo_session_token">Session token: %1$s</string>
     <string name="osmo_auth_pending">Waiting for authorization…</string>
     <string name="osmo_locations_sent">Locations sent %1$d (in buffer %2$d) </string>
