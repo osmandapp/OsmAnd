@@ -68,13 +68,13 @@ public class OsmAndFormatter {
 		}
 		//Miles exceptions
 		//FIXME (conversions missing)
-		if (mc == MetricsConstants.MILES_AND_FOOTS && point == 1 / metersInSecondUnit && roundDist == 2000) {
-			roundDist = 0.5f;
-		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 1000) {
-			roundDist = 0.5f;
-		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 500) {
-			roundDist = 0.25f;
-		}
+//		if (mc == MetricsConstants.MILES_AND_FOOTS && point == 1 / metersInSecondUnit && roundDist == 2000) {
+//			roundDist = 0.5f;
+//		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 1000) {
+//			roundDist = 0.5f;
+//		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 500) {
+//			roundDist = 0.25f;
+//		}
 		return roundDist;
 	}
 	
@@ -113,9 +113,9 @@ public class OsmAndFormatter {
 		} else if (meters > 0.999f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_FOOTS && meters > 0.249f * mainUnitInMeters) {
-                        return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-                        return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.09f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else {

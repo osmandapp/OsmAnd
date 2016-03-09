@@ -76,7 +76,7 @@ public class BinaryInspector {
 //				"-vstats",
 //				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
 //				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf"
-				"/Users/victorshcherb/osmand/maps/Map.obf"
+				"/Users/victorshcherb/osmand/maps/C_11_03_06.obf"
 					});
 		} else {
 			in.inspector(args);
