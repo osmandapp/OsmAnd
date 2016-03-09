@@ -68,7 +68,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 
 			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
 			if (trackingUtils != null) {
-				float head = trackingUtils.getHeading();
+				Float head = trackingUtils.getHeading();
 				float mapRotation = mapActivity.getMapRotate();
 				LatLon mw = mapActivity.getMapLocation();
 				Location l = trackingUtils.getMyLocation();
