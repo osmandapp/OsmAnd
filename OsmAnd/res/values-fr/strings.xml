@@ -2170,4 +2170,8 @@
     <string name="storage_permission_restart_is_required">Désormais l\'application est autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
+    <string name="release_2_3">" • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires.\n\n • Map markers. Une nouvelle façon de marquer des emplacements sur les cartes.\n\n • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités.\n\n • Amélioration de l\'expérience utilisateur lors de la préparation d\'un trajet.\n\n • Plein d\'autres améliorations sur les cartes ou encore la recherche d\'adresses contextuelles.\n\net bien plus encore... "</string>
+    <string name="storage_directory_readonly_desc">L\'emplacement de stockage sélectionné est en lecture seule. L\'emplacement de stockage a donc été modifié pour utiliser la mémoire interne. Merci de sélectionner un dossier valide.</string>
+    <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
+    <string name="osm_live_subscription">Abonnement à OSM Live</string>
     </resources>
