@@ -36,6 +36,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	private File externalStorage;
 	public static boolean isInterestedInFirstTime = true;
 	boolean storageReadOnly;
+	boolean hasExternalStoragePermission;
 
 	@Override
 	public void onStart() {
@@ -52,9 +53,14 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+
+		hasExternalStoragePermission = DownloadActivity.hasPermissionToWriteExternalStorage(getActivity());
+
 		internalStorage = getInternalStorageDirectory(getActivity());
 		sharedStorage = getSharedStorageDirectory(getActivity());
-		externalStorage = getMyApplication().getSettings().getSecondaryStorage();
+		if (hasExternalStoragePermission) {
+			externalStorage = getMyApplication().getSettings().getSecondaryStorage();
+		}
 
 		Bundle args = null;
 		if (savedInstanceState != null) {
@@ -92,11 +98,16 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		sharedMemoryDescription.setText(getFreeSpace(sharedStorage));
 
 		View memoryStickRow = view.findViewById(R.id.memoryStickRow);
-		memoryStickRow.setOnClickListener(externalMemoryOnClickListener);
-		ImageView memoryStickImageView = (ImageView) view.findViewById(R.id.memoryStickImageView);
-		memoryStickImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
-		TextView memoryStickDescription = (TextView) view.findViewById(R.id.memoryStickDescription);
-		memoryStickDescription.setText(getFreeSpace(externalStorage));
+		if (hasExternalStoragePermission) {
+			memoryStickRow.setOnClickListener(externalMemoryOnClickListener);
+			ImageView memoryStickImageView = (ImageView) view.findViewById(R.id.memoryStickImageView);
+			memoryStickImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+			TextView memoryStickDescription = (TextView) view.findViewById(R.id.memoryStickDescription);
+			memoryStickDescription.setText(getFreeSpace(externalStorage));
+		} else {
+			view.findViewById(R.id.divExtStorage).setVisibility(View.GONE);
+			memoryStickRow.setVisibility(View.GONE);
+		}
 
 		final ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
 		closeImageButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
