@@ -67,11 +67,11 @@ public class OsmAndFormatter {
 			}
 		}
 		//Miles exceptions: 2000ft->0.5mi, 1000yd->0.5mi, 500yd->0.25mi
-		if (mc == MetricsConstants.MILES_AND_FOOTS && roundDist == 2000 / FOOTS_IN_ONE_METER) {
+		if (mc == MetricsConstants.MILES_AND_FOOTS && roundDist == 2000 / (double) FOOTS_IN_ONE_METER) {
 			roundDist = 0.5f * METERS_IN_ONE_MILE;
-		} else if (mc == MetricsConstants.MILES_AND_YARDS && roundDist == 1000 / YARDS_IN_ONE_METER) {
+		} else if (mc == MetricsConstants.MILES_AND_YARDS && roundDist == 1000 / (double) YARDS_IN_ONE_METER) {
 			roundDist = 0.5f * METERS_IN_ONE_MILE;
-		} else if (mc == MetricsConstants.MILES_AND_YARDS && roundDist == 500 / YARDS_IN_ONE_METER) {
+		} else if (mc == MetricsConstants.MILES_AND_YARDS && roundDist == 500 / (double) YARDS_IN_ONE_METER) {
 			roundDist = 0.25f * METERS_IN_ONE_MILE;
 		}
 		return roundDist;
