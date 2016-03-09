@@ -1030,7 +1030,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Punto de estacionamiento</string>
-    <string name="context_menu_item_add_parking_point">Fijar ubicación de estacionamiento</string>
+    <string name="context_menu_item_add_parking_point">Marcar como estacionamiento</string>
     <string name="context_menu_item_delete_parking_point">Quitar marcador de estacionamiento</string>
     <string name="gpxup_public">Público</string>
     <string name="gpxup_identifiable">Identificable</string>
