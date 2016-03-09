@@ -66,15 +66,15 @@ public class OsmAndFormatter {
 				pointer = 1;
 			}
 		}
-		//Miles exceptions
-		//FIXME (conversions missing)
-//		if (mc == MetricsConstants.MILES_AND_FOOTS && point == 1 / metersInSecondUnit && roundDist == 2000) {
-//			roundDist = 0.5f;
-//		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 1000) {
-//			roundDist = 0.5f;
-//		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 500) {
-//			roundDist = 0.25f;
-//		}
+		//Miles exceptions: 2000ft->0.5mi, 1000yd->0.5mi, 500yd->0.25mi
+
+		if (mc == MetricsConstants.MILES_AND_FOOTS && point == 1 / metersInSecondUnit && roundDist == 2000 / FOOTS_IN_ONE_METER) {
+			roundDist = 0.5f * METERS_IN_ONE_MILE;
+		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 1000 / YARDS_IN_ONE_METER) {
+			roundDist = 0.5f * METERS_IN_ONE_MILE;
+		} else if (mc == MetricsConstants.MILES_AND_YARDS && point == 1 / metersInSecondUnit && roundDist == 500 / YARDS_IN_ONE_METER) {
+			roundDist = 0.25f * METERS_IN_ONE_MILE;
+		}
 		return roundDist;
 	}
 	
