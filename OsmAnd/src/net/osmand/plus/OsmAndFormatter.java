@@ -46,8 +46,8 @@ public class OsmAndFormatter {
 			mainUnitInMeter = YARDS_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
 		}
-		// 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000 ...
 
+		// 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000 ...
 		int generator = 1;
 		byte pointer = 1;
 		double point = mainUnitInMeter;
@@ -66,9 +66,11 @@ public class OsmAndFormatter {
 				pointer = 1;
 			}
 		}
-		//Miles exceptions: 2000ft->0.5mi, 1000yd->0.5mi, 500yd->0.25mi
+		//Miles exceptions: 2000ft->0.5mi, 1000ft->0.25mi, 1000yd->0.5mi, 500yd->0.25mi
 		if (mc == MetricsConstants.MILES_AND_FOOTS && roundDist == 2000 / (double) FOOTS_IN_ONE_METER) {
 			roundDist = 0.5f * METERS_IN_ONE_MILE;
+		} else if (mc == MetricsConstants.MILES_AND_FOOTS && roundDist == 1000 / (double) FOOTS_IN_ONE_METER) {
+			roundDist = 0.25f * METERS_IN_ONE_MILE;
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && roundDist == 1000 / (double) YARDS_IN_ONE_METER) {
 			roundDist = 0.5f * METERS_IN_ONE_MILE;
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && roundDist == 500 / (double) YARDS_IN_ONE_METER) {
