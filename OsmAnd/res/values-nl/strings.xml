@@ -1337,7 +1337,7 @@
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Deze plugin is voor de \"OsMo geavanceerde live monitoring\", zie http://osmo.mobi.\n\n Je kunt alle toestellen van een groep deelnemers volgen en met elkaar communiceren. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Deze plug-in is voor \"OsMo Monitoring\", zie http://osmo.mobi.\n\nJe kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -1359,10 +1359,10 @@
     
     
     <string name="osmo_connected_devices">Verbonden toestellen</string>
-    <string name="osmo_groups">OsMo groepen/toestellen</string>
+    <string name="osmo_groups">OsMo Groepen</string>
     <string name="osmo_auto_send_locations_descr">Start tracker en stuur locaties automatisch na het starten van de applicatie</string>
     <string name="osmo_auto_send_locations">Tracker-sessies automatisch starten</string>
-    <string name="osmo_tracker_id">Persoonlijk tracker-ID</string>
+    <string name="osmo_tracker_id">Tracker-ID</string>
     <string name="osmo_tracker_id_descr">Tik om tracker-ID te bekijken of te delen.
       LET OP: met het tracker-ID kunnen verbonden toestellen alle bewegingen van dit toestel volgen! Maak een nieuw ID om ze los te koppelen.</string>
     <string name="osmo_session_token">Sessie-token: %1$s</string>
@@ -1389,10 +1389,10 @@
     <string name="osmo_expire_group">Vervalt over</string>
     <string name="osmo_group_description">Beschrijving</string>
     <string name="osmo_group_policy">Groepsbeleid</string>
-    <string name="osmo_connect_to_group_id">Groep-ID</string>
+    <string name="osmo_connect_to_group_id">Groeps-ID</string>
     <string name="osmo_group_name">Groepnaam</string>
     <string name="osmo_connect_to_group">Verbind met groep</string>
-    <string name="osmo_connect">Verbind met</string>
+    <string name="osmo_connect">Verbinden</string>
     <string name="osmo_create_group">Maak een nieuwe groep</string>
     <string name="osmo_server_operation_failed">OsMo server probleem</string>
     <string name="osmo_activity">OpenStreetMap Monitoring (OsMo)</string>
@@ -1421,7 +1421,7 @@
     <string name="osmo_center_location">Centreer op het scherm</string>
     <string name="osmo_set_moving_target">Stel in als bewegend doel</string>
     <string name="osmo_use_server_name">Geregistreerde naam</string>
-    <string name="osmo_connect_to_my_nickname">Mijn bijnaam</string>
+    <string name="osmo_connect_to_my_nickname">Mijn Bijnaam</string>
     <string name="osmo_user_name">Gebruikersnaam</string>
 	
 	
@@ -2239,4 +2239,7 @@
     <string name="shared_string_move_down">Omlaag</string>
     <string name="finish_navigation">Navigatie stoppen</string>
     <string name="release_2_3">" • OSM Live: Ondersteun bijdragers aan de kaart en ontwikkelaars en ontvang dagelijks kaart-updates.\n\n • Markeervlaggetjes: Een nieuwe manier op snel plekken op de kaart te kiezen.\n\n • Nog meer details op de kaart met landspecifieke routeschildjes en nog veel meer nieuwe mogelijkheden.\n\n • De route-voorbereiding is vernieuwd.\n\n • Vele verbeteringen in het kaart-context-menu, zoals adres-zoek-functie.\n\n en nog meer… "</string>
+    <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
+    <string name="full_report">Volledig Verslag</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap loginnaam and wachtwoord</string>
     </resources>
