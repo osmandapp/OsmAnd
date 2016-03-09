@@ -307,7 +307,7 @@ public class RoutingContext {
 		return original;
 	}
 	
-	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory, List<RouteDataObject> toLoad) {
+	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory, List<RouteDataObject> toLoad, TLongHashSet excludeNotAllowed) {
 		boolean wasUnloaded = ts.isUnloaded();
 		int ucount = ts.getUnloadCont();
 		if (nativeLib == null) {
@@ -321,8 +321,14 @@ public class RoutingContext {
 					toLoad.addAll(res);
 				} else {
 					for(RouteDataObject ro : res){
-						if(ro != null && config.router.acceptLine(ro)) {
-							ts.add(ro);
+						if(ro != null) {
+							if(config.router.acceptLine(ro)) {
+								if(excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
+									ts.add(ro);
+								}
+							} else if(excludeNotAllowed != null){
+								excludeNotAllowed.add(ro.getId());
+							}
 						}
 					}
 				}
@@ -500,9 +506,10 @@ public class RoutingContext {
 			}
 			List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 			if (subregions != null) {
+				TLongHashSet duplicates = new TLongHashSet();
 				for (RoutingSubregionTile ts : subregions) {
 					if (!ts.isLoaded()) {
-						loadSubregionTile(ts, loadOptions == OPTION_IN_MEMORY_LOAD, null);
+						loadSubregionTile(ts, loadOptions == OPTION_IN_MEMORY_LOAD, null, duplicates);
 					}
 				}
 			}
