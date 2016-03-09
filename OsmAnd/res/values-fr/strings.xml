@@ -2167,4 +2167,7 @@
     <string name="shared_string_move_up">Monter</string>
     <string name="shared_string_move_down">Descendre</string>
     <string name="finish_navigation">Terminer la navigation</string>
+    <string name="storage_permission_restart_is_required">Désormais l\'application est autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
+    <string name="full_report">Rapport complet</string>
+    <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
     </resources>
