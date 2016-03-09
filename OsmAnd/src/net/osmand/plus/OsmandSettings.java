@@ -1573,7 +1573,7 @@ public class OsmandSettings {
 	private MapMarkersStorage mapMarkersStorage = new MapMarkersStorage();
 	private MapMarkersHistoryStorage mapMarkersHistoryStorage = new MapMarkersHistoryStorage();
 
-	private void backupPointToStart() {
+	public void backupPointToStart() {
 		settingsAPI.edit(globalPreferences)
 				.putFloat(START_POINT_LAT_BACKUP, settingsAPI.getFloat(globalPreferences, START_POINT_LAT, 0))
 				.putFloat(START_POINT_LON_BACKUP, settingsAPI.getFloat(globalPreferences, START_POINT_LON, 0))
