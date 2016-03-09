@@ -333,9 +333,9 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			// 100 m
 			addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, groups); // 500 feet, 200 yards,
 			// 200 m
-			addOptionSplit(550, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1000 feet, 500 yards,
+			addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1000 feet, 500 yards,
 			// 500 m
-			addOptionSplit(1400, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2000 feet, 1000 yards, 1 km
+			addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2000 feet, 1000 yards, 1 km
 			addOptionSplit(3000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1 mi, 2 km
 			addOptionSplit(6000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2 mi, 5 km
 			addOptionSplit(15000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 5 mi, 10 km
