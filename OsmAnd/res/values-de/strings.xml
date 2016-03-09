@@ -2116,4 +2116,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="avoid_road">Straßen vermeiden</string>
     <string name="storage_directory_readonly_desc">Der momentan gewählte Speicherort ist schreibgeschützt. Es wurde vorübergehend zum internen Speicher gewechselt. Bitte einen gültigen Speicherort wählen.</string>
     <string name="storage_directory_shared">Gemeinsamer Speicher</string>
+    <string name="release_2_3">" • OSM Live. Unterstütze Karten Mitwirkende und Entwickler und bekomme stündliche Karten Aktualisierungen.\n\n • Karten Markierungen. Ein neuer Weg um schnell ausgewählte Plätze auf der Karte auszuwählen.\n\n • Detailliertere OSM Karten mit länderspezifischen Straßenschildern und einer Menge weitere Funktionalitäten.\n\n • Verbessertes Aussehen und Gefühl der Routen Vorbereitung.\n\n • Viele Verbesserungen der Karten Kontextmenüs, wie beispielsweise kontextabhängige Adresssuche.
+\n\n und mehr… "</string>
+    <string name="full_report">Vollständiger Report</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap Zugang und Passwort</string>
     </resources>
