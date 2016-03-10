@@ -1223,11 +1223,10 @@
     <string name="osmo_settings_debug">Отладочная информация</string>
     <string name="osmo_connect_to_device_tracker_id">ID трекера</string>
     <string name="osmo_auto_send_locations_descr">Автоматический старт путешествия и отправка местоположения после запуска приложения</string>
-    <string name="osmo_auto_send_locations">Автоматически запускать мониторинг</string>
-    <string name="osmo_tracker_id">Персональный ID</string>
+    <string name="osmo_auto_send_locations">Автоматический старт путешествия</string>
+    <string name="osmo_tracker_id">ID трекера</string>
     <string name="osmo_session_token">Токен сессии: %1$s</string>
-    <string name="osmo_tracker_id_descr">Выберите чтобы посмотреть или поделиться ID трекера.
-	Используя ID трекера присоединённые устройства будут доступны для мониторинга всех передвижений этого устройства! Для отключения выберите опцию восстановления.</string>
+    <string name="osmo_tracker_id_descr">Нажмите для посмотра ID трекера</string>
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
     <string name="osmo_connect_to_group_id">ID группы</string>
     <string name="osmo_group_name">Название группы</string>
@@ -1966,4 +1965,5 @@
     <string name="live_update">Live обновление</string>
     <string name="updates_size">Размер обновления</string>
     <string name="reports_for">Отчет для</string>
-</resources>
+<string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
+    </resources>
