@@ -1250,9 +1250,9 @@
     <string name="osmo_server_operation_failed">OsMo: не удалось правильно обработать команду</string>
     <string name="import_file_favourites">Сохранить точки как файл GPX или импортировать их в избранное?</string>
     
-    <string name="rendering_value_pink_name">розовый</string>
+    <string name="rendering_value_pink_name">Розовый</string>
     
-    <string name="rendering_value_brown_name">коричневый</string>
+    <string name="rendering_value_brown_name">Коричневый</string>
     
     
     
@@ -1966,4 +1966,5 @@
     <string name="updates_size">Размер обновления</string>
     <string name="reports_for">Отчет для</string>
 <string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
+    <string name="release_2_3">" • OSM Live. Поддержка авторов и разработчиков карт и получение почасовых обновлений карты.\n\n• Маркеры. Новый способ для быстрого выбора мест на карте.\n\n• Более подробные OSM карты со специфическими дорожными знаками стран и с большим количеством новых функций.\n\n• Улучшен внешний вид и подготовка маршрута.\n\n• Множество улучшений в контекстном меню карты таких как поиск адреса.\n\nИ многое другое... "</string>
     </resources>
