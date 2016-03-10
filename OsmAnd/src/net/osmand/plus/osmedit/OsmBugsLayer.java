@@ -133,6 +133,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				float iconSize = resolvedNote.getWidth() * 3 / 2.5f;
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				List<OpenStreetNote> fullObjects = new ArrayList<>();
+				List<LatLon> fullObjectsLatLon = new ArrayList<>();
+				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				for (OpenStreetNote o : objects) {
 					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
@@ -145,8 +147,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 							b = resolvedNoteSmall;
 						}
 						canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 					} else {
 						fullObjects.add(o);
+						fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 					}
 				}
 				for (OpenStreetNote o : fullObjects) {
@@ -160,6 +164,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 				}
+				this.fullObjectsLatLon = fullObjectsLatLon;
+				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
 	}
@@ -517,6 +523,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public boolean disableLongPressOnMap() {
 		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof OpenStreetNote;
 	}
 
 	@Override

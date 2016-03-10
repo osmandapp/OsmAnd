@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
@@ -492,6 +491,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
 		return false;
 	}
 

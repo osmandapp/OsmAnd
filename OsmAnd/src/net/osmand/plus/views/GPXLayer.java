@@ -13,7 +13,6 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.support.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -286,6 +285,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<WptPt> pts = getListStarPoints(g);
 				List<WptPt> fullObjects = new ArrayList<>();
+				List<LatLon> fullObjectsLatLon = new ArrayList<>();
+				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
 				for (WptPt o : pts) {
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
@@ -299,8 +300,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							int col = visit ? visitedColor : o.getColor(fcolor);
 							paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
 							canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+							smallObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						} else {
 							fullObjects.add(o);
+							fullObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						}
 					}
 				}
@@ -312,6 +315,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
 					fid.drawBitmapInCenter(canvas, x, y);
 				}
+				this.fullObjectsLatLon = fullObjectsLatLon;
+				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
 	}
@@ -468,6 +473,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public boolean disableLongPressOnMap() {
 		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof WptPt;
 	}
 
 	@Override

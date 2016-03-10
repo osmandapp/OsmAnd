@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -22,6 +23,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
@@ -41,17 +43,23 @@ public class MapDataMenuController extends MenuController {
 	private List<IndexItem> otherIndexItems;
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
+	boolean downloaded;
 
 	private DownloadIndexesThread downloadThread;
+	private ResourceManager rm;
 
 	public MapDataMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final DownloadMapObject mapObject) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.mapObject = mapObject;
+		rm = app.getResourceManager();
 		indexItem = mapObject.getIndexItem();
 		downloadThread = app.getDownloadThread();
 		if (indexItem != null) {
+			downloaded = indexItem.isDownloaded();
 			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(mapObject.getWorldRegion()));
 			otherIndexItems.remove(indexItem);
+		} else {
+			downloaded = checkIfObjectDownloaded(rm.getOsmandRegions().getDownloadName(mapObject.getDataObject()));
 		}
 
 		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
@@ -93,6 +101,14 @@ public class MapDataMenuController extends MenuController {
 			public void buttonPressed() {
 				if (indexItem != null) {
 					deleteItem();
+				} else if (downloaded) {
+/*
+					File f = new File(info.getPathToData());
+					boolean successfull = Algorithms.removeAllFiles(f);
+					if (successfull) {
+						getMapActivity().getMyApplication().getResourceManager().closeFile(info.getFileName());
+					}
+*/
 				}
 			}
 		};
@@ -216,6 +232,11 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean supportZoomIn() {
+		return false;
+	}
+
+	@Override
 	public boolean fabVisible() {
 		return false;
 	}
@@ -254,7 +275,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		}
 
-		rightTitleButtonController.visible = indexItem != null && indexItem.isDownloaded();
+		rightTitleButtonController.visible = downloaded;
 		topRightTitleButtonController.visible = otherIndexItems.size() > 0;
 
 		boolean downloadIndexes = getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()
@@ -331,5 +352,13 @@ public class MapDataMenuController extends MenuController {
 			confirm.setMessage(getMapActivity().getString(R.string.delete_confirmation_msg, fn));
 			confirm.show();
 		}
+	}
+
+	private boolean checkIfObjectDownloaded(String downloadName) {
+		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
 }

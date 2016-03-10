@@ -15,6 +15,7 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,6 +62,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, List<? extends OsmPoint> objects) {
+		List<LatLon> fullObjectsLatLon = new ArrayList<>();
 		for (OsmPoint o : objects) {
 			float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 			float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
@@ -73,7 +75,9 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				b = poi;
 			}
 			canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+			fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 		}
+		this.fullObjectsLatLon = fullObjectsLatLon;
 	}
 
 	@Override
@@ -131,6 +135,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	@Override
 	public boolean disableLongPressOnMap() {
 		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof OsmPoint;
 	}
 
 	@Override

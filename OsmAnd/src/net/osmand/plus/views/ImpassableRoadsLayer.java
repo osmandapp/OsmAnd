@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
@@ -108,6 +107,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
 		return false;
 	}
 

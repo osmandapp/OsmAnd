@@ -199,6 +199,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 
 	@Override
+	public boolean isObjectClickable(Object o) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
 		getFromPoint(tileBox, point, res);
 	}
