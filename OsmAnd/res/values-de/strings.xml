@@ -1898,8 +1898,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="favorite_category_select">Kategorie auswählen</string>
     <string name="default_speed_system_descr">System zur Geschwindigkeitsmessung eingeben</string>
     <string name="default_speed_system">Geschwindigkeitsmessung</string>
-    <string name="nm">nm</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm">sm</string>
+    <string name="nm_h">sm/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
