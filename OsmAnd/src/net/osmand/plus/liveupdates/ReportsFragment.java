@@ -40,7 +40,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class ReportsFragment extends BaseOsmAndFragment implements CountrySelectionFragment.OnFragmentInteractionListener {
-	public static final String TITLE = "Report";
+	public static final int TITLE = R.string.report;
 	public static final String DOMAIN = "http://download.osmand.net/";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = DOMAIN +
 			"reports/query_report.php?report=total_changes_by_month&month=%s&region=%s";

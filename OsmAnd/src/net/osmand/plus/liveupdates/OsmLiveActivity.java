@@ -1,6 +1,7 @@
 package net.osmand.plus.liveupdates;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -40,7 +41,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 		}
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-		pagerAdapter = new LiveUpdatesFragmentPagerAdapter(getSupportFragmentManager());
+		pagerAdapter = new LiveUpdatesFragmentPagerAdapter(getSupportFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
 
 		final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -96,11 +97,16 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
 		private final Fragment[] fragments = new Fragment[]{new LiveUpdatesFragment(),
 				new ReportsFragment()};
-		private final String[] titles = new String[]{LiveUpdatesFragment.TITLE,
+		private static final int[] titleIds = new int[]{LiveUpdatesFragment.TITLE,
 				ReportsFragment.TITLE};
+		private final String[] titles;
 
-		public LiveUpdatesFragmentPagerAdapter(FragmentManager fm) {
+		public LiveUpdatesFragmentPagerAdapter(FragmentManager fm, Resources res) {
 			super(fm);
+			titles = new String[titleIds.length];
+			for (int i = 0; i < titleIds.length; i++) {
+				titles[i] = res.getString(titleIds[i]);
+			}
 		}
 
 		@Override
