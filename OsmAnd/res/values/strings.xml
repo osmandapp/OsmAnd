@@ -229,7 +229,7 @@
     <string name="favorite_category_select">Select category</string>
     <string name="default_speed_system_descr">Define speed measurement system</string>
     <string name="default_speed_system">Speed measurement</string>
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Nautical miles</string>
     <string name="si_kmh">Kilometers per hour</string>
     <string name="si_mph">Miles per hour</string>
