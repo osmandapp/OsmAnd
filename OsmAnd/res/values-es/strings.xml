@@ -1858,7 +1858,7 @@
     <string name="downloads_left_template">Quedan %1$s descargas</string>
     <string name="default_speed_system_descr">Define el sistema de medición de velocidad</string>
     <string name="default_speed_system">Medición de la velocidad</string>
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Millas náuticas</string>
     <string name="si_kmh">Kilómetros por hora</string>
     <string name="si_mph">Millas por hora</string>
@@ -1866,7 +1866,7 @@
     <string name="si_min_km">Minutos por kilómetro</string>
     <string name="si_min_m">Minutos por milla</string>
     <string name="si_nm_h">Millas náuticas por hora (nudos)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">nmi/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2126,4 +2126,5 @@
     <string name="avoid_road">Evitar carretera</string>
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
+    <string name="report">Informe</string>
     </resources>
