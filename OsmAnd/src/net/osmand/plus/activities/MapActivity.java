@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -165,6 +166,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
 
+	private static boolean permissionDone;
 	private boolean permissionAsked;
 	private boolean permissionGranted;
 
@@ -591,25 +593,28 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 
-		if (!permissionAsked) {
-			if (app.isExternalStorageDirectoryReadOnly()
-					&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-				if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
-					DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
-				} else {
-					ActivityCompat.requestPermissions(this,
-							new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-							DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+		if (!permissionDone) {
+			if (!permissionAsked) {
+				if (app.isExternalStorageDirectoryReadOnly()
+						&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
+						DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+					} else {
+						ActivityCompat.requestPermissions(this,
+								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+					}
 				}
+			} else {
+				if (permissionGranted) {
+					restartApp();
+				} else if (getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+					DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+				}
+				permissionAsked = false;
+				permissionGranted = false;
+				permissionDone = true;
 			}
-		} else {
-			if (permissionGranted) {
-				restartApp();
-			} else if (getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-				DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
-			}
-			permissionAsked = false;
-			permissionGranted = false;
 		}
 	}
 
@@ -620,10 +625,56 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				android.os.Process.killProcess(android.os.Process.myPid());
+				doRestart(MapActivity.this);
+				//android.os.Process.killProcess(android.os.Process.myPid());
 			}
 		});
 		bld.show();
+	}
+
+	public static void doRestart(Context c) {
+		boolean res = false;
+		try {
+			//check if the context is given
+			if (c != null) {
+				//fetch the packagemanager so we can get the default launch activity
+				// (you can replace this intent with any other activity if you want
+				PackageManager pm = c.getPackageManager();
+				//check if we got the PackageManager
+				if (pm != null) {
+					//create the intent with the default start activity for your application
+					Intent mStartActivity = pm.getLaunchIntentForPackage(
+							c.getPackageName()
+					);
+					if (mStartActivity != null) {
+						mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						//create a pending intent so the application is restarted after System.exit(0) was called.
+						// We use an AlarmManager to call this intent in 100ms
+						int mPendingIntentId = 84523443;
+						PendingIntent mPendingIntent = PendingIntent
+								.getActivity(c, mPendingIntentId, mStartActivity,
+										PendingIntent.FLAG_CANCEL_CURRENT);
+						AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+						//kill the application
+						res = true;
+						android.os.Process.killProcess(android.os.Process.myPid());
+						//System.exit(0);
+					} else {
+						LOG.error("Was not able to restart application, mStartActivity null");
+					}
+				} else {
+					LOG.error("Was not able to restart application, PM null");
+				}
+			} else {
+				LOG.error("Was not able to restart application, Context null");
+			}
+		} catch (Exception ex) {
+			LOG.error("Was not able to restart application");
+		}
+		if (!res) {
+			android.os.Process.killProcess(android.os.Process.myPid());
+		}
 	}
 
 	private void parseNavigationIntent(final Uri data) {
