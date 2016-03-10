@@ -237,7 +237,7 @@
     <string name="si_min_km">Minutes per kilometer</string>
     <string name="si_min_m">Minutes per mile</string>
     <string name="si_nm_h">Nautical miles per hour (knot)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">nmi/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
