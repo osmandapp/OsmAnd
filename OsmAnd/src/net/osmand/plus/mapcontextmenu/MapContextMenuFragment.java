@@ -231,14 +231,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					moving = false;
 					int posY = getViewY();
 					if (!centered) {
-						if (!zoomIn) {
+						if (!zoomIn && menu.supportZoomIn()) {
 							LatLon centerLatLon = map.getCurrentRotatedTileBox().getCenterLatLon();
 							if (centerLatLon.equals(menu.getLatLon())) {
 								zoomIn = true;
 							}
 						}
 						centerMarkerLocation();
-					} else if (!zoomIn) {
+					} else if (!zoomIn && menu.supportZoomIn()) {
 						int fZoom = getZoom();
 						zoomIn = true;
 						if (fZoom < ZOOM_IN_STANDARD) {

@@ -172,7 +172,12 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	public boolean disableLongPressOnMap() {
 		return false;
 	}
-	
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return false;
+	}
+
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();

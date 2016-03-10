@@ -114,6 +114,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
+	public boolean isObjectClickable(Object o) {
+		return o == getParkingPoint();
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		getParkingFromPoint(tileBox, point, o);
 	}

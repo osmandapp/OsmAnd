@@ -236,6 +236,10 @@ public abstract class MenuController extends BaseMenuController {
 		return titleProgressController;
 	}
 
+	public boolean supportZoomIn() {
+		return true;
+	}
+
 	public boolean fabVisible() {
 		return true;
 	}

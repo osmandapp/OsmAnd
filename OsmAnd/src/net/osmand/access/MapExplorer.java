@@ -1,25 +1,19 @@
 package net.osmand.access;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import android.graphics.PointF;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.graphics.PointF;
-import android.os.Build;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.MotionEvent;
+
+import java.util.List;
+import java.util.Map;
 
 // Provide touch exploration mode for map view
 // when scrolling it by gestures is disabled.
@@ -88,6 +82,11 @@ public class MapExplorer extends SimpleOnGestureListener implements IContextMenu
 
     @Override
     public boolean disableLongPressOnMap() {
+        return false;
+    }
+
+    @Override
+    public boolean isObjectClickable(Object o) {
         return false;
     }
 

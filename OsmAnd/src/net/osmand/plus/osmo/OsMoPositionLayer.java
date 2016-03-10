@@ -209,6 +209,11 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof OsMoDevice;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		getOsmoFromPoint(tileBox, point, o);
 	}

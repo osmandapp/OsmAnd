@@ -232,6 +232,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		List<Amenity> objects = Collections.emptyList();
 		List<Amenity> fullObjects = new ArrayList<>();
+		List<LatLon> fullObjectsLatLon = new ArrayList<>();
+		List<LatLon> smallObjectsLatLon = new ArrayList<>();
 		if (filter != null) {
 			if (tileBox.getZoom() >= startZoom) {
 				data.queryNewData(tileBox);
@@ -248,8 +250,12 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
+							smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
+									o.getLocation().getLongitude()));
 						} else {
 							fullObjects.add(o);
+							fullObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
+									o.getLocation().getLongitude()));
 						}
 					}
 					for (Amenity o : fullObjects) {
@@ -274,6 +280,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							}
 						}
 					}
+					this.fullObjectsLatLon = fullObjectsLatLon;
+					this.smallObjectsLatLon = smallObjectsLatLon;
 				}
 			}
 		}
@@ -508,6 +516,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			return ((Amenity) o).getLocation();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof Amenity;
 	}
 
 	@Override

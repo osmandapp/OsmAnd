@@ -101,6 +101,8 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 				// request to load
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();
 				List<LocationPoint> fullObjects = new ArrayList<>();
+				List<LatLon> fullObjectsLatLon = new ArrayList<>();
+				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				for (LocationPoint o : getPoints()) {
 					if (!o.isVisible()) {
 						continue;
@@ -112,13 +114,17 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 						int col = o.getColor() == 0 || o.getColor() == Color.BLACK ? defaultColor : o.getColor();
 						paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
 						canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 					} else {
 						fullObjects.add(o);
+						fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 					}
 				}
 				for (LocationPoint o : fullObjects) {
 					drawPoint(canvas, tileBox, latLonBounds, o);
 				}
+				this.fullObjectsLatLon = fullObjectsLatLon;
+				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
 		if(textLayer.isVisible()) {
@@ -194,6 +200,11 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	@Override
 	public boolean disableLongPressOnMap() {
 		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof LocationPoint;
 	}
 
 	@Override

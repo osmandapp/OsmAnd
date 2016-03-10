@@ -14,20 +14,14 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.data.Amenity;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
-import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
-import net.osmand.plus.osmedit.OsmPoint;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +43,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean disableSingleTap();
 
 		boolean disableLongPressOnMap();
+
+		boolean isObjectClickable(Object o);
 	}
 
 	public interface IContextMenuProviderSelection {
@@ -70,7 +66,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private ImageView contextMarker;
 	private Paint paint;
 	private Bitmap pressedBitmap;
-	private LatLon pressedLatLon;
+	private Bitmap pressedBitmapSmall;
+	private List<LatLon> pressedLatLonFull = new ArrayList<>();
+	private List<LatLon> pressedLatLonSmall = new ArrayList<>();
 
 	private GestureDetector movementListener;
 
@@ -99,6 +97,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		paint = new Paint();
 		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap);
+		pressedBitmapSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap_small);
 	}
 
 	public boolean isVisible() {
@@ -107,9 +106,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
-		if (pressedLatLon != null) {
-			int x = (int) box.getPixXFromLatLon(pressedLatLon.getLatitude(), pressedLatLon.getLongitude());
-			int y = (int) box.getPixYFromLatLon(pressedLatLon.getLatitude(), pressedLatLon.getLongitude());
+		for (LatLon latLon : pressedLatLonSmall) {
+			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			canvas.drawBitmap(pressedBitmapSmall, x - pressedBitmapSmall.getWidth() / 2, y - pressedBitmapSmall.getHeight() / 2, paint);
+		}
+		for (LatLon latLon : pressedLatLonFull) {
+			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
 		}
 
@@ -162,7 +166,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
-		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point);
+		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false);
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
@@ -229,7 +233,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
-	private Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox, PointF point) {
+	private Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox,
+																		  PointF point, boolean acquireObjLatLon) {
+		List<LatLon> pressedLatLonFull = new ArrayList<>();
+		List<LatLon> pressedLatLonSmall = new ArrayList<>();
 		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 		List<Object> s = new ArrayList<>();
 		for (OsmandMapLayer lt : view.getLayers()) {
@@ -239,8 +246,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				l.collectObjectsFromPoint(point, tileBox, s);
 				for (Object o : s) {
 					selectedObjects.put(o, l);
+					if (acquireObjLatLon && l.isObjectClickable(o)) {
+						LatLon latLon = l.getObjectLocation(o);
+						if (lt.isPresentInFullObjects(latLon) && !pressedLatLonFull.contains(latLon)) {
+							pressedLatLonFull.add(latLon);
+						} else if (lt.isPresentInSmallObjects(latLon) && !pressedLatLonSmall.contains(latLon)) {
+							pressedLatLonSmall.add(latLon);
+						}
+					}
 				}
 			}
+		}
+		if (acquireObjLatLon) {
+			this.pressedLatLonFull = pressedLatLonFull;
+			this.pressedLatLonSmall = pressedLatLonSmall;
 		}
 		return selectedObjects;
 	}
@@ -316,58 +335,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				PointF point = new PointF(event.getX(), event.getY());
-				Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point);
-				if (selectedObjects.size() == 1) {
-					Object selectedObj = selectedObjects.keySet().iterator().next();
-					IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
-					LatLon latLon = null;
-					PointDescription pointDescription = null;
-					if (contextObject != null) {
-						latLon = contextObject.getObjectLocation(selectedObj);
-						pointDescription = contextObject.getObjectName(selectedObj);
-					}
-					if (latLon == null) {
-						latLon = getLatLon(point, tileBox);
-					}
-					if (isObjectClickable(selectedObj, pointDescription)) {
-						pressedLatLon = latLon;
-						view.refreshMap();
-					}
+				selectObjectsForContextMenu(tileBox, new PointF(event.getX(), event.getY()), true);
+				if (pressedLatLonFull.size() > 0 || pressedLatLonSmall.size() > 0) {
+					view.refreshMap();
 				}
 				break;
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_CANCEL:
-				pressedLatLon = null;
+				pressedLatLonFull.clear();
+				pressedLatLonSmall.clear();
 				view.refreshMap();
 				break;
 		}
 
 		return false;
-	}
-
-	private boolean isObjectClickable(Object object, PointDescription pointDescription) {
-		boolean res;
-		if (pointDescription != null) {
-			res = pointDescription.isParking()
-					|| pointDescription.isFavorite()
-					|| pointDescription.isAudioNote()
-					|| pointDescription.isPhotoNote()
-					|| pointDescription.isVideoNote()
-					|| pointDescription.isPoi()
-					|| object instanceof OsmPoint
-					|| object instanceof FavouritePoint
-					|| object instanceof OsMoDevice
-					|| object instanceof OpenStreetNote;
-		} else {
-			res = object instanceof Amenity
-					|| object instanceof Recording
-					|| object instanceof OsmPoint
-					|| object instanceof FavouritePoint
-					|| object instanceof OsMoDevice
-					|| object instanceof OpenStreetNote;
-		}
-		return res;
 	}
 
 	private class MenuLayerOnGestureListener extends GestureDetector.SimpleOnGestureListener {

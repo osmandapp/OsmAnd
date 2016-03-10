@@ -194,6 +194,11 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		return false;
 	}
 
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return false;
+	}
+
 	private LatLon getMyLocation() {
 		Location location = locationProvider.getLastKnownLocation();
 		if (location != null) {

@@ -90,14 +90,18 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			final QuadRect latlon = tileBox.getLatLonBounds();
 			List<Recording> objects = recs.getObjects(latlon.top, latlon.left, latlon.bottom, latlon.right);
 			List<Recording> fullObjects = new ArrayList<>();
+			List<LatLon> fullObjectsLatLon = new ArrayList<>();
+			List<LatLon> smallObjectsLatLon = new ArrayList<>();
 			for (Recording o : objects) {
 				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 					canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+					smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 				} else {
 					fullObjects.add(o);
+					fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 				}
 			}
 			for (Recording o : fullObjects) {
@@ -113,6 +117,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 				}
 				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 			}
+			this.fullObjectsLatLon = fullObjectsLatLon;
+			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
 	}
 
@@ -154,6 +160,11 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public boolean disableLongPressOnMap() {
 		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof Recording;
 	}
 
 	@Override

@@ -588,6 +588,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 
 		@Override
+		public boolean isObjectClickable(Object o) {
+			return false;
+		}
+
+		@Override
 		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 			getMPointsFromPoint(tileBox, point, o);
 		}

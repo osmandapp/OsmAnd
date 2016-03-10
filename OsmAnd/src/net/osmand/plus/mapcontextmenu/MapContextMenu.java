@@ -737,6 +737,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	public boolean supportZoomIn() {
+		return menuController == null || menuController.supportZoomIn();
+	}
+
 	public boolean fabVisible() {
 		return menuController == null || menuController.fabVisible();
 	}

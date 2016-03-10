@@ -386,6 +386,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	public boolean isObjectClickable(Object o) {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> markers = markersHelper.getActiveMapMarkers();
