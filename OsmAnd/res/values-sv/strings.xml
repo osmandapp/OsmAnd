@@ -1896,8 +1896,8 @@
     <string name="favorite_category_select">Välj kategori</string>
 
     <string name="count_of_lines">Antal rader</string>
-    <string name="nm">nm</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm">nmi</string>
+    <string name="nm_h">nmi/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
