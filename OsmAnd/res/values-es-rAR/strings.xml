@@ -2143,4 +2143,5 @@
     <string name="storage_permission_restart_is_required">Ahora, la aplicación puede escribir en el almacenamiento externo. Se requiere reiniciar la aplicación manualmente.</string>
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
+    <string name="report">Informe</string>
     </resources>
