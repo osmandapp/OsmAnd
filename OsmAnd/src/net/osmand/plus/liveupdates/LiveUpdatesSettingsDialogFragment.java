@@ -117,6 +117,8 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 			updateFrequenciesStrings[i] = getString(updateFrequencies[i].getLocalizedId());
 		}
 
+		refreshTimeOfDayLayout(UpdateFrequency.values()[updateFrequencyPreference.get()],
+				updateTimesOfDayLayout);
 		updateFrequencySpinner.setAdapter(new ArrayAdapter<>(getActivity(),
 				R.layout.action_spinner_item, updateFrequenciesStrings));
 		updateFrequencySpinner.setSelection(updateFrequencyPreference.get());
