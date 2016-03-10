@@ -1,6 +1,9 @@
 package net.osmand.plus.views;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
@@ -11,15 +14,20 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
+import net.osmand.plus.osmedit.OsmPoint;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,23 +35,28 @@ import java.util.List;
 import java.util.Map;
 
 public class ContextMenuLayer extends OsmandMapLayer {
-	
+
 	public interface IContextMenuProvider {
 
 		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
-		
+
 		LatLon getObjectLocation(Object o);
+
 		String getObjectDescription(Object o);
+
 		PointDescription getObjectName(Object o);
 
 		boolean disableSingleTap();
+
 		boolean disableLongPressOnMap();
 	}
-	
+
 	public interface IContextMenuProviderSelection {
 
 		int getOrder(Object o);
+
 		void setSelectedObject(Object o);
+
 		void clearSelectedObject();
 	}
 
@@ -55,16 +68,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private CallbackWithObject<LatLon> selectOnMap = null;
 
 	private ImageView contextMarker;
+	private Paint paint;
+	private Bitmap pressedBitmap;
+	private LatLon pressedLatLon;
 
 	private GestureDetector movementListener;
 
-	public ContextMenuLayer(MapActivity activity){
+	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
 		menu = activity.getContextMenu();
 		multiSelectionMenu = menu.getMultiSelectionMenu();
 		movementListener = new GestureDetector(activity, new MenuLayerOnGestureListener());
 	}
-	
+
 	@Override
 	public void destroyLayer() {
 	}
@@ -80,6 +96,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int minw = contextMarker.getDrawable().getMinimumWidth();
 		int minh = contextMarker.getDrawable().getMinimumHeight();
 		contextMarker.layout(0, 0, minw, minh);
+
+		paint = new Paint();
+		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap);
 	}
 
 	public boolean isVisible() {
@@ -88,7 +107,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
-		if(menu.isActive()) {
+		if (pressedLatLon != null) {
+			int x = (int) box.getPixXFromLatLon(pressedLatLon.getLatitude(), pressedLatLon.getLongitude());
+			int y = (int) box.getPixYFromLatLon(pressedLatLon.getLatitude(), pressedLatLon.getLongitude());
+			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
+		}
+
+		if (menu.isActive()) {
 			LatLon latLon = menu.getLatLon();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -180,8 +205,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public boolean disableSingleTap() {
 		boolean res = false;
-		for(OsmandMapLayer lt : view.getLayers()){
-			if(lt instanceof ContextMenuLayer.IContextMenuProvider) {
+		for (OsmandMapLayer lt : view.getLayers()) {
+			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
 				if (((IContextMenuProvider) lt).disableSingleTap()) {
 					res = true;
 					break;
@@ -246,7 +271,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 
-		if(selectOnMap != null) {
+		if (selectOnMap != null) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			CallbackWithObject<LatLon> cb = selectOnMap;
 			cb.processResult(latlon);
@@ -289,7 +314,60 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 
+		switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				PointF point = new PointF(event.getX(), event.getY());
+				Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point);
+				if (selectedObjects.size() == 1) {
+					Object selectedObj = selectedObjects.keySet().iterator().next();
+					IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
+					LatLon latLon = null;
+					PointDescription pointDescription = null;
+					if (contextObject != null) {
+						latLon = contextObject.getObjectLocation(selectedObj);
+						pointDescription = contextObject.getObjectName(selectedObj);
+					}
+					if (latLon == null) {
+						latLon = getLatLon(point, tileBox);
+					}
+					if (isObjectClickable(selectedObj, pointDescription)) {
+						pressedLatLon = latLon;
+						view.refreshMap();
+					}
+				}
+				break;
+			case MotionEvent.ACTION_UP:
+			case MotionEvent.ACTION_CANCEL:
+				pressedLatLon = null;
+				view.refreshMap();
+				break;
+		}
+
 		return false;
+	}
+
+	private boolean isObjectClickable(Object object, PointDescription pointDescription) {
+		boolean res;
+		if (pointDescription != null) {
+			res = pointDescription.isParking()
+					|| pointDescription.isFavorite()
+					|| pointDescription.isAudioNote()
+					|| pointDescription.isPhotoNote()
+					|| pointDescription.isVideoNote()
+					|| pointDescription.isPoi()
+					|| object instanceof OsmPoint
+					|| object instanceof FavouritePoint
+					|| object instanceof OsMoDevice
+					|| object instanceof OpenStreetNote;
+		} else {
+			res = object instanceof Amenity
+					|| object instanceof Recording
+					|| object instanceof OsmPoint
+					|| object instanceof FavouritePoint
+					|| object instanceof OsMoDevice
+					|| object instanceof OpenStreetNote;
+		}
+		return res;
 	}
 
 	private class MenuLayerOnGestureListener extends GestureDetector.SimpleOnGestureListener {
