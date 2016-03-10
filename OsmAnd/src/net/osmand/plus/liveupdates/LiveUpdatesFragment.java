@@ -33,6 +33,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -69,7 +70,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppListener {
-	public static final String TITLE = "Live Updates";
+	public static final int TITLE = R.string.live_updates;
 	private static final int SUBSCRIPTION_SETTINGS = 5;
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
 		@Override
