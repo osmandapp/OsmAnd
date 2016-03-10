@@ -110,8 +110,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -166,6 +164,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
+
+	private boolean permissionAsked;
+	private boolean permissionGranted;
 
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -590,15 +591,25 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 
-		if (app.isExternalStorageDirectoryReadOnly()
-				&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-			if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
-				DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
-			} else {
-				ActivityCompat.requestPermissions(this,
-						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-						DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+		if (!permissionAsked) {
+			if (app.isExternalStorageDirectoryReadOnly()
+					&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+				if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
+					DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+				} else {
+					ActivityCompat.requestPermissions(this,
+							new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+							DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+				}
 			}
+		} else {
+			if (permissionGranted) {
+				restartApp();
+			} else if (getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+				DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+			}
+			permissionAsked = false;
+			permissionGranted = false;
 		}
 	}
 
@@ -1222,24 +1233,8 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 				&& grantResults.length > 0 && permissions.length > 0
 				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				new Timer().schedule(new TimerTask() {
-					@Override
-					public void run() {
-						restartApp();
-					}
-				}, 1);
-			} else {
-				AccessibleToast.makeText(this,
-						R.string.missing_write_external_storage_permission,
-						Toast.LENGTH_LONG).show();
-				new Timer().schedule(new TimerTask() {
-					@Override
-					public void run() {
-						DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
-					}
-				}, 1);
-			}
+			permissionAsked = true;
+			permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 		}
 
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
