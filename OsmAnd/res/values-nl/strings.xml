@@ -1944,7 +1944,7 @@
     <string name="favorite_category_select">Kies categorie</string>
     <string name="default_speed_system_descr">Eenheid voor de snelheid instellen</string>
     <string name="default_speed_system">Snelheid weergeven in ...</string>
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Zeemijlen</string>
     <string name="si_kmh">Kilometer per uur</string>
     <string name="si_mph">Mijl per uur</string>
@@ -1952,7 +1952,7 @@
     <string name="si_min_km">Minuten per kilometer</string>
     <string name="si_min_m">Minuten per mijl</string>
     <string name="si_nm_h">Zeemijlen per uur (knopen)</string>
-    <string name="nm_h">Knopen</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2242,4 +2242,5 @@
     <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
     <string name="full_report">Volledig Verslag</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap loginnaam and wachtwoord</string>
+    <string name="report">Verslag</string>
     </resources>
