@@ -1249,7 +1249,7 @@
     <string name="share_route_subject">藉由 OsmAnd 分享路線</string>
     <string name="navigation_intent_invalid">無效的格式：%s</string>
     <string name="osmo_settings_uuid">專有的裝置 ID</string>
-    <string name="osmo_plugin_name">OsMo (OSM 監控)</string>
+    <string name="osmo_plugin_name">OpenStreetMap 監控</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
     <string name="osmo_plugin_description">"這個外掛元件同時提供了所謂的 OsMo 進階即時監控，請參閱 http://osmo.mobi。\n\n您可以即時追蹤所有參與群組的裝置，並且彼此互通。具有各種選項用於連線期間追蹤或持續的追蹤。\n\n匿名群組可以為指定的天數和有限制的預設功能自發的建立，例如沒有遠端控制和沒有群組管理員。另一方面，完整功能的群組可以在網站上建立，並且只有已註冊的使用者才能進入他們。 "</string>
@@ -1264,10 +1264,10 @@
     <string name="share_fav_subject">經由 OsmAnd 分享我的收藏</string>
     <string name="use_points_as_intermediates">預估兩點之間的路線</string>
 
-    <string name="osmo_auto_send_locations_descr">自動開始追蹤連線階段和發送位置之後啟動應用程式</string>
-    <string name="osmo_auto_send_locations">自動開始追蹤連線階段</string>
-    <string name="osmo_tracker_id">個人追蹤 ID</string>
-    <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。使用追蹤 ID 連線的裝置將能夠監控該裝置的所有動作！要斷開選擇恢復選項。</string>
+    <string name="osmo_auto_send_locations_descr">自動開始旅程和發送位置之後啟動應用程式</string>
+    <string name="osmo_auto_send_locations">自動開始旅程</string>
+    <string name="osmo_tracker_id">追蹤 ID</string>
+    <string name="osmo_tracker_id_descr">點擊以查看追蹤 ID</string>
     <string name="osmo_session_token">連線階段標記：%1$s</string>
     <string name="osmo_auth_pending">等候授權…</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
@@ -1283,7 +1283,7 @@
 
 
     <string name="osmo_connected_devices">已連接裝置</string>
-    <string name="osmo_groups">OsMo 群組/裝置</string>
+    <string name="osmo_groups">OsMo 群組</string>
     <string name="osmo_group">OsMo 群組</string>
     <string name="osmo_group_info">資訊</string>
     <string name="osmo_group_share">為了連接到群組 %2$s，指定群組 ID (%1$s)或是點選 %3$s。</string>
@@ -1303,7 +1303,7 @@
     <string name="osmo_connect_to_group_id">群組 ID</string>
     <string name="osmo_group_name">群組名稱</string>
     <string name="osmo_connect_to_group">與群組連線</string>
-    <string name="osmo_connect">連接到</string>
+    <string name="osmo_connect">加入</string>
     <string name="osmo_create_group">建立群組</string>
     <string name="osmo_server_operation_failed">OsMo 伺服器操作失敗</string>
     <string name="osmo_activity">OpenStreetMap 監控</string>
@@ -1333,7 +1333,7 @@
     <string name="osmo_center_location">在螢幕中央</string>
     <string name="osmo_set_moving_target">設定為移動目標</string>
     <string name="osmo_use_server_name">已註冊的名稱</string>
-    <string name="osmo_connect_to_my_nickname">我的暱稱</string>
+    <string name="osmo_connect_to_my_nickname">暱稱</string>
     <string name="osmo_user_name">使用者</string>
     
 
@@ -1746,7 +1746,7 @@
     <string name="routing_attr_height_description">指定許可在路線行駛的車輛高度</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
     <string name="use_fast_recalculation_desc">只有在長途航行路線的初始部分重新計算</string>
-    <string name="osmo_share_my_location">分享我的位置</string>
+    <string name="osmo_share_my_location">傳送位置</string>
     <string name="shared_string_logoff">登出</string>
     <string name="rendering_value_disabled_name">已停用</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">依據路線的有效範圍著色</string>
@@ -1892,7 +1892,7 @@
     <string name="min_km">分/公里</string>
     <string name="m_s">秒/公尺</string>
 
-    <string name="nm_h">浬時</string>
+    <string name="nm_h">浬/時</string>
     <string name="favorite_category_add_new">增加新的</string>
     <string name="favorite_category_select">選擇類別</string>
 
@@ -2148,4 +2148,6 @@
     <string name="finish_navigation">導航完成</string>
     <string name="shared_string_move_up">上移</string>
     <string name="shared_string_move_down">下移</string>
+    <string name="full_report">全部報告</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap 登入與密碼</string>
     </resources>
