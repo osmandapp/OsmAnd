@@ -75,7 +75,6 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	private TextView numberOfRecipientsTitle;
 	private TextView donationsTitle;
 	private ProgressBar progressBar;
-	private View dividerToHide;
 
 	private int inactiveColor;
 	private int textColorPrimary;
@@ -86,8 +85,24 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_reports, container, false);
 		monthReportsSpinner = (Spinner) view.findViewById(R.id.monthReportsSpinner);
+		final View monthButton = view.findViewById(R.id.monthButton);
+		monthReportsSpinner.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				event.offsetLocation(AndroidUtils.dpToPx(getActivity(), 48f), 0);
+				monthButton.onTouchEvent(event);
+				return true;
+			}
+		});
 		monthsForReportsAdapter = new MonthsForReportsAdapter(getActivity());
 		monthReportsSpinner.setAdapter(monthsForReportsAdapter);
+
+		monthButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				monthReportsSpinner.performClick();
+			}
+		});
 
 		view.findViewById(R.id.show_all).setOnClickListener(new OnClickListener() {
 
@@ -132,7 +147,9 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		countryNameTextView.setText(selectedCountryItem.getLocalName());
 
 		setThemedDrawable(view, R.id.calendarImageView, R.drawable.ic_action_data);
+		setThemedDrawable(view, R.id.monthDropDownIcon, R.drawable.ic_action_arrow_drop_down);
 		setThemedDrawable(view, R.id.regionIconImageView, R.drawable.ic_world_globe_dark);
+		setThemedDrawable(view, R.id.countryDropDownIcon, R.drawable.ic_action_arrow_drop_down);
 
 		numberOfContributorsIcon = (ImageView) view.findViewById(R.id.numberOfContributorsIcon);
 		numberOfEditsIcon = (ImageView) view.findViewById(R.id.numberOfEditsIcon);
@@ -155,8 +172,6 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		editsTextView = (TextView) view.findViewById(R.id.editsTextView);
 		donationsTextView = (TextView) view.findViewById(R.id.donationsTextView);
 		recipientsTextView = (TextView) view.findViewById(R.id.recipientsTextView);
-
-		dividerToHide = view.findViewById(R.id.divider_to_hide);
 
 		requestAndUpdateUi();
 
@@ -356,8 +371,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		donationsTitle.setTextColor(inactiveColor);
 		
 		progressBar.setVisibility(View.VISIBLE);
-		dividerToHide.setVisibility(View.GONE);
-		
+
 		contributorsTextView.setTextColor(inactiveColor);
 		donationsTextView.setTextColor(inactiveColor);
 		recipientsTextView.setTextColor(inactiveColor);
@@ -375,9 +389,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		numberOfRecipientsTitle.setTextColor(textColorSecondary);
 		donationsTitle.setTextColor(textColorSecondary);
 		
-		progressBar.setVisibility(View.GONE);
-		dividerToHide.setVisibility(View.VISIBLE);
-		
+		progressBar.setVisibility(View.INVISIBLE);
+
 		contributorsTextView.setTextColor(textColorPrimary);
 		editsTextView.setTextColor(textColorPrimary);
 		donationsTextView.setTextColor(textColorPrimary);
