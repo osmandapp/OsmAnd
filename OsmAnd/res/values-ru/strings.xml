@@ -1193,7 +1193,7 @@
     <string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
     <string name="osmo_plugin_description">"Плагин обеспечивает функциональность для расширенного живого мониторинга OsMo, см. http://osmo.mobi.\n\nОн позволяет отслеживать другие устройства и отслеживаться самому. Вы можете создавать анонимные группы, делиться друг с другом местоположением и общаться. Возможны различные варианты опций для отслеживания сессии или постоянного слежения.\n\nАнонимные группы создаются для указанного количества дней и ограниченным функционалом, то есть нет дистанционного управления и нет администратора группы. Полностью функциональные группы, с другой стороны, могут быть созданы на веб-сайте и только зарегистрированные пользователи имеют к ним доступ. "</string>
-    <string name="osmo_plugin_name">OsMo (OSM мониторинг)</string>
+    <string name="osmo_plugin_name">OSM мониторинг</string>
     <string name="osmo_settings">OsMo</string>
     <string name="navigation_intent_invalid">Неправильный формат: %s</string>
     <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
@@ -1262,7 +1262,7 @@
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены, что хотите пересоздать персональные ID? Все устройства, связанные с Вами, больше не будут отслеживать Вас.</string>
     <string name="osmo_regenerate_login_ids">Регенерировать ID пользователя</string>
     <string name="osmo_use_server_name">Зарегистрированное имя</string>
-    <string name="osmo_connect_to_my_nickname">Мой ник</string>
+    <string name="osmo_connect_to_my_nickname">Ник</string>
     <string name="osmo_user_name">Пользователь</string>
     
     <string name="osmo_credentials_not_valid">Ваши учётные данные OsMo не верны.</string>
@@ -1658,7 +1658,7 @@
     <string name="rendering_value_disabled_name">Отключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска в соответствии с легендой маршрута</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Раскраска в соответствии с OSMC</string>
-    <string name="osmo_share_my_location">Поделиться моим местоположением</string>
+    <string name="osmo_share_my_location">Передача местоположения</string>
     <string name="shared_string_logoff">Выход</string>
     <string name="index_name_netherlands">Европа - Нидерланды</string>
     <string name="shared_string_wikipedia">Википедия</string>
@@ -1921,7 +1921,7 @@
     <string name="osm_live_month_cost">Стоимость в месяц</string>
     <string name="osm_live_month_cost_desc">Ежемесячный платеж</string>
     <string name="osm_live_enter_email">Пожалуйста, введите действительный адрес электронной почты</string>
-    <string name="osm_live_thanks"/>
+    <string name="osm_live_thanks">Благодарим вас за подписку на live обновления!</string>
     <string name="osm_live_subscription_settings">Параметры подписки</string>
     <string name="osm_live_ask_for_purchase">Пожалуйста сначала приобретите подписку OSM Live</string>
 
@@ -1950,4 +1950,14 @@
     <string name="n_items_removed">элементы удалены</string>
     <string name="live_updates">Live обновления</string>
     <string name="select_voice_provider_descr">Выберите или скачайте голосовые подсказки для вашего языка</string>
+    <string name="full_report">Полный отчет</string>
+    <string name="recalculate_route">Пересчитать маршрут</string>
+    <string name="open_street_map_login_and_pass">Имя пользователя и пароль OpenStreetMap</string>
+    <string name="number_of_recipients">Количество получателей</string>
+    <string name="osm_live_active">Активные</string>
+    <string name="osm_live_not_active">Неактивные</string>
+    <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться OSM пользователям внесшим изменения в карту этого региона</string>
+    <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время доступно только {2} Мб свободного места.</string>
+    <string name="upload_osm_note_description">Вы можете загрузить вашу OSM заметку анонимно, используя свой профиль OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Загрузить OSM заметку</string>
     </resources>
