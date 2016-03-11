@@ -204,7 +204,7 @@
     <string name="configure_map">Configurar mapa</string>
     <string name="search_radius_proximity">En las proximidades de</string>
     <string name="osmo_device_not_found">Dispositivo no encontrado</string>
-    <string name="osmo_no_connection_msg">Servicio OsMo no disponible:\n- comprueba la conexión;\n- comprueba los ajustes;\n- comprueba nuestro Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">No se pudo conectar con el servicio OsMo:\n- comprueba tu conexión;\n- comprueba los ajustes;\n- visita nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Conectado como %1$s</string>
     <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
@@ -487,7 +487,7 @@
     <string name="rendering_attr_tramRoutes_name">Rutas de tranvía</string>
     <string name="map_widget_appearance_rem">Elementos restantes</string>
     <string name="map_widget_vector_attributes">Atributos de renderizado</string>
-    <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en una sala privada.</string>
+    <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en el panel de control personal del sitio web.</string>
     <string name="speed_limit_exceed_message">Elige el margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
     <string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s, para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
@@ -530,7 +530,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar vías no aptas para vehículos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ocultar bosques y matorrales</string>
     <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro expiró.\n ¿Quieres realizar un nuevo registro?</string>
-    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quieres ser anónimo, conecta los dispositivos directamente a través de identificadores Tracker.\n - Los grupos privados están limitados a 8 personas.\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puedes restringir la entrada de grupo, como sólo por invitación, pero para controlar el grupo tienes que ir a la consola de administración.\n - Si tienes que crear un grupo, pero con otras condiciones, contacta con http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Al crear un grupo, debes darle un nombre y completar la descripción.\n - Desde la aplicación del grupo, sólo se crean con el tipo Simple, lee más en el sitio web https://osmo.mobi/g/new\n - Puedes gestionar un grupo desde un sitio web, para ubicar todas las trazas y puntos disponibles\n - No avalamos el uso de grupos con sólo un usuario, si esto no es el grupo de PDI\n - Los grupos privados se limitan sólo a 8 personas\n - Los detalles sobre términos y condiciones, se encuentran en el sitio web OsMo.mobi\n - Si necesitas condiciones especiales, contacta con el soporte: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Falló conexión a OsMo</string>
     <string name="osmo_gpx_points_downloaded">%1$s puntos OsMo descargados.</string>
@@ -2144,4 +2144,5 @@
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     <string name="report">Informe</string>
-    </resources>
+    <string name="file_name_containes_illegal_char">El nombre del archivo contiene caracteres ilegales</string>
+</resources>
