@@ -571,7 +571,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
 		if (leftTitleButtonController != null) {
 			leftTitleButton.setText(leftTitleButtonController.caption);
-			leftTitleButton.setVisibility(leftTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+			leftTitleButton.setVisibility(leftTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
 			Drawable leftIcon = leftTitleButtonController.getLeftIcon();
 			if (leftIcon != null) {
@@ -594,7 +594,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		final Button rightTitleButton = (Button) view.findViewById(R.id.title_button_right);
 		if (rightTitleButtonController != null) {
 			rightTitleButton.setText(rightTitleButtonController.caption);
-			rightTitleButton.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
+			rightTitleButton.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
 			Drawable leftIcon = rightTitleButtonController.getLeftIcon();
 			rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);

@@ -102,33 +102,33 @@ public class DownloadResources extends DownloadResourceGroup {
 	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
 		boolean outdated = false;
 		String sfName = item.getTargetFileName();
-		String indexactivateddate = indexActivatedFileNames.get(sfName);
-		String indexfilesdate = indexFileNames.get(sfName);
+		String indexActivatedDate = indexActivatedFileNames.get(sfName);
+		String indexFilesDate = indexFileNames.get(sfName);
 		item.setDownloaded(false);
 		item.setOutdated(false);
-		if(indexactivateddate == null && indexfilesdate == null) {
-			return outdated;
+		if (indexActivatedDate == null && indexFilesDate == null) {
+			return false;
 		}
 		item.setDownloaded(true);
 		String date = item.getDate(format);
 		boolean parsed = false;
-		if(indexactivateddate != null) {
+		if (indexActivatedDate != null) {
 			try {
-				item.setLocalTimestamp(format.parse(indexactivateddate).getTime());
+				item.setLocalTimestamp(format.parse(indexActivatedDate).getTime());
 				parsed = true;
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
-		if (!parsed && indexfilesdate != null) {
+		if (!parsed && indexFilesDate != null) {
 			try {
-				item.setLocalTimestamp(format.parse(indexfilesdate).getTime());
+				item.setLocalTimestamp(format.parse(indexFilesDate).getTime());
 				parsed = true;
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
-		if (date != null && !date.equals(indexactivateddate) && !date.equals(indexfilesdate)) {
+		if (date != null && !date.equals(indexActivatedDate) && !date.equals(indexFilesDate)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE

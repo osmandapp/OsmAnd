@@ -21,6 +21,8 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
@@ -55,6 +57,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private Paint paintOutdated;
 	private Path pathOutdated;
 	private OsmandRegions osmandRegions;
+	private LocalIndexHelper helper;
 
 	private TextPaint textPaint;
 	private ResourceManager rm;
@@ -76,6 +79,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		private BinaryMapDataObject dataObject;
 		private WorldRegion worldRegion;
 		private IndexItem indexItem;
+		private LocalIndexInfo localIndexInfo;
 
 		public BinaryMapDataObject getDataObject() {
 			return dataObject;
@@ -89,10 +93,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			return indexItem;
 		}
 
-		public DownloadMapObject(BinaryMapDataObject dataObject, WorldRegion worldRegion, IndexItem indexItem) {
+		public LocalIndexInfo getLocalIndexInfo() {
+			return localIndexInfo;
+		}
+
+		public DownloadMapObject(BinaryMapDataObject dataObject, WorldRegion worldRegion,
+								 IndexItem indexItem, LocalIndexInfo localIndexInfo) {
 			this.dataObject = dataObject;
 			this.worldRegion = worldRegion;
 			this.indexItem = indexItem;
+			this.localIndexInfo = localIndexInfo;
 		}
 	}
 
@@ -102,6 +112,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		app = view.getApplication();
 		rm = app.getResourceManager();
 		osmandRegions = rm.getOsmandRegions();
+		helper = new LocalIndexHelper(app);
 
 		paintDownloaded = getPaint(view.getResources().getColor(R.color.region_uptodate));
 		paintSelected = getPaint(view.getResources().getColor(R.color.region_selected));
@@ -251,8 +262,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
 
-
-
 	private List<BinaryMapDataObject> queryData(RotatedTileBox tileBox) {
 		if (tileBox.getZoom() >= ZOOM_AFTER_BASEMAP) {
 			if(!checkIfMapEmpty(tileBox)) {
@@ -391,7 +400,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				Set<String> set = new TreeSet<String>();
 				int cx = view.getCurrentRotatedTileBox().getCenter31X();
 				int cy = view.getCurrentRotatedTileBox().getCenter31Y();
-				if ((currentObjects != null && currentObjects.size() > 0)) {
+				if ((currentObjects.size() > 0)) {
 					for (int i = 0; i < currentObjects.size(); i++) {
 						final BinaryMapDataObject o = currentObjects.get(i);
 						if (!osmandRegions.contain(o, cx, cy)) {
@@ -537,10 +546,18 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 					if (!dataItems.isEmpty()) {
 						for (IndexItem item : dataItems) {
-							dataObjects.add(new DownloadMapObject(o, region, item));
+							dataObjects.add(new DownloadMapObject(o, region, item, null));
 						}
 					} else {
-						dataObjects.add(new DownloadMapObject(o, region, null));
+						String downloadName = osmandRegions.getDownloadName(o);
+						List<LocalIndexInfo> infos = helper.getLocalIndexInfos(downloadName);
+						if (infos.size() == 0) {
+							dataObjects.add(new DownloadMapObject(o, region, null, null));
+						} else {
+							for (LocalIndexInfo info : infos) {
+								dataObjects.add(new DownloadMapObject(o, region, null, info));
+							}
+						}
 					}
 				}
 			}
@@ -555,6 +572,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			order = mapObject.worldRegion.getLevel() * 1000 - 100000;
 			if (mapObject.indexItem != null) {
 				order += mapObject.indexItem.getType().getOrderIndex();
+			} else if (mapObject.localIndexInfo != null) {
+				order += mapObject.localIndexInfo.getType().getOrderIndex(mapObject.localIndexInfo);
 			}
 		}
 		return order;

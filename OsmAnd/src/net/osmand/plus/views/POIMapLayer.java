@@ -119,7 +119,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				if (filter == null) {
+				if (filter == null || latLonBounds == null) {
 					return new ArrayList<Amenity>();
 				}
 				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
