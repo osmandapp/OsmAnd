@@ -318,11 +318,10 @@ public class MapDataMenuController extends MenuController {
 			}
 		}
 
-		leftTitleButtonController.visible = false;
+		leftTitleButtonController.visible = true;
 		leftTitleButtonController.leftIconId = R.drawable.ic_action_import;
 		if (backuped) {
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.local_index_mi_restore);
-			leftTitleButtonController.visible = true;
 		} else if (indexItem != null) {
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
 					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
@@ -331,10 +330,13 @@ public class MapDataMenuController extends MenuController {
 				leftTitleButtonController.leftIconId = 0;
 			} else if (indexItem.isOutdated()) {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
-			} else {
+			} else if (!downloaded) {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
+			} else {
+				leftTitleButtonController.visible = false;
 			}
-			leftTitleButtonController.visible = true;
+		} else {
+			leftTitleButtonController.visible = false;
 		}
 
 		rightTitleButtonController.visible = downloaded;
@@ -401,7 +403,6 @@ public class MapDataMenuController extends MenuController {
 						}
 
 						protected void onPostExecute(Void result) {
-							getMapActivity().getMapLayers().getDownloadedRegionsLayer().updateObjects();
 							getMapActivity().refreshMap();
 						}
 
@@ -446,7 +447,6 @@ public class MapDataMenuController extends MenuController {
 			}
 
 			protected void onPostExecute(Void result) {
-				getMapActivity().getMapLayers().getDownloadedRegionsLayer().updateObjects();
 				getMapActivity().refreshMap();
 			}
 

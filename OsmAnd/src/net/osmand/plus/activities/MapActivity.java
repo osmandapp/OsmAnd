@@ -570,8 +570,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			app.getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
 
-		getMapLayers().getDownloadedRegionsLayer().updateObjects();
-
 		OsmandPlugin.onMapActivityResume(this);
 		mapView.refreshMap(true);
 		if (atlasMapRendererView != null) {
@@ -1245,9 +1243,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		if (fragmentRef != null) {
 			fragmentRef.get().newDownloadIndexes();
 		}
-		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
-			refreshMap();
-		}
+		refreshMap();
 	}
 
 	@Override
@@ -1255,9 +1251,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().downloadInProgress();
-		}
-		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
-			refreshMap();
 		}
 	}
 
@@ -1267,9 +1260,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		if (fragmentRef != null) {
 			fragmentRef.get().downloadHasFinished();
 		}
-		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
-			refreshMap();
-		}
+		refreshMap();
 	}
 
 	@Override
