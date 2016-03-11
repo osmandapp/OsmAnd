@@ -2328,7 +2328,7 @@
     <string name="finish_navigation">Afslut navigation</string>
     <string name="shared_string_move_up">Flyt op</string>
     <string name="shared_string_move_down">Flyt ned</string>
-    <string name="release_2_3">" • OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time.\n\n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet.\n\n • Mere detaljerede OSM kort med landespecifikke vejskilte og masser af nye kortfunktioner.\n\n • Forbedret ruteplanlægning.\n\n • Mange forbedringer i kontekstmenuen på korter, såsom indholdsbestemt adresseopslag.\n\n   og mere... "</string>
+    <string name="release_2_3">" • OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time.\n\n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet.\n\n • Mere detaljerede OSM kort med landespecifikke vejskilte og masser af nye kortfunktioner.\n\n • Forbedret ruteplanlægning.\n\n • Mange forbedringer i kontekstmenuen på kortet, såsom indholdsbestemt adresseopslag.\n\n   og mere... "</string>
     <string name="full_report">Fuldstændig rapport</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Nu har programmet lov til at skrive til ekstern lager. Manuel genstart er påkrævet.</string>
