@@ -2150,4 +2150,5 @@
     <string name="shared_string_move_down">下移</string>
     <string name="full_report">全部報告</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap 登入與密碼</string>
+    <string name="report">報告</string>
     </resources>
