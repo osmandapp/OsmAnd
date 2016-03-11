@@ -158,6 +158,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			return;
 		}
 		updateCurrentTrack(getView(), getActivity(), app);
+		@SuppressWarnings("ConstantConditions")
 		final CheckBox checkbox = (CheckBox) getView().findViewById(R.id.check_local_index);
 		checkbox.setVisibility(selectionMode && showOnMapMode ? View.VISIBLE : View.GONE);
 		if (selectionMode && showOnMapMode) {
@@ -566,7 +567,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected List<GpxInfo> doInBackground(Activity... params) {
-			List<GpxInfo> result = new ArrayList<GpxInfo>();
+			List<GpxInfo> result = new ArrayList<>();
 			loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, this);
 			return result;
 		}

@@ -14,6 +14,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -70,21 +72,23 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
+	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/\\<>]");
 
 	private LoadLocalIndexTask asyncLoader;
-	private Map<String, IndexItem> filesToUpdate = new HashMap<String, IndexItem>();
+	private Map<String, IndexItem> filesToUpdate = new HashMap<>();
 	private LocalIndexesAdapter listAdapter;
 	private AsyncTask<LocalIndexInfo, ?, ?> operationTask;
 
 	private boolean selectionMode = false;
-	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<LocalIndexInfo>();
+	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<>();
 
-	protected static int DELETE_OPERATION = 1;
-	protected static int BACKUP_OPERATION = 2;
-	protected static int RESTORE_OPERATION = 3;
+	protected static final int DELETE_OPERATION = 1;
+	protected static final int BACKUP_OPERATION = 2;
+	protected static final int RESTORE_OPERATION = 3;
 
 	private ContextMenuAdapter optionsMenuAdapter;
 	private ActionMode actionMode;
@@ -154,11 +158,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	public void reloadData() {
 		List<IndexItem> itemsToUpdate = getDownloadActivity().getDownloadThread().getIndexes().getItemsToUpdate();
 		filesToUpdate.clear();
-		for(IndexItem ii : itemsToUpdate) {
+		for (IndexItem ii : itemsToUpdate) {
 			filesToUpdate.put(ii.getTargetFileName(), ii);
 		}
 		LoadLocalIndexTask current = asyncLoader;
-		if(current == null || current.getStatus() == AsyncTask.Status.FINISHED ||
+		if (current == null || current.getStatus() == AsyncTask.Status.FINISHED ||
 				current.isCancelled() || current.getResult() != null) {
 			asyncLoader = new LoadLocalIndexTask();
 			asyncLoader.execute();
@@ -247,32 +251,67 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			final String originalName = xt == -1 ? f.getName() : f.getName().substring(0, xt);
 			final EditText editText = new EditText(a);
 			editText.setText(originalName);
-			b.setView(editText);
-			b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+			editText.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				}
 
 				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					String newName = editText.getText().toString() + ext;
-					File dest = new File(f.getParentFile(), newName);
-					if (dest.exists()) {
-						AccessibleToast.makeText(a, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
-					} else {
-						if (!dest.getParentFile().exists()) {
-							dest.getParentFile().mkdirs();
-						}
-						if (f.renameTo(dest)) {
-							if (callback != null) {
-								callback.run();
-							}
-						} else {
-							AccessibleToast.makeText(a, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					Editable text = editText.getText();
+					if (text.length() >= 1) {
+						if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(text).find()) {
+							editText.setError(a.getString(R.string.file_name_containes_illegal_char));
 						}
 					}
-
 				}
 			});
+			b.setView(editText);
+			// Behaviour will be overwritten later;
+			b.setPositiveButton(R.string.shared_string_save, null);
 			b.setNegativeButton(R.string.shared_string_cancel, null);
-			b.show();
+			final AlertDialog alertDialog = b.create();
+			alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+				@Override
+				public void onShow(DialogInterface dialog) {
+					alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
+							new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									String newName = editText.getText().toString() + ext;
+									if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(newName).find()) {
+										Toast.makeText(a, R.string.file_name_containes_illegal_char,
+												Toast.LENGTH_LONG).show();
+										return;
+									}
+									File dest = new File(f.getParentFile(), newName);
+									if (dest.exists()) {
+										AccessibleToast.makeText(a, R.string.file_with_name_already_exists,
+												Toast.LENGTH_LONG).show();
+										return;
+									} else {
+										if (!dest.getParentFile().exists()) {
+											dest.getParentFile().mkdirs();
+										}
+										if (f.renameTo(dest)) {
+											if (callback != null) {
+												callback.run();
+											}
+										} else {
+											AccessibleToast.makeText(a, R.string.file_can_not_be_renamed,
+													Toast.LENGTH_LONG).show();
+										}
+									}
+									alertDialog.dismiss();
+								}
+							});
+				}
+			});
+			alertDialog.show();
 		}
 	}
 
@@ -338,11 +377,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 
-
-
-
-
-
 	public static class LocalIndexOperationTask extends AsyncTask<LocalIndexInfo, LocalIndexInfo, String> {
 		protected static int DELETE_OPERATION = 1;
 		protected static int BACKUP_OPERATION = 2;
@@ -371,6 +405,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 			return new File(i.getPathToData());
 		}
+
 		private OsmandApplication getMyApplication() {
 			return (OsmandApplication) a.getApplication();
 		}
@@ -400,6 +435,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 			return new File(i.getPathToData());
 		}
+
 		@Override
 		protected String doInBackground(LocalIndexInfo... params) {
 			int count = 0;
@@ -731,7 +767,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	public void openSelectionMode(int stringRes, int darkIcon, DialogInterface.OnClickListener listener, 
+	public void openSelectionMode(int stringRes, int darkIcon, DialogInterface.OnClickListener listener,
 								  EnumSet<LocalIndexType> filter) {
 		if (filter != null) {
 			listAdapter.filterCategories(filter);
@@ -740,12 +776,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 
-
-
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
 
-		Map<LocalIndexInfo, List<LocalIndexInfo>> data = new LinkedHashMap<LocalIndexInfo, List<LocalIndexInfo>>();
-		List<LocalIndexInfo> category = new ArrayList<LocalIndexInfo>();
+		Map<LocalIndexInfo, List<LocalIndexInfo>> data = new LinkedHashMap<>();
+		List<LocalIndexInfo> category = new ArrayList<>();
 		List<LocalIndexInfo> filterCategory = null;
 		int warningColor;
 		int okColor;
@@ -829,10 +863,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		public void filterCategories(EnumSet<LocalIndexType> types) {
-			List<LocalIndexInfo> filter = new ArrayList<LocalIndexInfo>();
+			List<LocalIndexInfo> filter = new ArrayList<>();
 			List<LocalIndexInfo> source = filterCategory == null ? category : filterCategory;
 			for (LocalIndexInfo info : source) {
-				if(types.contains(info.getType())) {
+				if (types.contains(info.getType())) {
 					filter.add(info);
 				}
 			}
@@ -841,7 +875,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		public void filterCategories(boolean backup) {
-			List<LocalIndexInfo> filter = new ArrayList<LocalIndexInfo>();
+			List<LocalIndexInfo> filter = new ArrayList<>();
 			List<LocalIndexInfo> source = filterCategory == null ? category : filterCategory;
 			for (LocalIndexInfo info : source) {
 				if (info.isBackupedData() == backup) {
@@ -904,10 +938,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 
 		private String getNameToDisplay(LocalIndexInfo child) {
-			String mapName = FileNameTranslationHelper.getFileName(ctx,
+			return FileNameTranslationHelper.getFileName(ctx,
 					ctx.getMyApplication().getResourceManager().getOsmandRegions(),
 					child.getFileName());
-			return mapName;
 		}
 
 		@Override
@@ -1055,7 +1088,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 
 				if (child.getSize() >= 0) {
-					if(builder.length() > 0) {
+					if (builder.length() > 0) {
 						builder.append(" • ");
 					}
 					if (child.getSize() > 100) {
@@ -1065,8 +1098,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					}
 				}
 
-				if(!Algorithms.isEmpty(child.getDescription())){
-					if(builder.length() > 0) {
+				if (!Algorithms.isEmpty(child.getDescription())) {
+					if (builder.length() > 0) {
 						builder.append(" • ");
 					}
 					builder.append(child.getDescription());
@@ -1098,7 +1131,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			private Drawable getContentIcon(DownloadActivity context, int resourceId) {
 				return context.getMyApplication().getIconsCache().getContentIcon(resourceId);
 			}
-			
+
 			private Drawable getContentIcon(DownloadActivity context, int resourceId, int colorId) {
 				return context.getMyApplication().getIconsCache().getIcon(resourceId, colorId);
 			}
@@ -1155,7 +1188,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
-		
+
 
 		optionsMenu.show();
 	}
@@ -1197,7 +1230,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 			}
 
-		}.execute(new Object[]{fnExt});
+		}.execute(fnExt);
 	}
 
 
