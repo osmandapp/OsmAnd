@@ -2333,4 +2333,5 @@
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Nu har programmet lov til at skrive til ekstern lager. Manuel genstart er påkrævet.</string>
     <string name="report">Rapport</string>
-    </resources>
+    <string name="file_name_containes_illegal_char">Filnavnet indeholder ulovlige tegn</string>
+</resources>
