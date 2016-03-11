@@ -2113,4 +2113,9 @@
     <string name="shared_string_move_down">Премести надолу</string>
     <string name="finish_navigation">Завърши навигация</string>
     <string name="avoid_road">Избягване на път</string>
-    </resources>
+    <string name="storage_directory_shared">Споделена памет</string>
+    <string name="shared_string_topbar">Горна лента</string>
+    <string name="full_report">Пълен доклад</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap потребителско име и парола</string>
+    <string name="file_name_containes_illegal_char">Името на файла съдържа неправилен символ</string>
+</resources>
