@@ -1303,7 +1303,7 @@
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
     <string name="osmo_plugin_description">"Vstavek OsMo omogoča napredno sledenje v živo. Za več informacij si oglejte spletno stran http://osmo.mobi.\n\nSledilnik Osmo omogoča sledenje napravam, ki objavljajo položaj. Na ta način lahko skupina omogoči sočasno sledenje mesta. Spletni sistem omogoča ustvarjanje brezimnih skupin posameznikov, ki objavljajo svoj položaj in želijo biti med seboj v stiku. Možni so različni načini sledenja od začasnega do trajnega.\n\nBrezimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
-    <string name="osmo_plugin_name">Sledilnik OsMo</string>
+    <string name="osmo_plugin_name">Sledilnik OpenStreetMap</string>
     <string name="keep_informing_never">Samo ročno (pritisnite na puščico)</string>
     <string name="keep_informing_descr">Ponovno najavi obvestila navigacije v rednih časovnih zamikih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
@@ -1424,19 +1424,19 @@
     <string name="seconds_ago">sekund nazaj</string>
     <string name="minutes_ago">minut nazaj</string>
     <string name="hours_ago">ur nazaj</string>
-    <string name="osmo_connect">Poveži se z</string>
+    <string name="osmo_connect">Pridruži se</string>
     <string name="none_selected_gpx">Ni izbranih datotek GPX. Datoteke je mogoče izbrati z zadržanim pritiskom na imenu želene sledi.</string>
     <string name="gpx_split_interval">Interval za razdelitev</string>
     <string name="osmo_server_operation_failed">Opravilo strežnika OsMo je spodletelo</string>
-    <string name="osmo_groups">Skupine / Naprave OsMo</string>
-    <string name="osmo_auto_send_locations">Samodejno začni sejo sledilnika</string>
-    <string name="osmo_tracker_id">Osebni ID sledilnika</string>
-    <string name="osmo_tracker_id_descr">Kliknite za ogled ali objavo ID sledilnika. Z uporabo dodeljenega ID lahko povezane naprave spremljajo premike te naprave na zemljevidu! Če želite povezavo prekiniti, izberite možnost Obnovitev.</string>
+    <string name="osmo_groups">Skupine OsMo</string>
+    <string name="osmo_auto_send_locations">Samodejno začni potovanje</string>
+    <string name="osmo_tracker_id">ID sledilnika</string>
+    <string name="osmo_tracker_id_descr">Kliknite za ogled ID sledilnika</string>
     <string name="osmo_mode_restart">Ponovno zaženi sejo OsMo</string>
 
     <string name="osmo_tracker_id_share">Za povezavo s ciljno napravo %2$s, kliknite na povezavo %3$s ali določite ID sledilnika (%1$s)</string>
     <string name="osmo_connect_to_device_tracker_id">ID sledilnika</string>
-    <string name="osmo_auto_send_locations_descr">Samodejno začni sejo sledilnika in pošiljaj trenutno mesto po zagonu programa</string>
+    <string name="osmo_auto_send_locations_descr">Samodejno začni potovanje in pošiljaj trenutno mesto po zagonu programa</string>
 
     <string name="no_index_file_to_download">Prejetih datotek ni mogoče najti. Preverite internetno povezavo.</string>
     <string name="keep_navigation_service">Obdrži</string>
@@ -1568,8 +1568,8 @@
     <string name="configure_map">Nastavitve zemljevida</string>
     <string name="search_radius_proximity">V bližini</string>
     <string name="osmo_device_not_found">Naprave ni mogoče najti</string>
-    <string name="osmo_no_connection_msg">Storitev sledilnika OsMo ni na voljo:\n- Preverite povezavo\n- Preverite nastavitve\n- Spremljajte novice na Twitterju: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Brezimni uporabnik ne more:\n- Ustvariti skupin\n- Usklajevati skupin in naprav s strežnikom\n- Zasebno upravljati skupin in naprav.</string>
+    <string name="osmo_no_connection_msg">Ni se mogoče povezati s strežnikom OsMo:\n- Preverite internetno povezavo\n- Preverite nastavitve\n- Spremljajte novice na Twitterju: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Brezimni uporabnik ne more:\n- Ustvariti skupin\n- Usklajevati skupin in naprav s strežnikom\n- Zasebno upravljati skupin in naprav prek spletnega vmesnika.</string>
     <string name="anonymous_user">Brezimni uporabnik</string>
     <string name="logged_as">Prijava kot %1$s</string>
     <string name="speed_limit_exceed">Upoštevanje omejitve hitrosti</string>
@@ -2157,4 +2157,9 @@
     <string name="finish_navigation">Končaj navigacijo</string>
     <string name="storage_directory_readonly_desc">Trenutno do dovoljenja podatkovne mape le za branje, zato je začasno prestavljen na notranji pomnilnik. Izbrati je priporočljivo ustrezno in veljavno mapo za podatke.</string>
     <string name="storage_directory_shared">Pomnilnik v souporabi</string>
-    </resources>
+    <string name="report">Poročilo</string>
+    <string name="storage_permission_restart_is_required">Sedaj je mogoče program uporabljati tako, da zapisuje podatke na zunanji nosilec. Poseg zahteva ponovni zagon programa.</string>
+    <string name="full_report">Polno poročilo</string>
+    <string name="open_street_map_login_and_pass">Prijavni podatki za OpenStreetMap</string>
+    <string name="file_name_containes_illegal_char">V imenu datoteke je nedovoljen znak</string>
+</resources>
