@@ -1497,7 +1497,7 @@
 \nСледа %2$s</string>
     <string name="gpx_file_is_empty">Празен GPX файл</string>
     <string name="osmo_connect_to_device_tracker_id">ID на трекер</string>
-    <string name="osmo_plugin_name">OsMo (OsMo наблюдение)</string>
+    <string name="osmo_plugin_name">Мониторинг на OpenStreetMap</string>
     <string name="get_plugin">Вземи</string>
     <string name="osmo_cancel_moving_target">Откажете подвижната цел</string>
     <string name="osmo_set_moving_target">Установете като подвижна цел</string>
@@ -1576,7 +1576,7 @@
     <string name="osmo_credentials_not_valid">Вашите OsMo идентификационни данни не са валидни.</string>
     <string name="osmo_center_location">Центъра на екрана</string>
     <string name="osmo_use_server_name">Регистрирано име</string>
-    <string name="osmo_connect_to_my_nickname">Моят псевдоним</string>
+    <string name="osmo_connect_to_my_nickname">Псвевдоним</string>
     <string name="osmo_user_name">Потребител</string>
     <string name="rendering_value_brown_name">кафяв</string>
 
@@ -1613,7 +1613,7 @@
     <string name="osmo_group_name">Име на група</string>
     <string name="osmo_connect_to_device">Връзка с устройство</string>
     <string name="osmo_connect_to_group">Връзка с група</string>
-    <string name="osmo_connect">Свързване към</string>
+    <string name="osmo_connect">Присъединяване</string>
     <string name="osmo_create_group">Създаване на група</string>
     <string name="osmo_server_operation_failed">Неуспешна операция на OsMo Server</string>
     <string name="osmo_enable_tracker">Изпрати моите места</string>
@@ -1622,7 +1622,7 @@
     <string name="minutes_ago">минути по-рано</string>
     <string name="seconds_ago">секунди по-рано</string>
     <string name="osmo_connected_devices">Свързани устройства</string>
-    <string name="osmo_groups">OsMo групи/устройства</string>
+    <string name="osmo_groups">OsMo групи</string>
     <string name="osmo_session_token">Маркер за сесия: %1$s</string>
     <string name="osmo_auth_pending">Чака за разрешение…</string>
     <string name="av_camera_pic_size_descr">Изберете размер на снимката за вградената камера</string>
@@ -1858,7 +1858,7 @@
     <string name="lang_new">Непал Бхаса</string>
     <string name="lang_gl">Галски</string>
     <string name="rendering_attr_roadStyle_description">Оцветяване на пътищата</string>
-    <string name="osmo_tracker_id">Личен ID на трекера</string>
+    <string name="osmo_tracker_id">ID на трекера</string>
     <string name="misc_pref_title">Разни</string>
     <string name="localization_pref_title">Локализация</string>
     <string name="index_item_nation_addresses">адреси в цялата страна</string>
@@ -1989,7 +1989,7 @@
     <string name="osmo_settings_descr">Конфигуриране на настройките за мониторинг и настройка на личния канал за мониторинг</string>
     <string name="android_19_location_disabled">"След версия 4.4 (KitKat) на Android  не можете да теглите и актуализирате карти в текущата папка за съхранение (%s). Искате ли да промените на разрешените местоположението и копиране на всички OsmAnd файлове там?\n Бележка 1: Старите файлове ще останат непроменени (но могат да бъдат изтрити ръчно).\n Бележка 2: В новото местоположение за съхранение няма да може да споделяте файлове между OsmAnd и OsmAnd +."</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Оцветяване на пътеките според OSMC следите</string>
-<string name="osmo_auto_send_locations_descr">Автоматично стартиране на тракер сесия и изпращане на данни</string>
+<string name="osmo_auto_send_locations_descr">Автоматично стартиране и изпращане на данни</string>
     <string name="shared_string_near">Близо</string>
     <string name="shared_string_hide">Скрий</string>
     <string name="av_video_quality_low">Най-ниско качество</string>
@@ -2002,7 +2002,7 @@
     <string name="av_audio_bitrate_descr">Изберете аудио битрейт</string>
     <string name="no_address_found">Няма адрес</string>
 	<string name="looking_up_address">Търсене на адрес</string>
-    <string name="osmo_tracker_id_descr">Преглед или споделяне ID на трекер. Използването на свързани устройства с това ID позволява пълното проследяване на това устройство! За да прекъснете изберете \'Регенериране\'.</string>
+    <string name="osmo_tracker_id_descr">Преглед ID на трекер.</string>
     <string name="local_index_description">Докоснете върху елемент за да видите повече информация, натиснете и задръжте за да деактивирате или да изтриете. Данни в устройството (%1$s свободни):</string>
 	<string name="number_of_rows_in_dash">Брой редове %1$s</string>
 	<string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Вашият избор може да бъде променен по-късно.</string>
@@ -2107,4 +2107,5 @@
     <string name="rendering_attr_showMtbRoutes_name">Покажи МТБ маршрути</string>
     <string name="show_polygons">Покажи полигони</string>
     <string name="osm_live_email_desc">Нуждаем се от това за да ви покажем информация за приносите</string>
+    <string name="report">Доклад</string>
     </resources>
