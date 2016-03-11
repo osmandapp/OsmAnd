@@ -2108,4 +2108,9 @@
     <string name="show_polygons">Покажи полигони</string>
     <string name="osm_live_email_desc">Нуждаем се от това за да ви покажем информация за приносите</string>
     <string name="report">Доклад</string>
+    <string name="storage_permission_restart_is_required">Сега на приложението е разрешено да пише във външната памет. Изисква се рестартиране.</string>
+    <string name="shared_string_move_up">Премести нагоре</string>
+    <string name="shared_string_move_down">Премести надолу</string>
+    <string name="finish_navigation">Завърши навигация</string>
+    <string name="avoid_road">Избягване на път</string>
     </resources>
