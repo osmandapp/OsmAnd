@@ -601,10 +601,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	private void showFirstTimeExternalStorage() {
 		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime();
-		final boolean externalExists =
-				getMyApplication().getSettings().getSecondaryStorage() != null;
-		if (firstTime && (externalExists || !hasPermissionToWriteExternalStorage(this))
-				&& DataStoragePlaceDialogFragment.isInterestedInFirstTime) {
+		if (firstTime && DataStoragePlaceDialogFragment.isInterestedInFirstTime) {
 			if (!hasPermissionToWriteExternalStorage(this)) {
 				ActivityCompat.requestPermissions(this,
 						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},

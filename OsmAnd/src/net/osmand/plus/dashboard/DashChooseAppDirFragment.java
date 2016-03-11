@@ -87,8 +87,10 @@ public class DashChooseAppDirFragment {
 		}
 
 		public void updateView() {
-			if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT) {
-				locationPath.setText(R.string.storage_directory_default);
+			if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE) {
+				locationPath.setText(R.string.storage_directory_internal_app);
+			} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT) {
+				locationPath.setText(R.string.storage_directory_shared);
 			} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE) {
 				locationPath.setText(R.string.storage_directory_external);
 			} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB) {
@@ -175,7 +177,7 @@ public class DashChooseAppDirFragment {
 				if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT) {
 					selected = items.size();
 				}
-				items.add(getString(R.string.storage_directory_default));
+				items.add(getString(R.string.storage_directory_shared));
 				paths.add(df.getAbsolutePath());
 				types.add(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT);
 			}
