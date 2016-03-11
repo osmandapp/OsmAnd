@@ -9,6 +9,18 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_group_information_desc">
+        - Creating a group please give it a name and fill in description\n
+        - From the application group are created only with Simple type, read more on the website https://osmo.mobi/g/new \n
+        - Through a website you can manage a group, to place tracks and points available all\n
+        - We do not endorse the use of the group only one user, if this is not the POI group\n
+        - Private groups are limited to 8 persons \n
+        - Detailed terms and conditions always have an on website OsMo.mobi\n
+        - If you need special conditions - please contact support: osmo.mobi@gmail.com
+    </string>
+    <string name="osmo_specify_tracker_id">Please specify ID</string>
+    <string name="osmo_no_connection_msg">Cannot connect to the server OsMo:\n- check your internet connection;\n- check the settings;\n- check out our Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">An anonymous user can not:\n- create groups;\n- synchronize groups and devices with the server;\n- manage groups and devices in a personal dashboard on website.</string>
     <string name="report">Report</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker ID</string>
     <string name="osmo_connect_to_group_id">Group ID</string>
@@ -605,8 +617,6 @@
     <string name="configure_map">Configure map</string>
     <string name="search_radius_proximity">In proximity of</string>
     <string name="osmo_device_not_found">Device not found</string>
-    <string name="osmo_no_connection_msg">OsMo service is not available:\n- check the connection;\n- check the settings;\n- check out our Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">An anonymous user can not:\n- create groups;\n- synchronize groups and devices with the server;\n- manage groups and devices in a private office.</string>
     <string name="anonymous_user">Anonymous user</string>
     <string name="logged_as">Logged in as %1$s</string>
     <string name="speed_limit_exceed">Speed limit tolerance</string>
@@ -672,7 +682,6 @@
     <string name="rendering_attr_coloredBuildings_name">Color-code buildings by type</string>
     <string name="osmo_invite">Invite…</string>
     <string name="osmo_leave_confirmation_msg">Do you want to leave group %1$s?</string>
-    <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
     <string name="keep_navigation_service">Keep</string>
@@ -707,12 +716,6 @@
         It could be a temporary service down or your registration expired.\n
         Do you want to proceed with new registration?</string>
     <string name="osmo_group_by_invite">Enter by invite</string>
-    <string name="osmo_group_information_desc">
-        - All created groups are public! If you want to be anonymous, connect devices directly via Tracker ids.\n
-        - Private groups are limited to 8 persons \n
-        - In case of inactivity or only 1 person activity for 2 weeks, group will be deleted.\n
-        - You can restrict group entrance, as only by invite, but to control group you need to go to admin console.\n
-        - If you need to create a group, but with other conditions please contact http://osmo.mobi</string>
     <string name="osmo_group_information">Please read before creating a group!</string>
     <string name="osmo_not_signed_in">OsMo login failed</string>
     <string name="osmo_gpx_points_downloaded">OsMo points %1$s downloaded.</string>
