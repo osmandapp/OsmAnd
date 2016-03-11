@@ -1201,9 +1201,9 @@
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configura la presentación y otros ajustes globales</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
-    <string name="user_name">Su usuario de OSM</string>
+    <string name="user_name">Tu usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a OpenStreetMap.org</string>
-    <string name="user_password">Su clave de OSM</string>
+    <string name="user_password">Tu contraseña de OSM</string>
     <string name="user_password_descr">Necesario para envíos a OpenStreetMap.org</string>
     <string name="osmand_service">Modo reposo</string>
     <string name="osmand_service_descr">Ejecutar OsmAnd en segundo plano, mientras la pantalla este apagada</string>
@@ -2105,7 +2105,7 @@
     <string name="number_of_recipients">Número de destinatarios</string>
     <string name="osm_user_stat">Ediciones %1$s, posición %2$s, ediciones totales %3$s</string>
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
-    <string name="osm_live_subscription">Suscripción de OSM en vivo</string>
+    <string name="osm_live_subscription">Suscripción de OSM Live</string>
     <string name="osm_live_subscribe_btn">Suscribir</string>
     <string name="osm_live_email_desc">Necesario para proporcionarte información sobre las contribuciones</string>
     <string name="osm_live_user_public_name">Nombre público</string>
@@ -2120,7 +2120,7 @@
     <string name="osm_live_thanks">¡Gracias por suscribirte a las actualizaciones en vivo!</string>
     <string name="osm_live_region_desc">Parte de tu donación se enviará a los usuarios de OSM que realicen cambios en el mapa de esa región</string>
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
-    <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OSM en vivo</string>
+    <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OSM Live</string>
 
     <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo. La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM. En caso de que ames OsmAnd, OSM y quieras apoyarlo, esta sería una manera correcta de hacerlo.</string>
     
@@ -2138,8 +2138,7 @@
     <string name="shared_string_move_down">Bajar</string>
     <string name="finish_navigation">Finalizar navegación</string>
     <string name="avoid_road">Evitar carretera</string>
-    <string name="release_2_3">" • OSM en vivo. Apoya a los contribuidores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora.
-\n\n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa.\n\n • Mayor detalle en el mapa OSM con escudos viales de países específicos y muchas otras nuevas características.\n\n • Mejora visual en la preparación de la ruta.\n\n • Muchas mejoras en el menú contextual del mapa, como la búsqueda contextual de direcciones.\n\n y más… "</string>
+    <string name="release_2_3">" • OSM Live. Apoya a los contribuidores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora.\n\n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa.\n\n • Mayor detalle en el mapa OSM con escudos viales de países específicos y muchas otras nuevas características.\n\n • Mejora visual en la preparación de la ruta.\n\n • Muchas mejoras en el menú contextual del mapa, como la búsqueda contextual de direcciones.\n\n y más… "</string>
     <string name="storage_permission_restart_is_required">Ahora, la aplicación puede escribir en el almacenamiento externo. Se requiere reiniciar la aplicación manualmente.</string>
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
