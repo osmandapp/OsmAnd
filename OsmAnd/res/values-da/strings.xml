@@ -1572,7 +1572,7 @@
 
     <string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Forlad gruppen %1$s?</string>
-    <string name="osmo_specify_tracker_id">Angiv id</string>
+    <string name="osmo_specify_tracker_id">Angiv ID</string>
     <string name="arrival_distance_factor_early">Tidligt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Sent</string>
@@ -1626,8 +1626,8 @@
     <string name="speed_limit_exceed">Tolerance for hastighedsgrænse</string>
     <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en stemmeadvarsel.</string>
     <string name="osmo_device_not_found">Enheden blev ikke fundet</string>
-    <string name="osmo_no_connection_msg">OsMo tjenesten er ikke tilgængelig:\n- kontrollere forbindelsen;\n- kontrollere indstillingerne;\n- se på Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">En anonym bruger kan ikke:\n- oprette grupper;\n- synkronisere grupper og enheder med serveren;\n- administrere grupper og enheder i et privat område.</string>
+    <string name="osmo_no_connection_msg">Kan ikke forbinde til OsMo serveren:\n- kontrollere internetforbindelsen;\n- kontrollere indstillingerne;\n- se på Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">En anonym bruger kan ikke:\n- oprette grupper;\n- synkronisere grupper og enheder med serveren;\n- administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
     <string name="anonymous_user">Anonym bruger</string>
     <string name="logged_as">Logget ind som %1$s</string>
     <string name="configure_map">Konfigurer kort</string>
