@@ -407,4 +407,13 @@
     <string name="choose_osmand_theme">Etoso</string>
     <string name="choose_osmand_theme_descr">Elektu etoson de aplikaĵo</string>
     <string name="local_indexes_cat_srtm">Nivelkurboj</string>
+    <string name="osmo_group_information_desc">" - Por krei grupon, bonvolu nomi kaj priskribi ĝin\n - Uzante la aplikaĵon nur Simplaj specoj de grupoj estas kreitaj, legu pli en la retpaĝo https://osmo.mobi/g/new\n - Per-retpaĝe vi povas administri grupon, loki kursojn kaj punktojn videblajn por ĉiujn\n - Ni ne rekomendas uzi gropon nur per unu persono, se tiu ne estas Intereseja gropo\n - Nekomunaj grupoj estas limitaj ĝis 8 personoj\n - Detalaj kondiĉoj estas ĉiam disponeblaj en retejo OsMo.mobi\n- Se vi bezonos specialajn kondiĉojn - bonvolu kontakti subtenantojn: osmo.mobi@gmail.com "</string>
+    <string name="osmo_specify_tracker_id">Bonvolu difini ID-on</string>
+    <string name="osmo_no_connection_msg">Ne povas konekti al la servilo de OsMo:\n- kontrolu vian retkonekton;\n- kontrolu agordojn;\n- vizitu na nia Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonima uzanto ne povas:\n- krei grupojn;\n- samtempigi grupojn kaj aparatojn kun la servilo;\n- administri grupojn kaj aparatojn per persona stirpanelo en retejo.</string>
+    <string name="report">Raporti</string>
+    <string name="osmo_connect_to_group_id">Grupa ID</string>
+    <string name="osmo_connect_to_device_tracker_id">Ŝanĝospurila ID</string>
+    <string name="osmo_connect">Konekti</string>
+    <string name="osmo_groups">Grupoj OsMo</string>
     </resources>
