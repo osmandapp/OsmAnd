@@ -1250,7 +1250,7 @@
 	<string name="osmo_settings_uuid">Унікальны ідэнтыфікатар прылады</string>
     <string name="osmo_settings_descr">Глянуць унікальны рэгістрацыйны ключ прыстасаваньня і наладзіць асабісты канал адсочваньня</string>
     <string name="osmo_plugin_description">"Модуль забясьпечвае функцыянальнасьць г. зв. пашыранага жывога адсочваньня OsMo, гл. Http: //osmo.mobi.↵\n↵\nЁн дазваляе адсочваць усе прылады ў вашай групе ў рэальным часе і мець зносіны. Магчымыя розныя варыянты опцый для адсочваньня сэсіі або сталага адсочваньня.↵\n↵\nАнанімныя групы ствараюцца па жаданьні на пэўную колькасьць дзён, але з абмежаваным функцыяналам, гэта значыць няма дыстанцыйнага кіраваньня і няма адміністратара групы. Цалкам функцыянальныя групы, з другога боку, могуць быць створаны на вэб-сайце і толькі зарэгістраваныя карыстальнікі маюць да іх доступ. "</string>
-    <string name="osmo_plugin_name">OsMo (OSM адсочваньне)</string>
+    <string name="osmo_plugin_name">OpenStreetMap адсочваньне</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
     <string name="route_descr_destination">Пункт прызначэньня</string>
@@ -1284,9 +1284,9 @@
 	<string name="use_points_as_intermediates">Разлічыць маршрут паміж кропкамі</string>
     
     <string name="osmo_auto_send_locations_descr">Аўтаматычна пачынаць запіс сьледу і перадачу месцазнаходжаньня пасьля старту праграмы</string>
-    <string name="osmo_auto_send_locations">Аўтаматычна пачынаць адсылку месцазнаходжаньня</string>
-    <string name="osmo_tracker_id">Пэрсанальны ID трэкера</string>
-    <string name="osmo_tracker_id_descr">Націсніце, каб паглядзець ці падзяліцца ідэнтыфікатарам трэкера. Выкарыстаньне ідэнтыфікатара трэкера звязанага з прыстасаваньнем дасьць магчымасьць кантраляваць усе перамяшчэньні гэтага прыстасаваньня! Для адключэньня выберыце опцыю перастварэньня.</string>
+    <string name="osmo_auto_send_locations">Аўтаматычна пачынаць падарожжа</string>
+    <string name="osmo_tracker_id">ID трэкера</string>
+    <string name="osmo_tracker_id_descr">Націсніце, каб паглядзець ідэнтыфікатар трэкера</string>
     <string name="osmo_session_token">Токен сэсыі: %1$s</string>
     <string name="osmo_auth_pending">У чаканьні дазволу…</string>
     <string name="osmo_locations_sent">"Месцазнаходжаньне адаслана %1$d (у буферы %2$d) "</string>
@@ -1302,7 +1302,7 @@
     
     
     <string name="osmo_connected_devices">Падключаныя прыстасаваньні</string>
-    <string name="osmo_groups">OsMo Групы/Прыстасаваньні</string>
+    <string name="osmo_groups">Групы OsMo</string>
     <string name="osmo_group_info">Інфармацыя</string>
     <string name="osmo_group">Група OsMo</string>
     <string name="osmo_group_share">Каб падключыцца да групы %2$s, задайце ID групы (%1$s) або націсьніце %3$s.</string>
@@ -1318,7 +1318,7 @@
     <string name="osmo_connect_to_group_id">ID групы</string>
     <string name="osmo_group_name">Назва групы</string>
     <string name="osmo_connect_to_group">Падлучыцца да групы</string>
-    <string name="osmo_connect">Падключыцца да</string>
+    <string name="osmo_connect">Далучыцца</string>
     <string name="osmo_create_group">Стварыць групу</string>
     <string name="osmo_server_operation_failed">Памылка аперацыі на сэрвэры OsMo</string>
     <string name="osmo_activity">Маніторынг OpenStreetMap</string>
@@ -1348,7 +1348,7 @@
     <string name="osmo_regenerate_login_ids_confirm">Вы ўпэўненыя, што хочаце перастварыць асабістыя ідэнтыфікатары? Усе прыстасаваньні, падлучаныя да вас больш не змогуць адсочваць вас.</string>
     <string name="osmo_regenerate_login_ids">Перастварыць ідэнтыфікатар карыстальніка</string>
     <string name="osmo_use_server_name">Зарэгістраванае імя</string>
-    <string name="osmo_connect_to_my_nickname">Мой нік</string>
+    <string name="osmo_connect_to_my_nickname">Нікнэйм</string>
     <string name="osmo_user_name">Карыстальнік</string>
 	
 	
@@ -1786,7 +1786,7 @@
 	<string name="routing_attr_height_description">Пазначце вышыню транспартнага сродку для разьліку маршруту</string>
     <string name="use_fast_recalculation">Разумны пераразьлік маршруту</string>
 	<string name="use_fast_recalculation_desc">Пераразьлічваць толькі пачатак маршруту для доўгіх паездак</string>
-<string name="osmo_share_my_location">Апублікаваць маё месцазнаходжаньне</string>
+<string name="osmo_share_my_location">Перадаць месцазнаходжаньне</string>
     <string name="shared_string_logoff">Выйсьці</string>
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
@@ -2156,4 +2156,11 @@
     <string name="osm_live_active">Актыўны</string>
     <string name="osm_live_not_active">Не актыўны</string>
     <string name="show_transparency_seekbar">Паказаць празрыстую пошукавую панэль</string>
+    <string name="storage_permission_restart_is_required">Праграма атрымала дазвол на запіс на зьнешні носьбіт. Патрабуецца перазагрузка праграмы.</string>
+    <string name="full_report">Поўная справаздача</string>
+    <string name="open_street_map_login_and_pass">Імя карыстальніка і пароль OpenStreetMap</string>
+    <string name="osm_live_thanks">Дзякуем вам за падпіску на live абнаўленьні!</string>
+    <string name="osm_live_region_desc">Частка вашага ахвяраваньня будзе накіроўвацца OSM карыстальнікам, якія ўнеслі зьмены ў мапу гэтага рэгіёну</string>
+    <string name="upload_osm_note_description">Вы можаце адаслаць Вашу OSM заўвагу ананімна, калі вы выкарыстоўваеце свой профіль OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Адаслаць OSM заўвагу</string>
     </resources>

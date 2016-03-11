@@ -1683,7 +1683,7 @@
     <string name="waypoint_visit_after">Odwiedź później</string>
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symulowanie lokalizacji</string>
-    <string name="short_location_on_map">Szer %1$s↵\nDług %2$s</string>
+    <string name="short_location_on_map">Szerokość %1$s\nDługość %2$s</string>
     <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne</string>
     <string name="routing_settings_2">Ustawienia nawigacji</string>
     <string name="general_settings_2">Ustawienia ogólne</string>
@@ -1876,7 +1876,7 @@
     <string name="building_number">Numer wersji</string>
     <string name="av_locations_descr">Plik GPS z notatkami o lokalizacjach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
-    <string name="download_live_updates">Aktualizacje na bieżąco</string>
+    <string name="download_live_updates">Aktualizowanie na bieżąco</string>
     <string name="commit_poi">Wyślij POI</string>
     <string name="tab_title_basic">Podstawowe</string>
     <string name="tab_title_advanced">Zaawansowane</string>
@@ -2048,7 +2048,7 @@
     <string name="no_address_found">Brak określonego adresu</string>
     <string name="shared_string_hide">Ukryj</string>
     <string name="only_download_over_wifi">Pobieranie tylko przez WiFi</string>
-    <string name="live_update">Uaktualniaj na bieżąco</string>
+    <string name="live_update">Uaktualnianie na bieżąco</string>
     <string name="update_now">Uaktualnij</string>
     <string name="update">Okres aktualizacji</string>
     <string name="route_distance">Odległość:</string>
@@ -2075,7 +2075,7 @@
     <string name="shared_string_type">Typ</string>
     <string name="starting_point">Punkt początkowy</string>
     <string name="rec_split_storage_size">Wielkość pamięci</string>
-    <string name="live_updates">Aktualizowanie na bieżąco</string>
+    <string name="live_updates">Bieżące aktualizacje</string>
     <string name="hourly">Co godzinę</string>
     <string name="daily">Co dzień</string>
     <string name="weekly">Co tydzień</string>
@@ -2134,4 +2134,10 @@
     <string name="storage_directory_shared">Pamięć współdzielona</string>
     <string name="osm_live_subscribe_btn">Zasubskrybuj</string>
     <string name="storage_permission_restart_is_required">Teraz aplikacja może zapisywać do pamięci zewnętrznej. Wymagane jest manualne ponowne uruchomienie.</string>
+    <string name="full_report">Pełny raport</string>
+    <string name="donations">Suma datków</string>
+    <string name="number_of_recipients">Liczba odbiorców</string>
+    <string name="report">Raport</string>
+    <string name="avoid_road">Omiń drogę</string>
+    <string name="recalculate_route">Wyznacz ponownie trasę</string>
     </resources>
