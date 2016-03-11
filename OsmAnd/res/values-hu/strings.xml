@@ -1297,7 +1297,7 @@
     <string name="osmo_settings_uuid">Egyedi eszközazonosító</string>
     <string name="osmo_settings_descr">Monitorozási beállítások és személyes monitorozási csatorna</string>
     <string name="osmo_plugin_description">"Ez a bővítmény biztosítja az úgynevezett OsMo speciális valós idejű megfigyelésének lehetőségét. Bővebben: http://osmo.mobi.\n\nValós időben követheti egy résztvevő csoport összes eszközét, és kommunikálhatnak egymással. Különféle lehetőségekkel érkezik a munkamenet követéséhez vagy az állandó követéshez.\n\nNévtelen csoportok hozhatók létre spontán adott számú napig, és korlátozva vannak a meghatározott szolgáltatásokra, azaz nincs távirányítás és nincs csoport adminisztrátor. Másrészről teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, és kizárólag regisztrált felhasználók rendelkeznek hozzáféréssel. "</string>
-    <string name="osmo_plugin_name">OsMo (OSM megfigyelés)</string>
+    <string name="osmo_plugin_name">OpenStreetMap Monitoring</string>
     <string name="osmo_settings">OsMo</string>
     <string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
     <string name="voice_pref_title">Hang</string>
@@ -1390,7 +1390,7 @@
     <string name="osmo_center_location">Képernyő közepére</string>
     <string name="osmo_set_moving_target">Beállítás mozgó célpontnak</string>
     <string name="osmo_use_server_name">Regisztrált név</string>
-    <string name="osmo_connect_to_my_nickname">Felhasználónevem</string>
+    <string name="osmo_connect_to_my_nickname">Felhasználónév</string>
     <string name="osmo_user_name">Felhasználó</string>
     
 
@@ -1407,7 +1407,7 @@
     <string name="osmo_group_name">Csoportnév</string>
     <string name="osmo_connect_to_device">Összekötés eszközzel</string>
     <string name="osmo_connect_to_group">Összekötés csoporttal</string>
-    <string name="osmo_connect">Kapcsolódás ide</string>
+    <string name="osmo_connect">Csatlakozás</string>
     <string name="osmo_create_group">Csoport létrehozása</string>
     <string name="osmo_server_operation_failed">OsMo kiszolgáló művelet sikertelen</string>
     <string name="osmo_activity">OpenStreetMap Monitoring</string>
@@ -1417,10 +1417,10 @@
     <string name="minutes_ago">perce</string>
     <string name="seconds_ago">másodperce</string>
     <string name="osmo_connected_devices">Összekapcsolt eszközök</string>
-    <string name="osmo_groups">OsMo Csoportok/Eszközök</string>
-    <string name="osmo_auto_send_locations_descr">A programindítás után a nyomkövető automatikus indítása és pozícióküldés</string>
-    <string name="osmo_auto_send_locations">Nyomkövető automatikus indítása</string>
-    <string name="osmo_tracker_id">Személyes nyomkövető ID</string>
+    <string name="osmo_groups">OsMo Csoportok</string>
+    <string name="osmo_auto_send_locations_descr">A programindítás után a nyomvonal automatikus indítása és pozícióküldés</string>
+    <string name="osmo_auto_send_locations">Nyomvonal automatikus indítása</string>
+    <string name="osmo_tracker_id">Nyomkövető ID</string>
 
     <string name="use_points_as_intermediates">Útvonal tervezése pontok között</string>
 
@@ -1504,7 +1504,7 @@
     <string name="osmo_start_service">OsMo szolgáltatás</string>
     <string name="osmo_gpx_track_downloaded">OsMo nyomvonal %1$s letöltve.</string>
     <string name="osmo_tracker_id_share">A(z) %2$s cél eszközhöz csatlakozáshoz kattints a %3$s linkre vagy add meg a tracker id-t (%1$s)</string>
-    <string name="osmo_tracker_id_descr">Kattints a tracker id megtekintéséhez vagy megosztásához. A tracker id-vel összekapcsolt eszközök minden mozgása követhető! A leválasztáshoz válaszd az Újragenerálás opciót.</string>
+    <string name="osmo_tracker_id_descr">Kattints a tracker ID megtekintéséhez</string>
     <string name="osmo_session_token">Munkamenet token: %1$s</string>
     <string name="osmo_auth_pending">Várakozás engedélyeztetésre…</string>
     <string name="osmo_locations_sent">"Pozíció elküldve %1$s (pufferben %2$s) "</string>
@@ -1776,7 +1776,7 @@
     <string name="routing_attr_height_description">Az utakon engedélyezett járműmagasság megadása</string>
     <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
     <string name="use_fast_recalculation_desc">Hosszú utaknál csak az útvonal kezdeti részének újraszámítása</string>
-    <string name="osmo_share_my_location">Pozícióm megosztása</string>
+    <string name="osmo_share_my_location">Pozíció továbbítása</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal hálózati szerepe szerint</string>
@@ -1899,7 +1899,7 @@
     <string name="favorite_category_select">Válassz kategóriát</string>
     <string name="default_speed_system_descr">Sebességmérési rendszer megadása</string>
     <string name="default_speed_system">Sebesség mértékegysége</string>
-    <string name="nm">nm</string>
+    <string name="nm">tm</string>
     <string name="si_nm">Tengeri mérföld</string>
     <string name="si_kmh">Kilométer per óra</string>
     <string name="si_mph">Mérföld per óra</string>
@@ -1907,7 +1907,7 @@
     <string name="si_min_km">Perc per kilométer</string>
     <string name="si_min_m">Perc per mérföld</string>
     <string name="si_nm_h">Tengeri mérföld per óra (csomó)</string>
-    <string name="nm_h">nm/h</string>
+    <string name="nm_h">tm/h</string>
     <string name="min_mile">perc/mf</string>
     <string name="min_km">perc/km</string>
     <string name="m_s">m/s</string>
@@ -2153,4 +2153,19 @@
     <string name="number_of_contributors">Közreműködők száma</string>
     <string name="number_of_edits">Szerkesztések száma</string>
     <string name="reports_for">Jelentés erről</string>
-</resources>
+<string name="report">Jelentés</string>
+    <string name="release_2_3">" • OSM Live. Támogasd a térkép szerkesztőit és fejlesztőket, és óránkénti térképfrissítést kapsz.\n\n • Térkép jelölők. Egy új mód arra, hogy a gyorsan tudj helyeket kiválasztani a térképen.\n\n • Még részletesebb OSM térképek, országspecifikus útszám ikonokkal és sok új térképelemmel.\n\n • Továbbfejlesztett útvonal előkészítő felület.\n\n • Számos fejlesztés a térkép környezeti menüjében, mint például a cím azonnali keresése. "</string>
+    <string name="shared_string_move_up">Mozgatás fel</string>
+    <string name="shared_string_move_down">Mozgatás le</string>
+    <string name="finish_navigation">Navigáció befejezése</string>
+    <string name="avoid_road">Út elkerülése</string>
+    <string name="full_report">Részletes jelentés</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap felhasználónév és jelszó</string>
+    <string name="osm_live_email_desc">Azért van rá szükségünk, hogy információval szolgálhassunk a hozzájárulásokról</string>
+    <string name="shared_string_undo_all">MINDET VISSZAVON</string>
+    <string name="file_name_containes_illegal_char">A fájlnév érvénytelen karaktereket tartalmaz</string>
+<string name="storage_permission_restart_is_required">Az alkalmazás már tud írni a külső tárolóra. Egy kézi alkalmazás újraindítás szükséges.</string>
+    <string name="rec_split_desc">Klippek elvágása, ha a felhasznált hely túllépi a tárolási méretet</string>
+    <string name="rec_split_clip_length_desc">Az egyes felvett klippek hossza nem lesz hosszabb a megadott időnél</string>
+    <string name="rec_split_storage_size_desc">Az összes klipp által elfoglalható hely</string>
+    </resources>
