@@ -1408,15 +1408,15 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungseinstellungen und des persönlichen Überwachungskanals</string>
 	<string name="osmo_plugin_description">"Dieses Plugin stellt den Funktionsumfang der sogenannten OsMo-Live-Überwachung bereit, siehe http://osmo.mobi.\n\nEs ermöglicht die temporäre oder dauerhafte Positionsdarstellung und Kommunikation einer Gruppe teilnehmender Geräte in Echtzeit. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung.\n\nAnonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
-	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
+	<string name="osmo_plugin_name">OpenStreetMap Überwachung</string>
 	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">"OsMo-Verbindungsproblem: "</string>
 	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
 	<string name="osmo_mode_off">OsMo-Sitzung starten</string>
 	<string name="osmo_auto_send_locations_descr">Aufzeichnung automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
 	<string name="osmo_auto_send_locations">Aufzeichnung automatisch starten</string>
-	<string name="osmo_tracker_id">Persönliche Aufzeichnungs-ID</string>
-	<string name="osmo_tracker_id_descr">Zum Anzeigen oder Teilen der Aufzeichnungs-ID tippen. Mit der Aufzeichnungs-ID verbundene Geräte können alle Bewegungen dieses Geräts aufzeigen! Zum Trennen der Verbindung die Regenerieren-Option auswählen.</string>
+	<string name="osmo_tracker_id">Aufzeichnungs-ID</string>
+	<string name="osmo_tracker_id_descr">Zum Anzeigen der Aufzeichnungs-ID tippen</string>
 	<string name="osmo_session_token">Sitzungstoken: %1$s</string>
 	<string name="osmo_auth_pending">Auf Autorisierung warten…</string>
 	<string name="osmo_locations_sent">Gesendete Standorte %1$d (im Zwischenspeicher %2$d) </string>
@@ -1426,7 +1426,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmo_connect_to_device_name">Nutzername</string>
 	<string name="osmo_connect_to_device_tracker_id">Aufzeichnungs-ID</string>
 	<string name="osmo_connect_to_device">Mit Gerät koppeln</string>
-	<string name="osmo_groups">OsMo-Gruppen/Geräte</string>
+	<string name="osmo_groups">OsMo-Gruppen</string>
 	<string name="osmo_edit_device">Ändern der Nutzereinstellungen</string>
 	<string name="osmo_group_info">Info</string>
 	<string name="osmo_group">OsMo-Gruppe</string>
@@ -1458,7 +1458,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmo_regenerate_login_ids_confirm">Sind sie sicher, dass Sie Ihre persönliche ID regenerieren möchten? Alle Geräte, die mit Ihnen verbunden sind, werden Ihnen nicht mehr folgen können.</string>
 	<string name="osmo_regenerate_login_ids">Nutzer-ID regenerieren</string>
 	<string name="osmo_use_server_name">Registrierter Name</string>
-	<string name="osmo_connect_to_my_nickname">Mein Nickname</string>
+	<string name="osmo_connect_to_my_nickname">Nickname</string>
 	<string name="osmo_user_name">Nutzer</string>
 	<string name="osmo_follow">Folgen</string>
 	<string name="osmo_user_joined">Nutzer %1$s hat die Gruppe %2$s betreten</string>
@@ -1743,7 +1743,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="search_poi_category_hint">Suchbegriff</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="shared_string_logoff">Abmelden</string>
-    <string name="osmo_share_my_location">Teile meine Position</string>
+    <string name="osmo_share_my_location">Übertragen der Position</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
     
 	<string name="routing_attr_height_name">Höhenbeschränkung</string>
@@ -2122,4 +2122,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="open_street_map_login_and_pass">OpenStreetMap Zugang und Passwort</string>
     <string name="osm_live_email_desc">Wir brauchen dies um dir Informationen über Beiträge zur Verfügung zu stellen</string>
     <string name="osm_live_support_region">Unterstützter Region</string>
+    <string name="report">Bericht</string>
+    <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
+    <string name="shared_string_move_up">Hoch bewegen</string>
+    <string name="shared_string_move_down">Runter bewegen</string>
     </resources>
