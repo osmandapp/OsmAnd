@@ -154,7 +154,6 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			} else {
 				ShareDialog dlg = new ShareDialog(this);
 				dlg.setTitle(getString(R.string.osmo_tracker_id));
-				dlg.setAction(getString(R.string.osmo_regenerate_login_ids), getRegenerateAction());
 				dlg.viewContent(ci.trackerId);
 				String url = OsMoService.SHARE_TRACKER_URL+Uri.encode(ci.trackerId);
 				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId, "", url), null);
@@ -162,28 +161,6 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			}
 		}
 		return super.onPreferenceClick(preference);
-	}
-	
-	private Runnable getRegenerateAction() {
-		return new Runnable() {
-			
-			@Override
-			public void run() {
-				AlertDialog.Builder bld = new AlertDialog.Builder(SettingsOsMoActivity.this);
-				bld.setMessage(R.string.osmo_regenerate_login_ids_confirm);
-				bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
-						assert plugin != null;
-						plugin.getService().pushCommand(OsMoService.REGENERATE_CMD);
-					}
-				});
-				bld.setNegativeButton(R.string.shared_string_no, null);
-				bld.show();
-			}
-		};
 	}
 
 	@Override
