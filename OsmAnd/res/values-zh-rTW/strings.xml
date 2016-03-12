@@ -1252,7 +1252,7 @@
     <string name="osmo_plugin_name">OpenStreetMap 監控</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
-    <string name="osmo_plugin_description">"這個外掛元件同時提供了所謂的 OsMo 進階即時監控，請參閱 http://osmo.mobi。\n\n您可以即時追蹤所有參與群組的裝置，並且彼此互通。具有各種選項用於連線期間追蹤或持續的追蹤。\n\n匿名群組可以為指定的天數和有限制的預設功能自發的建立，例如沒有遠端控制和沒有群組管理員。另一方面，完整功能的群組可以在網站上建立，並且只有已註冊的使用者才能進入他們。 "</string>
+    <string name="osmo_plugin_description">"這個外掛元件部分提供了 OpenStreetMap 監控功能，請參閱 http://osmo.mobi。\n\n您可以即時追蹤所有參與群組的裝置。具有各種選項用於連線期間追蹤或持續的追蹤。您還可以查看上傳到您所屬群組的航點和軌跡。\n\n經過幾個月不移除該群組，使其符合您在 OsMo.mobi 網站上建立的群組規則 "</string>
     <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
@@ -1496,8 +1496,8 @@
     <string name="speed_limit_exceed">速限容許餘裕</string>
     <string name="speed_limit_exceed_message">選擇速限容許餘裕界限，超過時您將會收到語音警告。</string>
     <string name="osmo_device_not_found">未找到裝置</string>
-    <string name="osmo_no_connection_msg">OsMo 服務無法使用：\n- 檢查連線；\n- 檢查設定；\n- 查看我們的 Twitter：https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在個人的辦事處所管理群組和裝置。</string>
+    <string name="osmo_no_connection_msg">無法連接到 OsMo 伺服器：\n- 檢查您的網路連線；\n- 檢查設定；\n- 查看我們的 Twitter：https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在網站上的個人儀表板管理群組和裝置。</string>
     <string name="anonymous_user">匿名使用者</string>
     <string name="logged_as">已登入於 %1$s</string>
     <string name="rendering_category_details">詳細資訊</string>
@@ -2151,4 +2151,6 @@
     <string name="full_report">全部報告</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap 登入與密碼</string>
     <string name="report">報告</string>
+    <string name="file_name_containes_illegal_char">檔案名稱含有違反規則的字符</string>
+<string name="storage_permission_restart_is_required">現在應用程式允許寫入外部記憶體。應用程式需要手動重新啟動。</string>
     </resources>
