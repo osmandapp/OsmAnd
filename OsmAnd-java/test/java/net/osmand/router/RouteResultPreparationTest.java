@@ -68,7 +68,6 @@ public class RouteResultPreparationTest {
     public static Collection<Object[]> data() throws IOException {
 
         InputStream inputStream = RouteResultPreparationTest.class.getResourceAsStream("test_routes.json");
-        //InputStream inputStream = new FileInputStream("test_routes.json");
         Reader reader = new InputStreamReader(inputStream);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
@@ -107,7 +106,6 @@ public class RouteResultPreparationTest {
                         //TODO: action if needed when expectedResults is null
                     }
 
-                    //Assert.fail("FAILED!");
                     System.out.println("segmentId: " + segmentId + " description: " + name);
 
                 }
