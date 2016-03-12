@@ -147,8 +147,8 @@
     </style>
 
     <style name="OsmandLightTheme.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
-        <item name="android:background">?attr:selectableItemBackground</item>
-        <item name="android:dropDownSelector">?attr:selectableItemBackground</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:dropDownSelector">?attr/selectableItemBackground</item>
         <item name="android:divider">@null</item>
         <item name="overlapAnchor">true</item>
         <item name="android:textColorPrimary">@color/color_dialog_buttons_light</item>
