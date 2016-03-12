@@ -1477,7 +1477,7 @@
     <string name="osmo_auto_connect">Automatisch verbinding maken</string>
     <string name="osmo_start_service">OsMo service</string>
     <string name="osmo_gpx_track_downloaded">OsMo track: %1$s opgehaald.</string>
-    <string name="osmo_group_information_desc">" - Alle groepen zijn openbaar! Om anoniem te blijven moet u apparaten rechtstreeks met elkaar verbinden via hun Tracker-ID, en niet in een groep.\n- Er kunnen maximaal 8 deelnemers in een groep.\n- Als er gedurende 2 weken geen of nog maar 1 deelnemer actief is, wordt de groep verwijderd.\n- Een groep kan besloten worden gemaakt (\"alleen op uitnodiging\"). Het beheer daarvan moet op de beheerspagina gebeuren.\n- Als u een groep nodig heeft met andere voorwaarden, ga dan naar http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Geef een naam en omschrijving om een groep te maken\n- Hier gemaakte groepen zijn van het type \'Simple\'; zie voor uitleg https://osmo.mobi/g/new\n- Via de website kunnen groepen beheerd worden en paden en punten beschikbaar worden gemaakt\n- Een groep is voor meerdere gebruikers, als het niet de POI-groep is\n- Er kunnen maximaal 8 deelnemers in een prive-groep\n- Gebruiksvoorwaarden zijn beschikbaar op de site osmo.mobi\n- Als u een groep nodig heeft met andere voorwaarden, neem dan contact op met support: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Lees dit voordat u een groep maakt!</string>
     <string name="osmo_not_signed_in">Kon niet inloggen op OsMo</string>
     <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
@@ -1532,7 +1532,7 @@
 	<string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
     <string name="osmo_invite">Uitnodiging voor…</string>
     <string name="osmo_leave_confirmation_msg">Wil je de groep %1$s verlaten?</string>
-    <string name="osmo_specify_tracker_id">Specificeer je tracker-id alsjeblieft</string>
+    <string name="osmo_specify_tracker_id">Geef tracker-ID</string>
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
     <string name="arrival_distance_factor_normally">Op tijd</string>
     <string name="arrival_distance_factor_late">Laat</string>
@@ -1593,7 +1593,7 @@
 	<string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">In de buurt van</string>
     <string name="osmo_device_not_found">Apparaat niet gevonden</string>
-    <string name="osmo_no_connection_msg">OsMo service is niet beschikbaar:\n- Controleer de verbinding;\n- Controleer de instellingen;\n- Kijk op Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">OsMo service is niet bereikbaar:\n- Controleer de verbinding;\n- Controleer de instellingen;\n- Kijk op Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">een anonieme gebruiker kan niet:\n- een groep aanmaken;\n- groepen en apparaten synchroniseren met de server;\n- groepen en apparaten beheren in een eigen omgeving.</string>
     <string name="anonymous_user">Anonieme gebruiker</string>
     <string name="logged_as">Ingelogd als %1$s</string>
@@ -2243,4 +2243,5 @@
     <string name="full_report">Volledig Verslag</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap loginnaam and wachtwoord</string>
     <string name="report">Verslag</string>
-    </resources>
+    <string name="file_name_containes_illegal_char">Bestandsnaam bevat verkeerd teken</string>
+</resources>
