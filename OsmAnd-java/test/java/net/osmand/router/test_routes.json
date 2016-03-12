@@ -10,7 +10,7 @@
       "latitude": 45.6952846638807
     },
     "expectedResults": {
-      "-94307": "+TL, +TL, +TL, C, TR, TR",
+      "-94361": "TL, TL, TL, C, TR, TR",
       "-96062": "+TL, +TL, +TL, +C, TR, TR",
       "-96063": "+TL, +TL, +TL, C, TR, TR"
     }
