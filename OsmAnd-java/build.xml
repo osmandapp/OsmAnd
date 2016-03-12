@@ -9,6 +9,8 @@
 	<property name="bin.dir" value="bin" />
 	<property name="bin.absolute.dir" location="${bin.dir}" />
 	<property name="lib.dir" value="libs" />
+	<property name="unit.dir" value="test/java" />
+	<property name="unit.absolute.dir" location="${unit.dir}" />
 	<property name="lib.absolute.dir" location="${lib.dir}" />
 	<property name="java.encoding" value="UTF-8" />
 
@@ -16,6 +18,11 @@
 		<fileset dir="${lib.absolute.dir}">
 			<include name="*.jar" />
 		</fileset>
+	</path>
+
+	<path id="unit.test.path">
+		<path refid="build.path"/>
+		<pathelement path="test/java"/>
 	</path>
 
 	<target name="-dirs">
@@ -27,6 +34,29 @@
 		<delete file="OsmAnd-core.jar" />
 	</target>
 
+	<target name="compileUnitTests" depends="compile">
+		<javac srcdir="test/" destdir="${bin.absolute.dir}">
+			<classpath refid="unit.test.path"/>
+		</javac>
+		<copy todir="${bin.absolute.dir}">
+			<fileset dir="test/java">
+				<include name="**/*.json" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="run-route-test" >
+		<junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+			<classpath>
+				<pathelement path="bin"/>
+				<path refid="build.path"/>
+			</classpath>
+			<test name="net.osmand.router.RouteResultPreparationTest" haltonfailure="no" outfile="result">
+				<formatter type="plain"/>
+				<formatter type="xml"/>
+			</test>
+		</junit>
+	</target>
 
 	<target name="copy_resources">
 		<copy todir="${src.absolute.dir}/net/osmand/router/">
@@ -90,7 +120,7 @@
 		<antcall target="jar" />
 	</target>
 
-	<target name="jar" depends="compile">
+	<target name="jar" depends="compile, compileUnitTests">
 		<manifestclasspath property="lib.list" jarfile="OsmAnd-core.jar">
 			<classpath refid="build.path" />
 		</manifestclasspath>
@@ -109,6 +139,9 @@
 				<include name="**/*" />
 			</fileset>
 			<fileset dir="${src.absolute.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${unit.absolute.dir}">
 				<include name="**/*.java" />
 			</fileset>
 		</jar>

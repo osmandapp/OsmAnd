@@ -1,0 +1,34 @@
+[
+  {
+    "testName": "Amstelveenseweg",
+    "startPoint": {
+      "longitude": 35.51630312204361,
+      "latitude": 45.6971206184178
+    },
+    "endPoint": {
+      "longitude": 35.51303619146347,
+      "latitude": 45.6952846638807
+    },
+    "expectedResults": {
+      "-94307": "+TL, +TL, +TL, C, TR, TR",
+      "-96062": "+TL, +TL, +TL, +C, TR, TR",
+      "-96063": "+TL, +TL, +TL, C, TR, TR"
+    }
+  },
+  {
+    "testName": "Amstelveenseweg2",
+    "startPoint": {
+      "longitude": 35.51630312204361,
+      "latitude": 45.6971206184178
+    },
+    "endPoint": {
+      "longitude": 35.51303619146347,
+      "latitude": 45.6952846638807
+    },
+    "expectedResults": {
+      "-96061": "+TL, +TL, +TL, +C, TR, TR",
+      "-96062": "+TL, +TL, +TL, C, TR, TR",
+      "-96063": "+TL, +TL, +TL, +C, TR, TR"
+    }
+  }
+]
