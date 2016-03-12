@@ -2655,5 +2655,7 @@
 
 	<string name="poi_sport_free_flying">Свободный полёт (спорт)</string>
 	<string name="poi_bicycle_repair_station">Стойка для ремонта велосипедов</string>
+	<string name="poi_water_tap">Водопроводный кран</string>
+
 
 </resources>
