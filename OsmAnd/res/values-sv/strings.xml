@@ -1445,7 +1445,7 @@
 
     <string name="osmo_invite">Bjud in…</string>
     <string name="osmo_leave_confirmation_msg">Vill du lämna gruppen %1$s?</string>
-    <string name="osmo_specify_tracker_id">Ange id</string>
+    <string name="osmo_specify_tracker_id">Ange ID</string>
     <string name="rendering_attr_coloredBuildings_name">Färgkoda byggnader efter typ</string>
     <string name="arrival_distance_factor_early">Tidigt</string>
     <string name="arrival_distance_factor_normally">Normalt</string>
@@ -1500,8 +1500,8 @@
     <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
     <string name="speed_limit_exceed">Tolerans för hastighetsgräns</string>
     <string name="osmo_device_not_found">Hittar ingen enhet</string>
-    <string name="osmo_no_connection_msg">OsMo-tjänsten är inte tillgänglig:\n- kolla din anslutning;\n- kolla inställningarna;\n- besök vårt Twitter-konto: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">En anonym användare kan inte:\n- skapa grupper;\n- synkronisera grupper och enheter med servern;\n- hantera grupper och enheter i ett privat kontor.</string>
+    <string name="osmo_no_connection_msg">Kan inte ansluta till OsMo-servern:\n- kolla din Internetanslutning;\n- kolla inställningarna;\n- besök vårt Twitter-konto: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">En anonym användare kan inte:\n- skapa grupper;\n- synkronisera grupper och enheter med servern;\n- hantera grupper och enheter på ett personligt ställe på webbplatsen.</string>
     <string name="anonymous_user">Anonym användare</string>
     <string name="logged_as">Inloggad som %1$s</string>
     <string name="configure_map">Konfigurera kartan</string>
