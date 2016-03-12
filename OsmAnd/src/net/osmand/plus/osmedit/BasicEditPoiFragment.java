@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
 import android.content.res.Resources;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +8,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +47,6 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
-
-		Display display = getActivity().getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		int height = size.y;
-		view.findViewById(R.id.screenFiller).setMinimumHeight(height);
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = getActivity().getTheme();
