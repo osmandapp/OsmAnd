@@ -2449,4 +2449,7 @@
 	<string name="poi_amenity_vacuum_cleaner">Aspiradoras</string>
 
 <string name="poi_sport_free_flying">Vuelo libre (deporte)</string>
+<string name="poi_bicycle_repair_station">Estación de reparación para bicicletas</string>
+	<string name="poi_water_tap">Grifo público</string>
+
 </resources>
