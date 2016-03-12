@@ -2654,5 +2654,6 @@
 	<string name="poi_amenity_vacuum_cleaner">Пылесос</string>
 
 	<string name="poi_sport_free_flying">Свободный полёт (спорт)</string>
+	<string name="poi_bicycle_repair_station">Стойка для ремонта велосипедов</string>
 
 </resources>
