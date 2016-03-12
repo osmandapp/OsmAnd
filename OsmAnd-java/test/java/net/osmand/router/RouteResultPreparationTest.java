@@ -41,14 +41,11 @@ public class RouteResultPreparationTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        String fileName = "../../../osmand/Turn_lanes_test.obf";
-        String fileName2 = "../../../osmand/World_basemap_2.obf";
+        String fileName = "../../resources/Turn_lanes_test.obf";
 
         File fl = new File(fileName);
-        File fl2 = new File(fileName2);
 
         RandomAccessFile raf = new RandomAccessFile(fl, "r");
-        RandomAccessFile raf2 = new RandomAccessFile(fl2, "r");
 
         fe = new RoutePlannerFrontEnd(false);
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
@@ -56,7 +53,7 @@ public class RouteResultPreparationTest {
         params.put("car", "true");
         params.put("short_way", "true");
         RoutingConfiguration config = builder.build("car", RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
-        BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf2, fl2), new BinaryMapIndexReader(raf, fl)};
+        BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
         ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
                 RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
         ctx.leftSideNavigation = false;
