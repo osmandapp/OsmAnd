@@ -1519,6 +1519,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if (osMoPlugin.getService().isLoggedIn()) {
 			app.getSettings().OSMO_USER_NAME.set("");
 			app.getSettings().OSMO_USER_PWD.set("");
+			app.getSettings().OSMO_DEVICE_KEY.set("");
 			osMoPlugin.getService().reconnectToServer();
 			updateStatus();
 			osMoPlugin.getGroups().clearGroups();
