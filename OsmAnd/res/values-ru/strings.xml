@@ -1193,7 +1193,7 @@
     <string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
     <string name="osmo_plugin_description">"Плагин обеспечивает функциональность для расширенного живого мониторинга OsMo, см. http://osmo.mobi.\n\nОн позволяет отслеживать другие устройства и отслеживаться самому. Вы можете создавать анонимные группы, делиться друг с другом местоположением и общаться. Возможны различные варианты опций для отслеживания сессии или постоянного слежения.\n\nАнонимные группы создаются для указанного количества дней и ограниченным функционалом, то есть нет дистанционного управления и нет администратора группы. Полностью функциональные группы, с другой стороны, могут быть созданы на веб-сайте и только зарегистрированные пользователи имеют к ним доступ. "</string>
-    <string name="osmo_plugin_name">OSM мониторинг</string>
+    <string name="osmo_plugin_name">OpenStreetMap Мониторинг</string>
     <string name="osmo_settings">OsMo</string>
     <string name="navigation_intent_invalid">Неправильный формат: %s</string>
     <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
@@ -1209,7 +1209,7 @@
     <string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
     <string name="osmo_connected_devices">Устройства</string>
-    <string name="osmo_groups">Управление OsMo</string>
+    <string name="osmo_groups">Группы OsMo</string>
     <string name="osmo_connect_to_device">Подключиться к устройству</string>
     <string name="osmo_auth_pending">Ожидание авторизации…</string>
     <string name="osmo_conn_successfull">Соединение установлено: %1$s </string>
@@ -1221,9 +1221,9 @@
     <string name="osmo_mode_on">Остановить сессию</string>
     <string name="osmo_mode_off">Старт сессии</string>
     <string name="osmo_settings_debug">Отладочная информация</string>
-    <string name="osmo_connect_to_device_tracker_id">ID трекера</string>
-    <string name="osmo_auto_send_locations_descr">Автоматический старт путешествия и отправка местоположения после запуска приложения</string>
-    <string name="osmo_auto_send_locations">Автоматический старт путешествия</string>
+    <string name="osmo_connect_to_device_tracker_id">Трекер ID</string>
+    <string name="osmo_auto_send_locations_descr">Автоматический старт поездки и отправка местоположения после запуска приложения</string>
+    <string name="osmo_auto_send_locations">Автоматический старт поездки</string>
     <string name="osmo_tracker_id">ID трекера</string>
     <string name="osmo_session_token">Токен сессии: %1$s</string>
     <string name="osmo_tracker_id_descr">Нажмите для посмотра ID трекера</string>
@@ -1246,7 +1246,7 @@
     <string name="osmo_group_share">Чтобы подключиться к группе %2$s, укажите ID группы (%1$s) или нажмите %3$s.</string>
     <string name="osmo_share_connect_device">Поделиться ID трекера</string>
     <string name="osmo_connect_menu">Соединение</string>
-    <string name="osmo_connect">Подключиться к</string>
+    <string name="osmo_connect">Войти</string>
     <string name="osmo_server_operation_failed">OsMo: не удалось правильно обработать команду</string>
     <string name="import_file_favourites">Сохранить точки как файл GPX или импортировать их в избранное?</string>
     
@@ -1967,4 +1967,5 @@
     <string name="reports_for">Отчет для</string>
 <string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
     <string name="release_2_3">" • OSM Live. Поддержка авторов и разработчиков карт и получение почасовых обновлений карты.\n\n• Маркеры. Новый способ для быстрого выбора мест на карте.\n\n• Более подробные OSM карты со специфическими дорожными знаками стран и с большим количеством новых функций.\n\n• Улучшен внешний вид и подготовка маршрута.\n\n• Множество улучшений в контекстном меню карты таких как поиск адреса.\n\nИ многое другое... "</string>
+    <string name="report">Отчёт</string>
     </resources>
