@@ -124,12 +124,5 @@
             android:text="@string/add_opening_hours"
             android:textSize="@dimen/default_sub_text_size"
             osmand:typeface="@string/font_roboto_medium"/>
-
-        <!--XXX due to bug in NestedScrollView-->
-        <Space
-            android:id="@+id/screenFiller"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:visibility="visible"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
