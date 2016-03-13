@@ -2660,4 +2660,29 @@
 	<string name="poi_button_operated_yes">Включается кнопкой: да</string>
 	<string name="poi_button_operated_no">Включается кнопкой: нет</string>
 
+	<string name="poi_free_flying_site_takeoff">Свободный полёт: подъём</string>
+	<string name="poi_free_flying_site_landing">Свободный полёт: посадка</string>
+	<string name="poi_free_flying_site_toplanding">Свободный полёт: посадка на вершине</string>
+	<string name="poi_free_flying_site_towing">Свободный полёт: буксировка</string>
+	<string name="poi_free_flying_site_training">Свободный полёт: тренировка</string>
+	<string name="poi_free_flying_official_yes">Официальное место для свободного полёта: да</string>
+	<string name="poi_free_flying_official_no">Официальное место для свободного полёта: нет</string>
+	<string name="poi_free_flying_paragliding_yes">Парапланеризм: да</string>
+	<string name="poi_free_flying_paragliding_no">Парапланеризм: нет</string>
+	<string name="poi_free_flying_hanggliding_yes">Дельтапланеризм: да</string>
+	<string name="poi_free_flying_hanggliding_no">Дельтапланеризм: нет</string>
+	<string name="poi_free_flying_rigid_yes">Дельтаплан с жестким крылом: да</string>
+	<string name="poi_free_flying_rigid_no">Дельтаплан с жестким крылом: нет</string>
+	<string name="poi_free_flying_site_orientation_n">Ориентация площадки для свободного полёта: С</string>
+	<string name="poi_free_flying_site_orientation_ne">Ориентация площадки для свободного полёта: СВ</string>
+	<string name="poi_free_flying_site_orientation_e">Ориентация площадки для свободного полёта: В</string>
+	<string name="poi_free_flying_site_orientation_se">Ориентация площадки для свободного полёта: ЮВ</string>
+	<string name="poi_free_flying_site_orientation_s">Ориентация площадки для свободного полёта: Ю</string>
+	<string name="poi_free_flying_site_orientation_sw">Ориентация площадки для свободного полёта: ЮЗ</string>
+	<string name="poi_free_flying_site_orientation_w">Ориентация площадки для свободного полёта: З</string>
+	<string name="poi_free_flying_site_orientation_nw">Ориентация площадки для свободного полёта: СЗ</string>
+	<string name="poi_free_flying_no_flight_time">Запрещенное для свободного полёта время</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Инструктаж для свободного полёта: обязательно</string>
+	<string name="poi_free_flying_guest_guidelines_no">Инструктаж для свободного полёта: необязательно</string>
+
 </resources>

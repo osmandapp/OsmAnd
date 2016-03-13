@@ -2661,4 +2661,29 @@
 	<string name="poi_button_operated_yes">Button operated: yes</string>
 	<string name="poi_button_operated_no">Button operated: no</string>
 
+	<string name="poi_free_flying_site_takeoff">Free flying site: takeoff</string>
+	<string name="poi_free_flying_site_landing">Free flying site: landing</string>
+	<string name="poi_free_flying_site_toplanding">Free flying site: toplanding</string>
+	<string name="poi_free_flying_site_towing">Free flying site: towing</string>
+	<string name="poi_free_flying_site_training">Free flying site: training</string>
+	<string name="poi_free_flying_official_yes">Free flying official: yes</string>
+	<string name="poi_free_flying_official_no">Free flying official: no</string>
+	<string name="poi_free_flying_paragliding_yes">Paragliding: yes</string>
+	<string name="poi_free_flying_paragliding_no">Paragliding: no</string>
+	<string name="poi_free_flying_hanggliding_yes">Hanggliding: yes</string>
+	<string name="poi_free_flying_hanggliding_no">Hanggliding: no</string>
+	<string name="poi_free_flying_rigid_yes">Free flying rigid: yes</string>
+	<string name="poi_free_flying_rigid_no">Free flying rigid: no</string>
+	<string name="poi_free_flying_site_orientation_n">Free flying site orientation: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Free flying site orientation: NE</string>
+	<string name="poi_free_flying_site_orientation_e">Free flying site orientation: E</string>
+	<string name="poi_free_flying_site_orientation_se">Free flying site orientation: SE</string>
+	<string name="poi_free_flying_site_orientation_s">Free flying site orientation: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Free flying site orientation: SW</string>
+	<string name="poi_free_flying_site_orientation_w">Free flying site orientation: W</string>
+	<string name="poi_free_flying_site_orientation_nw">Free flying site orientation: NW</string>
+	<string name="poi_free_flying_no_flight_time">No flight time (free flying)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Guest guidelines for free flying: yes</string>
+	<string name="poi_free_flying_guest_guidelines_no">Guest guidelines for free flying: no</string>
+
 </resources>
