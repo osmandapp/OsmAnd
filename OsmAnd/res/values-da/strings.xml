@@ -2323,7 +2323,7 @@
     <string name="recalculate_route">Genberegn ruten</string>
     <string name="shared_string_topbar">Topbjælke</string>
     <string name="storage_directory_shared">Delt hukommelse</string>
-    <string name="storage_directory_readonly_desc">Den aktuelt valgte lagerpladsmappe til data er skrivebeskyttet. Lagermappe blev midlertidigt skifte til Intern hukommelse. Vælg en gyldig lagerpladsmappe.</string>
+    <string name="storage_directory_readonly_desc">Den aktuelt valgte mappe til data er skrivebeskyttet. Mappe blev midlertidigt skifte til Intern hukommelse. Vælg en gyldig mappe.</string>
     <string name="avoid_road">Undgå vej</string>
     <string name="finish_navigation">Afslut navigation</string>
     <string name="shared_string_move_up">Flyt op</string>
