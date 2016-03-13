@@ -1039,7 +1039,7 @@
 	<string name="poi_denomination_new_apostolic">Kościół Nowoapostolski</string>
 	<string name="poi_shower">Prysznic</string>
 	<string name="poi_email">E-mail</string>
-	<string name="poi_fax"/>
+	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
@@ -1181,4 +1181,75 @@
 	<string name="poi_association">Biura stowarzyszenia</string>
 	<string name="poi_financial">Biuro finansowe</string>
 	<string name="poi_denomination_episcopal">Biskupi</string>
+	<string name="poi_aerialway_pylon">Słup podtrzymujący kable wyciągu</string>
+
+	<string name="poi_lighting_tower">Maszt oświetleniowy</string>
+	<string name="poi_greenfield">Teren niezagospodarowany</string>
+	<string name="poi_capital">Stolica</string>
+	<string name="poi_religion_multifaith">Wielowyznaniowość</string>
+	<string name="poi_denomination_shia">Szyityzm</string>
+	<string name="poi_denomination_united">Kościół Unicki (grecko-katolicki)</string>
+	<string name="poi_denomination_tibetan">Buddyzm tybetański</string>
+	<string name="poi_denomination_united_reformed">Kościół Zjednoczony (Unijny)</string>
+	<string name="poi_denomination_mennonite">Mennonici</string>
+	<string name="poi_denomination_quaker">Kwakrzy</string>
+	<string name="poi_denomination_assemblies_of_god">Zbory Boże</string>
+	<string name="poi_denomination_adventist">Adwentyści</string>
+	<string name="poi_denomination_nazarene">Kościół Nazarejczyka</string>
+	<string name="poi_denomination_old_believers">Staroobrzędowcy</string>
+	<string name="poi_denomination_serbian_orthodox">Serbski ortodoksyjny</string>
+	<string name="poi_denomination_armenian_apostolic">Apostolski Kościół Ormiański</string>
+	<string name="poi_denomination_dutch_reformed">Holenderski Kościół Reformowany</string>
+	<string name="poi_denomination_apostolic">Kościół Apostolski</string>
+	<string name="poi_denomination_latter_day_saints">Kościół Jezusa Chrystusa Świętych w Dniach Ostatnich</string>
+	<string name="poi_denomination_church_of_christ"/>
+	<string name="poi_denomination_georgian_orthodox">Gruziński prawosławny</string>
+	<string name="poi_denomination_romanian_orthodox">Rumuński prawosławny</string>
+	<string name="poi_denomination_coptic_orthodox">Koptyjski</string>
+	<string name="poi_denomination_shaktism">Śaktyzm</string>
+	<string name="poi_denomination_shingon_shu">Shingon</string>
+	<string name="poi_denomination_maronite">Maronityzm</string>
+	<string name="poi_denomination_mahayana">Mahajana</string>
+
+	<string name="poi_internet_access_yes">Dostęp do internetu: tak</string>
+	<string name="poi_internet_access_no">Dostęp do internetu: nie</string>
+
+	<string name="poi_mobile">Telefon komórkowy</string>
+	<string name="poi_drinking_water_no">Brak wody pitnej</string>
+	<string name="poi_seasonal_no">Całoroczny</string>
+	<string name="poi_seasonal_dry_season">Pora sucha</string>
+	<string name="poi_seasonal_wet_season">Pora deszczowa</string>
+	<string name="poi_wheelchair">Wózki inwalidzkie</string>
+	<string name="poi_wheelchair_no">Brak dostępu dla wózków inwalidzkich</string>
+	<string name="poi_access_private">Dostęp prywatny</string>
+	<string name="poi_content_fuel">Zawartość: paliwo</string>
+	<string name="poi_content_wine">Zawartość: wino</string>
+	<string name="poi_content_gas">Zawartość: gaz</string>
+	<string name="poi_content_biomass">Zawartość: biomasa</string>
+	<string name="poi_content_crop">Zawartość: plony</string>
+	<string name="poi_content_beer">Zawartość: piwo</string>
+	<string name="poi_content_salt">Zawartość: sól</string>
+	<string name="poi_content_grain">Zawartość: zboże</string>
+
+	<string name="poi_content_water">Zawartość: woda</string>
+	<string name="poi_content_oil">Zawartość: ropa naftowa</string>
+	<string name="poi_nudism_permissive">Nudyzm: dozwolony</string>
+
+	<string name="poi_bicycle_parking_stands">Stoiska</string>
+	<string name="poi_bicycle_parking_building">Budynek specjalny</string>
+	<string name="poi_bicycle_parking_shed">Zadaszenie</string>
+	<string name="poi_bicycle_parking_bollard">Słupek</string>
+	<string name="poi_trees_olive">Krzewy oliwne</string>
+	<string name="poi_trees_apple">Jabłonie</string>
+	<string name="poi_urban">Miejski</string>
+	<string name="poi_animal_shelter">Schronisko</string>
+	<string name="poi_pump_no">Brak pompy</string>
+	<string name="poi_pump_yes">Pompa</string>
+
+	<string name="poi_water_characteristic_mineral">Charakterystyka wody: mineralna</string>
+	<string name="poi_water_characteristic_mud">Charakterystyka wody: mętna</string>
+	<string name="poi_water_characteristic_sulfuric">Charakterystyka wody: siarczkowa</string>
+
+	<string name="poi_amenity_vacuum_cleaner">Odkurzacz</string>
+
 	</resources>
