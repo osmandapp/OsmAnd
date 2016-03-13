@@ -1521,7 +1521,7 @@
     <string name="osmo_not_signed_in">OsMo log ind mislykkedes</string>
     <string name="osmo_group_information">Læs dette før oprettelse af en gruppe!</string>
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
-    <string name="osmo_group_information_desc">" - Alle grupper der oprettes er offentlige! Hvis de skal være anonyme, tilsluttes enheder direkte via sporings-id\'er.\n - Private grupper er begrænset til 8 personer\n - I tilfælde af inaktivitet eller aktivitet af kun 1 person i 2 uger, vil gruppen blive slettet.\n - Man kan begrænse adgangen til gruppen, til kun med invitation, men for at kontrollere gruppen skal man bruge administrationskonsollen.\n - Hvis der er brug for at oprette en gruppe, men med andre betingelser, kontakt http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Oprettelse af en gruppe angiv et navn og udfyld beskrivelsen\n- Fra programmet kan kun oprettes en gruppe af simpel type, læs mere på hjemmesiden https://osmo.mobi/g/new\n- Via en hjemmeside kan administreres en gruppe, til at placere spor og punkter til rådighed for alle\n- Understøtter ikke brugen af en gruppe for kun én bruger, hvis dette ikke er IP-gruppen\n- Private grupper er begrænset til 8 personer\n- Detaljerede vilkår kan altid ses på hjemmesiden OsMo.mobi\n- Brug for  særlige vilkår - kontakt support: osmo.mobi@gmail.com "</string>
     <string name="osmo_auth_error_short">Autorisation fejlede</string>
     <string name="osmo_auth_error">"OsMo autorisation fejl: %1$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
@@ -2333,5 +2333,5 @@
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Nu har programmet lov til at skrive til ekstern lager. Manuel genstart er påkrævet.</string>
     <string name="report">Rapport</string>
-    <string name="file_name_containes_illegal_char">Filnavnet indeholder ulovlige tegn</string>
+    <string name="file_name_containes_illegal_char">Filnavnet indeholder ikke tilladte tegn</string>
 </resources>
