@@ -2719,4 +2719,7 @@
 
 <string name="poi_water_tap">Vandhane</string>
 
+<string name="poi_button_operated_yes">Knapbetjent: ja</string>
+	<string name="poi_button_operated_no">Knapbetjent: nej</string>
+
 </resources>
