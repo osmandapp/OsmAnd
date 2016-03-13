@@ -2657,5 +2657,7 @@
 	<string name="poi_bicycle_repair_station">Стойка для ремонта велосипедов</string>
 	<string name="poi_water_tap">Водопроводный кран</string>
 
+	<string name="poi_button_operated_yes">Включается кнопкой: да</string>
+	<string name="poi_button_operated_no">Включается кнопкой: нет</string>
 
 </resources>
