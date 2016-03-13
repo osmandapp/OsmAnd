@@ -100,7 +100,7 @@
     <string name="map_text_size_descr">Wybierz rozmiar tekstu dla nazw na mapie</string>
     <string name="map_text_size">Rozmiar tekstu</string>
     <string name="trace_rendering">Informacje o diagnozowaniu błędów renderowania</string>
-    <string name="trace_rendering_descr">Wyświetlaj informacje o wydajności renderowania</string>
+    <string name="trace_rendering_descr">Wyświetla informacje o wydajności renderowania</string>
 
 
     <string name="installing_new_resources">Rozpakowywanie nowych danych…</string>
@@ -153,7 +153,7 @@
     <string name="preferred_locale">Język interfejsu</string>
 
 
-    <string name="shared_string_next">Dalej</string>
+    <string name="shared_string_next">Naprzód</string>
     <string name="shared_string_previous">Wstecz</string>
     <string name="unit_of_length_descr">Zmienia jednostki długości i prędkości</string>
     <string name="unit_of_length">Jednostki miar</string>
@@ -236,7 +236,7 @@
     <string name="daynight_descr">Zdefiniuj kryterium przełączania trybu dzień/noc</string>
     <string name="daynight">Tryb dzienny/nocny</string>
     <string name="download_files_question">Pobrać {0} plik(ów) ({1} MB)?</string>
-    <string name="items_were_selected">{0} element(ów) zaznaczono</string>
+    <string name="items_were_selected">zaznaczono {0} element(ów)</string>
     <string name="filter_existing_indexes">Pobrane</string>
 
     <string name="shared_string_select_all">Zaznacz wszystko</string>
@@ -249,9 +249,9 @@
     <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
     <string name="fast_route_mode">Najszybsza trasa</string>
     <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
-    <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
-    <string name="shared_string_download_map">Pobieranie mapy</string>
-    <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
+    <string name="tiles_to_download_estimated_size">Do pobrania {1} kafelków na poziomie {0} ({2} MB)</string>
+    <string name="shared_string_download_map">Pobierz mapę</string>
+    <string name="select_max_zoom_preload_area">Proszę wybrać maksymalne przybliżenie do pobrania</string>
     <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
     <string name="continuous_rendering">Rysowanie ciągłe</string>
     <string name="continuous_rendering_descr">Używaj ciągłego rysowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
@@ -656,7 +656,7 @@
     <string name="support_new_features">Wesprzyj prace</string>
 
     <string name="show_ruler_level">Wyświetl linijkę</string>
-    <string name="info_button">Informacja</string>
+    <string name="info_button">Informacje</string>
     <string name="back_to_location">Powróć do pozycji</string>
     <string name="shared_string_help">Pomoc</string>
 
@@ -785,7 +785,7 @@
     <string name="rendering_attr_appMode_name">Tryb rysowania</string>
     <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
     <string name="rendering_attr_contourLines_description">Wyświetlanie od poziomu powiększenia (wymagane dane poziomicowe):</string>
-    <string name="rendering_attr_contourLines_name">Wyświetlanie poziomic</string>
+    <string name="rendering_attr_contourLines_name">Poziomice</string>
     <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
     <string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string>
     <string name="route_roundabout">Rondo: wybierz %1$d zjazd</string>
@@ -1067,7 +1067,7 @@
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
     <string name="shared_string_more_actions">Więcej akcji</string>
     <string name="favourites_list_activity">Wybierz ulubione</string>
-    <string name="download_using_mobile_internet">Urządzenie nie jest połączone przez Wi-Fi. Czy chcesz kontynuować pobieranie używając obecnego połączenia?</string>
+    <string name="download_using_mobile_internet">Połączenie sieciowe nie jest nawiązane za pośrednictwem Wi-Fi. Kontynuować pobieranie używając obecnego połączenia?</string>
     <string name="clear_destination">Usuń punkt docelowy</string>
     <string name="cancel_navigation">Zatrzymaj nawigację</string>
     <string name="cancel_route">Odrzuć trasę</string>
@@ -1075,8 +1075,8 @@
     <string name="other_location">Inna</string>
     <string name="files_limit">Pozostało %1$d plików</string>
     <string name="available_downloads_left">%1$d dostępnych plików do pobrania</string>
-    <string name="use_magnetic_sensor_descr">Użyj czujnika pola magnetycznego, aby określić kierunek kompasu</string>
-    <string name="use_magnetic_sensor">Użyj czujnika magnetycznego (kompas)</string>
+    <string name="use_magnetic_sensor_descr">Wykorzystuje czujnik pola magnetycznego zamiast czujnika orientacji, w celu określania kierunku kompasu</string>
+    <string name="use_magnetic_sensor">Używanie czujnika magnetycznego</string>
     <string name="local_indexes_cat_srtm">Poziomice</string>
     <string name="use_kalman_filter_compass_descr">Redukuje szumy w odczytach kompasu, ale zwiększa bezwładność</string>
     <string name="use_kalman_filter_compass">Używanie filtra Kalmana</string>
@@ -1212,16 +1212,16 @@
     <string name="app_mode_aircraft">Samolot</string>
     <string name="map_widget_map_rendering">Renderowanie</string>
     <string name="app_modes_choose">Profile programu</string>
-    <string name="app_modes_choose_descr">Wybierz używane profile widoczne w aplikacji</string>
+    <string name="app_modes_choose_descr">Wybiera używane profile widoczne w programie</string>
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
 
 
     <string name="speech_rate_descr">Określa tempo odtwarzania syntezowanych komunikatów głosowych</string>
     <string name="speech_rate">Szybkość mowy</string>
 
-    <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
+    <string name="disable_complex_routing_descr">Wyłącza 2-etapowe wyznaczanie trasy dla nawigacji samochodowej</string>
     <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s). Przełączanie na tryb powolny.</string>
-    <string name="disable_complex_routing">Wyłącz złożone wyznaczanie trasy</string>
+    <string name="disable_complex_routing">Wyłączenie złożonego wyznaczanie trasy</string>
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
     <string name="routing_preferences_descr">Wyznaczanie trasy</string>
     <string name="app_mode_truck">Ciężarówka</string>
@@ -1381,10 +1381,10 @@
     <string name="osmo_expire_group">Wygasa za</string>
     <string name="osmo_group_description">Opis</string>
     <string name="osmo_group_policy">Polityka grup</string>
-    <string name="osmo_connect_to_group_id">ID grupy</string>
+    <string name="osmo_connect_to_group_id">Identyfikator grupy</string>
     <string name="osmo_group_name">Nazwa grupy</string>
     <string name="osmo_connect_to_group">Sparuj z grupą</string>
-    <string name="osmo_connect">Połącz</string>
+    <string name="osmo_connect">Dołącz</string>
     <string name="osmo_create_group">Utwórz grupę</string>
     <string name="osmo_server_operation_failed">Błąd działania Serwera OsMo</string>
     <string name="osmo_activity">Monitorowanie OpenStreetMap</string>
@@ -1516,7 +1516,7 @@
     <string name="rendering_attr_coloredBuildings_name">Kolorowy kod typów budynków</string>
     <string name="osmo_invite">Zaproś…</string>
     <string name="osmo_leave_confirmation_msg">Opuścić grupę %1$s?</string>
-    <string name="osmo_specify_tracker_id">Określ id</string>
+    <string name="osmo_specify_tracker_id">Proszę określić identyfikator</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
     <string name="pause_navigation">Wstrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Skala wspinaczki alpinistycznej (SAC)</string>
@@ -1683,7 +1683,7 @@
     <string name="waypoint_visit_after">Odwiedź później</string>
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symulowanie lokalizacji</string>
-    <string name="short_location_on_map">Szerokość %1$s\nDługość %2$s</string>
+    <string name="short_location_on_map">Szerokość %1$s\n Długość %2$s</string>
     <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne</string>
     <string name="routing_settings_2">Ustawienia nawigacji</string>
     <string name="general_settings_2">Ustawienia ogólne</string>
@@ -1932,8 +1932,8 @@
     <string name="srtm_plugin_disabled">Wyłączone poziomice</string>
     <string name="favourites_edit_dialog_title">Informacje ulubione</string>
     <string name="downloading_number_of_files">Pobieranie - %1$d plik</string>
-    <string name="show_free_version_banner">Pokaż baner darmowej wersji</string>
-    <string name="show_free_version_banner_description">Nawet jeśli posiadasz płatną wersję to nadal nadal możesz zobaczyć baner darmowej wersji</string>
+    <string name="show_free_version_banner">Baner darmowej wersji</string>
+    <string name="show_free_version_banner_description">Wyświetla baner wersji darmowej w przypadku zainstalowania wersji płatnej</string>
     <string name="buy">KUP</string>
     <string name="activate_seamarks_plugin">Proszę włączyć wtyczkę latarni morskich</string>
     <string name="activate_srtm_plugin">Proszę włączyć wtyczkę SRTM</string>
@@ -1942,7 +1942,7 @@
     <string name="downloads">Pobierz</string>
     <string name="favorite_category_add_new_title">Dodaj nową kategorię</string>
     <string name="favorite_category_name">Nazwa kategorii</string>
-    <string name="favorite_category_dublicate_message">Taka nazwa kategorii już istnieje. Proszę wybrać inną.</string>
+    <string name="favorite_category_dublicate_message">Określona nazwa kategorii już istnieje. Proszę wybrać inną.</string>
     <string name="share_menu_location">Udostępnij położenie</string>
     <string name="shared_string_send">Wyślij</string>
     <string name="file_size_in_mb">%.1f MB</string>
@@ -1952,11 +1952,11 @@
     <string name="value_downloaded_of_max">%1$.1f z %2$.1f MB</string>
     <string name="shared_string_qr_code">Kod QR</string>
     <string name="enter_country_name">Proszę wybrać kraj</string>
-    <string name="map_downloaded_descr">Mapa %1$s została pobrana. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
+    <string name="map_downloaded_descr">Pobrano mapę %1$s. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
     <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby uzyskać kompletne środowisko.</string>
     <string name="map_downloaded">Pobrano mapę</string>
     <string name="go_to_map">Powróć do mapy</string>
-    <string name="simulate_initial_startup">Symulowania pierwszego uruchomienia programu</string>
+    <string name="simulate_initial_startup">Zasymuluj pierwsze uruchomienie programu</string>
     <string name="read_more">Czytaj dalej</string>
     <string name="whats_new">Co nowego w</string>
     <string name="rendering_attr_hideProposed_name">Ukrywanie proponowanych obiektów</string>
@@ -1964,7 +1964,7 @@
     <string name="shared_string_upload">Prześlij</string>
     <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
 
-    <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
+    <string name="simulate_initial_startup_descr">Ustala flagę wskazującą pierwsze uruchomienie programu zachowując wszystkie pozostałe ustawienia</string>
     <string name="share_geo">geo:</string>
     <string name="confirm_download_roadmaps">Pobrać mapę samochodową, nawet jeśli pobrano już zwykłą mapę?</string>
     <string name="free_downloads_used_description">Wyświetla ilość zużytych darmowych pobrań</string>
@@ -2109,15 +2109,15 @@
     <string name="shared_string_add_to_map_markers">Dodaj znacznik mapy</string>
     <string name="select_map_markers">Wybierz znacznik mapy</string>
     <string name="shared_string_reverse_order">Odwróć kolejność</string>
-    <string name="show_map_markers_description">Aktywuj funkcję Znaczników mapy</string>
+    <string name="show_map_markers_description">Aktywuje funkcję znaczników mapy</string>
     <string name="clear_active_markers_q">Usunąć wszystkie aktywne znaczniki?</string>
     <string name="clear_markers_history_q">Wyczyścić historię znaczników mapy?</string>
     <string name="active_markers">Aktywne znaczniki</string>
     <string name="map_markers">Znaczniki mapy</string>
     <string name="map_marker">Znacznik mapy</string>
     <string name="consider_turning_polygons_off">Zaleca się wyłączenie renderowania wielokątów.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Pokaż trasy MTB</string>
-    <string name="show_polygons">Pokaż wielokąty</string>
+    <string name="rendering_attr_showMtbRoutes_name">Trasy MTB</string>
+    <string name="show_polygons">Wielokąty</string>
     <string name="find_parking">Znajdź parking</string>
     <string name="shared_string_status">Status</string>
     <string name="add_time_span">Dodaj przedział czasowy</string>
@@ -2135,9 +2135,15 @@
     <string name="osm_live_subscribe_btn">Zasubskrybuj</string>
     <string name="storage_permission_restart_is_required">Teraz aplikacja może zapisywać do pamięci zewnętrznej. Wymagane jest manualne ponowne uruchomienie.</string>
     <string name="full_report">Pełny raport</string>
-    <string name="donations">Suma datków</string>
+    <string name="donations">Kwota datków</string>
     <string name="number_of_recipients">Liczba odbiorców</string>
     <string name="report">Raport</string>
     <string name="avoid_road">Omiń drogę</string>
     <string name="recalculate_route">Wyznacz ponownie trasę</string>
+    <string name="open_street_map_login_and_pass">Nazwa użytkownika i hasło OpenStreetMap</string>
+    <string name="osm_editors_ranking">Ranking edytorów OSM</string>
+    <string name="osm_live_enter_email">Proszę wprowadzić prawidłowy adres e-mail</string>
+    <string name="osm_live_thanks">Dziękujemy za zasubskrybowanie bieżących aktualizacji!</string>
+    <string name="osm_live_subscription_settings">Ustawienia subskrypcji</string>
+    <string name="show_transparency_seekbar">Pasek przezroczystości</string>
     </resources>
