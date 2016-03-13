@@ -1096,8 +1096,8 @@
     <string name="routing_attr_short_way_description">Использовать кратчайший путь</string>
     <string name="routing_attr_avoid_toll_name">Избегать платных дорог</string>
     <string name="routing_attr_avoid_toll_description">Избегать платных дорог</string>
-    <string name="routing_attr_avoid_unpaved_name">Избегать грунтовые дороги</string>
-    <string name="routing_attr_avoid_unpaved_description">Избегать грунтовые дороги</string>
+    <string name="routing_attr_avoid_unpaved_name">Избегать грунтовых дорог</string>
+    <string name="routing_attr_avoid_unpaved_description">Избегать грунтовых дорог</string>
     <string name="routing_attr_avoid_ferries_name">Избегать паромов</string>
     <string name="routing_attr_avoid_ferries_description">Избегать паромов</string>
     <string name="routing_attr_weight_name">Максимальная масса</string>
@@ -1424,7 +1424,7 @@
     <string name="local_index_description">Нажмите на любой элемент списка для просмотра более подробной информации, нажмите и удерживайте, чтобы поместить в архив или удалить. Текущие данные на устройстве (%1$s свободно):</string>
     <string name="osmo_device_not_found">Устройство не обнаружено</string>
     <string name="anonymous_user">Анонимный пользователь</string>
-    <string name="osmo_no_connection_msg">Сервис OsMo не доступен:\n- проверьте соединение;\n- проверьте настройки;\n- проверьте наш Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Сервис OsMo не доступен:\n- проверьте интернет соединение;\n- проверьте настройки;\n- проверьте наш Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Анонимному пользователю недоступно:\n- создание групп;\n- синхронизация групп и устройств с сервером;\n- управление группами и устройствами в личном кабинете.</string>
     <string name="logged_as">Вы вошли как %1$s</string>
     <string name="rendering_category_routes">Маршруты</string>
@@ -1648,7 +1648,7 @@
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Скрыть номера домов</string>
     
-    <string name="routing_attr_avoid_borders_description">Избегать пересечение границы с другой страной</string>
+    <string name="routing_attr_avoid_borders_description">Избегать пересечения границы с другой страной</string>
     <string name="routing_attr_height_name">Ограничение высоты</string>
     <string name="routing_attr_height_description">Укажите высоту автомобиля для учёта при построении маршрута</string>
     <string name="use_fast_recalculation">Умный перерасчет маршрута</string>
@@ -1868,7 +1868,7 @@
     <string name="context_menu_item_edit_waypoint">Редактировать точку GPX</string>
     <string name="routing_attr_avoid_stairs_name">Избегать лестниц</string>
     <string name="routing_attr_avoid_stairs_description">Избегать лестниц</string>
-    <string name="routing_attr_avoid_borders_name">Избегать пересечение бордюра</string>
+    <string name="routing_attr_avoid_borders_name">Избегать пересечения границы</string>
     <string name="update">Обновлять каждые</string>
     <string name="only_download_over_wifi">Загружать только через WiFi</string>
     <string name="update_now">Обновить сейчас</string>
