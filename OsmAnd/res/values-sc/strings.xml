@@ -239,7 +239,7 @@
     <string name="osmo_plugin_description">"Custa estensione frunit sas funtzionalidades pro impreare sa compidada avantzada in dereta OsMo, bie http://osmo.mobi.
 \n\nSighi totu sos dispositivos de unu grupu in ue e comùnica cun sos àteros. Sunt disponìbiles meda impostatziones pro s’arrastamentu, pro sa sessione in cursu o permanentes.
 \n\nSos grupos anònimos podent èssere creados pro su nùmeru pretzisu de dies e bi sunt lìmites pro calicuna de sas funtziones, es. non b’est su controllu remotu e nemmancu s’amministradore de su grupu. Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. "</string>
-    <string name="osmo_plugin_name">OsMo (Compidada OSM)</string>
+    <string name="osmo_plugin_name">Compidada OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
 
 
@@ -530,7 +530,7 @@
     <string name="osmo_center_location">Tzentra in s’ischermu</string>
     <string name="osmo_set_moving_target">Imposta comente obietivu mòbile</string>
     <string name="osmo_use_server_name">Nùmene registrau</string>
-    <string name="osmo_connect_to_my_nickname">Zistru meu</string>
+    <string name="osmo_connect_to_my_nickname">Zistru</string>
     <string name="osmo_user_name">Impitadore</string>
     
     <string name="rendering_value_pink_name">rosa</string>
@@ -559,13 +559,13 @@
     <string name="osmo_expire_group">Iscadidi intre</string>
     <string name="osmo_group_description">Descritzione</string>
     <string name="osmo_group_policy">Règulas</string>
-    <string name="osmo_connect_to_device_tracker_id">Id de arrastamentu</string>
+    <string name="osmo_connect_to_device_tracker_id">ID de arrastamentu</string>
     <string name="osmo_connect_to_device_name">Nùmene impitadore</string>
-    <string name="osmo_connect_to_group_id">Id grupu</string>
+    <string name="osmo_connect_to_group_id">ID grupu</string>
     <string name="osmo_group_name">Nùmene grupu</string>
     <string name="osmo_connect_to_device">Cullegamentu cun su dispositivu</string>
     <string name="osmo_connect_to_group">Cullegamentu cun su grupu</string>
-    <string name="osmo_connect">Cullega a</string>
+    <string name="osmo_connect">Auni·ti</string>
     <string name="osmo_create_group">Crea grupu</string>
     <string name="osmo_server_operation_failed">Operatzione de su server Osmo fallida</string>
     <string name="osmo_activity">Compidada OpenStreetMap</string>
@@ -575,11 +575,11 @@
     <string name="minutes_ago">minutos àchede</string>
     <string name="seconds_ago">secundos àchede</string>
     <string name="osmo_connected_devices">Dispositivos cullegaos</string>
-    <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Avia/Inghitza automaticamente sa registratzione de sa sessione e imbia sa localizatzione a pustis de s\'aviu de s’aplicu</string>
-    <string name="osmo_auto_send_locations">Avia automaticamente sa sessione de arrastamentu</string>
-    <string name="osmo_tracker_id">Id pessonale arrastamentu</string>
-    <string name="osmo_tracker_id_descr">Carca pro visualizzare o cumpartzire s’id de arrastamentu. Impreende s’id de arrastamentu sos dispositivos connessos ant a èssere capatzes de sighire totu sos movimentos de custu dispositivu! Pro ti disconnèttere ischerta s’optzione \"Torra a ingendrare\".</string>
+    <string name="osmo_groups">Grupos OsMo</string>
+    <string name="osmo_auto_send_locations_descr">Incumintza automaticamente su biàgiu e imbia sas localizatziones a pustis de s\'aviu de s’aplicatzione</string>
+    <string name="osmo_auto_send_locations">Incumintza automaticamente su biàgiu</string>
+    <string name="osmo_tracker_id">ID arrastamentu</string>
+    <string name="osmo_tracker_id_descr">Incarca pro bìdere s’ID de arrastamentu</string>
     <string name="osmo_session_token">Token de sa sessione: %1$s</string>
     <string name="osmo_auth_pending">Isetende pro s’autorizatzione…</string>
     <string name="osmo_locations_sent">"Localizatziones imbiadas %1$d (in su buffer %2$d) "</string>
@@ -842,7 +842,7 @@
     <string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
     <string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Boles essire dae su grupu %1$s?</string>
-    <string name="osmo_specify_tracker_id">Pro piaghere dislinda s’id</string>
+    <string name="osmo_specify_tracker_id">Pro piaghere dislinda s’ID</string>
     <string name="continue_navigation">Sighi cun su nàvigu</string>
     <string name="pause_navigation">Pone in pasu su nàvigu</string>
     <string name="rendering_attr_alpineHiking_name">Iscala pro s’alpinismu (SAC)</string>
@@ -1541,7 +1541,7 @@
     <string name="osmo_device_not_found">Dispositivu no agatau</string>
     <string name="anonymous_user">Impitadore anònimu</string>
     <string name="logged_as">Identificadu comente %1$s</string>
-    <string name="osmo_no_connection_msg">Su servìtziu OsMo no est disponìbile:\n- còmpida sa connessione;\n- còmpida sas impostatziones;\n- abbista su Twitter nostru: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Connessione a su server OsMo non disponìbile:\n- còmpida sa connessione ìnternet tua;\n- còmpida sas impostatziones;\n- abbista su Twitter nostru: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in un\'ufìtziu privadu.</string>
     <string name="rendering_category_details">Minujas</string>
     <string name="configure_map">Cunfigura sa mapa</string>
@@ -1760,7 +1760,7 @@
     <string name="use_fast_recalculation_desc">Torra a calculare petzi su cantu initziale de s’àndala pro biàgios longos</string>
     
     <string name="rendering_value_disabled_name">Disabilitadu</string>
-    <string name="osmo_share_my_location">Cumpartzi sa positzione mea</string>
+    <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
     <string name="shared_string_logoff">Essi</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
@@ -1896,7 +1896,7 @@
     <string name="favorite_category_select">Ischerta sa categoria</string>
     <string name="default_speed_system_descr">Issèbera s’unidade de medida de sa lestresa</string>
     <string name="default_speed_system">Medida de sa lestresa</string>
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Mìglios nàuticos</string>
     <string name="si_kmh">Chilòmetros pro ora</string>
     <string name="si_mph">Mìglios pro ora</string>
@@ -1904,7 +1904,7 @@
     <string name="si_min_km">Minutos pro chilòmetru</string>
     <string name="si_min_m">Minutos pro mìgliu</string>
     <string name="si_nm_h">Mìglios nàuticos pro ora (knot)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">nmi/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2151,4 +2151,16 @@
     <string name="shared_string_widgets">Widgets</string>
     <string name="recalculate_route">Torra a calculare s’àndala</string>
     <string name="shared_string_topbar">Barra in pitzu</string>
+    <string name="storage_permission_restart_is_required">Como s\'aplicatzione est autorizada a iscrìere in sa memòria esterna. Pro aplicare custa modìfica, depet èssere torrada a allùere manualmente.</string>
+    <string name="shared_string_move_up">Moe prus in artu</string>
+    <string name="shared_string_move_down">Moe prus in bassu</string>
+    <string name="finish_navigation">Concrui su nàvigu</string>
+    <string name="avoid_road">Istransi s\'istrada</string>
+    <string name="storage_directory_shared">Memòria cumpartzida</string>
+    <string name="full_report">Raportu cumpridu</string>
+    <string name="open_street_map_login_and_pass">Nùmene impreadore e crae de OpenStreetMap</string>
+    <string name="release_2_3">" • OSM Live. Suporta sos contribuidores a sa mapa e sos isvilupadores pro otènnere mapas agiornadas cada ora.
+\n\n • Marcadores mapa. Una manera noa de ischertare in manera lestra logos in sa mapa.\n\n • Mapas OSM prus a sa minuda cun caraterìsticas pro sas istradas pro cada istadu e unu muntone de àteras funtzionalidades.\n\n • Megioramentu de s’aparèntzia e de s’ammaniamentu de sas àndalas.
+\n\n • Medas megioramentos in su menù de sa mapa, comente sa chirca cuntestuale de sos indiritzos.\n\n e àteru… "</string>
+    <string name="storage_directory_readonly_desc">Sa cartella de memorizatzione ischertada est in letura ebbia. Sa cartella de memorizatzione est istada mudada pro impreare sa mamòria interna. Pro praghere issèbera una cartella de destinatzione vàlida.</string>
     </resources>
