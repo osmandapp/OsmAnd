@@ -1364,7 +1364,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_group_description">Опис</string>
     <string name="osmo_connect_to_device_name">Ім’я пристрою</string>
     <string name="osmo_create_group">Створити групу</string>
-    <string name="osmo_connect">Приєднатись до</string>
+    <string name="osmo_connect">Приєднатись</string>
     <string name="osmo_enable_tracker">Надіслати мої місцезнаходження</string>
     <string name="hours_ago">годин тому</string>
     <string name="minutes_ago">хвилин тому</string>
@@ -2316,4 +2316,5 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="select_map_marker">Виберіть позначку</string>
     <string name="upload_anonymously">Вивантажено анонімно</string>
     <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
+    <string name="report">Звіт</string>
     </resources>
