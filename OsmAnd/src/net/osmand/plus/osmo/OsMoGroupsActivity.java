@@ -12,6 +12,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -26,6 +27,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.ColorInt;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
@@ -63,6 +65,7 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
@@ -88,11 +91,14 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,6 +110,7 @@ import gnu.trove.list.array.TIntArrayList;
  */
 public class OsMoGroupsActivity extends OsmandExpandableListActivity implements OsmAndCompassListener,
 		OsmAndLocationListener, OsMoGroupsUIListener, StateChangedListener<Boolean> {
+	private static final Log LOG = PlatformUtil.getLog(OsMoGroupsActivity.class);
 
 	public static final int CONNECT_TO = 1;
 	protected static final int DELETE_ACTION_ID = 2;
@@ -116,6 +123,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int LOGIN_ID = 12;
 	public static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	public static final long RECENT_THRESHOLD = 60000;
+	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
+	private static final int WIDTH_IN_DP = 24;
+	private static final int HEIGHT_ID_DP = 24;
+
 	private boolean joinGroup;
 
 	private OsMoPlugin osMoPlugin;
@@ -124,9 +135,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private OsmandApplication app;
 	private Handler uiHandler;
 
-	private float width = 24;
-	private float height = 24;
-	private Path directionPath = new Path();
+	private float widthInPx;
+	private float heightInPx;
+	private Path directionPath;
 	private float lastCompass;
 	private ActionMode actionMode;
 	private Object selectedObject = null;
@@ -137,6 +148,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private CompoundButton srvc;
 
 	private int connections = 0;
+	private final Map<Integer, DirectionDrawable> direactionDrawables = new HashMap<>();
+	private final Map<Integer, NonDirectionDrawable> nonDireactionDrawables = new HashMap<>();
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -164,20 +177,20 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		setupFooter();
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 
-		
+
 		adapter = new OsMoGroupsAdapter(osMoPlugin.getGroups(), osMoPlugin.getTracker(),
 				osMoPlugin.getService());
 		setListAdapter(adapter);
-		
-		
+
+
 		uiHandler = new Handler();
-		directionPath = createDirectionPath();
-		
+		initDirectionPath();
+
 		white = new Paint();
 		white.setStyle(Style.FILL_AND_STROKE);
 		white.setColor(getResources().getColor(R.color.color_unknown));
 		white.setAntiAlias(true);
-		
+
 		updateStatus();
 		setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
@@ -207,19 +220,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		getExpandableListView().addHeaderView(header);
 		ImageView iv =  (ImageView) header.findViewById(R.id.share_my_location);
 		iv.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				shareSession();
 			}
 		});
 		updateTrackerButton();
-		
+
 		srvc = (CompoundButton) header.findViewById(R.id.enable_service);
 		srvc.setChecked(osMoPlugin.getService().isEnabled());
 		srvc.setText(R.string.osmo_start_service);
 		srvc.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
@@ -231,7 +244,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_LIVE);
 					}
 					if (getExpandableListView().getFooterViewsCount() > 0) {
-						getExpandableListView().removeFooterView(footer);	
+						getExpandableListView().removeFooterView(footer);
 					}
 				}
 				setSupportProgressBarIndeterminateVisibility(true);
@@ -250,9 +263,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}, 3000);
 			}
 		});
-		
-		
-		
+
+
+
 		TextView mtd = (TextView) header.findViewById(R.id.motd);
 		SessionInfo si = osMoPlugin.getService().getCurrentSessionInfo();
 		boolean visible = si != null && si.motd != null && si.motd.length() > 0;
@@ -262,8 +275,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			mtd.setLinksClickable(true);
 			mtd.setMovementMethod(LinkMovementMethod.getInstance());
 		}
-		
-		
+
+
 	}
 
 	private void updateTrackerButton() {
@@ -274,7 +287,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			trackr.setChecked(osMoPlugin.getTracker().isEnabledTracker());
 		}
 		trackr.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked) {
@@ -304,7 +317,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		TextView noConnectionTextView = (TextView) footer.findViewById(R.id.osmo_no_connection_msg);
 		noConnectionTextView.setMovementMethod(LinkMovementMethod.getInstance());
 	}
-	
+
 	long lastUpdateTime;
 	private Drawable blinkImg;
 	private void blink(final ImageView status, Drawable bigger, final Drawable smaller ) {
@@ -333,7 +346,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 //				Color.LTGRAY);
 		OsMoService service = osMoPlugin.getService();
 		OsMoTracker tracker = osMoPlugin.getTracker();
-		
+
 		Drawable small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 		Drawable big = srcSignalinactive;// tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 		long last = service.getLastCommandTime();
@@ -365,14 +378,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 	}
 
-	private Path createDirectionPath() {
+	private void initDirectionPath() {
 		int h = 15;
 		int w = 4;
 		float sarrowL = 8; // side of arrow
 		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
 		float hpartArrowL = (harrowL - w) / 2;
 		Path path = new Path();
-		path.moveTo(width / 2, height - (height - h) / 3);
+		path.moveTo(WIDTH_IN_DP / 2, HEIGHT_ID_DP - (HEIGHT_ID_DP - h) / 3);
 		path.rMoveTo(w / 2, 0);
 		path.rLineTo(0, -h);
 		path.rLineTo(hpartArrowL, 0);
@@ -387,11 +400,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		mgr.getDefaultDisplay().getMetrics(dm);
 		pathTransform.postScale(dm.density, dm.density);
 		path.transform(pathTransform);
-		width *= dm.density;
-		height *= dm.density;
-		return path;
+		widthInPx = WIDTH_IN_DP * dm.density;
+		heightInPx = HEIGHT_ID_DP * dm.density;
+		directionPath = path;
 	}
-	
+
 
 	@Override
 	protected void onResume() {
@@ -414,7 +427,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		app.getSettings().OSMO_SEND_LOCATIONS_STATE.addListener(this);
 		updateTrackerButton();
 	}
-	
+
 	@Override
 	public void stateChanged(Boolean change) {
 		updateTrackerButton();
@@ -575,8 +588,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		bld.append(getString(field)).append(": ").append(value).append("\n");
 		return bld;
 	}
-	
-	
+
+
 
 	protected void showGroupInfo(final OsMoGroup group) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
@@ -605,14 +618,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		bld.setView(sv);
 		bld.setPositiveButton(R.string.shared_string_ok, null);
 		bld.setNegativeButton(R.string.osmo_invite, new OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				shareOsMoGroup(group.getVisibleName(app), group.getGroupId());
 			}
 		});
 		bld.show();
-		
+
 	}
 
 	protected void deleteObject(OsMoGroup selectedObject) {
@@ -653,7 +666,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	private void loginDialog() {
 		if (!osMoPlugin.getService().isLoggedIn()) {
 			setSupportProgressBarIndeterminateVisibility(true);
@@ -664,7 +677,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			bld.setMessage(text);
 			bld.setPositiveButton(R.string.shared_string_ok, null);
 			bld.setNegativeButton(R.string.shared_string_logoff, new OnClickListener() {
-				
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					logoff();
@@ -677,7 +690,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private void shareSession() {
 		shareSessionUrl(osMoPlugin, OsMoGroupsActivity.this);
 	}
-	
+
 	public static void shareSessionUrl(OsMoPlugin osMoPlugin, Activity ctx) {
 		String sessionURL = osMoPlugin.getTracker().getSessionURL();
 		if(sessionURL == null ) {
@@ -699,12 +712,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		dlg.shareURLOrText(url, getString(R.string.osmo_group_share, groupId, name, url), null);
 		dlg.showDialog();
 	}
-	
+
 	private void signinPost() {
 		signinPost(true);
 	}
-	
-	
+
+
 	static int getResIdFromAttribute(final Activity activity, final int attr) {
 		if (attr == 0)
 			return 0;
@@ -712,9 +725,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		activity.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
 	}
-	
+
 	private void signinPost(final boolean createGroup) {
-		final Dialog dialog = new Dialog(this, 
+		final Dialog dialog = new Dialog(this,
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme:
 							R.style.OsmandDarkTheme);
@@ -760,10 +773,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				return false;
 			}
 		});
-		
+
 		dialog.setCancelable(true);
 		dialog.setOnCancelListener(new OnCancelListener() {
-			
+
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				if (!createGroup) {
@@ -772,9 +785,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 			}
 		});
-		dialog.show();		
+		dialog.show();
 		wv.setWebViewClient(new WebViewClient() {
-			
+
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				setSupportProgressBarIndeterminateVisibility(false);
@@ -800,7 +813,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		   }
 		});
 	}
-	
+
 	public void createGroupWithDelay(final int delay) {
 		if(delay <= 0) {
 			app.showToastMessage(R.string.osmo_not_signed_in);
@@ -809,7 +822,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		setSupportProgressBarIndeterminateVisibility(true);
 		new Handler().postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if(osMoPlugin.getService().getRegisteredUserName() == null) {
@@ -821,7 +834,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		}, delay);
 	}
-	
+
 	protected void signin() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_sign_in);
@@ -832,7 +845,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		message += getString(R.string.osmo_create_groups_confirm);
 		builder.setMessage(message);
 		builder.setPositiveButton(R.string.osmo_sign_in, new OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				signinPost();
@@ -841,7 +854,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 //				startActivity(browserIntent);
 			}
 		});
-		
+
 		//builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.show();
 	}
@@ -862,7 +875,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 		final TextView warnCreateDesc = (TextView) v.findViewById(R.id.osmo_group_create_dinfo);
 		View.OnClickListener click = new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				int vls = warnCreateDesc.getVisibility();
@@ -873,7 +886,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		info.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_gabout_dark));
 		info.setOnClickListener(click);
 		warnCreateDesc.setOnClickListener(click);
-		
+
 		builder.setView(v);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
@@ -915,7 +928,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 		dialog.show();
 		AndroidUtils.softKeyboardDelayed(name);
-		
+
 	}
 
 	private void connectToDevice() {
@@ -928,16 +941,16 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final View mgv = v.findViewById(R.id.MyGroupName);
 		final EditText nickname = (EditText) v.findViewById(R.id.NickName);
 		nickname.setText(app.getSettings().OSMO_USER_NAME.get());
-		
+
 		labelTracker.setText(R.string.osmo_connect_to_group_id);
 		labelName.setText(R.string.osmo_group_name);
 		name.setHint(R.string.osmo_use_server_name);
 		name.setVisibility(View.GONE);
 		labelName.setVisibility(View.GONE);
 		mgv.setVisibility(View.VISIBLE);
-		
-		
-		
+
+
+
 		builder.setView(v);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
@@ -967,7 +980,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		builder.create().show();
 		AndroidUtils.softKeyboardDelayed(tracker);
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		OsMoService service = osMoPlugin.getService();
@@ -1027,7 +1040,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		this.operation = operation;
 		setSupportProgressBarIndeterminateVisibility(true);
 		uiHandler.postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if(OsMoGroupsActivity.this.operation != null) {
@@ -1042,11 +1055,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		this.operation = null;
 		setSupportProgressBarIndeterminateVisibility(false);
 	}
-	
+
 	@Override
 	public void groupsListChange(final String operation, final OsMoGroup group) {
 		uiHandler.post(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				String top = OsMoGroupsActivity.this.operation;
@@ -1070,7 +1083,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		});
 	}
-	
+
 	public boolean checkOperationIsNotRunning() {
 		if(operation != null) {
 			Toast.makeText(this, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
@@ -1101,7 +1114,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				sortedGroups.remove(group);
 				users.remove(group);
 			} else {
-				List<OsMoDevice> us = !group.isEnabled() && !group.isMainGroup() ? new ArrayList<OsMoDevice>(0) : 
+				List<OsMoDevice> us = !group.isEnabled() && !group.isMainGroup() ? new ArrayList<OsMoDevice>(0) :
 					group.getVisibleGroupUsers(srv.getMyGroupTrackerId());
 				final Collator ci = Collator.getInstance();
 				Collections.sort(us, new Comparator<OsMoDevice>() {
@@ -1117,7 +1130,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 			}
 		}
-		
+
 		public void clear() {
 			users.clear();
 			sortedGroups.clear();
@@ -1223,7 +1236,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 				v.setVisibility(View.VISIBLE);
 				v.setOnClickListener(new View.OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						if (model != selectedObject) {
@@ -1242,7 +1255,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				ci.setOnCheckedChangeListener(null);
 				ci.setChecked(model.isEnabled() && model.isActive());
 				ci.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if(isChecked) {
@@ -1251,7 +1264,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						} else {
 							String operation = osMoPlugin.getGroups().disconnectGroup(model);
 							startLongRunningOperation(operation);
-						}	
+						}
 					}
 				});
 			}
@@ -1266,8 +1279,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.osmo_group_list_item, parent, false);
 			}
-			final OsMoDevice model = getChild(groupPosition, childPosition);
-			row.setTag(model);
+			final OsMoDevice osmoDevice = getChild(groupPosition, childPosition);
+			row.setTag(osmoDevice);
 			if (app.getSettings().isLightContent()) {
 				row.setBackgroundResource(R.drawable.expandable_list_item_background_light);
 			} else {
@@ -1276,55 +1289,50 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			TextView labelTime = (TextView) row.findViewById(R.id.osmo_label_time);
 			ImageView icon = (ImageView) row.findViewById(R.id.osmo_user_icon);
-			Location location = model.getLastLocation();
-			if(model.getTrackerId().equals(osMoPlugin.getService().getMyGroupTrackerId())) {
+			Location location = osmoDevice.getLastLocation();
+			if (osmoDevice.getTrackerId().equals(osMoPlugin.getService().getMyGroupTrackerId())) {
 				location = tracker.getLastSendLocation();
 			}
-			int color = getResources().getColor(R.color.color_unknown);
-			int activeColor = model.getColor();
-			if (activeColor == 0) {
-				activeColor = ColorDialogs.getRandomColor();
-				osMoPlugin.getGroups().setGenColor(model, activeColor);
-			}
-			//Location location = tracker.getLastLocation(model.trackerId);
-			if(!model.isEnabled()) {
+			int color = osmoDevice.getColor();
+			if (!osmoDevice.isEnabled()) {
 				icon.setVisibility(View.INVISIBLE);
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-				label.setText(model.getVisibleName());
+				label.setText(osmoDevice.getVisibleName());
 				labelTime.setText("");
 			} else if (location == null || mapLocation == null) {
 				label.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				icon.setVisibility(View.VISIBLE);
-				NonDirectionDrawable draw ;
-				if(icon.getDrawable() instanceof NonDirectionDrawable) {
-					draw = (NonDirectionDrawable) icon.getDrawable(); 
-				} else {
-					draw = new NonDirectionDrawable();
+				NonDirectionDrawable nonDirectionDrawable;
+				nonDirectionDrawable = nonDireactionDrawables.get(color);
+				if (nonDirectionDrawable == null ) {
+					nonDirectionDrawable = new NonDirectionDrawable(getResources(), widthInPx, heightInPx);
+					nonDirectionDrawable.setColor(color);
+					nonDireactionDrawables.put(color, nonDirectionDrawable);
 				}
-				draw.setColor(model.isEnabled() ? activeColor : color);
-				icon.setImageDrawable(draw);
-				label.setText(model.getVisibleName());
+				icon.setImageDrawable(nonDirectionDrawable);
+				label.setText(osmoDevice.getVisibleName());
 				labelTime.setText("");
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				icon.setVisibility(View.VISIBLE);
-				DirectionDrawable draw;
-				if (icon.getDrawable() instanceof DirectionDrawable) {
-					draw = (DirectionDrawable) icon.getDrawable();
-				} else {
-					draw = new DirectionDrawable();
-				}
 				float[] mes = new float[2];
 				net.osmand.Location.distanceBetween(location.getLatitude(), location.getLongitude(),
 						mapLocation.getLatitude(), mapLocation.getLongitude(), mes);
 				//TODO: Hardy: Check: The arrow direction below may only be correct for the default display's standard orientation
 				//      i.e. still needs to be corrected for .ROTATION_90/180/170
 				//	Keep in mind: getRotation was introduced from Android 2.2
-				draw.setAngle(mes[1] - lastCompass + 180);
 				long now = System.currentTimeMillis();
-				final boolean recent = Math.abs( now - location.getTime() ) < RECENT_THRESHOLD;
-				draw.setColor(recent ? activeColor : color);
-				icon.setImageDrawable(draw);
+				final boolean recent = Math.abs(now - location.getTime()) < RECENT_THRESHOLD;
+				color = recent ? color : getResources().getColor(R.color.color_unknown);
+				DirectionDrawable directionDrawable;
+				directionDrawable = direactionDrawables.get(color);
+				if (directionDrawable == null ) {
+					directionDrawable = new DirectionDrawable(getResources(), widthInPx, heightInPx);
+					directionDrawable.setColor(color);
+					direactionDrawables.put(color, directionDrawable);
+				}
+				directionDrawable.setAngle(mes[1] - lastCompass + 180);
+				icon.setImageDrawable(directionDrawable);
 				int dist = (int) mes[0];
 				long seconds = Math.max(0, (now - location.getTime()) / 1000);
 				String time = "";
@@ -1338,7 +1346,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					time = (seconds / (60 * 60)) + " " + getString(R.string.hours_ago);
 				}
 				String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
-				String visibleName = model.getVisibleName();
+				String visibleName = osmoDevice.getVisibleName();
 				String firstPart = distance + visibleName;
 				label.setText(firstPart, TextView.BufferType.SPANNABLE);
 				((Spannable) label.getText()).setSpan(
@@ -1352,9 +1360,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			return row;
 		}
-
-
-		
 	}
 
 	@Override
@@ -1368,8 +1373,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		}
 	}
-	
-	
+
+
 
 	@Override
 	public void updateCompassValue(float value) {
@@ -1393,14 +1398,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			uiHandler.sendMessageDelayed(msg, 100);
 		}
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void deviceLocationChanged(OsMoDevice device) {
-		refreshList();		
+		refreshList();
 	}
-	
+
 
 	public static void showSettingsDialog(Context ctx, final OsMoPlugin plugin, final OsMoDevice device) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
@@ -1410,18 +1415,18 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
         final EditText name = (EditText) view.findViewById(R.id.Name);
         if(device.getColor() == 0) {
 			plugin.getGroups().setDeviceProperties(device, device.getVisibleName(),
-        			ColorDialogs.getRandomColor());	
+        			ColorDialogs.getRandomColor());
         }
-        int devColor = device.getColor();        
+        int devColor = device.getColor();
         bld.setView(view);
         name.setText(device.getVisibleName());
-        
+
         final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
         final TIntArrayList list = new TIntArrayList();
         ColorDialogs.setupColorSpinner(ctx, devColor, colorSpinner, list);
-		
+
 		bld.setPositiveButton(R.string .shared_string_yes, new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				plugin.getGroups().setDeviceProperties(device,
@@ -1432,29 +1437,24 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		bld.show();
 	}
 
-	
-	
-	class NonDirectionDrawable extends Drawable {
-		Paint paintRouteDirection;
-		
-		public void setColor(int color) {
+	abstract static class ColorDrawable extends Drawable {
+		protected Paint paintRouteDirection;
+		protected final float width;
+		protected final float height;
+
+		public ColorDrawable(Resources resource, float wight, float height) {
+			this.width = wight;
+			this.height = height;
+			paintRouteDirection = new Paint();
+			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
+			paintRouteDirection.setColor(resource.getColor(R.color.color_unknown));
+			paintRouteDirection.setAntiAlias(true);
+		}
+
+		public void setColor(@ColorInt int color) {
 			paintRouteDirection.setColor(color);
 		}
 
-		public NonDirectionDrawable() {
-			paintRouteDirection = new Paint();
-			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
-			paintRouteDirection.setAntiAlias(true);
-			
-		}
-		
-		@Override
-		public void draw(Canvas canvas) {
-			canvas.drawCircle(width/2, height/2, (width + height) / 6, white);
-			canvas.drawCircle(width/2, height/2, (width + height) / 7, paintRouteDirection);
-		}
-		
 		@Override
 		public int getOpacity() {
 			return 0;
@@ -1463,29 +1463,32 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		@Override
 		public void setAlpha(int alpha) {
 			paintRouteDirection.setAlpha(alpha);
-
 		}
 
 		@Override
 		public void setColorFilter(ColorFilter cf) {
 			paintRouteDirection.setColorFilter(cf);
 		}
+
 	}
 
-	class DirectionDrawable extends Drawable {
-		Paint paintRouteDirection;
-
-		private float angle;
-
-		public DirectionDrawable() {
-			paintRouteDirection = new Paint();
-			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
-			paintRouteDirection.setAntiAlias(true);
+	class NonDirectionDrawable extends ColorDrawable {
+		public NonDirectionDrawable(Resources resource, float wight, float height) {
+			super(resource, wight, height);
 		}
 
-		public void setColor(int color) {
-			paintRouteDirection.setColor(color);
+		@Override
+		public void draw(Canvas canvas) {
+			canvas.drawCircle(width / 2, height / 2, (width + height) / 6, white);
+			canvas.drawCircle(width / 2, height / 2, (width + height) / 7, paintRouteDirection);
+		}
+	}
+
+	class DirectionDrawable extends ColorDrawable {
+		private float angle;
+
+		public DirectionDrawable(Resources resource, float wight, float height) {
+			super(resource, wight, height);
 		}
 
 		public void setAngle(float angle) {
@@ -1496,22 +1499,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		public void draw(Canvas canvas) {
 			canvas.rotate(angle, width / 2, height / 2);
 			canvas.drawPath(directionPath, paintRouteDirection);
-		}
-
-		@Override
-		public int getOpacity() {
-			return 0;
-		}
-
-		@Override
-		public void setAlpha(int alpha) {
-			paintRouteDirection.setAlpha(alpha);
-
-		}
-
-		@Override
-		public void setColorFilter(ColorFilter cf) {
-			paintRouteDirection.setColorFilter(cf);
 		}
 	}
 
@@ -1526,7 +1513,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			adapter.synchronizeGroups();
 		}
 	}
-	
+
 	private void showHint() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.anonymous_user);
@@ -1536,7 +1523,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		builder.show();
 	}
 
-	
+
 
 	public void handleConnect() {
 		app.runInUIThread(new Runnable() {
@@ -1550,10 +1537,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		});
 	}
-	
+
 	public void handleDisconnect(final String msg) {
 		app.runInUIThread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if (!TextUtils.isEmpty(msg) && connections > 0) {
