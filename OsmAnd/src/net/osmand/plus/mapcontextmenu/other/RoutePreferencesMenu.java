@@ -279,7 +279,7 @@ public class RoutePreferencesMenu {
 	public ArrayAdapter<LocalRoutingParameter> getRoutePreferencesDrawerAdapter(final boolean nightMode) {
 
 		listAdapter = new ArrayAdapter<LocalRoutingParameter>(mapActivity, R.layout.layers_list_activity_item, R.id.title,
-				getRoutingParameters(settings.APPLICATION_MODE.get())) {
+				getRoutingParameters(routingHelper.getAppMode()/*settings.APPLICATION_MODE.get()*/)) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				LocalRoutingParameter parameter = getItem(position);
@@ -560,7 +560,8 @@ public class RoutePreferencesMenu {
 	}
 
 	private void updateParameters() {
-		ApplicationMode am = settings.APPLICATION_MODE.get();
+		//ApplicationMode am = settings.APPLICATION_MODE.get();
+		ApplicationMode am = routingHelper.getAppMode();
 		listAdapter.setNotifyOnChange(false);
 		listAdapter.clear();
 		for (LocalRoutingParameter r : getRoutingParameters(am)) {
