@@ -2163,4 +2163,5 @@
     <string name="osm_live_region_desc">Частка вашага ахвяраваньня будзе накіроўвацца OSM карыстальнікам, якія ўнеслі зьмены ў мапу гэтага рэгіёну</string>
     <string name="upload_osm_note_description">Вы можаце адаслаць Вашу OSM заўвагу ананімна, калі вы выкарыстоўваеце свой профіль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Адаслаць OSM заўвагу</string>
+    <string name="report">Справаздача</string>
     </resources>
