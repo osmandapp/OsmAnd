@@ -464,11 +464,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
+			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
+				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
+			}
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 				mapRouteInfoMenu.show();
 			} else {
 				touchEvent = 0;
+				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);

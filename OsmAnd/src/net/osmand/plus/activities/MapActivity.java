@@ -945,7 +945,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		changeKeyguardFlags();
 		updateMapSettings();
 		mapViewTrackingUtilities.updateSettings();
-		app.getRoutingHelper().setAppMode(settings.getApplicationMode());
+		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {
 			mapLayers.getMapInfoLayer().recreateControls();
 		}
