@@ -1307,8 +1307,7 @@
     <string name="rendering_attr_hideWoodScrubs_name">Skrýt lesy a křoviny</string>
     <string name="rendering_attr_showSurfaces_name">Zobrazit povrch cesty</string>
     <string name="osmo_group_information">Prosím čtěte před vytvářením skupiny!</string>
-    <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID.\n - Soukromé skupiny jsou omezené na 8 lidí.
-\n - V případě neaktivity nebo aktivity pouze jedné osoby v průběhu dvou týdnů, bude skupina zrušena.\n - Můžete omezit vstup do skupiny pozvánkami, ale pro ovládání skupiny musíte použít administrátorskou konzoli.\n - Pokud potřebujete vytvořit skupinu s jinými podmínkami prosím kontaktujte http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Vyplňte jméno a popis skupiny při vytvoření\n- From the application group are created only with Simple type, read more on the website https://osmo.mobi/g/new\n- Skupiny můžete spravovat přes webové stránky, umísťování tras a bodů je k dispozici všem\n- Nepodporujeme použití skupiny pouze jedním uživatelem, pokud to není POI skupina\n- Soukromé skupiny jsou omezené na 8 lidí.\n- Detailní pravidla a podmínky jsou vždy na stránkách OsMo.mobi\n- Pokud potřebujete zvláštní podmínky, prosím kontaktujte podporu: osmo.mobi@gmail.com "</string>
     <string name="osmo_auth_error">Chyba při autorizaci OsMo: %1$s.\n Služba může být dočasně nedostupná nebo vám vypršela registrace.
 \n Chcete pokračovat v nové registraci?</string>
     <string name="osmo_auth_error_short">Autorizace selhala</string>
@@ -1343,7 +1342,7 @@
     <string name="continue_navigation">Pokračování v navigaci</string>
     <string name="osmo_invite">Pozvat…</string>
     <string name="osmo_leave_confirmation_msg">Chcete opustit skupinu %1$s?</string>
-    <string name="osmo_specify_tracker_id">Prosím určete id</string>
+    <string name="osmo_specify_tracker_id">Prosím určete ID</string>
     <string name="rendering_attr_coloredBuildings_name">Barvy budov podle typu</string>
     <string name="lang_sw">Svahilština (Kiswahili)</string>
     <string name="lang_he">Hebrejština</string>
@@ -1407,8 +1406,8 @@
     <string name="speed_limit_exceed">Tolerance překročení rychlosti</string>
     <string name="speed_limit_exceed_message">Zvolte toleranci překročení povolené rychlosti, po které uslyšíte hlasové varování.</string>
     <string name="osmo_device_not_found">Zařízení nenalezeno</string>
-    <string name="osmo_no_connection_msg">Služba OsMo není k dispozici:\n- zkontrolujte připojení;\n- zkontrolujte nastavení;\n- podívejte se na náš Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonymní uživatel nemůže:\n- vytvářet skupiny;\n- synchronizovat skupiny a zařízení se serverem;\n- spravovat soukromé skupiny a zařízení.</string>
+    <string name="osmo_no_connection_msg">Nelze se připojit k serveru OsMo:\n- zkontrolujte vaše internetové připojení;\n- zkontrolujte nastavení;\n- podívejte se na náš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonymní uživatel nemůže:\n- vytvářet skupiny;\n- synchronizovat skupiny a zařízení se serverem;\n- spravovat skupiny a zařízení v osobním ovládacím panelu na webových stránkách.</string>
     <string name="anonymous_user">Anonymní uživatel</string>
     <string name="logged_as">Přihlášen jako %1$s</string>
     <string name="rendering_category_details">Detaily</string>
@@ -1989,4 +1988,5 @@
     <string name="consider_turning_polygons_off">Je doporučeno vypnout zobrazování polygonů.</string>
     <string name="rendering_attr_showMtbRoutes_name">Zobrazit trasy pro horská kola</string>
     <string name="storage_permission_restart_is_required">Nyní aplikace umožňuje zapisovat na externí úložiště. Je potřeba provést ruční restart aplikace.</string>
-    </resources>
+    <string name="file_name_containes_illegal_char">Název souboru obsahuje nepovolené zaky</string>
+</resources>
