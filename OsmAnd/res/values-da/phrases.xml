@@ -2722,4 +2722,31 @@
 <string name="poi_button_operated_yes">Knapbetjent: ja</string>
 	<string name="poi_button_operated_no">Knapbetjent: nej</string>
 
-</resources>
+<string name="poi_free_flying_paragliding_yes">Paragliding: ja</string>
+	<string name="poi_free_flying_paragliding_no">Paragliding: nej</string>
+	<string name="poi_free_flying_hanggliding_yes">Hanggliding: ja</string>
+	<string name="poi_free_flying_hanggliding_no">Hanggliding: nej</string>
+	<string name="poi_free_flying_site_orientation_s">Frit flyvested orientering: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Frit flyvested orientering: SV</string>
+	<string name="poi_free_flying_site_orientation_w">Frit flyvested orientering: V</string>
+	<string name="poi_free_flying_site_orientation_nw">Frit flyvested orientering: NV</string>
+	<string name="poi_free_flying_site_orientation_n">Frit flyvested orientering: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Frit flyvested orientering: NØ</string>
+	<string name="poi_free_flying_site_orientation_e">Frit flyvested orientering: Ø</string>
+	<string name="poi_free_flying_site_orientation_se">Frit flyvested orientering: SØ</string>
+	<string name="poi_free_flying_no_flight_time">Ingen flyvetid (fri flyvning)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Gæsteretningslinjer for fri flyvning: ja</string>
+	<string name="poi_free_flying_guest_guidelines_no">Gæsteretningslinjer for fri flyvning: nej</string>
+
+	<string name="poi_solarium">Solarium</string>
+
+<string name="poi_free_flying_site_takeoff">Fri flyvning sted: start</string>
+	<string name="poi_free_flying_site_landing">Fri flyvning sted: landing</string>
+	<string name="poi_free_flying_site_toplanding">Fri flyvning sted: toplanding</string>
+	<string name="poi_free_flying_site_towing">Fri flyvning sted: trækanordning</string>
+	<string name="poi_free_flying_site_training">"Fri flyvning sted:  træning"</string>
+	<string name="poi_free_flying_official_yes">Fri flyvning funktionær: ja</string>
+	<string name="poi_free_flying_official_no">Fri flyvning funktionær: nej</string>
+	<string name="poi_free_flying_rigid_yes">Fri flyvning fastvinge: ja</string>
+	<string name="poi_free_flying_rigid_no">Fri flyvning fastvinge: nej</string>
+	</resources>
