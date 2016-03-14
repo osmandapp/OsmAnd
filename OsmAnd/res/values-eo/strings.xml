@@ -452,7 +452,7 @@
     <string name="action_modify">Modifi</string>
     <string name="action_delete">Forigi</string>
     <string name="osm_edits">OSM-aj redaktoj</string>
-    <string name="parking_place_limited">Parkuma tempo limiga ĝis</string>
+    <string name="parking_place_limited">Parkuma tempo limigita ĝis</string>
     <string name="osmand_parking_time_left">restas</string>
     <string name="your_edits">Viaj redaktoj</string>
     <string name="waypoint_visit_after">Viziti poste</string>
@@ -580,4 +580,8 @@
     <string name="traffic_warning_speed_limit">Rapidlimo</string>
     <string name="speak_favorites">Proksimaj ŝatataj</string>
     <string name="speed_limit_exceed_message">Elektas rango de tolerado de rapidlimo, supre kiu vi ricevos sonajn avertojn</string>
+    <string name="fav_point_emoticons_message">La nomo de ŝatata punkto estas ŝanĝita al %1$s por plifaciligi korektan konservadon de tekstoĉeno kun miensimboloj al dosiero.</string>
+    <string name="print_route">Presi kurson</string>
+    <string name="fav_point_dublicate">Duplikata nomo</string>
+    <string name="fav_point_dublicate_message">Difinita nomo de ŝatata punkto estas jam uzata, ĝi estas ŝanĝita al %1$s por eviti duplikatadon.</string>
     </resources>
