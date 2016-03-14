@@ -2452,4 +2452,7 @@
 <string name="poi_bicycle_repair_station">Estación de reparación para bicicletas</string>
 	<string name="poi_water_tap">Grifo público</string>
 
+<string name="poi_button_operated_yes">Activado por botón</string>
+	<string name="poi_button_operated_no">No activado por botón</string>
+
 </resources>
