@@ -540,4 +540,16 @@
     <string name="download_tab_downloads">Ĉiuj</string>
     <string name="download_tab_local">Lokaj</string>
     <string name="no_internet_connection">Elŝutado ne eblas, bonvolu kontroli vian retkonekton.</string>
+    <string name="record_plugin_name">Registrado de kursoj</string>
+	<string name="record_plugin_description">"Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn kursojn per permana elektado de GPX-registrada fenestraĵo sur la mapekrano, aŭ ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX-dosiero.\n\nRegistritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por kontribui la OSM-on. Atletoj povas uzi registritajn kursojn por monitori siajn ekzercojn. Kelkaj bazaj ecoj oni povas analizi senpere per OsmAnd, kiel: tempoj de ĉirkaŭoj, muzumaj rapidecoj, ktp, kaj kursoj oni povas poste analizi uzante specialajn eksterajn programojn. "</string>
+    <string name="use_opengl_render">Uzi OpenGL-bildigon</string>
+    <string name="use_opengl_render_descr">Uzas aparatan plirapidigan OpenGL-bildigon (povas ne funkcii je iuj aparatoj)</string>
+    <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
+    <string name="home_button">Ĉefekrano</string>
+    <string name="map_update">Ĝisdatigoj disponeblaj por %1$s mapoj</string>
+    <string name="search_for">Serĉi</string>
+    <string name="coordinates">Koordinatoj</string>
+    <string name="rendering_attr_publicTransportMode_name">Busaj, trolebusaj, pramaj kursoj</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramaj kaj vagonaraj kursoj</string>
+    <string name="rendering_attr_subwayMode_name">Metroaj kursoj</string>
     </resources>
