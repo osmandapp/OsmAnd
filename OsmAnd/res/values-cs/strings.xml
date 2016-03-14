@@ -1406,7 +1406,7 @@
     <string name="speed_limit_exceed">Tolerance překročení rychlosti</string>
     <string name="speed_limit_exceed_message">Zvolte toleranci překročení povolené rychlosti, po které uslyšíte hlasové varování.</string>
     <string name="osmo_device_not_found">Zařízení nenalezeno</string>
-    <string name="osmo_no_connection_msg">Nelze se připojit k serveru OsMo:\n- zkontrolujte vaše internetové připojení;\n- zkontrolujte nastavení;\n- podívejte se na náš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Nelze se připojit k serveru OsMo:\n- zkontrolujte své internetové připojení;\n- zkontrolujte nastavení;\n- podívejte se na náš Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Anonymní uživatel nemůže:\n- vytvářet skupiny;\n- synchronizovat skupiny a zařízení se serverem;\n- spravovat skupiny a zařízení v osobním ovládacím panelu na webových stránkách.</string>
     <string name="anonymous_user">Anonymní uživatel</string>
     <string name="logged_as">Přihlášen jako %1$s</string>
@@ -1988,5 +1988,5 @@
     <string name="consider_turning_polygons_off">Je doporučeno vypnout zobrazování polygonů.</string>
     <string name="rendering_attr_showMtbRoutes_name">Zobrazit trasy pro horská kola</string>
     <string name="storage_permission_restart_is_required">Nyní aplikace umožňuje zapisovat na externí úložiště. Je potřeba provést ruční restart aplikace.</string>
-    <string name="file_name_containes_illegal_char">Název souboru obsahuje nepovolené zaky</string>
+    <string name="file_name_containes_illegal_char">Název souboru obsahuje nepovolené znaky</string>
 </resources>
