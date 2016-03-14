@@ -2685,4 +2685,6 @@
 	<string name="poi_free_flying_guest_guidelines_yes">Инструктаж для свободного полёта: обязательно</string>
 	<string name="poi_free_flying_guest_guidelines_no">Инструктаж для свободного полёта: необязательно</string>
 
+	<string name="poi_solarium">Солярий</string>
+
 </resources>
