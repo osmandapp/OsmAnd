@@ -1223,8 +1223,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				|| visibleType == DashboardType.LIST_MENU
 				|| visibleType == DashboardType.ROUTE_PREFERENCES
 				|| visibleType == DashboardType.CONFIGURE_SCREEN
-				|| visibleType == DashboardType.MAP_MARKERS
-				|| visibleType == DashboardType.MAP_MARKERS_SELECTION;
+				|| (visibleType == DashboardType.MAP_MARKERS && mapMarkerDialogHelper.hasActiveMarkers())
+				|| (visibleType == DashboardType.MAP_MARKERS_SELECTION && mapMarkerDialogHelper.hasActiveMarkers());
 	}
 
 	private boolean isBackButtonVisible() {

@@ -99,6 +99,10 @@ public class MapMarkerDialogHelper {
 		return selectionMode;
 	}
 
+	public boolean hasActiveMarkers() {
+		return markersHelper.getActiveMapMarkers().size() > 0;
+	}
+
 	public void setSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 	}
@@ -341,7 +345,7 @@ public class MapMarkerDialogHelper {
 						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 						MenuItem item;
 						item = optionsMenu.getMenu().add(R.string.shared_string_clear)
-								.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark, !nightMode));
+								.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
@@ -369,7 +373,7 @@ public class MapMarkerDialogHelper {
 
 						if (!sorted) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
-									iconsCache.getContentIcon(R.drawable.ic_action_undo_dark, !nightMode));
+									iconsCache.getContentIcon(R.drawable.ic_action_undo_dark));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
@@ -385,7 +389,7 @@ public class MapMarkerDialogHelper {
 						}
 
 						item = optionsMenu.getMenu().add(R.string.shared_string_save_as_gpx).setIcon(
-								iconsCache.getContentIcon(R.drawable.ic_action_save, !nightMode));
+								iconsCache.getContentIcon(R.drawable.ic_action_save));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
