@@ -1,10 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+<<<<<<< 403d02b34072c0a6c5f78c09aaa457148f878a23
 <<<<<<< dd501239ba9dc90776f69c482aa750ad987cc9f5
     <string name="select_map_markers">Выберите маркеры</string>
 =======
     <string name="select_map_marker">Выберите маркеры</string>
 >>>>>>> Update ru strings
+=======
+>>>>>>> fix
     <string name="shared_string_topbar">Верхняя панель</string>
     <string name="osm_user_stat">Правок: %1$s, ранг: %2$s, всего правок: %3$s</string>
     <string name="osm_editors_ranking">Рейтинг картографов OSM</string>
