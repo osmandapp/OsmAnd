@@ -1947,8 +1947,8 @@
     <string name="shared_string_read_more">Подробнее</string>
     <string name="item_removed">Запись удалена</string>
     <string name="n_items_removed">элементы удалены</string>
-    <string name="live_updates">Live обновления</string>
-    <string name="select_voice_provider_descr">Выберите или скачайте голосовые подсказки для вашего языка</string>
+    <string name="live_updates">Живые обновления</string>
+    <string name="select_voice_provider_descr">Выберите или скачайте голосовое сопровождение для вашего языка</string>
     <string name="full_report">Полный отчет</string>
     <string name="recalculate_route">Пересчитать маршрут</string>
     <string name="open_street_map_login_and_pass">Имя пользователя и пароль OpenStreetMap</string>
