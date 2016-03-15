@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="select_map_markers">Выберите маркеры</string>
     <string name="shared_string_topbar">Верхняя панель</string>
     <string name="osm_user_stat">Правок: %1$s, ранг: %2$s, всего правок: %3$s</string>
     <string name="osm_editors_ranking">Рейтинг картографов OSM</string>
