@@ -139,6 +139,14 @@
 				<data android:scheme="google.navigation" />
 				<data android:scheme="osmand.navigation" />
 			</intent-filter>
+
+			<!-- osmand api -->
+			<intent-filter>
+				<data android:scheme="osmand.api" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+
 		</activity>
 
 		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">

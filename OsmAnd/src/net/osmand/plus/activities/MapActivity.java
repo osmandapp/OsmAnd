@@ -81,6 +81,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -557,6 +558,13 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 						setIntent(null);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						parseNavigationIntent(data);
+					} else if ("osmand.api".equals(scheme)) {
+						ExternalApiHelper apiHelper = new ExternalApiHelper(this);
+						Intent result = apiHelper.processApiRequest(intent);
+						setResult(apiHelper.getResultCode(), result);
+						if (apiHelper.needFinish()) {
+							finish();
+						}
 					}
 				}
 			}
@@ -687,7 +695,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 				getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false,
 						-1);
-				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false);
+				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false, true);
 			} catch (NumberFormatException e) {
 				AccessibleToast.makeText(this,
 						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
@@ -712,7 +720,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+			getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
