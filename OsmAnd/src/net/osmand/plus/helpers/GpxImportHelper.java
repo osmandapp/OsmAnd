@@ -164,7 +164,7 @@ public class GpxImportHelper {
 			}
 		}.execute();
 	}
-	
+
 	private void importFavoritesImpl(final GPXFile gpxFile) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
 			ProgressDialog progress = null;
@@ -248,8 +248,7 @@ public class GpxImportHelper {
 			} else {
 				if (save) {
 					new SaveAsyncTask(result, name).execute();
-				}
-				else {
+				} else {
 					showGpxOnMap(result);
 				}
 			}
@@ -265,6 +264,7 @@ public class GpxImportHelper {
 			warning = application.getString(R.string.error_reading_gpx);
 		} else {
 			final File importDir = application.getAppPath(IndexConstants.GPX_IMPORT_DIR);
+			//noinspection ResultOfMethodCallIgnored
 			importDir.mkdirs();
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
 				final GPXUtilities.WptPt pt = gpxFile.findPointToShow();
@@ -352,20 +352,17 @@ public class GpxImportHelper {
 	}
 
 	private List<FavouritePoint> asFavourites(final List<GPXUtilities.WptPt> wptPts) {
-		final List<FavouritePoint> favourites = new ArrayList<FavouritePoint>();
+		final List<FavouritePoint> favourites = new ArrayList<>();
 
 		for (GPXUtilities.WptPt p : wptPts) {
 			if (p.category != null) {
 				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, p.category);
-				if (p.desc!=null) {
+				if (p.desc != null) {
 					fp.setDescription(p.desc);
 				}
 				favourites.add(fp);
 			} else if (p.name != null) {
-				int c;
-				if ((c = p.name.lastIndexOf('_')) != -1) {
-					favourites.add(new FavouritePoint(p.lat, p.lon, p.name.substring(0, c), p.name.substring(c + 1)));
-				}
+				favourites.add(new FavouritePoint(p.lat, p.lon, p.name, ""));
 			}
 		}
 
@@ -373,13 +370,13 @@ public class GpxImportHelper {
 	}
 
 	/**
-	   * Checks, whether the child directory is a subdirectory of the parent
-	   * directory.
-	   *
-	   * @param parent the parent directory.
-	   * @param child the suspected child directory.
-	   * @return true if the child is a subdirectory of the parent directory.
-	   */
+	 * Checks, whether the child directory is a subdirectory of the parent
+	 * directory.
+	 *
+	 * @param parent the parent directory.
+	 * @param child  the suspected child directory.
+	 * @return true if the child is a subdirectory of the parent directory.
+	 */
 	public boolean isSubDirectory(File parent, File child) {
 		try {
 			parent = parent.getCanonicalFile();
