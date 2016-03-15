@@ -1919,8 +1919,8 @@
     <string name="osm_live_hide_user_name">Не показывать мое имя в отчетах</string>
     <string name="osm_live_month_cost">Стоимость в месяц</string>
     <string name="osm_live_month_cost_desc">Ежемесячный платеж</string>
-    <string name="osm_live_enter_email">Пожалуйста, введите действительный адрес электронной почты</string>
-    <string name="osm_live_thanks">Благодарим вас за подписку на live обновления!</string>
+    <string name="osm_live_enter_email">Пожалуйста, введите корректный адрес электронной почты</string>
+    <string name="osm_live_thanks">Благодарим вас за подписку на живые обновления!</string>
     <string name="osm_live_subscription_settings">Параметры подписки</string>
     <string name="osm_live_ask_for_purchase">Пожалуйста сначала приобретите подписку OSM Live</string>
 
@@ -1928,7 +1928,7 @@
     
     <string name="select_map_marker">Выберите маркер</string>
     <string name="map_markers_other">Другие маркеры</string>
-    <string name="upload_anonymously">Добавлено анонимно</string>
+    <string name="upload_anonymously">Загрузить анонимно</string>
     <string name="map_marker_1st">Первый маркер</string>
     <string name="map_marker_2nd">Второй маркер</string>
     <string name="shared_string_toolbar">Панель инструментов</string>
@@ -1955,7 +1955,7 @@
     <string name="number_of_recipients">Количество получателей</string>
     <string name="osm_live_active">Активные</string>
     <string name="osm_live_not_active">Неактивные</string>
-    <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться OSM пользователям внесшим изменения в карту этого региона</string>
+    <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OpenStreetMap внесшим изменения в карту этого региона</string>
     <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время доступно только {2} Мб свободного места.</string>
     <string name="upload_osm_note_description">Вы можете загрузить вашу OSM заметку анонимно, используя свой профиль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
@@ -1968,4 +1968,11 @@
 <string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
     <string name="release_2_3">" • OSM Live. Поддержка авторов и разработчиков карт и получение почасовых обновлений карты.\n\n• Маркеры. Новый способ для быстрого выбора мест на карте.\n\n• Более подробные OSM карты со специфическими дорожными знаками стран и с большим количеством новых функций.\n\n• Улучшен внешний вид и подготовка маршрута.\n\n• Множество улучшений в контекстном меню карты таких как поиск адреса.\n\nИ многое другое... "</string>
     <string name="report">Отчёт</string>
+    <string name="shared_string_move_up">Переместить вверх</string>
+    <string name="shared_string_move_down">Переместить вниз</string>
+    <string name="finish_navigation">Завершить навигацию</string>
+    <string name="avoid_road">Избегать дорог</string>
+    <string name="osm_live_user_public_name">Публичное имя</string>
+    <string name="osm_live_support_region">Поддерживаемый регион</string>
+    <string name="osm_live_enter_user_name">Пожалуйста введите имя</string>
     </resources>
