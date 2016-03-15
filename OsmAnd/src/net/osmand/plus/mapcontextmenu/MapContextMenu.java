@@ -472,7 +472,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					latLon.getLongitude(), getPointDescriptionForTarget());
 		} else if (targets.getIntermediatePoints().isEmpty()) {
 			targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
-			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
 			close();
 		} else {
 			Builder bld = new AlertDialog.Builder(mapActivity);
@@ -494,11 +494,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					if (defaultVls[0] == 0) {
 						targets.removeAllWayPoints(false, true);
 						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
 						close();
 					} else {
 						targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
 						close();
 					}
 				}

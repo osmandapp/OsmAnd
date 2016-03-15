@@ -53,7 +53,30 @@ public class ColorDialogs {
 			0xb48e2512
 	};
 
-	
+	public static String[] paletteColorTags = new String[] {
+			"red",
+			"orange",
+			"yellow",
+			"lightgreen",
+			"green",
+			"lightblue",
+			"blue",
+			"purple",
+			"pink",
+			"brown"
+	};
+
+	public static int getColorByTag(String tag) {
+		String t = tag.toLowerCase();
+		for (int i = 0; i < paletteColorTags.length; i++) {
+			String colorTag = paletteColorTags[i];
+			if (colorTag.equals(t)) {
+				return pallette[i];
+			}
+		}
+		return 0;
+	}
+
 	public static void setupColorSpinner(Context ctx, int selectedColor, final Spinner colorSpinner, 
 			final TIntArrayList colors) {
 		 OnItemSelectedListener listener = new OnItemSelectedListener() {
