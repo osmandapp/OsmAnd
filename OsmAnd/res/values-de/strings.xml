@@ -1551,7 +1551,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="osmo_no_connection_msg">OsMo-Dienst ist nicht verfügbar:\n- bitte Verbindung prüfen;\n- bitte Einstellungen prüfen;\n- ggf. Meldung auf Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
-	<string name="anonymous_user_hint">Anonyme Benutzer können nicht:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
+	<string name="anonymous_user_hint">Anonyme Benutzer können keine:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
     <string name="rendering_category_routes">Routen</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">ÖPNV-Linien</string>
@@ -2108,7 +2108,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
     <string name="osm_live_ask_for_purchase">Kaufen Sie bitte zuerst ein OSM Live Abonnement</string>
 
-    <string name="osm_live_region_desc">Teile Ihrer Spende werden am OSM-Mitwirkende weitergegeben, welche diese Region bearbeiten.</string>
+    <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, welche diese Region bearbeiten</string>
     <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. Ein Großteil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so ist dies dafür eine perfekte Möglichkeit.</string>
     
     <string name="shared_string_topbar">Obere Leiste</string>
@@ -2116,7 +2116,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="avoid_road">Straßen vermeiden</string>
     <string name="storage_directory_readonly_desc">Der momentan gewählte Speicherort ist schreibgeschützt. Es wurde vorübergehend zum internen Speicher gewechselt. Bitte einen gültigen Speicherort wählen.</string>
     <string name="storage_directory_shared">Gemeinsamer Speicher</string>
-    <string name="release_2_3">" • OSM Live. Unterstütze Karten Mitwirkende und Entwickler und bekomme stündliche Karten Aktualisierungen.\n\n • Karten Markierungen. Ein neuer Weg um schnell ausgewählte Plätze auf der Karte auszuwählen.\n\n • Detailliertere OSM Karten mit länderspezifischen Straßenschildern und einer Menge weitere Funktionalitäten.\n\n • Verbessertes Aussehen und Gefühl der Routen Vorbereitung.\n\n • Viele Verbesserungen der Karten Kontextmenüs, wie beispielsweise kontextabhängige Adresssuche.
+    <string name="release_2_3">" • OSM Live. Unterstütze Karten-Mitwirkende und Entwickler und erhalte stündliche Karten Aktualisierungen.\n\n • Karten Markierungen. Ein neuer Weg um schnell ausgewählte Plätze auf der Karte auszuwählen.\n\n • Detailliertere OSM Karten mit länderspezifischen Straßenschildern und einer Menge weitere Funktionalitäten.\n\n • Verbessertes Aussehen und Gefühl der Routen Vorbereitung.\n\n • Viele Verbesserungen der Karten Kontextmenüs, wie beispielsweise kontextabhängige Adresssuche.
 \n\n und mehr… "</string>
     <string name="full_report">Vollständiger Report</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap Zugang und Passwort</string>
@@ -2126,4 +2126,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
     <string name="shared_string_move_up">Hoch bewegen</string>
     <string name="shared_string_move_down">Runter bewegen</string>
-    </resources>
+    <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubt Zeichen</string>
+</resources>

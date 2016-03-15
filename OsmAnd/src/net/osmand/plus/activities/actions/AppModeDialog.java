@@ -28,7 +28,7 @@ public class AppModeDialog {
 		if(!showDefault) {
 			values.remove(ApplicationMode.DEFAULT);
 		}
-		if (showDefault || settings.getApplicationMode() != ApplicationMode.DEFAULT) {
+		if (showDefault || (settings.getApplicationMode() != ApplicationMode.DEFAULT && !singleSelection)) {
 			selected.add(settings.getApplicationMode());
 		}
 		return prepareAppModeView(a, values, selected, parent, singleSelection, false, useMapTheme, onClickListener);
