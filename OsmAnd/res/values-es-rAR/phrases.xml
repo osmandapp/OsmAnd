@@ -2692,4 +2692,31 @@
 <string name="poi_button_operated_yes">Activado por botón</string>
 	<string name="poi_button_operated_no">No activado por botón</string>
 
+<string name="poi_free_flying_site_takeoff">Sitio de vuelo libre: Despegue</string>
+	<string name="poi_free_flying_site_landing">Sitio de vuelo libre: Aterrizaje</string>
+	<string name="poi_free_flying_site_toplanding">Sitio de vuelo libre: Aterrizaje en la cima</string>
+	<string name="poi_free_flying_site_towing">Sitio de vuelo libre: Remolque</string>
+	<string name="poi_free_flying_site_training">Sitio de capacitación en vuelo libre</string>
+	<string name="poi_free_flying_official_yes">Sitio permitido para vuelo libre</string>
+	<string name="poi_free_flying_official_no">Sitio no permitido para vuelo libre</string>
+	<string name="poi_free_flying_paragliding_yes">Parapente: Sí</string>
+	<string name="poi_free_flying_paragliding_no">Parapente: No</string>
+	<string name="poi_free_flying_hanggliding_yes">Ala delta: Sí</string>
+	<string name="poi_free_flying_hanggliding_no">Ala delta: No</string>
+	<string name="poi_free_flying_rigid_yes">Ala delta rígido: Sí</string>
+	<string name="poi_free_flying_rigid_no">Ala delta rígido: No</string>
+	<string name="poi_free_flying_site_orientation_n">Orientación del sitio en vuelo libre: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Orientación del sitio en vuelo libre: NE</string>
+	<string name="poi_free_flying_site_orientation_e">Orientación del sitio en vuelo libre: E</string>
+	<string name="poi_free_flying_site_orientation_se">Orientación del sitio en vuelo libre: SE</string>
+	<string name="poi_free_flying_site_orientation_s">Orientación del sitio en vuelo libre: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Orientación del sitio en vuelo libre: SO</string>
+	<string name="poi_free_flying_site_orientation_w">Orientación del sitio en vuelo libre: O</string>
+	<string name="poi_free_flying_site_orientation_nw">Orientación del sitio en vuelo libre: NO</string>
+	<string name="poi_free_flying_no_flight_time">Sin horario de vuelo (vuelo libre)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Con directrices de invitado en vuelo libre</string>
+	<string name="poi_free_flying_guest_guidelines_no">Sin directrices de invitado en vuelo libre</string>
+
+	<string name="poi_solarium">Centro de bronceado (solarium)</string>
+
 </resources>
