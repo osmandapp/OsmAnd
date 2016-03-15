@@ -1945,7 +1945,7 @@
     <string name="shared_string_save_changes">Сохранить изменения</string>
     <string name="shared_string_email_address">Адрес электронной почты</string>
     <string name="shared_string_read_more">Подробнее</string>
-    <string name="item_removed">Элемент удален</string>
+    <string name="item_removed">Запись удалена</string>
     <string name="n_items_removed">элементы удалены</string>
     <string name="live_updates">Live обновления</string>
     <string name="select_voice_provider_descr">Выберите или скачайте голосовые подсказки для вашего языка</string>
