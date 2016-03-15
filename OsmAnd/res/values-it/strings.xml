@@ -1300,7 +1300,7 @@
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
     <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità del cosiddetto monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti e comunicare con loro. Viene fornito con varie opzioni di monitoraggio della sessione in corso o permanentemente.\n\nI gruppi anonimi possono essere creati autonomamente per uno specifico numero di giorni e sono limitati ad alcune funzioni, es. non ci sono controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
-    <string name="osmo_plugin_name">OsMo (monitoraggio OSM)</string>
+    <string name="osmo_plugin_name">Monitoraggio OpenStreetMap</string>
     <string name="osmo_settings">OsMO</string>
     <string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
     <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
@@ -1314,10 +1314,10 @@
     <string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
     <string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
 
-    <string name="osmo_auto_send_locations_descr">Avvia automaticamente la registrazione della sessione e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
-    <string name="osmo_auto_send_locations">Avvia automaticamente la sessione di tracciamento</string>
-    <string name="osmo_tracker_id">ID tracciamento personale</string>
-    <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità. Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnettersi seleziona l\'opzione Rigenera l\'id.</string>
+    <string name="osmo_auto_send_locations_descr">Avvia automaticamente il viaggio e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
+    <string name="osmo_auto_send_locations">Avvia automaticamente il viaggio</string>
+    <string name="osmo_tracker_id">ID tracciamento</string>
+    <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
@@ -1328,12 +1328,12 @@
     <string name="minutes_ago">minuti fa</string>
     <string name="seconds_ago">secondi fa</string>
     <string name="osmo_connect_to_device_name">Nome utente</string>
-    <string name="osmo_connect_to_device_tracker_id">Id tracciabilità</string>
+    <string name="osmo_connect_to_device_tracker_id">ID tracciabilità</string>
     <string name="osmo_connect_to_device">Collegamento con il dispositivo</string>
 
 
     <string name="osmo_connected_devices">Dispositivi collegati</string>
-    <string name="osmo_groups">Gruppi/Dispositivi OsMo</string>
+    <string name="osmo_groups">Gruppi OsMo</string>
     <string name="osmo_group_info">Informazioni</string>
     <string name="osmo_group">Gruppo OsMo</string>
     <string name="osmo_group_share">Per collegarsi al gruppo %2$s, specificare l\'id del gruppo (%1$s) o cliccare %3$s.</string>
@@ -1350,10 +1350,10 @@
     <string name="osmo_expire_group">Scade fra</string>
     <string name="osmo_group_description">Descrizione</string>
     <string name="osmo_group_policy">Regole</string>
-    <string name="osmo_connect_to_group_id">Id gruppo</string>
+    <string name="osmo_connect_to_group_id">ID gruppo</string>
     <string name="osmo_group_name">Nome gruppo</string>
     <string name="osmo_connect_to_group">Collegamento con il gruppo</string>
-    <string name="osmo_connect">Collega a</string>
+    <string name="osmo_connect">Entra</string>
     <string name="osmo_create_group">Crea gruppo</string>
     <string name="osmo_server_operation_failed">Operazione del server OsMo fallita</string>
     <string name="osmo_activity">Monitoraggio OpenStreetMap</string>
@@ -1382,7 +1382,7 @@
     <string name="osmo_center_location">Centra nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
     <string name="osmo_use_server_name">Nome registrato</string>
-    <string name="osmo_connect_to_my_nickname">Mio nickname</string>
+    <string name="osmo_connect_to_my_nickname">Nick</string>
     <string name="osmo_user_name">Utente</string>
 
 
@@ -1485,7 +1485,7 @@
     <string name="rendering_attr_subwayMode_name">Percorsi metró</string>
     <string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
-    <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
+    <string name="osmo_specify_tracker_id">Per favore specifica l\'ID</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
     <string name="pause_navigation">Metti in pausa la navigazione</string>
     <string name="rendering_attr_alpineHiking_name">Scala escursionismo alpino (SAC)</string>
@@ -1546,8 +1546,8 @@
     <string name="speed_limit_exceed">Tolleranza del limite di velocità</string>
     <string name="speed_limit_exceed_message">Seleziona il valore di superamento del limite di velocità dal quale si desidera avere l\'avviso vocale.</string>
     <string name="osmo_device_not_found">Dispositivo non trovato</string>
-    <string name="osmo_no_connection_msg">Il servizio OsMo non è disponibile:\n- controlla la connessione;\n- controlla le impostazioni;\n- contattaci su Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Un utente anonimo non può:\n- creare gruppi;\n- sincronizzare con il server gruppi e dispositivi;\n- gestire gruppi e dispositivi in un ufficio privato.</string>
+    <string name="osmo_no_connection_msg">Connessione al server OsMo non riuscita:\n- controlla la connessione a internet;\n- controlla le impostazioni;\n- contattaci su Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un utente anonimo non può:\n- creare gruppi;\n- sincronizzare con il server gruppi e dispositivi;\n- gestire gruppi e dispositivi nel pannello di controllo sul sito.</string>
     <string name="anonymous_user">Utente anonimo</string>
     <string name="logged_as">Registrato come %1$s</string>
     <string name="rendering_category_routes">Percorsi</string>
@@ -1817,7 +1817,7 @@
     <string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
     <string name="use_fast_recalculation">Ricalcolo percorso intelligente</string>
     <string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso per i viaggi lunghi</string>
-    <string name="osmo_share_my_location">Condividi la mia posizione</string>
+    <string name="osmo_share_my_location">Invia la posizione</string>
     <string name="shared_string_logoff">Esci</string>
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
@@ -2214,4 +2214,6 @@
     <string name="avoid_road">Evita la strada</string>
     <string name="storage_directory_shared">Memoria condivisa</string>
     <string name="storage_directory_readonly_desc">La carella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegliere una cartella di destinazione valida.</string>
+    <string name="report">Rapporto</string>
+    <string name="storage_permission_restart_is_required">Ora l\'applicazione ha i permessi per scrivere sulla memoria esterna. È necessario riavviare l\'applicazione.</string>
     </resources>

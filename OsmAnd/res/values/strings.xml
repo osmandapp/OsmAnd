@@ -587,8 +587,6 @@
     <string name="use_opengl_render_descr">Use hardware accelerated OpenGL rendering (may not work on some devices)</string>
     <string name="error_avoid_specific_road">No bypass found</string>
     <string name="home_button">Home</string>
-    <string name="osmo_use_https_descr">Use secure connection to server</string>
-    <string name="osmo_use_https">Use HTTPS</string>
     <string name="map_update">Updates available for %1$s maps</string>
     <string name="search_for">Search for</string>
     <string name="coordinates">Coordinates</string>

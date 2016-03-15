@@ -1001,9 +1001,6 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> OSMO_AUTO_CONNECT = new BooleanPreference("osmo_automatically_connect", false).makeGlobal();
 
-	public final CommonPreference<Boolean> OSMO_USE_HTTPS = new BooleanPreference("osmo_use_https",
-			Build.VERSION.SDK_INT < 14/*Build.VERSION_CODES.ICE_CREAM_SANDWICH*/ ? false : true).makeGlobal();
-
 	public final OsmandPreference<Long> OSMO_LAST_PING = new LongPreference("osmo_last_ping", 0).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> OSMO_SEND_LOCATIONS_STATE = new BooleanPreference("osmo_send_locations", false).cache().makeGlobal();

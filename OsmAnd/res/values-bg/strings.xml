@@ -2118,4 +2118,9 @@
     <string name="full_report">Пълен доклад</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap потребителско име и парола</string>
     <string name="file_name_containes_illegal_char">Името на файла съдържа неправилен символ</string>
-</resources>
+<string name="storage_directory_readonly_desc">Понастоящем, избраната от Вас папка за съхранение е само за четене. Временно папката за съхранение е прехвърлена във вътрешната памет на устройството. Моля, изберете валидна папка за запис.</string>
+    <string name="osm_live_region_desc">Част от вашето дарение ще бъде изпратено до други потребители на OSM, които са допринесли за картата в този район</string>
+    <string name="osm_live_header">Този абонамент позволява актуализиране на всички карти на всеки час. Голяма част от прихода отива за общността на OSM, за потребителите които са допринесли за картата. В случай че харесвате OsmAnd и OSM и искате да помогнете, това е перфектният начин да го сторите.</string>
+    
+    <string name="show_transparency_seekbar">Показване на прозрачна лента</string>
+    </resources>

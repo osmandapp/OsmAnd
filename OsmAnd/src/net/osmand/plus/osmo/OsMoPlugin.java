@@ -3,6 +3,7 @@ package net.osmand.plus.osmo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -34,7 +35,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +53,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	protected Activity groupsActivity;
 	protected OsMoControlDevice deviceControl;
 
-	private final static Log log = PlatformUtil.getLog(OsMoPlugin.class);
+	private final static Log LOG = PlatformUtil.getLog(OsMoPlugin.class);
 
 
 	public OsMoPlugin(final OsmandApplication app) {
@@ -398,6 +398,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 							try {
 								color = Algorithms.parseColor(obj.getString("color"));
 							} catch (RuntimeException e) {
+								LOG.warn("", e);
 							}
 						}
 						boolean visible = obj.has("visible");
@@ -406,12 +407,10 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 							long len = !f.exists() ? -1 : f.length();
 							boolean sizeEqual = obj.has("size") && obj.getLong("size") == len;
 							boolean modifySupported = f.setLastModified(timestamp - 1);
-							if (sizeEqual && !modifySupported) {
-								// false alarm
-							} else {
+							if (!sizeEqual || modifySupported) {
 								changed = true;
 								String url = obj.getString("url");
-								log.info("Download gpx " + url);
+								LOG.info("Download gpx " + url);
 								DownloadFileHelper df = new DownloadFileHelper(app);
 								InputStream is = df.getInputStreamToDownload(new URL(url), false);
 								int av = is.available();
@@ -431,10 +430,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 							}
 							app.getSelectedGpxHelper().setGpxFileToDisplay(selectGPXFile);
 						}
-					} catch (JSONException e) {
-						e.printStackTrace();
-						errors += e.getMessage() + "\n";
-					} catch (IOException e) {
+					} catch (JSONException | IOException e) {
 						e.printStackTrace();
 						errors += e.getMessage() + "\n";
 					}
@@ -443,7 +439,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 			}
 
 			private void redownloadFile(File f, long timestamp, int color, InputStream is)
-					throws FileNotFoundException, IOException {
+					throws IOException {
 				FileOutputStream fout = new FileOutputStream(f);
 				byte[] buf = new byte[1024];
 				int k;
@@ -453,7 +449,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 				fout.close();
 				is.close();
 				if (!f.setLastModified(timestamp)) {
-					log.error("Timestamp updates are not supported");
+					LOG.error("Timestamp updates are not supported");
 				}
 			}
 
@@ -467,8 +463,6 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 					refreshMap();
 				}
 			}
-
-			;
 
 			@Override
 			protected void onPostExecute(String result) {
@@ -512,7 +506,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	}
 
 	public boolean useHttps() {
-		return app.getSettings().OSMO_USE_HTTPS.get();
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 	}
 
 	@Override

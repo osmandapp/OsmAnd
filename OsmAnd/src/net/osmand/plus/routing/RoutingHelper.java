@@ -97,6 +97,7 @@ public class RoutingHelper {
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, settings);
 		provider = new RouteProvider();
+		setAppMode(settings.APPLICATION_MODE.get());
 	}
 	
 

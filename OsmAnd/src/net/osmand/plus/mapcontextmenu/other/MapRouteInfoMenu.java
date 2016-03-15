@@ -225,8 +225,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	private void updateApplicationModes(final View parentView) {
-		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		ApplicationMode am = settings.APPLICATION_MODE.get();
+		//final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		//ApplicationMode am = settings.APPLICATION_MODE.get();
+		ApplicationMode am = routingHelper.getAppMode();
 		final Set<ApplicationMode> selected = new HashSet<>();
 		selected.add(am);
 		ViewGroup vg = (ViewGroup) parentView.findViewById(R.id.app_modes);
@@ -237,8 +238,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					public void onClick(View v) {
 						if (selected.size() > 0) {
 							ApplicationMode next = selected.iterator().next();
-							settings.APPLICATION_MODE.set(next);
-							updateMenu();
+							//settings.APPLICATION_MODE.set(next);
+							//updateMenu();
+							routingHelper.setAppMode(next);
 							mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 						}
 					}
