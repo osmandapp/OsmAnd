@@ -58,7 +58,7 @@
 		</copy>
 	</target>
 
-	<target name="run-route-test" >
+	<target name="run-turn-lanes-test" >
 		<junit printsummary="yes" haltonfailure="yes" showoutput="yes">
 			<classpath>
 				<pathelement path="bin"/>
