@@ -1961,7 +1961,7 @@
     <string name="osm_live_not_active">Неактивные</string>
     <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OpenStreetMap внесшим изменения в карту этого региона</string>
     <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время доступно только {2} Мб свободного места.</string>
-    <string name="upload_osm_note_description">Вы можете загрузить вашу OSM заметку анонимно, используя свой профиль OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Вы можете загрузить вашу OSM заметку анонимно, или используя свой профиль OpenStreetMap.org</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать домашнюю страницу</string>
