@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
+    <string name="select_map_marker">Выберите маркеры</string>
+    <string name="shared_string_topbar">Верхняя панель</string>
+    <string name="osm_user_stat">Правок: %1$s, ранг: %2$s, всего правок: %3$s</string>
+    <string name="osm_editors_ranking">Рейтинг картографов OSM</string>
+    <string name="show_transparency_seekbar">Отображать регулировку прозрачности</string>
     <string name="show_polygons">Отображать полигоны</string>
     <string name="rendering_attr_showMtbRoutes_name">Отображать MTB маршруты</string>
     <string name="shared_string_select">Выбрать</string>
@@ -29,7 +33,7 @@
 	<string name="osn_bug_name">Заметка OSM</string>
 	<string name="osn_add_dialog_title">Создать заметку</string>
 	<string name="osn_comment_dialog_title">Добавить комментарий</string>
-	<string name="osn_reopen_dialog_title">Повторное открыть заметку</string>
+	<string name="osn_reopen_dialog_title">Повторно открыть заметку</string>
 	<string name="osn_close_dialog_title">Закрыть заметку</string>
 	<string name="osn_add_dialog_success">Заметка успешно создана</string>
 	<string name="osn_add_dialog_error">Ошибка: заметка не была создана</string>
