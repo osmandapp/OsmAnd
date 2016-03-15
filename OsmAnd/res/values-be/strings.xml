@@ -1283,7 +1283,7 @@
 	<string name="share_fav_subject">Упадабанае адаслана праз OsmAnd</string>
 	<string name="use_points_as_intermediates">Разлічыць маршрут паміж кропкамі</string>
     
-    <string name="osmo_auto_send_locations_descr">Аўтаматычна пачынаць запіс сьледу і перадачу месцазнаходжаньня пасьля старту праграмы</string>
+    <string name="osmo_auto_send_locations_descr">Аўтаматычна пачынаць падарожжа і перадачу месцазнаходжаньня пасьля старту праграмы</string>
     <string name="osmo_auto_send_locations">Аўтаматычна пачынаць падарожжа</string>
     <string name="osmo_tracker_id">ID трэкера</string>
     <string name="osmo_tracker_id_descr">Націсніце, каб паглядзець ідэнтыфікатар трэкера</string>
@@ -1521,7 +1521,7 @@
 	<string name="osmo_device_not_found">Прыстасаваньне ня знойдзена</string>
     <string name="anonymous_user">Ананімны карыстальнік</string>
     <string name="logged_as">Вы ўвайшлі як %1$s</string>
-	<string name="osmo_no_connection_msg">Сэрвіс OsMo не даступны:\n- Праверце злучэньне;\n- Праверце налады;\n- Праверце наш Twitter: https://twitter.com/OsMomobi</string>
+	<string name="osmo_no_connection_msg">Сэрвіс OsMo не даступны:\n- Праверце Інтэрнэт-злучэньне;\n- Праверце налады;\n- Праверце наш Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Ананімнаму карыстальніку недаступныя:\n- Стварэньне груп;\n- Сінхранізацыя груп і прыстасаваньняў з серверам;\n- Кіраваньне групамі і прыстасаваньнямі ў асабістым кабінеце.</string>
     <string name="configure_map">Налады мапы</string>
     <string name="search_radius_proximity">Паблізу ад</string>
@@ -2164,4 +2164,16 @@
     <string name="upload_osm_note_description">Вы можаце адаслаць Вашу OSM заўвагу ананімна, калі вы выкарыстоўваеце свой профіль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Адаслаць OSM заўвагу</string>
     <string name="report">Справаздача</string>
+    <string name="release_2_3">" • OSM Live. Падтрымка аўтараў і распрацоўнікаў мапаў і атрыманьне штогадзінных абнаўленьняў мапы.\n\n• Маркеры. Новы спосаб для хуткага выбару месцаў на мапе.\n\n• Больш падрабязныя OSM мапы са спэцыфічнымі дарожнымі знакамі краін і з вялікай колькасьцю новых функцый.\n\n• Палепшаны вонкавы выгляд і падрыхтоўка маршруту.\n\n• Мноства паляпшэньняў у кантэкстным мэню мапы такіх як пошук адрасу.\n\nІ шматлікае іншае... "</string>
+    <string name="shared_string_move_up">Перамясьціць угару</string>
+    <string name="shared_string_move_down">Перамясьціць уніз</string>
+    <string name="finish_navigation">Завяршыць навігацыю</string>
+    <string name="avoid_road">Пазьбягаць дарог</string>
+    <string name="shared_string_topbar">Верхняя панэль</string>
+    <string name="osm_user_stat">Правак: %1$s, ранг: %2$s, усяго правак: %3$s</string>
+    <string name="osm_editors_ranking">Рэйтынг картографаў OSM</string>
+    <string name="osm_live_user_public_name">Публічнае імя</string>
+    <string name="osm_live_support_region">Падтрымоўваны рэгіён</string>
+    <string name="osm_live_enter_user_name">Калі ласка ўвядзіце імя</string>
+    <string name="select_map_markers">Абярыце маркеры</string>
     </resources>
