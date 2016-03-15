@@ -676,4 +676,11 @@
 	<string name="srtm_plugin_name">Nivelkurboj</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi ebleco estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de lando.\n\nLa mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa sputniko de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems). "</string>
     <string name="srtm_plugin_description">"Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi ebleco estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de lando.\n\nLa mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa sputniko de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems). "</string>
+    <string name="no_index_file_to_download">Elŝutado de trovita, bonvolu kontroli vian retkonekton.</string>
+    <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu na http://osmand.net).</string>
+    <string name="none_selected_gpx">Nenia GPX-dosiero elektita. Por elekti bonvolu premteni disponeblan kurson.</string>
+    <string name="local_index_select_gpx_file">Elektu por montri</string>
+    <string name="gpx_split_interval">Divid-intervalo</string>
+    <string name="sort_by_distance">Ordigi laŭ distanco</string>
+    <string name="sort_by_name">Ordigi laŭ nomo</string>
     </resources>
