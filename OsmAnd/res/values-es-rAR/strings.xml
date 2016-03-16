@@ -82,8 +82,8 @@
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
-    <string name="shared_string_clear">Vaciar</string>
-    <string name="shared_string_clear_all">Vaciar todo</string>
+    <string name="shared_string_clear">Borrar</string>
+    <string name="shared_string_clear_all">Borrar todo</string>
     <string name="shared_string_save">Guardar</string>
     <string name="shared_string_save_as_gpx">Guardar como traza GPX</string>
     <string name="shared_string_rename">Renombrar</string>
