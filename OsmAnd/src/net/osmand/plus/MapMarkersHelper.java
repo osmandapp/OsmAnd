@@ -197,6 +197,14 @@ public class MapMarkersHelper {
 		return mapMarkers;
 	}
 
+	public MapMarker getFirstMapMarker() {
+		if (mapMarkers.size() > 0) {
+			return mapMarkers.get(0);
+		} else {
+			return null;
+		}
+	}
+
 	public List<MapMarker> getSortedMapMarkers() {
 		return sortedMapMarkers;
 	}
