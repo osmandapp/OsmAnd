@@ -2127,5 +2127,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
     <string name="shared_string_move_up">Hoch bewegen</string>
     <string name="shared_string_move_down">Runter bewegen</string>
-    <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubt Zeichen</string>
+    <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
 </resources>
