@@ -1,34 +1,75 @@
 [
   {
-    "testName": "Amstelveenseweg",
+    "testName": "1.Preston road TR Lorimar drive",
     "startPoint": {
-      "longitude": 35.51630312204361,
-      "latitude": 45.6971206184178
+      "latitude": 45.69539,
+      "longitude": 35.43936
     },
     "endPoint": {
-      "longitude": 35.51303619146347,
-      "latitude": 45.6952846638807
+      "latitude": 45.69567,
+      "longitude": 35.440113
     },
     "expectedResults": {
-      "-94361": "TL, TL, TL, C, TR, TR",
-      "-96062": "+TL, +TL, +TL, +C, TR, TR",
-      "-96063": "+TL, +TL, +TL, +C, TR, TR"
+      "-8827": "TL, C, C, C, +TR"
     }
   },
   {
-    "testName": "Amstelveenseweg2",
+    "testName": "1.2.Preston road TL Lorimar drive",
     "startPoint": {
-      "longitude": 35.51630312204361,
-      "latitude": 45.6971206184178
+      "latitude": 45.69716379996895,
+      "longitude": 35.43819894718172
     },
     "endPoint": {
-      "longitude": 35.51303619146347,
-      "latitude": 45.6952846638807
+      "latitude": 45.69602851362186,
+      "longitude": 35.44070949481966
     },
     "expectedResults": {
-      "-96061": "+TL, +TL, +TL, +C, TR, TR",
-      "-96062": "+TL, +TL, +TL, C, TR, TR",
+      "-9105": "+TL, C, C, C, TR",
+      "-8512": "+TL, C, C, C",
+      "-8827": "TL, +C, +C"
+   }
+  },
+  {
+    "testName": "1.3.Baywater drive TR Preston road",
+    "startPoint": {
+      "latitude": 45.6960514631203,
+      "longitude": 35.43735606299879
+    },
+    "endPoint": {
+      "latitude": 45.695624319890825,
+      "longitude": 35.438198276629464
+    },
+    "expectedResults": {
+      "-8644": "TL, C, C, +TR"
+   }
+  },
+  {
+    "testName": "2.Valley View Lane TU Highway 161 Service Road ?????",
+    "startPoint": {
+      "latitude": 45.694859388262195,
+      "longitude": 35.467755138874054
+    },
+    "endPoint": {
+      "latitude": 45.694132477954575,
+      "longitude": 35.46842032670975
+    },
+    "expectedResults": {
+      "-41125": "+TU, +TL, +C;TL, C, C;TR"
+   }
+  },
+  {
+    "testName": "3.Motorway link from Ringweg Zuid TL Amstelveenseweg",
+    "startPoint": {
+      "latitude": 45.6971206184178,
+      "longitude": 35.51630312204361
+    },
+    "endPoint": {
+      "latitude": 45.6952846638807,
+      "longitude": 35.51303619146347
+    },
+    "expectedResults": {
       "-96063": "+TL, +TL, +TL, +C, TR, TR"
     }
   }
+
 ]

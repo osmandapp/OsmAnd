@@ -4,6 +4,7 @@ OsmAnd-core.jar
 protobuf-src/com
 OsmAnd-core-android.jar
 src/net/osmand/core/jni/*
+result.*
 
 # Android Studio
 /.idea
