@@ -32,7 +32,7 @@
     <string name="mark_to_delete">Marcar para borrar</string>
     <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener una longitud de al menos 3 caracteres!</string>
     <string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambio(s) a OSM. ¿Está seguro?</string>
-    <string name="confirmation_to_clear_history">¿Quiere vaciar el historial?</string>
+    <string name="confirmation_to_clear_history">¿Quieres vaciar el historial?</string>
     <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_places">Lugares</string>
@@ -82,8 +82,8 @@
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
-    <string name="shared_string_clear">Vaciar</string>
-    <string name="shared_string_clear_all">Vaciar todo</string>
+    <string name="shared_string_clear">Limpiar</string>
+    <string name="shared_string_clear_all">Borrar todo</string>
     <string name="shared_string_save">Guardar</string>
     <string name="shared_string_save_as_gpx">Guardar como traza GPX</string>
     <string name="shared_string_rename">Renombrar</string>
