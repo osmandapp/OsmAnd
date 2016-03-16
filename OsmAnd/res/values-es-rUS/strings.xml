@@ -33,7 +33,7 @@
     <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener una longitud de al menos 3 caracteres!</string>
     <string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambio(s) a OSM. ¿Está seguro?</string>
     <string name="confirmation_to_clear_history">¿Quieres vaciar el historial?</string>
-    <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
+    <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_places">Lugares</string>
     <string name="delay_to_start_navigation_descr">Indique el tiempo de espera para permanecer en la pantalla de planificación de ruta</string>
