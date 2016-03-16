@@ -68,7 +68,7 @@
       "longitude": 35.51303619146347
     },
     "expectedResults": {
-      "-96063": "+TL, +TL, +TL, +C, TR, TR"
+      "-16705": "+TL, +TL, +TL, C, TR, TR"
     }
   },
   {
@@ -156,6 +156,35 @@
     "expectedResults": {
       "-77187": "+TL, TL;TR",
       "-77197": "TL, +C, +C"
+   }
+  },
+  {
+    "testName": "8.Luisenstraße TL Invalidenstraße (L 1008)",
+    "startPoint": {
+      "latitude": 45.698618375457045,
+      "longitude": 35.59940265119076
+    },
+    "endPoint": {
+      "latitude": 45.698873149397336,
+      "longitude": 35.597948893904686
+    },
+    "expectedResults": {
+      "-127534": "+TL, TR",
+      "-127696": "+C, +C;TR"
+   }
+  },
+  {
+    "testName": "9.Torstraße C",
+    "startPoint": {
+      "latitude": 45.69951195248144,
+      "longitude": 35.61424867808819
+    },
+    "endPoint": {
+      "latitude": 45.699101695620705,
+      "longitude": 35.61031924188137
+    },
+    "expectedResults": {
+      "-132245": "+C;TL, +C, TR"
    }
   }
 
