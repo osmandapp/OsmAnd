@@ -1870,7 +1870,7 @@
 	<string name="poi_bridge_bicycle">Puente para bicicletas</string>
 	<string name="poi_bridge_railway">Puente ferroviario</string>
 	<string name="poi_bridge_waterway">Puente fluvial</string>
-	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_wetland_saltern">Salar</string>
 	<string name="poi_bridge_structure_beam">Estructura del puente: Viga</string>
 	<string name="poi_bridge_structure_simple_suspension">Estructura del puente: Suspensión simple</string>
 	<string name="poi_bridge_structure_suspension">Estructura del puente: Suspensión</string>
