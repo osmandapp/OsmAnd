@@ -44,7 +44,7 @@
    }
   },
   {
-    "testName": "2.Valley View Lane TU Highway 161 Service Road ?????",
+    "testName": "2.Valley View Lane TU Highway 161 Service Road",
     "startPoint": {
       "latitude": 45.694859388262195,
       "longitude": 35.467755138874054
@@ -70,6 +70,93 @@
     "expectedResults": {
       "-96063": "+TL, +TL, +TL, +C, TR, TR"
     }
+  },
+  {
+    "testName": "4.Martinistraße TL Wilhelm-Kaisen-Brücke",
+    "startPoint": {
+      "latitude": 45.700375542702446,
+      "longitude": 35.538462191820145
+    },
+    "endPoint": {
+      "latitude": 45.70025377916235,
+      "longitude": 35.539058312773705
+    },
+    "expectedResults": {
+      "-62200": "TL, +C"
+    }
+  },
+  {
+    "testName": "5.1.Fritz-Foerster-Platz (S 172) TR Bergstraße (B 170)",
+    "startPoint": {
+      "latitude": 45.69942484339974,
+      "longitude": 35.552937403321266
+    },
+    "endPoint": {
+      "latitude": 45.698372030432985,
+      "longitude": 35.553747430443764
+    },
+    "expectedResults": {
+      "-68071": "C, C, +TR, +TR"
+    }
+  },
+  {
+    "testName": "5.2.Zellescher Weg (S 172) TL Bergstraße (B 170)",
+    "startPoint": {
+      "latitude": 45.69887876939763,
+      "longitude": 35.55432008206844
+    },
+    "endPoint": {
+      "latitude": 45.69869143574982,
+      "longitude": 35.553684398531914
+    },
+    "expectedResults": {
+      "-68128": "+TL, +TL, C, C;TR",
+      "-68107": "+TL, +TL, C, C",
+      "-68071": "TL, +C, +C"
+    }
+  },
+  {
+    "testName": "6.Platz der Vereinten Nationen TR Platz der Vereinten Nationen",
+    "startPoint": {
+      "latitude": 45.69942016011204,
+      "longitude": 35.568235382437706
+    },
+    "endPoint": {
+      "latitude": 45.70020132709422,
+      "longitude": 35.56931899487972
+    },
+    "expectedResults": {
+      "-71975": "TL, C, +TR;C"
+    }
+  },
+  {
+    "testName": "7.1.Spindlersfelder Straße TR Oberspreestraße",
+    "startPoint": {
+      "latitude": 45.699817301524455,
+      "longitude": 35.58391557633877
+    },
+    "endPoint": {
+      "latitude": 45.69793647478804,
+      "longitude": 35.58106707036495
+    },
+    "expectedResults": {
+      "-77184": "TL, +TR;TL"
+    }
+  },
+  {
+    "testName": "7.2.Spindlersfelder Straße TL Oberspreestraße",
+    "startPoint": {
+      "latitude": 45.699817301524455,
+      "longitude": 35.58391557633877
+    },
+    "endPoint": {
+      "latitude": 45.69657639532305,
+      "longitude": 35.586447581
+    },
+    "expectedResults": {
+      "-77187": "+TL, TL;TR",
+      "-77197": "TL, +C, +C"
+   }
   }
 
 ]
