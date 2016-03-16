@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
@@ -243,7 +244,7 @@ public class ExternalApiHelper {
 						} else if (API_CMD_RECORD_VIDEO.equals(cmd)) {
 							plugin.recordVideo(lat, lon, mapActivity);
 						} else if (API_CMD_RECORD_PHOTO.equals(cmd)) {
-							plugin.takePhoto(lat, lon, mapActivity);
+							plugin.takePhoto(lat, lon, mapActivity, true);
 						}
 					}
 
@@ -305,9 +306,7 @@ public class ExternalApiHelper {
 				FavouritesDbHelper helper = app.getFavorites();
 				helper.addFavourite(fav);
 
-				mapActivity.getContextMenu().show(new LatLon(lat, lon),
-						mapActivity.getMapLayers().getFavoritesLayer().getObjectName(fav), fav);
-
+				showOnMap(lat, lon, fav, mapActivity.getMapLayers().getFavoritesLayer().getObjectName(fav));
 				resultCode = RESULT_CODE_OK;
 
 			} else if (API_CMD_ADD_MAP_MARKER.equals(cmd)) {
@@ -323,10 +322,8 @@ public class ExternalApiHelper {
 
 				MapMarker marker = markersHelper.getFirstMapMarker();
 				if (marker != null) {
-					mapActivity.getContextMenu().show(new LatLon(lat, lon),
-							mapActivity.getMapLayers().getMapMarkersLayer().getObjectName(marker), marker);
+					showOnMap(lat, lon, marker, mapActivity.getMapLayers().getMapMarkersLayer().getObjectName(marker));
 				}
-
 				resultCode = RESULT_CODE_OK;
 
 			} else if (API_CMD_START_GPX_REC.equals(cmd)) {
@@ -360,6 +357,15 @@ public class ExternalApiHelper {
 		}
 
 		return result;
+	}
+
+	private void showOnMap(double lat, double lon, Object object, PointDescription pointDescription) {
+		MapContextMenu mapContextMenu = mapActivity.getContextMenu();
+		mapContextMenu.setMapCenter(new LatLon(lat, lon));
+		mapContextMenu.setMapPosition(mapActivity.getMapView().getMapPosition());
+		mapContextMenu.setCenterMarker(true);
+		mapContextMenu.setMapZoom(15);
+		mapContextMenu.show(new LatLon(lat, lon), pointDescription, object);
 	}
 
 	private void startNavigation(GPXFile gpx,
