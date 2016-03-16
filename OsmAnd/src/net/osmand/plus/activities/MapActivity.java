@@ -544,6 +544,8 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 		readLocationToShow();
 
+		OsmandPlugin.onMapActivityResume(this);
+
 		final Intent intent = getIntent();
 		if (intent != null) {
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
@@ -578,7 +580,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			app.getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
 
-		OsmandPlugin.onMapActivityResume(this);
 		mapView.refreshMap(true);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnResume();
