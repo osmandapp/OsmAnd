@@ -1921,8 +1921,8 @@
     <string name="rendering_category_others">Diğer harita özellikleri</string>
     <string name="map_widget_appearance_rem">Kalan unsurlar</string>
     <string name="search_radius_proximity">Yakınında</string>
-    <string name="osmo_no_connection_msg">Osmo hizmeti kullanılabilir değil:\n- Bağlantısını kontrol edin;\n- Ayarları kontrol edin;\n- Check out bizim Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Bir anonim kullanıcı olamaz:\n- Grupları oluşturmak;\n- Sunucuyla grupları ve cihazları senkronize;\n- Özel ofiste grupları ve aygıtları yönetmek.</string>
+    <string name="osmo_no_connection_msg">Sunucu OSMO bağlanamıyor:\n- Internet bağlantınızı kontrol;\n- Ayarlarını kontrol;\n- Check out bizim Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Bir anonim kullanıcı olamaz:\n- Grupları oluşturmak;\n- Sunucuyla grupları ve cihazları senkronize;\n- Web sitesinde kişisel pano grupları ve aygıtları yönetmek.</string>
     <string name="anonymous_user">Anonim Kullanıcı</string>
     <string name="logged_as">%1$s olarak giriş</string>
     <string name="speed_limit_exceed_message">Bir sesli uyarı alırsınız yukarıda seç hız limiti tolerans marjı.</string>
@@ -1965,7 +1965,7 @@
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>
     <string name="rendering_attr_coloredBuildings_name">Binalar türüne göre renk kodu</string>
     <string name="osmo_leave_confirmation_msg">Grup %1$s ayrılmak istiyor musunuz?</string>
-    <string name="osmo_specify_tracker_id">Lütfen kimlik belirtin</string>
+    <string name="osmo_specify_tracker_id">Lütfen belirtin</string>
     <string name="keep_navigation_service">Devam et</string>
     <string name="map_preferred_locale_descr">Harita üzerinde etiket için tercih edilen dil (yerel adlarıyla İngilizce veya geçecektir mevcut değilse)</string>
     <string name="map_preferred_locale">Harita Tercih dili</string>
@@ -1988,7 +1988,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Döngüsü yolları göster</string>
     <string name="osmo_auth_error_short">Yetkilendirme başarısız oldu</string>
     <string name="osmo_auth_error">OsMo yetkilendirme hata oluştu: %1$s.\nAşağı bir geçici olarak hizmet olabilir veya kayıt süresi.\nYeni kayıt devam etmek istiyor musunuz?</string>
-    <string name="osmo_group_information_desc">" -Tüm oluşturulan grupları genel! Anonim olmak istiyorsan, izci kimlikleri üzerinden doğrudan aygıtlarını bağlayın.\n-Özel gruplar için 8 kişi sınırlıdır\nHareketsizlik ya da 2 hafta için sadece 1 kişi faaliyet-grup-ecek var olmak silmek.\n-Sadece davet, ama kontrol grubuna yönetici konsolu için gitmek gerekir gibi grup giriş, sınırlayabilirsiniz.\n-Bir grup oluşturun, ancak diğer koşulları ile lütfen http://osmo.mobi başvurun gerekiyorsa"</string>
+    <string name="osmo_group_information_desc">" -Bir grup oluşturma ona bir isim vermek ve açıklama doldurunuz\n- Uygulama grubundan, sadece Basit türü ile oluşturulan web sitesinde daha fazla okumak https://osmo.mobi/g/new\n  - Bir grup yönetebilecek bir web sitesi aracılığıyla, parça ve mevcut tüm noktalarını yerleştirmek için\n  - Bu POI grubu değilse Biz grubun yalnızca bir kullanıcı kullanımını uygun bulmuyorum\n  - Özel gruplar 8 kişilik sınırlıdır\n  - Detaylı şartları her zaman OsMo.mobi web sitesinde bir var\n  Eğer özel şartları gerekiyorsa - - irtibata geçiniz desteği: osmo.mobi@gmail.com "</string>
     <string name="update">Bütün Güncellemler</string>
     <string name="only_download_over_wifi">Sadece WiFi üzerinden İndir</string>
     <string name="live_update">Canlı güncelleştirme</string>
@@ -2107,4 +2107,5 @@
     <string name="storage_directory_shared">Paylaşılan bellek</string>
     <string name="shared_string_topbar">Topbar</string>
     <string name="recalculate_route">Rota yeniden hesaplama</string>
+    <string name="report">Rapor</string>
     </resources>
