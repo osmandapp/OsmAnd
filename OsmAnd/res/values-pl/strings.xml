@@ -641,7 +641,7 @@
     <string name="osm_editing_plugin_description">Umożliwia wprowadzanie zmian w zasobach OSM, takich jak dodawanie lub modyfikowanie obiektów POI, zgłaszanie i komentowanie błędów oraz wysyłanie zarejestrowanych plików GPX. OSM jest publicznym projektem tworzenia map przez społeczność. Więcej szczegółów pod adresem http://openstreetmap.org. Aktywny udział jest mile widziany, modyfikacji można dokonywać bezpośrednio z poziomu programu po wprowadzeniu danych uwierzytelniających OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
 
-    <string name="play_commands_of_currently_selected_voice">Odtwarza komunikaty wybranym głosem nawigatora</string>
+    <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w wybranym głosie</string>
     <string name="debugging_and_development">Rozwój OsmAnd</string>
     <string name="native_rendering">Renderowanie natywne</string>
 
@@ -649,7 +649,7 @@
 
     <string name="send_files_to_osm">Wysłać pliki GPX do OSM?</string>
     <string name="gpx_visibility_txt">Widoczność</string>
-    <string name="gpx_tags_txt">Etykiety</string>
+    <string name="gpx_tags_txt">Tagi</string>
     <string name="gpx_description_txt">Opis</string>
     <string name="validate_gpx_upload_name_pwd">Proszę podać nazwę użytkownika OSM oraz hasło aby wysłać pliki GPX.</string>
     <string name="default_buttons_support">Wsparcie</string>
@@ -1920,7 +1920,7 @@
     <string name="m_s">m/s</string>
 
     <string name="shared_string_trip_recording">Nagrywanie trasy</string>
-    <string name="simulate_your_location_descr">Symuluje lokalizację za pomocą wyznaczonej trasy lub zarejestrowanego śladu GPX</string>
+    <string name="simulate_your_location_descr">Symuluj używając wyliczonej trasy lub nagranej trasy GPX</string>
     <string name="downloads_left_template">pozostało %1$s pobrań</string>
 
     <string name="regions">Regiony</string>

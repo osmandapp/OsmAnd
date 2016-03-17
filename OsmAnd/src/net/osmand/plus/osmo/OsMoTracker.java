@@ -29,7 +29,7 @@ public class OsMoTracker implements OsMoReactor {
 		integerFormat.setDecimalFormatSymbols(symbols);
 	}
 
-	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<>();
+	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
 	private OsMoService service;
 	private int locationsSent = 0;
 	private OsmoTrackerListener trackerListener = null;
@@ -37,13 +37,15 @@ public class OsMoTracker implements OsMoReactor {
 	private Location lastBufferLocation;
 	private OsmandPreference<Integer> pref;
 	private String sessionURL;
-	private Map<String, OsMoDevice> trackingDevices = new java.util.concurrent.ConcurrentHashMap<>();
+	private Map<String, OsMoDevice> trackingDevices = new java.util.concurrent.ConcurrentHashMap<String, OsMoGroupsStorage.OsMoDevice>();
 	private OsmandPreference<Boolean> stateSendLocation;
 	protected static final Log LOG = PlatformUtil.getLog(OsMoTracker.class);
 
 	public interface OsmoTrackerListener {
-		void locationChange(String trackerId, Location location);
+
+		public void locationChange(String trackerId, Location location);
 	}
+
 
 	public OsMoTracker(OsMoService service, OsmandPreference<Integer> interval,
 					   OsmandPreference<Boolean> stateSendLocation) {
@@ -129,7 +131,7 @@ public class OsMoTracker implements OsMoReactor {
 			cmd.append("C");
 			integerFormat.format(loc.getBearing(), cmd, new FieldPosition(cmd.length()));
 		}
-		if (loc.getTime() != 0) {
+		if ((System.currentTimeMillis() - loc.getTime()) > 30000 && loc.getTime() != 0) {
 			cmd.append("T");
 			integerFormat.format(loc.getTime(), cmd, new FieldPosition(cmd.length()));
 		}
@@ -178,56 +180,55 @@ public class OsMoTracker implements OsMoReactor {
 
 	@Override
 	public boolean acceptCommand(String command, String tid, String data, JSONObject obj, OsMoThread thread) {
-		switch (command) {
-			case "LISTEN":
-				return true;
-			case "UNLISTEN":
-				return true;
-			case "TRACKER_SESSION_CLOSE":
-				return true;
-			case "TRACKER_SESSION_OPEN":
-				try {
-					sessionURL = obj.getString("url");
-				} catch (JSONException e) {
-					service.showErrorMessage(e.getMessage());
-					e.printStackTrace();
-				}
-				return true;
-			case "LT":
-				double lat = 0;
-				double lon = 0;
-				double speed = 0;
-				int k = 0;
-				for (int i = 1; i <= data.length(); i++) {
-					boolean separator = i == data.length() ||
-							!(Character.isDigit(data.charAt(i)) ||
-									data.charAt(i) == ':' || data.charAt(i) == '.' || data.charAt(i) == '-');
-					if (separator) {
-						char ch = data.charAt(k);
-						String vl = data.substring(k + 1, i);
-						if (ch == 'L') {
-							int l = vl.indexOf(":");
-							lat = Double.parseDouble(vl.substring(0, l));
-							lon = Double.parseDouble(vl.substring(l + 1));
-						} else if (ch == 'S') {
-							speed = Double.parseDouble(vl);
-						}
-						k = i;
+		if (command.equals("LISTEN")) {
+			return true;
+		} else if (command.equals("UNLISTEN")) {
+			return true;
+		} else if (command.equals("TRACKER_SESSION_CLOSE")) {
+			return true;
+		} else if (command.equals("TRACKER_SESSION_OPEN")) {
+			try {
+				sessionURL = obj.getString("url");
+			} catch (JSONException e) {
+				service.showErrorMessage(e.getMessage());
+				e.printStackTrace();
+			}
+			return true;
+		} else if (command.equals("LT")) {
+			double lat = 0;
+			double lon = 0;
+			double speed = 0;
+			int k = 0;
+			for (int i = 1; i <= data.length(); i++) {
+				boolean separator = i == data.length() ||
+						!(Character.isDigit(data.charAt(i)) ||
+								data.charAt(i) == ':' || data.charAt(i) == '.' || data.charAt(i) == '-');
+				if (separator) {
+					char ch = data.charAt(k);
+					String vl = data.substring(k + 1, i);
+					if (ch == 'L') {
+						int l = vl.indexOf(":");
+						lat = Double.parseDouble(vl.substring(0, l));
+						lon = Double.parseDouble(vl.substring(l + 1));
+					} else if (ch == 'S') {
+						speed = Double.parseDouble(vl);
 					}
+					k = i;
 				}
-				if (lat != 0 || lon != 0) {
-					Location loc = new Location("osmo");
-					loc.setTime(System.currentTimeMillis());
-					loc.setLatitude(lat);
-					loc.setLongitude(lon);
-					if (speed > 0) {
-						loc.setSpeed((float) speed);
-					}
-					if (trackerListener != null) {
-						trackerListener.locationChange(tid, loc);
-					}
+			}
+			if (lat != 0 || lon != 0) {
+				Location loc = new Location("osmo");
+				loc.setTime(System.currentTimeMillis());
+				loc.setLatitude(lat);
+				loc.setLongitude(lon);
+				if (speed > 0) {
+					loc.setSpeed((float) speed);
 				}
-				return true;
+				if (trackerListener != null) {
+					trackerListener.locationChange(tid, loc);
+				}
+			}
+			return true;
 		}
 		return false;
 	}

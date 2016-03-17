@@ -193,8 +193,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					disconnectAllGroupUsers(group);
 					disableGroupTracks(group, group.groupTracks);
 					disableGroupTracks(group, Collections.singleton(group.name + " points.gpx"));
+					processed = true;
 				}
-				processed = true;
 			}
 		} else if (command.equalsIgnoreCase("GROUP_CONNECT")) {
 			group = storage.getGroup(gid);
