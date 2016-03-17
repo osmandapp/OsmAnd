@@ -2144,4 +2144,6 @@
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     <string name="report">Informe</string>
     <string name="file_name_containes_illegal_char">El nombre del archivo contiene caracteres ilegales</string>
-</resources>
+<string name="no_map_markers_found">Añade marcadores a través del mapa</string>
+    <string name="no_waypoints_found">No se encontraron puntos de ruta</string>
+    </resources>
