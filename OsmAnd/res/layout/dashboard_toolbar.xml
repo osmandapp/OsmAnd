@@ -88,5 +88,16 @@
         android:src="@drawable/ic_action_edit_dark"
         android:visibility="gone"/>
 
+    <ImageView
+        android:id="@+id/toolbar_refresh"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
+        android:layout_gravity="right"
+        android:background="@drawable/dashboard_button_light"
+        android:scaleType="center"
+        android:src="@drawable/ic_action_refresh_dark"
+        tools:visibility="visible"
+        android:visibility="gone"/>
+
 
 </android.support.v7.widget.Toolbar>
