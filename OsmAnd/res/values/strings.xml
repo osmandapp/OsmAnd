@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="no_map_markers_found">Please add map markers via map</string>
+    <string name="no_waypoints_found">No waypoints found</string>
     <string name="osmo_group_information_desc">
         - Creating a group please give it a name and fill in description\n
         - From the application group are created only with Simple type, read more on the website https://osmo.mobi/g/new \n

@@ -55,11 +55,26 @@
             android:layout_height="match_parent"
             android:visibility="gone" >
 
-            <View
+            <LinearLayout
                 android:id="@+id/dash_list_background"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/bg_color" />
+                android:layout_height="match_parent"
+                android:background="?attr/bg_color"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/emptyTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/default_list_text_size_large"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
 
             <net.osmand.plus.views.controls.DynamicListView
                 android:id="@+id/dash_list_view"
