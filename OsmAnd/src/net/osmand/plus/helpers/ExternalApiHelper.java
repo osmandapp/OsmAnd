@@ -87,6 +87,7 @@ public class ExternalApiHelper {
 
 	public static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
+
 	public static final int RESULT_CODE_OK = 0;
 	public static final int RESULT_CODE_ERROR_UNKNOWN = -1;
 	public static final int RESULT_CODE_ERROR_NOT_IMPLEMENTED = -2;

@@ -424,14 +424,6 @@ public class GeoPointParserUtil {
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// whatsapp
-		// https://maps.google.com/maps?q=loc:34.99393,-106.61568 (USER NAME)
-		z = GeoParsedPoint.NO_ZOOM;
-		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (+55 99 99999-9999)";
-		System.out.println("url: " + url);
-		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
-
-		// whatsapp
 		// https://www.google.com/maps/search/34.99393,-106.61568/data=!4m4!2m3!3m1!2s-23.2776,-45.8443128!4b1
 		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + "/data=!4m4!2m3!3m1!2s-23.2776,-45.8443128!4b1";
 		System.out.println("url: " + url);
@@ -980,7 +972,7 @@ public class GeoPointParserUtil {
 						if(opath.contains(pref)) {
 							opath = opath.substring(opath.lastIndexOf(pref) + pref.length());
 						}
-						final String postf = "\\s\\((\\p{L}|\\p{M}|\\p{Z}|\\p{S}|\\p{N}|\\p{P}|\\p{C})*\\)$";
+						final String postf = "\\s\\((\\p{L}|\\s)*\\)$";
 						opath = opath.replaceAll(postf, "");
 						System.out.println("opath=" + opath);
 						return parseGoogleMapsPath(opath, params);

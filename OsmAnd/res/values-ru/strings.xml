@@ -14,7 +14,7 @@
     <string name="av_video_quality_high">Высокое качество</string>
     <string name="av_video_quality">Качество видео</string>
     <string name="av_video_quality_descr">Выберите качество видео</string>
-    <string name="shared_string_commit">Подтвердить</string>
+	<string name="shared_string_commit">Подтвердить</string>
     <string name="looking_up_address">Поиск адреса</string>
     <string name="please_specify_poi_type_only_from_list">Пожалуйста, укажите корректный тип POI из списка, или оставьте его пустым</string>
     <string name="av_audio_format">Формат аудио</string>
@@ -22,24 +22,24 @@
     <string name="av_audio_bitrate">Битрейт аудио</string>
     <string name="av_audio_bitrate_descr">Выберите битрейт аудио</string>
     <string name="shared_string_hide">Скрыть</string>
-    <string name="no_address_found">Адрес не определён</string>
-    <string name="shared_string_near">Около</string>
+	<string name="no_address_found">Адрес не определён</string>
+	<string name="shared_string_near">Около</string>
     <string name="shared_string_location">Местоположение</string>
     <string name="poi_context_menu_modify_osm_change">Редактировать POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
     <string name="osm_edit_commented_note">К заметке OSM добавлен комментарий</string>
     <string name="osm_edit_removed_note">Заметка OSM удалена</string>
-    <string name="osm_edit_created_note">Заметка OSM создана</string>
-    <string name="osn_bug_name">Заметка OSM</string>
-    <string name="osn_add_dialog_title">Создать заметку</string>
-    <string name="osn_comment_dialog_title">Добавить комментарий</string>
-    <string name="osn_reopen_dialog_title">Повторно открыть заметку</string>
-    <string name="osn_close_dialog_title">Закрыть заметку</string>
-    <string name="osn_add_dialog_success">Заметка успешно создана</string>
-    <string name="osn_add_dialog_error">Ошибка: заметка не была создана</string>
-    <string name="osn_close_dialog_success">Заметка было успешно закрыта</string>
-    <string name="osn_close_dialog_error">Ошибка: заметка не была закрыта</string>
-    <string name="osm_edit_deleted_poi">OSM POI удалена</string>
+	<string name="osm_edit_created_note">Заметка OSM создана</string>
+	<string name="osn_bug_name">Заметка OSM</string>
+	<string name="osn_add_dialog_title">Создать заметку</string>
+	<string name="osn_comment_dialog_title">Добавить комментарий</string>
+	<string name="osn_reopen_dialog_title">Повторно открыть заметку</string>
+	<string name="osn_close_dialog_title">Закрыть заметку</string>
+	<string name="osn_add_dialog_success">Заметка успешно создана</string>
+	<string name="osn_add_dialog_error">Ошибка: заметка не была создана</string>
+	<string name="osn_close_dialog_success">Заметка было успешно закрыта</string>
+	<string name="osn_close_dialog_error">Ошибка: заметка не была закрыта</string>
+   <string name="osm_edit_deleted_poi">OSM POI удалена</string>
     <string name="osm_edit_modified_poi">OSM POI отредактирована</string>
     <string name="osm_save_offline">Сохранить локально</string>
     <string name="context_menu_item_open_note">Добавить заметку OSM</string>
@@ -124,7 +124,7 @@
     <string name="map_online_data_descr">Использовать онлайн карты (загрузка и кэширование на SD-карте)</string>
     <string name="shared_string_online_maps">Онлайн карты</string>
     <string name="online_map_settings_descr">Настройки источников онлайн карт и слоёв</string>
-    <string name="osmand_rastermaps_plugin_description">"С помощью этого плагина можно получить доступ ко множеству видов онлайн-карт (тайловых или растровых), от предопределенных тайловых OpenStreetMap (Mapnik) до спутниковых снимков и слоев специального назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т. д.\n\nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения или подложки к другой базовой карте (например стандартной офлайн-карте OsmAnd). Чтобы сделать какую-либо подложку лучше видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню «Настройка карты».\n\nТайловые карты можно получить непосредственно с помощью онлайн-источников или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей. "</string>
+    <string name="osmand_rastermaps_plugin_description">"С помощью этого плагина можно получить доступ ко множеству видов онлайн-карт (тайловых или растровых), от предопределенных тайловых OpenStreetMap (Mapnik) до спутниковых снимков и слоев специального назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т. д.\n\nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения или подложки к другой базовой карте (например стандартной офлайн-карте OsmAnd). Чтобы сделать какую-либо подложку лучше видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню «Настройка карты».\n\nТайловые карты можно получить непосредственно с помощью онлайн-источников или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей. "</string>
     <string name="osmand_background_plugin_description">Этот плагин предоставляет навигацию и запись маршрутов в энергосберегающем режиме. Плагин работает в фоновом режиме и периодически активизирует GPS для записи маршрута или воспроизведения голосовых команд.</string>
     <string name="osmand_accessibility_description">"Плагин добавляет поддержку специальных возможностей устройства непосредственно в OsmAnd. Это облегчает, например, регулировку скорости речи для голоса TTS, настройку направленности  экрана навигации, управление масштабом при помощи трекбола или использование голосовых команд обратной связи для авто аннотации вашего местоположения."</string>
     <string name="osmand_development_plugin_description">Плагин отображает параметры для разработки и отладки функций, таких как, проверка или моделирование маршрута, отображение производительности отрисовки, проверка голосовых подсказок. Эти настройки предназначены для разработчиков и не требуются для обычного пользователя.</string>
@@ -217,7 +217,7 @@
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
     <string name="search_position_undefined">Неопределенно</string>
-
+    
     <string name="search_position_map_view">Текущий центр карты</string>
     <string name="select_search_position">Начало:</string>
     <string name="context_menu_item_search">Искать рядом</string>
@@ -422,7 +422,7 @@
     <string name="layer_gpx_layer">Трек GPX…</string>
     <string name="error_reading_gpx">Ошибка чтения данных GPX</string>
     <string name="vector_data">Локальные векторные карты</string>
-
+    
     <string name="poi_context_menu_modify">Редактировать POI</string>
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">По направлению компаса</string>
@@ -659,9 +659,9 @@
     <string name="search_address_building">Дом</string>
     <string name="search_address_building_option">Дом</string>
     <string name="search_address_street_option">Пересечение улиц</string>
-
+    
     <string name="context_menu_item_update_map">Обновить карту</string>
-
+    
     <string name="context_menu_item_create_poi">Добавить POI</string>
     <string name="shared_string_yes">Да</string>
     <string name="shared_string_cancel">Отмена</string>
@@ -673,12 +673,19 @@
     <string name="favourites_context_menu_delete">Удалить точку</string>
     <string name="favourites_remove_dialog_msg">Удалить точку \"%s\" из Избранных?</string>
     <string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
-
-
+    
+    
+    
+    
+    
     <string name="osb_comment_dialog_success">Комментарий был успешно добавлен</string>
     <string name="osb_comment_dialog_error">Возникло исключение: комментарий не добавлен</string>
-
-
+    
+    
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Комментарий</string>
     <string name="osb_comment_dialog_author">Автор</string>
     <string name="poi_edit_title">Редактирование POI</string>
@@ -926,7 +933,7 @@
     <string name="enable_plugin_monitoring_services">"Включите плагин \"Запись поездки\" для использования сервисов мониторинга  (запись GPX, сопровождение в реальном времени)"</string>
     <string name="rendering_attr_roadColors_description">Выберите цветовую схему дорог:</string>
     <string name="rendering_attr_roadColors_name">Цветовая схема дорог</string>
-
+    
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
     <string name="incomplete_locale">незавершенное</string>
     <string name="map_widget_max_speed">Ограничение скорости</string>
@@ -1246,12 +1253,13 @@
     <string name="osmo_connect">Войти</string>
     <string name="osmo_server_operation_failed">OsMo: не удалось правильно обработать команду</string>
     <string name="import_file_favourites">Сохранить точки как файл GPX или импортировать их в избранное?</string>
-
+    
     <string name="rendering_value_pink_name">Розовый</string>
-
+    
     <string name="rendering_value_brown_name">Коричневый</string>
-
-
+    
+    
+    
     <string name="osmo_create_groups_confirm">Чтобы создавать группы Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены, что хотите пересоздать персональные ID? Все устройства, связанные с Вами, больше не будут отслеживать Вас.</string>
@@ -1259,7 +1267,7 @@
     <string name="osmo_use_server_name">Зарегистрированное имя</string>
     <string name="osmo_connect_to_my_nickname">Ник</string>
     <string name="osmo_user_name">Пользователь</string>
-
+    
     <string name="osmo_credentials_not_valid">Ваши учётные данные OsMo не верны.</string>
     <string name="osmo_follow">Следить</string>
     <string name="osmo_edit_device">Изменить пользовательские настройки</string>
@@ -1343,7 +1351,7 @@
     <string name="live_monitoring_m">Онлайн слежение (требуется GPX)</string>
     <string name="live_monitoring_start">Начать онлайн слежение</string>
     <string name="live_monitoring_stop">Остановить онлайн слежение</string>
-    <string name="osmo_auth_error">Ошибка авторизации OsMo : %1$s.↵\n Это может быть временно недоступный сервис или срок вашей регистрации истек.↵\n Желаете продолжить с новой регистрацией?</string>
+    <string name="osmo_auth_error">Ошибка авторизации OsMo : %1$s.↵\n Это может быть временно недоступный сервис или срок вашей регистрации истек.↵\n Желаете продолжить с новой регистрацией?</string>
     <string name="osmo_not_signed_in">Не удалось войти в OsMo</string>
     <string name="osmo_gpx_track_downloaded">OsMo трек %1$s загружен.</string>
     <string name="no_index_file_to_download">Загрузок не найдено, проверьте подключение к Интернет.</string>
@@ -1643,7 +1651,7 @@
     <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Скрыть номера домов</string>
-
+    
     <string name="routing_attr_avoid_borders_description">Избегать пересечения границы с другой страной</string>
     <string name="routing_attr_height_name">Ограничение высоты</string>
     <string name="routing_attr_height_description">Укажите высоту автомобиля для учёта при построении маршрута</string>
@@ -1848,12 +1856,12 @@
     <string name="shared_string_update">Обновить</string>
     <string name="shared_string_upload">Отправить</string>
     <string name="osm_edit_created_poi">Создана OSM POI</string>
-
+    
     <string name="osmand_running_in_background">Работает в фоновом режиме</string>
     <string name="av_locations">Места</string>
     <string name="downloading_number_of_files">Загрузка файла - %1$d</string>
 
-    <string name="read_more">Подробнее</string>
+<string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
     <string name="route_distance">Расстояние:</string>
@@ -1869,7 +1877,7 @@
     <string name="only_download_over_wifi">Загружать только через WiFi</string>
     <string name="update_now">Обновить сейчас</string>
     <string name="missing_write_external_storage_permission">Приложению не разрешена запись на карту памяти</string>
-    <string name="available_maps">Доступные карты</string>
+<string name="available_maps">Доступные карты</string>
     <string name="starting_point">Начальный пункт</string>
     <string name="shared_string_not_selected">Не выбрано</string>
     <string name="rec_split_storage_size">Размер хранилища</string>
@@ -1883,7 +1891,7 @@
     <string name="daily">Ежедневно</string>
     <string name="weekly">Еженедельно</string>
     <string name="select_month_and_country">Выберите месяц и страну</string>
-    <string name="poi_dialog_reopen">Открыть повторно</string>
+<string name="poi_dialog_reopen">Открыть повторно</string>
     <string name="impassable_road_desc">Выберите дороги, которых следует избегать при навигации</string>
     <string name="shared_string_undo_all">ОТМЕНИТЬ ВСЁ</string>
     <string name="shared_string_type">Тип</string>
@@ -1921,7 +1929,7 @@
     <string name="osm_live_ask_for_purchase">Пожалуйста сначала приобретите подписку OSM Live</string>
 
     <string name="osm_live_header">Эта подписка позволяет получать ежечасное обновление для всех карт мира. Основная часть доходов переводится в OSM сообщество и выплачивается за каждого взноса OSM. В случае, если вы любите OsmAnd и OSM и хотите поддержать его, это идеальный способ сделать это.</string>
-
+    
     <string name="select_map_marker">Выберите маркер</string>
     <string name="map_markers_other">Другие маркеры</string>
     <string name="upload_anonymously">Загрузить анонимно</string>
@@ -1961,7 +1969,7 @@
     <string name="live_update">Live обновление</string>
     <string name="updates_size">Размер обновления</string>
     <string name="reports_for">Отчет для</string>
-    <string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
+<string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
     <string name="release_2_3">" • OSM Live. Поддержка авторов и разработчиков карт и получение почасовых обновлений карты.\n\n• Маркеры. Новый способ для быстрого выбора мест на карте.\n\n• Более подробные OSM карты со специфическими дорожными знаками стран и с большим количеством новых функций.\n\n• Улучшен внешний вид и подготовка маршрута.\n\n• Множество улучшений в контекстном меню карты таких как поиск адреса.\n\nИ многое другое... "</string>
     <string name="report">Отчёт</string>
     <string name="shared_string_move_up">Переместить вверх</string>
@@ -1971,4 +1979,4 @@
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Пожалуйста введите имя</string>
-</resources>
+    </resources>
