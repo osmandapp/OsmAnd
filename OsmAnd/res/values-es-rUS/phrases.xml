@@ -2198,7 +2198,7 @@
 	<string name="poi_temperature">Temperatura</string>
 	<string name="poi_bathing_yes">Permitido bañarse</string>
 	<string name="poi_bathing_no">Prohibido bañarse</string>
-<string name="poi_traffic_calming_island">Mediana (tráfico)</string>
+<string name="poi_traffic_calming_island">Calzada dividida</string>
 	<string name="poi_boat_storage">Guardería náutica</string>
 <string name="poi_conveying_yes">Transportadora: Si</string>
 	<string name="poi_bridge_ref">Referencia del puente</string>
