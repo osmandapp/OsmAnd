@@ -86,7 +86,7 @@
 	<string name="poi_erotic">Sexshop</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_florist">Florería</string>
-	<string name="poi_frame">Tienda de marcos</string>
+	<string name="poi_frame">Marcos para cuadros</string>
 	<string name="poi_furniture">Mueblería</string>
 	<string name="poi_garden_centre">Vivero (venta)</string>
 	<string name="poi_gas">Gas líquido</string>
@@ -114,7 +114,7 @@
 	<string name="poi_paint">Pinturería</string>
 	<string name="poi_pet">Mascotas</string>
 	<string name="poi_photo">Servicio fotográfico</string>
-	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
+	<string name="poi_radiotechnics">Venta de radiotecnia</string>
 	<string name="poi_second_hand">Local de segunda mano</string>
 	<string name="poi_ship_chandler">Proveedor naval</string>
 	<string name="poi_sports">Artículos deportivos</string>
@@ -2399,7 +2399,7 @@
 	<string name="poi_bathing_yes">Permitido bañarse</string>
 	<string name="poi_bathing_no">Prohibido bañarse</string>
 
-<string name="poi_traffic_calming_island">Mediana (tráfico)</string>
+<string name="poi_traffic_calming_island">Calzada dividida</string>
 	<string name="poi_boat_storage">Guardería náutica</string>
 
 
