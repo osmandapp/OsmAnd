@@ -725,4 +725,6 @@
     <string name="lang_uk">Ukraina</string>
     <string name="lang_vi">Vjetnama</string>
     <string name="lang_cy">Kimra</string>
+    <string name="no_waypoints_found">Ne trovis navigadpunktojn</string>
+    <string name="no_map_markers_found">Bonvolu aldoni markojn per mapo</string>
     </resources>
