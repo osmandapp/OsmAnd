@@ -3,7 +3,6 @@ package net.osmand.plus.download.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StatFs;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -57,8 +56,8 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		hasExternalStoragePermission = DownloadActivity.hasPermissionToWriteExternalStorage(getActivity());
 
 		internalStorage = getInternalStorageDirectory(getActivity());
-		sharedStorage = getSharedStorageDirectory(getActivity());
 		if (hasExternalStoragePermission) {
+			sharedStorage = getSharedStorageDirectory(getActivity());
 			externalStorage = getMyApplication().getSettings().getSecondaryStorage();
 		}
 
@@ -98,7 +97,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		sharedMemoryDescription.setText(getFreeSpace(sharedStorage));
 
 		View memoryStickRow = view.findViewById(R.id.memoryStickRow);
-		if (hasExternalStoragePermission) {
+		if (hasExternalStoragePermission && externalStorage != null) {
 			memoryStickRow.setOnClickListener(externalMemoryOnClickListener);
 			ImageView memoryStickImageView = (ImageView) view.findViewById(R.id.memoryStickImageView);
 			memoryStickImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
