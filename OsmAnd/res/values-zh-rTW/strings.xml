@@ -2154,4 +2154,6 @@
     <string name="file_name_containes_illegal_char">檔案名稱含有違反規則的字符</string>
 <string name="storage_permission_restart_is_required">現在應用程式允許寫入外部記憶體。應用程式需要手動重新啟動。</string>
     <string name="release_2_3">" • OSM實況。支援地圖貢獻者和開發者和每小時獲得地圖更新。\n\n• 地圖標記。一種新的方式以快速在地圖上選擇地點。\n\n• 更詳細的 OSM 地圖與國家具體的公路標誌和許多新的地圖功能。\n\n• 改善外觀和感覺的路線準備。\n\n• 在地圖下拉選單中有許多改善，如下拉地址查找。\n\n以及更多… "</string>
+    <string name="no_map_markers_found">請透過地圖增加地圖標記</string>
+    <string name="no_waypoints_found">未發現任何航點</string>
     </resources>
