@@ -80,7 +80,7 @@
     <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
         Major part of the income goes back to OSM community and is paid out per each OSM contribution. 
         In case you love OsmAnd and OSM and want to support it, this is a perfect way to do it.</string>
-    
+
     <string name="select_map_marker">Select map marker</string>
     <string name="map_markers_other">Other markers</string>
     <string name="upload_anonymously">Upload anonymously</string>
