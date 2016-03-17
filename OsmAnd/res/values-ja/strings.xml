@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
@@ -1744,7 +1744,7 @@ POIの更新は利用できません</string>
     <string name="error_avoid_specific_road">バイパスが見つかりません</string>
     <string name="save_track_to_gpx_globally_headline">要求時に経路を保存</string>
 	<string name="enable_proxy_title">HTTPプロキシを使用</string>
-	<string name="enable_proxy_descr">すべてのネットワーク要求に使用されるプロキシの設定を行います</string>
+	<string name="enable_proxy_descr">有効にした場合すべてのネットワーク接続に使用されるので設定をする必要があります</string>
 	<string name="proxy_host_title">プロキシホスト</string>
 	<string name="proxy_host_descr">プロキシのホスト名を設定します(例：127.0.0.1)</string>
 	<string name="proxy_port_title">プロキシポート</string>
@@ -1864,8 +1864,8 @@ POIの更新は利用できません</string>
 	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します</string>
     <string name="use_fast_recalculation">スマートなルート再計算</string>
 	<string name="use_fast_recalculation_desc">経路が長い場合、最初の部分のみ再計算します</string>
-<string name="light_theme">白色</string>
-    <string name="dark_theme">黒色</string>
+<string name="light_theme">ライト</string>
+    <string name="dark_theme">ダーク</string>
     <string name="lang_pms">ピエモンテ語</string>
     <string name="lang_bn">ベンガル語</string>
     <string name="lang_tl">タガログ語</string>
@@ -2135,45 +2135,4 @@ POIの更新は利用できません</string>
     <string name="shared_string_type">タイプ</string>
     <string name="starting_point">出発地</string>
     <string name="shared_string_not_selected">無選択</string>
-    <string name="report">レポート</string>
-    <string name="storage_permission_restart_is_required">外部ストレージへの書き込みが許可されました。手動でアプリケーションを再起動してください。</string>
-    <string name="release_2_3">" ・ OSM Live. 地図作成者と開発者をサポートする機能と時間毎の地図更新。\n\n・ マップマーカー. マップ上の場所を選択する新しい方法。\n\n・ より詳細なOSMマップと国または地域別の道路標識とマップの新しい機能\n\n・ 改良された見て分かりやすいルート準備\n\n・ 住所検索などコンテキストメニューの大幅改良\n\n・ 等々… "</string>
-    <string name="shared_string_move_up">上に移動</string>
-    <string name="shared_string_move_down">下に移動</string>
-    <string name="finish_navigation">ナビゲーションの終了</string>
-    <string name="avoid_road">使用しない道路</string>
-    <string name="storage_directory_readonly_desc">現在選択されているデータ保存フォルダーは読み取り専用です。保存フォルダーは一時的に内部メモリに設定されました。書き込み可能なストレージのフォルダを選択してください。</string>
-    <string name="storage_directory_shared">共有メモリ</string>
-    <string name="full_report">完全なレポート</string>
-    <string name="recalculate_route">ルートの再計算</string>
-    <string name="open_street_map_login_and_pass">OpenStreetMapのログイン名とパスワード</string>
-    <string name="donations">寄付</string>
-    <string name="osm_user_stat">編集 %1$s, ランク %2$s, 総編集数 %3$s</string>
-    <string name="osm_editors_ranking">OSM編集者ランキング</string>
-    <string name="osm_live_user_public_name">パブリック名</string>
-    <string name="osm_live_hide_user_name">レポートに自分の名前を表示しない</string>
-    <string name="osm_live_support_region">サポート地域</string>
-    <string name="osm_live_month_cost">月間コスト</string>
-    <string name="osm_live_month_cost_desc">毎月の支払額</string>
-    <string name="osm_live_active">アクティブ</string>
-    <string name="osm_live_not_active">非アクティブ</string>
-    <string name="osm_live_enter_email">有効な電子メールアドレスを入力してください</string>
-    <string name="osm_live_enter_user_name">パブリック名を入力してください</string>
-    <string name="osm_live_thanks">ライブ更新を購読いただきありがとうございます!</string>
-    <string name="osm_live_region_desc">あなたの寄付の一部がその地域のマップ更新に貢献したユーザーへ還元されます</string>
-    <string name="select_map_marker">マップマーカーの選択</string>
-    <string name="map_markers_other">その他のマーカー</string>
-    <string name="upload_anonymously">匿名でアップロード</string>
-    <string name="show_transparency_seekbar">透過タイプシークバーを表示</string>
-    <string name="download_files_error_not_enough_space">空き容量が足りません! 一時ファイルの置き場に {3}MB、維持のため {1}MBが必要で、現在利用可能なのは {2}MBです。</string>
-    <string name="download_files_question_space_with_temp">{0}個のファイルを本当にダウンロードしますか? 一時的に {3}MB 維持のために {1}MB が必要です。現在利用可能なのは {2}MBです。</string>
-    <string name="upload_osm_note_description">OpenStreetMap.orgプロファイルを使用する場合は、OSMメモを匿名でアップロードできます。</string>
-    <string name="upload_osm_note">OSMメモをアップロード</string>
-    <string name="map_marker_1st">最初のマップマーカー</string>
-    <string name="map_marker_2nd">2番目のマップマーカー</string>
-    <string name="shared_string_toolbar">ツールバー</string>
-    <string name="shared_string_widgets">ウィジェット</string>
-    <string name="add_points_to_map_markers_q">マップマーカーにすべての地点を追加しますか?</string>
-    <string name="shared_string_add_to_map_markers">マップマーカーに追加</string>
-    <string name="select_map_markers">マップマーカーを選択</string>
     </resources>

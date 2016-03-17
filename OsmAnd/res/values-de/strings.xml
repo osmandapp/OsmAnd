@@ -1469,8 +1469,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
 	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
-	<string name="osmo_group_information_desc">" - Zum Erstellen einer Gruppe bitte Namen und Beschreibung angeben\n - Die App legt nur Gruppen vom Typ \"einfache Gruppe\" an, mehr dazu auf der Website https://osmo.mobi/g/new
-\n - Auf der Webseite kann man die Gruppe bearbeiten um Orte, Strecken und Punkte hinzuzufügen\n - Wir empfehlen es keine Gruppen mit nur einem Nutzer zu erstellen, wenn es keine POI Gruppe ist\n - Private Gruppen sind auf 8 Personen beschränkt\n - Detaillierte Vertragsbedingungen sind auf der Webseite OsMo.mobi zu finden\n - Wenn besondere Bedürfnisse bestehen, bitte den Support kontaktieren: osmo.mobi@gmail.com "</string>
+	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer privaten Gruppe können sich bis zu 8 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
 	<string name="osmo_group_information">Bitte vor dem Erstellen von Gruppen beachten!</string>
 	<string name="osmo_not_signed_in">OsMo-Anmeldung fehlgeschlagen</string>
 	<string name="osmo_gpx_points_downloaded">OsMo-Punkte %1$s heruntergeladen.</string>
@@ -1549,7 +1548,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
 	<string name="speed_limit_exceed_message">Schwellenwert für Warnung bei Überschreiten der Höchstgeschwindigkeit.</string>
 	<string name="osmo_device_not_found">Gerät wurde nicht gefunden</string>
-    <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo Server:\n- bitte Verbindung prüfen;\n- bitte Einstellungen prüfen;\n- ggf. Meldung auf Twitter prüfen: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">OsMo-Dienst ist nicht verfügbar:\n- bitte Verbindung prüfen;\n- bitte Einstellungen prüfen;\n- ggf. Meldung auf Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
 	<string name="anonymous_user_hint">Anonyme Benutzer können keine:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
@@ -2117,7 +2116,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="avoid_road">Straßen vermeiden</string>
     <string name="storage_directory_readonly_desc">Der momentan gewählte Speicherort ist schreibgeschützt. Es wurde vorübergehend zum internen Speicher gewechselt. Bitte einen gültigen Speicherort wählen.</string>
     <string name="storage_directory_shared">Gemeinsamer Speicher</string>
-    <string name="release_2_3">" • OSM Live. Unterstütze Karten-Mitwirkende und Entwickler und erhalte stündliche Karten Aktualisierungen.\n\n • Kartenmarkierung. Eine neue Methode Orte auf der Karte schnell auszuwählen.\n\n • Detailliertere OSM Karten mit länderspezifischen Straßenschildern und vielen neuen Kartenmerkmalen.\n\n • Verbessertes Aussehen und Verhalten der Routenerstellung.\n\n • Viele Verbesserungen im Kontextmenü der Karte, wie beispielsweise kontextabhängige Adresssuche.
+    <string name="release_2_3">" • OSM Live. Unterstütze Karten-Mitwirkende und Entwickler und erhalte stündliche Karten Aktualisierungen.\n\n • Karten Markierungen. Ein neuer Weg um schnell ausgewählte Plätze auf der Karte auszuwählen.\n\n • Detailliertere OSM Karten mit länderspezifischen Straßenschildern und einer Menge weitere Funktionalitäten.\n\n • Verbessertes Aussehen und Gefühl der Routen Vorbereitung.\n\n • Viele Verbesserungen der Karten Kontextmenüs, wie beispielsweise kontextabhängige Adresssuche.
 \n\n und mehr… "</string>
     <string name="full_report">Vollständiger Report</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap Zugang und Passwort</string>
@@ -2127,5 +2126,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
     <string name="shared_string_move_up">Hoch bewegen</string>
     <string name="shared_string_move_down">Runter bewegen</string>
-    <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
+    <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubt Zeichen</string>
 </resources>

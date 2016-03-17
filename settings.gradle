@@ -1,4 +1,4 @@
-include ':OsmAnd-java', ':api-test'
+include ':OsmAnd-java'
 include ':eclipse-compile:gridlayout'
 include ':eclipse-compile:cardview'
 include ':eclipse-compile:design'

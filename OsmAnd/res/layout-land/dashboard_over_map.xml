@@ -59,6 +59,19 @@
                     android:background="?attr/bg_color"
                     android:fadeScrollbars="true" >
                 </net.osmand.plus.views.controls.DynamicListView>
+
+                <TextView
+                    android:id="@+id/emptyTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="?attr/bg_color"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:clickable="true"
+                    android:textSize="@dimen/default_list_text_size_large"
+                    android:visibility="gone"/>
+
             </FrameLayout>
         </LinearLayout>
 

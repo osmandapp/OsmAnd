@@ -1951,7 +1951,7 @@
     <string name="osmand_running_in_background">Esecuzione in backgroung</string>
     <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità</string>
     <string name="default_speed_system">Misurazione della velocità</string>
-    <string name="nm">nmi</string>
+    <string name="nm">nm</string>
     <string name="si_nm">Miglia nautiche</string>
     <string name="si_kmh">Chilometri all\'ora</string>
     <string name="si_mph">Miglia per ora</string>
@@ -1959,7 +1959,7 @@
     <string name="si_min_km">Minuti al chilometro</string>
     <string name="si_min_m">Minuti per miglia</string>
     <string name="si_nm_h">Miglia nautiche per ora (knot)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">nmh</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2216,7 +2216,4 @@
     <string name="storage_directory_readonly_desc">La carella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegliere una cartella di destinazione valida.</string>
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">Ora l\'applicazione ha i permessi per scrivere sulla memoria esterna. È necessario riavviare l\'applicazione.</string>
-    <string name="full_report">Rapporto completo</string>
-    <string name="open_street_map_login_and_pass">Nome utente e password OpenStreetMap</string>
-    <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
-</resources>
+    </resources>
