@@ -2128,4 +2128,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="shared_string_move_up">Hoch bewegen</string>
     <string name="shared_string_move_down">Runter bewegen</string>
     <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
-</resources>
+<string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
+    <string name="no_map_markers_found">Bitte eine Kartenmarkierung via Karte setzen</string>
+    </resources>
