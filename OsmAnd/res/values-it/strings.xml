@@ -2219,4 +2219,6 @@
     <string name="full_report">Rapporto completo</string>
     <string name="open_street_map_login_and_pass">Nome utente e password OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
-</resources>
+<string name="no_map_markers_found">Aggiungi i marcatori della mappa dalla mappa</string>
+    <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
+    </resources>
