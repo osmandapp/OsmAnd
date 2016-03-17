@@ -152,7 +152,7 @@
 
     <string name="shared_string_qr_code">QR-kodo</string>
     <string name="rendering_attr_hideProposed_name">Kaŝi proponitajn objektojn</string>
-    <string name="share_menu_location">Kunhavigi lokon</string>
+    <string name="share_menu_location">Kunhavigi pozicion</string>
     <string name="shared_string_send">Sendi</string>
     <string name="world_map_download_descr">Monda bazmapo (kiu kovras tutan mondon ĉe etaj zomoj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti mondan bazmapon por havi plenan ĉirkaŭaĵon.</string>
     <string name="map_downloaded">Mapo elŝutita</string>
@@ -216,7 +216,7 @@
     <string name="hillshade_layer_disabled">Tavolo de nivel-ombrumo kaŝita</string>
     <string name="favorite_category_add_new">Aldoni novan</string>
     <string name="favorite_category_select">Elekti kategorion</string>
-    <string name="default_speed_system_descr">Difinas unuon de rapideco</string>
+    <string name="default_speed_system_descr">Difinas unuon de rapido</string>
     <string name="default_speed_system">Rapideca mezuro</string>
     <string name="nm">nm</string>
     <string name="si_nm">Marmejloj</string>
@@ -434,7 +434,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">Lasta elŝuto de A-GPS datumoj: %1$s</string>
-    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo, kaj aliaj) uzado de sciigoj pri rapid-kontroloj estas kontraŭleĝaj. Aŭtoroj de OsmAnd ne responsos se vi rompos leĝon. Bonvolu elekti \"Jes\" nur tiam kiam vi havas rajton por uzi tiu ĉi funkcio.</string>
+    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo, kaj aliaj) uzado de sciigoj pri rapid-kontroloj estas kontraŭleĝaj. Aŭtoroj de OsmAnd ne responsos se vi rompos leĝon. Bonvolu elekti \"Jes\" nur tiam kiam vi havas rajton por uzi tiun ĉi funkcion.</string>
     <string name="welcome_select_region">Por korekte prezenti viajn trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete!</string>
     <string name="current_route">Nuna kurso</string>
@@ -541,7 +541,7 @@
     <string name="download_tab_local">Lokaj</string>
     <string name="no_internet_connection">Elŝutado ne eblas, bonvolu kontroli vian retkonekton.</string>
     <string name="record_plugin_name">Registrado de kursoj</string>
-	<string name="record_plugin_description">"Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn kursojn per permana elektado de GPX-registrada fenestraĵo sur la mapekrano, aŭ ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX-dosiero.\n\nRegistritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por kontribui la OSM-on. Atletoj povas uzi registritajn kursojn por monitori siajn ekzercojn. Kelkaj bazaj ecoj oni povas analizi senpere per OsmAnd, kiel: tempoj de ĉirkaŭoj, muzumaj rapidecoj, ktp, kaj kursoj oni povas poste analizi uzante specialajn eksterajn programojn. "</string>
+	<string name="record_plugin_description">"Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn kursojn per permana elektado de GPX-registrada fenestraĵo sur la mapekrano, aŭ ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX-dosiero.\n\nRegistritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por kontribui la OSM-on. Atletoj povas uzi registritajn kursojn por monitori siajn ekzercojn. Kelkaj bazaj ecoj oni povas analizi senpere per OsmAnd, kiel: tempoj de ĉirkaŭoj, mezumaj rapidoj, ktp, kaj kursoj oni povas poste analizi uzante specialajn eksterajn programojn. "</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigon</string>
     <string name="use_opengl_render_descr">Uzas aparatan plirapidigan OpenGL-bildigon (povas ne funkcii je iuj aparatoj)</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
@@ -727,4 +727,21 @@
     <string name="lang_cy">Kimra</string>
     <string name="no_waypoints_found">Ne trovis navigadpunktojn</string>
     <string name="no_map_markers_found">Bonvolu aldoni markojn per mapo</string>
+    <string name="layer_amenity_label">Interesejaj etikedoj</string>
+    <string name="loading_smth">Ŝarganta %1$s…</string>
+    <string name="map_widget_plain_time">Nuna tempo</string>
+    <string name="gpx_wpt">Navigadpunkto</string>
+    <string name="selected_gpx_info_show">\n\nPremtrenu por vidi sur la mapo</string>
+    <string name="delay_navigation_start">Eki turnon post turno navigadon aŭtomate</string>
+    <string name="local_index_gpx_info_show">\n\nPremtrenu por montri agordojn</string>
+    <string name="gpx_info_waypoints">"Navigadpunktoj: %1$s "</string>
+    <string name="gpx_info_subtracks">"Subkursoj: %1$s "</string>
+    <string name="gpx_info_distance">"Distanco: %1$s (%1$s punktoj) "</string>
+    <string name="gpx_info_start_time">"Komenco je: %1$tF, %1$tT "</string>
+    <string name="gpx_info_end_time">"Fino je: %1$tF, %1$tT "</string>
+    <string name="gpx_info_average_speed">"Mezuma rapido: %1$s "</string>
+    <string name="gpx_info_maximum_speed">"Maksimuma rapido: %1$s "</string>
+    <string name="gpx_info_avg_altitude">Mezuma altitudo: %1$s</string>
+    <string name="gpx_info_diff_altitude">Altituda intervalo: %1$s</string>
+    <string name="gpx_timespan">Tempa intervalo: %1$s</string>
     </resources>
