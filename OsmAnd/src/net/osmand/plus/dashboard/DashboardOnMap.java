@@ -74,6 +74,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.DynamicListViewCallbacks;
@@ -81,6 +82,7 @@ import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.DismissCallbacks;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -487,6 +489,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				backPressed();
 			}
 		});
+		ImageView refreshToolbarItem = (ImageView) dashboardView.findViewById(R.id.toolbar_refresh);
+		refreshToolbarItem.setVisibility(View.GONE);
 
 		if (waypointsVisible && getMyApplication().getWaypointHelper().getAllPoints().size() > 0) {
 			if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
@@ -534,6 +538,22 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				public void onClick(View v) {
 					hideDashboard(false);
 					mapActivity.openDrawer();
+				}
+			});
+		}
+
+		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
+			refreshToolbarItem.setVisibility(View.VISIBLE);
+			settingsButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+					registry.resetToDefault();
+					MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+					if (mil != null) {
+						mil.recreateControls();
+					}
+					updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
 				}
 			});
 		}
