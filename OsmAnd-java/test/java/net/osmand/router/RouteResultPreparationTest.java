@@ -3,7 +3,6 @@ package net.osmand.router;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
-import net.osmand.router.TestEntry;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import org.apache.commons.logging.Log;
@@ -89,6 +88,7 @@ public class RouteResultPreparationTest {
     public void testLanes() throws Exception {
 
         List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, startPoint, endPoint, null);
+        Set<Long> reachedSegments = new TreeSet<Long>();
 
         int prevSegment = -1;
         for (int i = 0; i <= routeSegments.size(); i++) {
@@ -110,6 +110,15 @@ public class RouteResultPreparationTest {
                 }
                 prevSegment = i;
             }
+
+            if (i < routeSegments.size()) {
+                reachedSegments.add(routeSegments.get(i).getObject().getId());
+            }
+        }
+
+        Set<Long> expectedSegments = expectedResults.keySet();
+        for (Long expSegId : expectedSegments){
+            Assert.assertTrue("Expected segment " + expSegId + " weren't reached in route segments " + reachedSegments.toString(), reachedSegments.contains(expSegId));
         }
 
     }
