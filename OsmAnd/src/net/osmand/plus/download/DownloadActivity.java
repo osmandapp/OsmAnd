@@ -614,9 +614,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	private void chooseDataStorage() {
-		if (getMyApplication().getSettings().getSecondaryStorage() != null) {
-			DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), false);
-		}
+		DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), false);
 	}
 
 	public static boolean hasPermissionToWriteExternalStorage(Context ctx) {
