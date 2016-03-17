@@ -2334,4 +2334,6 @@
     <string name="storage_permission_restart_is_required">Nu har programmet lov til at skrive til ekstern lager. Manuel genstart er påkrævet.</string>
     <string name="report">Rapport</string>
     <string name="file_name_containes_illegal_char">Filnavnet indeholder ikke tilladte tegn</string>
-</resources>
+<string name="no_map_markers_found">Tilføj kortmarkører via kort</string>
+    <string name="no_waypoints_found">Ingen rutepunkter fundet</string>
+    </resources>

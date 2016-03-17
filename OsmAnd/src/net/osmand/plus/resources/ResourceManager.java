@@ -697,7 +697,9 @@ public class ResourceManager {
 							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 						}
 					}
-					if (mapReader.containsRouteData()) {
+					// disable osmc for routing temporarily due to some bugs
+					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) || 
+							context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get())) {
 						try {
 							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
 							routingMapFiles.put(f.getName(), new BinaryMapIndexReader(raf, mapReader));

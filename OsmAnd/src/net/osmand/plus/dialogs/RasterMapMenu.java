@@ -131,6 +131,7 @@ public class RasterMapMenu {
 					.layout(R.layout.progress_list_item)
 					.iconColor(R.drawable.ic_action_opacity)
 					.progress(mapTransparencyPreference.get())
+					.listen(l)
 					.listenInteger(integerListener).reg();
 			if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
 				contextMenuAdapter.item(R.string.show_polygons).listen(l)

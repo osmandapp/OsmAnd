@@ -1755,7 +1755,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="configure_map">Налаштування мапи</string>
     <string name="search_radius_proximity">Поруч з</string>
     <string name="osmo_device_not_found">Пристрій не знайдено</string>
-    <string name="osmo_no_connection_msg">Сервіс OsMo не доступний:\n- перевірте з’єднання;\n- перевірте налаштування;\n- перевірте наш Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Неможливо з\'єднатися із сервером OsMo:\n- перевірте Ваше інтернет з’єднання;\n- перевірте налаштування;\n- перевірте наш Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Анонімний користувач не в змозі:\n- створювати групи;\n- синхронізувати групи та пристрої з сервером;\n- керувати групами та пристроями в особистому кабінеті.</string>
     <string name="anonymous_user">Анонімний користувач</string>
     <string name="logged_as">Ви увійшли як %1$s</string>

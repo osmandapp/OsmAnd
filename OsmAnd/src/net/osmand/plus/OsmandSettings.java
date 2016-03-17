@@ -2401,6 +2401,8 @@ public class OsmandSettings {
 		return customBooleanRoutingProps.get(attrName);
 	}
 
+	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", false).makeGlobal();
+	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
 
 	// for background service

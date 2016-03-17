@@ -3,6 +3,7 @@ package net.osmand.router;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
+import net.osmand.router.TestEntry;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import org.apache.commons.logging.Log;
@@ -64,8 +65,9 @@ public class RouteResultPreparationTest {
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() throws IOException {
 
-        InputStream inputStream = RouteResultPreparationTest.class.getResourceAsStream("test_routes.json");
-        Reader reader = new InputStreamReader(inputStream);
+        String fileName = "test_turn_lanes.json";
+
+        Reader reader = new FileReader(fileName);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> twoDArray = new ArrayList<Object[]>();
@@ -113,7 +115,7 @@ public class RouteResultPreparationTest {
     }
 
 
-    String getLanesString(RouteSegmentResult segment) {
+    private String getLanesString(RouteSegmentResult segment) {
         String turn = segment.getTurnType().toString();
         final int[] lns = segment.getTurnType().getLanes();
         if (lns != null) {

@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -15,11 +14,14 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -150,5 +152,25 @@ public class AndroidUtils {
 
 	public static boolean isValidEmail(CharSequence target) {
 		return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+	}
+
+	public static String getFileAsString(File file) {
+		try {
+			FileInputStream fin = new FileInputStream(file);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				if (sb.length() > 0) {
+					sb.append("\n");
+				}
+				sb.append(line);
+			}
+			reader.close();
+			fin.close();
+			return sb.toString();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

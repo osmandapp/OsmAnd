@@ -1,0 +1,207 @@
+[
+  {
+    "testName": "1.Preston road TR Lorimar drive",
+    "startPoint": {
+      "latitude": 45.69539,
+      "longitude": 35.43936
+    },
+    "endPoint": {
+      "latitude": 45.69567,
+      "longitude": 35.440113
+    },
+    "expectedResults": {
+      "26545": "TL, C, C, C, +TR"
+    }
+  },
+  {
+    "testName": "1.2.Preston road TL Lorimar drive",
+    "startPoint": {
+      "latitude": 45.69716379996895,
+      "longitude": 35.43819894718172
+    },
+    "endPoint": {
+      "latitude": 45.69602851362186,
+      "longitude": 35.44070949481966
+    },
+    "expectedResults": {
+      "26557": "+TL, C, C, C, TR",
+      "26517": "+TL, C, C, C",
+      "26545": "TL, +C, +C"
+   }
+  },
+  {
+    "testName": "1.3.Baywater drive TR Preston road",
+    "startPoint": {
+      "latitude": 45.6960514631203,
+      "longitude": 35.43735606299879
+    },
+    "endPoint": {
+      "latitude": 45.695624319890825,
+      "longitude": 35.438198276629464
+    },
+    "expectedResults": {
+      "26529": "TL, C, C, +TR"
+   }
+  },
+  {
+    "testName": "2.Valley View Lane TU Highway 161 Service Road",
+    "startPoint": {
+      "latitude": 45.694859388262195,
+      "longitude": 35.467755138874054
+    },
+    "endPoint": {
+      "latitude": 45.694132477954575,
+      "longitude": 35.46842032670975
+    },
+    "expectedResults": {
+      "26789": "+TU, +TL, +C;TL, C, C;TR"
+   }
+  },
+  {
+    "testName": "2.1.Highway 161 Service Road to Lyndon B Johnson Freeway (I 635) link",
+    "startPoint": {
+      "latitude": 45.69384114913531,
+      "longitude": 35.46754793822765
+    },
+    "endPoint": {
+      "latitude": 45.69231235051791,
+      "longitude": 35.49527125060558
+    },
+    "expectedResults": {
+      "26717": "+TSLL;C, C, C",
+      "26821": "+C",
+      "29088": "C, C, C, C, +C"
+    }
+  },
+  {
+    "testName": "3.Motorway link from Ringweg Zuid TL Amstelveenseweg",
+    "startPoint": {
+      "latitude": 45.6971206184178,
+      "longitude": 35.51630312204361
+    },
+    "endPoint": {
+      "latitude": 45.6952846638807,
+      "longitude": 35.51303619146347
+    },
+    "expectedResults": {
+      "27091": "+TL, +TL, +TL, C, TR, TR"
+    }
+  },
+  {
+    "testName": "4.Tiefer TL Wilhelm-Kaisen-Brücke",
+    "startPoint": {
+      "latitude": 45.69999011335712,
+      "longitude": 35.53932720422745
+    },
+    "endPoint": {
+      "latitude": 45.69952693897639,
+      "longitude": 35.537424847483635
+    },
+    "expectedResults": {
+      "27177": "+C;TL, C"
+    }
+  },
+  {
+    "testName": "5.1.Fritz-Foerster-Platz (S 172) TR Bergstraße (B 170)",
+    "startPoint": {
+      "latitude": 45.69942484339974,
+      "longitude": 35.552937403321266
+    },
+    "endPoint": {
+      "latitude": 45.698372030432985,
+      "longitude": 35.553747430443764
+    },
+    "expectedResults": {
+      "27231": "C, C, +TR, +TR"
+    }
+  },
+  {
+    "testName": "5.2.Zellescher Weg (S 172) TL Bergstraße (B 170)",
+    "startPoint": {
+      "latitude": 45.69887876939763,
+      "longitude": 35.55432008206844
+    },
+    "endPoint": {
+      "latitude": 45.69869143574982,
+      "longitude": 35.553684398531914
+    },
+    "expectedResults": {
+      "27305": "+TL, +TL, C, C;TR",
+      "27275": "+TL, +TL, C, C",
+      "27231": "TL, +C, +C"
+    }
+  },
+  {
+    "testName": "6.Platz der Vereinten Nationen TR Platz der Vereinten Nationen",
+    "startPoint": {
+      "latitude": 45.69942016011204,
+      "longitude": 35.568235382437706
+    },
+    "endPoint": {
+      "latitude": 45.70020132709422,
+      "longitude": 35.56931899487972
+    },
+    "expectedResults": {
+      "27411": "TL, C, +TR;C"
+    }
+  },
+  {
+    "testName": "7.1.Spindlersfelder Straße TR Oberspreestraße",
+    "startPoint": {
+      "latitude": 45.699817301524455,
+      "longitude": 35.58391557633877
+    },
+    "endPoint": {
+      "latitude": 45.69793647478804,
+      "longitude": 35.58106707036495
+    },
+    "expectedResults": {
+      "27435": "TL, +TR;TL"
+    }
+  },
+  {
+    "testName": "7.2.Spindlersfelder Straße TL Oberspreestraße",
+    "startPoint": {
+      "latitude": 45.699817301524455,
+      "longitude": 35.58391557633877
+    },
+    "endPoint": {
+      "latitude": 45.69657639532305,
+      "longitude": 35.586447581
+    },
+    "expectedResults": {
+      "27441": "+TL, TL;TR",
+      "27461": "TL, +C, +C"
+   }
+  },
+  {
+    "testName": "8.Luisenstraße TL Invalidenstraße (L 1008)",
+    "startPoint": {
+      "latitude": 45.698618375457045,
+      "longitude": 35.59940265119076
+    },
+    "endPoint": {
+      "latitude": 45.698873149397336,
+      "longitude": 35.597948893904686
+    },
+    "expectedResults": {
+      "27581": "+TL, TR",
+      "27591": "+C, +C;TR"
+   }
+  },
+  {
+    "testName": "9.Torstraße C",
+    "startPoint": {
+      "latitude": 45.69951195248144,
+      "longitude": 35.61424867808819
+    },
+    "endPoint": {
+      "latitude": 45.699101695620705,
+      "longitude": 35.61031924188137
+    },
+    "expectedResults": {
+      "27611": "+C;TL, +C, TR"
+   }
+  }
+
+]

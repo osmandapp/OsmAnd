@@ -197,6 +197,14 @@ public class MapMarkersHelper {
 		return mapMarkers;
 	}
 
+	public MapMarker getFirstMapMarker() {
+		if (mapMarkers.size() > 0) {
+			return mapMarkers.get(0);
+		} else {
+			return null;
+		}
+	}
+
 	public List<MapMarker> getSortedMapMarkers() {
 		return sortedMapMarkers;
 	}
@@ -302,8 +310,8 @@ public class MapMarkersHelper {
 					pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 				}
 				if (colorIndex == -1) {
-					if (mapMarkers.size() > 0) {
-						colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+					if (sortedMapMarkers.size() > 0) {
+						colorIndex = (sortedMapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					} else {
 						colorIndex = 0;
 					}

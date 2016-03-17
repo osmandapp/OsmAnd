@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
     android:paddingTop="16dp">
 
     <LinearLayout
@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_card_orange"
         android:orientation="vertical"
-        android:paddingBottom="8dp"
+        android:paddingBottom="12dp"
         android:paddingLeft="24dp"
-        android:paddingRight="8dp"
+        android:paddingRight="12dp"
         android:paddingTop="16dp">
 
         <LinearLayout
@@ -63,6 +63,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_round_shade"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
                 android:text="@string/shared_string_read_more"
                 android:textColor="@color/color_white"/>
 
@@ -70,7 +72,9 @@
                 android:id="@+id/subscription_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_marginLeft="12dp"
                 android:background="@drawable/btn_round_shade"
                 android:text="@string/osm_live_subscribe_btn"
                 android:textColor="@color/color_white"/>
@@ -146,13 +150,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:minHeight="48dp">
 
 
             <net.osmand.plus.widgets.TextViewEx
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/osm_live_support_region"
@@ -162,10 +167,10 @@
 
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/regionTextView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:layout_marginBottom="4dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="4dp"
                 android:gravity="right"

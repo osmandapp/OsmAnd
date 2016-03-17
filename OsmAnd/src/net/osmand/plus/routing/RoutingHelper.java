@@ -921,10 +921,10 @@ public class RoutingHelper {
 				currentRunningJob = new Thread(new Runnable() {
 					@Override
 					public void run() {
-						try {
-							r.run();
-						} finally {
-							synchronized (RoutingHelper.this) {
+						synchronized (RoutingHelper.this) {
+							try {
+								r.run();
+							} finally {
 								currentRunningJob = null;
 							}
 						}

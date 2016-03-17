@@ -2714,7 +2714,7 @@
 	<string name="poi_vacuum_cleaner_no">Støvsuger: nej</string>
 	<string name="poi_amenity_vacuum_cleaner">Støvsuger</string>
 
-<string name="poi_sport_free_flying">Fri flyvning (sport)</string>
+<string name="poi_sport_free_flying">Freeflying (sport)</string>
 <string name="poi_bicycle_repair_station">Cykel reparation stander</string>
 
 <string name="poi_water_tap">Vandhane</string>
@@ -2726,27 +2726,27 @@
 	<string name="poi_free_flying_paragliding_no">Paragliding: nej</string>
 	<string name="poi_free_flying_hanggliding_yes">Hanggliding: ja</string>
 	<string name="poi_free_flying_hanggliding_no">Hanggliding: nej</string>
-	<string name="poi_free_flying_site_orientation_s">Frit flyvested orientering: S</string>
-	<string name="poi_free_flying_site_orientation_sw">Frit flyvested orientering: SV</string>
-	<string name="poi_free_flying_site_orientation_w">Frit flyvested orientering: V</string>
-	<string name="poi_free_flying_site_orientation_nw">Frit flyvested orientering: NV</string>
-	<string name="poi_free_flying_site_orientation_n">Frit flyvested orientering: N</string>
-	<string name="poi_free_flying_site_orientation_ne">Frit flyvested orientering: NØ</string>
-	<string name="poi_free_flying_site_orientation_e">Frit flyvested orientering: Ø</string>
-	<string name="poi_free_flying_site_orientation_se">Frit flyvested orientering: SØ</string>
-	<string name="poi_free_flying_no_flight_time">Ingen flyvetid (fri flyvning)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">Gæsteretningslinjer for fri flyvning: ja</string>
-	<string name="poi_free_flying_guest_guidelines_no">Gæsteretningslinjer for fri flyvning: nej</string>
+	<string name="poi_free_flying_site_orientation_s">Freeflying sted orientering: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Freeflying sted orientering: SV</string>
+	<string name="poi_free_flying_site_orientation_w">Freeflying sted orientering: V</string>
+	<string name="poi_free_flying_site_orientation_nw">Freeflying sted orientering: NV</string>
+	<string name="poi_free_flying_site_orientation_n">Freeflying sted orientering: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Freeflying sted orientering: NØ</string>
+	<string name="poi_free_flying_site_orientation_e">Freeflying sted orientering: Ø</string>
+	<string name="poi_free_flying_site_orientation_se">Freeflying sted orientering: SØ</string>
+	<string name="poi_free_flying_no_flight_time">Ingen flyvetid (Freeflying)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Gæsteretningslinjer for freeflying: ja</string>
+	<string name="poi_free_flying_guest_guidelines_no">Gæsteretningslinjer for freeflying: nej</string>
 
 	<string name="poi_solarium">Solarium</string>
 
-<string name="poi_free_flying_site_takeoff">Fri flyvning sted: start</string>
-	<string name="poi_free_flying_site_landing">Fri flyvning sted: landing</string>
-	<string name="poi_free_flying_site_toplanding">Fri flyvning sted: toplanding</string>
-	<string name="poi_free_flying_site_towing">Fri flyvning sted: trækanordning</string>
-	<string name="poi_free_flying_site_training">"Fri flyvning sted:  træning"</string>
-	<string name="poi_free_flying_official_yes">Fri flyvning funktionær: ja</string>
-	<string name="poi_free_flying_official_no">Fri flyvning funktionær: nej</string>
-	<string name="poi_free_flying_rigid_yes">Fri flyvning fastvinge: ja</string>
-	<string name="poi_free_flying_rigid_no">Fri flyvning fastvinge: nej</string>
+<string name="poi_free_flying_site_takeoff">Freeflying sted: start</string>
+	<string name="poi_free_flying_site_landing">Freeflying sted: landing</string>
+	<string name="poi_free_flying_site_toplanding">Freeflying sted: toplanding</string>
+	<string name="poi_free_flying_site_towing">Freeflying sted: trækanordning</string>
+	<string name="poi_free_flying_site_training">"Freeflying sted:  træning"</string>
+	<string name="poi_free_flying_official_yes">Freeflying funktionær: ja</string>
+	<string name="poi_free_flying_official_no">Freeflying funktionær: nej</string>
+	<string name="poi_free_flying_rigid_yes">Freeflying fastvinge: ja</string>
+	<string name="poi_free_flying_rigid_no">Freeflying fastvinge: nej</string>
 	</resources>
