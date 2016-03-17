@@ -95,14 +95,15 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 				return loginResult;
 			}
 		}
-		return editingPOI(b.toString(), POST, msg);
+		return editingPOI(b.toString(), POST, msg, anonymous);
 	}
 
 	public OsmBugResult validateLoginDetails() {
-		return editingPOI(getUserDetailsApi(), GET, "validate_login");
+		return editingPOI(getUserDetailsApi(), GET, "validate_login", false);
 	}
 
-	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation) {
+	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation,
+									boolean anonymous) {
 		OsmBugResult r = new OsmBugResult();
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
@@ -111,8 +112,10 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			connection.setRequestMethod(requestMethod);
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
 
-			String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
-			connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if (!anonymous) {
+				String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
+				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			}
 
 			connection.setDoInput(true);
 			connection.connect();
