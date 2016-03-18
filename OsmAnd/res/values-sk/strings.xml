@@ -1132,8 +1132,8 @@
     <string name="lang_cy">Welšsky (Cymraeg)</string>
     <string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
-    <string name="osmo_plugin_description">"Tento modul poskytuje funkcie pokročilého sledovania naživo cez OsMo, pozrite na http://osmo.mobi.\n\nMôžete sledovať všetky zariadenia účastníkov v skupine a komunikovať spolu. Obsahuje možnosti nastavenia krátkodobého a dlhodobého sledovania.\n\nAnonymné skupiny môžu byť operatívne vytvorené na určený počet dní a ich funkcie sú obmedzené, napr. nie je diaľkové ovládanie ani administrátor skupiny. Na druhej strane, plne funkčné skupiny je možné vytvoriť na webstránke a sú prístupné len registrovaným používateľom. "</string>
-    <string name="osmo_plugin_name">OsMo (sledovanie OSM)</string>
+    <string name="osmo_plugin_description">"Tento modul poskytuje časť funkcií pokročilého sledovania naživo cez OpenStreetMap sledovanie, pozrite na http://osmo.mobi.\n\nMôžete sledovať všetky zariadenia účastníkov v skupine. Môžete tiež vidieť body a stopy odoslané do skupiny, v ktorej ste členom.\n\nSkupiny nie sú vymazané ani po dlhej dobe. Skupiny sa vytvárajú na stránke OsMo.mobi "</string>
+    <string name="osmo_plugin_name">OpenStreetMap sledovanie</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Len ručne (použiť šípku)</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
@@ -1152,12 +1152,11 @@
     <string name="osmo_connect_to_device_tracker_id">ID sledovacieho zariadenia</string>
     <string name="osmo_connect_to_device">Spojiť so zariadením</string>
     <string name="osmo_connected_devices">Pripojené zariadenia</string>
-    <string name="osmo_groups">Skupiny/Zariadenia OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Automaticky spustiť reláciu sledovania a odosielať polohu po spustení aplikácie</string>
-    <string name="osmo_auto_send_locations">Automaticky spustiť reláciu sledovania</string>
-    <string name="osmo_tracker_id">Osobné ID sledovacieho zariadenia</string>
-    <string name="osmo_tracker_id_descr">Kliknite pre zobrazenia alebo zdieľanie ID sledovacieho zariadenia.
-        Pomocou ID budú pripojené zariadenia schopné sledovať všetky pohyby tohto zariadenia! Pre odpojenie použite možnosť "Pregenerovať".</string>
+    <string name="osmo_groups">Skupiny OsMo</string>
+    <string name="osmo_auto_send_locations_descr">Automaticky spustiť výlet a odosielať polohu po spustení aplikácie</string>
+    <string name="osmo_auto_send_locations">Automaticky spustiť výlet</string>
+    <string name="osmo_tracker_id">ID sledovacieho zariadenia</string>
+    <string name="osmo_tracker_id_descr">Kliknite pre zobrazenie ID sledovacieho zariadenia</string>
     <string name="osmo_session_token">Token relácie: %1$s</string>
     <string name="osmo_auth_pending">Čaká sa na autorizáciu…</string>
     <string name="osmo_locations_sent">Odoslané polohy %1$d (v zásobníku %2$d) </string>
@@ -1201,7 +1200,7 @@
     <string name="osmo_center_location">Na stred obrazovky</string>
     <string name="osmo_set_moving_target">Nastaviť ako pohyblivý cieľ</string>
     <string name="osmo_use_server_name">Registrované meno</string>
-    <string name="osmo_connect_to_my_nickname">Moja prezývka</string>
+    <string name="osmo_connect_to_my_nickname">Prezývka</string>
     <string name="osmo_user_name">Používateľ</string>
     <string name="osmo_group_share">Na pripojenie do skupiny %2$s, zadajte ID skupiny (%1$s) alebo kliknite %3$s.</string>
     <string name="osmo_share_connect_device">Trvale sledovať toto zariadenie</string>
@@ -1261,7 +1260,9 @@
     <string name="osmo_auth_error_short">Autorizácia zlyhala</string>
     <string name="osmo_auth_error">Chyba pri autorizácii OsMo : %1$s.\n Možno je služba dočasne nedostupná alebo vám skončila registrácia.\n Chcete pokračovať v novej registrácii?</string>
     <string name="osmo_group_by_invite">Vstúpiť pozvaním</string>
-    <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Súkromné skupiny sú obmedzené na 8 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Keď vytvárate skupinu, zadajte jej názov a popis\n - Cez aplikáciu sa vytvárajú len skupiny jednoduchého typu, prečítajte si viac na stránke https://osmo.mobi/g/new
+\n - Cez webstránku môžete skupinu spravovať, pridať stopy a body dostupné pre všetkých\n - Neodporúčame používať skupinu len s jedným používateľom, ak to nie je skupina POI\n - Súkromné skupiny sú obmedzené na 8 osôb
+\n - Podrobné podmienky použitia sú na stránke OsMo.mobi\n - Ak potrebujete špeciálne podmienky - prosím kontaktuje podporu: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
     <string name="stop_navigation_service">Zastaviť</string>
     <string name="enable_sleep_mode">Zapnúť režim GPS v pozadí</string>
@@ -1361,8 +1362,8 @@
     <string name="osmo_device_not_found">Zariadenie sa nenašlo</string>
     <string name="anonymous_user">Anonymný používateľ</string>
     <string name="logged_as">Prihlásený ako %1$s</string>
-    <string name="osmo_no_connection_msg">Služba OsMo nie je dostupná:\n- skontrolujte pripojenie;\n- skontrolujte nastavenie;\n- pozrite na náš Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonymný používateľ nemôže:\n- vytvárať skupiny;\n- synchronizovať skupiny a zariadenia so serverom;\n- spravovať skupiny a zariadenia v súkromnej kancelárii.</string>
+    <string name="osmo_no_connection_msg">Nedá sa pripojiť na server OsMo:\n- skontrolujte vaše pripojenie na internet;\n- skontrolujte nastavenia;\n- pozrite na náš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonymný používateľ nemôže:\n- vytvárať skupiny;\n- synchronizovať skupiny a zariadenia so serverom;\n- spravovať skupiny a zariadenia na osobnej webovej stránke.</string>
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_category_transport">Doprava</string>
     <string name="rendering_category_others">Iné vlastnosti mapy</string>
@@ -1609,7 +1610,7 @@
     <string name="routing_attr_height_description">Zadajte výšku vozidla aká musí byť povolená na cestách</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
     <string name="use_fast_recalculation_desc">Prepočítať iba začiatočný úsek trasy pri dlhých výletoch</string>
-    <string name="osmo_share_my_location">Zdieľať moju polohu</string>
+    <string name="osmo_share_my_location">Odosielať polohu</string>
     <string name="shared_string_logoff">Odhlásiť</string>
     <string name="rendering_value_disabled_name">Vypnuté</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa dôležitosti trasy</string>
@@ -1739,7 +1740,7 @@
     <string name="favorite_category_select">Zvoľte kategóriu</string>
     <string name="default_speed_system_descr">Zvoľte spôsob merania rýchlosti</string>
     <string name="default_speed_system">Meranie rýchlosti</string>
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Námorné míle</string>
     <string name="si_kmh">Kilometre za hodinu</string>
     <string name="si_mph">Míle za hodinu</string>
@@ -1747,7 +1748,7 @@
     <string name="si_min_km">Minúty za kilometer</string>
     <string name="si_min_m">Minúty za míľu</string>
     <string name="si_nm_h">Námorné míle za hodinu (uzly)</string>
-    <string name="nm_h">nm/h</string>
+    <string name="nm_h">nmi/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -1997,4 +1998,14 @@
     <string name="finish_navigation">Dokončiť navigáciu</string>
     <string name="shared_string_move_up">Posunúť hore</string>
     <string name="shared_string_move_down">Posunúť dolu</string>
-    </resources>
+    <string name="no_map_markers_found">Prosím pridajte mapové značky pomocou mapy</string>
+    <string name="no_waypoints_found">Nenašli sa žiadne body cesty</string>
+    <string name="report">Hlásenie</string>
+    <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska. Je potrebný reštart aplikácie.</string>
+    <string name="release_2_3">" • OSM Naživo. Podporte tvorcov mapy a vývojárov a získajte aktualizácie máp každú hodinu.
+\n\n • Mapové značky. Nový spôsob rýchleho výberu miest na mape.\n\n • Detailnejšie mapy z OSM s ikonami ciest pre príslušné krajiny a nové objekty na mape.\n\n • Vylepšený vzhľad a použitie tvorby trasy.
+\n\n • Vylepšenia v menu mapy, ako napríklad hľadanie adresy podľa kontextu.\n\n a ďalšie… "</string>
+    <string name="full_report">Plné hlásenie</string>
+    <string name="open_street_map_login_and_pass">Meno a heslo pre OpenStreetMap</string>
+    <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
+</resources>
