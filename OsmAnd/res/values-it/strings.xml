@@ -1299,7 +1299,7 @@
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità del cosiddetto monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti e comunicare con loro. Viene fornito con varie opzioni di monitoraggio della sessione in corso o permanentemente.\n\nI gruppi anonimi possono essere creati autonomamente per uno specifico numero di giorni e sono limitati ad alcune funzioni, es. non ci sono controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
+    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità del cosiddetto monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.\n\nIl gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi "</string>
     <string name="osmo_plugin_name">Monitoraggio OpenStreetMap</string>
     <string name="osmo_settings">OsMO</string>
     <string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
@@ -2224,4 +2224,6 @@
     <string name="release_2_3">" • OSM Live. Sostiene i contributori della mappa e gli sviluppatori e si hanno gli aggiornamenti orari della mappa.\n\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.\n\n • Mappe OSM più dettagliate con scudetti specifici per ogni nazione dei nomi delle strade e molte nuove caratteristiche.
 \n\n • Aspetto e gestione migliorati della preparazione del percorso.
 \n\n • Molti miglioramenti nel menu contestuale dells mappa e nella ricerca contestuale degli indirizzi.\n\n e altro… "</string>
+    <string name="rec_split">Frazionatore delle registrazioni</string>
+    <string name="rec_split_title">Usa il frazionamento delle registrazioni</string>
     </resources>
