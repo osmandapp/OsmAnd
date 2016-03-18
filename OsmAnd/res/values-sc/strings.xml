@@ -1542,7 +1542,7 @@
     <string name="anonymous_user">Impitadore anònimu</string>
     <string name="logged_as">Identificadu comente %1$s</string>
     <string name="osmo_no_connection_msg">Connessione a su server OsMo non disponìbile:\n- còmpida sa connessione ìnternet tua;\n- còmpida sas impostatziones;\n- abbista su Twitter nostru: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in un\'ufìtziu privadu.</string>
+    <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in unu pannellu de controllu in su giassu/situ web.</string>
     <string name="rendering_category_details">Minujas</string>
     <string name="configure_map">Cunfigura sa mapa</string>
     <string name="search_radius_proximity">A curtzu de</string>
@@ -2163,4 +2163,8 @@
 \n\n • Marcadores mapa. Una manera noa de ischertare in manera lestra logos in sa mapa.\n\n • Mapas OSM prus a sa minuda cun caraterìsticas pro sas istradas pro cada istadu e unu muntone de àteras funtzionalidades.\n\n • Megioramentu de s’aparèntzia e de s’ammaniamentu de sas àndalas.
 \n\n • Medas megioramentos in su menù de sa mapa, comente sa chirca cuntestuale de sos indiritzos.\n\n e àteru… "</string>
     <string name="storage_directory_readonly_desc">Sa cartella de memorizatzione ischertada est in letura ebbia. Sa cartella de memorizatzione est istada mudada pro impreare sa mamòria interna. Pro praghere issèbera una cartella de destinatzione vàlida.</string>
-    </resources>
+    <string name="no_map_markers_found">Annanghe sos marcadores mapa dae sa mapa</string>
+    <string name="no_waypoints_found">Perunu puntu de coladòrgiu agatadu</string>
+    <string name="report">Raportu</string>
+    <string name="file_name_containes_illegal_char">Su nùmene de su documentu cuntennit caràteres non permitidos</string>
+</resources>
