@@ -70,6 +70,11 @@ public class RoutePreferencesMenu {
 	public static class LocalRoutingParameter {
 
 		public GeneralRouter.RoutingParameter routingParameter;
+		private ApplicationMode am;
+		
+		public LocalRoutingParameter(ApplicationMode am) {
+			this.am = am;
+		}
 
 		public String getText(MapActivity mapActivity) {
 			return SettingsBaseActivity.getRoutingStringPropertyName(mapActivity, routingParameter.getId(),
@@ -79,33 +84,66 @@ public class RoutePreferencesMenu {
 		public boolean isSelected(OsmandSettings settings) {
 			final OsmandSettings.CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(routingParameter
 					.getId());
-			return property.get();
+			if(am != null) {
+				return property.getModeValue(am);
+			} else {
+				return property.get();
+			}
 		}
 
 		public void setSelected(OsmandSettings settings, boolean isChecked) {
 			final OsmandSettings.CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(routingParameter
 					.getId());
-			property.set(isChecked);
+			if(am != null) {
+				property.setModeValue(am, isChecked);
+			} else {
+				property.set(isChecked);
+			}
 		}
 
 	}
 
 	private static class MuteSoundRoutingParameter extends LocalRoutingParameter {
+
+		public MuteSoundRoutingParameter() {
+			super(null);
+		}
 	}
 
 	private static class InterruptMusicRoutingParameter extends LocalRoutingParameter {
+
+		public InterruptMusicRoutingParameter() {
+			super(null);
+		}
 	}
 
 	private static class VoiceGuidanceRoutingParameter extends LocalRoutingParameter {
+
+		public VoiceGuidanceRoutingParameter() {
+			super(null);
+		}
 	}
 
 	private static class AvoidRoadsRoutingParameter extends LocalRoutingParameter {
+
+		public AvoidRoadsRoutingParameter() {
+			super(null);
+		}
+		
 	}
 
 	private static class GpxLocalRoutingParameter extends LocalRoutingParameter {
+
+		public GpxLocalRoutingParameter() {
+			super(null);
+		}
 	}
 
 	private static class OtherSettingsRoutingParameter extends LocalRoutingParameter {
+
+		public OtherSettingsRoutingParameter() {
+			super(null);
+		}
 	}
 
 	private static class OtherLocalRoutingParameter extends LocalRoutingParameter {
@@ -114,6 +152,7 @@ public class RoutePreferencesMenu {
 		public int id;
 
 		public OtherLocalRoutingParameter(int id, String text, boolean selected) {
+			super(null);
 			this.text = text;
 			this.selected = selected;
 			this.id = id;
@@ -425,7 +464,7 @@ public class RoutePreferencesMenu {
 				ch.setOnCheckedChangeListener(null);
 				if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")) {
 					// if short route settings - it should be inverse of fast_route_mode
-					ch.setChecked(!settings.FAST_ROUTE_MODE.get());
+					ch.setChecked(!settings.FAST_ROUTE_MODE.getModeValue(routingHelper.getAppMode()));
 				} else {
 					ch.setChecked(rp.isSelected(settings));
 				}
@@ -435,7 +474,7 @@ public class RoutePreferencesMenu {
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						// if short way that it should set valut to fast mode opposite of current
 						if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")) {
-							settings.FAST_ROUTE_MODE.set(!isChecked);
+							settings.FAST_ROUTE_MODE.setModeValue(routingHelper.getAppMode(), !isChecked);
 						}
 						rp.setSelected(settings, isChecked);
 
@@ -550,7 +589,7 @@ public class RoutePreferencesMenu {
 		}
 		for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
 			if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
-				LocalRoutingParameter rp = new LocalRoutingParameter();
+				LocalRoutingParameter rp = new LocalRoutingParameter(am);
 				rp.routingParameter = r;
 				list.add(rp);
 			}
