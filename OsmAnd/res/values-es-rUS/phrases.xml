@@ -59,7 +59,7 @@
 	<string name="poi_wine">Vinoteca</string>
 	<string name="poi_books">Librería</string>
 	<string name="poi_bicycle">Bicicletería</string>
-	<string name="poi_anime">Tienda de anime</string>
+	<string name="poi_anime">Artículos de anime</string>
 	<string name="poi_antiques">Antigüedades</string>
 	<string name="poi_art">Venta de arte</string>
 	<string name="poi_baby_goods">Artículos para bebés</string>
@@ -158,7 +158,7 @@
 	<string name="poi_traffic_calming_chicane">Chicana</string>
 	<string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
 	<string name="poi_traffic_calming_table">Peatonal elevada</string>
-	<string name="poi_traffic_calming_choker">Gargantilla</string>
+	<string name="poi_traffic_calming_choker">Calzada reducida</string>
 	<string name="poi_traffic_signals">Semáforo</string>
 	<string name="poi_car_repair">Taller mecánico</string>
 	<string name="poi_service_tyres">Neumáticos</string>
@@ -812,7 +812,7 @@
 	<string name="poi_highway_crossing">Cruce peatonal</string>
 <string name="poi_cheese">Quesería</string>
 	<string name="poi_chocolate">Chocolatería</string>
-	<string name="poi_coffee">Tienda de café</string>
+	<string name="poi_coffee">Venta de café en granos</string>
 	<string name="poi_pasta">Fábrica de pastas</string>
 	<string name="poi_pastry">Pastelería</string>
 	<string name="poi_furnace">Artículos de calefacción</string>
