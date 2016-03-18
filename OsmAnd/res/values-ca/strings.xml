@@ -1171,7 +1171,7 @@
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
     <string name="osmo_plugin_description">"Aquest connector us ofereix la funcionalitat del seguiment avançat en temps real anomenat OsMo, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment de tots els dispositius que integrin un grup i comunicar-vos amb qualsevol d\'ells. Hi ha diferents paràmetres segons el tipus de seguiment: puntual o permanent.\n\nEls grups anònims es poden crear al moment per un nombre de dies especificat i tenen les funcionalitats limitades, p. ex. no tenen control remot ni administració del grup. Els grups totalment operatius, per altra banda, poden crear-se des del lloc web i només els usuaris registrats hi tenen accés. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitorització OSM)</string>
+    <string name="osmo_plugin_name">Monitorització OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
     <string name="osmo_mode_on">Atura la sessió a OsMo</string>
@@ -1190,10 +1190,10 @@
     <string name="shared_string_share">Compartir</string>
     <string name="share_fav_subject">Preferits compartits via OsmAnd</string>
     <string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
-    <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
-    <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
-    <string name="osmo_tracker_id">Identificació personal de seguiment</string>
-    <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador. Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
+    <string name="osmo_auto_send_locations_descr">Inici automàtic de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
+    <string name="osmo_auto_send_locations">Inici automàtic de la traça</string>
+    <string name="osmo_tracker_id">Identificació del traçador</string>
+    <string name="osmo_tracker_id_descr">Premeu per veure la identificació del traçador</string>
     <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
     <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
     <string name="osmo_locations_sent">"%1$d ubicacions enviades (%2$d a la memòria intermèdia) "</string>
@@ -1244,7 +1244,7 @@
     <string name="osmo_center_location">Centra a la pantalla</string>
     <string name="osmo_set_moving_target">Estableix com a objectiu en moviment</string>
     <string name="osmo_use_server_name">Nom registrat</string>
-    <string name="osmo_connect_to_my_nickname">El vostre àlies</string>
+    <string name="osmo_connect_to_my_nickname">Àlies</string>
     <string name="osmo_user_name">Usuari</string>
     
     <string name="rendering_value_pink_name">rosa</string>
@@ -1608,7 +1608,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre</string>
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
     <string name="use_fast_recalculation_desc">Torna a calcular només la part inicial de la ruta si són viatges llargs</string>
-    <string name="osmo_share_my_location">Comparteix la meva posició</string>
+    <string name="osmo_share_my_location">Transmet la posició</string>
     <string name="shared_string_logoff">Surt</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
