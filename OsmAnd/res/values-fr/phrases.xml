@@ -159,7 +159,7 @@
 	<string name="poi_funicular">Voie de funiculaire</string>
 	<string name="poi_furniture">Magasin d\'ameublement</string>
 	<string name="poi_garden_centre">Jardinerie</string>
-	<string name="poi_general">Magasin généraliste</string>
+	<string name="poi_shop_yes">Magasin généraliste</string>
 	<string name="poi_gift">Boutique de cadeaux</string>
 	<string name="poi_glacier">Glacier</string>
 	<string name="poi_glaziery">Vitrier</string>
@@ -1507,7 +1507,7 @@
 
 	<string name="poi_historic_yes">Objet historique</string>
 	<string name="poi_surveillance_yes">Surveillance : oui</string>
-	<string name="poi_shop_yes">Avec boutique</string>
+	<string name="poi_shop_additional_yes">Avec boutique</string>
 
 	<string name="poi_wildlife_hide">Lieu d\'observation de la vie sauvage</string>
 

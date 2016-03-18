@@ -45,7 +45,7 @@
         <string name="poi_furniture">Møbelforretning</string>
         <string name="poi_garden_centre">Havecenter</string>
         <string name="poi_gas">Flaskegas</string>
-        <string name="poi_general">Landhandel</string>
+        <string name="poi_shop_yes">Landhandel</string>
         <string name="poi_gift">Gavebutik</string>
         <string name="poi_glaziery">Glarmester</string>
         <string name="poi_hardware">Værktøj</string>
@@ -1958,7 +1958,7 @@
 
 <string name="poi_historic_yes">Historisk objekt</string>
 	<string name="poi_surveillance_yes">Overvågning: ja</string>
-	<string name="poi_shop_yes">Med butik</string>
+	<string name="poi_shop_additional_yes">Med butik</string>
 
 	<string name="poi_service_bicycle_retail_yes">Cykelsalg: ja</string>
 	<string name="poi_service_bicycle_retail_no">Cykelsalg: nej</string>
