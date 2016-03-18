@@ -16,7 +16,7 @@
 	<string name="poi_pub">パブ・居酒屋(Pub)</string>
 	<string name="poi_sauna">サウナ(Sauna)</string>
 	<string name="poi_school">学校(School)</string>
-	<string name="poi_shop_yes">雑貨店(General store)</string>
+	<string name="poi_general">雑貨店(General store)</string>
 	<string name="poi_taxi">タクシー乗り場(Taxi)</string>
 	<string name="poi_theme_park">テーマパーク(Theme park)</string>
 	<string name="poi_university">大学(University)</string>

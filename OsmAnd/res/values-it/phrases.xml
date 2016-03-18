@@ -80,7 +80,7 @@
 
 	<string name="poi_anime">Negozio anime</string>
 	<string name="poi_boutique">Boutique</string>
-	<string name="poi_shop_yes">Emporio</string>
+	<string name="poi_general">Emporio</string>
 	<string name="poi_gift">Negozio regali</string>
 	<string name="poi_glaziery">Vetreria</string>
 	<string name="poi_hardware">Ferramenta</string>
