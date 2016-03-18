@@ -292,6 +292,7 @@ public class RoutePreferencesMenu {
 				if (obj instanceof OtherSettingsRoutingParameter) {
 					final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
 					settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
+					settings.putExtra(SettingsBaseActivity.INTENT_APP_MODE, routingHelper.getAppMode().getStringKey());
 					mapActivity.startActivity(settings);
 				} else if (obj instanceof MuteSoundRoutingParameter) {
 					final CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
