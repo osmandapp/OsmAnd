@@ -1342,8 +1342,8 @@
     <string name="osmo_expire_group">Expira en</string>
     <string name="osmo_group_description">Descripción</string>
     <string name="osmo_group_policy">Política</string>
-    <string name="osmo_connect_to_device_tracker_id">Identificador de seguimiento</string>
-    <string name="osmo_connect_to_group_id">Identificador de grupo</string>
+    <string name="osmo_connect_to_device_tracker_id">ID de seguimiento</string>
+    <string name="osmo_connect_to_group_id">ID de grupo</string>
     <string name="osmo_group_name">Nombre de grupo</string>
     <string name="osmo_connect_to_device">Emparejar con dispositivo</string>
     <string name="osmo_connect_to_group">Emparejar con grupo</string>
@@ -1358,8 +1358,8 @@
     <string name="seconds_ago">segundos antes</string>
     <string name="osmo_auto_send_locations_descr">Inicia el viaje y envía ubicaciones automáticamente tras el arranque de la aplicación</string>
     <string name="osmo_auto_send_locations">Iniciar viaje automáticamente</string>
-    <string name="osmo_tracker_id">Identificador de seguimiento</string>
-    <string name="osmo_tracker_id_descr">Pulsa para ver el identificador de seguimiento</string>
+    <string name="osmo_tracker_id">ID de seguimiento</string>
+    <string name="osmo_tracker_id_descr">Pulsa para ver el ID de seguimiento</string>
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
