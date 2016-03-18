@@ -55,7 +55,7 @@
 	<string name="poi_furniture">Мебель</string>
 	<string name="poi_garden_centre">Садово-огородный магазин</string>
 	<string name="poi_gas">Газ в баллонах</string>
-	<string name="poi_general">Магазин</string>
+	<string name="poi_shop_yes">Магазин</string>
 	<string name="poi_gift">Подарки, сувениры</string>
 	<string name="poi_glaziery">Окна, стёкла</string>
 	<string name="poi_hardware">Скобяные изделия и инструмент</string>
@@ -2686,5 +2686,6 @@
 	<string name="poi_free_flying_guest_guidelines_no">Инструктаж для свободного полёта: необязательно</string>
 
 	<string name="poi_solarium">Солярий</string>
+	<string name="poi_shop_additional_yes">Магазин: есть</string>
 
 </resources>

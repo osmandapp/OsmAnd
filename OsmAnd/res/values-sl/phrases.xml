@@ -232,7 +232,7 @@
 	<string name="poi_dive">Trgovina s potapljaško opremo</string>
 	<string name="poi_fishing">Trgovina z ribiškim priborom</string>
 	<string name="poi_furniture">Trgovina s pohištvom</string>
-	<string name="poi_general">Splošna trgovina</string>
+	<string name="poi_shop_yes">Splošna trgovina</string>
 	<string name="poi_gift">Trgovina z darili</string>
 	<string name="poi_glaziery">Steklarstvo</string>
 	<string name="poi_hardware">Železnina</string>
