@@ -1231,7 +1231,7 @@
     <string name="rendering_attr_coloredBuildings_name">Cladiri colorate</string>
     <string name="osmo_invite">Invită…</string>
     <string name="osmo_leave_confirmation_msg">Vrei să părăsești grupul %1$s?</string>
-    <string name="osmo_specify_tracker_id">Vă rugăm să specificați id</string>
+    <string name="osmo_specify_tracker_id">Vă rugăm să specificați ID</string>
     <string name="continue_navigation">Coninuați navigația</string>
     <string name="pause_navigation">Întrerupeți navigația</string>
     <string name="map_preferred_locale">Limba de afișare preferată</string>
