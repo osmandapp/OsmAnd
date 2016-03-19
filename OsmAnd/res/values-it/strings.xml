@@ -1317,7 +1317,7 @@
     <string name="osmo_auto_send_locations_descr">Avvia automaticamente il viaggio e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
     <string name="osmo_auto_send_locations">Avvia automaticamente il viaggio</string>
     <string name="osmo_tracker_id">ID tracciamento</string>
-    <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità.</string>
+    <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
