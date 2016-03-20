@@ -89,7 +89,12 @@ public class GpxSelectionHelper {
 			for (Track t : g.tracks) {
 				GpxDisplayGroup group = new GpxDisplayGroup(g);
 				group.gpxName = name;
+
+				// Set colour/zoom, using parent's data if not explicitly defined in the track...
+				// (and using defaults if not defined in the parent)
 				group.color = t.getColor(g.getColor(0));
+				group.gpxZoom = t.getGpxZoom(g.getGpxZoom(1.0f));
+
 				group.setType(GpxDisplayItemType.TRACK_SEGMENT);
 				group.setTrack(t);
 				String ks = (k++) + "";
@@ -414,6 +419,7 @@ public class GpxSelectionHelper {
 		private boolean showCurrentTrack;
 		private GPXFile gpxFile;
 		private int color;
+		private float gpxZoom; // custom zoom magnifier for GPX track drawing from .gpx file. 1.0 = 100%
 		private GPXTrackAnalysis trackAnalysis;
 		private long modifiedTime = -1;
 		private List<TrkSegment> processedPointsToDisplay = new ArrayList<TrkSegment>();
@@ -423,9 +429,13 @@ public class GpxSelectionHelper {
 		
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
-			if(gpxFile.tracks.size() > 0) {
-				this.color = gpxFile.tracks.get(0).getColor(0);
-			}
+
+			// Set default zoom/colour to top-level zoom/colour from the .gpx
+			// It's possible that there are none, and that these are defined for individual tracks
+			//
+			this.gpxZoom = gpxFile.getGpxZoom(1.0f);
+			this.color = gpxFile.getColor(0);
+
 			processPoints();
 		}
 
@@ -486,6 +496,8 @@ public class GpxSelectionHelper {
 			return color;
 		}
 
+		public float getGpxZoom() { return gpxZoom; }
+
 		public List<GpxDisplayGroup> getDisplayGroups() {
 			if(modifiedTime != gpxFile.modifiedTime) {
 				update();
@@ -521,6 +533,7 @@ public class GpxSelectionHelper {
 		private double splitDistance = -1;
 		private int splitTime = -1;
 		private int color;
+		private float gpxZoom = 1.0f; //boo - resizes width of GPX tracks. 1.0 = 100%
 		
 		public GpxDisplayGroup(GPXFile gpx) {
 			this.gpx = gpx;
@@ -624,6 +637,7 @@ public class GpxSelectionHelper {
 		public int getColor() {
 			return color;
 		}
+		public float getGpxZoom() { return gpxZoom; }
 	}
 	
 	public static class GpxDisplayItem {

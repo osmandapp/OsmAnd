@@ -36,6 +36,7 @@ import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +44,8 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, 
+
+public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 			MapTextProvider<WptPt> {
 	
 	private OsmandMapTileView view;
@@ -316,13 +318,86 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
+
+	// Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
+	// This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
+	// but optimised for this specific usage.
+
+	private boolean[] cullRamerDouglasPeucer(List<WptPt> points, double epsilon) {
+
+		int nsize = points.size();
+		boolean[] survivor = new boolean[nsize];
+		if (nsize>0) {
+			cullRamerDouglasPeucer(points, epsilon, survivor, 0, nsize - 1);
+			survivor[0] = true;
+		}
+		return survivor;
+	}
+
+	private static void cullRamerDouglasPeucer(List<WptPt> pt, double epsilon, boolean[] survivor, int start, int end) {
+
+		double dmax = -1;
+		int index = -1;
+		for (int i = start + 1; i < end; i++) {
+			double d = MapUtils.getOrthogonalDistance(
+					pt.get(i).getLatitude(), pt.get(i).getLongitude(),
+					pt.get(start).getLatitude(), pt.get(start).getLongitude(),
+					pt.get(end).getLatitude(), pt.get(end).getLongitude());
+			if (d > dmax) {
+				dmax = d;
+				index = i;
+			}
+		}
+		if (dmax >= epsilon ) {
+			cullRamerDouglasPeucer(pt, epsilon, survivor, start, index);
+			cullRamerDouglasPeucer(pt, epsilon, survivor, index, end);
+		} else {
+			survivor[end] = true;
+		}
+	}
+
+	private double getScale(int zoom) {
+		return 75*Math.pow(2.0, (zoom - 18) / 2.0);
+	}
+
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			List<TrkSegment> points = g.getPointsToDisplay();
-			boolean routePoints = g.isRoutePoints();
-			updatePaints(g.getColor(), routePoints, g.isShowCurrentTrack(), settings, tileBox);
-			drawSegments(canvas, tileBox, points);
+
+			List<TrkSegment> segments = g.getPointsToDisplay();
+			for (TrkSegment ts : segments) {
+
+				// Each track segment has a companion 'culled' segment, which is the original passed through a point-reduction
+				// to minimise the number of points required. The culled segment is only generated when needed - a "fingerprint"
+				// consisting of the view scale and # points in the track changes.
+
+				int viewZoom = view.getZoom();
+				if (ts.culledFingerprint!=ts.points.size()+viewZoom) {
+
+					// Reduce the point count of the track, based on the zoom level. "Cache" the new culled track alongside
+					// the original. A "fingerprint" lets us know when culled track is out of date and must be regenerated.
+					boolean[] survivor = cullRamerDouglasPeucer(ts.points, Math.pow(2.0, 17 - viewZoom));
+					List<WptPt> culled = new ArrayList<WptPt>();
+					for (int i = 0; i < survivor.length; i++)
+						if (survivor[i])
+							culled.add(ts.points.get(i));
+
+					ts.culledFingerprint = ts.points.size()+viewZoom;			// 'cache' by associating to track size + zoom level
+					ts.culledPoints = culled;
+				}
+
+				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
+				double gpxTrackWidth = ts.getGpxZoom(g.getGpxZoom()) * getScale(viewZoom);
+				paint.setStrokeWidth((float)gpxTrackWidth);
+				updatePaints(ts.getColor(g.getColor()), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
+
+				// Create a transient track/segment for display purposes only
+				TrkSegment tsCulled = new TrkSegment();
+				tsCulled.points = ts.culledPoints;
+				tsCulled.setColor(ts.getColor(g.getColor()));
+
+				drawSingleSegment(canvas, tileBox, tsCulled);
+			}
 		}
 	}
 
@@ -346,47 +421,54 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<TrkSegment> points) {
-		final QuadRect latLonBounds = tileBox.getLatLonBounds();
-		for (TrkSegment l : points) {
-			int startIndex = -1;
-			int endIndex = -1;
-		    int prevCross = 0;
-		    double shift = 0;
-			for (int i = 0; i < l.points.size(); i++) {
-				WptPt ls = l.points.get(i);
-				int cross = 0;
-				cross |= (ls.lon < latLonBounds.left - shift ? 1 : 0);
-				cross |= (ls.lon > latLonBounds.right + shift ? 2 : 0);
-				cross |= (ls.lat > latLonBounds.top + shift ? 4 : 0);
-				cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
-				if (i > 0) {
-					if ((prevCross & cross) == 0) {
-						if (endIndex == i - 1 && startIndex != -1) {
-							// continue previous line
-						} else {
-							// start new segment
-							if (startIndex >= 0) {
-								drawSegment(canvas, tileBox, l, startIndex, endIndex);
-							}
-							startIndex = i - 1;
-						}
-						endIndex = i;
-					}
-				}
-				prevCross = cross;
-			}
-			if (startIndex != -1) {
-				drawSegment(canvas, tileBox, l, startIndex, endIndex);
-			}
+		for (TrkSegment ts : points) {
+			drawSingleSegment(canvas, tileBox, ts);
 		}
 	}
-	
+
+	private void drawSingleSegment(Canvas canvas, RotatedTileBox tileBox, TrkSegment l) {
+
+		final QuadRect latLonBounds = tileBox.getLatLonBounds();
+
+		int startIndex = -1;
+		int endIndex = -1;
+		int prevCross = 0;
+		double shift = 0;
+		for (int i = 0; i < l.points.size(); i++) {
+			WptPt ls = l.points.get(i);
+			int cross = 0;
+			cross |= (ls.lon < latLonBounds.left - shift ? 1 : 0);
+			cross |= (ls.lon > latLonBounds.right + shift ? 2 : 0);
+			cross |= (ls.lat > latLonBounds.top + shift ? 4 : 0);
+			cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
+			if (i > 0) {
+				if ((prevCross & cross) == 0) {
+					if (endIndex == i - 1 && startIndex != -1) {
+						// continue previous line
+					} else {
+						// start new segment
+						if (startIndex >= 0) {
+							drawSegment(canvas, tileBox, l, startIndex, endIndex);
+						}
+						startIndex = i - 1;
+					}
+					endIndex = i;
+				}
+			}
+			prevCross = cross;
+		}
+		if (startIndex != -1) {
+			drawSegment(canvas, tileBox, l, startIndex, endIndex);
+		}
+	}
+
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 
 
-	
+
 	private void drawSegment(Canvas canvas, RotatedTileBox tb, TrkSegment l, int startIndex, int endIndex) {
 		TIntArrayList tx = new TIntArrayList();
 		TIntArrayList ty = new TIntArrayList();
@@ -418,7 +500,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			canvas.drawPath(path, paint2);
 		}
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-		
+
 	}
 	
 	
