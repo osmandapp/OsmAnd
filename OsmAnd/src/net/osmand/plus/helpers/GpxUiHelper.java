@@ -302,7 +302,7 @@ public class GpxUiHelper {
 				// tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position, light), 0, 0, 0);
 				// }
 				// tv.setCompoundDrawablePadding(padding);
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+				final CheckBox ch = ((CheckBox) v.findViewById(R.id.toggle_item));
 				if (adapter.getSelection(position) == -1) {
 					ch.setVisibility(View.INVISIBLE);
 				} else {

@@ -39,7 +39,7 @@
 		android:textSize="@dimen/default_desc_text_size"/>
 
 	<CheckBox
-		android:id="@+id/check_item"
+		android:id="@+id/toggle_item"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"

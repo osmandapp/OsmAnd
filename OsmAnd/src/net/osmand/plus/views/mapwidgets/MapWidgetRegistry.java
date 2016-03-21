@@ -353,13 +353,13 @@ public class MapWidgetRegistry {
 	
 
 	public void addControls(MapActivity map, ContextMenuAdapter cm, ApplicationMode mode) {
-		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.list_group_title_with_switch).reg();
 		addControls(map, cm, right, mode);
 		if(mode != ApplicationMode.DEFAULT) {
-			cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+			cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.list_group_title_with_switch).reg();
 			addControls(map, cm, left, mode);
 		}
-		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.list_group_title_with_switch).reg();
 		addControlsAppearance(map, cm, mode);		
 	}
 	

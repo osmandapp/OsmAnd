@@ -385,7 +385,7 @@ public class MapActivityActions implements DialogProvider {
 						String name = path.substring(path.lastIndexOf("/") + 1, path.length());
 						((TextView) convertView.findViewById(R.id.title)).setText(name);
 						convertView.findViewById(R.id.icon).setVisibility(View.GONE);
-						convertView.findViewById(R.id.check_item).setVisibility(View.GONE);
+						convertView.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 						return convertView;
 					}
 				};

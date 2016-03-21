@@ -863,43 +863,26 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private void applyDayNightMode() {
-		if (nightMode) {
-			if (listBackgroundView != null) {
-				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
-			} else {
-				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
-				listEmptyTextView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
-			}
-			if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS
-					&& visibleType != DashboardType.MAP_MARKERS_SELECTION) {
-				Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_dark));
-				listView.setDivider(d);
-				listView.setDividerHeight(dpToPx(1f));
-			} else {
-				listView.setDivider(null);
-			}
+		int backgroundColor = mapActivity.getResources().getColor(
+				nightMode ? R.color.ctx_menu_info_view_bg_dark
+						: R.color.ctx_menu_info_view_bg_light);
+		Drawable dividerDrawable = new ColorDrawable(mapActivity.getResources().getColor(
+				nightMode ? R.color.dashboard_divider_dark : R.color.dashboard_divider_dark));
+
+		if (listBackgroundView != null) {
+			listBackgroundView.setBackgroundColor(backgroundColor);
 		} else {
-			if (listBackgroundView != null) {
-				listBackgroundView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-			} else {
-				listView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-				listEmptyTextView.setBackgroundColor(mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-			}
-			if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS
-					&& visibleType != DashboardType.MAP_MARKERS_SELECTION) {
-				Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_light));
-				listView.setDivider(d);
-				listView.setDividerHeight(dpToPx(1f));
-			} else {
-				listView.setDivider(null);
-			}
+			listView.setBackgroundColor(backgroundColor);
+			listEmptyTextView.setBackgroundColor(backgroundColor);
+		}
+		if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS
+				&& visibleType != DashboardType.MAP_MARKERS_SELECTION) {
+			listView.setDivider(dividerDrawable);
+			listView.setDividerHeight(dpToPx(1f));
+		} else {
+			listView.setDivider(null);
 		}
 		AndroidUtils.setTextSecondaryColor(mapActivity, listEmptyTextView, nightMode);
-		/*
-		listView.setOverscrollFooter(new ColorDrawable(
-					nightMode ? mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_dark)
-							: mapActivity.getResources().getColor(R.color.ctx_menu_info_view_bg_light)));
-		*/
 	}
 
 	private int dpToPx(float dp) {
@@ -1031,7 +1014,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 						hideDashboard();
 					}
 				} else if (click != null) {
-					CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
+					CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 					if (btn != null && btn.getVisibility() == View.VISIBLE) {
 						btn.setChecked(!btn.isChecked());
 					} else {
@@ -1594,7 +1577,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			} else if (listBackgroundView != null) {
 				tileBoxHeightPx = 3 * (mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight) / 4;
 			}
-			mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, mFlexibleBlurSpaceHeight * 3/2);
+			mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, mFlexibleBlurSpaceHeight * 3 / 2);
 		}
 	}
 }

@@ -399,7 +399,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				LayoutInflater inflater = LayoutInflater.from(ctx);
 				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
 			}
-			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			TextView nameView = ((TextView) v.findViewById(R.id.title));
 			nameView.setText(section);
 			v.setOnClickListener(null);
 			TypedValue typedValue = new TypedValue();

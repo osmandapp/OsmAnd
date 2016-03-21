@@ -51,7 +51,7 @@ public class ContextMenuAdapter {
 
 		//boolean return type needed to desribe if drawer needed to be close or not
 		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
-			CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
+			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 			if (btn != null && btn.getVisibility() == View.VISIBLE) {
 				btn.setChecked(!btn.isChecked());
 				return false;
@@ -422,8 +422,8 @@ public class ContextMenuAdapter {
 				tv.setTypeface(null);
 			}
 
-			if (convertView.findViewById(R.id.check_item) != null) {
-				final CompoundButton ch = (CompoundButton) convertView.findViewById(R.id.check_item);
+			if (convertView.findViewById(R.id.toggle_item) != null) {
+				final CompoundButton ch = (CompoundButton) convertView.findViewById(R.id.toggle_item);
 				if (selectedList.get(position) != -1) {
 					ch.setOnCheckedChangeListener(null);
 					ch.setVisibility(View.VISIBLE);

@@ -276,7 +276,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		v.findViewById(R.id.divider).setVisibility(View.GONE);
 		v.findViewById(R.id.options).setVisibility(View.GONE);
 		v.findViewById(R.id.stop).setVisibility(View.VISIBLE);
-		v.findViewById(R.id.check_item).setVisibility(View.GONE);
+		v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 	}
 
 	@Override
@@ -801,7 +801,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				options.setVisibility(View.VISIBLE);
 			}
 
-			final CompoundButton checkItem = (CompoundButton) v.findViewById(R.id.check_item);
+			final CompoundButton checkItem = (CompoundButton) v.findViewById(R.id.toggle_item);
 			if (isSelectedGroup(groupPosition)) {
 				checkItem.setVisibility(View.VISIBLE);
 				v.findViewById(R.id.options).setVisibility(View.GONE);
@@ -1356,6 +1356,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		TextView descr = ((TextView) v.findViewById(R.id.description));
 		descr.setVisibility(View.GONE);
 
-		v.findViewById(R.id.check_item).setVisibility(View.GONE);
+		v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 	}
 }

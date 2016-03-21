@@ -649,7 +649,7 @@ public class WaypointDialogHelper {
 										 final int position, final ArrayAdapter<Object> thisAdapter, boolean nightMode) {
 		View v;
 		v = ctx.getLayoutInflater().inflate(R.layout.waypoint_header, null);
-		final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
+		final CompoundButton btn = (CompoundButton) v.findViewById(R.id.toggle_item);
 		btn.setVisibility(waypointHelper.isTypeConfigurable(type) ? View.VISIBLE : View.GONE);
 		btn.setOnCheckedChangeListener(null);
 		final boolean checked = waypointHelper.isTypeEnabled(type);
