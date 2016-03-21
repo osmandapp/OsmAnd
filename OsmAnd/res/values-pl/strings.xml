@@ -67,7 +67,7 @@
     <string name="shared_string_others">Inne</string>
     <string name="shared_string_no_thanks">Niepotrzebne</string>
     <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf.</string>
-    <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Musisz je najpierw pobrać, by używać map offline.</string>
+    <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Proszę zwrócić uwagę pobierając ją, aby używać map w trybie offline.</string>
     <string name="local_index_gpx_info_show">\n\nProszę nacisnąć i przytrzymać, aby wyświetlić opcje</string>
 
 
@@ -765,7 +765,7 @@
 
 
     <string name="download_files_not_enough_space">Nie ma wystarczająco miejsca, aby pobrać %1$s MB (dostępne miejsce: %2$s).</string>
-    <string name="download_files_question_space">Czy pobrać {0} plik(-i/-ów)? To potrzebuje {1} MB na stałe? Obecnie posiadasz dostępne {2} MB.</string>
+    <string name="download_files_question_space">Czy pobrać {0} plik(-i/-ów)? To potrzebuje {1} MB na stałe. Obecnie posiadasz dostępne {2} MB.</string>
     <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii POI odpowiadających zapytaniu:</string>
     <string name="favourites_edit_dialog_name">Nazwa</string>
     <string name="favourites_edit_dialog_category">Kategoria</string>
@@ -954,7 +954,7 @@
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. czy również ją zatrzymać?</string>
 
     <string name="close_changeset">Zamknij zestaw zmian</string>
-    <string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Market?</string>
+    <string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
     <string name="incomplete_locale">niekompletne</string>
     <string name="download_regular_maps">Mapa zwykła</string>
     <string name="rendering_attr_noAdminboundaries_name">Ukrywanie granic</string>
@@ -1011,7 +1011,7 @@
 
 
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
-    <string name="dropbox_plugin_description">Wtyczka Dropbox umożliwia synchronizację ścieżek i notatek audio/wideo z twoim kontem Dropbox.</string>
+    <string name="dropbox_plugin_description">Wtyczka Dropbox umożliwia Tobie synchronizację ścieżek i notatek audio/wideo z twoim kontem Dropbox.</string>
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
 
     <string name="intermediate_points_change_order">Zmień kolejność</string>
@@ -1253,7 +1253,7 @@
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
     <string name="calculate_osmand_route_gpx">Wyznacz trasę offline w OsmAnd</string>
-    <string name="keep_and_add_destination_point">Dodaj jako cel podróży</string>
+    <string name="keep_and_add_destination_point">Dodaj jako ostatni cel podróży</string>
     <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlaną trasę do nawigacji?</string>
 
     <string name="calculate_osmand_route_without_internet">Wyznacz segment trasy OsmAnd offline</string>
@@ -1320,8 +1320,7 @@
     <string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
     <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">"Wtyczka zapewnia funkcjonalność usługi OsMo - zaawansowanego monitorowania na żywo. Więcej szczegółów na http://osmo.mobi.
-\n\nZa jej pomocą można śledzić inne urządzenia lub samemu być śledzonym w obrębie grupy w czasie rzeczywistym oraz komunikować się ze sobą. Dostarcza różne opcje dla śledzenia sesji i śledzenia stałego.\n\nAnonimowe grupy tworzone są na określoną liczbę dni i limitowane są określonymi opcjami, np. brak zdalnego sterowania i brak administratora grupy. Natomiast w pełni funkcjonalne grupy mogą zostać utworzone na stronie, a dostęp do nich będą mieć tylko zarejestrowani użytkownicy. "</string>
+    <string name="osmo_plugin_description">"Wtyczka ta częściowo zapewnia funkcjonalność monitoringu OpenStreetMap, zobacz https://osmo.mobi\n\nMożesz śledzić wszystkie urządzenia należące do grupy w czasie rzeczywistym. Można również zobaczyć punkt i trasy przesłane do grupy, do której należą.\n\nGrupa nie została usunięta po kilku miesiącach, wprowadza ją zgodnie z regułą tworzenie grup na stronie OsMo.mobi "</string>
     <string name="osmo_plugin_name">Monitoring OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
@@ -1391,7 +1390,7 @@
     <string name="osmo_enable_tracker">Wysyłaj moją pozycję</string>
     <string name="osmo_control">Szybki dostęp do OsMo</string>
 
-    <string name="import_file_favourites">Zapisać punkty jako plik GPX czy zaimportować je do ulubionych?</string>
+    <string name="import_file_favourites">Zapisać dane jako plik GPX czy zaimportować je do Ulubionych?</string>
 
     <string name="osmo_follow">Śledź</string>
     <string name="osmo_sign_in">Zarejestruj</string>
@@ -1457,7 +1456,7 @@
 
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     <string name="osmo_group_by_invite">Dołącz do grupy przez zaproszenie</string>
-    <string name="osmo_group_information_desc">" - Wszystkie utworzone grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzenia bezpośrednio poprzez identyfikator Tracker id.\n - Prywatne grupy są ograniczone do 8 osób.\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodni, grupa zostanie usunięta.\n - Można ograniczyć dostęp do grupy przez zapraszanie tylko wybranych osób, ale do zarządzania grupą potrzebujesz użyć konsoli administracyjnej.\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Tworząc grupę należy nadać mu nazwę i wypełnić opis\n - Z aplikacji są tworzone tylko grupy prostego typu, czytaj więcej na stronie https://osmo.mobi/g/new\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodni, grupa zostanie usunięta.\n - Można ograniczyć dostęp do grupy przez zapraszanie tylko wybranych osób, ale do zarządzania grupą potrzebujesz użyć konsoli administracyjnej.\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi "</string>
     <string name="osmo_group_information">Proszę przeczytać przed założeniem grupy!</string>
     <string name="osmo_not_signed_in">Nie udało się zalogować do OsMo</string>
     <string name="osmo_gpx_points_downloaded">Pobrano %1$s punktów OsMo.</string>
@@ -1571,8 +1570,8 @@
     <string name="fav_point_emoticons_message">Nazwa ulubionego punktu została zmieniona na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
     <string name="print_route">Drukuj trasę</string>
     <string name="osmo_device_not_found">Nie odnaleziono urządzenia</string>
-    <string name="osmo_no_connection_msg">Serwis OsMo jest niedostępny. Proszę sprawdzić:\n- połączenie internetowe,\n- ustawienia,\n- Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup,\n- synchronizować grup i urządzeń z serwerem,\n- zarządzać grupami i urządzeniami w gabinecie.</string>
+    <string name="osmo_no_connection_msg">Nie można połączyć się z serwisem OsMo:\n- sprawdź połączenie internetowe,\n- sprawdź ustawienia,\n- sprawdź nasz Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup,\n- synchronizować grup i urządzeń z serwerem,\n- zarządzać grupami i urządzeniami osobistym pulpicie na stronie internetowej.</string>
     <string name="anonymous_user">Użytkownik anonimowy</string>
     <string name="logged_as">Zalogowano jako %1$s</string>
     <string name="rendering_category_routes">Trasy</string>
@@ -1907,14 +1906,14 @@
     <string name="default_speed_system_descr">Definiuje jednostki pomiaru prędkości</string>
     <string name="default_speed_system">Pomiar prędkości</string>
     <string name="si_nm">Mile morskie</string>
-    <string name="nm">nm</string>
+    <string name="nm">węzły</string>
     <string name="si_kmh">Kilometry na godzinę</string>
     <string name="si_mph">Mile na godzinę</string>
     <string name="si_m_s">Metry na sekundę</string>
     <string name="si_min_km">Minuty na kilometr</string>
     <string name="si_min_m">Minuty na milę</string>
     <string name="si_nm_h">Mile morskie na godzinę (węzły)</string>
-    <string name="nm_h">węzłów</string>
+    <string name="nm_h">węzłów/godzinę</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2096,8 +2095,8 @@
     <string name="select_map_marker">Wybierz znacznik mapy</string>
     <string name="map_markers_other">Inne znaczniki</string>
     <string name="download_files_error_not_enough_space">Za mało miejsca! To potrzebuje {3} MB tymczasowo i {1} MB na stałe. Obecnie posiadasz dostępne tylko {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(-i/-ów)? To potrzebuje {3} MB tymczasowo i {1} MB na stałe? Obecnie posiadasz dostępne {2} MB.</string>
-    <string name="upload_osm_note_description">Można przesłać swoje notatki OSM anonimowo ze swojego profilu OpenStreetMap.org.</string>
+    <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(-i/-ów)? To potrzebuje {3} MB tymczasowo i {1} MB na stałe. Obecnie posiadasz dostępne {2} MB.</string>
+    <string name="upload_osm_note_description">Można przesłać swoje notatki OSM anonimowo jeżeli użyjesz swojego profilu OpenStreetMap.org.</string>
     <string name="upload_osm_note">Prześlij notatki OSM</string>
     <string name="upload_anonymously">Wyślij anonimowo</string>
 <string name="show_map_markers_topbar">Pokaż górny pasek znaczników</string>
@@ -2129,7 +2128,7 @@
     <string name="rec_split_desc">Przenieś pliki gdy wykorzystana przestrzeń przekracza rozmiar pamięci nośnika</string>
     <string name="rec_split_clip_length_desc">Długość każdego nagranego pliku nie będzie dłuższa niż określony przedział czasu</string>
     <string name="rec_split_storage_size_desc">Ilość miejsca, jaka może być zajmowana przez wszystkie nagrane pliki</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Mapy i Nawigacja - wyznaczaj trasy i znajduj lokalizacje na mapie bez połączenia z Internetem. Pobierz mapę danego kraju przed wyjazdem w podróż, aby znaleźć miejsca i trasy w nieznanym obszarze. Podstawowe opcje: • Szczegółowe mapy 200 krajów • Nawigacja Offline z komunikatami głosowymi • Szukaj adresy w trybie offline • Informacje o lokalizacji na mapie: interesujących miejsc, kawiarnii, parkingów, sklepów • Dodawanie lokalizacji do ulubionych • nawigacja samochodowa, rowerowa i piesza Dodatkowe opcje: • Możliwość wyświetlania i nagrywania tras GPX • Opis Wikipedii punktów POI • Dodawanie zdjęć, nagrań i wideo notatek do mapy • Dzień i nocny tryb mapy dla wygodniejszej jazdy • Informacje o trasach transportu publicznego i przystankach • Ścieżki rowerowe i chodniki • Szlaków turystyczne do podróżowania po całym świecie • Mapy online z wielu źródeł • Informacja o jakości nawierzchni dróg i stanie oświetlenia ulicznego • Dodawanie, edycja i usuwanie POI (dla użytkowników OpenStreetMap.org) • Osmo - live monitoring innych urządzeń Pobierz niezawodny nawigator w twoim kraju - czy to Francja, Niemcy, Meksyk, Wielka Brytania, Hiszpania, Holandia, USA, Rosja, Brazylia lub inne państwo. Wtyczki: • Mapy konturowe i z cieniowaniem terenu https://goo.gl/7mojP8 Dane linii konturowych i wizualizacji terenu dodane do podstawowej mapy OsmAnd. • Mapy narciarskie https://goo.gl/pX6DxJ Informacje na temat tras zjazdowych, biegowych narciarskich, kolei linowych i wyciągów narciarskich. • Żeglarskie mapy https://goo.gl/0hEdxm Specjalne style mapy do oglądania wodnych drogowskazów nawigacyjnych dla głównych i przybrzeżnych nawigacji morskich. • Pozycja parkowania https://goo.gl/6JxQXF Pomaga oznaczyć lokalizację zaparkowanego samochodu i zobaczyć informację na temat ograniczeń czasu parkowania. Bądź na bieżąco! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Strona: http://osmand.net Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym zespołem wsparcia: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Mapy i Nawigacja - znajdowanie lokalizacji na mapie i obliczanie tras bez połączenia z Internetem. Pobierz mapę danego kraju przed wyjazdem w podróż, aby znaleźć miejsca i trasy w nieznanym obszarze. Podstawowe opcje: • Szczegółowe mapy 200 krajów • Nawigacja Offline z komunikatami głosowymi • Szukaj adresy w trybie offline • Informacje o lokalizacji na mapie: interesujących miejsc, kawiarnii, parkingów, sklepów • Dodawanie lokalizacji do ulubionych • nawigacja samochodowa, rowerowa i piesza Dodatkowe opcje: • Możliwość wyświetlania i nagrywania tras GPX • Opis Wikipedii punktów POI • Dodawanie zdjęć, nagrań i wideo notatek do mapy • Dzień i nocny tryb mapy dla wygodniejszej jazdy • Informacje o trasach transportu publicznego i przystankach • Ścieżki rowerowe i chodniki • Szlaków turystyczne do podróżowania po całym świecie • Mapy online z wielu źródeł • Informacja o jakości nawierzchni dróg i stanie oświetlenia ulicznego • Dodawanie, edycja i usuwanie POI (dla użytkowników OpenStreetMap.org) • Osmo - live monitoring innych urządzeń Pobierz niezawodny nawigator w twoim kraju - czy to Francja, Niemcy, Meksyk, Wielka Brytania, Hiszpania, Holandia, USA, Rosja, Brazylia lub inne państwo. Wtyczki: • Mapy konturowe i z cieniowaniem terenu https://goo.gl/7mojP8 Dane linii konturowych i wizualizacji terenu dodane do podstawowej mapy OsmAnd. • Mapy narciarskie https://goo.gl/pX6DxJ Informacje na temat tras zjazdowych, biegowych narciarskich, kolei linowych i wyciągów narciarskich. • Żeglarskie mapy https://goo.gl/0hEdxm Specjalne style mapy do oglądania wodnych drogowskazów nawigacyjnych dla głównych i przybrzeżnych nawigacji morskich. • Pozycja parkowania https://goo.gl/6JxQXF Pomaga oznaczyć lokalizację zaparkowanego samochodu i zobaczyć informację na temat ograniczeń czasu parkowania. Bądź na bieżąco! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Strona: http://osmand.net Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym zespołem wsparcia: support@osmand.net. "</string>
     <string name="storage_directory_readonly_desc">Wybrany katalog przechowywania danych umożliwia tylko ich odczyt. Katalog przechowywania został tymczasowo umieszczony w pamięci wewnętrznej. Proszę wybrać prawidłowy katalog przechowywania danych.</string>
     <string name="storage_directory_shared">Pamięć współdzielona</string>
     <string name="osm_live_subscribe_btn">Zasubskrybuj</string>
@@ -2146,4 +2145,28 @@
     <string name="osm_live_thanks">Dziękujemy za zasubskrybowanie bieżących aktualizacji!</string>
     <string name="osm_live_subscription_settings">Ustawienia subskrypcji</string>
     <string name="show_transparency_seekbar">Pasek przezroczystości</string>
-    </resources>
+    <string name="no_map_markers_found">Proszę dodać znacznik na mapie</string>
+    <string name="no_waypoints_found">Nie znaleziono punktów</string>
+    <string name="release_2_3">" • OSM Live. Wspieraj współtwórców map i programistów i uzyskaj godzinowe aktualizacji mapy.\n\n  • Znaczniki mapy. Nowy sposób na szybki wybór miejsca na mapie.\n\n  • Bardziej szczegółowe mapy OSM z oznaczeniami numeracji dróg specyficznymi dla konkretnego kraju oraz wiele nowych funkcji map.\n\n  • Ulepszony wygląd i przygotowanie trasy.\n\n  • Wiele ulepszeń w menu kontekstowym mapy, takie jak kontekstowe odnośniki adresu.\n\n  i więcej… "</string>
+    <string name="shared_string_move_up">Podnieś</string>
+    <string name="shared_string_move_down">Opuść</string>
+    <string name="finish_navigation">Zakończ nawigację</string>
+    <string name="shared_string_topbar">Belka górna</string>
+    <string name="osm_user_stat">Edycji %1$s, range %2$s, zmian łącznie %3$s</string>
+    <string name="osm_live_subscription">Subskrypcja OSM Live</string>
+    <string name="osm_live_email_desc">Potrzebujemy go, aby zapewnić Tobie informacje o wkładzie</string>
+    <string name="osm_live_user_public_name">Nazwa Publiczna</string>
+    <string name="osm_live_hide_user_name">Nie pokazuj mnie w raportach</string>
+    <string name="osm_live_support_region">Wspierane regiony</string>
+    <string name="osm_live_month_cost">Koszt miesięczny</string>
+    <string name="osm_live_month_cost_desc">Miesięczna płatność</string>
+    <string name="osm_live_active">Aktywny</string>
+    <string name="osm_live_not_active">Nieaktywny</string>
+    <string name="osm_live_enter_user_name">Proszę wprowadź nazwę publiczną</string>
+    <string name="osm_live_region_desc">Część wpłat zostanie wysłana do użytkowników OSM, którzy prześlą zmiany na mapie w tym regionie</string>
+    <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OSM Live</string>
+
+    <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata. Większa część dochodów powraca do społeczności OSM i jest wypłacana za każdy wkład OSM. W przypadku, kiedy lubisz OsmAnd i OSM i chce je wspierać, jest to doskonały sposób, aby to zrobić.</string>
+    
+    <string name="file_name_containes_illegal_char">Nazwa pliku zawiera niedozwolony znak</string>
+</resources>
