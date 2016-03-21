@@ -2417,4 +2417,6 @@
 	<string name="poi_health_specialty_psychiatry_yes">醫療專業：精神科</string>
 	<string name="poi_health_specialty_neurology_yes">醫療專業：神經科</string>
 	<string name="poi_seamark_dyke">防波堤</string>
+	<string name="poi_historic_period_villager">歷史時期：村民 (時代 I, II, 1580 BC – 133 AC)</string>
+	<string name="poi_historic_period_urban">歷史時期：城市（時代，133 AC - 374 AC）</string>
 	</resources>
