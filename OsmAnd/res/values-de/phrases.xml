@@ -2595,4 +2595,81 @@
 	<string name="poi_nuclear_explosion_type_underwater">Explosionsart: unter Wasser</string>
 	<string name="poi_solarium">Solarium</string>
 
-</resources>
+<string name="poi_nuclear_explosion_type_underground_shaft">Explosionstyp: Untergrund, Welle</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Explosionstyp: atmosphärisch, Luft</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Explosionstyp: atmosphärisch, Oberfläche, Turm</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Explosionstyp: atmosphärisch, Ballon</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Explosionstyp: atmosphärisch, Wasseroberfläche , Barge</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Explosionstyp: Kraterbruch (flache Untergrund )</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Explosionstyp: atmosphärisch, Rakete oder Raketen</string>
+	<string name="poi_nuclear_explosion_date_utc">Explosionsdatum (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Schussname (en)</string>
+	<string name="poi_nuclear_explosion_series">Explosionsserie</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Explosionzweck: Atomwaffen verbunden</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Explosionszweck: Waffeneffekte</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Explosionszweck: Sicherheitsexperiment</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Explosionszweck: Forschung für friedliche Anwendungen</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Explosionszweck: Grundlagenforschung</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Explosionszweck: industrielle Anwendung, Aushub Hohlraum</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Explosionszweck: industrielle Anwendung, seismisch klingend</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Explosionszweck: industrielle Anwendung, Öl Stimulation</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Explosionszweck: industrielle Anwendung</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Explosionszweck: industrielle Anwendung, Erdbewegung</string>
+	<string name="poi_nuclear_explosion_time_utc">Explosionszeit (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Explosionsausbeute</string>
+	<string name="poi_nuclear_explosion_hole">Explosionsloch</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Höhe der Explosion</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Höhe des Zentrums</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Körperwelle Größe</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Explosionsalve: erste Detonation eines Salvetests</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosionsalve: zweite Detonation eines Salvetests</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Explosion: Kraterdurchmesser</string>
+	<string name="poi_nuclear_explosion_warhead">Explosion: Sprengkopf</string>
+	<string name="poi_nuclear_explosion_device">Explosion: Gerät</string>
+
+	<string name="poi_religion">Religiöse Waren</string>
+
+	<string name="poi_plant_nursery">Baumschule</string>
+
+	<string name="poi_compressed_air_yes">Druckluft : Ja</string>
+	<string name="poi_compressed_air_no">Druckluft : Nein</string>
+
+	<string name="poi_car_wash_yes">Autowäsche: Ja</string>
+
+	<string name="poi_vacuum_cleaner_yes">Staubsauger: Ja</string>
+	<string name="poi_vacuum_cleaner_no">Staubsauger: Nein</string>
+	<string name="poi_amenity_vacuum_cleaner">Staubsauger</string>
+
+	<string name="poi_sport_free_flying">Freie Fliegen (Sport)</string>
+	<string name="poi_bicycle_repair_station">Selbstreparaturstation für Fahrräder</string>
+	<string name="poi_water_tap">Wasserhahn</string>
+	<string name="poi_button_operated_yes">Tastenbetätigung: Ja</string>
+	<string name="poi_button_operated_no">Tastenbetätigung: Nein</string>
+
+	<string name="poi_free_flying_site_takeoff">Freies Flugfeld : Start</string>
+	<string name="poi_free_flying_site_landing">Freies Flugfeld : Landeplatz</string>
+	<string name="poi_free_flying_site_toplanding">Freies Flugfeld: Landepunkt</string>
+	<string name="poi_free_flying_site_towing">Freies Flugfeld: Abschleppen</string>
+	<string name="poi_free_flying_site_training">Freies Flugfeld: Ausbildung</string>
+	<string name="poi_free_flying_official_yes">Freies Fliegen offiziell: Ja</string>
+	<string name="poi_free_flying_official_no">Freies Fliegen offiziell: Nein</string>
+	<string name="poi_free_flying_paragliding_yes">Paragleiten: Ja</string>
+	<string name="poi_free_flying_paragliding_no">Paragleiten: Nein</string>
+	<string name="poi_free_flying_hanggliding_yes">Drachenfliegen: Ja</string>
+	<string name="poi_free_flying_hanggliding_no">Drachenfliegen: Nein</string>
+	<string name="poi_free_flying_rigid_yes">Freies Fliegen strikt: Ja</string>
+	<string name="poi_free_flying_rigid_no">Freies Fliegen strikt: Nein</string>
+	<string name="poi_free_flying_site_orientation_n">Freier Flugplatz Ausrichtung: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Freier Flugplatz Ausrichtung: NO</string>
+	<string name="poi_free_flying_site_orientation_e">Freier Flugplatz Ausrichtung: O</string>
+	<string name="poi_free_flying_site_orientation_se">Freier Flugplatz Ausrichtung: SO</string>
+	<string name="poi_free_flying_site_orientation_s">Freier Flugplatz Ausrichtung: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Freier Flugplatz Ausrichtung: SW</string>
+	<string name="poi_free_flying_site_orientation_w">Freier Flugplatz Ausrichtung: W</string>
+	<string name="poi_free_flying_site_orientation_nw">Freier Flugplatz Ausrichtung: NW</string>
+	<string name="poi_free_flying_no_flight_time">Keine Flugzeit (freies Fliegen)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Gästerichtlinien für das freie Fliegen: Ja</string>
+	<string name="poi_free_flying_guest_guidelines_no">Gästerichtlinien für das freie Fliegen: Nein</string>
+
+	<string name="poi_protection_title">Schutztitel</string>
+	</resources>
