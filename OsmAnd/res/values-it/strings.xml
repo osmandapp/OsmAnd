@@ -1440,7 +1440,7 @@
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     <string name="osmo_not_signed_in">Login a OsMo fallito</string>
     <string name="osmo_group_by_invite">Accedere su invito</string>
-    <string name="osmo_group_information_desc">" - Tutti i gruppi creati sono pubblici! Se volete rimanere anonimi connettete i dispositivi direttamente tramite gli id di tracciamento.\n - I gruppi privati sono limitati a 8 persone.\n - Nel caso di inattività o di attività di una sola persona per due settimane, il gruppo sarà cancellato.\n - È possibile limitare l\'accesso al gruppo, tipo solo su invito, per amministrare il gruppo devi andare al pannello di amministrazione.\n - Se avete bisogno di creare un gruppo ad altre condizioni per favore visitate http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Quando crei un gruppo, per favore, dagli un nome e una descrizione\n - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new\n - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti\n - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI\n - I gruppi privati sono limitati a 8 persone\n - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi\n - Se avete altre necessità particolari - per favore conattatte il supporto osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.\nPotrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.\nVuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_hideBuildings_name">Nascondi gli edifici</string>
@@ -2223,7 +2223,7 @@
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
     <string name="release_2_3">" • OSM Live. Sostiene i contributori della mappa e gli sviluppatori e si hanno gli aggiornamenti orari della mappa.\n\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.\n\n • Mappe OSM più dettagliate con scudetti specifici per ogni nazione dei nomi delle strade e molte nuove caratteristiche.
 \n\n • Aspetto e gestione migliorati della preparazione del percorso.
-\n\n • Molti miglioramenti nel menu contestuale dells mappa e nella ricerca contestuale degli indirizzi.\n\n e altro… "</string>
+\n\n • Molti miglioramenti nel menu contestuale della mappa e nella ricerca contestuale degli indirizzi.\n\n e altro… "</string>
     <string name="rec_split">Frazionatore delle registrazioni</string>
     <string name="rec_split_title">Usa il frazionamento delle registrazioni</string>
     </resources>
