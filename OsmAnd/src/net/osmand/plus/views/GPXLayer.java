@@ -168,8 +168,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				if (currentTrack) {
 					additional = (additional.length() == 0 ? "" : ";") + "currentTrack=true";
 				}
-				renderingReq.setIntFilter(rrs.PROPS.R_MINZOOM, tileBox.getZoom());
-				renderingReq.setIntFilter(rrs.PROPS.R_MAXZOOM, tileBox.getZoom());
+				req.setIntFilter(rrs.PROPS.R_MINZOOM, tileBox.getZoom());
+				req.setIntFilter(rrs.PROPS.R_MAXZOOM, tileBox.getZoom());
 				if (additional.length() > 0) {
 					req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
 				}
