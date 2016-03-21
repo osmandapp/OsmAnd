@@ -140,7 +140,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity());
+		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom());
 		if (hsh != cachedHash) {
 			cachedHash = hsh;
 			cachedColor = view.getResources().getColor(R.color.gpx_track);
@@ -168,6 +168,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				if (currentTrack) {
 					additional = (additional.length() == 0 ? "" : ";") + "currentTrack=true";
 				}
+				renderingReq.setIntFilter(rrs.PROPS.R_MINZOOM, tileBox.getZoom());
+				renderingReq.setIntFilter(rrs.PROPS.R_MAXZOOM, tileBox.getZoom());
 				if (additional.length() > 0) {
 					req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
 				}
