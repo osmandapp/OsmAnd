@@ -804,14 +804,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
-				listView.scrollTo(0, 0);
-				listView.clearParams();
-				if (listView instanceof ObservableListView) {
-					onScrollChanged(listView.getScrollY(), false, false);
-				}
 				if (refresh) {
 					refreshContent(false);
 				} else {
+					listView.scrollTo(0, 0);
+					listView.clearParams();
+					onScrollChanged(listView.getScrollY(), false, false);
 					updateListAdapter();
 				}
 				updateListBackgroundHeight();
@@ -853,6 +851,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					df.get().onCloseDash();
 				}
 			}
+		}
+	}
+
+	public void updateDashboard() {
+		if (visibleType == DashboardType.ROUTE_PREFERENCES) {
+			refreshContent(false);
 		}
 	}
 

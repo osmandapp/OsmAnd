@@ -44,10 +44,10 @@ import java.util.Set;
 public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
+	public static final String INTENT_APP_MODE = "INTENT_APP_MODE";
 
-	
 	protected OsmandSettings settings;
-	protected final boolean profileSettings ;
+	protected final boolean profileSettings;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
 	private ApplicationMode previousAppMode; 
 
@@ -388,7 +388,14 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		super.onResume();
 		if (profileSettings) {
 			previousAppMode = settings.getApplicationMode();
-			boolean found = setSelectedAppMode(previousAppMode);
+			boolean found;
+			if (getIntent() != null && getIntent().hasExtra(INTENT_APP_MODE)) {
+				String modeStr = getIntent().getStringExtra(INTENT_APP_MODE);
+				ApplicationMode mode = ApplicationMode.valueOfStringKey(modeStr, previousAppMode);
+				found = setSelectedAppMode(mode);
+			} else {
+				found = setSelectedAppMode(previousAppMode);
+			}
 			if (!found) {
 				getSpinner().setSelection(0);
 			}

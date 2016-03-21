@@ -1043,7 +1043,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			@Override
 			public void run() {
 				String top = OsMoGroupsActivity.this.operation;
-				if (top.equals(operation) || (operation != null && operation.equals(top))) {
+				if (operation != null && operation.equals(top)) {
 					hideProgressBar();
 				}
 				if (joinGroup && (operation != null && operation.startsWith("GROUP_CONNECT"))) {
