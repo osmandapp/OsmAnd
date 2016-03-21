@@ -13,6 +13,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -74,6 +75,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.DynamicListViewCallbacks;
@@ -81,6 +83,7 @@ import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.DismissCallbacks;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -537,6 +540,24 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				}
 			});
 		}
+
+		toolbar.getMenu().clear();
+		toolbar.inflateMenu(R.menu.refresh_menu);
+		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem menuItem) {
+				if (menuItem.getItemId() == R.id.action_refresh) {
+					MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+					registry.resetToDefault();
+					MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+					if (mil != null) {
+						mil.recreateControls();
+					}
+					updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
+				}
+				return false;
+			}
+		});
 	}
 
 

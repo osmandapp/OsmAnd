@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools">
-	<application tools:replace="android:icon"
-		android:icon="@drawable/icon_free">
-		<service tools:replace="android:process"
-		    android:process="net.osmand"
-			android:name="net.osmand.plus.NavigationService"/>
-		
-		</application>
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:icon="@drawable/icon_free"
+        tools:replace="android:icon">
+
+        <service
+            android:name="net.osmand.plus.NavigationService"
+            tools:replace="android:process"
+            android:process="net.osmand"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            tools:replace="android:authorities"
+            android:authorities="net.osmand.fileprovider"/>
+    </application>
 </manifest> 

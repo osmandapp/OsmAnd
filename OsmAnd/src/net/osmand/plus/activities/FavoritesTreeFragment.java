@@ -580,7 +580,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						sendIntent.setAction(Intent.ACTION_SEND);
 						sendIntent.putExtra(Intent.EXTRA_TEXT, "Favourites.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, getMyApplication()));
 						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
-						sendIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getActivity(), "net.osmand.fileprovider", dst));
+						sendIntent.putExtra(Intent.EXTRA_STREAM,
+								FileProvider.getUriForFile(getActivity(),
+										getActivity().getPackageName() + ".fileprovider", dst));
 						sendIntent.setType("text/plain");
 						startActivity(sendIntent);
 					} catch (IOException e) {

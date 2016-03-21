@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,11 @@ public class ContextMenuAdapter {
 
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
 	}
 
 	public interface OnIntegerValueChangedListener {
-		public boolean onIntegerValueChangedListener(int newValue);
+		boolean onIntegerValueChangedListener(int newValue);
 	}
 
 	public static abstract class OnRowItemClick implements OnContextMenuClick {
@@ -74,6 +75,7 @@ public class ContextMenuAdapter {
 
 	private final Context ctx;
 	private View anchor;
+	@LayoutRes
 	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
 			R.layout.list_menu_item : R.layout.list_menu_item_native;
 	final TIntArrayList items = new TIntArrayList();

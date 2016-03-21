@@ -88,5 +88,4 @@
         android:src="@drawable/ic_action_edit_dark"
         android:visibility="gone"/>
 
-
 </android.support.v7.widget.Toolbar>
