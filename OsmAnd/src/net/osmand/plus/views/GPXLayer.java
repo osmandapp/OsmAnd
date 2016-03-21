@@ -357,8 +357,38 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private double getScale(int zoom) {
-		return 75*Math.pow(2.0, (zoom - 18) / 2.0);
+
+		final double handRolledMagnification[] = {
+
+			// Calculation: 2^((18-zoom)/2) and then handcrafted to finesse the visuals
+			// Trimmed to 0 when not to be displayed, and all zooms after last entry use same value as last
+			// Adjust the constant multiplier on the return value to make things a bit bigger or smaller
+
+				0, 					// 0
+				0,				  	// 1
+				0,					// 2
+				0,				  	// 3
+				0,			  		// 4
+				0,				  	// 5
+				0,		 	 		// 6
+				0.0220970869121,  	// 7		1st zoom level where GPS tracks visible
+				0.03125,  			// 8
+				0.0441941738242,  	// 9
+				0.0625,  			// 10
+				0.0883883476483,  	// 11
+				0.125,  			// 12
+				0.176776695297,  	// 13
+				0.25, 	 			// 14
+				0.353553390593,  	// 15
+				0.5,  				// 16		last zoom level where things get bigger
+
+				// add or remove extra zoom level entries - the code will work OK as it's self-configuring
+		};
+
+		int clamped = Math.max(0, Math.min(zoom, handRolledMagnification.length-1));
+		return 60.0 * handRolledMagnification[clamped];
 	}
+
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
@@ -387,16 +417,19 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				}
 
 				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
+				// If width becomes 0, then track is not displayed.
 				double gpxTrackWidth = ts.getGpxZoom(g.getGpxZoom()) * getScale(viewZoom);
-				paint.setStrokeWidth((float)gpxTrackWidth);
-				updatePaints(ts.getColor(g.getColor()), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
+				if (gpxTrackWidth > 0) {
+					paint.setStrokeWidth((float) gpxTrackWidth);
+					updatePaints(ts.getColor(g.getColor()), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
 
-				// Create a transient track/segment for display purposes only
-				TrkSegment tsCulled = new TrkSegment();
-				tsCulled.points = ts.culledPoints;
-				tsCulled.setColor(ts.getColor(g.getColor()));
+					// Create a transient track/segment for display purposes only
+					TrkSegment tsCulled = new TrkSegment();
+					tsCulled.points = ts.culledPoints;
+					tsCulled.setColor(ts.getColor(g.getColor()));
 
-				drawSingleSegment(canvas, tileBox, tsCulled);
+					drawSingleSegment(canvas, tileBox, tsCulled);
+				}
 			}
 		}
 	}
@@ -426,7 +459,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
+
 	private void drawSingleSegment(Canvas canvas, RotatedTileBox tileBox, TrkSegment l) {
+
+		//TODO: This routine FAILS if the first segment starts onscreen - it is not displayed.
+		//TODO: remove stuff from inner loop - e.g, the +-shift can be precalculated
+		//TODO: remove i>0 test by putting initial prevCross calculation outside loop
 
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 
@@ -436,17 +474,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		double shift = 0;
 		for (int i = 0; i < l.points.size(); i++) {
 			WptPt ls = l.points.get(i);
-			int cross = 0;
-			cross |= (ls.lon < latLonBounds.left - shift ? 1 : 0);
-			cross |= (ls.lon > latLonBounds.right + shift ? 2 : 0);
-			cross |= (ls.lat > latLonBounds.top + shift ? 4 : 0);
-			cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
+			int cross = (ls.lon < latLonBounds.left - shift ? 1 : 0)
+					| (ls.lon > latLonBounds.right + shift ? 2 : 0)
+					| (ls.lat > latLonBounds.top + shift ? 4 : 0)
+					| (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
 			if (i > 0) {
 				if ((prevCross & cross) == 0) {
 					if (endIndex == i - 1 && startIndex != -1) {
 						// continue previous line
 					} else {
-						// start new segment
+						// draw previous segment and start a new segment
 						if (startIndex >= 0) {
 							drawSegment(canvas, tileBox, l, startIndex, endIndex);
 						}
@@ -461,6 +498,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			drawSegment(canvas, tileBox, l, startIndex, endIndex);
 		}
 	}
+
 
 
 	@Override
