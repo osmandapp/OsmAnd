@@ -139,13 +139,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void updateLayerStyle() {
 		cachedHash = -1;
 	}
-	
+
 	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
 		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity());
 		if (hsh != cachedHash) {
 			cachedHash = hsh;
+
 			cachedColor = view.getResources().getColor(R.color.gpx_track);
 			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
@@ -191,7 +192,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					}
 				} else {
 					System.err.println("Rendering attribute gpx is not found !");
-					paint.setStrokeWidth(7 * view.getDensity());
+					//paint.setStrokeWidth(7 * view.getDensity());					Handled by new auto-sizing code
 				}
 			}
 		}
@@ -420,8 +421,15 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				// If width becomes 0, then track is not displayed.
 				double gpxTrackWidth = ts.getGpxZoom(g.getGpxZoom()) * getScale(viewZoom);
 				if (gpxTrackWidth > 0) {
+
+					// Set "ideal" track width first. Shadows, etc., appear to use the current paint's track width as a starting
+					// point, so this should be compatible with those additional effects.
 					paint.setStrokeWidth((float) gpxTrackWidth);
+
 					updatePaints(ts.getColor(g.getColor()), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
+
+
+
 
 					// Create a transient track/segment for display purposes only
 					TrkSegment tsCulled = new TrkSegment();
@@ -483,7 +491,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					if (endIndex == i - 1 && startIndex != -1) {
 						// continue previous line
 					} else {
-						// draw previous segment and start a new segment
+						// draw previous segment and start new segment
 						if (startIndex >= 0) {
 							drawSegment(canvas, tileBox, l, startIndex, endIndex);
 						}
