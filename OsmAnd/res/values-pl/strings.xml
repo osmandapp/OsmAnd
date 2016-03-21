@@ -855,7 +855,7 @@
     <string name="map_widget_speed">Prędkość</string>
     <string name="map_widget_distance">Cel</string>
     <string name="map_widget_altitude">Wysokość</string>
-    <string name="map_widget_time">Czas do osiągnięcia celu</string>
+    <string name="map_widget_time">Czas do celu</string>
     <string name="map_widget_next_turn">Następny zakręt</string>
     <string name="map_widget_next_turn_small">Następny zakręt (mały)</string>
     <string name="map_widget_next_next_turn">Drugi zakręt</string>
@@ -1311,7 +1311,7 @@
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     <string name="interrupt_music_descr">Wstrzymuje odtwarzanie muzyki podczas komunikatów</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
-    <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
+    <string name="always_center_position_on_map">Zawsze wyśrodkowana pozycja</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
     <string name="localization_pref_title">Lokalizacja</string>
@@ -1363,7 +1363,7 @@
 
 
     <string name="osmo_edit_device">Zmień właściwości użytkownika</string>
-    <string name="osmo_edit_color">Kolor wyświetlacza</string>
+    <string name="osmo_edit_color">Kolor wyświetlania</string>
     <string name="osmo_group_info">Informacje</string>
     <string name="osmo_group">Grupa OsMo</string>
     <string name="osmo_group_share">W celu dołączenia do grupy %2$s, proszę określić identyfikator grupy (%1$s) lub kliknąć %3$s.</string>
@@ -1414,7 +1414,7 @@
 
     <string name="shared_string_my_tracks">Moje trasy</string>
     <string name="shared_string_my_favorites">Ulubione</string>
-    <string name="shared_string_my_places">Miejsca</string>
+    <string name="shared_string_my_places">Moje Miejsca</string>
 
     <string name="gpx_info_subtracks">"Ślady podrzędne: %1$s "</string>
     <string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
@@ -1857,8 +1857,8 @@
     <string name="error_message_pattern">Błąd: {0}</string>
     <string name="av_locations">Położenia</string>
     <string name="plugin_settings">Wtyczki</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Omijanie pociągów wahadłowych</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Omijanie pociągów wahadłowych</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Omijanie przejazdów kolejowych</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Omijanie przejazdów kolejowych</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
     <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
     <string name="dahboard_options_dialog_title">Opcje kokpitu</string>
@@ -2138,7 +2138,7 @@
     <string name="number_of_recipients">Liczba odbiorców</string>
     <string name="report">Raport</string>
     <string name="avoid_road">Omiń drogę</string>
-    <string name="recalculate_route">Wyznacz ponownie trasę</string>
+    <string name="recalculate_route">Wyznacz trasę ponownie</string>
     <string name="open_street_map_login_and_pass">Nazwa użytkownika i hasło OpenStreetMap</string>
     <string name="osm_editors_ranking">Ranking edytorów OSM</string>
     <string name="osm_live_enter_email">Proszę wprowadzić prawidłowy adres e-mail</string>
