@@ -1382,7 +1382,7 @@
     <string name="osmo_center_location">Centra nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
     <string name="osmo_use_server_name">Nome registrato</string>
-    <string name="osmo_connect_to_my_nickname">Nick</string>
+    <string name="osmo_connect_to_my_nickname">Nick name</string>
     <string name="osmo_user_name">Utente</string>
 
 
@@ -1440,7 +1440,7 @@
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     <string name="osmo_not_signed_in">Login a OsMo fallito</string>
     <string name="osmo_group_by_invite">Accedere su invito</string>
-    <string name="osmo_group_information_desc">" - Quando crei un gruppo, per favore, dagli un nome e una descrizione\n - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new\n - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti\n - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI\n - I gruppi privati sono limitati a 8 persone\n - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi\n - Se avete altre necessità particolari - per favore conattatte il supporto osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">" - Quando crei un gruppo, per favore, dagli un nome e una descrizione\n - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new\n - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti\n - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI\n - I gruppi privati sono limitati a 8 persone\n - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi\n - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.\nPotrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.\nVuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_hideBuildings_name">Nascondi gli edifici</string>
