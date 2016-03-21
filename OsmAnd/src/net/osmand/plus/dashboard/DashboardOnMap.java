@@ -32,7 +32,6 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -542,22 +541,24 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 
 		toolbar.getMenu().clear();
-		toolbar.inflateMenu(R.menu.refresh_menu);
-		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem menuItem) {
-				if (menuItem.getItemId() == R.id.action_refresh) {
-					MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
-					registry.resetToDefault();
-					MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-					if (mil != null) {
-						mil.recreateControls();
+		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
+			toolbar.inflateMenu(R.menu.refresh_menu);
+			toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem menuItem) {
+					if (menuItem.getItemId() == R.id.action_refresh) {
+						MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+						registry.resetToDefault();
+						MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+						if (mil != null) {
+							mil.recreateControls();
+						}
+						updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
 					}
-					updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
+					return false;
 				}
-				return false;
-			}
-		});
+			});
+		}
 	}
 
 
@@ -953,20 +954,20 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 		} else {
 
-			if (DashboardType.CONFIGURE_SCREEN == visibleType) {
+			if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 				cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
-			} else if (DashboardType.CONFIGURE_MAP == visibleType) {
+			} else if (visibleType == DashboardType.CONFIGURE_MAP) {
 				cm = new ConfigureMapMenu().createListAdapter(mapActivity);
-			} else if (DashboardType.LIST_MENU == visibleType) {
+			} else if (visibleType == DashboardType.LIST_MENU) {
 				cm = mapActivity.getMapActions().createMainOptionsMenu();
-			} else if (DashboardType.ROUTE_PREFERENCES == visibleType) {
+			} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
 				RoutePreferencesMenu routePreferencesMenu = new RoutePreferencesMenu(mapActivity);
 				ArrayAdapter<LocalRoutingParameter> listAdapter = routePreferencesMenu.getRoutePreferencesDrawerAdapter(nightMode);
 				OnItemClickListener listener = routePreferencesMenu.getItemClickListener(listAdapter);
 				updateListAdapter(listAdapter, listener);
-			} else if (DashboardType.UNDERLAY_MAP == visibleType) {
+			} else if (visibleType == DashboardType.UNDERLAY_MAP) {
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.UNDERLAY);
-			} else if (DashboardType.OVERLAY_MAP == visibleType) {
+			} else if (visibleType == DashboardType.OVERLAY_MAP) {
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.OVERLAY);
 			}
 			if (cm != null) {
