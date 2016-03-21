@@ -2140,4 +2140,6 @@
     <string name="finish_navigation">Avsluta navigeringen</string>
     <string name="full_report">Fullständig rapport</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap inloggning och lösenord</string>
+    <string name="no_map_markers_found">Lägg till kartmarkörer via kartan</string>
+    <string name="no_waypoints_found">Hittar inga waypoints</string>
     </resources>
