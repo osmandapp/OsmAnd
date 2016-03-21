@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,7 @@ public class ContextMenuAdapter {
 
 	private final Context ctx;
 	private View anchor;
+	@LayoutRes
 	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
 			R.layout.list_menu_item : R.layout.list_menu_item_native;
 	final TIntArrayList items = new TIntArrayList();

@@ -6,6 +6,6 @@
 		<service tools:replace="android:process"
 		    android:process="net.osmand"
 			android:name="net.osmand.plus.NavigationService"/>
-		
+
 		</application>
 </manifest> 

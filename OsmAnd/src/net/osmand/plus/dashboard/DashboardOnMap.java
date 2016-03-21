@@ -13,6 +13,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -489,8 +490,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				backPressed();
 			}
 		});
-		ImageView refreshToolbarItem = (ImageView) dashboardView.findViewById(R.id.toolbar_refresh);
-		refreshToolbarItem.setVisibility(View.GONE);
 
 		if (waypointsVisible && getMyApplication().getWaypointHelper().getAllPoints().size() > 0) {
 			if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
@@ -542,11 +541,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			});
 		}
 
-		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			refreshToolbarItem.setVisibility(View.VISIBLE);
-			settingsButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+		toolbar.getMenu().clear();
+		toolbar.inflateMenu(R.menu.refresh_menu);
+		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem menuItem) {
+				if (menuItem.getItemId() == R.id.action_refresh) {
 					MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
 					registry.resetToDefault();
 					MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
@@ -555,8 +555,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					}
 					updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
 				}
-			});
-		}
+				return false;
+			}
+		});
 	}
 
 

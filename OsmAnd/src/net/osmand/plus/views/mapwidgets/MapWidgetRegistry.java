@@ -479,7 +479,7 @@ public class MapWidgetRegistry {
 	
 	public ContextMenuAdapter getViewConfigureMenuAdapter(final MapActivity map) {
 		final ContextMenuAdapter cm = new ContextMenuAdapter(map);
-		cm.setDefaultLayoutId(R.layout.drawer_list_item);
+		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
 		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
 
