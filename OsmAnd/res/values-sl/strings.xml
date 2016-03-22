@@ -1302,7 +1302,7 @@
 
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
-    <string name="osmo_plugin_description">"Vstavek OsMo omogoča napredno sledenje v živo. Za več informacij si oglejte spletno stran http://osmo.mobi.\n\nSledilnik Osmo omogoča sledenje napravam, ki objavljajo položaj. Na ta način lahko skupina omogoči sočasno sledenje mesta. Spletni sistem omogoča ustvarjanje brezimnih skupin posameznikov, ki objavljajo svoj položaj in želijo biti med seboj v stiku. Možni so različni načini sledenja od začasnega do trajnega.\n\nBrezimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
+    <string name="osmo_plugin_description">"Vstavek OsMo omogoča delno podopo sledenja z OpenStreetMap. Za več informacij si oglejte spletno stran http://osmo.mobi.\n\nSledilnik Osmo omogoča sledenje napravam, ki objavljajo položaj in ustvarjanje točk, ki so vidne celotni skupini.\n\nSkupine, ki že mesece niso odstranjene, je treba uskladiti z novimi pravili prek spletišča OsMo.mobi. "</string>
     <string name="osmo_plugin_name">Sledilnik OpenStreetMap</string>
     <string name="keep_informing_never">Samo ročno (pritisnite na puščico)</string>
     <string name="keep_informing_descr">Ponovno najavi obvestila navigacije v rednih časovnih zamikih</string>
@@ -1481,7 +1481,8 @@
     <string name="osmo_gpx_track_downloaded">Prejeta je sled OsMo %1$s.</string>
     <string name="lang_fa">Perzijščina</string>
     <string name="osmo_auth_error">Overitev s sledilnikom OsMo je spodletelo: %1$s.\n Problem je lahko začasen zaradi nedelovanja storitve, ali pa je vaša registracija potekla.\n Ali želite nadaljevati z obnovitvijo registracije?</string>
-    <string name="osmo_group_information_desc">" - Vse ustvarjene skupine so javne! Če si želite zagotoviti brezimnost, povežite naprave neposredno s kodo ID sledilnika.\n - V zasebnih skupinah je lahko največ 8 oseb.\n - Skupina, ki je nedejavna več kot dva tedna oziroma je v njej le ena oseba, je samodejno izbrisana.\n - Dostop je mogoče omejiti na povabilo, nadzor pa je mogoče le preko skrbniške konzole.\n - Za ustvarjanje skupin, ki ne sledijo zgornjim omejitvam, stopite v stik z razvijalci preko http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Za ustvarjanje skupine vpišite ime in izpolnite opis\n - Iz programa so lahko ustvarjene le enostavne skupine. Več o tem si lahko preberete na https://osmo.mobi/g/new.\n - Prek spletnega vmesnika lahko urejate skupine, postavljate sledi in dodajate točke, ki so na voljo vsem.
+\n - Ne podpiramo možnosti skupin z enim uporabnikom. To niso skupine POI.\n - V zasebnih skupinah je lahko največ 8 oseb.\n - Podrobnosti možnosti in dovoljenja uporabe so na spletni strani OsMo.mobi.\n - Za ustvarjanje skupin, ki ne sledijo zgornjim omejitvam, stopite v stik s podporo na osmo.mobi@gmail.com. "</string>
     <string name="lang_al">Albanščina</string>
     <string name="lang_ar">Arabščina</string>
     <string name="lang_sr">Srbščina</string>
@@ -2162,4 +2163,11 @@
     <string name="full_report">Polno poročilo</string>
     <string name="open_street_map_login_and_pass">Prijavni podatki za OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">V imenu datoteke je nedovoljen znak</string>
-</resources>
+<string name="no_map_markers_found">Dodajte oznake zemljevida prek zemljevida</string>
+    <string name="no_waypoints_found">Ni vmesnih točk</string>
+    <string name="release_2_3">" • OSM v živo. S podporo razvijalcem in skupnosti si pridobite možnost urnih posodobitev zemljevidov.
+\n\n • Oznake zemljevidov so nov hiter način izbire mest na zemljevidu.\n\n • Podrobnejši zemljevidi OSM, ki so opremljeni z specifičnimi oznakami cest in veliko novih zmožnost zemljevidov.\n\n • Izboljšana uporabniška izkušnja pri pripravi potovanj.
+\n\n • Mnogo posodobitev vsebinskega menija, kot je na primer vsebinsko iskanje naslova.\n\n • Še in še in še ... "</string>
+    <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta. Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to odlične način za začetek sodelovanja.</string>
+    
+    </resources>
