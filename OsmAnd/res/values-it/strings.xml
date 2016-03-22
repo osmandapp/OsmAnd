@@ -2213,7 +2213,7 @@
     <string name="finish_navigation">Termina la navigazione</string>
     <string name="avoid_road">Evita la strada</string>
     <string name="storage_directory_shared">Memoria condivisa</string>
-    <string name="storage_directory_readonly_desc">La carella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegliere una cartella di destinazione valida.</string>
+    <string name="storage_directory_readonly_desc">La cartella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegliere una cartella di destinazione valida.</string>
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">Ora l\'applicazione ha i permessi per scrivere sulla memoria esterna. È necessario riavviare l\'applicazione.</string>
     <string name="full_report">Rapporto completo</string>
