@@ -59,6 +59,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private boolean isPaint_1;
 	private int cachedHash;
 	private int cachedColor;
+	private float cachedStrokeWidth;
+
 	private Paint paintIcon;
 	private Bitmap pointSmall;
 
@@ -140,6 +142,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		cachedHash = -1;
 	}
 
+	private float getDefaultStrokeWidth() {
+		return 7 * view.getDensity();
+	}
+
+
 	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
@@ -182,6 +189,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					osmandRenderer.updatePaint(req, paint, 0, false, rc);
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
 					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
+
+					cachedStrokeWidth = osmandRenderer.getStrokeWidth();
+
 					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
 					if (isShadowPaint) {
 						ColorFilter cf = new PorterDuffColorFilter(req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR),
@@ -192,7 +202,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					}
 				} else {
 					System.err.println("Rendering attribute gpx is not found !");
-					//paint.setStrokeWidth(7 * view.getDensity());					Handled by new auto-sizing code
+					cachedStrokeWidth = getDefaultStrokeWidth();						// this is "100%" setting
+					//paint.setStrokeWidth(7 * view.getDensity());
 				}
 			}
 		}
@@ -422,14 +433,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				double gpxTrackWidth = ts.getGpxZoom(g.getGpxZoom()) * getScale(viewZoom);
 				if (gpxTrackWidth > 0) {
 
-					// Set "ideal" track width first. Shadows, etc., appear to use the current paint's track width as a starting
-					// point, so this should be compatible with those additional effects.
-					paint.setStrokeWidth((float) gpxTrackWidth);
+					updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
 
-					updatePaints(ts.getColor(g.getColor()), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
-
-
-
+					gpxTrackWidth *= osmandRenderer.getStrokeWidth()/getDefaultStrokeWidth();
+					paint.setStrokeWidth((float)gpxTrackWidth);
 
 					// Create a transient track/segment for display purposes only
 					TrkSegment tsCulled = new TrkSegment();
@@ -470,10 +477,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private void drawSingleSegment(Canvas canvas, RotatedTileBox tileBox, TrkSegment l) {
 
-		//TODO: This routine FAILS if the first segment starts onscreen - it is not displayed.
-		//TODO: remove stuff from inner loop - e.g, the +-shift can be precalculated
-		//TODO: remove i>0 test by putting initial prevCross calculation outside loop
-
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 
 		int startIndex = -1;
@@ -482,16 +485,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		double shift = 0;
 		for (int i = 0; i < l.points.size(); i++) {
 			WptPt ls = l.points.get(i);
-			int cross = (ls.lon < latLonBounds.left - shift ? 1 : 0)
-					| (ls.lon > latLonBounds.right + shift ? 2 : 0)
-					| (ls.lat > latLonBounds.top + shift ? 4 : 0)
-					| (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
+			int cross = 0;
+			cross |= (ls.lon < latLonBounds.left - shift ? 1 : 0);
+			cross |= (ls.lon > latLonBounds.right + shift ? 2 : 0);
+			cross |= (ls.lat > latLonBounds.top + shift ? 4 : 0);
+			cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
 			if (i > 0) {
 				if ((prevCross & cross) == 0) {
 					if (endIndex == i - 1 && startIndex != -1) {
 						// continue previous line
 					} else {
-						// draw previous segment and start new segment
+						// start new segment
 						if (startIndex >= 0) {
 							drawSegment(canvas, tileBox, l, startIndex, endIndex);
 						}

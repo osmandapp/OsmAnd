@@ -57,8 +57,14 @@ public class OsmandRenderer {
 	private static final Log log = PlatformUtil.getLog(OsmandRenderer.class);
 
 	private Paint paint;
-
 	private Paint paintIcon;
+
+	private float cachedStrokeWidth;
+	private float defaultStrokeWidth;
+	public float getStrokeWidth() {
+		return cachedStrokeWidth;
+	}
+
 
 	public static final int TILE_SIZE = 256; 
 	private static final int MAX_V = 75;
@@ -721,6 +727,8 @@ public class OsmandRenderer {
 			p.clearShadowLayer();
 			p.setStyle(Style.STROKE);
 			p.setStrokeWidth(rc.getComplexValue(req, rStrokeW));
+			cachedStrokeWidth = p.getStrokeWidth();
+
 			String cap = req.getStringPropertyValue(rCap);
 			if(!Algorithms.isEmpty(cap)){
 				p.setStrokeCap(Cap.valueOf(cap.toUpperCase()));
@@ -843,6 +851,8 @@ public class OsmandRenderer {
 		if (rc.shadowRenderingMode == 3 && shadowRadius > 0) {
 			paint.clearShadowLayer();
 			paint.setStrokeWidth(paint.getStrokeWidth() + shadowRadius * 2);
+			cachedStrokeWidth = paint.getStrokeWidth();
+
 			ColorFilter cf = new PorterDuffColorFilter(shadowColor, Mode.SRC_IN);
 			paint.setColorFilter(cf);
 //			 paint.setColor(0xffbababa);
