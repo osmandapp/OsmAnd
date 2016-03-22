@@ -43,6 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
+import java.util.concurrent.Semaphore;
 
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
@@ -59,7 +60,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private boolean isPaint_1;
 	private int cachedHash;
 	private int cachedColor;
-	private float cachedStrokeWidth;
 
 	private Paint paintIcon;
 	private Bitmap pointSmall;
@@ -190,8 +190,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
 					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
 
-					cachedStrokeWidth = osmandRenderer.getStrokeWidth();
-
 					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
 					if (isShadowPaint) {
 						ColorFilter cf = new PorterDuffColorFilter(req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR),
@@ -202,8 +200,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					}
 				} else {
 					System.err.println("Rendering attribute gpx is not found !");
-					cachedStrokeWidth = getDefaultStrokeWidth();						// this is "100%" setting
-					//paint.setStrokeWidth(7 * view.getDensity());
+					paint.setStrokeWidth(getDefaultStrokeWidth());
 				}
 			}
 		}
@@ -393,19 +390,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				0.25, 	 			// 14
 				0.353553390593,  	// 15
 				0.5,  				// 16		last zoom level where things get bigger
+									// 17... 	same as above
 
 				// add or remove extra zoom level entries - the code will work OK as it's self-configuring
 		};
 
 		int clamped = Math.max(0, Math.min(zoom, handRolledMagnification.length-1));
-		return 60.0 * handRolledMagnification[clamped];
+		return 32. * handRolledMagnification[clamped];
 	}
 
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
-		for (SelectedGpxFile g : selectedGPXFiles) {
 
+		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
 
@@ -414,29 +412,32 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				// consisting of the view scale and # points in the track changes.
 
 				int viewZoom = view.getZoom();
-				if (ts.culledFingerprint!=ts.points.size()+viewZoom) {
+				if (ts.culledFingerprint != ts.points.size() + viewZoom) {
 
 					// Reduce the point count of the track, based on the zoom level. "Cache" the new culled track alongside
 					// the original. A "fingerprint" lets us know when culled track is out of date and must be regenerated.
+					//TODO: Ok, this might take some amount of time with very large tracks. Move it to a separate thread!
 					boolean[] survivor = cullRamerDouglasPeucer(ts.points, Math.pow(2.0, 17 - viewZoom));
 					List<WptPt> culled = new ArrayList<WptPt>();
 					for (int i = 0; i < survivor.length; i++)
 						if (survivor[i])
 							culled.add(ts.points.get(i));
 
-					ts.culledFingerprint = ts.points.size()+viewZoom;			// 'cache' by associating to track size + zoom level
+					ts.culledFingerprint = ts.points.size() + viewZoom;            // 'cache' by associating to track size + zoom level
 					ts.culledPoints = culled;
 				}
 
 				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
-				// If width becomes 0, then track is not displayed.
-				double gpxTrackWidth = ts.getGpxZoom(g.getGpxZoom()) * getScale(viewZoom);
-				if (gpxTrackWidth > 0) {
+				// AND it is scaled by the "default" original track width per the code where NO GPX track was detected.
+				double gpxTrackScale = ts.getGpxZoom(g.getGpxZoom()) * getScale(viewZoom) / getDefaultStrokeWidth();
+				if (gpxTrackScale > 0 && ts.culledPoints != null) {
 
 					updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
 
-					gpxTrackWidth *= osmandRenderer.getStrokeWidth()/getDefaultStrokeWidth();
-					paint.setStrokeWidth((float)gpxTrackWidth);
+					// Now we have calculated the scaling for the tracks, and updatePaints has potentially set its idea
+					// of the track sizes, we can revisit the paint contexts and resize the brushes accordingly. This should
+					// leave the existing brush calculations intact, and simply modify the resultant sizes according to scale...
+					fixupStrokeWidths(gpxTrackScale);
 
 					// Create a transient track/segment for display purposes only
 					TrkSegment tsCulled = new TrkSegment();
@@ -449,6 +450,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
+	private void fixupStrokeWidths(double rescale) {
+
+		// Go through ALL the paint contexts which are affected by the new stroke width calculations for GPX tracks and
+		// rescale their original widths based on the new scaling value.
+
+		osmandRenderer.fixupStrokeWidth(paint, rescale);
+		osmandRenderer.fixupStrokeWidth(paint2, rescale);
+		osmandRenderer.fixupStrokeWidth(paint_1, rescale);
+		//TODO: shadowPaint??
+		}
 
 	private boolean isPointVisited(WptPt o) {
 		boolean visit = false;
