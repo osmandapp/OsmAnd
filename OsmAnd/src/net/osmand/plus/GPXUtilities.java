@@ -59,7 +59,22 @@ public class GPXUtilities {
 			}
 			return extensions;
 		}
-		
+
+		public float getGpxZoom(float defaultGpxZoom) {
+			if(extensions != null && extensions.containsKey("zoom")) {
+				try {
+					defaultGpxZoom = Float.parseFloat(extensions.get("zoom"));
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
+			return defaultGpxZoom;
+		}
+
+		public void setGpxZoom(float gpxZoom) {
+			getExtensionsToWrite().put("zoom", Float.toString(gpxZoom));
+		}
+
 		public int getColor(int defColor) {
 			if(extensions != null && extensions.containsKey("color")) {
 				try {
@@ -166,7 +181,9 @@ public class GPXUtilities {
 
 	public static class TrkSegment extends GPXExtensions {
 		public List<WptPt> points = new ArrayList<WptPt>();
-		
+		public List<WptPt> culledPoints = null;
+		public int culledFingerprint = -1;
+
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
 			return split(getDistanceMetric(), getTimeSplit(), meters);
 		}
@@ -692,12 +709,14 @@ public class GPXUtilities {
 			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			for (Track t : tracks) {
 				int trackColor = t.getColor(getColor(0));
+				float trackZoom = t.getGpxZoom(getGpxZoom(1.0f));
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);
-						sgmt.setColor(trackColor);
+						sgmt.setColor(ts.getColor(trackColor));
+						sgmt.setGpxZoom(ts.getGpxZoom(trackZoom));
 					}
 				}
 			}
@@ -964,6 +983,7 @@ public class GPXUtilities {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
+
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(f)); //$NON-NLS-1$
 			Stack<GPXExtensions> parserState = new Stack<GPXExtensions>();
@@ -1046,9 +1066,9 @@ public class GPXUtilities {
 								((WptPt) parse).desc = readText(parser, "desc");
 							} else if (parser.getName().equals("link")) {
 								((WptPt) parse).link = parser.getAttributeValue("", "href");
-							} else if (tag.equals("category")) {
+							} else if (tag.equals("category")) {								//TODO: is this a bug?  should be parser.getName() not tag
 								((WptPt) parse).category = readText(parser, "category");
-							} else if (tag.equals("type")) {
+							} else if (tag.equals("type")) {									//TODO: is this a bug?  should be parser.getName() not tag
 								if(((WptPt) parse).category == null) {
 									((WptPt) parse).category = readText(parser, "type");
 								}
