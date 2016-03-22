@@ -56,13 +56,15 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
-			drawPoints(canvas, tileBox, plugin.getDBBug().getOsmbugsPoints());
-			drawPoints(canvas, tileBox, plugin.getDBPOI().getOpenstreetmapPoints());
+			List<LatLon> fullObjectsLatLon = new ArrayList<>();
+			drawPoints(canvas, tileBox, plugin.getDBBug().getOsmbugsPoints(), fullObjectsLatLon);
+			drawPoints(canvas, tileBox, plugin.getDBPOI().getOpenstreetmapPoints(), fullObjectsLatLon);
+			this.fullObjectsLatLon = fullObjectsLatLon;
 		}
 	}
 
-	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, List<? extends OsmPoint> objects) {
-		List<LatLon> fullObjectsLatLon = new ArrayList<>();
+	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, List<? extends OsmPoint> objects,
+							List<LatLon> fullObjectsLatLon) {
 		for (OsmPoint o : objects) {
 			float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 			float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
@@ -77,7 +79,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 			fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 		}
-		this.fullObjectsLatLon = fullObjectsLatLon;
 	}
 
 	@Override
@@ -144,7 +145,9 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
-		getOsmEditsFromPoint(point, tileBox, o);
+		if (tileBox.getZoom() >= startZoom) {
+			getOsmEditsFromPoint(point, tileBox, o);
+		}
 	}
 
 	@Override

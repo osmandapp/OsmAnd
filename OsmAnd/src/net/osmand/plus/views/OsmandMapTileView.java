@@ -820,6 +820,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 		if (twoFingerTapDetector.onTouchEvent(event)) {
+			ContextMenuLayer contextMenuLayer = getLayerByClass(ContextMenuLayer.class);
+			if (contextMenuLayer != null) {
+				contextMenuLayer.onTouchEvent(event, getCurrentRotatedTileBox());
+			}
 			return true;
 		}
 
