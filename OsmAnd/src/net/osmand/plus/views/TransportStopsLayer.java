@@ -205,7 +205,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
-		getFromPoint(tileBox, point, res);
+		if (tileBox.getZoom() >= startZoom) {
+			getFromPoint(tileBox, point, res);
+		}
 	}
 
 	@Override
