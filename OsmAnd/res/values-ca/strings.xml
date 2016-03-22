@@ -1170,7 +1170,7 @@
     <string name="interrupt_music">Pausa la música</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Aquest connector us ofereix la funcionalitat del seguiment avançat en temps real anomenat OsMo, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment de tots els dispositius que integrin un grup i comunicar-vos amb qualsevol d\'ells. Hi ha diferents paràmetres segons el tipus de seguiment: puntual o permanent.\n\nEls grups anònims es poden crear al moment per un nombre de dies especificat i tenen les funcionalitats limitades, p. ex. no tenen control remot ni administració del grup. Els grups totalment operatius, per altra banda, poden crear-se des del lloc web i només els usuaris registrats hi tenen accés. "</string>
+    <string name="osmo_plugin_description">"Aquest connector us ofereix parcialment la funcionalitat de la Monitorització OpenStreetmap, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment de tots els dispositius que integrin un grup en temps real. També podeu consultar les fites i traces pujades en el grup on sigueu.\n\nEl grups creats fa mesos s\'han d\'actualitzar amb les normes actuals de creació de grups a la seu  OsMo.mobi "</string>
     <string name="osmo_plugin_name">Monitorització OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
@@ -1963,4 +1963,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="storage_directory_shared">Memòria compartida</string>
     <string name="no_waypoints_found">No s\'ha trobat cap fita</string>
     <string name="report">Informe</string>
+    <string name="storage_permission_restart_is_required">L\'aplicació ja permet escriure a un emmagatzemament extern. Cal una reinicialització manual de l\'aplicació.</string>
     </resources>
