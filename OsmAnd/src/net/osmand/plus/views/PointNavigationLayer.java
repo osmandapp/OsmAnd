@@ -180,24 +180,24 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
-		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
-		List<TargetPoint> intermediatePoints = tg.getAllPoints();
-		int r = getRadiusPoi(tileBox);
-		for (int i = 0; i < intermediatePoints.size(); i++) {
-			TargetPoint tp = intermediatePoints.get(i);
-			LatLon latLon = tp.point;
-			if (latLon != null) {
-				int ex = (int) point.x;
-				int ey = (int) point.y;
-				int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				if (calculateBelongs(ex, ey, x, y, r)) {
-					o.add(tp);
+		if (tileBox.getZoom() >= 3) {
+			TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
+			List<TargetPoint> intermediatePoints = tg.getAllPoints();
+			int r = getRadiusPoi(tileBox);
+			for (int i = 0; i < intermediatePoints.size(); i++) {
+				TargetPoint tp = intermediatePoints.get(i);
+				LatLon latLon = tp.point;
+				if (latLon != null) {
+					int ex = (int) point.x;
+					int ey = (int) point.y;
+					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					if (calculateBelongs(ex, ey, x, y, r)) {
+						o.add(tp);
+					}
 				}
 			}
 		}
-		
-		
 	}
 	
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {

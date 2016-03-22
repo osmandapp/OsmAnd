@@ -532,7 +532,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
-		getBugFromPoint(tileBox, point, res);
+		if (tileBox.getZoom() >= startZoom) {
+			getBugFromPoint(tileBox, point, res);
+		}
 	}
 
 	@Override

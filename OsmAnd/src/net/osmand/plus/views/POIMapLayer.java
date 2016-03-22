@@ -507,7 +507,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
-		getAmenityFromPoint(tileBox, point, objects);
+		if (tileBox.getZoom() >= startZoom) {
+			getAmenityFromPoint(tileBox, point, objects);
+		}
 	}
 
 	@Override
