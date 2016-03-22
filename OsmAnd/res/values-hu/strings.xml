@@ -2168,4 +2168,6 @@
     <string name="rec_split_desc">Klippek elvágása, ha a felhasznált hely túllépi a tárolási méretet</string>
     <string name="rec_split_clip_length_desc">Az egyes felvett klippek hossza nem lesz hosszabb a megadott időnél</string>
     <string name="rec_split_storage_size_desc">Az összes klipp által elfoglalható hely</string>
+    <string name="no_map_markers_found">Kérlek, vegyél fel jelölőket a térképen</string>
+    <string name="no_waypoints_found">Nem találhatók útpontok</string>
     </resources>
