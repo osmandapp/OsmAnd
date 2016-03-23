@@ -262,7 +262,7 @@ public class MapActivityLayers {
 		OsmandApplication app = (OsmandApplication) getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
-		adapter.item(R.string.shared_string_search).iconColor(R.drawable.ic_action_search_dark).reg();
+		adapter.item(R.string.shared_string_search).colorIcon(R.drawable.ic_action_search_dark).reg();
 		final List<PoiUIFilter> list = new ArrayList<PoiUIFilter>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {

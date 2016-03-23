@@ -255,11 +255,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		overlayMapDescr = overlayMapDescr != null ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.item(R.string.layer_overlay).layout(R.layout.drawer_list_doubleitem).description(overlayMapDescr)
-				.iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
+				.colorIcon(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		underlayMapDescr = underlayMapDescr != null ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.item(R.string.layer_underlay).layout(R.layout.drawer_list_doubleitem).description(underlayMapDescr)
-				.iconColor(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
+				.colorIcon(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
 	}
 
 
@@ -280,9 +280,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					return true;
 				}
 			};
-			adapter.item(R.string.context_menu_item_update_map).iconColor(R.drawable.ic_action_refresh_dark)
+			adapter.item(R.string.context_menu_item_update_map).colorIcon(R.drawable.ic_action_refresh_dark)
 					.listen(listener).reg();
-			adapter.item(R.string.shared_string_download_map).iconColor(R.drawable.ic_action_import)
+			adapter.item(R.string.shared_string_download_map).colorIcon(R.drawable.ic_action_import)
 					.listen(listener).reg();
 		}
 	}

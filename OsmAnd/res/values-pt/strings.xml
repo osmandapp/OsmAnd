@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -1393,10 +1394,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="minutes_ago">minutos atras</string>
     <string name="seconds_ago">segundos atras</string>
     <string name="osmo_connected_devices">aparelhos ligados</string>
-    <string name="osmo_groups">OsMo Grupos/Aparelhos</string>
+    <string name="osmo_groups">Grupos OsMo</string>
     <string name="osmo_tracker_id_share">Para ligar o aparelho alvo %2$s, click no link %3$s ou especifique o id do tracker(%1$s)</string>
-    <string name="osmo_auto_send_locations_descr">Inicie automaticamente a sessão do tracker e envie localização após o início da aplicação</string>
-    <string name="osmo_auto_send_locations">Inicie automaticamente a sessão do tracker</string>
+    <string name="osmo_auto_send_locations_descr">Ao iniciar a aplicação, automaticamente gravar e enviar as localizações da viagem</string>
+    <string name="osmo_auto_send_locations">Inicie automaticamente a viagem</string>
     <string name="osmo_tracker_id">Identificação pessoal do tracker</string>
     <string name="osmo_tracker_id_descr">Clique para partilhar a identificação do tracker
 	Ao usar a identificação do tracker, aparelhos ligados podem ver todos os movimentos deste aparelho ! Para desligar seleccione a opção regenerar.</string>
@@ -1963,8 +1964,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_widget_left">Painel esquerdo</string>
     <string name="search_radius_proximity">Na proximidade de</string>
     <string name="osmo_device_not_found">Aparelho não encontrado</string>
-    <string name="osmo_no_connection_msg">Serviço Osmo não está disponível:\n- Verifique a ligação;\n- Verifique as configurações;\n- Verifique o nosso Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Um utilizador anónimo não pode:\n- Criar grupos;\n- Sincronizar grupos e dispositivos com o servidor;\n- Gerir grupos e dispositivos num escritório privado.</string>
+    <string name="osmo_no_connection_msg">Não é possível estabelecer ligação ao Servidor Osmo:\n- Verifique a ligação à internet;\n- Verifique as configurações;\n- Verifique o nosso Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Um utilizador anónimo não pode:\n- Criar grupos;\n- Sincronizar grupos e dispositivos com o servidor;\n- Gerir grupos e dispositivos num painel de controle pessoal no sitio web.</string>
     <string name="anonymous_user">Utilizador anónimo</string>
     <string name="logged_as">Ligado como %1$s</string>
     <string name="shared_string_not_selected">Não seleccionado</string>
@@ -1973,4 +1974,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="poi_context_menu_modify_osm_change">Modificar edição OSM</string>
     <string name="use_dashboard_btn">Usar Painel</string>
     <string name="use_drawer_btn">Usar Menú</string>
+    <string name="no_map_markers_found">Por favor, adicione os marcadores no mapa</string>
+    <string name="no_waypoints_found">Não há pontos intermédios</string>
+    <string name="osmo_specify_tracker_id">Indique qual a Identidade</string>
+    <string name="report">Relatório</string>
     </resources>

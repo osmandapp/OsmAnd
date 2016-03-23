@@ -544,7 +544,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				} else if (item.getItemId() == SHARE_ID) {
 					shareOsMoGroup(group.getVisibleName(app), group.getGroupId());
 				} else if (item.getItemId() == ON_OFF_ACTION_ID) {
-					CompoundButton bt = ((CompoundButton) MenuItemCompat.getActionView(item).findViewById(R.id.check_item));
+					CompoundButton bt = ((CompoundButton) MenuItemCompat.getActionView(item).findViewById(R.id.toggle_item));
 					onOffAction(bt);
 				}
 				return true;
@@ -1228,7 +1228,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					}
 				});
 			}
-			CompoundButton ci = (CompoundButton) row.findViewById(R.id.check_item);
+			CompoundButton ci = (CompoundButton) row.findViewById(R.id.toggle_item);
 			if (model.isMainGroup()) {
 				ci.setVisibility(View.GONE);
 			} else {

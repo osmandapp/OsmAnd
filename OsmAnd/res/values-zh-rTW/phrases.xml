@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">商店</string>
 		<string name="poi_shop_food">食品商店</string>
 	<string name="poi_emergency">緊急救助</string>
@@ -90,7 +90,7 @@
 	<string name="poi_furniture">傢俱店</string>
 	<string name="poi_garden_centre">園藝中心</string>
 	<string name="poi_gas">瓦斯行</string>
-	<string name="poi_general">雜貨店</string>
+	<string name="poi_shop_yes">雜貨店</string>
 	<string name="poi_gift">禮品店</string>
 	<string name="poi_glaziery">玻璃行</string>
 	<string name="poi_hardware">五金店</string>
@@ -1944,7 +1944,7 @@
 
 	<string name="poi_historic_yes">歷史物件</string>
 	<string name="poi_surveillance_yes">監視器：有</string>
-	<string name="poi_shop_yes">有商店</string>
+	<string name="poi_shop_additional_yes">有商店</string>
 
 	<string name="poi_service_bicycle_retail_yes">自行車零售：有</string>
 	<string name="poi_service_bicycle_retail_no">自行車零售：無</string>
@@ -2416,4 +2416,7 @@
 	<string name="poi_health_specialty_radiology_yes">醫療專業：放射科</string>
 	<string name="poi_health_specialty_psychiatry_yes">醫療專業：精神科</string>
 	<string name="poi_health_specialty_neurology_yes">醫療專業：神經科</string>
+	<string name="poi_seamark_dyke">防波堤</string>
+	<string name="poi_historic_period_villager">歷史時期：村民 (時代 I, II, 1580 BC – 133 AC)</string>
+	<string name="poi_historic_period_urban">歷史時期：城市（時代，133 AC - 374 AC）</string>
 	</resources>

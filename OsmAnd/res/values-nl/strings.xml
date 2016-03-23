@@ -2244,4 +2244,6 @@
     <string name="open_street_map_login_and_pass">OpenStreetMap loginnaam and wachtwoord</string>
     <string name="report">Verslag</string>
     <string name="file_name_containes_illegal_char">Bestandsnaam bevat verkeerd teken</string>
-</resources>
+<string name="no_map_markers_found">Markeervlaggetjes kun je via de kaart toevoegen</string>
+    <string name="no_waypoints_found">Geen punten gevonden</string>
+    </resources>

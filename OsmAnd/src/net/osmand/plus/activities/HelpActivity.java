@@ -1,24 +1,12 @@
 package net.osmand.plus.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.dialogs.HelpArticleDialogFragment;
-
-import org.apache.commons.logging.Log;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -36,10 +24,23 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+
+import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class HelpActivity extends OsmandActionBarActivity {
 
 //	public static final String DIALOG = "dialog";
+	@IdRes
 	public static final int DIALOG = 5;
 	final static HelpMenuCategory[] categories = HelpMenuCategory.values();
 	public static final String OSMAND_POLL_HTML = "http://osmand.net/android-poll.html";
@@ -274,7 +275,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 				LayoutInflater inflater = LayoutInflater.from(ctx);
 				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
 			}
-			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			TextView nameView = ((TextView) v.findViewById(R.id.title));
 			nameView.setText(titleId);
 			v.setOnClickListener(null);
 			TypedValue typedValue = new TypedValue();

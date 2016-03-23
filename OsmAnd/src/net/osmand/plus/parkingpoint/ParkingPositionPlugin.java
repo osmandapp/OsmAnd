@@ -227,7 +227,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.context_menu_item_add_parking_point)
-		.iconColor( R.drawable.ic_action_parking_dark).listen(addListener).reg();
+		.colorIcon(R.drawable.ic_action_parking_dark).listen(addListener).reg();
 		
 	}
 

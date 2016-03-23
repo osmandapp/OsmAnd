@@ -62,7 +62,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final TextView regionNameTextView = (TextView) view.findViewById(R.id.regionNameTextView);
 		final TextView lastMapChangeTextView = (TextView) view.findViewById(R.id.lastMapChangeTextView);
 		final TextView lastUpdateTextView = (TextView) view.findViewById(R.id.lastUpdateTextView);
-		final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
+		final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.toggle_item);
 		final CheckBox downloadOverWiFiCheckBox = (CheckBox) view.findViewById(R.id.downloadOverWiFiSwitch);
 		final Spinner updateFrequencySpinner = (Spinner) view.findViewById(R.id.updateFrequencySpinner);
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);

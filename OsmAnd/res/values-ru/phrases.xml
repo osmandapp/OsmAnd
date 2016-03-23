@@ -55,7 +55,7 @@
 	<string name="poi_furniture">Мебель</string>
 	<string name="poi_garden_centre">Садово-огородный магазин</string>
 	<string name="poi_gas">Газ в баллонах</string>
-	<string name="poi_general">Магазин</string>
+	<string name="poi_shop_yes">Магазин</string>
 	<string name="poi_gift">Подарки, сувениры</string>
 	<string name="poi_glaziery">Окна, стёкла</string>
 	<string name="poi_hardware">Скобяные изделия и инструмент</string>
@@ -1772,7 +1772,7 @@
 
 	<string name="poi_historic_yes">Исторический объект</string>
 	<string name="poi_surveillance_yes">С видеонаблюдением</string>
-	<string name="poi_shop_yes">С магазином</string>
+	<string name="poi_shop_additional_yes">С магазином</string>
 
 	<string name="poi_service_bicycle_retail_yes">Продажа велосипедов: да</string>
 	<string name="poi_service_bicycle_retail_no">Продажа велосипедов: отсутствует</string>

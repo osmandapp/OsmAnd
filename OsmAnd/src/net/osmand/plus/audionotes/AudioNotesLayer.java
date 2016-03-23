@@ -169,7 +169,9 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
-		getRecordingsFromPoint(point, tileBox, objects);
+		if (tileBox.getZoom() >= startZoom) {
+			getRecordingsFromPoint(point, tileBox, objects);
+		}
 	}
 	
 	public void getRecordingsFromPoint(PointF point, RotatedTileBox tileBox, List<? super Recording> am) {

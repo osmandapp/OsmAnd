@@ -140,7 +140,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity());
+		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom());
 		if (hsh != cachedHash) {
 			cachedHash = hsh;
 			cachedColor = view.getResources().getColor(R.color.gpx_track);
@@ -168,6 +168,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				if (currentTrack) {
 					additional = (additional.length() == 0 ? "" : ";") + "currentTrack=true";
 				}
+				req.setIntFilter(rrs.PROPS.R_MINZOOM, tileBox.getZoom());
+				req.setIntFilter(rrs.PROPS.R_MAXZOOM, tileBox.getZoom());
 				if (additional.length() > 0) {
 					req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
 				}
@@ -280,13 +282,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					true).getIntrinsicWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
+			List<LatLon> fullObjectsLatLon = new ArrayList<>();
+			List<LatLon> smallObjectsLatLon = new ArrayList<>();
 			// request to load
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<WptPt> pts = getListStarPoints(g);
 				List<WptPt> fullObjects = new ArrayList<>();
-				List<LatLon> fullObjectsLatLon = new ArrayList<>();
-				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
 				for (WptPt o : pts) {
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
@@ -315,9 +317,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
 					fid.drawBitmapInCenter(canvas, x, y);
 				}
-				this.fullObjectsLatLon = fullObjectsLatLon;
-				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
+			this.fullObjectsLatLon = fullObjectsLatLon;
+			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
 	}
 
@@ -482,7 +484,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
-		getWptFromPoint(tileBox, point, res);
+		if (tileBox.getZoom() >= startZoom) {
+			getWptFromPoint(tileBox, point, res);
+		}
 	}
 
 	@Override

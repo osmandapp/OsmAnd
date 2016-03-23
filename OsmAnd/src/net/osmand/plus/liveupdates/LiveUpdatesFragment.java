@@ -352,12 +352,12 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 				LayoutInflater inflater = LayoutInflater.from(ctx);
 				view = inflater.inflate(R.layout.list_group_title_with_switch, parent, false);
 			}
-			TextView nameView = ((TextView) view.findViewById(R.id.section_name));
+			TextView nameView = ((TextView) view.findViewById(R.id.title));
 			nameView.setText(group);
 
 			view.setOnClickListener(null);
 
-			final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.liveUpdatesSwitch);
+			final SwitchCompat liveUpdatesSwitch = (SwitchCompat) view.findViewById(R.id.toggle_item);
 			View topShadowView = view.findViewById(R.id.bottomShadowView);
 			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				topShadowView.setVisibility(View.GONE);

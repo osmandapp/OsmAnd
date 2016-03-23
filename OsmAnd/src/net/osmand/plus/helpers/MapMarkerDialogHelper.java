@@ -271,7 +271,7 @@ public class MapMarkerDialogHelper {
 
 	protected View createItemForCategory(final ArrayAdapter<Object> listAdapter, final int type) {
 		View v = mapActivity.getLayoutInflater().inflate(R.layout.waypoint_header, null);
-		v.findViewById(R.id.check_item).setVisibility(View.GONE);
+		v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 		v.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 
 		if (type == MARKERS_HISTORY) {

@@ -2004,19 +2004,27 @@ public class OsmandSettings {
 			List<LatLon> ps = getPoints();
 			List<String> ds = getPointDescriptions(ps.size());
 			int i = ps.indexOf(new LatLon(latitude, longitude));
-			ds.set(i, PointDescription.serializeToString(historyDescription));
-			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+			if (i != -1) {
+				ds.set(i, PointDescription.serializeToString(historyDescription));
+				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+				}
+				return savePoints(ps, ds);
+			} else {
+				return false;
 			}
-			return savePoints(ps, ds);
 		}
 
 		public boolean deletePoint(int index) {
 			List<LatLon> ps = getPoints();
 			List<String> ds = getPointDescriptions(ps.size());
-			ps.remove(index);
-			ds.remove(index);
-			return savePoints(ps, ds);
+			if (index < ps.size()) {
+				ps.remove(index);
+				ds.remove(index);
+				return savePoints(ps, ds);
+			} else {
+				return false;
+			}
 		}
 
 		public boolean savePoints(List<LatLon> ps, List<String> ds) {

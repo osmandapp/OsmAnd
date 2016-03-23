@@ -117,18 +117,20 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
-		int ex = (int) point.x;
-		int ey = (int) point.y;
-		int compare = getRadiusPoi(tileBox);
-		int radius = compare * 3 / 2;
+		if (tileBox.getZoom() >= startZoom) {
+			int ex = (int) point.x;
+			int ey = (int) point.y;
+			int compare = getRadiusPoi(tileBox);
+			int radius = compare * 3 / 2;
 
-		for (RouteDataObject road : getMissingRoads()) {
-			Location location = getMissingRoadLocations().get(road.getId());
-			int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-			int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-			if (calculateBelongs(ex, ey, x, y, compare)) {
-				compare = radius;
-				o.add(road);
+			for (RouteDataObject road : getMissingRoads()) {
+				Location location = getMissingRoadLocations().get(road.getId());
+				int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+				int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+				if (calculateBelongs(ex, ey, x, y, compare)) {
+					compare = radius;
+					o.add(road);
+				}
 			}
 		}
 	}
@@ -174,7 +176,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			};
 
-			adapter.item(R.string.avoid_road).iconColor(
+			adapter.item(R.string.avoid_road).colorIcon(
 					R.drawable.ic_action_road_works_dark).listen(listener).reg();
 		}
 	}

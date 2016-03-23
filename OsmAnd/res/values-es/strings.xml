@@ -1342,8 +1342,8 @@
     <string name="osmo_expire_group">Expira en</string>
     <string name="osmo_group_description">Descripción</string>
     <string name="osmo_group_policy">Política</string>
-    <string name="osmo_connect_to_device_tracker_id">Identificador de seguimiento</string>
-    <string name="osmo_connect_to_group_id">Identificador de grupo</string>
+    <string name="osmo_connect_to_device_tracker_id">ID de seguimiento</string>
+    <string name="osmo_connect_to_group_id">ID de grupo</string>
     <string name="osmo_group_name">Nombre de grupo</string>
     <string name="osmo_connect_to_device">Emparejar con dispositivo</string>
     <string name="osmo_connect_to_group">Emparejar con grupo</string>
@@ -1358,8 +1358,8 @@
     <string name="seconds_ago">segundos antes</string>
     <string name="osmo_auto_send_locations_descr">Inicia el viaje y envía ubicaciones automáticamente tras el arranque de la aplicación</string>
     <string name="osmo_auto_send_locations">Iniciar viaje automáticamente</string>
-    <string name="osmo_tracker_id">Identificador de seguimiento</string>
-    <string name="osmo_tracker_id_descr">Pulsa para ver el identificador de seguimiento</string>
+    <string name="osmo_tracker_id">ID de seguimiento</string>
+    <string name="osmo_tracker_id_descr">Pulsa para ver el ID de seguimiento</string>
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
@@ -1437,8 +1437,10 @@
     <string name="osmo_auth_error_short">Fallo en la autorización</string>
     <string name="osmo_auth_error">Se encontró un error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que su registro ha expirado.\n ¿Quiere realizar un nuevo registro?</string>
     <string name="osmo_group_by_invite">Entrar por invitación</string>
-    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quiere hacerse anónimo, conecte dispositivos directamente a través de los identificadores de seguimiento.\n - Los grupos privados están limitados a 8 personas.
-\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada al grupo, como sólo por invitación pero para controlar el grupo necesita ir a la consola de administración.\n - Si tiene que crear un grupo pero con otras condiciones, contacte con http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Al crear un grupo por favor dale un nombre e introduce su descripción.\n- Desde la aplicación los grupos se crean sólo con el tipo Simple, lee más en  el sitio web https://osmo.mobi/g/new
+\n - A través de un sitio web puedes gestionar un grupo, para  ubicar pistas y puntos disponibles para todos
+\n - No apoyamos el uso de  grupos de un único usuario, si no es el grupo POI
+\n - Los grupos privados están limitados a 8 personas\n -  Los términos y condiciones detallados siempre están en el sitio web OsMo.mobi\n - Si necesitas condiciones especiales por favor contacta con soporte: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Fallo al iniciar sesión en OsMo</string>
     <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
@@ -1481,7 +1483,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar caminos de acuerdo a las trazas de OSMC</string>
     <string name="osmo_invite">Invitar…</string>
     <string name="osmo_leave_confirmation_msg">¿Quiere abandonar el grupo %1$s?</string>
-    <string name="osmo_specify_tracker_id">Especifique el id</string>
+    <string name="osmo_specify_tracker_id">Por favor especifica ID</string>
     <string name="arrival_distance_factor_early">Pronto</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tarde</string>
@@ -1532,8 +1534,8 @@
     <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
     <string name="speed_limit_exceed_message">Seleccione el margen de tolerancia sobre el límite de velocidad con el cual recibirá un aviso de voz.</string>
     <string name="osmo_device_not_found">Dispositivo no encontrado</string>
-    <string name="osmo_no_connection_msg">Servicio OsMo no disponible:\n- compruebe la conexión;\n- compruebe los ajustes;\n- compruebe nuestro Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en una sala privada.</string>
+    <string name="osmo_no_connection_msg">No puedo contactar con el servidor OsMo:\n- comprueba la conexión a Internet;\n- comprueba la configuración;\n- comprueba nuestro Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos desde un cuadro de mando personal en el sitio web.</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Iniciado la sesión como %1$s</string>
     <string name="rendering_category_details">Detalles</string>
@@ -2127,4 +2129,7 @@
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     <string name="report">Informe</string>
-    </resources>
+    <string name="no_map_markers_found">Por favor, añade marcadores de mapa via mapa</string>
+    <string name="no_waypoints_found">No se han encontrado puntos intermedios</string>
+    <string name="file_name_containes_illegal_char">El nombre de archivo contiene caracteres ilegales</string>
+</resources>

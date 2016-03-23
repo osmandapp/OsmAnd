@@ -255,7 +255,7 @@ public class IntermediatePointsDialog {
 						R.drawable.ic_action_intermediate;
 					tv.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getContentIcon(icon), null, null, null);
 					tv.setCompoundDrawablePadding(padding);
-					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+					final CheckBox ch = ((CheckBox) v.findViewById(R.id.toggle_item));
 					ch.setVisibility(View.VISIBLE);
 					ch.setOnCheckedChangeListener(null);
 					ch.setChecked(checkedIntermediates[position]);

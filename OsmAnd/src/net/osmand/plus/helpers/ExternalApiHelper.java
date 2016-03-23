@@ -1,9 +1,8 @@
 package net.osmand.plus.helpers;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AlertDialog;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.util.Arrays;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -25,11 +24,15 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 
 public class ExternalApiHelper {
 
@@ -54,7 +57,9 @@ public class ExternalApiHelper {
 	public static final String API_CMD_STOP_GPX_REC = "stop_gpx_rec";
 
 	public static final String API_CMD_SUBSCRIBE_VOICE_NOTIFICATIONS = "subscribe_voice_notifications";
-
+	public static final int VERSION_CODE = 1;
+	
+	
 	public static final String PARAM_NAME = "name";
 	public static final String PARAM_DESC = "desc";
 	public static final String PARAM_CATEGORY = "category";
@@ -75,9 +80,16 @@ public class ExternalApiHelper {
 	public static final String PARAM_DEST_LON = "dest_lon";
 	public static final String PARAM_PROFILE = "profile";
 
+	public static final String PARAM_VERSION = "version";
 	public static final String PARAM_ETA = "eta";
 	public static final String PARAM_TIME_LEFT = "time_left";
 	public static final String PARAM_DISTANCE_LEFT = "time_distance_left";
+	public static final String PARAM_NT_DISTANCE = "turn_distance";
+	public static final String PARAM_NT_IMMINENT = "turn_imminent";
+	public static final String PARAM_NT_DIRECTION_NAME = "turn_name";
+	public static final String PARAM_NT_DIRECTION_TURN = "turn_type";
+	public static final String PARAM_NT_DIRECTION_LANES = "turn_lanes";
+
 
 	public static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
 			ApplicationMode.CAR,
@@ -95,6 +107,7 @@ public class ExternalApiHelper {
 	public static final int RESULT_CODE_ERROR_GPX_NOT_FOUND = 20;
 	public static final int RESULT_CODE_ERROR_INVALID_PROFILE = 30;
 
+	
 	private MapActivity mapActivity;
 	private int resultCode;
 	private boolean finish;
@@ -260,13 +273,27 @@ public class ExternalApiHelper {
 				}
 
 				final RoutingHelper routingHelper = app.getRoutingHelper();
-				if (routingHelper.isFollowingMode()) {
+				if (routingHelper.isRouteCalculated()) {
 					int time = routingHelper.getLeftTime();
 					result.putExtra(PARAM_TIME_LEFT, time);
 					long eta = time + System.currentTimeMillis() / 1000;
 					result.putExtra(PARAM_ETA, eta);
 					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
+					
+					NextDirectionInfo ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+					if(ni.distanceTo > 0) {
+						updateTurnInfo("next_", result, ni);
+						ni = routingHelper.getNextRouteDirectionInfoAfter(ni, new NextDirectionInfo(), true);
+						if(ni.distanceTo > 0) {
+							updateTurnInfo("after_next", result, ni);
+						}
+					}
+					routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+					if(ni.distanceTo > 0) {
+						updateTurnInfo("no_speak_next_", result, ni);
+					}
 				}
+				result.putExtra(PARAM_VERSION, VERSION_CODE);
 
 				finish = true;
 				resultCode = RESULT_CODE_OK;
@@ -357,6 +384,20 @@ public class ExternalApiHelper {
 		}
 
 		return result;
+	}
+
+	private void updateTurnInfo(String prefix, Intent result, NextDirectionInfo ni) {
+		result.putExtra(prefix + PARAM_NT_DISTANCE, ni.distanceTo);
+		result.putExtra(prefix + PARAM_NT_IMMINENT, ni.imminent);
+		if(ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
+			TurnType tt = ni.directionInfo.getTurnType();
+			RouteDirectionInfo a = ni.directionInfo;
+			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName()));
+			result.putExtra(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
+			if(tt.getLanes() != null) {
+				result.putExtra(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
+			}
+		}
 	}
 
 	private void showOnMap(double lat, double lon, Object object, PointDescription pointDescription) {

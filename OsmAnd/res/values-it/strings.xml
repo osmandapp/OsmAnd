@@ -1299,7 +1299,7 @@
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità del cosiddetto monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti e comunicare con loro. Viene fornito con varie opzioni di monitoraggio della sessione in corso o permanentemente.\n\nI gruppi anonimi possono essere creati autonomamente per uno specifico numero di giorni e sono limitati ad alcune funzioni, es. non ci sono controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
+    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità del cosiddetto monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.\n\nIl gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi "</string>
     <string name="osmo_plugin_name">Monitoraggio OpenStreetMap</string>
     <string name="osmo_settings">OsMO</string>
     <string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
@@ -1317,7 +1317,7 @@
     <string name="osmo_auto_send_locations_descr">Avvia automaticamente il viaggio e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
     <string name="osmo_auto_send_locations">Avvia automaticamente il viaggio</string>
     <string name="osmo_tracker_id">ID tracciamento</string>
-    <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità.</string>
+    <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
@@ -1382,7 +1382,7 @@
     <string name="osmo_center_location">Centra nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
     <string name="osmo_use_server_name">Nome registrato</string>
-    <string name="osmo_connect_to_my_nickname">Nick</string>
+    <string name="osmo_connect_to_my_nickname">Nick name</string>
     <string name="osmo_user_name">Utente</string>
 
 
@@ -1440,7 +1440,7 @@
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     <string name="osmo_not_signed_in">Login a OsMo fallito</string>
     <string name="osmo_group_by_invite">Accedere su invito</string>
-    <string name="osmo_group_information_desc">" - Tutti i gruppi creati sono pubblici! Se volete rimanere anonimi connettete i dispositivi direttamente tramite gli id di tracciamento.\n - I gruppi privati sono limitati a 8 persone.\n - Nel caso di inattività o di attività di una sola persona per due settimane, il gruppo sarà cancellato.\n - È possibile limitare l\'accesso al gruppo, tipo solo su invito, per amministrare il gruppo devi andare al pannello di amministrazione.\n - Se avete bisogno di creare un gruppo ad altre condizioni per favore visitate http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Quando crei un gruppo, per favore, dagli un nome e una descrizione\n - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new\n - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti\n - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI\n - I gruppi privati sono limitati a 8 persone\n - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi\n - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.\nPotrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.\nVuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_hideBuildings_name">Nascondi gli edifici</string>
@@ -2039,7 +2039,7 @@
 
     <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
     <string name="read_more">Altro</string>
-    <string name="whats_new">Novità nella versione</string>
+    <string name="whats_new">Novità</string>
     <string name="share_osm_edits_subject">Modifiche OSM condivise tramite OsmAnd</string>
     <string name="lang_nds">Basso sassone</string>
     <string name="lang_mk">Macedone</string>
@@ -2156,7 +2156,7 @@
     <string name="shared_string_save_changes">Salva le modifiche</string>
     <string name="show_polygons">Mostra i poligoni</string>
     <string name="find_parking">Cerca un parcheggio</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - crea percorsi e trova luoghi sulla mappa senza connessione a Internet. Scarica la mappa di una nazione prima di partire per un viaggio per trovare luoghi e percorsi in un luogo sconosciuto. Opzioni base: • Mappe dettagliate di 200 nazioni • Navigatore offline con istruzioni vocali • Ricerca degli indirizzi in modalità offline • Informazioni sui luoghi della mappa: punti d\'interesse, bar, parcheggi, negozi • Aggiunta di luoghi ai preferiti • Navigazione per guida, ciclisti e pedoni Opzioni aggiuntive: • Possibilità di vedere e registrare tracciati GPX • Descrizioni Wikipedia dei PDI • Aggiunta di note audio, video e foto alla mappa • Modalità notturna e diurna della mappa per una guida più confortevole • Informazioni sui percorsi e le fermate dei trasporti pubblici • Piste ciclabili e percorsi pedonali • Sentieri turistici in tutto il mondo • Mappe online da numerose fonti • Informazioni sulla qualità del fondo stradale e sull\'illuminazione • Aggiunta, modifica e cancellazione dei PDI (per gli utenti di OpenStreetMap.org) • OsMo - monitoraggio in tempo reale degli altri dispositivi Usa un navigatore affidabile nella tua nazione - che sia Francia, Germania, Messico, Regno Unito, Spagna, Olanda, USA, Russia, Brasile qualunque altro stato. Plugin: • Curve di livello e ombreggiatura del terreno https://goo.gl/7mojP8 Visualizzazione delle curve di livello e dell\'ombreggiatura del terreno in aggiunta alla mappa base OsmAnd. • Mappe sci https://goo.gl/pX6DxJ Informazioni sulle piste da sci, sui percorsi da sci di fondo, cross-country, funivie e skilift. • Mappe nautiche https://goo.gl/0hEdxm Stile speciale della mappa per mostrare i simboli per la navigazione nautica marine a lungo o breve raggio. • Posizione di parcheggio https://goo.gl/6JxQXF Ti aiuta a segnare la posizione del tuo veicolo parcheggiato e vedere quanto tempo manca se il parcheggio ha limiti di tempo. Resta sintonizzato! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sito: http://osmand.net Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di supporto: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - trova luoghi sulla mappa e crea percorsi senza connessione a Internet. Scarica la mappa di una nazione prima di partire per un viaggio per trovare luoghi e percorsi in un luogo sconosciuto. Opzioni base: • Mappe dettagliate di 200 nazioni • Navigatore offline con istruzioni vocali • Ricerca degli indirizzi in modalità offline • Informazioni sui luoghi della mappa: punti d\'interesse, bar, parcheggi, negozi • Aggiunta di luoghi ai preferiti • Navigazione per guida, ciclisti e pedoni Opzioni aggiuntive: • Possibilità di vedere e registrare tracciati GPX • Descrizioni Wikipedia dei PDI • Aggiunta di note audio, video e foto alla mappa • Modalità notturna e diurna della mappa per una guida più confortevole • Informazioni sui percorsi e le fermate dei trasporti pubblici • Piste ciclabili e percorsi pedonali • Sentieri turistici in tutto il mondo • Mappe online da numerose fonti • Informazioni sulla qualità del fondo stradale e sull\'illuminazione • Aggiunta, modifica e cancellazione dei PDI (per gli utenti di OpenStreetMap.org) • OsMo - monitoraggio in tempo reale degli altri dispositivi Usa un navigatore affidabile nella tua nazione - che sia Francia, Germania, Messico, Regno Unito, Spagna, Olanda, USA, Russia, Brasile qualunque altro stato. Plugin: • Curve di livello e ombreggiatura del terreno https://goo.gl/7mojP8 Visualizzazione delle curve di livello e dell\'ombreggiatura del terreno in aggiunta alla mappa base OsmAnd. • Mappe sci https://goo.gl/pX6DxJ Informazioni sulle piste da sci, sui percorsi da sci di fondo, cross-country, funivie e skilift. • Mappe nautiche https://goo.gl/0hEdxm Stile speciale della mappa per mostrare i simboli per la navigazione nautica marine a lungo o breve raggio. • Posizione di parcheggio https://goo.gl/6JxQXF Ti aiuta a segnare la posizione del tuo veicolo parcheggiato e vedere quanto tempo manca se il parcheggio ha limiti di tempo. Resta sintonizzato! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sito: http://osmand.net Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di supporto: support@osmand.net. "</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostra i percorsi MTB</string>
     <string name="select_map_markers">Scegli i marcatori della mappa</string>
     <string name="shared_string_reverse_order">Inverti l\'ordine</string>
@@ -2213,10 +2213,17 @@
     <string name="finish_navigation">Termina la navigazione</string>
     <string name="avoid_road">Evita la strada</string>
     <string name="storage_directory_shared">Memoria condivisa</string>
-    <string name="storage_directory_readonly_desc">La carella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegliere una cartella di destinazione valida.</string>
+    <string name="storage_directory_readonly_desc">La cartella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegliere una cartella di destinazione valida.</string>
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">Ora l\'applicazione ha i permessi per scrivere sulla memoria esterna. È necessario riavviare l\'applicazione.</string>
     <string name="full_report">Rapporto completo</string>
     <string name="open_street_map_login_and_pass">Nome utente e password OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
-</resources>
+<string name="no_map_markers_found">Aggiungi i marcatori della mappa dalla mappa</string>
+    <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
+    <string name="release_2_3">" • OSM Live. Sostiene i contributori della mappa e gli sviluppatori e si hanno gli aggiornamenti orari della mappa.\n\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.\n\n • Mappe OSM più dettagliate con scudetti specifici per ogni nazione dei nomi delle strade e molte nuove caratteristiche.
+\n\n • Aspetto e gestione migliorati della preparazione del percorso.
+\n\n • Molti miglioramenti nel menu contestuale della mappa e nella ricerca contestuale degli indirizzi.\n\n e altro… "</string>
+    <string name="rec_split">Frazionatore delle registrazioni</string>
+    <string name="rec_split_title">Usa il frazionamento delle registrazioni</string>
+    </resources>

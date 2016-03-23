@@ -486,6 +486,8 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 						new RateUsBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
 					}
 				}
+			} else {
+				dashboardOnMap.updateDashboard();
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);

@@ -1170,8 +1170,8 @@
     <string name="interrupt_music">Pausa la música</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Aquest connector us ofereix la funcionalitat del seguiment avançat en temps real anomenat OsMo, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment de tots els dispositius que integrin un grup i comunicar-vos amb qualsevol d\'ells. Hi ha diferents paràmetres segons el tipus de seguiment: puntual o permanent.\n\nEls grups anònims es poden crear al moment per un nombre de dies especificat i tenen les funcionalitats limitades, p. ex. no tenen control remot ni administració del grup. Els grups totalment operatius, per altra banda, poden crear-se des del lloc web i només els usuaris registrats hi tenen accés. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitorització OSM)</string>
+    <string name="osmo_plugin_description">"Aquest connector us ofereix parcialment la funcionalitat de la Monitorització OpenStreetmap, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment de tots els dispositius que integrin un grup en temps real. També podeu consultar les fites i traces pujades en el grup on sigueu.\n\nEl grups creats fa mesos s\'han d\'actualitzar amb les normes actuals de creació de grups a la seu  OsMo.mobi "</string>
+    <string name="osmo_plugin_name">Monitorització OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
     <string name="osmo_mode_on">Atura la sessió a OsMo</string>
@@ -1190,10 +1190,10 @@
     <string name="shared_string_share">Compartir</string>
     <string name="share_fav_subject">Preferits compartits via OsmAnd</string>
     <string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
-    <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
-    <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
-    <string name="osmo_tracker_id">Identificació personal de seguiment</string>
-    <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador. Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
+    <string name="osmo_auto_send_locations_descr">Inici automàtic de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
+    <string name="osmo_auto_send_locations">Inici automàtic de la traça</string>
+    <string name="osmo_tracker_id">Identificació del traçador</string>
+    <string name="osmo_tracker_id_descr">Premeu per veure la identificació del traçador</string>
     <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
     <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
     <string name="osmo_locations_sent">"%1$d ubicacions enviades (%2$d a la memòria intermèdia) "</string>
@@ -1207,7 +1207,7 @@
     <string name="osmo_connect_to_device_tracker_id">Identificador de la traça</string>
     <string name="osmo_connect_to_device">Enllaça amb el dispositiu</string>
     <string name="osmo_connected_devices">Dispositius connectats</string>
-    <string name="osmo_groups">Grups/dispositius d\'OsMo</string>
+    <string name="osmo_groups">Grups OsMo</string>
     <string name="osmo_group_info">Informació</string>
     <string name="osmo_group">Grup OsMo</string>
     <string name="osmo_group_share">Per connectar amb el grup %2$s, indiqueu l\'identificador de grup (%1$s) o feu clic a %3$s.</string>
@@ -1227,7 +1227,7 @@
     <string name="osmo_connect_to_group_id">Identificador de grup</string>
     <string name="osmo_group_name">Nom del grup</string>
     <string name="osmo_connect_to_group">Enllaça amb el grup</string>
-    <string name="osmo_connect">Connecta a</string>
+    <string name="osmo_connect">Uneix-te</string>
     <string name="osmo_create_group">Crea un grup</string>
     <string name="osmo_server_operation_failed">Ha fallat l\'operació del servidor OsMo</string>
     <string name="osmo_activity">Monitorització d\'OpenStreetMap</string>
@@ -1244,7 +1244,7 @@
     <string name="osmo_center_location">Centra a la pantalla</string>
     <string name="osmo_set_moving_target">Estableix com a objectiu en moviment</string>
     <string name="osmo_use_server_name">Nom registrat</string>
-    <string name="osmo_connect_to_my_nickname">El vostre àlies</string>
+    <string name="osmo_connect_to_my_nickname">Àlies</string>
     <string name="osmo_user_name">Usuari</string>
     
     <string name="rendering_value_pink_name">rosa</string>
@@ -1306,7 +1306,8 @@
     <string name="osmo_gpx_track_downloaded">S\'ha baixat la traça OsMo %1$s.</string>
     <string name="osmo_not_signed_in">Ha fallat l\'inici de sessió OsMo</string>
     <string name="osmo_group_by_invite">Entreu per convidar</string>
-    <string name="osmo_group_information_desc">" - Tots els grups creats són públics! Si es vol ser anònim, afegiu directament els aparells via identificació de Tracker.\n - Els grups privats estan limitats fins un màxim de 8 persones.\n - Cas d\'inactivitat o d\'activitat d\'una sola persona durant 2 setmanes, el grup serà esborrat.\n - Es pot restringir l\'entrada al grup, a només per invitació, però per controlar el grup es necessitarà accedir a la consola d\'administració.\n - Si us cal crear un grup, però amb altres condicions, contacteu  http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - En crear un grup li hauríeu de donar-li un nom i omplir una descripció\n - Des la gestió de grups només se\'n poden crear de tipus Simple, amplieu-ho a la web  https://osmo.mobi/g/new 
+\n - Mitjançant la web es pot gestionar un grup, posar rutes i ubicacions que tots poden accedir\n - No es recolzen els grups d\'un sol usuari si no és el grup POI\n - Els grups privats estan limitats fins un màxim de 8 persones.\n - Els termes i condicions detallats  hi són sempre a la web OsMo.mobi\n - Si us calen condicions especials, contacteu amb el suport: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Cal que ho llegiu abans de crear un grup.</string>
     <string name="osmo_auth_error_short">Ha fallat l\'autorització</string>
     <string name="osmo_auth_error">S\'ha trobat un error d\'autorització OsMo: %1$s.\n Pot ser per una caiguda temporal del servei o bé pel venciment del vostre usuari.\n Voleu crear un nou usuari nou?</string>
@@ -1407,8 +1408,8 @@
     <string name="speed_limit_exceed">Tolerància sobre el límit de velocitat</string>
     <string name="speed_limit_exceed_message">Trieu el marge de tolerància al límit de velocitat per sobre del que rebreu un avís de veu.</string>
     <string name="osmo_device_not_found">No s\'ha trobat el dispositiu</string>
-    <string name="osmo_no_connection_msg">El servei OsMo no està disponible:\n- verifiqueu la connexió;\n- verifiqueu la configuració;\n- consulteu el nostre Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Un usuari anònim no pot:\n- crear grups;\n- sincronitzar grups i dispositius amb el servidor;\n- gestionar grups i dispositius en privat.</string>
+    <string name="osmo_no_connection_msg">No s\'ha pogut connectar al servei OsMo :\n- verifiqueu la connexió a internet;\n- verifiqueu la configuració;\n- consulteu el nostre Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un usuari anònim no pot:\n- crear grups;\n- sincronitzar grups i dispositius amb el servidor;\n- gestionar grups i dispositius en un tauler personal a la web.</string>
     <string name="anonymous_user">Usuari anònim</string>
     <string name="logged_as">S\'ha iniciat sessió com a %1$s</string>
     <string name="rendering_category_details">Detalls</string>
@@ -1607,7 +1608,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre</string>
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
     <string name="use_fast_recalculation_desc">Torna a calcular només la part inicial de la ruta si són viatges llargs</string>
-    <string name="osmo_share_my_location">Comparteix la meva posició</string>
+    <string name="osmo_share_my_location">Transmet la posició</string>
     <string name="shared_string_logoff">Surt</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
@@ -1960,4 +1961,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="avoid_road">Evita la via</string>
     <string name="storage_directory_readonly_desc">La carpeta d\'emmagatzemament de dades seleccionada només permet la lectura. S\'ha modificat temporalment la carpeta d\'emmagatzemament a la memòria interna . Seleccioneu un directori d\'emmagatzemament vàlid.</string>
     <string name="storage_directory_shared">Memòria compartida</string>
+    <string name="no_waypoints_found">No s\'ha trobat cap fita</string>
+    <string name="report">Informe</string>
+    <string name="storage_permission_restart_is_required">L\'aplicació ja permet escriure a un emmagatzemament extern. Cal una reinicialització manual de l\'aplicació.</string>
     </resources>

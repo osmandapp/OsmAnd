@@ -62,7 +62,7 @@
 
 	<string name="poi_books">Librería (libros)</string>
 	<string name="poi_bicycle">Bicicletería</string>
-	<string name="poi_anime">Tienda de anime</string>
+	<string name="poi_anime">Artículos de anime</string>
 	<string name="poi_antiques">Antigüedades</string>
 	<string name="poi_art">Venta de arte</string>
 	<string name="poi_baby_goods">Artículos para bebés</string>
@@ -86,11 +86,11 @@
 	<string name="poi_erotic">Sexshop</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_florist">Florería</string>
-	<string name="poi_frame">Tienda de marcos</string>
+	<string name="poi_frame">Marcos para cuadros</string>
 	<string name="poi_furniture">Mueblería</string>
 	<string name="poi_garden_centre">Vivero (venta)</string>
 	<string name="poi_gas">Gas líquido</string>
-	<string name="poi_general">Pulpería</string>
+	<string name="poi_shop_yes">Pulpería</string>
 	<string name="poi_gift">Regalería</string>
 	<string name="poi_glaziery">Vidriería</string>
 	<string name="poi_hardware">Ferretería</string>
@@ -114,7 +114,7 @@
 	<string name="poi_paint">Pinturería</string>
 	<string name="poi_pet">Mascotas</string>
 	<string name="poi_photo">Servicio fotográfico</string>
-	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
+	<string name="poi_radiotechnics">Venta de radiotecnia</string>
 	<string name="poi_second_hand">Local de segunda mano</string>
 	<string name="poi_ship_chandler">Proveedor naval</string>
 	<string name="poi_sports">Artículos deportivos</string>
@@ -127,7 +127,7 @@
 	<string name="poi_vacuum_cleaner">Aspiradoras</string>
 	<string name="poi_variety_store">Todo por $2</string>
 	<string name="poi_video">Videoclub</string>
-	<string name="poi_window_blind">Tienda de persianas</string>
+	<string name="poi_window_blind">Persianas</string>
 	<string name="poi_department_store">Grandes almacenes</string>
 	<string name="poi_electronics">Electrónicos</string>
 	<string name="poi_car">Concesionario de automóviles</string>
@@ -163,7 +163,7 @@
 	<string name="poi_traffic_calming_chicane">Chicana</string>
 	<string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
 	<string name="poi_traffic_calming_table">Peatonal elevada</string>
-	<string name="poi_traffic_calming_choker">Gargantilla</string>
+	<string name="poi_traffic_calming_choker">Calzada reducida</string>
 	<string name="poi_traffic_signals">Semáforo</string>
 
 	<string name="poi_car_repair">Taller mecánico</string>
@@ -855,7 +855,7 @@
 
 <string name="poi_cheese">Quesería</string>
 	<string name="poi_chocolate">Chocolatería</string>
-	<string name="poi_coffee">Tienda de café</string>
+	<string name="poi_coffee">Venta de café en granos</string>
 	<string name="poi_pasta">Fábrica de pastas</string>
 	<string name="poi_pastry">Pastelería</string>
 	<string name="poi_furnace">Artículos de calefacción</string>
@@ -1934,7 +1934,7 @@
 <string name="poi_bridge_structure_simple_wooden">Estructura del puente: Madera simple</string>
 	<string name="poi_historic_yes">Objeto histórico</string>
 	<string name="poi_surveillance_yes">Vigilado</string>
-	<string name="poi_shop_yes">Con negocio</string>
+	<string name="poi_shop_additional_yes">Con negocio</string>
 
 	<string name="poi_service_bicycle_retail_yes">Vende bicicletas</string>
 	<string name="poi_service_bicycle_retail_no">No vende bicicletas</string>
@@ -2399,7 +2399,7 @@
 	<string name="poi_bathing_yes">Permitido bañarse</string>
 	<string name="poi_bathing_no">Prohibido bañarse</string>
 
-<string name="poi_traffic_calming_island">Mediana (tráfico)</string>
+<string name="poi_traffic_calming_island">Calzada dividida</string>
 	<string name="poi_boat_storage">Guardería náutica</string>
 
 

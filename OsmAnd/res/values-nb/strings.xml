@@ -704,7 +704,7 @@
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
     <string name="osmo_settings_uuid">Unik enhets-id</string>
     <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
-    <string name="osmo_plugin_name">OsMo (OSM-overvåking)</string>
+    <string name="osmo_plugin_name">OpenStreetMap-overvåking</string>
     <string name="osmo_settings">OsMo</string>
     <string name="map_widget_top">Statuslinje</string>
     <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis det ikke er tilgjengelig skiftes til engelsk eller til lokale navn)</string>
@@ -720,7 +720,7 @@
     <string name="routing_preferences_descr">Ruteplanleggingsinnstillinger</string>
     <string name="rendering_attr_noAdminboundaries_name">Skjul grenser</string>
     <string name="map_widget_max_speed">Fartsgrense</string>
-    <string name="map_widget_transparent">Gjennomsiktig layout</string>
+    <string name="map_widget_transparent">Gjennomsiktige moduler</string>
     <string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
     <string name="plugins_screen">Programtillegg</string>
     <string name="prefs_plugins_descr">Programtillegg aktiverer avanserte innstillinger og flere funksjoner</string>
@@ -1303,7 +1303,7 @@
     <string name="shared_string_show_details">Vis detaljer</string>
     <string name="osm_edit_context_menu_delete">Slett OSM-redigering</string>
     <string name="rendering_value_disabled_name">Deaktivert</string>
-    <string name="osmo_share_my_location">Del min posisjon</string>
+    <string name="osmo_share_my_location">Send posisjonen</string>
     <string name="lang_pms">Piemontesisk</string>
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalog</string>
@@ -1524,4 +1524,16 @@
     <string name="switch_start_finish">Bytt om på startpunkt og reisemål</string>
     <string name="shared_string_topbar">Topplinje</string>
     <string name="recalculate_route">Beregn rute på nytt</string>
+    <string name="no_map_markers_found">Legg til kartmarkører via kart</string>
+    <string name="no_waypoints_found">Ingen rutepunkter funnet</string>
+    <string name="shared_string_move_up">Flytt opp</string>
+    <string name="shared_string_move_down">Flytt ned</string>
+    <string name="finish_navigation">Avslutt navigering</string>
+    <string name="avoid_road">Unngå vei</string>
+    <string name="storage_directory_shared">Delt minne</string>
+    <string name="full_report">Fullstendig rapport</string>
+    <string name="shared_string_widgets">Moduler</string>
+    <string name="consider_turning_polygons_off">Det anbefales å slå av opptegning av polygoner.</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
+    <string name="select_month_and_country">Velg måned og land</string>
     </resources>
