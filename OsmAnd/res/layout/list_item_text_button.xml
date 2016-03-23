@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/bg_color"
+              android:minHeight="54dp"
+              android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:textSize="@dimen/default_list_text_size"
+        tools:text="Some title text"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/description"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:inputType="textCapWords"
+        tools:text="topbar"
+        android:textColor="?colorAccent"
+        android:layout_marginLeft="16dp"
+        android:focusable="false"/>
+
+</LinearLayout>

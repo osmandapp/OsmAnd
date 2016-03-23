@@ -129,7 +129,7 @@ public class RasterMapMenu {
 			// android:max="255" in layout is expected
 			contextMenuAdapter.item(mapTypeStringTransparency)
 					.layout(R.layout.progress_list_item)
-					.iconColor(R.drawable.ic_action_opacity)
+					.colorIcon(R.drawable.ic_action_opacity)
 					.progress(mapTransparencyPreference.get())
 					.listen(l)
 					.listenInteger(integerListener).reg();

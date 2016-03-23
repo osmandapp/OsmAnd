@@ -874,7 +874,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);
 		} else {
-			listView.setBackgroundColor(backgroundColor);
+//			listView.setBackgroundColor(backgroundColor);
 			listEmptyTextView.setBackgroundColor(backgroundColor);
 		}
 		if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS

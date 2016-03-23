@@ -115,7 +115,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.layer_hillshade).selected(HILLSHADE.get()? 1 : 0)
-			.iconColor( R.drawable.ic_action_hillshade_dark).listen(listener).position(13).layout(R.layout.drawer_list_item).reg();
+			.colorIcon(R.drawable.ic_action_hillshade_dark).listen(listener).position(13).layout(R.layout.drawer_list_item).reg();
 	}
 	
 	@Override

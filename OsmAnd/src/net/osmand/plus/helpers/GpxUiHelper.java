@@ -208,7 +208,7 @@ public class GpxUiHelper {
 			s = s.replace('_', ' ');
 
 			adapter.item(s).selected(multipleChoice ? 0 : -1)
-					.iconColor(R.drawable.ic_action_polygom_dark).reg();
+					.colorIcon(R.drawable.ic_action_polygom_dark).reg();
 
 			//if there's some selected files - need to mark them as selected
 			if (selectedGpxList != null) {

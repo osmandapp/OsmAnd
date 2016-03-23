@@ -140,12 +140,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.context_menu_item_add_waypoint).iconColor(R.drawable.ic_action_gnew_label_dark)
+		adapter.item(R.string.context_menu_item_add_waypoint).colorIcon(R.drawable.ic_action_gnew_label_dark)
 				.listen(listener).reg();
 		if (selectedObj instanceof WptPt) {
 			WptPt pt = (WptPt) selectedObj;
 			if (app.getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
-				adapter.item(R.string.context_menu_item_edit_waypoint).iconColor(R.drawable.ic_action_edit_dark)
+				adapter.item(R.string.context_menu_item_edit_waypoint).colorIcon(R.drawable.ic_action_edit_dark)
 						.listen(listener).reg();
 			}
 		}
