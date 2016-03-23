@@ -2,8 +2,8 @@ package net.osmand.plus.routepointsnavigation;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -17,9 +17,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.List;
 
-/**
- * Created by Barsik on 20.06.2014.
- */
 public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
 	private final RoutePointsPlugin plugin;
@@ -112,10 +109,10 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			};
 
 			if (plugin.getCurrentRoute().getPointStatus(point)){
-				adapter.item(R.string.mark_as_not_visited).iconColor(
+				adapter.item(R.string.mark_as_not_visited).colorIcon(
 						R.drawable.ic_action_gremove_dark).listen(listener).reg();
 			} else {
-				adapter.item(R.string.mark_as_visited).iconColor(
+				adapter.item(R.string.mark_as_visited).colorIcon(
 						R.drawable.ic_action_done).listen(listener).reg();
 			}
 
@@ -123,11 +120,11 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			if (routePoint != null) {
 				if (routePoint.isNextNavigate) {
 					adapter.item(R.string.navigate_to_next)
-							.iconColor(R.drawable.ic_action_gnext_dark).listen(listener)
+							.colorIcon(R.drawable.ic_action_gnext_dark).listen(listener)
 							.reg();
 				} else {
 					adapter.item(R.string.mark_as_current)
-							.iconColor(R.drawable.ic_action_signpost_dark)
+							.colorIcon(R.drawable.ic_action_signpost_dark)
 							.listen(listener).reg();
 				}
 			}

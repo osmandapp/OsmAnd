@@ -216,15 +216,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			isEditable = !amenity.getType().isWiki() && !poiType.isNotEditableOsm();
 		}
 		if (isEditable) {
-			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
-			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
+			adapter.item(R.string.poi_context_menu_modify).colorIcon(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
+			adapter.item(R.string.poi_context_menu_delete).colorIcon(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
 			adapter.item(R.string.poi_context_menu_modify_osm_change)
-					.iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
+					.colorIcon(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 		} else {
-			adapter.item(R.string.context_menu_item_create_poi).iconColor(R.drawable.ic_action_plus_dark).listen(listener).position(-1).reg();
+			adapter.item(R.string.context_menu_item_create_poi).colorIcon(R.drawable.ic_action_plus_dark).listen(listener).position(-1).reg();
 		}
-		adapter.item(R.string.context_menu_item_open_note).iconColor(R.drawable.ic_action_bug_dark).listen(listener).reg();
+		adapter.item(R.string.context_menu_item_open_note).colorIcon(R.drawable.ic_action_bug_dark).listen(listener).reg();
 	}
 
 	@Override
@@ -240,7 +240,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		adapter.item(R.string.layer_osm_bugs).selected(settings.SHOW_OSM_BUGS.get() ? 1 : 0)
-				.iconColor(R.drawable.ic_action_bug_dark).listen(new OnContextMenuClick() {
+				.colorIcon(R.drawable.ic_action_bug_dark).listen(new OnContextMenuClick() {
 
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -263,7 +263,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void contextMenuFragment(final Activity la, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			adapter.item(R.string.local_index_mi_upload_gpx)
-					.iconColor(R.drawable.ic_action_export)
+					.colorIcon(R.drawable.ic_action_export)
 					.listen(new OnContextMenuClick() {
 
 						@Override

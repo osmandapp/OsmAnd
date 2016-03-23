@@ -56,7 +56,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
-			helper.item(R.string.version_settings).iconColor(R.drawable.ic_action_gabout_dark)
+			helper.item(R.string.version_settings).colorIcon(R.drawable.ic_action_gabout_dark)
 					.listen(new OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

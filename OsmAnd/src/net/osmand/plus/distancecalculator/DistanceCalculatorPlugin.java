@@ -675,7 +675,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 							return true;
 						}
 					};
-					adapter.item(R.string.delete_point).iconColor(R.drawable.ic_action_delete_dark).listen(listener).reg();
+					adapter.item(R.string.delete_point).colorIcon(R.drawable.ic_action_delete_dark).listen(listener).reg();
 				}
 			}
 		}

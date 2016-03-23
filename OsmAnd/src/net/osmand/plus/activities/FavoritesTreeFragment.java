@@ -171,7 +171,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		if (selectionMode) {
-			CheckBox ch = (CheckBox) v.findViewById(R.id.check_item);
+			CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
 			FavouritePoint model = favouritesAdapter.getChild(groupPosition, childPosition);
 			ch.setChecked(!ch.isChecked());
 			if (ch.isChecked()) {
@@ -722,7 +722,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
-			boolean checkBox = row != null && row.findViewById(R.id.check_item) instanceof CheckBox;
+			boolean checkBox = row != null && row.findViewById(R.id.toggle_item) instanceof CheckBox;
 			boolean same = (selectionMode && checkBox) || (!selectionMode && !checkBox);
 			if (row == null || !same) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -735,7 +735,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.name);
 
 			if (selectionMode) {
-				final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
+				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(groupsToDelete.contains(model));
 
@@ -756,7 +756,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					}
 				});
 			} else {
-				final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
+				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
 			}
 			final View ch = row.findViewById(R.id.options);
@@ -821,7 +821,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			direction.setVisibility(View.VISIBLE);
 			direction.setImageDrawable(arrowImage);
 
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
+			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(favoritesSelected.contains(model));

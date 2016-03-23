@@ -28,7 +28,7 @@
         android:textSize="@dimen/default_list_text_size" />
 
     <CheckBox
-        android:id="@+id/check_item"
+        android:id="@+id/toggle_item"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="center_vertical"

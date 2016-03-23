@@ -99,9 +99,9 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 						}
 						mapActivity.getDashboard().refreshDashboardFragments();
 						settings.SHOW_DASHBOARD_ON_START.set(
-								((CompoundButton) showDashboardOnStart.findViewById(R.id.check_item)).isChecked());
+								((CompoundButton) showDashboardOnStart.findViewById(R.id.toggle_item)).isChecked());
 						settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(
-								((CompoundButton) accessFromMap.findViewById(R.id.check_item)).isChecked());
+								((CompoundButton) accessFromMap.findViewById(R.id.toggle_item)).isChecked());
 						mapActivity.getMapLayers().getMapControlsLayer().initDasboardRelatedControls();
 					}
 				})
@@ -121,7 +121,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		final TextView subtextView = (TextView) view.findViewById(R.id.subtext);
 		textView.setText(text);
 		subtextView.setText(description);
-		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.check_item);
+		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
 		compoundButton.setChecked(pref.get());
 		textView.setTextColor(pref.get() ? textColorPrimary
 				: textColorSecondary);
@@ -247,7 +247,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 			this.dashFragmentAdapter = dashFragmentAdapter;
 			this.numberOfRowsTextView = (TextView) view.findViewById(R.id.numberOfRowsTextView);
 			this.textView = (TextView) view.findViewById(R.id.text);
-			this.compoundButton = (CompoundButton) view.findViewById(R.id.check_item);
+			this.compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
 			colorBlue = ctx.getResources().getColor(R.color.dashboard_blue);
 		}
 

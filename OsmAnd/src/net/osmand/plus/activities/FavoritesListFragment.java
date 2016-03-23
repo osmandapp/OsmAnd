@@ -234,7 +234,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 					favorite.getLatitude(), favorite.getLongitude(), screenOrientation, app, activity);
 
 			name.setText(getName(favorite));
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
+			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 			icon.setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
 			return row;
