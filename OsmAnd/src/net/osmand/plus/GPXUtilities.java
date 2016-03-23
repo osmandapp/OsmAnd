@@ -60,6 +60,10 @@ public class GPXUtilities {
 			return extensions;
 		}
 
+		public boolean hasCustomZoom() {
+			return extensions != null && extensions.containsKey("zoom");
+		}
+
 		public float getGpxZoom(float defaultGpxZoom) {
 			if(extensions != null && extensions.containsKey("zoom")) {
 				try {

@@ -84,7 +84,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private List<TrkSegment> points;
 	private GPXFile gpx;
 
-	
+	private boolean autoScale = false;				//TODO: INIT THIS TO TRUE ONLY FOR ANDREW'S TESTING
+	public void setAutoScale(boolean scale) {
+		autoScale = scale;
+	}
+
+
 	private void initUI() {
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
@@ -414,9 +419,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				int viewZoom = view.getZoom();
 				if (ts.culledFingerprint != ts.points.size() + viewZoom) {
 
+					//TODO: Don't keep doing this for 'current track'!
+					//TODO: Split this out to a separate thread
+
 					// Reduce the point count of the track, based on the zoom level. "Cache" the new culled track alongside
 					// the original. A "fingerprint" lets us know when culled track is out of date and must be regenerated.
-					//TODO: Ok, this might take some amount of time with very large tracks. Move it to a separate thread!
 					boolean[] survivor = cullRamerDouglasPeucer(ts.points, Math.pow(2.0, 17 - viewZoom));
 					List<WptPt> culled = new ArrayList<WptPt>();
 					for (int i = 0; i < survivor.length; i++)
@@ -429,7 +436,22 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
 				// AND it is scaled by the "default" original track width per the code where NO GPX track was detected.
-				double gpxTrackScale = ts.getGpxZoom(g.getGpxZoom()) * getScale(viewZoom) / getDefaultStrokeWidth();
+
+				// Logic:  IFF the GPX specifies a zoom (i.e., getGpxZoom != 1.0) then we always use that to modify the
+				// existing track width (i.e., we multiply the original track width by the zoom). This will make tracks wider
+				// by relatively the same amount at all zoom levels, regardless of which system originally set the width.
+				// IFF, however, the GPX does not specify a zoom, then we totally leave the track width alone.
+				// >>> Constrained by the toggle ON/OFF (autoScale) which lets us choose between behaviours
+				// autoScale = false --> above behaviour
+				// autoScale = true --> Andrew's debugging version which assumes a constant track width for all zooms has
+				//  been set by updatePaints, and then this is modified according to the view scale.  So...
+				// *** MAKE SURE autoScale IS SET to 'false' !!!
+
+				double gpxTrackScale = ts.getGpxZoom(g.getGpxZoom());		// will be 1.0 if no scaling specified in segment
+				if (autoScale == true || ts.hasCustomZoom()) {
+					gpxTrackScale *=  getScale(viewZoom) / getDefaultStrokeWidth();
+				}
+
 				if (gpxTrackScale > 0 && ts.culledPoints != null) {
 
 					updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
@@ -437,6 +459,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					// Now we have calculated the scaling for the tracks, and updatePaints has potentially set its idea
 					// of the track sizes, we can revisit the paint contexts and resize the brushes accordingly. This should
 					// leave the existing brush calculations intact, and simply modify the resultant sizes according to scale...
+					// Note: If autoScale is 'false' then gpxTrackScale IS 1.0 and we have no net change on sizing.           <<< IMPORTANT!
 					fixupStrokeWidths(gpxTrackScale);
 
 					// Create a transient track/segment for display purposes only
@@ -537,8 +560,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		Path path = new Path();
 		for (int i = startIndex; i <= endIndex; i++) {
 			WptPt p = l.points.get(i);
-			int x = (int) tb.getPixXFromLatLon(p.lat, p.lon);
-			int y = (int) tb.getPixYFromLatLon(p.lat, p.lon);
+			int x = (int) (tb.getPixXFromLatLon(p.lat, p.lon)+0.5);
+			int y = (int) (tb.getPixYFromLatLon(p.lat, p.lon)+0.5);
 //			int x = tb.getPixXFromLonNoRot(p.lon);
 //			int y = tb.getPixYFromLatNoRot(p.lat);
 			tx.add(x);
