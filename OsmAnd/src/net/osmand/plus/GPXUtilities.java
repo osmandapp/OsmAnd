@@ -60,8 +60,13 @@ public class GPXUtilities {
 			return extensions;
 		}
 
+		private boolean customZoom = false;
 		public boolean hasCustomZoom() {
-			return extensions != null && extensions.containsKey("zoom");
+			customZoom = customZoom | (extensions != null && extensions.containsKey("zoom"));
+			return customZoom;
+		}
+		public void setCustomZoom(boolean zoom) {
+			customZoom = zoom;
 		}
 
 		public float getGpxZoom(float defaultGpxZoom) {
@@ -717,6 +722,7 @@ public class GPXUtilities {
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
+						sgmt.setCustomZoom(ts.hasCustomZoom()|t.hasCustomZoom());
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);
 						sgmt.setColor(ts.getColor(trackColor));

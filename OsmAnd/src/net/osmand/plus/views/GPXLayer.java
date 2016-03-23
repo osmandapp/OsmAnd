@@ -13,7 +13,6 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.support.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -37,13 +36,14 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapUtils;
+import net.osmand.osm.edit.OsmMapUtils;
+import net.osmand.osm.edit.Node;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
-import java.util.concurrent.Semaphore;
 
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
@@ -430,9 +430,19 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						if (survivor[i])
 							culled.add(ts.points.get(i));
 
+					// TESTING THE GENERIC POINT LIST RESAMPLING CODE - SHOULD LOOK THE SAME AS ORIGINAL WITH DIFFERENT POINTS
+					// SPACED EQUALLY IN DISTANCE ACCORDING TO PARAMETER...
+					List<WptPt> resampled = resampleTrack(culled, 150.0);
+					culled = resampled;			// testing!!!
+
 					ts.culledFingerprint = ts.points.size() + viewZoom;            // 'cache' by associating to track size + zoom level
 					ts.culledPoints = culled;
+
+
+
+
 				}
+
 
 				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
 				// AND it is scaled by the "default" original track width per the code where NO GPX track was detected.
@@ -687,5 +697,44 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 
 
+	// Resample a list of points into a new list of points.
+	// The new list is evenly-spaced (dist) and contains the first and last point from the original list.
+	// The purpose is to allow tracks to be displayed with colours/shades/animation with even spacing
+	// This routine essentially 'walks' along the path, dropping sample points along the trail where necessary. It is
+	// Typically, pass a point list to this, and set dist (in metres) to something that's relative to screen zoom
+	// The new point list has resampled times, elevations, speed and hdop too!
 
+	private List<WptPt> resampleTrack(List<WptPt> pts, double dist) {
+
+		ArrayList<WptPt> newPts = new ArrayList<WptPt>();
+		if (pts != null && pts.size() > 0) {
+
+			WptPt lastPt = pts.get(0);
+			double segSub = 0;
+			for (int i = 1; i < pts.size(); i++) {
+				WptPt pt = pts.get(i);
+				double segLength = MapUtils.getDistance(pt.getLatitude(),pt.getLongitude(),lastPt.getLatitude(),lastPt.getLongitude());
+
+				// March along the segment, calculating the interpolated point values as we go
+				while (segSub < segLength) {
+					double partial = segSub / segLength;
+					WptPt newPoint = new WptPt(
+							lastPt.getLatitude() + partial * (pt.getLatitude() - lastPt.getLatitude()),
+							lastPt.getLongitude() + partial * (pt.getLongitude() - lastPt.getLongitude()),
+							(long) (lastPt.time + partial * (pt.time - lastPt.time)),
+							lastPt.ele + partial * (pt.ele - lastPt.ele),
+							lastPt.speed + partial * (pt.speed - lastPt.speed),
+							lastPt.hdop + partial * (pt.hdop - lastPt.hdop)
+					);
+					newPts.add(newPts.size(), newPoint);
+					segSub += dist;
+				}
+				segSub -= segLength;                // leftover
+				lastPt = pt;
+			}
+			// Add in the last point as a terminator
+			newPts.add(newPts.size(), lastPt);
+		}
+		return newPts;
+	}
 }
