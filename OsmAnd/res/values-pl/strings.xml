@@ -2138,7 +2138,7 @@
     <string name="number_of_recipients">Liczba odbiorców</string>
     <string name="report">Raport</string>
     <string name="avoid_road">Omiń drogę</string>
-    <string name="recalculate_route">Wyznacz trasę ponownie</string>
+    <string name="recalculate_route">Przelicz trasę</string>
     <string name="open_street_map_login_and_pass">Nazwa użytkownika i hasło OpenStreetMap</string>
     <string name="osm_editors_ranking">Ranking edytorów OSM</string>
     <string name="osm_live_enter_email">Proszę wprowadzić prawidłowy adres e-mail</string>
