@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -203,7 +204,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 
 	public void createDashboardView() {
-		baseColor = mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
+		baseColor = ContextCompat.getColor(mapActivity, R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
 		waypointDialogHelper.setHelperCallbacks(this);
 		mapMarkerDialogHelper = new MapMarkerDialogHelper(mapActivity);
@@ -356,7 +357,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					}
 				});
 
-		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
+		gradientToolbar = ContextCompat.getDrawable(mapActivity, R.drawable.gradient_toolbar).mutate();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
 			scrollView.setScrollViewCallbacks(this);
@@ -380,7 +381,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			fl.gravity = Gravity.BOTTOM;
 			shadowContainer.setLayoutParams(fl);
 			ImageView shadow = new ImageView(mapActivity);
-			shadow.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.bg_shadow_onmap));
+			shadow.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.bg_shadow_onmap));
 			shadow.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
 					FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM));
 			shadow.setScaleType(ScaleType.FIT_XY);
@@ -575,12 +576,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
 		actionButton.setLayoutParams(params);
 		actionButton.setScaleType(ScaleType.CENTER);
-		actionButton.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.btn_circle_blue));
+		actionButton.setBackgroundResource(R.drawable.btn_circle_blue);
 		hideActionButton();
 
 
 		DashboardActionButton myLocationButton = new DashboardActionButton();
-		myLocationButton.icon = mapActivity.getResources().getDrawable(R.drawable.map_my_location);
+		myLocationButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_my_location);
 		myLocationButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -594,7 +595,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		};
 
 		DashboardActionButton navigateButton = new DashboardActionButton();
-		navigateButton.icon = mapActivity.getResources().getDrawable(R.drawable.map_start_navigation);
+		navigateButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_start_navigation);
 		navigateButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -604,7 +605,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		};
 
 		DashboardActionButton routeButton = new DashboardActionButton();
-		routeButton.icon = mapActivity.getResources().getDrawable(R.drawable.map_directions);
+		routeButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_directions);
 		routeButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -644,7 +645,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		};
 
 		DashboardActionButton markersSelectionButton = new DashboardActionButton();
-		markersSelectionButton.icon = mapActivity.getResources().getDrawable(R.drawable.map_start_navigation);
+		markersSelectionButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_start_navigation);
 		markersSelectionButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -863,11 +864,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private void applyDayNightMode() {
-		int backgroundColor = mapActivity.getResources().getColor(
+		final int backgroundColor;
+		backgroundColor = ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.ctx_menu_info_view_bg_dark
 						: R.color.ctx_menu_info_view_bg_light);
-		Drawable dividerDrawable = new ColorDrawable(mapActivity.getResources().getColor(
-				nightMode ? R.color.dashboard_divider_dark : R.color.dashboard_divider_dark));
+		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(mapActivity,
+				nightMode ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
 
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);
@@ -1298,10 +1300,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
 			gradientToolbar.setAlpha((int) ((1 - t) * 255));
 			setAlpha(dashboardView, (int) (t * 128), 0);
+			View toolbar = dashboardView.findViewById(R.id.toolbar);
 			if (t < 1) {
-				dashboardView.findViewById(R.id.toolbar).setBackgroundDrawable(gradientToolbar);
+				//noinspection deprecation
+				toolbar.setBackgroundDrawable(gradientToolbar);
 			} else {
-				dashboardView.findViewById(R.id.toolbar).setBackgroundColor(0xff000000 | baseColor);
+				toolbar.setBackgroundColor(0xff000000 | baseColor);
 			}
 		}
 	}
