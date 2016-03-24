@@ -289,11 +289,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		}
 		mapView.refreshMap(true);
 
-		if (getMyApplication().getAppInitializer().isFirstTime() && FirstUsageFragment.SHOW) {
+		if (!getMyApplication().getAppInitializer().isFirstUsageFragmentDone() && FirstUsageFragment.SHOW) {
 			FirstUsageFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageFragment(),
 							FirstUsageFragment.TAG).commit();
+			app.getAppInitializer().setFirstUsageFragmentDone();
 		}
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -616,6 +617,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 				}
 			} else {
 				if (permissionGranted) {
+					if (app.getAppInitializer().isFirstTime()) {
+						app.getAppInitializer().resetFirstUsageFragmentDone();
+					}
 					restartApp();
 				} else if (getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
 					DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
