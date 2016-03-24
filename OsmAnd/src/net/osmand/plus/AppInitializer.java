@@ -83,7 +83,6 @@ public class AppInitializer implements IProgress {
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
-	public static final String FIRST_USAGE_FRAGMENT_DONE = "FIRST_USAGE_FRAGMENT_DONE"; //$NON-NLS-1$
 
 	public static final String LATEST_CHANGES_URL = "http://osmand.net/blog?id=osmand-2-3-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
@@ -94,7 +93,6 @@ public class AppInitializer implements IProgress {
 
 	private boolean initSettings = false;
 	private boolean firstTime;
-	private boolean firstUsageFragmentDone;
 	private boolean activityChangesShowed = false;
 	private boolean appVersionChanged;
 	private int prevAppVersion;
@@ -170,7 +168,6 @@ public class AppInitializer implements IProgress {
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
 		}
-		firstUsageFragmentDone = startPrefs.contains(FIRST_USAGE_FRAGMENT_DONE);
 		initSettings = true;
 	}
 
@@ -191,26 +188,7 @@ public class AppInitializer implements IProgress {
 	public void resetFirstTimeRun() {
 		if(startPrefs != null) {
 			startPrefs.edit().remove(FIRST_TIME_APP_RUN).commit();
-			resetFirstUsageFragmentDone();
 		}
-	}
-
-	public void setFirstUsageFragmentDone() {
-		if(startPrefs != null) {
-			startPrefs.edit().putBoolean(FIRST_USAGE_FRAGMENT_DONE, true).commit();
-			firstUsageFragmentDone = true;
-		}
-	}
-
-	public void resetFirstUsageFragmentDone() {
-		if(startPrefs != null) {
-			startPrefs.edit().remove(FIRST_USAGE_FRAGMENT_DONE).commit();
-			firstUsageFragmentDone = false;
-		}
-	}
-
-	public boolean isFirstUsageFragmentDone() {
-		return firstUsageFragmentDone;
 	}
 
 	public boolean isFirstTime() {
