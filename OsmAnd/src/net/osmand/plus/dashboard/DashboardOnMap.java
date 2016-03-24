@@ -1011,7 +1011,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
 				OnContextMenuClick click = cm.getClickAdapter(which);
 				if (click instanceof OnRowItemClick) {
-					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, cm.getElementId(which), which);
+					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, cm.getTitleRes(which), which);
 					if (cl) {
 						hideDashboard();
 					}
@@ -1020,7 +1020,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					if (btn != null && btn.getVisibility() == View.VISIBLE) {
 						btn.setChecked(!btn.isChecked());
 					} else {
-						if (click.onContextMenuClick(listAdapter, cm.getElementId(which), which, false)) {
+						if (click.onContextMenuClick(listAdapter, cm.getTitleRes(which), which, false)) {
 							hideDashboard();
 						}
 					}

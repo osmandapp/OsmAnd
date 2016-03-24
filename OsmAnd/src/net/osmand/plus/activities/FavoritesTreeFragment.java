@@ -271,10 +271,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-//		if (item.getElementId() == EXPORT_ID) {
-//			export();
-//			return true;
-//		} else 
 		if (item.getItemId() == SELECT_MAP_MARKERS_ID) {
 			selectMapMarkers();
 			return true;

@@ -175,13 +175,17 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		basicFileOperation(info, adapter);
 		OsmandPlugin.onContextMenuActivity(getActivity(), null, info, adapter);
 
-		String[] values = adapter.getItemNames();
+		int[] titleResources = adapter.getTitleResources();
+		String[] values = new String[titleResources.length];
+		for (int i = 0; i < titleResources.length; i++) {
+			values[i] = getString(titleResources[i]);
+		}
 		builder.setItems(values, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
+					clk.onContextMenuClick(null, adapter.getTitleRes(which), which, false);
 				}
 			}
 
@@ -611,10 +615,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					split.getItem();
 					MenuItemCompat.setShowAsAction(split.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
-				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = split.add(0, optionsMenuAdapter.getTitleRes(j), j + 1, optionsMenuAdapter.getTitleRes(j));
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			} else {
-				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = menu.add(0, optionsMenuAdapter.getTitleRes(j), j + 1, optionsMenuAdapter.getTitleRes(j));
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			}
 			OsmandApplication app = getMyApplication();
@@ -635,7 +639,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getElementId(i)) {
+			if (itemId == optionsMenuAdapter.getTitleRes(i)) {
 				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(null, itemId, i, false);
 				return true;
 			}
