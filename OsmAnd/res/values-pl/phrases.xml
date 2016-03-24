@@ -922,17 +922,17 @@
 	<string name="poi_abandoned_poi">Obiekt opuszczony</string>
 	<string name="poi_disused">Wyłączony z użycia</string>
 
-	<string name="poi_operator">Obsługujący</string>
+	<string name="poi_operator">Operator</string>
 	<string name="poi_brand">Marka</string>
 	<string name="poi_fee_yes">Opłata</string>
 
-	<string name="poi_enforcement_traffic_signals">Sygnalizacja świetlna</string>
-	<string name="poi_enforcement_maxspeed">Fotoradar</string>
-	<string name="poi_enforcement_maxheight">Kontrola wysokości pojazdu</string>
-	<string name="poi_enforcement_mindistance">Kontrola minimalnego dystansu</string>
-	<string name="poi_enforcement_check">Kontrola</string>
-	<string name="poi_enforcement_access">Kontrola dostępu</string>
-	<string name="poi_enforcement_toll">Kontrola opłat</string>
+	<string name="poi_enforcement_traffic_signals">Egzekwowanie: Sygnalizacja świetlna</string>
+	<string name="poi_enforcement_maxspeed">Egzekwowanie: ograniczeń prędkości</string>
+	<string name="poi_enforcement_maxheight">Egzekwowanie: wysokości pojazdu</string>
+	<string name="poi_enforcement_mindistance">Egzekwowanie: minimalnego dystansu</string>
+	<string name="poi_enforcement_check">Egzekwowanie: kontrola</string>
+	<string name="poi_enforcement_access">Egzekwowanie: dostępu</string>
+	<string name="poi_enforcement_toll">Egzekwowanie: opłat</string>
 
 <string name="poi_doors">Drzwi</string>
 	<string name="poi_perfumery">Perfumeria</string>
@@ -1050,7 +1050,7 @@
 	<string name="poi_height">Wysokość</string>
 	<string name="poi_ele">Wysokość nad poziomem morza</string>
 	<string name="poi_fee_no">Bez opłat</string>
-	<string name="poi_drinking_water_yes">Woda pitna</string>
+	<string name="poi_drinking_water_yes">Woda pitna: tak</string>
 	<string name="poi_seasonal_yes">Sezonowe</string>
 	<string name="poi_seasonal_spring">Wiosna</string>
 	<string name="poi_seasonal_summer">Lato</string>
@@ -1068,8 +1068,8 @@
 	<string name="poi_nudism_customary">Nudyzm: zwyczajowy</string>
 	<string name="poi_trade_building_supplies">Materiały budowlane</string>
 	<string name="poi_population">Populacja</string>
-	<string name="poi_parking_underground">Podziemny</string>
-	<string name="poi_parking_multi_storey">Wielopoziomowy</string>
+	<string name="poi_parking_underground">Typ: podziemny</string>
+	<string name="poi_parking_multi_storey">Typ: wielopoziomowy</string>
 
 	<string name="poi_leaf_type_broadleaved">Liściaste</string>
 	<string name="poi_leaf_type_needleleaved">Iglaste</string>
@@ -1077,10 +1077,10 @@
 	<string name="poi_leaf_type_leafless">Bezlistne</string>
 	<string name="poi_species">Gatunki</string>
 	<string name="poi_trees_oil">Olej palmowy</string>
-	<string name="poi_animal_shelter_dog">Schronisko dla psów</string>
-	<string name="poi_animal_shelter_cat">Schronisko dla kotów</string>
-	<string name="poi_animal_shelter_dog_cat">Schronisko dla psów i kotów</string>
-	<string name="poi_animal_shelter_bird">Schronisko dla ptaków</string>
+	<string name="poi_animal_shelter_dog">Typ schroniska: dla psów</string>
+	<string name="poi_animal_shelter_cat">Typ schroniska: dla kotów</string>
+	<string name="poi_animal_shelter_dog_cat">Typ schroniska: dla psów i kotów</string>
+	<string name="poi_animal_shelter_bird">Typ schroniska: dla ptaków</string>
 
 	<string name="poi_seats">Siedzenia</string>
 	<string name="poi_backrest_yes">Oparcia: tak</string>
@@ -1115,10 +1115,10 @@
 	<string name="poi_information_route_marker">Znacznik trasy</string>
 	<string name="poi_information_sign">Znak</string>
 	<string name="poi_information_bicyclemap">Mapa rowerowa</string>
-	<string name="poi_board_type_plants">Informacje o roślinach</string>
-	<string name="poi_board_type_public_transport">Informacje na temat transportu publicznego</string>
-	<string name="poi_board_type_technology">Informacje o technologii</string>
-	<string name="poi_board_type_astronomy">Informacje na temat astronomii</string>
+	<string name="poi_board_type_plants">Informacje: o roślinach</string>
+	<string name="poi_board_type_public_transport">Informacje: na temat transportu publicznego</string>
+	<string name="poi_board_type_technology">Informacje: technologiczne</string>
+	<string name="poi_board_type_astronomy">Informacje: astronomiczne</string>
 
 	<string name="poi_smoking_no">Zakaz palenia</string>
 	<string name="poi_smoking_outside">Palenie dozwolone na zewnątrz</string>
@@ -1202,7 +1202,7 @@
 	<string name="poi_denomination_dutch_reformed">Holenderski Kościół Reformowany</string>
 	<string name="poi_denomination_apostolic">Kościół Apostolski</string>
 	<string name="poi_denomination_latter_day_saints">Kościół Jezusa Chrystusa Świętych w Dniach Ostatnich</string>
-	<string name="poi_denomination_church_of_christ"/>
+	<string name="poi_denomination_church_of_christ">Kościół Chrystusowy</string>
 	<string name="poi_denomination_georgian_orthodox">Gruziński prawosławny</string>
 	<string name="poi_denomination_romanian_orthodox">Rumuński prawosławny</string>
 	<string name="poi_denomination_coptic_orthodox">Koptyjski</string>
@@ -1252,4 +1252,13 @@
 
 	<string name="poi_amenity_vacuum_cleaner">Odkurzacz</string>
 
+	<string name="poi_cooling_tower">Chłodnia przemysłowa</string>
+	<string name="poi_bunker_silo">Silos do składowania sypkich materiałów</string>
+	<string name="poi_denomination_nondenominational">Bezwyznaniowy</string>
+	<string name="poi_denomination_congregational">Kongregacyjny</string>
+	<string name="poi_denomination_spiritist">Spirytyczny</string>
+	<string name="poi_denomination_united_church_of_christ">Zjednoczony Kościół Chrystusowy</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopski ortodoksyjny tewahedo</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+	<string name="poi_denomination_uniting">Zjednoczony</string>
 	</resources>
