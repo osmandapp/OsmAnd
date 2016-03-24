@@ -13,6 +13,7 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.os.AsyncTask;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -41,16 +42,18 @@ import net.osmand.osm.edit.Node;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 			MapTextProvider<WptPt> {
-	
+
 	private OsmandMapTileView view;
-	
+
 	private Paint paint;
 	private Paint paint2;
 	private boolean isPaint2;
@@ -66,7 +69,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private static final int startZoom = 7;
 
-	
+
 	private GpxSelectionHelper selectedGpxHelper;
 	private Paint paintBmp;
 	private List<WptPt> cache = new ArrayList<WptPt>();
@@ -83,8 +86,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private List<TrkSegment> points;
 	private GPXFile gpx;
+	private HashMap<Object,AsyncRamerDouglasPeucer> asyncCullers = new HashMap();
 
-	private boolean autoScale = false;				//TODO: INIT THIS TO TRUE ONLY FOR ANDREW'S TESTING
+	private boolean autoScale = false;                //TODO: INIT THIS TO TRUE ONLY FOR ANDREW'S TESTING
+
 	public void setAutoScale(boolean scale) {
 		autoScale = scale;
 	}
@@ -103,21 +108,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paint_1 = new Paint();
 		paint_1.setStyle(Style.STROKE);
 		paint_1.setAntiAlias(true);
-		
 
-		
+
 		paintBmp = new Paint();
 		paintBmp.setAntiAlias(true);
 		paintBmp.setFilterBitmap(true);
 		paintBmp.setDither(true);
-		
+
 		paintTextIcon = new Paint();
 		paintTextIcon.setTextSize(10 * view.getDensity());
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setFakeBoldText(true);
 		paintTextIcon.setColor(Color.BLACK);
 		paintTextIcon.setAntiAlias(true);
-		
+
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 
 		paintOuter = new Paint();
@@ -132,7 +136,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
 	}
-	
+
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -142,7 +146,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		initUI();
 	}
 
-	
+
 	public void updateLayerStyle() {
 		cachedHash = -1;
 	}
@@ -152,7 +156,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 
-	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox){
+	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
 		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity());
@@ -164,16 +168,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
 				CommonPreference<String> p = view.getSettings().getCustomRenderProperty("currentTrackColor");
-				if(p != null && p.isSet()) {
+				if (p != null && p.isSet()) {
 					RenderingRuleProperty ctColor = rrs.PROPS.get("currentTrackColor");
-					if(ctColor != null) {
+					if (ctColor != null) {
 						req.setStringFilter(ctColor, p.get());
 					}
 				}
 				CommonPreference<String> p2 = view.getSettings().getCustomRenderProperty("currentTrackWidth");
-				if(p2 != null && p2.isSet()) {
+				if (p2 != null && p2.isSet()) {
 					RenderingRuleProperty ctWidth = rrs.PROPS.get("currentTrackWidth");
-					if(ctWidth != null) {
+					if (ctWidth != null) {
 						req.setStringFilter(ctWidth, p2.get());
 					}
 				}
@@ -212,7 +216,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paint.setColor(color == 0 ? cachedColor : color);
 		return cachedColor;
 	}
-	
+
 	private int calculateHash(Object... o) {
 		return Arrays.hashCode(o);
 	}
@@ -220,7 +224,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if(points != null) {
+		if (points != null) {
 			updatePaints(0, false, false, settings, tileBox);
 			drawSegments(canvas, tileBox, points);
 		} else {
@@ -237,9 +241,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			}
 		}
 	}
-	
-	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles, 
-			DrawSettings settings) {
+
+	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles,
+										 DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			for (SelectedGpxFile g : selectedGPXFiles) {
@@ -257,10 +261,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSplitItems(Canvas canvas, RotatedTileBox tileBox, List<GpxDisplayItem> items, DrawSettings settings) {
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 		int r = (int) (12 * tileBox.getDensity());
-		int dr = r * 3 / 2; 
+		int dr = r * 3 / 2;
 		int px = -1;
 		int py = -1;
-		for(int k = 0; k < items.size(); k++) {
+		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
 			WptPt o = i.locationEnd;
 			if (o != null && o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top && o.lon >= latLonBounds.left
@@ -333,80 +337,43 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 
-	// Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
-	// This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
-	// but optimised for this specific usage.
-
-	private boolean[] cullRamerDouglasPeucer(List<WptPt> points, double epsilon) {
-
-		int nsize = points.size();
-		boolean[] survivor = new boolean[nsize];
-		if (nsize>0) {
-			cullRamerDouglasPeucer(points, epsilon, survivor, 0, nsize - 1);
-			survivor[0] = true;
-		}
-		return survivor;
-	}
-
-	private static void cullRamerDouglasPeucer(List<WptPt> pt, double epsilon, boolean[] survivor, int start, int end) {
-
-		double dmax = -1;
-		int index = -1;
-		for (int i = start + 1; i < end; i++) {
-			double d = MapUtils.getOrthogonalDistance(
-					pt.get(i).getLatitude(), pt.get(i).getLongitude(),
-					pt.get(start).getLatitude(), pt.get(start).getLongitude(),
-					pt.get(end).getLatitude(), pt.get(end).getLongitude());
-			if (d > dmax) {
-				dmax = d;
-				index = i;
-			}
-		}
-		if (dmax >= epsilon ) {
-			cullRamerDouglasPeucer(pt, epsilon, survivor, start, index);
-			cullRamerDouglasPeucer(pt, epsilon, survivor, index, end);
-		} else {
-			survivor[end] = true;
-		}
-	}
-
 	private double getScale(int zoom) {
 
 		final double handRolledMagnification[] = {
 
-			// Calculation: 2^((18-zoom)/2) and then handcrafted to finesse the visuals
-			// Trimmed to 0 when not to be displayed, and all zooms after last entry use same value as last
-			// Adjust the constant multiplier on the return value to make things a bit bigger or smaller
+				// Calculation: 2^((18-zoom)/2) and then handcrafted to finesse the visuals
+				// Trimmed to 0 when not to be displayed, and all zooms after last entry use same value as last
+				// Adjust the constant multiplier on the return value to make things a bit bigger or smaller
 
-				0, 					// 0
-				0,				  	// 1
-				0,					// 2
-				0,				  	// 3
-				0,			  		// 4
-				0,				  	// 5
-				0,		 	 		// 6
-				0.0220970869121,  	// 7		1st zoom level where GPS tracks visible
-				0.03125,  			// 8
-				0.0441941738242,  	// 9
-				0.0625,  			// 10
-				0.0883883476483,  	// 11
-				0.125,  			// 12
-				0.176776695297,  	// 13
-				0.25, 	 			// 14
-				0.353553390593,  	// 15
-				0.5,  				// 16		last zoom level where things get bigger
-									// 17... 	same as above
+				0,                    // 0
+				0,                    // 1
+				0,                    // 2
+				0,                    // 3
+				0,                    // 4
+				0,                    // 5
+				0,                    // 6
+				0.0220970869121,    // 7		1st zoom level where GPS tracks visible
+				0.03125,            // 8
+				0.0441941738242,    // 9
+				0.0625,            // 10
+				0.0883883476483,    // 11
+				0.125,            // 12
+				0.176776695297,    // 13
+				0.25,                // 14
+				0.353553390593,    // 15
+				0.5,                // 16		last zoom level where things get bigger
+				// 17... 	same as above
 
 				// add or remove extra zoom level entries - the code will work OK as it's self-configuring
 		};
 
-		int clamped = Math.max(0, Math.min(zoom, handRolledMagnification.length-1));
+		int clamped = Math.max(0, Math.min(zoom, handRolledMagnification.length - 1));
 		return 32. * handRolledMagnification[clamped];
 	}
 
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
-			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
+										   List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 
 		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<TrkSegment> segments = g.getPointsToDisplay();
@@ -420,28 +387,29 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				if (ts.culledFingerprint != ts.points.size() + viewZoom) {
 
 					//TODO: Don't keep doing this for 'current track'!
-					//TODO: Split this out to a separate thread
 
-					// Reduce the point count of the track, based on the zoom level. "Cache" the new culled track alongside
-					// the original. A "fingerprint" lets us know when culled track is out of date and must be regenerated.
-					boolean[] survivor = cullRamerDouglasPeucer(ts.points, Math.pow(2.0, 17 - viewZoom));
-					List<WptPt> culled = new ArrayList<WptPt>();
-					for (int i = 0; i < survivor.length; i++)
-						if (survivor[i])
-							culled.add(ts.points.get(i));
+					// Fire up an asynchronous "cull" of the current track. But first, we need to cancel/kill any cull that
+					// is already happening for this track segment - otherwise we get a possible order problem where the culls
+					// finish in out of sequence and we end up viewing the wrong resolution culled track. So, we keep the
+					// cull processes in a hash map so that we know what cull is being done by which track.
 
-					// TESTING THE GENERIC POINT LIST RESAMPLING CODE - SHOULD LOOK THE SAME AS ORIGINAL WITH DIFFERENT POINTS
-					// SPACED EQUALLY IN DISTANCE ACCORDING TO PARAMETER...
-					List<WptPt> resampled = resampleTrack(culled, 150.0);
-					culled = resampled;			// testing!!!
+					AsyncRamerDouglasPeucer culler = asyncCullers.get(ts);
+					if (culler != null)
+						culler.cancel(true);
+					culler = new AsyncRamerDouglasPeucer(ts, Math.pow(2.0, 17 - viewZoom));
+					asyncCullers.put(ts, culler);
+					ts.culledPoints = null;			// effectively use full-resolution until re-cull complete (see below)
+					culler.execute("Culled");
 
 					ts.culledFingerprint = ts.points.size() + viewZoom;            // 'cache' by associating to track size + zoom level
-					ts.culledPoints = culled;
-
-
-
-
 				}
+
+				// Special-case if there is NO culled map, then we use the full-resolution!
+				// This kicks in when first displaying a track and the culled track hasn't finished generating yet.
+				// Also indirectly when we have started culling a track and we want to switch display to highest resolution for
+				// the track so that we don't see zoomed-in low-resolution culled tracks.
+				if (ts.culledPoints==null)
+					ts.culledPoints = ts.points;
 
 
 				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
@@ -457,9 +425,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				//  been set by updatePaints, and then this is modified according to the view scale.  So...
 				// *** MAKE SURE autoScale IS SET to 'false' !!!
 
-				double gpxTrackScale = ts.getGpxZoom(g.getGpxZoom());		// will be 1.0 if no scaling specified in segment
+				double gpxTrackScale = ts.getGpxZoom(g.getGpxZoom());        // will be 1.0 if no scaling specified in segment
 				if (autoScale == true || ts.hasCustomZoom()) {
-					gpxTrackScale *=  getScale(viewZoom) / getDefaultStrokeWidth();
+					gpxTrackScale *= getScale(viewZoom) / getDefaultStrokeWidth();
 				}
 
 				if (gpxTrackScale > 0 && ts.culledPoints != null) {
@@ -492,12 +460,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		osmandRenderer.fixupStrokeWidth(paint2, rescale);
 		osmandRenderer.fixupStrokeWidth(paint_1, rescale);
 		//TODO: shadowPaint??
-		}
+	}
 
 	private boolean isPointVisited(WptPt o) {
 		boolean visit = false;
 		String visited = o.getExtensionsToRead().get("VISITED_KEY");
-		if(visited != null && !visited.equals("0")) {
+		if (visited != null && !visited.equals("0")) {
 			visit = true;
 		}
 		return visit;
@@ -556,11 +524,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 
-
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
-
 
 
 	private void drawSegment(Canvas canvas, RotatedTileBox tb, TrkSegment l, int startIndex, int endIndex) {
@@ -570,36 +536,36 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		Path path = new Path();
 		for (int i = startIndex; i <= endIndex; i++) {
 			WptPt p = l.points.get(i);
-			int x = (int) (tb.getPixXFromLatLon(p.lat, p.lon)+0.5);
-			int y = (int) (tb.getPixYFromLatLon(p.lat, p.lon)+0.5);
+			int x = (int) (tb.getPixXFromLatLon(p.lat, p.lon) + 0.5);
+			int y = (int) (tb.getPixYFromLatLon(p.lat, p.lon) + 0.5);
 //			int x = tb.getPixXFromLonNoRot(p.lon);
 //			int y = tb.getPixYFromLatNoRot(p.lat);
 			tx.add(x);
 			ty.add(y);
 		}
 		calculatePath(tb, tx, ty, path);
-		if(isPaint_1) {
+		if (isPaint_1) {
 			canvas.drawPath(path, paint_1);
 		}
-		if(isShadowPaint) {
+		if (isShadowPaint) {
 			canvas.drawPath(path, shadowPaint);
 		}
 		int clr = paint.getColor();
-		if(clr != l.getColor(clr) && l.getColor(clr) != 0) {
+		if (clr != l.getColor(clr) && l.getColor(clr) != 0) {
 			paint.setColor(l.getColor(clr));
 		}
 		canvas.drawPath(path, paint);
 		paint.setColor(clr);
-		if(isPaint2) {
+		if (isPaint2) {
 			canvas.drawPath(path, paint2);
 		}
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 
 	}
-	
-	
+
+
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2) ;
+		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2);
 //		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
 
@@ -622,16 +588,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public String getObjectDescription(Object o) {
-		if(o instanceof WptPt){
-			return view.getContext().getString(R.string.gpx_wpt) + " : " + ((WptPt)o).name; //$NON-NLS-1$
+		if (o instanceof WptPt) {
+			return view.getContext().getString(R.string.gpx_wpt) + " : " + ((WptPt) o).name; //$NON-NLS-1$
 		}
 		return null;
 	}
-	
+
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof WptPt){
-			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt)o).name); //$NON-NLS-1$
+		if (o instanceof WptPt) {
+			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt) o).name); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -653,17 +619,18 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof WptPt){
-			return new LatLon(((WptPt)o).lat, ((WptPt)o).lon);
+		if (o instanceof WptPt) {
+			return new LatLon(((WptPt) o).lat, ((WptPt) o).lon);
 		}
 		return null;
 	}
-	
-	
+
+
 	@Override
 	public void destroyLayer() {
-		
+
 	}
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
@@ -676,7 +643,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public LatLon getTextLocation(WptPt o) {
-		return new LatLon(((WptPt)o).lat, ((WptPt)o).lon);
+		return new LatLon(((WptPt) o).lat, ((WptPt) o).lon);
 	}
 
 	@Override
@@ -692,9 +659,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	public void setGivenGpx(GPXFile gpx) {
 		this.gpx = gpx;
-		this.points = (gpx == null ? null :	gpx.proccessPoints());
+		this.points = (gpx == null ? null : gpx.proccessPoints());
 	}
-
 
 
 	// Resample a list of points into a new list of points.
@@ -703,6 +669,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	// This routine essentially 'walks' along the path, dropping sample points along the trail where necessary. It is
 	// Typically, pass a point list to this, and set dist (in metres) to something that's relative to screen zoom
 	// The new point list has resampled times, elevations, speed and hdop too!
+
+	// TESTING THE GENERIC POINT LIST RESAMPLING CODE - SHOULD LOOK THE SAME AS ORIGINAL WITH DIFFERENT POINTS
+	// SPACED EQUALLY IN DISTANCE ACCORDING TO PARAMETER...
+//					List<WptPt> resampled = resampleTrack(culled, 1.0);
+//					culled = resampled;            // testing!!!
+
 
 	private List<WptPt> resampleTrack(List<WptPt> pts, double dist) {
 
@@ -713,7 +685,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			double segSub = 0;
 			for (int i = 1; i < pts.size(); i++) {
 				WptPt pt = pts.get(i);
-				double segLength = MapUtils.getDistance(pt.getLatitude(),pt.getLongitude(),lastPt.getLatitude(),lastPt.getLongitude());
+				double segLength = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(), lastPt.getLatitude(), lastPt.getLongitude());
 
 				// March along the segment, calculating the interpolated point values as we go
 				while (segSub < segLength) {
@@ -737,4 +709,86 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 		return newPts;
 	}
+
+
+	private class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
+
+		private TrkSegment ts = null;
+		private double zoom;
+		private List<WptPt> culled = null;
+
+		public AsyncRamerDouglasPeucer(TrkSegment ts, double zoom) {
+			this.ts = ts;
+			this.zoom = zoom;
+		}
+
+
+		// Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
+		// This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
+		// but optimised for this specific usage.
+
+		private boolean[] cullRamerDouglasPeucer(List<WptPt> points, double epsilon) {
+
+			int nsize = points.size();
+			boolean[] survivor = new boolean[nsize];
+			if (nsize > 0) {
+				cullRamerDouglasPeucer(points, epsilon, survivor, 0, nsize - 1);
+				survivor[0] = true;
+			}
+			return survivor;
+		}
+
+		private void cullRamerDouglasPeucer(List<WptPt> pt, double epsilon, boolean[] survivor, int start, int end) {
+
+			double dmax = -1;
+			int index = -1;
+			for (int i = start + 1; i < end; i++) {
+				double d = MapUtils.getOrthogonalDistance(
+						pt.get(i).getLatitude(), pt.get(i).getLongitude(),
+						pt.get(start).getLatitude(), pt.get(start).getLongitude(),
+						pt.get(end).getLatitude(), pt.get(end).getLongitude());
+				if (d > dmax) {
+					dmax = d;
+					index = i;
+				}
+			}
+			if (dmax >= epsilon) {
+				cullRamerDouglasPeucer(pt, epsilon, survivor, start, index);
+				cullRamerDouglasPeucer(pt, epsilon, survivor, index, end);
+			} else {
+				survivor[end] = true;
+			}
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			String resp = "OK";
+			try {
+				boolean[] survivor = cullRamerDouglasPeucer(ts.points, zoom);
+				culled = new ArrayList<WptPt>();
+				for (int i = 0; i < survivor.length; i++)
+					if (survivor[i])
+						culled.add(ts.points.get(i));
+			} catch (Exception e) {
+				e.printStackTrace();
+				resp = e.getMessage();
+			}
+
+			if (isCancelled())
+				resp = "Cancelled";
+
+			return resp;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// executes on the UI thread so it's OK to change its variables
+			if (ts != null && result == "OK") {
+				ts.culledPoints = culled;
+				view.refreshMap();					// FORCE redraw to guarantee new culled track is shown
+			}
+		}
+	}
+
 }
