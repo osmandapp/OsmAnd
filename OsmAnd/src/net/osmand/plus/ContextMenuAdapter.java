@@ -36,11 +36,11 @@ public class ContextMenuAdapter {
 
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
 	}
 
 	public interface OnIntegerValueChangedListener {
-		boolean onIntegerValueChangedListener(int newValue);
+		public boolean onIntegerValueChangedListener(int newValue);
 	}
 
 	public static abstract class OnRowItemClick implements OnContextMenuClick {

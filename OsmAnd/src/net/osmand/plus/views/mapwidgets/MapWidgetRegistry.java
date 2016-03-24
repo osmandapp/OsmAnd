@@ -1,10 +1,12 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -19,13 +21,11 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 
 public class MapWidgetRegistry {
 	
@@ -488,6 +488,20 @@ public class MapWidgetRegistry {
 				map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(map));
 			}
 		});
+		cm.item(R.string.map_widget_reset).iconColor(R.drawable.ic_action_reset_to_default_dark)
+				.listen(new OnContextMenuClick() {
+
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						resetToDefault();
+						MapInfoLayer mil = map.getMapLayers().getMapInfoLayer();
+						if (mil != null) {
+							mil.recreateControls();
+						}
+						map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(map));
+						return false;
+					}
+				}).reg();
 		final ApplicationMode mode = settings.getApplicationMode();
 		addControls(map, cm, mode);
 		return cm;
