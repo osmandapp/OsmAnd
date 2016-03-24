@@ -52,13 +52,26 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import java.util.HashMap;
 
 public class OsmandRenderer {
 	private static final Log log = PlatformUtil.getLog(OsmandRenderer.class);
 
 	private Paint paint;
-
 	private Paint paintIcon;
+
+	private Map paintStrokes = new HashMap();
+
+	// Given a paint context, use the hashmap ORIGINAL stroke width and scale it by the given value.
+	// Set that to the new stroke width for the paint context. This gives us our scaling of GPX tracks!
+
+	public void fixupStrokeWidth(Paint p, double rescale) {
+		Float originalWidth = (Float) paintStrokes.get(p.hashCode());
+		if (originalWidth != null) {
+			float scaledWidth = originalWidth.floatValue() * (float) rescale;
+			p.setStrokeWidth(scaledWidth);										// even if 0
+		}
+	}
 
 	public static final int TILE_SIZE = 256; 
 	private static final int MAX_V = 75;
@@ -711,6 +724,7 @@ public class OsmandRenderer {
 			p.setColorFilter(null);
 			p.clearShadowLayer();
 			p.setStyle(Style.FILL_AND_STROKE);
+			paintStrokes.put(p.hashCode(),new Float(0));
 			p.setStrokeWidth(0);
 		} else {
 			if(!req.isSpecified(rStrokeW)){
@@ -720,7 +734,9 @@ public class OsmandRenderer {
 			p.setColorFilter(null);
 			p.clearShadowLayer();
 			p.setStyle(Style.STROKE);
-			p.setStrokeWidth(rc.getComplexValue(req, rStrokeW));
+			paintStrokes.put(p.hashCode(),new Float(rc.getComplexValue(req, rStrokeW)));
+			p.setStrokeWidth((float)paintStrokes.get(p.hashCode()));
+
 			String cap = req.getStringPropertyValue(rCap);
 			if(!Algorithms.isEmpty(cap)){
 				p.setStrokeCap(Cap.valueOf(cap.toUpperCase()));
@@ -843,6 +859,7 @@ public class OsmandRenderer {
 		if (rc.shadowRenderingMode == 3 && shadowRadius > 0) {
 			paint.clearShadowLayer();
 			paint.setStrokeWidth(paint.getStrokeWidth() + shadowRadius * 2);
+
 			ColorFilter cf = new PorterDuffColorFilter(shadowColor, Mode.SRC_IN);
 			paint.setColorFilter(cf);
 //			 paint.setColor(0xffbababa);
