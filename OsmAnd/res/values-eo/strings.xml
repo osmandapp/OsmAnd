@@ -801,7 +801,7 @@
     <string name="osmo_connected_devices">Konektitaj aparatoj</string>
     <string name="osmo_session_token">Seanca ĵetono: %1$s</string>
     <string name="osmo_auth_pending">Atendanta rajtigadon…</string>
-    <string name="osmo_locations_sent">"Pozicioj senditaj %1$d (en bufro %s$d) "</string>
+    <string name="osmo_locations_sent">"Pozicioj senditaj %1$d (en bufro %2$d) "</string>
     <string name="osmo_conn_successfull">"Konektita: %1$s "</string>
     <string name="osmo_io_error">"Problemo kun OsMo konekto: "</string>
     <string name="osmo_settings_uuid">Ununura aparata identigilo</string>
