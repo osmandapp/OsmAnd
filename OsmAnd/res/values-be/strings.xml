@@ -2176,4 +2176,5 @@
     <string name="osm_live_support_region">Падтрымоўваны рэгіён</string>
     <string name="osm_live_enter_user_name">Калі ласка ўвядзіце імя</string>
     <string name="select_map_markers">Абярыце маркеры</string>
-    </resources>
+    <string name="file_name_containes_illegal_char">Назва файлу зьмяшчае недапушчальны сымбаль</string>
+</resources>
