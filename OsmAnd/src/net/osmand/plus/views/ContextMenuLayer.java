@@ -18,6 +18,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -131,7 +132,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {
+	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		if (menu.hasHiddenBottomInfo()) {
 			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
@@ -142,9 +143,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					return true;
 				}
 			};
-			adapter.item(R.string.shared_string_show_description)
-					.colorIcon(R.drawable.ic_action_note_dark).listen(listener)
-					.reg();
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.shared_string_show_description, activity)
+					.setColorIcon(R.drawable.ic_action_note_dark).setListener(listener)
+					.createItem());
 		}
 	}
 

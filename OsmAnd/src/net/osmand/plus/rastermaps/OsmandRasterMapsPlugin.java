@@ -24,6 +24,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -254,12 +255,22 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		overlayMapDescr = overlayMapDescr != null ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.item(R.string.layer_overlay).layout(R.layout.drawer_list_doubleitem).description(overlayMapDescr)
-				.colorIcon(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
+		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
+				.setLayout(R.layout.drawer_list_doubleitem)
+				.setDescription(overlayMapDescr)
+				.setColorIcon(R.drawable.ic_layer_top_dark)
+				.setListener(listener)
+				.setPosition(14)
+				.createItem());
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		underlayMapDescr = underlayMapDescr != null ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.item(R.string.layer_underlay).layout(R.layout.drawer_list_doubleitem).description(underlayMapDescr)
-				.colorIcon(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
+		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
+				.setLayout(R.layout.drawer_list_doubleitem)
+				.setDescription(underlayMapDescr)
+				.setColorIcon(R.drawable.ic_layer_bottom_dark)
+				.setListener(listener)
+				.setPosition(15)
+				.createItem());
 	}
 
 
@@ -280,10 +291,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					return true;
 				}
 			};
-			adapter.item(R.string.context_menu_item_update_map).colorIcon(R.drawable.ic_action_refresh_dark)
-					.listen(listener).reg();
-			adapter.item(R.string.shared_string_download_map).colorIcon(R.drawable.ic_action_import)
-					.listen(listener).reg();
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
+					.setColorIcon(R.drawable.ic_action_refresh_dark)
+					.setListener(listener).createItem());
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.shared_string_download_map, mapActivity)
+					.setColorIcon(R.drawable.ic_action_import)
+					.setListener(listener).createItem());
 		}
 	}
 

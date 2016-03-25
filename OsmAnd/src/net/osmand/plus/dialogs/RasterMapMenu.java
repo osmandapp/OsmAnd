@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -111,12 +112,17 @@ public class RasterMapMenu {
 				return false;
 			}
 		};
-		int selectedCode = selected ? 1 : 0;
 		mapTypeDescr = selected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
-		contextMenuAdapter.item(toggleActionStringId).listen(l).selected(selectedCode).reg();
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(toggleActionStringId, mapActivity)
+				.setListener(l)
+				.setSelected(selected).createItem());
 		if (selected) {
-			contextMenuAdapter.item(mapTypeString).listen(l).layout(R.layout.two_line_list_item)
-					.description(mapTypeDescr).reg();
+			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(mapTypeString, mapActivity)
+					.setListener(l)
+					.setLayout(R.layout.two_line_list_item)
+					.setDescription(mapTypeDescr).createItem());
 			ContextMenuAdapter.OnIntegerValueChangedListener integerListener =
 					new ContextMenuAdapter.OnIntegerValueChangedListener() {
 						@Override
@@ -127,20 +133,25 @@ public class RasterMapMenu {
 						}
 					};
 			// android:max="255" in layout is expected
-			contextMenuAdapter.item(mapTypeStringTransparency)
-					.layout(R.layout.progress_list_item)
-					.colorIcon(R.drawable.ic_action_opacity)
-					.progress(mapTransparencyPreference.get())
-					.listen(l)
-					.listenInteger(integerListener).reg();
+			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(mapTypeStringTransparency, mapActivity)
+					.setLayout(R.layout.progress_list_item)
+					.setColorIcon(R.drawable.ic_action_opacity)
+					.setProgress(mapTransparencyPreference.get())
+					.setListener(l)
+					.setIntegerListener(integerListener).createItem());
 			if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
-				contextMenuAdapter.item(R.string.show_polygons).listen(l)
-						.selected(hidePolygonsPref.get() ? 0 : 1).reg();
+				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.show_polygons, mapActivity)
+						.setListener(l)
+						.setSelected(hidePolygonsPref.get()).createItem());
 			}
 			Boolean transparencySwitchState = settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get()
 					&& mapLayers.getMapControlsLayer().isTransparencyBarInitialized();
-			contextMenuAdapter.item(R.string.show_transparency_seekbar).listen(l)
-					.selected(transparencySwitchState ? 1 : 0).reg();
+			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.show_transparency_seekbar, mapActivity)
+					.setListener(l)
+					.setSelected(transparencySwitchState).createItem());
 		}
 	}
 

@@ -8,6 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -83,7 +84,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
-	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {
+	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		if (o != null && o instanceof GPXUtilities.WptPt && plugin.getCurrentRoute() != null){
 			final GPXUtilities.WptPt point = (GPXUtilities.WptPt) o;
 			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
@@ -109,23 +110,33 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			};
 
 			if (plugin.getCurrentRoute().getPointStatus(point)){
-				adapter.item(R.string.mark_as_not_visited).colorIcon(
-						R.drawable.ic_action_gremove_dark).listen(listener).reg();
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.mark_as_not_visited, mapActivity)
+						.setColorIcon(R.drawable.ic_action_gremove_dark)
+						.setListener(listener)
+						.createItem());
 			} else {
-				adapter.item(R.string.mark_as_visited).colorIcon(
-						R.drawable.ic_action_done).listen(listener).reg();
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.mark_as_visited, mapActivity)
+						.setColorIcon(R.drawable.ic_action_done)
+						.setListener(listener)
+						.createItem());
 			}
 
 			RoutePointsPlugin.RoutePoint routePoint = plugin.getCurrentRoute().getRoutePointFromWpt(point);
 			if (routePoint != null) {
 				if (routePoint.isNextNavigate) {
-					adapter.item(R.string.navigate_to_next)
-							.colorIcon(R.drawable.ic_action_gnext_dark).listen(listener)
-							.reg();
+					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setTitleId(R.string.navigate_to_next, mapActivity)
+							.setColorIcon(R.drawable.ic_action_gnext_dark)
+							.setListener(listener)
+							.createItem());
 				} else {
-					adapter.item(R.string.mark_as_current)
-							.colorIcon(R.drawable.ic_action_signpost_dark)
-							.listen(listener).reg();
+					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setTitleId(R.string.mark_as_current, mapActivity)
+							.setColorIcon(R.drawable.ic_action_signpost_dark)
+							.setListener(listener)
+							.createItem());
 				}
 			}
 		}

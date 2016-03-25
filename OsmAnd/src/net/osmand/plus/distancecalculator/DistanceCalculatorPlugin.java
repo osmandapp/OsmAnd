@@ -34,6 +34,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
@@ -640,7 +641,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 		
 		@Override
-		public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {
+		public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 			if (o != null && o instanceof WptPt) {
 				final WptPt p = (WptPt) o;
 				boolean containsPoint = false;
@@ -675,7 +676,10 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 							return true;
 						}
 					};
-					adapter.item(R.string.delete_point).colorIcon(R.drawable.ic_action_delete_dark).listen(listener).reg();
+					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setTitleId(R.string.delete_point, mapActivity)
+							.setColorIcon(R.drawable.ic_action_delete_dark)
+							.setListener(listener).createItem());
 				}
 			}
 		}

@@ -14,7 +14,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.Item;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -262,7 +262,9 @@ public class MapActivityLayers {
 		OsmandApplication app = (OsmandApplication) getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
-		adapter.item(R.string.shared_string_search).colorIcon(R.drawable.ic_action_search_dark).reg();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.shared_string_search, app)
+				.setColorIcon(R.drawable.ic_action_search_dark).createItem());
 		final List<PoiUIFilter> list = new ArrayList<PoiUIFilter>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
@@ -301,13 +303,14 @@ public class MapActivityLayers {
 
 	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiUIFilter> list, PoiUIFilter f) {
 		list.add(f);
-		Item it = adapter.item(f.getName()).selected(-1);
+		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
+		builder.setTitle(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
-			it.icon(RenderingIcons.getBigIconResourceId(f.getIconId()));
+			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			it.icon(R.drawable.mx_user_defined);
+			builder.setIcon(R.drawable.mx_user_defined);
 		}
-		it.reg();
+		adapter.addItem(builder.createItem());
 	}
 
 	public void selectMapLayer(final OsmandMapTileView mapView) {

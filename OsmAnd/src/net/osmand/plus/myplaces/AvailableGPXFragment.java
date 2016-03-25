@@ -36,6 +36,7 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
@@ -348,12 +349,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		};
-		optionsMenuAdapter.item(R.string.shared_string_show_on_map).icon(R.drawable.ic_show_on_map)
-				.listen(listener).reg();
-		optionsMenuAdapter.item(R.string.shared_string_delete)
-				.icon(R.drawable.ic_action_delete_dark).listen(listener).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-				.icon(R.drawable.ic_action_refresh_dark).listen(listener).reg();
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
+				.setIcon(R.drawable.ic_show_on_map)
+				.setListener(listener).createItem());
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_delete, getActivity())
+				.setIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_reload, getActivity())
+				.setIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			final MenuItem item;

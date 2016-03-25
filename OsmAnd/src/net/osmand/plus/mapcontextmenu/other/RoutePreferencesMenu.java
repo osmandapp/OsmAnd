@@ -23,6 +23,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -215,7 +216,8 @@ public class RoutePreferencesMenu {
 		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.get();
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
-		adapter.item(entries[k]).reg();
+		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
+		adapter.addItem(itemBuilder.setTitle(entries[k]).createItem());
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(selectedValue)) {
 			selected = k;
 		}
@@ -224,7 +226,7 @@ public class RoutePreferencesMenu {
 			entries[k] = (s.contains("tts") ?  mapActivity.getResources().getString(R.string.ttsvoice) + " " : "") +
 					FileNameTranslationHelper.getVoiceName(mapActivity, s);
 			entrieValues[k] = s;
-			adapter.item(entries[k]).reg();
+			adapter.addItem(itemBuilder.setTitle(entries[k]).createItem());
 			if (s.equals(selectedValue)) {
 				selected = k;
 			}
@@ -232,7 +234,7 @@ public class RoutePreferencesMenu {
 		}
 		entrieValues[k] = MORE_VALUE;
 		entries[k] =  mapActivity.getResources().getString(R.string.install_more);
-		adapter.item(entries[k]).reg();
+		adapter.addItem(itemBuilder.setTitle(entries[k]).createItem());
 
 		AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 		bld.setSingleChoiceItems(entries, selected, new DialogInterface.OnClickListener() {

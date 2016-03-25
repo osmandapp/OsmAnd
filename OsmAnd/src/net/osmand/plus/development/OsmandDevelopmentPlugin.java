@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -56,15 +57,17 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
-			helper.item(R.string.version_settings).colorIcon(R.drawable.ic_action_gabout_dark)
-					.listen(new OnContextMenuClick() {
+			helper.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.version_settings, mapActivity)
+					.setColorIcon(R.drawable.ic_action_gabout_dark)
+					.setListener(new OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
 							mapActivity.startActivityForResult(mapIntent, 0);
 							return true;
 						}
-					}).reg();
+					}).createItem());
 		}
 
 	}

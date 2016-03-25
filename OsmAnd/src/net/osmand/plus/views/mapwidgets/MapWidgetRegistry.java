@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -285,47 +286,50 @@ public class MapWidgetRegistry {
 			addControlId(map, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
 		}
 		if (settings.USE_MAP_MARKERS.get()) {
-			cm.item(R.string.map_markers).description(settings.MAP_MARKERS_MODE.get().toHumanString(map)).listen(new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
-					final OsmandMapTileView view = map.getMapView();
-					AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
-					bld.setTitle(R.string.map_markers);
-					final String[] items = new String[MapMarkersMode.values().length];
-					for (int i = 0; i < items.length; i++) {
-						items[i] = MapMarkersMode.values()[i].toHumanString(map);
-					}
-					int i = settings.MAP_MARKERS_MODE.get().ordinal();
-					bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
+			cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
+					.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
+					.setListener(new OnContextMenuClick() {
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							settings.MAP_MARKERS_MODE.set(MapMarkersMode.values()[which]);
-							for (MapWidgetRegInfo info : right) {
-								if ("map_marker_1st".equals(info.key) || "map_marker_2nd".equals(info.key)) {
-									changeVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets());
+						public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
+							final OsmandMapTileView view = map.getMapView();
+							AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
+							bld.setTitle(R.string.map_markers);
+							final String[] items = new String[MapMarkersMode.values().length];
+							for (int i = 0; i < items.length; i++) {
+								items[i] = MapMarkersMode.values()[i].toHumanString(map);
+							}
+							int i = settings.MAP_MARKERS_MODE.get().ordinal();
+							bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									settings.MAP_MARKERS_MODE.set(MapMarkersMode.values()[which]);
+									for (MapWidgetRegInfo info : right) {
+										if ("map_marker_1st".equals(info.key) || "map_marker_2nd".equals(info.key)) {
+											changeVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets());
+										}
+									}
+									MapInfoLayer mil = map.getMapLayers().getMapInfoLayer();
+									if (mil != null) {
+										mil.recreateControls();
+									}
+									map.refreshMap();
+									dialog.dismiss();
+									cm.setItemDescription(pos, settings.MAP_MARKERS_MODE.get().toHumanString(map));
+									ad.notifyDataSetChanged();
 								}
-							}
-							MapInfoLayer mil = map.getMapLayers().getMapInfoLayer();
-							if (mil != null) {
-								mil.recreateControls();
-							}
-							map.refreshMap();
-							dialog.dismiss();
-							cm.setItemDescription(pos, settings.MAP_MARKERS_MODE.get().toHumanString(map));
-							ad.notifyDataSetChanged();
+							});
+							bld.show();
+							return false;
 						}
-					});
-					bld.show();
-					return false;
-				}
-			}).layout(R.layout.list_item_text_button).reg();
+					}).setLayout(R.layout.list_item_text_button).createItem());
 		}
 	}
 
-	private void addControlId(final MapActivity map, ContextMenuAdapter cm, int stringId, OsmandPreference<Boolean> pref) {
-		cm.item(stringId).selected(pref.get() ? 1 : 0)
-//			.icons(r.drawableDark, r.drawableLight)
-				.listen(new ApearanceOnContextMenuClick(pref, map)).reg();
+	private void addControlId(final MapActivity map, ContextMenuAdapter cm,
+							  @StringRes int stringId, OsmandPreference<Boolean> pref) {
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(stringId, map)
+				.setSelected(pref.get())
+				.setListener(new ApearanceOnContextMenuClick(pref, map)).createItem());
 	}
 
 	class ApearanceOnContextMenuClick implements OnContextMenuClick {
@@ -360,13 +364,16 @@ public class MapWidgetRegistry {
 
 
 	public void addControls(MapActivity map, ContextMenuAdapter cm, ApplicationMode mode) {
-		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.list_group_title_with_switch).reg();
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, map)
+				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		addControls(map, cm, right, mode);
 		if (mode != ApplicationMode.DEFAULT) {
-			cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.list_group_title_with_switch).reg();
+			cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_left, map)
+					.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 			addControls(map, cm, left, mode);
 		}
-		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.list_group_title_with_switch).reg();
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_appearance_rem, map)
+				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		addControlsAppearance(map, cm, mode);
 	}
 
@@ -393,11 +400,11 @@ public class MapWidgetRegistry {
 			if ("map_marker_1st".equals(r.key) || "map_marker_2nd".equals(r.key)) {
 				continue;
 			}
-			adapter.item(r.messageId)
-					.selected(r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0)
-					.colorIcon(r.drawableMenu)
-					.secondaryIconColor(R.drawable.ic_action_additional_option)
-					.listen(new OnContextMenuClick() {
+			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, map)
+					.setSelected(r.visibleCollapsed(mode) || r.visible(mode))
+					.setColorIcon(r.drawableMenu)
+					.setSecondaryLightIcon(R.drawable.ic_action_additional_option)
+					.setListener(new OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
 							changeVisibility(r);
@@ -406,12 +413,11 @@ public class MapWidgetRegistry {
 								mil.recreateControls();
 							}
 							adapter.setItemName(pos, getText(mil.getMapActivity(), mode, r));
-							adapter.setSelection(pos, r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0);
+							adapter.setSelection(pos, r.visibleCollapsed(mode) || r.visible(mode));
 							a.notifyDataSetChanged();
 							return false;
 						}
-					})
-					.reg();
+					}).createItem());
 			adapter.setItemName(adapter.length() - 1, getText(map, mode, r));
 		}
 	}
@@ -492,7 +498,8 @@ public class MapWidgetRegistry {
 	public ContextMenuAdapter getViewConfigureMenuAdapter(final MapActivity map) {
 		final ContextMenuAdapter cm = new ContextMenuAdapter(map);
 		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.app_modes_choose, map)
+				.setLayout(R.layout.mode_toggles).createItem());
 		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
 
 			@Override
