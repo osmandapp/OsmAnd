@@ -243,8 +243,7 @@ public class GpxUiHelper {
 
 			@Override
 			public boolean processResult(GPXFile[] result) {
-				cmAdapter.setItemDescription(position,
-						getDescription((OsmandApplication) app, result[0], f, false));
+				cmAdapter.setItemName(position, cmAdapter.getItemName(position) + "\n" + getDescription((OsmandApplication) app, result[0], f, false));
 				adapter.notifyDataSetInvalidated();
 				return true;
 			}
@@ -261,13 +260,8 @@ public class GpxUiHelper {
 		final boolean light = app.getSettings().isLightContent();
 		final int layout = R.layout.list_menu_item_native;
 
-		int[] tileIds = adapter.getTitleResources();
-		String[] titles = new String[tileIds.length];
-		for (int i = 0; i < tileIds.length; i++) {
-			titles[i] = activity.getString(tileIds[i]);
-		}
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout,
-				R.id.title, titles) {
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
+				adapter.getItemNames()) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
@@ -284,10 +278,11 @@ public class GpxUiHelper {
 						if (showCurrentGpx && position == 0) {
 							return;
 						}
-						if (adapter.getItemDescr(position) == null) {
+						int nline = adapter.getItemName(position).indexOf('\n');
+						if (nline == -1) {
 							setDescripionInDialog(arrayAdapter, adapter, activity, dir, list.get(position), position);
 						} else {
-							adapter.setItemDescription(position, null);
+							adapter.setItemName(position, adapter.getItemName(position).substring(0, nline));
 							arrayAdapter.notifyDataSetInvalidated();
 						}
 					}
@@ -299,7 +294,7 @@ public class GpxUiHelper {
 					icon.setVisibility(View.VISIBLE);
 				}
 				TextView tv = (TextView) v.findViewById(R.id.title);
-				tv.setText(adapter.getTitleRes(position));
+				tv.setText(adapter.getItemName(position));
 				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
 				// Put the image on the TextView

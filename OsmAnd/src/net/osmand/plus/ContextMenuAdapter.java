@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
@@ -37,12 +38,53 @@ import gnu.trove.list.array.TIntArrayList;
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
 
+
+	public interface OnContextMenuClick {
+		//boolean return type needed to desribe if drawer needed to be close or not
+		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+	}
+
+	public interface OnIntegerValueChangedListener {
+		boolean onIntegerValueChangedListener(int newValue);
+	}
+
+	public static abstract class OnRowItemClick implements OnContextMenuClick {
+
+		public OnRowItemClick() {
+		}
+
+		//boolean return type needed to desribe if drawer needed to be close or not
+		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
+			if (btn != null && btn.getVisibility() == View.VISIBLE) {
+				btn.setChecked(!btn.isChecked());
+				return false;
+			} else {
+				return onContextMenuClick(adapter, itemId, pos, false);
+			}
+		}
+	}
+
+	public class BooleanResult {
+		private boolean result = false;
+
+		public void setResult(boolean value) {
+			result = value;
+		}
+
+		public boolean getResult() {
+			return result;
+		}
+	}
+
 	private final Context ctx;
+	private View anchor;
 	@LayoutRes
 	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
 			R.layout.list_menu_item : R.layout.list_menu_item_native;
-	final TIntArrayList titleResList = new TIntArrayList();
+	final TIntArrayList items = new TIntArrayList();
 	final TIntArrayList isCategory = new TIntArrayList();
+	final ArrayList<String> itemNames = new ArrayList<String>();
 	final ArrayList<OnContextMenuClick> checkListeners = new ArrayList<>();
 	final ArrayList<OnIntegerValueChangedListener> integerListeners = new ArrayList<>();
 	final TIntArrayList selectedList = new TIntArrayList();
@@ -52,8 +94,8 @@ public class ContextMenuAdapter {
 	final TIntArrayList iconList = new TIntArrayList();
 	final TIntArrayList lightIconList = new TIntArrayList();
 	final TIntArrayList secondaryLightIconList = new TIntArrayList();
-	final ArrayList<String> itemDescription = new ArrayList<>();
-	private List<ApplicationMode> visibleModes = new ArrayList<>();
+	final ArrayList<String> itemDescription = new ArrayList<String>();
+	private List<ApplicationMode> visibleModes = new ArrayList<ApplicationMode>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
 	//neded to detect whether user opened all modes or not
 	private BooleanResult allModes = new BooleanResult();
@@ -67,37 +109,20 @@ public class ContextMenuAdapter {
 		this.ctx = ctx;
 	}
 
-	// Related to whole adapter
+	public void setAnchor(View anchor) {
+		this.anchor = anchor;
+	}
+
+	public View getAnchor() {
+		return anchor;
+	}
+
 	public int length() {
-		return titleResList.size();
+		return items.size();
 	}
 
-	public void setDefaultLayoutId(int defaultLayoutId) {
-		this.defaultLayoutId = defaultLayoutId;
-	}
-
-	public void setChangeAppModeListener(ConfigureMapMenu.OnClickListener changeAppModeListener) {
-		this.changeAppModeListener = changeAppModeListener;
-	}
-
-	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
-		final int layoutId = defaultLayoutId;
-		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		String[] names = new String[titleResList.size()];
-		for (int i = 0; i < titleResList.size(); i++) {
-			names[i] = activity.getString(titleResList.get(i));
-		}
-		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title, names, app, holoLight);
-	}
-
-	public int[] getTitleResources() {
-		return titleResList.toArray();
-	}
-
-	// Item related
-	@StringRes
-	public int getTitleRes(int pos) {
-		return titleResList.get(pos);
+	public int getElementId(int pos) {
+		return items.get(pos);
 	}
 
 	public OnContextMenuClick getClickAdapter(int i) {
@@ -108,8 +133,16 @@ public class ContextMenuAdapter {
 		return integerListeners.get(i);
 	}
 
+	public String getItemName(int pos) {
+		return itemNames.get(pos);
+	}
+
 	public String getItemDescr(int pos) {
 		return itemDescription.get(pos);
+	}
+
+	public void setItemName(int pos, String str) {
+		itemNames.set(pos, str);
 	}
 
 	public void setItemDescription(int pos, String str) {
@@ -136,6 +169,7 @@ public class ContextMenuAdapter {
 		progressList.set(pos, s);
 	}
 
+
 	public Drawable getImage(OsmandApplication ctx, int pos, boolean light) {
 		int lst = iconList.get(pos);
 		if (lst != 0) {
@@ -157,35 +191,22 @@ public class ContextMenuAdapter {
 		return null;
 	}
 
+	public int getBackgroundColor(Context ctx, boolean holoLight) {
+		if (holoLight) {
+			return ctx.getResources().getColor(R.color.bg_color_light);
+		} else {
+			return ctx.getResources().getColor(R.color.bg_color_dark);
+		}
+	}
+
+
 	public boolean isCategory(int pos) {
 		return isCategory.get(pos) > 0;
 	}
 
-	public void removeItem(int pos) {
-		titleResList.removeAt(pos);
-		selectedList.removeAt(pos);
-		progressList.removeAt(pos);
-		iconList.removeAt(pos);
-		lightIconList.removeAt(pos);
-		secondaryLightIconList.removeAt(pos);
-		checkListeners.remove(pos);
-		integerListeners.remove(pos);
-		isCategory.removeAt(pos);
-		layoutIds.removeAt(pos);
-		loadingList.removeAt(pos);
-	}
-
-	public int getLayoutId(int position) {
-		int l = layoutIds.get(position);
-		if (l != -1) {
-			return l;
-		}
-		return defaultLayoutId;
-	}
-
 	public Item item(String name) {
 		Item i = new Item();
-		i.title = (name.hashCode() << 4) | titleResList.size();
+		i.id = (name.hashCode() << 4) | items.size();
 		i.name = name;
 		return i;
 	}
@@ -193,7 +214,7 @@ public class ContextMenuAdapter {
 
 	public Item item(@StringRes int resId) {
 		Item i = new Item();
-		i.title = resId;
+		i.id = resId;
 		i.name = ctx.getString(resId);
 		return i;
 	}
@@ -202,11 +223,11 @@ public class ContextMenuAdapter {
 		@DrawableRes
 		int icon = 0;
 		@DrawableRes
-		int secondaryIcon = 0;
-		@DrawableRes
 		int lightIcon = 0;
-		@StringRes
-		int title;
+		@DrawableRes
+		int secondaryLightIcon = 0;
+		@IdRes
+		int id;
 		String name;
 		int selected = -1;
 		int progress = -1;
@@ -227,14 +248,13 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
-
 		public Item colorIcon(@DrawableRes int icon) {
 			this.lightIcon = icon;
 			return this;
 		}
 
 		public Item secondaryIconColor(@DrawableRes int icon) {
-			this.secondaryIcon = icon;
+			this.secondaryLightIcon = icon;
 			return this;
 		}
 
@@ -279,10 +299,11 @@ public class ContextMenuAdapter {
 		}
 
 		public void reg() {
-			if (pos >= titleResList.size() || pos < 0) {
-				pos = titleResList.size();
+			if (pos >= items.size() || pos < 0) {
+				pos = items.size();
 			}
-			titleResList.insert(pos, title);
+			items.insert(pos, id);
+			itemNames.add(pos, name);
 			itemDescription.add(pos, description);
 			selectedList.insert(pos, selected);
 			progressList.insert(pos, progress);
@@ -290,7 +311,7 @@ public class ContextMenuAdapter {
 			layoutIds.insert(pos, layout);
 			iconList.insert(pos, icon);
 			lightIconList.insert(pos, lightIcon);
-			secondaryLightIconList.insert(pos, secondaryIcon);
+			secondaryLightIconList.insert(pos, secondaryLightIcon);
 			checkListeners.add(pos, checkBoxListener);
 			integerListeners.add(pos, integerListener);
 			isCategory.insert(pos, cat ? 1 : 0);
@@ -308,6 +329,51 @@ public class ContextMenuAdapter {
 
 	}
 
+	public String[] getItemNames() {
+		return itemNames.toArray(new String[itemNames.size()]);
+	}
+
+	public void removeItem(int pos) {
+		items.removeAt(pos);
+		itemNames.remove(pos);
+		selectedList.removeAt(pos);
+		progressList.removeAt(pos);
+		iconList.removeAt(pos);
+		lightIconList.removeAt(pos);
+		secondaryLightIconList.removeAt(pos);
+		checkListeners.remove(pos);
+		integerListeners.remove(pos);
+		isCategory.removeAt(pos);
+		layoutIds.removeAt(pos);
+		loadingList.removeAt(pos);
+	}
+
+	public int getLayoutId(int position) {
+		int l = layoutIds.get(position);
+		if (l != -1) {
+			return l;
+		}
+		return defaultLayoutId;
+	}
+
+
+	public void setDefaultLayoutId(int defaultLayoutId) {
+		this.defaultLayoutId = defaultLayoutId;
+	}
+
+
+	public void setChangeAppModeListener(ConfigureMapMenu.OnClickListener changeAppModeListener) {
+		this.changeAppModeListener = changeAppModeListener;
+	}
+
+
+	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
+		final int layoutId = defaultLayoutId;
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
+				getItemNames(), app, holoLight);
+	}
+
 	public class ContextMenuArrayAdapter extends ArrayAdapter<String> {
 		private Activity activity;
 		private OsmandApplication app;
@@ -315,8 +381,8 @@ public class ContextMenuAdapter {
 		private int layoutId;
 
 		public ContextMenuArrayAdapter(Activity context, int resource, int textViewResourceId,
-									   String[] names, OsmandApplication app, boolean holoLight) {
-			super(context, resource, textViewResourceId, names);
+									   String[] objects, OsmandApplication app, boolean holoLight) {
+			super(context, resource, textViewResourceId, objects);
 			activity = context;
 			this.app = app;
 			this.holoLight = holoLight;
@@ -328,7 +394,7 @@ public class ContextMenuAdapter {
 			// User super class to create the View
 			Integer lid = getLayoutId(position);
 			if (lid == R.layout.mode_toggles) {
-				final Set<ApplicationMode> selected = new LinkedHashSet<>();
+				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
 				return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, true, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -351,7 +417,7 @@ public class ContextMenuAdapter {
 			if (!isCategory(position)) {
 				AndroidUtils.setTextPrimaryColor(ctx, tv, !holoLight);
 			}
-			tv.setText(isCategory(position) ? getItem(position).toUpperCase() : getItem(position));
+			tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
 
 			if (layoutId == R.layout.simple_list_menu_item) {
 				int color = activity.getResources()
@@ -411,7 +477,7 @@ public class ContextMenuAdapter {
 							OnContextMenuClick ca = getClickAdapter(position);
 							selectedList.set(position, isChecked ? 1 : 0);
 							if (ca != null) {
-								ca.onContextMenuClick(la, getTitleRes(position), position, isChecked);
+								ca.onContextMenuClick(la, getElementId(position), position, isChecked);
 							}
 						}
 					};
@@ -464,44 +530,6 @@ public class ContextMenuAdapter {
 				((TextView) convertView.findViewById(R.id.description)).setText(itemDescr);
 			}
 			return convertView;
-		}
-	}
-
-	public interface OnContextMenuClick {
-		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
-	}
-
-	public interface OnIntegerValueChangedListener {
-		boolean onIntegerValueChangedListener(int newValue);
-	}
-
-	public static abstract class OnRowItemClick implements OnContextMenuClick {
-
-		public OnRowItemClick() {
-		}
-
-		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
-			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
-			if (btn != null && btn.getVisibility() == View.VISIBLE) {
-				btn.setChecked(!btn.isChecked());
-				return false;
-			} else {
-				return onContextMenuClick(adapter, itemId, pos, false);
-			}
-		}
-	}
-
-	public class BooleanResult {
-		private boolean result = false;
-
-		public void setResult(boolean value) {
-			result = value;
-		}
-
-		public boolean getResult() {
-			return result;
 		}
 	}
 }

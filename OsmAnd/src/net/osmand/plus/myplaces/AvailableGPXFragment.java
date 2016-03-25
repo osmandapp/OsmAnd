@@ -78,6 +78,8 @@ import java.util.Set;
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public static final int SEARCH_ID = -1;
+	// public static final int ACTION_ID = 0;
+	// protected static final int DELETE_ACTION_ID = 1;
 	private boolean selectionMode = false;
 	private List<GpxInfo> selectedItems = new ArrayList<>();
 	private ActionMode actionMode;
@@ -355,7 +357,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			final MenuItem item;
-			item = menu.add(0, optionsMenuAdapter.getTitleRes(j), j + 1, optionsMenuAdapter.getTitleRes(j));
+			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -390,7 +392,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getTitleRes(i)) {
+			if (itemId == optionsMenuAdapter.getElementId(i)) {
 				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(null, itemId, i, false);
 				return true;
 			}

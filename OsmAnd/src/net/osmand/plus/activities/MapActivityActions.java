@@ -298,7 +298,7 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				int standardId = adapter.getTitleRes(which);
+				int standardId = adapter.getElementId(which);
 				OnContextMenuClick click = adapter.getClickAdapter(which);
 				if (click != null) {
 					click.onContextMenuClick(listAdapter, standardId, which, false);
@@ -883,7 +883,7 @@ public class MapActivityActions implements DialogProvider {
 				ContextMenuAdapter.OnContextMenuClick click =
 						contextMenuAdapter.getClickAdapter(position);
 				if (click.onContextMenuClick(simpleListAdapter,
-						contextMenuAdapter.getTitleRes(position), position, false)) {
+						contextMenuAdapter.getElementId(position), position, false)) {
 					mapActivity.closeDrawer();
 				}
 			}

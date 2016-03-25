@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
@@ -369,6 +370,10 @@ public class MapWidgetRegistry {
 		addControlsAppearance(map, cm, mode);
 	}
 
+	public String getText(Context ctx, final ApplicationMode mode, final MapWidgetRegInfo r) {
+		return (r.visibleCollapsed(mode) ? " + " : "  ") + ctx.getString(r.messageId);
+	}
+
 	public Set<MapWidgetRegInfo> getRight() {
 		return right;
 	}
@@ -400,12 +405,14 @@ public class MapWidgetRegistry {
 							if (mil != null) {
 								mil.recreateControls();
 							}
+							adapter.setItemName(pos, getText(mil.getMapActivity(), mode, r));
 							adapter.setSelection(pos, r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0);
 							a.notifyDataSetChanged();
 							return false;
 						}
 					})
 					.reg();
+			adapter.setItemName(adapter.length() - 1, getText(map, mode, r));
 		}
 	}
 
