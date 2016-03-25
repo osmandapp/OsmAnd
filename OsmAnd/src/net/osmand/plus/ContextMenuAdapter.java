@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
@@ -37,45 +36,6 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
-
-
-	public interface OnContextMenuClick {
-		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
-	}
-
-	public interface OnIntegerValueChangedListener {
-		boolean onIntegerValueChangedListener(int newValue);
-	}
-
-	public static abstract class OnRowItemClick implements OnContextMenuClick {
-
-		public OnRowItemClick() {
-		}
-
-		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
-			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
-			if (btn != null && btn.getVisibility() == View.VISIBLE) {
-				btn.setChecked(!btn.isChecked());
-				return false;
-			} else {
-				return onContextMenuClick(adapter, itemId, pos, false);
-			}
-		}
-	}
-
-	public class BooleanResult {
-		private boolean result = false;
-
-		public void setResult(boolean value) {
-			result = value;
-		}
-
-		public boolean getResult() {
-			return result;
-		}
-	}
 
 	private final Context ctx;
 	private View anchor;
@@ -219,115 +179,7 @@ public class ContextMenuAdapter {
 		return i;
 	}
 
-	public class Item {
-		@DrawableRes
-		int icon = 0;
-		@DrawableRes
-		int lightIcon = 0;
-		@DrawableRes
-		int secondaryLightIcon = 0;
-		@IdRes
-		int id;
-		String name;
-		int selected = -1;
-		int progress = -1;
-		@LayoutRes
-		int layout = -1;
-		int loading = -1;
-		boolean cat;
-		int pos = -1;
-		String description = "";
-		private OnContextMenuClick checkBoxListener;
-		private OnIntegerValueChangedListener integerListener;
 
-		private Item() {
-		}
-
-		public Item icon(@DrawableRes int icon) {
-			this.icon = icon;
-			return this;
-		}
-
-		public Item colorIcon(@DrawableRes int icon) {
-			this.lightIcon = icon;
-			return this;
-		}
-
-		public Item secondaryIconColor(@DrawableRes int icon) {
-			this.secondaryLightIcon = icon;
-			return this;
-		}
-
-		public Item position(int pos) {
-			this.pos = pos;
-			return this;
-		}
-
-		public Item selected(int selected) {
-			this.selected = selected;
-			return this;
-		}
-
-		public Item progress(int progress) {
-			this.progress = progress;
-			return this;
-		}
-
-		public Item loading(int loading) {
-			this.loading = loading;
-			return this;
-		}
-
-		public Item layout(@LayoutRes int l) {
-			this.layout = l;
-			return this;
-		}
-
-		public Item description(String descr) {
-			this.description = descr;
-			return this;
-		}
-
-		public Item listen(OnContextMenuClick l) {
-			this.checkBoxListener = l;
-			return this;
-		}
-
-		public Item listenInteger(OnIntegerValueChangedListener l) {
-			this.integerListener = l;
-			return this;
-		}
-
-		public void reg() {
-			if (pos >= items.size() || pos < 0) {
-				pos = items.size();
-			}
-			items.insert(pos, id);
-			itemNames.add(pos, name);
-			itemDescription.add(pos, description);
-			selectedList.insert(pos, selected);
-			progressList.insert(pos, progress);
-			loadingList.insert(pos, loading);
-			layoutIds.insert(pos, layout);
-			iconList.insert(pos, icon);
-			lightIconList.insert(pos, lightIcon);
-			secondaryLightIconList.insert(pos, secondaryLightIcon);
-			checkListeners.add(pos, checkBoxListener);
-			integerListeners.add(pos, integerListener);
-			isCategory.insert(pos, cat ? 1 : 0);
-		}
-
-		public Item setCategory(boolean b) {
-			cat = b;
-			return this;
-		}
-
-		public Item name(String name) {
-			this.name = name;
-			return this;
-		}
-
-	}
 
 	public String[] getItemNames() {
 		return itemNames.toArray(new String[itemNames.size()]);
@@ -531,5 +383,153 @@ public class ContextMenuAdapter {
 			}
 			return convertView;
 		}
+	}
+
+	public interface OnContextMenuClick {
+		//boolean return type needed to desribe if drawer needed to be close or not
+		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+	}
+
+	public interface OnIntegerValueChangedListener {
+		boolean onIntegerValueChangedListener(int newValue);
+	}
+
+	public static abstract class OnRowItemClick implements OnContextMenuClick {
+
+		public OnRowItemClick() {
+		}
+
+		//boolean return type needed to desribe if drawer needed to be close or not
+		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
+			if (btn != null && btn.getVisibility() == View.VISIBLE) {
+				btn.setChecked(!btn.isChecked());
+				return false;
+			} else {
+				return onContextMenuClick(adapter, itemId, pos, false);
+			}
+		}
+	}
+
+	public class BooleanResult {
+		private boolean result = false;
+
+		public void setResult(boolean value) {
+			result = value;
+		}
+
+		public boolean getResult() {
+			return result;
+		}
+	}
+
+	public class Item {
+		@DrawableRes
+		int icon = 0;
+		@DrawableRes
+		int lightIcon = 0;
+		@DrawableRes
+		int secondaryLightIcon = 0;
+		@StringRes
+		int id;
+		String name;
+		int selected = -1;
+		int progress = -1;
+		@LayoutRes
+		int layout = -1;
+		int loading = -1;
+		boolean cat;
+		int pos = -1;
+		String description = "";
+		private OnContextMenuClick checkBoxListener;
+		private OnIntegerValueChangedListener integerListener;
+
+		private Item() {
+		}
+
+		public Item icon(@DrawableRes int icon) {
+			this.icon = icon;
+			return this;
+		}
+
+		public Item colorIcon(@DrawableRes int icon) {
+			this.lightIcon = icon;
+			return this;
+		}
+
+		public Item secondaryIconColor(@DrawableRes int icon) {
+			this.secondaryLightIcon = icon;
+			return this;
+		}
+
+		public Item position(int pos) {
+			this.pos = pos;
+			return this;
+		}
+
+		public Item selected(int selected) {
+			this.selected = selected;
+			return this;
+		}
+
+		public Item progress(int progress) {
+			this.progress = progress;
+			return this;
+		}
+
+		public Item loading(int loading) {
+			this.loading = loading;
+			return this;
+		}
+
+		public Item layout(@LayoutRes int l) {
+			this.layout = l;
+			return this;
+		}
+
+		public Item description(String descr) {
+			this.description = descr;
+			return this;
+		}
+
+		public Item listen(OnContextMenuClick l) {
+			this.checkBoxListener = l;
+			return this;
+		}
+
+		public Item listenInteger(OnIntegerValueChangedListener l) {
+			this.integerListener = l;
+			return this;
+		}
+
+		public void reg() {
+			if (pos >= items.size() || pos < 0) {
+				pos = items.size();
+			}
+			items.insert(pos, id);
+			itemNames.add(pos, name);
+			itemDescription.add(pos, description);
+			selectedList.insert(pos, selected);
+			progressList.insert(pos, progress);
+			loadingList.insert(pos, loading);
+			layoutIds.insert(pos, layout);
+			iconList.insert(pos, icon);
+			lightIconList.insert(pos, lightIcon);
+			secondaryLightIconList.insert(pos, secondaryLightIcon);
+			checkListeners.add(pos, checkBoxListener);
+			integerListeners.add(pos, integerListener);
+			isCategory.insert(pos, cat ? 1 : 0);
+		}
+
+		public Item setCategory(boolean b) {
+			cat = b;
+			return this;
+		}
+
+		public Item name(String name) {
+			this.name = name;
+			return this;
+		}
+
 	}
 }
