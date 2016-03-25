@@ -602,7 +602,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 
-		if (!permissionDone && !app.getAppInitializer().isFirstTime()) {
+		if (!permissionDone) {
 			if (!permissionAsked) {
 				if (app.isExternalStorageDirectoryReadOnly()
 						&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
