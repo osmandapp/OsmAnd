@@ -180,6 +180,15 @@ public abstract class PointEditorFragment extends Fragment {
 		ImageView descriptionImage = (ImageView) view.findViewById(R.id.description_image);
 		descriptionImage.setImageDrawable(getRowIcon(R.drawable.ic_action_note_dark));
 
+		if (getMyApplication().accessibilityEnabled()) {
+			headerCaption.setFocusable(true);
+			nameCaption.setFocusable(true);
+			categoryCaption.setFocusable(true);
+			nameEdit.setHint(R.string.access_hint_enter_name);
+			categoryEdit.setHint(R.string.access_hint_enter_category);
+			descriptionEdit.setHint(R.string.access_hint_enter_description);
+		}
+
 		runLayoutListener();
 
 		return view;

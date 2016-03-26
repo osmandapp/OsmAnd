@@ -1995,4 +1995,7 @@
     <string name="access_expanded_list">Развёрнутый список</string>
     <string name="access_empty_list">Пустой список</string>
     <string name="access_map_linked_to_location">Карта привязана к местоположению</string>
+    <string name="access_hint_enter_name">Введите имя</string>
+    <string name="access_hint_enter_category">Введите категорию</string>
+    <string name="access_hint_enter_description">Введите описание</string>
 </resources>
