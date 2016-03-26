@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
@@ -20,7 +21,7 @@ public class RenderableSegment {
 	private double renderDist;
 	protected List<WptPt> points = null;
 	protected List<WptPt> culled = null;
-	int hash;
+	double hash;
 	double param1,param2;
 
 	AsyncRamerDouglasPeucer culler = null;
@@ -52,20 +53,26 @@ public class RenderableSegment {
 		return renderType;
 	}
 
-	public void recalculateRenderScale(OsmandMapTileView view, int zoom) {
+	public int lighter(int colour, float amount) {
+		int red = (int) ((Color.red(colour) * (1 - amount) / 255 + amount) * 255);
+		int green = (int) ((Color.green(colour) * (1 - amount) / 255 + amount) * 255);
+		int blue = (int) ((Color.blue(colour) * (1 - amount) / 255 + amount) * 255);
+		return Color.argb(Color.alpha(colour), red, green, blue);
+	}
 
-		int hashCode = points.hashCode() + zoom;
+	public void recalculateRenderScale(OsmandMapTileView view, double zoom) {
+
+		// Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
+		// The asynchronous callback will set the variable, and that is used for rendering
+
+		double hashCode = points.hashCode() + zoom;
 		if (culled==null || hash != hashCode) {
-
 			if (culler != null)
-				culler.cancel(true);
-
+				culler.cancel(true);				// stop any still-running cull
 			hash = hashCode;
-
 			culler = new AsyncRamerDouglasPeucer(renderType, view, this, param1, param2);
 			culled = null;				// effectively use full-resolution until re-cull complete (see below)
 			culler.execute("");
-
 		}
 	}
 
@@ -137,11 +144,11 @@ public class RenderableSegment {
 		int h = tb.getPixHeight();
 		int w = tb.getPixWidth();
 		int cnt = 0;
-		boolean pin = isIn(px, py, 0, 0, w, h);
+		boolean pin = isIn(px, py, w, h);
 		for(int i = 1; i < xs.size(); i++) {
 			int x = xs.get(i);
 			int y = ys.get(i);
-			boolean in = isIn(x, y, 0, 0, w, h);
+			boolean in = isIn(x, y, w, h);
 			boolean draw = false;
 			if(pin && in) {
 				draw = true;
@@ -172,7 +179,7 @@ public class RenderableSegment {
 	}
 
 
-	private boolean isIn(int x, int y, int lx, int ty, int rx, int by) {
-		return x >= lx && x <= rx && y >= ty && y <= by;
+	protected boolean isIn(float x, float y, float rx, float by) {
+		return x >= 0f && x <= rx && y >= 0f && y <= by;
 	}
 }

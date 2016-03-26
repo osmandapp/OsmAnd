@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.ArrayList;
@@ -22,6 +23,12 @@ public class TrkSegment extends GPXExtensions {
 	public void addRenderable(OsmandMapTileView view, RenderType type, double param1, double param2) {
 		RenderableSegment rs = null;
 		switch (type) {
+			case SPEED:
+				rs = new RenderableSpeed(view, type, points, param1, param2);
+
+			case ALTITUDE:
+				rs = new RenderableAltitude(view, type, points, param1, param2);
+				break;
 			case ORIGINAL:
 				rs = new RenderableSegment(view, type, points, param1, param2);
 				break;
@@ -38,7 +45,7 @@ public class TrkSegment extends GPXExtensions {
 	}
 
 
-	public void recalculateRenderScales(OsmandMapTileView view, int zoom) {
+	public void recalculateRenderScales(OsmandMapTileView view, double zoom) {
 		for (RenderableSegment rs : renders)
 			rs.recalculateRenderScale(view, zoom);
 	}

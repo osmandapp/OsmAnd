@@ -11,15 +11,15 @@ import java.util.List;
 
 public class RenderableDot extends RenderableSegment {
 
-	float dotSize;
+	float dotScale;
 
 	RenderableDot(OsmandMapTileView view, RenderType type, List<WptPt> pt, double param1, double param2) {
 		super(view, type, pt, param1, param2);
 
-		dotSize = (float) param2;
+		dotScale = (float) param2;
 	}
 
-	public void recalculateRenderScale(OsmandMapTileView view, int zoom) {
+	public void recalculateRenderScale(OsmandMapTileView view, double zoom) {
 		if (culled==null) {
 			culler = new AsyncRamerDouglasPeucer(renderType, view, this, param1, param2);
 			culler.execute("");
@@ -27,7 +27,7 @@ public class RenderableDot extends RenderableSegment {
 	}
 
 	private String getLabel(double value) {
-		return String.valueOf((int)(value+0.5));
+		return String.valueOf((int)((value+0.5)/1000))+" km";
 	}
 
 	public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
@@ -35,25 +35,39 @@ public class RenderableDot extends RenderableSegment {
 		if (culled != null) {
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			float sw = p.getStrokeWidth();
+
+			float ds = sw*dotScale;
+
 			Paint.Style ps = p.getStyle();
 			int col = p.getColor();
-			p.setStyle(Paint.Style.FILL_AND_STROKE);
-			p.setTextSize(32);
+			int light = lighter(col,0.5f);
 
-			for (WptPt pt : culled) {		//TODO: probls with not in tilebox...?
+			p.setStyle(Paint.Style.FILL_AND_STROKE);
+			p.setTextSize(sw*1.25f);
+
+			int w = tileBox.getPixWidth();
+			int h = tileBox.getPixHeight();
+
+			for (WptPt pt : culled) {
+
 				float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
 				float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-				p.setColor(0xFF000000);
-				p.setStrokeWidth(dotSize + 4);
-				canvas.drawPoint(x, y, p);
-				p.setStrokeWidth(dotSize);
-				p.setColor(0xFFFFFFFF);
-				canvas.drawPoint(x, y, p);
+				if (isIn(x, y, w, h)) {
 
-				p.setColor(Color.BLACK);
-				p.setStrokeWidth(1);
-				canvas.drawText(getLabel(pt.getCumulativeDistance()), x+25, y+25, p);
+					p.setColor(0xFF000000);
+					p.setStrokeWidth(ds + 2);
+					canvas.drawPoint(x, y, p);
+					p.setStrokeWidth(ds);
+					p.setColor(0xFFFFFFFF);
+					canvas.drawPoint(x, y, p);
+
+					if (sw>16) {
+						p.setColor(Color.BLACK);
+						p.setStrokeWidth(1);
+						canvas.drawText(getLabel(pt.getCumulativeDistance()), x + ds/2, y+ds/2, p);
+					}
+				}
 			}
 
 			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());

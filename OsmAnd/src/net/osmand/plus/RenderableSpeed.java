@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,25 +20,12 @@ import gnu.trove.list.array.TIntArrayList;
 
 
 
-public class RenderableConveyor extends RenderableSegment {
+public class RenderableSpeed extends RenderableSegment {
 
-    static Timer t = null;
-    static private int conveyor = 0;
     private double zoom = 0;
 
-    RenderableConveyor(final OsmandMapTileView view, RenderType type, List<WptPt> pt, double param1, double param2) {
+    RenderableSpeed(final OsmandMapTileView view, RenderType type, List<WptPt> pt, double param1, double param2) {
         super(view, type, pt, param1, param2);
-
-        if (t==null) {
-            t = new Timer();
-            t.scheduleAtFixedRate(new TimerTask() {
-                public void run() {
-                    RenderableConveyor.conveyor++;
-                    view.refreshMap();
-                }
-            }, 0, 200);     // 4 Hz
-        }
-
     }
 
     public void recalculateRenderScale(OsmandMapTileView view, double zoom) {
@@ -50,61 +38,75 @@ public class RenderableConveyor extends RenderableSegment {
         }
     }
 
-    public static int getComplementaryColor(int colorToInvert) {
-        float[] hsv = new float[3];
-        Color.RGBToHSV(Color.red(colorToInvert), Color.green(colorToInvert),
-                Color.blue(colorToInvert), hsv);
-        hsv[0] = (hsv[0] + 180) % 360;
-        return Color.HSVToColor(hsv);
+    public int getColor(double percent) {
+
+        int r = (int)(255 * percent);
+        int g = (int)(255 * (1.0 - percent));
+        int b = 0;
+
+        return 0xFF000000 + (r<<16) + (g<<8) + b;
     }
 
     public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+
 
         assert (p != null);
         assert (canvas != null);
 
         if (culled != null) {
 
-//            conveyor++;
+            // Draws into a bitmap so that the lines can be drawn solid and the *ENTIRE* can be alpha-blended
+            // back into the original canvas
 
-            canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            Bitmap newBitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas2 = new Canvas(newBitmap);
+            Paint alphaPaint = new Paint();
+            alphaPaint.setAlpha(160);
+
+            canvas2.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             float sw = p.getStrokeWidth();
             int col = p.getColor();
 
-            p.setStrokeWidth(sw*1.25f);
-            p.setColor(getComplementaryColor(col));
+            p.setStrokeWidth(sw*3f);
 
             float lastx = 0;
             float lasty = 0;
             boolean first = true;
-            Path path = new Path();
 
             int h = tileBox.getPixHeight();
             int w = tileBox.getPixWidth();
 
-            int intp = conveyor;
             for (WptPt pt : culled) {
-                intp--;
 
                 float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                 float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                if (!first &&  (isIn(x,y,w,h) || isIn(lastx,lasty,w,h)) && (intp & 15) < 3) {
-                    path.moveTo(lastx, lasty);
-                    path.lineTo(x, y);
+                if (!first) {
+                    Path px = new Path();
+                    px.moveTo(lastx, lasty);
+                    px.lineTo(x, y);
+                    if (canvas.clipPath(px)) {
+                        p.setColor(getColor(pt.fractionElevation));
+                        canvas2.drawLine(lastx, lasty, x, y, p);
+                    }
                 }
 
                 first = false;
                 lastx = x;
                 lasty = y;
             }
-            canvas.drawPath(path, p);
 
-            canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            canvas2.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            canvas.drawBitmap(newBitmap, 0, 0, alphaPaint);
             p.setStrokeWidth(sw);
             p.setColor(col);
         }
+
+
+
     }
+
+
 
 
 }

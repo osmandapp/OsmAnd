@@ -28,18 +28,63 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 	}
 
 
+	private List<WptPt> resampleAltitude(List<WptPt> pts, double dist) {
+
+		assert dist > 0;
+		assert pts != null;
+
+		List<WptPt> track = resampleTrack(pts, dist);
+
+		// Calculate the absolutes of the altitude variations
+		Double max = Double.NEGATIVE_INFINITY;
+		Double min = Double.POSITIVE_INFINITY;
+		for (WptPt pt : track) {
+			max = Math.max(max, pt.ele);
+			min = Math.min(min, pt.ele);
+			pt.fractionElevation = 0.5;
+		}
+		Double elevationRange = max-min;
+		if (elevationRange > 0)
+			for (WptPt pt : track)
+				pt.fractionElevation = (pt.ele - min)/elevationRange;
+
+		return track;
+	}
+
+
+	private List<WptPt> resampleSpeed(List<WptPt> pts, double dist) {
+
+		//TODO: speed!!
+
+		assert dist > 0;
+		assert pts != null;
+
+		List<WptPt> track = resampleTrack(pts, dist);
+
+		// Calculate the absolutes of the altitude variations
+		Double max = Double.NEGATIVE_INFINITY;
+		Double min = Double.POSITIVE_INFINITY;
+		for (WptPt pt : track) {
+			max = Math.max(max, pt.ele);
+			min = Math.min(min, pt.ele);
+			pt.fractionElevation = 0.5;
+		}
+		Double elevationRange = max-min;
+		if (elevationRange > 0)
+			for (WptPt pt : track)
+				pt.fractionElevation = (pt.ele - min)/elevationRange;
+
+		return track;
+	}
+
+
+
 	// Resample a list of points into a new list of points.
 	// The new list is evenly-spaced (dist) and contains the first and last point from the original list.
 	// The purpose is to allow tracks to be displayed with colours/shades/animation with even spacing
 	// This routine essentially 'walks' along the path, dropping sample points along the trail where necessary. It is
 	// Typically, pass a point list to this, and set dist (in metres) to something that's relative to screen zoom
 	// The new point list has resampled times, elevations, speed and hdop too!
-
-	// TESTING THE GENERIC POINT LIST RESAMPLING CODE - SHOULD LOOK THE SAME AS ORIGINAL WITH DIFFERENT POINTS
-	// SPACED EQUALLY IN DISTANCE ACCORDING TO PARAMETER...
-//					List<WptPt> resampled = resampleTrack(culled, 1.0);
-//					culled = resampled;            // testing!!!
-
 
 	private List<WptPt> resampleTrack(List<WptPt> pts, double dist) {
 
@@ -77,9 +122,6 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 		}
 		return newPts;
 	}
-
-
-
 
 	// Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
 	// This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
@@ -132,6 +174,14 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 			switch (renderType) {
 
 				case FORCE_REDRAW:
+					break;
+
+				case ALTITUDE:
+					culled = resampleAltitude(points, param1);
+					break;
+
+				case SPEED:
+					culled = resampleSpeed(points, param1);
 					break;
 
 				case CONVEYOR:

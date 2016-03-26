@@ -382,33 +382,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
 
+				// Hardwire a few renderers so that the track gets displayed. Note that they are processed in order
+				// and that they ALL have asynchronous resampling/culling capabililty. In an ideal world, the
+				// renderers to be used are selected via UI or externally, and the segment will already have
+				// them attached.
+
 				if (ts.renders.size()==0) {
-					ts.addRenderable(view, RenderType.ORIGINAL, 0, 0);
-					ts.addRenderable(view, RenderType.CONVEYOR, 10, 100);        // m, ms
-					ts.addRenderable(view, RenderType.RESAMPLE, 1000, 70);        // 1000m, dot size
-					ts.addRenderable(view, RenderType.RESAMPLE, 250, 30);        // m, dot size
+					ts.addRenderable(view, RenderType.ALTITUDE, 20, 0);				// an altitude display
+					//ts.addRenderable(view, RenderType.ORIGINAL, 0, 0);				// the base line
+					ts.addRenderable(view, RenderType.CONVEYOR, 20, 100);        	// conveyor belt on top
+					ts.addRenderable(view, RenderType.RESAMPLE, 1000, 1.5);        	// 1km markings
+					//ts.addRenderable(view, RenderType.RESAMPLE, 250, 1.5);        	// 250 m markings
 				}
 
-				//---------------------------------------------------------------------------
-				// Each track segment has a companion 'culled' segment, which is the original passed through a point-reduction
-				// to minimise the number of points required. The culled segment is only generated when needed - a "fingerprint"
-				// consisting of the view scale and # points in the track changes.
-
 				int viewZoom = view.getZoom();
-
-				//---------------------------------------------------------------------------
-				// Each track segment also has an associated resampled track. The resampled track(s) give us the
-				// effects that can be overlaid - for example, the conveyor belt effect, or the distance markers.
-				// The resampling occurs whenever there's a zoom change, too!
-
-				ts.recalculateRenderScales(view, viewZoom);			// rework all renderers as required
-
-
-
-
-
-
-
 
 
 				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
@@ -430,6 +417,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				}
 
 				if (gpxTrackScale > 0) { // && ts.culledPoints != null) {
+
+					ts.recalculateRenderScales(view, viewZoom);            // rework all renderers as required
 
 					updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
 
@@ -483,82 +472,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 
-/*	private void drawSingleSegment(Canvas canvas, RotatedTileBox tileBox, TrkSegment l) {
-
-		final QuadRect latLonBounds = tileBox.getLatLonBounds();
-
-		int startIndex = -1;
-		int endIndex = -1;
-		int prevCross = 0;
-		double shift = 0;
-		for (int i = 0; i < l.points.size(); i++) {
-			WptPt ls = l.points.get(i);
-			int cross = 0;
-			cross |= (ls.lon < latLonBounds.left - shift ? 1 : 0);
-			cross |= (ls.lon > latLonBounds.right + shift ? 2 : 0);
-			cross |= (ls.lat > latLonBounds.top + shift ? 4 : 0);
-			cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
-			if (i > 0) {
-				if ((prevCross & cross) == 0) {
-					if (endIndex == i - 1 && startIndex != -1) {
-						// continue previous line
-					} else {
-						// start new segment
-						if (startIndex >= 0) {
-							drawSegment(canvas, tileBox, l, startIndex, endIndex);
-						}
-						startIndex = i - 1;
-					}
-					endIndex = i;
-				}
-			}
-			prevCross = cross;
-		}
-		if (startIndex != -1) {
-			drawSegment(canvas, tileBox, l, startIndex, endIndex);
-		}
-	}
-*/
-
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
-
-/*
-	private void drawSegment(Canvas canvas, RotatedTileBox tb, TrkSegment l, int startIndex, int endIndex) {
-		TIntArrayList tx = new TIntArrayList();
-		TIntArrayList ty = new TIntArrayList();
-		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-		Path path = new Path();
-		for (int i = startIndex; i <= endIndex; i++) {
-			WptPt p = l.points.get(i);
-			int x = (int) (tb.getPixXFromLatLon(p.lat, p.lon) + 0.5);
-			int y = (int) (tb.getPixYFromLatLon(p.lat, p.lon) + 0.5);
-//			int x = tb.getPixXFromLonNoRot(p.lon);
-//			int y = tb.getPixYFromLatNoRot(p.lat);
-			tx.add(x);
-			ty.add(y);
-		}
-		calculatePath(tb, tx, ty, path);
-		if (isPaint_1) {
-			canvas.drawPath(path, paint_1);
-		}
-		if (isShadowPaint) {
-			canvas.drawPath(path, shadowPaint);
-		}
-		int clr = paint.getColor();
-		if (clr != l.getColor(clr) && l.getColor(clr) != 0) {
-			paint.setColor(l.getColor(clr));
-		}
-		canvas.drawPath(path, paint);
-		paint.setColor(clr);
-		if (isPaint2) {
-			canvas.drawPath(path, paint2);
-		}
-		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-
-	}
-*/
+	
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2);

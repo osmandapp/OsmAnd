@@ -22,6 +22,9 @@ public class WptPt extends GPXExtensions implements LocationPoint {
 	public double hdop = Double.NaN;
 	public boolean deleted = false;
 	public double cumDist = 0.0;				// cumulative distance, if in a track
+	public double fractionElevation = 0.0;		// gives a fraction of the elevation difference for this point
+		//... given a track of points.  For example, 0 at the lowest point in the track, 1.0 at the highest
+
 
 	public void setCumulativeDistance(double dist) {
 		cumDist = dist;
