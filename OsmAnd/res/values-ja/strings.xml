@@ -1308,7 +1308,7 @@ POIの更新は利用できません</string>
 	<string name="keep_and_add_destination_point">最終目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
-    <string name="shared_string_select_on_map">マップ上を選択</string>
+    <string name="shared_string_select_on_map">マップから選択</string>
     <string name="shared_string_favorite">お気に入り</string>
     <string name="route_preferences">ルート設定</string>
     <string name="route_info">ルート情報</string>
@@ -1667,7 +1667,7 @@ POIの更新は利用できません</string>
     <string name="wake_on_voice_descr">方向転換地点に近づいたらデバイスの画面を(オフの場合指定時間)オンにします</string>
     <string name="shared_string_never">しない</string>
     
-    <string name="impassable_road">無視する道路…</string>
+    <string name="impassable_road">通行止め指定する道路…</string>
     
     <string name="rendering_attr_trainLightrailRoutes_name">電車でのルート</string>
     <string name="rendering_attr_tramRoutes_name">路面電車でのルート</string>
@@ -2146,10 +2146,10 @@ POIの更新は利用できません</string>
     <string name="avoid_road">使用しない道路</string>
     <string name="storage_directory_readonly_desc">現在選択されているデータ保存フォルダーは読み取り専用です。保存フォルダーは一時的に内部メモリに設定されました。書き込み可能なストレージのフォルダを選択してください。</string>
     <string name="storage_directory_shared">共有メモリ</string>
-    <string name="full_report">完全なレポート</string>
+    <string name="full_report">より詳細な情報は以下へ</string>
     <string name="recalculate_route">ルートの再計算</string>
     <string name="open_street_map_login_and_pass">OpenStreetMapのログイン名とパスワード</string>
-    <string name="donations">寄付</string>
+    <string name="donations">寄付額</string>
     <string name="osm_user_stat">編集数 %1$s, ランク %2$s, 総編集数 %3$s</string>
     <string name="osm_editors_ranking">OSM編集者ランキング</string>
     <string name="osm_live_user_public_name">パブリック名</string>
@@ -2204,7 +2204,7 @@ POIの更新は利用できません</string>
     <string name="available_maps">利用可能なマップ</string>
     <string name="select_voice_provider">音声案内を選択</string>
     <string name="select_voice_provider_descr">使用したい言語の音声案内を選択しダウンロードします</string>
-    <string name="impassable_road_desc">ナビゲーション中に避けたい道路を選択します</string>
+    <string name="impassable_road_desc">ルート検索やナビゲーション中に避けたい道路を選択します</string>
     <string name="shared_string_sound">音声</string>
     <string name="no_location_permission">指定されたデータ保存場所にアクセスする権限がありません。</string>
     <string name="no_camera_permission">カメラ機能を使用する権限がありません。</string>
