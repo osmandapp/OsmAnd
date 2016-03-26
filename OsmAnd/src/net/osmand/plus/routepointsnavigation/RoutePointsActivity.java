@@ -10,7 +10,7 @@ import android.widget.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -64,9 +64,9 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 
 	private void selectGPX() {
-		GpxUiHelper.selectGPXFile(this, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+		GpxUiHelper.selectGPXFile(this, false, false, new CallbackWithObject<GPXFile[]>() {
 			@Override
-			public boolean processResult(GPXUtilities.GPXFile[] result) {
+			public boolean processResult(GPXFile[] result) {
 				final GPXFile gpx = result[0];
 				app.getSelectedGpxHelper().clearAllGpxFileToShow();
 				app.getSelectedGpxHelper().selectGpxFile(gpx, true, true);

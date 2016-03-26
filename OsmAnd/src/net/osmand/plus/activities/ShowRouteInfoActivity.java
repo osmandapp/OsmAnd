@@ -14,7 +14,7 @@ import java.util.List;
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -94,7 +94,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 
               final Intent sendIntent = new Intent();
               sendIntent.setAction(Intent.ACTION_SEND);
-              sendIntent.putExtra(Intent.EXTRA_TEXT, GPXUtilities.asString(gpx, getMyApplication()));
+              sendIntent.putExtra(Intent.EXTRA_TEXT, new GPXUtilities().asString(gpx, getMyApplication()));
               sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
               sendIntent.setType("application/gpx+xml");
               startActivity(sendIntent);

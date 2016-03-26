@@ -15,7 +15,7 @@ import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -200,7 +200,7 @@ public class DashTrackFragment extends DashBaseFragment {
 					Runnable run = new Runnable() {
 						@Override
 						public void run() {
-							showOnMap(GPXUtilities.loadGPXFile(app, f));
+							showOnMap(new GPXUtilities().loadGPXFile(app, f));
 						}
 					};
 					run.run();
@@ -209,7 +209,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	private void showOnMap(GPXUtilities.GPXFile file){
+	private void showOnMap(GPXFile file){
 		if (file.isEmpty()) {
 			AccessibleToast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
 			return;

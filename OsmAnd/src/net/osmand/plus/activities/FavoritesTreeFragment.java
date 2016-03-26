@@ -41,7 +41,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
@@ -570,7 +570,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					hideProgressBar();
 					final Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, "Favourites.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, getMyApplication()));
+					sendIntent.putExtra(Intent.EXTRA_TEXT, "Favourites.gpx:\n\n\n" + new GPXUtilities().asString(gpxFile, getMyApplication()));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(helper.getExternalFile()));
 //					sendIntent.setType("application/gpx+xml");

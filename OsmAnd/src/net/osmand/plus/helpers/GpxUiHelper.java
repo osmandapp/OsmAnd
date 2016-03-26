@@ -24,9 +24,9 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.GPXTrackAnalysis;
+import net.osmand.plus.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -239,7 +239,7 @@ public class GpxUiHelper {
 											  final File dir, String filename, final int position) {
 		final Application app = activity.getApplication();
 		final File f = new File(dir, filename);
-		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXFile[]>() {
 
 			@Override
 			public boolean processResult(GPXFile[] result) {
@@ -453,7 +453,7 @@ public class GpxUiHelper {
 				}
 				for (String fname : filename) {
 					final File f = new File(dir, fname);
-					GPXFile res = GPXUtilities.loadGPXFile(activity.getApplication(), f);
+					GPXFile res = new GPXUtilities().loadGPXFile(activity.getApplication(), f);
 					if (res.warning != null && res.warning.length() > 0) {
 						w += res.warning + "\n";
 					}

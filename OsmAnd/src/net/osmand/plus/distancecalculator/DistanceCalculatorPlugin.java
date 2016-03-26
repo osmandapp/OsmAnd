@@ -35,11 +35,11 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.Route;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.Route;
+import net.osmand.plus.Track;
+import net.osmand.plus.TrkSegment;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -197,7 +197,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				} else if (id == R.string.distance_measurement_finish_editing) {
 					distanceMeasurementMode = 0;
 				} else if (id == R.string.distance_measurement_finish_subtrack) {
-					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+					measurementPoints.add(new LinkedList<WptPt>());
 				} else if (id == R.string.distance_measurement_clear_route) {
 					distanceMeasurementMode = 0;
 					originalGPX = null;
@@ -218,7 +218,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	
 
 	protected void loadGpx(final MapActivity activity) {
-		GpxUiHelper.selectGPXFile(activity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+		GpxUiHelper.selectGPXFile(activity, false, false, new CallbackWithObject<GPXFile[]>() {
 			
 			@Override
 			public boolean processResult(GPXFile[] res) {
@@ -361,7 +361,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						}
 					}
 				}
-				return GPXUtilities.writeGpxFile(toSave, gpx, app);
+				return new GPXUtilities().writeGpxFile(toSave, gpx, app);
 			}
 
 			@Override
@@ -484,7 +484,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			if(distanceMeasurementMode == 1) {
 				LatLon l = tileBox.getLatLonFromPixel(point.x, point.y);
 				if(measurementPoints.size() == 0) {
-					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+					measurementPoints.add(new LinkedList<WptPt>());
 				}
 				WptPt pt = new WptPt();
 				pt.lat = l.getLatitude();

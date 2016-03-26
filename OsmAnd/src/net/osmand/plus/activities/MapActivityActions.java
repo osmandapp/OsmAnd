@@ -31,7 +31,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -47,7 +47,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -262,7 +262,7 @@ public class MapActivityActions implements DialogProvider {
 			if (params.length > 0) {
 				File file = params[0];
 				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute();
-				GPXUtilities.writeGpxFile(file, gpx, app);
+				new GPXUtilities().writeGpxFile(file, gpx, app);
 				return app.getString(R.string.route_successfully_saved_at, file.getName());
 			}
 			return null;

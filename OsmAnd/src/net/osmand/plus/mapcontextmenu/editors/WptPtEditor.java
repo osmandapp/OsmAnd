@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -88,7 +88,7 @@ public class TrackActivity extends TabActivity {
 				if(file == null) {
 					return getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				}
-				return GPXUtilities.loadGPXFile(TrackActivity.this, file);
+				return new GPXUtilities().loadGPXFile(TrackActivity.this, file);
 			}
 			protected void onPostExecute(GPXFile result) {
 				setSupportProgressBarIndeterminateVisibility(false);

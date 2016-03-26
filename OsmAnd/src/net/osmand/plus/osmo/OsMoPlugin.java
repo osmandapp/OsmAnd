@@ -13,8 +13,8 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -334,7 +334,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 					if (isGroupConnect) {
 						g = new GPXFile();
 					} else {
-						g = GPXUtilities.loadGPXFile(app, ps);
+						g = new GPXUtilities().loadGPXFile(app, ps);
 					}
 					for (WptPt point : params) {
 						if (point.deleted) {
@@ -348,7 +348,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 							g.points.add(point);
 						}
 					}
-					errors = GPXUtilities.writeGpxFile(ps, g, app);
+					errors = new GPXUtilities().writeGpxFile(ps, g, app);
 					ps.setLastModified(timestamp);
 					if (errors == null) {
 						errors = "";
@@ -359,7 +359,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 				}
 				SelectedGpxFile byPath = app.getSelectedGpxHelper().getSelectedFileByPath(ps.getAbsolutePath());
 				if (byPath == null || changed) {
-					GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, ps);
+					GPXFile selectGPXFile = new GPXUtilities().loadGPXFile(app, ps);
 					if (byPath != null) {
 						app.getSelectedGpxHelper().selectGpxFile(selectGPXFile, false, false);
 					}
@@ -425,7 +425,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 							}
 						}
 						if (visible && (changed || makeVisible)) {
-							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
+							GPXFile selectGPXFile = new GPXUtilities().loadGPXFile(app, f);
 							if (color != 0) {
 								selectGPXFile.setColor(color);
 							}

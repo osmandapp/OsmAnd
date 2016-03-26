@@ -29,8 +29,8 @@ import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -273,7 +273,7 @@ public class NotesFragment extends OsmAndListFragment {
 				file.points.add(wpt);
 			}
 		}
-		GPXUtilities.writeGpxFile(tmpFile, file, getMyApplication());
+		new GPXUtilities().writeGpxFile(tmpFile, file, getMyApplication());
 		return tmpFile;
 	}
 

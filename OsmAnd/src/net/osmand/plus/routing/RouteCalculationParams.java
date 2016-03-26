@@ -6,7 +6,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.RouteCalculationProgress;
 

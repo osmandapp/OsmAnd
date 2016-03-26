@@ -10,8 +10,8 @@ import android.os.Bundle;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -232,7 +232,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
+			new GPXUtilities().writeGpxFile(new File(gpx.path), gpx, app);
 			return null;
 		}
 

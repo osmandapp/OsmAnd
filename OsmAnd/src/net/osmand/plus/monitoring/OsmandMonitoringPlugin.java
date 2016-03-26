@@ -23,7 +23,7 @@ import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;

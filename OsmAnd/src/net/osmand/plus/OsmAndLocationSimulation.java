@@ -17,7 +17,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.GPXRouteParamsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,9 +79,9 @@ public class OsmAndLocationSimulation {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean gpxNavigation = radioGPX.isChecked();
 					if (gpxNavigation) {
-						GpxUiHelper.selectGPXFile(ma, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+						GpxUiHelper.selectGPXFile(ma, false, false, new CallbackWithObject<GPXFile[]>() {
 							@Override
-							public boolean processResult(GPXUtilities.GPXFile[] result) {
+							public boolean processResult(GPXFile[] result) {
 								GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
 								startAnimationThread(app, builder.getPoints(), true, speedup.getProgress() + 1);
 								if (runnable != null) {

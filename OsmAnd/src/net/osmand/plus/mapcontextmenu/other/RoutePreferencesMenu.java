@@ -23,6 +23,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -36,6 +37,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.routing.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapControlsLayer;
@@ -453,7 +455,7 @@ public class RoutePreferencesMenu {
 	}
 
 	private void updateGpxRoutingParameter(OtherLocalRoutingParameter gpxParam) {
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		boolean selected = gpxParam.isSelected(settings);
 		if (rp != null) {
 			if (gpxParam.id == R.string.gpx_option_reverse_route) {
@@ -518,7 +520,7 @@ public class RoutePreferencesMenu {
 
 	private List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		RouteProvider.GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		boolean osmandRouter = settings.ROUTER_SERVICE.get() == RouteProvider.RouteService.OSMAND;
 		if (!osmandRouter) {
 			list.add(new OtherLocalRoutingParameter(R.string.calculate_osmand_route_without_internet,
@@ -529,7 +531,7 @@ public class RoutePreferencesMenu {
 			return list;
 		}
 		if (rparams != null) {
-			GPXUtilities.GPXFile fl = rparams.getFile();
+			GPXFile fl = rparams.getFile();
 			if (fl.hasRtePt()) {
 				list.add(new OtherLocalRoutingParameter(R.string.use_points_as_intermediates,
 						getString(R.string.use_points_as_intermediates), rparams.isUseIntermediatePointsRTE()));
@@ -570,10 +572,10 @@ public class RoutePreferencesMenu {
 	}
 
 	protected void openGPXFileSelection(final TextView gpxSpinner) {
-		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXFile[]>() {
 
 			@Override
-			public boolean processResult(GPXUtilities.GPXFile[] result) {
+			public boolean processResult(GPXFile[] result) {
 				mapActivity.getMapActions().setGPXRouteParams(result[0]);
 				app.getTargetPointsHelper().updateRouteAndRefresh(true);
 				updateSpinnerItems(gpxSpinner);
@@ -585,13 +587,13 @@ public class RoutePreferencesMenu {
 	}
 
 	private void updateSpinnerItems(final TextView gpxSpinner) {
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		gpxSpinner.setText(rp == null ? mapActivity.getString(R.string.shared_string_none) :
 				new File(rp.getFile().path).getName());
 	}
 
 	private void showOptionsMenu(final TextView gpxSpinner) {
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		final PopupMenu optionsMenu = new PopupMenu(gpxSpinner.getContext(), gpxSpinner);
 		MenuItem item = optionsMenu.getMenu().add(
 				mapActivity.getString(R.string.shared_string_none));

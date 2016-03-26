@@ -12,9 +12,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.Route;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.Route;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -354,10 +354,10 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	}
 
 	public class SelectedRouteGpxFile {
-		private GPXUtilities.GPXFile gpx;
+		private GPXFile gpx;
 		private List<RoutePoint> currentPoints = new ArrayList<RoutePointsPlugin.RoutePoint>();
 
-		public SelectedRouteGpxFile(GPXUtilities.GPXFile gpx) {
+		public SelectedRouteGpxFile(GPXFile gpx) {
 			this.gpx = gpx;
 			parseGPXFile(gpx);
 		}
@@ -380,7 +380,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			return currentPoints.size();
 		}
 
-		public GPXUtilities.Route getRoute() {
+		public Route getRoute() {
 			if (gpx.routes.isEmpty()) {
 				return null;
 			}
@@ -388,7 +388,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 
 		public String saveFile() {
-			return GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
+			return new GPXUtilities().writeGpxFile(new File(gpx.path), gpx, app);
 		}
 
 		public void markPoint(RoutePoint point, boolean visited) {

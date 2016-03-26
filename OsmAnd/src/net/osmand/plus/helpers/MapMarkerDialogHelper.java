@@ -27,8 +27,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -898,6 +898,6 @@ public class MapMarkerDialogHelper {
 			//wpt.category = r.getSearchHistoryType();
 			file.points.add(wpt);
 		}
-		GPXUtilities.writeGpxFile(fout, file, app);
+		new GPXUtilities().writeGpxFile(fout, file, app);
 	}
 }

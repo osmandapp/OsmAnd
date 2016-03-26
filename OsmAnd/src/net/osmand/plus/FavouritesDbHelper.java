@@ -5,8 +5,8 @@ import android.support.v7.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -381,7 +381,7 @@ public class FavouritesDbHelper {
 	
 	public String saveFile(List<FavouritePoint> favoritePoints, File f) {
 		GPXFile gpx = asGpxFile(favoritePoints);
-		return GPXUtilities.writeGpxFile(f, gpx, context);
+		return new GPXUtilities().writeGpxFile(f, gpx, context);
 	}
 
 	
@@ -541,7 +541,7 @@ public class FavouritesDbHelper {
 		if(!file.exists()) {
 			return false;
 		}
-		GPXFile res = GPXUtilities.loadGPXFile(context, file);
+		GPXFile res = new GPXUtilities().loadGPXFile(context, file);
 		if (res.warning != null) {
 			return false;
 		}

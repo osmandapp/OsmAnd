@@ -20,9 +20,12 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.AsyncRamerDouglasPeucer;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.RenderType;
+import net.osmand.plus.TrkSegment;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -36,15 +39,11 @@ import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.MapUtils;
-import net.osmand.osm.edit.OsmMapUtils;
-import net.osmand.osm.edit.Node;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -86,7 +85,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private List<TrkSegment> points;
 	private GPXFile gpx;
-	private HashMap<Object,AsyncRamerDouglasPeucer> asyncCullers = new HashMap();
+	private HashMap<Object,AsyncRamerDouglasPeucer> asyncCuller = new HashMap();
+
+//	private HashMap<Object,Integer> resamplerFingeprints = new HashMap();
+//	private HashMap<String,AsyncRamerDouglasPeucer> asyncResampler = new HashMap();
+
 
 	private boolean autoScale = false;                //TODO: INIT THIS TO TRUE ONLY FOR ANDREW'S TESTING
 
@@ -379,37 +382,33 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
 
+				if (ts.renders.size()==0) {
+					ts.addRenderable(view, RenderType.ORIGINAL, 0, 0);
+					ts.addRenderable(view, RenderType.CONVEYOR, 10, 100);        // m, ms
+					ts.addRenderable(view, RenderType.RESAMPLE, 1000, 70);        // 1000m, dot size
+					ts.addRenderable(view, RenderType.RESAMPLE, 250, 30);        // m, dot size
+				}
+
+				//---------------------------------------------------------------------------
 				// Each track segment has a companion 'culled' segment, which is the original passed through a point-reduction
 				// to minimise the number of points required. The culled segment is only generated when needed - a "fingerprint"
 				// consisting of the view scale and # points in the track changes.
 
 				int viewZoom = view.getZoom();
-				if (ts.culledFingerprint != ts.points.size() + viewZoom) {
 
-					//TODO: Don't keep doing this for 'current track'!
+				//---------------------------------------------------------------------------
+				// Each track segment also has an associated resampled track. The resampled track(s) give us the
+				// effects that can be overlaid - for example, the conveyor belt effect, or the distance markers.
+				// The resampling occurs whenever there's a zoom change, too!
 
-					// Fire up an asynchronous "cull" of the current track. But first, we need to cancel/kill any cull that
-					// is already happening for this track segment - otherwise we get a possible order problem where the culls
-					// finish in out of sequence and we end up viewing the wrong resolution culled track. So, we keep the
-					// cull processes in a hash map so that we know what cull is being done by which track.
+				ts.recalculateRenderScales(view, viewZoom);			// rework all renderers as required
 
-					AsyncRamerDouglasPeucer culler = asyncCullers.get(ts);
-					if (culler != null)
-						culler.cancel(true);
-					culler = new AsyncRamerDouglasPeucer(ts, Math.pow(2.0, 17 - viewZoom));
-					asyncCullers.put(ts, culler);
-					ts.culledPoints = null;			// effectively use full-resolution until re-cull complete (see below)
-					culler.execute("Culled");
 
-					ts.culledFingerprint = ts.points.size() + viewZoom;            // 'cache' by associating to track size + zoom level
-				}
 
-				// Special-case if there is NO culled map, then we use the full-resolution!
-				// This kicks in when first displaying a track and the culled track hasn't finished generating yet.
-				// Also indirectly when we have started culling a track and we want to switch display to highest resolution for
-				// the track so that we don't see zoomed-in low-resolution culled tracks.
-				if (ts.culledPoints==null)
-					ts.culledPoints = ts.points;
+
+
+
+
 
 
 				// The path width is based on the view zoom and any scale modifier from the extensions block in the GPX
@@ -426,11 +425,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				// *** MAKE SURE autoScale IS SET to 'false' !!!
 
 				double gpxTrackScale = ts.getGpxZoom(g.getGpxZoom());        // will be 1.0 if no scaling specified in segment
-				if (autoScale == true || ts.hasCustomZoom()) {
+				if (autoScale || ts.hasCustomZoom()) {
 					gpxTrackScale *= getScale(viewZoom) / getDefaultStrokeWidth();
 				}
 
-				if (gpxTrackScale > 0 && ts.culledPoints != null) {
+				if (gpxTrackScale > 0) { // && ts.culledPoints != null) {
 
 					updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
 
@@ -440,12 +439,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					// Note: If autoScale is 'false' then gpxTrackScale IS 1.0 and we have no net change on sizing.           <<< IMPORTANT!
 					fixupStrokeWidths(gpxTrackScale);
 
-					// Create a transient track/segment for display purposes only
-					TrkSegment tsCulled = new TrkSegment();
-					tsCulled.points = ts.culledPoints;
-					tsCulled.setColor(ts.getColor(g.getColor()));
+					ts.drawRenderers(paint, canvas, tileBox);				// any renderers now get to draw
 
-					drawSingleSegment(canvas, tileBox, tsCulled);
 				}
 			}
 		}
@@ -482,12 +477,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<TrkSegment> points) {
 		for (TrkSegment ts : points) {
-			drawSingleSegment(canvas, tileBox, ts);
+			//drawSingleSegment(canvas, tileBox, ts);
+			ts.drawRenderers(paint, canvas,tileBox);
 		}
 	}
 
 
-	private void drawSingleSegment(Canvas canvas, RotatedTileBox tileBox, TrkSegment l) {
+/*	private void drawSingleSegment(Canvas canvas, RotatedTileBox tileBox, TrkSegment l) {
 
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 
@@ -522,13 +518,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			drawSegment(canvas, tileBox, l, startIndex, endIndex);
 		}
 	}
-
+*/
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 
-
+/*
 	private void drawSegment(Canvas canvas, RotatedTileBox tb, TrkSegment l, int startIndex, int endIndex) {
 		TIntArrayList tx = new TIntArrayList();
 		TIntArrayList ty = new TIntArrayList();
@@ -562,7 +558,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 
 	}
-
+*/
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2);
@@ -662,133 +658,5 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		this.points = (gpx == null ? null : gpx.proccessPoints());
 	}
 
-
-	// Resample a list of points into a new list of points.
-	// The new list is evenly-spaced (dist) and contains the first and last point from the original list.
-	// The purpose is to allow tracks to be displayed with colours/shades/animation with even spacing
-	// This routine essentially 'walks' along the path, dropping sample points along the trail where necessary. It is
-	// Typically, pass a point list to this, and set dist (in metres) to something that's relative to screen zoom
-	// The new point list has resampled times, elevations, speed and hdop too!
-
-	// TESTING THE GENERIC POINT LIST RESAMPLING CODE - SHOULD LOOK THE SAME AS ORIGINAL WITH DIFFERENT POINTS
-	// SPACED EQUALLY IN DISTANCE ACCORDING TO PARAMETER...
-//					List<WptPt> resampled = resampleTrack(culled, 1.0);
-//					culled = resampled;            // testing!!!
-
-
-	private List<WptPt> resampleTrack(List<WptPt> pts, double dist) {
-
-		ArrayList<WptPt> newPts = new ArrayList<WptPt>();
-		if (pts != null && pts.size() > 0) {
-
-			WptPt lastPt = pts.get(0);
-			double segSub = 0;
-			for (int i = 1; i < pts.size(); i++) {
-				WptPt pt = pts.get(i);
-				double segLength = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(), lastPt.getLatitude(), lastPt.getLongitude());
-
-				// March along the segment, calculating the interpolated point values as we go
-				while (segSub < segLength) {
-					double partial = segSub / segLength;
-					WptPt newPoint = new WptPt(
-							lastPt.getLatitude() + partial * (pt.getLatitude() - lastPt.getLatitude()),
-							lastPt.getLongitude() + partial * (pt.getLongitude() - lastPt.getLongitude()),
-							(long) (lastPt.time + partial * (pt.time - lastPt.time)),
-							lastPt.ele + partial * (pt.ele - lastPt.ele),
-							lastPt.speed + partial * (pt.speed - lastPt.speed),
-							lastPt.hdop + partial * (pt.hdop - lastPt.hdop)
-					);
-					newPts.add(newPts.size(), newPoint);
-					segSub += dist;
-				}
-				segSub -= segLength;                // leftover
-				lastPt = pt;
-			}
-			// Add in the last point as a terminator
-			newPts.add(newPts.size(), lastPt);
-		}
-		return newPts;
-	}
-
-
-	private class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
-
-		private TrkSegment ts = null;
-		private double zoom;
-		private List<WptPt> culled = null;
-
-		public AsyncRamerDouglasPeucer(TrkSegment ts, double zoom) {
-			this.ts = ts;
-			this.zoom = zoom;
-		}
-
-
-		// Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
-		// This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
-		// but optimised for this specific usage.
-
-		private boolean[] cullRamerDouglasPeucer(List<WptPt> points, double epsilon) {
-
-			int nsize = points.size();
-			boolean[] survivor = new boolean[nsize];
-			if (nsize > 0) {
-				cullRamerDouglasPeucer(points, epsilon, survivor, 0, nsize - 1);
-				survivor[0] = true;
-			}
-			return survivor;
-		}
-
-		private void cullRamerDouglasPeucer(List<WptPt> pt, double epsilon, boolean[] survivor, int start, int end) {
-
-			double dmax = -1;
-			int index = -1;
-			for (int i = start + 1; i < end; i++) {
-				double d = MapUtils.getOrthogonalDistance(
-						pt.get(i).getLatitude(), pt.get(i).getLongitude(),
-						pt.get(start).getLatitude(), pt.get(start).getLongitude(),
-						pt.get(end).getLatitude(), pt.get(end).getLongitude());
-				if (d > dmax) {
-					dmax = d;
-					index = i;
-				}
-			}
-			if (dmax >= epsilon) {
-				cullRamerDouglasPeucer(pt, epsilon, survivor, start, index);
-				cullRamerDouglasPeucer(pt, epsilon, survivor, index, end);
-			} else {
-				survivor[end] = true;
-			}
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-
-			String resp = "OK";
-			try {
-				boolean[] survivor = cullRamerDouglasPeucer(ts.points, zoom);
-				culled = new ArrayList<WptPt>();
-				for (int i = 0; i < survivor.length; i++)
-					if (survivor[i])
-						culled.add(ts.points.get(i));
-			} catch (Exception e) {
-				e.printStackTrace();
-				resp = e.getMessage();
-			}
-
-			if (isCancelled())
-				resp = "Cancelled";
-
-			return resp;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			// executes on the UI thread so it's OK to change its variables
-			if (ts != null && result == "OK") {
-				ts.culledPoints = culled;
-				view.refreshMap();					// FORCE redraw to guarantee new culled track is shown
-			}
-		}
-	}
 
 }

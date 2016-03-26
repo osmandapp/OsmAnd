@@ -10,6 +10,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -82,8 +83,8 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {
-		if (o != null && o instanceof GPXUtilities.WptPt && plugin.getCurrentRoute() != null){
-			final GPXUtilities.WptPt point = (GPXUtilities.WptPt) o;
+		if (o != null && o instanceof WptPt && plugin.getCurrentRoute() != null){
+			final WptPt point = (WptPt) o;
 			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

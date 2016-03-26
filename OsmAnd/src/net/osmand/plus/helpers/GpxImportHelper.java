@@ -16,9 +16,10 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -90,7 +91,7 @@ public class GpxImportHelper {
 	}
 
 	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save) {
-		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
+		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
 			@Override
@@ -99,14 +100,14 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected GPXUtilities.GPXFile doInBackground(Void... nothing) {
+			protected GPXFile doInBackground(Void... nothing) {
 				InputStream is = null;
 				try {
 					final ParcelFileDescriptor pFD = application.getContentResolver().openFileDescriptor(gpxFile, "r");
 
 					if (pFD != null) {
 						is = new FileInputStream(pFD.getFileDescriptor());
-						return GPXUtilities.loadGPXFile(application, is);
+						return new GPXUtilities().loadGPXFile(application, is);
 					}
 				} catch (FileNotFoundException e) {
 					//
@@ -120,7 +121,7 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected void onPostExecute(GPXUtilities.GPXFile result) {
+			protected void onPostExecute(GPXFile result) {
 				progress.dismiss();
 				handleResult(result, fileName, save);
 			}
@@ -128,7 +129,7 @@ public class GpxImportHelper {
 	}
 
 	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save) {
-		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
+		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
 			@Override
@@ -137,14 +138,14 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected GPXUtilities.GPXFile doInBackground(Void... nothing) {
+			protected GPXFile doInBackground(Void... nothing) {
 				InputStream is = null;
 				try {
 					final ParcelFileDescriptor pFD = application.getContentResolver().openFileDescriptor(gpxFile, "r");
 
 					if (pFD != null) {
 						is = new FileInputStream(pFD.getFileDescriptor());
-						return GPXUtilities.loadGPXFile(application, is);
+						return new GPXUtilities().loadGPXFile(application, is);
 					}
 				} catch (FileNotFoundException e) {
 					//
@@ -158,7 +159,7 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected void onPostExecute(final GPXUtilities.GPXFile result) {
+			protected void onPostExecute(final GPXFile result) {
 				progress.dismiss();
 				importFavourites(result, fileName, save);
 			}
@@ -166,7 +167,7 @@ public class GpxImportHelper {
 	}
 	
 	private void importFavoritesImpl(final GPXFile gpxFile) {
-		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
+		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
 			@Override
@@ -175,7 +176,7 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected GPXUtilities.GPXFile doInBackground(Void... nothing) {
+			protected GPXFile doInBackground(Void... nothing) {
 				final List<FavouritePoint> favourites = asFavourites(gpxFile.points);
 				final FavouritesDbHelper favoritesHelper = application.getFavorites();
 				for (final FavouritePoint favourite : favourites) {
@@ -188,7 +189,7 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected void onPostExecute(GPXUtilities.GPXFile result) {
+			protected void onPostExecute(GPXFile result) {
 				progress.dismiss();
 				AccessibleToast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				final Intent newIntent = new Intent(mapActivity, application.getAppCustomization().getFavoritesActivity());
@@ -198,7 +199,7 @@ public class GpxImportHelper {
 	}
 
 	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save) {
-		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
+		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
 			@Override
@@ -207,7 +208,7 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected GPXUtilities.GPXFile doInBackground(Void... nothing) {
+			protected GPXFile doInBackground(Void... nothing) {
 				InputStream is = null;
 				try {
 					final ParcelFileDescriptor pFD = application.getContentResolver().openFileDescriptor(kmlFile, "r");
@@ -216,7 +217,7 @@ public class GpxImportHelper {
 						final String result = Kml2Gpx.toGpx(is);
 						if (result != null) {
 							try {
-								return GPXUtilities.loadGPXFile(application, new ByteArrayInputStream(result.getBytes("UTF-8")));
+								return new GPXUtilities().loadGPXFile(application, new ByteArrayInputStream(result.getBytes("UTF-8")));
 							} catch (UnsupportedEncodingException e) {
 								return null;
 							}
@@ -234,14 +235,14 @@ public class GpxImportHelper {
 			}
 
 			@Override
-			protected void onPostExecute(GPXUtilities.GPXFile result) {
+			protected void onPostExecute(GPXFile result) {
 				progress.dismiss();
 				handleResult(result, name, save);
 			}
 		}.execute();
 	}
 
-	private void handleResult(final GPXUtilities.GPXFile result, final String name, final boolean save) {
+	private void handleResult(final GPXFile result, final String name, final boolean save) {
 		if (result != null) {
 			if (result.warning != null) {
 				AccessibleToast.makeText(mapActivity, result.warning, Toast.LENGTH_LONG).show();
@@ -258,7 +259,7 @@ public class GpxImportHelper {
 		}
 	}
 
-	private String saveImport(final GPXUtilities.GPXFile gpxFile, final String fileName) {
+	private String saveImport(final GPXFile gpxFile, final String fileName) {
 		final String warning;
 
 		if (gpxFile.isEmpty() || fileName == null) {
@@ -267,10 +268,10 @@ public class GpxImportHelper {
 			final File importDir = application.getAppPath(IndexConstants.GPX_IMPORT_DIR);
 			importDir.mkdirs();
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
-				final GPXUtilities.WptPt pt = gpxFile.findPointToShow();
+				final WptPt pt = gpxFile.findPointToShow();
 				final File toWrite = getFileToSave(fileName, importDir, pt);
 
-				warning = GPXUtilities.writeGpxFile(toWrite, gpxFile, application);
+				warning = new GPXUtilities().writeGpxFile(toWrite, gpxFile, application);
 				if (warning == null) {
 					gpxFile.path = toWrite.getAbsolutePath();
 				}
@@ -282,7 +283,7 @@ public class GpxImportHelper {
 		return warning;
 	}
 
-	private File getFileToSave(final String fileName, final File importDir, final GPXUtilities.WptPt pt) {
+	private File getFileToSave(final String fileName, final File importDir, final WptPt pt) {
 		final StringBuilder builder = new StringBuilder(fileName);
 		if ("".equals(fileName)) {
 			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_SUFFIX); //$NON-NLS-1$
@@ -296,10 +297,10 @@ public class GpxImportHelper {
 	}
 
 	private class SaveAsyncTask extends AsyncTask<Void, Void, String> {
-		private final GPXUtilities.GPXFile result;
+		private final GPXFile result;
 		private final String name;
 
-		private SaveAsyncTask(GPXUtilities.GPXFile result, final String name) {
+		private SaveAsyncTask(GPXFile result, final String name) {
 			this.result = result;
 			this.name = name;
 		}
@@ -319,16 +320,16 @@ public class GpxImportHelper {
 
 	}
 
-	private void showGpxOnMap(final GPXUtilities.GPXFile result) {
+	private void showGpxOnMap(final GPXFile result) {
 		application.getSelectedGpxHelper().setGpxFileToDisplay(result);
-		final GPXUtilities.WptPt moveTo = result.findPointToShow();
+		final WptPt moveTo = result.findPointToShow();
 		if (moveTo != null) {
 			mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
 		}
 		mapView.refreshMap();
 	}
 
-	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName, final boolean save) {
+	private void importFavourites(final GPXFile gpxFile, final String fileName, final boolean save) {
 		final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -351,10 +352,10 @@ public class GpxImportHelper {
 				.show();
 	}
 
-	private List<FavouritePoint> asFavourites(final List<GPXUtilities.WptPt> wptPts) {
+	private List<FavouritePoint> asFavourites(final List<WptPt> wptPts) {
 		final List<FavouritePoint> favourites = new ArrayList<FavouritePoint>();
 
-		for (GPXUtilities.WptPt p : wptPts) {
+		for (WptPt p : wptPts) {
 			if (p.category != null) {
 				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, p.category);
 				if (p.desc!=null) {

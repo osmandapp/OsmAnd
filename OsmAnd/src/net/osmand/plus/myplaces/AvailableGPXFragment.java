@@ -37,9 +37,9 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.GPXTrackAnalysis;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
@@ -543,7 +543,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void showGpxOnMap(GpxInfo info) {
-		info.setGpx(GPXUtilities.loadGPXFile(app, info.file));
+		info.setGpx(new GPXUtilities().loadGPXFile(app, info.file));
 		boolean e = true;
 		if (info != null && info.gpx != null) {
 			WptPt loc = info.gpx.findPointToShow();
@@ -1078,7 +1078,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			for (GpxInfo info : params) {
 				if (!isCancelled()) {
 					if (!info.currentlyRecordingTrack) {
-						info.setGpx(GPXUtilities.loadGPXFile(app, info.file));
+						info.setGpx(new GPXUtilities().loadGPXFile(app, info.file));
 					}
 					publishProgress(info);
 				}

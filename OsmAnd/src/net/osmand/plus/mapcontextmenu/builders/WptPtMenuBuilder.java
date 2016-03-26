@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.view.View;
 
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

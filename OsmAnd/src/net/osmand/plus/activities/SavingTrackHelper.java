@@ -8,11 +8,11 @@ import android.text.format.DateFormat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.GPXTrackAnalysis;
+import net.osmand.plus.Track;
+import net.osmand.plus.TrkSegment;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -203,7 +203,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						}
 					}
 
-					String warn = GPXUtilities.writeGpxFile(fout, data.get(f), ctx);
+					String warn = new GPXUtilities().writeGpxFile(fout, data.get(f), ctx);
 					if (warn != null) {
 						warnings.add(warn);
 						return warnings;
@@ -391,7 +391,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			lastPoint = new LatLon(lat, lon);
 		}
 		lastTimeUpdated = time;
-		WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop);
+		WptPt pt = new WptPt(lat, lon, time, alt, speed, hdop);
 		addTrackPoint(pt, newSegment, time);
 	}
 	

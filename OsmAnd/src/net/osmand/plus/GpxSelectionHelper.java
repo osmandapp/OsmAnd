@@ -3,12 +3,13 @@ package net.osmand.plus;
 import android.graphics.Bitmap;
 
 import net.osmand.IProgress;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Route;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXFile;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXTrackAnalysis;
+import net.osmand.plus.Route;
+import net.osmand.plus.Track;
+import net.osmand.plus.TrkSegment;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -184,9 +185,9 @@ public class GpxSelectionHelper {
 			GPXTrackAnalysis[] as ;
 			boolean split = true;
 			if(group.splitDistance > 0) {
-				as = r.splitByDistance(group.splitDistance).toArray(new GPXTrackAnalysis[0]);
+				as = new GPXUtilities().splitByDistance(group.splitDistance).toArray(new GPXTrackAnalysis[0]);
 			} else if(group.splitTime > 0) {
-				as = r.splitByTime(group.splitTime).toArray(new GPXTrackAnalysis[0]);
+				as = new GPXUtilities().splitByTime(group.splitTime).toArray(new GPXTrackAnalysis[0]);
 			} else {
 				split = false;
 				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, r)};
@@ -333,7 +334,7 @@ public class GpxSelectionHelper {
 						if(p != null) {
 							p.startTask(getString(R.string.loading_smth, fl.getName()), -1);
 						}
-						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
+						GPXFile gpx = new GPXUtilities().loadGPXFile(app, fl);
 						if(obj.has(COLOR)) {
 							int clr = Algorithms.parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);

@@ -3,7 +3,7 @@ package net.osmand.plus.osmo;
 import com.google.gson.Gson;
 
 import net.osmand.Location;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;

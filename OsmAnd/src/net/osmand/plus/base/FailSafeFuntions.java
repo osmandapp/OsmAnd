@@ -12,14 +12,14 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 
 import org.apache.commons.logging.Log;
@@ -113,7 +113,7 @@ public class FailSafeFuntions {
 						protected GPXFile doInBackground(String... params) {
 							if (gpxPath != null) {
 								// Reverse also should be stored ?
-								GPXFile f = GPXUtilities.loadGPXFile(app, new File(gpxPath));
+								GPXFile f = new GPXUtilities().loadGPXFile(app, new File(gpxPath));
 								if (f.warning != null) {
 									return null;
 								}

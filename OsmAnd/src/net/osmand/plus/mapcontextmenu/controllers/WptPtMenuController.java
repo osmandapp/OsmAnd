@@ -3,7 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
