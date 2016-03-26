@@ -2750,4 +2750,6 @@
 	<string name="poi_free_flying_rigid_yes">Freeflying fastvinge: ja</string>
 	<string name="poi_free_flying_rigid_no">Freeflying fastvinge: nej</string>
 
+<string name="poi_sanitary_dump_station">Sanitær tømmestation</string>
+
 </resources>
