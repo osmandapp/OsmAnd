@@ -649,7 +649,7 @@ public class RouteInfoWidgetsFactory {
 
 			this.scaleCoefficient = scaleCoefficent;
 			laneStraight = getPathFromTurnType(paths, TurnType.C, null, scaleCoefficient / miniCoeff);
-			laneStraightBitmap = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, TurnType.C, 0, 0, 1, null, scaleCoefficient / miniCoeff, leftSide);
+			laneStraightBitmap = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, TurnType.C, 0, 0, TurnPathHelper.FIRST_TURN, null, scaleCoefficient / miniCoeff, leftSide);
 			paintBlack = new Paint();
 			paintBlack.setStyle(Style.STROKE);
 			paintBlack.setColor(Color.BLACK);
@@ -704,11 +704,11 @@ public class RouteInfoWidgetsFactory {
 					secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
 
 					float coef = scaleCoefficient / miniCoeff;
-					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, 0, 1, laneStraightBitmap, coef, leftSide);
+					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, 0, TurnPathHelper.FIRST_TURN, laneStraightBitmap, coef, leftSide);
 
 					if(secondTurnType > 0){
 						Bitmap bSecond = null;
-						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, 0, 2, laneStraightBitmap, coef, leftSide);
+						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, 0, TurnPathHelper.SECOND_TURN, laneStraightBitmap, coef, leftSide);
 						if (bSecond != null){
 							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
 							canvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);

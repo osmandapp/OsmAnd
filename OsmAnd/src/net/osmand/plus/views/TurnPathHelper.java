@@ -11,6 +11,11 @@ import java.util.Map;
 
 public class TurnPathHelper {
 
+	//Index of processed turn
+	public static final int FIRST_TURN = 1;
+	public static final int SECOND_TURN = 2;
+	public static final int THIRD_TURN = 3;
+
 	// 72x72
 	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform) {
 		if(turnType == null){
@@ -400,7 +405,7 @@ public class TurnPathHelper {
 
 	}
 
-	public static Bitmap getBitmapFromTurnType(Resources res, Map<TurnResource, Bitmap> cache, int firstTurn, int secondTurn, int thirdTurn, int turn, Bitmap defaultType, float coef, boolean leftSide) {
+	public static Bitmap getBitmapFromTurnType(Resources res, Map<TurnResource, Bitmap> cache, int firstTurn, int secondTurn, int thirdTurn, int turnIndex, Bitmap defaultType, float coef, boolean leftSide) {
 
 		int firstTurnType = TurnType.valueOf(firstTurn, leftSide).getValue();
 		int secondTurnType = TurnType.valueOf(secondTurn, leftSide).getValue();
@@ -408,7 +413,7 @@ public class TurnPathHelper {
 
 		TurnResource turnResource = new TurnResource(R.drawable.map_turn_forward_small, false);
 
-		if(turn == 1){
+		if(turnIndex == FIRST_TURN){
 			if(firstTurn == 0) return defaultType;
 			if(secondTurnType == 0) {
 				turnResource = getTallArrow(firstTurnType);
@@ -422,14 +427,14 @@ public class TurnPathHelper {
 				// get the small one
 				turnResource = getShortArrow(firstTurnType);
 			}
-		}else if(turn == 2){
-			if(firstTurnType == TurnType.C){
+		}else if(turnIndex == SECOND_TURN){
+			if(firstTurnType == TurnType.C || firstTurnType == TurnType.TR){
 				// get the small one
 				turnResource = getShortArrow(secondTurnType);
 			}else{
 				turnResource = getTallArrow(secondTurnType);
 			}
-		}else if(turn == 3){
+		}else if(turnIndex == THIRD_TURN){
 			if(secondTurnType == TurnType.C){
 				// get the small one
 				turnResource = getShortArrow(thirdTurnType);
