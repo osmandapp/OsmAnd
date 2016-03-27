@@ -521,7 +521,7 @@ POIの更新は利用できません</string>
 <string name="choose_available_region">リストから地域を選ぶ</string>
 <string name="choose_intersected_street">交差する通りを選ぶ</string>
 <string name="Closest_Amenities">いちばん近い施設</string>
-<string name="app_mode_default">マップ参照</string>
+<string name="app_mode_default">地図閲覧</string>
 <string name="app_mode_car">自動車</string>
 <string name="app_mode_bicycle">自転車</string>
 <string name="app_mode_pedestrian">徒歩</string>
@@ -1100,7 +1100,7 @@ POIの更新は利用できません</string>
 	<string name="av_camera_focus_infinity">フォーカスを無限遠(∞)にセット</string>
 	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
 	<string name="osmand_srtm_long_description_1000_chars">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
-\n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とASTER(資源探査用将来型センサ)、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
+\n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
     <string name="audionotes_location_not_defined">メモを取る地点が指定されていません。メモをとるためには\'ロケーションメニュー\'から任意の項目を呼び出してください。</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">音声/ビデオメモプラグインは、旅行中の音声/写真/ビデオに関するメモ機能を提供します。マップ画面上のボタンまたはコンテキストメニューから使用出来ます。</string>
@@ -1108,7 +1108,7 @@ POIの更新は利用できません</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_description">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
-\n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とASTER(資源探査用将来型センサ)、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
+\n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
     <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -1798,7 +1798,7 @@ POIの更新は利用できません</string>
     <string name="plugin_nautical_descr">"このプラグインはOsmAnd Maps &amp; Navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。
 \n\nOsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更出来ます。 "</string>
 	<string name="plugin_ski_name">スキーマップ表示</string>
-	<string name="plugin_ski_descr">"このプラグインは、あなたの指先で簡単にダウンヒルスキー場、クロスカントリースキー、アルペンスキールート、ケーブルカーやスキーリフトについての詳細を置けます。ルートとゲレンデが色分けされた難易度によって示され、冬の雪景色をイメージした\'ウィンター風\'マップスタイルで描かれます。\n\nこの表示を有効化すると、冬の景色をイメージした\'ウィンターアンドスキー\'のスタイルに変更されます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。 "</string>
+	<string name="plugin_ski_descr">"このプラグインは、あなたの指先で簡単にダウンヒルスキー、クロスカントリースキー、アルペンスキーのコース、ロープウェイ及びゴンドラやスキーリフトについての詳細を置けます。ルートとゲレンデが色分けされた難易度によって示され、冬の雪景色をイメージした\'ウィンター風\'マップスタイルで描かれます。\n\nこの表示を有効化すると、冬の景色をイメージした\'ウィンターアンドスキー\'のスタイルに変更されます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。 "</string>
 	<string name="rename_failed">リネームが失敗しました。</string>
 	<string name="days_behind">日前</string>
 	<string name="back_to_map">マップ画面に戻る</string>
@@ -1832,7 +1832,7 @@ POIの更新は利用できません</string>
     <string name="confirm_usage_speed_cameras">多くの国(ドイツ、フランス、イタリア、その他)ではスピードカメラ警告の使用が法律で許可されていません。あなたが法律に違反した場合OsmAndは一切の責任を負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
 	<string name="shared_string_message">メッセージ</string>
 	<string name="shared_string_do_not_use">使用しない</string>
-	<string name="shared_string_show_description">説明表示</string>
+	<string name="shared_string_show_description">詳細表示</string>
 	<string name="shared_string_address">住所</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">OSM マップ作成アシスタント</string>
 	<string name="shared_string_manage">管理</string>
@@ -2067,7 +2067,7 @@ POIの更新は利用できません</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX経由地点を削除しますか？</string>
     <string name="context_menu_item_edit_waypoint">GPX経由地点の編集</string>
-    <string name="shared_string_location">場所</string>
+    <string name="shared_string_location">道路名称、市町村名</string>
     <string name="share_osm_edits_subject">OSMの編集をOsmAndで共有</string>
     <string name="lang_nds">低地ドイツ語</string>
     <string name="lang_mk">マケドニア語</string>
@@ -2212,7 +2212,7 @@ POIの更新は利用できません</string>
     <string name="route_distance">距離:</string>
     <string name="route_duration">時間:</string>
     <string name="rendering_attr_horseRoutes_name">乗馬用ルート</string>
-    <string name="shared_string_near">付近</string>
+    <string name="shared_string_near">近隣</string>
     <string name="shared_string_hide">非表示</string>
     <string name="av_video_quality_low">最低画質</string>
     <string name="av_video_quality_high">最高画質</string>
@@ -2222,7 +2222,7 @@ POIの更新は利用できません</string>
     <string name="av_audio_format_descr">音声出力形式を選択します</string>
     <string name="av_audio_bitrate">音声ビットレート</string>
     <string name="av_audio_bitrate_descr">音声のビットレートを選択します</string>
-    <string name="looking_up_address">住所を検索</string>
+    <string name="looking_up_address">道路名及び市町村名を取得中</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - インターネットに接続することなく目的の場所を探したりルートを検索することが出来ます。なじみのない場所やルートを検索出来るように旅行の前に、その地域の地図をダウンロードしてください。基本的な機能:・200カ国の詳細なマップ・オフラインでの音声ナビゲーション・オフラインでの住所検索・地図上の場所についての情報、観光、喫茶店、駐車場、店舗・お気に入りの場所の追加・自動車、自転車、徒歩移動ごとのナビゲーション設定・GPX経路を表示、記録機能・POIに関するWikipedia情報利用・マップに追加できる音声やビデオメモ機能・運転時に分かりやすい昼と夜のマップモード・公共交通機関のルートや停留所・自転車道や歩道小道・世界中の観光向けトレイルコース・様々なオンラインマップにも対応・道路の舗装状況や街路照明の情報・POIの追加、編集、削除(OpenStreetMap.orgユーザー向け)・OSM - 他のデバイスのライブモニタリング機能はその国に通じた信頼性の高いナビゲーターを得るのと同等 - フランス、ドイツ、メキシコ、イギリス、スペイン、オランダ、アメリカ、ロシア、ブラジルやその他の地域。プラグイン:・等高線 https://goo.gl/7mojP8 既存マップに等高線や地形の陰影表示を追加で描写可能。・スキーマップ https://goo.gl/pX6DxJ スキーゲレンデ、クロスカントリースキーコース、ロープウェイやリフトの情報。・航海マップ https://goo.gl/0hEdxm 沿岸や航海時のナビゲーションを補助する特殊スタイルマップ。・駐車位置 https://goo.gl/6JxQXF 車両の駐車位置や駐車料金、残り駐車時間などの表示。等々乞うご期待！Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp サイト: http://osmand.net OsmAndアプリについてのヘルプが必要な場合はサポートチームにご連絡ください: support@osmand.net. "</string>
     <string name="begin_with_osmand_menu_group">OsmAndの最初のステップ</string>
     <string name="first_usage_item">使用方法の簡易説明</string>
