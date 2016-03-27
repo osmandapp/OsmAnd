@@ -2675,7 +2675,7 @@
 	<string name="poi_nuclear_explosion_type_space">Eksplosionstype: rummet (højde over 80 km)</string>
 	<string name="poi_nuclear_explosion_type_underwater">Eksplosionstype: undersøisk</string>
 	<string name="poi_nuclear_explosion_date_utc">Eksplosionsdato (UTC)</string>
-	<string name="poi_nuclear_explosion_shot_name_en">Skudnavnet (en)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Skudnavn (en)</string>
 	<string name="poi_nuclear_explosion_series">Eksplosionsserie</string>
 	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Eksplosionsformål: atomvåben relateret</string>
 	<string name="poi_nuclear_explosion_purpose_weapons_effects">Eksplosionsformål: våbeneffekt</string>
@@ -2688,11 +2688,11 @@
 	<string name="poi_nuclear_explosion_purpose_industrial_application">Eksplosionsformål: industriel anvendelse</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Eksplosionsformål: industriel anvendelse, jordflytning</string>
 	<string name="poi_nuclear_explosion_time_utc">Eksplosionstidpunkt (UTC)</string>
-	<string name="poi_nuclear_explosion_yield">Eksplosion udbytte</string>
+	<string name="poi_nuclear_explosion_yield">Eksplosionsudbytte</string>
 	<string name="poi_nuclear_explosion_hole">Eksplosionshul</string>
 	<string name="poi_nuclear_explosion_height_of_burst">Eksplosionenshøjde</string>
 	<string name="poi_nuclear_explosion_ground_zero_altitude">Højde over jordoverfladen</string>
-	<string name="poi_nuclear_explosion_body_wave_magnitude">bølge størrelsesorden</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Seismiskbølge størrelsesorden</string>
 	<string name="poi_nuclear_explosion_salvo_first_detonation">Eksplosionssalve: første detonation af en salvetest</string>
 	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Eksplosionssalve: anden eller senere detonation af en salvetest</string>
 	<string name="poi_nuclear_explosion_crater_diameter">Eksplosion: kraterdiameter</string>
@@ -2715,7 +2715,7 @@
 	<string name="poi_amenity_vacuum_cleaner">Støvsuger</string>
 
 <string name="poi_sport_free_flying">Freeflying (sport)</string>
-<string name="poi_bicycle_repair_station">Cykel reparation stander</string>
+<string name="poi_bicycle_repair_station">Cykelreparationsstander</string>
 
 <string name="poi_water_tap">Vandhane</string>
 
@@ -2726,25 +2726,25 @@
 	<string name="poi_free_flying_paragliding_no">Paragliding: nej</string>
 	<string name="poi_free_flying_hanggliding_yes">Hanggliding: ja</string>
 	<string name="poi_free_flying_hanggliding_no">Hanggliding: nej</string>
-	<string name="poi_free_flying_site_orientation_s">Freeflying sted orientering: S</string>
-	<string name="poi_free_flying_site_orientation_sw">Freeflying sted orientering: SV</string>
-	<string name="poi_free_flying_site_orientation_w">Freeflying sted orientering: V</string>
-	<string name="poi_free_flying_site_orientation_nw">Freeflying sted orientering: NV</string>
-	<string name="poi_free_flying_site_orientation_n">Freeflying sted orientering: N</string>
-	<string name="poi_free_flying_site_orientation_ne">Freeflying sted orientering: NØ</string>
-	<string name="poi_free_flying_site_orientation_e">Freeflying sted orientering: Ø</string>
-	<string name="poi_free_flying_site_orientation_se">Freeflying sted orientering: SØ</string>
+	<string name="poi_free_flying_site_orientation_s">Freeflying flyvepladsorientering: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Freeflying flyvepladsorientering: SV</string>
+	<string name="poi_free_flying_site_orientation_w">Freeflying flyvepladsorientering: V</string>
+	<string name="poi_free_flying_site_orientation_nw">Freeflying flyvepladsorientering: NV</string>
+	<string name="poi_free_flying_site_orientation_n">Freeflying flyvepladsorientering: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Freeflying flyvepladsorientering: NØ</string>
+	<string name="poi_free_flying_site_orientation_e">Freeflying flyvepladsorientering: Ø</string>
+	<string name="poi_free_flying_site_orientation_se">Freeflying flyvepladsorientering: SØ</string>
 	<string name="poi_free_flying_no_flight_time">Ingen flyvetid (Freeflying)</string>
 	<string name="poi_free_flying_guest_guidelines_yes">Gæsteretningslinjer for freeflying: ja</string>
 	<string name="poi_free_flying_guest_guidelines_no">Gæsteretningslinjer for freeflying: nej</string>
 
 	<string name="poi_solarium">Solarium</string>
 
-<string name="poi_free_flying_site_takeoff">Freeflying sted: start</string>
-	<string name="poi_free_flying_site_landing">Freeflying sted: landing</string>
-	<string name="poi_free_flying_site_toplanding">Freeflying sted: toplanding</string>
-	<string name="poi_free_flying_site_towing">Freeflying sted: trækanordning</string>
-	<string name="poi_free_flying_site_training">"Freeflying sted:  træning"</string>
+<string name="poi_free_flying_site_takeoff">Freeflying flyveplads: start</string>
+	<string name="poi_free_flying_site_landing">Freeflying flyveplads: landing</string>
+	<string name="poi_free_flying_site_toplanding">Freeflying flyveplads: toplanding</string>
+	<string name="poi_free_flying_site_towing">Freeflying flyveplads: trækanordning</string>
+	<string name="poi_free_flying_site_training">"Freeflying flyveplads:  træning"</string>
 	<string name="poi_free_flying_official_yes">Freeflying funktionær: ja</string>
 	<string name="poi_free_flying_official_no">Freeflying funktionær: nej</string>
 	<string name="poi_free_flying_rigid_yes">Freeflying fastvinge: ja</string>

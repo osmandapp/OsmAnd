@@ -48,6 +48,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -590,8 +591,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.layer_recordings).selected(SHOW_RECORDINGS.get() ? 1 : 0)
-				.colorIcon(R.drawable.ic_action_micro_dark).listen(listener).position(12).reg();
+		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_recordings, app)
+				.setSelected(SHOW_RECORDINGS.get())
+				.setColorIcon(R.drawable.ic_action_micro_dark)
+				.setPosition(12)
+				.setListener(listener).createItem());
 	}
 
 	@Override
@@ -600,33 +604,42 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (isRecording()) {
 			return;
 		}
-		adapter.item(R.string.recording_context_menu_arecord).colorIcon(R.drawable.ic_action_micro_dark)
-				.listen(new OnContextMenuClick() {
+		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
+				.setColorIcon(R.drawable.ic_action_micro_dark)
+				.setListener(new OnContextMenuClick() {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						recordAudio(latitude, longitude, mapActivity);
 						return true;
 					}
-				}).position(6).reg();
-		adapter.item(R.string.recording_context_menu_vrecord).colorIcon(R.drawable.ic_action_video_dark)
-				.listen(new OnContextMenuClick() {
+				})
+				.setPosition(6)
+				.createItem());
+		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
+				.setColorIcon(R.drawable.ic_action_video_dark)
+				.setListener(new OnContextMenuClick() {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						recordVideo(latitude, longitude, mapActivity);
 						return true;
 					}
-				}).position(7).reg();
-		adapter.item(R.string.recording_context_menu_precord).colorIcon(R.drawable.ic_action_photo_dark)
-				.listen(new OnContextMenuClick() {
+				})
+				.setPosition(7)
+				.createItem());
+		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
+				.setColorIcon(R.drawable.ic_action_photo_dark)
+				.setListener(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						takePhoto(latitude, longitude, mapActivity, false);
 						return true;
 					}
 
-				}).position(8).reg();
+				})
+				.setPosition(8)
+				.createItem());
 	}
 
 	@Override

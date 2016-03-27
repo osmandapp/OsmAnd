@@ -1319,7 +1319,7 @@
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
     <string name="osmo_plugin_description">"Pateikia OsMo - taip vadinamo pažangaus tiesioginio stebėjimo, nustatymus, daugiau http://osmo.mobi.
 \nSuteikia galimybę stebėti visus įrenginius konkrečioje grupėje realiuoju laiku bei bendrauti tarpusavyje. Tebėti glima tik konkrečios sesijos metu arba pastoviai.\nSusikurkite anonimines grupes tik kelioms dienoms su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
-    <string name="osmo_plugin_name">OsMo (OSM stebėjimas)</string>
+    <string name="osmo_plugin_name">OpenStreetMap stebėjimas</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
@@ -1339,10 +1339,10 @@
 
 
     <string name="osmo_connected_devices">Prijungti įrenginiai</string>
-    <string name="osmo_groups">OsMo grupės/įrenginiai</string>
+    <string name="osmo_groups">OsMo grupės</string>
     <string name="osmo_auto_send_locations_descr">Automatiškai pradėti sekimo sesiją ir siųsti buvimo vietą tik paleidus programą</string>
     <string name="osmo_auto_send_locations">Automatiškai pradėti sekimo sesiją</string>
-    <string name="osmo_tracker_id">Asmeninis sekiklio ID</string>
+    <string name="osmo_tracker_id">Sekiklio ID</string>
     <string name="osmo_tracker_id_descr">Paspauskite peržiūrėti ar bendrinti sekiklio ID. 
         Naudodami sekiklio ID prijungti prietaisai galės stebėti visą šio įrenginio judėjimą! Norėdami atjungti pasirinkite Regeneravimo nustatymą.</string>
     <string name="osmo_session_token">Sesijos žymė: %1$s</string>
@@ -1390,7 +1390,7 @@
     <string name="osmo_center_location">Centruoti ekrane</string>
     <string name="osmo_set_moving_target">Nustatyti judančiu taikiniu</string>
     <string name="osmo_use_server_name">Registruotas vardas</string>
-    <string name="osmo_connect_to_my_nickname">Mano slapyvardis</string>
+    <string name="osmo_connect_to_my_nickname">Slapyvardis</string>
     <string name="osmo_user_name">Vartotojas</string>
     
     <string name="rendering_value_pink_name">rožinė</string>
@@ -1516,7 +1516,7 @@
 
     <string name="osmo_invite">Pakvietimas…</string>
     <string name="osmo_leave_confirmation_msg">Ar norite atsijungti nuo grupės %1$s?</string>
-    <string name="osmo_specify_tracker_id">Prašome nurodyti id</string>
+    <string name="osmo_specify_tracker_id">Prašome nurodyti ID</string>
     <string name="arrival_distance_factor_early">Anksti</string>
     <string name="arrival_distance_factor_normally">Įprastai</string>
     <string name="arrival_distance_factor_late">Vėlai</string>
@@ -1572,7 +1572,7 @@
     <string name="speed_limit_exceed">Greičio ribojimo viršijimo reikšmė</string>
     <string name="speed_limit_exceed_message">Pasirinkite greičio ribojimo viršijimo ribą, kurią pasiekus bus pranešta balsu.</string>
     <string name="osmo_device_not_found">Įrenginys neaptiktas</string>
-    <string name="osmo_no_connection_msg">OsMo paslauga negalima:\n- patikrinkite internetinį ryšį;\n- patikrinkite nustatymus;\n- užeikite į Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Nepavykp prisijungti prie OsMo serverio:\n- patikrinkite internetinį ryšį;\n- patikrinkite nustatymus;\n- užeikite į Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Anonimas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įranginius su sreveriu;\n- valdyti grupes bei įrenginius privačiame biure.</string>
     <string name="anonymous_user">Anonimas</string>
     <string name="logged_as">Prisijungėte kaip %1$s</string>
@@ -1779,7 +1779,7 @@
     <string name="routing_attr_height_description">Nurodykite transporto priemonės aukštį, leidžiamą maršrutuose</string>
     <string name="use_fast_recalculation_desc">Perskaičiuoti tik pradinę ilgos kelionės maršruto dalį</string>
     <string name="rendering_value_disabled_name">Išjungtas</string>
-    <string name="osmo_share_my_location">Pasidalinti mano vieta</string>
+    <string name="osmo_share_my_location">Perduoti mano vieta</string>
     <string name="shared_string_logoff">Atsijungti</string>
     <string name="search_poi_category_hint">Rašykite, norėdami pradėti paiešką</string>
     <string name="track_points">Maršruto taškai</string>
@@ -1847,7 +1847,7 @@
     <string name="rendering_value_translucent_blue_name">Permatoma mėlyna</string>
     <string name="rendering_value_purple_name">Purpurinė</string>
     <string name="rendering_value_translucent_purple_name">Permatoma purpurinė</string>
-    <string name="restart_is_required">Siekiant viviškai pritaikyti pakeitimus, būtina iš naujo startuoti programą.</string>
+    <string name="restart_is_required">Siekiant visiškai pritaikyti pakeitimus, būtina iš naujo startuoti programą.</string>
     <string name="lang_bpy">Bišnuprų</string>
     <string name="rendering_attr_currentTrackColor_name">GPX spalva</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX plotis</string>
@@ -1963,7 +1963,7 @@
     <string name="contact_us">Susisiekti</string>
     <string name="world_map_download_descr">Pasaulio žemėlapis (padengiantis visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti.</string>
     <string name="share_geo">geo:</string>
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="shared_string_trip_recording">Kelionės įrašymas</string>
     <string name="tab_title_basic">Pagrindinis</string>
     <string name="tab_title_advanced">Išplėstinis</string>
@@ -2131,4 +2131,19 @@
     <string name="osm_live_ask_for_purchase">Prašome pirmiau įsigyti OSM Live prenumeratą</string>
 
     <string name="download_files_error_not_enough_space">Nepakanka vietos! Failams reikalinga {3} MB laikinai ir {1} MB pastoviai. Šiuo metu galimi tik {2} MB vietos.</string>
+    <string name="report">Ataskaita</string>
+    <string name="shared_string_move_up">Perkelti viršun</string>
+    <string name="shared_string_move_down">Perkelti žemyn</string>
+    <string name="avoid_road">Vengti kelių</string>
+    <string name="full_report">Visa ataskaita</string>
+    <string name="recalculate_route">Iš naujo perskaičiuoti maršrutą</string>
+    <string name="donations">Paremti</string>
+    <string name="select_map_marker">Pasirinite žymeklį</string>
+    <string name="map_markers_other">Kiti žymekliai</string>
+    <string name="upload_anonymously">Siųsti anonimiškai</string>
+    <string name="map_marker_1st">Pirmasis žymeklis</string>
+    <string name="map_marker_2nd">Antrasis žymeklis</string>
+    <string name="shared_string_reverse_order">Atvirkštinė tvarka</string>
+    <string name="switch_start_finish">Sukeisti vietomis pradžios tašką ir galutinį tikslą</string>
+    <string name="routing_attr_avoid_borders_name">Vengti sienų kirtimo</string>
     </resources>

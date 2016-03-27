@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -114,8 +115,14 @@ public class SRTMPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.layer_hillshade).selected(HILLSHADE.get()? 1 : 0)
-			.colorIcon(R.drawable.ic_action_hillshade_dark).listen(listener).position(13).layout(R.layout.drawer_list_item).reg();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.layer_hillshade, mapActivity)
+				.setSelected(HILLSHADE.get())
+				.setColorIcon(R.drawable.ic_action_hillshade_dark)
+				.setListener(listener)
+				.setPosition(13)
+				.setLayout(R.layout.drawer_list_item)
+				.createItem());
 	}
 	
 	@Override

@@ -40,6 +40,7 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -200,16 +201,28 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if (info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA ||
 				info.getType() == LocalIndexType.WIKI_DATA) {
 			if (!info.isBackupedData()) {
-				adapter.item(R.string.local_index_mi_backup).listen(listener).position(1).reg();
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.local_index_mi_backup, getContext())
+						.setListener(listener)
+						.setPosition(1).createItem());
 			}
 		}
 		if (info.isBackupedData()) {
-			adapter.item(R.string.local_index_mi_restore).listen(listener).position(2).reg();
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.local_index_mi_restore, getContext())
+					.setListener(listener)
+					.setPosition(2).createItem());
 		}
 		if (info.getType() != LocalIndexType.TTS_VOICE_DATA && info.getType() != LocalIndexType.VOICE_DATA) {
-			adapter.item(R.string.shared_string_rename).listen(listener).position(3).reg();
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.shared_string_rename, getContext())
+					.setListener(listener)
+					.setPosition(3).createItem());
 		}
-		adapter.item(R.string.shared_string_delete).listen(listener).position(4).reg();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.shared_string_delete, getContext())
+				.setListener(listener)
+				.setPosition(4).createItem());
 	}
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
@@ -588,16 +601,24 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		};
-		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-				.icon(R.drawable.ic_action_refresh_dark)
-				.listen(listener).position(1).reg();
-		optionsMenuAdapter.item(R.string.shared_string_delete)
-				.icon(R.drawable.ic_action_delete_dark)
-				.listen(listener).position(2).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_backup)
-				.listen(listener).position(3).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_restore)
-				.listen(listener).position(4).reg();
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.local_index_mi_reload,getContext())
+				.setIcon(R.drawable.ic_action_refresh_dark)
+				.setListener(listener)
+				.createItem());
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.shared_string_delete,getContext())
+				.setIcon(R.drawable.ic_action_delete_dark)
+				.setListener(listener)
+				.createItem());
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.local_index_mi_backup,getContext())
+				.setListener(listener)
+				.createItem());
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.local_index_mi_restore,getContext())
+				.setListener(listener)
+				.createItem());
 		// doesn't work correctly
 		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
 		int max = 3;

@@ -23,6 +23,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
@@ -207,8 +208,8 @@ public class GpxUiHelper {
 			}
 			s = s.replace('_', ' ');
 
-			adapter.item(s).selected(multipleChoice ? 0 : -1)
-					.colorIcon(R.drawable.ic_action_polygom_dark).reg();
+			adapter.addItem(ContextMenuItem.createBuilder(s).setSelected(multipleChoice)
+					.setColorIcon(R.drawable.ic_action_polygom_dark).createItem());
 
 			//if there's some selected files - need to mark them as selected
 			if (selectedGpxList != null) {
@@ -223,12 +224,12 @@ public class GpxUiHelper {
 										  final ContextMenuAdapter adapter, int i, String fileName) {
 		if (i == 0 && showCurrentTrack) {
 			if (selectedGpxList.contains("")) {
-				adapter.setSelection(i, 1);
+				adapter.setSelection(i, true);
 			}
 		} else {
 			for (String file : selectedGpxList) {
 				if (file.endsWith(fileName)) {
-					adapter.setSelection(i, 1);
+					adapter.setSelection(i, true);
 					break;
 				}
 			}
@@ -303,15 +304,15 @@ public class GpxUiHelper {
 				// }
 				// tv.setCompoundDrawablePadding(padding);
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.toggle_item));
-				if (adapter.getSelection(position) == -1) {
+				if (adapter.getSelection(position) == null) {
 					ch.setVisibility(View.INVISIBLE);
 				} else {
 					ch.setOnCheckedChangeListener(null);
-					ch.setChecked(adapter.getSelection(position) > 0);
+					ch.setChecked(adapter.getSelection(position));
 					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							adapter.setSelection(position, isChecked ? 1 : 0);
+							adapter.setSelection(position, isChecked);
 						}
 					});
 				}
@@ -337,12 +338,12 @@ public class GpxUiHelper {
 							if (app != null && app.getSelectedGpxHelper() != null) {
 								app.getSelectedGpxHelper().clearAllGpxFileToShow();
 							}
-							if (showCurrentGpx && adapter.getSelection(0) > 0) {
+							if (showCurrentGpx && adapter.getSelection(0)) {
 								currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 							}
 							List<String> s = new ArrayList<>();
 							for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
-								if (adapter.getSelection(i) > 0) {
+								if (adapter.getSelection(i)) {
 									s.add(list.get(i));
 								}
 							}
@@ -360,7 +361,7 @@ public class GpxUiHelper {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (multipleChoice) {
-					adapter.setSelection(position, adapter.getSelection(position) > 0 ? 0 : 1);
+					adapter.setSelection(position, !adapter.getSelection(position));
 					listAdapter.notifyDataSetInvalidated();
 				} else {
 					dlg.dismiss();

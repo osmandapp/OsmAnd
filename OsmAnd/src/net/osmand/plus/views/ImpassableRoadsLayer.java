@@ -13,6 +13,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
@@ -160,7 +161,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public void populateObjectContextMenu(final LatLon latLon, final Object o, ContextMenuAdapter adapter) {
+	public void populateObjectContextMenu(final LatLon latLon, final Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		if (latLon != null && o == null
 				&& (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode())) {
 
@@ -176,8 +177,10 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			};
 
-			adapter.item(R.string.avoid_road).colorIcon(
-					R.drawable.ic_action_road_works_dark).listen(listener).reg();
+			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.avoid_road, activity)
+					.setColorIcon(R.drawable.ic_action_road_works_dark)
+					.setListener(listener)
+					.createItem());
 		}
 	}
 }

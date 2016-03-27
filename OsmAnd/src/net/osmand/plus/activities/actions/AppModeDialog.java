@@ -36,7 +36,7 @@ public class AppModeDialog {
 
 	//special method for drawer menu
 	//needed because if there's more than 4 items  - the don't fit in drawer
-	public static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final Set<ApplicationMode> selected, ContextMenuAdapter.BooleanResult allModes,
+	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected, ContextMenuAdapter.BooleanResult allModes,
 												boolean useMapTheme, final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));

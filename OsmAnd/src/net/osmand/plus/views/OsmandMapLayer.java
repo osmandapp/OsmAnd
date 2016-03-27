@@ -12,6 +12,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapAlgorithms;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public abstract class OsmandMapLayer {
 	public void onRetainNonConfigurationInstance(Map<String, Object> map) {
 	}
 
-	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter) {
+	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {

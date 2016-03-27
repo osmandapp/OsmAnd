@@ -19,6 +19,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -226,9 +227,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.context_menu_item_add_parking_point)
-		.colorIcon(R.drawable.ic_action_parking_dark).listen(addListener).reg();
-		
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.context_menu_item_add_parking_point, mapActivity)
+				.setColorIcon(R.drawable.ic_action_parking_dark)
+				.setListener(addListener)
+				.createItem());
 	}
 
 	/**

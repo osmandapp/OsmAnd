@@ -23,6 +23,7 @@ import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
@@ -140,13 +141,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.context_menu_item_add_waypoint).colorIcon(R.drawable.ic_action_gnew_label_dark)
-				.listen(listener).reg();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
+				.setColorIcon(R.drawable.ic_action_gnew_label_dark)
+				.setListener(listener).createItem());
 		if (selectedObj instanceof WptPt) {
 			WptPt pt = (WptPt) selectedObj;
 			if (app.getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
-				adapter.item(R.string.context_menu_item_edit_waypoint).colorIcon(R.drawable.ic_action_edit_dark)
-						.listen(listener).reg();
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
+						.setColorIcon(R.drawable.ic_action_edit_dark)
+						.setListener(listener).createItem());
 			}
 		}
 	}
