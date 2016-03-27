@@ -1,17 +1,13 @@
 package net.osmand.plus.views;
 
+import android.graphics.*;
 import net.osmand.plus.R;
 import net.osmand.router.TurnType;
 import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+
+import java.util.Map;
 
 public class TurnPathHelper {
 
@@ -295,6 +291,189 @@ public class TurnPathHelper {
 			paintRouteDirection.setColorFilter(cf);
 		}
 		
+	}
+
+
+	public static class TurnResource {
+		boolean flip;
+		int resourceId;
+
+		public TurnResource(){}
+
+		public TurnResource(int resourceId, boolean value) {
+			this.resourceId = resourceId;
+			this.flip = value;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			return super.equals(o);
+		}
+
+		@Override
+		public int hashCode() {
+			return resourceId * (flip ? -1 : 1);
+		}
+	}
+
+	private static TurnResource getTallArrow(int tt){
+
+		TurnResource result = new TurnResource();
+
+		switch (tt){
+			case TurnType.C:
+				result.resourceId = R.drawable.map_turn_forward_small;
+				break;
+			case TurnType.TR:
+			case TurnType.TL:
+				result.resourceId = R.drawable.map_turn_right2_small;
+				break;
+			case TurnType.KR:
+			case TurnType.KL:
+				result.resourceId = R.drawable.map_turn_keep_right_small;
+				break;
+			case TurnType.TSLR:
+			case TurnType.TSLL:
+				result.resourceId = R.drawable.map_turn_slight_right_small;
+				break;
+			case TurnType.TSHR:
+			case TurnType.TSHL:
+				result.resourceId = R.drawable.map_turn_sharp_right_small;
+				break;
+			case TurnType.TRU:
+			case TurnType.TU:
+				result.resourceId = R.drawable.map_turn_uturn_small;
+				break;
+			default:
+				result.resourceId = R.drawable.map_turn_forward_small;
+				break;
+		}
+
+		if(tt == TurnType.TL || tt == TurnType.KL || tt == TurnType.TSLL
+				|| tt == TurnType.TSHL || tt == TurnType.TU){
+			result.flip = true;
+		}
+
+		return result;
+
+	}
+
+	private static TurnResource getShortArrow(int tt){
+
+		TurnResource result = new TurnResource();
+
+		switch (tt) {
+			case TurnType.C:
+				result.resourceId = R.drawable.map_turn_forward_small;
+				break;
+			case TurnType.TR:
+			case TurnType.TL:
+				result.resourceId = R.drawable.map_turn_forward_right_turn_small;
+				break;
+			case TurnType.KR:
+			case TurnType.KL:
+				result.resourceId = R.drawable.map_turn_forward_keep_right_small;
+				break;
+			case TurnType.TSLR:
+			case TurnType.TSLL:
+				result.resourceId = R.drawable.map_turn_forward_slight_right_turn_small;
+				break;
+			case TurnType.TSHR:
+			case TurnType.TSHL:
+				result.resourceId = R.drawable.map_turn_forward_turn_sharp_small;
+				break;
+			case TurnType.TRU:
+			case TurnType.TU:
+				result.resourceId = R.drawable.map_turn_forward_uturn_right_small;
+				break;
+			default:
+				result.resourceId = R.drawable.map_turn_forward_small;
+				break;
+		}
+
+		if(tt == TurnType.TL || tt == TurnType.KL || tt == TurnType.TSLL
+				|| tt == TurnType.TSHL || tt == TurnType.TU){
+			result.flip = true;
+		}
+
+		return result;
+
+	}
+
+	public static Bitmap getBitmapFromTurnType(Resources res, Map<TurnResource, Bitmap> cache, int firstTurn, int secondTurn, int thirdTurn, int turn, Bitmap defaultType, float coef, boolean leftSide) {
+
+		int firstTurnType = TurnType.valueOf(firstTurn, leftSide).getValue();
+		int secondTurnType = TurnType.valueOf(secondTurn, leftSide).getValue();
+		int thirdTurnType = TurnType.valueOf(thirdTurn, leftSide).getValue();
+
+		TurnResource turnResource = new TurnResource(R.drawable.map_turn_forward_small, false);
+
+		if(turn == 1){
+			if(firstTurn == 0) return defaultType;
+			if(secondTurnType == 0) {
+				turnResource = getTallArrow(firstTurnType);
+			}else if(secondTurnType != TurnType.C){
+				if(firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU){
+					turnResource = getShortArrow(firstTurnType);
+				}else {
+					turnResource = getTallArrow(firstTurnType);
+				}
+			}else{
+				// get the small one
+				turnResource = getShortArrow(firstTurnType);
+			}
+		}else if(turn == 2){
+			if(firstTurnType == TurnType.C){
+				// get the small one
+				turnResource = getShortArrow(secondTurnType);
+			}else{
+				turnResource = getTallArrow(secondTurnType);
+			}
+		}else if(turn == 3){
+			if(secondTurnType == TurnType.C){
+				// get the small one
+				turnResource = getShortArrow(thirdTurnType);
+			}else{
+				// ? slightly turn?
+			}
+		}
+
+		Bitmap b = cache.get(turnResource);
+		if(b == null) {
+			b = turnResource.flip ? getFlippedBitmap(res, turnResource.resourceId) : BitmapFactory.decodeResource(res, turnResource.resourceId);
+			cache.put(turnResource, b);
+		}
+
+		//Maybe redundant scaling
+		/*
+		float bRatio = (float)b.getWidth() / (float)b.getHeight();
+		float s = 72f * coef;
+		int wq = Math.round(s / bRatio);
+		int hq = Math.round(s);
+		b = Bitmap.createScaledBitmap(b, wq, hq, false);
+		*/
+
+		return b;
+	}
+
+	public static Bitmap getFlippedBitmap(Resources res, int resId){
+
+		BitmapFactory.Options opt = new BitmapFactory.Options();
+		opt.inJustDecodeBounds = true;
+		//Below line is necessary to fill in opt.outWidth, opt.outHeight
+		Bitmap b = BitmapFactory.decodeResource(res, resId, opt);
+
+		b = Bitmap.createBitmap(opt.outWidth, opt.outHeight, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(b);
+
+		Matrix flipHorizontalMatrix = new Matrix();
+		flipHorizontalMatrix.setScale(-1, 1);
+		flipHorizontalMatrix.postTranslate(b.getWidth(), 0);
+
+		Bitmap bb = BitmapFactory.decodeResource(res, resId);
+		canvas.drawBitmap(bb, flipHorizontalMatrix, null);
+
+		return b;
 	}
 
 

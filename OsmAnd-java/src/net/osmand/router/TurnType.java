@@ -158,6 +158,7 @@ public class TurnType {
 	// 0 bit - 0/1 - to use or not
 	// 1-5 bits - additional turn info 
 	// 6-10 bits - secondary turn
+	// 11-15 bits - tertiary turn
 	public void setLanes(int[] lanes) {
 		this.lanes = lanes;
 	}
@@ -181,6 +182,16 @@ public class TurnType {
 	public static int getSecondaryTurn(int laneValue) {
 		// Get the primary turn modifier for the lane
 		return (laneValue >> 5);
+	}
+
+	public static void setTertiaryTurn(int[] lanes, int lane, int turnType) {
+		lanes[lane] &= ~(15 << 10);
+		lanes[lane] |= (turnType << 10);
+	}
+
+	public static int getTertiaryTurn(int laneValue) {
+		// Get the primary turn modifier for the lane
+		return (laneValue >> 10);
 	}
 
 	
