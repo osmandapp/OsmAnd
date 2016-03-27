@@ -13,37 +13,53 @@ public class RenderableDot extends RenderableSegment {
 
 	float dotScale;
 
-	RenderableDot(OsmandMapTileView view, RenderType type, List<WptPt> pt, double param1, double param2) {
-		super(view, type, pt, param1, param2);
+	RenderableDot(RenderType type, List<WptPt> pt, double param1, double param2) {
+		super(type, pt, param1, param2);
 
 		dotScale = (float) param2;
 	}
 
 	public void recalculateRenderScale(OsmandMapTileView view, double zoom) {
-		if (culled==null) {
+		if (culled == null && culler == null) {
 			culler = new AsyncRamerDouglasPeucer(renderType, view, this, param1, param2);
-			culler.execute("");
+			assert (culler != null);
+			if (culler != null)
+				culler.execute("");
 		}
 	}
 
 	private String getLabel(double value) {
-		return String.valueOf((int)((value+0.5)/1000))+" km";
+		String lab;
+//		value /= 1000.;
+//		int v2 = (int)((value+0.005)*100);
+
+//		if (v2%100 == 0)
+//			lab = String.format("%d km",(int)value);
+//		else
+			lab = String.format("%.2f km",value/1000.);
+		return lab;
 	}
 
 	public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-		if (culled != null) {
+		assert p != null;
+		assert canvas != null;
+		assert tileBox != null;
+
+		try {
+
+			if (culled == null)
+				return;
+
+			Paint px = new Paint();
+			assert (px != null);
+
+			px.setStrokeCap(Paint.Cap.ROUND);
+
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
 			float sw = p.getStrokeWidth();
-
-			float ds = sw*dotScale;
-
-			Paint.Style ps = p.getStyle();
-			int col = p.getColor();
-			int light = lighter(col,0.5f);
-
-			p.setStyle(Paint.Style.FILL_AND_STROKE);
-			p.setTextSize(sw*1.25f);
+			float ds = sw * dotScale;
 
 			int w = tileBox.getPixWidth();
 			int h = tileBox.getPixHeight();
@@ -55,27 +71,27 @@ public class RenderableDot extends RenderableSegment {
 
 				if (isIn(x, y, w, h)) {
 
-					p.setColor(0xFF000000);
-					p.setStrokeWidth(ds + 2);
-					canvas.drawPoint(x, y, p);
-					p.setStrokeWidth(ds);
-					p.setColor(0xFFFFFFFF);
-					canvas.drawPoint(x, y, p);
+					px.setColor(0xFF000000);
+					px.setStrokeWidth(ds + 2);
+					canvas.drawPoint(x, y, px);
+					px.setStrokeWidth(ds);
+					px.setColor(0xFFFFFFFF);
+					canvas.drawPoint(x, y, px);
 
-					if (sw>16) {
-						p.setColor(Color.BLACK);
-						p.setStrokeWidth(1);
-						canvas.drawText(getLabel(pt.getCumulativeDistance()), x + ds/2, y+ds/2, p);
+					if (sw > 10) {
+						px.setColor(Color.BLACK);
+						px.setStrokeWidth(1);
+						px.setTextSize(sw*2f);
+						canvas.drawText(getLabel(pt.getCumulativeDistance()), x + ds / 2, y + ds / 2, px);
 					}
 				}
+				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
+		} catch (Exception e) {
+			String exception = e.getMessage();
+			Throwable cause = e.getCause();
 
-			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-			p.setStrokeWidth(sw);
-			p.setStyle(ps);
-			p.setColor(col);
 		}
 	}
-
 
 }

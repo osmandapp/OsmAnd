@@ -8,12 +8,10 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.os.AsyncTask;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -21,7 +19,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AsyncRamerDouglasPeucer;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXFile;
 import net.osmand.plus.RenderType;
 import net.osmand.plus.TrkSegment;
@@ -44,8 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import gnu.trove.list.array.TIntArrayList;
 
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
@@ -227,6 +222,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+
+	try {
 		if (points != null) {
 			updatePaints(0, false, false, settings, tileBox);
 			drawSegments(canvas, tileBox, points);
@@ -243,6 +240,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				textLayer.putData(this, cache);
 			}
 		}
+	} catch (Exception e) {
+		String m = e.getMessage();
+		Throwable t = e.getCause();
+	}
 	}
 
 	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles,
@@ -388,11 +389,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				// them attached.
 
 				if (ts.renders.size()==0) {
-					ts.addRenderable(view, RenderType.ALTITUDE, 20, 0);				// an altitude display
-					//ts.addRenderable(view, RenderType.ORIGINAL, 0, 0);				// the base line
-					ts.addRenderable(view, RenderType.CONVEYOR, 20, 100);        	// conveyor belt on top
-					ts.addRenderable(view, RenderType.RESAMPLE, 1000, 1.5);        	// 1km markings
-					//ts.addRenderable(view, RenderType.RESAMPLE, 250, 1.5);        	// 250 m markings
+					//ts.addRenderable(view, RenderType.ALTITUDE, 25, 128);				// an altitude display (m,alpha)
+					//ts.addRenderable(view, RenderType.SPEED, 20, 255);        	// (m,alpha)
+					ts.addRenderable(view, RenderType.ORIGINAL, 0, 0);				// the base line
+					ts.addRenderable(view, RenderType.CONVEYOR, 10, 250);        	// conveyor belt on top (m,refresh(ms))
+					ts.addRenderable(view, RenderType.DISTANCE, 1000, 1);        	// 1km markings (m,size)
 				}
 
 				int viewZoom = view.getZoom();
@@ -416,7 +417,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					gpxTrackScale *= getScale(viewZoom) / getDefaultStrokeWidth();
 				}
 
-				if (gpxTrackScale > 0) { // && ts.culledPoints != null) {
+				if (gpxTrackScale > 0) {
 
 					ts.recalculateRenderScales(view, viewZoom);            // rework all renderers as required
 
@@ -475,7 +476,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
-	
+
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2);

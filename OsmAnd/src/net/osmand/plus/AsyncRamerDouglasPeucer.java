@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 
 import net.osmand.plus.views.OsmandMapTileView;
@@ -27,6 +28,57 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 		this.param2 = param2;
 	}
 
+/*	private int getColor(double percent) {
+		int r = (int)(255 * percent);
+		int g = (int)(255 * (1.0 - percent));
+		return 0xFF000000 + (r<<16) + (g<<8);
+	}
+*/
+
+	public int getColor2(double percent) {
+		double a = (1. - percent) * 5.;
+		int X = (int)Math.floor(a);
+		int Y = (int)(Math.floor(255 * (a - X)));
+		int r = 0,g = 0,b = 0;
+		switch (X) {
+			case 0:
+				r = 255;
+				g = Y;
+				b = 0;
+				break;
+			case 1:
+				r = 255 - Y;
+				g = 255;
+				b = 0;
+				break;
+			case 2:
+				r = 0;
+				g = 255;
+				b = Y;
+				break;
+			case 3:
+				r = 0;
+				g = 255 - Y;
+				b = 255;
+				break;
+			case 4:
+				r = Y;
+				g = 0;
+				b = 255;
+				break;
+			case 5:
+				r = 255;
+				g = 0;
+				b = 255;
+				break;
+		}
+		return 0xFF000000 + (r<<16) + (g<<8) + b;
+	}
+
+	public int getColor(double percent) {
+		float hsv[] = { (float)percent, 1.0f, 0.5f };
+		return Color.HSVToColor(hsv);
+	}
 
 	private List<WptPt> resampleAltitude(List<WptPt> pts, double dist) {
 
@@ -35,18 +87,20 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 
 		List<WptPt> track = resampleTrack(pts, dist);
 
+		int halfC = getColor2(0.5);
+
 		// Calculate the absolutes of the altitude variations
 		Double max = Double.NEGATIVE_INFINITY;
 		Double min = Double.POSITIVE_INFINITY;
 		for (WptPt pt : track) {
 			max = Math.max(max, pt.ele);
 			min = Math.min(min, pt.ele);
-			pt.fractionElevation = 0.5;
+			pt.colourARGB = halfC;
 		}
 		Double elevationRange = max-min;
 		if (elevationRange > 0)
 			for (WptPt pt : track)
-				pt.fractionElevation = (pt.ele - min)/elevationRange;
+				pt.colourARGB = getColor2((pt.ele - min)/elevationRange);
 
 		return track;
 	}
@@ -54,25 +108,37 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 
 	private List<WptPt> resampleSpeed(List<WptPt> pts, double dist) {
 
-		//TODO: speed!!
-
-		assert dist > 0;
-		assert pts != null;
-
 		List<WptPt> track = resampleTrack(pts, dist);
+
+		WptPt lastPt = track.get(0);
+		lastPt.speed = 0;
+
+		// calculate speeds
+		for (int i=1; i<track.size(); i++) {
+			WptPt pt = track.get(i);
+			double delta = pt.time - lastPt.time;
+			if (delta>0)
+				pt.speed = MapUtils.getDistance(pt.getLatitude(),pt.getLongitude(),
+						lastPt.getLatitude(),lastPt.getLongitude())/delta;
+			else
+				pt.speed = 0;		// GPX doesn't have time - this is OK, colour will be mid-range for whole track
+			lastPt = pt;
+		}
 
 		// Calculate the absolutes of the altitude variations
 		Double max = Double.NEGATIVE_INFINITY;
 		Double min = Double.POSITIVE_INFINITY;
 		for (WptPt pt : track) {
-			max = Math.max(max, pt.ele);
-			min = Math.min(min, pt.ele);
-			pt.fractionElevation = 0.5;
+			max = Math.max(max, pt.speed);
+			min = Math.min(min, pt.speed);
+			pt.colourARGB = getColor2(0.5);
 		}
-		Double elevationRange = max-min;
-		if (elevationRange > 0)
+		Double range = max-min;
+		if (range > 0)
 			for (WptPt pt : track)
-				pt.fractionElevation = (pt.ele - min)/elevationRange;
+				pt.colourARGB = getColor2((pt.speed - min) / range);
+
+
 
 		return track;
 	}
@@ -89,12 +155,14 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 	private List<WptPt> resampleTrack(List<WptPt> pts, double dist) {
 
 		ArrayList<WptPt> newPts = new ArrayList<WptPt>();
-		if (pts != null && pts.size() > 0) {
+
+		int ptCt = pts.size();
+		if (pts != null && ptCt > 0) {
 
 			WptPt lastPt = pts.get(0);
 			double segSub = 0;
 			double cumDist = 0;
-			for (int i = 1; i < pts.size(); i++) {
+			for (int i = 1; i < ptCt; i++) {
 				WptPt pt = pts.get(i);
 				double segLength = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(), lastPt.getLatitude(), lastPt.getLongitude());
 
@@ -117,8 +185,11 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 				cumDist += segLength;
 				lastPt = pt;
 			}
-			// Add in the last point as a terminator
-			newPts.add(newPts.size(), lastPt);
+
+			// Add in the last point as a terminator (with total distance recorded)
+			WptPt newPoint = new WptPt( lastPt.getLatitude(), lastPt.getLongitude(), lastPt.time, lastPt.ele, lastPt.speed, lastPt. hdop);
+			newPoint.setCumulativeDistance(cumDist);
+			newPts.add(newPts.size(), newPoint);
 		}
 		return newPts;
 	}
@@ -185,7 +256,7 @@ public class AsyncRamerDouglasPeucer extends AsyncTask<String,Integer,String> {
 					break;
 
 				case CONVEYOR:
-				case RESAMPLE:
+				case DISTANCE:
 					culled = resampleTrack(points, param1);
 					break;
 

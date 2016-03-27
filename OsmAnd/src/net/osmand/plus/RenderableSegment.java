@@ -11,24 +11,28 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapAlgorithms;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import gnu.trove.list.array.TIntArrayList;
 
 public class RenderableSegment {
 
 	protected RenderType renderType;
-	private double renderPriority;
-	private double renderDist;
 	protected List<WptPt> points = null;
 	protected List<WptPt> culled = null;
+	OsmandMapTileView view = null;
+	static private Timer t = null;
+	static protected int conveyor = 0;
 	double hash;
 	double param1,param2;
+	boolean shadow = false;
 
 	AsyncRamerDouglasPeucer culler = null;
 
 	public List<WptPt> getPoints() { return points; }
 
-	RenderableSegment(OsmandMapTileView view, RenderType type, List<WptPt> pt, double param1, double param2) {
+	RenderableSegment(RenderType type, List<WptPt> pt, double param1, double param2) {
 
 		hash = 0;
 
@@ -41,23 +45,23 @@ public class RenderableSegment {
 		points = pt;
 	}
 
+	public void startScreenRefresh(OsmandMapTileView v, long period) {
+		view = v;
+		if (t==null) {
+			t = new Timer();
+			t.scheduleAtFixedRate(new TimerTask() {
+				public void run() {
+					conveyor = (conveyor+1)&31;
+					if (view != null)
+						view.refreshMap();
+				}
+			}, 0, period);
+		}
+	}
+
+
 	public void setRDP(List<WptPt> cull) {
 		culled = cull;
-	}
-
-	public double getPriority() {
-		return renderPriority;
-	}
-
-	public RenderType getRenderType() {
-		return renderType;
-	}
-
-	public int lighter(int colour, float amount) {
-		int red = (int) ((Color.red(colour) * (1 - amount) / 255 + amount) * 255);
-		int green = (int) ((Color.green(colour) * (1 - amount) / 255 + amount) * 255);
-		int blue = (int) ((Color.blue(colour) * (1 - amount) / 255 + amount) * 255);
-		return Color.argb(Color.alpha(colour), red, green, blue);
 	}
 
 	public void recalculateRenderScale(OsmandMapTileView view, double zoom) {
@@ -65,25 +69,23 @@ public class RenderableSegment {
 		// Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
 		// The asynchronous callback will set the variable, and that is used for rendering
 
-		double hashCode = points.hashCode() + zoom;
-		if (culled==null || hash != hashCode) {
-			if (culler != null)
-				culler.cancel(true);				// stop any still-running cull
-			hash = hashCode;
-			culler = new AsyncRamerDouglasPeucer(renderType, view, this, param1, param2);
-			culled = null;				// effectively use full-resolution until re-cull complete (see below)
-			culler.execute("");
+		if (points != null) {
+			double hashCode = points.hashCode() + zoom;
+			if (culled == null || hash != hashCode) {
+				if (culler != null)
+					culler.cancel(true);                // stop any still-running cull
+				hash = hashCode;
+				culler = new AsyncRamerDouglasPeucer(renderType, view, this, param1, param2);
+				culled = null;                // effectively use full-resolution until re-cull complete (see below)
+				culler.execute("");
+			}
 		}
 	}
 
 
 	public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+
 		List<WptPt> pts = culled == null? points: culled;			// use culled points preferentially
-		drawSingleSegment2(pts, p, canvas, tileBox );
-	}
-
-
-	private void drawSingleSegment2(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 
@@ -133,7 +135,20 @@ public class RenderableSegment {
 
 //TODO: colour
 		calculatePath(tb, tx, ty, path);
-		canvas.drawPath(path, paint);
+
+		if (shadow) {
+			float sw = paint.getStrokeWidth();
+			int col = paint.getColor();
+			paint.setColor(Color.BLACK);
+			paint.setStrokeWidth(sw + 4);
+			canvas.drawPath(path, paint);
+			paint.setStrokeWidth(sw);
+			paint.setColor(col);
+			canvas.drawPath(path, paint);
+		} else
+			canvas.drawPath(path, paint);
+
+
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 

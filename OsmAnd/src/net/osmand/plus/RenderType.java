@@ -3,7 +3,7 @@ package net.osmand.plus;
 public enum RenderType {
 	FORCE_REDRAW,
 	ORIGINAL,
-	RESAMPLE,
+	DISTANCE,
 	CONVEYOR,
 	ALTITUDE,
 	SPEED,

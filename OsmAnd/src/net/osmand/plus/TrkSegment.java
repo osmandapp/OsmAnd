@@ -4,15 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public class TrkSegment extends GPXExtensions {
 
@@ -24,19 +19,22 @@ public class TrkSegment extends GPXExtensions {
 		RenderableSegment rs = null;
 		switch (type) {
 			case SPEED:
-				rs = new RenderableSpeed(view, type, points, param1, param2);
-
+				rs = new RenderableSpeed(type, points, param1, param2);
+				break;
 			case ALTITUDE:
-				rs = new RenderableAltitude(view, type, points, param1, param2);
+				rs = new RenderableAltitude(type, points, param1, param2);
 				break;
 			case ORIGINAL:
-				rs = new RenderableSegment(view, type, points, param1, param2);
+				rs = new RenderableSegment(type, points, param1, param2);
 				break;
-			case RESAMPLE:
-				rs = new RenderableDot(view, type, points, param1, param2);
+			case DISTANCE:
+				rs = new RenderableDot(type, points, param1, param2);
 				break;
 			case CONVEYOR:
-				rs = new RenderableConveyor(view, type, points, param1, param2);
+				rs = new RenderableConveyor(type, points, param1, param2);
+				rs.startScreenRefresh(view, (long) param2);						// start timer to refresh screen
+				break;
+
 			default:
 				break;
 		}
