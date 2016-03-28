@@ -183,6 +183,22 @@ public class TurnType {
 		// Get the primary turn modifier for the lane
 		return (laneValue >> 5);
 	}
+	
+	public static void setPrimaryTurnShiftOthers(int[] lanes, int lane, int turnType) {
+		int pt = getPrimaryTurn(lanes[lane]);
+		int st = getSecondaryTurn(lanes[lane]);
+		//int tt = getTertiaryTurn(lanes[lane]);
+		setPrimaryTurnAndReset(lanes, lane, turnType);
+		setSecondaryTurn(lanes, lane, pt);
+		setTertiaryTurn(lanes, lane, st);
+	}
+	
+	public static void setSecondaryTurnShiftOthers(int[] lanes, int lane, int turnType) {
+		int st = getSecondaryTurn(lanes[lane]);
+		//int tt = getTertiaryTurn(lanes[lane]);
+		setSecondaryTurn(lanes, lane, turnType);
+		setTertiaryTurn(lanes, lane, st);
+	}
 
 	public static void setTertiaryTurn(int[] lanes, int lane, int turnType) {
 		lanes[lane] &= ~(15 << 10);
