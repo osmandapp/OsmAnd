@@ -1314,7 +1314,7 @@
     <string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
     <string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
     <string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre tous les appareils d\'un groupe en temps réel. Il existe différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
-    <string name="osmo_plugin_name">OsMo (Suivi OSM)</string>
+    <string name="osmo_plugin_name">Suivi OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
 
     <string name="osmo_io_error">Problème de connexion OSMo : </string>
@@ -1322,15 +1322,14 @@
     <string name="osmo_mode_off">Démarrer la session OsMo</string>
     <string name="osmo_mode_restart">Redémarrer la session OsMo</string>
     <string name="osmo_settings_debug">Informations de débogage</string>
-    <string name="osmo_tracker_id">Identifiant personnel de suivi</string>
-	<string name="osmo_tracker_id_descr">Cliquer pour voir ou partager l\'identifiant de suivi. 
-       L\'utilisation d\'appareils connectés par identifiant de suivi permettra de suivre tous les mouvements de cet appareil ! Pour se déconnecter, sélectionnez l\'option Redémarrer.</string>
+    <string name="osmo_tracker_id">Identifiant de suivi</string>
+	<string name="osmo_tracker_id_descr">Cliquer pour afficher l\'identifiant de suivi</string>
     <string name="osmo_session_token">Jeton de session : %1$s</string>
     <string name="osmo_auth_pending">En attente d\'autorisation…</string>
     <string name="osmo_locations_sent">"Positions envoyées : %1$d (en attente : %2$d) "</string>
     <string name="osmo_conn_successfull">Connexion établie : %1$s </string>
-    <string name="osmo_auto_send_locations_descr">Démarrer automatiquement une session de suivi et l\'envoi des emplacements dès le démarrage de l\'application</string>
-    <string name="osmo_auto_send_locations">Démarrage automatique de session de suivi</string>
+    <string name="osmo_auto_send_locations_descr">Démarrer automatiquement l\'itinéraire et envoyer les positions dès le démarrage de l\'application</string>
+    <string name="osmo_auto_send_locations">Démarrer automatiquement l\'itinéraire</string>
     <string name="keep_informing_never">Manuelle (en appuyant sur la flèche)</string>
     <string name="keep_informing_descr">Répéter les instructions de navigation à intervalles réguliers</string>
     <string name="keep_informing">Répéter les instructions de navigation</string>
@@ -1349,7 +1348,7 @@
 
 
     <string name="osmo_connected_devices">Appareils connectés</string>
-    <string name="osmo_groups">Groupes/appareils OsMo</string>
+    <string name="osmo_groups">Groupes OsMo</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">Groupe OsMo</string>
     <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s) ou cliquer %3$s.</string>
@@ -1371,7 +1370,7 @@
     <string name="osmo_connect_to_group_id">Identifiant du groupe</string>
     <string name="osmo_group_name">Nom du groupe</string>
     <string name="osmo_connect_to_group">Lier au groupe</string>
-    <string name="osmo_connect">Connexion à</string>
+    <string name="osmo_connect">Rejoindre</string>
     <string name="osmo_create_group">Créer un groupe</string>
     <string name="osmo_server_operation_failed">Échec du serveur OsMo</string>
     <string name="osmo_activity">Suivi OpenStreetMap</string>
@@ -1400,7 +1399,7 @@
     <string name="osmo_center_location">Centrer sur l\'écran</string>
     <string name="osmo_set_moving_target">Définir comme cible mobile</string>
     <string name="osmo_use_server_name">Nom enregistré</string>
-    <string name="osmo_connect_to_my_nickname">Mon pseudo</string>
+    <string name="osmo_connect_to_my_nickname">Pseudo</string>
     <string name="osmo_user_name">Utilisateur</string>
     
     <string name="osmo_user_joined">L\'utilisateur %1$s a rejoint le groupe %2$s</string>
@@ -1570,8 +1569,8 @@
     <string name="speed_limit_exceed">Marge de tolérance aux limites de vitesse</string>
     <string name="speed_limit_exceed_message">Indiquez la marge de tolérance à ajouter à la limitations de vitesse et au dessus de laquelle vous recevrez une alerte vocale.</string>
     <string name="osmo_device_not_found">Périphérique introuvable</string>
-    <string name="osmo_no_connection_msg">Le service OsMo n\'est pas disponible :\n- Vérifier la connexion;\n- Vérifier les paramètres;\n- Vérifier notre page Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :\n- Créer des groupes;\n- Synchroniser les groupes et les périphériques avec le serveur;\n- Gérer les groupes et les périphériques dans un espace privé.</string>
+    <string name="osmo_no_connection_msg">Impossible de se connecter au serveur OsMo :\n- Vérifier votre connexion Internet;\n- Vérifier les paramètres;\n- Vérifier notre page Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :\n- Créer des groupes;\n- Synchroniser les groupes et les périphériques avec le serveur;\n- Gérer les groupes et les périphériques depuis un espace privé sur le site Web.</string>
     <string name="anonymous_user">Utilisateur anonyme</string>
     <string name="logged_as">Connecté entant que %1$s</string>
     <string name="rendering_category_details">Détails</string>
@@ -2174,4 +2173,23 @@
     <string name="storage_directory_readonly_desc">L\'emplacement de stockage sélectionné est en lecture seule. L\'emplacement de stockage a donc été modifié pour utiliser la mémoire interne. Merci de sélectionner un dossier valide.</string>
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement à OSM Live</string>
+    <string name="no_map_markers_found">Ajoutez des marqueurs depuis la carte</string>
+    <string name="no_waypoints_found">Aucun point de passage trouvé</string>
+    <string name="report">Signaler</string>
+    <string name="select_map_marker">Sélectionner un marqueur</string>
+    <string name="map_markers_other">Autres marqueurs</string>
+    <string name="map_marker_1st">Premier marqueur</string>
+    <string name="map_marker_2nd">Second marqueur</string>
+    <string name="add_points_to_map_markers_q">Souhaitez-vous ajouter tous les points comme marqueurs ?</string>
+    <string name="shared_string_add_to_map_markers">Ajouter comme marqueur</string>
+    <string name="select_map_markers">Sélectionner les marqueurs</string>
+    <string name="show_map_markers_description">Activer la fonction marqueur</string>
+    <string name="clear_active_markers_q">Souhaitez-vous supprimer tous les marqueurs actifs ?</string>
+    <string name="clear_markers_history_q">Souhaitez-vous effacer l\'historique des marqueurs ?</string>
+    <string name="active_markers">Marqueurs actifs</string>
+    <string name="map_markers">Marqueurs</string>
+    <string name="map_marker">Marqueur</string>
+    <string name="file_name_containes_illegal_char">Le nom de fichier contient des caractères interdits</string>
+<string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes. Les dons sont reversés à la Communauté OSM. Si vous appréciez OsmAnd et OSM et que vous souhaitez supporter ces projets, c\'est la meilleure façon de le faire.</string>
+    
     </resources>
