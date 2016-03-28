@@ -71,7 +71,7 @@ public class ContextMenuAdapter {
 		@DrawableRes
 		int lst = items.get(position).getIcon();
 		if (lst != -1) {
-			return ctx.getResources().getDrawable(lst);
+			return ContextCompat.getDrawable(ctx, lst);
 		}
 		@DrawableRes
 		int lstLight = items.get(position).getLightIcon();
@@ -95,11 +95,6 @@ public class ContextMenuAdapter {
 		items.get(position).setSelected(s);
 	}
 
-	@Deprecated
-	public void setProgress(int position, int progress) {
-		items.get(position).setProgress(progress);
-	}
-
 	// Adapter related
 	public String[] getItemNames() {
 		String[] itemNames = new String[items.size()];
@@ -111,6 +106,10 @@ public class ContextMenuAdapter {
 
 	public void addItem(ContextMenuItem item) {
 		items.add(item);
+	}
+
+	public ContextMenuItem getItem(int pos) {
+		return items.get(pos);
 	}
 
 	public void removeItem(int pos) {
@@ -184,8 +183,12 @@ public class ContextMenuAdapter {
 				convertView.setTag(layoutId);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
-			if (!item.isCategory()) {
+
+			if (item.isCategory()) {
+				tv.setTypeface(Typeface.DEFAULT_BOLD);
+			} else {
 				AndroidUtils.setTextPrimaryColor(getContext(), tv, !holoLight);
+				tv.setTypeface(null);
 			}
 			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
 
@@ -224,12 +227,6 @@ public class ContextMenuAdapter {
 				if (imageView != null) {
 					imageView.setVisibility(View.GONE);
 				}
-			}
-
-			if (item.isCategory()) {
-				tv.setTypeface(Typeface.DEFAULT_BOLD);
-			} else {
-				tv.setTypeface(null);
 			}
 
 			if (convertView.findViewById(R.id.toggle_item) != null && !item.isCategory()) {
@@ -299,6 +296,11 @@ public class ContextMenuAdapter {
 				((TextView) convertView.findViewById(R.id.description)).setText(itemDescr);
 			}
 			return convertView;
+		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			return !getItem(position).isCategory();
 		}
 	}
 
