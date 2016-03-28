@@ -172,7 +172,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private void showContextMenu(final LocalIndexInfo info) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
+		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		basicFileOperation(info, adapter);
 		OsmandPlugin.onContextMenuActivity(getActivity(), null, info, adapter);
 
@@ -593,7 +593,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		optionsMenuAdapter = new ContextMenuAdapter(getDownloadActivity());
+		optionsMenuAdapter = new ContextMenuAdapter();
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

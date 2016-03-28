@@ -204,7 +204,7 @@ public class RoutePreferencesMenu {
 	}
 
 	public static void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback) {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
+		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 
 		String[] entries;
 		final String[] entrieValues;

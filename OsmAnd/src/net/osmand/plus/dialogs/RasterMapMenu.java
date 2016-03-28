@@ -21,7 +21,7 @@ public class RasterMapMenu {
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
 													   final OsmandRasterMapsPlugin.RasterMapType type) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity, false);
+		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
