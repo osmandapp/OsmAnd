@@ -202,6 +202,20 @@
     "expectedResults": {
       "27611": "+C;TL, +C, TR"
    }
+  },
+  {
+    "testName": "10.Ringweg Oost u-turn",
+    "startPoint": {
+      "latitude": 45.69722318654911,
+      "longitude": 35.62708438868003
+    },
+    "endPoint": {
+      "latitude": 45.69793506976422,
+      "longitude": 35.624509468025735
+    },
+    "expectedResults": {
+      "14418": "TL, +TL, C, C, TR"
+   }
   }
 
 ]
