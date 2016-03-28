@@ -254,7 +254,7 @@ public class Renderable {
             this.segmentSize = segmentSize;
             this.alpha = alpha;
             alphaPaint = new Paint();
-            alphaPaint.setStrokeCap(Paint.Cap.ROUND);
+            alphaPaint.setStrokeCap(Paint.Cap.BUTT);
             colorBandWidth = 3.0f;
         }
 

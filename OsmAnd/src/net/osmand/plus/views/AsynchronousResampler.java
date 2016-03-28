@@ -1,10 +1,8 @@
 package net.osmand.plus.views;
 
-import android.graphics.Color;
 import android.os.AsyncTask;
 
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -26,48 +24,22 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             rs.setRDP(culled);
     }
 
-    protected int getColor2(double percent) {
+    protected int getRainbowColour(double percent) {
 
-        // ugly code - given an input percentage (0.0-1.0) this will produce a colour from a "wide rainbow"
+        // Given an input percentage (0.0-1.0) this will produce a colour from a "wide rainbow"
         // from purple (low) to red(high).  This is useful for producing value-based colourations (e.g., altitude)
 
         double a = (1. - percent) * 5.;
         int X = (int)Math.floor(a);
         int Y = (int)(Math.floor(255 * (a - X)));
-        int r = 0,g = 0,b = 0;
         switch (X) {
-            case 0:
-                r = 255;
-                g = Y;
-                b = 0;
-                break;
-            case 1:
-                r = 255 - Y;
-                g = 255;
-                b = 0;
-                break;
-            case 2:
-                r = 0;
-                g = 255;
-                b = Y;
-                break;
-            case 3:
-                r = 0;
-                g = 255 - Y;
-                b = 255;
-                break;
-            case 4:
-                r = Y;
-                g = 0;
-                b = 255;
-                break;
-            case 5:
-                r = 255;
-                g = 0;
-                b = 255;
-                break;
+            case 0: return 0xFFFF0000 + (Y<<8);
+            case 1: return 0xFF00FF00 + ((255-Y)<<16);
+            case 2: return 0xFF00FF00 + Y;
+            case 3: return 0xFF0000FF + ((255-Y)<<8);
+            case 4: return 0xFF0000FF + (Y << 16);
         }
-        return 0xFF000000 + (r<<16) + (g<<8) + b;
+        return 0xFFFF00FF;
     }
 
 
@@ -89,6 +61,10 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             double segSub = 0;
             double cumDist = 0;
             for (int i = 1; i < ptCt; i++) {
+
+                if (isCancelled())
+                    return null;
+
                 GPXUtilities.WptPt pt = pts.get(i);
                 double segLength = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(), lastPt.getLatitude(), lastPt.getLongitude());
 
@@ -138,24 +114,26 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             // Resample track, then analyse altitudes and set colours for each point
 
             culled = resampleTrack(rs.getPoints(), segmentSize);
+            if (!isCancelled()) {
 
-            int halfC = getColor2(0.5);                             // default coloration if no elevations found
+                int halfC = getRainbowColour(0.5);                             // default coloration if no elevations found
 
-            // Calculate the absolutes of the altitude variations
-            Double max = Double.NEGATIVE_INFINITY;
-            Double min = Double.POSITIVE_INFINITY;
-            for (GPXUtilities.WptPt pt : culled) {
-                max = Math.max(max, pt.ele);
-                min = Math.min(min, pt.ele);
-                pt.colourARGB = halfC;
+                // Calculate the absolutes of the altitude variations
+                Double max = Double.NEGATIVE_INFINITY;
+                Double min = Double.POSITIVE_INFINITY;
+                for (GPXUtilities.WptPt pt : culled) {
+                    max = Math.max(max, pt.ele);
+                    min = Math.min(min, pt.ele);
+                    pt.colourARGB = halfC;
+                }
+
+                Double elevationRange = max - min;
+                if (elevationRange > 0)
+                    for (GPXUtilities.WptPt pt : culled)
+                        pt.colourARGB = getRainbowColour((pt.ele - min) / elevationRange);
             }
 
-            Double elevationRange = max-min;
-            if (elevationRange > 0)
-                for (GPXUtilities.WptPt pt : culled)
-                    pt.colourARGB = getColor2((pt.ele - min)/elevationRange);
-
-            return "OK";
+            return isCancelled() ? "" : "OK";
         }
     }
 
@@ -176,37 +154,38 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             List<GPXUtilities.WptPt> points = rs.getPoints();
             culled = resampleTrack(points, segmentSize);
+            if (!isCancelled()) {
 
-            GPXUtilities.WptPt lastPt = points.get(0);
-            lastPt.speed = 0;
+                GPXUtilities.WptPt lastPt = points.get(0);
+                lastPt.speed = 0;
 
-            // calculate speeds using time:distance for each segment
-            for (int i=1; i<points.size(); i++) {
-                GPXUtilities.WptPt pt = points.get(i);
-                double delta = pt.time - lastPt.time;
-                if (delta>0)
-                    pt.speed = MapUtils.getDistance(pt.getLatitude(),pt.getLongitude(),
-                            lastPt.getLatitude(),lastPt.getLongitude())/delta;
-                else
-                    pt.speed = 0;		// GPX doesn't have time - this is OK, colour will be mid-range for whole track
-                lastPt = pt;
+                // calculate speeds using time:distance for each segment
+                for (int i = 1; i < points.size(); i++) {
+                    GPXUtilities.WptPt pt = points.get(i);
+                    double delta = pt.time - lastPt.time;
+                    if (delta > 0)
+                        pt.speed = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(),
+                                lastPt.getLatitude(), lastPt.getLongitude()) / delta;
+                    else
+                        pt.speed = 0;        // GPX doesn't have time - this is OK, colour will be mid-range for whole track
+                    lastPt = pt;
+                }
+
+                // Calculate the absolutes of the speed variations
+                Double max = Double.NEGATIVE_INFINITY;
+                Double min = Double.POSITIVE_INFINITY;
+                for (GPXUtilities.WptPt pt : points) {
+                    max = Math.max(max, pt.speed);
+                    min = Math.min(min, pt.speed);
+                    pt.colourARGB = getRainbowColour(0.5);
+                }
+                Double range = max - min;
+                if (range > 0)
+                    for (GPXUtilities.WptPt pt : points)
+                        pt.colourARGB = getRainbowColour((pt.speed - min) / range);
             }
 
-            // Calculate the absolutes of the speed variations
-            Double max = Double.NEGATIVE_INFINITY;
-            Double min = Double.POSITIVE_INFINITY;
-            for (GPXUtilities.WptPt pt : points) {
-                max = Math.max(max, pt.speed);
-                min = Math.min(min, pt.speed);
-                pt.colourARGB = getColor2(0.5);
-            }
-            Double range = max-min;
-            if (range > 0)
-                for (GPXUtilities.WptPt pt : points)
-                    pt.colourARGB = getColor2((pt.speed - min) / range);
-
-
-            return "OK";
+            return isCancelled() ? "" : "OK";
         }
     }
 
@@ -223,7 +202,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
         @Override protected String doInBackground(String... params) {
             culled = resampleTrack(rs.getPoints(), segmentSize);
-            return "OK";
+            return isCancelled() ? "" : "OK";
         }
     }
 
@@ -247,20 +226,20 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             // but optimised for this specific usage.
 
             points = rs.getPoints();
+            culled = new ArrayList<>();
 
             int nsize = points.size();
-            survivor = new boolean[nsize];
             if (nsize > 0) {
+                survivor = new boolean[nsize];
                 cullRamerDouglasPeucer(0, nsize - 1);
-                survivor[0] = true;
+                if (!isCancelled()) {
+                    survivor[0] = true;
+                    for (int i = 0; i < survivor.length; i++)
+                        if (survivor[i])
+                            culled.add(points.get(i));
+                }
             }
-
-            culled = new ArrayList<>();
-            for (int i = 0; i < survivor.length; i++)
-                if (survivor[i])
-                    culled.add(points.get(i));
-
-            return "OK";
+            return isCancelled() ? "" : "OK";
         }
 
         private void cullRamerDouglasPeucer(int start, int end) {
