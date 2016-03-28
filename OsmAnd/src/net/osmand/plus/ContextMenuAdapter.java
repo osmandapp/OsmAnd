@@ -178,7 +178,8 @@ public class ContextMenuAdapter {
 					}
 				});
 			}
-			if (convertView == null || (layoutId != convertView.getTag())) {
+			if (convertView == null || !(convertView.getTag() instanceof Integer)
+					|| (layoutId != (Integer)convertView.getTag())) {
 				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
 				convertView.setTag(layoutId);
 			}

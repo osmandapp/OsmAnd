@@ -630,7 +630,7 @@ public class RouteInfoWidgetsFactory {
 		boolean imminent = false;
 		private Context ctx;
 		private ArrayList<Path> paths = new ArrayList<Path>();
-		private Map<TurnPathHelper.TurnResource, Bitmap> bitmapCache = new ArrayMap<TurnPathHelper.TurnResource, Bitmap>();
+		private Map<TurnPathHelper.TurnResource, Bitmap> bitmapCache = new HashMap<TurnPathHelper.TurnResource, Bitmap>();
 		private Paint paintBlack;
 		private Path laneStraight;
 		private final Bitmap laneStraightBitmap;
