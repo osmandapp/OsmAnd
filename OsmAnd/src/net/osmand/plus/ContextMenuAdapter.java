@@ -161,10 +161,10 @@ public class ContextMenuAdapter {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			// User super class to create the View
 			final ContextMenuItem item = getItem(position);
-			int lid = item.getLayout();
-			lid = lid != -1 ? lid : DEFAULT_LAYOUT_ID;
-			if (lid == R.layout.mode_toggles) {
-				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+			int layoutId = item.getLayout();
+			layoutId = layoutId != -1 ? layoutId : DEFAULT_LAYOUT_ID;
+			if (layoutId == R.layout.mode_toggles) {
+				final Set<ApplicationMode> selected = new LinkedHashSet<>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
 						selected, true, new View.OnClickListener() {
 					@Override
@@ -179,9 +179,9 @@ public class ContextMenuAdapter {
 					}
 				});
 			}
-			if (convertView == null || (lid != convertView.getTag())) {
-				convertView = LayoutInflater.from(getContext()).inflate(lid, parent, false);
-				convertView.setTag(lid);
+			if (convertView == null || (layoutId != convertView.getTag())) {
+				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
+				convertView.setTag(layoutId);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
 			if (!item.isCategory()) {
@@ -189,7 +189,7 @@ public class ContextMenuAdapter {
 			}
 			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
 
-			if (layoutId == R.layout.simple_list_menu_item) {
+			if (this.layoutId == R.layout.simple_list_menu_item) {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
 				Drawable imageId = ContextCompat.getDrawable(getContext(), item.getLightIcon());
@@ -203,7 +203,6 @@ public class ContextMenuAdapter {
 			} else {
 				Drawable drawable = getImage(app, position, holoLight);
 				if (drawable != null) {
-
 					((ImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
@@ -211,11 +210,11 @@ public class ContextMenuAdapter {
 				}
 			}
 			@DrawableRes
-			int secondaryLightDrawable = item.getSecondaryLightIcon();
-			if (secondaryLightDrawable != -1) {
+			int secondaryDrawable = item.getSecondaryIcon();
+			if (secondaryDrawable != -1) {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryLightIcon());
+				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryIcon());
 				DrawableCompat.setTint(drawable, color);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);

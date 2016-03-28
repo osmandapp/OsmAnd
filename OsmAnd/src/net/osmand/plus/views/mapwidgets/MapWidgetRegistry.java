@@ -403,7 +403,7 @@ public class MapWidgetRegistry {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, map)
 					.setSelected(r.visibleCollapsed(mode) || r.visible(mode))
 					.setColorIcon(r.drawableMenu)
-					.setSecondaryLightIcon(R.drawable.ic_action_additional_option)
+					.setSecondaryIcon(R.drawable.ic_action_additional_option)
 					.setListener(new OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
