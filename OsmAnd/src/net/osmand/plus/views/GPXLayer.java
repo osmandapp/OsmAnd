@@ -8,7 +8,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
@@ -39,8 +38,6 @@ import net.osmand.render.RenderingRulesStorage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import gnu.trove.list.array.TIntArrayList;
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, 
 			MapTextProvider<WptPt> {
@@ -351,7 +348,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 					// TODO: To see more clearly the line reduction in action, change the 18 to a higher number (say, 18.5 or 19)...
 
-					ts.addRenderable(view, Renderable.RenderType.ORIGINAL, 18, 0);				// the base line (distance modifier)
+
+					ts.renders.add(new Renderable.StandardTrack(ts.points, 17));				// the base line (distance modifier)
 
 					// TODO : enable these to see how the experimental conveyor, altitude, speed, waypoint renders work
 
@@ -361,10 +359,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 					// You can, of course, comment out the following...
 
-					ts.addRenderable(view, Renderable.RenderType.CONVEYOR, 10, 250);        	// conveyor belt animation (m,refresh(ms))
-					//ts.addRenderable(view, Renderable.RenderType.ALTITUDE, 25, 128);			// an altitude display (m,alpha) << IMPORTANT: See [note 1] below
-					//ts.addRenderable(view, Renderable.RenderType.DISTANCE, 1000, 1);        	// 1km markings (m,size)
-					//ts.addRenderable(view, Renderable.RenderType.SPEED, 20, 255);        		// a speed display (m,alpha) << IMPORTANT: See [Note 1]
+					ts.renders.add(new Renderable.AltitudeColours(ts.points, 50, 128));
+					ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
+					ts.renders.add(new Renderable.DistanceMarker(ts.points, 1000, 1));
+					//ts.renders.add(new Renderable.SpeedColours(ts.points, 50, 128));
 
 					// [Note 1]: The altitude and speed renders (only if enabled, above) have a bug that can crash OsmAnd
 					// 	- crashes on the emulator only!

@@ -216,25 +216,25 @@ public class GPXUtilities {
 		// The two parameters' maning varies based upon the type of renderable - see the parameters' usage
 		// in each derived renderable class.
 
-		public Renderable.RenderableSegment addRenderable(OsmandMapTileView view, Renderable.RenderType type,
+/*		public Renderable.RenderableSegment addRenderable(OsmandMapTileView view, Renderable.RenderType type,
 														  double param1, double param2) {
 			Renderable.RenderableSegment rs = null;
 			switch (type) {
 				case ORIGINAL: 	// a Ramer-Douglas-Peucer line reduction draw
 					rs = new Renderable.RenderableSegment(type, points, param1, param2);
 					break;
-				case DISTANCE:	// a resample every N metres draw
-					rs = new Renderable.RenderableDot(type, points, param1, param2);
+				case DISTANCE_MARKERS:	// a resample every N metres draw
+					rs = new Renderable.DistanceMarker(type, points, param1, param2);
 					break;
 				case CONVEYOR:	// an animating segment draw
-					rs = new Renderable.RenderableConveyor(type, points, param1, param2);
+					rs = new Renderable.Conveyor(type, points, param1, param2);
 					Renderable.startScreenRefresh(view, (long) param2);
 					break;
 				case ALTITUDE:	// a colour-banded altitude draw
-					rs = new Renderable.RenderableAltitude(type, points, param1, param2);
+					rs = new Renderable.AltitudeColours(type, points, param1, param2);
 					break;
 				case SPEED:		// a colour-banded speed draw
-					rs = new Renderable.RenderableSpeed(type, points, param1, param2);
+					rs = new Renderable.SpeedColours(type, points, param1, param2);
 					break;
 
 				default:
@@ -245,6 +245,7 @@ public class GPXUtilities {
 			return rs;
 		}
 
+*/
 
 		public void recalculateRenderScales(OsmandMapTileView view) {
 			for (Renderable.RenderableSegment rs : renders)

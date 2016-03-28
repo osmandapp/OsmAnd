@@ -9,7 +9,6 @@ import android.graphics.Path;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapAlgorithms;
 
 import java.util.List;
@@ -25,15 +24,6 @@ public class Renderable {
     // (i.e., a list of WptPt) which has renders attached to it. There can be any number of renders
     // layered upon each other to give multiple effects.
 
-    public enum RenderType {
-        ORIGINAL,             // Auto-resizing using Ramer-Douglas-Peucer algorithm
-        DISTANCE,             // markers at given distance
-        CONVEYOR,             // arrows/direction movers
-        ALTITUDE,             // colour-rainbow altitude band
-        SPEED,                // colour-rainbow speed band
-    }
-
-
     static private Timer t = null;                      // fires a repaint for animating segments
     static private int conveyor = 0;                    // single cycler for 'conveyor' style renders
     static private OsmandMapTileView view = null;       // for paint refresh
@@ -42,7 +32,7 @@ public class Renderable {
     // If any render wants to have animation, something needs to make a one-off call to 'startScreenRefresh'
     // to setup a timer to periodically force a screen refresh/redraw
 
-    public static void startScreenRefresh(OsmandMapTileView v, double period) {
+    public static void startScreenRefresh(OsmandMapTileView v, long period) {
         view = v;
         if (t==null && v != null) {
             t = new Timer();
@@ -51,43 +41,57 @@ public class Renderable {
                     conveyor = (conveyor+1)&31;             // mask/wrap to avoid boundary issues
                     view.refreshMap();
                 }
-            }, 0, (long) period);
+            }, 0, period);
         }
     }
 
 
     //----------------------------------------------------------------------------------------------
 
-    public static class RenderableSegment {
+    public static abstract class RenderableSegment {
 
-
-        protected RenderType renderType;
         protected List<GPXUtilities.WptPt> points = null;           // Original list of points
         protected List<GPXUtilities.WptPt> culled = null;           // Reduced/resampled list of points
 
         double hash;
-        double param1,param2;
         boolean shadow = false;         // TODO: fixup shadow support
 
         AsynchronousResampler culler = null;                        // The currently active resampler
 
-        public List<GPXUtilities.WptPt> getPoints() { return points; }
-
-
-        public RenderableSegment(RenderType type, List<GPXUtilities.WptPt> pt, double param1, double param2) {
-
+        public RenderableSegment(List<GPXUtilities.WptPt> pt) {
+            points = pt;
             hash = 0;
             culled = null;
-            renderType = type;
-            this.param1 = param1;
-            this.param2 = param2;
-            points = pt;
         }
 
+        public void recalculateRenderScale(OsmandMapTileView view) {}
+        public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {}
 
         // When the asynchronous task has finished, it calls this function to set the 'culled' list
         public void setRDP(List<GPXUtilities.WptPt> cull) {
             culled = cull;
+            if (view != null)
+                view.refreshMap();          // force a redraw
+        }
+
+        public List<GPXUtilities.WptPt> getPoints() {
+            return points;
+        }
+
+        protected boolean isIn(float x, float y, float rx, float by) {
+            return x >= 0f && x <= rx && y >= 0f && y <= by;
+        }
+
+    }
+    //----------------------------------------------------------------------------------------------
+
+    public static class StandardTrack extends RenderableSegment {
+
+        double base;     // parameter for calculating Ramer-Douglas-Peucer distance
+
+        public StandardTrack(List<GPXUtilities.WptPt> pt, double base) {
+            super(pt);
+            this.base = base;
         }
 
 
@@ -102,7 +106,7 @@ public class Renderable {
         // 2. Individual derived classes (altitude, speed, etc) can override this routine to
         //    ensure that the cull only ever happens once.
 
-        public void recalculateRenderScale(OsmandMapTileView view) {
+        @Override public void recalculateRenderScale(OsmandMapTileView view) {
 
             // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
             // The asynchronous callback will set the variable, and that is used for rendering
@@ -115,8 +119,8 @@ public class Renderable {
                     if (culler != null)
                         culler.cancel(true);                // stop any still-running cull
                     hash = hashCode;
-                    double cullDistance = Math.pow(2.0,param1-zoom);
-                    culler = new AsynchronousResampler(renderType, view, this, cullDistance, param2);
+                    double cullDistance = Math.pow(2.0,base-zoom);
+                    culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
                     culled = null;                // effectively use full-resolution until re-cull complete (see [Note 1] below)
                     culler.execute("");
                 }
@@ -124,7 +128,7 @@ public class Renderable {
         }
 
 
-        public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
             List<GPXUtilities.WptPt> pts = culled == null? points: culled;			// [Note 1]: use culled points preferentially
 
@@ -233,34 +237,34 @@ public class Renderable {
             }
             return cnt;
         }
-
-
-        protected boolean isIn(float x, float y, float rx, float by) {
-            return x >= 0f && x <= rx && y >= 0f && y <= by;
-        }
     }
 
     //----------------------------------------------------------------------------------------------
 
-    public static class RenderableAltitude extends RenderableSegment {
+    public static class AltitudeColours extends RenderableSegment {
 
         private Paint alphaPaint = null;
         private int alpha;
         protected float colorBandWidth;             // width of speed/altitude colour band
+        protected double segmentSize;
 
-        public RenderableAltitude(RenderType type, List<GPXUtilities.WptPt> pt, double param1, double param2) {
-            super(type, pt, param1, param2);
+        public AltitudeColours(List<GPXUtilities.WptPt> pt, double segmentSize, int alpha) {
+            super(pt);
 
-            alpha = (int)param2;
+            this.segmentSize = segmentSize;
+            this.alpha = alpha;
             alphaPaint = new Paint();
             alphaPaint.setStrokeCap(Paint.Cap.ROUND);
-
             colorBandWidth = 3.0f;
+        }
+
+        public double getSegmentSize() {
+            return segmentSize;
         }
 
         @Override public void recalculateRenderScale(OsmandMapTileView view) {
             if (culler == null && culled == null) {
-                culler = new AsynchronousResampler(renderType, view, this, param1, param2);
+                culler = new AsynchronousResampler.ResampleAltitude(this, segmentSize);
                 culler.execute("");
             }
         }
@@ -304,27 +308,36 @@ public class Renderable {
 
     //----------------------------------------------------------------------------------------------
 
-    public static class RenderableSpeed extends RenderableAltitude {
-        public RenderableSpeed(RenderType type, List<GPXUtilities.WptPt> pt, double param1, double param2) {
-            super(type, pt, param1, param2);
-            colorBandWidth = 3f;
+    public static class SpeedColours extends AltitudeColours {
+
+        public SpeedColours(List<GPXUtilities.WptPt> pt, double segmentSize, int alpha) {
+            super(pt, segmentSize, alpha);
+        }
+
+        @Override public void recalculateRenderScale(OsmandMapTileView view) {
+            if (culler == null && culled == null) {
+                culler = new AsynchronousResampler.ResampleSpeed(this, segmentSize);
+                culler.execute("");
+            }
         }
     }
 
     //----------------------------------------------------------------------------------------------
 
-    public static class RenderableConveyor extends RenderableSegment {
+    public static class Conveyor extends RenderableSegment {
 
-        private double zoom = 0;
+        private double segmentSize;
 
-        public RenderableConveyor(RenderType type, List<GPXUtilities.WptPt> pt, double param1, double param2) {
-            super(type, pt, param1, param2);
+        public Conveyor(List<GPXUtilities.WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
+            super(pt);
+            this.segmentSize = segmentSize;
+
+            Renderable.startScreenRefresh(view, refreshRate);
         }
 
         @Override public void recalculateRenderScale(OsmandMapTileView view) {
-            this.zoom = zoom;
             if (culled == null && culler == null) {       // i.e., do NOT resample when scaling - only allow a one-off generation
-                culler = new AsynchronousResampler(renderType, view, this, param1, param2);
+                culler = new AsynchronousResampler.GenericResampler(this, segmentSize);
                 culler.execute("");
             }
         }
@@ -394,19 +407,20 @@ public class Renderable {
 
     //----------------------------------------------------------------------------------------------
 
-    public static class RenderableDot extends RenderableSegment {
+    public static class DistanceMarker extends RenderableSegment {
 
-        float dotScale;
+        private float dotScale;
+        private double segmentSize;
 
-        public RenderableDot(RenderType type, List<GPXUtilities.WptPt> pt, double param1, double param2) {
-            super(type, pt, param1, param2);
-
-            dotScale = (float) param2;
+        public DistanceMarker(List<GPXUtilities.WptPt> pt, double segmentSize, float dotScale) {
+            super(pt);
+            this.dotScale = dotScale;
+            this.segmentSize = segmentSize;
         }
 
         @Override public void recalculateRenderScale(OsmandMapTileView view) {
             if (culled == null && culler == null) {
-                culler = new AsynchronousResampler(renderType, view, this, param1, param2);
+                culler = new AsynchronousResampler.GenericResampler(this, segmentSize);
                 assert (culler != null);
                 if (culler != null)
                     culler.execute("");
@@ -474,6 +488,89 @@ public class Renderable {
                 Throwable cause = e.getCause();
 
             }
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    public static class Arrows extends RenderableSegment {
+
+        private double segmentSize;
+
+        public Arrows(List<GPXUtilities.WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
+            super(pt);
+            this.segmentSize = segmentSize;
+
+            Renderable.startScreenRefresh(view, refreshRate);
+        }
+
+        @Override public void recalculateRenderScale(OsmandMapTileView view) {
+            if (culled == null && culler == null) {       // i.e., do NOT resample when scaling - only allow a one-off generation
+                culler = new AsynchronousResampler.GenericResampler(this, segmentSize);
+                culler.execute("");
+            }
+        }
+
+        public int getComplementaryColor(int colorToInvert) {
+            float[] hsv = new float[3];
+            Color.RGBToHSV(Color.red(colorToInvert), Color.green(colorToInvert), Color.blue(colorToInvert), hsv);
+            hsv[0] = (hsv[0] + 180) % 360;
+            return Color.HSVToColor(hsv);
+        }
+
+        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+
+            // This is a simple/experimental track subsegment 'conveyor' animator just to show how
+            // effects of constant segment-size can be used for animation effects.  I've put an arrowhead
+            // in just to show what can be done.  Very hacky, it's just a "hey look at this".
+
+            if (culled == null)
+                return;
+
+            canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
+            int pCol = p.getColor();
+            float pSw = p.getStrokeWidth();
+
+            //p.setStrokeWidth(pSw * 2f);                         // use a thicker line
+            p.setColor(getComplementaryColor(p.getColor()));    // and a complementary colour
+
+            float lastx = Float.NEGATIVE_INFINITY;
+            float lasty = Float.NEGATIVE_INFINITY;
+            Path path = new Path();
+
+            int h = tileBox.getPixHeight();
+            int w = tileBox.getPixWidth();
+            boolean broken = true;
+            int intp = conveyor;                                // the segment cycler
+            for (GPXUtilities.WptPt pt : culled) {
+                intp--;                                         // increment to go the other way!
+
+                if ((intp & 7) < 3) {
+
+                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+
+                    if ((isIn(x, y, w, h) || isIn(lastx, lasty, w, h))) {
+                        if (broken) {
+                            path.moveTo(x, y);
+                            broken = false;
+                        } else
+                            path.lineTo(x, y);
+                        lastx = x;
+                        lasty = y;
+                    } else
+                        broken = true;
+                } else
+                    broken = true;
+
+            }
+
+            canvas.drawPath(path, p);
+            canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
+            p.setStrokeWidth(pSw);
+            p.setColor(pCol);
         }
     }
 

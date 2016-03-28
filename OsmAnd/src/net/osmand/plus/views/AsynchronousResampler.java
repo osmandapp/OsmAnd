@@ -10,27 +10,23 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AsynchronousResampler extends AsyncTask<String,Integer,String> {
+public abstract class AsynchronousResampler extends AsyncTask<String,Integer,String> {
 
-    private OsmandMapTileView view;
-    private Renderable.RenderableSegment rs;
-    private Renderable.RenderType renderType;
-    private double param1, param2;
+    protected Renderable.RenderableSegment rs;
+    protected List<GPXUtilities.WptPt> culled;
 
-    private List<GPXUtilities.WptPt> culled = null;
-
-
-    public AsynchronousResampler(Renderable.RenderType rt, OsmandMapTileView view,
-                                 Renderable.RenderableSegment rs, double param1, double param2) {
-        this.view = view;
+    AsynchronousResampler(Renderable.RenderableSegment rs) {
         this.rs = rs;
-        this.renderType = rt;
-
-        this.param1 = param1;
-        this.param2 = param2;
+        culled = null;
     }
 
-    public int getColor2(double percent) {
+    @Override protected void onPostExecute(String result) {
+        // executes on the UI thread so it's OK to change its variables
+        if (rs != null && result.equals("OK") && !isCancelled())
+            rs.setRDP(culled);
+    }
+
+    protected int getColor2(double percent) {
 
         // ugly code - given an input percentage (0.0-1.0) this will produce a colour from a "wide rainbow"
         // from purple (low) to red(high).  This is useful for producing value-based colourations (e.g., altitude)
@@ -75,68 +71,6 @@ public class AsynchronousResampler extends AsyncTask<String,Integer,String> {
     }
 
 
-    private List<GPXUtilities.WptPt> resampleAltitude(List<GPXUtilities.WptPt> pts, double dist) {
-
-        List<GPXUtilities.WptPt> track = resampleTrack(pts, dist);
-
-        int halfC = getColor2(0.5);
-
-        // Calculate the absolutes of the altitude variations
-        Double max = Double.NEGATIVE_INFINITY;
-        Double min = Double.POSITIVE_INFINITY;
-        for (GPXUtilities.WptPt pt : track) {
-            max = Math.max(max, pt.ele);
-            min = Math.min(min, pt.ele);
-            pt.colourARGB = halfC;
-        }
-        Double elevationRange = max-min;
-        if (elevationRange > 0)
-            for (GPXUtilities.WptPt pt : track)
-                pt.colourARGB = getColor2((pt.ele - min)/elevationRange);
-
-        return track;
-    }
-
-
-    private List<GPXUtilities.WptPt> resampleSpeed(List<GPXUtilities.WptPt> pts, double dist) {
-
-        List<GPXUtilities.WptPt> track = resampleTrack(pts, dist);
-
-        GPXUtilities.WptPt lastPt = track.get(0);
-        lastPt.speed = 0;
-
-        // calculate speeds
-        for (int i=1; i<track.size(); i++) {
-            GPXUtilities.WptPt pt = track.get(i);
-            double delta = pt.time - lastPt.time;
-            if (delta>0)
-                pt.speed = MapUtils.getDistance(pt.getLatitude(),pt.getLongitude(),
-                        lastPt.getLatitude(),lastPt.getLongitude())/delta;
-            else
-                pt.speed = 0;		// GPX doesn't have time - this is OK, colour will be mid-range for whole track
-            lastPt = pt;
-        }
-
-        // Calculate the absolutes of the altitude variations
-        Double max = Double.NEGATIVE_INFINITY;
-        Double min = Double.POSITIVE_INFINITY;
-        for (GPXUtilities.WptPt pt : track) {
-            max = Math.max(max, pt.speed);
-            min = Math.min(min, pt.speed);
-            pt.colourARGB = getColor2(0.5);
-        }
-        Double range = max-min;
-        if (range > 0)
-            for (GPXUtilities.WptPt pt : track)
-                pt.colourARGB = getColor2((pt.speed - min) / range);
-
-
-
-        return track;
-    }
-
-
-
     // Resample a list of points into a new list of points.
     // The new list is evenly-spaced (dist) and contains the first and last point from the original list.
     // The purpose is to allow tracks to be displayed with colours/shades/animation with even spacing
@@ -144,7 +78,7 @@ public class AsynchronousResampler extends AsyncTask<String,Integer,String> {
     // Typically, pass a point list to this, and set dist (in metres) to something that's relative to screen zoom
     // The new point list has resampled times, elevations, speed and hdop too!
 
-    private List<GPXUtilities.WptPt> resampleTrack(List<GPXUtilities.WptPt> pts, double dist) {
+    protected List<GPXUtilities.WptPt> resampleTrack(List<GPXUtilities.WptPt> pts, double dist) {
 
         ArrayList<GPXUtilities.WptPt> newPts = new ArrayList<GPXUtilities.WptPt>();
 
@@ -186,97 +120,177 @@ public class AsynchronousResampler extends AsyncTask<String,Integer,String> {
         return newPts;
     }
 
-    // Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
-    // This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
-    // but optimised for this specific usage.
 
-    private boolean[] cullRamerDouglasPeucer(List<GPXUtilities.WptPt> points, double epsilon) {
 
-        int nsize = points.size();
-        boolean[] survivor = new boolean[nsize];
-        if (nsize > 0) {
-            cullRamerDouglasPeucer(points, epsilon, survivor, 0, nsize - 1);
-            survivor[0] = true;
+    //----------------------------------------------------------------------------------------------
+
+    public static class ResampleAltitude extends AsynchronousResampler {
+
+        private double segmentSize;
+
+        ResampleAltitude(Renderable.RenderableSegment rs, double segmentSize) {
+            super(rs);
+            this.segmentSize = segmentSize;
         }
-        return survivor;
-    }
 
-    private void cullRamerDouglasPeucer(List<GPXUtilities.WptPt> pt, double epsilon, boolean[] survivor, int start, int end) {
+        @Override protected String doInBackground(String... params) {
 
-        double dmax = -1;
-        int index = -1;
-        for (int i = start + 1; i < end; i++) {
+            // Resample track, then analyse altitudes and set colours for each point
 
-            if (isCancelled())
-                return;
+            culled = resampleTrack(rs.getPoints(), segmentSize);
 
-            double d = MapUtils.getOrthogonalDistance(
-                    pt.get(i).getLatitude(), pt.get(i).getLongitude(),
-                    pt.get(start).getLatitude(), pt.get(start).getLongitude(),
-                    pt.get(end).getLatitude(), pt.get(end).getLongitude());
-            if (d > dmax) {
-                dmax = d;
-                index = i;
+            int halfC = getColor2(0.5);                             // default coloration if no elevations found
+
+            // Calculate the absolutes of the altitude variations
+            Double max = Double.NEGATIVE_INFINITY;
+            Double min = Double.POSITIVE_INFINITY;
+            for (GPXUtilities.WptPt pt : culled) {
+                max = Math.max(max, pt.ele);
+                min = Math.min(min, pt.ele);
+                pt.colourARGB = halfC;
             }
-        }
-        if (dmax >= epsilon) {
-            cullRamerDouglasPeucer(pt, epsilon, survivor, start, index);
-            cullRamerDouglasPeucer(pt, epsilon, survivor, index, end);
-        } else {
-            survivor[end] = true;
+
+            Double elevationRange = max-min;
+            if (elevationRange > 0)
+                for (GPXUtilities.WptPt pt : culled)
+                    pt.colourARGB = getColor2((pt.ele - min)/elevationRange);
+
+            return "OK";
         }
     }
 
-    @Override
-    protected String doInBackground(String... params) {
+    //----------------------------------------------------------------------------------------------
 
-        String resp = "OK";
-        try {
+    public static class ResampleSpeed extends AsynchronousResampler {
+
+        private double segmentSize;
+
+        ResampleSpeed(Renderable.RenderableSegment rs, double segmentSize) {
+            super(rs);
+            this.segmentSize = segmentSize;
+        }
+
+        @Override protected String doInBackground(String... params) {
+
+            // Resample track, then analyse speeds and set colours for each point
+
             List<GPXUtilities.WptPt> points = rs.getPoints();
+            culled = resampleTrack(points, segmentSize);
 
-            switch (renderType) {
+            GPXUtilities.WptPt lastPt = points.get(0);
+            lastPt.speed = 0;
 
-                case ALTITUDE:
-                    culled = resampleAltitude(points, param1);
-                    break;
-
-                case SPEED:
-                    culled = resampleSpeed(points, param1);
-                    break;
-
-                case CONVEYOR:
-                case DISTANCE:
-                    culled = resampleTrack(points, param1);
-                    break;
-
-                case ORIGINAL:
-                    boolean[] survivor = cullRamerDouglasPeucer(points, param1);
-                    culled = new ArrayList<>();
-                    for (int i = 0; i < survivor.length; i++)
-                        if (survivor[i])
-                            culled.add(points.get(i));
-                    break;
-
-                default:
-                    break;
+            // calculate speeds using time:distance for each segment
+            for (int i=1; i<points.size(); i++) {
+                GPXUtilities.WptPt pt = points.get(i);
+                double delta = pt.time - lastPt.time;
+                if (delta>0)
+                    pt.speed = MapUtils.getDistance(pt.getLatitude(),pt.getLongitude(),
+                            lastPt.getLatitude(),lastPt.getLongitude())/delta;
+                else
+                    pt.speed = 0;		// GPX doesn't have time - this is OK, colour will be mid-range for whole track
+                lastPt = pt;
             }
 
+            // Calculate the absolutes of the speed variations
+            Double max = Double.NEGATIVE_INFINITY;
+            Double min = Double.POSITIVE_INFINITY;
+            for (GPXUtilities.WptPt pt : points) {
+                max = Math.max(max, pt.speed);
+                min = Math.min(min, pt.speed);
+                pt.colourARGB = getColor2(0.5);
+            }
+            Double range = max-min;
+            if (range > 0)
+                for (GPXUtilities.WptPt pt : points)
+                    pt.colourARGB = getColor2((pt.speed - min) / range);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp = e.getMessage();
+
+            return "OK";
         }
-
-
-        return resp;
     }
 
-    @Override
-    protected void onPostExecute(String result) {
-        // executes on the UI thread so it's OK to change its variables
-        if (rs != null && result.equals("OK") && !isCancelled()) {
-            rs.setRDP(culled);
-            view.refreshMap();					// FORCE redraw to guarantee new culled track is shown
+    //----------------------------------------------------------------------------------------------
+
+    public static class GenericResampler extends AsynchronousResampler {
+
+        private double segmentSize;
+
+        public GenericResampler(Renderable.RenderableSegment rs, double segmentSize) {
+            super(rs);
+            this.segmentSize = segmentSize;
+        }
+
+        @Override protected String doInBackground(String... params) {
+            culled = resampleTrack(rs.getPoints(), segmentSize);
+            return "OK";
         }
     }
+
+    //----------------------------------------------------------------------------------------------
+
+    public static class RamerDouglasPeucer extends AsynchronousResampler {
+
+        private double epsilon;
+        private boolean survivor[];
+        private List<GPXUtilities.WptPt> points;
+
+        public RamerDouglasPeucer(Renderable.RenderableSegment rs, double epsilon) {
+            super(rs);
+            this.epsilon = epsilon;
+        }
+
+        @Override protected String doInBackground(String... params) {
+
+            // Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
+            // This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
+            // but optimised for this specific usage.
+
+            points = rs.getPoints();
+
+            int nsize = points.size();
+            survivor = new boolean[nsize];
+            if (nsize > 0) {
+                cullRamerDouglasPeucer(0, nsize - 1);
+                survivor[0] = true;
+            }
+
+            culled = new ArrayList<>();
+            for (int i = 0; i < survivor.length; i++)
+                if (survivor[i])
+                    culled.add(points.get(i));
+
+            return "OK";
+        }
+
+        private void cullRamerDouglasPeucer(int start, int end) {
+
+            double dmax = -1;
+            int index = -1;
+            for (int i = start + 1; i < end; i++) {
+
+                if (isCancelled())
+                    return;
+
+                double d = MapUtils.getOrthogonalDistance(
+                        points.get(i).getLatitude(), points.get(i).getLongitude(),
+                        points.get(start).getLatitude(), points.get(start).getLongitude(),
+                        points.get(end).getLatitude(), points.get(end).getLongitude());
+                if (d > dmax) {
+                    dmax = d;
+                    index = i;
+                }
+            }
+            if (dmax >= epsilon) {
+                cullRamerDouglasPeucer(start, index);
+                cullRamerDouglasPeucer(index, end);
+            } else {
+                survivor[end] = true;
+            }
+        }
+
+    }
+
+
+
 }
