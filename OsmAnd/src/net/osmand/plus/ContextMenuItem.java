@@ -18,7 +18,7 @@ public class ContextMenuItem {
 	@DrawableRes
 	private final int lightIcon;
 	@DrawableRes
-	private final int secondaryLightIcon;
+	private final int secondaryIcon;
 	private Boolean selected;
 	private int progress;
 	@LayoutRes
@@ -30,7 +30,7 @@ public class ContextMenuItem {
 	private ContextMenuAdapter.OnContextMenuClick checkBoxListener;
 	private ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 
-	private ContextMenuItem(int titleId, String title, int icon, int lightIcon, int secondaryLightIcon,
+	private ContextMenuItem(int titleId, String title, int icon, int lightIcon, int secondaryIcon,
 							Boolean selected, int progress, int layout, boolean loading, boolean category,
 							int pos, String description, ContextMenuAdapter.OnContextMenuClick checkBoxListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
@@ -38,7 +38,7 @@ public class ContextMenuItem {
 		this.title = title;
 		this.icon = icon;
 		this.lightIcon = lightIcon;
-		this.secondaryLightIcon = secondaryLightIcon;
+		this.secondaryIcon = secondaryIcon;
 		this.selected = selected;
 		this.progress = progress;
 		this.layout = layout;
@@ -66,8 +66,8 @@ public class ContextMenuItem {
 		return lightIcon;
 	}
 
-	public int getSecondaryLightIcon() {
-		return secondaryLightIcon;
+	public int getSecondaryIcon() {
+		return secondaryIcon;
 	}
 
 	public Boolean getSelected() {
@@ -143,7 +143,7 @@ public class ContextMenuItem {
 		private String mTitle;
 		private int mIcon = -1;
 		private int mLightIcon = -1;
-		private int mSecondaryLightIcon = -1;
+		private int mSecondaryIcon = -1;
 		private Boolean mSelected = null;
 		private int mProgress = -1;
 		private int mLayout = -1;
@@ -178,8 +178,8 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setSecondaryLightIcon(int secondaryLightIcon) {
-			mSecondaryLightIcon = secondaryLightIcon;
+		public ItemBuilder setSecondaryIcon(int secondaryIcon) {
+			mSecondaryIcon = secondaryIcon;
 			return this;
 		}
 
@@ -229,7 +229,7 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			return new ContextMenuItem(mTitleId, mTitle, mIcon, mLightIcon, mSecondaryLightIcon, mSelected, mProgress, mLayout, mLoading, mCat, mPos, mDescription, mCheckBoxListener, mIntegerListener);
+			return new ContextMenuItem(mTitleId, mTitle, mIcon, mLightIcon, mSecondaryIcon, mSelected, mProgress, mLayout, mLoading, mCat, mPos, mDescription, mCheckBoxListener, mIntegerListener);
 		}
 	}
 }

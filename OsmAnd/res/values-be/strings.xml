@@ -1559,7 +1559,7 @@
     <string name="use_opengl_render_descr">Выкарыстоўваць апаратнае паскарэньне OpenGL (можа не працаваць на некаторых прыстасаваньнях)</string>
     <string name="everything_up_to_date">Усе файлы ў актуальным стане</string>
     <string name="no_internet_connection">Немагчыма cьцягнуць. Калі ласка, праверце ваша Інтэрнэт-злучэньне.</string>
-    <string name="download_tab_downloads">Усё cьцягнутае</string>
+    <string name="download_tab_downloads">Даступнае</string>
     <string name="download_tab_updates">Абнаўленьні</string>
     <string name="download_tab_local">Лякальныя</string>
 	<string name="navigate_point_zone">Зона</string>

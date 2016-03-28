@@ -198,7 +198,7 @@ public class GpxUiHelper {
 	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList,
 																  List<String> selectedGpxList, boolean multipleChoice,
 																  boolean showCurrentTrack) {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
+		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		//element position in adapter
 		int i = 0;
 		for (String s : allGpxList) {

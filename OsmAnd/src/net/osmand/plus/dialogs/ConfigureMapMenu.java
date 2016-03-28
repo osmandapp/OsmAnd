@@ -56,22 +56,20 @@ public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 
 	public interface OnClickListener {
-		public void onClick(boolean result);
+		void onClick();
 	}
-
-	;
 
 	private boolean allModes = false;
 
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(ma, allModes);
+		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.app_modes_choose, ma)
 				.setLayout(R.layout.mode_toggles).createItem());
 		adapter.setChangeAppModeListener(new OnClickListener() {
 			@Override
-			public void onClick(boolean result) {
+			public void onClick() {
 				allModes = true;
 				ma.getDashboard().updateListAdapter(createListAdapter(ma));
 			}
