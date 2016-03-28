@@ -10,7 +10,6 @@ import android.widget.LinearLayout.LayoutParams;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -36,7 +35,7 @@ public class AppModeDialog {
 
 	//special method for drawer menu
 	//needed because if there's more than 4 items  - the don't fit in drawer
-	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected, ContextMenuAdapter.BooleanResult allModes,
+	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected,
 												boolean useMapTheme, final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));

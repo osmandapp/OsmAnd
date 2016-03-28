@@ -496,14 +496,14 @@ public class MapWidgetRegistry {
 	}
 
 	public ContextMenuAdapter getViewConfigureMenuAdapter(final MapActivity map) {
-		final ContextMenuAdapter cm = new ContextMenuAdapter(map);
+		final ContextMenuAdapter cm = new ContextMenuAdapter();
 		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.app_modes_choose, map)
 				.setLayout(R.layout.mode_toggles).createItem());
 		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
 
 			@Override
-			public void onClick(boolean allModes) {
+			public void onClick() {
 				map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(map));
 			}
 		});

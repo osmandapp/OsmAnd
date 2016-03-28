@@ -1,11 +1,11 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -35,60 +35,38 @@ import java.util.Set;
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
 
-	private final Context ctx;
 	@LayoutRes
-	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
+	private int DEFAULT_LAYOUT_ID = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
 			R.layout.list_menu_item : R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
 	//neded to detect whether user opened all modes or not
-	private BooleanResult allModes = new BooleanResult();
-
-	public ContextMenuAdapter(Context ctx, boolean allModes) {
-		this.ctx = ctx;
-		this.allModes.setResult(allModes);
-	}
-
-	public ContextMenuAdapter(Context ctx) {
-		this.ctx = ctx;
-	}
 
 	public int length() {
 		return items.size();
 	}
 
+	@Deprecated
 	public int getElementId(int position) {
 		return items.get(position).getTitleId();
 	}
 
+	@Deprecated
 	public OnContextMenuClick getClickAdapter(int position) {
 		return items.get(position).getCheckBoxListener();
 	}
 
-	public OnIntegerValueChangedListener getIntegerLister(int position) {
-		return items.get(position).getIntegerListener();
-	}
-
+	@Deprecated
 	public String getItemName(int position) {
 		return items.get(position).getTitle();
 	}
 
-	public String getItemDescr(int position) {
-		return items.get(position).getDescription();
-	}
-
+	@Deprecated
 	public Boolean getSelection(int position) {
 		return items.get(position).getSelected();
 	}
 
-	public int getProgress(int position) {
-		return items.get(position).getProgress();
-	}
-
-	public int getLoading(int position) {
-		return items.get(position).isLoading() ? 1 : 0;
-	}
-
+	@Deprecated
 	public Drawable getImage(OsmandApplication ctx, int position, boolean light) {
 		@DrawableRes
 		int lst = items.get(position).getIcon();
@@ -103,39 +81,12 @@ public class ContextMenuAdapter {
 		return null;
 	}
 
-	public Drawable getSecondaryImage(OsmandApplication ctx, int position, boolean light) {
-		@DrawableRes
-		int secondaryDrawableId = items.get(position).getSecondaryLightIcon();
-		if (secondaryDrawableId != -1) {
-			return ctx.getIconsCache().getIcon(secondaryDrawableId, light);
-		}
-		return null;
-	}
-
-	public int getBackgroundColor(Context ctx, boolean holoLight) {
-		if (holoLight) {
-			return ctx.getResources().getColor(R.color.bg_color_light);
-		} else {
-			return ctx.getResources().getColor(R.color.bg_color_dark);
-		}
-	}
-
-	public boolean isCategory(int pos) {
-		return items.get(pos).isCategory();
-	}
-
-	public int getLayoutId(int position) {
-		int l = items.get(position).getLayout();
-		if (l != -1) {
-			return l;
-		}
-		return defaultLayoutId;
-	}
-
+	@Deprecated
 	public void setItemName(int position, String str) {
 		items.get(position).setTitle(str);
 	}
 
+	@Deprecated
 	public void setItemDescription(int position, String str) {
 		items.get(position).setDescription(str);
 	}
@@ -144,6 +95,7 @@ public class ContextMenuAdapter {
 		items.get(position).setSelected(s);
 	}
 
+	@Deprecated
 	public void setProgress(int position, int progress) {
 		items.get(position).setProgress(progress);
 	}
@@ -166,7 +118,7 @@ public class ContextMenuAdapter {
 	}
 
 	public void setDefaultLayoutId(int defaultLayoutId) {
-		this.defaultLayoutId = defaultLayoutId;
+		this.DEFAULT_LAYOUT_ID = defaultLayoutId;
 	}
 
 
@@ -176,34 +128,45 @@ public class ContextMenuAdapter {
 
 
 	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
-		final int layoutId = defaultLayoutId;
+		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
-				items.toArray(new ContextMenuItem[items.size()]), app, holoLight);
+				items.toArray(new ContextMenuItem[items.size()]), app, holoLight, changeAppModeListener);
 	}
 
 	public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
 		private OsmandApplication app;
 		private boolean holoLight;
+		@LayoutRes
 		private int layoutId;
+		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
 
-		public ContextMenuArrayAdapter(Activity context, int resource, int textViewResourceId,
-									   ContextMenuItem[] objects, OsmandApplication app, boolean holoLight) {
-			super(context, resource, textViewResourceId, objects);
+		public ContextMenuArrayAdapter(Activity context,
+									   @LayoutRes
+									   int layoutRes,
+									   @IdRes
+									   int textViewResourceId,
+									   ContextMenuItem[] objects,
+									   OsmandApplication app,
+									   boolean holoLight,
+									   ConfigureMapMenu.OnClickListener changeAppModeListener) {
+			super(context, layoutRes, textViewResourceId, objects);
 			this.app = app;
 			this.holoLight = holoLight;
-			layoutId = resource;
+			layoutId = layoutRes;
+			this.changeAppModeListener = changeAppModeListener;
 		}
 
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			// User super class to create the View
 			final ContextMenuItem item = getItem(position);
-			Integer lid = getLayoutId(position);
+			int lid = item.getLayout();
+			lid = lid != -1 ? lid : DEFAULT_LAYOUT_ID;
 			if (lid == R.layout.mode_toggles) {
 				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
-						selected, allModes, true, new View.OnClickListener() {
+						selected, true, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						if (selected.size() > 0) {
@@ -211,21 +174,20 @@ public class ContextMenuAdapter {
 							notifyDataSetChanged();
 						}
 						if (changeAppModeListener != null) {
-							changeAppModeListener.onClick(allModes.getResult());
+							changeAppModeListener.onClick();
 						}
 					}
 				});
 			}
-			if (convertView == null || (!lid.equals(convertView.getTag()))) {
+			if (convertView == null || (lid != convertView.getTag())) {
 				convertView = LayoutInflater.from(getContext()).inflate(lid, parent, false);
-//				AndroidUtils.setListItemBackground(ctx, convertView, !holoLight);
 				convertView.setTag(lid);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
-			if (!isCategory(position)) {
+			if (!item.isCategory()) {
 				AndroidUtils.setTextPrimaryColor(getContext(), tv, !holoLight);
 			}
-			tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
+			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
 
 			if (layoutId == R.layout.simple_list_menu_item) {
 				int color = ContextCompat.getColor(getContext(),
@@ -253,7 +215,7 @@ public class ContextMenuAdapter {
 			if (secondaryLightDrawable != -1) {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable drawable = getSecondaryImage(app, position, holoLight);
+				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryLightIcon());
 				DrawableCompat.setTint(drawable, color);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
@@ -265,13 +227,13 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			if (isCategory(position)) {
+			if (item.isCategory()) {
 				tv.setTypeface(Typeface.DEFAULT_BOLD);
 			} else {
 				tv.setTypeface(null);
 			}
 
-			if (convertView.findViewById(R.id.toggle_item) != null) {
+			if (convertView.findViewById(R.id.toggle_item) != null && !item.isCategory()) {
 				final CompoundButton ch = (CompoundButton) convertView.findViewById(R.id.toggle_item);
 				if (item.getSelected() != null) {
 					ch.setOnCheckedChangeListener(null);
@@ -282,10 +244,10 @@ public class ContextMenuAdapter {
 
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							OnContextMenuClick ca = getClickAdapter(position);
+							OnContextMenuClick ca = item.getCheckBoxListener();
 							item.setSelected(isChecked);
 							if (ca != null) {
-								ca.onContextMenuClick(la, getElementId(position), position, isChecked);
+								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked);
 							}
 						}
 					};
@@ -299,11 +261,11 @@ public class ContextMenuAdapter {
 			if (convertView.findViewById(R.id.seekbar) != null) {
 				SeekBar seekBar = (SeekBar) convertView.findViewById(R.id.seekbar);
 				if (item.getProgress() != -1) {
-					seekBar.setProgress(getProgress(position));
+					seekBar.setProgress(item.getProgress());
 					seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 						@Override
 						public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-							OnIntegerValueChangedListener listener = getIntegerLister(position);
+							OnIntegerValueChangedListener listener = item.getIntegerListener();
 							item.setProgress(progress);
 							if (listener != null && fromUser) {
 								listener.onIntegerValueChangedListener(progress);
@@ -333,7 +295,7 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			String itemDescr = getItemDescr(position);
+			String itemDescr = item.getDescription();
 			if (convertView.findViewById(R.id.description) != null) {
 				((TextView) convertView.findViewById(R.id.description)).setText(itemDescr);
 			}
@@ -366,17 +328,4 @@ public class ContextMenuAdapter {
 			}
 		}
 	}
-
-	public class BooleanResult {
-		private boolean result = false;
-
-		public void setResult(boolean value) {
-			result = value;
-		}
-
-		public boolean getResult() {
-			return result;
-		}
-	}
-
 }

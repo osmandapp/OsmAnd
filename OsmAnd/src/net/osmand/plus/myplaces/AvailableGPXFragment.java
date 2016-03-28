@@ -327,7 +327,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
 
-		optionsMenuAdapter = new ContextMenuAdapter(getActivity());
+		optionsMenuAdapter = new ContextMenuAdapter();
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, final int itemId, int pos, boolean isChecked) {
