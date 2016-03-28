@@ -39,7 +39,7 @@ import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -180,7 +180,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		builder.setItems(values, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				OnContextMenuClick clk = adapter.getClickAdapter(which);
+				ContextMenuAdapter.ItemClickListener clk = adapter.getClickAdapter(which);
 				if (clk != null) {
 					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
 				}
@@ -192,7 +192,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ItemClickListener listener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				return performBasicOperation(resId, info);
@@ -594,7 +594,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		optionsMenuAdapter = new ContextMenuAdapter();
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				localOptionsMenu(itemId);
@@ -602,21 +602,21 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.local_index_mi_reload,getContext())
+				.setTitleId(R.string.local_index_mi_reload, getContext())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.shared_string_delete,getContext())
+				.setTitleId(R.string.shared_string_delete, getContext())
 				.setIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.local_index_mi_backup,getContext())
+				.setTitleId(R.string.local_index_mi_backup, getContext())
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.local_index_mi_restore,getContext())
+				.setTitleId(R.string.local_index_mi_restore, getContext())
 				.setListener(listener)
 				.createItem());
 		// doesn't work correctly

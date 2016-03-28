@@ -18,7 +18,7 @@ import android.widget.TimePicker;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -217,7 +217,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			final double latitude, final double longitude,
 			ContextMenuAdapter adapter, Object selectedObj) {
 
-		OnContextMenuClick addListener = new OnContextMenuClick() {
+		ItemClickListener addListener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId,
 					int pos, boolean isChecked) {

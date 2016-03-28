@@ -13,7 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -234,7 +234,7 @@ public class ConfigureMapMenu {
 		String descr = getRenderDescr(activity);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_widget_renderer, activity)
-				.setListener(new OnContextMenuClick() {
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 						AlertDialog.Builder bld = new AlertDialog.Builder(activity);
@@ -279,7 +279,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_widget_day_night, activity)
 				.setDescription(getDayNightDescr(activity))
-				.setListener(new OnContextMenuClick() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 						final OsmandMapTileView view = activity.getMapView();
@@ -307,7 +307,7 @@ public class ConfigureMapMenu {
 				}).setLayout(R.layout.drawer_list_doubleitem).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.map_magnifier, activity).setListener(new OnContextMenuClick() {
+				.setTitleId(R.string.map_magnifier, activity).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 						final OsmandMapTileView view = activity.getMapView();
@@ -360,7 +360,7 @@ public class ConfigureMapMenu {
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.text_size, activity).setListener(new OnContextMenuClick() {
+				.setTitleId(R.string.text_size, activity).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 						final OsmandMapTileView view = activity.getMapView();
@@ -392,7 +392,7 @@ public class ConfigureMapMenu {
 				}).setDescription(getScale(activity)).setLayout(R.layout.drawer_list_doubleitem).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.map_locale, activity).setListener(new OnContextMenuClick() {
+				.setTitleId(R.string.map_locale, activity).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 						final OsmandMapTileView view = activity.getMapView();
@@ -511,7 +511,7 @@ public class ConfigureMapMenu {
 					.setTitleId(strId, activity)
 					.setDescription(descr)
 					.setLayout(R.layout.drawer_list_doubleitem)
-					.setListener(new OnContextMenuClick() {
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
@@ -619,7 +619,7 @@ public class ConfigureMapMenu {
 				final OsmandSettings.CommonPreference<Boolean> pref = view.getApplication().getSettings()
 						.getCustomRenderBooleanProperty(p.getAttrName());
 				adapter.addItem(ContextMenuItem.createBuilder(propertyName)
-						.setListener(new OnContextMenuClick() {
+						.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 							@Override
 							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -640,7 +640,7 @@ public class ConfigureMapMenu {
 					descr = SettingsActivity.getStringPropertyValue(view.getContext(),
 							p.getDefaultValueDescription());
 				}
-				adapter.addItem(ContextMenuItem.createBuilder(propertyName).setListener(new OnContextMenuClick() {
+				adapter.addItem(ContextMenuItem.createBuilder(propertyName).setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {

@@ -33,7 +33,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -655,7 +654,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					}
 				}
 				if (containsPoint) {
-					OnContextMenuClick listener = new OnContextMenuClick() {
+					ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
@@ -288,7 +287,7 @@ public class MapWidgetRegistry {
 		if (settings.USE_MAP_MARKERS.get()) {
 			cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
 					.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
-					.setListener(new OnContextMenuClick() {
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 							final OsmandMapTileView view = map.getMapView();
@@ -329,15 +328,15 @@ public class MapWidgetRegistry {
 							  @StringRes int stringId, OsmandPreference<Boolean> pref) {
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(stringId, map)
 				.setSelected(pref.get())
-				.setListener(new ApearanceOnContextMenuClick(pref, map)).createItem());
+				.setListener(new ApearanceItemClickListener(pref, map)).createItem());
 	}
 
-	class ApearanceOnContextMenuClick implements OnContextMenuClick {
+	class ApearanceItemClickListener implements ContextMenuAdapter.ItemClickListener {
 
 		private MapActivity map;
 		private OsmandPreference<Boolean> pref;
 
-		public ApearanceOnContextMenuClick(OsmandPreference<Boolean> pref, MapActivity map) {
+		public ApearanceItemClickListener(OsmandPreference<Boolean> pref, MapActivity map) {
 			this.pref = pref;
 			this.map = map;
 		}
@@ -404,7 +403,7 @@ public class MapWidgetRegistry {
 					.setSelected(r.visibleCollapsed(mode) || r.visible(mode))
 					.setColorIcon(r.drawableMenu)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setListener(new OnContextMenuClick() {
+					.setListener(new ContextMenuAdapter.OnRowItemClick() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
 							changeVisibility(r);

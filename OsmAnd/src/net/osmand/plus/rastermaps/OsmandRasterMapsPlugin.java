@@ -23,7 +23,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -236,7 +236,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 												ContextMenuAdapter adapter,
 												final MapActivity mapActivity) {
 		final MapActivityLayers layers = mapActivity.getMapLayers();
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ContextMenuAdapter.ItemClickListener listener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				OsmandSettings settings = mapActivity.getMyApplication().getSettings();
@@ -279,7 +279,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 											  Object selectedObj) {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
-			OnContextMenuClick listener = new OnContextMenuClick() {
+			ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 					if (resId == R.string.context_menu_item_update_map) {

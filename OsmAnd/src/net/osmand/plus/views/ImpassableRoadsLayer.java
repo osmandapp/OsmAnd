@@ -165,7 +165,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 		if (latLon != null && o == null
 				&& (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode())) {
 
-			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.avoid_road) {

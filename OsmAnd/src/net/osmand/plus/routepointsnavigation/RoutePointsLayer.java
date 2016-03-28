@@ -87,7 +87,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		if (o != null && o instanceof GPXUtilities.WptPt && plugin.getCurrentRoute() != null){
 			final GPXUtilities.WptPt point = (GPXUtilities.WptPt) o;
-			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.mark_as_not_visited){
