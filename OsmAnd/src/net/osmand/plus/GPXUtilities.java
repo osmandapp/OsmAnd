@@ -2,12 +2,17 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.Renderable;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -98,8 +103,18 @@ public class GPXUtilities {
 		public double speed = 0;
 		public double hdop = Double.NaN;
 		public boolean deleted = false;
+		public int colourARGB = 0;					// point colour (used for altitude/speed colouring)
+		public double distance = 0.0;				// cumulative distance, if in a track
 
 		public WptPt() {
+		}
+
+		public void setDistance(double dist) {
+			distance = dist;
+		}
+
+		public double getDistance() {
+			return distance;
 		}
 
 		@Override
@@ -166,7 +181,18 @@ public class GPXUtilities {
 
 	public static class TrkSegment extends GPXExtensions {
 		public List<WptPt> points = new ArrayList<WptPt>();
-		
+		private OsmandMapTileView view;
+
+		// A list of renderables. A rendereable is 'a way of drawing' something related to a TrkSegment.
+		// For example, we could have several renderables drawing on top of each other;
+		// 1. rainbow coloured altitude indicator
+		// 2. base rendered segments
+		// 3. 'dot' 1km markers on top
+		// These are dimply enabled by adding new Renderable objects to this list
+		// Note; see addRenderers for a complete list of handled Renderables.
+
+		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
+
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
 			return split(getDistanceMetric(), getTimeSplit(), meters);
 		}
@@ -180,6 +206,57 @@ public class GPXUtilities {
 			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this);
 			return convert(splitSegments);
 		}
+
+
+		// Track segments are drawn by 'Renderable' objects. A segment can have zero or more renderables,
+		// each of which performs its own point-culling/reduction and display drawing. There are a selction
+		// of renderable types, as defiend in Renderable.RenderType.  To use, call this function to create
+		// a new renderable type, and then attach it to your displayable object in a list or similar.
+
+		// The two parameters' maning varies based upon the type of renderable - see the parameters' usage
+		// in each derived renderable class.
+
+		public Renderable.RenderableSegment addRenderable(OsmandMapTileView view, Renderable.RenderType type,
+														  double param1, double param2) {
+			Renderable.RenderableSegment rs = null;
+			switch (type) {
+				case ORIGINAL: 	// a Ramer-Douglas-Peucer line reduction draw
+					rs = new Renderable.RenderableSegment(type, points, param1, param2);
+					break;
+				case DISTANCE:	// a resample every N metres draw
+					rs = new Renderable.RenderableDot(type, points, param1, param2);
+					break;
+				case CONVEYOR:	// an animating segment draw
+					rs = new Renderable.RenderableConveyor(type, points, param1, param2);
+					Renderable.startScreenRefresh(view, (long) param2);
+					break;
+				case ALTITUDE:	// a colour-banded altitude draw
+					rs = new Renderable.RenderableAltitude(type, points, param1, param2);
+					break;
+				case SPEED:		// a colour-banded speed draw
+					rs = new Renderable.RenderableSpeed(type, points, param1, param2);
+					break;
+
+				default:
+					break;
+			}
+			if (rs != null)
+				renders.add(rs);
+			return rs;
+		}
+
+
+		public void recalculateRenderScales(OsmandMapTileView view) {
+			for (Renderable.RenderableSegment rs : renders)
+				rs.recalculateRenderScale(view);
+		}
+
+		public void drawRenderers(Paint p, Canvas c, RotatedTileBox tb) {
+			for (Renderable.RenderableSegment rs : renders)
+				rs.drawSingleSegment(p, c, tb);
+		}
+
+
 
 	}
 

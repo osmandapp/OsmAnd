@@ -207,7 +207,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if(points != null) {
 			updatePaints(0, false, false, settings, tileBox);
-			drawSegments(canvas, tileBox, points);
+			for (TrkSegment ts : points)
+				ts.drawRenderers(paint, canvas,tileBox);
 		} else {
 			List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
 			cache.clear();
@@ -326,10 +327,57 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			List<TrkSegment> points = g.getPointsToDisplay();
-			boolean routePoints = g.isRoutePoints();
-			updatePaints(g.getColor(), routePoints, g.isShowCurrentTrack(), settings, tileBox);
-			drawSegments(canvas, tileBox, points);
+			List<TrkSegment> segments = g.getPointsToDisplay();
+			for (TrkSegment ts : segments) {
+
+				// TODO: Select/install renderables via UI or external process!  (See comments below)
+
+				// Each TrkSegment has one or more 'Renderables' - these handle drawing different things such
+				// as the original track, rainbow altitude colouring, 1km markers, etc. They also handle the
+				// asynchronous re-sampling of tracks for more efficient display. For example, the default
+				// operation Renderable.RenderType.ORIGINAL does Ramer-Douglas-Peucer line optimisation for
+				// zoom-level changes in track resolution. Change the '18' to '20' to see it more clearly.
+
+				// Renderables are processed in order that ALL have asynchronous resampling/culling capabililty.
+				// In an ideal world, the renderers to be used are selected via UI or externally, and the
+				// segment will already have them attached.  For this first version, we add them the very
+				// first time the TrkSegment gets drawn.
+
+				// NOTE: At the moment the 'ORIGINAL' renderer below is TOTALLY FUNCTIONALLY EQUIVALENT								<<<IMPORTANT!!!
+				// with the master branch/version before I added this capability, except that the track now resamples
+				// based on zoom level and displays the resampled version when its available.
+
+				if (ts.renders.size()==0) {  // only do once
+
+					// TODO: To see more clearly the line reduction in action, change the 18 to a higher number (say, 18.5 or 19)...
+
+					ts.addRenderable(view, Renderable.RenderType.ORIGINAL, 18, 0);				// the base line (distance modifier)
+
+					// TODO : enable these to see how the experimental conveyor, altitude, speed, waypoint renders work
+
+					// Note: the conveyor is EXAMPLE ONLY just to show an example of multiple renderables being used
+					// - it is intended to show how support for arrows in route-based rendering can be supported by this
+					// type of system. Please leave the code alone, and I will implement the arrows after this code is approved!
+
+					// You can, of course, comment out the following...
+
+					ts.addRenderable(view, Renderable.RenderType.CONVEYOR, 10, 250);        	// conveyor belt animation (m,refresh(ms))
+					//ts.addRenderable(view, Renderable.RenderType.ALTITUDE, 25, 128);			// an altitude display (m,alpha) << IMPORTANT: See [note 1] below
+					//ts.addRenderable(view, Renderable.RenderType.DISTANCE, 1000, 1);        	// 1km markings (m,size)
+					//ts.addRenderable(view, Renderable.RenderType.SPEED, 20, 255);        		// a speed display (m,alpha) << IMPORTANT: See [Note 1]
+
+					// [Note 1]: The altitude and speed renders (only if enabled, above) have a bug that can crash OsmAnd
+					// 	- crashes on the emulator only!
+					//  - works fine on real hardware
+					//  - CAN YOU HELP ME FIND/UNDERSTAND IT???
+					// [Note 2]: we only see valid altitude data if the GPX file has 'ele' tags
+					// [Note 3]: we only see valid speed data if the GPX has 'time' tags
+				}
+
+				ts.recalculateRenderScales(view);                        // rework all renderers as required
+				updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
+				ts.drawRenderers(paint, canvas, tileBox);				// any renderers now get to draw
+			}
 		}
 	}
 
@@ -352,48 +400,15 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return pts;
 	}
 
-	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<TrkSegment> points) {
-		final QuadRect latLonBounds = tileBox.getLatLonBounds();
-		for (TrkSegment l : points) {
-			int startIndex = -1;
-			int endIndex = -1;
-		    int prevCross = 0;
-		    double shift = 0;
-			for (int i = 0; i < l.points.size(); i++) {
-				WptPt ls = l.points.get(i);
-				int cross = 0;
-				cross |= (ls.lon < latLonBounds.left - shift ? 1 : 0);
-				cross |= (ls.lon > latLonBounds.right + shift ? 2 : 0);
-				cross |= (ls.lat > latLonBounds.top + shift ? 4 : 0);
-				cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
-				if (i > 0) {
-					if ((prevCross & cross) == 0) {
-						if (endIndex == i - 1 && startIndex != -1) {
-							// continue previous line
-						} else {
-							// start new segment
-							if (startIndex >= 0) {
-								drawSegment(canvas, tileBox, l, startIndex, endIndex);
-							}
-							startIndex = i - 1;
-						}
-						endIndex = i;
-					}
-				}
-				prevCross = cross;
-			}
-			if (startIndex != -1) {
-				drawSegment(canvas, tileBox, l, startIndex, endIndex);
-			}
-		}
-	}
-	
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 
+/*
+	ORIGINAL drawSegment below
+	This is now moved to become one of the 'Renderable' types in Renderable.java
 
-	
 	private void drawSegment(Canvas canvas, RotatedTileBox tb, TrkSegment l, int startIndex, int endIndex) {
 		TIntArrayList tx = new TIntArrayList();
 		TIntArrayList ty = new TIntArrayList();
@@ -427,7 +442,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		
 	}
-	
+	*/
 	
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2) ;
