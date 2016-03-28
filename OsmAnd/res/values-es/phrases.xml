@@ -350,7 +350,7 @@
 	<string name="poi_craft_painter">Pintor</string>
 	<string name="poi_craft_photographer">Fotógrafo</string>
 	<string name="poi_craft_photographic_laboratory">Laboratorio fotográfico</string>
-	<string name="poi_craft_plumber">Plomero/Fontanero</string>
+	<string name="poi_craft_plumber">Fontanero</string>
 	<string name="poi_craft_sculptor">Escultor</string>
 	<string name="poi_beauty">Salón de belleza</string>
 	<string name="poi_hairdresser">Peluquería</string>
@@ -365,7 +365,7 @@
 	<string name="poi_crematorium">Crematorio</string>
 	<string name="poi_bank">Banco</string>
 	<string name="poi_atm">Cajero automático</string>
-	<string name="poi_accountant">Contable/Contador</string>
+	<string name="poi_accountant">Contable</string>
 	<string name="poi_cave_entrance">Entrada a cueva</string>
 	<string name="poi_volcano">Volcán</string>
 	<string name="poi_crater">Cráter</string>
@@ -729,7 +729,7 @@
 	<string name="poi_craft_tiler">Alicatador</string>
 	<string name="poi_craft_window_construction">Fábrica de ventanas</string>
 
-	<string name="poi_craft_computer">Montaje de computadoras/ordenadores</string>
+	<string name="poi_craft_computer">Montaje de ordenadores</string>
 	<string name="poi_saddle">Collado</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_anchor_berth">Fondeadero</string>
@@ -1003,7 +1003,7 @@
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_rubble">Escombros</string>
 	<string name="poi_recycling_cds">CDs</string>
-	<string name="poi_recycling_waste_oil">Aceite usado</string>
+	<string name="poi_recycling_waste_oil">Restos de aceite</string>
 	<string name="poi_recycling_bottles">Botellas</string>
 	<string name="poi_recycling_cork">Corcho</string>
 	<string name="poi_recycling_printer_cartridges">Cartuchos de impresora</string>
@@ -2710,6 +2710,6 @@
 	<string name="poi_free_flying_guest_guidelines_yes">Directrices de huésped para vuelo libre: sí</string>
 	<string name="poi_free_flying_guest_guidelines_no">Directrices de huésped para vuelo libre: no</string>
 
-	<string name="poi_solarium">Solarium</string>
+	<string name="poi_solarium">Solárium</string>
 
 </resources>
