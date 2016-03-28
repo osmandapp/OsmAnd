@@ -692,32 +692,39 @@ public class RouteInfoWidgetsFactory {
 				canvas.save();
 				// canvas.translate((int) (16 * scaleCoefficient), 0);
 				for (int i = 0; i < lanes.length; i++) {
-					int turnType;
-					int secondTurnType;
 					if ((lanes[i] & 1) == 1) {
 						paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) :
 								ctx.getResources().getColor(R.color.nav_arrow));
 					} else {
 						paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
 					}
-					turnType = TurnType.getPrimaryTurn(lanes[i]);
-					secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
+					int turnType = TurnType.getPrimaryTurn(lanes[i]);
+					int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
+					int thirdTurnType = TurnType.getTertiaryTurn(lanes[i]);
 
 					float coef = scaleCoefficient / miniCoeff;
-					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, 0, TurnPathHelper.FIRST_TURN, laneStraightBitmap, coef, leftSide);
-
-					if(secondTurnType > 0){
+					if(thirdTurnType > 0){
 						Bitmap bSecond = null;
-						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, 0, TurnPathHelper.SECOND_TURN, laneStraightBitmap, coef, leftSide);
+						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide);
 						if (bSecond != null){
 							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
 							canvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
 						}
 					}
-
-					paintRouteDirection.setColorFilter(new PorterDuffColorFilter(paintRouteDirection.getColor(), PorterDuff.Mode.SRC_ATOP));
-					canvas.drawBitmap(b, 0f, 0f, paintRouteDirection);
-					canvas.translate(w, 0);
+					if(secondTurnType > 0){
+						Bitmap bSecond = null;
+						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide);
+						if (bSecond != null){
+							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
+							canvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
+						}
+					}
+					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
+					if(b != null) {
+						paintRouteDirection.setColorFilter(new PorterDuffColorFilter(paintRouteDirection.getColor(), PorterDuff.Mode.SRC_ATOP));
+						canvas.drawBitmap(b, 0f, 0f, paintRouteDirection);
+						canvas.translate(w, 0);
+					}
 				}
 				canvas.restore();
 			}

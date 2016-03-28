@@ -405,58 +405,64 @@ public class TurnPathHelper {
 
 	}
 
-	public static Bitmap getBitmapFromTurnType(Resources res, Map<TurnResource, Bitmap> cache, int firstTurn, int secondTurn, int thirdTurn, int turnIndex, Bitmap defaultType, float coef, boolean leftSide) {
+	public static Bitmap getBitmapFromTurnType(Resources res, Map<TurnResource, Bitmap> cache, int firstTurn,
+			int secondTurn, int thirdTurn, int turnIndex, float coef, boolean leftSide) {
 
 		int firstTurnType = TurnType.valueOf(firstTurn, leftSide).getValue();
 		int secondTurnType = TurnType.valueOf(secondTurn, leftSide).getValue();
 		int thirdTurnType = TurnType.valueOf(thirdTurn, leftSide).getValue();
 
-		TurnResource turnResource = new TurnResource(R.drawable.map_turn_forward_small, false);
+		TurnResource turnResource = null;
 
-		if(turnIndex == FIRST_TURN){
-			if(firstTurn == 0) return defaultType;
-			if(secondTurnType == 0) {
+		if (turnIndex == FIRST_TURN) {
+			if (secondTurnType == 0) {
 				turnResource = getTallArrow(firstTurnType);
-			}else if(secondTurnType != TurnType.C){
-				if(firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU){
+			} else if (secondTurnType != TurnType.C) {
+				if (firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU) {
 					turnResource = getShortArrow(firstTurnType);
-				}else {
+				} else {
 					turnResource = getTallArrow(firstTurnType);
 				}
-			}else{
+			} else {
 				// get the small one
 				turnResource = getShortArrow(firstTurnType);
 			}
-		}else if(turnIndex == SECOND_TURN){
-			if(firstTurnType == TurnType.C || firstTurnType == TurnType.TR){
+		} else if (turnIndex == SECOND_TURN) {
+			if (TurnType.isLeftTurn(firstTurnType) && TurnType.isLeftTurn(secondTurnType)) {
+				turnResource = null;
+			} else if (TurnType.isRightTurn(firstTurnType) && TurnType.isRightTurn(secondTurnType)) {
+				turnResource = null;
+			} else if (firstTurnType == TurnType.C || thirdTurnType == TurnType.C) {
 				// get the small one
 				turnResource = getShortArrow(secondTurnType);
-			}else{
+			} else {
 				turnResource = getTallArrow(secondTurnType);
 			}
-		}else if(turnIndex == THIRD_TURN){
-			if(secondTurnType == TurnType.C){
-				// get the small one
-				turnResource = getShortArrow(thirdTurnType);
-			}else{
-				// ? slightly turn?
+		} else if (turnIndex == THIRD_TURN) {
+			if ((TurnType.isLeftTurn(firstTurnType) || TurnType.isLeftTurn(secondTurnType)) && TurnType.isLeftTurn(thirdTurnType)) {
+				turnResource = null;
+			} else if ((TurnType.isRightTurn(firstTurnType) || TurnType.isRightTurn(secondTurnType)) && TurnType.isRightTurn(thirdTurnType)) {
+				turnResource = null;
+			} else {
+				turnResource = getShortArrow(secondTurnType);
 			}
+		}
+		if (turnResource == null) {
+			return null;
 		}
 
 		Bitmap b = cache.get(turnResource);
-		if(b == null) {
-			b = turnResource.flip ? getFlippedBitmap(res, turnResource.resourceId) : BitmapFactory.decodeResource(res, turnResource.resourceId);
+		if (b == null) {
+			b = turnResource.flip ? getFlippedBitmap(res, turnResource.resourceId) : BitmapFactory.decodeResource(res,
+					turnResource.resourceId);
 			cache.put(turnResource, b);
 		}
 
-		//Maybe redundant scaling
+		// Maybe redundant scaling
 		/*
-		float bRatio = (float)b.getWidth() / (float)b.getHeight();
-		float s = 72f * coef;
-		int wq = Math.round(s / bRatio);
-		int hq = Math.round(s);
-		b = Bitmap.createScaledBitmap(b, wq, hq, false);
-		*/
+		 * float bRatio = (float)b.getWidth() / (float)b.getHeight(); float s = 72f * coef; int wq = Math.round(s /
+		 * bRatio); int hq = Math.round(s); b = Bitmap.createScaledBitmap(b, wq, hq, false);
+		 */
 
 		return b;
 	}
