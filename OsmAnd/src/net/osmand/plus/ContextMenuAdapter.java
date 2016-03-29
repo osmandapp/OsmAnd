@@ -47,16 +47,6 @@ public class ContextMenuAdapter {
 	}
 
 	@Deprecated
-	public int getElementId(int position) {
-		return items.get(position).getTitleId();
-	}
-
-	@Deprecated
-	public ItemClickListener getClickAdapter(int position) {
-		return items.get(position).getItemClickListener();
-	}
-
-	@Deprecated
 	public String getItemName(int position) {
 		return items.get(position).getTitle();
 	}

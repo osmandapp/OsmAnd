@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
@@ -301,8 +302,9 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				int standardId = adapter.getElementId(which);
-				ItemClickListener click = adapter.getClickAdapter(which);
+				ContextMenuItem item = adapter.getItem(which);
+				int standardId = item.getTitleId();
+				ItemClickListener click = item.getItemClickListener();
 				if (click != null) {
 					click.onContextMenuClick(listAdapter, standardId, which, false);
 				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
@@ -357,7 +359,7 @@ public class MapActivityActions implements DialogProvider {
 		final boolean useIntermediatePointsByDefault = true;
 		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
 				.getSelectedGPXFiles();
-		final List<GPXFile> gpxFiles = new ArrayList<GPXFile>();
+		final List<GPXFile> gpxFiles = new ArrayList<>();
 		for (SelectedGpxFile gs : selectedGPXFiles) {
 			if (!gs.isShowCurrentTrack() && !gs.notShowNavigationDialog) {
 				if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkpt()) {
@@ -855,7 +857,7 @@ public class MapActivityActions implements DialogProvider {
 
 
 	public void whereAmIDialog() {
-		final List<String> items = new ArrayList<String>();
+		final List<String> items = new ArrayList<>();
 		items.add(getString(R.string.show_location));
 		items.add(getString(R.string.shared_string_show_details));
 		AlertDialog.Builder menu = new AlertDialog.Builder(mapActivity);
@@ -883,9 +885,9 @@ public class MapActivityActions implements DialogProvider {
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
 		if (nightMode) {
-			menuItemsListView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_dark));
+			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_dark));
 		} else {
-			menuItemsListView.setBackgroundColor(mapActivity.getResources().getColor(R.color.bg_color_light));
+			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_light));
 		}
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
@@ -896,10 +898,10 @@ public class MapActivityActions implements DialogProvider {
 		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				ContextMenuAdapter.ItemClickListener click =
-						contextMenuAdapter.getClickAdapter(position);
-				if (click.onContextMenuClick(simpleListAdapter,
-						contextMenuAdapter.getElementId(position), position, false)) {
+				ContextMenuItem item = contextMenuAdapter.getItem(position);
+				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
+				if (click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
+						position, false)) {
 					mapActivity.closeDrawer();
 				}
 			}
