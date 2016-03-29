@@ -52,8 +52,8 @@ public class ContextMenuAdapter {
 	}
 
 	@Deprecated
-	public OnContextMenuClick getClickAdapter(int position) {
-		return items.get(position).getCheckBoxListener();
+	public ItemClickListener getClickAdapter(int position) {
+		return items.get(position).getItemClickListener();
 	}
 
 	@Deprecated
@@ -91,6 +91,7 @@ public class ContextMenuAdapter {
 		items.get(position).setDescription(str);
 	}
 
+	@Deprecated
 	public void setSelection(int position, boolean s) {
 		items.get(position).setSelected(s);
 	}
@@ -126,7 +127,7 @@ public class ContextMenuAdapter {
 	}
 
 
-	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
+	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean holoLight) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
@@ -241,7 +242,7 @@ public class ContextMenuAdapter {
 
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							OnContextMenuClick ca = item.getCheckBoxListener();
+							ItemClickListener ca = item.getItemClickListener();
 							item.setSelected(isChecked);
 							if (ca != null) {
 								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked);
@@ -305,22 +306,19 @@ public class ContextMenuAdapter {
 		}
 	}
 
-	public interface OnContextMenuClick {
+	public interface ItemClickListener {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked);
 	}
 
 	public interface OnIntegerValueChangedListener {
 		boolean onIntegerValueChangedListener(int newValue);
 	}
 
-	public static abstract class OnRowItemClick implements OnContextMenuClick {
+	public static abstract class OnRowItemClick implements ItemClickListener {
 
-		public OnRowItemClick() {
-		}
-
-		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+		//boolean return type needed to describe if drawer needed to be close or not
+		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
 			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 			if (btn != null && btn.getVisibility() == View.VISIBLE) {
 				btn.setChecked(!btn.isChecked());

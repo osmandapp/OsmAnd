@@ -29,6 +29,7 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -43,7 +44,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
@@ -951,7 +951,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			this.nightMode = nightMode;
 			applyDayNightMode();
 		}
-		final ArrayAdapter<?> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
+		final ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
 		updateListAdapter(listAdapter, listener);
 	}
@@ -965,7 +965,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			View v = listView.getChildAt(0);
 			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());
 			updateListAdapter();
-			listView.setSelectionFromTop(index, top);
+			((ListView) listView).setSelectionFromTop(index, top);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}
@@ -988,13 +988,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
-															  final ArrayAdapter<?> listAdapter) {
+															  final ArrayAdapter<ContextMenuItem> listAdapter) {
 		return new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
 				ContextMenuItem item = cm.getItem(which);
-				OnContextMenuClick click = item.getCheckBoxListener();
+				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
 				if (click instanceof OnRowItemClick) {
 					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item.getTitleId(), which);
 					if (cl) {

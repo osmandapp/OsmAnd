@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.widget.ArrayAdapter;
 
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -60,9 +59,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			helper.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.version_settings, mapActivity)
 					.setColorIcon(R.drawable.ic_action_gabout_dark)
-					.setListener(new OnContextMenuClick() {
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 							final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
 							mapActivity.startActivityForResult(mapIntent, 0);
 							return true;
