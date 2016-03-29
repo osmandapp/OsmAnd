@@ -143,15 +143,19 @@ public class Renderable {
                 }
             } else if (culler == null || hashZoom != zoom) {
 
-                hashZoom = zoom;
-
                 if (culler != null) {
                     culler.cancel(true);
                 }
 
                 double cullDistance = Math.pow(2.0, base - zoom);
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
-                culled = null;                // use full-resolution until re-cull complete (see [Note 1] below)
+
+                if (hashZoom < zoom) {            // if line would look worse (we're zooming in) then...
+                    culled = null;                // use full-resolution until re-cull complete
+                }
+
+                hashZoom = zoom;
+
                 culler.execute("");
 
                 // The trackBounds may be slightly inaccurate (unlikely, but...) so let's reset it
