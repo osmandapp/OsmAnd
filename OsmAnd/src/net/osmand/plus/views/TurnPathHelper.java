@@ -347,7 +347,7 @@ public class TurnPathHelper {
 				break;
 			case TurnType.TRU:
 			case TurnType.TU:
-				result.resourceId = R.drawable.map_turn_uturn_small;
+				result.resourceId = R.drawable.map_turn_uturn_right_small;
 				break;
 			default:
 				result.resourceId = R.drawable.map_turn_forward_small;
