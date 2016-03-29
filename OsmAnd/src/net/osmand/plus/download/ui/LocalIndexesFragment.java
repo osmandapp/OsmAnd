@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -39,7 +39,7 @@ import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -87,15 +87,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	private boolean selectionMode = false;
 	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<>();
 
-	protected static final int DELETE_OPERATION = 1;
-	protected static final int BACKUP_OPERATION = 2;
-	protected static final int RESTORE_OPERATION = 3;
-
 	private ContextMenuAdapter optionsMenuAdapter;
 	private ActionMode actionMode;
-
-	Drawable sdcard;
-	Drawable planet;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,7 +101,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
 		setListView(listView);
-		colorDrawables();
 		return view;
 	}
 
@@ -126,13 +118,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 		}
 		setHasOptionsMenu(true);
-	}
-
-	private void colorDrawables() {
-		boolean light = getMyApplication().getSettings().isLightContent();
-		sdcard = getActivity().getResources().getDrawable(R.drawable.ic_sdcard);
-		sdcard.mutate();
-		sdcard.setColorFilter(getActivity().getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 	}
 
 	@Override
@@ -180,9 +165,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		builder.setItems(values, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				OnContextMenuClick clk = adapter.getClickAdapter(which);
-				if (clk != null) {
-					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
+				ContextMenuItem item = adapter.getItem(which);
+				if (item.getItemClickListener() != null) {
+					item.getItemClickListener().onContextMenuClick(null,
+							item.getTitleId(), which, false);
 				}
 			}
 
@@ -192,9 +178,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ItemClickListener listener = new ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
 				return performBasicOperation(resId, info);
 			}
 		};
@@ -594,29 +580,30 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		optionsMenuAdapter = new ContextMenuAdapter();
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
+											  int itemId, int pos, boolean isChecked) {
 				localOptionsMenu(itemId);
 				return true;
 			}
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.local_index_mi_reload,getContext())
-				.setIcon(R.drawable.ic_action_refresh_dark)
+				.setTitleId(R.string.local_index_mi_reload, getContext())
+				.setColorIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.shared_string_delete,getContext())
-				.setIcon(R.drawable.ic_action_delete_dark)
+				.setTitleId(R.string.shared_string_delete, getContext())
+				.setColorIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.local_index_mi_backup,getContext())
+				.setTitleId(R.string.local_index_mi_backup, getContext())
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.local_index_mi_restore,getContext())
+				.setTitleId(R.string.local_index_mi_restore, getContext())
 				.setListener(listener)
 				.createItem());
 		// doesn't work correctly
@@ -625,6 +612,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		SubMenu split = null;
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
+			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, j + 1, R.string.shared_string_more_actions);
@@ -632,15 +620,14 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					split.getItem();
 					MenuItemCompat.setShowAsAction(split.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
-				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = split.add(0, contextMenuItem.getTitleId(), j + 1, contextMenuItem.getTitle());
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			} else {
-				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = menu.add(0, contextMenuItem.getTitleId(), j + 1, contextMenuItem.getTitle());
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			}
-			OsmandApplication app = getMyApplication();
-			if (optionsMenuAdapter.getImage(app, j, isLightActionBar()) != null) {
-				item.setIcon(optionsMenuAdapter.getImage(app, j, isLightActionBar()));
+			if (contextMenuItem.getLightIcon() != -1) {
+				item.setIcon(contextMenuItem.getLightIcon());
 			}
 
 		}
@@ -656,8 +643,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getElementId(i)) {
-				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(null, itemId, i, false);
+			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
+			if (itemId == contextMenuItem.getTitleId()) {
+				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false);
 				return true;
 			}
 		}
@@ -809,11 +797,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		public LocalIndexesAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
-			warningColor = ctx.getResources().getColor(R.color.color_warning);
-			okColor = ctx.getResources().getColor(R.color.color_ok);
+			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
+			okColor = ContextCompat.getColor(ctx, R.color.color_ok);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
-			corruptedColor = ctx.getResources().getColor(R.color.color_invalid);
+			corruptedColor = ContextCompat.getColor(ctx, R.color.color_invalid);
 		}
 
 		public void clear() {

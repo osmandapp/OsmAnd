@@ -40,36 +40,15 @@ public class ContextMenuAdapter {
 			R.layout.list_menu_item : R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
-	//neded to detect whether user opened all modes or not
 
 	public int length() {
 		return items.size();
 	}
 
 	@Deprecated
-	public int getElementId(int position) {
-		return items.get(position).getTitleId();
-	}
-
-	@Deprecated
-	public OnContextMenuClick getClickAdapter(int position) {
-		return items.get(position).getCheckBoxListener();
-	}
-
-	@Deprecated
-	public String getItemName(int position) {
-		return items.get(position).getTitle();
-	}
-
-	@Deprecated
-	public Boolean getSelection(int position) {
-		return items.get(position).getSelected();
-	}
-
-	@Deprecated
 	public Drawable getImage(OsmandApplication ctx, int position, boolean light) {
 		@DrawableRes
-		int lst = items.get(position).getIcon();
+		int lst = items.get(position).getLightIcon();
 		if (lst != -1) {
 			return ContextCompat.getDrawable(ctx, lst);
 		}
@@ -79,20 +58,6 @@ public class ContextMenuAdapter {
 			return ctx.getIconsCache().getIcon(lstLight, light);
 		}
 		return null;
-	}
-
-	@Deprecated
-	public void setItemName(int position, String str) {
-		items.get(position).setTitle(str);
-	}
-
-	@Deprecated
-	public void setItemDescription(int position, String str) {
-		items.get(position).setDescription(str);
-	}
-
-	public void setSelection(int position, boolean s) {
-		items.get(position).setSelected(s);
 	}
 
 	// Adapter related
@@ -108,12 +73,12 @@ public class ContextMenuAdapter {
 		items.add(item);
 	}
 
-	public ContextMenuItem getItem(int pos) {
-		return items.get(pos);
+	public ContextMenuItem getItem(int position) {
+		return items.get(position);
 	}
 
-	public void removeItem(int pos) {
-		items.remove(pos);
+	public void removeItem(int position) {
+		items.remove(position);
 	}
 
 	public void setDefaultLayoutId(int defaultLayoutId) {
@@ -126,7 +91,7 @@ public class ContextMenuAdapter {
 	}
 
 
-	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
+	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean holoLight) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
@@ -241,7 +206,7 @@ public class ContextMenuAdapter {
 
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							OnContextMenuClick ca = item.getCheckBoxListener();
+							ItemClickListener ca = item.getItemClickListener();
 							item.setSelected(isChecked);
 							if (ca != null) {
 								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked);
@@ -305,28 +270,25 @@ public class ContextMenuAdapter {
 		}
 	}
 
-	public interface OnContextMenuClick {
+	public interface ItemClickListener {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked);
 	}
 
 	public interface OnIntegerValueChangedListener {
 		boolean onIntegerValueChangedListener(int newValue);
 	}
 
-	public static abstract class OnRowItemClick implements OnContextMenuClick {
+	public static abstract class OnRowItemClick implements ItemClickListener {
 
-		public OnRowItemClick() {
-		}
-
-		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+		//boolean return type needed to describe if drawer needed to be close or not
+		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
 			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 			if (btn != null && btn.getVisibility() == View.VISIBLE) {
 				btn.setChecked(!btn.isChecked());
 				return false;
 			} else {
-				return onContextMenuClick(adapter, itemId, pos, false);
+				return onContextMenuClick(adapter, itemId, position, false);
 			}
 		}
 	}

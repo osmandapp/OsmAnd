@@ -72,7 +72,8 @@ public class RasterMapMenu {
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
+										  View view, int itemId, int pos) {
 				if (itemId == mapTypeString) {
 					if (selected) {
 						plugin.selectMapOverlayLayer(mapActivity.getMapView(), mapTypePreference,
@@ -84,7 +85,7 @@ public class RasterMapMenu {
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<?> adapter,
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
 											  int itemId, int pos, boolean isChecked) {
 				if (itemId == toggleActionStringId) {
 					if (isChecked) {

@@ -836,7 +836,7 @@
     <string name="interrupt_music">Avbryt musikk</string>
     <string name="gpxup_public">Offentlig</string>
     <string name="rendering_attr_appMode_description">Optimaliser kart for</string>
-    <string name="rendering_attr_contourLines_description">Vis fra zoom-nivå (krever kote-data):</string>
+    <string name="rendering_attr_contourLines_description">Vis fra zoom-nivå (krever kotedata):</string>
     <string name="local_index_description">Klikk på et eksisterende element for å se flere detaljer, trykk og hold for å deaktivere eller slette. Gjeldende data på enheten (%1$s ledig):</string>
     <string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
     <string name="arrival_distance_factor_early">Tidlig</string>
@@ -1536,4 +1536,17 @@
     <string name="consider_turning_polygons_off">Det anbefales å slå av opptegning av polygoner.</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="select_month_and_country">Velg måned og land</string>
-    </resources>
+    <string name="storage_directory_readonly_desc">Den valgte datalagringsmappe er skrivebeskyttet. Lagringsmappen har midlertidig skiftet til internminnet. Velg en gyldig lagringsmappe.</string>
+    <string name="shared_string_reverse_order">Snu rekkefølgen</string>
+    <string name="rendering_attr_hideUnderground_name">Skjul objekter som er under bakken</string>
+    <string name="item_removed">Element fjernet</string>
+    <string name="n_items_removed">Elementer fjernet</string>
+    <string name="shared_string_not_selected">Ikke valgt</string>
+    <string name="select_voice_provider">Velg taleveiledning</string>
+    <string name="select_voice_provider_descr">Velg eller last ned taleveiledning for ditt språk</string>
+    <string name="no_address_found">Ingen adresse funnet</string>
+    <string name="shared_string_near">Nær</string>
+    <string name="looking_up_address">Ser etter adresse</string>
+    <string name="cancel_route">Forkast rute</string>
+    <string name="file_name_containes_illegal_char">Filnavn inneholder ulovlig tegn</string>
+</resources>

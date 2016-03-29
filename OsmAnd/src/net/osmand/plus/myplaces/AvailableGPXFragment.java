@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
@@ -35,7 +36,7 @@ import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -96,7 +97,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private boolean showOnMapMode;
 
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(Context activity) {
 		super.onAttach(activity);
 		this.app = (OsmandApplication) getActivity().getApplication();
 		final Collator collator = Collator.getInstance();
@@ -104,7 +105,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		currentRecording = new GpxInfo(getMyApplication().getSavingTrackHelper().getCurrentGpx(), getString(R.string.shared_string_currently_recording_track));
 		currentRecording.currentlyRecordingTrack = true;
 		asyncLoader = new LoadGpxTask();
-		selectedGpxHelper = ((OsmandApplication) activity.getApplication()).getSelectedGpxHelper();
+		selectedGpxHelper = ((OsmandApplication) activity.getApplicationContext()).getSelectedGpxHelper();
 		allGpxAdapter = new GpxIndexesAdapter(getActivity());
 		setAdapter(allGpxAdapter);
 	}
@@ -197,11 +198,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(View v) {
 				if (isRecording) {
 					plugin.stopRecording();
-				} else if(plugin != null){
+				} else
 					if (app.getLocationProvider().checkGPSEnabled(ctx)) {
 						plugin.startGPXMonitoring(ctx);
 					}
-				}
 			}
 		});
 		SavingTrackHelper sth = app.getSavingTrackHelper();
@@ -209,8 +209,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin
-						.getEnabledPlugin(OsmandMonitoringPlugin.class);
 				plugin.saveCurrentTrack();
 			}
 		});
@@ -221,7 +219,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 		save.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_gsave_dark));
 
-		((TextView) v.findViewById(R.id.points_count)).setText(sth.getPoints() + "");
+		((TextView) v.findViewById(R.id.points_count)).setText(String.valueOf(sth.getPoints()));
 		((TextView) v.findViewById(R.id.distance))
 				.setText(OsmAndFormatter.getFormattedDistance(sth.getDistance(), app));
 		v.findViewById(R.id.points_icon).setVisibility(View.VISIBLE);
@@ -327,10 +325,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
 
+		// TODO Rewrite without ContextMenuAdapter
 		optionsMenuAdapter = new ContextMenuAdapter();
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, final int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.local_index_mi_reload) {
 					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());
@@ -350,16 +349,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
-				.setIcon(R.drawable.ic_show_on_map)
+				.setColorIcon(R.drawable.ic_show_on_map)
 				.setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_delete, getActivity())
-				.setIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
+				.setColorIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_reload, getActivity())
-				.setIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
+				.setColorIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			final MenuItem item;
-			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
+			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
+			item = menu.add(0, contextMenuItem.getTitleId(), j + 1, contextMenuItem.getTitle());
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -370,9 +370,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					}
 				});
 			}
-			OsmandApplication app = getMyApplication();
-			if (optionsMenuAdapter.getImage(app, j, isLightActionBar()) != null) {
-				item.setIcon(optionsMenuAdapter.getImage(app, j, isLightActionBar()));
+			if (contextMenuItem.getLightIcon() != -1) {
+				item.setIcon(contextMenuItem.getLightIcon());
 			}
 
 		}
@@ -394,8 +393,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getElementId(i)) {
-				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(null, itemId, i, false);
+			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
+			if (itemId == contextMenuItem.getTitleId()) {
+				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false);
 				return true;
 			}
 		}
@@ -548,7 +548,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private void showGpxOnMap(GpxInfo info) {
 		info.setGpx(GPXUtilities.loadGPXFile(app, info.file));
 		boolean e = true;
-		if (info != null && info.gpx != null) {
+		if (info.gpx != null) {
 			WptPt loc = info.gpx.findPointToShow();
 			OsmandSettings settings = getMyApplication().getSettings();
 			if (loc != null) {
@@ -676,9 +676,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		private SearchFilter filter;
 
 		public GpxIndexesAdapter(Context ctx) {
-			warningColor = ctx.getResources().getColor(R.color.color_warning);
+			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-			defaultColor = ta.getColor(0, ctx.getResources().getColor(R.color.color_unknown));
+			defaultColor = ta.getColor(0, ContextCompat.getColor(ctx, R.color.color_unknown));
 			ta.recycle();
 		}
 
@@ -1133,7 +1133,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				String cs = constraint.toString();
 				List<GpxInfo> res = new ArrayList<>();
 				for (GpxInfo r : raw) {
-					if (r.getName().toLowerCase().indexOf(cs) != -1) {
+					if (r.getName().toLowerCase().contains(cs)) {
 						res.add(r);
 					}
 				}
