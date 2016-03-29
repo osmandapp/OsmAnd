@@ -104,7 +104,7 @@ public class ConfigureMapMenu {
 			if (itemId == R.string.layer_poi) {
 				selectPOILayer(ma.getMyApplication().getSettings());
 				return false;
-			} else if (itemId == R.string.layer_gpx_layer && cm.getSelection(pos)) {
+			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
 				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
 				return false;
 			} else {
@@ -134,7 +134,7 @@ public class ConfigureMapMenu {
 						public void onDismiss(DialogInterface dialog) {
 							boolean areAnyGpxTracksVisible =
 									ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles();
-							cm.setSelection(pos, areAnyGpxTracksVisible);
+							cm.getItem(pos).setSelected(areAnyGpxTracksVisible);
 							adapter.notifyDataSetChanged();
 						}
 					});
@@ -266,7 +266,7 @@ public class ConfigureMapMenu {
 								} else {
 									AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 								}
-								adapter.setItemDescription(pos, getRenderDescr(activity));
+								adapter.getItem(pos).setDescription(getRenderDescr(activity));
 								activity.getDashboard().refreshContent(true);
 								dialog.dismiss();
 							}
@@ -299,7 +299,7 @@ public class ConfigureMapMenu {
 								refreshMapComplete(activity);
 								dialog.dismiss();
 								activity.getDashboard().refreshContent(true);
-								//adapter.setItemDescription(pos, getDayNightDescr(activity));
+								//adapter.getItem(pos).setDescription(s, getDayNightDescr(activity));
 								//ad.notifyDataSetInvalidated();
 							}
 						});
@@ -350,7 +350,7 @@ public class ConfigureMapMenu {
 										if (mapContext != null) {
 											mapContext.updateMapSettings();
 										}
-										adapter.setItemDescription(pos, String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %");
+										adapter.getItem(pos).setDescription(String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %");
 										ad.notifyDataSetInvalidated();
 										dialog.dismiss();
 									}
@@ -385,7 +385,7 @@ public class ConfigureMapMenu {
 							public void onClick(DialogInterface dialog, int which) {
 								view.getSettings().TEXT_SCALE.set(txtValues[which]);
 								refreshMapComplete(activity);
-								adapter.setItemDescription(pos, getScale(activity));
+								adapter.getItem(pos).setDescription(getScale(activity));
 								ad.notifyDataSetInvalidated();
 								dialog.dismiss();
 							}
@@ -418,7 +418,7 @@ public class ConfigureMapMenu {
 							public void onClick(DialogInterface dialog, int which) {
 								view.getSettings().MAP_PREFERRED_LOCALE.set(txtIds[which]);
 								refreshMapComplete(activity);
-								adapter.setItemDescription(pos, txtIds[which]);
+								adapter.getItem(pos).setDescription(txtIds[which]);
 								ad.notifyDataSetInvalidated();
 								dialog.dismiss();
 							}
@@ -579,7 +579,7 @@ public class ConfigureMapMenu {
 				for (int i = 0; i < prefs.size(); i++) {
 					prefs.get(i).set(tempPrefs[i]);
 				}
-				adapter.setItemDescription(pos, getDescription(prefs));
+				adapter.getItem(pos).setDescription(getDescription(prefs));
 				a.notifyDataSetInvalidated();
 				refreshMapComplete(activity);
 				activity.getMapLayers().updateLayers(activity.getMapView());
@@ -680,7 +680,7 @@ public class ConfigureMapMenu {
 									pref.set(p.getPossibleValues()[which - 1]);
 								}
 								refreshMapComplete(activity);
-								adapter.setItemDescription(pos, SettingsActivity.getStringPropertyValue(activity, pref.get()));
+								adapter.getItem(pos).setDescription(SettingsActivity.getStringPropertyValue(activity, pref.get()));
 								dialog.dismiss();
 								ad.notifyDataSetInvalidated();
 							}

@@ -302,7 +302,7 @@ public class MapWidgetRegistry {
 									}
 									map.refreshMap();
 									dialog.dismiss();
-									cm.setItemDescription(pos, settings.MAP_MARKERS_MODE.get().toHumanString(map));
+									cm.getItem(pos).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
 									ad.notifyDataSetChanged();
 								}
 							});
