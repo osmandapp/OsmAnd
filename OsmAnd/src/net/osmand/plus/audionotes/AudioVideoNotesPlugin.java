@@ -583,7 +583,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_recordings) {
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 					updateLayers(mapView, mapActivity);
@@ -609,7 +609,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						recordAudio(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -621,7 +621,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setListener(new ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						recordVideo(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -632,7 +632,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setColorIcon(R.drawable.ic_action_photo_dark)
 				.setListener(new ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						takePhoto(latitude, longitude, mapActivity, false);
 						return true;
 					}

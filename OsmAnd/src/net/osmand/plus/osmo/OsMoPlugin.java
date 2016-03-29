@@ -278,7 +278,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 				.setColorIcon(R.drawable.ic_osmo_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						Intent intent = new Intent(mapActivity, OsMoGroupsActivity.class);
 						mapActivity.startActivity(intent);
 						return true;

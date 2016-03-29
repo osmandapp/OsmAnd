@@ -136,7 +136,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (menu.hasHiddenBottomInfo()) {
 			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.shared_string_show_description) {
 						menu.openMenuFullScreen();
 					}

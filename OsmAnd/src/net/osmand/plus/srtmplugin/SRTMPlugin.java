@@ -107,7 +107,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ItemClickListener listener = new ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_hillshade) {
 					HILLSHADE.set(!HILLSHADE.get());
 					updateLayers(mapView, mapActivity);

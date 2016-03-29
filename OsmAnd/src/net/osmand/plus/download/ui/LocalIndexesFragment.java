@@ -194,7 +194,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		ItemClickListener listener = new ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
 				return performBasicOperation(resId, info);
 			}
 		};
@@ -596,7 +596,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		optionsMenuAdapter = new ContextMenuAdapter();
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				localOptionsMenu(itemId);
 				return true;
 			}

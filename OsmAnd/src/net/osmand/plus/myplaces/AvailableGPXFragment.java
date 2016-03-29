@@ -330,7 +330,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter();
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, final int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.local_index_mi_reload) {
 					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());

@@ -951,7 +951,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			this.nightMode = nightMode;
 			applyDayNightMode();
 		}
-		final ArrayAdapter<?> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
+		final ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
 		updateListAdapter(listAdapter, listener);
 	}
@@ -988,7 +988,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
-															  final ArrayAdapter<?> listAdapter) {
+															  final ArrayAdapter<ContextMenuItem> listAdapter) {
 		return new AdapterView.OnItemClickListener() {
 
 			@Override

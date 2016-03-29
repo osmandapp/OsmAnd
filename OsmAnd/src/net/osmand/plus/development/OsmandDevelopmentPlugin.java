@@ -61,7 +61,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 					.setColorIcon(R.drawable.ic_action_gabout_dark)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 							final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
 							mapActivity.startActivityForResult(mapIntent, 0);
 							return true;

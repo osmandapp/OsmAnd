@@ -131,7 +131,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			ContextMenuAdapter adapter, Object selectedObj) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_add_waypoint) {
 					mapActivity.getContextMenu().addWptPt();
 				} else if (resId == R.string.context_menu_item_edit_waypoint) {

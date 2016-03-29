@@ -127,7 +127,7 @@ public class ContextMenuAdapter {
 	}
 
 
-	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
+	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean holoLight) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
@@ -308,7 +308,7 @@ public class ContextMenuAdapter {
 
 	public interface ItemClickListener {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked);
 	}
 
 	public interface OnIntegerValueChangedListener {
@@ -318,7 +318,7 @@ public class ContextMenuAdapter {
 	public static abstract class OnRowItemClick implements ItemClickListener {
 
 		//boolean return type needed to describe if drawer needed to be close or not
-		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
 			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 			if (btn != null && btn.getVisibility() == View.VISIBLE) {
 				btn.setChecked(!btn.isChecked());

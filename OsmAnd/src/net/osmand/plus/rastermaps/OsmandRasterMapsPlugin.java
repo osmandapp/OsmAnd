@@ -238,7 +238,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final MapActivityLayers layers = mapActivity.getMapLayers();
 		ContextMenuAdapter.ItemClickListener listener = new ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				if (itemId == R.string.layer_map) {
 					layers.selectMapLayer(mapView);
@@ -281,7 +281,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
 			ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
 					if (resId == R.string.context_menu_item_update_map) {
 						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
 					} else if (resId == R.string.shared_string_download_map) {
