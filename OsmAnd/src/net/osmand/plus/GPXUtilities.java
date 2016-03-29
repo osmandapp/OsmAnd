@@ -207,54 +207,16 @@ public class GPXUtilities {
 			return convert(splitSegments);
 		}
 
-
-		// Track segments are drawn by 'Renderable' objects. A segment can have zero or more renderables,
-		// each of which performs its own point-culling/reduction and display drawing. There are a selction
-		// of renderable types, as defiend in Renderable.RenderType.  To use, call this function to create
-		// a new renderable type, and then attach it to your displayable object in a list or similar.
-
-		// The two parameters' maning varies based upon the type of renderable - see the parameters' usage
-		// in each derived renderable class.
-
-/*		public Renderable.RenderableSegment addRenderable(OsmandMapTileView view, Renderable.RenderType type,
-														  double param1, double param2) {
-			Renderable.RenderableSegment rs = null;
-			switch (type) {
-				case ORIGINAL: 	// a Ramer-Douglas-Peucer line reduction draw
-					rs = new Renderable.RenderableSegment(type, points, param1, param2);
-					break;
-				case DISTANCE_MARKERS:	// a resample every N metres draw
-					rs = new Renderable.DistanceMarker(type, points, param1, param2);
-					break;
-				case CONVEYOR:	// an animating segment draw
-					rs = new Renderable.Conveyor(type, points, param1, param2);
-					Renderable.startScreenRefresh(view, (long) param2);
-					break;
-				case ALTITUDE:	// a colour-banded altitude draw
-					rs = new Renderable.AltitudeColours(type, points, param1, param2);
-					break;
-				case SPEED:		// a colour-banded speed draw
-					rs = new Renderable.SpeedColours(type, points, param1, param2);
-					break;
-
-				default:
-					break;
+		public void recalculateRenderScales(double zoom) {
+			for (Renderable.RenderableSegment rs : renders) {
+				rs.recalculateRenderScale(zoom);
 			}
-			if (rs != null)
-				renders.add(rs);
-			return rs;
-		}
-
-*/
-
-		public void recalculateRenderScales(OsmandMapTileView view) {
-			for (Renderable.RenderableSegment rs : renders)
-				rs.recalculateRenderScale(view);
 		}
 
 		public void drawRenderers(Paint p, Canvas c, RotatedTileBox tb) {
-			for (Renderable.RenderableSegment rs : renders)
+			for (Renderable.RenderableSegment rs : renders) {
 				rs.drawSingleSegment(p, c, tb);
+			}
 		}
 
 

@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import android.os.AsyncTask;
 
 import net.osmand.plus.GPXUtilities;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -20,28 +21,10 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     @Override protected void onPostExecute(String result) {
         // executes on the UI thread so it's OK to change its variables
-        if (rs != null && result.equals("OK") && !isCancelled())
+        if (rs != null && result.equals("OK") && !isCancelled()) {
             rs.setRDP(culled);
-    }
-
-    protected int getRainbowColour(double percent) {
-
-        // Given an input percentage (0.0-1.0) this will produce a colour from a "wide rainbow"
-        // from purple (low) to red(high).  This is useful for producing value-based colourations (e.g., altitude)
-
-        double a = (1. - percent) * 5.;
-        int X = (int)Math.floor(a);
-        int Y = (int)(Math.floor(255 * (a - X)));
-        switch (X) {
-            case 0: return 0xFFFF0000 + (Y<<8);
-            case 1: return 0xFF00FF00 + ((255-Y)<<16);
-            case 2: return 0xFF00FF00 + Y;
-            case 3: return 0xFF0000FF + ((255-Y)<<8);
-            case 4: return 0xFF0000FF + (Y << 16);
         }
-        return 0xFFFF00FF;
     }
-
 
     // Resample a list of points into a new list of points.
     // The new list is evenly-spaced (dist) and contains the first and last point from the original list.
@@ -52,18 +35,19 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     protected List<GPXUtilities.WptPt> resampleTrack(List<GPXUtilities.WptPt> pts, double dist) {
 
-        ArrayList<GPXUtilities.WptPt> newPts = new ArrayList<GPXUtilities.WptPt>();
+        ArrayList<GPXUtilities.WptPt> newPts = new ArrayList<>();
 
         int ptCt = pts.size();
-        if (pts != null && ptCt > 0) {
+        if (ptCt > 0) {
 
             GPXUtilities.WptPt lastPt = pts.get(0);
             double segSub = 0;
             double cumDist = 0;
             for (int i = 1; i < ptCt; i++) {
 
-                if (isCancelled())
+                if (isCancelled()) {
                     return null;
+                }
 
                 GPXUtilities.WptPt pt = pts.get(i);
                 double segLength = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(), lastPt.getLatitude(), lastPt.getLongitude());
@@ -116,7 +100,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             culled = resampleTrack(rs.getPoints(), segmentSize);
             if (!isCancelled()) {
 
-                int halfC = getRainbowColour(0.5);                             // default coloration if no elevations found
+                int halfC = Algorithms.getRainbowColor(0.5);
 
                 // Calculate the absolutes of the altitude variations
                 Double max = Double.NEGATIVE_INFINITY;
@@ -124,13 +108,13 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 for (GPXUtilities.WptPt pt : culled) {
                     max = Math.max(max, pt.ele);
                     min = Math.min(min, pt.ele);
-                    pt.colourARGB = halfC;
+                    pt.colourARGB = halfC;                  // default, in case there are no 'ele' in GPX
                 }
 
                 Double elevationRange = max - min;
                 if (elevationRange > 0)
                     for (GPXUtilities.WptPt pt : culled)
-                        pt.colourARGB = getRainbowColour((pt.ele - min) / elevationRange);
+                        pt.colourARGB = Algorithms.getRainbowColor((pt.ele - min) / elevationRange);
             }
 
             return isCancelled() ? "" : "OK";
@@ -163,13 +147,16 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 for (int i = 1; i < points.size(); i++) {
                     GPXUtilities.WptPt pt = points.get(i);
                     double delta = pt.time - lastPt.time;
-                    if (delta > 0)
+                    if (delta > 0) {
                         pt.speed = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(),
                                 lastPt.getLatitude(), lastPt.getLongitude()) / delta;
-                    else
+                    } else {
                         pt.speed = 0;        // GPX doesn't have time - this is OK, colour will be mid-range for whole track
+                    }
                     lastPt = pt;
                 }
+
+                int halfC = Algorithms.getRainbowColor(0.5);
 
                 // Calculate the absolutes of the speed variations
                 Double max = Double.NEGATIVE_INFINITY;
@@ -177,14 +164,14 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 for (GPXUtilities.WptPt pt : points) {
                     max = Math.max(max, pt.speed);
                     min = Math.min(min, pt.speed);
-                    pt.colourARGB = getRainbowColour(0.5);
+                    pt.colourARGB = halfC;                  // default, in case there are no 'time' in GPX
                 }
-                Double range = max - min;
-                if (range > 0)
+                Double speedRange = max - min;
+                if (speedRange > 0) {
                     for (GPXUtilities.WptPt pt : points)
-                        pt.colourARGB = getRainbowColour((pt.speed - min) / range);
+                        pt.colourARGB = Algorithms.getRainbowColor((pt.speed - min) / speedRange);
+                }
             }
-
             return isCancelled() ? "" : "OK";
         }
     }
@@ -221,9 +208,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
         @Override protected String doInBackground(String... params) {
 
-            // Reduce the point-count of the GPX track. The concept is that at arbitrary scales, some points are superfluous.
-            // This is handled using the well-known 'Ramer-Douglas-Peucker' algorithm. This code is modified from the similar code elsewhere
-            // but optimised for this specific usage.
+            // Reduce the point-count of the GPX track using Ramer-Douglas-Peucker algorithm.
 
             points = rs.getPoints();
             culled = new ArrayList<>();
@@ -235,8 +220,9 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 if (!isCancelled()) {
                     survivor[0] = true;
                     for (int i = 0; i < survivor.length; i++)
-                        if (survivor[i])
+                        if (survivor[i]) {
                             culled.add(points.get(i));
+                        }
                 }
             }
             return isCancelled() ? "" : "OK";
@@ -248,8 +234,9 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             int index = -1;
             for (int i = start + 1; i < end; i++) {
 
-                if (isCancelled())
+                if (isCancelled()) {
                     return;
+                }
 
                 double d = MapUtils.getOrthogonalDistance(
                         points.get(i).getLatitude(), points.get(i).getLongitude(),

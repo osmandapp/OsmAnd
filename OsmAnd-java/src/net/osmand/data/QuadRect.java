@@ -41,6 +41,10 @@ public class QuadRect {
 		return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
 	}
 
+	public static boolean trivialOverlap(QuadRect a, QuadRect b) {
+		return !((a.right < b.left) || (a.left > b.right) || (a.top < b.bottom) || (a.bottom > b.top));
+	}
+
 	public double centerX() {
 		return (left + right) / 2;
 	}
