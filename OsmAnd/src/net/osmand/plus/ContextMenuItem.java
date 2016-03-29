@@ -5,7 +5,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.widget.CompoundButton;
 
 public class ContextMenuItem {
 	@StringRes
@@ -26,7 +25,6 @@ public class ContextMenuItem {
 	private final int pos;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
-	private final CompoundButton.OnCheckedChangeListener checkboxListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 
 	private ContextMenuItem(int titleId, String title, int icon, int lightIcon,
@@ -34,7 +32,6 @@ public class ContextMenuItem {
 							int layout, boolean loading, boolean category,
 							int pos, String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
-							CompoundButton.OnCheckedChangeListener checkboxListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
 		this.titleId = titleId;
 		this.title = title;
@@ -49,7 +46,6 @@ public class ContextMenuItem {
 		this.pos = pos;
 		this.description = description;
 		this.itemClickListener = itemClickListener;
-		this.checkboxListener = checkboxListener;
 		this.integerListener = integerListener;
 	}
 
@@ -147,7 +143,6 @@ public class ContextMenuItem {
 		private int mPos = -1;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
-		private CompoundButton.OnCheckedChangeListener mCheckboxListener;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 
 		public ItemBuilder setTitleId(int titleId, @Nullable Context context) {
@@ -219,10 +214,6 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public void setCheckboxListener(CompoundButton.OnCheckedChangeListener checkboxListener) {
-			mCheckboxListener = checkboxListener;
-		}
-
 		public ItemBuilder setIntegerListener(ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
 			mIntegerListener = integerListener;
 			return this;
@@ -231,7 +222,7 @@ public class ContextMenuItem {
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mLightIcon, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mCat, mPos, mDescription,
-					mItemClickListener, mCheckboxListener, mIntegerListener);
+					mItemClickListener, mIntegerListener);
 		}
 	}
 }
