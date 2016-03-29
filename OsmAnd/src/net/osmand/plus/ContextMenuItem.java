@@ -57,6 +57,7 @@ public class ContextMenuItem {
 		return title;
 	}
 
+	@Deprecated
 	public int getIcon() {
 		return icon;
 	}
@@ -159,6 +160,7 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		@Deprecated
 		public ItemBuilder setIcon(int icon) {
 			mIcon = icon;
 			return this;
