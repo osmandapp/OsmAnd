@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?attr/bg_color"
-              android:minHeight="54dp"
+              android:minHeight="60dp"
               android:orientation="horizontal"
               android:paddingLeft="16dp"
               android:paddingRight="16dp">
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="16dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         tools:src="@drawable/ic_action_gabout_dark"/>
 
