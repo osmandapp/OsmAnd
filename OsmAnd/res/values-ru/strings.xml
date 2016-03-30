@@ -490,12 +490,12 @@
     <string name="unzipping_file">Файл распаковывается…</string>
     <string name="route_tr">Поверните направо и двигайтесь</string>
     <string name="route_tshr">Поверните резко направо и двигайтесь</string>
-    <string name="route_tslr">Поверните направо и двигайтесь</string>
+    <string name="route_tslr">Поверните плавно направо и двигайтесь</string>
     <string name="route_tl">Поверните налево и двигайтесь</string>
     <string name="route_tshl">Поверните резко налево и двигайтесь</string>
-    <string name="route_tsll">Поверните налево и двигайтесь</string>
+    <string name="route_tsll">Поверните плавно налево и двигайтесь</string>
     <string name="route_tu">Выполните разворот и двигайтесь</string>
-    <string name="route_head">Двигайтесь</string>
+    <string name="route_head">Двигайтесь прямо</string>
     <string name="first_time_continue">Продолжить</string>
     <string name="first_time_download">Загрузить детальные карты регионов</string>
     <string name="search_poi_location">Поиск сигнала…</string>
