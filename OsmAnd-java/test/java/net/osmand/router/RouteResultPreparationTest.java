@@ -64,7 +64,7 @@ public class RouteResultPreparationTest {
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() throws IOException {
 
-        String fileName = "test_turn_lanes.json";
+        String fileName = "test/resources/test_turn_lanes.json";
 
         Reader reader = new FileReader(fileName);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -101,8 +101,6 @@ public class RouteResultPreparationTest {
                     String expectedResult = expectedResults.get(segmentId);
                     if (expectedResult != null) {
                         Assert.assertEquals("Segment " + segmentId, expectedResult, lanes);
-                    } else {
-                        //TODO: action if needed when expectedResults is null
                     }
 
                     System.out.println("segmentId: " + segmentId + " description: " + name);
@@ -125,7 +123,6 @@ public class RouteResultPreparationTest {
 
 
     private String getLanesString(RouteSegmentResult segment) {
-        String turn = segment.getTurnType().toString();
         final int[] lns = segment.getTurnType().getLanes();
         if (lns != null) {
             String s = "";
@@ -152,7 +149,6 @@ public class RouteResultPreparationTest {
 
             }
             s += "";
-            turn += s;
             return s;
         }
         return null;

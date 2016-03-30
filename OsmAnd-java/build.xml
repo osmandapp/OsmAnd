@@ -15,7 +15,7 @@
 	<property name="test.lib.dir" value="test-libs" />
 	<property name="test.lib.absolute.dir" location="${test.lib.dir}" />
 	<property name="reports.tests" value="${basedir}/test-results" />
-
+	<property name="srctests.dir" value="test/java"/>
 	<property name="java.encoding" value="UTF-8" />
 
 	<path id="build.path">
