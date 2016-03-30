@@ -65,7 +65,7 @@ public class CurrentPositionHelper {
 	private boolean scheduleRouteSegmentFind(final Location loc, final boolean storeFound, final ResultMatcher<GeocodingResult> geoCoding, final ResultMatcher<RouteDataObject> result) {
 		boolean res = false;
 		if (loc != null) {
-			Runnable run = new Runnable() {
+			new Thread(new Runnable() {
 				@Override
 				public void run() {
 					try {
@@ -88,8 +88,8 @@ public class CurrentPositionHelper {
 						e.printStackTrace();
 					}
 				}
-			};
-			res = app.getRoutingHelper().startTaskInRouteThreadIfPossible(run);
+			}, "Geocoding...").start();
+			res = true;
 		}
 		return res;
 	}
