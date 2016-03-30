@@ -110,7 +110,8 @@ public class Renderable {
     }
     //----------------------------------------------------------------------------------------------
 
-    public static class StandardTrack extends RenderableSegment {
+    @Deprecated public static class StandardTrack extends RenderableSegment {
+        // use SimpleTrack instead
 
         double base;     // parameter for calculating Ramer-Douglas-Peucer distance
 
@@ -169,7 +170,7 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            List<GPXUtilities.WptPt> pts = culled == null? points: culled;			// [Note 1]: use culled points preferentially
+            List<GPXUtilities.WptPt> pts = culled == null? points: culled;			// use culled points preferentially
 
             QuadRect latLonBounds = tileBox.getLatLonBounds();
             if (!QuadRect.trivialOverlap(latLonBounds, trackBounds)) {
@@ -293,7 +294,7 @@ public class Renderable {
             this.alpha = alpha;
             alphaPaint = new Paint();
             alphaPaint.setStrokeCap(Paint.Cap.ROUND);
-            colorBandWidth = 16f;
+            colorBandWidth = 32f;
         }
 
         @Override public void recalculateRenderScale(double zoom) {
@@ -316,22 +317,28 @@ public class Renderable {
 
                 alphaPaint.setAlpha(255);
 
-                float stroke = (p.getStrokeWidth() + 16)/2;
+                float stroke = (p.getStrokeWidth() + colorBandWidth)/2;
                 alphaPaint.setStrokeWidth(stroke*2);  // colorBandWidth
 
-                float lastx = Float.NEGATIVE_INFINITY;
-                float lasty = 0;
+                float clipL = -stroke;
+                float clipB = -stroke;
+                float clipT = canvas.getHeight() + stroke;
+                float clipR = canvas.getWidth() + stroke;
 
-                for (GPXUtilities.WptPt pt : culled) {
+                GPXUtilities.WptPt pt = culled.get(0);
+                float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+
+                for (int i = 1; i < culled.size(); i++) {
+                    pt = culled.get(i);
+
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                     float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                    if (lastx != Float.NEGATIVE_INFINITY) {
-                        if (Math.min(x,lastx)<canvas.getWidth()+stroke && Math.max(x,lastx) > 0-stroke
-                                && Math.min(y,lasty) < canvas.getHeight()+stroke && Math.max(y,lasty) > 0-stroke) {
-                            alphaPaint.setColor(pt.colourARGB);
-                            canvas2.drawLine(lastx, lasty, x, y, alphaPaint);
-                        }
+                    if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
+                            && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
+                        alphaPaint.setColor(pt.colourARGB);
+                        canvas2.drawLine(lastx, lasty, x, y, alphaPaint);
                     }
                     lastx = x;
                     lasty = y;
@@ -398,48 +405,37 @@ public class Renderable {
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
                 int pCol = p.getColor();
-                float pSw = p.getStrokeWidth();
+                float stroke = p.getStrokeWidth()/2f;
+                p.setColor(getComplementaryColor(p.getColor()));
 
-                //p.setStrokeWidth(pSw * 2f);                         // use a thicker line
-                p.setColor(getComplementaryColor(p.getColor()));    // and a complementary colour
+                float clipL = -stroke;
+                float clipB = -stroke;
+                float clipT = canvas.getHeight() + stroke;
+                float clipR = canvas.getWidth() + stroke;
 
-                float lastx = Float.NEGATIVE_INFINITY;
-                float lasty = Float.NEGATIVE_INFINITY;
-                Path path = new Path();
+                GPXUtilities.WptPt pt = culled.get(0);
+                float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                int h = tileBox.getPixHeight();
-                int w = tileBox.getPixWidth();
-                boolean broken = true;
-                int intp = conveyor;                                // the segment cycler
-                for (GPXUtilities.WptPt pt : culled) {
-                    intp--;                                         // increment to go the other way!
+                int intp = conveyor;
+                for (int i = 1; i < culled.size(); i++, intp--) {
+
+                    pt = culled.get(i);
+                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
                     if ((intp & 7) < 3) {
-
-                        float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
-                        float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
-
-                        if ((isIn(x, y, w, h) || isIn(lastx, lasty, w, h))) {
-                            if (broken) {
-                                path.moveTo(x, y);
-                                broken = false;
-                            } else {
-                                path.lineTo(x, y);
-                            }
-                            lastx = x;
-                            lasty = y;
-                        } else {
-                            broken = true;
+                        if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
+                                && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
+                            canvas.drawLine(lastx, lasty, x, y, p);
                         }
-                    } else {
-                        broken = true;
                     }
+                    lastx = x;
+                    lasty = y;
                 }
-
-                canvas.drawPath(path, p);
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                p.setStrokeWidth(pSw);
+                p.setStrokeWidth(stroke*2f);
                 p.setColor(pCol);
             }
         }
@@ -494,23 +490,24 @@ public class Renderable {
                 float viewScale = view.getScaleCoefficient()/4.0f;       // now "1" for emulator sizing
                 float density = view.getDensity();
                 float ds = 160 / viewScale;      // "10pt"
-                float sw = p.getStrokeWidth();
+                float stroke = p.getStrokeWidth();
 
-
-                int w = tileBox.getPixWidth();
-                int h = tileBox.getPixHeight();
+                float clipL = -stroke / 2f;
+                float clipB = -stroke / 2f;
+                float clipT = canvas.getHeight() + stroke / 2f;
+                float clipR = canvas.getWidth() + stroke / 2f;
 
                 for (GPXUtilities.WptPt pt : culled) {
 
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                     float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                    if (isIn(x, y, w, h)) {
+                    if (x < clipR && x > clipL && y < clipT && y > clipB) {
 
                         px.setColor(0xFF000000);
-                        px.setStrokeWidth(sw + 4);
+                        px.setStrokeWidth(stroke + 4);
                         canvas.drawPoint(x, y, px);
-                        px.setStrokeWidth(sw+2);
+                        px.setStrokeWidth(stroke+2);
                         px.setColor(0xFFFFFFFF);
                         canvas.drawPoint(x, y, px);
 
@@ -633,5 +630,90 @@ public class Renderable {
             }
         }
     }
+
+    //----------------------------------------------------------------------------------------------
+
+    public static class SimpleTrack extends RenderableSegment {
+
+        double base;     // parameter for calculating Ramer-Douglas-Peucer distance
+
+        public SimpleTrack(List<GPXUtilities.WptPt> pt, double base) {
+            super(pt);
+            this.base = base;
+        }
+
+        @Override public void recalculateRenderScale(double zoom) {
+
+            // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
+            // The asynchronous callback will set the variable, and that is preferentially used for rendering
+
+            double hashCode = points.hashCode() ;
+
+            if (hashPoint != hashCode) {            // current track, changing?
+                if (culler != null) {
+                    culler.cancel(true);            // STOP culling a track with changing points
+                    culled =  null;                 // and force use of original track
+                }
+            } else if (culler == null || hashZoom != zoom) {
+
+                if (culler != null) {
+                    culler.cancel(true);
+                }
+
+                double cullDistance = Math.pow(2.0, base - zoom);
+                culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
+
+                if (hashZoom < zoom) {            // if line would look worse (we're zooming in) then...
+                    culled = null;                // use full-resolution until re-cull complete
+                }
+
+                hashZoom = zoom;
+
+                culler.execute("");
+
+                // The trackBounds may be slightly inaccurate (unlikely, but...) so let's reset it
+                //trackBounds.left = trackBounds.bottom = Double.POSITIVE_INFINITY;
+                //trackBounds.right = trackBounds.bottom = Double.NEGATIVE_INFINITY;
+            }
+        }
+
+        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+
+            List<GPXUtilities.WptPt> pts = culled == null? points: culled;			// use culled points preferentially
+            if (pts != null && !pts.isEmpty()
+                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+
+                canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
+                float stroke = p.getStrokeWidth()/2;
+
+                float clipL = -stroke;
+                float clipB = -stroke;
+                float clipT = canvas.getHeight() + stroke;
+                float clipR = canvas.getWidth() + stroke;
+
+                GPXUtilities.WptPt pt = pts.get(0);
+                float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+
+                int size = pts.size();
+                for (int i = 1; i < size; i++) {
+                    pt = pts.get(i);
+
+                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+
+                    if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
+                            && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
+                        canvas.drawLine(lastx, lasty, x, y, p);
+                    }
+                    lastx = x;
+                    lasty = y;
+                }
+                canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            }
+        }
+    }
+
 
 }

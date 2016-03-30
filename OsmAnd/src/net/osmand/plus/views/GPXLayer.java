@@ -327,17 +327,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
 
-				if (ts.renders.size()==0				// only do once (CODE HERE NEEDS TO BE UI INSTEAD)
-						&& !ts.points.isEmpty())		// hmmm. 0-point tracks happen, but.... how?
-				{
+				if (ts.renders.isEmpty()				// only do once (CODE HERE NEEDS TO BE UI INSTEAD)
+						&& !ts.points.isEmpty()) {		// hmmm. 0-point tracks happen, but.... how?
 
-					//ts.renders.add(new Renderable.Altitude(ts.points, 50, 128));
-					ts.renders.add(new Renderable.StandardTrack(ts.points, 17));
+					//ts.renders.add(new Renderable.StandardTrack(ts.points, 17));		DEPRECATED
+					ts.renders.add(new Renderable.SimpleTrack(ts.points, 18));
+					ts.renders.add(new Renderable.Altitude(ts.points, 10, 180));
 
 					// TODO : enable these to see how the experimental conveyor, altitude, speed, waypoint renders work
 
 					//ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
-					//ts.renders.add(new Renderable.DistanceMarker(ts.points, view, 1000));
+					ts.renders.add(new Renderable.DistanceMarker(ts.points, view, 1000));
 					//ts.renders.add(new Renderable.Speed(ts.points, 50, 128));
 					//ts.renders.add(new Renderable.Arrows(ts.points,view,10,250));
 				}
