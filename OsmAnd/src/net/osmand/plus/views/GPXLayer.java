@@ -330,8 +330,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				if (ts.renders.isEmpty()				// only do once (CODE HERE NEEDS TO BE UI INSTEAD)
 						&& !ts.points.isEmpty()) {		// hmmm. 0-point tracks happen, but.... how?
 
-					//ts.renders.add(new Renderable.StandardTrack(ts.points, 17));		DEPRECATED
-					ts.renders.add(new Renderable.SimpleTrack(ts.points, 18));
+					ts.renders.add(new Renderable.StandardTrack(ts.points, 18));
 					ts.renders.add(new Renderable.Altitude(ts.points, 10, 180));
 
 					// TODO : enable these to see how the experimental conveyor, altitude, speed, waypoint renders work
