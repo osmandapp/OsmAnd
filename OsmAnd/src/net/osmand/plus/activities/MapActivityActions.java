@@ -283,15 +283,15 @@ public class MapActivityActions implements DialogProvider {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter() : iadapter;
 		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
 		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_search, mapActivity)
-				.setColorIcon(R.drawable.ic_action_search_dark).createItem());
+				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-					.setColorIcon(R.drawable.ic_action_gdirections_dark).createItem());
+					.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
 		}
 		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null &&
 				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
 			adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_last_intermediate_point, mapActivity)
-					.setColorIcon(R.drawable.ic_action_intermediate).createItem());
+					.setIcon(R.drawable.ic_action_intermediate).createItem());
 		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
@@ -599,7 +599,7 @@ public class MapActivityActions implements DialogProvider {
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter();
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.home, mapActivity)
-				.setColorIcon(R.drawable.map_dashboard)
+				.setIcon(R.drawable.map_dashboard)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -611,7 +611,7 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 		if (settings.USE_MAP_MARKERS.get()) {
 			optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, mapActivity)
-					.setColorIcon(R.drawable.ic_action_flag_dark)
+					.setIcon(R.drawable.ic_action_flag_dark)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -622,7 +622,7 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		} else {
 			optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.waypoints, mapActivity)
-					.setColorIcon(R.drawable.ic_action_intermediate)
+					.setIcon(R.drawable.ic_action_intermediate)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -633,7 +633,7 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
-				.setColorIcon(R.drawable.ic_action_gdirections_dark)
+				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -652,7 +652,7 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites)
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.search_button, mapActivity)
-				.setColorIcon(R.drawable.ic_action_search_dark)
+				.setIcon(R.drawable.ic_action_search_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -671,7 +671,7 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_my_places, mapActivity)
-				.setColorIcon(R.drawable.ic_action_fav_dark)
+				.setIcon(R.drawable.ic_action_fav_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -685,7 +685,7 @@ public class MapActivityActions implements DialogProvider {
 
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.show_point_options, mapActivity)
-				.setColorIcon(R.drawable.ic_action_marker_dark)
+				.setIcon(R.drawable.ic_action_marker_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -696,7 +696,7 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
-				.setColorIcon(R.drawable.ic_action_layers_dark)
+				.setIcon(R.drawable.ic_action_layers_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -707,7 +707,7 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_map_appearance, mapActivity)
-				.setColorIcon(R.drawable.ic_configure_screen_dark)
+				.setIcon(R.drawable.ic_configure_screen_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -725,7 +725,7 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.index_settings, null)
-				.setTitle(d).setColorIcon(R.drawable.ic_type_archive)
+				.setTitle(d).setIcon(R.drawable.ic_type_archive)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -739,7 +739,7 @@ public class MapActivityActions implements DialogProvider {
 
 		if (Version.isGooglePlayEnabled(app)) {
 			optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.osm_live, mapActivity)
-					.setColorIcon(R.drawable.ic_action_osm_live)
+					.setIcon(R.drawable.ic_action_osm_live)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -752,7 +752,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.prefs_plugins, mapActivity)
-				.setColorIcon(R.drawable.ic_extension_dark)
+				.setIcon(R.drawable.ic_extension_dark)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -766,7 +766,7 @@ public class MapActivityActions implements DialogProvider {
 
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_settings, mapActivity)
-				.setColorIcon(R.drawable.ic_action_settings)
+				.setIcon(R.drawable.ic_action_settings)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
@@ -778,7 +778,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_help, mapActivity)
-				.setColorIcon(R.drawable.ic_action_help)
+				.setIcon(R.drawable.ic_action_help)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {

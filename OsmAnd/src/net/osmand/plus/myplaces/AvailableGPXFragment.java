@@ -349,12 +349,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
-				.setColorIcon(R.drawable.ic_show_on_map)
+				.setIcon(R.drawable.ic_show_on_map)
 				.setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_delete, getActivity())
-				.setColorIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
+				.setIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_reload, getActivity())
-				.setColorIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
+				.setIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			final MenuItem item;
@@ -370,8 +370,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					}
 				});
 			}
-			if (contextMenuItem.getLightIcon() != -1) {
-				item.setIcon(contextMenuItem.getLightIcon());
+			if (contextMenuItem.getIcon() != -1) {
+				item.setIcon(contextMenuItem.getIcon());
 			}
 
 		}

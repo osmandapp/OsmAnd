@@ -14,9 +14,9 @@ public class ContextMenuItem {
 	private final int titleId;
 	private String title;
 	@DrawableRes
-	private final int lightIcon;
+	private final int mIcon;
 	@ColorRes
-	private final int colorRes;
+	private int colorRes;
 	@DrawableRes
 	private final int secondaryIcon;
 	private Boolean selected;
@@ -32,7 +32,7 @@ public class ContextMenuItem {
 
 	private ContextMenuItem(@StringRes int titleId,
 							String title,
-							@DrawableRes int lightIcon,
+							@DrawableRes int icon,
 							@ColorRes int colorRes,
 							@DrawableRes int secondaryIcon,
 							Boolean selected,
@@ -46,7 +46,7 @@ public class ContextMenuItem {
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
 		this.titleId = titleId;
 		this.title = title;
-		this.lightIcon = lightIcon;
+		this.mIcon = icon;
 		this.colorRes = colorRes;
 		this.secondaryIcon = secondaryIcon;
 		this.selected = selected;
@@ -70,8 +70,8 @@ public class ContextMenuItem {
 	}
 
 	@DrawableRes
-	public int getLightIcon() {
-		return lightIcon;
+	public int getIcon() {
+		return mIcon;
 	}
 
 	@ColorRes
@@ -146,6 +146,10 @@ public class ContextMenuItem {
 		this.title = title;
 	}
 
+	public void setColorRes(int colorRes) {
+		this.colorRes = colorRes;
+	}
+
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
@@ -171,7 +175,7 @@ public class ContextMenuItem {
 		private int mTitleId;
 		private String mTitle;
 		@DrawableRes
-		private int mLightIcon = -1;
+		private int mIcon = -1;
 		@ColorRes
 		private int mColor = -1;
 		@DrawableRes
@@ -206,8 +210,8 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setColorIcon(@DrawableRes int lightIcon) {
-			mLightIcon = lightIcon;
+		public ItemBuilder setIcon(@DrawableRes int icon) {
+			mIcon = icon;
 			return this;
 		}
 
@@ -262,7 +266,7 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			return new ContextMenuItem(mTitleId, mTitle, mLightIcon, mColor, mSecondaryIcon,
+			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mPosition, mDescription,
 					mItemClickListener, mIntegerListener);
 		}

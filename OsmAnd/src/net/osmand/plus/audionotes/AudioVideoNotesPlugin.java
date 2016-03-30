@@ -593,7 +593,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		};
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_recordings, app)
 				.setSelected(SHOW_RECORDINGS.get())
-				.setColorIcon(R.drawable.ic_action_micro_dark)
+				.setIcon(R.drawable.ic_action_micro_dark)
 				.setPosition(12)
 				.setListener(listener).createItem());
 	}
@@ -605,7 +605,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return;
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
-				.setColorIcon(R.drawable.ic_action_micro_dark)
+				.setIcon(R.drawable.ic_action_micro_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
@@ -617,7 +617,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setPosition(6)
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
-				.setColorIcon(R.drawable.ic_action_video_dark)
+				.setIcon(R.drawable.ic_action_video_dark)
 				.setListener(new ItemClickListener() {
 
 					@Override
@@ -629,7 +629,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setPosition(7)
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
-				.setColorIcon(R.drawable.ic_action_photo_dark)
+				.setIcon(R.drawable.ic_action_photo_dark)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {

@@ -137,7 +137,7 @@ public class RasterMapMenu {
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(mapTypeStringTransparency, mapActivity)
 					.setLayout(R.layout.progress_list_item)
-					.setColorIcon(R.drawable.ic_action_opacity)
+					.setIcon(R.drawable.ic_action_opacity)
 					.setProgress(mapTransparencyPreference.get())
 					.setListener(l)
 					.setIntegerListener(integerListener).createItem());

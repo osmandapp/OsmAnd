@@ -212,7 +212,7 @@ public class GpxUiHelper {
 			s = s.replace('_', ' ');
 
 			adapter.addItem(ContextMenuItem.createBuilder(s).setSelected(multipleChoice)
-					.setColorIcon(R.drawable.ic_action_polygom_dark).createItem());
+					.setIcon(R.drawable.ic_action_polygom_dark).createItem());
 
 			//if there's some selected files - need to mark them as selected
 			if (selectedGpxList != null) {
@@ -276,7 +276,7 @@ public class GpxUiHelper {
 				}
 				final ContextMenuItem item = adapter.getItem(position);
 				ImageView iconView = (ImageView) v.findViewById(R.id.icon);
-				Drawable icon = ContextCompat.getDrawable(activity, item.getLightIcon());
+				Drawable icon = ContextCompat.getDrawable(activity, item.getIcon());
 				DrawableCompat.setTint(icon, item.getThemedColor(activity));
 				iconView.setImageDrawable(icon);
 				final ArrayAdapter<String> arrayAdapter = this;

@@ -391,7 +391,7 @@ public class MapWidgetRegistry {
 			}
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, map)
 					.setSelected(r.visibleCollapsed(mode) || r.visible(mode))
-					.setColorIcon(r.drawableMenu)
+					.setIcon(r.drawableMenu)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
 					.setListener(new ContextMenuAdapter.OnRowItemClick() {
 						@Override

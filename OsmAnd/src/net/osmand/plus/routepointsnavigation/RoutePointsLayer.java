@@ -112,13 +112,13 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			if (plugin.getCurrentRoute().getPointStatus(point)){
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.mark_as_not_visited, mapActivity)
-						.setColorIcon(R.drawable.ic_action_gremove_dark)
+						.setIcon(R.drawable.ic_action_gremove_dark)
 						.setListener(listener)
 						.createItem());
 			} else {
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.mark_as_visited, mapActivity)
-						.setColorIcon(R.drawable.ic_action_done)
+						.setIcon(R.drawable.ic_action_done)
 						.setListener(listener)
 						.createItem());
 			}
@@ -128,13 +128,13 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 				if (routePoint.isNextNavigate) {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setTitleId(R.string.navigate_to_next, mapActivity)
-							.setColorIcon(R.drawable.ic_action_gnext_dark)
+							.setIcon(R.drawable.ic_action_gnext_dark)
 							.setListener(listener)
 							.createItem());
 				} else {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setTitleId(R.string.mark_as_current, mapActivity)
-							.setColorIcon(R.drawable.ic_action_signpost_dark)
+							.setIcon(R.drawable.ic_action_signpost_dark)
 							.setListener(listener)
 							.createItem());
 				}

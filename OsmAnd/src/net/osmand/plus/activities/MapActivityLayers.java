@@ -264,7 +264,7 @@ public class MapActivityLayers {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_search, app)
-				.setColorIcon(R.drawable.ic_action_search_dark).createItem());
+				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		final List<PoiUIFilter> list = new ArrayList<PoiUIFilter>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
@@ -306,9 +306,9 @@ public class MapActivityLayers {
 		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
 		builder.setTitle(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
-			builder.setColorIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
+			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setColorIcon(R.drawable.mx_user_defined);
+			builder.setIcon(R.drawable.mx_user_defined);
 		}
 		builder.setColor(R.color.color_white);
 		adapter.addItem(builder.createItem());

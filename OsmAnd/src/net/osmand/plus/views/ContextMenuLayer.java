@@ -145,7 +145,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			};
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_show_description, activity)
-					.setColorIcon(R.drawable.ic_action_note_dark).setListener(listener)
+					.setIcon(R.drawable.ic_action_note_dark).setListener(listener)
 					.createItem());
 		}
 	}

@@ -178,7 +178,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 			};
 
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.avoid_road, activity)
-					.setColorIcon(R.drawable.ic_action_road_works_dark)
+					.setIcon(R.drawable.ic_action_road_works_dark)
 					.setListener(listener)
 					.createItem());
 		}

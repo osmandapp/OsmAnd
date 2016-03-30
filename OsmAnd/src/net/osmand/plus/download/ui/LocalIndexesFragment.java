@@ -590,12 +590,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.local_index_mi_reload, getContext())
-				.setColorIcon(R.drawable.ic_action_refresh_dark)
+				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_delete, getContext())
-				.setColorIcon(R.drawable.ic_action_delete_dark)
+				.setIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -626,8 +626,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				item = menu.add(0, contextMenuItem.getTitleId(), j + 1, contextMenuItem.getTitle());
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			}
-			if (contextMenuItem.getLightIcon() != -1) {
-				item.setIcon(contextMenuItem.getLightIcon());
+			if (contextMenuItem.getIcon() != -1) {
+				item.setIcon(contextMenuItem.getIcon());
 			}
 
 		}

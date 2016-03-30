@@ -142,14 +142,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		};
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
-				.setColorIcon(R.drawable.ic_action_gnew_label_dark)
+				.setIcon(R.drawable.ic_action_gnew_label_dark)
 				.setListener(listener).createItem());
 		if (selectedObj instanceof WptPt) {
 			WptPt pt = (WptPt) selectedObj;
 			if (app.getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
-						.setColorIcon(R.drawable.ic_action_edit_dark)
+						.setIcon(R.drawable.ic_action_edit_dark)
 						.setListener(listener).createItem());
 			}
 		}

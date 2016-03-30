@@ -218,30 +218,30 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
-					.setColorIcon(R.drawable.ic_action_edit_dark)
+					.setIcon(R.drawable.ic_action_edit_dark)
 					.setListener(listener)
 					.setPosition(1)
 					.createItem());
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_delete, mapActivity)
-					.setColorIcon(R.drawable.ic_action_delete_dark)
+					.setIcon(R.drawable.ic_action_delete_dark)
 					.setListener(listener)
 					.setPosition(2)
 					.createItem());
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
-					.setColorIcon(R.drawable.ic_action_edit_dark)
+					.setIcon(R.drawable.ic_action_edit_dark)
 					.setListener(listener)
 					.setPosition(1)
 					.createItem());
 		} else {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_create_poi, mapActivity)
-					.setColorIcon(R.drawable.ic_action_plus_dark)
+					.setIcon(R.drawable.ic_action_plus_dark)
 					.setListener(listener)
 					.setPosition(-1)
 					.createItem());
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
-				.setColorIcon(R.drawable.ic_action_bug_dark)
+				.setIcon(R.drawable.ic_action_bug_dark)
 				.setListener(listener).createItem());
 	}
 
@@ -259,7 +259,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_osm_bugs, mapActivity)
 				.setSelected(settings.SHOW_OSM_BUGS.get())
-				.setColorIcon(R.drawable.ic_action_bug_dark)
+				.setIcon(R.drawable.ic_action_bug_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
@@ -285,7 +285,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void contextMenuFragment(final Activity la, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, la)
-					.setColorIcon(R.drawable.ic_action_export)
+					.setIcon(R.drawable.ic_action_export)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
@@ -302,7 +302,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
-					.setColorIcon(R.drawable.ic_action_export)
+					.setIcon(R.drawable.ic_action_export)
 					.setColor(R.color.color_white)
 					.setListener(new ItemClickListener() {
 

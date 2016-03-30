@@ -179,32 +179,32 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(settings.SELECTED_POI_FILTER_FOR_MAP.get() != null)
-				.setColorIcon(R.drawable.ic_action_info_dark)
+				.setIcon(R.drawable.ic_action_info_dark)
 				.setListener(l).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_amenity_label, activity)
 				.setSelected(settings.SHOW_POI_LABEL.get())
-				.setColorIcon(R.drawable.ic_action_text_dark)
+				.setIcon(R.drawable.ic_action_text_dark)
 				.setListener(l).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_favorites, activity)
 				.setSelected(settings.SHOW_FAVORITES.get())
-				.setColorIcon(R.drawable.ic_action_fav_dark)
+				.setIcon(R.drawable.ic_action_fav_dark)
 				.setListener(l).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_gpx_layer, activity)
 				.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles())
-				.setColorIcon(R.drawable.ic_action_polygom_dark)
+				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setListener(l).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_map, activity)
-				.setColorIcon(R.drawable.ic_world_globe_dark)
+				.setIcon(R.drawable.ic_world_globe_dark)
 				.setListener(l).createItem());
 		if (TransportRouteHelper.getInstance().routeIsCalculated()) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.layer_transport_route, activity)
 					.setSelected(true)
-					.setColorIcon(R.drawable.ic_action_bus_dark)
+					.setIcon(R.drawable.ic_action_bus_dark)
 					.setListener(l).createItem());
 		}
 

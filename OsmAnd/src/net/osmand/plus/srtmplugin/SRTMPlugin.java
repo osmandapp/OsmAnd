@@ -118,7 +118,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_hillshade, mapActivity)
 				.setSelected(HILLSHADE.get())
-				.setColorIcon(R.drawable.ic_action_hillshade_dark)
+				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setListener(listener)
 				.setPosition(13)
 				.setLayout(R.layout.drawer_list_item)

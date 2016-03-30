@@ -275,7 +275,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		helper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.osmo_groups, mapActivity)
-				.setColorIcon(R.drawable.ic_osmo_dark)
+				.setIcon(R.drawable.ic_osmo_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
