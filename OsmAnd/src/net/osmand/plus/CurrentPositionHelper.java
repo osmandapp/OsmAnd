@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.os.AsyncTask;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,40 +60,45 @@ public class CurrentPositionHelper {
 		}
 		defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, rs);
 	}
-	
-	
-	
-	
+
 	private boolean scheduleRouteSegmentFind(final Location loc, final boolean storeFound, final ResultMatcher<GeocodingResult> geoCoding, final ResultMatcher<RouteDataObject> result) {
 		boolean res = false;
 		if (loc != null) {
-			new Thread(new Runnable() {
+			new AsyncTask<Void, Void, Void>() {
+
 				@Override
-				public void run() {
+				protected Void doInBackground(Void... params) {
 					try {
-						final List<GeocodingResult> gr = runUpdateInThread(loc.getLatitude(), loc.getLongitude(), 
-								geoCoding != null);
-						if (storeFound) {
-							lastAskedLocation = loc;
-							lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
-						} else if(geoCoding != null) {
-							justifyResult(gr, geoCoding);
-						} else if(result != null) {
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad());
-								}
-							});
-						}
+						processGeocoding(loc, geoCoding, storeFound, result);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					return null;
 				}
-			}, "Geocoding...").start();
+
+			}.execute((Void) null);
+
 			res = true;
 		}
 		return res;
+	}
+
+	private synchronized void processGeocoding(Location loc, ResultMatcher<GeocodingResult> geoCoding, boolean storeFound, final ResultMatcher<RouteDataObject> result) throws IOException {
+		final List<GeocodingResult> gr = runUpdateInThread(loc.getLatitude(), loc.getLongitude(),
+				geoCoding != null);
+		if (storeFound) {
+			lastAskedLocation = loc;
+			lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
+		} else if(geoCoding != null) {
+			justifyResult(gr, geoCoding);
+		} else if(result != null) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad());
+				}
+			});
+		}
 	}
 	
 	protected void justifyResult(List<GeocodingResult> res, final ResultMatcher<GeocodingResult> result) {
