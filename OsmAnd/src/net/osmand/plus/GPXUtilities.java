@@ -680,9 +680,11 @@ public class GPXUtilities {
 			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			if (routes.size() > 0) {
 				for (Route r : routes) {
-					TrkSegment sgmt = new TrkSegment();
-					tpoints.add(sgmt);
-					sgmt.points.addAll(r.points);
+					if (r.points.size() > 0) {
+						TrkSegment sgmt = new TrkSegment();
+						tpoints.add(sgmt);
+						sgmt.points.addAll(r.points);
+					}
 				}
 			}
 			return tpoints;
