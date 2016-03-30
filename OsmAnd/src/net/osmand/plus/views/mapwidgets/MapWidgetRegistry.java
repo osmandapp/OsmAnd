@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
@@ -378,8 +379,9 @@ public class MapWidgetRegistry {
 		return left;
 	}
 
-	private void addControls(final MapActivity map, final ContextMenuAdapter contextMenuAdapter,
+	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 							 Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
+		@ColorRes final int defaultColor = ContextMenuItem.getDefaultColorRes(mapActivity);
 		for (final MapWidgetRegInfo r : top) {
 			if (mode == ApplicationMode.DEFAULT) {
 				if ("intermediate_distance".equals(r.key) || "distance".equals(r.key) || "time".equals(r.key)) {
@@ -389,9 +391,12 @@ public class MapWidgetRegistry {
 			if ("map_marker_1st".equals(r.key) || "map_marker_2nd".equals(r.key)) {
 				continue;
 			}
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, map)
-					.setSelected(r.visibleCollapsed(mode) || r.visible(mode))
+
+			final boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
+			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, mapActivity)
 					.setIcon(r.drawableMenu)
+					.setSelected(selected)
+					.setColor(selected ? R.color.osmand_orange : defaultColor)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
 					.setListener(new ContextMenuAdapter.OnRowItemClick() {
 						@Override
@@ -436,11 +441,13 @@ public class MapWidgetRegistry {
 												   boolean visible,
 												   boolean collapsed) {
 							MapWidgetRegistry.this.setVisibility(r, visible, collapsed);
-							MapInfoLayer mil = map.getMapLayers().getMapInfoLayer();
+							MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 							if (mil != null) {
 								mil.recreateControls();
 							}
-							adapter.getItem(position).setSelected(visible);
+							ContextMenuItem item = adapter.getItem(position);
+							item.setSelected(visible);
+							item.setColorRes(visible || collapsed ? R.color.osmand_orange : defaultColor);
 							adapter.notifyDataSetChanged();
 						}
 					}).createItem());

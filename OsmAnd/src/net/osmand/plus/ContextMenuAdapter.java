@@ -44,7 +44,6 @@ public class ContextMenuAdapter {
 		return items.size();
 	}
 
-	// Adapter related
 	public String[] getItemNames() {
 		String[] itemNames = new String[items.size()];
 		for (int i = 0; i < items.size(); i++) {
