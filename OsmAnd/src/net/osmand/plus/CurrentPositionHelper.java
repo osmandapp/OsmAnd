@@ -51,7 +51,12 @@ public class CurrentPositionHelper {
 		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 		RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build(GeneralRouterProfile.CAR.name().toLowerCase(), 10, 
 				new HashMap<String, String>());
-		defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, app.getResourceManager().getRoutingMapFiles());
+		BinaryMapIndexReader[] rs = new BinaryMapIndexReader[app.getResourceManager().getAddressRepositories().size()];
+		int i = 0;
+		for (RegionAddressRepository rep : app.getResourceManager().getAddressRepositories()) {
+			rs[i++] = rep.getFile();
+		}
+		defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, rs);
 	}
 	
 	

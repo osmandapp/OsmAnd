@@ -921,12 +921,10 @@ public class RoutingHelper {
 				currentRunningJob = new Thread(new Runnable() {
 					@Override
 					public void run() {
-						synchronized (RoutingHelper.this) {
-							try {
-								r.run();
-							} finally {
-								currentRunningJob = null;
-							}
+						try {
+							r.run();
+						} finally {
+							currentRunningJob = null;
 						}
 					}
 				}, "Calculating position"); //$NON-NLS-1$
