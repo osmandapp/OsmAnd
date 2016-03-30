@@ -306,10 +306,11 @@ public class MapActivityLayers {
 		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
 		builder.setTitle(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
-			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
+			builder.setColorIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setIcon(R.drawable.mx_user_defined);
+			builder.setColorIcon(R.drawable.mx_user_defined);
 		}
+		builder.setColor(R.color.color_white);
 		adapter.addItem(builder.createItem());
 	}
 

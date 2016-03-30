@@ -198,7 +198,7 @@ public class IntermediatePointsDialog {
 			final List<TargetPoint> intermediates, final TIntArrayList originalPositions,  final boolean[] checkedIntermediates) {
 		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
 		final ArrayAdapter<TargetPoint> listadapter = new ArrayAdapter<TargetPoint>(app, 
-				changeOrder? R.layout.change_order_item : R.layout.list_menu_item, R.id.title,
+				changeOrder? R.layout.change_order_item : R.layout.list_menu_item_native, R.id.title,
 				intermediates) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {

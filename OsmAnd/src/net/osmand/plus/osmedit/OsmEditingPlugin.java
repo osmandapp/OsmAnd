@@ -302,7 +302,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
-					.setIcon(R.drawable.ic_action_export)
+					.setColorIcon(R.drawable.ic_action_export)
+					.setColor(R.color.color_white)
 					.setListener(new ItemClickListener() {
 
 						@Override

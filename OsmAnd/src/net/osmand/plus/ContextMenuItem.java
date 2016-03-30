@@ -1,19 +1,22 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 
 public class ContextMenuItem {
 	@StringRes
 	private final int titleId;
 	private String title;
 	@DrawableRes
-	private final int icon;
-	@DrawableRes
 	private final int lightIcon;
+	@ColorRes
+	private final int colorRes;
 	@DrawableRes
 	private final int secondaryIcon;
 	private Boolean selected;
@@ -27,16 +30,24 @@ public class ContextMenuItem {
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 
-	private ContextMenuItem(int titleId, String title, int icon, int lightIcon,
-							int secondaryIcon, Boolean selected, int progress,
-							int layout, boolean loading, boolean category,
-							int pos, String description,
+	private ContextMenuItem(@StringRes int titleId,
+							String title,
+							@DrawableRes int lightIcon,
+							@ColorRes int colorRes,
+							@DrawableRes int secondaryIcon,
+							Boolean selected,
+							int progress,
+							@LayoutRes int layout,
+							boolean loading,
+							boolean category,
+							int pos,
+							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
 		this.titleId = titleId;
 		this.title = title;
-		this.icon = icon;
 		this.lightIcon = lightIcon;
+		this.colorRes = colorRes;
 		this.secondaryIcon = secondaryIcon;
 		this.selected = selected;
 		this.progress = progress;
@@ -49,6 +60,7 @@ public class ContextMenuItem {
 		this.integerListener = integerListener;
 	}
 
+	@StringRes
 	public int getTitleId() {
 		return titleId;
 	}
@@ -57,15 +69,38 @@ public class ContextMenuItem {
 		return title;
 	}
 
-	@Deprecated
-	public int getIcon() {
-		return icon;
-	}
-
+	@DrawableRes
 	public int getLightIcon() {
 		return lightIcon;
 	}
 
+	@ColorRes
+	public int getColorRes() {
+		return colorRes;
+	}
+
+	@ColorRes
+	public int getThemedColorRes(Context context) {
+		if (getColorRes() != -1) {
+			return getColorRes();
+		} else {
+			return getDefaultColorRes(context);
+		}
+	}
+
+	@ColorInt
+	public int getThemedColor(Context context) {
+		return ContextCompat.getColor(context, getThemedColorRes(context));
+	}
+
+	@ColorRes
+	public static int getDefaultColorRes(Context context) {
+		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		boolean light = app.getSettings().isLightContent();
+		return light ? R.color.icon_color : 0;
+	}
+
+	@DrawableRes
 	public int getSecondaryIcon() {
 		return secondaryIcon;
 	}
@@ -78,6 +113,7 @@ public class ContextMenuItem {
 		return progress;
 	}
 
+	@LayoutRes
 	public int getLayout() {
 		return layout;
 	}
@@ -131,22 +167,27 @@ public class ContextMenuItem {
 	}
 
 	public static class ItemBuilder {
+		@StringRes
 		private int mTitleId;
 		private String mTitle;
-		private int mIcon = -1;
+		@DrawableRes
 		private int mLightIcon = -1;
+		@ColorRes
+		private int mColor = -1;
+		@DrawableRes
 		private int mSecondaryIcon = -1;
 		private Boolean mSelected = null;
 		private int mProgress = -1;
+		@LayoutRes
 		private int mLayout = -1;
 		private boolean mLoading = false;
-		private boolean mCat = false;
-		private int mPos = -1;
+		private boolean mIsCategory = false;
+		private int mPosition = -1;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 
-		public ItemBuilder setTitleId(int titleId, @Nullable Context context) {
+		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
 			this.mTitleId = titleId;
 			if (context != null) {
 				mTitle = context.getString(titleId);
@@ -160,18 +201,17 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		@Deprecated
-		public ItemBuilder setIcon(int icon) {
-			mIcon = icon;
+		public ItemBuilder setColor(@ColorRes int color) {
+			mColor = color;
 			return this;
 		}
 
-		public ItemBuilder setColorIcon(int lightIcon) {
+		public ItemBuilder setColorIcon(@DrawableRes int lightIcon) {
 			mLightIcon = lightIcon;
 			return this;
 		}
 
-		public ItemBuilder setSecondaryIcon(int secondaryIcon) {
+		public ItemBuilder setSecondaryIcon(@DrawableRes int secondaryIcon) {
 			mSecondaryIcon = secondaryIcon;
 			return this;
 		}
@@ -186,7 +226,7 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setLayout(int layout) {
+		public ItemBuilder setLayout(@LayoutRes int layout) {
 			mLayout = layout;
 			return this;
 		}
@@ -196,13 +236,13 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setCategory(boolean cat) {
-			mCat = cat;
+		public ItemBuilder setCategory(boolean category) {
+			mIsCategory = category;
 			return this;
 		}
 
-		public ItemBuilder setPosition(int pos) {
-			mPos = pos;
+		public ItemBuilder setPosition(int position) {
+			mPosition = position;
 			return this;
 		}
 
@@ -222,8 +262,8 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			return new ContextMenuItem(mTitleId, mTitle, mIcon, mLightIcon, mSecondaryIcon,
-					mSelected, mProgress, mLayout, mLoading, mCat, mPos, mDescription,
+			return new ContextMenuItem(mTitleId, mTitle, mLightIcon, mColor, mSecondaryIcon,
+					mSelected, mProgress, mLayout, mLoading, mIsCategory, mPosition, mDescription,
 					mItemClickListener, mIntegerListener);
 		}
 	}

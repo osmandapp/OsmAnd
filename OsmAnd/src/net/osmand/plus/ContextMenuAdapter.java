@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -36,8 +35,7 @@ public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
 
 	@LayoutRes
-	private int DEFAULT_LAYOUT_ID = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
-			R.layout.list_menu_item : R.layout.list_menu_item_native;
+	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
 
@@ -47,11 +45,6 @@ public class ContextMenuAdapter {
 
 	@Deprecated
 	public Drawable getImage(OsmandApplication ctx, int position, boolean light) {
-		@DrawableRes
-		int lst = items.get(position).getLightIcon();
-		if (lst != -1) {
-			return ContextCompat.getDrawable(ctx, lst);
-		}
 		@DrawableRes
 		int lstLight = items.get(position).getLightIcon();
 		if (lstLight != -1) {

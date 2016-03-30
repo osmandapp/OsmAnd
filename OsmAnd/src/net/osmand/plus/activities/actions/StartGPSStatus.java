@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -114,12 +113,7 @@ public class StartGPSStatus extends OsmAndAction {
 		lp.setMargins(7, 10, 7, 0);
 		cb.setLayoutParams(lp);
 		
-		final int layout;
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			layout = R.layout.list_menu_item;
-		} else {
-			layout = R.layout.list_menu_item_native;
-		}
+		final int layout = R.layout.list_menu_item_native;
 		final ArrayAdapter<GpsStatusApps> adapter = new ArrayAdapter<GpsStatusApps>(mapActivity, layout, GpsStatusApps.values()) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {

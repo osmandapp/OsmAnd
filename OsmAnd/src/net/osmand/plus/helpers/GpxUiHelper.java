@@ -5,7 +5,9 @@ import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.View;
@@ -261,7 +263,6 @@ public class GpxUiHelper {
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		// final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
-		final boolean light = app.getSettings().isLightContent();
 		final int layout = R.layout.list_menu_item_native;
 
 		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
@@ -274,10 +275,12 @@ public class GpxUiHelper {
 					v = activity.getLayoutInflater().inflate(layout, null);
 				}
 				final ContextMenuItem item = adapter.getItem(position);
-				ImageView icon = (ImageView) v.findViewById(R.id.icon);
-				icon.setImageDrawable(adapter.getImage(app, position, light));
+				ImageView iconView = (ImageView) v.findViewById(R.id.icon);
+				Drawable icon = ContextCompat.getDrawable(activity, item.getLightIcon());
+				DrawableCompat.setTint(icon, item.getThemedColor(activity));
+				iconView.setImageDrawable(icon);
 				final ArrayAdapter<String> arrayAdapter = this;
-				icon.setOnClickListener(new View.OnClickListener() {
+				iconView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (showCurrentGpx && position == 0) {
@@ -294,9 +297,9 @@ public class GpxUiHelper {
 
 				});
 				if (showCurrentGpx && position == 0) {
-					icon.setVisibility(View.INVISIBLE);
+					iconView.setVisibility(View.INVISIBLE);
 				} else {
-					icon.setVisibility(View.VISIBLE);
+					iconView.setVisibility(View.VISIBLE);
 				}
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(item.getTitle());
