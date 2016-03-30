@@ -145,6 +145,10 @@ public class RouteResultPreparationTest {
                 if (st != 0) {
                     s += ";" + TurnType.valueOf(st, false).toXmlString();
                 }
+                int tt = TurnType.getTertiaryTurn(lns[h]);
+                if (tt != 0) {
+                    s += ";" + TurnType.valueOf(tt, false).toXmlString();
+                }
 
             }
             s += "";
