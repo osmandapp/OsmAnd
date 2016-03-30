@@ -10,6 +10,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.util.MapAlgorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 import java.util.Timer;
@@ -314,8 +315,9 @@ public class Renderable {
                 canvas2.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
                 alphaPaint.setAlpha(255);
-                alphaPaint.setStrokeWidth(p.getStrokeWidth()*4.0f);  // colorBandWidth
 
+                float stroke = (p.getStrokeWidth() + 16)/2;
+                alphaPaint.setStrokeWidth(stroke*2);  // colorBandWidth
 
                 float lastx = Float.NEGATIVE_INFINITY;
                 float lasty = 0;
@@ -324,11 +326,13 @@ public class Renderable {
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                     float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                    if (lasty != Float.NEGATIVE_INFINITY) {
-                        alphaPaint.setColor(pt.colourARGB);
-                        canvas2.drawLine(lastx, lasty, x, y, alphaPaint);
+                    if (lastx != Float.NEGATIVE_INFINITY) {
+                        if (Math.min(x,lastx)<canvas.getWidth()+stroke && Math.max(x,lastx) > 0-stroke
+                                && Math.min(y,lasty) < canvas.getHeight()+stroke && Math.max(y,lasty) > 0-stroke) {
+                            alphaPaint.setColor(pt.colourARGB);
+                            canvas2.drawLine(lastx, lasty, x, y, alphaPaint);
+                        }
                     }
-
                     lastx = x;
                     lasty = y;
                 }
