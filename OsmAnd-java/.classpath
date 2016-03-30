@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test/java"/>
+	<classpathentry kind="src" path="test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/bsh-core-2.0b4.jar"/>
 	<classpathentry kind="lib" path="libs/bzip2-20090327.jar"/>

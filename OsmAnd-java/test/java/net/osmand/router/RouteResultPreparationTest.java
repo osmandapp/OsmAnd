@@ -2,9 +2,11 @@ package net.osmand.router;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+
 import org.apache.commons.logging.Log;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -63,10 +65,8 @@ public class RouteResultPreparationTest {
 
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() throws IOException {
-
-        String fileName = "test/resources/test_turn_lanes.json";
-
-        Reader reader = new FileReader(fileName);
+        String fileName = "/test_turn_lanes.json";
+        Reader reader = new InputStreamReader(RouteResultPreparationTest.class.getResourceAsStream(fileName));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> twoDArray = new ArrayList<Object[]>();

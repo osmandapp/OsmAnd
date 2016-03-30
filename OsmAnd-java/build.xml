@@ -53,8 +53,8 @@
 			</classpath>
 		</javac>
 		<copy todir="${bin.absolute.dir}">
-			<fileset dir="test/java">
-				<include name="**/*.json" />
+			<fileset dir="test/resources">
+				<include name="**/*" />
 			</fileset>
 		</copy>
 	</target>
