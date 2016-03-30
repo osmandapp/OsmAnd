@@ -60,7 +60,7 @@
 	</target>
 
 	<target name="junits" >
-		<junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+		<junit printsummary="yes" haltonfailure="no" showoutput="yes">
 			<classpath>
 				<pathelement path="bin"/>
 				<path refid="build.path"/>
