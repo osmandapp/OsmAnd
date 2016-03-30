@@ -14,7 +14,7 @@
 	<property name="unit.absolute.dir" location="${unit.dir}" />
 	<property name="test.lib.dir" value="test/libs" />
 	<property name="test.lib.absolute.dir" location="${test.lib.dir}" />
-	<property name="reports.tests" value="${basedir}/test-results" />
+	<property name="reports.tests" value="test-results" />
 	<property name="srctests.dir" value="test/java"/>
 	<property name="java.encoding" value="UTF-8" />
 
@@ -60,15 +60,16 @@
 	</target>
 
 	<target name="junits" >
-		<junit printsummary="yes" haltonfailure="no" showoutput="yes">
+		<junit printsummary="yes" showoutput="yes">
 			<classpath>
 				<pathelement path="bin"/>
 				<path refid="build.path"/>
 				<path refid="test-lib.path" />
 			</classpath>
+			<formatter type="xml" />
 			<batchtest fork="false" todir="${reports.tests}" >
 				<fileset dir="${srctests.dir}" >
-					<include name="**/*Test*.java" />
+					<include name="**/*Test.java" />
 					<exclude name="**/AllTests.java" />
 					<exclude name="**/*Suite*.java" />
 				</fileset>
