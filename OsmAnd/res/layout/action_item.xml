@@ -11,7 +11,7 @@
     android:clickable="true"
     android:background="@drawable/quickaction_slider_btn">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />

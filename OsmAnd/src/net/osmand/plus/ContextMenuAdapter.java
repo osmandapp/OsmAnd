@@ -8,6 +8,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,16 +42,6 @@ public class ContextMenuAdapter {
 
 	public int length() {
 		return items.size();
-	}
-
-	@Deprecated
-	public Drawable getImage(OsmandApplication ctx, int position, boolean light) {
-		@DrawableRes
-		int lstLight = items.get(position).getLightIcon();
-		if (lstLight != -1) {
-			return ctx.getIconsCache().getIcon(lstLight, light);
-		}
-		return null;
 	}
 
 	// Adapter related
@@ -163,9 +154,10 @@ public class ContextMenuAdapter {
 				tv.setCompoundDrawables(imageId, null, null, null);
 				tv.setCompoundDrawablePadding(paddingInPixels);
 			} else {
-				Drawable drawable = getImage(app, position, holoLight);
+				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getLightIcon());
+				DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
 				if (drawable != null) {
-					((ImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
+					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
 					convertView.findViewById(R.id.icon).setVisibility(View.GONE);
