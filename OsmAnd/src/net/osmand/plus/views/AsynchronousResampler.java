@@ -16,7 +16,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     AsynchronousResampler(Renderable.RenderableSegment rs) {
         this.rs = rs;
-        culled = null;
+        culled = new ArrayList<>();     // so we NEVER return a null list
     }
 
     @Override protected void onPostExecute(String result) {
@@ -35,10 +35,10 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     protected List<GPXUtilities.WptPt> resampleTrack(List<GPXUtilities.WptPt> pts, double dist) {
 
-        ArrayList<GPXUtilities.WptPt> newPts = new ArrayList<>();
+        List<GPXUtilities.WptPt> newPts = new ArrayList<>();
 
         int ptCt = pts.size();
-        if (ptCt > 0) {
+        if (ptCt > 1) {
 
             GPXUtilities.WptPt lastPt = pts.get(0);
             double segSub = 0;
@@ -76,6 +76,11 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             GPXUtilities.WptPt newPoint = new GPXUtilities.WptPt( lastPt.getLatitude(), lastPt.getLongitude(), lastPt.time, lastPt.ele, lastPt.speed, lastPt. hdop);
             newPoint.setDistance(cumDist);
             newPts.add(newPts.size(), newPoint);
+
+        } else { // 0 and 1 point lines are just copied
+            for (GPXUtilities.WptPt pt : pts) {
+                newPts.add(new GPXUtilities.WptPt(pt));
+            }
         }
         return newPts;
     }
@@ -98,7 +103,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             // Resample track, then analyse altitudes and set colours for each point
 
             culled = resampleTrack(rs.getPoints(), segmentSize);
-            if (!isCancelled()) {
+            if (!isCancelled() && !culled.isEmpty()) {
 
                 int halfC = Algorithms.getRainbowColor(0.5);
 
@@ -138,7 +143,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             List<GPXUtilities.WptPt> points = rs.getPoints();
             culled = resampleTrack(points, segmentSize);
-            if (!isCancelled()) {
+            if (!isCancelled() && !culled.isEmpty()) {
 
                 GPXUtilities.WptPt lastPt = points.get(0);
                 lastPt.speed = 0;
@@ -211,10 +216,9 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             // Reduce the point-count of the GPX track using Ramer-Douglas-Peucker algorithm.
 
             points = rs.getPoints();
-            culled = new ArrayList<>();
-
             int nsize = points.size();
-            if (nsize > 0) {
+            if (nsize > 2) {
+                culled = new ArrayList<>();
                 survivor = new boolean[nsize];
                 cullRamerDouglasPeucer(0, nsize - 1);
                 if (!isCancelled()) {
@@ -223,6 +227,11 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                         if (survivor[i]) {
                             culled.add(points.get(i));
                         }
+                }
+            } else { // make a copy of 0-1-2 point arrays
+                culled = new ArrayList<>();
+                for (GPXUtilities.WptPt pt : points) {
+                    culled.add(new GPXUtilities.WptPt(pt));
                 }
             }
             return isCancelled() ? "" : "OK";

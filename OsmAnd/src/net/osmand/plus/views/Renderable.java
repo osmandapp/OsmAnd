@@ -78,6 +78,7 @@ public class Renderable {
         // When the asynchronous task has finished, it calls this function to set the 'culled' list
         public void setRDP(List<GPXUtilities.WptPt> cull) {
 
+            assert cull!=null;
             culled = cull;
 
             // Find the segment's bounding box, to allow quick draw rejection later
