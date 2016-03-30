@@ -1379,7 +1379,7 @@
     <string name="navigation_intent_invalid">Ugyldigt format: %s</string>
     <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"Udvidelsen giver delvis funktionalitet af OpenStreetMap ovetvågning, se http://osmo.mobi.\n\nSpor alle enheder i en deltagende gruppe tidstro. Se punkt og spor overført til den gruppe, du tilhører.\n\nGruppen er ikke blevet fjernet efter måneder, bring det i overensstemmelse med de regler, du oprettede grupper med på hjemmesiden OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Udvidelsen giver delvis funktionalitet af OpenStreetMap ovetvågning, se http://osmo.mobi.\n\nSpor alle enheder i en deltagende gruppe tidstro. Se punkt og spor overført til den gruppe, du tilhører.\n\nGruppen er ikke blevet fjernet efter måneder, bring det i overensstemmelse med de regler grupper blev oprettet med på hjemmesiden OsMo.mobi "</string>
     <string name="osmo_plugin_name">OpenStreetMap monitorering</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
@@ -2243,24 +2243,24 @@
 \n• Detaljerede kort for 200 lande
 \n• Offline navigation med stemmevejledning\n• Adressesøgning i offline mode
 \n• Info om steder på kortet: steder af interesse, caféer, parkeringspladser, butikker
-\n• Tlføj steder til foretrukne
+\n• Tilføj steder til foretrukne
 \n• Kørsel-, cykel- og fodgængernavigation
 \n\nYderligere indstillinger:
-\n• Mulighed for at vise og optage GPX spor\n• Wikipedia beskrivelse af IP\n• Tilføj foto-, audio-, og videonoter til kort
+\n• Mulighed for at vise og optage GPX spor\n• Wikipedia beskrivelse af interessepunkter\n• Tilføj foto-, audio-, og videonoter til kort
 \n• Dag- og natkort tilstand for mere bekvem kørsel
 \n• Oplysninger om offentlig transport og stoppesteder\n• Cykel- og gangstier
 \n• Vandreruter for turisme over hele verden
 \n• Online kort fra adskillige kilder
 \n• Info om vej- og fortovskvalitet og gadebelysning
 \n• Tilføj, rediger og sletning af IP (for OpenStreetMap.org brugere)
-\n• OsMo - live overvågning af andre enheder
+\n• OsMo - realtidsovervågning af andre enheder
 \n\nFå pålidelig navigation - om det er i Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller i et andet land.
 \n\nUdvidelser:
 \n• Konturkort og terrænskygge: https://goo.gl/7mojP8
 \n  højdekurver og terræn visualisering tilføjet til grundlæggende OsmAnd kortet.
 \n• Skikort: https://goo.gl/pX6DxJ\n  info om skipister, langrendsløjper, tovbaner og skilifte\n• Søkort: https://goo.gl/0hEdxm
-\n  Kortstil til visning af sømærker for arteriel- og kystnærnavigation.
-\n• Parkeringposition https://goo.gl/6JxQXF
+\n  Kortstil til visning af sømærker for indre- og kystnærnavigation.
+\n• Parkeringsposition https://goo.gl/6JxQXF
 \n  Hjælper med at markere placeringen af den parkerede bil og viser hvor meget tid der er tilbage, hvis parkering er tidsbegrænset.
 \n\nFølg med på:\n• Twitter: https://twitter.com/osmandapp
 \n• Facebook: https://www.facebook.com/osmandapp\n• Hjemmeside: http://osmand.net
