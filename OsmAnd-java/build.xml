@@ -14,6 +14,7 @@
 	<property name="unit.absolute.dir" location="${unit.dir}" />
 	<property name="test.lib.dir" value="test-libs" />
 	<property name="test.lib.absolute.dir" location="${test.lib.dir}" />
+	<property name="reports.tests" value="${basedir}/test-results" />
 
 	<property name="java.encoding" value="UTF-8" />
 
@@ -58,17 +59,20 @@
 		</copy>
 	</target>
 
-	<target name="run-turn-lanes-test" >
+	<target name="junits" >
 		<junit printsummary="yes" haltonfailure="yes" showoutput="yes">
 			<classpath>
 				<pathelement path="bin"/>
 				<path refid="build.path"/>
 				<path refid="test-lib.path" />
 			</classpath>
-			<test name="net.osmand.router.RouteResultPreparationTest" haltonfailure="no" outfile="result">
-				<formatter type="plain"/>
-				<formatter type="xml"/>
-			</test>
+			<batchtest fork="false" todir="${reports.tests}" >
+				<fileset dir="${srctests.dir}" >
+					<include name="**/*Test*.java" />
+					<exclude name="**/AllTests.java" />
+					<exclude name="**/*Suite*.java" />
+				</fileset>
+			</batchtest>
 		</junit>
 	</target>
 
