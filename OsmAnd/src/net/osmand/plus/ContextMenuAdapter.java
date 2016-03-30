@@ -154,9 +154,9 @@ public class ContextMenuAdapter {
 				tv.setCompoundDrawables(imageId, null, null, null);
 				tv.setCompoundDrawablePadding(paddingInPixels);
 			} else {
-				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getLightIcon());
-				DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
-				if (drawable != null) {
+				if (item.getLightIcon() != -1) {
+					Drawable drawable = ContextCompat.getDrawable(getContext(), item.getLightIcon());
+					DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
