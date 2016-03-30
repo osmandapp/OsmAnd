@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -381,7 +382,7 @@ public class MapWidgetRegistry {
 
 	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 							 Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
-		@ColorRes final int defaultColor = ContextMenuItem.getDefaultColorRes(mapActivity);
+		@ColorRes final int defaultColor = IconsCache.getDefaultColorRes(mapActivity);
 		for (final MapWidgetRegInfo r : top) {
 			if (mode == ApplicationMode.DEFAULT) {
 				if ("intermediate_distance".equals(r.key) || "distance".equals(r.key) || "time".equals(r.key)) {

@@ -86,20 +86,13 @@ public class ContextMenuItem {
 		if (getColorRes() != INVALID_ID) {
 			return getColorRes();
 		} else {
-			return getDefaultColorRes(context);
+			return IconsCache.getDefaultColorRes(context);
 		}
 	}
 
 	@ColorInt
 	public int getThemedColor(Context context) {
 		return ContextCompat.getColor(context, getThemedColorRes(context));
-	}
-
-	@ColorRes
-	public static int getDefaultColorRes(Context context) {
-		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		boolean light = app.getSettings().isLightContent();
-		return light ? R.color.icon_color : R.color.color_white;
 	}
 
 	@DrawableRes
