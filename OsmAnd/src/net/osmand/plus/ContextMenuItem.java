@@ -10,6 +10,8 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 
 public class ContextMenuItem {
+	public static final int INVALID_ID = 0;
+
 	@StringRes
 	private final int titleId;
 	private String title;
@@ -81,7 +83,7 @@ public class ContextMenuItem {
 
 	@ColorRes
 	public int getThemedColorRes(Context context) {
-		if (getColorRes() != -1) {
+		if (getColorRes() != INVALID_ID) {
 			return getColorRes();
 		} else {
 			return getDefaultColorRes(context);
@@ -97,7 +99,7 @@ public class ContextMenuItem {
 	public static int getDefaultColorRes(Context context) {
 		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		boolean light = app.getSettings().isLightContent();
-		return light ? R.color.icon_color : 0;
+		return light ? R.color.icon_color : R.color.color_white;
 	}
 
 	@DrawableRes
@@ -175,18 +177,18 @@ public class ContextMenuItem {
 		private int mTitleId;
 		private String mTitle;
 		@DrawableRes
-		private int mIcon = -1;
+		private int mIcon = INVALID_ID;
 		@ColorRes
-		private int mColor = -1;
+		private int mColor = INVALID_ID;
 		@DrawableRes
-		private int mSecondaryIcon = -1;
+		private int mSecondaryIcon = INVALID_ID;
 		private Boolean mSelected = null;
-		private int mProgress = -1;
+		private int mProgress = INVALID_ID;
 		@LayoutRes
-		private int mLayout = -1;
+		private int mLayout = INVALID_ID;
 		private boolean mLoading = false;
 		private boolean mIsCategory = false;
-		private int mPosition = -1;
+		private int mPosition = INVALID_ID;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;

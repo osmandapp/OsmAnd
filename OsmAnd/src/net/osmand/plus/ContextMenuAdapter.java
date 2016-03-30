@@ -109,7 +109,7 @@ public class ContextMenuAdapter {
 			// User super class to create the View
 			final ContextMenuItem item = getItem(position);
 			int layoutId = item.getLayout();
-			layoutId = layoutId != -1 ? layoutId : DEFAULT_LAYOUT_ID;
+			layoutId = layoutId != ContextMenuItem.INVALID_ID ? layoutId : DEFAULT_LAYOUT_ID;
 			if (layoutId == R.layout.mode_toggles) {
 				final Set<ApplicationMode> selected = new LinkedHashSet<>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
@@ -153,7 +153,7 @@ public class ContextMenuAdapter {
 				tv.setCompoundDrawables(imageId, null, null, null);
 				tv.setCompoundDrawablePadding(paddingInPixels);
 			} else {
-				if (item.getIcon() != -1) {
+				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 					Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
 					DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
@@ -164,7 +164,7 @@ public class ContextMenuAdapter {
 			}
 			@DrawableRes
 			int secondaryDrawable = item.getSecondaryIcon();
-			if (secondaryDrawable != -1) {
+			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
 				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryIcon());
@@ -206,7 +206,7 @@ public class ContextMenuAdapter {
 
 			if (convertView.findViewById(R.id.seekbar) != null) {
 				SeekBar seekBar = (SeekBar) convertView.findViewById(R.id.seekbar);
-				if (item.getProgress() != -1) {
+				if (item.getProgress() != ContextMenuItem.INVALID_ID) {
 					seekBar.setProgress(item.getProgress());
 					seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 						@Override
