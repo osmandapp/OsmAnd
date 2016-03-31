@@ -152,6 +152,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				View.VISIBLE : View.GONE);
 		this.expand.setImageResource(expanded ? R.drawable.map_up :
 			R.drawable.map_down);
+		expand.setContentDescription(map.getString(expanded ? R.string.shared_string_collapse : R.string.access_widget_expand));
 		expand.setOnClickListener(new OnClickListener() {
 			
 			@Override

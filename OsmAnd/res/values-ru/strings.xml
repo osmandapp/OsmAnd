@@ -1988,4 +1988,5 @@
     <string name="storage_directory_shared">Разделяемая память</string>
     <string name="access_sort">Сортировать</string>
     <string name="access_shared_string_navigate_up">Перейти вверх</string>
+    <string name="access_widget_expand">Развернуть</string>
 </resources>
