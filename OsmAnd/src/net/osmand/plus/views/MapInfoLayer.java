@@ -1,7 +1,14 @@
 package net.osmand.plus.views;
 
 
-import java.lang.reflect.Field;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -20,17 +27,10 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.LanesControl;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
+
+import java.lang.reflect.Field;
 
 public class MapInfoLayer extends OsmandMapLayer {
-
-	
 	private final MapActivity map;
 	private final RouteLayer routeLayer;
 	private OsmandMapTileView view;
@@ -48,7 +48,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private OsmandSettings settings;
 	private DrawSettings drawSettings;
 	private TopTextView streetNameView;
-
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -141,8 +140,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
 		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, "plain_time", false, 25);
 	}
-	
-	
 
 	public void recreateControls() {
 		rightStack.removeAllViews();
@@ -182,17 +179,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private int themeId = -1;
 	public void updateColorShadowsOfText() {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
-		boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			TextState ts = calculateTextState();
 			map.findViewById(R.id.map_center_info).setBackgroundResource(ts.boxFree);
-			for (MapWidgetRegInfo reg : mapInfoControls.getLeft()) {
+			for (MapWidgetRegInfo reg : mapInfoControls.getLeftWidgetSet()) {
 				updateReg(ts, reg);
 			}
-			for (MapWidgetRegInfo reg : mapInfoControls.getRight()) {
+			for (MapWidgetRegInfo reg : mapInfoControls.getRightWidgetSet()) {
 				updateReg(ts, reg);
 			}
 			updateStreetName(nightMode, ts);
@@ -221,16 +218,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private TextState calculateTextState() {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
-		boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		TextState ts = new TextState();
 		ts.textBold = following;
 		ts.night = nightMode;
-		ts.textColor = nightMode ? view.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
+		ts.textColor = nightMode ? ContextCompat.getColor(view.getContext(), R.color.widgettext_night) : Color.BLACK;
 		// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent
-		ts.textShadowColor = nightMode ? view.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
+		ts.textShadowColor = nightMode ? ContextCompat.getColor(view.getContext(), R.color.widgettext_shadow_night) : Color.WHITE;
 		if (!transparent && !nightMode) {
-//			ts.textShadowColor = Color.TRANSPARENT;
 			ts.textShadowRadius = 0;
 		} else {
 			ts.textShadowRadius = (int) (4 * view.getDensity());
@@ -256,9 +252,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		return ts;
 	}
-	
-	
-	
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
@@ -273,7 +266,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 	}
 	
-	
 	@Override
 	public void destroyLayer() {
 	}
@@ -283,12 +275,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return true;
 	}
 	
-	
 	public View getProgressBar() {
 		// currently no progress on info layer
 		return null;
 	}
-
 
 	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {
@@ -316,11 +306,4 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		return defValue;
 	}
-
-
-	
-	
-
-	
-	
 }

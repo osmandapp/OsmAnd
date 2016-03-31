@@ -247,9 +247,15 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			String itemDescr = item.getDescription();
-			if (convertView.findViewById(R.id.description) != null) {
-				((TextView) convertView.findViewById(R.id.description)).setText(itemDescr);
+			View descriptionTextView = convertView.findViewById(R.id.description);
+			if (descriptionTextView != null) {
+				String itemDescr = item.getDescription();
+				if (itemDescr != null) {
+					((TextView) descriptionTextView).setText(itemDescr);
+					descriptionTextView.setVisibility(View.VISIBLE);
+				} else {
+					descriptionTextView.setVisibility(View.GONE);
+				}
 			}
 			return convertView;
 		}
