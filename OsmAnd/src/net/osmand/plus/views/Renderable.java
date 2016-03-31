@@ -60,7 +60,7 @@ public class Renderable {
                 Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
 
 
-        double hashZoom;
+        double zoom;
         double hashPoint;
 
         boolean shadow = false;         // TODO: fixup shadow support
@@ -70,7 +70,7 @@ public class Renderable {
         public RenderableSegment(List<GPXUtilities.WptPt> pt) {
             points = pt;
             hashPoint = points.hashCode();
-            hashZoom = 0;
+            zoom = 0;
             culled = null;
         }
 
@@ -133,7 +133,7 @@ public class Renderable {
                     culler.cancel(true);            // STOP culling a track with changing points
                     culled =  null;                 // and force use of original track
                 }
-            } else if (culler == null || hashZoom != zoom) {
+            } else if (culler == null || this.zoom != zoom) {
 
                 if (culler != null) {
                     culler.cancel(true);
@@ -142,11 +142,11 @@ public class Renderable {
                 double cullDistance = Math.pow(2.0, base - zoom);
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
 
-                if (hashZoom < zoom) {            // if line would look worse (we're zooming in) then...
+                if (this.zoom < zoom) {            // if line would look worse (we're zooming in) then...
                     culled = null;                // use full-resolution until re-cull complete
                 }
 
-                hashZoom = zoom;
+                this.zoom = zoom;
 
                 culler.execute("");
 
@@ -369,7 +369,7 @@ public class Renderable {
         }
 
         @Override public void recalculateRenderScale(double zoom) {
-            hashZoom = zoom;
+            this.zoom = zoom;
             if (culled == null && culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);
                 culler.execute("");
@@ -384,7 +384,7 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && !culled.isEmpty() && hashZoom > 12
+            if (culled != null && !culled.isEmpty() && zoom > 12
                     && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -440,7 +440,6 @@ public class Renderable {
     // EXPERIMENTAL! WORK IN PROGRESS...
 
         private double segmentSize;
-        private double zoom;
 
         public Arrows(List<GPXUtilities.WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
             super(pt);
@@ -466,15 +465,18 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && !culled.isEmpty()
-                    /*&& QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)*/) {
+            if (culled != null && !culled.isEmpty() && zoom > 14
+                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 // This is all very hacky and experimental code. Just showing how to do an animating segmented
                 // line to draw arrows in the direction of movement.
 
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                float sizer = (float) Math.pow(2.0,zoom-18) * 512;
+                float stroke = p.getStrokeWidth();
+                p.setStrokeWidth(stroke*1.5f);
+
+                float sizer = (float) Math.pow(2.0,zoom-18) * 128;
                 int pCol = p.getColor();
 
                 p.setColor(getComplementaryColor(p.getColor()));    // and a complementary colour
@@ -487,56 +489,57 @@ public class Renderable {
                 int w = tileBox.getPixWidth();
                 boolean broken = true;
                 int intp = conveyor;                                // the segment cycler
+
+
+                float clipL = -sizer;
+                float clipB = -sizer;
+                float clipT = canvas.getHeight() + sizer;
+                float clipR = canvas.getWidth() + sizer;
+
+
                 for (GPXUtilities.WptPt pt : culled) {
                     intp--;                                         // increment to go the other way!
 
-                    if ((intp & 15) < 8) {
+                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                        float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
-                        float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+                    boolean nextBroken = true;
 
+                    if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
+                            && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
 
-                        if ((intp&15) == 0) {
-                            // arrowhead - trial and error trig till it looked OK :)
-                            double angle = Math.atan2(lasty-y,lastx-x);
-                            float newx1 = x + (float)Math.sin(angle-0.4+Math.PI/2)*sizer;
-                            float newy1 = y - (float)Math.cos(angle-0.4+Math.PI/2)*sizer;
-                            float newx2 = x + (float)Math.sin(angle+0.4+Math.PI/2)*sizer;
-                            float newy2 = y - (float)Math.cos(angle+0.4+Math.PI/2)*sizer;
+                        if ((intp & 15) < 6) {
+                            p.setStrokeWidth(stroke * (1f + 1.25f* (5 - (intp & 7)) / 2f));
 
-                            if (broken) {
-                                path.moveTo(x, y);
+                            if (!broken) {
+                                canvas.drawLine(lastx, lasty, x, y, p);
                             }
 
-                            path.lineTo(x,y);
-                            path.moveTo(newx1, newy1);
-                            path.lineTo(x, y);
-                            path.lineTo(newx2, newy2);
-                            path.moveTo(x,y);
-                            broken = false;
+                            nextBroken = false;
+
+                            if (zoom > 15 &&  (intp & 15) == 0) {
+                                // arrowhead - trial and error trig till it looked OK :)
+                                double angle = Math.atan2(lasty - y, lastx - x);
+                                float newx1 = x + (float) Math.sin(angle - 0.4 + Math.PI / 2) * sizer;
+                                float newy1 = y - (float) Math.cos(angle - 0.4 + Math.PI / 2) * sizer;
+                                float newx2 = x + (float) Math.sin(angle + 0.4 + Math.PI / 2) * sizer;
+                                float newy2 = y - (float) Math.cos(angle + 0.4 + Math.PI / 2) * sizer;
+
+                                canvas.drawLine(newx1, newy1, x, y, p);
+                                canvas.drawLine(newx2, newy2, x, y, p);
+                            }
                         }
+                    }
 
-
-
-                        if ((isIn(x, y, w, h) || isIn(lastx, lasty, w, h))) {
-                            if (broken) {
-                                path.moveTo(x, y);
-                                broken = false;
-                            } else {
-                                path.lineTo(x, y);
-                            }
-                            lastx = x;
-                            lasty = y;
-                        } else
-                            broken = true;
-                    } else
-                        broken = true;
-
+                    broken = nextBroken;
+                    lastx = x;
+                    lasty = y;
                 }
 
-                canvas.drawPath(path, p);
+//                canvas.drawPath(path, p);
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 p.setColor(pCol);
+                p.setStrokeWidth(stroke);
             }
         }
     }
