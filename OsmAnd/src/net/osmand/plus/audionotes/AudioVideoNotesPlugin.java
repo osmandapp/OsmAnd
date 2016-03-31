@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.StatFs;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Surface;
@@ -40,7 +41,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
@@ -740,7 +740,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void chooseDefaultAction(final double lat, final double lon, final MapActivity mapActivity) {
-		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(mapActivity);
+		AlertDialog.Builder ab = new AlertDialog.Builder(mapActivity);
 		ab.setItems(
 				new String[]{mapActivity.getString(R.string.recording_context_menu_arecord),
 						mapActivity.getString(R.string.recording_context_menu_vrecord),

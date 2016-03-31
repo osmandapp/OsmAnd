@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -48,7 +47,7 @@ public class FailSafeFuntions {
 
 				@Override
 				public void run() {
-					AlertDialog.Builder builder = new AccessibleAlertBuilder(ma);
+					AlertDialog.Builder builder = new AlertDialog.Builder(ma);
 					final TextView tv = new TextView(ma);
 					tv.setText(ma.getString(R.string.continue_follow_previous_route_auto, delay + ""));
 					tv.setPadding(7, 5, 7, 5);

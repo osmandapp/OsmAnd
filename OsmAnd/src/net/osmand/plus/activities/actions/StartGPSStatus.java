@@ -22,7 +22,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -103,7 +102,7 @@ public class StartGPSStatus extends OsmAndAction {
 			res[i++] = g.stringRes;
 		}
 		OsmandMapTileView view = mapActivity.getMapView();
-		AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		LinearLayout ll = new LinearLayout(activity);
 		final ListView lv = new ListView(activity);
 		lv.setPadding(7, 3, 7, 0);
@@ -168,7 +167,7 @@ public class StartGPSStatus extends OsmAndAction {
 			mapActivity.startActivity(intent);
 		} else {
 			if (Version.isMarketEnabled(getMyApplication())) {
-				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+				AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 				builder.setMessage(mapActivity. getString(R.string.gps_status_app_not_found));
 				builder.setPositiveButton(mapActivity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override

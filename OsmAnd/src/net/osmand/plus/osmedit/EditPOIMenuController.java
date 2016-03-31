@@ -3,8 +3,8 @@ package net.osmand.plus.osmedit;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -52,7 +52,7 @@ public class EditPOIMenuController extends MenuController {
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				AccessibleAlertBuilder bld = new AccessibleAlertBuilder(getMapActivity());
+				AlertDialog.Builder bld = new AlertDialog.Builder(getMapActivity());
 				bld.setMessage(R.string.recording_delete_confirm);
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 

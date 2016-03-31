@@ -21,7 +21,6 @@ import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -483,7 +482,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	private Dialog createReloadTitleDialog(final Bundle args) {
-		AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setMessage(R.string.context_menu_item_update_map_confirm);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		final OsmandMapTileView mapView = mapActivity.getMapView();
