@@ -277,6 +277,8 @@ public class GpxUiHelper {
 				final ContextMenuItem item = adapter.getItem(position);
 				ImageView iconView = (ImageView) v.findViewById(R.id.icon);
 				Drawable icon = ContextCompat.getDrawable(activity, item.getIcon());
+				icon = DrawableCompat.wrap(icon);
+				icon.mutate();
 				DrawableCompat.setTint(icon, item.getThemedColor(activity));
 				iconView.setImageDrawable(icon);
 				final ArrayAdapter<String> arrayAdapter = this;
@@ -345,7 +347,7 @@ public class GpxUiHelper {
 							if (app != null && app.getSelectedGpxHelper() != null) {
 								app.getSelectedGpxHelper().clearAllGpxFileToShow();
 							}
-							if (showCurrentGpx && adapter.getItem(0).getSelected()) {
+							if (app != null && showCurrentGpx && adapter.getItem(0).getSelected()) {
 								currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 							}
 							List<String> s = new ArrayList<>();

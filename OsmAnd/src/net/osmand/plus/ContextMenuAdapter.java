@@ -144,7 +144,9 @@ public class ContextMenuAdapter {
 			if (this.layoutId == R.layout.simple_list_menu_item) {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable imageId = ContextCompat.getDrawable(getContext(), item.getIcon());
+				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
+				Drawable imageId = DrawableCompat.wrap(drawable);
+				imageId.mutate();
 				DrawableCompat.setTint(imageId, color);
 				float density = getContext().getResources().getDisplayMetrics().density;
 				int paddingInPixels = (int) (24 * density);
@@ -155,6 +157,8 @@ public class ContextMenuAdapter {
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 					Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
+					drawable = DrawableCompat.wrap(drawable);
+					drawable.mutate();
 					DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
@@ -168,6 +172,8 @@ public class ContextMenuAdapter {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
 				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryIcon());
+				drawable = DrawableCompat.wrap(drawable);
+				drawable.mutate();
 				DrawableCompat.setTint(drawable, color);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
