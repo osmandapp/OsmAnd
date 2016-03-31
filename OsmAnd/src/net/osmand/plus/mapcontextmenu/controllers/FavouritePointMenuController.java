@@ -76,6 +76,11 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
+	public int getFavActionStringId() {
+		return R.string.favourites_context_menu_edit;
+	}
+
+	@Override
 	public String getTypeStr() {
 		return fav.getCategory().length() == 0 ?
 				getMapActivity().getString(R.string.shared_string_favorites) : fav.getCategory();

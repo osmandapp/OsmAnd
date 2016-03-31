@@ -460,6 +460,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return favActionIconId;
 	}
 
+	public int getFavActionStringId() {
+		if (menuController != null)
+			return menuController.getFavActionStringId();
+		return R.string.shared_string_add_to_favorites;
+	}
+
 	protected void acquireIcons() {
 		super.acquireIcons();
 		if (menuController != null) {

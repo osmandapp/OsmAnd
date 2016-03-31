@@ -276,6 +276,8 @@ public abstract class MenuController extends BaseMenuController {
 
 	public int getFavActionIconId() { return R.drawable.map_action_fav_dark; }
 
+	public int getFavActionStringId() { return R.string.shared_string_add_to_favorites; }
+
 	public String getTypeStr() { return ""; }
 
 	public String getCommonTypeStr() { return ""; }
