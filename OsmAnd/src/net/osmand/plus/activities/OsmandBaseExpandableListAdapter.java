@@ -13,11 +13,14 @@ public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableList
 		if (!isExpanded) {
 			if (getChildrenCount(groupPosition) == 0) {
 				indicator.setImageResource(light ? R.drawable.expandable_category_empty_light : R.drawable.expandable_category_empty_dark);
+				indicator.setContentDescription(row.getContext().getString(R.string.access_empty_list));
 			} else {
 				indicator.setImageResource(light ? R.drawable.expandable_category_unpushed_light : R.drawable.expandable_category_unpushed_dark);
+				indicator.setContentDescription(row.getContext().getString(R.string.access_collapsed_list));
 			}
 		} else {
 			indicator.setImageResource(light ? R.drawable.expandable_category_pushed_light : R.drawable.expandable_category_pushed_dark);
+			indicator.setContentDescription(row.getContext().getString(R.string.access_expanded_list));
 		}
 	}
 

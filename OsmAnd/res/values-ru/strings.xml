@@ -1991,4 +1991,7 @@
     <string name="access_widget_expand">Развернуть</string>
     <string name="access_shared_string_not_installed">Не установлен</string>
     <string name="access_tree_list">Иерархический список</string>
+    <string name="access_collapsed_list">Свёрнутый список</string>
+    <string name="access_expanded_list">Развёрнутый список</string>
+    <string name="access_empty_list">Пустой список</string>
 </resources>
