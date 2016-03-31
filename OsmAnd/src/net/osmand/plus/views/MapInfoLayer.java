@@ -134,7 +134,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
 		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
-		registerSideWidget(maxspeed, R.drawable.ic_action_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
+		registerSideWidget(maxspeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map);
 		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);

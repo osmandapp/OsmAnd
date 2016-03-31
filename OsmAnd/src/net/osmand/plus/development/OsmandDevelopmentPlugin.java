@@ -111,7 +111,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		final OsmandMapTileView mv = activity.getMapView();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
 			FPSTextInfoWidget fps = new FPSTextInfoWidget(mv, activity);
-			mapInfoLayer.registerSideWidget(fps, R.drawable.widget_no_icon,
+			mapInfoLayer.registerSideWidget(fps, R.drawable.ic_action_fps,
 					R.string.map_widget_fps_info, "fps", false, 30);
 			mapInfoLayer.recreateControls();
 		}
