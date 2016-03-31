@@ -60,7 +60,7 @@ public class Renderable {
                 Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
 
 
-        double zoom;
+        double zoom = -1;
         double hashPoint;
 
         boolean shadow = false;         // TODO: fixup shadow support
@@ -115,25 +115,24 @@ public class Renderable {
     public static class StandardTrack extends RenderableSegment {
 
         double base;     // parameter for calculating Ramer-Douglas-Peucer distance
+        boolean currentTrack = false;
 
         public StandardTrack(List<GPXUtilities.WptPt> pt, double base) {
             super(pt);
             this.base = base;
         }
 
+        public void setCurrentTrack() {
+            currentTrack = true;
+        }
+
         @Override public void recalculateRenderScale(double zoom) {
 
             // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
-            // The asynchronous callback will set the variable, and that is preferentially used for rendering
+            // The asynchronous callback will set the variable 'culled', and that is preferentially used for rendering
+            // The current track does not undergo this process, as it is potentially constantly changing.
 
-            double hashCode = points.hashCode() ;
-
-            if (hashPoint != hashCode) {            // current track, changing?
-                if (culler != null) {
-                    culler.cancel(true);            // STOP culling a track with changing points
-                    culled =  null;                 // and force use of original track
-                }
-            } else if (culler == null || this.zoom != zoom) {
+            if (!currentTrack && this.zoom != zoom) {
 
                 if (culler != null) {
                     culler.cancel(true);
@@ -143,7 +142,7 @@ public class Renderable {
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
 
                 if (this.zoom < zoom) {            // if line would look worse (we're zooming in) then...
-                    culled = null;                // use full-resolution until re-cull complete
+                    culled = null;                 // use full-resolution until re-cull complete
                 }
 
                 this.zoom = zoom;
@@ -479,7 +478,7 @@ public class Renderable {
                 float sizer = (float) Math.pow(2.0,zoom-18) * 128;
                 int pCol = p.getColor();
 
-                p.setColor(getComplementaryColor(p.getColor()));    // and a complementary colour
+                p.setColor(Color.RED); //getComplementaryColor(p.getColor()));    // and a complementary colour
 
                 float lastx = Float.NEGATIVE_INFINITY;
                 float lasty = Float.NEGATIVE_INFINITY;
@@ -509,7 +508,7 @@ public class Renderable {
                             && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
 
                         if ((intp & 15) < 6) {
-                            p.setStrokeWidth(stroke * (1f + 1.25f* (5 - (intp & 7)) / 2f));
+                            p.setStrokeWidth(stroke * (0.75f + 1.f* (5 - (intp & 7)) / 2f));
 
                             if (!broken) {
                                 canvas.drawLine(lastx, lasty, x, y, p);

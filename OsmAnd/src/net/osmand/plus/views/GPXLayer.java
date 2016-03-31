@@ -330,17 +330,18 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				if (ts.renders.isEmpty()				// only do once (CODE HERE NEEDS TO BE UI INSTEAD)
 						&& !ts.points.isEmpty()) {		// hmmm. 0-point tracks happen, but.... how?
 
-					boolean showCT = g.isShowCurrentTrack();
-
-					ts.renders.add(new Renderable.Altitude(ts.points, 10));
-					ts.renders.add(new Renderable.StandardTrack(ts.points, 18));
-
-					// TODO : enable these to see how the experimental conveyor, altitude, speed, waypoint renders work
-
-					//ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
-					ts.renders.add(new Renderable.DistanceMarker(ts.points, view, 1000));
-					//ts.renders.add(new Renderable.Speed(ts.points, 50, 128));
-					ts.renders.add(new Renderable.Arrows(ts.points,view,10,250));
+					if (g.isShowCurrentTrack()) {
+						Renderable.StandardTrack st = new Renderable.StandardTrack(ts.points, 18);
+						st.setCurrentTrack();
+						ts.renders.add(st);
+					} else {
+						ts.renders.add(new Renderable.Altitude(ts.points, 10));
+						ts.renders.add(new Renderable.StandardTrack(ts.points, 18));
+						//ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
+						ts.renders.add(new Renderable.DistanceMarker(ts.points, view, 1000));
+						//ts.renders.add(new Renderable.Speed(ts.points, 50, 128));
+						ts.renders.add(new Renderable.Arrows(ts.points, view, 10, 250));
+					}
 				}
 
 				ts.recalculateRenderScales(view.getZoom());
