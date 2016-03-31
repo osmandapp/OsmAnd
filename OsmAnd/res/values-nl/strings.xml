@@ -1909,7 +1909,7 @@
     <string name="traffic_warning_hazard">Gevaar</string>
     <string name="rendering_value_boldOutline_name">Dik omlijnd</string>
     <string name="no_updates_available">Geen updates beschikbaar</string>
-    <string name="download_live_updates">Automatisch controleren op update?</string>
+    <string name="download_live_updates">Live Updates gebruiken</string>
 	<string name="lang_os">Ossetisch</string>
     <string name="lang_nb">Noors (Bokmål)</string>
     <string name="lang_vo">Volapük</string>
