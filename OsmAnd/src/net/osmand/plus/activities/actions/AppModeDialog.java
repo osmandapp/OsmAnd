@@ -76,6 +76,7 @@ public class AppModeDialog {
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
 			if (checked) {
 				iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.osmand_orange));
+				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
 				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
 			} else {
 				if (useMapTheme) {
@@ -85,6 +86,7 @@ public class AppModeDialog {
 				} else {
 					iv.setImageDrawable(ctx.getIconsCache().getThemedIcon(mode.getSmallIconDark()));
 				}
+				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_unchecked)));
 				tb.findViewById(R.id.selection).setVisibility(View.INVISIBLE);
 			}
 			iv.setOnClickListener(new View.OnClickListener() {
@@ -120,9 +122,9 @@ public class AppModeDialog {
 		int metricsX = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
 		int metricsY = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
 		View tb = layoutInflater.inflate(R.layout.mode_view, null);
-		tb.findViewById(R.id.app_mode_icon).setContentDescription(mode.toHumanString(ctx));
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
 		iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.osmand_orange));
+		iv.setContentDescription(mode.toHumanString(ctx));
 //		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.app_mode_icon_color), null, null);
 		LayoutParams lp = new LinearLayout.LayoutParams(metricsX, metricsY);
 //		lp.setMargins(left, 0, 0, 0);
