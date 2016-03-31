@@ -94,10 +94,12 @@ public class PluginsActivity extends OsmandListActivity {
 			pluginLogo.setImageResource(plugin.getLogoResourceId());
 			if (plugin.isActive()) {
 				pluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
+				pluginLogo.setContentDescription(getString(R.string.shared_string_disable));
 			} else {
 				TypedArray attributes = getTheme().obtainStyledAttributes(
 						new int[] {R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
+				pluginLogo.setContentDescription(getString(plugin.needsInstallation() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
 				attributes.recycle();
 			}
 			pluginLogo.setOnClickListener(new View.OnClickListener() {

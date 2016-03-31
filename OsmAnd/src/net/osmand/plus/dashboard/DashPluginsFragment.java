@@ -130,10 +130,12 @@ public class DashPluginsFragment extends DashBaseFragment {
 		ImageButton logoView = (ImageButton) pluginView.findViewById(R.id.plugin_logo);
 		if (plugin.isActive()) {
 			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
+			logoView.setContentDescription(getString(R.string.shared_string_disable));
 		} else {
 			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(
 					new int[]{R.attr.bg_plugin_logo_disabled});
 			logoView.setBackgroundDrawable(attributes.getDrawable(0));
+			logoView.setContentDescription(getString(plugin.needsInstallation() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
 			attributes.recycle();
 		}
 	}
