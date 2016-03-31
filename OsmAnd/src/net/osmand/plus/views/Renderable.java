@@ -1,24 +1,17 @@
 package net.osmand.plus.views;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.util.MapAlgorithms;
-import net.osmand.util.MapUtils;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-
-import gnu.trove.list.array.TIntArrayList;
 
 
 public class Renderable {
@@ -60,7 +53,6 @@ public class Renderable {
                 Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
 
         double zoom = -1;
-        boolean shadow = false;         // TODO: fixup shadow support
         AsynchronousResampler culler = null;                        // The currently active resampler
 
         public RenderableSegment(List<GPXUtilities.WptPt> pt) {
@@ -92,15 +84,6 @@ public class Renderable {
             //    view.refreshMap();          // force a redraw
             //}
         }
-
-        public List<GPXUtilities.WptPt> getPoints() {
-            return points;
-        }
-
-        protected boolean isIn(float x, float y, float rx, float by) {
-            return x >= 0f && x <= rx && y >= 0f && y <= by;
-        }
-
     }
 
     //----------------------------------------------------------------------------------------------
@@ -133,8 +116,8 @@ public class Renderable {
                 double cullDistance = Math.pow(2.0, base - zoom);
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
 
-                if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
-                    culled = null;                 // use full-resolution until re-cull complete
+                if (zoom < newZoom) {               // if line would look worse (we're zooming in) then...
+                    culled = null;                  // use full-resolution until re-cull complete
                 }
                 zoom = newZoom;
                 culler.execute("");
@@ -347,16 +330,11 @@ public class Renderable {
     //----------------------------------------------------------------------------------------------
 
     public static class DistanceMarker extends RenderableSegment {
-    // EXPERIMENTAL!
 
-        private float dotScale;
         private double segmentSize;
-        private OsmandMapTileView view;
 
-        public DistanceMarker(List<GPXUtilities.WptPt> pt, OsmandMapTileView view, double segmentSize) {
+        public DistanceMarker(List<GPXUtilities.WptPt> pt, double segmentSize) {
             super(pt);
-            //this.view = view;
-            this.dotScale = view.getScaleCoefficient();
             this.segmentSize = segmentSize;
         }
 
@@ -430,7 +408,6 @@ public class Renderable {
     //----------------------------------------------------------------------------------------------
 
     public static class Arrows extends RenderableSegment {
-    // EXPERIMENTAL! WORK IN PROGRESS...
 
         private double segmentSize;
 
@@ -449,13 +426,6 @@ public class Renderable {
             }
         }
 
-        public int getComplementaryColor(int colorToInvert) {
-            float[] hsv = new float[3];
-            Color.RGBToHSV(Color.red(colorToInvert), Color.green(colorToInvert), Color.blue(colorToInvert), hsv);
-            hsv[0] = (hsv[0] + 180) % 360;
-            return Color.HSVToColor(hsv);
-        }
-
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
             if (culled != null && !culled.isEmpty() && zoom > 14
@@ -467,7 +437,7 @@ public class Renderable {
                 float arrowSize = (float) Math.pow(2.0,zoom-18) * 128;
 
                 int pCol = p.getColor();
-                p.setColor(Color.RED); //getComplementaryColor(p.getColor()));    // and a complementary colour
+                p.setColor(Color.RED);
 
                 float lastx = 0;
                 float lasty = 0;
