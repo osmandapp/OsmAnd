@@ -204,14 +204,6 @@ public class GPXUtilities {
 		public List<WptPt> points = new ArrayList<WptPt>();
 		private OsmandMapTileView view;
 
-		// A list of renderables. A rendereable is 'a way of drawing' something related to a TrkSegment.
-		// For example, we could have several renderables drawing on top of each other;
-		// 1. rainbow coloured altitude indicator
-		// 2. base rendered segments
-		// 3. 'dot' 1km markers on top
-		// These are dimply enabled by adding new Renderable objects to this list
-		// Note; see addRenderers for a complete list of handled Renderables.
-
 		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
 
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
@@ -239,9 +231,6 @@ public class GPXUtilities {
 				rs.drawSingleSegment(p, c, tb);
 			}
 		}
-
-
-
 	}
 
 	public static class Track extends GPXExtensions {

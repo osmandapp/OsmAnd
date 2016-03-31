@@ -198,19 +198,11 @@ public class Renderable {
 
     public static class Altitude extends RenderableSegment {
 
-        private Paint alphaPaint = null;
-        private int alpha;
-        protected float colorBandWidth;             // width of speed/altitude colour band
         protected double segmentSize;
 
-        public Altitude(List<GPXUtilities.WptPt> pt, double segmentSize, int alpha) {
+        public Altitude(List<GPXUtilities.WptPt> pt, double segmentSize) {
             super(pt);
-
             this.segmentSize = segmentSize;
-            this.alpha = alpha;
-            alphaPaint = new Paint();
-            alphaPaint.setStrokeCap(Paint.Cap.ROUND);
-            colorBandWidth = 32f;
         }
 
         @Override public void recalculateRenderScale(double zoom) {
@@ -225,21 +217,21 @@ public class Renderable {
             if (culled != null && !culled.isEmpty()
                 && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
-                // Draws into a bitmap so that the lines can be drawn solid and the *ENTIRE* can be alpha-blended
+                canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                Bitmap newBitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas2 = new Canvas(newBitmap);
-                canvas2.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+                Paint.Cap cap = p.getStrokeCap();
+                float stroke = p.getStrokeWidth();
+                int col = p.getColor();
 
-                alphaPaint.setAlpha(255);
+                p.setStrokeCap(Paint.Cap.ROUND);
 
-                float stroke = (p.getStrokeWidth() + colorBandWidth)/2;
-                alphaPaint.setStrokeWidth(stroke*2);  // colorBandWidth
+                float bandWidth = stroke * 3f;
+                p.setStrokeWidth(bandWidth);
 
-                float clipL = -stroke;
-                float clipB = -stroke;
-                float clipT = canvas.getHeight() + stroke;
-                float clipR = canvas.getWidth() + stroke;
+                float clipL = -bandWidth / 2f;
+                float clipB = -bandWidth / 2f;
+                float clipT = canvas.getHeight() + bandWidth / 2f;
+                float clipR = canvas.getWidth() + bandWidth / 2f;
 
                 GPXUtilities.WptPt pt = culled.get(0);
                 float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
@@ -253,15 +245,18 @@ public class Renderable {
 
                     if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
                             && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
-                        alphaPaint.setColor(pt.colourARGB);
-                        canvas2.drawLine(lastx, lasty, x, y, alphaPaint);
+                        p.setColor(pt.colourARGB);
+                        canvas.drawLine(lastx, lasty, x, y, p);
                     }
                     lastx = x;
                     lasty = y;
                 }
-                canvas2.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-                alphaPaint.setAlpha(alpha);
-                canvas.drawBitmap(newBitmap, 0, 0, alphaPaint);
+                canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
+                p.setStrokeCap(cap);
+                p.setStrokeWidth(stroke);
+                p.setColor(col);
+
             }
         }
     }
@@ -270,8 +265,8 @@ public class Renderable {
 
     public static class SpeedColours extends Altitude {
 
-        public SpeedColours(List<GPXUtilities.WptPt> pt, double segmentSize, int alpha) {
-            super(pt, segmentSize, alpha);
+        public SpeedColours(List<GPXUtilities.WptPt> pt, double segmentSize) {
+            super(pt, segmentSize);
         }
 
         @Override public void recalculateRenderScale(double zoom) {
@@ -374,6 +369,7 @@ public class Renderable {
         }
 
         @Override public void recalculateRenderScale(double zoom) {
+            hashZoom = zoom;
             if (culled == null && culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);
                 culler.execute("");
@@ -388,14 +384,18 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && !culled.isEmpty()
+            if (culled != null && !culled.isEmpty() && hashZoom > 12
                     && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
+                float scale = 50;
+
                 float stroke = p.getStrokeWidth();
                 int col = p.getColor();
                 float ts = p.getTextSize();
+                Paint.Style st = p.getStyle();
+                p.setStyle(Paint.Style.FILL);
 
                 for (int i = culled.size()-1; --i >= 0;) {
 
@@ -403,7 +403,7 @@ public class Renderable {
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                     float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                    p.setTextSize(50);
+                    p.setTextSize(scale);
                     p.setStrokeWidth(3);
 
                     Rect bounds = new Rect();
@@ -413,15 +413,20 @@ public class Renderable {
                     int rectH =  bounds.height();
                     int rectW =  bounds.width();
 
-                    if (x < canvas.getWidth() + rectW/2 +20 && x > -rectW/2 +20 && y < canvas.getHeight() + rectH/2f && y > -rectH/2f) {
-//                        p.setColor(Color.WHITE);
-//                        p.setStyle(Paint.Style.FILL);
-//                        canvas.drawText(lab, x - rectW / 2+10+2, y + rectH / 2 + 2, p);
+                    if (x < canvas.getWidth() + rectW/2 + scale && x > -rectW/2 + scale && y < canvas.getHeight() + rectH/2f && y > -rectH/2f) {
+
+                        p.setStyle(Paint.Style.FILL);
                         p.setColor(Color.BLACK);
-                        canvas.drawText(lab,x-rectW/2+20,y+rectH/2,p);
+                        p.setStrokeWidth(stroke);
+                        canvas.drawPoint(x, y, p);
+                        p.setStrokeWidth(4);
+                        p.setColor(Color.BLACK);
+                        canvas.drawText(lab,x-rectW/2+40,y+rectH/2,p);
                     }
                     canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 }
+
+                p.setStyle(st);
                 p.setStrokeWidth(stroke);
                 p.setColor(col);
                 p.setTextSize(ts);
