@@ -44,7 +44,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
@@ -115,7 +114,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MapActivity extends AccessibleActivity implements DownloadEvents,
+public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		ActivityCompat.OnRequestPermissionsResultCallback, IRouteInformationListener,
 		MapMarkerChangedListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
