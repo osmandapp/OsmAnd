@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="access_shared_string_navigate_up">Navigate up</string>
     <string name="access_sort">Sort</string>
     <string name="map_mode">Map mode</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX files selected</string>

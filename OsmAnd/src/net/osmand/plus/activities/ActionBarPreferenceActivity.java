@@ -45,6 +45,7 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 		}
 		tb.setClickable(true);
 		tb.setNavigationIcon(((OsmandApplication) getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));
 		tb.setNavigationOnClickListener(new View.OnClickListener() {
