@@ -8,7 +8,7 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal" >
 
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/plugin_logo"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -54,7 +54,7 @@
             osmand:typeface="@string/font_roboto_regular" />
     </LinearLayout>
 
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/plugin_options"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"

@@ -9,12 +9,14 @@ import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class IconsCache {
 
-	private TLongObjectHashMap<Drawable> drawable = new TLongObjectHashMap<Drawable>();
+	private TLongObjectHashMap<Drawable> drawable = new TLongObjectHashMap<>();
 	private OsmandApplication app;
 	
 	public IconsCache(OsmandApplication app) {
@@ -114,6 +116,15 @@ public class IconsCache {
 	@Deprecated
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
 		return getDrawable(id, light ? R.color.icon_color : 0);
+	}
+
+	public static Drawable getContentIconCompat(Context context, @DrawableRes int id) {
+		Drawable drawable = ContextCompat.getDrawable(context, id);
+		@ColorInt int color = ContextCompat.getColor(context, getDefaultColorRes(context));
+		drawable = DrawableCompat.wrap(drawable);
+		drawable.mutate();
+		DrawableCompat.setTint(drawable, color);
+		return drawable;
 	}
 
 	@ColorRes
