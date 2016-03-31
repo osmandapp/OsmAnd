@@ -479,6 +479,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				final boolean flatNow = visibleType == DashboardType.WAYPOINTS_FLAT;
 				flat.setImageDrawable(iconsCache.getIcon(flatNow ? R.drawable.ic_tree_list_dark
 						: R.drawable.ic_flat_list_dark));
+				flat.setContentDescription(mapActivity.getString(flatNow ? R.string.access_tree_list : R.string.drawer));
 				flat.setOnClickListener(new View.OnClickListener() {
 
 					@Override

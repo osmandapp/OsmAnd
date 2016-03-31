@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="access_tree_list">Tree list</string>
     <string name="access_shared_string_not_installed">Not installed</string>
     <string name="access_widget_expand">Expand</string>
     <string name="access_shared_string_navigate_up">Navigate up</string>

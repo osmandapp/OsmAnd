@@ -1990,4 +1990,5 @@
     <string name="access_shared_string_navigate_up">Перейти вверх</string>
     <string name="access_widget_expand">Развернуть</string>
     <string name="access_shared_string_not_installed">Не установлен</string>
+    <string name="access_tree_list">Иерархический список</string>
 </resources>
