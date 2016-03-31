@@ -84,6 +84,10 @@ public class Renderable {
             //    view.refreshMap();          // force a redraw
             //}
         }
+
+        public List<GPXUtilities.WptPt> getPoints() {
+            return points;
+        }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -116,8 +120,8 @@ public class Renderable {
                 double cullDistance = Math.pow(2.0, base - zoom);
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
 
-                if (zoom < newZoom) {               // if line would look worse (we're zooming in) then...
-                    culled = null;                  // use full-resolution until re-cull complete
+                if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
+                    culled = null;                 // use full-resolution until re-cull complete
                 }
                 zoom = newZoom;
                 culler.execute("");
@@ -279,12 +283,8 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            // This is a simple/experimental track subsegment 'conveyor' animator just to show how
-            // effects of constant segment-size can be used for animation effects.  I've put an arrowhead
-            // in just to show what can be done.  Very hacky, it's just a "hey look at this".
-
             if (culled != null && !culled.isEmpty()
-                   /* && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)*/ ) {
+                   && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
