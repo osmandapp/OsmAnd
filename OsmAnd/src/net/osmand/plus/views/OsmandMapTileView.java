@@ -33,7 +33,6 @@ import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
-import net.osmand.access.MapExplorer;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -220,7 +219,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		handler = new Handler();
 		baseHandler = new Handler(application.getResourceManager().getRenderingBufferImageThread().getLooper());
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
-		gestureDetector = new GestureDetector(ctx, new MapExplorer(this, new MapTileViewOnGestureListener()));
+		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
 		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
 		doubleTapScaleDetector = new DoubleTapScaleDetector(activity, new MapTileViewMultiTouchZoomListener());
 
@@ -1037,7 +1036,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			animatedDraggingThread.startDragging(velocityX, velocityY,
+			animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
 					e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
 			return true;
 		}
