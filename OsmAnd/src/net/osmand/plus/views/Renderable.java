@@ -117,7 +117,7 @@ public class Renderable {
                 if (culler != null) {
                     culler.cancel(true);
                 }
-                double cullDistance = Math.pow(2.0, base - zoom);
+                double cullDistance = Math.pow(2.0, base - newZoom);
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
 
                 if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
