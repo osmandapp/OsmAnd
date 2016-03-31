@@ -34,7 +34,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -490,7 +489,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 		final String actionButton = value;
 		if (allGpxAdapter.getGroupCount() == 0) {
-			AccessibleToast.makeText(getActivity(),
+			Toast.makeText(getActivity(),
 					app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT)
 					.show();
 			return;
@@ -520,7 +519,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
-					AccessibleToast.makeText(getActivity(),
+					Toast.makeText(getActivity(),
 							app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()),
 							Toast.LENGTH_SHORT).show();
 					return true;
@@ -559,7 +558,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		}
 		if (e) {
-			AccessibleToast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -1063,7 +1062,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(String result) {
 			getActivity().setProgressBarIndeterminateVisibility(false);
-			AccessibleToast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
 		}
 	}
 

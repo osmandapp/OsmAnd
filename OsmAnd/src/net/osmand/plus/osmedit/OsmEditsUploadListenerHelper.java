@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -60,7 +59,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			}
 		}
 		if (uploaded == pointsNum) {
-			AccessibleToast.makeText(activity,
+			Toast.makeText(activity,
 					MessageFormat.format(numberFormat, uploaded),
 					Toast.LENGTH_LONG)
 					.show();

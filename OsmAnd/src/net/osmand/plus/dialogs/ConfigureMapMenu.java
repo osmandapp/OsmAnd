@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
@@ -304,7 +303,7 @@ public class ConfigureMapMenu {
 									app.getRendererRegistry().setCurrentSelectedRender(loaded);
 									refreshMapComplete(activity);
 								} else {
-									AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+									Toast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 								}
 								adapter.getItem(pos).setDescription(getRenderDescr(activity));
 								activity.getDashboard().refreshContent(true);

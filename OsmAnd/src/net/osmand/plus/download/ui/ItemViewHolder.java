@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -304,7 +303,7 @@ public class ItemViewHolder {
 					case ASK_FOR_SEAMARKS_PLUGIN:
 						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
 								.getPluginsActivity()));
-						AccessibleToast.makeText(context.getApplicationContext(),
+						Toast.makeText(context.getApplicationContext(),
 								context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
 						break;
 					case ASK_FOR_SRTM_PLUGIN_PURCHASE:
@@ -314,7 +313,7 @@ public class ItemViewHolder {
 					case ASK_FOR_SRTM_PLUGIN_ENABLE:
 						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
 								.getPluginsActivity()));
-						AccessibleToast.makeText(context, context.getString(R.string.activate_srtm_plugin),
+						Toast.makeText(context, context.getString(R.string.activate_srtm_plugin),
 								Toast.LENGTH_SHORT).show();
 						break;
 					case DOWNLOAD:

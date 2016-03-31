@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -103,7 +102,7 @@ public class MapDataMenuController extends MenuController {
 						} else {
 							mapActivity.startActivity(new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 									.getPluginsActivity()));
-							AccessibleToast.makeText(mapActivity, mapActivity.getString(R.string.activate_srtm_plugin),
+							Toast.makeText(mapActivity, mapActivity.getString(R.string.activate_srtm_plugin),
 									Toast.LENGTH_SHORT).show();
 						}
 					} else {

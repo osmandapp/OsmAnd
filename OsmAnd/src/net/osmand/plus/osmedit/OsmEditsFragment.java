@@ -28,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
@@ -650,7 +649,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		protected void onPostExecute(String result) {
 			getActivity().setProgressBarIndeterminateVisibility(false);
 			if (result != null) {
-				AccessibleToast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
 			} else {
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);

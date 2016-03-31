@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -374,11 +373,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			@Override
 			protected void onPostExecute(String warning) {
 				if (warning == null) {
-					AccessibleToast.makeText(activity,
+					Toast.makeText(activity,
 							MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
 							Toast.LENGTH_LONG).show();
 				} else {
-					AccessibleToast.makeText(activity, warning, Toast.LENGTH_LONG).show();
+					Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
 				}
 				if(dlg != null && dlg.isShowing()) {
 					dlg.dismiss();

@@ -26,7 +26,6 @@ import android.widget.Toast;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -564,7 +563,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -573,7 +572,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -582,7 +581,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -591,7 +590,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();				
+				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();				
 			}
 		});
 	}

@@ -18,7 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -319,7 +318,7 @@ public class SearchAddressFragment extends Fragment {
 	
 	public void select(int mode) {
 		if (searchPoint == null) {
-			AccessibleToast.makeText(getActivity(), R.string.please_select_address, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), R.string.please_select_address, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		AddressInformation ai = new AddressInformation();

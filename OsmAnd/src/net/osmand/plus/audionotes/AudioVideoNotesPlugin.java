@@ -41,7 +41,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -726,7 +725,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		// double lat = mapActivity.getMapView().getLatitude();
 		// double lon = mapActivity.getMapView().getLongitude();
 		if (loc == null) {
-			AccessibleToast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
+			Toast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
 			return;
 		}
 		double lon = loc.getLongitude();
@@ -965,7 +964,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void logErr(Exception e) {
 		log.error("Error starting recorder ", e);
-		AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+		Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 	}
 
 	protected void openCamera() {
@@ -1094,7 +1093,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					mediaRecFile = f;
 
 				} catch (Exception e) {
-					AccessibleToast.makeText(app, e.getMessage(), Toast.LENGTH_LONG).show();
+					Toast.makeText(app, e.getMessage(), Toast.LENGTH_LONG).show();
 					e.printStackTrace();
 					res = false;
 				}
@@ -1118,7 +1117,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				runMediaRecorder(mapActivity, mr, f);
 			} catch (Exception e) {
 				log.error("Error starting audio recorder ", e);
-				AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : "
+				Toast.makeText(app, app.getString(R.string.recording_error) + " : "
 						+ e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		} else {
@@ -1410,7 +1409,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			mapActivity.startActivityForResult(takePictureIntent, 205);
 		} catch (Exception e) {
 			log.error("Error taking a picture ", e);
-			AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 	}
 

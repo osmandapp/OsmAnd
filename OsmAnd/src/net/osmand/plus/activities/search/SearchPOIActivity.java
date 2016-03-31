@@ -37,7 +37,6 @@ import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -191,7 +190,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private boolean search() {
 		String query = searchFilter.getText().toString().trim();
 		if (query.length() < 2 && isNameSearch()) {
-			AccessibleToast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG)
+			Toast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG)
 					.show();
 			return true;
 		}
@@ -607,7 +606,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			updateButtonState();
 			if (isNameSearch()) {
 				if (isNominatimFilter() && !Algorithms.isEmpty(((NominatimPoiFilter) filter).getLastError())) {
-					AccessibleToast.makeText(SearchPOIActivity.this, ((NominatimPoiFilter) filter).getLastError(),
+					Toast.makeText(SearchPOIActivity.this, ((NominatimPoiFilter) filter).getLastError(),
 							Toast.LENGTH_LONG).show();
 				}
 				amenityAdapter.setNewModel(result);
@@ -888,7 +887,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public void onClick(DialogInterface dialog, int which) {
 				
 				if (app.getPoiFilters().removePoiFilter(filter)) {
-					AccessibleToast.makeText(
+					Toast.makeText(
 							SearchPOIActivity.this,
 							MessageFormat.format(SearchPOIActivity.this.getText(R.string.edit_filter_delete_message).toString(),
 									filter.getName()), Toast.LENGTH_SHORT).show();
@@ -924,7 +923,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					nFilter.setSavedFilterByName(searchFilter.getText().toString());
 				}
 				if (app.getPoiFilters().createPoiFilter(nFilter)) {
-					AccessibleToast.makeText(
+					Toast.makeText(
 							SearchPOIActivity.this,
 							MessageFormat.format(SearchPOIActivity.this.getText(R.string.edit_filter_create_message).toString(),
 									editText.getText().toString()), Toast.LENGTH_SHORT).show();

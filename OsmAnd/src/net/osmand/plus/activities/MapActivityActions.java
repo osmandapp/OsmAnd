@@ -21,7 +21,6 @@ import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -136,7 +135,7 @@ public class MapActivityActions implements DialogProvider {
 				String name = editText.getText().toString();
 				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
 				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), null, name, null, 0);
-				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
+				Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 						.show();
 				dialog.dismiss();
 			}
@@ -166,7 +165,7 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
+				Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -262,7 +261,7 @@ public class MapActivityActions implements DialogProvider {
 		@Override
 		protected void onPostExecute(String result) {
 			if (result != null) {
-				AccessibleToast.makeText(app, result, Toast.LENGTH_LONG).show();
+				Toast.makeText(app, result, Toast.LENGTH_LONG).show();
 			}
 		}
 
@@ -492,12 +491,12 @@ public class MapActivityActions implements DialogProvider {
 				int zoom = args.getInt(KEY_ZOOM);
 				BaseMapLayer mainLayer = mapView.getMainLayer();
 				if (!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()) {
-					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
 				if (mapSource == null || !mapSource.couldBeDownloadedFromInternet()) {
-					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();

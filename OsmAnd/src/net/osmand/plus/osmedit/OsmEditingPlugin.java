@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
@@ -358,7 +357,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		String name = settings.USER_NAME.get();
 		String pwd = settings.USER_PASSWORD.get();
 		if (Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) {
-			AccessibleToast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
+			Toast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
 			return false;
 		}
 		AlertDialog.Builder bldr = new AlertDialog.Builder(la);

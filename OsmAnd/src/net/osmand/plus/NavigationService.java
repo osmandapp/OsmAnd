@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmo.OsMoPlugin;
 import android.app.AlarmManager;
@@ -246,7 +245,7 @@ public class NavigationService extends Service implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		AccessibleToast.makeText(this, getString(R.string.off_router_service_no_gps_available), Toast.LENGTH_LONG).show();
+		Toast.makeText(this, getString(R.string.off_router_service_no_gps_available), Toast.LENGTH_LONG).show();
 	}
 
 

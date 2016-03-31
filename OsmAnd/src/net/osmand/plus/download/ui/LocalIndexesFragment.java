@@ -37,7 +37,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -289,7 +288,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 									}
 									File dest = new File(f.getParentFile(), newName);
 									if (dest.exists()) {
-										AccessibleToast.makeText(a, R.string.file_with_name_already_exists,
+										Toast.makeText(a, R.string.file_with_name_already_exists,
 												Toast.LENGTH_LONG).show();
 										return;
 									} else {
@@ -301,7 +300,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 												callback.run();
 											}
 										} else {
-											AccessibleToast.makeText(a, R.string.file_can_not_be_renamed,
+											Toast.makeText(a, R.string.file_can_not_be_renamed,
 													Toast.LENGTH_LONG).show();
 										}
 									}
@@ -504,7 +503,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected void onPostExecute(String result) {
 			a.setProgressBarIndeterminateVisibility(false);
-			AccessibleToast.makeText(a, result, Toast.LENGTH_LONG).show();
+			Toast.makeText(a, result, Toast.LENGTH_LONG).show();
 			if (operation == RESTORE_OPERATION || operation == BACKUP_OPERATION) {
 				a.reloadLocalIndexes();
 			} else {
@@ -688,7 +687,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			listAdapter.cancelFilter();
 			expandAllGroups();
 			listAdapter.notifyDataSetChanged();
-			AccessibleToast.makeText(getDownloadActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getDownloadActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
 		expandAllGroups();
@@ -717,7 +716,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
-					AccessibleToast.makeText(getDownloadActivity(),
+					Toast.makeText(getDownloadActivity(),
 							getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 					return true;
 				}

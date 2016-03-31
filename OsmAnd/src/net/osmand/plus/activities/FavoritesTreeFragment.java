@@ -31,7 +31,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -472,7 +471,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	private void shareFavourites() {
 		if (favouritesAdapter.isEmpty()) {
-			AccessibleToast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 		} else {
 			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
 				@Override
@@ -518,9 +517,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	protected void export() {
 		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
 		if (favouritesAdapter.isEmpty()) {
-			AccessibleToast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 		} else if (!tosave.getParentFile().exists()) {
-			AccessibleToast.makeText(getActivity(), R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 		} else {
 			final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>() {
 				@Override
@@ -537,12 +536,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				protected void onPostExecute(String warning) {
 					hideProgressBar();
 					if (warning == null) {
-						AccessibleToast.makeText(
+						Toast.makeText(
 								getActivity(),
 								MessageFormat.format(getString(R.string.fav_saved_sucessfully),
 										tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
 					} else {
-						AccessibleToast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
 					}
 				}
 			};

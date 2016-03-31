@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import net.osmand.IndexConstants;
 import net.osmand.ValueHolder;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
@@ -294,7 +293,7 @@ public class DashChooseAppDirFragment {
 								mapsCopied = true;
 								getMyApplication().getResourceManager().resetStoreDirectory();
 							} else {
-								AccessibleToast.makeText(activity, R.string.copying_osmand_file_failed,
+								Toast.makeText(activity, R.string.copying_osmand_file_failed,
 										Toast.LENGTH_SHORT).show();
 							}
 							updateView();
@@ -324,7 +323,7 @@ public class DashChooseAppDirFragment {
 									.remove(fragment).commit();
 						}
 					} else {
-						AccessibleToast.makeText(activity, R.string.specified_directiory_not_writeable,
+						Toast.makeText(activity, R.string.specified_directiory_not_writeable,
 								Toast.LENGTH_LONG).show();
 					}
 					if(dlg != null) {

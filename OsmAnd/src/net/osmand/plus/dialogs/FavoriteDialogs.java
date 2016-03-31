@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -72,7 +71,7 @@ public class FavoriteDialogs {
 		}
 		final String[] names = new String[points.size()];
 		if(points.size() == 0){
-			AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
 			return null;
 		}
 		return showFavoritesDialog(activity, favouritesAdapter, click, null, dlgHolder, true);
@@ -154,7 +153,7 @@ public class FavoriteDialogs {
 			protected void addFavorite(final Activity activity, FavouritePoint point, final FavouritesDbHelper helper) {
 				boolean added = helper.addFavourite(point);
 				if (added) {
-					AccessibleToast.makeText(activity, MessageFormat.format(
+					Toast.makeText(activity, MessageFormat.format(
 							activity.getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}

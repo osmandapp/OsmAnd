@@ -21,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -533,7 +532,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					AccessibleToast.makeText(SettingsBaseActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+					Toast.makeText(SettingsBaseActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 
 				}
 			});

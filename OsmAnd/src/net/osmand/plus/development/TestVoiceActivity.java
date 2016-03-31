@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -118,7 +117,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					public void run() {
 						CommandPlayer p = app.getRoutingHelper().getVoiceRouter().getPlayer();
 						if (p == null) {
-							AccessibleToast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
+							Toast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
 						} else {
 							addButtons(ll, p);
 						}						

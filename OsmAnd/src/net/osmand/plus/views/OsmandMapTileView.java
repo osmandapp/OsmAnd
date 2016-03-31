@@ -33,7 +33,6 @@ import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
-import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
@@ -885,7 +884,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(application, msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+				Toast.makeText(application, msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			}
 		});
 	}

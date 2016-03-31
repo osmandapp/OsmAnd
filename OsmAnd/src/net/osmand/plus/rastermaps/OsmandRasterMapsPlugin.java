@@ -18,7 +18,6 @@ import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
-import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -322,7 +321,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries();
 		if (!settings.isInternetConnectionAvailable(true)) {
-			AccessibleToast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return;
 		}
 		AsyncTask<Void, Void, List<TileSourceTemplate>> t = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
@@ -333,7 +332,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 			protected void onPostExecute(final java.util.List<TileSourceTemplate> downloaded) {
 				if (downloaded == null || downloaded.isEmpty()) {
-					AccessibleToast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
+					Toast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -348,7 +347,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 						selected[which] = isChecked;
 						if (entriesMap.containsKey(downloaded.get(which).getName()) && isChecked) {
-							AccessibleToast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+							Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 						}
 					}
 				});
@@ -447,13 +446,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							.replace("{$y}", "{2}").replace("{$z}", "{0}"));
 					if (r.getName().length() > 0) {
 						if (settings.installTileSource(r)) {
-							AccessibleToast.makeText(activity, activity.getString(R.string.edit_tilesource_successfully, r.getName()),
+							Toast.makeText(activity, activity.getString(R.string.edit_tilesource_successfully, r.getName()),
 									Toast.LENGTH_SHORT).show();
 							resultMatcher.publish(r);
 						}
 					}
 				} catch (RuntimeException e) {
-					AccessibleToast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

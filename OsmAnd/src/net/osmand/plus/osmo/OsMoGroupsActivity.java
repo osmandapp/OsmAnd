@@ -66,7 +66,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.NavigationService;
@@ -672,7 +671,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public static void shareSessionUrl(OsMoPlugin osMoPlugin, Activity ctx) {
 		String sessionURL = osMoPlugin.getTracker().getSessionURL();
 		if (sessionURL == null) {
-			AccessibleToast.makeText(ctx, R.string.osmo_session_not_available, Toast.LENGTH_SHORT).show();
+			Toast.makeText(ctx, R.string.osmo_session_not_available, Toast.LENGTH_SHORT).show();
 		} else {
 			ShareDialog dlg = new ShareDialog(ctx);
 			dlg.setTitle(ctx.getString(R.string.osmo_share_session));

@@ -44,7 +44,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
@@ -700,12 +699,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						-1);
 				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false, true);
 			} catch (NumberFormatException e) {
-				AccessibleToast.makeText(this,
+				Toast.makeText(this,
 						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
 						Toast.LENGTH_LONG).show(); //$NON-NLS-1$
 			}
 		} else {
-			AccessibleToast.makeText(this,
+			Toast.makeText(this,
 					getString(R.string.navigation_intent_invalid, schemeSpecificPart),
 					Toast.LENGTH_LONG).show(); //$NON-NLS-1$
 		}
@@ -814,16 +813,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		final int newZoom = mapView.getZoom() + stp;
 		final double zoomFrac = mapView.getZoomFractionalPart();
 		if (newZoom > 22) {
-			AccessibleToast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			Toast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
 		if (newZoom < 1) {
-			AccessibleToast.makeText(this, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			Toast.makeText(this, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, zoomFrac, changeLocation);
 		if (app.accessibilityEnabled())
-			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			Toast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();
 	}
 
@@ -1095,9 +1094,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			// ok
 		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-			AccessibleToast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
 		} else {
-			AccessibleToast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
 		}
 	}
 

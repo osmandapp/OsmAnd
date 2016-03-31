@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -50,11 +49,11 @@ public class DownloadTilesDialog {
 	public void openDialog(){
 		BaseMapLayer mainLayer = mapView.getMainLayer();
 		if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
-			AccessibleToast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 		}
 		final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
 		if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
-			AccessibleToast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		final RotatedTileBox rb = mapView.getCurrentRotatedTileBox();
