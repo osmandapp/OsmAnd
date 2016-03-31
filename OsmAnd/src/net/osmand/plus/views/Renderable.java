@@ -41,7 +41,7 @@ public class Renderable {
             t = new Timer();
             t.scheduleAtFixedRate(new TimerTask() {
                 public void run() {
-                    conveyor = (conveyor+1)&31;             // mask/wrap to avoid boundary issues
+                    conveyor++;
                     view.refreshMap();
                 }
             }, 0, period);
@@ -59,18 +59,12 @@ public class Renderable {
         protected QuadRect trackBounds = new QuadRect(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY,
                 Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
 
-
         double zoom = -1;
-        double hashPoint;
-
         boolean shadow = false;         // TODO: fixup shadow support
-
         AsynchronousResampler culler = null;                        // The currently active resampler
 
         public RenderableSegment(List<GPXUtilities.WptPt> pt) {
             points = pt;
-            hashPoint = points.hashCode();
-            zoom = 0;
             culled = null;
         }
 
@@ -80,7 +74,6 @@ public class Renderable {
         // When the asynchronous task has finished, it calls this function to set the 'culled' list
         public void setRDP(List<GPXUtilities.WptPt> cull) {
 
-            assert cull!=null;
             culled = cull;
 
             // Find the segment's bounding box, to allow quick draw rejection later
@@ -126,27 +119,24 @@ public class Renderable {
             currentTrack = true;
         }
 
-        @Override public void recalculateRenderScale(double zoom) {
+        @Override public void recalculateRenderScale(double newZoom) {
 
             // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
             // The asynchronous callback will set the variable 'culled', and that is preferentially used for rendering
             // The current track does not undergo this process, as it is potentially constantly changing.
 
-            if (!currentTrack && this.zoom != zoom) {
+            if (!currentTrack && zoom != newZoom) {
 
                 if (culler != null) {
                     culler.cancel(true);
                 }
-
                 double cullDistance = Math.pow(2.0, base - zoom);
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
 
-                if (this.zoom < zoom) {            // if line would look worse (we're zooming in) then...
+                if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
                     culled = null;                 // use full-resolution until re-cull complete
                 }
-
-                this.zoom = zoom;
-
+                zoom = newZoom;
                 culler.execute("");
 
                 // The trackBounds may be slightly inaccurate (unlikely, but...) so let's reset it
@@ -236,7 +226,8 @@ public class Renderable {
                 float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                 float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                for (int i = 1; i < culled.size(); i++) {
+                int size = culled.size();
+                for (int i = 1; i < size; i++) {
                     pt = culled.get(i);
 
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
@@ -328,9 +319,11 @@ public class Renderable {
                 float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
                 int intp = conveyor;
-                for (int i = 1; i < culled.size(); i++, intp--) {
 
+                int size = culled.size();
+                for (int i = 1; i < size; i++, intp--) {
                     pt = culled.get(i);
+
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                     float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
@@ -412,7 +405,8 @@ public class Renderable {
                     int rectH =  bounds.height();
                     int rectW =  bounds.width();
 
-                    if (x < canvas.getWidth() + rectW/2 + scale && x > -rectW/2 + scale && y < canvas.getHeight() + rectH/2f && y > -rectH/2f) {
+                    if (x < canvas.getWidth() + rectW/2 + scale && x > -rectW/2 + scale
+                            && y < canvas.getHeight() + rectH/2f && y > -rectH/2f) {
 
                         p.setStyle(Paint.Style.FILL);
                         p.setColor(Color.BLACK);
@@ -467,34 +461,23 @@ public class Renderable {
             if (culled != null && !culled.isEmpty() && zoom > 14
                     && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
-                // This is all very hacky and experimental code. Just showing how to do an animating segmented
-                // line to draw arrows in the direction of movement.
-
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
                 float stroke = p.getStrokeWidth();
-                p.setStrokeWidth(stroke*1.5f);
+                float arrowSize = (float) Math.pow(2.0,zoom-18) * 128;
 
-                float sizer = (float) Math.pow(2.0,zoom-18) * 128;
                 int pCol = p.getColor();
-
                 p.setColor(Color.RED); //getComplementaryColor(p.getColor()));    // and a complementary colour
 
-                float lastx = Float.NEGATIVE_INFINITY;
-                float lasty = Float.NEGATIVE_INFINITY;
-                Path path = new Path();
-
-                int h = tileBox.getPixHeight();
-                int w = tileBox.getPixWidth();
+                float lastx = 0;
+                float lasty = 0;
                 boolean broken = true;
                 int intp = conveyor;                                // the segment cycler
 
-
-                float clipL = -sizer;
-                float clipB = -sizer;
-                float clipT = canvas.getHeight() + sizer;
-                float clipR = canvas.getWidth() + sizer;
-
+                float clipL = -arrowSize;
+                float clipB = -arrowSize;
+                float clipT = canvas.getHeight() + arrowSize;
+                float clipR = canvas.getWidth() + arrowSize;
 
                 for (GPXUtilities.WptPt pt : culled) {
                     intp--;                                         // increment to go the other way!
@@ -507,35 +490,32 @@ public class Renderable {
                     if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
                             && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
 
-                        if ((intp & 15) < 6) {
-                            p.setStrokeWidth(stroke * (0.75f + 1.f* (5 - (intp & 7)) / 2f));
+                        int segment = intp & 15;
+                        if (segment < 6) {
+                            p.setStrokeWidth(stroke * (3.25f - segment/2f));
 
                             if (!broken) {
                                 canvas.drawLine(lastx, lasty, x, y, p);
                             }
-
                             nextBroken = false;
 
-                            if (zoom > 15 &&  (intp & 15) == 0) {
-                                // arrowhead - trial and error trig till it looked OK :)
+                            // arrowhead...
+                            if (zoom > 15 &&  segment == 0) {
                                 double angle = Math.atan2(lasty - y, lastx - x);
-                                float newx1 = x + (float) Math.sin(angle - 0.4 + Math.PI / 2) * sizer;
-                                float newy1 = y - (float) Math.cos(angle - 0.4 + Math.PI / 2) * sizer;
-                                float newx2 = x + (float) Math.sin(angle + 0.4 + Math.PI / 2) * sizer;
-                                float newy2 = y - (float) Math.cos(angle + 0.4 + Math.PI / 2) * sizer;
+                                float newx1 = x + (float) Math.cos(angle - 0.4) * arrowSize;
+                                float newy1 = y + (float) Math.sin(angle - 0.4) * arrowSize;
+                                float newx2 = x + (float) Math.cos(angle + 0.4) * arrowSize;
+                                float newy2 = y + (float) Math.sin(angle + 0.4) * arrowSize;
 
                                 canvas.drawLine(newx1, newy1, x, y, p);
                                 canvas.drawLine(newx2, newy2, x, y, p);
                             }
                         }
                     }
-
                     broken = nextBroken;
                     lastx = x;
                     lasty = y;
                 }
-
-//                canvas.drawPath(path, p);
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 p.setColor(pCol);
                 p.setStrokeWidth(stroke);
