@@ -2336,4 +2336,7 @@
     <string name="file_name_containes_illegal_char">Filnavnet indeholder ikke tilladte tegn</string>
 <string name="no_map_markers_found">Tilføj kortmarkører via kort</string>
     <string name="no_waypoints_found">Ingen rutepunkter fundet</string>
+    <string name="rendering_value_thin_name">Tynd</string>
+    <string name="rendering_value_medium_name">Mellem</string>
+    <string name="rendering_value_bold_name">Fed</string>
     </resources>
