@@ -118,6 +118,18 @@
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>
 
         <item name="color_dialog_buttons">@color/color_dialog_buttons_light</item>
+
+        <item name="popupMenuStyle">@style/PopupMenuLight</item>
+    </style>
+
+    <style name="PopupMenuLight" parent="@style/Widget.AppCompat.Light.PopupMenu">
+        <item name="overlapAnchor">true</item>'
+        <item name="android:dropDownVerticalOffset">8dip</item>
+    </style>
+
+    <style name="PopupMenuDark" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="overlapAnchor">true</item>'
+        <item name="android:dropDownVerticalOffset">8dip</item>
     </style>
 
     <style name="OsmandLightTheme.NoActionbar">
@@ -237,6 +249,8 @@
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
         <item name="color_dialog_buttons">@color/color_dialog_buttons_dark</item>
+
+        <item name="popupMenuStyle">@style/PopupMenuDark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

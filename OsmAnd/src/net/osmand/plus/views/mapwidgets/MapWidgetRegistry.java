@@ -7,8 +7,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.PopupMenu;
-import android.view.Gravity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +26,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -383,27 +382,32 @@ public class MapWidgetRegistry {
 													  final View view,
 													  final int itemId,
 													  final int pos) {
-							PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.CENTER_VERTICAL);
+							View textWrapper = view.findViewById(R.id.text_wrapper);
+							IconPopupMenu popup = new IconPopupMenu(view.getContext(), textWrapper);
 							MenuInflater inflater = popup.getMenuInflater();
 							inflater.inflate(R.menu.vidget_visibility_menu, popup.getMenu());
-							popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-								@Override
-								public boolean onMenuItemClick(MenuItem menuItem) {
+							IconsCache.paintMenuItem(mapActivity, popup.getMenu().findItem(R.id.action_show));
+							IconsCache.paintMenuItem(mapActivity, popup.getMenu().findItem(R.id.action_hide));
+							IconsCache.paintMenuItem(mapActivity, popup.getMenu().findItem(R.id.action_collapse));
+							popup.setOnMenuItemClickListener(
+									new IconPopupMenu.OnMenuItemClickListener() {
+										@Override
+										public boolean onMenuItemClick(MenuItem menuItem) {
 
-									switch (menuItem.getItemId()) {
-										case R.id.action_show:
-											setVisibility(adapter, pos, true, false);
-											return true;
-										case R.id.action_hide:
-											setVisibility(adapter, pos, false, false);
-											return true;
-										case R.id.action_collapse:
-											setVisibility(adapter, pos, true, true);
-											return true;
-									}
-									return false;
-								}
-							});
+											switch (menuItem.getItemId()) {
+												case R.id.action_show:
+													setVisibility(adapter, pos, true, false);
+													return true;
+												case R.id.action_hide:
+													setVisibility(adapter, pos, false, false);
+													return true;
+												case R.id.action_collapse:
+													setVisibility(adapter, pos, true, true);
+													return true;
+											}
+											return false;
+										}
+									});
 							popup.show();
 							return false;
 						}

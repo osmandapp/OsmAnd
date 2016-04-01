@@ -11,6 +11,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.view.MenuItem;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -125,6 +126,14 @@ public class IconsCache {
 		drawable.mutate();
 		DrawableCompat.setTint(drawable, color);
 		return drawable;
+	}
+
+	public static void paintMenuItem(Context context, MenuItem menuItem) {
+		Drawable drawable = menuItem.getIcon();
+		drawable = DrawableCompat.wrap(drawable);
+		drawable.mutate();
+		int color = ContextCompat.getColor(context, getDefaultColorRes(context));
+		DrawableCompat.setTint(drawable, color);
 	}
 
 	@ColorRes
