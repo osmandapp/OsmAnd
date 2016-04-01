@@ -63,7 +63,7 @@ public class ConfigureMapMenu {
 
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
-		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
+		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.app_modes_choose, ma)
 				.setLayout(R.layout.mode_toggles).createItem());
@@ -92,7 +92,7 @@ public class ConfigureMapMenu {
 		private List<String> getAlreadySelectedGpx() {
 			GpxSelectionHelper selectedGpxHelper = ma.getMyApplication().getSelectedGpxHelper();
 			List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
-			List<String> files = new ArrayList<String>();
+			List<String> files = new ArrayList<>();
 			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
 				files.add(file.getGpxFile().path);
 			}
@@ -175,7 +175,7 @@ public class ConfigureMapMenu {
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_show, activity)
-				.setCategory(true).setLayout(R.layout.drawer_list_sub_header).createItem());
+				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_poi, activity)
@@ -231,7 +231,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_widget_map_rendering, activity)
 				.setCategory(true)
-				.setLayout(R.layout.drawer_list_sub_header).createItem());
+				.setLayout(R.layout.list_group_title_with_switch).createItem());
 		String descr = getRenderDescr(activity);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_widget_renderer, activity)
@@ -319,7 +319,7 @@ public class ConfigureMapMenu {
 						final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 						int p = (int) (mapDensity.get() * 100);
 						final TIntArrayList tlist = new TIntArrayList(new int[]{33, 50, 75, 100, 150, 200, 300, 400});
-						final List<String> values = new ArrayList<String>();
+						final List<String> values = new ArrayList<>();
 						int i = -1;
 						for (int k = 0; k <= tlist.size(); k++) {
 							final boolean end = k == tlist.size();
@@ -433,7 +433,7 @@ public class ConfigureMapMenu {
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
-			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>();
+			List<RenderingRuleProperty> customRules = new ArrayList<>();
 			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())) {
 					customRules.add(p);
@@ -451,8 +451,10 @@ public class ConfigureMapMenu {
 
 			if (customRules.size() > 0) {
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitleId(R.string.rendering_category_others, activity).setCategory(true)
-						.setLayout(R.layout.drawer_list_sub_header).createItem());
+						.setTitleId(R.string.rendering_category_others, activity)
+						.setCategory(true)
+						.setLayout(R.layout.list_group_title_with_switch)
+						.createItem());
 				createCustomRenderingProperties(adapter, activity, customRules);
 			}
 		}
@@ -463,11 +465,11 @@ public class ConfigureMapMenu {
 
 	public static String[] getSortedMapNamesIds(Context ctx) {
 		String[] vls = getMapNamesValues(ctx, mapNamesIds);
-		final Map<String, String> mp = new HashMap<String, String>();
+		final Map<String, String> mp = new HashMap<>();
 		for (int i = 0; i < mapNamesIds.length; i++) {
 			mp.put(mapNamesIds[i], vls[i]);
 		}
-		ArrayList<String> lst = new ArrayList<String>(mp.keySet());
+		ArrayList<String> lst = new ArrayList<>(mp.keySet());
 		Collections.sort(lst, new Comparator<String>() {
 			@Override
 			public int compare(String lhs, String rhs) {
@@ -497,8 +499,8 @@ public class ConfigureMapMenu {
 
 	private void createProperties(List<RenderingRuleProperty> customRules, final int strId, String cat,
 								  final ContextMenuAdapter adapter, final MapActivity activity) {
-		final List<RenderingRuleProperty> ps = new ArrayList<RenderingRuleProperty>();
-		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<OsmandSettings.CommonPreference<Boolean>>();
+		final List<RenderingRuleProperty> ps = new ArrayList<>();
+		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<>();
 		Iterator<RenderingRuleProperty> it = customRules.iterator();
 
 		while (it.hasNext()) {
@@ -539,8 +541,7 @@ public class ConfigureMapMenu {
 				enabled++;
 			}
 		}
-		final String descr = enabled + "/" + count;
-		return descr;
+		return enabled + "/" + count;
 	}
 
 	protected void showPreferencesDialog(final ContextMenuAdapter adapter, final ArrayAdapter<?> a, final int pos, final MapActivity activity,
