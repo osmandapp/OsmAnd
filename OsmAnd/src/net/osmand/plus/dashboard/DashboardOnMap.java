@@ -193,6 +193,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private class DashboardActionButton {
 		private Drawable icon;
+		private String text;
 		private View.OnClickListener onClickListener;
 	}
 
@@ -565,6 +566,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 		DashboardActionButton myLocationButton = new DashboardActionButton();
 		myLocationButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_my_location);
+		myLocationButton.text = mapActivity.getString(R.string.map_widget_back_to_loc);
 		myLocationButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -579,6 +581,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 		DashboardActionButton navigateButton = new DashboardActionButton();
 		navigateButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_start_navigation);
+		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -589,6 +592,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 		DashboardActionButton routeButton = new DashboardActionButton();
 		routeButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_directions);
+		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -629,6 +633,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 		DashboardActionButton markersSelectionButton = new DashboardActionButton();
 		markersSelectionButton.icon = ContextCompat.getDrawable(mapActivity, R.drawable.map_start_navigation);
+		markersSelectionButton.text = mapActivity.getString(R.string.map_markers);
 		markersSelectionButton.onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -665,6 +670,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 		if (button != null) {
 			actionButton.setImageDrawable(button.icon);
+			actionButton.setContentDescription(button.text);
 			actionButton.setOnClickListener(button.onClickListener);
 		}
 	}
