@@ -128,7 +128,8 @@ public class ConfigureMapMenu {
 				if (ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()) {
 					ma.getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
-					AlertDialog dialog = ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+					AlertDialog dialog = ma.getMapLayers()
+							.showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
 					dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {

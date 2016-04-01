@@ -146,8 +146,7 @@ public class GpxUiHelper {
 			if (showCurrentGpx) {
 				allGpxList.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, allGpxList, selectedGpxList, multipleChoice,
-					showCurrentGpx);
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, showCurrentGpx);
 
 			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, allGpxList, adapter);
 		}
@@ -167,8 +166,7 @@ public class GpxUiHelper {
 				list.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
 
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, multipleChoice,
-					showCurrentGpx);
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx);
 			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter);
 		}
 		return null;
@@ -191,15 +189,14 @@ public class GpxUiHelper {
 				}
 			}
 
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, false,
-					showCurrentGpx);
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx);
 			return createDialog(activity, showCurrentGpx, false, callbackWithObject, list, adapter);
 		}
 		return null;
 	}
 
-	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList,
-																  List<String> selectedGpxList, boolean multipleChoice,
+	private static ContextMenuAdapter createGpxContextMenuAdapter(List<String> allGpxList,
+																  List<String> selectedGpxList,
 																  boolean showCurrentTrack) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		//element position in adapter
@@ -211,7 +208,7 @@ public class GpxUiHelper {
 			}
 			s = s.replace('_', ' ');
 
-			adapter.addItem(ContextMenuItem.createBuilder(s).setSelected(multipleChoice)
+			adapter.addItem(ContextMenuItem.createBuilder(s).setSelected(false)
 					.setIcon(R.drawable.ic_action_polygom_dark).createItem());
 
 			//if there's some selected files - need to mark them as selected
