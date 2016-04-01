@@ -7,7 +7,8 @@ import android.graphics.Rect;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 import java.util.Timer;
@@ -46,31 +47,43 @@ public class Renderable {
 
     public static abstract class RenderableSegment {
 
-        public List<GPXUtilities.WptPt> points = null;              // Original list of points
-        protected List<GPXUtilities.WptPt> culled = null;           // Reduced/resampled list of points
+        public List<WptPt> points = null;              // Original list of points
+        protected List<WptPt> culled = null;           // Reduced/resampled list of points
 
         protected QuadRect trackBounds;
         double zoom = -1;
         AsynchronousResampler culler = null;                        // The currently active resampler
+        protected Paint paint = null;                   // MUST be set by 'updateLocalPaint' before use
 
-        public RenderableSegment(List<GPXUtilities.WptPt> pt) {
+        public RenderableSegment(List<WptPt> pt) {
             points = pt;
             calculateBounds(points);
+        }
+
+        protected void updateLocalPaint(Paint p) {
+            if (paint == null) {
+                paint = new Paint(p);
+                paint.setStrokeCap(Paint.Cap.ROUND);
+                paint.setStrokeJoin(Paint.Join.ROUND);
+                paint.setStyle(Paint.Style.FILL);
+            }
+            paint.setColor(p.getColor());
+            paint.setStrokeWidth(p.getStrokeWidth());
         }
 
         public void recalculateRenderScale(double zoom) {}
         public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {}
 
-        private void calculateBounds(List<GPXUtilities.WptPt> pts) {
+        private void calculateBounds(List<WptPt> pts) {
             trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
                     Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             updateBounds(pts, 0);
         }
 
-        public void updateBounds(List<GPXUtilities.WptPt> pts, int startIndex) {
+        public void updateBounds(List<WptPt> pts, int startIndex) {
             int size = pts.size();
             for (int i = startIndex; i < size; i++) {
-                GPXUtilities.WptPt pt = pts.get(i);
+                WptPt pt = pts.get(i);
                 trackBounds.right = Math.max(trackBounds.right, pt.lon);
                 trackBounds.left = Math.min(trackBounds.left, pt.lon);
                 trackBounds.top = Math.max(trackBounds.top, pt.lat);
@@ -79,31 +92,26 @@ public class Renderable {
         }
 
         // When the asynchronous task has finished, it calls this function to set the 'culled' list
-        public void setRDP(List<GPXUtilities.WptPt> cull) {
-
+        public void setRDP(List<WptPt> cull) {
             culled = cull;
-            calculateBounds(culled);
-
-            //if (view != null) {
-            //    view.refreshMap();          // force a redraw
-            //}
+            //calculateBounds(culled);
         }
 
-        protected void draw(List<GPXUtilities.WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void draw(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (pts != null && !pts.isEmpty()
-                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+            if (pts.size() > 1 && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
+                updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-
-                float stroke = p.getStrokeWidth()/2;
+                
+                float stroke = paint.getStrokeWidth() / 2;
 
                 float clipL = -stroke;
                 float clipB = -stroke;
                 float clipT = canvas.getHeight() + stroke;
                 float clipR = canvas.getWidth() + stroke;
 
-                GPXUtilities.WptPt pt = pts.get(0);
+                WptPt pt = pts.get(0);
                 float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                 float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
@@ -116,7 +124,7 @@ public class Renderable {
 
                     if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
                             && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
-                        canvas.drawLine(lastx, lasty, x, y, p);
+                        canvas.drawLine(lastx, lasty, x, y, paint);
                     }
                     lastx = x;
                     lasty = y;
@@ -133,7 +141,7 @@ public class Renderable {
 
         double base;     // parameter for calculating Ramer-Douglas-Peucer distance
 
-        public StandardTrack(List<GPXUtilities.WptPt> pt, double base) {
+        public StandardTrack(List<WptPt> pt, double base) {
             super(pt);
             this.base = base;
         }
@@ -149,18 +157,15 @@ public class Renderable {
                 if (culler != null) {
                     culler.cancel(true);
                 }
-                double cullDistance = Math.pow(2.0, base - newZoom);
-                culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
 
                 if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
                     culled = null;                 // use full-resolution until re-cull complete
                 }
                 zoom = newZoom;
-                culler.execute("");
 
-                // The trackBounds may be slightly inaccurate (unlikely, but...) so let's reset it
-                //trackBounds.left = trackBounds.bottom = Double.POSITIVE_INFINITY;
-                //trackBounds.right = trackBounds.bottom = Double.NEGATIVE_INFINITY;
+                double cullDistance = Math.pow(2.0, base - zoom);
+                culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
+                culler.execute("");
             }
         }
 
@@ -175,7 +180,7 @@ public class Renderable {
 
         protected double segmentSize;
 
-        public Altitude(List<GPXUtilities.WptPt> pt, double segmentSize) {
+        public Altitude(List<WptPt> pt, double segmentSize) {
             super(pt);
             this.segmentSize = segmentSize;
         }
@@ -189,26 +194,21 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && !culled.isEmpty()
+            if (culled != null && culled.size() > 1
                 && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
+                updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                Paint.Cap cap = p.getStrokeCap();
-                float stroke = p.getStrokeWidth();
-                int col = p.getColor();
+                float bandWidth = paint.getStrokeWidth() * 3;
+                paint.setStrokeWidth(bandWidth);
 
-                p.setStrokeCap(Paint.Cap.ROUND);
+                float clipL = -bandWidth / 2;
+                float clipB = -bandWidth / 2;
+                float clipT = canvas.getHeight() + bandWidth / 2;
+                float clipR = canvas.getWidth() + bandWidth / 2;
 
-                float bandWidth = stroke * 3f;
-                p.setStrokeWidth(bandWidth);
-
-                float clipL = -bandWidth / 2f;
-                float clipB = -bandWidth / 2f;
-                float clipT = canvas.getHeight() + bandWidth / 2f;
-                float clipR = canvas.getWidth() + bandWidth / 2f;
-
-                GPXUtilities.WptPt pt = culled.get(0);
+                WptPt pt = culled.get(0);
                 float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                 float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
@@ -221,27 +221,22 @@ public class Renderable {
 
                     if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
                             && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
-                        p.setColor(pt.colourARGB);
-                        canvas.drawLine(lastx, lasty, x, y, p);
+                        paint.setColor(pt.colourARGB);
+                        canvas.drawLine(lastx, lasty, x, y, paint);
                     }
                     lastx = x;
                     lasty = y;
                 }
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-
-                p.setStrokeCap(cap);
-                p.setStrokeWidth(stroke);
-                p.setColor(col);
-
             }
         }
     }
 
     //----------------------------------------------------------------------------------------------
 
-    public static class SpeedColours extends Altitude {
+    public static class Speed extends Altitude {
 
-        public SpeedColours(List<GPXUtilities.WptPt> pt, double segmentSize) {
+        public Speed(List<WptPt> pt, double segmentSize) {
             super(pt, segmentSize);
         }
 
@@ -259,7 +254,7 @@ public class Renderable {
 
         private double segmentSize;
 
-        public Conveyor(List<GPXUtilities.WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
+        public Conveyor(List<WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
             super(pt);
             this.segmentSize = segmentSize;
 
@@ -282,21 +277,22 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && !culled.isEmpty()
+            if (culled != null && culled.size() > 1
                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
+                updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                int pCol = p.getColor();
-                float stroke = p.getStrokeWidth()/2f;
-                p.setColor(getComplementaryColor(p.getColor()));
+                paint.setColor(getComplementaryColor(p.getColor()));
 
-                float clipL = -stroke;
-                float clipB = -stroke;
-                float clipT = canvas.getHeight() + stroke;
-                float clipR = canvas.getWidth() + stroke;
+                float strokeRadius = paint.getStrokeWidth() / 2;
 
-                GPXUtilities.WptPt pt = culled.get(0);
+                float clipL = -strokeRadius;
+                float clipB = -strokeRadius;
+                float clipT = canvas.getHeight() + strokeRadius;
+                float clipR = canvas.getWidth() + strokeRadius;
+
+                WptPt pt = culled.get(0);
                 float lastx = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                 float lasty = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
@@ -312,16 +308,13 @@ public class Renderable {
                     if ((intp & 7) < 3) {
                         if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
                                 && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
-                            canvas.drawLine(lastx, lasty, x, y, p);
+                            canvas.drawLine(lastx, lasty, x, y, paint);
                         }
                     }
                     lastx = x;
                     lasty = y;
                 }
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-
-                p.setStrokeWidth(stroke * 2f);
-                p.setColor(pCol);
             }
         }
     }
@@ -332,7 +325,7 @@ public class Renderable {
 
         private double segmentSize;
 
-        public DistanceMarker(List<GPXUtilities.WptPt> pt, double segmentSize) {
+        public DistanceMarker(List<WptPt> pt, double segmentSize) {
             super(pt);
             this.segmentSize = segmentSize;
         }
@@ -340,7 +333,7 @@ public class Renderable {
         @Override public void recalculateRenderScale(double zoom) {
             this.zoom = zoom;
             if (culled == null && culler == null) {
-                culler = new AsynchronousResampler.GenericResampler(this, segmentSize);
+                culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once only
                 culler.execute("");
             }
         }
@@ -356,28 +349,24 @@ public class Renderable {
             if (culled != null && !culled.isEmpty() && zoom > 12
                     && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
+                updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
                 float scale = 50;
-
-                float stroke = p.getStrokeWidth();
-                int col = p.getColor();
-                float ts = p.getTextSize();
-                Paint.Style st = p.getStyle();
-                p.setStyle(Paint.Style.FILL);
+                float stroke = paint.getStrokeWidth();
 
                 for (int i = culled.size()-1; --i >= 0;) {
 
-                    GPXUtilities.WptPt pt = culled.get(i);
+                    WptPt pt = culled.get(i);
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                     float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                    p.setTextSize(scale);
-                    p.setStrokeWidth(3);
+                    paint.setTextSize(scale);
+                    paint.setStrokeWidth(3);
 
                     Rect bounds = new Rect();
                     String lab = getKmLabel(pt.getDistance());
-                    p.getTextBounds(lab, 0, lab.length(), bounds);
+                    paint.getTextBounds(lab, 0, lab.length(), bounds);
 
                     int rectH =  bounds.height();
                     int rectW =  bounds.width();
@@ -385,21 +374,14 @@ public class Renderable {
                     if (x < canvas.getWidth() + rectW/2 + scale && x > -rectW/2 + scale
                             && y < canvas.getHeight() + rectH/2f && y > -rectH/2f) {
 
-                        p.setStyle(Paint.Style.FILL);
-                        p.setColor(Color.BLACK);
-                        p.setStrokeWidth(stroke);
-                        canvas.drawPoint(x, y, p);
-                        p.setStrokeWidth(4);
-                        p.setColor(Color.BLACK);
-                        canvas.drawText(lab,x-rectW/2+40,y+rectH/2,p);
+                        paint.setColor(Color.BLACK);
+                        paint.setStrokeWidth(stroke);
+                        canvas.drawPoint(x, y, paint);
+                        paint.setStrokeWidth(4);
+                        canvas.drawText(lab,x-rectW/2+40,y+rectH/2,paint);
                     }
                     canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 }
-
-                p.setStyle(st);
-                p.setStrokeWidth(stroke);
-                p.setColor(col);
-                p.setTextSize(ts);
             }
         }
     }
@@ -409,8 +391,9 @@ public class Renderable {
     public static class Arrows extends RenderableSegment {
 
         private double segmentSize;
+        private int cachedC;
 
-        public Arrows(List<GPXUtilities.WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
+        public Arrows(List<WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
             super(pt);
             this.segmentSize = segmentSize;
 
@@ -425,75 +408,90 @@ public class Renderable {
             }
         }
 
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        private void drawArrows(Canvas canvas, RotatedTileBox tileBox, boolean internal) {
 
-            if (culled != null && !culled.isEmpty() && zoom > 14
-                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+            float scale = internal ? 0.8f : 1.0f;
 
-                canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            float stroke = paint.getStrokeWidth();
+            double zoomlimit = zoom > 15 ? 15f : zoom;
+            float arrowSize = (float) Math.pow(2.0,zoomlimit-18) * 800;
+            boolean broken = true;
+            int intp = cachedC;                                // the segment cycler
 
-                float stroke = p.getStrokeWidth();
-                double zoomlimit = zoom > 17 ? 17f : zoom;
-                float arrowSize = (float) Math.pow(2.0,zoomlimit-18) * 128;
+            float clipL = -arrowSize;
+            float clipB = -arrowSize;
+            float clipT = canvas.getHeight() + arrowSize;
+            float clipR = canvas.getWidth() + arrowSize;
 
-                int pCol = p.getColor();
-                p.setColor(Color.MAGENTA);
+            float lastx = 0;
+            float lasty = Float.NEGATIVE_INFINITY;
 
-                float lastx = 0;
-                float lasty = 0;
-                boolean broken = true;
-                int intp = conveyor;                                // the segment cycler
+            int size = culled.size();
+            for (int i = 0; i < size; i++) {
+                WptPt pt = culled.get(i);
 
-                float clipL = -arrowSize;
-                float clipB = -arrowSize;
-                float clipT = canvas.getHeight() + arrowSize;
-                float clipR = canvas.getWidth() + arrowSize;
+                intp--;                                         // increment to go the other way!
 
-                for (GPXUtilities.WptPt pt : culled) {
-                    intp--;                                         // increment to go the other way!
+                float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
+                float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
 
-                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
-                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+                boolean nextBroken = true;
 
-                    boolean nextBroken = true;
+                if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
+                        && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
 
-                    if (Math.min(x, lastx) < clipR && Math.max(x, lastx) > clipL
-                            && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
+                    float segment = intp & 15;
+                    if (segment < 6) {
 
-                        int segment = intp & 15;
-                        if (segment < 6) {
+                        paint.setColor(internal ? Algorithms.getRainbowColor(((double) (i)) / ((double) size)) : Color.BLACK);
 
-                            int segpiece = 6-segment;
-                            if (segpiece > 4)
-                                segpiece = 4;
+                        float segpiece = 6 - segment;
+                        if (segpiece > 4)
+                            segpiece = 4;
 
-                            if (!broken) {
-                                p.setStrokeWidth(stroke * segpiece / 2f);
-                                canvas.drawLine(lastx, lasty, x, y, p);
-                            }
-                            nextBroken = false;
+                        if (!broken) {
+                            float sw = stroke * segpiece * scale;
+                            paint.setStrokeWidth(sw);
+                            canvas.drawLine(lastx, lasty, x, y, paint);
+                        }
+                        nextBroken = false;
+                        // arrowhead...
+                        if (segment == 0 && lasty != -Float.NEGATIVE_INFINITY) {
+                            float sw = stroke * (6 - segment) / 2f * scale;
+                            paint.setStrokeWidth(sw);
+                            double angle = Math.atan2(lasty - y, lastx - x);
 
-                            // arrowhead...
-                            if (segment == 0) {
-                                p.setStrokeWidth(stroke * (6f - segment)/4f);
-                                double angle = Math.atan2(lasty - y, lastx - x);
-                                float newx1 = x + (float) Math.cos(angle - 0.4) * arrowSize;
-                                float newy1 = y + (float) Math.sin(angle - 0.4) * arrowSize;
-                                float newx2 = x + (float) Math.cos(angle + 0.4) * arrowSize;
-                                float newy2 = y + (float) Math.sin(angle + 0.4) * arrowSize;
+                            float extendx = x - (float) Math.cos(angle) * arrowSize / 2;
+                            float extendy = y - (float) Math.sin(angle) * arrowSize / 2;
+                            float newx1 = extendx + (float) Math.cos(angle - 0.4) * arrowSize;
+                            float newy1 = extendy + (float) Math.sin(angle - 0.4) * arrowSize;
+                            float newx2 = extendx + (float) Math.cos(angle + 0.4) * arrowSize;
+                            float newy2 = extendy + (float) Math.sin(angle + 0.4) * arrowSize;
 
-                                canvas.drawLine(newx1, newy1, x, y, p);
-                                canvas.drawLine(newx2, newy2, x, y, p);
-                            }
+                            canvas.drawLine(extendx, extendy, x, y, paint);
+                            canvas.drawLine(newx1, newy1, extendx, extendy, paint);
+                            canvas.drawLine(newx2, newy2, extendx, extendy, paint);
                         }
                     }
-                    broken = nextBroken;
-                    lastx = x;
-                    lasty = y;
                 }
+                broken = nextBroken;
+                lastx = x;
+                lasty = y;
+            }
+            paint.setStrokeWidth(stroke);
+        }
+
+        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+
+            if (culled != null && !culled.isEmpty() && zoom > 13
+                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+
+                updateLocalPaint(p);
+                canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+                cachedC = conveyor;
+                drawArrows(canvas, tileBox, false);
+                drawArrows(canvas, tileBox, true);
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-                p.setColor(pCol);
-                p.setStrokeWidth(stroke);
             }
         }
     }
@@ -504,7 +502,7 @@ public class Renderable {
 
         private int size;
 
-        public CurrentTrack(List<GPXUtilities.WptPt> pt) {
+        public CurrentTrack(List<WptPt> pt) {
             super(pt);
             size = pt.size();
         }
