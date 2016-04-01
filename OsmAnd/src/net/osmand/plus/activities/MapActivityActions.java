@@ -52,6 +52,7 @@ import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -90,18 +91,6 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 	}
 
-	/*
-	public void addAsWaypoint(double latitude, double longitude, PointDescription pd) {
-		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		boolean destination = (targets.getPointToNavigate() == null);
-
-		targets.navigateToPoint(new LatLon(latitude, longitude), true,
-				destination ? -1 : targets.getIntermediatePoints().size(),
-				pd);
-
-		openIntermediateEditPointsDialog();
-	}
-	*/
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1,
@@ -223,6 +212,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(View v) {
 				String name = edit.getText().toString();
+				//noinspection ResultOfMethodCallIgnored
 				fileDir.mkdirs();
 				File toSave = fileDir;
 				if (name.length() > 0) {
@@ -476,14 +466,6 @@ public class MapActivityActions implements DialogProvider {
 	public ApplicationMode getRouteMode(LatLon from) {
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		ApplicationMode selected = settings.APPLICATION_MODE.get();
-		OsmandApplication app = mapActivity.getMyApplication();
-		TargetPointsHelper targets = app.getTargetPointsHelper();
-		if (from == null) {
-			Location ll = app.getLocationProvider().getLastKnownLocation();
-			if (ll != null) {
-				from = new LatLon(ll.getLatitude(), ll.getLongitude());
-			}
-		}
 		if (selected != ApplicationMode.DEFAULT) {
 			mode = selected;
 		} else if (mode == ApplicationMode.DEFAULT) {
@@ -492,18 +474,6 @@ public class MapActivityActions implements DialogProvider {
 					settings.LAST_ROUTING_APPLICATION_MODE != ApplicationMode.DEFAULT) {
 				mode = settings.LAST_ROUTING_APPLICATION_MODE;
 			}
-			// didn't provide good results
-//			if (from != null && targets.getPointToNavigate() != null) {
-//				double dist = MapUtils.getDistance(from, targets.getPointToNavigate().getLatitude(),
-//						targets.getPointToNavigate().getLongitude());
-//				if (dist >= 50000 && mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-//					mode = ApplicationMode.CAR;
-//				} else if (dist >= 300000 && mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-//					mode = ApplicationMode.CAR;
-//				} else if (dist < 2000 && mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-//					mode = ApplicationMode.PEDESTRIAN;
-//				}
-//			}
 		}
 		return mode;
 	}
@@ -637,15 +607,9 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-						MapActivity.clearPrevActivityIntent();
-						if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-							if (settings.USE_MAP_MARKERS.get()) {
-								setFirstMapMarkerAsTarget();
-							}
-							enterRoutePlanningMode(null, null);
-						} else {
-							mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-							mapActivity.refreshMap();
+						MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+						if (mapControlsLayer != null) {
+							mapControlsLayer.doRoute(false);
 						}
 						return true;
 					}
@@ -791,23 +755,6 @@ public class MapActivityActions implements DialogProvider {
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-
-//		optionsMenuHelper.item(R.string.shared_string_exit).colorIcon(R.drawable.ic_action_quit_dark )
-//					.listen(new OnContextMenuClick() {
-//			@Override
-//			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-//				// 1. Work for almost all cases when user open apps from main menu
-////				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMapActivity());
-////				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////				// not exit
-////				newIntent.putExtra(AppInitializer.APP_EXIT_KEY, AppInitializer.APP_EXIT_CODE);
-////				mapActivity.startActivity(newIntent);
-//				// In future when map will be main screen this should change
-//				app.closeApplication(mapActivity);
-//				return true;
-//			}
-//		}).reg();
-
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
 	}
@@ -818,10 +765,6 @@ public class MapActivityActions implements DialogProvider {
 
 	public void openRoutePreferencesDialog() {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.ROUTE_PREFERENCES);
-	}
-
-	private TargetPointsHelper getTargets() {
-		return mapActivity.getMyApplication().getTargetPointsHelper();
 	}
 
 	public void stopNavigationWithoutConfirm() {
@@ -854,7 +797,6 @@ public class MapActivityActions implements DialogProvider {
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		return builder.show();
 	}
-
 
 	public void whereAmIDialog() {
 		final List<String> items = new ArrayList<>();
