@@ -1964,4 +1964,11 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="no_waypoints_found">No s\'ha trobat cap fita</string>
     <string name="report">Informe</string>
     <string name="storage_permission_restart_is_required">L\'aplicació ja permet escriure a un emmagatzemament extern. Cal una reinicialització manual de l\'aplicació.</string>
+    <string name="rendering_value_thin_name">Estilitzat</string>
+    <string name="rendering_value_medium_name">Normal</string>
+    <string name="rendering_value_bold_name">Negreta</string>
+    <string name="finish_navigation">Atura la navegació</string>
+    <string name="full_report">Informe complert</string>
+    <string name="open_street_map_login_and_pass">Usuari i contrasenya d\'OpenStreetMap</string>
+    <string name="osm_live_subscribe_btn">Subscriu</string>
     </resources>
