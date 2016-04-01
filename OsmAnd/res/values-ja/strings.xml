@@ -1192,8 +1192,8 @@ POIの更新は利用できません</string>
 	
 	
 	<string name="search_position_map_view">マップ中心に表示</string>
-	<string name="select_search_position">ここを起点に検索:</string>
-	<string name="context_menu_item_search">ここの近くで検索</string>
+	<string name="select_search_position">指定地点から検索:</string>
+	<string name="context_menu_item_search">近隣を検索</string>
 	<string name="shared_string_save_as_gpx">GPXトラックとしてルートを保存</string>
 	<string name="route_successfully_saved_at">ルートを「%1$s」として保存しました。</string>
 	<string name="filename_input">ファイル名: </string>
@@ -2143,10 +2143,10 @@ POIの更新は利用できません</string>
     <string name="shared_string_move_up">上に移動</string>
     <string name="shared_string_move_down">下に移動</string>
     <string name="finish_navigation">ナビゲーションの終了</string>
-    <string name="avoid_road">使用しない道路</string>
+    <string name="avoid_road">使用しない道路として指定</string>
     <string name="storage_directory_readonly_desc">現在選択されているデータ保存フォルダーは読み取り専用です。保存フォルダーは一時的に内部メモリに設定されました。書き込み可能なストレージのフォルダを選択してください。</string>
     <string name="storage_directory_shared">共有メモリ</string>
-    <string name="full_report">より詳細な情報は以下へ</string>
+    <string name="full_report">より詳細なレポートは以下サイトにて</string>
     <string name="recalculate_route">ルートの再計算</string>
     <string name="open_street_map_login_and_pass">OpenStreetMapのログイン名とパスワード</string>
     <string name="donations">寄付額</string>
@@ -2178,7 +2178,7 @@ POIの更新は利用できません</string>
     <string name="add_points_to_map_markers_q">マップマーカーにすべての地点を追加しますか?</string>
     <string name="shared_string_add_to_map_markers">マップマーカーに追加</string>
     <string name="select_map_markers">マップマーカーを選択</string>
-    <string name="no_map_markers_found">マップ画面でマップマーカーを追加してください</string>
+    <string name="no_map_markers_found">マップ画面でマーカーを追加してください</string>
     <string name="no_waypoints_found">経由地点が見つかりませんでした</string>
     <string name="osm_live_email_desc">情報提供への謝礼を示すためにあなたの情報を必要としています</string>
     <string name="shared_string_reverse_order">逆順で並べ替え</string>
@@ -2253,6 +2253,6 @@ POIの更新は利用できません</string>
     <string name="no_address_found">設定しない</string>
     <string name="number_of_contributors">貢献者数</string>
     <string name="number_of_edits">編集数</string>
-    <string name="reports_for">レポート対象</string>
+    <string name="reports_for">表示レポート</string>
     <string name="share_geo">geo:</string>
     </resources>
