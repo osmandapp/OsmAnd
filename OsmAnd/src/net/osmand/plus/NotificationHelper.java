@@ -67,7 +67,7 @@ public class NotificationHelper {
 
 	public Builder buildNotificationInStatusBar() {
 		NavigationService service = app.getNavigationService();
-		String notificationText ;
+		String notificationText = "";
 		int icon = R.drawable.bgs_icon;
 		OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 		if (service != null) {
