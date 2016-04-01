@@ -84,7 +84,8 @@ public class NotificationHelper {
 				if (s.length() > 0) {
 					s += ", ";
 				}
-				s += app.getString(R.string.shared_string_trip_recording).toLowerCase();
+				s += app.getString(R.string.shared_string_trip_recording).toLowerCase()
+					+ ": " + OsmAndFormatter.getFormattedDistance(app.getSavingTrackHelper().getDistance(), app);
 			}
 			if ((service.getUsedBy() & NavigationService.USED_BY_LIVE) != 0) {
 				if (s.length() > 0) {
@@ -105,10 +106,10 @@ public class NotificationHelper {
 			}
 		} else if(monitoringPlugin == null) {
 			return null;
-		} else {
+		} else if(app.getSavingTrackHelper().getDistance() > 0f){
 			notificationText =	app.getString(R.string.shared_string_trip_recording);
 			float dst = app.getSavingTrackHelper().getDistance();
-			notificationText += " ("+OsmAndFormatter.getFormattedDistance(dst, app)+")";
+			notificationText += ": "+OsmAndFormatter.getFormattedDistance(dst, app);
 			icon = R.drawable.ic_action_polygom_dark;
 		}
 
