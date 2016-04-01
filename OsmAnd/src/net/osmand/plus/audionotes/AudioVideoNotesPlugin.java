@@ -1520,6 +1520,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (mapActivity != null && rec != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			menu.show(new LatLon(rec.lat, rec.lon), audioNotesLayer.getObjectName(rec), rec);
+			if (app.getRoutingHelper().isFollowingMode()) {
+				menu.hideWithTimeout(3000);
+			}
 		}
 	}
 
