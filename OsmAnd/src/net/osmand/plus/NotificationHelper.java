@@ -136,7 +136,8 @@ public class NotificationHelper {
 						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
 						savePendingIntent);
-			} else if(service == null) {
+//			} else if(service == null) {
+			} else {
 				Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
 				PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
