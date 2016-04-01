@@ -111,6 +111,8 @@ public class NotificationHelper {
 			float dst = app.getSavingTrackHelper().getDistance();
 			notificationText += ": "+OsmAndFormatter.getFormattedDistance(dst, app);
 			icon = R.drawable.ic_action_polygom_dark;
+		} else {
+			return null;
 		}
 
 		Intent contentIntent = new Intent(app, MapActivity.class);
