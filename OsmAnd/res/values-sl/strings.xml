@@ -2170,4 +2170,7 @@
 \n\n • Mnogo posodobitev vsebinskega menija, kot je na primer vsebinsko iskanje naslova.\n\n • Še in še in še ... "</string>
     <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta. Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to odlične način za začetek sodelovanja.</string>
     
+    <string name="rendering_value_thin_name">Tanko</string>
+    <string name="rendering_value_medium_name">Srednje</string>
+    <string name="rendering_value_bold_name">Krepko</string>
     </resources>
