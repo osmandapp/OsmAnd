@@ -2192,4 +2192,7 @@
     <string name="file_name_containes_illegal_char">Le nom de fichier contient des caractères interdits</string>
 <string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes. Les dons sont reversés à la Communauté OSM. Si vous appréciez OsmAnd et OSM et que vous souhaitez supporter ces projets, c\'est la meilleure façon de le faire.</string>
     
+    <string name="rendering_value_thin_name">Fin</string>
+    <string name="rendering_value_medium_name">Moyen</string>
+    <string name="rendering_value_bold_name">Épais</string>
     </resources>
