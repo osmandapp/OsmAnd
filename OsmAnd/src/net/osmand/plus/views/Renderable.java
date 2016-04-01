@@ -46,95 +46,51 @@ public class Renderable {
 
     public static abstract class RenderableSegment {
 
-        protected List<GPXUtilities.WptPt> points = null;           // Original list of points
+        public List<GPXUtilities.WptPt> points = null;              // Original list of points
         protected List<GPXUtilities.WptPt> culled = null;           // Reduced/resampled list of points
 
-        protected QuadRect trackBounds = new QuadRect(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY,
-                Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
-
+        protected QuadRect trackBounds;
         double zoom = -1;
         AsynchronousResampler culler = null;                        // The currently active resampler
 
         public RenderableSegment(List<GPXUtilities.WptPt> pt) {
             points = pt;
-            culled = null;
+            calculateBounds(points);
         }
 
         public void recalculateRenderScale(double zoom) {}
         public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {}
 
-        // When the asynchronous task has finished, it calls this function to set the 'culled' list
-        public void setRDP(List<GPXUtilities.WptPt> cull) {
+        private void calculateBounds(List<GPXUtilities.WptPt> pts) {
+            trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
+                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+            updateBounds(pts, 0);
+        }
 
-            culled = cull;
-
-            // Find the segment's bounding box, to allow quick draw rejection later
-
-            trackBounds.left = trackBounds.bottom = Double.POSITIVE_INFINITY;
-            trackBounds.right = trackBounds.top = Double.NEGATIVE_INFINITY;
-
-            for (GPXUtilities.WptPt pt : culled) {
+        public void updateBounds(List<GPXUtilities.WptPt> pts, int startIndex) {
+            int size = pts.size();
+            for (int i = startIndex; i < size; i++) {
+                GPXUtilities.WptPt pt = pts.get(i);
                 trackBounds.right = Math.max(trackBounds.right, pt.lon);
                 trackBounds.left = Math.min(trackBounds.left, pt.lon);
                 trackBounds.top = Math.max(trackBounds.top, pt.lat);
                 trackBounds.bottom = Math.min(trackBounds.bottom, pt.lat);
             }
+        }
+
+        // When the asynchronous task has finished, it calls this function to set the 'culled' list
+        public void setRDP(List<GPXUtilities.WptPt> cull) {
+
+            culled = cull;
+            calculateBounds(culled);
 
             //if (view != null) {
             //    view.refreshMap();          // force a redraw
             //}
         }
 
-        public List<GPXUtilities.WptPt> getPoints() {
-            return points;
-        }
-    }
+        protected void draw(List<GPXUtilities.WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-    //----------------------------------------------------------------------------------------------
-
-    public static class StandardTrack extends RenderableSegment {
-
-        double base;     // parameter for calculating Ramer-Douglas-Peucer distance
-        boolean currentTrack = false;
-
-        public StandardTrack(List<GPXUtilities.WptPt> pt, double base) {
-            super(pt);
-            this.base = base;
-        }
-
-        public void setCurrentTrack() {
-            currentTrack = true;
-        }
-
-        @Override public void recalculateRenderScale(double newZoom) {
-
-            // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
-            // The asynchronous callback will set the variable 'culled', and that is preferentially used for rendering
-            // The current track does not undergo this process, as it is potentially constantly changing.
-
-            if (!currentTrack && zoom != newZoom) {
-
-                if (culler != null) {
-                    culler.cancel(true);
-                }
-                double cullDistance = Math.pow(2.0, base - newZoom);
-                culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
-
-                if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
-                    culled = null;                 // use full-resolution until re-cull complete
-                }
-                zoom = newZoom;
-                culler.execute("");
-
-                // The trackBounds may be slightly inaccurate (unlikely, but...) so let's reset it
-                //trackBounds.left = trackBounds.bottom = Double.POSITIVE_INFINITY;
-                //trackBounds.right = trackBounds.bottom = Double.NEGATIVE_INFINITY;
-            }
-        }
-
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
-
-            List<GPXUtilities.WptPt> pts = culled == null? points: culled;			// use culled points preferentially
             if (pts != null && !pts.isEmpty()
                     && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
@@ -167,6 +123,49 @@ public class Renderable {
                 }
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
+        }
+
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    public static class StandardTrack extends RenderableSegment {
+
+        double base;     // parameter for calculating Ramer-Douglas-Peucer distance
+
+        public StandardTrack(List<GPXUtilities.WptPt> pt, double base) {
+            super(pt);
+            this.base = base;
+        }
+
+        @Override public void recalculateRenderScale(double newZoom) {
+
+            // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
+            // The asynchronous callback will set the variable 'culled', and that is preferentially used for rendering
+            // The current track does not undergo this process, as it is potentially constantly changing.
+
+            if (zoom != newZoom) {
+
+                if (culler != null) {
+                    culler.cancel(true);
+                }
+                double cullDistance = Math.pow(2.0, base - newZoom);
+                culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
+
+                if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
+                    culled = null;                 // use full-resolution until re-cull complete
+                }
+                zoom = newZoom;
+                culler.execute("");
+
+                // The trackBounds may be slightly inaccurate (unlikely, but...) so let's reset it
+                //trackBounds.left = trackBounds.bottom = Double.POSITIVE_INFINITY;
+                //trackBounds.right = trackBounds.bottom = Double.NEGATIVE_INFINITY;
+            }
+        }
+
+        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            draw(culled == null ? points : culled, p, canvas, tileBox);
         }
     }
 
@@ -321,7 +320,7 @@ public class Renderable {
                 }
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                p.setStrokeWidth(stroke*2f);
+                p.setStrokeWidth(stroke * 2f);
                 p.setColor(pCol);
             }
         }
@@ -434,10 +433,11 @@ public class Renderable {
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
                 float stroke = p.getStrokeWidth();
-                float arrowSize = (float) Math.pow(2.0,zoom-18) * 128;
+                double zoomlimit = zoom > 17 ? 17f : zoom;
+                float arrowSize = (float) Math.pow(2.0,zoomlimit-18) * 128;
 
                 int pCol = p.getColor();
-                p.setColor(Color.RED);
+                p.setColor(Color.MAGENTA);
 
                 float lastx = 0;
                 float lasty = 0;
@@ -462,15 +462,20 @@ public class Renderable {
 
                         int segment = intp & 15;
                         if (segment < 6) {
-                            p.setStrokeWidth(stroke * (3.25f - segment/2f));
+
+                            int segpiece = 6-segment;
+                            if (segpiece > 4)
+                                segpiece = 4;
 
                             if (!broken) {
+                                p.setStrokeWidth(stroke * segpiece / 2f);
                                 canvas.drawLine(lastx, lasty, x, y, p);
                             }
                             nextBroken = false;
 
                             // arrowhead...
-                            if (zoom > 15 &&  segment == 0) {
+                            if (segment == 0) {
+                                p.setStrokeWidth(stroke * (6f - segment)/4f);
                                 double angle = Math.atan2(lasty - y, lastx - x);
                                 float newx1 = x + (float) Math.cos(angle - 0.4) * arrowSize;
                                 float newy1 = y + (float) Math.sin(angle - 0.4) * arrowSize;
@@ -493,5 +498,24 @@ public class Renderable {
         }
     }
 
+    //----------------------------------------------------------------------------------------------
+
+    public static class CurrentTrack extends RenderableSegment {
+
+        private int size;
+
+        public CurrentTrack(List<GPXUtilities.WptPt> pt) {
+            super(pt);
+            size = pt.size();
+        }
+
+        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            if (points.size() != size) {
+                updateBounds(points, size);        // use newly added points to recalculate bounding box
+                size = points.size();
+            }
+            draw(points, p, canvas, tileBox);
+        }
+    }
 
 }

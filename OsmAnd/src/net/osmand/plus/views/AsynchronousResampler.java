@@ -102,7 +102,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             // Resample track, then analyse altitudes and set colours for each point
 
-            culled = resampleTrack(rs.getPoints(), segmentSize);
+            culled = resampleTrack(rs.points, segmentSize);
             if (!isCancelled() && !culled.isEmpty()) {
 
                 int halfC = Algorithms.getRainbowColor(0.5);
@@ -141,7 +141,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             // Resample track, then analyse speeds and set colours for each point
 
-            List<GPXUtilities.WptPt> points = rs.getPoints();
+            List<GPXUtilities.WptPt> points = rs.points;
             culled = resampleTrack(points, segmentSize);
             if (!isCancelled() && !culled.isEmpty()) {
 
@@ -193,7 +193,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         }
 
         @Override protected String doInBackground(String... params) {
-            culled = resampleTrack(rs.getPoints(), segmentSize);
+            culled = resampleTrack(rs.points, segmentSize);
             return isCancelled() ? "" : "OK";
         }
     }
@@ -215,7 +215,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             // Reduce the point-count of the GPX track using Ramer-Douglas-Peucker algorithm.
 
-            points = rs.getPoints();
+            points = rs.points;
             int nsize = points.size();
             if (nsize > 2) {
                 culled = new ArrayList<>();
