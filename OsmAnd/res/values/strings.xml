@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="access_map_linked_to_location">Map is linked to location</string>
     <string name="access_collapsed_list">Collapsed list</string>
     <string name="access_expanded_list">Expanded list</string>
     <string name="access_empty_list">Empty list</string>

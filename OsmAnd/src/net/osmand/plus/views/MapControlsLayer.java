@@ -577,10 +577,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_niu_white : R.drawable.map_compass_niu);
+			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_none_opt));
 		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_bearing_white : R.drawable.map_compass_bearing);
+			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_bearing_opt));
 		} else {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_white : R.drawable.map_compass);
+			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_compass_opt));
 		}
 	}
 
@@ -591,12 +594,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (!enabled) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
 			backToLocationControl.setIconColorId(R.color.icon_color, 0);
+			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.unknown_location));
 		} else if (tracked) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
 			backToLocationControl.setIconColorId(R.color.color_myloc_distance);
+			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.access_map_linked_to_location));
 		} else {
 			backToLocationControl.setIconColorId(0);
 			backToLocationControl.setBg(R.drawable.btn_circle_blue);
+			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
 		backToLocationControl.updateVisibility(visible && !dialogOpened);
