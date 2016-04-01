@@ -129,11 +129,13 @@ public class MapWidgetRegistry {
 	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {
 		for (MapWidgetRegInfo ri : leftWidgetSet) {
 			if (cl.isInstance(ri)) {
+				//noinspection unchecked
 				return (T) ri.widget;
 			}
 		}
 		for (MapWidgetRegInfo ri : rightWidgetSet) {
 			if (cl.isInstance(ri)) {
+				//noinspection unchecked
 				return (T) ri.widget;
 			}
 		}
@@ -368,11 +370,13 @@ public class MapWidgetRegistry {
 			}
 
 			final boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
+			final String desc = mapActivity.getString(R.string.shared_string_collapse);
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, mapActivity)
 					.setIcon(r.drawableMenu)
 					.setSelected(selected)
 					.setColor(selected ? R.color.osmand_orange : defaultColor)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
+					.setDescription(r.visibleCollapsed(mode) ? desc : null)
 					.setListener(new ContextMenuAdapter.OnRowItemClick() {
 						@Override
 						public boolean onRowItemClick(final ArrayAdapter<ContextMenuItem> adapter,
@@ -423,7 +427,6 @@ public class MapWidgetRegistry {
 							ContextMenuItem item = adapter.getItem(position);
 							item.setSelected(visible);
 							item.setColorRes(visible ? R.color.osmand_orange : defaultColor);
-							String desc = mapActivity.getString(R.string.shared_string_collapse);
 							item.setDescription(visible && collapsed ? desc : null);
 							adapter.notifyDataSetChanged();
 						}
