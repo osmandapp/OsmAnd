@@ -76,27 +76,27 @@ public class NotificationHelper {
 			String s = "";
 			if ((service.getUsedBy() & NavigationService.USED_BY_NAVIGATION) != 0) {
 				if (s.length() > 0) {
-					s += "\n - ";
+					s += ", ";
 				}
 				s += app.getString(R.string.shared_string_navigation).toLowerCase();
 			}
 			if ((service.getUsedBy() & NavigationService.USED_BY_GPX) != 0) {
 				if (s.length() > 0) {
-					s += "\n - ";
+					s += ", ";
 				}
 				s += app.getString(R.string.shared_string_trip_recording).toLowerCase()
 					+ ": " + OsmAndFormatter.getFormattedDistance(app.getSavingTrackHelper().getDistance(), app);
 			}
 			if ((service.getUsedBy() & NavigationService.USED_BY_LIVE) != 0) {
 				if (s.length() > 0) {
-					s += "\n - ";
+					s += ", ";
 				}
 				s += app.getString(R.string.osmo);
 			}
 			if(s.length() > 0) {
-				notificationText += s + ".";
+				notificationText += " (" + s + "). ";
 			}
-			notificationText += "\n" + app.getString(R.string.gps_wake_up_timer) + ": ";
+			notificationText += app.getString(R.string.gps_wake_up_timer) + ": ";
 			if (soi == 0) {
 				notificationText = notificationText + app.getString(R.string.int_continuosly);
 			} else if (soi <= 90000) {
