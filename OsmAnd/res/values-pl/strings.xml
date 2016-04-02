@@ -1571,7 +1571,7 @@
     <string name="print_route">Drukuj trasę</string>
     <string name="osmo_device_not_found">Nie odnaleziono urządzenia</string>
     <string name="osmo_no_connection_msg">Nie można połączyć się z serwisem OsMo:\n- sprawdź połączenie internetowe,\n- sprawdź ustawienia,\n- sprawdź nasz Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup,\n- synchronizować grup i urządzeń z serwerem,\n- zarządzać grupami i urządzeniami osobistym pulpicie na stronie internetowej.</string>
+    <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup,\n- synchronizować grup i urządzeń z serwerem,\n- zarządzać grupami i urządzeniami na osobistym kokpicie na stronie internetowej.</string>
     <string name="anonymous_user">Użytkownik anonimowy</string>
     <string name="logged_as">Zalogowano jako %1$s</string>
     <string name="rendering_category_routes">Trasy</string>
