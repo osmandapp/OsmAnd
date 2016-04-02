@@ -305,11 +305,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public static void showWikipediaDialog(Context ctx, OsmandApplication app, Amenity a) {
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
-			String preferredLang = lang;
-			if (Algorithms.isEmpty(preferredLang)) {
-				preferredLang = app.getLanguage();
-			}
-			showWiki(ctx, app, a, preferredLang);
+			showWiki(ctx, app, a, lang);
 		}
 	}
 
@@ -326,11 +322,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	private static void showWiki(final Context ctx, final OsmandApplication app, final Amenity a, final String lang) {
+		String preferredLang = lang;
+		if (Algorithms.isEmpty(preferredLang)) {
+			preferredLang = app.getLanguage();
+		}
 		final Dialog dialog = new Dialog(ctx,
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme :
 						R.style.OsmandDarkTheme);
-		final String title = a.getName(lang);
+		final String title = Algorithms.isEmpty(lang) ? a.getName() : a.getName(lang);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
 
@@ -342,7 +342,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
 		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 
-		String lng = a.getContentSelected("content", lang, "en");
+		String lng = a.getContentSelected("content", preferredLang, "en");
 		if (Algorithms.isEmpty(lng)) {
 			lng = "en";
 		}

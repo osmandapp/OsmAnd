@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_show"
+        android:icon="@drawable/ic_action_view"
+        android:title="@string/shared_string_show"/>
+    <item
+        android:id="@+id/action_hide"
+        android:icon="@drawable/ic_action_hide"
+        android:title="@string/shared_string_hide"/>
+    <item
+        android:id="@+id/action_collapse"
+        android:icon="@drawable/ic_action_widget_collapse"
+        android:title="@string/shared_string_collapse"/>
+</menu>

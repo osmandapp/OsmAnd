@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:duplicateParentState="true" >
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/icon"
                 android:layout_width="32dip"
                 android:layout_height="32dip"

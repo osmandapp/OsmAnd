@@ -47,7 +47,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -581,9 +581,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_recordings) {
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 					updateLayers(mapView, mapActivity);
@@ -593,7 +593,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		};
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_recordings, app)
 				.setSelected(SHOW_RECORDINGS.get())
-				.setColorIcon(R.drawable.ic_action_micro_dark)
+				.setIcon(R.drawable.ic_action_micro_dark)
 				.setPosition(12)
 				.setListener(listener).createItem());
 	}
@@ -605,11 +605,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return;
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
-				.setColorIcon(R.drawable.ic_action_micro_dark)
-				.setListener(new OnContextMenuClick() {
+				.setIcon(R.drawable.ic_action_micro_dark)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						recordAudio(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -617,11 +617,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setPosition(6)
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
-				.setColorIcon(R.drawable.ic_action_video_dark)
-				.setListener(new OnContextMenuClick() {
+				.setIcon(R.drawable.ic_action_video_dark)
+				.setListener(new ItemClickListener() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						recordVideo(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -629,10 +629,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setPosition(7)
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
-				.setColorIcon(R.drawable.ic_action_photo_dark)
-				.setListener(new OnContextMenuClick() {
+				.setIcon(R.drawable.ic_action_photo_dark)
+				.setListener(new ItemClickListener() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						takePhoto(latitude, longitude, mapActivity, false);
 						return true;
 					}
@@ -1533,6 +1533,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (mapActivity != null && rec != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			menu.show(new LatLon(rec.lat, rec.lon), audioNotesLayer.getObjectName(rec), rec);
+			if (app.getRoutingHelper().isFollowingMode()) {
+				menu.hideWithTimeout(3000);
+			}
 		}
 	}
 

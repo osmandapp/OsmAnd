@@ -1,24 +1,26 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 
-/**
- * Created by GaidamakUA on 3/25/16.
- */
 public class ContextMenuItem {
+	public static final int INVALID_ID = 0;
+
 	@StringRes
 	private final int titleId;
 	private String title;
 	@DrawableRes
-	private final int icon;
+	private final int mIcon;
+	@ColorRes
+	private int colorRes;
 	@DrawableRes
-	private final int lightIcon;
-	@DrawableRes
-	private final int secondaryLightIcon;
+	private final int secondaryIcon;
 	private Boolean selected;
 	private int progress;
 	@LayoutRes
@@ -27,18 +29,28 @@ public class ContextMenuItem {
 	private final boolean category;
 	private final int pos;
 	private String description;
-	private ContextMenuAdapter.OnContextMenuClick checkBoxListener;
-	private ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
+	private final ContextMenuAdapter.ItemClickListener itemClickListener;
+	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 
-	private ContextMenuItem(int titleId, String title, int icon, int lightIcon, int secondaryLightIcon,
-							Boolean selected, int progress, int layout, boolean loading, boolean category,
-							int pos, String description, ContextMenuAdapter.OnContextMenuClick checkBoxListener,
+	private ContextMenuItem(@StringRes int titleId,
+							String title,
+							@DrawableRes int icon,
+							@ColorRes int colorRes,
+							@DrawableRes int secondaryIcon,
+							Boolean selected,
+							int progress,
+							@LayoutRes int layout,
+							boolean loading,
+							boolean category,
+							int pos,
+							String description,
+							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
 		this.titleId = titleId;
 		this.title = title;
-		this.icon = icon;
-		this.lightIcon = lightIcon;
-		this.secondaryLightIcon = secondaryLightIcon;
+		this.mIcon = icon;
+		this.colorRes = colorRes;
+		this.secondaryIcon = secondaryIcon;
 		this.selected = selected;
 		this.progress = progress;
 		this.layout = layout;
@@ -46,10 +58,11 @@ public class ContextMenuItem {
 		this.category = category;
 		this.pos = pos;
 		this.description = description;
-		this.checkBoxListener = checkBoxListener;
+		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
 	}
 
+	@StringRes
 	public int getTitleId() {
 		return titleId;
 	}
@@ -58,16 +71,33 @@ public class ContextMenuItem {
 		return title;
 	}
 
+	@DrawableRes
 	public int getIcon() {
-		return icon;
+		return mIcon;
 	}
 
-	public int getLightIcon() {
-		return lightIcon;
+	@ColorRes
+	public int getColorRes() {
+		return colorRes;
 	}
 
-	public int getSecondaryLightIcon() {
-		return secondaryLightIcon;
+	@ColorRes
+	public int getThemedColorRes(Context context) {
+		if (getColorRes() != INVALID_ID) {
+			return getColorRes();
+		} else {
+			return IconsCache.getDefaultColorRes(context);
+		}
+	}
+
+	@ColorInt
+	public int getThemedColor(Context context) {
+		return ContextCompat.getColor(context, getThemedColorRes(context));
+	}
+
+	@DrawableRes
+	public int getSecondaryIcon() {
+		return secondaryIcon;
 	}
 
 	public Boolean getSelected() {
@@ -78,6 +108,7 @@ public class ContextMenuItem {
 		return progress;
 	}
 
+	@LayoutRes
 	public int getLayout() {
 		return layout;
 	}
@@ -98,8 +129,8 @@ public class ContextMenuItem {
 		return description;
 	}
 
-	public ContextMenuAdapter.OnContextMenuClick getCheckBoxListener() {
-		return checkBoxListener;
+	public ContextMenuAdapter.ItemClickListener getItemClickListener() {
+		return itemClickListener;
 	}
 
 	public ContextMenuAdapter.OnIntegerValueChangedListener getIntegerListener() {
@@ -108,6 +139,10 @@ public class ContextMenuItem {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public void setColorRes(int colorRes) {
+		this.colorRes = colorRes;
 	}
 
 	public void setSelected(boolean selected) {
@@ -126,35 +161,32 @@ public class ContextMenuItem {
 		this.description = description;
 	}
 
-	public void setCheckBoxListener(ContextMenuAdapter.OnContextMenuClick checkBoxListener) {
-		this.checkBoxListener = checkBoxListener;
-	}
-
-	public void setIntegerListener(ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
-		this.integerListener = integerListener;
-	}
-
 	public static ItemBuilder createBuilder(String title) {
 		return new ItemBuilder().setTitle(title);
 	}
 
 	public static class ItemBuilder {
+		@StringRes
 		private int mTitleId;
 		private String mTitle;
-		private int mIcon = -1;
-		private int mLightIcon = -1;
-		private int mSecondaryLightIcon = -1;
+		@DrawableRes
+		private int mIcon = INVALID_ID;
+		@ColorRes
+		private int mColor = INVALID_ID;
+		@DrawableRes
+		private int mSecondaryIcon = INVALID_ID;
 		private Boolean mSelected = null;
-		private int mProgress = -1;
-		private int mLayout = -1;
+		private int mProgress = INVALID_ID;
+		@LayoutRes
+		private int mLayout = INVALID_ID;
 		private boolean mLoading = false;
-		private boolean mCat = false;
-		private int mPos = -1;
+		private boolean mIsCategory = false;
+		private int mPosition = INVALID_ID;
 		private String mDescription = null;
-		private ContextMenuAdapter.OnContextMenuClick mCheckBoxListener = null;
+		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 
-		public ItemBuilder setTitleId(int titleId, @Nullable Context context) {
+		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
 			this.mTitleId = titleId;
 			if (context != null) {
 				mTitle = context.getString(titleId);
@@ -168,18 +200,18 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setIcon(int icon) {
+		public ItemBuilder setColor(@ColorRes int color) {
+			mColor = color;
+			return this;
+		}
+
+		public ItemBuilder setIcon(@DrawableRes int icon) {
 			mIcon = icon;
 			return this;
 		}
 
-		public ItemBuilder setColorIcon(int lightIcon) {
-			mLightIcon = lightIcon;
-			return this;
-		}
-
-		public ItemBuilder setSecondaryLightIcon(int secondaryLightIcon) {
-			mSecondaryLightIcon = secondaryLightIcon;
+		public ItemBuilder setSecondaryIcon(@DrawableRes int secondaryIcon) {
+			mSecondaryIcon = secondaryIcon;
 			return this;
 		}
 
@@ -193,7 +225,7 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setLayout(int layout) {
+		public ItemBuilder setLayout(@LayoutRes int layout) {
 			mLayout = layout;
 			return this;
 		}
@@ -203,13 +235,13 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setCategory(boolean cat) {
-			mCat = cat;
+		public ItemBuilder setCategory(boolean category) {
+			mIsCategory = category;
 			return this;
 		}
 
-		public ItemBuilder setPosition(int pos) {
-			mPos = pos;
+		public ItemBuilder setPosition(int position) {
+			mPosition = position;
 			return this;
 		}
 
@@ -218,8 +250,8 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setListener(ContextMenuAdapter.OnContextMenuClick checkBoxListener) {
-			mCheckBoxListener = checkBoxListener;
+		public ItemBuilder setListener(ContextMenuAdapter.ItemClickListener checkBoxListener) {
+			mItemClickListener = checkBoxListener;
 			return this;
 		}
 
@@ -229,7 +261,9 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			return new ContextMenuItem(mTitleId, mTitle, mIcon, mLightIcon, mSecondaryLightIcon, mSelected, mProgress, mLayout, mLoading, mCat, mPos, mDescription, mCheckBoxListener, mIntegerListener);
+			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
+					mSelected, mProgress, mLayout, mLoading, mIsCategory, mPosition, mDescription,
+					mItemClickListener, mIntegerListener);
 		}
 	}
 }

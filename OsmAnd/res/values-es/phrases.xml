@@ -64,7 +64,7 @@
 	<string name="poi_furniture">Mueblería</string>
 	<string name="poi_garden_centre">Vivero</string>
 	<string name="poi_gas">Gas líquido</string>
-	<string name="poi_shop_yes">Tienda general</string>
+	<string name="poi_shop_yes">"Con  tienda"</string>
 	<string name="poi_gift">Tienda de regalos</string>
 	<string name="poi_glaziery">Vidriería</string>
 	<string name="poi_herbalist">Herboristería</string>
@@ -350,7 +350,7 @@
 	<string name="poi_craft_painter">Pintor</string>
 	<string name="poi_craft_photographer">Fotógrafo</string>
 	<string name="poi_craft_photographic_laboratory">Laboratorio fotográfico</string>
-	<string name="poi_craft_plumber">Plomero/Fontanero</string>
+	<string name="poi_craft_plumber">Fontanero</string>
 	<string name="poi_craft_sculptor">Escultor</string>
 	<string name="poi_beauty">Salón de belleza</string>
 	<string name="poi_hairdresser">Peluquería</string>
@@ -365,7 +365,7 @@
 	<string name="poi_crematorium">Crematorio</string>
 	<string name="poi_bank">Banco</string>
 	<string name="poi_atm">Cajero automático</string>
-	<string name="poi_accountant">Contable/Contador</string>
+	<string name="poi_accountant">Contable</string>
 	<string name="poi_cave_entrance">Entrada a cueva</string>
 	<string name="poi_volcano">Volcán</string>
 	<string name="poi_crater">Cráter</string>
@@ -729,7 +729,7 @@
 	<string name="poi_craft_tiler">Alicatador</string>
 	<string name="poi_craft_window_construction">Fábrica de ventanas</string>
 
-	<string name="poi_craft_computer">Montaje de computadoras/ordenadores</string>
+	<string name="poi_craft_computer">Montaje de ordenadores</string>
 	<string name="poi_saddle">Collado</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_anchor_berth">Fondeadero</string>
@@ -1003,7 +1003,7 @@
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_rubble">Escombros</string>
 	<string name="poi_recycling_cds">CDs</string>
-	<string name="poi_recycling_waste_oil">Aceite usado</string>
+	<string name="poi_recycling_waste_oil">Restos de aceite</string>
 	<string name="poi_recycling_bottles">Botellas</string>
 	<string name="poi_recycling_cork">Corcho</string>
 	<string name="poi_recycling_printer_cartridges">Cartuchos de impresora</string>
@@ -2675,5 +2675,41 @@
 	<string name="poi_vacuum_cleaner_yes">Aspiradora: sí</string>
 	<string name="poi_vacuum_cleaner_no">Aspiradora: no</string>
 	<string name="poi_amenity_vacuum_cleaner">Aspiradora</string>
+
+<string name="poi_compressed_air_yes">Aire comprimido: sí</string>
+	<string name="poi_compressed_air_no">Aire comprimido: no</string>
+
+	<string name="poi_sport_free_flying">Vuelo libre (deporte)</string>
+	<string name="poi_bicycle_repair_station">"Estación de  autoreparación de bicicletas"</string>
+	<string name="poi_water_tap">Grifo de agua</string>
+	<string name="poi_button_operated_yes">Funciona con botón: sí</string>
+	<string name="poi_button_operated_no">Funciona con botón: no</string>
+
+	<string name="poi_free_flying_site_takeoff">Sitio de vuelo libre: despegue</string>
+	<string name="poi_free_flying_site_landing">Sitio de vuelo libre: aterrizaje</string>
+	<string name="poi_free_flying_site_toplanding">Sitio de vuelo libre: aterrizaje elevado</string>
+	<string name="poi_free_flying_site_towing">Sitio de vuelo libre: remolcador</string>
+	<string name="poi_free_flying_site_training">Sitio de vuelo libre: formación</string>
+	<string name="poi_free_flying_official_yes">Oficial de vuelo libre: sí</string>
+	<string name="poi_free_flying_official_no">Oficial de vuelo libre: no</string>
+	<string name="poi_free_flying_paragliding_yes">Parapente: sí</string>
+	<string name="poi_free_flying_paragliding_no">Parapente: no</string>
+	<string name="poi_free_flying_hanggliding_yes">Ala delta: sí</string>
+	<string name="poi_free_flying_hanggliding_no">Ala delta: no</string>
+	<string name="poi_free_flying_rigid_yes">Vuelo libre rígido: sí</string>
+	<string name="poi_free_flying_rigid_no">Vuelo libre rígido: no</string>
+	<string name="poi_free_flying_site_orientation_n">"Orientación  del sitio de vuelo libre: N"</string>
+	<string name="poi_free_flying_site_orientation_ne">"Orientación  del sitio de vuelo libre: NE"</string>
+	<string name="poi_free_flying_site_orientation_e">"Orientación  del sitio de vuelo libre: E"</string>
+	<string name="poi_free_flying_site_orientation_se">"Orientación  del sitio de vuelo libre: SE"</string>
+	<string name="poi_free_flying_site_orientation_s">"Orientación  del sitio de vuelo libre: S"</string>
+	<string name="poi_free_flying_site_orientation_sw">"Orientación  del sitio de vuelo libre: SO"</string>
+	<string name="poi_free_flying_site_orientation_w">"Orientación  del sitio de vuelo libre: O"</string>
+	<string name="poi_free_flying_site_orientation_nw">"Orientación  del sitio de vuelo libre: NO"</string>
+	<string name="poi_free_flying_no_flight_time">Sin tiempo de vuelo (vuelo libre)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Directrices de huésped para vuelo libre: sí</string>
+	<string name="poi_free_flying_guest_guidelines_no">Directrices de huésped para vuelo libre: no</string>
+
+	<string name="poi_solarium">Solárium</string>
 
 </resources>

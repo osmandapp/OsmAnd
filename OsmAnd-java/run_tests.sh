@@ -6,5 +6,5 @@ if [ ! -d bin ];
     ant build
 fi
 echo "Starting tests..."
-ant run-turn-lanes-test
+ant junits
 echo "Results can be found in result.txt file."

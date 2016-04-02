@@ -71,6 +71,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private boolean inLocationUpdate = false;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
+	private boolean autoHide;
 
 	private int favActionIconId;
 
@@ -300,6 +301,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				active = false;
 			}
 			centerMarker = false;
+			autoHide = false;
 		}
 	}
 
@@ -346,6 +348,19 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
+	}
+
+	// timeout in msec
+	public void hideWithTimeout(long timeout) {
+		autoHide = true;
+		mapActivity.getMyApplication().runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				if (autoHide) {
+					hide();
+				}
+			}
+		}, timeout);
 	}
 
 	public void updateMenuUI() {
@@ -553,7 +568,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void buttonMorePressed() {
-		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(mapActivity);
+		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
 		for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
 			layer.populateObjectContextMenu(latLon, object, menuAdapter, mapActivity);
 		}

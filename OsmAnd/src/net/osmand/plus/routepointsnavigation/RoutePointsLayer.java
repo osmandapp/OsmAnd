@@ -87,9 +87,9 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		if (o != null && o instanceof GPXUtilities.WptPt && plugin.getCurrentRoute() != null){
 			final GPXUtilities.WptPt point = (GPXUtilities.WptPt) o;
-			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.mark_as_not_visited){
 						plugin.getCurrentRoute().markPoint(point,false);
 						plugin.saveCurrentRoute();
@@ -112,13 +112,13 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			if (plugin.getCurrentRoute().getPointStatus(point)){
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.mark_as_not_visited, mapActivity)
-						.setColorIcon(R.drawable.ic_action_gremove_dark)
+						.setIcon(R.drawable.ic_action_gremove_dark)
 						.setListener(listener)
 						.createItem());
 			} else {
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.mark_as_visited, mapActivity)
-						.setColorIcon(R.drawable.ic_action_done)
+						.setIcon(R.drawable.ic_action_done)
 						.setListener(listener)
 						.createItem());
 			}
@@ -128,13 +128,13 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 				if (routePoint.isNextNavigate) {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setTitleId(R.string.navigate_to_next, mapActivity)
-							.setColorIcon(R.drawable.ic_action_gnext_dark)
+							.setIcon(R.drawable.ic_action_gnext_dark)
 							.setListener(listener)
 							.createItem());
 				} else {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setTitleId(R.string.mark_as_current, mapActivity)
-							.setColorIcon(R.drawable.ic_action_signpost_dark)
+							.setIcon(R.drawable.ic_action_signpost_dark)
 							.setListener(listener)
 							.createItem());
 				}

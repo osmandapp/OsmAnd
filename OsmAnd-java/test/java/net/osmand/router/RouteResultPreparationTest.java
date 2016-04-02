@@ -2,9 +2,11 @@ package net.osmand.router;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+
 import org.apache.commons.logging.Log;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -63,10 +65,8 @@ public class RouteResultPreparationTest {
 
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() throws IOException {
-
-        String fileName = "test_turn_lanes.json";
-
-        Reader reader = new FileReader(fileName);
+        String fileName = "/test_turn_lanes.json";
+        Reader reader = new InputStreamReader(RouteResultPreparationTest.class.getResourceAsStream(fileName));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> twoDArray = new ArrayList<Object[]>();
@@ -101,8 +101,6 @@ public class RouteResultPreparationTest {
                     String expectedResult = expectedResults.get(segmentId);
                     if (expectedResult != null) {
                         Assert.assertEquals("Segment " + segmentId, expectedResult, lanes);
-                    } else {
-                        //TODO: action if needed when expectedResults is null
                     }
 
                     System.out.println("segmentId: " + segmentId + " description: " + name);
@@ -125,7 +123,6 @@ public class RouteResultPreparationTest {
 
 
     private String getLanesString(RouteSegmentResult segment) {
-        String turn = segment.getTurnType().toString();
         final int[] lns = segment.getTurnType().getLanes();
         if (lns != null) {
             String s = "";
@@ -145,10 +142,13 @@ public class RouteResultPreparationTest {
                 if (st != 0) {
                     s += ";" + TurnType.valueOf(st, false).toXmlString();
                 }
+                int tt = TurnType.getTertiaryTurn(lns[h]);
+                if (tt != 0) {
+                    s += ";" + TurnType.valueOf(tt, false).toXmlString();
+                }
 
             }
             s += "";
-            turn += s;
             return s;
         }
         return null;

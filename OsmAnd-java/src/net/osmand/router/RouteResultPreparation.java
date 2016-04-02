@@ -392,6 +392,10 @@ public class RouteResultPreparation {
 							if (st != 0) {
 								s += ";" + TurnType.valueOf(st, false).toXmlString();
 							}
+							int tt = TurnType.getTertiaryTurn(lns[h]);
+			                if (tt != 0) {
+			                    s += ";" + TurnType.valueOf(tt, false).toXmlString();
+			                }
 							
 						}
 						s += "]";
@@ -648,11 +652,13 @@ public class RouteResultPreparation {
 			boolean leftTurn = TurnType.isLeftTurn(mainTurnType);
 			int ind = leftTurn? 0 : lanesArray.length - 1;
 			final int tt = TurnType.getPrimaryTurn(lanesArray[ind]);
+			final int st = TurnType.getSecondaryTurn(lanesArray[ind]);
 			if (leftTurn) {
 				if (!TurnType.isLeftTurn(tt)) {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TL);
 					TurnType.setSecondaryTurn(lanesArray, ind, tt);
+					TurnType.setTertiaryTurn(lanesArray, ind, st);
 					lanesArray[ind] |= 1;
 				}
 			} else {
@@ -660,6 +666,7 @@ public class RouteResultPreparation {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TR);
 					TurnType.setSecondaryTurn(lanesArray, ind, tt);
+					TurnType.setTertiaryTurn(lanesArray, ind, st);
 					lanesArray[ind] |= 1;
 				}
 			}
@@ -1031,10 +1038,9 @@ public class RouteResultPreparation {
                     	(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn)) || 
                     	(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn)) 
                     	) {
-                    	TurnType.setPrimaryTurnAndReset(lanes, i, turn);
-                        TurnType.setSecondaryTurn(lanes, i, primary);
+                    	TurnType.setPrimaryTurnShiftOthers(lanes, i, turn);
                     } else {
-                        TurnType.setSecondaryTurn(lanes, i, turn);
+                    	TurnType.setSecondaryTurnShiftOthers(lanes, i, turn);
                     }
 					break; // Move on to the next lane
 				}
@@ -1055,11 +1061,17 @@ public class RouteResultPreparation {
 				if (TurnType.getSecondaryTurn(oLanes[i]) != 0) {
 					possibleTurns.add(TurnType.getSecondaryTurn(oLanes[i]));
 				}
+				if (TurnType.getTertiaryTurn(oLanes[i]) != 0) {
+					possibleTurns.add(TurnType.getTertiaryTurn(oLanes[i]));
+				}
 			} else {
 				TIntArrayList laneTurns = new TIntArrayList();
 				laneTurns.add(TurnType.getPrimaryTurn(oLanes[i]));
 				if (TurnType.getSecondaryTurn(oLanes[i]) != 0) {
 					laneTurns.add(TurnType.getSecondaryTurn(oLanes[i]));
+				}
+				if (TurnType.getTertiaryTurn(oLanes[i]) != 0) {
+					laneTurns.add(TurnType.getTertiaryTurn(oLanes[i]));
 				}
 				possibleTurns.retainAll(laneTurns);
 				if (possibleTurns.isEmpty()) {
@@ -1075,6 +1087,9 @@ public class RouteResultPreparation {
 				possibleTurns.remove((Integer) TurnType.getPrimaryTurn(oLanes[i]));
 				if (TurnType.getSecondaryTurn(oLanes[i]) != 0) {
 					possibleTurns.remove((Integer) TurnType.getSecondaryTurn(oLanes[i]));
+				}
+				if (TurnType.getTertiaryTurn(oLanes[i]) != 0) {
+					possibleTurns.remove((Integer) TurnType.getTertiaryTurn(oLanes[i]));
 				}
 			}
 		}

@@ -23,7 +23,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -236,9 +236,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 												ContextMenuAdapter adapter,
 												final MapActivity mapActivity) {
 		final MapActivityLayers layers = mapActivity.getMapLayers();
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		ContextMenuAdapter.ItemClickListener listener = new ItemClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				if (itemId == R.string.layer_map) {
 					layers.selectMapLayer(mapView);
@@ -258,7 +258,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
 				.setLayout(R.layout.drawer_list_doubleitem)
 				.setDescription(overlayMapDescr)
-				.setColorIcon(R.drawable.ic_layer_top_dark)
+				.setIcon(R.drawable.ic_layer_top_dark)
 				.setListener(listener)
 				.setPosition(14)
 				.createItem());
@@ -267,7 +267,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
 				.setLayout(R.layout.drawer_list_doubleitem)
 				.setDescription(underlayMapDescr)
-				.setColorIcon(R.drawable.ic_layer_bottom_dark)
+				.setIcon(R.drawable.ic_layer_bottom_dark)
 				.setListener(listener)
 				.setPosition(15)
 				.createItem());
@@ -279,9 +279,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 											  Object selectedObj) {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
-			OnContextMenuClick listener = new OnContextMenuClick() {
+			ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
 					if (resId == R.string.context_menu_item_update_map) {
 						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
 					} else if (resId == R.string.shared_string_download_map) {
@@ -293,11 +293,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			};
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
-					.setColorIcon(R.drawable.ic_action_refresh_dark)
+					.setIcon(R.drawable.ic_action_refresh_dark)
 					.setListener(listener).createItem());
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
-					.setColorIcon(R.drawable.ic_action_import)
+					.setIcon(R.drawable.ic_action_import)
 					.setListener(listener).createItem());
 		}
 	}

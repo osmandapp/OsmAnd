@@ -1,12 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import android.content.res.Resources;
 import android.graphics.*;
+import android.util.ArrayMap;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -515,132 +513,6 @@ public class RouteInfoWidgetsFactory {
 		return p;
 	}
 
-	private static Bitmap getPathBitmapFromTurnType(Resources res, List<Bitmap> paths, int laneType, int secondTurnType, Bitmap defaultType, float coef) {
-		if(laneType == 0) {
-			return defaultType;
-		}
-		/*while (paths.size() <= laneType) {
-			paths.add(null);
-		}
-
-		if(secondTurnType == 0) {
-			Bitmap b = paths.get(laneType);
-			if (b != null) {
-				return b;
-			}
-		}*/
-
-		boolean flip = false;
-
-		int turnResourceId = R.drawable.map_turn_right;
-		if(secondTurnType == 0){
-			TurnType tp = TurnType.valueOf(laneType, false);
-			switch (tp.getValue()){
-				case TurnType.C:
-					turnResourceId = R.drawable.map_turn_forward;
-					break;
-				case TurnType.TR:
-					turnResourceId = R.drawable.map_turn_right;
-					break;
-				case TurnType.TL:
-					turnResourceId = R.drawable.map_turn_right;
-					flip = true;
-					break;
-				case TurnType.KR:
-					turnResourceId = R.drawable.map_turn_right;
-					break;
-				case TurnType.KL:
-					turnResourceId = R.drawable.map_turn_right;
-					flip = true;
-					break;
-				case TurnType.TSLR:
-					turnResourceId = R.drawable.map_turn_slight_right;
-					break;
-				case TurnType.TSLL:
-					turnResourceId = R.drawable.map_turn_slight_right;
-					flip = true;
-					break;
-				case TurnType.TRU:
-					turnResourceId = R.drawable.map_turn_uturn_right;
-					break;
-				case TurnType.TU:
-					turnResourceId = R.drawable.map_turn_uturn;
-					flip = true;
-					break;
-			}
-		}else{
-			TurnType tp = TurnType.valueOf(laneType, false);
-			switch (tp.getValue()) {
-				case TurnType.C:
-					turnResourceId = R.drawable.map_turn_forward;
-					break;
-				case TurnType.TR:
-					turnResourceId = R.drawable.map_turn_forward_right_turn;
-					break;
-				case TurnType.TL:
-					turnResourceId = R.drawable.map_turn_forward_right_turn;
-					flip = true;
-					break;
-				case TurnType.KR:
-					turnResourceId = R.drawable.map_turn_forward_slight_right_turn;
-					break;
-				case TurnType.KL:
-					turnResourceId = R.drawable.map_turn_forward_slight_right_turn;
-					flip = true;
-					break;
-				case TurnType.TSLR:
-					turnResourceId = R.drawable.map_turn_forward_slight_right_turn;
-					break;
-				case TurnType.TSLL:
-					turnResourceId = R.drawable.map_turn_forward_slight_right_turn;
-					flip = true;
-					break;
-				case TurnType.TRU:
-					turnResourceId = R.drawable.map_turn_forward_uturn_right;
-					break;
-				case TurnType.TU:
-					turnResourceId = R.drawable.map_turn_forward_uturn_right;
-					flip = true;
-					break;
-				default:
-					turnResourceId = R.drawable.map_turn_forward_right_turn;
-					break;
-			}
-
-		}
-
-		Bitmap b = flip ? getFlippedBitmap(res, turnResourceId) : BitmapFactory.decodeResource(res, turnResourceId);
-
-		//Maybe redundant scaling
-		float bRatio = (float)b.getWidth() / (float)b.getHeight();
-		float s = 72f * coef;
-		int wq = Math.round(s / bRatio);
-		int hq = Math.round(s);
-		b = Bitmap.createScaledBitmap(b, wq, hq, false);
-
-		//paths.set(laneType, b);
-		return b;
-	}
-
-	public static Bitmap getFlippedBitmap(Resources res, int resId){
-
-		BitmapFactory.Options opt = new BitmapFactory.Options();
-		opt.inJustDecodeBounds = true;
-		//Below line is necessary to fill in opt.outWidth, opt.outHeight
-		Bitmap b = BitmapFactory.decodeResource(res, resId, opt);
-
-		b = Bitmap.createBitmap(opt.outWidth, opt.outHeight, Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(b);
-
-		Matrix flipHorizontalMatrix = new Matrix();
-		flipHorizontalMatrix.setScale(-1, 1);
-		flipHorizontalMatrix.postTranslate(b.getWidth(), 0);
-
-		Bitmap bb = BitmapFactory.decodeResource(res, resId);
-		canvas.drawBitmap(bb, flipHorizontalMatrix, null);
-
-		return b;
-	}
 
 	public static class LanesControl {
 		private MapViewTrackingUtilities trackingUtilities;
@@ -758,7 +630,7 @@ public class RouteInfoWidgetsFactory {
 		boolean imminent = false;
 		private Context ctx;
 		private ArrayList<Path> paths = new ArrayList<Path>();
-		private ArrayList<Bitmap> pathBitmaps = new ArrayList<Bitmap>();
+		private Map<TurnPathHelper.TurnResource, Bitmap> bitmapCache = new HashMap<TurnPathHelper.TurnResource, Bitmap>();
 		private Paint paintBlack;
 		private Path laneStraight;
 		private final Bitmap laneStraightBitmap;
@@ -768,12 +640,16 @@ public class RouteInfoWidgetsFactory {
 		private int height;
 		private int width;
 		private static final float miniCoeff = 2f;
+		private final boolean leftSide;
 
-		public LanesDrawable(Context ctx, float scaleCoefficent) {
+		public LanesDrawable(MapActivity ctx, float scaleCoefficent) {
 			this.ctx = ctx;
+			OsmandSettings settings = ctx.getMyApplication().getSettings();
+			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+
 			this.scaleCoefficient = scaleCoefficent;
 			laneStraight = getPathFromTurnType(paths, TurnType.C, null, scaleCoefficient / miniCoeff);
-			laneStraightBitmap = getPathBitmapFromTurnType(ctx.getResources(), pathBitmaps, TurnType.C, 0, null, scaleCoefficient / miniCoeff);
+			laneStraightBitmap = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, TurnType.C, 0, 0, TurnPathHelper.FIRST_TURN, scaleCoefficient / miniCoeff, leftSide);
 			paintBlack = new Paint();
 			paintBlack.setStyle(Style.STROKE);
 			paintBlack.setColor(Color.BLACK);
@@ -816,31 +692,39 @@ public class RouteInfoWidgetsFactory {
 				canvas.save();
 				// canvas.translate((int) (16 * scaleCoefficient), 0);
 				for (int i = 0; i < lanes.length; i++) {
-					int turnType;
-					int secondTurnType;
 					if ((lanes[i] & 1) == 1) {
 						paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) :
 								ctx.getResources().getColor(R.color.nav_arrow));
 					} else {
 						paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
 					}
-					turnType = TurnType.getPrimaryTurn(lanes[i]);
-					secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
+					int turnType = TurnType.getPrimaryTurn(lanes[i]);
+					int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
+					int thirdTurnType = TurnType.getTertiaryTurn(lanes[i]);
 
-					Bitmap b = getPathBitmapFromTurnType(ctx.getResources(), pathBitmaps, turnType, secondTurnType, laneStraightBitmap, scaleCoefficient / miniCoeff);
-
-					if(secondTurnType > 0){
+					float coef = scaleCoefficient / miniCoeff;
+					if(thirdTurnType > 0){
 						Bitmap bSecond = null;
-						bSecond = getPathBitmapFromTurnType(ctx.getResources(), pathBitmaps, secondTurnType, secondTurnType, laneStraightBitmap, scaleCoefficient / miniCoeff);
+						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide);
 						if (bSecond != null){
 							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
 							canvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
 						}
 					}
-
-					paintRouteDirection.setColorFilter(new PorterDuffColorFilter(paintRouteDirection.getColor(), PorterDuff.Mode.SRC_ATOP));
-					canvas.drawBitmap(b, 0f, 0f, paintRouteDirection);
-					canvas.translate(w, 0);
+					if(secondTurnType > 0){
+						Bitmap bSecond = null;
+						bSecond = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide);
+						if (bSecond != null){
+							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
+							canvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
+						}
+					}
+					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
+					if(b != null) {
+						paintRouteDirection.setColorFilter(new PorterDuffColorFilter(paintRouteDirection.getColor(), PorterDuff.Mode.SRC_ATOP));
+						canvas.drawBitmap(b, 0f, 0f, paintRouteDirection);
+						canvas.translate(w, 0);
+					}
 				}
 				canvas.restore();
 			}

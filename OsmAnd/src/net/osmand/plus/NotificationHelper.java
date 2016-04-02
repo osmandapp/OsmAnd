@@ -67,7 +67,7 @@ public class NotificationHelper {
 
 	public Builder buildNotificationInStatusBar() {
 		NavigationService service = app.getNavigationService();
-		String notificationText ;
+		String notificationText = "";
 		int icon = R.drawable.bgs_icon;
 		OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 		if (service != null) {
@@ -84,7 +84,8 @@ public class NotificationHelper {
 				if (s.length() > 0) {
 					s += ", ";
 				}
-				s += app.getString(R.string.shared_string_trip_recording).toLowerCase();
+				s += app.getString(R.string.shared_string_trip_recording).toLowerCase()
+					+ ": " + OsmAndFormatter.getFormattedDistance(app.getSavingTrackHelper().getDistance(), app);
 			}
 			if ((service.getUsedBy() & NavigationService.USED_BY_LIVE) != 0) {
 				if (s.length() > 0) {
@@ -105,11 +106,13 @@ public class NotificationHelper {
 			}
 		} else if(monitoringPlugin == null) {
 			return null;
-		} else {
+		} else if(app.getSavingTrackHelper().getDistance() > 0f){
 			notificationText =	app.getString(R.string.shared_string_trip_recording);
 			float dst = app.getSavingTrackHelper().getDistance();
-			notificationText += " ("+OsmAndFormatter.getFormattedDistance(dst, app)+")";
+			notificationText += ": "+OsmAndFormatter.getFormattedDistance(dst, app);
 			icon = R.drawable.ic_action_polygom_dark;
+		} else {
+			return null;
 		}
 
 		Intent contentIntent = new Intent(app, MapActivity.class);
@@ -133,7 +136,8 @@ public class NotificationHelper {
 						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
 						savePendingIntent);
-			} else if(service == null) {
+//			} else if(service == null) {
+			} else {
 				Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
 				PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);

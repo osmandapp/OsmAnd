@@ -1,11 +1,8 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,10 +14,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by Alexey Pelykh
- * on 02.02.2015.
- */
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+
 public class PluginActivity extends OsmandActionBarActivity {
 	private static final String TAG = "PluginActivity";
 	public static final String EXTRA_PLUGIN_ID = "plugin_id";
@@ -58,6 +56,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 		}
 
 		setContentView(R.layout.plugin);
+		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(plugin.getName());
 		if(plugin.getAssetResourceName() != 0 && Build.VERSION.SDK_INT >= 14) {
 			ImageView img = (ImageView) findViewById(R.id.plugin_image);
@@ -128,9 +127,9 @@ public class PluginActivity extends OsmandActionBarActivity {
 				R.id.plugin_enable_disable);
 		Button getButton = (Button)findViewById(R.id.plugin_get);
 		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
-		IconsCache ic = ((OsmandApplication) getApplication()).getIconsCache();
-		settingsButton.setCompoundDrawablesWithIntrinsicBounds(ic.getContentIcon(
-				R.drawable.ic_action_settings), null, null, null);
+		settingsButton.setCompoundDrawablesWithIntrinsicBounds(
+				IconsCache.getContentIconCompat(this, R.drawable.ic_action_settings),
+				null, null, null);
 		View installHeader = findViewById(R.id.plugin_install_header);
 
 		if (plugin.needsInstallation()) {
@@ -138,9 +137,15 @@ public class PluginActivity extends OsmandActionBarActivity {
 			enableDisableButton.setVisibility(View.GONE);
 			settingsButton.setVisibility(View.GONE);
 			installHeader.setVisibility(View.VISIBLE);
-			((ImageView) installHeader.findViewById(R.id.ic_world_globe)).setBackgroundDrawable(ic
-					.getContentIcon(R.drawable.ic_world_globe_dark));
-
+			View worldGlobeIcon = installHeader.findViewById(R.id.ic_world_globe);
+			Drawable worldGlobeDrawable = IconsCache.getContentIconCompat(this,
+					R.drawable.ic_world_globe_dark);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+				worldGlobeIcon.setBackground(worldGlobeDrawable);
+			} else {
+				//noinspection deprecation
+				worldGlobeIcon.setBackgroundDrawable(worldGlobeDrawable);
+			}
 		} else {
 			getButton.setVisibility(View.GONE);
 			enableDisableButton.setVisibility(View.VISIBLE);

@@ -1,14 +1,14 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,120 +35,15 @@ import java.util.Set;
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
 
-	private final Context ctx;
 	@LayoutRes
-	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
-			R.layout.list_menu_item : R.layout.list_menu_item_native;
+	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
-	//neded to detect whether user opened all modes or not
-	private BooleanResult allModes = new BooleanResult();
-
-	public ContextMenuAdapter(Context ctx, boolean allModes) {
-		this.ctx = ctx;
-		this.allModes.setResult(allModes);
-	}
-
-	public ContextMenuAdapter(Context ctx) {
-		this.ctx = ctx;
-	}
 
 	public int length() {
 		return items.size();
 	}
 
-	public int getElementId(int position) {
-		return items.get(position).getTitleId();
-	}
-
-	public OnContextMenuClick getClickAdapter(int position) {
-		return items.get(position).getCheckBoxListener();
-	}
-
-	public OnIntegerValueChangedListener getIntegerLister(int position) {
-		return items.get(position).getIntegerListener();
-	}
-
-	public String getItemName(int position) {
-		return items.get(position).getTitle();
-	}
-
-	public String getItemDescr(int position) {
-		return items.get(position).getDescription();
-	}
-
-	public Boolean getSelection(int position) {
-		return items.get(position).getSelected();
-	}
-
-	public int getProgress(int position) {
-		return items.get(position).getProgress();
-	}
-
-	public int getLoading(int position) {
-		return items.get(position).isLoading() ? 1 : 0;
-	}
-
-	public Drawable getImage(OsmandApplication ctx, int position, boolean light) {
-		@DrawableRes
-		int lst = items.get(position).getIcon();
-		if (lst != -1) {
-			return ctx.getResources().getDrawable(lst);
-		}
-		@DrawableRes
-		int lstLight = items.get(position).getLightIcon();
-		if (lstLight != -1) {
-			return ctx.getIconsCache().getIcon(lstLight, light);
-		}
-		return null;
-	}
-
-	public Drawable getSecondaryImage(OsmandApplication ctx, int position, boolean light) {
-		@DrawableRes
-		int secondaryDrawableId = items.get(position).getSecondaryLightIcon();
-		if (secondaryDrawableId != -1) {
-			return ctx.getIconsCache().getIcon(secondaryDrawableId, light);
-		}
-		return null;
-	}
-
-	public int getBackgroundColor(Context ctx, boolean holoLight) {
-		if (holoLight) {
-			return ctx.getResources().getColor(R.color.bg_color_light);
-		} else {
-			return ctx.getResources().getColor(R.color.bg_color_dark);
-		}
-	}
-
-	public boolean isCategory(int pos) {
-		return items.get(pos).isCategory();
-	}
-
-	public int getLayoutId(int position) {
-		int l = items.get(position).getLayout();
-		if (l != -1) {
-			return l;
-		}
-		return defaultLayoutId;
-	}
-
-	public void setItemName(int position, String str) {
-		items.get(position).setTitle(str);
-	}
-
-	public void setItemDescription(int position, String str) {
-		items.get(position).setDescription(str);
-	}
-
-	public void setSelection(int position, boolean s) {
-		items.get(position).setSelected(s);
-	}
-
-	public void setProgress(int position, int progress) {
-		items.get(position).setProgress(progress);
-	}
-
-	// Adapter related
 	public String[] getItemNames() {
 		String[] itemNames = new String[items.size()];
 		for (int i = 0; i < items.size(); i++) {
@@ -161,12 +56,16 @@ public class ContextMenuAdapter {
 		items.add(item);
 	}
 
-	public void removeItem(int pos) {
-		items.remove(pos);
+	public ContextMenuItem getItem(int position) {
+		return items.get(position);
+	}
+
+	public void removeItem(int position) {
+		items.remove(position);
 	}
 
 	public void setDefaultLayoutId(int defaultLayoutId) {
-		this.defaultLayoutId = defaultLayoutId;
+		this.DEFAULT_LAYOUT_ID = defaultLayoutId;
 	}
 
 
@@ -175,35 +74,46 @@ public class ContextMenuAdapter {
 	}
 
 
-	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
-		final int layoutId = defaultLayoutId;
+	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean holoLight) {
+		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
-				items.toArray(new ContextMenuItem[items.size()]), app, holoLight);
+				items.toArray(new ContextMenuItem[items.size()]), app, holoLight, changeAppModeListener);
 	}
 
 	public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
 		private OsmandApplication app;
 		private boolean holoLight;
+		@LayoutRes
 		private int layoutId;
+		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
 
-		public ContextMenuArrayAdapter(Activity context, int resource, int textViewResourceId,
-									   ContextMenuItem[] objects, OsmandApplication app, boolean holoLight) {
-			super(context, resource, textViewResourceId, objects);
+		public ContextMenuArrayAdapter(Activity context,
+									   @LayoutRes
+									   int layoutRes,
+									   @IdRes
+									   int textViewResourceId,
+									   ContextMenuItem[] objects,
+									   OsmandApplication app,
+									   boolean holoLight,
+									   ConfigureMapMenu.OnClickListener changeAppModeListener) {
+			super(context, layoutRes, textViewResourceId, objects);
 			this.app = app;
 			this.holoLight = holoLight;
-			layoutId = resource;
+			layoutId = layoutRes;
+			this.changeAppModeListener = changeAppModeListener;
 		}
 
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			// User super class to create the View
 			final ContextMenuItem item = getItem(position);
-			Integer lid = getLayoutId(position);
-			if (lid == R.layout.mode_toggles) {
-				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+			int layoutId = item.getLayout();
+			layoutId = layoutId != ContextMenuItem.INVALID_ID ? layoutId : DEFAULT_LAYOUT_ID;
+			if (layoutId == R.layout.mode_toggles) {
+				final Set<ApplicationMode> selected = new LinkedHashSet<>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
-						selected, allModes, true, new View.OnClickListener() {
+						selected, true, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						if (selected.size() > 0) {
@@ -211,26 +121,32 @@ public class ContextMenuAdapter {
 							notifyDataSetChanged();
 						}
 						if (changeAppModeListener != null) {
-							changeAppModeListener.onClick(allModes.getResult());
+							changeAppModeListener.onClick();
 						}
 					}
 				});
 			}
-			if (convertView == null || (!lid.equals(convertView.getTag()))) {
-				convertView = LayoutInflater.from(getContext()).inflate(lid, parent, false);
-//				AndroidUtils.setListItemBackground(ctx, convertView, !holoLight);
-				convertView.setTag(lid);
+			if (convertView == null || !(convertView.getTag() instanceof Integer)
+					|| (layoutId != (Integer)convertView.getTag())) {
+				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
+				convertView.setTag(layoutId);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
-			if (!isCategory(position)) {
-				AndroidUtils.setTextPrimaryColor(getContext(), tv, !holoLight);
-			}
-			tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
 
-			if (layoutId == R.layout.simple_list_menu_item) {
+			if (item.isCategory()) {
+				tv.setTypeface(Typeface.DEFAULT_BOLD);
+			} else {
+				AndroidUtils.setTextPrimaryColor(getContext(), tv, !holoLight);
+				tv.setTypeface(null);
+			}
+			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
+
+			if (this.layoutId == R.layout.simple_list_menu_item) {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable imageId = ContextCompat.getDrawable(getContext(), item.getLightIcon());
+				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
+				Drawable imageId = DrawableCompat.wrap(drawable);
+				imageId.mutate();
 				DrawableCompat.setTint(imageId, color);
 				float density = getContext().getResources().getDisplayMetrics().density;
 				int paddingInPixels = (int) (24 * density);
@@ -239,21 +155,25 @@ public class ContextMenuAdapter {
 				tv.setCompoundDrawables(imageId, null, null, null);
 				tv.setCompoundDrawablePadding(paddingInPixels);
 			} else {
-				Drawable drawable = getImage(app, position, holoLight);
-				if (drawable != null) {
-
-					((ImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
+				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
+					Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
+					drawable = DrawableCompat.wrap(drawable);
+					drawable.mutate();
+					DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
+					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
 					convertView.findViewById(R.id.icon).setVisibility(View.GONE);
 				}
 			}
 			@DrawableRes
-			int secondaryLightDrawable = item.getSecondaryLightIcon();
-			if (secondaryLightDrawable != -1) {
+			int secondaryDrawable = item.getSecondaryIcon();
+			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
 				int color = ContextCompat.getColor(getContext(),
 						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable drawable = getSecondaryImage(app, position, holoLight);
+				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryIcon());
+				drawable = DrawableCompat.wrap(drawable);
+				drawable.mutate();
 				DrawableCompat.setTint(drawable, color);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
@@ -265,13 +185,7 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			if (isCategory(position)) {
-				tv.setTypeface(Typeface.DEFAULT_BOLD);
-			} else {
-				tv.setTypeface(null);
-			}
-
-			if (convertView.findViewById(R.id.toggle_item) != null) {
+			if (convertView.findViewById(R.id.toggle_item) != null && !item.isCategory()) {
 				final CompoundButton ch = (CompoundButton) convertView.findViewById(R.id.toggle_item);
 				if (item.getSelected() != null) {
 					ch.setOnCheckedChangeListener(null);
@@ -282,10 +196,10 @@ public class ContextMenuAdapter {
 
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							OnContextMenuClick ca = getClickAdapter(position);
+							ItemClickListener ca = item.getItemClickListener();
 							item.setSelected(isChecked);
 							if (ca != null) {
-								ca.onContextMenuClick(la, getElementId(position), position, isChecked);
+								ca.onContextMenuClick(la, item.getTitleId(), position, isChecked);
 							}
 						}
 					};
@@ -298,12 +212,12 @@ public class ContextMenuAdapter {
 
 			if (convertView.findViewById(R.id.seekbar) != null) {
 				SeekBar seekBar = (SeekBar) convertView.findViewById(R.id.seekbar);
-				if (item.getProgress() != -1) {
-					seekBar.setProgress(getProgress(position));
+				if (item.getProgress() != ContextMenuItem.INVALID_ID) {
+					seekBar.setProgress(item.getProgress());
 					seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 						@Override
 						public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-							OnIntegerValueChangedListener listener = getIntegerLister(position);
+							OnIntegerValueChangedListener listener = item.getIntegerListener();
 							item.setProgress(progress);
 							if (listener != null && fromUser) {
 								listener.onIntegerValueChangedListener(progress);
@@ -333,50 +247,45 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			String itemDescr = getItemDescr(position);
-			if (convertView.findViewById(R.id.description) != null) {
-				((TextView) convertView.findViewById(R.id.description)).setText(itemDescr);
+			View descriptionTextView = convertView.findViewById(R.id.description);
+			if (descriptionTextView != null) {
+				String itemDescr = item.getDescription();
+				if (itemDescr != null) {
+					((TextView) descriptionTextView).setText(itemDescr);
+					descriptionTextView.setVisibility(View.VISIBLE);
+				} else {
+					descriptionTextView.setVisibility(View.GONE);
+				}
 			}
 			return convertView;
 		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			return !getItem(position).isCategory();
+		}
 	}
 
-	public interface OnContextMenuClick {
+	public interface ItemClickListener {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
+		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked);
 	}
 
 	public interface OnIntegerValueChangedListener {
 		boolean onIntegerValueChangedListener(int newValue);
 	}
 
-	public static abstract class OnRowItemClick implements OnContextMenuClick {
+	public static abstract class OnRowItemClick implements ItemClickListener {
 
-		public OnRowItemClick() {
-		}
-
-		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+		//boolean return type needed to describe if drawer needed to be close or not
+		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
 			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 			if (btn != null && btn.getVisibility() == View.VISIBLE) {
 				btn.setChecked(!btn.isChecked());
 				return false;
 			} else {
-				return onContextMenuClick(adapter, itemId, pos, false);
+				return onContextMenuClick(adapter, itemId, position, false);
 			}
 		}
 	}
-
-	public class BooleanResult {
-		private boolean result = false;
-
-		public void setResult(boolean value) {
-			result = value;
-		}
-
-		public boolean getResult() {
-			return result;
-		}
-	}
-
 }

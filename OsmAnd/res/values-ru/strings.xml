@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+
+    <string name="rendering_value_thin_name">Тонкий</string>
+    <string name="rendering_value_medium_name">Средний</string>
+    <string name="rendering_value_bold_name">Толстый</string>
     <string name="select_map_markers">Выберите маркеры</string>
     <string name="shared_string_topbar">Верхняя панель</string>
     <string name="osm_user_stat">Правок: %1$s, ранг: %2$s, всего правок: %3$s</string>

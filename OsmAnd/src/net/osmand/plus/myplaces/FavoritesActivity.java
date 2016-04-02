@@ -54,8 +54,6 @@ public class FavoritesActivity extends TabActivity {
 		setTabs(mTabs);
 		// setupHomeButton();
 	}
-	
-	
 
 	private void setTabs(List<TabItem> mTabs) {
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
@@ -87,9 +85,9 @@ public class FavoritesActivity extends TabActivity {
 		}
 
 		List<TabItem> mTabs = new ArrayList<>();
-		mTabs.add(getTabIndicator(R.string.shared_string_my_favorites, FavoritesTreeFragment.class));
+		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
 		if (hasGpx) {
-			mTabs.add(getTabIndicator(R.string.shared_string_my_tracks, AvailableGPXFragment.class));
+			mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
 		}
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;

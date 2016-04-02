@@ -44,8 +44,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -421,28 +421,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 						obs.removeOnGlobalLayoutListener(this);
 					} else {
+						//noinspection deprecation
 						obs.removeGlobalOnLayoutListener(this);
 					}
 					listBackgroundView.getLayoutParams().height = contentView.getHeight();
 				}
 			});
-
-
-			/*
-			if (contentView.getHeight() > 0) {
-				listBackgroundView.getLayoutParams().height = contentView.getHeight();
-			} else {
-				contentView.post(new Runnable() {
-					@Override
-					public void run() {
-						// mListBackgroundView's should fill its parent vertically
-						// but the height of the content view is 0 on 'onCreate'.
-						// So we should get it with post().
-						listBackgroundView.getLayoutParams().height = contentView.getHeight();
-					}
-				});
-			}
-			*/
 		}
 	}
 
@@ -967,7 +951,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			this.nightMode = nightMode;
 			applyDayNightMode();
 		}
-		final ArrayAdapter<?> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
+		final ArrayAdapter<ContextMenuItem> listAdapter = cm.createListAdapter(mapActivity, !nightMode);
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
 		updateListAdapter(listAdapter, listener);
 	}
@@ -1004,14 +988,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
-															  final ArrayAdapter<?> listAdapter) {
+															  final ArrayAdapter<ContextMenuItem> listAdapter) {
 		return new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
-				OnContextMenuClick click = cm.getClickAdapter(which);
+				ContextMenuItem item = cm.getItem(which);
+				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
 				if (click instanceof OnRowItemClick) {
-					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, cm.getElementId(which), which);
+					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, item.getTitleId(), which);
 					if (cl) {
 						hideDashboard();
 					}
@@ -1020,12 +1005,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					if (btn != null && btn.getVisibility() == View.VISIBLE) {
 						btn.setChecked(!btn.isChecked());
 					} else {
-						if (click.onContextMenuClick(listAdapter, cm.getElementId(which), which, false)) {
+						if (click.onContextMenuClick(listAdapter, item.getTitleId(), which, false)) {
 							hideDashboard();
 						}
 					}
 				} else {
-					hideDashboard();
+					if (!item.isCategory()) {
+						hideDashboard();
+					}
 				}
 			}
 		};

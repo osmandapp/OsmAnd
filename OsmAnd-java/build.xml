@@ -12,9 +12,10 @@
 	<property name="lib.absolute.dir" location="${lib.dir}" />
 	<property name="unit.dir" value="test/java" />
 	<property name="unit.absolute.dir" location="${unit.dir}" />
-	<property name="test.lib.dir" value="test-libs" />
+	<property name="test.lib.dir" value="test/libs" />
 	<property name="test.lib.absolute.dir" location="${test.lib.dir}" />
-
+	<property name="reports.tests" value="test-results" />
+	<property name="srctests.dir" value="test/java"/>
 	<property name="java.encoding" value="UTF-8" />
 
 	<path id="build.path">
@@ -52,23 +53,27 @@
 			</classpath>
 		</javac>
 		<copy todir="${bin.absolute.dir}">
-			<fileset dir="test/java">
-				<include name="**/*.json" />
+			<fileset dir="test/resources">
+				<include name="**/*" />
 			</fileset>
 		</copy>
 	</target>
 
-	<target name="run-turn-lanes-test" >
-		<junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+	<target name="junits" >
+		<junit printsummary="yes" showoutput="yes">
 			<classpath>
 				<pathelement path="bin"/>
 				<path refid="build.path"/>
 				<path refid="test-lib.path" />
 			</classpath>
-			<test name="net.osmand.router.RouteResultPreparationTest" haltonfailure="no" outfile="result">
-				<formatter type="plain"/>
-				<formatter type="xml"/>
-			</test>
+			<formatter type="xml" />
+			<batchtest fork="false" todir="${reports.tests}" >
+				<fileset dir="${srctests.dir}" >
+					<include name="**/*Test.java" />
+					<exclude name="**/AllTests.java" />
+					<exclude name="**/*Suite*.java" />
+				</fileset>
+			</batchtest>
 		</junit>
 	</target>
 

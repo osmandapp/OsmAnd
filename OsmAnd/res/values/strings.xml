@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_value_thin_name">Thin</string>
+    <string name="rendering_value_medium_name">Medium</string>
+    <string name="rendering_value_bold_name">Bold</string>
     <string name="no_map_markers_found">Please add map markers via map</string>
     <string name="no_waypoints_found">No waypoints found</string>
     <string name="osmo_group_information_desc">
@@ -1676,7 +1679,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="init_native_library">Initializing native library…</string>
     <string name="choose_auto_follow_route">Auto-center map view</string>
     <string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
-    <string name="auto_follow_route_never">Never (tap \'Go\' to start guidance manually)</string>
+    <!-- string name="auto_follow_route_never">Never (tap \'Go\' to start guidance manually)</string -->
     <string name="keep_informing_never">Only manually (tap arrow)</string>
     <string name="keep_informing_descr">Re-announce navigation instructions at regular intervals</string>
     <string name="keep_informing">Repeat navigation instructions</string>

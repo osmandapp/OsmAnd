@@ -2,17 +2,10 @@ package net.osmand.plus.widgets;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.ToggleButton;
 
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.FontCache;
-
-/**
- * Created by Alexey Pelykh on 02.02.2015.
- */
+@Deprecated
 public class SwitchEx extends ToggleButton {
 	public SwitchEx(Context context) {
 		super(context);

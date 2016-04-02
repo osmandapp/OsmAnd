@@ -165,9 +165,9 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 		if (latLon != null && o == null
 				&& (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode())) {
 
-			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.avoid_road) {
 						activity.getMyApplication().getAvoidSpecificRoads().addImpassableRoad(
 								activity, latLon, false);
@@ -178,7 +178,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 			};
 
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.avoid_road, activity)
-					.setColorIcon(R.drawable.ic_action_road_works_dark)
+					.setIcon(R.drawable.ic_action_road_works_dark)
 					.setListener(listener)
 					.createItem());
 		}

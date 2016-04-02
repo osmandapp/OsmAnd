@@ -21,7 +21,7 @@ public class RasterMapMenu {
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
 													   final OsmandRasterMapsPlugin.RasterMapType type) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity, false);
+		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
@@ -72,7 +72,8 @@ public class RasterMapMenu {
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
+										  View view, int itemId, int pos) {
 				if (itemId == mapTypeString) {
 					if (selected) {
 						plugin.selectMapOverlayLayer(mapActivity.getMapView(), mapTypePreference,
@@ -84,7 +85,7 @@ public class RasterMapMenu {
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<?> adapter,
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
 											  int itemId, int pos, boolean isChecked) {
 				if (itemId == toggleActionStringId) {
 					if (isChecked) {
@@ -136,7 +137,7 @@ public class RasterMapMenu {
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(mapTypeStringTransparency, mapActivity)
 					.setLayout(R.layout.progress_list_item)
-					.setColorIcon(R.drawable.ic_action_opacity)
+					.setIcon(R.drawable.ic_action_opacity)
 					.setProgress(mapTransparencyPreference.get())
 					.setListener(l)
 					.setIntegerListener(integerListener).createItem());

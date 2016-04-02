@@ -914,30 +914,7 @@ public class RoutingHelper {
 			}
 		}
 	}
-	
-	public boolean startTaskInRouteThreadIfPossible(final Runnable r) {
-		if (currentRunningJob == null) {
-			synchronized (this) {
-				currentRunningJob = new Thread(new Runnable() {
-					@Override
-					public void run() {
-						synchronized (RoutingHelper.this) {
-							try {
-								r.run();
-							} finally {
-								currentRunningJob = null;
-							}
-						}
-					}
-				}, "Calculating position"); //$NON-NLS-1$
-				currentRunningJob.start();
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
+
 	private void updateProgress(final RouteCalculationParams params) {
 		if(progressRoute != null ) {
 			app.runInUIThread(new Runnable() {

@@ -115,7 +115,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 		Integer[] intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
 		entries = new String[intValues.length];
-		entries[0] = getString(R.string.auto_follow_route_never);
+		entries[0] = getString(R.string.shared_string_never);
 		for (int i = 1; i < intValues.length; i++) {
 			entries[i] = (int) intValues[i] + " " + getString(R.string.int_seconds);
 		}

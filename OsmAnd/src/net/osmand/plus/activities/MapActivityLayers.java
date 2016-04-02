@@ -261,10 +261,10 @@ public class MapActivityLayers {
 	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiUIFilter[] selected) {
 		OsmandApplication app = (OsmandApplication) getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
+		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_search, app)
-				.setColorIcon(R.drawable.ic_action_search_dark).createItem());
+				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		final List<PoiUIFilter> list = new ArrayList<PoiUIFilter>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
@@ -310,6 +310,7 @@ public class MapActivityLayers {
 		} else {
 			builder.setIcon(R.drawable.mx_user_defined);
 		}
+		builder.setColor(R.color.color_white);
 		adapter.addItem(builder.createItem());
 	}
 
