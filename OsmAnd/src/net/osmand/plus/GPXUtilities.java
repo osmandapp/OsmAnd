@@ -220,15 +220,9 @@ public class GPXUtilities {
 			return convert(splitSegments);
 		}
 
-		public void recalculateRenderScales(double zoom) {
+		public void drawRenderers(double zoom, Paint p, Canvas c, RotatedTileBox tb) {
 			for (Renderable.RenderableSegment rs : renders) {
-				rs.recalculateRenderScale(zoom);
-			}
-		}
-
-		public void drawRenderers(Paint p, Canvas c, RotatedTileBox tb) {
-			for (Renderable.RenderableSegment rs : renders) {
-				rs.drawSingleSegment(p, c, tb);
+				rs.drawSegment(zoom, p, c, tb);
 			}
 		}
 	}

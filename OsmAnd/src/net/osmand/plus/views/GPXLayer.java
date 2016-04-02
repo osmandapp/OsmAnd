@@ -205,7 +205,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if(points != null) {
 			updatePaints(0, false, false, settings, tileBox);
 			for (TrkSegment ts : points)
-				ts.drawRenderers(paint, canvas,tileBox);
+				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 		} else {
 			List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
 			cache.clear();
@@ -334,17 +334,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						ts.renders.add(new Renderable.CurrentTrack(ts.points));
 					} else {
 						ts.renders.add(new Renderable.Altitude(ts.points, 10));
-						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.5));
-						ts.renders.add(new Renderable.DistanceMarker(ts.points, 1000));
-						//ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
-						//ts.renders.add(new Renderable.Speed(ts.points, 50));
+						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
+						ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
 						ts.renders.add(new Renderable.Arrows(ts.points, view, 40, 250));
+						ts.renders.add(new Renderable.DistanceMarker(ts.points, 1000));
+						//ts.renders.add(new Renderable.Speed(ts.points, 50));
 					}
 				}
 
-				ts.recalculateRenderScales(view.getZoom());
+				//ts.recalculateRenderScales(view.getZoom());
 				updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
-				ts.drawRenderers(paint, canvas, tileBox);
+				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 			}
 		}
 	}

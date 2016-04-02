@@ -50,13 +50,14 @@ public class Renderable {
 
         public List<WptPt> points = null;                           // Original list of points
         protected List<WptPt> culled = new ArrayList();             // Reduced/resampled list of points
+        protected int pointSize;
 
         protected QuadRect trackBounds;
         double zoom = -1;
         AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                   // MUST be set by 'updateLocalPaint' before use
 
-        public RenderableSegment(List<WptPt> pt) {
+        public RenderableSegment(List <WptPt> pt) {
             points = pt;
             calculateBounds(points);
         }
@@ -72,8 +73,15 @@ public class Renderable {
             paint.setStrokeWidth(p.getStrokeWidth());
         }
 
-        public void recalculateRenderScale(double zoom) {}
-        public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {}
+        public void startCuller(double zoom) {}
+        protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {}
+
+        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
+                startCuller(zoom);
+                drawSingleSegment(zoom, p, canvas, tileBox);
+            }
+        }
 
         private void calculateBounds(List<WptPt> pts) {
             trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
@@ -81,9 +89,9 @@ public class Renderable {
             updateBounds(pts, 0);
         }
 
-        public void updateBounds(List<WptPt> pts, int startIndex) {
-            int size = pts.size();
-            for (int i = startIndex; i < size; i++) {
+        protected void updateBounds(List<WptPt> pts, int startIndex) {
+            pointSize = pts.size();
+            for (int i = startIndex; i < pointSize; i++) {
                 WptPt pt = pts.get(i);
                 trackBounds.right = Math.max(trackBounds.right, pt.lon);
                 trackBounds.left = Math.min(trackBounds.left, pt.lon);
@@ -95,16 +103,15 @@ public class Renderable {
         // When the asynchronous task has finished, it calls this function to set the 'culled' list
         public void setRDP(List<WptPt> cull) {
             culled = cull;
-            //calculateBounds(culled);
         }
 
         protected void draw(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (pts.size() > 1 && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+            if (pts.size() > 1) {
 
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-                
+
                 float stroke = paint.getStrokeWidth() / 2;
 
                 float clipL = -stroke;
@@ -133,7 +140,6 @@ public class Renderable {
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
         }
-
     }
 
     //----------------------------------------------------------------------------------------------
@@ -147,7 +153,7 @@ public class Renderable {
             this.base = base;
         }
 
-        @Override public void recalculateRenderScale(double newZoom) {
+        @Override public void startCuller(double newZoom) {
 
             // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
             // The asynchronous callback will set the variable 'culled', and that is preferentially used for rendering
@@ -170,7 +176,7 @@ public class Renderable {
             }
         }
 
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             draw(culled.isEmpty() ? points : culled, p, canvas, tileBox);
         }
     }
@@ -186,18 +192,16 @@ public class Renderable {
             this.segmentSize = segmentSize;
         }
 
-        @Override public void recalculateRenderScale(double zoom) {
+        @Override public void startCuller(double zoom) {
             if (culler == null) {
                 culler = new AsynchronousResampler.ResampleAltitude(this, segmentSize);     // once only!
                 culler.execute("");
             }
         }
 
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled.size() > 1
-                && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
-
+            if (culled.size() > 1) {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
@@ -241,7 +245,7 @@ public class Renderable {
             super(pt, segmentSize);
         }
 
-        @Override public void recalculateRenderScale(double zoom) {
+        @Override public void startCuller(double zoom) {
             if (culler == null) {
                 culler = new AsynchronousResampler.ResampleSpeed(this, segmentSize);        // once only!
                 culler.execute("");
@@ -262,7 +266,7 @@ public class Renderable {
             Renderable.startScreenRefresh(view, refreshRate);
         }
 
-        @Override public void recalculateRenderScale(double zoom) {
+        @Override public void startCuller(double zoom) {
             if (culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once only!
                 culler.execute("");
@@ -276,11 +280,9 @@ public class Renderable {
             return Color.HSVToColor(hsv);
         }
 
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled.size() > 1
-                   && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
-
+            if (culled.size() > 1) {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
@@ -331,8 +333,7 @@ public class Renderable {
             this.segmentSize = segmentSize;
         }
 
-        @Override public void recalculateRenderScale(double zoom) {
-            this.zoom = zoom;
+        @Override public void startCuller(double zoom) {
             if (culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once only
                 culler.execute("");
@@ -345,18 +346,16 @@ public class Renderable {
             return lab;
         }
 
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (!culled.isEmpty() && zoom > 12
-                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
-
+            if (zoom > 12 && !culled.isEmpty()) {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
                 float scale = 50;
                 float stroke = paint.getStrokeWidth();
 
-                for (int i = culled.size()-1; --i >= 0;) {
+                for (int i = culled.size() - 1; --i >= 0; ) {
 
                     WptPt pt = culled.get(i);
                     float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
@@ -369,17 +368,17 @@ public class Renderable {
                     String lab = getKmLabel(pt.getDistance());
                     paint.getTextBounds(lab, 0, lab.length(), bounds);
 
-                    int rectH =  bounds.height();
-                    int rectW =  bounds.width();
+                    int rectH = bounds.height();
+                    int rectW = bounds.width();
 
-                    if (x < canvas.getWidth() + rectW/2 + scale && x > -rectW/2 + scale
-                            && y < canvas.getHeight() + rectH/2f && y > -rectH/2f) {
+                    if (x < canvas.getWidth() + rectW / 2 + scale && x > -rectW / 2 + scale
+                            && y < canvas.getHeight() + rectH / 2f && y > -rectH / 2f) {
 
                         paint.setColor(Color.BLACK);
                         paint.setStrokeWidth(stroke);
                         canvas.drawPoint(x, y, paint);
                         paint.setStrokeWidth(4);
-                        canvas.drawText(lab,x-rectW/2+40,y+rectH/2,paint);
+                        canvas.drawText(lab, x - rectW / 2 + 40, y + rectH / 2, paint);
                     }
                     canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 }
@@ -401,17 +400,16 @@ public class Renderable {
             Renderable.startScreenRefresh(view, refreshRate);
         }
 
-        @Override public void recalculateRenderScale(double zoom) {
-            this.zoom = zoom;
+        @Override public void startCuller(double zoom) {
             if (culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once
                 culler.execute("");
             }
         }
 
-        private void drawArrows(Canvas canvas, RotatedTileBox tileBox, boolean internal) {
+        private void drawArrows(double zoom, Canvas canvas, RotatedTileBox tileBox, boolean internal) {
 
-            float scale = internal ? 0.8f : 1.0f;
+            float scale = internal ? 0.6f : 1.0f;
 
             float stroke = paint.getStrokeWidth();
             double zoomlimit = zoom > 15 ? 15f : zoom;
@@ -482,16 +480,14 @@ public class Renderable {
             paint.setStrokeWidth(stroke);
         }
 
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (!culled.isEmpty() && zoom > 13
-                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
-
+            if (zoom > 13 && !culled.isEmpty()) {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 cachedC = conveyor;
-                drawArrows(canvas, tileBox, false);
-                drawArrows(canvas, tileBox, true);
+                drawArrows(zoom, canvas, tileBox, false);
+                drawArrows(zoom, canvas, tileBox, true);
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
         }
@@ -501,18 +497,18 @@ public class Renderable {
 
     public static class CurrentTrack extends RenderableSegment {
 
-        private int size;
-
         public CurrentTrack(List<WptPt> pt) {
             super(pt);
-            size = pt.size();
         }
 
-        @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            if (points.size() != size) {
-                updateBounds(points, size);        // use newly added points to recalculate bounding box
-                size = points.size();
+        @Override public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+            if (points.size() != pointSize) {
+                updateBounds(points, pointSize);
             }
+            drawSingleSegment(zoom, p, canvas, tileBox);
+        }
+
+        @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             draw(points, p, canvas, tileBox);
         }
     }
