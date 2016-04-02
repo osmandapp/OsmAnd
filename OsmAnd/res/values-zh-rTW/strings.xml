@@ -2156,4 +2156,7 @@
     <string name="release_2_3">" • OSM實況。支援地圖貢獻者和開發者和每小時獲得地圖更新。\n\n• 地圖標記。一種新的方式以快速在地圖上選擇地點。\n\n• 更詳細的 OSM 地圖與國家具體的公路標誌和許多新的地圖功能。\n\n• 改善外觀和感覺的路線準備。\n\n• 在地圖下拉選單中有許多改善，如下拉地址查找。\n\n以及更多… "</string>
     <string name="no_map_markers_found">請透過地圖增加地圖標記</string>
     <string name="no_waypoints_found">未發現任何航點</string>
+    <string name="rendering_value_medium_name">中等</string>
+    <string name="rendering_value_bold_name">粗的</string>
+    <string name="rendering_value_thin_name">細的</string>
     </resources>
