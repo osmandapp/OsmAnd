@@ -209,17 +209,19 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             double dmax = Double.NEGATIVE_INFINITY;
             int index = -1;
+
+            WptPt startPt = rs.points.get(start);
+            WptPt endPt = rs.points.get(end);
+
             for (int i = start + 1; i < end && !isCancelled(); i++) {
-                double d = MapUtils.getOrthogonalDistance(
-                        rs.points.get(i).getLatitude(), rs.points.get(i).getLongitude(),
-                        rs.points.get(start).getLatitude(), rs.points.get(start).getLongitude(),
-                        rs.points.get(end).getLatitude(), rs.points.get(end).getLongitude());
+                WptPt pt = rs.points.get(i);
+                double d = MapUtils.getOrthogonalDistance(pt.lat, pt.lon, startPt.lat, startPt.lon, endPt.lat, endPt.lon);
                 if (d > dmax) {
                     dmax = d;
                     index = i;
                 }
             }
-            if (dmax >= epsilon) {
+            if (dmax > epsilon) {
                 cullRamerDouglasPeucer(survivor, start, index);
                 cullRamerDouglasPeucer(survivor, index, end);
             } else {
