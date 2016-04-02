@@ -51,15 +51,17 @@ public class Renderable {
         public List<WptPt> points = null;                           // Original list of points
         protected List<WptPt> culled = new ArrayList();             // Reduced/resampled list of points
         protected int pointSize;
+        protected double segmentSize;
 
         protected QuadRect trackBounds;
         double zoom = -1;
         AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                   // MUST be set by 'updateLocalPaint' before use
 
-        public RenderableSegment(List <WptPt> pt) {
-            points = pt;
+        public RenderableSegment(List <WptPt> points, double segmentSize) {
+            this.points = points;
             calculateBounds(points);
+            this.segmentSize = segmentSize;
         }
 
         protected void updateLocalPaint(Paint p) {
@@ -73,7 +75,24 @@ public class Renderable {
             paint.setStrokeWidth(p.getStrokeWidth());
         }
 
-        public void startCuller(double zoom) {}
+        protected void startCuller(double newZoom) {
+            if (zoom != newZoom) {
+                if (culler != null) {
+                    culler.cancel(true);
+                }
+                culled.clear();
+                zoom = newZoom;
+
+                double length = Math.pow(2.0, 17 - zoom) * segmentSize;
+                culler = getCuller(length);
+                culler.execute("");
+            }
+        }
+
+        protected AsynchronousResampler getCuller(double segmentSize) {
+            return new AsynchronousResampler.GenericResampler(this, segmentSize);
+        }
+
         protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {}
 
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
@@ -146,31 +165,22 @@ public class Renderable {
 
     public static class StandardTrack extends RenderableSegment {
 
-        double base;     // parameter for calculating Ramer-Douglas-Peucer distance
-
         public StandardTrack(List<WptPt> pt, double base) {
-            super(pt);
-            this.base = base;
+            super(pt, base);
         }
 
         @Override public void startCuller(double newZoom) {
 
-            // Here we create the 'shadow' resampled/culled points list, based on the asynchronous call.
-            // The asynchronous callback will set the variable 'culled', and that is preferentially used for rendering
-            // The current track does not undergo this process, as it is potentially constantly changing.
-
             if (zoom != newZoom) {
-
                 if (culler != null) {
                     culler.cancel(true);
                 }
-
                 if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
-                    culled.clear();                 // use full-resolution until re-cull complete
+                    culled.clear();              // use full-resolution until re-cull complete
                 }
                 zoom = newZoom;
 
-                double cullDistance = Math.pow(2.0, base - zoom);
+                double cullDistance = Math.pow(2.0, segmentSize - zoom);    // segmentSize == epsilon
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
                 culler.execute("");
             }
@@ -185,18 +195,12 @@ public class Renderable {
 
     public static class Altitude extends RenderableSegment {
 
-        protected double segmentSize;
-
         public Altitude(List<WptPt> pt, double segmentSize) {
-            super(pt);
-            this.segmentSize = segmentSize;
+            super(pt, segmentSize);
         }
 
-        @Override public void startCuller(double zoom) {
-            if (culler == null) {
-                culler = new AsynchronousResampler.ResampleAltitude(this, segmentSize);     // once only!
-                culler.execute("");
-            }
+        @Override protected AsynchronousResampler getCuller(double segmentSize) {
+            return new AsynchronousResampler.ResampleAltitude(this, segmentSize);
         }
 
         @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
@@ -245,11 +249,8 @@ public class Renderable {
             super(pt, segmentSize);
         }
 
-        @Override public void startCuller(double zoom) {
-            if (culler == null) {
-                culler = new AsynchronousResampler.ResampleSpeed(this, segmentSize);        // once only!
-                culler.execute("");
-            }
+        @Override protected AsynchronousResampler getCuller(double segmentSize) {
+            return new AsynchronousResampler.ResampleSpeed(this, segmentSize);
         }
     }
 
@@ -257,20 +258,9 @@ public class Renderable {
 
     public static class Conveyor extends RenderableSegment {
 
-        private double segmentSize;
-
         public Conveyor(List<WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
-            super(pt);
-            this.segmentSize = segmentSize;
-
+            super(pt, segmentSize);
             Renderable.startScreenRefresh(view, refreshRate);
-        }
-
-        @Override public void startCuller(double zoom) {
-            if (culler == null) {
-                culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once only!
-                culler.execute("");
-            }
         }
 
         private int getComplementaryColor(int colorToInvert) {
@@ -326,11 +316,8 @@ public class Renderable {
 
     public static class DistanceMarker extends RenderableSegment {
 
-        private double segmentSize;
-
         public DistanceMarker(List<WptPt> pt, double segmentSize) {
-            super(pt);
-            this.segmentSize = segmentSize;
+            super(pt, segmentSize);
         }
 
         @Override public void startCuller(double zoom) {
@@ -390,30 +377,17 @@ public class Renderable {
 
     public static class Arrows extends RenderableSegment {
 
-        private double segmentSize;
-        private int cachedC;
-
         public Arrows(List<WptPt> pt, OsmandMapTileView view, double segmentSize, long refreshRate) {
-            super(pt);
-            this.segmentSize = segmentSize;
-
+            super(pt, segmentSize);
             Renderable.startScreenRefresh(view, refreshRate);
         }
 
-        @Override public void startCuller(double zoom) {
-            if (culler == null) {
-                culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once
-                culler.execute("");
-            }
-        }
-
-        private void drawArrows(double zoom, Canvas canvas, RotatedTileBox tileBox, boolean internal) {
+        private void drawArrows(int cachedC, double zoom, Canvas canvas, RotatedTileBox tileBox, boolean internal) {
 
             float scale = internal ? 0.6f : 1.0f;
 
             float stroke = paint.getStrokeWidth();
-            double zoomlimit = zoom > 15 ? 15f : zoom;
-            float arrowSize = (float) Math.pow(2.0,zoomlimit-18) * 800;
+            float arrowSize = 75f;
             boolean broken = true;
             int intp = cachedC;                                // the segment cycler
 
@@ -440,13 +414,13 @@ public class Renderable {
                         && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
 
                     float segment = intp & 15;
-                    if (segment < 6) {
+                    if (segment < 5) {
 
                         paint.setColor(internal ? Algorithms.getRainbowColor(((double) (i)) / ((double) size)) : Color.BLACK);
 
-                        float segpiece = 6 - segment;
-                        if (segpiece > 4)
-                            segpiece = 4;
+                        float segpiece = 5 - segment;
+                        if (segpiece > 3)
+                            segpiece = 3;
 
                         if (!broken) {
                             float sw = stroke * segpiece * scale;
@@ -454,9 +428,10 @@ public class Renderable {
                             canvas.drawLine(lastx, lasty, x, y, paint);
                         }
                         nextBroken = false;
+
                         // arrowhead...
                         if (segment == 0 && lasty != -Float.NEGATIVE_INFINITY) {
-                            float sw = stroke * (6 - segment) / 2f * scale;
+                            float sw = stroke * segpiece * scale;
                             paint.setStrokeWidth(sw);
                             double angle = Math.atan2(lasty - y, lastx - x);
 
@@ -485,9 +460,9 @@ public class Renderable {
             if (zoom > 13 && !culled.isEmpty()) {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-                cachedC = conveyor;
-                drawArrows(zoom, canvas, tileBox, false);
-                drawArrows(zoom, canvas, tileBox, true);
+                int cachedC = conveyor;
+                drawArrows(cachedC, zoom, canvas, tileBox, false);
+                drawArrows(cachedC, zoom, canvas, tileBox, true);
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
         }
@@ -498,7 +473,7 @@ public class Renderable {
     public static class CurrentTrack extends RenderableSegment {
 
         public CurrentTrack(List<WptPt> pt) {
-            super(pt);
+            super(pt, 0);
         }
 
         @Override public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
@@ -507,6 +482,8 @@ public class Renderable {
             }
             drawSingleSegment(zoom, p, canvas, tileBox);
         }
+
+        @Override protected void startCuller(double newZoom) {}
 
         @Override public void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             draw(points, p, canvas, tileBox);
