@@ -109,26 +109,26 @@ public class GPXUtilities {
 		public WptPt() {
 		}
 
-		public WptPt(WptPt toCopy) {
-			this.lat = toCopy.lat;
-			this.lon = toCopy.lon;
-			if (toCopy.name != null) {
-				this.name = new String(toCopy.name);
-			}
-			if (toCopy.link != null) {
-				this.link = new String(toCopy.link);
-			}
-			if (toCopy.category != null) {
-				this.category = new String(toCopy.category);
-			}
-			this.time = toCopy.time;
-			this.ele = toCopy.ele;
-			this.speed = toCopy.speed;
-			this.hdop = toCopy.hdop;
-			this.deleted = toCopy.deleted;
-			this.colourARGB = toCopy.colourARGB;
-			this.distance = toCopy.distance;
-		}
+//		public WptPt(WptPt toCopy) {
+//			this.lat = toCopy.lat;
+//			this.lon = toCopy.lon;
+//			if (toCopy.name != null) {
+//				this.name = new String(toCopy.name);
+//			}
+//			if (toCopy.link != null) {
+//				this.link = new String(toCopy.link);
+//			}
+//			if (toCopy.category != null) {
+//				this.category = new String(toCopy.category);
+//			}
+//			this.time = toCopy.time;
+//			this.ele = toCopy.ele;
+//			this.speed = toCopy.speed;
+//			this.hdop = toCopy.hdop;
+//			this.deleted = toCopy.deleted;
+//			this.colourARGB = toCopy.colourARGB;
+//			this.distance = toCopy.distance;
+//		}
 
 		public void setDistance(double dist) {
 			distance = dist;
