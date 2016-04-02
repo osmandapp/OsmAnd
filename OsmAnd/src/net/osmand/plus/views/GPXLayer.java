@@ -333,12 +333,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					if (g.isShowCurrentTrack()) {
 						ts.renders.add(new Renderable.CurrentTrack(ts.points));
 					} else {
-						//ts.renders.add(new Renderable.Altitude(ts.points, 10));
-						ts.renders.add(new Renderable.StandardTrack(ts.points, 18));
-						//ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
-						ts.renders.add(new Renderable.Speed(ts.points, 50));
-						ts.renders.add(new Renderable.Arrows(ts.points, view, 40, 250));
+						ts.renders.add(new Renderable.Altitude(ts.points, 10));
+						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.5));
 						ts.renders.add(new Renderable.DistanceMarker(ts.points, 1000));
+						//ts.renders.add(new Renderable.Conveyor(ts.points, view, 20, 250));
+						//ts.renders.add(new Renderable.Speed(ts.points, 50));
+						ts.renders.add(new Renderable.Arrows(ts.points, view, 40, 250));
 					}
 				}
 
