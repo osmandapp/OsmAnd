@@ -2177,4 +2177,7 @@
     <string name="osm_live_enter_user_name">Калі ласка ўвядзіце імя</string>
     <string name="select_map_markers">Абярыце маркеры</string>
     <string name="file_name_containes_illegal_char">Назва файлу зьмяшчае недапушчальны сымбаль</string>
-</resources>
+<string name="rendering_value_thin_name">Тонкі</string>
+    <string name="rendering_value_medium_name">Сярэдні</string>
+    <string name="rendering_value_bold_name">Тоўсты</string>
+    </resources>
