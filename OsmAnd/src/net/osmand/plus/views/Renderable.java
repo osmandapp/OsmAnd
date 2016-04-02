@@ -10,6 +10,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -47,8 +48,8 @@ public class Renderable {
 
     public static abstract class RenderableSegment {
 
-        public List<WptPt> points = null;              // Original list of points
-        protected List<WptPt> culled = null;           // Reduced/resampled list of points
+        public List<WptPt> points = null;                           // Original list of points
+        protected List<WptPt> culled = new ArrayList();             // Reduced/resampled list of points
 
         protected QuadRect trackBounds;
         double zoom = -1;
@@ -159,7 +160,7 @@ public class Renderable {
                 }
 
                 if (zoom < newZoom) {            // if line would look worse (we're zooming in) then...
-                    culled = null;                 // use full-resolution until re-cull complete
+                    culled.clear();                 // use full-resolution until re-cull complete
                 }
                 zoom = newZoom;
 
@@ -170,7 +171,7 @@ public class Renderable {
         }
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            draw(culled == null ? points : culled, p, canvas, tileBox);
+            draw(culled.isEmpty() ? points : culled, p, canvas, tileBox);
         }
     }
 
@@ -186,7 +187,7 @@ public class Renderable {
         }
 
         @Override public void recalculateRenderScale(double zoom) {
-            if (culled == null && culler == null) {
+            if (culler == null) {
                 culler = new AsynchronousResampler.ResampleAltitude(this, segmentSize);     // once only!
                 culler.execute("");
             }
@@ -194,7 +195,7 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && culled.size() > 1
+            if (culled.size() > 1
                 && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 updateLocalPaint(p);
@@ -241,7 +242,7 @@ public class Renderable {
         }
 
         @Override public void recalculateRenderScale(double zoom) {
-            if (culled == null && culler == null) {
+            if (culler == null) {
                 culler = new AsynchronousResampler.ResampleSpeed(this, segmentSize);        // once only!
                 culler.execute("");
             }
@@ -262,7 +263,7 @@ public class Renderable {
         }
 
         @Override public void recalculateRenderScale(double zoom) {
-            if (culled == null && culler == null) {
+            if (culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once only!
                 culler.execute("");
             }
@@ -277,7 +278,7 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && culled.size() > 1
+            if (culled.size() > 1
                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 updateLocalPaint(p);
@@ -332,7 +333,7 @@ public class Renderable {
 
         @Override public void recalculateRenderScale(double zoom) {
             this.zoom = zoom;
-            if (culled == null && culler == null) {
+            if (culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once only
                 culler.execute("");
             }
@@ -346,7 +347,7 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && !culled.isEmpty() && zoom > 12
+            if (!culled.isEmpty() && zoom > 12
                     && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 updateLocalPaint(p);
@@ -402,7 +403,7 @@ public class Renderable {
 
         @Override public void recalculateRenderScale(double zoom) {
             this.zoom = zoom;
-            if (culled == null && culler == null) {
+            if (culler == null) {
                 culler = new AsynchronousResampler.GenericResampler(this, segmentSize);     // once
                 culler.execute("");
             }
@@ -483,7 +484,7 @@ public class Renderable {
 
         @Override public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled != null && !culled.isEmpty() && zoom > 13
+            if (!culled.isEmpty() && zoom > 13
                     && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
 
                 updateLocalPaint(p);
