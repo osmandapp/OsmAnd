@@ -130,7 +130,8 @@ public class NotificationHelper {
 			PendingIntent savePendingIntent = PendingIntent.getBroadcast(app, 0, saveIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
 
-			if(service != null && service.getUsedBy() == NavigationService.USED_BY_GPX) {
+			if(service != null && (service.getUsedBy()&2)!=0) {
+				//checks if service.getUsedBy() includes NavigationService.USED_BY_GPX
 				Intent stopIntent = new Intent(OSMAND_STOP_GPX_SERVICE_ACTION);
 				PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
