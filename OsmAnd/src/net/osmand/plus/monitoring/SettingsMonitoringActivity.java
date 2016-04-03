@@ -6,6 +6,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.OsmAndFormatter;
 import android.content.BroadcastReceiver;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
