@@ -2008,4 +2008,7 @@
     <string name="full_report">Plné hlásenie</string>
     <string name="open_street_map_login_and_pass">Meno a heslo pre OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
-</resources>
+<string name="rendering_value_thin_name">Tenké</string>
+    <string name="rendering_value_medium_name">Stredné</string>
+    <string name="rendering_value_bold_name">Tučné</string>
+    </resources>
