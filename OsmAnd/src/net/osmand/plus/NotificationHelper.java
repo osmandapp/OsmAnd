@@ -108,7 +108,7 @@ public class NotificationHelper {
 			return null;
 		//} else if(app.getSavingTrackHelper().getDistance() > 0f){
 		//This produces system notification if unsaved GPX track exists, displaying recorded distance. But only while OsmAnd is in the foreground and while recording has been stopped (otherwise background notification caries this info anyway)
-		//Purpose is doubtful, we have widget for that. If we re-instante, we need to implement notification refresh upon track saved.
+		//Purpose is doubtful, we have widget for that. If we re-instate, we need to implement notification refresh upon track saved, maybe also work on notification wording to clarify meaning.
 		//	notificationText =	app.getString(R.string.shared_string_trip_recording);
 		//	float dst = app.getSavingTrackHelper().getDistance();
 		//	notificationText += ": "+OsmAndFormatter.getFormattedDistance(dst, app);
