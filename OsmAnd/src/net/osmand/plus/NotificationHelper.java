@@ -135,7 +135,7 @@ public class NotificationHelper {
 				PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 				notificationBuilder.addAction(R.drawable.ic_action_rec_stop,
-						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
+						app.getString(R.string.gpx_monitoring_stop), stopPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
 						savePendingIntent);
 //			} else if(service == null) {
@@ -144,7 +144,7 @@ public class NotificationHelper {
 				PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 				notificationBuilder.addAction(R.drawable.ic_action_rec_start,
-						app.getString(R.string.shared_string_control_start), startPendingIntent);
+						app.getString(R.string.gpx_monitoring_start), startPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
 						savePendingIntent);
 			}
