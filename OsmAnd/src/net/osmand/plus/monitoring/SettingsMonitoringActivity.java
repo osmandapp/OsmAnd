@@ -65,7 +65,8 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 
 		Preference pref = new Preference(this);
 		pref.setTitle(R.string.save_current_track);
-		pref.setSummary(getMyApplication().getString(R.string.save_current_track_descr) + ": " + OsmAndFormatter.getFormattedDistance(getMyApplication().getSavingTrackHelper().getDistance(), getMyApplication()));
+		pref.setSummary(getMyApplication().getString(R.string.save_current_track_descr)
+				+ " (" + OsmAndFormatter.getFormattedDistance(getMyApplication().getSavingTrackHelper().getDistance(), getMyApplication()) + ")");
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
