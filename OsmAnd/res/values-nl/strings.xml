@@ -2246,4 +2246,7 @@
     <string name="file_name_containes_illegal_char">Bestandsnaam bevat verkeerd teken</string>
 <string name="no_map_markers_found">Markeervlaggetjes kun je via de kaart toevoegen</string>
     <string name="no_waypoints_found">Geen punten gevonden</string>
+    <string name="rendering_value_thin_name">Dun</string>
+    <string name="rendering_value_medium_name">Normaal</string>
+    <string name="rendering_value_bold_name">Vet</string>
     </resources>
