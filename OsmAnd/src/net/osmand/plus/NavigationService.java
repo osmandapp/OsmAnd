@@ -167,9 +167,6 @@ public class NavigationService extends Service implements LocationListener {
 	}
 	
 	protected void stopService() {
-		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-			settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
-		}
 		OsMoPlugin osmoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (osmoPlugin != null) {
 			if (osmoPlugin.getTracker().isEnabledTracker()) {

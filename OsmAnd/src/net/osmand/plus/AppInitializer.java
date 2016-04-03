@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -30,6 +29,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -57,7 +57,6 @@ import java.util.List;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
-
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
@@ -575,7 +574,7 @@ public class AppInitializer implements IProgress {
 				app.savingTrackHelper.loadGpxFromDatabase();
 			}
 		}
-		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
+		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null){
 			app.startNavigationService(NavigationService.USED_BY_GPX);
 		}
 	}
