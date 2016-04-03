@@ -2167,4 +2167,7 @@
     <string name="no_waypoints_found">Perunu puntu de coladòrgiu agatadu</string>
     <string name="report">Raportu</string>
     <string name="file_name_containes_illegal_char">Su nùmene de su documentu cuntennit caràteres non permitidos</string>
-</resources>
+<string name="rendering_value_thin_name">Fine</string>
+    <string name="rendering_value_medium_name">Mesanu</string>
+    <string name="rendering_value_bold_name">Grussu</string>
+    </resources>
