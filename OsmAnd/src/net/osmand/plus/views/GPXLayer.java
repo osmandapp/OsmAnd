@@ -323,6 +323,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
+
 		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
@@ -333,11 +334,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					if (g.isShowCurrentTrack()) {
 						ts.renders.add(new Renderable.CurrentTrack(ts.points));
 					} else {
-						ts.renders.add(new Renderable.Altitude(ts.points, 10));
+						//ts.renders.add(new Renderable.Altitude(ts.points, 10));
 						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
-						ts.renders.add(new Renderable.Conveyor(ts.points, view, 5, 250));
-						ts.renders.add(new Renderable.Arrows(ts.points, view, 10, 250));
-						ts.renders.add(new Renderable.DistanceMarker(ts.points, 1000));
+						//ts.renders.add(new Renderable.Conveyor(ts.points, view, 5, 250));
+						//ts.renders.add(new Renderable.Arrows(ts.points, view, 10, 250));
+						//ts.renders.add(new Renderable.DistanceMarker(ts.points, 1000));
 						//ts.renders.add(new Renderable.Speed(ts.points, 50));
 					}
 				}

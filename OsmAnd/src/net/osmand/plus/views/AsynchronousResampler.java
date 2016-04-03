@@ -193,7 +193,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 boolean survivor[] = new boolean[nsize];
                 cullRamerDouglasPeucer(survivor, 0, nsize - 1);
                 if (!isCancelled()) {
-                    culled = new ArrayList();
+                    culled = new ArrayList<>();
                     survivor[0] = true;
                     for (int i = 0; i < nsize; i++) {
                         if (survivor[i]) {
