@@ -2130,4 +2130,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
 <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
     <string name="no_map_markers_found">Bitte eine Kartenmarkierung via Karte setzen</string>
+    <string name="rendering_value_thin_name">Dünn</string>
+    <string name="rendering_value_medium_name">Mittel</string>
+    <string name="rendering_value_bold_name">Fett</string>
     </resources>
