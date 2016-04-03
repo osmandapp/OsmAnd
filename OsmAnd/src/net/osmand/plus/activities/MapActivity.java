@@ -171,24 +171,25 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	private boolean permissionAsked;
 	private boolean permissionGranted;
 
-	private Notification getNotification() {
-		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
-		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT);
+	//private Notification getNotification() {
+	//Suppress extra nav notification, all handled by background service notification now
+	//	Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
+	//	notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	//	PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT);
 //		Notification notification = new Notification(R.drawable.bgs_icon_drive, "", //$NON-NLS-1$
 //				System.currentTimeMillis());
 //		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 //		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
 //				pi);
-		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
-		final Builder noti = new NotificationCompat.Builder(this).setContentTitle(Version.getAppName(app))
-				.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-				.setContentText(getString(R.string.go_back_to_osmand))
-				.setSmallIcon(smallIcon)
+	//	int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
+	//	final Builder noti = new NotificationCompat.Builder(this).setContentTitle(Version.getAppName(app))
+	//			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+	//			.setContentText(getString(R.string.go_back_to_osmand))
+	//			.setSmallIcon(smallIcon)
 //	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
-				.setContentIntent(pi).setOngoing(true);
-		return noti.build();
-	}
+	//			.setContentIntent(pi).setOngoing(true);
+	//	return noti.build();
+	//}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -864,12 +865,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	@Override
 	protected void onStop() {
-		if (app.getRoutingHelper().isFollowingMode()) {
-			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-			if (mNotificationManager != null) {
-				mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
-			}
-		}
+	//	if (app.getRoutingHelper().isFollowingMode()) {
+	//		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+	//		if (mNotificationManager != null) {
+	//			mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+	//		}
+	//	}
 		wakeLockHelper.onStop(this);
 		if (getMyApplication().getNavigationService() == null) {
 			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
