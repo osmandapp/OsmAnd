@@ -715,8 +715,6 @@
     <string name="back_to_location">Retourner à la position</string>
     <string name="shared_string_help">Aide</string>
 
-    <string name="accessibility_extensions_descr">Extensions d\'accessibilité pour les anciennes versions Android</string>
-    <string name="accessibility_extensions">Extensions d\'accessibilité</string>
     <string name="accessibility_mode">Mode accessibilité</string>
     <string name="accessibility_mode_descr">Activer les fonctionnalités d\'accessibilité</string>
     <string name="shared_string_on">Oui</string>
@@ -761,13 +759,9 @@
     <string name="settings_direction_style_descr">Sélectionnez un style pour indiquer la direction générale lors du déplacement</string>
     <string name="auto_announce_on">Démarrer les annonces automatiques</string>
     <string name="auto_announce_off">Arrêter les annonces automatiques</string>
-    <string name="scroll_map_by_gestures_descr">Faire défiler la carte par gestes sur l\'écran</string>
-    <string name="scroll_map_by_gestures">Défilement naturel de la carte</string>
     <string name="i_am_here">Je suis ici</string>
     <string name="zoom_by_trackball_descr">Modifier le niveau de zoom par mouvements horizontaux du trackball</string>
     <string name="zoom_by_trackball">Utiliser le trackball pour le contrôle du zoom</string>
-    <string name="use_short_object_names_descr">Utiliser les noms d\'objets courts</string>
-    <string name="use_short_object_names">Utiliser les noms d\'objets</string>
     <string name="accessibility_preferences_descr">Configurer les paramètres liés à l\'accessibilité</string>
     <string name="shared_string_accessibility">Accessibilité</string>
     <string name="use_fluorescent_overlays">Sur-couche fluorescente</string>

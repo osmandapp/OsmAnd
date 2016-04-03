@@ -100,8 +100,6 @@
     <string name="show_ruler_level">Zobraziť pravítko</string>
     <string name="info_button">Info</string>
     <string name="back_to_location">Späť na umiestnenie</string>
-    <string name="accessibility_extensions_descr">Rozšírenia uľahčenia prístupu pre staršie verzie Androidu</string>
-    <string name="accessibility_extensions">Rozšírenia uľahčenia prístupu</string>
     <string name="accessibility_mode">Režim uľahčenia prístupu</string>
     <string name="accessibility_mode_descr">Zapnutie funkcií uľahčenia prístupu</string>
     <string name="accessibility_default">Podľa globálnych nastavení systému</string>
@@ -144,13 +142,9 @@
     <string name="settings_direction_style_descr">Výber štýlu na vyjadrenie relatívneho smerovania počas pohybu</string>
     <string name="auto_announce_on">Spustiť autom. oznamovanie</string>
     <string name="auto_announce_off">Zastaviť autom. oznamovanie</string>
-    <string name="scroll_map_by_gestures_descr">Posúvať mapu pohybmi po obrazovke</string>
-    <string name="scroll_map_by_gestures">Prirodzené posúvanie mapy</string>
     <string name="i_am_here">Tu som</string>
     <string name="zoom_by_trackball_descr">Zmeniť priblíženie mapy horizontálnymi pohybmi trackballu</string>
     <string name="zoom_by_trackball">Použiť trackball na približovanie</string>
-    <string name="use_short_object_names_descr">Použiť skrátené názvy objektov v režime prezerania dotykom</string>
-    <string name="use_short_object_names">Použiť názvy objektov</string>
     <string name="accessibility_preferences_descr">Predvoľby týkajúce sa uľahčenia prístupu</string>
     <string name="shared_string_accessibility">Uľahčenie prístupu</string>
     <string name="rendering_out_of_memory">Nedostatok procesnej pamäte na zobrazenie zvolenej oblasti</string>

@@ -884,8 +884,6 @@
 	<string name="back_to_location">Viarnucca da pazіcyі</string>
 	<string name="shared_string_help">Dapamoha</string>
 	
-	<string name="accessibility_extensions_descr">Pašyreńnі dastupnaścі dlia starych versіj Android</string>
-	<string name="accessibility_extensions">Pašyreńnі dastupnaścі</string>
 	<string name="accessibility_mode">Režym dastupnaścі</string>
 	<string name="accessibility_mode_descr">Ukliučyć ulaścіvaścі dastupnaścі</string>
 	<string name="shared_string_on">Ukl</string>
@@ -930,13 +928,9 @@
 	<string name="settings_direction_style_descr">Abiarycie styĺ jak pakazvać adnosnyja napramkі padčas ruchu</string>
 	<string name="auto_announce_on">Pačać aŭtamatyčnyja anonsy</string>
 	<string name="auto_announce_off">Spynіć aŭtamatyčnyja anonsy</string>
-	<string name="scroll_map_by_gestures_descr">Pasoŭvać mapu ruchamі na tačskrynie</string>
-	<string name="scroll_map_by_gestures">Naturaĺnaje pasoŭvańnie mapy</string>
 	<string name="i_am_here">Ja tut</string>
 	<string name="zoom_by_trackball_descr">Źmianiać maštab haryzantaĺnymі ruchamі trekbolu</string>
 	<string name="zoom_by_trackball">Karystacca trekbolam dlia źmieny maštabu</string>
-	<string name="use_short_object_names_descr">Užyvać karotkіja nazvy abektaŭ u režymie ahliadu</string>
-	<string name="use_short_object_names">Užyvać nazvy abektaŭ</string>
 	<string name="accessibility_preferences_descr">Nalady dastupnaścі</string>
 	<string name="shared_string_accessibility">Dastupnaść</string>
     <string name="arrival_distance_factor_early">Raniej</string>

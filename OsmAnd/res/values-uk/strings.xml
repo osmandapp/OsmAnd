@@ -77,8 +77,6 @@
   <string name="back_to_location">Повернутись</string>
   <string name="shared_string_help">Допомога</string>
   
-  <string name="accessibility_extensions_descr">Допоміжні можливості для старих версій Android</string>
-  <string name="accessibility_extensions">Розширення допоміжних можливостей</string>
   <string name="accessibility_mode">Режим допоміжних можливостей</string>
   <string name="accessibility_mode_descr">Вмикає допоміжні можливості</string>
   <string name="shared_string_on">Увімкнено</string>
@@ -123,13 +121,9 @@
   <string name="settings_direction_style_descr">Виберіть стиль вказівника відносних напрямків під час руху</string>
   <string name="auto_announce_on">Увімкнути автоповідомлення</string>
   <string name="auto_announce_off">Вимкнути автоповідомлення</string>
-  <string name="scroll_map_by_gestures_descr">Пересувати карту жестами на сенсорному екрані</string>
-  <string name="scroll_map_by_gestures">Звичайне управління картою</string>
   <string name="i_am_here">Я тут</string>
   <string name="zoom_by_trackball_descr">Змінювати масштаб горизонтальним рухом трекбола</string>
   <string name="zoom_by_trackball">Використовувати трекбол для зміни масштабу</string>
-  <string name="use_short_object_names_descr">Використовувати короткі назви для об’єктів при огляді мапи</string>
-  <string name="use_short_object_names">Використовувати короткі назви для об’єктів</string>
   <string name="accessibility_preferences_descr">Налаштування для невізуального доступу</string>
   <string name="shared_string_accessibility">Спеціальні можливості</string>
   <string name="rendering_out_of_memory">Недостатньо пам’яті для процесу показу мапи для виділеної ділянки</string>

@@ -13,8 +13,6 @@
     <string name="info_button">Informace</string>
     <string name="back_to_location">Zpět na zobrazení pozice</string>
     <string name="shared_string_help">Nápověda</string>
-    <string name="accessibility_extensions_descr">Moduly pro Usnadnění pro starší verze Androidu</string>
-    <string name="accessibility_extensions">Moduly pro Usnadnění</string>
     <string name="accessibility_mode">Režim usnadnění</string>
     <string name="accessibility_mode_descr">Aktivuje funkce usnadnění</string>
     <string name="shared_string_on">Zapnuto</string>
@@ -59,13 +57,9 @@
     <string name="settings_direction_style_descr">Vyberte způsob vyjádření relativního směru pohybu</string>
     <string name="auto_announce_on">Spustit automatické ohlašování</string>
     <string name="auto_announce_off">Zastavit automatické ohlašování</string>
-    <string name="scroll_map_by_gestures_descr">Posouvat mapu pohybem prstů po dotykovém displeji</string>
-    <string name="scroll_map_by_gestures">Přirozené posouvání mapy</string>
     <string name="i_am_here">Jsem zde</string>
     <string name="zoom_by_trackball_descr">Měnit zvětšení vodorovnými pohyby trackballu</string>
     <string name="zoom_by_trackball">Ovládat zvětšení pomocí trackballu</string>
-    <string name="use_short_object_names_descr">Použít krátká jména objektů</string>
-    <string name="use_short_object_names">Krátká jména objektů</string>
     <string name="accessibility_preferences_descr">Konfigurace usnadnění pro uživatele s omezením zraku</string>
     <string name="shared_string_accessibility">Usnadnění</string>
     <string name="use_fluorescent_overlays">Fluorescentní barvy</string>

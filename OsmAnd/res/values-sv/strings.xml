@@ -152,8 +152,6 @@
     <string name="gpx_description_txt">Beskrivning</string>
     <string name="validate_gpx_upload_name_pwd">Vänligen ange OSM användarnamn och lösenord för att ladda upp GPX-filer.</string>
 
-    <string name="accessibility_extensions_descr">Tillgänglighetstillägg för gamla Android-versioner</string>
-    <string name="accessibility_extensions">Tillgänglighetstillägg</string>
     <string name="accessibility_mode">Tillgänglighetsläge</string>
     <string name="accessibility_mode_descr">Sätter på tillgänglighetsfunktioner</string>
     <string name="shared_string_on">På</string>
@@ -264,13 +262,9 @@
     <string name="settings_direction_style_descr">Välj sätt att uttrycka relativa riktningar under rörelse</string>
     <string name="auto_announce_on">Börja meddela automatiskt</string>
     <string name="auto_announce_off">Sluta meddela automatiskt</string>
-    <string name="scroll_map_by_gestures_descr">Bläddra i kartan med gester på pekskärmen</string>
-    <string name="scroll_map_by_gestures">Naturlig kartrullning</string>
     <string name="i_am_here">Jag är här</string>
     <string name="zoom_by_trackball_descr">Ändra kartzoom med horisontell flyttning av styrkulan</string>
     <string name="zoom_by_trackball">Använd styrkula för zoom-kontroll</string>
-    <string name="use_short_object_names_descr">Använd korta objektnamn i \"touch exploration mode\"</string>
-    <string name="use_short_object_names">Använd objektnamn</string>
     <string name="accessibility_preferences_descr">Tillgänglighetsrelaterade inställningar</string>
     <string name="shared_string_accessibility">Tillgänglighet</string>
     <string name="rendering_out_of_memory">Inte tillräckligt med processminne för att visa valt område</string>

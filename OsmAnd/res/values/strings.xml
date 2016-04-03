@@ -1561,8 +1561,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="info_button">Info</string>
     <string name="back_to_location">Back to position</string>
 
-    <string name="accessibility_extensions_descr">Accessibility extensions for old Android versions</string>
-    <string name="accessibility_extensions">Accessibility extensions</string>
     <string name="accessibility_mode">Accessibility mode</string>
     <string name="accessibility_mode_descr">Turns on the accessibility features</string>
     <string name="accessibility_default">According to the global system setting</string>
@@ -1605,13 +1603,9 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
     <string name="auto_announce_on">Start auto announcing</string>
     <string name="auto_announce_off">Stop auto announcing</string>
-    <string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
-    <string name="scroll_map_by_gestures">Natural map scrolling</string>
     <string name="i_am_here">I am here</string>
     <string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
     <string name="zoom_by_trackball">Use trackball for zoom control</string>
-    <string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
-    <string name="use_short_object_names">Use object names</string>
     <string name="accessibility_preferences_descr">Accessibility related preferences</string>
     <string name="arrival_distance_factor_early">Early</string>
     <string name="arrival_distance_factor_normally">Normal</string>

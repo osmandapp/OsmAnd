@@ -441,8 +441,6 @@
   <string name="back_to_location">Kokapenera itzuli</string>
   <string name="shared_string_help">Laguntza</string>
   
-  <string name="accessibility_extensions_descr">Androiden bertsio zaharreko erabilerraztasunerako luzapenak</string>
-  <string name="accessibility_extensions">Erabilerraztasunerako luzapenak</string>
   <string name="accessibility_mode">Erabilerraztasun modua</string>
   <string name="accessibility_mode_descr">Erabilerraztasun ezaugarriak gaitu</string>
   <string name="shared_string_on">On</string>
@@ -487,13 +485,9 @@
   <string name="settings_direction_style_descr">Aukeratu mugimenduan egotean ematen diren argibide erlatiboen estiloa</string>
   <string name="auto_announce_on">Iragarpen automatikoa hasi</string>
   <string name="auto_announce_off">Iragarpen automatikoa gelditu</string>
-  <string name="scroll_map_by_gestures_descr">Korritu mapa ukipen-pantailaren keinuen bidez</string>
-  <string name="scroll_map_by_gestures">Maparen korritze naturala</string>
   <string name="i_am_here">Hemen nago</string>
   <string name="zoom_by_trackball_descr">Maparen zooma aldatu trackball-aren mugimendu orizontalaren bidez</string>
   <string name="zoom_by_trackball">Trackball-a erabili zooma kontrolatzeko</string>
-  <string name="use_short_object_names_descr">Objektuen izen motzak erabili ukipen-esplorazio moduan</string>
-  <string name="use_short_object_names">Objetuen izenak erabili</string>
   <string name="accessibility_preferences_descr">Erabilerraztasunari erlazionaturiko hobespenak</string>
   <string name="shared_string_accessibility">Erabilerraztasuna</string>
   <string name="rendering_out_of_memory">Aukeratutako area erakusteko ez dago memoria nahikorik</string>

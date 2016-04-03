@@ -167,8 +167,6 @@
 	<string name="back_to_location">عودة إلى الموقع</string>
 	<string name="shared_string_help">مساعدة</string>
 	
-	<string name="accessibility_extensions_descr">ملحقات الوصول لإصدارات أندرويد القديمة</string>
-	<string name="accessibility_extensions">ملحقات لإتاحة الوصول</string>
 	<string name="accessibility_mode">وضع إتاحة الوصول</string>
 	<string name="accessibility_mode_descr">تفعيل مميزات إتاحة الوصول</string>
 	<string name="shared_string_on">تفعيل</string>
@@ -567,7 +565,6 @@
 	<string name="back_right">الأيمن الخلفي</string>
 	<string name="accuracy">الدقة</string>
 	<string name="altitude">الارتفاع</string>
-	<string name="use_short_object_names">استخدام أسماء الكائنات</string>
 	<string name="accessibility_preferences_descr">التفضيلات المتعلقة بالإتاحة</string>
 	<string name="shared_string_accessibility">الإتاحة</string>
 	<string name="rendering_out_of_memory">ذاكرة التشغيل غير كافية لعرض المنطقة المختارة</string>
@@ -603,8 +600,6 @@
 	<string name="direction_style_clockwise">جانبان (12 قطاع)</string>
 	<string name="settings_direction_style">نمط التّوجه</string>
 	<string name="settings_direction_style_descr">اختر نمط التّعبير عن الاتّجاهات النّسبية أثناء الحركة</string>
-	<string name="scroll_map_by_gestures_descr">تمرير الخريطة بالإيماء على شاشة اللمس</string>
-	<string name="scroll_map_by_gestures">تمرير الخريطة الطبيعي</string>
 	<string name="i_am_here">أنا هنا</string>
 	<string name="index_name_voice">الحزم الصوتية (مسجلة، ميزات محدودة)</string>
 	<string name="index_name_tts_voice">الحزم الصوتية (صوت آلي، مفضلة)</string>
@@ -632,7 +627,6 @@
 	<string name="auto_announce_on">تفعيل الإخطار التلقائي</string>
 	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لايتمكن جهاز توجيه OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المحتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
 	<string name="audionotes_location_not_defined">لم يعين المكان المرتبط بالملاحظة. استخدم \"استخدم المكان …\" لتعيين ملاحظة لمكان محدد</string>
-    <string name="use_short_object_names_descr">استخدم أسماء عناصر صغيرة في نمط التّصفح اللمسي</string>
 	<string name="animate_routing_route_not_calculated">رجاء، احتسب المسار أولا</string>
     <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>

@@ -694,10 +694,6 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmandRegions getRegions() {
 		return regions;
 	}
-
-	public boolean accessibilityExtensions() {
-		return (Build.VERSION.SDK_INT < 14) ? getSettings().ACCESSIBILITY_EXTENSIONS.get() : false;
-	}
 	
 	public boolean accessibilityEnabled() {
 		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();

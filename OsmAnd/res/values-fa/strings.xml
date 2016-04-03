@@ -1232,17 +1232,11 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="play_commands_of_currently_selected_voice">پخش دستورات صوتی صدای انتخاب شده</string>
 	<string name="native_rendering">رندر بومی</string>
 	
-	<string name="accessibility_extensions_descr">افزونه دسترسی برای نسخه های قدیمی آندروید</string>
-	<string name="accessibility_extensions">افزونه دسترسی</string>
 	<string name="accessibility_mode">حالت دسترسی</string>
 	<string name="accessibility_mode_descr">روشن کردن ویژگی های دسترسی</string>
 	<string name="direction_style_sidewise">راه های جانبی (۸ بخشی)</string>
-	<string name="scroll_map_by_gestures_descr">حرکات نقشه بر روی صفحه نمایش لمسی</string>
-	<string name="scroll_map_by_gestures">حرکات طبیعی نقشه</string>
 	<string name="zoom_by_trackball_descr">تغییر زوم نقشه توسط حرکت افقی گوی مکان نما</string>
 	<string name="zoom_by_trackball">استفاده از گوی مکان نما برای کنترل زوم</string>
-	<string name="use_short_object_names_descr">استفاده از نام کوتاه شی در حالت اکتشاف لمسی</string>
-	<string name="use_short_object_names">استفاده از نام شی</string>
 	<string name="accessibility_preferences_descr">تنظیمات مربوط به دسترسی</string>
 	<string name="shared_string_accessibility">دسترسی</string>
 	

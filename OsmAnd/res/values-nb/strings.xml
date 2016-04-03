@@ -128,8 +128,6 @@
     <string name="info_button">Info</string>
     <string name="back_to_location">Tilbake til posisjon</string>
 
-    <string name="accessibility_extensions_descr">Tilgjengelighetsmoduler for gamle Android-versjoner</string>
-    <string name="accessibility_extensions">Tilgjengelighetsmoduler</string>
     <string name="accessibility_mode">Tilgjengelighetsmodus</string>
     <string name="accessibility_mode_descr">Slår på tilgjengelighetsfunksjonene</string>
     <string name="shared_string_on">På</string>
@@ -174,13 +172,9 @@
     <string name="settings_direction_style_descr">Velg stil til å uttrykke relative retninger under bevegelse</string>
     <string name="auto_announce_on">Start auto-annonsering</string>
     <string name="auto_announce_off">Stopp auto-annonsering</string>
-    <string name="scroll_map_by_gestures_descr">Rull kartet med bevegelser på berøringsskjermen</string>
-    <string name="scroll_map_by_gestures">Naturlig kartrulling</string>
     <string name="i_am_here">Jeg er her</string>
     <string name="zoom_by_trackball_descr">Endre kartzooming ved horisontale styrekulebevegelser</string>
     <string name="zoom_by_trackball">Bruk styrekule for zoomkontroll</string>
-    <string name="use_short_object_names_descr">Bruk korte objektnavn i berøringsmodus</string>
-    <string name="use_short_object_names">Bruk objektnavn</string>
     <string name="accessibility_preferences_descr">Tilgjengelighetsrelaterte innstillinger</string>
     <string name="shared_string_accessibility">Tilgjengelighet</string>
     <string name="rendering_out_of_memory">Ikke nok prosessminne til å vise valgt område</string>

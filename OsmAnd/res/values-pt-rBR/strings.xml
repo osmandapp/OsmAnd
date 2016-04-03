@@ -1023,8 +1023,6 @@
 	<string name="info_button">Informação</string>
 	<string name="back_to_location">Voltar à posição</string>
 	
-	<string name="accessibility_extensions_descr">Extensões de acessibilidade para versões antigas do Android</string>
-	<string name="accessibility_extensions">Extensões de acessibilidade</string>
 	<string name="accessibility_mode">Modo de acessibilidade</string>
 	<string name="accessibility_mode_descr">Ativar as opções de acessibilidade</string>
 	<string name="accessibility_default">De acordo com a configuração do sistema global</string>
@@ -1062,13 +1060,9 @@
 	<string name="direction_style_clockwise">No sentido horário (12 setores)</string>
 	<string name="settings_direction_style">Estilo de direção</string>
 	<string name="settings_direction_style_descr">Escolher o estilo para expressar sentidos relativos ao mover</string>
-	<string name="scroll_map_by_gestures_descr">Deslizar na tela para mover o mapa</string>
-	<string name="scroll_map_by_gestures">Movimentação natural do mapa</string>
 	<string name="i_am_here">Estou aqui</string>
 	<string name="zoom_by_trackball_descr">Alterar zoom do mapa por movimentos horizontais do trackball</string>
 	<string name="zoom_by_trackball">Usar trackball para controle de zoom</string>
-	<string name="use_short_object_names_descr">Usar nomes curtos de objetos em modo de exploração por toque</string>
-	<string name="use_short_object_names">Usar nomes de objetos</string>
 	<string name="accessibility_preferences_descr">Preferências relacionadas com a acessibilidade</string>
     <string name="arrival_distance_factor_early">Adiantado</string>
     <string name="arrival_distance_factor_normally">Normal</string>

@@ -105,8 +105,6 @@
     <string name="info_button">Informació</string>
     <string name="back_to_location">Torna a la ubicació</string>
     <string name="shared_string_help">Ajuda</string>
-    <string name="accessibility_extensions_descr">Extensions d\'accessibilitat per versions d\'Android antigues</string>
-    <string name="accessibility_extensions">Extensions d\'accessibilitat</string>
     <string name="accessibility_mode">Mode d\'accessibilitat</string>
     <string name="shared_string_on">Activa</string>
     <string name="shared_string_off">Inactiva</string>
@@ -185,11 +183,8 @@
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
     <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
     <string name="play_commands_of_currently_selected_voice">Reprodueix les instruccions de la veu seleccionada</string>
-    <string name="scroll_map_by_gestures_descr">Desplaçament del mapa per gestos a la pantalla tàctil</string>
-    <string name="scroll_map_by_gestures">Desplaçament natural del mapa</string>
     <string name="zoom_by_trackball_descr">Canvia el zoom del mapa amb moviments horitzontals al ratolí de bola</string>
     <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
-    <string name="use_short_object_names">Utilitza el nom dels objectes</string>
     <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/notes</string>
     <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades localment</string>
     <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM de la base de dades local</string>
@@ -422,7 +417,6 @@
     <string name="map_widget_view_direction">Direcció de visió</string>
     <string name="shared_string_clear_all">Neteja-ho tot</string>
     <string name="recalculate_route_to_your_location">Mitjà de transport:</string>
-    <string name="use_short_object_names_descr">Utilitza el nom curt dels objectes en el mode d\'exploració tàctil</string>
     <string name="amenity_type_user_defined">Definit per l\'usuari</string>
     <string name="choose_auto_follow_route">Visualització del mapa centrada automàticament</string>
     <string name="auto_follow_route_navigation">Només centra automàticament en la navegació</string>
