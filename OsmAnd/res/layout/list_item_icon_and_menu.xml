@@ -1,67 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="?attr/bg_color"
-              android:minHeight="60dp"
-              android:orientation="horizontal"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp">
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/bg_color"
+    android:minHeight="60dp"
+    tools:layout_height="60dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         tools:src="@drawable/ic_action_gabout_dark"/>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/text_wrapper"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_toEndOf="@+id/icon"
+        android:layout_toLeftOf="@+id/secondary_icon"
+        android:layout_toRightOf="@+id/icon"
+        android:layout_toStartOf="@+id/secondary_icon"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:minHeight="60dp"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical">
+            android:textSize="@dimen/default_list_text_size"
+            tools:text="Some title text"/>
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/default_list_text_size"
-                tools:text="Some title text"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_desc_text_size"
+            tools:text="Some title text"/>
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/default_desc_text_size"
-                tools:text="Some title text"/>
-
-        </LinearLayout>
-    </FrameLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/secondary_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_margin="16dp"
+        android:layout_toLeftOf="@+id/toggle_item"
+        android:layout_toStartOf="@+id/toggle_item"
         tools:src="@drawable/ic_action_gabout_dark"/>
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/toggle_item"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_gravity="center_vertical"
         android:focusable="false"/>
 
-</LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/text_wrapper"
+        android:layout_alignStart="@+id/text_wrapper"
+        android:background="?attr/divider_color"/>
+
+</RelativeLayout>

@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dashboard"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:visibility="gone" >
+<FrameLayout android:id="@+id/dashboard"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             android:visibility="gone">
 
     <include
         android:id="@+id/init_progress"
         layout="@layout/application_loading"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/animateContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="@dimen/dashboard_land_width"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#70000000">
+            android:background="#70000000"
+            android:orientation="vertical">
 
-            <include layout="@layout/dashboard_toolbar" />
+            <include layout="@layout/dashboard_toolbar"/>
 
             <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
                 android:id="@+id/main_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
-                android:fadeScrollbars="true" >
+                android:fadeScrollbars="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical" />
+                        android:orientation="vertical"/>
                 </LinearLayout>
             </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
 
@@ -50,25 +50,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <net.osmand.plus.views.controls.DynamicListView
                     android:id="@+id/dash_list_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="?attr/bg_color"
-                    android:fadeScrollbars="true" >
-                </net.osmand.plus.views.controls.DynamicListView>
+                    android:divider="@null"
+                    android:fadeScrollbars="true"/>
 
                 <TextView
                     android:id="@+id/emptyTextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:background="?attr/bg_color"
+                    android:clickable="true"
+                    android:gravity="center"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:clickable="true"
                     android:textSize="@dimen/default_list_text_size_large"
                     android:visibility="gone"/>
 
@@ -78,7 +78,7 @@
         <FrameLayout
             android:id="@+id/map_part_dashboard"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="fill_parent">
 
             <Button
                 android:id="@+id/map_download_button"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/shared_string_download"
-                android:visibility="gone" />
+                android:visibility="gone"/>
         </FrameLayout>
     </LinearLayout>
 
