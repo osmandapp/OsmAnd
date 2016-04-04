@@ -1413,9 +1413,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	@Override
 	public void onItemSwapping(int position) {
-		if (swipeDismissListener != null) {
-			swipeDismissListener.setEnabled(false);
-		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1451,10 +1448,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					List<MapMarker> markers = (List<MapMarker>) (Object) items;
 					getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, null);
 					reloadAdapter();
-				}
-
-				if (swipeDismissListener != null) {
-					swipeDismissListener.setEnabled(true);
 				}
 			}
 		}, 50);
