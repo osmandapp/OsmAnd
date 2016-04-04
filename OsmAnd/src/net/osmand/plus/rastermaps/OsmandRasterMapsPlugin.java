@@ -254,20 +254,24 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		};
 
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
-		overlayMapDescr = overlayMapDescr != null ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
+		boolean hasOverlayDescription = overlayMapDescr != null;
+		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
-				.setLayout(R.layout.list_item_single_line_descrition_wide)
 				.setDescription(overlayMapDescr)
+				.setSelected(hasOverlayDescription)
 				.setIcon(R.drawable.ic_layer_top_dark)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(14)
 				.createItem());
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
-		underlayMapDescr = underlayMapDescr != null ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
+		boolean hasUnderlayDescription = underlayMapDescr != null;
+		underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
-				.setLayout(R.layout.list_item_single_line_descrition_wide)
 				.setDescription(underlayMapDescr)
+				.setSelected(hasUnderlayDescription)
 				.setIcon(R.drawable.ic_layer_bottom_dark)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(15)
 				.createItem());
