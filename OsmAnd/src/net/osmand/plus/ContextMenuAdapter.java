@@ -129,6 +129,7 @@ public class ContextMenuAdapter {
 			if (convertView == null || !(convertView.getTag() instanceof Integer)
 					|| (layoutId != (Integer) convertView.getTag())) {
 				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
+				AndroidUtils.setListItemBackground(getContext(), convertView, !holoLight);
 				convertView.setTag(layoutId);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
