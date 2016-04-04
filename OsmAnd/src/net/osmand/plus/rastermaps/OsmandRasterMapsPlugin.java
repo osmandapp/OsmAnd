@@ -256,7 +256,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		overlayMapDescr = overlayMapDescr != null ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
-				.setLayout(R.layout.drawer_list_doubleitem)
+				.setLayout(R.layout.list_item_single_line_descrition_wide)
 				.setDescription(overlayMapDescr)
 				.setIcon(R.drawable.ic_layer_top_dark)
 				.setListener(listener)
@@ -265,7 +265,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		underlayMapDescr = underlayMapDescr != null ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
-				.setLayout(R.layout.drawer_list_doubleitem)
+				.setLayout(R.layout.list_item_single_line_descrition_wide)
 				.setDescription(underlayMapDescr)
 				.setIcon(R.drawable.ic_layer_bottom_dark)
 				.setListener(listener)

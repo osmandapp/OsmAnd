@@ -862,7 +862,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		if (visibleType != DashboardType.WAYPOINTS
 				&& visibleType != DashboardType.MAP_MARKERS
 				&& visibleType != DashboardType.MAP_MARKERS_SELECTION
-				&& visibleType != DashboardType.CONFIGURE_SCREEN) {
+				&& visibleType != DashboardType.CONFIGURE_SCREEN
+				&& visibleType != DashboardType.CONFIGURE_MAP) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(dpToPx(1f));
 		} else {

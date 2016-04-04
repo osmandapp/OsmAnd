@@ -121,7 +121,6 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setListener(listener)
 				.setPosition(13)
-				.setLayout(R.layout.drawer_list_item)
 				.createItem());
 	}
 	

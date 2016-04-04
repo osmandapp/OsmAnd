@@ -273,7 +273,7 @@ public class ConfigureMapMenu {
 						bld.show();
 						return false;
 					}
-				}).setDescription(descr).setLayout(R.layout.drawer_list_doubleitem).createItem());
+				}).setDescription(descr).setLayout(R.layout.list_item_single_line_descrition_narrow).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_widget_day_night, activity)
@@ -304,7 +304,7 @@ public class ConfigureMapMenu {
 						bld.show();
 						return false;
 					}
-				}).setLayout(R.layout.drawer_list_doubleitem).createItem());
+				}).setLayout(R.layout.list_item_single_line_descrition_narrow).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_magnifier, activity).setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -357,7 +357,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				}).setDescription(String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %")
-				.setLayout(R.layout.drawer_list_doubleitem)
+				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -391,7 +391,7 @@ public class ConfigureMapMenu {
 						b.show();
 						return false;
 					}
-				}).setDescription(getScale(activity)).setLayout(R.layout.drawer_list_doubleitem).createItem());
+				}).setDescription(getScale(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_locale, activity).setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -426,7 +426,7 @@ public class ConfigureMapMenu {
 					}
 				})
 				.setDescription(activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get())
-				.setLayout(R.layout.drawer_list_doubleitem).createItem());
+				.setLayout(R.layout.list_item_single_line_descrition_narrow).createItem());
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
@@ -515,7 +515,7 @@ public class ConfigureMapMenu {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(strId, activity)
 					.setDescription(descr)
-					.setLayout(R.layout.drawer_list_doubleitem)
+					.setLayout(R.layout.list_item_single_line_descrition_narrow)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
@@ -687,7 +687,7 @@ public class ConfigureMapMenu {
 						b.show();
 						return false;
 					}
-				}).setDescription(descr).setLayout(R.layout.drawer_list_doubleitem).createItem());
+				}).setDescription(descr).setLayout(R.layout.list_item_single_line_descrition_narrow).createItem());
 			}
 		}
 	}
