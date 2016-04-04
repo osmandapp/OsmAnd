@@ -49,6 +49,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -581,11 +582,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
+		final int defaultColor = IconsCache.getDefaultColorRes(mapActivity);
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_recordings) {
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
+					adapter.getItem(pos).setColorRes(SHOW_RECORDINGS.get() ?
+							R.color.osmand_orange : defaultColor);
+					adapter.notifyDataSetChanged();
 					updateLayers(mapView, mapActivity);
 				}
 				return true;
@@ -594,6 +599,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_recordings, app)
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
+				.setColor(SHOW_RECORDINGS.get() ? R.color.osmand_orange : defaultColor)
 				.setPosition(12)
 				.setListener(listener).createItem());
 	}
