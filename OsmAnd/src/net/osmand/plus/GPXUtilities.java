@@ -2,12 +2,17 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.Renderable;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -98,8 +103,39 @@ public class GPXUtilities {
 		public double speed = 0;
 		public double hdop = Double.NaN;
 		public boolean deleted = false;
+		public int colourARGB = 0;					// point colour (used for altitude/speed colouring)
+		public double distance = 0.0;				// cumulative distance, if in a track
 
 		public WptPt() {
+		}
+
+//		public WptPt(WptPt toCopy) {
+//			this.lat = toCopy.lat;
+//			this.lon = toCopy.lon;
+//			if (toCopy.name != null) {
+//				this.name = new String(toCopy.name);
+//			}
+//			if (toCopy.link != null) {
+//				this.link = new String(toCopy.link);
+//			}
+//			if (toCopy.category != null) {
+//				this.category = new String(toCopy.category);
+//			}
+//			this.time = toCopy.time;
+//			this.ele = toCopy.ele;
+//			this.speed = toCopy.speed;
+//			this.hdop = toCopy.hdop;
+//			this.deleted = toCopy.deleted;
+//			this.colourARGB = toCopy.colourARGB;
+//			this.distance = toCopy.distance;
+//		}
+
+		public void setDistance(double dist) {
+			distance = dist;
+		}
+
+		public double getDistance() {
+			return distance;
 		}
 
 		@Override
@@ -166,7 +202,10 @@ public class GPXUtilities {
 
 	public static class TrkSegment extends GPXExtensions {
 		public List<WptPt> points = new ArrayList<WptPt>();
-		
+		private OsmandMapTileView view;
+
+		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
+
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
 			return split(getDistanceMetric(), getTimeSplit(), meters);
 		}
@@ -181,6 +220,11 @@ public class GPXUtilities {
 			return convert(splitSegments);
 		}
 
+		public void drawRenderers(double zoom, Paint p, Canvas c, RotatedTileBox tb) {
+			for (Renderable.RenderableSegment rs : renders) {
+				rs.drawSegment(zoom, p, c, tb);
+			}
+		}
 	}
 
 	public static class Track extends GPXExtensions {
