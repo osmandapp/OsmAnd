@@ -387,6 +387,13 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 				topShadowView.setVisibility(View.VISIBLE);
 				liveUpdatesSwitch.setVisibility(View.GONE);
 			}
+
+			View divider = view.findViewById(R.id.divider);
+			if (getChildrenCount(groupPosition) == 0) {
+				divider.setVisibility(View.GONE);
+			} else {
+				divider.setVisibility(View.VISIBLE);
+			}
 			return view;
 		}
 

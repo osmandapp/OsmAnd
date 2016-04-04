@@ -83,11 +83,12 @@
         android:focusable="false"/>
 
     <View
+        android:id="@+id/divider"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/text_wrapper"
         android:layout_alignStart="@+id/text_wrapper"
-        android:background="?attr/divider_color"/>
+        android:background="?attr/dashboard_divider"/>
 
 </RelativeLayout>

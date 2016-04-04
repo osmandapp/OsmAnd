@@ -95,8 +95,6 @@ import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-/**
- */
 public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicListViewCallbacks,
 		IRouteInformationListener, WaypointDialogHelperCallbacks, MapMarkersDialogHelperCallbacks,
 		MapMarkerChangedListener {

@@ -114,20 +114,20 @@ public class ContextMenuAdapter {
 				final Set<ApplicationMode> selected = new LinkedHashSet<>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
 						selected, true, new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						if (selected.size() > 0) {
-							app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
-							notifyDataSetChanged();
-						}
-						if (changeAppModeListener != null) {
-							changeAppModeListener.onClick();
-						}
-					}
-				});
+							@Override
+							public void onClick(View view) {
+								if (selected.size() > 0) {
+									app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
+									notifyDataSetChanged();
+								}
+								if (changeAppModeListener != null) {
+									changeAppModeListener.onClick();
+								}
+							}
+						});
 			}
 			if (convertView == null || !(convertView.getTag() instanceof Integer)
-					|| (layoutId != (Integer)convertView.getTag())) {
+					|| (layoutId != (Integer) convertView.getTag())) {
 				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
 				convertView.setTag(layoutId);
 			}
@@ -255,6 +255,15 @@ public class ContextMenuAdapter {
 					descriptionTextView.setVisibility(View.VISIBLE);
 				} else {
 					descriptionTextView.setVisibility(View.GONE);
+				}
+			}
+
+			View dividerView = convertView.findViewById(R.id.divider);
+			if (dividerView != null) {
+				if (getCount() - 1 == position || getItem(position + 1).isCategory()) {
+					dividerView.setVisibility(View.GONE);
+				} else {
+					dividerView.setVisibility(View.VISIBLE);
 				}
 			}
 			return convertView;
