@@ -29,6 +29,7 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		final Dialog dialog = new Dialog(getActivity(), themeId);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_PopUpMenu_Bottom;
+		dialog.setCanceledOnTouchOutside(true);
 		return dialog;
 	}
 

@@ -168,6 +168,7 @@ public class AvoidSpecificRoads {
 					if (menu.isActive() && menu.getLatLon().equals(loc)) {
 						menu.close();
 					}
+					activity.refreshMap();
 				}
 				return true;
 			}
