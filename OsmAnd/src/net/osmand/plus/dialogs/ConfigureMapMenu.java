@@ -59,8 +59,6 @@ public class ConfigureMapMenu {
 		void onClick();
 	}
 
-	private boolean allModes = false;
-
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
@@ -70,7 +68,6 @@ public class ConfigureMapMenu {
 		adapter.setChangeAppModeListener(new OnClickListener() {
 			@Override
 			public void onClick() {
-				allModes = true;
 				ma.getDashboard().updateListAdapter(createListAdapter(ma));
 			}
 		});

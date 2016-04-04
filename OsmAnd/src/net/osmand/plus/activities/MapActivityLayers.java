@@ -259,7 +259,7 @@ public class MapActivityLayers {
 
 
 	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiUIFilter[] selected) {
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -310,7 +310,7 @@ public class MapActivityLayers {
 		} else {
 			builder.setIcon(R.drawable.mx_user_defined);
 		}
-		builder.setColor(R.color.color_white);
+		builder.setColor(R.color.osmand_orange);
 		adapter.addItem(builder.createItem());
 	}
 
