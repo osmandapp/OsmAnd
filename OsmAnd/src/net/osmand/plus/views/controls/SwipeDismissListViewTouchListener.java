@@ -108,6 +108,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	private int mDownPosition;
 	private View mSwipeDownView;
 	private boolean mSwipePaused;
+	private boolean mSwipeCanceled;
 
 	private PopupWindow mUndoPopup;
 	private int mValidDelayedMsgId;
@@ -635,6 +636,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				mSwipeDownView = mSwipeDownChild = null;
 				mDownPosition = ListView.INVALID_POSITION;
 				mSwiping = false;
+				mSwipeCanceled = false;
 				break;
 			}
 
@@ -677,17 +679,24 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				mSwipeDownChild = null;
 				mDownPosition = AbsListView.INVALID_POSITION;
 				mSwiping = false;
+				mSwipeCanceled = false;
 				break;
 			}
 
 			case MotionEvent.ACTION_MOVE: {
-				if (mVelocityTracker == null || mSwipePaused) {
+				if (mVelocityTracker == null || mSwipePaused || mSwipeCanceled) {
 					break;
 				}
 
 				mVelocityTracker.addMovement(ev);
 				float deltaX = ev.getRawX() - mDownX;
 				float deltaY = ev.getRawY() - mDownY;
+
+				if (!mSwiping && Math.abs(deltaY) > mSlop * 2) {
+					mSwipeCanceled = true;
+					break;
+				}
+
 				// Only start swipe in correct direction
 				if (isSwipeDirectionValid(deltaX)) {
 					ViewParent parent = mListView.getParent();
