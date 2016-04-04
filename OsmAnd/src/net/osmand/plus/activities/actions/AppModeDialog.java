@@ -118,7 +118,7 @@ public class AppModeDialog {
 
 	static private View createToggle(LayoutInflater layoutInflater, OsmandApplication ctx, LinearLayout layout, ApplicationMode mode){
 		int metricsX = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
-		int metricsY = (int) ctx.getResources().getDimension(R.dimen.list_item_height);
+		int metricsY = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
 		View tb = layoutInflater.inflate(R.layout.mode_view, null);
 		tb.findViewById(R.id.app_mode_icon).setContentDescription(mode.toHumanString(ctx));
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
