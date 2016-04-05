@@ -231,11 +231,10 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_world_globe_dark)
 				.setListener(l).createItem());
 		if (TransportRouteHelper.getInstance().routeIsCalculated()) {
-			selected = true;
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.layer_transport_route, activity)
 					.setSelected(true)
-					.setColor(selected ? R.color.osmand_orange : defaultColor)
+					.setColor(R.color.osmand_orange)
 					.setIcon(R.drawable.ic_action_bus_dark)
 					.setListener(l).createItem());
 		}
@@ -316,7 +315,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_widget_day_night, activity)
 				.setDescription(getDayNightDescr(activity))
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
-				.setIcon(R.drawable.ic_action_map_night)
+				.setIcon(getDayNightIcon(activity))
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
@@ -650,6 +649,11 @@ public class ConfigureMapMenu {
 
 	protected String getDayNightDescr(final MapActivity activity) {
 		return activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity);
+	}
+
+	@DrawableRes
+	protected int getDayNightIcon(final MapActivity activity) {
+		return activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().getIconRes();
 	}
 
 	protected String getScale(final MapActivity activity) {
