@@ -358,7 +358,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		// FAB
 		fabView = (ImageView) view.findViewById(R.id.context_menu_fab_view);
 		if (menu.fabVisible()) {
-			fabView.setImageDrawable(iconsCache.getIcon(menu.getFabIconId(), 0, 0f));
+			fabView.setImageDrawable(iconsCache.getIcon(menu.getFabIconId(), 0));
 			if (menu.isLandscapeLayout()) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) fabView.getLayoutParams();
 				params.setMargins(0, 0, dpToPx(28f), 0);

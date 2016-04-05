@@ -386,9 +386,10 @@ public class MapWidgetRegistry {
 							IconPopupMenu popup = new IconPopupMenu(view.getContext(), textWrapper);
 							MenuInflater inflater = popup.getMenuInflater();
 							inflater.inflate(R.menu.vidget_visibility_menu, popup.getMenu());
-							IconsCache.paintMenuItem(mapActivity, popup.getMenu().findItem(R.id.action_show));
-							IconsCache.paintMenuItem(mapActivity, popup.getMenu().findItem(R.id.action_hide));
-							IconsCache.paintMenuItem(mapActivity, popup.getMenu().findItem(R.id.action_collapse));
+							IconsCache ic = mapActivity.getMyApplication().getIconsCache();
+							ic.paintMenuItem(popup.getMenu().findItem(R.id.action_show));
+							ic.paintMenuItem(popup.getMenu().findItem(R.id.action_hide));
+							ic.paintMenuItem(popup.getMenu().findItem(R.id.action_collapse));
 							popup.setOnMenuItemClickListener(
 									new IconPopupMenu.OnMenuItemClickListener() {
 										@Override

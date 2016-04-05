@@ -172,7 +172,7 @@ public class ContextMenuItem {
 		@DrawableRes
 		private int mIcon = INVALID_ID;
 		@ColorRes
-		private int mColor = INVALID_ID;
+		private int mColorRes = INVALID_ID;
 		@DrawableRes
 		private int mSecondaryIcon = INVALID_ID;
 		private Boolean mSelected = null;
@@ -200,8 +200,8 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setColor(@ColorRes int color) {
-			mColor = color;
+		public ItemBuilder setColor(@ColorRes int colorRes) {
+			mColorRes = colorRes;
 			return this;
 		}
 
@@ -261,7 +261,7 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
+			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mPosition, mDescription,
 					mItemClickListener, mIntegerListener);
 		}
