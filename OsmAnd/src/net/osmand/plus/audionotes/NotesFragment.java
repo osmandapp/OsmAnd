@@ -368,7 +368,7 @@ public class NotesFragment extends OsmAndListFragment {
 				DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
 			}
 //			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
-//					.getContentIcon(R.drawable.ic_play_dark));
+//					.getIcon(R.drawable.ic_play_dark));
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			
 			

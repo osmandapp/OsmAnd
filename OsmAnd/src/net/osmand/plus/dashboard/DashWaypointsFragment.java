@@ -161,8 +161,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			final boolean optionsVisible = (SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0); 
 			
 			options.setImageDrawable(getMyApplication().getIconsCache().
-					getContentIcon(optionsVisible? R.drawable.ic_overflow_menu_white :
-						R.drawable.ic_action_remove_dark));
+					getContentIcon(optionsVisible ? R.drawable.ic_overflow_menu_white :
+							R.drawable.ic_action_remove_dark));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -222,7 +222,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		MenuItem item; 
 //		item = optionsMenu.getMenu().add(
 //				R.string.shared_string_add_to_favorites).setIcon(getMyApplication().getIconsCache().
-//						getContentIcon(R.drawable.ic_action_fav_dark));
+//						getIcon(R.drawable.ic_action_fav_dark));
 //		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 //			@Override
 //			public boolean onMenuItemClick(MenuItem item) {

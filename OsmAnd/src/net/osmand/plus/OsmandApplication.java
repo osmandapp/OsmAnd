@@ -371,7 +371,7 @@ public class OsmandApplication extends MultiDexApplication {
 				View view = uiContext.getLayoutInflater().inflate(R.layout.select_voice_first, null);
 
 				((ImageView) view.findViewById(R.id.icon))
-						.setImageDrawable(getIconsCache().getContentIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
+						.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
 
 				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -392,7 +392,7 @@ public class OsmandApplication extends MultiDexApplication {
 				});
 
 				((ImageView) view.findViewById(R.id.dropDownIcon))
-						.setImageDrawable(getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
+						.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
 
 				builder.setCancelable(true);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);

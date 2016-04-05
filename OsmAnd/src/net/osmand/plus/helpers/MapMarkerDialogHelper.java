@@ -334,7 +334,7 @@ public class MapMarkerDialogHelper {
 
 			} else {
 				final ImageButton btn = (ImageButton) v.findViewById(R.id.image_button);
-				btn.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white, !nightMode));
+				btn.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_overflow_menu_white, !nightMode));
 				btn.setVisibility(View.VISIBLE);
 				btn.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -423,7 +423,7 @@ public class MapMarkerDialogHelper {
 		more.setVisibility(View.GONE);
 		if (!marker.history && !sorted) {
 			move.setVisibility(View.VISIBLE);
-			((ImageView) move).setImageDrawable(app.getIconsCache().getContentIcon(
+			((ImageView) move).setImageDrawable(app.getIconsCache().getIcon(
 					R.drawable.ic_action_reorder, !nightMode));
 			move.setTag(new DynamicListView.DragIcon() {
 				@Override
@@ -513,7 +513,7 @@ public class MapMarkerDialogHelper {
 					.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
 		} else {
 			waypointIcon.setImageDrawable(app.getIconsCache()
-					.getContentIcon(R.drawable.ic_action_flag_dark, !nightMode));
+					.getIcon(R.drawable.ic_action_flag_dark, !nightMode));
 			AndroidUtils.setTextSecondaryColor(ctx, text, nightMode);
 			AndroidUtils.setTextSecondaryColor(ctx, textDist, nightMode);
 		}

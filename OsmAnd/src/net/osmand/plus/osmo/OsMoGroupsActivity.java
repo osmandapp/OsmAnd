@@ -1210,7 +1210,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if (model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
-//				(ImageView) v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings));
+//				(ImageView) v.setImageDrawable(getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_settings));
 
 				if ((selectedObject == model) != ((CheckBox) v).isChecked()) {
 					((CheckBox) v).setChecked(selectedObject == model);
