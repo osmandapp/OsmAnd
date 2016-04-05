@@ -9,7 +9,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.LayoutInflater;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -89,10 +88,8 @@ public class ContextMenuAdapter {
 		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
 
 		public ContextMenuArrayAdapter(Activity context,
-									   @LayoutRes
-									   int layoutRes,
-									   @IdRes
-									   int textViewResourceId,
+									   @LayoutRes int layoutRes,
+									   @IdRes int textViewResourceId,
 									   ContextMenuItem[] objects,
 									   OsmandApplication app,
 									   boolean holoLight,
@@ -100,7 +97,7 @@ public class ContextMenuAdapter {
 			super(context, layoutRes, textViewResourceId, objects);
 			this.app = app;
 			this.holoLight = holoLight;
-			layoutId = layoutRes;
+			this.layoutId = layoutRes;
 			this.changeAppModeListener = changeAppModeListener;
 		}
 
@@ -128,8 +125,8 @@ public class ContextMenuAdapter {
 			}
 			if (convertView == null || !(convertView.getTag() instanceof Integer)
 					|| (layoutId != (Integer) convertView.getTag())) {
-				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
-				AndroidUtils.setListItemBackground(getContext(), convertView, !holoLight);
+				int themeRes = holoLight ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
@@ -137,7 +134,6 @@ public class ContextMenuAdapter {
 			if (item.isCategory()) {
 				tv.setTypeface(Typeface.DEFAULT_BOLD);
 			} else {
-				AndroidUtils.setTextPrimaryColor(getContext(), tv, !holoLight);
 				tv.setTypeface(null);
 			}
 			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
