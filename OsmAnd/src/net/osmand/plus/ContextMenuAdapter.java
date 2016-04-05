@@ -2,11 +2,10 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -85,6 +84,7 @@ public class ContextMenuAdapter {
 		@LayoutRes
 		private int layoutId;
 		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
+		private final IconsCache mIconsCache;
 
 		public ContextMenuArrayAdapter(Activity context,
 									   @LayoutRes int layoutRes,
@@ -98,6 +98,7 @@ public class ContextMenuAdapter {
 			this.holoLight = holoLight;
 			this.layoutId = layoutRes;
 			this.changeAppModeListener = changeAppModeListener;
+			mIconsCache = app.getIconsCache();
 		}
 
 		@Override
@@ -132,24 +133,19 @@ public class ContextMenuAdapter {
 			tv.setText(item.getTitle());
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
-				int color = ContextCompat.getColor(getContext(),
-						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
-				Drawable imageId = DrawableCompat.wrap(drawable);
-				imageId.mutate();
-				DrawableCompat.setTint(imageId, color);
+				@ColorRes
+				int color = holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
+				Drawable drawable = mIconsCache.getIcon(item.getIcon(), color);
 				float density = getContext().getResources().getDisplayMetrics().density;
 				int paddingInPixels = (int) (24 * density);
 				int drawableSizeInPixels = (int) (24 * density); // 32
-				imageId.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
-				tv.setCompoundDrawables(imageId, null, null, null);
+				drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
+				tv.setCompoundDrawables(drawable, null, null, null);
 				tv.setCompoundDrawablePadding(paddingInPixels);
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
-					Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
-					drawable = DrawableCompat.wrap(drawable);
-					drawable.mutate();
-					DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
+					Drawable drawable = mIconsCache.getIcon(item.getIcon(),
+							item.getThemedColorRes(getContext()));
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
@@ -159,12 +155,9 @@ public class ContextMenuAdapter {
 			@DrawableRes
 			int secondaryDrawable = item.getSecondaryIcon();
 			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
-				int color = ContextCompat.getColor(getContext(),
-						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryIcon());
-				drawable = DrawableCompat.wrap(drawable);
-				drawable.mutate();
-				DrawableCompat.setTint(drawable, color);
+				@ColorRes
+				int colorRes = holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
+				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
 				imageView.setVisibility(View.VISIBLE);

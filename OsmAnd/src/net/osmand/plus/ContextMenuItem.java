@@ -27,6 +27,7 @@ public class ContextMenuItem {
 	private final int layout;
 	private boolean loading;
 	private final boolean category;
+	private final boolean skipPaintingWithoutColor;
 	private final int pos;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
@@ -42,7 +43,7 @@ public class ContextMenuItem {
 							@LayoutRes int layout,
 							boolean loading,
 							boolean category,
-							int pos,
+							boolean skipPaintingWithoutColor, int pos,
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
@@ -56,6 +57,7 @@ public class ContextMenuItem {
 		this.layout = layout;
 		this.loading = loading;
 		this.category = category;
+		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
 		this.pos = pos;
 		this.description = description;
 		this.itemClickListener = itemClickListener;
@@ -83,7 +85,7 @@ public class ContextMenuItem {
 
 	@ColorRes
 	public int getThemedColorRes(Context context) {
-		if (getColorRes() != INVALID_ID) {
+		if (skipPaintingWithoutColor || getColorRes() != INVALID_ID) {
 			return getColorRes();
 		} else {
 			return IconsCache.getDefaultColorRes(context);
@@ -185,6 +187,7 @@ public class ContextMenuItem {
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
+		private boolean mSkipPaintingWithoutColor;
 
 		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
 			this.mTitleId = titleId;
@@ -260,10 +263,15 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setSkipPaintingWithoutColor(boolean skipPaintingWithoutColor) {
+			mSkipPaintingWithoutColor = skipPaintingWithoutColor;
+			return this;
+		}
+
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
-					mSelected, mProgress, mLayout, mLoading, mIsCategory, mPosition, mDescription,
-					mItemClickListener, mIntegerListener);
+					mSelected, mProgress, mLayout, mLoading, mIsCategory, mSkipPaintingWithoutColor,
+					mPosition, mDescription, mItemClickListener, mIntegerListener);
 		}
 	}
 }
