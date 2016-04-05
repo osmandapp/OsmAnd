@@ -703,12 +703,12 @@ public class WaypointHelper {
 						ApplicationMode appMode = app.getSettings().getApplicationMode();
 						return uiCtx.getResources().getDrawable(appMode.getResourceLocationDay());
 					} else {
-						return iconsCache.getIcon(R.drawable.list_startpoint, 0, 0f);
+						return iconsCache.getIcon(R.drawable.list_startpoint, 0);
 					}
 				} else if (((TargetPoint) point).intermediate) {
-					return iconsCache.getIcon(R.drawable.list_intermediate, 0, 0f);
+					return iconsCache.getIcon(R.drawable.list_intermediate, 0);
 				} else {
-					return iconsCache.getIcon(R.drawable.list_destination, 0, 0f);
+					return iconsCache.getIcon(R.drawable.list_destination, 0);
 				}
 
 			} else if (type == FAVORITES || type == WAYPOINTS) {
