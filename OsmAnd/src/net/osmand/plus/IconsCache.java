@@ -84,10 +84,6 @@ public class IconsCache {
 		return getDrawable(id, colorId);
 	}
 
-	@Deprecated
-	public Drawable getIcon(@DrawableRes int id, @ColorRes int colorId, float scale) {
-		return getDrawable(id, colorId, scale);
-	}
 
 	@Deprecated
 	public Drawable getIcon(@DrawableRes int backgroundId, @DrawableRes int id, @ColorRes int colorId) {
