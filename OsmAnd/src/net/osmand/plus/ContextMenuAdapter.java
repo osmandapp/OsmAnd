@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
@@ -133,14 +132,7 @@ public class ContextMenuAdapter {
 				convertView.setTag(layoutId);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
-
-			if (item.isCategory()) {
-				tv.setTypeface(Typeface.DEFAULT_BOLD);
-			} else {
-				AndroidUtils.setTextPrimaryColor(getContext(), tv, !holoLight);
-				tv.setTypeface(null);
-			}
-			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
+			tv.setText(item.getTitle());
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
 				int color = ContextCompat.getColor(getContext(),
