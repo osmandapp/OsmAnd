@@ -406,9 +406,11 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
 			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_flag_dark,
 					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+			buttonWaypoint.setContentDescription(getString(R.string.shared_string_add_to_map_markers));
 		} else {
 			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoint,
 					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+			buttonWaypoint.setContentDescription(getString(R.string.context_menu_item_destination_point));
 		}
 		AndroidUtils.setDashButtonBackground(getMapActivity(), buttonWaypoint, nightMode);
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {

@@ -189,8 +189,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
 		if (isRecording) {
 			stop.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_rec_stop));
+			stop.setContentDescription(app.getString(R.string.gpx_monitoring_stop));
 		} else {
 			stop.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_rec_start));
+			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));
 		}
 		stop.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -217,6 +219,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			save.setVisibility(View.GONE);
 		}
 		save.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_gsave_dark));
+		save.setContentDescription(app.getString(R.string.save_current_track));
 
 		((TextView) v.findViewById(R.id.points_count)).setText(String.valueOf(sth.getPoints()));
 		((TextView) v.findViewById(R.id.distance))

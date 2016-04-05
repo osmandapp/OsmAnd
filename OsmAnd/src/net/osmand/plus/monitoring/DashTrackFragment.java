@@ -170,6 +170,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			});
 			ImageButton showOnMap = ((ImageButton) v.findViewById(R.id.show_on_map));
 			showOnMap.setVisibility(View.VISIBLE);
+			showOnMap.setContentDescription(getString(R.string.shared_string_show_on_map));
 			updateShowOnMap(app, f, v, showOnMap);
 			tracks.addView(v);
 		}

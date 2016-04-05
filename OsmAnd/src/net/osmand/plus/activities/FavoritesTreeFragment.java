@@ -716,6 +716,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			if (!selectionMode) {
 				((ImageView) ch).setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 				ch.setVisibility(View.VISIBLE);
+				ch.setContentDescription(getString(R.string.shared_string_settings));
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
