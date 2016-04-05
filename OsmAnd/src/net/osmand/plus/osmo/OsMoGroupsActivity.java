@@ -341,8 +341,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final Drawable srcSignalBig = getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
 //		final Drawable srcinactive = getResources().getDrawable(R.drawable.mon_osmo_inactive);
 		final Drawable srcSignalinactive = getResources().getDrawable(R.drawable.mon_osmo_signal_inactive);
-//		final Drawable srcSignalinactive = app.getIconsCache().getPaintedContentIcon(R.drawable.mon_osmo_signal_inactive,
-//				Color.LTGRAY);
 		OsMoService service = osMoPlugin.getService();
 		OsMoTracker tracker = osMoPlugin.getTracker();
 
@@ -864,7 +862,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		};
 		ImageButton info = (ImageButton) v.findViewById(R.id.info);
-		info.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_gabout_dark));
+		info.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_gabout_dark));
 		info.setOnClickListener(click);
 		warnCreateDesc.setOnClickListener(click);
 

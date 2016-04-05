@@ -76,7 +76,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 		name.setText(routingHelper.getGeneralRouteInformation());
 		icon.setImageDrawable(getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_start_navigation, 
 				R.color.color_myloc_distance));
-		cancel.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark) 
+		cancel.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark)
 				);
 		cancel.setOnClickListener(new OnClickListener() {
 			
@@ -109,8 +109,8 @@ public class DashNavigationFragment extends DashBaseFragment {
 
 	private void updatePlayButton(final RoutingHelper routingHelper, final MapActivity map, final ImageView play) {
 		boolean toContinueNavigation = routingHelper.isRoutePlanningMode();
-		play.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(
-				toContinueNavigation? R.drawable.ic_play_dark : R.drawable.ic_pause ) 
+		play.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(
+						toContinueNavigation ? R.drawable.ic_play_dark : R.drawable.ic_pause)
 				);
 		play.setContentDescription(getString(toContinueNavigation ? R.string.continue_navigation :
 			R.string.pause_navigation));

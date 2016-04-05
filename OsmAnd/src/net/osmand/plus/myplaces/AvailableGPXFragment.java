@@ -189,9 +189,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
 		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
 		if (isRecording) {
-			stop.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_rec_stop));
+			stop.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_rec_stop));
 		} else {
-			stop.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_rec_start));
+			stop.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_rec_start));
 		}
 		stop.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -217,7 +217,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			save.setVisibility(View.GONE);
 		}
-		save.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_gsave_dark));
+		save.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_gsave_dark));
 
 		((TextView) v.findViewById(R.id.points_count)).setText(String.valueOf(sth.getPoints()));
 		((TextView) v.findViewById(R.id.distance))
@@ -225,10 +225,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		v.findViewById(R.id.points_icon).setVisibility(View.VISIBLE);
 		ImageView distance = (ImageView) v.findViewById(R.id.distance_icon);
 		distance.setVisibility(View.VISIBLE);
-		distance.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_distance));
+		distance.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_distance));
 		ImageView pointsCount = (ImageView) v.findViewById(R.id.points_icon);
 		pointsCount.setVisibility(View.VISIBLE);
-		pointsCount.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_point));
+		pointsCount.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_point));
 
 	}
 
@@ -772,7 +772,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
-			options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+			options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -952,7 +952,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 
-		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(iconsCache.getContentIcon(R.drawable.ic_show_on_map));
+		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_show_on_map));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -962,7 +962,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -978,7 +978,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_gshare_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -993,7 +993,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && osmEditingPlugin.isActive()) {
-			item = optionsMenu.getMenu().add(R.string.shared_string_export).setIcon(iconsCache.getContentIcon(R.drawable.ic_action_export));
+			item = optionsMenu.getMenu().add(R.string.shared_string_export).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_export));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -1005,7 +1005,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -1287,7 +1287,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		// ImageView icon = (ImageView) v.findViewById(!isDashItem? R.id.icon : R.id.show_on_map);
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
-		icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_gpx_track));
+		icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_gpx_track));
 		if (child.isCorrupted()) {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 		} else {
@@ -1327,13 +1327,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
 			ImageView distanceI = (ImageView) v.findViewById(R.id.distance_icon);
 			distanceI.setVisibility(View.VISIBLE);
-			distanceI.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_distance));
+			distanceI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_distance));
 			ImageView pointsI = (ImageView) v.findViewById(R.id.points_icon);
 			pointsI.setVisibility(View.VISIBLE);
-			pointsI.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_point));
+			pointsI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_point));
 			ImageView timeI = (ImageView) v.findViewById(R.id.time_icon);
 			timeI.setVisibility(View.VISIBLE);
-			timeI.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_time));
+			timeI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_time));
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
 			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);

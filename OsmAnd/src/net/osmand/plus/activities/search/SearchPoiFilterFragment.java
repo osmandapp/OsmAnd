@@ -69,7 +69,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
         v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
         ((EditText)v.findViewById(R.id.searchEditText)).setHint(R.string.search_poi_category_hint);
         ((ImageView)v.findViewById(R.id.search_icon)).setImageDrawable(
-        		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_search_dark));
+        		getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark));
         
         setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
         setupOptions((ImageView) v.findViewById(R.id.options));
@@ -78,7 +78,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
     }
 	
 	private void setupOptions(ImageView options) {
-		options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+		options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -332,7 +332,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 
 		MenuItem item = optionsMenu.getMenu().add(R.string.poi_filter_custom_filter)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

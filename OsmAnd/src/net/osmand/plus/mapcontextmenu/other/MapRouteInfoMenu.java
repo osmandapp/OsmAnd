@@ -937,7 +937,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				if (row.icon != null) {
 					icon = row.icon;
 				} else if (row.iconId > 0) {
-					icon = mapActivity.getMyApplication().getIconsCache().getContentIcon(row.iconId);
+					icon = mapActivity.getMyApplication().getIconsCache().getThemedIcon(row.iconId);
 				}
 				label.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 				label.setCompoundDrawablePadding(AndroidUtils.dpToPx(mapActivity, 16f));

@@ -274,8 +274,8 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			holder.pointNameTextView.setText(pointWrapper.point);
 			IconsCache cache = ((OsmandApplication) context.getApplication()).getIconsCache();
 			holder.checkedUncheckedImageView.setImageDrawable(pointWrapper.hasError ?
-					cache.getContentIcon(R.drawable.ic_action_remove_dark) :
-					cache.getContentIcon(R.drawable.ic_action_done));
+					cache.getThemedIcon(R.drawable.ic_action_remove_dark) :
+					cache.getThemedIcon(R.drawable.ic_action_done));
 
 			return row;
 		}

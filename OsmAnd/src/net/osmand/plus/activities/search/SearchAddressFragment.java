@@ -1,15 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.resources.RegionAddressRepository;
-import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -27,6 +17,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.util.Algorithms;
 
 public class SearchAddressFragment extends Fragment {
 
@@ -177,7 +178,7 @@ public class SearchAddressFragment extends Fragment {
 			}
 		});
 		OsmandApplication app = getApplication();
-		Drawable icon = getApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark);
+		Drawable icon = getApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark);
 		((ImageView)findViewById(R.id.ResetBuilding)).setBackgroundDrawable(icon);
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
 			@Override

@@ -50,7 +50,7 @@ public class IconsCache {
 		return d;
 	}
 
-	public Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color){
+	public Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color){
 		return getPaintedDrawable(id, color);
 	}
 
@@ -67,7 +67,7 @@ public class IconsCache {
 		return new LayerDrawable(layers);
 	}
 
-	public Drawable getContentIcon(@DrawableRes int id) {
+	public Drawable getThemedIcon(@DrawableRes int id) {
 		return getDrawable(id, app.getSettings().isLightContent() ? R.color.icon_color : 0);
 	}
 

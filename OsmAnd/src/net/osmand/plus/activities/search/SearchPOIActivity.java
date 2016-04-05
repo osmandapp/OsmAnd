@@ -244,9 +244,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		((EditText)findViewById(R.id.searchEditText)).setHint(R.string.filter_poi_hint);
         ((ImageView)findViewById(R.id.search_icon)).setImageDrawable(
-        		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_filter_dark));
+        		getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_filter_dark));
         ((ImageView) findViewById(R.id.options)).
-        	setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+        	setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -336,7 +336,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		final PoiUIFilter f = this.filter;
 		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_edit)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -367,7 +367,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private void addFilter(PopupMenu optionsMenu, final String value) {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		MenuItem item = optionsMenu.getMenu().add(getString(R.string.search_poi_filter) + " " + value)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

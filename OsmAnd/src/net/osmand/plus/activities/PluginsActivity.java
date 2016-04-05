@@ -1,8 +1,5 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -16,6 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 
 public class PluginsActivity extends OsmandListActivity {
 	public static final int ACTIVE_PLUGINS_LIST_MODIFIED = 1;
@@ -121,7 +122,7 @@ public class PluginsActivity extends OsmandListActivity {
 
 
 			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
-			pluginOptions.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+			pluginOptions.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			pluginOptions.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

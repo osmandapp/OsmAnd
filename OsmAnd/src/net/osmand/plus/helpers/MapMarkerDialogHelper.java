@@ -345,7 +345,7 @@ public class MapMarkerDialogHelper {
 						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 						MenuItem item;
 						item = optionsMenu.getMenu().add(R.string.shared_string_clear)
-								.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
+								.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
@@ -373,7 +373,7 @@ public class MapMarkerDialogHelper {
 
 						if (!sorted) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
-									iconsCache.getContentIcon(R.drawable.ic_action_undo_dark));
+									iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
@@ -389,7 +389,7 @@ public class MapMarkerDialogHelper {
 						}
 
 						item = optionsMenu.getMenu().add(R.string.shared_string_save_as_gpx).setIcon(
-								iconsCache.getContentIcon(R.drawable.ic_action_save));
+								iconsCache.getThemedIcon(R.drawable.ic_action_save));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
@@ -433,7 +433,7 @@ public class MapMarkerDialogHelper {
 					MenuItem item;
 					item = optionsMenu.getMenu().add(
 							R.string.shared_string_remove).setIcon(app.getIconsCache().
-							getContentIcon(R.drawable.ic_action_remove_dark));
+							getThemedIcon(R.drawable.ic_action_remove_dark));
 					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {

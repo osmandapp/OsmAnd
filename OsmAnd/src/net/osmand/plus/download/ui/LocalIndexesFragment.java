@@ -1062,7 +1062,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			public void bindLocalIndexInfo(final LocalIndexInfo child) {
 
 				options.setImageDrawable(ctx.getMyApplication().getIconsCache()
-						.getContentIcon(R.drawable.ic_overflow_menu_white));
+						.getThemedIcon(R.drawable.ic_overflow_menu_white));
 				options.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -1138,7 +1138,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 
 			private Drawable getContentIcon(DownloadActivity context, int resourceId) {
-				return context.getMyApplication().getIconsCache().getContentIcon(resourceId);
+				return context.getMyApplication().getIconsCache().getThemedIcon(resourceId);
 			}
 
 			private Drawable getContentIcon(DownloadActivity context, int resourceId, int colorId) {
@@ -1156,7 +1156,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		MenuItem item;
 		if ((info.getType() == LocalIndexType.MAP_DATA) || (info.getType() == LocalIndexType.DEACTIVATED)) {
 			item = optionsMenu.getMenu().add(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
-					.setIcon(iconsCache.getContentIcon(R.drawable.ic_type_archive));
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_type_archive));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -1167,7 +1167,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -1178,7 +1178,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		final IndexItem update = filesToUpdate.get(info.getFileName());
 		if (update != null) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_download)
-					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_import));
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_import));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -1189,7 +1189,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

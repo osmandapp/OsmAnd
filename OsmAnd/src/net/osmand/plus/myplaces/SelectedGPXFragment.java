@@ -463,9 +463,9 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				icon.setVisibility(View.VISIBLE);
 				additional.setVisibility(View.INVISIBLE);
 				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
-					icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_polygom_dark));
+					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
 				} else if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-					icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_markers_dark));
+					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_markers_dark));
 				} else {
 					int groupColor = child.group.getColor();
 					if (child.locationStart != null) {

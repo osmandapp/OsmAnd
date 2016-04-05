@@ -83,7 +83,7 @@ public class AppModeDialog {
 					iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), !nightMode));
 					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 				} else {
-					iv.setImageDrawable(ctx.getIconsCache().getContentIcon(mode.getSmallIconDark()));
+					iv.setImageDrawable(ctx.getIconsCache().getThemedIcon(mode.getSmallIconDark()));
 				}
 				tb.findViewById(R.id.selection).setVisibility(View.INVISIBLE);
 			}

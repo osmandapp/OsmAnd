@@ -193,7 +193,7 @@ public class DashTrackFragment extends DashBaseFragment {
 				}
 			});
 		} else {
-			showOnMap.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_show_on_map));
+			showOnMap.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_show_on_map));
 			showOnMap.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

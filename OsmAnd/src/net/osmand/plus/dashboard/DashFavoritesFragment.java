@@ -105,7 +105,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			ImageView groupImage = (ImageView)view.findViewById(R.id.group_image);
 			if (point.getCategory().length() > 0) {
 				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategory());
-				groupImage.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_small_group));
+				groupImage.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_small_group));
 			} else {
 				groupImage.setVisibility(View.GONE);
 			}
@@ -120,7 +120,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			name.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 
-			((ImageView) view.findViewById(R.id.navigate_to)).setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_gdirections_dark));
+			((ImageView) view.findViewById(R.id.navigate_to)).setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_gdirections_dark));
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

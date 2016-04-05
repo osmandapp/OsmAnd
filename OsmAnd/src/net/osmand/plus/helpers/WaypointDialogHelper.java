@@ -434,7 +434,7 @@ public class WaypointDialogHelper {
 						if (hasActivePoints) {
 							item = optionsMenu.getMenu().add(
 									R.string.intermediate_items_sort_by_distance).setIcon(app.getIconsCache().
-									getContentIcon(R.drawable.ic_sort_waypoint_dark));
+									getThemedIcon(R.drawable.ic_sort_waypoint_dark));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
@@ -445,7 +445,7 @@ public class WaypointDialogHelper {
 							});
 							item = optionsMenu.getMenu().add(
 									R.string.switch_start_finish).setIcon(app.getIconsCache().
-									getContentIcon(R.drawable.ic_action_undo_dark));
+									getThemedIcon(R.drawable.ic_action_undo_dark));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
@@ -502,7 +502,7 @@ public class WaypointDialogHelper {
 						MenuItem item;
 						if (index > 0 && count > 1) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_move_up)
-									.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_up));
+									.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_up));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
@@ -515,7 +515,7 @@ public class WaypointDialogHelper {
 						}
 						if (index < count - 1 && count > 1) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_move_down)
-									.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down));
+									.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
@@ -528,7 +528,7 @@ public class WaypointDialogHelper {
 						}
 
 						item = optionsMenu.getMenu().add(R.string.shared_string_remove)
-								.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
+								.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
