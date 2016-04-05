@@ -1524,14 +1524,14 @@
     <string name="osmo_group_information_desc">" - Oprettelse af en gruppe angiv et navn og udfyld beskrivelsen\n- Fra programmet kan kun oprettes en gruppe af simpel type, læs mere på hjemmesiden https://osmo.mobi/g/new\n- Via en hjemmeside kan administreres en gruppe, til at placere spor og punkter til rådighed for alle\n- Understøtter ikke brugen af en gruppe for kun én bruger, hvis dette ikke er IP-gruppen\n- Private grupper er begrænset til 8 personer\n- Detaljerede vilkår kan altid ses på hjemmesiden OsMo.mobi\n- Brug for  særlige vilkår - kontakt support: osmo.mobi@gmail.com "</string>
     <string name="osmo_auth_error_short">Autorisation fejlede</string>
     <string name="osmo_auth_error">"OsMo autorisation fejl: %1$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
-    <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Skjul gang- og cykelstier</string>
-    <string name="rendering_attr_hideText_name">Skjul tekst</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Skjul skov og beplantning</string>
+    <string name="rendering_attr_hideBuildings_name">Bygninger</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Gang- og cykelstier</string>
+    <string name="rendering_attr_hideText_name">Tekst</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Skov og beplantning</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoomniveau 15</string>
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Skjul adgangsbegrænsninger</string>
+    <string name="rendering_attr_hideAccess_name">Adgangsbegrænsninger</string>
     <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
@@ -1888,7 +1888,7 @@
     <string name="storage_directory">Kortlagring</string>
     <string name="shared_string_copy">Kopier</string>
     <string name="application_dir_change_warning3">Skal OsmAnd også kopiere datafilerne til den nye placering?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
     
@@ -2117,7 +2117,7 @@
     
     
     <string name="shared_string_update">Opdatering</string>
-    <string name="rendering_attr_hideProposed_name">Skjul foreslåede objekter</string>
+    <string name="rendering_attr_hideProposed_name">Foreslåede objekter</string>
     <string name="read_more">Læs mere</string>
     <string name="whats_new">Hvad er nyt i</string>
     <!-- string name="map_legend_item_description">Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig</string -->
@@ -2225,7 +2225,7 @@
     <string name="item_removed">Emne fjernet</string>
     <string name="n_items_removed">Emner slettet</string>
     <string name="shared_string_undo_all">FORTRYD ALLE</string>
-    <string name="rendering_attr_hideIcons_name">Skjul IP ikoner</string>
+    <string name="rendering_attr_hideIcons_name">IP ikoner</string>
     <string name="switch_start_finish">Byt om på startpunkt og destination</string>
     <string name="number_of_contributors">Antal bidragydere</string>
     <string name="number_of_edits">Antal redigeringer</string>
@@ -2236,7 +2236,7 @@
     <string name="road_blocked">Spærret vej</string>
     <string name="shared_string_remove">Fjern</string>
     <string name="data_is_not_available">Data er ikke tilgængelig</string>
-    <string name="rendering_attr_hideUnderground_name">Skjul underjordiske objekter</string>
+    <string name="rendering_attr_hideUnderground_name">Underjordiske objekter</string>
     <string name="shared_string_read_more">Læs mere</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - find steder på kortet og beregn ruter uden en internetforbindelse. Hent kort for et land, før rejsen og find steder og ruter i et ukendt område.
 \n\nGrundlæggende indstillinger:
