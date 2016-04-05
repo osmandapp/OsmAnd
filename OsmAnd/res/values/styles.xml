@@ -364,4 +364,8 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
+    <style name="TextAppearance.OsmandListItemTitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
 </resources>

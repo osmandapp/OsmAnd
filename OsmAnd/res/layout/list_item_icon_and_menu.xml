@@ -25,12 +25,12 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_toEndOf="@+id/icon"
         android:layout_toLeftOf="@+id/secondary_icon"
         android:layout_toRightOf="@+id/icon"
         android:layout_toStartOf="@+id/secondary_icon"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:minHeight="60dp"
         android:orientation="vertical">
 
@@ -43,6 +43,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.OsmandListItemTitle"
             android:textSize="@dimen/default_list_text_size"
             tools:text="Some title text"/>
 
@@ -51,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/default_desc_text_size"
-            tools:text="Some title text"/>
+            tools:text="Some subtitle text"/>
 
         <View
             android:layout_width="0dp"
@@ -77,17 +78,17 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:focusable="false"/>
 
     <View
         android:id="@+id/divider"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/text_wrapper"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/text_wrapper"
         android:background="?attr/dashboard_divider"/>
 
