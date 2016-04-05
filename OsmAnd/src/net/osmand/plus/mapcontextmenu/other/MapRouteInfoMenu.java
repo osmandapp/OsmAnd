@@ -411,7 +411,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
 			fromIcon.setImageDrawable(mapActivity.getResources().getDrawable(appMode.getResourceLocationDay()));
 		} else {
-			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.list_startpoint, 0, 0f));
+			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.list_startpoint, 0));
 		}
 	}
 
@@ -475,7 +475,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private Drawable getIconOrig(int iconId) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		return iconsCache.getIcon(iconId, 0, 0f);
+		return iconsCache.getIcon(iconId, 0);
 	}
 
 	private OnItemClickListener getOnFavoriteClickListener(final boolean target, final FavouritesAdapter favouritesAdapter,

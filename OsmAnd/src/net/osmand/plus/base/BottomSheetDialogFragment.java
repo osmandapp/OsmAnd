@@ -27,6 +27,7 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		int themeId = isLightTheme ? R.style.OsmandLightTheme_BottomSheet
 				: R.style.OsmandDarkTheme_BottomSheet;
 		final Dialog dialog = new Dialog(getActivity(), themeId);
+		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_PopUpMenu_Bottom;
 		dialog.setCanceledOnTouchOutside(true);
