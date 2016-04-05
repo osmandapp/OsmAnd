@@ -136,7 +136,7 @@ public class ContextMenuAdapter {
 			} else {
 				tv.setTypeface(null);
 			}
-			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
+			tv.setText(item.getTitle());
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
 				int color = ContextCompat.getColor(getContext(),
