@@ -8,7 +8,7 @@
     <string name="show_polygons">Отображать полигоны</string>
     <string name="rendering_attr_showMtbRoutes_name">Отображать MTB маршруты</string>
     <string name="shared_string_select">Выбрать</string>
-    <string name="rendering_attr_hideIcons_name">Скрыть значки POI</string>
+    <string name="rendering_attr_hideIcons_name">Значки POI</string>
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
     <string name="av_video_quality_low">Низкое качество</string>
     <string name="av_video_quality_high">Высокое качество</string>
@@ -51,7 +51,7 @@
     <string name="lang_mk">Македонский</string>
     <string name="lang_fy">Западнофризский</string>
     <string name="lang_als">Албанский (тоскский)</string>
-    <string name="rendering_attr_hideProposed_name">Скрыть планируемые объекты</string>
+    <string name="rendering_attr_hideProposed_name">Планируемые объекты</string>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
     <string name="srtm_plugin_description">"Этот плагин обеспечивает как наложение контурных линий, так и отображения затеняющего слоя рельефа поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусами на севере и 70 градусами на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems). "</string>
@@ -1315,16 +1315,16 @@
     <string name="none_selected_gpx">Нет выбранных файлов GPX. Используйте длительное нажатие для выбора доступного трека.</string>
     <string name="local_index_select_gpx_file">Выбрать для отображения</string>
     <string name="osmo_group_by_invite">Войти по приглашению</string>
-    <string name="rendering_attr_hideBuildings_name">Скрыть строения</string>
-    <string name="rendering_attr_hideText_name">Скрыть текст</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Скрыть леса и кустарники</string>
+    <string name="rendering_attr_hideBuildings_name">Строения</string>
+    <string name="rendering_attr_hideText_name">Текст</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Леса и кустарники</string>
     <string name="rendering_attr_moreDetailed_name">Более подробно</string>
     <string name="rendering_attr_lessDetailed_name">Менее подробно</string>
     <string name="rendering_attr_showSurfaceGrade_name">Отображать качество дорог</string>
     <string name="rendering_attr_showSurfaces_name">Отображать тип покрытия</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Скрыть непроезжие дороги</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Непроезжие дороги</string>
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
-    <string name="rendering_attr_hideAccess_name">Скрыть ограничения доступа</string>
+    <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
     <string name="rendering_attr_showAccess_name">Отображать ограничения доступа</string>
     <string name="rendering_attr_showCycleRoutes_name">Отображать веломаршруты</string>
     <string name="osmo_auth_error_short">Сбой авторизации</string>
@@ -1650,7 +1650,7 @@
     <string name="shared_string_copy">Копировать</string>
     <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Скрыть номера домов</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     
     <string name="routing_attr_avoid_borders_description">Избегать пересечения границы с другой страной</string>
     <string name="routing_attr_height_name">Ограничение высоты</string>
@@ -1909,7 +1909,7 @@
     <string name="rec_split_desc">Циклическая перезапись клипов при превышении заданного объема хранилища</string>
     <string name="switch_start_finish">Поменять местами пункт отправления и пункт назначения</string>
     <string name="shared_string_remove">Удалить</string>
-    <string name="rendering_attr_hideUnderground_name">Скрыть подземные объекты</string>
+    <string name="rendering_attr_hideUnderground_name">Подземные объекты</string>
 
     <string name="data_is_not_available">Данные недоступны</string>
     <string name="clear_updates_proposition_message">Загруженные обновления можно удалить и вернуться к первоначальной редакции карты</string>
