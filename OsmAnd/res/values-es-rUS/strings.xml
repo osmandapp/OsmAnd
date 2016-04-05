@@ -527,7 +527,7 @@
     <string name="live_monitoring_stop">Parar rastreo en línea</string>
     <string name="gpx_monitoring_start">Iniciar grabación GPX</string>
     <string name="gpx_monitoring_stop">Parar grabación GPX</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Carreteras no aptas para vehículos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
     <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro expiró.\n ¿Quieres realizar un nuevo registro?</string>
     <string name="osmo_group_information_desc">" - Al crear un grupo, debes darle un nombre y completar la descripción.\n - Desde la aplicación del grupo, sólo se crean con el tipo Simple, lee más en el sitio web https://osmo.mobi/g/new\n - Puedes gestionar un grupo desde un sitio web, para ubicar todas las trazas y puntos disponibles\n - No avalamos el uso de grupos con sólo un usuario, si esto no es el grupo de PDI\n - Los grupos privados se limitan sólo a 8 personas\n - Los detalles sobre términos y condiciones, se encuentran en el sitio web OsMo.mobi\n - Si necesitas condiciones especiales, contacta con el soporte: osmo.mobi@gmail.com "</string>
