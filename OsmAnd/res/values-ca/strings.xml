@@ -636,7 +636,7 @@
     <string name="city_type_village">Vila</string>
     <string name="favorite_delete_multiple">Esteu a punt de suprimir %1$d preferit(s) i %2$d grup(s) de preferits. N\'esteu segurs?</string>
     <string name="basemap_missing">No s\'ha trobat el mapa base del món (el qual cobreix tot el món als nivells de zoom menors). És recomanable que us baixeu el fitxer World_basemap_x.obf per gaudir d\'un entorn complet.</string>
-    <string name="vector_data_missing">No s\'ha trobat les dades de bord («fora de línia») a la targeta SD. És recomanable que les baixeu per utilitzar els mapes fora de línia.</string>
+    <string name="vector_data_missing">No s\'ha trobat les dades descarregades («fora de línia») a la targeta SD. És recomanable que les baixeu per utilitzar mapes sense connexió.</string>
     <string name="tts_missing_language_data">No hi ha dades instal·lades per la llengua seleccionada. Voleu anar al Market per instal·lar-ne?</string>
     <string name="gpx_option_from_start_point">Passa al llarg de la traça sencera</string>
     <string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització.
@@ -785,7 +785,7 @@
     <string name="voice_stream_voice_call">Àudio de trucada de veu</string>
     <string name="enable_plugin_monitoring_services">Habilita el connector de monitorització (enregistrament GPX, seguiment en viu) per poder utilitzar els serveis de registre d\'ubicació</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
-    <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar al Market?</string>
+    <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar a Google Play?</string>
     <string name="rendering_attr_roadColors_name">Esquema de color de carreteres</string>
     <string name="map_widget_show_destination_arrow">Mostra la direcció de destinació</string>
     <string name="non_optimal_route_calculation">Calcula possibles rutes no òptimes per a llargues distàncies</string>
@@ -1107,7 +1107,7 @@
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
     <string name="osmand_srtm_long_description_1000_chars">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
-    <string name="keep_and_add_destination_point">Afegeix com a punt de destinació</string>
+    <string name="keep_and_add_destination_point">Afegeix com a darrer punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
     <string name="use_displayed_track_for_navigation">Voleu utilitzar la traça visualitzada per la navegació?</string>
@@ -1233,7 +1233,7 @@
     <string name="osmo_activity">Monitorització d\'OpenStreetMap</string>
     <string name="osmo_enable_tracker">Envia les meves ubicacions</string>
     <string name="osmo_control">Accés ràpid a OsMo</string>
-    <string name="import_file_favourites">Voleu desar els punts com un fitxer GPX o voleu importar-los als preferits?</string>
+    <string name="import_file_favourites">Voleu desar les dades com un fitxer GPX o voleu importar les fites als Preferits?</string>
     <string name="osmo_follow">Segueix</string>
     <string name="osmo_sign_in">Inicia una sessió</string>
     <string name="osmo_create_groups_confirm">Per poder crear grups cal ser un usuari registrat d\'OsMo.</string>
@@ -1822,7 +1822,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_mk">Macedònic</string>
     <string name="lang_fy">Frisó</string>
     <string name="lang_als">Albanès (Tosc)</string>
-    <string name="save_poi_without_poi_type_message">Confirmeu desar el PDI sense indicar el tipus?</string>
+    <string name="save_poi_without_poi_type_message">Confirmeu que voleu desar el PDI sense indicar el seu tipus?</string>
     <string name="context_menu_item_delete_waypoint">Voleu suprimir la fita GPX?</string>
     <string name="context_menu_item_edit_waypoint">Edita la fita GPX</string>
     <string name="shared_string_location">Localització</string>
@@ -1883,10 +1883,10 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="update_now">Actualitza ara</string>
  	<string name="route_distance">Distància:</string>
     <string name="route_duration">Durada:</string>
-    <string name="missing_write_external_storage_permission">L\'aplicació no té autorització per utilitzar la memòria SD</string>
-<string name="no_location_permission">L\'aplicació no té autorització per utilitzar les dades d\'ubicació.</string>
-    <string name="no_camera_permission">L\'aplicació no té autorització per utilitzar la càmera.</string>
-    <string name="no_microphone_permission">L\'aplicació no té autorització per utilitzar el micròfon.</string>
+    <string name="missing_write_external_storage_permission">L\'aplicació no tenia autorització per utilitzar la memòria SD</string>
+<string name="no_location_permission">L\'aplicació no tenia autorització per utilitzar les dades d\'ubicació.</string>
+    <string name="no_camera_permission">L\'aplicació no tenia autorització per utilitzar la càmera.</string>
+    <string name="no_microphone_permission">L\'aplicació no tenia autorització per utilitzar el micròfon.</string>
     <string name="impassable_road_desc">Indiqueu les vies que voleu evitar en la navegació</string>
     <string name="shared_string_sound">So</string>
     <string name="live_updates">Actualitzacions al moment</string>
@@ -1971,4 +1971,30 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="full_report">Informe complert</string>
     <string name="open_street_map_login_and_pass">Usuari i contrasenya d\'OpenStreetMap</string>
     <string name="osm_live_subscribe_btn">Subscriu</string>
-    </resources>
+    <string name="release_2_3">" • OSM en directe. Recolzament a desenvolupadors i col·laboradors de mapes i obtenció de mapes actualitzats cada hora..
+\n\n • Marcadors de mapa. Una nova opció per seleccionar ràpidament llocs al mapa.\n\n • Els mapes OSM tenen més detalls amb la la simbologia específica de les carreteres del país i moltes noves característiques del mapa.\n\n • S\'ha millorat l\'aspecte i la experiència de la preparació de ruta.
+\n\n • Moltes millores al menú contextual de mapa, com la cerca contextual d\'adreces .\n\n i encara més… "</string>
+    <string name="osm_live_subscription">Subscripció a OSM en directe</string>
+    <string name="osm_live_email_desc">Ens cal per proporcionar-vos informació d\'aportacions</string>
+    <string name="osm_live_support_region">Zona de suport</string>
+    <string name="osm_live_thanks">Us agraïm haver-vos subscrit a les actualitzacions en directe!</string>
+    <string name="osm_live_region_desc">Una part del vostre donatiu s\'enviarà als usuaris d\'OSM que enviïn modificacions del mapa a aquesta regió</string>
+    <string name="osm_live_ask_for_purchase">Primer hauríeu de subscriure-os a OSM en directe</string>
+
+    <string name="select_map_marker">Seleccioneu un marcador de mapa</string>
+    <string name="map_markers_other">Altres marcadors</string>
+    <string name="show_transparency_seekbar">Mostreu la transparència de la barra de cerca</string>
+    <string name="upload_osm_note">Puja una nota OSM</string>
+    <string name="map_marker_1st">Primer marcador de mapa</string>
+    <string name="map_marker_2nd">Segon marcador de mapa</string>
+    <string name="add_points_to_map_markers_q">Voleu afegir tots els punts als marcadors de mapa?</string>
+    <string name="shared_string_add_to_map_markers">Afegeix als marcadors de mapa</string>
+    <string name="select_map_markers">Selecciona marcadors de mapa</string>
+    <string name="show_map_markers_description">Activa l\'opció de marcadors de mapa</string>
+    <string name="clear_active_markers_q">Voleu treure tots els marcadors actius?</string>
+    <string name="clear_markers_history_q">Voleu netejar l\'historial de marcadors de mapa?</string>
+    <string name="active_markers">Marcadors actius</string>
+    <string name="map_markers">Marcadors de mapa</string>
+    <string name="map_marker">Marcador de mapa</string>
+    <string name="file_name_containes_illegal_char">El nom de fitxer inclou un caràcter ilegal</string>
+</resources>
