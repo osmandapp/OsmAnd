@@ -1040,9 +1040,9 @@ public class RouteResultPreparation {
                     	(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn)) 
                     	) {
                     	TurnType.setPrimaryTurnShiftOthers(lanes, i, turn);
-                    } else if (!is_tertiary_turn) {
+                    } else if (!isTertiaryTurn) {
                     	TurnType.setSecondaryTurnShiftOthers(lanes, i, turn);
-						is_tertiary_turn = true;
+						isTertiaryTurn = true;
                     } else {
 						TurnType.setTertiaryTurn(lanes, i, turn);
 						break;
