@@ -1006,6 +1006,7 @@ public class RouteResultPreparation {
 		int[] lanes = new int[splitLaneOptions.length];
 		for (int i = 0; i < splitLaneOptions.length; i++) {
 			String[] laneOptions = splitLaneOptions[i].split(";");
+			boolean is_tertiary_turn = false;
 
 			for (int j = 0; j < laneOptions.length; j++) {
 				int turn;
@@ -1039,10 +1040,13 @@ public class RouteResultPreparation {
                     	(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn)) 
                     	) {
                     	TurnType.setPrimaryTurnShiftOthers(lanes, i, turn);
-                    } else {
+                    } else if (!is_tertiary_turn) {
                     	TurnType.setSecondaryTurnShiftOthers(lanes, i, turn);
+						is_tertiary_turn = true;
+                    } else {
+						TurnType.setTertiaryTurn(lanes, i, turn);
+						break;
                     }
-					break; // Move on to the next lane
 				}
 			}
 		}
