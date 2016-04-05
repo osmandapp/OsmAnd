@@ -1484,14 +1484,14 @@
     <string name="gpx_monitoring_start">Démarrer l\'enregistrement GPX</string>
     <string name="gpx_monitoring_stop">Arrêter l\'enregistrement GPX</string>
     <string name="gpx_start_new_segment">Débuter un nouveau segment</string>
-    <string name="rendering_attr_hideBuildings_name">Masquer les bâtiments</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Masquer les voies non adaptées aux véhicules</string>
-    <string name="rendering_attr_hideText_name">Masquer les textes</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Masquer la végétation</string>
+    <string name="rendering_attr_hideBuildings_name">Bâtiments</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Voies non adaptées aux véhicules</string>
+    <string name="rendering_attr_hideText_name">Texte</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Végétation</string>
     <string name="rendering_attr_buildings15zoom_name">Bâtiments en zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
-    <string name="rendering_attr_hideAccess_name">Masquer les restrictions d\'accès</string>
+    <string name="rendering_attr_hideAccess_name">Accès restreints</string>
     <string name="rendering_attr_showAccess_name">Afficher les restrictions d\'accès</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
@@ -1777,7 +1777,7 @@
     <string name="storage_directory">Stockage de la carte</string>
     <string name="shared_string_copy">Copier</string>
     <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Masquer les numéros dans les rues</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Numéros dans les rues</string>
     
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
     <string name="routing_attr_height_name">Limite de hauteur</string>
@@ -2010,7 +2010,7 @@
     <string name="shared_string_update">Mise à jour</string>
     <string name="read_more">Lire plus</string>
     <string name="whats_new">Quoi de neuf dans</string>
-    <string name="rendering_attr_hideProposed_name">Masquer les objets proposés</string>
+    <string name="rendering_attr_hideProposed_name">Objets proposés</string>
     <string name="lang_mk">Macédonien</string>
     <string name="lang_fy">Frison occidental</string>
     <string name="lang_als">Tosque</string>
@@ -2111,7 +2111,7 @@
     <string name="rec_split_storage_size_desc">Espace maximum alloué pour tous les enregistrements</string>
     <string name="shared_string_type">Type</string>
     <string name="switch_start_finish">Inverser Départ et Destination</string>
-    <string name="rendering_attr_hideIcons_name">Masquer les icônes des PI</string>
+    <string name="rendering_attr_hideIcons_name">Icônes des PI</string>
     <string name="number_of_contributors">Nombre de contributeurs</string>
     <string name="number_of_edits">Nombre de modifications</string>
     <string name="reports_for">Signaler pour</string>
@@ -2121,7 +2121,7 @@
     <string name="road_blocked">Route barrée</string>
     <string name="add_time_span">Ajouter un laps de temps</string>
     <string name="data_is_not_available">Donnée indisponible</string>
-    <string name="rendering_attr_hideUnderground_name">Cacher les objets souterrains</string>
+    <string name="rendering_attr_hideUnderground_name">Objets souterrains</string>
     <string name="shared_string_read_more">Lire la suite</string>
     <string name="shared_string_email_address">Adresse email</string>
     <string name="shared_string_status">Statut</string>
