@@ -606,6 +606,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
 		backToLocationControl.updateVisibility(visible && !dialogOpened);
+		if (app.accessibilityEnabled()) {
+			backToLocationControl.iv.setClickable(enabled && visible);
+		}
 	}
 
 
