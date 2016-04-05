@@ -49,7 +49,7 @@
     <string name="download_regular_maps">Standard kort</string>
     <string name="download_roads_only_maps">Kort kun med veje</string>
 
-    <string name="rendering_attr_noAdminboundaries_name">Skjul grænser</string>
+    <string name="rendering_attr_noAdminboundaries_name">Grænser</string>
 
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
@@ -257,7 +257,7 @@
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>
     <string name="show_traffic_warnings">Trafikadvarsler</string>
     <string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
-    <string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
+    <string name="rendering_attr_noPolygons_name">Polygoner</string>
     <string name="rendering_attr_appMode_name">Optegningsmåde</string>
     <string name="rendering_attr_appMode_description">Optimer kort til</string>
     <string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver højdekurvedata):</string>
