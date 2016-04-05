@@ -508,7 +508,7 @@
     <string name="local_index_no_items_to_do">Ni predmetov za %1$s</string>
     <string name="local_index_action_do">Opravilo: %1$s %2$s predmetov. Ali želite nadaljevati?</string>
     <string name="local_index_mi_reload">Ponovno naloži s kartice SD</string>
-    <string name="shared_string_download">Prejmi</string>
+    <string name="shared_string_download">Prejmi zemljevid:</string>
     <string name="local_index_map_data">Podatki zemljevida</string>
     <string name="local_indexes_cat_backup">Izklopljen</string>
     <string name="local_index_transport_data">Podatki javnih prevozov</string>
@@ -2165,9 +2165,8 @@
     <string name="file_name_containes_illegal_char">V imenu datoteke je nedovoljen znak</string>
 <string name="no_map_markers_found">Dodajte oznake zemljevida prek zemljevida</string>
     <string name="no_waypoints_found">Ni vmesnih točk</string>
-    <string name="release_2_3">" • OSM v živo. S podporo razvijalcem in skupnosti si pridobite možnost urnih posodobitev zemljevidov.
-\n\n • Oznake zemljevidov so nov hiter način izbire mest na zemljevidu.\n\n • Podrobnejši zemljevidi OSM, ki so opremljeni z specifičnimi oznakami cest in veliko novih zmožnost zemljevidov.\n\n • Izboljšana uporabniška izkušnja pri pripravi potovanj.
-\n\n • Mnogo posodobitev vsebinskega menija, kot je na primer vsebinsko iskanje naslova.\n\n • Še in še in še ... "</string>
+    <string name="release_2_3">" • Uporabljajte OSM v živo. Pridobite si možnost urnih posodobitev zemljevidov. S podporo razvijalcem in skupnosti si pridobite dostop do trenutnih podatkov.\n\n • Z oznakami zemljevidov je mogoča enostavna izbira mest na zemljevidu.\n\n • Zemljevidi OSM so opremljeni s specifičnimi oznakami cest, dodani so tudi drugi podatki.\n\n • Uvedene so izboljšave uporabniške izkušnje pri pripravi poti potovanj.
+\n\n • Omogočene so različne posodobitve vsebinskega menija, kot je vsebinsko iskanje naslova.\n\n • Še in še in še ... "</string>
     <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta. Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to odlične način za začetek sodelovanja.</string>
     
     <string name="rendering_value_thin_name">Tanko</string>
