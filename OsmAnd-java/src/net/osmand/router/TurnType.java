@@ -180,7 +180,7 @@ public class TurnType {
 	}
 
 	public static int getSecondaryTurn(int laneValue) {
-		// Get the primary turn modifier for the lane
+		// Get the secondary turn modifier for the lane
 		return (laneValue >> 5);
 	}
 	
@@ -206,7 +206,7 @@ public class TurnType {
 	}
 
 	public static int getTertiaryTurn(int laneValue) {
-		// Get the primary turn modifier for the lane
+		// Get the tertiary turn modifier for the lane
 		return (laneValue >> 10);
 	}
 
