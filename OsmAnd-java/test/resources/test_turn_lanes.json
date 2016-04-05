@@ -216,6 +216,21 @@
     "expectedResults": {
       "14418": "TL, +TL, C, C, TR"
    }
+  },
+  {
+    "testName": "11.Figure 8 TL",
+    "startPoint": {
+      "latitude": 45.69816447596442,
+      "longitude": 35.74885922431952
+    },
+    "endPoint": {
+      "latitude": 45.700075267731705,
+      "longitude": 35.7467134571076
+    },
+    "expectedResults": {
+      "43906": null,
+      "43905": "+TL;C;TR"
+    }
   }
 
 ]
