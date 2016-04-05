@@ -215,10 +215,41 @@
     },
     "expectedResults": {
       "14418": "TL, +TL, C, C, TR"
+    }
+  },
+  {
+    "testName": "11.Graaf Lodewijkstraat to Graaf Lodewijkstraat u-turn",
+    "startPoint": {
+      "latitude": 52.076116774796496,
+      "longitude": 4.821222126483946
+    },
+    "endPoint": {
+      "latitude": 52.075488682963716,
+      "longitude": 4.821018278598814
+    },
+    "expectedResults": {
+      "7352195": null,
+      "7352546": "+TL;TR"
+    }
+  },
+  {
+    "testName": "12.Rembrandtlaan to Rubensstraat u-turn",
+    "startPoint": {
+      "latitude": 45.69849708250879,
+      "longitude": 35.64191635632511
+    },
+    "endPoint": {
+      "latitude": 45.699958273396,
+      "longitude": 35.642077288866005
+    },
+    "expectedResults": {
+      "7351364": null,
+      "7351365": "+TL",
+      "7351445": "+TL"
    }
   },
   {
-    "testName": "11.Figure 8 TL",
+    "testName": "12.Figure 8 TL",
     "startPoint": {
       "latitude": 45.69816447596442,
       "longitude": 35.74885922431952
