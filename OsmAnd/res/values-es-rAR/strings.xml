@@ -2146,7 +2146,7 @@
     <string name="file_name_containes_illegal_char">El nombre del archivo contiene caracteres ilegales</string>
 <string name="no_map_markers_found">Añade marcadores a través del mapa</string>
     <string name="no_waypoints_found">No se encontraron puntos de ruta</string>
-    <string name="rendering_value_thin_name">Delgado</string>
+    <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Grueso</string>
     <string name="map_mode">Modo mapa</string>
