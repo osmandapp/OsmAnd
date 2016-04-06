@@ -1986,4 +1986,5 @@
     <string name="show_map_markers_description">Использовать маркеры на карте</string>
     <string name="storage_directory_readonly_desc">Папка, выбранная для хранения данных, доступна только для чтения. Вместо нее временно будет использоваться внутренняя память. Пожалуйста, выберите подходящее хранилище.</string>
     <string name="storage_directory_shared">Разделяемая память</string>
+    <string name="access_sort">Сортировать</string>
 </resources>

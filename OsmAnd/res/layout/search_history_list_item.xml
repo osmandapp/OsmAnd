@@ -87,6 +87,7 @@
 
         <ImageButton
             android:id="@+id/options"
+            android:contentDescription="@string/shared_string_more"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
@@ -97,6 +98,7 @@
 
         <ImageButton
             android:id="@+id/navigate_to"
+            android:contentDescription="@string/context_menu_item_directions_to"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
