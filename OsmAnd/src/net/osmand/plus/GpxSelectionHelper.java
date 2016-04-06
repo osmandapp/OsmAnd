@@ -81,18 +81,18 @@ public class GpxSelectionHelper {
 	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile g) {
 		List<GpxDisplayGroup> dg = new ArrayList<>();
 		String name = g.path;
-		if(g.showCurrentTrack){
-			name =  getString(R.string.shared_string_currently_recording_track);
+		if (g.showCurrentTrack) {
+			name = getString(R.string.shared_string_currently_recording_track);
 		} else {
 			int i = name.lastIndexOf('/');
-			if(i >= 0) {
+			if (i >= 0) {
 				name = name.substring(i + 1);
 			}
 			i = name.lastIndexOf('\\');
-			if(i >= 0) {
+			if (i >= 0) {
 				name = name.substring(i + 1);
 			}
-			if(name.endsWith(".gpx")) {
+			if (name.endsWith(".gpx")) {
 				name = name.substring(0, name.length() - 4);
 			}
 			name = name.replace('_', ' ');
@@ -108,7 +108,7 @@ public class GpxSelectionHelper {
 				String ks = (k++) + "";
 				group.setName(getString(R.string.gpx_selection_track, name, g.tracks.size() == 1 ? "" : ks));
 				String d = "";
-				if(t.name != null && t.name.length() > 0) {
+				if (t.name != null && t.name.length() > 0) {
 					d = t.name + " " + d;
 				}
 				group.setDescription(d);
@@ -123,7 +123,7 @@ public class GpxSelectionHelper {
 				group.gpxName = name;
 				group.setType(GpxDisplayItemType.TRACK_ROUTE_POINTS);
 				String d = getString(R.string.gpx_selection_number_of_points, name, route.points.size());
-				if(route.name != null && route.name.length() > 0) {
+				if (route.name != null && route.name.length() > 0) {
 					d = route.name + " " + d;
 				}
 				group.setDescription(d);
@@ -189,26 +189,26 @@ public class GpxSelectionHelper {
 			if (r.points.size() == 0) {
 				continue;
 			}
-			GPXTrackAnalysis[] as ;
+			GPXTrackAnalysis[] as;
 			boolean split = true;
-			if(group.splitDistance > 0) {
+			if (group.splitDistance > 0) {
 				List<GPXTrackAnalysis> trackSegments = r.splitByDistance(group.splitDistance);
 				as = trackSegments.toArray(new GPXTrackAnalysis[trackSegments.size()]);
-			} else if(group.splitTime > 0) {
+			} else if (group.splitTime > 0) {
 				List<GPXTrackAnalysis> trackSegments = r.splitByTime(group.splitTime);
 				as = trackSegments.toArray(new GPXTrackAnalysis[trackSegments.size()]);
 			} else {
 				split = false;
-				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, r)};
+				as = new GPXTrackAnalysis[]{GPXTrackAnalysis.segment(0, r)};
 			}
-			for(GPXTrackAnalysis analysis : as) {
+			for (GPXTrackAnalysis analysis : as) {
 				GpxDisplayItem item = new GpxDisplayItem();
 				item.group = group;
-				if(split) {
+				if (split) {
 					item.splitMetric = analysis.metricEnd;
 					item.secondarySplitMetric = analysis.secondaryMetricEnd;
 					item.splitName = formatSplitName(analysis.metricEnd, group, app);
-					item.splitName += " ("+formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) +") ";
+					item.splitName += " (" + formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) + ") ";
 				}
 
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
@@ -217,7 +217,7 @@ public class GpxSelectionHelper {
 //				if(group.track.segments.size() > 1) {
 //					name += t++ + ". ";
 //				}
-				if(!group.isSplitDistance()) {
+				if (!group.isSplitDistance()) {
 					name += GpxUiHelper.getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 				}
 				if ((analysis.timeSpan > 0 || analysis.timeMoving > 0) && !group.isSplitTime()) {
@@ -238,20 +238,20 @@ public class GpxSelectionHelper {
 				if (analysis.isElevationSpecified()) {
 					if (name.length() != 0)
 						name += ", ";
-						name += GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
-						name += " - ";
-						name += GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
+					name += GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
+					name += " - ";
+					name += GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
 				}
 				if (analysis.isElevationSpecified() && (analysis.diffElevationUp > eleThreshold ||
-						analysis.diffElevationDown > eleThreshold) ) {
+						analysis.diffElevationDown > eleThreshold)) {
 					if (name.length() != 0)
 						name += ", ";
-					if(analysis.diffElevationDown > eleThreshold) {
-						name += GpxUiHelper.getColorValue(descClr, " \u2193 "+
+					if (analysis.diffElevationDown > eleThreshold) {
+						name += GpxUiHelper.getColorValue(descClr, " \u2193 " +
 								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
 					}
-					if(analysis.diffElevationUp > eleThreshold) {
-						name += GpxUiHelper.getColorValue(ascClr, " \u2191 "+
+					if (analysis.diffElevationUp > eleThreshold) {
+						name += GpxUiHelper.getColorValue(ascClr, " \u2191 " +
 								OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
 					}
 				}
@@ -295,8 +295,8 @@ public class GpxSelectionHelper {
 	}
 
 	public SelectedGpxFile getSelectedFileByPath(String path) {
-		for(SelectedGpxFile s : selectedGPXFiles) {
-			if(s.getGpxFile().path.equals(path)) {
+		for (SelectedGpxFile s : selectedGPXFiles) {
+			if (s.getGpxFile().path.equals(path)) {
 				return s;
 			}
 		}
@@ -323,7 +323,7 @@ public class GpxSelectionHelper {
 
 	public void setGpxFileToDisplay(GPXFile... gpxs) {
 		// special case for gpx current route
-		for(GPXFile gpx : gpxs) {
+		for (GPXFile gpx : gpxs) {
 			selectGpxFileImpl(gpx, true, false);
 		}
 		saveCurrentSelections();
@@ -331,32 +331,32 @@ public class GpxSelectionHelper {
 
 	public void loadGPXTracks(IProgress p) {
 		String load = app.getSettings().SELECTED_GPX.get();
-		if(!Algorithms.isEmpty(load)) {
+		if (!Algorithms.isEmpty(load)) {
 			try {
 				JSONArray ar = new JSONArray(load);
 				boolean save = false;
-				for(int i = 0; i < ar.length(); i++) {
+				for (int i = 0; i < ar.length(); i++) {
 					JSONObject obj = ar.getJSONObject(i);
-					if(obj.has(FILE)) {
+					if (obj.has(FILE)) {
 						File fl = new File(obj.getString(FILE));
-						if(p != null) {
+						if (p != null) {
 							p.startTask(getString(R.string.loading_smth, fl.getName()), -1);
 						}
 						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
-						if(obj.has(COLOR)) {
+						if (obj.has(COLOR)) {
 							int clr = Algorithms.parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
 						}
-						if(gpx.warning != null) {
+						if (gpx.warning != null) {
 							save = true;
 						} else {
 							selectGpxFile(gpx, true, false);
 						}
-					} else if(obj.has(CURRENT_TRACK)) {
+					} else if (obj.has(CURRENT_TRACK)) {
 						selectedGPXFiles.add(savingTrackHelper.getCurrentTrack());
 					}
 				}
-				if(save) {
+				if (save) {
 					saveCurrentSelections();
 				}
 			} catch (Exception e) {
@@ -368,15 +368,15 @@ public class GpxSelectionHelper {
 
 	private void saveCurrentSelections() {
 		JSONArray ar = new JSONArray();
-		for(SelectedGpxFile s : selectedGPXFiles) {
-			if(s.gpxFile != null && !s.notShowNavigationDialog) {
+		for (SelectedGpxFile s : selectedGPXFiles) {
+			if (s.gpxFile != null && !s.notShowNavigationDialog) {
 				JSONObject obj = new JSONObject();
 				try {
-					if(s.isShowCurrentTrack()) {
+					if (s.isShowCurrentTrack()) {
 						obj.put(CURRENT_TRACK, true);
-					} else if(!Algorithms.isEmpty(s.gpxFile.path)) {
+					} else if (!Algorithms.isEmpty(s.gpxFile.path)) {
 						obj.put(FILE, s.gpxFile.path);
-						if(s.gpxFile.getColor(0) != 0) {
+						if (s.gpxFile.getColor(0) != 0) {
 							obj.put(COLOR, Algorithms.colorToString(s.gpxFile.getColor(0)));
 						}
 					}
@@ -391,8 +391,8 @@ public class GpxSelectionHelper {
 
 	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
 		boolean displayed;
-		SelectedGpxFile sf ;
-		if(gpx != null && gpx.showCurrentTrack) {
+		SelectedGpxFile sf;
+		if (gpx != null && gpx.showCurrentTrack) {
 			sf = savingTrackHelper.getCurrentTrack();
 			sf.notShowNavigationDialog = notShowNavigationDialog;
 			displayed = selectedGPXFiles.contains(sf);
@@ -400,14 +400,14 @@ public class GpxSelectionHelper {
 			assert gpx != null;
 			sf = getSelectedFileByPath(gpx.path);
 			displayed = sf != null;
-			if(show && sf == null) {
+			if (show && sf == null) {
 				sf = new SelectedGpxFile();
 				sf.setGpxFile(gpx);
 				sf.notShowNavigationDialog = notShowNavigationDialog;
 			}
 		}
-		if(displayed != show) {
-			if(show) {
+		if (displayed != show) {
+			if (show) {
 				selectedGPXFiles.add(sf);
 			} else {
 				selectedGPXFiles.remove(sf);
@@ -438,14 +438,14 @@ public class GpxSelectionHelper {
 
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
-			if(gpxFile.tracks.size() > 0) {
+			if (gpxFile.tracks.size() > 0) {
 				this.color = gpxFile.tracks.get(0).getColor(0);
 			}
 			processPoints();
 		}
 
 		public GPXTrackAnalysis getTrackAnalysis() {
-			if(modifiedTime != gpxFile.modifiedTime) {
+			if (modifiedTime != gpxFile.modifiedTime) {
 				update();
 			}
 			return trackAnalysis;
@@ -455,14 +455,14 @@ public class GpxSelectionHelper {
 			modifiedTime = gpxFile.modifiedTime;
 			trackAnalysis = gpxFile.getAnalysis(
 					Algorithms.isEmpty(gpxFile.path) ? System.currentTimeMillis() :
-					new File(gpxFile.path).lastModified());
+							new File(gpxFile.path).lastModified());
 			displayGroups = null;
 		}
 
 		public void processPoints() {
 			update();
 			this.processedPointsToDisplay = gpxFile.proccessPoints();
-			if(this.processedPointsToDisplay.isEmpty()) {
+			if (this.processedPointsToDisplay.isEmpty()) {
 				this.processedPointsToDisplay = gpxFile.processRoutePoints();
 				routePoints = !this.processedPointsToDisplay.isEmpty();
 			}
@@ -502,14 +502,14 @@ public class GpxSelectionHelper {
 		}
 
 		public List<GpxDisplayGroup> getDisplayGroups() {
-			if(modifiedTime != gpxFile.modifiedTime) {
+			if (modifiedTime != gpxFile.modifiedTime) {
 				update();
 			}
 			return displayGroups;
 		}
 
 		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups) {
-			if(modifiedTime != gpxFile.modifiedTime) {
+			if (modifiedTime != gpxFile.modifiedTime) {
 				update();
 			}
 			this.displayGroups = displayGroups;
@@ -619,21 +619,21 @@ public class GpxSelectionHelper {
 			list.clear();
 			splitDistance = -1;
 			splitTime = -1;
-			processGroupTrack(app, this	);
+			processGroupTrack(app, this);
 		}
 
 		public void splitByDistance(OsmandApplication app, double meters) {
 			list.clear();
 			splitDistance = meters;
 			splitTime = -1;
-			processGroupTrack(app, this	);
+			processGroupTrack(app, this);
 		}
 
 		public void splitByTime(OsmandApplication app, int seconds) {
 			list.clear();
 			splitDistance = -1;
 			splitTime = seconds;
-			processGroupTrack(app, this	);
+			processGroupTrack(app, this);
 		}
 
 		public int getColor() {
