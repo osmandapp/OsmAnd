@@ -2195,4 +2195,6 @@
     <string name="rendering_value_thin_name">Fin</string>
     <string name="rendering_value_medium_name">Moyen</string>
     <string name="rendering_value_bold_name">Épais</string>
+    <string name="number_of_gpx_files_selected_pattern">%s fichiers GPX sélectionnés</string>
+    <string name="map_mode">Mode Carte</string>
     </resources>
