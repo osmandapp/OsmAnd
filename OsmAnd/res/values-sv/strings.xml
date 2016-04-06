@@ -1393,7 +1393,7 @@
 
     <string name="osmo_not_signed_in">Inloggningen till OsMo misslyckades</string>
     <string name="osmo_group_by_invite">Anslut via inbjudan</string>
-    <string name="osmo_group_information_desc">" - Alla skapade grupper är offentliga! Om du vill vara anonym, anslut enheter direkt via Tracker-id-\n- Privata grupper är begränsade till åtta personer.\n- Grupper tas bort i fall av inaktivitet eller aktivitet av endast en (1) person under två veckor.\n- Du kan begränsa inträde i grupp (som t.ex. endast via inbjudan) men för att kontrollera gruppen måste du gå till adminkonsollen.\n- Om du behöver skapa en grupp med andra villkor kontakta http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - När du skapar en grupp, ge den ett namn och fyll i beskrivningen\n- Läs mer på webbplatsen https://osmo.mobi/g/new\n- Via en webbsajt kan du hantera en grupp och placera ut spår och punkter tillgängliga för alla\n- Vi tillåter inte grupper med endast 1 användare om det inte är en POI-grupp\n- Privata grupper är begränsade till 8 personer\n- Mer detaljer finns på webbsajten OsMo.mobi\n- Om du behöver skapa en grupp med andra villkor kontakta http://osmo.mobi "</string>
     <string name="osmo_group_information">Läs detta innan du skapar en grupp!</string>
     <string name="keep_navigation_service">Behåll</string>
     <string name="stop_navigation_service">Stoppa</string>
@@ -1414,14 +1414,14 @@
     <string name="gpx_monitoring_start">Starta GPX-loggning</string>
     <string name="gpx_monitoring_stop">Stoppa GPX-loggning</string>
     <string name="gpx_start_new_segment">Starta nytt segment</string>
-    <string name="rendering_attr_hideBuildings_name">Dölj byggnader</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Visa endast vägar för motorfordon</string>
-    <string name="rendering_attr_hideText_name">Dölj text</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Dölj skog och vegetation</string>
+    <string name="rendering_attr_hideBuildings_name">Byggnader</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Vägar, inte för motorfordon</string>
+    <string name="rendering_attr_hideText_name">Text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Skog och vegetation</string>
     <string name="rendering_attr_buildings15zoom_name">Byggnader vid zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Dölj tillfartsinskränkningar</string>
+    <string name="rendering_attr_hideAccess_name">Tillfartsinskränkningar</string>
     <string name="rendering_attr_showAccess_name">Visa tillfartsinskränkningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
@@ -1747,7 +1747,7 @@
     <string name="storage_directory_default">Internminne</string>
     <string name="storage_directory">Kartlagring</string>
     <string name="shared_string_copy">Kopiera</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Dölj husnummer</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Husnummer</string>
     <string name="routing_attr_avoid_borders_description">Undvik att korsa gränsen till ett annat land</string>
     <string name="routing_attr_height_name">Höjdgräns</string>
     <string name="use_fast_recalculation">Smart omräkning av rutt</string>
@@ -1967,7 +1967,7 @@
     <string name="feedback">Återkoppling</string>
     <string name="read_more">Läs mer</string>
     <string name="whats_new">Nyheter</string>
-    <string name="rendering_attr_hideProposed_name">Dölj föreslagna objekt</string>
+    <string name="rendering_attr_hideProposed_name">Föreslagna objekt</string>
 <string name="lang_nds">Lågtyska</string>
     <string name="lang_mk">Makedonska</string>
     <string name="lang_fy">Frisiska</string>
@@ -2064,7 +2064,7 @@
     <string name="item_removed">Post borttagen</string>
     <string name="n_items_removed">poster raderade</string>
     <string name="shared_string_undo_all">ÅNGRA ALLA</string>
-    <string name="rendering_attr_hideIcons_name">Dölj POI-ikoner</string>
+    <string name="rendering_attr_hideIcons_name">POI-ikoner</string>
     <string name="switch_start_finish">Skifta startpunkt och destination</string>
     <string name="number_of_contributors">Antal bidragsgivare</string>
     <string name="number_of_edits">Antal redigeringar</string>
@@ -2075,7 +2075,7 @@
     <string name="add_time_span">Lägg till tidsspann</string>
     <string name="road_blocked">Blockerad väg</string>
     <string name="data_is_not_available">Inga data tillgängliga</string>
-    <string name="rendering_attr_hideUnderground_name">Dölj underjordiska objekt</string>
+    <string name="rendering_attr_hideUnderground_name">Underjordiska objekt</string>
     <string name="shared_string_read_more">Läs mer</string>
     <string name="rec_split_storage_size">Lagringsutrymme</string>
     <string name="shared_string_email_address">E-postadress</string>
