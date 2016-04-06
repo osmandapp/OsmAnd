@@ -2159,4 +2159,5 @@
     <string name="rendering_value_medium_name">中等</string>
     <string name="rendering_value_bold_name">粗的</string>
     <string name="rendering_value_thin_name">細的</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX 檔案已選擇</string>
     </resources>
