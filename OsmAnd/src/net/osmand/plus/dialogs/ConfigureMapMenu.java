@@ -142,8 +142,10 @@ public class ConfigureMapMenu {
 			} else if (itemId == R.string.shared_string_favorites) {
 				settings.SHOW_FAVORITES.set(isChecked);
 			} else if (itemId == R.string.layer_gpx_layer) {
-				if (ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()) {
-					ma.getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
+				final GpxSelectionHelper selectedGpxHelper = ma.getMyApplication().getSelectedGpxHelper();
+				if (selectedGpxHelper.isShowingAnyGpxFiles()) {
+					selectedGpxHelper.clearAllGpxFileToShow();
+					adapter.getItem(pos).setDescription(selectedGpxHelper.getGpxDescription());
 				} else {
 					AlertDialog dialog = ma.getMapLayers()
 							.showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
@@ -151,7 +153,7 @@ public class ConfigureMapMenu {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
 							boolean areAnyGpxTracksVisible =
-									ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles();
+									selectedGpxHelper.isShowingAnyGpxFiles();
 							item.setSelected(areAnyGpxTracksVisible);
 							item.setColorRes(areAnyGpxTracksVisible ? R.color.osmand_orange : defaultColor);
 							adapter.notifyDataSetChanged();
@@ -222,6 +224,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_gpx_layer, activity)
 				.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles())
+				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
 				.setColor(selected ? R.color.osmand_orange : defaultColor)
 				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
