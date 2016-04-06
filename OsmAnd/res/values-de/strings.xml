@@ -2133,4 +2133,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="rendering_value_thin_name">Dünn</string>
     <string name="rendering_value_medium_name">Mittel</string>
     <string name="rendering_value_bold_name">Fett</string>
+    <string name="map_mode">Kartenmodus</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX Dateien ausgewählt</string>
     </resources>
