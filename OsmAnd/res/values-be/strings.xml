@@ -1417,14 +1417,14 @@
 \n - Калі вам трэба стварыць групу з іншымі ўмовамі, калі ласка, зьвяртайцеся на http://osmo.mobi"</string>
     <string name="osmo_auth_error_short">Не атрымалася выканаць аўтарызацыю</string>
     <string name="osmo_auth_error">Адбылася памылка аўтарызацыі OsMo: %1$s.\nГэта можа быць выклікана часовай непрацаздольнасьцю службы ці сканьчэньнем вашай рэгістрацыі.\nХочаце зарэгістравацца ізноў?</string>
-    <string name="rendering_attr_hideBuildings_name">Схаваць будынкі</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Схаваць не аўтамабільныя дарогі</string>
-    <string name="rendering_attr_hideText_name">Схаваць тэкст</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Схаваць лясы і хмызьнякі</string>
+    <string name="rendering_attr_hideBuildings_name">Будынкі</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Не аўтамабільныя дарогі</string>
+    <string name="rendering_attr_hideText_name">Тэкст</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Лясы і хмызьнякі</string>
     <string name="rendering_attr_buildings15zoom_name">Будынкі на маштабе 15</string>
     <string name="rendering_attr_moreDetailed_name">Больш падрабязна</string>
     <string name="rendering_attr_lessDetailed_name">Менш падрабязна</string>
-    <string name="rendering_attr_hideAccess_name">Схаваць абмежаваньні доступу</string>
+    <string name="rendering_attr_hideAccess_name">Абмежаваньні доступу</string>
     <string name="rendering_attr_showAccess_name">Паказаць абмежаваньні доступу</string>
     <string name="rendering_attr_showSurfaceGrade_name">Адлюстроўваць якасьць дарог</string>
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцьця</string>
@@ -1779,7 +1779,7 @@
     <string name="storage_directory">Захоўваньне мапы</string>
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
     <string name="application_dir_change_warning3">Вы хочаце, каб OsmAnd таксама скапіяваў свае файлы дадзеных у новае месца прызначэньня?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Схаваць нумары дамоў</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Нумары дамоў</string>
     
 	<string name="routing_attr_avoid_borders_description">Пазьбягаць перасячэньня мяжы іншай краіны</string>
 	<string name="routing_attr_height_name">Абмежаваньне па вышыні</string>
@@ -2003,7 +2003,7 @@
     <string name="techical_articles_item">Тэхнічныя артыкулы</string>
     <string name="read_more">Падрабязьней</string>
     <string name="whats_new">Што новага ў</string>
-    <string name="rendering_attr_hideProposed_name">Схаваць плануемыя аб\'екты</string>
+    <string name="rendering_attr_hideProposed_name">Плануемыя аб\'екты</string>
     <string name="lang_mk">македонская</string>
     <string name="lang_nds">ніжненямецкая</string>
     <string name="lang_fy">заходнефрыская</string>
@@ -2098,7 +2098,7 @@
     <string name="shared_string_remove">Выдаліць</string>
     <string name="road_blocked">Дарога заблякаваная</string>
     <string name="switch_start_finish">Памяняць месцамі пункт адпраўленьня і пункт прызначэньня</string>
-    <string name="rendering_attr_hideIcons_name">Схаваць значкі POI</string>
+    <string name="rendering_attr_hideIcons_name">Значкі POI</string>
     <string name="rec_split">Разьбіцьцё на кліпы</string>
     <string name="rec_split_title">Выкарыстоўваць разьбіцьцё на кліпы</string>
     <string name="rec_split_desc">Цыклічны перазапіс кліпаў пры перавышэньні зададзенага аб\'ёму сховішча</string>
@@ -2112,7 +2112,7 @@
     <string name="shared_string_status">Стан</string>
     <string name="shared_string_save_changes">Захаваць зьмены</string>
     <string name="shared_string_email_address">E-mail адрас</string>
-    <string name="rendering_attr_hideUnderground_name">Схаваць падземныя аб\'екты</string>
+    <string name="rendering_attr_hideUnderground_name">Падземныя аб\'екты</string>
     <string name="data_is_not_available">Зьвесткі недаступныя</string>
     <string name="shared_string_read_more">Чытаць далей</string>
     <string name="clear_updates_proposition_message">Вы можаце выдаліць сьцягнутыя абнаўленьні і вярнуцца да першапачатковай рэдакцыі мапы</string>
