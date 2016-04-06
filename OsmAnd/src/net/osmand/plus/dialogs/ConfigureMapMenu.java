@@ -107,10 +107,10 @@ public class ConfigureMapMenu {
 		@Override
 		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
 			if (itemId == R.string.layer_poi) {
-				selectPOILayer(ma.getMyApplication().getSettings());
+				selectPOILayer(adapter, adapter.getItem(pos));
 				return false;
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
-				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+				showGpxSelectionDialog();
 				return false;
 			} else {
 				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
@@ -136,7 +136,7 @@ public class ConfigureMapMenu {
 			if (itemId == R.string.layer_poi) {
 				settings.SELECTED_POI_FILTER_FOR_MAP.set(null);
 				if (isChecked) {
-					selectPOILayer(settings);
+					selectPOILayer(adapter, adapter.getItem(pos));
 				} else {
 					adapter.getItem(pos).setDescription(POIMapLayer.getSelectedPoiName(ma.getMyApplication()));
 				}
@@ -150,18 +150,7 @@ public class ConfigureMapMenu {
 					selectedGpxHelper.clearAllGpxFileToShow();
 					adapter.getItem(pos).setDescription(selectedGpxHelper.getGpxDescription());
 				} else {
-					AlertDialog dialog = ma.getMapLayers()
-							.showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
-					dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							boolean areAnyGpxTracksVisible =
-									selectedGpxHelper.isShowingAnyGpxFiles();
-							item.setSelected(areAnyGpxTracksVisible);
-							item.setColorRes(areAnyGpxTracksVisible ? R.color.osmand_orange : defaultColor);
-							adapter.notifyDataSetChanged();
-						}
-					});
+					showGpxSelectionDialog();
 				}
 			} else if (itemId == R.string.layer_map) {
 				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
@@ -179,14 +168,25 @@ public class ConfigureMapMenu {
 			return false;
 		}
 
-		protected void selectPOILayer(final OsmandSettings settings) {
+		private void showGpxSelectionDialog() {
+			ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+		}
+
+		protected void selectPOILayer(final ArrayAdapter<ContextMenuItem> adapter,
+									  final ContextMenuItem item) {
 			final PoiUIFilter[] selected = new PoiUIFilter[1];
 			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), selected);
 			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
 
 				@Override
 				public void onDismiss(DialogInterface dialog) {
-					ma.getDashboard().refreshContent(true);
+					OsmandApplication myApplication = ma.getMyApplication();
+					boolean selected = myApplication.getSettings()
+							.SELECTED_POI_FILTER_FOR_MAP.get() != null;
+					item.setSelected(selected);
+					item.setDescription(POIMapLayer.getSelectedPoiName(myApplication));
+					item.setColorRes(selected ? R.color.osmand_orange : defaultColor);
+					adapter.notifyDataSetChanged();
 				}
 			});
 		}
