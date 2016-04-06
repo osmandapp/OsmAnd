@@ -2004,4 +2004,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="add_time_span">Afegeix un lapse de temps</string>
     <string name="rec_split">Divisió d\'enregistrament</string>
     <string name="rec_split_title">Utilitza divisió d\'enregistrament</string>
+    <string name="map_mode">Mode mapa</string>
+    <string name="number_of_gpx_files_selected_pattern">"Seleccionats  %s arxius GPX"</string>
     </resources>
