@@ -60,13 +60,10 @@ public class RouteResultPreparation {
 			TurnType t = result.get(i).getTurnType();
 			// justify turn
 			if (t != null) {
-				boolean turnOnSameStreet = result.get(i).getObject().id == result.get(next).getObject().id;
-				if (turnOnSameStreet) {
-					TurnType jt = justifyUTurn(leftSide, result, i, t);
-					if (jt != null) {
-						result.get(i).setTurnType(jt);
-						next = i + 2;
-					}
+				TurnType jt = justifyUTurn(leftSide, result, i, t);
+				if (jt != null) {
+					result.get(i).setTurnType(jt);
+					next = i + 2;
 				}
 			}
 		}
