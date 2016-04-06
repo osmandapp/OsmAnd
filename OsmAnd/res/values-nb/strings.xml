@@ -275,7 +275,7 @@
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
 
-    <string name="local_index_mi_reload">Last på nytt fra sd-kort</string>
+    <string name="local_index_mi_reload">Last på nytt fra SD-kort</string>
     <string name="shared_string_download">Last ned</string>
 
     <string name="local_index_poi_data">Interessepunkt-data</string>
@@ -571,7 +571,7 @@
     <string name="edit_filter_delete_message">Filter {0} har blitt slettet</string>
     <string name="edit_filter_create_message">Filter {0} har blitt opprettet</string>
 
-    <string name="email">E-post</string>
+    <string name="email">e-post</string>
     <string name="map_widget_gps_info">GPS-info</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="prefer_motorways">Foretrekk motorveier</string>
@@ -702,7 +702,7 @@
     <string name="lang_hr">Kroatisk</string>
     <string name="calculate_osmand_route_without_internet">Beregn OsmAnd-rutesegment uten internett</string>
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
-    <string name="osmo_settings_uuid">Unik enhets-id</string>
+    <string name="osmo_settings_uuid">Unik enhets-ID</string>
     <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
     <string name="osmo_plugin_name">OpenStreetMap-overvåking</string>
     <string name="osmo_settings">OsMo</string>
@@ -713,7 +713,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapper under navigering</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
-    <string name="map_widget_plain_time">Gjeldende tid</string>
+    <string name="map_widget_plain_time">Nåtid</string>
     <string name="osmo_edit_color">Visningsfarge</string>
     <string name="always_center_position_on_map">Vis posisjon alltid i midten</string>
     <string name="guidance_preferences_descr">Navigeringsinnstillinger</string>
@@ -725,7 +725,7 @@
     <string name="plugins_screen">Programtillegg</string>
     <string name="prefs_plugins_descr">Programtillegg aktiverer avanserte innstillinger og flere funksjoner</string>
     <string name="prefs_plugins">Programtillegg</string>
-    <string name="show_point_options">Bruk posisjon…</string>
+    <string name="show_point_options">Bruk posisjon …</string>
     <string name="wake_on_voice">Slå på skjermen</string>
 
     <string name="impassable_road">Unngå veier…</string>
@@ -797,7 +797,7 @@
     <string name="gpx_wpt">Rutepunkt</string>
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
-    <string name="localization_pref_title">Lokaltilpassing</string>
+    <string name="localization_pref_title">Lokaltilpasning</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
     <string name="lang_fa">Persisk</string>
@@ -858,7 +858,7 @@
     <string name="incomplete_locale">ufullstendig</string>
     <string name="context_menu_item_add_waypoint">Legg til GPX-rutepunkt</string>
     <string name="voice_is_not_available_title">Ingen taleveiledning valgt</string>
-    <string name="select_max_zoom_preload_area">Velg maksimum zoom til å forhåndslaste</string>
+    <string name="select_max_zoom_preload_area">Velg maksimalt zoomnivål å forhåndslaste</string>
     <string name="voice_data_initializing">Initialiserer taledata…</string>
     <string name="update_poi_is_not_available_for_zoom">Oppdatering av interessepunkter er ikke tilgjengelig ved lave zoomnivåer</string>
     <string name="arrived_at_destination">Du har ankommet ditt reisemål</string>
@@ -932,7 +932,7 @@
     <string name="srtm_paid_version_title">Programtillegg for koter</string>
     <string name="av_settings_descr">Still inn lyd og video</string>
     <string name="av_settings">"Lyd/video-innstillinger "</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-programtillegg for offline koter</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-programtillegg for frakoblede koter</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
 
     <string name="index_srtm_ele">Koter</string>
@@ -975,7 +975,7 @@
     <string name="loading_postcodes">Laster postnummer…</string>
     <string name="loading_data">Laster data…</string>
 	
-	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå standardkartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
+	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med skråningsskygger som kan vises vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
 \n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
 
     <string name="first_time_msg">Takk for at du bruker OsmAnd. For mange funksjoner i dette programmet trenger du noen regionale offline-data som du kan laste ned via \'Innstillinger\' → \'Karthåndtering\'. Etterpå vil du være i stand til å se kart, finne adresser, lete etter interessepunkter og finne offentlig transport.</string>
@@ -1046,7 +1046,7 @@
     <string name="route_descr_destination">Reisemål</string>
     <string name="gpx_file_name">GPX-filnavn</string>
     <string name="osmand_distance_planning_plugin_name">Distansekalkulator &amp; planleggingsverktøy</string>
-    <string name="layer_hillshade">Relieffskyggelag</string>
+    <string name="layer_hillshade">Skråningsskyggelag</string>
 
     <string name="download_hillshade_maps">Relieffskygger</string>
 
@@ -1095,7 +1095,7 @@
     <string name="rendering_attr_roadStyle_name">Veistil</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
-    <string name="rendering_value_germanRoadAtlas_name">Tysk veiatlas</string>
+    <string name="rendering_value_germanRoadAtlas_name">Tyskt veiatlas</string>
     <string name="traffic_warning_railways">Jernbaneovergang</string>
     <string name="traffic_warning_pedestrian">Fotgjengerovergang</string>
     <string name="show_railway_warnings">Vis jernbaneoverganger</string>
@@ -1127,7 +1127,7 @@
     <string name="map_overlay_descr">Velg overleggskart</string>
     <string name="audionotes_plugin_name">Audio/video-notater</string>
     <string name="osm_settings">OSM-redigering</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå standardkartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
+	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med skråningsskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
 \n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="plugin_ski_name">Skikartvisning</string>
     <string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for TTS-tale, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for zoomkontroll, eller bruke tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
@@ -1171,7 +1171,7 @@
     <string name="shared_string_help">Hjelp</string>
     <string name="shared_string_settings">Innstillinger</string>
     <string name="shared_string_history">Historikk</string>
-    <string name="shared_string_select_on_map">Velg på kart</string>
+    <string name="shared_string_select_on_map">Velg i kart</string>
     <string name="shared_string_save">Lagre</string>
     <string name="shared_string_save_as_gpx">Lagre som GPX-spor</string>
     <string name="shared_string_rename">Endre navn</string>
@@ -1263,8 +1263,8 @@
     <string name="shared_string_copy">Kopier</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
     <string name="shared_string_release">Utgitt</string>
-    <string name="local_index_items_backuped">%1$d av %2$d element(er) vellykket deaktivert.</string>
-    <string name="local_index_items_deleted">%1$d av %2$d element(er) vellykket slettet.</string>
+    <string name="local_index_items_backuped">Vellykket deaktivering av %1$d av %2$d element(er).</string>
+    <string name="local_index_items_deleted">Vellykket sletting av %1$d av %2$d element(er).</string>
     <string name="local_index_items_restored">%1$d av %2$d element(er) vellykket aktivert.</string>
     <string name="local_index_no_items_to_do">Aksjon %1$s: Ingen elementer finnes</string>
     <string name="local_index_action_do">%1$s: %2$s element(er). Fortsette?</string>
@@ -1393,7 +1393,7 @@
     <string name="regions">Regioner</string>
     <string name="region_maps">Regionkart</string>
     <string name="world_maps">Verdenskart</string>
-    <string name="hillshade_layer_disabled">Relieffskyggelag deaktivert</string>
+    <string name="hillshade_layer_disabled">Skråningsskyggelag avskrudd</string>
     <string name="share_menu_location">Del posisjon</string>
     <string name="shared_string_send">Send</string>
     <string name="map_downloaded">Kart lastet ned</string>
@@ -1405,7 +1405,7 @@
     <string name="update_all">Oppdater alle (%1$s MB)</string>
     <string name="free_downloads_used">Gratis nedlastinger brukt</string>
     <string name="application_dir_description">Velg hvor du vil lagre kartfiler.</string>
-    <string name="enter_country_name">Oppfør navn på land</string>
+    <string name="enter_country_name">Oppgi navn på land</string>
     <string name="world_map_download_descr">Basiskart verden (som dekker hele verden ved lav zoom) mangler eller er utdatert. Vurder å laste ned Basiskart verden for et komplett miljø.</string>
     <string name="shared_string_qr_code">QR-kode</string>
     <string name="basemap_was_selected_to_download">Basiskart er nødvendig for at programmet skal fungere riktig og ble valgt for å laste ned.</string>
@@ -1526,8 +1526,8 @@
     <string name="recalculate_route">Beregn rute på nytt</string>
     <string name="no_map_markers_found">Legg til kartmarkører via kart</string>
     <string name="no_waypoints_found">Ingen rutepunkter funnet</string>
-    <string name="shared_string_move_up">Flytt opp</string>
-    <string name="shared_string_move_down">Flytt ned</string>
+    <string name="shared_string_move_up">Flytt oppover</string>
+    <string name="shared_string_move_down">Flytt nedover</string>
     <string name="finish_navigation">Avslutt navigering</string>
     <string name="avoid_road">Unngå vei</string>
     <string name="storage_directory_shared">Delt minne</string>
@@ -1549,4 +1549,66 @@
     <string name="looking_up_address">Ser etter adresse</string>
     <string name="cancel_route">Forkast rute</string>
     <string name="file_name_containes_illegal_char">Filnavn inneholder ulovlig tegn</string>
-</resources>
+<string name="rendering_value_thin_name">Tynt</string>
+    <string name="rendering_value_medium_name">Middels</string>
+    <string name="rendering_value_bold_name">Fet</string>
+    <string name="osmo_connect_to_group_id">Gruppe-ID</string>
+    <string name="osmo_connect_to_my_nickname">Kallenavn</string>
+    <string name="donations">Donasjoner</string>
+    <string name="number_of_recipients">Antall mottakere</string>
+    <string name="osm_live_subscribe_btn">Abonner</string>
+    <string name="osm_live_user_public_name">Offentlig navn</string>
+    <string name="osm_live_month_cost">Månedlig kostnad</string>
+    <string name="osm_live_month_cost_desc">Månedlig avdrag</string>
+    <string name="osm_live_active">Aktiv</string>
+    <string name="osm_live_not_active">Inaktiv</string>
+    <string name="osm_live_enter_email">Skriv inn en gyldig E-postadresse</string>
+    <string name="osm_live_enter_user_name">Skriv inn offentlig navn</string>
+    <string name="osm_live_subscription_settings">Abonnementsinnstillinger</string>
+    <string name="shared_string_logoff">Logg av</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Fargelegger i henhold til OSMC</string>
+    <string name="proxy_pref_title">Mellomtjener</string>
+    <string name="gpx_selection_number_of_points">" %1$s punkter"</string>
+    <string name="osmo_group_policy">Praksis</string>
+    <string name="osmo_connect_to_device_name">Brukernavn</string>
+    <string name="osmo_group_name">Gruppenavn</string>
+    <string name="osmo_connect_to_device">Lenk med enheten</string>
+    <string name="osmo_connect_to_group">Lenk med gruppe</string>
+    <string name="osmo_create_group">Opprett gruppe</string>
+    <string name="osmo_connected_devices">Tilkoblede enheter</string>
+    <string name="osmo_session_token">Øktsymbol: %1$s</string>
+    <string name="osmo_settings_debug">Feilrettingsinformasjon</string>
+    <string name="accessibility_options">Tilgjengelighetsvalg</string>
+    <string name="local_openstreetmap_act_title">OSM-endringer</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="intermediate_points_change_order">Endre rekkefølge</string>
+    <string name="av_def_action_choose">Velg på forespørsel</string>
+    <string name="av_def_action_video">Ta opp video</string>
+    <string name="av_def_action_audio">Ta opp lyd</string>
+    <string name="recording_context_menu_delete">Slett opptak</string>
+    <string name="recording_context_menu_play">Spill av</string>
+    <string name="int_continuosly">Sammenhengende</string>
+    <string name="gpxup_trackable">Sporbar</string>
+    <string name="gpxup_identifiable">Identifiserbar</string>
+    <string name="context_menu_item_delete_parking_point">Slett en parkeringsmarkering</string>
+    <string name="asap">Omgående</string>
+    <string name="share_route_subject">Rute delt via OsmAnd</string>
+    <string name="confirm_interrupt_download">Ønsker du å avbryte nedlasting av fila?</string>
+    <string name="gpx_tags_txt">Merkelapper</string>
+    <string name="default_buttons_support">Brukerstøtte</string>
+    <string name="first_time_continue">Senere</string>
+    <string name="transport_to_go_after">tidligere distanse</string>
+    <string name="transport_to_go_before">påfølgende distanse</string>
+    <string name="transport_stops_to_pass">stopp å passere</string>
+    <string name="finished_task">Fullført</string>
+    <string name="poi_action_delete">slett</string>
+    <string name="poi_error_io_error_template">I/O-feil under utførelse av handlingen {0}.</string>
+    <string name="user_hates_app_get_feedback">Fortell oss hvorfor.</string>
+    <string name="failed_to_upload">Klarte ikke å laste opp</string>
+    <string name="buy">KJØP</string>
+    <string name="faq_item">O-S-S</string>
+    <string name="number_of_edits">Antall endringer</string>
+    <string name="number_of_contributors">Antall bidragsytere</string>
+    <string name="morning">Morgen</string>
+    <string name="night">Natt</string>
+    </resources>
