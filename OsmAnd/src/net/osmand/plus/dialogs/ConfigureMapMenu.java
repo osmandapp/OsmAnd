@@ -269,10 +269,9 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_widget_map_rendering, activity)
 				.setCategory(true)
 				.setLayout(R.layout.list_group_title_with_switch).createItem());
-		String descr = getRenderDescr(activity);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_widget_renderer, activity)
-				.setDescription(descr)
+				.setDescription(getRenderDescr(activity))
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_map)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -319,7 +318,7 @@ public class ConfigureMapMenu {
 				}).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.map_widget_day_night, activity)
+				.setTitleId(R.string.map_mode, activity)
 				.setDescription(getDayNightDescr(activity))
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(getDayNightIcon(activity))
@@ -444,9 +443,12 @@ public class ConfigureMapMenu {
 					}
 				}).createItem());
 
+		String localeDescr = activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get();
+		localeDescr = localeDescr == null || localeDescr.equals("") ?
+				activity.getString(R.string.local_map_names) : localeDescr;
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_locale, activity)
-				.setDescription(activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get())
+				.setDescription(localeDescr)
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_language)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -471,7 +473,10 @@ public class ConfigureMapMenu {
 							public void onClick(DialogInterface dialog, int which) {
 								view.getSettings().MAP_PREFERRED_LOCALE.set(txtIds[which]);
 								refreshMapComplete(activity);
-								adapter.getItem(pos).setDescription(txtIds[which]);
+								String localeDescr = txtIds[which];
+								localeDescr = localeDescr == null || localeDescr.equals("") ?
+										activity.getString(R.string.local_map_names) : localeDescr;
+								adapter.getItem(pos).setDescription(localeDescr);
 								ad.notifyDataSetInvalidated();
 								dialog.dismiss();
 							}

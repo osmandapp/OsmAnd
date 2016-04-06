@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_mode">Map mode</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX files selected</string>
     <string name="rendering_value_thin_name">Thin</string>
     <string name="rendering_value_medium_name">Medium</string>
@@ -1426,7 +1427,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="select_navigation_mode">Select transport mode</string>
     <string name="day_night_info_description">Sunrise: %1$s \nSunset: %2$s</string>
     <string name="day_night_info">Day/night info</string>
-    <string name="map_widget_day_night">Day/night map</string>
     <string name="map_widget_renderer">Map style</string>
     <string name="layer_map_appearance">Configure screen</string>
     <string name="show_lanes">Show lanes</string>
