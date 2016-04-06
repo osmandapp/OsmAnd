@@ -2180,4 +2180,12 @@
 <string name="rendering_value_thin_name">Тонкі</string>
     <string name="rendering_value_medium_name">Сярэдні</string>
     <string name="rendering_value_bold_name">Тоўсты</string>
+    <string name="map_mode">Рэжым мапы</string>
+    <string name="number_of_gpx_files_selected_pattern">Абрана %s GPX файлаў</string>
+    <string name="add_points_to_map_markers_q">Хочаце дадаць усе пункты да маркераў мапы?</string>
+    <string name="shared_string_add_to_map_markers">Дадаць да маркераў мапы</string>
+    <string name="no_map_markers_found">Калі ласка, дадайце маркеры праз экран мапы</string>
+    <string name="storage_directory_readonly_desc">Абраны для захоўваньня зьвестак каталёг даступны толькі для чытаньня. Каталёг захоўваньня часова разьмешчаны ва ўнутранай памяці. Калі ласка, абярыце падыходзячы каталёг для захоўваньня зьвестак.</string>
+    <string name="osm_live_email_desc">Неабходна прадаставіць інфармацыю пра ўкладальнікаў</string>
+    <string name="show_map_markers_description">Актывуе функцыю маркераў мапы</string>
     </resources>
