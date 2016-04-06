@@ -36,6 +36,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRuleProperty;
@@ -136,6 +137,8 @@ public class ConfigureMapMenu {
 				settings.SELECTED_POI_FILTER_FOR_MAP.set(null);
 				if (isChecked) {
 					selectPOILayer(settings);
+				} else {
+					adapter.getItem(pos).setDescription(POIMapLayer.getSelectedPoiName(ma.getMyApplication()));
 				}
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
@@ -209,6 +212,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(settings.SELECTED_POI_FILTER_FOR_MAP.get() != null)
+				.setDescription(POIMapLayer.getSelectedPoiName(app))
 				.setColor(selected ? R.color.osmand_orange : defaultColor)
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
