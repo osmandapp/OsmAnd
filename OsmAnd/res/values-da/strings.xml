@@ -146,8 +146,8 @@
     <string name="osmand_plus_short_description_80_chars">Global mobilkort for visning &amp; navigation til offline og online OSM kort</string>
 
     <string name="filterpoi_activity">Opret interessepunkt-filter</string>
-    <string name="recalculate_route_to_your_location">Transportform:</string>
-    <string name="select_navigation_mode">Vælg transportform</string>
+    <string name="recalculate_route_to_your_location">Transporttilstand:</string>
+    <string name="select_navigation_mode">Vælg transporttilstand</string>
 	
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
@@ -1552,9 +1552,9 @@
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Stop</string>
-    <string name="enable_sleep_mode">Aktiver GPS baggrundstjenesten</string>
+    <string name="enable_sleep_mode">Aktiver GPS baggrundstilstand</string>
     <string name="gps_wake_up_timer">GPS vågn-op interval</string>
-    <string name="sleep_mode_stop_dialog">Stop GPS baggrundstjenesten?</string>
+    <string name="sleep_mode_stop_dialog">Stop GPS baggrundstilstand?</string>
     <string name="keep_navigation_service">Hold</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
@@ -2241,7 +2241,7 @@
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - find steder på kortet og beregn ruter uden en internetforbindelse. Hent kort for et land, før rejsen og find steder og ruter i et ukendt område.
 \n\nGrundlæggende indstillinger:
 \n• Detaljerede kort for 200 lande
-\n• Offline navigation med stemmevejledning\n• Adressesøgning i offline mode
+\n• Offline navigation med stemmevejledning\n• Adressesøgning i offline tilstand
 \n• Info om steder på kortet: steder af interesse, caféer, parkeringspladser, butikker
 \n• Tilføj steder til foretrukne
 \n• Kørsel-, cykel- og fodgængernavigation
