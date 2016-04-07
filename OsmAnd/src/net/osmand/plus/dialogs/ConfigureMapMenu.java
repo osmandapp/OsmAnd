@@ -85,7 +85,8 @@ public class ConfigureMapMenu {
 	private final class LayerMenuListener extends OnRowItemClick {
 		private MapActivity ma;
 		private ContextMenuAdapter cm;
-		@ColorRes final int defaultColor;
+		@ColorRes
+		final int defaultColor;
 
 		private LayerMenuListener(MapActivity ma, ContextMenuAdapter cm) {
 			this.ma = ma;
@@ -109,7 +110,8 @@ public class ConfigureMapMenu {
 				selectPOILayer(adapter, adapter.getItem(pos));
 				return false;
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
-				showGpxSelectionDialog();
+				showGpxSelectionDialog(adapter, adapter.getItem(pos));
+
 				return false;
 			} else {
 				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
@@ -149,7 +151,7 @@ public class ConfigureMapMenu {
 					selectedGpxHelper.clearAllGpxFileToShow();
 					adapter.getItem(pos).setDescription(selectedGpxHelper.getGpxDescription());
 				} else {
-					showGpxSelectionDialog();
+					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
 			} else if (itemId == R.string.layer_map) {
 				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
@@ -167,8 +169,21 @@ public class ConfigureMapMenu {
 			return false;
 		}
 
-		private void showGpxSelectionDialog() {
-			ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+		private void showGpxSelectionDialog(final ArrayAdapter<ContextMenuItem> adapter,
+											final ContextMenuItem item) {
+			AlertDialog dialog = ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(),
+					ma.getMapView());
+			dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					OsmandApplication app = ma.getMyApplication();
+					boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
+					item.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles());
+					item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
+					item.setColorRes(selected ? R.color.osmand_orange : defaultColor);
+					adapter.notifyDataSetChanged();
+				}
+			});
 		}
 
 		protected void selectPOILayer(final ArrayAdapter<ContextMenuItem> adapter,
@@ -499,7 +514,7 @@ public class ConfigureMapMenu {
 			createProperties(customRules, R.string.rendering_category_details,
 					R.drawable.widget_no_icon, "details", adapter, activity);
 			createProperties(customRules, R.string.rendering_category_hide,
-					R.drawable.ic_action_hide,"hide", adapter, activity);
+					R.drawable.ic_action_hide, "hide", adapter, activity);
 			createProperties(customRules, R.string.rendering_category_routes,
 					R.drawable.ic_action_map_routes, "routes", adapter, activity);
 
