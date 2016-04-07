@@ -51,8 +51,10 @@
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
             android:textSize="@dimen/default_desc_text_size"
-            tools:text="Some subtitle text"/>
+            tools:text="Some very long subtitle text, that won't fit into one line"/>
 
         <View
             android:layout_width="0dp"
