@@ -164,8 +164,8 @@
     <string name="rendering_value_highContrastRoads_name">Caminos en alto contraste</string>
     <string name="traffic_warning_railways">Cruce de ferrocarril</string>
     <string name="traffic_warning_pedestrian">Cruce peatonal</string>
-    <string name="show_railway_warnings">Mostrar cruces de ferrocarril</string>
-    <string name="show_pedestrian_warnings">Mostrar cruces peatonales</string>
+    <string name="show_railway_warnings">Cruces de ferrocarril</string>
+    <string name="show_pedestrian_warnings">Cruces peatonales</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas de caminos americanos</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar reglas de navegación introducidas en v.1.9</string>
@@ -254,10 +254,10 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de los caminos</string>
-    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de los caminos</string>
-    <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
+    <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
+    <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
     <string name="osmo_auth_error_short">Falló la autorización</string>
     <string name="osmo_group_by_invite">Entrar por invitación</string>
     <string name="osmo_auto_connect">Autoconectar</string>
@@ -772,7 +772,7 @@
     <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC</string>
-    <string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
+    <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5-9)</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">GPX</string>
@@ -964,7 +964,7 @@
     <string name="map_widget_day_night">Mapa día/noche</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
-    <string name="show_lanes">Mostrar carriles</string>
+    <string name="show_lanes">Carriles</string>
     <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
     <string name="avoid_ferries">Evitar ferris/transbordadores</string>
     <string name="avoid_in_routing_title">Evitar…</string>
@@ -998,8 +998,8 @@
     <string name="bg_service_screen_unlock">Desbloquear pantalla</string>
     <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
     <string name="bg_service_interval">Definir intervalo de activación:</string>
-    <string name="show_cameras">Mostrar radares</string>
-    <string name="show_traffic_warnings">Mostrar límites de velocidad</string>
+    <string name="show_cameras">Radares</string>
+    <string name="show_traffic_warnings">Límites de velocidad</string>
     <string name="avoid_toll_roads">Evitar peajes</string>
     <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
     <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
@@ -1043,7 +1043,7 @@
     <string name="route_kl">Mantente a la izquierda y continúa por</string>
     <string name="route_kr">Mantente a la derecha y continúa por</string>
     <string name="rendering_attr_noPolygons_description">Hacer todas las funciones del terreno transparentes en el mapa</string>
-    <string name="rendering_attr_noPolygons_name">Ocultar polígonos</string>
+    <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de dibujo</string>
     <string name="rendering_attr_appMode_description">Optimizar mapa para</string>
     <string name="rendering_attr_contourLines_description">Mostrar desde el nivel de ampliación (requiere datos de contorno):</string>
@@ -2081,7 +2081,7 @@
     <string name="find_parking">Encontrar estacionamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
     <string name="underlay_transparency">Transparencia subyacente</string>
-    <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas de BTT</string>
+    <string name="rendering_attr_showMtbRoutes_name">Rutas de BTT</string>
     <string name="shared_string_reverse_order">Invertir orden</string>
     <string name="show_map_markers">Marcadores del mapa</string>
     <string name="show_map_markers_description">Activar función de marcadores del mapa</string>
