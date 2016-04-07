@@ -375,7 +375,7 @@
     <string name="i_am_here">Jeg er her</string>
     <string name="zoom_by_trackball_descr">Skift kortzoom via vandrette trackball bevægelser</string>
     <string name="zoom_by_trackball">Brug trackball til zoom</string>
-    <string name="use_short_object_names_descr">Brug korte objektnavne i touch udforskning tilstand</string>
+    <string name="use_short_object_names_descr">Brug korte objektnavne i berøringstilstand</string>
     <string name="use_short_object_names">Objektnavne</string>
     <string name="accessibility_preferences_descr">Tilgængelighedsrelaterede indstillinger</string>
     <string name="shared_string_accessibility">Tilgængelighed</string>
@@ -435,7 +435,7 @@
     <string name="open_street_map_login_descr">Nødvendige for ændringer i openstreetmap.org</string>
     <string name="user_password">OSM-kodeord</string>
     <string name="user_password_descr">Nødvendig for ændringer i openstreetmap.org</string>
-    <string name="osmand_service">Kørsel i baggrunden</string>
+    <string name="osmand_service">Baggrundstilstand</string>
     <string name="osmand_service_descr">OsmAnd kører i baggrunden, mens skærmen er slukket</string>
 
 
@@ -1190,7 +1190,7 @@
     <string name="av_camera_focus_auto">Autofokus</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokalafstand</string>
     <string name="av_camera_focus_infinity">Uendelig fokus</string>
-    <string name="av_camera_focus_macro">Makro (nærbillede) fokusindstilling</string>
+    <string name="av_camera_focus_macro">Makrofokustilstand (nærbillede)</string>
     <string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
     <string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
     <string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
