@@ -322,7 +322,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			List<String> options = new ArrayList<String>();
 
 
-			options.add(app.getString(R.string.none));
+			options.add(app.getString(R.string.shared_string_none));
 			distanceSplit.add(-1d);
 			timeSplit.add(-1);
 			addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, groups); // 50 feet, 20 yards, 20
