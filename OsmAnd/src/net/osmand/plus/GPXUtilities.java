@@ -32,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -39,6 +40,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -64,7 +66,7 @@ public class GPXUtilities {
 			}
 			return extensions;
 		}
-		
+
 		public int getColor(int defColor) {
 			if(extensions != null && extensions.containsKey("color")) {
 				try {
@@ -75,7 +77,7 @@ public class GPXUtilities {
 			}
 			return defColor;
 		}
-		
+
 		public void setColor(int color) {
 			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
 		}
@@ -153,7 +155,7 @@ public class GPXUtilities {
 			return lon;
 		}
 
-		
+
 		@Override
 		public PointDescription getPointDescription(Context ctx) {
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, name);
@@ -209,22 +211,22 @@ public class GPXUtilities {
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
 			return split(getDistanceMetric(), getTimeSplit(), meters);
 		}
-		
+
 		public List<GPXTrackAnalysis> splitByTime(int seconds) {
 			return split(getTimeSplit(), getDistanceMetric(), seconds);
 		}
-		
+
 		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit) {
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this);
 			return convert(splitSegments);
 		}
 
-		public void drawRenderers(double zoom, Paint p, Canvas c, RotatedTileBox tb) {
-			for (Renderable.RenderableSegment rs : renders) {
-				rs.drawSegment(zoom, p, c, tb);
-			}
-		}
+//		public void drawRenderers(double zoom, Paint p, Canvas c, RotatedTileBox tb) {
+//			for (Renderable.RenderableSegment rs : renders) {
+//				rs.drawSegment(zoom, p, c, tb);
+//			}
+//		}
 	}
 
 	public static class Track extends GPXExtensions {
@@ -240,7 +242,7 @@ public class GPXUtilities {
 		public List<WptPt> points = new ArrayList<WptPt>();
 
 	}
-	
+
 	public static class GPXTrackAnalysis {
 		public float totalDistance = 0;
 		public int totalTracks = 0;
@@ -255,13 +257,13 @@ public class GPXUtilities {
 		public double avgElevation = 0;
 		public double minElevation = 99999;
 		public double maxElevation = -100;
-		
+
 		public float maxSpeed = 0;
 		public float avgSpeed;
-		
+
 		public int points;
 		public int wptPoints = 0;
-		
+
 		public double metricEnd;
 		public double secondaryMetricEnd;
 		public WptPt locationStart;
@@ -270,24 +272,24 @@ public class GPXUtilities {
 		public boolean isTimeSpecified() {
 			return startTime != Long.MAX_VALUE && startTime != 0;
 		}
-		
+
 		public boolean isTimeMoving() {
 			return timeMoving != 0;
 		}
-		
+
 		public boolean isElevationSpecified() {
 			return maxElevation != -100;
 		}
-		
+
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
 		}
-		
-		
+
+
 		public static GPXTrackAnalysis segment(long filetimestamp, TrkSegment segment) {
 			return new GPXTrackAnalysis().prepareInformation(filetimestamp, new SplitSegment(segment));
 		}
-		
+
 		public GPXTrackAnalysis prepareInformation(long filestamp, SplitSegment... splitSegments) {
 			float[] calculations = new float[1];
 
@@ -296,7 +298,7 @@ public class GPXUtilities {
 			int speedCount = 0;
 			double totalSpeedSum = 0;
 			points = 0;
-			
+
 			double channelThresMin = 5;            // Minimum oscillation amplitude considered as noise for Up/Down analysis
 			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop
 			double channelBase;
@@ -452,9 +454,9 @@ public class GPXUtilities {
 			}
 			return this;
 		}
-		
+
 	}
-	
+
 	private static class SplitSegment {
 		TrkSegment  segment;
 		double startCoeff = 0;
@@ -463,7 +465,7 @@ public class GPXUtilities {
 		int endPointInd;
 		double metricEnd;
 		double secondaryMetricEnd;
-		
+
 		public SplitSegment(TrkSegment s) {
 			startPointInd = 0;
 			startCoeff = 0;
@@ -471,18 +473,18 @@ public class GPXUtilities {
 			endCoeff = 1;
 			this.segment = s;
 		}
-		
+
 		public SplitSegment(TrkSegment s, int pointInd, double cf) {
 			this.segment = s;
 			this.startPointInd = pointInd;
 			this.startCoeff = cf;
 		}
-		
-		
+
+
 		public int getNumberOfPoints() {
 			return endPointInd - startPointInd + 2;
 		}
-		
+
 		public WptPt get(int j) {
 			final int ind = j + startPointInd;
 			if(j == 0) {
@@ -500,7 +502,7 @@ public class GPXUtilities {
 			return segment.points.get(ind);
 		}
 
-		
+
 		private WptPt approx(WptPt w1, WptPt w2, double cf) {
 			long time = value(w1.time, w2.time, 0, cf);
 			double speed = value(w1.speed, w2.speed, 0, cf);
@@ -510,7 +512,7 @@ public class GPXUtilities {
 			double lon = value(w1.lon, w2.lon, -360, cf);
 			return new WptPt(lat, lon, time, ele, speed, hdop);
 		}
-		
+
 		private double value(double vl, double vl2, double none, double cf) {
 			if(vl == none || Double.isNaN(vl)) {
 				return vl2;
@@ -529,18 +531,18 @@ public class GPXUtilities {
 			return vl + ((long) (cf * (vl2 - vl)));
 		}
 
-	
+
 		public double setLastPoint(int pointInd, double endCf) {
 			endCoeff = endCf;
 			endPointInd = pointInd;
 			return endCoeff;
 		}
-		
+
 	}
-	
+
 	private static SplitMetric getDistanceMetric() {
 		return new SplitMetric() {
-			
+
 			private float[] calculations = new float[1];
 
 			@Override
@@ -550,10 +552,10 @@ public class GPXUtilities {
 			}
 		};
 	}
-	
+
 	private static SplitMetric getTimeSplit() {
 		return new SplitMetric() {
-			
+
 			@Override
 			public double metric(WptPt p1, WptPt p2) {
 				if(p1.time != 0 && p2.time != 0) {
@@ -563,13 +565,13 @@ public class GPXUtilities {
 			}
 		};
 	}
-	
+
 	private abstract static class SplitMetric {
 
 		public abstract double metric(WptPt p1, WptPt p2);
 
 	}
-	
+
 	private static void splitSegment(SplitMetric metric, SplitMetric secondaryMetric,
 			double metricLimit, List<SplitSegment> splitSegments,
 			TrkSegment segment) {
@@ -585,12 +587,12 @@ public class GPXUtilities {
 				secondaryMetricEnd += secondaryMetric.metric(prev, point);
 				while (total + currentSegment > currentMetricEnd) {
 					double p = currentMetricEnd - total;
-					double cf = (p / currentSegment); 
+					double cf = (p / currentSegment);
 					sp.setLastPoint(k - 1, cf);
 					sp.metricEnd = currentMetricEnd;
 					sp.secondaryMetricEnd = secondaryMetricEnd;
 					splitSegments.add(sp);
-					
+
 					sp = new SplitSegment(segment, k - 1, cf);
 					currentMetricEnd += metricLimit;
 					prev = sp.get(0);
@@ -617,13 +619,13 @@ public class GPXUtilities {
 		}
 		return ls;
 	}
-	
+
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<Track>();
 		public List<WptPt> points = new ArrayList<WptPt>();
 		public List<Route> routes = new ArrayList<Route>();
-		
+
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
@@ -632,8 +634,8 @@ public class GPXUtilities {
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
-		
-		
+
+
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
@@ -660,11 +662,11 @@ public class GPXUtilities {
 			}
 			return false;
 		}
-		
+
 		public boolean hasWptPt() {
 			return points.size() > 0;
 		}
-		
+
 		public boolean hasTrkpt() {
 			for(Track t  : tracks) {
 				for (TrkSegment ts : t.segments) {
@@ -749,7 +751,7 @@ public class GPXUtilities {
 			}
 			return tpoints;
 		}
-		
+
 		public WptPt getLastPoint() {
 			if (tracks.size() > 0) {
 				Track tk = tracks.get(tracks.size() - 1);
