@@ -58,7 +58,7 @@ public class GpxSelectionHelper {
 			File file = new File(selectedGPXFiles.get(0).getGpxFile().path);
 			return Algorithms.getFileNameWithoutExtension(file);
 		} else if (selectedGPXFiles.size() == 0) {
-			return app.getResources().getString(R.string.shared_string_none);
+			return null;
 		} else {
 			return app.getResources().getString(R.string.number_of_gpx_files_selected_pattern,
 					selectedGPXFiles.size());
