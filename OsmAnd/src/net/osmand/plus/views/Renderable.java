@@ -55,6 +55,9 @@ public class Renderable {
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
             if (pointSize != points.size()) {
+                for (int i = pointSize; i < points.size(); i++) {
+                    culled.add(points.get(i));
+                }
                 updateBounds(points, pointSize);
             }
 
