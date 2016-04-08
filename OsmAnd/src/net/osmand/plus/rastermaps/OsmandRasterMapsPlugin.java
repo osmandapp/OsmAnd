@@ -238,18 +238,62 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final int defaultColor = IconsCache.getDefaultColorRes(mapActivity);
 
 		final MapActivityLayers layers = mapActivity.getMapLayers();
-		ContextMenuAdapter.ItemClickListener listener = new ItemClickListener() {
+		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-				OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-				if (itemId == R.string.layer_map) {
-					layers.selectMapLayer(mapView);
-				} else if (itemId == R.string.layer_overlay) {
+			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+				if (itemId == R.string.layer_overlay) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP);
 					return false;
 				} else if (itemId == R.string.layer_underlay) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP);
 					return false;
+				}
+				return true;
+			}
+
+			@Override
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
+				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+				switch (itemId) {
+					case R.string.layer_overlay:
+						toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
+								new OnMapSelectedCallback() {
+									@Override
+									public void onMapSelected() {
+										ContextMenuItem item = adapter.getItem(pos);
+
+										String overlayMapDescr = settings.MAP_OVERLAY.get();
+										boolean hasOverlayDescription = overlayMapDescr != null;
+										overlayMapDescr = hasOverlayDescription ? overlayMapDescr
+												: mapActivity.getString(R.string.shared_string_none);
+
+										item.setDescription(overlayMapDescr);
+										item.setSelected(hasOverlayDescription);
+										item.setColorRes(hasOverlayDescription ? R.color.osmand_orange : defaultColor);
+										adapter.notifyDataSetChanged();
+									}
+								});
+						return false;
+					case R.string.layer_underlay:
+						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY, new
+								OnMapSelectedCallback() {
+									@Override
+									public void onMapSelected() {
+										ContextMenuItem item = adapter.getItem(pos);
+
+										String underlayMapDescr = settings.MAP_UNDERLAY.get();
+										boolean hasUnderlayDescription = underlayMapDescr != null;
+										underlayMapDescr = hasUnderlayDescription ? underlayMapDescr
+												: mapActivity.getString(R.string.shared_string_none);
+
+										item.setDescription(underlayMapDescr);
+										item.setSelected(hasUnderlayDescription);
+										item.setColorRes(hasUnderlayDescription ? R.color.osmand_orange : defaultColor);
+
+										adapter.notifyDataSetChanged();
+									}
+								});
+						return false;
 				}
 				return true;
 			}
