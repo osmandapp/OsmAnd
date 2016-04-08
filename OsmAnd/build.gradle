@@ -19,7 +19,7 @@ apply plugin: 'com.android.application'
 
 android {
 	compileSdkVersion 23
-	buildToolsVersion "23.0.1"
+	buildToolsVersion "23.0.2"
 
 	signingConfigs {
 		development {
@@ -91,58 +91,58 @@ android {
 	productFlavors {
 		// ABI
 		armv7 {
-			flavorDimension "abi"
+			dimension "abi"
 			ndk {
 				abiFilter "armeabi-v7a"
 			}
 		}
 		armv5 {
-			flavorDimension "abi"
+			dimension "abi"
 			ndk {
 				abiFilter "armeabi"
 			}
 		}
 		x86 {
-			flavorDimension "abi"
+			dimension "abi"
 			ndk {
 				abiFilter "x86"
 			}
 		}
 		mips {
-			flavorDimension "abi"
+			dimension "abi"
 			ndk {
 				abiFilter "mips"
 			}
 		}
 		fat {
-			flavorDimension "abi"
+			dimension "abi"
 		}
 
 		// Version
 		freedev {
-			flavorDimension "version"
+			dimension "version"
 			applicationId "net.osmand.dev"
 		}
 		free {
-			flavorDimension "version"
+			dimension "version"
 			applicationId "net.osmand"
 		}
 		full {
-			flavorDimension "version"
+			dimension "version"
 			applicationId "net.osmand.plus"
 		}
 
 		// CoreVersion
 		legacy {
-			flavorDimension "coreversion"
+			dimension "coreversion"
 		}
 
 		qtcore {
-			flavorDimension "coreversion"
+			dimension "coreversion"
 		}
 
 		qtcoredebug {
-			flavorDimension "coreversion"
+			dimension "coreversion"
 		}
 	}
 
