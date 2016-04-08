@@ -1977,4 +1977,13 @@
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Пожалуйста введите имя</string>
-    </resources>
+    <string name="dashboard_or_drawer_description">Вместо статического меню можно использовать новый интерфейс в виде домашней страницы. Ваш выбор всегда может быть изменен в настройках панели управления.</string>
+    <string name="watch">Просмотреть</string>
+    <string name="no_map_markers_found">Пожалуйста, добавьте маркеры на карте</string>
+    <string name="no_waypoints_found">Путевых точек не найдено</string>
+    <string name="add_points_to_map_markers_q">Вы хотите добавить маркеры для всех точек?</string>
+    <string name="shared_string_add_to_map_markers">Добавить к маркерам</string>
+    <string name="show_map_markers_description">Использовать маркеры на карте</string>
+    <string name="storage_directory_readonly_desc">Папка, выбранная для хранения данных, доступна только для чтения. Вместо нее временно будет использоваться внутренняя память. Пожалуйста, выберите подходящее хранилище.</string>
+    <string name="storage_directory_shared">Разделяемая память</string>
+</resources>
