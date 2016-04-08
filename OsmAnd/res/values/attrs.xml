@@ -47,6 +47,7 @@
         <attr name="contextMenuButtonColor" format="reference" />
 
         <attr name="color_dialog_buttons" format="color"/>
+        <attr name="secondary_icon_color" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
