@@ -258,10 +258,13 @@ public class ItemViewHolder {
 			final boolean isDownloading = context.getDownloadThread().isDownloading(item);
 			if (isDownloading) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
+				rightImageButton.setContentDescription(context.getString(R.string.shared_string_cancel));
 			} else if(item.isDownloaded() && !item.isOutdated()) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_overflow_menu_white));
+				rightImageButton.setContentDescription(context.getString(R.string.shared_string_more));
 			} else {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
+				rightImageButton.setContentDescription(context.getString(R.string.shared_string_download));
 			}
 			rightImageButton.setOnClickListener(action);
 		}

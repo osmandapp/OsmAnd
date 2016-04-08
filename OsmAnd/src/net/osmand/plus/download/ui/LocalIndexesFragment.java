@@ -1062,6 +1062,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 				options.setImageDrawable(ctx.getMyApplication().getIconsCache()
 						.getThemedIcon(R.drawable.ic_overflow_menu_white));
+				options.setContentDescription(ctx.getString(R.string.shared_string_more));
 				options.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
