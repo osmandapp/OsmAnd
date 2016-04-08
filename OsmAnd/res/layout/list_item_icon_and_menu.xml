@@ -44,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
-            android:textSize="@dimen/default_list_text_size"
             tools:text="Some title text"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -76,7 +75,7 @@
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/toggle_item"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
