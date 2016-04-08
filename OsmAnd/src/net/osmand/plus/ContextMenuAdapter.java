@@ -243,7 +243,8 @@ public class ContextMenuAdapter {
 
 			View dividerView = convertView.findViewById(R.id.divider);
 			if (dividerView != null) {
-				if (getCount() - 1 == position || getItem(position + 1).isCategory()) {
+				if (getCount() - 1 == position || getItem(position + 1).isCategory()
+						|| item.shouldHideDivider()) {
 					dividerView.setVisibility(View.GONE);
 				} else {
 					dividerView.setVisibility(View.VISIBLE);

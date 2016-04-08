@@ -116,13 +116,15 @@ public class RasterMapMenu {
 		mapTypeDescr = selected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(toggleActionStringId, mapActivity)
+				.hideDivider(true)
 				.setListener(l)
 				.setSelected(selected).createItem());
 		if (selected) {
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(mapTypeString, mapActivity)
+					.hideDivider(true)
 					.setListener(l)
-					.setLayout(R.layout.two_line_list_item)
+					.setLayout(R.layout.list_item_icon_and_menu_wide)
 					.setDescription(mapTypeDescr).createItem());
 			ContextMenuAdapter.OnIntegerValueChangedListener integerListener =
 					new ContextMenuAdapter.OnIntegerValueChangedListener() {
@@ -136,7 +138,8 @@ public class RasterMapMenu {
 			// android:max="255" in layout is expected
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(mapTypeStringTransparency, mapActivity)
-					.setLayout(R.layout.progress_list_item)
+					.hideDivider(true)
+					.setLayout(R.layout.list_item_progress)
 					.setIcon(R.drawable.ic_action_opacity)
 					.setProgress(mapTransparencyPreference.get())
 					.setListener(l)
@@ -151,6 +154,7 @@ public class RasterMapMenu {
 					&& mapLayers.getMapControlsLayer().isTransparencyBarInitialized();
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.show_transparency_seekbar, mapActivity)
+					.hideDivider(true)
 					.setListener(l)
 					.setSelected(transparencySwitchState).createItem());
 		}

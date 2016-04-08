@@ -32,6 +32,7 @@ public class ContextMenuItem {
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
+	private final boolean hideDivider;
 
 	private ContextMenuItem(@StringRes int titleId,
 							String title,
@@ -46,7 +47,8 @@ public class ContextMenuItem {
 							boolean skipPaintingWithoutColor, int pos,
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
-							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
+							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
+							boolean hideDivider) {
 		this.titleId = titleId;
 		this.title = title;
 		this.mIcon = icon;
@@ -62,6 +64,7 @@ public class ContextMenuItem {
 		this.description = description;
 		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
+		this.hideDivider = hideDivider;
 	}
 
 	@StringRes
@@ -139,6 +142,10 @@ public class ContextMenuItem {
 		return integerListener;
 	}
 
+	public boolean shouldHideDivider() {
+		return hideDivider;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -188,6 +195,7 @@ public class ContextMenuItem {
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 		private boolean mSkipPaintingWithoutColor;
+		private boolean mHideDivider;
 
 		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
 			this.mTitleId = titleId;
@@ -268,10 +276,15 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder hideDivider(boolean hideDivider) {
+			mHideDivider = hideDivider;
+			return this;
+		}
+
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mSkipPaintingWithoutColor,
-					mPosition, mDescription, mItemClickListener, mIntegerListener);
+					mPosition, mDescription, mItemClickListener, mIntegerListener, mHideDivider);
 		}
 	}
 }
