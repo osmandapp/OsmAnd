@@ -14,6 +14,7 @@
 
 	<ImageButton
 		android:id="@+id/start_navigation"
+		android:contentDescription="@string/follow"
 		android:layout_marginLeft="5dp"
 		android:layout_marginRight="5dp"
 		android:layout_width="@dimen/list_item_height"

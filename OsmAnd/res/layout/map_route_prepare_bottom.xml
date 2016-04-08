@@ -8,6 +8,7 @@
 
     <ImageButton
         android:id="@+id/map_cancel_route_button"
+        android:contentDescription="@string/cancel_route"
         android:layout_width="@dimen/map_route_buttons_width"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
@@ -22,6 +23,7 @@
 
     <ImageButton
         android:id="@+id/map_waypoints_route_button"
+        android:contentDescription="@string/waypoints"
         android:layout_width="@dimen/map_route_buttons_width"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
@@ -36,6 +38,7 @@
 
     <ImageButton
         android:id="@+id/map_options_route_button"
+        android:contentDescription="@string/shared_string_more"
         android:layout_width="@dimen/map_route_buttons_width"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"

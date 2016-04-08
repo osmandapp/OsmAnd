@@ -9,6 +9,7 @@
 
     <ImageButton
         android:id="@+id/back"
+        android:contentDescription="@string/back"
         android:focusable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

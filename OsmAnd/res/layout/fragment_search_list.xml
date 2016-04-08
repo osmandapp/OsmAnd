@@ -14,6 +14,7 @@
 
         <ImageButton
             android:id="@+id/clearButton"
+            android:contentDescription="@string/shared_string_close"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="48dp"
             android:layout_height="48dp"

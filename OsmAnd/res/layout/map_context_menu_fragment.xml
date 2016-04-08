@@ -264,6 +264,7 @@
 
                     <ImageView
                         android:id="@+id/progressButton"
+                        android:contentDescription="@string/shared_string_close"
                         android:layout_width="@dimen/context_menu_progress_cancel_button_size"
                         android:layout_height="@dimen/context_menu_progress_cancel_button_size"
                         android:layout_gravity="center_vertical"
@@ -289,6 +290,7 @@
 
                 <ImageButton
                     android:id="@+id/context_menu_fav_button"
+                    android:contentDescription="@string/shared_string_add_to_favorites"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
@@ -321,6 +323,7 @@
 
                 <ImageButton
                     android:id="@+id/context_menu_share_button"
+                    android:contentDescription="@string/context_menu_item_share_location"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
@@ -337,6 +340,7 @@
 
                 <ImageButton
                     android:id="@+id/context_menu_more_button"
+                    android:contentDescription="@string/show_point_options"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
@@ -382,6 +386,7 @@
 
         <ImageView
             android:id="@+id/context_menu_fab_view"
+            android:contentDescription="@string/layer_route"
             android:layout_width="@dimen/fab_size_with_shadow"
             android:layout_height="@dimen/fab_size_with_shadow"
             android:layout_gravity="right"

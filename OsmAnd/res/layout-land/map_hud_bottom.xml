@@ -91,6 +91,7 @@
 
                 <ImageButton
                     android:id="@+id/map_menu_button"
+                    android:contentDescription="@string/backToMenu"
                     android:layout_width="@dimen/map_button_size"
                     android:layout_height="@dimen/map_button_size"
                     android:background="@drawable/btn_round"
@@ -98,6 +99,7 @@
 
                 <ImageButton
                     android:id="@+id/map_route_info_button"
+                    android:contentDescription="@string/layer_route"
                     android:layout_width="@dimen/map_button_size"
                     android:layout_height="@dimen/map_button_size"
                     android:layout_marginLeft="@dimen/map_button_spacing_land"
@@ -174,6 +176,7 @@
 
             <ImageButton
                 android:id="@+id/map_transparency_hide"
+                android:contentDescription="@string/shared_string_hide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -227,6 +230,7 @@
 
         <ImageButton
             android:id="@+id/map_my_location_button"
+            android:contentDescription="@string/shared_string_my_location"
             android:layout_width="@dimen/map_button_size"
             android:layout_height="@dimen/map_button_size"
             android:layout_gravity="bottom"
@@ -242,6 +246,7 @@
 
             <ImageButton
                 android:id="@+id/map_zoom_in_button"
+                android:contentDescription="@string/zoomIn"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_circle"
@@ -249,6 +254,7 @@
 
             <ImageButton
                 android:id="@+id/map_zoom_out_button"
+                android:contentDescription="@string/zoomOut"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:layout_marginTop="@dimen/map_button_spacing_land"

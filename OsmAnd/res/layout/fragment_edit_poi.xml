@@ -62,6 +62,7 @@
                 <!--android:layout_marginLeft="72dp"-->
                 <ImageButton
                     android:id="@+id/poiTypeButton"
+                    android:contentDescription="@string/poi_dialog_poi_type"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="bottom"
@@ -90,6 +91,7 @@
 
                 <ImageButton
                     android:id="@+id/onlineDocumentationButton"
+                    android:contentDescription="@string/shared_string_help"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="bottom"

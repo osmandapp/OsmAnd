@@ -48,6 +48,7 @@
 
             <ImageButton
                 android:id="@+id/closeImageButton"
+                android:contentDescription="@string/shared_string_close"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="44dp"
                 android:layout_height="44dp"

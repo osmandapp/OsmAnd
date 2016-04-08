@@ -25,6 +25,7 @@
 
             <ImageButton
                 android:id="@+id/delete_button"
+                android:contentDescription="@string/shared_string_delete"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
@@ -33,6 +34,7 @@
 
             <ImageButton
                 android:id="@+id/ok_button"
+                android:contentDescription="@string/shared_string_save"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"

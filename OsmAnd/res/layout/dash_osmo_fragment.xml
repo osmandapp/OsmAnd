@@ -55,6 +55,7 @@
 
 			<ImageButton
 				android:id="@+id/share"
+				android:contentDescription="@string/shared_string_share"
 				android:layout_width="@dimen/list_item_height"
 				android:layout_height="@dimen/list_item_height"
 				android:gravity="center"

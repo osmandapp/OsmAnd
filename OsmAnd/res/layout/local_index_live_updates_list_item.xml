@@ -61,6 +61,7 @@
 
     <ImageButton
         android:id="@+id/options"
+        android:contentDescription="@string/shared_string_more"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_alignParentRight="true"

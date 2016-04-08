@@ -59,6 +59,7 @@
 
             <ImageView
                 android:id="@+id/edit_icon"
+                android:contentDescription="@string/shared_string_edit"
                 android:layout_width="@dimen/list_item_height"
                 android:layout_height="@dimen/list_item_height"
                 android:layout_gravity="center_vertical"

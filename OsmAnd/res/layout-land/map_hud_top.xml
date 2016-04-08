@@ -327,6 +327,7 @@
 
                 <ImageButton
                     android:id="@+id/waypoint_more"
+                    android:contentDescription="@string/shared_string_more"
                     android:layout_width="@dimen/map_address_height"
                     android:layout_height="@dimen/map_address_height"
                     android:background="@drawable/btn_circle_transparent"
@@ -334,6 +335,7 @@
 
                 <ImageButton
                     android:id="@+id/waypoint_close"
+                    android:contentDescription="@string/shared_string_close"
                     android:layout_width="@dimen/map_address_height"
                     android:layout_height="@dimen/map_address_height"
                     android:background="@drawable/btn_circle_transparent"
@@ -357,6 +359,7 @@
 
                 <ImageButton
                     android:id="@+id/map_layers_button"
+                    android:contentDescription="@string/configure_map"
                     android:layout_width="@dimen/map_small_button_size"
                     android:layout_height="@dimen/map_small_button_size"
                     android:background="@drawable/btn_inset_circle_trans"
@@ -364,6 +367,7 @@
 
                 <ImageButton
                     android:id="@+id/map_compass_button"
+                    android:contentDescription="@string/map_widget_compass"
                     android:layout_width="@dimen/map_small_button_size"
                     android:layout_height="@dimen/map_small_button_size"
                     android:layout_marginLeft="@dimen/map_small_button_margin"
@@ -456,6 +460,7 @@
 
             <ImageButton
                 android:id="@+id/map_collapse_button"
+                android:contentDescription="@string/shared_string_collapse"
                 android:layout_width="@dimen/map_small_button_size"
                 android:layout_height="@dimen/map_small_button_size"
                 android:layout_gravity="top|center_horizontal"

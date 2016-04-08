@@ -35,6 +35,7 @@
 
     <ImageView
         android:id="@+id/options"
+        android:contentDescription="@string/shared_string_more"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="center_vertical"

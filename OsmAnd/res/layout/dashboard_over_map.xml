@@ -30,6 +30,7 @@
 
                 <FrameLayout
                     android:id="@+id/map_part_dashboard"
+                    android:contentDescription="@string/back_to_map"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/dashboard_map_top_padding">
 

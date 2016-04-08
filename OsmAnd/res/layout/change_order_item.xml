@@ -13,6 +13,7 @@
     <ImageButton
         android:src="@drawable/ic_action_down_dark"
         android:id="@+id/down"
+        android:contentDescription="@string/shared_string_move_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -30,6 +31,7 @@
     <ImageButton
         android:src="@drawable/ic_action_up_dark"
         android:id="@+id/up"
+        android:contentDescription="@string/shared_string_move_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

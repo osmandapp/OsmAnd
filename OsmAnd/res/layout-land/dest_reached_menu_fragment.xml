@@ -64,6 +64,7 @@
 
                         <ImageButton
                             android:id="@+id/closeImageButton"
+                            android:contentDescription="@string/shared_string_close"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:layout_gravity="top"

@@ -73,6 +73,7 @@
 
 		<ImageButton
 			android:id="@+id/show_on_map"
+			android:contentDescription="@string/shared_string_show_on_map"
 			android:layout_width="@dimen/list_item_height"
 			android:layout_height="@dimen/list_item_height"
 			android:layout_gravity="center_vertical"

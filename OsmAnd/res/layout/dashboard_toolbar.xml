@@ -12,6 +12,7 @@
 
     <ImageView
         android:id="@+id/toolbar_back"
+        android:contentDescription="@string/back_to_map"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="left"
@@ -22,6 +23,7 @@
 
     <ImageView
         android:id="@+id/toolbar_list"
+        android:contentDescription="@string/backToMenu"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="left"
@@ -31,6 +33,7 @@
 
     <ImageView
         android:id="@+id/toolbar_settings"
+        android:contentDescription="@string/shared_string_settings"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
@@ -51,6 +54,7 @@
 
     <ImageView
         android:id="@+id/toolbar_ok"
+        android:contentDescription="@string/shared_string_ok"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
@@ -60,6 +64,7 @@
 
     <ImageView
         android:id="@+id/toolbar_sort"
+        android:contentDescription="@string/intermediate_points_change_order"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
@@ -70,6 +75,7 @@
 
     <ImageView
         android:id="@+id/toolbar_flat"
+        android:contentDescription="@string/drawer"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
@@ -80,6 +86,7 @@
 
     <ImageView
         android:id="@+id/toolbar_edit"
+        android:contentDescription="@string/shared_string_edit"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"

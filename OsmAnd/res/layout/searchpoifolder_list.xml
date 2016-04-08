@@ -30,6 +30,7 @@
          
     <ImageView
         android:id="@+id/options"
+        android:contentDescription="@string/search_poi_filter"
         android:layout_width="@dimen/list_item_height"
 		android:layout_gravity="center_vertical"
         android:layout_height="@dimen/list_item_height"

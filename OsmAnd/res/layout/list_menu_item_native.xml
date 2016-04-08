@@ -31,6 +31,7 @@
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon_settings"
+        android:contentDescription="@string/shared_string_settings"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:focusable="false"

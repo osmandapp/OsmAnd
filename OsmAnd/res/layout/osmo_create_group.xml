@@ -84,6 +84,7 @@
 
 			<ImageButton
 				android:id="@+id/info"
+				android:contentDescription="@string/osmo_group_info"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="?attr/dashboard_button"

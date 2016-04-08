@@ -113,7 +113,7 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="2dp"
-        android:contentDescription="@string/shared_string_close"
+        android:contentDescription="@string/shared_string_delete"
         android:focusable="false"
         android:scaleType="center"
         android:src="@drawable/ic_action_remove_dark"/>
@@ -124,6 +124,7 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="2dp"
+        android:contentDescription="@string/shared_string_more"
         android:clickable="false"
         android:focusable="false"
         android:scaleType="center"

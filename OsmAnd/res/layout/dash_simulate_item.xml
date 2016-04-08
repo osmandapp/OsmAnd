@@ -50,6 +50,7 @@
 
         <ImageButton
             android:id="@+id/stop"
+            android:contentDescription="@string/animate_route_off"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"

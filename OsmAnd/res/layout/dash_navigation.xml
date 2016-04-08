@@ -41,6 +41,7 @@
 
         <ImageButton
             android:id="@+id/play"
+            android:contentDescription="@string/recording_context_menu_play"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
@@ -50,6 +51,7 @@
 
         <ImageButton
             android:id="@+id/cancel"
+            android:contentDescription="@string/shared_string_cancel"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
