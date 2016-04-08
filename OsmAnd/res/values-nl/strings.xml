@@ -1477,14 +1477,14 @@
     <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
     <string name="osmo_auth_error_short">Aanmelding mislukt</string>
     <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie?</string>
-    <string name="rendering_attr_hideBuildings_name">Verberg gebouwen</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voetpaden</string>
-    <string name="rendering_attr_hideText_name">Verberg tekst</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Verberg bossen en beplanting</string>
+    <string name="rendering_attr_hideBuildings_name">Gebouwen</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Voet- en fietspaden</string>
+    <string name="rendering_attr_hideText_name">Tekst</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Bossen en beplanting</string>
     <string name="rendering_attr_buildings15zoom_name">Gebouwen tonen vanaf zoomstap 15</string>
     <string name="rendering_attr_moreDetailed_name">Toon meer details</string>
     <string name="rendering_attr_lessDetailed_name">Minder details</string>
-    <string name="rendering_attr_hideAccess_name">Toegankelijkheid niet tonen</string>
+    <string name="rendering_attr_hideAccess_name">Toegangsbeperkingen</string>
     <string name="rendering_attr_showAccess_name">Toegangsbeperkingen tonen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kwaliteit van wegen tonen</string>
     <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
@@ -1821,7 +1821,7 @@
 	<string name="shared_string_message">Bericht</string>
 	<string name="shared_string_do_not_use">Niet gebruiken</string>
 	<string name="shared_string_address">Adres</string>
-	<string name="rendering_attr_hideHouseNumbers_name">Verberg huisnummers</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Huisnummers</string>
     <string name="application_dir_change_warning3">Moet OsmAnd de gegevensbestanden ook naar de nieuwe locatie kopiëren?</string>
     <string name="specified_directiory_not_writeable">In de opgegeven directory kunnen geen kaarten opgeslagen worden</string>
 	<string name="copying_osmand_file_failed">Het kopiëren van bestanden is niet gelukt</string>    
@@ -2052,7 +2052,7 @@
     <string name="map_legend">Legenda</string>
 <string name="read_more">Meer lezen</string>
     <string name="whats_new">Wat is er nieuw in</string>
-    <string name="rendering_attr_hideProposed_name">Verberg voorgestelde objecten</string>
+    <string name="rendering_attr_hideProposed_name">Voorgestelde objecten</string>
     <string name="share_osm_edits_subject">Via OsmAnd gedeelde OSM-bewerkingen</string>
     <string name="lang_nds">Nederduits</string>
     <string name="lang_mk">Macedonisch</string>
@@ -2157,7 +2157,7 @@
     <string name="item_removed">Item verwijderd</string>
     <string name="n_items_removed">items verwijderd</string>
     <string name="shared_string_undo_all">Alles terugzetten</string>
-    <string name="rendering_attr_hideIcons_name">Verberg POI-iconen</string>
+    <string name="rendering_attr_hideIcons_name">POI-iconen</string>
     <string name="switch_start_finish">Start en bestemming verwisselen</string>
     <string name="number_of_contributors">Aantal Bijdragers</string>
     <string name="number_of_edits">Aantal Bewerkingen</string>
@@ -2168,7 +2168,7 @@
     <string name="shared_string_select">Blokkeer...</string>
     <string name="reports_for">Verslag voor:</string>
 <string name="data_is_not_available">Gegevens niet beschikbaar</string>
-    <string name="rendering_attr_hideUnderground_name">Verberg ondergrondse objecten</string>
+    <string name="rendering_attr_hideUnderground_name">Ondergrondse objecten</string>
     <string name="shared_string_read_more">Lees meer...</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Wijzigingen opslaan</string>
@@ -2243,4 +2243,6 @@
     <string name="rendering_value_thin_name">Dun</string>
     <string name="rendering_value_medium_name">Normaal</string>
     <string name="rendering_value_bold_name">Vet</string>
+    <string name="map_mode">Dag-Nacht stijl</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX-files geselecteerd</string>
     </resources>
