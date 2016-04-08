@@ -2223,4 +2223,6 @@
     <string name="rendering_value_thin_name">Sottile</string>
     <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grosso</string>
+    <string name="map_mode">Modalità mappa</string>
+    <string name="number_of_gpx_files_selected_pattern">%s file GPX selezionati</string>
     </resources>
