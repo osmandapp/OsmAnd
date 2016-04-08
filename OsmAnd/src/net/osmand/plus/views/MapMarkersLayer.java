@@ -21,6 +21,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -263,26 +264,34 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 
-		boolean show = useFingerLocation && map.getMyApplication().getSettings().SHOW_DESTINATION_ARROW.get();
-		if (show && fingerLocation != null) {
-			List<MapMarker> sortedMapMarkers = markersHelper.getSortedMapMarkers();
-			int i = 0;
-			for (MapMarker marker : sortedMapMarkers) {
-				if (!isLocationVisible(tb, marker)) {
-					canvas.save();
-					net.osmand.Location.distanceBetween(fingerLocation.getLatitude(), fingerLocation.getLongitude(),
-							marker.getLatitude(), marker.getLongitude(), calculations);
-					float bearing = calculations[1] - 90;
-					float radiusBearing = DIST_TO_SHOW * tb.getDensity();
-					final QuadPoint cp = tb.getCenterPixelPoint();
-					canvas.rotate(bearing, cp.x, cp.y);
-					canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
-					canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
-					canvas.restore();
-				}
-				i++;
-				if (i > 1) {
-					break;
+		boolean show = useFingerLocation ||
+				(map.getMyApplication().getSettings().MAP_MARKERS_MODE.get() == OsmandSettings.MapMarkersMode.WIDGETS
+				&& map.getMyApplication().getSettings().SHOW_DESTINATION_ARROW.get());
+		if (show) {
+			LatLon loc = fingerLocation;
+			if (!useFingerLocation) {
+				loc = tb.getCenterLatLon();
+			}
+			if (loc != null) {
+				List<MapMarker> sortedMapMarkers = markersHelper.getSortedMapMarkers();
+				int i = 0;
+				for (MapMarker marker : sortedMapMarkers) {
+					if (!isLocationVisible(tb, marker)) {
+						canvas.save();
+						net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
+								marker.getLatitude(), marker.getLongitude(), calculations);
+						float bearing = calculations[1] - 90;
+						float radiusBearing = DIST_TO_SHOW * tb.getDensity();
+						final QuadPoint cp = tb.getCenterPixelPoint();
+						canvas.rotate(bearing, cp.x, cp.y);
+						canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
+						canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
+						canvas.restore();
+					}
+					i++;
+					if (i > 1) {
+						break;
+					}
 				}
 			}
 		}
