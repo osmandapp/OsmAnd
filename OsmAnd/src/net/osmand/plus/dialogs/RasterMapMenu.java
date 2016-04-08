@@ -147,6 +147,7 @@ public class RasterMapMenu {
 			if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
 				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.show_polygons, mapActivity)
+						.hideDivider(true)
 						.setListener(l)
 						.setSelected(hidePolygonsPref.get()).createItem());
 			}
