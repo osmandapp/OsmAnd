@@ -483,6 +483,14 @@ public class WaypointDialogHelper {
 				more.setVisibility(View.GONE);
 				((ImageView) move).setImageDrawable(app.getIconsCache().getIcon(
 						R.drawable.ic_action_reorder, !nightMode));
+				if (app.accessibilityEnabled()) {
+					move.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							((DragIcon)view.getTag()).onClick();
+						}
+					});
+				}
 				move.setTag(new DragIcon() {
 					@Override
 					public void onClick() {

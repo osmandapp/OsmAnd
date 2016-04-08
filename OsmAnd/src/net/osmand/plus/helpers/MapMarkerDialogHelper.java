@@ -425,6 +425,14 @@ public class MapMarkerDialogHelper {
 			move.setVisibility(View.VISIBLE);
 			((ImageView) move).setImageDrawable(app.getIconsCache().getIcon(
 					R.drawable.ic_action_reorder, !nightMode));
+			if (app.accessibilityEnabled()) {
+				move.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						((DynamicListView.DragIcon)view.getTag()).onClick();
+					}
+				});
+			}
 			move.setTag(new DynamicListView.DragIcon() {
 				@Override
 				public void onClick() {
