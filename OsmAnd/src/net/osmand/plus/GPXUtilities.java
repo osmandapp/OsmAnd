@@ -2,15 +2,12 @@
 package net.osmand.plus;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.util.Algorithms;
@@ -32,7 +29,6 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -40,7 +36,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -105,8 +100,8 @@ public class GPXUtilities {
 		public double speed = 0;
 		public double hdop = Double.NaN;
 		public boolean deleted = false;
-		public int colourARGB = 0;					// point colour (used for altitude/speed colouring)
-		public double distance = 0.0;				// cumulative distance, if in a track
+	//	public int colourARGB = 0;					// point colour (used for altitude/speed colouring)
+	//	public double distance = 0.0;				// cumulative distance, if in a track
 
 		public WptPt() {
 		}
@@ -132,13 +127,13 @@ public class GPXUtilities {
 //			this.distance = toCopy.distance;
 //		}
 
-		public void setDistance(double dist) {
-			distance = dist;
-		}
+		//public void setDistance(double dist) {
+		//	distance = dist;
+		//}
 
-		public double getDistance() {
-			return distance;
-		}
+		//public double getDistance() {
+		//	return distance;
+		//}
 
 		@Override
 		public int getColor() {
@@ -206,7 +201,7 @@ public class GPXUtilities {
 		public List<WptPt> points = new ArrayList<WptPt>();
 		private OsmandMapTileView view;
 
-		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
+		public List<Renderable> renders = new ArrayList<>();
 
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
 			return split(getDistanceMetric(), getTimeSplit(), meters);
@@ -223,7 +218,7 @@ public class GPXUtilities {
 		}
 
 //		public void drawRenderers(double zoom, Paint p, Canvas c, RotatedTileBox tb) {
-//			for (Renderable.RenderableSegment rs : renders) {
+//			for (Renderable.Renderable rs : renders) {
 //				rs.drawSegment(zoom, p, c, tb);
 //			}
 //		}

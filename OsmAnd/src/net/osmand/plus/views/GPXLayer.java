@@ -207,7 +207,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if(points != null) {
 			updatePaints(0, false, false, settings, tileBox);
 			for (TrkSegment ts : points) {
-				for (Renderable.RenderableSegment rs : ts.renders) {
+				for (Renderable rs : ts.renders) {
 					rs.drawSegment(view.getZoom(), paint, canvas, tileBox);		// unsorted
 				}
 			}
@@ -327,14 +327,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private class Rend {
-		Renderable.RenderableSegment rs;
+		Renderable rs;
 		public int color;
 		public boolean routePoints;
 		public boolean showCurrentTrack;
 		public DrawSettings settings;
 		public RotatedTileBox tileBox;
 
-		Rend(Renderable.RenderableSegment r, int col, boolean rp, boolean ct, DrawSettings ds, RotatedTileBox tb) {
+		Rend(Renderable r, int col, boolean rp, boolean ct, DrawSettings ds, RotatedTileBox tb) {
 			rs = r;
 			color = col;
 			routePoints = rp;
@@ -353,19 +353,28 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
 
-				if (ts.renders.isEmpty()) {                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
+				/////////////////////////////////////////////////////////////////////////////////////
+				// START OF SECTION TO BE MOVED TO UI
 
-					// Note: CurrentTrack - it is no longer necessary to identify this; it is auto-detected
-					// so always just use 'StandardTrack' for all tracks and add on the other renderers as required
+				if (ts.renders.isEmpty()) {
 
-					double epsilon = 16.5;                // aggressiveness (zoom) of line simiplification. Increase for less quality.
+					if (g.isShowCurrentTrack()) {
+						ts.renders.add(new Renderable.CurrentTrack(ts.points, 0));
+					} else {
 
-					ts.renders.add(new Renderable.StandardTrack(100, ts.points, epsilon));
-					ts.renders.add(new Renderable.Altitude(0, ts.points, epsilon, 5));
-					//ts.renders.add(new Renderable.Speed(1,ts.points, epsilon, 5));
+						double epsilon = 16.5;                // Increase for less quality.
+
+						ts.renders.add(new Renderable.StandardTrack(ts.points, epsilon));
+						ts.renders.add(new Renderable.Altitude(ts.points, epsilon, 2.5));
+						//ts.renders.add(new Renderable.Speed(ts.points, epsilon, 4));
+						ts.renders.add(new Renderable.Distance(ts.points, Renderable.Distance.unit.KILOMETERS));
+					}
 				}
+				// END OF SECTION TO BE MOVED TO UI
+				/////////////////////////////////////////////////////////////////////////////////////
 
-				for (Renderable.RenderableSegment r : ts.renders) {
+
+				for (Renderable r : ts.renders) {
 					rend.add(new Rend(r, ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox));
 				}
 
@@ -373,14 +382,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 
 		// Draw renderers in sorted priority order
-		Collections.sort(rend, new CustomComparator());
+		Collections.sort(rend, new RoadPriorityComparator());
 		for (Rend r : rend) {
 			updatePaints(r.color, r.routePoints, r.showCurrentTrack, r.settings, r.tileBox );
 			r.rs.drawSegment(view.getZoom(), paint, canvas, tileBox);
 		}
 	}
 
-	public class CustomComparator implements Comparator<Rend> {
+	public class RoadPriorityComparator implements Comparator<Rend> {
 		@Override
 		public int compare(Rend o1, Rend o2) {
 			return o1.rs.getPriority() - o2.rs.getPriority();

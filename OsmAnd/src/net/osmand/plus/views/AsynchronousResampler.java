@@ -11,11 +11,11 @@ import java.util.List;
 
 public abstract class AsynchronousResampler extends AsyncTask<String,Integer,String> {
 
-    protected Renderable.RenderableSegment rs;
-    protected List<WptPt> culled = null;
+    protected Renderable rs;
+    protected List<WptPt2> culled = null;
     protected double epsilon;
 
-    AsynchronousResampler(Renderable.RenderableSegment rs, double epsilon) {
+    AsynchronousResampler(Renderable rs, double epsilon) {
         assert rs != null;
         assert rs.points != null;
         this.rs = rs;
@@ -28,22 +28,24 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         }
     }
 
-    private WptPt createIntermediatePoint(WptPt lastPt, WptPt pt, double partial, double dist) {
+    @Override protected String doInBackground(String... params) { return null;}
+
+
+    private WptPt2 createIntermediatePoint(WptPt lastPt, WptPt pt, double partial, double dist) {
         double inpartial = 1.0 - partial;
-        WptPt newPt = new WptPt(
+        WptPt2 newPt = new WptPt2(
                 lastPt.getLatitude() * inpartial + pt.getLatitude() * partial,
                 lastPt.getLongitude() * inpartial + pt.getLongitude() * partial,
                 (long) (lastPt.time * inpartial + pt.time * partial),
                 lastPt.ele * inpartial + pt.ele * partial,
                 lastPt.speed * inpartial + pt.speed * partial,
-                lastPt.hdop * inpartial + pt.hdop * partial);
-        newPt.setDistance(dist);
+                dist);
         return newPt;
     }
 
-    protected List<WptPt> resampleTrack(List<WptPt> pts, double dist) {
+    public List<WptPt2> resampleTrack(List<WptPt> pts, double dist) {
 
-        List<WptPt> newPts = new ArrayList<>();
+        List<WptPt2> newPts = new ArrayList<>();
 
         int size = pts.size();
         if (size > 0) {
@@ -56,7 +58,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 double segLength = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(), lastPt.getLatitude(), lastPt.getLongitude());
                 while (segSub < segLength) {
                     double partial = segSub / segLength;
-                    WptPt nPt = createIntermediatePoint(lastPt, pt, segSub / segLength, cumDist + segLength * partial);
+                    WptPt2 nPt = createIntermediatePoint(lastPt, pt, segSub / segLength, cumDist + segLength * partial);
                     newPts.add(nPt);
                     segSub += dist;
                 }
@@ -69,8 +71,8 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         return newPts;
     }
 
-    protected List<WptPt> doRamerDouglasPeucerSimplification(List<WptPt> pts) {
-        List<WptPt> rdpTrack = null;
+    protected List<WptPt2> doRamerDouglasPeucerSimplification(List<WptPt> pts) {
+        List<WptPt2> rdpTrack = null;
         int nsize = pts.size();
         if (nsize > 0) {
             boolean survivor[] = new boolean[nsize];
@@ -80,7 +82,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 survivor[0] = true;
                 for (int i = 0; i < nsize; i++) {
                     if (survivor[i]) {
-                        rdpTrack.add(pts.get(i));
+                        rdpTrack.add(new WptPt2(pts.get(i)));
                     }
                 }
             }
@@ -112,11 +114,21 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         }
     }
 
-    //----------------------------------------------------------------------------------------------
+    public static class Generic extends AsynchronousResampler {
+
+        public Generic(Renderable rs, double epsilon) {
+            super(rs, epsilon);
+        }
+
+        @Override protected String doInBackground(String... params) {
+            culled = resampleTrack(rs.points, epsilon);
+            return null;
+        }
+    }
 
     public static class RamerDouglasPeucer extends AsynchronousResampler {
 
-        public RamerDouglasPeucer(Renderable.RenderableSegment rs, double epsilon) {
+        public RamerDouglasPeucer(Renderable rs, double epsilon) {
             super(rs, epsilon);
         }
 
@@ -126,11 +138,9 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         }
     }
 
-    //----------------------------------------------------------------------------------------------
+    public static class Altitude extends AsynchronousResampler {
 
-    public static class ResampleAltitude extends AsynchronousResampler {
-
-        ResampleAltitude(Renderable.RenderableSegment rs, double epsilon) {
+        public Altitude(Renderable rs, double epsilon) {
             super(rs, epsilon);
         }
 
@@ -143,7 +153,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 // Calculate the absolutes of the altitude variations
                 Double max = culled.get(0).ele;
                 Double min = max;
-                for (WptPt pt : culled) {
+                for (WptPt2 pt : culled) {
                     max = Math.max(max, pt.ele);
                     min = Math.min(min, pt.ele);
                     pt.colourARGB = halfC;                  // default, in case there are no 'ele' in GPX
@@ -151,7 +161,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
                 Double elevationRange = max - min;
                 if (elevationRange > 0)
-                    for (WptPt pt : culled)
+                    for (WptPt2 pt : culled)
                         pt.colourARGB = Algorithms.getRainbowColor((pt.ele - min) / elevationRange);
             }
 
@@ -159,11 +169,9 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         }
     }
 
-    //----------------------------------------------------------------------------------------------
+    public static class Speed extends AsynchronousResampler {
 
-    public static class ResampleSpeed extends AsynchronousResampler {
-
-        ResampleSpeed(Renderable.RenderableSegment rs, double epsilon) {
+        public Speed(Renderable rs, double epsilon) {
             super(rs, epsilon);
         }
 
@@ -174,15 +182,15 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             culled = doRamerDouglasPeucerSimplification(rs.points); //resampleTrack(rs.points, epsilon);
             if (!isCancelled() && !culled.isEmpty()) {
 
-                WptPt lastPt = culled.get(0);
+                WptPt2 lastPt = culled.get(0);
                 lastPt.speed = 0;
 
                 int size = culled.size();
                 for (int i = 1; i < size; i++) {
-                    WptPt pt = culled.get(i);
+                    WptPt2 pt = culled.get(i);
                     double delta = pt.time - lastPt.time;
-                    pt.speed = delta > 0 ? MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(),
-                            lastPt.getLatitude(), lastPt.getLongitude()) / delta : 0;
+                    pt.speed = delta > 0 ? MapUtils.getDistance(pt.lat, pt.lon,
+                            lastPt.lat, lastPt.lon) / delta : 0;
                     lastPt = pt;
                 }
 
@@ -195,14 +203,14 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
                 int halfC = Algorithms.getRainbowColor(0.5);
 
-                for (WptPt pt : culled) {
+                for (WptPt2 pt : culled) {
                     max = Math.max(max, pt.speed);
                     min = Math.min(min, pt.speed);
                     pt.colourARGB = halfC;                  // default, in case there are no 'time' in GPX
                 }
                 double speedRange = max - min;
                 if (speedRange > 0) {
-                    for (WptPt pt : culled)
+                    for (WptPt2 pt : culled)
                         pt.colourARGB = Algorithms.getRainbowColor((pt.speed - min) / speedRange);
                 }
             }
