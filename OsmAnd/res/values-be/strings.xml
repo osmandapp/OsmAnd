@@ -2182,4 +2182,5 @@
     <string name="storage_directory_readonly_desc">Абраны для захоўваньня зьвестак каталёг даступны толькі для чытаньня. Каталёг захоўваньня часова разьмешчаны ва ўнутранай памяці. Калі ласка, абярыце падыходзячы каталёг для захоўваньня зьвестак.</string>
     <string name="osm_live_email_desc">Неабходна прадаставіць інфармацыю пра ўкладальнікаў</string>
     <string name="show_map_markers_description">Актывуе функцыю маркераў мапы</string>
+    <string name="no_waypoints_found">Не знайшлося шляхавых пунктаў</string>
     </resources>
