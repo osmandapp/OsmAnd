@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -43,7 +43,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				AccessibleAlertBuilder bld = new AccessibleAlertBuilder(getMapActivity());
+				AlertDialog.Builder bld = new AlertDialog.Builder(getMapActivity());
 				bld.setMessage(R.string.recording_delete_confirm);
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 

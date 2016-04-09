@@ -40,8 +40,8 @@ public class DashSimulateFragment extends DashBaseFragment {
 		((TextView) getView().findViewById(R.id.name)).setText(routeAnimating ? R.string.animate_route_off
 				: R.string.animate_route);
 		((ImageButton) getView().findViewById(R.id.stop)).setImageDrawable(
-				!routeAnimating ? getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_play_dark)
-						: getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_rec_stop));
+				!routeAnimating ? getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_play_dark)
+						: getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_rec_stop));
 
 	}
 

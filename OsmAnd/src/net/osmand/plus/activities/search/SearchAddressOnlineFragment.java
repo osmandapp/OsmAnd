@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.io.NetworkUtils;
@@ -219,7 +218,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 			protected void onPostExecute(Void result) {
 				view.findViewById(R.id.ProgressBar).setVisibility(View.INVISIBLE);
 				if(places == null){
-					AccessibleToast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
 				} else {
 					adapter.setPlaces(places);
 				}

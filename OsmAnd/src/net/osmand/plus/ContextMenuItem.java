@@ -27,10 +27,12 @@ public class ContextMenuItem {
 	private final int layout;
 	private boolean loading;
 	private final boolean category;
+	private final boolean skipPaintingWithoutColor;
 	private final int pos;
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
+	private final boolean hideDivider;
 
 	private ContextMenuItem(@StringRes int titleId,
 							String title,
@@ -42,10 +44,11 @@ public class ContextMenuItem {
 							@LayoutRes int layout,
 							boolean loading,
 							boolean category,
-							int pos,
+							boolean skipPaintingWithoutColor, int pos,
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
-							ContextMenuAdapter.OnIntegerValueChangedListener integerListener) {
+							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
+							boolean hideDivider) {
 		this.titleId = titleId;
 		this.title = title;
 		this.mIcon = icon;
@@ -56,10 +59,12 @@ public class ContextMenuItem {
 		this.layout = layout;
 		this.loading = loading;
 		this.category = category;
+		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
 		this.pos = pos;
 		this.description = description;
 		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
+		this.hideDivider = hideDivider;
 	}
 
 	@StringRes
@@ -83,7 +88,7 @@ public class ContextMenuItem {
 
 	@ColorRes
 	public int getThemedColorRes(Context context) {
-		if (getColorRes() != INVALID_ID) {
+		if (skipPaintingWithoutColor || getColorRes() != INVALID_ID) {
 			return getColorRes();
 		} else {
 			return IconsCache.getDefaultColorRes(context);
@@ -137,6 +142,10 @@ public class ContextMenuItem {
 		return integerListener;
 	}
 
+	public boolean shouldHideDivider() {
+		return hideDivider;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -172,7 +181,7 @@ public class ContextMenuItem {
 		@DrawableRes
 		private int mIcon = INVALID_ID;
 		@ColorRes
-		private int mColor = INVALID_ID;
+		private int mColorRes = INVALID_ID;
 		@DrawableRes
 		private int mSecondaryIcon = INVALID_ID;
 		private Boolean mSelected = null;
@@ -185,6 +194,8 @@ public class ContextMenuItem {
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
+		private boolean mSkipPaintingWithoutColor;
+		private boolean mHideDivider;
 
 		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
 			this.mTitleId = titleId;
@@ -200,8 +211,8 @@ public class ContextMenuItem {
 			return this;
 		}
 
-		public ItemBuilder setColor(@ColorRes int color) {
-			mColor = color;
+		public ItemBuilder setColor(@ColorRes int colorRes) {
+			mColorRes = colorRes;
 			return this;
 		}
 
@@ -260,10 +271,20 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setSkipPaintingWithoutColor(boolean skipPaintingWithoutColor) {
+			mSkipPaintingWithoutColor = skipPaintingWithoutColor;
+			return this;
+		}
+
+		public ItemBuilder hideDivider(boolean hideDivider) {
+			mHideDivider = hideDivider;
+			return this;
+		}
+
 		public ContextMenuItem createItem() {
-			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColor, mSecondaryIcon,
-					mSelected, mProgress, mLayout, mLoading, mIsCategory, mPosition, mDescription,
-					mItemClickListener, mIntegerListener);
+			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
+					mSelected, mProgress, mLayout, mLoading, mIsCategory, mSkipPaintingWithoutColor,
+					mPosition, mDescription, mItemClickListener, mIntegerListener, mHideDivider);
 		}
 	}
 }

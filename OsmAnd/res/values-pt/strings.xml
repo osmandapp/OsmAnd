@@ -500,8 +500,6 @@
   <string name="back_to_location">Back to location</string>
   <string name="shared_string_help">Ajuda</string>
   
-  <string name="accessibility_extensions_descr">Extensões de acessibilidade para versões Android antigas</string>
-  <string name="accessibility_extensions">Extensões de acessibilidade</string>
   <string name="accessibility_mode">Modo de acessibilidade</string>
   <string name="accessibility_mode_descr">Activa as opções de acessibilidade</string>
   <string name="shared_string_on">Ligado</string>
@@ -546,13 +544,9 @@
   <string name="settings_direction_style_descr">Escolha o estilo para expressar sentidos relativos ao movimento</string>
   <string name="auto_announce_on">Começar auto-anunciar</string>
   <string name="auto_announce_off">Parar auto-anunciar</string>
-  <string name="scroll_map_by_gestures_descr">Usar gestos no ecrã táctil para mover o mapa</string>
-  <string name="scroll_map_by_gestures">Movimentação natural do mapa</string>
   <string name="i_am_here">Estou aqui</string>
   <string name="zoom_by_trackball_descr">Alterar zoom do mapa por movimentos horizontais da trackball</string>
   <string name="zoom_by_trackball">Usar trackball para controle de zoom</string>
-  <string name="use_short_object_names_descr">Use nomes curtos de objetos em modo de exploração por toque</string>
-  <string name="use_short_object_names">Usar nomes de objetos</string>
   <string name="accessibility_preferences_descr">Preferências relacionadas com a acessibilidade</string>
   <string name="shared_string_accessibility">Acessibilidade</string>
   <string name="use_fluorescent_overlays">Sobreposições Fluorescentes</string>

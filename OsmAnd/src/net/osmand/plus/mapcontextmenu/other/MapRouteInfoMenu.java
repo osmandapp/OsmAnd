@@ -33,7 +33,6 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -217,7 +216,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			main.findViewById(R.id.InfoDuration).setVisibility(View.GONE);
 			textView.setText(R.string.route_is_too_long);
 			textView.setVisibility(View.VISIBLE);
-			iconView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_warning, isLight()));
+			iconView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_warning, isLight()));
 		} else {
 			main.findViewById(R.id.dividerToDropDown).setVisibility(View.GONE);
 			main.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
@@ -328,7 +327,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateToIcon(parentView);
 
 		ImageView toDropDownIcon = (ImageView) parentView.findViewById(R.id.toDropDownIcon);
-		toDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
+		toDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
 	}
 
 	private void updateToIcon(View parentView) {
@@ -400,7 +399,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateFromIcon(parentView);
 
 		ImageView fromDropDownIcon = (ImageView) parentView.findViewById(R.id.fromDropDownIcon);
-		fromDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
+		fromDropDownIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, isLight()));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -411,7 +410,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
 			fromIcon.setImageDrawable(mapActivity.getResources().getDrawable(appMode.getResourceLocationDay()));
 		} else {
-			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.list_startpoint, 0, 0f));
+			fromIcon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.list_startpoint, 0));
 		}
 	}
 
@@ -475,7 +474,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private Drawable getIconOrig(int iconId) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		return iconsCache.getIcon(iconId, 0, 0f);
+		return iconsCache.getIcon(iconId, 0);
 	}
 
 	private OnItemClickListener getOnFavoriteClickListener(final boolean target, final FavouritesAdapter favouritesAdapter,
@@ -525,7 +524,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		mainView.findViewById(R.id.RouteInfoControls).setVisibility(View.VISIBLE);
 		final OsmandApplication ctx = mapActivity.getMyApplication();
 		ImageView prev = (ImageView) mainView.findViewById(R.id.Prev);
-		prev.setImageDrawable(ctx.getIconsCache().getContentIcon(R.drawable.ic_prev, isLight()));
+		prev.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_prev, isLight()));
 		if (directionInfo >= 0) {
 			prev.setVisibility(View.VISIBLE);
 			prev.setOnClickListener(new View.OnClickListener() {
@@ -554,7 +553,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 		ImageView next = (ImageView) mainView.findViewById(R.id.Next);
 		next.setVisibility(View.VISIBLE);
-		next.setImageDrawable(ctx.getIconsCache().getContentIcon(R.drawable.ic_next, isLight()));
+		next.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_next, isLight()));
 		next.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -592,9 +591,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			infoDurationView.setVisibility(View.GONE);
 			textView.setVisibility(View.VISIBLE);
 		} else {
-			infoIcon.setImageDrawable(ctx.getIconsCache().getContentIcon(R.drawable.ic_action_polygom_dark, isLight()));
+			infoIcon.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, isLight()));
 			infoIcon.setVisibility(View.VISIBLE);
-			durationIcon.setImageDrawable(ctx.getIconsCache().getContentIcon(R.drawable.ic_action_time, isLight()));
+			durationIcon.setImageDrawable(ctx.getIconsCache().getIcon(R.drawable.ic_action_time, isLight()));
 			durationIcon.setVisibility(View.VISIBLE);
 			infoDistanceView.setVisibility(View.VISIBLE);
 			infoDurationView.setVisibility(View.VISIBLE);
@@ -938,7 +937,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				if (row.icon != null) {
 					icon = row.icon;
 				} else if (row.iconId > 0) {
-					icon = mapActivity.getMyApplication().getIconsCache().getContentIcon(row.iconId);
+					icon = mapActivity.getMyApplication().getIconsCache().getThemedIcon(row.iconId);
 				}
 				label.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 				label.setCompoundDrawablePadding(AndroidUtils.dpToPx(mapActivity, 16f));

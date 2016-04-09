@@ -104,7 +104,8 @@ public abstract class Entity implements Serializable {
 	private Map<String, String> tags = null;
 	private final long id;
 	private boolean dataLoaded;
-	private int modify;  
+	private int modify;
+	private int version;
 	public static final int MODIFY_UNKNOWN = 0;
 	public static final int MODIFY_DELETED = -1;
 	public static final int MODIFY_MODIFIED = 1;
@@ -171,6 +172,14 @@ public abstract class Entity implements Serializable {
 			return null;
 		}
 		return tags.get(key);
+	}
+	
+	public int getVersion() {
+		return version;
+	}
+	
+	public void setVersion(int version) {
+		this.version = version;
 	}
 	
 	public Map<String, String> getTags() {

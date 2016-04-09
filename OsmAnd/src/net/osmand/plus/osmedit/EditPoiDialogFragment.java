@@ -48,7 +48,6 @@ import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.PoiCategory;
@@ -463,7 +462,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 								  final Activity activity,
 								  final OpenstreetmapUtil openstreetmapUtil) {
 		if (info == null && OsmPoint.Action.CREATE != action && openstreetmapUtil instanceof OpenstreetmapRemoteUtil) {
-			AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
 		new AsyncTask<Void, Void, Node>() {
@@ -598,7 +597,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							EditPoiDialogFragment.createInstance(n, false);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
-					AccessibleToast.makeText(activity,
+					Toast.makeText(activity,
 							activity.getString(R.string.poi_error_poi_not_found),
 							Toast.LENGTH_SHORT).show();
 				}
@@ -653,7 +652,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		protected void onPostExecute(final Node n) {
 			if (n == null) {
-				AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
+				Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 				return;
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -700,10 +699,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 						public boolean processResult(Node result) {
 							if (result != null) {
 								if (isLocalEdit) {
-									AccessibleToast.makeText(activity, R.string.osm_changes_added_to_local_edits,
+									Toast.makeText(activity, R.string.osm_changes_added_to_local_edits,
 											Toast.LENGTH_LONG).show();
 								} else {
-									AccessibleToast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG)
+									Toast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG)
 											.show();
 								}
 								if (activity instanceof MapActivity) {

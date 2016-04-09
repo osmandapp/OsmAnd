@@ -26,7 +26,6 @@ import android.widget.Toast;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -371,7 +370,7 @@ public class OsmandApplication extends MultiDexApplication {
 				View view = uiContext.getLayoutInflater().inflate(R.layout.select_voice_first, null);
 
 				((ImageView) view.findViewById(R.id.icon))
-						.setImageDrawable(getIconsCache().getContentIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
+						.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
 
 				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -392,7 +391,7 @@ public class OsmandApplication extends MultiDexApplication {
 				});
 
 				((ImageView) view.findViewById(R.id.dropDownIcon))
-						.setImageDrawable(getIconsCache().getContentIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
+						.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
 
 				builder.setCancelable(true);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -564,7 +563,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -573,7 +572,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -582,7 +581,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -591,7 +590,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();				
+				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();				
 			}
 		});
 	}
@@ -694,10 +693,6 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public OsmandRegions getRegions() {
 		return regions;
-	}
-
-	public boolean accessibilityExtensions() {
-		return (Build.VERSION.SDK_INT < 14) ? getSettings().ACCESSIBILITY_EXTENSIONS.get() : false;
 	}
 	
 	public boolean accessibilityEnabled() {

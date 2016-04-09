@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
   <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
@@ -440,8 +441,6 @@
   <string name="back_to_location">Kokapenera itzuli</string>
   <string name="shared_string_help">Laguntza</string>
   
-  <string name="accessibility_extensions_descr">Androiden bertsio zaharreko erabilerraztasunerako luzapenak</string>
-  <string name="accessibility_extensions">Erabilerraztasunerako luzapenak</string>
   <string name="accessibility_mode">Erabilerraztasun modua</string>
   <string name="accessibility_mode_descr">Erabilerraztasun ezaugarriak gaitu</string>
   <string name="shared_string_on">On</string>
@@ -486,13 +485,9 @@
   <string name="settings_direction_style_descr">Aukeratu mugimenduan egotean ematen diren argibide erlatiboen estiloa</string>
   <string name="auto_announce_on">Iragarpen automatikoa hasi</string>
   <string name="auto_announce_off">Iragarpen automatikoa gelditu</string>
-  <string name="scroll_map_by_gestures_descr">Korritu mapa ukipen-pantailaren keinuen bidez</string>
-  <string name="scroll_map_by_gestures">Maparen korritze naturala</string>
   <string name="i_am_here">Hemen nago</string>
   <string name="zoom_by_trackball_descr">Maparen zooma aldatu trackball-aren mugimendu orizontalaren bidez</string>
   <string name="zoom_by_trackball">Trackball-a erabili zooma kontrolatzeko</string>
-  <string name="use_short_object_names_descr">Objektuen izen motzak erabili ukipen-esplorazio moduan</string>
-  <string name="use_short_object_names">Objetuen izenak erabili</string>
   <string name="accessibility_preferences_descr">Erabilerraztasunari erlazionaturiko hobespenak</string>
   <string name="shared_string_accessibility">Erabilerraztasuna</string>
   <string name="rendering_out_of_memory">Aukeratutako area erakusteko ez dago memoria nahikorik</string>
@@ -563,7 +558,7 @@
   
   
   <string name="download_files_not_enough_space">Ez dago leku nahikorik %1$s MB deskargatzeko (%2$s libre).</string>
-  <string name="download_files_question_space">{2} MB libre! Deskargatu {0} fitxategi ({1} MB)?</string>
+  <string name="download_files_question_space">Benetan {0} fitxategi deskargatu? Honek {1} MB behar ditu behin betiko. {2} MB daude libre orain.</string>
   
   
   
@@ -727,7 +722,7 @@
   
   
   
-  <string name="shared_string_next">Ondorengoa</string>
+  <string name="shared_string_next">Hurrengoa</string>
   <string name="shared_string_previous">Aurrekoa</string>
   <string name="unit_of_length_descr">Luzeera eta abiaduraren unitateak aldatu</string>
   <string name="unit_of_length">Neurtze unitatea</string>
@@ -940,7 +935,7 @@
   <string name="transport_stops_to_pass">pasatu beharreko geldialdiak</string>
   <string name="transport_route_distance">Ibilbidearen distantzia</string>
   <string name="transport">Garraioa</string>
-  <string name="shared_string_ok">OK</string>
+  <string name="shared_string_ok">Ados</string>
   <string name="show_transport_over_map_description">Erakutsi garraio publikoko geldialdiak mapan</string>
   <string name="show_transport_over_map">Erakutsi garraioko geldialdiak</string>
   <string name="hello">OsmAnd nabigatzaile aplikazioa</string>
@@ -1107,7 +1102,7 @@
   
   <string name="context_menu_item_create_poi">POIa sortu</string>
   <string name="shared_string_yes">Bai</string>
-  <string name="shared_string_cancel">Ezeztatu</string>
+  <string name="shared_string_cancel">Utzi</string>
   <string name="shared_string_apply">Aplikatu</string>
   <string name="shared_string_add">Gehitu</string>
   <string name="shared_string_no">Ez</string>
@@ -1210,7 +1205,7 @@
 	<string name="rendering_attr_coloredBuildings_name">Koloreetako eraikinak</string>
     <string name="osmo_invite">Gonbidatu…</string>
     <string name="osmo_leave_confirmation_msg">%1$s taldea utzi nahi duzu?</string>
-    <string name="osmo_specify_tracker_id">Id-a espezifikatu</string>
+    <string name="osmo_specify_tracker_id">Zehaztu IDa</string>
     <string name="continue_navigation">Jarraitu Nabigazioa</string>
     <string name="pause_navigation">Pausatu Nabigazioa</string>
     <string name="rendering_attr_subwayMode_name">Metro modua</string>
@@ -1338,9 +1333,9 @@
     <string name="osmo_expire_group">Amaitzen da</string>
     <string name="osmo_group_description">Deskribapena</string>
     <string name="osmo_group_policy">Politika</string>
-    <string name="osmo_connect_to_device_tracker_id">Jarraipen id-a</string>
+    <string name="osmo_connect_to_device_tracker_id">Jarraipen IDa</string>
     <string name="osmo_connect_to_device_name">Erabiltzaile izena</string>
-    <string name="osmo_connect_to_group_id">Talde id-a</string>
+    <string name="osmo_connect_to_group_id">Talde IDa</string>
     <string name="osmo_group_name">Talde izena</string>
     <string name="osmo_create_group">Taldea sortu</string>
     <string name="osmo_enable_tracker">Kokapena bidali</string>
@@ -1402,4 +1397,44 @@
 	<string name="index_name_canada">Ipar Amerika - Kanada</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Britainia Handia</string>
+    <string name="rendering_value_thin_name">Fina</string>
+    <string name="rendering_value_medium_name">Ertaina</string>
+    <string name="rendering_value_bold_name">Lodia</string>
+    <string name="no_map_markers_found">Gehitu markatzaileak maparen bidez</string>
+    <string name="shared_string_dismiss">Baztertu</string>
+    <string name="general_settings_2">Ezarpen orokorrak</string>
+    <string name="shared_string_ellipsis">…</string>
+    <string name="shared_string_do_not_use">Ez erabili</string>
+    <string name="shared_string_enable">Gaitu</string>
+    <string name="shared_string_disable">Ezgaitu</string>
+    <string name="shared_string_enabled">Gaituta</string>
+    <string name="shared_string_disabled">Ezgaituta</string>
+    <string name="shared_string_selected">Hautatuta</string>
+    <string name="shared_string_never">Inoiz ez</string>
+    <string name="no_waypoints_found">Ez da bide-punturik aurkitu</string>
+    <string name="report">Jakinarazi</string>
+    <string name="osmo_connect">Batu</string>
+    <string name="osmo_groups">OsMo Taldeak</string>
+    <string name="osmo_connect_to_my_nickname">Ezizena</string>
+    <string name="osmo_share_my_location">Igorri kokapena</string>
+    <string name="shared_string_move_up">Mugitu gora</string>
+    <string name="shared_string_move_down">Mugitu behera</string>
+    <string name="finish_navigation">Bukatu nabigazioa</string>
+    <string name="avoid_road">Ekidin errepidea</string>
+    <string name="storage_directory_shared">Partekatutako memoria</string>
+    <string name="shared_string_topbar">Goiko barra</string>
+    <string name="full_report">Txosten osoa</string>
+    <string name="recalculate_route">Birkalkulatu ibilbidea</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap erabiltzaile-izena eta pasahitza</string>
+    <string name="donations">Dohaintzak</string>
+    <string name="number_of_recipients">Hartzaile kopurua</string>
+    <string name="osm_live_subscribe_btn">Harpidetu</string>
+    <string name="osm_live_month_cost_desc">Hileroko ordainketa</string>
+    <string name="osm_live_active">Aktiboa</string>
+    <string name="osm_live_not_active">Ez aktiboa</string>
+    <string name="osm_live_enter_email">Sartu baliozko e-posta helbide bat</string>
+    <string name="osm_live_enter_user_name">Sartu izen publikoa</string>
+    <string name="osm_live_subscription_settings">Harpidetzaren ezarpenak</string>
+    <string name="upload_anonymously">Igo anonimo gisa</string>
+    <string name="shared_string_widgets">Trepetak</string>
     </resources>

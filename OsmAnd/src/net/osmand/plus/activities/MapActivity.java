@@ -44,8 +44,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.access.AccessibleActivity;
-import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
@@ -115,7 +113,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MapActivity extends AccessibleActivity implements DownloadEvents,
+public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		ActivityCompat.OnRequestPermissionsResultCallback, IRouteInformationListener,
 		MapMarkerChangedListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
@@ -171,24 +169,25 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	private boolean permissionAsked;
 	private boolean permissionGranted;
 
-	private Notification getNotification() {
-		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
-		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT);
+	//private Notification getNotification() {
+	//Suppress extra nav notification, all handled by background service notification now
+	//	Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
+	//	notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	//	PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT);
 //		Notification notification = new Notification(R.drawable.bgs_icon_drive, "", //$NON-NLS-1$
 //				System.currentTimeMillis());
 //		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 //		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
 //				pi);
-		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
-		final Builder noti = new NotificationCompat.Builder(this).setContentTitle(Version.getAppName(app))
-				.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-				.setContentText(getString(R.string.go_back_to_osmand))
-				.setSmallIcon(smallIcon)
+	//	int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
+	//	final Builder noti = new NotificationCompat.Builder(this).setContentTitle(Version.getAppName(app))
+	//			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+	//			.setContentText(getString(R.string.go_back_to_osmand))
+	//			.setSmallIcon(smallIcon)
 //	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
-				.setContentIntent(pi).setOngoing(true);
-		return noti.build();
-	}
+	//			.setContentIntent(pi).setOngoing(true);
+	//	return noti.build();
+	//}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -700,12 +699,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 						-1);
 				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false, true);
 			} catch (NumberFormatException e) {
-				AccessibleToast.makeText(this,
+				Toast.makeText(this,
 						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
 						Toast.LENGTH_LONG).show(); //$NON-NLS-1$
 			}
 		} else {
-			AccessibleToast.makeText(this,
+			Toast.makeText(this,
 					getString(R.string.navigation_intent_invalid, schemeSpecificPart),
 					Toast.LENGTH_LONG).show(); //$NON-NLS-1$
 		}
@@ -814,16 +813,16 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		final int newZoom = mapView.getZoom() + stp;
 		final double zoomFrac = mapView.getZoomFractionalPart();
 		if (newZoom > 22) {
-			AccessibleToast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			Toast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
 		if (newZoom < 1) {
-			AccessibleToast.makeText(this, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			Toast.makeText(this, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, zoomFrac, changeLocation);
 		if (app.accessibilityEnabled())
-			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			Toast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();
 	}
 
@@ -864,12 +863,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	@Override
 	protected void onStop() {
-		if (app.getRoutingHelper().isFollowingMode()) {
-			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-			if (mNotificationManager != null) {
-				mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
-			}
-		}
+	//	if (app.getRoutingHelper().isFollowingMode()) {
+	//		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+	//		if (mNotificationManager != null) {
+	//			mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+	//		}
+	//	}
 		wakeLockHelper.onStop(this);
 		if (getMyApplication().getNavigationService() == null) {
 			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
@@ -1095,9 +1094,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			// ok
 		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-			AccessibleToast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
 		} else {
-			AccessibleToast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
 		}
 	}
 

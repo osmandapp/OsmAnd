@@ -660,8 +660,6 @@
     <string name="back_to_location">Powróć do pozycji</string>
     <string name="shared_string_help">Pomoc</string>
 
-    <string name="accessibility_extensions_descr">Rozszerzenia ułatwienia dostępu dla starych wersji Androida</string>
-    <string name="accessibility_extensions">Rozszerzenia ułatwień dostępu</string>
     <string name="accessibility_mode">Tryb ułatwień dostępu</string>
     <string name="accessibility_mode_descr">Przełącza funkcje ułatwień dostępu</string>
     <string name="shared_string_on">Włączone</string>
@@ -706,13 +704,9 @@
     <string name="settings_direction_style_descr">Wybierz styl określania kierunków względnych podczas ruchu</string>
     <string name="auto_announce_on">Włącz automatyczne ogłaszanie</string>
     <string name="auto_announce_off">Wyłącz automatyczne ogłaszanie</string>
-    <string name="scroll_map_by_gestures_descr">Przesuwaj mapę za pomocą gestów na ekranie dotykowym</string>
-    <string name="scroll_map_by_gestures">Naturalne przewijanie mapy</string>
     <string name="i_am_here">Jestem tutaj</string>
     <string name="zoom_by_trackball_descr">Zmienia stopień przybliżenia mapy poziomymi ruchami trackballa</string>
     <string name="zoom_by_trackball">Przybliżanie mapy za pomocą trackballa</string>
-    <string name="use_short_object_names_descr">Używa krótkich nazw obiektów w trybie eksploracji dotykowej</string>
-    <string name="use_short_object_names">Nazwy obiektów</string>
     <string name="accessibility_preferences_descr">Ustawienia ułatwień dostępu</string>
     <string name="shared_string_accessibility">Ułatwienia dostępu</string>
     <string name="use_fluorescent_overlays">Odblaskowe nakładki</string>
@@ -1571,7 +1565,7 @@
     <string name="print_route">Drukuj trasę</string>
     <string name="osmo_device_not_found">Nie odnaleziono urządzenia</string>
     <string name="osmo_no_connection_msg">Nie można połączyć się z serwisem OsMo:\n- sprawdź połączenie internetowe,\n- sprawdź ustawienia,\n- sprawdź nasz Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup,\n- synchronizować grup i urządzeń z serwerem,\n- zarządzać grupami i urządzeniami osobistym pulpicie na stronie internetowej.</string>
+    <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup,\n- synchronizować grup i urządzeń z serwerem,\n- zarządzać grupami i urządzeniami na osobistym kokpicie na stronie internetowej.</string>
     <string name="anonymous_user">Użytkownik anonimowy</string>
     <string name="logged_as">Zalogowano jako %1$s</string>
     <string name="rendering_category_routes">Trasy</string>

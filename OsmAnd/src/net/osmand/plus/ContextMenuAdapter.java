@@ -1,15 +1,13 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.LayoutInflater;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -87,12 +84,11 @@ public class ContextMenuAdapter {
 		@LayoutRes
 		private int layoutId;
 		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
+		private final IconsCache mIconsCache;
 
 		public ContextMenuArrayAdapter(Activity context,
-									   @LayoutRes
-									   int layoutRes,
-									   @IdRes
-									   int textViewResourceId,
+									   @LayoutRes int layoutRes,
+									   @IdRes int textViewResourceId,
 									   ContextMenuItem[] objects,
 									   OsmandApplication app,
 									   boolean holoLight,
@@ -100,8 +96,9 @@ public class ContextMenuAdapter {
 			super(context, layoutRes, textViewResourceId, objects);
 			this.app = app;
 			this.holoLight = holoLight;
-			layoutId = layoutRes;
+			this.layoutId = layoutRes;
 			this.changeAppModeListener = changeAppModeListener;
+			mIconsCache = app.getIconsCache();
 		}
 
 		@Override
@@ -114,52 +111,41 @@ public class ContextMenuAdapter {
 				final Set<ApplicationMode> selected = new LinkedHashSet<>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
 						selected, true, new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						if (selected.size() > 0) {
-							app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
-							notifyDataSetChanged();
-						}
-						if (changeAppModeListener != null) {
-							changeAppModeListener.onClick();
-						}
-					}
-				});
+							@Override
+							public void onClick(View view) {
+								if (selected.size() > 0) {
+									app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
+									notifyDataSetChanged();
+								}
+								if (changeAppModeListener != null) {
+									changeAppModeListener.onClick();
+								}
+							}
+						});
 			}
 			if (convertView == null || !(convertView.getTag() instanceof Integer)
-					|| (layoutId != (Integer)convertView.getTag())) {
-				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
+					|| (layoutId != (Integer) convertView.getTag())) {
+				int themeRes = holoLight ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
-
-			if (item.isCategory()) {
-				tv.setTypeface(Typeface.DEFAULT_BOLD);
-			} else {
-				AndroidUtils.setTextPrimaryColor(getContext(), tv, !holoLight);
-				tv.setTypeface(null);
-			}
-			tv.setText(item.isCategory() ? item.getTitle().toUpperCase() : item.getTitle());
+			tv.setText(item.getTitle());
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
-				int color = ContextCompat.getColor(getContext(),
-						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
-				Drawable imageId = DrawableCompat.wrap(drawable);
-				imageId.mutate();
-				DrawableCompat.setTint(imageId, color);
+				@ColorRes
+				int color = holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
+				Drawable drawable = mIconsCache.getIcon(item.getIcon(), color);
 				float density = getContext().getResources().getDisplayMetrics().density;
 				int paddingInPixels = (int) (24 * density);
 				int drawableSizeInPixels = (int) (24 * density); // 32
-				imageId.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
-				tv.setCompoundDrawables(imageId, null, null, null);
+				drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
+				tv.setCompoundDrawables(drawable, null, null, null);
 				tv.setCompoundDrawablePadding(paddingInPixels);
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
-					Drawable drawable = ContextCompat.getDrawable(getContext(), item.getIcon());
-					drawable = DrawableCompat.wrap(drawable);
-					drawable.mutate();
-					DrawableCompat.setTint(drawable, item.getThemedColor(getContext()));
+					Drawable drawable = mIconsCache.getIcon(item.getIcon(),
+							item.getThemedColorRes(getContext()));
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
@@ -169,12 +155,9 @@ public class ContextMenuAdapter {
 			@DrawableRes
 			int secondaryDrawable = item.getSecondaryIcon();
 			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
-				int color = ContextCompat.getColor(getContext(),
-						holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
-				Drawable drawable = ContextCompat.getDrawable(getContext(), item.getSecondaryIcon());
-				drawable = DrawableCompat.wrap(drawable);
-				drawable.mutate();
-				DrawableCompat.setTint(drawable, color);
+				@ColorRes
+				int colorRes = holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
+				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
 				imageView.setVisibility(View.VISIBLE);
@@ -255,6 +238,16 @@ public class ContextMenuAdapter {
 					descriptionTextView.setVisibility(View.VISIBLE);
 				} else {
 					descriptionTextView.setVisibility(View.GONE);
+				}
+			}
+
+			View dividerView = convertView.findViewById(R.id.divider);
+			if (dividerView != null) {
+				if (getCount() - 1 == position || getItem(position + 1).isCategory()
+						|| item.shouldHideDivider()) {
+					dividerView.setVisibility(View.GONE);
+				} else {
+					dividerView.setVisibility(View.VISIBLE);
 				}
 			}
 			return convertView;

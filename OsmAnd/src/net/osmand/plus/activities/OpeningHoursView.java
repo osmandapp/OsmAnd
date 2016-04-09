@@ -122,7 +122,7 @@ public class OpeningHoursView {
 			}
 			TextView label = (TextView)row.findViewById(R.id.label);
 			ImageView icon = (ImageView)row.findViewById(R.id.remove);
-			icon.setBackgroundDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
+			icon.setBackgroundDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
 			if(selectedRule == position){
 				label.setTypeface(null, Typeface.BOLD);
 				label.setTextSize(22);

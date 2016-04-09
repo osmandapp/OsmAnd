@@ -368,13 +368,13 @@ public class NotesFragment extends OsmAndListFragment {
 				DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
 			}
 //			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
-//					.getContentIcon(R.drawable.ic_play_dark));
+//					.getIcon(R.drawable.ic_play_dark));
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			
 			
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_local_index);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
-			options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+			options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			if(selectionMode) {
 				options.setVisibility(View.GONE);
 				ch.setVisibility(View.VISIBLE);
@@ -437,9 +437,9 @@ public class NotesFragment extends OsmAndListFragment {
 		boolean isPhoto = recording.isPhoto();
 		Drawable playIcon;
 		if (isPhoto) {
-			playIcon = getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_view);
+			playIcon = getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_view);
 		} else {
-			playIcon = getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_play_dark);
+			playIcon = getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_play_dark);
 		}
 		item = optionsMenu.getMenu().add(isPhoto ? R.string.watch : R.string.recording_context_menu_play)
 				.setIcon(playIcon);
@@ -452,7 +452,7 @@ public class NotesFragment extends OsmAndListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(
-				iconsCache.getContentIcon(R.drawable.ic_show_on_map));
+				iconsCache.getThemedIcon(R.drawable.ic_show_on_map));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -462,7 +462,7 @@ public class NotesFragment extends OsmAndListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_gshare_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -486,7 +486,7 @@ public class NotesFragment extends OsmAndListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -496,7 +496,7 @@ public class NotesFragment extends OsmAndListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.recording_context_menu_delete)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

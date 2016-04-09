@@ -36,7 +36,7 @@ public class ErrorBottomSheetDialog extends BottomSheetDialogFragment {
 		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		ImageView iv = ((ImageView) view.findViewById(R.id.error_icon));
-		iv.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_crashlog));
+		iv.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_crashlog));
 		TextView message = ((TextView) view.findViewById(R.id.error_header));
 		message.setTypeface(typeface);
 		message.setText(msg);

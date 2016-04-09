@@ -180,7 +180,7 @@ public class TurnType {
 	}
 
 	public static int getSecondaryTurn(int laneValue) {
-		// Get the primary turn modifier for the lane
+		// Get the secondary turn modifier for the lane
 		return (laneValue >> 5);
 	}
 	
@@ -206,7 +206,7 @@ public class TurnType {
 	}
 
 	public static int getTertiaryTurn(int laneValue) {
-		// Get the primary turn modifier for the lane
+		// Get the tertiary turn modifier for the lane
 		return (laneValue >> 10);
 	}
 
@@ -271,8 +271,16 @@ public class TurnType {
 		return type == TL || type == TSHL || type == TSLL || type == TU || type == KL;
 	}
 	
+	public static boolean isLeftTurnNoUTurn(int type) {
+		return type == TL || type == TSHL || type == TSLL || type == KL;
+	}
+	
 	public static boolean isRightTurn(int type) {
 		return type == TR || type == TSHR || type == TSLR || type == TRU || type == KR;
+	}
+	
+	public static boolean isRightTurnNoUTurn(int type) {
+		return type == TR || type == TSHR || type == TSLR || type == KR;
 	}
 
 	public static boolean isSlightTurn(int type) {

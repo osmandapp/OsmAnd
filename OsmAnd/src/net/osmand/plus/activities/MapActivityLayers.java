@@ -10,7 +10,6 @@ import android.widget.Toast;
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
-import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
@@ -228,7 +227,7 @@ public class MapActivityLayers {
 					if (g.showCurrentTrack) {
 						if (!settings.SAVE_TRACK_TO_GPX.get() && !
 								settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							AccessibleToast.makeText(activity,
+							Toast.makeText(activity,
 									R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_LONG).show();
 						} else {
 							g.path = getString(R.string.show_current_gpx_title);
@@ -259,7 +258,7 @@ public class MapActivityLayers {
 
 
 	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiUIFilter[] selected) {
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -310,13 +309,13 @@ public class MapActivityLayers {
 		} else {
 			builder.setIcon(R.drawable.mx_user_defined);
 		}
-		builder.setColor(R.color.color_white);
+		builder.setColor(R.color.osmand_orange);
 		adapter.addItem(builder.createItem());
 	}
 
 	public void selectMapLayer(final OsmandMapTileView mapView) {
 		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
-			AccessibleToast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();
 			return;
 		}
 		final OsmandSettings settings = getApplication().getSettings();

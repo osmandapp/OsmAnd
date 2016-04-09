@@ -95,8 +95,6 @@ import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-/**
- */
 public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicListViewCallbacks,
 		IRouteInformationListener, WaypointDialogHelperCallbacks, MapMarkersDialogHelperCallbacks,
 		MapMarkerChangedListener {
@@ -861,8 +859,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 //			listView.setBackgroundColor(backgroundColor);
 			listEmptyTextView.setBackgroundColor(backgroundColor);
 		}
-		if (visibleType != DashboardType.WAYPOINTS && visibleType != DashboardType.MAP_MARKERS
-				&& visibleType != DashboardType.MAP_MARKERS_SELECTION) {
+		if (visibleType != DashboardType.WAYPOINTS
+				&& visibleType != DashboardType.MAP_MARKERS
+				&& visibleType != DashboardType.MAP_MARKERS_SELECTION
+				&& visibleType != DashboardType.CONFIGURE_SCREEN
+				&& visibleType != DashboardType.CONFIGURE_MAP) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(dpToPx(1f));
 		} else {
@@ -1409,9 +1410,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	@Override
 	public void onItemSwapping(int position) {
-		if (swipeDismissListener != null) {
-			swipeDismissListener.setEnabled(false);
-		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1447,10 +1445,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					List<MapMarker> markers = (List<MapMarker>) (Object) items;
 					getMyApplication().getMapMarkersHelper().saveMapMarkers(markers, null);
 					reloadAdapter();
-				}
-
-				if (swipeDismissListener != null) {
-					swipeDismissListener.setEnabled(true);
 				}
 			}
 		}, 50);

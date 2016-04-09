@@ -228,8 +228,6 @@
 	<string name="back_to_location">חזרה למיקום</string>
 	<string name="shared_string_help">עזרה</string>
 	
-	<string name="accessibility_extensions_descr">הרחבות נגישות לגרסאות ישנות של אנדרויד</string>
-	<string name="accessibility_extensions">הרחבות נגישות</string>
 	<string name="accessibility_mode">מצב נגישות</string>
 	<string name="accessibility_mode_descr">הפעלת תכונות הנגישות</string>
 	<string name="shared_string_on">פעיל</string>
@@ -274,13 +272,9 @@
 	<string name="settings_direction_style_descr">נא לבחור את הסגנון להבעת יחס ההכוונה בעת התזוזה</string>
 	<string name="auto_announce_on">התחלת הכרזה אוטומטית</string>
 	<string name="auto_announce_off">הפסקת ההכרזה האוטומטית</string>
-	<string name="scroll_map_by_gestures_descr">ניתן לגלול את המפה על ידי נגיעה במסך</string>
-	<string name="scroll_map_by_gestures">גלילת מפה טבעית</string>
 	<string name="i_am_here">הנני כאן</string>
 	<string name="zoom_by_trackball_descr">החלפת התקריב למפה על ידי תזוזות אופקיות של כדור המעקב</string>
 	<string name="zoom_by_trackball">שימוש בכדור המעקב לצורך שליטה בתקריב</string>
-	<string name="use_short_object_names_descr">שימוש בשמות קצרים לפריטים במצב חקירה במגע</string>
-	<string name="use_short_object_names">שימוש בשמות של פריטים</string>
 	<string name="accessibility_preferences_descr">העדפות הקשורות בנגישות</string>
 	<string name="shared_string_accessibility">נגישות</string>
 	<string name="rendering_out_of_memory">אין די זיכרון לתהליך כדי להציג את האיזור הנבחר</string>

@@ -49,7 +49,7 @@
     <string name="download_regular_maps">Standard kort</string>
     <string name="download_roads_only_maps">Kort kun med veje</string>
 
-    <string name="rendering_attr_noAdminboundaries_name">Skjul grænser</string>
+    <string name="rendering_attr_noAdminboundaries_name">Grænser</string>
 
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
@@ -146,8 +146,8 @@
     <string name="osmand_plus_short_description_80_chars">Global mobilkort for visning &amp; navigation til offline og online OSM kort</string>
 
     <string name="filterpoi_activity">Opret interessepunkt-filter</string>
-    <string name="recalculate_route_to_your_location">Transportform:</string>
-    <string name="select_navigation_mode">Vælg transportform</string>
+    <string name="recalculate_route_to_your_location">Transporttilstand:</string>
+    <string name="select_navigation_mode">Vælg transporttilstand</string>
 	
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
@@ -257,7 +257,7 @@
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>
     <string name="show_traffic_warnings">Trafikadvarsler</string>
     <string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
-    <string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
+    <string name="rendering_attr_noPolygons_name">Polygoner</string>
     <string name="rendering_attr_appMode_name">Optegningsmåde</string>
     <string name="rendering_attr_appMode_description">Optimer kort til</string>
     <string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver højdekurvedata):</string>
@@ -321,8 +321,6 @@
     <string name="show_ruler_level">Vis målestok</string>
     <string name="back_to_location">Tilbage til placering</string>
 
-    <string name="accessibility_extensions_descr">Tilgængelighedsudvidelser for gamle Android versioner</string>
-    <string name="accessibility_extensions">Tilgængelighedsudvidelser</string>
     <string name="accessibility_mode">Tilgængelighedstilstand</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="default_buttons_support">Støt</string>
@@ -370,13 +368,9 @@
     <string name="settings_direction_style_descr">Vælg stil til at udtrykke relative retninger under bevægelse</string>
     <string name="auto_announce_on">Begynd autoannoncering</string>
     <string name="auto_announce_off">Stop autoannoncering</string>
-    <string name="scroll_map_by_gestures_descr">Rul kort med fagter på den berøringsfølsomme skærm</string>
-    <string name="scroll_map_by_gestures">Naturlig kortrulning</string>
     <string name="i_am_here">Jeg er her</string>
     <string name="zoom_by_trackball_descr">Skift kortzoom via vandrette trackball bevægelser</string>
     <string name="zoom_by_trackball">Brug trackball til zoom</string>
-    <string name="use_short_object_names_descr">Brug korte objektnavne i touch udforskning tilstand</string>
-    <string name="use_short_object_names">Objektnavne</string>
     <string name="accessibility_preferences_descr">Tilgængelighedsrelaterede indstillinger</string>
     <string name="shared_string_accessibility">Tilgængelighed</string>
     <string name="rendering_out_of_memory">Ikke nok proceshukommelse til at vise det valgte område</string>
@@ -435,7 +429,7 @@
     <string name="open_street_map_login_descr">Nødvendige for ændringer i openstreetmap.org</string>
     <string name="user_password">OSM-kodeord</string>
     <string name="user_password_descr">Nødvendig for ændringer i openstreetmap.org</string>
-    <string name="osmand_service">Kørsel i baggrunden</string>
+    <string name="osmand_service">Baggrundstilstand</string>
     <string name="osmand_service_descr">OsmAnd kører i baggrunden, mens skærmen er slukket</string>
 
 
@@ -1190,7 +1184,7 @@
     <string name="av_camera_focus_auto">Autofokus</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokalafstand</string>
     <string name="av_camera_focus_infinity">Uendelig fokus</string>
-    <string name="av_camera_focus_macro">Makro (nærbillede) fokusindstilling</string>
+    <string name="av_camera_focus_macro">Makrofokustilstand (nærbillede)</string>
     <string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
     <string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
     <string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
@@ -1524,14 +1518,14 @@
     <string name="osmo_group_information_desc">" - Oprettelse af en gruppe angiv et navn og udfyld beskrivelsen\n- Fra programmet kan kun oprettes en gruppe af simpel type, læs mere på hjemmesiden https://osmo.mobi/g/new\n- Via en hjemmeside kan administreres en gruppe, til at placere spor og punkter til rådighed for alle\n- Understøtter ikke brugen af en gruppe for kun én bruger, hvis dette ikke er IP-gruppen\n- Private grupper er begrænset til 8 personer\n- Detaljerede vilkår kan altid ses på hjemmesiden OsMo.mobi\n- Brug for  særlige vilkår - kontakt support: osmo.mobi@gmail.com "</string>
     <string name="osmo_auth_error_short">Autorisation fejlede</string>
     <string name="osmo_auth_error">"OsMo autorisation fejl: %1$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
-    <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Skjul gang- og cykelstier</string>
-    <string name="rendering_attr_hideText_name">Skjul tekst</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Skjul skov og beplantning</string>
+    <string name="rendering_attr_hideBuildings_name">Bygninger</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Gang- og cykelstier</string>
+    <string name="rendering_attr_hideText_name">Tekst</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Skov og beplantning</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoomniveau 15</string>
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Skjul adgangsbegrænsninger</string>
+    <string name="rendering_attr_hideAccess_name">Adgangsbegrænsninger</string>
     <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
@@ -1552,9 +1546,9 @@
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Stop</string>
-    <string name="enable_sleep_mode">Aktiver GPS baggrundstjenesten</string>
+    <string name="enable_sleep_mode">Aktiver GPS baggrundstilstand</string>
     <string name="gps_wake_up_timer">GPS vågn-op interval</string>
-    <string name="sleep_mode_stop_dialog">Stop GPS baggrundstjenesten?</string>
+    <string name="sleep_mode_stop_dialog">Stop GPS baggrundstilstand?</string>
     <string name="keep_navigation_service">Hold</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
@@ -1888,7 +1882,7 @@
     <string name="storage_directory">Kortlagring</string>
     <string name="shared_string_copy">Kopier</string>
     <string name="application_dir_change_warning3">Skal OsmAnd også kopiere datafilerne til den nye placering?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
     
@@ -2117,7 +2111,7 @@
     
     
     <string name="shared_string_update">Opdatering</string>
-    <string name="rendering_attr_hideProposed_name">Skjul foreslåede objekter</string>
+    <string name="rendering_attr_hideProposed_name">Foreslåede objekter</string>
     <string name="read_more">Læs mere</string>
     <string name="whats_new">Hvad er nyt i</string>
     <!-- string name="map_legend_item_description">Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig</string -->
@@ -2225,7 +2219,7 @@
     <string name="item_removed">Emne fjernet</string>
     <string name="n_items_removed">Emner slettet</string>
     <string name="shared_string_undo_all">FORTRYD ALLE</string>
-    <string name="rendering_attr_hideIcons_name">Skjul IP ikoner</string>
+    <string name="rendering_attr_hideIcons_name">IP ikoner</string>
     <string name="switch_start_finish">Byt om på startpunkt og destination</string>
     <string name="number_of_contributors">Antal bidragydere</string>
     <string name="number_of_edits">Antal redigeringer</string>
@@ -2236,12 +2230,12 @@
     <string name="road_blocked">Spærret vej</string>
     <string name="shared_string_remove">Fjern</string>
     <string name="data_is_not_available">Data er ikke tilgængelig</string>
-    <string name="rendering_attr_hideUnderground_name">Skjul underjordiske objekter</string>
+    <string name="rendering_attr_hideUnderground_name">Underjordiske objekter</string>
     <string name="shared_string_read_more">Læs mere</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - find steder på kortet og beregn ruter uden en internetforbindelse. Hent kort for et land, før rejsen og find steder og ruter i et ukendt område.
 \n\nGrundlæggende indstillinger:
 \n• Detaljerede kort for 200 lande
-\n• Offline navigation med stemmevejledning\n• Adressesøgning i offline mode
+\n• Offline navigation med stemmevejledning\n• Adressesøgning i offline tilstand
 \n• Info om steder på kortet: steder af interesse, caféer, parkeringspladser, butikker
 \n• Tilføj steder til foretrukne
 \n• Kørsel-, cykel- og fodgængernavigation
@@ -2339,4 +2333,6 @@
     <string name="rendering_value_thin_name">Tynd</string>
     <string name="rendering_value_medium_name">Mellem</string>
     <string name="rendering_value_bold_name">Fed</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX filer valgt</string>
+    <string name="map_mode">Korttilstand</string>
     </resources>

@@ -334,7 +334,7 @@ public class MapMarkerDialogHelper {
 
 			} else {
 				final ImageButton btn = (ImageButton) v.findViewById(R.id.image_button);
-				btn.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white, !nightMode));
+				btn.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_overflow_menu_white, !nightMode));
 				btn.setVisibility(View.VISIBLE);
 				btn.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -345,7 +345,7 @@ public class MapMarkerDialogHelper {
 						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 						MenuItem item;
 						item = optionsMenu.getMenu().add(R.string.shared_string_clear)
-								.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
+								.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
@@ -373,7 +373,7 @@ public class MapMarkerDialogHelper {
 
 						if (!sorted) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
-									iconsCache.getContentIcon(R.drawable.ic_action_undo_dark));
+									iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
@@ -389,7 +389,7 @@ public class MapMarkerDialogHelper {
 						}
 
 						item = optionsMenu.getMenu().add(R.string.shared_string_save_as_gpx).setIcon(
-								iconsCache.getContentIcon(R.drawable.ic_action_save));
+								iconsCache.getThemedIcon(R.drawable.ic_action_save));
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
@@ -423,7 +423,7 @@ public class MapMarkerDialogHelper {
 		more.setVisibility(View.GONE);
 		if (!marker.history && !sorted) {
 			move.setVisibility(View.VISIBLE);
-			((ImageView) move).setImageDrawable(app.getIconsCache().getContentIcon(
+			((ImageView) move).setImageDrawable(app.getIconsCache().getIcon(
 					R.drawable.ic_action_reorder, !nightMode));
 			move.setTag(new DynamicListView.DragIcon() {
 				@Override
@@ -433,7 +433,7 @@ public class MapMarkerDialogHelper {
 					MenuItem item;
 					item = optionsMenu.getMenu().add(
 							R.string.shared_string_remove).setIcon(app.getIconsCache().
-							getContentIcon(R.drawable.ic_action_remove_dark));
+							getThemedIcon(R.drawable.ic_action_remove_dark));
 					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
@@ -513,7 +513,7 @@ public class MapMarkerDialogHelper {
 					.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
 		} else {
 			waypointIcon.setImageDrawable(app.getIconsCache()
-					.getContentIcon(R.drawable.ic_action_flag_dark, !nightMode));
+					.getIcon(R.drawable.ic_action_flag_dark, !nightMode));
 			AndroidUtils.setTextSecondaryColor(ctx, text, nightMode);
 			AndroidUtils.setTextSecondaryColor(ctx, textDist, nightMode);
 		}

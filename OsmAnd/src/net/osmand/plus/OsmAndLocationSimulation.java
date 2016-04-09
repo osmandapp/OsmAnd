@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 
@@ -41,7 +40,7 @@ public class OsmAndLocationSimulation {
 //		if (!isRouteAnimating()) {
 //			List<Location> currentRoute = app.getRoutingHelper().getCurrentRoute();
 //			if (currentRoute.isEmpty()) {
-//				AccessibleToast.makeText(app, R.string.animate_routing_route_not_calculated, Toast.LENGTH_LONG).show();
+//				Toast.makeText(app, R.string.animate_routing_route_not_calculated, Toast.LENGTH_LONG).show();
 //			} else {
 //				startAnimationThread(app.getRoutingHelper(), ma, new ArrayList<Location>(currentRoute), false, 1);
 //			}
@@ -92,7 +91,7 @@ public class OsmAndLocationSimulation {
 					} else {
 						List<Location> currentRoute = app.getRoutingHelper().getCurrentCalculatedRoute();
 						if (currentRoute.isEmpty()) {
-							AccessibleToast.makeText(app, R.string.animate_routing_route_not_calculated,
+							Toast.makeText(app, R.string.animate_routing_route_not_calculated,
 									Toast.LENGTH_LONG).show();
 						} else {
 							startAnimationThread(app, new ArrayList<Location>(currentRoute), false, 1);

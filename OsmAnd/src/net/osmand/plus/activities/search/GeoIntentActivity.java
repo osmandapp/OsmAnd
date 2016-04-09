@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -127,7 +126,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			progress.dismiss();
 			if (result != null) {
 				if (result.isEmpty()) {
-					AccessibleToast.makeText(GeoIntentActivity.this, getString(R.string.search_nothing_found),
+					Toast.makeText(GeoIntentActivity.this, getString(R.string.search_nothing_found),
 							Toast.LENGTH_LONG).show();
 				} else {
 					if (result.hasZoom()) {
@@ -143,7 +142,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				}
 				finish();
 			} else {
-				AccessibleToast.makeText(GeoIntentActivity.this,
+				Toast.makeText(GeoIntentActivity.this,
 						getString(R.string.search_offline_geo_error, intent.getData()), Toast.LENGTH_LONG).show();
 			}
 		}

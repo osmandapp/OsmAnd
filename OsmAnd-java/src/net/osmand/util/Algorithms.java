@@ -225,7 +225,6 @@ public class Algorithms {
             				colorString.charAt(1) + colorString.charAt(1) +
             				colorString.charAt(2) + colorString.charAt(2) +
             				colorString.charAt(3) + colorString.charAt(3);
-            				
             	}
             	long color = Long.parseLong(colorString.substring(1), 16);
             	if (colorString.length() == 7) {

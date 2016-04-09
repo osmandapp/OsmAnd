@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
@@ -139,7 +138,7 @@ public class GpxUiHelper {
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<String> allGpxList = getSortedGPXFilenames(dir, false);
 		if (allGpxList.isEmpty()) {
-			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
 
 		if (!allGpxList.isEmpty() || showCurrentGpx) {
@@ -159,7 +158,7 @@ public class GpxUiHelper {
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<String> list = getSortedGPXFilenames(dir, false);
 		if (list.isEmpty()) {
-			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
 		if (!list.isEmpty() || showCurrentGpx) {
 			if (showCurrentGpx) {
@@ -473,7 +472,7 @@ public class GpxUiHelper {
 					@Override
 					public void run() {
 						if (warn.length() > 0) {
-							AccessibleToast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+							Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
 						} else {
 							callbackWithObject.processResult(result);
 						}

@@ -813,8 +813,6 @@
 	<string name="back_to_location">Regresar á posición</string>
 	<string name="shared_string_help">Axuda</string>
 	
-	<string name="accessibility_extensions_descr">Extensións de accesibibidade para versións antigas de Android</string>
-	<string name="accessibility_extensions">Extensións de accesibilidade</string>
 	<string name="accessibility_mode">Modo de accesibilidade</string>
 	<string name="accessibility_mode_descr">Activa as funcionalidades de accesibibidade</string>
 	<string name="shared_string_on">Activar</string>
@@ -859,13 +857,9 @@
 	<string name="settings_direction_style_descr">Escolla o estilo para expresar as direccións relativas cando se estea en movemento</string>
 	<string name="auto_announce_on">Iniciar os anuncios automáticos</string>
 	<string name="auto_announce_off">Parar os anuncios automáticos</string>
-	<string name="scroll_map_by_gestures_descr">Desprazar o mapa con xestos na pantalla táctil</string>
-	<string name="scroll_map_by_gestures">Desprazamento natural do mapa</string>
 	<string name="i_am_here">Estou aquí</string>
 	<string name="zoom_by_trackball_descr">Cambiar a ampliación do mapa con movementos horizontais da trackball</string>
 	<string name="zoom_by_trackball">Empregar a trackball para controlar a ampliación</string>
-	<string name="use_short_object_names_descr">Empregar os nomes curtos dos obxectos no modo de exploración con toques</string>
-	<string name="use_short_object_names">Empregar os nomes dos obxectos</string>
 	<string name="accessibility_preferences_descr">Preferencias relacionadas coa accesibilidade</string>
 	<string name="shared_string_accessibility">Accesibilidade</string>
     <string name="arrival_distance_factor_early">Cedo</string>

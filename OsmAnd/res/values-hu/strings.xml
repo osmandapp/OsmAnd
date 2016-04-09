@@ -13,8 +13,6 @@
     <string name="back_to_location">Vissza a pozícióra</string>
     <string name="shared_string_help">Súgó</string>
 
-    <string name="accessibility_extensions_descr">Akadálymentesítési kiegészítés régi Android verzióhoz</string>
-    <string name="accessibility_extensions">Akadálymentesítési kiegészítés</string>
     <string name="accessibility_mode">Akadálymentesítési mód</string>
     <string name="accessibility_mode_descr">Akadálymentesítési lehetőségek bekapcsolása</string>
     <string name="shared_string_on">Be</string>
@@ -59,13 +57,9 @@
     <string name="settings_direction_style_descr">Mozgás közbeni relatív irány megjelenítés stílusának kiválasztása</string>
     <string name="auto_announce_on">Automatikus bemondás indítása</string>
     <string name="auto_announce_off">Automatikus bemondás leállítása</string>
-    <string name="scroll_map_by_gestures_descr">Térkép görgetése érintőképernyős gesztusokkal</string>
-    <string name="scroll_map_by_gestures">Természetes térképgörgetés</string>
     <string name="i_am_here">Itt vagyok</string>
     <string name="zoom_by_trackball_descr">Térképnagyítás vízszintes \'trackball\' mozdulatokkal</string>
     <string name="zoom_by_trackball">\'trackball\' használata térképnagyításhoz</string>
-    <string name="use_short_object_names_descr">Rövid objektumnevek használata felfedező módban</string>
-    <string name="use_short_object_names">Objektumnevek használata</string>
     <string name="accessibility_preferences_descr">Akadálymentesítéssel kapcsolatos beállítások</string>
     <string name="shared_string_accessibility">Akadálymentesítés</string>
     <string name="rendering_out_of_memory">Kevés a folyamatmemória a terület megjelenítéséhez</string>

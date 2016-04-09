@@ -261,7 +261,6 @@
 	<string name="towards">prema</string>
 	<string name="no_info">Nema informacija</string>
 	<string name="i_am_here">Ja sam ovdje</string>
-	<string name="use_short_object_names">Koristite imena objekata</string>
 	<string name="rendering_out_of_memory">Nedovoljno memorije za prikaz odabranog područja</string>
 	<string name="email">E-pošta</string>
 

@@ -222,7 +222,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(
 						R.layout.help_to_improve_item, parent, false);
 				TextView feedbackButton = (TextView) convertView.findViewById(R.id.feedbackButton);
-				Drawable pollIcon = ctx.getIconsCache().getContentIcon(R.drawable.ic_action_message);
+				Drawable pollIcon = ctx.getIconsCache().getThemedIcon(R.drawable.ic_action_message);
 				feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
 				feedbackButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -233,7 +233,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 				});
 				TextView contactUsButton = (TextView) convertView.findViewById(R.id.contactUsButton);
 				Drawable contactUsIcon =
-						ctx.getIconsCache().getContentIcon(R.drawable.ic_action_message);
+						ctx.getIconsCache().getThemedIcon(R.drawable.ic_action_message);
 				contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
 						null);
 				final String email = ctx.getString(R.string.support_email);
@@ -396,7 +396,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 			if (menuItem.getIcon() != -1) {
 				leftImageView.setVisibility(View.VISIBLE);
 				leftImageView.setImageDrawable(context.getIconsCache()
-						.getContentIcon(menuItem.getIcon()));
+						.getThemedIcon(menuItem.getIcon()));
 			} else {
 				leftImageView.setVisibility(View.GONE);
 			}

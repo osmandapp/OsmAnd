@@ -161,7 +161,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
 			TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
 			statusTextView.setText(getString(R.string.osm_live_active));
-			statusIcon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_done));
+			statusIcon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_done));
 
 			String countryName = getSettings().BILLING_USER_COUNTRY.get();
 			if (Algorithms.isEmpty(countryName)) {
@@ -387,6 +387,13 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 				topShadowView.setVisibility(View.VISIBLE);
 				liveUpdatesSwitch.setVisibility(View.GONE);
 			}
+
+			View divider = view.findViewById(R.id.divider);
+			if (getChildrenCount(groupPosition) == 0) {
+				divider.setVisibility(View.GONE);
+			} else {
+				divider.setVisibility(View.VISIBLE);
+			}
 			return view;
 		}
 
@@ -554,7 +561,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 
 		private Drawable getSecondaryColorPaintedIcon(@DrawableRes int drawable) {
 			return fragment.getMyActivity().getMyApplication().getIconsCache()
-					.getPaintedContentIcon(drawable, secondaryColor);
+					.getPaintedIcon(drawable, secondaryColor);
 		}
 	}
 

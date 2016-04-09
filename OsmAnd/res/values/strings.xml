@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_mode">Map mode</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX files selected</string>
     <string name="rendering_value_thin_name">Thin</string>
     <string name="rendering_value_medium_name">Medium</string>
     <string name="rendering_value_bold_name">Bold</string>
@@ -123,7 +125,7 @@
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Save changes</string>
     <string name="shared_string_email_address">E-mail address</string>
-    <string name="rendering_attr_hideUnderground_name">Hide underground objects</string>
+    <string name="rendering_attr_hideUnderground_name">Underground objects</string>
     <string name="data_is_not_available">Data is not available</string>
     <string name="shared_string_remove">Remove</string>
     <string name="shared_string_read_more">Read more</string>
@@ -132,7 +134,7 @@
     <string name="road_blocked">Road blocked</string>
     <string name="shared_string_select">Select</string>
     <string name="switch_start_finish">Reverse starting point &amp; destination</string>
-    <string name="rendering_attr_hideIcons_name">Hide POI icons</string>
+    <string name="rendering_attr_hideIcons_name">POI icons</string>
     <string name="item_removed">Item removed</string>
     <string name="n_items_removed">items removed</string>
     <string name="shared_string_undo_all">UNDO ALL</string>
@@ -220,7 +222,7 @@
     <string name="lang_als">Albanian (Tosk)</string>
     <string name="read_more">Read more</string>
     <string name="whats_new">What\'s new in</string>
-    <string name="rendering_attr_hideProposed_name">Hide proposed objects</string>
+    <string name="rendering_attr_hideProposed_name">Proposed objects</string>
     <string name="shared_string_update">Update</string>
     <string name="shared_string_upload">Upload</string>
     <string name="osm_edit_created_poi">Created OSM POI</string>
@@ -348,7 +350,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>
     <string name="shared_string_logoff">Log Off</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Hide house numbers</string>
+    <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="application_dir_change_warning3">Do you want OsmAnd to also copy its data files to the new destination?</string>
     <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
     <string name="copying_osmand_file_failed">Copying files failed</string>
@@ -702,14 +704,14 @@
     <string name="gpx_monitoring_start">Start GPX logging</string>
     <string name="gpx_monitoring_stop">Stop GPX logging</string>
     <string name="gpx_start_new_segment">Start new segment</string>
-    <string name="rendering_attr_hideBuildings_name">Hide buildings</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Hide non-vehicle highways</string>
-    <string name="rendering_attr_hideText_name">Hide text</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Hide wood and scrubs</string>
+    <string name="rendering_attr_hideBuildings_name">Buildings</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>
+    <string name="rendering_attr_hideText_name">Text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Wood and scrubs</string>
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
-    <string name="rendering_attr_hideAccess_name">Hide access restrictions</string>
+    <string name="rendering_attr_hideAccess_name">Access restrictions</string>
     <string name="rendering_attr_showAccess_name">Show access restrictions</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
@@ -1425,7 +1427,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="select_navigation_mode">Select transport mode</string>
     <string name="day_night_info_description">Sunrise: %1$s \nSunset: %2$s</string>
     <string name="day_night_info">Day/night info</string>
-    <string name="map_widget_day_night">Day/night map</string>
     <string name="map_widget_renderer">Map style</string>
     <string name="layer_map_appearance">Configure screen</string>
     <string name="show_lanes">Show lanes</string>
@@ -1560,8 +1561,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="info_button">Info</string>
     <string name="back_to_location">Back to position</string>
 
-    <string name="accessibility_extensions_descr">Accessibility extensions for old Android versions</string>
-    <string name="accessibility_extensions">Accessibility extensions</string>
     <string name="accessibility_mode">Accessibility mode</string>
     <string name="accessibility_mode_descr">Turns on the accessibility features</string>
     <string name="accessibility_default">According to the global system setting</string>
@@ -1604,13 +1603,9 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
     <string name="auto_announce_on">Start auto announcing</string>
     <string name="auto_announce_off">Stop auto announcing</string>
-    <string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
-    <string name="scroll_map_by_gestures">Natural map scrolling</string>
     <string name="i_am_here">I am here</string>
     <string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
     <string name="zoom_by_trackball">Use trackball for zoom control</string>
-    <string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
-    <string name="use_short_object_names">Use object names</string>
     <string name="accessibility_preferences_descr">Accessibility related preferences</string>
     <string name="arrival_distance_factor_early">Early</string>
     <string name="arrival_distance_factor_normally">Normal</string>

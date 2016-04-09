@@ -46,18 +46,18 @@ public class CurrentPositionHelper {
 		} else if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			p = GeneralRouterProfile.CAR;
 		} else {
-			p = GeneralRouterProfile.PEDESTRIAN;
+			p = GeneralRouterProfile.CAR;
 		}
-		RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10, 
-				new HashMap<String, String>());
-		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
-		RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build(GeneralRouterProfile.CAR.name().toLowerCase(), 10, 
-				new HashMap<String, String>());
 		BinaryMapIndexReader[] rs = new BinaryMapIndexReader[app.getResourceManager().getAddressRepositories().size()];
 		int i = 0;
 		for (RegionAddressRepository rep : app.getResourceManager().getAddressRepositories()) {
 			rs[i++] = rep.getFile();
 		}
+		RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10,
+				new HashMap<String, String>());
+		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, rs);
+		RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build(GeneralRouterProfile.CAR.name().toLowerCase(), 10, 
+				new HashMap<String, String>());
 		defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, rs);
 	}
 

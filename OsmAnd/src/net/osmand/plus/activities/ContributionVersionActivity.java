@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.access.AccessibleToast;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 
@@ -103,7 +102,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		}
 		if(operationId == DOWNLOAD_BUILDS_LIST){
 			if(e != null){
-				AccessibleToast.makeText(this, getString(R.string.loading_builds_failed) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.loading_builds_failed) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 				finish();
 			} else {
 				setListAdapter(new OsmandBuildsAdapter(downloadedBuilds));
@@ -128,7 +127,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 
 	private void updateInstalledApp(boolean showMessage, Date d) {
 		if (showMessage) {
-			AccessibleToast.makeText(
+			Toast.makeText(
 					this,
 					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, 
 							AndroidUtils.formatDateTime(getMyApplication(), currentSelectedBuild.date.getTime())), Toast.LENGTH_LONG).show();

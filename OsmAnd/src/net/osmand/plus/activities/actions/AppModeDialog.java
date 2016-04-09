@@ -80,10 +80,10 @@ public class AppModeDialog {
 			} else {
 				if (useMapTheme) {
 					boolean nightMode = ctx.getDaynightHelper().isNightModeForMapControls();
-					iv.setImageDrawable(ctx.getIconsCache().getContentIcon(mode.getSmallIconDark(), !nightMode));
+					iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), !nightMode));
 					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 				} else {
-					iv.setImageDrawable(ctx.getIconsCache().getContentIcon(mode.getSmallIconDark()));
+					iv.setImageDrawable(ctx.getIconsCache().getThemedIcon(mode.getSmallIconDark()));
 				}
 				tb.findViewById(R.id.selection).setVisibility(View.INVISIBLE);
 			}
@@ -118,7 +118,7 @@ public class AppModeDialog {
 
 	static private View createToggle(LayoutInflater layoutInflater, OsmandApplication ctx, LinearLayout layout, ApplicationMode mode){
 		int metricsX = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
-		int metricsY = (int) ctx.getResources().getDimension(R.dimen.list_item_height);
+		int metricsY = (int) ctx.getResources().getDimension(R.dimen.map_mode_button_width);
 		View tb = layoutInflater.inflate(R.layout.mode_view, null);
 		tb.findViewById(R.id.app_mode_icon).setContentDescription(mode.toHumanString(ctx));
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);

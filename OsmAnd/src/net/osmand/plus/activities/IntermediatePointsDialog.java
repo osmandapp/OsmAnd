@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import net.osmand.Location;
 import net.osmand.TspAnt;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -86,7 +85,7 @@ public class IntermediatePointsDialog {
 			}
 		});
 		
-		AlertDialog.Builder builder = new AccessibleAlertBuilder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setView(contentView);
 		builder.setInverseBackgroundForced(true);
 		lv.setBackgroundColor(Color.WHITE);
@@ -253,7 +252,7 @@ public class IntermediatePointsDialog {
 				} else {
 					int icon = position == intermediates.size() - 1? R.drawable.ic_action_target:
 						R.drawable.ic_action_intermediate;
-					tv.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getContentIcon(icon), null, null, null);
+					tv.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getThemedIcon(icon), null, null, null);
 					tv.setCompoundDrawablePadding(padding);
 					final CheckBox ch = ((CheckBox) v.findViewById(R.id.toggle_item));
 					ch.setVisibility(View.VISIBLE);

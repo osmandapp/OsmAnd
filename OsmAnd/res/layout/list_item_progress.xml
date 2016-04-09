@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="74dp"
+    android:layout_height="wrap_content"
+    android:background="?attr/bg_color"
     android:descendantFocusability="blocksDescendants"
     android:gravity="center_vertical"
-    android:minHeight="@dimen/list_item_height"
+    android:minHeight="72dp"
     android:orientation="vertical"
     android:paddingLeft="16dp">
 

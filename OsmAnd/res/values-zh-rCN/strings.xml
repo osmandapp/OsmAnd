@@ -135,8 +135,6 @@
 	<string name="info_button">信息</string>
 	<string name="shared_string_help">帮助</string>
 	
-	<string name="accessibility_extensions_descr">无障碍扩展旧的Android版本</string>
-	<string name="accessibility_extensions">无障碍扩展</string>
 	<string name="accessibility_mode">无障碍模式</string>
 	<string name="accessibility_mode_descr">打开辅助功能</string>
 	<string name="shared_string_on">开</string>
@@ -169,9 +167,7 @@
 	<string name="accuracy">准确性</string>
 	<string name="altitude">海拔</string>
 	<string name="no_info">没有资料</string>
-	<string name="scroll_map_by_gestures">天然地图滚动</string>
 	<string name="i_am_here">我在这里</string>
-	<string name="use_short_object_names">使用对象名</string>
 	<string name="accessibility_preferences_descr">无障碍相关的喜好</string>
 	<string name="shared_string_accessibility">无障碍</string>
 	<string name="offline_edition">离线编辑</string>

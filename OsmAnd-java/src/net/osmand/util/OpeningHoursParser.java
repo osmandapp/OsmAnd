@@ -288,6 +288,16 @@ public class OpeningHoursParser {
 		 * lists of equal size representing the start and end times
 		 */
 		private TIntArrayList startTimes = new TIntArrayList(), endTimes = new TIntArrayList();
+		
+		/**
+		 * Public holiday flag
+		 */
+		private boolean publicHoliday = false;
+		
+		/**
+		 * School holiday flag
+		 */
+		private boolean schoolHoliday = false;
 
 		/**
 		 * return an array representing the days of the rule
@@ -305,6 +315,14 @@ public class OpeningHoursParser {
 		 */
 		public boolean[] getMonths() {
 			return months;
+		}
+		
+		public boolean appliesToPublicHolidays() {
+			return publicHoliday;
+		}
+		
+		public boolean appliesToSchoolHolidays() {
+			return schoolHoliday;
 		}
 
 		/**
@@ -619,6 +637,20 @@ public class OpeningHoursParser {
 					dash = false;
 				}
 			}
+			if (publicHoliday) {
+				if (!first) {
+					builder.append(", ");
+				}
+				builder.append("PH");
+				first = false;
+			}
+			if (schoolHoliday) {
+				if (!first) {
+					builder.append(", ");
+				}
+				builder.append("SH");
+				first = false;
+			}
 		}
 
 		/**
@@ -804,11 +836,11 @@ public class OpeningHoursParser {
 						previousMonth = m;
 					}
 					if (previousMonth == -1) {
-						int h = 0;
-						for (String s : holidayStr) {
-							if (s.charAt(0) == ch && s.charAt(1) == r.charAt(k + 1)) {
-								return new UnparseableRule(r);
-							}
+						if (ch == 'p' && r.charAt(k + 1) == 'h') {
+							basic.publicHoliday = true;
+						}
+						if (ch == 's' && r.charAt(k + 1) == 'h') {
+							basic.schoolHoliday = true;
 						}
 					}
 				}
@@ -816,7 +848,7 @@ public class OpeningHoursParser {
 				return new UnparseableRule(r);
 			}
 		}
-		if (previousDay == -1) {
+		if (previousDay == -1 && !basic.publicHoliday && !basic.schoolHoliday) {
 			// no days given => take all days.
 			for (int i = 0; i < 7; i++) {
 				days[i] = true;
@@ -976,7 +1008,7 @@ public class OpeningHoursParser {
 		String assembledString = hours.toStringNoMonths();
 		boolean isCorrect = assembledString.equalsIgnoreCase(timeString);
 		System.out.printf("  %sok: Expected: \"%s\" got: \"%s\"\n",
-				(isCorrect ? "NOT " : ""), timeString, assembledString);
+				(!isCorrect ? "NOT " : ""), timeString, assembledString);
 		if (!isCorrect) {
 			throw new IllegalArgumentException("BUG!!!");
 		}
@@ -992,10 +1024,13 @@ public class OpeningHoursParser {
 		hours = parseOpenedHours("mo-fr 07:00-19:00; sa 12:00-18:00");
 		System.out.println(hours);
 
-		hours = parseOpenedHours("Mo-Fr 11:30-15:00,17:30-23:00; Sa-Su,PH 11:30-23:00");
+		String string = "Mo-Fr 11:30-15:00, 17:30-23:00; Sa, Su, PH 11:30-23:00";
+		hours = parseOpenedHours(string);
+		testParsedAndAssembledCorrectly(string, hours);
 		System.out.println(hours);
 		testOpened("7.09.2015 14:54", hours, true);
 		testOpened("7.09.2015 15:05", hours, false);
+		testOpened("3.04.2016 16:05", hours, true);
 
 
 		// two time and date ranges
@@ -1132,7 +1167,7 @@ public class OpeningHoursParser {
 		testOpened("05.12.2015 16:00", hours, false);
 
 		// Test holidays
-		String hoursString = "mo-fr 11:00-21:00; ph off";
+		String hoursString = "mo-fr 11:00-21:00; PH off";
 		hours = parseOpenedHoursHandleErrors(hoursString);
 		testParsedAndAssembledCorrectly(hoursString, hours);
 	}

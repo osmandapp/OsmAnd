@@ -17,7 +17,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
@@ -343,7 +342,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		} catch (IOException | XmlPullParserException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
+			Toast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
 					Toast.LENGTH_LONG).show();
 		}
 		return null;
@@ -386,7 +385,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 				@Override
 				public void run() {
-					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
+					Toast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
 							Toast.LENGTH_LONG).show();
 				}
 			});
@@ -398,7 +397,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
+				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 			}
 		});
 	}

@@ -322,7 +322,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			List<String> options = new ArrayList<String>();
 
 
-			options.add(app.getString(R.string.none));
+			options.add(app.getString(R.string.shared_string_none));
 			distanceSplit.add(-1d);
 			timeSplit.add(-1);
 			addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, groups); // 50 feet, 20 yards, 20
@@ -463,9 +463,9 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				icon.setVisibility(View.VISIBLE);
 				additional.setVisibility(View.INVISIBLE);
 				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
-					icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_polygom_dark));
+					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
 				} else if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-					icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_markers_dark));
+					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_markers_dark));
 				} else {
 					int groupColor = child.group.getColor();
 					if (child.locationStart != null) {

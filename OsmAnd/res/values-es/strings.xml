@@ -651,8 +651,6 @@
     <string name="info_button">Información</string>
     <string name="back_to_location">Volver a la posición</string>
     <string name="shared_string_help">Ayuda</string>
-    <string name="accessibility_extensions_descr">Extensión de accesibilidad para versiones viejas de Android</string>
-    <string name="accessibility_extensions">Extensiones de accesibilidad</string>
     <string name="accessibility_mode">Modo accesibilidad</string>
     <string name="accessibility_mode_descr">Activa las características de accesibilidad</string>
     <string name="shared_string_on">Activado</string>
@@ -697,13 +695,9 @@
     <string name="settings_direction_style_descr">Selecciona el estilo para expresar direcciones relativas mientras se mueve</string>
     <string name="auto_announce_on">Comenzar anuncios automáticos</string>
     <string name="auto_announce_off">Parar anuncios automáticos</string>
-    <string name="scroll_map_by_gestures_descr">Desplaza el mapa por gestos en la pantalla táctil</string>
-    <string name="scroll_map_by_gestures">Desplazamiento de mapa natural</string>
     <string name="i_am_here">Estoy aquí</string>
     <string name="zoom_by_trackball_descr">Cambia el acercamiento del mapa con los movimientos horizontales de la bola de desplazamiento</string>
     <string name="zoom_by_trackball">Utilizar la bola de desplazamiento para control del acercamiento</string>
-    <string name="use_short_object_names_descr">Usa nombres cortos de objetos en modo de exploración táctil</string>
-    <string name="use_short_object_names">Utilizar nombre de objetos</string>
     <string name="accessibility_preferences_descr">Preferencias relativas a la accesibilidad</string>
     <string name="shared_string_accessibility">Accesibilidad</string>
     <string name="local_index_routing_data">Datos de la navegación</string>
@@ -1293,8 +1287,8 @@
     <string name="interrupt_music">Interrumpir música</string>
     <string name="osmo_settings_uuid">Identificador único del dispositivo</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y configura el canal de rastreo personal</string>
-    <string name="osmo_plugin_description">"Este extra proporciona parcialmente la funcionalidad de Monitorización OpenStreetMap, ver https://osmo.mobi\n\nPuedes rastrear en tiempo real todos los dispositivos de un grupo  en el que participes. También se pueden ver el punto y las pistas subidas al grupo al que perteneces.
-\n\nEl grupo no ha sido eliminado después de meses, armonizarla con las normas que crear grupos en el sitio web OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Este extra proporciona parcialmente la funcionalidad de Monitorización OpenStreetMap, ver https://osmo.mobi\n\nPuedes rastrear en tiempo real todos los dispositivos de un grupo en el que participes. También puedes ver el punto y las pistas subidas al grupo al que perteneces.
+\n\nEl grupo no ha sido eliminado después de meses, actívalo con las normas que crear grupos en el sitio web OsMo.mobi "</string>
     <string name="osmo_plugin_name">Monitorización OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
@@ -1422,14 +1416,14 @@
     <string name="none_selected_gpx">No hay archivos GPX seleccionados. Para seleccionar presione y mantenga presionado en la traza disponible.</string>
     <string name="local_index_select_gpx_file">Marcar para mostrar</string>
     <string name="no_index_file_to_download">No se encontraron descargas, compruebe su conexión a Internet.</string>
-    <string name="rendering_attr_hideBuildings_name">Ocultar edificios</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar vías no aptas para vehículos</string>
-    <string name="rendering_attr_hideText_name">Ocultar textos</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Ocultar bosques y matorrales</string>
+    <string name="rendering_attr_hideBuildings_name">Edificios</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
+    <string name="rendering_attr_hideText_name">Textos</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
     <string name="rendering_attr_buildings15zoom_name">Edificios en acercamiento 15</string>
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
-    <string name="rendering_attr_hideAccess_name">Ocultar restricciones de acceso</string>
+    <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
     <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de carreteras</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carreteras</string>
@@ -1729,7 +1723,7 @@
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_copy">Copiar</string>
     <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzar una frontera hacia otro país</string>
     <string name="routing_attr_height_name">Límite de altura</string>
     <string name="routing_attr_height_description">Especifique la altura del vehículo que se permite en las rutas</string>
@@ -1939,7 +1933,7 @@
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>
-    <string name="rendering_attr_hideProposed_name">Ocultar objetos propuestos</string>
+    <string name="rendering_attr_hideProposed_name">Objetos propuestos</string>
     <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
     <string name="lang_nds">Bajo Alemán</string>
@@ -2051,11 +2045,11 @@
     <string name="road_blocked">Carretera bloqueada</string>
     <string name="shared_string_select">Seleccionar</string>
     <string name="switch_start_finish">Invertir punto de partida y destino</string>
-    <string name="rendering_attr_hideIcons_name">Ocultar iconos de PDI</string>
+    <string name="rendering_attr_hideIcons_name">Iconos de PDI</string>
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de ediciones</string>
     <string name="reports_for">Informe para</string>
-<string name="rendering_attr_hideUnderground_name">Ocultar objetos subterráneos</string>
+<string name="rendering_attr_hideUnderground_name">Objetos subterráneos</string>
     <string name="data_is_not_available">No hay datos disponibles</string>
     <string name="shared_string_read_more">Leer más</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas sin conexión a Internet. Descarga un mapa de un país antes de que viajes para encontrar sitios y rutas en un área que no te sea familiar. Opciones básicas: • Mapas detallados de 200 países • Navegador fuera de línea con avisos de voz • Búsqueda de direcciones en modo sin conexión • Información sobre ubicaciones en el mapa: sitios de interés, cafeterías, aparcamientos, tiendas • Añadir ubicaciones a tus favoritos • Opciones adicionales de navegación en modos Conducción, Ciclismo y Pedestre : • Capacidad de ver y grabar trazas GPX • Descripciones de Wikipedia de los PDI • Añadir notas de foto, audio y vídeo al mapa • Modos de mapa Día y Noche  para una conducción más conveniente • Información sobre rutas y paradas de transporte público • Vías ciclistas y caminos • Vías de senderismo para hacer turismo en todo el mundo • Mapas en línea de numerosas fuentes • Información sobre calidad del pavimento e iluminación de las calles • Añadir, editar y eliminar PDI (para usuarios deOpenstreetmap.org) • OsMo - monitorización de directo de otros dispositivos Consigue un explorador fiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Holanda, EE.UU., Rusia, Brasil o cualquiera otro estado. Extras: • Mapas de contorno y sombreado del terreno https://goo.gl/7mojP8 Datos de curvas de nivel y visualización de terreno añadidos al mapa básico OsmAnd . • Mapas de esquí https://goo.gl/pX6DxJ La información sobre pistas de esquí, pistas de esquí de fondo, telecabinas y ascensores de esquí. • Mapa náutico https://goo.gl/0hEdxm Estilo de mapa especial para ver señales de navegación náutica para arteriales y navegación costera. • Posición de aparcamiento https://goo.gl/6jxQXF Te ayuda a marcar la ubicación de tu vehículo aparcado y ver cuánto tiempo queda si el aparcamiento es por tiempo limitado. ¡Mantente informado! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sitio: http://osmand.net Si necesitas ayuda con la aplicación OsmAnd, por favor contacta con nuestro equipo de soporte: support@osmand.net. "</string>
@@ -2121,7 +2115,7 @@
     <string name="storage_permission_restart_is_required">Ahora la aplicación puede escribir en el almacenamiento externo. Se necesita un rearranque manual de la aplicación.</string>
     <string name="release_2_3">" • OSM en vivo. Apoya a colaboradores del mapa y desarrolladores y obtén actualizaciones de mapas cada hora.
 \n\n • Marcadores de mapa. Una nueva forma de seleccionar rápidamente lugares en el mapa.\n\n • Mapas de OSM más detallados con escudos de carreteras específicos de cada país y un montón de nuevas características del mapa.\n\n • Mejor aspecto visual en la preparación de la ruta.
-\n\n • Muchas mejoras en el menú contextual del mapa como la búsqueda de direcciones contextual.\n\n y más... "</string>
+\n\n • Muchas mejoras en el menú contextual del mapa como la búsqueda de direcciones contextual.\n\n  y más... "</string>
     <string name="shared_string_move_up">Mover hacia arriba</string>
     <string name="shared_string_move_down">Mover hacia abajo</string>
     <string name="finish_navigation">Finalizar navegación</string>
@@ -2132,4 +2126,9 @@
     <string name="no_map_markers_found">Por favor, añade marcadores de mapa via mapa</string>
     <string name="no_waypoints_found">No se han encontrado puntos intermedios</string>
     <string name="file_name_containes_illegal_char">El nombre de archivo contiene caracteres ilegales</string>
-</resources>
+<string name="map_mode">Modo mapa</string>
+    <string name="number_of_gpx_files_selected_pattern">%s archivos GPX seleccionados</string>
+    <string name="rendering_value_thin_name">Fino</string>
+    <string name="rendering_value_medium_name">Mediano</string>
+    <string name="rendering_value_bold_name">Negrita</string>
+    </resources>

@@ -1,7 +1,6 @@
 package net.osmand.access;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -23,7 +22,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
 
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.shared_string_accessibility);
@@ -74,18 +73,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
 		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
-		
-		cat.addPreference(createCheckBoxPreference(settings.USE_SHORT_OBJECT_NAMES, R.string.use_short_object_names,
-				R.string.use_short_object_names_descr));
-		
-
-		if (Build.VERSION.SDK_INT < 14) { // Build.VERSION_CODES.ICE_CREAM_SANDWICH
-			cat.addPreference(createCheckBoxPreference(settings.SCROLL_MAP_BY_GESTURES, R.string.scroll_map_by_gestures,
-					R.string.scroll_map_by_gestures_descr));
-			cat.addPreference(createCheckBoxPreference(settings.ACCESSIBILITY_EXTENSIONS, R.string.accessibility_extensions,
-					R.string.accessibility_extensions));
-		}
-    }
+	}
 
 
 	protected void addSpeechRateSetting(PreferenceGroup grp) {

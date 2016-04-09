@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.StatFs;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Surface;
@@ -40,8 +41,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -49,6 +48,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -581,11 +581,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
+		final int defaultColor = IconsCache.getDefaultColorRes(mapActivity);
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_recordings) {
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
+					adapter.getItem(pos).setColorRes(SHOW_RECORDINGS.get() ?
+							R.color.osmand_orange : defaultColor);
+					adapter.notifyDataSetChanged();
 					updateLayers(mapView, mapActivity);
 				}
 				return true;
@@ -594,6 +598,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_recordings, app)
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
+				.setColor(SHOW_RECORDINGS.get() ? R.color.osmand_orange : defaultColor)
 				.setPosition(12)
 				.setListener(listener).createItem());
 	}
@@ -720,7 +725,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		// double lat = mapActivity.getMapView().getLatitude();
 		// double lon = mapActivity.getMapView().getLongitude();
 		if (loc == null) {
-			AccessibleToast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
+			Toast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
 			return;
 		}
 		double lon = loc.getLongitude();
@@ -734,7 +739,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void chooseDefaultAction(final double lat, final double lon, final MapActivity mapActivity) {
-		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(mapActivity);
+		AlertDialog.Builder ab = new AlertDialog.Builder(mapActivity);
 		ab.setItems(
 				new String[]{mapActivity.getString(R.string.recording_context_menu_arecord),
 						mapActivity.getString(R.string.recording_context_menu_vrecord),
@@ -959,7 +964,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void logErr(Exception e) {
 		log.error("Error starting recorder ", e);
-		AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+		Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 	}
 
 	protected void openCamera() {
@@ -1088,7 +1093,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					mediaRecFile = f;
 
 				} catch (Exception e) {
-					AccessibleToast.makeText(app, e.getMessage(), Toast.LENGTH_LONG).show();
+					Toast.makeText(app, e.getMessage(), Toast.LENGTH_LONG).show();
 					e.printStackTrace();
 					res = false;
 				}
@@ -1112,7 +1117,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				runMediaRecorder(mapActivity, mr, f);
 			} catch (Exception e) {
 				log.error("Error starting audio recorder ", e);
-				AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : "
+				Toast.makeText(app, app.getString(R.string.recording_error) + " : "
 						+ e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		} else {
@@ -1404,7 +1409,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			mapActivity.startActivityForResult(takePictureIntent, 205);
 		} catch (Exception e) {
 			log.error("Error taking a picture ", e);
-			AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 	}
 

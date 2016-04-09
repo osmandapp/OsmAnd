@@ -28,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
@@ -416,7 +415,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 			}
 
 			((ImageView) options).setImageDrawable(getMyApplication().getIconsCache()
-					.getContentIcon(R.drawable.ic_overflow_menu_white));
+					.getThemedIcon(R.drawable.ic_overflow_menu_white));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -454,7 +453,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).
-				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_show_on_map));
+				setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_show_on_map));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -466,7 +465,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		});
 		if (info instanceof OpenstreetmapPoint && info.getAction() != Action.DELETE) {
 			item = optionsMenu.getMenu().add(R.string.poi_context_menu_modify_osm_change)
-					.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_edit_dark));
+					.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				
 
@@ -482,7 +481,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 			});
 		}
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete).
-				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_delete_dark));
+				setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -494,7 +493,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 			}
 		});
 		item = optionsMenu.getMenu().add(R.string.local_openstreetmap_upload).
-				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_export));
+				setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_export));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -650,7 +649,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		protected void onPostExecute(String result) {
 			getActivity().setProgressBarIndeterminateVisibility(false);
 			if (result != null) {
-				AccessibleToast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
 			} else {
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);

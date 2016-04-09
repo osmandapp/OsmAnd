@@ -172,7 +172,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 						activity.getMyApplication().getAvoidSpecificRoads().addImpassableRoad(
 								activity, latLon, false);
 					}
-					activity.refreshMap();
 					return true;
 				}
 			};

@@ -100,8 +100,6 @@
     <string name="show_ruler_level">Zobraziť pravítko</string>
     <string name="info_button">Info</string>
     <string name="back_to_location">Späť na umiestnenie</string>
-    <string name="accessibility_extensions_descr">Rozšírenia uľahčenia prístupu pre staršie verzie Androidu</string>
-    <string name="accessibility_extensions">Rozšírenia uľahčenia prístupu</string>
     <string name="accessibility_mode">Režim uľahčenia prístupu</string>
     <string name="accessibility_mode_descr">Zapnutie funkcií uľahčenia prístupu</string>
     <string name="accessibility_default">Podľa globálnych nastavení systému</string>
@@ -144,13 +142,9 @@
     <string name="settings_direction_style_descr">Výber štýlu na vyjadrenie relatívneho smerovania počas pohybu</string>
     <string name="auto_announce_on">Spustiť autom. oznamovanie</string>
     <string name="auto_announce_off">Zastaviť autom. oznamovanie</string>
-    <string name="scroll_map_by_gestures_descr">Posúvať mapu pohybmi po obrazovke</string>
-    <string name="scroll_map_by_gestures">Prirodzené posúvanie mapy</string>
     <string name="i_am_here">Tu som</string>
     <string name="zoom_by_trackball_descr">Zmeniť priblíženie mapy horizontálnymi pohybmi trackballu</string>
     <string name="zoom_by_trackball">Použiť trackball na približovanie</string>
-    <string name="use_short_object_names_descr">Použiť skrátené názvy objektov v režime prezerania dotykom</string>
-    <string name="use_short_object_names">Použiť názvy objektov</string>
     <string name="accessibility_preferences_descr">Predvoľby týkajúce sa uľahčenia prístupu</string>
     <string name="shared_string_accessibility">Uľahčenie prístupu</string>
     <string name="rendering_out_of_memory">Nedostatok procesnej pamäte na zobrazenie zvolenej oblasti</string>
@@ -1282,14 +1276,14 @@
     <string name="gpx_monitoring_start">Zapnúť zaznamenávanie GPX</string>
     <string name="gpx_monitoring_stop">Zastaviť zaznamenávanie GPX</string>
     <string name="gpx_start_new_segment">Začať nový segment</string>
-    <string name="rendering_attr_hideBuildings_name">Skryť budovy</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Skryť cesty, ktoré nie sú pre vozidlá</string>
-    <string name="rendering_attr_hideText_name">Skryť text</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Skryť lesy a kríky</string>
+    <string name="rendering_attr_hideBuildings_name">Budovy</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, ktoré nie sú pre vozidlá</string>
+    <string name="rendering_attr_hideText_name">Text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Lesy a kríky</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy pri priblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
-    <string name="rendering_attr_hideAccess_name">Skryť obmedzenia prístupu</string>
+    <string name="rendering_attr_hideAccess_name">Obmedzenia prístupu</string>
     <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
@@ -1603,7 +1597,7 @@
     <string name="storage_directory">Úložisko máp</string>
     <string name="shared_string_copy">Kopírovať</string>
     <string name="application_dir_change_warning3">Chcete aby OsmAnd skopíroval svoje údaje do nového cieľa?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Skryť čísla domov</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Čísla domov</string>
     
     <string name="routing_attr_avoid_borders_description">Vyhnúť sa prekročeniu hranice do inej krajiny</string>
     <string name="routing_attr_height_name">Výškový limit</string>
@@ -1815,7 +1809,7 @@
     <string name="map_legend">Vysvetlivky k mape</string>
     <string name="shared_string_upload">Odoslať</string>
     <string name="shared_string_update">Aktualizovať</string>
-    <string name="rendering_attr_hideProposed_name">Skryť plánované objekty</string>
+    <string name="rendering_attr_hideProposed_name">Plánované objekty</string>
 
 <string name="read_more">Prečítať viac</string>
     <string name="whats_new">Čo je nové v</string>
@@ -1928,7 +1922,7 @@
     <string name="road_blocked">Cesta zablokovaná</string>
     <string name="shared_string_select">Vybrať</string>
     <string name="switch_start_finish">Vymeniť východzí a cieľový bod</string>
-    <string name="rendering_attr_hideIcons_name">Skryť ikony bodov záujmu (POI)</string>
+    <string name="rendering_attr_hideIcons_name">Ikony bodov záujmu (POI)</string>
     <string name="number_of_contributors">Počet prispievateľov</string>
     <string name="number_of_edits">Počet zmien</string>
     <string name="reports_for">Výkaz pre</string>
@@ -1936,7 +1930,7 @@
     <string name="shared_string_status">Stav</string>
     <string name="shared_string_save_changes">Uložiť zmeny</string>
     <string name="shared_string_email_address">E-mailová adresa</string>
-    <string name="rendering_attr_hideUnderground_name">Skryť podzemné objekty</string>
+    <string name="rendering_attr_hideUnderground_name">Podzemné objekty</string>
     <string name="shared_string_read_more">Prečítať viac</string>
     <string name="find_parking">Nájsť parkovanie</string>
     <string name="show_polygons">Zobraziť polygóny</string>
@@ -2008,4 +2002,9 @@
     <string name="full_report">Plné hlásenie</string>
     <string name="open_street_map_login_and_pass">Meno a heslo pre OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
-</resources>
+<string name="rendering_value_thin_name">Tenké</string>
+    <string name="rendering_value_medium_name">Stredné</string>
+    <string name="rendering_value_bold_name">Tučné</string>
+    <string name="map_mode">Režim mapy</string>
+    <string name="number_of_gpx_files_selected_pattern">%s vybraných GPX súborov</string>
+    </resources>

@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -147,7 +146,7 @@ public class DownloadValidationManager {
 				builder.setNegativeButton(R.string.shared_string_no, null);
 				builder.show();
 			} else {
-				AccessibleToast.makeText(context, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
+				Toast.makeText(context, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
 			}
 		} else {
 			downloadFilesCheck_3_ValidateSpace(context, items);
