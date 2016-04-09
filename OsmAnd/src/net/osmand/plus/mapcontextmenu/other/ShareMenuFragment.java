@@ -105,7 +105,7 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 				final ShareItem item = getItem(position);
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				icon.setImageDrawable(menu.getMapActivity().getMyApplication()
-						.getIconsCache().getContentIcon(item.getIconResourceId(), menu.isLight()));
+						.getIconsCache().getIcon(item.getIconResourceId(), menu.isLight()));
 				TextView name = (TextView) v.findViewById(R.id.name);
 				AndroidUtils.setTextPrimaryColor(v.getContext(), name, !menu.isLight());
 				name.setText(getContext().getText(item.getTitleResourceId()));

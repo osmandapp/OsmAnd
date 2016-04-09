@@ -2,7 +2,6 @@ package net.osmand.plus.osmedit;
 
 import java.io.File;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
@@ -58,7 +57,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 				}
 				b.append(values[i]);
 			}
-			AccessibleToast.makeText(la, b.toString(), Toast.LENGTH_LONG).show();
+			Toast.makeText(la, b.toString(), Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -70,7 +69,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		la.setProgressBarIndeterminateVisibility(false);
-		AccessibleToast.makeText(la, result, Toast.LENGTH_LONG).show();
+		Toast.makeText(la, result, Toast.LENGTH_LONG).show();
 	}
 
 }

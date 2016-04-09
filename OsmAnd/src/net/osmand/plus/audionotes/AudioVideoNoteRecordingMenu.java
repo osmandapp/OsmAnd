@@ -2,7 +2,6 @@ package net.osmand.plus.audionotes;
 
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,7 +131,7 @@ public class AudioVideoNoteRecordingMenu {
 		ImageView leftButtonIcon = (ImageView) view.findViewById(R.id.leftButtonIcon);
 		View leftButtonView = view.findViewById(R.id.leftButtonView);
 		if (recording.getType() != AVActionType.REC_AUDIO) {
-			leftButtonIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_minimize));
+			leftButtonIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_minimize));
 			TextView showHideText = (TextView) view.findViewById(R.id.leftButtonText);
 			showHideText.setText(showViewfinder ?
 					view.getResources().getString(R.string.shared_string_hide) : view.getResources().getString(R.string.shared_string_show));
@@ -156,14 +155,14 @@ public class AudioVideoNoteRecordingMenu {
 		switch (recording.getType()) {
 			case REC_AUDIO:
 			case REC_VIDEO:
-				recIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_rec_stop));
+				recIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_rec_stop));
 				recText.setText(view.getResources().getString(R.string.shared_string_control_stop));
 				recText.setVisibility(View.VISIBLE);
 				updateDuration();
 				timeView.setVisibility(View.VISIBLE);
 				break;
 			case REC_PHOTO:
-				recIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_photo_dark));
+				recIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_photo_dark));
 				recText.setVisibility(View.GONE);
 				timeView.setVisibility(View.INVISIBLE);
 				break;

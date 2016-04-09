@@ -14,7 +14,6 @@ import android.text.ClipboardManager;
 import android.text.Html;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -194,7 +193,7 @@ public class ShareDialog {
 			activity.startActivity(intent);
 		} else {
 			if (Version.isMarketEnabled((OsmandApplication) activity.getApplication())) {
-				AlertDialog.Builder builder = new AccessibleAlertBuilder(activity);
+				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
 				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override

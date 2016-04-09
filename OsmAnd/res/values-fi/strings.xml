@@ -543,8 +543,6 @@
 	<string name="native_rendering">Natiivi renderöinti</string>
 	<string name="send_files_to_osm">Lähetä GPX-tiedostot OSM:iin?</string>
 	<string name="gpx_visibility_txt">Näkyvyys</string>
-	<string name="accessibility_extensions_descr">Esteettömyys laajennokset vanhoille Android versioille</string>
-	<string name="accessibility_extensions">Esteettömyys laajennokset</string>
 	<string name="accessibility_mode">Esteettömyys moodi</string>
 	<string name="accessibility_default">Globaalien systeemiasetusten mukaan</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing viivakoodinlukusovellusta ei ole asennettuna. Etsitäänkö se Marketisa?</string>

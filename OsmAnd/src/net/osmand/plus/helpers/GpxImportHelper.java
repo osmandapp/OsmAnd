@@ -12,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
@@ -190,7 +189,7 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXUtilities.GPXFile result) {
 				progress.dismiss();
-				AccessibleToast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
+				Toast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				final Intent newIntent = new Intent(mapActivity, application.getAppCustomization().getFavoritesActivity());
 				mapActivity.startActivity(newIntent);
 			}
@@ -244,7 +243,7 @@ public class GpxImportHelper {
 	private void handleResult(final GPXUtilities.GPXFile result, final String name, final boolean save) {
 		if (result != null) {
 			if (result.warning != null) {
-				AccessibleToast.makeText(mapActivity, result.warning, Toast.LENGTH_LONG).show();
+				Toast.makeText(mapActivity, result.warning, Toast.LENGTH_LONG).show();
 			} else {
 				if (save) {
 					new SaveAsyncTask(result, name).execute();
@@ -253,7 +252,7 @@ public class GpxImportHelper {
 				}
 			}
 		} else {
-			AccessibleToast.makeText(mapActivity, R.string.error_reading_gpx, Toast.LENGTH_LONG).show();
+			Toast.makeText(mapActivity, R.string.error_reading_gpx, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -312,7 +311,7 @@ public class GpxImportHelper {
 		@Override
 		protected void onPostExecute(final String warning) {
 			final String msg = warning == null ? MessageFormat.format(application.getString(R.string.gpx_saved_sucessfully), result.path) : warning;
-			AccessibleToast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
+			Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 
 			showGpxOnMap(result);
 		}

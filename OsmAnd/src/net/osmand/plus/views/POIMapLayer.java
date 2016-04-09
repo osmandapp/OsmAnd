@@ -14,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -120,7 +121,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
 				if (filter == null || latLonBounds == null) {
-					return new ArrayList<Amenity>();
+					return new ArrayList<>();
 				}
 				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
 
@@ -178,7 +179,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
 		String format = OsmAndFormatter.getPoiStringWithoutType(n,
 				view.getSettings().MAP_PREFERRED_LOCALE.get());
-		res.append(" " + format + "\n" + OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), n, true));
+		res.append(" ").append(format).append("\n").append(
+				OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), n, true));
 		return res;
 	}
 
@@ -201,7 +203,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 
 	public int getRadiusPoi(RotatedTileBox tb) {
-		int r = 0;
+		int r;
 		final double zoom = tb.getZoom();
 		if (zoom < startZoom) {
 			r = 0;
@@ -313,6 +315,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		showText(ctx, app, text, title);
 	}
 
+	public static String getSelectedPoiName(OsmandApplication app) {
+		PoiFiltersHelper pfh = app.getPoiFilters();
+		String filterId = app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get();
+		if (filterId == null) {
+			return app.getResources().getString(R.string.shared_string_none);
+		}
+		PoiUIFilter filter = pfh.getFilterById(filterId);
+		return filter.getName();
+	}
+
 	static int getResIdFromAttribute(final Context ctx, final int attr) {
 		if (attr == 0)
 			return 0;
@@ -339,8 +351,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		topBar.setNavigationIcon(back);
 		topBar.setTitle(title);
-		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
-		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
+		topBar.setBackgroundColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
+		topBar.setTitleTextColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 
 		String lng = a.getContentSelected("content", preferredLang, "en");
 		if (Algorithms.isEmpty(lng)) {
@@ -421,8 +433,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		topBar.setNavigationIcon(back);
 		topBar.setTitle(title);
-		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
-		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
+		topBar.setBackgroundColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
+		topBar.setTitleTextColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 		topBar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
@@ -437,7 +449,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		textView.setLayoutParams(llTextParams);
 		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
 		textView.setText(text);
@@ -457,7 +469,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	protected static void showPopupLangMenu(final Context ctx, Toolbar tb,
 											final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		Set<String> names = new TreeSet<String>();
+		Set<String> names = new TreeSet<>();
 		names.addAll(a.getNames("content", "en"));
 		names.addAll(a.getNames("description", "en"));
 

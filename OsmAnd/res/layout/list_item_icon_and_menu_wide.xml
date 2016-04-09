@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
-    android:minHeight="60dp"
-    tools:layout_height="60dp">
+    android:minHeight="72dp"
+    tools:layout_height="72dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon"

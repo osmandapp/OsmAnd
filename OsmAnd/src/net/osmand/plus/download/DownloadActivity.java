@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.WorldRegion;
@@ -524,7 +523,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 						}
 						b.append(w);
 					}
-					AccessibleToast.makeText(DownloadActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+					Toast.makeText(DownloadActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 				}
 				newDownloadIndexes();
 			}
@@ -635,7 +634,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				}
 			}, 1);
 		} else {
-			AccessibleToast.makeText(this,
+			Toast.makeText(this,
 					R.string.missing_write_external_storage_permission,
 					Toast.LENGTH_LONG).show();
 		}

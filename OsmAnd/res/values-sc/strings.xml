@@ -446,14 +446,14 @@
     <string name="gpx_monitoring_start">Inghitza sa registratzione GPX</string>
     <string name="gpx_monitoring_stop">Firma sa registratzione GPX</string>
     <string name="gpx_start_new_segment">Inghitza unu segmentu nou</string>
-    <string name="rendering_attr_hideBuildings_name">Cua sos edifìtzios</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Cua sas istradas non carrabiles</string>
-    <string name="rendering_attr_hideText_name">Cua su testu</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Cua padentes e buschedos</string>
+    <string name="rendering_attr_hideBuildings_name">Edifìtzios</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Istradas non carràbiles</string>
+    <string name="rendering_attr_hideText_name">Testu</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Padentes e buschedos</string>
     <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae su zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Prus minujas (a sa minuda)</string>
     <string name="rendering_attr_lessDetailed_name">Minujas de mancu</string>
-    <string name="rendering_attr_hideAccess_name">Cua sas restritziones de atzessu</string>
+    <string name="rendering_attr_hideAccess_name">Restritziones de atzessu</string>
     <string name="rendering_attr_showAccess_name">Ammustra sas restritziones de atzessu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sas istradas</string>
     <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sas istradas</string>
@@ -776,7 +776,6 @@
     <string name="direction_style_clockwise">Bùssola (12 setores)</string>
     <string name="settings_direction_style">Istile de sa diretzione</string>
     <string name="i_am_here">Deo so inoghe</string>
-    <string name="use_short_object_names">Imprea sos nùmenes de sos ogetos</string>
     <string name="accessibility_preferences_descr">Preferèntzias ligadas a s’atzessibilidade</string>
     <string name="shared_string_accessibility">Atzessibilidade</string>
     <string name="local_openstreetmap_uploading">Carrigamentu …</string>
@@ -891,8 +890,6 @@
     <string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostatziones (Amministra sos documentos de sas mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
 
     <string name="support_new_features_descr">Faghe una donatzione pro tènnere funtzionalidades noas implementadas in s’àplicu</string>
-    <string name="accessibility_extensions_descr">Estensiones pro s’atzessibilidade pro versiones betzas de Android</string>
-    <string name="accessibility_extensions">Estensiones pro s’atzessibilidade</string>
     <string name="accessibility_default">Basada in supra de sas impostatziones globales de sistema</string>
     <string name="zoomOut">Ismanniamentu in segus</string>
     <string name="zoomIn">Ismanniamentu in antis</string>
@@ -906,11 +903,8 @@
     <string name="settings_direction_style_descr">Issèbera s’istile in su cale benint espressadas in movimentu sas diretziones relativas</string>
     <string name="auto_announce_on">Incumentza s’autosinnalatzione</string>
     <string name="auto_announce_off">Firma s’autosinnalatzione</string>
-    <string name="scroll_map_by_gestures_descr">Move sa mapa cun sos gestos in s’ischermu tàtile</string>
-    <string name="scroll_map_by_gestures">Iscurrimentu naturale de sa mapa</string>
     <string name="zoom_by_trackball_descr">Muda su zoom de sa mapa cun movimentos orizontales de sa trackball</string>
     <string name="zoom_by_trackball">Imprea sa trackball pro controllare su zoom</string>
-    <string name="use_short_object_names_descr">Imprea sos nùmenes curtzos de sos ogetos in sa modalidade esploratzione tàtile</string>
     <string name="arrival_distance_factor_early">Chitzo</string>
     <string name="arrival_distance_factor_normally">Normale</string>
     <string name="arrival_distance_factor_late">Tardu</string>
@@ -1752,7 +1746,7 @@
     <string name="rendering_value_highContrastRoads_name">Istradas a cuntrastu artu</string>
     <string name="storage_directory_multiuser">Memòria multi-impreadore</string>
     <string name="storage_directory">Memòria de sas mapas</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Cua sos nùmeros de sas domos</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Nùmeros de sas domos</string>
     <string name="routing_attr_height_name">Lìmite de artària</string>
     <string name="routing_attr_height_description">Dislinda s’artària de su veìculu permitida pro sas istradas</string>
     <string name="routing_attr_avoid_borders_description">Non rugrare sas fronteras intre sos istados</string>
@@ -1981,7 +1975,7 @@
     <string name="shared_string_update">Agiorna</string>
     <string name="read_more">Leghe àteru</string>
     <string name="whats_new">Ite b\'est de nou in</string>
-    <string name="rendering_attr_hideProposed_name">Cua sos ogetos propostos</string>
+    <string name="rendering_attr_hideProposed_name">Ogetos propostos</string>
     <string name="lang_nds">Bassu-tedescu</string>
     <string name="lang_mk">Matzèdone</string>
     <string name="lang_fy">Frisonu otzidentale</string>
@@ -2083,7 +2077,7 @@
     <string name="rec_split">Intervallu de registratzione</string>
     <string name="rec_split_title">Imprea un’intervallu de registratzione</string>
     <string name="switch_start_finish">Furria puntos de incumintzu e destinatzione</string>
-    <string name="rendering_attr_hideIcons_name">Cua sas iconas de sos PDI</string>
+    <string name="rendering_attr_hideIcons_name">Iconas de sos PDI</string>
     <string name="number_of_contributors">Nùmeru de cuntribuidores</string>
     <string name="number_of_edits">Nùmeru de modìficas</string>
     <string name="reports_for">Sinnala pro</string>
@@ -2093,7 +2087,7 @@
     <string name="add_time_span">Annanghe intervallu de tempus</string>
     <string name="road_blocked">Àndala blocada</string>
     <string name="shared_string_select">Ischerta</string>
-    <string name="rendering_attr_hideUnderground_name">Cua ogetos suta de terra</string>
+    <string name="rendering_attr_hideUnderground_name">Ogetos suta de terra</string>
     <string name="shared_string_read_more">Leghe àteru</string>
     <string name="find_parking">Agata unu parchègiu</string>
     <string name="shared_string_status">Istadu</string>
@@ -2170,4 +2164,6 @@
 <string name="rendering_value_thin_name">Fine</string>
     <string name="rendering_value_medium_name">Mesanu</string>
     <string name="rendering_value_bold_name">Grussu</string>
+    <string name="map_mode">Modalidade mapa</string>
+    <string name="number_of_gpx_files_selected_pattern">%s documentos GPX ischertados</string>
     </resources>

@@ -33,7 +33,7 @@ public class BaseOsmAndFragment extends Fragment {
 	}
 
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color){
-		return getIconsCache().getPaintedContentIcon(id, color);
+		return getIconsCache().getPaintedIcon(id, color);
 	}
 
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId){
@@ -41,7 +41,7 @@ public class BaseOsmAndFragment extends Fragment {
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int id){
-		return getIconsCache().getContentIcon(id);
+		return getIconsCache().getThemedIcon(id);
 	}
 
 	protected void setThemedDrawable(View parent, @IdRes int viewId, @DrawableRes int iconId) {

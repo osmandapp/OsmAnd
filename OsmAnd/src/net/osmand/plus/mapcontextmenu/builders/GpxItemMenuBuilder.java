@@ -65,7 +65,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 		llIconParams.setMargins(0, 0, gpxSmallIconMargin, 0);
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		icon.setLayoutParams(llIconParams);
-		icon.setImageDrawable(app.getIconsCache().getContentIcon(iconId));
+		icon.setImageDrawable(app.getIconsCache().getThemedIcon(iconId));
 		ll.addView(icon);
 	}
 

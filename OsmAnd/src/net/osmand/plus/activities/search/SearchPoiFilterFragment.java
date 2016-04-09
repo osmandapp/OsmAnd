@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
@@ -69,7 +68,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
         v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
         ((EditText)v.findViewById(R.id.searchEditText)).setHint(R.string.search_poi_category_hint);
         ((ImageView)v.findViewById(R.id.search_icon)).setImageDrawable(
-        		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_search_dark));
+        		getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark));
         
         setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
         setupOptions((ImageView) v.findViewById(R.id.options));
@@ -78,7 +77,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
     }
 	
 	private void setupOptions(ImageView options) {
-		options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+		options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -213,7 +212,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		final Object item = getListAdapter().getItem(position);
 		ResourceManager rm = getApp().getResourceManager();
 		if (!rm.containsAmenityRepositoryToSearch(false)) {
-			AccessibleToast.makeText(getActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
+			Toast.makeText(getActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
 			return;
 		}
 		if (item instanceof PoiUIFilter) {
@@ -332,7 +331,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 
 		MenuItem item = optionsMenu.getMenu().add(R.string.poi_filter_custom_filter)
-				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

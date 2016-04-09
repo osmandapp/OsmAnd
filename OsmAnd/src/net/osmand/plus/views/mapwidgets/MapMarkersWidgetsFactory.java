@@ -234,6 +234,10 @@ public class MapMarkersWidgetsFactory {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 		}
 
+		if (customLocation) {
+			heading = 0f;
+		}
+
 		boolean newImage = false;
 		DirectionDrawable dd;
 		if (!(arrowImg.getDrawable() instanceof DirectionDrawable)) {

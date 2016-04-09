@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -128,7 +127,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 		Button getButton = (Button)findViewById(R.id.plugin_get);
 		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
 		settingsButton.setCompoundDrawablesWithIntrinsicBounds(
-				getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings),
+				getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_settings),
 				null, null, null);
 		View installHeader = findViewById(R.id.plugin_install_header);
 
@@ -138,7 +137,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 			settingsButton.setVisibility(View.GONE);
 			installHeader.setVisibility(View.VISIBLE);
 			View worldGlobeIcon = installHeader.findViewById(R.id.ic_world_globe);
-			Drawable worldGlobeDrawable = getMyApplication().getIconsCache().getContentIcon(
+			Drawable worldGlobeDrawable = getMyApplication().getIconsCache().getThemedIcon(
 					R.drawable.ic_world_globe_dark);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 				worldGlobeIcon.setBackground(worldGlobeDrawable);

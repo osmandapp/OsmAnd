@@ -90,7 +90,7 @@ public class RouteResultPreparationTest {
 
         List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, startPoint, endPoint, null);
         Set<Long> reachedSegments = new TreeSet<Long>();
-
+        Assert.assertNotNull(routeSegments);
         int prevSegment = -1;
         for (int i = 0; i <= routeSegments.size(); i++) {
             if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {

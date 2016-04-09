@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -200,7 +199,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 					.setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
 			reloadData();
 		} else {
-			AccessibleToast.makeText(context, R.string.specified_directiory_not_writeable,
+			Toast.makeText(context, R.string.specified_directiory_not_writeable,
 					Toast.LENGTH_LONG).show();
 		}
 		return wr;

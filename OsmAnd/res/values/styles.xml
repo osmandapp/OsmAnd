@@ -365,7 +365,12 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="TextAppearance.OsmandListItemTitle" parent="TextAppearance.AppCompat.Subhead">
+    <style name="TextAppearance.ListItemTitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.ListItemCategoryTitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="typeface">@string/font_roboto_medium</item>
     </style>
 </resources>

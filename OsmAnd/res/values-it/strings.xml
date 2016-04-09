@@ -677,8 +677,6 @@
     <string name="info_button">Info</string>
     <string name="back_to_location">Torna alla posizione</string>
 
-    <string name="accessibility_extensions_descr">Estensioni per l\'accessibilità per vecchie versioni di Android</string>
-    <string name="accessibility_extensions">Estensioni per l\'accessibilità</string>
     <string name="accessibility_mode">Modalità accessibile</string>
     <string name="accessibility_mode_descr">Abilita le funzioni relative all\'accessibilità</string>
     <string name="accessibility_default">Basata sulle impostazioni globali di sistema</string>
@@ -721,13 +719,9 @@
     <string name="settings_direction_style_descr">Scegli lo stile in cui vengono espresse in movimento le direzioni relative</string>
     <string name="auto_announce_on">Avvia gli annunci automatici</string>
     <string name="auto_announce_off">Ferma gli annunci automatici</string>
-    <string name="scroll_map_by_gestures_descr">Muovi la mappa con i gesti sullo schermo tattile</string>
-    <string name="scroll_map_by_gestures">Scorrimento naturale della mappa</string>
     <string name="i_am_here">Io sono qui</string>
     <string name="zoom_by_trackball_descr">Cambia lo zoom della mappa con movimenti orizzontali della trackball</string>
     <string name="zoom_by_trackball">Usa la trackball per il controllo dello zoom</string>
-    <string name="use_short_object_names_descr">Usa i nomi corti degli oggetti in modalità esplorazione col tocco</string>
-    <string name="use_short_object_names">Usa i nomi degli oggetti</string>
     <string name="accessibility_preferences_descr">Preferenze relative all\'accessibilità</string>
     <string name="shared_string_accessibility">Accessibilità</string>
     <string name="index_name_north_america">Nord America</string>
@@ -1443,14 +1437,14 @@
     <string name="osmo_group_information_desc">" - Quando crei un gruppo, per favore, dagli un nome e una descrizione\n - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new\n - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti\n - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI\n - I gruppi privati sono limitati a 8 persone\n - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi\n - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.\nPotrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.\nVuoi procedere con una nuova registrazione?</string>
-    <string name="rendering_attr_hideBuildings_name">Nascondi gli edifici</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Nascondi le strade non carrabili</string>
-    <string name="rendering_attr_hideText_name">Nascondi il testo</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Nascondi foreste e boscaglie</string>
+    <string name="rendering_attr_hideBuildings_name">Edifici</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Strade non carrabili</string>
+    <string name="rendering_attr_hideText_name">Testo</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Foreste e boscaglie</string>
     <string name="rendering_attr_buildings15zoom_name">Edifici da zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
-    <string name="rendering_attr_hideAccess_name">Nascondi le limitazioni di accesso</string>
+    <string name="rendering_attr_hideAccess_name">Limitazioni di accesso</string>
     <string name="rendering_attr_showAccess_name">Mostra le limitazioni di accesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
@@ -1810,7 +1804,7 @@
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Nascondi i numeri civici</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Numeri civici</string>
 
     <string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione</string>
     <string name="routing_attr_height_name">Limite di altezza</string>
@@ -2037,7 +2031,7 @@
 
 
 
-    <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
+    <string name="rendering_attr_hideProposed_name">Oggetti proposti</string>
     <string name="read_more">Altro</string>
     <string name="whats_new">Novità</string>
     <string name="share_osm_edits_subject">Modifiche OSM condivise tramite OsmAnd</string>
@@ -2139,7 +2133,7 @@
     <string name="n_items_removed">oggetti cancellati</string>
     <string name="shared_string_undo_all">ANNULLA TUTTO</string>
     <string name="switch_start_finish">Inverti punti di partenza e destinazione</string>
-    <string name="rendering_attr_hideIcons_name">Nascondi le icone dei PDI</string>
+    <string name="rendering_attr_hideIcons_name">Icone dei PDI</string>
     <string name="number_of_edits">Numero di modifiche</string>
     <string name="number_of_contributors">Numero di contributori</string>
     <string name="shared_string_select">Scegli</string>
@@ -2149,7 +2143,7 @@
     <string name="road_blocked">Strada bloccata</string>
     <string name="add_time_span">Aggiungi durata</string>
     <string name="data_is_not_available">Dati non disponibili</string>
-    <string name="rendering_attr_hideUnderground_name">Nascondi gli oggetti sotterranei</string>
+    <string name="rendering_attr_hideUnderground_name">Oggetti sotterranei</string>
     <string name="shared_string_read_more">Approfondisci</string>
     <string name="shared_string_email_address">Indirizzo email</string>
     <string name="shared_string_status">Stato</string>
@@ -2226,4 +2220,9 @@
 \n\n • Molti miglioramenti nel menu contestuale della mappa e nella ricerca contestuale degli indirizzi.\n\n e altro… "</string>
     <string name="rec_split">Frazionatore delle registrazioni</string>
     <string name="rec_split_title">Usa il frazionamento delle registrazioni</string>
+    <string name="rendering_value_thin_name">Sottile</string>
+    <string name="rendering_value_medium_name">Medio</string>
+    <string name="rendering_value_bold_name">Grosso</string>
+    <string name="map_mode">Modalità mappa</string>
+    <string name="number_of_gpx_files_selected_pattern">%s file GPX selezionati</string>
     </resources>

@@ -66,7 +66,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.NavigationService;
@@ -341,8 +340,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final Drawable srcSignalBig = getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
 //		final Drawable srcinactive = getResources().getDrawable(R.drawable.mon_osmo_inactive);
 		final Drawable srcSignalinactive = getResources().getDrawable(R.drawable.mon_osmo_signal_inactive);
-//		final Drawable srcSignalinactive = app.getIconsCache().getPaintedContentIcon(R.drawable.mon_osmo_signal_inactive,
-//				Color.LTGRAY);
 		OsMoService service = osMoPlugin.getService();
 		OsMoTracker tracker = osMoPlugin.getTracker();
 
@@ -674,7 +671,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public static void shareSessionUrl(OsMoPlugin osMoPlugin, Activity ctx) {
 		String sessionURL = osMoPlugin.getTracker().getSessionURL();
 		if (sessionURL == null) {
-			AccessibleToast.makeText(ctx, R.string.osmo_session_not_available, Toast.LENGTH_SHORT).show();
+			Toast.makeText(ctx, R.string.osmo_session_not_available, Toast.LENGTH_SHORT).show();
 		} else {
 			ShareDialog dlg = new ShareDialog(ctx);
 			dlg.setTitle(ctx.getString(R.string.osmo_share_session));
@@ -864,7 +861,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		};
 		ImageButton info = (ImageButton) v.findViewById(R.id.info);
-		info.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_gabout_dark));
+		info.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_gabout_dark));
 		info.setOnClickListener(click);
 		warnCreateDesc.setOnClickListener(click);
 
@@ -1210,7 +1207,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if (model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
-//				(ImageView) v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings));
+//				(ImageView) v.setImageDrawable(getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_settings));
 
 				if ((selectedObject == model) != ((CheckBox) v).isChecked()) {
 					((CheckBox) v).setChecked(selectedObject == model);

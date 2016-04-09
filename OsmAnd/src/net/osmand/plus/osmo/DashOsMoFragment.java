@@ -152,7 +152,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 
 		ImageButton share = (ImageButton) header.findViewById(R.id.share);
 		IconsCache cache = getMyApplication().getIconsCache();
-		share.setImageDrawable(cache.getContentIcon(R.drawable.ic_action_gshare_dark));
+		share.setImageDrawable(cache.getThemedIcon(R.drawable.ic_action_gshare_dark));
 		share.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -291,10 +291,10 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			if (device.isEnabled()) {
 				icon.setImageDrawable(getMyApplication().getIconsCache().
-						getPaintedContentIcon(R.drawable.ic_person, device.getColor()));
+						getPaintedIcon(R.drawable.ic_person, device.getColor()));
 			} else {
 				icon.setImageDrawable(getMyApplication().getIconsCache().
-						getContentIcon(R.drawable.ic_person));
+						getThemedIcon(R.drawable.ic_person));
 			}
 
 			((TextView) v.findViewById(R.id.name)).setText(name);

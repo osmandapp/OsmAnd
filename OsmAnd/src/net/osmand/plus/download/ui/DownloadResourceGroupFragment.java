@@ -269,15 +269,15 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			Drawable iconLeft;
 			if (group.getType() == DownloadResourceGroupType.VOICE_REC
 					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
-				iconLeft = ctx.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_volume_up);
+				iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_volume_up);
 			} else {
 				IconsCache cache = ctx.getMyApplication().getIconsCache();
 				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
-					iconLeft = cache.getContentIcon(R.drawable.ic_world_globe_dark);
+					iconLeft = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 				} else {
 					DownloadResourceGroup ggr = group
 							.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-					iconLeft = cache.getContentIcon(R.drawable.ic_map);
+					iconLeft = cache.getThemedIcon(R.drawable.ic_map);
 					if (ggr != null && ggr.getIndividualResources() != null) {
 						IndexItem item = null;
 						for (IndexItem ii : ggr.getIndividualResources()) {

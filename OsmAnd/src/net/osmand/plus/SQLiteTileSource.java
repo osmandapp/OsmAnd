@@ -10,7 +10,6 @@ import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -124,7 +123,7 @@ public class SQLiteTileSource implements ITileSource {
 				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
 			} catch (bsh.EvalError e) {
 				LOG.debug("getUrlToLoad Error" + e.getMessage());
-				AccessibleToast.makeText(ctx, e.getMessage(), Toast.LENGTH_LONG).show();
+				Toast.makeText(ctx, e.getMessage(), Toast.LENGTH_LONG).show();
 				LOG.error(e.getMessage(), e);
 				return null;
 			}

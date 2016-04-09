@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
@@ -274,7 +273,7 @@ public class DownloadIndexesThread {
 
 	private boolean checkRunning() {
 		if (getCurrentRunningTask() != null) {
-			AccessibleToast.makeText(app, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
+			Toast.makeText(app, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return false;
@@ -429,7 +428,7 @@ public class DownloadIndexesThread {
 		@Override
 		protected void onPostExecute(String result) {
 			if (result != null && result.length() > 0) {
-				AccessibleToast.makeText(ctx, result, Toast.LENGTH_LONG).show();
+				Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
 			}
 			if (uiActivity instanceof Activity) {
 				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);

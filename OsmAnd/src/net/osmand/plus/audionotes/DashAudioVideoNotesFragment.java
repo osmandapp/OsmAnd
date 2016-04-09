@@ -92,7 +92,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 			getNoteView(recording, view, getMyApplication());
 			((ImageView) view.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
-					.getContentIcon(R.drawable.ic_play_dark));
+					.getThemedIcon(R.drawable.ic_play_dark));
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

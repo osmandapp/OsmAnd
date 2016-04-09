@@ -23,8 +23,6 @@
 	<string name="back_to_location">위치로 돌아감</string>
 	
 	
-	<string name="accessibility_extensions_descr">이전 안드로이드 버전에 대한 접근성(내게 필요한 옵션) 확장</string>
-	<string name="accessibility_extensions">접근성 확장</string>
 	<string name="accessibility_mode">접근성 모드</string>
 	<string name="accessibility_mode_descr">접근성(내게 필요한 옵션) 기능을 켭니다</string>
 	<string name="accessibility_default">글로벌 시스템 설정에 따름</string>
@@ -38,13 +36,9 @@
 	<string name="settings_direction_style_descr">이동하면서 상대적인 방향을 표현하는스타일을 선택합니다</string>
 	<string name="auto_announce_on">자동알림 시작</string>
 	<string name="auto_announce_off">자동알림 정지</string>
-	<string name="scroll_map_by_gestures_descr">터치스크린에서 제스쳐를 통해 지도를 스크롤합니다</string>
-	<string name="scroll_map_by_gestures">자연스런 지도 스크롤</string>
 	<string name="i_am_here">현재 나의 위치</string>
 	<string name="zoom_by_trackball_descr">수평으로 트랙볼을 움직여 지도의 확대와 축소를 변경합니다</string>
 	<string name="zoom_by_trackball">줌 제어를 위한 트랙볼 사용</string>
-	<string name="use_short_object_names_descr">터치 탐색 모드에서 짧은 개체 이름을 사용합니다</string>
-	<string name="use_short_object_names">개체 이름 사용</string>
 	<string name="accessibility_preferences_descr">접근성(내게 필요한 옵션) 관련 선호도를 선택합니다</string>
 	<string name="shared_string_accessibility">접근성</string>
 	

@@ -13,7 +13,6 @@ import android.support.v7.app.AlertDialog;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -253,7 +252,7 @@ public class AppInitializer implements IProgress {
 		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
 		// do not show each time
 		if (check && new Random().nextInt() % 5 == 1) {
-			AlertDialog.Builder builder = new AccessibleAlertBuilder(ctx);
+			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			if (maps.isEmpty()) {
 				builder.setMessage(R.string.vector_data_missing);
 			} else if (!maps.basemapExists()) {

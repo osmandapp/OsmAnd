@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -331,20 +330,20 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			protected void onPostExecute(OsmBugResult obj) {
 				if (obj != null && obj.warning == null) {
 					if(local == osmbugsUtil) { 
-						AccessibleToast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
+						Toast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
 						if(obj.local != null) {
 							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_OSM_BUG, obj.local.getText());
 							activity.getContextMenu().show(new LatLon(obj.local.getLatitude(), obj.local.getLongitude()), pd, obj.local);
 						}
 					} else {
 						if(action == Action.REOPEN) {
-							AccessibleToast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
+							Toast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
 						} else if(action == Action.MODIFY) {
-							AccessibleToast.makeText(activity, R.string.osb_comment_dialog_success, Toast.LENGTH_LONG).show();
+							Toast.makeText(activity, R.string.osb_comment_dialog_success, Toast.LENGTH_LONG).show();
 						} else if(action == Action.DELETE) {
-							AccessibleToast.makeText(activity, R.string.osn_close_dialog_success, Toast.LENGTH_LONG).show();
+							Toast.makeText(activity, R.string.osn_close_dialog_success, Toast.LENGTH_LONG).show();
 						} else if(action == Action.CREATE) {
-							AccessibleToast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
+							Toast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
 						}
 						
 					}
@@ -363,7 +362,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					} else {
 						commentBug(bug, text);
 					}
-					AccessibleToast.makeText(activity, activity.getResources().getString(r) + "\n" + obj, Toast.LENGTH_LONG).show();
+					Toast.makeText(activity, activity.getResources().getString(r) + "\n" + obj, Toast.LENGTH_LONG).show();
 				}
 			}
 		};
@@ -448,7 +447,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
 					// server validation will handle it
 //					if (us.length() == 0 || pwd.length() == 0) {
-//						AccessibleToast.makeText(activity, activity.getString(R.string.osb_author_or_password_not_specified),
+//						Toast.makeText(activity, activity.getString(R.string.osb_author_or_password_not_specified),
 //								Toast.LENGTH_SHORT).show();
 //					}
 					activity.getContextMenu().close();

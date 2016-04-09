@@ -60,7 +60,7 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int drawableRes) {
-		return getMyApplication().getIconsCache().getContentIcon(drawableRes);
+		return getMyApplication().getIconsCache().getThemedIcon(drawableRes);
 	}
 
 }
