@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.junit.Assert;
@@ -95,12 +96,18 @@ public class RouteResultPreparationTest {
             if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
                 if (prevSegment >= 0) {
                     String lanes = getLanesString(routeSegments.get(prevSegment));
+                    String turn = routeSegments.get(prevSegment).getTurnType().toXmlString();
+                    String turnLanes = turn +":" +lanes;
                     String name = routeSegments.get(prevSegment).getDescription();
 
                     long segmentId = routeSegments.get(prevSegment).getObject().getId();
                     String expectedResult = expectedResults.get(segmentId);
                     if (expectedResult != null) {
-                        Assert.assertEquals("Segment " + segmentId, expectedResult, lanes);
+                    	if(!Algorithms.objectEquals(expectedResult, turnLanes) &&
+                    			!Algorithms.objectEquals(expectedResult, lanes) && 
+                    			!Algorithms.objectEquals(expectedResult, turn)) {
+                    		Assert.assertEquals("Segment " + segmentId, expectedResult, turnLanes);
+                    	}
                     }
 
                     System.out.println("segmentId: " + segmentId + " description: " + name);
@@ -128,7 +135,7 @@ public class RouteResultPreparationTest {
             String s = "";
             for (int h = 0; h < lns.length; h++) {
                 if (h > 0) {
-                    s += ", ";
+                    s += "|";
                 }
                 if (lns[h] % 2 == 1) {
                     s += "+";
@@ -140,11 +147,11 @@ public class RouteResultPreparationTest {
                 s += TurnType.valueOf(pt, false).toXmlString();
                 int st = TurnType.getSecondaryTurn(lns[h]);
                 if (st != 0) {
-                    s += ";" + TurnType.valueOf(st, false).toXmlString();
+                    s += "," + TurnType.valueOf(st, false).toXmlString();
                 }
                 int tt = TurnType.getTertiaryTurn(lns[h]);
                 if (tt != 0) {
-                    s += ";" + TurnType.valueOf(tt, false).toXmlString();
+                    s += "," + TurnType.valueOf(tt, false).toXmlString();
                 }
 
             }

@@ -10,7 +10,7 @@
       "longitude": 35.440113
     },
     "expectedResults": {
-      "26545": "TL, C, C, C, +TR"
+      "26545": "TL|C|C|C|+TR"
     }
   },
   {
@@ -24,9 +24,9 @@
       "longitude": 35.44070949481966
     },
     "expectedResults": {
-      "26557": "+TL, C, C, C, TR",
-      "26517": "+TL, C, C, C",
-      "26545": "TL, +C, +C"
+      "26557": "+TL|C|C|C|TR",
+      "26517": "+TL|C|C|C",
+      "26545": "TL|+C|+C"
    }
   },
   {
@@ -40,7 +40,7 @@
       "longitude": 35.438198276629464
     },
     "expectedResults": {
-      "26529": "TL, C, C, +TR"
+      "26529": "TL|C|C|+TR"
    }
   },
   {
@@ -54,7 +54,7 @@
       "longitude": 35.46842032670975
     },
     "expectedResults": {
-      "26789": "+TU, +TL, +C;TL, C, C;TR"
+      "26789": "+TU|+TL|+C,TL|C|C,TR"
    }
   },
   {
@@ -68,9 +68,9 @@
       "longitude": 35.49527125060558
     },
     "expectedResults": {
-      "26717": "+TSLL;C, C, C",
+      "26717": "+TSLL,C|C|C",
       "26821": "+C",
-      "29088": "C, C, C, C, +C"
+      "29088": "C|C|C|C|+C"
     }
   },
   {
@@ -84,7 +84,7 @@
       "longitude": 35.51303619146347
     },
     "expectedResults": {
-      "27091": "+TL, +TL, +TL, C, TR, TR"
+      "27091": "+TL|+TL|+TL|C|TR|TR"
     }
   },
   {
@@ -98,7 +98,7 @@
       "longitude": 35.537424847483635
     },
     "expectedResults": {
-      "27177": "+C;TL, C"
+      "27177": "+C,TL|C"
     }
   },
   {
@@ -112,7 +112,7 @@
       "longitude": 35.553747430443764
     },
     "expectedResults": {
-      "27231": "C, C, +TR, +TR"
+      "27231": "C|C|+TR|+TR"
     }
   },
   {
@@ -126,9 +126,9 @@
       "longitude": 35.553684398531914
     },
     "expectedResults": {
-      "27305": "+TL, +TL, C, C;TR",
-      "27275": "+TL, +TL, C, C",
-      "27231": "TL, +C, +C"
+      "27305": "+TL|+TL|C|C,TR",
+      "27275": "+TL|+TL|C|C",
+      "27231": "TL|+C|+C"
     }
   },
   {
@@ -142,7 +142,7 @@
       "longitude": 35.56931899487972
     },
     "expectedResults": {
-      "27411": "TL, C, +TR;C"
+      "27411": "TL|C|+TR,C"
     }
   },
   {
@@ -156,7 +156,7 @@
       "longitude": 35.58106707036495
     },
     "expectedResults": {
-      "27435": "TL, +TR;TL"
+      "27435": "TL|+TR,TL"
     }
   },
   {
@@ -170,8 +170,8 @@
       "longitude": 35.586447581
     },
     "expectedResults": {
-      "27441": "+TL, TL;TR",
-      "27461": "TL, +C, +C"
+      "27441": "+TL|TL,TR",
+      "27461": "TL|+C|+C"
    }
   },
   {
@@ -185,8 +185,8 @@
       "longitude": 35.597948893904686
     },
     "expectedResults": {
-      "27581": "+TL, TR",
-      "27591": "+C, +C;TR"
+      "27581": "+TL|TR",
+      "27591": "+C|+C,TR"
    }
   },
   {
@@ -200,7 +200,7 @@
       "longitude": 35.61031924188137
     },
     "expectedResults": {
-      "27611": "+C;TL, +C, TR"
+      "27611": "+C,TL|+C|TR"
    }
   },
   {
@@ -214,7 +214,7 @@
       "longitude": 35.624509468025735
     },
     "expectedResults": {
-      "14418": "TL, +TL, C, C, TR"
+      "14418": "TL|+TL|C|C|TR"
    }
   },
   {
@@ -229,7 +229,22 @@
     },
     "expectedResults": {
       "43906": null,
-      "43905": "+TL;C;TR"
+      "43905": "+TL,C,TR"
+    }
+  },
+  {
+    "testName": "15.Каширское шоссе u-turn",
+    "startPoint": {
+      "latitude": 45.66869817293356,
+      "longitude": 35.44163727760315
+    },
+    "endPoint": {
+      "latitude": 45.66882562819617,
+      "longitude": 35.441980600357056
+    },
+    "expectedResults": {
+      "-14967": null,
+      "-14919": "TU:+C|C|C|C|C"
     }
   }
 
