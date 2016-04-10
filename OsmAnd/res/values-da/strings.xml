@@ -2335,4 +2335,18 @@
     <string name="rendering_value_bold_name">Fed</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX filer valgt</string>
     <string name="map_mode">Korttilstand</string>
+    <string name="access_default_color">Standardfarve</string>
+    <string name="access_category_choice">Vælg kategori</string>
+    <string name="access_hint_enter_name">Indtast navn</string>
+    <string name="access_hint_enter_category">Angiv kategori</string>
+    <string name="access_hint_enter_description">Angiv beskrivelse</string>
+    <string name="access_map_linked_to_location">Kort er knyttet til placering</string>
+    <string name="access_collapsed_list">Skjult liste</string>
+    <string name="access_expanded_list">Udvidet liste</string>
+    <string name="access_empty_list">Tom liste</string>
+    <string name="access_tree_list">Træ liste</string>
+    <string name="access_shared_string_not_installed">Ikke installeret</string>
+    <string name="access_widget_expand">Udvid</string>
+    <string name="access_shared_string_navigate_up">Navigere op</string>
+    <string name="access_sort">Sorter</string>
     </resources>
