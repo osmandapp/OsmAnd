@@ -98,7 +98,7 @@
       "longitude": 35.537424847483635
     },
     "expectedResults": {
-      "27177": "+C,TL|C"
+      "27177": "+TL|+TL|C,TR"
     }
   },
   {
