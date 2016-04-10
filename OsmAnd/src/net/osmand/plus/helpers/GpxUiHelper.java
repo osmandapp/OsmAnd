@@ -298,7 +298,7 @@ public class GpxUiHelper {
 					iconView.setVisibility(View.INVISIBLE);
 				} else {
 					iconView.setVisibility(View.VISIBLE);
-					iconView.setContentDescription(activity.getString(adapter.getItemName(position).contains("\n") ? R.string.shared_string_collapse : R.string.access_widget_expand));
+					iconView.setContentDescription(activity.getString(item.getTitle().contains("\n") ? R.string.shared_string_collapse : R.string.access_widget_expand));
 				}
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(item.getTitle());
