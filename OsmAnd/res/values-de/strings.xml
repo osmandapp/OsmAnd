@@ -2129,4 +2129,18 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="rendering_value_bold_name">Fett</string>
     <string name="map_mode">Kartenmodus</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX Dateien ausgewählt</string>
+    <string name="access_default_color">Standartfarbe</string>
+    <string name="access_category_choice">Kategorie auswählen</string>
+    <string name="access_hint_enter_name">Name eingeben</string>
+    <string name="access_hint_enter_category">Kategorie eingeben</string>
+    <string name="access_hint_enter_description">Beschreibung eingeben</string>
+    <string name="access_map_linked_to_location">Karte ist mit einer Position verknüpft</string>
+    <string name="access_collapsed_list">Reduzierte Liste</string>
+    <string name="access_expanded_list">Erweiterte Liste</string>
+    <string name="access_empty_list">Liste leeren</string>
+    <string name="access_tree_list">Strukturliste</string>
+    <string name="access_shared_string_not_installed">Nicht installiert</string>
+    <string name="access_widget_expand">Erweitern</string>
+    <string name="access_shared_string_navigate_up">Hoch navigieren</string>
+    <string name="access_sort">Sortierten</string>
     </resources>
