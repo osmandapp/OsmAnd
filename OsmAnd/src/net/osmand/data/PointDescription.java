@@ -85,6 +85,9 @@ public class PointDescription {
 
 	public void setName(String name){
 		this.name = name;
+		if (this.name == null) {
+			this.name = "";
+		}
 	}
 
 	public String getTypeName() {

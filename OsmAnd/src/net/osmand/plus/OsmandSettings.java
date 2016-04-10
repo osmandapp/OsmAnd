@@ -77,7 +77,7 @@ public class OsmandSettings {
 		private List<WeakReference<StateChangedListener<T>>> l = null;
 
 		@Override
-		public void addListener(StateChangedListener<T> listener) {
+		public synchronized void addListener(StateChangedListener<T> listener) {
 			if (l == null) {
 				l = new LinkedList<WeakReference<StateChangedListener<T>>>();
 			}
@@ -86,7 +86,7 @@ public class OsmandSettings {
 			}
 		}
 
-		public void fireEvent(T value) {
+		public synchronized void fireEvent(T value) {
 			if (l != null) {
 				Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
 				while (it.hasNext()) {
@@ -101,7 +101,7 @@ public class OsmandSettings {
 		}
 
 		@Override
-		public void removeListener(StateChangedListener<T> listener) {
+		public synchronized void removeListener(StateChangedListener<T> listener) {
 			if (l != null) {
 				Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
 				while (it.hasNext()) {

@@ -99,7 +99,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commit();
+				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	private void runLayoutListener() {
