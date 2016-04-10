@@ -2191,4 +2191,16 @@
     <string name="rendering_value_bold_name">Épais</string>
     <string name="number_of_gpx_files_selected_pattern">%s fichiers GPX sélectionnés</string>
     <string name="map_mode">Mode Carte</string>
+    <string name="access_default_color">Couleur par défaut</string>
+    <string name="access_category_choice">Sélectionnez une catégorie</string>
+    <string name="access_hint_enter_name">Saisissez un nom</string>
+    <string name="access_hint_enter_category">Saisissez une catégorie</string>
+    <string name="access_hint_enter_description">Saisissez une description</string>
+    <string name="access_collapsed_list">Plier la liste</string>
+    <string name="access_expanded_list">Déplier la liste</string>
+    <string name="access_empty_list">Vider la liste</string>
+    <string name="access_tree_list">Liste arborescente</string>
+    <string name="access_shared_string_not_installed">Non installé</string>
+    <string name="access_widget_expand">Déplier</string>
+    <string name="access_sort">Trier</string>
     </resources>
