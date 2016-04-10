@@ -2155,4 +2155,17 @@
     <string name="rendering_value_thin_name">細的</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX 檔案已選擇</string>
     <string name="map_mode">地圖模式</string>
+    <string name="access_default_color">預設顏色</string>
+    <string name="access_category_choice">選擇類別</string>
+    <string name="access_hint_enter_name">輸入名稱</string>
+    <string name="access_hint_enter_category">輸入類別</string>
+    <string name="access_hint_enter_description">輸入說明</string>
+    <string name="access_map_linked_to_location">地圖已連結到所在地</string>
+    <string name="access_collapsed_list">已收起清單</string>
+    <string name="access_expanded_list">已展開清單</string>
+    <string name="access_empty_list">空的清單</string>
+    <string name="access_tree_list">樹狀清單</string>
+    <string name="access_shared_string_not_installed">未安裝</string>
+    <string name="access_widget_expand">展開</string>
+    <string name="access_sort">分類</string>
     </resources>
