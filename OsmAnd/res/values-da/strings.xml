@@ -2344,7 +2344,7 @@
     <string name="access_collapsed_list">Skjult liste</string>
     <string name="access_expanded_list">Udvidet liste</string>
     <string name="access_empty_list">Tom liste</string>
-    <string name="access_tree_list">Træ liste</string>
+    <string name="access_tree_list">Hierarkisk liste</string>
     <string name="access_shared_string_not_installed">Ikke installeret</string>
     <string name="access_widget_expand">Udvid</string>
     <string name="access_shared_string_navigate_up">Navigere op</string>
