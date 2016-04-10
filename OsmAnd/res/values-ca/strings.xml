@@ -2000,4 +2000,18 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rec_split_title">Utilitza divisió d\'enregistrament</string>
     <string name="map_mode">Mode mapa</string>
     <string name="number_of_gpx_files_selected_pattern">"Seleccionats  %s arxius GPX"</string>
+    <string name="access_default_color">Color per defecte</string>
+    <string name="access_category_choice">Trieu la categoria</string>
+    <string name="access_hint_enter_name">Introduïu el nom</string>
+    <string name="access_hint_enter_category">Indiqueu la categoria</string>
+    <string name="access_hint_enter_description">Introduïu una descripció</string>
+    <string name="access_map_linked_to_location">El mapa està vinculat a la posició</string>
+    <string name="access_collapsed_list">Llista recollida</string>
+    <string name="access_expanded_list">Llista desplegada</string>
+    <string name="access_empty_list">Llista buida</string>
+    <string name="access_tree_list">Llista en arbre</string>
+    <string name="access_shared_string_not_installed">No està instal·lat</string>
+    <string name="access_widget_expand">Expandeix</string>
+    <string name="access_shared_string_navigate_up">Desplaça amunt</string>
+    <string name="access_sort">Ordena</string>
     </resources>
