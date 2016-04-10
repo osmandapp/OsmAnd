@@ -1977,7 +1977,7 @@
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Пожалуйста введите имя</string>
-    <string name="dashboard_or_drawer_description">Вместо статического меню можно использовать новый интерфейс в виде домашней страницы. Ваш выбор всегда может быть изменен в настройках панели управления.</string>
+    <string name="dashboard_or_drawer_description">Вместо статического меню можно использовать новый интерфейс в виде домашней страницы. Ваш выбор всегда может быть изменен в настройках домашней страницы.</string>
     <string name="watch">Просмотреть</string>
     <string name="no_map_markers_found">Пожалуйста, добавьте маркеры на карте</string>
     <string name="no_waypoints_found">Путевых точек не найдено</string>
