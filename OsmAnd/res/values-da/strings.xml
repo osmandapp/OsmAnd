@@ -2341,7 +2341,7 @@
     <string name="access_hint_enter_category">Angiv kategori</string>
     <string name="access_hint_enter_description">Angiv beskrivelse</string>
     <string name="access_map_linked_to_location">Kort er forbundet til placering</string>
-    <string name="access_collapsed_list">Sammenfaldet liste</string>
+    <string name="access_collapsed_list">Sammenfoldet liste</string>
     <string name="access_expanded_list">Udvidet liste</string>
     <string name="access_empty_list">Tom liste</string>
     <string name="access_tree_list">Hierarkisk liste</string>
