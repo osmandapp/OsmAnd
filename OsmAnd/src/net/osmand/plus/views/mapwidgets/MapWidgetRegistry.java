@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -357,7 +356,6 @@ public class MapWidgetRegistry {
 
 	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 							 Set<MapWidgetRegInfo> groupTitle, final ApplicationMode mode) {
-		@ColorRes final int defaultColor = IconsCache.getDefaultColorRes(mapActivity);
 		for (final MapWidgetRegInfo r : groupTitle) {
 			if (mode == ApplicationMode.DEFAULT) {
 				if ("intermediate_distance".equals(r.key) || "distance".equals(r.key) || "time".equals(r.key)) {
@@ -373,7 +371,7 @@ public class MapWidgetRegistry {
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, mapActivity)
 					.setIcon(r.drawableMenu)
 					.setSelected(selected)
-					.setColor(selected ? R.color.osmand_orange : defaultColor)
+					.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
 					.setDescription(r.visibleCollapsed(mode) ? desc : null)
 					.setListener(new ContextMenuAdapter.OnRowItemClick() {
@@ -431,7 +429,7 @@ public class MapWidgetRegistry {
 							}
 							ContextMenuItem item = adapter.getItem(position);
 							item.setSelected(visible);
-							item.setColorRes(visible ? R.color.osmand_orange : defaultColor);
+							item.setColorRes(visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							item.setDescription(visible && collapsed ? desc : null);
 							adapter.notifyDataSetChanged();
 						}
