@@ -23,13 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -348,14 +345,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		});
 		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
-		mapAppModeShadow.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				onApplicationModePress(v);
-			}
-		});
-		appModeIcon = (ImageView) mapActivity.findViewById(R.id.map_app_mode_icon);
+		appModeIcon = (ImageView) mapActivity.findViewById(R.id.map_layers_button);
 		zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
 
 		View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
@@ -548,12 +538,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			//if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
 			if ((System.currentTimeMillis() - lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);
-				appModeIcon.setVisibility(View.VISIBLE);
-				appModeIcon.setImageDrawable(
-						app.getIconsCache().getIcon(
+				appModeIcon.setImageDrawable(app.getIconsCache().getIcon(
 								settings.getApplicationMode().getSmallIconDark(), !isNight));
 			} else {
-				appModeIcon.setVisibility(View.GONE);
 				zoomText.setVisibility(View.VISIBLE);
 				zoomText.setTextColor(textColor);
 				zoomText.setText(getZoomLevel(tileBox));
@@ -838,35 +825,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 
-	}
-
-	private void onApplicationModePress(View v) {
-		final QuickAction mQuickAction = new QuickAction(v);
-		mQuickAction.setOnAnchorOnTop(true);
-		List<ApplicationMode> vls = ApplicationMode.values(mapActivity.getMyApplication().getSettings());
-		final ApplicationMode[] modes = vls.toArray(new ApplicationMode[vls.size()]);
-		Drawable[] icons = new Drawable[vls.size()];
-		int[] values = new int[vls.size()];
-		for (int k = 0; k < modes.length; k++) {
-			icons[k] = app.getIconsCache().getIcon(modes[k].getSmallIconDark(), R.color.icon_color);
-			values[k] = modes[k].getStringResource();
-		}
-		for (int i = 0; i < modes.length; i++) {
-			final ActionItem action = new ActionItem();
-			action.setTitle(mapActivity.getResources().getString(values[i]));
-			action.setIcon(icons[i]);
-			final int j = i;
-			action.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mapActivity.getMyApplication().getSettings().APPLICATION_MODE.set(modes[j]);
-					mQuickAction.dismiss();
-				}
-			});
-			mQuickAction.addActionItem(action);
-		}
-		mQuickAction.setAnimStyle(QuickAction.ANIM_AUTO);
-		mQuickAction.show();
 	}
 
 	private String getZoomLevel(@NonNull RotatedTileBox tb) {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
-import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
@@ -20,7 +19,6 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -85,13 +83,10 @@ public class ConfigureMapMenu {
 	private final class LayerMenuListener extends OnRowItemClick {
 		private MapActivity ma;
 		private ContextMenuAdapter cm;
-		@ColorRes
-		final int defaultColor;
 
 		private LayerMenuListener(MapActivity ma, ContextMenuAdapter cm) {
 			this.ma = ma;
 			this.cm = cm;
-			defaultColor = IconsCache.getDefaultColorRes(ma);
 		}
 
 		private List<String> getAlreadySelectedGpx() {
@@ -117,7 +112,7 @@ public class ConfigureMapMenu {
 				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 				if (btn != null && btn.getVisibility() == View.VISIBLE) {
 					btn.setChecked(!btn.isChecked());
-					cm.getItem(pos).setColorRes(btn.isChecked() ? R.color.osmand_orange : defaultColor);
+					cm.getItem(pos).setColorRes(btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 					return false;
 				} else {
@@ -131,7 +126,7 @@ public class ConfigureMapMenu {
 			final OsmandSettings settings = ma.getMyApplication().getSettings();
 			final ContextMenuItem item = cm.getItem(pos);
 			if (item.getSelected() != null) {
-				item.setColorRes(isChecked ? R.color.osmand_orange : defaultColor);
+				item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				adapter.notifyDataSetChanged();
 			}
 			if (itemId == R.string.layer_poi) {
@@ -180,7 +175,7 @@ public class ConfigureMapMenu {
 					boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
 					item.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles());
 					item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
-					item.setColorRes(selected ? R.color.osmand_orange : defaultColor);
+					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 				}
 			});
@@ -199,7 +194,7 @@ public class ConfigureMapMenu {
 							.SELECTED_POI_FILTER_FOR_MAP.get() != null;
 					item.setSelected(selected);
 					item.setDescription(POIMapLayer.getSelectedPoiName(myApplication));
-					item.setColorRes(selected ? R.color.osmand_orange : defaultColor);
+					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 				}
 			});
@@ -207,7 +202,6 @@ public class ConfigureMapMenu {
 	}
 
 	private void createLayersItems(ContextMenuAdapter adapter, MapActivity activity) {
-		@ColorRes final int defaultColor = IconsCache.getDefaultColorRes(activity);
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
@@ -219,7 +213,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_favorites, activity)
 				.setSelected(settings.SHOW_FAVORITES.get())
-				.setColor(selected ? R.color.osmand_orange : defaultColor)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_fav_dark)
 				.setListener(l).createItem());
 		selected = settings.SELECTED_POI_FILTER_FOR_MAP.get() != null;
@@ -227,7 +221,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(settings.SELECTED_POI_FILTER_FOR_MAP.get() != null)
 				.setDescription(POIMapLayer.getSelectedPoiName(app))
-				.setColor(selected ? R.color.osmand_orange : defaultColor)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
@@ -235,7 +229,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_amenity_label, activity)
 				.setSelected(settings.SHOW_POI_LABEL.get())
-				.setColor(selected ? R.color.osmand_orange : defaultColor)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_text_dark)
 				.setListener(l).createItem());
 		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
@@ -243,7 +237,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_gpx_layer, activity)
 				.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles())
 				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
-				.setColor(selected ? R.color.osmand_orange : defaultColor)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());

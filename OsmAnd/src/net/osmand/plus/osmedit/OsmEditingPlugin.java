@@ -21,7 +21,6 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -257,11 +256,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
-		final int defaultColor = IconsCache.getDefaultColorRes(mapActivity);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_osm_bugs, mapActivity)
 				.setSelected(settings.SHOW_OSM_BUGS.get())
 				.setIcon(R.drawable.ic_action_bug_dark)
-				.setColor(settings.SHOW_OSM_BUGS.get() ? R.color.osmand_orange : defaultColor)
+				.setColor(settings.SHOW_OSM_BUGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 					@Override
@@ -270,7 +268,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							OsmandSettings.OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
 							showOsmBugs.set(isChecked);
 							adapter.getItem(pos).setColorRes(showOsmBugs.get() ?
-									R.color.osmand_orange : defaultColor);
+									R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							adapter.notifyDataSetChanged();
 							updateLayers(mapActivity.getMapView(), mapActivity);
 						}

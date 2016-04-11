@@ -71,16 +71,16 @@ public class ContextMenuAdapter {
 	}
 
 
-	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean holoLight) {
+	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
-				items.toArray(new ContextMenuItem[items.size()]), app, holoLight, changeAppModeListener);
+				items.toArray(new ContextMenuItem[items.size()]), app, lightTheme, changeAppModeListener);
 	}
 
 	public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
 		private OsmandApplication app;
-		private boolean holoLight;
+		private boolean lightTheme;
 		@LayoutRes
 		private int layoutId;
 		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
@@ -91,11 +91,11 @@ public class ContextMenuAdapter {
 									   @IdRes int textViewResourceId,
 									   ContextMenuItem[] objects,
 									   OsmandApplication app,
-									   boolean holoLight,
+									   boolean lightTheme,
 									   ConfigureMapMenu.OnClickListener changeAppModeListener) {
 			super(context, layoutRes, textViewResourceId, objects);
 			this.app = app;
-			this.holoLight = holoLight;
+			this.lightTheme = lightTheme;
 			this.layoutId = layoutRes;
 			this.changeAppModeListener = changeAppModeListener;
 			mIconsCache = app.getIconsCache();
@@ -125,7 +125,7 @@ public class ContextMenuAdapter {
 			}
 			if (convertView == null || !(convertView.getTag() instanceof Integer)
 					|| (layoutId != (Integer) convertView.getTag())) {
-				int themeRes = holoLight ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+				int themeRes = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
@@ -134,7 +134,7 @@ public class ContextMenuAdapter {
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
 				@ColorRes
-				int color = holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
+				int color = lightTheme ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
 				Drawable drawable = mIconsCache.getIcon(item.getIcon(), color);
 				float density = getContext().getResources().getDisplayMetrics().density;
 				int paddingInPixels = (int) (24 * density);
@@ -144,8 +144,11 @@ public class ContextMenuAdapter {
 				tv.setCompoundDrawablePadding(paddingInPixels);
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
-					Drawable drawable = mIconsCache.getIcon(item.getIcon(),
-							item.getThemedColorRes(getContext()));
+					int colorRes = item.getColorRes();
+					if (colorRes == ContextMenuItem.INVALID_ID) {
+						colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
+					}
+					Drawable drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
@@ -156,7 +159,7 @@ public class ContextMenuAdapter {
 			int secondaryDrawable = item.getSecondaryIcon();
 			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
 				@ColorRes
-				int colorRes = holoLight ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+				int colorRes = lightTheme ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
 				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);

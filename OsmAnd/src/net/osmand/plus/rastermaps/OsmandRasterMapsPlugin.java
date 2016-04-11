@@ -24,7 +24,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -235,8 +234,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView,
 												ContextMenuAdapter adapter,
 												final MapActivity mapActivity) {
-		final int defaultColor = IconsCache.getDefaultColorRes(mapActivity);
-
 		final MapActivityLayers layers = mapActivity.getMapLayers();
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
@@ -269,7 +266,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 										item.setDescription(overlayMapDescr);
 										item.setSelected(hasOverlayDescription);
-										item.setColorRes(hasOverlayDescription ? R.color.osmand_orange : defaultColor);
+										item.setColorRes(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 										adapter.notifyDataSetChanged();
 									}
 								});
@@ -288,7 +285,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 										item.setDescription(underlayMapDescr);
 										item.setSelected(hasUnderlayDescription);
-										item.setColorRes(hasUnderlayDescription ? R.color.osmand_orange : defaultColor);
+										item.setColorRes(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 
 										adapter.notifyDataSetChanged();
 									}
@@ -305,7 +302,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
 				.setDescription(overlayMapDescr)
 				.setSelected(hasOverlayDescription)
-				.setColor(hasOverlayDescription ? R.color.osmand_orange : defaultColor)
+				.setColor(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_top_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
@@ -317,7 +314,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
 				.setDescription(underlayMapDescr)
 				.setSelected(hasUnderlayDescription)
-				.setColor(hasUnderlayDescription ? R.color.osmand_orange : defaultColor)
+				.setColor(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_bottom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
