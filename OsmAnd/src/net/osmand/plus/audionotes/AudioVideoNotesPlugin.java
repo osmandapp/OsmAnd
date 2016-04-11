@@ -137,9 +137,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_CAMERA_FOCUS_INFINITY = 3;
 	public static final int AV_CAMERA_FOCUS_MACRO = 4;
 	public static final int AV_CAMERA_FOCUS_CONTINUOUS = 5;
-	// shoto shot:
+	// photo shot:
 	private static int shotId = 0;
 	private SoundPool sp = null;
+	public static final int FULL_SCEEN_RESULT_DELAY_MS = 5000;
 
 	public final CommonPreference<Integer> AV_CAMERA_PICTURE_SIZE;
 	public final CommonPreference<Integer> AV_CAMERA_FOCUS_TYPE;
@@ -1909,6 +1910,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 
+			if (recordingMenu != null) {
+				recordingMenu.showFinalPhoto(data, FULL_SCEEN_RESULT_DELAY_MS);
+			}
 			startPhotoTimer();
 		}
 	}
@@ -1923,7 +1927,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			public void run() {
 				finishPhotoRecording(false);
 			}
-		}, 4000);
+		}, FULL_SCEEN_RESULT_DELAY_MS);
 	}
 
 	private void cancelPhotoTimer() {
@@ -1940,6 +1944,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				cam.cancelAutoFocus();
 				cam.stopPreview();
+				if (recordingMenu != null) {
+					recordingMenu.hideFinalPhoto();
+				}
 				cam.startPreview();
 				internalShoot();
 

@@ -21,6 +21,13 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -80,14 +87,29 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/centerButtonIcon"
+                <FrameLayout
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/orange_circle_background_style"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_action_done"/>
+                    android:layout_gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/centerButtonIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/orange_circle_background_style"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_action_done"/>
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:max="500"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/progress_photo_circular"/>
+
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/centerButtonText"
