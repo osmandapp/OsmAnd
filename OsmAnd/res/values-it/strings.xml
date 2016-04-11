@@ -2225,4 +2225,18 @@
     <string name="rendering_value_bold_name">Grosso</string>
     <string name="map_mode">Modalità mappa</string>
     <string name="number_of_gpx_files_selected_pattern">%s file GPX selezionati</string>
+    <string name="access_default_color">Colore preimpostato</string>
+    <string name="access_category_choice">Scegli la categoria</string>
+    <string name="access_hint_enter_name">Immetti il nome</string>
+    <string name="access_hint_enter_category">Immetti la categoria</string>
+    <string name="access_hint_enter_description">Immetti la descrizione</string>
+    <string name="access_map_linked_to_location">La mappa è collegata alla località</string>
+    <string name="access_collapsed_list">Lista raggruppata</string>
+    <string name="access_expanded_list">Lista espansa</string>
+    <string name="access_empty_list">Lista vuota</string>
+    <string name="access_tree_list">Lista ad albero</string>
+    <string name="access_shared_string_not_installed">Non installato</string>
+    <string name="access_widget_expand">Espandi</string>
+    <string name="access_shared_string_navigate_up">Naviga in su</string>
+    <string name="access_sort">Ordina</string>
     </resources>
