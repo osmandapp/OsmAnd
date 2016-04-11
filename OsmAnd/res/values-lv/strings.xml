@@ -895,7 +895,7 @@
   <string name="bg_service_sleep_mode_on">Izslēgt\n fona režīmu</string>
 
 
-<string name="layer_map_appearance">Ekrāna skats</string>
+<string name="layer_map_appearance">Ekrāna uzstādījumi</string>
 <string name="show_lanes">Rādīt joslas</string>
 <string name="avoid_unpaved">Izvairīties no grants ceļiem</string>
 <string name="avoid_ferries">Izvairīties no pārceltuvēm</string>
@@ -1350,7 +1350,7 @@
     <string name="osmo_group_share">Lai pievienotos grupai %2$s, norādiet grupas id (%1$s) vai spiediet %3$s.</string>
     <string name="osmo_share_connect_device">Atļaut patstāvīgi sekot ierīcei</string>
     <string name="osmo_share_current_session">Dalīties tekošajā sesijā pārlūkā</string>
-    <string name="osmo_session_not_available">Sesija nav pieejama, lūdzu, pārbaudiet vai \'sūtīt pozīciju\' ir iespējots.</string>
+    <string name="osmo_session_not_available">Sesija nav pieejama, lūdzu, pārbaudiet vai \'sūtīt pozīciju\' ir ieslēgts.</string>
     <string name="osmo_share_session">Dalīties sesijā</string>
     <string name="osmo_session_id_share">Sesijas url ierīces izsekošanai (%1$s)</string>
     <string name="osmo_tracker_id_share">"Lai pievienotos ierīcei %2$s, spiediet uz linka  %3$s vai norādiet trakera id (%1$s)"</string>
@@ -1424,7 +1424,7 @@
     
     <string name="shared_string_my_tracks">Visi treki</string>
     <string name="shared_string_my_favorites">Mana izlase</string>
-    <string name="shared_string_my_places">Manas vietas</string>
+    <string name="shared_string_my_places">Izlase</string>
     
     <string name="gpx_file_is_empty">Gpx treks ir tukšs</string>
     <string name="loading_smth">Ielādē %1$s…</string>
@@ -1500,7 +1500,7 @@
     <string name="lang_sw">Svahili</string>
     <string name="forward">Uz priekšu</string>
     <string name="home">Mana izvēlne</string>
-    <string name="live_monitoring_m_descr">Sūtīt sekošanas datus uz norādīto tīkla servisu, ja ir iespējots GPX ieraksts.</string>
+    <string name="live_monitoring_m_descr">Sūtīt sekošanas datus uz norādīto tīkla servisu, ja ir ieslēgts GPX ieraksts.</string>
 	<string name="live_monitoring_m">Sekošana tīklā (no GPX ieraksta)</string>
     <string name="live_monitoring_start">Sākt sekošanu tīklā</string>
 	<string name="live_monitoring_stop">Pārtraukt sekošanu tīklā</string>
@@ -1593,7 +1593,7 @@
 	<string name="map_widget_right">Labais panelis</string>
 	<string name="map_widget_left">Kreisais panelis</string>
     <string name="shared_string_show">Rādīt</string>
-	<string name="configure_map">Kartes konfigurācija</string>
+	<string name="configure_map">Kartes attēlošana</string>
     <string name="osmo_device_not_found">Ierīce nav atrasta</string>
     <string name="anonymous_user">Anonīms lietotājs</string>
     <string name="anonymous_user_hint">Anonīms lietotājs nevar:\n- izveidot grupas\n- sinhronizēt grupas un ierīces ar serveri\n- pārvaldīt grupas un ierīces no sava interneta konta.</string>
@@ -1652,9 +1652,9 @@
 	<string name="shared_string_ellipsis">…</string>
 	
 	<string name="shared_string_enable">Iespējot</string>
-	<string name="shared_string_disable">Atspējots</string>
-	<string name="shared_string_enabled">Iespējots</string>
-	<string name="shared_string_disabled">Atspējots</string>
+	<string name="shared_string_disable">Atslēgts</string>
+	<string name="shared_string_enabled">Ieslēgts</string>
+	<string name="shared_string_disabled">Atslēgts</string>
 	<string name="shared_string_selected">Atlasīts</string>
 	<string name="shared_string_deselect">Noņemt iezīmi</string>
 	<string name="shared_string_deselect_all">Neatlasīt neko</string>
@@ -1705,7 +1705,7 @@
     <string name="search_radius_proximity">Attālumā līdz</string>
     <string name="sleep_mode_stop_dialog">Vai izslēgt GPS darbību fonā?</string>
 	<string name="stop_navigation_service">Izslēgt</string>
-	<string name="save_global_track_interval_descr">Izvēlieties intervālu treka ierakstam (iespējots ar GPX ierakstīšanas pogu uz kartes)</string>
+	<string name="save_global_track_interval_descr">Izvēlieties intervālu treka ierakstam (ieslēgt ar GPX ierakstīšanas pogu uz kartes)</string>
 	<string name="save_global_track_interval">Ierakstīšanas intervāls</string>
 	<string name="enable_sleep_mode">Iespējot GPS darbību fonā</string>
 	<string name="save_track_to_gpx_globally">Rakstīt treku GPX failā</string>
@@ -2019,7 +2019,7 @@
     <string name="lang_et">Igauniešu</string>
     <string name="lang_ceb">Cebuanu</string>
     <string name="disable_recording_once_app_killed">Nerakstīt automātiski</string>
-    <string name="rendering_value_disabled_name">Atspējots</string>
+    <string name="rendering_value_disabled_name">Atslēgts</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Iekrāsojums pēc maršruta gaitas</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Iekrāsojums pēc OSMC</string>
     <string name="osmo_share_my_location">Sūtīt atrašanās vietu</string>
@@ -2145,7 +2145,7 @@
     <string name="osm_user_stat">Labojumi %1$s, vieta %2$s, kopējie labojumi %3$s</string>
     <string name="osm_editors_ranking">OSM labotāju reitings</string>
     <string name="lang_nds">Zemvācu</string>
-    <string name="plugin_touringview_descr">"Tūrisma karte rāda maksimāli daudz noderīgas detaļas ceļotājiem un profesionālajiem braucējiem, īpaši izceļot ceļus, trekus, norādes un orientēšanās zīmes.\n\nVisi ceļi, atkarībā no to tipa, ir iezīmēti ar atšķirīgām krāsām, kas būs īpaši noderīgi lielu kravu pārvadātājiem.\n\nTāpat tiek nodrošinātas speciālas tūrisma opcijas kā veloceļiņu vai kalnu taciņu maršrutu rādīšana.\n\nAtsevišķas kartes lejupielāde nav nepieciešama.\n\nŠo karti var atkārtoti deaktivizēt šeit vai galvenajā izvēlē pie kartes konfigurācijas. "</string>
+    <string name="plugin_touringview_descr">"Tūrisma karte rāda maksimāli daudz noderīgas detaļas ceļotājiem un profesionālajiem braucējiem, īpaši izceļot ceļus, trekus, norādes un orientēšanās zīmes.\n\nVisi ceļi, atkarībā no to tipa, ir iezīmēti ar atšķirīgām krāsām, kas būs īpaši noderīgi lielu kravu pārvadātājiem.\n\nTāpat tiek nodrošinātas speciālas tūrisma opcijas kā veloceļiņu vai kalnu taciņu maršrutu rādīšana.\n\nAtsevišķas kartes lejupielāde nav nepieciešama.\n\nŠo karti var atkārtoti deaktivizēt šeit vai galvenajā izvēlē - kartes attēlošana. "</string>
     <string name="map_mode">Kartes veids</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX faili atzīmēti</string>
     <string name="rendering_value_thin_name">Tievi</string>
@@ -2165,7 +2165,7 @@
     <string name="full_report">Pilnā atskaite</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap lietotāja vārds un parole</string>
     <string name="osm_live_email_desc">Osm_live epasta ziņojumi</string>
-    <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.\n\nSpeciāls kartes papildinājums rādīs navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).\n\nLai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti kartes konfigurācijas izvēlnē. "</string>
+    <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.\n\nSpeciāls kartes papildinājums rādīs navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).\n\nLai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti galvenajā izvēlnē - kartes attēlošana. "</string>
     <string name="number_of_contributors">Līdzstrādnieku skaits</string>
     <string name="file_name_containes_illegal_char">Faila vārds satur neatļautas rakstu zīmes</string>
 <string name="access_default_color">Noklusētā krāsa</string>
