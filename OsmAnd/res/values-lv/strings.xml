@@ -191,7 +191,7 @@
   <string name="shared_string_rename">Pārsaukt</string>
   
   <string name="poi_filter_nominatim">Tiešaistes POI - Nominatim</string>
-  <string name="search_position_current_location_search">Meklē atrašanos…</string>
+  <string name="search_position_current_location_search">Meklē atrašanās vietu…</string>
   <string name="search_position_current_location_found">Mana vieta (atrasta)</string>
   <string name="search_position_address">Adrese…</string>
   <string name="search_position_favorites">Izlase…</string>
@@ -337,7 +337,7 @@
   <string name="send_location_sms_pattern">Vieta: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Lai redzētu atrašanās vietu, sekojiet web pārlūka saitei %1$s vai android saitei %2$s</string>
   <string name="send_location">Sūtīt atrašanās vietu</string>
-  <string name="context_menu_item_share_location">Koplietot atrašanos</string>
+  <string name="context_menu_item_share_location">Koplietot atrašanās vietu</string>
   <string name="add_waypoint_dialog_added">GPX ceļapunkts \'\'{0}\'\' tika veiksmīgi pievienots</string>
   <string name="add_waypoint_dialog_title">Pievienot ceļapunktu GPX trasei</string>
   <string name="context_menu_item_add_waypoint">Pievienot GPX ceļapunktu</string>
@@ -1936,7 +1936,7 @@
     <string name="simulate_initial_startup_descr">Imitē aplikācijas pirmo atvēršanu pēc instalācijas, saglabājot visus uzstādījumus</string>
     <string name="simulate_initial_startup">Imitēt pirmo atvēršanu</string>
     <string name="share_geo">ģeo:</string>
-    <string name="share_menu_location">Koplietot atrašanos</string>
+    <string name="share_menu_location">Koplietot atrašanās vietu</string>
     <string name="shared_string_send">Sūtīt</string>
     <string name="favorite_category_dublicate_message">Sāda kategorija jau eksistē. Lūdzu izvēlieties citu nosaukumu.</string>
     <string name="favorite_category_name">Kategorija</string>
