@@ -325,4 +325,11 @@ public class AudioVideoNoteRecordingMenu {
 			recTimer = null;
 		}
 	}
+
+	public void showFinalPhoto(final byte[] data, long duration) {
+	}
+
+	public void hideFinalPhoto() {
+	}
+
 }
