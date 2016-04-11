@@ -156,7 +156,7 @@ public class ContextMenuAdapter {
 			int secondaryDrawable = item.getSecondaryIcon();
 			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
 				@ColorRes
-				int colorRes = holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
+				int colorRes = holoLight ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
 				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);

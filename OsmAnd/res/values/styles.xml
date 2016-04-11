@@ -111,6 +111,7 @@
         <item name="android:actionMenuTextColor">@color/color_white</item>
 
         <item name="dialog_inactive_text_color">@color/icon_color_light</item>
+        <item name="secondary_icon_color">@color/icon_color_light</item>
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
@@ -242,6 +243,7 @@
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
 
         <item name="dialog_inactive_text_color">@color/dialog_inactive_text_color_dark</item>
+        <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
