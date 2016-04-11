@@ -2092,7 +2092,7 @@
 <string name="poi_protected_area">Àrea protegida</string>
 	<string name="poi_fair_trade_no">Comerç just: no</string>
 	<string name="poi_fair_trade_yes">Comerç just: sí</string>
-	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Motiu de l\'explosió: aplicació industrial, moviment de terres</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Objecte de l\'explosió: ús industriall, moviment de terres</string>
 	<string name="poi_nuclear_explosion_time_utc">Hora de la explosió (UTC)</string>
 	<string name="poi_nuclear_explosion_hole">Cràter de l\'explosió</string>
 	<string name="poi_bridge_ref">Codi de referència del pont</string>
@@ -2172,5 +2172,17 @@
 	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipus d\'explosió: atmosfèrica, descàrrega aèria</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipus d\'explosió: atmosfèrica, de superfície, torre</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipus d\'explosió: atmosfèrica, globus</string>
-	<string name="poi_nuclear_explosion_type_underground">Tipus d\'explossió: subterrània</string>
+	<string name="poi_nuclear_explosion_type_underground">Tipus d\'explosió: subterrània</string>
+	<string name="poi_nuclear_explosion_date_utc">Data de l\'explosió (UTC)</string>
+	<string name="poi_nuclear_explosion_type_space">Tipus d\'explosió: espacial (per sobre dels 80 km d\'alçada)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Tipus d\'explosió: submarina</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Objecte de l\'explosió: relacionat amb armes nuclears</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Objecte de l\'explosió: efectivitat de les armes</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Objecte de l\'explosió: experiment de seguretat</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Objecte de l\'explosió: recerca per usos pacífics</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Objecte de l\'explosió: ciència bàsica</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Objecte de l\'explosió: ús industrial, excavació</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Objecte de l\'explosió: ús industrial, sonda sísmica</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Objecte de l\'explosió: ús industrial, estimulació petroliera</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Objecte de l\'explosió: ús industrial</string>
 	</resources>
