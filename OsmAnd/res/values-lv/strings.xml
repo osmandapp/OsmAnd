@@ -141,7 +141,7 @@
   <string name="user_password">Jūsu OSM parole</string>
   <string name="user_password_descr">Nepieciešams, lai veiktu openstreetmap.org augšuplādi</string>
   <string name="osmand_service">Fona režīms</string>
-  <string name="osmand_service_descr">OsmAnd darbosies arī fonā, kad ekrāns būs izslēgts</string>
+  <string name="osmand_service_descr">OsmAnd darbosies fonā, kad ekrāns būs izslēgts</string>
   
   
   
@@ -482,7 +482,7 @@
   
   <string name="use_trackball_descr">Lietojiet trackball, lai pārvietotu karti</string>
   <string name="use_trackball">Lietot trackball</string>
-  <string name="background_service_wait_int_descr">Uzstādiet maksimālo gaidīšanas laiku pozīcijas noteikšanai fona režīmā</string>
+  <string name="background_service_wait_int_descr">Izvēlieties maksimālo laiku vietas noteikšanai fona servisam</string>
   <string name="background_service_wait_int">Gaidīšanas laiks</string>
   
   <string name="where_am_i">Kur es esmu?</string>
@@ -491,13 +491,13 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekundes</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Iestatiet gps ieslēgšanās intervālu aplikācijas darbībai fona režīmā</string>
+  <string name="background_service_int_descr">Iestatiet pamošanās intervālu fona servisam</string>
   <string name="background_service_int">GPS pamošanās intervāls</string>
   <string name="background_service_provider_descr">Izvēlēties vietas noteicēju miega režīmam</string>
   <string name="background_service_provider">Vietas noteicējs</string>
   <string name="background_router_service_descr">Darbina OsmAnd fonā, lai sekotu atrašanās vietai, kamēr ekrāns ir izslēgts</string>
   <string name="background_router_service">OsmAnd ieslēgts fona režīms</string>
-  <string name="off_router_service_no_gps_available">Navigàcijas darbībai fonā ir nepieciešams ieslēgt atrašanās vietas noteikšanu.</string>
+  <string name="off_router_service_no_gps_available">Navigācijas fona servisam nepieciešams ieslēgt atrašanās vietas noteicēju.</string>
   <string name="hide_poi_filter">Nerādīt filtru</string>
   <string name="show_poi_filter">Rādīt filtru</string>
   <string name="search_poi_filter">Filtrs</string>
@@ -891,8 +891,8 @@
   <string name="bg_service_interval">Uzstādīt pamošanās intervālu:</string>
   <string name="screen_is_locked">Lai atslēgtu ekrānu, nospiediet atslēdziņas ikonu</string>
   <string name="bg_service_screen_unlock">Atslēgt ekrānu</string>
-  <string name="bg_service_sleep_mode_off">Ieslēgt\nfona režīmu</string>
-  <string name="bg_service_sleep_mode_on">Izslēgt\n fona režīmu</string>
+  <string name="bg_service_sleep_mode_off">Darbināt aplikāciju fonā</string>
+  <string name="bg_service_sleep_mode_on">Izslēgt\n aplikācijas darbību fonā</string>
 
 
 <string name="layer_map_appearance">Ekrāna uzstādījumi</string>
@@ -1543,7 +1543,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikāņu ceļu karte</string>
     <string name="routing_attr_no_new_routing_name">Ne v1.9 maršruta nosacījumi</string>
     <string name="routing_attr_no_new_routing_description">Nelietot jaunos maršruta nosacījumus, kas atrodami 1.9 versijā</string>
-    <string name="dash_download_msg_none">Vai lejupielādēt kartes telefonā?</string>
+    <string name="dash_download_msg_none">Vai lejupielādēt kartes?</string>
     <string name="dash_download_msg">Lejupielādēti %1$s no kartēm</string>
     <string name="dash_download_new_one">Lejupielādēt jaunu karti</string>
     <string name="dash_download_manage">Pārvaldīt</string>
@@ -1707,7 +1707,7 @@
 	<string name="stop_navigation_service">Izslēgt</string>
 	<string name="save_global_track_interval_descr">Izvēlieties intervālu treka ierakstam (ieslēgt ar GPX ierakstīšanas pogu uz kartes)</string>
 	<string name="save_global_track_interval">Ierakstīšanas intervāls</string>
-	<string name="enable_sleep_mode">Iespējot GPS darbību fonā</string>
+	<string name="enable_sleep_mode">Atļaut gps darboties fonā</string>
 	<string name="save_track_to_gpx_globally">Rakstīt treku GPX failā</string>
 	<string name="save_track_to_gpx_globally_headline">Treka ieraksta logošana pēc pieprasījuma</string>
 	<string name="save_track_to_gpx_globally_descr">Atrašanās vietas rakstīšana GPX failā var tikt ieslēgta vai izslēgta ar GPX ieraksta pogu uz kartes</string>
@@ -1837,8 +1837,8 @@
     <string name="download_files_error_not_enough_space">Nav brīvas vietas! Vajag {3} MB pagaidu un {1} MB patstāvīgas vietas. Patreiz brīvi pieejami ir tikai {2} MB.</string>
     <string name="upload_osm_note_description">Jūs varat augšupielādēt OSM Note anonīmi caur savu OpenStreetMap.org profilu.</string>
     <string name="upload_osm_note">Augšupielādēt OSM Note</string>
-    <string name="map_marker_1st">Pirmās kartes marķieris</string>
-    <string name="map_marker_2nd">Otrās kartes marķieris</string>
+    <string name="map_marker_1st">Pirmais marķieris</string>
+    <string name="map_marker_2nd">Otrais marķieris</string>
     <string name="add_points_to_map_markers_q">Vai gribat pievienot visus punktus kartes marķierī?</string>
     <string name="shared_string_add_to_map_markers">Pievienot kartes marķierim</string>
     <string name="select_map_markers">Atzīmēt kartes marķierus</string>
@@ -1871,7 +1871,7 @@
     <string name="rec_split_storage_size_desc">Krātuves izmērs ierakstu veikšanai</string>
     <string name="live_updates">Live atjauninājumi</string>
     <string name="select_voice_provider">Izvēlieties balss vadību</string>
-    <string name="select_voice_provider_descr">Izvēlieties savai valodai piemērotu balss vadību</string>
+    <string name="select_voice_provider_descr">Kādā valodā tiks izrunātas norādes</string>
     <string name="impassable_road_desc">Atzīmējiet ceļus, no kuriem jāizvairās navigācijas laikā</string>
     <string name="no_location_permission">Aplikācijai nav atļauts piekļūt atrašanās vietas datiem.</string>
     <string name="no_camera_permission">Aplikācijai nav atļaujas izmantot kameru.</string>
