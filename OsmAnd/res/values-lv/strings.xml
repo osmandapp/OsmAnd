@@ -941,25 +941,7 @@
 	<string name="snap_to_road_descr">Navigācijas laikā tuvināt ceļam</string>
 	<string name="snap_to_road">Tuvināt ceļam</string>
 	<string name="osmand_short_description_80_chars">OsmAnd ir atvērtā koda navigācijas aplikācija bezsaistes un tiešsaistes kartēm</string>
-	<string name="osmand_long_description_1000_chars">
-		"OsmAnd (OSM Automated Navigation Directions) OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem OpenStreetMap (OSM) datiem. Visi kartes dati (vektoru un bilžu kartes) var tikt saglabātas telefona atmiņā, lai vēlāk to izmantotu bezsaistē. OsmAnd arī piedāvā bezsaistes un tiešsaistes navigācijas funkcionalitāti t.sk. balss vadību.
-
-		Programmas pamata funcionalitāte iekļauj:
-		 - Pilnīga bezsaistes funkcionalitāte (vektoru un bilžu kartes saglabātas izvēlētā dierktorijā)
- 		- Pieejamas kompaktas bezsaistes kartes visai pasaulei - valsts vai reģiona kartes ir lejuplādējamas tieši no aplikācijas
-		 - Iespējama vairāku karšu pārklāšana ar dažādiem caurspīdīguma līmeņiem (piem. GPX sekošanas ceļš, intereses vietas (POI), favorīti, kontūra līnijas, sabiedriskā transporta pieturas, papildus karte)
-		 - Bezsaistes adrešu un POI meklēšana.
-		 - Bezsaistes navigācija (eksperimentāla)
-		 - Auto, velo un kājāmgājēju režīmi
-		 - ieslēdzama dienas un nakts režīmu pārslēgšanās
-		 - ieslēdzama joslu uzrādīšana, ātruma ierobežojuma attēlošana, ierakstītas un TTS valodas.
-
-		 Šai bezmaksas OsmAnd versijai ir sekojoši ierobežojumi:
-		 - Ierobežots lejuplādējamo karšu skaits
-		 - Nav pieejams Wikipēdijas bezsaistes POI.
-
-		OsmAnd tiek atkīvi izstrādāts un mūsu projekta tālākais progress ir balstīts uz ziedojumiem, lai finansētu jaunas funkcionalitātes izstrādi un testēšanu. Lūdzu izvēlaties iespēju iegādāties OsmAnd+, vai izvēlaties finansēt speciālās funkcijas vai arī ziedojot tieši osmand.net.
-	</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem OpenStreetMap (OSM) datiem. Visi kartes dati (vektoru un bilžu kartes) var tikt saglabāti telefona atmiņā, lai vēlāk tos izmantotu bezsaistē. OsmAnd piedāvā arī bezsaistes un tiešsaistes navigācijas funkcionalitāti t.sk. balss vadību.\n\n\t\tProgrammas pamata funcionalitāte iekļauj:\n\t\t - Pilnīga bezsaistes funkcionalitāte (vektoru un bilžu kartes saglabātas izvēlētajā mapē)\n \t\t- Kompaktas bezsaistes kartes visai pasaulei - valsts vai reģiona kartes lejupielādējamas tieši no aplikācijas\n\t\t - Iespējama vairāku karšu pārklāšana ar dažādiem caurspīdīguma līmeņiem (piem. GPX sekošanas ceļš, intereses vietas (POI), izlase, kontūra līnijas, sabiedriskā transporta pieturas, papildus kartes)\n\t\t - Bezsaistes adrešu un POI meklēšana.\n\t\t - Bezsaistes navigācija (eksperimentāla)\n\t\t - Auto, velo un kājāmgājēju režīmi\n\t\t - ieslēdzama dienas un nakts režīmu pārslēgšanās\n\t\t - ieslēdzama joslu uzrādīšana, ātruma ierobežojuma attēlošana, ierakstītas un TTS valodas.\n\n\t\t Šai bezmaksas OsmAnd versijai ir sekojoši ierobežojumi:\n\t\t - Ierobežots lejuplādējamo karšu skaits\n\t\t - Nav pieejams Wikipēdijas bezsaistes POI.\n\n\t\tOsmAnd tiek atkīvi izstrādāts un mūsu projekta tālākais progress ir balstīts uz ziedojumiem, lai finansētu jaunas funkcionalitātes izstrādi un testēšanu. Lūdzu izvēlēties iespēju iegādāties OsmAnd+ vai izvēlieties finansēt speciālās funkcijas, vai arī ziedot tieši osmand.net. "</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd ir atvērtā koda navigācijas aplikācija bezsaistes un tiešsaistes kartēm</string>
 	<string name="filterpoi_activity">Izveidot POI filtru</string>
 	<string name="select_navigation_mode">Izvēlieties pārvietošanās veidu</string>
@@ -1961,7 +1943,7 @@
     <string name="favorite_category_add_new_title">Izveidot jaunu kategoriju</string>
     <string name="region_maps">Apgabala kartes</string>
     <string name="world_maps">Pasaules kartes</string>
-    <string name="hillshade_layer_disabled">Hillshade layer ir atspējots</string>
+    <string name="hillshade_layer_disabled">Hillshade layer ir atslēgts</string>
     <string name="srtm_plugin_disabled">Kontūrlīnijas ir atspējotas</string>
     <string name="favorite_category_add_new">Izveidot jaunu</string>
     <string name="favorite_category_select">Izvēlieties kategoriju</string>
@@ -2186,4 +2168,21 @@
     <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.\n\nSpeciāls kartes papildinājums rādīs navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).\n\nLai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti kartes konfigurācijas izvēlnē. "</string>
     <string name="number_of_contributors">Līdzstrādnieku skaits</string>
     <string name="file_name_containes_illegal_char">Faila vārds satur neatļautas rakstu zīmes</string>
-</resources>
+<string name="access_default_color">Noklusētā krāsa</string>
+    <string name="access_category_choice">Izvēlieties kategoriju</string>
+    <string name="access_hint_enter_name">Ievadiet vārdu</string>
+    <string name="access_hint_enter_category">Ievadiet kategoriju</string>
+    <string name="access_hint_enter_description">Ievadiet aprakstu</string>
+    <string name="access_map_linked_to_location">Karte piesaistīta atrašanās vietai</string>
+    <string name="access_collapsed_list">Sakļauts saraksts</string>
+    <string name="access_expanded_list">Izplests saraksts</string>
+    <string name="access_empty_list">Tukšs saraksts</string>
+    <string name="access_tree_list">Hierarhisks saraksts</string>
+    <string name="access_shared_string_not_installed">Nav instalēts</string>
+    <string name="access_widget_expand">Paplašināt</string>
+    <string name="access_shared_string_navigate_up">Uz augšu</string>
+    <string name="access_sort">Sakārtot</string>
+    <string name="osmo_group_information_desc">" - Veidojot grupu, piešķiriet tai vārdu un aprakstu\n- No aplikācijas loga var izveidot tikai vienkāršu grupu, vairāk lasiet https://osmo.mobi/g/new interneta lapā\n- Caur interneta lapu ir iespējams organizēt grupu, kā arī pievienot visiem pieejamus trekus un punktus\n- Mēs neatbalstam vienas grupas lietošanu vienpersoniski, ja vien tā nav POI grupa\n- Privātās grupas ir ierobežotas līdz 8 personām\n- Detalizētākus noteikumus un nosacījumus lasiet OsMo.mobi interneta lapā\n- Ja jums ir īpašas prasības un vajadzības - lūdzu rakstiet uz epastu osmo.mobi@gmail.com "</string>
+    <string name="release_2_2">" • Jauns satura jūtīgs interfeiss pieskaroties vietām uz kartes un citur aplikācijā\n • Kartes skats tiek atvērts uzreiz, ja vien nav atzīmēts \"rādīt manu izvēlni atverot aplikāciju\"\n • Definēt kādas sadaļas un kā tiks attēlotas manā izvēlnē\n • Izslēgt manu izvēlni, ja jums labāk patīk kontrolēt aplikāciju caur parastām izvēlnēm\n • Lai lejupielādētu kartes, izvēlētos reģionus var atzīmēt uz pasaules kartes\n • POI meklēšana tagad atbalsta specifiskākus vaicājumus\n • Uzlabotas POI un OSM labošanas iespējas\n • Pārstrādāts karšu datu lejupielādes struktūra un interfeiss\n\nun vēl... "</string>
+    <string name="plugin_ski_descr">"Šis OsmAnd spraudnis ļauj piekļūt datiem par slēpošanas trasēm un maršrutēm, trošu vagoniem un pacēlājiem. Maršruti un trases tiek rādītas pēc krāsām atkarībā no grūtības pakāpes un attēlotas īpašā \"ziemas\" kartes stilā.\n\nAktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpes,\" attēlojot visus ainavas elementus ziemas apstākļiem atbilstošus. Deaktivizēt spraudni un atgriezties normālā kartes skatā var vai nu šeit vai mainot kartes stilu kartes uzstādījumos. "</string>
+    </resources>
