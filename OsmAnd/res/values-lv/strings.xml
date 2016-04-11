@@ -125,7 +125,7 @@
   <string name="fav_export_confirmation">Fails ar iepriekš eksportētu izlasi jau pastāv. Vai vēlaties to pārrakstīt?</string>
   <string name="profile_settings">Profila uzstādījumi</string>
   <string name="settings_preset">Noklusētais profils</string>
-  <string name="settings_preset_descr">Kartes skats un navigācijas uzstādījumi tiek saglabāti lietotāja profilā. Uzstādiet noklusēto profilu šeit.</string>
+  <string name="settings_preset_descr">Kartes un navigācijas uzstādījumi tiek saglabāti katrā profilā atsevišķi. Izvēlieties noklusēto profilu.</string>
   
   
   <string name="routing_settings">Navigācija</string>
@@ -308,7 +308,7 @@
   <string name="search_offline_geo_error">Kļūda geo pieprasījumā \'%s\'</string>
   <string name="search_osm_offline">Meklēt adresi bezsaistes kartēs</string>
   <string name="system_locale">Sistēma</string>
-  <string name="preferred_locale_descr">Izvēlēties saskarsmes valodu</string>
+  <string name="preferred_locale_descr">Izvēlieties no saraksta valodu</string>
   <string name="preferred_locale">Saskarsmes valoda</string>
   
   
@@ -324,7 +324,7 @@
   
   <string name="shared_string_next">Tālāk</string>
   <string name="shared_string_previous">Atpakaļ</string>
-  <string name="unit_of_length_descr">Attāluma un braukšanas ātruma mērvienības</string>
+  <string name="unit_of_length_descr">Attāluma un kustības ātruma mērvienības</string>
   <string name="unit_of_length">Mērvienības</string>
   <string name="si_mi_foots">Jūdzes/pēdas</string>
   <string name="si_mi_yard">Jūdzes/jardi</string>
@@ -430,7 +430,7 @@
   <string name="phone">Telefons</string>
   <string name="download_type_to_filter">Filtrēt pēc vārda</string>
   <string name="use_high_res_maps">Augstas izšķirtspējas ekrāns</string>
-  <string name="use_high_res_maps_descr">Neizplest (nepadarīt izplūdušas) kartes bildes augstas izšķirtspējas ekrānam</string>
+  <string name="use_high_res_maps_descr">Neizplest (nepadarīt izplūdušas) kartes bildes augstas izšķirtspējas ekrāniem</string>
   <string name="unknown_location">Atrašanās vieta vēl nav noteikta</string>
   
   <string name="context_menu_item_search_transport">Meklēt sabiedrisko transportu</string>
@@ -454,8 +454,8 @@
   <string name="rotate_map_compass_opt">Pēc kompasa</string>
   <string name="rotate_map_bearing_opt">Kustības virzienā</string>
   <string name="rotate_map_none_opt">Nemainīt virzienu</string>
-  <string name="rotate_map_to_bearing_descr">Izvēlēties kartes orientāciju uz ekrāna</string>
-  <string name="rotate_map_to_bearing">Kartes orientācija</string>
+  <string name="rotate_map_to_bearing_descr">Pēc kompasa, kustības virzienā vai nemainīt</string>
+  <string name="rotate_map_to_bearing">Kartes pagriešana</string>
   <string name="show_route">Maršruta detaļas</string>
   <string name="fav_imported_sucessfully">Izlase veiksmīgi importēta</string>
   <string name="fav_file_to_load_not_found">GPX izlases fails nav atrasts {0}</string>
@@ -867,7 +867,7 @@
   <string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string>
   
   <string name="map_widget_top_text">Ielas nosaukums</string>
-  <string name="map_widget_config">Ekrāna skats</string>
+  <string name="map_widget_config">Ekrāna uzstādījumi</string>
   
   <string name="map_widget_back_to_loc">Kur es atrodos</string>
   <string name="map_widget_lock_screen">Noslēgt ekrānu</string>
@@ -1000,12 +1000,12 @@
     <string name="edit_tilesource_name">Vārds</string>
     <string name="maps_define_edit">Definēt/labot…</string>
 	<string name="map_widget_fps_info">FPS atkļūdošana</string>
-	<string name="driving_region_descr">Atzīmējiet braukšanas reģionu: ASV, Eiropa, Apvienotā Karaliste, Āzija u.c</string>
-	<string name="driving_region">Braukšanas reģions</string>
+	<string name="driving_region_descr">Izvēlieties braukšanas apgabalu: ASV, Eiropa, Apvienotā Karaliste, Āzija un citi</string>
+	<string name="driving_region">Apgabals</string>
 	<string name="driving_region_japan">Japāna</string>
 	<string name="driving_region_us">ASV</string>
 	<string name="driving_region_canada">Kanāda</string>
-	<string name="driving_region_europe_asia">Eiropa &amp; Āzija</string>
+	<string name="driving_region_europe_asia">Eiropa un Āzija</string>
 	<string name="driving_region_uk">Apvienotā Karaliste, Indija, Austrālija un citas</string>
 	    
     
@@ -1472,7 +1472,7 @@
     <string name="sort_by_name">Kārtot pēc nosaukuma</string>
     <string name="lang_al">Albāņu</string>
 	<string name="lang_fa">Persiešu</string>
-	<string name="map_preferred_locale_descr">Ieteicamā valoda rakstībai uz kartes (ja netiks atrasta, tiks izmantoti lokālie vai angļu valodas nosaukumi)</string>
+	<string name="map_preferred_locale_descr">Rakstība uz kartes (ja izvēlētā valoda nebūs pieejama, tiks lietoti vietvārdi vai angļu valoda)</string>
     <string name="map_preferred_locale">Kartes valoda</string>
     <string name="record_plugin_description">"Ar šo spraudni jūs varat manuāli saglabāt ceļa trekus, nospiežot GPX ieraksta pogu kartes ekrānā vai automātiski veikt treka ierakstus GPX failā.\n\nIerakstītie treki vēlāk var tikt izmantoti maršruta analīzei, koplietošanai ar draugiem vai OSM izstrādei. "</string>
     <string name="record_plugin_name">Ceļojuma ieraksts</string>
