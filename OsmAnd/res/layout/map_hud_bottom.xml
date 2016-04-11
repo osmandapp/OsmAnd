@@ -45,14 +45,6 @@
             android:layout_marginLeft="@dimen/map_button_shadow_margin"
             android:background="@drawable/btn_round_trans">
 
-            <ImageView
-                android:id="@+id/map_app_mode_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center"
-                android:layout_marginTop="3dp"
-                android:src="@drawable/ic_action_test_light"/>
-
             <TextView
                 android:id="@+id/map_app_mode_text"
                 android:layout_width="wrap_content"
