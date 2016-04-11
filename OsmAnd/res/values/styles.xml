@@ -369,10 +369,12 @@
 
     <style name="TextAppearance.ListItemTitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/default_list_text_size</item>
     </style>
 
     <style name="TextAppearance.ListItemCategoryTitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="typeface">@string/font_roboto_medium</item>
+        <item name="android:textSize">@dimen/default_list_text_size</item>
     </style>
 </resources>
