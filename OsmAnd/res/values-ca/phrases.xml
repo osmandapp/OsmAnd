@@ -2165,4 +2165,12 @@
 	<string name="poi_health_specialty_dermatology_yes">Especialitat mèdica: dermatologia</string>
 	<string name="poi_health_specialty_urology_yes">Especialitat mèdica: urologia</string>
 	<string name="poi_health_specialty_surgery_yes">Especialitat mèdica: cirurgia general</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipus d\'explosió: atmosfèrica, coet o míssil</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipus d\'explosió: atmosfèrica, de superfície</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipus d\'explosió: subterrània, túnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Tipus d\'explosió: atmosfèrica</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipus d\'explosió: atmosfèrica, descàrrega aèria</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipus d\'explosió: atmosfèrica, de superfície, torre</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipus d\'explosió: atmosfèrica, globus</string>
+	<string name="poi_nuclear_explosion_type_underground">Tipus d\'explossió: subterrània</string>
 	</resources>
