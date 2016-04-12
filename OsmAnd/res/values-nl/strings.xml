@@ -2245,4 +2245,18 @@
     <string name="rendering_value_bold_name">Vet</string>
     <string name="map_mode">Dag-Nacht stijl</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX-files geselecteerd</string>
+    <string name="access_default_color">Standaardkleur</string>
+    <string name="access_category_choice">Kies categorie</string>
+    <string name="access_hint_enter_name">Voer naam in</string>
+    <string name="access_hint_enter_category">Voer categorie in</string>
+    <string name="access_hint_enter_description">Voer omschrijving in</string>
+    <string name="access_map_linked_to_location">Kaart is gekoppeld aan locatie</string>
+    <string name="access_collapsed_list">Ingevouwen lijst</string>
+    <string name="access_expanded_list">Uitgevouwen lijst</string>
+    <string name="access_empty_list">Lege lijst</string>
+    <string name="access_tree_list">Boomstructuur</string>
+    <string name="access_shared_string_not_installed">Niet geïnstalleerd</string>
+    <string name="access_widget_expand">Uitvouwen</string>
+    <string name="access_shared_string_navigate_up">Omhoog navigeren</string>
+    <string name="access_sort">Sorteren</string>
     </resources>
