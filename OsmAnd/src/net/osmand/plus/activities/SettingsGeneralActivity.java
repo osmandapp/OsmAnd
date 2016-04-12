@@ -23,6 +23,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.osm.io.NetworkUtils;
@@ -334,7 +335,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 	private void showAppDirDialogV19() {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		ChooseAppDirFragment frg = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null);
+		ChooseAppDirFragment frg = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null) {
+			@Override
+			protected void successCallback() {
+				updateApplicationDirTextAndSummary();
+			}
+		};
 		bld.setView(frg.initView(getLayoutInflater(), null, null));
 		AlertDialog dlg = bld.show();
 		frg.setDialog(dlg);
