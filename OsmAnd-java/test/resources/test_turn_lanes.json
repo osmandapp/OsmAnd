@@ -292,8 +292,23 @@
       "longitude": 35.441980600357056
     },
     "expectedResults": {
-      "-14967": null,
-      "-14919": "TU:+C|C|C|C|C"
+      "96306": null,
+      "96296": "TU:+C|C|C|C|C"
+    }
+  },
+  {
+    "testName": "16.A10 TL Bos en Lommerweg",
+    "startPoint": {
+      "latitude": 45.67023519467668,
+      "longitude": 35.46151900291443
+    },
+    "endPoint": {
+      "latitude": 45.66888943629539,
+      "longitude": 35.47155582904816
+    },
+    "expectedResults": {
+      "102447": "TL|+C",
+      "102992": "+C|+C|TR"
     }
   }
 
