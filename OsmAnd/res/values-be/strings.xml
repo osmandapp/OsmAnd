@@ -2183,4 +2183,18 @@
     <string name="osm_live_email_desc">Неабходна прадаставіць інфармацыю пра ўкладальнікаў</string>
     <string name="show_map_markers_description">Актывуе функцыю маркераў мапы</string>
     <string name="no_waypoints_found">Не знайшлося шляхавых пунктаў</string>
+    <string name="access_default_color">Колер па змаўчаньні</string>
+    <string name="access_category_choice">Выберыце катэгорыю</string>
+    <string name="access_hint_enter_name">Увядзіце імя</string>
+    <string name="access_hint_enter_category">Увядзіце катэгорыю</string>
+    <string name="access_hint_enter_description">Увядзіце апісаньне</string>
+    <string name="access_map_linked_to_location">Мапа прывязаная да месцазнаходжаньня</string>
+    <string name="access_collapsed_list">Згорнуты сьпіс</string>
+    <string name="access_expanded_list">Разгорнуты сьпіс</string>
+    <string name="access_empty_list">Пусты сьпіс</string>
+    <string name="access_tree_list">Іерархічны сьпіс</string>
+    <string name="access_shared_string_not_installed">Не ўсталяваны</string>
+    <string name="access_widget_expand">Разгарнуць</string>
+    <string name="access_shared_string_navigate_up">Перайсьці ўверх</string>
+    <string name="access_sort">Сартаваць</string>
     </resources>
