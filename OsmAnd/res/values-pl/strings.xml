@@ -1480,14 +1480,14 @@
     <string name="gpx_monitoring_start">Rozpocznij rejestrowanie GPX</string>
     <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie GPX</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
-    <string name="rendering_attr_hideBuildings_name">Ukrywanie budynków</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Ukryj trasy niedostępne dla aut</string>
-    <string name="rendering_attr_hideText_name">Ukryj opisy</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Ukryj drewna i zarośla</string>
+    <string name="rendering_attr_hideBuildings_name">Budynki</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Trasy niedostępne dla aut</string>
+    <string name="rendering_attr_hideText_name">Opisy</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Drzewa i zarośla</string>
     <string name="rendering_attr_buildings15zoom_name">Budynki na przybliżeniu 15</string>
     <string name="rendering_attr_moreDetailed_name">Więcej szczegółów</string>
     <string name="rendering_attr_lessDetailed_name">Mniej szczegółów</string>
-    <string name="rendering_attr_hideAccess_name">Ukryj ograniczenia dostępu</string>
+    <string name="rendering_attr_hideAccess_name">Ograniczenia dostępu</string>
     <string name="rendering_attr_showAccess_name">Ograniczenia dostępu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Jakość dróg</string>
     <string name="rendering_attr_showSurfaces_name">Nawierzchnia dróg</string>
@@ -1759,7 +1759,7 @@
     <string name="storage_directory_internal_app">Wewnętrzna pamięć programu</string>
     <string name="storage_directory">Przechowywanie map</string>
     <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Numery budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
 
     <string name="routing_attr_avoid_borders_description">Omija przejścia graniczne z innym państwem</string>
@@ -1952,7 +1952,7 @@
     <string name="simulate_initial_startup">Zasymuluj pierwsze uruchomienie programu</string>
     <string name="read_more">Czytaj dalej</string>
     <string name="whats_new">Co nowego w</string>
-    <string name="rendering_attr_hideProposed_name">Ukrywanie proponowanych obiektów</string>
+    <string name="rendering_attr_hideProposed_name">Proponowane obiekty</string>
     <string name="shared_string_update">Aktualizuj</string>
     <string name="shared_string_upload">Prześlij</string>
     <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
@@ -2083,7 +2083,7 @@
     <string name="reports_for">Region raportowania</string>
 <string name="number_of_contributors">Liczba współtwórców</string>
     <string name="shared_string_read_more">Przeczytaj więcej</string>
-    <string name="rendering_attr_hideUnderground_name">Ukrycie podziemnych obiektów</string>
+    <string name="rendering_attr_hideUnderground_name">Podziemne obiekty</string>
     <string name="shared_string_save_changes">Zapisz zmiany</string>
     <string name="shared_string_email_address">Adres e-mail</string>
     <string name="select_map_marker">Wybierz znacznik mapy</string>
@@ -2116,7 +2116,7 @@
     <string name="add_time_span">Dodaj przedział czasowy</string>
     <string name="road_blocked">Droga zablokowana</string>
     <string name="switch_start_finish">Odwróć kolejność punktów startu i celu</string>
-    <string name="rendering_attr_hideIcons_name">Ukryj ikony POI</string>
+    <string name="rendering_attr_hideIcons_name">Ikony POI</string>
     <string name="rec_split">Podział rejestratora</string>
     <string name="rec_split_title">Użyj podziału rejestratora</string>
     <string name="rec_split_desc">Przenieś pliki gdy wykorzystana przestrzeń przekracza rozmiar pamięci nośnika</string>
@@ -2163,4 +2163,16 @@
     <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata. Większa część dochodów powraca do społeczności OSM i jest wypłacana za każdy wkład OSM. W przypadku, kiedy lubisz OsmAnd i OSM i chce je wspierać, jest to doskonały sposób, aby to zrobić.</string>
     
     <string name="file_name_containes_illegal_char">Nazwa pliku zawiera niedozwolony znak</string>
-</resources>
+<string name="access_default_color">Domyślny kolor</string>
+    <string name="access_category_choice">Wybierz kategorię</string>
+    <string name="access_hint_enter_category">Wpisz kategorię</string>
+    <string name="access_hint_enter_description">Wpisz opis</string>
+    <string name="access_collapsed_list">Zwinięta lista</string>
+    <string name="access_expanded_list">Rozwinięta lista</string>
+    <string name="access_empty_list">Pusta lista</string>
+    <string name="access_shared_string_not_installed">Nie zainstalowano</string>
+    <string name="access_widget_expand">Rozwiń</string>
+    <string name="access_sort">Sortuj</string>
+    <string name="map_mode">Tryb mapy</string>
+    <string name="number_of_gpx_files_selected_pattern">Wyprano %s plików GPX</string>
+    </resources>
