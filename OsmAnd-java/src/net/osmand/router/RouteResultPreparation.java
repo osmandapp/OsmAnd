@@ -562,13 +562,14 @@ public class RouteResultPreparation {
 		}
 		TurnType currentTurn = currentSegment.getTurnType();
 		currentTurn.setLanes(active.disabledLanes);
-		int turn = inferTurnFromLanes(active.disabledLanes);
-		if (turn != 0 && turn != currentTurn.getValue()) {
-			TurnType newTurnType = TurnType.valueOf(turn, leftSide);
-			newTurnType.setLanes(active.disabledLanes);
-			newTurnType.setSkipToSpeak(currentTurn.isSkipToSpeak());
-			currentSegment.setTurnType(newTurnType);
-		}
+		// There is a test which fails that assumption and there is no contr-test how it could help here
+//		int turn = inferTurnFromLanes(active.disabledLanes);
+//		if (turn != 0 && turn != currentTurn.getValue()) {
+//			TurnType newTurnType = TurnType.valueOf(turn, leftSide);
+//			newTurnType.setLanes(active.disabledLanes);
+//			newTurnType.setSkipToSpeak(currentTurn.isSkipToSpeak());
+//			currentSegment.setTurnType(newTurnType);
+//		}
 	}
 	
 	private static final int MAX_SPEAK_PRIORITY = 5;
