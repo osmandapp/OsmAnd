@@ -650,7 +650,8 @@ public class RouteResultPreparation {
 		String turnLanes = getTurnLanesString(prevSegm);
 		int[] lanesArray ;
 		if (turnLanes == null) {
-			if(prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null) {
+			if(prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null
+					&& prevSegm.getDistance() < 100) {
 				int[] lns = prevSegm.getTurnType().getLanes();
 				TIntArrayList lst = new TIntArrayList();
 				for(int i = 0; i < lns.length; i++) {
@@ -1031,7 +1032,6 @@ public class RouteResultPreparation {
 		for (int i = 0; i < splitLaneOptions.length; i++) {
 			String[] laneOptions = splitLaneOptions[i].split(";");
 			boolean isTertiaryTurn = false;
-
 			for (int j = 0; j < laneOptions.length; j++) {
 				int turn;
 				if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
@@ -1052,7 +1052,8 @@ public class RouteResultPreparation {
 					turn = TurnType.TU;
 				} else {
 					// Unknown string
-					continue;
+					turn = TurnType.C;
+//					continue;
 				}
 
 				final int primary = TurnType.getPrimaryTurn(lanes[i]);
