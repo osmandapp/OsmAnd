@@ -788,9 +788,9 @@ public class RouteResultPreparation {
 			}
 		} else {
 			for (int k = 0; k < rawLanes.length; k++) {
-				int turn = rawLanes[k];
+				int turn = TurnType.getPrimaryTurn(rawLanes[k]);
 				boolean active = false;
-				if (TurnType.getPrimaryTurn(turn) == TurnType.C) {
+				if (turn == TurnType.C) {
 					active = true;
 				} else if (TurnType.isRightTurn(turn) && rs.roadsOnRight == 0) {
 					// some turns go through many segments (to turn right or left)
