@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.View;
@@ -31,6 +30,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -252,10 +252,14 @@ public class GpxUiHelper {
 		}, dir, null, filename);
 	}
 
-	private static AlertDialog createDialog(final Activity activity, final boolean showCurrentGpx,
-											final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject,
-											final List<String> list, final ContextMenuAdapter adapter) {
+	private static AlertDialog createDialog(final Activity activity,
+											final boolean showCurrentGpx,
+											final boolean multipleChoice,
+											final CallbackWithObject<GPXFile[]> callbackWithObject,
+											final List<String> list,
+											final ContextMenuAdapter adapter) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final IconsCache iconsCache = app.getIconsCache();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		// final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
@@ -272,10 +276,7 @@ public class GpxUiHelper {
 				}
 				final ContextMenuItem item = adapter.getItem(position);
 				ImageView iconView = (ImageView) v.findViewById(R.id.icon);
-				Drawable icon = ContextCompat.getDrawable(activity, item.getIcon());
-				icon = DrawableCompat.wrap(icon);
-				icon.mutate();
-				DrawableCompat.setTint(icon, item.getThemedColor(activity));
+				Drawable icon = iconsCache.getIcon(item.getIcon());
 				iconView.setImageDrawable(icon);
 				final ArrayAdapter<String> arrayAdapter = this;
 				iconView.setOnClickListener(new View.OnClickListener() {
