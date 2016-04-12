@@ -316,6 +316,7 @@ public class DashChooseAppDirFragment {
 						boolean changed = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath());
 						getMyApplication().setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
 						if (changed) {
+							successCallback();
 							reloadData();
 						}
 						if (fragment != null && activity instanceof FragmentActivity) {
@@ -332,6 +333,9 @@ public class DashChooseAppDirFragment {
 				}
 			};
 		}
+
+		// To be implemented by subclass
+		protected void successCallback() {}
 
 		protected void reloadData() {
 			new ReloadData(activity, getMyApplication()).execute((Void) null);
