@@ -68,8 +68,8 @@
       "longitude": 35.49527125060558
     },
     "expectedResults": {
-      "26717": "+TSLL,C|C|C",
-      "26821": "+C",
+      "26717": "C:+TSLL,C|C|C",
+      "26821": "TSLL:+TSLL,C|C|C",
       "29088": "C|C|C|C|+C"
     }
   },
