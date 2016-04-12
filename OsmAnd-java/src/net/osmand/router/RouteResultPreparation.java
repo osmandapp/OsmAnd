@@ -647,10 +647,26 @@ public class RouteResultPreparation {
 
 	private int[] getTurnLanesInfo(RouteSegmentResult prevSegm, int mainTurnType) {
 		String turnLanes = getTurnLanesString(prevSegm);
+		int[] lanesArray ;
 		if (turnLanes == null) {
-			return null;
+			if(prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null) {
+				int[] lns = prevSegm.getTurnType().getLanes();
+				TIntArrayList lst = new TIntArrayList();
+				for(int i = 0; i < lns.length; i++) {
+					if(lns[i] % 2 == 1) {
+						lst.add((lns[i] >> 1) << 1);
+					}
+				}
+				if(lst.isEmpty()) {
+					return null;
+				}
+				lanesArray = lst.toArray();
+			} else {
+				return null;
+			}
+		} else {
+			lanesArray = calculateRawTurnLanes(turnLanes, mainTurnType);
 		}
-		int[] lanesArray = calculateRawTurnLanes(turnLanes, mainTurnType);
 		// Manually set the allowed lanes.
 		boolean isSet = setAllowedLanes(mainTurnType, lanesArray);
 		if(!isSet && lanesArray.length > 0) {
