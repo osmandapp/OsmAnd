@@ -68,7 +68,7 @@
       "longitude": 35.49527125060558
     },
     "expectedResults": {
-      "26717": "C:+TSLL,C|C|C",
+      "26717": "C:+C,TSLL|C|C",
       "26821": "TSLL:+TSLL,C|C|C",
       "29088": "C|C|C|C|+C"
     }
@@ -170,7 +170,7 @@
       "longitude": 35.586447581
     },
     "expectedResults": {
-      "27441": "+TL|TL,TR",
+      "27441": "+TL|+TL,TR",
       "27461": "TL|+C|+C"
    }
   },
