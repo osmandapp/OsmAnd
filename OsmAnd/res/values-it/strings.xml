@@ -2215,7 +2215,7 @@
     <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
 <string name="no_map_markers_found">Aggiungi i marcatori della mappa dalla mappa</string>
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
-    <string name="release_2_3">" • OSM Live. Sostiene i contributori della mappa e gli sviluppatori e si hanno gli aggiornamenti orari della mappa.\n\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.\n\n • Mappe OSM più dettagliate con scudetti specifici per ogni nazione dei nomi delle strade e molte nuove caratteristiche.
+    <string name="release_2_3">" • OSM Live. Sostiene i contributori della mappa e gli sviluppatori e si hanno gli aggiornamenti orari della mappa.\n\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.\n\n • Mappe OSM più dettagliate con scudetti dei nomi delle strade specifici per ogni nazione  e molte nuove caratteristiche.
 \n\n • Aspetto e gestione migliorati della preparazione del percorso.
 \n\n • Molti miglioramenti nel menu contestuale della mappa e nella ricerca contestuale degli indirizzi.\n\n e altro… "</string>
     <string name="rec_split">Frazionatore delle registrazioni</string>
