@@ -544,10 +544,16 @@ public class RouteResultPreparation {
 		} else {
 			// next turn is get through (take out the left and the right turn)
 			if (target.activeLen < active.activeLen) {
-				float ratio = (active.activeLen - target.activeLen) / 2f;
-				active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
-				active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
-				changed = true;
+				if(target.originalLanes.length == active.activeLen) {
+					active.activeEndIndex = active.activeStartIndex + target.activeEndIndex;
+					active.activeStartIndex = active.activeStartIndex + target.activeStartIndex;
+					changed = true;
+				} else {
+					float ratio = (active.activeLen - target.activeLen) / 2f;
+					active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
+					active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
+					changed = true;
+				}
 			}
 		}
 		if (!changed) {
@@ -556,7 +562,8 @@ public class RouteResultPreparation {
 
 		// set the allowed lane bit
 		for (int i = 0; i < active.disabledLanes.length; i++) {
-			if (i >= active.activeStartIndex && i <= active.activeEndIndex) {
+			if (i >= active.activeStartIndex && i <= active.activeEndIndex && 
+					active.originalLanes[i] % 2 == 1) {
 				active.disabledLanes[i] |= 1;
 			}
 		}

@@ -219,6 +219,7 @@
   },
   {
     "testName": "11.Graaf Lodewijkstraat to Graaf Lodewijkstraat u-turn",
+    "ignore":true,
     "startPoint": {
       "latitude": 52.076116774796496,
       "longitude": 4.821222126483946

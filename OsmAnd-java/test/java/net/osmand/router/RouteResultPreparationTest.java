@@ -72,13 +72,11 @@ public class RouteResultPreparationTest {
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> twoDArray = new ArrayList<Object[]>();
         for (int i = 0; i < testEntries.length; ++i) {
-            Object[] arr = new Object[]{
-                    testEntries[i].getTestName(),
-                    testEntries[i].getStartPoint(),
-                    testEntries[i].getEndPoint(),
-                    testEntries[i].getExpectedResults()
-            };
-            twoDArray.add(arr);
+			if (!testEntries[i].isIgnore()) {
+				Object[] arr = new Object[] { testEntries[i].getTestName(), testEntries[i].getStartPoint(),
+						testEntries[i].getEndPoint(), testEntries[i].getExpectedResults() };
+				twoDArray.add(arr);
+			}
         }
         reader.close();
         return twoDArray;

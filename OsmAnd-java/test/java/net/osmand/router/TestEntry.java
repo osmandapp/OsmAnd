@@ -12,6 +12,7 @@ public class TestEntry {
     private String testName;
     private LatLon startPoint;
     private LatLon endPoint;
+    private boolean ignore;
     private Map<Long, String> expectedResults;
 
     public LatLon getStartPoint() {
@@ -20,6 +21,14 @@ public class TestEntry {
 
     public void setStartPoint(LatLon startPoint) {
         this.startPoint = startPoint;
+    }
+    
+    public void setIgnore(boolean ignore) {
+		this.ignore = ignore;
+	}
+    
+    public boolean isIgnore() {
+    	return ignore;
     }
 
     public LatLon getEndPoint() {
