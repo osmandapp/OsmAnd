@@ -871,16 +871,16 @@ public class RouteResultPreparation {
 			double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
 			double mpi = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), attached.getBearingBegin()));
 			int rsSpeakPriority = highwaySpeakPriority(attached.getObject().getHighway());
+			int lanes = countLanesMinOne(attached);
+			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
+			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
+			boolean attachedOnTheRight = ex >= 0;
+			if (attachedOnTheRight) {
+				rs.roadsOnRight++;
+			} else {
+				rs.roadsOnLeft++;
+			}
 			if (rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
-				int lanes = countLanesMinOne(attached);
-				boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
-				boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
-				boolean attachedOnTheRight = ex >= 0;
-				if (attachedOnTheRight) {
-					rs.roadsOnRight++;
-				} else {
-					rs.roadsOnLeft++;
-				}
 				if (smallTargetVariation || smallStraightVariation) {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
