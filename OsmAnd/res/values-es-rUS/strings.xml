@@ -2145,4 +2145,18 @@
     <string name="rendering_value_bold_name">Grueso</string>
     <string name="map_mode">Modo mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivos GPX elegidos</string>
+    <string name="access_default_color">Color predefinido</string>
+    <string name="access_category_choice">Elegir categoría</string>
+    <string name="access_hint_enter_name">Ingresar nombre</string>
+    <string name="access_hint_enter_category">Ingresar categoría</string>
+    <string name="access_hint_enter_description">Ingresar descripción</string>
+    <string name="access_map_linked_to_location">Mapa vinculado a la ubicación</string>
+    <string name="access_collapsed_list">Lista oculta</string>
+    <string name="access_expanded_list">Lista abierta</string>
+    <string name="access_empty_list">Lista vacía</string>
+    <string name="access_tree_list">Lista de árbol</string>
+    <string name="access_shared_string_not_installed">No instalado</string>
+    <string name="access_widget_expand">Abrir</string>
+    <string name="access_shared_string_navigate_up">Navegar hacia arriba</string>
+    <string name="access_sort">Ordenar</string>
     </resources>
