@@ -2175,4 +2175,11 @@
     <string name="access_sort">Sortuj</string>
     <string name="map_mode">Tryb mapy</string>
     <string name="number_of_gpx_files_selected_pattern">Wyprano %s plików GPX</string>
+    <string name="access_hint_enter_name">Wprowadź nazwę</string>
+    <string name="access_map_linked_to_location">Mapa jest powiązana z obszarem</string>
+    <string name="access_tree_list">Lista hierarchiczna</string>
+    <string name="access_shared_string_navigate_up">Idź w górę</string>
+    <string name="rendering_value_thin_name">Cienkie</string>
+    <string name="rendering_value_medium_name">Średnie</string>
+    <string name="rendering_value_bold_name">Grube</string>
     </resources>
