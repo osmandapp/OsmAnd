@@ -2166,4 +2166,18 @@
     <string name="rendering_value_bold_name">Grussu</string>
     <string name="map_mode">Modalidade mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s documentos GPX ischertados</string>
+    <string name="access_default_color">Colore predefinidu</string>
+    <string name="access_category_choice">Issèbera una categoria</string>
+    <string name="access_hint_enter_name">Inserta su nùmene</string>
+    <string name="access_hint_enter_category">Inserta una categoria</string>
+    <string name="access_hint_enter_description">Inserta una descritzione</string>
+    <string name="access_map_linked_to_location">Sa mapa est ligada a su logu</string>
+    <string name="access_collapsed_list">Lista minimada</string>
+    <string name="access_expanded_list">Lista ismanniada</string>
+    <string name="access_empty_list">Lista bòida</string>
+    <string name="access_tree_list">Lista a àrbore</string>
+    <string name="access_shared_string_not_installed">Non installadu</string>
+    <string name="access_widget_expand">Ismànnia</string>
+    <string name="access_shared_string_navigate_up">Nàviga in subra</string>
+    <string name="access_sort">Òrdina</string>
     </resources>
