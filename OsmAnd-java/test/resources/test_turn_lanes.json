@@ -218,23 +218,7 @@
     }
   },
   {
-    "testName": "11.Graaf Lodewijkstraat to Graaf Lodewijkstraat u-turn",
-    "ignore":true,
-    "startPoint": {
-      "latitude": 52.076116774796496,
-      "longitude": 4.821222126483946
-    },
-    "endPoint": {
-      "latitude": 52.075488682963716,
-      "longitude": 4.821018278598814
-    },
-    "expectedResults": {
-      "7352195": null,
-      "7352546": "+TL,TR"
-    }
-  },
-  {
-    "testName": "12.Rembrandtlaan to Rubensstraat u-turn",
+    "testName": "11.Rembrandtlaan to Rubensstraat u-turn",
     "startPoint": {
       "latitude": 45.698570524678956,
       "longitude": 35.64198324084282
@@ -250,7 +234,7 @@
     }
   },
   {
-    "testName": "13.Ira Lee Henderson Memorial Highway (US 75)",
+    "testName": "13.Ira Lee Henderson Memorial Highway (US 75) u-turn",
     "startPoint": {
       "latitude": 45.691518814511134,
       "longitude": 35.66402764618397
@@ -268,7 +252,7 @@
    }
   },
   {
-    "testName": "14.Figure 8 TL",
+    "testName": "14*.Figure 8 TL",
     "startPoint": {
       "latitude": 45.69816447596442,
       "longitude": 35.74885922431952
