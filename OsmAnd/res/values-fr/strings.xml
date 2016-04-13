@@ -2097,10 +2097,10 @@
     <string name="shared_string_undo_all">Tout annuler</string>
     <string name="starting_point">Point de départ</string>
     <string name="rec_split">Intervalle d\'enregistrement</string>
-    <string name="rec_split_title">Utiliser un intervalle d\'enregistrement</string>
+    <string name="rec_split_title">Définir un intervalle d\'enregistrement</string>
     <string name="rec_split_desc">Écraser les enregistrements quand l\'espace utilisé dépasse la capacité de stockage</string>
     <string name="rec_split_clip_length">Durée de l\'enregistrement</string>
-    <string name="rec_split_clip_length_desc">La longueur de chaque enregistrement ne sera plus l\'intervalle de temps défini</string>
+    <string name="rec_split_clip_length_desc">La longueur de chaque enregistrement ne dépassera pas l’intervalle de temps défini</string>
     <string name="rec_split_storage_size">Taille de l\'espace de stockage</string>
     <string name="rec_split_storage_size_desc">Espace maximum alloué pour tous les enregistrements</string>
     <string name="shared_string_type">Type</string>
@@ -2203,4 +2203,8 @@
     <string name="access_shared_string_not_installed">Non installé</string>
     <string name="access_widget_expand">Déplier</string>
     <string name="access_sort">Trier</string>
+    <string name="access_smart_autoannounce">Annonces intelligentes</string>
+    <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée</string>
+    <string name="access_autoannounce_period">Fréquence des annonces</string>
+    <string name="access_autoannounce_period_descr">Temps minimum entre deux annonces</string>
     </resources>
