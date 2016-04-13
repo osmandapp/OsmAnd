@@ -780,6 +780,22 @@ public class OsmandSettings {
 			new BooleanPreference("use_trackball_for_movements", true).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> ACCESSIBILITY_SMART_AUTOANNOUNCE =
+		new BooleanAccessibilityPreference("accessibility_smart_autoannounce", true).makeGlobal();
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference("accessibility_autoannounce_period", 10000).makeGlobal().cache();
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> DISABLE_OFFROUTE_RECALC =
+		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeGlobal();
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
+		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeGlobal();
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
 			new BooleanAccessibilityPreference("zoom_by_trackball", false).makeGlobal();
 

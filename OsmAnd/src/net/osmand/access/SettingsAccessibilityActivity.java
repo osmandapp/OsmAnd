@@ -19,6 +19,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
 	private ListPreference accessibilityModePreference;
 	private ListPreference directionStylePreference;
+	private ListPreference autoannouncePeriodPreference;
 
 
 	@Override
@@ -71,6 +72,30 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 		});
 		cat.addPreference(directionStylePreference);
 
+		cat.addPreference(createCheckBoxPreference(settings.ACCESSIBILITY_SMART_AUTOANNOUNCE, R.string.access_smart_autoannounce,
+				R.string.access_smart_autoannounce_descr));
+
+		final int[] seconds = new int[] {5, 10, 15, 20, 30, 45, 60, 90};
+		final int[] minutes = new int[] {2, 3, 5};
+		autoannouncePeriodPreference = createTimeListPreference(settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD, seconds, minutes, 1000,
+				R.string.access_autoannounce_period, R.string.access_autoannounce_period_descr);
+		autoannouncePeriodPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			private final OnPreferenceChangeListener committer = autoannouncePeriodPreference.getOnPreferenceChangeListener();
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				if (committer != null)
+					committer.onPreferenceChange(preference, newValue);
+				updateAllSettings();
+				return true;
+			}
+		});
+		cat.addPreference(autoannouncePeriodPreference);
+
+		cat.addPreference(createCheckBoxPreference(settings.DISABLE_OFFROUTE_RECALC, R.string.access_disable_offroute_recalc,
+				R.string.access_disable_offroute_recalc_descr));
+		cat.addPreference(createCheckBoxPreference(settings.DISABLE_WRONG_DIRECTION_RECALC, R.string.access_disable_wrong_direction_recalc,
+				R.string.access_disable_wrong_direction_recalc_descr));
+
 		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
 	}
@@ -97,6 +122,9 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 		}
 		if(directionStylePreference != null) {
 			directionStylePreference.setSummary(getString(R.string.settings_direction_style_descr) + "  [" + settings.DIRECTION_STYLE.get().toHumanString(getMyApplication()) + "]");
+		}
+		if(autoannouncePeriodPreference != null) {
+			autoannouncePeriodPreference.setSummary(getString(R.string.access_autoannounce_period_descr) + "  [" + autoannouncePeriodPreference.getEntry() + "]");
 		}
 	}
 
