@@ -2159,4 +2159,12 @@
     <string name="access_widget_expand">Abrir</string>
     <string name="access_shared_string_navigate_up">Navegar hacia arriba</string>
     <string name="access_sort">Ordenar</string>
+    <string name="access_disable_offroute_recalc">No cambiar de ruta cuando me salga del camino</string>
+    <string name="access_disable_offroute_recalc_descr">Previene el recálculo automático de ruta, al alejarse del camino correcto</string>
+    <string name="access_disable_wrong_direction_recalc">No cambiar de ruta por una dirección equivocada</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Previene el recálculo automático de ruta, al conducir en dirección equivocada</string>
+    <string name="access_smart_autoannounce">Aviso automático inteligente</string>
+    <string name="access_smart_autoannounce_descr">Notifica sólo cuando se cambia la dirección al destino</string>
+    <string name="access_autoannounce_period">Período de aviso automático</string>
+    <string name="access_autoannounce_period_descr">Lapso de tiempo mínimo entre avisos</string>
     </resources>
