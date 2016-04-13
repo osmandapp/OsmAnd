@@ -68,12 +68,25 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 	@Override
 	public void onStart() {
 		super.onStart();
+		menu.getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
+		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 		wasDrawerDisabled = menu.getMapActivity().isDrawerDisabled();
 		if (!wasDrawerDisabled) {
 			menu.getMapActivity().disableDrawer();
 		}
-		menu.getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
-		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (!wasDrawerDisabled) {
+			menu.getMapActivity().enableDrawer();
+		}
 	}
 
 	@Override
@@ -84,9 +97,6 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		}
 		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
 		menu.getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
-		if (!wasDrawerDisabled) {
-			menu.getMapActivity().enableDrawer();
-		}
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {
