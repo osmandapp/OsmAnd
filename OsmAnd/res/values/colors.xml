@@ -86,6 +86,8 @@
 	<color name="icon_color">#727272</color>
 	<color name="icon_color_light">#ccc</color>
 
+	<color name="on_map_icon_color">#505050</color>
+
 	<color name="ctx_menu_info_view_bg_light">#eaeaea</color>
 	<color name="ctx_menu_info_view_bg_dark">#292f33</color>
 	<color name="ctx_menu_info_text_light">#212121</color>

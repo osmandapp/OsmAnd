@@ -531,7 +531,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if ((System.currentTimeMillis() - lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);
 				appModeIcon.setImageDrawable(app.getIconsCache().getIcon(
-								settings.getApplicationMode().getSmallIconDark(), !isNight));
+						settings.getApplicationMode().getSmallIconDark(),
+						isNight ? 0 : R.color.on_map_icon_color));
 			} else {
 				zoomText.setVisibility(View.VISIBLE);
 				zoomText.setTextColor(textColor);
@@ -665,7 +666,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void setTransparencyBarEnabled(boolean isTransparencyBarEnabled) {
 		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
 		if (settingsToTransparency != null) {
-			if(isTransparencyBarEnabled) {
+			if (isTransparencyBarEnabled) {
 				transparencyBarLayout.setVisibility(View.VISIBLE);
 			} else {
 				transparencyBarLayout.setVisibility(View.GONE);
