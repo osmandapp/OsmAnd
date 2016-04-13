@@ -543,13 +543,14 @@ public class VoiceRouter {
 			return empty;
 		}
 		if (player != null && player.supportsStructuredStreetNames()) {
+			Term next = empty;
 			if (fullDest == true) {
-				Struct next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
+				next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
 						getTermString(getSpeakablePointName(i.getStreetName())),
 						getTermString(getSpeakablePointName(i.getDestinationName())) });
 			} else {
 			//Issue 2377: Using Dest in last turn prompt causes too much talking, so either delete or shorten Dest here
-				Struct next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
+				next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
 						getTermString(getSpeakablePointName(i.getStreetName())),
 						empty });
 			}
