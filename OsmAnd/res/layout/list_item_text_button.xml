@@ -14,7 +14,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="16dp"
         android:layout_weight="1"
-        android:textSize="@dimen/default_list_text_size"
+        android:textAppearance="@style/TextAppearance.ListItemTitle"
         tools:text="Some title text"/>
 
     <android.support.v7.widget.AppCompatTextView
