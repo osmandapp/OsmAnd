@@ -429,7 +429,7 @@ public class VoiceRouter {
 			if (dist == 0) {
 				return;
 			} else if (needsInforming()) {
-				playGoAhead(dist, getSpeakableStreetName(currentSegment, next));
+				playGoAhead(dist, getSpeakableStreetName(currentSegment, next, false));
 				return;
 			} else if (currentStatus == STATUS_TOLD) {
 				// nothing said possibly that's wrong case we should say before that
@@ -490,7 +490,7 @@ public class VoiceRouter {
 			nextStatusAfter(STATUS_UNKNOWN);
 		} else if (repeat || (statusNotPassed(STATUS_PREPARE) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
-			playGoAhead(dist, getSpeakableStreetName(currentSegment, next));
+			playGoAhead(dist, getSpeakableStreetName(currentSegment, next, false));
 		}
 	}
 
@@ -499,7 +499,7 @@ public class VoiceRouter {
 		RouteDirectionInfo next = nextInfo.directionInfo;
 		if(isTargetPoint(nextInfo) && (!playedAndArriveAtTarget || repeat)) {
 			if(next.getTurnType().goAhead()) {
-				playGoAhead(nextInfo.distanceTo, getSpeakableStreetName(currentSegment, next));
+				playGoAhead(nextInfo.distanceTo, getSpeakableStreetName(currentSegment, next, true));
 				andSpeakArriveAtPoint(nextInfo);
 				playedAndArriveAtTarget = true;
 			} else if(nextInfo.distanceTo <= 2 * TURN_IN_DISTANCE) {
@@ -538,21 +538,35 @@ public class VoiceRouter {
 		}
 	}
 
-	public Term getSpeakableStreetName(RouteSegmentResult currentSegment, RouteDirectionInfo i) {
+	public Term getSpeakableStreetName(RouteSegmentResult currentSegment, RouteDirectionInfo i, boolean fullDest) {
 		if(i == null || !router.getSettings().SPEAK_STREET_NAMES.get()){
 			return empty;
 		}
 		if (player != null && player.supportsStructuredStreetNames()) {
-			Struct next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
-					getTermString(getSpeakablePointName(i.getStreetName())),
-					getTermString(getSpeakablePointName(i.getDestinationName())) });
+			if (fullDest == true) {
+				Struct next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
+						getTermString(getSpeakablePointName(i.getStreetName())),
+						getTermString(getSpeakablePointName(i.getDestinationName())) });
+			} else {
+			//Issue 2377: Using Dest in last turn prompt causes too much talking, so either delete or shorten Dest here
+				Struct next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
+						getTermString(getSpeakablePointName(i.getStreetName())),
+						empty });
+			}
 			Term current = empty;
 			if (currentSegment != null) {
-				
-				RouteDataObject obj = currentSegment.getObject();
-				current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
-						getTermString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get()))),
-						getTermString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()))) });
+				if (fullDest == true) {
+					RouteDataObject obj = currentSegment.getObject();
+					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
+							getTermString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get()))),
+							getTermString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()))) });
+				} else {
+				//Issue 2377: Using Dest in last turn prompt causes too much talking, so either delete or shorten Dest here
+					RouteDataObject obj = currentSegment.getObject();
+					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
+							getTermString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get()))),
+							empty });
+				}
 			}
 			Struct voice = new Struct("voice", next, current );
 			return voice;
@@ -594,13 +608,13 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			if(tParam != null){
 				notifyOnVoiceMessage();
-				play.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next)).play();
+				play.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next, true)).play();
 			} else if(next.getTurnType().isRoundAbout()){
 				notifyOnVoiceMessage();
-				play.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next)).play();
+				play.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true)).play();
 			} else if(next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU){
 				notifyOnVoiceMessage();
-				play.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next)).play();
+				play.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next, true)).play();
 			} 
 		}
 	}
@@ -611,11 +625,11 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
 			if (tParam != null) {
-				play.turn(tParam, dist, getSpeakableStreetName(currentSegment, next));
+				play.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
 			} else if (next.getTurnType().isRoundAbout()) {
-				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next));
+				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
 			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
-				play.makeUT(dist, getSpeakableStreetName(currentSegment, next));
+				play.makeUT(dist, getSpeakableStreetName(currentSegment, next, true));
 			} else {
 				isPlay = false;
 			}
@@ -625,14 +639,14 @@ public class VoiceRouter {
 				isPlay = true;
 				if (next.getTurnType().getValue() == TurnType.C && 
 						TurnType.C != t.getValue()) {
-					play.goAhead(dist, getSpeakableStreetName(currentSegment, next));
+					play.goAhead(dist, getSpeakableStreetName(currentSegment, next, false));
 				}
 				if (TurnType.TL == t.getValue() || TurnType.TSHL == t.getValue() || TurnType.TSLL == t.getValue()
 						|| TurnType.TU == t.getValue() || TurnType.KL == t.getValue()) {
-					play.then().bearLeft( getSpeakableStreetName(currentSegment, next));
+					play.then().bearLeft( getSpeakableStreetName(currentSegment, next, false));
 				} else if (TurnType.TR == t.getValue() || TurnType.TSHR == t.getValue() || TurnType.TSLR == t.getValue()
 						|| TurnType.KR == t.getValue()) {
-					play.then().bearRight( getSpeakableStreetName(currentSegment, next));
+					play.then().bearRight( getSpeakableStreetName(currentSegment, next, false));
 				}
 			}
 			if(isPlay){
@@ -663,11 +677,11 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isplay = true;
 			if(tParam != null){
-				play.turn(tParam, getSpeakableStreetName(currentSegment, next));
+				play.turn(tParam, getSpeakableStreetName(currentSegment, next, false));
 			} else if(next.getTurnType().isRoundAbout()){
-				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(),  getSpeakableStreetName(currentSegment, next));
+				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(),  getSpeakableStreetName(currentSegment, next, false));
 			} else if(next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU){
-				play.makeUT( getSpeakableStreetName(currentSegment, next));
+				play.makeUT( getSpeakableStreetName(currentSegment, next, false));
 				// do not say it
 //				} else if(next.getTurnType().getValue() == TurnType.C)){
 //					play.goAhead();
