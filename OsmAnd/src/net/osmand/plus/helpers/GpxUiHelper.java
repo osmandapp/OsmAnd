@@ -276,7 +276,7 @@ public class GpxUiHelper {
 				}
 				final ContextMenuItem item = adapter.getItem(position);
 				ImageView iconView = (ImageView) v.findViewById(R.id.icon);
-				Drawable icon = iconsCache.getIcon(item.getIcon());
+				Drawable icon = iconsCache.getThemedIcon(item.getIcon());
 				iconView.setImageDrawable(icon);
 				final ArrayAdapter<String> arrayAdapter = this;
 				iconView.setOnClickListener(new View.OnClickListener() {
