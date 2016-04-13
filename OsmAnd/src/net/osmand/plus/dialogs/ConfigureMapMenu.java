@@ -51,6 +51,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -360,7 +361,7 @@ public class ConfigureMapMenu {
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.map_magnifier, activity)
-				.setDescription(String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %")
+				.setDescription(String.format(Locale.UK, "%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %")
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_magnifier)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -404,7 +405,8 @@ public class ConfigureMapMenu {
 										if (mapContext != null) {
 											mapContext.updateMapSettings();
 										}
-										adapter.getItem(pos).setDescription(String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %");
+										adapter.getItem(pos).setDescription(String.format(Locale.UK,
+												"%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %");
 										ad.notifyDataSetInvalidated();
 										dialog.dismiss();
 									}
@@ -506,7 +508,7 @@ public class ConfigureMapMenu {
 			createProperties(customRules, R.string.rendering_category_transport,
 					R.drawable.ic_action_bus_dark, "transport", adapter, activity);
 			createProperties(customRules, R.string.rendering_category_details,
-					R.drawable.widget_no_icon, "details", adapter, activity);
+					R.drawable.ic_action_layers_dark, "details", adapter, activity);
 			createProperties(customRules, R.string.rendering_category_hide,
 					R.drawable.ic_action_hide, "hide", adapter, activity);
 			createProperties(customRules, R.string.rendering_category_routes,
