@@ -81,7 +81,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private TextView zoomText;
 	private OsmandMapTileView mapView;
 	private OsmandApplication app;
-	private View mapAppModeShadow;
 	private MapHudButton routePlanningBtn;
 	private long touchEvent;
 	private MapHudButton mapZoomOut;
@@ -324,8 +323,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		});
-		controls.add(createHudButton(mapActivity.findViewById(R.id.map_app_mode_shadow), 0).setBg(
-				R.drawable.btn_round_trans, R.drawable.btn_round_transparent));
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
 
 		final boolean dash = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
@@ -344,7 +341,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		});
-		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
 		appModeIcon = (ImageView) mapActivity.findViewById(R.id.map_layers_button);
 		zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
 
@@ -527,14 +523,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		compassHud.updateVisibility(!dialogOpened);
 		layersHud.updateVisibility(!dialogOpened);
 
-		if (routePlanningMode || routeFollowingMode) {
-			mapAppModeShadow.setVisibility(View.GONE);
-		} else {
+		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {
 				lastZoom = System.currentTimeMillis();
 			}
-			mapAppModeShadow.setVisibility(View.VISIBLE);
-			mapAppModeShadow.setContentDescription(settings.getApplicationMode().toHumanString(app));
 			//if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
 			if ((System.currentTimeMillis() - lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);

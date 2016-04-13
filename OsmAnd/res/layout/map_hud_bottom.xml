@@ -36,23 +36,16 @@
                 tools:text="60"/>
         </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/map_app_mode_shadow"
-            android:layout_width="@dimen/map_button_shadow_width"
-            android:layout_height="@dimen/map_button_shadow_height"
+        <TextView
+            android:id="@+id/map_app_mode_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            tools:text="13.44"
+            android:layout_marginBottom="56dp"
+            android:layout_marginLeft="8dp"
             android:layout_gravity="bottom|left"
-            android:layout_marginBottom="@dimen/map_button_shadow_margin"
-            android:layout_marginLeft="@dimen/map_button_shadow_margin"
-            android:background="@drawable/btn_round_trans">
-
-            <TextView
-                android:id="@+id/map_app_mode_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center"
-                android:gravity="center_horizontal"
-                android:textSize="@dimen/map_button_text_size"/>
-        </FrameLayout>
+            android:textSize="@dimen/map_button_text_size"/>
 
         <LinearLayout
             android:id="@+id/map_transparency_layout"
@@ -72,11 +65,11 @@
 
             <ImageButton
                 android:id="@+id/map_transparency_hide"
-                android:contentDescription="@string/shared_string_hide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/btn_circle_transparent"
+                android:contentDescription="@string/shared_string_hide"
                 android:src="@drawable/headliner_close"/>
         </LinearLayout>
 
@@ -89,20 +82,20 @@
 
             <ImageButton
                 android:id="@+id/map_menu_button"
-                android:contentDescription="@string/backToMenu"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_round"
-                android:src="@drawable/ic_action_test_light"/>
+                android:contentDescription="@string/backToMenu"
+                tools:src="@drawable/ic_action_test_light"/>
 
             <ImageButton
                 android:id="@+id/map_route_info_button"
-                android:contentDescription="@string/layer_route"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:layout_marginLeft="@dimen/map_button_spacing"
                 android:background="@drawable/btn_round"
-                android:src="@drawable/ic_action_test_light"/>
+                android:contentDescription="@string/layer_route"
+                tools:src="@drawable/ic_action_test_light"/>
 
             <FrameLayout
                 android:id="@+id/map_ruler_layout"
@@ -157,12 +150,12 @@
 
             <ImageButton
                 android:id="@+id/map_my_location_button"
-                android:contentDescription="@string/shared_string_my_location"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:layout_gravity="bottom"
                 android:background="@drawable/btn_circle"
-                android:src="@drawable/ic_action_test_light"/>
+                android:contentDescription="@string/shared_string_my_location"
+                tools:src="@drawable/ic_action_test_light"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -173,20 +166,20 @@
 
                 <ImageButton
                     android:id="@+id/map_zoom_in_button"
-                    android:contentDescription="@string/zoomIn"
                     android:layout_width="@dimen/map_button_size"
                     android:layout_height="@dimen/map_button_size"
                     android:background="@drawable/btn_circle"
-                    android:src="@drawable/ic_action_test_light"/>
+                    android:contentDescription="@string/zoomIn"
+                    tools:src="@drawable/ic_action_test_light"/>
 
                 <ImageButton
                     android:id="@+id/map_zoom_out_button"
-                    android:contentDescription="@string/zoomOut"
                     android:layout_width="@dimen/map_button_size"
                     android:layout_height="@dimen/map_button_size"
                     android:layout_marginTop="@dimen/map_button_spacing"
                     android:background="@drawable/btn_circle"
-                    android:src="@drawable/ic_action_test_light"/>
+                    android:contentDescription="@string/zoomOut"
+                    tools:src="@drawable/ic_action_test_light"/>
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
@@ -218,14 +211,14 @@
                 android:layout_height="@dimen/map_address_height"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_circle_transparent"
-                android:src="@drawable/ic_action_test_light"/>
+                tools:src="@drawable/ic_action_test_light"/>
 
             <ImageButton
                 android:layout_width="@dimen/map_address_height"
                 android:layout_height="@dimen/map_address_height"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_circle_transparent"
-                android:src="@drawable/ic_action_test_light"/>
+                tools:src="@drawable/ic_action_test_light"/>
         </LinearLayout>
     </FrameLayout>
 
