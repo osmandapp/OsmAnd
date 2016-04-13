@@ -305,7 +305,7 @@
     <string name="osmo_expire_group">Expira en</string>
     <string name="osmo_connect_menu">Conectar</string>
     <string name="int_days">días</string>
-    <string name="osmo_track_interval_descr">Elige el intervalo de tiempo para enviar la ubicación</string>
+    <string name="osmo_track_interval_descr">Elige el lapso de tiempo para enviar la ubicación</string>
     <string name="osmo_track_interval">Intervalo de registro</string>
     <string name="osmo_share_session">Compartir sesión</string>
     <string name="osmo_session_not_available">Sesión no disponible, comprueba que \'Enviar localizaciones\' este activado.</string>
@@ -316,9 +316,9 @@
     
     
     
-    <string name="rendering_value_brown_name">marrón</string>
+    <string name="rendering_value_brown_name">Marrón</string>
     
-    <string name="rendering_value_pink_name">rosa</string>
+    <string name="rendering_value_pink_name">Rosa</string>
     
     <string name="osmo_user_name">Usuario</string>
     <string name="osmo_connect_to_my_nickname">Apodo</string>
@@ -2020,7 +2020,7 @@
     <string name="rec_split_title">Usar la división de grabación</string>
     <string name="rec_split_desc">Reescribir clips al exceder el espacio de almacenamiento utilizado</string>
     <string name="rec_split_clip_length">Duración del clip</string>
-    <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el intervalo de tiempo determinado</string>
+    <string name="rec_split_clip_length_desc">La duración de cada clip grabado, no excederá el lapso de tiempo determinado</string>
     <string name="rec_split_storage_size">Tamaño de almacenamiento</string>
     <string name="rec_split_storage_size_desc">La cantidad de espacio que pueden ocupar todos los clips grabados</string>
     <string name="updates_size">Tamaño de actualización</string>
@@ -2159,7 +2159,7 @@
     <string name="access_widget_expand">Abrir</string>
     <string name="access_shared_string_navigate_up">Navegar hacia arriba</string>
     <string name="access_sort">Ordenar</string>
-    <string name="access_disable_offroute_recalc">No cambiar de ruta cuando me salga del camino</string>
+    <string name="access_disable_offroute_recalc">No cambiar de ruta al salirme del camino</string>
     <string name="access_disable_offroute_recalc_descr">Previene el recálculo automático de ruta, al alejarse del camino correcto</string>
     <string name="access_disable_wrong_direction_recalc">No cambiar de ruta por una dirección equivocada</string>
     <string name="access_disable_wrong_direction_recalc_descr">Previene el recálculo automático de ruta, al conducir en dirección equivocada</string>
