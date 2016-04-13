@@ -311,6 +311,34 @@
       "102992": "C|+C|TR",
       "102447": "TL|+C"
     }
+  },
+  {
+    "testName": "17.Alt-Mahlsdorf  S",
+    "startPoint": {
+      "latitude": 45.669848071308095,
+      "longitude": 35.49515941739082
+    },
+    "endPoint": {
+      "latitude": 45.669818082408455,
+      "longitude": 35.500362902879715
+    },
+    "expectedResults": {
+      "7040281": "TL|+C|+C|TR"
+    }
+  },
+  {
+    "testName": "18.Stuttgarter Straße  S",
+    "startPoint": {
+      "latitude": 45.66799997535318,
+      "longitude": 35.52440086007118
+    },
+    "endPoint": {
+      "latitude": 45.67020418826295,
+      "longitude": 35.5249265730381
+    },
+    "expectedResults": {
+      "7057747": "TL|+C"
+    }
   }
 
 ]
