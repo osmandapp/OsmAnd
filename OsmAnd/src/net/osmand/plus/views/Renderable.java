@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 
@@ -12,6 +13,8 @@ import net.osmand.plus.GPXUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Renderable {
 
@@ -29,6 +32,8 @@ public abstract class Renderable {
         }
     }
 
+    private OsmandMapTileView view = null;                       // for paint refresh
+
     public List<GPXUtilities.WptPt> points = null;               // Original list of points
     protected List<WptPt2> culled;                               // Reduced/resampled list of points
     protected int pointSize;
@@ -40,10 +45,14 @@ public abstract class Renderable {
     protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
     protected int priority;
 
-    public Renderable(Priority priority, List<GPXUtilities.WptPt> points, double epsilon) {
+    public Renderable(Priority priority, OsmandMapTileView view, List<GPXUtilities.WptPt> points, double epsilon) {
+
+        assert view != null;
+
         this.priority = priority.priority;
         this.points = points;
         this.epsilon = epsilon;
+        this.view = view;
 
         culled = new ArrayList<>();
         for (GPXUtilities.WptPt pt : points) {
@@ -60,13 +69,23 @@ public abstract class Renderable {
             paint = new Paint(p);
             paint.setStrokeCap(Paint.Cap.ROUND);
             paint.setStrokeJoin(Paint.Join.ROUND);
-            paint.setStyle(Paint.Style.FILL);
+            paint.setStyle(Paint.Style.STROKE);
         }
-        paint.setColor(p.getColor() | 0xFF000000);
+        paint.setColor(p.getColor());
         paint.setStrokeWidth(p.getStrokeWidth());
     }
 
-    protected abstract void startCuller(double newZoom);
+    protected void startCuller(double newZoom) {
+        if (zoom != newZoom) {
+            if (culler != null) {
+                culler.cancel(true);
+            }
+            zoom = newZoom;
+            culler = Factory();
+            culler.execute("");
+        }
+    }
+    protected AsynchronousResampler Factory() { return null; }
 
     protected void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {}
 
@@ -94,73 +113,57 @@ public abstract class Renderable {
 
     public void setRDP(List<WptPt2> cull) {
         culled = cull;
+        view.refreshMap();
     }
 
-    protected void draw(List<WptPt2> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+    protected void basicDraw (Canvas canvas, RotatedTileBox tileBox) {
 
-        if (pts.size() > 1) {
+        canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+        QuadRect tileBounds = tileBox.getLatLonBounds();
 
-            updateLocalPaint(p);
-            canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-            QuadRect tileBounds = tileBox.getLatLonBounds();
+        Path path = new Path();
+        WptPt2 lastPt = culled.get(0);
+        boolean reCalculateLastXY = true;
 
-            WptPt2 lastPt = pts.get(0);
-            float lastx = 0;
-            float lasty = 0;
-            boolean reCalculateLastXY = true;
+        int size = culled.size();
+        for (int i = 1; i < size; i++) {
+            WptPt2 pt = culled.get(i);
 
-            int size = pts.size();
-            for (int i = 1; i < size; i++) {
-                WptPt2 pt = pts.get(i);
+            if (Math.min(pt.lon, lastPt.lon) < tileBounds.right && Math.max(pt.lon, lastPt.lon) > tileBounds.left
+                    && Math.min(pt.lat, lastPt.lat) < tileBounds.top && Math.max(pt.lat, lastPt.lat) > tileBounds.bottom) {
 
-                if (Math.min(pt.lon, lastPt.lon) < tileBounds.right && Math.max(pt.lon, lastPt.lon) > tileBounds.left
-                        && Math.min(pt.lat, lastPt.lat) < tileBounds.top && Math.max(pt.lat, lastPt.lat) > tileBounds.bottom) {
-
-                    if (reCalculateLastXY) {
-                        lastx = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
-                        lasty = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
-                        reCalculateLastXY = false;
-                    }
-
-                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
-                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
-
-                    canvas.drawLine(lastx, lasty, x, y, paint);
-
-                    lastx = x;
-                    lasty = y;
-
-                } else {
-                    reCalculateLastXY = true;
+                if (reCalculateLastXY) {
+                    reCalculateLastXY = false;
+                    path.moveTo(tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon), tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon));
                 }
-                lastPt = pt;
+                path.lineTo(tileBox.getPixXFromLatLon(pt.lat, pt.lon), tileBox.getPixYFromLatLon(pt.lat, pt.lon));
+            } else {
+                reCalculateLastXY = true;
             }
-            canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            lastPt = pt;
         }
+
+        canvas.drawPath(path, paint);
+        canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
     }
 
     //----------------------------------------------------------------------------------------------
 
     public static class StandardTrack extends Renderable {
 
-        public StandardTrack(List<GPXUtilities.WptPt> pt, double epsilon) {
-            super(Priority.STANDARD, pt, epsilon);
+        public StandardTrack(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon) {
+            super(Priority.STANDARD, view, pt, epsilon);
         }
 
-        @Override protected void startCuller(double newZoom) {
-
-            if (zoom != newZoom) {
-                if (culler != null) {
-                    culler.cancel(true);
-                }
-                zoom = newZoom;
-                culler = new AsynchronousResampler.RamerDouglasPeucer(this, Math.pow(2.0, epsilon - zoom));
-                culler.execute("");
-            }
+        @Override protected AsynchronousResampler Factory() {
+            return new AsynchronousResampler.RamerDouglasPeucer(this, Math.pow(2.0, epsilon - zoom));
         }
 
         @Override protected void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            draw(culled, p, canvas, tileBox);
+            if (culled.size() > 1) {
+                updateLocalPaint(p);
+                basicDraw(canvas, tileBox);
+            }
         }
     }
 
@@ -170,8 +173,8 @@ public abstract class Renderable {
 
         private boolean forceCull = false;
 
-        public CurrentTrack(List<GPXUtilities.WptPt> pt, double base) {
-            super(Priority.CURRENT, pt, base);
+        public CurrentTrack(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double base) {
+            super(Priority.CURRENT, view, pt, base);
         }
 
         @Override protected void startCuller(double newZoom) {
@@ -190,6 +193,7 @@ public abstract class Renderable {
             if (pointSize != points.size()) {
                 for (int i = pointSize; i < points.size(); i++) {
                     culled.add(new WptPt2(points.get(i)));
+                    forceCull = true;
                 }
                 updateBounds(points, pointSize);
                 forceCull = true;
@@ -197,7 +201,10 @@ public abstract class Renderable {
 
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
                 startCuller(zoom);
-                draw(culled, p, canvas, tileBox);
+                if (culled.size() > 1 ) {
+                    updateLocalPaint(p);
+                    basicDraw(canvas, tileBox);
+                }
             }
         }
     }
@@ -208,28 +215,16 @@ public abstract class Renderable {
 
         protected double widthZoom;
 
-        public ColourBand(Priority priority, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
-            super(priority, pt, epsilon);
+        public ColourBand(Priority priority, OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
+            super(priority, view, pt, epsilon);
             this.widthZoom = widthZoom;
-        }
-
-        protected abstract AsynchronousResampler Factory();
-
-        @Override protected void startCuller(double newZoom) {
-            if (zoom != newZoom) {
-                if (culler != null) {
-                    culler.cancel(true);
-                }
-                zoom = newZoom;
-                culler = Factory();
-                culler.execute("");
-            }
         }
 
         @Override protected void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (culled.size() > 1
-                    && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+            if (culled.size() > 1 && QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
+
+                Path path = new Path();
 
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -270,8 +265,8 @@ public abstract class Renderable {
 
     public static class Speed extends ColourBand {
 
-        public Speed(List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
-            super(Priority.SPEED, pt, epsilon, widthZoom);
+        public Speed(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
+            super(Priority.SPEED, view, pt, epsilon, widthZoom);
         }
 
         @Override protected AsynchronousResampler Factory() {
@@ -283,8 +278,8 @@ public abstract class Renderable {
 
     public static class Altitude extends ColourBand {
 
-        public Altitude(List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
-            super(Priority.ALTITUDE, pt, epsilon, widthZoom);
+        public Altitude(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
+            super(Priority.ALTITUDE, view, pt, epsilon, widthZoom);
         }
 
         @Override protected AsynchronousResampler Factory() {
@@ -318,8 +313,8 @@ public abstract class Renderable {
 
         private unit option;
 
-        public Distance(List<GPXUtilities.WptPt> pt, unit segment) {
-            super(Priority.DISTANCE, pt, segment.value);
+        public Distance(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, unit segment) {
+            super(Priority.DISTANCE, view, pt, segment.value);
             this.option = segment;
         }
 
@@ -339,7 +334,7 @@ public abstract class Renderable {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                float scale = 11 * tileBox.getDensity();
+                float scale = 9.5f * tileBox.getDensity();
                 paint.setTextSize(scale);
 
                 float stroke = paint.getStrokeWidth();
@@ -360,10 +355,10 @@ public abstract class Renderable {
                     if (x < canvas.getWidth() + rectW && x > -rectW
                             && y < canvas.getHeight() + rectH/2f && y > -rectH/2f) {
 
-                        paint.setStrokeWidth(2f * tileBox.getDensity());
-                        paint.setStyle(Paint.Style.STROKE);
-                        paint.setColor(Color.WHITE);
-                        canvas.drawText(lab, x, y + rectH / 2, paint);
+                        //paint.setStrokeWidth(2f * tileBox.getDensity());
+                        //paint.setStyle(Paint.Style.STROKE);
+                        //paint.setColor(Color.WHITE);
+                        //canvas.drawText(lab, x, y + rectH / 2, paint);
                         paint.setStyle(Paint.Style.FILL);
                         paint.setStrokeWidth(1.5f * tileBox.getDensity());
                         paint.setColor(Color.BLACK);
@@ -377,4 +372,5 @@ public abstract class Renderable {
             }
         }
     }
+
 }

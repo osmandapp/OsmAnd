@@ -32,15 +32,14 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
 
     private WptPt2 createIntermediatePoint(WptPt lastPt, WptPt pt, double partial, double dist) {
-        double inpartial = 1.0 - partial;
-        WptPt2 newPt = new WptPt2(
-                lastPt.getLatitude() * inpartial + pt.getLatitude() * partial,
-                lastPt.getLongitude() * inpartial + pt.getLongitude() * partial,
-                (long) (lastPt.time * inpartial + pt.time * partial),
-                lastPt.ele * inpartial + pt.ele * partial,
-                lastPt.speed * inpartial + pt.speed * partial,
-                dist);
-        return newPt;
+        double angle = Math.atan2(lastPt.lat - pt.lat, lastPt.lon - pt.lon);    // kludge
+        return new WptPt2(
+                lastPt.lat + (pt.lat - lastPt.lat) * partial,
+                lastPt.lon + (pt.lon - lastPt.lon) * partial,
+                (long) (lastPt.time + (pt.time - lastPt.time) * partial),
+                lastPt.ele + (pt.ele - lastPt.ele) * partial,
+                lastPt.speed + (pt.speed - lastPt.speed) * partial,
+                dist, angle);
     }
 
     public List<WptPt2> resampleTrack(List<WptPt> pts, double dist) {
@@ -55,11 +54,10 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             double cumDist = 0;
             for (int i = 1; i < size && !isCancelled(); i++) {
                 WptPt pt = pts.get(i);
-                double segLength = MapUtils.getDistance(pt.getLatitude(), pt.getLongitude(), lastPt.getLatitude(), lastPt.getLongitude());
+                double segLength = MapUtils.getDistance(pt.lat, pt.lon, lastPt.lat, lastPt.lon);
                 while (segSub < segLength) {
                     double partial = segSub / segLength;
-                    WptPt2 nPt = createIntermediatePoint(lastPt, pt, segSub / segLength, cumDist + segLength * partial);
-                    newPts.add(nPt);
+                    newPts.add(createIntermediatePoint(lastPt, pt, partial, cumDist + segLength * partial));
                     segSub += dist;
                 }
                 segSub -= segLength;

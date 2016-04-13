@@ -359,15 +359,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				if (ts.renders.isEmpty()) {
 
 					if (g.isShowCurrentTrack()) {
-						ts.renders.add(new Renderable.CurrentTrack(ts.points, 0));
+						ts.renders.add(new Renderable.CurrentTrack(view, ts.points, 0));
 					} else {
 
 						double epsilon = 16.5;                // Increase for less quality.
 
-						ts.renders.add(new Renderable.StandardTrack(ts.points, epsilon));
-						ts.renders.add(new Renderable.Altitude(ts.points, epsilon, 2.5));
-						//ts.renders.add(new Renderable.Speed(ts.points, epsilon, 4));
-						ts.renders.add(new Renderable.Distance(ts.points, Renderable.Distance.unit.KILOMETERS));
+						ts.renders.add(new Renderable.StandardTrack(view, ts.points, epsilon));
+						ts.renders.add(new Renderable.Altitude(view, ts.points, epsilon, 2.5));
+						//ts.renders.add(new Renderable.Speed(view, ts.points, epsilon, 4));
+						ts.renders.add(new Renderable.Distance(view, ts.points, Renderable.Distance.unit.KILOMETERS));
+						//ts.renders.add(new Renderable.Arrows(view, ts.points, view, 20, 500));
 					}
 				}
 				// END OF SECTION TO BE MOVED TO UI
