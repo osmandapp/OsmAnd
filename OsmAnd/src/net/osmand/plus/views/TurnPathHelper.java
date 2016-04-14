@@ -417,15 +417,14 @@ public class TurnPathHelper {
 		if (turnIndex == FIRST_TURN) {
 			if (secondTurnType == 0) {
 				turnResource = getTallArrow(firstTurnType);
-			} else if (secondTurnType != TurnType.C) {
+			} else if (secondTurnType == TurnType.C || thirdTurnType == TurnType.C) {
+				turnResource = getShortArrow(firstTurnType);
+			} else {
 				if (firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU) {
 					turnResource = getShortArrow(firstTurnType);
 				} else {
 					turnResource = getTallArrow(firstTurnType);
 				}
-			} else {
-				// get the small one
-				turnResource = getShortArrow(firstTurnType);
 			}
 		} else if (turnIndex == SECOND_TURN) {
 			if (TurnType.isLeftTurn(firstTurnType) && TurnType.isLeftTurn(secondTurnType)) {
@@ -444,7 +443,7 @@ public class TurnPathHelper {
 			} else if ((TurnType.isRightTurn(firstTurnType) || TurnType.isRightTurn(secondTurnType)) && TurnType.isRightTurn(thirdTurnType)) {
 				turnResource = null;
 			} else {
-				turnResource = getShortArrow(secondTurnType);
+				turnResource = getShortArrow(thirdTurnType);
 			}
 		}
 		if (turnResource == null) {
