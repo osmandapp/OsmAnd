@@ -2193,4 +2193,13 @@
     <string name="access_widget_expand">Разгарнуць</string>
     <string name="access_shared_string_navigate_up">Перайсьці ўверх</string>
     <string name="access_sort">Сартаваць</string>
+    <string name="access_disable_offroute_recalc">Не змяняць маршрут пры сходзе са шляху</string>
+    <string name="access_disable_offroute_recalc_descr">Прадухіляе аўтаматычны пералік маршруту пры значным аддаленьні ад зададзенага шляху</string>
+    <string name="access_disable_wrong_direction_recalc">Не зьмяняць маршрут пры няслушным кірунку руху</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Прадухіляе аўтаматычны пералік маршруту пры няслушным кірунку руху</string>
+    <string name="access_smart_autoannounce">Інтэлектуальнае аўтаабвяшчэньне</string>
+    <string name="access_smart_autoannounce_descr">Казаць толькі пры зьмене кірунку на мэтавы пункт</string>
+    <string name="access_autoannounce_period">Пэрыяд аўтаабвяшчэньняў</string>
+    <string name="access_autoannounce_period_descr">Мінімальны час паміж абвяшчэньнямі</string>
+    <string name="map_widget_bearing">Азімут</string>
     </resources>
