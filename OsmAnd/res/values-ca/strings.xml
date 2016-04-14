@@ -2014,4 +2014,12 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="access_widget_expand">Expandeix</string>
     <string name="access_shared_string_navigate_up">Desplaça amunt</string>
     <string name="access_sort">Ordena</string>
+    <string name="access_disable_offroute_recalc">No recalcularà la ruta quan sigueu fora del camí</string>
+    <string name="access_disable_offroute_recalc_descr">Evitarà el recalcul automàtic de la ruta quan sigueu força lluny del camí correcte</string>
+    <string name="access_disable_wrong_direction_recalc">No recalcularà la ruta per direcció incorrecte</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Evitarà el recalcul automàtic de ruta quan us mogueu en una direcció incorrecte</string>
+    <string name="access_smart_autoannounce">Recordatoris intel·ligents</string>
+    <string name="access_smart_autoannounce_descr">Només notificarà quan la direcció al punt de destí canvïi</string>
+    <string name="access_autoannounce_period">Freqüència dels recordatoris</string>
+    <string name="access_autoannounce_period_descr">Interval mínim de temps entre anuncis</string>
     </resources>
