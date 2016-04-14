@@ -2259,4 +2259,7 @@
     <string name="access_widget_expand">Uitvouwen</string>
     <string name="access_shared_string_navigate_up">Omhoog navigeren</string>
     <string name="access_sort">Sorteren</string>
+    <string name="map_widget_bearing">Koers</string>
+    <string name="access_disable_offroute_recalc">Wijzig de route niet als u van de weg af bent</string>
+    <string name="access_disable_offroute_recalc_descr">Voorkom automatische hercalculatie van de route wanneer u ver weg bent van de juiste richting</string>
     </resources>
