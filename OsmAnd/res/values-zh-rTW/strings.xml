@@ -2177,4 +2177,5 @@
     <string name="access_smart_autoannounce_descr">只在方向到目標點已被改變了才通知</string>
     <string name="access_autoannounce_period">自動播報期間</string>
     <string name="access_autoannounce_period_descr">在播報之間的最短時間間隔</string>
+    <string name="map_widget_bearing">方位</string>
     </resources>
