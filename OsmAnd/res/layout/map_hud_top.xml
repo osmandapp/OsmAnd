@@ -213,6 +213,7 @@
 
                     <ImageButton
                         android:id="@+id/marker_btn_ok"
+                        android:contentDescription="@string/shared_string_remove"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
@@ -220,6 +221,7 @@
 
                     <ImageButton
                         android:id="@+id/marker_btn_more"
+                        android:contentDescription="@string/shared_string_more"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
@@ -294,6 +296,7 @@
 
                     <ImageButton
                         android:id="@+id/marker_btn_ok_2dn"
+                        android:contentDescription="@string/shared_string_remove"
                         android:layout_width="50dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
