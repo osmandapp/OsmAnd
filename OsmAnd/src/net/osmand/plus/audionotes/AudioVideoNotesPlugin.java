@@ -161,7 +161,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static File mediaRecFile;
 	private static MediaRecorder mediaRec;
 	private File lastTakingPhoto;
-	private byte[] photoRawData;
+	private byte[] photoJpegData;
 	private Timer photoTimer;
 	private Camera cam;
 	private List<Camera.Size> mSupportedPreviewSizes;
@@ -1297,14 +1297,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void internalShoot() {
 		if (!autofocus) {
-			cam.takePicture(null, null, new AudioVideoPhotoHandler());
+			cam.takePicture(null, null, new JpegPhotoHandler());
 		} else {
 			cam.autoFocus(new Camera.AutoFocusCallback() {
 				@Override
 				public void onAutoFocus(boolean success, Camera camera) {
-					cam.cancelAutoFocus();
 					try {
-						cam.takePicture(null, null, new AudioVideoPhotoHandler());
+						cam.takePicture(null, null, new JpegPhotoHandler());
 					} catch (Exception e) {
 						logErr(e);
 						closeRecordingMenu();
@@ -1389,7 +1388,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordingDone = true;
 			if (cam != null && lastTakingPhoto != null) {
 				try {
-					cam.takePicture(null, null, new AudioVideoPhotoHandler());
+					cam.takePicture(null, null, new JpegPhotoHandler());
 				} catch (RuntimeException e) {
 					closeRecordingMenu();
 					closeCamera();
@@ -1893,14 +1892,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public class AudioVideoPhotoHandler implements PictureCallback {
+	public class JpegPhotoHandler implements PictureCallback {
 
-		public AudioVideoPhotoHandler() {
+		public JpegPhotoHandler() {
 		}
 
 		@Override
 		public void onPictureTaken(final byte[] data, Camera camera) {
-			photoRawData = data;
+			photoJpegData = data;
 
 			if (AV_PHOTO_PLAY_SOUND.get()) {
 				if (sp != null && shotId != 0) {
@@ -1937,7 +1936,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public synchronized void shootAgain() {
 		cancelPhotoTimer();
-		photoRawData = null;
+		photoJpegData = null;
 		if (cam != null) {
 			try {
 				cam.cancelAutoFocus();
@@ -1960,18 +1959,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public synchronized void finishPhotoRecording(boolean cancel) {
 		cancelPhotoTimer();
-		if (photoRawData != null && photoRawData.length > 0 && lastTakingPhoto != null) {
+		if (photoJpegData != null && photoJpegData.length > 0 && lastTakingPhoto != null) {
 			try {
 				if (!cancel) {
 					FileOutputStream fos = new FileOutputStream(lastTakingPhoto);
-					fos.write(photoRawData);
+					fos.write(photoJpegData);
 					fos.close();
 					indexFile(true, lastTakingPhoto);
 				}
 			} catch (Exception error) {
 				logErr(error);
 			} finally {
-				photoRawData = null;
+				photoJpegData = null;
 				closeRecordingMenu();
 				if (!cancel) {
 					finishRecording();

@@ -326,7 +326,7 @@ public class AudioVideoNoteRecordingMenu {
 		}
 	}
 
-	public void showFinalPhoto(final byte[] data, long duration) {
+	public void showFinalPhoto(final byte[] jpeg, long duration) {
 	}
 
 	public void hideFinalPhoto() {
