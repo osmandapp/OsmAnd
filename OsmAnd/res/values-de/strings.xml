@@ -2149,4 +2149,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="access_disable_wrong_direction_recalc_descr">Bei falscher Fahrtrichtung automatische Routenneuberechnung verhindern</string>
     <string name="access_smart_autoannounce">Intelligente automatische Ankündigung</string>
     <string name="access_smart_autoannounce_descr">Nur benachrichtigen wenn sich die Richtung zum Zielpunkt geändert hat</string>
+    <string name="access_autoannounce_period_descr">Kürzester Abstand zwischen Benachrichtigungen</string>
     </resources>
