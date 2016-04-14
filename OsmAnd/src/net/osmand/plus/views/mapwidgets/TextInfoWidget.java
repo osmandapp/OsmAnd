@@ -42,7 +42,11 @@ public class TextInfoWidget  {
 		smallTextViewShadow = (TextView) view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = (TextView) view.findViewById(R.id.widget_text_small);
 	}
-	
+
+	public OsmandApplication getOsmandApplication() {
+		return app;
+	}
+
 	public View getView() {
 		return view;
 	}

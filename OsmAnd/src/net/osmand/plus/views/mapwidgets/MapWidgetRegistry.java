@@ -358,7 +358,10 @@ public class MapWidgetRegistry {
 							 Set<MapWidgetRegInfo> groupTitle, final ApplicationMode mode) {
 		for (final MapWidgetRegInfo r : groupTitle) {
 			if (mode == ApplicationMode.DEFAULT) {
-				if ("intermediate_distance".equals(r.key) || "distance".equals(r.key) || "time".equals(r.key)) {
+				if ("intermediate_distance".equals(r.key)
+						|| "distance".equals(r.key)
+						|| "bearing".equals(r.key)
+						|| "time".equals(r.key)) {
 					continue;
 				}
 			}
