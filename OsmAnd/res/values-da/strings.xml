@@ -2349,4 +2349,12 @@
     <string name="access_widget_expand">Udvid</string>
     <string name="access_shared_string_navigate_up">Navigere op</string>
     <string name="access_sort">Sorter</string>
+    <string name="access_disable_offroute_recalc">Ændre ikke ruten, når du er væk fra vejen</string>
+    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk rute genberegning, når du er ret langt fra den rette vej</string>
+    <string name="access_disable_wrong_direction_recalc">Ændre ikke ruten ved forkert retning</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk rute genberegning, når du er på vej i den forkerte retning</string>
+    <string name="access_smart_autoannounce_descr">Underret kun når der ændres retning til målpunktet</string>
+    <string name="access_autoannounce_period">Autoannounce periode</string>
+    <string name="access_autoannounce_period_descr">Mindste tidsinterval mellem annonceringer</string>
+    <string name="access_smart_autoannounce">Smarte autoannonceringer</string>
     </resources>
