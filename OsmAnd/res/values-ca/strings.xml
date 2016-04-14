@@ -2022,5 +2022,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="access_smart_autoannounce_descr">Només notificarà quan la direcció al punt de destí canvïi</string>
     <string name="access_autoannounce_period">Freqüència dels recordatoris</string>
     <string name="access_autoannounce_period_descr">Interval mínim de temps entre anuncis</string>
-    <string name="map_widget_bearing">Desviació</string>
+    <string name="map_widget_bearing">Rumb</string>
     </resources>
