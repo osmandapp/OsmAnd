@@ -104,7 +104,7 @@ public class TrackActivity extends TabActivity {
 						getTabIndicator(R.string.track_segments, TrackSegmentFragment.class));
 				if (isHavingWayPoints()){
 					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-							getTabIndicator(R.string.track_points, TrackPointFragment.class));
+							getTabIndicator(R.string.announce_gpx_waypoints, TrackPointFragment.class));
 				}
 				if (isHavingRoutePoints()){
 					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
