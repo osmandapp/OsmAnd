@@ -2169,4 +2169,5 @@
     <string name="access_widget_expand">展開</string>
     <string name="access_sort">分類</string>
     <string name="access_shared_string_navigate_up">往上</string>
+    <string name="access_disable_offroute_recalc">當您離開道路，不改變路線</string>
     </resources>
