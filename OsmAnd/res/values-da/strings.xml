@@ -2357,4 +2357,5 @@
     <string name="access_autoannounce_period">Autoannonceringsperiode</string>
     <string name="access_autoannounce_period_descr">Mindste tidsinterval mellem annonceringer</string>
     <string name="access_smart_autoannounce">Smarte autoannonceringer</string>
+    <string name="map_widget_bearing">Kurs</string>
     </resources>
