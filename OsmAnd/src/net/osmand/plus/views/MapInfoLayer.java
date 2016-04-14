@@ -119,6 +119,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map);
 		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 5);
+		TextInfoWidget bearing = ric.createBearingControl(map);
+		registerSideWidget(bearing, R.drawable.ic_action_target, R.string.map_widget_bearing, "bearing", false, 7);
 		TextInfoWidget time = ric.createTimeControl(map);
 		registerSideWidget(time, R.drawable.ic_action_time, R.string.map_widget_time, "time", false, 10);
 
