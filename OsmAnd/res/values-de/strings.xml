@@ -2150,4 +2150,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="access_smart_autoannounce">Intelligente automatische Ankündigung</string>
     <string name="access_smart_autoannounce_descr">Nur benachrichtigen wenn sich die Richtung zum Zielpunkt geändert hat</string>
     <string name="access_autoannounce_period_descr">Kürzester Abstand zwischen Benachrichtigungen</string>
+    <string name="map_widget_bearing">Peilung</string>
+    <string name="access_autoannounce_period">Zeitraum der automatischen Ankündigungen</string>
     </resources>
