@@ -2021,4 +2021,13 @@
     <string name="access_widget_expand">Rozbaliť</string>
     <string name="access_shared_string_navigate_up">Navigovať nahor</string>
     <string name="access_sort">Zotriediť</string>
+    <string name="map_widget_bearing">Smerovanie</string>
+    <string name="access_disable_offroute_recalc">Nemeniť trasu ak ste mimo cesty</string>
+    <string name="access_disable_offroute_recalc_descr">Nerobiť automatické prepočítanie trasy ak ste ďaleko od správnej cesty</string>
+    <string name="access_disable_wrong_direction_recalc">Nemeniť trasu pri jazde opačným smerom</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Nerobiť automatické prepočítanie trasy ak sa pohybujete opačným smerom</string>
+    <string name="access_smart_autoannounce">Šikovné oznamovanie</string>
+    <string name="access_smart_autoannounce_descr">Oznamovať len ak sa smer k cieľu zmenil</string>
+    <string name="access_autoannounce_period">Interval šikovného oznamovania</string>
+    <string name="access_autoannounce_period_descr">Minimálny čas medzi oznamami</string>
     </resources>
