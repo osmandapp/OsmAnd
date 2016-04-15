@@ -181,7 +181,7 @@ public class TurnType {
 
 	public static int getSecondaryTurn(int laneValue) {
 		// Get the secondary turn modifier for the lane
-		return (laneValue >> 5);
+		return (laneValue >> 5) & ((1 << 5) - 1);
 	}
 	
 	public static void setPrimaryTurnShiftOthers(int[] lanes, int lane, int turnType) {
