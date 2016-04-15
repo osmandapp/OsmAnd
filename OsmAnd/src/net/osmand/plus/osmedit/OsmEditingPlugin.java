@@ -163,10 +163,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityCreate(MapActivity activity) {
-		// Always create new actions !
-//		poiActions = new EditingPOIDialogProvider(activity, this);
-//		activity.addDialogProvider(getPoiActions(activity));
-		activity.addDialogProvider(getBugsLayer(activity));
 	}
 
 

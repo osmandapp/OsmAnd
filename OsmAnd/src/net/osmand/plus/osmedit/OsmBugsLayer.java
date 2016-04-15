@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,8 +11,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Xml;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.OsmBugsUtil.OsmBugResult;
 import net.osmand.plus.osmedit.OsmPoint.Action;
@@ -49,9 +47,9 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider, DialogProvider {
+public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider {
 
-	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class); 
+	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class);
 	private final static int startZoom = 8;
 	private final OsmEditingPlugin plugin;
 
@@ -71,13 +69,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static Bundle dialogBundle = new Bundle();
 	private OsmBugsLocalUtil local;
 	private MapLayerData<List<OpenStreetNote>> data;
-	
+
 	public OsmBugsLayer(MapActivity activity, OsmEditingPlugin plugin){
 		this.activity = activity;
 		this.plugin = plugin;
 		local = plugin.getOsmNotesLocalUtil();
 	}
-	
+
 	public OsmBugsUtil getOsmbugsUtil(OpenStreetNote bug) {
 		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		if ((bug != null && bug.isLocal()) || settings.OFFLINE_EDITION.get()
@@ -87,7 +85,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			return plugin.getOsmNotesRemoteUtil();
 		}
 	}
-	
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
@@ -103,7 +101,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			{
 				ZOOM_THRESHOLD = 1;
 			}
-			
+
 			@Override
 			protected List<OpenStreetNote> calculateResult(RotatedTileBox tileBox) {
 				QuadRect bounds = tileBox.getLatLonBounds();
@@ -170,9 +168,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		
+
 	}
-	
+
 	public int getRadiusBug(RotatedTileBox tb) {
 		int z;
 		final double zoom = tb.getZoom();
@@ -191,14 +189,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		return (int) (z * tb.getDensity());
 	}
-	
-	
-	
+
+
+
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
-	
+
 	public void getBugFromPoint(RotatedTileBox tb, PointF point, List<? super OpenStreetNote> res){
 		List<OpenStreetNote> objects = data.getResults();
 		if (objects != null && view != null) {
@@ -228,7 +226,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			data.clearCache();
 		}
 	}
-	
+
 	private static String readText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
 		int tok;
 		String text = "";
@@ -238,24 +236,24 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			} else if(tok == XmlPullParser.TEXT){
 				text += parser.getText();
 			}
-			
+
 		}
 		return text;
 	}
-	
-	
+
+
 	protected List<OpenStreetNote> loadingBugs(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude){
 		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		
+
 		String SITE_API;
-		
+
 		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
 			SITE_API = "https://api.openstreetmap.org/";
 		}
 		else {
 			SITE_API = "http://api.openstreetmap.org/";
 		}
-	
+
 		List<OpenStreetNote> bugs = new ArrayList<>();
 		StringBuilder b = new StringBuilder();
 		b.append(SITE_API).append("api/0.6/notes?bbox="); //$NON-NLS-1$
@@ -311,10 +309,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		return bugs;
 	}
-	
 
-	
-	
+
+
+
 	private void asyncActionTask(final OpenStreetNote bug, final String text, final Action action) {
 		AsyncTask<Void, Void, OsmBugResult> task = new AsyncTask<Void, Void, OsmBugResult>() {
 			private OsmBugsUtil osmbugsUtil;
@@ -329,7 +327,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			}
 			protected void onPostExecute(OsmBugResult obj) {
 				if (obj != null && obj.warning == null) {
-					if(local == osmbugsUtil) { 
+					if(local == osmbugsUtil) {
 						Toast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
 						if(obj.local != null) {
 							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_OSM_BUG, obj.local.getText());
@@ -345,7 +343,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						} else if(action == Action.CREATE) {
 							Toast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
 						}
-						
+
 					}
 					clearCache();
 				} else {
@@ -368,47 +366,28 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		};
 		executeTaskInBackground(task);
 	}
-	
+
 
 	public void openBug(final double latitude, final double longitude, String message){
 		OpenStreetNote bug = new OpenStreetNote();
 		bug.setLatitude(latitude);
 		bug.setLongitude(longitude);
-		dialogBundle = new Bundle();
-		dialogBundle.putSerializable(KEY_BUG, bug);
-		dialogBundle.putSerializable(KEY_TEXT, message);
-		dialogBundle.putSerializable(KEY_ACTION, Action.CREATE.name());
-		activity.showDialog(DIALOG_BUG);
+		showBugDialog(bug, Action.CREATE, message);
 	}
-	
+
 	public void closeBug(final OpenStreetNote bug, String txt){
-		dialogBundle = new Bundle();
-		dialogBundle.putSerializable(KEY_BUG, bug);
-		dialogBundle.putSerializable(KEY_TEXT, txt);
-		dialogBundle.putSerializable(KEY_ACTION, Action.DELETE.name());
-		activity.showDialog(DIALOG_BUG);
+		showBugDialog(bug, Action.DELETE, txt);
 	}
-	
+
 	public void reopenBug(final OpenStreetNote bug, String txt){
-		dialogBundle = new Bundle();
-		dialogBundle.putSerializable(KEY_BUG, bug);
-		dialogBundle.putSerializable(KEY_TEXT, txt);
-		dialogBundle.putSerializable(KEY_ACTION, Action.REOPEN.name());
-		activity.showDialog(DIALOG_BUG);
+		showBugDialog(bug, Action.REOPEN, txt);
 	}
-	
+
 	public void commentBug(final OpenStreetNote bug, String txt){
-		dialogBundle = new Bundle();
-		dialogBundle.putSerializable(KEY_BUG, bug);
-		dialogBundle.putSerializable(KEY_TEXT, txt);
-		dialogBundle.putSerializable(KEY_ACTION, Action.MODIFY.name());
-		activity.showDialog(DIALOG_BUG);
+		showBugDialog(bug, Action.MODIFY, txt);
 	}
-	
-	private void prepareBugDialog(Bundle args, Dialog dialog) {
-		final OpenStreetNote bug = (OpenStreetNote) args.getSerializable(KEY_BUG);
-		final Action action = Action.valueOf((String) args.getSerializable(KEY_ACTION));
-		String text =(String) args.getSerializable(KEY_TEXT);
+
+	private void showBugDialog(final OpenStreetNote bug, final Action action, String text) {
 		int title ;
 		if(action == Action.DELETE) {
 			title = R.string.osn_close_dialog_title;
@@ -418,15 +397,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			title = R.string.osn_reopen_dialog_title;
 		} else {
 			title = R.string.osn_add_dialog_title;
-		}		
-		final AlertDialog dlg = (AlertDialog) dialog;
-		dlg.setTitle(title);
-		final View view = dlg.findViewById(R.id.layout);
-		Button btn = dlg.getButton(DialogInterface.BUTTON_POSITIVE);
-		btn.setText(title);
+		}
 
 		OsmBugsUtil util = getOsmbugsUtil(bug);
 		final boolean offline =  util instanceof OsmBugsLocalUtil;
+
+		final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
 		if(offline) {
 			view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
 			view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
@@ -440,39 +416,28 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			((EditText)view.findViewById(R.id.message_field)).setText(text);
 		}
 		AndroidUtils.softKeyboardDelayed(view.findViewById(R.id.message_field));
-		btn.setOnClickListener(new View.OnClickListener() {
+
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(R.string.shared_string_commit);
+		builder.setView(view);
+		builder.setPositiveButton(title, new DialogInterface.OnClickListener() {
 			@Override
-			public void onClick(View dialog) {
+			public void onClick(DialogInterface dialog, int which) {
 				if (bug != null) {
 					String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
-					// server validation will handle it
-//					if (us.length() == 0 || pwd.length() == 0) {
-//						Toast.makeText(activity, activity.getString(R.string.osb_author_or_password_not_specified),
-//								Toast.LENGTH_SHORT).show();
-//					}
 					activity.getContextMenu().close();
 					asyncActionTask(bug, text, action);
-					dlg.dismiss();
 				}
 			}
 		});
-	}
-	
-	private Dialog createBugDialog(final Bundle args) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle(R.string.shared_string_commit);
-		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
-		view.setId(R.id.layout);
-		builder.setView(view);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_commit, null);
-		return builder.create();
+		builder.create().show();
 	}
 
 	private String getUserName() {
 		return ((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get();
 	}
-	
+
 	private String getTextAndUpdateUserPwd(final View view) {
 		String text = getMessageText(view);
 		String author = ((EditText)view.findViewById(R.id.user_name_field)).getText().toString();
@@ -485,16 +450,16 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private String getMessageText(final View view) {
 		return ((EditText)view.findViewById(R.id.message_field)).getText().toString();
 	}
-	
+
 	public void refreshMap(){
 		if (view != null && view.getLayers().contains(OsmBugsLayer.this)) {
 			view.refreshMap();
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof OpenStreetNote){
@@ -502,7 +467,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		return null;
 	}
-	
+
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof OpenStreetNote){
@@ -543,28 +508,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		return null;
 	}
-
-	@Override
-	public Dialog onCreateDialog(int id) {
-		Bundle args = dialogBundle;
-		switch (id) {
-			case DIALOG_BUG:
-				return createBugDialog(args);
-		}
-		return null;
-	}
-
-	@Override
-	public void onPrepareDialog(int id, Dialog dialog) {
-		switch (id) {
-			case DIALOG_BUG:
-				prepareBugDialog(dialogBundle, dialog);
-				((EditText)dialog.findViewById(R.id.message_field)).setText("");
-				break;
-		}
-	}
-	
-	
 
 	public static class OpenStreetNote implements Serializable {
 		private boolean local;
@@ -660,7 +603,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			}
 			return res;
 		}
-		
+
 		public long getId() {
 			return id;
 		}
@@ -673,11 +616,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		public void setOpened(boolean opened) {
 			this.opened = opened;
 		}
-		
+
 		public boolean isLocal() {
 			return local;
 		}
-		
+
 		public void setLocal(boolean local) {
 			this.local = local;
 		}
