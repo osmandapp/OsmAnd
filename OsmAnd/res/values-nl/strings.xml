@@ -2261,5 +2261,11 @@
     <string name="access_sort">Sorteren</string>
     <string name="map_widget_bearing">Koers</string>
     <string name="access_disable_offroute_recalc">Wijzig de route niet als u van de weg af bent</string>
-    <string name="access_disable_offroute_recalc_descr">Voorkom automatische hercalculatie van de route wanneer u ver weg bent van de juiste richting</string>
+    <string name="access_disable_offroute_recalc_descr">Voorkom automatische hercalculatie van de route wanneer u ver van de route afwijkt</string>
+    <string name="access_disable_wrong_direction_recalc">Wijzig de route niet als u de verkeerde kant op gaat</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Voorkom automatische herberekening van de route als u de verkeerde kant op beweegt</string>
+    <string name="access_smart_autoannounce">Slimme aankondigingen</string>
+    <string name="access_smart_autoannounce_descr">Geef alleen instructie als de richting naar het doel veranderd is</string>
+    <string name="access_autoannounce_period">Tijd tussen meldingen</string>
+    <string name="access_autoannounce_period_descr">De minimale tijd die tussen meldingen moet zitten</string>
     </resources>
