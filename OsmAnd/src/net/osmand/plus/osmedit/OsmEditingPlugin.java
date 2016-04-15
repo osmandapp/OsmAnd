@@ -381,7 +381,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return true;
 	}
 
-
 	@Override
 	public String getName() {
 		return app.getString(R.string.osm_settings);
