@@ -1,8 +1,10 @@
 package net.osmand.plus.helpers;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.util.Arrays;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -29,10 +31,10 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AlertDialog;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.util.Arrays;
 
 public class ExternalApiHelper {
 
@@ -99,9 +101,11 @@ public class ExternalApiHelper {
 
 	public static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
-
-	public static final int RESULT_CODE_OK = 0;
-	public static final int RESULT_CODE_ERROR_UNKNOWN = -1;
+	// RESULT_OK == -1
+	// RESULT_CANCELED == 0
+	// RESULT_FIRST_USER == 1
+	// from Activity
+	public static final int RESULT_CODE_ERROR_UNKNOWN = -3;
 	public static final int RESULT_CODE_ERROR_NOT_IMPLEMENTED = -2;
 	public static final int RESULT_CODE_ERROR_PLUGIN_INACTIVE = 10;
 	public static final int RESULT_CODE_ERROR_GPX_NOT_FOUND = 20;
@@ -173,7 +177,7 @@ public class ExternalApiHelper {
 					} else {
 						app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 					}
-					resultCode = RESULT_CODE_OK;
+					resultCode = Activity.RESULT_OK;
 				} else {
 					resultCode = RESULT_CODE_ERROR_GPX_NOT_FOUND;
 				}
@@ -261,7 +265,7 @@ public class ExternalApiHelper {
 						}
 					}
 
-					resultCode = RESULT_CODE_OK;
+					resultCode = Activity.RESULT_OK;
 				}
 
 			} else if (API_CMD_GET_INFO.equals(cmd)) {
@@ -296,7 +300,7 @@ public class ExternalApiHelper {
 				result.putExtra(PARAM_VERSION, VERSION_CODE);
 
 				finish = true;
-				resultCode = RESULT_CODE_OK;
+				resultCode = Activity.RESULT_OK;
 
 			} else if (API_CMD_ADD_FAVORITE.equals(cmd)) {
 				String name = uri.getQueryParameter(PARAM_NAME);
@@ -334,7 +338,7 @@ public class ExternalApiHelper {
 				helper.addFavourite(fav);
 
 				showOnMap(lat, lon, fav, mapActivity.getMapLayers().getFavoritesLayer().getObjectName(fav));
-				resultCode = RESULT_CODE_OK;
+				resultCode = Activity.RESULT_OK;
 
 			} else if (API_CMD_ADD_MAP_MARKER.equals(cmd)) {
 				double lat = Double.parseDouble(uri.getQueryParameter(PARAM_LAT));
@@ -351,7 +355,7 @@ public class ExternalApiHelper {
 				if (marker != null) {
 					showOnMap(lat, lon, marker, mapActivity.getMapLayers().getMapMarkersLayer().getObjectName(marker));
 				}
-				resultCode = RESULT_CODE_OK;
+				resultCode = Activity.RESULT_OK;
 
 			} else if (API_CMD_START_GPX_REC.equals(cmd)) {
 				OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
@@ -361,7 +365,7 @@ public class ExternalApiHelper {
 					plugin.startGPXMonitoring(null);
 				}
 
-				resultCode = RESULT_CODE_OK;
+				resultCode = Activity.RESULT_OK;
 
 			} else if (API_CMD_STOP_GPX_REC.equals(cmd)) {
 				OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
@@ -371,7 +375,7 @@ public class ExternalApiHelper {
 					plugin.stopRecording();
 				}
 
-				resultCode = RESULT_CODE_OK;
+				resultCode = Activity.RESULT_OK;
 
 			} else if (API_CMD_SUBSCRIBE_VOICE_NOTIFICATIONS.equals(cmd)) {
 				// not implemented yet
