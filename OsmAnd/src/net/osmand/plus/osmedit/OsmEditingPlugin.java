@@ -159,11 +159,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityCreate(MapActivity activity) {
-	}
-
-
-	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsOsmEditingActivity.class;
 	}
