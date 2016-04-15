@@ -1,9 +1,26 @@
 package net.osmand.plus.views.mapwidgets;
 
 
-import java.util.*;
-
-import android.graphics.*;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
+import android.graphics.BlurMaskFilter.Blur;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.text.format.DateFormat;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -21,6 +38,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -30,20 +48,16 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
-import android.text.format.DateFormat;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RouteInfoWidgetsFactory {
 
@@ -758,9 +772,16 @@ public class RouteInfoWidgetsFactory {
 		@Override
 		public void draw(Canvas canvas) {
 			float w = 72 * scaleCoefficient / miniCoeff;
+
+			Bitmap src = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
+			// setup canvas for painting
+			Canvas srcCanvas = new Canvas(src);
+			// setup default color
+			srcCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+
 			//to change color immediately when needed
 			if (lanes != null && lanes.length > 0) {
-				canvas.save();
+				srcCanvas.save();
 				// canvas.translate((int) (16 * scaleCoefficient), 0);
 				for (int i = 0; i < lanes.length; i++) {
 					if ((lanes[i] & 1) == 1) {
@@ -780,7 +801,7 @@ public class RouteInfoWidgetsFactory {
 								secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide);
 						if (bSecond != null){
 							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
-							canvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
+							srcCanvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
 						}
 					}
 					if(secondTurnType > 0){
@@ -789,20 +810,36 @@ public class RouteInfoWidgetsFactory {
 								secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide);
 						if (bSecond != null){
 							paintSecondTurn.setColorFilter(new PorterDuffColorFilter(paintSecondTurn.getColor(), PorterDuff.Mode.SRC_ATOP));
-							canvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
+							srcCanvas.drawBitmap(bSecond, 0f, 0f, paintSecondTurn);
 						}
 					}
 					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType, 
 							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
 					if(b != null) {
 						paintRouteDirection.setColorFilter(new PorterDuffColorFilter(paintRouteDirection.getColor(), PorterDuff.Mode.SRC_ATOP));
-						canvas.drawBitmap(b, 0f, 0f, paintRouteDirection);
-						canvas.translate(w, 0);
+						srcCanvas.drawBitmap(b, 0f, 0f, paintRouteDirection);
+						srcCanvas.translate(w, 0);
 					}
 				}
-				canvas.restore();
+				srcCanvas.restore();
 			}
 
+			// create a blur paint for capturing alpha
+			Paint ptBlur = new Paint();
+			ptBlur.setMaskFilter(new BlurMaskFilter(5, Blur.OUTER));
+			int[] offsetXY = new int[2];
+			// capture alpha into a bitmap
+			Bitmap bmAlpha = src.extractAlpha(ptBlur, offsetXY);
+			// create a color paint
+			Paint ptAlphaColor = new Paint();
+			ptAlphaColor.setColor(0xFF000000);
+			// paint color for captured alpha region (bitmap)
+			canvas.drawBitmap(bmAlpha, offsetXY[0], offsetXY[1], ptAlphaColor);
+			// free memory
+			bmAlpha.recycle();
+
+			// paint the image source
+			canvas.drawBitmap(src, 0, 0, null);
 		}
 
 		//@Override
