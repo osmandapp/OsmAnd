@@ -53,7 +53,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private OpenstreetmapRemoteUtil remoteUtil;
 	private OsmBugsRemoteUtil remoteNotesUtil;
 	private OsmBugsLocalUtil localNotesUtil;
-	
+
 	public OsmEditingPlugin(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
@@ -70,37 +70,35 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		return dbpoi;
 	}
-	
+
 	public OpenstreetmapLocalUtil getPoiModificationLocalUtil() {
-		if(localUtil == null) {
+		if (localUtil == null) {
 			localUtil = new OpenstreetmapLocalUtil(this);
 		}
 		return localUtil;
 	}
-	
+
 	public OpenstreetmapRemoteUtil getPoiModificationRemoteUtil() {
-		if(remoteUtil == null) {
+		if (remoteUtil == null) {
 			remoteUtil = new OpenstreetmapRemoteUtil(app);
 		}
 		return remoteUtil;
 	}
-	
+
 	public OsmBugsRemoteUtil getOsmNotesRemoteUtil() {
-		if(remoteNotesUtil == null) {
+		if (remoteNotesUtil == null) {
 			remoteNotesUtil = new OsmBugsRemoteUtil(app);
 		}
 		return remoteNotesUtil;
 	}
-	
+
 	public OsmBugsLocalUtil getOsmNotesLocalUtil() {
-		if(localNotesUtil == null) {
+		if (localNotesUtil == null) {
 			localNotesUtil = new OsmBugsLocalUtil(app, getDBBug());
 		}
 		return localNotesUtil;
 	}
-	
-	
-	
+
 
 	public OsmBugsDbHelper getDBBug() {
 		if (dbbug == null) {
@@ -109,7 +107,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return dbbug;
 	}
 
-	
 
 	private OsmBugsLayer osmBugsLayer;
 	private OsmEditsLayer osmEditsLayer;
@@ -415,7 +412,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			}
 			return prefix + subtype + ((OpenstreetmapPoint) point).getName();
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return prefix  + ((OsmNotesPoint) point).getText();
+			return prefix + ((OsmNotesPoint) point).getText();
 		} else {
 			return prefix;
 		}
