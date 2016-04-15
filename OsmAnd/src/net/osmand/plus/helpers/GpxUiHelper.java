@@ -93,16 +93,14 @@ public class GpxUiHelper {
 
 		// 2. Time span
 		if (analysis.timeSpan > 0 && analysis.timeSpan / 1000 != analysis.timeMoving / 1000) {
-			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000)
-			);
+			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timespan,
 					getColorValue(timeSpanClr, formatDuration, html)));
 		}
 
 		// 3. Time moving, if any
 		if (analysis.isTimeMoving()) {
-			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000)
-			);
+			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timemoving,
 					getColorValue(timeSpanClr, formatDuration, html)));
 		}

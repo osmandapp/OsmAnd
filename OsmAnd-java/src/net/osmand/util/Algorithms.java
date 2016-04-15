@@ -514,7 +514,7 @@ public class Algorithms {
 	}
 	
 
-	public static String formatDuration(int seconds) {
+	public static String formatDuration(int seconds, boolean fullForm) {
 		String sec;
 		if (seconds % 60 < 10) {
 			sec = "0" + (seconds % 60);
@@ -522,7 +522,7 @@ public class Algorithms {
 			sec = (seconds % 60) + "";
 		}
 		int minutes = seconds / 60;
-		if (minutes < 60) {
+		if ((!fullForm) && (minutes < 60)) {
 			return minutes + ":" + sec;
 		} else {
 			String min;

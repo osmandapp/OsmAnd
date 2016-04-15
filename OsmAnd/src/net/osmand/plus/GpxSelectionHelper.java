@@ -227,7 +227,7 @@ public class GpxSelectionHelper {
 					}
 					if (name.length() != 0)
 						name += ", ";
-					name += GpxUiHelper.getColorValue(timeSpanClr, Algorithms.formatDuration((int) (tm / 1000)));
+					name += GpxUiHelper.getColorValue(timeSpanClr, Algorithms.formatDuration((int) (tm / 1000), app.accessibilityEnabled()));
 				}
 				if (analysis.isSpeedSpecified()) {
 					if (name.length() != 0)
@@ -265,7 +265,7 @@ public class GpxSelectionHelper {
 
 	private static String formatSecondarySplitName(double metricEnd, GpxDisplayGroup group, OsmandApplication app) {
 		if (group.isSplitDistance()) {
-			return Algorithms.formatDuration((int) metricEnd);
+			return Algorithms.formatDuration((int) metricEnd, app.accessibilityEnabled());
 		} else {
 			return OsmAndFormatter.getFormattedDistance((float) metricEnd, app);
 		}
@@ -290,7 +290,7 @@ public class GpxSelectionHelper {
 				return OsmAndFormatter.getFormattedDistance((float) metricEnd, app);
 			}
 		} else {
-			return Algorithms.formatDuration((int) metricEnd);
+			return Algorithms.formatDuration((int) metricEnd, app.accessibilityEnabled());
 		}
 	}
 

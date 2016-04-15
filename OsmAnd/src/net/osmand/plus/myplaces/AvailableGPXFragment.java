@@ -1350,7 +1350,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 //				if (analysis.isTimeMoving()) {
 //					time.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000)) + "");
 //				} else {
-				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000)) + "");
+				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
 //				}
 			} else {
 				time.setText("");

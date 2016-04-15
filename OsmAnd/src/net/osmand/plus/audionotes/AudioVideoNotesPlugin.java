@@ -441,11 +441,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 		}
 
-		public String getPlainDuration() {
+		public String getPlainDuration(boolean accessibilityEnabled) {
 			updateInternalDescription();
 			if (duration > 0) {
 				int d = (int) (duration / 1000);
-				return Algorithms.formatDuration(d);
+				return Algorithms.formatDuration(d, accessibilityEnabled);
 			} else {
 				return "";
 			}
@@ -455,7 +455,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String additional = "";
 			if (duration > 0) {
 				int d = (int) (duration / 1000);
-				additional += "(" + Algorithms.formatDuration(d) + ")";
+				additional += "(" + Algorithms.formatDuration(d, ((OsmandApplication)ctx.getApplicationContext()).accessibilityEnabled()) + ")";
 			}
 			if (!available) {
 				additional += "[" + ctx.getString(R.string.recording_unavailable) + "]";

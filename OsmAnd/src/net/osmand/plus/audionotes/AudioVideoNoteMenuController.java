@@ -114,6 +114,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public void updateData() {
+		boolean accessibilityEnabled = getMapActivity().getMyApplication().accessibilityEnabled();
 		rightTitleButtonController.visible = true;
 		if (!recording.isPhoto()) {
 			if (plugin.isPlaying(recording)) {
@@ -122,9 +123,9 @@ public class AudioVideoNoteMenuController extends MenuController {
 				int pos = plugin.getPlayingPosition();
 				String durationStr;
 				if (pos == -1) {
-					durationStr = recording.getPlainDuration();
+					durationStr = recording.getPlainDuration(accessibilityEnabled);
 				} else {
-					durationStr = Algorithms.formatDuration(pos / 1000);
+					durationStr = Algorithms.formatDuration(pos / 1000, accessibilityEnabled);
 				}
 				leftTitleButtonController.needRightText = true;
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
@@ -132,7 +133,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 			} else {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
 				leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
-				String durationStr = recording.getPlainDuration();
+				String durationStr = recording.getPlainDuration(accessibilityEnabled);
 				leftTitleButtonController.needRightText = true;
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
 			}
