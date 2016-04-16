@@ -1,6 +1,7 @@
 package net.osmand.plus.routing;
 
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +57,9 @@ import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.GeoPolylineParserUtil;
 
+import org.json.JSONObject;
 import org.json.JSONException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -1142,30 +1145,31 @@ public class RouteProvider {
 			}
 		}
 		appendOSRMLoc(uri, params.end);
-		uri.append("&output=gpx"); //$NON-NLS-1$
-		
+
 		log.info("URL route " + uri);
 		
 		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
-//		StringBuilder content = new StringBuilder();
-//		BufferedReader rs = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//		String s;
-//		while((s = rs.readLine()) != null) {
-//			content.append(s);
-//		}
-//		JSONObject obj = new JSONObject(content.toString());
-		final InputStream inputStream = connection.getInputStream();
-		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, inputStream);
+		StringBuilder content = new StringBuilder();
+		BufferedReader rs = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		String s;
+		while((s = rs.readLine()) != null) {
+			content.append(s);
+		}
+		JSONObject obj = new JSONObject(content.toString());
 		try {
-			inputStream.close();
+			rs.close();
 		} catch(IOException e){
 		}
-		if(gpxFile.routes.isEmpty()) {
+		List<LatLon> route = GeoPolylineParserUtil.parse(obj.get("route_geometry").toString());
+		if (route.isEmpty()) {
 			return new RouteCalculationResult("Route is empty");
 		}
-		for (WptPt pt : gpxFile.routes.get(0).points) {
-			res.add(createLocation(pt));
+		for (LatLon pt : route) {
+			WptPt wpt = new WptPt();
+			wpt.lat = pt.getLatitude();
+			wpt.lon = pt.getLongitude();
+			res.add(createLocation(wpt));
 		}
 		params.intermediates = null;
 		return new RouteCalculationResult(res, null, params, null);
