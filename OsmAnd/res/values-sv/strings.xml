@@ -2136,4 +2136,36 @@
     <string name="open_street_map_login_and_pass">OpenStreetMap inloggning och lösenord</string>
     <string name="no_map_markers_found">Lägg till kartmarkörer via kartan</string>
     <string name="no_waypoints_found">Hittar inga waypoints</string>
+    <string name="release_2_3">" • OSM Live. Stöd bidragsgivare och utvecklare av kartor och erhåll kartuppdateringar varje timme.
+\n\n • Kartmarkörer. Ett nytt sätt att snabbt välja platser på kartan.\n\n • Mer detaljerade OSM-kartor med landsspecifika vägmärken samt massor av nya kartfunktioner.\n\n • Förbättrad ruttförberedelse.
+\n\n • Många förbättringar i kartans kontextmeny såsom kontextuell adresssökning.\n\n och ännu mer … "</string>
+    <string name="map_widget_bearing">Bäring</string>
+    <string name="access_disable_offroute_recalc">Ändra inte rutten när du lämnat vägen</string>
+    <string name="access_disable_offroute_recalc_descr">Förhindra automatiskt omberäkning av rutten när du är långt borta från rätt väg</string>
+    <string name="access_disable_wrong_direction_recalc">Ändra inte rutten vid fel riktning</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Förhindra automatisk omberäkning av rutten när du rör dig i fel riktning</string>
+    <string name="access_smart_autoannounce">Smart auto-meddelande</string>
+    <string name="access_smart_autoannounce_descr">Meddela endast när riktningen till målpunkten ändras</string>
+    <string name="access_autoannounce_period">Period för auto-meddelande</string>
+    <string name="access_autoannounce_period_descr">Minsta tidsintervall mellan meddelanden</string>
+    <string name="access_default_color">Standardfärg</string>
+    <string name="access_category_choice">Välj kategori</string>
+    <string name="access_hint_enter_name">Skriv in namn</string>
+    <string name="access_hint_enter_category">Skriv in kategori</string>
+    <string name="access_hint_enter_description">Skriv in beskrivning</string>
+    <string name="access_map_linked_to_location">Kartan är länkad till platsen</string>
+    <string name="access_collapsed_list">Minimerad lista</string>
+    <string name="access_expanded_list">Expanderad lista</string>
+    <string name="access_empty_list">Tom lista</string>
+    <string name="access_tree_list">Trädlista</string>
+    <string name="access_shared_string_not_installed">Inte installerad</string>
+    <string name="access_widget_expand">Expandera</string>
+    <string name="access_shared_string_navigate_up">Navigera upp</string>
+    <string name="access_sort">Sortera</string>
+    <string name="map_mode">Kartläge</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX-filer valda</string>
+    <string name="rendering_value_thin_name">Tunn</string>
+    <string name="rendering_value_medium_name">Mellan</string>
+    <string name="rendering_value_bold_name">Tjock</string>
+    <string name="report">Rapportera</string>
     </resources>
