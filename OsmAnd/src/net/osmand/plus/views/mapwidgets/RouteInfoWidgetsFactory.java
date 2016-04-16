@@ -505,76 +505,79 @@ public class RouteInfoWidgetsFactory {
 		return distanceControl;
 	}
 
-
-	public abstract static class BearingToPointInfoControl extends TextInfoWidget {
-
-		private final OsmandMapTileView view;
-		private float[] calculations = new float[2];
-		private int cachedDegrees;
-
-		public BearingToPointInfoControl(MapActivity ma, int res, int resNight) {
-			super(ma);
-			this.view = ma.getMapView();
-			if (res != 0 && resNight != 0) {
-				setIcons(res, resNight);
-			}
-			setText(null, null);
-			setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					click(view);
-				}
-			});
-		}
-
-		protected void click(final OsmandMapTileView view) {
-			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-			LatLon pointToNavigate = getPointToNavigate();
-			if (pointToNavigate != null) {
-				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom();
-				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-			}
-		}
-
-		@Override
-		public boolean updateInfo(DrawSettings drawSettings) {
-			int b = getBearing();
-			if (distChanged(cachedDegrees, b)) {
-				cachedDegrees = b;
-				if (b >= 0) {
-					setText(String.valueOf(b) + "°", null);
-				} else {
-					setText(null, null);
-				}
-				return true;
-			}
-			return false;
-		}
-
-		public abstract LatLon getPointToNavigate();
-
-		public int getBearing() {
-			int d = -1;
-			Location myLocation = getOsmandApplication().getLocationProvider().getLastKnownLocation();
-			LatLon l = getPointToNavigate();
-			if (myLocation != null && l != null) {
-				Location.distanceBetween(myLocation.getLatitude(), myLocation.getLongitude(), l.getLatitude(), l.getLongitude(), calculations);
-				d = (int) calculations[1];
-			}
-			return d;
-		}
-	}
-
 	public TextInfoWidget createBearingControl(final MapActivity map) {
-		BearingToPointInfoControl bearingControl = new BearingToPointInfoControl(map,R.drawable.widget_target_day,
-				R.drawable.widget_target_night) {
-			@Override
+		final int bearingResId = R.drawable.widget_bearing_day;
+		final int bearingNightResId = R.drawable.widget_bearing_night;
+		final int relativeBearingResId = R.drawable.widget_bearing_day;
+		final int relativeBearingNightResId = R.drawable.widget_bearing_night;
+		final OsmandApplication ctx = map.getMyApplication();
+		final OsmandPreference<Boolean> showRelativeBearing = ctx.getSettings().SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING;
+
+		final TextInfoWidget bearingControl = new TextInfoWidget(map) {
+			private int cachedDegrees;
+
 			public LatLon getPointToNavigate() {
 				TargetPoint p = map.getPointToNavigate();
 				return p == null ? null : p.point;
 			}
+
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				int b = getBearing(showRelativeBearing.get());
+				if (distChanged(cachedDegrees, b)) {
+					cachedDegrees = b;
+					if (b != -1000) {
+						setText(String.valueOf(b) + "°", null);
+					} else {
+						setText(null, null);
+					}
+					return true;
+				}
+				return false;
+			}
+
+			public int getBearing(boolean relative) {
+				int d = -1000;
+				Location myLocation = getOsmandApplication().getLocationProvider().getLastKnownLocation();
+				LatLon l = getPointToNavigate();
+				if (myLocation != null && l != null) {
+					Location dest = new Location("");
+					dest.setLatitude(l.getLatitude());
+					dest.setLongitude(l.getLongitude());
+					dest.setBearing(myLocation.bearingTo(dest));
+					float bearingToDest = dest.getBearing();
+					if (relative) {
+						if (myLocation.hasBearing()) {
+							bearingToDest -= myLocation.getBearing();
+							if (bearingToDest > 180f) {
+								bearingToDest -= 360f;
+							} else if (bearingToDest < -180f) {
+								bearingToDest += 360f;
+							}
+							d = (int) bearingToDest;
+						}
+					} else {
+						d = (int) bearingToDest;
+					}
+				}
+				return d;
+			}
 		};
+
+		bearingControl.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showRelativeBearing.set(!showRelativeBearing.get());
+				bearingControl.setIcons(showRelativeBearing.get() ? bearingResId : relativeBearingResId,
+						showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
+				map.getMapView().refreshMap();
+			}
+
+		});
+		bearingControl.setText(null, null);
+		bearingControl.setIcons(showRelativeBearing.get() ? bearingResId : relativeBearingResId,
+				showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
 		return bearingControl;
 	}
 	

@@ -18,6 +18,7 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -142,7 +143,13 @@ public class MapMarkersWidgetsFactory {
 	private void showMarkerOnMap(int index) {
 		if (helper.getSortedMapMarkers().size() > index) {
 			MapMarker marker = helper.getSortedMapMarkers().get(index);
-			MapMarkerDialogHelper.showMarkerOnMap(map, marker);
+			AnimateDraggingMapThread thread = map.getMapView().getAnimatedDraggingThread();
+			LatLon pointToNavigate = marker.point;
+			if (pointToNavigate != null) {
+				int fZoom = map.getMapView().getZoom() < 15 ? 15 : map.getMapView().getZoom();
+				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
+			}
+			//MapMarkerDialogHelper.showMarkerOnMap(map, marker);
 		}
 	}
 

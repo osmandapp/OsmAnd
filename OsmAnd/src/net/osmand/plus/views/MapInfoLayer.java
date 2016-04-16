@@ -120,7 +120,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget dist = ric.createDistanceControl(map);
 		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget bearing = ric.createBearingControl(map);
-		registerSideWidget(bearing, R.drawable.ic_action_target, R.string.map_widget_bearing, "bearing", false, 7);
+		registerSideWidget(bearing, R.drawable.ic_action_bearing, R.string.map_widget_bearing, "bearing", false, 7);
 		TextInfoWidget time = ric.createTimeControl(map);
 		registerSideWidget(time, R.drawable.ic_action_time, R.string.map_widget_time, "time", false, 10);
 
