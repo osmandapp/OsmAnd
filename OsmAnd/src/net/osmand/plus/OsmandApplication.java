@@ -729,11 +729,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void startNavigationService(int intent, int interval) {
 		final Intent serviceIntent = new Intent(this, NavigationService.class);
+		
+		if (getNavigationService() != null) {
+			intent |= getNavigationService().getUsedBy();
+			interval = Math.min(getNavigationService().getServiceOffInterval(), interval);
+			getNavigationService().stopSelf();
+			
+		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		serviceIntent.putExtra(NavigationService.USAGE_OFF_INTERVAL, interval);
-		if (getNavigationService() != null) {
-			getNavigationService().stopSelf();
-		}	
 		startService(serviceIntent);
 		getNotificationHelper().showNotification();
 	}
