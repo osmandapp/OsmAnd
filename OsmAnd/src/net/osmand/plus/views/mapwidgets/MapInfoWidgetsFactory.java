@@ -123,7 +123,7 @@ public class MapInfoWidgetsFactory {
 					
 				} else {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
-					vs.value = app.getSettings().SERVICE_OFF_INTERVAL.get();
+					vs.value = 0;
 					final AlertDialog[] dlgshow = new AlertDialog[1]; 
 					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
 					dlg.setTitle(app.getString(R.string.enable_sleep_mode));
@@ -147,8 +147,7 @@ public class MapInfoWidgetsFactory {
 					dlg.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
-							app.startNavigationService(NavigationService.USED_BY_WAKE_UP);
+							app.startNavigationService(NavigationService.USED_BY_WAKE_UP, vs.value);
 						}
 					});
 					dlg.setNegativeButton(R.string.shared_string_cancel, null);

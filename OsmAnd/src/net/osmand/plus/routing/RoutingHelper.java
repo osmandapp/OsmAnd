@@ -116,7 +116,7 @@ public class RoutingHelper {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
 			}
 		} else {
-			app.startNavigationService(NavigationService.USED_BY_NAVIGATION);
+			app.startNavigationService(NavigationService.USED_BY_NAVIGATION, 0);
 		}
 	}
 	
@@ -132,7 +132,7 @@ public class RoutingHelper {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
 			}
 		} else {
-			app.startNavigationService(NavigationService.USED_BY_NAVIGATION);
+			app.startNavigationService(NavigationService.USED_BY_NAVIGATION, 0);
 		}
 	}
 	

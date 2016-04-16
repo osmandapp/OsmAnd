@@ -83,7 +83,7 @@ public class OsMoControlDevice implements OsMoReactor {
 				}
 			} else if(data.equals("START_TRACKING")) {
 				tracker.enableTrackerCmd();
-				app.startNavigationService(NavigationService.USED_BY_LIVE);
+				app.startNavigationService(NavigationService.USED_BY_LIVE, 0);
 				//interval setting not needed here, handled centrally in app.startNavigationService
 				//app.getSettings().SERVICE_OFF_INTERVAL.set(0);
 			} else if(data.equals("OSMAND_INFO")) {

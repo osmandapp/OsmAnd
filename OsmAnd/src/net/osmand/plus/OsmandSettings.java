@@ -2435,13 +2435,6 @@ public class OsmandSettings {
 
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Integer> SERVICE_OFF_INTERVAL = new IntPreference("service_off_interval",
-			0).makeGlobal();
-
-
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 
 

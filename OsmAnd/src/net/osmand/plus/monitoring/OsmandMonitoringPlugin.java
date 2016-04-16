@@ -17,7 +17,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
@@ -367,15 +366,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
-
-				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
-					settings.SERVICE_OFF_INTERVAL.set(0);
-				} else {
-					//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
-					settings.SERVICE_OFF_INTERVAL.set(settings.SAVE_GLOBAL_TRACK_INTERVAL.get());
-				}
-
-				app.startNavigationService(NavigationService.USED_BY_GPX);
+				int interval = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
+				app.startNavigationService(NavigationService.USED_BY_GPX, interval < 30000? 0 : interval);
 			}
 		};
 		if(choice.value || map == null) {

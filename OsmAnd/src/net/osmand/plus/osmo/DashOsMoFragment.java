@@ -63,9 +63,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				if (plugin != null && plugin.getTracker() != null) {
 					plugin.getTracker().enableTracker();
 				}
-				getMyApplication().startNavigationService(NavigationService.USED_BY_LIVE);
-				//interval setting not needed here, handled centrally in app.startNavigationService
-				//app.getSettings().SERVICE_OFF_INTERVAL.set(0);
+				getMyApplication().startNavigationService(NavigationService.USED_BY_LIVE, 0);
 			} else {
 				if (plugin != null && plugin.getTracker() != null) {
 					plugin.getTracker().disableTracker();

@@ -34,6 +34,7 @@ public class NavigationService extends Service implements LocationListener {
 	public static int USED_BY_LIVE = 4;
 	public static int USED_BY_WAKE_UP = 8;
 	public final static String USAGE_INTENT = "SERVICE_USED_BY";
+	public final static String USAGE_OFF_INTERVAL = "SERVICE_OFF_INTERVAL";
 
 	private NavigationServiceBinder binder = new NavigationServiceBinder();
 
@@ -95,17 +96,6 @@ public class NavigationService extends Service implements LocationListener {
 		if ((usedBy & usageIntent) > 0) {
 			usedBy -= usageIntent;
 		}
-
-		if (usedBy == 2) {
-			//reset SERVICE_OFF_INTERVAL to automatic settings for USED_BY_GPX
-			if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
-				settings.SERVICE_OFF_INTERVAL.set(0);
-			} else {
-				//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
-				settings.SERVICE_OFF_INTERVAL.set(settings.SAVE_GLOBAL_TRACK_INTERVAL.get());
-			}
-		}
-
 		if (usedBy == 0) {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
@@ -118,10 +108,9 @@ public class NavigationService extends Service implements LocationListener {
 		final OsmandApplication app = (OsmandApplication) getApplication();
 		settings = app.getSettings();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
+		serviceOffInterval = intent.getIntExtra(USAGE_OFF_INTERVAL, 0);
 		if ((usedBy & USED_BY_NAVIGATION) != 0) {
 			serviceOffInterval = 0;
-		} else {
-			serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
 		}
 		// use only gps provider
 		serviceOffProvider = LocationManager.GPS_PROVIDER;
@@ -164,22 +153,6 @@ public class NavigationService extends Service implements LocationListener {
 		}
 		return START_REDELIVER_INTENT;
 	}
-	
-	protected void stopService() {
-		OsMoPlugin osmoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
-		if (osmoPlugin != null) {
-			if (osmoPlugin.getTracker().isEnabledTracker()) {
-				osmoPlugin.getTracker().disableTracker();
-			}
-		}
-		OsmandMonitoringPlugin monitoringPlugin =
-				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
-		if (monitoringPlugin != null) {
-			monitoringPlugin.stopRecording();
-		}
-		NavigationService.this.stopSelf();
-	}
-
 	
 	
 

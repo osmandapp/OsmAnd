@@ -727,23 +727,15 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 	
 
-	public void startNavigationService(int intent) {
+	public void startNavigationService(int intent, int interval) {
 		final Intent serviceIntent = new Intent(this, NavigationService.class);
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
-		if (getNavigationService() == null) {
-			if (intent != NavigationService.USED_BY_GPX) {
-				//for only-USED_BY_GPX case use pre-configured SERVICE_OFF_INTERVAL
-				//other cases always use "continuous":
-				getSettings().SERVICE_OFF_INTERVAL.set(0);
-			}
-			startService(serviceIntent);
-		} else {
-			//additional cases always use "continuous"
-			//TODO: fallback to custom USED_BY_GPX interval in case all other sleep mode purposes have been stopped
-			getSettings().SERVICE_OFF_INTERVAL.set(0);
-			getNavigationService().addUsageIntent(intent);
-			getNotificationHelper().showNotification();
+		serviceIntent.putExtra(NavigationService.USAGE_OFF_INTERVAL, interval);
+		if (getNavigationService() != null) {
+			getNavigationService().stopSelf();
 		}	
+		startService(serviceIntent);
+		getNotificationHelper().showNotification();
 	}
 
 

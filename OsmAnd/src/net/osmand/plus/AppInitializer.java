@@ -574,7 +574,8 @@ public class AppInitializer implements IProgress {
 			}
 		}
 		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null){
-			app.startNavigationService(NavigationService.USED_BY_GPX);
+			int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() ;
+			app.startNavigationService(NavigationService.USED_BY_GPX, interval < 30000 ? 0 : interval);
 		}
 	}
 
