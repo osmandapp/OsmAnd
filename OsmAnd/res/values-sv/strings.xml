@@ -2167,5 +2167,9 @@
     <string name="rendering_value_thin_name">Tunn</string>
     <string name="rendering_value_medium_name">Mellan</string>
     <string name="rendering_value_bold_name">Tjock</string>
-    <string name="report">Rapportera</string>
+    <string name="report">Rapporter</string>
+    <string name="storage_permission_restart_is_required">Nu har appen tillåtelse att skriva till extern lagringsplats. En manuell omstart av appen krävs.</string>
+    <string name="osm_live_support_region">Stödregion</string>
+    <string name="osm_live_header">Denna prenumeration aktiverar uppdateringar varje timme av kartor runt omkring i världen. Den större delen av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag. Om du tycker om OsmAnd och OSM och vill stödja detta så är detta ett utmärkt sätt att göra det på.</string>
+    
     </resources>
