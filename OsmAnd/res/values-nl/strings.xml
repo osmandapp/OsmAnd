@@ -2267,5 +2267,5 @@
     <string name="access_smart_autoannounce">Slimme aankondigingen</string>
     <string name="access_smart_autoannounce_descr">Geef alleen instructie als de richting naar het doel veranderd is</string>
     <string name="access_autoannounce_period">Tijd tussen meldingen</string>
-    <string name="access_autoannounce_period_descr">Minimale tijdsinterval tussen aankondigingen</string>
+    <string name="access_autoannounce_period_descr">Minimale tijd tussen aankondigingen</string>
     </resources>
