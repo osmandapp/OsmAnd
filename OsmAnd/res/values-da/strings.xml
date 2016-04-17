@@ -829,7 +829,7 @@
     <string name="error_occurred_loading_gpx">Der skete en fejl under indlæsning af GPX</string>
     <string name="send_report">Send rapport</string>
     <string name="none_region_found">Ingen offline-data for regionen er fundet på SD-kortet. Hent regioner fra internettet.</string>
-    <string name="poi_namefinder_query_empty">Indtast søgetekst for at finde interessepunkt</string>
+    <string name="poi_namefinder_query_empty">Angiv søgetekst for at finde interessepunkt</string>
     <string name="any_poi">Alle</string>
     <string name="layer_transport_route">Transportrute</string>
     <string name="thanks_yandex_traffic">Tak til Yandex for trafikinformation.</string>
@@ -927,12 +927,12 @@
     <string name="transport_to_go_before">efterfølgende afstand</string>
     <string name="transport_route_distance">Rutelængde</string>
     <string name="transport">Transport</string>
-    <string name="poi_remove_confirm_template">Slet {0} (indtast kommentar)?</string>
+    <string name="poi_remove_confirm_template">Slet {0} (angiv kommentar)?</string>
     
     <string name="osb_comment_dialog_error">Undtagelse opstod: kommentar blev ikke tilføjet</string>
     <string name="osb_comment_dialog_author">Forfatternavn</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-    <string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
+    <string name="add_favorite_dialog_top_text">Angiv favoritnavn</string>
     <string name="context_menu_item_create_poi">Opret interessepunkt</string>
     <string name="context_menu_item_update_map">Opdater kort</string>
 
@@ -1092,7 +1092,7 @@
     <string name="app_mode_pedestrian">Fodgænger</string>
     <string name="position_on_map_center">Centrum</string>
     <string name="position_on_map_bottom">Bunden</string>
-    <string name="navigate_point_top_text">Indtast bredde(lat)- og længdegrad(long) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
+    <string name="navigate_point_top_text">Angiv bredde(lat)- og længdegrad(long) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
     <string name="navigate_point_latitude">Breddegrad</string>
     <string name="navigate_point_longitude">Længdegrad</string>
     <string name="navigate_point_format_D">DDD.DD</string>
@@ -2022,7 +2022,7 @@
     <string name="shared_string_trip_recording">Optag ture</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Kører i baggrunden</string>
-    <string name="default_speed_system">Hastighedsenhed</string>
+    <string name="default_speed_system">Hastighedsmåling</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Sømil</string>
     <string name="si_kmh">Kilometer i timen</string>
@@ -2079,7 +2079,7 @@
     <string name="map_downloaded_descr">Kort over %1$s er hentet. Gå tilbage til kortet for at begynde at bruge det.</string>
     <string name="go_to_map">Gå til kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
-    <string name="enter_country_name">Indtast landenavn</string>
+    <string name="enter_country_name">Angiv landenavn</string>
     <string name="world_map_download_descr">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent verdensgrundkortet for et komplet miljø.</string>
     <string name="new_version">Ny version</string>
     <string name="begin_with_osmand_menu_group">Kom godt i gang med OsmAnd</string>
@@ -2305,8 +2305,8 @@
     <string name="osm_live_month_cost_desc">Månedlig betaling</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
-    <string name="osm_live_enter_email">Indtast gyldig e-mail adresse</string>
-    <string name="osm_live_enter_user_name">Indtast offentligt navn</string>
+    <string name="osm_live_enter_email">Angiv en gyldig e-mail adresse</string>
+    <string name="osm_live_enter_user_name">Angiv offentligt navn</string>
     <string name="osm_live_thanks">Tak for at abonnere på live opdateringer!</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i den pågældende region</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
@@ -2337,7 +2337,7 @@
     <string name="map_mode">Korttilstand</string>
     <string name="access_default_color">Standardfarve</string>
     <string name="access_category_choice">Vælg kategori</string>
-    <string name="access_hint_enter_name">Indtast navn</string>
+    <string name="access_hint_enter_name">Angiv navn</string>
     <string name="access_hint_enter_category">Angiv kategori</string>
     <string name="access_hint_enter_description">Angiv beskrivelse</string>
     <string name="access_map_linked_to_location">Kort er forbundet til placering</string>
