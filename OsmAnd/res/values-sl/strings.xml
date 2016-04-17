@@ -2127,7 +2127,7 @@
     <string name="osm_live_subscribe_btn">Naročanje</string>
     <string name="recalculate_route">Preračunaj pot</string>
     <string name="number_of_recipients">Število prejemnikov</string>
-    <string name="osm_user_stat">Urajanj: %1$s, rang: %2$s, skupno urejanj: %3$s</string>
+    <string name="osm_user_stat">Urejanj: %1$s, rang: %2$s, skupno urejanj: %3$s</string>
     <string name="osm_editors_ranking">Rangiranje urednikov OSM</string>
     <string name="osm_live_subscription">Naročila OSM</string>
     <string name="osm_live_email_desc">Podatke potrebujemo za posredovanje\npodrobnosti o potrjenih objavah</string>
