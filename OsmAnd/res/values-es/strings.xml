@@ -72,7 +72,7 @@
     <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano mientras la pantalla está apagada</string>
     <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial presente descargado para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa en línea (para esto active el complemento mapas en línea).</string>
     <string name="download_files_not_enough_space">No hay suficiente espacio para descargar %1$s MB (disponible: %2$s).</string>
-    <string name="download_files_question_space">¿Realmente quieres descargar {0} archivos? Esto necesita {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
+    <string name="download_files_question_space">¿Realmente quieres descargar {0} archivo(s)? Esto necesita {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
@@ -1730,7 +1730,7 @@
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta para viajes largos</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según el ámbito de la ruta</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     <string name="osmo_share_my_location">Transmitir la ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
@@ -2078,7 +2078,7 @@
     <string name="shared_string_toolbar">Barra de herramientas</string>
     <string name="shared_string_widgets">Controles</string>
     <string name="download_files_error_not_enough_space">No hay suficiente espacio! Necesitaría {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay solo {2} MB disponibles.</string>
-    <string name="download_files_question_space_with_temp">¿Realmente quieres descargar {0} archivos? Esto necesita {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
+    <string name="download_files_question_space_with_temp">¿Realmente quieres descargar {0} archivo(s)? Esto necesita {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
     <string name="select_map_marker">Seleccionar marcador de mapa</string>
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_osm_note_description">Puedes subir tu nota de OSM anónimamente si utilizas tu perfil de OpenStreetMap.org.</string>
@@ -2131,4 +2131,26 @@
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Negrita</string>
+    <string name="access_disable_offroute_recalc">No cambiar la ruta cuando esté fuera de la vía</string>
+    <string name="access_disable_offroute_recalc_descr">"Evita el recálculo de ruta automático cuando estás muy lejos de la  vía correcta"</string>
+    <string name="access_disable_wrong_direction_recalc">No cambiar de ruta por ir en dirección errónea</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Evita el recálculo de ruta automático cuando te estás moviendo en dirección equivocada</string>
+    <string name="access_smart_autoannounce">Autoanuncio inteligente</string>
+    <string name="access_smart_autoannounce_descr">Sólo notifica cuando se cambia la dirección al punto de destino</string>
+    <string name="access_autoannounce_period">"Período de  autoanuncio"</string>
+    <string name="access_autoannounce_period_descr">Mínimo intervalo de tiempo entre anuncios</string>
+    <string name="access_default_color">Color por defecto</string>
+    <string name="access_category_choice">Elegir categoría</string>
+    <string name="access_hint_enter_name">Introducir nombre</string>
+    <string name="access_hint_enter_category">Introducir categoría</string>
+    <string name="access_hint_enter_description">Introducir descripción</string>
+    <string name="access_map_linked_to_location">El mapa está enlazado a la ubicación</string>
+    <string name="access_collapsed_list">Lista colapsada</string>
+    <string name="access_expanded_list">Lista expandida</string>
+    <string name="access_empty_list">Lista vacía</string>
+    <string name="access_tree_list">Lista de árbol</string>
+    <string name="access_shared_string_not_installed">No instalado</string>
+    <string name="access_widget_expand">Expandir</string>
+    <string name="access_shared_string_navigate_up">Navegar hacia arriba</string>
+    <string name="access_sort">Ordenar</string>
     </resources>
