@@ -37,7 +37,6 @@ import java.io.File;
 import java.util.Arrays;
 
 public class ExternalApiHelper {
-
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ExternalApiHelper.class);
 
 	public static final String API_CMD_SHOW_GPX = "show_gpx";
@@ -60,8 +59,8 @@ public class ExternalApiHelper {
 
 	public static final String API_CMD_SUBSCRIBE_VOICE_NOTIFICATIONS = "subscribe_voice_notifications";
 	public static final int VERSION_CODE = 1;
-	
-	
+
+
 	public static final String PARAM_NAME = "name";
 	public static final String PARAM_DESC = "desc";
 	public static final String PARAM_CATEGORY = "category";
@@ -111,7 +110,6 @@ public class ExternalApiHelper {
 	public static final int RESULT_CODE_ERROR_GPX_NOT_FOUND = 20;
 	public static final int RESULT_CODE_ERROR_INVALID_PROFILE = 30;
 
-	
 	private MapActivity mapActivity;
 	private int resultCode;
 	private boolean finish;
@@ -153,6 +151,7 @@ public class ExternalApiHelper {
 						gpx = GPXUtilities.loadGPXFile(mapActivity, new ByteArrayInputStream(gpxStr.getBytes()));
 					}
 				} else {
+					finish = true;
 					resultCode = RESULT_CODE_ERROR_GPX_NOT_FOUND;
 				}
 
@@ -179,6 +178,7 @@ public class ExternalApiHelper {
 					}
 					resultCode = Activity.RESULT_OK;
 				} else {
+					finish = true;
 					resultCode = RESULT_CODE_ERROR_GPX_NOT_FOUND;
 				}
 
@@ -283,17 +283,17 @@ public class ExternalApiHelper {
 					long eta = time + System.currentTimeMillis() / 1000;
 					result.putExtra(PARAM_ETA, eta);
 					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
-					
+
 					NextDirectionInfo ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-					if(ni.distanceTo > 0) {
+					if (ni.distanceTo > 0) {
 						updateTurnInfo("next_", result, ni);
 						ni = routingHelper.getNextRouteDirectionInfoAfter(ni, new NextDirectionInfo(), true);
-						if(ni.distanceTo > 0) {
+						if (ni.distanceTo > 0) {
 							updateTurnInfo("after_next", result, ni);
 						}
 					}
 					routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-					if(ni.distanceTo > 0) {
+					if (ni.distanceTo > 0) {
 						updateTurnInfo("no_speak_next_", result, ni);
 					}
 				}
@@ -393,12 +393,12 @@ public class ExternalApiHelper {
 	private void updateTurnInfo(String prefix, Intent result, NextDirectionInfo ni) {
 		result.putExtra(prefix + PARAM_NT_DISTANCE, ni.distanceTo);
 		result.putExtra(prefix + PARAM_NT_IMMINENT, ni.imminent);
-		if(ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
+		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
 			TurnType tt = ni.directionInfo.getTurnType();
 			RouteDirectionInfo a = ni.directionInfo;
 			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName()));
 			result.putExtra(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
-			if(tt.getLanes() != null) {
+			if (tt.getLanes() != null) {
 				result.putExtra(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
 			}
 		}
