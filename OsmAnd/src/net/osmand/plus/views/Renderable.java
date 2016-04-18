@@ -55,13 +55,16 @@ public abstract class Renderable {
         this.view = view;
 
         culled = new ArrayList<>();
-        for (GPXUtilities.WptPt pt : points) {
-            culled.add(new WptPt2(pt));
-        }
 
         trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
                 Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         updateBounds(points, 0);
+    }
+
+    protected void copyPointsToCulled() {
+        for (GPXUtilities.WptPt pt : points) {
+            culled.add(new WptPt2(pt));
+        }
     }
 
     protected void updateLocalPaint(Paint p) {
@@ -153,6 +156,7 @@ public abstract class Renderable {
 
         public StandardTrack(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon) {
             super(Priority.STANDARD, view, pt, epsilon);
+            copyPointsToCulled();
         }
 
         @Override protected AsynchronousResampler Factory() {
@@ -214,10 +218,27 @@ public abstract class Renderable {
     private abstract static class ColourBand extends Renderable {
 
         protected double widthZoom;
+        protected double clampMin = 0;
+        protected double clampMax = 0;
+        protected boolean clamp;
 
         public ColourBand(Priority priority, OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
             super(priority, view, pt, epsilon);
             this.widthZoom = widthZoom;
+            this.clamp = false;
+
+        }
+
+        // Set the extent of values for colour band calculations. Values are clampted to min...max for band display
+        // Notes: Altitude range in metres
+        // Speed range in metres per millisecond.
+        // To convert to km/h, divide by 3600
+        //  100/3600  = 100 km/h
+
+        public void setRange(double clampMin, double clampMax) {
+            this.clampMin = clampMin;
+            this.clampMax = clampMax;
+            this.clamp = true;
         }
 
         @Override protected void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
@@ -270,7 +291,9 @@ public abstract class Renderable {
         }
 
         @Override protected AsynchronousResampler Factory() {
-            return new AsynchronousResampler.Speed(this, Math.pow(2.0, epsilon - zoom));
+            return clamp ?
+                new AsynchronousResampler.Speed(this, Math.pow(2.0, epsilon - zoom), clampMin, clampMax) :
+                new AsynchronousResampler.Speed(this, Math.pow(2.0, epsilon - zoom));
         }
     }
 
@@ -283,7 +306,9 @@ public abstract class Renderable {
         }
 
         @Override protected AsynchronousResampler Factory() {
-            return new AsynchronousResampler.Altitude(this, Math.pow(2.0, epsilon - zoom));
+            return clamp ?
+                new AsynchronousResampler.Altitude(this, Math.pow(2.0, epsilon - zoom), clampMin, clampMax) :
+                new AsynchronousResampler.Altitude(this, Math.pow(2.0, epsilon - zoom));
         }
     }
 

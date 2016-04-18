@@ -138,8 +138,20 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     public static class Altitude extends AsynchronousResampler {
 
+        private double clampMin;
+        private double clampMax;
+        private boolean clamp;
+
         public Altitude(Renderable rs, double epsilon) {
             super(rs, epsilon);
+            this.clamp = false;
+        }
+
+        public Altitude(Renderable rs, double epsilon, double clampMin, double clampMax) {
+            super(rs, epsilon);
+            this.clampMin = clampMin;
+            this.clampMax = clampMax;
+            this.clamp = true;
         }
 
         @Override protected String doInBackground(String... params) {
@@ -147,20 +159,26 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             if (!isCancelled() && !culled.isEmpty()) {
 
                 int halfC = Algorithms.getRainbowColor(0.5);
-
-                // Calculate the absolutes of the altitude variations
-                Double max = culled.get(0).ele;
-                Double min = max;
                 for (WptPt2 pt : culled) {
-                    max = Math.max(max, pt.ele);
-                    min = Math.min(min, pt.ele);
                     pt.colourARGB = halfC;                  // default, in case there are no 'ele' in GPX
                 }
 
-                Double elevationRange = max - min;
+                // If no clamping, auto-detect range
+                if (!clamp) {
+                    clampMin = Double.POSITIVE_INFINITY;
+                    clampMax = Double.NEGATIVE_INFINITY;
+                    for (WptPt2 pt : culled) {
+                        clampMax = Math.max(clampMax, pt.ele);
+                        clampMin = Math.min(clampMin, pt.ele);
+                    }
+                }
+
+                Double elevationRange = clampMax - clampMin;
                 if (elevationRange > 0)
-                    for (WptPt2 pt : culled)
-                        pt.colourARGB = Algorithms.getRainbowColor((pt.ele - min) / elevationRange);
+                    for (WptPt2 pt : culled) {
+                        double clamped = Math.min(clampMax, Math.max(pt.ele, clampMin));
+                        pt.colourARGB = Algorithms.getRainbowColor((clamped - clampMin) / elevationRange);
+                    }
             }
 
             return null;
@@ -169,8 +187,20 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     public static class Speed extends AsynchronousResampler {
 
+        private double clampMin;
+        private double clampMax;
+        private boolean clamp;
+
         public Speed(Renderable rs, double epsilon) {
             super(rs, epsilon);
+            this.clamp = false;
+        }
+
+        public Speed(Renderable rs, double epsilon, double clampMin, double clampMax) {
+            super(rs, epsilon);
+            this.clampMin = clampMin;
+            this.clampMax = clampMax;
+            this.clamp = true;
         }
 
         @Override protected String doInBackground(String... params) {
@@ -196,20 +226,27 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                     culled.get(0).speed = culled.get(1).speed;      // fixup 1st speed
                 }
 
-                double max = lastPt.speed;
-                double min = max;
+                // If no manual clamping, auto-detect range
+                if (!clamp) {
+                    clampMin = Double.POSITIVE_INFINITY;
+                    clampMax = Double.NEGATIVE_INFINITY;
+                    for (WptPt2 pt : culled) {
+                        clampMax = Math.max(clampMax, pt.speed);
+                        clampMin = Math.min(clampMin, pt.speed);
+                    }
+                }
 
                 int halfC = Algorithms.getRainbowColor(0.5);
-
                 for (WptPt2 pt : culled) {
-                    max = Math.max(max, pt.speed);
-                    min = Math.min(min, pt.speed);
                     pt.colourARGB = halfC;                  // default, in case there are no 'time' in GPX
                 }
-                double speedRange = max - min;
+
+                double speedRange = clampMax - clampMin;
                 if (speedRange > 0) {
-                    for (WptPt2 pt : culled)
-                        pt.colourARGB = Algorithms.getRainbowColor((pt.speed - min) / speedRange);
+                    for (WptPt2 pt : culled) {
+                        double clamped = Math.min(clampMax, Math.max(pt.speed, clampMin));
+                        pt.colourARGB = Algorithms.getRainbowColor((clamped - clampMin) / speedRange);
+                    }
                 }
             }
             return null;
