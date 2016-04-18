@@ -802,7 +802,7 @@ public class MapActivityActions implements DialogProvider {
 	public AlertDialog stopAndEraseNavigationActionConfirm() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		// Stop the navigation
-		builder.setTitle(getString(R.string.clear_destination);
+		builder.setTitle(getString(R.string.clear_destination));
 		builder.setMessage(getString(R.string.clear_dest_confirm));
 		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override

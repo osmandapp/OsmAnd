@@ -228,7 +228,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		ImageView eraseRouteButton = (ImageView) main.findViewById(R.id.map_erase_route_button);
-		eraseRouteButton.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_action_eraser, !nightMode));
+		eraseRouteButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_eraser, !nightMode));
 		AndroidUtils.setBackground(mapActivity, eraseRouteButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 		eraseRouteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
