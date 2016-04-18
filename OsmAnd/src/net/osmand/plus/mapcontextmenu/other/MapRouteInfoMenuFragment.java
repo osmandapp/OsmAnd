@@ -140,6 +140,8 @@ public class MapRouteInfoMenuFragment extends Fragment {
 				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn3), nightMode,
 				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn4), nightMode,
+				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
 
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaView), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaSubView), nightMode);
