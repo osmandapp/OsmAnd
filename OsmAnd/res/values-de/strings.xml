@@ -1880,7 +1880,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="whats_new">Neuerungen in</string>
     <string name="osm_edit_created_poi">OSM-POI erstellt</string>
     
-    <string name="world_map_download_descr">Welt-Basiskarte (welche ganze Welt auf geringen Zoomstufen abdeckt) fehlt oder ist veraltet. Lade bitte die Welt-Basiskarte herunter.</string>
+    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Lade bitte die Welt-Basiskarte herunter.</string>
     <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert</string>
     <string name="simulate_initial_startup">Ersten App-Start simulieren</string>
     <string name="share_geo">geo:</string>
