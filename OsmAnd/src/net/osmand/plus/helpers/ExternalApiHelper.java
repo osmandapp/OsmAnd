@@ -250,6 +250,7 @@ public class ExternalApiHelper {
 				AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
+					finish = true;
 				} else {
 					if (API_CMD_STOP_AV_REC.equals(cmd)) {
 						plugin.stopRecording(mapActivity, false);
@@ -361,6 +362,7 @@ public class ExternalApiHelper {
 				OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
+					finish = true;
 				} else {
 					plugin.startGPXMonitoring(null);
 				}
@@ -371,6 +373,7 @@ public class ExternalApiHelper {
 				OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
+					finish = true;
 				} else {
 					plugin.stopRecording();
 				}
