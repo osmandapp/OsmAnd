@@ -2152,4 +2152,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="access_autoannounce_period_descr">Kürzester Abstand zwischen Benachrichtigungen</string>
     <string name="map_widget_bearing">Relative Peilung</string>
     <string name="access_autoannounce_period">Zeitraum der automatischen Ankündigungen</string>
+    <string name="map_widget_magnetic_bearing">Magnetische Peilung</string>
     </resources>
