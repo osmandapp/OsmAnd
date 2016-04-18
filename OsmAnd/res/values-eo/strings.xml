@@ -817,4 +817,9 @@
     <string name="index_item_nation_addresses">adresoj tutmondaj</string>
     <string name="index_item_world_altitude_correction">Korekto de altitudo</string>
     <string name="index_item_world_seamarks">Mondaj maraj navigadpunktoj</string>
+    <string name="access_category_choice">Elektu kategorion</string>
+    <string name="access_hint_enter_name">Entajpu nomon</string>
+    <string name="access_hint_enter_category">Entajpu kategorion</string>
+    <string name="access_hint_enter_description">Entajpu priskribon</string>
+    <string name="access_default_color">Defaŭlta koloro</string>
     </resources>
