@@ -2202,4 +2202,5 @@
     <string name="access_autoannounce_period">Пэрыяд аўтаабвяшчэньняў</string>
     <string name="access_autoannounce_period_descr">Мінімальны час паміж абвяшчэньнямі</string>
     <string name="map_widget_bearing">Адносны азімут</string>
+    <string name="map_widget_magnetic_bearing">Магнітны азімут</string>
     </resources>
