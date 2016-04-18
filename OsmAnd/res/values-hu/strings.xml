@@ -1448,14 +1448,14 @@
     <string name="gpx_monitoring_start">GPX naplózás indítása</string>
     <string name="gpx_monitoring_stop">GPX naplózás leállítása</string>
     <string name="gpx_start_new_segment">Új szakasz kezdése</string>
-    <string name="rendering_attr_hideBuildings_name">Épületek elrejtése</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Gyalogutak elrejtése</string>
-    <string name="rendering_attr_hideText_name">Szövegek elrejtése</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Erdők, bozótok elrejtése</string>
+    <string name="rendering_attr_hideBuildings_name">Épületek</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Gyalogutak</string>
+    <string name="rendering_attr_hideText_name">Szövegek</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Erdők, bozótok</string>
     <string name="rendering_attr_buildings15zoom_name">Épületek 15-ös zoomon</string>
     <string name="rendering_attr_moreDetailed_name">Több részlet</string>
     <string name="rendering_attr_lessDetailed_name">Kevésbé részletes</string>
-    <string name="rendering_attr_hideAccess_name">Behajtási korlátozások elrejtése</string>
+    <string name="rendering_attr_hideAccess_name">Behajtási korlátozások</string>
     <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség</string>
     <string name="rendering_attr_showSurfaces_name">Útfelület</string>
@@ -1763,7 +1763,7 @@
     <string name="rendering_value_highContrastRoads_name">Nagy kontrasztú utak</string>
     <string name="index_name_netherlands">Európa - Hollandia</string>
     <string name="application_dir_change_warning3">Szeretnéd, hogy az OsmAnd az adatfájljaidat is az új helyre másolja?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Házszámok elrejtése</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
     
     <string name="routing_attr_avoid_borders_description">A határ átlépésének elkerülése egy másik országba</string>
     <string name="routing_attr_height_name">Magasságkorlát</string>
@@ -1979,7 +1979,7 @@
     <string name="contact_us">Kapcsolat</string>
 <string name="read_more">Bővebben</string>
     <string name="whats_new">Újdonságok</string>
-    <string name="rendering_attr_hideProposed_name">Tervezett objektumok elrejtése</string>
+    <string name="rendering_attr_hideProposed_name">Tervezett objektumok</string>
     <string name="shared_string_update">Frissítés</string>
     <string name="shared_string_upload">Feltöltés</string>
     <string name="osm_edit_created_poi">Létrehozott OSM POI</string>
@@ -2127,7 +2127,7 @@
     <string name="shared_string_status">Állapot</string>
     <string name="shared_string_save_changes">Módosítások mentése</string>
     <string name="shared_string_email_address">Email cím</string>
-    <string name="rendering_attr_hideUnderground_name">Földalatti objektumok elrejtése</string>
+    <string name="rendering_attr_hideUnderground_name">Földalatti objektumok</string>
     <string name="data_is_not_available">Az adat nem elérhető</string>
     <string name="shared_string_read_more">Bővebben</string>
     <string name="clear_updates_proposition_message">Eltávolíthatod a letöltött frissítéseket ezzel visszakapva az eredeti térképkiadást</string>
@@ -2135,7 +2135,7 @@
     <string name="road_blocked">Út blokkolva</string>
     <string name="shared_string_select">Kiválasztás</string>
     <string name="switch_start_finish">Kiinduló- és célpont felcserélése</string>
-    <string name="rendering_attr_hideIcons_name">POI ikonok elrejtése</string>
+    <string name="rendering_attr_hideIcons_name">POI ikonok</string>
     <string name="item_removed">Elem eltávolítva</string>
     <string name="n_items_removed">elem eltávolítva</string>
     <string name="shared_string_type">Típus</string>
@@ -2164,4 +2164,27 @@
     <string name="rec_split_storage_size_desc">Az összes klipp által elfoglalható hely</string>
     <string name="no_map_markers_found">Kérlek, vegyél fel jelölőket a térképen</string>
     <string name="no_waypoints_found">Nem találhatók útpontok</string>
+    <string name="map_widget_bearing">Irány</string>
+    <string name="access_disable_offroute_recalc_descr">Megakadályozza az automatikus újratervezést, ha túl távol vagy a helyes úttól</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Megakadályozza az automatikus újratervezést, ha rossz irányba mész</string>
+    <string name="access_default_color">Alapértelmezett szín</string>
+    <string name="access_category_choice">Válassz kategóriát</string>
+    <string name="access_hint_enter_name">Adj meg egy nevet</string>
+    <string name="access_hint_enter_category">Adj meg egy kategóriát</string>
+    <string name="access_hint_enter_description">Adj meg egy leírást</string>
+    <string name="access_map_linked_to_location">A térkép a pozícióhoz rögzítve</string>
+    <string name="access_collapsed_list">Becsukott lista</string>
+    <string name="access_expanded_list">Kinyitott lista</string>
+    <string name="access_empty_list">Üres lista</string>
+    <string name="access_tree_list">Fa lista</string>
+    <string name="access_shared_string_not_installed">Nincs telepítve</string>
+    <string name="access_widget_expand">Kinyit</string>
+    <string name="access_shared_string_navigate_up">Navigáció fel</string>
+    <string name="access_sort">Rendezés</string>
+    <string name="map_mode">Térképmód</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX fájl kiválasztva</string>
+    <string name="rendering_value_thin_name">Vékony</string>
+    <string name="rendering_value_medium_name">Közepes</string>
+    <string name="rendering_value_bold_name">Vastag</string>
+    <string name="shared_string_widgets">Vezérlőgomb</string>
     </resources>
