@@ -53,6 +53,13 @@ public class Relation extends Entity {
 		return Collections.unmodifiableMap(members);
 	}
 	
+	public Map<EntityId, String> getModifiableMembersMap() {
+		if(members == null){
+			return Collections.emptyMap();
+		}
+		return members;
+	}
+	
 	public Collection<EntityId> getMemberIds(String role) {
 		if (members == null) {
 			return Collections.emptyList();
