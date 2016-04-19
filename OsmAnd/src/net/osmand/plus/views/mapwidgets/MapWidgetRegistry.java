@@ -360,7 +360,6 @@ public class MapWidgetRegistry {
 			if (mode == ApplicationMode.DEFAULT) {
 				if ("intermediate_distance".equals(r.key)
 						|| "distance".equals(r.key)
-						|| "bearing".equals(r.key)
 						|| "time".equals(r.key)) {
 					continue;
 				}
