@@ -16,6 +16,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.hardware.GeomagneticField;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -508,8 +511,8 @@ public class RouteInfoWidgetsFactory {
 	public TextInfoWidget createBearingControl(final MapActivity map) {
 		final int bearingResId = R.drawable.widget_bearing_day;
 		final int bearingNightResId = R.drawable.widget_bearing_night;
-		final int relativeBearingResId = R.drawable.widget_bearing_day;
-		final int relativeBearingNightResId = R.drawable.widget_bearing_night;
+		final int relativeBearingResId = R.drawable.widget_relative_bearing_day;
+		final int relativeBearingNightResId = R.drawable.widget_relative_bearing_night;
 		final OsmandApplication ctx = map.getMyApplication();
 		final OsmandPreference<Boolean> showRelativeBearing = ctx.getSettings().SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING;
 
@@ -540,15 +543,33 @@ public class RouteInfoWidgetsFactory {
 				int d = -1000;
 				Location myLocation = getOsmandApplication().getLocationProvider().getLastKnownLocation();
 				LatLon l = getPointToNavigate();
+				if (l == null) {
+					List<MapMarker> markers = getOsmandApplication().getMapMarkersHelper().getSortedMapMarkers();
+					if (markers.size() > 0) {
+						l = markers.get(0).point;
+					}
+				}
 				if (myLocation != null && l != null) {
 					Location dest = new Location("");
 					dest.setLatitude(l.getLatitude());
 					dest.setLongitude(l.getLongitude());
 					dest.setBearing(myLocation.bearingTo(dest));
-					float bearingToDest = dest.getBearing();
+					GeomagneticField destGf = new GeomagneticField((float) dest.getLatitude(), (float) dest.getLongitude(), (float) dest.getAltitude(),
+							System.currentTimeMillis());
+					float bearingToDest = dest.getBearing() + destGf.getDeclination();
 					if (relative) {
-						if (myLocation.hasBearing()) {
-							bearingToDest -= myLocation.getBearing();
+						float b = -1000;
+						Float heading = getOsmandApplication().getLocationProvider().getHeading();
+						if (((myLocation.hasSpeed() && myLocation.getSpeed() < 11) || !myLocation.hasBearing())
+								&& heading != null) {
+							b = heading;
+						} else if (myLocation.hasBearing()) {
+							GeomagneticField myLocGf = new GeomagneticField((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) myLocation.getAltitude(),
+									System.currentTimeMillis());
+							b = (myLocation.getBearing() + myLocGf.getDeclination());
+						}
+						if (b > -1000) {
+							bearingToDest -= b;
 							if (bearingToDest > 180f) {
 								bearingToDest -= 360f;
 							} else if (bearingToDest < -180f) {
@@ -829,7 +850,8 @@ public class RouteInfoWidgetsFactory {
 
 			// create a blur paint for capturing alpha
 			Paint ptBlur = new Paint();
-			ptBlur.setMaskFilter(new BlurMaskFilter(5, Blur.OUTER));
+			float density = ctx.getResources().getDisplayMetrics().density;
+			ptBlur.setMaskFilter(new BlurMaskFilter(1.66f * density, Blur.OUTER));
 			int[] offsetXY = new int[2];
 			// capture alpha into a bitmap
 			Bitmap bmAlpha = src.extractAlpha(ptBlur, offsetXY);

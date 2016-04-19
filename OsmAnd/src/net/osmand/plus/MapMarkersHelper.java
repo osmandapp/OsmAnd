@@ -50,7 +50,7 @@ public class MapMarkersHelper {
 		}
 
 		public PointDescription getPointDescription(Context ctx) {
-			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker, ""),
+			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker),
 					getOnlyName());
 		}
 

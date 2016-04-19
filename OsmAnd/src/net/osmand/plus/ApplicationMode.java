@@ -67,7 +67,6 @@ public class ApplicationMode {
 		// right
 		regWidget("intermediate_distance", exceptDefault);
 		regWidget("distance", exceptDefault);
-		regWidget("bearing", none);
 		regWidget("time", exceptDefault);
 		regWidget("speed", exceptPedestrianAndDefault);
 		regWidget("max_speed", CAR);
