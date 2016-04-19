@@ -1036,17 +1036,17 @@ public class GPXUtilities {
 							if (parser.getName().equals("gpx")) {
 								((GPXFile) parse).author = parser.getAttributeValue("", "creator");
 							}
-							if (parser.getName().equals("trk")) {
+							else if (parser.getName().equals("trk")) {
 								Track track = new Track();
 								((GPXFile) parse).tracks.add(track);
 								parserState.push(track);
 							}
-							if (parser.getName().equals("rte")) {
+							else if (parser.getName().equals("rte")) {
 								Route route = new Route();
 								((GPXFile) parse).routes.add(route);
 								parserState.push(route);
 							}
-							if (parser.getName().equals("wpt")) {
+							else if (parser.getName().equals("wpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((GPXFile) parse).points.add(wptPt);
 								parserState.push(wptPt);
@@ -1055,10 +1055,10 @@ public class GPXUtilities {
 							if (parser.getName().equals("name")) {
 								((Route) parse).name = readText(parser, "name");
 							}
-							if (parser.getName().equals("desc")) {
+							else if (parser.getName().equals("desc")) {
 								((Route) parse).desc = readText(parser, "desc");
 							}
-							if (parser.getName().equals("rtept")) {
+							else if (parser.getName().equals("rtept")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((Route) parse).points.add(wptPt);
 								parserState.push(wptPt);
@@ -1067,10 +1067,10 @@ public class GPXUtilities {
 							if (parser.getName().equals("name")) {
 								((Track) parse).name = readText(parser, "name");
 							}
-							if (parser.getName().equals("desc")) {
+							else if (parser.getName().equals("desc")) {
 								((Track) parse).desc = readText(parser, "desc");
 							}
-							if (parser.getName().equals("trkseg")) {
+							else if (parser.getName().equals("trkseg")) {
 								TrkSegment trkSeg = new TrkSegment();
 								((Track) parse).segments.add(trkSeg);
 								parserState.push(trkSeg);

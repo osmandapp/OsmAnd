@@ -218,7 +218,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                     WptPt2 pt = culled.get(i);
                     double delta = pt.time - lastPt.time;
                     pt.speed = delta > 0 ? MapUtils.getDistance(pt.lat, pt.lon,
-                            lastPt.lat, lastPt.lon) / delta : 0;
+                            lastPt.lat, lastPt.lon) / delta * 3600 : 0;             // units:  km/h
                     lastPt = pt;
                 }
 

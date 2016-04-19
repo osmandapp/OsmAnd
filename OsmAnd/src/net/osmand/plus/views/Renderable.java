@@ -229,12 +229,7 @@ public abstract class Renderable {
 
         }
 
-        // Set the extent of values for colour band calculations. Values are clampted to min...max for band display
-        // Notes: Altitude range in metres
-        // Speed range in metres per millisecond.
-        // To convert to km/h, divide by 3600
-        //  100/3600  = 100 km/h
-
+        // Speed range in km/h, altitude is in m.
         public void setRange(double clampMin, double clampMax) {
             this.clampMin = clampMin;
             this.clampMax = clampMax;
@@ -288,6 +283,12 @@ public abstract class Renderable {
 
         public Speed(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
             super(Priority.SPEED, view, pt, epsilon, widthZoom);
+        }
+
+        public void setRangeMilesPerHour(double clampMin, double clampMax) {
+            this.clampMin = clampMin / 1.60934;
+            this.clampMax = clampMax / 1.60934;
+            this.clamp = true;
         }
 
         @Override protected AsynchronousResampler Factory() {
