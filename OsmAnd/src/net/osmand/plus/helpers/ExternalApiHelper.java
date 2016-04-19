@@ -96,6 +96,8 @@ public class ExternalApiHelper {
 	public static final String PARAM_NT_DIRECTION_TURN = "turn_type";
 	public static final String PARAM_NT_DIRECTION_LANES = "turn_lanes";
 
+	public static final String PARAM_CLOSE_AFTER_COMMAND = "close_after_command";
+
 
 	public static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
 			ApplicationMode.CAR,
@@ -390,8 +392,10 @@ public class ExternalApiHelper {
 					plugin.startGPXMonitoring(null);
 				}
 
+				if (uri.getBooleanQueryParameter(PARAM_CLOSE_AFTER_COMMAND, true)) {
+					finish = true;
+				}
 				resultCode = Activity.RESULT_OK;
-
 			} else if (API_CMD_STOP_GPX_REC.equals(cmd)) {
 				OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
@@ -401,8 +405,10 @@ public class ExternalApiHelper {
 					plugin.stopRecording();
 				}
 
+				if (uri.getBooleanQueryParameter(PARAM_CLOSE_AFTER_COMMAND, true)) {
+					finish = true;
+				}
 				resultCode = Activity.RESULT_OK;
-
 			} else if (API_CMD_SUBSCRIBE_VOICE_NOTIFICATIONS.equals(cmd)) {
 				// not implemented yet
 				resultCode = RESULT_CODE_ERROR_NOT_IMPLEMENTED;
