@@ -2063,7 +2063,7 @@
     <string name="rec_split_clip_length">Długość nagrania</string>
     <string name="shared_string_not_selected">Nie wybrany</string>
 <string name="item_removed">Pozycja usunięta</string>
-    <string name="n_items_removed">Pozycje usunięta</string>
+    <string name="n_items_removed">pozycji usuniętych</string>
     <string name="shared_string_undo_all">COFNIJ WSZYSTKO</string>
     <string name="shared_string_type">Typ</string>
     <string name="starting_point">Punkt początkowy</string>
@@ -2174,7 +2174,7 @@
     <string name="access_widget_expand">Rozwiń</string>
     <string name="access_sort">Sortuj</string>
     <string name="map_mode">Tryb mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">Wyprano %s plików GPX</string>
+    <string name="number_of_gpx_files_selected_pattern">Wybrano %s plików GPX</string>
     <string name="access_hint_enter_name">Wprowadź nazwę</string>
     <string name="access_map_linked_to_location">Mapa jest powiązana z obszarem</string>
     <string name="access_tree_list">Lista hierarchiczna</string>
