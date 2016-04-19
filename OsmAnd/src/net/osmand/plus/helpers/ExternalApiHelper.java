@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
@@ -34,6 +36,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.util.Arrays;
 
 public class ExternalApiHelper {
@@ -70,6 +74,7 @@ public class ExternalApiHelper {
 	public static final String PARAM_VISIBLE = "visible";
 
 	public static final String PARAM_PATH = "path";
+	public static final String PARAM_URI = "uri";
 	public static final String PARAM_DATA = "data";
 	public static final String PARAM_FORCE = "force";
 
@@ -149,6 +154,24 @@ public class ExternalApiHelper {
 					String gpxStr = intent.getStringExtra(PARAM_DATA);
 					if (!Algorithms.isEmpty(gpxStr)) {
 						gpx = GPXUtilities.loadGPXFile(mapActivity, new ByteArrayInputStream(gpxStr.getBytes()));
+					}
+				} else if (uri.getBooleanQueryParameter(PARAM_URI, false)) {
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						LOG.debug("uriString=" + intent.getClipData().getItemAt(0).getUri());
+						Uri gpxUri = intent.getClipData().getItemAt(0).getUri();
+
+						ParcelFileDescriptor gpxParcelDescriptor = mapActivity.getContentResolver()
+								.openFileDescriptor(gpxUri, "r");
+						if (gpxParcelDescriptor != null) {
+							FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+							gpx = GPXUtilities.loadGPXFile(mapActivity, new FileInputStream(fileDescriptor));
+						} else {
+							finish = true;
+							resultCode = RESULT_CODE_ERROR_GPX_NOT_FOUND;
+						}
+					} else {
+						finish = true;
+						resultCode = RESULT_CODE_ERROR_GPX_NOT_FOUND;
 					}
 				} else {
 					finish = true;
