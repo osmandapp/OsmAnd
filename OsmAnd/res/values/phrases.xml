@@ -2690,4 +2690,49 @@
 
 	<string name="poi_sanitary_dump_station">Sanitary dump station</string>
 
+	<string name="poi_medical_system_western_yes">Medical system: western</string>
+	<string name="poi_medical_system_chinese_yes">Medical system: traditional chinese</string>
+	<string name="poi_medical_system_unknown_yes">Medical system: unknown traditional</string>
+	<string name="poi_medical_system_ayurveeda_yes">Medical system: ayurveeda</string>
+	<string name="poi_medical_system_kampo_yes">Medical system: kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Medical system: traditional mongolian</string>
+	<string name="poi_medical_system_tibetan_yes">Medical system: traditional tibetan</string>
+	<string name="poi_medical_system_sidda_yes">Medical system: sidda</string>
+	<string name="poi_medical_system_unani_yes">Medical system: unani</string>
+
+	<string name="poi_health_service_nursing_yes">Health service: nursing: yes</string>
+	<string name="poi_health_service_nursing_no">Health service: nursing: no</string>
+	<string name="poi_health_service_counselling_yes">Health service: counselling: yes</string>
+	<string name="poi_health_service_counselling_no">Health service: counselling: no</string>
+	<string name="poi_health_service_examination_yes">Health service: examination: yes</string>
+	<string name="poi_health_service_examination_no">Health service: examination: no</string>
+	<string name="poi_health_service_child_care_yes">Health service: child care: yes</string>
+	<string name="poi_health_service_child_care_no">Health service: child care: no</string>
+	<string name="poi_health_service_prevention_yes">Health service: prevention: yes</string>
+	<string name="poi_health_service_prevention_no">Health service: prevention: no</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Health service: vaccination: yes</string>
+	<string name="poi_health_service_prevention_vaccination_no">Health service: vaccination: no</string>
+	<string name="poi_health_service_support_yes">Health service: support: yes</string>
+	<string name="poi_health_service_support_no">Health service: support: no</string>
+	<string name="poi_health_service_test_yes">Health service: test: yes</string>
+	<string name="poi_health_service_test_no">Health service: test: no</string>
+
+	<string name="poi_health_facility_type_office">Health facility type: office</string>
+	<string name="poi_health_facility_type_hospital">Health facility type: hospital</string>
+	<string name="poi_health_facility_type_field_hospital">Health facility type: field hospital</string>
+	<string name="poi_health_facility_type_clinic">Health facility type: clinic</string>
+	<string name="poi_health_facility_type_health_centre">Health facility type: health centre</string>
+	<string name="poi_health_facility_type_counselling_centre">Health facility type: counselling centre</string>
+	<string name="poi_health_facility_type_rehabilitation">Health facility type: rehabilitation</string>
+	<string name="poi_health_facility_type_laboratory">Health facility type: laboratory</string>
+	<string name="poi_health_facility_type_therapy">Health facility type: therapy</string>
+	<string name="poi_health_facility_type_department">Health facility type: department</string>
+	<string name="poi_health_facility_type_dispensary">Health facility type: dispensary</string>
+	<string name="poi_health_facility_type_pharmacy">Health facility type: pharmacy</string>
+	<string name="poi_health_facility_type_first_aid">Health facility type: first aid</string>
+	<string name="poi_health_facility_type_nursing_home">Health facility type: nursing home</string>
+	<string name="poi_health_facility_type_support_group_home">Health facility type: support group home</string>
+
+	<string name="poi_health_specialty_palliative_medicine_yes">Health specialty: palliative medicine</string>
+
 </resources>

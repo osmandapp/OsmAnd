@@ -2689,4 +2689,49 @@
 
 	<string name="poi_sanitary_dump_station">Ассенизационная сливная станция</string>
 
+	<string name="poi_medical_system_western_yes">Медицинская система: западная</string>
+	<string name="poi_medical_system_chinese_yes">Медицинская система: традиционная китайская</string>
+	<string name="poi_medical_system_unknown_yes">Медицинская система: традиционная неизвестно</string>
+	<string name="poi_medical_system_ayurveeda_yes">Медицинская система: традиционная аюрведа</string>
+	<string name="poi_medical_system_kampo_yes">Медицинская система: традиционная японская</string>
+	<string name="poi_medical_system_mongolian_yes">Медицинская система: традиционная монгольская</string>
+	<string name="poi_medical_system_tibetan_yes">Медицинская система: традиционная тибетская</string>
+	<string name="poi_medical_system_sidda_yes">Медицинская система: традиционная тамильская</string>
+	<string name="poi_medical_system_unani_yes">Медицинская система: традиционная греко-исламская</string>
+
+	<string name="poi_health_service_nursing_yes">Медицинские услуги: уход: есть</string>
+	<string name="poi_health_service_nursing_no">Медицинские услуги: уход: нет</string>
+	<string name="poi_health_service_counselling_yes">Медицинские услуги: консультация: есть</string>
+	<string name="poi_health_service_counselling_no">Медицинские услуги: консультация: нет</string>
+	<string name="poi_health_service_examination_yes">Медицинские услуги: базовая диагностика: есть</string>
+	<string name="poi_health_service_examination_no">Медицинские услуги: базовая диагностика: нет</string>
+	<string name="poi_health_service_child_care_yes">Медицинские услуги: присмотр за детьми: есть</string>
+	<string name="poi_health_service_child_care_no">Медицинские услуги: присмотр за детьми: нет</string>
+	<string name="poi_health_service_prevention_yes">Медицинские услуги: профилактика: есть</string>
+	<string name="poi_health_service_prevention_no">Медицинские услуги: профилактика: нет</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Медицинские услуги: вакцинация: есть</string>
+	<string name="poi_health_service_prevention_vaccination_no">Медицинские услуги: вакцинация: нет</string>
+	<string name="poi_health_service_support_yes">Медицинские услуги: support: есть</string>
+	<string name="poi_health_service_support_no">Медицинские услуги: support: нет</string>
+	<string name="poi_health_service_test_yes">Медицинские услуги: тестирование: есть</string>
+	<string name="poi_health_service_test_no">Медицинские услуги: тестирование: нет</string>
+
+	<string name="poi_health_facility_type_office">Тип медучреждения: офис</string>
+	<string name="poi_health_facility_type_hospital">Тип медучреждения: госпиталь</string>
+	<string name="poi_health_facility_type_field_hospital">Тип медучреждения: полевой госпиталь</string>
+	<string name="poi_health_facility_type_clinic">Тип медучреждения: поликлиника</string>
+	<string name="poi_health_facility_type_health_centre">Тип медучреждения: медицинский центр</string>
+	<string name="poi_health_facility_type_counselling_centre">Тип медучреждения: центр психологической консультации</string>
+	<string name="poi_health_facility_type_rehabilitation">Тип медучреждения: реабилитационный центр</string>
+	<string name="poi_health_facility_type_laboratory">Тип медучреждения: медицинская лаборатория</string>
+	<string name="poi_health_facility_type_therapy">Тип медучреждения: терапия</string>
+	<string name="poi_health_facility_type_department">Тип медучреждения: отделение</string>
+	<string name="poi_health_facility_type_dispensary">Тип медучреждения: выдача лекарственных средств</string>
+	<string name="poi_health_facility_type_pharmacy">Тип медучреждения: аптека</string>
+	<string name="poi_health_facility_type_first_aid">Тип медучреждения: станция первой помощи</string>
+	<string name="poi_health_facility_type_nursing_home">Тип медучреждения: хоспис</string>
+	<string name="poi_health_facility_type_support_group_home">Тип медучреждения: встречи групп поддержки</string>
+
+	<string name="poi_health_specialty_palliative_medicine_yes">Специализация: паллиативная помощь</string>
+
 </resources>
