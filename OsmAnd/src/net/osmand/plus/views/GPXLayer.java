@@ -371,7 +371,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 //						ts.renders.add(alt);
 
 						Renderable.Speed speed = new Renderable.Speed(view, ts.points, epsilon, 4);
-						speed.setRange(0,80);	// optional (0 km/h to 80 km/h range)
+						//speed.setRange(0,80);	// optional (0 km/h to 80 km/h range)
 						ts.renders.add(speed);
 
 
