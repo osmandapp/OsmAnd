@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>
     <string name="access_disable_offroute_recalc">Don\'t change route when you are off the way</string>
     <string name="access_disable_offroute_recalc_descr">Prevent automatic route recalculation when you are quite far from the right way</string>

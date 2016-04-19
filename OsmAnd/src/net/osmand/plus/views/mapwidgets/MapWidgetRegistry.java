@@ -6,6 +6,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -141,11 +143,41 @@ public class MapWidgetRegistry {
 	}
 
 	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
+													   WidgetState widgetState,
+													   String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, widgetState, priorityOrder, left);
+		processVisibleModes(key, ii);
+		if (widget != null) {
+			widget.setContentTitle(widgetState.getMenuTitleId());
+		}
+		if (left) {
+			this.leftWidgetSet.add(ii);
+		} else {
+			this.rightWidgetSet.add(ii);
+		}
+		return ii;
+	}
+
+
+	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
 													   @DrawableRes int drawableMenu,
 													   @StringRes int messageId,
 													   String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,
 				messageId, priorityOrder, left);
+		processVisibleModes(key, ii);
+		if (widget != null) {
+			widget.setContentTitle(messageId);
+		}
+		if (left) {
+			this.leftWidgetSet.add(ii);
+		} else {
+			this.rightWidgetSet.add(ii);
+		}
+		return ii;
+	}
+
+	private void processVisibleModes(String key, MapWidgetRegInfo ii) {
 		for (ApplicationMode ms : ApplicationMode.values(settings)) {
 			boolean collapse = ms.isWidgetCollapsible(key);
 			boolean def = ms.isWidgetVisible(key);
@@ -168,15 +200,6 @@ public class MapWidgetRegistry {
 				ii.visibleCollapsible.add(ms);
 			}
 		}
-		if (widget != null) {
-			widget.setContentTitle(messageId);
-		}
-		if (left) {
-			this.leftWidgetSet.add(ii);
-		} else {
-			this.rightWidgetSet.add(ii);
-		}
-		return ii;
 	}
 
 	private void restoreModes(Set<String> set, Set<MapWidgetRegInfo> mi, ApplicationMode mode) {
@@ -343,7 +366,7 @@ public class MapWidgetRegistry {
 	}
 
 	public String getText(Context ctx, final ApplicationMode mode, final MapWidgetRegInfo r) {
-		return (r.visibleCollapsed(mode) ? " + " : "  ") + ctx.getString(r.messageId);
+		return (r.visibleCollapsed(mode) ? " + " : "  ") + ctx.getString(r.getMessageId());
 	}
 
 	public Set<MapWidgetRegInfo> getRightWidgetSet() {
@@ -370,8 +393,8 @@ public class MapWidgetRegistry {
 
 			final boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
 			final String desc = mapActivity.getString(R.string.shared_string_collapse);
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.messageId, mapActivity)
-					.setIcon(r.drawableMenu)
+			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.getMessageId(), mapActivity)
+					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
 					.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -385,11 +408,32 @@ public class MapWidgetRegistry {
 							View textWrapper = view.findViewById(R.id.text_wrapper);
 							IconPopupMenu popup = new IconPopupMenu(view.getContext(), textWrapper);
 							MenuInflater inflater = popup.getMenuInflater();
-							inflater.inflate(R.menu.vidget_visibility_menu, popup.getMenu());
+							final Menu menu = popup.getMenu();
+							inflater.inflate(R.menu.widget_visibility_menu, menu);
 							IconsCache ic = mapActivity.getMyApplication().getIconsCache();
-							ic.paintMenuItem(popup.getMenu().findItem(R.id.action_show));
-							ic.paintMenuItem(popup.getMenu().findItem(R.id.action_hide));
-							ic.paintMenuItem(popup.getMenu().findItem(R.id.action_collapse));
+							menu.findItem(R.id.action_show).setIcon(ic.getThemedIcon(R.drawable.ic_action_view));
+							menu.findItem(R.id.action_hide).setIcon(ic.getThemedIcon(R.drawable.ic_action_hide));
+							menu.findItem(R.id.action_collapse).setIcon(ic.getThemedIcon(R.drawable.ic_action_widget_collapse));
+
+							final int[] menuIconIds = r.getDrawableMenuIds();
+							final int[] menuTitleIds = r.getMessageIds();
+							final int[] menuItemIds = r.getItemIds();
+							int checkedId = r.getItemId();
+							if (menuIconIds != null && menuTitleIds != null && menuItemIds != null
+									&& menuIconIds.length == menuTitleIds.length && menuIconIds.length == menuItemIds.length) {
+								for (int i = 0; i < menuIconIds.length; i++) {
+									int iconId = menuIconIds[i];
+									int titleId = menuTitleIds[i];
+									int id = menuItemIds[i];
+									MenuItem menuItem = menu.add(R.id.single_selection_group, id, i, titleId)
+											.setChecked(id == checkedId);
+									menuItem.setIcon(menuItem.isChecked()
+											? ic.getIcon(iconId, R.color.osmand_orange) : ic.getThemedIcon(iconId));
+								}
+								menu.setGroupCheckable(R.id.single_selection_group, true, true);
+								menu.setGroupVisible(R.id.single_selection_group, true);
+							}
+
 							popup.setOnMenuItemClickListener(
 									new IconPopupMenu.OnMenuItemClickListener() {
 										@Override
@@ -405,6 +449,23 @@ public class MapWidgetRegistry {
 												case R.id.action_collapse:
 													setVisibility(adapter, pos, true, true);
 													return true;
+												default:
+													if (menuItemIds != null) {
+														for (int menuItemId : menuItemIds) {
+															if (menuItem.getItemId() == menuItemId) {
+																r.changeState(menuItemId);
+																MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+																if (mil != null) {
+																	mil.recreateControls();
+																}
+																ContextMenuItem item = adapter.getItem(pos);
+																item.setIcon(r.getDrawableMenu());
+																item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+																adapter.notifyDataSetChanged();
+																return true;
+															}
+														}
+													}
 											}
 											return false;
 										}
@@ -443,9 +504,10 @@ public class MapWidgetRegistry {
 	public static class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo> {
 		public final TextInfoWidget widget;
 		@DrawableRes
-		public final int drawableMenu;
+		private int drawableMenu;
 		@StringRes
-		public final int messageId;
+		private int messageId;
+		private WidgetState widgetState;
 		public final String key;
 		public final boolean left;
 		public final int priorityOrder;
@@ -461,6 +523,69 @@ public class MapWidgetRegistry {
 			this.messageId = messageId;
 			this.priorityOrder = priorityOrder;
 			this.left = left;
+		}
+
+		public MapWidgetRegInfo(String key, TextInfoWidget widget, WidgetState widgetState,
+								int priorityOrder, boolean left) {
+			this.key = key;
+			this.widget = widget;
+			this.widgetState = widgetState;
+			this.priorityOrder = priorityOrder;
+			this.left = left;
+		}
+
+		public int getDrawableMenu() {
+			if (widgetState != null) {
+				return widgetState.getMenuIconId();
+			} else {
+				return drawableMenu;
+			}
+		}
+
+		public int getMessageId() {
+			if (widgetState != null) {
+				return widgetState.getMenuTitleId();
+			} else {
+				return messageId;
+			}
+		}
+
+		public int getItemId() {
+			if (widgetState != null) {
+				return widgetState.getMenuItemId();
+			} else {
+				return messageId;
+			}
+		}
+
+		public int[] getDrawableMenuIds() {
+			if (widgetState != null) {
+				return widgetState.getMenuIconIds();
+			} else {
+				return null;
+			}
+		}
+
+		public int[] getMessageIds() {
+			if (widgetState != null) {
+				return widgetState.getMenuTitleIds();
+			} else {
+				return null;
+			}
+		}
+
+		public int[] getItemIds() {
+			if (widgetState != null) {
+				return widgetState.getMenuItemIds();
+			} else {
+				return null;
+			}
+		}
+
+		public void changeState(int stateId) {
+			if (widgetState != null) {
+				widgetState.changeState(stateId);
+			}
 		}
 
 		public boolean visibleCollapsed(ApplicationMode mode) {
@@ -483,7 +608,7 @@ public class MapWidgetRegistry {
 
 		@Override
 		public int hashCode() {
-			return messageId;
+			return getMessageId();
 		}
 
 		@Override
@@ -496,16 +621,16 @@ public class MapWidgetRegistry {
 				return false;
 			}
 			MapWidgetRegInfo other = (MapWidgetRegInfo) obj;
-			return messageId == other.messageId;
+			return getMessageId() == other.getMessageId();
 		}
 
 		@Override
 		public int compareTo(@NonNull MapWidgetRegInfo another) {
-			if (messageId == another.messageId) {
+			if (getMessageId() == another.getMessageId()) {
 				return 0;
 			}
 			if (priorityOrder == another.priorityOrder) {
-				return messageId - another.messageId;
+				return getMessageId() - another.getMessageId();
 			}
 			return priorityOrder - another.priorityOrder;
 		}
@@ -545,5 +670,28 @@ public class MapWidgetRegistry {
 			a.notifyDataSetChanged();
 			return false;
 		}
+	}
+
+	public static abstract class WidgetState {
+
+		private OsmandApplication ctx;
+
+		public OsmandApplication getCtx() {
+			return ctx;
+		}
+
+		public WidgetState(OsmandApplication ctx) {
+			this.ctx = ctx;
+		}
+
+		public abstract int getMenuTitleId();
+		public abstract int getMenuIconId();
+		public abstract int getMenuItemId();
+
+		public abstract int[] getMenuTitleIds();
+		public abstract int[] getMenuIconIds();
+		public abstract int[] getMenuItemIds();
+
+		public abstract void changeState(int stateId);
 	}
 }

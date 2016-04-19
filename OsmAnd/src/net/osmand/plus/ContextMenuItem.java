@@ -16,7 +16,7 @@ public class ContextMenuItem {
 	private final int titleId;
 	private String title;
 	@DrawableRes
-	private final int mIcon;
+	private int mIcon;
 	@ColorRes
 	private int colorRes;
 	@DrawableRes
@@ -148,6 +148,10 @@ public class ContextMenuItem {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public void setIcon(int iconId) {
+		this.mIcon = iconId;
 	}
 
 	public void setColorRes(int colorRes) {
