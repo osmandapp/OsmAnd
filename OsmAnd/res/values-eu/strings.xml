@@ -187,7 +187,7 @@
   <string name="index_srtm_parts">zatiak</string>
   <string name="index_srtm_ele">Sestra-kurbak</string>
   <string name="srtm_plugin_description">Lineaz kanpoko sestra-kurbak eta mendi itzalak deskargatzeko erraztasunak (\'Ezarpenak\' -&gt; \'Kudeatu mapen fitxategiak\' -&gt; \'Deskargatu\' -&gt; Aukeratu nahi duzun mapa mota).</string>
-  <string name="srtm_plugin_name">Sestra-kurben plugina</string>
+  <string name="srtm_plugin_name">Sestra-kurbak</string>
   <string name="download_select_map_types">Beste mapak</string>
   <string name="download_roads_only_item">Errepideak bakarrik</string>
   <string name="download_srtm_maps">Sestra-kurbak</string>
@@ -360,7 +360,7 @@
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Aparkaleku puntua</string>
   <string name="osmand_parking_plugin_description">Plugin honek zure aparkatutako kotxearen kokalekua gordetzea ahalbideratzen zaitu.</string>
-  <string name="osmand_parking_plugin_name">Aparkalekuaren Kokapen Plugina</string>
+  <string name="osmand_parking_plugin_name">Aparkalekuaren kokapena</string>
   <string name="context_menu_item_add_parking_point">Aparkaleku kokapen bezala markatu</string>
   <string name="context_menu_item_delete_parking_point">Aparkaleku markatzaile bat ezabatu</string>
   <string name="gpxup_public">Publikoa</string>
@@ -781,7 +781,7 @@
   <string name="use_osmand_routing_service_descr">Erabili OsmAnden lineaz kanpoko nabigatzailea, &gt; 20 km ibilbideetan erabili daiteke (experimentala)</string>
   <string name="osmand_routing_experimental">OsmAnden lineaz kanpoko nabigazioa ezaugarri esperimentala da eta ez du 20 km baina gehiagoko distantziekin lan egiten.⏎\n⏎\nNabigazio zerbitzuak oraingoz sarean dagoen CloudMade zerbitzua erabiltzen du.</string>
   <string name="specified_dir_doesnt_exist">Ezin izan da eskatutako direktorioa aurkitu.</string>
-  <string name="application_dir">Gordetze direktorioa</string>
+  <string name="application_dir">Datuak gordetzeko direktorioa</string>
   
   <string name="osmand_net_previously_installed">OsmAnden bertsio zaharrago bat dago instalatuta. Aplikazio berriak lineaz kanpoko datu guztiak erabili ditzake. Hala ere, Puntu Gogokoenak aplikazio zaharrean esportatu eta berrian inportatuak izan beharko lirateke.</string>
   <string name="build_installed">{0} eraikitzea ongi instalatuta ({1}).</string>
@@ -1273,7 +1273,7 @@
     <string name="animate_routing_route">"Simulatu kalkulatutako ibilbidea erabiliz "</string>
     <string name="animate_routing_gpx">Simulatu GPX ibilbidea erabiliz</string>
     <string name="enable_sleep_mode">Gaitu esekidura modua</string>
-	<string name="gps_wake_up_timer">GPS enatze tartea</string>
+	<string name="gps_wake_up_timer">GPS esnatze tartea</string>
 	<string name="map_preferred_locale">Maparen hizkuntz gogokoena</string>
     <string name="map_preferred_locale_descr">Hizkuntz gogokoena maparen etiketentzat (erabilgarri ez badago izen Ingelesera edo lokalera aldatuko da)</string>
     <string name="live_monitoring_m_descr">Bidali jarraipena web zerbitzu espezifiko batera GPX grabazioa gaituta badago.</string>
@@ -1437,4 +1437,9 @@
     <string name="osm_live_subscription_settings">Harpidetzaren ezarpenak</string>
     <string name="upload_anonymously">Igo anonimo gisa</string>
     <string name="shared_string_widgets">Trepetak</string>
+    <string name="plugin_ski_name">Ski-mapa ikuspegia</string>
+	<string name="shared_string_photo">Argazkia</string>
+    <string name="route_points">Ibilibidearen puntuak</string>
+    <string name="shared_string_audio">Audioa</string>
+    <string name="shared_string_video">Bideoa</string>
     </resources>
