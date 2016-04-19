@@ -21,11 +21,14 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.BearingWidgetState;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.LanesControl;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.TimeControlWidgetState;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
 import java.lang.reflect.Field;
@@ -82,6 +85,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateReg(calculateTextState(), reg);
 	}
 
+	public void registerSideWidget(TextInfoWidget widget, WidgetState widgetState, String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, widgetState, key, left, priorityOrder);
+		updateReg(calculateTextState(), reg);
+	}
+
 	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {
 		return mapInfoControls.getSideWidget(cl);
 	}
@@ -120,9 +128,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget dist = ric.createDistanceControl(map);
 		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map);
-		registerSideWidget(time, R.drawable.ic_action_time, R.string.map_widget_time, "time", false, 10);
+		registerSideWidget(time, new TimeControlWidgetState(app), "time", false, 10);
 		TextInfoWidget bearing = ric.createBearingControl(map);
-		registerSideWidget(bearing, R.drawable.ic_action_bearing, R.string.map_widget_bearing, "bearing", false, 11);
+		registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 11);
 
 		if (settings.USE_MAP_MARKERS.get()) {
 			TextInfoWidget marker = mwf.createMapMarkerControl(map, true);

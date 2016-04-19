@@ -79,14 +79,6 @@ public class IconsCache {
 		return getDrawable(id, light ? R.color.icon_color : 0);
 	}
 
-	public void paintMenuItem(MenuItem menuItem) {
-		Drawable drawable = menuItem.getIcon();
-		drawable = DrawableCompat.wrap(drawable);
-		drawable.mutate();
-		int color = ContextCompat.getColor(app, getDefaultColorRes(app));
-		DrawableCompat.setTint(drawable, color);
-	}
-
 	@ColorRes
 	public static int getDefaultColorRes(Context context) {
 		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();

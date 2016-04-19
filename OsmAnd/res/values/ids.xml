@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="index_item" type="id"/>
+
+    <!-- Bearing widget ids-->
+    <item name="bearing_widget_state_relative_bearing" type="id"/>
+    <item name="bearing_widget_state_magnetic_bearing" type="id"/>
+    <!-- Time control widget ids-->
+    <item name="time_control_widget_state_arrival_time" type="id"/>
+    <item name="time_control_widget_state_time_to_go" type="id"/>
+
 </resources>

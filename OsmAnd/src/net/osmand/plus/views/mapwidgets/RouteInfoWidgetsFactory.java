@@ -27,7 +27,6 @@ import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -51,6 +50,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -196,11 +196,56 @@ public class RouteInfoWidgetsFactory {
 		// initial state 
 		return nextTurnInfo;
 	}
-	
-	
 
 
 
+	public static class TimeControlWidgetState extends WidgetState {
+
+		public static final int TIME_CONTROL_WIDGET_STATE_ARRIVAL_TIME = R.id.time_control_widget_state_arrival_time;
+		public static final int TIME_CONTROL_WIDGET_STATE_TIME_TO_GO = R.id.time_control_widget_state_time_to_go;
+
+		private final OsmandPreference<Boolean> showArrival;
+
+		public TimeControlWidgetState(OsmandApplication ctx) {
+			super(ctx);
+			showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+		}
+
+		@Override
+		public int getMenuTitleId() {
+			return showArrival.get() ? R.string.access_arrival_time : R.string.map_widget_time;
+		}
+
+		@Override
+		public int getMenuIconId() {
+			return showArrival.get() ? R.drawable.ic_action_time : R.drawable.ic_action_time_to_distance;
+		}
+
+		@Override
+		public int getMenuItemId() {
+			return showArrival.get() ? TIME_CONTROL_WIDGET_STATE_ARRIVAL_TIME : TIME_CONTROL_WIDGET_STATE_TIME_TO_GO;
+		}
+
+		@Override
+		public int[] getMenuTitleIds() {
+			return new int[]{R.string.access_arrival_time, R.string.map_widget_time};
+		}
+
+		@Override
+		public int[] getMenuIconIds() {
+			return new int[]{R.drawable.ic_action_time, R.drawable.ic_action_time_to_distance};
+		}
+
+		@Override
+		public int[] getMenuItemIds() {
+			return new int[]{TIME_CONTROL_WIDGET_STATE_ARRIVAL_TIME, TIME_CONTROL_WIDGET_STATE_TIME_TO_GO};
+		}
+
+		@Override
+		public void changeState(int stateId) {
+			showArrival.set(stateId == TIME_CONTROL_WIDGET_STATE_ARRIVAL_TIME);
+		}
+	}
 
 	public TextInfoWidget createTimeControl(final MapActivity map){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
@@ -508,6 +553,55 @@ public class RouteInfoWidgetsFactory {
 		return distanceControl;
 	}
 
+
+	public static class BearingWidgetState extends WidgetState {
+
+		public static final int BEARING_WIDGET_STATE_RELATIVE_BEARING = R.id.bearing_widget_state_relative_bearing;
+		public static final int BEARING_WIDGET_STATE_MAGNETIC_BEARING = R.id.bearing_widget_state_magnetic_bearing;
+
+		private final OsmandPreference<Boolean> showRelativeBearing;
+
+		public BearingWidgetState(OsmandApplication ctx) {
+			super(ctx);
+			showRelativeBearing = ctx.getSettings().SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING;
+		}
+
+		@Override
+		public int getMenuTitleId() {
+			return showRelativeBearing.get() ? R.string.map_widget_bearing : R.string.map_widget_magnetic_bearing;
+		}
+
+		@Override
+		public int getMenuIconId() {
+			return showRelativeBearing.get() ? R.drawable.ic_action_relative_bearing : R.drawable.ic_action_bearing;
+		}
+
+		@Override
+		public int getMenuItemId() {
+			return showRelativeBearing.get() ? BEARING_WIDGET_STATE_RELATIVE_BEARING : BEARING_WIDGET_STATE_MAGNETIC_BEARING;
+		}
+
+		@Override
+		public int[] getMenuTitleIds() {
+			return new int[]{R.string.map_widget_magnetic_bearing, R.string.map_widget_bearing};
+		}
+
+		@Override
+		public int[] getMenuIconIds() {
+			return new int[]{R.drawable.ic_action_bearing, R.drawable.ic_action_relative_bearing};
+		}
+
+		@Override
+		public int[] getMenuItemIds() {
+			return new int[]{BEARING_WIDGET_STATE_MAGNETIC_BEARING, BEARING_WIDGET_STATE_RELATIVE_BEARING};
+		}
+
+		@Override
+		public void changeState(int stateId) {
+			showRelativeBearing.set(stateId == BEARING_WIDGET_STATE_RELATIVE_BEARING);
+		}
+	}
+
 	public TextInfoWidget createBearingControl(final MapActivity map) {
 		final int bearingResId = R.drawable.widget_bearing_day;
 		final int bearingNightResId = R.drawable.widget_bearing_night;
@@ -526,7 +620,9 @@ public class RouteInfoWidgetsFactory {
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				int b = getBearing(showRelativeBearing.get());
+				boolean relative = showRelativeBearing.get();
+				setContentTitle(relative ? R.string.map_widget_bearing : R.string.map_widget_magnetic_bearing);
+				int b = getBearing(relative);
 				if (distChanged(cachedDegrees, b)) {
 					cachedDegrees = b;
 					if (b != -1000) {
@@ -590,15 +686,15 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public void onClick(View v) {
 				showRelativeBearing.set(!showRelativeBearing.get());
-				bearingControl.setIcons(showRelativeBearing.get() ? bearingResId : relativeBearingResId,
-						showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
+				bearingControl.setIcons(!showRelativeBearing.get() ? bearingResId : relativeBearingResId,
+						!showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
 				map.getMapView().refreshMap();
 			}
 
 		});
 		bearingControl.setText(null, null);
-		bearingControl.setIcons(showRelativeBearing.get() ? bearingResId : relativeBearingResId,
-				showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
+		bearingControl.setIcons(!showRelativeBearing.get() ? bearingResId : relativeBearingResId,
+				!showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
 		return bearingControl;
 	}
 	

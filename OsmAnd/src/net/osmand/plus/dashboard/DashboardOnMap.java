@@ -965,8 +965,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.MAP_MARKERS
-				|| visibleType == DashboardType.MAP_MARKERS_SELECTION || force) {
+		if (visibleType == DashboardType.WAYPOINTS
+				|| visibleType == DashboardType.MAP_MARKERS
+				|| visibleType == DashboardType.MAP_MARKERS_SELECTION
+				|| visibleType == DashboardType.CONFIGURE_SCREEN
+				|| force) {
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
