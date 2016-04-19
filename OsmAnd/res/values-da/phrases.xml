@@ -2793,4 +2793,8 @@
 	<string name="poi_health_facility_type_pharmacy">Sundhed facilitetstype: apotek</string>
 	<string name="poi_health_facility_type_first_aid">Sundhed facilitetstype: førstehjælp</string>
 	<string name="poi_health_facility_type_nursing_home">Sundhed facilitetstype: plejehjem</string>
-	</resources>
+	<string name="poi_health_facility_type_support_group_home">Sundhed facilitetstype: støttegruppe hjem</string>
+
+	<string name="poi_health_specialty_palliative_medicine_yes">Sundhedsspeciale: palliativ medicin</string>
+
+</resources>
