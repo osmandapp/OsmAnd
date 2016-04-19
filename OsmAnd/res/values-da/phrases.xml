@@ -2752,4 +2752,45 @@
 
 <string name="poi_sanitary_dump_station">Sanitær tømmestation</string>
 
-</resources>
+<string name="poi_medical_system_western_yes">Medicinsk system: vestlig</string>
+	<string name="poi_medical_system_chinese_yes">Medicinsk system: traditionel kinesisk</string>
+	<string name="poi_medical_system_unknown_yes">Medicinsk system: ukendt traditionel</string>
+	<string name="poi_medical_system_ayurveeda_yes">Medicinsk system: ayurveeda</string>
+	<string name="poi_medical_system_kampo_yes">Medicinsk system: kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Medicinsk system: traditionelt mongolsk</string>
+	<string name="poi_medical_system_tibetan_yes">Medicinsk system: traditionel tibetansk</string>
+	<string name="poi_medical_system_sidda_yes">Medicinsk system: sidda</string>
+	<string name="poi_medical_system_unani_yes">Medicinsk system: unani</string>
+
+	<string name="poi_health_service_nursing_yes">Sundhedsvæsen: sygepleje: ja</string>
+	<string name="poi_health_service_nursing_no">Sundhedsvæsen: sygepleje: nej</string>
+	<string name="poi_health_service_counselling_yes">Sundhedsvæsen: rådgivning: ja</string>
+	<string name="poi_health_service_counselling_no">Sundhedsvæsen: rådgivning: nej</string>
+	<string name="poi_health_service_examination_yes">Sundhedsvæsen: undersøgelse: ja</string>
+	<string name="poi_health_service_examination_no">Sundhedsvæsen: undersøgelse: nej</string>
+	<string name="poi_health_service_child_care_yes">Sundhedsvæsen: børnepasning: ja</string>
+	<string name="poi_health_service_child_care_no">Sundhedsvæsen: børnepasning: nej</string>
+	<string name="poi_health_service_prevention_yes">Sundhedsvæsen: forebyggelse: ja</string>
+	<string name="poi_health_service_prevention_no">Sundhedsvæsen: forebyggelse: nej</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Sundhedsvæsen: vaccination: ja</string>
+	<string name="poi_health_service_prevention_vaccination_no">Sundhedsvæsen: vaccination: nej</string>
+	<string name="poi_health_service_support_yes">Sundhedsvæsen: støtte: ja</string>
+	<string name="poi_health_service_support_no">Sundhedsvæsen: støtte: nej</string>
+	<string name="poi_health_service_test_yes">Sundhedsvæsen: test: ja</string>
+	<string name="poi_health_service_test_no">Sundhedsvæsen: test: nej</string>
+
+	<string name="poi_health_facility_type_office">Sundhed facilitetstype: kontor</string>
+	<string name="poi_health_facility_type_hospital">Sundhed facilitetstype: hospital</string>
+	<string name="poi_health_facility_type_field_hospital">Sundhed facilitetstype: felthospital</string>
+	<string name="poi_health_facility_type_clinic">Sundhed facilitetstype: klinik</string>
+	<string name="poi_health_facility_type_health_centre">Sundhed facilitetstype: sundhedscenter</string>
+	<string name="poi_health_facility_type_counselling_centre">Sundhed facilitetstype: rådgivningscenter</string>
+	<string name="poi_health_facility_type_rehabilitation">Sundhed facilitetstype: rehabilitering</string>
+	<string name="poi_health_facility_type_laboratory">Sundhed facilitetstype: laboratorium</string>
+	<string name="poi_health_facility_type_therapy">Sundhed facilitetstype: terapi</string>
+	<string name="poi_health_facility_type_department">Sundhed facilitetstype: institut</string>
+	<string name="poi_health_facility_type_dispensary">Sundhed facilitetstype: apotek</string>
+	<string name="poi_health_facility_type_pharmacy">Sundhed facilitetstype: apotek</string>
+	<string name="poi_health_facility_type_first_aid">Sundhed facilitetstype: førstehjælp</string>
+	<string name="poi_health_facility_type_nursing_home">Sundhed facilitetstype: plejehjem</string>
+	</resources>
