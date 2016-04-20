@@ -1079,7 +1079,6 @@
     <string name="use_magnetic_sensor">Naudoti magnetinį sensorių (kompasą)</string>
     <string name="use_kalman_filter_compass_descr">Sumažina kompaso triukšmą, tačiau prideda inertiškumo</string>
     <string name="use_kalman_filter_compass">Naudoti Kalmano filtrą</string>
-    <string name="access_mark_final_location_first">Prieigos režimas: pirmiausia pasirinkite kelionės tikslą</string>
     <string name="local_indexes_cat_srtm">Kontūrinės linijos</string>
     <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
     <string name="shared_string_downloading">Parsiunčiama</string>

@@ -1073,7 +1073,6 @@
     <string name="use_magnetic_sensor">Mágnesszenzor (iránytű) használata</string>
     <string name="use_kalman_filter_compass_descr">Csökkenti a zajt az iránytű olvasásakor, de hozzáadja a tehetetlenséget</string>
     <string name="use_kalman_filter_compass">Kálmán-szűrő használata</string>
-    <string name="access_mark_final_location_first">Kisegítő mód: előbb válassz célpontot</string>
 
     <string name="local_indexes_cat_srtm">Szintvonalak</string>
     <string name="wait_current_task_finished">Kérlek várd meg, amíg a jelenlegi befejeződik</string>

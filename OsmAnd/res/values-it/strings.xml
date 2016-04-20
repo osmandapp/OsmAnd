@@ -1072,7 +1072,6 @@
     <string name="local_indexes_cat_srtm">Linee isocline</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia</string>
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
-    <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string>
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
     <string name="plugin_distance_point_time">orario</string>
     <string name="plugin_distance_point_hdop">precisione</string>

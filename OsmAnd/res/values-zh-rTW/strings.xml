@@ -976,7 +976,6 @@
     <string name="recording_context_menu_arecord">錄取音訊附註</string>
     <string name="destination_point">目的地 ％1$S</string>
     <string name="local_osm_changes_backup_successful">OSM 變更的檔案已成功的產生 %1$s</string>
-    <string name="access_mark_final_location_first">無障礙模式：首先請選擇目的地</string>
     <string name="av_use_external_recorder_descr">視訊使用系統錄製</string>
     <string name="av_use_external_recorder">使用系統錄製</string>
     <string name="av_use_external_camera_descr">使用系統應用程式拍照</string>

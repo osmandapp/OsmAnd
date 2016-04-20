@@ -1057,7 +1057,6 @@
     <string name="use_magnetic_sensor_descr">Χρήση του μαγνητικού αισθητήρα για τον προσδιορισμό της ένδειξης της πυξίδας, αντί του αισθητήρα προσανατολισμού</string>
     <string name="use_kalman_filter_compass_descr">Μειώνει τον θόρυβο στην ανάγνωση της πυξίδας αλλά προσθέτει αδράνεια</string>
     <string name="use_kalman_filter_compass">Χρήση φίλτρου Kalman</string>
-    <string name="access_mark_final_location_first">Λειτουργία προσβασιμότητας: παρακαλώ επιλέξτε πρώτα προορισμό</string> 
     <string name="wait_current_task_finished">Παρακαλώ περιμένετε μέχρι να τελειώσει η τρέχουσα διεργασία</string>
     <string name="local_indexes_cat_srtm">Δεδομένα ισοϋψών γραμμών</string>
     <string name="shared_string_downloading">Λήψη</string>

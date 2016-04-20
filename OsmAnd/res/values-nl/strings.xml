@@ -1111,7 +1111,6 @@
     <string name="use_magnetic_sensor">Gebruik magnetische sensor</string>
     <string name="use_kalman_filter_compass_descr">Verminder storingen in het kompas (maakt de kompasweergave langzamer)</string>
     <string name="use_kalman_filter_compass">Gebruik Kalman-filter</string>
-    <string name="access_mark_final_location_first">Toegankelijkheidsmodus: kies eerst een bestemming</string> 
     <string name="local_indexes_cat_srtm">Hoogtelijnen</string>
 	<string name="wait_current_task_finished">Wacht alsjeblieft tot de huidige taak klaar is</string>
     <string name="delete_point">Verwijder punt</string>

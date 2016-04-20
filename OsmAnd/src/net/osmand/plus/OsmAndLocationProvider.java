@@ -836,7 +836,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return hint;
 	}
 
-	public boolean emitNavigationHint() {
+	public void emitNavigationHint() {
 		final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
 		if (point != null) {
 			if (app.getRoutingHelper().isRouteCalculated()) {
@@ -844,10 +844,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			} else {
 				app.showToastMessage(getNavigationHint(point));
 			}
-			return true;
 		} else {
-			app.showShortToastMessage(R.string.access_mark_final_location_first);
-			return false;
+			app.showShortToastMessage(R.string.access_no_destination);
 		}
 	}
 

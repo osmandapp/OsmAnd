@@ -1171,7 +1171,6 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="wait_current_task_finished">Aguarde até que a tarefa esteja concluída</string>
     <string name="use_kalman_filter_compass_descr">Use filtro Kalman para evitar aberrações na bússola</string>
     <string name="use_kalman_filter_compass">Use filtro Kalman</string>
-    <string name="access_mark_final_location_first">Modo de acessibilidade: selecione o destino primeiro</string> 
     <string name="use_magnetic_sensor_descr">use o sensor magnético para determinar a direção da bússola em vez do sensor de orientação</string>
     <string name="use_magnetic_sensor">Use sensor magnético</string>
     <string name="other_location">Outro</string>

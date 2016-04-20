@@ -90,7 +90,6 @@
     <string name="wait_current_task_finished">Калі ласка, пачакайце пакуль бягучая задача не будзе завершаная</string>
     <string name="use_kalman_filter_compass_descr">Зьніжае шум паказаньняў компасу, але дадае інэрцыю</string>
     <string name="use_kalman_filter_compass">Выкарыстоўваць фільтар Калмана</string>
-    <string name="access_mark_final_location_first">Рэжым даступнасьці: Калі ласка, спачатку абярыце пункт прызначэньня</string> 
     <string name="use_magnetic_sensor_descr">Выкарыстоўваць для працы компаса магнітны датчык замест датчыка арыентацыі</string>
     <string name="use_magnetic_sensor">Выкарыстоўваць магнітомэтр</string>
     <string name="other_location">Іншае</string>

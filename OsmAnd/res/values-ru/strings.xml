@@ -1016,7 +1016,6 @@
 \n* Нажмите и удерживайте на карте, чтобы удалить предыдущую точку.
 \n* Нажмите и удерживайте на точке, чтобы просмотреть и добавить описание.
 \n* Нажмите на виджет измерения, чтобы увидеть больше действий.</string>
-    <string name="access_mark_final_location_first">Режим доступности: Пожалуйста, выберите сначала пункт назначения</string>
     <string name="use_magnetic_sensor_descr">Использовать магнитный датчик вместо датчика ориентации</string>
     <string name="other_location">Другие</string>
     <string name="local_indexes_cat_srtm">Контурные линии</string>
@@ -2010,4 +2009,5 @@
     <string name="access_disable_offroute_recalc_descr">Предотвращает автоматический пересчет маршрута при значительном удалении от заданного пути</string>
     <string name="access_disable_wrong_direction_recalc">Не менять маршрут при неверном направлении движения</string>
     <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчет маршрута при неверном направлении движения</string>
+    <string name="access_no_destination">Пункт назначения не задан</string>
 </resources>

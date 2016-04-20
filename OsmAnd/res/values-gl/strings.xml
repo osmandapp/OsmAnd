@@ -455,7 +455,6 @@
     <string name="wait_current_task_finished">Agarde até que remate a tarefa actual</string>
     <string name="use_kalman_filter_compass_descr">Reduce o ruído nas lecturas do compás mais engade inercia</string>
     <string name="use_kalman_filter_compass">Empregar o filtro Kalman</string>
-    <string name="access_mark_final_location_first">Modo de accesibilidade: seleccione primeiro o destino</string> 
     <string name="use_magnetic_sensor_descr">Empregar o sensor magnético para determinar o valor do compás no canto do sensor de orientación</string>
     <string name="use_magnetic_sensor">Empregar o sensor magnético</string>
     <string name="other_location">Outra</string>

@@ -1154,7 +1154,6 @@
     <string name="wait_current_task_finished">გთხოვთ მოითმინოთ სანამ დასრულდება მიმდინარე ამოცანა</string>
     <string name="use_kalman_filter_compass_descr">კომპასის ცდომილებების თავიდან ასაცილებლად გამოიყენეთ კალმანის ფილტრი</string>
     <string name="use_kalman_filter_compass">კალმანის ფილტრის გამოყენება</string>
-    <string name="access_mark_final_location_first">მაღალი წვდომადობის რეჟიმი: გთხოვთ ჯერ აირჩიოთ დანიშნულების წერტილი</string> 
     <string name="use_magnetic_sensor_descr">კომპასის მნიშვნელობის გამოსათვლელად ორიენტაციის სენსორის მაგიერ მაგნიტური სენსორის გამოყენება</string>
     <string name="use_magnetic_sensor">მაგნიტური სენსორის გამოყენება</string>
     <string name="other_location">სხვა</string>

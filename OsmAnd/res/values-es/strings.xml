@@ -1014,7 +1014,6 @@
     <string name="shared_string_more_actions">Más acciones</string>
     <string name="use_kalman_filter_compass_descr">Reduce el ruido en las lecturas de la brújula pero añade inercia</string>
     <string name="use_kalman_filter_compass">Utilizar filtro Kalman</string>
-    <string name="access_mark_final_location_first">Modo Accesibilidad: seleccione el destino primero</string>
     <string name="use_magnetic_sensor_descr">Utiliza el sensor magnético para determinar el valor de la brújula en vez del sensor de orientación</string>
     <string name="use_magnetic_sensor">Utilizar sensor magnético</string>
     <string name="other_location">Otra</string>

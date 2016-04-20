@@ -81,7 +81,6 @@
   <string name="wait_current_task_finished">Mesedez itxaron uneko zeregina bukatu harte</string>
   <string name="use_kalman_filter_compass_descr">Kalman filtroa erabili konpasaren aberrazioak ekiditeko</string>
   <string name="use_kalman_filter_compass">Kalman filtroa erabili</string>
-  <string name="access_mark_final_location_first">Erabil-erraztasun modua: mesedez aukeratu helmuga lehendabizi</string>
   <string name="use_magnetic_sensor_descr">Konpasaren balioa erabakitzeko erabili sentsore magnetikoa orientazio sentsorearen ordez</string>
   <string name="use_magnetic_sensor">Sentsore magnetikoa erabili</string>
   <string name="other_location">Bestelakoa</string>

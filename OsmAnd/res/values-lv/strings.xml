@@ -1174,7 +1174,6 @@
     <string name="background_service_is_enabled_question">OsmAnd serviss turpinās darboties. Vai vēlaties to izslēgt?</string>
     <string name="app_modes_choose">Lietotāja režīmi</string>
 	
-    <string name="access_mark_final_location_first">Pieejamības režīms: lūdzu vispirms izvēlieties galamērķi</string> 
     <string name="app_modes_choose_descr">Izvēlētos lietotāja režīmus varēs lietot aplikācijā</string>
     <string name="app_mode_hiking">Iet kājām</string>
     <string name="app_mode_boat">Ūdens transports</string>

@@ -708,7 +708,6 @@
     <string name="wait_current_task_finished">Aguarde até que a tarefa seja concluída</string>
     <string name="use_kalman_filter_compass_descr">Reduzir o ruído em leituras da bússola, mas acrescenta a inércia</string>
     <string name="use_kalman_filter_compass">Usar filtro de Kalman</string>
-    <string name="access_mark_final_location_first">Modo de acessibilidade: selecione o destino primeiro</string> 
     <string name="use_magnetic_sensor_descr">Usar o sensor magnético para determinar a direção da bússola em vez do sensor de orientação</string>
     <string name="use_magnetic_sensor">Usar sensor magnético</string>
     <string name="other_location">Outro</string>

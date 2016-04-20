@@ -955,7 +955,6 @@
     <string name="use_kalman_filter_compass_descr">Sníží šum v hodnotách z kompasu, ale zpomalí změny směru</string>
     <string name="use_kalman_filter_compass">Použít Kalmanův filtr</string>
     <string name="use_magnetic_sensor">Používat magnetický senzor</string>
-    <string name="access_mark_final_location_first">Usnadnění: vyberte prosím nejdříve cíl</string>
     <string name="wait_current_task_finished">Čekejte prosím na dokončení úlohy</string>
     <string name="use_magnetic_sensor_descr">Použít magnetický senzor k určení směru místo senzoru natočení</string>
     <string name="cancel_route">Zrušit trasu</string>

@@ -962,7 +962,6 @@
     <string name="wait_current_task_finished">현재 작업이 완료 될 때까지 기다리십시오</string>
     <string name="use_kalman_filter_compass_descr">나침반 흔들림을 방지하기 위해 칼만 필터를 사용</string>
     <string name="use_kalman_filter_compass">칼만 필터 사용</string>
-    <string name="access_mark_final_location_first">접근성 모드 : 먼저 도착지를 선택하세요</string> 
     <string name="use_magnetic_sensor_descr">방위센서(GPS) 대신 나침반 값을 결정하는 지자기센서를 사용</string>
     <string name="use_magnetic_sensor">지자기센서를 사용</string>
     <string name="other_location">기타</string>

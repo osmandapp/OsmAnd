@@ -923,7 +923,6 @@
     <string name="wait_current_task_finished">Prosím, čakajte, kým sa dokončí aktuálna úloha</string>
     <string name="use_kalman_filter_compass_descr">Zníži šum v hodnotách z kompasu, ale spomalí zmeny smeru</string>
     <string name="use_kalman_filter_compass">Použiť Kalmanov filter</string>
-    <string name="access_mark_final_location_first">Režim zjednodušeného ovládania: prosím, najskôr vyberte cieľ</string>
     <string name="delete_point">Odstrániť bod</string>
     <string name="plugin_distance_point_time">čas</string>
     <string name="plugin_distance_point_hdop">presnosť</string>

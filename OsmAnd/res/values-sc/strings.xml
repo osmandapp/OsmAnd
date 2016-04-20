@@ -216,7 +216,6 @@
     <string name="wait_current_task_finished">Pro praghere iseta sa fine de su traballu presente</string>
     <string name="use_kalman_filter_compass_descr">Minimat s’abbolotu de sa bùssola ma annanghet inèrtzia/preìtia</string>
     <string name="use_kalman_filter_compass">Impreu de su filtru de Kalman</string>
-    <string name="access_mark_final_location_first">Modalidade de atzessu fatzilidadu: issebera in antis sa destinatzione</string>
     <string name="use_magnetic_sensor_descr">Imprea su sensore magneticu pro determinare su balore de sa bùssola imbetzes de su sensore de orientamentu</string>
     <string name="use_magnetic_sensor">Imprea su sensore magneticu (bùssola)</string>
     <string name="other_location">Àtera</string>

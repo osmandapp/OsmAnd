@@ -477,7 +477,6 @@
 	
     <string name="use_kalman_filter_compass_descr">يقلل الشوشرة في قراءة البوصلة ولكن يضيف قصور ذاتي</string>
     <string name="use_kalman_filter_compass">استخدم مُرشّح كالمان</string>
-    <string name="access_mark_final_location_first">نمط الإتاحة: اختر وجهتك أولًا رجاءً</string> 
     <string name="av_photo_play_sound">شغّل صوتًا عند التقاط صورة</string>
 	<string name="use_magnetic_sensor">استخدم الاستشعار المغناطيسي</string>
     <string name="av_widget_action_descr">حدد عمل الودجة الافتراضي</string>

@@ -709,7 +709,6 @@ POIの更新は利用できません</string>
     <string name="wait_current_task_finished">現在のタスクが終了するまでお待ちください</string>
     <string name="use_kalman_filter_compass_descr">慣性の追加を代償にして、電子コンパスの誤差を低減します</string>
     <string name="use_kalman_filter_compass">カルマンフィルタを使用</string>
-    <string name="access_mark_final_location_first">アクセシビリティモード:最初に目的地を選択して下さい</string> 
     <string name="use_magnetic_sensor_descr">回転センサーの代わりに磁気センサーの値をコンパスの値として使用します</string>
     <string name="use_magnetic_sensor">磁気センサーを使用</string>
     <string name="other_location">その他</string>

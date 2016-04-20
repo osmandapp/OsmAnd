@@ -768,7 +768,6 @@
     <string name="wait_current_task_finished">Mevcut görev bitene kadar bekleyin lütfen</string>
     <string name="use_kalman_filter_compass_descr">Pusula sapmalarından korunmak için Kalman filtresi kullan</string>
     <string name="use_kalman_filter_compass">Kalman filtresi kullan</string>
-    <string name="access_mark_final_location_first">Erişilebilirlik modu : lütfen önce varış noktası seçin</string> 
     <string name="use_magnetic_sensor_descr">pusula değerini belirlemek için yönlendirme sensörü yerine manyetik sensörü kullan</string>
     <string name="use_magnetic_sensor">Manyetik sensörü kullan</string>
     <string name="other_location">Diğer</string>

@@ -1018,7 +1018,6 @@
     <string name="choose_osmand_theme">App-tema</string>
     <string name="choose_osmand_theme_descr">Välj tema för applikationen</string>
     <string name="use_magnetic_sensor_descr">Använd magnetisk sensor för att bestämma kompassvärde i stället för orienteringssensor</string>
-    <string name="access_mark_final_location_first">Tillgänglighetsläge: välj destination först</string>
     <string name="accessibility_options">Tillgänglighetsalternativ</string>
     <string name="select_address_activity">Välj adress</string>
     <string name="favourites_list_activity">Välj favorit</string>

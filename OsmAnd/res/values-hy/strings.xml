@@ -29,7 +29,6 @@
     <string name="email">էլ-փոստ</string>
 <string name="use_kalman_filter_compass_descr">Օգտագործել Կալմանի ֆիլտրը կողմնացույցի սխելներից խուսափելու համար</string>
     <string name="use_kalman_filter_compass">Օգտագործել Կալմանի ֆիլտրը</string>
-    <string name="access_mark_final_location_first">Մատչելիության ռեժիմ: խնդրում ենք ընտրել ուղղություն</string> 
     <string name="use_magnetic_sensor_descr">Օգտագործեք մագնիսական սենսորը որոշելու կողմնացույցի ուղղությունը</string>
     <string name="use_magnetic_sensor">Օգտագործել մագնիսական սենսորը</string>
     <string name="other_location">Այլ</string>

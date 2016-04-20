@@ -179,7 +179,6 @@
 	<string name="local_osm_changes_backup">پشتیبان‌گیری به عنوان تغییرات OsmAnd</string>
     <string name="delete_point">حذف نقطه</string>
     <string name="use_kalman_filter_compass">استفاده از فیلتر کالمن</string>
-    <string name="access_mark_final_location_first">حالت دسترسی: لطفاً ابتدا مقصد را انتخاب نمایید</string> 
     <string name="cancel_route">لغو مسیر</string>
     <string name="max_speed_none">هیچ کدام</string>
     <string name="dropbox_plugin_name">افزونه دراپ باکس</string>

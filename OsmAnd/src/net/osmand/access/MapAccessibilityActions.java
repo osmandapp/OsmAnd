@@ -1,12 +1,9 @@
 package net.osmand.access;
 
-import net.osmand.data.LatLon;
+import android.graphics.PointF;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import android.graphics.PointF;
-import android.os.Build;
 
 // Accessibility actions for map view.
 public class MapAccessibilityActions implements AccessibilityActionsProvider {
@@ -19,15 +16,19 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
 
     @Override
     public boolean onClick(PointF point, RotatedTileBox tileBox) {
-        if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().accessibilityEnabled()) {
-        	// not sure if it is very clear why should I mark destination first when I tap on the object
-        	return activity.getMyApplication().getLocationProvider().emitNavigationHint();
+        if (activity.getMyApplication().accessibilityEnabled()) {
+            activity.getMyApplication().getLocationProvider().emitNavigationHint();
+            return true;
         }
         return false;
     }
 
     @Override
     public boolean onLongClick(PointF point, RotatedTileBox tileBox) {
+        if (activity.getMyApplication().accessibilityEnabled() && activity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+            activity.getMapLayers().getContextMenuLayer().showContextMenu(tileBox.getLatitude(), tileBox.getLongitude(), true);
+            return true;
+        }
         return false;
     }
 

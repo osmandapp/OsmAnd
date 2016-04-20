@@ -1085,7 +1085,6 @@
     <string name="wait_current_task_finished">Počakajte na končanje trenutne naloge</string>
     <string name="use_kalman_filter_compass_descr">Kalmanov filter je algoritem za ocenjevanje odstopanj položaja kompasa</string>
     <string name="use_kalman_filter_compass">Uporabi Kalmanov filter</string>
-    <string name="access_mark_final_location_first">Način dostopnosti: najprej je treba izbrati cilj</string>
     <string name="use_magnetic_sensor_descr">Za določanje vrednosti kompasa je treba namesto tipala za usmerjevanje uporabiti magnetno tipalo</string>
     <string name="cancel_route">Opusti pot</string>
     <string name="monitoring_settings_descr">Nastavitve beleženja potovanj in poti</string>

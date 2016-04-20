@@ -529,7 +529,6 @@
     <string name="wait_current_task_finished">Kalі laska, pačakajcie pakuĺ biahučaja zadača nie budzie zavieršanaja</string>
     <string name="use_kalman_filter_compass_descr">Vykarystoŭvać fіĺtar Kalmana kab praduchіlіć aberacyju kompasu</string>
     <string name="use_kalman_filter_compass">Vykarystoŭvać fіĺtar Kalmana</string>
-    <string name="access_mark_final_location_first">Režym dastupnaścі: Kalі laska, spačatku abiarycie punkt pryznačeńnia</string> 
     <string name="use_magnetic_sensor_descr">Vykarystoŭvać dlia pracy kompasa mahnіtny datčyk zamiest datčyka aryjentacyі</string>
     <string name="use_magnetic_sensor">Vykarystoŭvać mahnіtomietr</string>
     <string name="other_location">Іnšaje</string>
