@@ -622,13 +622,13 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean relative = showRelativeBearing.get();
-				setIcons(relative ? relativeBearingResId : bearingResId, relative ? relativeBearingNightResId : bearingNightResId);
+				boolean modeChanged = setIcons(relative ? relativeBearingResId : bearingResId, relative ? relativeBearingNightResId : bearingNightResId);
 				setContentTitle(relative ? R.string.map_widget_bearing : R.string.map_widget_magnetic_bearing);
 				int b = getBearing(relative);
-				if (distChanged(cachedDegrees, b)) {
+				if (degreesChanged(cachedDegrees, b) || modeChanged) {
 					cachedDegrees = b;
 					if (b != -1000) {
-						setText(String.valueOf(b) + "°", null);
+						setText(String.valueOf(b) + "°" + (relative ? "" : " M"), null);
 					} else {
 						setText(null, null);
 					}
@@ -688,9 +688,7 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public void onClick(View v) {
 				showRelativeBearing.set(!showRelativeBearing.get());
-				bearingControl.setIcons(!showRelativeBearing.get() ? bearingResId : relativeBearingResId,
-						!showRelativeBearing.get() ? bearingNightResId : relativeBearingNightResId);
-				map.getMapView().refreshMap();
+				map.refreshMap();
 			}
 
 		});
@@ -1198,10 +1196,14 @@ public class RouteInfoWidgetsFactory {
 	
 	
 	public static boolean distChanged(int oldDist, int dist){
-		if(oldDist != 0 && Math.abs(oldDist - dist) < 10){
+		if (oldDist != 0 && Math.abs(oldDist - dist) < 10) {
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean degreesChanged(int oldDegrees, int degrees){
+		return Math.abs(oldDegrees - degrees) >= 1;
 	}
 
 	public AlarmWidget createAlarmInfoControl(OsmandApplication app, MapActivity map) {
