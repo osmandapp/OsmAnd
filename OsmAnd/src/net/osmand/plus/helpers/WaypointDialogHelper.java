@@ -603,8 +603,7 @@ public class WaypointDialogHelper {
 		if (type == WaypointHelper.POI) {
 			v = ctx.getLayoutInflater().inflate(R.layout.drawer_list_radius_ex, null);
 			AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.titleEx), nightMode);
-			String descEx = waypointHelper.getPoiFilter() == null ? ctx.getString(R.string.poi) : waypointHelper
-					.getPoiFilter().getName();
+			String descEx = app.getPoiFilters().isShowingAnyPoi() ? ctx.getString(R.string.poi) : app.getPoiFilters().getSelectedPoiFiltersName();
 			((TextView) v.findViewById(R.id.title)).setText(ctx.getString(R.string.search_radius_proximity) + ":");
 			((TextView) v.findViewById(R.id.titleEx)).setText(ctx.getString(R.string.shared_string_type) + ":");
 			final TextView radiusEx = (TextView) v.findViewById(R.id.descriptionEx);
@@ -615,8 +614,7 @@ public class WaypointDialogHelper {
 					running[0] = position;
 					thisAdapter.notifyDataSetInvalidated();
 					MapActivity map = (MapActivity) ctx;
-					final PoiUIFilter[] selected = new PoiUIFilter[1];
-					AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
+					AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView());
 					dlg.setOnDismissListener(new OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
@@ -688,15 +686,14 @@ public class WaypointDialogHelper {
 	private void selectPoi(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
 						   final boolean enable, Activity ctx) {
 		if (ctx instanceof MapActivity &&
-				!PoiUIFilter.CUSTOM_FILTER_ID.equals(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get())) {
+				!app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.CUSTOM_FILTER_ID)) {
 			MapActivity map = (MapActivity) ctx;
-			final PoiUIFilter[] selected = new PoiUIFilter[1];
-			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
+			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView());
 			dlg.setOnDismissListener(new OnDismissListener() {
 
 				@Override
 				public void onDismiss(DialogInterface dialog) {
-					if (selected != null) {
+					if (app.getPoiFilters().isShowingAnyPoi()) {
 						enableType(running, listAdapter, type, enable);
 					}
 				}

@@ -4,6 +4,7 @@ package net.osmand.plus.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -257,7 +259,7 @@ public class MapActivityLayers {
 	}
 
 
-	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiUIFilter[] selected) {
+	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView) {
 		OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -274,36 +276,43 @@ public class MapActivityLayers {
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				PoiUIFilter pf = list.get(which);
-				String filterId = pf.getFilterId();
-				if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
+			public void onClick(DialogInterface dialog, int position) {
+                PoiUIFilter pf = list.get(position);
+                String filterId = pf.getFilterId();
+                if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
 					Intent search = new Intent(activity, SearchActivity.class);
 					search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
 					activity.startActivity(search);
-				} else {
-					pf = poiFilters.getFilterById(filterId);
-					if (pf != null) {
-						pf.setFilterByName(pf.getSavedFilterByName());
-					}
-					getApplication().getSettings().SELECTED_POI_FILTER_FOR_MAP.set(filterId);
-					mapView.refreshMap();
-					if (selected != null && selected.length > 0) {
-						selected[0] = pf;
-					}
 				}
 			}
-
 		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setTitle(R.string.show_poi_over_map)
+				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+                        mapView.refreshMap();
+					}
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null);
 		return builder.show();
 	}
 
-	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiUIFilter> list, PoiUIFilter f) {
+	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiUIFilter> list, final PoiUIFilter f) {
 		list.add(f);
 		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
+		builder.setListener(new ContextMenuAdapter.ItemClickListener() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+				if (isChecked)
+					getApplication().getPoiFilters().addSelectedPoiFilter(f);
+				else
+					getApplication().getPoiFilters().removeSelectedPoiFilter(f);
+				return true;
+			}
+		});
 		builder.setTitle(f.getName());
+		builder.setSelected(getApplication().getPoiFilters().isPoiFilterSelected(f));
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
 			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {

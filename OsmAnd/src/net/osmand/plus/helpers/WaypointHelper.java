@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.FloatMath;
@@ -538,10 +539,11 @@ public class WaypointHelper {
 
 
 	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints) {
-		PoiUIFilter pf = getPoiFilter();
-		if (pf != null) {
+		if (app.getPoiFilters().isShowingAnyPoi()) {
 			final List<Location> locs = route.getImmutableAllLocations();
-			List<Amenity> amenities = pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius);
+			List<Amenity> amenities = new ArrayList<>();
+			for (PoiUIFilter pf : app.getPoiFilters().getSelectedPoiFilters())
+                amenities.addAll(pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius));
 			for (Amenity a : amenities) {
 				AmenityRoutePoint rp = a.getRoutePoint();
 				int i = locs.indexOf(rp.pointA);
@@ -607,8 +609,8 @@ public class WaypointHelper {
 
 
 	/// 
-	public PoiUIFilter getPoiFilter() {
-		return app.getPoiFilters().getFilterById(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get());
+	public Set<PoiUIFilter> getPoiFilters() {
+		return app.getPoiFilters().getSelectedPoiFilters();
 	}
 
 	public boolean showPOI() {

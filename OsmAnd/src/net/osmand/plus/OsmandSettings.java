@@ -38,7 +38,9 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -48,6 +50,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 public class OsmandSettings {
 
@@ -2319,8 +2322,20 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
 	}
 
-
+	// Avoid using this property, probably you need to use PoiFiltersHelper.getSelectedPoiFilters()
 	public final OsmandPreference<String> SELECTED_POI_FILTER_FOR_MAP = new StringPreference("selected_poi_filter_for_map", null).makeGlobal().cache();
+
+	public Set<String> getSelectedPoiFilters() {
+		Set<String> result = new LinkedHashSet<>();
+		String filtersId = SELECTED_POI_FILTER_FOR_MAP.get();
+		if (filtersId != null)
+			Collections.addAll(result, filtersId.split(","));
+		return result;
+	}
+
+	public void setSelectedPoiFilters(final Set<String> poiFilters) {
+		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
+	}
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 

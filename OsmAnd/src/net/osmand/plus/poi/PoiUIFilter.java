@@ -33,8 +33,9 @@ import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
-public class PoiUIFilter implements SearchPoiTypeFilter {
+public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter> {
 	
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
@@ -61,7 +62,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	protected String filterByName = null;
 	protected String savedFilterByName = null;
 	protected List<Amenity> currentSearchResult = null;
-	
+
 	// constructor for standard filters
 	public PoiUIFilter(AbstractPoiType type, OsmandApplication application, String idSuffix) {
 		this.app = application;
@@ -97,12 +98,12 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 		this.app = app;
 		isStandardFilter = false;
 		poiTypes = app.getPoiTypes();
-		if(filterId == null){
+		if (filterId == null) {
 			filterId = USER_PREFIX + name.replace(' ', '_').toLowerCase();
 		}
 		this.filterId = filterId;
 		this.name = name;
-		if(acceptedTypes == null){
+		if (acceptedTypes == null) {
 			initSearchAll();
 		} else {
 			this.acceptedTypes.putAll(acceptedTypes);
@@ -123,7 +124,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	
 	public void updateFilterResults() {
 		List<Amenity> prev = currentSearchResult;
-		if(prev != null) {
+		if (prev != null) {
 			AmenityNameFilter nameFilter = getNameFilter(filterByName);
 			List<Amenity> newResults = new ArrayList<Amenity>();
 			for(Amenity a : prev) {
@@ -151,7 +152,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	
 	public List<Amenity> searchAgain(double lat, double lon) {
 		List<Amenity> amenityList ;
-		if(currentSearchResult != null) {
+		if (currentSearchResult != null) {
 			amenityList = currentSearchResult;
 		} else {
 			amenityList = searchAmenities(lat, lon, null);
@@ -162,7 +163,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	
 
 	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher){
-		if(distanceInd < distanceToSearchValues.length - 1){
+		if (distanceInd < distanceToSearchValues.length - 1) {
 			distanceInd ++;
 		}
 		List<Amenity> amenityList = searchAmenities( latitude, longitude, matcher);
@@ -450,8 +451,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 		}
 		return false;
 	}
-	
-	
+
 	public void updateTypesToAccept(AbstractPoiType pt) {
 		pt.putTypes(acceptedTypes);
 		if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
@@ -466,7 +466,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
 			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
 		}
-		if(pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
+		if (pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
 			for(PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
 				fillPoiAdditionals(ps);
 			}
@@ -508,7 +508,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	}
 	
 	public void setTypeToAccept(PoiCategory poiCategory, boolean b) {
-		if(b) {
+		if (b) {
 			acceptedTypes.put(poiCategory, null);
 		} else {
 			acceptedTypes.remove(poiCategory);
@@ -525,9 +525,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	}
 	
 	public String getIconId(){
-		if(filterId.startsWith(STD_PREFIX)) {
+		if (filterId.startsWith(STD_PREFIX)) {
 			return standardIconId;
-		} else if(filterId.startsWith(USER_PREFIX)) {
+		} else if (filterId.startsWith(USER_PREFIX)) {
 			return filterId.substring(USER_PREFIX.length()).toLowerCase();
 		}
 		return filterId;
@@ -547,17 +547,17 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	
 	@Override
 	public boolean accept(PoiCategory type, String subtype) {
-		if(type == null) {
+		if (type == null) {
 			return true;
 		}
-		if(!poiTypes.isRegisteredType(type)) {
+		if (!poiTypes.isRegisteredType(type)) {
 			type = poiTypes.getOtherPoiCategory();
 		}
-		if(!acceptedTypes.containsKey(type)){
+		if (!acceptedTypes.containsKey(type)){
 			return false;
 		}
 		LinkedHashSet<String> set = acceptedTypes.get(type);
-		if(set == null){
+		if (set == null){
 			return true;
 		}
 		return set.contains(subtype);
@@ -568,7 +568,14 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 		return acceptedTypes.isEmpty();
 	}
 
-	
+	@Override
+	public int compareTo(@NonNull PoiUIFilter another) {
+		if (another.filterId.equals(this.filterId))
+			return 0;
+		else
+            return this.name.compareTo(another.name);
+	}
+
 	public interface AmenityNameFilter {
 		
 		public boolean accept(Amenity a) ;

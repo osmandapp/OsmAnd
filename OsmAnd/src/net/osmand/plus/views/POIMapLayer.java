@@ -83,16 +83,13 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private OsmandMapTileView view;
 	private final static int MAXIMUM_SHOW_AMENITIES = 5;
 
-	private ResourceManager resourceManager;
 	private RoutingHelper routingHelper;
-	private PoiUIFilter filter;
+	private Set<PoiUIFilter> filters = new TreeSet<>();
 	private MapTextLayer mapTextLayer;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private MapLayerData<List<Amenity>> data;
-
-	private OsmandSettings settings;
 
 	private OsmandApplication app;
 
@@ -100,7 +97,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public POIMapLayer(final MapActivity activity) {
 		routingHelper = activity.getRoutingHelper();
 		routingHelper.addListener(this);
-		settings = activity.getMyApplication().getSettings();
 		app = activity.getMyApplication();
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
 			{
@@ -120,24 +116,26 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				if (filter == null || latLonBounds == null) {
+				if (filters.isEmpty() || latLonBounds == null) {
 					return new ArrayList<>();
 				}
 				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
 
-				List<Amenity> res = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
-						latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {
+				List<Amenity> res = new ArrayList<>();
+				for (PoiUIFilter filter : filters)
+					res.addAll(filter.searchAmenities(latLonBounds.top, latLonBounds.left,
+							latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {
 
-							@Override
-							public boolean publish(Amenity object) {
-								return true;
-							}
+								@Override
+								public boolean publish(Amenity object) {
+									return true;
+								}
 
-							@Override
-							public boolean isCancelled() {
-								return isInterrupted();
-							}
-						});
+								@Override
+								public boolean isCancelled() {
+									return isInterrupted();
+								}
+							}));
 
 				Collections.sort(res, new Comparator<Amenity>() {
 					@Override
@@ -197,7 +195,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);
 		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield_small);
 
-		resourceManager = view.getApplication().getResourceManager();
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
@@ -221,14 +218,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (!Algorithms.objectEquals(this.settings.SELECTED_POI_FILTER_FOR_MAP.get(),
-				filter == null ? null : filter.getFilterId())) {
-			if (this.settings.SELECTED_POI_FILTER_FOR_MAP.get() == null) {
-				this.filter = null;
-			} else {
-				PoiFiltersHelper pfh = app.getPoiFilters();
-				this.filter = pfh.getFilterById(this.settings.SELECTED_POI_FILTER_FOR_MAP.get());
-			}
+		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
+		if (!this.filters.equals(selectedPoiFilters)) {
+            this.filters = new TreeSet<>(selectedPoiFilters);
 			data.clearCache();
 		}
 
@@ -236,7 +228,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		List<Amenity> fullObjects = new ArrayList<>();
 		List<LatLon> fullObjectsLatLon = new ArrayList<>();
 		List<LatLon> smallObjectsLatLon = new ArrayList<>();
-		if (filter != null) {
+		if (!filters.isEmpty()) {
 			if (tileBox.getZoom() >= startZoom) {
 				data.queryNewData(tileBox);
 				objects = data.getResults();
@@ -313,16 +305,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, String text, String title) {
 		showText(ctx, app, text, title);
-	}
-
-	public static String getSelectedPoiName(OsmandApplication app) {
-		PoiFiltersHelper pfh = app.getPoiFilters();
-		String filterId = app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get();
-		if (filterId == null) {
-			return app.getResources().getString(R.string.shared_string_none);
-		}
-		PoiUIFilter filter = pfh.getFilterById(filterId);
-		return filter.getName();
 	}
 
 	static int getResIdFromAttribute(final Context ctx, final int attr) {
@@ -490,7 +472,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		optionsMenu.show();
 
 	}
-
 
 	@Override
 	public String getObjectDescription(Object o) {
