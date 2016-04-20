@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -106,6 +107,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private Float heading = null;
 
 	private SearchAmenityTask currentSearchTask = null;
+	private AccessibilityAssistant accessibilityAssistant;
 	
 	private OsmandApplication app;
 	private MenuItem showFilterItem;
@@ -219,6 +221,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		setListAdapter(amenityAdapter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		searchFilter = (EditText) findViewById(R.id.searchEditText);
+		accessibilityAssistant = new AccessibilityAssistant(this);
 		searchFilter.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
@@ -508,7 +511,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		float lastHeading = heading != null ? heading : 99;
 		heading = value;
 		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			accessibilityAssistant.lockEvents();
 			amenityAdapter.notifyDataSetChanged();
+			accessibilityAssistant.unlockEvents();
 		} else {
 			heading = lastHeading;
 		}
@@ -771,6 +776,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, app.getSettings().MAP_PREFERRED_LOCALE.get());
 			label.setText(poiType);
 			distanceText.setText(distance);
+			row.setAccessibilityDelegate(accessibilityAssistant);
 			return (row);
 		}
 

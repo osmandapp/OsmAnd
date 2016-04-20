@@ -94,6 +94,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		View view = inflater.inflate(R.layout.local_index, container, false);
 
 		getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+		getDownloadActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.LOCAL_TAB_NUMBER);
 
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new LocalIndexesAdapter(getDownloadActivity());
