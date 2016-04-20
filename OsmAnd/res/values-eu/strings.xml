@@ -69,7 +69,7 @@
   <string name="gpx_file_name">GPX fitxategi izena</string>
   <string name="gpx_saved_sucessfully">GPX fitxategia arrakastaz gorde da {0}</string>
   <string name="osmand_distance_planning_plugin_description">Bideak sortu (edo erabili / eraldatu iadanik sortutako GPX fitxategiak) puntuen harteko distantzia neurtzeko. GPX bezala gorde, GPX bideak planifikatzeko erabili daiteke.</string>
-  <string name="osmand_distance_planning_plugin_name">Distantzia kalkulagailua &amp; Planifikatzailea</string>
+  <string name="osmand_distance_planning_plugin_name">Distantzia kalkulagailua eta planifikatzailea</string>
   <string name="use_distance_measurement_help">* Pantailan sakatu puntu bat markatzeko.\n * Mapan sakatuta mantendu iadanik dagoen puntu bat ezabatzeko.\n * Puntu batean sakatuta mantendu deskribapena ikusi eta atxikitzeko.\n * Neurgailuan klik egin ekintza gehiago ikusteko.</string>
   <string name="shared_string_do_not_show_again">Ez erakutsi berriro</string>
   <string name="distance_measurement_start_editing">Editatzen hasi</string>
@@ -112,7 +112,7 @@
   
   
   <string name="layer_hillshade">Erliebe geruza</string>
-  <string name="map_widget_gps_info">GPS info</string>
+  <string name="map_widget_gps_info">GPS informazioa</string>
   
   <string name="access_arrival_time">Iritsiera denbora</string>
   <string name="item_checked">aukeratua</string>
@@ -443,7 +443,7 @@
   <string name="accessibility_mode">Erabilerraztasun modua</string>
   <string name="accessibility_mode_descr">Erabilerraztasun ezaugarriak gaitu</string>
   <string name="shared_string_on">On</string>
-  <string name="shared_string_off">Off</string>
+  <string name="shared_string_off">Ezgaituta</string>
   <string name="accessibility_default">Sistemako ezarpen orokorraren arabera</string>
   <string name="backToMenu">Menura Itzuli</string>
   <string name="zoomOut">Urrundu</string>
@@ -972,7 +972,7 @@
   <string name="address">Helbidea</string>
   <string name="shared_string_download_successful">Deskarga arrakastatsua</string>
   
-  <string name="shared_string_downloading">Deskargatzen…</string>
+  <string name="shared_string_downloading">Deskargatzen</string>
   
   <string name="downloading_list_indexes">Eskugarri dauden eskualdeen zerrenda deskargatzen…</string>
   <string name="list_index_files_was_not_loaded">Eskualdeen zerrenda ez da osmand.net-en aurkitu.</string>
@@ -1110,7 +1110,7 @@
   <string name="add_favorite_dialog_favourite_added_template">Gogokoen \"{0}\" puntua arrakastaz gehitu da.</string>
   <string name="favourites_context_menu_edit">Gogokoena editatu</string>
   <string name="favourites_context_menu_delete">Gogokoena ezabatu</string>
-  <string name="favourites_remove_dialog_msg">Ezabatu \'%s\' gogokoen puntua?</string>
+  <string name="favourites_remove_dialog_msg">Ezabatu \'%s\' gogoko puntua?</string>
   <string name="favourites_remove_dialog_success">{0} punto gogokoena arrakastaz ezabatu da.</string>
   
   
@@ -1170,8 +1170,8 @@
     <string name="keep_and_add_destination_point">Helmuga puntua bezala gehitu</string>
     <string name="select_gpx">Aukeratu GPX …</string>
     <string name="route_descr_select_destination">Aukeratu Helmuga</string>
-    <string name="shared_string_select_on_map">Aukeratu mapan …</string>
-    <string name="shared_string_favorite">Gogokoena …</string>
+    <string name="shared_string_select_on_map">Aukeratu mapan</string>
+    <string name="shared_string_favorite">Gogokoa</string>
     <string name="route_preferences">Ibilbide lehentasunak</string>
     <string name="route_info">Ibilbide informazioa</string>
     <string name="routing_attr_prefer_motorway_name">Autopistak nahiago</string>
@@ -1441,4 +1441,11 @@
     <string name="route_points">Ibilibidearen puntuak</string>
     <string name="shared_string_audio">Audioa</string>
     <string name="shared_string_video">Bideoa</string>
+    <string name="access_no_destination">Ez da helburua zehaztu</string>
+    <string name="access_disable_offroute_recalc">Ez aldatu ibilbidea honetatik kanpo banago ere</string>
+    <string name="access_disable_offroute_recalc_descr">Eragotzi ibilibidearen birkalkulatze automatikoa bide zuzenetik oso urrun zudenean</string>
+    <string name="access_disable_wrong_direction_recalc">Ez aldatu ibilbidea okerreko noranzkoan</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Eragotzi ibilibidearen birkalkulatze automatikoa okerreko noranzkoak mugitzen zaudenean</string>
+    <string name="access_default_color">Lehenetsitako kolorea</string>
+    <string name="access_category_choice">Hautatu kategoria</string>
     </resources>
