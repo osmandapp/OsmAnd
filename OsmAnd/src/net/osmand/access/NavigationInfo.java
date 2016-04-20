@@ -4,21 +4,27 @@ package net.osmand.access;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.access.RelativeDirectionStyle;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavigationInfo {
+public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationListener {
 
 	private static final float FULL_CIRCLE = 360.0f;
 
@@ -95,6 +101,22 @@ public class NavigationInfo {
 			}
 		}
 
+		public Integer getInclination() {
+			if (value < 0) // unknown direction
+				return null;
+			final int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
+			final int halfRound = nSectors / 2;
+			if (value == halfRound) // opposite direction
+				return null;
+			if (value > halfRound)
+				return value - nSectors;
+			return value;
+		}
+
+		protected int getValue() {
+			return value;
+		}
+
 		// The first argument must be not null as well as the currentLocation.
 		private int directionTo(final Location point, float heading) {
 			final float bearing = currentLocation.bearingTo(point) - heading;
@@ -124,12 +146,16 @@ public class NavigationInfo {
 			R.string.north_west,
 			R.string.north_north_west};
 
+	private final long HAPTIC_INCLINATION_LEFT[] = { 0, 60 };
+	private final long HAPTIC_INCLINATION_RIGHT[] = { 0, 20, 80, 20 };
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private Location currentLocation;
 	private RelativeDirection lastDirection;
 	private long lastNotificationTime;
 	private volatile boolean autoAnnounce;
+	private volatile boolean targetDirectionFlag;
 
 	public NavigationInfo(OsmandApplication app) {
 		this.app = app;
@@ -138,6 +164,7 @@ public class NavigationInfo {
 		lastDirection = new RelativeDirection();
 		lastNotificationTime = SystemClock.uptimeMillis();
 		autoAnnounce = false;
+		targetDirectionFlag = false;
 	}
 
 	private String getString(int id) {
@@ -217,7 +244,8 @@ public class NavigationInfo {
 		return null;
 	}
 
-	public synchronized void setLocation(Location location) {
+	@Override
+	public synchronized void updateLocation(Location location) {
 		currentLocation = location;
 		if (autoAnnounce && app.accessibilityEnabled()) {
 			final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
@@ -243,6 +271,67 @@ public class NavigationInfo {
 					lastDirection.clear();
 				}
 			}
+		}
+	}
+
+	public synchronized void updateTargetDirection(final Location point, float heading) {
+		if ((currentLocation != null) && (point != null)) {
+			RelativeDirection direction = new RelativeDirection(point, heading);
+			Integer inclination = direction.getInclination();
+			if (targetDirectionFlag && ((inclination == null) || (inclination != 0))) {
+				targetDirectionFlag = false;
+				if (settings.DIRECTION_AUDIO_FEEDBACK.get()) {
+					AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class);
+					if (accessibilityPlugin != null) {
+						if (inclination == null) {
+							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.DIRECTION_NOTIFICATION);
+						} else if (inclination > 0) {
+							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.INCLINATION_LEFT);
+						} else {
+							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.INCLINATION_RIGHT);
+						}
+					}
+				}
+				if (settings.DIRECTION_HAPTIC_FEEDBACK.get()) {
+					Vibrator haptic = (Vibrator)app.getSystemService(Context.VIBRATOR_SERVICE);
+					if ((haptic != null) && haptic.hasVibrator()) {
+						if (inclination == null) {
+							haptic.vibrate(200);
+						} else if (inclination > 0) {
+							haptic.vibrate(HAPTIC_INCLINATION_LEFT, -1);
+						} else {
+							haptic.vibrate(HAPTIC_INCLINATION_RIGHT, -1);
+						}
+					}
+				}
+			} else if ((!targetDirectionFlag) && (direction.getValue() == 0)) {
+				targetDirectionFlag = true;
+			}
+		}
+	}
+
+	public synchronized void updateTargetDirection(final LatLon point, float heading) {
+		if (point != null) {
+			Location destination = new Location("map"); //$NON-NLS-1$
+			destination.setLatitude(point.getLatitude());
+			destination.setLongitude(point.getLongitude());
+			updateTargetDirection(destination, heading);
+		}
+	}
+
+	@Override
+	public synchronized void updateCompassValue(float heading) {
+		RoutingHelper router = app.getRoutingHelper();
+		if (router.isFollowingMode() && router.isRouteCalculated()) {
+			synchronized (router) {
+				NextDirectionInfo nextDirection = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+				if (nextDirection != null) {
+					updateTargetDirection(router.getLocationFromRouteDirection(nextDirection.directionInfo), heading);
+				}
+			}
+		} else {
+			TargetPoint target = app.getTargetPointsHelper().getPointToNavigate();
+			updateTargetDirection((target != null) ? target.point : null, heading);
 		}
 	}
 
