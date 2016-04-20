@@ -124,18 +124,16 @@ public class NavigationInfo {
 			R.string.north_west,
 			R.string.north_north_west};
 
-	private final OsmandApplication context;
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private Location currentLocation;
 	private RelativeDirection lastDirection;
 	private long lastNotificationTime;
 	private volatile boolean autoAnnounce;
-	private OsmandApplication app;
 
 	public NavigationInfo(OsmandApplication app) {
 		this.app = app;
-		this.context = app;
-		settings = this.context.getSettings();
+		settings = app.getSettings();
 		currentLocation = null;
 		lastDirection = new RelativeDirection();
 		lastNotificationTime = SystemClock.uptimeMillis();
@@ -143,12 +141,12 @@ public class NavigationInfo {
 	}
 
 	private String getString(int id) {
-		return context.getString(id);
+		return app.getString(id);
 	}
 
 	// The argument must be not null as well as the currentLocation
 	private String distanceString(final Location point) {
-		return OsmAndFormatter.getFormattedDistance(currentLocation.distanceTo(point), context);
+		return OsmAndFormatter.getFormattedDistance(currentLocation.distanceTo(point), app);
 	}
 
 	// The argument must be not null as well as the currentLocation
@@ -188,7 +186,7 @@ public class NavigationInfo {
 	// Get current travelling speed and direction
 	public synchronized String getSpeedString() {
 		if ((currentLocation != null) && currentLocation.hasSpeed()) {
-			String result = OsmAndFormatter.getFormattedSpeed(currentLocation.getSpeed(), context);
+			String result = OsmAndFormatter.getFormattedSpeed(currentLocation.getSpeed(), app);
 			if (currentLocation.hasBearing())
 				result += " " + absoluteDirectionString(currentLocation.getBearing()); //$NON-NLS-1$
 			return result;
@@ -202,7 +200,7 @@ public class NavigationInfo {
 		if (currentLocation != null) {
 			String provider = currentLocation.getProvider();
 			if (currentLocation.hasAccuracy())
-				result = getString(R.string.accuracy) + " " + OsmAndFormatter.getFormattedDistance(currentLocation.getAccuracy(), context); //$NON-NLS-1$
+				result = getString(R.string.accuracy) + " " + OsmAndFormatter.getFormattedDistance(currentLocation.getAccuracy(), app); //$NON-NLS-1$
 			if (result != null)
 				result += " (" + provider + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 			else
@@ -215,13 +213,13 @@ public class NavigationInfo {
 	public synchronized String getAltitudeString() {
 		if ((currentLocation != null) && currentLocation.hasAltitude())
 			return getString(R.string.altitude)
-					+ " " + OsmAndFormatter.getFormattedDistance((float) currentLocation.getAltitude(), context); //$NON-NLS-1$
+					+ " " + OsmAndFormatter.getFormattedDistance((float) currentLocation.getAltitude(), app); //$NON-NLS-1$
 		return null;
 	}
 
 	public synchronized void setLocation(Location location) {
 		currentLocation = location;
-		if (autoAnnounce && context.accessibilityEnabled()) {
+		if (autoAnnounce && app.accessibilityEnabled()) {
 			final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
 			if (point != null) {
 				if ((currentLocation != null) && currentLocation.hasBearing()) {
@@ -236,7 +234,7 @@ public class NavigationInfo {
 							app.runInUIThread(new Runnable() {
 								@Override
 								public void run() {
-									context.showToastMessage(notification);
+									app.showToastMessage(notification);
 								}
 							});
 						}
