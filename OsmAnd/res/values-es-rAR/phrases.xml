@@ -2719,4 +2719,51 @@
 
 	<string name="poi_solarium">Centro de bronceado (solarium)</string>
 
+<string name="poi_sanitary_dump_station">Estación sanitaria de descarga</string>
+
+	<string name="poi_medical_system_western_yes">Sistema médico: Occidental</string>
+	<string name="poi_medical_system_chinese_yes">Sistema médico: Chino tradicional</string>
+	<string name="poi_medical_system_unknown_yes">Sistema médico: Desconocido</string>
+	<string name="poi_medical_system_ayurveeda_yes">Sistema médico: Ayurveda</string>
+	<string name="poi_medical_system_kampo_yes">Sistema médico: Kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Sistema médico: Mongol tradicional</string>
+	<string name="poi_medical_system_tibetan_yes">Sistema médico: Tibetano tradicional</string>
+	<string name="poi_medical_system_sidda_yes">Sistema médico: Sidda</string>
+	<string name="poi_medical_system_unani_yes">Sistema médico: Unani</string>
+
+	<string name="poi_health_service_nursing_yes">Servicio de salud: Con enfermería</string>
+	<string name="poi_health_service_nursing_no">Servicio de salud: Sin enfermería</string>
+	<string name="poi_health_service_counselling_yes">Servicio de salud: Con asesoramiento</string>
+	<string name="poi_health_service_counselling_no">Servicio de salud: Sin asesoramiento</string>
+	<string name="poi_health_service_examination_yes">Servicio de salud: Con revisión médica</string>
+	<string name="poi_health_service_examination_no">Servicio de salud: Sin revisión médica</string>
+	<string name="poi_health_service_child_care_yes">Servicio de salud: Con cuidados para niños</string>
+	<string name="poi_health_service_child_care_no">Servicio de salud: Sin cuidados para niños</string>
+	<string name="poi_health_service_prevention_yes">Servicio de salud: Con prevención</string>
+	<string name="poi_health_service_prevention_no">Servicio de salud: Sin prevención</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Servicio de salud: Con vacunación</string>
+	<string name="poi_health_service_prevention_vaccination_no">Servicio de salud: Sin vacunación</string>
+	<string name="poi_health_service_support_yes">Servicio de salud: Con ayuda</string>
+	<string name="poi_health_service_support_no">Servicio de salud: Sin ayuda</string>
+	<string name="poi_health_service_test_yes">Servicio de salud: Con pruebas</string>
+	<string name="poi_health_service_test_no">Servicio de salud: Sin pruebas</string>
+
+	<string name="poi_health_facility_type_office">Tipo de instalación médica: Oficina</string>
+	<string name="poi_health_facility_type_hospital">Tipo de instalación médica: Hospital</string>
+	<string name="poi_health_facility_type_field_hospital">Tipo de instalación médica: Hospital de campaña</string>
+	<string name="poi_health_facility_type_clinic">Tipo de instalación médica: Clínica</string>
+	<string name="poi_health_facility_type_health_centre">Tipo de instalación médica: Centro de salud</string>
+	<string name="poi_health_facility_type_counselling_centre">Tipo de instalación médica: Centro de asesoramiento</string>
+	<string name="poi_health_facility_type_rehabilitation">Tipo de instalación médica: Rehabilitación</string>
+	<string name="poi_health_facility_type_laboratory">Tipo de instalación médica: Laboratorio</string>
+	<string name="poi_health_facility_type_therapy">Tipo de instalación médica: Terapia</string>
+	<string name="poi_health_facility_type_department">Tipo de instalación médica: Departamento</string>
+	<string name="poi_health_facility_type_dispensary">Tipo de instalación médica: Dispensario</string>
+	<string name="poi_health_facility_type_pharmacy">Tipo de instalación médica: Farmacia</string>
+	<string name="poi_health_facility_type_first_aid">Tipo de instalación médica: Primeros auxilios</string>
+	<string name="poi_health_facility_type_nursing_home">Tipo de instalación médica: Geriátrico</string>
+	<string name="poi_health_facility_type_support_group_home">Tipo de instalación médica: Grupo de ayuda en casa</string>
+
+	<string name="poi_health_specialty_palliative_medicine_yes">Tipo de instalación médica: Medicina paliativa</string>
+
 </resources>
