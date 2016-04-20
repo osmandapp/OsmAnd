@@ -29,7 +29,7 @@ public class PoiFiltersHelper {
 	private final OsmandApplication application;
 	
 	private NominatimPoiFilter nominatimPOIFilter;
-	private NominatimPoiFilter nominatimAddresFilter;
+	private NominatimPoiFilter nominatimAddressFilter;
 	
 	private PoiUIFilter searchByNamePOIFilter;
 	private PoiUIFilter customPOIFilter;
@@ -37,7 +37,6 @@ public class PoiFiltersHelper {
 	private PoiUIFilter localWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters;
 
-	
 	private static final String UDF_CAR_AID = "car_aid";
 	private static final String UDF_FOR_TOURISTS = "for_tourists";
 	private static final String UDF_FOOD_SHOP = "food_shop";
@@ -45,7 +44,7 @@ public class PoiFiltersHelper {
 	private static final String UDF_SIGHTSEEING = "sightseeing";
 	private static final String UDF_EMERGENCY = "emergency";
 	private static final String UDF_PUBLIC_TRANSPORT = "public_transport";
-	private static final String UDF_ACCOMMODATION = "accomodation";
+	private static final String UDF_ACCOMMODATION = "accommodation";
 	private static final String UDF_RESTAURANTS = "restaurants";
 	private static final String UDF_PARKING = "parking";
 	
@@ -66,10 +65,10 @@ public class PoiFiltersHelper {
 	}
 	
 	public NominatimPoiFilter getNominatimAddressFilter() {
-		if(nominatimAddresFilter == null){
-			nominatimAddresFilter = new NominatimPoiFilter(application, true);
+		if(nominatimAddressFilter == null){
+			nominatimAddressFilter = new NominatimPoiFilter(application, true);
 		}
-		return nominatimAddresFilter;
+		return nominatimAddressFilter;
 	}
 	
 	public PoiUIFilter getSearchByNamePOIFilter() {
