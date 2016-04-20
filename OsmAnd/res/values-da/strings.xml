@@ -2358,4 +2358,5 @@
     <string name="access_smart_autoannounce">Smart autoannoncering</string>
     <string name="map_widget_bearing">Relativ kurs</string>
     <string name="map_widget_magnetic_bearing">Magnetisk kurs</string>
+    <string name="access_no_destination">Destination er ikke angivet</string>
     </resources>
