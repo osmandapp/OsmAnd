@@ -2178,4 +2178,5 @@
     <string name="access_autoannounce_period_descr">在播報之間的最短時間間隔</string>
     <string name="map_widget_bearing">相對方位</string>
     <string name="map_widget_magnetic_bearing">磁力方位</string>
+    <string name="access_no_destination">未設定目的地</string>
     </resources>
