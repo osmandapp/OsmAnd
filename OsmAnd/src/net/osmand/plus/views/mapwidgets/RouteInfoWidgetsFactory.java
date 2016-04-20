@@ -260,6 +260,7 @@ public class RouteInfoWidgetsFactory {
 			
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
+				setIcons(showArrival.get() ? time : timeToGo, showArrival.get() ? timeN : timeToGoN);
 				int time = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated()) {
 					//boolean followingMode = routingHelper.isFollowingMode();
@@ -621,6 +622,7 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean relative = showRelativeBearing.get();
+				setIcons(relative ? relativeBearingResId : bearingResId, relative ? relativeBearingNightResId : bearingNightResId);
 				setContentTitle(relative ? R.string.map_widget_bearing : R.string.map_widget_magnetic_bearing);
 				int b = getBearing(relative);
 				if (distChanged(cachedDegrees, b)) {
