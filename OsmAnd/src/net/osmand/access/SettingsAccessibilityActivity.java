@@ -96,6 +96,11 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.DISABLE_WRONG_DIRECTION_RECALC, R.string.access_disable_wrong_direction_recalc,
 				R.string.access_disable_wrong_direction_recalc_descr));
 
+		cat.addPreference(createCheckBoxPreference(settings.DIRECTION_AUDIO_FEEDBACK, R.string.access_direction_audio_feedback,
+				R.string.access_direction_audio_feedback_descr));
+		cat.addPreference(createCheckBoxPreference(settings.DIRECTION_HAPTIC_FEEDBACK, R.string.access_direction_haptic_feedback,
+				R.string.access_direction_haptic_feedback_descr));
+
 		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
 	}

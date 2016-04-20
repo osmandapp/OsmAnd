@@ -2010,4 +2010,8 @@
     <string name="access_disable_wrong_direction_recalc">Не менять маршрут при неверном направлении движения</string>
     <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчет маршрута при неверном направлении движения</string>
     <string name="access_no_destination">Пункт назначения не задан</string>
+    <string name="access_direction_audio_feedback">Звуковая индикация направления</string>
+    <string name="access_direction_audio_feedback_descr">Индицировать звуком направление на целевую точку</string>
+    <string name="access_direction_haptic_feedback">Тактильная индикация направления</string>
+    <string name="access_direction_haptic_feedback_descr">Индицировать вибрацией направление на целевую точку</string>
 </resources>

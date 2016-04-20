@@ -10,6 +10,10 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="access_direction_audio_feedback">Direction audio feedback</string>
+    <string name="access_direction_audio_feedback_descr">Indicate target point direction by sound</string>
+    <string name="access_direction_haptic_feedback">Direction haptic feedback</string>
+    <string name="access_direction_haptic_feedback_descr">Indicate target point direction by vibration</string>
     <string name="access_no_destination">Destination is not set</string>
     <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>

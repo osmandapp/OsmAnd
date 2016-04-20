@@ -225,6 +225,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		USE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
+		addLocationListener(navigationInfo);
+		addCompassListener(navigationInfo);
 	}
 
 	public void resumeAllUpdates() {
@@ -367,7 +369,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return null;
 	}
 
-	public void registerOrUnregisterCompassListener(boolean register) {
+	public synchronized void registerOrUnregisterCompassListener(boolean register) {
 		if (sensorRegistered && !register) {
 			Log.d(PlatformUtil.TAG, "Disable sensor"); //$NON-NLS-1$
 			((SensorManager) app.getSystemService(Context.SENSOR_SERVICE)).unregisterListener(this);
@@ -440,6 +442,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return;
 		}
 		synchronized (this) {
+			if (!sensorRegistered) {
+				return;
+			}
 			inUpdateValue = true;
 			try {
 				float val = 0;
@@ -544,7 +549,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 	}
 	
-	public Float getHeading() {
+	public synchronized Float getHeading() {
 //		if (heading != null && lastValSin != avgValSin && System.currentTimeMillis() - lastHeadingCalcTime > 700) {
 //			avgValSin = lastValSin;
 //			avgValCos = lastValCos;
@@ -641,9 +646,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public void pauseAllUpdates() {
 		stopLocationRequests();
-		SensorManager sensorMgr = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-		sensorMgr.unregisterListener(this);
-		sensorRegistered = false;
+		registerOrUnregisterCompassListener(false);
 	}
 
 	public static net.osmand.Location convertLocation(Location l, OsmandApplication app) {
@@ -750,8 +753,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		app.getSavingTrackHelper().updateLocation(location);
 		OsmandPlugin.updateLocationPlugins(location);
-		// 2. accessibility routing
-		navigationInfo.setLocation(location);
 		app.getRoutingHelper().updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
 	}
@@ -782,10 +783,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			app.getSavingTrackHelper().updateLocation(location);
 			OsmandPlugin.updateLocationPlugins(location);
 		}
-		// 2. accessibility routing
-		navigationInfo.setLocation(location);
 
-		// 3. routing
+		// 2. routing
 		net.osmand.Location updatedLocation = location;
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || isPointAccurateForRouting(location)) {
