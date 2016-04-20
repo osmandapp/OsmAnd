@@ -2764,6 +2764,6 @@
 	<string name="poi_health_facility_type_nursing_home">Tipo de instalación médica: Geriátrico</string>
 	<string name="poi_health_facility_type_support_group_home">Tipo de instalación médica: Grupo de ayuda en casa</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Tipo de instalación médica: Medicina paliativa</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Especialidad médica: Medicina paliativa</string>
 
 </resources>
