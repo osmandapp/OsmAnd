@@ -84,10 +84,15 @@ public class TextInfoWidget  {
 		topImageView.invalidate();
 	}
 	
-	public void setIcons(int widgetDayIcon, int widgetNightIcon) {
-		dayIcon = widgetDayIcon;
-		nightIcon = widgetNightIcon;
-		setImageDrawable(!isNight ? dayIcon : nightIcon);
+	public boolean setIcons(int widgetDayIcon, int widgetNightIcon) {
+		if (dayIcon != widgetDayIcon || nightIcon != widgetNightIcon) {
+			dayIcon = widgetDayIcon;
+			nightIcon = widgetNightIcon;
+			setImageDrawable(!isNight ? dayIcon : nightIcon);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean isNight() {
@@ -210,9 +215,4 @@ public class TextInfoWidget  {
 		tv.setTextColor(textColor);
 		tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 	}
-
-	
-
-	
-	
 }

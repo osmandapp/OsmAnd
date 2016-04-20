@@ -419,6 +419,7 @@ public class MapWidgetRegistry {
 							final int[] menuTitleIds = r.getMessageIds();
 							final int[] menuItemIds = r.getItemIds();
 							int checkedId = r.getItemId();
+							boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
 							if (menuIconIds != null && menuTitleIds != null && menuItemIds != null
 									&& menuIconIds.length == menuTitleIds.length && menuIconIds.length == menuItemIds.length) {
 								for (int i = 0; i < menuIconIds.length; i++) {
@@ -427,7 +428,7 @@ public class MapWidgetRegistry {
 									int id = menuItemIds[i];
 									MenuItem menuItem = menu.add(R.id.single_selection_group, id, i, titleId)
 											.setChecked(id == checkedId);
-									menuItem.setIcon(menuItem.isChecked()
+									menuItem.setIcon(menuItem.isChecked() && selected
 											? ic.getIcon(iconId, R.color.osmand_orange) : ic.getThemedIcon(iconId));
 								}
 								menu.setGroupCheckable(R.id.single_selection_group, true, true);
