@@ -76,6 +76,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			groupId = "";
 		}
 		activity = (DownloadActivity) getActivity();
+		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));

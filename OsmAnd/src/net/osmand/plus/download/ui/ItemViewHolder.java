@@ -83,7 +83,10 @@ public class ItemViewHolder {
 		descrTextView = (TextView) view.findViewById(R.id.description);
 		rightImageButton = (ImageView) view.findViewById(R.id.rightImageButton);
 		nameTextView = (TextView) view.findViewById(R.id.name);
-		
+
+		view.setAccessibilityDelegate(context.getAccessibilityAssistant());
+		rightButton.setAccessibilityDelegate(context.getAccessibilityAssistant());
+		rightImageButton.setAccessibilityDelegate(context.getAccessibilityAssistant());
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = context.getTheme();

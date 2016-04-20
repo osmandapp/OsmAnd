@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.WorldRegion;
@@ -101,6 +102,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ViewPager viewPager;
+	private AccessibilityAssistant accessibilityAssistant;
 	private String filter;
 	private String filterCat;
 	private String filterGroup;
@@ -123,6 +125,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (!indexes.isDownloadedFromInternet) {
 			getDownloadThread().runReloadIndexFiles();
 		}
+		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download);
 		//noinspection ConstantConditions
@@ -155,6 +158,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 		mSlidingTabLayout.setViewPager(viewPager);
+		mSlidingTabLayout.setOnPageChangeListener(accessibilityAssistant);
 
 		viewPager.setCurrentItem(currentTab);
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
@@ -170,6 +174,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public DownloadIndexesThread getDownloadThread() {
 		return downloadThread;
+	}
+
+	public AccessibilityAssistant getAccessibilityAssistant() {
+		return accessibilityAssistant;
 	}
 
 	@Override
@@ -246,6 +254,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	@UiThread
 	public void downloadInProgress() {
+		if (accessibilityAssistant.isUiUpdateDiscouraged())
+			return;
+		accessibilityAssistant.lockEvents();
 		visibleBanner.updateBannerInProgress();
 		showDownloadWorldMapIfNeeded();
 		for (WeakReference<Fragment> ref : fragSet) {
@@ -254,6 +265,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				((DownloadEvents) f).downloadInProgress();
 			}
 		}
+		accessibilityAssistant.unlockEvents();
 	}
 
 
