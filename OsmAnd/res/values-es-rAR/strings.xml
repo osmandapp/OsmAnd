@@ -2167,5 +2167,6 @@
     <string name="access_smart_autoannounce_descr">Notifica sólo cuando se cambia la dirección al destino</string>
     <string name="access_autoannounce_period">Período de aviso automático</string>
     <string name="access_autoannounce_period_descr">Lapso de tiempo mínimo entre avisos</string>
-    <string name="map_widget_bearing">Rumbo</string>
+    <string name="map_widget_bearing">Rumbo relativo</string>
+    <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
     </resources>
