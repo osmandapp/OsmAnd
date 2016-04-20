@@ -2029,4 +2029,6 @@
     <string name="access_smart_autoannounce_descr">Oznamovať len ak sa smer k cieľu zmenil</string>
     <string name="access_autoannounce_period">Interval šikovného oznamovania</string>
     <string name="access_autoannounce_period_descr">Minimálny čas medzi oznamami</string>
+    <string name="access_no_destination">Cieľ nie je určený</string>
+    <string name="map_widget_magnetic_bearing">Magnetické smerovanie</string>
     </resources>
