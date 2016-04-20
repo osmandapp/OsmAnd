@@ -512,6 +512,12 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 					new PointDescription(PointDescription.POINT_TYPE_WPT, child.locationStart.name),
 					false,
 					child.locationStart);
+		} else if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					new PointDescription(PointDescription.POINT_TYPE_WPT, child.name),
+					false,
+					child.locationStart);
 		} else {
 			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 					settings.getLastKnownMapZoom(),
