@@ -459,7 +459,7 @@
     <string name="waypoint_visit_before">Viziti antaŭe</string>
     <string name="simulate_your_location">Simuli vian pozicion</string>
     <string name="drawer">Plata listo</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Oftaj demandoj, lastaj ŝanĝoj, kaj aliaj</string>
     <string name="shared_string_do_not_use">Ne uzi</string>
     <string name="shared_string_selected_lowercase">elektitaj</string>
@@ -628,9 +628,9 @@
     <string name="announce_gpx_waypoints">GPX-aj navigadpunktoj</string>
     <string name="download_additional_maps">Ĉu elŝuti mankajn mapojn de %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Esplori mapon</string>
-    <string name="rendering_value_car_name">Aŭto</string>
-    <string name="rendering_value_bicycle_name">Biciklo</string>
-    <string name="rendering_value_pedestrian_name">Perpiedanto</string>
+    <string name="rendering_value_car_name">Aŭte</string>
+    <string name="rendering_value_bicycle_name">Bicikle</string>
+    <string name="rendering_value_pedestrian_name">Perpiede</string>
     <string name="osmo_invite">Inviti…</string>
     <string name="rendering_attr_coloredBuildings_name">Kolor-kodigi domojn laŭspece</string>
     <string name="osmo_leave_confirmation_msg">Ĉu vi volas forlasi grupon %1$s?</string>
@@ -816,7 +816,7 @@
     <string name="localization_pref_title">Loko</string>
     <string name="index_item_nation_addresses">adresoj tutmondaj</string>
     <string name="index_item_world_altitude_correction">Korekto de altitudo</string>
-    <string name="index_item_world_seamarks">Mondaj maraj navigadpunktoj</string>
+    <string name="index_item_world_seamarks">Tutmondaj maraj navigadpunktoj</string>
     <string name="access_category_choice">Elektu kategorion</string>
     <string name="access_hint_enter_name">Entajpu nomon</string>
     <string name="access_hint_enter_category">Entajpu kategorion</string>
@@ -846,4 +846,22 @@
     <string name="rendering_value_thin_name">Maldika</string>
     <string name="rendering_value_medium_name">Meza</string>
     <string name="rendering_value_bold_name">Dika</string>
+    <string name="access_no_destination">Finpunkto ne estas precizigita</string>
+    <string name="index_item_world_bitcoin_payments">Tutmondaj Bitmono-pageblaj lokoj</string>
+    <string name="index_item_world_basemap">Fundamenta mapo de mondo</string>
+    <string name="index_item_world_ski">Tutmondaj skivojoj</string>
+    <string name="calculate_osmand_route_without_internet">Loke kalkuli segmenton de OsmAnd-a kurso</string>
+    <string name="use_displayed_track_for_navigation">Ĉu vi volas uzi montratan kurson por navigado?</string>
+    <string name="gpx_option_calculate_first_last_segment">Kalkuli OsmAnd-an kurson por unua kaj fina segmentoj de kurso</string>
+    <string name="keep_and_add_destination_point">Aldoni kiel finpunkto</string>
+    <string name="select_gpx">Elekti GPX-on…</string>
+    <string name="route_descr_select_destination">Elekti celon</string>
+    <string name="route_preferences">Kursaj agordoj</string>
+    <string name="route_info">Informoj pri kurso</string>
+    <string name="routing_attr_prefer_motorway_name">Preferi aŭtovojojn</string>
+    <string name="routing_attr_prefer_motorway_description">Preferas aŭtovojojn</string>
+    <string name="routing_attr_short_way_name">La plej kurta vojo</string>
+    <string name="routing_attr_short_way_description">Uzas la plej mallogan vojon</string>
+    <string name="routing_attr_avoid_toll_name">Eviti pagendajn vojojn</string>
+    <string name="routing_attr_avoid_toll_description">Evitas pagendajn vojojn</string>
     </resources>
