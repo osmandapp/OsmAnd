@@ -2168,4 +2168,5 @@
     <string name="access_autoannounce_period_descr">Lapso de tiempo mínimo entre avisos</string>
     <string name="map_widget_bearing">Rumbo relativo</string>
     <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
+    <string name="access_no_destination">No se fijó el destino</string>
     </resources>
