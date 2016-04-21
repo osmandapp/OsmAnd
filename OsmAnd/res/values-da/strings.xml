@@ -2340,7 +2340,7 @@
     <string name="access_hint_enter_category">Angiv kategori</string>
     <string name="access_hint_enter_description">Angiv beskrivelse</string>
     <string name="access_map_linked_to_location">Kort er forbundet til placering</string>
-    <string name="access_collapsed_list">Sammenfoldet liste</string>
+    <string name="access_collapsed_list">Minineret liste</string>
     <string name="access_expanded_list">Udvidet liste</string>
     <string name="access_empty_list">Tom liste</string>
     <string name="access_tree_list">Hierarkisk liste</string>
@@ -2349,7 +2349,7 @@
     <string name="access_shared_string_navigate_up">Navigere op</string>
     <string name="access_sort">Sorter</string>
     <string name="access_disable_offroute_recalc">Ændre ikke ruten, ved afvigelse væk fra vejen</string>
-    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk genberegning af ruten, ved bevægelse ret langt fra den rette vej</string>
+    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk genberegning ved afvigelse fra ruten</string>
     <string name="access_disable_wrong_direction_recalc">Ændre ikke ruten ved forkert retning</string>
     <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk genberegning af ruten, ved bevægelse i den forkerte retning</string>
     <string name="access_smart_autoannounce_descr">Underret kun når retning til målpunktet ændres</string>
