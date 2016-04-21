@@ -2817,11 +2817,11 @@
 	<string name="poi_health_person_type_podologist">Rolle af sundhedspersonale: podologist</string>
 	<string name="poi_health_person_type_psychologist">Rolle af sundhedspersonale: psykolog</string>
 	<string name="poi_health_person_type_therapist">Rolle af sundhedspersonale: terapeut</string>
-	<string name="poi_health_person_type_physician_assitant">Rolle af sundhedspersonale: læge assistant</string>
+	<string name="poi_health_person_type_physician_assitant">Rolle af sundhedspersonale: lægeassistant</string>
 	<string name="poi_health_person_type_technician">Rolle af sundhedspersonale: tekniker</string>
 	<string name="poi_health_person_type_witchdoctor">Rolle af sundhedspersonale: heksedoktor</string>
 
-	<string name="poi_counselling_type_addiction_yes">Rådgivning (afhængighed): Ja</string>
+	<string name="poi_counselling_type_addiction_yes">Rådgivning (afhængighed): ja</string>
 	<string name="poi_counselling_type_addiction_no">Rådgivning (afhængighed): nej</string>
 	<string name="poi_counselling_type_antenatal_yes">Rådgivning (før fødslen): ja</string>
 	<string name="poi_counselling_type_antenatal_no">Rådgivning (før fødslen): nej</string>
