@@ -2856,4 +2856,44 @@
 	<string name="poi_counselling_type_violence_yes">Rådgivning (vold): ja</string>
 	<string name="poi_counselling_type_violence_no">Rådgivning (vold): nej</string>
 
-</resources>
+<string name="poi_capacity_beds">Kapacitet (senge)</string>
+
+	<string name="poi_counselling_yes">Rådgivning: ja</string>
+	<string name="poi_counselling_no">Rådgivning: nej</string>
+	<string name="poi_emergency_yes">Nødsituation: ja</string>
+	<string name="poi_emergency_no">Nødsituation: nej</string>
+	<string name="poi_home_visit_yes">Hjemmebesøg: ja</string>
+	<string name="poi_home_visit_no">Hjemmebesøg: nej</string>
+
+	<string name="poi_disease_malaria_yes">Malaria: ja</string>
+	<string name="poi_disease_malaria_no">Malaria: nej</string>
+	<string name="poi_disease_ebola_yes">Ebola: ja</string>
+	<string name="poi_disease_ebola_no">Ebola: nej</string>
+	<string name="poi_disease_autism_yes">Autisme: ja</string>
+	<string name="poi_disease_autism_no">Autisme: nej</string>
+	<string name="poi_disease_aids_yes">AIDS: ja</string>
+	<string name="poi_disease_aids_no">AIDS: nej</string>
+
+<string name="poi_provided_for_infant_yes">Stillet til rådighed for spædbørn: ja</string>
+	<string name="poi_provided_for_infant_no">Stillet til rådighed for spædbørn: nej</string>
+	<string name="poi_provided_for_toddler_yes">Stillet til rådighed for småbørn: ja</string>
+	<string name="poi_provided_for_toddler_no">"Stillet til rådighed for småbørn:  nej"</string>
+	<string name="poi_provided_for_child_yes">Stillet til rådighed for børn: ja</string>
+	<string name="poi_provided_for_child_no">Stillet til rådighed for børn: nej</string>
+	<string name="poi_provided_for_adult_yes">Stillet til rådighed for voksne: ja</string>
+	<string name="poi_provided_for_adult_no">Stillet til rådighed for voksne: nej</string>
+	<string name="poi_provided_for_woman_yes">Stillet til rådighed for kvinder: ja</string>
+	<string name="poi_provided_for_woman_no">Stillet til rådighed for kvinder: nej</string>
+	<string name="poi_provided_for_senior_yes">Stillet til rådighed for seniorer: ja</string>
+	<string name="poi_provided_for_senior_no">Stillet til rådighed for seniorer: nej</string>
+	<string name="poi_provided_for_girl_yes">Stillet til rådighed for piger: ja</string>
+	<string name="poi_provided_for_girl_no">Stillet til rådighed for piger: nej</string>
+	<string name="poi_provided_for_man_yes">Stillet til rådighed for mænd: ja</string>
+	<string name="poi_provided_for_man_no">Stillet til rådighed for mænd: nej</string>
+	<string name="poi_provided_for_boy_yes">Stillet til rådighed for drenge: ja</string>
+	<string name="poi_provided_for_boy_no">Stillet til rådighed for drenge: nej</string>
+
+	<string name="poi_treat_inpatient_yes">Indlæggelse: ja</string>
+	<string name="poi_treat_inpatient_no">Indlæggelse: nej</string>
+	<string name="poi_treat_inpatient_only">Indlæggelse: eksklusiv</string>
+	</resources>
