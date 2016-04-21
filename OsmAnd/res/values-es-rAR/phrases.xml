@@ -2770,4 +2770,59 @@
 
 	<string name="poi_fire_hydrant_type_underground">Tipo: Subterráneo</string>
 	<string name="poi_fire_hydrant_type_pillar">Tipo: Poste</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Tipo: Columna seca</string>
+	<string name="poi_fire_hydrant_type_pond">Tipo: Estanque</string>
+	<string name="poi_fire_hydrant_type_wall">Tipo: De pared</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Botiquín de primeros auxilios</string>
+	<string name="poi_health_amenity_type_scales">Escalas públicas</string>
+
+	<string name="poi_health_person_type_assistant">Rol del trabajador de la salud: Asistente</string>
+	<string name="poi_health_person_type_healer">Rol del trabajador de la salud: Curandero</string>
+	<string name="poi_health_person_type_midwife">Rol del trabajador de la salud: Partera</string>
+	<string name="poi_health_person_type_nurse">Rol del trabajador de la salud: Enfermera/o</string>
+	<string name="poi_health_person_type_paramedic">Rol del trabajador de la salud: Paramédico</string>
+	<string name="poi_health_person_type_physician">Rol del trabajador de la salud: Médico</string>
+	<string name="poi_health_person_type_podologist">Rol del trabajador de la salud: Podólogo</string>
+	<string name="poi_health_person_type_therapist">Rol del trabajador de la salud: Terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Rol del trabajador de la salud: Asistente médico</string>
+	<string name="poi_health_person_type_technician">Rol del trabajador de la salud: Técnico</string>
+	<string name="poi_health_person_type_witchdoctor">Rol del trabajador de la salud: Brujo</string>
+
+	<string name="poi_counselling_type_addiction_yes">Asesoramiento (adicción): Sí</string>
+	<string name="poi_counselling_type_addiction_no">Asesoramiento (adicción): No</string>
+	<string name="poi_counselling_type_antenatal_yes">Asesoramiento (prenatal): Sí</string>
+	<string name="poi_counselling_type_antenatal_no">Asesoramiento (prenatal): No</string>
+	<string name="poi_counselling_type_child_guidance_yes">Asesoramiento (orientación infantil): Sí</string>
+	<string name="poi_counselling_type_child_guidance_no">Asesoramiento (orientación infantil): No</string>
+	<string name="poi_counselling_type_couple_yes">Asesoramiento (pareja): Sí</string>
+	<string name="poi_counselling_type_couple_no">Asesoramiento (pareja): No</string>
+	<string name="poi_counselling_type_crisis_yes">Asesoramiento (crisis): Sí</string>
+	<string name="poi_counselling_type_crisis_no">Asesoramiento (crisis): No</string>
+	<string name="poi_counselling_type_drugs_yes">Asesoramiento (drogas): Sí</string>
+	<string name="poi_counselling_type_drugs_no">Asesoramiento (drogas): No</string>
+	<string name="poi_counselling_type_education_yes">Asesoramiento (educación): Sí</string>
+	<string name="poi_counselling_type_education_no">Asesoramiento (educación): No</string>
+	<string name="poi_counselling_type_family_yes">Asesoramiento (familiar): Sí</string>
+	<string name="poi_counselling_type_family_no">Asesoramiento (familiar): No</string>
+	<string name="poi_counselling_type_homeless_yes">Asesoramiento (sin hogar): Sí</string>
+	<string name="poi_counselling_type_homeless_no">Asesoramiento (sin hogar): No</string>
+	<string name="poi_counselling_type_immigrant_yes">Asesoramiento (inmigrantes): Sí</string>
+	<string name="poi_counselling_type_immigrant_no">Asesoramiento (inmigrantes): No</string>
+	<string name="poi_counselling_type_marriage_yes">Asesoramiento (matrimonio): Sí</string>
+	<string name="poi_counselling_type_marriage_no">Asesoramiento (matrimonio): No</string>
+	<string name="poi_counselling_type_nutrition_yes">Asesoramiento (nutrición): Sí</string>
+	<string name="poi_counselling_type_nutrition_no">Asesoramiento (nutrición): No</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Asesoramiento (rehabilitación): Sí</string>
+	<string name="poi_counselling_type_rehabilitation_no">Asesoramiento (rehabilitación): No</string>
+	<string name="poi_counselling_type_sexual_yes">Asesoramiento (sexual): Sí</string>
+	<string name="poi_counselling_type_sexual_no">Asesoramiento (sexual): No</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Asesoramiento (abuso sexual): Sí</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Asesoramiento (abuso sexual): No</string>
+	<string name="poi_counselling_type_victim_yes">Asesoramiento (víctimas): Sí</string>
+	<string name="poi_counselling_type_victim_no">Asesoramiento (víctimas): No</string>
+	<string name="poi_counselling_type_violence_yes">Asesoramiento (violencia): Sí</string>
+	<string name="poi_counselling_type_violence_no">Asesoramiento (violencia): No</string>
+
+<string name="poi_health_person_type_psychologist">Rol del trabajador en salud: Psicólogo</string>
 	</resources>
