@@ -2707,4 +2707,24 @@
 	<string name="poi_health_facility_type_nursing_home">Gesundheit-Einrichtungstyp: Pflegeheim</string>
 	<string name="poi_health_facility_type_support_group_home">Gesundheit-Einrichtungstyp: Selbsthilfegruppe</string>
 
+	<string name="poi_disease_malaria_yes">Malaria: Ja</string>
+	<string name="poi_disease_malaria_no">Malaria: Nein</string>
+	<string name="poi_disease_ebola_yes">Ebola: Ja</string>
+	<string name="poi_disease_autism_yes">Autismus: Ja</string>
+	<string name="poi_disease_aids_yes">AIDS: Ja</string>
+	<string name="poi_disease_aids_no">AIDS: Nein</string>
+
+<string name="poi_health_service_support_yes">Gesundheitswesen: Unterstützung: Ja</string>
+	<string name="poi_health_service_support_no">Gesundheitswesen: Unterstützung: Nein</string>
+	<string name="poi_suction_point">Saugpunkt</string>
+
+	<string name="poi_fire_hydrant_type_underground">Typ: Untergrund</string>
+	<string name="poi_fire_hydrant_type_pillar">Typ: Säule</string>
+	<string name="poi_fire_hydrant_type_pond">Typ: Teich</string>
+	<string name="poi_fire_hydrant_type_wall">Typ: Wand</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Erste Hilfe Kasten</string>
+	<string name="poi_health_amenity_type_scales">Öffentliche Waagen</string>
+
+	<string name="poi_health_person_type_assistant">Rolle des Gesundheitspersonals: Assistent</string>
 	</resources>
