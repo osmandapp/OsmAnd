@@ -2797,4 +2797,12 @@
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Sundhedsspeciale: palliativ medicin</string>
 
+<string name="poi_suction_point">Sugepunkt</string>
+
+	<string name="poi_fire_hydrant_type_underground">Type: underjordisk</string>
+	<string name="poi_fire_hydrant_type_pillar">Type: søjle</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Type: dry barrel</string>
+	<string name="poi_fire_hydrant_type_pond">Type: dam</string>
+	<string name="poi_fire_hydrant_type_wall">Type: væg</string>
+
 </resources>
