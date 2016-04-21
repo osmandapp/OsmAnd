@@ -2717,7 +2717,7 @@
 	<string name="poi_health_service_test_yes">Health service: test: yes</string>
 	<string name="poi_health_service_test_no">Health service: test: no</string>
 
-	<string name="poi_health_facility_type_office">Health facility type: office</string>
+	<string name="poi_health_facility_type_office">Medical office</string>
 	<string name="poi_health_facility_type_field_hospital">Health facility type: field hospital</string>
 	<string name="poi_health_facility_type_counselling_centre">Health facility type: counselling centre</string>
 	<string name="poi_health_facility_type_laboratory">Health facility type: laboratory</string>
@@ -2828,5 +2828,13 @@
 	<string name="poi_disease_autism_no">Autism: no</string>
 	<string name="poi_disease_aids_yes">AIDS: yes</string>
 	<string name="poi_disease_aids_no">AIDS: no</string>
+
+	<string name="poi_office_physician">Physician office</string>
+	<string name="poi_office_therapist">Therapist office</string>
+	<string name="poi_office_podologist">Podologist office</string>
+	<string name="poi_office_healer">Healer office</string>
+	<string name="poi_office_psychologist">Psychologist office</string>
+	<string name="poi_office_nursing_service">Nursing service</string>
+	<string name="poi_office_midwife">Midwife office</string>
 
 </resources>

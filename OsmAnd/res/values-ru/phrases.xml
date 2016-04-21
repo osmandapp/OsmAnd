@@ -2716,7 +2716,8 @@
 	<string name="poi_health_service_test_yes">Медицинские услуги: тестирование: есть</string>
 	<string name="poi_health_service_test_no">Медицинские услуги: тестирование: нет</string>
 
-	<string name="poi_health_facility_type_office">Тип медучреждения: офис</string>
+	<string name="poi_health_facility_type_office">Медицинский офис</string>
+
 	<string name="poi_health_facility_type_field_hospital">Тип медучреждения: полевой госпиталь</string>
 	<string name="poi_health_facility_type_counselling_centre">Тип медучреждения: центр психологической консультации</string>
 	<string name="poi_health_facility_type_laboratory">Тип медучреждения: медицинская лаборатория</string>
@@ -2825,5 +2826,13 @@
 	<string name="poi_disease_autism_no">Аутизм: нет</string>
 	<string name="poi_disease_aids_yes">СПИД: да</string>
 	<string name="poi_disease_aids_no">СПИД: нет</string>
+
+	<string name="poi_office_physician">Офис врача</string>
+	<string name="poi_office_therapist">Офис терапевта</string>
+	<string name="poi_office_podologist">Офис подолога</string>
+	<string name="poi_office_healer">Офис целителя</string>
+	<string name="poi_office_psychologist">Офис психолога</string>
+	<string name="poi_office_nursing_service">Офис службы ухода за больными</string>
+	<string name="poi_office_midwife">Офис акушерки</string>
 
 </resources>
