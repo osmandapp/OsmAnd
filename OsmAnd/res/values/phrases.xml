@@ -2718,17 +2718,12 @@
 	<string name="poi_health_service_test_no">Health service: test: no</string>
 
 	<string name="poi_health_facility_type_office">Health facility type: office</string>
-	<string name="poi_health_facility_type_hospital">Health facility type: hospital</string>
 	<string name="poi_health_facility_type_field_hospital">Health facility type: field hospital</string>
-	<string name="poi_health_facility_type_clinic">Health facility type: clinic</string>
-	<string name="poi_health_facility_type_health_centre">Health facility type: health centre</string>
 	<string name="poi_health_facility_type_counselling_centre">Health facility type: counselling centre</string>
-	<string name="poi_health_facility_type_rehabilitation">Health facility type: rehabilitation</string>
 	<string name="poi_health_facility_type_laboratory">Health facility type: laboratory</string>
 	<string name="poi_health_facility_type_therapy">Health facility type: therapy</string>
 	<string name="poi_health_facility_type_department">Health facility type: department</string>
 	<string name="poi_health_facility_type_dispensary">Health facility type: dispensary</string>
-	<string name="poi_health_facility_type_pharmacy">Health facility type: pharmacy</string>
 	<string name="poi_health_facility_type_first_aid">Health facility type: first aid</string>
 	<string name="poi_health_facility_type_nursing_home">Health facility type: nursing home</string>
 	<string name="poi_health_facility_type_support_group_home">Health facility type: support group home</string>
@@ -2742,5 +2737,56 @@
 	<string name="poi_fire_hydrant_type_dry_barrel">Type: dry barrel</string>
 	<string name="poi_fire_hydrant_type_pond">Type: pond</string>
 	<string name="poi_fire_hydrant_type_wall">Type: wall</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">First aid kit</string>
+	<string name="poi_health_amenity_type_scales">Public scales</string>
+
+	<string name="poi_health_person_type_assistant">Role of health worker: assistant</string>
+	<string name="poi_health_person_type_healer">Role of health worker: healer</string>
+	<string name="poi_health_person_type_midwife">Role of health worker: midwife</string>
+	<string name="poi_health_person_type_nurse">Role of health worker: nurse</string>
+	<string name="poi_health_person_type_paramedic">Role of health worker: paramedic</string>
+	<string name="poi_health_person_type_physician">Role of health worker: physician</string>
+	<string name="poi_health_person_type_podologist">Role of health worker: podologist</string>
+	<string name="poi_health_person_type_psychologist">Role of health worker: psychologist</string>
+	<string name="poi_health_person_type_therapist">Role of health worker: therapist</string>
+	<string name="poi_health_person_type_physician_assitant">Role of health worker: physician assitant</string>
+	<string name="poi_health_person_type_technician">Role of health worker: technician</string>
+	<string name="poi_health_person_type_witchdoctor">Role of health worker: witchdoctor</string>
+
+	<string name="poi_counselling_type_addiction_yes">Counselling (addiction): yes</string>
+	<string name="poi_counselling_type_addiction_no">Counselling (addiction): no</string>
+	<string name="poi_counselling_type_antenatal_yes">Counselling (antenatal): yes</string>
+	<string name="poi_counselling_type_antenatal_no">Counselling (antenatal): no</string>
+	<string name="poi_counselling_type_child_guidance_yes">Counselling (child guidance): yes</string>
+	<string name="poi_counselling_type_child_guidance_no">Counselling (child guidance): no</string>
+	<string name="poi_counselling_type_couple_yes">Counselling (couple): yes</string>
+	<string name="poi_counselling_type_couple_no">Counselling (couple): no</string>
+	<string name="poi_counselling_type_crisis_yes">Counselling (crisis): yes</string>
+	<string name="poi_counselling_type_crisis_no">Counselling (crisis): no</string>
+	<string name="poi_counselling_type_drugs_yes">Counselling (drugs): yes</string>
+	<string name="poi_counselling_type_drugs_no">Counselling (drugs): no</string>
+	<string name="poi_counselling_type_education_yes">Counselling (education): yes</string>
+	<string name="poi_counselling_type_education_no">Counselling (education): no</string>
+	<string name="poi_counselling_type_family_yes">Counselling (family): yes</string>
+	<string name="poi_counselling_type_family_no">Counselling (family): no</string>
+	<string name="poi_counselling_type_homeless_yes">Counselling (homeless): yes</string>
+	<string name="poi_counselling_type_homeless_no">Counselling (homeless): no</string>
+	<string name="poi_counselling_type_immigrant_yes">Counselling (immigrant): yes</string>
+	<string name="poi_counselling_type_immigrant_no">Counselling (immigrant): no</string>
+	<string name="poi_counselling_type_marriage_yes">Counselling (marriage): yes</string>
+	<string name="poi_counselling_type_marriage_no">Counselling (marriage): no</string>
+	<string name="poi_counselling_type_nutrition_yes">Counselling (nutrition): yes</string>
+	<string name="poi_counselling_type_nutrition_no">Counselling (nutrition): no</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Counselling (rehabilitation): yes</string>
+	<string name="poi_counselling_type_rehabilitation_no">Counselling (rehabilitation): no</string>
+	<string name="poi_counselling_type_sexual_yes">Counselling (sexual): yes</string>
+	<string name="poi_counselling_type_sexual_no">Counselling (sexual): no</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Counselling (sexual abuse): yes</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Counselling (sexual abuse): no</string>
+	<string name="poi_counselling_type_victim_yes">Counselling (victim): yes</string>
+	<string name="poi_counselling_type_victim_no">Counselling (victim): no</string>
+	<string name="poi_counselling_type_violence_yes">Counselling (violence): yes</string>
+	<string name="poi_counselling_type_violence_no">Counselling (violence): no</string>
 
 </resources>
