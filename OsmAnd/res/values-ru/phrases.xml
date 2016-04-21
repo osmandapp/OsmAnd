@@ -2717,17 +2717,12 @@
 	<string name="poi_health_service_test_no">Медицинские услуги: тестирование: нет</string>
 
 	<string name="poi_health_facility_type_office">Тип медучреждения: офис</string>
-	<string name="poi_health_facility_type_hospital">Тип медучреждения: госпиталь</string>
 	<string name="poi_health_facility_type_field_hospital">Тип медучреждения: полевой госпиталь</string>
-	<string name="poi_health_facility_type_clinic">Тип медучреждения: поликлиника</string>
-	<string name="poi_health_facility_type_health_centre">Тип медучреждения: медицинский центр</string>
 	<string name="poi_health_facility_type_counselling_centre">Тип медучреждения: центр психологической консультации</string>
-	<string name="poi_health_facility_type_rehabilitation">Тип медучреждения: реабилитационный центр</string>
 	<string name="poi_health_facility_type_laboratory">Тип медучреждения: медицинская лаборатория</string>
 	<string name="poi_health_facility_type_therapy">Тип медучреждения: терапия</string>
 	<string name="poi_health_facility_type_department">Тип медучреждения: отделение</string>
 	<string name="poi_health_facility_type_dispensary">Тип медучреждения: выдача лекарственных средств</string>
-	<string name="poi_health_facility_type_pharmacy">Тип медучреждения: аптека</string>
 	<string name="poi_health_facility_type_first_aid">Тип медучреждения: станция первой помощи</string>
 	<string name="poi_health_facility_type_nursing_home">Тип медучреждения: хоспис</string>
 	<string name="poi_health_facility_type_support_group_home">Тип медучреждения: встречи групп поддержки</string>
@@ -2740,5 +2735,56 @@
 	<string name="poi_fire_hydrant_type_pillar">Тип: надземный</string>
 	<string name="poi_fire_hydrant_type_pond">Тип: пруд</string>
 	<string name="poi_fire_hydrant_type_wall">Тип: пожарный кран</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Аптечка первой помощи</string>
+	<string name="poi_health_amenity_type_scales">Весы для публичного пользования</string>
+
+	<string name="poi_health_person_type_assistant">Роль медработника: ассистент</string>
+	<string name="poi_health_person_type_healer">Роль медработника: целитель</string>
+	<string name="poi_health_person_type_midwife">Роль медработника: акушер</string>
+	<string name="poi_health_person_type_nurse">Роль медработника: медсестра</string>
+	<string name="poi_health_person_type_paramedic">Роль медработника: фельдшер</string>
+	<string name="poi_health_person_type_physician">Роль медработника: врач</string>
+	<string name="poi_health_person_type_podologist">Роль медработника: подолог</string>
+	<string name="poi_health_person_type_psychologist">Роль медработника: психолог</string>
+	<string name="poi_health_person_type_therapist">Роль медработника: терапевт</string>
+	<string name="poi_health_person_type_physician_assitant">Роль медработника: помощник врача</string>
+	<string name="poi_health_person_type_technician">Роль медработника: техник</string>
+	<string name="poi_health_person_type_witchdoctor">Роль медработника: знахарь</string>
+
+	<string name="poi_counselling_type_addiction_yes">Консультация алко/наркозависимых: да</string>
+	<string name="poi_counselling_type_addiction_no">Консультация алко/наркозависимых: нет</string>
+	<string name="poi_counselling_type_antenatal_yes">Консультация для будущих матерей: да</string>
+	<string name="poi_counselling_type_antenatal_no">Консультация для будущих матерей: нет</string>
+	<string name="poi_counselling_type_child_guidance_yes">Консультация по детскому воспитанию: да</string>
+	<string name="poi_counselling_type_child_guidance_no">Консультация по детскому воспитанию: нет</string>
+	<string name="poi_counselling_type_couple_yes">Консультация для пар: да</string>
+	<string name="poi_counselling_type_couple_no">Консультация для пар: нет</string>
+	<string name="poi_counselling_type_crisis_yes">Консультация кризисная: да</string>
+	<string name="poi_counselling_type_crisis_no">Консультация кризисная: нет</string>
+	<string name="poi_counselling_type_drugs_yes">Консультация наркозависимых: да</string>
+	<string name="poi_counselling_type_drugs_no">Консультация наркозависимых: нет</string>
+	<string name="poi_counselling_type_education_yes">Консультация образовательная: да</string>
+	<string name="poi_counselling_type_education_no">Консультация образовательная: нет</string>
+	<string name="poi_counselling_type_family_yes">Консультация семейная: да</string>
+	<string name="poi_counselling_type_family_no">Консультация семейная: нет</string>
+	<string name="poi_counselling_type_homeless_yes">Консультация для бездомных: да</string>
+	<string name="poi_counselling_type_homeless_no">Консультация для бездомных: нет</string>
+	<string name="poi_counselling_type_immigrant_yes">Консультация для иммигрантов: да</string>
+	<string name="poi_counselling_type_immigrant_no">Консультация для иммигрантов: нет</string>
+	<string name="poi_counselling_type_marriage_yes">Консультация брачная: да</string>
+	<string name="poi_counselling_type_marriage_no">Консультация брачная: нет</string>
+	<string name="poi_counselling_type_nutrition_yes">Консультация по вопросам питания: да</string>
+	<string name="poi_counselling_type_nutrition_no">Консультация по вопросам питания: нет</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Консультация реабилитационная: да</string>
+	<string name="poi_counselling_type_rehabilitation_no">Консультация реабилитационная: нет</string>
+	<string name="poi_counselling_type_sexual_yes">Консультация сексологическая: да</string>
+	<string name="poi_counselling_type_sexual_no">Консультация сексологическая: нет</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Консультация для жертв домагательств: да</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Консультация для жертв домагательств: нет</string>
+	<string name="poi_counselling_type_victim_yes">Консультация для жертв насилия: да</string>
+	<string name="poi_counselling_type_victim_no">Консультация для жертв насилия: нет</string>
+	<string name="poi_counselling_type_violence_yes">Консультация по вопросам (домашнего) насилия: да</string>
+	<string name="poi_counselling_type_violence_no">Консультация по вопросам (домашнего) насилия: нет</string>
 
 </resources>
