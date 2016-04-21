@@ -2736,4 +2736,9 @@
 
 	<string name="poi_suction_point">Точка забора воды</string>
 
+	<string name="poi_fire_hydrant_type_underground">Тип: подземный</string>
+	<string name="poi_fire_hydrant_type_pillar">Тип: надземный</string>
+	<string name="poi_fire_hydrant_type_pond">Тип: пруд</string>
+	<string name="poi_fire_hydrant_type_wall">Тип: пожарный кран</string>
+
 </resources>
