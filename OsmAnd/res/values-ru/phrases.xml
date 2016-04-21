@@ -2787,4 +2787,43 @@
 	<string name="poi_counselling_type_violence_yes">Консультация по вопросам (домашнего) насилия: да</string>
 	<string name="poi_counselling_type_violence_no">Консультация по вопросам (домашнего) насилия: нет</string>
 
+	<string name="poi_provided_for_infant_yes">Услуги предоставляются грудничкам: да</string>
+	<string name="poi_provided_for_infant_no">Услуги предоставляются грудничкам: нет</string>
+	<string name="poi_provided_for_toddler_yes">Услуги предоставляются младенцам: да</string>
+	<string name="poi_provided_for_toddler_no">Услуги предоставляются младенцам: нет</string>
+	<string name="poi_provided_for_child_yes">Услуги предоставляются детям: да</string>
+	<string name="poi_provided_for_child_no">Услуги предоставляются детям: нет</string>
+	<string name="poi_provided_for_adult_yes">Услуги предоставляются взрослым: да</string>
+	<string name="poi_provided_for_adult_no">Услуги предоставляются взрослым: нет</string>
+	<string name="poi_provided_for_woman_yes">Услуги предоставляются женщинам: да</string>
+	<string name="poi_provided_for_woman_no">Услуги предоставляются женщинам: нет</string>
+	<string name="poi_provided_for_senior_yes">Услуги предоставляются пожилым: да</string>
+	<string name="poi_provided_for_senior_no">Услуги предоставляются пожилым: нет</string>
+	<string name="poi_provided_for_girl_yes">Услуги предоставляются девочкам: да</string>
+	<string name="poi_provided_for_girl_no">Услуги предоставляются девочкам: нет</string>
+	<string name="poi_provided_for_man_yes">Услуги предоставляются мужчинам: да</string>
+	<string name="poi_provided_for_man_no">Услуги предоставляются мужчинам: нет</string>
+	<string name="poi_provided_for_boy_yes">Услуги предоставляются мальчикам: да</string>
+	<string name="poi_provided_for_boy_no">Услуги предоставляются мальчикам: нет</string>
+
+	<string name="poi_capacity_beds">Количество коек</string>
+	<string name="poi_treat_inpatient_yes">Обслуживание в стационаре: да</string>
+	<string name="poi_treat_inpatient_no">Обслуживание в стационаре: нет</string>
+	<string name="poi_treat_inpatient_only">Обслуживание в стационаре: исключительно</string>
+	<string name="poi_counselling_yes">Оказываются консультационные услуги</string>
+	<string name="poi_counselling_no">Консультационные услуги не оказываются</string>
+	<string name="poi_emergency_yes">Крайняя необходимость: да</string>
+	<string name="poi_emergency_no">Крайняя необходимость: нет</string>
+	<string name="poi_home_visit_yes">Выезд на дом: да</string>
+	<string name="poi_home_visit_no">Выезд на дом: нет</string>
+
+	<string name="poi_disease_malaria_yes">Малярия: да</string>
+	<string name="poi_disease_malaria_no">Малярия: нет</string>
+	<string name="poi_disease_ebola_yes">Лихорадка Эбола: да</string>
+	<string name="poi_disease_ebola_no">Лихорадка Эбола: нет</string>
+	<string name="poi_disease_autism_yes">Аутизм: да</string>
+	<string name="poi_disease_autism_no">Аутизм: нет</string>
+	<string name="poi_disease_aids_yes">СПИД: да</string>
+	<string name="poi_disease_aids_no">СПИД: нет</string>
+
 </resources>

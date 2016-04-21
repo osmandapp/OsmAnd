@@ -2789,4 +2789,44 @@
 	<string name="poi_counselling_type_violence_yes">Counselling (violence): yes</string>
 	<string name="poi_counselling_type_violence_no">Counselling (violence): no</string>
 
+	<string name="poi_provided_for_infant_yes">Provided for infants: yes</string>
+	<string name="poi_provided_for_infant_no">Provided for infants: no</string>
+	<string name="poi_provided_for_toddler_yes">Provided for toddlers: yes</string>
+	<string name="poi_provided_for_toddler_no">Provided for toddlers: no</string>
+	<string name="poi_provided_for_child_yes">Provided for children: yes</string>
+	<string name="poi_provided_for_child_no">Provided for children: no</string>
+	<string name="poi_provided_for_adult_yes">Provided for adults: yes</string>
+	<string name="poi_provided_for_adult_no">Provided for adults: no</string>
+	<string name="poi_provided_for_woman_yes">Provided for women: yes</string>
+	<string name="poi_provided_for_woman_no">Provided for women: no</string>
+	<string name="poi_provided_for_senior_yes">Provided for seniors: yes</string>
+	<string name="poi_provided_for_senior_no">Provided for seniors: no</string>
+	<string name="poi_provided_for_girl_yes">Provided for girls: yes</string>
+	<string name="poi_provided_for_girl_no">Provided for girls: no</string>
+	<string name="poi_provided_for_man_yes">Provided for men: yes</string>
+	<string name="poi_provided_for_man_no">Provided for men: no</string>
+	<string name="poi_provided_for_boy_yes">Provided for boys: yes</string>
+	<string name="poi_provided_for_boy_no">Provided for boys: no</string>
+
+	<string name="poi_capacity_beds">Capacity (beds)</string>
+
+	<string name="poi_treat_inpatient_yes">Inpatient services: yes</string>
+	<string name="poi_treat_inpatient_no">Inpatient services: no</string>
+	<string name="poi_treat_inpatient_only">Inpatient services: only</string>
+	<string name="poi_counselling_yes">Counselling: yes</string>
+	<string name="poi_counselling_no">Counselling: no</string>
+	<string name="poi_emergency_yes">Emergency: yes</string>
+	<string name="poi_emergency_no">Emergency: no</string>
+	<string name="poi_home_visit_yes">Home visit: yes</string>
+	<string name="poi_home_visit_no">Home visit: no</string>
+
+	<string name="poi_disease_malaria_yes">Malaria: yes</string>
+	<string name="poi_disease_malaria_no">Malaria: no</string>
+	<string name="poi_disease_ebola_yes">Ebola: yes</string>
+	<string name="poi_disease_ebola_no">Ebola: no</string>
+	<string name="poi_disease_autism_yes">Autism: yes</string>
+	<string name="poi_disease_autism_no">Autism: no</string>
+	<string name="poi_disease_aids_yes">AIDS: yes</string>
+	<string name="poi_disease_aids_no">AIDS: no</string>
+
 </resources>
