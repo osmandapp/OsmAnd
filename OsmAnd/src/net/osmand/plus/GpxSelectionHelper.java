@@ -92,7 +92,7 @@ public class GpxSelectionHelper {
 			if (i >= 0) {
 				name = name.substring(i + 1);
 			}
-			if (name.endsWith(".gpx")) {
+			if (name.toLowerCase().endsWith(".gpx")) {
 				name = name.substring(0, name.length() - 4);
 			}
 			name = name.replace('_', ' ');

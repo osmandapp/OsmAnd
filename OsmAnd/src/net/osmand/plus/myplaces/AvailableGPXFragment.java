@@ -646,7 +646,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
 							+ gpxFile.getName();
 					loadGPXFolder(gpxFile, result, loadTask, progress, sub);
-				} else if (gpxFile.isFile() && gpxFile.getName().endsWith(".gpx")) {
+				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
 					GpxInfo info = new GpxInfo();
 					info.subfolder = gpxSubfolder;
 					info.file = gpxFile;
