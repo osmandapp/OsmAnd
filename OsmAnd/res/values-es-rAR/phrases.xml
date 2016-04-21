@@ -2766,4 +2766,8 @@
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Especialidad médica: Medicina paliativa</string>
 
-</resources>
+<string name="poi_suction_point">Punto de succión</string>
+
+	<string name="poi_fire_hydrant_type_underground">Tipo: Subterráneo</string>
+	<string name="poi_fire_hydrant_type_pillar">Tipo: Poste</string>
+	</resources>
