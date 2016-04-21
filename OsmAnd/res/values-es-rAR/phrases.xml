@@ -2728,7 +2728,7 @@
 	<string name="poi_medical_system_kampo_yes">Sistema médico: Kampo</string>
 	<string name="poi_medical_system_mongolian_yes">Sistema médico: Mongol tradicional</string>
 	<string name="poi_medical_system_tibetan_yes">Sistema médico: Tibetano tradicional</string>
-	<string name="poi_medical_system_sidda_yes">Sistema médico: Sidda</string>
+	<string name="poi_medical_system_sidda_yes">Sistema médico: Siddha</string>
 	<string name="poi_medical_system_unani_yes">Sistema médico: Unani</string>
 
 	<string name="poi_health_service_nursing_yes">Servicio de salud: Con enfermería</string>
@@ -2777,17 +2777,17 @@
 	<string name="poi_health_amenity_type_first_aid_kit">Botiquín de primeros auxilios</string>
 	<string name="poi_health_amenity_type_scales">Escalas públicas</string>
 
-	<string name="poi_health_person_type_assistant">Rol del trabajador de la salud: Asistente</string>
-	<string name="poi_health_person_type_healer">Rol del trabajador de la salud: Curandero</string>
-	<string name="poi_health_person_type_midwife">Rol del trabajador de la salud: Partera</string>
-	<string name="poi_health_person_type_nurse">Rol del trabajador de la salud: Enfermera/o</string>
-	<string name="poi_health_person_type_paramedic">Rol del trabajador de la salud: Paramédico</string>
-	<string name="poi_health_person_type_physician">Rol del trabajador de la salud: Médico</string>
-	<string name="poi_health_person_type_podologist">Rol del trabajador de la salud: Podólogo</string>
-	<string name="poi_health_person_type_therapist">Rol del trabajador de la salud: Terapeuta</string>
-	<string name="poi_health_person_type_physician_assitant">Rol del trabajador de la salud: Asistente médico</string>
-	<string name="poi_health_person_type_technician">Rol del trabajador de la salud: Técnico</string>
-	<string name="poi_health_person_type_witchdoctor">Rol del trabajador de la salud: Brujo</string>
+	<string name="poi_health_person_type_assistant">Rol del trabajador en salud: Asistente</string>
+	<string name="poi_health_person_type_healer">Rol del trabajador en salud: Curandero/a</string>
+	<string name="poi_health_person_type_midwife">Rol del trabajador en salud: Partera</string>
+	<string name="poi_health_person_type_nurse">Rol del trabajador en salud: Enfermera/o</string>
+	<string name="poi_health_person_type_paramedic">Rol del trabajador en salud: Paramédico</string>
+	<string name="poi_health_person_type_physician">Rol del trabajador en salud: Médico/a</string>
+	<string name="poi_health_person_type_podologist">Rol del trabajador en salud: Podólogo/a</string>
+	<string name="poi_health_person_type_therapist">Rol del trabajador en salud: Terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Rol del trabajador en salud: Asistente médico</string>
+	<string name="poi_health_person_type_technician">Rol del trabajador en salud: Técnico</string>
+	<string name="poi_health_person_type_witchdoctor">Rol del trabajador en salud: Brujo/a</string>
 
 	<string name="poi_counselling_type_addiction_yes">Asesoramiento (adicción): Sí</string>
 	<string name="poi_counselling_type_addiction_no">Asesoramiento (adicción): No</string>
@@ -2824,5 +2824,5 @@
 	<string name="poi_counselling_type_violence_yes">Asesoramiento (violencia): Sí</string>
 	<string name="poi_counselling_type_violence_no">Asesoramiento (violencia): No</string>
 
-<string name="poi_health_person_type_psychologist">Rol del trabajador en salud: Psicólogo</string>
+<string name="poi_health_person_type_psychologist">Rol del trabajador en salud: Psicólogo/a</string>
 	</resources>
