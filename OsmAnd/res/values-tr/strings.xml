@@ -1748,13 +1748,13 @@
     <string name="minutes_ago">Dakkika önce</string>
     <string name="seconds_ago">Saniye önce</string>
     <string name="osmo_connected_devices">Bağlı cihazları</string>
-    <string name="osmo_groups">OSMO Gruplar / Cihazlar</string>
+    <string name="osmo_groups">OsMo Grupları / Aygıtlar</string>
     <string name="osmo_auto_send_locations_descr">Otomatik olarak izci oturumu başlatın ve uygulama başlangıcından sonra yerleri göndermek</string>
     <string name="osmo_auto_send_locations">Otomatik olarak izci oturumu başlatın</string>
     <string name="osmo_tracker_id">Kişisel izci kimliği</string>
     <string name="osmo_tracker_id_descr">Görüntülemek veya izci kimliği paylaşmak için tıklayınız. Izci kimliği bağlı cihazlar kullanarak bu cihazın tüm hareketlerini izlemek mümkün olacak! Select Regenerate seçeneği kesmek için.</string>
     <string name="osmo_group_policy">Politika</string>
-    <string name="osmo_connect_to_device_tracker_id">Tracker kimliği</string>
+    <string name="osmo_connect_to_device_tracker_id">Yolcu kimliği</string>
     <string name="osmo_connect_to_device_name">Kullanıcı adı</string>
     <string name="osmo_connect_to_group_id">Grup kimliği</string>
     <string name="osmo_group_name">Grup ismi</string>
