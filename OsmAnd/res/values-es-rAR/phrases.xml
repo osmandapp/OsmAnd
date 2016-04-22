@@ -2750,18 +2750,18 @@
 
 	<string name="poi_health_facility_type_office">Consultorio médico</string>
 	<string name="poi_health_facility_type_hospital">Tipo de instalación médica: Hospital</string>
-	<string name="poi_health_facility_type_field_hospital">Tipo de instalación médica: Hospital de campaña</string>
+	<string name="poi_health_facility_type_field_hospital">Tipo de centro médico: Hospital de campaña</string>
 	<string name="poi_health_facility_type_clinic">Tipo de instalación médica: Clínica</string>
 	<string name="poi_health_facility_type_health_centre">Tipo de instalación médica: Centro de salud</string>
-	<string name="poi_health_facility_type_counselling_centre">Tipo de instalación médica: Centro de asesoramiento</string>
+	<string name="poi_health_facility_type_counselling_centre">Tipo de centro médico: Centro de asesoramiento</string>
 	<string name="poi_health_facility_type_rehabilitation">Tipo de instalación médica: Rehabilitación</string>
-	<string name="poi_health_facility_type_laboratory">Tipo de instalación médica: Laboratorio</string>
-	<string name="poi_health_facility_type_therapy">Tipo de instalación médica: Terapia</string>
-	<string name="poi_health_facility_type_department">Tipo de instalación médica: Departamento</string>
-	<string name="poi_health_facility_type_dispensary">Tipo de instalación médica: Dispensario</string>
+	<string name="poi_health_facility_type_laboratory">Tipo de centro médico: Laboratorio</string>
+	<string name="poi_health_facility_type_therapy">Tipo de centro médico: Terapia</string>
+	<string name="poi_health_facility_type_department">Tipo de centro médico: Departamento</string>
+	<string name="poi_health_facility_type_dispensary">Tipo de centro médico: Dispensario</string>
 	<string name="poi_health_facility_type_pharmacy">Tipo de instalación médica: Farmacia</string>
-	<string name="poi_health_facility_type_first_aid">Tipo de instalación médica: Primeros auxilios</string>
-	<string name="poi_health_facility_type_nursing_home">Tipo de instalación médica: Geriátrico</string>
+	<string name="poi_health_facility_type_first_aid">Tipo de centro médico: Primeros auxilios</string>
+	<string name="poi_health_facility_type_nursing_home">Tipo de centro médico: Geriátrico</string>
 	<string name="poi_health_facility_type_support_group_home">Tipo de centro médico: Grupo de apoyo domiciliario</string>
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Especialidad médica: Medicina paliativa</string>
