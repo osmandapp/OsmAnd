@@ -258,10 +258,6 @@ public class RouteLayer extends OsmandMapLayer {
 				}
 				calculatePath(tb, tx, ty, path);
 
-				//boo - here we draw the wptpt2 path instead
-				// can we use the Renderable drawing... prolly!
-				// rs.drawSegment(view.getZoom(), paint, canvas, tileBox);
-
 				if (isPaint_1) {
 					canvas.drawPath(path, paint_1);
 				}
@@ -275,7 +271,7 @@ public class RouteLayer extends OsmandMapLayer {
 				if (tb.getZoomAnimation() == 0) {
 					TIntArrayList lst = new TIntArrayList(50);
 					calculateSplitPaths(tb, tx, ty, lst);
-					//boo drawArrowsOverPath(canvas, lst, coloredArrowUp);
+					drawArrowsOverPath(canvas, lst, coloredArrowUp);
 				}
 			} finally {
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
@@ -348,7 +344,6 @@ public class RouteLayer extends OsmandMapLayer {
 
 			renderable = new ArrayList<>();
 
-			//boo
 			List<GPXUtilities.WptPt> pts = new ArrayList<>();
 			for (Location loc : routeNodes) {
 				GPXUtilities.WptPt wpt = new GPXUtilities.WptPt();
@@ -359,10 +354,12 @@ public class RouteLayer extends OsmandMapLayer {
 
 			double epsilon = 16.5;
 			renderable.add(new Renderable.StandardTrack(view, pts, epsilon));
-			//renderable.add(new Renderable.Arrows(view, pts, epsilon, 1000));
 			renderable.add(new Renderable.RouteMarker(view, pts, epsilon, 1000));
 		}
 
+		for (Renderable r : renderable) {
+			r.drawSegment(view.getZoom(), paint, canvas, tb);
+		}
 
 /*
 
@@ -397,9 +394,6 @@ public class RouteLayer extends OsmandMapLayer {
 			drawAction(tb, canvas);
 		}
 */
-		for (Renderable r : renderable) {
-			r.drawSegment(view.getZoom(), paint, canvas, tb);
-		}
 
 	}
 

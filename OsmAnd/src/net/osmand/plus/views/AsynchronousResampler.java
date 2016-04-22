@@ -245,19 +245,18 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             culled = resampleTrack(rs.points, epsilon);
 
-            int distSinceArrow = Integer.MAX_VALUE;
-            int detectionLength = 5;
-
-            int size = culled.size();
+            int detectionLength = 2;
             double cumulativeAngle = 0;
-            for (int i = 0; i < size && i < detectionLength + 3; i++) {
+
+            // Pre-calc sum of angles for the first part of the track
+            int size = culled.size();
+            for (int i = 0; i < size && i < detectionLength + 1; i++) {
                 cumulativeAngle += calculatedAngle(i);
             }
 
             for (int i = 0; i < size; i++) {
-                int idx = i - detectionLength;
                 cumulativeAngle -= calculatedAngle(i - detectionLength);
-                cumulativeAngle += calculatedAngle(i + detectionLength + 3);
+                cumulativeAngle += calculatedAngle(i + detectionLength + 1);
                 culled.get(i).speed = cumulativeAngle;          // re-use var
             }
 
@@ -280,7 +279,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                     warn = true;
                 }
 
-                if (run > 8 || (gap > 0 && gap < 5)) {
+                if (run > 8 || (gap > 0 && gap < 3)) {
                     warn = false;
                 }
 
@@ -294,7 +293,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
                 } else {
                     gap++;
-                    if (gap > 5) {
+                    if (gap > 3) {
                         pt.colourARGB = Color.BLACK;
                         gap = 0;
                     }

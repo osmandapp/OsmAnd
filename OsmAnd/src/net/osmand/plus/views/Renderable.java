@@ -548,8 +548,7 @@ public abstract class Renderable {
             Path path = new Path();
 
             float stroke = paint.getStrokeWidth();
-            double zoomlimit = zoom > 15 ? 15f : zoom;
-            float arrowSize = (float) Math.pow(2.0, zoomlimit - 18) * 500; //800;
+            float arrowSize = 64f;                       //(float) Math.pow(2.0, zoomlimit - 18) * 500; //800;
 
             float clipL = -arrowSize;
             float clipB = -arrowSize;
@@ -589,6 +588,7 @@ public abstract class Renderable {
                         }
                         path.lineTo(x, y);
 
+                        // look for end of line (requiring an arrow)...
                         if ((i == size-1 || i < size - 1 && culled.get(i + 1).colourARGB != Color.YELLOW)) {
                             path.lineTo(extendx, extendy);
                             path.moveTo(newx2, newy2);
@@ -613,7 +613,7 @@ public abstract class Renderable {
                 paint.setStrokeWidth(3f*stroke);
                 paint.setColor(Color.BLACK);
                 canvas.drawPath(path, paint);
-                paint.setColor(Color.YELLOW);
+                paint.setColor(0xFFFFC000);
                 paint.setStrokeWidth(2f * stroke);
                 canvas.drawPath(path, paint);
 
