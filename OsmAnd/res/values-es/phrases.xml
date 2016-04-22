@@ -2754,4 +2754,105 @@
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Especialidad sanitario: medicina paliativa</string>
 
+	<string name="poi_suction_point">Punto de aspiración</string>
+
+	<string name="poi_fire_hydrant_type_underground">Tipo: subterráneo</string>
+	<string name="poi_fire_hydrant_type_pillar">Tipo: pilar</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Tipo: barril seco</string>
+	<string name="poi_fire_hydrant_type_pond">Tipo: estanque</string>
+	<string name="poi_fire_hydrant_type_wall">Tipo: pared</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Kit de primeros auxilios</string>
+	<string name="poi_health_amenity_type_scales">Básculas públicas</string>
+
+	<string name="poi_health_person_type_assistant">Rol del trabajador sanitario: Asistente</string>
+	<string name="poi_health_person_type_healer">Rol del trabajador sanitario: sanador</string>
+	<string name="poi_health_person_type_midwife">Rol del trabajador sanitario: matrona</string>
+	<string name="poi_health_person_type_nurse">Rol del trabajador sanitario: enfermera</string>
+	<string name="poi_health_person_type_paramedic">Rol del trabajador sanitario: paramédico</string>
+	<string name="poi_health_person_type_physician">Rol del trabajador sanitario: médico</string>
+	<string name="poi_health_person_type_podologist">Rol del trabajador sanitario: podólogo</string>
+	<string name="poi_health_person_type_psychologist">Rol del trabajador sanitario: psicólogo</string>
+	<string name="poi_health_person_type_therapist">Rol del trabajador sanitario: terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Rol del trabajador sanitario: asistente del médico</string>
+	<string name="poi_health_person_type_technician">Rol del trabajador sanitario: técnico</string>
+	<string name="poi_health_person_type_witchdoctor">Rol del trabajador sanitario: brujo</string>
+
+	<string name="poi_counselling_type_addiction_yes">Asesoría (adicción): sí</string>
+	<string name="poi_counselling_type_addiction_no">Asesoría (adicción): no</string>
+	<string name="poi_counselling_type_antenatal_yes">Asesoría (prenatal): sí</string>
+	<string name="poi_counselling_type_antenatal_no">Asesoría (prenatal): no</string>
+	<string name="poi_counselling_type_child_guidance_yes">Asesoría (orientación infantil): sí</string>
+	<string name="poi_counselling_type_child_guidance_no">Asesoría (orientación infantil): no</string>
+	<string name="poi_counselling_type_couple_yes">Asesoría (pareja): sí</string>
+	<string name="poi_counselling_type_couple_no">Asesoría ( pareja): no</string>
+	<string name="poi_counselling_type_crisis_yes">Asesoría (crisis): sí</string>
+	<string name="poi_counselling_type_crisis_no">Asesoría (crisis): no</string>
+	<string name="poi_counselling_type_drugs_yes">Asesoría (drogas): sí</string>
+	<string name="poi_counselling_type_drugs_no">Asesoría (drogas): no</string>
+	<string name="poi_counselling_type_education_yes">Asesoría (educación): sí</string>
+	<string name="poi_counselling_type_education_no">Asesoría (educación): no</string>
+	<string name="poi_counselling_type_family_yes">Asesoría (familia): sí</string>
+	<string name="poi_counselling_type_family_no">Asesoría (familia): no</string>
+	<string name="poi_counselling_type_homeless_yes">Asesoría (desamparados): sí</string>
+	<string name="poi_counselling_type_homeless_no">Asesoría (desamparados): no</string>
+	<string name="poi_counselling_type_immigrant_yes">Asesoría (inmigración): sí</string>
+	<string name="poi_counselling_type_immigrant_no">Asesoría (inmigración): no</string>
+	<string name="poi_counselling_type_marriage_yes">Asesoría (matrimonio): sí</string>
+	<string name="poi_counselling_type_marriage_no">Asesoría (matrimonio): no</string>
+	<string name="poi_counselling_type_nutrition_yes">Asesoría (nutrición): sí</string>
+	<string name="poi_counselling_type_nutrition_no">Asesoría (nutrición): no</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Asesoría (rehabilitación): sí</string>
+	<string name="poi_counselling_type_rehabilitation_no">Asesoría (rehabilitación): no</string>
+	<string name="poi_counselling_type_sexual_yes">Asesoría (sexual): sí</string>
+	<string name="poi_counselling_type_sexual_no">Asesoría (sexual): no</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Asesoría (abusos sexuales): sí</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Asesoría (abusos sexuales): no</string>
+	<string name="poi_counselling_type_victim_yes">Asesoría (victimas): sí</string>
+	<string name="poi_counselling_type_victim_no">Asesoría (victimas): no</string>
+	<string name="poi_counselling_type_violence_yes">Asesoría (violencia): sí</string>
+	<string name="poi_counselling_type_violence_no">Asesoría (violencia): no</string>
+
+	<string name="poi_provided_for_infant_yes">Para bebés: sí</string>
+	<string name="poi_provided_for_infant_no">Para bebés: no</string>
+	<string name="poi_provided_for_toddler_yes">Para niños pequeños: sí</string>
+	<string name="poi_provided_for_toddler_no">Para niños pequeños: no</string>
+	<string name="poi_provided_for_child_yes">Para niños: sí</string>
+	<string name="poi_provided_for_child_no">Para niños: no</string>
+	<string name="poi_provided_for_adult_yes">Para adultos: sí</string>
+	<string name="poi_provided_for_adult_no">Para adultos: no</string>
+	<string name="poi_provided_for_woman_yes">Para mujeres: sí</string>
+	<string name="poi_provided_for_woman_no">Para mujeres: no</string>
+	<string name="poi_provided_for_senior_yes">Para personas mayores: sí</string>
+	<string name="poi_provided_for_senior_no">Para personas mayores: no</string>
+	<string name="poi_provided_for_girl_yes">Para chicas: sí</string>
+	<string name="poi_provided_for_girl_no">Para chicas: no</string>
+	<string name="poi_provided_for_man_yes">Para hombres: sí</string>
+	<string name="poi_provided_for_man_no">Para hombres: no</string>
+	<string name="poi_provided_for_boy_yes">Para chicos: sí</string>
+	<string name="poi_provided_for_boy_no">Para chicos: no</string>
+
+	<string name="poi_capacity_beds">Capacidad (camas)</string>
+
+	<string name="poi_treat_inpatient_yes">Servicios hospitalarios: sí</string>
+	<string name="poi_treat_inpatient_no">Servicios hospitalarios: no</string>
+	<string name="poi_treat_inpatient_only">Servicios hospitalarios: sólo</string>
+	<string name="poi_counselling_yes">Asesoría: sí</string>
+	<string name="poi_counselling_no">Asesoría: no</string>
+	<string name="poi_emergency_yes">Emergencia: sí</string>
+	<string name="poi_emergency_no">Emergencia: no</string>
+	<string name="poi_home_visit_yes">Visitas domiciliarias: sí</string>
+	<string name="poi_home_visit_no">Visitas domiciliarias: no</string>
+
+	<string name="poi_disease_malaria_yes">Malaria: sí</string>
+	<string name="poi_disease_malaria_no">Malaria: no</string>
+	<string name="poi_disease_ebola_yes">Ébola: sí</string>
+	<string name="poi_disease_ebola_no">Ébola: no</string>
+	<string name="poi_disease_autism_yes">Autismo: sí</string>
+	<string name="poi_disease_autism_no">Autismo: no</string>
+	<string name="poi_disease_aids_yes">SIDA: sí</string>
+	<string name="poi_disease_aids_no">SIDA: no</string>
+
+	<string name="poi_office_physician">Consultorio médico</string>
+	<string name="poi_office_therapist">Oficina de terapeuta</string>
 	</resources>
