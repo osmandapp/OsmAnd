@@ -1944,7 +1944,7 @@
     <string name="osmand_running_in_background">Esecuzione in backgroung</string>
     <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità</string>
     <string name="default_speed_system">Misurazione della velocità</string>
-    <string name="nm">nmi</string>
+    <string name="nm">NM</string>
     <string name="si_nm">Miglia nautiche</string>
     <string name="si_kmh">Chilometri all\'ora</string>
     <string name="si_mph">Miglia per ora</string>
@@ -1952,7 +1952,7 @@
     <string name="si_min_km">Minuti al chilometro</string>
     <string name="si_min_m">Minuti per miglia</string>
     <string name="si_nm_h">Miglia nautiche per ora (knot)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
