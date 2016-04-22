@@ -221,7 +221,7 @@
 
 
     <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
-    <string name="download_files_question_space">Dabar laisvos vietos yra {2} MB! Parsiųsti {0} failą(-us) ({1} MB)?</string>
+    <string name="download_files_question_space">Tikrai parsiųsti {0} failą(-us)? Tam prireims {1} MB pastoviam saugojinui. Dabar laisvos vietos yra {2} MB.</string>
 
 
     <string name="use_transparent_map_theme">Permatoma tema</string>
@@ -1333,11 +1333,10 @@
 
     <string name="osmo_connected_devices">Prijungti įrenginiai</string>
     <string name="osmo_groups">OsMo grupės</string>
-    <string name="osmo_auto_send_locations_descr">Automatiškai pradėti sekimo sesiją ir siųsti buvimo vietą tik paleidus programą</string>
-    <string name="osmo_auto_send_locations">Automatiškai pradėti sekimo sesiją</string>
+    <string name="osmo_auto_send_locations_descr">Automatiškai pradėti kelionę ir siųsti buvimo vietą tik paleidus programą</string>
+    <string name="osmo_auto_send_locations">Automatiškai pradėti kelionę</string>
     <string name="osmo_tracker_id">Sekiklio ID</string>
-    <string name="osmo_tracker_id_descr">Paspauskite peržiūrėti ar bendrinti sekiklio ID. 
-        Naudodami sekiklio ID prijungti prietaisai galės stebėti visą šio įrenginio judėjimą! Norėdami atjungti pasirinkite Regeneravimo nustatymą.</string>
+    <string name="osmo_tracker_id_descr">Paspauskite jei norite pamatyti sekiklio ID</string>
     <string name="osmo_session_token">Sesijos žymė: %1$s</string>
     <string name="osmo_auth_pending">Laukiama autorizavimo…</string>
     <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
@@ -1364,7 +1363,7 @@
     <string name="osmo_connect_to_group_id">Grupės ID</string>
     <string name="osmo_group_name">Grupės pavadinimas</string>
     <string name="osmo_connect_to_group">Prisijungti prie grupės</string>
-    <string name="osmo_connect">Prisijungti prie</string>
+    <string name="osmo_connect">Prisijungti</string>
     <string name="osmo_create_group">Sukurti grupę</string>
     <string name="osmo_server_operation_failed">OsMo serverio veiksmas nepavyko</string>
     <string name="osmo_activity">OpenStreetMap stebėjimas</string>
@@ -1463,14 +1462,14 @@
     <string name="osmo_not_signed_in">Prisijungti prie OsMo nepavyko</string>
     <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
     <string name="osmo_auth_error">OsMo autorizavimo metu įvyko klaida : %1$s.\n Gali būti, kad paslauga laikinai neveikia arba baigėsi jūsų prisijungimo laikas.\n Ar norite registruotis iš naujo?</string>
-    <string name="rendering_attr_hideBuildings_name">Paslėpti pastatus</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Paslėpti ne automobiliams skirtus greitkelius</string>
-    <string name="rendering_attr_hideText_name">Paslėpti tekstą</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Paslėpti miškus ir krūmynus</string>
+    <string name="rendering_attr_hideBuildings_name">Pastatai</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Ne automobiliams skirti greitkeliai</string>
+    <string name="rendering_attr_hideText_name">Tekstas</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Miškai ir krūmynai</string>
     <string name="rendering_attr_buildings15zoom_name">Pastatus rodyti 15 didinimo laipsnyje</string>
     <string name="rendering_attr_moreDetailed_name">Detaliau</string>
     <string name="rendering_attr_lessDetailed_name">Mažiau detalių</string>
-    <string name="rendering_attr_hideAccess_name">Paslėpti prieigos tipą</string>
+    <string name="rendering_attr_hideAccess_name">Prieigos apribojimai</string>
     <string name="rendering_attr_showAccess_name">Rodyti prieigos tipą</string>
     <string name="rendering_attr_showSurfaceGrade_name">Rodyti kelių kokybę</string>
     <string name="rendering_attr_showSurfaces_name">Rodyti kelių paviršiaus tipą</string>
@@ -1566,7 +1565,7 @@
     <string name="speed_limit_exceed_message">Pasirinkite greičio ribojimo viršijimo ribą, kurią pasiekus bus pranešta balsu.</string>
     <string name="osmo_device_not_found">Įrenginys neaptiktas</string>
     <string name="osmo_no_connection_msg">Nepavykp prisijungti prie OsMo serverio:\n- patikrinkite internetinį ryšį;\n- patikrinkite nustatymus;\n- užeikite į Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonimas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įranginius su sreveriu;\n- valdyti grupes bei įrenginius privačiame biure.</string>
+    <string name="anonymous_user_hint">Anonimas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įrenginius su sreveriu;\n- valdyti grupes bei įrenginius asmeniniame valdymo skydelyje interneto svetainėje.</string>
     <string name="anonymous_user">Anonimas</string>
     <string name="logged_as">Prisijungėte kaip %1$s</string>
     <string name="rendering_category_details">Detalės</string>
@@ -1750,7 +1749,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM žymėtojo pagalbininkas</string>
     <string name="shared_string_manage">Valdymas</string>
     <string name="track_segments">Kelio segmentai</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Slėpti namų numerius</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Pastatų numeriai</string>
     <string name="specified_directiory_not_writeable">Nepavyko sukurti žemėlapių nurodytoje direktorijoje</string>
     <string name="copying_osmand_file_failed">Nepavyko nukopijuoti failo</string>
     <string name="storage_directory_external">Išorinė saugykla</string>
@@ -1956,7 +1955,7 @@
     <string name="contact_us">Susisiekti</string>
     <string name="world_map_download_descr">Pasaulio žemėlapis (padengiantis visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti.</string>
     <string name="share_geo">geo:</string>
-    <string name="nm">nmi</string>
+    <string name="nm">jm</string>
     <string name="shared_string_trip_recording">Kelionės įrašymas</string>
     <string name="tab_title_basic">Pagrindinis</string>
     <string name="tab_title_advanced">Išplėstinis</string>
@@ -1996,7 +1995,7 @@
 <string name="first_usage_item">Pirmasis paleidimas</string>
     <string name="read_more">Skaityti toliau</string>
     <string name="whats_new">Kas naujo</string>
-    <string name="rendering_attr_hideProposed_name">Paslėpti siūlomus objektus</string>
+    <string name="rendering_attr_hideProposed_name">Siūlomi objektai</string>
     <string name="lang_mk">Makedonų</string>
     <string name="copied_to_clipboard">Nukopijuota į įškarpinę</string>
     <string name="osm_edit_deleted_poi">OSM LV ištrinta</string>
@@ -2061,9 +2060,9 @@
     
     <string name="update_time">Atnaujinimo laikas</string>
 <string name="shared_string_not_selected">Nepasirinkta</string>
-    <string name="rec_split">Įrašo dalijimas</string>
-    <string name="rec_split_title">Naudoti įrašo dalijimą</string>
-    <string name="rec_split_desc">Perrašyti klipus kai naudojama vieta didesnė nei saugyklos dydis</string>
+    <string name="rec_split">Įrašo padalijimas</string>
+    <string name="rec_split_title">Naudoti įrašo padalijimą</string>
+    <string name="rec_split_desc">Perrašyti klipus kai naudojama vieta pasiekia saugyklos dydį</string>
     <string name="rec_split_clip_length">Klipo ilgis</string>
     <string name="rec_split_clip_length_desc">Kiekvieno klipo ilgis nebus didesnis nei nurodytas laiko intervalas</string>
     <string name="rec_split_storage_size">Saugyklos dydis</string>
@@ -2076,7 +2075,7 @@
     <string name="av_audio_bitrate">Audio bitų sparta</string>
     <string name="av_audio_bitrate_descr">Pasirinkite audio bitų spartą</string>
     <string name="release_2_2">" • New context-sensitive UI for tapping locations on the map and on other screens\n\n • Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n • Configure which and how cards are displayed on the dashboard\n\n • Bypass the dashboard if you like menu-based app control\n\n • Tam, kad būtų atsiųsti žemėlapiai, pakanka paliesti regioną pasaulio žemėlapyje\n\n • POI Search now supports more specific queries\n\n • Pagerintas LV ir OSM redagavimo funkcionalumas\n\n • Perdaryti žemėlapio atsisiuntimo struktūra bei sąsaja\n\n ir dar daugiau… "</string>
-    <string name="access_from_map_description">Meniu mygtukas aktyvuoja duomenų skydelį, ne meniu</string>
+    <string name="access_from_map_description">Meniu mygtukas aktyvuoja valdymo skydelį, ne meniu</string>
     <string name="use_dashboard_btn">Naudoti duomenų skydelį</string>
     <string name="dashboard_or_drawer_description">Sukurta nauja galimybė naudoti programėlę duomenų skydelio arba statinio meniu pagalba. Savo pasirinkimą galite bet kada pakeisti duomenų skydelio nustatymuose.</string>
     
@@ -2088,7 +2087,7 @@
     <string name="night">Naktį</string>
     <string name="shared_string_remove">Pašalinti</string>
     <string name="shared_string_select">Pasirinkti</string>
-    <string name="rendering_attr_hideIcons_name">Paslėpti LV piktogramas</string>
+    <string name="rendering_attr_hideIcons_name">LV piktogramos</string>
     <string name="item_removed">Objektas pašalintas</string>
     <string name="n_items_removed">objektai pašalinti</string>
     <string name="shared_string_undo_all">ATŠAUKTI VISKĄ</string>
@@ -2096,11 +2095,11 @@
     <string name="updates_size">Naujinio dydis</string>
     <string name="select_month_and_country">Pasirinkite mėnesį bei šalį</string>
     <string name="number_of_edits">Pataisymų kiekis</string>
-    <string name="reports_for">Pranešti apie</string>
+    <string name="reports_for">Pranešimas</string>
 <string name="shared_string_status">Statusas</string>
     <string name="shared_string_save_changes">Išsaugoti pakeitimus</string>
     <string name="shared_string_email_address">E. pašto adresas</string>
-    <string name="rendering_attr_hideUnderground_name">Slėpti požeminius objektus</string>
+    <string name="rendering_attr_hideUnderground_name">Požeminiai objektai</string>
     <string name="data_is_not_available">Duomenys nepasiekiami</string>
     <string name="find_parking">Surasti parkavimo vietą</string>
     <string name="rendering_attr_showMtbRoutes_name">Rodyti MTB maršrutus</string>
@@ -2123,20 +2122,20 @@
     <string name="osm_live_subscription_settings">Prenumeratos nustatymai</string>
     <string name="osm_live_ask_for_purchase">Prašome pirmiau įsigyti OSM Live prenumeratą</string>
 
-    <string name="download_files_error_not_enough_space">Nepakanka vietos! Failams reikalinga {3} MB laikinai ir {1} MB pastoviai. Šiuo metu galimi tik {2} MB vietos.</string>
+    <string name="download_files_error_not_enough_space">Nepakanka vietos! Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui. Šiuo metu prieinama tik {2} MB vietos.</string>
     <string name="report">Ataskaita</string>
     <string name="shared_string_move_up">Perkelti viršun</string>
     <string name="shared_string_move_down">Perkelti žemyn</string>
     <string name="avoid_road">Vengti kelių</string>
     <string name="full_report">Visa ataskaita</string>
-    <string name="recalculate_route">Iš naujo perskaičiuoti maršrutą</string>
+    <string name="recalculate_route">Perskaičiuoti maršrutą</string>
     <string name="donations">Paremti</string>
-    <string name="select_map_marker">Pasirinite žymeklį</string>
-    <string name="map_markers_other">Kiti žymekliai</string>
+    <string name="select_map_marker">Pasirinite žemėlapio žymę</string>
+    <string name="map_markers_other">Kitos žymės</string>
     <string name="upload_anonymously">Siųsti anonimiškai</string>
-    <string name="map_marker_1st">Pirmasis žymeklis</string>
-    <string name="map_marker_2nd">Antrasis žymeklis</string>
-    <string name="shared_string_reverse_order">Atvirkštinė tvarka</string>
+    <string name="map_marker_1st">Pirmoji žymė</string>
+    <string name="map_marker_2nd">Antroji žymė</string>
+    <string name="shared_string_reverse_order">Atvirkštine tvarka</string>
     <string name="switch_start_finish">Sukeisti vietomis pradžios tašką ir galutinį tikslą</string>
     <string name="routing_attr_avoid_borders_name">Vengti sienų kirtimo</string>
     </resources>
