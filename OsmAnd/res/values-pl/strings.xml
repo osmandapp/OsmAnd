@@ -2181,4 +2181,7 @@
     <string name="rendering_value_thin_name">Cienkie</string>
     <string name="rendering_value_medium_name">Średnie</string>
     <string name="rendering_value_bold_name">Grube</string>
+    <string name="access_no_destination">Nie podano celu trasy</string>
+    <string name="access_disable_offroute_recalc">Nie zmieniaj trasy po zboczeniu z niej</string>
+    <string name="access_disable_offroute_recalc_descr">Zapobiega automatycznej zmianie proponowanej trasy, gdy poważnie oddalisz się od niej</string>
     </resources>
