@@ -2779,7 +2779,7 @@
 	<string name="poi_health_service_test_yes">Sundhedsvæsen: test: ja</string>
 	<string name="poi_health_service_test_no">Sundhedsvæsen: test: nej</string>
 
-	<string name="poi_health_facility_type_office">Sundhed facilitetstype: kontor</string>
+	<string name="poi_health_facility_type_office">Medicinsk kontor</string>
 	<string name="poi_health_facility_type_hospital">Sundhed facilitetstype: hospital</string>
 	<string name="poi_health_facility_type_field_hospital">Sundhed facilitetstype: felthospital</string>
 	<string name="poi_health_facility_type_clinic">Sundhed facilitetstype: klinik</string>
@@ -2896,4 +2896,12 @@
 	<string name="poi_treat_inpatient_yes">Indlæggelse: ja</string>
 	<string name="poi_treat_inpatient_no">Indlæggelse: nej</string>
 	<string name="poi_treat_inpatient_only">Indlæggelse: eksklusiv</string>
-	</resources>
+	<string name="poi_office_physician">Læge kontor</string>
+	<string name="poi_office_therapist">Terapeut kontor</string>
+	<string name="poi_office_podologist">Podologist kontor</string>
+	<string name="poi_office_healer">Healer kontor</string>
+	<string name="poi_office_psychologist">Psykolog kontor</string>
+	<string name="poi_office_nursing_service">Sygepleje service</string>
+	<string name="poi_office_midwife">Jordemoder kontor</string>
+
+</resources>
