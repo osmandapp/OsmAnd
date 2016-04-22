@@ -55,7 +55,6 @@ public abstract class Renderable {
         }
     }
 
-
     public List<GPXUtilities.WptPt> points = null;               // Original list of points
     protected List<WptPt2> culled;                               // Reduced/resampled list of points
     protected int pointSize;
@@ -83,6 +82,12 @@ public abstract class Renderable {
         updateBounds(points, 0);
     }
 
+    protected void copyPointsToCulled() {
+        for (GPXUtilities.WptPt pt : points) {
+            culled.add(new WptPt2(pt));
+        }
+    }
+
     protected void updateLocalPaint(Paint p) {
         if (paint == null) {
             paint = new Paint(p);
@@ -92,12 +97,6 @@ public abstract class Renderable {
         }
         paint.setColor(p.getColor());
         paint.setStrokeWidth(p.getStrokeWidth());
-    }
-
-    protected void seedCulledTrack() {
-        for (GPXUtilities.WptPt pt : points) {
-            culled.add(new WptPt2(pt));
-        }
     }
 
     protected AsynchronousResampler Factory() {
@@ -145,7 +144,6 @@ public abstract class Renderable {
     }
 
     protected void basicDraw (Canvas canvas, RotatedTileBox tileBox) {
-
         canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         QuadRect tileBounds = tileBox.getLatLonBounds();
 
@@ -181,7 +179,7 @@ public abstract class Renderable {
 
         public StandardTrack(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon) {
             super(Priority.STANDARD, view, pt, epsilon);
-            seedCulledTrack();
+            copyPointsToCulled();
         }
 
         @Override protected AsynchronousResampler Factory() {
@@ -222,6 +220,7 @@ public abstract class Renderable {
             if (pointSize != points.size()) {
                 for (int i = pointSize; i < points.size(); i++) {
                     culled.add(new WptPt2(points.get(i)));
+                    forceCull = true;
                 }
                 updateBounds(points, pointSize);
                 forceCull = true;
@@ -242,15 +241,29 @@ public abstract class Renderable {
     private abstract static class ColourBand extends Renderable {
 
         protected double widthZoom;
+        protected double clampMin = 0;
+        protected double clampMax = 0;
+        protected boolean clamp;
 
         public ColourBand(Priority priority, OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
             super(priority, view, pt, epsilon);
             this.widthZoom = widthZoom;
+            this.clamp = false;
+        }
+
+        // Speed range in km/h, altitude is in m.
+        public void setRange(double clampMin, double clampMax) {
+            this.clampMin = clampMin;
+            this.clampMax = clampMax;
+            this.clamp = true;
         }
 
         @Override protected void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
             if (culled.size() > 1) {
+
+                Path path = new Path();
+
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
@@ -294,8 +307,16 @@ public abstract class Renderable {
             super(Priority.SPEED, view, pt, epsilon, widthZoom);
         }
 
+        public void setRangeMilesPerHour(double clampMin, double clampMax) {
+            this.clampMin = clampMin / 1.60934;
+            this.clampMax = clampMax / 1.60934;
+            this.clamp = true;
+        }
+
         @Override protected AsynchronousResampler Factory() {
-            return new AsynchronousResampler.Speed(this, Math.pow(2.0, epsilon - zoom));
+            return clamp ?
+                new AsynchronousResampler.Speed(this, Math.pow(2.0, epsilon - zoom), clampMin, clampMax) :
+                new AsynchronousResampler.Speed(this, Math.pow(2.0, epsilon - zoom));
         }
     }
 
@@ -308,7 +329,9 @@ public abstract class Renderable {
         }
 
         @Override protected AsynchronousResampler Factory() {
-            return new AsynchronousResampler.Altitude(this, Math.pow(2.0, epsilon - zoom));
+            return clamp ?
+                new AsynchronousResampler.Altitude(this, Math.pow(2.0, epsilon - zoom), clampMin, clampMax) :
+                new AsynchronousResampler.Altitude(this, Math.pow(2.0, epsilon - zoom));
         }
     }
 
@@ -358,7 +381,7 @@ public abstract class Renderable {
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-                float scale = 11 * tileBox.getDensity();
+                float scale = 9.5f * tileBox.getDensity();
                 paint.setTextSize(scale);
 
                 float stroke = paint.getStrokeWidth();
@@ -396,7 +419,6 @@ public abstract class Renderable {
             }
         }
     }
-
 
     //----------------------------------------------------------------------------------------------
 

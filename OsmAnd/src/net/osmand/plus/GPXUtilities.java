@@ -1035,6 +1035,7 @@ public class GPXUtilities {
 						if (parse instanceof GPXFile) {
 							if (parser.getName().equals("gpx")) {
 								((GPXFile) parse).author = parser.getAttributeValue("", "creator");
+<<<<<<< HEAD
 							} else if (parser.getName().equals("trk")) {
 								Track track = new Track();
 								((GPXFile) parse).tracks.add(track);
@@ -1044,6 +1045,20 @@ public class GPXUtilities {
 								((GPXFile) parse).routes.add(route);
 								parserState.push(route);
 							} else if (parser.getName().equals("wpt")) {
+=======
+							}
+							else if (parser.getName().equals("trk")) {
+								Track track = new Track();
+								((GPXFile) parse).tracks.add(track);
+								parserState.push(track);
+							}
+							else if (parser.getName().equals("rte")) {
+								Route route = new Route();
+								((GPXFile) parse).routes.add(route);
+								parserState.push(route);
+							}
+							else if (parser.getName().equals("wpt")) {
+>>>>>>> minimal
 								WptPt wptPt = parseWptAttributes(parser);
 								((GPXFile) parse).points.add(wptPt);
 								parserState.push(wptPt);
@@ -1051,9 +1066,17 @@ public class GPXUtilities {
 						} else if (parse instanceof Route) {
 							if (parser.getName().equals("name")) {
 								((Route) parse).name = readText(parser, "name");
+<<<<<<< HEAD
 							} else if (parser.getName().equals("desc")) {
 								((Route) parse).desc = readText(parser, "desc");
 							} else if (parser.getName().equals("rtept")) {
+=======
+							}
+							else if (parser.getName().equals("desc")) {
+								((Route) parse).desc = readText(parser, "desc");
+							}
+							else if (parser.getName().equals("rtept")) {
+>>>>>>> minimal
 								WptPt wptPt = parseWptAttributes(parser);
 								((Route) parse).points.add(wptPt);
 								parserState.push(wptPt);
@@ -1061,9 +1084,17 @@ public class GPXUtilities {
 						} else if (parse instanceof Track) {
 							if (parser.getName().equals("name")) {
 								((Track) parse).name = readText(parser, "name");
+<<<<<<< HEAD
 							} else if (parser.getName().equals("desc")) {
 								((Track) parse).desc = readText(parser, "desc");
 							} else if (parser.getName().equals("trkseg")) {
+=======
+							}
+							else if (parser.getName().equals("desc")) {
+								((Track) parse).desc = readText(parser, "desc");
+							}
+							else if (parser.getName().equals("trkseg")) {
+>>>>>>> minimal
 								TrkSegment trkSeg = new TrkSegment();
 								((Track) parse).segments.add(trkSeg);
 								parserState.push(trkSeg);

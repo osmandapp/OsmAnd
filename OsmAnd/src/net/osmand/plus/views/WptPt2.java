@@ -7,8 +7,8 @@ public class WptPt2 {
     public double lat;
     public double lon;
     public long time = 0;
-    public double ele = Double.NaN;
-    public double speed = 0;
+    public double ele = Double.NaN;             // m
+    public double speed = 0;                    // km/h
     public int colourARGB = 0;					// point colour (used for altitude/speed colouring)
     public double distance = 0.0;				// cumulative distance, if in a track
     public double angle = 0;

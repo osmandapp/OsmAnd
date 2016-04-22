@@ -368,6 +368,19 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						ts.renders.add(new Renderable.Altitude(view, ts.points, epsilon, 2.5));
 						//ts.renders.add(new Renderable.Speed(view, ts.points, epsilon, 4));
 						ts.renders.add(new Renderable.Distance(view, ts.points, Renderable.Distance.unit.KILOMETERS));
+
+//						Renderable.Altitude alt = new Renderable.Altitude(view, ts.points, epsilon, 2.5);
+//						alt.setRange(0,500);	// optional  - set colour range 0m to 500m
+//						ts.renders.add(alt);
+
+//						Renderable.Speed speed = new Renderable.Speed(view, ts.points, epsilon, 4);
+						//speed.setRange(0,80);	// optional (0 km/h to 80 km/h range)
+///						ts.renders.add(speed);
+
+
+
+	//					ts.renders.add(new Renderable.Distance(view, ts.points, Renderable.Distance.unit.KILOMETERS));
+						//ts.renders.add(new Renderable.Arrows(view, ts.points, view, 20, 500));
 					}
 				}
 				// END OF SECTION TO BE MOVED TO UI
