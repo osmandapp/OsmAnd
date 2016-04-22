@@ -2533,12 +2533,12 @@
 
 	<string name="poi_fire_hydrant_type_underground">Tipo: Subterráneo</string>
 	<string name="poi_fire_hydrant_type_pillar">Tipo: Poste</string>
-	<string name="poi_fire_hydrant_type_dry_barrel">Tipo: Columna seca</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Tipo: Barril seco</string>
 	<string name="poi_fire_hydrant_type_pond">Tipo: Estanque</string>
 	<string name="poi_fire_hydrant_type_wall">Tipo: De pared</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">Botiquín de primeros auxilios</string>
-	<string name="poi_health_amenity_type_scales">Escalas públicas</string>
+	<string name="poi_health_amenity_type_scales">Balanzas públicas</string>
 
 	<string name="poi_health_person_type_assistant">Rol del trabajador en salud: Asistente</string>
 	<string name="poi_health_person_type_healer">Rol del trabajador en salud: Curandero/a</string>
@@ -2635,5 +2635,32 @@
 	<string name="poi_office_psychologist">Oficina de psicólogo/a</string>
 	<string name="poi_office_nursing_service">Servicio de enfermería</string>
 	<string name="poi_office_midwife">Oficina de partera</string>
+
+<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoramiento (nutrición): No</string>
+	<string name="poi_fire_hydrant_diameter">Diámetro del hidrante</string>
+	<string name="poi_fire_hydrant_pressure">Presión del hidrante</string>
+	<string name="poi_fire_hydrant_count">Cantidad de hidrantes</string>
+	<string name="poi_fire_hydrant_flow_capacity">Capacidad de caudal del hidrante</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Ubicación del hidrante: En acera</string>
+	<string name="poi_fire_hydrant_position_green">Ubicación del hidrante: En césped</string>
+	<string name="poi_fire_hydrant_position_lane">Ubicación del hidrante: En carril</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Ubicación del hidrante: En estacionamiento</string>
+	<string name="poi_fire_hydrant_position_street">Ubicación del hidrante: En la calle</string>
+	<string name="poi_fire_hydrant_position_underground">Ubicación del hidrante: Subterráneo</string>
+	<string name="poi_fire_hydrant_style_wsh">Estilo de hidrante: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Fuente de agua del hidrante: Principal</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Fuente de agua del hidrante: Estanque</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Fuente de agua del hidrante: Arroyo</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Fuente de agua del hidrante: Cisterna</string>
+	<string name="poi_in_service_yes">En servicio: Sí</string>
+
+	<string name="poi_street_cabinet_power">Tipo de gabinete: Energía</string>
+	<string name="poi_street_cabinet_telecom">Tipo de gabinete: Telecomunicación</string>
+	<string name="poi_street_cabinet_cable_tv">Tipo de gabinete: TV por cable</string>
+	<string name="poi_street_cabinet_gas">Tipo de gabinete: Gas</string>
+	<string name="poi_street_cabinet_postal_service">Tipo de gabinete: Servicio postal</string>
+	<string name="poi_street_cabinet_waste">Tipo de gabinete: Residuos</string>
+	<string name="poi_street_cabinet_water_management">Tipo de gabinete: Gestión del agua</string>
+	<string name="poi_street_cabinet_street_lighting">Tipo de gabinete: Alumbrado público</string>
 
 </resources>
