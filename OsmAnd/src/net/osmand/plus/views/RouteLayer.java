@@ -357,9 +357,26 @@ public class RouteLayer extends OsmandMapLayer {
 			renderable.add(new Renderable.RouteMarker(view, pts, epsilon, 1000));
 		}
 
-		for (Renderable r : renderable) {
-			r.drawSegment(view.getZoom(), paint, canvas, tb);
+
+		// Try to replicate original behaviour with the various paint contexts and drawing order
+
+		if (isPaint_1) {
+			renderable.get(0).drawSegment(view.getZoom(), paint_1, canvas, tb);
 		}
+
+		if (isShadowPaint) {
+			renderable.get(0).drawSegment(view.getZoom(), shadowPaint, canvas, tb);
+		}
+
+		// Now the standard track
+		renderable.get(0).drawSegment(view.getZoom(), paint, canvas, tb);
+
+		if (isPaint2) {
+			renderable.get(0).drawSegment(view.getZoom(), paint2, canvas, tb);
+		}
+
+		// Finally draw the arrows/markers over the top
+		renderable.get(1).drawSegment(view.getZoom(), paint, canvas, tb);
 
 /*
 

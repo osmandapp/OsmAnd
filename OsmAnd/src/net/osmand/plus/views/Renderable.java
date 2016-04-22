@@ -7,7 +7,6 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 
-import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities;
@@ -20,6 +19,9 @@ import java.util.TimerTask;
 public abstract class Renderable {
 
     public enum Priority {
+
+        // Format is the NAME and a priority. This is used for prioritising track drawing, which
+        // is sorted according to the priority values (lowest values drawn first).
 
         CURRENT(1000),
         ALTITUDE(1),
@@ -73,7 +75,7 @@ public abstract class Renderable {
         this.priority = priority.priority;
         this.points = points;
         this.epsilon = epsilon;
-        this.view = view;
+        Renderable.view = view;
 
         culled = new ArrayList<>();
 
@@ -101,7 +103,7 @@ public abstract class Renderable {
 
     protected AsynchronousResampler Factory() {
         return null;
-    };
+    }
 
     protected void startCuller(double newZoom) {
         if (zoom != newZoom) {
@@ -262,8 +264,6 @@ public abstract class Renderable {
 
             if (culled.size() > 1) {
 
-                Path path = new Path();
-
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
@@ -326,6 +326,11 @@ public abstract class Renderable {
 
         public Altitude(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
             super(Priority.ALTITUDE, view, pt, epsilon, widthZoom);
+        }
+
+        public void setRangeMiles(double clampMin, double clampMax) {
+            this.clampMin = clampMin / 1.60934;
+            this.clampMax = clampMax / 1.60934;
         }
 
         @Override protected AsynchronousResampler Factory() {
@@ -414,8 +419,8 @@ public abstract class Renderable {
                         paint.setStrokeWidth(stroke * 2);
                         canvas.drawPoint(x, y, paint);
                     }
-                    canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 }
+                canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
         }
     }
@@ -514,7 +519,6 @@ public abstract class Renderable {
             }
 
 
-            float stroke = paint.getStrokeWidth();
             paint.setStrokeWidth(40f);
             paint.setColor(0xFFFF00FF);
             canvas.drawPath(path, paint);
@@ -563,17 +567,23 @@ public abstract class Renderable {
             }
         }
 
+
         private void drawArrows(Canvas canvas, RotatedTileBox tileBox, boolean actionPoints) {
 
+            // We want a sharp point on the arrow, so use a mitre join
             paint.setStrokeJoin(Paint.Join.MITER);
 
             List<Path> paths = new ArrayList<>();
-            Path path = new Path();
-            paths.add(path);
+            Path currentPath = new Path();
+            paths.add(currentPath);
+
+            Path path = currentPath;
 
 
             float stroke = paint.getStrokeWidth();
-            float arrowSize = 64f;                       //(float) Math.pow(2.0, zoomlimit - 18) * 500; //800;
+            float stroke2 = stroke / 2;
+
+            float arrowSize = stroke;                       //(float) Math.pow(2.0, zoomlimit - 18) * 500; //800;
 
             float clipL = -arrowSize;
             float clipB = -arrowSize;
@@ -599,10 +609,10 @@ public abstract class Renderable {
                     double angle = Math.atan2(lasty - y, lastx - x);
                     float extendx = x - (float) Math.cos(angle) * arrowSize / 4;
                     float extendy = y - (float) Math.sin(angle) * arrowSize / 4;
-                    float newx1 = extendx + (float) Math.cos(angle - 0.6) * arrowSize;
-                    float newy1 = extendy + (float) Math.sin(angle - 0.6) * arrowSize;
-                    float newx2 = extendx + (float) Math.cos(angle + 0.6) * arrowSize;
-                    float newy2 = extendy + (float) Math.sin(angle + 0.6) * arrowSize;
+                    float newx1 = extendx + (float) Math.cos(angle - 0.5) * arrowSize;
+                    float newy1 = extendy + (float) Math.sin(angle - 0.5) * arrowSize;
+                    float newx2 = extendx + (float) Math.cos(angle + 0.5) * arrowSize;
+                    float newy2 = extendy + (float) Math.sin(angle + 0.5) * arrowSize;
 
                     int clr = pt.colourARGB;
                     if (actionPoints && clr == Color.YELLOW) {
@@ -620,10 +630,19 @@ public abstract class Renderable {
                             path.lineTo(extendx, extendy);
                             path.lineTo(newx1, newy1);
 
-                            path = new Path();
-                            paths.add(path);
+                            // Start a new path; we need to be able to overlay arrows and have the black/yellow
+                            // highlight the 'on top' arrow; so when we have completed an arrow, start a new path.
+                            // We can't just go 'path = new Path()' here, as the garbage collector seems to kick in
+                            // and the arrow isn't drawn; instead, we use a roundabout way to do the same thing
+
+                            currentPath = new Path();
+                            paths.add(currentPath);
+                            path = currentPath;
                         }
+
                     } else if (!actionPoints && clr == Color.BLACK) {
+
+                        // Handle the simple direction markers
                         path.moveTo(newx2, newy2);
                         path.lineTo(extendx, extendy);
                         path.lineTo(newx1, newy1);
@@ -639,20 +658,20 @@ public abstract class Renderable {
 
             if (actionPoints) {
                 for (Path path2 : paths) {
-                    paint.setStrokeWidth(3f * stroke);
+                    paint.setStrokeWidth(stroke2 * 1.2f);
                     paint.setColor(Color.BLACK);
                     canvas.drawPath(path2, paint);
                     paint.setColor(0xFFFFE000);
-                    paint.setStrokeWidth(2f * stroke);
+                    paint.setStrokeWidth(0.75f * stroke2 * 1.2f);
                     canvas.drawPath(path2, paint);
                 }
 
             } else {
                 for (Path path2 : paths) {
-                    paint.setStrokeWidth(2f * stroke);
+                    paint.setStrokeWidth(stroke2 * 0.8f);
                     paint.setColor(Color.BLACK);
                     canvas.drawPath(path2, paint);
-                    paint.setStrokeWidth(1.2f * stroke);
+                    paint.setStrokeWidth(0.75f * stroke2 * 0.8f);
                     paint.setColor(0x80FF00FF);
                     canvas.drawPath(path2, paint);
                 }
@@ -666,7 +685,7 @@ public abstract class Renderable {
 
             if (!culled.isEmpty() && zoom > 10) {
                 updateLocalPaint(p);
-                paint.setStrokeWidth(12.0f);
+                //paint.setStrokeWidth(12.0f);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 drawArrows(canvas, tileBox, false);
                 drawArrows(canvas, tileBox, true);
