@@ -489,6 +489,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
 			app.poiFilters.reloadAllPoiFilters();
+			app.poiFilters.loadSelectedPoiFilters();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			indexRegionsBoundaries(warnings);
 			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);

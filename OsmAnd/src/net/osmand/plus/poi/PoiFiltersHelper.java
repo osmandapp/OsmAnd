@@ -120,7 +120,7 @@ public class PoiFiltersHelper {
 	
 	private PoiUIFilter getFilterById(String filterId, PoiUIFilter... filters){
 		for (PoiUIFilter pf : filters) {
-			if(pf.getFilterId().equals(filterId)){
+			if (pf.getFilterId().equals(filterId)) {
 				return pf;
 			}
 		}
@@ -128,11 +128,11 @@ public class PoiFiltersHelper {
 	}
 	
 	public PoiUIFilter getFilterById(String filterId){
-		if(filterId == null){
+		if (filterId == null){
 			return null;
 		}
-		for(PoiUIFilter f : getTopDefinedPoiFilters()) {
-			if(f.getFilterId().equals(filterId)){
+		for (PoiUIFilter f : getTopDefinedPoiFilters()) {
+			if (f.getFilterId().equals(filterId)) {
 				return f;
 			}
 		}
@@ -141,10 +141,10 @@ public class PoiFiltersHelper {
 		if (ff != null) {
 			return ff;
 		}
-		if(filterId.startsWith(PoiUIFilter.STD_PREFIX)) {
+		if (filterId.startsWith(PoiUIFilter.STD_PREFIX)) {
 			String typeId = filterId.substring(PoiUIFilter.STD_PREFIX.length());
 			AbstractPoiType tp = application.getPoiTypes().getAnyPoiTypeByKey(typeId);
-			if(tp != null) {
+			if (tp != null) {
 				PoiUIFilter lf = new PoiUIFilter(tp, application, "");
 				ArrayList<PoiUIFilter> copy = new ArrayList<PoiUIFilter>(cacheTopStandardFilters);
 				copy.add(lf);
@@ -153,7 +153,7 @@ public class PoiFiltersHelper {
 				return lf;
 			}
 			AbstractPoiType lt = application.getPoiTypes().getAnyPoiAdditionalTypeByKey(typeId);
-			if(lt != null) {
+			if (lt != null) {
 				PoiUIFilter lf = new PoiUIFilter(lt, application, "");
 				ArrayList<PoiUIFilter> copy = new ArrayList<PoiUIFilter>(cacheTopStandardFilters);
 				copy.add(lf);
@@ -165,22 +165,13 @@ public class PoiFiltersHelper {
 		return null;
 	}
 
-	public List<PoiUIFilter> getFiltersById(String filtersId) {
-		List<PoiUIFilter> result = new ArrayList<PoiUIFilter>();
-		for (String filterId : filtersId.split(","))
-			result.add(getFilterById(filterId));
-		return result;
-	}
-
-	
 	public void reloadAllPoiFilters() {
 		showAllPOIFilter = null;
 		getShowAllPOIFilter();
 		cacheTopStandardFilters = null;
 		getTopDefinedPoiFilters();
 	}
-	
-	
+
 	private List<PoiUIFilter> getUserDefinedPoiFilters() {
 		ArrayList<PoiUIFilter> userDefinedFilters = new ArrayList<PoiUIFilter>();
 		PoiFilterDbHelper helper = openDbHelper();
@@ -276,9 +267,7 @@ public class PoiFiltersHelper {
 		helper.close();
 		return res;
 	}
-	
-	
-	
+
 	public boolean editPoiFilter(PoiUIFilter filter) {
 		if (filter.getFilterId().equals(PoiUIFilter.CUSTOM_FILTER_ID) || 
 				filter.getFilterId().equals(PoiUIFilter.BY_NAME_FILTER_ID) || filter.getFilterId().startsWith(PoiUIFilter.STD_PREFIX)) {
@@ -294,23 +283,28 @@ public class PoiFiltersHelper {
 	}
 
 	@NonNull
-	public Set<PoiUIFilter> getSelectedPoiFilters() { return selectedPoiFilters; }
+	public Set<PoiUIFilter> getSelectedPoiFilters() {
+		return selectedPoiFilters;
+	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
 		selectedPoiFilters.add(filter);
-	}
-
-	public void addSelectedPoiFilter(String filterId) {
-		selectedPoiFilters.add(getFilterById(filterId));
+		saveSelectedPoiFilters();
 	}
 
 	public void removeSelectedPoiFilter(PoiUIFilter filter) {
 		selectedPoiFilters.remove(filter);
+		saveSelectedPoiFilters();
 	}
 
-	public boolean isShowingAnyPoi() { return !selectedPoiFilters.isEmpty(); }
+	public boolean isShowingAnyPoi() {
+		return !selectedPoiFilters.isEmpty();
+	}
 
-	public void clearSelectedPoiFilters() { selectedPoiFilters.clear(); }
+	public void clearSelectedPoiFilters() {
+		selectedPoiFilters.clear();
+		saveSelectedPoiFilters();
+	}
 
 	public String getSelectedPoiFiltersName() {
 		if (!isShowingAnyPoi()) {
@@ -333,7 +327,13 @@ public class PoiFiltersHelper {
 		return false;
 	}
 
-	private void saveCurrentSelections() {
+	public void loadSelectedPoiFilters() {
+		Set<String> filters = application.getSettings().getSelectedPoiFilters();
+		for (String f: filters)
+			selectedPoiFilters.add(getFilterById(f));
+	}
+
+	public void saveSelectedPoiFilters() {
 		Set<String> filters = new HashSet<>();
 		for (PoiUIFilter f: selectedPoiFilters)
 			filters.add(f.filterId);
