@@ -17,6 +17,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
@@ -331,19 +332,32 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
 
 			@Override
-			protected Void doInBackground(Void... params) {
+			protected void onPreExecute() {
 				isSaving = true;
+				if (monitoringControl != null) {
+					monitoringControl.updateInfo(null);
+				}
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
 				try {
 					SavingTrackHelper helper = app.getSavingTrackHelper();
 					helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
 					helper.close();
-					app.getNotificationHelper().showNotification();
 				} finally {
-					isSaving = false;
+					app.getNotificationHelper().showNotification();
 				}
 				return null;
 			}
 
+			@Override
+			protected void onPostExecute(Void aVoid) {
+				isSaving = false;
+				if (monitoringControl != null) {
+					monitoringControl.updateInfo(null);
+				}
+			}
 		}, (Void) null);
 	}
 
