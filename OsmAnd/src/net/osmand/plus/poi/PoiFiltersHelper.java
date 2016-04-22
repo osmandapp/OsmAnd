@@ -148,7 +148,7 @@ public class PoiFiltersHelper {
 				PoiUIFilter lf = new PoiUIFilter(tp, application, "");
 				ArrayList<PoiUIFilter> copy = new ArrayList<PoiUIFilter>(cacheTopStandardFilters);
 				copy.add(lf);
-				sortListOfFilters(copy);
+				Collections.sort(copy);
 				cacheTopStandardFilters = copy;
 				return lf;
 			}
@@ -157,7 +157,7 @@ public class PoiFiltersHelper {
 				PoiUIFilter lf = new PoiUIFilter(lt, application, "");
 				ArrayList<PoiUIFilter> copy = new ArrayList<PoiUIFilter>(cacheTopStandardFilters);
 				copy.add(lf);
-				sortListOfFilters(copy);
+				Collections.sort(copy);
 				cacheTopStandardFilters = copy;
 				return lf;
 			}
@@ -183,18 +183,6 @@ public class PoiFiltersHelper {
 		return userDefinedFilters;
 	}
 	
-	public void sortListOfFilters(List<PoiUIFilter> list) {
-		final Collator instance = Collator.getInstance();
-		Collections.sort(list, new Comparator<PoiUIFilter>() {
-
-			@Override
-			public int compare(PoiUIFilter lhs, PoiUIFilter rhs) {
-				return instance.compare(lhs.getName(), rhs.getName());
-			}
-		});
-		
-	}
-	
 	public List<PoiUIFilter> getTopDefinedPoiFilters() {
 		if (cacheTopStandardFilters == null) {
 			List<PoiUIFilter> top = new ArrayList<PoiUIFilter>();
@@ -209,7 +197,7 @@ public class PoiFiltersHelper {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				top.add(f);
 			}
-			sortListOfFilters(top);
+			Collections.sort(top);
 			cacheTopStandardFilters = top;
 		}
 		List<PoiUIFilter> result = new ArrayList<PoiUIFilter>();
@@ -261,7 +249,7 @@ public class PoiFiltersHelper {
 		if(res){
 			ArrayList<PoiUIFilter> copy = new ArrayList<>(cacheTopStandardFilters);
 			copy.add(filter);
-			sortListOfFilters(copy);
+			Collections.sort(copy);
 			cacheTopStandardFilters = copy;
 		}
 		helper.close();
