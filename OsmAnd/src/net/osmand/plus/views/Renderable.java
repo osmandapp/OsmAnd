@@ -545,7 +545,10 @@ public abstract class Renderable {
 
             paint.setStrokeJoin(Paint.Join.MITER);
 
+            List<Path> paths = new ArrayList<>();
             Path path = new Path();
+            paths.add(path);
+
 
             float stroke = paint.getStrokeWidth();
             float arrowSize = 64f;                       //(float) Math.pow(2.0, zoomlimit - 18) * 500; //800;
@@ -594,6 +597,9 @@ public abstract class Renderable {
                             path.moveTo(newx2, newy2);
                             path.lineTo(extendx, extendy);
                             path.lineTo(newx1, newy1);
+
+                            path = new Path();
+                            paths.add(path);
                         }
                     } else if (!actionPoints && clr == Color.BLACK) {
                         path.moveTo(newx2, newy2);
@@ -610,20 +616,24 @@ public abstract class Renderable {
             }
 
             if (actionPoints) {
-                paint.setStrokeWidth(3f*stroke);
-                paint.setColor(Color.BLACK);
-                canvas.drawPath(path, paint);
-                paint.setColor(0xFFFFC000);
-                paint.setStrokeWidth(2f * stroke);
-                canvas.drawPath(path, paint);
+                for (Path path2 : paths) {
+                    paint.setStrokeWidth(3f * stroke);
+                    paint.setColor(Color.BLACK);
+                    canvas.drawPath(path2, paint);
+                    paint.setColor(0xFFFFE000);
+                    paint.setStrokeWidth(2f * stroke);
+                    canvas.drawPath(path2, paint);
+                }
 
             } else {
-                paint.setStrokeWidth(2f*stroke);
-                paint.setColor(Color.BLACK);
-                canvas.drawPath(path, paint);
-                paint.setStrokeWidth(1.2f*stroke);
-                paint.setColor(0x80FF00FF);
-                canvas.drawPath(path, paint);
+                for (Path path2 : paths) {
+                    paint.setStrokeWidth(2f * stroke);
+                    paint.setColor(Color.BLACK);
+                    canvas.drawPath(path2, paint);
+                    paint.setStrokeWidth(1.2f * stroke);
+                    paint.setColor(0x80FF00FF);
+                    canvas.drawPath(path2, paint);
+                }
             }
 
             paint.setStrokeWidth(stroke);
@@ -632,7 +642,7 @@ public abstract class Renderable {
         @Override
         public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
-            if (!culled.isEmpty() && zoom > 12) {
+            if (!culled.isEmpty() && zoom > 10) {
                 updateLocalPaint(p);
                 paint.setStrokeWidth(12.0f);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
