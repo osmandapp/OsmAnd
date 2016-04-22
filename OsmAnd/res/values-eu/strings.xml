@@ -25,7 +25,7 @@
   <string name="driving_region_uk">EB, India, Australia &amp; Bestelakoak</string>
   
   
-  <string name="announce_gpx_waypoints">GPX bide-puntuen berri eman</string>
+  <string name="announce_gpx_waypoints">GPX bide-puntuak</string>
   <string name="speak_title">Iragarri…</string>
   <string name="speak_descr">Konfiguratu kaleen izenen, trafiko abixuen (geldialdi behartuak, abiadura mugak) eta radarren berri emateko</string>
   <string name="speak_street_names">Kaleen izenen berri eman (TTS)</string>
@@ -37,8 +37,8 @@
   <string name="clear_intermediate_points">Erdibideko puntuak garbitu</string>
   <string name="keep_intermediate_points">Erdibideko puntuak mantendu</string>
   <string name="new_directions_point_dialog">Baduzu iada erdibideko puntuen multzoa.</string>
-  <string name="context_menu_item_directions_to">Norabideak Honera</string>
-  <string name="context_menu_item_directions_from">Norabideak Hemendik</string>
+  <string name="context_menu_item_directions_to">Jarraibideak hona</string>
+  <string name="context_menu_item_directions_from">Jarraibideak hemendik</string>
   <string name="route_descr_map_location">Mapa: </string>
   <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
   
@@ -105,7 +105,7 @@
   <string name="choose_osmand_theme_descr">Aplikazioaren itsura aukeratu</string>
   <string name="choose_osmand_theme">Aplikazioaren itsura</string>
   <string name="accessibility_options">Erabilerraztasun aukerak</string>
-  <string name="select_address_activity">Helbidea aukeratu</string>
+  <string name="select_address_activity">Hautatu helbidea</string>
   <string name="favourites_list_activity">Aukeratu gogokoena</string>
   <string name="local_openstreetmap_act_title">OSM aldaketak</string>
   <string name="shared_string_more_actions">Bestelako ekintzak</string>
@@ -216,7 +216,7 @@
   <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikazioa ez dago instalatua. Marketean bilatu nahi duzu?</string>
   <string name="rendering_attr_roadColors_description">Aukeratu errepideentzako kolore paleta:</string>
   <string name="rendering_attr_roadColors_name">Errepideentzako kolore paleta</string>
-  <string name="map_widget_show_destination_arrow">Erakutsi helmugaren helbidea</string>
+  <string name="map_widget_show_destination_arrow">Erakutsi helmugara noranzkoa</string>
   <string name="enable_plugin_monitoring_services">Jarraipen plugina gaitu kokapen erregistru zerbitzuak erabiltzeko (GPX grabaketak, sare bidezko jarraipena)</string>
   <string name="non_optimal_route_calculation">Kalkulatu distantzia luzeetan hoberena izan ez daitekeen ibilbidea</string>
   <string name="gps_not_available">Mesedez gaitu GPSa ezarpenetan</string>
@@ -283,7 +283,7 @@
   
   
   
-  <string name="layer_map_appearance">Pantaila konfiguratu</string>
+  <string name="layer_map_appearance">Konfiguratu pantaila</string>
   <string name="show_lanes">Erreilak erakutsi</string>
   <string name="avoid_unpaved">Asfaltatu gabeko bideak sahistu</string>
   <string name="avoid_ferries">Ferriak sahiestu</string>
@@ -302,7 +302,7 @@
   <string name="int_continuosly">Etengabeko</string>
   <string name="screen_is_locked">Pantaila desblokeatzeko sakatu giltrarrapoearen ikonoa</string>
   <string name="map_widget_top_text">Kale izena</string>
-  <string name="map_widget_config">Pantaila konfiguratu</string>
+  <string name="map_widget_config">Konfiguratu pantaila</string>
   <string name="map_widget_back_to_loc">Non nago</string>
   <string name="map_widget_lock_screen">Pantaila blokeatu</string>
   <string name="map_widget_compass">Iparrorratza</string>
@@ -480,8 +480,8 @@
   <string name="no_info">Informaziorik ez</string>
   <string name="direction_style_sidewise">Ezkerreruntz (8 sektore)</string>
   <string name="direction_style_clockwise">Eskubiruntz (12 sektore)</string>
-  <string name="settings_direction_style">Argibideen estiloa</string>
-  <string name="settings_direction_style_descr">Aukeratu mugimenduan egotean ematen diren argibide erlatiboen estiloa</string>
+  <string name="settings_direction_style">Jarraibideen estiloa</string>
+  <string name="settings_direction_style_descr">Aukeratu mugimenduan egotean ematen diren jarraibide erlatiboen estiloa</string>
   <string name="auto_announce_on">Iragarpen automatikoa hasi</string>
   <string name="auto_announce_off">Iragarpen automatikoa gelditu</string>
   <string name="i_am_here">Hemen nago</string>
@@ -605,7 +605,7 @@
   
   
   <string name="search_position_map_view">Azkeneko mapa ikuspegia</string>
-  <string name="select_search_position">Ondoan bilatu:</string>
+  <string name="select_search_position">Jatorria:</string>
   <string name="context_menu_item_search">Honen ondoan bilatu</string>
   
   <string name="shared_string_save_as_gpx">GPX bide bezala gorde ibilbidea</string>
@@ -674,7 +674,7 @@
   <string name="gpx_option_reverse_route">Alderantzizkatu GPXaren norabidea</string>
   <string name="gpx_option_destination_point">Erabili uneko helmuga</string>
   <string name="gpx_option_from_start_point">Bide guztitik pasa</string>
-  <string name="switch_to_vector_map_to_see">Lineaz kanpoko bektore mapa bat dago kokapen honentzat. ⏎\n⇥⏎\n⇥Erabiltzeko, aktibatu \'Menua\' -&gt; \'Mapa geruzak\' -&gt; \'Mapa Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
+  <string name="switch_to_vector_map_to_see">Lineaz kanpoko bektore mapa bat dago kokapen honentzat. ⏎\n⇥⏎\n⇥Erabiltzeko, aktibatu \'Menua\' -&gt; \'Konfiguratu mapa\' -&gt; \'Mapa Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
   <string name="choose_audio_stream">Ahots gidaritzaren irteera</string>
   <string name="choose_audio_stream_descr">Aukeratu ahots gidaritza erreproduzituko den kanala (sistemaren araberakoa)</string>
   <string name="voice_stream_voice_call">Ahots deiaren audioa</string>
@@ -737,9 +737,9 @@
   <string name="send_location_email_pattern">Kokapena ikusteko jarraitu web arakatzailearen %1$s esteka edo androiderako %2$s esteka</string>
   <string name="send_location">Kokapena bidali</string>
   <string name="context_menu_item_share_location">Kokapena partekatu</string>
-  <string name="add_waypoint_dialog_added">GPX \"{0}\" bide puntua arrakastaz gehitu da</string>
-  <string name="add_waypoint_dialog_title">Grabatutako GPX bideari bide puntua gehitu</string>
-  <string name="context_menu_item_add_waypoint">GPX bide puntua gehitu</string>
+  <string name="add_waypoint_dialog_added">GPX \"{0}\" bide-puntua ongi gehitu da</string>
+  <string name="add_waypoint_dialog_title">Grabatutako GPX bideari bide-puntua gehitu</string>
+  <string name="context_menu_item_add_waypoint">GPX bide-puntua gehitu</string>
   <string name="amenity_type_administrative">Administrazioa</string>
   <string name="amenity_type_barrier">Hesiak</string>
   <string name="amenity_type_education">Hezkuntza</string>
@@ -843,7 +843,7 @@
   <string name="poi_context_menu_modify">POIa eraldatu</string>
   <string name="poi_context_menu_delete">POIa ezabatu</string>
   <string name="rotate_map_compass_opt">Konpaseruntz</string>
-  <string name="rotate_map_bearing_opt">Mugimenduaren norabideruntz</string>
+  <string name="rotate_map_bearing_opt">Mugimenduaren noranzkoan</string>
   <string name="rotate_map_none_opt">Ez biratu (iparra goian)</string>
   <string name="rotate_map_to_bearing_descr">Aukeratu maparen alineazioa</string>
   <string name="rotate_map_to_bearing">Mapa orientazioa</string>
@@ -914,7 +914,7 @@
   <string name="first_time_download">Eskualdeak deskargatu</string>
   <string name="search_poi_location">Seinalea bilatzen…</string>
   <string name="search_near_map">Hurbilen dagoen mapa kokapena bilatu</string>
-  <string name="search_nearby">Ondoan bilatu</string>
+  <string name="search_nearby">Bilatu inguruan</string>
   <string name="map_orientation_default">Gailuaren berdina</string>
   <string name="map_orientation_portrait">Bertikalean</string>
   <string name="map_orientation_landscape">Horizontalean</string>
@@ -958,7 +958,7 @@
   <string name="searching">Bilatzen…</string>
   <string name="searching_address">Helbidea bilatzen…</string>
   <string name="search_osm_nominatim">OSM Nominatim erabiltzen sarean bilatzeko</string>
-  <string name="hint_search_online">Etxearen zenbakia, kalea, herria</string>
+  <string name="hint_search_online">Bilatu linean: Etxearen zenbakia, kalea, herria</string>
   <string name="search_offline_address">Lineaz kanpoko bilaketa</string>
   <string name="search_online_address">Sareko bilaketa</string>
   <string name="max_level_download_tile">Sareko zoom maximoa</string>
@@ -983,7 +983,7 @@
   <string name="only_show">Bidea erakutsi</string>
   <string name="follow">Hasi nabigazioa</string>
   <string name="mark_final_location_first">Mesedez aukeratu lehenbizi helmuga</string>
-  <string name="get_directions">Helbideak</string>
+  <string name="get_directions">Jarraibideak</string>
   
   <string name="opening_hours">Irekitze orduak</string>
   <string name="opening_changeset">Aldaketa multzoa irekitzen…</string>
@@ -1215,7 +1215,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreera</string>
     <string name="forward">Aurrera</string>
-    <string name="home">Etxea</string>
+    <string name="home">Kontrol panela</string>
     <string name="gpx_monitoring_start">Hasi grabatzen GPXa</string>
 	<string name="gpx_monitoring_stop">Gelditu grabatzen GPXa</string>
     <string name="gpx_start_new_segment">Hasi segmentu berria</string>
@@ -1234,7 +1234,7 @@
     <string name="shared_string_share">Banatu</string>
 	<string name="share_fav_subject">Banatutako gogokoenak OsmAnd bidez</string>
 	
-	<string name="import_file_favourites">Gorde GPX fitxategi bezala edo inportatu gogokoenetan?</string>
+	<string name="import_file_favourites">Gorde datuak GPX fitxategi bezala edo inportatu bide-puntuak gogokoetara?</string>
 	
 	<string name="keep_informing_never">Inoiz</string>
     <string name="keep_informing_descr">Ber-iragarri nabigazio jarraibideak tarte erregularretan</string>
@@ -1445,7 +1445,7 @@
     <string name="access_disable_offroute_recalc">Ez aldatu ibilbidea honetatik kanpo banago ere</string>
     <string name="access_disable_offroute_recalc_descr">Eragotzi ibilibidearen birkalkulatze automatikoa bide zuzenetik oso urrun zudenean</string>
     <string name="access_disable_wrong_direction_recalc">Ez aldatu ibilbidea okerreko noranzkoan</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Eragotzi ibilibidearen birkalkulatze automatikoa okerreko noranzkoak mugitzen zaudenean</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Eragotzi ibilbidearen birkalkulatze automatikoa okerreko noranzkoak mugitzen zaudenean</string>
     <string name="access_default_color">Lehenetsitako kolorea</string>
     <string name="access_category_choice">Hautatu kategoria</string>
     <string name="access_hint_enter_name">Sartu izena</string>
@@ -1665,4 +1665,19 @@
     <string name="shared_string_show_all">Erakutsi guztiak</string>
     <string name="shared_string_address">Helbidea</string>
     <string name="shared_string_my_location">Nire kokapena</string>
+    <string name="map_widget_magnetic_bearing">Norabide magnetikoa</string>
+    <string name="map_widget_bearing">Norabide erlatiboa</string>
+    <string name="access_smart_autoannounce">Iragartze adimentsua</string>
+    <string name="access_autoannounce_period">Iragartze maiztasuna</string>
+    <string name="access_smart_autoannounce_descr">Jakinarazi helburu puntura norabidea aldatzean, besterik ez</string>
+    <string name="access_autoannounce_period_descr">Iragarpenen arteko gutxieneko denbora tartea</string>
+    <string name="access_collapsed_list">Tolestutako zerrenda</string>
+    <string name="access_expanded_list">Zabaldutako zerrenda</string>
+    <string name="waypoints">Bide-puntuak</string>
+    <string name="gpx_wpt">Bide-puntua</string>
+    <string name="gpx_info_waypoints">"Bide-puntuak: %1$s "</string>
+    <string name="configure_map">Konfiguratu mapa</string>
+    <string name="osmo_tracker_id">Jarraipen IDa</string>
+    <string name="osmo_tracker_id_descr">Sakatu jarraipen IDa ikusteko</string>
+    <string name="osmo_plugin_name">OpenStreetMap Monitorizatzea</string>
     </resources>
