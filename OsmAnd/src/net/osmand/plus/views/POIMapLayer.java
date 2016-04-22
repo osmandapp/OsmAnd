@@ -122,6 +122,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
 
 				List<Amenity> res = new ArrayList<>();
+				PoiUIFilter.combineStandardPoiFilters(filters, app);
 				for (PoiUIFilter filter : filters)
 					res.addAll(filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {

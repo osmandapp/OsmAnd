@@ -15,8 +15,10 @@ import net.osmand.util.Algorithms;
 import android.support.annotation.NonNull;
 import android.util.ArraySet;
 
+import java.lang.reflect.Array;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -126,7 +128,7 @@ public class PoiFiltersHelper {
 		}
 		return null;
 	}
-	
+
 	public PoiUIFilter getFilterById(String filterId){
 		if (filterId == null){
 			return null;
@@ -182,13 +184,23 @@ public class PoiFiltersHelper {
 		}
 		return userDefinedFilters;
 	}
-	
+
+	public List<PoiUIFilter> getSearchPoiFilters() {
+		List<PoiUIFilter> result = new ArrayList<>();
+		List<PoiUIFilter> filters = Arrays.asList(getCustomPOIFilter(),  // getShowAllPOIFilter(),
+				getSearchByNamePOIFilter(), getNominatimPOIFilter(), getNominatimAddressFilter());
+		for (PoiUIFilter f : filters)
+			if (f != null && !f.isEmpty())
+				result.add(f);
+		return result;
+	}
+
 	public List<PoiUIFilter> getTopDefinedPoiFilters() {
 		if (cacheTopStandardFilters == null) {
 			List<PoiUIFilter> top = new ArrayList<PoiUIFilter>();
 			// user defined
 			top.addAll(getUserDefinedPoiFilters());
-			if(getLocalWikiPOIFilter() != null) {
+			if (getLocalWikiPOIFilter() != null) {
 				top.add(getLocalWikiPOIFilter());
 			}
 			// default
@@ -294,14 +306,20 @@ public class PoiFiltersHelper {
 		saveSelectedPoiFilters();
 	}
 
-	public String getSelectedPoiFiltersName() {
-		if (!isShowingAnyPoi()) {
+	public String getFiltersName(Set<PoiUIFilter> filters) {
+		if (filters.isEmpty()) {
 			return application.getResources().getString(R.string.shared_string_none);
 		}
-		List<String> names = new ArrayList<String>();
-		for (PoiUIFilter filter : selectedPoiFilters)
-			names.add(filter.getName());
-		return android.text.TextUtils.join(", ", names);
+		else {
+			List<String> names = new ArrayList<>();
+			for (PoiUIFilter filter : filters)
+				names.add(filter.getName());
+			return android.text.TextUtils.join(", ", names);
+		}
+	}
+
+	public String getSelectedPoiFiltersName() {
+		return getFiltersName(selectedPoiFilters);
 	}
 
 	public boolean isPoiFilterSelected(PoiUIFilter filter) {

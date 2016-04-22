@@ -11,7 +11,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -353,8 +355,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public String getNameTokenOpen() {
 		return app.getString(R.string.shared_string_open);
 	}
-	
-	
+
 	private ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
 		final AmenityNameFilter nm = getNameFilter(filterByName);
 		return new ResultMatcher<Amenity>() {
@@ -488,14 +489,31 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		}
 	}
 
-	public void replaceWithPoiFilter(PoiUIFilter f) {
-		acceptedTypes.clear();
+	public void combineWithPoiFilter(PoiUIFilter f) {
 		acceptedTypes.putAll(f.acceptedTypes);
-		poiAdditionals.clear();
 		poiAdditionals.putAll(f.poiAdditionals);
 	}
-	
-	
+
+	public static void combineStandardPoiFilters(Set<PoiUIFilter> filters, OsmandApplication app) {
+		Set<PoiUIFilter> standardFilters = new TreeSet<>();
+		for (PoiUIFilter filter : filters)
+			if (filter.isStandardFilter() && filter.filterId.startsWith(PoiUIFilter.STD_PREFIX))
+				standardFilters.add(filter);
+		if (!standardFilters.isEmpty()) {
+			PoiUIFilter standardFiltersCombined = new PoiUIFilter(
+					null, app, app.getPoiFilters().getFiltersName(standardFilters));
+			for (PoiUIFilter f : standardFilters)
+				standardFiltersCombined.combineWithPoiFilter(f);
+			filters.removeAll(standardFilters);
+			filters.add(standardFiltersCombined);
+		}
+	}
+
+	public void replaceWithPoiFilter(PoiUIFilter f) {
+		clearFilter();
+		combineWithPoiFilter(f);
+	}
+
 	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes(){
 		return new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(acceptedTypes);
 	}
@@ -563,7 +581,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	@Override
 	public boolean isEmpty() {
-		return acceptedTypes.isEmpty();
+		return acceptedTypes.isEmpty() &&
+				(currentSearchResult == null || currentSearchResult.isEmpty());
 	}
 
 	@Override
@@ -579,6 +598,4 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		public boolean accept(Amenity a) ;
 	}
 
-
-	
 }

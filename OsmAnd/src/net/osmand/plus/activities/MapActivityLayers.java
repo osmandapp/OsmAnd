@@ -271,6 +271,9 @@ public class MapActivityLayers {
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f);
 		}
+		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
+			addFilterToList(adapter, list, f);
+		}
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
