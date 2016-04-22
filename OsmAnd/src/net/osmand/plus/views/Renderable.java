@@ -393,8 +393,8 @@ public abstract class Renderable {
                         paint.setStrokeWidth(stroke * 2);
                         canvas.drawPoint(x, y, paint);
                     }
-                    canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 }
+                canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
         }
     }
