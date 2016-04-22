@@ -2719,7 +2719,7 @@
 
 	<string name="poi_solarium">Centro de bronceado (solarium)</string>
 
-<string name="poi_sanitary_dump_station">Estación sanitaria de descarga</string>
+<string name="poi_sanitary_dump_station">Estación de descarga sanitaria</string>
 
 	<string name="poi_medical_system_western_yes">Sistema médico: Occidental</string>
 	<string name="poi_medical_system_chinese_yes">Sistema médico: Chino tradicional</string>
@@ -2737,18 +2737,18 @@
 	<string name="poi_health_service_counselling_no">Servicio de salud: Sin asesoramiento</string>
 	<string name="poi_health_service_examination_yes">Servicio de salud: Con revisión médica</string>
 	<string name="poi_health_service_examination_no">Servicio de salud: Sin revisión médica</string>
-	<string name="poi_health_service_child_care_yes">Servicio de salud: Con cuidados para niños</string>
-	<string name="poi_health_service_child_care_no">Servicio de salud: Sin cuidados para niños</string>
+	<string name="poi_health_service_child_care_yes">Servicio de salud: Con pediatría</string>
+	<string name="poi_health_service_child_care_no">Servicio de salud: Sin pediatría</string>
 	<string name="poi_health_service_prevention_yes">Servicio de salud: Con prevención</string>
 	<string name="poi_health_service_prevention_no">Servicio de salud: Sin prevención</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Servicio de salud: Con vacunación</string>
 	<string name="poi_health_service_prevention_vaccination_no">Servicio de salud: Sin vacunación</string>
 	<string name="poi_health_service_support_yes">Servicio de salud: Con ayuda</string>
 	<string name="poi_health_service_support_no">Servicio de salud: Sin ayuda</string>
-	<string name="poi_health_service_test_yes">Servicio de salud: Con pruebas</string>
-	<string name="poi_health_service_test_no">Servicio de salud: Sin pruebas</string>
+	<string name="poi_health_service_test_yes">Servicio de salud: Con análisis</string>
+	<string name="poi_health_service_test_no">Servicio de salud: Sin análisis</string>
 
-	<string name="poi_health_facility_type_office">Tipo de instalación médica: Oficina</string>
+	<string name="poi_health_facility_type_office">Consultorio médico</string>
 	<string name="poi_health_facility_type_hospital">Tipo de instalación médica: Hospital</string>
 	<string name="poi_health_facility_type_field_hospital">Tipo de instalación médica: Hospital de campaña</string>
 	<string name="poi_health_facility_type_clinic">Tipo de instalación médica: Clínica</string>
@@ -2762,7 +2762,7 @@
 	<string name="poi_health_facility_type_pharmacy">Tipo de instalación médica: Farmacia</string>
 	<string name="poi_health_facility_type_first_aid">Tipo de instalación médica: Primeros auxilios</string>
 	<string name="poi_health_facility_type_nursing_home">Tipo de instalación médica: Geriátrico</string>
-	<string name="poi_health_facility_type_support_group_home">Tipo de instalación médica: Grupo de ayuda en casa</string>
+	<string name="poi_health_facility_type_support_group_home">Tipo de centro médico: Grupo de apoyo domiciliario</string>
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Especialidad médica: Medicina paliativa</string>
 
@@ -2825,4 +2825,52 @@
 	<string name="poi_counselling_type_violence_no">Asesoramiento (violencia): No</string>
 
 <string name="poi_health_person_type_psychologist">Rol del trabajador en salud: Psicólogo/a</string>
-	</resources>
+	<string name="poi_provided_for_infant_yes">Provisto para bebés</string>
+	<string name="poi_provided_for_infant_no">No provisto para bebés</string>
+	<string name="poi_provided_for_toddler_yes">Provisto para niños pequeños</string>
+	<string name="poi_provided_for_toddler_no">No provisto para niños pequeños</string>
+	<string name="poi_provided_for_child_yes">Provisto para niños</string>
+	<string name="poi_provided_for_child_no">No provisto para niños</string>
+	<string name="poi_provided_for_adult_yes">Provisto para adultos</string>
+	<string name="poi_provided_for_adult_no">No provisto para adultos</string>
+	<string name="poi_provided_for_woman_yes">Provisto para mujeres</string>
+	<string name="poi_provided_for_woman_no">No provisto para mujeres</string>
+	<string name="poi_provided_for_senior_yes">Provisto para adultos mayores</string>
+	<string name="poi_provided_for_senior_no">No provisto para adultos mayores</string>
+	<string name="poi_provided_for_girl_yes">Provisto para chicas</string>
+	<string name="poi_provided_for_girl_no">No provisto para chicas</string>
+	<string name="poi_provided_for_man_yes">Provisto para hombres</string>
+	<string name="poi_provided_for_man_no">No provisto para hombres</string>
+	<string name="poi_provided_for_boy_yes">Provisto para chicos</string>
+	<string name="poi_provided_for_boy_no">No provisto para chicos</string>
+
+	<string name="poi_capacity_beds">Capacidad (camas)</string>
+
+	<string name="poi_treat_inpatient_yes">Con servicios para pacientes</string>
+	<string name="poi_treat_inpatient_no">Sin servicios para pacientes</string>
+	<string name="poi_treat_inpatient_only">Sólo servicios para pacientes</string>
+	<string name="poi_counselling_yes">Con asesoramiento</string>
+	<string name="poi_counselling_no">Sin asesoramiento</string>
+	<string name="poi_emergency_yes">Emergencias: Sí</string>
+	<string name="poi_emergency_no">Emergencias: No</string>
+	<string name="poi_home_visit_yes">Visitas domiciliarias: Sí</string>
+	<string name="poi_home_visit_no">Visitas domiciliarias: No</string>
+
+	<string name="poi_disease_malaria_yes">Malaria: Sí</string>
+	<string name="poi_disease_malaria_no">Malaria: No</string>
+	<string name="poi_disease_ebola_yes">Ébola: Sí</string>
+	<string name="poi_disease_ebola_no">Ébola: No</string>
+	<string name="poi_disease_autism_yes">Autismo: Sí</string>
+	<string name="poi_disease_autism_no">Autismo: No</string>
+	<string name="poi_disease_aids_yes">SIDA: Sí</string>
+	<string name="poi_disease_aids_no">SIDA: No</string>
+
+	<string name="poi_office_physician">Consultorio médico</string>
+	<string name="poi_office_therapist">Oficina terapéutica</string>
+	<string name="poi_office_podologist">Oficina de podólogo</string>
+	<string name="poi_office_healer">Oficina de sanador</string>
+	<string name="poi_office_psychologist">Oficina de psicólogo/a</string>
+	<string name="poi_office_nursing_service">Servicio de enfermería</string>
+	<string name="poi_office_midwife">Oficina de partera</string>
+
+</resources>
