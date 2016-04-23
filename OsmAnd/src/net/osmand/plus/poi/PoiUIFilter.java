@@ -503,10 +503,15 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			}
 		}
 		if (!standardFilters.isEmpty()) {
-			PoiUIFilter standardFiltersCombined = new PoiUIFilter(
-					null, app, app.getPoiFilters().getFiltersName(standardFilters));
+			PoiUIFilter standardFiltersCombined = null;
 			for (PoiUIFilter f : standardFilters) {
-				standardFiltersCombined.combineWithPoiFilter(f);
+				if (standardFiltersCombined == null) {
+					standardFiltersCombined = f;
+					f.filterId = PoiUIFilter.STD_PREFIX + "combined";
+					f.name = app.getPoiFilters().getFiltersName(standardFilters);
+				} else {
+					standardFiltersCombined.combineWithPoiFilter(f);
+				}
 			}
 			filters.removeAll(standardFilters);
 			filters.add(standardFiltersCombined);
