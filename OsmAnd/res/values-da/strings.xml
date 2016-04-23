@@ -2356,7 +2356,7 @@
     <string name="access_autoannounce_period">Autoannonceringsperiode</string>
     <string name="access_autoannounce_period_descr">Mindste tidsinterval mellem annonceringer</string>
     <string name="access_smart_autoannounce">Smart autoannoncering</string>
-    <string name="map_widget_bearing">Relativ kurs</string>
-    <string name="map_widget_magnetic_bearing">Magnetisk kurs</string>
+    <string name="map_widget_bearing">Relativ pejling</string>
+    <string name="map_widget_magnetic_bearing">Magnetisk pejling</string>
     <string name="access_no_destination">Destination er ikke angivet</string>
     </resources>
