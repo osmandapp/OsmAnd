@@ -2171,4 +2171,8 @@
     <string name="osm_live_support_region">Stödregion</string>
     <string name="osm_live_header">Denna prenumeration aktiverar uppdateringar varje timme av kartor runt omkring i världen. Den större delen av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag. Om du tycker om OsmAnd och OSM och vill stödja detta så är detta ett utmärkt sätt att göra det på.</string>
     
-    </resources>
+    <string name="access_no_destination">Ingen destination angiven</string>
+    <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
+    <string name="rec_split_clip_length">Klipplängd</string>
+    <string name="file_name_containes_illegal_char">Filnamnet innehåller ogiltiga tecken</string>
+</resources>
