@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
+    <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
     <string name="map_mode">Режим карты</string>
     <string name="rendering_value_thin_name">Тонкий</string>
