@@ -138,7 +138,7 @@
     <string name="shared_string_others">Autres</string>
     <string name="shared_string_no_thanks">Pas nécessaire</string>
     <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom). Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
-    <string name="vector_data_missing">Il n\'y a aucune carte hors-ligne sur la carte SD. Pensez à télécharger des cartes pour utiliser OsmAnd hors-ligne.</string>
+    <string name="vector_data_missing">Il n\'y a aucune carte hors-ligne sur la carte SD. Pensez à en télécharger pour utiliser les cartes sans connexion.</string>
 
 
     <string name="local_index_installed">Version locale</string>
@@ -1024,7 +1024,7 @@
     <string name="av_def_action_picture">Prendre une photo</string>
     <string name="recording_context_menu_precord">Prendre une photo</string>
     <string name="stop_routing_confirm">Êtes-vous sûr de vouloir arrêter la navigation ?</string>
-    <string name="clear_dest_confirm">Êtes-vous certain de vouloir supprimer votre destination (et vos étapes) ?</string>
+    <string name="clear_dest_confirm">Souhaitez-vous vraiment supprimer votre destination (et vos étapes) ?</string>
     <string name="precise_routing_mode">Routage précis (alpha)</string>
     <string name="precise_routing_mode_descr">Activer pour calculer des itinéraires précis et sans surprises. Actuellement fonctionne sur des distances limitées et reste lent.</string>
     <string name="local_indexes_cat_av">Données audio/vidéo</string>
@@ -1498,7 +1498,7 @@
     <string name="lang_zh_TW">chinois traditionnel</string>
     <string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Voulez-vous quitter le groupe %1$s ?</string>
-    <string name="osmo_specify_tracker_id">Veuillez spécifier l\'identifiant</string>
+    <string name="osmo_specify_tracker_id">Veuillez renseigner l\'identifiant</string>
     <string name="continue_navigation">Reprendre la navigation</string>
     <string name="pause_navigation">Interrompre la navigation</string>
     <string name="rendering_attr_subwayMode_name">Lignes de métro</string>
@@ -1770,7 +1770,7 @@
     <string name="storage_directory">Stockage de la carte</string>
     <string name="shared_string_copy">Copier</string>
     <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Numéros dans les rues</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Numérotation des bâtiments</string>
     
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
     <string name="routing_attr_height_name">Limite de hauteur</string>
@@ -2139,18 +2139,18 @@
     <string name="osm_live_month_cost_desc">Paiement mensuel</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
-    <string name="osm_live_enter_email">Merci de saisir une adresse e-mail valide</string>
+    <string name="osm_live_enter_email">Merci de saisir un courriel valide</string>
     <string name="osm_live_thanks">Merci de vous être abonnés aux mises à jour temps réel !</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
     <string name="show_transparency_seekbar">Afficher la barre de recherche transparente</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
     <string name="storage_directory_shared">Mémoire partagée</string>
-    <string name="shared_string_topbar">Topbar</string>
-    <string name="osm_live_ask_for_purchase">Au préalable achetez un abonnement à OMS Live</string>
+    <string name="shared_string_topbar">Menu supérieur</string>
+    <string name="osm_live_ask_for_purchase">Au préalable achetez un abonnement à OSM Live</string>
 
-    <string name="osm_live_region_desc">Vos dons seront distribués aux utilisateurs ayant soumis des mises à jour pour la carte de cette région</string>
+    <string name="osm_live_region_desc">Une partie de vos dons seront distribués aux utilisateurs OSM ayant soumis des mises à jour dans cette région</string>
     <string name="avoid_road">Éviter la route</string>
-    <string name="osm_editors_ranking">Classement OSM</string>
+    <string name="osm_editors_ranking">Classement des éditeurs OSM</string>
     <string name="osm_live_email_desc">Ces informations sont requises pour afficher les contributions</string>
     <string name="osm_live_user_public_name">Nom affiché</string>
     <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les signalements</string>
@@ -2159,7 +2159,7 @@
     <string name="shared_string_move_up">Monter</string>
     <string name="shared_string_move_down">Descendre</string>
     <string name="finish_navigation">Terminer la navigation</string>
-    <string name="storage_permission_restart_is_required">Désormais l\'application est autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
+    <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
     <string name="release_2_3">" • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires.\n\n • Map markers. Une nouvelle façon de marquer des emplacements sur les cartes.\n\n • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités.\n\n • Amélioration de l\'expérience utilisateur lors de la préparation d\'un trajet.\n\n • Plein d\'autres améliorations sur les cartes ou encore la recherche d\'adresses contextuelles.\n\net bien plus encore... "</string>
@@ -2206,4 +2206,5 @@
     <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée</string>
     <string name="access_autoannounce_period">Fréquence des annonces</string>
     <string name="access_autoannounce_period_descr">Temps minimum entre deux annonces</string>
+    <string name="access_no_destination">La destination n\'est pas définie</string>
     </resources>
