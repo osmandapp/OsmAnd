@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -99,6 +100,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private AmenityAdapter amenityAdapter;
 	private EditText searchFilter;
 	private View searchFilterLayout;
+	private NavigationInfo navigationInfo;
 
 	private boolean searchNearBy = false;
 	private net.osmand.Location location = null;
@@ -106,6 +108,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private Float heading = null;
 
 	private SearchAmenityTask currentSearchTask = null;
+	private AccessibilityAssistant accessibilityAssistant;
 	
 	private OsmandApplication app;
 	private MenuItem showFilterItem;
@@ -219,6 +222,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		setListAdapter(amenityAdapter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		searchFilter = (EditText) findViewById(R.id.searchEditText);
+		accessibilityAssistant = new AccessibilityAssistant(this);
+		navigationInfo = new NavigationInfo(app);
 		searchFilter.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
@@ -296,6 +301,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			searchFilter.setText(text);
 			searchFilterLayout.setVisibility(text.length() > 0 || isNameSearch() ? View.VISIBLE : View.GONE);
 			
+			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().registerOrUnregisterCompassListener(true);
 		}
 
 		if (searchNearBy) {
@@ -304,14 +312,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			app.getLocationProvider().resumeAllUpdates();
 		}
 		updateLocation(location);
-		
-		// Freeze the direction arrows (reference is constant north) when Accessibility mode = ON, so screen can be read
-		// aloud without continuous updates
-		if (!app.accessibilityEnabled()) {
-			app.getLocationProvider().addCompassListener(this);
-			app.getLocationProvider().registerOrUnregisterCompassListener(true);
-		}
-		
 	}
 	
 	private void changeFilter(CharSequence s) {
@@ -497,6 +497,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			amenityAdapter.notifyDataSetChanged();
 			lv.setSelectionFromTop(index, top);
 			updateButtonState();
+			navigationInfo.updateLocation(location);
 		}
 
 	}
@@ -508,7 +509,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		float lastHeading = heading != null ? heading : 99;
 		heading = value;
 		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			accessibilityAssistant.lockEvents();
 			amenityAdapter.notifyDataSetChanged();
+			accessibilityAssistant.unlockEvents();
 		} else {
 			heading = lastHeading;
 		}
@@ -523,18 +526,36 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		// msg.what = COMPASS_REFRESH_MSG_ID;
 		// uiHandler.sendMessageDelayed(msg, 100);
 		// }
+		final View selected = accessibilityAssistant.getFocusedView();
+		if (selected != null) {
+			try {
+				int position = getListView().getPositionForView(selected);
+				if (position != AdapterView.INVALID_POSITION) {
+					navigationInfo.updateTargetDirection(amenityAdapter.getItem(position).getLocation(), heading.floatValue());
+				}
+			} catch (Exception e) {
+				return;
+			}
+		}
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		app.getLocationProvider().pauseAllUpdates();
+		app.getLocationProvider().removeCompassListener(this);
+		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 		if (searchNearBy) {
-			app.getLocationProvider().pauseAllUpdates();
 			app.getLocationProvider().removeLocationListener(this);
 		}
 		if (!app.accessibilityEnabled()) {
 			app.getLocationProvider().removeCompassListener(this);
 		}
+	}
+	
+	@Override
+	public void onDetachedFromWindow() {
+		accessibilityAssistant.forgetFocus();
 	}
 
 	@Override
@@ -771,6 +792,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, app.getSettings().MAP_PREFERRED_LOCALE.get());
 			label.setText(poiType);
 			distanceText.setText(distance);
+			row.setAccessibilityDelegate(accessibilityAssistant);
 			return (row);
 		}
 
@@ -826,7 +848,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 		});
 		List<String> attributes = new ArrayList<String>();
-		NavigationInfo navigationInfo = app.getLocationProvider().getNavigationInfo();
 		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
 		if (direction != null)
 			attributes.add(direction);
