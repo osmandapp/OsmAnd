@@ -123,7 +123,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 				List<Amenity> res = new ArrayList<>();
 				PoiUIFilter.combineStandardPoiFilters(filters, app);
-				for (PoiUIFilter filter : filters)
+				for (PoiUIFilter filter : filters) {
 					res.addAll(filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {
 
@@ -137,6 +137,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 									return isInterrupted();
 								}
 							}));
+				}
 
 				Collections.sort(res, new Comparator<Amenity>() {
 					@Override
@@ -309,8 +310,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	static int getResIdFromAttribute(final Context ctx, final int attr) {
-		if (attr == 0)
+		if (attr == 0) {
 			return 0;
+		}
 		final TypedValue typedvalueattr = new TypedValue();
 		ctx.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;

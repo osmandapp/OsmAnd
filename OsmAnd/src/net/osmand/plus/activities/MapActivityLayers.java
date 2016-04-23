@@ -307,10 +307,11 @@ public class MapActivityLayers {
 		builder.setListener(new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-				if (isChecked)
+				if (isChecked) {
 					getApplication().getPoiFilters().addSelectedPoiFilter(f);
-				else
+				} else {
 					getApplication().getPoiFilters().removeSelectedPoiFilter(f);
+				}
 				return true;
 			}
 		});

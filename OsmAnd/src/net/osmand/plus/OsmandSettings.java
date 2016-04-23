@@ -2328,8 +2328,9 @@ public class OsmandSettings {
 	public Set<String> getSelectedPoiFilters() {
 		Set<String> result = new LinkedHashSet<>();
 		String filtersId = SELECTED_POI_FILTER_FOR_MAP.get();
-		if (filtersId != null)
+		if (filtersId != null) {
 			Collections.addAll(result, filtersId.split(","));
+		}
 		return result;
 	}
 

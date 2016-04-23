@@ -217,10 +217,10 @@ public class AppInitializer implements IProgress {
 
 	private void checkMapUpdates() {
 		long diff = System.currentTimeMillis() - app.getSettings().LAST_CHECKED_UPDATES.get();
-		if(diff >= 2 * 24 * 60 * 60l  && new Random().nextInt(5) == 0 &&
+		if (diff >= 2 * 24 * 60 * 60l  && new Random().nextInt(5) == 0 &&
 				app.getSettings().isInternetConnectionAvailable()) {
 			app.getDownloadThread().runReloadIndexFiles();
-		} else if(Version.isDeveloperVersion(app)) {
+		} else if (Version.isDeveloperVersion(app)) {
 //			app.getDownloadThread().runReloadIndexFiles();
 		}
 	}

@@ -496,14 +496,17 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public static void combineStandardPoiFilters(Set<PoiUIFilter> filters, OsmandApplication app) {
 		Set<PoiUIFilter> standardFilters = new TreeSet<>();
-		for (PoiUIFilter filter : filters)
-			if (filter.isStandardFilter() && filter.filterId.startsWith(PoiUIFilter.STD_PREFIX))
+		for (PoiUIFilter filter : filters) {
+			if (filter.isStandardFilter() && filter.filterId.startsWith(PoiUIFilter.STD_PREFIX)) {
 				standardFilters.add(filter);
+			}
+		}
 		if (!standardFilters.isEmpty()) {
 			PoiUIFilter standardFiltersCombined = new PoiUIFilter(
 					null, app, app.getPoiFilters().getFiltersName(standardFilters));
-			for (PoiUIFilter f : standardFilters)
+			for (PoiUIFilter f : standardFilters) {
 				standardFiltersCombined.combineWithPoiFilter(f);
+			}
 			filters.removeAll(standardFilters);
 			filters.add(standardFiltersCombined);
 		}
@@ -587,10 +590,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	@Override
 	public int compareTo(@NonNull PoiUIFilter another) {
-		if (another.filterId.equals(this.filterId))
+		if (another.filterId.equals(this.filterId)) {
 			return 0;
-		else
+		} else {
             return this.name.compareTo(another.name);
+		}
 	}
 
 	public interface AmenityNameFilter {

@@ -542,8 +542,9 @@ public class WaypointHelper {
 		if (app.getPoiFilters().isShowingAnyPoi()) {
 			final List<Location> locs = route.getImmutableAllLocations();
 			List<Amenity> amenities = new ArrayList<>();
-			for (PoiUIFilter pf : app.getPoiFilters().getSelectedPoiFilters())
+			for (PoiUIFilter pf : app.getPoiFilters().getSelectedPoiFilters()) {
                 amenities.addAll(pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius));
+			}
 			for (Amenity a : amenities) {
 				AmenityRoutePoint rp = a.getRoutePoint();
 				int i = locs.indexOf(rp.pointA);
@@ -760,18 +761,23 @@ public class WaypointHelper {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (this == obj)
+			if (this == obj) {
 				return true;
-			if (obj == null)
+			}
+			if (obj == null) {
 				return false;
-			if (getClass() != obj.getClass())
+			}
+			if (getClass() != obj.getClass()) {
 				return false;
+			}
 			LocationPointWrapper other = (LocationPointWrapper) obj;
 			if (point == null) {
-				if (other.point != null)
+				if (other.point != null) {
 					return false;
-			} else if (!point.equals(other.point))
+				}
+			} else if (!point.equals(other.point)) {
 				return false;
+			}
 			return true;
 		}
 

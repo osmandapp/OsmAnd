@@ -828,8 +828,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		List<String> attributes = new ArrayList<String>();
 		NavigationInfo navigationInfo = app.getLocationProvider().getNavigationInfo();
 		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
-		if (direction != null)
+		if (direction != null) {
 			attributes.add(direction);
+		}
 		String[] as = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false).split("\n");
 		for (String s : as) {
 			attributes.add(s.replace(':', ' '));

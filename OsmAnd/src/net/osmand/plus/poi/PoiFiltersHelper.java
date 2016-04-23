@@ -100,7 +100,7 @@ public class PoiFiltersHelper {
 		if (localWikiPoiFilter == null){
 			PoiType place = application.getPoiTypes().getPoiTypeByKey("wiki_place");
 			if (place != null && !Algorithms.isEmpty(application.getLanguage())) {
-				PoiUIFilter filter = new PoiUIFilter(place, application, " " + 
+				PoiUIFilter filter = new PoiUIFilter(place, application, " " +
 						application.getLangTranslation(application.getLanguage())); //$NON-NLS-1$
 				filter.setSavedFilterByName("wiki:lang:"+application.getLanguage());
 				filter.setStandardFilter(true);
@@ -189,9 +189,11 @@ public class PoiFiltersHelper {
 		List<PoiUIFilter> result = new ArrayList<>();
 		List<PoiUIFilter> filters = Arrays.asList(getCustomPOIFilter(),  // getShowAllPOIFilter(),
 				getSearchByNamePOIFilter(), getNominatimPOIFilter(), getNominatimAddressFilter());
-		for (PoiUIFilter f : filters)
-			if (f != null && !f.isEmpty())
+		for (PoiUIFilter f : filters) {
+			if (f != null && !f.isEmpty()) {
 				result.add(f);
+			}
+		}
 		return result;
 	}
 
@@ -222,21 +224,21 @@ public class PoiFiltersHelper {
 		if(!application.getPoiTypes().isInit()) {
 			return null;
 		}
-		return new PoiFilterDbHelper(application.getPoiTypes(), application); 
+		return new PoiFilterDbHelper(application.getPoiTypes(), application);
 	}
 	
 	public boolean removePoiFilter(PoiUIFilter filter){
-		if(filter.getFilterId().equals(PoiUIFilter.CUSTOM_FILTER_ID) || 
+		if (filter.getFilterId().equals(PoiUIFilter.CUSTOM_FILTER_ID) ||
 				filter.getFilterId().equals(PoiUIFilter.BY_NAME_FILTER_ID) ||
-				filter.getFilterId().startsWith(PoiUIFilter.STD_PREFIX)){
+				filter.getFilterId().startsWith(PoiUIFilter.STD_PREFIX)) {
 			return false;
 		}
 		PoiFilterDbHelper helper = openDbHelper();
-		if(helper == null){
+		if (helper == null) {
 			return false;
 		}
 		boolean res = helper.deleteFilter(helper.getWritableDatabase(), filter);
-		if(res){
+		if (res) {
 			ArrayList<PoiUIFilter> copy = new ArrayList<>(cacheTopStandardFilters);
 			copy.remove(filter);
 			cacheTopStandardFilters = copy;
@@ -269,7 +271,7 @@ public class PoiFiltersHelper {
 	}
 
 	public boolean editPoiFilter(PoiUIFilter filter) {
-		if (filter.getFilterId().equals(PoiUIFilter.CUSTOM_FILTER_ID) || 
+		if (filter.getFilterId().equals(PoiUIFilter.CUSTOM_FILTER_ID) ||
 				filter.getFilterId().equals(PoiUIFilter.BY_NAME_FILTER_ID) || filter.getFilterId().startsWith(PoiUIFilter.STD_PREFIX)) {
 			return false;
 		}
@@ -309,11 +311,11 @@ public class PoiFiltersHelper {
 	public String getFiltersName(Set<PoiUIFilter> filters) {
 		if (filters.isEmpty()) {
 			return application.getResources().getString(R.string.shared_string_none);
-		}
-		else {
+		} else {
 			List<String> names = new ArrayList<>();
-			for (PoiUIFilter filter : filters)
+			for (PoiUIFilter filter : filters) {
 				names.add(filter.getName());
+			}
 			return android.text.TextUtils.join(", ", names);
 		}
 	}
@@ -327,22 +329,26 @@ public class PoiFiltersHelper {
 	}
 
 	public boolean isPoiFilterSelected(String filterId) {
-		for (PoiUIFilter filter: selectedPoiFilters)
-			if (filter.filterId.equals(filterId))
+		for (PoiUIFilter filter: selectedPoiFilters) {
+			if (filter.filterId.equals(filterId)) {
 				return true;
+			}
+		}
 		return false;
 	}
 
 	public void loadSelectedPoiFilters() {
 		Set<String> filters = application.getSettings().getSelectedPoiFilters();
-		for (String f: filters)
+		for (String f: filters) {
 			selectedPoiFilters.add(getFilterById(f));
+		}
 	}
 
 	public void saveSelectedPoiFilters() {
 		Set<String> filters = new HashSet<>();
-		for (PoiUIFilter f: selectedPoiFilters)
+		for (PoiUIFilter f: selectedPoiFilters) {
 			filters.add(f.filterId);
+		}
 		application.getSettings().setSelectedPoiFilters(filters);
 	}
 
@@ -356,8 +362,8 @@ public class PoiFiltersHelper {
 	    private static final String FILTER_COL_FILTERBYNAME = "filterbyname"; //$NON-NLS-1$
 	    private static final String FILTER_TABLE_CREATE =   "CREATE TABLE " + FILTER_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
 	    FILTER_COL_NAME + ", " + FILTER_COL_ID + ", " +  FILTER_COL_FILTERBYNAME + ");"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	    
-	    
+
+
 	    private static final String CATEGORIES_NAME = "categories"; //$NON-NLS-1$
 	    private static final String CATEGORIES_FILTER_ID = "filter_id"; //$NON-NLS-1$
 	    private static final String CATEGORIES_COL_CATEGORY = "category"; //$NON-NLS-1$
@@ -372,7 +378,7 @@ public class PoiFiltersHelper {
 			this.mapPoiTypes = mapPoiTypes;
 			this.context = context;
 	    }
-	    
+
 	    public SQLiteConnection getWritableDatabase() {
 	    	return openConnection(false);
 		}
@@ -418,7 +424,7 @@ public class PoiFiltersHelper {
 			}
 			conn.setVersion(newVersion);
 		}
-	    
+
 	    private void deleteOldFilters(SQLiteConnection conn) {
 			for (String toDel : DEL) {
 				deleteFilter(conn, "user_" + toDel);
@@ -452,7 +458,7 @@ public class PoiFiltersHelper {
 	    	}
 	    	return false;
 	    }
-	    
+
 	    protected List<PoiUIFilter> getFilters(SQLiteConnection conn){
 	    	ArrayList<PoiUIFilter> list = new ArrayList<PoiUIFilter>();
 	    	if(conn != null){
@@ -497,7 +503,7 @@ public class PoiFiltersHelper {
 	    	}
 	    	return list;
 	    }
-	    
+
 	    protected boolean editFilter(SQLiteConnection conn, PoiUIFilter filter) {
 			if (conn != null) {
 				conn.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?",  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -513,7 +519,7 @@ public class PoiFiltersHelper {
 			db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_FILTERBYNAME + " = ?, " + FILTER_COL_NAME + " = ? " + " WHERE " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 					+ FILTER_COL_ID + "= ?", new Object[] { filter.getFilterByName(), filter.getName(), filter.getFilterId() }); //$NON-NLS-1$
 		}
-	    
+
 	    protected boolean deleteFilter(SQLiteConnection db, PoiUIFilter p){
 	    	String key = p.getFilterId();
 	    	return deleteFilter(db, key);
@@ -528,7 +534,7 @@ public class PoiFiltersHelper {
 			}
 			return false;
 		}
-	    
+
 
 
 	}
