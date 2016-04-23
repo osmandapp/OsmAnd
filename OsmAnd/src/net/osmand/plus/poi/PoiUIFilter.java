@@ -497,7 +497,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public static void combineStandardPoiFilters(Set<PoiUIFilter> filters, OsmandApplication app) {
 		Set<PoiUIFilter> standardFilters = new TreeSet<>();
 		for (PoiUIFilter filter : filters) {
-			if (filter.isStandardFilter() && filter.filterId.startsWith(PoiUIFilter.STD_PREFIX)) {
+			if ((filter.isStandardFilter() && filter.filterId.startsWith(PoiUIFilter.STD_PREFIX))
+					|| filter.filterId.startsWith(PoiUIFilter.CUSTOM_FILTER_ID)) {
 				standardFilters.add(filter);
 			}
 		}
