@@ -1178,9 +1178,23 @@ public class RouteProvider {
 
 	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,
 			IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
-		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
-		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
+		int numpoints = 2 + (params.intermediates != null ? params.intermediates.size() : 0);
+		double[] lats = new double[numpoints];
+		double[] lons = new double[numpoints];
+		int index = 0;
 		String mode;
+		lats[index] = params.start.getLatitude();
+		lons[index] = params.start.getLongitude();
+		index++;
+		if(params.intermediates != null && params.intermediates.size() > 0) {
+			for(LatLon il : params.intermediates) {
+				lats[index] = il.getLatitude();
+				lons[index] = il.getLongitude();
+				index++;
+			}
+		}
+		lats[index] = params.end.getLatitude();
+		lons[index] = params.end.getLongitude();
 		if (ApplicationMode.PEDESTRIAN == params.mode) {
 			mode = "foot"; //$NON-NLS-1$
 		} else if (ApplicationMode.BICYCLE == params.mode) {
