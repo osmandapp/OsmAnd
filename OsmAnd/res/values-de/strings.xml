@@ -114,7 +114,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="arrival_distance_factor_normally">Normal</string>
 	<string name="arrival_distance_factor_late">Spät</string>
 	<string name="arrival_distance_factor_at_last">Auf den letzten Metern</string>
-	<string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+	<string name="route_is_too_long">OsmAnd-Offline-Routing kann bei Punkten mit mehr als 200 km Abstand wahrscheinlich sehr lange dauern (oder manchmal gar nicht funktionieren). Für eine bessere Leistung könnten Sie mehrere Zwischenziele festlegen.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -345,7 +345,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmand_service_descr">OsmAnd läuft bei ausgeschalteter Anzeige im Hintergrund</string>
 
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
-	<string name="download_files_question_space">Wirklich {0} Datei(en) herunterladen? Dies benötigt dauerhaft {1} MB. Aktuell sind {2} MB freier Speicher vorhanden.</string>
+	<string name="download_files_question_space">Wirklich {0} Datei(en) herunterladen? Dies benötigt dauerhaft {1} MB. Aktuell sind {2} MB verfügbar.</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
@@ -411,7 +411,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="favourites_edit_dialog_category">Kategorie</string>
 	<string name="shared_string_no_thanks">Nicht verwendet</string>
 	<string name="basemap_missing">Die Offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte \'Übersichtskarte der Welt\' herunterladen.</string>
-	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
+	<string name="vector_data_missing">An Bord (\"Offline\") sind keine Daten auf der SD-Karte vorhanden. Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
 
 	<string name="local_index_installed">Lokale Version</string>
@@ -1070,7 +1070,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="av_use_external_camera_descr">System Kamera App für Fotos verwenden</string>
 	<string name="av_use_external_camera">System Kamera App nutzen</string>
 	<string name="av_def_action_choose">Bei Anfrage auswählen</string>
-	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Konto.</string>
+	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen die Synchronisierung von Spuren und Audio/Video-Hinweisen mit Ihrem Dropbox-Konto.</string>
 	<string name="dropbox_plugin_name">Dropbox-Plugin</string>
 	<string name="intermediate_points_change_order">Reihenfolge ändern</string>
 
@@ -1106,7 +1106,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
-	<string name="clear_dest_confirm">Wollen Sie das Ziel (inkl. Zwischenziele) wirklich löschen?</string>
+	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihren Zielpunkt (und Zwischenziele) löschen möchten?</string>
 	<string name="precise_routing_mode_descr">Auswählen um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
 	<string name="local_indexes_cat_av">Audio/Video-Daten</string>
@@ -1406,8 +1406,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmo_io_error">"OsMo-Verbindungsproblem: "</string>
 	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
 	<string name="osmo_mode_off">OsMo-Sitzung starten</string>
-	<string name="osmo_auto_send_locations_descr">Aufzeichnung automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
-	<string name="osmo_auto_send_locations">Aufzeichnung automatisch starten</string>
+	<string name="osmo_auto_send_locations_descr">Fahrt automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
+	<string name="osmo_auto_send_locations">Fahrt automatisch starten</string>
 	<string name="osmo_tracker_id">Aufzeichnungs-ID</string>
 	<string name="osmo_tracker_id_descr">Zum Anzeigen der Aufzeichnungs-ID tippen</string>
 	<string name="osmo_session_token">Sitzungstoken: %1$s</string>
@@ -1417,7 +1417,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmo_mode_restart">OsMo-Sitzung neu starten</string>
 	<string name="osmo_settings_debug">Debug-Information</string>
 	<string name="osmo_connect_to_device_name">Nutzername</string>
-	<string name="osmo_connect_to_device_tracker_id">Aufzeichnungs-ID</string>
+	<string name="osmo_connect_to_device_tracker_id">Aufzeichnungskennung</string>
 	<string name="osmo_connect_to_device">Mit Gerät koppeln</string>
 	<string name="osmo_groups">OsMo-Gruppen</string>
 	<string name="osmo_edit_device">Ändern der Nutzereinstellungen</string>
@@ -1435,10 +1435,10 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmo_expire_group">Läuft ab in</string>
 	<string name="osmo_group_description">Beschreibung</string>
 	<string name="osmo_group_policy">Richtlinie</string>
-	<string name="osmo_connect_to_group_id">Gruppen-ID</string>
+	<string name="osmo_connect_to_group_id">Gruppenkennung</string>
 	<string name="osmo_group_name">Gruppenname</string>
 	<string name="osmo_connect_to_group">Mit Gruppe verbinden</string>
-	<string name="osmo_connect">Verbinden mit</string>
+	<string name="osmo_connect">Verbinden</string>
 	<string name="osmo_create_group">Gruppe erstellen</string>
 	<string name="osmo_server_operation_failed">OsMo-Server-Vorgang fehlgeschlagen</string>
 	<string name="osmo_activity">OpenStreetMap-Überwachung</string>
@@ -1518,7 +1518,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mehr…</string>
-    <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
+    <string name="osmo_specify_tracker_id">Bitte Kennung angeben</string>
     <string name="home">Dashboard</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
@@ -1542,10 +1542,10 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
 	<string name="speed_limit_exceed_message">Schwellenwert für Warnung bei Überschreiten der Höchstgeschwindigkeit.</string>
 	<string name="osmo_device_not_found">Gerät wurde nicht gefunden</string>
-    <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo Server:\n- bitte Verbindung prüfen;\n- bitte Einstellungen prüfen;\n- ggf. Meldung auf Twitter prüfen: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo-Server:\n- überprüfen Sie Ihre Internetverbindung;\n- überprüfen Sie die Einstellungen;\n- probieren Sie Meldungen auf Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
-	<string name="anonymous_user_hint">Anonyme Benutzer können keine:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
+	<string name="anonymous_user_hint">Anonyme Benutzer können keine:\n- Gruppen erstellen;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich auf der Webseite verwalten.</string>
     <string name="rendering_category_routes">Routen</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">ÖPNV-Linien</string>
@@ -1971,7 +1971,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
     <string name="enter_country_name">Name des Landes eingeben</string>
-    <string name="save_poi_without_poi_type_message">Soll der POI wirklich ohne POI-Typ gespeichert werden?</string>
+    <string name="save_poi_without_poi_type_message">Möchten Sie den POI wirklich ohne POI-Typ speichern?</string>
     <string name="poi_context_menu_modify_osm_change">OSM-Änderung bearbeiten</string>
     <string name="use_dashboard_btn">Dashboard verwenden</string>
     <string name="use_drawer_btn">Menü verwenden</string>
@@ -2007,7 +2007,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 <string name="update_now">Jetzt aktualisieren</string>
 <string name="route_distance">Entfernung:</string>
     <string name="route_duration">Dauer:</string>
-    <string name="missing_write_external_storage_permission">Die App hat keine Berichtigung die SD-Karte zu nutzen</string>
+    <string name="missing_write_external_storage_permission">App hat keine Berechtigung zur Verwendung der SD-Karte</string>
 <string name="no_location_permission">Die App hat keine Berechtigung um auf Positionsdaten zuzugreifen.</string>
     <string name="no_camera_permission">Die App hat keine Berechtigung um auf die Kamera zuzugreifen.</string>
     <string name="no_microphone_permission">Die App hat keine Berechtigung um auf das Mikrofon zuzugreifen.</string>
@@ -2027,7 +2027,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="rec_split_clip_length">Cliplänge</string>
     <string name="rec_split_clip_length_desc">Die Länge jedes ausgezeichneten Clips wird nicht länger sein, als das festgelegte Zeitintervall</string>
     <string name="rec_split_storage_size">Speicherplatz</string>
-    <string name="rec_split">Automatische Trennung</string>
+    <string name="rec_split">Aufzeichnungsteilung</string>
     <string name="rec_split_title">Automatische Trennung nutzen</string>
     <string name="hourly">Stündlich</string>
     <string name="daily">Täglich</string>
@@ -2039,7 +2039,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 <string name="select_month_and_country">Monat und Land auswählen</string>
 <string name="shared_string_type">Typ</string>
     <string name="starting_point">Startpunkt</string>
-    <string name="shared_string_undo_all">Alles rückgängig machen</string>
+    <string name="shared_string_undo_all">ALLES RÜCKGÄNGIG MACHEN</string>
     <string name="rendering_attr_hideIcons_name">POI Symbole</string>
     <string name="switch_start_finish">Start und Ziel tauschen</string>
 <string name="number_of_edits">Anzahl der Bearbeitungen</string>
@@ -2066,20 +2066,20 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="add_points_to_map_markers_q">"Wollen Sie alle Punkte zu den Kartenmarkierungen hinzufügen?"</string>
     <string name="shared_string_add_to_map_markers">Zu Kartenmarkierungen hinzufügen</string>
     <string name="select_map_markers">Kartenmarkierungen auswählen</string>
-    <string name="show_map_markers_description">Kartenmarkierungen aktivieren</string>
+    <string name="show_map_markers_description">Kartenmarkierungsfunktion aktivieren</string>
     <string name="clear_active_markers_q">Wollen Sie alle aktiven Kartenmarkierungen entfernen?</string>
     <string name="clear_markers_history_q">Wollen Sie den Verlauf der Kartenmarkierungen löschen?</string>
     <string name="active_markers">Aktive Kartenmarkierungen</string>
     <string name="map_markers">Kartenmarkierungen</string>
     <string name="map_marker">Kartenmarkierung</string>
-    <string name="consider_turning_polygons_off">Es wird empfohlen das Rendern von Polygonen zu deaktivieren.</string>
+    <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Polygonen zu deaktivieren.</string>
     <string name="show_map_markers_topbar">Leiste mit den Kartenmarkierungen anzeigen</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="download_files_error_not_enough_space">Nicht genug Speicher! Es werden temporär {3} MB benötigt und {1} MB permanent. Aktuell sind nur {2} MB verfügbar.</string>
-    <string name="download_files_question_space_with_temp">Wirklich {0} Datei(en) herunterladen? Dies benötigt temporär {3} MB und permanent {1} MB? Aktuell sind {2} MB verfügbar.</string>
+    <string name="download_files_question_space_with_temp">Wirklich {0} Datei(en) herunterladen? Dies benötigt temporär {3} MB und permanent {1} MB. Aktuell sind {2} MB verfügbar.</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="map_markers_other">Andere Markierungen</string>
-    <string name="upload_osm_note_description">Sie können ihre OSM Notizen anonym hochladen oder ihr OpenStreetMap.org Profil nutzen.</string>
+    <string name="upload_osm_note_description">Sie können Ihre OSM-Hinweise anonym hochladen, wenn Sie Ihr OpenStreetMap.org-Profil nutzen.</string>
     <string name="upload_osm_note">OSM Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
 <string name="show_transparency_seekbar">Transparente Suchleiste anzeigen</string>
@@ -2087,8 +2087,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="donations">Spenden</string>
     <string name="number_of_recipients">Anzahl der Empfänger</string>
     <string name="osm_user_stat">Bearbeitungen %1$s, Rang %2$s, Gesamtbearbeitungen %3$s</string>
-    <string name="osm_editors_ranking">OSM Bearbeiter Rangliste</string>
-    <string name="osm_live_subscription">OSM Live Abonnement</string>
+    <string name="osm_editors_ranking">OSM-Bearbeiter-Rangliste</string>
+    <string name="osm_live_subscription">OSM-Live-Abonnement</string>
     <string name="osm_live_subscribe_btn">Abonnieren</string>
     <string name="osm_live_user_public_name">Öffentlicher Name</string>
     <string name="osm_live_hide_user_name">Meinen Namen nicht in Berichten anzeigen</string>
@@ -2100,7 +2100,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="osm_live_enter_user_name">Bitte einen öffentlichen Namen eingeben</string>
     <string name="osm_live_thanks">Vielen Dank für Ihr Abonnement von Live Aktualisierungen!</string>
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
-    <string name="osm_live_ask_for_purchase">Kaufen Sie bitte zuerst ein OSM Live Abonnement</string>
+    <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OSM-Live-Abonnement</string>
 
     <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, welche diese Region bearbeiten</string>
     <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. Ein Großteil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so ist dies dafür eine perfekte Möglichkeit.</string>
@@ -2119,15 +2119,15 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="report">Bericht</string>
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
     <string name="shared_string_move_up">Hoch bewegen</string>
-    <string name="shared_string_move_down">Runter bewegen</string>
+    <string name="shared_string_move_down">Nach unten verschieben</string>
     <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
 <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
-    <string name="no_map_markers_found">Bitte eine Kartenmarkierung via Karte setzen</string>
+    <string name="no_map_markers_found">Bitte fügen Sie Kartenmarkierungen über die Karte hinzu</string>
     <string name="rendering_value_thin_name">Dünn</string>
     <string name="rendering_value_medium_name">Mittel</string>
     <string name="rendering_value_bold_name">Fett</string>
     <string name="map_mode">Kartenmodus</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX Dateien ausgewählt</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX-Dateien ausgewählt</string>
     <string name="access_default_color">Standartfarbe</string>
     <string name="access_category_choice">Kategorie auswählen</string>
     <string name="access_hint_enter_name">Name eingeben</string>
@@ -2137,18 +2137,18 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="access_collapsed_list">Reduzierte Liste</string>
     <string name="access_expanded_list">Erweiterte Liste</string>
     <string name="access_empty_list">Liste leeren</string>
-    <string name="access_tree_list">Strukturliste</string>
+    <string name="access_tree_list">Baumliste</string>
     <string name="access_shared_string_not_installed">Nicht installiert</string>
-    <string name="access_widget_expand">Erweitern</string>
-    <string name="access_shared_string_navigate_up">Hoch navigieren</string>
-    <string name="access_sort">Sortierten</string>
-    <string name="access_disable_offroute_recalc">Beim Abkommen vom Weg, Route nicht ändern</string>
-    <string name="access_disable_offroute_recalc_descr">Beim starken Abweichen von der Route, automatische Routenneuberechnung verhindern</string>
+    <string name="access_widget_expand">Ausklappen</string>
+    <string name="access_shared_string_navigate_up">Nach oben navigieren</string>
+    <string name="access_sort">Sortieren</string>
+    <string name="access_disable_offroute_recalc">Route beim Abkommen vom Weg nicht ändern</string>
+    <string name="access_disable_offroute_recalc_descr">Automatische Routenneuberechnung verhindern, wenn stark von der Route abgewichen wird</string>
     <string name="access_disable_wrong_direction_recalc">Route bei falscher Fahrtrichtung nicht ändern</string>
     <string name="access_disable_wrong_direction_recalc_descr">Bei falscher Fahrtrichtung automatische Routenneuberechnung verhindern</string>
     <string name="access_smart_autoannounce">Intelligente automatische Ankündigung</string>
     <string name="access_smart_autoannounce_descr">Nur benachrichtigen wenn sich die Richtung zum Zielpunkt geändert hat</string>
-    <string name="access_autoannounce_period_descr">Kürzester Abstand zwischen Benachrichtigungen</string>
+    <string name="access_autoannounce_period_descr">Mindestzeitabstand zwischen Benachrichtigungen</string>
     <string name="map_widget_bearing">Relative Peilung</string>
     <string name="access_autoannounce_period">Zeitraum der automatischen Ankündigungen</string>
     <string name="map_widget_magnetic_bearing">Magnetische Peilung</string>
