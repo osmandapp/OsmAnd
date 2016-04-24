@@ -194,7 +194,7 @@ public class DownloadActivityType {
 		if (this== DownloadActivityType.ROADS_FILE) {
 			return "&road=yes";
 		} else if (this == DownloadActivityType.LIVE_UPDATES_FILE) {
-			return "&osmc=yes";
+			return "&aosmc=yes";
 		} else if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return "&srtmcountry=yes";
 		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {
