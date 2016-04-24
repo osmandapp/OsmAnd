@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Alışveriş</string>
 		<string name="poi_shop_food">Bakkal</string>
 	<string name="poi_emergency">Acil</string>
@@ -219,7 +219,7 @@
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_biogas">Biyogaz</string>
 	<string name="poi_fuel_lh2">Sıvı hidrojen</string>
 	<string name="poi_fuel_electricity">Elektrik</string>
 	<string name="poi_charging_station">Şarj istasyonu</string>
@@ -618,24 +618,24 @@
 	<string name="poi_hunting_lodge">Avcı kulübesi</string>
 
 	<string name="poi_place_of_worship">İbadethane</string>
-	<string name="poi_religion_christian">İbadethane: hristiyan</string>
-	<string name="poi_religion_jewish">İbadethane: yahudi</string>
-	<string name="poi_religion_muslim">İbadethane: müslüman</string>
+	<string name="poi_religion_christian">Hristiyanlık</string>
+	<string name="poi_religion_jewish">Yahudilik</string>
+	<string name="poi_religion_muslim">İslami</string>
 	<string name="poi_religion_sikh">İbadethane: sih</string>
-	<string name="poi_religion_buddhist">İbadethane: budist</string>
-	<string name="poi_religion_hindu">İbadethane: hindu</string>
-	<string name="poi_religion_shinto">İbadethane: şinto</string>
-	<string name="poi_religion_taoist">İbadethane: taoist</string>
+	<string name="poi_religion_buddhist">Budizm</string>
+	<string name="poi_religion_hindu">Hinduizm</string>
+	<string name="poi_religion_shinto">Şintoizm</string>
+	<string name="poi_religion_taoist">Taoizm</string>
 	<string name="poi_religion_voodoo">Büyü</string>
 	<string name="poi_religion_unitarian_universalist">Üniteryan evrenselci</string>
 	<string name="poi_religion_multifaith">Çok inançlı</string>
 	<string name="poi_religion_jain">Jain</string>
-	<string name="poi_religion_spiritualist">Cinci</string>
-	<string name="poi_religion_bahai">Bahai</string>
+	<string name="poi_religion_spiritualist">Spiritualizm</string>
+	<string name="poi_religion_bahai">Bahaizm</string>
 	<string name="poi_religion_scientologist">Scientologist</string>
-	<string name="poi_religion_pagan">Pagan</string>
+	<string name="poi_religion_pagan">Paganizm</string>
 	<string name="poi_religion_tenrikyo">Tenrikyō</string>
-	<string name="poi_religion_zoroastrian">Zerdüşt</string>
+	<string name="poi_religion_zoroastrian">Zerdüştlük</string>
 
 	<string name="poi_denomination_catholic">Katolik</string>
 	<string name="poi_denomination_baptist">Baptist</string>
@@ -652,7 +652,7 @@
 	<string name="poi_denomination_pentecostal">Pentekostal</string>
 	<string name="poi_denomination_mormon">Mormon</string>
 	<string name="poi_denomination_jehovahs_witness">Yehova şahitleri</string>
-	<string name="poi_denomination_greek_orthodox">Yunan_ortodoks</string>
+	<string name="poi_denomination_greek_orthodox">Yunan ortodoks</string>
 	<string name="poi_denomination_reformed">Düzellmiş</string>
 	<string name="poi_denomination_seventh_day_adventist">Yedinci_gün_inanışçısı</string>
 	<string name="poi_denomination_new_apostolic">New_apostolic</string>
@@ -1037,4 +1037,9 @@
 
 <string name="poi_doors">Kapılar</string>
 	<string name="poi_fitness_centre">Spor salonu</string>
+	<string name="poi_historic_ship">Tarihi gemi</string>
+	<string name="poi_tourism_yes">Turistik obje</string>
+	<string name="poi_disease_aids_no">AIDS: hayır</string>
+
+	<string name="poi_disease_aids_yes">AIDS: evet</string>
 	</resources>
