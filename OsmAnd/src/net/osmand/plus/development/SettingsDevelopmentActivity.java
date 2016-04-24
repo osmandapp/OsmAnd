@@ -72,14 +72,20 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(firstRunPreference);
+		
 
+		cat.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_ROUTING,
+				R.string.use_osm_live_routing,
+				R.string.use_osm_live_routing_description));
+		
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
 
-		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,
-				R.string.map_markers,
-				R.string.show_map_markers_description));
+		// FIXME delete USE_MAP_MARKERS
+//		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,
+//				R.string.map_markers,
+//				R.string.show_map_markers_description));
 
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;

@@ -9,7 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
+    <string name="use_osm_live_routing_description">Enable navigation for OSM Live changes (Beta)</string>
+	<string name="use_osm_live_routing">OSM Live navigation</string>
     <string name="access_no_destination">Destination is not set</string>
     <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>

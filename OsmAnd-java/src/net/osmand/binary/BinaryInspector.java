@@ -59,6 +59,7 @@ public class BinaryInspector {
 	
 
 	public static final int BUFFER_SIZE = 1 << 20;
+	private static final int SHIFT_ID = 6;
 	private VerboseInfo vInfo;
 
 	public static void main(String[] args) throws IOException {
@@ -898,7 +899,7 @@ public class BinaryInspector {
 			b.append("]");
 		}
 
-		b.append(" id ").append((obj.getId() >> 1));
+		b.append(" id ").append((obj.getId() >> (SHIFT_ID + 1)));
 		if (vmapCoordinates) {
 			b.append(" lat/lon : ");
 			for (int i = 0; i < obj.getPointsLength(); i++) {
@@ -948,7 +949,7 @@ public class BinaryInspector {
 			}
 		}
 
-		tags.append("\t<tag k=\'").append("original_id").append("' v='").append(obj.getId() >> 1).append("'/>\n");
+		tags.append("\t<tag k=\'").append("original_id").append("' v='").append(obj.getId() >> (SHIFT_ID + 1)).append("'/>\n");
 		if(point) {
 			float lon= (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
 			float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
