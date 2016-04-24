@@ -567,7 +567,7 @@
     <string name="map_view_3d">Vue 3D</string>
     <string name="show_poi_over_map_description">Afficher PI sur la carte (utiliser le dernier filtre)</string>
     <string name="show_poi_over_map">Afficher PI</string>
-    <string name="map_tile_source_descr">Choisir la source des tuiles de carte (en ligne ou en cache)</string>
+    <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache)</string>
     <string name="map_tile_source">Carte en ligne (tuiles)</string>
     <string name="map_source">Source cartographique</string>
     <string name="use_internet">Utiliser internet</string>
@@ -2209,6 +2209,8 @@
     <string name="access_no_destination">La destination n\'est pas définie</string>
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
-    <string name="access_disable_offroute_recalc">Ne pas recalculer l\'itinéraire si vous vous écartez de la route</string>
-    <string name="access_disable_offroute_recalc_descr">Évite le recalcul de l\'itinéraire quand vous êtes assez éloigné du bon trajet</string>
+    <string name="access_disable_offroute_recalc">Ignorer les écarts de route</string>
+    <string name="access_disable_offroute_recalc_descr">Permet de ne pas recalculer automatiquement une nouvel itinéraire si vous vous éloignez beaucoup de la route prévue</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Permet de ne pas recalculer automatiquement une nouvel itinéraire si vous partez dans la mauvaise direction</string>
+    <string name="access_disable_wrong_direction_recalc">Ignorer les écarts de direction</string>
     </resources>
