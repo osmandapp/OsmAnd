@@ -184,7 +184,7 @@
     <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
   <string name="switch_to_vector_map_to_see">Cartes vectorielles hors-lignes disponibles pour cette position.
-\n\t\n\tPour activer : \'Menu\' → \'Couches\' → \'Source de la carte…\' → \'Cartes vectorielles hors ligne\'.</string>
+\n\t\n\tPour activer : \'Menu\' → \'Configurer la carte\' → \'Carte en ligne…\' → \'Cartes vectorielles hors ligne\'.</string>
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
     <string name="choose_audio_stream_descr">Sélectionnez le canal audio de sortie à utiliser pour le guidage vocal (selon les capacités de votre appareil)</string>
     <string name="voice_stream_voice_call">Sortie téléphonie</string>
@@ -377,7 +377,7 @@
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
     <string name="layer_transport">Arrêts de transports publics</string>
     <string name="layer_poi">Points d\'intérêt…</string>
-    <string name="layer_map">Source de la carte…</string>
+    <string name="layer_map">Carte en ligne…</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
 
@@ -568,7 +568,7 @@
     <string name="show_poi_over_map_description">Afficher PI sur la carte (utiliser le dernier filtre)</string>
     <string name="show_poi_over_map">Afficher PI</string>
     <string name="map_tile_source_descr">Choisir la source des tuiles de carte (en ligne ou en cache)</string>
-    <string name="map_tile_source">Source de la carte (tuiles)</string>
+    <string name="map_tile_source">Carte en ligne (tuiles)</string>
     <string name="map_source">Source cartographique</string>
     <string name="use_internet">Utiliser internet</string>
     <string name="show_location">Afficher votre position</string>
@@ -2207,4 +2207,6 @@
     <string name="access_autoannounce_period">Fréquence des annonces</string>
     <string name="access_autoannounce_period_descr">Temps minimum entre deux annonces</string>
     <string name="access_no_destination">La destination n\'est pas définie</string>
+    <string name="map_widget_magnetic_bearing">Cap magnétique</string>
+    <string name="map_widget_bearing">Cap relatif</string>
     </resources>
