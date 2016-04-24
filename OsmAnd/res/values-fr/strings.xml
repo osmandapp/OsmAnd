@@ -2209,5 +2209,5 @@
     <string name="access_no_destination">La destination n\'est pas définie</string>
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
-    <string name="access_disable_offroute_recalc">Ne pas changer l\'itinéraire quand vous êtes en dehors du trajet</string>
+    <string name="access_disable_offroute_recalc">Ne pas recalculer l\'itinéraire si vous vous écartez de la route</string>
     </resources>
