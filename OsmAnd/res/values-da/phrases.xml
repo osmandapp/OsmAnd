@@ -2779,21 +2779,21 @@
 	<string name="poi_health_service_test_yes">Sundhedsvæsen: test: ja</string>
 	<string name="poi_health_service_test_no">Sundhedsvæsen: test: nej</string>
 
-	<string name="poi_health_facility_type_office">Medicinsk kontor</string>
+	<string name="poi_health_facility_type_office">Medicinskkontor</string>
 	<string name="poi_health_facility_type_hospital">Sundhed facilitetstype: hospital</string>
-	<string name="poi_health_facility_type_field_hospital">Sundhed facilitetstype: felthospital</string>
+	<string name="poi_health_facility_type_field_hospital">Sundhedsfacilitetstype: felthospital</string>
 	<string name="poi_health_facility_type_clinic">Sundhed facilitetstype: klinik</string>
 	<string name="poi_health_facility_type_health_centre">Sundhed facilitetstype: sundhedscenter</string>
-	<string name="poi_health_facility_type_counselling_centre">Sundhed facilitetstype: rådgivningscenter</string>
+	<string name="poi_health_facility_type_counselling_centre">Sundhedsfacilitetstype: rådgivningscenter</string>
 	<string name="poi_health_facility_type_rehabilitation">Sundhed facilitetstype: rehabilitering</string>
-	<string name="poi_health_facility_type_laboratory">Sundhed facilitetstype: laboratorium</string>
-	<string name="poi_health_facility_type_therapy">Sundhed facilitetstype: terapi</string>
-	<string name="poi_health_facility_type_department">Sundhed facilitetstype: institut</string>
-	<string name="poi_health_facility_type_dispensary">Sundhed facilitetstype: udlevering af lægemidler</string>
+	<string name="poi_health_facility_type_laboratory">Sundhedsfacilitetstype: laboratorium</string>
+	<string name="poi_health_facility_type_therapy">Sundhedsfacilitetstype: terapi</string>
+	<string name="poi_health_facility_type_department">Sundhedsfacilitetstype: institut</string>
+	<string name="poi_health_facility_type_dispensary">Sundhedsfacilitetstype: udlevering af lægemidler</string>
 	<string name="poi_health_facility_type_pharmacy">Sundhed facilitetstype: apotek</string>
-	<string name="poi_health_facility_type_first_aid">Sundhed facilitetstype: førstehjælp</string>
-	<string name="poi_health_facility_type_nursing_home">Sundhed facilitetstype: plejehjem</string>
-	<string name="poi_health_facility_type_support_group_home">Sundhed facilitetstype: bofællesskab</string>
+	<string name="poi_health_facility_type_first_aid">Sundhedsfacilitetstype: førstehjælp</string>
+	<string name="poi_health_facility_type_nursing_home">Sundhedsfacilitetstype: plejehjem</string>
+	<string name="poi_health_facility_type_support_group_home">Sundhedsfacilitetstype: bofællesskab</string>
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Sundhedsspeciale: palliativ medicin</string>
 
@@ -2808,23 +2808,23 @@
 <string name="poi_health_amenity_type_first_aid_kit">Førstehjælpskasse</string>
 	<string name="poi_health_amenity_type_scales">Offentlige skalaer</string>
 
-	<string name="poi_health_person_type_assistant">Rolle af sundhedspersonale: assistent</string>
-	<string name="poi_health_person_type_healer">Rolle af sundhedspersonale: healer</string>
-	<string name="poi_health_person_type_midwife">Rolle af sundhedspersonale: jordemoder</string>
-	<string name="poi_health_person_type_nurse">Rolle af sundhedspersonale: sygeplejerske</string>
-	<string name="poi_health_person_type_paramedic">Rolle af sundhedspersonale: paramediciner</string>
-	<string name="poi_health_person_type_physician">Rolle af sundhedspersonale: læge</string>
-	<string name="poi_health_person_type_podologist">Rolle af sundhedspersonale: podologist</string>
-	<string name="poi_health_person_type_psychologist">Rolle af sundhedspersonale: psykolog</string>
-	<string name="poi_health_person_type_therapist">Rolle af sundhedspersonale: terapeut</string>
-	<string name="poi_health_person_type_physician_assitant">Rolle af sundhedspersonale: lægeassistant</string>
-	<string name="poi_health_person_type_technician">Rolle af sundhedspersonale: tekniker</string>
-	<string name="poi_health_person_type_witchdoctor">Rolle af sundhedspersonale: heksedoktor</string>
+	<string name="poi_health_person_type_assistant">Sundhedspersonalerolle: assistent</string>
+	<string name="poi_health_person_type_healer">Sundhedspersonalerolle: healer</string>
+	<string name="poi_health_person_type_midwife">Sundhedspersonalerolle: jordemoder</string>
+	<string name="poi_health_person_type_nurse">Sundhedspersonalerolle: sygeplejerske</string>
+	<string name="poi_health_person_type_paramedic">Sundhedspersonalerolle: paramediciner</string>
+	<string name="poi_health_person_type_physician">Sundhedspersonalerolle: læge</string>
+	<string name="poi_health_person_type_podologist">Sundhedspersonalerolle: podologist</string>
+	<string name="poi_health_person_type_psychologist">Sundhedspersonalerolle: psykolog</string>
+	<string name="poi_health_person_type_therapist">Sundhedspersonalerolle: terapeut</string>
+	<string name="poi_health_person_type_physician_assitant">Sundhedspersonalerolle: lægeassistant</string>
+	<string name="poi_health_person_type_technician">Sundhedspersonalerolle: tekniker</string>
+	<string name="poi_health_person_type_witchdoctor">Sundhedspersonalerolle: heksedoktor</string>
 
 	<string name="poi_counselling_type_addiction_yes">Rådgivning (afhængighed): ja</string>
 	<string name="poi_counselling_type_addiction_no">Rådgivning (afhængighed): nej</string>
-	<string name="poi_counselling_type_antenatal_yes">Rådgivning (før fødslen): ja</string>
-	<string name="poi_counselling_type_antenatal_no">Rådgivning (før fødslen): nej</string>
+	<string name="poi_counselling_type_antenatal_yes">Rådgivning (fødselsforberedelse): ja</string>
+	<string name="poi_counselling_type_antenatal_no">Rådgivning (fødselsforberedelse): nej</string>
 	<string name="poi_counselling_type_child_guidance_yes">Rådgivning (børnevejledning): ja</string>
 	<string name="poi_counselling_type_child_guidance_no">Rådgivning (børnevejledning): nej</string>
 	<string name="poi_counselling_type_couple_yes">Rådgivning (par): ja</string>
@@ -2896,12 +2896,12 @@
 	<string name="poi_treat_inpatient_yes">Indlæggelse: ja</string>
 	<string name="poi_treat_inpatient_no">Indlæggelse: nej</string>
 	<string name="poi_treat_inpatient_only">Indlæggelse: eksklusiv</string>
-	<string name="poi_office_physician">Læge kontor</string>
-	<string name="poi_office_therapist">Terapeut kontor</string>
-	<string name="poi_office_podologist">Podologist kontor</string>
-	<string name="poi_office_healer">Healer kontor</string>
-	<string name="poi_office_psychologist">Psykolog kontor</string>
-	<string name="poi_office_nursing_service">Sygepleje service</string>
-	<string name="poi_office_midwife">Jordemoder kontor</string>
+	<string name="poi_office_physician">Lægekontor</string>
+	<string name="poi_office_therapist">Terapeutkontor</string>
+	<string name="poi_office_podologist">Podologistkontor</string>
+	<string name="poi_office_healer">Healerkontor</string>
+	<string name="poi_office_psychologist">Psykologkontor</string>
+	<string name="poi_office_nursing_service">Sygeplejeservice</string>
+	<string name="poi_office_midwife">Jordemoderkontor</string>
 
 </resources>
