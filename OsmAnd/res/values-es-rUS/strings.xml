@@ -1902,7 +1902,7 @@
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
     <string name="application_dir_description">Elige donde guardar los archivos de los mapas.</string>
-    <string name="show_on_start_description">Si se desactiva, inicia directamente en la pantalla del mapa</string>
+    <string name="show_on_start_description">Al desactivarlo, inicia directo en la pantalla del mapa</string>
     <string name="map_downloaded">Mapa descargado</string>
     <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
     <string name="go_to_map">Ir al mapa</string>
@@ -2169,4 +2169,6 @@
     <string name="map_widget_bearing">Rumbo relativo</string>
     <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
     <string name="access_no_destination">No se fijó el destino</string>
+    <string name="use_osm_live_routing_description">Activa la navegación para cambios con OSM Live (Beta)</string>
+	<string name="use_osm_live_routing">Navegación OSM Live</string>
     </resources>
