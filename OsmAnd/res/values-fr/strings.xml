@@ -2213,4 +2213,6 @@
     <string name="access_disable_offroute_recalc_descr">Permet de ne pas recalculer automatiquement une nouvel itinéraire si vous vous éloignez beaucoup de la route prévue</string>
     <string name="access_disable_wrong_direction_recalc_descr">Permet de ne pas recalculer automatiquement une nouvel itinéraire si vous partez dans la mauvaise direction</string>
     <string name="access_disable_wrong_direction_recalc">Ignorer les écarts de direction</string>
+    <string name="use_osm_live_routing_description">Activer la navigation OSM Live prenant en comptes les modifications en temps réel (Bêta)</string>
+	<string name="use_osm_live_routing">Navigation OSM Live</string>
     </resources>
