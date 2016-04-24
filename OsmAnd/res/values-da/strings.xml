@@ -2359,4 +2359,6 @@
     <string name="map_widget_bearing">Relativ pejling</string>
     <string name="map_widget_magnetic_bearing">Magnetisk pejling</string>
     <string name="access_no_destination">Destination er ikke angivet</string>
+    <string name="use_osm_live_routing_description">Aktiver navigation for OSM Live ændringer (Beta)</string>
+	<string name="use_osm_live_routing">OSM Live navigation</string>
     </resources>
