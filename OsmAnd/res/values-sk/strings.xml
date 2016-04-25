@@ -1962,7 +1962,7 @@
     <string name="number_of_recipients">Počet príjemcov</string>
     <string name="osm_user_stat">Počet úprav %1$s, pozícia %2$s, celkový počet úprav %3$s</string>
     <string name="osm_editors_ranking">Pozícia medzi editormi OSM</string>
-    <string name="osm_live_subscription">Registrácia v OSM</string>
+    <string name="osm_live_subscription">Registrácia v OSM Naživo</string>
     <string name="osm_live_subscribe_btn">Registrovať</string>
     <string name="osm_live_email_desc">Potrebujeme to na poskytnutie informácií o príspevkoch</string>
     <string name="osm_live_user_public_name">Verejné meno</string>
@@ -1979,7 +1979,7 @@
     <string name="osm_live_subscription_settings">Nastavenia registrácie</string>
     <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Naživo</string>
 
-    <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých má sveta. Veľká časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena. Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob.</string>
+    <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých máp sveta. Veľká časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena. Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob.</string>
     
     <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
     <string name="recalculate_route">Prepočítať trasu</string>
@@ -2031,6 +2031,6 @@
     <string name="access_autoannounce_period_descr">Minimálny čas medzi oznamami</string>
     <string name="access_no_destination">Cieľ nie je určený</string>
     <string name="map_widget_magnetic_bearing">Magnetické smerovanie</string>
-    <string name="use_osm_live_routing_description">Zapnúť navigáciu pomocou zmien z OSM naživo (beta test)</string>
-	<string name="use_osm_live_routing">Navigácia OSM naživo</string>
+    <string name="use_osm_live_routing_description">Zapnúť navigáciu pomocou zmien z OSM Naživo (beta test)</string>
+	<string name="use_osm_live_routing">Navigácia OSM Naživo</string>
     </resources>
