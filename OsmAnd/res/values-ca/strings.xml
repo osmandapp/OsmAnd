@@ -2024,4 +2024,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="map_widget_bearing">Desviació relativa</string>
     <string name="access_no_destination">No s\'ha fixat la destinació</string>
     <string name="map_widget_magnetic_bearing">Desviació respecte el Nord magnètic</string>
+    <string name="use_osm_live_routing_description">Activa els canvis en temps real a OSM en la navegació (Beta)</string>
+	<string name="use_osm_live_routing">Navegació amb OSM actualitzat</string>
     </resources>
