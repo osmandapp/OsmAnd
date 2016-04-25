@@ -2031,4 +2031,6 @@
     <string name="access_autoannounce_period_descr">Minimálny čas medzi oznamami</string>
     <string name="access_no_destination">Cieľ nie je určený</string>
     <string name="map_widget_magnetic_bearing">Magnetické smerovanie</string>
+    <string name="use_osm_live_routing_description">Zapnúť navigáciu pomocou zmien z OSM naživo (beta test)</string>
+	<string name="use_osm_live_routing">Navigácia OSM naživo</string>
     </resources>
