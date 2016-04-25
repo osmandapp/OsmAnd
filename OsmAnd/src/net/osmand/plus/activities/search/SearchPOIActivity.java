@@ -157,7 +157,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public boolean onMenuItemClick(MenuItem item) {
 				OsmandSettings settings = app.getSettings();
 				filter.setFilterByName(searchFilter.getText().toString().trim());
-				settings.SELECTED_POI_FILTER_FOR_MAP.set(filter.getFilterId());
+				app.getPoiFilters().addSelectedPoiFilter(filter);
 				if (location != null) {
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 				}
@@ -828,8 +828,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		List<String> attributes = new ArrayList<String>();
 		NavigationInfo navigationInfo = app.getLocationProvider().getNavigationInfo();
 		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
-		if (direction != null)
+		if (direction != null) {
 			attributes.add(direction);
+		}
 		String[] as = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false).split("\n");
 		for (String s : as) {
 			attributes.add(s.replace(':', ' '));
