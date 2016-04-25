@@ -2193,4 +2193,6 @@
     <string name="map_widget_bearing">Relativna mer</string>
     <string name="access_no_destination">Cilj ni določen</string>
     <string name="map_widget_magnetic_bearing">Smer po magnetnem polju</string>
+    <string name="use_osm_live_routing_description">Omogoči navigacijo za spremembe OSM v živo (beta)</string>
+	<string name="use_osm_live_routing">Navigacija OSM v živo</string>
     </resources>
