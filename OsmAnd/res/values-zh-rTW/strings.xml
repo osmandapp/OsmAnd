@@ -2179,4 +2179,6 @@
     <string name="map_widget_bearing">相對方位</string>
     <string name="map_widget_magnetic_bearing">磁力方位</string>
     <string name="access_no_destination">未設定目的地</string>
+    <string name="use_osm_live_routing_description">為 OSM 即時更改啟用導航 (Beta)</string>
+	<string name="use_osm_live_routing">OSM 即時導航</string>
     </resources>
