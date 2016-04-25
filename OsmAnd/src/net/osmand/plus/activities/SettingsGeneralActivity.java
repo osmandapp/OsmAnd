@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.AsyncTask;
@@ -19,6 +20,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -50,15 +52,17 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class SettingsGeneralActivity extends SettingsBaseActivity {
+public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
 
 	public static final String MORE_VALUE = "MORE_VALUE";
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 	private ListPreference drivingRegionPreference;
-
+	private ChooseAppDirFragment chooseAppDirFragment;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -335,15 +339,15 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 	private void showAppDirDialogV19() {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		ChooseAppDirFragment frg = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null) {
+		chooseAppDirFragment = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null) {
 			@Override
 			protected void successCallback() {
 				updateApplicationDirTextAndSummary();
 			}
 		};
-		bld.setView(frg.initView(getLayoutInflater(), null, null));
+		bld.setView(chooseAppDirFragment.initView(getLayoutInflater(), null, null));
 		AlertDialog dlg = bld.show();
-		frg.setDialog(dlg);
+		chooseAppDirFragment.setDialog(dlg);
 	}
 
 
@@ -620,5 +624,24 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		return setFiles;
 	}
 
-
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+				&& grantResults.length > 0
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					if (chooseAppDirFragment != null) {
+						chooseAppDirFragment.processPermissionGranted();
+					}
+				}
+			}, 1);
+		} else {
+			Toast.makeText(this,
+					R.string.missing_write_external_storage_permission,
+					Toast.LENGTH_LONG).show();
+		}
+	}
 }

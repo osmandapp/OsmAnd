@@ -1,5 +1,6 @@
 package net.osmand.plus.dashboard;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +32,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -65,7 +68,10 @@ public class DashChooseAppDirFragment {
 		private Activity activity;
 		private Fragment fragment;
 		private Dialog dlg;
-		
+
+		private int typeTemp = -1;
+		private File selectedFileTemp;
+
 		public ChooseAppDirFragment(Activity activity, Fragment f) {
 			this.activity = activity;
 			this.fragment = f;
@@ -172,14 +178,12 @@ public class DashChooseAppDirFragment {
 				types.add(OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED);
 			}
 			File df = settings.getDefaultInternalStorage();
-			if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT || OsmandSettings.isWritable(df)) {
-				if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT) {
-					selected = items.size();
-				}
-				items.add(getString(R.string.storage_directory_shared));
-				paths.add(df.getAbsolutePath());
-				types.add(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT);
+			if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT) {
+				selected = items.size();
 			}
+			items.add(getString(R.string.storage_directory_shared));
+			paths.add(df.getAbsolutePath());
+			types.add(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT);
 
 			File[] externals = getMyApplication().getExternalFilesDirs(null);
 			if (externals != null) {
@@ -232,17 +236,39 @@ public class DashChooseAppDirFragment {
 								dialog.dismiss();
 								showOtherDialog();
 							} else {
-								mapsCopied = false;
-								type = types.get(which);
-								selectedFile = new File(paths.get(which));
-								dialog.dismiss();
-								updateView();
 
+								if (types.get(which) == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT
+										&& !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
+
+									typeTemp = types.get(which);
+									selectedFileTemp = new File(paths.get(which));
+									dialog.dismiss();
+
+									ActivityCompat.requestPermissions(activity,
+											new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+											DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+
+								} else {
+									mapsCopied = false;
+									type = types.get(which);
+									selectedFile = new File(paths.get(which));
+									dialog.dismiss();
+									updateView();
+								}
 							}
 						}
 					});
 			editalert.setNegativeButton(R.string.shared_string_dismiss, null);
 			editalert.show();
+		}
+
+		public void processPermissionGranted() {
+			if (typeTemp != -1 && selectedFileTemp != null) {
+				mapsCopied = false;
+				type = typeTemp;
+				selectedFile = selectedFileTemp;
+				updateView();
+			}
 		}
 
 		public void showOtherDialog() {
