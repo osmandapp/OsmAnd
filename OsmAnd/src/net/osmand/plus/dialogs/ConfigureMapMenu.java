@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
@@ -125,17 +126,18 @@ public class ConfigureMapMenu {
 		@Override
 		public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
 			final OsmandSettings settings = ma.getMyApplication().getSettings();
+			final PoiFiltersHelper pfh = ma.getMyApplication().getPoiFilters();
 			final ContextMenuItem item = cm.getItem(pos);
 			if (item.getSelected() != null) {
 				item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				adapter.notifyDataSetChanged();
 			}
 			if (itemId == R.string.layer_poi) {
-				settings.SELECTED_POI_FILTER_FOR_MAP.set(null);
+				pfh.clearSelectedPoiFilters();
 				if (isChecked) {
 					selectPOILayer(adapter, adapter.getItem(pos));
 				} else {
-					adapter.getItem(pos).setDescription(POIMapLayer.getSelectedPoiName(ma.getMyApplication()));
+					adapter.getItem(pos).setDescription(pfh.getSelectedPoiFiltersName());
 				}
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
@@ -184,17 +186,15 @@ public class ConfigureMapMenu {
 
 		protected void selectPOILayer(final ArrayAdapter<ContextMenuItem> adapter,
 									  final ContextMenuItem item) {
-			final PoiUIFilter[] selected = new PoiUIFilter[1];
-			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), selected);
+			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView());
 			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
 
 				@Override
 				public void onDismiss(DialogInterface dialog) {
-					OsmandApplication myApplication = ma.getMyApplication();
-					boolean selected = myApplication.getSettings()
-							.SELECTED_POI_FILTER_FOR_MAP.get() != null;
+					PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
+					boolean selected = pf.isShowingAnyPoi();
 					item.setSelected(selected);
-					item.setDescription(POIMapLayer.getSelectedPoiName(myApplication));
+					item.setDescription(pf.getSelectedPoiFiltersName());
 					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
 				}
@@ -217,11 +217,11 @@ public class ConfigureMapMenu {
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_fav_dark)
 				.setListener(l).createItem());
-		selected = settings.SELECTED_POI_FILTER_FOR_MAP.get() != null;
+		selected = app.getPoiFilters().isShowingAnyPoi();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_poi, activity)
-				.setSelected(settings.SELECTED_POI_FILTER_FOR_MAP.get() != null)
-				.setDescription(POIMapLayer.getSelectedPoiName(app))
+				.setSelected(selected)
+				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
