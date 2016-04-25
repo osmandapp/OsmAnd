@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
 	<string name="description">Kirjeldus</string>
 	<string name="contact_info">Kontakti info</string>
 	
@@ -60,7 +61,7 @@
 	<string name="shared_string_address">Aadress</string>
 	<string name="shared_string_add">Lisa</string>
 	<string name="shared_string_add_to_favorites">Lisa Lemmikutesse</string>
-	<string name="shared_string_my_location">Minu Asukoht</string>
+	<string name="shared_string_my_location">Minu asukoht</string>
 	<string name="shared_string_my_places">Minu Kohad</string>
 	<string name="shared_string_my_favorites">Minu Lemmikud</string>
 	<string name="shared_string_audio">Audio</string>
@@ -68,7 +69,7 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="shared_string_online_maps">Online kaardid</string>
 	<string name="record_plugin_name">Reisi salvestus</string>
-	<string name="osmo_plugin_name">OsMo (OSM Monitoorimine)</string>
+	<string name="osmo_plugin_name">OpenStreetMap monitoorimine</string>
 	<string name="plugin_nautical_name">Merendus kaardi vaade</string>
 	<string name="audionotes_plugin_name">Audio/video märkmed</string>
 	<string name="shared_string_accessibility">Juurdepääs</string>
