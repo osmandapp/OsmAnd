@@ -30,7 +30,7 @@ public class RasterMapMenu {
 	private static void createLayersItems(final ContextMenuAdapter contextMenuAdapter,
 										  final MapActivity mapActivity,
 										  final OsmandRasterMapsPlugin.RasterMapType type) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
 		assert plugin != null;
@@ -86,20 +86,25 @@ public class RasterMapMenu {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-											  int itemId, int pos, boolean isChecked) {
+											  final int itemId, final int pos, final boolean isChecked) {
 				if (itemId == toggleActionStringId) {
-					if (isChecked) {
-						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-					} else {
-						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
-					}
-					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
-					plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-					if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY && !isChecked) {
-						hidePolygonsPref.set(false);
-						mapActivity.getDashboard().refreshContent(true);
-					}
-					refreshMapComplete(mapActivity);
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							if (isChecked) {
+								mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+							} else {
+								mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
+							}
+							mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
+							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
+							if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
+								hidePolygonsPref.set(isChecked);
+								mapActivity.getDashboard().refreshContent(true);
+							}
+							refreshMapComplete(mapActivity);
+						}
+					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
 					refreshMapComplete(mapActivity);
@@ -149,7 +154,7 @@ public class RasterMapMenu {
 						.setTitleId(R.string.show_polygons, mapActivity)
 						.hideDivider(true)
 						.setListener(l)
-						.setSelected(hidePolygonsPref.get()).createItem());
+						.setSelected(!hidePolygonsPref.get()).createItem());
 			}
 			Boolean transparencySwitchState = settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get()
 					&& mapLayers.getMapControlsLayer().isTransparencyBarInitialized();
@@ -161,7 +166,7 @@ public class RasterMapMenu {
 		}
 	}
 
-	private static void refreshMapComplete(final MapActivity activity) {
+	public static void refreshMapComplete(final MapActivity activity) {
 		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
 		activity.updateMapSettings();
 		GPXLayer gpx = activity.getMapView().getLayerByClass(GPXLayer.class);

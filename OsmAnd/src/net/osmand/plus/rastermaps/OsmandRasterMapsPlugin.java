@@ -34,6 +34,7 @@ import net.osmand.plus.activities.DownloadTilesDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -288,6 +289,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 										item.setColorRes(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 
 										adapter.notifyDataSetChanged();
+
+										final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
+												mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
+										hidePolygonsPref.set(hasUnderlayDescription);
+										RasterMapMenu.refreshMapComplete(mapActivity);
 									}
 								});
 						return false;
