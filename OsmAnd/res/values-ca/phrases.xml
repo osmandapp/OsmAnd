@@ -2185,4 +2185,17 @@
 	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Objecte de l\'explosió: ús industrial, sonda sísmica</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Objecte de l\'explosió: ús industrial, estimulació petroliera</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application">Objecte de l\'explosió: ús industrial</string>
+	<string name="poi_health_facility_type_dispensary">Tipus d\'equipament sanitari: dispensari</string>
+	<string name="poi_health_facility_type_first_aid">Tipus d\'equipament sanitari: primers auxilis</string>
+	<string name="poi_health_facility_type_laboratory">Tipus d\'equipament sanitari: laboratori</string>
+	<string name="poi_health_facility_type_therapy">Tipus d\'equipament sanitari: teràpies</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Tipus d\'equipament sanitari: medicina pal·liativa</string>
+
+	<string name="poi_suction_point">Punt d\'aspiració</string>
+
+	<string name="poi_fire_hydrant_type_underground">Tipus: soterrat</string>
+	<string name="poi_health_amenity_type_first_aid_kit">Equip de primers auxilis</string>
+	<string name="poi_health_amenity_type_scales">Bàscules lliures</string>
+
+	<string name="poi_health_person_type_assistant">Tipus de treballador sanitari: assistent</string>
 	</resources>
