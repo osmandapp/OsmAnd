@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.render.RenderingRulesStorage;
 
 public class BinaryMapDataObject {
+	public static final int SHIFT_ID = 6;
 	protected int[] coordinates = null;
 	protected int[][] polygonInnerCoordinates = null;
 	protected boolean area = false;
