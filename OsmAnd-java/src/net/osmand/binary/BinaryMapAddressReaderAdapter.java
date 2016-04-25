@@ -37,7 +37,14 @@ public class BinaryMapAddressReaderAdapter {
 	public final static int POSTCODES_TYPE = 2;
 	public final static int VILLAGES_TYPE = 3;
 	public final static int STREET_TYPE = 4;
-	
+
+	public final static int[] TYPES = {
+			CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE
+	};
+	public final static int[] CITY_TYPES = {
+			CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE
+	};
+
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapAddressReaderAdapter.class);
 	public final static int[] TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE };
 	public final static int[] CITY_TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE };
@@ -53,19 +60,18 @@ public class BinaryMapAddressReaderAdapter {
 		public String getEnName() {
 			return enName;
 		}
-		
+
 		public List<CitiesBlock> getCities() {
 			return cities;
 		}
-		
+
 		public List<String> getAttributeTagsTable() {
 			return attributeTagsTable;
 		}
-		
+
 		public int getIndexNameOffset() {
 			return indexNameOffset;
 		}
-		
 
 		public String getPartName() {
 			return "Address";
@@ -77,6 +83,8 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 	public static class CitiesBlock extends BinaryIndexPart {
+		public String getPartName() { return "City"; }
+		public int getFieldNumber() { return OsmandOdb.OsmAndAddressIndex.CITIES_FIELD_NUMBER; }
 		int type;
 
 		public String getPartName() {
