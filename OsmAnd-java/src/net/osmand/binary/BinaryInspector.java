@@ -547,6 +547,21 @@ public class BinaryInspector {
 						b.append(" ").append(rr.getTag()).append("='").append(obj.getNames().get(key)).append("'");
 					}
 				}
+				if (obj.restrictions != null) {
+					b.append(" restrictions=");
+					for (int i = 0; i != obj.restrictions.length; i++) {
+						b.append(obj.getRestrictionId(i)).append(",");
+					}
+					b.append(" ");
+				}
+				if (vInfo.vmapCoordinates) {
+					b.append(" lat/lon : ");
+					for (int i = 0; i < obj.getPointsLength(); i++) {
+						float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
+						float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
+						b.append(y).append(" / ").append(x).append(" , ");
+					}
+				}
 				println(b.toString());
 				return false;
 			}
