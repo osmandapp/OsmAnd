@@ -1,6 +1,8 @@
 package net.osmand.plus.dialogs;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -9,10 +11,12 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.RouteLayer;
 
@@ -20,7 +24,7 @@ public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
-													   final OsmandRasterMapsPlugin.RasterMapType type) {
+													   final RasterMapType type) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		createLayersItems(adapter, mapActivity, type);
@@ -29,7 +33,7 @@ public class RasterMapMenu {
 
 	private static void createLayersItems(final ContextMenuAdapter contextMenuAdapter,
 										  final MapActivity mapActivity,
-										  final OsmandRasterMapsPlugin.RasterMapType type) {
+										  final RasterMapType type) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
@@ -37,15 +41,17 @@ public class RasterMapMenu {
 		final OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
 		final OsmandSettings.CommonPreference<String> mapTypePreference;
 		final OsmandSettings.CommonPreference<String> exMapTypePreference;
+		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
+				type == RasterMapType.OVERLAY ? LayerTransparencySeekbarMode.OVERLAY : LayerTransparencySeekbarMode.UNDERLAY;
 		@StringRes final int mapTypeString;
 		@StringRes final int mapTypeStringTransparency;
-		if (type == OsmandRasterMapsPlugin.RasterMapType.OVERLAY) {
+		if (type == RasterMapType.OVERLAY) {
 			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
 			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
 			mapTypeString = R.string.map_overlay;
 			mapTypeStringTransparency = R.string.overlay_transparency;
-		} else if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
+		} else if (type == RasterMapType.UNDERLAY) {
 			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
 			mapTypePreference = settings.MAP_UNDERLAY;
 			exMapTypePreference = settings.MAP_UNDERLAY_PREVIOUS;
@@ -91,14 +97,8 @@ public class RasterMapMenu {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							if (isChecked) {
-								mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-							} else {
-								mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
-							}
-							mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
 							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-							if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
+							if (type == RasterMapType.UNDERLAY) {
 								hidePolygonsPref.set(isChecked);
 								mapActivity.getDashboard().refreshContent(true);
 							}
@@ -109,11 +109,16 @@ public class RasterMapMenu {
 					hidePolygonsPref.set(!isChecked);
 					refreshMapComplete(mapActivity);
 				} else if (itemId == R.string.show_transparency_seekbar) {
-					settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.set(isChecked);
-					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
+					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(
+							isChecked ? currentMapTypeSeekbarMode : LayerTransparencySeekbarMode.OFF);
 					if (isChecked) {
 						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+						Log.e("111", "checkbox: show");
+					} else {
+						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
+						Log.e("111", "checkbox: hide");
 					}
+					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
 				}
 				return false;
 			}
@@ -149,21 +154,28 @@ public class RasterMapMenu {
 					.setProgress(mapTransparencyPreference.get())
 					.setListener(l)
 					.setIntegerListener(integerListener).createItem());
-			if (type == OsmandRasterMapsPlugin.RasterMapType.UNDERLAY) {
+			if (type == RasterMapType.UNDERLAY) {
 				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.show_polygons, mapActivity)
 						.hideDivider(true)
 						.setListener(l)
 						.setSelected(!hidePolygonsPref.get()).createItem());
 			}
-			Boolean transparencySwitchState = settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.get()
-					&& mapLayers.getMapControlsLayer().isTransparencyBarInitialized();
+			Boolean transparencySwitchState = isSeekbarVisible(app, type);
 			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.show_transparency_seekbar, mapActivity)
 					.hideDivider(true)
 					.setListener(l)
 					.setSelected(transparencySwitchState).createItem());
 		}
+	}
+
+	@NonNull
+	public static Boolean isSeekbarVisible(OsmandApplication app, RasterMapType type) {
+		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
+				type == RasterMapType.OVERLAY ? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
+		LayerTransparencySeekbarMode seekbarMode = app.getSettings().LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
+		return seekbarMode == LayerTransparencySeekbarMode.UNDEFINED || seekbarMode == currentMapTypeSeekbarMode;
 	}
 
 	public static void refreshMapComplete(final MapActivity activity) {

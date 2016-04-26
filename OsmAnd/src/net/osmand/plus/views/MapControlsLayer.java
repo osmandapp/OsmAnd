@@ -14,6 +14,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +33,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -39,6 +41,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -68,7 +71,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private SeekBar transparencyBar;
 	private LinearLayout transparencyBarLayout;
-	private static CommonPreference<Integer> settingsToTransparency;
+	private static CommonPreference<Integer> transparencySetting;
 	private boolean isTransparencyBarEnabled = true;
 	private OsmandSettings settings;
 
@@ -611,8 +614,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		transparencyBarLayout = (LinearLayout) mapActivity.findViewById(R.id.map_transparency_layout);
 		transparencyBar = (SeekBar) mapActivity.findViewById(R.id.map_transparency_seekbar);
 		transparencyBar.setMax(255);
-		if (settingsToTransparency != null) {
-			transparencyBar.setProgress(settingsToTransparency.get());
+		if (transparencySetting != null) {
+			transparencyBar.setProgress(transparencySetting.get());
 			transparencyBarLayout.setVisibility(View.VISIBLE);
 		} else {
 			transparencyBarLayout.setVisibility(View.GONE);
@@ -629,8 +632,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				if (settingsToTransparency != null) {
-					settingsToTransparency.set(progress);
+				if (transparencySetting != null) {
+					transparencySetting.set(progress);
 					mapActivity.getMapView().refreshMap();
 				}
 			}
@@ -640,15 +643,26 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				transparencyBarLayout.setVisibility(View.GONE);
-				settings.SHOW_LAYER_TRANSPARENCY_SEEKBAR.set(false);
-				hideTransparencyBar(settingsToTransparency);
+				settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
+				hideTransparencyBar(transparencySetting);
 			}
 		});
+
+		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
+		if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
+			showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+			setTransparencyBarEnabled(true);
+			Log.e("111", "init: show OVERLAY");
+		} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
+			showTransparencyBar(settings.MAP_TRANSPARENCY);
+			setTransparencyBarEnabled(true);
+			Log.e("111", "init: show UNDERLAY");
+		}
 	}
 
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference) {
-		if (MapControlsLayer.settingsToTransparency != transparenPreference) {
-			MapControlsLayer.settingsToTransparency = transparenPreference;
+		if (MapControlsLayer.transparencySetting != transparenPreference) {
+			MapControlsLayer.transparencySetting = transparenPreference;
 			if (isTransparencyBarEnabled) {
 				transparencyBarLayout.setVisibility(View.VISIBLE);
 			}
@@ -657,25 +671,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void hideTransparencyBar(CommonPreference<Integer> transparentPreference) {
-		if (settingsToTransparency == transparentPreference) {
+		if (transparencySetting == transparentPreference) {
 			transparencyBarLayout.setVisibility(View.GONE);
-			settingsToTransparency = null;
+			transparencySetting = null;
 		}
 	}
 
 	public void setTransparencyBarEnabled(boolean isTransparencyBarEnabled) {
 		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
-		if (settingsToTransparency != null) {
+		if (transparencySetting != null) {
 			if (isTransparencyBarEnabled) {
 				transparencyBarLayout.setVisibility(View.VISIBLE);
 			} else {
 				transparencyBarLayout.setVisibility(View.GONE);
 			}
 		}
-	}
-
-	public boolean isTransparencyBarInitialized() {
-		return settingsToTransparency != null;
 	}
 
 	private class MapHudButton {

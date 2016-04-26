@@ -1138,8 +1138,8 @@ public class OsmandSettings {
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeGlobal();
 
-	public final CommonPreference<Boolean> SHOW_LAYER_TRANSPARENCY_SEEKBAR =
-			new BooleanPreference("show_layer_transparency_seekbar", false).makeGlobal();
+	public final CommonPreference<LayerTransparencySeekbarMode> LAYER_TRANSPARENCY_SEEKBAR_MODE =
+			new EnumIntPreference<>("layer_transparency_seekbar_mode", LayerTransparencySeekbarMode.UNDEFINED, LayerTransparencySeekbarMode.values());
 
 	public final CommonPreference<String> MAP_OVERLAY_PREVIOUS = new StringPreference("map_overlay_previous", null).makeGlobal().cache();
 
@@ -2592,6 +2592,24 @@ public class OsmandSettings {
 			} else {
 				return new DayNightMode[]{AUTO, DAY, NIGHT};
 			}
+		}
+	}
+
+
+	public enum LayerTransparencySeekbarMode {
+		OVERLAY(R.string.overlay_transparency),
+		UNDERLAY(R.string.map_transparency),
+		OFF(R.string.shared_string_off),
+		UNDEFINED(R.string.shared_string_none);
+
+		private final int key;
+
+		LayerTransparencySeekbarMode(int key) {
+			this.key = key;
+		}
+
+		public String toHumanString(Context ctx) {
+			return ctx.getString(key);
 		}
 	}
 

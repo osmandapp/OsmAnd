@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -28,6 +29,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
@@ -105,6 +107,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		};
 		// mapView.addLayer(overlayLayer, 0.7f);
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
+
+
 	}
 
 	@Override
@@ -235,7 +239,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView,
 												ContextMenuAdapter adapter,
 												final MapActivity mapActivity) {
-		final MapActivityLayers layers = mapActivity.getMapLayers();
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
@@ -532,16 +535,39 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
+		OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
 		ITileSource map;
 		if (type == RasterMapType.OVERLAY) {
+			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
 			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
 			map = overlayLayer.getMap();
 		} else {
 			// Underlay expected
+			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
 			mapTypePreference = settings.MAP_UNDERLAY;
 			exMapTypePreference = settings.MAP_UNDERLAY_PREVIOUS;
 			map = underlayLayer.getMap();
+		}
+
+		boolean isChecked = map == null;
+		boolean showSeekbar = isChecked && RasterMapMenu.isSeekbarVisible(app, type);
+		boolean hideSeekbar = !isChecked && RasterMapMenu.isSeekbarVisible(app, type);
+		MapActivityLayers mapLayers = mapActivity.getMapLayers();
+		CommonPreference<LayerTransparencySeekbarMode> seekbarModePref = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE;
+		if (showSeekbar) {
+			mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+			mapLayers.getMapControlsLayer().setTransparencyBarEnabled(true);
+			if (seekbarModePref.get() == LayerTransparencySeekbarMode.UNDEFINED) {
+				final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
+						type == OsmandRasterMapsPlugin.RasterMapType.OVERLAY ? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
+				seekbarModePref.set(currentMapTypeSeekbarMode);
+			}
+			Log.e("111", "toggleUnderlayState: show");
+		} else if (hideSeekbar) {
+			mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
+			mapLayers.getMapControlsLayer().setTransparencyBarEnabled(false);
+			Log.e("111", "toggleUnderlayState: hide");
 		}
 
 		if (map != null) {
@@ -549,7 +575,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			if (callback != null) {
 				callback.onMapSelected();
 			}
-			MapActivityLayers mapLayers = mapActivity.getMapLayers();
 			updateMapLayers(mapView, null, mapLayers);
 		} else {
 			selectMapOverlayLayer(mapView, mapTypePreference, exMapTypePreference, false, mapActivity, callback);
