@@ -892,4 +892,6 @@
     <string name="speech_rate">Voĉa rapido</string>
     <string name="complex_route_calculation_failed">Eraro dum rapida kalkulado de kurso (%s), retropaŝanta malrapidan kalkuladon.</string>
     <string name="disable_complex_routing_descr">Malaktivigas 2-fazan difinadon de vojo por aŭt-navigado</string>
+    <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
+    <string name="amenity_type_seamark">Mara navigadpunkto</string>
     </resources>
