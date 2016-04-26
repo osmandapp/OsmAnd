@@ -2198,4 +2198,13 @@
 	<string name="poi_health_amenity_type_scales">Bàscules lliures</string>
 
 	<string name="poi_health_person_type_assistant">Tipus de treballador sanitari: assistent</string>
+	<string name="poi_disease_malaria_yes">Malària: sí</string>
+	<string name="poi_disease_malaria_no">Malària: no</string>
+	<string name="poi_disease_ebola_yes">Ebola: sí</string>
+	<string name="poi_disease_ebola_no">Ebola: no</string>
+	<string name="poi_disease_autism_yes">Autisme: sí</string>
+	<string name="poi_disease_autism_no">Autisme: no</string>
+	<string name="poi_disease_aids_yes">SIDA: sí</string>
+	<string name="poi_disease_aids_no">SIDA: no</string>
+
 	</resources>
