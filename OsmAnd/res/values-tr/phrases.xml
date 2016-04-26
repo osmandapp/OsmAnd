@@ -76,7 +76,7 @@
 	<string name="poi_baby_goods">Bebek ürünleri</string>
 	<string name="poi_bag">Çanta dükkanı</string>
 	<string name="poi_bathroom_furnishing">Banyo eşyaları</string>
-	<string name="poi_bed">Banyo eşyaları</string>
+	<string name="poi_bed">Katmanlaşma deposu</string>
 	<string name="poi_boutique">Moda butik</string>
 	<string name="poi_camera">Kameralar ve objektifler</string>
 	<string name="poi_carpet">Halı dükkanı</string>
@@ -250,8 +250,8 @@
 	<string name="poi_aerodrome">Havaalanı</string>
 	<string name="poi_helipad">Helikopter pisti</string>
 	<string name="poi_runway">Pist</string>
-	<string name="poi_aeroway_terminal">Aeroway terminal</string>
-	<string name="poi_aeroway_gate">Aeroway kapısı</string>
+	<string name="poi_aeroway_terminal">Katmanlaşma deposu</string>
+	<string name="poi_aeroway_gate">Havayolu kapısı</string>
 
 	<string name="poi_slipway">Kızak</string>
 	<string name="poi_ferry_terminal">Feribot terminali</string>
@@ -263,13 +263,13 @@
 	<string name="poi_aerialway_station">Aerialway istasyonu</string>
 	<string name="poi_aerialway_cable_car">Teleferik</string>
 	<string name="poi_aerialway_gondola">Gondol</string>
-	<string name="poi_aerialway_chair_lift">Telesiyej</string>
-	<string name="poi_aerialway_t_bar">T-bar Asansör</string>
-	<string name="poi_aerialway_j_bar">J-Bar Asansör</string>
-	<string name="poi_aerialway_platter">Tabağı Asansör</string>
+	<string name="poi_aerialway_chair_lift">Teleferik</string>
+	<string name="poi_aerialway_t_bar">Kayak asansörü</string>
+	<string name="poi_aerialway_j_bar">J-biçimli Asansör</string>
+	<string name="poi_aerialway_platter">Mutfak Asansörü</string>
 	<string name="poi_aerialway_mixed_lift">Karışık Asansör</string>
-	<string name="poi_aerialway_drag_lift">Asansörü sürükleyin</string>
-	<string name="poi_aerialway_rope_tow">Halat çekme Asansör</string>
+	<string name="poi_aerialway_drag_lift">Kayak teleferiği</string>
+	<string name="poi_aerialway_rope_tow">Teleferik çekme halatı</string>
 	<string name="poi_aerialway_goods">Malzeme asansörü</string>
 	<string name="poi_aerialway_magic_carpet">Halı asansörü</string>
 
@@ -313,8 +313,8 @@
 
 	<string name="poi_recycling">Geri dönüşüm</string>
 
-	<string name="poi_recycling_centre">Merkez</string>
-	<string name="poi_recycling_container">Konteyner</string>
+	<string name="poi_recycling_centre">Tür: geri dönüşüm merkezi</string>
+	<string name="poi_recycling_container">Tür: konteyner</string>
 	<string name="poi_recycling_glass">Cam</string>
 	<string name="poi_recycling_paper">Kağıt</string>
 	<string name="poi_recycling_clothes">Giyim</string>
@@ -354,7 +354,7 @@
 	<string name="poi_recycling_computers">Bilgisayarlar</string>
 	<string name="poi_recycling_tyres">Lastikler</string>
 	<string name="poi_recycling_tv_monitor">TV, monitör</string>
-	<string name="poi_recycling_tetrapak">Tetrapak</string>
+	<string name="poi_recycling_tetrapak">Karton kutu</string>
 	<string name="poi_recycling_rubble">Moloz</string>
 	<string name="poi_recycling_cds">CD</string>
 	<string name="poi_recycling_waste_oil">Atık yağ</string>
@@ -491,7 +491,7 @@
 	<string name="poi_research">Araştırma Bürosu</string>
 	<string name="poi_it">BT bürosu</string>
 	<string name="poi_newspaper">Gazete Bürosu</string>
-	<string name="poi_architect">Mimar bürosu</string>
+	<string name="poi_architect">Mimarlık bürosu</string>
 	<string name="poi_advertising_agency">Reklam Ajansı</string>
 	<string name="poi_educational_institution">Eğitim Kurumu</string>
 	<string name="poi_studio">Stüdyo</string>
@@ -523,9 +523,9 @@
 	<string name="poi_baseball">Beyzbol</string>
 	<string name="poi_basketball">Basketbol</string>
 	<string name="poi_beachvolleyball">Plaj voleybolu</string>
-	<string name="poi_bmx">BMX</string>
+	<string name="poi_bmx">Küçük bisiklet</string>
 	<string name="poi_boules">Misket</string>
-	<string name="poi_bowls">Kase</string>
+	<string name="poi_bowls">Dokuz Kuka oyunu</string>
 	<string name="poi_canadian_football">Kanada Futbol</string>
 	<string name="poi_canoe">Kano</string>
 	<string name="poi_chess">Satranç</string>
@@ -550,7 +550,7 @@
 	<string name="poi_orienteering">Oryantiring</string>
 	<string name="poi_paddle_tennis">Raket Tenisi</string>
 	<string name="poi_paragliding">Yamaç paraşütü</string>
-	<string name="poi_pelota">Pelota</string>
+	<string name="poi_pelota">Oyun</string>
 	<string name="poi_racquet">Raket</string>
 	<string name="poi_roller_skating">Tekerlekli paten</string>
 	<string name="poi_rowing">Kürek</string>
@@ -621,15 +621,15 @@
 	<string name="poi_religion_christian">Hristiyanlık</string>
 	<string name="poi_religion_jewish">Yahudilik</string>
 	<string name="poi_religion_muslim">İslami</string>
-	<string name="poi_religion_sikh">İbadethane: sih</string>
+	<string name="poi_religion_sikh">Sih dini</string>
 	<string name="poi_religion_buddhist">Budizm</string>
 	<string name="poi_religion_hindu">Hinduizm</string>
 	<string name="poi_religion_shinto">Şintoizm</string>
 	<string name="poi_religion_taoist">Taoizm</string>
 	<string name="poi_religion_voodoo">Büyü</string>
-	<string name="poi_religion_unitarian_universalist">Üniteryan evrenselci</string>
+	<string name="poi_religion_unitarian_universalist">Üniteryenizm</string>
 	<string name="poi_religion_multifaith">Çok inançlı</string>
-	<string name="poi_religion_jain">Jain</string>
+	<string name="poi_religion_jain">Jainizm</string>
 	<string name="poi_religion_spiritualist">Spiritualizm</string>
 	<string name="poi_religion_bahai">Bahaizm</string>
 	<string name="poi_religion_scientologist">Scientologist</string>
@@ -638,10 +638,10 @@
 	<string name="poi_religion_zoroastrian">Zerdüştlük</string>
 
 	<string name="poi_denomination_catholic">Katolik</string>
-	<string name="poi_denomination_baptist">Baptist</string>
+	<string name="poi_denomination_baptist">Baptistler</string>
 	<string name="poi_denomination_roman_catholic">Roma Katolik</string>
 	<string name="poi_denomination_orthodox">Ortodoks</string>
-	<string name="poi_denomination_lutheran">Lutheran</string>
+	<string name="poi_denomination_lutheran">Luteryen</string>
 	<string name="poi_denomination_sunni">Sünni</string>
 	<string name="poi_denomination_protestant">Protestan</string>
 	<string name="poi_denomination_methodist">Metodist</string>
@@ -654,34 +654,34 @@
 	<string name="poi_denomination_jehovahs_witness">Yehova şahitleri</string>
 	<string name="poi_denomination_greek_orthodox">Yunan ortodoks</string>
 	<string name="poi_denomination_reformed">Düzellmiş</string>
-	<string name="poi_denomination_seventh_day_adventist">Yedinci_gün_inanışçısı</string>
-	<string name="poi_denomination_new_apostolic">New_apostolic</string>
-	<string name="poi_denomination_church_of_england">Anglikan_kilisesi</string>
+	<string name="poi_denomination_seventh_day_adventist">Yedinci gün inannışçısı</string>
+	<string name="poi_denomination_new_apostolic">Yeni havarici</string>
+	<string name="poi_denomination_church_of_england">İngiltere kilisesi</string>
 	<string name="poi_denomination_episcopal">Piskoposluk</string>
 	<string name="poi_denomination_shia">Şii</string>
 	<string name="poi_denomination_united">Birleşik</string>
 	<string name="poi_denomination_greek_catholic">Yunan Katolik</string>
 	<string name="poi_denomination_tibetan">Tibetli</string>
 	<string name="poi_denomination_united_reformed">Birleşik düzen</string>
-	<string name="poi_denomination_church_of_scotland">İskoç kilisesi</string>
+	<string name="poi_denomination_church_of_scotland">İskoçya kilisesi</string>
 	<string name="poi_denomination_salvation_army">Selamet ordusu</string>
-	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+	<string name="poi_denomination_iglesia_ni_cristo">İsanın Kilisesi</string>
 	<string name="poi_denomination_uniting">Birleştirici</string>
-	<string name="poi_denomination_mennonite">Mennonite</string>
+	<string name="poi_denomination_mennonite">Mennonitler</string>
 	<string name="poi_denomination_quaker">Bubi tuzağı</string>
 	<string name="poi_denomination_bulgarian_orthodox">Bulgar ortodoks</string>
 	<string name="poi_denomination_assemblies_of_god">Tanrının meclisleri</string>
 	<string name="poi_denomination_nondenominational">Mezhepsiz</string>
-	<string name="poi_denomination_adventist">Adventist</string>
-	<string name="poi_denomination_nazarene">Nasıralı</string>
+	<string name="poi_denomination_adventist">Protestan</string>
+	<string name="poi_denomination_nazarene">Nasrani</string>
 	<string name="poi_denomination_united_methodist">Birleşik Metodist</string>
 	<string name="poi_denomination_congregational">Cemaat</string>
 	<string name="poi_denomination_old_believers">Eski inananlar</string>
-	<string name="poi_denomination_spiritist">Spiritist</string>
+	<string name="poi_denomination_spiritist">Tinselci</string>
 	<string name="poi_denomination_armenian_apostolic">Ermeni Apostolik</string>
 	<string name="poi_denomination_dutch_reformed">Hollanda Reformu</string>
 	<string name="poi_denomination_apostolic">Apostolik</string>
-	<string name="poi_denomination_reform">Reform</string>
+	<string name="poi_denomination_reform">Yenilik</string>
 	<string name="poi_denomination_latter_day_saints">İkinci gün azizleri</string>
 	<string name="poi_denomination_church_of_christ">İsa kilisesi</string>
 	<string name="poi_denomination_united_church_of_christ">Birleşik isa kilisesi</string>
@@ -693,7 +693,7 @@
 	<string name="poi_denomination_coptic_orthodox">Koptik ortodoks</string>
 	<string name="poi_denomination_wesleyan">Wesleyan</string>
 	<string name="poi_denomination_shaktism">Saktism</string>
-	<string name="poi_denomination_shingon_shu">Shingon shu</string>
+	<string name="poi_denomination_shingon_shu">Şingon budizmi</string>
 	<string name="poi_denomination_maronite">Maronit</string>
 	<string name="poi_denomination_mahayana">Mahayana</string>
 
@@ -706,7 +706,7 @@
 	<string name="poi_monastery">Manastır</string>
 	<string name="poi_historic_monastery">Tarihi Manastır</string>
 	<string name="poi_religious">Dini alan</string>
-	<string name="poi_wayside_cross">Wayside çapraz</string>
+	<string name="poi_wayside_cross">Wayside haçı</string>
 	<string name="poi_wayside_shrine">Yolkenarı tapınağı</string>
 	<string name="poi_information">Turistik bilgiler</string>
 	<string name="poi_clock">Saat</string>
@@ -723,8 +723,8 @@
 	<string name="poi_tomb">Mezar</string>
 	<string name="poi_shelter">Barınak</string>
 	<string name="poi_funicular">Füniküler</string>
-	<string name="poi_resort">Resort</string>
-	<string name="poi_hanami">Hanami</string>
+	<string name="poi_resort">Tatil Yeri</string>
+	<string name="poi_hanami">Çiçek Görüntüsü</string>
 	<string name="poi_wine_cellar">Şarap mahzeni</string>
 	<string name="poi_winery">Şaraphane</string>
 
@@ -777,12 +777,12 @@
 	<string name="poi_nightclub">Gece kulübü</string>
 	<string name="poi_stripclub">Striptiz kulübü</string>
 	<string name="poi_ski_resort">Kayak Merkezi</string>
-	<string name="poi_beach_resort">Beach resort</string>
+	<string name="poi_beach_resort">Sahil Oteli</string>
 	<string name="poi_dog_park">Köpek Parkı</string>
 	<string name="poi_leisure_fishing">Balık tutma yeri</string>
 	<string name="poi_hunting_stand">Avcılık standı</string>
 	<string name="poi_harbour">Liman</string>
-	<string name="poi_marina">Marina</string>
+	<string name="poi_marina">Yat Limanı</string>
 	<string name="poi_miniature_golf">Minyatür golf</string>
 	<string name="poi_playground">Oyun alanı</string>
 	<string name="poi_bench">Tezgah</string>
@@ -793,11 +793,11 @@
 	<string name="poi_village_green">Yeşil köy</string>
 	<string name="poi_trail_riding_station">İz sürme istasyonu</string>
 
-	<string name="poi_cafe">Cafe</string>
-	<string name="poi_biergarten">Biergarten</string>
+	<string name="poi_cafe">Kafe</string>
+	<string name="poi_biergarten">Bahçeli Birahane</string>
 	<string name="poi_restaurant">Restoran</string>
 	<string name="poi_bar">Bar</string>
-	<string name="poi_pub">Pub</string>
+	<string name="poi_pub">Birahane</string>
 	<string name="poi_barbecue">Mangal</string>
 
 	<string name="poi_craft_agricultural_engines">Tarımsal motorlar</string>
@@ -976,16 +976,16 @@
 	<string name="poi_stile">Stil</string>
 	<string name="poi_kissing_gate">Öpüşme kapısı</string>
 	<string name="poi_sally_port">Sally bağlantı noktası</string>
-	<string name="poi_lcn_ref">Yerel döngüsü düğüm ağ</string>
-	<string name="poi_iwn_ref">Uluslararası yürüyüş ağ düğümü</string>
-	<string name="poi_nwn_ref">Ulusal yürüyüş ağ düğümü</string>
-	<string name="poi_rwn_ref">Bölgesel yürüyüş ağ düğümü</string>
+	<string name="poi_lcn_ref">Yerel döngü ağ düğümü</string>
+	<string name="poi_iwn_ref">Uluslararası yürüyüş ağı düğümü</string>
+	<string name="poi_nwn_ref">Ulusal giden ağ düğümü</string>
+	<string name="poi_rwn_ref">Bölgesel giden ağ düğümü</string>
 	<string name="poi_lwn_ref">Yerel yürüyüş ağ düğümü</string>
 
-	<string name="poi_route_hiking_iwn_poi">Uluslararası yürüyüş rotası</string>
-	<string name="poi_route_hiking_nwn_poi">Ulusal yürüyüş rotası</string>
-	<string name="poi_route_hiking_rwn_poi">Bölgesel yürüme rotası</string>
-	<string name="poi_route_hiking_lwn_poi">Yerel yürüyüş rotası</string>
+	<string name="poi_route_hiking_iwn_poi">Uluslararası yürüyüş izleği</string>
+	<string name="poi_route_hiking_nwn_poi">Ulusal yürüyüş izleği</string>
+	<string name="poi_route_hiking_rwn_poi">Bölgesel yürüyüş izleği</string>
+	<string name="poi_route_hiking_lwn_poi">Yerel yürüyüş izleği</string>
 	<string name="poi_route_hiking_ref_poi">Yürüyüş yolu başvurusu</string>
 
 	<string name="poi_opening_hours"/>
@@ -995,7 +995,7 @@
 	<string name="poi_website">İnternet sitesi</string>
 	<string name="poi_fax">Faks</string>
 	<string name="poi_youtube">YouTube</string>
-	<string name="poi_instagram">Instagram</string>
+	<string name="poi_instagram">İnstagram</string>
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google +</string>
 	<string name="poi_mobile">Mobil</string>
@@ -1007,23 +1007,23 @@
 	<string name="poi_operator">Operatör</string>
 	<string name="poi_fee_yes">Ücrete tabi</string>
 	<string name="poi_fee_no">Ücretsiz</string>
-	<string name="poi_drinking_water_yes">İçme suyu</string>
+	<string name="poi_drinking_water_yes">İçme suyu: evet</string>
 	<string name="poi_supervised_yes">Denetimli</string>
 	<string name="poi_supervised_no">Denetimsiz</string>
 	<string name="poi_seasonal_summer"/>
 	<string name="poi_seasonal_autumn">Sonbahar</string>
 	<string name="poi_seasonal_winter">Kış</string>
-	<string name="poi_crossing_traffic_signals">Trafik işaretleri ile</string>
+	<string name="poi_crossing_traffic_signals">Fren lambaları ile</string>
 	<string name="poi_crossing_uncontrolled">Kontrolsüz</string>
 	<string name="poi_crossing_unmarked">İşaretlenmemiş</string>
 
 	<string name="poi_access_private">Özel erişim</string>
 	<string name="poi_access_no">Erişim yok</string>
 	<string name="poi_access_destination">Hedef erişimi</string>
-	<string name="poi_enforcement_traffic_signals">Uygulama: trafik sinyalleri</string>
-	<string name="poi_enforcement_maxspeed">Uygulama: maks hız</string>
-	<string name="poi_enforcement_maxheight">Uygulama: maks ağırlık</string>
-	<string name="poi_enforcement_mindistance">Uygulama: min uzunluk</string>
+	<string name="poi_enforcement_traffic_signals">Zorunlu: fren lambaları</string>
+	<string name="poi_enforcement_maxspeed">Zorunlu: hız sınırı</string>
+	<string name="poi_enforcement_maxheight">Zorunlu: en fazla yükseklik</string>
+	<string name="poi_enforcement_mindistance">Zorunlu: en kısa mesafe</string>
 	<string name="poi_enforcement_check">Uygulama: kontrol</string>
 	<string name="poi_enforcement_access">Uygulama: erişim</string>
 	<string name="poi_enforcement_toll">Uygulama: ücretli</string>
@@ -1031,7 +1031,7 @@
 	<string name="poi_animal_shelter_dog">Köpekler için barınak</string>
 	<string name="poi_animal_shelter_cat">Kediler için barınak</string>
 	<string name="poi_animal_shelter_dog_cat">Kediler ve köpekler için barınak</string>
-	<string name="poi_animal_shelter_bird">Kuşlar için barınak</string>
+	<string name="poi_animal_shelter_bird">Barınak türü: Kuş</string>
 
 	<string name="poi_building">Bina</string>
 
