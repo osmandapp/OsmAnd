@@ -562,10 +562,13 @@ public class RoutePreferencesMenu {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
 		RouteProvider.GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		boolean osmandRouter = settings.ROUTER_SERVICE.get() == RouteProvider.RouteService.OSMAND;
+		boolean bRouter = settings.ROUTER_SERVICE.get() == RouteProvider.RouteService.BROUTER;
 		if (!osmandRouter) {
-			list.add(new OtherLocalRoutingParameter(R.string.calculate_osmand_route_without_internet,
-					getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS
-					.get()));
+			if (!bRouter) {
+				list.add(new OtherLocalRoutingParameter(R.string.calculate_osmand_route_without_internet,
+						getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS
+						.get()));
+			}
 			list.add(new OtherLocalRoutingParameter(R.string.fast_route_mode, getString(R.string.fast_route_mode),
 					settings.FAST_ROUTE_MODE.get()));
 		}
