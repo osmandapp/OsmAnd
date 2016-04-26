@@ -59,7 +59,7 @@ public class BinaryInspector {
 	
 
 	public static final int BUFFER_SIZE = 1 << 20;
-	private static final int SHIFT_ID = 6;
+	public static final int SHIFT_ID = 6;
 	private VerboseInfo vInfo;
 
 	public static void main(String[] args) throws IOException {
@@ -536,7 +536,7 @@ public class BinaryInspector {
 				b.setLength(0);
 				b.append("Road ");
 				b.append(obj.id);
-				b.append(" osmid ").append(obj.id >> (SHIFT_ID + 2));
+				b.append(" osmid ").append(obj.getId() >> (SHIFT_ID));
 				for (int i = 0; i < obj.getTypes().length; i++) {
 					RouteTypeRule rr = obj.region.quickGetEncodingRule(obj.getTypes()[i]);
 					b.append(" ").append(rr.getTag()).append("='").append(rr.getValue()).append("'");
@@ -950,7 +950,7 @@ public class BinaryInspector {
 		}
 
 		b.append(" id ").append(obj.getId());
-		b.append(" osmid ").append((obj.getId() >> (SHIFT_ID + 2)));
+		b.append(" osmid ").append((obj.getId() >> (SHIFT_ID + 1)));
 		if (vmapCoordinates) {
 			b.append(" lat/lon : ");
 			for (int i = 0; i < obj.getPointsLength(); i++) {
