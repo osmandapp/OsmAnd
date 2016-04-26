@@ -52,8 +52,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
@@ -63,6 +61,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	private ListPreference applicationModePreference;
 	private ListPreference drivingRegionPreference;
 	private ChooseAppDirFragment chooseAppDirFragment;
+	private boolean permissionRequested;
+	private boolean permissionGranted;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -345,6 +345,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				updateApplicationDirTextAndSummary();
 			}
 		};
+		if (permissionRequested && !permissionGranted) {
+			chooseAppDirFragment.setPermissionDenied();
+		}
 		bld.setView(chooseAppDirFragment.initView(getLayoutInflater(), null, null));
 		AlertDialog dlg = bld.show();
 		chooseAppDirFragment.setDialog(dlg);
@@ -625,20 +628,24 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		if (permissionRequested) {
+			showAppDirDialogV19();
+			permissionRequested = false;
+		}
+	}
+
+	@Override
 	public void onRequestPermissionsResult(int requestCode,
 										   String permissions[], int[] grantResults) {
-		if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+		permissionRequested = requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE;
+		if (permissionRequested
 				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					if (chooseAppDirFragment != null) {
-						chooseAppDirFragment.processPermissionGranted();
-					}
-				}
-			}, 1);
+			permissionGranted = true;
 		} else {
+			permissionGranted = false;
 			Toast.makeText(this,
 					R.string.missing_write_external_storage_permission,
 					Toast.LENGTH_LONG).show();
