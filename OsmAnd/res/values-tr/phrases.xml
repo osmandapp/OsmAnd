@@ -806,7 +806,7 @@
 	<string name="poi_craft_boatbuilder">Boat builder</string>
 	<string name="poi_craft_bookbinder">Ciltçi</string>
 	<string name="poi_craft_carpenter">Marangoz</string>
-	<string name="poi_craft_carpet_layer">Halı katmanı</string>
+	<string name="poi_craft_carpet_layer">Halı satıcısı</string>
 	<string name="poi_craft_caterer">Yemek Servisi</string>
 	<string name="poi_craft_clockmaker">Saatçi</string>
 	<string name="poi_craft_dressmaker">Terzi</string>
@@ -822,7 +822,7 @@
 	<string name="poi_craft_photographer">Fotoğrafçı</string>
 	<string name="poi_craft_photographic_laboratory">Fotoğraf Laboratuvarı</string>
 	<string name="poi_craft_plasterer">Sıvacı</string>
-	<string name="poi_craft_plumber">Tesisatçı</string>
+	<string name="poi_craft_plumber">Sıhhi tesisatçı</string>
 	<string name="poi_craft_pottery">Seramik el sanatları</string>
 	<string name="poi_craft_rigger">Donatıcı</string>
 	<string name="poi_craft_saddler">Saraciye</string>
@@ -883,7 +883,7 @@
 	<string name="poi_river">Irmak</string>
 	<string name="poi_stream">Akış</string>
 	<string name="poi_rapids">Nehrin akıntılı yeri</string>
-	<string name="poi_stone">Dikkate değer taş</string>
+	<string name="poi_stone">Değerli taş</string>
 	<string name="poi_cape">Pelerin</string>
 	<string name="poi_beach">Plaj</string>
 	<string name="poi_water">Su</string>
@@ -893,7 +893,7 @@
 	<string name="poi_nature_reserve">Doğal rezerv</string>
 	<string name="poi_strait">Boğaz</string>
 	<string name="poi_island">Ada</string>
-	<string name="poi_beacon">Fener</string>
+	<string name="poi_beacon">İşaret ışığı</string>
 	<string name="poi_beacon_cardinal">Kardinal işareti</string>
 	<string name="poi_beacon_lateral">Yanal işaret</string>
 	<string name="poi_beacon_safe_water">Güvenli su feneri</string>
@@ -901,7 +901,7 @@
 	<string name="poi_seamark_building">Seamark binası</string>
 	<string name="poi_seamark_bridge">Deniz işaret köprüsü</string>
 	<string name="poi_buoy_cardinal">Kardinal şamandıra</string>
-	<string name="poi_buoy_safe_water">Güvenli su şamandrası</string>
+	<string name="poi_buoy_safe_water">Güvenilir su şamandrası</string>
 	<string name="poi_buoy_special_purpose">Özel amaçlı şamandıra</string>
 	<string name="poi_daymark">Daymark</string>
 	<string name="poi_distance_mark">Mesafe işareti</string>
@@ -912,7 +912,7 @@
 	<string name="poi_seamark_light_major">Deniz işareti, büyük ışık</string>
 	<string name="poi_seamark_light_minor">Deniz işareti, küçük ışık</string>
 	<string name="poi_seamark_light_float">Deniz işareti, şamandıra ışık</string>
-	<string name="poi_seamark_light_vessel">Deniz işareti, gemi ışığı</string>
+	<string name="poi_seamark_light_vessel">Gemi ışığı, deniz feneri</string>
 	<string name="poi_mooring">Demirleme</string>
 	<string name="poi_notice">Deniz işareti, uyarı</string>
 	<string name="poi_pile">Yığın</string>
@@ -1024,11 +1024,11 @@
 	<string name="poi_enforcement_maxspeed">Zorunlu: hız sınırı</string>
 	<string name="poi_enforcement_maxheight">Zorunlu: en fazla yükseklik</string>
 	<string name="poi_enforcement_mindistance">Zorunlu: en kısa mesafe</string>
-	<string name="poi_enforcement_check">Uygulama: kontrol</string>
+	<string name="poi_enforcement_check">Zorunlu: Denetle</string>
 	<string name="poi_enforcement_access">Uygulama: erişim</string>
 	<string name="poi_enforcement_toll">Uygulama: ücretli</string>
 
-	<string name="poi_animal_shelter_dog">Köpekler için barınak</string>
+	<string name="poi_animal_shelter_dog">Barınak türü: köpek</string>
 	<string name="poi_animal_shelter_cat">Kediler için barınak</string>
 	<string name="poi_animal_shelter_dog_cat">Kediler ve köpekler için barınak</string>
 	<string name="poi_animal_shelter_bird">Barınak türü: Kuş</string>
@@ -1042,4 +1042,10 @@
 	<string name="poi_disease_aids_no">AIDS: hayır</string>
 
 	<string name="poi_disease_aids_yes">AIDS: evet</string>
+	<string name="poi_deadlock">Çıkmaz</string>
+
+	<string name="poi_dolphin">Yunus</string>
+
+	<string name="poi_atm_yes">Atm: evet</string>
+	<string name="poi_medical_system_unknown_yes">Tıp sistemi: bilinmeyen geleneksel</string>
 	</resources>
