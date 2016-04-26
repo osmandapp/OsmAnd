@@ -864,4 +864,5 @@
     <string name="routing_attr_short_way_description">Uzas la plej mallogan vojon</string>
     <string name="routing_attr_avoid_toll_name">Eviti pagendajn vojojn</string>
     <string name="routing_attr_avoid_toll_description">Evitas pagendajn vojojn</string>
+    <string name="use_osm_live_routing">OSM Live navigado</string>
     </resources>
