@@ -8,6 +8,7 @@ import java.text.MessageFormat;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -466,8 +467,18 @@ public class RouteDataObject {
 		assertTrueLength("14.5'", 4.4196f);
 		assertTrueLength("15ft", 4.572f);
 	}
-	
-	
+
+	public String coordinates() {
+		StringBuilder b = new StringBuilder();
+		b.append(" lat/lon : ");
+		for (int i = 0; i < getPointsLength(); i++) {
+			float x = (float) MapUtils.get31LongitudeX(getPoint31XTile(i));
+			float y = (float) MapUtils.get31LatitudeY(getPoint31YTile(i));
+			b.append(y).append(" / ").append(x).append(" , ");
+		}
+		return b.toString();
+	}
+
 	@Override
 	public String toString() {
 		String name = getName();
