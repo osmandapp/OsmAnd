@@ -2269,4 +2269,6 @@
     <string name="access_autoannounce_period_descr">Minimale tijd tussen aankondigingen</string>
     <string name="access_no_destination">Bestemming is niet ingesteld</string>
     <string name="map_widget_magnetic_bearing">Magnetische koers</string>
+    <string name="use_osm_live_routing_description">OSM Live Updates gebruiken bij navigatie (Beta)</string>
+	<string name="use_osm_live_routing">OSM Live navigatie</string>
     </resources>
