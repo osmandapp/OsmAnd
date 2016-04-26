@@ -14,7 +14,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,7 +40,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -652,11 +650,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
 			showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 			setTransparencyBarEnabled(true);
-			Log.e("111", "init: show OVERLAY");
 		} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
 			showTransparencyBar(settings.MAP_TRANSPARENCY);
 			setTransparencyBarEnabled(true);
-			Log.e("111", "init: show UNDERLAY");
 		}
 	}
 

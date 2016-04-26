@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -563,11 +562,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						type == OsmandRasterMapsPlugin.RasterMapType.OVERLAY ? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
 				seekbarModePref.set(currentMapTypeSeekbarMode);
 			}
-			Log.e("111", "toggleUnderlayState: show");
 		} else if (hideSeekbar) {
 			mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
 			mapLayers.getMapControlsLayer().setTransparencyBarEnabled(false);
-			Log.e("111", "toggleUnderlayState: hide");
 		}
 
 		if (map != null) {

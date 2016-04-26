@@ -2,7 +2,6 @@ package net.osmand.plus.dialogs;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -113,10 +112,8 @@ public class RasterMapMenu {
 							isChecked ? currentMapTypeSeekbarMode : LayerTransparencySeekbarMode.OFF);
 					if (isChecked) {
 						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-						Log.e("111", "checkbox: show");
 					} else {
 						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
-						Log.e("111", "checkbox: hide");
 					}
 					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
 				}
