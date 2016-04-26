@@ -894,4 +894,13 @@
     <string name="disable_complex_routing_descr">Malaktivigas 2-fazan difinadon de vojo por aŭt-navigado</string>
     <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
     <string name="amenity_type_seamark">Mara navigadpunkto</string>
+    <string name="app_modes_choose">Aplikaĵaj profiloj</string>
+    <string name="app_modes_choose_descr">Elektu profilojn de uzado montritajn en aplikaĵo</string>
+    <string name="map_widget_map_rendering">Map-bildigado</string>
+    <string name="app_mode_hiking">Piedirado</string>
+    <string name="app_mode_motorcycle">Motorciklo</string>
+    <string name="app_mode_boat">Boato</string>
+    <string name="app_mode_aircraft">Aviadilo</string>
+    <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM-ajn ŝanĝojn?</string>
+    <string name="animate_routing_route_not_calculated">Bonvolu antaŭe kalkuli la kurson</string>
     </resources>
