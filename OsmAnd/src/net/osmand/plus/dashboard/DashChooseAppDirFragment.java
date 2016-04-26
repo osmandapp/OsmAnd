@@ -69,8 +69,8 @@ public class DashChooseAppDirFragment {
 		private Fragment fragment;
 		private Dialog dlg;
 
-		private int typeTemp = -1;
-		private String selectePathTemp;
+		private static int typeTemp = -1;
+		private static String selectePathTemp;
 
 		public ChooseAppDirFragment(Activity activity, Fragment f) {
 			this.activity = activity;
@@ -80,6 +80,11 @@ public class DashChooseAppDirFragment {
 		public ChooseAppDirFragment(Activity activity, Dialog dlg) {
 			this.activity = activity;
 			this.dlg = dlg;
+		}
+
+		public void setPermissionDenied() {
+			typeTemp = -1;
+			selectePathTemp = null;
 		}
 
 		private String getFreeSpace(File dir) {
@@ -156,6 +161,7 @@ public class DashChooseAppDirFragment {
 			copyMapsBtn = view.findViewById(R.id.copy_maps);
 			confirmBtn = view.findViewById(R.id.confirm);
 			addListeners();
+			processPermissionGranted();
 			updateView();
 			return view;
 		}
@@ -243,6 +249,9 @@ public class DashChooseAppDirFragment {
 									typeTemp = types.get(which);
 									selectePathTemp = paths.get(which);
 									dialog.dismiss();
+									if (dlg != null) {
+										dlg.dismiss();
+									}
 
 									ActivityCompat.requestPermissions(activity,
 											new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -262,12 +271,14 @@ public class DashChooseAppDirFragment {
 			editalert.show();
 		}
 
-		public void processPermissionGranted() {
+		private void processPermissionGranted() {
 			if (typeTemp != -1 && selectePathTemp != null) {
 				mapsCopied = false;
 				type = typeTemp;
 				selectedFile = new File(selectePathTemp);
-				updateView();
+
+				typeTemp = -1;
+				selectePathTemp = null;
 			}
 		}
 
