@@ -2777,7 +2777,7 @@
 	<string name="poi_counselling_type_marriage_yes">Counselling (marriage): yes</string>
 	<string name="poi_counselling_type_marriage_no">Counselling (marriage): no</string>
 	<string name="poi_counselling_type_nutrition_yes">Counselling (nutrition): yes</string>
-	<string name="poi_counselling_type_nutrition_no">Counselling (nutrition): no</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Counselling (nutrition): no</string>
 	<string name="poi_counselling_type_rehabilitation_yes">Counselling (rehabilitation): yes</string>
 	<string name="poi_counselling_type_rehabilitation_no">Counselling (rehabilitation): no</string>
 	<string name="poi_counselling_type_sexual_yes">Counselling (sexual): yes</string>
@@ -2836,5 +2836,22 @@
 	<string name="poi_office_psychologist">Psychologist office</string>
 	<string name="poi_office_nursing_service">Nursing service</string>
 	<string name="poi_office_midwife">Midwife office</string>
+
+	<string name="poi_fire_hydrant_diameter">Hydrant diameter</string>
+	<string name="poi_fire_hydrant_pressure">Hydrant pressure</string>
+	<string name="poi_fire_hydrant_count">Hydrant count</string>
+	<string name="poi_fire_hydrant_flow_capacity">Hydrant flow capacity</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Hydrant position: sidewalk</string>
+	<string name="poi_fire_hydrant_position_green">Hydrant position: green</string>
+	<string name="poi_fire_hydrant_position_lane">Hydrant position: lane</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Hydrant position: parking lot</string>
+	<string name="poi_fire_hydrant_position_street">Hydrant position: street</string>
+	<string name="poi_fire_hydrant_position_underground">Hydrant position: underground</string>
+	<string name="poi_fire_hydrant_style_wsh">Hydrant style: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Hydrant water source: main</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Hydrant water source: pond</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Hydrant water source: stream</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Hydrant water source: cistern</string>
+	<string name="poi_in_service_yes">In service: yes</string>
 
 </resources>

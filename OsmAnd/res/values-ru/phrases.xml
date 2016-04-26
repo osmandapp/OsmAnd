@@ -2835,4 +2835,18 @@
 	<string name="poi_office_nursing_service">Офис службы ухода за больными</string>
 	<string name="poi_office_midwife">Офис акушерки</string>
 
+	<string name="poi_fire_hydrant_diameter">Диаметр гидранта</string>
+	<string name="poi_fire_hydrant_pressure">Давление воды в гидранте</string>
+	<string name="poi_fire_hydrant_count">Количество гидрантов</string>
+	<string name="poi_fire_hydrant_flow_capacity">Пропускная способность гидранта</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Расположение гидранта: тротуар</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Расположение гидранта: парковка</string>
+	<string name="poi_fire_hydrant_position_street">Расположение гидранта: улица</string>
+	<string name="poi_fire_hydrant_position_underground">Расположение гидранта: подземный</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Источник воды гидранта: основной</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Источник воды гидранта: пруд</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Источник воды гидранта: поток</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Источник воды гидранта: ёмкость</string>
+	<string name="poi_in_service_yes">Используется: да</string>
+
 </resources>
