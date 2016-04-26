@@ -2920,6 +2920,6 @@
 	<string name="poi_fire_hydrant_style_water_source_pond">Brandhane vandkilde: dam</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Brandhane vandkilde: vandstrøm</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhane vandkilde: cisterne</string>
-	<string name="poi_in_service_yes">I tjeneste: Ja</string>
+	<string name="poi_in_service_yes">I tjeneste: ja</string>
 
 </resources>
