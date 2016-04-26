@@ -150,6 +150,15 @@ public class RouteDataObject {
 	public long getRestrictionId(int i) {
 		return restrictions[i] >> RESTRICTION_SHIFT;
 	}
+	
+	public boolean hasPointTypes() {
+		return pointTypes != null;
+	}
+	
+	public boolean hasPointNames() {
+		return pointNames != null;
+	}
+	
 
 	public void insert(int pos, int x31, int y31) {
 		int[] opointsX = pointsX;
