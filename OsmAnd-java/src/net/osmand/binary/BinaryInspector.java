@@ -950,6 +950,8 @@ public class BinaryInspector {
 		}
 
 		tags.append("\t<tag k=\'").append("original_id").append("' v='").append(obj.getId() >> (SHIFT_ID + 1)).append("'/>\n");
+		tags.append("\t<tag k=\'").append("osmand_id").append("' v='").append(obj.getId()).append("'/>\n");
+
 		if(point) {
 			float lon= (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
 			float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
