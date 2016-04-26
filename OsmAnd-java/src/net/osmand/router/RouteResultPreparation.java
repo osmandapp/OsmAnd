@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryInspector;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -325,7 +326,8 @@ public class RouteResultPreparation {
 				additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
 				additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
 				additional.append("description = \"").append(res.getDescription()).append("\" ");
-				println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" {3}/>", (res.getObject().getId()) + "",
+				println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
+						(res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + "", res.getObject().getId() + "", 
 						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
 				printAdditionalPointInfo(res);
 			}
