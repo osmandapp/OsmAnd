@@ -536,7 +536,7 @@ public class BinaryInspector {
 				b.setLength(0);
 				b.append("Road ");
 				b.append(obj.id);
-				b.append(" osmid ").append(obj.id >> (SHIFT_ID + 1));
+				b.append(" osmid ").append(obj.id >> (SHIFT_ID + 2));
 				for (int i = 0; i < obj.getTypes().length; i++) {
 					RouteTypeRule rr = obj.region.quickGetEncodingRule(obj.getTypes()[i]);
 					b.append(" ").append(rr.getTag()).append("='").append(rr.getValue()).append("'");
@@ -555,23 +555,25 @@ public class BinaryInspector {
 						String[] names = obj.getPointNames(i);
 						int[] nametypes = obj.getPointNameTypes(i);
 						int[] types = obj.getPointTypes(i);
-						b.append(" [" + (i + 1) + ". ");
-						if(names != null) {
-							for(int k = 0; k < names.length; k++) {
-								RouteTypeRule rr = obj.region.quickGetEncodingRule(nametypes[k]);
-								b.append(rr.getTag()).append("='").append(names[k]).append("'");
+						if (types != null || names != null) {
+							b.append(" [ " + (i + 1) + ". ");
+							if (names != null) {
+								for (int k = 0; k < names.length; k++) {
+									RouteTypeRule rr = obj.region.quickGetEncodingRule(nametypes[k]);
+									b.append(rr.getTag()).append("='").append(names[k]).append("' ");
+								}
 							}
-						}
-						if(types != null) {
-							for(int k = 0; k < types.length; k++) {
-								RouteTypeRule rr = obj.region.quickGetEncodingRule(types[k]);
-								b.append(rr.getTag()).append("='").append(rr.getValue()).append("'");
+							if (types != null) {
+								for (int k = 0; k < types.length; k++) {
+									RouteTypeRule rr = obj.region.quickGetEncodingRule(types[k]);
+									b.append(rr.getTag()).append("='").append(rr.getValue()).append("' ");
+								}
 							}
-						}
-						if(vInfo.vmapCoordinates && (types != null || names != null)) {
-							float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
-							float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
-							b.append(y).append(" / ").append(x).append(" ");
+							if (vInfo.vmapCoordinates) {
+								float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
+								float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
+								b.append(y).append(" / ").append(x).append(" ");
+							}
 						}
 						b.append("]");
 					}
@@ -948,7 +950,7 @@ public class BinaryInspector {
 		}
 
 		b.append(" id ").append(obj.getId());
-		b.append(" osmid ").append((obj.getId() >> (SHIFT_ID + 1)));
+		b.append(" osmid ").append((obj.getId() >> (SHIFT_ID + 2)));
 		if (vmapCoordinates) {
 			b.append(" lat/lon : ");
 			for (int i = 0; i < obj.getPointsLength(); i++) {
