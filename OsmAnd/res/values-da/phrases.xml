@@ -2911,15 +2911,15 @@
 	<string name="poi_fire_hydrant_flow_capacity">Brandhane flowkapacitet</string>
 	<string name="poi_fire_hydrant_position_sidewalk">Brandhane plsacering: fortov</string>
 	<string name="poi_fire_hydrant_position_green">Brandhane placering: grøn</string>
-	<string name="poi_fire_hydrant_position_lane">Brandhane placering: vej</string>
+	<string name="poi_fire_hydrant_position_lane">Brandhane placering: vognbane</string>
 	<string name="poi_fire_hydrant_position_parking_lot">Brandhane placering: parkeringsplads</string>
-	<string name="poi_fire_hydrant_position_street">Brandhane placering: gade</string>
-	<string name="poi_fire_hydrant_position_underground">Brandhane placering: underjorden</string>
+	<string name="poi_fire_hydrant_position_street">Brandhane placering: gaden</string>
+	<string name="poi_fire_hydrant_position_underground">Brandhane placering: under jorden</string>
 	<string name="poi_fire_hydrant_style_wsh">Brandhane stil: wsh</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Brandhane vandkilde: hovved</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Brandhane vandkilde: dam</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Brandhane vandkilde: vandstrøm</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhane vandkilde: cisterne</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Brandhane vandforsyning: primær</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Brandhane vandforsyning dam</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Brandhane vandforsyning: bæk</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhane vandforsyning: cisterne</string>
 	<string name="poi_in_service_yes">I tjeneste: ja</string>
 
 </resources>
