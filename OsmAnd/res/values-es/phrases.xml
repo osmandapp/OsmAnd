@@ -2855,4 +2855,12 @@
 
 	<string name="poi_office_physician">Consultorio médico</string>
 	<string name="poi_office_therapist">Oficina de terapeuta</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoría (nutrición): no</string>
+	<string name="poi_office_podologist">Consulta de podólogo</string>
+	<string name="poi_office_healer">Consulta de sanador</string>
+	<string name="poi_office_psychologist">Consulta de psicólogo</string>
+	<string name="poi_office_nursing_service">Servicio de enfermería</string>
+	<string name="poi_office_midwife">Consulta de matrona</string>
+
+	<string name="poi_fire_hydrant_diameter">Diámetro del hidrante</string>
 	</resources>
