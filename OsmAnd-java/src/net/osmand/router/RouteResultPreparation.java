@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -438,6 +439,10 @@ public class RouteResultPreparation {
 					ut = false;
 				}
 				if (result.get(i).getObject().getOneway() == 0 || result.get(i + 1).getObject().getOneway() == 0) {
+					ut = false;
+				}
+				if (!Algorithms.objectEquals(result.get(i).getObject().getName(), 
+						result.get(i + 1).getObject().getName())) {
 					ut = false;
 				}
 				if (ut) {
