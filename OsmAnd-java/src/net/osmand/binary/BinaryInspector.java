@@ -579,7 +579,11 @@ public class BinaryInspector {
 				if (obj.restrictions != null) {
 					b.append(" restrictions [");
 					for (int i = 0; i < obj.restrictions.length; i++) {
-						b.append(obj.getRestrictionId(i)).append(" (").append(obj.getRestrictionType(i)).append(") ").append(",");
+						if (i > 0) {
+							b.append(", ");
+						}
+						b.append(obj.getRestrictionId(i)).append(" (").append(obj.getRestrictionType(i)).append(") ");
+
 					}
 					b.append("] ");
 				}
