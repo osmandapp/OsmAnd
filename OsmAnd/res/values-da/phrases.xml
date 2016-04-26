@@ -2904,4 +2904,22 @@
 	<string name="poi_office_nursing_service">Sygeplejeservice</string>
 	<string name="poi_office_midwife">Jordemoderkontor</string>
 
+<string name="poi_counselling_type_nutrition_nfire_hydo">Rådgivning (ernæring): nej</string>
+	<string name="poi_fire_hydrant_diameter">Brandhane diameter</string>
+	<string name="poi_fire_hydrant_pressure">Brandhane tryk</string>
+	<string name="poi_fire_hydrant_count">Brandhane antal</string>
+	<string name="poi_fire_hydrant_flow_capacity">Brandhane flowkapacitet</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Brandhane plsacering: fortov</string>
+	<string name="poi_fire_hydrant_position_green">Brandhane placering: grøn</string>
+	<string name="poi_fire_hydrant_position_lane">Brandhane placering: vej</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Brandhane placering: parkeringsplads</string>
+	<string name="poi_fire_hydrant_position_street">Brandhane placering: gade</string>
+	<string name="poi_fire_hydrant_position_underground">Brandhane placering: underjorden</string>
+	<string name="poi_fire_hydrant_style_wsh">Brandhane stil: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Brandhane vandkilde: hovved</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Brandhane vandkilde: dam</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Brandhane vandkilde: vandstrøm</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhane vandkilde: cisterne</string>
+	<string name="poi_in_service_yes">I tjeneste: Ja</string>
+
 </resources>
