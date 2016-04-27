@@ -1230,7 +1230,7 @@
     <string name="osmo_auto_send_locations">Автоматический старт поездки</string>
     <string name="osmo_tracker_id">ID трекера</string>
     <string name="osmo_session_token">Токен сессии: %1$s</string>
-    <string name="osmo_tracker_id_descr">Нажмите для посмотра ID трекера</string>
+    <string name="osmo_tracker_id_descr">Нажмите для просмотра ID трекера</string>
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
     <string name="osmo_connect_to_group_id">ID группы</string>
     <string name="osmo_group_name">Название группы</string>
