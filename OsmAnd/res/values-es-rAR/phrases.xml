@@ -2890,4 +2890,14 @@
 	<string name="poi_fire_hydrant_style_water_source_cistern">Fuente de agua del hidrante: Cisterna</string>
 	<string name="poi_in_service_yes">En servicio: Sí</string>
 
+<string name="poi_fire_hydrant_style_wsh">Estilo de hidrante: wsh</string>
+	<string name="poi_street_cabinet_power">Tipo de gabinete: Energía</string>
+	<string name="poi_street_cabinet_telecom">Tipo de gabinete: Telecomunicación</string>
+	<string name="poi_street_cabinet_cable_tv">Tipo de gabinete: TV por cable</string>
+	<string name="poi_street_cabinet_gas">Tipo de gabinete: Gas</string>
+	<string name="poi_street_cabinet_postal_service">Tipo de gabinete: Servicio postal</string>
+	<string name="poi_street_cabinet_waste">Tipo de gabinete: Residuos</string>
+	<string name="poi_street_cabinet_water_management">Tipo de gabinete: Gestión del agua</string>
+	<string name="poi_street_cabinet_street_lighting">Tipo de gabinete: Alumbrado público</string>
+
 </resources>
