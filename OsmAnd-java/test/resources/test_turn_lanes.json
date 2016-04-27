@@ -292,8 +292,8 @@
       "longitude": 35.47155582904816
     },
     "expectedResults": {
-      "102992": "C|+C|TR",
-      "102447": "TL|+C"
+      "13183024": "C|+C|TR",
+      "13113280": "TL|+C"
     }
   },
   {
@@ -307,7 +307,7 @@
       "longitude": 35.500362902879715
     },
     "expectedResults": {
-      "7040281": "TL|+C|+C|TR"
+      "901155998": "TL|+C|+C|TR"
     }
   },
   {
@@ -321,7 +321,21 @@
       "longitude": 35.5249265730381
     },
     "expectedResults": {
-      "7057747": "TL|+C"
+      "903391632": "TL|+C"
+    }
+  },
+  {
+    "testName": "19.L353 straight",
+    "startPoint": {
+      "latitude": 45.65874639488115,
+      "longitude": 35.54377349972731
+    },
+    "endPoint": {
+      "latitude": 45.67263228320987,
+      "longitude": 35.568321076631605
+    },
+    "expectedResults": {
+      "41988272174": "TL|+C|TR"
     }
   }
 
