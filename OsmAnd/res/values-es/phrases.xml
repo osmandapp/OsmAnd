@@ -2741,7 +2741,7 @@
 	<string name="poi_health_service_test_yes">Servicio de salud: análisis: sí</string>
 	<string name="poi_health_service_test_no">Servicio de salud: análisis: no</string>
 
-	<string name="poi_health_facility_type_office">Tipo de centro sanitario: consultorio</string>
+	<string name="poi_health_facility_type_office">Consulta de médico</string>
 	<string name="poi_health_facility_type_field_hospital">Tipo de centro sanitario: hospital de campaña</string>
 	<string name="poi_health_facility_type_counselling_centre">"Tipo de centro sanitario: centro de  orientación"</string>
 	<string name="poi_health_facility_type_laboratory">Tipo de centro sanitario: laboratorio</string>
@@ -2880,4 +2880,7 @@
 	<string name="poi_in_service_yes">En servicio: sí</string>
 
 <string name="poi_forestry_compartment">Señal: compartimento de silvicultura</string>
+	<string name="poi_firepit">Calentador</string>
+	<string name="poi_street_cabinet">Gabinete de calle</string>
+
 	</resources>
