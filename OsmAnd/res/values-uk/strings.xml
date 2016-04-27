@@ -1424,14 +1424,14 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="gpx_monitoring_start">Розпочати логування GPX</string>
 	<string name="gpx_monitoring_stop">Зупинити логування GPX</string>
     <string name="gpx_start_new_segment">Розпочати новий відрізок</string>
-    <string name="rendering_attr_hideBuildings_name">Приховати будівлі</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Приховати дороги не призначені для автівок</string>
-    <string name="rendering_attr_hideText_name">Сховати текст</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Сховати дерева та кущі</string>
+    <string name="rendering_attr_hideBuildings_name">Будівлі</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Дороги не призначені для автівок</string>
+    <string name="rendering_attr_hideText_name">Текст</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Дерева та кущі</string>
     <string name="rendering_attr_buildings15zoom_name">Будинки на масштабі 15</string>
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
-    <string name="rendering_attr_hideAccess_name">Приховати обмеження доступу</string>
+    <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
     <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показати тип покриття</string>
@@ -1519,7 +1519,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_settings_debug">Інформація для відлагодження</string>
     <string name="osmo_settings_descr">Налаштування параметрів моніторингу та встановлення персонального каналу моніторингу</string>
     <string name="osmo_settings">OsMo</string>
-    <string name="osmo_plugin_description">"Цей втулок надає можливість сучасного онлайн моніторингу OsMo, дивіться http://osmo.mobi.\n\nВи можете відстежувати пристрої учасників з ваших групи в поточному часі та підтримувати зв’язок друг з другом. Втулок має різноманітні налаштування сесій чи постійного відстеження.\n\nАнонімні групи можуть створюватись та існувати вказану кількість днів та мати зазначені функції, ними неможливо керувати віддалено та вони не мають адміністраторів. Групи з повним набором функцій можуть бути створені на веб-сайті і тільки зареєстровані користувачі матимуть до них доступ. "</string>
+    <string name="osmo_plugin_description">"Цей втулок частково надає можливості OpenStreetMap Monitoring, дивіться https://osmo.mobi\n\nВи можете відстежувати пристрої учасників з вашої групи в поточному часі. Також, ви можете бачити точки та треки завантажені в групу, до якої ви належите.
+\n\nГрупи, що не були вилучені вродовж місяців, повині привести свій стан у відповідність до груп створених на сайті OsMo.mobi "</string>
     <string name="osmo_plugin_name">OpenStreetMap моніторинг</string>
    	<string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
     <string name="voice_pref_title">Голос</string>
@@ -1925,7 +1926,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 \n\nЦей вид можна де-активувати тут або змінити на інший, змінивши \'Стиль мапи\' на потрібний в \'Налаштування мапи\'. "</string>
 	<string name="plugin_ski_descr">"Втулок забезпечує вам доступ до даних про гірськолижні траси, маршрути для бігових лиж, гірськолижні спуски, фунікулери та підйомники. Маршрути і спуски відзначені різними кольорами залежно від їх складності та зображені з використанням спеціального \"зимового\" стилю мапи, який полягає в тому, що використовуються \"снігові\" кольори зимового пейзажу.
 \n\nУ разі активації цього виду, стиль мапи змінюється на \"Winter and ski\", показуючи всі деталі пейзажу так, як вони виглядають взимку. Цей (зимовий) вид може бути де-активований тут, або якщо ви поміняєте \"Стиль мапи\" в меню \"Налаштування мапи\" на бажаний вид. "</string>
-	<string name="rendering_attr_hideHouseNumbers_name">Приховати номери будинків</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Номери будинків</string>
     <string name="application_dir_change_warning3">Ви хочете, щоб OsmAnd також перемістив свої файли даних по новому призначенню?</string>
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
 	<string name="copying_osmand_file_failed">Не вдалося скопіювати файли</string>    
@@ -2209,7 +2210,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="use_drawer_btn">Використовувати меню</string>
     <string name="update">Оновлювати кожні</string>
     <string name="share_osm_edits_subject">OSM правки, поширені через OsmAnd</string>
-    <string name="rendering_attr_hideProposed_name">Приховати заплановані об’єкти</string>
+    <string name="rendering_attr_hideProposed_name">Заплановані обʼєкти</string>
     <string name="save_poi_without_poi_type_message">Ви дійсно хочете зберегти POI, не вказавши його тип?</string>
     <string name="no_location_permission">Додаток не має дозволу до місце-розташування.</string>
     <string name="no_camera_permission">Додаток не має дозволу на використання камери.</string>
@@ -2231,13 +2232,13 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="hourly">Щогодинно</string>
     <string name="daily">Щоденно</string>
     <string name="shared_string_remove">Вилучити</string>
-    <string name="rendering_attr_hideUnderground_name">Приховати підземні об’єкти</string>
+    <string name="rendering_attr_hideUnderground_name">Підземні обʼєкти</string>
     <string name="data_is_not_available">Дані недоступні</string>
     <string name="add_time_span">Додати часовий проміжок</string>
     <string name="road_blocked">Дорога перекрита</string>
     <string name="shared_string_select">Вибрати</string>
     <string name="switch_start_finish">Поміняти місцями точки призначення та початку</string>
-    <string name="rendering_attr_hideIcons_name">Приховати значки POI</string>
+    <string name="rendering_attr_hideIcons_name">Значки POI</string>
     <string name="item_removed">Елемент видалено</string>
     <string name="n_items_removed">Елементи видалено</string>
     <string name="shared_string_undo_all">ПОВЕРНУТИ ВСЕ</string>
@@ -2245,8 +2246,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="starting_point">Початкова точка</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
-    <string name="nm">нм</string>
-    <string name="nm_h">нм/г</string>
+    <string name="nm">м.милі</string>
+    <string name="nm_h">м.миль/г</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
     <string name="weekly">Щотижня</string>
@@ -2310,4 +2311,11 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="upload_anonymously">Вивантажено анонімно</string>
     <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
     <string name="report">Звіт</string>
+    <string name="use_osm_live_routing_description">Ввімкнути навігацію для змін OSM Live (Beta)</string>
+	<string name="use_osm_live_routing">Навігація OSM Live</string>
+    <string name="access_no_destination">Пункт призначення не встановлено</string>
+    <string name="map_widget_magnetic_bearing">Магнітний пеленг</string>
+    <string name="map_widget_bearing">Курсовий кут</string>
+    <string name="access_disable_offroute_recalc">Не змінювати маршрут при сході зі шляху</string>
+    <string name="access_disable_offroute_recalc_descr">Запобігає автоматичному перерахунку маршруту під час значнного віддалення від заданого шляху</string>
     </resources>
