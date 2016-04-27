@@ -2849,4 +2849,13 @@
 	<string name="poi_fire_hydrant_style_water_source_cistern">Источник воды гидранта: ёмкость</string>
 	<string name="poi_in_service_yes">Используется: да</string>
 
+	<string name="poi_street_cabinet_power">Тип шкафа: электрический</string>
+	<string name="poi_street_cabinet_telecom">Тип шкафа: телекоммуникации</string>
+	<string name="poi_street_cabinet_cable_tv">Тип шкафа: кабельное ТВ</string>
+	<string name="poi_street_cabinet_gas">Тип шкафа: газ</string>
+	<string name="poi_street_cabinet_postal_service">Тип шкафа: почтовая служба</string>
+	<string name="poi_street_cabinet_waste">Тип шкафа: мусор</string>
+	<string name="poi_street_cabinet_water_management">Тип шкафа: управление водными ресурсами</string>
+	<string name="poi_street_cabinet_street_lighting">Тип шкафа: уличное освещение</string>
+
 </resources>

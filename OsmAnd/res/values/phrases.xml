@@ -2854,4 +2854,13 @@
 	<string name="poi_fire_hydrant_style_water_source_cistern">Hydrant water source: cistern</string>
 	<string name="poi_in_service_yes">In service: yes</string>
 
+	<string name="poi_street_cabinet_power">Cabinet type: power</string>
+	<string name="poi_street_cabinet_telecom">Cabinet type: telecom</string>
+	<string name="poi_street_cabinet_cable_tv">Cabinet type: cable tv</string>
+	<string name="poi_street_cabinet_gas">Cabinet type: gas</string>
+	<string name="poi_street_cabinet_postal_service">Cabinet type: postal service</string>
+	<string name="poi_street_cabinet_waste">Cabinet type: waste</string>
+	<string name="poi_street_cabinet_water_management">Cabinet type: water management</string>
+	<string name="poi_street_cabinet_street_lighting">Cabinet type: street lighting</string>
+
 </resources>
