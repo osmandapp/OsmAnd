@@ -2026,4 +2026,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="map_widget_magnetic_bearing">Desviació respecte el Nord magnètic</string>
     <string name="use_osm_live_routing_description">Activa els canvis en temps real a OSM en la navegació (Beta)</string>
 	<string name="use_osm_live_routing">Navegació amb OSM actualitzat</string>
+    <string name="access_direction_haptic_feedback_descr">Indica la direcció al punt de destinació amb vibracions</string>
+    <string name="access_direction_audio_feedback_descr">Indica la direcció al punt de destinació amb só</string>
+    <string name="access_direction_audio_feedback">Resposta acústica segons direcció</string>
+    <string name="access_direction_haptic_feedback">Resposta cinètica segons direcció</string>
     </resources>
