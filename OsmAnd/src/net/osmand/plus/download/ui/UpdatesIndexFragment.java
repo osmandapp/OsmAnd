@@ -41,7 +41,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.update_index_frament, container, false);
+		View view = inflater.inflate(R.layout.update_index_frament, container, false);
+		getMyActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.UPDATES_TAB_NUMBER);
+		return view;
 	}
 
 	@Override

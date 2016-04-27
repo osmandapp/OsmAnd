@@ -799,6 +799,14 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =
+		new BooleanAccessibilityPreference("direction_audio_feedback", false).makeGlobal();
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> DIRECTION_HAPTIC_FEEDBACK =
+		new BooleanAccessibilityPreference("direction_haptic_feedback", false).makeGlobal();
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
 			new BooleanAccessibilityPreference("zoom_by_trackball", false).makeGlobal();
 
