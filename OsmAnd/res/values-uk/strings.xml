@@ -1364,8 +1364,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="seconds_ago">секунд тому</string>
     <string name="osmo_connected_devices">Під’єднані пристрої</string>
     <string name="osmo_groups">OsMo Групи</string>
-    <string name="osmo_auto_send_locations_descr">Автоматично запускати сесію трекера та надсилати місцезнаходження після запуску застосунку</string>
-    <string name="osmo_auto_send_locations">Автоматично запускати моніторинг</string>
+    <string name="osmo_auto_send_locations_descr">Автоматичний початок подорожі та надсилання місцезнаходження після запуска застосунка</string>
+    <string name="osmo_auto_send_locations">Автоматичний запук подорожі</string>
     <string name="osmo_tracker_id">ID трекера</string>
     <string name="osmo_tracker_id_descr">Натисніть, щоб подивитись ID трекера</string>
     <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
@@ -1391,7 +1391,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_center_location">По центру екрану</string>
     <string name="osmo_set_moving_target">Почати стеження</string>
     <string name="osmo_use_server_name">Зареєстроване ім’я</string>
-    <string name="osmo_connect_to_my_nickname">Моє прізвисько</string>
+    <string name="osmo_connect_to_my_nickname">Прізвисько</string>
     <string name="osmo_user_name">Користувач</string>
 	
 	<string name="rendering_value_pink_name">рожевий</string>
@@ -1439,7 +1439,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_auth_error_short">Збій авторизації</string>
     <string name="osmo_auth_error">Збій авторизації OsMo: %1$s.\n Можливо служба тимчасово не працює або закінчилась реєстрація.\n Бажаєте продовжити з новими реєстраційними даними?</string>
     <string name="osmo_group_by_invite">Увійти за запрошенням</string>
-    <string name="osmo_group_information_desc">" - Всі створені групи є публічними! Якщо бажаєте зберегти анонімність, під’єднайте пристрій за його ідентифікатором.\n - В групі може зареєструватись до 8 осіб.\n - У разі бездіяльності або активності тільки 1-ї особи впродовж двох тижнів, групу буде вилучено.\n - Ви можете обмежити вхід до групи, тільки за запрошенням, але щоб отримати контроль над групою потрібно увійти до адміністративної консолі.\n - Якщо вам потрібно створити групу, але з іншими умовами відвідайте http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Створюючи групу вкажіть її назву та додайте опис.\n - Тут ви можете створити лише Просту(Simple) групу, більш докладно - https://osmo.mobi/g/new.\n - На веб-сайті ви можете керувати групою, додавати треки та точки, що будуть доступні усім.\n - Ми не підтримуємо групи що складаються тільки з одного користувача, якщо це не група POI\n - Приватні групи мають обмеження у 8 осіб.\n - Більш докладні умови та вимоги завжди є на сайті OsMo.mobi\n - Якщо вам потрібні особливі умови, ви можете звернутись за підтримкою: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Будь ласка, прочитайте перед створенням групи!</string>
     <string name="osmo_not_signed_in">Збій входу до OsMo</string>
     <string name="osmo_gpx_points_downloaded">Завантажено %1$s точок OsMo.</string>
@@ -1749,7 +1749,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="search_radius_proximity">Поруч з</string>
     <string name="osmo_device_not_found">Пристрій не знайдено</string>
     <string name="osmo_no_connection_msg">Неможливо з\'єднатися із сервером OsMo:\n- перевірте Ваше інтернет з’єднання;\n- перевірте налаштування;\n- перевірте наш Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Анонімний користувач не в змозі:\n- створювати групи;\n- синхронізувати групи та пристрої з сервером;\n- керувати групами та пристроями в особистому кабінеті.</string>
+    <string name="anonymous_user_hint">Анонімний користувач не в змозі:\n- створювати групи;\n- синхронізувати групи та пристрої з сервером;\n- керувати групами та пристроями в персональній панелі керування на вебсайті.</string>
     <string name="anonymous_user">Анонімний користувач</string>
     <string name="logged_as">Ви увійшли як %1$s</string>
 	<string name="speed_limit_exceed">Допустиме перевищення швидкості</string>
@@ -2010,7 +2010,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_disabled_name">Вимкнено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Розмальовування відповідно до області маршруту</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно до OSMC</string>
-    <string name="osmo_share_my_location">Поділитися моїм місцезнаходженням</string>
+    <string name="osmo_share_my_location">Повідомляти про місцезнаходження</string>
     <string name="shared_string_logoff">Вийти</string>
     <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d записів. Ви впевнені?</string>
 	<string name="download_wikipedia_maps">Вікіпедія</string>
