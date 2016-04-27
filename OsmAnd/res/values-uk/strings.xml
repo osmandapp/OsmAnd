@@ -2318,4 +2318,62 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="map_widget_bearing">Курсовий кут</string>
     <string name="access_disable_offroute_recalc">Не змінювати маршрут при сході зі шляху</string>
     <string name="access_disable_offroute_recalc_descr">Запобігає автоматичному перерахунку маршруту під час значнного віддалення від заданого шляху</string>
-    </resources>
+    <string name="access_disable_wrong_direction_recalc">Не змінювати маршрут при помилковому напрямку</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Забороняє автоматичний перерахунок маршруту, коли ви рухаєтеся в неправильному напрямку</string>
+    <string name="access_smart_autoannounce">Інтелектуальне оповіщення</string>
+    <string name="access_smart_autoannounce_descr">Сповіщати тільки якщо напрямок до цільової точки змінюється</string>
+    <string name="access_autoannounce_period">Період сповіщеннь</string>
+    <string name="access_autoannounce_period_descr">Мінімальний час між сповіщеннями</string>
+    <string name="access_default_color">Типовий колір</string>
+    <string name="access_category_choice">Оберіть категорію</string>
+    <string name="access_hint_enter_name">Додайте назву</string>
+    <string name="access_hint_enter_category">Додайте категорію</string>
+    <string name="access_hint_enter_description">Додайте опис</string>
+    <string name="access_map_linked_to_location">Мапа повʼязана з місцевістю</string>
+    <string name="access_collapsed_list">Згорнутий перелік</string>
+    <string name="access_expanded_list">Розгорнутий перелік</string>
+    <string name="access_empty_list">Порожній перелік</string>
+    <string name="access_tree_list">Деревоподібний перелік</string>
+    <string name="access_shared_string_not_installed">Не встановлено</string>
+    <string name="access_widget_expand">Розгорнути</string>
+    <string name="access_shared_string_navigate_up">Вгору</string>
+    <string name="access_sort">Впорядкувати</string>
+    <string name="map_mode">Режим мапи</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX файл(ів) виділено</string>
+    <string name="rendering_value_thin_name">Тонко</string>
+    <string name="rendering_value_medium_name">Середньо</string>
+    <string name="rendering_value_bold_name">Жирно</string>
+    <string name="no_map_markers_found">Додайте маркери на мапі</string>
+    <string name="no_waypoints_found">Точки шляху не знайдені</string>
+    <string name="storage_permission_restart_is_required">Тепер застосунок має можливість записувати у зовнішнє сховище. Потрібне ручне перезавантаження.</string>
+    <string name="release_2_3">" • OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних.
+\n\n • Маркери. Новий спосіб швидко позначити місце на мапі.\n\n • Більш деталізовані мапи OSM з позначками доріг в залежності від країни та великою кількістю нових обʼєктів.\n\n • Оновлений зовнішній вигляд та підготовка маршрутів.
+\n\n • Багато покращень в контекстному меню мапи, наприклад контекстний пошук адрес.\n\nта багато іншого… "</string>
+    <string name="shared_string_move_up">Вгору</string>
+    <string name="shared_string_move_down">Вниз</string>
+    <string name="finish_navigation">Закінчити навігацію</string>
+    <string name="avoid_road">Уникати доріг</string>
+    <string name="storage_directory_readonly_desc">"Обрана тека для збереження даних доступна лише для читання.  Замість неї тимчасово використовується внутрішня памʼять. Будь ласка, оберіть відповідну теку для збереження даних."</string>
+    <string name="storage_directory_shared">Памʼять спільного користування</string>
+    <string name="shared_string_topbar">Верхня панель</string>
+    <string name="full_report">Повний звіт</string>
+    <string name="recalculate_route">Перераховувати маршрут</string>
+    <string name="open_street_map_login_and_pass">Логін та пароль OpenStreetMap</string>
+    <string name="number_of_recipients">Кількість одержувачів</string>
+    <string name="osm_user_stat">Правки %1$s, ранг %2$s, всього правок %3$s</string>
+    <string name="osm_editors_ranking">Рейтинг маперів OSM</string>
+    <string name="osm_live_subscription">Підписка OSM Live</string>
+    <string name="osm_live_email_desc">Це потрібно, щоб надавати вам інформацію про зміни на мапі</string>
+    <string name="osm_live_user_public_name">Публічне імʼя</string>
+    <string name="osm_live_support_region">Територія</string>
+    <string name="osm_live_enter_user_name">Додайте Публічне Імʼя</string>
+    <string name="osm_live_thanks">Дякуємо за підписку на оновлення!</string>
+    <string name="osm_live_region_desc">Частина коштів буде спрямована маперам OSM, що внесли зміни до мапи в цьому місці</string>
+    <string name="osm_live_ask_for_purchase">Будь ласка, оформіть передплату на OSM Live</string>
+
+    <string name="osm_live_header">Передплата дозволяє щогодини отримувати оновлення для мап по всьому світу. Основна частина від передплати спрямовується до спільноти OSM та виплачується кожному маперу за його внесок. Якщо вам подобається OsmAnd та OSM, ви можете у такий спосіб підтримати їх.</string>
+    
+    <string name="upload_osm_note_description">Ви можете додати Нотатку в OSM анонімно, або скориставшись вашим обліковим записом на OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Надіслати Нотатку OSM</string>
+    <string name="file_name_containes_illegal_char">Назва файлу містить неприпустимі символи</string>
+</resources>
