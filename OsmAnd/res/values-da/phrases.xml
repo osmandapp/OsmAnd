@@ -2910,7 +2910,7 @@
 	<string name="poi_fire_hydrant_count">Brandhane antal</string>
 	<string name="poi_fire_hydrant_flow_capacity">Brandhane flowkapacitet</string>
 	<string name="poi_fire_hydrant_position_sidewalk">Brandhane plsacering: fortov</string>
-	<string name="poi_fire_hydrant_position_green">Brandhane placering: grøn</string>
+	<string name="poi_fire_hydrant_position_green">Brandhane placering: grøs</string>
 	<string name="poi_fire_hydrant_position_lane">Brandhane placering: vognbane</string>
 	<string name="poi_fire_hydrant_position_parking_lot">Brandhane placering: parkeringsplads</string>
 	<string name="poi_fire_hydrant_position_street">Brandhane placering: gaden</string>
