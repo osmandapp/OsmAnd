@@ -2361,4 +2361,8 @@
     <string name="access_no_destination">Destination er ikke angivet</string>
     <string name="use_osm_live_routing_description">Aktiver navigation for OSM Live ændringer (Beta)</string>
 	<string name="use_osm_live_routing">OSM Live navigation</string>
+    <string name="access_direction_audio_feedback">Retning lyd-feedback</string>
+    <string name="access_direction_audio_feedback_descr">Angiv målpunkt retning med lyd</string>
+    <string name="access_direction_haptic_feedback">Retning haptisk feedback</string>
+    <string name="access_direction_haptic_feedback_descr">Angiv målpunkt retning med vibrationer</string>
     </resources>
