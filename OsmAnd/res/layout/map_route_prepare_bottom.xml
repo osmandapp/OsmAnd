@@ -22,6 +22,21 @@
         android:background="@color/dashboard_divider_dark"/>
 
     <ImageButton
+        android:id="@+id/map_erase_route_button"
+        android:contentDescription="@string/clear_destination"
+        android:layout_width="@dimen/map_route_buttons_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/dashboard_button"
+        android:src="@drawable/ic_action_test_light" />
+
+    <View
+        android:id="@+id/dividerBtn2"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/dashboard_divider_dark"/>
+
+    <ImageButton
         android:id="@+id/map_waypoints_route_button"
         android:contentDescription="@string/waypoints"
         android:layout_width="@dimen/map_route_buttons_width"
@@ -31,7 +46,7 @@
         android:src="@drawable/ic_action_test_light" />
 
     <View
-        android:id="@+id/dividerBtn2"
+        android:id="@+id/dividerBtn3"
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/dashboard_divider_dark"/>
@@ -46,7 +61,7 @@
         android:src="@drawable/ic_action_test_light" />
 
     <View
-        android:id="@+id/dividerBtn3"
+        android:id="@+id/dividerBtn4"
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/dashboard_divider_dark"/>

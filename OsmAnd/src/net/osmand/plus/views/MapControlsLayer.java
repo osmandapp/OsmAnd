@@ -228,6 +228,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		});
 
+		ImageView eraseRouteButton = (ImageView) main.findViewById(R.id.map_erase_route_button);
+		eraseRouteButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_eraser, !nightMode));
+		AndroidUtils.setBackground(mapActivity, eraseRouteButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
+		eraseRouteButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				clickRouteErase();
+			}
+		});
+
 		ImageView waypointsButton = (ImageView) main.findViewById(R.id.map_waypoints_route_button);
 		waypointsButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_waypoint, !nightMode));
 		AndroidUtils.setBackground(mapActivity, waypointsButton, nightMode, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
@@ -289,6 +299,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		} else {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
+	}
+
+	protected void clickRouteErase() {
+		mapRouteInfoMenu.hide();
+		mapActivity.getMapActions().stopAndEraseNavigationActionConfirm();
 	}
 
 	protected void clickRouteGo() {

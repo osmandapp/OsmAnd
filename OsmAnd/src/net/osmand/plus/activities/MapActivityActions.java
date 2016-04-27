@@ -766,6 +766,9 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void stopNavigationWithoutConfirm() {
+		stopNavigationAndEraseWithoutConfirm(false,false);
+	}
+	public void stopNavigationAndEraseWithoutConfirm(boolean updateRoute, boolean clearBackup) {
 		if (getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
 			getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
 		}
@@ -774,9 +777,9 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper.setRoutePlanningMode(false);
 		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-		if (settings.USE_MAP_MARKERS.get()) {
-			getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, false);
-		}
+		//if (settings.USE_MAP_MARKERS.get()) {
+			getMyApplication().getTargetPointsHelper().removeAllWayPoints(updateRoute, clearBackup);
+		//}
 		mapActivity.updateApplicationModeSettings();
 		mapActivity.getDashboard().clearDeletedPoints();
 	}
@@ -790,6 +793,21 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				stopNavigationWithoutConfirm();
+			}
+		});
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		return builder.show();
+	}
+
+	public AlertDialog stopAndEraseNavigationActionConfirm() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		// Stop the navigation
+		builder.setTitle(getString(R.string.clear_destination));
+		builder.setMessage(getString(R.string.clear_dest_confirm));
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				stopNavigationAndEraseWithoutConfirm(true,true);
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
