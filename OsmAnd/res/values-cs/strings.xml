@@ -1982,4 +1982,32 @@
     <string name="rendering_attr_showMtbRoutes_name">Zobrazit trasy pro horská kola</string>
     <string name="storage_permission_restart_is_required">Nyní aplikace umožňuje zapisovat na externí úložiště. Je potřeba provést ruční restart aplikace.</string>
     <string name="file_name_containes_illegal_char">Název souboru obsahuje nepovolené znaky</string>
-</resources>
+<string name="access_no_destination">Cíl není určen</string>
+    <string name="map_widget_magnetic_bearing">Magnetické směrování</string>
+    <string name="map_widget_bearing">Relativní směrování</string>
+    <string name="access_disable_offroute_recalc">Neměnit trasu při odchýlení z cesty</string>
+    <string name="access_disable_offroute_recalc_descr">Neprovádět automatické přepočítání trasy pokud jste daleko od správné cesty</string>
+    <string name="access_disable_wrong_direction_recalc">Neměnit trasu při jízdě opačným směrem</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Neprovádět automatické přepočítání když se pohybujete opačným směrem</string>
+    <string name="access_smart_autoannounce">Chytré oznamování</string>
+    <string name="access_smart_autoannounce_descr">Oznamovat pouze když se změní směr k cíli</string>
+    <string name="access_autoannounce_period">Interval oznamování</string>
+    <string name="access_autoannounce_period_descr">Minimální čas mezi oznámeními</string>
+    <string name="access_default_color">Výchozí barva</string>
+    <string name="access_category_choice">Vyberte kategorii</string>
+    <string name="access_hint_enter_name">Zadejte název</string>
+    <string name="access_hint_enter_category">Zadejte kategorii</string>
+    <string name="access_hint_enter_description">Zadejte popis</string>
+    <string name="access_map_linked_to_location">Mapa je propojená na pozici</string>
+    <string name="access_collapsed_list">Sbalený seznam</string>
+    <string name="access_expanded_list">Rozbalený seznam</string>
+    <string name="access_empty_list">Prázdný seznam</string>
+    <string name="access_tree_list">Stromový seznam</string>
+    <string name="access_shared_string_not_installed">Není nainstalované</string>
+    <string name="access_widget_expand">Rozbalit</string>
+    <string name="access_shared_string_navigate_up">Navigovat nahoru</string>
+    <string name="access_sort">Setřídit</string>
+    <string name="map_mode">Režim mapy</string>
+    <string name="number_of_gpx_files_selected_pattern">%s vybraných GPX souborů</string>
+    <string name="rendering_value_thin_name">Tenké</string>
+    </resources>
