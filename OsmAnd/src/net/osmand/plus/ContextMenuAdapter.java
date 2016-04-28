@@ -1,11 +1,14 @@
 package net.osmand.plus;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -19,8 +22,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -129,6 +134,38 @@ public class ContextMenuAdapter {
 				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
+			if (layoutId == R.layout.help_to_improve_item) {
+				TextView feedbackButton = (TextView) convertView.findViewById(R.id.feedbackButton);
+				Drawable pollIcon = app.getIconsCache().getThemedIcon(R.drawable.ic_action_big_poll);
+				feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
+				feedbackButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						HelpArticleDialogFragment
+								.instantiateWithUrl(HelpActivity.OSMAND_POLL_HTML, app.getString(R.string.feedback))
+								.show(((FragmentActivity) getContext()).getSupportFragmentManager(), null);
+					}
+				});
+				TextView contactUsButton = (TextView) convertView.findViewById(R.id.contactUsButton);
+				Drawable contactUsIcon =
+						app.getIconsCache().getThemedIcon(R.drawable.ic_action_big_feedback);
+				contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
+						null);
+				final String email = app.getString(R.string.support_email);
+				contactUsButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(Intent.ACTION_SENDTO);
+						intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+						intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+						if (intent.resolveActivity(app.getPackageManager()) != null) {
+							getContext().startActivity(intent);
+						}
+					}
+				});
+				return convertView;
+			}
+
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
 			tv.setText(item.getTitle());
 
