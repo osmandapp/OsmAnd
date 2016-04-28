@@ -99,7 +99,7 @@ public class RouteResultPreparationTest {
                     String turnLanes = turn +":" +lanes;
                     String name = routeSegments.get(prevSegment).getDescription();
 
-                    long segmentId = routeSegments.get(prevSegment).getObject().getId();
+                    long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (BinaryInspector.SHIFT_ID );
                     String expectedResult = expectedResults.get(segmentId);
                     if (expectedResult != null) {
                     	if(!Algorithms.objectEquals(expectedResult, turnLanes) &&
@@ -116,13 +116,13 @@ public class RouteResultPreparationTest {
             }
 
             if (i < routeSegments.size()) {
-                reachedSegments.add(routeSegments.get(i).getObject().getId());
+                reachedSegments.add(routeSegments.get(i).getObject().getId() >> (BinaryInspector.SHIFT_ID ));
             }
         }
 
         Set<Long> expectedSegments = expectedResults.keySet();
         for (Long expSegId : expectedSegments){
-            Assert.assertTrue("Expected segment " + (expSegId) + 
+            Assert.assertTrue("Expected segment " + (expSegId ) + 
             		" weren't reached in route segments " + reachedSegments.toString(), reachedSegments.contains(expSegId));
         }
 
