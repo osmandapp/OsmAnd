@@ -2033,4 +2033,9 @@
     <string name="map_widget_magnetic_bearing">Magnetické smerovanie</string>
     <string name="use_osm_live_routing_description">Zapnúť navigáciu pomocou zmien z OSM Naživo (beta test)</string>
 	<string name="use_osm_live_routing">Navigácia OSM Naživo</string>
+    <string name="follow_us">Sledujte nás</string>
+    <string name="access_direction_audio_feedback">Zvuková indikácia smeru</string>
+    <string name="access_direction_audio_feedback_descr">Indikovať smer k cieľu pomocou zvuku</string>
+    <string name="access_direction_haptic_feedback">Dotyková indikácia smeru</string>
+    <string name="access_direction_haptic_feedback_descr">Indikovať smer k cieľu pomocou vibrácie</string>
     </resources>
