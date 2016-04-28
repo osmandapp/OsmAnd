@@ -2271,4 +2271,9 @@
     <string name="map_widget_magnetic_bearing">Magnetische koers</string>
     <string name="use_osm_live_routing_description">OSM Live Updates gebruiken bij navigatie (Beta)</string>
 	<string name="use_osm_live_routing">OSM Live navigatie</string>
+    <string name="follow_us">Volg ons</string>
+    <string name="access_direction_audio_feedback">Richting aangeven met geluid</string>
+    <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid</string>
+    <string name="access_direction_haptic_feedback">Richting aangeven met trilling</string>
+    <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen</string>
     </resources>
