@@ -28,5 +28,8 @@
     <string name="hint_value">Value</string>
     <!-- DEVELOPMENT -->
         <string name="osm_live_default_price">€1,49</string>
-    
+    <string name="twitter_address">https://twitter.com/osmandapp</string>
+    <string name="facebook_address">https://www.facebook.com/osmandapp</string>
+    <string name="vk_address">https://vk.com/osmandapp</string>
+
 </resources>

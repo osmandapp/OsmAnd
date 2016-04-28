@@ -949,7 +949,7 @@
 
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
-	<string name="poi_facebook">Facebook</string>
+	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Celular</string>
 	<string name="poi_animal_shelter_dog">Abrigo para cães</string>
 	<string name="poi_animal_shelter_cat">Abrigo para gatos</string>
@@ -1043,11 +1043,11 @@
 	<string name="poi_crossing_unmarked">Desmarcado</string>
 
 	<string name="poi_mill_pond">Lagoa do moinho</string>
-	<string name="poi_twitter">Twitter</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">Perfumaria</string>
 

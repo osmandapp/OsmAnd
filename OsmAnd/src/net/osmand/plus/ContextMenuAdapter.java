@@ -290,12 +290,13 @@ public class ContextMenuAdapter {
 					dividerView.setVisibility(View.VISIBLE);
 				}
 			}
-			return convertView;
-		}
 
-		@Override
-		public boolean isEnabled(int position) {
-			return !getItem(position).isCategory();
+			if (item.isCategory()) {
+				convertView.setFocusable(false);
+				convertView.setClickable(false);
+			}
+
+			return convertView;
 		}
 	}
 
