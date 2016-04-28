@@ -2010,4 +2010,8 @@
     <string name="map_mode">Režim mapy</string>
     <string name="number_of_gpx_files_selected_pattern">%s vybraných GPX souborů</string>
     <string name="rendering_value_thin_name">Tenké</string>
+    <string name="rendering_value_medium_name">Střední</string>
+    <string name="rendering_value_bold_name">Tučné</string>
+    <string name="no_map_markers_found">Prosím přidejte mapové značky pomocí mapy</string>
+    <string name="no_waypoints_found">Žádné body cesty nenalezeny</string>
     </resources>
