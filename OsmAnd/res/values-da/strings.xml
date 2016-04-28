@@ -2365,4 +2365,5 @@
     <string name="access_direction_audio_feedback_descr">Indikerer målpunkt retning med lyd</string>
     <string name="access_direction_haptic_feedback">Retning haptisk indikation</string>
     <string name="access_direction_haptic_feedback_descr">Indikerer målpunkt retning med vibrationer</string>
+    <string name="follow_us">Følg os</string>
     </resources>
