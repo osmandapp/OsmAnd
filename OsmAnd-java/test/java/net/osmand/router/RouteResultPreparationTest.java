@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryInspector;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
@@ -121,7 +122,8 @@ public class RouteResultPreparationTest {
 
         Set<Long> expectedSegments = expectedResults.keySet();
         for (Long expSegId : expectedSegments){
-            Assert.assertTrue("Expected segment " + expSegId + " weren't reached in route segments " + reachedSegments.toString(), reachedSegments.contains(expSegId));
+            Assert.assertTrue("Expected segment " + (expSegId) + 
+            		" weren't reached in route segments " + reachedSegments.toString(), reachedSegments.contains(expSegId));
         }
 
     }
