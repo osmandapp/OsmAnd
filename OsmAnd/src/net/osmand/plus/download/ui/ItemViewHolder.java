@@ -79,10 +79,10 @@ public class ItemViewHolder {
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
 		progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 		rightButton = (Button) view.findViewById(R.id.rightButton);
-		leftImageView = (ImageView) view.findViewById(R.id.leftImageView);
+		leftImageView = (ImageView) view.findViewById(R.id.icon);
 		descrTextView = (TextView) view.findViewById(R.id.description);
-		rightImageButton = (ImageView) view.findViewById(R.id.rightImageButton);
-		nameTextView = (TextView) view.findViewById(R.id.name);
+		rightImageButton = (ImageView) view.findViewById(R.id.secondaryIcon);
+		nameTextView = (TextView) view.findViewById(R.id.title);
 
 		view.setAccessibilityDelegate(context.getAccessibilityAssistant());
 		rightButton.setAccessibilityDelegate(context.getAccessibilityAssistant());

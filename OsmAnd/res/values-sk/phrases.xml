@@ -1023,7 +1023,7 @@
 	<string name="poi_abandoned_poi">Opustený objekt</string>
 	<string name="poi_email">E-mailová adresa</string>
 	<string name="poi_fax">Fax</string>
-	<string name="poi_facebook">Facebook</string>
+	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Mobilný telefón</string>
 	<string name="poi_route_hiking_iwn_poi">Medzinárodná pešia trasa</string>
 	<string name="poi_route_hiking_nwn_poi">Národná pešia trasa</string>
@@ -1075,11 +1075,11 @@
 	<string name="poi_denomination_church_of_christ">Kristova cirkev</string>
 	<string name="poi_building">Budova</string>
 
-<string name="poi_twitter">Twitter</string>
+<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_military_office">Vojenský úrad</string>
 	<string name="poi_landfill_waste_nuclear">Jadrový odpad</string>

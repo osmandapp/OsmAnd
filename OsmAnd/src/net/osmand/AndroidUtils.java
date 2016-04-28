@@ -36,9 +36,6 @@ public class AndroidUtils {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
 	
-	/**
-	 * @param context
-	 */
 	public static void softKeyboardDelayed(final View view) {
 		view.post(new Runnable() {
 			@Override

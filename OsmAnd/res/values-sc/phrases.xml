@@ -1045,12 +1045,12 @@
 	<string name="poi_military_office">Ufìtziu militare</string>
 	<string name="poi_bollard">Bita</string>
 	<string name="poi_cattle_grid">Inferriada/cràdica pro su bestiàmene</string>
-	<string name="poi_facebook">Facebook</string>
-	<string name="poi_twitter">Twitter</string>
+	<string name="facebook">Facebook</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_mobile">Mòbile</string>
 	<string name="poi_height">Artària</string>

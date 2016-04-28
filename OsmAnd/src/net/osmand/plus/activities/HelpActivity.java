@@ -1,16 +1,22 @@
 package net.osmand.plus.activities;
 
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -35,7 +41,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		setContentView(R.layout.fragment_help_screen);
 
 		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter();
-		contextMenuAdapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		contextMenuAdapter.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
 
 		contextMenuAdapter.addItem(createCategory(R.string.begin_with_osmand_menu_group));
 		createBeginWithOsmandItems(contextMenuAdapter);
@@ -47,15 +53,31 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		createHelpUsToImproveItems(contextMenuAdapter);
 		contextMenuAdapter.addItem(createCategory(R.string.other_menu_group));
 		createOtherItems(contextMenuAdapter);
+		contextMenuAdapter.addItem(createCategory(R.string.follow_us));
+		createSocialNetworksItems(contextMenuAdapter);
 
 		mAdapter = contextMenuAdapter.createListAdapter(this, getMyApplication().getSettings().isLightContent());
 
 		ListView listView = (ListView) findViewById(android.R.id.list);
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
+		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(this,
+				getMyApplication().getSettings().isLightContent() ?
+						R.color.icon_color_light : R.color.dialog_inactive_text_color_dark));
+		listView.setDivider(dividerDrawable);
+		listView.setDividerHeight(AndroidUtils.dpToPx(this, 1f));
 
 		setTitle(R.string.shared_string_help);
 		setupHomeButton();
+	}
+
+	private void createSocialNetworksItems(ContextMenuAdapter contextMenuAdapter) {
+		contextMenuAdapter.addItem(createSocialItem(R.string.twitter, R.string.twitter_address,
+				R.drawable.ic_action_social_twitter));
+		contextMenuAdapter.addItem(createSocialItem(R.string.facebook, R.string.facebook_address,
+				R.drawable.ic_action_social_facebook));
+		contextMenuAdapter.addItem(createSocialItem(R.string.vk, R.string.vk_address,
+				R.drawable.ic_action_social_vk));
 	}
 
 	private void createHelpUsToImproveItems(ContextMenuAdapter contextMenuAdapter) {
@@ -84,6 +106,28 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 				.setTitle(title)
 				.setIcon(icon)
 				.setListener(new ShowArticleOnTouchListener(path, this))
+				.createItem();
+	}
+
+	private ContextMenuItem createSocialItem(@StringRes int title,
+											 @StringRes int urlRes,
+											 @DrawableRes int icon) {
+		final String url = getString(urlRes);
+		return new ContextMenuItem.ItemBuilder()
+				.setTitle(getString(title))
+				.setDescription(url)
+				.setIcon(icon)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
+													  int itemId,
+													  int position,
+													  boolean isChecked) {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+						startActivity(intent);
+						return false;
+					}
+				})
 				.createItem();
 	}
 
@@ -118,8 +162,11 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		mAdapter.getItem(position).getItemClickListener()
-				.onContextMenuClick(mAdapter, position, position, false);
+		ContextMenuAdapter.ItemClickListener listener =
+				mAdapter.getItem(position).getItemClickListener();
+		if (listener != null) {
+			listener.onContextMenuClick(mAdapter, position, position, false);
+		}
 	}
 
 	private void createFeaturesItems(ContextMenuAdapter contextMenuAdapter) {

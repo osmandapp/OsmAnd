@@ -948,7 +948,7 @@
 
 	<string name="poi_email">電子郵件</string>
 	<string name="poi_fax">傳真</string>
-	<string name="poi_facebook">臉書</string>
+	<string name="facebook">臉書</string>
 	<string name="poi_mobile">行動電話</string>
 	<string name="poi_animal_shelter_dog">收容所類型：狗</string>
 	<string name="poi_animal_shelter_cat">收容所：貓</string>
@@ -1041,11 +1041,11 @@
 	<string name="poi_supervised_yes">有監管</string>
 	<string name="poi_supervised_no">沒有監管</string>
 	<string name="poi_mill_pond">磨房水塘</string>
-	<string name="poi_twitter">Twitter</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">Youtube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">香水商店</string>
 

@@ -954,7 +954,7 @@
 
 	<string name="poi_email">Correu electrònic</string>
 	<string name="poi_fax">Fax</string>
-	<string name="poi_facebook">Facebook</string>
+	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Mòbil</string>
 	<string name="poi_animal_shelter_dog">Tipus de refugi: per gossos</string>
 	<string name="poi_animal_shelter_cat">Tipus de refugi: per gats</string>
@@ -1048,11 +1048,11 @@
 	<string name="poi_recycling_beverage_cartons">Envasos de cartró de begudes</string>
 	<string name="poi_recycling_sheet_metal">Xapa metàl·lica</string>
 	<string name="poi_mill_pond">Bassa del molí</string>
-	<string name="poi_twitter">Twitter</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">Perfumeria</string>
 

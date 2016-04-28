@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="follow_us">Follow us</string>
     <string name="access_direction_audio_feedback">Direction audio feedback</string>
     <string name="access_direction_audio_feedback_descr">Indicate target point direction by sound</string>
     <string name="access_direction_haptic_feedback">Direction haptic feedback</string>
