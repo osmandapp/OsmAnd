@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
 
 import net.osmand.IProgress;
@@ -54,6 +55,7 @@ public abstract class OsmandPlugin {
 
 	public abstract int getAssetResourceName();
 
+	@DrawableRes
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
 	}
