@@ -403,7 +403,7 @@
     <string name="lang_es">Hispana</string>
     <string name="about_version">Versio:</string>
     <string name="shared_string_about">Pri</string>
-    <string name="about_settings_descr">Montras informojn, permesilojn, kontribuistojn</string>
+    <string name="about_settings_descr">Informoj, permesiloj, kontribuistoj</string>
     <string name="choose_osmand_theme">Etoso</string>
     <string name="choose_osmand_theme_descr">Elektu etoson de aplikaĵo</string>
     <string name="local_indexes_cat_srtm">Nivelkurboj</string>
@@ -903,4 +903,21 @@
     <string name="app_mode_aircraft">Aviadilo</string>
     <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM-ajn ŝanĝojn?</string>
     <string name="animate_routing_route_not_calculated">Bonvolu antaŭe kalkuli la kurson</string>
+    <string name="follow_us">Sekvu nin</string>
+    <string name="animate_routing_route">"Simuli uzante kalkulitan kurson "</string>
+    <string name="animate_routing_gpx">Simuli uzante GPX-kurson</string>
+    <string name="route_is_too_long">Eksterreta kalkulado de kurso povos okupi multe da tempo (aŭ eĉ ĝi povos malfunkcii) por punktoj pli malproksimaj ol 200km. Eble vi provos aldoni interajn celojn por plibonigi rendimenton.</string>
+    <string name="auto_zoom_none">Sen aŭtomata skalado</string>
+    <string name="auto_zoom_close">Pliproksime</string>
+    <string name="auto_zoom_far">Meza-skalado</string>
+    <string name="auto_zoom_farthest">Malproksime</string>
+    <string name="base_world_map">Monda bazmapo</string>
+    <string name="map_magnifier">Map-skalado</string>
+    <string name="local_index_tile_data_zooms">Elŝutitaj niveloj de pligrandigo: %1$s</string>
+    <string name="local_index_tile_data_expire">Senvalidiĝos (minutoj): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Elŝuteblaj: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maksimuma skalo: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimuma skalo: %1$s</string>
+    <string name="local_index_tile_data_name">Kahelaj datumoj: %1$s</string>
+    <string name="edit_tilesource_successfully">Kahelfonto %1$s estas sukcese konservita</string>
     </resources>
