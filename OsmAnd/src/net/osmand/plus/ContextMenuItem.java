@@ -142,6 +142,10 @@ public class ContextMenuItem {
 		return integerListener;
 	}
 
+	public boolean shouldSkipPainting() {
+		return skipPaintingWithoutColor;
+	}
+
 	public boolean shouldHideDivider() {
 		return hideDivider;
 	}
