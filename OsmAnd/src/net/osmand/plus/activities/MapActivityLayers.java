@@ -54,7 +54,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -322,7 +321,8 @@ public class MapActivityLayers {
 		} else {
 			builder.setIcon(R.drawable.mx_user_defined);
 		}
-		builder.setColor(R.color.osmand_orange);
+		builder.setColor(ContextMenuItem.INVALID_ID);
+		builder.setSkipPaintingWithoutColor(true);
 		adapter.addItem(builder.createItem());
 	}
 
