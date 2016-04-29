@@ -25,16 +25,15 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRuleProperty;
@@ -186,19 +185,18 @@ public class ConfigureMapMenu {
 
 		protected void selectPOILayer(final ArrayAdapter<ContextMenuItem> adapter,
 									  final ContextMenuItem item) {
-			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView());
-			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
-					boolean selected = pf.isShowingAnyPoi();
-					item.setSelected(selected);
-					item.setDescription(pf.getSelectedPoiFiltersName());
-					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					adapter.notifyDataSetChanged();
-				}
-			});
+			ma.getMapLayers().showPoiFilterDialog(ma.getMapView(),
+					new MapActivityLayers.ConfirmListener() {
+						@Override
+						public void confirm() {
+							PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
+							boolean selected = pf.isShowingAnyPoi();
+							item.setSelected(selected);
+							item.setDescription(pf.getSelectedPoiFiltersName());
+							item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							adapter.notifyDataSetChanged();
+						}
+					});
 		}
 	}
 

@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
@@ -37,6 +36,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -62,7 +62,9 @@ public class WaypointDialogHelper {
 
 	public interface WaypointDialogHelperCallbacks {
 		void reloadAdapter();
+
 		void deleteWaypoint(int position);
+
 		void exchangeWaypoints(int pos1, int pos2);
 	}
 
@@ -487,7 +489,7 @@ public class WaypointDialogHelper {
 					move.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							((DragIcon)view.getTag()).onClick();
+							((DragIcon) view.getTag()).onClick();
 						}
 					});
 				}
@@ -614,13 +616,13 @@ public class WaypointDialogHelper {
 					running[0] = position;
 					thisAdapter.notifyDataSetInvalidated();
 					MapActivity map = (MapActivity) ctx;
-					AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView());
-					dlg.setOnDismissListener(new OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							enableType(running, thisAdapter, type, true);
-						}
-					});
+					map.getMapLayers().showPoiFilterDialog(map.getMapView(),
+							new MapActivityLayers.ConfirmListener() {
+								@Override
+								public void confirm() {
+									enableType(running, thisAdapter, type, true);
+								}
+							});
 				}
 
 			});
@@ -688,16 +690,15 @@ public class WaypointDialogHelper {
 		if (ctx instanceof MapActivity &&
 				!app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.CUSTOM_FILTER_ID)) {
 			MapActivity map = (MapActivity) ctx;
-			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView());
-			dlg.setOnDismissListener(new OnDismissListener() {
-
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					if (app.getPoiFilters().isShowingAnyPoi()) {
-						enableType(running, listAdapter, type, enable);
-					}
-				}
-			});
+			map.getMapLayers().showPoiFilterDialog(map.getMapView(),
+					new MapActivityLayers.ConfirmListener() {
+						@Override
+						public void confirm() {
+							if (app.getPoiFilters().isShowingAnyPoi()) {
+								enableType(running, listAdapter, type, enable);
+							}
+						}
+					});
 		} else {
 			enableType(running, listAdapter, type, enable);
 		}
