@@ -276,18 +276,17 @@ public class MapActivityLayers {
 				app.getSettings().isLightContent());
 		final ListView listView = new ListView(activity);
 		listView.setDivider(null);
+		listView.setClickable(true);
 		listView.setAdapter(listAdapter);
-		listView.setOnItemClickListener(
-				new ListView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						ContextMenuItem item = listAdapter.getItem(position);
-						PoiUIFilter filter = list.get(position);
-						boolean isChecked = getApplication().getPoiFilters().isPoiFilterSelected(filter);
-						item.getItemClickListener().onContextMenuClick(listAdapter, position, position, !isChecked);
-						listAdapter.notifyDataSetChanged();
-					}
-				});
+		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ContextMenuItem item = listAdapter.getItem(position);
+				item.setSelected(!item.getSelected());
+				item.getItemClickListener().onContextMenuClick(listAdapter, position, position, item.getSelected());
+				listAdapter.notifyDataSetChanged();
+			}
+		});
 		builder.setView(listView);
 		builder.setTitle(R.string.show_poi_over_map)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
