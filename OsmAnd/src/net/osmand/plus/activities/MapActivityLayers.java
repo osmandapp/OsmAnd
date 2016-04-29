@@ -2,10 +2,11 @@ package net.osmand.plus.activities;
 
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
@@ -23,7 +24,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -258,14 +258,11 @@ public class MapActivityLayers {
 	}
 
 
-	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView) {
+	public void showPoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
 		OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.shared_string_search, app)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
-		final List<PoiUIFilter> list = new ArrayList<PoiUIFilter>();
+		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f);
@@ -275,29 +272,35 @@ public class MapActivityLayers {
 		}
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
-		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int position) {
-                PoiUIFilter pf = list.get(position);
-                String filterId = pf.getFilterId();
-                if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
-					Intent search = new Intent(activity, SearchActivity.class);
-					search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
-					activity.startActivity(search);
-				}
-			}
-		});
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity,
+				app.getSettings().isLightContent());
+		final ListView listView = new ListView(activity);
+		listView.setDivider(null);
+		listView.setAdapter(listAdapter);
+		listView.setOnItemClickListener(
+				new ListView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						ContextMenuItem item = listAdapter.getItem(position);
+						PoiUIFilter filter = list.get(position);
+						boolean isChecked = getApplication().getPoiFilters().isPoiFilterSelected(filter);
+						item.getItemClickListener().onContextMenuClick(listAdapter, position, position, !isChecked);
+						listAdapter.notifyDataSetChanged();
+					}
+				});
+		builder.setView(listView);
 		builder.setTitle(R.string.show_poi_over_map)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-                        mapView.refreshMap();
+						mapView.refreshMap();
+						listener.confirm();
 					}
 				})
-				.setNegativeButton(R.string.shared_string_cancel, null);
-		return builder.show();
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				// TODO go to single choice dialog
+				.setNeutralButton("", null);
+		builder.show();
 	}
 
 	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiUIFilter> list, final PoiUIFilter f) {
@@ -503,5 +506,9 @@ public class MapActivityLayers {
 
 	public DownloadedRegionsLayer getDownloadedRegionsLayer() {
 		return downloadedRegionsLayer;
+	}
+
+	public interface ConfirmListener {
+		void confirm();
 	}
 }
