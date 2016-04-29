@@ -99,6 +99,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 	}
 
 	private void createSocialNetworksItems(ContextMenuAdapter contextMenuAdapter) {
+		contextMenuAdapter.addItem(createCategory(R.string.follow_us));
 		contextMenuAdapter.addItem(createSocialItem(R.string.twitter, R.string.twitter_address,
 				R.drawable.ic_action_social_twitter));
 		contextMenuAdapter.addItem(createSocialItem(R.string.facebook, R.string.facebook_address,
