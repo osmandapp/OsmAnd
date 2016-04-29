@@ -2181,4 +2181,7 @@
     <string name="access_no_destination">未設定目的地</string>
     <string name="use_osm_live_routing_description">為 OSM 即時更改啟用導航 (Beta)</string>
 	<string name="use_osm_live_routing">OSM 即時導航</string>
+    <string name="follow_us">追蹤我們</string>
+    <string name="access_direction_audio_feedback">方向音訊反饋</string>
+    <string name="access_direction_audio_feedback_descr">用聲音指示目標點方向</string>
     </resources>
