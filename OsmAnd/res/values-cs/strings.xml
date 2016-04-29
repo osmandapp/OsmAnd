@@ -1980,7 +1980,7 @@
     <string name="map_marker">Mapová značka</string>
     <string name="consider_turning_polygons_off">Je doporučeno vypnout zobrazování polygonů.</string>
     <string name="rendering_attr_showMtbRoutes_name">Zobrazit trasy pro horská kola</string>
-    <string name="storage_permission_restart_is_required">Nyní aplikace umožňuje zapisovat na externí úložiště. Je potřeba provést ruční restart aplikace.</string>
+    <string name="storage_permission_restart_is_required">Aplikace nyní umožňuje zapisovat na externí úložiště. Je potřeba provést ruční restart aplikace.</string>
     <string name="file_name_containes_illegal_char">Název souboru obsahuje nepovolené znaky</string>
 <string name="access_no_destination">Cíl není určen</string>
     <string name="map_widget_magnetic_bearing">Magnetické směrování</string>
@@ -2014,4 +2014,9 @@
     <string name="rendering_value_bold_name">Tučné</string>
     <string name="no_map_markers_found">Prosím přidejte mapové značky pomocí mapy</string>
     <string name="no_waypoints_found">Žádné body cesty nenalezeny</string>
+    <string name="follow_us">Sleduj nás</string>
+    <string name="access_direction_audio_feedback_descr">Indikovat směr k cílovému bodu zvukem</string>
+    <string name="access_direction_haptic_feedback">Haptická zpětná vazba směru</string>
+    <string name="access_direction_haptic_feedback_descr">Indikovat směr k cílovému bodu vibrováním</string>
+    <string name="use_osm_live_routing">OSM Live navigace</string>
     </resources>
