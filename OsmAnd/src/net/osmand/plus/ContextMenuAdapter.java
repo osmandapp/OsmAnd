@@ -55,7 +55,11 @@ public class ContextMenuAdapter {
 	}
 
 	public void addItem(ContextMenuItem item) {
-		items.add(item);
+		try {
+			items.add(item.getPos(), item);
+		} catch (IndexOutOfBoundsException ex) {
+			items.add(item);
+		}
 	}
 
 	public ContextMenuItem getItem(int position) {
