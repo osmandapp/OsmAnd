@@ -888,7 +888,7 @@
     <string name="app_mode_truck">Kamiono</string>
     <string name="guidance_preferences_descr">Navigadaj agordoj</string>
     <string name="routing_preferences_descr">Difinado de vojo</string>
-    <string name="speech_rate_descr">Agordu lud-rapidon por generitaj dialogaj helpoj</string>
+    <string name="speech_rate_descr">Agordas lud-rapidon por parolsintezitaj dialogaj helpoj</string>
     <string name="speech_rate">Voĉa rapido</string>
     <string name="complex_route_calculation_failed">Eraro dum rapida kalkulado de kurso (%s), retropaŝanta malrapidan kalkuladon.</string>
     <string name="disable_complex_routing_descr">Malaktivigas 2-fazan difinadon de vojo por aŭt-navigado</string>
@@ -920,4 +920,37 @@
     <string name="local_index_tile_data_minzoom">Minimuma skalo: %1$s</string>
     <string name="local_index_tile_data_name">Kahelaj datumoj: %1$s</string>
     <string name="edit_tilesource_successfully">Kahelfonto %1$s estas sukcese konservita</string>
+    <string name="edit_tilesource_elliptic_tile">Elipsa merkatora</string>
+    <string name="edit_tilesource_maxzoom">Maksimuma skalo</string>
+    <string name="edit_tilesource_expiration_time">Senvalidiĝas (minutoj)</string>
+    <string name="edit_tilesource_minzoom">Minimuma skalo</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Elekti ekzistantan…</string>
+    <string name="edit_tilesource_name">Nomo</string>
+    <string name="maps_define_edit">Difini/Redakti…</string>
+    <string name="map_widget_fps_info">Montri kadrojn sekunde (senerarigo)</string>
+    <string name="driving_region">Trafika regiono</string>
+    <string name="driving_region_descr">Elektu trafikan regionon: Usono, Eŭropo, Unuiĝinta Reĝlando, Azio, kaj aliaj</string>
+    <string name="speak_title">Anoncanta…</string>
+    <string name="speak_descr">Agordas anoncoj pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroladoj, rapidlimoj</string>
+    <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
+    <string name="speak_speed_limit">Rapidlimoj</string>
+    <string name="speak_cameras">Rapid-kontroladoj</string>
+    <string name="speak_traffic_warnings">Trafikaj avertoj</string>
+    <string name="osb_author_or_password_not_specified">Bonvolu entajpi uzantnomon kaj pasvorton por OSM en Agordoj</string>
+    <string name="clear_intermediate_points">Vakigi inter-celojn</string>
+    <string name="keep_intermediate_points">Konservi inter-celojn</string>
+    <string name="new_directions_point_dialog">Vi jam precizigis inter-celojn.</string>
+    <string name="context_menu_item_directions_to">Navigi al</string>
+    <string name="context_menu_item_directions_from">Navigi el</string>
+    <string name="route_descr_map_location">"Mapo: "</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
+    <string name="route_descr_destination">Celo</string>
+    <string name="route_to">Al:</string>
+    <string name="route_via">Tra:</string>
+    <string name="route_from">El:</string>
+
+    <string name="app_mode_default">Esplori mapon</string>
+    <string name="settings_preset">Implicita profilo</string>
+    <string name="settings_preset_descr">Map-vido kaj navigadaj agordoj estas memoritaj aparte por ia profilo de uzado. Agordu vian implicitan profilon tie ĉi.</string>
     </resources>
