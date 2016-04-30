@@ -2204,4 +2204,9 @@
     <string name="map_widget_magnetic_bearing">Магнітны азімут</string>
     <string name="use_osm_live_routing">Навігацыя OSM Live</string>
     <string name="access_no_destination">Пункт прызначэньня не зададзены</string>
+    <string name="follow_us">Сачыце за намі</string>
+    <string name="access_direction_audio_feedback">Гукавая індыкацыя кірунку</string>
+    <string name="access_direction_audio_feedback_descr">Індыцыраваць гукам кірунак на мэтавы пункт</string>
+    <string name="access_direction_haptic_feedback">Тактыльная індыкацыя кірунку</string>
+    <string name="access_direction_haptic_feedback_descr">Індыцыраваць вібрацыяй кірунак на мэтавы пункт</string>
     </resources>
