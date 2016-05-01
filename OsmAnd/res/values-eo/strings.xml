@@ -630,7 +630,7 @@
     <string name="rendering_value_browse_map_name">Esplori mapon</string>
     <string name="rendering_value_car_name">Aŭto</string>
     <string name="rendering_value_bicycle_name">Biciklo</string>
-    <string name="rendering_value_pedestrian_name">Perpiedulo</string>
+    <string name="rendering_value_pedestrian_name">Perpiedanto</string>
     <string name="osmo_invite">Inviti…</string>
     <string name="rendering_attr_coloredBuildings_name">Kolor-kodigi domojn laŭspece</string>
     <string name="osmo_leave_confirmation_msg">Ĉu vi volas forlasi grupon %1$s?</string>
