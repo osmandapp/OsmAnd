@@ -411,8 +411,8 @@ public class InAppHelper {
 	}
 
 	private void sendToken(String purchaseToken, final OnRequestResultListener listener) {
-		String userId = ctx.getSettings().BILLING_USER_ID.get();
-		String email = ctx.getSettings().BILLING_USER_EMAIL.get();
+		final String userId = ctx.getSettings().BILLING_USER_ID.get();
+		final String email = ctx.getSettings().BILLING_USER_EMAIL.get();
 		try {
 			Map<String, String> parameters = new HashMap<>();
 			parameters.put("userid", userId);
@@ -458,11 +458,15 @@ public class InAppHelper {
 											ctx.getSettings().BILLING_USER_EMAIL.set(obj.getString("email"));
 										}
 									} else {
-										complain("SendToken Error: " + obj.getString("error"));
+										complain("SendToken Error: "
+												+ obj.getString("error")
+												+ " (userId=" + userId + " token=" + token + ")");
 									}
 								} catch (JSONException e) {
 									logError("SendToken", e);
-									complain("SendToken Error: " + (e.getMessage() != null ? e.getMessage() : "JSONException"));
+									complain("SendToken Error: "
+											+ (e.getMessage() != null ? e.getMessage() : "JSONException")
+											+ " (userId=" + userId + " token=" + token + ")");
 								}
 							}
 							if (listener != null) {
@@ -518,7 +522,7 @@ public class InAppHelper {
 
 	private void complain(String message) {
 		logError("**** InAppHelper Error: " + message);
-		showToast("Error: " + message);
+		showToast(message);
 	}
 
 	private void showToast(final String message) {
@@ -530,7 +534,7 @@ public class InAppHelper {
 	}
 
 	void logError(String msg) {
-		Log.e(TAG, "Error: " + msg);
+		Log.e(TAG, msg);
 	}
 
 	void logError(String msg, Throwable e) {
