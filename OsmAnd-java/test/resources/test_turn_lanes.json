@@ -337,6 +337,20 @@
     "expectedResults": {
       "328033376": "TL|+C|TR"
     }
+  },
+  {
+    "testName": "20.Leimuiderweg (N207) TL Leidsestraat (N208)",
+    "startPoint": {
+      "latitude": 45.66587440212255,
+      "longitude": 35.598875460624754
+    },
+    "endPoint": {
+      "latitude": 45.664455433977736,
+      "longitude": 35.59152620792395
+    },
+    "expectedResults": {
+      "385047566": "+TL|+TL,C|TR"
+    }
   }
 
 ]
