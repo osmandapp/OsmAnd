@@ -2931,4 +2931,6 @@
 	<string name="poi_street_cabinet_water_management">Gadeskabstype: vandforsyning</string>
 	<string name="poi_street_cabinet_street_lighting">Gadeskabstype: gadebelysning</string>
 
+<string name="poi_military_checkpoint">Militært kontrolpost</string>
+
 </resources>
