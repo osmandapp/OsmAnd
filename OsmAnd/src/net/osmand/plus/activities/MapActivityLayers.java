@@ -2,10 +2,13 @@ package net.osmand.plus.activities;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -100,7 +104,7 @@ public class MapActivityLayers {
 
 	public void createLayers(final OsmandMapTileView mapView) {
 
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		// first create to make accessible
 		mapTextLayer = new MapTextLayer();
@@ -234,8 +238,7 @@ public class MapActivityLayers {
 							g.path = getString(R.string.show_current_gpx_title);
 						}
 						break;
-					}
-					if (!g.showCurrentTrack || locToShow == null) {
+					} else {
 						locToShow = g.findPointToShow();
 					}
 				}
@@ -258,22 +261,21 @@ public class MapActivityLayers {
 	}
 
 
-	public void showPoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
-		OsmandApplication app = getApplication();
+	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
+		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
-			addFilterToList(adapter, list, f);
+			addFilterToList(adapter, list, f, true);
 		}
 		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
-			addFilterToList(adapter, list, f);
+			addFilterToList(adapter, list, f, true);
 		}
 
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity,
-				app.getSettings().isLightContent());
 		final ListView listView = new ListView(activity);
 		listView.setDivider(null);
 		listView.setClickable(true);
@@ -287,8 +289,8 @@ public class MapActivityLayers {
 				listAdapter.notifyDataSetChanged();
 			}
 		});
-		builder.setView(listView);
-		builder.setTitle(R.string.show_poi_over_map)
+		builder.setView(listView)
+				.setTitle(R.string.show_poi_over_map)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -298,26 +300,98 @@ public class MapActivityLayers {
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				// TODO go to single choice dialog
-				.setNeutralButton("", null);
-		builder.show();
+				.setNeutralButton(" ", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						showSingleChoicePoiFilterDialog(mapView, listener);
+					}
+				});
+		final AlertDialog alertDialog = builder.create();
+		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+			@Override
+			public void onShow(DialogInterface dialog) {
+				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_singleselect);
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+		});
+		alertDialog.show();
 	}
 
-	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiUIFilter> list, final PoiUIFilter f) {
-		list.add(f);
-		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
-		builder.setListener(new ContextMenuAdapter.ItemClickListener() {
+	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
+		final OsmandApplication app = getApplication();
+		final PoiFiltersHelper poiFilters = app.getPoiFilters();
+		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		final List<PoiUIFilter> list = new ArrayList<>();
+		list.add(poiFilters.getCustomPOIFilter());
+		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
+			addFilterToList(adapter, list, f, false);
+		}
+		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
+			addFilterToList(adapter, list, f, false);
+		}
+
+		final ArrayAdapter<ContextMenuItem> listAdapter =
+				adapter.createListAdapter(activity, app.getSettings().isLightContent());
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-				if (isChecked) {
-					getApplication().getPoiFilters().addSelectedPoiFilter(f);
+			public void onClick(DialogInterface dialog, int which) {
+				PoiUIFilter pf = list.get(which + 1);
+				String filterId = pf.getFilterId();
+				if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
+					Intent search = new Intent(activity, SearchActivity.class);
+					search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
+					activity.startActivity(search);
 				} else {
-					getApplication().getPoiFilters().removeSelectedPoiFilter(f);
+					getApplication().getPoiFilters().clearSelectedPoiFilters();
+					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
+					mapView.refreshMap();
+					listener.confirm();
 				}
-				return true;
+			}
+
+		});
+		builder.setTitle(R.string.show_poi_over_map);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setNeutralButton(" ", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				showMultichoicePoiFilterDialog(mapView, listener);
 			}
 		});
+		final AlertDialog alertDialog = builder.create();
+		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+			@Override
+			public void onShow(DialogInterface dialog) {
+				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_multiselect);
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+		});
+		alertDialog.show();
+	}
+
+	private void addFilterToList(final ContextMenuAdapter adapter,
+								 final List<PoiUIFilter> list,
+								 final PoiUIFilter f,
+								 boolean multichoice) {
+		list.add(f);
+		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
+		if (multichoice) {
+			builder.setListener(new ContextMenuAdapter.ItemClickListener() {
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+					if (isChecked) {
+						getApplication().getPoiFilters().addSelectedPoiFilter(f);
+					} else {
+						getApplication().getPoiFilters().removeSelectedPoiFilter(f);
+					}
+					return true;
+				}
+			});
+			builder.setSelected(getApplication().getPoiFilters().isPoiFilterSelected(f));
+		}
 		builder.setTitle(f.getName());
-		builder.setSelected(getApplication().getPoiFilters().isPoiFilterSelected(f));
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
 			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
@@ -335,7 +409,7 @@ public class MapActivityLayers {
 		}
 		final OsmandSettings settings = getApplication().getSettings();
 
-		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<String, String>();
+		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
 
 
 		final String layerOsmVector = "LAYER_OSM_VECTOR";
@@ -347,7 +421,7 @@ public class MapActivityLayers {
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
 		entriesMap.put(layerEditInstall, getString(R.string.maps_define_edit));
 
-		final List<Entry<String, String>> entriesMapList = new ArrayList<Entry<String, String>>(entriesMap.entrySet());
+		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
@@ -382,57 +456,62 @@ public class MapActivityLayers {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String layerKey = entriesMapList.get(which).getKey();
-				if (layerKey.equals(layerOsmVector)) {
-					settings.MAP_ONLINE_DATA.set(false);
-					updateMapSource(mapView, null);
-				} else if (layerKey.equals(layerEditInstall)) {
-					OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
+				switch (layerKey) {
+					case layerOsmVector:
+						settings.MAP_ONLINE_DATA.set(false);
+						updateMapSource(mapView, null);
+						break;
+					case layerEditInstall:
+						OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
 
-						@Override
-						public boolean publish(TileSourceTemplate object) {
-							settings.MAP_TILE_SOURCES.set(object.getName());
-							settings.MAP_ONLINE_DATA.set(true);
-							updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-
-					});
-				} else if (layerKey.equals(layerInstallMore)) {
-					OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
-						TileSourceTemplate template = null;
-						int count = 0;
-
-						@Override
-						public boolean publish(TileSourceTemplate object) {
-							if (object == null) {
-								if (count == 1) {
-									settings.MAP_TILE_SOURCES.set(template.getName());
-									settings.MAP_ONLINE_DATA.set(true);
-									updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-								} else {
-									selectMapLayer(mapView);
-								}
-							} else {
-								count++;
-								template = object;
+							@Override
+							public boolean publish(TileSourceTemplate object) {
+								settings.MAP_TILE_SOURCES.set(object.getName());
+								settings.MAP_ONLINE_DATA.set(true);
+								updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+								return true;
 							}
-							return false;
-						}
 
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
-				} else {
-					settings.MAP_TILE_SOURCES.set(layerKey);
-					settings.MAP_ONLINE_DATA.set(true);
-					updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+
+						});
+						break;
+					case layerInstallMore:
+						OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+							TileSourceTemplate template = null;
+							int count = 0;
+
+							@Override
+							public boolean publish(TileSourceTemplate object) {
+								if (object == null) {
+									if (count == 1) {
+										settings.MAP_TILE_SOURCES.set(template.getName());
+										settings.MAP_ONLINE_DATA.set(true);
+										updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+									} else {
+										selectMapLayer(mapView);
+									}
+								} else {
+									count++;
+									template = object;
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+						break;
+					default:
+						settings.MAP_TILE_SOURCES.set(layerKey);
+						settings.MAP_ONLINE_DATA.set(true);
+						updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+						break;
 				}
 
 				dialog.dismiss();

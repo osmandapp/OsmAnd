@@ -103,7 +103,7 @@ public class ConfigureMapMenu {
 		@Override
 		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
 			if (itemId == R.string.layer_poi) {
-				selectPOILayer(adapter, adapter.getItem(pos));
+				showPoiFilterDialog(adapter, adapter.getItem(pos));
 				return false;
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
 				showGpxSelectionDialog(adapter, adapter.getItem(pos));
@@ -134,7 +134,7 @@ public class ConfigureMapMenu {
 			if (itemId == R.string.layer_poi) {
 				pfh.clearSelectedPoiFilters();
 				if (isChecked) {
-					selectPOILayer(adapter, adapter.getItem(pos));
+					showPoiFilterDialog(adapter, adapter.getItem(pos));
 				} else {
 					adapter.getItem(pos).setDescription(pfh.getSelectedPoiFiltersName());
 				}
@@ -183,9 +183,9 @@ public class ConfigureMapMenu {
 			});
 		}
 
-		protected void selectPOILayer(final ArrayAdapter<ContextMenuItem> adapter,
-									  final ContextMenuItem item) {
-			ma.getMapLayers().showPoiFilterDialog(ma.getMapView(),
+		protected void showPoiFilterDialog(final ArrayAdapter<ContextMenuItem> adapter,
+										   final ContextMenuItem item) {
+			ma.getMapLayers().showSingleChoicePoiFilterDialog(ma.getMapView(),
 					new MapActivityLayers.ConfirmListener() {
 						@Override
 						public void confirm() {
