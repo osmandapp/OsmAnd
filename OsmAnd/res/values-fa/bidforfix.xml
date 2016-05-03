@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="bidforfix_loading">بارگزاری</string>
-    <string name="bidforfix_supporters">حمایت کنندگان %1$d</string>
-	<string name="bidforfix_funded">حمایت مالی: %d%%</string>    
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="bidforfix_loading">بارگزاری</string>
+  <string name="bidforfix_supporters">حمایت کنندگان %1$d</string>
+  <string name="bidforfix_funded">حمایت مالی: %d%%</string>
 </resources>

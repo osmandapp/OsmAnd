@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="bidforfix_loading">ロード中</string>
-    <string name="bidforfix_funded">発見： %d%%</string>    
-<string name="bidforfix_supporters">サポーター %1$d</string>
-	</resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="bidforfix_loading">読み込み中</string>
+  <string name="bidforfix_supporters">%1$d サポーター数</string>
+  <string name="bidforfix_funded">基金達成率: %d%%</string>
+</resources>

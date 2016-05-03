@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-<string name="bidforfix_loading">Učitavanje</string>
-    <string name="bidforfix_supporters">%1$d Podržali</string>
-	<string name="bidforfix_funded">financirao:%d%%</string>    
+  <string name="bidforfix_loading">Učitavanje</string>
+  <string name="bidforfix_supporters">%1$d Podržali</string>
+  <string name="bidforfix_funded">financirao:% d%%</string>
 </resources>

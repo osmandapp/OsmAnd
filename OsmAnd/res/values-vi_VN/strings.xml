@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Disclaimer:
+         If you are going to translate strings, please make sure:
+         1. There is no duplicate strings by name
+         2. Every apostrophe (quote) is preceded by a backslash (see others).
+         If you are making/correcting English translations make sure:
+         3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
+    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy-->
+  <!--string name="underlay_transparency">Underlay transparency</string-->
+  <!--means first letter of word *hour*-->
+  <!--means first letter of word *minute*-->
+  <!--used to describe time left, not left direction-->
+  <!--string name="gpx_selection_current_track">recording</string-->
+  <!--string name="route_descr_current_location">Current position</string-->
+  <!--string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string-->
+  <!--string name="auto_follow_route_never">Never (tap \'Go\' to start guidance manually)</string-->
+  <!--string name="search_position_current_location">Current position…</string-->
+  <!--string name="local_indexes_cat_gpx">GPX data</string-->
+  <!--string name="search_tabs_location">Location</string-->
+</resources>

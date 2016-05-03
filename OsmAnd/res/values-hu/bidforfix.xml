@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="bidforfix_loading">Betöltés</string>
-    <string name="bidforfix_supporters">%1$d támogató</string>
-	<string name="bidforfix_funded">felajánlás: %d%%</string>    
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="bidforfix_loading">Betöltés</string>
+  <string name="bidforfix_supporters">%1$d Támogatók</string>
+  <string name="bidforfix_funded">felajánlás: %d%%</string>
 </resources>

@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-<string name="bidforfix_loading">Nalaganje</string>
-    <string name="bidforfix_supporters">%1$d podpornikov</string>
-	<string name="bidforfix_funded">financirano: %d%%</string>    
+  <string name="bidforfix_loading">Poteka nalaganje ...</string>
+  <string name="bidforfix_supporters">%1$d podpornikov</string>
+  <string name="bidforfix_funded">zbrano: %d%%</string>
 </resources>

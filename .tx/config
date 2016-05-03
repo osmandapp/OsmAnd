@@ -5,10 +5,10 @@ host = https://www.transifex.com
 file_filter = OsmAnd/res/values-<lang>/strings.xml
 source_file = OsmAnd/res/values/strings.xml
 source_lang = en
-lang_map = zh-CN:zh-rCN, zh-TW:zh-rTW
+lang_map = zh_CN:zh-rCN, zh_TW:zh-rTW, pt_BR:pt-rBR
 
 [osmand.bidforfixxml]
 file_filter = OsmAnd/res/values-<lang>/bidforfix.xml
 source_file = OsmAnd/res/values/bidforfix.xml
 source_lang = en
-lang_map = zh-CN:zh-rCN, zh-TW:zh-rTW
+lang_map = zh_CN:zh-rCN, zh_TW:zh-rTW, pt_BR:pt-rBR
