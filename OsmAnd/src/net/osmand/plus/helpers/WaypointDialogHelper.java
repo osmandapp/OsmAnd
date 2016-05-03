@@ -10,6 +10,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
@@ -224,11 +225,11 @@ public class WaypointDialogHelper {
 		int color;
 		int pointColor;
 		if (nightMode) {
-			color = ctx.getResources().getColor(R.color.dashboard_divider_dark);
-			pointColor = ctx.getResources().getColor(R.color.dashboard_divider_dark);
+			color = ContextCompat.getColor(ctx, R.color.dashboard_divider_dark);
+			pointColor = ContextCompat.getColor(ctx, R.color.dashboard_divider_dark);
 		} else {
-			color = ctx.getResources().getColor(R.color.dashboard_divider_light);
-			pointColor = ctx.getResources().getColor(R.color.ctx_menu_info_divider_light);
+			color = ContextCompat.getColor(ctx, R.color.dashboard_divider_light);
+			pointColor = ContextCompat.getColor(ctx, R.color.ctx_menu_info_divider_light);
 		}
 
 		Shape fullDividerShape = new ListDividerShape(color, 0);
@@ -616,7 +617,7 @@ public class WaypointDialogHelper {
 					running[0] = position;
 					thisAdapter.notifyDataSetInvalidated();
 					MapActivity map = (MapActivity) ctx;
-					map.getMapLayers().showPoiFilterDialog(map.getMapView(),
+					map.getMapLayers().showSingleChoicePoiFilterDialog(map.getMapView(),
 							new MapActivityLayers.ConfirmListener() {
 								@Override
 								public void confirm() {
@@ -690,7 +691,7 @@ public class WaypointDialogHelper {
 		if (ctx instanceof MapActivity &&
 				!app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.CUSTOM_FILTER_ID)) {
 			MapActivity map = (MapActivity) ctx;
-			map.getMapLayers().showPoiFilterDialog(map.getMapView(),
+			map.getMapLayers().showSingleChoicePoiFilterDialog(map.getMapView(),
 					new MapActivityLayers.ConfirmListener() {
 						@Override
 						public void confirm() {
@@ -834,9 +835,8 @@ public class WaypointDialogHelper {
 		boolean rc = waypointHelper.isRouteCalculated();
 		for (int i = 0; i < WaypointHelper.MAX; i++) {
 			List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
-			if (!rc && i != WaypointHelper.WAYPOINTS && i != WaypointHelper.TARGETS) {
-				// skip
-			} else if (waypointHelper.isTypeVisible(i)) {
+			if ((rc || i == WaypointHelper.WAYPOINTS || i == WaypointHelper.TARGETS)
+					&& waypointHelper.isTypeVisible(i)) {
 				if (points.size() > 0) {
 					points.add(true);
 				}
