@@ -889,43 +889,6 @@ public class WaypointDialogHelper {
 		app.getSettings().setMapLocationToShow(locationPoint.getLatitude(), locationPoint.getLongitude(),
 				15, locationPoint.getPointDescription(a), false, locationPoint);
 		MapActivity.launchMapActivityMoveToTop(a);
-
-		/*
-		MapActivity ctx = (MapActivity) a;
-		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
-		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
-		double flat = locationPoint.getLatitude();
-		double flon = locationPoint.getLongitude();
-		if (!center) {
-			RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
-			cp.setCenterLocation(0.5f, 0.25f);
-			cp.setLatLonCenter(flat, flon);
-			flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
-			flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
-		}
-		if (thread.isAnimating()) {
-			ctx.getMapView().setIntZoom(fZoom);
-			ctx.getMapView().setLatLon(flat, flon);
-			app.getAppCustomization().showLocationPoint(ctx, locationPoint);
-		} else {
-			final double dist = MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
-					locationPoint.getLatitude(), locationPoint.getLongitude());
-			double t = 10;
-			if (dist < t) {
-				app.getAppCustomization().showLocationPoint(ctx, locationPoint);
-			} else {
-				thread.startMoving(flat, flon, fZoom, true);
-			}
-			if (ctx.getDashboard().isVisible()) {
-				ctx.getDashboard().hideDashboard();
-				ctx.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
-				ctx.getContextMenu().show(
-						new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
-						locationPoint.getPointDescription(ctx),
-						locationPoint);
-			}
-		}
-		*/
 	}
 
 	public static void sortAllTargets(final OsmandApplication app, final Activity activity,

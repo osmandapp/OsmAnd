@@ -3,10 +3,12 @@ package net.osmand.plus.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -260,7 +262,7 @@ public class MapActivityLayers {
 
 
 	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
-		OsmandApplication app = getApplication();
+		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		final List<PoiUIFilter> list = new ArrayList<>();
@@ -298,17 +300,25 @@ public class MapActivityLayers {
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				// TODO go to single choice dialog
-				.setNeutralButton("Single choice", new DialogInterface.OnClickListener() {
+				.setNeutralButton(" ", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						showSingleChoicePoiFilterDialog(mapView, listener);
 					}
 				});
-		builder.show();
+		final AlertDialog alertDialog = builder.create();
+		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+			@Override
+			public void onShow(DialogInterface dialog) {
+				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_singleselect);
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+		});
+		alertDialog.show();
 	}
 
 	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
-		OsmandApplication app = getApplication();
+		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		final List<PoiUIFilter> list = new ArrayList<>();
@@ -344,13 +354,21 @@ public class MapActivityLayers {
 		});
 		builder.setTitle(R.string.show_poi_over_map);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setNeutralButton("Multichoice", new DialogInterface.OnClickListener() {
+		builder.setNeutralButton(" ", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				showMultichoicePoiFilterDialog(mapView, listener);
 			}
 		});
-		builder.show();
+		final AlertDialog alertDialog = builder.create();
+		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+			@Override
+			public void onShow(DialogInterface dialog) {
+				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_multiselect);
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+		});
+		alertDialog.show();
 	}
 
 	private void addFilterToList(final ContextMenuAdapter adapter,
