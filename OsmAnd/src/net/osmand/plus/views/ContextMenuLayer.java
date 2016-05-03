@@ -1,12 +1,16 @@
 package net.osmand.plus.views;
 
+import android.Manifest;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
@@ -14,6 +18,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -24,38 +29,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ContextMenuLayer extends OsmandMapLayer {
-
-	public interface IContextMenuProvider {
-
-		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
-
-		LatLon getObjectLocation(Object o);
-
-		String getObjectDescription(Object o);
-
-		PointDescription getObjectName(Object o);
-
-		boolean disableSingleTap();
-
-		boolean disableLongPressOnMap();
-
-		boolean isObjectClickable(Object o);
-	}
-
-	public interface IContextMenuProviderSelection {
-
-		int getOrder(Object o);
-
-		void setSelectedObject(Object o);
-
-		void clearSelectedObject();
-	}
+	private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
+	public static final int VIBRATE_SHORT = 100;
 
 	private OsmandMapTileView view;
 
@@ -72,6 +55,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private List<LatLon> pressedLatLonSmall = new ArrayList<>();
 
 	private GestureDetector movementListener;
+
+	private boolean mInChangeMarkerPositionMode;
 
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
@@ -118,7 +103,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
 		}
 
-		if (menu.isActive()) {
+		if (mInChangeMarkerPositionMode) {
+			int x = box.getCenterPixelX();
+			int y = box.getCenterPixelY();
+			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
+			contextMarker.draw(canvas);
+		} else if (menu.isActive()) {
 			LatLon latLon = menu.getLatLon();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -151,10 +141,26 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
+	@RequiresPermission(Manifest.permission.VIBRATE)
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (disableLongPressOnMap()) {
 			return false;
 		}
+		if (pressedContextMarker(tileBox, point.x, point.y)) {
+			Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+			vibrator.vibrate(VIBRATE_SHORT);
+
+			mInChangeMarkerPositionMode = !mInChangeMarkerPositionMode;
+			if (!mInChangeMarkerPositionMode) {
+				int newMarkerX = tileBox.getCenterPixelX();
+				int newMarkerY = tileBox.getCenterPixelY();
+				PointF newMarkerPosition = new PointF(newMarkerX, newMarkerY);
+				showContextMenu(newMarkerPosition, tileBox, true);
+				view.refreshMap();
+			}
+			return true;
+		}
+
 		showContextMenu(point, tileBox, true);
 		view.refreshMap();
 		return true;
@@ -272,16 +278,24 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean pressedContextMarker(RotatedTileBox tb, float px, float py) {
-		if (menu.isActive()) {
+		float markerX;
+		float markerY;
+		if (mInChangeMarkerPositionMode) {
+			markerX = tb.getCenterPixelX();
+			markerY = tb.getCenterPixelY();
+		} else if (menu.isActive()) {
 			LatLon latLon = menu.getLatLon();
-			Rect bs = contextMarker.getDrawable().getBounds();
-			int dx = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
-			int dy = (int) (py - tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
-			int bx = dx + bs.width() / 2;
-			int by = dy + bs.height();
-			return (bs.contains(bx, by));
+			markerX = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			markerY = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+		} else {
+			return false;
 		}
-		return false;
+		Rect bs = contextMarker.getDrawable().getBounds();
+		int dx = (int) (px - markerX);
+		int dy = (int) (py - markerY);
+		int bx = dx + bs.width() / 2;
+		int by = dy + bs.height();
+		return (bs.contains(bx, by));
 	}
 
 	@Override
@@ -351,6 +365,32 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		return false;
+	}
+
+	public interface IContextMenuProvider {
+
+		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
+
+		LatLon getObjectLocation(Object o);
+
+		String getObjectDescription(Object o);
+
+		PointDescription getObjectName(Object o);
+
+		boolean disableSingleTap();
+
+		boolean disableLongPressOnMap();
+
+		boolean isObjectClickable(Object o);
+	}
+
+	public interface IContextMenuProviderSelection {
+
+		int getOrder(Object o);
+
+		void setSelectedObject(Object o);
+
+		void clearSelectedObject();
 	}
 
 	private class MenuLayerOnGestureListener extends GestureDetector.SimpleOnGestureListener {
