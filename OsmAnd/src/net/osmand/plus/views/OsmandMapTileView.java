@@ -389,14 +389,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return currentViewport.isZoomAnimated();
 	}
 
+	/**
+	 * Adds listener to control when map is dragging
+	 */
 	public void setMapLocationListener(IMapLocationListener l) {
 		locationListener = l;
 	}
 
-	/**
-	 * Adds listener to control when map is dragging
-	 */
-	public IMapLocationListener setMapLocationListener() {
+	public IMapLocationListener getMapLocationListener() {
 		return locationListener;
 	}
 
@@ -450,12 +450,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
 			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
 			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
-//			LatLon lt = bufferImgLoc.getLeftTopLatLon();
-//			LatLon rb = bufferImgLoc.getRightBottomLatLon();
-//			final float x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
-//			final float x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
-//			final float y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
-//			final float y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
 			if (!bufferBitmap.isRecycled()) {
 				RectF rct = new RectF(x1, y1, x2, y2);
 				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);

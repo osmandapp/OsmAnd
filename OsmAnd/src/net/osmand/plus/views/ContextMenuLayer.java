@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
 import android.view.GestureDetector;
@@ -59,6 +60,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private final MoveMarkerBottomSheetHelper mMoveMarkerBottomSheetHelper;
 	private boolean mInChangeMarkerPositionMode;
+	@Nullable
+	private LatLon mMarkerLocation;
 
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
@@ -107,6 +110,18 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
 		}
 
+		if (mMarkerLocation != null
+				&& mMarkerLocation.equals(menu.getLatLon())
+				&& mMarkerLocation.equals(box.getCenterLatLon())) {
+			mInChangeMarkerPositionMode = true;
+			double latitude = mMarkerLocation.getLatitude();
+			double longitude = mMarkerLocation.getLongitude();
+			mMoveMarkerBottomSheetHelper.show(latitude, longitude);
+
+			activity.getContextMenu().hide();
+			mMarkerLocation = null;
+			box.getPixHeight();
+		}
 		if (mInChangeMarkerPositionMode) {
 			int x = box.getCenterPixelX();
 			int y = box.getCenterPixelY();
@@ -154,10 +169,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 			vibrator.vibrate(VIBRATE_SHORT);
 
-			mInChangeMarkerPositionMode = true;
-			activity.getContextMenu().hide();
-			LatLon latLon = tileBox.getCenterLatLon();
-			mMoveMarkerBottomSheetHelper.show(latLon.getLatitude(), latLon.getLongitude());
+			AnimateDraggingMapThread thread = activity.getMapView().getAnimatedDraggingThread();
+			mMarkerLocation = menu.getLatLon();
+			double lat = mMarkerLocation.getLatitude();
+			double lon = mMarkerLocation.getLongitude();
+			int zoom = activity.getMapView().getZoom();
+			thread.startMoving(lat, lon, zoom, true);
+
 			return true;
 		}
 
@@ -170,8 +188,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (!mInChangeMarkerPositionMode) {
 			throw new IllegalStateException("Not in change marker position mode");
 		}
-		mInChangeMarkerPositionMode = false;
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+		mInChangeMarkerPositionMode = false;
 		int newMarkerX = tileBox.getCenterPixelX();
 		int newMarkerY = tileBox.getCenterPixelY();
 		PointF newMarkerPosition = new PointF(newMarkerX, newMarkerY);
