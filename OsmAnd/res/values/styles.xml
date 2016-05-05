@@ -377,4 +377,17 @@
         <item name="typeface">@string/font_roboto_medium</item>
         <item name="android:textSize">@dimen/default_list_text_size</item>
     </style>
+
+    <style name="TextAppearance.ContextMenuTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/default_list_text_size_large</item>
+        <item name="android:maxLines">6</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextAppearance.ContextMenuSubtitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textSize">@dimen/default_desc_text_size</item>
+    </style>
+
 </resources>

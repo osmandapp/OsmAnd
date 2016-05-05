@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
+import android.support.v4.content.ContextCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
@@ -56,6 +57,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private GestureDetector movementListener;
 
+	private final MoveMarkerBottomSheetHelper mMoveMarkerBottomSheetHelper;
 	private boolean mInChangeMarkerPositionMode;
 
 	public ContextMenuLayer(MapActivity activity) {
@@ -63,6 +65,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		menu = activity.getContextMenu();
 		multiSelectionMenu = menu.getMultiSelectionMenu();
 		movementListener = new GestureDetector(activity, new MenuLayerOnGestureListener());
+		mMoveMarkerBottomSheetHelper = new MoveMarkerBottomSheetHelper(activity, this);
 	}
 
 	@Override
@@ -73,9 +76,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 
-		contextMarker = new ImageView(view.getContext());
+		Context context = view.getContext();
+		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		contextMarker.setImageDrawable(view.getResources().getDrawable(R.drawable.map_pin_context_menu));
+		contextMarker.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.map_pin_context_menu));
 		contextMarker.setClickable(true);
 		int minw = contextMarker.getDrawable().getMinimumWidth();
 		int minh = contextMarker.getDrawable().getMinimumHeight();
@@ -150,14 +154,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 			vibrator.vibrate(VIBRATE_SHORT);
 
-			mInChangeMarkerPositionMode = !mInChangeMarkerPositionMode;
-			if (!mInChangeMarkerPositionMode) {
-				int newMarkerX = tileBox.getCenterPixelX();
-				int newMarkerY = tileBox.getCenterPixelY();
-				PointF newMarkerPosition = new PointF(newMarkerX, newMarkerY);
-				showContextMenu(newMarkerPosition, tileBox, true);
-				view.refreshMap();
-			}
+			mInChangeMarkerPositionMode = true;
+			activity.getContextMenu().hide();
+			LatLon latLon = tileBox.getCenterLatLon();
+			mMoveMarkerBottomSheetHelper.show(latLon.getLatitude(), latLon.getLongitude());
 			return true;
 		}
 
@@ -166,8 +166,26 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return true;
 	}
 
+	public void applyNewMarkerPosition() {
+		if (!mInChangeMarkerPositionMode) {
+			throw new IllegalStateException("Not in change marker position mode");
+		}
+		mInChangeMarkerPositionMode = false;
+		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+		int newMarkerX = tileBox.getCenterPixelX();
+		int newMarkerY = tileBox.getCenterPixelY();
+		PointF newMarkerPosition = new PointF(newMarkerX, newMarkerY);
+		showContextMenu(newMarkerPosition, tileBox, true);
+		view.refreshMap();
+	}
+
+	public void cancelMovingMarker() {
+		mInChangeMarkerPositionMode = false;
+		activity.getContextMenu().show();
+	}
+
 	public boolean showContextMenu(double latitude, double longitude, boolean showUnknownLocation) {
-		RotatedTileBox cp = activity.getMapView().getCurrentRotatedTileBox().copy();
+		RotatedTileBox cp = activity.getMapView().getCurrentRotatedTileBox();
 		float x = cp.getPixXFromLatLon(latitude, longitude);
 		float y = cp.getPixYFromLatLon(latitude, longitude);
 		return showContextMenu(new PointF(x, y), activity.getMapView().getCurrentRotatedTileBox(), showUnknownLocation);
@@ -216,6 +234,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean disableSingleTap() {
+		if (mInChangeMarkerPositionMode) {
+			return true;
+		}
 		boolean res = false;
 		for (OsmandMapLayer lt : view.getLayers()) {
 			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
@@ -229,6 +250,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean disableLongPressOnMap() {
+		if (mInChangeMarkerPositionMode) {
+			return true;
+		}
 		boolean res = false;
 		for (OsmandMapLayer lt : view.getLayers()) {
 			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {

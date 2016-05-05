@@ -188,7 +188,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/recording_note_fragment"/>
+        <include layout="@layout/recording_note_fragment"
+            tools:visibility="gone"/>
+
+        <include layout="@layout/move_marker_bottom_sheet"/>
 
         <LinearLayout
             android:id="@+id/map_context_menu_layout"
