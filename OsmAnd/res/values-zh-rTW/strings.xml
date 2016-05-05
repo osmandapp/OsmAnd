@@ -2184,4 +2184,6 @@
     <string name="follow_us">追蹤我們</string>
     <string name="access_direction_audio_feedback">方向音訊反饋</string>
     <string name="access_direction_audio_feedback_descr">用聲音指示目標點方向</string>
+    <string name="access_direction_haptic_feedback">方向觸感反饋</string>
+    <string name="access_direction_haptic_feedback_descr">由振動指示目標點方向</string>
     </resources>
