@@ -174,10 +174,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		return getMyLocation();
 	}
 
-	@Override
-	public String getObjectDescription(Object o) {
-		return view.getResources().getString(R.string.shared_string_my_location);
-	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {

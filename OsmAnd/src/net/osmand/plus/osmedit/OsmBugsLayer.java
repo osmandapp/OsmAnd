@@ -456,13 +456,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 
-	@Override
-	public String getObjectDescription(Object o) {
-		if (o instanceof OpenStreetNote) {
-			return activity.getString(R.string.osn_bug_name) + ": " + ((OpenStreetNote) o).getCommentDescription(); //$NON-NLS-1$
-		}
-		return null;
-	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {

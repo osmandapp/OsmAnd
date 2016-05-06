@@ -431,11 +431,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		return view.getContext().getString(R.string.shared_string_map);
-	}
-
-	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);

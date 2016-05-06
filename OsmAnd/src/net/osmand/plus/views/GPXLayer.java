@@ -390,14 +390,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		if(o instanceof WptPt){
-			return view.getContext().getString(R.string.gpx_wpt) + " : " + ((WptPt)o).name; //$NON-NLS-1$
-		}
-		return null;
-	}
-	
-	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof WptPt){
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt)o).name); //$NON-NLS-1$

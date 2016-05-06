@@ -146,11 +146,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		return null;
-	}
-
-	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof RouteDataObject) {
 			RouteDataObject route = (RouteDataObject) o;

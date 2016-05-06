@@ -228,20 +228,6 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		return null;
 	}
 	
-	@Override
-	public String getObjectDescription(Object o) {
-		if (o instanceof OsMoDevice) {
-			String d = map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
-			final Location l = ((OsMoDevice) o).getLastLocation();
-			float speed = 0;
-			if(l != null && l.hasSpeed()) {
-				speed = l.getSpeed();
-			}
-			d += "\n"+ OsmAndFormatter.getFormattedSpeed(speed, map.getMyApplication());
-			return d;
-		}
-		return null;
-	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {

@@ -131,11 +131,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		return null;
 	}
 	
-	@Override
-	public String getObjectDescription(Object o) {
-		return plugin.getParkingDescription(map);
-
-	}
 
 	public String getFormattedTime(long time){
 		return plugin.getFormattedTime(time, map);

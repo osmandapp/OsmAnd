@@ -449,13 +449,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		return null;
 	}
 
-	@Override
-	public String getObjectDescription(Object o) {
-		if (o instanceof MapMarker) {
-			return ((MapMarker) o).getPointDescription(view.getContext()).getFullPlainName(view.getContext());
-		}
-		return null;
-	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {

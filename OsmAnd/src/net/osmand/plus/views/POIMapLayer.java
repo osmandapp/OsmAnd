@@ -476,14 +476,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		if (o instanceof Amenity) {
-			return buildPoiInformation(new StringBuilder(), (Amenity) o).toString();
-		}
-		return null;
-	}
-
-	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(

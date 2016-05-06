@@ -130,13 +130,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return true;
 	}
 
-	@Override
-	public String getObjectDescription(Object o) {
-		if(o instanceof Recording){
-			return ((Recording)o).getDescription(view.getContext());
-		}
-		return null;
-	}
 	
 	@Override
 	public PointDescription getObjectName(Object o) {

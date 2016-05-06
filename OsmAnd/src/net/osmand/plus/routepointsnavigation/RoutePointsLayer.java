@@ -53,11 +53,6 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		return null;
-	}
-
-	@Override
 	public PointDescription getObjectName(Object o) {
 		return null;
 	}
