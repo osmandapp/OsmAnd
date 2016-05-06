@@ -261,18 +261,18 @@ public class MapActivityLayers {
 	}
 
 
-	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
+	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		final List<PoiUIFilter> list = new ArrayList<>();
-		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f, true);
 		}
 		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
 			addFilterToList(adapter, list, f, true);
 		}
+		list.add(poiFilters.getCustomPOIFilter());
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -294,8 +294,16 @@ public class MapActivityLayers {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						for (int i = 0; i < listAdapter.getCount(); i++) {
+							ContextMenuItem item = listAdapter.getItem(i);
+								PoiUIFilter filter = list.get(i);
+							if (item.getSelected()) {
+								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
+							} else {
+								getApplication().getPoiFilters().removeSelectedPoiFilter(filter);
+							}
+						}
 						mapView.refreshMap();
-						listener.confirm();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
@@ -312,15 +320,25 @@ public class MapActivityLayers {
 			public void onShow(DialogInterface dialog) {
 				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_singleselect);
-				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+			}
+		});
+		alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				listener.dismiss();
+			}
 		});
 		alertDialog.show();
 	}
 
-	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
+	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.shared_string_search, app)
+				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
@@ -336,7 +354,7 @@ public class MapActivityLayers {
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiUIFilter pf = list.get(which + 1);
+				PoiUIFilter pf = list.get(which);
 				String filterId = pf.getFilterId();
 				if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
 					Intent search = new Intent(activity, SearchActivity.class);
@@ -347,13 +365,12 @@ public class MapActivityLayers {
 					getApplication().getPoiFilters().clearSelectedPoiFilters();
 					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
 					mapView.refreshMap();
-					listener.confirm();
 				}
 			}
 
 		});
 		builder.setTitle(R.string.show_poi_over_map);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_dismiss, null);
 		builder.setNeutralButton(" ", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -366,7 +383,14 @@ public class MapActivityLayers {
 			public void onShow(DialogInterface dialog) {
 				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_multiselect);
-				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+			}
+		});
+		alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				listener.dismiss();
+			}
 		});
 		alertDialog.show();
 	}
@@ -378,18 +402,16 @@ public class MapActivityLayers {
 		list.add(f);
 		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
 		if (multichoice) {
+			builder.setSelected(getApplication().getPoiFilters().isPoiFilterSelected(f));
 			builder.setListener(new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-					if (isChecked) {
-						getApplication().getPoiFilters().addSelectedPoiFilter(f);
-					} else {
-						getApplication().getPoiFilters().removeSelectedPoiFilter(f);
-					}
-					return true;
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
+												  int itemId, int position, boolean isChecked) {
+					ContextMenuItem item = adapter.getItem(position);
+					item.setSelected(isChecked);
+					return false;
 				}
 			});
-			builder.setSelected(getApplication().getPoiFilters().isPoiFilterSelected(f));
 		}
 		builder.setTitle(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
@@ -586,7 +608,7 @@ public class MapActivityLayers {
 		return downloadedRegionsLayer;
 	}
 
-	public interface ConfirmListener {
-		void confirm();
+	public interface DismissListener {
+		void dismiss();
 	}
 }

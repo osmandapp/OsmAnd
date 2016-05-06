@@ -125,18 +125,18 @@ public class ConfigureMapMenu {
 		@Override
 		public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
 			final OsmandSettings settings = ma.getMyApplication().getSettings();
-			final PoiFiltersHelper pfh = ma.getMyApplication().getPoiFilters();
+			final PoiFiltersHelper poiFiltersHelper = ma.getMyApplication().getPoiFilters();
 			final ContextMenuItem item = cm.getItem(pos);
 			if (item.getSelected() != null) {
 				item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				adapter.notifyDataSetChanged();
 			}
 			if (itemId == R.string.layer_poi) {
-				pfh.clearSelectedPoiFilters();
+				poiFiltersHelper.clearSelectedPoiFilters();
 				if (isChecked) {
 					showPoiFilterDialog(adapter, adapter.getItem(pos));
 				} else {
-					adapter.getItem(pos).setDescription(pfh.getSelectedPoiFiltersName());
+					adapter.getItem(pos).setDescription(poiFiltersHelper.getSelectedPoiFiltersName());
 				}
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
@@ -185,18 +185,26 @@ public class ConfigureMapMenu {
 
 		protected void showPoiFilterDialog(final ArrayAdapter<ContextMenuItem> adapter,
 										   final ContextMenuItem item) {
-			ma.getMapLayers().showSingleChoicePoiFilterDialog(ma.getMapView(),
-					new MapActivityLayers.ConfirmListener() {
-						@Override
-						public void confirm() {
-							PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
-							boolean selected = pf.isShowingAnyPoi();
-							item.setSelected(selected);
-							item.setDescription(pf.getSelectedPoiFiltersName());
-							item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-							adapter.notifyDataSetChanged();
-						}
-					});
+			final PoiFiltersHelper poiFiltersHelper = ma.getMyApplication().getPoiFilters();
+			MapActivityLayers.DismissListener dismissListener =
+					new MapActivityLayers.DismissListener() {
+				@Override
+				public void dismiss() {
+					PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
+					boolean selected = pf.isShowingAnyPoi();
+					item.setSelected(selected);
+					item.setDescription(pf.getSelectedPoiFiltersName());
+					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					adapter.notifyDataSetChanged();
+				}
+			};
+			if (poiFiltersHelper.getSelectedPoiFilters().size() > 1) {
+				ma.getMapLayers().showMultichoicePoiFilterDialog(ma.getMapView(),
+						dismissListener);
+			} else {
+				ma.getMapLayers().showSingleChoicePoiFilterDialog(ma.getMapView(),
+						dismissListener);
+			}
 		}
 	}
 
