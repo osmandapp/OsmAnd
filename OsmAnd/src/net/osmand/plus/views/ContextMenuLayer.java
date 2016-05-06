@@ -62,6 +62,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private int previousMarkerX;
 	private int previousMarkerY;
+	private Object selectedObj;
 
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
@@ -163,6 +164,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			activity.getContextMenu().hide();
 			LatLon latLon = tileBox.getCenterLatLon();
 			mMoveMarkerBottomSheetHelper.show(latLon.getLatitude(), latLon.getLongitude());
+
+			view.tryMovingObject(selectedObj);
 			return true;
 		}
 
@@ -199,7 +202,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false);
 		if (selectedObjects.size() == 1) {
-			Object selectedObj = selectedObjects.keySet().iterator().next();
+			selectedObj = selectedObjects.keySet().iterator().next();
 			IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
 			LatLon latLon = null;
 			PointDescription pointDescription = null;

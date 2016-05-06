@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.support.annotation.ColorInt;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -39,7 +40,11 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	private int defaultColor;
 
 	private OsmandSettings settings;
-	
+
+	private LocationPoint objectInMotion;
+	private int objectInMotionX;
+	private int objectInMotionY;
+
 	protected Class<? extends LocationPoint> getFavoriteClass() {
 		return (Class<? extends LocationPoint>) FavouritePoint.class;
 	}
@@ -87,6 +92,10 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (objectInMotion != null) {
+			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), objectInMotion.getColor(), true);
+			fid.drawBitmapInCenter(canvas, objectInMotionX, objectInMotionY);
+		}
 	}
 	
 	@Override
@@ -111,6 +120,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+						@ColorInt
 						int col = o.getColor() == 0 || o.getColor() == Color.BLACK ? defaultColor : o.getColor();
 						paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
 						canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
@@ -121,7 +131,9 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 					}
 				}
 				for (LocationPoint o : fullObjects) {
-					drawPoint(canvas, tileBox, latLonBounds, o);
+					if (o != objectInMotion) {
+						drawPoint(canvas, tileBox, latLonBounds, o);
+					}
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
 				this.smallObjectsLatLon = smallObjectsLatLon;
@@ -142,8 +154,6 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 			int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true);
 			fid.drawBitmapInCenter(canvas, x, y);
-//					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
-//							y - favoriteIcon.getHeight(), paint);
 		}
 	}
 	
@@ -204,7 +214,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 
 	@Override
 	public boolean isObjectClickable(Object o) {
-		return o instanceof LocationPoint;
+		return o instanceof LocationPoint && o != objectInMotion;
 	}
 
 	@Override
@@ -236,8 +246,17 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	public String getText(LocationPoint o) {
 		return PointDescription.getSimpleName(o, view.getContext());
 	}
-	
 
+	@Override
+	public boolean onTryMovingObject(Object selectedObject, RotatedTileBox tileBox) {
+		if (selectedObject instanceof LocationPoint) {
+			objectInMotion = (LocationPoint) selectedObject;
+			objectInMotionX = (int) tileBox.getPixXFromLatLon(objectInMotion.getLatitude(), objectInMotion.getLongitude());
+			objectInMotionY = (int) tileBox.getPixYFromLatLon(objectInMotion.getLatitude(), objectInMotion.getLongitude());
+			return true;
+		}
+		return super.onTryMovingObject(selectedObject, tileBox);
+	}
 }
 
 

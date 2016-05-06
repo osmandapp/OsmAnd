@@ -133,7 +133,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private AccessibilityActionsProvider accessibilityActions;
 
-	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
+	private List<OsmandMapLayer> layers = new ArrayList<>();
 
 	private BaseMapLayer mainLayer;
 
@@ -602,6 +602,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else if (doubleTapScaleDetector.isInZoomMode()) {
 			drawMapPosition(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
 		}
+	}
+
+	public boolean tryMovingObject(Object selectedObject) {
+		for (OsmandMapLayer layer : layers) {
+			if (layer.onTryMovingObject(selectedObject, getCurrentRotatedTileBox())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected void drawMapPosition(Canvas canvas, float x, float y) {

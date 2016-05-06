@@ -52,6 +52,10 @@ public abstract class OsmandMapLayer {
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		return false;
 	}
+	
+	public boolean onTryMovingObject(Object selectedObject, RotatedTileBox tileBox) {
+		return false;
+	}
 
 	public <Params> void executeTaskInBackground(AsyncTask<Params, ?, ?> task, Params... params) {
 		task.execute(params);
