@@ -386,14 +386,7 @@ public class RotatedTileBox {
 		return new QuadPointDouble((tileRB.x *  MapUtils.getPowZoom(zoom - this.zoom)),
 				(tileRB.y *  MapUtils.getPowZoom(zoom - this.zoom)));
 	}
-
-	public float getRatioX() {
-		return pixWidth / cx;
-	}
-
-	public float getRatioY() {
-		return pixHeight / cy;
-	}
+	
 
 	private void checkTileRectangleCalculated() {
 		if(tileBounds == null){
