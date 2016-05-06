@@ -29,6 +29,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MapHelper;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 
 import org.apache.commons.logging.Log;
@@ -169,12 +170,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 			vibrator.vibrate(VIBRATE_SHORT);
 
-			AnimateDraggingMapThread thread = activity.getMapView().getAnimatedDraggingThread();
 			mMarkerLocation = menu.getLatLon();
-			double lat = mMarkerLocation.getLatitude();
-			double lon = mMarkerLocation.getLongitude();
-			int zoom = activity.getMapView().getZoom();
-			thread.startMoving(lat, lon, zoom, true);
+			MapHelper mapHelper = new MapHelper(activity, 132);
+			mapHelper.showOnMap(mMarkerLocation, true);
 
 			return true;
 		}
