@@ -266,13 +266,13 @@ public class MapActivityLayers {
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		final List<PoiUIFilter> list = new ArrayList<>();
-		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f, true);
 		}
 		for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
 			addFilterToList(adapter, list, f, true);
 		}
+		list.add(poiFilters.getCustomPOIFilter());
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -294,6 +294,15 @@ public class MapActivityLayers {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						for (int i = 0; i < listAdapter.getCount(); i++) {
+							ContextMenuItem item = listAdapter.getItem(i);
+								PoiUIFilter filter = list.get(i);
+							if (item.getSelected()) {
+								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
+							} else {
+								getApplication().getPoiFilters().removeSelectedPoiFilter(filter);
+							}
+						}
 						mapView.refreshMap();
 					}
 				})
@@ -393,18 +402,16 @@ public class MapActivityLayers {
 		list.add(f);
 		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
 		if (multichoice) {
+			builder.setSelected(getApplication().getPoiFilters().isPoiFilterSelected(f));
 			builder.setListener(new ContextMenuAdapter.ItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-					if (isChecked) {
-						getApplication().getPoiFilters().addSelectedPoiFilter(f);
-					} else {
-						getApplication().getPoiFilters().removeSelectedPoiFilter(f);
-					}
-					return true;
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
+												  int itemId, int position, boolean isChecked) {
+					ContextMenuItem item = adapter.getItem(position);
+					item.setSelected(isChecked);
+					return false;
 				}
 			});
-			builder.setSelected(getApplication().getPoiFilters().isPoiFilterSelected(f));
 		}
 		builder.setTitle(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
