@@ -321,6 +321,9 @@ public class MapActivityLayers {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.shared_string_search, app)
+				.setIcon(R.drawable.ic_action_search_dark).createItem());
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
@@ -336,7 +339,7 @@ public class MapActivityLayers {
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiUIFilter pf = list.get(which + 1);
+				PoiUIFilter pf = list.get(which);
 				String filterId = pf.getFilterId();
 				if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
 					Intent search = new Intent(activity, SearchActivity.class);
