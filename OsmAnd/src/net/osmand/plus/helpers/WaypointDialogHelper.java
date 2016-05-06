@@ -618,9 +618,9 @@ public class WaypointDialogHelper {
 					thisAdapter.notifyDataSetInvalidated();
 					MapActivity map = (MapActivity) ctx;
 					map.getMapLayers().showSingleChoicePoiFilterDialog(map.getMapView(),
-							new MapActivityLayers.ConfirmListener() {
+							new MapActivityLayers.DismissListener() {
 								@Override
-								public void confirm() {
+								public void dismiss() {
 									enableType(running, thisAdapter, type, true);
 								}
 							});
@@ -692,9 +692,9 @@ public class WaypointDialogHelper {
 				!app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.CUSTOM_FILTER_ID)) {
 			MapActivity map = (MapActivity) ctx;
 			map.getMapLayers().showSingleChoicePoiFilterDialog(map.getMapView(),
-					new MapActivityLayers.ConfirmListener() {
+					new MapActivityLayers.DismissListener() {
 						@Override
-						public void confirm() {
+						public void dismiss() {
 							if (app.getPoiFilters().isShowingAnyPoi()) {
 								enableType(running, listAdapter, type, enable);
 							}

@@ -261,7 +261,7 @@ public class MapActivityLayers {
 	}
 
 
-	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
+	public void showMultichoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -295,7 +295,6 @@ public class MapActivityLayers {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						mapView.refreshMap();
-						listener.confirm();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
@@ -312,12 +311,19 @@ public class MapActivityLayers {
 			public void onShow(DialogInterface dialog) {
 				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_singleselect);
-				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+			}
+		});
+		alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				listener.dismiss();
+			}
 		});
 		alertDialog.show();
 	}
 
-	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final ConfirmListener listener) {
+	public void showSingleChoicePoiFilterDialog(final OsmandMapTileView mapView, final DismissListener listener) {
 		final OsmandApplication app = getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -350,13 +356,12 @@ public class MapActivityLayers {
 					getApplication().getPoiFilters().clearSelectedPoiFilters();
 					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
 					mapView.refreshMap();
-					listener.confirm();
 				}
 			}
 
 		});
 		builder.setTitle(R.string.show_poi_over_map);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_dismiss, null);
 		builder.setNeutralButton(" ", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -369,7 +374,14 @@ public class MapActivityLayers {
 			public void onShow(DialogInterface dialog) {
 				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_multiselect);
-				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);			}
+				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+			}
+		});
+		alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				listener.dismiss();
+			}
 		});
 		alertDialog.show();
 	}
@@ -589,7 +601,7 @@ public class MapActivityLayers {
 		return downloadedRegionsLayer;
 	}
 
-	public interface ConfirmListener {
-		void confirm();
+	public interface DismissListener {
+		void dismiss();
 	}
 }
