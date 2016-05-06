@@ -14,6 +14,7 @@ import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
@@ -155,7 +156,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (obj != null && isObjectMoveable(obj)) {
 				Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 				vibrator.vibrate(VIBRATE_SHORT);
-				mInChangeMarkerPositionMode = true;
+				
 				activity.getContextMenu().hide();
 				LatLon ll = menu.getLatLon();
 				RotatedTileBox rb = new RotatedTileBox(tileBox);
@@ -164,7 +165,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				view.setLatLon(lat, lon);
-				mMoveMarkerBottomSheetHelper.show(menu.getLeftIcon());
+				enterMovingMode();
+				view.refreshMap();
+
 				return true;
 			}
 			return false;
@@ -175,6 +178,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return true;
 	}
 	
+	
+
 	public PointF getMoveableCenterPoint(RotatedTileBox tb) {
 		return new PointF(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
 	}
@@ -211,19 +216,41 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (!mInChangeMarkerPositionMode) {
 			throw new IllegalStateException("Not in change marker position mode");
 		}
-		mInChangeMarkerPositionMode = false;
-		
+		Object obj = getMoveableObject();
+		quitMovingMarker();
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
 		PointF newMarkerPosition = getMoveableCenterPoint(tileBox);
 		LatLon ll = tileBox.getLatLonFromPixel(newMarkerPosition.x, newMarkerPosition.y);
-		applyMovedObject(getMoveableObject(), ll);
+		applyMovedObject(obj, ll);
 		// TODO pass object properly
 		showContextMenu(newMarkerPosition, tileBox, true);
 		view.refreshMap();
 	}
 
-	public void cancelMovingMarker() {
+	private void quitMovingMarker() {
 		mInChangeMarkerPositionMode = false;
+		mark(View.VISIBLE, R.id.map_menu_button, R.id.map_route_info_button, R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+	}
+	
+	private void enterMovingMode() {
+		mInChangeMarkerPositionMode = true;
+		mMoveMarkerBottomSheetHelper.show(menu.getLeftIcon());
+		mark(View.INVISIBLE, R.id.map_menu_button, R.id.map_route_info_button, R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+	}
+
+	private void mark(int status, int... widgets) {
+		for(int i = 0; i < widgets.length ; i++) {
+			View v = activity.findViewById(widgets[i]);
+			if(v != null) {
+				v.setVisibility(status);
+			}
+		}
+	}
+
+	public void cancelMovingMarker() {
+		quitMovingMarker();
 		activity.getContextMenu().show();
 	}
 
