@@ -1554,8 +1554,8 @@
     <string name="fav_point_emoticons_message">A kedvenc hely neve módosítva lett erre: %1$s, lehetővé téve a hangulatjeleket tartalmazó szöveg fájlba mentését.</string>
     <string name="print_route">Útvonal nyomtatása</string>
     <string name="osmo_device_not_found">Eszköz nem található</string>
-    <string name="osmo_no_connection_msg">Az OsMo szolgáltatás nem érhető el:\n- ellenőrizze a kapcsolatot;\n- ellenőrizze a beállításokat;\n- nézzen rá a Twitterünkre: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Egy anonim felhasználó nem tud:\n- csoportot létrehozni;\n- csoportokat és eszközöket szinkronizálni a kiszolgálóval;\n- csoportokat és eszközöket kezelni egy kabinetben.</string>
+    <string name="osmo_no_connection_msg">Nem sikerült csatlakozni az OsMo szerverhez:\n- ellenőrizze az internetkapcsolatot;\n- ellenőrizze a beállításokat;\n- nézzen rá a Twitterünkre: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Egy anonim felhasználó nem tud:\n- csoportot létrehozni;\n- csoportokat és eszközöket szinkronizálni a kiszolgálóval;\n- csoportokat és eszközöket kezelni egy személyes beállítási felületen a weboldalon.</string>
     <string name="anonymous_user">Anonim felhasználó</string>
     <string name="logged_as">Bejelentkezve mint %1$s</string>
 
@@ -2011,7 +2011,7 @@
 	
     <string name="context_menu_item_delete_waypoint">Törlöd a GPX útpontot?</string>
     <string name="context_menu_item_edit_waypoint">GPX útpont szerkesztése</string>
-    <string name="shared_string_location">Cím</string>
+    <string name="shared_string_location">Pozíció</string>
     <string name="rendering_attr_currentTrackColor_description">GPX szín</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX vastagság</string>
     <string name="rendering_attr_roadStyle_description">Útstílus</string>
@@ -2163,7 +2163,7 @@
     <string name="rec_split_storage_size_desc">Az összes klipp által elfoglalható hely</string>
     <string name="no_map_markers_found">Kérlek, vegyél fel jelölőket a térképen</string>
     <string name="no_waypoints_found">Nem találhatók útpontok</string>
-    <string name="map_widget_bearing">Irány</string>
+    <string name="map_widget_bearing">Relatív irány</string>
     <string name="access_disable_offroute_recalc_descr">Megakadályozza az automatikus újratervezést, ha túl távol vagy a helyes úttól</string>
     <string name="access_disable_wrong_direction_recalc_descr">Megakadályozza az automatikus újratervezést, ha rossz irányba mész</string>
     <string name="access_default_color">Alapértelmezett szín</string>
@@ -2186,4 +2186,11 @@
     <string name="rendering_value_medium_name">Közepes</string>
     <string name="rendering_value_bold_name">Vastag</string>
     <string name="shared_string_widgets">Vezérlőgomb</string>
+    <string name="follow_us">Kövess minket</string>
+    <string name="use_osm_live_routing">OSM Live navigáció</string>
+    <string name="use_osm_live_routing_description">Navigáció engedélyezése az élő frissítéseken (Beta)</string>
+	<string name="map_widget_magnetic_bearing">Mágneses irány</string>
+    <string name="access_disable_offroute_recalc">Ne tervezzen újra, ha letérsz az útról</string>
+    <string name="access_disable_wrong_direction_recalc">Ne tervezzen újra, ha rossz irányba mész</string>
+    <string name="access_no_destination">Nincs beállítva cél</string>
     </resources>
