@@ -186,7 +186,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public boolean isObjectMoveable(Object o) {
 		for (OsmandMapLayer lt : view.getLayers()) {
-			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
+			if (lt instanceof ContextMenuLayer.IMoveObjectProvider) {
 				final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) lt;
 				if(l.isObjectMoveable(o)) {
 					return true;
@@ -198,7 +198,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public void applyMovedObject(Object o, LatLon position) {
 		for (OsmandMapLayer lt : view.getLayers()) {
-			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
+			if (lt instanceof ContextMenuLayer.IMoveObjectProvider) {
 				final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) lt;
 				if(l.isObjectMoveable(o)) {
 					l.applyNewObjectPosition(o, position);
