@@ -1520,7 +1520,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_settings_descr">Налаштування параметрів моніторингу та встановлення персонального каналу моніторингу</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_plugin_description">"Цей втулок частково надає можливості OpenStreetMap Monitoring, дивіться https://osmo.mobi\n\nВи можете відстежувати пристрої учасників з вашої групи в поточному часі. Також, ви можете бачити точки та треки завантажені в групу, до якої ви належите.
-\n\nГрупи, що не були вилучені вродовж місяців, повині привести свій стан у відповідність до груп створених на сайті OsMo.mobi "</string>
+\n\nГрупи, що не були вилучені впродовж місяців, повинні привести свій стан у відповідність до груп створених на сайті OsMo.mobi "</string>
     <string name="osmo_plugin_name">OpenStreetMap моніторинг</string>
    	<string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
     <string name="voice_pref_title">Голос</string>
@@ -2311,7 +2311,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="upload_anonymously">Вивантажено анонімно</string>
     <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
     <string name="report">Звіт</string>
-    <string name="use_osm_live_routing_description">Ввімкнути навігацію для змін OSM Live (Beta)</string>
+    <string name="use_osm_live_routing_description">Увімкнути навігацію для змін OSM Live (Beta)</string>
 	<string name="use_osm_live_routing">Навігація OSM Live</string>
     <string name="access_no_destination">Пункт призначення не встановлено</string>
     <string name="map_widget_magnetic_bearing">Магнітний пеленг</string>
@@ -2376,4 +2376,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="upload_osm_note_description">Ви можете додати Нотатку в OSM анонімно, або скориставшись вашим обліковим записом на OpenStreetMap.org.</string>
     <string name="upload_osm_note">Надіслати Нотатку OSM</string>
     <string name="file_name_containes_illegal_char">Назва файлу містить неприпустимі символи</string>
-</resources>
+<string name="follow_us">Слідуйте за нами</string>
+    <string name="access_direction_audio_feedback">Звукова ідентифікація напрямку</string>
+    <string name="access_direction_audio_feedback_descr">Ініціювати звуком напрям на цільову точку</string>
+    <string name="access_direction_haptic_feedback">Напрям тактильного зворотнього звязку</string>
+    <string name="access_direction_haptic_feedback_descr">Показати вібрацією напрям на цільову точку</string>
+    </resources>

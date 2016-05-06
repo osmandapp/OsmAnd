@@ -2179,4 +2179,18 @@
     <string name="access_widget_expand">Ismànnia</string>
     <string name="access_shared_string_navigate_up">Nàviga in subra</string>
     <string name="access_sort">Òrdina</string>
+    <string name="follow_us">Sighi·nos</string>
+    <string name="use_osm_live_routing_description">Allue su nàvigu OSM Live cun sas mòdìficas in tempus reale (Beta)</string>
+	<string name="use_osm_live_routing">Nàvigu OSM Live</string>
+    <string name="access_no_destination">Destinatzione non definida</string>
+    <string name="map_widget_magnetic_bearing">Bùssola magnètica</string>
+    <string name="map_widget_bearing">Bùssola relativa</string>
+    <string name="access_disable_offroute_recalc">Non cambiare s\'àndala si ses a fora de s\'istrada</string>
+    <string name="access_disable_offroute_recalc_descr">Èvita su ricàlculu de s\'àndala cando ses meda indedda dae s\'istrada giusta</string>
+    <string name="access_disable_wrong_direction_recalc">Non cambiare s\'àndala si sa diretzione est isballiada</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Èvita su ricàlculu automàticu de s\'àndala si ti ses moende in sa diretzione isballiada</string>
+    <string name="access_smart_autoannounce">Annùntziu automàticu intelligente</string>
+    <string name="access_smart_autoannounce_descr">Notìfica petzi cando sa diretzione cara a sa destinatzione est cambiada</string>
+    <string name="access_autoannounce_period">Intervallu de annùntziu automàticu</string>
+    <string name="access_autoannounce_period_descr">Tempus mìnimu intre sos annùntzios</string>
     </resources>

@@ -114,7 +114,7 @@
   <string name="free_version_message">Deze gratis versie van OsmAnd is beperkt tot %1$s downloads en ondersteunt geen offline Wikipedia artikelen.</string>
   <string name="free_version_title">Gratis versie</string>
   <string name="poi_context_menu_showdescription">Toon interessepunt-beschrijvingen</string>
-  <string name="index_name_north_america">Noord Amerika</string>
+  <string name="index_name_north_america">Noord-Amerika</string>
   <string name="index_name_us">Noord Amerika - Verenigde Staten</string>
   <string name="index_name_central_america">Centraal Amerika</string>
   <string name="index_name_south_america">Zuid Amerika</string>
@@ -159,7 +159,7 @@
   
   
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
-  <string name="download_files_question_space">{0} bestand(en) downloaden? Hiervoor is {1} MB vrije ruimte nodig. Er is nu {2} MB beschikbaar!</string>
+  <string name="download_files_question_space">{0} bestand(en) downloaden? Deze beslaan {1} MB opslagruimte. Er is nu {2} MB beschikbaar.</string>
   
   
   <string name="use_transparent_map_theme">Transparant thema</string>
@@ -213,7 +213,7 @@
   <string name="show_more_map_detail_descr">Toon sommige vectorkaartdetails (wegen enz.) al op lager zoomniveau</string>
   <string name="favourites_delete_multiple_succesful">Favoriet(en) succesvol verwijderd.</string>
   <string name="favorite_delete_multiple">%1$d favorieten en %2$d groepen verwijderen?</string>
-  <string name="favorite_home_category">Dashboard</string>
+  <string name="favorite_home_category">Thuis</string>
   <string name="favorite_friends_category">Vrienden</string>
   <string name="favorite_places_category">Plaatsen</string>
   
@@ -231,7 +231,7 @@
   <string name="local_index_items_deleted">%1$d van %2$d bestanden succesvol verwijderd.</string>
   <string name="local_index_items_restored">%1$d van %2$d bestanden succesvol geactiveerd.</string>
   <string name="local_index_no_items_to_do">Voor %1$s: geen bestanden</string>
-  <string name="local_index_action_do">%1$s: %2$s bestanden. Doorgaan?</string>
+  <string name="local_index_action_do">U gaat %2$s bestanden %1$s. Doorgaan?</string>
   <string name="local_index_descr_title">Kaartbeheer</string>
   <string name="local_index_mi_restore">Activeer</string>
   <string name="local_index_mi_backup">Deactiveer</string>
@@ -511,7 +511,7 @@
   <string name="route_head">Volg</string>
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
-  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\') of deze zelf aanmaken. Daarna kan je de kaart bekijken, navigeren en adressen, interessepunten en openbaar vervoer opzoeken.</string>
+  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\'). Daarna kan je navigeren, de kaart bekijken, en adressen, interessepunten en openbaar vervoer opzoeken.</string>
   <string name="search_poi_location">Naar signaal zoeken…</string>
   <string name="search_near_map">Zoek bij het midden van de kaart</string>
   <string name="search_nearby">Zoek dichtbij</string>
@@ -956,7 +956,7 @@
 
     <string name="context_menu_item_last_intermediate_point">Als laatste Tussenpunt toevoegen</string>
     <string name="context_menu_item_first_intermediate_point">Als eerste Tussenpunt toevoegen</string>
-    <string name="add_as_last_destination_point">Als laatste Tussenpunt toevoegen</string>
+    <string name="add_as_last_destination_point">Als laatste tussenpunt toevoegen</string>
     <string name="add_as_first_destination_point">Als eerste Tussenpunt toevoegen</string>
     <string name="replace_destination_point">Bestemming vervangen</string>
     <string name="new_destination_point_dialog">Er is al een Bestemming gekozen.</string>
@@ -1207,7 +1207,7 @@
 	
     <string name="base_world_map">Basis-wereldkaart</string>
     <string name="map_magnifier">Kaartvergrootglas</string>
-    <string name="route_is_too_long">"De afstand tot de bestemming is meer dan 200 km. De routeberekening kan hierdoor erg lang duren (of zelfs  mislukken). Door Tussenpunten toe te voegen, wordt de routeberekening sneller."</string>
+    <string name="route_is_too_long">"De afstand tot de bestemming is meer dan 200 km. De routeberekening kan hierdoor erg lang duren (of zelfs  mislukken). Door tussenpunten toe te voegen, wordt de routeberekening sneller."</string>
     <string name="auto_zoom_none">Geen automatische zoom</string>
     <string name="auto_zoom_close">Zoom naar close-up</string>
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
@@ -1392,7 +1392,7 @@
     <string name="osmo_enable_tracker">Verstuur mijn posities</string>
     <string name="osmo_control">OsMo snelle toegang</string>
     
-	<string name="import_file_favourites">Gegevens als GPX-bestand opslaan of importeren naar Favorieten?</string>
+	<string name="import_file_favourites">Gegevens als GPX-bestand opslaan of importeren naar favorieten?</string>
 	
 	
 	<string name="rendering_value_pink_name">Roze</string>
@@ -1449,7 +1449,7 @@
     <string name="loading_smth">Laad %1$s…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Kies Bestemmingen</string>
-    <string name="layer_amenity_label">Namen van Interessepunten</string>
+    <string name="layer_amenity_label">Namen van interessepunten</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie automatisch</string>
@@ -1982,7 +1982,7 @@
     <string name="shared_string_others">Overige</string>
 	<string name="favourites_context_menu_add">Favoriet toevoegen</string>
 	<string name="poi_action_delete">wissen</string>
-	<string name="dahboard_options_dialog_title">Configureer dashboard</string>
+	<string name="dahboard_options_dialog_title">Dashboard instellen</string>
 	<string name="show_on_start">Na opstarten tonen</string>
 	<string name="shared_string_card_was_hidden">Kaart was verborgen</string>
 	<string name="shared_string_undo">Ongedaan maken</string>
@@ -1994,7 +1994,7 @@
 	<string name="tab_title_advanced">Geavanceerd</string>
 	<string name="building_number">Huisnummer</string>
 	<string name="next_proceed">Volgende</string>
-	<string name="opening_at">Open vanaf</string>
+	<string name="opening_at">Open van</string>
 	<string name="closing_at">Sluit om</string>
 	<string name="contact_info">Contact</string>
 	<string name="description">Omschrijving</string>
@@ -2076,7 +2076,7 @@
 	<string name="osn_close_dialog_error">Er was een probleem: notitie is niet afgesloten</string>
 	<string name="osm_save_offline">Bewaar voor off-line gebruik</string>
     
-    <string name="dashboard_or_drawer_description">Kies tussen het flexibele dashboard of een vast menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
+    <string name="dashboard_or_drawer_description">Kies tussen het flexibele Dashboard of een vast Menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
     <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Mogelijkheid menu te gebruiken in plaats van het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer… "</string>
     <string name="shared_string_commit">Bijdrage versturen</string>
@@ -2093,11 +2093,11 @@
     <string name="save_poi_without_poi_type_message">Deze POI echt bewaren zonder het type aan te geven?</string>
     <string name="poi_context_menu_modify_osm_change">Verander OSM-wijziging</string>
     
-    <string name="dashboard_or_drawer_title">Kies tussen dashboard of menu</string>
+    <string name="dashboard_or_drawer_title">Kies tussen Dashboard of Menu</string>
     <string name="please_specify_poi_type_only_from_list">Geef het juiste type POI of sla dit over</string>
     <string name="access_from_map_description">Menu-knop opent dashboard in plaats van menu</string>
     <string name="access_from_map">Openen vanaf de kaart</string>
-    <string name="use_dashboard_btn">Gebruik dashboard</string>
+    <string name="use_dashboard_btn">Dashboard gebruiken</string>
     <string name="use_drawer_btn">Gebruik menu</string>
     <string name="routing_attr_avoid_stairs_name">Vermijd trappen</string>
 	<string name="routing_attr_avoid_stairs_description">Vermijd trappen</string>
@@ -2183,7 +2183,7 @@
     <string name="osm_editors_ranking">OSM-Bijdragers Ranglijst</string>
     <string name="osm_live_subscription">OSM Live abonnement</string>
     <string name="osm_live_subscribe_btn">Abonneren</string>
-    <string name="osm_live_email_desc">Om je op de hoogte te houden over je abonnement</string>
+    <string name="osm_live_email_desc">Dit is nodig om je op de hoogte te houden over je abonnement</string>
     <string name="osm_live_user_public_name">Openbare Naam</string>
     <string name="osm_live_hide_user_name">Mijn naam niet tonen in verslagen</string>
     <string name="osm_live_support_region">Ondersteunde regio</string>
@@ -2271,4 +2271,9 @@
     <string name="map_widget_magnetic_bearing">Magnetische koers</string>
     <string name="use_osm_live_routing_description">OSM Live Updates gebruiken bij navigatie (Beta)</string>
 	<string name="use_osm_live_routing">OSM Live navigatie</string>
+    <string name="follow_us">Volg ons</string>
+    <string name="access_direction_audio_feedback">Richting aangeven met geluid</string>
+    <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid</string>
+    <string name="access_direction_haptic_feedback">Richting aangeven met trilling</string>
+    <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen</string>
     </resources>

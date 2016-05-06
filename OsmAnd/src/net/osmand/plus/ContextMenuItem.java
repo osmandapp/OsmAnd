@@ -142,6 +142,10 @@ public class ContextMenuItem {
 		return integerListener;
 	}
 
+	public boolean shouldSkipPainting() {
+		return skipPaintingWithoutColor;
+	}
+
 	public boolean shouldHideDivider() {
 		return hideDivider;
 	}
@@ -194,7 +198,7 @@ public class ContextMenuItem {
 		private int mLayout = INVALID_ID;
 		private boolean mLoading = false;
 		private boolean mIsCategory = false;
-		private int mPosition = INVALID_ID;
+		private int mPosition = -1;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;

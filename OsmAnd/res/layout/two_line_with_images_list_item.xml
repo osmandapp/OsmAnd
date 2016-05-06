@@ -15,7 +15,7 @@
         android:paddingLeft="@dimen/list_content_padding">
 
         <ImageView
-            android:id="@+id/leftImageView"
+            android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
@@ -65,7 +65,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/rightImageButton"
+            android:id="@+id/secondaryIcon"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"

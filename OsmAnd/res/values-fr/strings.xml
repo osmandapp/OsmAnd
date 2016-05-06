@@ -2215,4 +2215,5 @@
     <string name="access_disable_wrong_direction_recalc">Ignorer les écarts de direction</string>
     <string name="use_osm_live_routing_description">Activer la navigation OSM Live prenant en comptes les modifications en temps réel (Bêta)</string>
 	<string name="use_osm_live_routing">Navigation OSM Live</string>
+    <string name="follow_us">Suivez nous</string>
     </resources>

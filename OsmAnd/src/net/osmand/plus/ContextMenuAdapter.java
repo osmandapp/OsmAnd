@@ -55,7 +55,11 @@ public class ContextMenuAdapter {
 	}
 
 	public void addItem(ContextMenuItem item) {
-		items.add(item);
+		try {
+			items.add(item.getPos(), item);
+		} catch (IndexOutOfBoundsException ex) {
+			items.add(item);
+		}
 	}
 
 	public ContextMenuItem getItem(int position) {
@@ -182,10 +186,10 @@ public class ContextMenuAdapter {
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 					int colorRes = item.getColorRes();
-					if (colorRes == ContextMenuItem.INVALID_ID) {
+					if (colorRes == ContextMenuItem.INVALID_ID && !item.shouldSkipPainting()) {
 						colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
 					}
-					Drawable drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
+					final Drawable drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (convertView.findViewById(R.id.icon) != null) {
@@ -290,12 +294,13 @@ public class ContextMenuAdapter {
 					dividerView.setVisibility(View.VISIBLE);
 				}
 			}
-			return convertView;
-		}
 
-		@Override
-		public boolean isEnabled(int position) {
-			return !getItem(position).isCategory();
+			if (item.isCategory()) {
+				convertView.setFocusable(false);
+				convertView.setClickable(false);
+			}
+
+			return convertView;
 		}
 	}
 

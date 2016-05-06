@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -99,12 +100,17 @@ public class TextInfoWidget  {
 		return isNight;
 	}
 
-	public void setContentDescription(CharSequence text) {
-		if (contentTitle != null) {
-			view.setContentDescription(contentTitle + " " + text); //$NON-NLS-1$
-		} else { 
-			view.setContentDescription(text);
+	private CharSequence combine(CharSequence text, CharSequence subtext) {
+		if (TextUtils.isEmpty(text)) {
+			return subtext;
+		} else if (TextUtils.isEmpty(subtext)) {
+			return text;
 		}
+		return text + " " + subtext; //$NON-NLS-1$
+	}
+
+	public void setContentDescription(CharSequence text) {
+		view.setContentDescription(combine(contentTitle, text));
 	}
 	
 	public void setContentTitle(int messageId) {
@@ -113,7 +119,7 @@ public class TextInfoWidget  {
 
 	public void setContentTitle(String text) {
 		contentTitle = text;
-		view.setContentDescription(text);
+		setContentDescription(combine(textView.getText(), smallTextView.getText()));
 	}
 	
 	public void setText(String text, String subtext) {
@@ -122,15 +128,7 @@ public class TextInfoWidget  {
 	}
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
-		if (text != null) {
-			if (subtext != null) {
-				setContentDescription(text + " " + subtext); //$NON-NLS-1$
-			} else {
-				setContentDescription(text);
-			}
-		} else if(subtext != null){
-			setContentDescription(subtext);
-		}
+		setContentDescription(combine(text, subtext));
 //		if(this.text != null && this.text.length() > 7) {
 //			this.text = this.text.substring(0, 6) +"..";
 //		}

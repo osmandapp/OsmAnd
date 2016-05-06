@@ -1969,7 +1969,7 @@
 	<string name="poi_entrance_exit">Выход</string>
 	<string name="poi_highway_crossing">Пешеходный переход</string>
 
-	<string name="poi_vk">ВКонтакте</string>
+	<string name="vk">ВКонтакте</string>
 
 	<string name="poi_content_silage">Содержимое: силос</string>
 	<string name="poi_content_water">Содержимое: вода</string>
@@ -2372,8 +2372,8 @@
 	<string name="poi_boat_storage">Место для хранения лодок</string>
 
 	<string name="poi_kissing_gate">Калитка</string>
-	<string name="poi_facebook">Фейсбук</string>
-	<string name="poi_twitter">Твиттер</string>
+	<string name="facebook">Фейсбук</string>
+	<string name="twitter">Твиттер</string>
 	<string name="poi_skype">Скайп</string>
 	<string name="poi_garden_style_kitchen">Стиль сада: кухня</string>
 	<string name="poi_toilets_access_community">Туалет: общественный</string>

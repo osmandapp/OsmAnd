@@ -720,7 +720,7 @@
 	<string name="layer_hillshade">Tepe gölgesi katmanı</string>
     <string name="map_widget_fps_info">FPS hata ayıklama bilgisi</string>
 	<string name="driving_region_descr">Sürüş bölgeyi seçin: ABD Avrupa, İngiltere, Asya ve Diğerleri</string>
-	<string name="driving_region">Sürüş Bölgesi</string>
+	<string name="driving_region">Araba sürme alanı</string>
 	<string name="driving_region_japan">Japonya</string>
 	<string name="driving_region_us">Amerika</string>
 	<string name="driving_region_canada">Kanada</string>
@@ -1319,7 +1319,7 @@
     <string name="disable_recording_once_app_killed">Tek başına günlüğe eklemeyi önle</string>
     <string name="disable_recording_once_app_killed_descrp">Uygulama kapatılırsa (son uygulamalardan) GPX iz kaydına ara verilecektir. (OsmAnd Uyku modu simgesi Bildirim alanından kaybolur)</string>
     
-    <string name="routing_attr_avoid_shuttle_train_name">Mekik treninden kaçın</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Aynı hatta gidip gelen trenden sakın</string>
 	<string name="local_indexes_cat_wiki">Vikipedi</string>
     <string name="osm_edit_context_menu_delete">OSM düzeltmesini sil</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Rota kapsamına göre Boyama</string>
@@ -1397,7 +1397,7 @@
     <string name="lang_als">Arnavut (Tosk)</string>
     <string name="read_more">Daha fazla oku</string>
     <string name="whats_new">Yenilikler neler:</string>
-    <string name="rendering_attr_hideProposed_name">Önerilen nesneleri gizlemek</string>
+    <string name="rendering_attr_hideProposed_name">Önerilen nesneler</string>
     <string name="shared_string_update">Güncelleştirme</string>
     <string name="shared_string_upload">Yükleme</string>
     <string name="osm_edit_created_poi">OSM POI oluşturmak</string>
@@ -1738,7 +1738,7 @@
     <string name="index_item_world_seamarks">Dünya seamarks</string>
     <string name="osmo_connect_to_device">Cihazla bağlantı</string>
     <string name="osmo_connect_to_group">Grubu ile bağlantı</string>
-    <string name="osmo_connect">Bağlanmak</string>
+    <string name="osmo_connect">Katıl</string>
     <string name="osmo_create_group">Grup oluştur</string>
     <string name="osmo_server_operation_failed">OSMO Sunucu işlemi başarısız oldu</string>
     <string name="osmo_activity">OpenStreetMap İzleme</string>
@@ -1751,8 +1751,8 @@
     <string name="osmo_groups">OsMo Grupları / Aygıtlar</string>
     <string name="osmo_auto_send_locations_descr">Uygulama başladığında otomatik olarak gezintiyi başlat ve lokasyonları gönder</string>
     <string name="osmo_auto_send_locations">Otomatik olarak gezinti oturumu başlatın</string>
-    <string name="osmo_tracker_id">Kişisel izci kimliği</string>
-    <string name="osmo_tracker_id_descr">Görüntülemek veya izci kimliği paylaşmak için tıklayınız. Izci kimliği bağlı cihazlar kullanarak bu cihazın tüm hareketlerini izlemek mümkün olacak! Select Regenerate seçeneği kesmek için.</string>
+    <string name="osmo_tracker_id">İzleyici Kimliği</string>
+    <string name="osmo_tracker_id_descr">İzleyici kimliğini incelemek için tıkla</string>
     <string name="osmo_group_policy">Politika</string>
     <string name="osmo_connect_to_device_tracker_id">Yolcu kimliği</string>
     <string name="osmo_connect_to_device_name">Kullanıcı adı</string>
@@ -1841,7 +1841,7 @@
     <string name="si_kmh">Saatte kilometre</string>
     <string name="si_min_m">Mil başına Dakika</string>
     <string name="si_nm_h">Saatte deniz mili (düğüm)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">deniz mili/saat</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -1972,7 +1972,7 @@
     <string name="gpx_monitoring_start">GPX günlüğü başlat</string>
     <string name="gpx_monitoring_stop">Dur GPX günlüğü</string>
     <string name="gpx_start_new_segment">Yeni bir segment başlat</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Olmayan araç otoyolları gizle</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ahşap ve scrubs gizle</string>
     <string name="rendering_attr_buildings15zoom_name">Binalar üzerinde yakınlaştırma 15</string>
     <string name="rendering_attr_hideAccess_name">Erişim kısıtlamaları</string>
@@ -2051,7 +2051,7 @@
     <string name="shared_string_toolbar">Araç çubuğu</string>
     <string name="shared_string_widgets">widget\'ler</string>
     <string name="add_points_to_map_markers_q">İşaretlerini eşlemek için tüm noktaları eklemek istiyor musunuz?</string>
-    <string name="shared_string_add_to_map_markers">Harita işaretleyicilerine ekleyin</string>
+    <string name="shared_string_add_to_map_markers">Harita belirteçleri ekle</string>
     <string name="select_map_markers">Harita işaretleyicilerini seçin</string>
     <string name="shared_string_reverse_order">Ters sırada</string>
     <string name="show_map_markers_description">Harita işaretleri özelliğini etkinleştirmek</string>
@@ -2124,6 +2124,6 @@
     <string name="rendering_value_bold_name">Kalın</string>
     <string name="storage_permission_restart_is_required">Şimdi uygulamaya harici kayıt yerine yazma izni verildi. Elle uygulamanın baştan başlatılması gereklidir.</string>
     <string name="full_report">Full rapor</string>
-    <string name="open_street_map_login_and_pass">OpenStreetMap login and password</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap oturum açma ve parola</string>
     <string name="file_name_containes_illegal_char">Dosya adı uygunsuz karakter içeriyor</string>
 </resources>

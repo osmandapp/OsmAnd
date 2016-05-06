@@ -966,7 +966,7 @@
 
 	<string name="poi_email">E-mail</string>
 	<string name="poi_fax">Fax</string>
-	<string name="poi_facebook">Facebook</string>
+	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Mobiltelefon</string>
 	<string name="poi_animal_shelter_dog">Internat: hund</string>
 	<string name="poi_animal_shelter_cat">Internat: kat</string>
@@ -1060,11 +1060,11 @@
 	<string name="poi_crossing_unmarked">Ikke markeret</string>
 
 	<string name="poi_mill_pond">Mølledam</string>
-	<string name="poi_twitter">Twitter</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">Parfumeri</string>
 
@@ -2916,10 +2916,10 @@
 	<string name="poi_fire_hydrant_position_street">Brandhane placering: gaden</string>
 	<string name="poi_fire_hydrant_position_underground">Brandhane placering: under jorden</string>
 	<string name="poi_fire_hydrant_style_wsh">Brandhane stil: wsh</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Brandhane vandforsyning: primær</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Brandhane vandforsyning dam</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Brandhane vandforsyning: bæk</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhane vandforsyning: cisterne</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Brandhane vandforsyningskilde: primær</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Brandhane vandforsyningskilde: dam</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Brandhane vandforsyningskilde: vandløb</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhane vandforsyningskilde: cisterne</string>
 	<string name="poi_in_service_yes">I tjeneste: ja</string>
 
 <string name="poi_street_cabinet_power">Gadeskabstype: eldistribution</string>

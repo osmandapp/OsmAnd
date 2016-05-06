@@ -2171,4 +2171,9 @@
     <string name="access_no_destination">No se fijó el destino</string>
     <string name="use_osm_live_routing_description">Activa la navegación para cambios con OSM Live (Beta)</string>
 	<string name="use_osm_live_routing">Navegación OSM Live</string>
+    <string name="follow_us">Síguenos</string>
+    <string name="access_direction_audio_feedback">Dirección de retroalimentación auditiva</string>
+    <string name="access_direction_audio_feedback_descr">Indica el punto de dirección del destino mediante sonido</string>
+    <string name="access_direction_haptic_feedback">Dirección de retroalimentación háptica</string>
+    <string name="access_direction_haptic_feedback_descr">Indica el punto de dirección del destino mediante vibración</string>
     </resources>

@@ -1331,7 +1331,7 @@
 
     <string name="osmo_auto_send_locations_descr">Po uruchomieniu aplikacji automatycznie uruchom trackera i przesyłaj pozycję</string>
     <string name="osmo_auto_send_locations">Automatycznie uruchom trackera</string>
-    <string name="osmo_tracker_id">ID trackera</string>
+    <string name="osmo_tracker_id">Identyfikator serwera śledzącego</string>
     <string name="osmo_session_token">Token sesji: %1$s</string>
     <string name="osmo_auth_pending">Oczekiwanie na uwierzytelnienie…</string>
     <string name="osmo_conn_successfull">"Nawiązano połączenie: %1$s "</string>
@@ -1341,7 +1341,7 @@
     <string name="minutes_ago">minut temu</string>
     <string name="seconds_ago">sekund temu</string>
     <string name="osmo_connect_to_device_name">Nazwa użytkownika</string>
-    <string name="osmo_connect_to_device_tracker_id">ID trackera</string>
+    <string name="osmo_connect_to_device_tracker_id">Identyfikator serwera śledzącego</string>
     <string name="osmo_connect_to_device">Sparuj z urządzeniem</string>
 
 
@@ -2125,7 +2125,7 @@
     <string name="storage_directory_readonly_desc">Wybrany katalog przechowywania danych umożliwia tylko ich odczyt. Katalog przechowywania został tymczasowo umieszczony w pamięci wewnętrznej. Proszę wybrać prawidłowy katalog przechowywania danych.</string>
     <string name="storage_directory_shared">Pamięć współdzielona</string>
     <string name="osm_live_subscribe_btn">Zasubskrybuj</string>
-    <string name="storage_permission_restart_is_required">Teraz aplikacja może zapisywać do pamięci zewnętrznej. Wymagane jest manualne ponowne uruchomienie.</string>
+    <string name="storage_permission_restart_is_required">Teraz program może zapisywać do pamięci zewnętrznej. Wymagane jest ponowne uruchomienie programu.</string>
     <string name="full_report">Pełny raport</string>
     <string name="donations">Kwota datków</string>
     <string name="number_of_recipients">Liczba odbiorców</string>
@@ -2164,8 +2164,8 @@
     <string name="file_name_containes_illegal_char">Nazwa pliku zawiera niedozwolony znak</string>
 <string name="access_default_color">Domyślny kolor</string>
     <string name="access_category_choice">Wybierz kategorię</string>
-    <string name="access_hint_enter_category">Wpisz kategorię</string>
-    <string name="access_hint_enter_description">Wpisz opis</string>
+    <string name="access_hint_enter_category">Proszę wprowadzić kategorię</string>
+    <string name="access_hint_enter_description">Proszę wprowadzić opis</string>
     <string name="access_collapsed_list">Zwinięta lista</string>
     <string name="access_expanded_list">Rozwinięta lista</string>
     <string name="access_empty_list">Pusta lista</string>
@@ -2174,17 +2174,19 @@
     <string name="access_sort">Sortuj</string>
     <string name="map_mode">Tryb mapy</string>
     <string name="number_of_gpx_files_selected_pattern">Wybrano %s plików GPX</string>
-    <string name="access_hint_enter_name">Wprowadź nazwę</string>
-    <string name="access_map_linked_to_location">Mapa jest powiązana z obszarem</string>
+    <string name="access_hint_enter_name">Proszę wprowadzić nazwę</string>
+    <string name="access_map_linked_to_location">Mapa jest powiązana z położeniem</string>
     <string name="access_tree_list">Lista hierarchiczna</string>
-    <string name="access_shared_string_navigate_up">Idź w górę</string>
+    <string name="access_shared_string_navigate_up">Przejdź w górę</string>
     <string name="rendering_value_thin_name">Cienki</string>
     <string name="rendering_value_medium_name">Średni</string>
     <string name="rendering_value_bold_name">Gruby</string>
     <string name="access_no_destination">Nie ustalono celu trasy</string>
     <string name="access_disable_offroute_recalc">Nie zmienianie trasy po zboczeniu z niej</string>
-    <string name="access_disable_offroute_recalc_descr">Zapobiega automatycznej zmianie proponowanej trasy po poważnym oddaleniu się od niej</string>
+    <string name="access_disable_offroute_recalc_descr">Zapobiega zmianie wyznaczonej trasy po znacznym oddaleniu się od niej</string>
     <string name="map_widget_magnetic_bearing">Orientacja magnetyczna</string>
     <string name="map_widget_bearing">Orientacja względna</string>
-    <string name="access_disable_wrong_direction_recalc">Nie zmienianie trasy po obraniu niewłaściwego kierunku</string>
+    <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
+    <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
+	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega zmianie wyznaczonej trasy podczas poruszania się w niewłaściwym kierunku</string>
     </resources>

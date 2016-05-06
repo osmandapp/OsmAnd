@@ -5,12 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
@@ -37,6 +37,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -62,7 +63,9 @@ public class WaypointDialogHelper {
 
 	public interface WaypointDialogHelperCallbacks {
 		void reloadAdapter();
+
 		void deleteWaypoint(int position);
+
 		void exchangeWaypoints(int pos1, int pos2);
 	}
 
@@ -222,11 +225,11 @@ public class WaypointDialogHelper {
 		int color;
 		int pointColor;
 		if (nightMode) {
-			color = ctx.getResources().getColor(R.color.dashboard_divider_dark);
-			pointColor = ctx.getResources().getColor(R.color.dashboard_divider_dark);
+			color = ContextCompat.getColor(ctx, R.color.dashboard_divider_dark);
+			pointColor = ContextCompat.getColor(ctx, R.color.dashboard_divider_dark);
 		} else {
-			color = ctx.getResources().getColor(R.color.dashboard_divider_light);
-			pointColor = ctx.getResources().getColor(R.color.ctx_menu_info_divider_light);
+			color = ContextCompat.getColor(ctx, R.color.dashboard_divider_light);
+			pointColor = ContextCompat.getColor(ctx, R.color.ctx_menu_info_divider_light);
 		}
 
 		Shape fullDividerShape = new ListDividerShape(color, 0);
@@ -487,7 +490,7 @@ public class WaypointDialogHelper {
 					move.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							((DragIcon)view.getTag()).onClick();
+							((DragIcon) view.getTag()).onClick();
 						}
 					});
 				}
@@ -614,13 +617,13 @@ public class WaypointDialogHelper {
 					running[0] = position;
 					thisAdapter.notifyDataSetInvalidated();
 					MapActivity map = (MapActivity) ctx;
-					AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView());
-					dlg.setOnDismissListener(new OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							enableType(running, thisAdapter, type, true);
-						}
-					});
+					map.getMapLayers().showSingleChoicePoiFilterDialog(map.getMapView(),
+							new MapActivityLayers.ConfirmListener() {
+								@Override
+								public void confirm() {
+									enableType(running, thisAdapter, type, true);
+								}
+							});
 				}
 
 			});
@@ -688,16 +691,15 @@ public class WaypointDialogHelper {
 		if (ctx instanceof MapActivity &&
 				!app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.CUSTOM_FILTER_ID)) {
 			MapActivity map = (MapActivity) ctx;
-			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView());
-			dlg.setOnDismissListener(new OnDismissListener() {
-
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					if (app.getPoiFilters().isShowingAnyPoi()) {
-						enableType(running, listAdapter, type, enable);
-					}
-				}
-			});
+			map.getMapLayers().showSingleChoicePoiFilterDialog(map.getMapView(),
+					new MapActivityLayers.ConfirmListener() {
+						@Override
+						public void confirm() {
+							if (app.getPoiFilters().isShowingAnyPoi()) {
+								enableType(running, listAdapter, type, enable);
+							}
+						}
+					});
 		} else {
 			enableType(running, listAdapter, type, enable);
 		}
@@ -833,9 +835,8 @@ public class WaypointDialogHelper {
 		boolean rc = waypointHelper.isRouteCalculated();
 		for (int i = 0; i < WaypointHelper.MAX; i++) {
 			List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
-			if (!rc && i != WaypointHelper.WAYPOINTS && i != WaypointHelper.TARGETS) {
-				// skip
-			} else if (waypointHelper.isTypeVisible(i)) {
+			if ((rc || i == WaypointHelper.WAYPOINTS || i == WaypointHelper.TARGETS)
+					&& waypointHelper.isTypeVisible(i)) {
 				if (points.size() > 0) {
 					points.add(true);
 				}
@@ -888,43 +889,6 @@ public class WaypointDialogHelper {
 		app.getSettings().setMapLocationToShow(locationPoint.getLatitude(), locationPoint.getLongitude(),
 				15, locationPoint.getPointDescription(a), false, locationPoint);
 		MapActivity.launchMapActivityMoveToTop(a);
-
-		/*
-		MapActivity ctx = (MapActivity) a;
-		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
-		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
-		double flat = locationPoint.getLatitude();
-		double flon = locationPoint.getLongitude();
-		if (!center) {
-			RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
-			cp.setCenterLocation(0.5f, 0.25f);
-			cp.setLatLonCenter(flat, flon);
-			flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
-			flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
-		}
-		if (thread.isAnimating()) {
-			ctx.getMapView().setIntZoom(fZoom);
-			ctx.getMapView().setLatLon(flat, flon);
-			app.getAppCustomization().showLocationPoint(ctx, locationPoint);
-		} else {
-			final double dist = MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
-					locationPoint.getLatitude(), locationPoint.getLongitude());
-			double t = 10;
-			if (dist < t) {
-				app.getAppCustomization().showLocationPoint(ctx, locationPoint);
-			} else {
-				thread.startMoving(flat, flon, fZoom, true);
-			}
-			if (ctx.getDashboard().isVisible()) {
-				ctx.getDashboard().hideDashboard();
-				ctx.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
-				ctx.getContextMenu().show(
-						new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
-						locationPoint.getPointDescription(ctx),
-						locationPoint);
-			}
-		}
-		*/
 	}
 
 	public static void sortAllTargets(final OsmandApplication app, final Activity activity,

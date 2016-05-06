@@ -2195,4 +2195,9 @@
     <string name="map_widget_magnetic_bearing">Smer po magnetnem polju</string>
     <string name="use_osm_live_routing_description">Omogoči navigacijo za spremembe OSM v živo (beta)</string>
 	<string name="use_osm_live_routing">Navigacija OSM v živo</string>
+    <string name="follow_us">Sledi nam</string>
+    <string name="access_direction_audio_feedback">Zvočno najavljanje smeri</string>
+    <string name="access_direction_audio_feedback_descr">Določi smer ciljne točke z zvokom</string>
+    <string name="access_direction_haptic_feedback">Vibracijsko najavljanje smeri</string>
+    <string name="access_direction_haptic_feedback_descr">Določi smer ciljne točke z vibriranjem naprave</string>
     </resources>

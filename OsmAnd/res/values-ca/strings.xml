@@ -2030,4 +2030,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="access_direction_audio_feedback_descr">Indica la direcció al punt de destinació amb só</string>
     <string name="access_direction_audio_feedback">Resposta acústica segons direcció</string>
     <string name="access_direction_haptic_feedback">Resposta cinètica segons direcció</string>
+    <string name="follow_us">Seguiu-nos</string>
     </resources>

@@ -712,12 +712,12 @@
 	<string name="poi_website">Sitio web</string>
 	<string name="poi_email">Correo electrónico</string>
 	<string name="poi_fax">Fax</string>
-	<string name="poi_facebook">Facebook</string>
-	<string name="poi_twitter">Twitter</string>
+	<string name="facebook">Facebook</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">Youtube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">Vkontakte</string>
+	<string name="vk">Vkontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_mobile">Móbil</string>
 	<string name="poi_maxheight">Altura máxima</string>

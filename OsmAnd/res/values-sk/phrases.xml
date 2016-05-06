@@ -850,7 +850,7 @@
 	<string name="poi_chocolate">Obchod s čokoládou</string>
 	<string name="poi_coffee">Obchod s kávou</string>
 	<string name="poi_pasta">Obchod s cestovinami</string>
-	<string name="poi_pastry">Obchod s zákuskami</string>
+	<string name="poi_pastry">Obchod so zákuskami</string>
 	<string name="poi_candles">Obchod so sviečkami</string>
 	<string name="poi_fashion">Módny butik</string>
 	<string name="poi_furnace">Obchod s kúrením</string>
@@ -1023,7 +1023,7 @@
 	<string name="poi_abandoned_poi">Opustený objekt</string>
 	<string name="poi_email">E-mailová adresa</string>
 	<string name="poi_fax">Fax</string>
-	<string name="poi_facebook">Facebook</string>
+	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Mobilný telefón</string>
 	<string name="poi_route_hiking_iwn_poi">Medzinárodná pešia trasa</string>
 	<string name="poi_route_hiking_nwn_poi">Národná pešia trasa</string>
@@ -1075,11 +1075,11 @@
 	<string name="poi_denomination_church_of_christ">Kristova cirkev</string>
 	<string name="poi_building">Budova</string>
 
-<string name="poi_twitter">Twitter</string>
+<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_military_office">Vojenský úrad</string>
 	<string name="poi_landfill_waste_nuclear">Jadrový odpad</string>
@@ -1642,4 +1642,77 @@
 	<string name="poi_vending_drinks_food">Jedlo a nápoje</string>
 	<string name="poi_vending_fuel">Palivo</string>
 	<string name="poi_vending_parcel_pickup">Vyzdvihnutie balíkov</string>
+	<string name="poi_surface_unpaved">Povrch: nespevnený</string>
+	<string name="poi_surface_paved">Povrch: spevnený</string>
+	<string name="poi_surface_asphalt">Povrch: asfalt</string>
+	<string name="poi_surface_concrete">Povrch: betón</string>
+	<string name="poi_surface_sett">Povrch: hranaté kamene</string>
+	<string name="poi_surface_cobblestone">Povrch: dlažobné kamene</string>
+	<string name="poi_surface_paving_stones">Povrch: dlažobné tvárnice</string>
+	<string name="poi_surface_pebblestone">Povrch: oblý štrk</string>
+	<string name="poi_surface_stone">Povrch: kameň</string>
+	<string name="poi_surface_metal">Povrch: kov</string>
+	<string name="poi_surface_wood">Povrch: drevo</string>
+	<string name="poi_surface_gravel">Povrch: ostrý štrk</string>
+	<string name="poi_surface_fine_gravel">Povrch: jemné kamienky</string>
+	<string name="poi_surface_compacted">Povrch: zhutnený</string>
+	<string name="poi_surface_sand">Povrch: piesok</string>
+	<string name="poi_surface_grass">Povrch: tráva</string>
+	<string name="poi_surface_grass_paver">Povrch: zatrávňovacie panely</string>
+	<string name="poi_surface_ground">Povrch: zem</string>
+	<string name="poi_surface_dirt">Povrch: pôda</string>
+	<string name="poi_surface_mud">Povrch: blato</string>
+	<string name="poi_surface_ice">Povrch: ľad</string>
+	<string name="poi_surface_salt">Povrch: soľ</string>
+	<string name="poi_surface_snow">Povrch: sneh</string>
+
+	<string name="poi_parking_surface">Typ: povrchové</string>
+	<string name="poi_fitness_centre">Fitnescentrum</string>
+	<string name="poi_fitness">Fitness</string>
+
+	<string name="poi_fitness_station">Miesto na cvičenie</string>
+
+	<string name="poi_atm_yes">Bankomat: áno</string>
+	<string name="poi_atm_no">Bankomat: nie</string>
+
+	<string name="poi_highway_steps">Schody</string>
+	<string name="poi_tunnel_pedestrian">Tunel pre peších</string>
+	<string name="poi_bridge_pedestrian">Most pre peších</string>
+	<string name="poi_running">Beh</string>
+	<string name="poi_internet_access_type_wlan">Typ internetového pripojenia: wifi</string>
+	<string name="poi_internet_access_type_terminal">Typ internetového pripojenia: terminál</string>
+	<string name="poi_internet_access_type_wired">Typ internetového pripojenia: kábel</string>
+	<string name="poi_internet_access_type_public">Typ internetového pripojenia: verejné</string>
+	<string name="poi_internet_access_type_service">Typ internetového pripojenia: služba</string>
+	<string name="poi_internet_access_type_no">Žiadny prístup na Internet</string>
+	<string name="poi_internet_access_type_yes">S prístupom na Internet</string>
+
+	<string name="poi_memorial_statue">Socha</string>
+	<string name="poi_artwork_type_statue">Typ diela: socha</string>
+	<string name="poi_artwork_type_sculpture">Typ diela: plastika</string>
+	<string name="poi_artwork_type_mural">Typ diela: freska</string>
+	<string name="poi_artwork_type_architecture">Typ diela: architektúra</string>
+	<string name="poi_artwork_type_painting">Typ diela: maľba</string>
+	<string name="poi_artwork_type_stone">Typ diela: kameň</string>
+	<string name="poi_artwork_type_bust">Typ diela: busta</string>
+	<string name="poi_artwork_type_installation">Typ diela: inštalácia</string>
+	<string name="poi_artwork_type_mosaic">Typ diela: mozaika</string>
+	<string name="poi_artwork_type_relief">Typ diela: reliéf</string>
+	<string name="poi_artwork_type_graffiti">Typ diela: grafiti</string>
+	<string name="poi_artwork_type_stele">Typ diela: stéla</string>
+	<string name="poi_artwork_type_fountain">Typ diela: fontána</string>
+
+	<string name="poi_building_type_church">Typ budovy: kostol</string>
+	<string name="poi_building_type_chapel">Typ budovy: kaplnka</string>
+	<string name="poi_building_type_mosque">Typ budovy: mešita</string>
+	<string name="poi_building_type_temple">Typ budovy: chrám</string>
+	<string name="poi_building_type_cathedral">Typ budovy: katedrála</string>
+	<string name="poi_building_type_monastery">Typ budovy: kláštor</string>
+	<string name="poi_building_type_basilica">Typ budovy: bazilika</string>
+	<string name="poi_building_type_synagogue">Typ budovy: synagóga</string>
+	<string name="poi_building_type_shrine">Typ budovy: svätyňa</string>
+
+	<string name="poi_building_type_pyramid">Typ budovy: pyramída</string>
+
+	<string name="poi_square">Námestie</string>
 	</resources>

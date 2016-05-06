@@ -959,7 +959,7 @@
 	<string name="poi_monitoring_station">Станцыя назіраньня</string>
 	<string name="poi_email">Эл. пошта</string>
 	<string name="poi_fax">Факс</string>
-	<string name="poi_facebook">Фэйсбук</string>
+	<string name="facebook">Фэйсбук</string>
 	<string name="poi_mobile">Сотавы тэлефон</string>
 	<string name="poi_animal_shelter_dog">Прытулак для сабак</string>
 	<string name="poi_animal_shelter_cat">Прытулак для катоў</string>
@@ -1054,11 +1054,11 @@
 	<string name="poi_recycling_waste_oil">Адпрацаваная алiва</string>
 	<string name="poi_perfumery">Парфумэрыя</string>
 
-	<string name="poi_twitter">Твітар</string>
+	<string name="twitter">Твітар</string>
 	<string name="poi_skype">Скайп</string>
 	<string name="poi_youtube">Ютуб</string>
 	<string name="poi_instagram">Інстаграм</string>
-	<string name="poi_vk">УКантакце</string>
+	<string name="vk">УКантакце</string>
 	<string name="poi_google_plus">Гугл+</string>
 	<string name="poi_mill_pond">Млынавая сажалка</string>
 	<string name="poi_building">Будынак</string>
@@ -1523,4 +1523,5 @@
 	<string name="poi_resource_zinc">Цынк</string>
 	<string name="poi_resource_zircon">Цыркон</string>
 
+	<string name="poi_highway_steps">Сходы</string>
 	</resources>

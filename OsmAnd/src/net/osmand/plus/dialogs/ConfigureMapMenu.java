@@ -25,16 +25,15 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRuleProperty;
@@ -104,7 +103,7 @@ public class ConfigureMapMenu {
 		@Override
 		public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
 			if (itemId == R.string.layer_poi) {
-				selectPOILayer(adapter, adapter.getItem(pos));
+				showPoiFilterDialog(adapter, adapter.getItem(pos));
 				return false;
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
 				showGpxSelectionDialog(adapter, adapter.getItem(pos));
@@ -135,7 +134,7 @@ public class ConfigureMapMenu {
 			if (itemId == R.string.layer_poi) {
 				pfh.clearSelectedPoiFilters();
 				if (isChecked) {
-					selectPOILayer(adapter, adapter.getItem(pos));
+					showPoiFilterDialog(adapter, adapter.getItem(pos));
 				} else {
 					adapter.getItem(pos).setDescription(pfh.getSelectedPoiFiltersName());
 				}
@@ -184,21 +183,20 @@ public class ConfigureMapMenu {
 			});
 		}
 
-		protected void selectPOILayer(final ArrayAdapter<ContextMenuItem> adapter,
-									  final ContextMenuItem item) {
-			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView());
-			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
-					boolean selected = pf.isShowingAnyPoi();
-					item.setSelected(selected);
-					item.setDescription(pf.getSelectedPoiFiltersName());
-					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					adapter.notifyDataSetChanged();
-				}
-			});
+		protected void showPoiFilterDialog(final ArrayAdapter<ContextMenuItem> adapter,
+										   final ContextMenuItem item) {
+			ma.getMapLayers().showSingleChoicePoiFilterDialog(ma.getMapView(),
+					new MapActivityLayers.ConfirmListener() {
+						@Override
+						public void confirm() {
+							PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
+							boolean selected = pf.isShowingAnyPoi();
+							item.setSelected(selected);
+							item.setDescription(pf.getSelectedPoiFiltersName());
+							item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							adapter.notifyDataSetChanged();
+						}
+					});
 		}
 	}
 

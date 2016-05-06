@@ -894,7 +894,7 @@
 	<string name="poi_fee_no">Sin cargo</string>
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
-	<string name="poi_facebook">Facebook</string>
+	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Móvil</string>
 	<string name="poi_animal_shelter_dog">Refugio canino</string>
 	<string name="poi_animal_shelter_cat">Refugio gatuno</string>
@@ -984,11 +984,11 @@
 	<string name="poi_recycling_hardcore">Escombros</string>
 	<string name="poi_recycling_chipboard">Cartón prensado</string>
 	<string name="poi_mill_pond">Laguna de molino</string>
-	<string name="poi_twitter">Twitter</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
-	<string name="poi_vk">VKontakte</string>
+	<string name="vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">Perfumería</string>
 	<string name="poi_building">Edificio</string>
@@ -1757,9 +1757,9 @@
 	<string name="poi_surface_paved">Superficie pavimentada</string>
 	<string name="poi_surface_asphalt">Superficie asfaltada</string>
 	<string name="poi_surface_concrete">Superficie de hormigón</string>
-	<string name="poi_surface_sett">Superficie adoquinada</string>
+	<string name="poi_surface_sett">Superficie de pavimento intertrabado</string>
 	<string name="poi_surface_cobblestone">Superficie empedrada (adoquín)</string>
-	<string name="poi_surface_paving_stones">Superficie de adoquín prefabricado</string>
+	<string name="poi_surface_paving_stones">Superficie de adoquín prefabricado (loseta)</string>
 	<string name="poi_surface_pebblestone">Superficie empedrada (canto rodado)</string>
 	<string name="poi_surface_stone">Superficie de piedras</string>
 	<string name="poi_surface_metal">Superficie metalizada</string>

@@ -1,16 +1,22 @@
 package net.osmand.plus.activities;
 
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -24,6 +30,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 	//	public static final String DIALOG = "dialog";
 	@IdRes
 	public static final String OSMAND_POLL_HTML = "http://osmand.net/android-poll.html";
+	public static final int NULL_ID = -1;
 	private ArrayAdapter<ContextMenuItem> mAdapter;
 
 	//public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
@@ -35,66 +42,40 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		setContentView(R.layout.fragment_help_screen);
 
 		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter();
-		contextMenuAdapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		contextMenuAdapter.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
 
-		contextMenuAdapter.addItem(createCategory(R.string.begin_with_osmand_menu_group));
 		createBeginWithOsmandItems(contextMenuAdapter);
-		contextMenuAdapter.addItem(createCategory(R.string.features_menu_group));
 		createFeaturesItems(contextMenuAdapter);
-		contextMenuAdapter.addItem(createCategory(R.string.plugins_menu_group));
 		createPluginsItems(contextMenuAdapter);
-		contextMenuAdapter.addItem(createCategory(R.string.help_us_to_improve_menu_group));
 		createHelpUsToImproveItems(contextMenuAdapter);
-		contextMenuAdapter.addItem(createCategory(R.string.other_menu_group));
 		createOtherItems(contextMenuAdapter);
+		createSocialNetworksItems(contextMenuAdapter);
 
-		mAdapter = contextMenuAdapter.createListAdapter(this, getMyApplication().getSettings().isLightContent());
+		boolean lightContent = getMyApplication().getSettings().isLightContent();
+
+		mAdapter = contextMenuAdapter.createListAdapter(this, lightContent);
 
 		ListView listView = (ListView) findViewById(android.R.id.list);
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
+		int dividerColor = lightContent ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(this, dividerColor));
+		listView.setDivider(dividerDrawable);
+		listView.setDividerHeight(AndroidUtils.dpToPx(this, 1f));
 
 		setTitle(R.string.shared_string_help);
 		setupHomeButton();
 	}
 
-	private void createHelpUsToImproveItems(ContextMenuAdapter contextMenuAdapter) {
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setLayout(R.layout.help_to_improve_item).createItem());
-	}
 
-	private ContextMenuItem createCategory(@StringRes int titleRes) {
-		return new ContextMenuItem.ItemBuilder().setTitle(
-				getString(titleRes)).setCategory(true)
-				.setLayout(R.layout.download_item_list_section).createItem();
-	}
 
-	private ContextMenuItem createItem(@StringRes int titleRes,
-									   @StringRes String path) {
-		return new ContextMenuItem.ItemBuilder()
-				.setTitle(getString(titleRes))
-				.setListener(new ShowArticleOnTouchListener(path, this))
-				.createItem();
-	}
-
-	private ContextMenuItem createPluginItem(String title,
-											 @DrawableRes int icon,
-											 String path) {
-		return new ContextMenuItem.ItemBuilder()
-				.setTitle(title)
-				.setIcon(icon)
-				.setListener(new ShowArticleOnTouchListener(path, this))
-				.createItem();
-	}
-
-	private ContextMenuItem createItem(@StringRes int titleRes,
-									   @StringRes int descriptionRes,
-									   String path) {
-		return new ContextMenuItem.ItemBuilder()
-				.setTitle(getString(titleRes))
-				.setDescription(getString(descriptionRes))
-				.setListener(new ShowArticleOnTouchListener(path, this))
-				.createItem();
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		ContextMenuAdapter.ItemClickListener listener =
+				mAdapter.getItem(position).getItemClickListener();
+		if (listener != null) {
+			listener.onContextMenuClick(mAdapter, position, position, false);
+		}
 	}
 
 	@Override
@@ -108,32 +89,45 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 	}
 
 	private void createBeginWithOsmandItems(ContextMenuAdapter contextMenuAdapter) {
-		contextMenuAdapter.addItem(createItem(R.string.first_usage_item, R.string.first_usage_item_description,
-				"feature_articles/start.html"));
-		contextMenuAdapter.addItem(createItem(R.string.shared_string_navigation, R.string.navigation_item_description,
-				"feature_articles/navigation.html"));
-		contextMenuAdapter.addItem(createItem(R.string.faq_item, R.string.faq_item_description,
-				"feature_articles/faq.html"));
+		contextMenuAdapter.addItem(createCategory(R.string.begin_with_osmand_menu_group));
+		contextMenuAdapter.addItem(createItem(R.string.first_usage_item,
+				R.string.first_usage_item_description, "feature_articles/start.html"));
+		contextMenuAdapter.addItem(createItem(R.string.shared_string_navigation,
+				R.string.navigation_item_description, "feature_articles/navigation.html"));
+		contextMenuAdapter.addItem(createItem(R.string.faq_item,
+				R.string.faq_item_description, "feature_articles/faq.html"));
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		mAdapter.getItem(position).getItemClickListener()
-				.onContextMenuClick(mAdapter, position, position, false);
+	private void createSocialNetworksItems(ContextMenuAdapter contextMenuAdapter) {
+		contextMenuAdapter.addItem(createCategory(R.string.follow_us));
+		contextMenuAdapter.addItem(createSocialItem(R.string.twitter, R.string.twitter_address,
+				R.drawable.ic_action_social_twitter));
+		contextMenuAdapter.addItem(createSocialItem(R.string.facebook, R.string.facebook_address,
+				R.drawable.ic_action_social_facebook));
+		contextMenuAdapter.addItem(createSocialItem(R.string.vk, R.string.vk_address,
+				R.drawable.ic_action_social_vk));
+	}
+
+	private void createHelpUsToImproveItems(ContextMenuAdapter contextMenuAdapter) {
+		contextMenuAdapter.addItem(createCategory(R.string.help_us_to_improve_menu_group));
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setLayout(R.layout.help_to_improve_item).createItem());
 	}
 
 	private void createFeaturesItems(ContextMenuAdapter contextMenuAdapter) {
-		contextMenuAdapter.addItem(createItem(R.string.map_viewing_item,
+		contextMenuAdapter.addItem(createCategory(R.string.features_menu_group));
+		contextMenuAdapter.addItem(createItem(R.string.map_viewing_item, NULL_ID,
 				"feature_articles/map-viewing.html"));
-		contextMenuAdapter.addItem(createItem(R.string.search_on_the_map_item,
+		contextMenuAdapter.addItem(createItem(R.string.search_on_the_map_item, NULL_ID,
 				"feature_articles/find-something-on-map.html"));
-		contextMenuAdapter.addItem(createItem(R.string.planning_trip_item,
+		contextMenuAdapter.addItem(createItem(R.string.planning_trip_item, NULL_ID,
 				"feature_articles/trip-planning.html"));
-		contextMenuAdapter.addItem(createItem(R.string.map_legend,
+		contextMenuAdapter.addItem(createItem(R.string.map_legend, NULL_ID,
 				"feature_articles/map-legend.html"));
 	}
 
 	private void createPluginsItems(ContextMenuAdapter contextMenuAdapter) {
+		contextMenuAdapter.addItem(createCategory(R.string.plugins_menu_group));
 		for (final OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
 			final String helpFileName = osmandPlugin.getHelpFileName();
 			if (helpFileName != null) {
@@ -144,11 +138,12 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 	}
 
 	private void createOtherItems(ContextMenuAdapter contextMenuAdapter) {
-		contextMenuAdapter.addItem(createItem(R.string.instalation_troubleshooting_item,
+		contextMenuAdapter.addItem(createCategory(R.string.other_menu_group));
+		contextMenuAdapter.addItem(createItem(R.string.instalation_troubleshooting_item, NULL_ID,
 				"feature_articles/installation-and-troubleshooting.html"));
-		contextMenuAdapter.addItem(createItem(R.string.techical_articles_item,
+		contextMenuAdapter.addItem(createItem(R.string.techical_articles_item, NULL_ID,
 				"feature_articles/technical-articles.html"));
-		contextMenuAdapter.addItem(createItem(R.string.versions_item,
+		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
 
 		String releasedate = "";
@@ -161,6 +156,57 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitle(getString(R.string.shared_string_about))
 				.setDescription(version).setListener(listener).createItem());
+	}
+
+	// Helper metods
+	private ContextMenuItem createCategory(@StringRes int titleRes) {
+		return new ContextMenuItem.ItemBuilder().setTitle(
+				getString(titleRes)).setCategory(true)
+				.setLayout(R.layout.download_item_list_section).createItem();
+	}
+
+	private ContextMenuItem createItem(@StringRes int titleRes,
+									   @StringRes int descriptionRes,
+									   String path) {
+		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder()
+				.setTitle(getString(titleRes))
+				.setListener(new ShowArticleOnTouchListener(path, this));
+		if (descriptionRes != -1) {
+			builder.setDescription(getString(descriptionRes));
+		}
+		return builder.createItem();
+	}
+
+	private ContextMenuItem createPluginItem(String title,
+											 @DrawableRes int icon,
+											 String path) {
+		return new ContextMenuItem.ItemBuilder()
+				.setTitle(title)
+				.setIcon(icon)
+				.setListener(new ShowArticleOnTouchListener(path, this))
+				.createItem();
+	}
+
+	private ContextMenuItem createSocialItem(@StringRes int title,
+											 @StringRes int urlRes,
+											 @DrawableRes int icon) {
+		final String url = getString(urlRes);
+		return new ContextMenuItem.ItemBuilder()
+				.setTitle(getString(title))
+				.setDescription(url)
+				.setIcon(icon)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
+													  int itemId,
+													  int position,
+													  boolean isChecked) {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+						startActivity(intent);
+						return false;
+					}
+				})
+				.createItem();
 	}
 
 	private static class ShowArticleOnTouchListener implements ContextMenuAdapter.ItemClickListener {

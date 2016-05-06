@@ -113,6 +113,13 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		updatePoiAdditionals();
 	}
 
+	public PoiUIFilter(Set<PoiUIFilter> filtersToMerge, OsmandApplication app) {
+		this(app);
+		combineWithPoiFilters(filtersToMerge);
+		filterId = PoiUIFilter.STD_PREFIX + "combined";
+		name = app.getPoiFilters().getFiltersName(filtersToMerge);
+	}
+
 	public String getFilterByName() {
 		return filterByName;
 	}
@@ -494,6 +501,12 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		poiAdditionals.putAll(f.poiAdditionals);
 	}
 
+	public void combineWithPoiFilters(Set<PoiUIFilter> filters) {
+		for (PoiUIFilter f : filters) {
+			combineWithPoiFilter(f);
+		}
+	}
+
 	public static void combineStandardPoiFilters(Set<PoiUIFilter> filters, OsmandApplication app) {
 		Set<PoiUIFilter> standardFilters = new TreeSet<>();
 		for (PoiUIFilter filter : filters) {
@@ -503,16 +516,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			}
 		}
 		if (!standardFilters.isEmpty()) {
-			PoiUIFilter standardFiltersCombined = null;
-			for (PoiUIFilter f : standardFilters) {
-				if (standardFiltersCombined == null) {
-					standardFiltersCombined = f;
-					f.filterId = PoiUIFilter.STD_PREFIX + "combined";
-					f.name = app.getPoiFilters().getFiltersName(standardFilters);
-				} else {
-					standardFiltersCombined.combineWithPoiFilter(f);
-				}
-			}
+			PoiUIFilter standardFiltersCombined = new PoiUIFilter(standardFilters, app);
 			filters.removeAll(standardFilters);
 			filters.add(standardFiltersCombined);
 		}
