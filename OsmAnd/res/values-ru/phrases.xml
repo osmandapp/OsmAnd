@@ -2858,4 +2858,6 @@
 	<string name="poi_street_cabinet_water_management">Тип шкафа: управление водными ресурсами</string>
 	<string name="poi_street_cabinet_street_lighting">Тип шкафа: уличное освещение</string>
 
+	<string name="poi_military_checkpoint">Военный КПП</string>
+
 </resources>
