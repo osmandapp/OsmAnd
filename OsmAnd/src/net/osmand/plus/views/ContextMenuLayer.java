@@ -60,6 +60,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private final MoveMarkerBottomSheetHelper mMoveMarkerBottomSheetHelper;
 	private boolean mInChangeMarkerPositionMode;
 
+	private int previousMarkerX;
+	private int previousMarkerY;
+
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
 		menu = activity.getContextMenu();
@@ -108,14 +111,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		if (mInChangeMarkerPositionMode) {
-			int x = box.getCenterPixelX();
-			int y = box.getCenterPixelY();
+			int x = previousMarkerX;
+			int y = previousMarkerY;
 			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 		} else if (menu.isActive()) {
 			LatLon latLon = menu.getLatLon();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			previousMarkerX = x;
+			previousMarkerY = y;
 			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 		}
@@ -172,8 +177,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		mInChangeMarkerPositionMode = false;
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
-		int newMarkerX = tileBox.getCenterPixelX();
-		int newMarkerY = tileBox.getCenterPixelY();
+		int newMarkerX = previousMarkerX;
+		int newMarkerY = previousMarkerY;
 		PointF newMarkerPosition = new PointF(newMarkerX, newMarkerY);
 		showContextMenu(newMarkerPosition, tileBox, true);
 		view.refreshMap();
