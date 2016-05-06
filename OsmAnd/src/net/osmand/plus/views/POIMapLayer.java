@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
@@ -558,4 +557,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				r.getDisplayMetrics()
 		);
 	}
+
+
 }

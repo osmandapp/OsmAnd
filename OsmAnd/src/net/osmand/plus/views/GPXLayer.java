@@ -12,7 +12,6 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -471,8 +470,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		this.gpx = gpx;
 		this.points = (gpx == null ? null :	gpx.proccessPoints());
 	}
-
-
 
 
 }

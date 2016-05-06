@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -217,4 +216,5 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 		return null;
 	}
+
 }

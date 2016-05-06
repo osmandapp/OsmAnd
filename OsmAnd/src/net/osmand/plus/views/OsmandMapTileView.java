@@ -604,14 +604,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public boolean tryMovingObject(Object selectedObject) {
-		for (OsmandMapLayer layer : layers) {
-			if (layer.onTryMovingObject(selectedObject, getCurrentRotatedTileBox())) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	protected void drawMapPosition(Canvas canvas, float x, float y) {
 		canvas.drawCircle(x, y, 3 * dm.density, paintCenter);

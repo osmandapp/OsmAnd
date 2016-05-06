@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -489,4 +488,5 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void clearSelectedObject() {
 	}
+
 }

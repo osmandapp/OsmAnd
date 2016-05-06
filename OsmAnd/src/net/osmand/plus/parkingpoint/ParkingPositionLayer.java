@@ -187,5 +187,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			}
 		}
 	}
+
 	
 }

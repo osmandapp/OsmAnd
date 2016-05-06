@@ -13,7 +13,6 @@ import android.graphics.PointF;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -427,6 +426,6 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 			followTrackerId = null;
 		}
 	}
-	
+
 	
 }

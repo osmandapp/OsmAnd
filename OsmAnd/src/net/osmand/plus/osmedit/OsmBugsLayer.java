@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -625,5 +624,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			this.local = local;
 		}
 	}
+
 
 }

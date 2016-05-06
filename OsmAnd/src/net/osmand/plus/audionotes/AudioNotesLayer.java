@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -200,6 +199,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		return null;
 	}
+
 
 
 }

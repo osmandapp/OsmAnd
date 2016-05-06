@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.widget.ArrayAdapter;
-
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;

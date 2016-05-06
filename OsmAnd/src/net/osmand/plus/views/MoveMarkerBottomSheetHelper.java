@@ -1,10 +1,11 @@
 package net.osmand.plus.views;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -39,10 +40,20 @@ public class MoveMarkerBottomSheetHelper {
 			}
 		});
 	}
-
-	public void show(double lat, double lon) {
-		mView.setVisibility(View.VISIBLE);
+	
+	public void onDraw(RotatedTileBox rt) {
+		double lat = rt.getLatFromPixel(rt.getPixWidth() / 2, rt.getPixHeight() / 2);
+		double lon = rt.getLonFromPixel(rt.getPixWidth() / 2, rt.getPixHeight() / 2);
 		mDescription.setText(mContext.getString(R.string.lat_lon_pattern, lat, lon));
+	}
+	
+	public boolean isVisible() {
+		return mView.getVisibility() == View.VISIBLE;
+	}
+
+	public void show(Drawable drawable) {
+		mView.setVisibility(View.VISIBLE);
+		((ImageView) mView.findViewById(R.id.icon)).setImageDrawable(drawable);
 	}
 
 	public void hide() {

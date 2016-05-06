@@ -110,6 +110,9 @@ public class MapActivityLayers {
 		mapTextLayer = new MapTextLayer();
 		// 5.95 all labels
 		mapView.addLayer(mapTextLayer, 5.95f);
+		// 8. context menu layer 
+		contextMenuLayer = new ContextMenuLayer(activity);
+		mapView.addLayer(contextMenuLayer, 8);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		mapTileLayer = new MapTileLayer(true);
 		mapView.addLayer(mapTileLayer, 0.0f);
@@ -156,8 +159,6 @@ public class MapActivityLayers {
 		impassableRoadsLayer = new ImpassableRoadsLayer(activity);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
 		// 8. context menu layer 
-		contextMenuLayer = new ContextMenuLayer(activity);
-		mapView.addLayer(contextMenuLayer, 8);
 		// 9. map info layer
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
 		mapView.addLayer(mapInfoLayer, 9);

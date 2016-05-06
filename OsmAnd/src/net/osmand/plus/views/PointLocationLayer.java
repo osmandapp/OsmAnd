@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -223,4 +222,5 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			}
 		}
 	}
+
 }

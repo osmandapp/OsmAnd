@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -242,4 +241,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		}
 		return null;
 	}
+
+
 }

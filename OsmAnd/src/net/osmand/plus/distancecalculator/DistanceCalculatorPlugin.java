@@ -24,7 +24,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -717,6 +716,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 			return null;
 		}
+
 
 	}
 	

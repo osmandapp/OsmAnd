@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -184,4 +183,5 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 		return null;
 	}
+
 }
