@@ -159,8 +159,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				activity.getContextMenu().hide();
 				LatLon ll = menu.getLatLon();
 				RotatedTileBox rb = new RotatedTileBox(tileBox);
-				PointF pf = getMoveableCenterPoint(rb);
-				rb.setCenterLocation(pf.x, pf.y);
+				rb.setCenterLocation(0.5f, 0.5f);
 				rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
 				double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -215,8 +214,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mInChangeMarkerPositionMode = false;
 		
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
-		PointF newMarkerPosition = new PointF(tileBox.getPixWidth() / 2,
-				tileBox.getPixHeight() / 2);
+		PointF newMarkerPosition = getMoveableCenterPoint(tileBox);
+		LatLon ll = tileBox.getLatLonFromPixel(newMarkerPosition.x, newMarkerPosition.y);
+		applyMovedObject(getMoveableObject(), ll);
 		// TODO pass object properly
 		showContextMenu(newMarkerPosition, tileBox, true);
 		view.refreshMap();
