@@ -2883,4 +2883,15 @@
 	<string name="poi_firepit">Calentador</string>
 	<string name="poi_street_cabinet">Gabinete de calle</string>
 
-	</resources>
+	<string name="poi_street_cabinet_power">Tipo de cabina: electricidad</string>
+	<string name="poi_street_cabinet_telecom">Tipo de cabina: telecomunicaciones</string>
+	<string name="poi_street_cabinet_cable_tv">Tipo de cabina: TV por cable</string>
+	<string name="poi_street_cabinet_gas">Tipo de cabina: gas</string>
+	<string name="poi_street_cabinet_postal_service">Tipo de cabina: servicio postal</string>
+	<string name="poi_street_cabinet_waste">Tipo de cabina: basura</string>
+	<string name="poi_street_cabinet_water_management">Tipo de cabina: gestión de agua</string>
+	<string name="poi_street_cabinet_street_lighting">Tipo de cabina: alumbrado público</string>
+
+	<string name="poi_military_checkpoint">Puesto de control militar</string>
+
+</resources>
