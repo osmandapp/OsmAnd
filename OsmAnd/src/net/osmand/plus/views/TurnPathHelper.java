@@ -321,7 +321,7 @@ public class TurnPathHelper {
 		}
 	}
 
-	private static TurnResource getTallArrow(int tt){
+	private static TurnResource getTallArrow(int tt, boolean nooverlap){
 
 		TurnResource result = new TurnResource();
 
@@ -331,7 +331,7 @@ public class TurnPathHelper {
 				break;
 			case TurnType.TR:
 			case TurnType.TL:
-				result.resourceId = R.drawable.map_turn_right2_small;
+				result.resourceId = nooverlap ? R.drawable.map_turn_right_small : R.drawable.map_turn_right2_small;
 				break;
 			case TurnType.KR:
 			case TurnType.KL:
@@ -416,14 +416,14 @@ public class TurnPathHelper {
 
 		if (turnIndex == FIRST_TURN) {
 			if (secondTurnType == 0) {
-				turnResource = getTallArrow(firstTurnType);
+				turnResource = getTallArrow(firstTurnType, true);
 			} else if (secondTurnType == TurnType.C || thirdTurnType == TurnType.C) {
 				turnResource = getShortArrow(firstTurnType);
 			} else {
 				if (firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU) {
 					turnResource = getShortArrow(firstTurnType);
 				} else {
-					turnResource = getTallArrow(firstTurnType);
+					turnResource = getTallArrow(firstTurnType, false);
 				}
 			}
 		} else if (turnIndex == SECOND_TURN) {
@@ -435,7 +435,7 @@ public class TurnPathHelper {
 				// get the small one
 				turnResource = getShortArrow(secondTurnType);
 			} else {
-				turnResource = getTallArrow(secondTurnType);
+				turnResource = getTallArrow(secondTurnType, false);
 			}
 		} else if (turnIndex == THIRD_TURN) {
 			if ((TurnType.isLeftTurn(firstTurnType) || TurnType.isLeftTurn(secondTurnType)) && TurnType.isLeftTurn(thirdTurnType)) {
