@@ -188,6 +188,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return mInChangeMarkerPositionMode ?  menu.getObject() : null;
 	}
 	
+	public boolean isInChangeMarkerPositionMode() {
+		return mInChangeMarkerPositionMode;
+	}
+	
 	public boolean isObjectMoveable(Object o) {
 		for (OsmandMapLayer lt : view.getLayers()) {
 			if (lt instanceof ContextMenuLayer.IMoveObjectProvider) {
@@ -229,14 +233,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void quitMovingMarker() {
 		mInChangeMarkerPositionMode = false;
-		mark(View.VISIBLE, R.id.map_menu_button, R.id.map_route_info_button, R.id.map_ruler_layout,
+		mark(View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 	}
 	
 	private void enterMovingMode() {
 		mInChangeMarkerPositionMode = true;
 		mMoveMarkerBottomSheetHelper.show(menu.getLeftIcon());
-		mark(View.INVISIBLE, R.id.map_menu_button, R.id.map_route_info_button, R.id.map_ruler_layout,
+		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 	}
 
