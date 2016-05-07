@@ -483,7 +483,7 @@ public class RoutingHelper {
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			String name = "";
-			if(intermediatePoints != null ) {
+			if(intermediatePoints != null && !intermediatePoints.isEmpty()) {
 				LatLon rm = intermediatePoints.remove(0);
 				List<TargetPoint> ll = targets.getIntermediatePointsNavigation();
 				int ind = -1;
