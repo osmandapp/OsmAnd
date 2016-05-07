@@ -1,8 +1,4 @@
 include ':OsmAnd-java'
-include ':eclipse-compile:gridlayout'
-include ':eclipse-compile:cardview'
-include ':eclipse-compile:design'
-include ':eclipse-compile:appcompat'
 include ':OsmAnd'
 include ':plugins:OsmAnd-AddressPlugin'
 include ':plugins:Osmand-ParkingPlugin'

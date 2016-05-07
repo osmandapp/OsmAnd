@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -131,13 +130,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return true;
 	}
 
-	@Override
-	public String getObjectDescription(Object o) {
-		if(o instanceof Recording){
-			return ((Recording)o).getDescription(view.getContext());
-		}
-		return null;
-	}
 	
 	@Override
 	public PointDescription getObjectName(Object o) {
@@ -200,6 +192,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		return null;
 	}
+
 
 
 }

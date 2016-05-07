@@ -75,10 +75,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/search_address_building"
-                                android:maxLines="6"
-                                android:ellipsize="end"
-                                android:textColor="?android:textColorPrimary"
-                                android:textSize="@dimen/default_list_text_size_large"/>
+                                style="@style/TextAppearance.ContextMenuTitle"/>
 
                         </LinearLayout>
 
@@ -128,8 +125,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:text="@string/amenity_type_finance"
-                                    android:textColor="?android:textColorSecondary"
-                                    android:textSize="@dimen/default_desc_text_size"/>
+                                    style="@style/TextAppearance.ContextMenuSubtitle"/>
 
                             </LinearLayout>
 

@@ -11,7 +11,6 @@ import android.graphics.PointF;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
@@ -432,11 +431,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		return view.getContext().getString(R.string.shared_string_map);
-	}
-
-	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);
@@ -547,4 +541,5 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	public void clearSelectedObject() {
 		selectedObjects = new LinkedList<>();
 	}
+
 }

@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
@@ -477,14 +476,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		if (o instanceof Amenity) {
-			return buildPoiInformation(new StringBuilder(), (Amenity) o).toString();
-		}
-		return null;
-	}
-
-	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
@@ -558,4 +549,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				r.getDisplayMetrics()
 		);
 	}
+
+
 }

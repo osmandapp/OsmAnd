@@ -10,6 +10,8 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="move_marker_bottom_sheet_title">Move the map to change marker\'s position</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="follow_us">Follow us</string>
     <string name="access_direction_audio_feedback">Direction audio feedback</string>
     <string name="access_direction_audio_feedback_descr">Indicate target point direction by sound</string>
@@ -1153,7 +1155,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces</string>
 
     <string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
-    <string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5–9)</string>
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No buildings found.</string>

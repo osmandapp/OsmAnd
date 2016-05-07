@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -457,13 +456,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 
-	@Override
-	public String getObjectDescription(Object o) {
-		if (o instanceof OpenStreetNote) {
-			return activity.getString(R.string.osn_bug_name) + ": " + ((OpenStreetNote) o).getCommentDescription(); //$NON-NLS-1$
-		}
-		return null;
-	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {
@@ -625,5 +617,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			this.local = local;
 		}
 	}
+
 
 }

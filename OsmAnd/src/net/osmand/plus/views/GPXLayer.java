@@ -12,7 +12,6 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -391,14 +390,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		if(o instanceof WptPt){
-			return view.getContext().getString(R.string.gpx_wpt) + " : " + ((WptPt)o).name; //$NON-NLS-1$
-		}
-		return null;
-	}
-	
-	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof WptPt){
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt)o).name); //$NON-NLS-1$
@@ -471,8 +462,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		this.gpx = gpx;
 		this.points = (gpx == null ? null :	gpx.proccessPoints());
 	}
-
-
 
 
 }

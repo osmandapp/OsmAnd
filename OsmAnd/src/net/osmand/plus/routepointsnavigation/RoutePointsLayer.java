@@ -3,7 +3,6 @@ package net.osmand.plus.routepointsnavigation;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.widget.ArrayAdapter;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -50,11 +49,6 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		return null;
-	}
-
-	@Override
-	public String getObjectDescription(Object o) {
 		return null;
 	}
 
@@ -141,6 +135,5 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			}
 		}
 	}
-
 
 }

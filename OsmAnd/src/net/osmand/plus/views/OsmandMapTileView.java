@@ -133,7 +133,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private AccessibilityActionsProvider accessibilityActions;
 
-	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
+	private List<OsmandMapLayer> layers = new ArrayList<>();
 
 	private BaseMapLayer mainLayer;
 
@@ -603,6 +603,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			drawMapPosition(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
 		}
 	}
+
 
 	protected void drawMapPosition(Canvas canvas, float x, float y) {
 		canvas.drawCircle(x, y, 3 * dm.density, paintCenter);

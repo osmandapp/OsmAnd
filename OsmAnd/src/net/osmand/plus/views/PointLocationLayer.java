@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -175,10 +174,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		return getMyLocation();
 	}
 
-	@Override
-	public String getObjectDescription(Object o) {
-		return view.getResources().getString(R.string.shared_string_my_location);
-	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {
@@ -223,4 +218,5 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			}
 		}
 	}
+
 }

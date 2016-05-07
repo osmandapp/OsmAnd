@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -58,7 +59,7 @@ public class WptPtMenuController extends MenuController {
 	@Override
 	public Drawable getLeftIcon() {
 		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(),
-				wpt.getColor(getMapActivity().getResources().getColor(R.color.gpx_color_point)), false);
+				wpt.getColor(ContextCompat.getColor(getMapActivity(), R.color.gpx_color_point)), false);
 	}
 
 	@Override

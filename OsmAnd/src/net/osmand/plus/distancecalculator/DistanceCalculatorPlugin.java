@@ -24,7 +24,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -682,30 +681,6 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 		}
 
-		@Override
-		public String getObjectDescription(Object o) {
-			if(o instanceof WptPt) {
-				PointDescription desc = getObjectName(o); 
-				List<String> l = new ArrayList<String>();
-				if(!Double.isNaN(((WptPt) o).ele)) {
-					l.add(app.getString(R.string.plugin_distance_point_ele) + " "+ OsmAndFormatter.getFormattedDistance((float) ((WptPt) o).ele, app)); 
-				}
-				if(!Double.isNaN(((WptPt) o).speed)) {
-					l.add(app.getString(R.string.plugin_distance_point_speed) + " "+ OsmAndFormatter.getFormattedSpeed((float) ((WptPt) o).speed, app)); 
-				}
-				if(!Double.isNaN(((WptPt) o).hdop)) {
-					l.add(app.getString(R.string.plugin_distance_point_hdop) + " "+ OsmAndFormatter.getFormattedDistance((float) ((WptPt) o).hdop, app)); 
-				}
-				if(((WptPt) o).time != 0) {
-					Date date = new Date(((WptPt) o).time);
-					java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(app);
-					java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(app);
-					l.add(app.getString(R.string.plugin_distance_point_time) + " "+ dateFormat.format(date) + " " + timeFormat.format(date)); 
-				}
-				return desc.getName() + " " + l;
-			}
-			return null;
-		}
 
 		@Override
 		public PointDescription getObjectName(Object o) {
@@ -717,6 +692,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 			return null;
 		}
+
 
 	}
 	

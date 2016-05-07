@@ -89,12 +89,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapHudButton layersHud;
 	private long lastZoom;
 	private boolean hasTargets;
+	private ContextMenuLayer contextMenuLayer;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
 		app = activity.getMyApplication();
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
+		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
 	}
 
 	public MapRouteInfoMenu getMapRouteInfoMenu() {
@@ -504,7 +506,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);
-		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode);
+		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode) && !contextMenuLayer.isInChangeMarkerPositionMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
