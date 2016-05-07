@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -92,7 +93,7 @@
   <string name="user_password">तुमचा ओएसएम पासवर्ड</string>
   
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
-  <string name="download_files_question_space">शिल्लक जागा आता {2} एमबी! {0} फाइल डाउनलोड करायच्या का ({1} एमबी)?</string>
+  <string name="download_files_question_space">{0} फाइल डाउनलोड करायच्या का? {1} एमबी जागा लागेल. सध्या शिल्लक जागा {2} एमबी.</string>
   
   <string name="auto_follow_route_never">कधीच नाही</string>
   <string name="pref_vector_map">वेक्टर नकाशाचे पर्याय</string>
@@ -273,7 +274,7 @@
   <string name="search_address">पत्ता शोधा</string>
   <string name="choose_building">इमारत निवडा</string>
   <string name="choose_street">रस्ता निवडा</string>
-  <string name="choose_city">शहर निवडा</string>
+  <string name="choose_city">शहर किंवा पोस्टकोड निवडा</string>
   <string name="ChooseCountry">देश निवडा</string>
   <string name="map_source">नकाशाचा स्त्रोत</string>
   <string name="use_internet">इंटरनेट वापरा</string>
@@ -458,7 +459,7 @@
 	<string name="preferred_locale_descr">भाषा निवडा (बदलल्यावर ओएसएमएएनडी पुन्हा चालू करा)</string>
 	<string name="system_locale">सिस्टिम</string>
 	
-	<string name="rendering_attr_hideHouseNumbers_name">घरक्रमांक लपवा</string>
+	<string name="rendering_attr_hideHouseNumbers_name">घरक्रमांक</string>
     <string name="shared_string_open">उघडा</string>
     <string name="shared_string_places">ठिकाणे</string>
 	<string name="shared_string_search">शोध</string>
