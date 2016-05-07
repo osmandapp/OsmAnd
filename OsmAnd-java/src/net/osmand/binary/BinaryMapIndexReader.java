@@ -611,6 +611,7 @@ public class BinaryMapIndexReader {
 				return r;
 			}
 		}
+		
 		throw new IllegalArgumentException("Illegal offset " + offset); //$NON-NLS-1$
 	}
 	
@@ -1961,8 +1962,8 @@ public class BinaryMapIndexReader {
 
 	
 	private static boolean testMapSearch = false;
-	private static boolean testAddressSearch = false;
-	private static boolean testAddressJustifySearch = true;
+	private static boolean testAddressSearch = true;
+	private static boolean testAddressJustifySearch = false;
 	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
@@ -1978,7 +1979,7 @@ public class BinaryMapIndexReader {
 	
 	public static void main(String[] args) throws IOException {
 //		File fl = new File("/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf");
-		File fl = new File("/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf");
+		File fl = new File("/Users/victorshcherb/osmand/maps/Argentina_southamerica_2.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2271,7 +2272,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "кие");
+		}, "Reynaldo");
 		reader.searchAddressDataByName(req);
 	}
 	

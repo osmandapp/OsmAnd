@@ -61,24 +61,23 @@ public class BinaryInspector {
 	public static final int BUFFER_SIZE = 1 << 20;
 	public static final int SHIFT_ID = 6;
 	private VerboseInfo vInfo;
-
 	public static void main(String[] args) throws IOException {
 		BinaryInspector in = new BinaryInspector();
 		// test cases show info
-		if(args.length == 1 && "test".equals(args[0])) {
+		if ("test".equals(args[0])) {
 			in.inspector(new String[]{
-//				"-vpoi",
-				"-vmap","-vmapobjects", // "-vmapcoordinates", 
-				"-vrouting",
-//				"-vaddress", "-vcities",//"-vstreetgroups", 
-//				"-vstreets", "-vbuildings", "-vintersections", 
-//				"-zoom=15",
-//				"-bbox=1.74,51.17,1.75,51.16",
-//				"-vstats",
-//				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
-//				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf"
-				"/Users/victorshcherb/osmand/maps/C_11_03_06.obf"
-					});
+//					"-vpoi",
+//					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+//					"-vrouting",
+					"-vaddress", "-vcities","-vstreetgroups",
+					"-vstreets", "-vbuildings", "-vintersections",
+//					"-zoom=15",
+//					"-bbox=1.74,51.17,1.75,51.16",
+//					"-vstats",
+//					"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
+//					"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf"
+					"/Users/victorshcherb/osmand/maps/Argentina_southamerica_2.obf"
+			});
 		} else {
 			in.inspector(args);
 		}
