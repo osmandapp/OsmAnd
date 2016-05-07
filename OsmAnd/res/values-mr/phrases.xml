@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">दुकान</string>
 		<string name="poi_emergency">तातडीची सेवा</string>
 	<string name="poi_public_transport">सार्वजनिक परिवहन</string>
@@ -85,4 +85,11 @@
 	<string name="poi_building_type_mosque">इमारत प्रकार: मशिद</string>
 	<string name="poi_building_type_temple">इमारत प्रकार: मंदिर</string>
 	<string name="poi_square">चौक</string>
+	<string name="poi_shop_food">खाद्य दुकान</string>
+	<string name="poi_man_made">मनुष्य निर्मित</string>
+		<string name="poi_communication">संभाषण</string>
+		<string name="poi_accomodation">राहण्याची व्यवस्था</string>
+		<string name="poi_club">क्लब</string>
+	<string name="poi_farm">शेतीमाल दुकान</string>
+	<string name="poi_dairy">दुग्धजन्य पदार्थांचे दुकान</string>
 	</resources>
