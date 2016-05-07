@@ -1204,4 +1204,20 @@
     <string name="osmand_parking_time_limit">Tempo-limigita parkumejo</string>
     <string name="osmand_parking_time_no_limit">Sen-templima parkumejo</string>
     <string name="osmand_parking_position_description">La pozicio de via parkumita aŭto. %1$s</string>
+    <string name="osmand_parking_position_description_add">Reprenu la aŭton je:</string>
+    <string name="osmand_parking_pm">ptm.</string>
+    <string name="osmand_parking_am">atm.</string>
+    <string name="osmand_parking_position_name">Parkumejo</string>
+    <string name="context_menu_item_add_parking_point">Marki kiel pozicio de parkumado</string>
+    <string name="context_menu_item_delete_parking_point">Forigi markon de parkumita aŭto</string>
+    <string name="gpxup_public">Publika</string>
+    <string name="gpxup_identifiable">Identigebla</string>
+    <string name="gpxup_trackable">Spurebla</string>
+    <string name="gpxup_private">Privata</string>
+    <string name="asap">Senprokrasta</string>
+    <string name="share_route_as_gpx">Kunhavigi kurson kiel GPX-dosiero</string>
+    <string name="share_route_subject">Kurso kunhavigita per OsmAnd</string>
+    <string name="route_roundabout">Trafikcirklo: enveturu %1$d-an elveturejon</string>
+    <string name="route_kl">Veturu je maldekstra koridoro</string>
+    <string name="route_kr">Veturu je dekstra koridoro</string>
     </resources>
