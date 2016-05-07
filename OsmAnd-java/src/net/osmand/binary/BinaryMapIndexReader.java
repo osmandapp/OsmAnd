@@ -82,6 +82,10 @@ public class BinaryMapIndexReader {
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
 	
+	public final static int[] TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE };
+	public final static int[] CITY_TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE };
+
+	
 	private final RandomAccessFile raf;
 	protected final File file;
 	/*private*/ int version;

@@ -215,6 +215,13 @@ public class BinaryMapRouteReaderAdapter {
 		int destinationTypeRule = -1;
 		int destinationRefTypeRule = -1;
 		
+		public String getPartName() {
+			return "Routing";
+		}
+
+		public int getFieldNumber() {
+			return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER;
+		}
 		
 		public RouteTypeRule quickGetEncodingRule(int id) {
 			return routeEncodingRules.get(id);

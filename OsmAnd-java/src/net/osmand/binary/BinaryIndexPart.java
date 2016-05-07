@@ -1,10 +1,14 @@
 package net.osmand.binary;
 
-public class BinaryIndexPart {
+public abstract class BinaryIndexPart {
 
 	String name;
 	int length;
 	int filePointer;
+	
+	abstract public String getPartName();
+
+	abstract public int getFieldNumber();
 	
 	public int getLength() {
 		return length;

@@ -65,6 +65,14 @@ public class BinaryMapPoiReaderAdapter {
 			return leftLongitude;
 		}
 		
+		public String getPartName() {
+			return "POI";
+		}
+
+		public int getFieldNumber() {
+			return OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER;
+		}  
+		
 		public PoiSubType getSubtypeFromId(int id, StringBuilder returnValue) {
 			int tl;
 			int sl;
