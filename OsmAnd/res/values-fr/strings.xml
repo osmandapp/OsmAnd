@@ -962,7 +962,7 @@
 
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Masquer les limites administratives</string>
-    <string name="rendering_attr_noAdminboundaries_description">Ne pas afficher les limites administratives régionales (niveaux 5 à 9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9)</string>
 
 
     <string name="index_srtm_ele">Courbes de niveau</string>
@@ -2216,4 +2216,5 @@
     <string name="use_osm_live_routing_description">Activer la navigation OSM Live prenant en comptes les modifications en temps réel (Bêta)</string>
 	<string name="use_osm_live_routing">Navigation OSM Live</string>
     <string name="follow_us">Suivez nous</string>
+    <string name="lat_lon_pattern">Lat. : %1$.6f Lon. : %2$.6f</string>
     </resources>
