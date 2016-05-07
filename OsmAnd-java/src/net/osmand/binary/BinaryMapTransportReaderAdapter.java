@@ -41,6 +41,14 @@ public class BinaryMapTransportReaderAdapter {
 
 		int stopsFileOffset = 0;
 		int stopsFileLength = 0;
+		
+		public String getPartName() {
+			return "Transport";
+		}
+
+		public int getFieldNumber() {
+			return OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER;
+		}
 
 		public int getLeft() {
 			return left;
