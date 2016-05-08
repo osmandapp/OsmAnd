@@ -2186,6 +2186,6 @@
     <string name="access_direction_audio_feedback_descr">用聲音指示目標點方向</string>
     <string name="access_direction_haptic_feedback">方向觸感反饋</string>
     <string name="access_direction_haptic_feedback_descr">由振動指示目標點方向</string>
-    <string name="move_marker_bottom_sheet_title">移動地圖來改變標記的位置</string>
+    <string name="move_marker_bottom_sheet_title">移動地圖到要變更標記的位置</string>
     <string name="lat_lon_pattern">緯度: %1$.6f 經度: %2$.6f</string>
     </resources>
