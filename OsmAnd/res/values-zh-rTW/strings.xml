@@ -1003,7 +1003,7 @@
     <string name="download_roads_only_maps">僅道路地圖</string>
 
     <string name="rendering_attr_noAdminboundaries_name">隱藏界線</string>
-    <string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">抑制顯示行政區界(管理級別5-9)</string>
 
 
     <string name="map_widget_max_speed">速限</string>
