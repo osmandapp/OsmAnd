@@ -2175,4 +2175,7 @@
     <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
     <string name="rec_split_clip_length">Klipplängd</string>
     <string name="file_name_containes_illegal_char">Filnamnet innehåller ogiltiga tecken</string>
-</resources>
+<string name="move_marker_bottom_sheet_title">Flytta på kartan för att ändra markörens plats</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">Följ oss</string>
+    </resources>
