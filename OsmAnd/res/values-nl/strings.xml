@@ -2276,4 +2276,6 @@
     <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid</string>
     <string name="access_direction_haptic_feedback">Richting aangeven met trilling</string>
     <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen</string>
+    <string name="move_marker_bottom_sheet_title">Schuif de kaart om de positie te veranderen</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     </resources>
