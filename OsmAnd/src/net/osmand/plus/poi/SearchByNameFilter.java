@@ -1,6 +1,7 @@
 package net.osmand.plus.poi;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -34,8 +35,9 @@ public class SearchByNameFilter extends PoiUIFilter {
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		currentSearchResult = new ArrayList<Amenity>();
 		final int limit = distanceInd == 0 ? 500 : -1;
+		List<Amenity> result = Collections.emptyList();
 		if (!Algorithms.isBlank(getFilterByName())) {
-			List<Amenity> result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), topLatitude,
+			result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), topLatitude,
 					leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
 						boolean elimit = false;
 
