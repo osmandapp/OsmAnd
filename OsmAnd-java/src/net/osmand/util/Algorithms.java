@@ -35,6 +35,10 @@ public class Algorithms {
 	public static boolean isEmpty(String s){
 		return s == null || s.length() == 0;
 	}
+	
+	public static boolean isBlank(String s){
+		return s == null || s.trim().length() == 0;
+	}
 
 	public static boolean stringsEqual(String s1, String s2) {
 		if (s1 == null && s2 == null) {
