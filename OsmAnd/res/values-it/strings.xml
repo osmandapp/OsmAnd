@@ -2241,7 +2241,7 @@
     <string name="access_no_destination">Destinazione non impostata</string>
     <string name="map_widget_magnetic_bearing">Bussola magnetica</string>
     <string name="map_widget_bearing">Bussola relativa</string>
-    <string name="access_disable_offroute_recalc">Non cambiare il percorso quando si è fuori strada</string>
+    <string name="access_disable_offroute_recalc">Non cambiare il percorso quando si è fuori percorso</string>
     <string name="access_disable_offroute_recalc_descr">Previene il ricalcolo automatico del percorso quando si esce dalla strada giusta.</string>
     <string name="access_disable_wrong_direction_recalc">Non cambiare il percorso se la direzione è sbagliata</string>
     <string name="access_disable_wrong_direction_recalc_descr">Previene il ricalcolo automatico del percorso quando ci muove nella direzione sbagliata</string>
@@ -2249,4 +2249,13 @@
     <string name="access_smart_autoannounce_descr">Notifica solo quando la direzione verso la destinazione è cambiata</string>
     <string name="access_autoannounce_period">Intervallo annuncio automatico</string>
     <string name="access_autoannounce_period_descr">Tempo minimo fra annunci</string>
+    <string name="move_marker_bottom_sheet_title">Muovi la mappa per cambiare la posizione del marcatore</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">Seguici</string>
+    <string name="access_direction_audio_feedback">Audio feedback della direzione</string>
+    <string name="access_direction_audio_feedback_descr">Indica la posizione dell\'obiettivo con il suono</string>
+    <string name="access_direction_haptic_feedback">Feedback aptico della direzione</string>
+    <string name="access_direction_haptic_feedback_descr">Indica la direzione dell\' obiettivo con la vibrazione</string>
+    <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OSM Live (Beta)</string>
+	<string name="use_osm_live_routing">Navigazione OSM Live</string>
     </resources>
