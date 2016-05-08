@@ -2031,4 +2031,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="access_direction_audio_feedback">Resposta acústica segons direcció</string>
     <string name="access_direction_haptic_feedback">Resposta cinètica segons direcció</string>
     <string name="follow_us">Seguiu-nos</string>
+    <string name="move_marker_bottom_sheet_title">Desplaceu el mapa per canviar la posició del marcador</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     </resources>
