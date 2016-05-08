@@ -2242,7 +2242,7 @@
     <string name="map_widget_magnetic_bearing">Bussola magnetica</string>
     <string name="map_widget_bearing">Bussola relativa</string>
     <string name="access_disable_offroute_recalc">Non cambiare il percorso quando si è fuori percorso</string>
-    <string name="access_disable_offroute_recalc_descr">Previene il ricalcolo automatico del percorso quando si esce dalla strada giusta.</string>
+    <string name="access_disable_offroute_recalc_descr">Previene il ricalcolo automatico del percorso quando si esce dalla strada giusta</string>
     <string name="access_disable_wrong_direction_recalc">Non cambiare il percorso se la direzione è sbagliata</string>
     <string name="access_disable_wrong_direction_recalc_descr">Previene il ricalcolo automatico del percorso quando ci muove nella direzione sbagliata</string>
     <string name="access_smart_autoannounce">Annuncio automatico intelligente</string>
