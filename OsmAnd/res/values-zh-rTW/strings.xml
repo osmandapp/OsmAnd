@@ -66,7 +66,7 @@
 
     <string name="layer_map_appearance">組態螢幕顯示</string>
     <string name="show_lanes">顯示車道數</string>
-    <string name="avoid_unpaved">避開顛頗路面</string>
+    <string name="avoid_unpaved">避開未鋪面道路</string>
     <string name="avoid_ferries">避開渡輪</string>
     <string name="avoid_in_routing_title">避開…</string>
     <string name="avoid_in_routing_descr">避開收費道路、顛頗路面、渡輪</string>
@@ -80,7 +80,7 @@
     <string name="bg_service_sleep_mode_off">運行\n 應用程式在背景運轉</string>
     <string name="bg_service_sleep_mode_on">停止\n在背景執行</string>
     <string name="gps_wakeup_interval">GPS 喚醒間隔：%s</string>
-    <string name="int_continuosly">繼續</string>
+    <string name="int_continuosly">連續</string>
     <string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
     <string name="map_widget_top_text">街道名稱</string>
     <string name="map_widget_config">組態螢幕顯示</string>
@@ -190,7 +190,7 @@
 	
 	
 	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網上（所謂的圖磚或網格）地圖，從預設的 OpenStreetMap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
-\n\n地圖圖磚可以直接透過線上資料來源獲得，或著可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
+\n\n地圖圖磚可以直接透過線上資料來源獲得，或者可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
     <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景模式下(螢幕關閉)顯示設定，以啟用追蹤與導航。</string>
     <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
 
@@ -209,7 +209,7 @@
     <string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(管理地圖檔案)或切換成線上地圖(啟用線上地圖外掛元件)。</string>
     <string name="send_files_to_osm">傳送 GPX 檔案到 OSM 嗎？</string>
     <string name="gpx_visibility_txt">能見度</string>
-    <string name="gpx_tags_txt">旗標</string>
+    <string name="gpx_tags_txt">標籤</string>
     <string name="gpx_description_txt">敘述</string>
     <string name="validate_gpx_upload_name_pwd">請指定 OSM 的帳號、密碼用以上傳 GPX 檔案。</string>
     <string name="default_buttons_support">支援</string>
@@ -330,7 +330,7 @@
 
 
     <string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
-    <string name="download_files_question_space">"真的要下載 {0 MB 檔案嗎？這需要 {1} MB  的永久空間，現有 {2} MB 的可用空間。"</string>
+    <string name="download_files_question_space">"真的要下載 {0} MB 檔案嗎？這需要 {1} MB  的永久空間，現有 {2} MB 的可用空間。"</string>
 
 
     <string name="use_transparent_map_theme">透明主題</string>
@@ -626,7 +626,7 @@
     <string name="network_provider">網路</string>
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">秒</string>
-    <string name="int_min">分。</string>
+    <string name="int_min">分</string>
     <string name="background_service_int_descr">設定使用在背景服務的喚醒間隔</string>
     <string name="background_service_int">GPS 喚醒間隔</string>
     <string name="background_service_provider_descr">選擇位置提供，使用在背景服務</string>
@@ -974,7 +974,7 @@
     <string name="recording_delete_confirm">您想刪除此錄製嗎？</string>
     <string name="recording_unavailable">無法使用</string>
     <string name="recording_context_menu_arecord">錄取音訊附註</string>
-    <string name="destination_point">目的地 ％1$S</string>
+    <string name="destination_point">目的地 %1$s</string>
     <string name="local_osm_changes_backup_successful">OSM 變更的檔案已成功的產生 %1$s</string>
     <string name="av_use_external_recorder_descr">視訊使用系統錄製</string>
     <string name="av_use_external_recorder">使用系統錄製</string>
@@ -1026,7 +1026,7 @@
     <string name="please_select_address">首先選擇城市或街道</string>
     <string name="available_downloads_left">還可下載檔案 %1$d 次</string>
     <string name="close_changeset">關閉異動清單</string>
-    <string name="zxing_barcode_scanner_not_found">ZXing 條碼掃描器應用程式未安裝。要在 Google Play 中的搜尋嗎？</string>
+    <string name="zxing_barcode_scanner_not_found">ZXing 條碼掃描器應用程式未安裝。要在 Google Play 中搜尋嗎？</string>
     <string name="support_new_features_descr">捐贈後可在應用程式裡看到新的功能實現</string>
     <string name="local_index_no_items_to_do">沒有項目在 %1$s</string>
     <string name="incomplete_locale">未完成</string>
@@ -1155,7 +1155,7 @@
     <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
     <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於之前的存儲檔案夾 (%s)。您是否想變更到允許的存儲位置並複製所有的 OsmAnd 檔案到那裡？
 \n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
-\n注意 2：在新的存儲位置，它不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。</string>
+\n注意 2：在新的存儲位置，它不可能在 OsmAnd 和 OsmAnd+ 兩者之間共用檔案。</string>
     <string name="routing_attr_prefer_motorway_name">高速公路優先</string>
     <string name="routing_attr_prefer_motorway_description">高速公路優先</string>
     <string name="routing_attr_short_way_name">最短路線</string>
@@ -1439,7 +1439,7 @@
     <string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
     <string name="arrival_distance_factor_late">稍遲</string>
-    <string name="arrival_distance_factor_at_last">在最後一米</string>
+    <string name="arrival_distance_factor_at_last">在最後幾公尺</string>
     <string name="rendering_attr_coloredBuildings_name">按類型用色碼區分建築物</string>
 
     <string name="av_camera_pic_size">相機照片的大小</string>
@@ -1492,7 +1492,7 @@
     <string name="osmo_no_connection_msg">無法連接到 OsMo 伺服器：\n- 檢查您的網路連線；\n- 檢查設定；\n- 查看我們的 Twitter：https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在網站上的個人儀表板管理群組和裝置。</string>
     <string name="anonymous_user">匿名使用者</string>
-    <string name="logged_as">已登入於 %1$s</string>
+    <string name="logged_as">已登入為 %1$s</string>
     <string name="rendering_category_details">詳細資訊</string>
     <string name="rendering_category_transport">交通工具</string>
     <string name="rendering_category_others">其它地圖屬性</string>
@@ -1678,7 +1678,7 @@
     <string name="waypoint_visit_after">隨後造訪</string>
     <string name="waypoint_visit_before">先造訪</string>
     <string name="shared_string_dismiss">解除</string>
-    <string name="shared_string_collapse">崩潰</string>
+    <string name="shared_string_collapse">收合</string>
     <string name="drawer">平面清單</string>
     <string name="osm_edits">OSM 編輯</string>
     <string name="osmand_parking_hour">時</string>
@@ -1838,8 +1838,8 @@
     <string name="tab_title_basic">基本</string>
     <string name="tab_title_advanced">展開</string>
     <string name="building_number">門牌號碼</string>
-    <string name="opening_at">營業于</string>
-    <string name="closing_at">結束于</string>
+    <string name="opening_at">營業於</string>
+    <string name="closing_at">結束於</string>
     <string name="next_proceed">下頁</string>
     <string name="av_locations_descr">GPX 檔案加上地點附註</string>
     <string name="av_locations">地點</string>
@@ -1880,10 +1880,10 @@
     <string name="si_m_s">公尺每秒</string>
     <string name="si_min_km">分鐘每公里</string>
     <string name="si_min_m">分鐘每英里</string>
-    <string name="si_nm_h">海浬每小時 (節)</string>
+    <string name="si_nm_h">海里每小時 (節)</string>
     <string name="min_mile">分/公尺</string>
     <string name="min_km">分/公里</string>
-    <string name="m_s">秒/公尺</string>
+    <string name="m_s">公尺/秒</string>
 
     <string name="nm_h">浬/時</string>
     <string name="favorite_category_add_new">增加新的</string>
@@ -1927,7 +1927,7 @@
     <string name="go_to_map">返回地圖</string>
     <string name="shared_string_qr_code">QR 碼</string>
     <string name="enter_country_name">輸入國家/地區名稱</string>
-    <string name="world_map_download_descr">全球底圖 (涵蓋在整個縮小的世界) 丟失或過時。請考量一下為了完整的環境，下載全球底圖。</string>
+    <string name="world_map_download_descr">全球底圖 (小比例尺涵蓋全世界) 丟失或過時。請考量一下為了完整的環境，下載全球底圖。</string>
     <string name="new_version">新版本</string>
     <string name="begin_with_osmand_menu_group">跟 OsmAnd 的第一步</string>
     <string name="features_menu_group">功能</string>
@@ -1966,7 +1966,7 @@
     <string name="lang_mk">馬其頓</string>
     <string name="lang_fy">菲士蘭</string>
     <string name="lang_als">阿爾巴尼亞 (Tosk)</string>
-    <string name="share_osm_edits_subject">透過 OsmAnd 共用以編輯 Osm</string>
+    <string name="share_osm_edits_subject">透過 OsmAnd 共用以編輯 OSM</string>
     <string name="save_poi_without_poi_type_message">您真的想要儲存興趣點成為沒有類型的興趣點嗎？</string>
     <string name="shared_string_location">位置</string>
     <string name="poi_context_menu_modify_osm_change">修改 OSM 的變更</string>
@@ -2042,7 +2042,7 @@
 
     <string name="update_time">更新時間</string>
 
-<string name="updates_size">更新：%s</string>
+<string name="updates_size">更新大小</string>
 <string name="last_map_change">上次地圖的更改：%s</string>
 <string name="rec_split">錄製分割</string>
     <string name="rec_split_title">使用錄製分割</string>
@@ -2112,11 +2112,11 @@
     <string name="show_transparency_seekbar">顯示透明度拖動軸</string>
     <string name="donations">捐贈</string>
     <string name="number_of_recipients">接受者數目</string>
-    <string name="osm_user_stat">編輯 %1$s，等級 %2$s，合計編輯 %2$s</string>
+    <string name="osm_user_stat">編輯 %1$s，等級 %2$s，合計編輯 %3$s</string>
     <string name="osm_editors_ranking">OSM 編輯排名</string>
     <string name="osm_live_subscribe_btn">捐助</string>
     <string name="osm_live_email_desc">我們需要它來為您提供關於捐款的資訊</string>
-    <string name="osm_live_user_public_name">公衆名稱</string>
+    <string name="osm_live_user_public_name">公開名稱</string>
     <string name="osm_live_hide_user_name">不要在報告中顯示我的名稱</string>
     <string name="osm_live_support_region">支援地區</string>
     <string name="osm_live_month_cost">每月費用</string>
@@ -2124,7 +2124,7 @@
     <string name="osm_live_active">有效的</string>
     <string name="osm_live_not_active">失效的</string>
     <string name="osm_live_enter_email">請輸入有效的電子郵件地址</string>
-    <string name="osm_live_enter_user_name">請輸入公眾名稱</string>
+    <string name="osm_live_enter_user_name">請輸入公開名稱</string>
     <string name="osm_live_subscription_settings">認捐設定</string>
     <string name="osm_live_subscription">OSM 即時捐助</string>
     <string name="osm_live_thanks">感謝您的捐款，即時更新！</string>
@@ -2141,7 +2141,7 @@
     <string name="finish_navigation">導航完成</string>
     <string name="shared_string_move_up">上移</string>
     <string name="shared_string_move_down">下移</string>
-    <string name="full_report">全部報告</string>
+    <string name="full_report">完整報告</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap 登入與密碼</string>
     <string name="report">報告</string>
     <string name="file_name_containes_illegal_char">檔案名稱含有違反規則的字符</string>
