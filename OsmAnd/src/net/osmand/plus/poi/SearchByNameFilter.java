@@ -10,6 +10,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class SearchByNameFilter extends PoiUIFilter {
@@ -33,27 +34,30 @@ public class SearchByNameFilter extends PoiUIFilter {
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		currentSearchResult = new ArrayList<Amenity>();
 		final int limit = distanceInd == 0 ? 500 : -1;
-		List<Amenity> result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
-					boolean elimit = false;
-					@Override
-					public boolean publish(Amenity object) {
-						if (limit != -1 && currentSearchResult.size() > limit) {
-							elimit = true;
-						}
-						if (matcher.publish(object)) {
-							currentSearchResult.add(object);
-							return true;
-						}
-						return false;
-					}
+		if (!Algorithms.isBlank(getFilterByName())) {
+			List<Amenity> result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), topLatitude,
+					leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
+						boolean elimit = false;
 
-					@Override
-					public boolean isCancelled() {
-						return matcher.isCancelled() || elimit;
-					}
-				});
-		MapUtils.sortListOfMapObject(result, lat, lon);
+						@Override
+						public boolean publish(Amenity object) {
+							if (limit != -1 && currentSearchResult.size() > limit) {
+								elimit = true;
+							}
+							if (matcher.publish(object)) {
+								currentSearchResult.add(object);
+								return true;
+							}
+							return false;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return matcher.isCancelled() || elimit;
+						}
+					});
+			MapUtils.sortListOfMapObject(result, lat, lon);
+		}
 		currentSearchResult = result;
 		return currentSearchResult;
 	}
