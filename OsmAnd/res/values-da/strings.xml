@@ -53,7 +53,7 @@
 
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
-    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale grænser (admin niveau 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale administrative grænser (niveau 5–9)</string>
 
 
     <string name="map_widget_max_speed">Hastighedsgrænse</string>
@@ -2366,4 +2366,6 @@
     <string name="access_direction_haptic_feedback">Retning med haptisk indikation</string>
     <string name="access_direction_haptic_feedback_descr">"Indikerer retning til målpunkt  med vibrationer"</string>
     <string name="follow_us">Følg os</string>
+    <string name="move_marker_bottom_sheet_title">Flyt kortet for at ændre markørens position</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     </resources>
