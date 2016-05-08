@@ -772,7 +772,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC</string>
     <string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
-    <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5–9)</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No se encontró edificios.</string>
@@ -2176,4 +2176,6 @@
     <string name="access_direction_audio_feedback_descr">Indica el punto de dirección del destino mediante sonido</string>
     <string name="access_direction_haptic_feedback">Dirección de retroalimentación háptica</string>
     <string name="access_direction_haptic_feedback_descr">Indica el punto de dirección del destino mediante vibración</string>
+    <string name="move_marker_bottom_sheet_title">Mueve el mapa para cambiar la ubicación del marcador</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     </resources>
