@@ -2033,4 +2033,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="follow_us">Seguiu-nos</string>
     <string name="move_marker_bottom_sheet_title">Desplaceu el mapa per canviar la posició del marcador</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="map_widget_battery">Nivell de la bateria</string>
     </resources>
