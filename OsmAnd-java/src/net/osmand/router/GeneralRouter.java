@@ -767,7 +767,7 @@ public class GeneralRouter implements VehicleRouter {
 			parameters.add(param);
 		}
 
-		public Object eval(BitSet types, ParameterContext paramContext) {
+		public synchronized Object eval(BitSet types, ParameterContext paramContext) {
 			if (matches(types, paramContext)) {
 				return calcSelectValue(types, paramContext);
 			}
