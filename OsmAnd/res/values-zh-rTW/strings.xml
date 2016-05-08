@@ -1431,9 +1431,9 @@
     <string name="osmo_invite">邀請…</string>
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
-    <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 （SAC）</string>
+    <string name="rendering_attr_alpineHiking_name">登山難度分級 （SAC）</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">徒步符號層</string>
-    <string name="rendering_attr_alpineHiking_description">依據 SAC 比例演算路徑</string>
+    <string name="rendering_attr_alpineHiking_description">依據 SAC 分級演算路徑</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡演算路徑</string>
 
     <string name="arrival_distance_factor_early">提早</string>
@@ -2186,4 +2186,6 @@
     <string name="access_direction_audio_feedback_descr">用聲音指示目標點方向</string>
     <string name="access_direction_haptic_feedback">方向觸感反饋</string>
     <string name="access_direction_haptic_feedback_descr">由振動指示目標點方向</string>
+    <string name="move_marker_bottom_sheet_title">移動地圖來改變標記的位置</string>
+    <string name="lat_lon_pattern">緯度: %1$.6f 經度: %2$.6f</string>
     </resources>
