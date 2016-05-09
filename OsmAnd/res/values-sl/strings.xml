@@ -949,7 +949,7 @@
 
     <string name="monitoring_control_start">Beleženje GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
-    <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej na ravneh približanja od 5 do 9</string>
+    <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9)</string>
 
 
     <string name="index_srtm_ele">Izris izohips</string>
@@ -2200,4 +2200,6 @@
     <string name="access_direction_audio_feedback_descr">Določi smer ciljne točke z zvokom</string>
     <string name="access_direction_haptic_feedback">Vibracijsko najavljanje smeri</string>
     <string name="access_direction_haptic_feedback_descr">Določi smer ciljne točke z vibriranjem naprave</string>
+    <string name="move_marker_bottom_sheet_title">Premakni zemljevid za spremembo položaja oznake</string>
+    <string name="lat_lon_pattern">ZŠir: %1$.6f ZDol: %2$.6f</string>
     </resources>
