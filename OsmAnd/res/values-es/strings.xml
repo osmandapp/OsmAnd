@@ -2152,4 +2152,16 @@
     <string name="access_widget_expand">Expandir</string>
     <string name="access_shared_string_navigate_up">Navegar hacia arriba</string>
     <string name="access_sort">Ordenar</string>
+    <string name="move_marker_bottom_sheet_title">Mover el mapa para cambiar la posición del marcador</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">Síguenos</string>
+    <string name="access_direction_audio_feedback">Realimentación por audio de la dirección</string>
+    <string name="access_direction_audio_feedback_descr">Indicar la dirección del punto objetivo mediante sonido</string>
+    <string name="access_direction_haptic_feedback">Retroalimentación háptica de la dirección</string>
+    <string name="access_direction_haptic_feedback_descr">"Indicar la dirección del punto  destino mediante vibración"</string>
+    <string name="use_osm_live_routing_description">Habilitar la navegación para los cambios de OSM en vivo (Beta)</string>
+	<string name="use_osm_live_routing">Navegación de OSM en vivo</string>
+    <string name="access_no_destination">El destino no está fijado</string>
+    <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
+    <string name="map_widget_bearing">Rumbo relativo</string>
     </resources>
