@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -2206,4 +2207,45 @@
     <string name="confirm_download_roadmaps">모든 지도를 가지고 있더러도 지도를 다운로드 하시겠습니까?</string>
     <string name="file_size_in_mb">%.1f MB</string>
 <string name="value_downloaded_of_max">%2$.1f MB 에서 %1$.1f</string>
+    <string name="move_marker_bottom_sheet_title"/>
+    <string name="lat_lon_pattern"/>
+    <string name="follow_us"/>
+    <string name="access_direction_audio_feedback"/>
+    <string name="access_direction_audio_feedback_descr"/>
+    <string name="access_direction_haptic_feedback"/>
+    <string name="access_direction_haptic_feedback_descr"/>
+    <string name="use_osm_live_routing_description"/>
+	<string name="use_osm_live_routing"/>
+    <string name="access_no_destination"/>
+    <string name="map_widget_magnetic_bearing"/>
+    <string name="map_widget_bearing"/>
+    <string name="access_disable_offroute_recalc"/>
+    <string name="access_disable_offroute_recalc_descr"/>
+    <string name="access_disable_wrong_direction_recalc"/>
+    <string name="access_disable_wrong_direction_recalc_descr"/>
+    <string name="access_smart_autoannounce"/>
+    <string name="access_smart_autoannounce_descr"/>
+    <string name="access_autoannounce_period"/>
+    <string name="access_autoannounce_period_descr"/>
+    <string name="access_default_color"/>
+    <string name="access_category_choice"/>
+    <string name="access_hint_enter_name"/>
+    <string name="access_hint_enter_category"/>
+    <string name="access_hint_enter_description"/>
+    <string name="access_map_linked_to_location"/>
+    <string name="access_collapsed_list"/>
+    <string name="access_expanded_list"/>
+    <string name="access_empty_list"/>
+    <string name="access_tree_list"/>
+    <string name="access_shared_string_not_installed"/>
+    <string name="access_widget_expand"/>
+    <string name="access_shared_string_navigate_up"/>
+    <string name="access_sort"/>
+    <string name="map_mode"/>
+    <string name="number_of_gpx_files_selected_pattern"/>
+    <string name="rendering_value_thin_name"/>
+    <string name="rendering_value_medium_name"/>
+    <string name="rendering_value_bold_name"/>
+    <string name="no_map_markers_found"></string>
+    <string name="no_waypoints_found"/>
     </resources>
