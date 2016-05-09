@@ -2252,8 +2252,8 @@
     <string name="move_marker_bottom_sheet_title">Muovi la mappa per cambiare la posizione del marcatore</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="follow_us">Seguici</string>
-    <string name="access_direction_audio_feedback">Audio feedback della direzione</string>
-    <string name="access_direction_audio_feedback_descr">Indica la posizione dell\'obiettivo con il suono</string>
+    <string name="access_direction_audio_feedback">Feedback sonoro di direzione</string>
+    <string name="access_direction_audio_feedback_descr">Indica la direzione di destinazione con il suono</string>
     <string name="access_direction_haptic_feedback">Feedback aptico della direzione</string>
     <string name="access_direction_haptic_feedback_descr">Indica la direzione dell\' obiettivo con la vibrazione</string>
     <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OSM Live (Beta)</string>
