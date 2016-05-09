@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.BlurMaskFilter.Blur;
@@ -17,6 +19,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.hardware.GeomagneticField;
+import android.os.BatteryManager;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -330,7 +333,7 @@ public class RouteInfoWidgetsFactory {
 					if (DateFormat.is24HourFormat(ctx)) {
 						setText(DateFormat.format("k:mm", time).toString(), null); //$NON-NLS-1$
 					} else {
-						setText(DateFormat.format("h:mm", time).toString(), 
+						setText(DateFormat.format("h:mm", time).toString(),
 								DateFormat.format("aa", time).toString()); //$NON-NLS-1$
 					}
 				}
@@ -341,8 +344,46 @@ public class RouteInfoWidgetsFactory {
 		plainTimeControl.setIcons(R.drawable.widget_time_day, R.drawable.widget_time_night);
 		return plainTimeControl;
 	}
-	
-	
+
+
+	public TextInfoWidget createBatteryControl(final MapActivity map){
+		final int battery = R.drawable.widget_battery_day;
+		final int batteryN = R.drawable.widget_battery_night;
+		final int batteryCharging = R.drawable.widget_battery_charging_day;
+		final int batteryChargingN = R.drawable.widget_battery_charging_night;
+		final OsmandApplication ctx = map.getMyApplication();
+		final TextInfoWidget batteryControl = new TextInfoWidget(map) {
+			private long cachedLeftTime = 0;
+
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				long time = System.currentTimeMillis();
+				if (time - cachedLeftTime > 1000) {
+					cachedLeftTime = time;
+					Intent batteryIntent = ctx.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+					int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+					int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+					int status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+
+					if (level == -1 || scale == -1 || status == -1) {
+						setText("?", null);
+						setIcons(battery, batteryN);
+					} else {
+						boolean charging = ((status == BatteryManager.BATTERY_STATUS_CHARGING) ||
+								(status == BatteryManager.BATTERY_STATUS_FULL));
+						setText(String.format("%d%%", (level * 100) / scale), null );
+						setIcons(charging ? batteryCharging : battery, charging ? batteryChargingN : batteryN);
+					}
+				}
+				return false;
+			};
+		};
+		batteryControl.setText(null, null);
+		batteryControl.setIcons(battery, batteryN);
+		return batteryControl;
+	}
+
+
 	public TextInfoWidget createMaxSpeedControl(final MapActivity map) {
 		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
 		final OsmAndLocationProvider locationProvider = map.getMyApplication().getLocationProvider();
