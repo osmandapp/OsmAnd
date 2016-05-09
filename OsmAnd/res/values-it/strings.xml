@@ -2034,7 +2034,7 @@
     <string name="read_more">Altro</string>
     <string name="whats_new">Novità</string>
     <string name="share_osm_edits_subject">Modifiche OSM condivise tramite OsmAnd</string>
-    <string name="lang_nds">Basso sassone</string>
+    <string name="lang_nds">Basso tedesco</string>
     <string name="lang_mk">Macedone</string>
     <string name="save_poi_without_poi_type_message">Vuoi davvero salvare il PDI senza specificarne il tipo?</string>
     <string name="context_menu_item_delete_waypoint">Cancellare il waypoint del GPX?</string>
@@ -2255,7 +2255,7 @@
     <string name="access_direction_audio_feedback">Feedback sonoro di direzione</string>
     <string name="access_direction_audio_feedback_descr">Indica la direzione di destinazione con il suono</string>
     <string name="access_direction_haptic_feedback">Feedback aptico della direzione</string>
-    <string name="access_direction_haptic_feedback_descr">Indica la direzione dell\' obiettivo con la vibrazione</string>
+    <string name="access_direction_haptic_feedback_descr">Indica la direzione di destinazione con la vibrazione</string>
     <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OSM Live (Beta)</string>
 	<string name="use_osm_live_routing">Navigazione OSM Live</string>
     </resources>
