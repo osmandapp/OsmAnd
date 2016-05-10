@@ -2172,7 +2172,7 @@
     <string name="access_hint_enter_name">Ievadiet vārdu</string>
     <string name="access_hint_enter_category">Ievadiet kategoriju</string>
     <string name="access_hint_enter_description">Ievadiet aprakstu</string>
-    <string name="access_map_linked_to_location">Karte piesaistīta atrašanās vietai</string>
+    <string name="access_map_linked_to_location">Karte ir piesaistīta atrašanās vietai</string>
     <string name="access_collapsed_list">Sakļauts saraksts</string>
     <string name="access_expanded_list">Izplests saraksts</string>
     <string name="access_empty_list">Tukšs saraksts</string>
@@ -2184,4 +2184,24 @@
     <string name="osmo_group_information_desc">" - Veidojot grupu, piešķiriet tai vārdu un aprakstu\n- No aplikācijas loga var izveidot tikai vienkāršu grupu, vairāk lasiet https://osmo.mobi/g/new interneta lapā\n- Caur interneta lapu ir iespējams organizēt grupu, kā arī pievienot visiem pieejamus trekus un punktus\n- Mēs neatbalstam vienas grupas lietošanu vienpersoniski, ja vien tā nav POI grupa\n- Privātās grupas ir ierobežotas līdz 8 personām\n- Detalizētākus noteikumus un nosacījumus lasiet OsMo.mobi interneta lapā\n- Ja jums ir īpašas prasības un vajadzības - lūdzu rakstiet uz epastu osmo.mobi@gmail.com "</string>
     <string name="release_2_2">" • Jauns satura jūtīgs interfeiss pieskaroties vietām uz kartes un citur aplikācijā\n • Kartes skats tiek atvērts uzreiz, ja vien nav atzīmēts \"rādīt manu izvēlni atverot aplikāciju\"\n • Definēt kādas sadaļas un kā tiks attēlotas manā izvēlnē\n • Izslēgt manu izvēlni, ja jums labāk patīk kontrolēt aplikāciju caur parastām izvēlnēm\n • Lai lejupielādētu kartes, izvēlētos reģionus var atzīmēt uz pasaules kartes\n • POI meklēšana tagad atbalsta specifiskākus vaicājumus\n • Uzlabotas POI un OSM labošanas iespējas\n • Pārstrādāts karšu datu lejupielādes struktūra un interfeiss\n\nun vēl... "</string>
     <string name="plugin_ski_descr">"Šis OsmAnd spraudnis ļauj piekļūt datiem par slēpošanas trasēm un maršrutēm, trošu vagoniem un pacēlājiem. Maršruti un trases tiek rādītas pēc krāsām atkarībā no grūtības pakāpes un attēlotas īpašā \"ziemas\" kartes stilā.\n\nAktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpes,\" attēlojot visus ainavas elementus ziemas apstākļiem atbilstošus. Deaktivizēt spraudni un atgriezties normālā kartes skatā var vai nu šeit vai mainot kartes stilu kartes uzstādījumos. "</string>
+    <string name="move_marker_bottom_sheet_title">Pārvietojiet karti, lai mainītu marķiera pozīciju</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">Sekojiet mums</string>
+    <string name="access_direction_audio_feedback">Skaņas indikācija kustībai</string>
+    <string name="access_direction_audio_feedback_descr">Kustība uz mērķa virzienu pēc skaņas</string>
+    <string name="access_direction_haptic_feedback">Vibrāciju indikācija kustībai</string>
+    <string name="access_direction_haptic_feedback_descr">Kustība uz mērķa virzienu pēc vibrācijas</string>
+    <string name="use_osm_live_routing_description">Iespējot navigāciju ar OSM Live (Beta)</string>
+	<string name="use_osm_live_routing">OSM Live navigācija</string>
+    <string name="access_no_destination">Galamēŗķis nav nosprausts</string>
+    <string name="map_widget_magnetic_bearing">Magnētiskais virziens</string>
+    <string name="map_widget_bearing">Relatīvais virziens</string>
+    <string name="access_disable_offroute_recalc">Nemainīt maršrutu, novirzoties no ceļa</string>
+    <string name="access_disable_offroute_recalc_descr">Maršruts netiks automātiski pārrēķināts, arī ja būsiet novirzījies no nospraustā ceļa</string>
+    <string name="access_disable_wrong_direction_recalc">Nemainīt maršrutu pēc kustības virziena</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Maržruts netiks automātiski pārrēķināts, ja brauksiet nepareizā virzienā</string>
+    <string name="access_smart_autoannounce">Gudrā balss vadība</string>
+    <string name="access_smart_autoannounce_descr">Ziņot tikai tad, ja ir izmainījies virziens uz galamērķi</string>
+    <string name="access_autoannounce_period">Balss vadības intervāls</string>
+    <string name="access_autoannounce_period_descr">Minimālais laika intervāls starp balss uzvednēm</string>
     </resources>
