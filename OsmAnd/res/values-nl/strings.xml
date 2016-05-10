@@ -1330,7 +1330,7 @@
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Deze plug-in is voor \"OsMo Monitoring\", zie http://osmo.mobi.\n\nJe kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Deze plug-in is voor OpenStreetMap Monitoring\", zie https://osmo.mobi.\n\nJe kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -2136,7 +2136,7 @@
     <string name="update_time">Controle-tijdstip</string>
 <string name="updates_size">Updates: grootte totaal</string>
 <string name="last_map_change">Laatste kaart-update: %s</string>
-<string name="rec_split">Video-opname automatisch splitsen</string>
+<string name="rec_split">Splitsen van opnames</string>
     <string name="rec_split_title">Gebruik automatische splitsing</string>
     <string name="rec_split_desc">Videoclips overschrijven als opslagruimte vol is</string>
     <string name="rec_split_clip_length">Cliplengte</string>
@@ -2205,7 +2205,7 @@
     <string name="upload_anonymously">Anoniem uploaden</string>
     <string name="show_transparency_seekbar">Toon Transparantie-schuif op kaart</string>
     <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! Tijdelijk is {3} MB nodig en permanent {1} MB. Nu is maar {2} MB beschikbaar.</string>
-    <string name="download_files_question_space_with_temp">{0} bestanden downloaden? Tijdelijk is {3} MB nodig en permanent {1} MB. Er is nu maar {2} MB beschikbaar.</string>
+    <string name="download_files_question_space_with_temp">{0} bestanden downloaden? Tijdelijk is {3} MB nodig en permanent {1} MB. Er is nu {2} MB beschikbaar.</string>
     <string name="upload_osm_note_description">Je kunt OSM Opmerkingen anoniem uploaden of je OpenStreetMap.org profiel gebruiken.</string>
     <string name="upload_osm_note">OSM Opmerking uploaden</string>
     <string name="map_marker_1st">Eerste Markeervlaggetje</string>
@@ -2243,7 +2243,7 @@
     <string name="rendering_value_medium_name">Normaal</string>
     <string name="rendering_value_bold_name">Vet</string>
     <string name="map_mode">Dag-Nacht stijl</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-files geselecteerd</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX-bestanden geselecteerd</string>
     <string name="access_default_color">Standaardkleur</string>
     <string name="access_category_choice">Kies categorie</string>
     <string name="access_hint_enter_name">Voer naam in</string>
