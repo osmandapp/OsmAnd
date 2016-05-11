@@ -531,7 +531,7 @@
     <string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的標點須以舊版程式匯出後再用新版程式匯入。</string>
     <string name="build_installed">編譯 {0} 成功安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
-    <string name="install_selected_build">您要安裝 OsmAnd - {0} 的 {1} {2} MB ?</string>
+    <string name="install_selected_build">您要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
     <string name="loading_builds_failed">檢索 OsmAnd 編譯列表失敗</string>
     <string name="loading_builds">正在載入 OsmAnd 編譯…</string>
     <string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
@@ -1686,9 +1686,9 @@
     <string name="osmand_parking_time_left">左</string>
     <string name="parking_place_limited">停車場時限到</string>
     <string name="your_edits">您的編輯</string>
-    <string name="action_create">行動建立</string>
+    <string name="action_create">建立</string>
     <string name="action_modify">修改</string>
-    <string name="action_delete">行動刪除</string>
+    <string name="action_delete">刪除</string>
     <string name="osmand_parking_overdue">已過時</string>
     <string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間</string>
     <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
