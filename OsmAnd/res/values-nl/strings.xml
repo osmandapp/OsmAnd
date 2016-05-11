@@ -581,7 +581,7 @@
   <string name="follow">Start navigatie</string>
   <string name="recalculate_route_to_your_location">Soort vervoer:</string>
   <string name="mark_final_location_first">Kies eerst een Bestemming</string>
-  <string name="get_directions">Aanwijzingen</string>
+  <string name="get_directions">Routebeschrijving</string>
   
   <string name="opening_hours">Openingstijden</string>
   <string name="opening_changeset">Changeset wordt geopend…</string>
@@ -1163,8 +1163,8 @@
     <string name="clear_intermediate_points">Wis Tussenpunten</string>
     <string name="keep_intermediate_points">Bewaar Tussenpunten</string>
     <string name="new_directions_point_dialog">"Er zijn al Tussenpunten  gemaakt."</string>
-    <string name="context_menu_item_directions_to">Aanwijzingen naar</string>
-    <string name="context_menu_item_directions_from">Aanwijzingen vanaf</string>
+    <string name="context_menu_item_directions_to">Routebeschrijving naar</string>
+    <string name="context_menu_item_directions_from">Routebeschrijving vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
     <string name="route_to">Naar:</string>
     <string name="route_via">Via:</string>
