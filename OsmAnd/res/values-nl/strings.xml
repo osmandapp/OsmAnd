@@ -2278,4 +2278,5 @@
     <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen</string>
     <string name="move_marker_bottom_sheet_title">Schuif de kaart om de marker-positie te wijzigen</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="map_widget_battery">Acculading</string>
     </resources>
