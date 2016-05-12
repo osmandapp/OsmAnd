@@ -124,7 +124,7 @@ public class VoiceRouter {
 		// turn prompt starts either at distance, or additionally (TURN_IN and TURN only) if actual-lead-time(currentSpeed) < maximum-lead-time(defined by default speed)
 		if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			PREPARE_LONG_DISTANCE = 3500;             // [105 sec @ 120 km/h]
-			// Issue #1411: Do not play prompts for PREPARE_LONG_DISTANCE, not needed.
+			// Issue 1411: Do not play prompts for PREPARE_LONG_DISTANCE, not needed.
 			PREPARE_LONG_DISTANCE_END = 3000 + 1000;  // [ 90 sec @ 120 km/h]
 			PREPARE_DISTANCE = 1500;                  // [125 sec]
 			PREPARE_DISTANCE_END = 1200;      	  // [100 sec]
@@ -546,7 +546,7 @@ public class VoiceRouter {
 		}
 		if (player != null && player.supportsStructuredStreetNames()) {
 			Term next = empty;
-			//Issue 2377: Play Dest here only if not already previously announced to repeat repetition
+			//Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
 			if (includeDest == true) {
 				next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
 						getTermString(getSpeakablePointName(i.getStreetName())),
@@ -558,7 +558,7 @@ public class VoiceRouter {
 			}
 			Term current = empty;
 			if (currentSegment != null) {
-				//Issue 2377: Play Dest here only if not already previously announced to repeat repetition
+				//Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
 				if (includeDest == true) {
 					RouteDataObject obj = currentSegment.getObject();
 					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
