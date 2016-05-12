@@ -259,7 +259,7 @@
     <string name="search_radius_proximity">Na proximidade de</string>
     <string name="osmo_device_not_found">Aparelho não encontrado</string>
     <string name="osmo_no_connection_msg">Serviço OsMo não está disponível:\n- verificar a conexão;\n- verificar as configurações;\n- conferir nosso Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Um usuário anônimo não pode:\n- criar grupos;\n- sincronizar aparelhos e grupos com o servidor;\n- gerenciar grupos e aparelhos em uma sala particular.</string>
+    <string name="anonymous_user_hint">Um usuário anônimo não pode:\n- criar grupos;\n- sincronizar aparelhos e grupos com o servidor;\n- gerenciar grupos e aparelhos no painel de controle do website.</string>
     <string name="anonymous_user">Usuário anônimo</string>
     <string name="logged_as">Conectado como %1$s</string>
 	<string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
@@ -2021,4 +2021,12 @@
     <string name="donations">Doações</string>
     <string name="number_of_recipients">Número de destinatários</string>
     <string name="osm_editors_ranking">Ranking de editores de OSM</string>
+    <string name="map_widget_battery">Situação da bateria</string>
+    <string name="move_marker_bottom_sheet_title">Movimente o mapa para posicionar o marcador</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="use_osm_live_routing">Navegação OSM Live</string>
+    <string name="access_no_destination">O destino não foi indicado</string>
+    <string name="access_disable_offroute_recalc_descr">Desabilitar calculo automático da rota quando estiver muito longe</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo automático da rota quando estiver se movendo na direção errada</string>
+    <string name="follow_us">Siga-nos</string>
     </resources>
