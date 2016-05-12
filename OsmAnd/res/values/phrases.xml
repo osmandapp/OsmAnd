@@ -2865,4 +2865,8 @@
 
 	<string name="poi_military_checkpoint">Military checkpoint</string>
 
+	<string name="poi_bicycle_parking_lockers">Lockers</string>
+	<string name="poi_bicycle_parking_tree">Bicycle tree</string>
+	<string name="poi_bicycle_parking_streetpod">Streetpod</string>
+
 </resources>

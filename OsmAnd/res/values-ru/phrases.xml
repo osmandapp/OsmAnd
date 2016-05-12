@@ -2860,4 +2860,8 @@
 
 	<string name="poi_military_checkpoint">Военный КПП</string>
 
+	<string name="poi_bicycle_parking_lockers">Шкафчики запирающиеся</string>
+	<string name="poi_bicycle_parking_tree">Велопарковка в форме дерева</string>
+	<string name="poi_bicycle_parking_streetpod">Открытый отсек</string>
+
 </resources>
