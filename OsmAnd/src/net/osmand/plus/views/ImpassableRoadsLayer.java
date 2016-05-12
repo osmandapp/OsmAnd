@@ -207,10 +207,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			OsmandApplication application = activity.getMyApplication();
 			application.getDefaultRoutingConfig().removeImpassableRoad(object);
 			application.getAvoidSpecificRoads().addImpassableRoad(activity, position, false);
-			RoutingHelper rh = application.getRoutingHelper();
-			if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
-				rh.recalculateRouteDueToSettingsChange();
-			}
 		}
 		return false;
 	}
