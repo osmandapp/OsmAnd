@@ -1906,7 +1906,7 @@
     <string name="si_min_km">Minuty na kilometr</string>
     <string name="si_min_m">Minuty na milę</string>
     <string name="si_nm_h">Mile morskie na godzinę (węzły)</string>
-    <string name="nm_h">węzłów/godzinę</string>
+    <string name="nm_h">węzłów</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
