@@ -198,7 +198,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		} else if (selectedObjectContextMenuProvider != null
 				&& selectedObjectContextMenuProvider instanceof ContextMenuLayer.IMoveObjectProvider) {
 			final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) selectedObjectContextMenuProvider;
-			if (l.isObjectMoveable(o)) {
+			if (l.isObjectMovable(o)) {
 				return true;
 			}
 		}
@@ -209,7 +209,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (selectedObjectContextMenuProvider != null
 				&& selectedObjectContextMenuProvider instanceof ContextMenuLayer.IMoveObjectProvider) {
 			final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) selectedObjectContextMenuProvider;
-			if (l.isObjectMoveable(o)) {
+			if (l.isObjectMovable(o)) {
 				l.applyNewObjectPosition(o, position);
 			}
 		}
@@ -492,7 +492,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public interface IMoveObjectProvider {
 
-		boolean isObjectMoveable(Object o);
+		boolean isObjectMovable(Object o);
 
 		boolean applyNewObjectPosition(Object o, LatLon position);
 

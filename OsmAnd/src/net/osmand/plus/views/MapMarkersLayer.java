@@ -508,7 +508,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean isObjectMoveable(Object o) {
+	public boolean isObjectMovable(Object o) {
 		return o instanceof MapMarker;
 	}
 

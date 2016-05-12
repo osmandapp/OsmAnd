@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.widget.ArrayAdapter;
+
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -13,6 +14,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
@@ -20,7 +22,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import java.util.List;
 import java.util.Map;
 
-public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class ImpassableRoadsLayer extends OsmandMapLayer implements
+		ContextMenuLayer.IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
 
 	private static final int startZoom = 10;
 	private final MapActivity activity;
@@ -30,6 +33,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 	private Map<Long, Location> missingRoadLocations;
 	private List<RouteDataObject> missingRoads;
 	private RoutingHelper routingHelper;
+
+	private ContextMenuLayer contextMenuLayer;
 
 	public ImpassableRoadsLayer(MapActivity activity) {
 		this.activity = activity;
@@ -41,17 +46,30 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_avoid_road);
 		paint = new Paint();
 		routingHelper = activity.getRoutingHelper();
+
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-
+		if (contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
+			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			float left = pf.x - roadWorkIcon.getWidth() / 2;
+			float top = pf.y - roadWorkIcon.getHeight();
+			canvas.drawBitmap(roadWorkIcon, left, top, paint);
+		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			for (long id : getMissingRoadLocations().keySet()) {
+				if(contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
+					RouteDataObject object = (RouteDataObject) contextMenuLayer.getMoveableObject();
+					if (object.id == id) {
+						continue;
+					}
+				}
 				Location location = getMissingRoadLocations().get(id);
 				float x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 				float y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
@@ -175,5 +193,25 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements ContextMenuL
 					.setListener(listener)
 					.createItem());
 		}
+	}
+
+	@Override
+	public boolean isObjectMovable(Object o) {
+		return o instanceof RouteDataObject;
+	}
+
+	@Override
+	public boolean applyNewObjectPosition(Object o, LatLon position) {
+		if (o instanceof RouteDataObject) {
+			RouteDataObject object = (RouteDataObject) o;
+			OsmandApplication application = activity.getMyApplication();
+			application.getDefaultRoutingConfig().removeImpassableRoad(object);
+			application.getAvoidSpecificRoads().addImpassableRoad(activity, position, false);
+			RoutingHelper rh = application.getRoutingHelper();
+			if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
+				rh.recalculateRouteDueToSettingsChange();
+			}
+		}
+		return false;
 	}
 }

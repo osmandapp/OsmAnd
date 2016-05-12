@@ -238,7 +238,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 
 	
 	@Override
-	public boolean isObjectMoveable(Object o) {
+	public boolean isObjectMovable(Object o) {
 		return o instanceof FavouritePoint;
 	}
 
