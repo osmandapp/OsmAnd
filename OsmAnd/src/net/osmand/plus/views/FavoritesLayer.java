@@ -1,7 +1,15 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -14,15 +22,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.support.annotation.ColorInt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 	ContextMenuLayer.IMoveObjectProvider, MapTextProvider<FavouritePoint> {
@@ -32,7 +34,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	protected OsmandMapTileView view;
 	private Paint paint;
 	private FavouritesDbHelper favorites;
-	protected List<FavouritePoint> cache = new ArrayList<FavouritePoint>();
+	protected List<FavouritePoint> cache = new ArrayList<>();
 	private MapTextLayer textLayer;
 	private ContextMenuLayer contextMenuLayer;
 	private Paint paintIcon;
@@ -64,7 +66,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
-		defaultColor = view.getResources().getColor(R.color.color_favorite);
+		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
 	}
 	
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
