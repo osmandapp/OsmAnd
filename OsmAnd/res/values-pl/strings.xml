@@ -616,7 +616,7 @@
     <string name="left_side_navigation">Ruch lewostronny</string>
     <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
 
-    <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
+    <string name="unknown_from_location">Początek trasy nie jest jeszcze wyznaczony</string>
     <string name="confirm_interrupt_download">Anulować pobieranie pliku?</string>
     <string name="basemap_was_selected_to_download">Do pobrania została wybrana mapa bazowa wymagana do prawidłowego funkcjonowania programu.</string>
 
@@ -804,16 +804,16 @@
     <string name="osmand_parking_add_event">Dodaj powiadomienie do aplikacji kalendarza</string>
     <string name="osmand_parking_time_limit">Parking ograniczony czasowo</string>
     <string name="osmand_parking_time_no_limit">Parking nielimitowany czasowo</string>
-    <string name="osmand_parking_position_description">Pozycja zaparkowanego samochodu. %1$s</string>
+    <string name="osmand_parking_position_description">Położenie zaparkowanego samochodu. %1$s</string>
     <string name="osmand_parking_position_description_add">Odebrać samochód o:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Miejsce parkowania</string>
     <string name="osmand_parking_plugin_description">Pozwala łatwo zapamiętać, gdzie został zaparkowany samochód oraz ile pozostało czasu parkowania, jeśli jest on ograniczony. Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżecie mapy.\nWtyczka może dodać powiadomienie i przypomnienie do kalendarza.</string>
     <string name="osmand_parking_plugin_name">Miejsce parkowania</string>
-    <string name="context_menu_item_add_parking_point">Oznacz jako pozycja parkowania</string>
+    <string name="context_menu_item_add_parking_point">Oznacz położenie parkowania</string>
     <string name="context_menu_item_delete_parking_point">Usuń znacznik parkowania</string>
-    <string name="starting_point_too_far">Punkt początkowy jest zbyt daleko od najbliższej drogi.</string>
+    <string name="starting_point_too_far">Początek trasy znajduje się zbyt daleko od najbliższej drogi.</string>
     <string name="shared_location">Lokalizacja współdzielona</string>
 
     <string name="global_app_allocated_memory_descr">Użyta pamięć: %1$s MB (limit Androida %2$s MB, dalvika %3$s MB).</string>
@@ -891,7 +891,7 @@
     <string name="no_route">Brak trasy</string>
     <string name="delete_target_point">Usuń cel</string>
     <string name="target_point">Cel podróży %1$s</string>
-    <string name="intermediate_point">Pośrednio cel %1$s</string>
+    <string name="intermediate_point">Pośredni cel %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Dodaj jako ostatni cel pośredni</string>
     <string name="context_menu_item_first_intermediate_point">Dodaj jako pierwszy cel pośredni</string>
     <string name="add_as_last_destination_point">Dodaj jako ostatni cel pośredni</string>
@@ -1123,9 +1123,9 @@
     <string name="osb_author_or_password_not_specified">Proszę wprowadzić nazwę użytkownika i hasło OSM w ustawieniach</string>
     <string name="clear_intermediate_points">Wyczyść cele pośrednie</string>
     <string name="keep_intermediate_points">Zachowaj cele pośrednie</string>
-    <string name="new_directions_point_dialog">Masz już ustawione cele pośrednie.</string>
-    <string name="context_menu_item_directions_to">Nawiguj do</string>
-    <string name="context_menu_item_directions_from">Nawiguj z</string>
+    <string name="new_directions_point_dialog">Ustalono już cele pośrednie.</string>
+    <string name="context_menu_item_directions_to">Nawiguj do położenia</string>
+    <string name="context_menu_item_directions_from">Nawiguj z położenia</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Do:</string>
     <string name="route_via">Przez:</string>
@@ -2065,7 +2065,7 @@
     <string name="n_items_removed">pozycji usuniętych</string>
     <string name="shared_string_undo_all">COFNIJ WSZYSTKO</string>
     <string name="shared_string_type">Typ</string>
-    <string name="starting_point">Punkt początkowy</string>
+    <string name="starting_point">Początek trasy</string>
     <string name="rec_split_storage_size">Wielkość pamięci</string>
     <string name="live_updates">Bieżące aktualizacje</string>
     <string name="hourly">Co godzinę</string>
@@ -2189,4 +2189,5 @@
     <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
     <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
 	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega zmianie wyznaczonej trasy podczas poruszania się w niewłaściwym kierunku</string>
+    <string name="map_widget_battery">Stan akumulatora</string>
     </resources>
