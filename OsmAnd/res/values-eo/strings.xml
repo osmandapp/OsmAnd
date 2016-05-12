@@ -378,7 +378,7 @@
     <string name="shared_string_favorites">Ŝatataj</string>
     <string name="shared_string_address">Adreso</string>
     <string name="shared_string_add">Aldoni</string>
-    <string name="shared_string_my_places">Miaj lokoj</string>
+    <string name="shared_string_my_places">Miaj ejoj</string>
     <string name="shared_string_my_tracks">Miaj kursoj</string>
     <string name="shared_string_audio">Sono</string>
     <string name="shared_string_video">Video</string>
@@ -1220,4 +1220,7 @@
     <string name="route_roundabout">Trafikcirklo: enveturu %1$d-an elveturejon</string>
     <string name="route_kl">Veturu je maldekstra koridoro</string>
     <string name="route_kr">Veturu je dekstra koridoro</string>
+    <string name="map_widget_battery">Stato de pilo</string>
+    <string name="move_marker_bottom_sheet_title">Movi la mapon por ŝanĝi pozicion de marko</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     </resources>
