@@ -2217,4 +2217,5 @@
 	<string name="use_osm_live_routing">Navigation OSM Live</string>
     <string name="follow_us">Suivez nous</string>
     <string name="lat_lon_pattern">Lat. : %1$.6f Lon. : %2$.6f</string>
+    <string name="map_widget_battery">État de la batterie</string>
     </resources>
