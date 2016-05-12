@@ -205,7 +205,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+	public void applyNewObjectPosition(@NonNull Object o,
+									   @NonNull LatLon position,
 									   @Nullable final ApplyMovedObjectCallback callback) {
 		if (o instanceof RouteDataObject) {
 			final RouteDataObject object = (RouteDataObject) o;

@@ -1893,6 +1893,7 @@ public class OsmandSettings {
 				if (ps.size() > index) {
 					ps.set(index, latLonNew);
 				}
+<<<<<<< 56c73430b940b4690ba7ddd2da9f14c234fc0155
 				ds.set(index, PointDescription.serializeToString(historyDescription));
 				if (cs.size() > index) {
 					cs.set(index, colorIndex);
@@ -1908,6 +1909,8 @@ public class OsmandSettings {
 					double lon = latLonNew.getLongitude();
 					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(lat, lon, historyDescription);
 				}
+=======
+>>>>>>> Fixes
 				return savePoints(ps, ds, cs, ns, bs);
 			} else {
 				return false;

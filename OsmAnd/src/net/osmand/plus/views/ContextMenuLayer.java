@@ -537,7 +537,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		boolean isObjectMovable(Object o);
 
-		void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+		void applyNewObjectPosition(@NonNull Object o,
+									@NonNull LatLon position,
 									@Nullable ApplyMovedObjectCallback callback);
 	}
 
