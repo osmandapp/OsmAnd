@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -80,6 +81,37 @@ public class MapMarkersHelper {
 			return false;
 		}
 
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+
+			MapMarker mapMarker = (MapMarker) o;
+
+			if (colorIndex != mapMarker.colorIndex) return false;
+			if (pos != mapMarker.pos) return false;
+			if (index != mapMarker.index) return false;
+			if (history != mapMarker.history) return false;
+			if (selected != mapMarker.selected) return false;
+			if (dist != mapMarker.dist) return false;
+			//noinspection SimplifiableIfStatement
+			if (!point.equals(mapMarker.point)) return false;
+			return pointDescription != null ? pointDescription.equals(mapMarker.pointDescription) : mapMarker.pointDescription == null;
+
+		}
+
+		@Override
+		public int hashCode() {
+			int result = point.hashCode();
+			result = 31 * result + (pointDescription != null ? pointDescription.hashCode() : 0);
+			result = 31 * result + colorIndex;
+			result = 31 * result + pos;
+			result = 31 * result + index;
+			result = 31 * result + (history ? 1 : 0);
+			result = 31 * result + (selected ? 1 : 0);
+			result = 31 * result + dist;
+			return result;
+		}
 	}
 
 	public MapMarkersHelper(OsmandApplication ctx) {
@@ -360,6 +392,14 @@ public class MapMarkersHelper {
 				readFromSettings();
 				refresh();
 			}
+		}
+	}
+
+	public void moveMapMarker(@Nullable MapMarker marker, LatLon latLon) {
+		if (marker != null) {
+			settings.moveMapMarker(new LatLon(marker.getLatitude(), marker.getLongitude()), latLon);
+			readFromSettings();
+			refresh();
 		}
 	}
 

@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -50,7 +49,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 public class OsmandSettings {
 
@@ -1875,6 +1873,20 @@ public class OsmandSettings {
 			return savePoints(ps, ds, cs, ns, bs);
 		}
 
+		public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			List<Integer> cs = getColors(ps.size());
+			List<Integer> ns = getPositions(ps.size());
+			List<Boolean> bs = getSelections(ps.size());
+			int index = ps.indexOf(latLonEx);
+
+			if (ps.size() > index) {
+				ps.set(index, latLonNew);
+			}
+			return savePoints(ps, ds, cs, ns, bs);
+		}
+
 		@Override
 		public boolean deletePoint(int index) {
 			List<LatLon> ps = getPoints();
@@ -2135,6 +2147,10 @@ public class OsmandSettings {
 								   int pos, boolean selected) {
 		return mapMarkersStorage.updatePoint(latitude, longitude, historyDescription, colorIndex,
 				pos, selected);
+	}
+
+	public boolean moveMapMarker(LatLon latLonEx, LatLon latLonNew) {
+		return mapMarkersStorage.movePoint(latLonEx, latLonNew);
 	}
 
 	public boolean deleteMapMarker(int index) {
