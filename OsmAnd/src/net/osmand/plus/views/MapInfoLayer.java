@@ -152,6 +152,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
 		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, "plain_time", false, 25);
+		TextInfoWidget battery = ric.createBatteryControl(map);
+		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, "battery", false, 26);
 	}
 
 	public void recreateControls() {
