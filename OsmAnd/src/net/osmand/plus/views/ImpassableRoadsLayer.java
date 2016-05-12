@@ -17,7 +17,9 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 
 import java.util.List;
 import java.util.Map;
@@ -182,7 +184,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.avoid_road) {
 						activity.getMyApplication().getAvoidSpecificRoads().addImpassableRoad(
-								activity, latLon, false);
+								activity, latLon, false, null);
 					}
 					return true;
 				}
@@ -201,13 +203,26 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public boolean applyNewObjectPosition(Object o, LatLon position) {
+	public void applyNewObjectPosition(Object o, LatLon position, final ApplyMovedObjectCallback callback) {
 		if (o instanceof RouteDataObject) {
-			RouteDataObject object = (RouteDataObject) o;
-			OsmandApplication application = activity.getMyApplication();
-			application.getDefaultRoutingConfig().removeImpassableRoad(object);
-			application.getAvoidSpecificRoads().addImpassableRoad(activity, position, false);
+			final RouteDataObject object = (RouteDataObject) o;
+			final OsmandApplication application = activity.getMyApplication();
+			application.getAvoidSpecificRoads().replaceImpassableRoad(activity, object, position, false, new AvoidSpecificRoadsCallback() {
+				@Override
+				public void onAddImpassableRoad(boolean success, RouteDataObject newObject) {
+					if (callback != null) {
+						callback.onApplyMovedObject(success, newObject);
+					}
+				}
+
+				@Override
+				public boolean isCancelled() {
+					if (callback != null) {
+						return callback.isCancelled();
+					}
+					return false;
+				}
+			});
 		}
-		return false;
 	}
 }

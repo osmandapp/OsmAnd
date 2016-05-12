@@ -1857,20 +1857,24 @@ public class OsmandSettings {
 			List<Integer> ns = getPositions(ps.size());
 			List<Boolean> bs = getSelections(ps.size());
 			int index = ps.indexOf(new LatLon(latitude, longitude));
-			ds.set(index, PointDescription.serializeToString(historyDescription));
-			if (cs.size() > index) {
-				cs.set(index, colorIndex);
+			if (index != -1) {
+				ds.set(index, PointDescription.serializeToString(historyDescription));
+				if (cs.size() > index) {
+					cs.set(index, colorIndex);
+				}
+				if (ns.size() > index) {
+					ns.set(index, pos);
+				}
+				if (bs.size() > index) {
+					bs.set(index, selected);
+				}
+				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+				}
+				return savePoints(ps, ds, cs, ns, bs);
+			} else {
+				return false;
 			}
-			if (ns.size() > index) {
-				ns.set(index, pos);
-			}
-			if (bs.size() > index) {
-				bs.set(index, selected);
-			}
-			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-			}
-			return savePoints(ps, ds, cs, ns, bs);
 		}
 
 		public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {
@@ -1880,11 +1884,14 @@ public class OsmandSettings {
 			List<Integer> ns = getPositions(ps.size());
 			List<Boolean> bs = getSelections(ps.size());
 			int index = ps.indexOf(latLonEx);
-
-			if (ps.size() > index) {
-				ps.set(index, latLonNew);
+			if (index != -1) {
+				if (ps.size() > index) {
+					ps.set(index, latLonNew);
+				}
+				return savePoints(ps, ds, cs, ns, bs);
+			} else {
+				return false;
 			}
-			return savePoints(ps, ds, cs, ns, bs);
 		}
 
 		@Override

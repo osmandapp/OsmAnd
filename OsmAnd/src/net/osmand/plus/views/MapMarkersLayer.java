@@ -27,6 +27,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
@@ -513,13 +514,21 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean applyNewObjectPosition(Object o, LatLon position) {
+	public void applyNewObjectPosition(Object o, LatLon position, ApplyMovedObjectCallback callback) {
+		boolean result = false;
+		Object newObject = null;
 		if (o instanceof MapMarker) {
 			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 			MapMarker marker = (MapMarker) o;
+			int index = markersHelper.getActiveMapMarkers().indexOf(marker);
 			markersHelper.moveMapMarker(marker, position);
-			return true;
+			if (index != -1) {
+				newObject = markersHelper.getActiveMapMarkers().get(index);
+			}
+			result = true;
 		}
-		return false;
+		if (callback != null) {
+			callback.onApplyMovedObject(result, newObject == null ? o : newObject);
+		}
 	}
 }

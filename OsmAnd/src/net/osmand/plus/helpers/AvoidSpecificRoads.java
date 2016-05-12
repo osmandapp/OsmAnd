@@ -138,14 +138,15 @@ public class AvoidSpecificRoads {
 
 			@Override
 			public boolean processResult(LatLon result) {
-				addImpassableRoad(mapActivity, result, true);
+				addImpassableRoad(mapActivity, result, true, null);
 				return true;
 			}
 
 		});
 	}
 
-	public void addImpassableRoad(final MapActivity activity, final LatLon loc, final boolean showDialog) {
+	public void addImpassableRoad(final MapActivity activity, final LatLon loc,
+								  final boolean showDialog, final AvoidSpecificRoadsCallback callback) {
 		final Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
@@ -153,34 +154,85 @@ public class AvoidSpecificRoads {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
-				if(object == null) {
+				if (object == null) {
 					Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+					if (callback != null) {
+						callback.onAddImpassableRoad(false, null);
+					}
 				} else {
-					getBuilder().addImpassableRoad(object, ll);
-					RoutingHelper rh = app.getRoutingHelper();
-					if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
-						rh.recalculateRouteDueToSettingsChange();
+					addImpassableRoadInternal(object, ll, showDialog, activity, loc);
+
+					if (callback != null) {
+						callback.onAddImpassableRoad(true, object);
 					}
-					if (showDialog) {
-						showDialog(activity);
-					}
-					MapContextMenu menu = activity.getContextMenu();
-					if (menu.isActive() && menu.getLatLon().equals(loc)) {
-						menu.close();
-					}
-					activity.refreshMap();
 				}
 				return true;
 			}
 
 			@Override
 			public boolean isCancelled() {
+				if (callback != null) {
+					return callback.isCancelled();
+				}
 				return false;
 			}
-			
+
 		});
 	}
-	
+
+	public void replaceImpassableRoad(final MapActivity activity, final RouteDataObject currentObject,
+									  final LatLon loc, final boolean showDialog,
+									  final AvoidSpecificRoadsCallback callback) {
+		final Location ll = new Location("");
+		ll.setLatitude(loc.getLatitude());
+		ll.setLongitude(loc.getLongitude());
+		app.getLocationProvider().getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
+
+			@Override
+			public boolean publish(RouteDataObject object) {
+				if (object == null) {
+					Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+					if (callback != null) {
+						callback.onAddImpassableRoad(false, null);
+					}
+				} else {
+					getBuilder().removeImpassableRoad(currentObject);
+					addImpassableRoadInternal(object, ll, showDialog, activity, loc);
+
+					if (callback != null) {
+						callback.onAddImpassableRoad(true, object);
+					}
+				}
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				if (callback != null) {
+					return callback.isCancelled();
+				}
+				return false;
+			}
+
+		});
+	}
+
+	private void addImpassableRoadInternal(RouteDataObject object, Location ll, boolean showDialog, MapActivity activity, LatLon loc) {
+		getBuilder().addImpassableRoad(object, ll);
+		RoutingHelper rh = app.getRoutingHelper();
+		if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
+			rh.recalculateRouteDueToSettingsChange();
+		}
+		if (showDialog) {
+			showDialog(activity);
+		}
+		MapContextMenu menu = activity.getContextMenu();
+		if (menu.isActive() && menu.getLatLon().equals(loc)) {
+			menu.close();
+		}
+		activity.refreshMap();
+	}
+
 	private void showOnMap(MapActivity ctx, double lat, double lon, String name,
 			DialogInterface dialog) {
 		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
@@ -195,4 +247,10 @@ public class AvoidSpecificRoads {
 		dialog.dismiss();
 	}
 
+	public interface AvoidSpecificRoadsCallback {
+
+		void onAddImpassableRoad(boolean success, RouteDataObject newObject);
+
+		boolean isCancelled();
+	}
 }

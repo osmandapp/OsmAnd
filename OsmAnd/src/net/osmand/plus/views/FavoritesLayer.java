@@ -21,6 +21,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 
 import java.util.ArrayList;
@@ -243,12 +244,15 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	}
 
 	@Override
-	public boolean applyNewObjectPosition(Object o, LatLon position) {
-		if(o instanceof FavouritePoint) {
-			favorites.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());			
-			return true;
+	public void applyNewObjectPosition(Object o, LatLon position, ApplyMovedObjectCallback callback) {
+		boolean result = false;
+		if (o instanceof FavouritePoint) {
+			favorites.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
+			result = true;
 		}
-		return false;
+		if (callback != null) {
+			callback.onApplyMovedObject(result, o);
+		}
 	}
 }
 

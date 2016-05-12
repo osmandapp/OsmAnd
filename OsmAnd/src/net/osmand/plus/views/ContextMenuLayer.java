@@ -58,6 +58,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private final MoveMarkerBottomSheetHelper mMoveMarkerBottomSheetHelper;
 	private boolean mInChangeMarkerPositionMode;
 	private IContextMenuProvider selectedObjectContextMenuProvider;
+	private boolean cancelApplyingNewMarkerPosition;
+	private LatLon applyingMarkerLatLon;
 
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
@@ -181,7 +183,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 
 	public PointF getMoveableCenterPoint(RotatedTileBox tb) {
-		return new PointF(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+		if (applyingMarkerLatLon != null) {
+			float x = tb.getPixXFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
+			float y = tb.getPixYFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
+			return new PointF(x, y);
+		} else {
+			return new PointF(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+		}
 	}
 
 	public Object getMoveableObject() {
@@ -205,12 +213,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	public void applyMovedObject(Object o, LatLon position) {
+	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
 		if (selectedObjectContextMenuProvider != null
 				&& selectedObjectContextMenuProvider instanceof ContextMenuLayer.IMoveObjectProvider) {
 			final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) selectedObjectContextMenuProvider;
 			if (l.isObjectMovable(o)) {
-				l.applyNewObjectPosition(o, position);
+				l.applyNewObjectPosition(o, position, callback);
 			}
 		}
 	}
@@ -222,18 +230,35 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
 		PointF newMarkerPosition = getMoveableCenterPoint(tileBox);
-		LatLon ll = tileBox.getLatLonFromPixel(newMarkerPosition.x, newMarkerPosition.y);
+		final LatLon ll = tileBox.getLatLonFromPixel(newMarkerPosition.x, newMarkerPosition.y);
+		applyingMarkerLatLon = ll;
 
 		Object obj = getMoveableObject();
-		applyMovedObject(obj, ll);
-		quitMovingMarker();
+		cancelApplyingNewMarkerPosition = false;
+		mMoveMarkerBottomSheetHelper.enterApplyPositionMode();
+		applyMovedObject(obj, ll, new ApplyMovedObjectCallback() {
+			@Override
+			public void onApplyMovedObject(boolean success, Object newObject) {
+				mMoveMarkerBottomSheetHelper.exitApplyPositionMode();
+				if (success && !cancelApplyingNewMarkerPosition) {
+					mMoveMarkerBottomSheetHelper.hide();
+					quitMovingMarker();
 
-		PointDescription pointDescription = null;
-		if (selectedObjectContextMenuProvider != null) {
-			pointDescription = selectedObjectContextMenuProvider.getObjectName(obj);
-		}
-		menu.show(ll, pointDescription, obj);
-		view.refreshMap();
+					PointDescription pointDescription = null;
+					if (selectedObjectContextMenuProvider != null) {
+						pointDescription = selectedObjectContextMenuProvider.getObjectName(newObject);
+					}
+					menu.show(ll, pointDescription, newObject);
+					view.refreshMap();
+				}
+				applyingMarkerLatLon = null;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return cancelApplyingNewMarkerPosition;
+			}
+		});
 	}
 
 	private void quitMovingMarker() {
@@ -259,8 +284,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void cancelMovingMarker() {
+		cancelApplyingNewMarkerPosition = true;
 		quitMovingMarker();
 		activity.getContextMenu().show();
+		applyingMarkerLatLon = null;
 	}
 
 	public boolean showContextMenu(double latitude, double longitude, boolean showUnknownLocation) {
@@ -494,10 +521,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		boolean isObjectMovable(Object o);
 
-		boolean applyNewObjectPosition(Object o, LatLon position);
+		void applyNewObjectPosition(Object o, LatLon position, ApplyMovedObjectCallback callback);
 
 	}
 
+	public interface ApplyMovedObjectCallback {
+
+		void onApplyMovedObject(boolean success, Object newObject);
+
+		boolean isCancelled();
+	}
 
 	public interface IContextMenuProviderSelection {
 
