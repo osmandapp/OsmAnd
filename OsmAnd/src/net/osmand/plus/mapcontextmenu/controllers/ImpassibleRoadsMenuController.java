@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.PointDescription;
@@ -47,6 +48,6 @@ public class ImpassibleRoadsMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getMapActivity().getResources().getDrawable(R.drawable.map_pin_avoid_road);
+		return ContextCompat.getDrawable(getMapActivity(), R.drawable.map_pin_avoid_road);
 	}
 }
