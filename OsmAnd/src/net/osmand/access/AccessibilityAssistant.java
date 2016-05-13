@@ -2,10 +2,11 @@ package net.osmand.access;
 
 import android.app.Activity;
 import android.os.Build;
+import android.support.v4.view.AccessibilityDelegateCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.SparseArray;
 import android.view.View;
-import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import android.widget.ImageView;
 
 import net.osmand.plus.OsmandApplication;
 
-public class AccessibilityAssistant extends AccessibilityDelegate implements OnPageChangeListener {
+public class AccessibilityAssistant extends AccessibilityDelegateCompat implements OnPageChangeListener {
 
     private final Activity hostActivity;
     private final OsmandApplication app;
@@ -33,7 +34,7 @@ public class AccessibilityAssistant extends AccessibilityDelegate implements OnP
         discourageUiUpdates = false;
         eventsLocked = false;
         focusedView = null;
-        monitoredPages = new SparseArray<View>();
+        monitoredPages = new SparseArray<>();
         visiblePage = null;
         visiblePageId = 0;
     }
@@ -68,7 +69,7 @@ public class AccessibilityAssistant extends AccessibilityDelegate implements OnP
         monitoredPages.put(id, page);
         if (id == visiblePageId)
             visiblePage = page;
-        page.setAccessibilityDelegate(this);
+        ViewCompat.setAccessibilityDelegate(page, this);
     }
 
 

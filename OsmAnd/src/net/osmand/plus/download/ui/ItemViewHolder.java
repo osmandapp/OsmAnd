@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.TypedValue;
@@ -84,9 +85,9 @@ public class ItemViewHolder {
 		rightImageButton = (ImageView) view.findViewById(R.id.secondaryIcon);
 		nameTextView = (TextView) view.findViewById(R.id.title);
 
-		view.setAccessibilityDelegate(context.getAccessibilityAssistant());
-		rightButton.setAccessibilityDelegate(context.getAccessibilityAssistant());
-		rightImageButton.setAccessibilityDelegate(context.getAccessibilityAssistant());
+		ViewCompat.setAccessibilityDelegate(view, context.getAccessibilityAssistant());
+		ViewCompat.setAccessibilityDelegate(rightButton, context.getAccessibilityAssistant());
+		ViewCompat.setAccessibilityDelegate(rightImageButton, context.getAccessibilityAssistant());
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = context.getTheme();
