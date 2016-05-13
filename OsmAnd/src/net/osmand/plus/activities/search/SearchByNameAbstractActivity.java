@@ -296,7 +296,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected void finishInitializing(List<T> list){
 		Comparator<? super T> cmp = createComparator();
 		getListAdapter().sort(cmp);
-		if(list != null){
+		if (list != null) {
 			Collections.sort(list,cmp);
 			initialListToFilter = list;
 		}
@@ -393,11 +393,11 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		@Override
 		public void handleMessage(Message msg) {
 			String currentFilter = SearchByNameAbstractActivity.this.currentFilter;
-			if(msg.what == MESSAGE_CLEAR_LIST){
+			if (msg.what == MESSAGE_CLEAR_LIST){
 				minimalIndex = Integer.MAX_VALUE;
 				minimalText = null;
 				getListAdapter().clear();
-				if(currentFilter.length() == 0) {
+				if (currentFilter.length() == 0) {
 					endingMap.clear();
 				}
 				updateTextBox(currentFilter, "", null, true);
