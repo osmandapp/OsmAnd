@@ -804,7 +804,7 @@
     <string name="new_destination_point_dialog">Ya fijó el punto de destino.</string>
     <string name="target_points">Destinos</string>
     <string name="intermediate_point_too_far">Destino intermedio, %1$s demasiado lejos del camino.</string>
-    <string name="arrived_at_intermediate_point">Llegó a tu destino intermedio</string>
+    <string name="arrived_at_intermediate_point">Has llegado a tu destino intermedio</string>
     <string name="context_menu_item_intermediate_point">Añadir como destino intermedio</string>
     <string name="map_widget_intermediate_distance">Destino intermedio</string>
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
