@@ -184,6 +184,34 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return req.getSearchResults();
 	}
 
+	private List<City> fillWithVillages(String name, String lang, final ResultMatcher<City> resultMatcher) throws IOException {
+		List<City> result = new ArrayList<City>();
+		List<City> foundCities = file.getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
+					List<City> cache = new ArrayList<City>();
+					@Override
+					public boolean publish(City c) {
+						if(c.getLocation() != null) {
+							City ct = getClosestCity(c.getLocation(), cache);
+							c.setClosestCity(ct);
+						}
+						return resultMatcher.publish(c);
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return resultMatcher.isCancelled();
+					}
+				}), new CollatorStringMatcher(name, StringMatcherMode.CHECK_STARTS_FROM_SPACE), lang,
+				BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+
+		for (City c : foundCities) {
+			result.add(c);
+			if (resultMatcher.isCancelled()) {
+				return result;
+			}
+		}
+		return result;
+	}
 
 	@Override
 	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
@@ -191,16 +219,30 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
 			citiesToFill.addAll(cities.values());
-			return citiesToFill;
+			if (!citiesToFill.isEmpty()) {
+				return citiesToFill;
+			}
 		}
 
+		String lang = getLang();
 		preloadCities(null);
 		if (name.length() == 0) {
 			citiesToFill.addAll(cities.values());
-			return citiesToFill;
+			if (searchVillages) {
+				for (City c : citiesToFill) {
+					resultMatcher.publish(c);
+				}
+				try {
+					citiesToFill.addAll(fillWithVillages(name, lang, resultMatcher));
+				} catch (IOException e) {
+					log.error("Disk operation failed", e); //$NON-NLS-1$
+				}
+			}
+			if (!citiesToFill.isEmpty()) {
+				return citiesToFill;
+			}
 		}
 		try {
-			String lang = getLang();
 			// essentially index is created that cities towns are first in cities map
 			if (/*name.length() >= 2 && Algorithms.containsDigit(name) && */searchVillages) {
 				// also try to identify postcodes
@@ -229,35 +271,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				}
 			}
 
-			int initialsize = citiesToFill.size();
+			int initialize = citiesToFill.size();
 			if (/*name.length() >= 3 && */searchVillages) {
-				
-				List<City> foundCities = file.getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
-					List<City> cache = new ArrayList<City>();
-					@Override
-					public boolean publish(City c) {
-						if(c.getLocation() != null) {
-							City ct = getClosestCity(c.getLocation(), cache);
-							c.setClosestCity(ct);
-						}
-						return resultMatcher.publish(c);
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return resultMatcher.isCancelled();
-					}
-				}), new CollatorStringMatcher(name,StringMatcherMode.CHECK_STARTS_FROM_SPACE), lang, 
-						BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
-				
-				for (City c : foundCities) {
-					citiesToFill.add(c);
-					if (resultMatcher.isCancelled()) {
-						return citiesToFill;
-					}
-				}
+				citiesToFill.addAll(fillWithVillages(name, lang, resultMatcher));
 			}
-			log.debug("Loaded citites " + (citiesToFill.size() - initialsize)); //$NON-NLS-1$
+			log.debug("Loaded citites " + (citiesToFill.size() - initialize)); //$NON-NLS-1$
 		} catch (IOException e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}
