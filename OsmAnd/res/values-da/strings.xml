@@ -1828,7 +1828,7 @@
     <string name="shared_string_currently_recording_track">Nuværende optagelsesspor</string>
     <string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
-    <string name="shared_string_collapse">Fold sammen</string>
+    <string name="shared_string_collapse">Kollapset</string>
     <string name="action_create">Handling: oprette</string>
     <string name="action_modify">Handling: rediger</string>
     <string name="action_delete">Handling: slet</string>
