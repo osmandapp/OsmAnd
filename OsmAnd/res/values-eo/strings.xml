@@ -111,7 +111,7 @@
     <string name="show_on_start_description">\'Ek\'-butono rekte lanĉas mapekranon</string>
     <string name="copied_to_clipboard">Enpoŝigita</string>
     <string name="show_on_start">Montri dum starto</string>
-    <string name="release_2_2">" • Nova teksto-dependa fasado kiu ebligas tuŝi poziciojn en la mapo kaj en aliaj ekranoj\n\n• Mapekrano estas nun montrita rekte escepte se \'Montri stirpanelon dum aplikaĵa starto\' estas elektita\n\n• Agordi kiujn kaj kiamaniere kartojn estas montritaj en la stirpanelo\n\n• Preterpasi la stirpanelon se vi ŝatas menuo-bazitan aplikaĵ-stiradon\n\n• Por elŝuti mapojn, regionoj povas esti elektitaj rekte per tuŝado en mondmapo\n\n• Intereseja Serĉado nun subtenas pli multe specifajn petojn\n\n• Plibonigitaj eblecoj por redakti Interesejojn kaj la OSM-on\n\n• Mapdosiera elŝutada strukturo kaj interfaco rebonigitaj\n\n• kaj pli... "</string>
+    <string name="release_2_2">" • Nova teksto-dependa fasado kiu ebligas tuŝi lokojn en la mapo kaj en aliaj ekranoj\n\n• Mapekrano estas nun montrita rekte escepte se \'Montri stirpanelon dum aplikaĵa starto\' estas elektita\n\n• Agordi kiujn kaj kiamaniere kartojn estas montritaj en la stirpanelo\n\n• Preterpasi la stirpanelon se vi ŝatas menuo-bazitan aplikaĵ-stiradon\n\n• Por elŝuti mapojn, regionoj povas esti elektitaj rekte per tuŝado en mondmapo\n\n• Intereseja Serĉado nun subtenas pli multe specifajn petojn\n\n• Plibonigitaj eblecoj por redakti Interesejojn kaj la OSM-on\n\n• Mapdosiera elŝutada strukturo kaj interfaco rebonigitaj\n\n• kaj pli... "</string>
     <string name="osm_save_offline">Konservi eksterrete</string>
     <string name="osm_edit_modified_poi">Ŝanĝitaj OSM-aj Interesejoj</string>
     <string name="osm_edit_deleted_poi">Forigitaj OSM-aj Interesejoj</string>
@@ -138,7 +138,7 @@
 
     <string name="context_menu_item_delete_waypoint">Ĉu forigi GPX-navigadpunkton?</string>
     <string name="context_menu_item_edit_waypoint">Redakti GPX-navigadpunkton</string>
-    <string name="shared_string_location">Pozicio</string>
+    <string name="shared_string_location">Loko</string>
     <string name="share_osm_edits_subject">OSM-aj redaktoj kunhavataj per OsmAnd</string>
     <string name="lang_nds">Platgermana</string>
     <string name="lang_mk">Makedona</string>
@@ -152,7 +152,7 @@
 
     <string name="shared_string_qr_code">QR-kodo</string>
     <string name="rendering_attr_hideProposed_name">Proponitaj objektoj</string>
-    <string name="share_menu_location">Kunhavigi pozicion</string>
+    <string name="share_menu_location">Kunhavigi lokon</string>
     <string name="shared_string_send">Sendi</string>
     <string name="world_map_download_descr">Monda bazmapo (kiu kovras tutan mondon ĉe etaj zomoj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti mondan bazmapon por havi plenan ĉirkaŭaĵon.</string>
     <string name="map_downloaded">Mapo elŝutita</string>
@@ -416,7 +416,7 @@
     <string name="osmo_connect_to_device_tracker_id">Kursospurila ID</string>
     <string name="osmo_connect">Konekti</string>
     <string name="osmo_groups">Grupoj OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Aŭtomate komencas registrigi ekskurson kaj sendas poziciojn dum starto de aplikaĵo</string>
+    <string name="osmo_auto_send_locations_descr">Aŭtomate komencas registrigi ekskurson kaj sendas lokojn dum starto de aplikaĵo</string>
     <string name="osmo_auto_send_locations">Aŭtomate eki ekskurs-registrilon</string>
     <string name="osmo_tracker_id">Kursospurila ID</string>
     <string name="osmo_tracker_id_descr">Alklaku por vidi identigilon de kursospurilo</string>
@@ -487,7 +487,7 @@
     <string name="days_behind">tagoj antaŭ</string>
     <string name="back_to_map">Reen mapen</string>
     <string name="share_note">Kunhavigi noton</string>
-    <string name="location_on_map">Pozicio:\nLat %1$s\nLon %2$s</string>
+    <string name="location_on_map">Loko:\nLat %1$s\nLon %2$s</string>
     <string name="watch">Montri</string>
     <string name="notes">Notoj</string>
     <string name="online_map">Enreta mapo</string>
@@ -1260,4 +1260,48 @@
     <string name="map_online_plugin_is_not_installed">Aktivigi la Enretajn mapojn kromprogramon por elekti aliajn fontojn de mapoj</string>
     <string name="map_online_data">Enretaj kaj kahelaj mapoj</string>
     <string name="map_online_data_descr">Uzas enretajn mapojn (elŝutas kaj kaŝmemorigas kahelojn en memorilkarto)</string>
+    <string name="online_map_settings_descr">Agordi fontojn de enretaj kaj kahelaj mapoj</string>
+    <string name="prefs_plugins">Kromprogramoj</string>
+    <string name="prefs_plugins_descr">Kromprogramoj aktivigas spertajn agordojn kaj pliajn eblecojn</string>
+    <string name="vector_maps_may_display_faster_on_some_devices">Vektoraj mapoj verŝajne funkcias pli rapide. Estas eble, ke tio ne funkcias en kelkaj aparatoj.</string>
+    <string name="play_commands_of_currently_selected_voice">Ludas avertojn uzante elektitan voĉon</string>
+    <string name="native_rendering">Indiĝena blldigo</string>
+    <string name="test_voice_prompts">Testi voĉ-avertojn</string>
+    <string name="switch_to_raster_map_to_see">Nenia eksterreta vektora mapo disponebla por tiu ĉi loko. Vi povas elŝuti iun en Agordoj (Administri map-dosierojn), aŭ ŝalti enretajn mapojn (aktivigu la Enretajn mapojn kromprogramon).</string>
+    <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
+    <string name="gpx_tags_txt">Markoj</string>
+    <string name="gpx_visibility_txt">Videbleco</string>
+    <string name="gpx_description_txt">Priskribo</string>
+    <string name="validate_gpx_upload_name_pwd">Bonvolu enmeti OSM-an uzantnomon kaj pasvorton por alŝuti GPX-dosierojn.</string>
+    <string name="default_buttons_support">Subteni</string>
+    <string name="support_new_features">Subteni navajn eblecojn</string>
+    <string name="support_new_features_descr">Donacu por vidi novajn eblecojn en la aplikaĵo</string>
+    <string name="show_ruler_level">Montri mezurilon</string>
+    <string name="info_button">Informoj</string>
+    <string name="back_to_location">Reveni al pozicio</string>
+
+    <string name="accessibility_mode">Alirebleca reĝimo</string>
+    <string name="accessibility_mode_descr">Aktivigas ilojn por alirebleco</string>
+    <string name="accessibility_default">Laŭ ĉefaj sistemaj agordoj</string>
+    <string name="backToMenu">Reveni al menuo</string>
+    <string name="zoomOut">Malgrandigi</string>
+    <string name="zoomIn">Pligrandigi</string>
+    <string name="zoomIs">Skal-nivelo estas:</string>
+    <string name="north">nordo</string>
+    <string name="north_north_east">nordo-nordo-oriento</string>
+    <string name="north_east">nordoriento</string>
+    <string name="east_north_east">oriento-nordo-oriento</string>
+    <string name="east">oriento</string>
+    <string name="east_south_east">oriento-sudo-oriento</string>
+    <string name="south_east">sudoriento</string>
+    <string name="south_south_east">sudo-sudo-oriento</string>
+    <string name="south">sudo</string>
+    <string name="south_south_west">sudo-sudo-okcidento</string>
+    <string name="south_west">sudo-okcidento</string>
+    <string name="west_south_west">okcidento-sudo-okcidento</string>
+    <string name="west">okcidento</string>
+    <string name="west_north_west">okcidento-nordo-okcidento</string>
+    <string name="north_west">nordokcidento</string>
+    <string name="north_north_west">nordo-nordo-okcidento</string>
+    <string name="front">antaŭen</string>
     </resources>
