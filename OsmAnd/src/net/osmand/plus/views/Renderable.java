@@ -50,7 +50,7 @@ public abstract class Renderable {
             t = new Timer();
             t.scheduleAtFixedRate(new TimerTask() {
                 public void run() {
-                    conveyor++;
+                    conveyor--;
                     view.refreshMap();
                 }
             }, 0, period);
@@ -254,11 +254,20 @@ public abstract class Renderable {
         }
 
         // Speed range in km/h, altitude is in m.
-        public void setRange(double clampMin, double clampMax) {
+        public void setRangeMetric(double clampMin, double clampMax) {
             this.clampMin = clampMin;
             this.clampMax = clampMax;
             this.clamp = true;
         }
+
+        // Set range in mph, altitude in miles
+        public void SetRangeImperial(double clampMin, double clampMax) {
+            this.clampMin = clampMin / 1.60934;
+            this.clampMax = clampMax / 1.60934;
+            this.clamp = true;
+        }
+
+
 
         @Override protected void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
 
@@ -307,12 +316,6 @@ public abstract class Renderable {
             super(Priority.SPEED, view, pt, epsilon, widthZoom);
         }
 
-        public void setRangeMilesPerHour(double clampMin, double clampMax) {
-            this.clampMin = clampMin / 1.60934;
-            this.clampMax = clampMax / 1.60934;
-            this.clamp = true;
-        }
-
         @Override protected AsynchronousResampler Factory() {
             return clamp ?
                 new AsynchronousResampler.Speed(this, Math.pow(2.0, epsilon - zoom), clampMin, clampMax) :
@@ -326,11 +329,6 @@ public abstract class Renderable {
 
         public Altitude(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, double widthZoom) {
             super(Priority.ALTITUDE, view, pt, epsilon, widthZoom);
-        }
-
-        public void setRangeMiles(double clampMin, double clampMax) {
-            this.clampMin = clampMin / 1.60934;
-            this.clampMax = clampMax / 1.60934;
         }
 
         @Override protected AsynchronousResampler Factory() {
@@ -546,13 +544,17 @@ public abstract class Renderable {
 
     public static class RouteMarker extends Renderable {
 
+        private int cachedC;
+
         public RouteMarker(OsmandMapTileView view, List<GPXUtilities.WptPt> pt, double epsilon, long refreshRate) {
             super(Priority.ARROWS, view, pt, epsilon);
-            Renderable.startScreenRefresh(view, refreshRate);
+            if (refreshRate > 0) {
+                Renderable.startScreenRefresh(view, refreshRate);
+            }
         }
 
         @Override protected AsynchronousResampler Factory() {
-            return new AsynchronousResampler.RouteMarker(this, 20 * Math.pow(2.0, epsilon - zoom));
+            return new AsynchronousResampler.RouteMarker(this, 4 * Math.pow(2.0, epsilon - zoom));
         }
 
         protected void startCuller(double newZoom) {
@@ -574,21 +576,19 @@ public abstract class Renderable {
             paint.setStrokeJoin(Paint.Join.MITER);
 
             List<Path> paths = new ArrayList<>();
-            Path currentPath = new Path();
-            paths.add(currentPath);
-
-            Path path = currentPath;
+            paths.add(new Path());
+            Path path = paths.get(paths.size() - 1);
 
 
             float stroke = paint.getStrokeWidth();
             float stroke2 = stroke / 2;
 
-            float arrowSize = stroke;                       //(float) Math.pow(2.0, zoomlimit - 18) * 500; //800;
+            float arrowSize = stroke * 1.5f;                       //(float) Math.pow(2.0, zoomlimit - 18) * 500; //800;
 
-            float clipL = -arrowSize;
-            float clipB = -arrowSize;
-            float clipT = canvas.getHeight() + arrowSize;
-            float clipR = canvas.getWidth() + arrowSize;
+            float clipL = -stroke;
+            float clipB = -stroke;
+            float clipT = canvas.getHeight() + stroke;
+            float clipR = canvas.getWidth() + stroke;
 
             float lastx = 0;
             float lasty = Float.NEGATIVE_INFINITY;
@@ -607,12 +607,12 @@ public abstract class Renderable {
                         && Math.min(y, lasty) < clipT && Math.max(y, lasty) > clipB) {
 
                     double angle = Math.atan2(lasty - y, lastx - x);
-                    float extendx = x - (float) Math.cos(angle) * arrowSize / 4;
-                    float extendy = y - (float) Math.sin(angle) * arrowSize / 4;
-                    float newx1 = extendx + (float) Math.cos(angle - 0.5) * arrowSize;
-                    float newy1 = extendy + (float) Math.sin(angle - 0.5) * arrowSize;
-                    float newx2 = extendx + (float) Math.cos(angle + 0.5) * arrowSize;
-                    float newy2 = extendy + (float) Math.sin(angle + 0.5) * arrowSize;
+                    float extendx = x - (float) Math.cos(angle) * arrowSize / 3f;
+                    float extendy = y - (float) Math.sin(angle) * arrowSize / 3f;
+                    float newx1 = extendx + (float) Math.cos(angle - 0.45) * arrowSize * 0.5f;
+                    float newy1 = extendy + (float) Math.sin(angle - 0.45) * arrowSize * 0.5f;
+                    float newx2 = extendx + (float) Math.cos(angle + 0.45) * arrowSize * 0.5f;
+                    float newy2 = extendy + (float) Math.sin(angle + 0.45) * arrowSize * 0.5f;
 
                     int clr = pt.colourARGB;
                     if (actionPoints && clr == Color.YELLOW) {
@@ -635,17 +635,22 @@ public abstract class Renderable {
                             // We can't just go 'path = new Path()' here, as the garbage collector seems to kick in
                             // and the arrow isn't drawn; instead, we use a roundabout way to do the same thing
 
-                            currentPath = new Path();
-                            paths.add(currentPath);
-                            path = currentPath;
+                            path = new Path();
+                            paths.add(path);
                         }
 
                     } else if (!actionPoints && clr == Color.BLACK) {
 
-                        // Handle the simple direction markers
-                        path.moveTo(newx2, newy2);
-                        path.lineTo(extendx, extendy);
-                        path.lineTo(newx1, newy1);
+
+                        if ( (i+cachedC) % 3 == 0) {
+                            // Handle the simple direction markers
+                            path.moveTo(x, y);
+                            path.lineTo(newx2, newy2);
+                            path.lineTo(extendx, extendy);
+                            path.lineTo(newx1, newy1);
+                            path.lineTo(x, y);
+                            path.lineTo(extendx, extendy);
+                        }
                     } else {
                         broken = true;
                     }
@@ -658,21 +663,21 @@ public abstract class Renderable {
 
             if (actionPoints) {
                 for (Path path2 : paths) {
-                    paint.setStrokeWidth(stroke2 * 1.2f);
+                    paint.setStrokeWidth(stroke2 * 0.75f);
                     paint.setColor(Color.BLACK);
                     canvas.drawPath(path2, paint);
                     paint.setColor(0xFFFFE000);
-                    paint.setStrokeWidth(0.75f * stroke2 * 1.2f);
-                    canvas.drawPath(path2, paint);
+                    float sw2 = stroke2 * 0.75f - 4.0f;
+                    if (sw2 > 0) {
+                        paint.setStrokeWidth(sw2);
+                        canvas.drawPath(path2, paint);
+                    }
                 }
 
             } else {
                 for (Path path2 : paths) {
-                    paint.setStrokeWidth(stroke2 * 0.8f);
+                    paint.setStrokeWidth(stroke2 * 0.3f);
                     paint.setColor(Color.BLACK);
-                    canvas.drawPath(path2, paint);
-                    paint.setStrokeWidth(0.75f * stroke2 * 0.8f);
-                    paint.setColor(0x80FF00FF);
                     canvas.drawPath(path2, paint);
                 }
             }
@@ -682,6 +687,8 @@ public abstract class Renderable {
 
         @Override
         public void drawSingleSegment(Paint p, Canvas canvas, RotatedTileBox tileBox) {
+
+            cachedC = conveyor;
 
             if (!culled.isEmpty() && zoom > 10) {
                 updateLocalPaint(p);

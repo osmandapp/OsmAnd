@@ -14,13 +14,13 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     protected Renderable rs;
     protected List<WptPt2> culled = null;
-    protected double epsilon;
+    protected double spacing;
 
-    AsynchronousResampler(Renderable rs, double epsilon) {
+    AsynchronousResampler(Renderable rs, double spacing) {
         assert rs != null;
         assert rs.points != null;
         this.rs = rs;
-        this.epsilon = epsilon;
+        this.spacing = spacing;
     }
 
     @Override protected void onPostExecute(String result) {
@@ -43,7 +43,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 dist, angle);
     }
 
-    public List<WptPt2> resampleTrack(List<WptPt> pts, double dist) {
+    public List<WptPt2> resampleTrack(List<WptPt> pts, double spacing) {
 
         List<WptPt2> newPts = new ArrayList<>();
 
@@ -59,7 +59,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 while (segSub < segLength) {
                     double partial = segSub / segLength;
                     newPts.add(createIntermediatePoint(lastPt, pt, partial, cumDist + segLength * partial));
-                    segSub += dist;
+                    segSub += spacing;
                 }
                 segSub -= segLength;
                 cumDist += segLength;
@@ -105,7 +105,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
                 index = i;
             }
         }
-        if (dmax > epsilon) {
+        if (dmax > spacing) {
             cullRamerDouglasPeucer(survivor, start, index);
             cullRamerDouglasPeucer(survivor, index, end);
         } else {
@@ -115,20 +115,20 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     public static class Generic extends AsynchronousResampler {
 
-        public Generic(Renderable rs, double epsilon) {
-            super(rs, epsilon);
+        public Generic(Renderable rs, double spacing) {
+            super(rs, spacing);
         }
 
         @Override protected String doInBackground(String... params) {
-            culled = resampleTrack(rs.points, epsilon);
+            culled = resampleTrack(rs.points, spacing);
             return null;
         }
     }
 
     public static class RamerDouglasPeucer extends AsynchronousResampler {
 
-        public RamerDouglasPeucer(Renderable rs, double epsilon) {
-            super(rs, epsilon);
+        public RamerDouglasPeucer(Renderable rs, double spacing) {
+            super(rs, spacing);
         }
 
         @Override protected String doInBackground(String... params) {
@@ -143,20 +143,20 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         private double clampMax;
         private boolean clamp;
 
-        public Altitude(Renderable rs, double epsilon) {
-            super(rs, epsilon);
+        public Altitude(Renderable rs, double spacing) {
+            super(rs, spacing);
             this.clamp = false;
         }
 
-        public Altitude(Renderable rs, double epsilon, double clampMin, double clampMax) {
-            super(rs, epsilon);
+        public Altitude(Renderable rs, double spacing, double clampMin, double clampMax) {
+            super(rs, spacing);
             this.clampMin = clampMin;
             this.clampMax = clampMax;
             this.clamp = true;
         }
 
         @Override protected String doInBackground(String... params) {
-            culled = doRamerDouglasPeucerSimplification(rs.points); //resampleTrack(rs.points, epsilon);
+            culled = doRamerDouglasPeucerSimplification(rs.points); //resampleTrack(rs.points, spacing);
             if (!isCancelled() && !culled.isEmpty()) {
 
                 int halfC = Algorithms.getRainbowColor(0.5);
@@ -192,13 +192,13 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
         private double clampMax;
         private boolean clamp;
 
-        public Speed(Renderable rs, double epsilon) {
-            super(rs, epsilon);
+        public Speed(Renderable rs, double spacing) {
+            super(rs, spacing);
             this.clamp = false;
         }
 
-        public Speed(Renderable rs, double epsilon, double clampMin, double clampMax) {
-            super(rs, epsilon);
+        public Speed(Renderable rs, double spacing, double clampMin, double clampMax) {
+            super(rs, spacing);
             this.clampMin = clampMin;
             this.clampMax = clampMax;
             this.clamp = true;
@@ -208,7 +208,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             // Resample track, then analyse speeds and set colours for each point
 
-            culled = doRamerDouglasPeucerSimplification(rs.points); //resampleTrack(rs.points, epsilon);
+            culled = doRamerDouglasPeucerSimplification(rs.points); //resampleTrack(rs.points, spacing);
             if (!isCancelled() && !culled.isEmpty()) {
 
                 WptPt2 lastPt = culled.get(0);
@@ -257,67 +257,70 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     public static class RouteMarker extends AsynchronousResampler {
 
-        public RouteMarker(Renderable rs, double epsilon) {
-            super(rs, epsilon);
+        public RouteMarker(Renderable rs, double spacing) {
+            super(rs, spacing);
         }
 
         private double calculatedAngle(int i) {
             double angle = 0;
-            int size = culled.size();
-            if (i > 0 && i < size) {
-                angle += Math.abs(diff(culled.get(i - 1).angle, culled.get(i).angle));
+            if (i > 0 && i < culled.size()) {
+                angle = diff(culled.get(i - 1).angle, culled.get(i).angle);
             }
             return angle;
         }
 
-        public static double diff(double theta1, double theta2) {
-            double dif = ((theta2 - theta1)%(2*Math.PI)); // in range
-            if (theta1>theta2) {dif += 2*Math.PI;}
-            if (dif >= Math.PI) {dif = -(dif - 2*Math.PI);}
-            return dif;
+        public double diff(double theta1, double theta2) {
+            double delta1;
+            if (theta1 > theta2)
+                delta1 = theta1 - theta2;
+            else
+                delta1 = theta2 - theta1;
+
+            if (delta1 > Math.PI) {
+                delta1 = 2 * Math.PI - delta1;
+            }
+
+            return delta1;
         }
 
 
         @Override protected String doInBackground(String... params) {
 
-            culled = resampleTrack(rs.points, epsilon);
+            culled = resampleTrack(rs.points, spacing);
 
-            int detectionLength = 2;
+            int detectionLength = 4;
             double cumulativeAngle = 0;
 
             // Pre-calc sum of angles for the first part of the track
             int size = culled.size();
-            for (int i = 0; i < size && i < detectionLength + 1; i++) {
+            for (int i = 0; i < size && i < detectionLength; i++) {
                 cumulativeAngle += calculatedAngle(i);
             }
 
             for (int i = 0; i < size; i++) {
                 cumulativeAngle -= calculatedAngle(i - detectionLength);
-                cumulativeAngle += calculatedAngle(i + detectionLength + 1);
+                cumulativeAngle += calculatedAngle(i + detectionLength);
                 culled.get(i).speed = cumulativeAngle;          // re-use var
             }
-
-
-
 
             int run = 0;
             int gap = 0;
 
             WptPt2 last = null;
 
-            double threshold = Math.PI/2f;
-
+            double threshold = Math.PI / 3.0;
 
             for (int i = 0; i < size; i++) {
                 WptPt2 pt = culled.get(i);
                 boolean warn = pt.speed > threshold;
 
-                if (run > 0 && run < 5) {
+                if (run > 0 && run < 15) {
                     warn = true;
                 }
 
-                if (run > 8 || (gap > 0 && gap < 3)) {
+                if (run > 15 || (gap > 0 && gap < 5)) {
                     warn = false;
+                    run = 0;
                 }
 
                 if (warn) {
@@ -330,11 +333,9 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
                 } else {
                     gap++;
-                    if (gap > 3) {
+                    if (gap % 5 == 0) {
                         pt.colourARGB = Color.BLACK;
-                        gap = 0;
                     }
-
                     run = 0;
                 }
                 last = pt;

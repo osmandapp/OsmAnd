@@ -344,6 +344,11 @@ public class RouteLayer extends OsmandMapLayer {
 
 			renderable = new ArrayList<>();
 
+			// Routes and tracks use different structures. A sign that they were written by different
+			// people!  So, convert the route point list into a waypoint point list, so that we can
+			// re-use the code that was written to display GPX tracks...  We want to use that code
+			// to get all the benefits of asynchronous resampling for zooming/efficiency etc.
+
 			List<GPXUtilities.WptPt> pts = new ArrayList<>();
 			for (Location loc : routeNodes) {
 				GPXUtilities.WptPt wpt = new GPXUtilities.WptPt();
@@ -352,31 +357,36 @@ public class RouteLayer extends OsmandMapLayer {
 				pts.add(wpt);
 			}
 
-			double epsilon = 16.5;
-			renderable.add(new Renderable.StandardTrack(view, pts, epsilon));
-			renderable.add(new Renderable.RouteMarker(view, pts, epsilon, 1000));
+			double epsilon = 16.5;			// how 'chunky' the resampled route is
+			long refreshRate = 0;			// 0 = no animation, else ms speed of animation
+
+			renderable.add(new Renderable.StandardTrack(view, pts, epsilon));				// purple track
+			renderable.add(new Renderable.RouteMarker(view, pts, epsilon, refreshRate));	// arrows/markers
 		}
 
 
 		// Try to replicate original behaviour with the various paint contexts and drawing order
 
+		int zoom = view.getZoom();
+		Renderable r = renderable.get(0);
+
 		if (isPaint_1) {
-			renderable.get(0).drawSegment(view.getZoom(), paint_1, canvas, tb);
+			r.drawSegment(zoom, paint_1, canvas, tb);
 		}
 
 		if (isShadowPaint) {
-			renderable.get(0).drawSegment(view.getZoom(), shadowPaint, canvas, tb);
+			r.drawSegment(zoom, shadowPaint, canvas, tb);
 		}
 
 		// Now the standard track
-		renderable.get(0).drawSegment(view.getZoom(), paint, canvas, tb);
+		r.drawSegment(zoom, paint, canvas, tb);
 
 		if (isPaint2) {
-			renderable.get(0).drawSegment(view.getZoom(), paint2, canvas, tb);
+			r.drawSegment(zoom, paint2, canvas, tb);
 		}
 
 		// Finally draw the arrows/markers over the top
-		renderable.get(1).drawSegment(view.getZoom(), paint, canvas, tb);
+		renderable.get(1).drawSegment(zoom, paint, canvas, tb);
 
 /*
 
