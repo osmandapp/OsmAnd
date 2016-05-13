@@ -1257,4 +1257,7 @@
     <string name="favorite_home_category">Hejmo</string>
     <string name="preferred_locale">Fasada lingvo</string>
     <string name="incomplete_locale">(nekompleta)</string>
+    <string name="map_online_plugin_is_not_installed">Aktivigi la Enretajn mapojn kromprogramon por elekti aliajn fontojn de mapoj</string>
+    <string name="map_online_data">Enretaj kaj kahelaj mapoj</string>
+    <string name="map_online_data_descr">Uzas enretajn mapojn (elŝutas kaj kaŝmemorigas kahelojn en memorilkarto)</string>
     </resources>
