@@ -2178,5 +2178,5 @@
     <string name="access_direction_haptic_feedback_descr">Indica el punto de dirección del destino mediante vibración</string>
     <string name="move_marker_bottom_sheet_title">Mueve el mapa para cambiar la ubicación del marcador</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
-    <string name="map_widget_battery">Estado de la batería</string>
+    <string name="map_widget_battery">Nivel de batería</string>
     </resources>
