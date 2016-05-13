@@ -39,9 +39,11 @@ public class DashSimulateFragment extends DashBaseFragment {
 		boolean routeAnimating = loc.getLocationSimulation().isRouteAnimating();
 		((TextView) getView().findViewById(R.id.name)).setText(routeAnimating ? R.string.animate_route_off
 				: R.string.animate_route);
-		((ImageButton) getView().findViewById(R.id.stop)).setImageDrawable(
+		ImageButton actionButton = (ImageButton) getView().findViewById(R.id.stop);
+		actionButton.setImageDrawable(
 				!routeAnimating ? getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_play_dark)
 						: getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_rec_stop));
+		actionButton.setContentDescription(getString(routeAnimating ? R.string.animate_route_off : R.string.animate_route));
 
 	}
 
@@ -64,7 +66,9 @@ public class DashSimulateFragment extends DashBaseFragment {
 			}
 		};
 		item.setOnClickListener(listener);
-		((ImageButton) item.findViewById(R.id.stop)).setOnClickListener(listener);
+		ImageButton actionButton = (ImageButton) item.findViewById(R.id.stop);
+		actionButton.setOnClickListener(listener);
+		actionButton.setContentDescription(getString(R.string.animate_route));
 		((TextView) item.findViewById(R.id.name)).setText(R.string.animate_route);
 		item.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 
