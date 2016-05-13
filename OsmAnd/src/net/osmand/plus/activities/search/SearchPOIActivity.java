@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -792,7 +793,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, app.getSettings().MAP_PREFERRED_LOCALE.get());
 			label.setText(poiType);
 			distanceText.setText(distance);
-			row.setAccessibilityDelegate(accessibilityAssistant);
+			ViewCompat.setAccessibilityDelegate(row, accessibilityAssistant);
 			return (row);
 		}
 

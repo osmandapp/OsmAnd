@@ -27,6 +27,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBar.OnNavigationListener;
@@ -205,7 +206,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 					@Override
 					public View getDropDownView(int position, View convertView, ViewGroup parent) {
 						View itemView = super.getDropDownView(position, convertView, parent);
-						itemView.setAccessibilityDelegate(accessibilityAssistant);
+						ViewCompat.setAccessibilityDelegate(itemView, accessibilityAssistant);
 						return itemView;
 					}
 				};
