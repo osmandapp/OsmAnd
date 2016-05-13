@@ -2937,4 +2937,6 @@
 	<string name="poi_bicycle_parking_tree">Cykeltræ patkering</string>
 	<string name="poi_bicycle_parking_streetpod">Streetpod</string>
 
+<string name="poi_depth">Dybde</string>
+
 </resources>
