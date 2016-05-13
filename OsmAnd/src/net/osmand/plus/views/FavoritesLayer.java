@@ -9,6 +9,8 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.FavouritePoint;
@@ -244,7 +246,8 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	}
 
 	@Override
-	public void applyNewObjectPosition(Object o, LatLon position, ApplyMovedObjectCallback callback) {
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+									   @Nullable ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		if (o instanceof FavouritePoint) {
 			favorites.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());

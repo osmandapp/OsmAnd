@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -205,10 +207,15 @@ public class ParkingPositionLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void applyNewObjectPosition(Object o, LatLon position, ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+		boolean result = false;
 		if (o == getParkingPoint()) {
 			plugin.setParkingPosition(position.getLatitude(), position.getLongitude());
-			callback.onApplyMovedObject(true, getParkingPoint());
+			result = true;
+		}
+		if (callback != null) {
+			callback.onApplyMovedObject(result, getParkingPoint());
 		}
 	}
 }

@@ -8,6 +8,10 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -16,66 +20,67 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class PointNavigationLayer extends OsmandMapLayer implements IContextMenuProvider {
+public class PointNavigationLayer extends OsmandMapLayer implements
+		IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
 	protected final static int DIST_TO_SHOW = 80;
 
-	private Paint point;
-	private Paint bitmapPaint;
-	
-	private OsmandMapTileView view;
-	private float[] calculations = new float[2];
+	private Paint mPoint;
+	private Paint mBitmapPaint;
 
-	private Bitmap startPoint;
-	private Bitmap targetPoint;
-	private Bitmap intermediatePoint;
-	private Bitmap arrowToDestination;
+	private OsmandMapTileView mView;
+	private float[] mCalculations = new float[2];
 
-	private Paint textPaint;
+	private Bitmap mStartPoint;
+	private Bitmap mTargetPoint;
+	private Bitmap mIntermediatePoint;
+	private Bitmap mArrowToDestination;
+
+	private Paint mTextPaint;
 
 	private final MapActivity map;
-	
+
+	private ContextMenuLayer contextMenuLayer;
+
 	public PointNavigationLayer(MapActivity map) {
 		this.map = map;
 	}
-	
 
 	private void initUI() {
-		
-		point = new Paint();
-		point.setColor(view.getResources().getColor(R.color.nav_point));
-		point.setAntiAlias(true);
-		point.setStyle(Style.FILL);
+		mPoint = new Paint();
+		mPoint.setColor(ContextCompat.getColor(map, R.color.nav_point));
+		mPoint.setAntiAlias(true);
+		mPoint.setStyle(Style.FILL);
 
-		bitmapPaint = new Paint();
-		bitmapPaint.setDither(true);
-		bitmapPaint.setAntiAlias(true);
-		bitmapPaint.setFilterBitmap(true);
-		textPaint = new Paint();
+		mBitmapPaint = new Paint();
+		mBitmapPaint.setDither(true);
+		mBitmapPaint.setAntiAlias(true);
+		mBitmapPaint.setFilterBitmap(true);
+		mTextPaint = new Paint();
 		float sp = Resources.getSystem().getDisplayMetrics().scaledDensity;
-		textPaint.setTextSize(sp * 18);
-		textPaint.setTextAlign(Align.CENTER);
-		textPaint.setAntiAlias(true);
-		startPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_start_point);
-		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_target_point);
-		intermediatePoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_intermediate_point);
-		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
-
-		
+		mTextPaint.setTextSize(sp * 18);
+		mTextPaint.setTextAlign(Align.CENTER);
+		mTextPaint.setAntiAlias(true);
+		mStartPoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_start_point);
+		mTargetPoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_target_point);
+		mIntermediatePoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_intermediate_point);
+		mArrowToDestination = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_arrow_to_destination);
 	}
-	
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
-		this.view = view;
+		this.mView = view;
 		initUI();
+
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
 
-	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		if (tb.getZoom() < 3) {
@@ -86,75 +91,96 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		TargetPoint pointToStart = targetPoints.getPointToStart();
 		if (pointToStart != null) {
 			if (isLocationVisible(tb, pointToStart)) {
-				int marginX = startPoint.getWidth() / 6;
-				int marginY = startPoint.getHeight();
-				int locationX = tb.getPixXFromLonNoRot(pointToStart.getLongitude());
-				int locationY = tb.getPixYFromLatNoRot(pointToStart.getLatitude());
+				int marginX = mStartPoint.getWidth() / 6;
+				int marginY = mStartPoint.getHeight();
+				float locationX = getPointX(tb, pointToStart);
+				float locationY = getPointY(tb, pointToStart);
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
-				canvas.drawBitmap(startPoint, locationX - marginX, locationY - marginY, bitmapPaint);
+				canvas.drawBitmap(mStartPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
 			}
 		}
 
 		int index = 0;
 		for (TargetPoint ip : targetPoints.getIntermediatePoints()) {
-			index ++;
+			index++;
 			if (isLocationVisible(tb, ip)) {
-				int marginX = intermediatePoint.getWidth() / 6;
-				int marginY = intermediatePoint.getHeight();
-				int locationX = tb.getPixXFromLonNoRot(ip.getLongitude());
-				int locationY = tb.getPixYFromLatNoRot(ip.getLatitude());
+				int marginX = mIntermediatePoint.getWidth() / 6;
+				int marginY = mIntermediatePoint.getHeight();
+				float locationX = getPointX(tb, ip);
+				float locationY = getPointY(tb, ip);
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
-				canvas.drawBitmap(intermediatePoint, locationX - marginX, locationY - marginY, bitmapPaint);
-				marginX = intermediatePoint.getWidth() / 3;
-				canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, textPaint);
+				canvas.drawBitmap(mIntermediatePoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+				marginX = mIntermediatePoint.getWidth() / 3;
+				canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, mTextPaint);
 				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
 
 		TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
 		if (isLocationVisible(tb, pointToNavigate)) {
-			int marginX = targetPoint.getWidth() / 6;
-			int marginY = targetPoint.getHeight();
-			int locationX = tb.getPixXFromLonNoRot(pointToNavigate.getLongitude());
-			int locationY = tb.getPixYFromLatNoRot(pointToNavigate.getLatitude());
+			int marginX = mTargetPoint.getWidth() / 6;
+			int marginY = mTargetPoint.getHeight();
+			float locationX = getPointX(tb, pointToNavigate);
+			float locationY = getPointY(tb, pointToNavigate);
 			canvas.rotate(-tb.getRotate(), locationX, locationY);
-			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, bitmapPaint);
-		} 
+			canvas.drawBitmap(mTargetPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+		}
 
 		Iterator<TargetPoint> it = targetPoints.getIntermediatePoints().iterator();
-		if(it.hasNext()) {
+		if (it.hasNext()) {
 			pointToNavigate = it.next();
 		}
 		if (pointToNavigate != null && !isLocationVisible(tb, pointToNavigate)) {
-			boolean show = !view.getApplication().getRoutingHelper().isRouteCalculated();
-			if(view.getSettings().SHOW_DESTINATION_ARROW.isSet()) {
-				show = view.getSettings().SHOW_DESTINATION_ARROW.get();
+			boolean show = !mView.getApplication().getRoutingHelper().isRouteCalculated();
+			if (mView.getSettings().SHOW_DESTINATION_ARROW.isSet()) {
+				show = mView.getSettings().SHOW_DESTINATION_ARROW.get();
 			}
 			if (show) {
-				net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(),
-						pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), calculations);
-				float bearing = calculations[1] - 90;
+				net.osmand.Location.distanceBetween(mView.getLatitude(), mView.getLongitude(),
+						pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), mCalculations);
+				float bearing = mCalculations[1] - 90;
 				float radiusBearing = DIST_TO_SHOW * tb.getDensity();
 				final QuadPoint cp = tb.getCenterPixelPoint();
 				canvas.rotate(bearing, cp.x, cp.y);
 				canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
-				canvas.drawBitmap(arrowToDestination, cp.x, cp.y, bitmapPaint);
+				canvas.drawBitmap(mArrowToDestination, cp.x, cp.y, mBitmapPaint);
 			}
 		}
-		
+
 	}
 
-	public boolean isLocationVisible(RotatedTileBox tb, TargetPoint p){
-		if(p == null || tb == null){
+	private float getPointX(RotatedTileBox tileBox, TargetPoint point) {
+		if (contextMenuLayer.getMoveableObject() != null
+				&& point == contextMenuLayer.getMoveableObject()) {
+			return contextMenuLayer.getMoveableCenterPoint(tileBox).x;
+		} else {
+			return tileBox.getPixXFromLonNoRot(point.getLongitude());
+		}
+	}
+
+	private float getPointY(RotatedTileBox tileBox, TargetPoint point) {
+		if (contextMenuLayer.getMoveableObject() != null
+				&& point == contextMenuLayer.getMoveableObject()) {
+			return contextMenuLayer.getMoveableCenterPoint(tileBox).y;
+		} else {
+			return tileBox.getPixYFromLatNoRot(point.getLatitude());
+		}
+	}
+
+	public boolean isLocationVisible(RotatedTileBox tb, TargetPoint p) {
+		if (contextMenuLayer.getMoveableObject() != null
+				&& p == contextMenuLayer.getMoveableObject()) {
+			return true;
+		} else if (p == null || tb == null) {
 			return false;
 		}
 		return tb.containsLatLon(p.getLatitude(), p.getLongitude());
 	}
-	
-	
+
+
 	@Override
 	public void destroyLayer() {
-		
+
 	}
 
 	@Override
@@ -198,19 +224,19 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			}
 		}
 	}
-	
+
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius && (objy - ey) <= 2.5 * radius ;
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius && (objy - ey) <= 2.5 * radius;
 	}
-	
-	public int getRadiusPoi(RotatedTileBox tb){
-		int r = 0;
+
+	public int getRadiusPoi(RotatedTileBox tb) {
+		int r;
 		final double zoom = tb.getZoom();
-		if(zoom <= 15){
+		if (zoom <= 15) {
 			r = 10;
-		} else if(zoom <= 16){
+		} else if (zoom <= 16) {
 			r = 14;
-		} else if(zoom <= 17){
+		} else if (zoom <= 17) {
 			r = 16;
 		} else {
 			r = 18;
@@ -230,10 +256,31 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).getPointDescription(view.getContext());
+			return ((TargetPoint) o).getPointDescription(mView.getContext());
 		}
 		return null;
 	}
 
 
+	@Override
+	public boolean isObjectMovable(Object o) {
+		return o instanceof TargetPoint;
+	}
+
+	@Override
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+		boolean result = false;
+		if (o instanceof TargetPoint) {
+			((TargetPoint) o).setLocation(position);
+			RoutingHelper rh = map.getMyApplication().getRoutingHelper();
+			if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
+				rh.recalculateRouteDueToSettingsChange();
+			}
+			result = true;
+		}
+		if (callback != null) {
+			callback.onApplyMovedObject(result, o);
+		}
+	}
 }

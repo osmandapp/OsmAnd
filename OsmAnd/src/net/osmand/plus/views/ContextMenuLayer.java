@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
 import android.view.GestureDetector;
@@ -521,8 +522,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		boolean isObjectMovable(Object o);
 
-		void applyNewObjectPosition(Object o, LatLon position, ApplyMovedObjectCallback callback);
-
+		void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+									@Nullable ApplyMovedObjectCallback callback);
 	}
 
 	public interface ApplyMovedObjectCallback {

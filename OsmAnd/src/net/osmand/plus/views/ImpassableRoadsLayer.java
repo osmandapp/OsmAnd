@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.ArrayAdapter;
 
 import net.osmand.Location;
@@ -107,7 +109,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	public int getRadiusPoi(RotatedTileBox tb) {
-		int r = 0;
+		int r;
 		if (tb.getZoom() < startZoom) {
 			r = 0;
 		} else {
@@ -203,7 +205,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void applyNewObjectPosition(Object o, LatLon position, final ApplyMovedObjectCallback callback) {
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+									   @Nullable final ApplyMovedObjectCallback callback) {
 		if (o instanceof RouteDataObject) {
 			final RouteDataObject object = (RouteDataObject) o;
 			final OsmandApplication application = activity.getMyApplication();
@@ -217,10 +220,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 				@Override
 				public boolean isCancelled() {
-					if (callback != null) {
-						return callback.isCancelled();
-					}
-					return false;
+					return callback != null && callback.isCancelled();
 				}
 			});
 		}
