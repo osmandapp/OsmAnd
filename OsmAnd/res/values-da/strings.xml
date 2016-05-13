@@ -2368,5 +2368,5 @@
     <string name="follow_us">Følg os</string>
     <string name="move_marker_bottom_sheet_title">Flyt kortet for at ændre markørens position</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
-    <string name="map_widget_battery">Batteristatus</string>
+    <string name="map_widget_battery">Batteriniveau</string>
     </resources>
