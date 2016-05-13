@@ -35,6 +35,16 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	private OsmandSettings osmandSettings;
 
 	@Override
+	protected void finishInitializing(List<City> list) {
+		// Show villages if cities are not present in this region
+		if (list != null && list.isEmpty()) {
+			searchVillagesMode = 0;
+			searchVillages.setVisibility(View.GONE);
+		}
+		super.finishInitializing(list);
+	}
+
+	@Override
 	protected void reset() {
 		//This is really only a "clear input text field", hence do not reset settings here
 		//searchVillagesMode = -1;
@@ -141,7 +151,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	private void redefineSearchVillagesMode(int queryLen) {
 		if (searchVillagesMode == 1) {
 			searchVillagesMode = 0;
-		} else if (searchVillagesMode == 0 && queryLen <= 3) {
+		} else if (searchVillagesMode == 0 && queryLen <= 3 && !initialListToFilter.isEmpty()) {
 			searchVillagesMode = -1;
 			uiHandler.post(new Runnable() {
 				@Override

@@ -296,7 +296,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected void finishInitializing(List<T> list){
 		Comparator<? super T> cmp = createComparator();
 		getListAdapter().sort(cmp);
-		if(list != null){
+		if (list != null) {
 			Collections.sort(list,cmp);
 			initialListToFilter = list;
 		}
