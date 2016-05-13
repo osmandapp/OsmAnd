@@ -2019,4 +2019,6 @@
     <string name="access_direction_haptic_feedback">Haptická zpětná vazba směru</string>
     <string name="access_direction_haptic_feedback_descr">Indikovat směr k cílovému bodu vibrováním</string>
     <string name="use_osm_live_routing">OSM Live navigace</string>
+    <string name="map_widget_battery">Stav baterie</string>
+    <string name="lat_lon_pattern"></string>
     </resources>
