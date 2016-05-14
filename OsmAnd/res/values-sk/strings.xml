@@ -833,7 +833,7 @@
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
-    <string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (administratívne úrovne 5 až 9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie hraníc regiónov (administratívne úrovne 5 až 9)</string>
     <string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="av_def_action_video">Nahrať video</string>
@@ -2038,4 +2038,7 @@
     <string name="access_direction_audio_feedback_descr">Indikovať smer k cieľu pomocou zvuku</string>
     <string name="access_direction_haptic_feedback">Dotyková indikácia smeru</string>
     <string name="access_direction_haptic_feedback_descr">Indikovať smer k cieľu pomocou vibrácie</string>
+    <string name="map_widget_battery">Úroveň batérie</string>
+    <string name="move_marker_bottom_sheet_title">Posuňte mapu pre zmenu pozície značky</string>
+    <string name="lat_lon_pattern">Šírka: %1$.6f Dĺžka: %2$.6f</string>
     </resources>
