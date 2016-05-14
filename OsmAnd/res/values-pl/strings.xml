@@ -974,14 +974,14 @@
 
     <string name="map_widget_audionotes">Notatki głosowe</string>
 
-    <string name="av_def_action_video">Nagraj film</string>
-    <string name="av_def_action_audio">Nagraj dźwięk</string>
-    <string name="av_widget_action_descr">Wybierz domyślną akcję widgetu</string>
-    <string name="av_widget_action">Domyślna akcja widżetu</string>
+    <string name="av_def_action_video">Nagranie filmu</string>
+    <string name="av_def_action_audio">Nagranie dźwięku</string>
+    <string name="av_widget_action_descr">Wybiera domyślną funkcję widżetu</string>
+    <string name="av_widget_action">Domyślne działanie widżetu</string>
     <string name="av_video_format_descr">Wybierz format wideo</string>
     <string name="av_video_format">Format wideo</string>
-    <string name="av_use_external_recorder_descr">Użyj kamery systemowej do nagrywania filmów</string>
-    <string name="av_use_external_recorder">Użyj systemowej kamery</string>
+    <string name="av_use_external_recorder_descr">Nagrywa filmy przy użyciu aplikacji systemowej</string>
+    <string name="av_use_external_recorder">Używanie aplikacji kamery</string>
     <string name="av_settings_descr">Konfiguruj ustawienia dźwięku i obrazu</string>
     <string name="av_settings">Ustawienia obrazu/dźwięku </string>
     <string name="recording_error">Wystąpił błąd podczas nagrywania </string>
@@ -1028,8 +1028,8 @@
 
     <string name="download_hillshade_maps">Cieniowanie rzeźby terenu</string>
 
-    <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
-    <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
+    <string name="av_use_external_camera_descr">Robi zdjęcia przy użyciu aplikacji systemowej</string>
+    <string name="av_use_external_camera">Używanie aplikacji aparatu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
 
     <string name="max_speed_none">brak</string>
@@ -1039,7 +1039,7 @@
     <string name="shared_string_map">Mapa</string>
     <string name="item_checked">zaznaczone</string>
     <string name="item_unchecked">niezaznaczone</string>
-    <string name="av_def_action_choose">Wybierz na żądanie</string>
+    <string name="av_def_action_choose">Wybranie czynności</string>
     <string name="access_arrival_time">Czas przybycia</string>
     <string name="map_widget_gps_info">Dane GPS</string>
     <string name="layer_hillshade">Cieniowanie rzeźby terenu</string>
@@ -1117,8 +1117,8 @@
     <string name="av_camera_focus_infinity">Fokus jest ustawiony na nieskończoność</string>
     <string name="av_camera_focus_macro">Makro fokus (zbliżenie)</string>
     <string name="av_camera_focus_continuous">Aparat stale stara się ustawić ostrość</string>
-    <string name="av_photo_play_sound">Odtwórz dźwięk przy robieniu zdjęć</string>
-    <string name="av_photo_play_sound_descr">Wybierz czy odtwarzać dźwięk podczas robienia zdjęć</string>
+    <string name="av_photo_play_sound">Dźwięk podczas robienia zdjęć</string>
+    <string name="av_photo_play_sound_descr">Odtwarza dźwięk podczas robienia zdjęć</string>
 
     <string name="osb_author_or_password_not_specified">Proszę wprowadzić nazwę użytkownika i hasło OSM w ustawieniach</string>
     <string name="clear_intermediate_points">Wyczyść cele pośrednie</string>
@@ -1313,7 +1313,8 @@
     <string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
     <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">"Wtyczka ta częściowo zapewnia funkcjonalność monitoringu OpenStreetMap, zobacz https://osmo.mobi\n\nMożesz śledzić wszystkie urządzenia należące do grupy w czasie rzeczywistym. Można również zobaczyć punkt i trasy przesłane do grupy, do której należą.\n\nGrupa nie została usunięta po kilku miesiącach, wprowadza ją zgodnie z regułą tworzenie grup na stronie OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Zapewnia częściową funkcjonalność monitoringu OpenStreetMap. Więcej szczegółów na http://osmo.mobi.
+\n\nZa jej pomocą można śledzić wszystkie urządzenia z danej grupy w czasie rzeczywistym, oglądać punkty i trasy przesłane przez ich uczestników.\n\nGrupa nie została usunięta po kilku miesiącach, wprowadza ją zgodnie z regułą tworzenie grup na stronie OsMo.mobi "</string>
     <string name="osmo_plugin_name">Monitoring OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
@@ -2026,12 +2027,12 @@
     <string name="dashboard_or_drawer_title">Kokpit lub menu</string>
     <string name="av_video_quality_low">Najniższa jakość</string>
     <string name="av_video_quality_high">Najwyższa jakość</string>
-    <string name="av_video_quality">Jakość video</string>
-    <string name="av_video_quality_descr">Proszę wybrać jakość wyjściowego nagrania wideo</string>
+    <string name="av_video_quality">Jakość wideo</string>
+    <string name="av_video_quality_descr">Wybiera jakość wyjściowego nagrania wideo</string>
     <string name="av_audio_format">Format dźwięku</string>
-    <string name="av_audio_format_descr">Proszę wybrać format wyjściowego nagrania dźwięku</string>
+    <string name="av_audio_format_descr">Wybiera format wyjściowego nagrania dźwięku</string>
     <string name="av_audio_bitrate">Przepływność dźwięku</string>
-    <string name="av_audio_bitrate_descr">Proszę wybrać wartość przepływności dźwięku</string>
+    <string name="av_audio_bitrate_descr">Określa wartość przepływności dźwięku</string>
     <string name="shared_string_near">Obok</string>
     <string name="routing_attr_avoid_stairs_name">Omijanie schodów</string>
     <string name="routing_attr_avoid_stairs_description">Omijanie schodów</string>
