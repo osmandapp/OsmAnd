@@ -2026,7 +2026,7 @@
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="use_osm_live_routing">Navegação OSM Live</string>
     <string name="access_no_destination">O destino não foi indicado</string>
-    <string name="access_disable_offroute_recalc_descr">Desabilitar calculo automático da rota quando estiver muito longe</string>
+    <string name="access_disable_offroute_recalc_descr">Desabilitar recálculo automático de rota quando estiver muito longe do caminho correto</string>
     <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo automático da rota quando estiver se movendo na direção errada</string>
     <string name="follow_us">Siga-nos</string>
     </resources>
