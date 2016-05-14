@@ -2343,11 +2343,11 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_thin_name">Тонко</string>
     <string name="rendering_value_medium_name">Середньо</string>
     <string name="rendering_value_bold_name">Жирно</string>
-    <string name="no_map_markers_found">Додайте маркери на мапі</string>
+    <string name="no_map_markers_found">Додайте позначки на мапі</string>
     <string name="no_waypoints_found">Точки шляху не знайдені</string>
     <string name="storage_permission_restart_is_required">Тепер застосунок має можливість записувати у зовнішнє сховище. Потрібне ручне перезавантаження.</string>
     <string name="release_2_3">" • OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних.
-\n\n • Маркери. Новий спосіб швидко позначити місце на мапі.\n\n • Більш деталізовані мапи OSM з позначками доріг в залежності від країни та великою кількістю нових обʼєктів.\n\n • Оновлений зовнішній вигляд та підготовка маршрутів.
+\n\n • Позначки. Новий спосіб швидко позначити місце на мапі.\n\n • Більш деталізовані мапи OSM з позначками доріг в залежності від країни та великою кількістю нових обʼєктів.\n\n • Оновлений зовнішній вигляд та підготовка маршрутів.
 \n\n • Багато покращень в контекстному меню мапи, наприклад контекстний пошук адрес.\n\nта багато іншого… "</string>
     <string name="shared_string_move_up">Вгору</string>
     <string name="shared_string_move_down">Вниз</string>
@@ -2379,9 +2379,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
 <string name="follow_us">Слідуйте за нами</string>
     <string name="access_direction_audio_feedback">Звукова ідентифікація напрямку</string>
     <string name="access_direction_audio_feedback_descr">Ініціювати звуком напрям на цільову точку</string>
-    <string name="access_direction_haptic_feedback">Напрям тактильного зворотнього звязку</string>
+    <string name="access_direction_haptic_feedback">Тактильна індикація напрямку</string>
     <string name="access_direction_haptic_feedback_descr">Показати вібрацією напрям на цільову точку</string>
     <string name="map_widget_battery">Заряд батареї</string>
-    <string name="move_marker_bottom_sheet_title">Пересуньте мапу, щоб змінити положення маркера</string>
+    <string name="move_marker_bottom_sheet_title">Пересуньте мапу, щоб змінити положення позначки</string>
     <string name="lat_lon_pattern">Шир: %1$.6f Дов: %2$.6f</string>
     </resources>
