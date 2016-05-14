@@ -825,7 +825,7 @@
 	<string name="poi_entrance">Entrée</string>
 	<string name="poi_entrance_exit">Sortie</string>
 
-	<string name="poi_highway_crossing">Échangeur autoroutier</string>
+	<string name="poi_highway_crossing">Passage piéton</string>
 
 <string name="poi_cattle_grid">Grille à bétail</string>
 	<string name="poi_bollard">Bollard</string>
@@ -1102,7 +1102,7 @@
 	<string name="poi_nudism_no">Nudisme interdit</string>
 	<string name="poi_nudism_obligatory">Nudisme obligatoire</string>
 	<string name="poi_population">Population</string>
-	<string name="poi_parking_underground">Sous-terrain</string>
+	<string name="poi_parking_underground">Parking sous-terrain</string>
 	<string name="poi_trees_olive">Olivier</string>
 	<string name="poi_trees_apple">Pommier</string>
 	<string name="poi_trees_oil">Palmier</string>
@@ -1963,5 +1963,18 @@
 	<string name="poi_capacity_parent_no">Pas de places réservées aux parents</string>
 	<string name="poi_service_bicycle_second_hand_yes">Vente de vélos d\'occasion : oui</string>
 	<string name="poi_service_bicycle_second_hand_no">Vente de vélos d\'occasion : non</string>
+
+	<string name="poi_bicycle_parking_shed">Abri à vélos</string>
+	<string name="poi_bicycle_parking_bollard">Borne à vélo</string>
+	<string name="poi_nudism_customary">Nudisme: toléré</string>
+	<string name="poi_parking_multi_storey">Parking à étages</string>
+
+	<string name="poi_trade_tile">Fournitures de tuiles</string>
+
+	<string name="poi_taxon">Nom scientifique</string>
+
+	<string name="poi_trees_meadow_orchard">Pré-verger</string>
+	<string name="poi_backrest_yes">Avec dossier</string>
+	<string name="poi_backrest_no">Sans dossier</string>
 
 	</resources>
