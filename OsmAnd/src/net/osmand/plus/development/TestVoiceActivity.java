@@ -181,7 +181,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
 
 		addButton(ll, "After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "In 450m enter the roundabout and take the 3rd exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
+		addButton(ll, "In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
 		addButton(ll, "Roundabout: Take the 2nd exit onto 'Highway 60'", builder(p).roundAbout(0, 2, street(p, "Highway 60")));
 
 		addButton(ll, "After 640m make a U-turn", builder(p).prepareMakeUT(640, street(p, "")));
