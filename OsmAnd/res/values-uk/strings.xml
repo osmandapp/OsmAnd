@@ -1029,7 +1029,7 @@
 	<string name="osmand_short_description_80_chars">Перегляд та навігація в автономному та онлайн режимах мапами ОСМ</string>
 	<string name="osmand_plus_short_description_80_chars">Перегляд та навігація в автономному на онлайн режимах мапами ОСМ</string>
 	<string name="incomplete_locale">незавершена</string>
-	<string name="rendering_attr_noAdminboundaries_description">Приховати регіональні кордони (рівні 5-9)</string>
+	<string name="rendering_attr_noAdminboundaries_description">Приховати регіональні кордони (рівні 5–9)</string>
     
     <string name="enable_plugin_monitoring_services">Активуйте втулок запису подорожей, щоб використовувати сервіси запису місцезнаходження (запис GPX, онлайн моніторинг)</string>
     <string name="filterpoi_activity">Створити фільтр POI</string>
@@ -2381,4 +2381,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="access_direction_audio_feedback_descr">Ініціювати звуком напрям на цільову точку</string>
     <string name="access_direction_haptic_feedback">Напрям тактильного зворотнього звязку</string>
     <string name="access_direction_haptic_feedback_descr">Показати вібрацією напрям на цільову точку</string>
+    <string name="map_widget_battery">Заряд батареї</string>
+    <string name="move_marker_bottom_sheet_title">Пересуньте мапу, щоб змінити положення маркера</string>
+    <string name="lat_lon_pattern">Шир: %1$.6f Дов: %2$.6f</string>
     </resources>
