@@ -350,6 +350,10 @@ public class VoiceRouter {
 					notifyOnVoiceMessage();
 					p.attention(type+"").play();
 				}
+				//See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
+				if (type == AlarmInfoType.TOLL_BOOTH) {
+					suppressDest = false;
+				}
 			}
 		}
 	}
