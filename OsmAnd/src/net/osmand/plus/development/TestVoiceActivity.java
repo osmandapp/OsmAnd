@@ -172,21 +172,21 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "After 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
 		addButton(ll, "In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
 		addButton(ll, "Turn left, then in 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
-		addButton(ll, "After 3100m turn right onto 'SR 80' towards 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "", "SR 80", "Rome")));
+		addButton(ll, "After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "", "SR 80", "Rome")));
 		addButton(ll, "In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")));
 		addButton(ll, "Turn sharply right onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")));
 
 		addButton(ll, "After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
-		addButton(ll, "In 400m keep left ' ' then in 80m keep right 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
+		addButton(ll, "In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
 		addButton(ll, "Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
 
-		addButton(ll, "After 1250m enter a roundabout and take the 3rd exit onto 'I 15' towards 'Los Angeles'", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "In 450m enter the roundabout and take the 1st exit towards 'Munich'", builder(p).roundAbout(450, 0, 1, street(p,"", "", "Munich")));
+		addButton(ll, "After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
+		addButton(ll, "In 450m enter the roundabout and take the 3rd exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
 		addButton(ll, "Roundabout: Take the 2nd exit onto 'Highway 60'", builder(p).roundAbout(0, 2, street(p, "Highway 60")));
 
 		addButton(ll, "After 640m make a U-turn", builder(p).prepareMakeUT(640, street(p, "")));
 		addButton(ll, "In 400m make a U-turn", builder(p).makeUT(400, street(p, "")));
-		addButton(ll, "Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera")));
+		addButton(ll, "Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")));
 		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
 
 		addButton(ll, "Follow the road for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
@@ -195,9 +195,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
 		addButton(ll, "Arrive at your intermediate destination 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
-		addButton(ll, "Pass GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
-		addButton(ll, "Pass favorite 'Brewery'", builder(p).arrivedAtFavorite("Brewery"));
-		addButton(ll, "Pass POI 'Museum'", builder(p).arrivedAtPoi("Museum"));
+		addButton(ll, "Passing GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
+		addButton(ll, "Passing favorite 'Brewery'", builder(p).arrivedAtFavorite("Brewery"));
+		addButton(ll, "Passing POI 'Museum'", builder(p).arrivedAtPoi("Museum"));
 
 		addButton(ll, "You are exceeding the speed limit", builder(p).speedAlarm());
 		addButton(ll, "Attention, speed camera", builder(p).attention("SPEED_CAMERA"));

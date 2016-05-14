@@ -632,7 +632,8 @@ public class VoiceRouter {
 				suppressDest = true;
 			} else if (next.getTurnType().isRoundAbout()) {
 				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
-				suppressDest = true;
+				//Other than in prepareTurn, in prepareRoundabout we do not announce destination, so we can repeat it one more time
+				suppressDest = false;
 			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
 				play.makeUT(dist, getSpeakableStreetName(currentSegment, next, true));
 				suppressDest = true;
