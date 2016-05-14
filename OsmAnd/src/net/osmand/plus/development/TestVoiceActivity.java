@@ -211,6 +211,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
 		addButton(ll, "GPS signal recovered", builder(p).gpsLocationRecover());
 		addButton(ll, "You have been off the route for 1050m", builder(p).offRoute(1050));
+		addButton(ll, "You are back on the route", builder(p).backOnRoute());
 		ll.forceLayout();
 	}
 	
