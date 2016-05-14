@@ -2189,4 +2189,5 @@
     <string name="move_marker_bottom_sheet_title">移動地圖到要變更標記的位置</string>
     <string name="lat_lon_pattern">緯度：%1$.6f 經度：%2$.6f</string>
     <string name="map_widget_battery">電池位準</string>
+    <string name="lang_hu_formal">匈牙利（正式的）</string>
     </resources>
