@@ -113,70 +113,72 @@ public class FileNameTranslationHelper {
 	}
 
 	private static String getStandardLangName(Context ctx, String filename) {
-		if (filename.equalsIgnoreCase("Croatian")) {
-			return ctx.getString(R.string.lang_hr);
-		} else if (filename.equalsIgnoreCase("Chinese")) {
-			return ctx.getString(R.string.lang_zh);
-		} else if (filename.equalsIgnoreCase("Portuguese")) {
-			return ctx.getString(R.string.lang_pt_br);
-		} else if (filename.equalsIgnoreCase("English")) {
-			return ctx.getString(R.string.lang_en);
-		} else if (filename.equalsIgnoreCase("Afrikaans") || filename.equalsIgnoreCase("Africaans")) {
+		if (filename.equalsIgnoreCase("Afrikaans") || filename.equalsIgnoreCase("Africaans")) {
 			return ctx.getString(R.string.lang_af);
-		} else if (filename.equalsIgnoreCase("Armenian")) {
-			return ctx.getString(R.string.lang_hy);
-		} else if (filename.equalsIgnoreCase("Basque")) {
-			return ctx.getString(R.string.lang_eu);
 		} else if (filename.equalsIgnoreCase("Belarusian")) {
 			return ctx.getString(R.string.lang_be);
-		} else if (filename.equalsIgnoreCase("Bosnian")) {
-			return ctx.getString(R.string.lang_bs);
 		} else if (filename.equalsIgnoreCase("Bulgarian")) {
 			return ctx.getString(R.string.lang_bg);
+		} else if (filename.equalsIgnoreCase("Bosnian")) {
+			return ctx.getString(R.string.lang_bs);
 		} else if (filename.equalsIgnoreCase("Catalan")) {
 			return ctx.getString(R.string.lang_ca);
 		} else if (filename.equalsIgnoreCase("Czech")) {
 			return ctx.getString(R.string.lang_cs);
+		} else if (filename.equalsIgnoreCase("Welsh")) {
+			return ctx.getString(R.string.lang_cy);
 		} else if (filename.equalsIgnoreCase("Danish")) {
 			return ctx.getString(R.string.lang_da);
-		} else if (filename.equalsIgnoreCase("Dutch")) {
-			return ctx.getString(R.string.lang_nl);
-		} else if (filename.equalsIgnoreCase("Finnish")) {
-			return ctx.getString(R.string.lang_fi);
-		} else if (filename.equalsIgnoreCase("French")) {
-			return ctx.getString(R.string.lang_fr);
-		} else if (filename.equalsIgnoreCase("Georgian")) {
-			return ctx.getString(R.string.lang_ka);
 		} else if (filename.equalsIgnoreCase("German")) {
 			return ctx.getString(R.string.lang_de);
 		} else if (filename.equalsIgnoreCase("Greek")) {
 			return ctx.getString(R.string.lang_el);
-		} else if (filename.equalsIgnoreCase("Hebrew")) {
-			return ctx.getString(R.string.lang_iw);
+		} else if (filename.equalsIgnoreCase("English")) {
+			return ctx.getString(R.string.lang_en);
+		} else if (filename.equalsIgnoreCase("Spanish")) {
+			return ctx.getString(R.string.lang_es);
+		} else if (filename.equalsIgnoreCase("Basque")) {
+			return ctx.getString(R.string.lang_eu);
+		} else if (filename.equalsIgnoreCase("Finnish")) {
+			return ctx.getString(R.string.lang_fi);
+		} else if (filename.equalsIgnoreCase("French")) {
+			return ctx.getString(R.string.lang_fr);
 		} else if (filename.equalsIgnoreCase("Hindi")) {
 			return ctx.getString(R.string.lang_hi);
+		} else if (filename.equalsIgnoreCase("Croatian")) {
+			return ctx.getString(R.string.lang_hr);
 		} else if (filename.equalsIgnoreCase("Hungarian")) {
 			return ctx.getString(R.string.lang_hu);
+		} else if (filename.equalsIgnoreCase("Armenian")) {
+			return ctx.getString(R.string.lang_hy);
 		} else if (filename.equalsIgnoreCase("Indonesian")) {
 			return ctx.getString(R.string.lang_id);
 		} else if (filename.equalsIgnoreCase("Italian")) {
 			return ctx.getString(R.string.lang_it);
+		} else if (filename.equalsIgnoreCase("Hebrew")) {
+			return ctx.getString(R.string.lang_iw);
 		} else if (filename.equalsIgnoreCase("Japanese")) {
 			return ctx.getString(R.string.lang_ja);
+		} else if (filename.equalsIgnoreCase("Georgian")) {
+			return ctx.getString(R.string.lang_ka);
 		} else if (filename.equalsIgnoreCase("Korean")) {
 			return ctx.getString(R.string.lang_ko);
-		} else if (filename.equalsIgnoreCase("Latvian")) {
-			return ctx.getString(R.string.lang_lv);
 		} else if (filename.equalsIgnoreCase("Lithuanian")) {
 			return ctx.getString(R.string.lang_lt);
+		} else if (filename.equalsIgnoreCase("Latvian")) {
+			return ctx.getString(R.string.lang_lv);
 		} else if (filename.equalsIgnoreCase("Marathi")) {
 			return ctx.getString(R.string.lang_mr);
+		} else if (filename.equalsIgnoreCase("Dutch")) {
+			return ctx.getString(R.string.lang_nl);
 		} else if (filename.equalsIgnoreCase("Norwegian")) {
 			return ctx.getString(R.string.lang_no);
 		} else if (filename.equalsIgnoreCase("Polish")) {
 			return ctx.getString(R.string.lang_pl);
 		} else if (filename.equalsIgnoreCase("Portuguese")) {
 			return ctx.getString(R.string.lang_pt);
+		//} else if (filename.equalsIgnoreCase("Portuguese")) {
+		//	return ctx.getString(R.string.lang_pt_br);
 		} else if (filename.equalsIgnoreCase("Romanian")) {
 			return ctx.getString(R.string.lang_ro);
 		} else if (filename.equalsIgnoreCase("Russian")) {
@@ -185,8 +187,6 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.lang_sk);
 		} else if (filename.equalsIgnoreCase("Slovenian")) {
 			return ctx.getString(R.string.lang_sl);
-		} else if (filename.equalsIgnoreCase("Spanish")) {
-			return ctx.getString(R.string.lang_es);
 		} else if (filename.equalsIgnoreCase("Swedish")) {
 			return ctx.getString(R.string.lang_sv);
 		} else if (filename.equalsIgnoreCase("Turkish")) {
@@ -195,8 +195,8 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.lang_uk);
 		} else if (filename.equalsIgnoreCase("Vietnamese")) {
 			return ctx.getString(R.string.lang_vi);
-		} else if (filename.equalsIgnoreCase("Welsh")) {
-			return ctx.getString(R.string.lang_cy);
+		} else if (filename.equalsIgnoreCase("Chinese")) {
+			return ctx.getString(R.string.lang_zh);
 		}
 		return null;
 	}
