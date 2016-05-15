@@ -271,11 +271,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				}
 			}
 
-			int initialize = citiesToFill.size();
+			int initialSize = citiesToFill.size();
 			if (/*name.length() >= 3 && */searchVillages) {
 				citiesToFill.addAll(fillWithVillages(name, lang, resultMatcher));
 			}
-			log.debug("Loaded citites " + (citiesToFill.size() - initialize)); //$NON-NLS-1$
+			log.debug("Loaded citites " + (citiesToFill.size() - initialSize)); //$NON-NLS-1$
 		} catch (IOException e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}
