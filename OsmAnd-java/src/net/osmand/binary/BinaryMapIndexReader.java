@@ -164,7 +164,7 @@ public class BinaryMapIndexReader {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if(!initCorrectly){
+				if (!initCorrectly) {
 					//throw new IOException("Corrupted file. It should be ended as it starts with version"); //$NON-NLS-1$
 					throw new IOException("Corrupt file, it should have ended as it starts with version: " + file.getName()); //$NON-NLS-1$
 				}
@@ -1738,9 +1738,6 @@ public class BinaryMapIndexReader {
 
 
 	public static class MapIndex extends BinaryIndexPart {
-		public String getPartName() { return "Map"; }
-		public int getFieldNumber() { return OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER; }
-
 		List<MapRoot> roots = new ArrayList<MapRoot>();
 
 		Map<String, Map<String, Integer>> encodingRules = new HashMap<String, Map<String, Integer>>();

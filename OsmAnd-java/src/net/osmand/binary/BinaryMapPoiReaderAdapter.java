@@ -50,9 +50,6 @@ public class BinaryMapPoiReaderAdapter {
 	}
 	
 	public static class PoiRegion extends BinaryIndexPart {
-		public String getPartName() { return "POI"; }
-		public int getFieldNumber() { return OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER; }
-
 		List<String> categories = new ArrayList<String>();
 		List<PoiCategory> categoriesType = new ArrayList<PoiCategory>();
 		List<List<String> > subcategories = new ArrayList<List<String> >();

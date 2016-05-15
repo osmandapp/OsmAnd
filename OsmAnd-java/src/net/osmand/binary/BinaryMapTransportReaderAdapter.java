@@ -33,9 +33,6 @@ public class BinaryMapTransportReaderAdapter {
 	}
 
 	public static class TransportIndex extends BinaryIndexPart {
-		public String getPartName() { return "Transport"; }
-		public int getFieldNumber() { return OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER; }
-
 		int left = 0;
 		int right = 0;
 		int top = 0;

@@ -163,7 +163,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 	
 	@Override
 	public int compareTo(MapObject o) {
-		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
+		int result = OsmAndCollator.primaryCollator().compare(getName(), o.getName());
+//		if (result == 0)
+//			result = Integer.compare(this.hashCode(), o.hashCode());
+		return result;
 	}
 	
 	public int getFileOffset() {

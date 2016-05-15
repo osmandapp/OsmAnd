@@ -268,23 +268,11 @@ public class BinaryInspector {
 		try {
 			BinaryMapIndexReader index = new BinaryMapIndexReader(r, file);
 			int i = 1;
-			println("Binary index " + filename + " version = " + index.getVersion() + " edition = " + new Date(index.getDateCreated()));
-			for (BinaryIndexPart p : index.getIndexes()) {
-				String partname = "";
-				if (p instanceof MapIndex) {
-					partname = "Map";
-				} else if (p instanceof TransportIndex) {
-
-				} else if (p instanceof RouteRegion) {
-					partname = "Routing";
-				} else if (p instanceof PoiRegion) {
-					partname = "Poi";
-				} else if (p instanceof AddressRegion) {
-					partname = "Address";
-				}
+			println("Binary index " + filename + " version = " + index.getVersion() +" edition = " + new Date(index.getDateCreated()));
+			for(BinaryIndexPart p : index.getIndexes()){
 				String name = p.getName() == null ? "" : p.getName();
 				println(MessageFormat.format("{0} {1} data {3} - {2,number,#} bytes",
-						i, partname, p.getLength(), name));
+						new Object[]{i, p.getPartName(), p.getLength(), name}));
 				if (p instanceof TransportIndex) {
 					TransportIndex ti = ((TransportIndex) p);
 					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
@@ -443,7 +431,8 @@ public class BinaryInspector {
 			}
 			println(":");
 
-			for (City c : cities) {
+			Set<City> citySet = new TreeSet<City>(cities);
+			for (City c : citySet) {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
 				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",

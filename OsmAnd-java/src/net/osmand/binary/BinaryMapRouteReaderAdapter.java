@@ -205,9 +205,6 @@ public class BinaryMapRouteReaderAdapter {
 	}
 	
 	public static class RouteRegion extends BinaryIndexPart {
-		public String getPartName() { return "Routing"; }
-		public int getFieldNumber() { return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER; }
-
 		public int regionsRead;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
