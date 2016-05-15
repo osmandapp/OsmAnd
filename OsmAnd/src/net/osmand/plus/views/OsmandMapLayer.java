@@ -165,6 +165,11 @@ public abstract class OsmandMapLayer {
 				long intersection = MapAlgorithms.calculateIntersection(x, y,
 						px, py, 0, w, h, 0);
 				if (intersection != -1) {
+					if (pin && (i == 1)) {
+						cnt++;
+						path.moveTo(px, py);
+						start = true;
+					}
 					px = (int) (intersection >> 32);
 					py = (int) (intersection & 0xffffffff);
 					draw = true;
