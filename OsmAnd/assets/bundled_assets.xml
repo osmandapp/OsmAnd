@@ -12,12 +12,16 @@
 	<asset source="voice/el/ttsconfig.p" destination="voice/el-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/en/ttsconfig.p" destination="voice/en-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/es/ttsconfig.p" destination="voice/es-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	<!--asset source="voice/es-ar/ttsconfig.p" destination="voice/es-ar-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /-->
+	<!--asset source="voice/et/ttsconfig.p" destination="voice/et-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /-->
 	<asset source="voice/fa/ttsconfig.p" destination="voice/fa-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fi/ttsconfig.p" destination="voice/fi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fr/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	<!--asset source="voice/he/ttsconfig.p" destination="voice/he-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /-->
 	<asset source="voice/hi/ttsconfig.p" destination="voice/hi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/hu/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hr/ttsconfig.p" destination="voice/hr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
+	<asset source="voice/hu/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<!--asset source="voice/hu-formal/ttsconfig.p" destination="voice/hu_formal-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /-->
 	<asset source="voice/it/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/ja/ttsconfig.p" destination="voice/ja-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/ko/ttsconfig.p" destination="voice/ko-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
@@ -28,26 +32,26 @@
 	<asset source="voice/pt-br/ttsconfig.p" destination="voice/pt-br-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ro/ttsconfig.p" destination="voice/ro-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ru/ttsconfig.p" destination="voice/ru-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	<!--asset source="voice/sc/ttsconfig.p" destination="voice/sc-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /-->
 	<asset source="voice/sk/ttsconfig.p" destination="voice/sk-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sl/ttsconfig.p" destination="voice/sl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sv/ttsconfig.p" destination="voice/sv-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sw/ttsconfig.p" destination="voice/sw-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<!--asset source="voice/uk/ttsconfig.p" destination="voice/uk-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh/ttsconfig.p" destination="voice/zh-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 
+	<asset source="voice/de/config.p" destination="voice/de/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fa/config.p" destination="voice/fa/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/de/config.p" destination="voice/de/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/it/config.p" destination="voice/it/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/pt/config.p" destination="voice/pt/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ru/config.p" destination="voice/ru/_config.p" mode="overwriteOnlyIfExists" />
-	
-	
+
 	<asset source="fonts/OpenSans-Italic.ttf" destination="fonts/OpenSans-Italic.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/OpenSans-Regular.ttf" destination="fonts/OpenSans-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/OpenSans-Semibold.ttf" destination="fonts/OpenSans-Semibold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/OpenSans-SemiboldItalic.ttf" destination="fonts/OpenSans-SemiboldItalic.ttf" mode="alwaysOverwriteOrCopy" />
-	
-	
+
 	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
 </assets>
