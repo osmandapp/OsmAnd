@@ -1484,7 +1484,7 @@
     <string name="rendering_attr_moreDetailed_name">Toon meer details</string>
     <string name="rendering_attr_lessDetailed_name">Minder details</string>
     <string name="rendering_attr_hideAccess_name">Toegangsbeperkingen</string>
-    <string name="rendering_attr_showAccess_name">Toegangsbeperkingen tonen</string>
+    <string name="rendering_attr_showAccess_name">Toon tol en toegangsverboden</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kwaliteit van wegen tonen</string>
     <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
     <string name="rendering_attr_showCycleRoutes_name">Fietsroutes tonen</string>
