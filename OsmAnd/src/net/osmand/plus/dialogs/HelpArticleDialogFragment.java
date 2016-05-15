@@ -55,6 +55,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		final View view = inflater.inflate(R.layout.fragment_help_article, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
