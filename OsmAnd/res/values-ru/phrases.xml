@@ -2864,4 +2864,6 @@
 	<string name="poi_bicycle_parking_tree">Велопарковка в форме дерева</string>
 	<string name="poi_bicycle_parking_streetpod">Открытый отсек</string>
 
+	<string name="poi_depth">Глубина</string>
+
 </resources>
