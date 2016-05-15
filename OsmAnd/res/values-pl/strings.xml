@@ -1348,7 +1348,7 @@
 
     <string name="osmo_connected_devices">Podłączone urządzenia</string>
     <string name="osmo_groups">Grupy OsMo</string>
-    <string name="osmo_tracker_id_descr">Kliknij, aby zobaczyć ID trackera</string>
+    <string name="osmo_tracker_id_descr">Wyświetla identyfikator serwera śledzącego</string>
     <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
 
     <string name="rendering_value_pink_name">różowy</string>
@@ -1768,7 +1768,7 @@
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
     <string name="use_fast_recalculation_desc">Wyznacza ponownie tylko początkową część trasy dla długich podróży</string>
     <string name="shared_string_logoff">Wyloguj się</string>
-    <string name="osmo_share_my_location">Udostępnij pozycję</string>
+    <string name="osmo_share_my_location">Udostępnianie położenia</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kolorowanie wg zasad OSMC</string>
     <string name="rendering_value_disabled_name">Wyłączony</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorowanie wg przeznaczenia trasy</string>
