@@ -593,7 +593,12 @@ public class BinaryMapIndexReader {
 	}
 
 	public int preloadStreets(City c, SearchRequest<Street> resultMatcher) throws IOException {
-		AddressRegion reg = checkAddressIndex(c.getFileOffset());
+		AddressRegion reg;
+		try {
+			reg = checkAddressIndex(c.getFileOffset());
+		} catch (IllegalArgumentException e) {
+			throw new IOException(e.getMessage() + " while reading " + c + " (id: " + c.getId() + ")");
+		}
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
