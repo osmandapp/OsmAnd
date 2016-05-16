@@ -2209,4 +2209,7 @@
     <string name="access_direction_audio_feedback_descr">Індыцыраваць гукам кірунак на мэтавы пункт</string>
     <string name="access_direction_haptic_feedback">Тактыльная індыкацыя кірунку</string>
     <string name="access_direction_haptic_feedback_descr">Індыцыраваць вібрацыяй кірунак на мэтавы пункт</string>
+    <string name="map_widget_battery">Зарад батарэі</string>
+    <string name="lat_lon_pattern">Шыр: %1$.6f Даў: %2$.6f</string>
+    <string name="lang_hu_formal">Вугорская (афіцыйная)</string>
     </resources>
