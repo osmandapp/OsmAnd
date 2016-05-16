@@ -89,10 +89,6 @@ public class TargetPointsHelper {
 			return null;
 		}
 
-		public void setLocation(LatLon location) {
-			point = location;
-		}
-
 		public double getLatitude() {
 			return point.getLatitude();
 		}

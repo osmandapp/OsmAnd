@@ -260,7 +260,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public boolean isObjectMovable(Object o) {
-		return o instanceof TargetPoint;
+		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
+		return o == targetPoints.getPointToNavigate();
 	}
 
 	@Override
@@ -270,8 +271,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (o instanceof TargetPoint) {
 			TargetPoint point = (TargetPoint) o;
 			TargetPointsHelper tph = map.getMyApplication().getTargetPointsHelper();
-			tph.removeWayPoint(false, point.index);
-			tph.navigateToPoint(position, true, point.index, point.getPointDescription(map));
+			tph.navigateToPoint(position, true, -1, point.getPointDescription(map));
 			result = true;
 		}
 		if (callback != null) {
