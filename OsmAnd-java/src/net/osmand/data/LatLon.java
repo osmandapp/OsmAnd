@@ -2,7 +2,7 @@ package net.osmand.data;
 
 import java.io.Serializable;
 
-public class LatLon implements Serializable {
+public class LatLon implements Comparable<LatLon>, Serializable {
 	private final double longitude;
 	private final double latitude;
 
@@ -50,4 +50,8 @@ public class LatLon implements Serializable {
 		return longitude;
 	}
 
+	@Override
+	public int compareTo(LatLon latLon) {
+		return Double.compare(latitude + longitude, latLon.latitude + latLon.longitude);
+	}
 }
