@@ -2258,4 +2258,6 @@
     <string name="access_direction_haptic_feedback_descr">Indica la direzione di destinazione con la vibrazione</string>
     <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OSM Live (Beta)</string>
 	<string name="use_osm_live_routing">Navigazione OSM Live</string>
+    <string name="map_widget_battery">Carica batteria</string>
+    <string name="lang_hu_formal">Ungherese (formale)</string>
     </resources>
