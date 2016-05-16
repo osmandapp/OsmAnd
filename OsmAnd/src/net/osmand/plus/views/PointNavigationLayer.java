@@ -20,7 +20,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.Iterator;
@@ -79,7 +78,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
-
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
@@ -252,7 +250,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		return null;
 	}
 
-
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof TargetPoint) {
@@ -260,7 +257,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		}
 		return null;
 	}
-
 
 	@Override
 	public boolean isObjectMovable(Object o) {
@@ -272,11 +268,10 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		if (o instanceof TargetPoint) {
-			((TargetPoint) o).setLocation(position);
-			RoutingHelper rh = map.getMyApplication().getRoutingHelper();
-			if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
-				rh.recalculateRouteDueToSettingsChange();
-			}
+			TargetPoint point = (TargetPoint) o;
+			TargetPointsHelper tph = map.getMyApplication().getTargetPointsHelper();
+			tph.removeWayPoint(false, point.index);
+			tph.navigateToPoint(position, true, point.index, point.getPointDescription(map));
 			result = true;
 		}
 		if (callback != null) {
