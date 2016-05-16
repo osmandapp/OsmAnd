@@ -25,5 +25,5 @@ artifacts {
 }
 
 dependencies {
-	compile fileTree(dir: "libs", include: ["*.jar"])
+	compile fileTree(include: ['*.jar'], dir: 'libs')
 }

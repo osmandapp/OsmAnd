@@ -33,7 +33,6 @@ public class BinaryMapTransportReaderAdapter {
 	}
 
 	public static class TransportIndex extends BinaryIndexPart {
-
 		int left = 0;
 		int right = 0;
 		int top = 0;

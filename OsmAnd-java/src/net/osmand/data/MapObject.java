@@ -160,10 +160,22 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public void setLocation(double latitude, double longitude){
 		location = new LatLon(latitude, longitude);
 	}
-	
+
+	public int compareToByNames(MapObject o) {
+		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
+	}
+
 	@Override
 	public int compareTo(MapObject o) {
-		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
+		if (equals(o)) {
+			return 0;
+		} else {
+			int result = compareToByNames(o);
+			if (result == 0) {
+				result = location.compareTo(o.location);
+			}
+			return result;
+		}
 	}
 	
 	public int getFileOffset() {
