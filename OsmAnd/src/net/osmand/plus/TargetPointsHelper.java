@@ -114,12 +114,17 @@ public class TargetPointsHelper {
 		readFromSettings();
 	}
 
+	public void lookupAddessAll() {
+		lookupAddressForPointToNavigate();
+		lookupAddessForStartPoint();
+		for(TargetPoint targetPoint : intermediatePoints) {
+			lookupAddressForIntermediatePoint(targetPoint);
+		}
+	}
+
 	private void readFromSettings() {
 		pointToNavigate = TargetPoint.create(settings.getPointToNavigate(), settings.getPointNavigateDescription());
-		lookupAddressForPointToNavigate();
-
 		pointToStart = TargetPoint.createStartPoint(settings.getPointToStart(), settings.getStartPointDescription());
-		lookupAddessForStartPoint();
 
 		intermediatePoints.clear();
 		List<LatLon> ips = settings.getIntermediatePoints();
@@ -128,7 +133,10 @@ public class TargetPointsHelper {
 			final TargetPoint targetPoint = new TargetPoint(ips.get(i),
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), i);
 			intermediatePoints.add(targetPoint);
-			lookupAddressForIntermediatePoint(targetPoint);
+		}
+
+		if (!ctx.isApplicationInitializing()) {
+			lookupAddessAll();
 		}
 	}
 
@@ -138,11 +146,14 @@ public class TargetPointsHelper {
 			AddressLookupRequest lookupRequest = new AddressLookupRequest(targetPoint.point, new GeocodingLookupService.OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
-					if (intermediatePoints.contains(targetPoint)) {
-						targetPoint.pointDescription.setName(address);
-						settings.updateIntermediatePoint(targetPoint.point.getLatitude(), targetPoint.point.getLongitude(),
-								targetPoint.pointDescription);
-						updateRouteAndRefresh(false);
+					for (TargetPoint p : intermediatePoints) {
+						if (p.point.equals(targetPoint.point)) {
+							p.pointDescription.setName(address);
+							settings.updateIntermediatePoint(p.point.getLatitude(), p.point.getLongitude(),
+									p.pointDescription);
+							updateRouteAndRefresh(false);
+							break;
+						}
 					}
 				}
 			}, null);

@@ -78,6 +78,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
+	private List<LatLon> intermediateRequestsLatLon = new ArrayList<>();
 
 	private OnMarkerSelectListener onMarkerSelectListener;
 	private OnDismissListener onDismissDialogListener;
@@ -167,6 +168,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 
 	public void showHideMenu() {
+		intermediateRequestsLatLon.clear();
 		if (isVisible()) {
 			hide();
 		} else {
@@ -642,16 +644,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			if (i > 0) {
 				via.append(" ");
 			}
-			String description = points.get(i).getOnlyName();
-			via.append(getRoutePointDescription(points.get(i).point, description));
-			boolean needAddress = new PointDescription(PointDescription.POINT_TYPE_LOCATION, description).isSearchingAddress(mapActivity);
+			TargetPoint p = points.get(i);
+			String description = p.getOnlyName();
+			via.append(getRoutePointDescription(p.point, description));
+			boolean needAddress = new PointDescription(PointDescription.POINT_TYPE_LOCATION, description).isSearchingAddress(mapActivity)
+					&& !intermediateRequestsLatLon.contains(p.point);
 			if (needAddress) {
-				AddressLookupRequest lookupRequest = new AddressLookupRequest(points.get(i).point, new GeocodingLookupService.OnAddressLookupResult() {
+				AddressLookupRequest lookupRequest = new AddressLookupRequest(p.point, new GeocodingLookupService.OnAddressLookupResult() {
 					@Override
 					public void geocodingDone(String address) {
 						updateMenu();
 					}
 				}, null);
+				intermediateRequestsLatLon.add(p.point);
 				geocodingLookupService.lookupAddress(lookupRequest);
 			}
 		}
