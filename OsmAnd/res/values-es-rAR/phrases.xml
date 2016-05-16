@@ -115,7 +115,7 @@
 	<string name="poi_pet">Mascotas</string>
 	<string name="poi_photo">Tienda fotográfica</string>
 	<string name="poi_radiotechnics">Venta de radiotecnia</string>
-	<string name="poi_second_hand">Local de segunda mano</string>
+	<string name="poi_second_hand">Tienda de artículos usados</string>
 	<string name="poi_ship_chandler">Proveedor naval</string>
 	<string name="poi_sports">Artículos deportivos</string>
 	<string name="poi_stationery">Librería</string>
@@ -886,7 +886,7 @@
 	<string name="poi_abandoned">Abandonado</string>
 	<string name="poi_disused">En desuso</string>
 
-<string name="poi_groyne">Rompeolas</string>
+<string name="poi_groyne">Espigón</string>
 
 	<string name="poi_conservation">Conservación del suelo</string>
 
