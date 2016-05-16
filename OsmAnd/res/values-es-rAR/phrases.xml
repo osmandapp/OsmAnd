@@ -1622,9 +1622,9 @@
 
 	<string name="poi_cocktails_yes">Con cócteles</string>
 
-	<string name="poi_second_hand_yes">Con artículos de segunda mano</string>
-	<string name="poi_second_hand_no">Sin artículos de segunda mano</string>
-	<string name="poi_second_hand_only">Sólo artículos de segunda mano</string>
+	<string name="poi_second_hand_yes">Con artículos usados</string>
+	<string name="poi_second_hand_no">Sin artículos usados</string>
+	<string name="poi_second_hand_only">Sólo artículos usados</string>
 
 	<string name="poi_service_parts">Partes</string>
 	<string name="poi_service_dealer">Repartidor</string>
@@ -1936,22 +1936,22 @@
 	<string name="poi_surveillance_yes">Vigilado</string>
 	<string name="poi_shop_additional_yes">Con negocio</string>
 
-	<string name="poi_service_bicycle_retail_yes">Vende bicicletas</string>
-	<string name="poi_service_bicycle_retail_no">No vende bicicletas</string>
-	<string name="poi_service_bicycle_repair_yes">Repara bicicletas</string>
-	<string name="poi_service_bicycle_repair_no">No repara bicicletas</string>
-	<string name="poi_service_bicycle_rental_yes">Alquila bicicletas</string>
-	<string name="poi_service_bicycle_rental_no">No alquila bicicletas</string>
-	<string name="poi_service_bicycle_pump_yes">Infla de bicicletas</string>
-	<string name="poi_service_bicycle_pump_no">No infla bicicletas</string>
+	<string name="poi_service_bicycle_retail_yes">Se venden bicicletas</string>
+	<string name="poi_service_bicycle_retail_no">No se venden bicicletas</string>
+	<string name="poi_service_bicycle_repair_yes">Se reparan bicicletas</string>
+	<string name="poi_service_bicycle_repair_no">No se reparan bicicletas</string>
+	<string name="poi_service_bicycle_rental_yes">Se alquilan bicicletas</string>
+	<string name="poi_service_bicycle_rental_no">No se alquilan bicicletas</string>
+	<string name="poi_service_bicycle_pump_yes">Se inflan bicicletas</string>
+	<string name="poi_service_bicycle_pump_no">No se inflan bicicletas</string>
 	<string name="poi_service_bicycle_diy_yes">Con autoservicio para bicicletas</string>
 	<string name="poi_service_bicycle_diy_no">Sin autoservicio para bicicletas</string>
-	<string name="poi_service_bicycle_cleaning_yes">Limpia bicicletas</string>
-	<string name="poi_service_bicycle_cleaning_no">No limpia bicicletas</string>
+	<string name="poi_service_bicycle_cleaning_yes">Se limpian bicicletas</string>
+	<string name="poi_service_bicycle_cleaning_no">No se limpian bicicletas</string>
 	<string name="poi_service_bicycle_chaintool_yes">Con herramientas para cadenas de bicicletas</string>
 	<string name="poi_service_bicycle_chaintool_no">Sin herramientas para cadenas de bicicletas</string>
-	<string name="poi_service_bicycle_second_hand_yes">Vende bicicletas de segunda mano</string>
-	<string name="poi_service_bicycle_second_hand_no">No vende bicicletas de segunda mano</string>
+	<string name="poi_service_bicycle_second_hand_yes">Se venden bicicletas usadas</string>
+	<string name="poi_service_bicycle_second_hand_no">No se venden bicicletas usadas</string>
 
 	<string name="poi_wildlife_hide">Observatorio de vida salvaje</string>
 
@@ -2905,5 +2905,7 @@
 <string name="poi_bicycle_parking_lockers">Casilleros</string>
 	<string name="poi_bicycle_parking_tree">Árbol de bicicletas</string>
 	<string name="poi_bicycle_parking_streetpod">Ranura plástica (streetpod)</string>
+
+<string name="poi_depth">Profundidad</string>
 
 </resources>
