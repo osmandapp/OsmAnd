@@ -1,6 +1,8 @@
 package net.osmand.util;
 
 
+import com.sun.javafx.beans.annotations.NonNull;
+
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 
@@ -21,6 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -32,11 +35,11 @@ public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
 
-	public static boolean isEmpty(String s){
+	public static boolean isEmpty(String s) {
 		return s == null || s.length() == 0;
 	}
 
-	public static boolean isBlank(String s){
+	public static boolean isBlank(String s) {
 		return s == null || s.trim().length() == 0;
 	}
 
@@ -47,13 +50,12 @@ public class Algorithms {
 			return false;
 		} else if (s2 == null) {
 			return false;
-		} else {
-			return s2.equals(s1);
 		}
+		return s2.equals(s1);
 	}
 
 	public static long parseLongSilently(String input, long def) {
-		if(input != null && input.length() > 0) {
+		if (input != null && input.length() > 0) {
 			try {
 				return Long.parseLong(input);
 			} catch (NumberFormatException e) {
@@ -67,7 +69,7 @@ public class Algorithms {
 	public static String getFileNameWithoutExtension(File f) {
 		String name = f.getName();
 		int i = name.indexOf('.');
-		if(i >= 0) {
+		if (i >= 0) {
 			name = name.substring(0, i);
 		}
 		return name;
@@ -79,7 +81,7 @@ public class Algorithms {
 		return name.substring(i + 1);
 	}
 
-	public static File[] getSortedFilesVersions(File dir){
+	public static File[] getSortedFilesVersions(File dir) {
 		File[] listFiles = dir.listFiles();
 		if (listFiles != null) {
 			Arrays.sort(listFiles, getFileVersionComparator());
@@ -96,20 +98,20 @@ public class Algorithms {
 
 			public String simplifyFileName(String fn) {
 				String lc = fn.toLowerCase();
-				if (lc.indexOf(".") != -1) {
+				if (lc.contains(".")) {
 					lc = lc.substring(0, lc.indexOf("."));
 				}
 				if (lc.endsWith("_2")) {
 					lc = lc.substring(0, lc.length() - "_2".length());
 				}
 				boolean hasTimestampEnd = false;
-				for(int i = 0; i < lc.length(); i++) {
-					if(lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
+				for (int i = 0; i < lc.length(); i++) {
+					if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
 						hasTimestampEnd = true;
 						break;
 					}
 				}
-				if(!hasTimestampEnd) {
+				if (!hasTimestampEnd) {
 					lc += "_00_00_00";
 				}
 				return lc;
@@ -139,7 +141,7 @@ public class Algorithms {
 			while (it.hasNext()) {
 				Entry<String, String> e = it.next();
 				bld.append(e.getKey()).append(CHAR_TOSPLIT)
-						.append(e.getValue().replace(CHAR_TOSPLIT, (char)(CHAR_TOSPLIT + 1)));
+						.append(e.getValue().replace(CHAR_TOSPLIT, (char) (CHAR_TOSPLIT + 1)));
 				bld.append(CHAR_TOSPLIT);
 			}
 			return bld.toString();
@@ -187,15 +189,15 @@ public class Algorithms {
 		return test == 0x504b0304;
 	}
 
-	private static final int readInt(InputStream in) throws IOException {
-        int ch1 = in.read();
-        int ch2 = in.read();
-        int ch3 = in.read();
-        int ch4 = in.read();
-        if ((ch1 | ch2 | ch3 | ch4) < 0)
-            throw new EOFException();
-        return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
-    }
+	private static int readInt(InputStream in) throws IOException {
+		int ch1 = in.read();
+		int ch2 = in.read();
+		int ch3 = in.read();
+		int ch4 = in.read();
+		if ((ch1 | ch2 | ch3 | ch4) < 0)
+			throw new EOFException();
+		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
+	}
 
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
@@ -207,8 +209,8 @@ public class Algorithms {
 	}
 
 
-	public static boolean objectEquals(Object a, Object b){
-		if(a == null){
+	public static boolean objectEquals(Object a, Object b) {
+		if (a == null) {
 			return b == null;
 		} else {
 			return a.equals(b);
@@ -217,34 +219,34 @@ public class Algorithms {
 
 
 	/**
-     	* Parse the color string, and return the corresponding color-int.
-     	* If the string cannot be parsed, throws an IllegalArgumentException
-     	* exception. Supported formats are:
-     	* #RRGGBB
-     	* #AARRGGBB
-     	* 'red', 'blue', 'green', 'black', 'white', 'gray', 'cyan', 'magenta',
-     	* 'yellow', 'lightgray', 'darkgray'
-     	*/
-    	public static int parseColor(String colorString) {
-        	if (colorString.charAt(0) == '#') {
-            	// Use a long to avoid rollovers on #ffXXXXXX
-        		if (colorString.length() == 4) {
-            		colorString = "#" +
-            				colorString.charAt(1) + colorString.charAt(1) +
-            				colorString.charAt(2) + colorString.charAt(2) +
-            				colorString.charAt(3) + colorString.charAt(3);
-            	}
-            	long color = Long.parseLong(colorString.substring(1), 16);
-            	if (colorString.length() == 7) {
-	                // Set the alpha value
-        	        color |= 0x00000000ff000000;
-            	} else if (colorString.length() != 9) {
-                	throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
-            	}
-            	return (int)color;
-        	}
-        	throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
-    	}
+	 * Parse the color string, and return the corresponding color-int.
+	 * If the string cannot be parsed, throws an IllegalArgumentException
+	 * exception. Supported formats are:
+	 * #RRGGBB
+	 * #AARRGGBB
+	 * 'red', 'blue', 'green', 'black', 'white', 'gray', 'cyan', 'magenta',
+	 * 'yellow', 'lightgray', 'darkgray'
+	 */
+	public static int parseColor(String colorString) {
+		if (colorString.charAt(0) == '#') {
+			// Use a long to avoid rollovers on #ffXXXXXX
+			if (colorString.length() == 4) {
+				colorString = "#" +
+						colorString.charAt(1) + colorString.charAt(1) +
+						colorString.charAt(2) + colorString.charAt(2) +
+						colorString.charAt(3) + colorString.charAt(3);
+			}
+			long color = Long.parseLong(colorString.substring(1), 16);
+			if (colorString.length() == 7) {
+				// Set the alpha value
+				color |= 0x00000000ff000000;
+			} else if (colorString.length() != 9) {
+				throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
+			}
+			return (int) color;
+		}
+		throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
+	}
 
 
 	public static int extractFirstIntegerNumber(String s) {
@@ -261,7 +263,7 @@ public class Algorithms {
 
 	public static int extractIntegerNumber(String s) {
 		int i = 0;
-		int k = 0;
+		int k;
 		for (k = 0; k < s.length(); k++) {
 			if (isDigit(s.charAt(k))) {
 				break;
@@ -308,6 +310,7 @@ public class Algorithms {
 	}
 
 
+	@SuppressWarnings("TryFinallyCanBeTryWithResources")
 	public static void fileCopy(File src, File dst) throws IOException {
 		FileOutputStream fout = new FileOutputStream(dst);
 		try {
@@ -321,7 +324,8 @@ public class Algorithms {
 			fout.close();
 		}
 	}
-	public static void streamCopy(InputStream in, OutputStream out) throws IOException{
+
+	public static void streamCopy(InputStream in, OutputStream out) throws IOException {
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;
 		while ((read = in.read(b)) != -1) {
@@ -330,45 +334,46 @@ public class Algorithms {
 	}
 
 
-	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException{
+	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;
 		int cp = 0;
 		while ((read = in.read(b)) != -1) {
 			out.write(b, 0, read);
 			cp += read;
-			if(pg != null && cp > bytesDivisor) {
+			if (pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);
 				cp = cp % bytesDivisor;
 			}
 		}
 	}
 
-	public static void oneByteStreamCopy(InputStream in, OutputStream out) throws IOException{
+	public static void oneByteStreamCopy(InputStream in, OutputStream out) throws IOException {
 		int read;
 		while ((read = in.read()) != -1) {
 			out.write(read);
 		}
 	}
 
-	public static void closeStream(Closeable stream){
+	public static void closeStream(Closeable stream) {
 		try {
-			if(stream != null){
+			if (stream != null) {
 				stream.close();
 			}
-		} catch(IOException e){
+		} catch (IOException e) {
 			log.warn("Closing stream warn", e); //$NON-NLS-1$
 		}
 	}
 
-	public static void updateAllExistingImgTilesToOsmandFormat(File f){
-		if(f.isDirectory()){
-			for(File c : f.listFiles()){
+	@SuppressWarnings("ResultOfMethodCallIgnored")
+	public static void updateAllExistingImgTilesToOsmandFormat(@NonNull File f) {
+		if (f.isDirectory()) {
+			for (File c : f.listFiles()) {
 				updateAllExistingImgTilesToOsmandFormat(c);
 			}
-		} else if(f.getName().endsWith(".png") || f.getName().endsWith(".jpg")){ //$NON-NLS-1$ //$NON-NLS-2$
+		} else if (f.getName().endsWith(".png") || f.getName().endsWith(".jpg")) { //$NON-NLS-1$ //$NON-NLS-2$
 			f.renameTo(new File(f.getAbsolutePath() + ".tile")); //$NON-NLS-1$
-		} else if(f.getName().endsWith(".andnav2")) { //$NON-NLS-1$
+		} else if (f.getName().endsWith(".andnav2")) { //$NON-NLS-1$
 			f.renameTo(new File(f.getAbsolutePath().substring(0, f.getAbsolutePath().length() - ".andnav2".length()) + ".tile")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
@@ -399,10 +404,10 @@ public class Algorithms {
 		}
 		if (f.isDirectory()) {
 			File[] fs = f.listFiles();
-			if(fs != null) {
-			  for (File c : fs) {
-			   removeAllFiles(c);
-			  }
+			if (fs != null) {
+				for (File c : fs) {
+					removeAllFiles(c);
+				}
 			}
 			return f.delete();
 		} else {
@@ -412,7 +417,7 @@ public class Algorithms {
 
 
 	public static long parseLongFromBytes(byte[] bytes, int offset) {
-		long o= 0xff & bytes[offset + 7];
+		long o = 0xff & bytes[offset + 7];
 		o = o << 8 | (0xff & bytes[offset + 6]);
 		o = o << 8 | (0xff & bytes[offset + 5]);
 		o = o << 8 | (0xff & bytes[offset + 4]);
@@ -424,8 +429,7 @@ public class Algorithms {
 	}
 
 
-
-	public static void putLongToBytes(byte[] bytes, int offset, long l){
+	public static void putLongToBytes(byte[] bytes, int offset, long l) {
 		bytes[offset] = (byte) (l & 0xff);
 		l >>= 8;
 		bytes[offset + 1] = (byte) (l & 0xff);
@@ -452,7 +456,7 @@ public class Algorithms {
 		return o;
 	}
 
-	public static void putIntToBytes(byte[] bytes, int offset, int l){
+	public static void putIntToBytes(byte[] bytes, int offset, int l) {
 		bytes[offset] = (byte) (l & 0xff);
 		l >>= 8;
 		bytes[offset + 1] = (byte) (l & 0xff);
@@ -496,7 +500,6 @@ public class Algorithms {
 		stream.write(l & 0xff);
 		l >>= 8;
 		stream.write(l & 0xff);
-		l >>= 8;
 	}
 
 	public static int parseSmallIntFromBytes(byte[] bytes, int offset) {
@@ -505,11 +508,10 @@ public class Algorithms {
 		return s;
 	}
 
-	public static void putSmallIntBytes(byte[] bytes, int offset, int s){
+	public static void putSmallIntBytes(byte[] bytes, int offset, int s) {
 		bytes[offset] = (byte) (s & 0xff);
 		s >>= 8;
 		bytes[offset + 1] = (byte) (s & 0xff);
-		s >>= 8;
 	}
 
 	public static boolean containsDigit(String name) {
@@ -550,14 +552,14 @@ public class Algorithms {
 		} else {
 			int min = minutes % 60;
 			int hours = minutes / 60;
-			return String.format("%02d:%02d", hours, min);
+			return String.format(Locale.UK, "%02d:%02d", hours, min);
 		}
 	}
 
-	public static <T extends Enum<T> > T parseEnumValue(T[] cl, String val, T defaultValue){
-		for(int i = 0; i< cl.length; i++) {
-			if(cl[i].name().equalsIgnoreCase(val)) {
-				return cl[i];
+	public static <T extends Enum<T>> T parseEnumValue(T[] cl, String val, T defaultValue) {
+		for (T aCl : cl) {
+			if (aCl.name().equalsIgnoreCase(val)) {
+				return aCl;
 			}
 		}
 		return defaultValue;
@@ -572,7 +574,7 @@ public class Algorithms {
 	}
 
 	private static String format(int i, String hexString) {
-		while(hexString.length() < i) {
+		while (hexString.length() < i) {
 			hexString = "0" + hexString;
 		}
 		return hexString;
@@ -584,13 +586,13 @@ public class Algorithms {
 		// from purple (low) to red(high).  This is useful for producing value-based colourations (e.g., altitude)
 
 		double a = (1. - percent) * 5.;
-		int X = (int)Math.floor(a);
-		int Y = (int)(Math.floor(255 * (a - X)));
+		int X = (int) Math.floor(a);
+		int Y = (int) (Math.floor(255 * (a - X)));
 		switch (X) {
-			case 0: return 0xFFFF0000 + (Y<<8);
-			case 1: return 0xFF00FF00 + ((255-Y)<<16);
+			case 0: return 0xFFFF0000 + (Y << 8);
+			case 1: return 0xFF00FF00 + ((255 - Y) << 16);
 			case 2: return 0xFF00FF00 + Y;
-			case 3: return 0xFF0000FF + ((255-Y)<<8);
+			case 3: return 0xFF0000FF + ((255 - Y) << 8);
 			case 4: return 0xFF0000FF + (Y << 16);
 		}
 		return 0xFFFF00FF;
