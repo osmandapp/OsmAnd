@@ -49,16 +49,21 @@ public class CurrentPositionHelper {
 			p = GeneralRouterProfile.CAR;
 		}
 		BinaryMapIndexReader[] rs = new BinaryMapIndexReader[app.getResourceManager().getAddressRepositories().size()];
-		int i = 0;
-		for (RegionAddressRepository rep : app.getResourceManager().getAddressRepositories()) {
-			rs[i++] = rep.getFile();
+		if (rs.length > 0) {
+			int i = 0;
+			for (RegionAddressRepository rep : app.getResourceManager().getAddressRepositories()) {
+				rs[i++] = rep.getFile();
+			}
+			RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10,
+					new HashMap<String, String>());
+			ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, rs);
+			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build(GeneralRouterProfile.CAR.name().toLowerCase(), 10,
+					new HashMap<String, String>());
+			defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, rs);
+		} else {
+			ctx = null;
+			defCtx = null;
 		}
-		RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10,
-				new HashMap<String, String>());
-		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, rs);
-		RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build(GeneralRouterProfile.CAR.name().toLowerCase(), 10, 
-				new HashMap<String, String>());
-		defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, rs);
 	}
 
 	private boolean scheduleRouteSegmentFind(final Location loc, final boolean storeFound, final ResultMatcher<GeocodingResult> geoCoding, final ResultMatcher<RouteDataObject> result) {

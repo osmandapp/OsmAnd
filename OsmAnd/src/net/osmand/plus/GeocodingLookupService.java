@@ -83,7 +83,8 @@ public class GeocodingLookupService {
 				lookupLocations.add(requestedLocation);
 			}
 
-			if (currentRequestedLocation == null) {
+			if (currentRequestedLocation == null && !lookupLocations.isEmpty()) {
+				currentRequestedLocation = lookupLocations.peek();
 				execute(new AddressLookupRequestsAsyncTask(app));
 			}
 		}

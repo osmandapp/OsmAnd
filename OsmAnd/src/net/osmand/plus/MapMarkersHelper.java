@@ -98,6 +98,15 @@ public class MapMarkersHelper {
 		settings.ROUTE_MAP_MARKERS_START_MY_LOC.set(startFromMyLocation);
 	}
 
+	public void lookupAddressAll() {
+		for (MapMarker mapMarker : mapMarkers) {
+			lookupAddress(mapMarker, false);
+		}
+		for (MapMarker mapMarker : mapMarkersHistory) {
+			lookupAddress(mapMarker, true);
+		}
+	}
+
 	private void readFromSettings() {
 		mapMarkers.clear();
 		mapMarkersHistory.clear();
@@ -121,7 +130,6 @@ public class MapMarkersHelper {
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colorIndex,
 					pos, selections.get(i), i);
 			mapMarkers.add(mapMarker);
-			lookupAddress(mapMarker, false);
 		}
 
 		updateSortedArray();
@@ -133,7 +141,10 @@ public class MapMarkersHelper {
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), 0, 0, false, i);
 			mapMarker.history = true;
 			mapMarkersHistory.add(mapMarker);
-			lookupAddress(mapMarker, true);
+		}
+
+		if (!ctx.isApplicationInitializing()) {
+			lookupAddressAll();
 		}
 	}
 
