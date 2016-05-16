@@ -42,7 +42,7 @@ public class BinaryMapAddressReaderAdapter {
 			CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE
 	};
 	public final static int[] CITY_TYPES = {
-			CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE
+			CITY_TOWN_TYPE, VILLAGES_TYPE, POSTCODES_TYPE
 	};
 
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapAddressReaderAdapter.class);
