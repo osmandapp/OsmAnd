@@ -26,16 +26,16 @@ import java.util.Map.Entry;
 
 
 /**
- * Basic algorithms that are not in jdk 
+ * Basic algorithms that are not in jdk
  */
 public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
-	
+
 	public static boolean isEmpty(String s){
 		return s == null || s.length() == 0;
 	}
-	
+
 	public static boolean isBlank(String s){
 		return s == null || s.trim().length() == 0;
 	}
@@ -62,8 +62,8 @@ public class Algorithms {
 		}
 		return def;
 	}
-	
-	
+
+
 	public static String getFileNameWithoutExtension(File f) {
 		String name = f.getName();
 		int i = name.indexOf('.');
@@ -72,9 +72,13 @@ public class Algorithms {
 		}
 		return name;
 	}
-	
-	
-	
+
+	public static String getFileExtension(File f) {
+		String name = f.getName();
+		int i = name.lastIndexOf(".");
+		return name.substring(i + 1);
+	}
+
 	public static File[] getSortedFilesVersions(File dir){
 		File[] listFiles = dir.listFiles();
 		if (listFiles != null) {
@@ -89,7 +93,7 @@ public class Algorithms {
 			public int compare(File o1, File o2) {
 				return -simplifyFileName(o1.getName()).compareTo(simplifyFileName(o2.getName()));
 			}
-			
+
 			public String simplifyFileName(String fn) {
 				String lc = fn.toLowerCase();
 				if (lc.indexOf(".") != -1) {
@@ -112,14 +116,14 @@ public class Algorithms {
 			}
 		};
 	}
-	
+
 	private static final char CHAR_TOSPLIT = 0x01;
 
 	public static Map<String, String> decodeMap(String s) {
 		if (isEmpty(s)) {
 			return Collections.emptyMap();
 		}
-		Map<String, String> names = new HashMap<String, String>();
+		Map<String, String> names = new HashMap<>();
 		String[] split = s.split(CHAR_TOSPLIT + "");
 		// last split is an empty string
 		for (int i = 1; i < split.length; i += 2) {
@@ -127,7 +131,7 @@ public class Algorithms {
 		}
 		return names;
 	}
-	
+
 	public static String encodeMap(Map<String, String> names) {
 		if (names != null) {
 			Iterator<Entry<String, String>> it = names.entrySet().iterator();
@@ -142,7 +146,7 @@ public class Algorithms {
 		}
 		return "";
 	}
-	
+
 	public static int findFirstNumberEndIndex(String value) {
 		int i = 0;
 		boolean valid = false;
@@ -159,7 +163,7 @@ public class Algorithms {
 			return -1;
 		}
 	}
-	
+
 	public static boolean isDigit(char charAt) {
 		return charAt >= '0' && charAt <= '9';
 	}
@@ -182,7 +186,7 @@ public class Algorithms {
 		in.close();
 		return test == 0x504b0304;
 	}
-	
+
 	private static final int readInt(InputStream in) throws IOException {
         int ch1 = in.read();
         int ch2 = in.read();
@@ -192,7 +196,7 @@ public class Algorithms {
             throw new EOFException();
         return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
     }
-	
+
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
 			// not very efficient algorithm
@@ -201,8 +205,8 @@ public class Algorithms {
 			return s;
 		}
 	}
-	
-	
+
+
 	public static boolean objectEquals(Object a, Object b){
 		if(a == null){
 			return b == null;
@@ -210,8 +214,8 @@ public class Algorithms {
 			return a.equals(b);
 		}
 	}
-	
-	
+
+
 	/**
      	* Parse the color string, and return the corresponding color-int.
      	* If the string cannot be parsed, throws an IllegalArgumentException
@@ -225,7 +229,7 @@ public class Algorithms {
         	if (colorString.charAt(0) == '#') {
             	// Use a long to avoid rollovers on #ffXXXXXX
         		if (colorString.length() == 4) {
-            		colorString = "#" + 
+            		colorString = "#" +
             				colorString.charAt(1) + colorString.charAt(1) +
             				colorString.charAt(2) + colorString.charAt(2) +
             				colorString.charAt(3) + colorString.charAt(3);
@@ -241,8 +245,8 @@ public class Algorithms {
         	}
         	throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
     	}
-	
-    	
+
+
 	public static int extractFirstIntegerNumber(String s) {
 		int i = 0;
 		for (int k = 0; k < s.length(); k++) {
@@ -254,7 +258,7 @@ public class Algorithms {
 		}
 		return i;
 	}
-	
+
 	public static int extractIntegerNumber(String s) {
 		int i = 0;
 		int k = 0;
@@ -272,7 +276,7 @@ public class Algorithms {
 		}
 		return i;
 	}
-	
+
 	public static String extractIntegerPrefix(String s) {
 		int k = 0;
 		for (; k < s.length(); k++) {
@@ -282,7 +286,7 @@ public class Algorithms {
 		}
 		return "";
 	}
-	
+
 	public static String extractOnlyIntegerSuffix(String s) {
 		int k = 0;
 		for (; k < s.length(); k++) {
@@ -292,7 +296,7 @@ public class Algorithms {
 		}
 		return "";
 	}
-	
+
 	public static String extractIntegerSuffix(String s) {
 		int k = 0;
 		for (; k < s.length(); k++) {
@@ -302,8 +306,8 @@ public class Algorithms {
 		}
 		return "";
 	}
-	
-	
+
+
 	public static void fileCopy(File src, File dst) throws IOException {
 		FileOutputStream fout = new FileOutputStream(dst);
 		try {
@@ -324,8 +328,8 @@ public class Algorithms {
 			out.write(b, 0, read);
 		}
 	}
-	
-	
+
+
 	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException{
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;
@@ -335,18 +339,18 @@ public class Algorithms {
 			cp += read;
 			if(pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);
-				cp = cp % bytesDivisor; 
+				cp = cp % bytesDivisor;
 			}
 		}
 	}
-	
+
 	public static void oneByteStreamCopy(InputStream in, OutputStream out) throws IOException{
 		int read;
 		while ((read = in.read()) != -1) {
 			out.write(read);
 		}
 	}
-	
+
 	public static void closeStream(Closeable stream){
 		try {
 			if(stream != null){
@@ -356,7 +360,7 @@ public class Algorithms {
 			log.warn("Closing stream warn", e); //$NON-NLS-1$
 		}
 	}
-	
+
 	public static void updateAllExistingImgTilesToOsmandFormat(File f){
 		if(f.isDirectory()){
 			for(File c : f.listFiles()){
@@ -367,9 +371,9 @@ public class Algorithms {
 		} else if(f.getName().endsWith(".andnav2")) { //$NON-NLS-1$
 			f.renameTo(new File(f.getAbsolutePath().substring(0, f.getAbsolutePath().length() - ".andnav2".length()) + ".tile")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-			
+
 	}
-	
+
 	public static StringBuilder readFromInputStream(InputStream i) throws IOException {
 		StringBuilder responseBody = new StringBuilder();
 		responseBody.setLength(0);
@@ -388,7 +392,7 @@ public class Algorithms {
 		}
 		return responseBody;
 	}
-	
+
 	public static boolean removeAllFiles(File f) {
 		if (f == null) {
 			return false;
@@ -405,8 +409,8 @@ public class Algorithms {
 			return f.delete();
 		}
 	}
-	
-	
+
+
 	public static long parseLongFromBytes(byte[] bytes, int offset) {
 		long o= 0xff & bytes[offset + 7];
 		o = o << 8 | (0xff & bytes[offset + 6]);
@@ -418,9 +422,9 @@ public class Algorithms {
 		o = o << 8 | (0xff & bytes[offset]);
 		return o;
 	}
-	
-	
-	
+
+
+
 	public static void putLongToBytes(byte[] bytes, int offset, long l){
 		bytes[offset] = (byte) (l & 0xff);
 		l >>= 8;
@@ -438,8 +442,8 @@ public class Algorithms {
 		l >>= 8;
 		bytes[offset + 7] = (byte) (l & 0xff);
 	}
-	
-	
+
+
 	public static int parseIntFromBytes(byte[] bytes, int offset) {
 		int o = (0xff & bytes[offset + 3]) << 24;
 		o |= (0xff & bytes[offset + 2]) << 16;
@@ -447,7 +451,7 @@ public class Algorithms {
 		o |= (0xff & bytes[offset]);
 		return o;
 	}
-	
+
 	public static void putIntToBytes(byte[] bytes, int offset, int l){
 		bytes[offset] = (byte) (l & 0xff);
 		l >>= 8;
@@ -457,8 +461,8 @@ public class Algorithms {
 		l >>= 8;
 		bytes[offset + 3] = (byte) (l & 0xff);
 	}
-	
-	
+
+
 	public static void writeLongInt(OutputStream stream, long l) throws IOException {
 		stream.write((int) (l & 0xff));
 		l >>= 8;
@@ -476,7 +480,7 @@ public class Algorithms {
 		l >>= 8;
 		stream.write((int) (l & 0xff));
 	}
-	
+
 	public static void writeInt(OutputStream stream, int l) throws IOException {
 		stream.write(l & 0xff);
 		l >>= 8;
@@ -486,7 +490,7 @@ public class Algorithms {
 		l >>= 8;
 		stream.write(l & 0xff);
 	}
-	
+
 
 	public static void writeSmallInt(OutputStream stream, int l) throws IOException {
 		stream.write(l & 0xff);
@@ -494,13 +498,13 @@ public class Algorithms {
 		stream.write(l & 0xff);
 		l >>= 8;
 	}
-	
+
 	public static int parseSmallIntFromBytes(byte[] bytes, int offset) {
 		int s = (0xff & bytes[offset + 1]) << 8;
 		s |= (0xff & bytes[offset]);
 		return s;
 	}
-	
+
 	public static void putSmallIntBytes(byte[] bytes, int offset, int s){
 		bytes[offset] = (byte) (s & 0xff);
 		s >>= 8;
@@ -516,7 +520,7 @@ public class Algorithms {
 		}
 		return false;
 	}
-	
+
 
 	public static String formatDuration(int seconds, boolean fullForm) {
 		String sec;
@@ -549,7 +553,7 @@ public class Algorithms {
 			return String.format("%02d:%02d", hours, min);
 		}
 	}
-	
+
 	public static <T extends Enum<T> > T parseEnumValue(T[] cl, String val, T defaultValue){
 		for(int i = 0; i< cl.length; i++) {
 			if(cl[i].name().equalsIgnoreCase(val)) {

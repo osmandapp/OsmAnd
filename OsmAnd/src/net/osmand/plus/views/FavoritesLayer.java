@@ -45,8 +45,6 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	private int defaultColor;
 
 	private OsmandSettings settings;
-
-
 	
 	protected String getObjName() {
 		return view.getContext().getString(R.string.favorite);
