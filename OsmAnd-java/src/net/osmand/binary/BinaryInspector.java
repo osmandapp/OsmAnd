@@ -457,7 +457,7 @@ public class BinaryInspector {
 				if (p instanceof MapIndex) {
 					partname = "Map";
 				} else if (p instanceof TransportIndex) {
-
+					partname = "Transport";
 				} else if (p instanceof RouteRegion) {
 					partname = "Routing";
 				} else if (p instanceof PoiRegion) {
