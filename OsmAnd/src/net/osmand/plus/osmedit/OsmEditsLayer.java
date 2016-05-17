@@ -5,6 +5,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -17,12 +20,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Denis on
- * 20.03.2015.
- */
-public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
-
+public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
+		ContextMenuLayer.IMoveObjectProvider {
 	private static final int startZoom = 10;
 	private final OsmEditingPlugin plugin;
 	private final MapActivity activity;
@@ -31,7 +30,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private OsmandMapTileView view;
 	private Paint paintIcon;
 
-
+	private ContextMenuLayer contextMenuLayer;
 
 	public OsmEditsLayer(MapActivity activity, OsmEditingPlugin plugin) {
 		this.activity = activity;
@@ -43,13 +42,19 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		this.view = view;
 
 		poi = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_poi);
-		bug = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_poi);
+		bug = poi;
 		paintIcon = new Paint();
+
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-
+		if (contextMenuLayer.getMoveableObject() instanceof OsmPoint) {
+			OsmPoint objectInMotion = (OsmPoint) contextMenuLayer.getMoveableObject();
+			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			drawPoint(canvas, objectInMotion, pf.x, pf.y);
+		}
 	}
 
 	@Override
@@ -65,19 +70,25 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, List<? extends OsmPoint> objects,
 							List<LatLon> fullObjectsLatLon) {
 		for (OsmPoint o : objects) {
-			float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-			float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-			Bitmap b;
-			if (o.getGroup() == OsmPoint.Group.POI) {
-				b = poi;
-			} else if (o.getGroup() == OsmPoint.Group.BUG) {
-				b = bug;
-			} else {
-				b = poi;
+			if (contextMenuLayer.getMoveableObject() != o) {
+				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+				drawPoint(canvas, o, x, y);
+				fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 			}
-			canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
-			fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 		}
+	}
+
+	private void drawPoint(Canvas canvas, OsmPoint o, float x, float y) {
+		Bitmap b;
+		if (o.getGroup() == OsmPoint.Group.POI) {
+			b = poi;
+		} else if (o.getGroup() == OsmPoint.Group.BUG) {
+			b = bug;
+		} else {
+			b = poi;
+		}
+		canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 	}
 
 	@Override
@@ -101,7 +112,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	private int getFromPoint(RotatedTileBox tileBox, List<? super OsmPoint> am, int ex, int ey, int compare,
-			int radius, List<? extends OsmPoint> pnts) {
+							 int radius, List<? extends OsmPoint> pnts) {
 		for (OsmPoint n : pnts) {
 			int x = (int) tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tileBox.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
@@ -114,12 +125,12 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius;
 	}
 
-	public int getRadiusPoi(RotatedTileBox tb){
-		int r = 0;
-		if(tb.getZoom()  < startZoom){
+	public int getRadiusPoi(RotatedTileBox tb) {
+		int r;
+		if (tb.getZoom() < startZoom) {
 			r = 0;
 		} else {
 			r = 15;
@@ -152,7 +163,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof OsmPoint) {
-			return new LatLon(((OsmPoint)o).getLatitude(),((OsmPoint)o).getLongitude());
+			return new LatLon(((OsmPoint) o).getLatitude(), ((OsmPoint) o).getLongitude());
 		}
 		return null;
 	}
@@ -160,11 +171,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof OsmPoint) {
-			OsmPoint point =  (OsmPoint) o;
+		if (o instanceof OsmPoint) {
+			OsmPoint point = (OsmPoint) o;
 			String name = "";
 			String type = "";
-			if (point.getGroup() == OsmPoint.Group.POI){
+			if (point.getGroup() == OsmPoint.Group.POI) {
 				name = ((OpenstreetmapPoint) point).getName();
 				type = PointDescription.POINT_TYPE_OSM_NOTE;
 			} else if (point.getGroup() == OsmPoint.Group.BUG) {
@@ -176,4 +187,13 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		return null;
 	}
 
+	@Override
+	public boolean isObjectMovable(Object o) {
+		return o instanceof OsmPoint;
+	}
+
+	@Override
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+
+	}
 }

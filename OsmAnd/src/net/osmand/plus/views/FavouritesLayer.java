@@ -39,12 +39,13 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	private FavouritesDbHelper favorites;
 	protected List<FavouritePoint> cache = new ArrayList<>();
 	private MapTextLayer textLayer;
-	private ContextMenuLayer contextMenuLayer;
 	private Paint paintIcon;
 	private Bitmap pointSmall;
 	private int defaultColor;
 
 	private OsmandSettings settings;
+
+	private ContextMenuLayer contextMenuLayer;
 	
 	protected String getObjName() {
 		return view.getContext().getString(R.string.favorite);
@@ -64,10 +65,10 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		settings = view.getApplication().getSettings();
 		favorites = view.getApplication().getFavorites();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
-		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
 		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 	
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -91,8 +92,9 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
-			FavouritePoint fp = (FavouritePoint) contextMenuLayer.getMoveableObject();
-			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), fp.getColor(), true);
+			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
+			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
+					objectInMotion.getColor(), true);
 			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
 			fid.drawBitmapInCenter(canvas, pf.x, pf.y);
 		}
