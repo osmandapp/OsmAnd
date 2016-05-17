@@ -70,7 +70,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static int ZOOM_TO_SHOW_BORDERS_ST = 4;
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
 	private static int ZOOM_TO_SHOW_SELECTION_ST = 3;
-	private static int ZOOM_TO_SHOW_SELECTION = 10;
+	private static int ZOOM_TO_SHOW_SELECTION = 8;
 
 	public static class DownloadMapObject {
 		private BinaryMapDataObject dataObject;
