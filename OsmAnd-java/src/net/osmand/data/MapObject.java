@@ -27,33 +27,33 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getId() {
-		if(id != null){
+		if (id != null) {
 			return id;
 		}
 		return null;
 	}
-	
+
 	public String getName() {
 		if (this.name != null) {
 			return this.name;
 		}
 		return ""; //$NON-NLS-1$
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public void setName(String lang, String name) {
-		if(names == null) {
+		if (names == null) {
 			names = new HashMap<String, String>();
-			
+
 		}
 		names.put(lang, name);
 	}
-	
+
 	public Map<String, String> getNamesMap(boolean includeEn) {
 		if (!includeEn || Algorithms.isEmpty(enName)) {
 			if (names == null) {
@@ -62,63 +62,63 @@ public abstract class MapObject implements Comparable<MapObject> {
 			return names;
 		}
 		Map<String, String> mp = new HashMap<String, String>();
-		if(names != null) {
+		if (names != null) {
 			mp.putAll(names);
 		}
-		mp.put("en", enName);		
+		mp.put("en", enName);
 		return mp;
 	}
-	
+
 	public List<String> getAllNames() {
 		List<String> l = new ArrayList<String>();
-		if(!Algorithms.isEmpty(enName)) {
+		if (!Algorithms.isEmpty(enName)) {
 			l.add(enName);
 		}
-		if(names != null) {
+		if (names != null) {
 			l.addAll(names.values());
 		}
 		return l;
 	}
-	
+
 	public void copyNames(MapObject s) {
-		if(Algorithms.isEmpty(name)) {
+		if (Algorithms.isEmpty(name)) {
 			name = s.name;
 		}
-		if(Algorithms.isEmpty(enName)) {
+		if (Algorithms.isEmpty(enName)) {
 			enName = s.enName;
 		}
 		copyNames(s.names);
 	}
-	
+
 	public void copyNames(Map<String, String> snames) {
-		if(snames != null && snames.containsKey("name:en")){
+		if (snames != null && snames.containsKey("name:en")) {
 			enName = snames.get("name:en");
 		}
-		if(snames != null && snames.containsKey("en")){
+		if (snames != null && snames.containsKey("en")) {
 			enName = snames.get("en");
 		}
-		if(snames != null){
+		if (snames != null) {
 			Iterator<Entry<String, String>> it = snames.entrySet().iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Entry<String, String> e = it.next();
 				String key = e.getKey();
-				if(key.startsWith("name:")) {
+				if (key.startsWith("name:")) {
 					key = key.substring("name:".length());
 				}
-				if(names == null) {
+				if (names == null) {
 					names = new HashMap<String, String>();
 				}
-				if(Algorithms.isEmpty(names.get(key))) {
+				if (Algorithms.isEmpty(names.get(key))) {
 					names.put(key, e.getValue());
 				}
 			}
-		}		
+		}
 	}
-	
+
 	public String getName(String lang) {
 		return getName(lang, false);
 	}
-	
+
 	public String getName(String lang, boolean transliterate) {
 		if (lang != null) {
 			if (lang.equals("en")) {
@@ -126,12 +126,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 				return getEnName(true);
 			} else {
 				// get name
-				if(names != null) {
+				if (names != null) {
 					String nm = names.get(lang);
-					if(!Algorithms.isEmpty(nm)) {
+					if (!Algorithms.isEmpty(nm)) {
 						return nm;
 					}
-					if(transliterate) {
+					if (transliterate) {
 						return Junidecode.unidecode(getName());
 					}
 				}
@@ -139,25 +139,25 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 		return getName();
 	}
-	
+
 	public String getEnName(boolean transliterate) {
-		if(!Algorithms.isEmpty(enName)){
+		if (!Algorithms.isEmpty(enName)) {
 			return this.enName;
-		} else if(!Algorithms.isEmpty(getName()) && transliterate){
+		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
 			return Junidecode.unidecode(getName());
 		}
 		return ""; //$NON-NLS-1$
 	}
-	
+
 	public void setEnName(String enName) {
 		this.enName = enName;
 	}
-	
-	public LatLon getLocation(){
+
+	public LatLon getLocation() {
 		return location;
 	}
-	
-	public void setLocation(double latitude, double longitude){
+
+	public void setLocation(double latitude, double longitude) {
 		location = new LatLon(latitude, longitude);
 	}
 	
@@ -165,7 +165,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public int compareTo(MapObject o) {
 		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
 	}
-	
+
 	public int getFileOffset() {
 		return fileOffset;
 	}
@@ -204,7 +204,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return true;
 	}
 	
-	public static class MapObjectComparator implements Comparator<MapObject>{
+	public static class MapObjectComparator implements Comparator<MapObject> {
 		private final String l;
 		Collator collator = OsmAndCollator.primaryCollator();
 		public MapObjectComparator(String lang){

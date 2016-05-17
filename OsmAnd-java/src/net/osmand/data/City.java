@@ -79,7 +79,6 @@ public class City extends MapObject {
 		return type == null;
 	}
 	
-
 	public String getPostcode() {
 		return postcode;
 	}
@@ -113,8 +112,6 @@ public class City extends MapObject {
 		return listOfStreets;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		if(isPostcode()) {
@@ -141,9 +138,5 @@ public class City extends MapObject {
 	public void setIsin(String isin) {
 		this.isin = isin;
 	}
-
-	
-
-	
 
 }
