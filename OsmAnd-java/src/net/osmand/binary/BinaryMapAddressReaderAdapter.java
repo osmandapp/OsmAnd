@@ -53,19 +53,18 @@ public class BinaryMapAddressReaderAdapter {
 		public String getEnName() {
 			return enName;
 		}
-		
+
 		public List<CitiesBlock> getCities() {
 			return cities;
 		}
-		
+
 		public List<String> getAttributeTagsTable() {
 			return attributeTagsTable;
 		}
-		
+
 		public int getIndexNameOffset() {
 			return indexNameOffset;
 		}
-		
 
 		public String getPartName() {
 			return "Address";

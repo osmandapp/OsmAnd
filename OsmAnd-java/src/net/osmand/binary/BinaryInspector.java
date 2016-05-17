@@ -56,7 +56,7 @@ import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.WireFormat;
 
 public class BinaryInspector {
-	
+
 
 	public static final int BUFFER_SIZE = 1 << 20;
 	public static final int SHIFT_ID = 6;
@@ -71,11 +71,6 @@ public class BinaryInspector {
 //					"-vrouting",
 					"-vaddress", "-vcities","-vstreetgroups",
 					"-vstreets", "-vbuildings", "-vintersections",
-//					"-zoom=15",
-//					"-bbox=1.74,51.17,1.75,51.16",
-//					"-vstats",
-//					"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
-//					"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf"
 					"/Users/victorshcherb/osmand/maps/Argentina_southamerica_2.obf"
 			});
 		} else {
@@ -84,15 +79,15 @@ public class BinaryInspector {
 	}
 
 	private void printToFile(String s) throws IOException {
-		if(vInfo.osmOut != null) {
+		if (vInfo.osmOut != null) {
 			vInfo.osmOut.write(s.getBytes());
 		} else {
 			System.out.println(s);
 		}
 	}
-	
+
 	private void println(String s) {
-		if(vInfo != null && vInfo.osm && vInfo.osmOut == null) {
+		if (vInfo != null && vInfo.osm && vInfo.osmOut == null) {
 			// ignore
 		} else {
 			System.out.println(s);
@@ -101,13 +96,13 @@ public class BinaryInspector {
 	}
 
 	private void print(String s) {
-		if(vInfo != null && vInfo.osm && vInfo.osmOut == null) {
+		if (vInfo != null && vInfo.osm && vInfo.osmOut == null) {
 			// ignore
 		} else {
 			System.out.print(s);
 		}
 	}
-	
+
 	protected static class VerboseInfo {
 		boolean vaddress;
 		boolean vcities;
@@ -129,71 +124,71 @@ public class BinaryInspector {
 		double lonleft = -180;
 		double lonright = 180;
 		int zoom = -1;
-		
+
 		public boolean isVaddress() {
 			return vaddress;
 		}
-		
+
 		public int getZoom() {
 			return zoom;
 		}
-		
+
 		public boolean isVmap() {
 			return vmap;
 		}
-		
+
 		public boolean isVrouting() {
 			return vrouting;
 		}
-		
+
 		public boolean isVpoi() {
 			return vpoi;
 		}
-		
+
 		public boolean isVtransport() {
 			return vtransport;
 		}
-		
+
 		public boolean isVStats() {
 			return vstats;
 		}
-		
+
 		public VerboseInfo(String[] params) throws FileNotFoundException {
-			for(int i=0;i<params.length;i++){
-				if(params[i].equals("-vaddress")){
+			for (int i = 0; i < params.length; i++) {
+				if (params[i].equals("-vaddress")) {
 					vaddress = true;
-				} else if(params[i].equals("-vstreets")){
+				} else if (params[i].equals("-vstreets")) {
 					vstreets = true;
-				} else if(params[i].equals("-vstreetgroups")){
+				} else if (params[i].equals("-vstreetgroups")) {
 					vstreetgroups = true;
-				} else if(params[i].equals("-vcities")){
+				} else if (params[i].equals("-vcities")) {
 					vcities = true;
-				} else if(params[i].equals("-vbuildings")){
+				} else if (params[i].equals("-vbuildings")) {
 					vbuildings = true;
-				} else if(params[i].equals("-vintersections")){
+				} else if (params[i].equals("-vintersections")) {
 					vintersections = true;
-				} else if(params[i].equals("-vmap")){
+				} else if (params[i].equals("-vmap")) {
 					vmap = true;
-				} else if(params[i].equals("-vstats")){
+				} else if (params[i].equals("-vstats")) {
 					vstats = true;
-				} else if(params[i].equals("-vrouting")){
+				} else if (params[i].equals("-vrouting")) {
 					vrouting = true;
-				} else if(params[i].equals("-vmapobjects")){
+				} else if (params[i].equals("-vmapobjects")) {
 					vmapObjects = true;
-				} else if(params[i].equals("-vmapcoordinates")){
+				} else if (params[i].equals("-vmapcoordinates")) {
 					vmapCoordinates = true;
-				} else if(params[i].equals("-vpoi")){
+				} else if (params[i].equals("-vpoi")) {
 					vpoi = true;
-				} else if(params[i].startsWith("-osm")){
+				} else if (params[i].startsWith("-osm")) {
 					osm = true;
-					if(params[i].startsWith("-osm=")){
+					if (params[i].startsWith("-osm=")) {
 						osmOut = new FileOutputStream(params[i].substring(5));
 					}
-				} else if(params[i].equals("-vtransport")){
+				} else if (params[i].equals("-vtransport")) {
 					vtransport = true;
-				} else if(params[i].startsWith("-zoom=")){
+				} else if (params[i].startsWith("-zoom=")) {
 					zoom = Integer.parseInt(params[i].substring("-zoom=".length()));
-				} else if(params[i].startsWith("-bbox=")){
+				} else if (params[i].startsWith("-bbox=")) {
 					String[] values = params[i].substring("-bbox=".length()).split(",");
 					lonleft = Double.parseDouble(values[0]);
 					lattop = Double.parseDouble(values[1]);
@@ -202,24 +197,24 @@ public class BinaryInspector {
 				}
 			}
 		}
-		
-		public boolean contains(MapObject o){
+
+		public boolean contains(MapObject o) {
 			return lattop >= o.getLocation().getLatitude() && latbottom <= o.getLocation().getLatitude()
 					&& lonleft <= o.getLocation().getLongitude() && lonright >= o.getLocation().getLongitude();
-			
+
 		}
 
 		public void close() throws IOException {
-			if(osmOut != null) {
-				osmOut.close();;
+			if (osmOut != null) {
+				osmOut.close();
 				osmOut = null;
 			}
 
 		}
 	}
 
-	public  void inspector(String[] args) throws IOException {
-		if(args == null || args.length == 0){
+	public void inspector(String[] args) throws IOException {
+		if (args == null || args.length == 0) {
 			printUsage(null);
 			return;
 		}
@@ -266,6 +261,7 @@ public class BinaryInspector {
 			printFileInformation(f);
 		}
 	}
+
 	public static final void writeInt(CodedOutputStream ous, int v) throws IOException {
 		ous.writeRawByte((v >>> 24) & 0xFF);
 		ous.writeRawByte((v >>> 16) & 0xFF);
@@ -423,82 +419,81 @@ public class BinaryInspector {
 	}
 	
 
-	protected  String formatBounds(int left, int right, int top, int bottom){
+	protected String formatBounds(int left, int right, int top, int bottom) {
 		double l = MapUtils.get31LongitudeX(left);
 		double r = MapUtils.get31LongitudeX(right);
 		double t = MapUtils.get31LatitudeY(top);
 		double b = MapUtils.get31LatitudeY(bottom);
-		return formatLatBounds(l, r, t, b); 
+		return formatLatBounds(l, r, t, b);
 	}
-	
-	protected  String formatLatBounds(double l, double r, double t, double b){
+
+	protected String formatLatBounds(double l, double r, double t, double b) {
 		MessageFormat format = new MessageFormat("(left top - right bottom) : {0,number,#.####}, {1,number,#.####} NE - {2,number,#.####}, {3,number,#.####} NE", new Locale("EN", "US"));
-		return format.format(new Object[]{l, t, r, b}); 
+		return format.format(new Object[]{l, t, r, b});
 	}
-	
-	public  void printFileInformation(String fileName) throws IOException {
+
+	public void printFileInformation(String fileName) throws IOException {
 		File file = new File(fileName);
-		if(!file.exists()){
+		if (!file.exists()) {
 			println("Binary OsmAnd index " + fileName + " was not found.");
 			return;
 		}
 		printFileInformation(file);
 	}
-	
-	
+
 	public void printFileInformation(File file) throws IOException {
 		RandomAccessFile r = new RandomAccessFile(file.getAbsolutePath(), "r");
 		printFileInformation(r, file);
 	}
 
-	public  void printFileInformation(RandomAccessFile r, File file ) throws IOException {
+	public void printFileInformation(RandomAccessFile r, File file) throws IOException {
 		String filename = file.getName();
 		try {
 			BinaryMapIndexReader index = new BinaryMapIndexReader(r, file);
 			int i = 1;
-			println("Binary index " + filename + " version = " + index.getVersion() +" edition = " + new Date(index.getDateCreated()));
-			for(BinaryIndexPart p : index.getIndexes()){
+			println("Binary index " + filename + " version = " + index.getVersion() + " edition = " + new Date(index.getDateCreated()));
+			for (BinaryIndexPart p : index.getIndexes()) {
 				String partname = "";
-				if(p instanceof MapIndex ){
+				if (p instanceof MapIndex) {
 					partname = "Map";
-				} else if(p instanceof TransportIndex){
-					partname = "Transport";
-				} else if(p instanceof RouteRegion){
+				} else if (p instanceof TransportIndex) {
+
+				} else if (p instanceof RouteRegion) {
 					partname = "Routing";
-				} else if(p instanceof PoiRegion){
+				} else if (p instanceof PoiRegion) {
 					partname = "Poi";
-				} else if(p instanceof AddressRegion){
+				} else if (p instanceof AddressRegion) {
 					partname = "Address";
 				}
-				String name = p.getName() == null ? "" : p.getName(); 
+				String name = p.getName() == null ? "" : p.getName();
 				println(MessageFormat.format("{0} {1} data {3} - {2,number,#} bytes",
 						new Object[]{i, partname, p.getLength(), name}));
 				if(p instanceof TransportIndex){
 					TransportIndex ti = ((TransportIndex) p);
 					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
-					println("\tBounds " + formatBounds(ti.getLeft() << sh, ti.getRight() << sh, 
+					println("\tBounds " + formatBounds(ti.getLeft() << sh, ti.getRight() << sh,
 							ti.getTop() << sh, ti.getBottom() << sh));
-				} else if(p instanceof RouteRegion){
+				} else if (p instanceof RouteRegion) {
 					RouteRegion ri = ((RouteRegion) p);
-					println("\tBounds " + formatLatBounds(ri.getLeftLongitude(), ri.getRightLongitude(), 
+					println("\tBounds " + formatLatBounds(ri.getLeftLongitude(), ri.getRightLongitude(),
 							ri.getTopLatitude(), ri.getBottomLatitude()));
-					if((vInfo != null && vInfo.isVrouting())){
+					if ((vInfo != null && vInfo.isVrouting())) {
 						printRouteDetailInfo(index, (RouteRegion) p);
 					}
-				} else if(p instanceof MapIndex){
+				} else if (p instanceof MapIndex) {
 					MapIndex m = ((MapIndex) p);
 					int j = 1;
-					for(MapRoot mi : m.getRoots()){
+					for (MapRoot mi : m.getRoots()) {
 						println(MessageFormat.format("\t{4}.{5} Map level minZoom = {0}, maxZoom = {1}, size = {2,number,#} bytes \n\t\tBounds {3}",
 								new Object[] {
 								mi.getMinZoom(), mi.getMaxZoom(), mi.getLength(), 
 								formatBounds(mi.getLeft(), mi.getRight(), mi.getTop(), mi.getBottom()), 
 								i, j++}));
 					}
-					if((vInfo != null && vInfo.isVmap())){
+					if ((vInfo != null && vInfo.isVmap())) {
 						printMapDetailInfo(index, m);
 					}
-				} else if(p instanceof PoiRegion && (vInfo != null && vInfo.isVpoi())){
+				} else if (p instanceof PoiRegion && (vInfo != null && vInfo.isVpoi())) {
 					printPOIDetailInfo(vInfo, index, (PoiRegion) p);
 				} else if (p instanceof AddressRegion) {
 					List<CitiesBlock> cities = ((AddressRegion) p).cities;
@@ -511,13 +506,13 @@ public class BinaryInspector {
 				}
 				i++;
 			}
-			
-			
+
+
 		} catch (IOException e) {
-			System.err.println("File doesn't have valid structure : " + filename + " " + e.getMessage() );
+			System.err.println("File doesn't have valid structure : " + filename + " " + e.getMessage());
 			throw e;
 		}
-		
+
 	}
 
 	private void printRouteDetailInfo(BinaryMapIndexReader index, RouteRegion p) throws IOException {
@@ -636,8 +631,8 @@ public class BinaryInspector {
 				continue;
 			}
 			println(":");
-			
-			for (City c : cities) {		
+
+			for (City c : cities) {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
 				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",
@@ -650,14 +645,14 @@ public class BinaryInspector {
 				println(":");
 				if (!verbose.contains(c))
 					continue;
-				
+
 				for (Street t : streets) {
 					if (!verbose.contains(t))
 						continue;
 					index.preloadBuildings(t, null);
 					final List<Building> buildings = t.getBuildings();
 					final List<Street> intersections = t.getIntersectedStreets();
-				
+
 					println(MessageFormat.format("\t\t\t''{0}'' [{1,number,#}], {2,number,#} building(s), {3,number,#} intersections(s)",
 							new Object[]{t.getName(lang), t.getId(), buildings.size(), intersections.size()}));
 					
@@ -668,7 +663,7 @@ public class BinaryInspector {
 									new Object[]{b.getName(lang), b.getId()}));
 						}
 					}
-					
+
 					if (intersections != null && !intersections.isEmpty() && verbose.vintersections) {
 						print("\t\t\t\tIntersects with:");
 						for (Street s : intersections) {
@@ -683,7 +678,7 @@ public class BinaryInspector {
 	private static class DamnCounter {
 		int value;
 	}
-	
+
 	private static class MapStatKey {
 		String key = "";
 		long statCoordinates;
@@ -692,7 +687,7 @@ public class BinaryInspector {
 		int count;
 		int namesLength;
 	}
-	
+
 	private class MapStats {
 		public int lastStringNamesSize;
 		public int lastObjectIdSize;
@@ -701,22 +696,22 @@ public class BinaryInspector {
 		public int lastObjectTypes;
 		public int lastObjectCoordinates;
 		public int lastObjectCoordinatesCount;
-		
+
 		public int lastObjectSize;
-		
+
 		private Map<String, MapStatKey> types = new LinkedHashMap<String, BinaryInspector.MapStatKey>();
 		private SearchRequest<BinaryMapDataObject> req;
-		
+
 		public void processKey(String simpleString, MapObjectStat st, TIntObjectHashMap<String> objectNames,
-				int coordinates, boolean names ) {
+		                       int coordinates, boolean names) {
 			TIntObjectIterator<String> it = objectNames.iterator();
 			int nameLen = 0;
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				it.advance();
-				nameLen ++;
+				nameLen++;
 				nameLen += it.value().length();
 			}
-			if(!types.containsKey(simpleString)) {
+			if (!types.containsKey(simpleString)) {
 				MapStatKey stt = new MapStatKey();
 				stt.key = simpleString;
 				types.put(simpleString, stt);
@@ -756,7 +751,7 @@ public class BinaryInspector {
 			for (int i = 0; i < obj.getTypes().length; i++) {
 				int tp = obj.getTypes()[i];
 				TagValuePair pair = obj.mapIndex.decodeType(tp);
-				if(pair == null) {
+				if (pair == null) {
 					continue;
 				}
 				processKey(pair.toSimpleString(), st, obj.getObjectNames(), cnt, names);
@@ -784,7 +779,7 @@ public class BinaryInspector {
 			b += out("Ids", lastObjectIdSize);
 			b += out("String names", lastStringNamesSize);
 			out("TOTAL", b);
-			
+
 			println("\n\nOBJECT BY TYPE STATS: ");
 			ArrayList<MapStatKey> stats = new ArrayList<MapStatKey>(types.values());
 			Collections.sort(stats, new Comparator<MapStatKey>() {
@@ -793,19 +788,19 @@ public class BinaryInspector {
 				public int compare(MapStatKey o1, MapStatKey o2) {
 					return compare(o1.statObjectSize, o2.statObjectSize);
 				}
-				
+
 				public int compare(long x, long y) {
 			        return (x < y) ? -1 : ((x == y) ? 0 : 1);
 			    }
 			});
-			
-			for(MapStatKey s : stats) {
-				println(s.key + " (" +  s.count + ") \t " + s.statObjectSize + " bytes \t coord="+
-						s.statCoordinatesCount+
-						" (" +s.statCoordinates +" bytes) " +
-						" names "+s.namesLength + " bytes");
+
+			for (MapStatKey s : stats) {
+				println(s.key + " (" + s.count + ") \t " + s.statObjectSize + " bytes \t coord=" +
+						s.statCoordinatesCount +
+						" (" + s.statCoordinates + " bytes) " +
+						" names " + s.namesLength + " bytes");
 			}
-			
+
 		}
 
 		private long out(String s, long i) {
@@ -813,7 +808,7 @@ public class BinaryInspector {
 				s += " ";
 			}
 			DecimalFormat df = new DecimalFormat("0,000,000,000");
-			println(s+": " + df.format(i));
+			println(s + ": " + df.format(i));
 			return i;
 		}
 
@@ -821,18 +816,18 @@ public class BinaryInspector {
 		public void setReq(SearchRequest<BinaryMapDataObject> req) {
 			this.req = req;
 		}
-		
+
 	}
-	
-	private  void printMapDetailInfo(BinaryMapIndexReader index, MapIndex mapIndex) throws IOException {
+
+	private void printMapDetailInfo(BinaryMapIndexReader index, MapIndex mapIndex) throws IOException {
 		final StringBuilder b = new StringBuilder();
 		final DamnCounter mapObjectsCounter = new DamnCounter();
 		final MapStats mapObjectStats = new MapStats();
-		if(vInfo.osm){
+		if (vInfo.osm) {
 			printToFile("<?xml version='1.0' encoding='UTF-8'?>\n" +
 					"<osm version='0.6'>\n");
 		}
-		if(vInfo.isVStats()) {
+		if (vInfo.isVStats()) {
 			BinaryMapIndexReader.READ_STATS = true;
 		}
 		final SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
@@ -851,7 +846,7 @@ public class BinaryInspector {
 					@Override
 					public boolean publish(BinaryMapDataObject obj) {
 						mapObjectsCounter.value++;
-						if(vInfo.isVStats()) {
+						if (vInfo.isVStats()) {
 							mapObjectStats.process(obj);
 						} else if (vInfo.vmapObjects) {
 							b.setLength(0);
@@ -870,61 +865,61 @@ public class BinaryInspector {
 						}
 						return false;
 					}
+
 					@Override
 					public boolean isCancelled() {
 						return false;
 					}
 				});
-		if(vInfo.vstats) {
+		if (vInfo.vstats) {
 			mapObjectStats.setReq(req);
 		}
 		index.searchMapIndex(req, mapIndex);
-		if(vInfo.osm){
+		if (vInfo.osm) {
 			printToFile("</osm >\n");
-		} 
-		if(vInfo.vstats) {
+		}
+		if (vInfo.vstats) {
 			mapObjectStats.print();
 		}
 		println("\tTotal map objects: " + mapObjectsCounter.value);
 	}
 
-	
 
 	private static void printMapDetails(BinaryMapDataObject obj, StringBuilder b, boolean vmapCoordinates) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
-		if(multipolygon ) {
+		if (multipolygon) {
 			b.append("Multipolygon");
 		} else {
-			b.append(obj.area? "Area" : (obj.getPointsLength() > 1? "Way" : "Point"));
+			b.append(obj.area ? "Area" : (obj.getPointsLength() > 1 ? "Way" : "Point"));
 		}
 		int[] types = obj.getTypes();
 		b.append(" types [");
-		for(int j = 0; j<types.length; j++){
-			if(j > 0) {
+		for (int j = 0; j < types.length; j++) {
+			if (j > 0) {
 				b.append(", ");
 			}
 			TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
-			if(pair == null) {
+			if (pair == null) {
 				System.err.println("Type " + types[j] + "was not found");
 				continue;
 //								throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 			}
-			b.append(pair.toSimpleString()+" ("+types[j]+")");
+			b.append(pair.toSimpleString() + " (" + types[j] + ")");
 		}
 		b.append("]");
-		if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
+		if (obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0) {
 			b.append(" add_types [");
-			for(int j = 0; j<obj.getAdditionalTypes().length; j++){
-				if(j > 0) {
+			for (int j = 0; j < obj.getAdditionalTypes().length; j++) {
+				if (j > 0) {
 					b.append(", ");
 				}
 				TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
-				if(pair == null) {
+				if (pair == null) {
 					System.err.println("Type " + obj.getAdditionalTypes()[j] + "was not found");
 					continue;
 //									throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 				}
-				b.append(pair.toSimpleString()+"("+obj.getAdditionalTypes()[j]+")");
+				b.append(pair.toSimpleString() + "(" + obj.getAdditionalTypes()[j] + ")");
 
 			}
 			b.append("]");
@@ -963,33 +958,33 @@ public class BinaryInspector {
 
 	private static int OSM_ID = 1;
 
-	private  void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b) {
+	private void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
 		boolean point = obj.getPointsLength() == 1;
 		StringBuilder tags = new StringBuilder();
 		int[] types = obj.getTypes();
-		for(int j = 0; j<types.length; j++){
+		for (int j = 0; j < types.length; j++) {
 			TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
-			if(pair == null) {
+			if (pair == null) {
 				throw new NullPointerException("Type " + types[j] + "was not found");
 			}
 			tags.append("\t<tag k='").append(pair.tag).append("' v='").append(pair.value).append("' />\n");
 		}
-		if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
-			for(int j = 0; j<obj.getAdditionalTypes().length; j++){
+		if (obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0) {
+			for (int j = 0; j < obj.getAdditionalTypes().length; j++) {
 				TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
-				if(pair == null) {
+				if (pair == null) {
 					throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 				}
 				tags.append("\t<tag k='").append(pair.tag).append("' v='").append(pair.value).append("' />\n");
 			}
 		}
 		TIntObjectHashMap<String> names = obj.getObjectNames();
-		if(names != null && !names.isEmpty()) {
+		if (names != null && !names.isEmpty()) {
 			int[] keys = names.keys();
-			for(int j = 0; j<keys.length; j++){
+			for (int j = 0; j < keys.length; j++) {
 				TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
-				if(pair == null) {
+				if (pair == null) {
 					throw new NullPointerException("Type " + keys[j] + "was not found");
 				}
 				String name = names.get(keys[j]);
@@ -1005,24 +1000,24 @@ public class BinaryInspector {
 		if(point) {
 			float lon= (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
 			float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
-			b.append("<node id = '" + OSM_ID++ + "' version='1' lat='" +lat+"' lon='"+lon+"' >\n" );
+			b.append("<node id = '" + OSM_ID++ + "' version='1' lat='" + lat + "' lon='" + lon + "' >\n");
 			b.append(tags);
 			b.append("</node>\n");
 		} else {
 			TLongArrayList innerIds = new TLongArrayList();
 			TLongArrayList ids = new TLongArrayList();
-			for(int i=0; i<obj.getPointsLength(); i++) {
+			for (int i = 0; i < obj.getPointsLength(); i++) {
 				float lon = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
 				float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
 				int id = OSM_ID++;
-				b.append("\t<node id = '" + id + "' version='1' lat='" +lat+"' lon='"+lon+"' />\n" );
+				b.append("\t<node id = '" + id + "' version='1' lat='" + lat + "' lon='" + lon + "' />\n");
 				ids.add(id);
 			}
 			long outerId = printWay(ids, b, multipolygon ? null : tags);
 			if (multipolygon) {
 				int[][] polygonInnerCoordinates = obj.getPolygonInnerCoordinates();
 				for (int j = 0; j < polygonInnerCoordinates.length; j++) {
-					ids.clear();;
+					ids.clear();
 					for (int i = 0; i < polygonInnerCoordinates[j].length; i += 2) {
 						float lon = (float) MapUtils.get31LongitudeX(polygonInnerCoordinates[j][i]);
 						float lat = (float) MapUtils.get31LatitudeY(polygonInnerCoordinates[j][i + 1]);
@@ -1033,36 +1028,36 @@ public class BinaryInspector {
 					innerIds.add(printWay(ids, b, null));
 				}
 				int id = OSM_ID++;
-				b.append("<relation id = '" + id + "' version='1'>\n" );
+				b.append("<relation id = '" + id + "' version='1'>\n");
 				b.append(tags);
-				b.append("\t<member type='way' role='outer' ref= '" + outerId + "'/>\n" );
+				b.append("\t<member type='way' role='outer' ref= '" + outerId + "'/>\n");
 				TLongIterator it = innerIds.iterator();
-				while(it.hasNext()) {
+				while (it.hasNext()) {
 					long ref = it.next();
-					b.append("<member type='way' role='inner' ref= '" + ref + "'/>\n" );
+					b.append("<member type='way' role='inner' ref= '" + ref + "'/>\n");
 				}
-				b.append("</relation>\n" );
+				b.append("</relation>\n");
 			}
 		}
 	}
 
-	private  long printWay(TLongArrayList ids, StringBuilder b , StringBuilder tags){
+	private long printWay(TLongArrayList ids, StringBuilder b, StringBuilder tags) {
 		int id = OSM_ID++;
-		b.append("<way id = '" + id + "' version='1'>\n" );
-		if(tags != null) {
+		b.append("<way id = '" + id + "' version='1'>\n");
+		if (tags != null) {
 			b.append(tags);
 		}
 		TLongIterator it = ids.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			long ref = it.next();
-			b.append("\t<nd ref = '" + ref + "'/>\n" );
+			b.append("\t<nd ref = '" + ref + "'/>\n");
 		}
-		b.append("</way>\n" );
+		b.append("</way>\n");
 		return id;
 	}
 
 
-	private  void printPOIDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index, PoiRegion p) throws IOException {
+	private void printPOIDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index, PoiRegion p) throws IOException {
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 				MapUtils.get31TileNumberX(verbose.lonleft),
 				MapUtils.get31TileNumberX(verbose.lonright),
@@ -1079,53 +1074,54 @@ public class BinaryInspector {
 					public boolean isEmpty() {
 						return false;
 					}
-					
+
 				},
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {
 						Iterator<Entry<String, String>> it = object.getAdditionalInfo().entrySet().iterator();
 						String s = "";
-						while(it.hasNext()) {
+						while (it.hasNext()) {
 							Entry<String, String> e = it.next();
-							if(e.getValue().startsWith(" gz ")) {
-								s += " " + e.getKey() +"=...";
+							if (e.getValue().startsWith(" gz ")) {
+								s += " " + e.getKey() + "=...";
 							} else {
-								s += " " + e.getKey() +"=" +e.getValue();
+								s += " " + e.getKey() + "=" + e.getValue();
 							}
 						}
-						
+
 						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " + s);
 						return false;
 					}
+
 					@Override
 					public boolean isCancelled() {
 						return false;
 					}
 				});
-		
+
 		index.initCategories(p);
 		println("\tRegion: " + p.name);
-		println("\t\tBounds " + formatLatBounds(p.getLeftLongitude(), p.getRightLongitude(), 
+		println("\t\tBounds " + formatLatBounds(p.getLeftLongitude(), p.getRightLongitude(),
 				p.getTopLatitude(), p.getBottomLatitude()));
 		println("\t\tCategories:");
-		for(int i =0; i< p.categories.size(); i++) {
+		for (int i = 0; i < p.categories.size(); i++) {
 			println("\t\t\t" + p.categories.get(i));
-			for(int j = 0; j < p.subcategories.get(i).size(); j++)
+			for (int j = 0; j < p.subcategories.get(i).size(); j++)
 				println("\t\t\t\t" + p.subcategories.get(i).get(j));
 		}
 		println("\t\tSubtypes:");
-		for(int i =0; i< p.subTypes.size(); i++) {
+		for (int i = 0; i < p.subTypes.size(); i++) {
 			PoiSubType st = p.subTypes.get(i);
-			println("\t\t\t" + st.name + " " + (st.text ? "text":(" encoded " + st.possibleValues.size())));
+			println("\t\t\t" + st.name + " " + (st.text ? "text" : (" encoded " + st.possibleValues.size())));
 		}
 //		req.poiTypeFilter = null;//for test only
 		index.searchPoi(p, req);
-		
+
 	}
 
-	public  void printUsage(String warning) {
-		if(warning != null){
+	public void printUsage(String warning) {
+		if (warning != null) {
 			println(warning);
 		}
 		println("Inspector is console utility for working with binary indexes of OsmAnd.");
