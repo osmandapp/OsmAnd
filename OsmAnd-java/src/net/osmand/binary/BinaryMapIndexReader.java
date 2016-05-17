@@ -593,7 +593,12 @@ public class BinaryMapIndexReader {
 	}
 
 	public int preloadStreets(City c, SearchRequest<Street> resultMatcher) throws IOException {
-		AddressRegion reg = checkAddressIndex(c.getFileOffset());
+		AddressRegion reg;
+		try {
+			reg = checkAddressIndex(c.getFileOffset());
+		} catch (IllegalArgumentException e) {
+			throw new IOException(e.getMessage() + " while reading " + c + " (id: " + c.getId() + ")");
+		}
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
@@ -1737,9 +1742,6 @@ public class BinaryMapIndexReader {
 
 
 	public static class MapIndex extends BinaryIndexPart {
-		public String getPartName() { return "Map"; }
-		public int getFieldNumber() { return OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER; }
-
 		List<MapRoot> roots = new ArrayList<MapRoot>();
 
 		Map<String, Map<String, Integer>> encodingRules = new HashMap<String, Map<String, Integer>>();
