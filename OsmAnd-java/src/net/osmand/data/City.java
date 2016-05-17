@@ -109,7 +109,7 @@ public class City extends MapObject {
 		return type;
 	}
 
-	public Collection<Street> getStreets() {
+	public List<Street> getStreets() {
 		return listOfStreets;
 	}
 
