@@ -128,7 +128,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="download_hillshade_maps">Reliefkarte</string>
 	
 	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
-	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
+	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe (Administrationsebenen 5 - 9)</string>
 	
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -2156,4 +2156,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="access_no_destination">Ziel ist nicht festgelegt</string>
     <string name="use_osm_live_routing">OSM Live Navigation</string>
 	<string name="map_widget_battery">Akkustand</string>
-</resources>
+<string name="move_marker_bottom_sheet_title">Karte bewegen um die Position des Marker zu verändern</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">Folge uns</string>
+    <string name="use_osm_live_routing_description">Navigation für OSM-Live Änderungen aktivieren (Beta)</string>
+	</resources>
