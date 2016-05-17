@@ -140,4 +140,15 @@ public class City extends MapObject {
 		this.isin = isin;
 	}
 
+	public void mergeWith(City city) {
+		for (Street street : city.listOfStreets) {
+			if (listOfStreets.contains(street)) {
+				listOfStreets.get(listOfStreets.indexOf(street)).mergeWith(street);
+			} else {
+				listOfStreets.add(street);
+			}
+		}
+		copyNames(city);
+	}
+
 }
