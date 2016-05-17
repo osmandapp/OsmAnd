@@ -606,22 +606,17 @@ public class BinaryInspector {
 		println("\tTotal map objects: " + mapObjectsCounter.value);
 	}
 
-	private  void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
-		String[] cityType_String = new String[] {
-	        "Cities/Towns section",
-	        "Villages section",
-	        "Postcodes section",
-	    };
-		int[] cityType = new int[] {
-			BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE,
-			BinaryMapAddressReaderAdapter.VILLAGES_TYPE,
-			BinaryMapAddressReaderAdapter.POSTCODES_TYPE
+	private void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
+		String[] cityType_String = new String[]{
+				"Cities/Towns section",
+				"Villages section",
+				"Postcodes section",
 		};
 		for (int j = 0; j < BinaryMapAddressReaderAdapter.CITY_TYPES.length; j++) {
 			int type = BinaryMapAddressReaderAdapter.CITY_TYPES[j];
 			final List<City> cities = index.getCities(region, null, type);
-			
-			print(MessageFormat.format("\t{0}, {1,number,#} group(s)", new Object[]{cityType_String[j], cities.size()}));
+
+			print(MessageFormat.format("\t{0}, {1,number,#} group(s)", cityType_String[j], cities.size()));
 			if (BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE == type) {
 				if (!verbose.vstreetgroups && !verbose.vcities) {
 					println("");
