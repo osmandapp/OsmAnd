@@ -17,13 +17,17 @@ import net.sf.junidecode.Junidecode;
 
 
 public abstract class MapObject implements Comparable<MapObject> {
+	
+	public static final Comparator<MapObject> BY_NAME_COMPARATOR = new MapObjectComparator();
+	
+	
 	protected String name = null;
 	protected String enName = null;
 	protected Map<String, String> names = null;
 	protected LatLon location = null;
 	protected int fileOffset = 0;
 	protected Long id = null;
-	public static final Comparator<MapObject> comparator = new MapObjectComparator();
+	
 
 	public void setId(Long id) {
 		this.id = id;
