@@ -116,9 +116,9 @@ public class City extends MapObject {
 	@Override
 	public String toString() {
 		if (isPostcode()) {
-			return "Postcode : " + getName(); //$NON-NLS-1$ //$NON-NLS-2$
+			return "Postcode : " + getName() + " " + getLocation(); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		return "City [" + type + "] " + getName(); //$NON-NLS-1$ //$NON-NLS-2$
+		return "City [" + type + "] " + getName() + " " + getLocation(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public Street getStreetByName(String name) {

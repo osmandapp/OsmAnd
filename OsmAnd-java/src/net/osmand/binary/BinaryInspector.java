@@ -71,7 +71,7 @@ public class BinaryInspector {
 //					"-vrouting",
 					"-vaddress", "-vcities","-vstreetgroups",
 					"-vstreets", "-vbuildings", "-vintersections",
-					"/Users/victorshcherb/osmand/maps/Argentina_southamerica_2.obf"
+					"/Users/victorshcherb/osmand/maps/Ukraine_europe_2.road.obf"
 			});
 		} else {
 			in.inspector(args);
