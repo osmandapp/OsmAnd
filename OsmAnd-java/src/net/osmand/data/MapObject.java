@@ -23,6 +23,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected LatLon location = null;
 	protected int fileOffset = 0;
 	protected Long id = null;
+	public static final Comparator<MapObject> comparator = new MapObjectComparator();
 
 	public void setId(Long id) {
 		this.id = id;
@@ -207,7 +208,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public static class MapObjectComparator implements Comparator<MapObject> {
 		private final String l;
 		Collator collator = OsmAndCollator.primaryCollator();
-		public MapObjectComparator(String lang){
+
+		public MapObjectComparator() {
+			this.l = null;
+		}
+
+		public MapObjectComparator(String lang) {
 			this.l = lang;
 		}
 		

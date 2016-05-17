@@ -123,6 +123,7 @@ public class BinaryInspector {
 		double latbottom = -85;
 		double lonleft = -180;
 		double lonright = 180;
+		String lang = null;
 		int zoom = -1;
 
 		public boolean isVaddress() {
@@ -186,6 +187,8 @@ public class BinaryInspector {
 					}
 				} else if (params[i].equals("-vtransport")) {
 					vtransport = true;
+				} else if (params[i].startsWith("-lang=")) {
+					lang = params[i].substring("-lang=".length());
 				} else if (params[i].startsWith("-zoom=")) {
 					zoom = Integer.parseInt(params[i].substring("-zoom=".length()));
 				} else if (params[i].startsWith("-bbox=")) {
@@ -603,24 +606,17 @@ public class BinaryInspector {
 		println("\tTotal map objects: " + mapObjectsCounter.value);
 	}
 
-	private  void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
-		String[] cityType_String = new String[] {
-	        "Cities/Towns section",
-	        "Villages section",
-	        "Postcodes section",
-	    };
-		int[] cityType = new int[] {
-			BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE,
-			BinaryMapAddressReaderAdapter.VILLAGES_TYPE,
-			BinaryMapAddressReaderAdapter.POSTCODES_TYPE
+	private void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
+		String[] cityType_String = new String[]{
+				"Cities/Towns section",
+				"Villages section",
+				"Postcodes section",
 		};
-		String lang = "en";
-		
-		for (int j = 0; j < cityType.length; j++) {
-			int type = cityType[j];
+		for (int j = 0; j < BinaryMapAddressReaderAdapter.CITY_TYPES.length; j++) {
+			int type = BinaryMapAddressReaderAdapter.CITY_TYPES[j];
 			final List<City> cities = index.getCities(region, null, type);
-			
-			print(MessageFormat.format("\t{0}, {1,number,#} group(s)", new Object[]{cityType_String[j], cities.size()}));
+
+			print(MessageFormat.format("\t{0}, {1,number,#} group(s)", cityType_String[j], cities.size()));
 			if (BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE == type) {
 				if (!verbose.vstreetgroups && !verbose.vcities) {
 					println("");
@@ -635,10 +631,11 @@ public class BinaryInspector {
 			for (City c : cities) {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
-				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",
-						new Object[]{c.getName(lang), c.getId(), streets.size(), size}));
-				if(!verbose.vstreets)
-		        {
+				String cityDescription = (j == BinaryMapAddressReaderAdapter.POSTCODES_TYPE ?
+						MessageFormat.format("\t\t''{0}'' {1,number,#} street(s) size {2,number,#} bytes", c.getName(verbose.lang), streets.size(), size) :
+						MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes", c.getName(verbose.lang), c.getId(), streets.size(), size));
+				print(cityDescription);
+				if (!verbose.vstreets) {
 					println("");
 		            continue;
 		        }
@@ -654,20 +651,19 @@ public class BinaryInspector {
 					final List<Street> intersections = t.getIntersectedStreets();
 
 					println(MessageFormat.format("\t\t\t''{0}'' [{1,number,#}], {2,number,#} building(s), {3,number,#} intersections(s)",
-							new Object[]{t.getName(lang), t.getId(), buildings.size(), intersections.size()}));
-					
+							new Object[]{t.getName(verbose.lang), t.getId(), buildings.size(), intersections.size()}));
 					if (buildings != null && !buildings.isEmpty() && verbose.vbuildings) {
 						println("\t\t\t\tBuildings:");
 						for (Building b : buildings) {
 							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#}]",
-									new Object[]{b.getName(lang), b.getId()}));
+									new Object[]{b.getName(verbose.lang), b.getId()}));
 						}
 					}
 
 					if (intersections != null && !intersections.isEmpty() && verbose.vintersections) {
 						print("\t\t\t\tIntersects with:");
 						for (Street s : intersections) {
-							println("\t\t\t\t\t" + s.getName(lang));
+							println("\t\t\t\t\t" + s.getName(verbose.lang));
 						}
 					}
 				}
