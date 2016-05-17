@@ -12,6 +12,11 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -38,8 +43,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, 
-			MapTextProvider<WptPt> {
+public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
+		ContextMenuLayer.IMoveObjectProvider, MapTextProvider<WptPt> {
 	
 	private OsmandMapTileView view;
 	
@@ -75,7 +80,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private List<TrkSegment> points;
 	private GPXFile gpx;
 
-	
+	private ContextMenuLayer contextMenuLayer;
+	@ColorInt
+	private int visitedColor;
+	@ColorInt
+	private int defPointColor;
+
+	@Override
+	public void initLayer(OsmandMapTileView view) {
+		this.view = view;
+		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
+		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
+		initUI();
+	}
+
 	private void initUI() {
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
@@ -89,21 +107,19 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paint_1 = new Paint();
 		paint_1.setStyle(Style.STROKE);
 		paint_1.setAntiAlias(true);
-		
 
-		
 		paintBmp = new Paint();
 		paintBmp.setAntiAlias(true);
 		paintBmp.setFilterBitmap(true);
 		paintBmp.setDither(true);
-		
+
 		paintTextIcon = new Paint();
 		paintTextIcon.setTextSize(10 * view.getDensity());
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setFakeBoldText(true);
 		paintTextIcon.setColor(Color.BLACK);
 		paintTextIcon.setAntiAlias(true);
-		
+
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 
 		paintOuter = new Paint();
@@ -117,17 +133,42 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
+
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
+
+		visitedColor = ContextCompat.getColor(view.getApplication(), R.color.color_ok);
+		defPointColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_color_point);
 	}
-	
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
-		this.view = view;
-		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
-		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
-		initUI();
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (contextMenuLayer.getMoveableObject() instanceof WptPt) {
+			WptPt objectInMotion = (WptPt) contextMenuLayer.getMoveableObject();
+			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			drawBigPoint(canvas, objectInMotion, defPointColor, pf.x, pf.y);
+		}
 	}
 
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if(points != null) {
+			updatePaints(0, false, false, settings, tileBox);
+			for (TrkSegment ts : points)
+				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
+		} else {
+			List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
+			cache.clear();
+			if (!selectedGPXFiles.isEmpty()) {
+				drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
+				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+				drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
+				drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
+			}
+			if (textLayer != null && textLayer.isVisible()) {
+				textLayer.putData(this, cache);
+			}
+		}
+	}
 	
 	public void updateLayerStyle() {
 		cachedHash = -1;
@@ -198,29 +239,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return Arrays.hashCode(o);
 	}
 
-
-	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if(points != null) {
-			updatePaints(0, false, false, settings, tileBox);
-			for (TrkSegment ts : points)
-				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
-		} else {
-			List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
-			cache.clear();
-			if (!selectedGPXFiles.isEmpty()) {
-				drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
-				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-				drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
-				drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
-			}
-			if (textLayer != null && textLayer.isVisible()) {
-				textLayer.putData(this, cache);
-			}
-		}
-	}
-	
-	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles, 
+	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles,
 			DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
@@ -239,7 +258,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSplitItems(Canvas canvas, RotatedTileBox tileBox, List<GpxDisplayItem> items, DrawSettings settings) {
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 		int r = (int) (12 * tileBox.getDensity());
-		int dr = r * 3 / 2; 
+		int dr = r * 3 / 2;
 		int px = -1;
 		int py = -1;
 		for(int k = 0; k < items.size(); k++) {
@@ -272,8 +291,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
-		int defPointColor = view.getResources().getColor(R.color.gpx_color_point);
-		int visitedColor = view.getContext().getResources().getColor(R.color.color_ok);
 		if (tileBox.getZoom() >= startZoom) {
 			float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
 					true).getIntrinsicWidth() * 3 / 2.5f;
@@ -286,18 +303,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<WptPt> pts = getListStarPoints(g);
 				List<WptPt> fullObjects = new ArrayList<>();
-				int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
+				@ColorInt
+				int fileColor = g.getColor() == 0 ? defPointColor : g.getColor();
 				for (WptPt o : pts) {
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
-							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
+							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right
+							&& o != contextMenuLayer.getMoveableObject()) {
 						cache.add(o);
 						float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
 						float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
 
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-							boolean visit = isPointVisited(o);
-							int col = visit ? visitedColor : o.getColor(fcolor);
-							paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
+							@ColorInt
+							int pointColor = getPointColor(o, fileColor);
+							paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
 							canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 							smallObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						} else {
@@ -309,15 +328,24 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				for (WptPt o : fullObjects) {
 					float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
 					float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
-					boolean visit = isPointVisited(o);
-					int pointColor = visit ? visitedColor : o.getColor(fcolor);
-					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
-					fid.drawBitmapInCenter(canvas, x, y);
+					drawBigPoint(canvas, o, fileColor, x, y);
 				}
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
+	}
+
+	private void drawBigPoint(Canvas canvas, WptPt o, int fileColor, float x, float y) {
+		int pointColor = getPointColor(o, fileColor);
+		FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
+		fid.drawBitmapInCenter(canvas, x, y);
+	}
+
+	@ColorInt
+	private int getPointColor(WptPt o, @ColorInt int fileColor) {
+		boolean visit = isPointVisited(o);
+		return visit ? visitedColor : o.getColor(fileColor);
 	}
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
@@ -343,7 +371,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
-
 	private boolean isPointVisited(WptPt o) {
 		boolean visit = false;
 		String visited = o.getExtensionsToRead().get("VISITED_KEY");
@@ -360,11 +387,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 //			pts = g.getGpxFile().routes.get(0).points;
 //		}
 		return pts;
-	}
-
-
-	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 	
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -464,4 +486,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 
+	@Override
+	public boolean isObjectMovable(Object o) {
+		return o instanceof WptPt;
+	}
+
+	@Override
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+
+	}
 }

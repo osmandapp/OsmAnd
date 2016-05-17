@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.ColorInt;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -64,8 +65,9 @@ public class GPXUtilities {
 			}
 			return extensions;
 		}
-		
-		public int getColor(int defColor) {
+
+		@ColorInt
+		public int getColor(@ColorInt int defColor) {
 			if(extensions != null && extensions.containsKey("color")) {
 				try {
 					return Color.parseColor(extensions.get("color").toUpperCase());
@@ -1224,7 +1226,5 @@ public class GPXUtilities {
 		if (from.warning != null) {
 			to.warning = from.warning;
 		}
-
 	}
-
 }
