@@ -656,12 +656,12 @@ public class BinaryInspector {
 					final List<Street> intersections = t.getIntersectedStreets();
 
 					println(MessageFormat.format("\t\t\t''{0}'' [{1,number,#}], {2,number,#} building(s), {3,number,#} intersections(s)",
-							new Object[]{t.getName(lang), t.getId(), buildings.size(), intersections.size()}));
+							new Object[]{t.getName(verbose.lang), t.getId(), buildings.size(), intersections.size()}));
 					if (buildings != null && !buildings.isEmpty() && verbose.vbuildings) {
 						println("\t\t\t\tBuildings:");
 						for (Building b : buildings) {
 							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#}]",
-									new Object[]{b.getName(lang), b.getId()}));
+									new Object[]{b.getName(verbose.lang), b.getId()}));
 						}
 					}
 

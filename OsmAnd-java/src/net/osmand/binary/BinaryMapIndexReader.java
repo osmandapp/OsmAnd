@@ -1742,9 +1742,6 @@ public class BinaryMapIndexReader {
 
 
 	public static class MapIndex extends BinaryIndexPart {
-		public String getPartName() { return "Map"; }
-		public int getFieldNumber() { return OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER; }
-
 		List<MapRoot> roots = new ArrayList<MapRoot>();
 
 		Map<String, Map<String, Integer>> encodingRules = new HashMap<String, Map<String, Integer>>();
