@@ -29,7 +29,7 @@ import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
+public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 	ContextMenuLayer.IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
 	protected int startZoom = 6;

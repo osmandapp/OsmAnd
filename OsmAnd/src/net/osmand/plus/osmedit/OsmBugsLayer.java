@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit;
 
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,13 +9,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -61,11 +62,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Bitmap resolvedNoteSmall;
 
 	private final MapActivity activity;
-	protected static final String KEY_BUG = "bug";
-	protected static final String KEY_TEXT = "text";
-	protected static final String KEY_ACTION = "action";
-	private static final int DIALOG_BUG = 305;
-	private static Bundle dialogBundle = new Bundle();
 	private OsmBugsLocalUtil local;
 	private MapLayerData<List<OpenStreetNote>> data;
 
@@ -400,6 +396,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		OsmBugsUtil util = getOsmbugsUtil(bug);
 		final boolean offline = util instanceof OsmBugsLocalUtil;
 
+		@SuppressLint("InflateParams")
 		final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
 		if (offline) {
 			view.findViewById(R.id.user_name_field).setVisibility(View.GONE);

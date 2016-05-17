@@ -37,7 +37,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.FavoritesLayer;
+import net.osmand.plus.views.FavouritesLayer;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.ImpassableRoadsLayer;
 import net.osmand.plus.views.MapControlsLayer;
@@ -72,7 +72,7 @@ public class MapActivityLayers {
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
 	private POIMapLayer poiMapLayer;
-	private FavoritesLayer favoritesLayer;
+	private FavouritesLayer mFavouritesLayer;
 	private TransportStopsLayer transportStopsLayer;
 	private TransportInfoLayer transportInfoLayer;
 	private PointLocationLayer locationLayer;
@@ -138,8 +138,8 @@ public class MapActivityLayers {
 		poiMapLayer = new POIMapLayer(activity);
 		mapView.addLayer(poiMapLayer, 3);
 		// 4. favorites layer
-		favoritesLayer = new FavoritesLayer();
-		mapView.addLayer(favoritesLayer, 4);
+		mFavouritesLayer = new FavouritesLayer();
+		mapView.addLayer(mFavouritesLayer, 4);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer();
 		// 5.5 transport info layer 
@@ -565,8 +565,8 @@ public class MapActivityLayers {
 		return contextMenuLayer;
 	}
 
-	public FavoritesLayer getFavoritesLayer() {
-		return favoritesLayer;
+	public FavouritesLayer getFavouritesLayer() {
+		return mFavouritesLayer;
 	}
 
 	public MapTextLayer getMapTextLayer() {
