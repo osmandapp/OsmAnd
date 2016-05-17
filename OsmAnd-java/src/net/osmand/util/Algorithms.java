@@ -1,8 +1,5 @@
 package net.osmand.util;
 
-
-import com.sun.javafx.beans.annotations.NonNull;
-
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 
@@ -366,7 +363,7 @@ public class Algorithms {
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
-	public static void updateAllExistingImgTilesToOsmandFormat(@NonNull File f) {
+	public static void updateAllExistingImgTilesToOsmandFormat(File f) {
 		if (f.isDirectory()) {
 			for (File c : f.listFiles()) {
 				updateAllExistingImgTilesToOsmandFormat(c);

@@ -136,14 +136,25 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.shared_string_show_description) {
 						menu.openMenuFullScreen();
+					} else if (itemId == R.string.change_markers_position) {
+						RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+						enterMovingMode(tileBox);
 					}
 					return true;
 				}
 			};
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_show_description, activity)
-					.setIcon(R.drawable.ic_action_note_dark).setListener(listener)
+					.setIcon(R.drawable.ic_action_note_dark)
+					.setListener(listener)
 					.createItem());
+			if (isObjectMoveable(o)) {
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.change_markers_position, activity)
+						.setIcon(R.drawable.ic_show_on_map)
+						.setListener(listener)
+						.createItem());
+			}
 		}
 	}
 
@@ -156,22 +167,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (pressedContextMarker(tileBox, point.x, point.y)) {
 			Object obj = menu.getObject();
 			if (isObjectMoveable(obj)) {
-				Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-				vibrator.vibrate(VIBRATE_SHORT);
-
-				menu.updateMapCenter(null);
-				menu.hide();
-
-				LatLon ll = menu.getLatLon();
-				RotatedTileBox rb = new RotatedTileBox(tileBox);
-				rb.setCenterLocation(0.5f, 0.5f);
-				rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
-				double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-				double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-				view.setLatLon(lat, lon);
-				enterMovingMode();
-				view.refreshMap();
-
+				enterMovingMode(tileBox);
 				return true;
 			}
 			return false;
@@ -268,11 +264,27 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 	}
 
-	private void enterMovingMode() {
+	private void enterMovingMode(RotatedTileBox tileBox) {
+		Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+		vibrator.vibrate(VIBRATE_SHORT);
+
+		menu.updateMapCenter(null);
+		menu.hide();
+
+		LatLon ll = menu.getLatLon();
+		RotatedTileBox rb = new RotatedTileBox(tileBox);
+		rb.setCenterLocation(0.5f, 0.5f);
+		rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
+		double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		view.setLatLon(lat, lon);
+
 		mInChangeMarkerPositionMode = true;
 		mMoveMarkerBottomSheetHelper.show(menu.getLeftIcon());
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+
+		view.refreshMap();
 	}
 
 	private void mark(int status, int... widgets) {
