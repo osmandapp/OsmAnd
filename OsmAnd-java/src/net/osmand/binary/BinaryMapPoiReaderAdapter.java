@@ -50,7 +50,6 @@ public class BinaryMapPoiReaderAdapter {
 	}
 	
 	public static class PoiRegion extends BinaryIndexPart {
-
 		List<String> categories = new ArrayList<String>();
 		List<PoiCategory> categoriesType = new ArrayList<PoiCategory>();
 		List<List<String> > subcategories = new ArrayList<List<String> >();
