@@ -58,12 +58,6 @@ public class City extends MapObject {
 		return new City(postcode, POSTCODE_INTERNAL_ID--);
 	}
 
-	public City(City city) {
-		this.type = city.type;
-		this.listOfStreets = new ArrayList<>(city.listOfStreets);
-		this.postcode = city.postcode;
-		this.closestCity = city.closestCity;
-	}
 
 	public City(CityType type) {
 		if (type == null) {
