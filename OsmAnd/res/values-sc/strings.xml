@@ -337,7 +337,7 @@
     <string name="download_roads_only_maps">Mapas cun petzi istradas</string>
 
     <string name="rendering_attr_noAdminboundaries_name">Cua sas làcanas</string>
-    <string name="rendering_attr_noAdminboundaries_description">Non bisualizzare sas làcanas regionales (livellos amministrativos 5–9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Cua sas làcanas regionales (livellos amministrativos 5–9)</string>
 
 
     <string name="map_widget_max_speed">Lìmite de lestresa</string>
