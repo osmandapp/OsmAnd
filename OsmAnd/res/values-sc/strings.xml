@@ -453,7 +453,7 @@
     <string name="rendering_attr_moreDetailed_name">Prus minujas (a sa minuda)</string>
     <string name="rendering_attr_lessDetailed_name">Minujas de mancu</string>
     <string name="rendering_attr_hideAccess_name">Restritziones de atzessu</string>
-    <string name="rendering_attr_showAccess_name">Ammustra sas restritziones de atzessu</string>
+    <string name="rendering_attr_showAccess_name">Ammustra restritziones de atzessu e pedàgios</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sas istradas</string>
     <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sas istradas</string>
     <string name="rendering_attr_showCycleRoutes_name">Ammustra sas àndalas pro bitzicleta</string>
