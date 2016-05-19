@@ -18,7 +18,7 @@ import net.sf.junidecode.Junidecode;
 
 public abstract class MapObject implements Comparable<MapObject> {
 	
-	public static final Comparator<MapObject> BY_NAME_COMPARATOR = new MapObjectComparator();
+	public static final MapObjectComparator BY_NAME_COMPARATOR = new MapObjectComparator();
 	
 	
 	protected String name = null;
@@ -223,7 +223,23 @@ public abstract class MapObject implements Comparable<MapObject> {
 		
 		@Override
 		public int compare(MapObject o1, MapObject o2) {
-			return collator.compare(o1.getName(l), o2.getName(l));
+			if (o1 == null ^ o2 == null) {
+				return (o1 == null) ? -1 : 1;
+			} else if (o1 == o2) {
+				return 0;
+			} else {
+				return collator.compare(o1.getName(l), o2.getName(l));
+			}
+		}
+
+		public boolean areEqual(MapObject o1, MapObject o2) {
+			if (o1 == null ^ o2 == null) {
+				return false;
+			} else if (o1 == o2) {
+				return true;
+			} else {
+				return collator.equals(o1.getName(l), o2.getName(l));
+			}
 		}
 	}	
 
