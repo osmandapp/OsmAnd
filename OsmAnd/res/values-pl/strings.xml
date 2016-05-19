@@ -952,7 +952,7 @@
     <string name="incomplete_locale">niekompletne</string>
     <string name="download_regular_maps">Mapa zwykła</string>
     <string name="rendering_attr_noAdminboundaries_name">Granice</string>
-    <string name="rendering_attr_noAdminboundaries_description">Wyłącz wyświetlanie granic regionalnych (poziomy administracyjne 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Wyłącz wyświetlanie granic regionalnych (poziomy administracyjne 5–9)</string>
 
 
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
@@ -2190,7 +2190,7 @@
     <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
     <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
 	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega zmianie wyznaczonej trasy podczas poruszania się w niewłaściwym kierunku</string>
-    <string name="map_widget_battery">Stan akumulatora</string>
+    <string name="map_widget_battery">Poziom baterii</string>
     <string name="access_direction_audio_feedback_descr">Powiadamia dźwiękiem o kierunku do punktu docelowego</string>
     <string name="access_direction_audio_feedback">Komunikaty dźwiękowe o kierunku</string>
     <string name="lat_lon_pattern">Długość: %1$.6f Szerokość: %2$.6f</string>
