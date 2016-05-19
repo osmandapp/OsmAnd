@@ -42,8 +42,8 @@
     <string name="shared_string_toolbar">Ilobreto</string>
     <string name="shared_string_widgets">Fenestraĵoj</string>
     <string name="consider_turning_polygons_off">Oni rekomendas malaktivigi bildigadon de pluranguloj.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Montri montbiciklajn vojojn</string>
-    <string name="show_polygons">Montri plurangulojn</string>
+    <string name="rendering_attr_showMtbRoutes_name">Montbiciklaj vojoj</string>
+    <string name="show_polygons">Pluranguloj</string>
     <string name="shared_string_status">Stato</string>
     <string name="find_parking">Trovi parkumejon</string>
     <string name="shared_string_save_changes">Konservi ŝanĝojn</string>
@@ -107,7 +107,7 @@
     <string name="av_audio_bitrate_descr">Elekti bitrapidon de sondosiero</string>
     <string name="please_specify_poi_type_only_from_list">Bonvolu difini korektan Interesejan specon aŭ transsalti tion ĉi</string>
     <string name="access_from_map_description">Menubutono lanĉas stirpanelon, ne menuon</string>
-    <string name="access_from_map">Aligo de mapo</string>
+    <string name="access_from_map">Aligi el mapo</string>
     <string name="show_on_start_description">\'Ek\'-butono rekte lanĉas mapekranon</string>
     <string name="copied_to_clipboard">Enpoŝigita</string>
     <string name="show_on_start">Montri dum starto</string>
@@ -405,7 +405,7 @@
     <string name="shared_string_about">Pri</string>
     <string name="about_settings_descr">Informoj, permesiloj, kontribuistoj</string>
     <string name="choose_osmand_theme">Etoso</string>
-    <string name="choose_osmand_theme_descr">Elektu etoson de aplikaĵo</string>
+    <string name="choose_osmand_theme_descr">Elektas etoson por aplikaĵo</string>
     <string name="local_indexes_cat_srtm">Nivelkurboj</string>
     <string name="osmo_group_information_desc">" - Por krei grupon, bonvolu nomi kaj priskribi ĝin\n - Uzante la aplikaĵon nur Simplaj specoj de grupoj estas kreitaj, legu pli en la retpaĝo https://osmo.mobi/g/new\n - Per-retpaĝe vi povas administri grupon, loki kursojn kaj punktojn videblajn por ĉiujn\n - Ni ne rekomendas uzi gropon nur per unu persono, se tiu ne estas Intereseja gropo\n - Nekomunaj grupoj estas limitaj ĝis 8 personoj\n - Detalaj kondiĉoj estas ĉiam disponeblaj en retejo OsMo.mobi\n- Se vi bezonos specialajn kondiĉojn - bonvolu kontakti subtenantojn: osmo.mobi@gmail.com "</string>
     <string name="osmo_specify_tracker_id">Bonvolu difini identigilon</string>
@@ -657,7 +657,7 @@
     <string name="rendering_attr_moreDetailed_name">Pli detaloj</string>
     <string name="rendering_attr_lessDetailed_name">Malpli detaloj</string>
     <string name="rendering_attr_hideAccess_name">Aliraj baroj</string>
-    <string name="rendering_attr_showAccess_name">Montri alirajn barojn</string>
+    <string name="rendering_attr_showAccess_name">Aliraj baroj</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalitojn de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimojn de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklovojoj</string>
@@ -841,7 +841,7 @@
     <string name="access_widget_expand">Etendi</string>
     <string name="access_shared_string_navigate_up">Supren</string>
     <string name="access_sort">Ordigi</string>
-    <string name="map_mode">Mapa reĝimo</string>
+    <string name="map_mode">Map-reĝimo</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX-dosieroj elektitaj</string>
     <string name="rendering_value_thin_name">Maldika</string>
     <string name="rendering_value_medium_name">Meza</string>
@@ -877,9 +877,9 @@
     <string name="routing_attr_avoid_borders_name">Eviti landlimajn trairejojn</string>
     <string name="routing_attr_avoid_borders_description">Evitas landlimajn trairejojn al aliaj landoj</string>
     <string name="routing_attr_weight_name">Pezlimo</string>
-    <string name="routing_attr_weight_description">Agordu maksimuman permesan pezon de veturilo</string>
+    <string name="routing_attr_weight_description">Agordas maksimuman permesan pezon de veturilo</string>
     <string name="routing_attr_height_name">Altlimo</string>
-    <string name="routing_attr_height_description">Agordu maksimuman permesan altecon de veturilo</string>
+    <string name="routing_attr_height_description">Agordas maksimuman permesan altecon de veturilo</string>
     <string name="android_19_location_disabled">Ekde versio 4.4 (KitKat) de Android, vi ne eblas elŝuti kaj ĝisdatigi mapojn en antaŭan dosierujon (%s). Ĉu vi volas ŝanĝi ĝin al permesa memoreja loko kaj kopii ĉiujn dosierojn de OsmAnd tie?\n Rimarko 1: Viaj malnovaj dosieroj ne estos ŝanĝitaj (tamen vi povos forigi ilin permane).\n Rimarko 2: Dosieroj en la nova loko ne povos esti uzitaj ambaŭ per OamAnd kaj OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Kopianta dosieron (%s) al la nova loko…</string>
     <string name="copying_osmand_files_descr">Kopianta datum-dosieroj de OsmAnd al la nova dosierujo (%s)…</string>
@@ -895,7 +895,7 @@
     <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
     <string name="amenity_type_seamark">Mara navigadpunkto</string>
     <string name="app_modes_choose">Aplikaĵaj profiloj</string>
-    <string name="app_modes_choose_descr">Elektu profilojn de uzado montritajn en aplikaĵo</string>
+    <string name="app_modes_choose_descr">Elektas profilojn de uzado montritajn en aplikaĵo</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
     <string name="app_mode_hiking">Piedirado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
@@ -930,7 +930,7 @@
     <string name="maps_define_edit">Difini/Redakti…</string>
     <string name="map_widget_fps_info">Montri kadrojn sekunde (senerarigo)</string>
     <string name="driving_region">Trafika regiono</string>
-    <string name="driving_region_descr">Elektu trafikan regionon: Usono, Eŭropo, Unuiĝinta Reĝlando, Azio, kaj aliaj</string>
+    <string name="driving_region_descr">Elektas trafikan regionon: Usono, Eŭropo, Unuiĝinta Reĝlando, Azio, kaj aliaj</string>
     <string name="speak_title">Anoncanta…</string>
     <string name="speak_descr">Agordas anoncoj pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroladoj, rapidlimoj</string>
     <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
@@ -951,7 +951,7 @@
     <string name="route_from">El:</string>
 
     <string name="app_mode_default">Esplori mapon</string>
-    <string name="settings_preset">Implicita profilo</string>
+    <string name="settings_preset">Ĉefa profilo</string>
     <string name="settings_preset_descr">Map-vido kaj navigadaj agordoj estas memoritaj aparte por ia profilo de uzado. Agordu vian implicitan profilon tie ĉi.</string>
     <string name="destination_point">Celo %1$s</string>
     <string name="context_menu_item_destination_point">Agordi kiel celo</string>
@@ -1071,8 +1071,8 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Piedirada tavolo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Bildigas vojojn laŭ OSMC kursoj</string>
 
-    <string name="rendering_attr_noAdminboundaries_name">Kaŝi limojn</string>
-    <string name="rendering_attr_noAdminboundaries_description">Ne montras regionajn limojn (administraciaj niveloj 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_name">Limoj</string>
+    <string name="rendering_attr_noAdminboundaries_description">Ne montras regionajn limojn (administraciaj niveloj 5–9)</string>
     <string name="map_widget_max_speed">Rapidlimo</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nenia domo trovita.</string>
@@ -1128,7 +1128,7 @@
     <string name="use_compass_navigation_descr">Uzas kompason, nur kiam nenia direkto estas legebla</string>
     <string name="avoid_motorway">Eviti aŭtovojojn</string>
     <string name="auto_zoom_map">Aŭtomate skaladi mapon</string>
-    <string name="auto_zoom_map_descr">Aŭtomate skaladi mapon depende de via rapido (dum mapo estas samtempigita kun aktuala pozicio)</string>
+    <string name="auto_zoom_map_descr">Aŭtomate skaladas mapon depende de via rapido (ĝis kiam mapo estas samtempigita kun aktuala pozicio)</string>
     <string name="snap_to_road_descr">Proksimumigas pozicion al vojo dum navigado</string>
     <string name="snap_to_road">Proksimumigi al vojo</string>
     <string name="interrupt_music">Paŭzi muzikon</string>
@@ -1220,10 +1220,10 @@
     <string name="route_roundabout">Trafikcirklo: enveturu %1$d-an elveturejon</string>
     <string name="route_kl">Veturu je maldekstra koridoro</string>
     <string name="route_kr">Veturu je dekstra koridoro</string>
-    <string name="map_widget_battery">Stato de pilo</string>
+    <string name="map_widget_battery">Pila nivelo</string>
     <string name="move_marker_bottom_sheet_title">Movi la mapon por ŝanĝi pozicion de marko</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
-    <string name="rendering_attr_noPolygons_name">Kaŝi plurangulojn</string>
+    <string name="rendering_attr_noPolygons_name">Pluranguloj</string>
     <string name="rendering_attr_noPolygons_description">Igas ĉiujn landajn aĵojn sur mapo travideblajn</string>
     <string name="rendering_attr_appMode_name">Desegnata reĝimo</string>
     <string name="rendering_attr_appMode_description">Plejbonigas mapon por</string>
@@ -1304,4 +1304,30 @@
     <string name="north_west">nordokcidento</string>
     <string name="north_north_west">nordo-nordo-okcidento</string>
     <string name="front">antaŭen</string>
+    <string name="lang_hu_formal">Hungara (forma)</string>
+    <string name="front_right">dekstre-antaŭen</string>
+    <string name="right">dekstren</string>
+    <string name="back_right">dekstre-malantaŭen</string>
+    <string name="back">malantaŭen</string>
+    <string name="back_left">maldekstre-malantaŭen</string>
+    <string name="left">maldekstren</string>
+    <string name="front_left">maldekstre-antaŭen</string>
+    <string name="oclock">tie ĉi</string>
+    <string name="towards">en la direkto al</string>
+    <string name="accuracy">Precizeco</string>
+    <string name="altitude">Altitudo</string>
+    <string name="no_info">Sen informoj</string>
+    <string name="direction_style_sidewise">Malhorloĝdirekte (8 sektoroj)</string>
+    <string name="direction_style_clockwise">Horloĝdirekte (12 sektoroj)</string>
+    <string name="settings_direction_style">Montrmaniero de direktoj</string>
+    <string name="settings_direction_style_descr">Elektas kiamaniere montri relativajn direktojn dum movado</string>
+    <string name="auto_announce_on">Aktivigi aŭtomatan anoncadon</string>
+    <string name="auto_announce_off">Ĉesigi aŭtomatan anoncadon</string>
+    <string name="zoom_by_trackball">Skali mapon per stirglobo</string>
+    <string name="zoom_by_trackball_descr">Ŝanĝas map-skalon per horizontala movo de stirglobo (trackball)</string>
+    <string name="accessibility_preferences_descr">Alireblecaj agordoj</string>
+    <string name="arrival_distance_factor_early">Frue</string>
+    <string name="arrival_distance_factor_normally">Norme</string>
+    <string name="arrival_distance_factor_late">Malfrue</string>
+    <string name="arrival_distance_factor_at_last">Dum la plej lastaj metroj</string>
     </resources>
