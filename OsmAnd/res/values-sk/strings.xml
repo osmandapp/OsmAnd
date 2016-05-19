@@ -1443,7 +1443,7 @@
     <string name="nautical_maps_missing">Pre zobrazenie námorných máp je potrebné stiahnuť samostatnú námornú mapu pre offline použitie</string>
     <string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
     <string name="free">"%1$s voľných "</string>
-    <string name="device_memory">Pamäť zariadenia</string>
+    <string name="device_memory">Pomnilnik naprave</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžiarske svahy</string>
     <string name="share_note">Zdieľať poznámku</string>
     <string name="notes">Poznámky</string>
