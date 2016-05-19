@@ -1312,7 +1312,7 @@
     <string name="rendering_attr_moreDetailed_name">Més detalls</string>
     <string name="rendering_attr_lessDetailed_name">Menys detalls</string>
     <string name="rendering_attr_hideAccess_name">Restriccions d\'accés</string>
-    <string name="rendering_attr_showAccess_name">Mostra les restriccions d\'accés</string>
+    <string name="rendering_attr_showAccess_name">Mostra les restriccions d\'accés i els peatges</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de la via</string>
     <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de la via</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra les vies ciclistes</string>
