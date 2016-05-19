@@ -12,6 +12,7 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.os.AsyncTask;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -29,6 +31,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -39,15 +42,18 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		ContextMenuLayer.IMoveObjectProvider, MapTextProvider<WptPt> {
-	
+
 	private OsmandMapTileView view;
-	
+
 	private Paint paint;
 	private Paint paint2;
 	private boolean isPaint2;
@@ -62,10 +68,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private static final int startZoom = 7;
 
-	
+
 	private GpxSelectionHelper selectedGpxHelper;
 	private Paint paintBmp;
-	private List<WptPt> cache = new ArrayList<WptPt>();
+	private List<WptPt> cache = new ArrayList<>();
+	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
 
 
@@ -145,13 +152,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if (contextMenuLayer.getMoveableObject() instanceof WptPt) {
 			WptPt objectInMotion = (WptPt) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
-			drawBigPoint(canvas, objectInMotion, defPointColor, pf.x, pf.y);
+			SelectedGpxFile gpxFile = pointFileMap.get(objectInMotion);
+			if (gpxFile != null) {
+				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y);
+			}
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if(points != null) {
+		if (points != null) {
 			updatePaints(0, false, false, settings, tileBox);
 			for (TrkSegment ts : points)
 				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
@@ -169,32 +179,32 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			}
 		}
 	}
-	
+
 	public void updateLayerStyle() {
 		cachedHash = -1;
 	}
-	
-	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox){
+
+	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
 		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom());
 		if (hsh != cachedHash) {
 			cachedHash = hsh;
-			cachedColor = view.getResources().getColor(R.color.gpx_track);
+			cachedColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_track);
 			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
 				CommonPreference<String> p = view.getSettings().getCustomRenderProperty("currentTrackColor");
-				if(p != null && p.isSet()) {
+				if (p != null && p.isSet()) {
 					RenderingRuleProperty ctColor = rrs.PROPS.get("currentTrackColor");
-					if(ctColor != null) {
+					if (ctColor != null) {
 						req.setStringFilter(ctColor, p.get());
 					}
 				}
 				CommonPreference<String> p2 = view.getSettings().getCustomRenderProperty("currentTrackWidth");
-				if(p2 != null && p2.isSet()) {
+				if (p2 != null && p2.isSet()) {
 					RenderingRuleProperty ctWidth = rrs.PROPS.get("currentTrackWidth");
-					if(ctWidth != null) {
+					if (ctWidth != null) {
 						req.setStringFilter(ctWidth, p2.get());
 					}
 				}
@@ -234,13 +244,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paint.setColor(color == 0 ? cachedColor : color);
 		return cachedColor;
 	}
-	
+
 	private int calculateHash(Object... o) {
 		return Arrays.hashCode(o);
 	}
 
 	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles,
-			DrawSettings settings) {
+										 DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			for (SelectedGpxFile g : selectedGPXFiles) {
@@ -261,7 +271,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		int dr = r * 3 / 2;
 		int px = -1;
 		int py = -1;
-		for(int k = 0; k < items.size(); k++) {
+		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
 			WptPt o = i.locationEnd;
 			if (o != null && o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top && o.lon >= latLonBounds.left
@@ -304,7 +314,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				List<WptPt> pts = getListStarPoints(g);
 				List<WptPt> fullObjects = new ArrayList<>();
 				@ColorInt
-				int fileColor = g.getColor() == 0 ? defPointColor : g.getColor();
+				int fileColor = getFileColor(g);
 				for (WptPt o : pts) {
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right
@@ -324,6 +334,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							fullObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						}
 					}
+					pointFileMap.put(o, g);
 				}
 				for (WptPt o : fullObjects) {
 					float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
@@ -334,6 +345,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
+	}
+
+	private int getFileColor(@NonNull SelectedGpxFile g) {
+		return g.getColor() == 0 ? defPointColor : g.getColor();
 	}
 
 	private void drawBigPoint(Canvas canvas, WptPt o, int fileColor, float x, float y) {
@@ -349,14 +364,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
-			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
+										   List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 
 		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
 
-				if (ts.renders.isEmpty()				// only do once (CODE HERE NEEDS TO BE UI INSTEAD)
-						&& !ts.points.isEmpty()) {		// hmmm. 0-point tracks happen, but.... how?
+				if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
+						&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
 
 					if (g.isShowCurrentTrack()) {
 						ts.renders.add(new Renderable.CurrentTrack(ts.points));
@@ -374,23 +389,18 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private boolean isPointVisited(WptPt o) {
 		boolean visit = false;
 		String visited = o.getExtensionsToRead().get("VISITED_KEY");
-		if(visited != null && !visited.equals("0")) {
+		if (visited != null && !visited.equals("0")) {
 			visit = true;
 		}
 		return visit;
 	}
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
-		List<WptPt> pts = g.getGpxFile().points;
-		// don't display points here
-//		if(pts.isEmpty() & !g.getGpxFile().routes.isEmpty()) {
-//			pts = g.getGpxFile().routes.get(0).points;
-//		}
-		return pts;
+		return g.getGpxFile().points;
 	}
-	
+
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2) ;
+		return (Math.abs(objx - ex) <= radius * 2 && Math.abs(objy - ey) <= radius * 2);
 //		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
 
@@ -413,8 +423,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof WptPt){
-			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt)o).name); //$NON-NLS-1$
+		if (o instanceof WptPt) {
+			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt) o).name); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -443,17 +453,18 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof WptPt){
-			return new LatLon(((WptPt)o).lat, ((WptPt)o).lon);
+		if (o instanceof WptPt) {
+			return new LatLon(((WptPt) o).lat, ((WptPt) o).lon);
 		}
 		return null;
 	}
-	
-	
+
+
 	@Override
 	public void destroyLayer() {
-		
+
 	}
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
@@ -466,7 +477,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public LatLon getTextLocation(WptPt o) {
-		return new LatLon(((WptPt)o).lat, ((WptPt)o).lon);
+		return new LatLon(o.lat, o.lon);
 	}
 
 	@Override
@@ -482,7 +493,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	public void setGivenGpx(GPXFile gpx) {
 		this.gpx = gpx;
-		this.points = (gpx == null ? null :	gpx.proccessPoints());
+		this.points = (gpx == null ? null : gpx.proccessPoints());
 	}
 
 
@@ -492,7 +503,48 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	@Override
-	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	public void applyNewObjectPosition(@NonNull Object o,
+									   @NonNull LatLon position,
+									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
 
+		if (o instanceof WptPt) {
+			WptPt objectInMotion = (WptPt) o;
+			GPXFile gpxFile = pointFileMap.get(objectInMotion).getGpxFile();
+			gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
+					position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
+					objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
+			new SaveGpxFileAsyncTask(view.getApplication(), callback, objectInMotion).execute(gpxFile);
+		} else if (callback != null) {
+			callback.onApplyMovedObject(false, o);
+		}
+	}
+
+	static class SaveGpxFileAsyncTask extends AsyncTask<GPXFile, Void, String> {
+		private final OsmandApplication app;
+		@Nullable
+		private final ContextMenuLayer.ApplyMovedObjectCallback callback;
+		@Nullable
+		private final WptPt point;
+
+		SaveGpxFileAsyncTask(OsmandApplication app,
+							 @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback,
+							 @Nullable WptPt point) {
+			this.app = app;
+			this.callback = callback;
+			this.point = point;
+		}
+
+		@Override
+		protected String doInBackground(GPXFile... params) {
+			GPXFile gpxFile = params[0];
+			return GPXUtilities.writeGpxFile(new File(gpxFile.path), gpxFile, app);
+		}
+
+		@Override
+		protected void onPostExecute(String errorMessage) {
+			if (callback != null) {
+				callback.onApplyMovedObject(errorMessage == null, point);
+			}
+		}
 	}
 }

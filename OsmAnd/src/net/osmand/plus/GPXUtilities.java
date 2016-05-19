@@ -667,7 +667,7 @@ public class GPXUtilities {
 			return points.size() > 0;
 		}
 		
-		public boolean hasTrkpt() {
+		public boolean hasTrkPt() {
 			for(Track t  : tracks) {
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
