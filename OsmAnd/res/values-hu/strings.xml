@@ -959,7 +959,7 @@
     <string name="monitoring_control_start">GPX</string>
 
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak elrejtése</string>
-    <string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg a közigazgatási határokat 5-9 szinten</string>
+    <string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg a közigazgatási határokat 5–9 szinten</string>
     <string name="download_srtm_maps">Szintvonalak</string>
     <string name="srtm_plugin_name">Szintvonalak</string>
     <string name="index_srtm_ele">Szintvonalak</string>
@@ -2193,4 +2193,16 @@
     <string name="access_disable_offroute_recalc">Ne tervezzen újra, ha letérsz az útról</string>
     <string name="access_disable_wrong_direction_recalc">Ne tervezzen újra, ha rossz irányba mész</string>
     <string name="access_no_destination">Nincs beállítva cél</string>
+    <string name="map_widget_battery">Akumlátor töltöttség</string>
+    <string name="move_marker_bottom_sheet_title">A jelölő helyének módosításához mozgasd a térképet</string>
+    <string name="lat_lon_pattern">Szél.: %1$.6f Hossz.: %2$.6f</string>
+    <string name="access_direction_audio_feedback">Irány hangjelzés</string>
+    <string name="access_direction_audio_feedback_descr">Hanggal jelzi a célpont irányát</string>
+    <string name="access_direction_haptic_feedback">Irány rezgő visszajelzés</string>
+    <string name="access_direction_haptic_feedback_descr">Rezgéssel jelzi a célpont irányát</string>
+    <string name="access_smart_autoannounce">Okos automatikus bejelentés</string>
+    <string name="access_smart_autoannounce_descr">Figyelmeztetés, csak ha a célpont iránya megváltozott</string>
+    <string name="access_autoannounce_period">Auto-bejelentési időköz</string>
+    <string name="access_autoannounce_period_descr">Minimális időköz a bejelentések között</string>
+    <string name="lang_hu_formal">Magyar (magázó)</string>
     </resources>
