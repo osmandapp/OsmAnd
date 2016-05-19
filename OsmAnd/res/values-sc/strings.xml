@@ -337,7 +337,7 @@
     <string name="download_roads_only_maps">Mapas cun petzi istradas</string>
 
     <string name="rendering_attr_noAdminboundaries_name">Cua sas làcanas</string>
-    <string name="rendering_attr_noAdminboundaries_description">Non bisualizzare sas làcanas regionales (livellos amministrativos 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Non bisualizzare sas làcanas regionales (livellos amministrativos 5–9)</string>
 
 
     <string name="map_widget_max_speed">Lìmite de lestresa</string>
@@ -2193,4 +2193,12 @@
     <string name="access_smart_autoannounce_descr">Notìfica petzi cando sa diretzione cara a sa destinatzione est cambiada</string>
     <string name="access_autoannounce_period">Intervallu de annùntziu automàticu</string>
     <string name="access_autoannounce_period_descr">Tempus mìnimu intre sos annùntzios</string>
+    <string name="map_widget_battery">Livellu bateria</string>
+    <string name="move_marker_bottom_sheet_title">Move sa mapa pro mudare sa positzione de su marcadore</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="access_direction_audio_feedback">Reatzione sonora de diretzione</string>
+    <string name="access_direction_audio_feedback_descr">Indicat sa diretzione de destinatzione cun unu sonu</string>
+    <string name="access_direction_haptic_feedback">Reatzione àptica de diretzione</string>
+    <string name="access_direction_haptic_feedback_descr">Indicat sa diretzione de destinatzione cun sa vibratzione</string>
+    <string name="lang_hu_formal">Ungheresu (formale)</string>
     </resources>
