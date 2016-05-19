@@ -1333,4 +1333,17 @@
     <string name="arrival_distance">Alvena anoncado</string>
     <string name="arrival_distance_descr">Kiafrue vi volas anoncon pri alveno?</string>
     <string name="rendering_out_of_memory">Mankas memoron por montri elektitan regionon</string>
+    <string name="use_fluorescent_overlays">Rebrilaj surtavoloj</string>
+    <string name="use_fluorescent_overlays_descr">Uzas rebrilajn kolorojn por montri kursojn kaj vojojn</string>
+    <string name="offline_edition">Eksterreta redaktado</string>
+    <string name="offline_edition_descr">Ĉiam uzas eksterretan redaktadon</string>
+    <string name="update_poi_does_not_change_indexes">Redakto de Interesejo en aplikaĵo ne kaŭzas ŝanĝon en elŝutitaj map-dosieroj, ŝanĝoj estas konservitaj en loka dosiero.</string>
+    <string name="local_openstreetmap_uploading">Alŝutanta…</string>
+    <string name="local_openstreetmap_were_uploaded">Alŝutis {0} Interesejojn/notojn</string>
+    <string name="local_openstreetmap_uploadall">Alŝuti ĉiujn</string>
+    <string name="local_openstreetmap_upload">Alŝuti modifaĵojn al OSM</string>
+    <string name="local_openstreetmap_delete">Forigi modifaĵojn</string>
+    <string name="local_openstreetmap_descr_title">Neunutempa (nesinkrona) redakto de OSM:</string>
+    <string name="local_openstreetmap_settings">Lokaj konservitaj OSM-aj Iteresejoj/notoj</string>
+    <string name="local_openstreetmap_settings_descr">Montras kaj administras OSM-ajn Interesejojn/notojn konservitajn en loka datumbazo</string>
     </resources>
