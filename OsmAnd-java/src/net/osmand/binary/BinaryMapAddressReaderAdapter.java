@@ -34,6 +34,7 @@ import com.google.protobuf.WireFormat;
 public class BinaryMapAddressReaderAdapter {
 	
 	public final static int CITY_TOWN_TYPE = 1;
+	// the correct type is -1, this is order in sections for postcode
 	public final static int POSTCODES_TYPE = 2;
 	public final static int VILLAGES_TYPE = 3;
 	public final static int STREET_TYPE = 4;
