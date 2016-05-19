@@ -1330,4 +1330,7 @@
     <string name="arrival_distance_factor_normally">Norme</string>
     <string name="arrival_distance_factor_late">Malfrue</string>
     <string name="arrival_distance_factor_at_last">Dum la plej lastaj metroj</string>
+    <string name="arrival_distance">Alvena anoncado</string>
+    <string name="arrival_distance_descr">Kiafrue vi volas anoncon pri alveno?</string>
+    <string name="rendering_out_of_memory">Mankas memoron por montri elektitan regionon</string>
     </resources>
