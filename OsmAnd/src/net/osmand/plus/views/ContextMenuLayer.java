@@ -211,12 +211,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
-		if (selectedObjectContextMenuProvider != null
-				&& selectedObjectContextMenuProvider instanceof ContextMenuLayer.IMoveObjectProvider) {
-			final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) selectedObjectContextMenuProvider;
-			if (l.isObjectMovable(o)) {
-				l.applyNewObjectPosition(o, position, callback);
+		if (selectedObjectContextMenuProvider != null) {
+			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
+				final IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
+				if (l.isObjectMovable(o)) {
+					l.applyNewObjectPosition(o, position, callback);
+				}
 			}
+		} else if (mInChangeMarkerPositionMode) {
+			callback.onApplyMovedObject(true, null);
 		}
 	}
 
@@ -235,7 +238,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mMoveMarkerBottomSheetHelper.enterApplyPositionMode();
 		applyMovedObject(obj, ll, new ApplyMovedObjectCallback() {
 			@Override
-			public void onApplyMovedObject(boolean success, Object newObject) {
+			public void onApplyMovedObject(boolean success, @Nullable Object newObject) {
 				mMoveMarkerBottomSheetHelper.exitApplyPositionMode();
 				if (success && !cancelApplyingNewMarkerPosition) {
 					mMoveMarkerBottomSheetHelper.hide();
@@ -540,7 +543,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public interface ApplyMovedObjectCallback {
 
-		void onApplyMovedObject(boolean success, Object newObject);
+		void onApplyMovedObject(boolean success, @Nullable Object newObject);
 
 		boolean isCancelled();
 	}
