@@ -150,15 +150,10 @@ public class RouteInfoWidgetsFactory {
 					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 					if (!deviatedFromRoute) {
 						if (r != null) {
-							// next turn is very close (show next next with false to speak)
-//							if (r.imminent >= 0 && r.imminent < 2) {
-//								r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, false);
-//							} else {
-								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-								if (r != null) {
-									r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
-								}
-//							}
+							r = routingHelper.getNextRouteDirectionInfo(calc1, true);
+							if (r != null) {
+								r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
+							}
 						}
 					}
 					if (r != null && r.distanceTo > 0&& r.directionInfo != null) {
