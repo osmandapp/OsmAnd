@@ -82,9 +82,6 @@ public class RoutingHelper {
 
 	private RouteCalculationProgressCallback progressRoute;
 
-	private boolean announceBackOnRoute = false;
-
-
 //	private ProgressBar progress;
 //	private Handler progressHandler;
 
@@ -322,7 +319,6 @@ public class RoutingHelper {
 					if(dist > 350) {
 						if (isFollowingMode) {
 							voiceRouter.announceOffRoute(dist);
-							announceBackOnRoute = true;
 						}
 					}
 				}
@@ -373,9 +369,8 @@ public class RoutingHelper {
 				if(!thread.isParamsChanged()) {
 					thread.stopCalculation();
 				}
-				if (announceBackOnRoute && isFollowingMode){
+				if (isFollowingMode){
 					voiceRouter.announceBackOnRoute();
-					announceBackOnRoute = false;
 				}
 			}
 		}

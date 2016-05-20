@@ -48,6 +48,7 @@ public class VoiceRouter {
 	private long waitAnnouncedSpeedLimit = 0;
 	private long waitAnnouncedOffRoute = 0;
 	private boolean suppressDest = false;
+	private boolean announceBackOnRoute = false;
 
 	// private long lastTimeRouteRecalcAnnounced = 0;
 	
@@ -220,6 +221,7 @@ public class VoiceRouter {
 			if (p != null) {
 				notifyOnVoiceMessage();
 				p.offRoute(dist).play();
+				announceBackOnRoute = true;
 			}
 			if(waitAnnouncedOffRoute == 0) {
 				waitAnnouncedOffRoute = 60000;	
@@ -232,9 +234,12 @@ public class VoiceRouter {
 
 	public void announceBackOnRoute() {
 		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
-			notifyOnVoiceMessage();
-			p.backOnRoute().play();
+		if (announceBackOnRoute == true) {
+			if (p != null) {
+				notifyOnVoiceMessage();
+				p.backOnRoute().play();
+			}
+			announceBackOnRoute = false;
 		}
 	}
 
@@ -426,6 +431,7 @@ public class VoiceRouter {
 			currentStatus = STATUS_UNKNOWN;
 			suppressDest = false;
 			playedAndArriveAtTarget = false;
+			announceBackOnRoute = false;
 			if (playGoAheadDist != -1) {
 				playGoAheadDist = 0;
 			}
