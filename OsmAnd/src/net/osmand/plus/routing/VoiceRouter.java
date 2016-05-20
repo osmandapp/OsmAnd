@@ -705,13 +705,13 @@ public class VoiceRouter {
 				String t2Param = getTurnType(nextNext.getTurnType());
 				if (t2Param != null) {
 					if(isplay) { play.then(); }
-					play.turn(t2Param, nextNextInfo.distanceTo, empty);
+					play.turn(t2Param, nextNext.distanceTo, empty);
 				} else if (nextNext.getTurnType().isRoundAbout()) {
 					if(isplay) { play.then(); }
-					play.roundAbout(nextNextInfo.distanceTo, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), empty);
+					play.roundAbout(nextNext.distanceTo, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), empty);
 				} else if (nextNext.getTurnType().getValue() == TurnType.TU) {
 					if(isplay) { play.then(); }
-					play.makeUT(nextNextInfo.distanceTo, empty);
+					play.makeUT(nextNext.distanceTo, empty);
 				}
 				isplay = true;
 			}
