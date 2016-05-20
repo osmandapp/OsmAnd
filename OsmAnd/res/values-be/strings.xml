@@ -196,7 +196,7 @@
     <string name="download_roads_only_maps">Мапа толькі дарог</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Схаваць межы</string>
-	<string name="rendering_attr_noAdminboundaries_description">Не адлюстроўваць рэгіянальныя межы (адміністатыўныя ўзроўні 5-9)</string>
+	<string name="rendering_attr_noAdminboundaries_description">Не адлюстроўваць рэгіянальныя межы (адміністатыўныя ўзроўні 5–9)</string>
     
     
 	
@@ -2212,4 +2212,5 @@
     <string name="map_widget_battery">Зарад батарэі</string>
     <string name="lat_lon_pattern">Шыр: %1$.6f Даў: %2$.6f</string>
     <string name="lang_hu_formal">Вугорская (афіцыйная)</string>
+    <string name="move_marker_bottom_sheet_title">Перасуньце мапу, каб зьмяніць становішча курсору</string>
     </resources>
