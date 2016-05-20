@@ -156,7 +156,7 @@ public class RouteInfoWidgetsFactory {
 							}
 						}
 					}
-					if (r != null && r.distanceTo > 0&& r.directionInfo != null) {
+					if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
 						turnType = r.directionInfo.getTurnType();
 						turnImminent = r.imminent;
 						nextTurnDistance = r.distanceTo;
