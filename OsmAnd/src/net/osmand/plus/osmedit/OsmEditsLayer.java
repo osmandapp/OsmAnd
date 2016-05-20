@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -27,7 +28,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private static final int startZoom = 10;
 	private final OsmEditingPlugin plugin;
 	private final MapActivity activity;
-	private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
+	private final OpenstreetmapLocalUtil mOsmChangeUtil;
+	private final OsmBugsLocalUtil mOsmBugsUtil;
 	private Bitmap poi;
 	private Bitmap bug;
 	private OsmandMapTileView view;
@@ -38,7 +40,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	public OsmEditsLayer(MapActivity activity, OsmEditingPlugin plugin) {
 		this.activity = activity;
 		this.plugin = plugin;
-		mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
+		mOsmChangeUtil = plugin.getPoiModificationLocalUtil();
+		mOsmBugsUtil = plugin.getOsmNotesLocalUtil();
 	}
 
 	@Override
@@ -112,7 +115,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		int compare = getRadiusPoi(tileBox);
 		int radius = compare * 3 / 2;
 		compare = getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBBug().getOsmbugsPoints());
-		compare = getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBPOI().getOpenstreetmapPoints());
+		getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBPOI().getOpenstreetmapPoints());
 	}
 
 	private int getFromPoint(RotatedTileBox tileBox, List<? super OsmPoint> am, int ex, int ey, int compare,
@@ -204,9 +207,13 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				Node node = objectInMotion.getEntity();
 				node.setLatitude(position.getLatitude());
 				node.setLongitude(position.getLongitude());
-				new SaveOsmChangeAsyncTask(mOpenstreetmapUtil, callback).execute(node);
+				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback).execute(node);
 			} else if (o instanceof OsmNotesPoint) {
 				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
+				objectInMotion.setLatitude(position.getLatitude());
+				objectInMotion.setLongitude(position.getLongitude());
+				new SaveOsmNoteAsyncTask(objectInMotion.getText(), activity, callback, plugin, mOsmBugsUtil)
+						.execute(objectInMotion);
 			}
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
@@ -235,6 +242,51 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		protected void onPostExecute(Node newNode) {
 			if (mCallback != null) {
 				mCallback.onApplyMovedObject(true, newNode);
+			}
+		}
+	}
+
+	private static class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, Boolean> {
+		private final String mText;
+		private final MapActivity mActivity;
+		@Nullable
+		private final ContextMenuLayer.ApplyMovedObjectCallback mCallback;
+		private final OsmEditingPlugin plugin;
+		private OsmBugsUtil mOsmbugsUtil;
+		private OsmNotesPoint mOsmNotesPoint;
+
+		public SaveOsmNoteAsyncTask(String text,
+									MapActivity activity,
+									@Nullable ContextMenuLayer.ApplyMovedObjectCallback callback,
+									OsmEditingPlugin plugin, OsmBugsUtil osmbugsUtil) {
+			mText = text;
+			mActivity = activity;
+			mCallback = callback;
+			this.plugin = plugin;
+			mOsmbugsUtil = osmbugsUtil;
+		}
+
+		@Override
+		protected Boolean doInBackground(OsmNotesPoint... params) {
+			mOsmNotesPoint = params[0];
+			OsmPoint.Action action = mOsmNotesPoint.getAction();
+			boolean isSuccess = plugin.getDBBug().deleteAllBugModifications(mOsmNotesPoint);
+			OsmBugsUtil.OsmBugResult result = mOsmbugsUtil.commit(mOsmNotesPoint, mText, action);
+			isSuccess &= isOperationSuccessfull(result);
+			return isSuccess;
+		}
+
+		private boolean isOperationSuccessfull(OsmBugsUtil.OsmBugResult result) {
+			return result != null && result.warning == null;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean isSuccess) {
+			if (isSuccess) {
+				Toast.makeText(mActivity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
+			}
+			if (mCallback != null) {
+				mCallback.onApplyMovedObject(isSuccess, mOsmNotesPoint);
 			}
 		}
 	}
