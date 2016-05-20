@@ -748,7 +748,7 @@
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
     <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
+    <string name="rendering_attr_showAccess_name">Show access restrictions and toll</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Show cycle routes</string>

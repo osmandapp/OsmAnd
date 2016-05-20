@@ -1325,7 +1325,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="rendering_attr_moreDetailed_name">Mehr Details</string>
 	<string name="rendering_attr_lessDetailed_name">Weniger Details in Karte</string>
 	<string name="rendering_attr_hideAccess_name">Zugangsbeschränkungen</string>
-	<string name="rendering_attr_showAccess_name">Zugangsbeschränkungen anzeigen</string>
+	<string name="rendering_attr_showAccess_name">Zugangsbeschränkungen und Maut anzeigen</string>
 	<string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
 	<string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
 	<string name="rendering_attr_showCycleRoutes_name">Fahrrad-Routen anzeigen</string>
