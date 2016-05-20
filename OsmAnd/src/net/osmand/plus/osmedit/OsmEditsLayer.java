@@ -5,12 +5,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -25,6 +27,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private static final int startZoom = 10;
 	private final OsmEditingPlugin plugin;
 	private final MapActivity activity;
+	private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
 	private Bitmap poi;
 	private Bitmap bug;
 	private OsmandMapTileView view;
@@ -35,6 +38,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	public OsmEditsLayer(MapActivity activity, OsmEditingPlugin plugin) {
 		this.activity = activity;
 		this.plugin = plugin;
+		mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
 	}
 
 	@Override
@@ -194,6 +198,44 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+		if (o instanceof OsmPoint) {
+			if (o instanceof OpenstreetmapPoint) {
+				OpenstreetmapPoint objectInMotion = (OpenstreetmapPoint) o;
+				Node node = objectInMotion.getEntity();
+				node.setLatitude(position.getLatitude());
+				node.setLongitude(position.getLongitude());
+				new SaveOsmChangeAsyncTask(mOpenstreetmapUtil, callback).execute(node);
+			} else if (o instanceof OsmNotesPoint) {
+				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
+			}
+		} else if (callback != null) {
+			callback.onApplyMovedObject(false, o);
+		}
+	}
 
+	static class SaveOsmChangeAsyncTask extends AsyncTask<Node, Void, Node> {
+		private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
+		@Nullable
+		private final ContextMenuLayer.ApplyMovedObjectCallback mCallback;
+
+		SaveOsmChangeAsyncTask(OpenstreetmapLocalUtil openstreetmapUtil,
+							   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+			this.mOpenstreetmapUtil = openstreetmapUtil;
+			this.mCallback = callback;
+		}
+
+		@Override
+		protected Node doInBackground(Node... params) {
+			Node node = params[0];
+			return mOpenstreetmapUtil.commitNodeImpl(OsmPoint.Action.MODIFY, node,
+					mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false);
+		}
+
+		@Override
+		protected void onPostExecute(Node newNode) {
+			if (mCallback != null) {
+				mCallback.onApplyMovedObject(true, newNode);
+			}
+		}
 	}
 }
