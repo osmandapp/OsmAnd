@@ -455,7 +455,7 @@ public class VoiceRouter {
 
 		if ((repeat || statusNotPassed(STATUS_TURN)) && isDistanceLess(speed, dist, TURN_DISTANCE, TURN_DEFAULT_SPEED)) {
 			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE_END && nextNextInfo != null) {
-				playMakeTurn(currentSegment, next, nextNextInfo.directionInfo);
+				playMakeTurn(currentSegment, next, nextNextInfo);
 			} else {
 				playMakeTurn(currentSegment, next, null);
 			}
@@ -683,7 +683,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private void playMakeTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, RouteDirectionInfo nextNext) {
+	private void playMakeTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, NextDirectionInfo nextNextInfo) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			String tParam = getTurnType(next.getTurnType());
@@ -701,17 +701,17 @@ public class VoiceRouter {
 				isplay = false;
 			}
 			// add turn after next
-			if (nextNext != null) {
-				String t2Param = getTurnType(nextNext.getTurnType());
+			if (nextNextInfo != null) {
+				String t2Param = getTurnType(nextNextInfo.directionInfo.getTurnType());
 				if (t2Param != null) {
 					if(isplay) { play.then(); }
-					play.turn(t2Param, nextNext.distanceTo, empty);
-				} else if (nextNext.getTurnType().isRoundAbout()) {
+					play.turn(t2Param, nextNextInfo.distanceTo, empty);
+				} else if (nextNextInfo.directionInfo.getTurnType().isRoundAbout()) {
 					if(isplay) { play.then(); }
-					play.roundAbout(nextNext.distanceTo, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), empty);
-				} else if (nextNext.getTurnType().getValue() == TurnType.TU) {
+					play.roundAbout(nextNextInfo.distanceTo, nextNextInfo.directionInfo.getTurnType().getTurnAngle(), nextNextInfo.directionInfo.getTurnType().getExitOut(), empty);
+				} else if (nextNextInfo.directionInfo.getTurnType().getValue() == TurnType.TU) {
 					if(isplay) { play.then(); }
-					play.makeUT(nextNext.distanceTo, empty);
+					play.makeUT(nextNextInfo.distanceTo, empty);
 				}
 				isplay = true;
 			}
