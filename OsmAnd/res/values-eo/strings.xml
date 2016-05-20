@@ -1185,7 +1185,7 @@
     <string name="osmand_parking_minutes">Minutoj</string>
     <string name="osmand_parking_position_description_add_time">La aŭto estis parkumita je</string>
     <string name="select_animate_speedup">Elekti rapidecon de kurso-simulado</string>
-    <string name="global_app_allocated_memory_descr">Memorasigno: %1$s MB (Limito de Android %2$s MB, Dalvik %3$s MB)</string>
+    <string name="global_app_allocated_memory_descr">Memorasigno: %1$s MB (Limito de Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memorasigno</string>
 	<string name="native_app_allocated_memory">Tuta indiĝena memoro</string>
     <string name="starting_point_too_far">Komencpunkto estas tro malproksime de la plej proksima vojo.</string>
@@ -1286,7 +1286,7 @@
     <string name="backToMenu">Reveni al menuo</string>
     <string name="zoomOut">Malgrandigi</string>
     <string name="zoomIn">Pligrandigi</string>
-    <string name="zoomIs">Skal-nivelo estas:</string>
+    <string name="zoomIs">Skal-nivelo estas</string>
     <string name="north">nordo</string>
     <string name="north_north_east">nordo-nordo-oriento</string>
     <string name="north_east">nordoriento</string>
@@ -1324,7 +1324,7 @@
     <string name="auto_announce_on">Aktivigi aŭtomatan anoncadon</string>
     <string name="auto_announce_off">Ĉesigi aŭtomatan anoncadon</string>
     <string name="zoom_by_trackball">Skali mapon per stirglobo</string>
-    <string name="zoom_by_trackball_descr">Ŝanĝas map-skalon per horizontala movo de stirglobo (trackball)</string>
+    <string name="zoom_by_trackball_descr">Ŝanĝas map-skalon per horizontala movo de stirglobo (ang. trackball)</string>
     <string name="accessibility_preferences_descr">Alireblecaj agordoj</string>
     <string name="arrival_distance_factor_early">Frue</string>
     <string name="arrival_distance_factor_normally">Norme</string>
@@ -1345,5 +1345,9 @@
     <string name="local_openstreetmap_delete">Forigi modifaĵojn</string>
     <string name="local_openstreetmap_descr_title">Neunutempa (nesinkrona) redakto de OSM:</string>
     <string name="local_openstreetmap_settings">Lokaj konservitaj OSM-aj Iteresejoj/notoj</string>
-    <string name="local_openstreetmap_settings_descr">Montras kaj administras OSM-ajn Interesejojn/notojn konservitajn en loka datumbazo</string>
+    <string name="local_openstreetmap_settings_descr">Vidi kaj administri OSM-ajn Interesejojn/notojn konservitajn en loka datumbazo</string>
+    <string name="live_monitoring_interval">Intervalo de enreta kurs-registrado</string>
+    <string name="live_monitoring_interval_descr">Difinas intervalon de enreta kurs-registrado</string>
+    <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
+    <string name="live_monitoring_url_descr">Difinas la retadreson uzante jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluumo de precizo)={3}, altitudo={4}, rapido={5}, birado={6}</string>
     </resources>
