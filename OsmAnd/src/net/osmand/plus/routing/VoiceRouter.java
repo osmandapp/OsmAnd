@@ -452,13 +452,14 @@ public class VoiceRouter {
 		}
 
 		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), !repeat);
+
 		if ((repeat || statusNotPassed(STATUS_TURN)) && isDistanceLess(speed, dist, TURN_DISTANCE, TURN_DEFAULT_SPEED)) {
-			if (next.distance < TURN_IN_DISTANCE_END && nextNextInfo != null) {
+			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE_END && nextNextInfo != null) {
 				playMakeTurn(currentSegment, next, nextNextInfo.directionInfo);
 			} else {
 				playMakeTurn(currentSegment, next, null);
 			}
-			if(next.distance < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
+			if(nextNextInfo.distanceTo < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
 				if(!next.getTurnType().goAhead()) {  // avoids isolated "and arrive.." prompt
 					andSpeakArriveAtPoint(nextNextInfo);
 				}
@@ -466,7 +467,7 @@ public class VoiceRouter {
 			nextStatusAfter(STATUS_TURN);
 		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE, 0f)) {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
-				if ((isDistanceLess(speed, next.distance, TURN_DISTANCE, 0f) || next.distance < TURN_IN_DISTANCE_END) &&
+				if ((isDistanceLess(speed, nextNextInfo.distanceTo, TURN_DISTANCE, 0f) || nextNextInfo.distanceTo < TURN_IN_DISTANCE_END) &&
 						nextNextInfo != null) {
 					playMakeTurnIn(currentSegment, next, dist, nextNextInfo.directionInfo);
 				} else {
@@ -704,13 +705,13 @@ public class VoiceRouter {
 				String t2Param = getTurnType(nextNext.getTurnType());
 				if (t2Param != null) {
 					if(isplay) { play.then(); }
-					play.turn(t2Param, next.distance, empty);
+					play.turn(t2Param, nextNextInfo.distanceTo, empty);
 				} else if (nextNext.getTurnType().isRoundAbout()) {
 					if(isplay) { play.then(); }
-					play.roundAbout(next.distance, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), empty);
+					play.roundAbout(nextNextInfo.distanceTo, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), empty);
 				} else if (nextNext.getTurnType().getValue() == TurnType.TU) {
 					if(isplay) { play.then(); }
-					play.makeUT(next.distance, empty);
+					play.makeUT(nextNextInfo.distanceTo, empty);
 				}
 				isplay = true;
 			}
