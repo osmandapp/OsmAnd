@@ -103,7 +103,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		for (String s : execute) {
 			bld.append(s).append(' ');
 		}
-		sendAlertToPebble(bld.toString());
 		if (mTts != null && !vrt.isMute()) {
 			if (ttsRequests++ == 0)
 				requestAudioFocus();
@@ -114,6 +113,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		} else {
 			sendAlertToAndroidWear(ctx, bld.toString());
 		}
+		sendAlertToPebble(bld.toString());
 	}
 
 	@Override
