@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
+    <string name="use_osm_live_routing">Навигация OSM Live</string>
+    <string name="map_widget_battery">Заряд батареи</string>
+    <string name="move_marker_bottom_sheet_title">Переместите карту чтобы изменить положение курсора</string>
+    <string name="lat_lon_pattern">Широта: %1$.6f Долгота: %2$.6f</string>
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
     <string name="map_mode">Режим карты</string>
