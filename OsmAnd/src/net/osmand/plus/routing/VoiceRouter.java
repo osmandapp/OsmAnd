@@ -708,7 +708,7 @@ public class VoiceRouter {
 				isplay = false;
 			}
 			// add turn after next
-			if (nextNextInfo != null) {
+			if ((nextNextInfo != null) && (nextNextInfo.directionInfo != null)) {
 				String t2Param = getTurnType(nextNextInfo.directionInfo.getTurnType());
 				if (t2Param != null) {
 					if(isplay) { play.then(); }
