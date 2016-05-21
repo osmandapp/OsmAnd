@@ -609,8 +609,8 @@ public class BinaryInspector {
 	private void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
 		String[] cityType_String = new String[]{
 				"Cities/Towns section",
-				"Villages section",
 				"Postcodes section",
+				"Villages section",
 		};
 		for (int j = 0; j < BinaryMapAddressReaderAdapter.CITY_TYPES.length; j++) {
 			int type = BinaryMapAddressReaderAdapter.CITY_TYPES[j];
