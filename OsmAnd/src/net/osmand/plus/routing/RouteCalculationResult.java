@@ -817,7 +817,7 @@ public class RouteCalculationResult {
 //							(!Algorithms.objectEquals(p.getRef(), i.getRef()) &&
 //									!Algorithms.objectEquals(p.getStreetName(), i.getStreetName()))) {
 // Just a temporary test
-					if(p == null || !i.getTurnType().isSkipToSpeak()) {
+					if(!i.getTurnType().isSkipToSpeak()) {
 						p = new RouteDirectionInfo(i.getAverageSpeed(), i.getTurnType());
 						p.routePointOffset = i.routePointOffset;
 						p.routeEndPointOffset = i.routeEndPointOffset;
