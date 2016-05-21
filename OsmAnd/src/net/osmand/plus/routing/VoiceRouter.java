@@ -451,7 +451,7 @@ public class VoiceRouter {
 		}
 
 		if (currentStatus == STATUS_UNKNOWN) {
-			// Tell goAhead distance after (1) route calculation if no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
+			// Play "Continue for ..." if (1) after route calculation no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 			if ((playGoAheadDist == -1) || (dist > PREPARE_LONG_DISTANCE)) {
 				playGoAheadDist = dist - 80;
 			}
@@ -460,6 +460,7 @@ public class VoiceRouter {
 		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), true);  //I think "true" is correct here, not "!repeat"
 		//Note: getNextRouteDirectionInfoAfter(nextInfo, x, y).distanceTo is distance from nextInfo, not from current position!
 
+		// STATUS_TURN = "Turn (now)"
 		if ((repeat || statusNotPassed(STATUS_TURN)) && isDistanceLess(speed, dist, TURN_DISTANCE, TURN_DEFAULT_SPEED)) {
 			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE_END && nextNextInfo != null) {
 				playMakeTurn(currentSegment, next, nextNextInfo);
@@ -472,6 +473,8 @@ public class VoiceRouter {
 				}
 			}
 			nextStatusAfter(STATUS_TURN);
+
+		// STATUS_TURN_IN = "Turn in ..."
 		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE, 0f)) {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
 				if ((isDistanceLess(speed, nextNextInfo.distanceTo, TURN_DISTANCE, 0f) || nextNextInfo.distanceTo < TURN_IN_DISTANCE_END) &&
@@ -483,6 +486,8 @@ public class VoiceRouter {
 				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_TURN_IN);
+
+		// STATUS_PREPARE = "Turn after ..."
 		} else if ((repeat || statusNotPassed(STATUS_PREPARE)) && (dist <= PREPARE_DISTANCE)) {
 			if (repeat || dist >= PREPARE_DISTANCE_END) {
 				if (!repeat && (next.getTurnType().keepLeft() || next.getTurnType().keepRight())){
@@ -493,12 +498,16 @@ public class VoiceRouter {
 				}
 			}
 			nextStatusAfter(STATUS_PREPARE);
+
+		// STATUS_LONG_PREPARE =  also "Turn after ...", we skip this now, users said this is obsolete
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
 				playPrepareTurn(currentSegment, next, dist);
 				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_LONG_PREPARE);
+
+		// STATUS_UNKNOWN = "Continue for ..." if (1) after route calculation no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 		} else if (statusNotPassed(STATUS_UNKNOWN)) {
 			// strange how we get here but
 			nextStatusAfter(STATUS_UNKNOWN);
@@ -652,19 +661,18 @@ public class VoiceRouter {
 			} else {
 				isPlay = false;
 			}
-			// small preparation to next after next
+			// 'then keep' preparation for next after next. (Also announces an interim straight segment, which is not pronounced above.)
 			if (pronounceNextNext != null) {
 				TurnType t = pronounceNextNext.getTurnType();
 				isPlay = true;
-				if (next.getTurnType().getValue() == TurnType.C && 
-						TurnType.C != t.getValue()) {
-					play.goAhead(dist, getSpeakableStreetName(currentSegment, next, false));
+				if (t.getValue() != TurnType.C && next.getTurnType().getValue() == TurnType.C) {
+					play.goAhead(dist, getSpeakableStreetName(currentSegment, next, true));
 				}
-				if (TurnType.TL == t.getValue() || TurnType.TSHL == t.getValue() || TurnType.TSLL == t.getValue()
-						|| TurnType.TU == t.getValue() || TurnType.KL == t.getValue()) {
+				if (t.getValue() == TurnType.TL || t.getValue() == TurnType.TSHL || t.getValue() == TurnType.TSLL
+						|| t.getValue() == TurnType.TU || t.getValue() == TurnType.KL ) {
 					play.then().bearLeft( getSpeakableStreetName(currentSegment, next, false));
-				} else if (TurnType.TR == t.getValue() || TurnType.TSHR == t.getValue() || TurnType.TSLR == t.getValue()
-						|| TurnType.KR == t.getValue()) {
+				} else if (t.getValue() == TurnType.TR || t.getValue() == TurnType.TSHR || t.getValue() == TurnType.TSLR
+						|| t.getValue() == TurnType.TRU || t.getValue() == TurnType.KR) {
 					play.then().bearRight( getSpeakableStreetName(currentSegment, next, false));
 				}
 			}
