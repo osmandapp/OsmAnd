@@ -701,9 +701,9 @@ public class VoiceRouter {
 				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, !suppressDest));
 			} else if(next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU){
 				play.makeUT(getSpeakableStreetName(currentSegment, next, !suppressDest));
-				// do not say it
-//				} else if(next.getTurnType().getValue() == TurnType.C)){
-//					play.goAhead();
+			// do not announce goAHeads
+			//} else if(next.getTurnType().getValue() == TurnType.C)){
+			//	play.goAhead();
 			} else {
 				isplay = false;
 			}
