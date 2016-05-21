@@ -813,11 +813,9 @@ public class RouteCalculationResult {
 				cacheAgreggatedDirections = new ArrayList<RouteDirectionInfo>();
 				RouteDirectionInfo p = null;
 				for(RouteDirectionInfo i : list) {
-//					if(p == null || !i.getTurnType().isSkipToSpeak() ||
-//							(!Algorithms.objectEquals(p.getRef(), i.getRef()) &&
-//									!Algorithms.objectEquals(p.getStreetName(), i.getStreetName()))) {
-// Just a temporary test
-					if(!i.getTurnType().isSkipToSpeak()) {
+					if(p == null || !i.getTurnType().isSkipToSpeak() ||
+							(!Algorithms.objectEquals(p.getRef(), i.getRef()) &&
+									!Algorithms.objectEquals(p.getStreetName(), i.getStreetName()))) {
 						p = new RouteDirectionInfo(i.getAverageSpeed(), i.getTurnType());
 						p.routePointOffset = i.routePointOffset;
 						p.routeEndPointOffset = i.routeEndPointOffset;
