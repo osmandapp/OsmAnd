@@ -2183,15 +2183,19 @@
     <string name="rendering_value_medium_name">Średni</string>
     <string name="rendering_value_bold_name">Gruby</string>
     <string name="access_no_destination">Nie ustalono celu trasy</string>
-    <string name="access_disable_offroute_recalc">Nie zmienianie trasy po zboczeniu z niej</string>
+    <string name="access_disable_offroute_recalc">Utrzymywanie trasy po zboczeniu z niej</string>
     <string name="access_disable_offroute_recalc_descr">Zapobiega zmianie wyznaczonej trasy po znacznym oddaleniu się od niej</string>
     <string name="map_widget_magnetic_bearing">Orientacja magnetyczna</string>
     <string name="map_widget_bearing">Orientacja względna</string>
     <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
     <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
 	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega zmianie wyznaczonej trasy podczas poruszania się w niewłaściwym kierunku</string>
-    <string name="map_widget_battery">Poziom baterii</string>
+    <string name="map_widget_battery">Poziom akumulatora</string>
     <string name="access_direction_audio_feedback_descr">Powiadamia dźwiękiem o kierunku do punktu docelowego</string>
     <string name="access_direction_audio_feedback">Komunikaty dźwiękowe o kierunku</string>
     <string name="lat_lon_pattern">Długość: %1$.6f Szerokość: %2$.6f</string>
+    <string name="access_smart_autoannounce_descr">Informuje tylko jeśli zmieni się kierunek do punktu docelowego</string>
+    <string name="access_smart_autoannounce">Inteligentne powiadamianie</string>
+    <string name="access_autoannounce_period_descr">Określa minimalny odstęp czasu pomiędzy powiadomieniami</string>
+    <string name="access_autoannounce_period">Okres powiadomień</string>
     </resources>
