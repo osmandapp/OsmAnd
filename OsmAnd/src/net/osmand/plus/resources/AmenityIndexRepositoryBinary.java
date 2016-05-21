@@ -71,8 +71,8 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 				if(mi.size() > 0) {
 					nm = mi.get(0).getName();
 				}
-				log.debug(String.format("Search for %s done in %s ms found %s (%s).",  //$NON-NLS-1$
-						query, System.currentTimeMillis() - now, amenities.size(), nm)); //$NON-NLS-1$
+				log.debug(String.format("Search for %s done in %s ms found %s (%s) %s.",  //$NON-NLS-1$
+						query, System.currentTimeMillis() - now, amenities.size(), nm, index.getFile().getName())); //$NON-NLS-1$
 			}
 		} catch (IOException e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$

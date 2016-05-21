@@ -69,9 +69,9 @@ public class BinaryInspector {
 //					"-vpoi",
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 //					"-vrouting",
-					"-vaddress", "-vcities","-vstreetgroups",
-					"-vstreets", "-vbuildings", "-vintersections",
-					"/Users/victorshcherb/osmand/maps/Ukraine_europe_2.road.obf"
+//					"-vaddress", "-vcities","-vstreetgroups",
+//					"-vstreets", "-vbuildings", "-vintersections",
+					"/Users/victorshcherb/osmand/maps/Netherlands_europe.road.obf"
 			});
 		} else {
 			in.inspector(args);

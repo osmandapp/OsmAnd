@@ -1966,9 +1966,9 @@ public class BinaryMapIndexReader {
 
 
 	private static boolean testMapSearch = false;
-	private static boolean testAddressSearch = true;
+	private static boolean testAddressSearch = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = false;
+	private static boolean testPoiSearch = true;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
 	private static int sleft = MapUtils.get31TileNumberX(6.3);
@@ -1983,7 +1983,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 //		File fl = new File("/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf");
-		File fl = new File("/Users/victorshcherb/osmand/maps/Argentina_southamerica_2.obf");
+		File fl = new File("/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2130,7 +2130,7 @@ public class BinaryMapIndexReader {
 
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "aBS",
+		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "Belar",
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {
