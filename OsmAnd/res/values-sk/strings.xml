@@ -1360,7 +1360,7 @@
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_category_transport">Doprava</string>
     <string name="rendering_category_others">Iné vlastnosti mapy</string>
-    <string name="map_widget_appearance_rem">Zvyšné elementy</string>
+    <string name="map_widget_appearance_rem">Ostatné prvky</string>
     <string name="map_widget_top">Stavový riadok</string>
     <string name="map_widget_right">Pravý panel</string>
     <string name="map_widget_left">Ľavý panel</string>
