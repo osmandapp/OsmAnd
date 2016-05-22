@@ -150,10 +150,7 @@ public class RouteInfoWidgetsFactory {
 					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 					if (!deviatedFromRoute) {
 						if (r != null) {
-							r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-							if (r != null) {
-								r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
-							}
+							r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
 						}
 					}
 					if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
