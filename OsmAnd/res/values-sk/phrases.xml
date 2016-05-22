@@ -1539,25 +1539,25 @@
 	<string name="poi_internet_access_fee_yes">Prístup na internet - požadovaný poplatok</string>
 	<string name="poi_internet_access_fee_no">Prístup na internet - bez poplatku</string>
 
-	<string name="poi_diet_vegetarian_only">Len vegetariánska diéta</string>
-	<string name="poi_diet_vegetarian_yes">Vegetariánska diéta</string>
-	<string name="poi_diet_vegetarian_no">Vegetariánska diéta: nie</string>
-	<string name="poi_diet_vegetarian_few">Vegetariánska diéta: niektoré</string>
-	<string name="poi_diet_vegan_only">Len vegánska diéta</string>
-	<string name="poi_diet_vegan_yes">Vegánska diéta</string>
-	<string name="poi_diet_vegan_no">Vegánska diéta: nie</string>
-	<string name="poi_diet_gluten_free_only">Len bezgluténová diéta</string>
-	<string name="poi_diet_gluten_free_yes">Bezgluténová diéta</string>
-	<string name="poi_diet_gluten_free_no">Bezgluténová diéta: nie</string>
-	<string name="poi_diet_kosher_only">Len kóšer diéta</string>
-	<string name="poi_diet_kosher_yes">Kóšer diéta</string>
-	<string name="poi_diet_kosher_no">Kóšer diéta: nie</string>
-	<string name="poi_diet_halal_only">Len halal diéta</string>
-	<string name="poi_diet_halal_yes">Halal diéta</string>
-	<string name="poi_diet_halal_no">Halal diéta: nie</string>
-	<string name="poi_diet_lactose_free_only">Len bezlaktózová diéta</string>
-	<string name="poi_diet_lactose_free_yes">Bezlaktózová diéta</string>
-	<string name="poi_diet_lactose_free_no">Bezlaktózová diéta: nie</string>
+	<string name="poi_diet_vegetarian_only">Len vegetariánske jedlá</string>
+	<string name="poi_diet_vegetarian_yes">Vegetariánske jedlá</string>
+	<string name="poi_diet_vegetarian_no">Vegetariánske jedlá: nie</string>
+	<string name="poi_diet_vegetarian_few">Vegetariánske jedlá: niektoré</string>
+	<string name="poi_diet_vegan_only">Len vegánske jedlá</string>
+	<string name="poi_diet_vegan_yes">Vegánske jedlá</string>
+	<string name="poi_diet_vegan_no">Vegánske jedlá: nie</string>
+	<string name="poi_diet_gluten_free_only">Len bezgluténové jedlá</string>
+	<string name="poi_diet_gluten_free_yes">Bezgluténové jedlá</string>
+	<string name="poi_diet_gluten_free_no">Bezgluténové jedlá: nie</string>
+	<string name="poi_diet_kosher_only">Len kóšer jedlá</string>
+	<string name="poi_diet_kosher_yes">Kóšer jedlá</string>
+	<string name="poi_diet_kosher_no">Kóšer jedlá: nie</string>
+	<string name="poi_diet_halal_only">Len halal jedlá</string>
+	<string name="poi_diet_halal_yes">Halal jedlá</string>
+	<string name="poi_diet_halal_no">Halal jedlá: nie</string>
+	<string name="poi_diet_lactose_free_only">Len bezlaktózové jedlá</string>
+	<string name="poi_diet_lactose_free_yes">Bezlaktózové jedlá</string>
+	<string name="poi_diet_lactose_free_no">Bezlaktózové jedlá: nie</string>
 	<string name="poi_drive_in_yes">Vjazd autom: áno</string>
 	<string name="poi_drive_in_no">Vjazd autom: nie</string>
 	<string name="poi_drive_through_yes">Prejazd autom: áno</string>
@@ -1715,4 +1715,6 @@
 	<string name="poi_building_type_pyramid">Typ budovy: pyramída</string>
 
 	<string name="poi_square">Námestie</string>
-	</resources>
+	<string name="poi_depth">Hĺbka</string>
+
+</resources>
