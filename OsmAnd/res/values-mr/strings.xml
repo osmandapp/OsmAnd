@@ -524,4 +524,5 @@
     <string name="contact_info">संपर्क माहिती</string>
     <string name="opening_at">उघडण्याची वेळ</string>
     <string name="closing_at">बंद होण्याची वेळ</string>
+    <string name="error_calculating_route">मार्ग निवडण्यात अडथळा</string>
     </resources>
