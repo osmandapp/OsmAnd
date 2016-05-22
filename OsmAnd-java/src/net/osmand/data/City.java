@@ -1,13 +1,7 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import net.osmand.OsmAndCollator;
-import net.osmand.util.Algorithms;
 
 public class City extends MapObject {
 	public enum CityType {
