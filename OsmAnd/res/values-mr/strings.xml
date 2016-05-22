@@ -509,4 +509,19 @@
     <string name="welmode_download_maps">नकाशे डाउनलोड करा</string>
 	<string name="current_route">सद्ध्याचा मार्ग</string>
     <string name="shared_string_do_not_use">वापरू नका</string>
-	</resources>
+	<string name="lat_lon_pattern">अक्शांश: %1$.6f रेखांश: %2$.6f</string>
+    <string name="access_default_color">मुळ रंग</string>
+    <string name="night">रात्र</string>
+    <string name="select_month_and_country">महिना आणि देश निवडा</string>
+    <string name="morning">सकाळ</string>
+    <string name="other_menu_group">इतर</string>
+    <string name="later">नंतर</string>
+    <string name="buy">विकत घ्या</string>
+    <string name="downloading_number_of_files">%1$d फाइल डाउनलोड करत आहे</string>
+    <string name="roads">रस्ते</string>
+    <string name="downloads_left_template">%1$s डाउनलोड शिल्लक</string>
+    <string name="working_days">कामाचे दिवस</string>
+    <string name="contact_info">संपर्क माहिती</string>
+    <string name="opening_at">उघडण्याची वेळ</string>
+    <string name="closing_at">बंद होण्याची वेळ</string>
+    </resources>
