@@ -2020,5 +2020,7 @@
     <string name="access_direction_haptic_feedback_descr">Indikovat směr k cílovému bodu vibrováním</string>
     <string name="use_osm_live_routing">OSM Live navigace</string>
     <string name="map_widget_battery">Stav baterie</string>
-    <string name="lat_lon_pattern"></string>
-    </resources>
+    <string name="lat_lon_pattern">Šíř: %1$.6f Dél: %2$.6f</string>
+    <string name="access_direction_audio_feedback">Zvuková zpětná vazba směru</string>
+    <string name="use_osm_live_routing_description">Povolit navigaci pro OSM Live změny (beta)</string>
+	</resources>
