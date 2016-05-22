@@ -1459,7 +1459,7 @@
     <string name="rendering_attr_moreDetailed_name">Več podrobnosti</string>
     <string name="rendering_attr_lessDetailed_name">Manj podrobnosti</string>
     <string name="rendering_attr_hideAccess_name">Mesta z omejenim dostopom</string>
-    <string name="rendering_attr_showAccess_name">Prikaži omejitve dostopa</string>
+    <string name="rendering_attr_showAccess_name">Prikaži omejitve dostopa in cestnine</string>
     <string name="rendering_attr_showSurfaceGrade_name">Pokaži kakovost cest</string>
     <string name="rendering_attr_showSurfaces_name">Pokaži površino cest</string>
     <string name="rendering_attr_showCycleRoutes_name">Kolesarske poti</string>
@@ -2203,4 +2203,5 @@
     <string name="move_marker_bottom_sheet_title">Premakni zemljevid za spremembo položaja oznake</string>
     <string name="lat_lon_pattern">ZŠir: %1$.6f ZDol: %2$.6f</string>
     <string name="map_widget_battery">Stanje baterije</string>
+    <string name="lang_hu_formal">Madžarščina (uradna)</string>
     </resources>
