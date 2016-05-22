@@ -114,6 +114,10 @@ public class CommandBuilder {
 	}
 	
 	
+	public CommandBuilder goAhead(){
+		return addCommand(C_GO_AHEAD);
+	}
+
 	public CommandBuilder goAhead(double dist, Term streetName){
 		return alt(prepareStruct(C_GO_AHEAD, dist, streetName), prepareStruct(C_GO_AHEAD, dist));
 	}
