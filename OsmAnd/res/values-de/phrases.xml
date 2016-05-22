@@ -2692,7 +2692,7 @@
 	<string name="poi_health_service_prevention_no">Gesundheitswesen: Prävention: Nein</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Gesundheitswesen: Impfung: Ja</string>
 	<string name="poi_health_service_prevention_vaccination_no">Gesundheitswesen: Impfung: Nein</string>
-	<string name="poi_health_facility_type_office">Gesundheit-Einrichtungstyp: Büro</string>
+	<string name="poi_health_facility_type_office">Gesundheitseinrichtung: Büro</string>
 	<string name="poi_health_facility_type_hospital">Gesundheit-Einrichtungstyp: Krankenhaus</string>
 	<string name="poi_health_facility_type_field_hospital">Gesundheit-Einrichtungstyp: Feldlazarett</string>
 	<string name="poi_health_facility_type_clinic">Gesundheit-Einrichtungstyp: Klinik</string>
@@ -2729,4 +2729,134 @@
 	<string name="poi_health_person_type_assistant">Rolle des Gesundheitspersonals: Assistent</string>
 	<string name="poi_depth">Tiefe</string>
 
-</resources>
+<string name="poi_health_service_examination_yes">Gesundheitswesen: Prüfung: Ja</string>
+	<string name="poi_health_service_examination_no">Gesundheitswesen: Prüfung: Nein</string>
+	<string name="poi_health_service_child_care_yes">Gesundheitswesen: Kinderbetreuung: Ja</string>
+	<string name="poi_health_service_child_care_no">Gesundheitswesen: Kinderbetreuung: Nein</string>
+	<string name="poi_health_service_test_yes">Gesundheitswesen: Test: Ja</string>
+	<string name="poi_health_service_test_no">Gesundheitswesen: Test: Nein</string>
+
+	<string name="poi_health_specialty_palliative_medicine_yes">Spezialmedizin: Palliativmedizin</string>
+
+	<string name="poi_fire_hydrant_type_dry_barrel">Typ: Trockenfass</string>
+	<string name="poi_health_person_type_healer">Rolle des Gesundheitspersonal: Therapeut</string>
+	<string name="poi_health_person_type_midwife">Rolle des Gesundheitspersonal: Hebamme</string>
+	<string name="poi_health_person_type_nurse">Rolle des Gesundheitspersonal: Krankenschwester</string>
+	<string name="poi_health_person_type_paramedic">Rolle des Gesundheitspersonal: Sanitäter</string>
+	<string name="poi_health_person_type_physician">Rolle des Gesundheitspersonal: Arzt</string>
+	<string name="poi_health_person_type_podologist">Rolle des Gesundheitspersonal: Podologin</string>
+	<string name="poi_health_person_type_psychologist">Rolle des Gesundheitspersonal: Psychologe</string>
+	<string name="poi_health_person_type_therapist">Rolle des Gesundheitspersonal: Therapeut</string>
+	<string name="poi_health_person_type_physician_assitant">Rolle des Gesundheitspersonal: Assistentsarzt</string>
+	<string name="poi_health_person_type_technician">Rolle des Gesundheitspersonal: Techniker</string>
+	<string name="poi_health_person_type_witchdoctor">Rolle des Gesundheitspersonal: Medizinmann</string>
+
+	<string name="poi_counselling_type_addiction_yes">"Beratung (Sucht):  Ja"</string>
+	<string name="poi_counselling_type_addiction_no">Beratung (Sucht): Nein</string>
+	<string name="poi_counselling_type_antenatal_yes">Beratung (vorgeburtliche): Ja</string>
+	<string name="poi_counselling_type_antenatal_no">Beratung (vorgeburtliche): Nein</string>
+	<string name="poi_counselling_type_child_guidance_yes">Beratung (Erziehungsberatung ): Ja</string>
+	<string name="poi_counselling_type_child_guidance_no">Beratung (Erziehungsberatung ): Nein</string>
+	<string name="poi_counselling_type_couple_yes">Beratung (Paar): Ja</string>
+	<string name="poi_counselling_type_couple_no">Beratung (Paar): Nein</string>
+	<string name="poi_counselling_type_crisis_yes">Beratung (Krise): Ja</string>
+	<string name="poi_counselling_type_crisis_no">Beratung (Krise): Nein</string>
+	<string name="poi_counselling_type_drugs_yes">Beratung (Drogen): Ja</string>
+	<string name="poi_counselling_type_drugs_no">Beratung (Drogen): Nein</string>
+	<string name="poi_counselling_type_education_yes">Beratung (Bildung): Ja</string>
+	<string name="poi_counselling_type_education_no">Beratung (Bildung): Nein</string>
+	<string name="poi_counselling_type_family_yes">Beratung (Familie): Ja</string>
+	<string name="poi_counselling_type_family_no">Beratung (Familie): Nein</string>
+	<string name="poi_counselling_type_homeless_yes">Beratung (Obdachlosigkeit): Ja</string>
+	<string name="poi_counselling_type_homeless_no">Beratung (Obdachlosigkeit): Nein</string>
+	<string name="poi_counselling_type_immigrant_yes">Beratung (Einwanderer): Ja</string>
+	<string name="poi_counselling_type_immigrant_no">Beratung (Einwanderer): Nein</string>
+	<string name="poi_counselling_type_marriage_yes">Beratung (Ehe): Ja</string>
+	<string name="poi_counselling_type_marriage_no">Beratung (Ehe): Nein</string>
+	<string name="poi_counselling_type_nutrition_yes">Beratung (Ernährung): Ja</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Beratung (Ernährung): Nein</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Beratung (Rehabilitation): Ja</string>
+	<string name="poi_counselling_type_rehabilitation_no">Beratung (Rehabilitation): Nein</string>
+	<string name="poi_counselling_type_sexual_yes">Beratung (Sexualität): Ja</string>
+	<string name="poi_counselling_type_sexual_no">Beratung (Sexualität): Nein</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Beratung (sexueller Missbrauch): Ja</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Beratung (sexueller Missbrauch): Nein</string>
+	<string name="poi_counselling_type_victim_yes">Beratung (Opfer): Ja</string>
+	<string name="poi_counselling_type_victim_no">Beratung (Opfer): Nein</string>
+	<string name="poi_counselling_type_violence_yes">Beratung (Gewalt): Ja</string>
+	<string name="poi_counselling_type_violence_no">Beratung (Gewalt): Nein</string>
+
+	<string name="poi_provided_for_infant_yes">Für Säuglinge zur Verfügung gestellt: Ja</string>
+	<string name="poi_provided_for_infant_no">Für Säuglinge zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_toddler_yes">Für Kleinkinder zur Verfügung gestellt: Ja</string>
+	<string name="poi_provided_for_toddler_no">Für Kleinkinder zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_child_yes">Für Kinder vorhanden: Ja</string>
+	<string name="poi_provided_for_child_no">Für Kinder vorhanden: Nein</string>
+	<string name="poi_provided_for_adult_yes">Für Erwachsene zur Verfügung gestellt: Ja</string>
+	<string name="poi_provided_for_adult_no">Für Erwachsene zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_woman_yes">Für Frauen zur Verfügung gestellt: Ja</string>
+	<string name="poi_provided_for_woman_no">Für Frauen zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_senior_yes">Vorgesehen für Senioren: Ja</string>
+	<string name="poi_provided_for_senior_no">Für Senioren zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_girl_yes">Vorgesehen für Mädchen: Ja</string>
+	<string name="poi_provided_for_girl_no">Für Mädchen zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_man_yes">Für Männer zur Verfügung gestellt: Ja</string>
+	<string name="poi_provided_for_man_no">Für Männer zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_boy_yes">Vorgesehen für Jungen: Ja</string>
+	<string name="poi_provided_for_boy_no">Für Jungen zur Verfügung gestellt: Nein</string>
+
+	<string name="poi_capacity_beds">Kapazität (Betten)</string>
+
+	<string name="poi_treat_inpatient_yes">Stationäre Dienste: Ja</string>
+	<string name="poi_treat_inpatient_no">Stationäre Dienste: Nein</string>
+	<string name="poi_treat_inpatient_only">Stationäre Dienste: einzig</string>
+	<string name="poi_counselling_yes">Beratung: Ja</string>
+	<string name="poi_counselling_no">Beratung: Nein</string>
+	<string name="poi_emergency_yes">Notfall: Ja</string>
+	<string name="poi_emergency_no">Notfall: Nein</string>
+	<string name="poi_home_visit_yes">Hausbesuch: Ja</string>
+	<string name="poi_home_visit_no">Hausbesuch: Nein</string>
+
+	<string name="poi_disease_ebola_no">Ebola: Nein</string>
+	<string name="poi_disease_autism_no">Autismus: Nein</string>
+	<string name="poi_office_physician">Arztpraxis</string>
+	<string name="poi_office_therapist">Therapeuten-Büro</string>
+	<string name="poi_office_podologist">Podologie Büro</string>
+	<string name="poi_office_healer">Arzt Büro</string>
+	<string name="poi_office_psychologist">Psychologie-Büro</string>
+	<string name="poi_office_nursing_service">Pflegedienst</string>
+	<string name="poi_office_midwife">Hebamme-Büro</string>
+
+	<string name="poi_fire_hydrant_diameter">Hydrantdurchmesser</string>
+	<string name="poi_fire_hydrant_pressure">Hydrantdruck</string>
+	<string name="poi_fire_hydrant_count">Hydrantnummer</string>
+	<string name="poi_fire_hydrant_flow_capacity">Hydrantdurchflusskapazität</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Hydrant Position: Bürgersteig</string>
+	<string name="poi_fire_hydrant_position_green">Hydrant Position: Rasen</string>
+	<string name="poi_fire_hydrant_position_lane">Hydrant Position: Fahrbahn</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Hydrant Position: Parkplatz</string>
+	<string name="poi_fire_hydrant_position_street">Hydrant Position: Straße</string>
+	<string name="poi_fire_hydrant_position_underground">Hydrant Position: Untergrund</string>
+	<string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Hydrant Wasserquelle : Haupt</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Hydrant Wasserquelle : Teich</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Hydrant Wasserquelle : Wasserlauf</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Hydrant Wasserquelle : Zisterne</string>
+	<string name="poi_in_service_yes">Im Dienst: Ja</string>
+
+	<string name="poi_street_cabinet_power">Kasten-Typ: Strom</string>
+	<string name="poi_street_cabinet_telecom">Kasten-Typ: Telekom</string>
+	<string name="poi_street_cabinet_cable_tv">Kasten-Typ: Kabelfernsehn</string>
+	<string name="poi_street_cabinet_gas">Kasten-Typ: Gas</string>
+	<string name="poi_street_cabinet_postal_service">Kasten-Typ: Postdienst</string>
+	<string name="poi_street_cabinet_waste">Kasten-Typ: Abfall</string>
+	<string name="poi_street_cabinet_water_management">Kasten-Typ: Wasserwirtschaft</string>
+	<string name="poi_street_cabinet_street_lighting">Kasten-Typ: Straßenbeleutung</string>
+
+	<string name="poi_military_checkpoint">Militärischer Kontrollpunkt</string>
+
+	<string name="poi_bicycle_parking_lockers">Schließfächer</string>
+	<string name="poi_bicycle_parking_tree">Fahrrad-Baum</string>
+	<string name="poi_bicycle_parking_streetpod">Straßenschließfach</string>
+
+	</resources>
