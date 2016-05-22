@@ -13,7 +13,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
+import android.support.v4.content.res.ResourcesCompat;
 import net.osmand.plus.R;
 
 import java.util.TreeMap;
@@ -41,7 +41,7 @@ public class FavoriteImageDrawable extends Drawable {
 		paintIcon = new Paint();
 		favIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_favorite);
 		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_favorite_shield);
-		listDrawable = getResources().getDrawable(R.drawable.ic_action_fav_dark).mutate();
+		listDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_action_fav_dark, null).mutate();
 
 		paintOuter = new Paint();
 		paintOuter.setAntiAlias(true);
