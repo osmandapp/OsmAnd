@@ -1283,7 +1283,7 @@
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
     <string name="rendering_attr_hideAccess_name">Obmedzenia prístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu a mýto</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklotrasy</string>
@@ -2041,4 +2041,5 @@
     <string name="map_widget_battery">Úroveň batérie</string>
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pre zmenu pozície značky</string>
     <string name="lat_lon_pattern">Šírka: %1$.6f Dĺžka: %2$.6f</string>
+    <string name="lang_hu_formal">Maďarsky (formálne)</string>
     </resources>
