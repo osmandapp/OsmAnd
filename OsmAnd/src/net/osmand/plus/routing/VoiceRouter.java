@@ -717,6 +717,13 @@ public class VoiceRouter {
 			}
 			// add turn after next
 			if ((nextNextInfo != null) && (nextNextInfo.directionInfo != null)) {
+
+				// This case only needed should we want a prompt at the end of straight segments (equivalent of makeTurn) when nextNextInfo should be announced again there.
+				if (nextNextInfo.directionInfo.getTurnType().getValue() != TurnType.C && next.getTurnType().getValue() == TurnType.C) {
+					play.goAhead();
+					isplay = true;
+				}
+
 				String t2Param = getTurnType(nextNextInfo.directionInfo.getTurnType());
 				if (t2Param != null) {
 					if(isplay) {
@@ -733,14 +740,6 @@ public class VoiceRouter {
 						play.then();
 						play.makeUT(nextNextInfo.distanceTo, empty);
 					}
-				}
-
-				// This case only needed should we want another prompt at the end of straight segments (equivalent of makeTurn) and nextNextInfo should be announced again there.
-				if (nextNextInfo.directionInfo.getTurnType().getValue() != TurnType.C && next.getTurnType().getValue() == TurnType.C) {
-					play.goAhead();
-					play.then();
-					play.turn(t2Param, nextNextInfo.distanceTo, empty);
-					isplay = true;
 				}
 			}
 			if(isplay){
