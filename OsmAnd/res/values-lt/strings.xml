@@ -1457,7 +1457,7 @@
     <string name="osmo_start_service">OsMo paslauga</string>
     <string name="osmo_gpx_track_downloaded">OsMo įrašas %1$s parsiųstas.</string>
     <string name="osmo_group_by_invite">Prisijungti su pakvietimais</string>
-    <string name="osmo_group_information_desc">" - Visos sukurtos grupės yra viešos! Jei norėsite jungtis anonimiškai, tai darykite naudodami sekiklio ID.\n- Grupėje gali būti iki 8 asmenų.\n- Jei grupėje nebus jokios veiklos arba veikloje dalyvaus tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Kurdami grupą uteikiate jai pavadinimą ir aprašymą.\n- Grupėje gali būti iki 8 asmenų.\n- Jei grupėje nebus jokios veiklos arba veikloje dalyvaus tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi "</string>
     <string name="osmo_group_information">Perskaitykite prieš kurdami grupę!</string>
     <string name="osmo_not_signed_in">Prisijungti prie OsMo nepavyko</string>
     <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
@@ -2138,4 +2138,19 @@
     <string name="shared_string_reverse_order">Atvirkštine tvarka</string>
     <string name="switch_start_finish">Sukeisti vietomis pradžios tašką ir galutinį tikslą</string>
     <string name="routing_attr_avoid_borders_name">Vengti sienų kirtimo</string>
+    <string name="lat_lon_pattern">Platuma: %1$.6f Ilguma: %2$.6f</string>
+    <string name="follow_us">Sekite mus</string>
+    <string name="use_osm_live_routing">OSM Live navigacija</string>
+    <string name="access_no_destination">Nenurodytas paskirties punktas</string>
+    <string name="access_default_color">Numatytoji spalva</string>
+    <string name="access_category_choice">Pasirinkite kategoriją</string>
+    <string name="access_hint_enter_category">Įrašykite kategoriją</string>
+    <string name="access_hint_enter_description">Įrašykite aprašymą</string>
+    <string name="access_empty_list">Tuščias sąrašas</string>
+    <string name="access_shared_string_not_installed">Neįdiegtas</string>
+    <string name="access_sort">Rūšiuoti</string>
+    <string name="rendering_value_thin_name">Plonas</string>
+    <string name="rendering_value_medium_name">Vidutinis</string>
+    <string name="rendering_value_bold_name">Storas</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap vartotojo vardas ir slaptažodis</string>
     </resources>
