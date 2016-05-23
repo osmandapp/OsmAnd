@@ -351,6 +351,48 @@
     "expectedResults": {
       "385047566": "+TL|+TL,C|TR"
     }
+  },
+  {
+    "testName": "21.Äußere Nürnberger Straße C",
+    "startPoint": {
+      "latitude": 45.66868152082188,
+      "longitude": 35.614286057558104
+    },
+    "endPoint": {
+      "latitude": 45.668853960276834,
+      "longitude": 35.61282157143597
+    },
+    "expectedResults": {
+      "32493519": "TL|TL|+C|+C"
+    }
+  },
+  {
+    "testName": "22.Plaswijckweg TL Burgemeester van Reenensingel",
+    "startPoint": {
+      "latitude": 45.67016598220978,
+      "longitude": 35.62939762314801
+    },
+    "endPoint": {
+      "latitude": 45.66791678292395,
+      "longitude": 35.63232659539227
+    },
+    "expectedResults": {
+      "202493001": "C,+TL|TR"
+    }
+  },
+  {
+    "testName": "23.Oranje Nassausingel TL Oostkanaalweg",
+    "startPoint": {
+      "latitude": 45.66099243044554,
+      "longitude": 35.64553111037259
+    },
+    "endPoint": {
+      "latitude": 45.66301696427094,
+      "longitude": 35.6475320382977
+    },
+    "expectedResults": {
+      "176772179": "+TL|+TL,C|TR|TR"
+    }
   }
 
 ]
