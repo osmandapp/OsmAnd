@@ -896,8 +896,7 @@ public class RouteResultPreparation {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
 					}
-//					rs.speak = rs.speak || (rsSpeakPriority <= speakPriority && speakPriority > 0);
-					rs.speak = rs.speak || (rsSpeakPriority < speakPriority);
+					rs.speak = rs.speak || (rsSpeakPriority <= speakPriority && speakPriority > 0);
 				} else {
 					if (attachedOnTheRight) {
 						rs.addRoadsOnRight++;
