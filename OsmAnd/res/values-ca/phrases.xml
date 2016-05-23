@@ -2221,4 +2221,9 @@
 	<string name="poi_health_specialty_tropical_medicine_yes">Especialitat mèdica:medicina tropical</string>
 	<string name="poi_health_specialty_tropical_medicine_no">Especialitat mèdica: sense medicina tropical</string>
 	<string name="poi_health_specialty_neurosurgery_yes">Especialitat mèdica: neurocirugia</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Directius de convidat pel vol lliure: sí</string>
+	<string name="poi_free_flying_guest_guidelines_no">Directrius de convidat pel vol lliure: no</string>
+
+	<string name="poi_solarium">Solàrium</string>
+
 	</resources>
