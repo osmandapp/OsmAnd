@@ -923,7 +923,8 @@ public class RouteResultPreparation {
 		}
 		// sometimes links are
 		if ((current <= rs.leftLanes + rs.rightLanes) && (rs.leftLanes > 1 || rs.rightLanes > 1)) {
-			rs.speak = true;
+			// Temporary test: See if this fixes Issue #2571
+			//rs.speak = true;
 		}
 		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
 		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
