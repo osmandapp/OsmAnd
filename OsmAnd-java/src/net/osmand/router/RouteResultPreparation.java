@@ -896,7 +896,8 @@ public class RouteResultPreparation {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
 					}
-					rs.speak = rs.speak || (rsSpeakPriority <= speakPriority);
+					//if (rs.keepLeft && rs.keepRight) it probably means you have no action here to be announced here
+					rs.speak = rs.speak || ((rsSpeakPriority <= speakPriority) && !(rs.keepLeft && rs.keepRight));
 				} else {
 					if (attachedOnTheRight) {
 						rs.addRoadsOnRight++;
