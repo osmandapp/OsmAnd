@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -1285,4 +1286,11 @@
     <string name="osm_save_offline">გათიშულად ჩაწერა</string>
     <string name="osm_edit_modified_poi">OSM POI-ს შეცვლა</string>
     <string name="osm_edit_deleted_poi">OSM POI წაშლილია</string>
+    <string name="map_widget_battery">ელემენტის დონე</string>
+    <string name="follow_us">გამოგვყევით</string>
+    <string name="lat_lon_pattern">გრძედი: %1$.6f განედი: %2$.6f</string>
+    <string name="move_marker_bottom_sheet_title">მარკერის შესაცვლელად გაამოძრავეთ რუკა</string>
+    <string name="access_direction_audio_feedback">მიმართულებების აუდიოკარნახი</string>
+    <string name="use_osm_live_routing">OSM ცოცხალი ნავიგაცია</string>
+    <string name="access_no_destination">დანიშნულება მითითებული არაა</string>
     </resources>
