@@ -837,7 +837,10 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		//Next line creates the bulk of Issue 2571. If we find a way to determine here for which of these turn lane cases a subsequent turn is announced anyway (as a separate turn), we could use rs.speak=false to de-crowd our navigation instructions
+		//Test suppressing 'ghost turns' where lanes split with no action (go staight) or a subsequent turn will be announced anyway. This mostly causes Issue 2571.
+		if (t = TurnType.valueOf(TurnType.C, leftSide));
+			rs.speak = false;
+		}
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(rawLanes);
 		return t;
