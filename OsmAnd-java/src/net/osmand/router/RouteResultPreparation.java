@@ -897,10 +897,6 @@ public class RouteResultPreparation {
 						rs.leftLanes += lanes;
 					}
 					rs.speak = rs.speak || (rsSpeakPriority <= speakPriority);
-					//if (rs.keepLeft && rs.keepRight) it probably means you have no action here to be announced here
-					if (rs.keepLeft && rs.keepRight) {
-						rs.speak = false;
-					}
 				} else {
 					if (attachedOnTheRight) {
 						rs.addRoadsOnRight++;
@@ -934,6 +930,7 @@ public class RouteResultPreparation {
 		TurnType t = null;
 		if (rs.keepLeft && rs.keepRight) {
 			t = TurnType.valueOf(TurnType.C, leftSide);
+			rs.speak = false;
 		} else if (rs.keepLeft) {
 			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
 		} else if (rs.keepRight) {
