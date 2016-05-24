@@ -838,7 +838,7 @@ public class RouteResultPreparation {
 			}
 		}
 		//Test suppressing 'ghost turns' where lanes split with no action (go staight) or a subsequent turn will be announced anyway. This mostly causes Issue 2571.
-		if (t = TurnType.valueOf(TurnType.C, leftSide));
+		if (t = TurnType.valueOf(TurnType.C, leftSide)) {;
 			rs.speak = false;
 		}
 		t.setSkipToSpeak(!rs.speak);
