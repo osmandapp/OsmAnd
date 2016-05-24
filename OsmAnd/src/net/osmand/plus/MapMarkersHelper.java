@@ -397,7 +397,8 @@ public class MapMarkersHelper {
 
 	public void moveMapMarker(@Nullable MapMarker marker, LatLon latLon) {
 		if (marker != null) {
-			settings.moveMapMarker(new LatLon(marker.getLatitude(), marker.getLongitude()), latLon);
+			settings.moveMapMarker(new LatLon(marker.getLatitude(), marker.getLongitude()), latLon,
+					marker.pointDescription, marker.colorIndex, marker.pos, marker.selected);
 			readFromSettings();
 			refresh();
 		}

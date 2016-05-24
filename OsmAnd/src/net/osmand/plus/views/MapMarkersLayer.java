@@ -518,12 +518,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
 									   @Nullable ApplyMovedObjectCallback callback) {
 		boolean result = false;
-		Object newObject = null;
+		MapMarker newObject = null;
 		if (o instanceof MapMarker) {
 			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 			MapMarker marker = (MapMarker) o;
-			int index = markersHelper.getActiveMapMarkers().indexOf(marker);
+
+			marker.getOriginalPointDescription().setName(PointDescription.getSearchAddressStr(map));
 			markersHelper.moveMapMarker(marker, position);
+			int index = markersHelper.getActiveMapMarkers().indexOf(marker);
 			if (index != -1) {
 				newObject = markersHelper.getActiveMapMarkers().get(index);
 			}

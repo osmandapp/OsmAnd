@@ -1877,7 +1877,12 @@ public class OsmandSettings {
 			}
 		}
 
-		public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {
+		public boolean movePoint(LatLon latLonEx,
+								 LatLon latLonNew,
+								 PointDescription historyDescription,
+								 int colorIndex,
+								 int pos,
+								 boolean selected) {
 			List<LatLon> ps = getPoints();
 			List<String> ds = getPointDescriptions(ps.size());
 			List<Integer> cs = getColors(ps.size());
@@ -1887,6 +1892,21 @@ public class OsmandSettings {
 			if (index != -1) {
 				if (ps.size() > index) {
 					ps.set(index, latLonNew);
+				}
+				ds.set(index, PointDescription.serializeToString(historyDescription));
+				if (cs.size() > index) {
+					cs.set(index, colorIndex);
+				}
+				if (ns.size() > index) {
+					ns.set(index, pos);
+				}
+				if (bs.size() > index) {
+					bs.set(index, selected);
+				}
+				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+					double lat = latLonNew.getLatitude();
+					double lon = latLonNew.getLongitude();
+					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(lat, lon, historyDescription);
 				}
 				return savePoints(ps, ds, cs, ns, bs);
 			} else {
@@ -2156,8 +2176,14 @@ public class OsmandSettings {
 				pos, selected);
 	}
 
-	public boolean moveMapMarker(LatLon latLonEx, LatLon latLonNew) {
-		return mapMarkersStorage.movePoint(latLonEx, latLonNew);
+	public boolean moveMapMarker(LatLon latLonEx,
+								 LatLon latLonNew,
+								 PointDescription historyDescription,
+								 int colorIndex,
+								 int pos,
+								 boolean selected) {
+		return mapMarkersStorage.movePoint(latLonEx, latLonNew, historyDescription, colorIndex,
+				pos, selected);
 	}
 
 	public boolean deleteMapMarker(int index) {
