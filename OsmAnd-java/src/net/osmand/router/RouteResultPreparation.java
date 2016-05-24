@@ -837,10 +837,9 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		//Test suppressing 'ghost turns' where lanes split with no action (go staight) or a subsequent turn will be announced anyway. This mostly causes Issue 2571.
-		if (t == TurnType.valueOf(TurnType.C, leftSide)) {
-			rs.speak = false;
-		}
+		// Issue 2571
+		// Is caused by not suppressing 'ghost turns' (rs.speak=false), either when lanes split with no action (go straight), or where a subsequent "regular" turn at the end of the turn lane will be announced anyway
+		// Having rs.speak=true in these cases inserts an extra intermediate route direction to "continue" (to the point of the ghost turn)
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(rawLanes);
 		return t;
@@ -934,7 +933,6 @@ public class RouteResultPreparation {
 		TurnType t = null;
 		if (rs.keepLeft && rs.keepRight) {
 			t = TurnType.valueOf(TurnType.C, leftSide);
-			rs.speak = false;
 		} else if (rs.keepLeft) {
 			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
 		} else if (rs.keepRight) {
