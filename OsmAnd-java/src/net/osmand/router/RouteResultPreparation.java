@@ -795,7 +795,7 @@ public class RouteResultPreparation {
 	}
 
 	protected TurnType createKeepLeftRightTurnBasedOnTurnTypes(RoadSplitStructure rs, RouteSegmentResult prevSegm,
-			RouteSegmentResult currentSegm, String turnLanes,boolean leftSide) {
+			RouteSegmentResult currentSegm, String turnLanes, boolean leftSide) {
 		// Maybe going straight at a 90-degree intersection
 		TurnType t = TurnType.valueOf(TurnType.C, leftSide);
 		int[] rawLanes = calculateRawTurnLanes(turnLanes, TurnType.C);
@@ -837,6 +837,7 @@ public class RouteResultPreparation {
 				}
 			}
 		}
+		//Next line creates the bulk of Issue 2571. If we find a way to determine here for which of these turn lane cases a subsequent turn is announced anyway (as a separate turn), we could use rs.speak=false to de-crowd our navigation instructions
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(rawLanes);
 		return t;
