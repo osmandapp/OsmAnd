@@ -795,7 +795,7 @@ public class RouteResultPreparation {
 	}
 
 	protected TurnType createKeepLeftRightTurnBasedOnTurnTypes(RoadSplitStructure rs, RouteSegmentResult prevSegm,
-			RouteSegmentResult currentSegm, String turnLanes, boolean leftSide) {
+			RouteSegmentResult currentSegm, String turnLanes,boolean leftSide) {
 		// Maybe going straight at a 90-degree intersection
 		TurnType t = TurnType.valueOf(TurnType.C, leftSide);
 		int[] rawLanes = calculateRawTurnLanes(turnLanes, TurnType.C);
@@ -836,10 +836,6 @@ public class RouteResultPreparation {
 					rawLanes[k] |= 1;
 				}
 			}
-		}
-		//Test suppressing 'ghost turns' where lanes split with no action (go staight) or a subsequent turn will be announced anyway. This mostly causes Issue 2571.
-		if (t = TurnType.valueOf(TurnType.C, leftSide)) {
-			rs.speak = false;
 		}
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(rawLanes);
@@ -900,7 +896,7 @@ public class RouteResultPreparation {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
 					}
-					rs.speak = rs.speak || (rsSpeakPriority <= speakPriority);
+					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
 				} else {
 					if (attachedOnTheRight) {
 						rs.addRoadsOnRight++;
@@ -934,7 +930,6 @@ public class RouteResultPreparation {
 		TurnType t = null;
 		if (rs.keepLeft && rs.keepRight) {
 			t = TurnType.valueOf(TurnType.C, leftSide);
-			rs.speak = false;
 		} else if (rs.keepLeft) {
 			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
 		} else if (rs.keepRight) {
