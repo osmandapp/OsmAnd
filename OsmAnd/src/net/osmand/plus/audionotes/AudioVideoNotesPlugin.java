@@ -1574,8 +1574,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		r.lon = geo.getLongitude();
 		Float heading = app.getLocationProvider().getHeading();
 		Location loc = app.getLocationProvider().getLastKnownLocation();
-		if (lastTakingPhoto != null && lastTakingPhoto.getName().equals(f.getName()) && heading != null) {
-			float rot = heading.floatValue();
+		if (lastTakingPhoto != null && lastTakingPhoto.getName().equals(f.getName())) {
+			float rot = heading != null ? heading : 0;
 			try {
 				r.updatePhotoInformation(r.lat, r.lon, loc, rot == 0 ? Double.NaN : rot);
 			} catch (IOException e) {
