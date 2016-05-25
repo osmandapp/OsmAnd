@@ -452,7 +452,6 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,
 			SearchRequest<Amenity> req, PoiRegion region) throws IOException {
 		int indexOffset = codedIS.getTotalBytesRead();

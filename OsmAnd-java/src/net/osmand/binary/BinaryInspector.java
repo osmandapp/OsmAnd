@@ -106,6 +106,7 @@ public class BinaryInspector {
 	protected static class VerboseInfo {
 		boolean vaddress;
 		boolean vcities;
+		boolean vcitynames;
 		boolean vstreetgroups;
 		boolean vstreets;
 		boolean vbuildings;
@@ -164,6 +165,8 @@ public class BinaryInspector {
 					vstreetgroups = true;
 				} else if (params[i].equals("-vcities")) {
 					vcities = true;
+				} else if (params[i].equals("-vcitynames")) {
+					vcitynames = true;
 				} else if (params[i].equals("-vbuildings")) {
 					vbuildings = true;
 				} else if (params[i].equals("-vintersections")) {
@@ -631,9 +634,14 @@ public class BinaryInspector {
 			for (City c : cities) {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
+				String name = c.getName(verbose.lang);
+				if (verbose.vcitynames) {
+					boolean includeEnName = verbose.lang == null || !verbose.lang.equals("en");
+					name += " " + c.getNamesMap(includeEnName).toString();
+				}
 				String cityDescription = (type == BinaryMapAddressReaderAdapter.POSTCODES_TYPE ?
-						MessageFormat.format("\t\t''{0}'' {1,number,#} street(s) size {2,number,#} bytes", c.getName(verbose.lang), streets.size(), size) :
-						MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes", c.getName(verbose.lang), c.getId(), streets.size(), size));
+						MessageFormat.format("\t\t''{0}'' {1,number,#} street(s) size {2,number,#} bytes", name, streets.size(), size) :
+						MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes", name, c.getId(), streets.size(), size));
 				print(cityDescription);
 				if (!verbose.vstreets) {
 					println("");
@@ -1122,7 +1130,7 @@ public class BinaryInspector {
 		}
 		println("Inspector is console utility for working with binary indexes of OsmAnd.");
 		println("It allows print info about file, extract parts and merge indexes.");
-		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-vmapcoordinates] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLat] [file]");
+		println("\nUsage for print info : inspector [-vaddress] [-vcitynames] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-vmapcoordinates] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLat] [file]");
 		println("  Prints information about [file] binary index of OsmAnd.");
 		println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
