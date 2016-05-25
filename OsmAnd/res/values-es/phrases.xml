@@ -2894,4 +2894,16 @@
 
 	<string name="poi_military_checkpoint">Puesto de control militar</string>
 
+<string name="poi_forestry_allotment">Señal: parcela forestal</string>
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo de explosión: atmosférica, paracaídas</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Explosión de salva: primera detonación de prueba</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosión de salva: segunda o posterior detonación de prueba</string>
+	<string name="poi_bicycle_parking_lockers">Casilleros</string>
+	<string name="poi_bicycle_parking_tree">Árbol de bicicleta</string>
+	<string name="poi_bicycle_parking_streetpod">Ranura plástica (streetpod)</string>
+
+	<string name="poi_depth">Profundidad</string>
+
 </resources>
