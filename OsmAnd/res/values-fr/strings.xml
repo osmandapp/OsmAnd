@@ -2220,4 +2220,6 @@
     <string name="map_widget_battery">Niveau de batterie</string>
     <string name="lang_hu_formal">Hongrois (formel)</string>
     <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position du marqueur</string>
+    <string name="current_track">Trace en cours</string>
+    <string name="change_markers_position">Modifier la position du marqueur</string>
     </resources>
