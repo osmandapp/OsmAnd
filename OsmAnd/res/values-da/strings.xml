@@ -2370,4 +2370,6 @@
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="map_widget_battery">Batteriniveau</string>
     <string name="lang_hu_formal">Ungarsk (formel)</string>
+    <string name="current_track">Aktuelt spor</string>
+    <string name="change_markers_position">Ændre markørens position</string>
     </resources>
