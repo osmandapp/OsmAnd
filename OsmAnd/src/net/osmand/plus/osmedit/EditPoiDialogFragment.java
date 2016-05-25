@@ -455,7 +455,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public static void commitNode(final OsmPoint.Action action,
-								  final Node n,
+								  final Node node,
 								  final EntityInfo info,
 								  final String comment,
 								  final boolean closeChangeSet,
@@ -477,7 +477,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 			@Override
 			protected Node doInBackground(Void... params) {
-				return openstreetmapUtil.commitNodeImpl(action, n, info, comment, closeChangeSet);
+				return openstreetmapUtil.commitNodeImpl(action, node, info, comment, closeChangeSet);
 			}
 
 			@Override

@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -55,7 +56,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private DistanceCalculatorLayer distanceCalculatorLayer;
 	private TextInfoWidget distanceControl;
 	
-	private List<LinkedList<WptPt>> measurementPoints = new ArrayList<LinkedList<WptPt>>();
+	private List<LinkedList<WptPt>> measurementPoints = new ArrayList<>();
 	private GPXFile originalGPX;
 	private String distance = null;
 
@@ -320,7 +320,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		b.show();
 	}
 	
-	private void saveGpx(final MapActivity activity, final String fileNameSave) {
+	private void saveGpx(final MapActivity activity,
+								final String fileNameSave) {
 		final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>() {
 			private ProgressDialog dlg;
 			private File toSave;
@@ -383,9 +384,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				}
 			};
 		};
-		exportTask.execute(new Void[0]);
-		
-		
+		exportTask.execute();
 	}
 	private void startEditingHelp(MapActivity ctx) {
 		final CommonPreference<Boolean> pref = app.getSettings().registerBooleanPreference("show_measurement_help_first_time", true);
@@ -643,9 +642,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				final WptPt p = (WptPt) o;
 				boolean containsPoint = false;
 				for (int i = 0; i < measurementPoints.size(); i++) {
-					Iterator<WptPt> it = measurementPoints.get(i).iterator();
-					while (it.hasNext()) {
-						if (it.next() == p) {
+					for (WptPt wptPt : measurementPoints.get(i)) {
+						if (wptPt == p) {
 							containsPoint = true;
 							break;
 						}

@@ -2164,4 +2164,4 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="access_direction_audio_feedback_descr">Zeige Richtung des Zielpunkt durch Ton</string>
     <string name="access_direction_haptic_feedback">Richtung haptisches Feedback</string>
     <string name="access_direction_haptic_feedback_descr">Zeige Richtung des Zielpunkt durch Vibration</string>
-    </resources>
+</resources>

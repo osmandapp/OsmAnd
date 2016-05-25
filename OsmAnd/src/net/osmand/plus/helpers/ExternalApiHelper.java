@@ -363,7 +363,7 @@ public class ExternalApiHelper {
 				FavouritesDbHelper helper = app.getFavorites();
 				helper.addFavourite(fav);
 
-				showOnMap(lat, lon, fav, mapActivity.getMapLayers().getFavoritesLayer().getObjectName(fav));
+				showOnMap(lat, lon, fav, mapActivity.getMapLayers().getFavouritesLayer().getObjectName(fav));
 				resultCode = Activity.RESULT_OK;
 
 			} else if (API_CMD_ADD_MAP_MARKER.equals(cmd)) {

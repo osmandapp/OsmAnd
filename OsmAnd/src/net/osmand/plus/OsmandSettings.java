@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -50,7 +49,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 public class OsmandSettings {
 
@@ -1859,20 +1857,61 @@ public class OsmandSettings {
 			List<Integer> ns = getPositions(ps.size());
 			List<Boolean> bs = getSelections(ps.size());
 			int index = ps.indexOf(new LatLon(latitude, longitude));
-			ds.set(index, PointDescription.serializeToString(historyDescription));
-			if (cs.size() > index) {
-				cs.set(index, colorIndex);
+			if (index != -1) {
+				ds.set(index, PointDescription.serializeToString(historyDescription));
+				if (cs.size() > index) {
+					cs.set(index, colorIndex);
+				}
+				if (ns.size() > index) {
+					ns.set(index, pos);
+				}
+				if (bs.size() > index) {
+					bs.set(index, selected);
+				}
+				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+				}
+				return savePoints(ps, ds, cs, ns, bs);
+			} else {
+				return false;
 			}
-			if (ns.size() > index) {
-				ns.set(index, pos);
+		}
+
+		public boolean movePoint(LatLon latLonEx,
+								 LatLon latLonNew,
+								 PointDescription historyDescription,
+								 int colorIndex,
+								 int pos,
+								 boolean selected) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			List<Integer> cs = getColors(ps.size());
+			List<Integer> ns = getPositions(ps.size());
+			List<Boolean> bs = getSelections(ps.size());
+			int index = ps.indexOf(latLonEx);
+			if (index != -1) {
+				if (ps.size() > index) {
+					ps.set(index, latLonNew);
+				}
+				ds.set(index, PointDescription.serializeToString(historyDescription));
+				if (cs.size() > index) {
+					cs.set(index, colorIndex);
+				}
+				if (ns.size() > index) {
+					ns.set(index, pos);
+				}
+				if (bs.size() > index) {
+					bs.set(index, selected);
+				}
+				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
+					double lat = latLonNew.getLatitude();
+					double lon = latLonNew.getLongitude();
+					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(lat, lon, historyDescription);
+				}
+				return savePoints(ps, ds, cs, ns, bs);
+			} else {
+				return false;
 			}
-			if (bs.size() > index) {
-				bs.set(index, selected);
-			}
-			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-			}
-			return savePoints(ps, ds, cs, ns, bs);
 		}
 
 		@Override
@@ -2134,6 +2173,16 @@ public class OsmandSettings {
 								   PointDescription historyDescription, int colorIndex,
 								   int pos, boolean selected) {
 		return mapMarkersStorage.updatePoint(latitude, longitude, historyDescription, colorIndex,
+				pos, selected);
+	}
+
+	public boolean moveMapMarker(LatLon latLonEx,
+								 LatLon latLonNew,
+								 PointDescription historyDescription,
+								 int colorIndex,
+								 int pos,
+								 boolean selected) {
+		return mapMarkersStorage.movePoint(latLonEx, latLonNew, historyDescription, colorIndex,
 				pos, selected);
 	}
 

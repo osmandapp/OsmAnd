@@ -1,25 +1,26 @@
 package net.osmand.plus.views;
 
-import gnu.trove.set.hash.TIntHashSet;
-
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import net.osmand.data.LatLon;
-import net.osmand.data.RotatedTileBox;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
+
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import gnu.trove.set.hash.TIntHashSet;
+
 public class MapTextLayer extends OsmandMapLayer {
 	
-	private Map<OsmandMapLayer, 
-			List<?>> textObjects = new LinkedHashMap<OsmandMapLayer, List<?>>();
+	private Map<OsmandMapLayer,
+			Collection<?>> textObjects = new LinkedHashMap<>();
 	public static final int TEXT_WRAP = 15;
 	public static final int TEXT_LINES = 3;
 	private Paint paintTextIcon;
@@ -37,7 +38,7 @@ public class MapTextLayer extends OsmandMapLayer {
 		String getText(T o);
 	}
 	
-	public void putData(OsmandMapLayer ml, List<?> objects) {
+	public void putData(OsmandMapLayer ml, Collection<?> objects) {
 		if(objects == null || objects.isEmpty()) {
 			textObjects.remove(ml); 
 		} else {
@@ -173,7 +174,7 @@ public class MapTextLayer extends OsmandMapLayer {
 		paintTextIcon.setTextSize(13 * v.getDensity());
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setAntiAlias(true);
-		Map<OsmandMapLayer, List<?>> textObjectsLoc = new TreeMap<OsmandMapLayer, List<?>>(new Comparator<OsmandMapLayer>() {
+		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<OsmandMapLayer, Collection<?>>(new Comparator<OsmandMapLayer>() {
 
 			@Override
 			public int compare(OsmandMapLayer lhs, OsmandMapLayer rhs) {

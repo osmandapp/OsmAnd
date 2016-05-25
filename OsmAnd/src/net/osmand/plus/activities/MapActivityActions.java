@@ -320,7 +320,7 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication()
 					.getSettings());
-			if (result.hasRtePt() && !result.hasTrkpt()) {
+			if (result.hasRtePt() && !result.hasTrkPt()) {
 				settings.GPX_CALCULATE_RTEPT.set(true);
 			} else {
 				settings.GPX_CALCULATE_RTEPT.set(false);
@@ -350,7 +350,7 @@ public class MapActivityActions implements DialogProvider {
 		final List<GPXFile> gpxFiles = new ArrayList<>();
 		for (SelectedGpxFile gs : selectedGPXFiles) {
 			if (!gs.isShowCurrentTrack() && !gs.notShowNavigationDialog) {
-				if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkpt()) {
+				if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkPt()) {
 					gpxFiles.add(gs.getGpxFile());
 				}
 			}

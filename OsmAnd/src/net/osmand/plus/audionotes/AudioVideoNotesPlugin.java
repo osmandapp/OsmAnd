@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.StatFs;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Display;
@@ -247,6 +248,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			File directory = file.getParentFile();
 			String fileName = getFileName();
 			File to = new File(directory, name + SPLIT_DESC + getOtherName(fileName));
+			if (file.renameTo(to)) {
+				file = to;
+				return true;
+			}
+			return false;
+		}
+
+		public boolean setLocation(LatLon latLon) {
+			File directory = file.getParentFile();
+			lat = latLon.getLatitude();
+			lon = latLon.getLongitude();
+			File to = getBaseFileName(lat, lon, directory, Algorithms.getFileExtension(file));
 			if (file.renameTo(to)) {
 				file = to;
 				return true;
@@ -764,14 +777,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private File getBaseFileName(double lat, double lon, OsmandApplication app, String ext) {
+	private static File getBaseFileName(double lat, double lon, OsmandApplication app, String ext) {
+		File baseDir = app.getAppPath(IndexConstants.AV_INDEX_DIR);
+		return getBaseFileName(lat, lon, baseDir, ext);
+	}
+
+	private static File getBaseFileName(double lat, double lon, @NonNull File baseDir, @NonNull String ext) {
 		String basename = MapUtils.createShortLinkString(lat, lon, 15);
 		int k = 1;
-		File f = app.getAppPath(IndexConstants.AV_INDEX_DIR);
-		f.mkdirs();
+		baseDir.mkdirs();
 		File fl;
 		do {
-			fl = new File(f, basename + "." + (k++) + "." + ext);
+			fl = new File(baseDir, basename + "." + (k++) + "." + ext);
 		} while (fl.exists());
 		return fl;
 	}

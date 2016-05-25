@@ -1,6 +1,15 @@
 package net.osmand.plus.parkingpoint;
 
-import java.util.List;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -10,14 +19,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+
+import java.util.List;
 
 /**
  * Class represents a layer which depicts the position of the parked car
@@ -25,7 +28,8 @@ import android.view.WindowManager;
  * @see ParkingPositionPlugin
  *
  */
-public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class ParkingPositionLayer extends OsmandMapLayer implements
+		ContextMenuLayer.IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
 	/**
 	 * magic number so far
 	 */
@@ -44,6 +48,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	private boolean timeLimit;
 
 	private ParkingPositionPlugin plugin;
+
+	private ContextMenuLayer contextMenuLayer;
 
 	public ParkingPositionLayer(MapActivity map, ParkingPositionPlugin plugin) {
 		this.map = map;
@@ -68,11 +74,14 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		parkingNoLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_poi_parking_pos_no_limit);
 		parkingLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_poi_parking_pos_limit);
 		timeLimit = plugin.getParkingType();
+
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
         LatLon parkingPoint = getParkingPoint();
+		boolean inMotion = parkingPoint == contextMenuLayer.getMoveableObject();
         if (parkingPoint == null)
 			return;
 		
@@ -84,11 +93,19 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		}
         double latitude = parkingPoint.getLatitude();
 		double longitude = parkingPoint.getLongitude();
-		if (isLocationVisible(tb, latitude, longitude)) {
+		if (isLocationVisible(tileBox, latitude, longitude) || inMotion) {
 			int marginX = parkingNoLimitIcon.getWidth() / 2;
 			int marginY = parkingNoLimitIcon.getHeight() / 2;
-			int locationX = tb.getPixXFromLonNoRot(longitude);
-			int locationY = tb.getPixYFromLatNoRot(latitude);
+			float locationX;
+			float locationY;
+			if (inMotion) {
+				PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+				locationX = pf.x;
+				locationY = pf.y;
+			} else {
+				locationX = tileBox.getPixXFromLonNoRot(longitude);
+				locationY = tileBox.getPixYFromLatNoRot(latitude);
+			}
 			canvas.rotate(-view.getRotate(), locationX, locationY);
 			canvas.drawBitmap(parkingIcon, locationX - marginX, locationY - marginY, bitmapPaint);
 		}
@@ -183,5 +200,22 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 
-	
+
+	@Override
+	public boolean isObjectMovable(Object o) {
+		return o == getParkingPoint();
+	}
+
+	@Override
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+		boolean result = false;
+		if (o == getParkingPoint()) {
+			plugin.setParkingPosition(position.getLatitude(), position.getLongitude());
+			result = true;
+		}
+		if (callback != null) {
+			callback.onApplyMovedObject(result, getParkingPoint());
+		}
+	}
 }

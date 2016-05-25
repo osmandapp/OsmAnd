@@ -11,6 +11,7 @@
     -->
 
     <string name="map_widget_battery">Battery level</string>
+    <string name="change_markers_position">Change marker\'s position</string>
     <string name="move_marker_bottom_sheet_title">Move the map to change marker\'s position</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="follow_us">Follow us</string>

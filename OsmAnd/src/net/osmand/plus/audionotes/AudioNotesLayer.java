@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -16,6 +19,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -24,19 +28,21 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvider {
+public class AudioNotesLayer extends OsmandMapLayer implements
+		IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
 
 	private static final int startZoom = 10;
 	private MapActivity activity;
 	private AudioVideoNotesPlugin plugin;
 	private Paint pointAltUI;
 	private Paint paintIcon;
-	private Paint point;
 	private OsmandMapTileView view;
 	private Bitmap audio;
 	private Bitmap video;
 	private Bitmap photo;
 	private Bitmap pointSmall;
+
+	private ContextMenuLayer contextMenuLayer;
 
 	public AudioNotesLayer(MapActivity activity, AudioVideoNotesPlugin plugin) {
 		this.activity = activity;
@@ -50,7 +56,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		pointAltUI = new Paint();
 		pointAltUI.setColor(0xa0FF3344);
 		pointAltUI.setStyle(Style.FILL);
-		
+
 		audio = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_audio);
 		video = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_video);
 		photo = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_photo);
@@ -59,15 +65,17 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		paintIcon = new Paint();
 
-		point = new Paint();
+		Paint point = new Paint();
 		point.setColor(Color.GRAY);
 		point.setAntiAlias(true);
 		point.setStyle(Style.STROKE);
+
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
-	
-	public int getRadiusPoi(RotatedTileBox tb){
+
+	public int getRadiusPoi(RotatedTileBox tb) {
 		int r = 0;
-		if(tb.getZoom()  < startZoom){
+		if (tb.getZoom() < startZoom) {
 			r = 0;
 		} else {
 			r = 15;
@@ -77,8 +85,13 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (contextMenuLayer.getMoveableObject() instanceof Recording) {
+			Recording objectInMotion = (Recording) contextMenuLayer.getMoveableObject();
+			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			drawRecording(canvas, objectInMotion, pf.x, pf.y);
+		}
 	}
-	
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
@@ -92,33 +105,39 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
 			List<LatLon> smallObjectsLatLon = new ArrayList<>();
 			for (Recording o : objects) {
-				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+				if (o != contextMenuLayer.getMoveableObject()) {
+					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
-				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
-					smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
-				} else {
-					fullObjects.add(o);
-					fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+						canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+					} else {
+						fullObjects.add(o);
+						fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+					}
 				}
 			}
 			for (Recording o : fullObjects) {
 				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-				Bitmap b;
-				if (o.isPhoto()) {
-					b = photo;
-				} else if (o.isAudio()) {
-					b = audio;
-				} else {
-					b = video;
-				}
-				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+				drawRecording(canvas, o, x, y);
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
+	}
+
+	private void drawRecording(Canvas canvas, Recording o, float x, float y) {
+		Bitmap b;
+		if (o.isPhoto()) {
+			b = photo;
+		} else if (o.isAudio()) {
+			b = audio;
+		} else {
+			b = video;
+		}
+		canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 	}
 
 	@Override
@@ -130,13 +149,13 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return true;
 	}
 
-	
+
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof Recording){
+		if (o instanceof Recording) {
 			Recording rec = (Recording) o;
 			String recName = rec.getName(activity, true);
-			if(Algorithms.isEmpty(recName)) {
+			if (Algorithms.isEmpty(recName)) {
 				return new PointDescription(rec.getSearchHistoryType(), view.getResources().getString(R.string.recording_default_name));
 			}
 			return new PointDescription(rec.getSearchHistoryType(), recName);
@@ -165,7 +184,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			getRecordingsFromPoint(point, tileBox, objects);
 		}
 	}
-	
+
 	public void getRecordingsFromPoint(PointF point, RotatedTileBox tileBox, List<? super Recording> am) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
@@ -182,17 +201,31 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius;
 	}
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof Recording){
-			return new LatLon(((Recording)o).getLatitude(), ((Recording)o).getLongitude());
+		if (o instanceof Recording) {
+			return new LatLon(((Recording) o).getLatitude(), ((Recording) o).getLongitude());
 		}
 		return null;
 	}
 
 
+	@Override
+	public boolean isObjectMovable(Object o) {
+		return o instanceof Recording;
+	}
 
+	@Override
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+		boolean result = false;
+		if (o instanceof Recording) {
+			result = ((Recording) o).setLocation(position);
+		}
+		if (callback != null) {
+			callback.onApplyMovedObject(result, o);
+		}
+	}
 }

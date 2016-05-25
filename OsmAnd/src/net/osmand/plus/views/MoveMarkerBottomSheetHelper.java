@@ -1,10 +1,12 @@
 package net.osmand.plus.views;
 
 import android.content.Context;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
@@ -15,6 +17,7 @@ public class MoveMarkerBottomSheetHelper {
 	private final TextView mDescription;
 	private final Context mContext;
 	private final ContextMenuLayer mContextMenuLayer;
+	private boolean applyingPositionMode;
 
 	public MoveMarkerBottomSheetHelper(MapActivity activity, ContextMenuLayer contextMenuLayer) {
 		mContextMenuLayer = contextMenuLayer;
@@ -28,7 +31,6 @@ public class MoveMarkerBottomSheetHelper {
 		mView.findViewById(R.id.apply_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				hide();
 				mContextMenuLayer.applyNewMarkerPosition();
 			}
 		});
@@ -42,8 +44,9 @@ public class MoveMarkerBottomSheetHelper {
 	}
 	
 	public void onDraw(RotatedTileBox rt) {
-		double lat = rt.getLatFromPixel(rt.getPixWidth() / 2, rt.getPixHeight() / 2);
-		double lon = rt.getLonFromPixel(rt.getPixWidth() / 2, rt.getPixHeight() / 2);
+		PointF point = mContextMenuLayer.getMoveableCenterPoint(rt);
+		double lat = rt.getLatFromPixel(point.x, point.y);
+		double lon = rt.getLonFromPixel(point.x, point.y);
 		mDescription.setText(mContext.getString(R.string.lat_lon_pattern, lat, lon));
 	}
 	
@@ -52,11 +55,27 @@ public class MoveMarkerBottomSheetHelper {
 	}
 
 	public void show(Drawable drawable) {
+		exitApplyPositionMode();
 		mView.setVisibility(View.VISIBLE);
 		((ImageView) mView.findViewById(R.id.icon)).setImageDrawable(drawable);
 	}
 
 	public void hide() {
+		exitApplyPositionMode();
 		mView.setVisibility(View.GONE);
+	}
+
+	public void enterApplyPositionMode() {
+		if (!applyingPositionMode) {
+			applyingPositionMode = true;
+			mView.findViewById(R.id.apply_button).setEnabled(false);
+		}
+	}
+
+	public void exitApplyPositionMode() {
+		if (applyingPositionMode) {
+			applyingPositionMode = false;
+			mView.findViewById(R.id.apply_button).setEnabled(true);
+		}
 	}
 }

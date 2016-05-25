@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import net.osmand.Location;
@@ -19,12 +20,12 @@ import java.util.List;
 
 public class TargetPointsHelper {
 
-	private List<TargetPoint> intermediatePoints = new ArrayList<TargetPoint>(); 
+	private List<TargetPoint> intermediatePoints = new ArrayList<>();
 	private TargetPoint pointToNavigate = null;
 	private TargetPoint pointToStart = null;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
-	private List<StateChangedListener<Void>> listeners = new ArrayList<StateChangedListener<Void>>();
+	private List<StateChangedListener<Void>> listeners = new ArrayList<>();
 	private OsmandApplication ctx;
 
 	private AddressLookupRequest startPointRequest;
@@ -49,6 +50,7 @@ public class TargetPointsHelper {
 			this.intermediate = true;
 		}
 		
+		@SuppressLint("StringFormatInvalid")
 		public PointDescription getPointDescription(Context ctx) {
 			if (!intermediate) {
 				return new PointDescription(PointDescription.POINT_TYPE_TARGET, ctx.getString(R.string.destination_point, ""), 
@@ -61,7 +63,7 @@ public class TargetPointsHelper {
 		
 		public PointDescription getOriginalPointDescription() {
 			return pointDescription;
-		};
+		}
 		
 		public String getOnlyName() {
 			return pointDescription == null ? "" : pointDescription.getName();
@@ -229,7 +231,7 @@ public class TargetPointsHelper {
 	}
 	
 	public List<LatLon> getIntermediatePointsLatLon() {
-		List<LatLon> intermediatePointsLatLon = new ArrayList<LatLon>();
+		List<LatLon> intermediatePointsLatLon = new ArrayList<>();
 		for (TargetPoint t : this.intermediatePoints) {
 			intermediatePointsLatLon.add(t.point);
 		}
@@ -237,7 +239,7 @@ public class TargetPointsHelper {
 	}
 	
 	public List<LatLon> getIntermediatePointsLatLonNavigation() {
-		List<LatLon> intermediatePointsLatLon = new ArrayList<LatLon>();
+		List<LatLon> intermediatePointsLatLon = new ArrayList<>();
 		if (settings.USE_INTERMEDIATE_POINTS_NAVIGATION.get()) {
 			for (TargetPoint t : this.intermediatePoints) {
 				intermediatePointsLatLon.add(t.point);
@@ -247,7 +249,7 @@ public class TargetPointsHelper {
 	}
 
 	public List<TargetPoint> getAllPoints() {
-		List<TargetPoint> res = new ArrayList<TargetPoint>();
+		List<TargetPoint> res = new ArrayList<>();
 		if(pointToStart != null) {
 			res.add(pointToStart);
 		}
@@ -259,7 +261,7 @@ public class TargetPointsHelper {
 	}
 
 	public List<TargetPoint> getIntermediatePointsWithTarget() {
-		List<TargetPoint> res = new ArrayList<TargetPoint>();
+		List<TargetPoint> res = new ArrayList<>();
 		res.addAll(this.intermediatePoints);
 		if(pointToNavigate != null) {
 			res.add(pointToNavigate);
@@ -423,8 +425,8 @@ public class TargetPointsHelper {
 		settings.clearPointToNavigate();
 		if (point.size() > 0) {
 			List<TargetPoint> subList = point.subList(0, point.size() - 1);
-			ArrayList<String> names = new ArrayList<String>(subList.size());
-			ArrayList<LatLon> ls = new ArrayList<LatLon>(subList.size());
+			ArrayList<String> names = new ArrayList<>(subList.size());
+			ArrayList<LatLon> ls = new ArrayList<>(subList.size());
 			for(int i = 0; i < subList.size(); i++) {
 				names.add(PointDescription.serializeToString(subList.get(i).pointDescription));
 				ls.add(subList.get(i).point);

@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
 import android.view.GestureDetector;
@@ -58,6 +59,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private final MoveMarkerBottomSheetHelper mMoveMarkerBottomSheetHelper;
 	private boolean mInChangeMarkerPositionMode;
 	private IContextMenuProvider selectedObjectContextMenuProvider;
+	private boolean cancelApplyingNewMarkerPosition;
+	private LatLon applyingMarkerLatLon;
 
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
@@ -133,14 +136,25 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.shared_string_show_description) {
 						menu.openMenuFullScreen();
+					} else if (itemId == R.string.change_markers_position) {
+						RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+						enterMovingMode(tileBox);
 					}
 					return true;
 				}
 			};
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_show_description, activity)
-					.setIcon(R.drawable.ic_action_note_dark).setListener(listener)
+					.setIcon(R.drawable.ic_action_note_dark)
+					.setListener(listener)
 					.createItem());
+			if (isObjectMoveable(o)) {
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.change_markers_position, activity)
+						.setIcon(R.drawable.ic_show_on_map)
+						.setListener(listener)
+						.createItem());
+			}
 		}
 	}
 
@@ -153,22 +167,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (pressedContextMarker(tileBox, point.x, point.y)) {
 			Object obj = menu.getObject();
 			if (isObjectMoveable(obj)) {
-				Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-				vibrator.vibrate(VIBRATE_SHORT);
-
-				menu.updateMapCenter(null);
-				menu.hide();
-
-				LatLon ll = menu.getLatLon();
-				RotatedTileBox rb = new RotatedTileBox(tileBox);
-				rb.setCenterLocation(0.5f, 0.5f);
-				rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
-				double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-				double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-				view.setLatLon(lat, lon);
-				enterMovingMode();
-				view.refreshMap();
-
+				enterMovingMode(tileBox);
 				return true;
 			}
 			return false;
@@ -181,7 +180,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 
 	public PointF getMoveableCenterPoint(RotatedTileBox tb) {
-		return new PointF(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+		if (applyingMarkerLatLon != null) {
+			float x = tb.getPixXFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
+			float y = tb.getPixYFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
+			return new PointF(x, y);
+		} else {
+			return new PointF(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+		}
 	}
 
 	public Object getMoveableObject() {
@@ -198,20 +203,23 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		} else if (selectedObjectContextMenuProvider != null
 				&& selectedObjectContextMenuProvider instanceof ContextMenuLayer.IMoveObjectProvider) {
 			final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) selectedObjectContextMenuProvider;
-			if (l.isObjectMoveable(o)) {
+			if (l.isObjectMovable(o)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void applyMovedObject(Object o, LatLon position) {
-		if (selectedObjectContextMenuProvider != null
-				&& selectedObjectContextMenuProvider instanceof ContextMenuLayer.IMoveObjectProvider) {
-			final IMoveObjectProvider l = (ContextMenuLayer.IMoveObjectProvider) selectedObjectContextMenuProvider;
-			if (l.isObjectMoveable(o)) {
-				l.applyNewObjectPosition(o, position);
+	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
+		if (selectedObjectContextMenuProvider != null) {
+			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
+				final IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
+				if (l.isObjectMovable(o)) {
+					l.applyNewObjectPosition(o, position, callback);
+				}
 			}
+		} else if (mInChangeMarkerPositionMode) {
+			callback.onApplyMovedObject(true, null);
 		}
 	}
 
@@ -222,18 +230,35 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
 		PointF newMarkerPosition = getMoveableCenterPoint(tileBox);
-		LatLon ll = tileBox.getLatLonFromPixel(newMarkerPosition.x, newMarkerPosition.y);
+		final LatLon ll = tileBox.getLatLonFromPixel(newMarkerPosition.x, newMarkerPosition.y);
+		applyingMarkerLatLon = ll;
 
 		Object obj = getMoveableObject();
-		applyMovedObject(obj, ll);
-		quitMovingMarker();
+		cancelApplyingNewMarkerPosition = false;
+		mMoveMarkerBottomSheetHelper.enterApplyPositionMode();
+		applyMovedObject(obj, ll, new ApplyMovedObjectCallback() {
+			@Override
+			public void onApplyMovedObject(boolean success, @Nullable Object newObject) {
+				mMoveMarkerBottomSheetHelper.exitApplyPositionMode();
+				if (success && !cancelApplyingNewMarkerPosition) {
+					mMoveMarkerBottomSheetHelper.hide();
+					quitMovingMarker();
 
-		PointDescription pointDescription = null;
-		if (selectedObjectContextMenuProvider != null) {
-			pointDescription = selectedObjectContextMenuProvider.getObjectName(obj);
-		}
-		menu.show(ll, pointDescription, obj);
-		view.refreshMap();
+					PointDescription pointDescription = null;
+					if (selectedObjectContextMenuProvider != null) {
+						pointDescription = selectedObjectContextMenuProvider.getObjectName(newObject);
+					}
+					menu.show(ll, pointDescription, newObject);
+					view.refreshMap();
+				}
+				applyingMarkerLatLon = null;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return cancelApplyingNewMarkerPosition;
+			}
+		});
 	}
 
 	private void quitMovingMarker() {
@@ -242,11 +267,27 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 	}
 
-	private void enterMovingMode() {
+	private void enterMovingMode(RotatedTileBox tileBox) {
+		Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+		vibrator.vibrate(VIBRATE_SHORT);
+
+		menu.updateMapCenter(null);
+		menu.hide();
+
+		LatLon ll = menu.getLatLon();
+		RotatedTileBox rb = new RotatedTileBox(tileBox);
+		rb.setCenterLocation(0.5f, 0.5f);
+		rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
+		double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		view.setLatLon(lat, lon);
+
 		mInChangeMarkerPositionMode = true;
 		mMoveMarkerBottomSheetHelper.show(menu.getLeftIcon());
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+
+		view.refreshMap();
 	}
 
 	private void mark(int status, int... widgets) {
@@ -259,8 +300,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void cancelMovingMarker() {
+		cancelApplyingNewMarkerPosition = true;
 		quitMovingMarker();
 		activity.getContextMenu().show();
+		applyingMarkerLatLon = null;
 	}
 
 	public boolean showContextMenu(double latitude, double longitude, boolean showUnknownLocation) {
@@ -492,12 +535,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public interface IMoveObjectProvider {
 
-		boolean isObjectMoveable(Object o);
+		boolean isObjectMovable(Object o);
 
-		boolean applyNewObjectPosition(Object o, LatLon position);
-
+		void applyNewObjectPosition(@NonNull Object o,
+									@NonNull LatLon position,
+									@Nullable ApplyMovedObjectCallback callback);
 	}
 
+	public interface ApplyMovedObjectCallback {
+
+		void onApplyMovedObject(boolean success, @Nullable Object newObject);
+
+		boolean isCancelled();
+	}
 
 	public interface IContextMenuProviderSelection {
 
