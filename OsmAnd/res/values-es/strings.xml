@@ -1423,7 +1423,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso y peajes</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de carreteras</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carreteras</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
@@ -2164,4 +2164,8 @@
     <string name="access_no_destination">El destino no está fijado</string>
     <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
     <string name="map_widget_bearing">Rumbo relativo</string>
+    <string name="current_track">Traza actual</string>
+    <string name="map_widget_battery">Nivel de batería</string>
+    <string name="change_markers_position">Cambiar ubicación del marcador</string>
+    <string name="lang_hu_formal">Húngaro (formal)</string>
     </resources>
