@@ -55,6 +55,11 @@ public class GpxSelectionHelper {
 
 	public String getGpxDescription() {
 		if (selectedGPXFiles.size() == 1) {
+			GPXFile currentGPX = app.getSavingTrackHelper().getCurrentGpx();
+			if (selectedGPXFiles.get(0).getGpxFile() == currentGPX) {
+				return app.getResources().getString(R.string.current_track);
+			}
+
 			File file = new File(selectedGPXFiles.get(0).getGpxFile().path);
 			return Algorithms.getFileNameWithoutExtension(file);
 		} else if (selectedGPXFiles.size() == 0) {

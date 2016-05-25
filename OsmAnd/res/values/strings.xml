@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="current_track">Current track</string>
     <string name="map_widget_battery">Battery level</string>
     <string name="change_markers_position">Change marker\'s position</string>
     <string name="move_marker_bottom_sheet_title">Move the map to change marker\'s position</string>
