@@ -1415,7 +1415,7 @@
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Tillfartsinskränkningar</string>
-    <string name="rendering_attr_showAccess_name">Visa tillfartsinskränkningar</string>
+    <string name="rendering_attr_showAccess_name">Visa tillfartsinskränkningar och vägtullar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
     <string name="rendering_attr_showCycleRoutes_name">Visa cykelleder</string>
