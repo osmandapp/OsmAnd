@@ -140,12 +140,15 @@ android {
 
 	buildTypes {
 		debug {
+                    applicationIdSuffix '.debug'
+                    resValue "string", "authority", "net.osmand.plus.debug.fileprovider"
 		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
 		    // minifyEnabled true
 		    // proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.development
 		}
 		release {
+                    resValue "string", "authority", "net.osmand.plus.fileprovider"
 		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
 		    // minifyEnabled true
 		    //proguardFiles 'proguard-project.txt'
