@@ -56,7 +56,9 @@ public class InterceptorFrameLayout extends FrameLayout {
 		switch (action) {
 			case MotionEvent.ACTION_DOWN:
 				mDownX = ev.getRawX();
-				listener.onTouch(this, ev);
+				if(listener != null) {
+					listener.onTouch(this, ev);
+				}
 				return false;
 			case MotionEvent.ACTION_MOVE:
 				if (mIsScrolling) {
