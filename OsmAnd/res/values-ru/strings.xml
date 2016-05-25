@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OSM Live</string>
     <string name="map_widget_battery">Заряд батареи</string>
     <string name="move_marker_bottom_sheet_title">Переместите карту чтобы изменить положение курсора</string>
