@@ -2036,4 +2036,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="map_widget_battery">Nivell de la bateria</string>
     <string name="lang_hu_formal">Hongarès (formal)</string>
     <string name="change_markers_position">Modifica la posició del marcador</string>
+    <string name="current_track">Traça actual</string>
     </resources>
