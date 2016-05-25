@@ -1661,4 +1661,6 @@
     <string name="shared_string_hide">Skjul</string>
     <string name="av_video_quality_low">Laveste kvalitet</string>
     <string name="av_video_quality_high">Høyeste kvalitet</string>
+    <string name="change_markers_position">Endre markørens posisjon</string>
+    <string name="show_transparency_seekbar">Vis glidebryterlinje for gjennomsiktighet</string>
     </resources>
