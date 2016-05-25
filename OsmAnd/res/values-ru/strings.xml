@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="change_markers_position">Переместить курсор</string>
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OSM Live</string>
     <string name="map_widget_battery">Заряд батареи</string>
