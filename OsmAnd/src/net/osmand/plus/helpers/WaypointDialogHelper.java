@@ -187,7 +187,7 @@ public class WaypointDialogHelper {
 			}
 		}
 
-		if (descr.equals(pointDescription)) {
+		if (Algorithms.objectEquals(descr, pointDescription)) {
 			pointDescription = "";
 		}
 		if (dist > 0 && !Algorithms.isEmpty(pointDescription)) {
