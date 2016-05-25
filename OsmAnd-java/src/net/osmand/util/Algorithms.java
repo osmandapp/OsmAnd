@@ -122,7 +122,7 @@ public class Algorithms {
 		if (isEmpty(s)) {
 			return Collections.emptyMap();
 		}
-		Map<String, String> names = new HashMap<>();
+		Map<String, String> names = new HashMap<String, String>();
 		String[] split = s.split(CHAR_TOSPLIT + "");
 		// last split is an empty string
 		for (int i = 1; i < split.length; i += 2) {
