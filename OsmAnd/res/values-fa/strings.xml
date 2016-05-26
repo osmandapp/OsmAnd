@@ -1,4 +1,69 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <!--
+    	 Disclaimer:
+         If you are going to translate strings, please make sure:
+         1. There is no duplicate strings by name
+         2. Every apostrophe (quote) is preceded by a backslash (see others).
+         If you are making/correcting English translations make sure:
+         3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
+    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
+    -->
+    
+    <string name="current_track">مسیر فعلی</string>
+    <string name="map_widget_battery">میزان شارژ باطری</string>
+    <string name="change_markers_position">تغییر محل علامتگذاری شده  \'s</string>
+    <string name="move_marker_bottom_sheet_title">حرکت به سمت موقعیت \'s علامتگذاری شده</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">دنبال کنید</string>
+    <string name="access_direction_audio_feedback">فیدبک صوتی</string>
+    <string name="access_direction_audio_feedback_descr">علامتگذاری برای فیدبکها صوتی</string>
+    <string name="access_direction_haptic_feedback">فیدبک لمسی</string>
+    <string name="access_direction_haptic_feedback_descr">علامتگذار فیدبکهای لرزشی</string>
+    <string name="use_osm_live_routing_description">روشن کردن مسیریاب برای تغییرات انلاین OSM (بتا)</string>
+    	<string name="use_osm_live_routing">مسیریاب انلاین OSM</string>
+    <string name="access_no_destination">مقصد مشخص نشده است</string>
+    <string name="map_widget_magnetic_bearing">وضعیتهای مغناطیسی</string>
+    <string name="map_widget_bearing">تناسب وضعیتها</string>
+    <string name="access_disable_offroute_recalc">مسیر n\'t بسته است مسیر را تغییر دهید</string>
+    <string name="access_disable_offroute_recalc_descr">جلوگیری از تغییر مسیر اتوماتیک هنگامی که شما در مسیر درست هستید</string>
+    <string name="access_disable_wrong_direction_recalc">مسیر n\'t اشتباه است آنرا تغییر دهید</string>
+    <string name="access_disable_wrong_direction_recalc_descr">جلوگیری از تغییر مسیر هنگامی که شما در مسیر اشتباه هستید</string>
+    <string name="access_smart_autoannounce">هشدارهای هوشمند اتوماتیک</string>
+    <string name="access_smart_autoannounce_descr">هشدار هنگام تغییر مقصد</string>
+    <string name="access_autoannounce_period">دوره هشدار اتوماتیک</string>
+    <string name="access_autoannounce_period_descr">حداقل فاصله زمانی بین هشدارها</string>
+    <string name="access_default_color">رنگ پیش فرض</string>
+    <string name="access_category_choice">انتخاب گروه</string>
+    <string name="access_hint_enter_name">وارد کردن نام</string>
+    <string name="access_hint_enter_category">وارد کردن گروه</string>
+    <string name="access_hint_enter_description">وارد کردن مقصد</string>
+    <string name="access_map_linked_to_location">اتصال نقشه به موقعیت</string>
+    <string name="access_collapsed_list">فهرست جمع آوری شده</string>
+    <string name="access_expanded_list">افزایش لیست</string>
+    <string name="access_empty_list">لیست خالی</string>
+    <string name="access_tree_list">لیست درختی</string>
+    <string name="access_shared_string_not_installed">نصب نشده</string>
+    <string name="access_widget_expand">باز</string>
+    <string name="access_shared_string_navigate_up">به سمت بالا</string>
+    <string name="access_sort">مرتب سازی</string>
+    <string name="map_mode">حالت نقشه</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX انتخاب فایل</string>
+    <string name="rendering_value_thin_name">نازک</string>
+    <string name="rendering_value_medium_name">متوسط</string>
+    <string name="rendering_value_bold_name">کلفت</string>
+    <string name="no_map_markers_found">لطفا مکان را در نقشه علامتگذاری کنید</string>
+    <string name="no_waypoints_found">ایستگاه بین راهی یافت نشد</string>
+    <string name="osmo_group_information_desc">
+        - Creating a group please give it a name and fill in description\n
+        - From the application group are created only with Simple type, read more on the website https://osmo.mobi/g/new \n
+        - Through a website you can manage a group, to place tracks and points available all\n
+        - We do not endorse the use of the group only one user, if this is not the POI group\n
+        - Private groups are limited to 8 persons \n
+        - Detailed terms and conditions always have an on website OsMo.mobi\n
+        - If you need special conditions - please contact support: osmo.mobi@gmail.com
+    </string>
+    <string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
