@@ -2280,4 +2280,6 @@
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="map_widget_battery">Accuniveau</string>
     <string name="lang_hu_formal">Hongaars (formeel)</string>
+    <string name="current_track">Huidige track</string>
+    <string name="change_markers_position">Verschuif markering</string>
     </resources>
