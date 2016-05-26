@@ -10,7 +10,7 @@
         android:id="@+id/bottom_left_views"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/move_marker_bottom_sheet"
+        android:layout_above="@+id/move_marker_bottom_sheet"
         android:layout_alignParentLeft="true">
 
         <!-- ALARM -->
