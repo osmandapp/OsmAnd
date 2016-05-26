@@ -154,11 +154,15 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Recording) {
 			Recording rec = (Recording) o;
-			String recName = rec.getName(activity, true);
-			if (Algorithms.isEmpty(recName)) {
-				return new PointDescription(rec.getSearchHistoryType(), view.getResources().getString(R.string.recording_default_name));
+			if (rec.getFile().exists()) {
+				String recName = rec.getName(activity, true);
+				if (Algorithms.isEmpty(recName)) {
+					return new PointDescription(rec.getSearchHistoryType(), view.getResources().getString(R.string.recording_default_name));
+				}
+				return new PointDescription(rec.getSearchHistoryType(), recName);
+			} else {
+				plugin.deleteRecording(rec, true);
 			}
-			return new PointDescription(rec.getSearchHistoryType(), recName);
 		}
 		return null;
 	}
