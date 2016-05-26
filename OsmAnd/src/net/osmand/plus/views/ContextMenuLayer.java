@@ -134,12 +134,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.shared_string_show_description) {
-						menu.openMenuFullScreen();
-					} else if (itemId == R.string.change_markers_position) {
-						RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
-						enterMovingMode(tileBox);
-					}
+					menu.openMenuFullScreen();
 					return true;
 				}
 			};
@@ -148,13 +143,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					.setIcon(R.drawable.ic_action_note_dark)
 					.setListener(listener)
 					.createItem());
-			if (isObjectMoveable(o)) {
-				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitleId(R.string.change_markers_position, activity)
-						.setIcon(R.drawable.ic_show_on_map)
-						.setListener(listener)
-						.createItem());
-			}
+		}
+		if (isObjectMoveable(o)) {
+			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+					RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+					enterMovingMode(tileBox);
+					return true;
+				}
+			};
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.change_markers_position, activity)
+					.setIcon(R.drawable.ic_show_on_map)
+					.setListener(listener)
+					.createItem());
 		}
 	}
 
