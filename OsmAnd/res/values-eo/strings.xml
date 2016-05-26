@@ -1350,4 +1350,6 @@
     <string name="live_monitoring_interval_descr">Difinas intervalon de enreta kurs-registrado</string>
     <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
     <string name="live_monitoring_url_descr">Difinas la retadreson uzante jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluumo de precizo)={3}, altitudo={4}, rapido={5}, birado={6}</string>
+    <string name="change_markers_position">Ŝanĝi pozicion de marko</string>
+    <string name="current_track">Nuna kurso</string>
     </resources>
