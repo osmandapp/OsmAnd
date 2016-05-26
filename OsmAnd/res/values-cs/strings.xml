@@ -861,7 +861,7 @@
     
     <string name="map_widget_max_speed">Rychlostní omezení</string>
     <string name="rendering_attr_noAdminboundaries_name">Skrýt hranice</string>
-    <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic 5-9</string>
+    <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic ( administrativní úrovně 5-9)</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
@@ -1295,9 +1295,9 @@
     <string name="osmo_gpx_track_downloaded">OsMo trasa %1$s stažena.</string>
     <string name="no_index_file_to_download">Není nic ke stažení, prosím zkontrolujte vaše připojení k Internetu.</string>
     <string name="none_selected_gpx">Nebyl vybrán žádný GPX soubor. Podržením vyberte z dostupných tras.</string>
-    <string name="rendering_attr_hideBuildings_name">Skrýt budovy</string>
-    <string name="rendering_attr_hideText_name">Skrýt text</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Skrýt lesy a křoviny</string>
+    <string name="rendering_attr_hideBuildings_name">Budovy</string>
+    <string name="rendering_attr_hideText_name">Text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Lesy a křoviny</string>
     <string name="rendering_attr_showSurfaces_name">Zobrazit povrch cesty</string>
     <string name="osmo_group_information">Prosím čtěte před vytvářením skupiny!</string>
     <string name="osmo_group_information_desc">" - Vyplňte jméno a popis skupiny při vytvoření\n- From the application group are created only with Simple type, read more on the website https://osmo.mobi/g/new\n- Skupiny můžete spravovat přes webové stránky, umísťování tras a bodů je k dispozici všem\n- Nepodporujeme použití skupiny pouze jedním uživatelem, pokud to není POI skupina\n- Soukromé skupiny jsou omezené na 8 lidí.\n- Detailní pravidla a podmínky jsou vždy na stránkách OsMo.mobi\n- Pokud potřebujete zvláštní podmínky, prosím kontaktujte podporu: osmo.mobi@gmail.com "</string>
@@ -1322,12 +1322,12 @@
     <string name="gpx_monitoring_start">Zapnout GPX logování</string>
     <string name="gpx_monitoring_stop">Zastavit GPX logování</string>
     <string name="gpx_start_new_segment">Začít nový segment</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Skrýt cesty které nejsou pro vozidla</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, které nejsou pro vozidla</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Více detailů</string>
     <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
-    <string name="rendering_attr_hideAccess_name">Skrýt omezení přístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
+    <string name="rendering_attr_hideAccess_name">Omezení přístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu a mýtné</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
@@ -1590,7 +1590,7 @@
     <string name="storage_directory_default">Interní paměť</string>
     <string name="storage_directory">Úložiště map</string>
     <string name="shared_string_copy">Kopírovat</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Skrýt popisná čísla domů</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Popisná čísla domů</string>
     
     <string name="routing_attr_avoid_borders_description">Nepřekračovat hranice do jiné země</string>
     <string name="routing_attr_height_name">Výškové omezení</string>
@@ -1802,7 +1802,7 @@
     <string name="map_legend">Legenda mapy</string>
     <string name="shared_string_update">Aktualizovat</string>
     <string name="shared_string_upload">Odeslat</string>
-    <string name="rendering_attr_hideProposed_name">Skrýt plánované objekty</string>
+    <string name="rendering_attr_hideProposed_name">Plánované objekty</string>
 
 <string name="whats_new">Novinky ve</string>
     <string name="share_osm_edits_subject">Úpravy OSM sdílené přes OsmAnd</string>
@@ -1905,7 +1905,7 @@
     <string name="night">V noci</string>
     <string name="select_month_and_country">Vyberte měsíc a krajinu</string>
 <string name="shared_string_remove">Odstranit</string>
-    <string name="rendering_attr_hideIcons_name">Skrýt ikony POI</string>
+    <string name="rendering_attr_hideIcons_name">Ikony POI</string>
     <string name="shared_string_select">Zvolit</string>
     <string name="road_blocked">Cesta je blokovaná</string>
     <string name="switch_start_finish">Zaměnit počáteční a cílový bod</string>
@@ -1915,7 +1915,7 @@
     <string name="number_of_contributors">Počet přispěvatelů</string>
     <string name="number_of_edits">Počet úprav</string>
     <string name="reports_for">Report za</string>
-<string name="rendering_attr_hideUnderground_name">Skrýt podzemní objekty</string>
+<string name="rendering_attr_hideUnderground_name">Podzemní objekty</string>
     <string name="shared_string_email_address">E-mail</string>
     <string name="show_polygons">Zobrazit polygony</string>
     <string name="find_parking">Najít parkování</string>
@@ -2023,4 +2023,8 @@
     <string name="lat_lon_pattern">Šíř: %1$.6f Dél: %2$.6f</string>
     <string name="access_direction_audio_feedback">Zvuková zpětná vazba směru</string>
     <string name="use_osm_live_routing_description">Povolit navigaci pro OSM Live změny (beta)</string>
-	</resources>
+	<string name="change_markers_position">Změnit umístění značky</string>
+    <string name="move_marker_bottom_sheet_title">Posuňte mapu pro změnu umístění značky</string>
+    <string name="lang_hu_formal">Maďarsky (formálně)</string>
+    <string name="current_track">Současná trasa</string>
+    </resources>
