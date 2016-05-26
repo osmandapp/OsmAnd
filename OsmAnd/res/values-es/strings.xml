@@ -2130,7 +2130,7 @@
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Negrita</string>
-    <string name="access_disable_offroute_recalc">No cambiar la ruta cuando esté fuera de la vía</string>
+    <string name="access_disable_offroute_recalc">No recalcular al desviarme de la ruta</string>
     <string name="access_disable_offroute_recalc_descr">"Evita el recálculo de ruta automático cuando estás muy lejos de la  vía correcta"</string>
     <string name="access_disable_wrong_direction_recalc">No cambiar de ruta por ir en dirección errónea</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evita el recálculo de ruta automático cuando te estás moviendo en dirección equivocada</string>
