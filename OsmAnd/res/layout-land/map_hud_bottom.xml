@@ -249,7 +249,6 @@
         layout="@layout/move_marker_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        tools:visibility="gone"/>
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
