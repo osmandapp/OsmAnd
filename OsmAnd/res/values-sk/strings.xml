@@ -2042,4 +2042,6 @@
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pre zmenu pozície značky</string>
     <string name="lat_lon_pattern">Šírka: %1$.6f Dĺžka: %2$.6f</string>
     <string name="lang_hu_formal">Maďarsky (formálne)</string>
+    <string name="current_track">Súčasná stopa</string>
+    <string name="change_markers_position">Zmeniť polohu značky</string>
     </resources>
