@@ -1977,7 +1977,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="use_dashboard_btn">Dashboard verwenden</string>
     <string name="use_drawer_btn">Menü verwenden</string>
     <string name="dashboard_or_drawer_title">Auswahl der App-Bedienung</string>
-    <string name="dashboard_or_drawer_description">Es ist nun auswählbar, ob die App primär über das flexible Dashboard oder über ein statisches Menü bedient werden soll(Jederzeit in den Dashboard-Einstellungen änderbar)</string>
+    <string name="dashboard_or_drawer_description">Es ist nun auswählbar, ob die App primär über das flexible Dashboard oder über ein statisches Menü bedient werden soll. Diese Entscheidung kann jederzeit in den Dashboard-Einstellungen geändert werden.</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
     <string name="favorite_category_add_new">neu erstellen</string>
     <string name="next_proceed">Weiter</string>
