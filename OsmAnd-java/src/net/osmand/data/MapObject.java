@@ -19,7 +19,8 @@ import net.sf.junidecode.Junidecode;
 public abstract class MapObject implements Comparable<MapObject> {
 	
 	public static final MapObjectComparator BY_NAME_COMPARATOR = new MapObjectComparator();
-	
+	public static final MapObjectByIdComparator BY_ID_COMPARATOR = new MapObjectByIdComparator();
+
 	
 	protected String name = null;
 	protected String enName = null;
@@ -239,6 +240,29 @@ public abstract class MapObject implements Comparable<MapObject> {
 				return true;
 			} else {
 				return collator.equals(o1.getName(l), o2.getName(l));
+			}
+		}
+	}
+
+	public static class MapObjectByIdComparator implements Comparator<MapObject> {
+		@Override
+		public int compare(MapObject o1, MapObject o2) {
+			if (o1 == null ^ o2 == null) {
+				return (o1 == null) ? -1 : 1;
+			} else if (o1 == o2) {
+				return 0;
+			} else {
+				return Double.compare(o1.id, o2.id);
+			}
+		}
+
+		public boolean areEqual(MapObject o1, MapObject o2) {
+			if (o1 == null ^ o2 == null) {
+				return false;
+			} else if (o1 == o2) {
+				return true;
+			} else {
+				return o1.id.equals(o2.id);
 			}
 		}
 	}	
