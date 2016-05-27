@@ -35,7 +35,6 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapObjectStat;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
@@ -120,12 +119,12 @@ public class BinaryInspector {
 		boolean vstats;
 		boolean osm;
 		FileOutputStream osmOut = null;
-		double lattop = 85;
-		double latbottom = -85;
-		double lonleft = -180;
-		double lonright = 180;
+		double lattop = MapUtils.LATITUDE_MIN;
+		double latbottom = MapUtils.LATITUDE_MAX;
+		double lonleft = MapUtils.LONGITUDE_MIN;
+		double lonright = MapUtils.LONGITUDE_MAX;
 		String lang = null;
-		int zoom = -1;
+		int zoom = MapUtils.NO_ZOOM;
 
 		public boolean isVaddress() {
 			return vaddress;

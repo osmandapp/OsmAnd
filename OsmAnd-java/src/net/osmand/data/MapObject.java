@@ -208,7 +208,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			return false;
 		return true;
 	}
-	
+
 	public static class MapObjectComparator implements Comparator<MapObject> {
 		private final String l;
 		Collator collator = OsmAndCollator.primaryCollator();
@@ -220,7 +220,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		public MapObjectComparator(String lang) {
 			this.l = lang;
 		}
-		
+
 		@Override
 		public int compare(MapObject o1, MapObject o2) {
 			if (o1 == null ^ o2 == null) {
