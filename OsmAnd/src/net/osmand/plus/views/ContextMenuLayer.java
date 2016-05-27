@@ -520,6 +520,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
+	public void tryInitSelectedObjectContextMenuProvider(Object o) {
+		for (OsmandMapLayer osmandMapLayer : view.getLayers()) {
+			if (osmandMapLayer instanceof IMoveObjectProvider) {
+				if(((IMoveObjectProvider) osmandMapLayer).isObjectMovable(o)) {
+					selectedObjectContextMenuProvider = (IContextMenuProvider) osmandMapLayer;
+					break;
+				}
+			}
+		}
+	}
+
 	public interface IContextMenuProvider {
 
 		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
