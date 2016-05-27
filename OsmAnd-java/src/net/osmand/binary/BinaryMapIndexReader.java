@@ -1557,6 +1557,18 @@ public class BinaryMapIndexReader {
 		public boolean isEmpty();
 	}
 
+	public static final SearchPoiTypeFilter EMPTY_SEARCH_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
+		@Override
+		public boolean accept(PoiCategory type, String subcategory) {
+			return true;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return false;
+		}
+	};
+
 	public static class MapObjectStat {
 		public int lastStringNamesSize;
 		public int lastObjectIdSize;
@@ -2147,18 +2159,7 @@ public class BinaryMapIndexReader {
 			println(" " + poiRegion.subcategories.get(i));
 		}
 
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, new SearchPoiTypeFilter() {
-			@Override
-			public boolean accept(PoiCategory type, String subcategory) {
-				return true;
-			}
-
-			@Override
-			public boolean isEmpty() {
-				return false;
-			}
-
-		}, null);
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, EMPTY_SEARCH_POI_TYPE_FILTER, null);
 		List<Amenity> results = reader.searchPoi(req);
 		for (Amenity a : results) {
 			println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
