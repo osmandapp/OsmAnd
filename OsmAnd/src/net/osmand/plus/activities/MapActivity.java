@@ -165,6 +165,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionAsked;
 	private boolean permissionGranted;
 
+	private boolean mIsDestroyed = false;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		long tm = System.currentTimeMillis();
@@ -276,6 +278,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
 		registerReceiver(screenOffReceiver, filter);
+
+		mIsDestroyed = false;
 	}
 
 
@@ -868,6 +872,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		mIsDestroyed = true;
 	}
 
 	private void cancelNotification() {
@@ -1341,6 +1346,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void routeWasFinished() {
-		DestinationReachedMenu.show(this);
+		if (!mIsDestroyed) {
+			DestinationReachedMenu.show(this);
+		}
 	}
 }
