@@ -130,8 +130,8 @@ public class CommandBuilder {
 		return alt(prepareStruct(C_MAKE_UT, streetName), prepareStruct(C_MAKE_UT));
 	}
 	
-	public CommandBuilder speedAlarm(){
-		return addCommand(C_SPEAD_ALARM);
+	public CommandBuilder speedAlarm(int maxSpeed, float speed){
+		return addCommand(C_SPEAD_ALARM, maxSpeed, speed);
 	}
 	
 	public CommandBuilder attention(String type){

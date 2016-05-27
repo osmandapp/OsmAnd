@@ -329,9 +329,10 @@ public class VoiceRouter {
 		return text;
 	}
 
-	public void announceAlarm(AlarmInfoType type) {
+	public void announceAlarm(AlarmInfo info, float speed) {
+		AlarmInfoType type = info.getType();
 		if (type == AlarmInfoType.SPEED_LIMIT) {
-			announceSpeedAlarm();
+			announceSpeedAlarm(info.getIntValue(), speed);
 		} else if (type == AlarmInfoType.SPEED_CAMERA) {
 			if (router.getSettings().SPEAK_SPEED_CAMERA.get()) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -363,7 +364,7 @@ public class VoiceRouter {
 		}
 	}
 
-	public void announceSpeedAlarm() {
+	public void announceSpeedAlarm(int maxSpeed, float speed) {
 		long ms = System.currentTimeMillis();
 		if (waitAnnouncedSpeedLimit == 0) {
 			// wait 10 seconds before announcement
@@ -380,7 +381,7 @@ public class VoiceRouter {
 					notifyOnVoiceMessage();
 					lastAnnouncedSpeedLimit = ms;
 					waitAnnouncedSpeedLimit = 0;
-					p.speedAlarm().play();
+					p.speedAlarm(maxSpeed, speed).play();
 				}
 			}
 		}
