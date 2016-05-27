@@ -19,6 +19,13 @@ import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
  */
 public class MapUtils {
 
+	public static final double MIN_LATITUDE = -85.0511;
+	public static final double MAX_LATITUDE = 85.0511;
+	public static final double LATITUDE_TURN = 180.0;
+	public static final double MIN_LONGITUDE = -180.0;
+	public static final double MAX_LONGITUDE = 180.0;
+	public static final double LONGITUDE_TURN = 360.0;
+
 	// TODO change the hostname back to osm.org once HTTPS works for it
 	// https://github.com/openstreetmap/operations/issues/2
 	private static final String BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/";
@@ -113,34 +120,31 @@ public class MapUtils {
 	}
 
 	public static double checkLongitude(double longitude) {
-		if (longitude > -180 && longitude <= 180) {
+		if (longitude > MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
 			return longitude;
 		}
-		while (longitude < -180 || longitude > 180) {
+		while (longitude < MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
 			if (longitude < 0) {
-				longitude += 360;
+				longitude += LONGITUDE_TURN;
 			} else {
-				longitude -= 360;
+				longitude -= LONGITUDE_TURN;
 			}
 		}
 		return longitude;
 	}
 
 	public static double checkLatitude(double latitude) {
-		if (latitude > -80 && latitude <= 80) {
-			return latitude;
-		}
 		while (latitude < -90 || latitude > 90) {
 			if (latitude < 0) {
-				latitude += 180;
+				latitude += LATITUDE_TURN;
 			} else {
-				latitude -= 180;
+				latitude -= LATITUDE_TURN;
 			}
 		}
-		if (latitude < -85.0511) {
-			return -85.0511;
-		} else if (latitude > 85.0511) {
-			return 85.0511;
+		if (latitude < MIN_LATITUDE) {
+			return MIN_LATITUDE;
+		} else if (latitude > MAX_LATITUDE) {
+			return MAX_LATITUDE;
 		}
 		return latitude;
 	}
