@@ -105,13 +105,13 @@
     <string name="av_audio_format_descr">Elekti formaton de eliga sondosiero</string>
     <string name="av_audio_bitrate">Sona bitrapido</string>
     <string name="av_audio_bitrate_descr">Elekti bitrapidon de sondosiero</string>
-    <string name="please_specify_poi_type_only_from_list">Bonvolu difini korektan Interesejan specon aŭ transsalti tion ĉi</string>
+    <string name="please_specify_poi_type_only_from_list">Bonvolu difini korektan specon de Interesejo aŭ transsalti tion ĉi</string>
     <string name="access_from_map_description">Menubutono lanĉas stirpanelon, ne menuon</string>
     <string name="access_from_map">Aligi el mapo</string>
     <string name="show_on_start_description">\'Ek\'-butono rekte lanĉas mapekranon</string>
     <string name="copied_to_clipboard">Enpoŝigita</string>
     <string name="show_on_start">Montri dum starto</string>
-    <string name="release_2_2">" • Nova teksto-dependa fasado kiu ebligas tuŝi lokojn en la mapo kaj en aliaj ekranoj\n\n• Mapekrano estas nun montrita rekte escepte se \'Montri stirpanelon dum aplikaĵa starto\' estas elektita\n\n• Agordi kiujn kaj kiamaniere kartojn estas montritaj en la stirpanelo\n\n• Preterpasi la stirpanelon se vi ŝatas menuo-bazitan aplikaĵ-stiradon\n\n• Por elŝuti mapojn, regionoj povas esti elektitaj rekte per tuŝado en mondmapo\n\n• Intereseja Serĉado nun subtenas pli multe specifajn petojn\n\n• Plibonigitaj eblecoj por redakti Interesejojn kaj la OSM-on\n\n• Mapdosiera elŝutada strukturo kaj interfaco rebonigitaj\n\n• kaj pli... "</string>
+    <string name="release_2_2">" • Nova teksto-dependa fasado kiu ebligas tuŝi lokojn en la mapo kaj en aliaj ekranoj\n\n• Mapekrano estas nun montrita rekte escepte se \'Montri stirpanelon dum aplikaĵa starto\' estas elektita\n\n• Agordi kiujn kaj kiamaniere kartojn estas montritaj en la stirpanelo\n\n• Preterpasi la stirpanelon se vi ŝatas menuo-bazitan aplikaĵ-stiradon\n\n• Por elŝuti mapojn, regionoj povas esti elektitaj rekte per tuŝado en mondmapo\n\n• Serĉado por Interesejoj nun subtenas pli multe specifajn petojn\n\n• Plibonigitaj eblecoj por redakti Interesejojn kaj la OSM-on\n\n• Mapdosiera elŝutada strukturo kaj interfaco rebonigitaj\n\n• kaj pli... "</string>
     <string name="osm_save_offline">Konservi eksterrete</string>
     <string name="osm_edit_modified_poi">Ŝanĝitaj OSM-aj Interesejoj</string>
     <string name="osm_edit_deleted_poi">Forigitaj OSM-aj Interesejoj</string>
@@ -407,7 +407,7 @@
     <string name="choose_osmand_theme">Etoso</string>
     <string name="choose_osmand_theme_descr">Elektas etoson por aplikaĵo</string>
     <string name="local_indexes_cat_srtm">Nivelkurboj</string>
-    <string name="osmo_group_information_desc">" - Por krei grupon, bonvolu nomi kaj priskribi ĝin\n - Uzante la aplikaĵon nur Simplaj specoj de grupoj estas kreitaj, legu pli en la retpaĝo https://osmo.mobi/g/new\n - Per-retpaĝe vi povas administri grupon, loki kursojn kaj punktojn videblajn por ĉiujn\n - Ni ne rekomendas uzi gropon nur per unu persono, se tiu ne estas Intereseja gropo\n - Nekomunaj grupoj estas limitaj ĝis 8 personoj\n - Detalaj kondiĉoj estas ĉiam disponeblaj en retejo OsMo.mobi\n- Se vi bezonos specialajn kondiĉojn - bonvolu kontakti subtenantojn: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">" - Por krei grupon, bonvolu nomi kaj priskribi ĝin\n - Uzante la aplikaĵon nur Simplaj specoj de grupoj estas kreitaj, legu pli en la retpaĝo https://osmo.mobi/g/new\n - Per-retpaĝe vi povas administri grupon, loki kursojn kaj punktojn videblajn por ĉiujn\n - Ni ne rekomendas uzi gropon nur per unu persono, se tiu ne estas Intereseja gropo\n - Nekomunaj grupoj estas limigitaj ĝis 8 personoj\n - Detalaj kondiĉoj estas ĉiam disponeblaj en retejo OsMo.mobi\n- Se vi bezonos specialajn kondiĉojn - bonvolu kontakti subtenantojn: osmo.mobi@gmail.com "</string>
     <string name="osmo_specify_tracker_id">Bonvolu difini identigilon</string>
     <string name="osmo_no_connection_msg">Ne povas konekti al la servilo de OsMo:\n- kontrolu vian retkonekton;\n- kontrolu agordojn;\n- vizitu na nia Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Anonima uzanto ne povas:\n- krei grupojn;\n- samtempigi grupojn kaj aparatojn kun la servilo;\n- administri grupojn kaj aparatojn per persona stirpanelo en retejo.</string>
@@ -727,7 +727,7 @@
     <string name="lang_cy">Kimra</string>
     <string name="no_waypoints_found">Ne trovis navigadpunktojn</string>
     <string name="no_map_markers_found">Bonvolu aldoni markojn per mapo</string>
-    <string name="layer_amenity_label">Interesejaj etikedoj</string>
+    <string name="layer_amenity_label">Etikedoj de Interesejoj</string>
     <string name="loading_smth">Ŝarganta %1$s…</string>
     <string name="map_widget_plain_time">Nuna tempo</string>
     <string name="gpx_wpt">Navigadpunkto</string>
@@ -1016,7 +1016,7 @@
     <string name="stop_routing_confirm">Ĉu vi certe volas ĉesigi navigadon?</string>
     <string name="clear_dest_confirm">Ĉu vi certe volas vakigi la celpunkton (kaj inter-celojn)?</string>
     <string name="precise_routing_mode">Precizaj kursoj (alfa)</string>
-    <string name="precise_routing_mode_descr">Aktivigas kalkuladon de precizaj senerarigaj kursoj. Nuntempe ĝi estas malrapida kaj nur por limitaj distancoj.</string>
+    <string name="precise_routing_mode_descr">Aktivigas kalkuladon de precizaj senerarigaj kursoj. Nuntempe ĝi estas malrapida kaj nur por limigitaj distancoj.</string>
     <string name="recording_context_menu_show">Montri</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Fari foton</string>
@@ -1135,10 +1135,10 @@
     <string name="interrupt_music_descr">Paŭzas muzikon dum sciigoj</string>
     <string name="osmand_short_description_80_chars">Foliumi tutmondajn mapojn kaj navigadi uzante eksterretajn kaj enretajn OSM mapojn</string>
 	<string name="osmand_plus_short_description_80_chars">Foliumi tutmondajn mapojn kaj navigadi uzante eksterretajn kaj enretajn OSM mapojn</string>
-	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) OsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservita en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon post turno voĉaj anoncoj.\nĈefaj eblecoj:\n - Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo)\n - Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo\n - Elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo\n - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, Interesejoj, ŝatataj ejoj, nivelkurboj publiktransportaj haltejoj, ekstraj mapoj kun ŝanĝebla diafaneco\n - Serĉi eksterrete adresojn kaj interesajn ejojn (Interesejojn)\n - Difini kursojn por mallongaj distancoj eksterrete (iafoje malfunkcias)\n - Aŭta, bicikla, kaj perpiedanta reĝimoj kun:\n  - agordebla aŭtomata/taga/nokta aspekto\n  - agordebla rapid-dependa map-skalado\n  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso\n  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj\nLimoj en tiu ĉi senpaga versio de OsmAnd:\n - Limita nombro da elŝutoj de mapoj\n - Sen aliro al eksterretaj Vikipediaj Interesejoj\nOsmAnd estas konstante disvolviĝanta kaj ĝia plua disvolviĝo dependas de monaj donacoj por subteni programadon kaj testadon de novaj eblecoj. Bonvolu konsideri aĉeti na OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto je osmand.net. "</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) OsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservita en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon post turno voĉaj anoncoj.\nĈefaj eblecoj:\n - Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo)\n - Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo\n - Elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo\n - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, Interesejoj, ŝatataj ejoj, nivelkurboj publiktransportaj haltejoj, ekstraj mapoj kun ŝanĝebla diafaneco\n - Serĉi eksterrete adresojn kaj interesajn ejojn (Interesejojn)\n - Difini kursojn por mallongaj distancoj eksterrete (iafoje malfunkcias)\n - Aŭta, bicikla, kaj perpiedanta reĝimoj kun:\n  - agordebla aŭtomata/taga/nokta aspekto\n  - agordebla rapid-dependa map-skalado\n  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso\n  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj\nLimoj en tiu ĉi senpaga versio de OsmAnd:\n - Limigita nombro da elŝutoj de mapoj\n - Sen aliro al eksterretaj Vikipediaj Interesejoj\nOsmAnd estas konstante disvolviĝanta kaj ĝia plua disvolviĝo dependas de monaj donacoj por subteni programadon kaj testadon de novaj eblecoj. Bonvolu konsideri aĉeti na OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto je osmand.net. "</string>
 	<string name="day_night_info_description">Sunleviĝo: %1$s\nSunsubiro: %2$s</string>
     <string name="day_night_info">Informo pri tago/nokto</string>
-    <string name="filterpoi_activity">Krei Interesejan filtrilon</string>
+    <string name="filterpoi_activity">Krei filtrilon de Interesejo</string>
     <string name="recalculate_route_to_your_location">Transporta speco:</string>
     <string name="select_navigation_mode">Elektas manieron de movado</string>
     <string name="layer_map_appearance">Agordi ekranon</string>
@@ -1330,7 +1330,7 @@
     <string name="arrival_distance_factor_normally">Norme</string>
     <string name="arrival_distance_factor_late">Malfrue</string>
     <string name="arrival_distance_factor_at_last">Dum la plej lastaj metroj</string>
-    <string name="arrival_distance">Alvena anoncado</string>
+    <string name="arrival_distance">Anonco pri alveno</string>
     <string name="arrival_distance_descr">Kiafrue vi volas anoncon pri alveno?</string>
     <string name="rendering_out_of_memory">Mankas memoron por montri elektitan regionon</string>
     <string name="use_fluorescent_overlays">Rebrilaj surtavoloj</string>
@@ -1352,4 +1352,30 @@
     <string name="live_monitoring_url_descr">Difinas la retadreson uzante jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluumo de precizo)={3}, altitudo={4}, rapido={5}, birado={6}</string>
     <string name="change_markers_position">Ŝanĝi pozicion de marko</string>
     <string name="current_track">Nuna kurso</string>
+    <string name="gpx_monitoring_disabled_warn">Konservu kurson uzante GPX-fenestraĵon aŭ per \'Registrado de kurso\' agordoj.</string>
+    <string name="show_current_gpx_title">Montri nunan kurson</string>
+    <string name="free_version_message">Tiu ĉi senpaga versio estas limigita al %1$s elŝutoj kaj ne subtenas eksterretajn Vikipediajn artikolojn.</string>
+    <string name="poi_context_menu_showdescription">Montri priskribon de Interesejo</string>
+    <string name="index_name_wiki">Tutmondaj Vikipediaj Interesejoj</string>
+    <string name="index_name_voice">Voĉ-avertoj (antaŭregistritaj, limigitaj eblecoj)</string>
+    <string name="index_name_tts_voice">Voĉ-avertoj (parolsintezitaj, konsilindaj)</string>
+    <string name="amenity_type_osmwiki">Vikipedio (eksterrete)</string>
+    <string name="amenity_type_user_defined">Propra</string>
+    <string name="fav_export_confirmation">Dosiero kun antaŭ-elportitaj ŝatataj jam ekzistas. Ĉu vi volas anstataŭigi ĝin?</string>
+    <string name="routing_settings">Navigado</string>
+    <string name="profile_settings">Specifaj agordoj de profilo</string>
+    <string name="routing_settings_descr">Difinas navigadajn agordojn</string>
+    <string name="global_settings">Ĝeneralaj agordoj</string>
+    <string name="index_settings">Administri map-dosierojn</string>
+    <string name="general_settings">Ĝeneralaj</string>
+    <string name="general_settings_descr">Agordas vidigon kaj ĝenerale la aplikaĵon</string>
+    <string name="global_app_settings">Ĝeneralaj agordoj de aplikaĵo</string>
+    <string name="user_name">Via OSM-uzantnomo</string>
+    <string name="open_street_map_login_descr">Bezonata por sendadoj al openstreetmap.org</string>
+    <string name="user_password">Via OSM-pasvorto</string>
+    <string name="osmand_service">Fona reĝimo</string>
+    <string name="osmand_service_descr">OsmAnd funkcias fone kiam la ekrano estas malaktiva</string>
+    <string name="city_type_village">Vilaĝo</string>
+    <string name="city_type_hamlet">Vilaĝego</string>
+    <string name="city_type_suburb">Antaŭrubo</string>
     </resources>
