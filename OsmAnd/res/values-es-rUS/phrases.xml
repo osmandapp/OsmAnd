@@ -2671,4 +2671,9 @@
 
 <string name="poi_depth">Profundidad</string>
 
+<string name="poi_salt_yes">Salado: Sí</string>
+	<string name="poi_salt_no">Salado: No</string>
+	<string name="poi_wheelchair_designated">Designado para sillas de ruedas</string>
+	<string name="poi_spoil_heap">Escombrera</string>
+
 </resources>
