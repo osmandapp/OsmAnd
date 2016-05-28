@@ -15,7 +15,7 @@
     <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
     <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
     <string name="delete_confirmation_msg">Usunąć %1$s?</string>
-    <string name="city_type_suburb">Dzielnica</string>
+    <string name="city_type_suburb">Przedmieście</string>
     <string name="city_type_hamlet">Przysiółek</string>
     <string name="city_type_village">Wieś</string>
     <string name="city_type_town">Miasteczko</string>
