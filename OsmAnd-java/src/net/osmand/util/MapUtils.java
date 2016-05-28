@@ -123,7 +123,7 @@ public class MapUtils {
 		if (longitude > MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
 			return longitude;
 		}
-		while (longitude < MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
+		while (longitude <= MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
 			if (longitude < 0) {
 				longitude += LONGITUDE_TURN;
 			} else {
@@ -134,6 +134,9 @@ public class MapUtils {
 	}
 
 	public static double checkLatitude(double latitude) {
+		if (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE) {
+			return latitude;
+		}
 		while (latitude < -90 || latitude > 90) {
 			if (latitude < 0) {
 				latitude += LATITUDE_TURN;
