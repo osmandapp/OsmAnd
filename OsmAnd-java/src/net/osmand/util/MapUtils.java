@@ -141,7 +141,7 @@ public class MapUtils {
 	}
 
 	public static double checkLatitude(double latitude) {
-		if (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE) {
+		if (latitude > LATITUDE_MIN && latitude <= LATITUDE_MAX) {
 			return latitude;
 		}
 		while (latitude < -90 || latitude > 90) {
