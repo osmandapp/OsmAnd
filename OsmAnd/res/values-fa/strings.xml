@@ -763,7 +763,7 @@
 	<string name="osmand_service_descr">OsmAnd حتی در زمانی که صفحه خاموش است در حال اجرا می‌ماند</string>
 	
 	<string name="download_files_not_enough_space">فضای کافی برای دانلود %1$s مگابایت وجود ندارد (فضای خالی: %2$s).</string>
-	<string name="download_files_question_space">اکنون فضای خالی {2} مگابایت است! {0} فایل دانلود شود ({1} MB)؟</string>
+	<string name="download_files_question_space">اکنون فضای خالی {2} مگابایت است. {0} فایل دانلود شود ({1} MB) ؟</string>
 	
 	<string name="use_transparent_map_theme">تم شفاف</string>
 	<string name="native_library_not_supported">کتابخانه بومی بر روی این دستگاه پشتیبانی نمیشود.</string>
@@ -2027,4 +2027,14 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="current_track">مسیر فعلی</string>
     <string name="move_marker_bottom_sheet_title">حرکت به سمت موقعیت علامتگذاری شده</string>
     <string name="lat_lon_pattern">طول: %1$.6f عرض: %2$.6f</string>
+    <string name="access_sort">مرتب سازی</string>
+    <string name="number_of_gpx_files_selected_pattern">انتخاب فایل GPX %s</string>
+    <string name="osm_live_email_desc">ما به اطلاعات شما برای ارائه خدمات نیازمندیم</string>
+    <string name="download_files_question_space_with_temp">اکنون فضای خالی {2} MB است. شما نیازمند {3} MB فضای خالی و {1} MB فضای اضافی هستید.</string>
+    <string name="shared_string_type">نوع</string>
+    <string name="rec_split">ضبط چند تایی</string>
+    <string name="shared_string_commit">انجام شده</string>
+
+    <string name="share_geo">جغرافیایی:</string>
+    <string name="nm_h">nmi/h</string>
     </resources>
