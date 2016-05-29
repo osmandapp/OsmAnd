@@ -1488,7 +1488,7 @@
     <string name="rendering_attr_moreDetailed_name">Więcej szczegółów</string>
     <string name="rendering_attr_lessDetailed_name">Mniej szczegółów</string>
     <string name="rendering_attr_hideAccess_name">Ograniczenia dostępu</string>
-    <string name="rendering_attr_showAccess_name">Ograniczenia dostępu</string>
+    <string name="rendering_attr_showAccess_name">Ograniczenia dostępu i opłaty</string>
     <string name="rendering_attr_showSurfaceGrade_name">Jakość dróg</string>
     <string name="rendering_attr_showSurfaces_name">Nawierzchnia dróg</string>
     <string name="rendering_attr_showCycleRoutes_name">Ścieżki rowerowe</string>
@@ -2106,7 +2106,7 @@
     <string name="clear_active_markers_q">Usunąć wszystkie aktywne znaczniki?</string>
     <string name="clear_markers_history_q">Wyczyścić historię znaczników mapy?</string>
     <string name="active_markers">Aktywne znaczniki</string>
-    <string name="map_markers">Znaczniki mapy</string>
+    <string name="map_markers">Znaczniki</string>
     <string name="map_marker">Znacznik mapy</string>
     <string name="consider_turning_polygons_off">Zaleca się wyłączenie renderowania wielokątów.</string>
     <string name="rendering_attr_showMtbRoutes_name">Trasy MTB</string>
@@ -2141,7 +2141,7 @@
     <string name="show_transparency_seekbar">Pasek przezroczystości</string>
     <string name="no_map_markers_found">Proszę dodać znacznik na mapie</string>
     <string name="no_waypoints_found">Nie znaleziono punktów</string>
-    <string name="release_2_3">" • OSM Live. Wspieraj współtwórców map i programistów i uzyskaj godzinowe aktualizacji mapy.\n\n  • Znaczniki mapy. Nowy sposób na szybki wybór miejsca na mapie.\n\n  • Bardziej szczegółowe mapy OSM z oznaczeniami numeracji dróg specyficznymi dla konkretnego kraju oraz wiele nowych funkcji map.\n\n  • Ulepszony wygląd i przygotowanie trasy.\n\n  • Wiele ulepszeń w menu kontekstowym mapy, takie jak kontekstowe odnośniki adresu.\n\n  i więcej… "</string>
+    <string name="release_2_3">" • OSM Live. Wspieraj współtwórców map i programistów, aby uzyskać bieżące aktualizacji mapy.\n\n  • Znaczniki mapy. Nowy sposób na szybkie oznaczenie położenia na mapie.\n\n  • Bardziej szczegółowe mapy OSM z oznaczeniami numeracji dróg specyficznymi dla konkretnego kraju oraz wiele nowych funkcji map.\n\n  • Ulepszony wygląd i przygotowanie trasy.\n\n  • Wiele ulepszeń w menu kontekstowym mapy, takie jak kontekstowe odnośniki adresu.\n\n  i więcej… "</string>
     <string name="shared_string_move_up">Podnieś</string>
     <string name="shared_string_move_down">Opuść</string>
     <string name="finish_navigation">Zakończ nawigację</string>
@@ -2160,7 +2160,7 @@
     <string name="osm_live_region_desc">Część wpłat zostanie wysłana do użytkowników OSM, którzy prześlą zmiany na mapie w tym regionie</string>
     <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OSM Live</string>
 
-    <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata. Większa część dochodów powraca do społeczności OSM i jest wypłacana za każdy wkład OSM. W przypadku, kiedy lubisz OsmAnd i OSM i chce je wspierać, jest to doskonały sposób, aby to zrobić.</string>
+    <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata. Większa część dochodów powraca do społeczności OSM i jest wypłacana za każdy wkład OSM. Jeśli lubisz OsmAnd i OSM i chcesz je wspierać, jest to doskonały sposób, aby to zrobić.</string>
     
     <string name="file_name_containes_illegal_char">Nazwa pliku zawiera niedozwolony znak</string>
 <string name="access_default_color">Domyślny kolor</string>
@@ -2198,4 +2198,6 @@
     <string name="access_smart_autoannounce">Inteligentne powiadamianie</string>
     <string name="access_autoannounce_period_descr">Określa minimalny odstęp czasu pomiędzy powiadomieniami</string>
     <string name="access_autoannounce_period">Okres powiadomień</string>
+    <string name="move_marker_bottom_sheet_title">Proszę przesunąć mapę, aby zmienić położenie znacznika</string>
+    <string name="change_markers_position">Zmień położenie znacznika</string>
     </resources>
