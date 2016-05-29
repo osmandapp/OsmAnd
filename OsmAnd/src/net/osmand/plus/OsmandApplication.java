@@ -303,12 +303,21 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void checkPreferredLocale() {
 		Configuration config = getBaseContext().getResources().getConfiguration();
-		String lang = osmandSettings.PREFERRED_LOCALE.get();
+
+		String pl = osmandSettings.PREFERRED_LOCALE.get();
+		String[] split = pl.split("_");
+		String lang = split[0];
+		String country = (split.length > 1) ? split[1] : "";
+
 		if(defaultLocale == null) {
 			defaultLocale = Locale.getDefault();
 		}
-		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
-			preferredLocale = new Locale(lang);
+		if (!"".equals(lang) && !config.locale.equals(pl)) {
+			if (!"".equals(country)) {
+				preferredLocale = new Locale(lang, country);
+			} else {
+				preferredLocale = new Locale(lang);
+			}
 			Locale.setDefault(preferredLocale);
 			config.locale = preferredLocale;
 			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());

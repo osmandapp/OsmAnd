@@ -150,14 +150,15 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		}
 		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
 
-		// Add this string in Latin also so it can be more easily identified if foreign language has been selected by mistake
+		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
+		// Hardy maintenance 2016-05-29:
+		//  - Include languages if their translation is >= ~10%    (but any language will be visible if it is the device's system locale)
+		//  - Mark as "incomplete" if                    < ~80%
+		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
+
+		// Add (Device language) in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
 		String latinSystemDefaultSuffix = " (" + getString(R.string.system_locale_no_translate) + ")";
 
-		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
-		// Hardy 2016-05-28:
-		//  - Include languages if their translation is >= ~10%    (but any language will be visible if it is the device's system locale)
-		//  - Mark as "incomplete" unless > ~80%
-		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[]{"",
 				"en",
@@ -165,8 +166,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"ar",
 				"eu",
 				"be",
+				"be_BY",
 				"bg",
 				"ca",
+				"zh_CN",
+				"zh_TW",
 				"hr",
 				"cs",
 				"da",
@@ -191,6 +195,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"fa",
 				"pl",
 				"pt",
+				"pt_BR",
 				"ro",
 				"ru",
 				"sc",
@@ -198,6 +203,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"sk",
 				"sl",
 				"es",
+				"es_US",
+				"es_AR",
 				"sv",
 				"tr",
 				"uk",
@@ -209,8 +216,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_ar) + incompleteSuffix,
 				getString(R.string.lang_eu),
 				getString(R.string.lang_be),
+				getString(R.string.lang_be_BY),
 				getString(R.string.lang_bg),
 				getString(R.string.lang_ca),
+				getString(R.string.lang_zh_CN) + incompleteSuffix,
+				getString(R.string.lang_zh_TW),
 				getString(R.string.lang_hr) + incompleteSuffix,
 				getString(R.string.lang_cs),
 				getString(R.string.lang_da),
@@ -235,6 +245,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_fa) + incompleteSuffix,
 				getString(R.string.lang_pl),
 				getString(R.string.lang_pt),
+				getString(R.string.lang_pt_br),
 				getString(R.string.lang_ro) + incompleteSuffix,
 				getString(R.string.lang_ru),
 				getString(R.string.lang_sc),
@@ -242,6 +253,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_sk),
 				getString(R.string.lang_sl),
 				getString(R.string.lang_es),
+				getString(R.string.lang_es_us),
+				getString(R.string.lang_es_ar),
 				getString(R.string.lang_sv),
 				getString(R.string.lang_tr),
 				getString(R.string.lang_uk),
