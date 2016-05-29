@@ -361,7 +361,8 @@
     <string name="lang_lb">Luxembourgish</string>
     <string name="lang_os">Ossetian</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_es_ar">Argentinean Spanish</string>
+    <string name="lang_es_us">Spanish (American)</string>
+    <string name="lang_es_ar">Spanish (Argentinian)</string>
     <string name="lang_nb">Norwegian Bokmål</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thai</string>
@@ -882,6 +883,7 @@
     <string name="lang_hy">Armenian</string>
     <string name="lang_eu">Basque</string>
     <string name="lang_be">Belarusian</string>
+    <string name="lang_be_BY">Belarusian (Latin)</string>
     <string name="lang_bs">Bosnian</string>
     <string name="lang_bg">Bulgarian</string>
     <string name="lang_ca">Catalan</string>
@@ -913,12 +915,12 @@
     <string name="lang_ru">Russian</string>
     <string name="lang_sc">Sardinian</string>
     <string name="lang_sr">Serbian</string>
-    <string name="lang_zh_CN">Simplified Chinese</string>
+    <string name="lang_zh_CN">Chinese (Simplified)</string>
     <string name="lang_sk">Slovak</string>
     <string name="lang_sl">Slovenian</string>
     <string name="lang_es">Spanish</string>
     <string name="lang_sv">Swedish</string>
-    <string name="lang_zh_TW">Traditional Chinese</string>
+    <string name="lang_zh_TW">Chinese (Traditional)</string>
     <string name="lang_tr">Turkish</string>
     <string name="lang_uk">Ukrainian</string>
     <string name="lang_vi">Vietnamese</string>
