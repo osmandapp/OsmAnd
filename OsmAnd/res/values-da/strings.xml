@@ -1552,8 +1552,8 @@
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
     <string name="lang_sr">Serbisk</string>
-    <string name="lang_zh_CN">Kinesisk, forenklet</string>
-    <string name="lang_zh_TW">Kinesisk, traditionelt</string>
+    <string name="lang_zh_CN">Kinesisk (forenklet)</string>
+    <string name="lang_zh_TW">Kinesisk (traditionelt)</string>
     <string name="lang_sc">Sardisk</string>
     <string name="rendering_attr_subwayMode_name">Metroruter</string>
     <string name="continue_navigation">Fortsæt navigation</string>
@@ -1917,7 +1917,7 @@
     <string name="lang_et">Estisk</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="lang_nb">Norsk</string>
-    <string name="lang_es_ar">Argentinsk spansk</string>
+    <string name="lang_es_ar">Spansk (Argentinsk)</string>
     <string name="light_theme">Lyst</string>
     <string name="dark_theme">Mørkt</string>
     <string name="lang_pms">Piemontisk</string>
@@ -2372,4 +2372,6 @@
     <string name="lang_hu_formal">Ungarsk (formel)</string>
     <string name="current_track">Aktuelt spor</string>
     <string name="change_markers_position">Ændre markørens position</string>
+    <string name="lang_es_us">Spansk (Amerikansk)</string>
+    <string name="lang_be_BY">Hviderussisk (Latin)</string>
     </resources>
