@@ -1512,8 +1512,8 @@
 	<string name="lang_ar">Arabisch</string>
 	<string name="lang_sc">Sardijns</string>
 	<string name="lang_sr">Servisch</string>
-	<string name="lang_zh_CN">Vereenvoudigd Chinees</string>
-	<string name="lang_zh_TW">Traditioneel Chinees</string>
+	<string name="lang_zh_CN">Chinees (vereenvoudigd)</string>
+	<string name="lang_zh_TW">Chinees (traditioneel)</string>
 	<string name="rendering_attr_subwayMode_name">Metrolijnen</string>
  	<string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
@@ -2282,4 +2282,7 @@
     <string name="lang_hu_formal">Hongaars (formeel)</string>
     <string name="current_track">Huidige track</string>
     <string name="change_markers_position">Verschuif markering</string>
+    <string name="lang_es_us">Spaans (Amerikaans)</string>
+    <string name="lang_be_BY">Wit-Russisch (latijns)</string>
+    <string name="lang_kn">Kannada</string>
     </resources>
