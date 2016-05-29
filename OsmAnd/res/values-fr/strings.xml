@@ -1494,8 +1494,8 @@
     <string name="lang_ar">arabe</string>
     <string name="lang_sc">sarde</string>
     <string name="lang_sr">serbe</string>
-    <string name="lang_zh_CN">chinois simplifié</string>
-    <string name="lang_zh_TW">chinois traditionnel</string>
+    <string name="lang_zh_CN">Chinois (simplifié)</string>
+    <string name="lang_zh_TW">Chinois (traditionnel)</string>
     <string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Voulez-vous quitter le groupe %1$s ?</string>
     <string name="osmo_specify_tracker_id">Veuillez renseigner l\'identifiant</string>
@@ -1798,7 +1798,7 @@
     <string name="lang_ht">Haïtien</string>
     <string name="lang_gl">Galicien</string>
     <string name="lang_et">Estonien</string>
-    <string name="lang_es_ar">Espagnol argentin</string>
+    <string name="lang_es_ar">Espagnol (argentin)</string>
     <string name="lang_pms">Piémontais</string>
     <string name="lang_sh">Serbo-croate</string>
     <string name="lang_br">Breton</string>
@@ -2222,4 +2222,5 @@
     <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position du marqueur</string>
     <string name="current_track">Trace en cours</string>
     <string name="change_markers_position">Modifier la position du marqueur</string>
+    <string name="lang_es_us">Espagnol (américain)</string>
     </resources>
