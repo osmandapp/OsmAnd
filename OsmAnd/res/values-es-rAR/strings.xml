@@ -397,12 +397,12 @@
     <string name="lang_ru">Ruso</string>
     <string name="lang_sc">Sardo</string>
     <string name="lang_sr">Serbio</string>
-    <string name="lang_zh_CN">Chino Simplificado</string>
+    <string name="lang_zh_CN">Chino (simplificado)</string>
     <string name="lang_sk">Eslovaco</string>
     <string name="lang_sl">Esloveno</string>
     <string name="lang_es">Español</string>
     <string name="lang_sv">Sueco</string>
-    <string name="lang_zh_TW">Chino Tradicional</string>
+    <string name="lang_zh_TW">Chino (tradicional)</string>
     <string name="lang_tr">Turco</string>
     <string name="lang_uk">Ucraniano</string>
     <string name="lang_vi">Vietnamita</string>
@@ -2182,4 +2182,6 @@
     <string name="lang_hu_formal">Húngaro (formal)</string>
     <string name="current_track">Traza actual</string>
     <string name="change_markers_position">Cambiar ubicación del marcador</string>
+    <string name="lang_es_us">Español (Estados Unidos)</string>
+    <string name="lang_be_BY">Bielorruso (Latín)</string>
     </resources>
