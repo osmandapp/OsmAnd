@@ -64,7 +64,7 @@
     
     <string name="map_widget_audionotes">یادداشتهای صوتی</string>
     <string name="audionotes_plugin_description">افزونه یادداشت صوتی/ویدئویی قابلیت یادداشت‌برداری صوتی یا عکس یا ویدئو را درحین سفرفراهم می‌کند.اینکار با استفاده از دکمه‌ای بر روی صفحه نقشه و یا مستقیماً از منوی زمینه‌ای با فشار دادن هر نقطه روی صفحه امکان‌پذیر است.</string>
-    <string name="audionotes_plugin_name">یادداشتهای صوتی/ویدئویی</string>
+    <string name="audionotes_plugin_name">یادداشتهای صوتی/تصویری</string>
     <string name="download_select_map_types">نقشه‌های دیگر</string>
     <string name="download_regular_maps">نقشه عادی</string>
     <string name="download_roads_only_maps">فقط نقشه جاده‌ها</string>
@@ -1341,7 +1341,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="driving_region_canada">کانادا</string>
 	<string name="driving_region_europe_asia">اروپا و آسیا</string>
 	<string name="driving_region_uk">انگلستان، هند، استرالیا و سایر کشورها</string>
-	<string name="about_version">ویرایش:</string>
+	<string name="about_version">نسخه:</string>
     <string name="shared_string_about">درباره</string>
     <string name="about_settings_descr">درباره نسخه، گواهی‌ها، اعضای پروژه</string>
     
@@ -1378,7 +1378,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="animate_routing_gpx">شبیه سازی با استفاده از مسیر GPX</string>
     <string name="shared_string_remember_my_choice">به یاد داشتن انتخاب</string>
     
-    <string name="route_is_too_long">احتمالاً محاسبه مسیر توسط مسیریاب آفلاین OsmAnd برای نقاط بیش از ۲۰۰ کیلومتر فاصله خیلی طول میکشد (یا گاهی کار نمیکند). بهتر است یک یا چند نقطه بین‌راهی انتخاب کنید تا مسیر محاسبه شود.</string>
+    <string name="route_is_too_long">گاهی مسیر یاب آفلاین OsmAnd برای نقاط بیش از ۲۰۰ کیلومتر درست کار نمیکند (یا گاهی کار نمیکند). بهتر است یک یا چند نقطه بین راهی استفاده کنید تا مسیر محاسبه شود.</string>
 	<string name="auto_zoom_none">زوم خودکار غیرفعال</string>
 	<string name="auto_zoom_close">نمای نزدیک</string>
 	<string name="auto_zoom_far">نمای متوسط</string>
@@ -1588,7 +1588,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_enable_tracker">ارسال موقعیت من</string>
     <string name="osmo_control">OsMo دسترسی سریع</string>
     
-	<string name="import_file_favourites">ذخیره نقاط به صورت فایل GPX و یا واردکردن آنها به مکانهای مورد علاقه شما؟</string>
+	<string name="import_file_favourites">ذخیره نقاط به صورت فایل GPX و یا واردکردن آنها به مکانهای مورد علاقه شما ؟</string>
 	
 	<string name="gpx_file_is_empty">مسیر GPX خالی است</string>
     
@@ -1751,7 +1751,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="roads_only">فقط راه‌ها</string>
     <string name="rendering_attr_pisteRoutes_name">پیست‌ها</string>
 	<string name="device_memory">حافظه دستگاه</string>
-    <string name="rendering_attr_pisteGrooming_name">آماده کردن پیست برای اسکی</string>
+    <string name="rendering_attr_pisteGrooming_name">نظافت پیست اسکی</string>
     <string name="plugin_ski_name">نمای نقشه اسکی</string>
     <string name="plugin_nautical_name">نمای نقشه ناتیکال</string>
     <string name="world_ski_missing">برای نمابش نقشه‌های اسکی بایستی نقشه‌های آقلاین مورد نیاز دانلود شود</string>
@@ -1769,7 +1769,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     
     
 	
-	<string name="rendering_attr_roadStyle_name">استایل جاده</string>
+	<string name="rendering_attr_roadStyle_name">ظاهر جاده</string>
     <string name="rendering_value_default_name">پیش‌فرض</string>
     <string name="rendering_value_orange_name">نارنجی</string>
     <string name="rendering_value_germanRoadAtlas_name">اطلس راه‌های آلمانی</string>
@@ -1840,7 +1840,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="traffic_warning_pedestrian">تقاطع‌ پیاده‌رو</string>
 	<string name="show_railway_warnings">تقاطع‌های ریلی نشان داده شوند</string>
 	<string name="show_pedestrian_warnings">تقاطع‌های پیاده‌رو نشان داده شوند</string>
-    <string name="routing_attr_no_new_routing_name">عدم استفاده ازفوانین مسیریابی نسخه 1.9</string>
+    <string name="routing_attr_no_new_routing_name">عدم استفاده ازقوانین مسیریابی نسخه 1.9</string>
     <string name="rendering_attr_transportStops_name">ایستگاه‌های حمل و نقل عمومی</string>
     <string name="navigate_point_northing">به طرف شمال</string>
     <string name="navigate_point_easting">به طرف شرق</string>
@@ -1986,7 +1986,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="shared_string_show_details">نمایش جزییات</string>
     <string name="lang_tl">تاگالوگ</string>
     <string name="rendering_value_disabled_name">غیرفعال</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس حوزه مسیر</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس دامنه مسیر</string>
     <string name="rendering_value_walkingRoutesOSMC_name">رنگ‌بندی براساس OSMC</string>
     <string name="osmo_share_my_location">اشتراک گذاری مکان من</string>
     <string name="no_address_found">آدرسی مشخص نشد</string>
@@ -2037,4 +2037,10 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 
     <string name="share_geo">جغرافیایی:</string>
     <string name="nm_h">nmi/h</string>
+    <string name="action_create">ساخت اکشن</string>
+    <string name="action_modify">اصلاح اکشن</string>
+    <string name="action_delete">حذف اکشن</string>
+    <string name="rendering_attr_alpineHiking_name">مقیاس پیاده روی آلپاین (SAC)</string>
+    <string name="opening_at">بازکردن در</string>
+    <string name="closing_at">بستن در</string>
     </resources>
