@@ -898,8 +898,8 @@
     <string name="osmo_group_description">Beskrivelse</string>
     <string name="use_points_as_intermediates">Beregn rute mellom punkter</string>
     <string name="lang_sr">Serbisk</string>
-    <string name="lang_zh_CN">Forenklet kinesisk</string>
-    <string name="lang_zh_TW">Tradisjonell kinesisk</string>
+    <string name="lang_zh_CN">Kinesisk (forenklet)</string>
+    <string name="lang_zh_TW">Kinesisk (tradisjonell)</string>
     <string name="keep_and_add_destination_point">Legg til som siste målpunkt</string>
     <string name="select_gpx">Velg GPX…</string>
 
@@ -1308,14 +1308,14 @@
     <string name="lang_is">Islandsk</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_ga">Irsk</string>
-    <string name="lang_la">Latin</string>
+    <string name="lang_la">Latinsk</string>
     <string name="lang_ku">Kurdisk</string>
     <string name="lang_ta">Tamilsk</string>
     <string name="lang_ml">Malayalam</string>
     <string name="lang_lb">Luxembourgsk</string>
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_es_ar">Argentinsk spansk</string>
+    <string name="lang_es_ar">Spansk (Argentinsk)</string>
     <string name="lang_nb">Norsk (bokmål)</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
@@ -1663,4 +1663,7 @@
     <string name="av_video_quality_high">Høyeste kvalitet</string>
     <string name="change_markers_position">Endre markørens posisjon</string>
     <string name="show_transparency_seekbar">Vis glidebryterlinje for gjennomsiktighet</string>
+    <string name="lang_hu_formal">Ungarsk (formell)</string>
+    <string name="lang_be_BY">Hviterussisk (latin)</string>
+    <string name="lang_es_us">Spansk (Amerikansk)</string>
     </resources>
