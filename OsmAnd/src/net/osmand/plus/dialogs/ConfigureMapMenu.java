@@ -539,6 +539,8 @@ public class ConfigureMapMenu {
 			mp.put(ids[i], values[i]);
 		}
 		ArrayList<String> lst = new ArrayList<>(mp.keySet());
+		String systemLocale = ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
+		String englishLocale = ctx.getString(R.string.lang_en);
 		Collections.sort(lst, new Comparator<String>() {
 			@Override
 			public int compare(String lhs, String rhs) {
@@ -547,11 +549,11 @@ public class ConfigureMapMenu {
 				if (i1 != i2) {
 					return i1 < i2 ? -1 : 1;
 				}
-				//i1 = lhs.equals(ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")") ? 0 : (lhs.equals(ctx.getString(R.string.lang_en)) ? 1 : 2);
-				//i2 = rhs.equals(ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")") ? 0 : (rhs.equals(ctx.getString(R.string.lang_en)) ? 1 : 2);
-				//if (i1 != i2) {
-				//	return i1 < i2 ? -1 : 1;
-				//}
+				i1 = lhs.equals(systemLocale) ? 0 : (lhs.equals(englishLocale)) ? 1 : 2);
+				i2 = rhs.equals(systemLocale) ? 0 : (rhs.equals(englishLocale)) ? 1 : 2);
+				if (i1 != i2) {
+					return i1 < i2 ? -1 : 1;
+				}
 				return mp.get(lhs).compareTo(mp.get(rhs));
 			}
 		});
