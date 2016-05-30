@@ -1294,8 +1294,8 @@
     <string name="lang_ar">Arabsky</string>
     <string name="lang_sc">Sardínsky</string>
     <string name="lang_sr">Srbsky</string>
-    <string name="lang_zh_CN">Zjednodušená čínština</string>
-    <string name="lang_zh_TW">Tradičná čínština</string>
+    <string name="lang_zh_CN">Čínština (Zjednodušená)</string>
+    <string name="lang_zh_TW">Čínština (Tradičná)</string>
     <string name="continue_navigation">Pokračovať v navigácii</string>
     <string name="pause_navigation">Pozastaviť navigáciu</string>
     <string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
@@ -1621,7 +1621,7 @@
     <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
     <string name="archive_wikipedia_data">Máte stiahnuté staré nekompatibilné dáta z Wikipedie. Chcete ich archivovať?</string>
     <string name="download_wikipedia_files">Chcete stiahnuť ďalšie dáta z Wikipedie (%1$s MB) ?</string>
-    <string name="lang_es_ar">Argentínska Španielčina</string>
+    <string name="lang_es_ar">Španielčina (Argentínska)</string>
     <string name="lang_nb">Nórsky Bokmål</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thajsky</string>
@@ -2044,4 +2044,7 @@
     <string name="lang_hu_formal">Maďarsky (formálne)</string>
     <string name="current_track">Súčasná stopa</string>
     <string name="change_markers_position">Zmeniť polohu značky</string>
+    <string name="lang_es_us">Španielčina (Americká)</string>
+    <string name="lang_be_BY">Bielorusky (Latinka)</string>
+    <string name="lang_kn">Kannada</string>
     </resources>
