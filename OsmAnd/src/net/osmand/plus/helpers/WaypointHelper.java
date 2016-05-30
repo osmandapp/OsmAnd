@@ -170,7 +170,7 @@ public class WaypointHelper {
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
-			getVoiceRouter().announceSpeedAlarm();
+			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), lastProjection.getSpeed());
 		}
 		AlarmInfo mostImportant = speedAlarm;
 		int value = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
@@ -271,7 +271,7 @@ public class WaypointHelper {
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, loc, delta);
 		if (speedAlarm != null) {
-			getVoiceRouter().announceSpeedAlarm();
+			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), loc.getSpeed());
 			return speedAlarm;
 		}
 		for (int i = 0; i < ro.getPointsLength(); i++) {
@@ -286,7 +286,7 @@ public class WaypointHelper {
 							long ms = System.currentTimeMillis();
 							if (ms - announcedAlarmTime > 50 * 1000) {
 								announcedAlarmTime = ms;
-								getVoiceRouter().announceAlarm(info.getType());
+								getVoiceRouter().announceAlarm(info, loc.getSpeed());
 							}
 							return info;
 						}
@@ -381,7 +381,7 @@ public class WaypointHelper {
 								ait.add(((AlarmInfo) pw.point).getType());
 							}
 							for (AlarmInfoType t : ait) {
-								app.getRoutingHelper().getVoiceRouter().announceAlarm(t);
+								app.getRoutingHelper().getVoiceRouter().announceAlarm(new AlarmInfo(t, -1), lastKnownLocation.getSpeed());
 							}
 						} else if (type == FAVORITES) {
 							getVoiceRouter().approachFavorite(lastKnownLocation, approachPoints);
