@@ -234,10 +234,8 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 
 		public boolean areEqual(MapObject o1, MapObject o2) {
-			if (o1 == null ^ o2 == null) {
-				return false;
-			} else if (o1 == o2) {
-				return true;
+			if (o1 == null) {
+				return o2 == null;
 			} else {
 				return collator.equals(o1.getName(l), o2.getName(l));
 			}
@@ -257,10 +255,8 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 
 		public boolean areEqual(MapObject o1, MapObject o2) {
-			if (o1 == null ^ o2 == null) {
-				return false;
-			} else if (o1 == o2) {
-				return true;
+			if (o1 == null) {
+				return o2 == null;
 			} else {
 				return o1.id.equals(o2.id);
 			}

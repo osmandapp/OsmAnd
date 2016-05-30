@@ -16,13 +16,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 
 /**
@@ -593,6 +597,17 @@ public class Algorithms {
 			case 4: return 0xFF0000FF + (Y << 16);
 		}
 		return 0xFFFF00FF;
+	}
+
+	public static <T> Set<T> findDuplicates(Collection<T> list) {
+		Set<T> duplicates = new LinkedHashSet<T>();
+		Set<T> uniques = new HashSet<T>();
+		for (T t : list) {
+			if (!uniques.add(t)) {
+				duplicates.add(t);
+			}
+		}
+		return duplicates;
 	}
 
 }
