@@ -86,5 +86,8 @@ public abstract class AbstractPoiType {
 
 	public abstract Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes);
 	
-	
+	@Override
+	public String toString() {
+		return keyName;
+	}	
 }

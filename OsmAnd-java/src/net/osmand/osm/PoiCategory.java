@@ -70,4 +70,6 @@ public class PoiCategory extends PoiFilter {
 		}
 		return basemapPoi.contains(pt);
 	}
+	
+	
 }
