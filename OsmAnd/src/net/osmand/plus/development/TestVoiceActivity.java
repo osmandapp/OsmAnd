@@ -165,9 +165,14 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "New route calculated (150m & 1m5sec)", builder(p).newRouteCalculated(150, 65));
-		addButton(ll, "New route calculated (11350m & 350sec)", builder(p).newRouteCalculated(11350, 350));
-		addButton(ll, "Route recalculated (23150m & 2h3m5sec)", builder(p).routeRecalculated(23150, 7385));
+		addButton(ll, "New route calculated, 150m, 260sec (00:04:20)", builder(p).newRouteCalculated(150, 260));
+		addButton(ll, "New route calculated, 1350m, 3690sec (01:01:30)", builder(p).newRouteCalculated(1350, 3690));
+		addButton(ll, "New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
+		addButton(ll, "New route calculated 9100m, 10980sec (03:03)", builder(p).newRouteCalculated(9100, 10980));
+		addButton(ll, "Route recalculated 11500m, 18600sec (05:10)", builder(p).routeRecalculated(11500, 18600));
+		addButton(ll, "Route recalculated 19633m, 26700sec (07:25)", builder(p).routeRecalculated(19633, 26700));
+		addButton(ll, "Route recalculated 89750m, 55800sec (15:30)", builder(p).routeRecalculated(89750, 55800));
+		addButton(ll, "Route recalculated 125900m, 92700sec (25:45)", builder(p).routeRecalculated(125900, 92700));
 
 		addButton(ll, "After 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
 		addButton(ll, "In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
