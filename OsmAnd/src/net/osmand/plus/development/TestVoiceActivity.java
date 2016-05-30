@@ -164,7 +164,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		}
 		return new Struct(name);
 	}
-	
+
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
 		addButton(ll, "       Route calculated and number tests:", builder(p));
 		addButton(ll, "(1.1)  New route calculated, 150m, 230sec (00:03:50)", builder(p).newRouteCalculated(150, 230));
@@ -184,7 +184,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")));
 		addButton(ll, "(3.6)  Turn sharply right onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")));
 
-		addButton(ll, "       Keep left/right:", builder(p));
+		addButton(ll, "       Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "(4.1)  After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
 		addButton(ll, "(4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
 		addButton(ll, "(4.3)  Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
@@ -200,13 +200,13 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(6.3)  Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")));
 		addButton(ll, "(6.4)  When possible, make a U-turn", builder(p).makeUTwp());
 
-		addButton(ll, "       Straight, Follow the road:", builder(p));
+		addButton(ll, "       Go straight, follow the road:", builder(p));
 		addButton(ll, "(7.1)  Straight ahead", builder(p).goAhead());
 		addButton(ll, "(7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
 		addButton(ll, "(7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
 		addButton(ll, "(7.4)  Continue the road for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
 
-		addButton(ll, "       Arriving and passing:", builder(p));
+		addButton(ll, "       Arriving and passing points:", builder(p));
 		addButton(ll, "(8.1)  Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
 		addButton(ll, "(8.2)  Arrive at your intermediate destination 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
 		addButton(ll, "(8.3)  Passing GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
@@ -230,14 +230,11 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(10.4) You are back on the route", builder(p).backOnRoute());
 		ll.forceLayout();
 	}
-	
-	
-	
+
 	private CommandBuilder builder(CommandPlayer p){
 		return p.newCommandBuilder();
 	}
-	
-	
+
 	public void addButton(ViewGroup layout, String description, final CommandBuilder builder){
 		Button button = new Button(this);
 		button.setGravity(Gravity.LEFT);
@@ -247,14 +244,14 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		
 		layout.addView(button);
 		button.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				builder.play();
 			}
 		});
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
@@ -262,9 +259,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		case android.R.id.home:
 			finish();
 			return true;
-
 		}
 		return false;
 	}
-
 }
