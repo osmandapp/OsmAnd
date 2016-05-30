@@ -549,8 +549,8 @@ public class ConfigureMapMenu {
 				if (i1 != i2) {
 					return i1 < i2 ? -1 : 1;
 				}
-				i1 = systemLocale.equals(lhs) ? 0 : (englishLocale.equals(lhs)) ? 1 : 2);
-				i2 = systemLocale.equals(rhs) ? 0 : (englishLocale.equals(rhs)) ? 1 : 2);
+				i1 = systemLocale.equals(lhs) ? 0 : (englishLocale.equals(lhs) ? 1 : 2);
+				i2 = systemLocale.equals(rhs) ? 0 : (englishLocale.equals(rhs) ? 1 : 2);
 				if (i1 != i2) {
 					return i1 < i2 ? -1 : 1;
 				}
