@@ -70,12 +70,14 @@ public class BinaryInspector {
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[]{
-//					"-vpoi",
+					"-vpoi",
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 //					"-vrouting",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
-					"/Users/victorshcherb/osmand/maps/Netherlands_europe.road.obf"
+//					"-bbox=28.7379,50.186,28.7471,50.183",
+//					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm" 
+					System.getProperty("maps.dir")+"/Ukraine_merge.road.obf"
 			});
 		} else {
 			in.inspector(args);
