@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +80,19 @@ public class BinaryMapIndexReader {
 	public static final int SHIFT_COORDINATES = 5;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
+	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
+		@Override
+		public boolean isEmpty() {
+			return false;
+		}
+		
+		@Override
+		public boolean accept(PoiCategory type, String subcategory) {
+			return true;
+		}
+	};
+	
+	
 	
 	
 	private final RandomAccessFile raf;
