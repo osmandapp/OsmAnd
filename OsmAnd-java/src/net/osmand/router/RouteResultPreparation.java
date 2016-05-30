@@ -821,9 +821,15 @@ public class RouteResultPreparation {
 		} else {
 			for (int k = 0; k < rawLanes.length; k++) {
 				int turn = TurnType.getPrimaryTurn(rawLanes[k]);
+				int sturn = TurnType.getSecondaryTurn(rawLanes[k]);
 				boolean active = false;
 				if (turn == TurnType.C) {
 					active = true;
+					if ((TurnType.isRightTurn(sturn) && rs.roadsOnRight == 0)
+							|| (TurnType.isLeftTurn(sturn) && rs.roadsOnLeft == 0)) {
+						TurnType.setPrimaryTurn(rawLanes, k, sturn);
+						TurnType.setSecondaryTurn(rawLanes, k, turn);
+					}
 				} else if (TurnType.isRightTurn(turn) && rs.roadsOnRight == 0) {
 					// some turns go through many segments (to turn right or left)
 					// so on one first segment the lane could be available and may be only 1 possible
