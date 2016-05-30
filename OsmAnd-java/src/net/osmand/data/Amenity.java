@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.zip.GZIPInputStream;
 
 
 public class Amenity extends MapObject  {
+	public static final AmenityByIdComparator BY_ID_COMPARATOR = new AmenityByIdComparator();
 
 	public static final String WEBSITE = "website";
 	public static final String PHONE = "phone";
@@ -249,5 +251,21 @@ public class Amenity extends MapObject  {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
 	}
 	
-	
+	public static class AmenityByIdComparator implements Comparator<Amenity> {
+		@Override
+		public int compare(Amenity a1, Amenity a2) {
+			int result = MapObject.BY_ID_COMPARATOR.compare(a1, a2);
+			if (result == 0) {
+				result = a1.type.compareTo(a2.type);
+			}
+			if (result == 0) {
+				result = a1.subType.compareTo(a2.subType);
+			}
+			return result;
+		}
+
+		public boolean areEqual(Amenity a1, Amenity a2) {
+			return MapObject.BY_ID_COMPARATOR.areEqual(a1, a2) && a1.type.equals(a2.type) && a1.subType.equals(a2.subType);
+		}
+	}
 }

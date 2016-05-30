@@ -19,12 +19,19 @@ import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
  */
 public class MapUtils {
 
-	public static final double MIN_LATITUDE = -85.0511;
-	public static final double MAX_LATITUDE = 85.0511;
+	public static final double LATITUDE_MIN = -85.0511;
+	public static final double LATITUDE_MAX = 85.0511;
 	public static final double LATITUDE_TURN = 180.0;
-	public static final double MIN_LONGITUDE = -180.0;
-	public static final double MAX_LONGITUDE = 180.0;
+	public static final double LONGITUDE_MIN = -180.0;
+	public static final double LONGITUDE_MAX = 180.0;
 	public static final double LONGITUDE_TURN = 360.0;
+	public static final int[] MAP_BOUNDING_BOX_31_TILE_NUMBER = {
+			MapUtils.get31TileNumberX(LONGITUDE_MIN),
+			MapUtils.get31TileNumberX(LONGITUDE_MAX),
+			MapUtils.get31TileNumberY(LATITUDE_MAX),
+			MapUtils.get31TileNumberY(LATITUDE_MIN),
+	};
+	public static final int NO_ZOOM = -1;
 
 	// TODO change the hostname back to osm.org once HTTPS works for it
 	// https://github.com/openstreetmap/operations/issues/2
@@ -120,10 +127,10 @@ public class MapUtils {
 	}
 
 	public static double checkLongitude(double longitude) {
-		if (longitude > MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
+		if (longitude > LONGITUDE_MIN && longitude <= LONGITUDE_MAX) {
 			return longitude;
 		}
-		while (longitude <= MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
+		while (longitude < LONGITUDE_MIN || longitude > LONGITUDE_MAX) {
 			if (longitude < 0) {
 				longitude += LONGITUDE_TURN;
 			} else {
@@ -134,7 +141,7 @@ public class MapUtils {
 	}
 
 	public static double checkLatitude(double latitude) {
-		if (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE) {
+		if (latitude > LATITUDE_MIN && latitude <= LATITUDE_MAX) {
 			return latitude;
 		}
 		while (latitude < -90 || latitude > 90) {
@@ -144,10 +151,10 @@ public class MapUtils {
 				latitude -= LATITUDE_TURN;
 			}
 		}
-		if (latitude < MIN_LATITUDE) {
-			return MIN_LATITUDE;
-		} else if (latitude > MAX_LATITUDE) {
-			return MAX_LATITUDE;
+		if (latitude < LATITUDE_MIN) {
+			return LATITUDE_MIN;
+		} else if (latitude > LATITUDE_MAX) {
+			return LATITUDE_MAX;
 		}
 		return latitude;
 	}
