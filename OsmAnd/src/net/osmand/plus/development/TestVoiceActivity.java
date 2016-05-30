@@ -199,7 +199,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "Passing favorite 'Brewery'", builder(p).arrivedAtFavorite("Brewery"));
 		addButton(ll, "Passing POI 'Museum'", builder(p).arrivedAtPoi("Museum"));
 
-		addButton(ll, "You are exceeding the speed limit", builder(p).speedAlarm(50, 65f));
+		addButton(ll, "You are exceeding the speed limit '50' (18 m/s)", builder(p).speedAlarm(50, 18f));
 		addButton(ll, "Attention, speed camera", builder(p).attention("SPEED_CAMERA"));
 		addButton(ll, "Attention, border control", builder(p).attention("BORDER_CONTROL"));
 		addButton(ll, "Attention, railroad crossing", builder(p).attention("RAILWAY"));
