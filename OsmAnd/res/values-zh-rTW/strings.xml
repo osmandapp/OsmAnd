@@ -1423,8 +1423,8 @@
     <string name="lang_ar">阿拉伯</string>
     <string name="lang_sc">薩丁尼亞島</string>
     <string name="lang_sr">塞爾維亞</string>
-    <string name="lang_zh_CN">簡體中文</string>
-    <string name="lang_zh_TW">正體中文</string>
+    <string name="lang_zh_CN">中文（簡體）</string>
+    <string name="lang_zh_TW">中文（正體）</string>
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
@@ -1767,7 +1767,7 @@
     <string name="lang_gl">加利西亞語</string>
     <string name="lang_et">愛沙尼亞語</string>
     <string name="lang_ceb">宿霧語</string>
-    <string name="lang_es_ar">阿根廷的西班牙文</string>
+    <string name="lang_es_ar">西班牙語（阿根廷）</string>
     <string name="lang_nb">挪威布克莫爾語</string>
     <string name="light_theme">明亮</string>
     <string name="dark_theme">暗色</string>
@@ -2192,4 +2192,7 @@
     <string name="lang_hu_formal">匈牙利（正式的）</string>
     <string name="change_markers_position">變更標記的位置</string>
     <string name="current_track">目前的軌跡</string>
+    <string name="lang_es_us">西班牙語（美洲）</string>
+    <string name="lang_be_BY">白俄羅斯語（拉丁）</string>
+    <string name="lang_kn">康納達語</string>
     </resources>
