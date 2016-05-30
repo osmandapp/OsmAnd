@@ -149,7 +149,7 @@ public class Amenity extends MapObject  {
 
 	@Override
 	public String toString() {
-		return type.toString() + " : " + subType + " "+ getName();
+		return type.getKeyName() + " : " + subType + " "+ getName();
 	}
 	
 	public String getSite() {
