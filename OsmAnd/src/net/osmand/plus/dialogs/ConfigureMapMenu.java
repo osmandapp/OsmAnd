@@ -547,11 +547,11 @@ public class ConfigureMapMenu {
 				if (i1 != i2) {
 					return i1 < i2 ? -1 : 1;
 				}
-				i1 = lhs.equals(ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")") ? 0 : (lhs.equals(ctx.getString(R.string.lang_en)) ? 1 : 2);
-				i1 = rhs.equals(ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")") ? 0 : (rhs.equals(ctx.getString(R.string.lang_en)) ? 1 : 2);
-				if (i1 != i2) {
-					return i1 < i2 ? -1 : 1;
-				}
+				//i1 = lhs.equals(ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")") ? 0 : (lhs.equals(ctx.getString(R.string.lang_en)) ? 1 : 2);
+				//i2 = rhs.equals(ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")") ? 0 : (rhs.equals(ctx.getString(R.string.lang_en)) ? 1 : 2);
+				//if (i1 != i2) {
+				//	return i1 < i2 ? -1 : 1;
+				//}
 				return mp.get(lhs).compareTo(mp.get(rhs));
 			}
 		});
