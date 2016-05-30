@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -1557,7 +1556,7 @@ public class BinaryMapIndexReader {
 		public boolean isEmpty();
 	}
 
-	public static final SearchPoiTypeFilter EMPTY_SEARCH_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
+	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
 		@Override
 		public boolean accept(PoiCategory type, String subcategory) {
 			return true;
@@ -2159,7 +2158,7 @@ public class BinaryMapIndexReader {
 			println(" " + poiRegion.subcategories.get(i));
 		}
 
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, EMPTY_SEARCH_POI_TYPE_FILTER, null);
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, ACCEPT_ALL_POI_TYPE_FILTER, null);
 		List<Amenity> results = reader.searchPoi(req);
 		for (Amenity a : results) {
 			println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());

@@ -48,7 +48,6 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
-import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
 import com.google.protobuf.CodedOutputStream;
@@ -1067,7 +1066,7 @@ public class BinaryInspector {
 				MapUtils.get31TileNumberY(verbose.lattop),
 				MapUtils.get31TileNumberY(verbose.latbottom),
 				verbose.getZoom(),
-				BinaryMapIndexReader.EMPTY_SEARCH_POI_TYPE_FILTER,
+				BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {
