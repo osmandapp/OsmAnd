@@ -1531,4 +1531,21 @@
     <string name="search_history_street">Strato: {0}, {1}</string>
     <string name="search_history_int_streets">Intersekco: {0} x {1} en {2}</string>
     <string name="search_history_building">Domo: {0}, {1}, {2}</string>
+    <string name="search_nothing_found">Trovis neniun</string>
+    <string name="searching">Serĉanta…</string>
+    <string name="searching_address">Serĉanta adreson…</string>
+    <string name="search_offline_address">Serĉado eksterrete</string>
+    <string name="search_online_address">Serĉado enrete</string>
+    <string name="address">Adreso</string>
+    <string name="poi">Interesejo</string>
+    <string name="update_tile">Ĝisdatigi mapon</string>
+    <string name="use_english_names">Uzi anglaj nomoj sur mapoj</string>
+    <string name="use_english_names_descr">Aktivigu por uzi anglajn nomojn anstataŭ lokajn</string>
+    <string name="search_address">Serĉi adreson</string>
+    <string name="app_mode_car">Aŭto</string>
+    <string name="app_mode_bicycle">Biciklo</string>
+    <string name="app_mode_pedestrian">Perpiedanto</string>
+    <string name="get_plugin">Elŝuti</string>
+    <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al ci?</string>
+    <string name="app_name_osmand">OsmAnd</string>
     </resources>
