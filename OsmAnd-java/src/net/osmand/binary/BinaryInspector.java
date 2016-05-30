@@ -35,6 +35,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapObjectStat;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
@@ -48,6 +49,7 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
 import com.google.protobuf.CodedOutputStream;
@@ -118,12 +120,12 @@ public class BinaryInspector {
 		boolean vstats;
 		boolean osm;
 		FileOutputStream osmOut = null;
-		double lattop = MapUtils.LATITUDE_MIN;
-		double latbottom = MapUtils.LATITUDE_MAX;
-		double lonleft = MapUtils.LONGITUDE_MIN;
-		double lonright = MapUtils.LONGITUDE_MAX;
+		double lattop = 85;
+		double latbottom = -85;
+		double lonleft = -180;
+		double lonright = 180;
 		String lang = null;
-		int zoom = MapUtils.NO_ZOOM;
+		int zoom = -1;
 
 		public boolean isVaddress() {
 			return vaddress;
@@ -1066,7 +1068,18 @@ public class BinaryInspector {
 				MapUtils.get31TileNumberY(verbose.lattop),
 				MapUtils.get31TileNumberY(verbose.latbottom),
 				verbose.getZoom(),
-				BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
+				new SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return true;
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+
+				},
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {
