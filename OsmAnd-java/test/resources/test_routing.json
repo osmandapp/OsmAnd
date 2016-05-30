@@ -1,0 +1,39 @@
+[
+  {
+    "testName": "1.Pedestrian Preston road TR Lorimar drive",
+    "startPoint": {
+      "latitude": 45.69539,
+      "longitude": 35.43936
+    },
+    "endPoint": {
+      "latitude": 45.69567,
+      "longitude": 35.440113
+    },
+    "params": {
+      "vehicle": "car",
+      "short_way": "true" 
+    },
+    "expectedResults": {
+      "26545": "TL|C|C|C"
+    }
+  },
+    {
+    "testName": "2. Car Preston road TR Lorimar drive",
+    "params": {
+      "vehicle": "pedestrian",
+      "pedestrian": "true",
+      "short_way": "true" 
+    },
+    "startPoint": {
+      "latitude": 45.69539,
+      "longitude": 35.43936
+    },
+    "endPoint": {
+      "latitude": 45.69567,
+      "longitude": 35.440113
+    },
+    "expectedResults": {
+      "26545": "TL|C|C|C|+TR"
+    }
+  }
+]

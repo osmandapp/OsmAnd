@@ -14,6 +14,7 @@ public class TestEntry {
     private LatLon endPoint;
     private boolean ignore;
     private Map<Long, String> expectedResults;
+    private Map<String, String> params;
 
     public LatLon getStartPoint() {
         return startPoint;
@@ -46,6 +47,14 @@ public class TestEntry {
     public void setExpectedResults(Map<Long, String> expectedResults) {
         this.expectedResults = expectedResults;
     }
+    
+    public void setParams(Map<String, String> params) {
+		this.params = params;
+	}
+    
+    public Map<String, String> getParams() {
+		return params;
+	}
 
     public String getTestName() {
         return testName;
