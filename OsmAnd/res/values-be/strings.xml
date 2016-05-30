@@ -2213,4 +2213,6 @@
     <string name="lat_lon_pattern">Шыр: %1$.6f Даў: %2$.6f</string>
     <string name="lang_hu_formal">Вугорская (афіцыйная)</string>
     <string name="move_marker_bottom_sheet_title">Перасуньце мапу, каб зьмяніць становішча курсору</string>
+    <string name="change_markers_position">Перамясьціць курсор</string>
+    <string name="lang_be_BY">Беларуская лацінка</string>
     </resources>
