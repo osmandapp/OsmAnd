@@ -799,7 +799,7 @@
 	<string name="poi_wiki_lang_gl">Galicyjska Wikipedia</string>
 	<string name="poi_wiki_lang_he">Hebrajska Wikipedia</string>
 	<string name="poi_wiki_lang_hi">Hinduska Wikipedia</string>
-	<string name="poi_wiki_lang_hr">Chorwacku Wikipedia</string>
+	<string name="poi_wiki_lang_hr">Chorwacka Wikipedia</string>
 	<string name="poi_wiki_lang_ht">Haitańska Wikipedia</string>
 	<string name="poi_wiki_lang_hu">Węgierska Wikipedia</string>
 	<string name="poi_wiki_lang_id">Indonezyjska Wikipedia</string>
@@ -1039,7 +1039,7 @@
 	<string name="poi_denomination_new_apostolic">Kościół Nowoapostolski</string>
 	<string name="poi_shower">Prysznic</string>
 	<string name="poi_email">E-mail</string>
-	<string name="poi_fax">Fax</string>
+	<string name="poi_fax">Faks</string>
 	<string name="facebook">Facebook</string>
 	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
