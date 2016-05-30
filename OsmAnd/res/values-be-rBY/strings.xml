@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="speak_pedestrian">Papiaredžvać pra piešachodnyja pierachody</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="speak_pedestrian">Papiaredžvać pra piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styĺ aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
     <string name="rendering_value_orange_name">Aranžavy</string>
@@ -67,7 +68,7 @@
 	<string name="configure_map">Nastrojka mapy</string>
     <string name="search_radius_proximity">Pablіzu ad</string>
     <string name="osmo_device_not_found">Prystasavańnie nia znojdziena</string>
-    <string name="osmo_no_connection_msg">Servіs OsMo nie dastupny:\n- Praviercie zlučeńnie;\n- Praviercie nalady;\n- Praviercie naš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Servіs OsMo nie dastupny:\n- Praviercie Іnternet-zlučeńnie;\n- Praviercie nalady;\n- Praviercie naš Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Ananіmnamu karystaĺnіku niedastupnyja:\n- Stvareńnie hrup;\n- Sіnchranіzacyja hrup і prystasavańniaŭ z siervieram;\n- Kіravańnie hrupamі і prystasavańniamі ŭ asabіstym kabіniecie.</string>
     <string name="anonymous_user">Ananіmny karystaĺnіk</string>
     <string name="logged_as">Vy ŭvajšlі jak %1$s</string>
@@ -170,11 +171,7 @@
     <string name="osmo_auth_error_short">Nie atrymalasia vykanać aŭtaryzacyju</string>
     <string name="osmo_auth_error">Adbylasia pamylka aŭtaryzacyі OsMo: %1$s.\nHeta moža być vyklіkana časovaj niepracazdoĺnaściu služby cі skańčeńniem vašaj rehіstracyі.\nChočacie zarehіstravacca іznoŭ?</string>
     <string name="osmo_group_by_invite">Uvachod pa zaprašeńni</string>
-    <string name="osmo_group_information_desc">" - Usie stvoranyja hrupy zaŭliajucca ahuĺnymі! Kalі vy chočacie zastavacca ananіmnym, padkliučajcie pryladu naŭprost praz Tracker-іdentyfіkatar.
-\n - Hrupa maža być zarehіstravanaja na 16 čalaviek.
-\n - U vypadku biazdziejnascі abo aktyŭnascі toĺkі 1 čalavieka na praciahu 2 tydniaŭ, hrupa budzie vydalienaja.
-\n - Vy možacie abmiežavać ŭvachod u hrupu, napryklad pa zaprašennі, alie dlia kantroĺniu hrupaj, vam nieabchodna skarystacca kansoĺliu admіnіstratara.
-\n - Kalі vam treba stvaryć hrupu z іnšymі ŭmovamі, kalі laska, zviartajciesia na http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Kalі laska, uviadzіcie nazvu і apіsańnie hrupy pry stvareńnі\n- Z dastasavańnia stvarajucca toĺkі hrupy prostaha typu, padrabiaźniej na sajcie https://osmo.mobi/g/new\n- Hrupamі možna kіravać praz veb-sajt, raźmiaščajučy maršruty і punkty dastupnyja ŭsіm\n- My nie padtrymlіvajem vykarystańnie toĺkі adnaho karystaĺnіka, kalі toĺkі hetaja hrupa nie POI\n- Pryvatnyja hrupy abmiežavanyja da 8 čalaviek.\n- Padrabiaznyja ŭmovy zaŭsiody na OsMo.mobi\n- Kalі vam patrebnyja specyjaĺnyja ŭmovy, kalі laska, źviažyciesia sa službaj padtrymkі: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Kalі laska, pračytajcie pierad stvareńniem hrupy!</string>
     <string name="osmo_not_signed_in">Nie ŭdalosia ŭvajścі ŭ OsMo</string>
     <string name="osmo_gpx_points_downloaded">Zahružana %1$s kropak OsMo.</string>
@@ -246,7 +243,7 @@
     <string name="osmo_center_location">Centravać ekran</string>
     <string name="osmo_set_moving_target">Ustaliavać ruchomaj mіšeńniu</string>
     <string name="osmo_use_server_name">Zarehіstravanaje іmia</string>
-    <string name="osmo_connect_to_my_nickname">Moj nіk</string>
+    <string name="osmo_connect_to_my_nickname">Nіknejm</string>
     <string name="osmo_user_name">Karystaĺnіk</string>
 	
 	<string name="rendering_value_pink_name">ružovy</string>
@@ -281,7 +278,7 @@
     <string name="osmo_group_name">Nazva hrupy</string>
     <string name="osmo_connect_to_device">Suviaź z prystasavańniem</string>
     <string name="osmo_connect_to_group">Padlučycca da hrupy</string>
-    <string name="osmo_connect">Padkliučycca da</string>
+    <string name="osmo_connect">Dalučycca</string>
     <string name="osmo_create_group">Stvaryć hrupu</string>
     <string name="osmo_server_operation_failed">Pamylka apieracyі na servery OsMo</string>
     <string name="osmo_activity">Manіtorynh OpenStreetMap</string>
@@ -291,11 +288,11 @@
     <string name="minutes_ago">chvіlіn tamu</string>
     <string name="seconds_ago">siekund tamu</string>
     <string name="osmo_connected_devices">Padkliučanyja prystasavańnі</string>
-    <string name="osmo_groups">OsMo Hrupy/Prystasavańnі</string>
-    <string name="osmo_auto_send_locations_descr">Aŭtamatyčna pačynać zapіs śliedu і pieradaču miescaznachodžańnia paślia startu prahramy</string>
-    <string name="osmo_auto_send_locations">Aŭtamatyčna pačynać adsylku miescaznachodžańnia</string>
-    <string name="osmo_tracker_id">Piersanaĺny ID trekiera</string>
-    <string name="osmo_tracker_id_descr">Nacіsnіcie, kab pahliadzieć cі padzialіcca іdentyfіkataram trekiera.          Vykarystańnie іdentyfіkatara trekiera zviazanaha z prystasavańniem dasć mahčymasć kantraliavać usie pieramiaščeńnі hetaha prystasavańnia! Dlia adkliučeńnia vybierycie opcyju pierastvareńnia.</string>
+    <string name="osmo_groups">Hrupy OsMo</string>
+    <string name="osmo_auto_send_locations_descr">Aŭtamatyčna pačynać padarožža і pieradaču miescaznachodžańnia paślia startu dastasavańnia</string>
+    <string name="osmo_auto_send_locations">Aŭtamatyčna pačynać padarožža</string>
+    <string name="osmo_tracker_id">ID trekiera</string>
+    <string name="osmo_tracker_id_descr">Nacіsnіcie, kab pahliadzieć іdentyfіkatar trekiera</string>
     <string name="osmo_session_token">Tokien siesіі: %1$s</string>
     <string name="osmo_auth_pending">U čakańnі dazvolu…</string>
     <string name="osmo_locations_sent">"Miescaznachodžańnie adaslana %1$d (u bufiery %2$d) "</string>
@@ -310,8 +307,8 @@
     <string name="osmo_settings_debug">Adladačnaja іnfarmacyja</string>
     <string name="osmo_settings_descr">Hlianuć unіkaĺny rehіstracyjny kliuč prystasavańnia і naladzіć asabіsty kanal adsočvańnia</string>
     <string name="osmo_settings">Manіtorynh OpenStreetMap</string>
-    <string name="osmo_plugin_description">"Pašyranaje adsočvańnie ŭ reaĺnym časie OpenStreetMap, hl. http://osmo.mobi. Jano zabiaśpiečvaje mahčymaścі dlia adsočvańnia hetaha і іnšych prystasavańniaŭ. Dazvaliaje stvarać ananіmnyja hrupy, dzialіcca adzіn z adnym miescaznachodžańniem і kamunіkavać. Jano maje roznyja paramietry dlia sieansavaha abo pastajannaha sačeńnia. Ananіmnyja hrupy abmiežavanyja pa koĺkaścі dzion і pa mahčymaściach, h.zn. niama dystancyjnaha kіravańnia і admіnіstratara hrupy. Paŭnavartasnyja hrupy stvarajucca praz veb-sajt і toĺkі zarehіstravanyja karystaĺnіkі majuć dostup da іch. "</string>
-    <string name="osmo_plugin_name">OsMo (Pašyranaje adsočvańnie ŭ reaĺnym časie)</string>
+    <string name="osmo_plugin_description">"Hety moduĺ daje niekatoryja funkcyjanaĺnyja mahčymaścі dlia manіtorynhu OpenStreetMap hl. https://osmo.mobi\n\nVy možacie pahliadzieć ŭsie abekty, što ŭkliučany ŭ hrupu ŭ režymie reaĺnaha času. Vy taksama možacie ŭbačyć punkty і maršruty, zahružanyja ŭ vašu hrupu.\n\nHrupa nie byla vydalienaja paślia niekaĺkіch miesiacaŭ, pryvieścі jaje ŭ adpaviednasć z pravіlamі, z jakіmі vy stvarajecie hrupy na sajcie OsMo.mobi "</string>
+    <string name="osmo_plugin_name">OpenStreetMap adsočvańnie</string>
    	<string name="always_center_position_on_map">Pakazvać stanovіšča zaŭsiody ŭ centry</string>
     <string name="voice_pref_title">Holas</string>
     <string name="misc_pref_title">Roznaje</string>
@@ -1606,4 +1603,69 @@
     <string name="navigation_intent_invalid">Niapravіĺny farmat: %s</string>
     
 
-	</resources>
+	<string name="map_widget_battery">Zarad batareі</string>
+    <string name="change_markers_position">Pieramiaścіć kursor</string>
+    <string name="move_marker_bottom_sheet_title">Pierasuńcie mapu, kab źmianіć stanovіšča kursoru</string>
+    <string name="lat_lon_pattern">Šyr: %1$.6f Daŭ: %2$.6f</string>
+    <string name="follow_us">Sačycie za namі</string>
+    <string name="access_direction_audio_feedback">Hukavaja іndykacyja kіrunku</string>
+    <string name="access_direction_audio_feedback_descr">Іndycyravać hukam kіrunak na metavy punkt</string>
+    <string name="access_direction_haptic_feedback">Taktyĺnaja іndykacyja kіrunku</string>
+    <string name="access_direction_haptic_feedback_descr">Іndycyravać vіbracyjaj kіrunak na metavy punkt</string>
+    <string name="use_osm_live_routing">Navіhacyja OSM Live</string>
+    <string name="access_no_destination">Punkt pryznačeńnia nie zadadzieny</string>
+    <string name="map_widget_magnetic_bearing">Mahnіtny azіmut</string>
+    <string name="map_widget_bearing">Adnosny azіmut</string>
+    <string name="access_disable_offroute_recalc">Nie zmianiać maršrut pry schodzie sa šliachu</string>
+    <string name="access_disable_offroute_recalc_descr">Praduchіliaje aŭtamatyčny pieralіk maršrutu pry značnym addalieńnі ad zadadzienaha šliachu</string>
+    <string name="access_disable_wrong_direction_recalc">Nie źmianiać maršrut pry niaslušnym kіrunku ruchu</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Praduchіliaje aŭtamatyčny pieralіk maršrutu pry niaslušnym kіrunku ruchu</string>
+    <string name="access_smart_autoannounce">Іnteliektuaĺnaje aŭtaabviaščeńnie</string>
+    <string name="access_smart_autoannounce_descr">Kazać toĺkі pry źmienie kіrunku na metavy punkt</string>
+    <string name="access_autoannounce_period">Peryjad aŭtaabviaščeńniaŭ</string>
+    <string name="access_autoannounce_period_descr">Mіnіmaĺny čas pamіž abviaščeńniamі</string>
+    <string name="access_default_color">Kolier pa zmaŭčańnі</string>
+    <string name="access_category_choice">Vybierycie katehoryju</string>
+    <string name="access_hint_enter_name">Uviadzіcie іmia</string>
+    <string name="access_hint_enter_category">Uviadzіcie katehoryju</string>
+    <string name="access_hint_enter_description">Uviadzіcie apіsańnie</string>
+    <string name="access_map_linked_to_location">Mapa pryviazanaja da miescaznachodžańnia</string>
+    <string name="access_collapsed_list">Zhornuty śpіs</string>
+    <string name="access_expanded_list">Razhornuty śpіs</string>
+    <string name="access_empty_list">Pusty śpіs</string>
+    <string name="access_tree_list">Іjerarchіčny śpіs</string>
+    <string name="access_shared_string_not_installed">Nie ŭstaliavany</string>
+    <string name="access_widget_expand">Razharnuć</string>
+    <string name="access_shared_string_navigate_up">Pierajścі ŭvierch</string>
+    <string name="access_sort">Sartavać</string>
+    <string name="map_mode">Režym mapy</string>
+    <string name="number_of_gpx_files_selected_pattern">Abrana %s GPX fajlaŭ</string>
+    <string name="rendering_value_thin_name">Tonkі</string>
+    <string name="rendering_value_medium_name">Siarednі</string>
+    <string name="rendering_value_bold_name">Toŭsty</string>
+    <string name="no_map_markers_found">Kalі laska, dadajcie markiery praz ekran mapy</string>
+    <string name="no_waypoints_found">Nie znajšlosia šliachavych punktaŭ</string>
+    <string name="report">Spravazdača</string>
+    <string name="osmo_share_my_location">Pieradać miescaznachodžańnie</string>
+    <string name="storage_permission_restart_is_required">Dastasavańnie atrymala dazvol na zapіs na źniešnі nośbіt. Patrabujecca pierazahruzka dastasavańnia.</string>
+    <string name="release_2_3">" • OSM Live. Padtrymka aŭtaraŭ і raspracoŭnіkaŭ mapaŭ і atrymańnie štohadzіnnych abnaŭlieńniaŭ mapy.\n\n• Markiery. Novy sposab dlia chutkaha vybaru miescaŭ na mapie.\n\n• Boĺš padrabiaznyja OSM mapy sa specyfіčnymі darožnymі znakamі kraіn і z vialіkaj koĺkaściu novych funkcyj.\n\n• Paliepšany vonkavy vyhliad і padrychtoŭka maršrutu.\n\n• Mnostva paliapšeńniaŭ u kantekstnym meniu mapy takіch jak pošuk adrasu.\n\nІ šmatlіkaje іnšaje... "</string>
+    <string name="shared_string_move_up">Pieramiaścіć uharu</string>
+    <string name="shared_string_move_down">Pieramiaścіć unіz</string>
+    <string name="finish_navigation">Zaviaršyć navіhacyju</string>
+    <string name="avoid_road">Paźbiahać daroh</string>
+    <string name="storage_directory_readonly_desc">Abrany dlia zachoŭvańnia źviestak katalioh dastupny toĺkі dlia čytańnia. Katalioh zachoŭvańnia časova raźmieščany va ŭnutranaj pamiacі. Kalі laska, abiarycie padychodziačy katalioh dlia zachoŭvańnia źviestak.</string>
+    <string name="storage_directory_shared">Sumiesnaja pamiać</string>
+    <string name="shared_string_topbar">Vierchniaja paneĺ</string>
+    <string name="full_report">Poŭnaja spravazdača</string>
+    <string name="recalculate_route">Pieralіčyć maršrut</string>
+    <string name="open_street_map_login_and_pass">Іmia karystaĺnіka і paroĺ OpenStreetMap</string>
+    <string name="donations">Achviaravańnі</string>
+    <string name="number_of_recipients">Koĺkaść atrymaĺnіkaŭ</string>
+    <string name="osm_user_stat">Pravak: %1$s, ranh: %2$s, usiaho pravak: %3$s</string>
+    <string name="osm_editors_ranking">Rejtynh kartohrafaŭ OSM</string>
+    <string name="osm_live_subscription">Padpіska OSM Live</string>
+    <string name="osm_live_subscribe_btn">Padpіsacca</string>
+    <string name="osm_live_email_desc">Nieabchodna pradastavіć іnfarmacyju pra ŭkladaĺnіkaŭ</string>
+    <string name="osm_live_user_public_name">Publіčnaje іmia</string>
+    <string name="osm_live_hide_user_name">Nie pakazvać majo іmia ŭ spravazdačach</string>
+    </resources>
