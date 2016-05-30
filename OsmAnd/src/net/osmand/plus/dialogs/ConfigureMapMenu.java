@@ -539,8 +539,8 @@ public class ConfigureMapMenu {
 			mp.put(ids[i], values[i]);
 		}
 		ArrayList<String> lst = new ArrayList<>(mp.keySet());
-		String systemLocale = ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
-		String englishLocale = ctx.getString(R.string.lang_en);
+		final String systemLocale = ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
+		final String englishLocale = ctx.getString(R.string.lang_en);
 		Collections.sort(lst, new Comparator<String>() {
 			@Override
 			public int compare(String lhs, String rhs) {
