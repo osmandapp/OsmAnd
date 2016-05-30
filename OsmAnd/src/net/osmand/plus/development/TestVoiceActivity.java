@@ -165,8 +165,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "(1.1) New route calculated, 150m, 260sec (00:04:20)", builder(p).newRouteCalculated(150, 260));
-		addButton(ll, "(1.2) New route calculated, 1350m, 3690sec (01:01:30)", builder(p).newRouteCalculated(1350, 3690));
+		addButton(ll, "(1.1) New route calculated, 150m, 230sec (00:03:50)", builder(p).newRouteCalculated(150, 230));
+		addButton(ll, "(1.2) New route calculated, 1350m, 3680sec (01:01:20)", builder(p).newRouteCalculated(1350, 3680));
 		addButton(ll, "(1.3) New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
 		addButton(ll, "(1.4) New route calculated 9100m, 10980sec (03:03)", builder(p).newRouteCalculated(9100, 10980));
 		addButton(ll, "(2.1) Route recalculated 11500m, 18600sec (05:10)", builder(p).routeRecalculated(11500, 18600));
