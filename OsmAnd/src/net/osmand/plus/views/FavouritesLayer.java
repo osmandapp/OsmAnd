@@ -95,7 +95,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
 			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
 					objectInMotion.getColor(), true);
-			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			fid.drawBitmapInCenter(canvas, pf.x, pf.y);
 		}
 	}

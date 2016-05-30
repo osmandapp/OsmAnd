@@ -99,7 +99,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements
 			float locationX;
 			float locationY;
 			if (inMotion) {
-				PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+				PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 				locationX = pf.x;
 				locationY = pf.y;
 			} else {

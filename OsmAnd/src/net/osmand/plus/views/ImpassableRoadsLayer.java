@@ -57,7 +57,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
-			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			float left = pf.x - roadWorkIcon.getWidth() / 2;
 			float top = pf.y - roadWorkIcon.getHeight();
 			canvas.drawBitmap(roadWorkIcon, left, top, paint);

@@ -190,12 +190,8 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			selectedObjects.remove(menuObject.getObject());
 		}
 		hide();
-		Object o = menuObject.getObject();
-		getMapActivity().getMapLayers().getContextMenuLayer().tryInitSelectedObjectContextMenuProvider(o);
-		getMapActivity().getMapViewTrackingUtilities().locationChanged(menuObject.getLatLon().getLatitude(),
-				menuObject.getLatLon().getLongitude(), this);
-		getMapActivity().getContextMenu()
-				.show(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject());
+		getMapActivity().getMapLayers().getContextMenuLayer().showContextMenu(
+				menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject());
 	}
 
 	private void clearSelectedObjects() {

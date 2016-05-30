@@ -308,7 +308,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (contextMenuLayer.getMoveableObject() instanceof MapMarker) {
 			MapMarker objectInMotion = (MapMarker) contextMenuLayer.getMoveableObject();
 			Bitmap bitmap = getMapMarkerBitmap(objectInMotion.colorIndex);
-			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			int marginX = bitmap.getWidth() / 6;
 			int marginY = bitmap.getHeight();
 			float locationX = pf.x;

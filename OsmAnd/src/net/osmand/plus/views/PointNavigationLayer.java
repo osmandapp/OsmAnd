@@ -150,7 +150,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private float getPointX(RotatedTileBox tileBox, TargetPoint point) {
 		if (contextMenuLayer.getMoveableObject() != null
 				&& point == contextMenuLayer.getMoveableObject()) {
-			return contextMenuLayer.getMoveableCenterPoint(tileBox).x;
+			return contextMenuLayer.getMovableCenterPoint(tileBox).x;
 		} else {
 			return tileBox.getPixXFromLonNoRot(point.getLongitude());
 		}
@@ -159,7 +159,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private float getPointY(RotatedTileBox tileBox, TargetPoint point) {
 		if (contextMenuLayer.getMoveableObject() != null
 				&& point == contextMenuLayer.getMoveableObject()) {
-			return contextMenuLayer.getMoveableCenterPoint(tileBox).y;
+			return contextMenuLayer.getMovableCenterPoint(tileBox).y;
 		} else {
 			return tileBox.getPixYFromLatNoRot(point.getLatitude());
 		}
