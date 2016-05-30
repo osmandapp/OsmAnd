@@ -262,8 +262,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_uk),
 				getString(R.string.lang_vi) + incompleteSuffix,
 				getString(R.string.lang_cy) + incompleteSuffix,};
-		String[] idslp = ConfigureMapMenu.getSortedMapNamesIds(this, entries, entrieValues);
-		registerListPreference(settings.PREFERRED_LOCALE, screen, idslp, entrieValues);
+		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(this, entries, entrieValues);
+		registerListPreference(settings.PREFERRED_LOCALE, screen, idsPl.ids, idsPl.values);
 
 		// Display "Device language" in Latin for all non-en languages
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
