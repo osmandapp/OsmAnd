@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -229,6 +230,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	
 	public void addButton(ViewGroup layout, String description, final CommandBuilder builder){
 		Button button = new Button(this);
+		button.setGravity(Gravity.LEFT);
 		button.setText(description);
 		button.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		button.setPadding(10, 5, 10, 2);
