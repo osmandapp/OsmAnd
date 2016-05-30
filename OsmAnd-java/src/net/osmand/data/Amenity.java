@@ -255,11 +255,17 @@ public class Amenity extends MapObject  {
 		@Override
 		public int compare(Amenity a1, Amenity a2) {
 			int result = MapObject.BY_ID_COMPARATOR.compare(a1, a2);
-			return result != 0 ? result : a1.type.compareTo(a2.type);
+			if (result == 0) {
+				result = a1.type.compareTo(a2.type);
+			}
+			if (result == 0) {
+				result = a1.subType.compareTo(a2.subType);
+			}
+			return result;
 		}
 
 		public boolean areEqual(Amenity a1, Amenity a2) {
-			return MapObject.BY_ID_COMPARATOR.areEqual(a1, a2) && a1.type.equals(a2.type);
+			return MapObject.BY_ID_COMPARATOR.areEqual(a1, a2) && a1.type.equals(a2.type) && a1.subType.equals(a2.subType);
 		}
 	}
 }
