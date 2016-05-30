@@ -165,58 +165,58 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "New route calculated, 150m, 260sec (00:04:20)", builder(p).newRouteCalculated(150, 260));
-		addButton(ll, "New route calculated, 1350m, 3690sec (01:01:30)", builder(p).newRouteCalculated(1350, 3690));
-		addButton(ll, "New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
-		addButton(ll, "New route calculated 9100m, 10980sec (03:03)", builder(p).newRouteCalculated(9100, 10980));
-		addButton(ll, "Route recalculated 11500m, 18600sec (05:10)", builder(p).routeRecalculated(11500, 18600));
-		addButton(ll, "Route recalculated 19633m, 26700sec (07:25)", builder(p).routeRecalculated(19633, 26700));
-		addButton(ll, "Route recalculated 89750m, 55800sec (15:30)", builder(p).routeRecalculated(89750, 55800));
-		addButton(ll, "Route recalculated 125900m, 92700sec (25:45)", builder(p).routeRecalculated(125900, 92700));
+		addButton(ll, "(1.1) New route calculated, 150m, 260sec (00:04:20)", builder(p).newRouteCalculated(150, 260));
+		addButton(ll, "(1.2) New route calculated, 1350m, 3690sec (01:01:30)", builder(p).newRouteCalculated(1350, 3690));
+		addButton(ll, "(1.3) New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
+		addButton(ll, "(1.4) New route calculated 9100m, 10980sec (03:03)", builder(p).newRouteCalculated(9100, 10980));
+		addButton(ll, "(2.1) Route recalculated 11500m, 18600sec (05:10)", builder(p).routeRecalculated(11500, 18600));
+		addButton(ll, "(2.2) Route recalculated 19633m, 26700sec (07:25)", builder(p).routeRecalculated(19633, 26700));
+		addButton(ll, "(2.3) Route recalculated 89750m, 55800sec (15:30)", builder(p).routeRecalculated(89750, 55800));
+		addButton(ll, "(2.4) Route recalculated 125900m, 92700sec (25:45)", builder(p).routeRecalculated(125900, 92700));
 
-		addButton(ll, "After 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
-		addButton(ll, "In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
-		addButton(ll, "Turn left, then in 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
-		addButton(ll, "After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "", "SR 80", "Rome")));
-		addButton(ll, "In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")));
-		addButton(ll, "Turn sharply right onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")));
+		addButton(ll, "(3.1) After 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
+		addButton(ll, "(3.2) In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
+		addButton(ll, "(3.3) Turn left, then in 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
+		addButton(ll, "(3.4) After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "", "SR 80", "Rome")));
+		addButton(ll, "(3.5) In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")));
+		addButton(ll, "(3.6) Turn sharply right onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")));
 
-		addButton(ll, "After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
-		addButton(ll, "In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
-		addButton(ll, "Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
+		addButton(ll, "(4.1) After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
+		addButton(ll, "(4.2) In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
+		addButton(ll, "(4.3) Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
 
-		addButton(ll, "After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "Roundabout: Take the 2nd exit onto 'Highway 60'", builder(p).roundAbout(0, 2, street(p, "Highway 60")));
+		addButton(ll, "(5.1) After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
+		addButton(ll, "(5.2) In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
+		addButton(ll, "(5.3) Roundabout: Take the 2nd exit onto 'Highway 60'", builder(p).roundAbout(0, 2, street(p, "Highway 60")));
 
-		addButton(ll, "After 640m make a U-turn", builder(p).prepareMakeUT(640, street(p, "")));
-		addButton(ll, "In 400m make a U-turn", builder(p).makeUT(400, street(p, "")));
-		addButton(ll, "Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")));
-		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
+		addButton(ll, "(6.1) After 640m make a U-turn", builder(p).prepareMakeUT(640, street(p, "")));
+		addButton(ll, "(6.2) In 400m make a U-turn", builder(p).makeUT(400, street(p, "")));
+		addButton(ll, "(6.3) Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")));
+		addButton(ll, "(6.4) When possible, make a U-turn", builder(p).makeUTwp());
 
-		addButton(ll, "Follow the road for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
-		addButton(ll, "Follow the road for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
-		addButton(ll, "Follow the road for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
+		addButton(ll, "(7.1) Follow the road for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
+		addButton(ll, "(7.2) Follow the road for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
+		addButton(ll, "(7.3) Follow the road for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
 
-		addButton(ll, "Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
-		addButton(ll, "Arrive at your intermediate destination 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
-		addButton(ll, "Passing GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
-		addButton(ll, "Passing favorite 'Brewery'", builder(p).arrivedAtFavorite("Brewery"));
-		addButton(ll, "Passing POI 'Museum'", builder(p).arrivedAtPoi("Museum"));
+		addButton(ll, "(8.1) Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
+		addButton(ll, "(8.2) Arrive at your intermediate destination 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
+		addButton(ll, "(8.3) Passing GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
+		addButton(ll, "(8.4) Passing favorite 'Brewery'", builder(p).arrivedAtFavorite("Brewery"));
+		addButton(ll, "(8.5) Passing POI 'Museum'", builder(p).arrivedAtPoi("Museum"));
 
-		addButton(ll, "You are exceeding the speed limit '50' (18 m/s)", builder(p).speedAlarm(50, 18f));
-		addButton(ll, "Attention, speed camera", builder(p).attention("SPEED_CAMERA"));
-		addButton(ll, "Attention, border control", builder(p).attention("BORDER_CONTROL"));
-		addButton(ll, "Attention, railroad crossing", builder(p).attention("RAILWAY"));
-		addButton(ll, "Attention, traffic calming", builder(p).attention("TRAFFIC_CALMING"));
-		addButton(ll, "Attention, toll both", builder(p).attention("TOLL_BOOTH"));
-		addButton(ll, "Attention, stop sign", builder(p).attention("STOP"));
-		addButton(ll, "Attention, pedestrian crosswalk", builder(p).attention("PEDESTRIAN"));
+		addButton(ll, "(9.1) You are exceeding the speed limit '50' (18 m/s)", builder(p).speedAlarm(50, 18f));
+		addButton(ll, "(9.2) Attention, speed camera", builder(p).attention("SPEED_CAMERA"));
+		addButton(ll, "(9.3) Attention, border control", builder(p).attention("BORDER_CONTROL"));
+		addButton(ll, "(9.4) Attention, railroad crossing", builder(p).attention("RAILWAY"));
+		addButton(ll, "(9.5) Attention, traffic calming", builder(p).attention("TRAFFIC_CALMING"));
+		addButton(ll, "(9.6) Attention, toll both", builder(p).attention("TOLL_BOOTH"));
+		addButton(ll, "(9.7) Attention, stop sign", builder(p).attention("STOP"));
+		addButton(ll, "(9.8) Attention, pedestrian crosswalk", builder(p).attention("PEDESTRIAN"));
 
-		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
-		addButton(ll, "GPS signal recovered", builder(p).gpsLocationRecover());
-		addButton(ll, "You have been off the route for 1050m", builder(p).offRoute(1050));
-		addButton(ll, "You are back on the route", builder(p).backOnRoute());
+		addButton(ll, "(10.1) GPS signal lost", builder(p).gpsLocationLost());
+		addButton(ll, "(10.2) GPS signal recovered", builder(p).gpsLocationRecover());
+		addButton(ll, "(10.3) You have been off the route for 1050m", builder(p).offRoute(1050));
+		addButton(ll, "(10.4) You are back on the route", builder(p).backOnRoute());
 		ll.forceLayout();
 	}
 	
