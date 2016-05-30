@@ -87,7 +87,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof Recording) {
 			Recording objectInMotion = (Recording) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			drawRecording(canvas, objectInMotion, pf.x, pf.y);
 		}
 	}

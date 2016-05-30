@@ -151,7 +151,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof WptPt) {
 			WptPt objectInMotion = (WptPt) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			SelectedGpxFile gpxFile = pointFileMap.get(objectInMotion);
 			if (gpxFile != null) {
 				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y);

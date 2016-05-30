@@ -59,7 +59,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof OsmPoint) {
 			OsmPoint objectInMotion = (OsmPoint) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMoveableCenterPoint(tileBox);
+			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			drawPoint(canvas, objectInMotion, pf.x, pf.y);
 		}
 	}

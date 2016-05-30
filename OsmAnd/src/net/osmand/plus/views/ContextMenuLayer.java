@@ -182,7 +182,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 
-	public PointF getMoveableCenterPoint(RotatedTileBox tb) {
+	public PointF getMovableCenterPoint(RotatedTileBox tb) {
 		if (applyingMarkerLatLon != null) {
 			float x = tb.getPixXFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
 			float y = tb.getPixYFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
@@ -232,7 +232,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
-		PointF newMarkerPosition = getMoveableCenterPoint(tileBox);
+		PointF newMarkerPosition = getMovableCenterPoint(tileBox);
 		final LatLon ll = tileBox.getLatLonFromPixel(newMarkerPosition.x, newMarkerPosition.y);
 		applyingMarkerLatLon = ll;
 
@@ -314,6 +314,23 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		float x = cp.getPixXFromLatLon(latitude, longitude);
 		float y = cp.getPixYFromLatLon(latitude, longitude);
 		return showContextMenu(new PointF(x, y), activity.getMapView().getCurrentRotatedTileBox(), showUnknownLocation);
+	}
+
+	public boolean showContextMenu(@NonNull LatLon latLon,
+								   @NonNull PointDescription pointDescription,
+								   @NonNull Object object) {
+		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
+		double latitude = latLon.getLatitude();
+		double longitude = latLon.getLongitude();
+		float x = tileBox.getPixXFromLatLon(latitude, longitude);
+		float y = tileBox.getPixYFromLatLon(latitude, longitude);
+		Map<Object, IContextMenuProvider> selectedObjects =
+				selectObjectsForContextMenu(tileBox, new PointF(x, y), false);
+		selectedObjectContextMenuProvider = selectedObjects.get(object);
+		hideVisibleMenues();
+		activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+		menu.show(latLon, pointDescription, object);
+		return true;
 	}
 
 	private boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
@@ -518,17 +535,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		return false;
-	}
-
-	public void tryInitSelectedObjectContextMenuProvider(Object o) {
-		for (OsmandMapLayer osmandMapLayer : view.getLayers()) {
-			if (osmandMapLayer instanceof IMoveObjectProvider) {
-				if(((IMoveObjectProvider) osmandMapLayer).isObjectMovable(o)) {
-					selectedObjectContextMenuProvider = (IContextMenuProvider) osmandMapLayer;
-					break;
-				}
-			}
-		}
 	}
 
 	public interface IContextMenuProvider {

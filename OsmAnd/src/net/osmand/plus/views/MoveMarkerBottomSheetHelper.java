@@ -44,7 +44,7 @@ public class MoveMarkerBottomSheetHelper {
 	}
 	
 	public void onDraw(RotatedTileBox rt) {
-		PointF point = mContextMenuLayer.getMoveableCenterPoint(rt);
+		PointF point = mContextMenuLayer.getMovableCenterPoint(rt);
 		double lat = rt.getLatFromPixel(point.x, point.y);
 		double lon = rt.getLonFromPixel(point.x, point.y);
 		mDescription.setText(mContext.getString(R.string.lat_lon_pattern, lat, lon));
