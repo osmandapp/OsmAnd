@@ -475,7 +475,7 @@ public class ConfigureMapMenu {
 						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 						// test old descr as title
 						b.setTitle(R.string.map_preferred_locale);
-						final String[] txtIds = getSortedMapNamesIds(activity, mapNameIds, getMapNamesValues(activity, mapNamesIds));
+						final String[] txtIds = getSortedMapNamesIds(activity, mapNamesIds, getMapNamesValues(activity, mapNamesIds));
 						final String[] txtValues = getMapNamesValues(activity, txtIds);
 						int selected = -1;
 						for (int i = 0; i < txtIds.length; i++) {
