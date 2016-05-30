@@ -1340,8 +1340,8 @@
     <string name="lang_ar">Àrab</string>
     <string name="lang_sc">Sard</string>
     <string name="lang_sr">Serbi</string>
-    <string name="lang_zh_CN">Xinès simplificat</string>
-    <string name="lang_zh_TW">Xinès tradicional</string>
+    <string name="lang_zh_CN">Xinès (simplificat)</string>
+    <string name="lang_zh_TW">Xinès (tradicional)</string>
     <string name="rendering_attr_subwayMode_name">Rutes de metro</string>
     <string name="continue_navigation">Continua la navegació</string>
     <string name="pause_navigation">Suspèn la navegació</string>
@@ -1629,7 +1629,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_gl">Gallec</string>
     <string name="lang_et">Estonià</string>
     <string name="lang_ceb">Cebuà</string>
-    <string name="lang_es_ar">Espanyol argentí</string>
+    <string name="lang_es_ar">Espanyol (argentí)</string>
     <string name="lang_nb">Noruec bokmål</string>
     <string name="light_theme">Lluminós</string>
     <string name="dark_theme">Fosc</string>
@@ -2037,4 +2037,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_hu_formal">Hongarès (formal)</string>
     <string name="change_markers_position">Modifica la posició del marcador</string>
     <string name="current_track">Traça actual</string>
+    <string name="lang_es_us">Espanyol (americà)</string>
+    <string name="lang_be_BY">Bielorús (alfabet llatí)</string>
     </resources>
