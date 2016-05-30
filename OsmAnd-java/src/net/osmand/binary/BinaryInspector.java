@@ -63,6 +63,10 @@ public class BinaryInspector {
 	private VerboseInfo vInfo;
 	public static void main(String[] args) throws IOException {
 		BinaryInspector in = new BinaryInspector();
+		if (args == null || args.length == 0) {
+			BinaryInspector.printUsage(null);
+			return;
+		}
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[]{
@@ -220,10 +224,6 @@ public class BinaryInspector {
 	}
 
 	public void inspector(String[] args) throws IOException {
-		if (args == null || args.length == 0) {
-			printUsage(null);
-			return;
-		}
 		String f = args[0];
 		if (f.charAt(0) == '-') {
 			// command
@@ -1124,21 +1124,21 @@ public class BinaryInspector {
 
 	}
 
-	public void printUsage(String warning) {
+	public static void printUsage(String warning) {
 		if (warning != null) {
-			println(warning);
+			System.out.println(warning);
 		}
-		println("Inspector is console utility for working with binary indexes of OsmAnd.");
-		println("It allows print info about file, extract parts and merge indexes.");
-		println("\nUsage for print info : inspector [-vaddress] [-vcitynames] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-vmapcoordinates] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLat] [file]");
-		println("  Prints information about [file] binary index of OsmAnd.");
-		println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
-		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
-		println("\tCreate new file of extracted parts from input file. [parts_to_extract] could be parts to include or exclude.");
-		println("  Example : inspector -c output_file input_file +1,2,3\n\tExtracts 1, 2, 3 parts (could be find in print info)");
-		println("  Example : inspector -c output_file input_file -2,3\n\tExtracts all  parts excluding 2, 3");
-		println("  Example : inspector -c output_file input_file1 input_file2 input_file3\n\tSimply combine 3 files");
-		println("  Example : inspector -c output_file input_file1 input_file2 -4\n\tCombine all parts of 1st file and all parts excluding 4th part of 2nd file");
+		System.out.println("Inspector is console utility for working with binary indexes of OsmAnd.");
+		System.out.println("It allows print info about file, extract parts and merge indexes.");
+		System.out.println("\nUsage for print info : inspector [-vaddress] [-vcitynames] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-vmapcoordinates] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLat] [file]");
+		System.out.println("  Prints information about [file] binary index of OsmAnd.");
+		System.out.println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
+		System.out.println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
+		System.out.println("\tCreate new file of extracted parts from input file. [parts_to_extract] could be parts to include or exclude.");
+		System.out.println("  Example : inspector -c output_file input_file +1,2,3\n\tExtracts 1, 2, 3 parts (could be find in print info)");
+		System.out.println("  Example : inspector -c output_file input_file -2,3\n\tExtracts all  parts excluding 2, 3");
+		System.out.println("  Example : inspector -c output_file input_file1 input_file2 input_file3\n\tSimply combine 3 files");
+		System.out.println("  Example : inspector -c output_file input_file1 input_file2 -4\n\tCombine all parts of 1st file and all parts excluding 4th part of 2nd file");
 
 		
 	}
