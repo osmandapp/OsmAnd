@@ -2200,4 +2200,5 @@
     <string name="access_autoannounce_period">Okres powiadomień</string>
     <string name="move_marker_bottom_sheet_title">Proszę przesunąć mapę, aby zmienić położenie znacznika</string>
     <string name="change_markers_position">Zmień położenie znacznika</string>
+    <string name="current_track">Aktualna trasa</string>
     </resources>
