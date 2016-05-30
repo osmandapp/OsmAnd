@@ -534,7 +534,6 @@ public class ConfigureMapMenu {
 	public static String[] mapNamesIds = new String[]{"", "en", "als", "af", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "et", "es", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sh", "sc", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
 	public static String[] getSortedMapNamesIds(Context ctx, String[] ids, String[] values) {
-		//String[] vls = getMapNamesValues(ctx, mapNamesIds);
 		final Map<String, String> mp = new HashMap<>();
 		for (int i = 0; i < ids.length; i++) {
 			mp.put(ids[i], values[i]);
