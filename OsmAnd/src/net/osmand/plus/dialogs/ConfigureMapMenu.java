@@ -475,7 +475,7 @@ public class ConfigureMapMenu {
 						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 						// test old descr as title
 						b.setTitle(R.string.map_preferred_locale);
-						final String[] txtIds = getSortedMapNamesIds(activity);
+						final String[] txtIds = getSortedMapNamesIds(activity, mapNamesIds, getMapNamesValues(activity, mapNamesIds));
 						final String[] txtValues = getMapNamesValues(activity, txtIds);
 						int selected = -1;
 						for (int i = 0; i < txtIds.length; i++) {
@@ -533,19 +533,24 @@ public class ConfigureMapMenu {
 
 	public static String[] mapNamesIds = new String[]{"", "en", "als", "af", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "et", "es", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sh", "sc", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
-
-	public static String[] getSortedMapNamesIds(Context ctx) {
-		String[] vls = getMapNamesValues(ctx, mapNamesIds);
+	public static String[] getSortedMapNamesIds(Context ctx, String[] ids, String[] values) {
 		final Map<String, String> mp = new HashMap<>();
-		for (int i = 0; i < mapNamesIds.length; i++) {
-			mp.put(mapNamesIds[i], vls[i]);
+		for (int i = 0; i < ids.length; i++) {
+			mp.put(ids[i], values[i]);
 		}
 		ArrayList<String> lst = new ArrayList<>(mp.keySet());
+		final String systemLocale = ctx.getString(R.string.system_locale) + " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
+		final String englishLocale = ctx.getString(R.string.lang_en);
 		Collections.sort(lst, new Comparator<String>() {
 			@Override
 			public int compare(String lhs, String rhs) {
 				int i1 = Algorithms.isEmpty(lhs) ? 0 : (lhs.equals("en") ? 1 : 2);
 				int i2 = Algorithms.isEmpty(rhs) ? 0 : (rhs.equals("en") ? 1 : 2);
+				if (i1 != i2) {
+					return i1 < i2 ? -1 : 1;
+				}
+				i1 = systemLocale.equals(lhs) ? 0 : (englishLocale.equals(lhs) ? 1 : 2);
+				i2 = systemLocale.equals(rhs) ? 0 : (englishLocale.equals(rhs) ? 1 : 2);
 				if (i1 != i2) {
 					return i1 < i2 ? -1 : 1;
 				}
