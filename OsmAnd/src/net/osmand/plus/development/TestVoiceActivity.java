@@ -204,7 +204,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(7.1)  Straight ahead", builder(p).goAhead());
 		addButton(ll, "(7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
 		addButton(ll, "(7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
-		addButton(ll, "(7.4)  Continue the road for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
+		addButton(ll, "(7.4)  Continue for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
 
 		addButton(ll, "       Arriving and passing points:", builder(p));
 		addButton(ll, "(8.1)  Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
