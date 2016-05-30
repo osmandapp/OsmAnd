@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class PoiCategory extends PoiFilter implements Comparable<PoiCategory> {
+public class PoiCategory extends PoiFilter {
 
 	private List<PoiFilter> poiFilters = new ArrayList<PoiFilter>();
 	private Set<PoiType> basemapPoi = null;
@@ -30,7 +30,8 @@ public class PoiCategory extends PoiFilter implements Comparable<PoiCategory> {
 	
 	public String getDefaultTag() {
 		if(defaultTag == null) {
-			return keyName; }
+			return keyName;
+		}
 		return defaultTag;
 	}
 	
@@ -69,29 +70,4 @@ public class PoiCategory extends PoiFilter implements Comparable<PoiCategory> {
 		}
 		return basemapPoi.contains(pt);
 	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (!(o instanceof PoiCategory)) {
-			return false;
-		}
-		PoiCategory other = (PoiCategory) o;
-		return regId == other.regId;
-	}
-
-	@Override
-	public int hashCode() {
-		return regId;
-	}
-
-	@Override
-	public int compareTo(PoiCategory poiCategory) {
-		return Double.compare(regId, poiCategory.regId);
-	}
-
-	@Override
-	public String toString() {
-		return keyName + " (" + regId + ")";
-	}
-
 }
