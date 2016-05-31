@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.LatLon;
@@ -185,13 +186,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		clearSelectedObjects();
 	}
 
-	public void openContextMenu(MenuObject menuObject) {
-		if (selectedObjects.containsKey(menuObject.getObject())) {
-			selectedObjects.remove(menuObject.getObject());
-		}
+	public void openContextMenu(@NonNull MenuObject menuObject) {
+		IContextMenuProvider provider = selectedObjects.remove(menuObject.getObject());
 		hide();
 		getMapActivity().getMapLayers().getContextMenuLayer().showContextMenu(
-				menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject());
+				menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), provider);
 	}
 
 	private void clearSelectedObjects() {
