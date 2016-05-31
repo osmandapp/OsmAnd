@@ -132,6 +132,13 @@
 				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kml" />
 			</intent-filter>
 
+			<!--trying to handle emails-->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:mimeType="application/gpx+xml" />
+			</intent-filter>
+
 			<!-- google navigation intent -->
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
