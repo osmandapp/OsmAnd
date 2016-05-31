@@ -207,7 +207,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				Node node = objectInMotion.getEntity();
 				node.setLatitude(position.getLatitude());
 				node.setLongitude(position.getLongitude());
-				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback).execute(node);
+				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback, objectInMotion).execute();
 			} else if (o instanceof OsmNotesPoint) {
 				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
 				objectInMotion.setLatitude(position.getLatitude());
@@ -218,20 +218,22 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 	}
 
-	static class SaveOsmChangeAsyncTask extends AsyncTask<Node, Void, Node> {
+	static class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Node> {
 		private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
 		@Nullable
 		private final ContextMenuLayer.ApplyMovedObjectCallback mCallback;
+		private final OpenstreetmapPoint objectInMotion;
 
 		SaveOsmChangeAsyncTask(OpenstreetmapLocalUtil openstreetmapUtil,
-							   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+							   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback, OpenstreetmapPoint objectInMotion) {
 			this.mOpenstreetmapUtil = openstreetmapUtil;
 			this.mCallback = callback;
+			this.objectInMotion = objectInMotion;
 		}
 
 		@Override
-		protected Node doInBackground(Node... params) {
-			Node node = params[0];
+		protected Node doInBackground(Void... params) {
+			Node node = objectInMotion.getEntity();
 			return mOpenstreetmapUtil.commitNodeImpl(OsmPoint.Action.MODIFY, node,
 					mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false);
 		}
@@ -239,7 +241,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		@Override
 		protected void onPostExecute(Node newNode) {
 			if (mCallback != null) {
-				mCallback.onApplyMovedObject(true, newNode);
+				mCallback.onApplyMovedObject(newNode != null, objectInMotion);
 			}
 		}
 	}
