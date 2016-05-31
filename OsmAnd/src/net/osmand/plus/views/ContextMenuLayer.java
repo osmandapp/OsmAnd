@@ -333,14 +333,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			LatLon latLon = null;
 			PointDescription pointDescription = null;
-			if (selectedObjectContextMenuProvider != null) {
-				latLon = selectedObjectContextMenuProvider.getObjectLocation(selectedObj);
-				pointDescription = selectedObjectContextMenuProvider.getObjectName(selectedObj);
+			final IContextMenuProvider provider = selectedObjects.get(selectedObj);
+			if (provider != null) {
+				latLon = provider.getObjectLocation(selectedObj);
+				pointDescription = provider.getObjectName(selectedObj);
 			}
 			if (latLon == null) {
 				latLon = getLatLon(point, tileBox);
 			}
-			showContextMenu(latLon, pointDescription, selectedObj, selectedObjects.get(selectedObj));
+			showContextMenu(latLon, pointDescription, selectedObj, provider);
 			return true;
 
 		} else if (selectedObjects.size() > 1) {
