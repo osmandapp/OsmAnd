@@ -1444,7 +1444,7 @@
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Limitazioni di accesso</string>
-    <string name="rendering_attr_showAccess_name">Mostra le limitazioni di accesso</string>
+    <string name="rendering_attr_showAccess_name">Mostra limitazioni di accesso e pedaggi</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra i percorsi per bicicletta</string>
@@ -1473,7 +1473,7 @@
     <string name="lang_ar">Arabo</string>
     <string name="lang_sc">Sardo</string>
     <string name="lang_sr">Serbo</string>
-    <string name="lang_zh_CN">Cinese semplificato</string>
+    <string name="lang_zh_CN">Cinese (Semplificato)</string>
     <string name="lang_zh_TW">Cinese tradizionale</string>
     <string name="rendering_attr_subwayMode_name">Percorsi metró</string>
     <string name="osmo_invite">Invita…</string>
@@ -1828,7 +1828,7 @@
     <string name="shared_string_show_details">Mostra i dettagli</string>
     <string name="local_recordings_delete_all_confirm">Stai per cancellare %1$d nota/e. Sei sicuro?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="lang_es_ar">Spagnolo argentino</string>
+    <string name="lang_es_ar">Spagnolo (Argentino)</string>
     <string name="lang_nb">Norvegese Bokmål</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thailandese</string>
@@ -2260,4 +2260,7 @@
 	<string name="use_osm_live_routing">Navigazione OSM Live</string>
     <string name="map_widget_battery">Carica batteria</string>
     <string name="lang_hu_formal">Ungherese (formale)</string>
+    <string name="current_track">Traccia corrente</string>
+    <string name="change_markers_position">Cambia la posizione del marcatore</string>
+    <string name="lang_es_us">Spagnolo (Americano)</string>
     </resources>
