@@ -215,8 +215,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				new SaveOsmNoteAsyncTask(objectInMotion.getText(), activity, callback, plugin, mOsmBugsUtil)
 						.execute(objectInMotion);
 			}
-		} else if (callback != null) {
-			callback.onApplyMovedObject(false, o);
 		}
 	}
 
@@ -246,14 +244,13 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 	}
 
-	private static class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, Boolean> {
+	private static class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, OsmNotesPoint> {
 		private final String mText;
 		private final MapActivity mActivity;
 		@Nullable
 		private final ContextMenuLayer.ApplyMovedObjectCallback mCallback;
 		private final OsmEditingPlugin plugin;
 		private OsmBugsUtil mOsmbugsUtil;
-		private OsmNotesPoint mOsmNotesPoint;
 
 		public SaveOsmNoteAsyncTask(String text,
 									MapActivity activity,
@@ -267,26 +264,21 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 
 		@Override
-		protected Boolean doInBackground(OsmNotesPoint... params) {
-			mOsmNotesPoint = params[0];
+		protected OsmNotesPoint doInBackground(OsmNotesPoint... params) {
+			OsmNotesPoint mOsmNotesPoint = params[0];
 			OsmPoint.Action action = mOsmNotesPoint.getAction();
-			boolean isSuccess = plugin.getDBBug().deleteAllBugModifications(mOsmNotesPoint);
+			plugin.getDBBug().deleteAllBugModifications(mOsmNotesPoint);
 			OsmBugsUtil.OsmBugResult result = mOsmbugsUtil.commit(mOsmNotesPoint, mText, action);
-			isSuccess &= isOperationSuccessful(result);
-			return isSuccess;
-		}
-
-		private boolean isOperationSuccessful(OsmBugsUtil.OsmBugResult result) {
-			return result != null && result.warning == null;
+			return result == null ? null : result.local;
 		}
 
 		@Override
-		protected void onPostExecute(Boolean isSuccess) {
-			if (isSuccess) {
+		protected void onPostExecute(OsmNotesPoint point) {
+			if (point != null) {
 				Toast.makeText(mActivity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
 			}
 			if (mCallback != null) {
-				mCallback.onApplyMovedObject(isSuccess, mOsmNotesPoint);
+				mCallback.onApplyMovedObject(point != null, point);
 			}
 		}
 	}
