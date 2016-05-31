@@ -1455,7 +1455,7 @@
     <string name="rendering_attr_moreDetailed_name">Több részlet</string>
     <string name="rendering_attr_lessDetailed_name">Kevésbé részletes</string>
     <string name="rendering_attr_hideAccess_name">Behajtási korlátozások</string>
-    <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
+    <string name="rendering_attr_showAccess_name">Behajtási korlátozások és útdíj megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség</string>
     <string name="rendering_attr_showSurfaces_name">Útfelület</string>
     <string name="rendering_attr_showCycleRoutes_name">Kerékpáros útvonalak</string>
@@ -1471,8 +1471,8 @@
     <string name="lang_ar">arab</string>
     <string name="lang_sc">szárd</string>
     <string name="lang_sr">szerb</string>
-    <string name="lang_zh_CN">egyszerűsített kínai</string>
-    <string name="lang_zh_TW">hagyományos kínai</string>
+    <string name="lang_zh_CN">kínai (egyszerűsített)</string>
+    <string name="lang_zh_TW">kínai (hagyományos)</string>
     <string name="rendering_attr_alpineHiking_name">Alpesi túra besorolás (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Ösvények SAC nehézségi skála szerint</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistajelzések rátét</string>
@@ -1797,7 +1797,7 @@
     <string name="lang_ceb">szebuano</string>
     <string name="archive_wikipedia_data">Régi, összeférhetetlen Wikipédia adatok lettek letöltve. Szeretnéd archiválni?</string>
     <string name="download_wikipedia_files">Szeretnél további Wikipédia adatokat letölteni (%1$s MB)?</string>
-    <string name="lang_es_ar">argentin spanyol</string>
+    <string name="lang_es_ar">spanyol (argentin)</string>
     <string name="lang_nb">norvég bokmål</string>
     <string name="light_theme">Világos</string>
     <string name="dark_theme">Sötét</string>
@@ -2205,4 +2205,9 @@
     <string name="access_autoannounce_period">Auto-bejelentési időköz</string>
     <string name="access_autoannounce_period_descr">Minimális időköz a bejelentések között</string>
     <string name="lang_hu_formal">Magyar (magázó)</string>
+    <string name="current_track">Aktuális nyomvonal</string>
+    <string name="change_markers_position">Jelölő helyének módosítása</string>
+    <string name="lang_es_us">spanyol (amerikai)</string>
+    <string name="lang_be_BY">belorusz (latin)</string>
+    <string name="lang_kn">kannada</string>
     </resources>
