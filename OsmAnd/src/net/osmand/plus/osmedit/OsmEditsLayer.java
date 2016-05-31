@@ -272,11 +272,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			OsmPoint.Action action = mOsmNotesPoint.getAction();
 			boolean isSuccess = plugin.getDBBug().deleteAllBugModifications(mOsmNotesPoint);
 			OsmBugsUtil.OsmBugResult result = mOsmbugsUtil.commit(mOsmNotesPoint, mText, action);
-			isSuccess &= isOperationSuccessfull(result);
+			isSuccess &= isOperationSuccessful(result);
 			return isSuccess;
 		}
 
-		private boolean isOperationSuccessfull(OsmBugsUtil.OsmBugResult result) {
+		private boolean isOperationSuccessful(OsmBugsUtil.OsmBugResult result) {
 			return result != null && result.warning == null;
 		}
 
