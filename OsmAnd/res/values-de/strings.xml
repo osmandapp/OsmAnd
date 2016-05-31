@@ -2161,9 +2161,12 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="follow_us">Folge uns</string>
     <string name="use_osm_live_routing_description">Navigation für OSM-Live Änderungen aktivieren (Beta)</string>
 	<string name="access_direction_audio_feedback">Richtung Audio Feedback</string>
-    <string name="access_direction_audio_feedback_descr">Zeige Richtung des Zielpunkt durch Ton</string>
-    <string name="access_direction_haptic_feedback">Richtung haptisches Feedback</string>
+    <string name="access_direction_audio_feedback_descr">Zeige Richtung des Zielpunktes durch Ton</string>
+    <string name="access_direction_haptic_feedback">Richtung angeben über haptisches Feedback</string>
     <string name="access_direction_haptic_feedback_descr">Zeige Richtung des Zielpunkt durch Vibration</string>
 <string name="change_markers_position">Position des Markers ändern</string>
     <string name="current_track">Aktueller Track</string>
+    <string name="lang_es_us">Spanisch (Amerikanisch)</string>
+    <string name="lang_be_BY">Weißrussisch (Lateinische Schrift)</string>
+    <string name="lang_kn">Kanadisch</string>
     </resources>
