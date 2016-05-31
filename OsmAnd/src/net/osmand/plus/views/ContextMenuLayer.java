@@ -317,16 +317,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean showContextMenu(@NonNull LatLon latLon,
-								   @NonNull PointDescription pointDescription,
-								   @NonNull Object object) {
-		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
-		double latitude = latLon.getLatitude();
-		double longitude = latLon.getLongitude();
-		float x = tileBox.getPixXFromLatLon(latitude, longitude);
-		float y = tileBox.getPixYFromLatLon(latitude, longitude);
-		Map<Object, IContextMenuProvider> selectedObjects =
-				selectObjectsForContextMenu(tileBox, new PointF(x, y), false);
-		selectedObjectContextMenuProvider = selectedObjects.get(object);
+								   @Nullable PointDescription pointDescription,
+								   @Nullable Object object,
+								   @Nullable IContextMenuProvider provider) {
+		selectedObjectContextMenuProvider = provider;
 		hideVisibleMenues();
 		activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 		menu.show(latLon, pointDescription, object);
@@ -337,7 +331,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false);
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
-			selectedObjectContextMenuProvider = selectedObjects.get(selectedObj);
 			LatLon latLon = null;
 			PointDescription pointDescription = null;
 			if (selectedObjectContextMenuProvider != null) {
@@ -347,9 +340,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (latLon == null) {
 				latLon = getLatLon(point, tileBox);
 			}
-			hideVisibleMenues();
-			activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-			menu.show(latLon, pointDescription, selectedObj);
+			showContextMenu(latLon, pointDescription, selectedObj, selectedObjects.get(selectedObj));
 			return true;
 
 		} else if (selectedObjects.size() > 1) {

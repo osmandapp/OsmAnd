@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -215,11 +216,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public MapContextMenu() {
 	}
 
-	public boolean init(LatLon latLon, PointDescription pointDescription, @Nullable Object object) {
+	public boolean init(@NonNull LatLon latLon,
+						@Nullable PointDescription pointDescription,
+						@Nullable Object object) {
 		return init(latLon, pointDescription, object, false);
 	}
 
-	public boolean init(LatLon latLon, PointDescription pointDescription, Object object, boolean update) {
+	public boolean init(@NonNull LatLon latLon,
+						@Nullable PointDescription pointDescription,
+						@Nullable Object object,
+						boolean update) {
 
 		if (myLocation == null) {
 			myLocation = getMapActivity().getMyApplication().getSettings().getLastKnownMapLocation();
@@ -296,7 +302,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void show(LatLon latLon, PointDescription pointDescription, @Nullable Object object) {
+	public void show(@NonNull LatLon latLon,
+					 @Nullable PointDescription pointDescription,
+					 @Nullable Object object) {
 		if (init(latLon, pointDescription, object)) {
 			if (!MapContextMenuFragment.showInstance(this, mapActivity, centerMarker)) {
 				active = false;
