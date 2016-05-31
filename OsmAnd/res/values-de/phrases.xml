@@ -9,7 +9,7 @@
 	<string name="poi_aerialway_cable_car">Seilbahn</string>
 	<string name="poi_aerialway_chair_lift">Sessellift</string>
 	<string name="poi_aerialway_drag_lift">Schlepplift</string>
-	<string name="poi_aerialway_gondola">Gondel</string>
+	<string name="poi_aerialway_gondola">Gondelbahn</string>
 	<string name="poi_aerialway_goods">Güterseilbahn</string>
 	<string name="poi_aerialway_j_bar">Schlepplift</string>
 	<string name="poi_aerialway_magic_carpet">Teppichlift</string>
@@ -18,7 +18,7 @@
 	<string name="poi_aerialway_rope_tow">Übungslift</string>
 	<string name="poi_aerialway_station">Seilbahnstation</string>
 	<string name="poi_aerialway_t_bar">Schlepplift</string>
-	<string name="poi_aeroway_gate">Flughafengate</string>
+	<string name="poi_aeroway_gate">Flugsteig</string>
 	<string name="poi_aeroway_terminal">Flughafenterminal</string>
 	<string name="poi_craft_agricultural_engines">Landmaschinen</string>
 	<string name="poi_aerodrome">Flughafen</string>
@@ -80,7 +80,7 @@
 	<string name="poi_border_control">Grenzkontrolle</string>
 	<string name="poi_boules">Bäcker</string>
 	<string name="poi_boundary_stone">Grenzstein</string>
-	<string name="poi_boutique">Modehaus</string>
+	<string name="poi_boutique">Boutique</string>
 	<string name="poi_bowls">Schüsseln</string>
 	<string name="poi_craft_brewery">Brauerei</string>
 	<string name="poi_bridge">Brücke</string>
@@ -171,10 +171,10 @@
 	<string name="poi_dairy">Molkerei </string>
 	<string name="poi_dam">Staudamm</string>
 	<string name="poi_dance_floor">Tanzfläche</string>
-	<string name="poi_deli">Delikatessen</string>
+	<string name="poi_deli">Feinkostgeschäft</string>
 	<string name="poi_dentist">Zahnarzt</string>
 	<string name="poi_department_store">Kaufhaus</string>
-	<string name="poi_dive">Tauchausrüstung</string>
+	<string name="poi_dive">Tauchgeschäft</string>
 	<string name="poi_diving">Tauschen</string>
 	<string name="poi_doctors">Arzt</string>
 	<string name="poi_dog_park">Hundepark</string>
@@ -194,7 +194,7 @@
 	<string name="poi_equestrian">Reiter</string>
 	<string name="poi_erotic">Sex-Shop</string>
 	<string name="poi_estate_agent">Immobilienmakler</string>
-	<string name="poi_fabric">Gardinenladen</string>
+	<string name="poi_fabric">Textilgeschäft</string>
 	<string name="poi_fast_food">Fast Food</string>
 	<string name="poi_ferry_terminal">Fährhafen</string>
 	<string name="poi_fire_extinguisher">Feuerlöscher</string>
@@ -430,7 +430,7 @@
 	<string name="poi_school">Schule</string>
 	<string name="poi_scuba_diving">Sporttauchen</string>
 	<string name="poi_craft_sculptor">Bildhauer</string>
-	<string name="poi_seafood">Meeresfrüchte</string>
+	<string name="poi_seafood">Fischgeschäft</string>
 	<string name="poi_anchor_berth">Ankerplatz</string>
 	<string name="poi_anchorage">Ankerplatz</string>
 	<string name="poi_beacon">Leuchtfeuer</string>
@@ -482,13 +482,13 @@
 	<string name="poi_craft_shoemaker">Schuster</string>
 	<string name="poi_shoes">Schuhgeschäft</string>
 	<string name="poi_shooting">Schießbude</string>
-	<string name="poi_farm">Landwirtschaft</string>
-	<string name="poi_tea">Teehaus</string>
+	<string name="poi_farm">Hofladen</string>
+	<string name="poi_tea">Teegeschäft</string>
 	<string name="poi_sinkhole">Senkgrube</string>
 	<string name="poi_skateboard">Skateboard</string>
 	<string name="poi_skating">Eislaufbahn</string>
 	<string name="poi_skiing">Skifahren</string>
-	<string name="poi_slipway">Gleitbahn</string>
+	<string name="poi_slipway">Slipanlage</string>
 	<string name="poi_soccer">Fußball</string>
 	<string name="poi_social_centre">Sozialzentrum</string>
 	<string name="poi_social_facility">Soziale Einrichtung</string>
@@ -540,7 +540,7 @@
 	<string name="poi_town">Kleinstadt</string>
 	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
-	<string name="poi_trade">Handelszentrum</string>
+	<string name="poi_trade">Baustoffhandlung</string>
 	<string name="poi_traffic_calming_bump">Bodenwelle</string>
 	<string name="poi_traffic_calming_chicane">Schikane</string>
 	<string name="poi_traffic_calming_choker">Fahrbahnverengung</string>
@@ -633,7 +633,7 @@
 		<string name="poi_accomodation">Unterkunft</string>
 		<string name="poi_internet_access">Internetzugang</string>
 	<string name="poi_entertainment">Freizeit</string>
-		<string name="poi_club">Club</string>
+		<string name="poi_club">Verein</string>
 	<string name="poi_sustenance">Gastronomie</string>
 	<string name="poi_cafe_and_restaurant">Cafe und Restaurant</string>
 	<string name="poi_transportation">Transport</string>
@@ -822,7 +822,7 @@
 	<string name="poi_garden_furniture">Gartenmöbelladen</string>
 	<string name="poi_leather">Ledergeschäft</string>
 	<string name="poi_music">Musikgeschäft</string>
-	<string name="poi_scuba_diving_shop">Tauchzubehörgeschäft</string>
+	<string name="poi_scuba_diving_shop">Tauchgeschäft</string>
 	<string name="poi_tyres">Reifengeschäft</string>
 	<string name="poi_watches">Uhrengeschäft</string>
 	<string name="poi_swimming_pool_shop">Poolzubehörgeschäft</string>
@@ -1139,7 +1139,7 @@
 	<string name="poi_aerialway_length">Länge</string>
 
 <string name="poi_craft_electronics">Elektriker</string>
-	<string name="poi_aerialway_pylon">Seilbahnpfeiler</string>
+	<string name="poi_aerialway_pylon">Seilbahnmast</string>
 
 	<string name="poi_memorial_war">Kriegsdenkmal</string>
 	<string name="poi_memorial_statue">Statue</string>
