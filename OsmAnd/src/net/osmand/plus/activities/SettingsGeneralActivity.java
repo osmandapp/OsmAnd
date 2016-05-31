@@ -156,7 +156,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		//  - Mark as "incomplete" if                    < ~80%
 		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
 
-		// Add (Device language) in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
+		// Add " (Device language)" to system default entry in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
 		String latinSystemDefaultSuffix = " (" + getString(R.string.system_locale_no_translate) + ")";
 
 		//getResources().getAssets().getLocales();
@@ -266,7 +266,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(this, entrieValues, entries);
 		registerListPreference(settings.PREFERRED_LOCALE, screen, valuesPl, idsPl);
 
-		// Display "Device language" in Latin for all non-en languages
+		// Add " (Display language)" to menu title in Latin letters for all non-en languages
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
 			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
