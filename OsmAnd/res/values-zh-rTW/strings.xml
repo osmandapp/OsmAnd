@@ -1423,7 +1423,7 @@
     <string name="lang_ar">阿拉伯</string>
     <string name="lang_sc">薩丁尼亞島</string>
     <string name="lang_sr">塞爾維亞</string>
-    <string name="lang_zh_CN">中文（簡體）</string>
+    <string name="lang_zh_CN">中文（简体）</string>
     <string name="lang_zh_TW">中文（正體）</string>
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
