@@ -1566,8 +1566,8 @@
 	<string name="poi_denomination_salvation_army">Heilsarmee</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
 	<string name="poi_denomination_mennonite">Mennoniten</string>
-	<string name="poi_denomination_quaker">Quaker</string>
-	<string name="poi_denomination_assemblies_of_god">Assemblies of god</string>
+	<string name="poi_denomination_quaker">Quäker</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblies of God</string>
 	<string name="poi_denomination_nondenominational">bekenntnisfrei</string>
 	<string name="poi_denomination_nazarene">Nazaräer</string>
 	<string name="poi_denomination_united_methodist">vereinigte Methodisten</string>
@@ -1628,9 +1628,9 @@
 	<string name="poi_boat_storage">Bootslager</string>
 
 	<string name="poi_bridge_ref">Brücken ref</string>
-	<string name="poi_tunnel_ref">Tunnel ref</string>
+	<string name="poi_tunnel_ref">"Tunnel  REF"</string>
 
-	<string name="poi_ref">Ref</string>
+	<string name="poi_ref">Referenz</string>
 
 	<string name="poi_cargo_passengers">Fracht: Passagiere</string>
 	<string name="poi_cargo_vehicle">Fracht: Fahrzeuge</string>
@@ -1714,7 +1714,7 @@
 	<string name="poi_denomination_unitarian">Unitarisch</string>
 	<string name="poi_denomination_wesleyan">Wesleyaner</string>
 	<string name="poi_denomination_shingon_shu">Schule des wahren Wortes</string>
-	<string name="poi_denomination_mahayana">Mahayana</string>
+	<string name="poi_denomination_mahayana">Mahayana Buddhisten</string>
 
 	<string name="poi_jersey_barrier">Jersey Barriere</string>
 	<string name="poi_leaf_type_needleleaved">Nadelwald</string>
@@ -2018,7 +2018,7 @@
 	<string name="poi_resource_peat">Torf</string>
 	<string name="poi_resource_platinum">Platin</string>
 	<string name="poi_resource_radium">Radium</string>
-	<string name="poi_wetland_saltern">Saltern</string>
+	<string name="poi_wetland_saltern">Saline</string>
 	<string name="poi_wetland_tidalflat">Watt</string>
 	<string name="poi_wetland_saltmarsh">Salzsumpf</string>
 	<string name="poi_wetland_mangrove">Mangroven</string>
@@ -2134,7 +2134,7 @@
 	<string name="poi_route_bus_ref">Bus</string>
 	<string name="poi_route_share_taxi_ref">geteiltes Taxi</string>
 	<string name="poi_route_trolleybus_ref">Oberleitungsbus</string>
-	<string name="poi_route_tram_ref">Tram</string>
+	<string name="poi_route_tram_ref">Stadtbahn</string>
 	<string name="poi_route_train_ref">Zug</string>
 	<string name="poi_route_light_rail_ref">Stadtbahn</string>
 	<string name="poi_route_monorail_ref">Einschienenbahn</string>
@@ -2211,7 +2211,7 @@
 	<string name="poi_office_camping">Camping Büro</string>
 	<string name="poi_model_aerodrome">Modellflugplatz</string>
 	<string name="poi_guide">Fremdenführerbüro</string>
-	<string name="poi_quango">Quango</string>
+	<string name="poi_quango">Mittlerorganisation</string>
 	<string name="poi_cooperative">Genossenschaftsbüro</string>
 	<string name="poi_office_forestry">Forstamt</string>
 	<string name="poi_logistics">Logistikbüro</string>
@@ -2859,4 +2859,9 @@
 	<string name="poi_bicycle_parking_tree">Fahrrad-Baum</string>
 	<string name="poi_bicycle_parking_streetpod">Straßenschließfach</string>
 
-	</resources>
+	<string name="poi_salt_yes">Salz</string>
+	<string name="poi_salt_no">Salz: Nein</string>
+	<string name="poi_wheelchair_designated">Ausgeschrieben für Rollstuhlfahrer</string>
+	<string name="poi_spoil_heap">Abraumhalde</string>
+
+</resources>
