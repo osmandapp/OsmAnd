@@ -120,7 +120,7 @@ public class MapUtils {
 	}
 
 	public static double checkLongitude(double longitude) {
-		if (longitude > MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
+		if (longitude >= MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
 			return longitude;
 		}
 		while (longitude <= MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
