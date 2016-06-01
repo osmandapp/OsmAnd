@@ -12,8 +12,10 @@
 	<string name="shared_string_favorites">Favourites</string>
 	<string name="shared_string_add_to_favorites">Add to Favourites</string>
 	<string name="shared_string_my_favorites">My Favourites</string>
+	<string name="traffic_warning_railways">Railway crossing</string>
 	<string name="traffic_warning_pedestrian">Pedestrian crossing</string>
-	<string name="show_pedestrian_warnings">Show pedestrian crossings</string>
+	<string name="show_railway_warnings">Railway crossings</string>
+	<string name="show_pedestrian_warnings">Pedestrian crossings</string>
 	<string name="rendering_attr_subwayMode_name">Underground routes</string>
 	<string name="fav_point_emoticons_message">The favourite point name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
 	<string name="fav_point_dublicate">Favourite point name duplicate</string>

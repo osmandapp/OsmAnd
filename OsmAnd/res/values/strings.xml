@@ -609,8 +609,8 @@
     <string name="rendering_value_highContrastRoads_name">High contrast roads</string>
     <string name="traffic_warning_railways">Railroad crossing</string>
     <string name="traffic_warning_pedestrian">Pedestrian crosswalk</string>
-    <string name="show_railway_warnings">Show railroad crossings</string>
-    <string name="show_pedestrian_warnings">Show pedestrian crosswalks</string>
+    <string name="show_railway_warnings">Railroad crossings</string>
+    <string name="show_pedestrian_warnings">Pedestrian crosswalks</string>
     <string name="rendering_value_americanRoadAtlas_name">American road atlas</string>
     <string name="routing_attr_no_new_routing_name">No v1.9 routing rules</string>
     <string name="routing_attr_no_new_routing_description">Do not use routing rules introduced in v1.9</string>
@@ -1213,7 +1213,7 @@
     <string name="poi_filter_food_shop">Food shop</string>
     <string name="poi_filter_for_tourists">For tourists</string>
     <string name="poi_filter_fuel">Fuel</string>
-    <string name="show_warnings_title">Show alarms…</string>
+    <string name="show_warnings_title">Show alerts…</string>
     <string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information</string>
     <string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
     <string name="use_compass_navigation">Use compass</string>
@@ -1471,7 +1471,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="day_night_info">Day/night info</string>
     <string name="map_widget_renderer">Map style</string>
     <string name="layer_map_appearance">Configure screen</string>
-    <string name="show_lanes">Show lanes</string>
+    <string name="show_lanes">Lanes</string>
     <string name="avoid_unpaved">Avoid unpaved roads</string>
     <string name="avoid_ferries">Avoid ferries</string>
     <string name="avoid_in_routing_title">Avoid…</string>
@@ -1505,8 +1505,8 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="bg_service_screen_unlock">Unlock screen</string>
     <string name="bg_service_screen_lock_toast">The screen is locked</string>
     <string name="bg_service_interval">Set wake-up interval:</string>
-    <string name="show_cameras">Show speed cameras</string>
-    <string name="show_traffic_warnings">Show traffic warnings</string>
+    <string name="show_cameras">Speed cameras</string>
+    <string name="show_traffic_warnings">Traffic warnings</string>
     <string name="avoid_toll_roads">Avoid toll roads</string>
     <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
     <string name="route_updated_loc_found">Route will be calculated once position is found</string>
