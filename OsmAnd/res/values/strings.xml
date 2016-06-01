@@ -285,8 +285,8 @@
     <string name="srtm_plugin_disabled">Contour lines disabled</string>
     <string name="favorite_category_add_new">Add new</string>
     <string name="favorite_category_select">Select category</string>
-    <string name="default_speed_system_descr">Define speed measurement system</string>
-    <string name="default_speed_system">Speed measurement</string>
+    <string name="default_speed_system_descr">Define unit of speed</string>
+    <string name="default_speed_system">Unit of speed</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Nautical miles</string>
     <string name="si_kmh">Kilometers per hour</string>
@@ -1841,8 +1841,8 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="preferred_locale_descr">Select display language (please restart OsmAnd after changing)</string>
     <string name="preferred_locale">Display language</string>
     <string name="incomplete_locale">incomplete</string>
-    <string name="unit_of_length_descr">Change units of length and speed</string>
-    <string name="unit_of_length">Unit of measure</string>
+    <string name="unit_of_length_descr">Change units of length</string>
+    <string name="unit_of_length">Unit of length</string>
     <string name="si_mi_foots">Miles/feet</string>
     <string name="si_mi_yard">Miles/yards</string>
     <string name="si_km_m">Kilometers/meters</string>
