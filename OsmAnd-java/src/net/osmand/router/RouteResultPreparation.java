@@ -472,6 +472,7 @@ public class RouteResultPreparation {
 			if (currentTurn == null || currentTurn.getLanes() == null) {
 				// skip
 			} else {
+				boolean changed = false;
 				if (nextSegment != null) {
 					String hw = currentSegment.getObject().getHighway();
 					double mergeDistance = 200;
@@ -479,7 +480,40 @@ public class RouteResultPreparation {
 						mergeDistance = 400;
 					}
 					if (dist < mergeDistance) {
-						mergeTurnLanes(leftside, currentSegment, nextSegment);
+						changed = mergeTurnLanes(leftside, currentSegment, nextSegment);
+					}
+				}
+				if (!changed) {
+					TurnType tt = currentSegment.getTurnType();
+					boolean goForward = false;
+					if (tt.getValue() == TurnType.C && tt.getLanes() != null) {
+						for (int it = 0; it < tt.getLanes().length; it++) {
+							int turn = tt.getLanes()[it];
+							if (TurnType.getPrimaryTurn(turn) == TurnType.C ||
+									TurnType.getSecondaryTurn(turn) == TurnType.C ||
+									TurnType.getTertiaryTurn(turn) == TurnType.C) {
+								goForward = true;
+								break;
+							}
+						}
+					}
+					if(goForward) {
+						for (int it = 0; it < tt.getLanes().length; it++) {
+							int turn = tt.getLanes()[it];
+							if (TurnType.getPrimaryTurn(turn) != TurnType.C) {
+								if(TurnType.getSecondaryTurn(turn) == TurnType.C) {
+									int st = TurnType.getSecondaryTurn(turn);
+									TurnType.setSecondaryTurn(tt.getLanes(), it, TurnType.getPrimaryTurn(turn));
+									TurnType.setPrimaryTurn(tt.getLanes(), it, st);
+								} else if(TurnType.getTertiaryTurn(turn) == TurnType.C) {
+									int st = TurnType.getTertiaryTurn(turn);
+									TurnType.setTertiaryTurn(tt.getLanes(), it, TurnType.getPrimaryTurn(turn));
+									TurnType.setPrimaryTurn(tt.getLanes(), it, st);
+								} else {
+									tt.getLanes()[it] = turn & (~1);
+								}
+							}
+						}
 					}
 				}
 				nextSegment = currentSegment;
@@ -525,14 +559,14 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private void mergeTurnLanes(boolean leftSide, RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
+	private boolean mergeTurnLanes(boolean leftSide, RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
 		MergeTurnLaneTurn active = new MergeTurnLaneTurn(currentSegment);
 		MergeTurnLaneTurn target = new MergeTurnLaneTurn(nextSegment);
 		if (active.activeLen < 2) {
-			return;
+			return false;
 		}
 		if (target.activeStartIndex == -1) {
-			return;
+			return false;
 		}
 		boolean changed = false;
 		if (target.isActiveTurnMostLeft()) {
@@ -564,7 +598,7 @@ public class RouteResultPreparation {
 			}
 		}
 		if (!changed) {
-			return;
+			return false;
 		}
 
 		// set the allowed lane bit
@@ -584,6 +618,7 @@ public class RouteResultPreparation {
 //			newTurnType.setSkipToSpeak(currentTurn.isSkipToSpeak());
 //			currentSegment.setTurnType(newTurnType);
 //		}
+		return true;
 	}
 	
 	private static final int MAX_SPEAK_PRIORITY = 5;
