@@ -1,4 +1,0 @@
-﻿<?xml version='1.0' encoding='UTF-8'?>
-<resources>
-<string name="ATTENTION">Please note that the Portuguese (Portugal) file phrases.xml has been moved to folder values-pt, where it can also act as proper default fallback for pt_BR. Please change your replication target.</string>
-</resources>
