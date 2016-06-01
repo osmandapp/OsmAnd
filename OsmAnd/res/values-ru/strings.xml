@@ -119,7 +119,7 @@
     <string name="native_library_not_running">Приложение запущено в безопасном режиме (отключите в Настройках).</string>
     <string name="background_service_is_enabled_question">Фоновый режим всё ещё запущен. Вы хотите прервать его тоже?</string>
     <string name="close_changeset">Закрыть changeset</string>
-    <string name="zxing_barcode_scanner_not_found">Приложение \"Сканнер штрих-кодов\" не найдено. Искать в Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">Приложение ZXing Barcode Scanner не найдено. Искать в Google Play?</string>
     <string name="non_optimal_route_calculation">Быстрое построение маршрута (возможно неоптимально)</string>
     <string name="oclock">ч.</string>
     <string name="unknown_from_location">Начальное местоположение ещё не определено</string>
@@ -1258,7 +1258,7 @@
     <string name="osmo_connect_menu">Соединение</string>
     <string name="osmo_connect">Войти</string>
     <string name="osmo_server_operation_failed">OsMo: не удалось правильно обработать команду</string>
-    <string name="import_file_favourites">Сохранить точки как файл GPX или импортировать их в избранное?</string>
+    <string name="import_file_favourites">Сохранить данные как файл GPX или импортировать путевые точки в избранное?</string>
     
     <string name="rendering_value_pink_name">Розовый</string>
     
@@ -1370,8 +1370,8 @@
     <string name="lang_fa">Персидский</string>
     <string name="lang_sc">Сардинский</string>
     <string name="lang_sr">Сербский</string>
-    <string name="lang_zh_CN">Упрощенный китайский</string>
-    <string name="lang_zh_TW">Традиционный китайский</string>
+    <string name="lang_zh_CN">Китайский (упрощенный)</string>
+    <string name="lang_zh_TW">Китайский (традиционный)</string>
     <string name="rendering_attr_subwayMode_name">Маршруты метро</string>
     <string name="osmo_invite">Пригласить…</string>
     <string name="osmo_leave_confirmation_msg">Вы хотите выйти из группы %1$s?</string>
@@ -1680,7 +1680,7 @@
     <string name="gps_network_not_enabled">Служба определения координат не включена. Вы хотите включить её?</string>
     <string name="disable_recording_once_app_killed_descrp">При завершении приложения (через последние приложения) запись GPX будет поставлена на паузу. (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="download_wikipedia_files">Хотите загрузить дополнительные данные Википедии (%1$s Мб) ?</string>
-    <string name="lang_es_ar">Аргентинский испанский</string>
+    <string name="lang_es_ar">Испанский (аргентинский)</string>
     <string name="lang_nb">Норвежский букмол</string>
     <string name="lang_vo">Волапюк</string>
     <string name="lang_th">Тайский</string>
@@ -1882,7 +1882,7 @@
     <string name="update">Обновлять каждые</string>
     <string name="only_download_over_wifi">Загружать только через WiFi</string>
     <string name="update_now">Обновить сейчас</string>
-    <string name="missing_write_external_storage_permission">Приложению не разрешена запись на карту памяти</string>
+    <string name="missing_write_external_storage_permission">Приложение не имеет разрешения на использование SD-карты</string>
 <string name="available_maps">Доступные карты</string>
     <string name="starting_point">Начальный пункт</string>
     <string name="shared_string_not_selected">Не выбрано</string>
@@ -2023,4 +2023,9 @@
     <string name="access_direction_haptic_feedback_descr">Индицировать вибрацией направление на целевую точку</string>
 <string name="osm_live_subscription">Подписка OSM Live</string>
     <string name="use_osm_live_routing_description">Включить навигацию с учетом автообновлений OSM Live (Beta)</string>
-	</resources>
+	<string name="lang_es_us">Испанский (американский)</string>
+    <string name="lang_en_gb">Английский (Соединенное Королевство)</string>
+    <string name="lang_hu_formal">Венгерский (официальный)</string>
+    <string name="lang_kn">Каннада</string>
+    <string name="file_name_containes_illegal_char">Имя файла содержит недопустимый символ</string>
+</resources>
