@@ -11,6 +11,7 @@
 	<asset source="voice/de/ttsconfig.p" destination="voice/de-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/el/ttsconfig.p" destination="voice/el-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/en/ttsconfig.p" destination="voice/en-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	<asset source="voice/en-gb/ttsconfig.p" destination="voice/en-gb-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es/ttsconfig.p" destination="voice/es-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/es-ar/ttsconfig.p" destination="voice/es-ar-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/et/ttsconfig.p" destination="voice/et-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
