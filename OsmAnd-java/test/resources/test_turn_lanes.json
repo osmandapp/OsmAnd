@@ -44,7 +44,7 @@
    }
   },
   {
-    "testName": "2.Valley View Lane TU Highway 161 Service Road",
+    "testName": "2. Valley View Lane TU Highway 161 Service Road",
     "startPoint": {
       "latitude": 45.694859388262195,
       "longitude": 35.467755138874054
@@ -58,7 +58,39 @@
    }
   },
   {
-    "testName": "2.1.Highway 161 Service Road to Lyndon B Johnson Freeway (I 635) link",
+    "testName": "2.1 Valley View Lane C Highway 161 Service Road",
+    "startPoint": {
+      "latitude": 45.694859388262195,
+      "longitude": 35.467755138874054
+    },
+    "endPoint": {
+      "latitude": 45.692210341270474,
+      "longitude": 35.462753385305405
+    },
+    "expectedResults": {
+      "26705": "TU|TL|+C,TL|C|C,TR",
+      "26897": "TL|+C,TL|C|C,TR",
+      "26739": "TL|+C,TL|C|C"
+   }
+  },
+  {
+    "testName": "2.2 Valley View Lane TL Highway 161 Service Road",
+    "startPoint": {
+      "latitude": 45.694859388262195,
+      "longitude": 35.467755138874054
+    },
+    "endPoint": {
+      "latitude": 45.69354592206,
+      "longitude": 35.46670215889
+    },
+    "expectedResults": {
+      "26705": "TU|+TL|+TL,C|C|C,TR",
+      "26897": "+TL|+TL,C|C|C,TR",
+      "26605": "TL:+TL|+TL,C|C|C"
+   }
+  },
+  {
+    "testName": "2.3. Highway 161 Service Road to Lyndon B Johnson Freeway (I 635) link",
     "startPoint": {
       "latitude": 45.69384114913531,
       "longitude": 35.46754793822765
@@ -74,7 +106,7 @@
     }
   },
   {
-    "testName": "3.Motorway link from Ringweg Zuid TL Amstelveenseweg",
+    "testName": "3. Motorway link from Ringweg Zuid TL Amstelveenseweg",
     "startPoint": {
       "latitude": 45.6971206184178,
       "longitude": 35.51630312204361
