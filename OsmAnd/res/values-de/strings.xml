@@ -965,8 +965,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="route_updated_loc_found">Route wird neu berechnet sobald Standort ermittelt</string>
 	<string name="continue_follow_previous_route_auto">Vorherige Navigation wurde nicht beendet. Der Route weiter folgen? (%1$s Sekunden)</string>
 
-	<string name="show_cameras">Radarfallen anzeigen</string>
-	<string name="show_traffic_warnings">Verkehrswarnungen anzeigen</string>
+	<string name="show_cameras">Radarfallen</string>
+	<string name="show_traffic_warnings">Verkehrswarnungen</string>
 	<string name="avoid_toll_roads">Mautstraßen vermeiden</string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
@@ -996,7 +996,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="map_widget_renderer">Kartendarstellung</string>
 
 	<string name="layer_map_appearance">Anzeige konfigurieren</string>
-	<string name="show_lanes">Fahrspuren anzeigen</string>
+	<string name="show_lanes">Fahrspuren</string>
 	<string name="avoid_unpaved">Vermeide unbefestigte Straßen</string>
 	<string name="avoid_ferries">Vermeide Fähren</string>
 	<string name="avoid_in_routing_title">Vermeide …</string>
@@ -1608,8 +1608,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="rendering_value_highContrastRoads_name">Kontrastreiche Straßen</string>
     <string name="traffic_warning_railways">Bahnübergang</string>
     <string name="traffic_warning_pedestrian">Fußgängerübergang</string>
-    <string name="show_railway_warnings">Eisenbahnübergänge anzeigen</string>
-    <string name="show_pedestrian_warnings">Fußgängerübergänge anzeigen</string>
+    <string name="show_railway_warnings">Eisenbahnübergänge</string>
+    <string name="show_pedestrian_warnings">Fußgängerübergänge</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
     <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus aus v1.9 nicht verwenden</string>

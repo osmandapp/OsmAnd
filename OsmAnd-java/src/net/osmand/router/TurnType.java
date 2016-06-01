@@ -1,5 +1,7 @@
 package net.osmand.router;
 
+import gnu.trove.set.hash.TIntHashSet;
+
 public class TurnType {
 	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
 	public static final int TL = 2; // turn left //$NON-NLS-1$
@@ -215,7 +217,33 @@ public class TurnType {
 		return (laneValue >> 10);
 	}
 
-	
+	public static String toString(int[] lns) {
+        String s = "";
+        for (int h = 0; h < lns.length; h++) {
+            if (h > 0) {
+                s += "|";
+            }
+            if (lns[h] % 2 == 1) {
+                s += "+";
+            }
+            int pt = TurnType.getPrimaryTurn(lns[h]);
+            if (pt == 0) {
+                pt = 1;
+            }
+            s += TurnType.valueOf(pt, false).toXmlString();
+            int st = TurnType.getSecondaryTurn(lns[h]);
+            if (st != 0) {
+                s += "," + TurnType.valueOf(st, false).toXmlString();
+            }
+            int tt = TurnType.getTertiaryTurn(lns[h]);
+            if (tt != 0) {
+                s += "," + TurnType.valueOf(tt, false).toXmlString();
+            }
+
+        }
+        s += "";
+        return s;
+	}
 	public int[] getLanes() {
 		return lanes;
 	}
@@ -291,4 +319,21 @@ public class TurnType {
 	public static boolean isSlightTurn(int type) {
 		return type == TSLL || type == TSLR || type == C || type == KL || type == KR;
 	}
+
+	public static void collectTurnTypes(int lane, TIntHashSet set) {
+		int pt = TurnType.getPrimaryTurn(lane);
+		if(pt != 0) {
+			set.add(pt);
+		}
+		pt = TurnType.getSecondaryTurn(lane);
+		if(pt != 0) {
+			set.add(pt);
+		}		
+		pt = TurnType.getTertiaryTurn(lane);
+		if(pt != 0) {
+			set.add(pt);
+		}		
+	}
+
+	
 }

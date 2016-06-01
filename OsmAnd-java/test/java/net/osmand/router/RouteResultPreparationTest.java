@@ -132,31 +132,7 @@ public class RouteResultPreparationTest {
     private String getLanesString(RouteSegmentResult segment) {
         final int[] lns = segment.getTurnType().getLanes();
         if (lns != null) {
-            String s = "";
-            for (int h = 0; h < lns.length; h++) {
-                if (h > 0) {
-                    s += "|";
-                }
-                if (lns[h] % 2 == 1) {
-                    s += "+";
-                }
-                int pt = TurnType.getPrimaryTurn(lns[h]);
-                if (pt == 0) {
-                    pt = 1;
-                }
-                s += TurnType.valueOf(pt, false).toXmlString();
-                int st = TurnType.getSecondaryTurn(lns[h]);
-                if (st != 0) {
-                    s += "," + TurnType.valueOf(st, false).toXmlString();
-                }
-                int tt = TurnType.getTertiaryTurn(lns[h]);
-                if (tt != 0) {
-                    s += "," + TurnType.valueOf(tt, false).toXmlString();
-                }
-
-            }
-            s += "";
-            return s;
+        	return TurnType.toString(lns);
         }
         return null;
     }

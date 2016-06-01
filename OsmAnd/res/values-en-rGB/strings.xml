@@ -12,8 +12,10 @@
 	<string name="shared_string_favorites">Favourites</string>
 	<string name="shared_string_add_to_favorites">Add to Favourites</string>
 	<string name="shared_string_my_favorites">My Favourites</string>
+	<string name="traffic_warning_railways">Railway crossing</string>
 	<string name="traffic_warning_pedestrian">Pedestrian crossing</string>
-	<string name="show_pedestrian_warnings">Show pedestrian crossings</string>
+	<string name="show_railway_warnings">Railway crossings</string>
+	<string name="show_pedestrian_warnings">Pedestrian crossings</string>
 	<string name="rendering_attr_subwayMode_name">Underground routes</string>
 	<string name="fav_point_emoticons_message">The favourite point name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
 	<string name="fav_point_dublicate">Favourite point name duplicate</string>
@@ -43,4 +45,13 @@
 	<string name="favourites_context_menu_delete">Delete favourite</string>
 	<string name="favourites_remove_dialog_msg">Delete favourite point \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Favourite point {0} was successfully deleted.</string>
+	<string name="osmo_center_location">Centre on the screen</string>
+	<string name="always_center_position_on_map">Display position always in centre</string>
+	<string name="choose_auto_follow_route">Auto-centre map view</string>
+	<string name="auto_follow_route_navigation">Auto-centre nav only</string>
+	<string name="auto_follow_route_navigation_descr">Auto-centre map view only while navigating.</string>
+	<string name="auto_follow_location_enabled">Auto-centre map view in use.</string>
+	<string name="search_position_map_view">Current map centre</string>
+	<string name="search_near_map">Search near current map centre</string>
+	<string name="position_on_map_center">Centre</string>
 </resources>
