@@ -1,12 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <!--  categories -->
-	<string name="poi_shop">Shop</string>
+	<string name="poi_shop">Store</string>
 		<string name="poi_shop_food">Food store</string>
 	<string name="poi_emergency">Emergency</string>
 	<string name="poi_transportation">Transportation</string>
 		<string name="poi_road_obstacle">Road obstacle</string>
-		<string name="poi_filling_station">Filling station</string>
+		<string name="poi_filling_station">Gas station</string>
 		<string name="poi_personal_transport">Personal transport</string>
 		<string name="poi_public_transport">Public transport</string>
 		<string name="poi_air_transport">Air transport</string>
@@ -57,7 +57,7 @@
 	<string name="poi_beverages">Beverage store</string>
 	<string name="poi_butcher">Meat market</string>
 	<string name="poi_deli">Deli</string>
-	<string name="poi_farm">Farm shop</string>
+	<string name="poi_farm">Farm store</string>
 	<string name="poi_greengrocer">Greengrocery</string>
 	<string name="poi_seafood">Seafood store</string>
 	<string name="poi_confectionery">Confectionery</string>
@@ -68,21 +68,20 @@
 	<string name="poi_pastry">Pastry shop</string>
 	<string name="poi_dairy">Dairy shop</string>
 	<string name="poi_vending_machine">Vending machine</string>
-	<string name="poi_wine">Wine shop</string>
-
+	<string name="poi_wine">Wine store</string>
 	<string name="poi_books">Bookstore</string>
-	<string name="poi_bicycle">Bicycle shop</string>
+	<string name="poi_bicycle">Bicycle store</string>
 	<string name="poi_anime">Anime shop</string>
 	<string name="poi_antiques">Antiques store</string>
-	<string name="poi_art">Art shop</string>
+	<string name="poi_art">Art store</string>
 	<string name="poi_baby_goods">Baby goods</string>
-	<string name="poi_bag">Bag shop</string>
+	<string name="poi_bag">Bag store</string>
 	<string name="poi_bathroom_furnishing">Bathroom furnishings</string>
 	<string name="poi_bed">Bedding store</string>
 	<string name="poi_boutique">Fashion boutique</string>
 	<string name="poi_camera">Cameras and lenses</string>
-	<string name="poi_carpet">Carpet shop</string>
-	<string name="poi_charity">Charity shop</string>
+	<string name="poi_carpet">Carpet store</string>
+	<string name="poi_charity">Charity store</string>
 	<string name="poi_chemist">Drug store</string>
 	<string name="poi_clothes">Apparel store</string>
 	<string name="poi_clothes_children">Childrens apparel</string>
@@ -90,19 +89,19 @@
 	<string name="poi_candles">Candles store</string>
 	<string name="poi_computer">Computer store</string>
 	<string name="poi_copyshop">Copy shop</string>
-	<string name="poi_curtain">Curtain shop</string>
-	<string name="poi_fabric">Drapery shop</string>
+	<string name="poi_curtain">Curtain store</string>
+	<string name="poi_fabric">Drapery store</string>
 <!--	<string name="poi_bedding">Bedding store</string>-->
 	<string name="poi_dive">Diving equipment</string>
 	<string name="poi_doityourself">Home improvement store</string>
 	<string name="poi_doors">Doors</string>
-	<string name="poi_erotic">Erotic shop</string>
-	<string name="poi_fashion">Fashion shop</string>
+	<string name="poi_erotic">Erotic store</string>
+	<string name="poi_fashion">Fashion store</string>
 	<string name="poi_fishing">Fishing tackle</string>
 	<string name="poi_florist">Flower shop</string>
 	<string name="poi_frame">Picture frame shop</string>
 	<string name="poi_free_flying">Free flying goods store</string>
-	<string name="poi_furnace">Heating units shop</string>
+	<string name="poi_furnace">Heating units store</string>
 	<string name="poi_furniture">Furniture store</string>
 	<string name="poi_garden_centre">Garden center</string>
 	<string name="poi_garden_furniture">Garden furniture store</string>
@@ -120,31 +119,31 @@
 	<string name="poi_jewelry">Jewelry store</string>
 	<string name="poi_kiosk">Kiosk</string>
 	<string name="poi_kitchen">Kitchen furnishings</string>
-	<string name="poi_leather">Leather shop</string>
+	<string name="poi_leather">Leather store</string>
 	<string name="poi_medical_supply">Medical supply</string>
 	<string name="poi_mobile_phone">Cell phone store</string>
-	<string name="poi_motorcycle">Motorcycle shop</string>
-	<string name="poi_music">Music shop</string>
+	<string name="poi_motorcycle">Motorcycle store</string>
+	<string name="poi_music">Music store</string>
 	<string name="poi_musical_instrument">Musical instruments</string>
-	<string name="poi_newsagent">Newsagency</string>
+	<string name="poi_newsagent">Newsagent</string>
 	<string name="poi_optician">Optometrist</string>
 	<string name="poi_organic">Organic food</string>
 	<string name="poi_outdoor">Outdoor store</string>
-	<string name="poi_paint">Paint shop</string>
-	<string name="poi_pet">Pet shop</string>
+	<string name="poi_paint">Paint store</string>
+	<string name="poi_pet">Pet store</string>
 	<string name="poi_photo">Photo shop</string>
 	<string name="poi_radiotechnics">Radiotechnics store</string>
 	<string name="poi_second_hand">Second hand store</string>
 	<string name="poi_scuba_diving_shop">Scuba diving goods store</string>
 	<string name="poi_ship_chandler">Ship chandler</string>
 	<string name="poi_sports">Sporting goods</string>
-	<string name="poi_stationery">Stationery shop</string>
-	<string name="poi_tableware">Tableware shop</string>
-	<string name="poi_ticket">Ticket shop</string>
+	<string name="poi_stationery">Stationery store</string>
+	<string name="poi_tableware">Tableware store</string>
+	<string name="poi_ticket">Ticket sales</string>
 	<string name="poi_tobacco">Tobacco store</string>
-	<string name="poi_toys">Toys store</string>
+	<string name="poi_toys">Toyshop</string>
 	<string name="poi_trade">Trading post</string>
-	<string name="poi_tyres">Tyres store</string>
+	<string name="poi_tyres">Tire store</string>
 	<string name="poi_vacuum_cleaner">Vacuum cleaner store</string>
 	<string name="poi_variety_store">Variety store</string>
 	<string name="poi_video">Video store</string>
@@ -152,8 +151,8 @@
 	<string name="poi_department_store">Department store</string>
 	<string name="poi_electronics">Electronics store</string>
 	<string name="poi_energy">Energy store</string>
-	<string name="poi_car">Car shop</string>
-	<string name="poi_car_parts">Car parts</string>
+	<string name="poi_car">Car dealer</string>
+	<string name="poi_car_parts">Auto parts</string>
 	<string name="poi_atv">Quad store</string>
 	<string name="poi_cosmetics">Cosmetics</string>
 	<string name="poi_marketplace">Marketplace</string>
@@ -166,7 +165,7 @@
 	<string name="poi_video_games">Video games</string>
 	<string name="poi_pyrotechnics">Pyrotechnics</string>
 	<string name="poi_weapons">Weapons store</string>
-	<string name="poi_perfumery">Perfume shop</string>
+	<string name="poi_perfumery">Perfume store</string>
 
 	<string name="poi_police">Police</string>
 	<string name="poi_fire_station">Fire station</string>
@@ -244,12 +243,12 @@
 	<string name="poi_tram_stop">Tram stop</string>
 	<string name="poi_public_transport_station">Public transport station</string>
 	<string name="poi_bus_station">Bus station</string>
-	<string name="poi_railway_station">Railway station</string>
-	<string name="poi_railway_platform">Railway platform</string>
-	<string name="poi_halt">Railway stop</string>
+	<string name="poi_railway_station">Railroad station</string>
+	<string name="poi_railway_platform">Railroad platform</string>
+	<string name="poi_halt">Railroad stop</string>
 	<string name="poi_subway_entrance">Subway entrance</string>
 	<string name="poi_subway_station">Subway station</string>
-	<string name="poi_railway_buffer_stop">Railway buffer stop</string>
+	<string name="poi_railway_buffer_stop">Railroad buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
 
 	<string name="poi_aerodrome">Airport</string>
@@ -322,7 +321,7 @@
 
 	<string name="poi_recycling">Recycling</string>
 
-	<string name="poi_recycling_centre">Type: recycling centre</string>
+	<string name="poi_recycling_centre">Type: recycling center</string>
 	<string name="poi_recycling_container">Type: container</string>
 	<string name="poi_recycling_glass">Glass</string>
 	<string name="poi_recycling_paper">Paper</string>
@@ -361,7 +360,7 @@
 	<string name="poi_recycling_mobile_phones">Mobile phones</string>
 	<string name="poi_recycling_hydrargyrum">Hydrargyrum</string>
 	<string name="poi_recycling_computers">Computers</string>
-	<string name="poi_recycling_tyres">Tyres</string>
+	<string name="poi_recycling_tyres">Tires</string>
 	<string name="poi_recycling_tv_monitor">TV, monitors</string>
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_rubble">Rubble</string>
@@ -392,8 +391,8 @@
 
 	<string name="poi_landfill">Landfill</string>
 	<string name="poi_landfill_waste_nuclear">Nuclear waste</string>
-	<string name="poi_waste_disposal">Waste disposal</string>
-	<string name="poi_waste_basket">Waste basket</string>
+	<string name="poi_waste_disposal">Trash disposal</string>
+	<string name="poi_waste_basket">Trash can</string>
 
 	<string name="poi_industrial">Industrial area</string>
 	<string name="poi_quarry">Quarry</string>
@@ -787,12 +786,12 @@
 	<string name="poi_ski_rental">Ski rental</string>
 
 	<string name="poi_library">Library</string>
-	<string name="poi_arts_centre">Arts centre</string>
+	<string name="poi_arts_centre">Arts center</string>
 	<string name="poi_cinema">Cinema</string>
 	<string name="poi_casino">Casino</string>
-	<string name="poi_community_centre">Community centre</string>
-	<string name="poi_social_centre">Social centre</string>
-	<string name="poi_theatre">Theatre</string>
+	<string name="poi_community_centre">Community center</string>
+	<string name="poi_social_centre">Social center</string>
+	<string name="poi_theatre">Theater</string>
 	<string name="poi_circus">Circus</string>
 	<string name="poi_gallery">Art gallery</string>
 	<string name="poi_dance_floor">Dance floor</string>
@@ -956,8 +955,8 @@
 	<string name="poi_seamark_dyke">Seamark dyke</string>
 	<string name="poi_floating_dock">Floating dock</string>
 	<string name="poi_fog_signal">Fog signal</string>
-	<string name="poi_harbour_basin">Harbour basin</string>
-	<string name="poi_seamark_harbour">Harbour</string>
+	<string name="poi_harbour_basin">Harbor basin</string>
+	<string name="poi_seamark_harbour">Harbor</string>
 	<string name="poi_landmark">Landmark</string>
 	<string name="poi_seamark_light">Light, seamark</string>
 	<string name="poi_seamark_light_major">Major light, seamark</string>
@@ -1854,11 +1853,11 @@
 	<string name="poi_tunnel_waterway">Water tunnel</string>
 	<string name="poi_tunnel_car">Road tunnel</string>
 	<string name="poi_tunnel_pedestrian">Pedestrian tunnel</string>
-	<string name="poi_tunnel_railway">Railway tunnel</string>
+	<string name="poi_tunnel_railway">Railroad tunnel</string>
 	<string name="poi_bridge_car">Road bridge</string>
 	<string name="poi_bridge_pedestrian">Pedestrian bridge</string>
 	<string name="poi_bridge_bicycle">Bicycle bridge</string>
-	<string name="poi_bridge_railway">Railway bridge</string>
+	<string name="poi_bridge_railway">Railroad bridge</string>
 	<string name="poi_bridge_waterway">Waterway bridge</string>
 	<string name="poi_bridge_structure_beam">Bridge structure: beam</string>
 	<string name="poi_bridge_structure_simple_suspension">Bridge structure: simple suspension</string>
@@ -1919,7 +1918,7 @@
 	<string name="poi_route_funicular_ref">Funicular</string>
 	<string name="poi_route_ferry_ref">Ferry</string>
 
-	<string name="poi_route_railway_ref">Route of a railway</string>
+	<string name="poi_route_railway_ref">Route of a railroad</string>
 
 	<string name="poi_historic_yes">Historical object</string>
 	<string name="poi_surveillance_yes">Surveillance: yes</string>
@@ -2337,7 +2336,7 @@
 	<string name="poi_pa">Pa (maori fortified settlement)</string>
 
 	<string name="poi_historic_farm">Historic farm</string>
-	<string name="poi_historic_railway_station">Historic railway station</string>
+	<string name="poi_historic_railway_station">Historic railroad station</string>
 
 	<string name="poi_club_freemasonry">Masonic Lodge</string>
 	<string name="poi_club_sailing">Sailing club</string>
@@ -2345,7 +2344,7 @@
 
 	<string name="poi_historic_threshing_floor">Historic threshing floor</string>
 	<string name="poi_historic_gallows">Historic gallows</string>
-	<string name="poi_historic_railway">Historic railway</string>
+	<string name="poi_historic_railway">Historic railroad</string>
 
 	<string name="poi_square">Square</string>
 	<string name="poi_artist_name">Artist</string>
@@ -2534,7 +2533,7 @@
 
 	<string name="poi_building_type_pyramid">Building type: pyramid</string>
 
-	<string name="poi_fitness_centre">Fitness centre</string>
+	<string name="poi_fitness_centre">Fitness center</string>
 	<string name="poi_fitness">Fitness</string>
 
 	<string name="poi_billiards">Billiards</string>
@@ -2719,7 +2718,7 @@
 
 	<string name="poi_health_facility_type_office">Medical office</string>
 	<string name="poi_health_facility_type_field_hospital">Health facility type: field hospital</string>
-	<string name="poi_health_facility_type_counselling_centre">Health facility type: counselling centre</string>
+	<string name="poi_health_facility_type_counselling_centre">Health facility type: counselling center</string>
 	<string name="poi_health_facility_type_laboratory">Health facility type: laboratory</string>
 	<string name="poi_health_facility_type_therapy">Health facility type: therapy</string>
 	<string name="poi_health_facility_type_department">Health facility type: department</string>
@@ -2754,40 +2753,40 @@
 	<string name="poi_health_person_type_technician">Role of health worker: technician</string>
 	<string name="poi_health_person_type_witchdoctor">Role of health worker: witchdoctor</string>
 
-	<string name="poi_counselling_type_addiction_yes">Counselling (addiction): yes</string>
-	<string name="poi_counselling_type_addiction_no">Counselling (addiction): no</string>
-	<string name="poi_counselling_type_antenatal_yes">Counselling (antenatal): yes</string>
-	<string name="poi_counselling_type_antenatal_no">Counselling (antenatal): no</string>
-	<string name="poi_counselling_type_child_guidance_yes">Counselling (child guidance): yes</string>
-	<string name="poi_counselling_type_child_guidance_no">Counselling (child guidance): no</string>
-	<string name="poi_counselling_type_couple_yes">Counselling (couple): yes</string>
-	<string name="poi_counselling_type_couple_no">Counselling (couple): no</string>
-	<string name="poi_counselling_type_crisis_yes">Counselling (crisis): yes</string>
-	<string name="poi_counselling_type_crisis_no">Counselling (crisis): no</string>
-	<string name="poi_counselling_type_drugs_yes">Counselling (drugs): yes</string>
-	<string name="poi_counselling_type_drugs_no">Counselling (drugs): no</string>
-	<string name="poi_counselling_type_education_yes">Counselling (education): yes</string>
-	<string name="poi_counselling_type_education_no">Counselling (education): no</string>
-	<string name="poi_counselling_type_family_yes">Counselling (family): yes</string>
-	<string name="poi_counselling_type_family_no">Counselling (family): no</string>
-	<string name="poi_counselling_type_homeless_yes">Counselling (homeless): yes</string>
-	<string name="poi_counselling_type_homeless_no">Counselling (homeless): no</string>
-	<string name="poi_counselling_type_immigrant_yes">Counselling (immigrant): yes</string>
-	<string name="poi_counselling_type_immigrant_no">Counselling (immigrant): no</string>
-	<string name="poi_counselling_type_marriage_yes">Counselling (marriage): yes</string>
-	<string name="poi_counselling_type_marriage_no">Counselling (marriage): no</string>
-	<string name="poi_counselling_type_nutrition_yes">Counselling (nutrition): yes</string>
-	<string name="poi_counselling_type_nutrition_nfire_hydo">Counselling (nutrition): no</string>
-	<string name="poi_counselling_type_rehabilitation_yes">Counselling (rehabilitation): yes</string>
-	<string name="poi_counselling_type_rehabilitation_no">Counselling (rehabilitation): no</string>
-	<string name="poi_counselling_type_sexual_yes">Counselling (sexual): yes</string>
-	<string name="poi_counselling_type_sexual_no">Counselling (sexual): no</string>
-	<string name="poi_counselling_type_sexual_abuse_yes">Counselling (sexual abuse): yes</string>
-	<string name="poi_counselling_type_sexual_abuse_no">Counselling (sexual abuse): no</string>
-	<string name="poi_counselling_type_victim_yes">Counselling (victim): yes</string>
-	<string name="poi_counselling_type_victim_no">Counselling (victim): no</string>
-	<string name="poi_counselling_type_violence_yes">Counselling (violence): yes</string>
-	<string name="poi_counselling_type_violence_no">Counselling (violence): no</string>
+	<string name="poi_counselling_type_addiction_yes">Counseling (addiction): yes</string>
+	<string name="poi_counselling_type_addiction_no">Counseling (addiction): no</string>
+	<string name="poi_counselling_type_antenatal_yes">Counseling (antenatal): yes</string>
+	<string name="poi_counselling_type_antenatal_no">Counseling (antenatal): no</string>
+	<string name="poi_counselling_type_child_guidance_yes">Counseling (child guidance): yes</string>
+	<string name="poi_counselling_type_child_guidance_no">Counseling (child guidance): no</string>
+	<string name="poi_counselling_type_couple_yes">Counseling (couple): yes</string>
+	<string name="poi_counselling_type_couple_no">Counseling (couple): no</string>
+	<string name="poi_counselling_type_crisis_yes">Counseling (crisis): yes</string>
+	<string name="poi_counselling_type_crisis_no">Counseling (crisis): no</string>
+	<string name="poi_counselling_type_drugs_yes">Counseling (drugs): yes</string>
+	<string name="poi_counselling_type_drugs_no">Counseling (drugs): no</string>
+	<string name="poi_counselling_type_education_yes">Counseling (education): yes</string>
+	<string name="poi_counselling_type_education_no">Counseling (education): no</string>
+	<string name="poi_counselling_type_family_yes">Counseling (family): yes</string>
+	<string name="poi_counselling_type_family_no">Counseling (family): no</string>
+	<string name="poi_counselling_type_homeless_yes">Counseling (homeless): yes</string>
+	<string name="poi_counselling_type_homeless_no">Counseling (homeless): no</string>
+	<string name="poi_counselling_type_immigrant_yes">Counseling (immigrant): yes</string>
+	<string name="poi_counselling_type_immigrant_no">Counseling (immigrant): no</string>
+	<string name="poi_counselling_type_marriage_yes">Counseling (marriage): yes</string>
+	<string name="poi_counselling_type_marriage_no">Counseling (marriage): no</string>
+	<string name="poi_counselling_type_nutrition_yes">Counseling (nutrition): yes</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Counseling (nutrition): no</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Counseling (rehabilitation): yes</string>
+	<string name="poi_counselling_type_rehabilitation_no">Counseling (rehabilitation): no</string>
+	<string name="poi_counselling_type_sexual_yes">Counseling (sexual): yes</string>
+	<string name="poi_counselling_type_sexual_no">Counseling (sexual): no</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Counseling (sexual abuse): yes</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Counseling (sexual abuse): no</string>
+	<string name="poi_counselling_type_victim_yes">Counseling (victim): yes</string>
+	<string name="poi_counselling_type_victim_no">Counseling (victim): no</string>
+	<string name="poi_counselling_type_violence_yes">Counseling (violence): yes</string>
+	<string name="poi_counselling_type_violence_no">Counseling (violence): no</string>
 
 	<string name="poi_provided_for_infant_yes">Provided for infants: yes</string>
 	<string name="poi_provided_for_infant_no">Provided for infants: no</string>
@@ -2813,8 +2812,8 @@
 	<string name="poi_treat_inpatient_yes">Inpatient services: yes</string>
 	<string name="poi_treat_inpatient_no">Inpatient services: no</string>
 	<string name="poi_treat_inpatient_only">Inpatient services: only</string>
-	<string name="poi_counselling_yes">Counselling: yes</string>
-	<string name="poi_counselling_no">Counselling: no</string>
+	<string name="poi_counselling_yes">Counseling: yes</string>
+	<string name="poi_counselling_no">Counseling: no</string>
 	<string name="poi_emergency_yes">Emergency: yes</string>
 	<string name="poi_emergency_no">Emergency: no</string>
 	<string name="poi_home_visit_yes">Home visit: yes</string>

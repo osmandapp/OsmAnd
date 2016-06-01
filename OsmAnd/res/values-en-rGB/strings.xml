@@ -1,0 +1,46 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<resources>
+	<!--
+		Our app defaults to American English with default strings in res/values
+		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
+	-->
+
+	<string name="access_default_color">Default colour</string>
+	<string name="rendering_value_walkingRoutesScopeOSMC_name">Colouring according to route scope</string>
+	<string name="rendering_value_walkingRoutesOSMC_name">Colouring according to OSMC</string>
+	<string name="shared_string_favorite">Favourite</string>
+	<string name="shared_string_favorites">Favourites</string>
+	<string name="shared_string_add_to_favorites">Add to Favourites</string>
+	<string name="shared_string_my_favorites">My Favourites</string>
+	<string name="traffic_warning_pedestrian">Pedestrian crossing</string>
+	<string name="show_pedestrian_warnings">Show pedestrian crossings</string>
+	<string name="rendering_attr_subwayMode_name">Underground routes</string>
+	<string name="fav_point_emoticons_message">The favourite point name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
+	<string name="fav_point_dublicate">Favourite point name duplicate</string>
+	<string name="fav_point_dublicate_message">Specified favourite name already in use, was changed to %1$s to avoid duplication.</string>
+	<string name="speak_favorites">Nearby Favourites</string>
+	<string name="rendering_attr_coloredBuildings_name">Colour-code buildings by type</string>
+	<string name="osmo_edit_color">Display colour</string>
+	<string name="favourites_list_activity">Select favourite</string>
+	<string name="rendering_attr_roadColors_description">Select a road colour scheme:</string>
+	<string name="rendering_attr_roadColors_name">Road colour scheme</string>
+	<string name="favourites_search_desc">Favourites search</string>
+	<string name="fav_export_confirmation">File with previously exported favourites already exists. Do you want to replace it?</string>
+	<string name="search_position_favorites">Favourites…</string>
+	<string name="favourites_delete_multiple_succesful">Favourite point(s) deleted successfully.</string>
+	<string name="favorite_delete_multiple">You are going to delete %1$d favourite(s) and %2$d favourite group(s). Are you sure?</string>
+	<string name="fav_imported_sucessfully">Favourites successfully imported</string>
+	<string name="fav_saved_sucessfully">Favourites successfully saved to {0}</string>
+	<string name="no_fav_to_save">No favourite points to save</string>
+	<string name="share_fav_subject">Favourites shared via OsmAnd</string>
+	<string name="fav_points_edited">Favourite point was edited</string>
+	<string name="fav_points_not_exist">No favourite points exist</string>
+	<string name="add_favorite_dialog_top_text">Enter favourite name</string>
+	<string name="add_favorite_dialog_default_favourite_name">Favourite</string>
+	<string name="add_favorite_dialog_favourite_added_template">Favourite point \'\'{0}\'\' was added successfully.</string>
+	<string name="favourites_context_menu_add">Add favourite</string>
+	<string name="favourites_context_menu_edit">Edit favourite</string>
+	<string name="favourites_context_menu_delete">Delete favourite</string>
+	<string name="favourites_remove_dialog_msg">Delete favourite point \'%s\'?</string>
+	<string name="favourites_remove_dialog_success">Favourite point {0} was successfully deleted.</string>
+</resources>
