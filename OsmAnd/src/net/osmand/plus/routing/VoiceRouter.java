@@ -617,6 +617,7 @@ public class VoiceRouter {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
 			pn = pn.replace(";", ", "); // Trailing blank prevents punctuation being pronounced. Replace by comma for better intonation.
+			pn = pn.replace("/", ", "); // Slash is actually pronounced by many TTS engines, ceeating an awkward voice prompt, better replace by comma.
 			if ((player != null) && (!"de".equals(player.getLanguage()))) {
 				pn = pn.replace("\u00df", "ss"); // Helps non-German tts voices to pronounce German Strasse (=street)
 			}
