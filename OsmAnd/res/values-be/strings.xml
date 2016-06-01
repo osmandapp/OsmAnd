@@ -1414,7 +1414,7 @@
     <string name="rendering_attr_moreDetailed_name">Больш падрабязна</string>
     <string name="rendering_attr_lessDetailed_name">Менш падрабязна</string>
     <string name="rendering_attr_hideAccess_name">Абмежаваньні доступу</string>
-    <string name="rendering_attr_showAccess_name">Паказаць абмежаваньні доступу</string>
+    <string name="rendering_attr_showAccess_name">Паказаць абмежаваньні доступу і аплату</string>
     <string name="rendering_attr_showSurfaceGrade_name">Адлюстроўваць якасьць дарог</string>
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцьця</string>
     <string name="rendering_attr_showCycleRoutes_name">Паказаць веламаршруты</string>
@@ -1441,8 +1441,8 @@
 	<string name="lang_al">альбанская</string>
 	<string name="lang_ar">арабская</string>
 	<string name="lang_sr">сэрбская</string>
-	<string name="lang_zh_CN">кітайская спрошчаная</string>
-	<string name="lang_zh_TW">кітайская традыцыйная</string>
+	<string name="lang_zh_CN">кітайская (спрошчаная)</string>
+	<string name="lang_zh_TW">кітайская (традыцыйная)</string>
 	<string name="lang_sc">сардынская</string>
 	<string name="rendering_attr_subwayMode_name">Лініі мэтро</string>
  	<string name="rendering_attr_coloredBuildings_name">Пазначаць тып будынка колерам</string>
@@ -1803,7 +1803,7 @@
     <string name="lang_ceb">cебуанская</string>
     <string name="lang_ms">малазійская</string>
     <string name="lang_eo">эспэранта</string>
-    <string name="lang_es_ar">аргентынская іспанская</string>
+    <string name="lang_es_ar">гішпанская (Аргентына)</string>
     <string name="lang_nb">нарвежская (букмал)</string>
     <string name="light_theme">Сьветлая</string>
     <string name="dark_theme">Цёмная</string>
@@ -2215,4 +2215,9 @@
     <string name="move_marker_bottom_sheet_title">Перасуньце мапу, каб зьмяніць становішча курсору</string>
     <string name="change_markers_position">Перамясьціць курсор</string>
     <string name="lang_be_BY">Беларуская лацінка</string>
-    </resources>
+    <string name="lang_es_us">гішпанская (ЗША)</string>
+    <string name="lang_en_gb">ангельская (Вялікабрытанія)</string>
+    <string name="current_track">Бягучы шлях</string>
+    <string name="lang_kn">канада (Індыя)</string>
+    <string name="use_osm_live_routing_description">Уключыць навігацыю для зьмен OSM Live (Beta)</string>
+	</resources>
