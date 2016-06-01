@@ -80,7 +80,7 @@
 	<string name="poi_bedding">Tienda de ropa de cama</string>
 	<string name="poi_dive">Equipo de buceo</string>
 	<string name="poi_doityourself">Mejoras para el hogar</string>
-	<string name="poi_erotic">Tienda erótica</string>
+	<string name="poi_erotic">Artículos eróticos</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_florist">Florería</string>
 	<string name="poi_frame">Marcos para cuadros</string>
@@ -109,7 +109,7 @@
 	<string name="poi_organic">Comida orgánica</string>
 	<string name="poi_outdoor">Tienda de actividades al aire libre</string>
 	<string name="poi_paint">Pinturería</string>
-	<string name="poi_pet">Mascotas</string>
+	<string name="poi_pet">Tienda de mascotas</string>
 	<string name="poi_photo">Tienda fotográfica</string>
 	<string name="poi_radiotechnics">Venta de radiotecnia</string>
 	<string name="poi_second_hand">Tienda de artículos usados</string>
@@ -127,7 +127,7 @@
 	<string name="poi_window_blind">Persianas</string>
 	<string name="poi_department_store">Grandes almacenes</string>
 	<string name="poi_electronics">Electrónicos</string>
-	<string name="poi_car">Concesionario de automóviles</string>
+	<string name="poi_car">Concesionaria de automóviles</string>
 	<string name="poi_car_parts">Autopartes</string>
 	<string name="poi_atv">Cuatriciclos</string>
 	<string name="poi_cosmetics">Cosméticos</string>
@@ -555,7 +555,7 @@
 	<string name="poi_arts_centre">Centro de arte</string>
 	<string name="poi_cinema">Cine</string>
 	<string name="poi_casino">Casino</string>
-	<string name="poi_community_centre">Centro comunitario</string>
+	<string name="poi_community_centre">Centro comunal</string>
 	<string name="poi_social_centre">Centro social</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_circus">Circo</string>
@@ -818,7 +818,7 @@
 	<string name="poi_furnace">Artículos de calefacción</string>
 	<string name="poi_garden_furniture">Muebles de jardín</string>
 	<string name="poi_leather">Marroquinería</string>
-	<string name="poi_tyres">Neumáticos</string>
+	<string name="poi_tyres">Tienda de neumáticos</string>
 	<string name="poi_watches">Relojería</string>
 	<string name="poi_games">Juegos</string>
 	<string name="poi_model">Modelos a escala</string>
@@ -827,7 +827,7 @@
 	<string name="poi_pyrotechnics">Pirotecnia</string>
 	<string name="poi_weapons">Armería</string>
 	<string name="poi_candles">Velas</string>
-	<string name="poi_fashion">Tienda de moda</string>
+	<string name="poi_fashion">Artículos de moda</string>
 	<string name="poi_free_flying">Artículos de paracaidismo</string>
 	<string name="poi_music">Disquería</string>
 	<string name="poi_energy">Acumulador de energía</string>
