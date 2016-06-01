@@ -105,7 +105,6 @@
 	<string name="poi_tunnel_railway">Railway tunnel</string>
 	<string name="poi_bridge_railway">Railway bridge</string>
 
-
 	<string name="poi_route_railway_ref">Route of a railway</string>
 
 	<string name="poi_historic_railway_station">Historic railway station</string>
@@ -145,5 +144,4 @@
 	<string name="poi_counselling_type_victim_no">Counselling (victim): no</string>
 	<string name="poi_counselling_type_violence_yes">Counselling (violence): yes</string>
 	<string name="poi_counselling_type_violence_no">Counselling (violence): no</string>
-
 </resources>
