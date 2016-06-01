@@ -23,11 +23,11 @@
         <string name="poi_antiques">Antikviteter</string>
         <string name="poi_art">Kunsthandler</string>
         <string name="poi_baby_goods">Babyudstryr</string>
-        <string name="poi_bag">Tasker</string>
+        <string name="poi_bag">Taskebutik</string>
         <string name="poi_bathroom_furnishing">Badeværelsesinventar</string>
         <string name="poi_bed">sengetøjsbutik</string>
         <string name="poi_boutique">Modebutik</string>
-        <string name="poi_carpet">Tæpper</string>
+        <string name="poi_carpet">Tæppebutik</string>
         <string name="poi_chemist">Materialist</string>
         <string name="poi_clothes">Tøjbutik</string>
         <string name="poi_shoes">Skobutik</string>
@@ -65,7 +65,7 @@
         <string name="poi_optician">Optiker</string>
         <string name="poi_organic">Økologiske fødevarer</string>
         <string name="poi_outdoor">Friluftsudstyr</string>
-        <string name="poi_paint">Maling butik</string>
+        <string name="poi_paint">Farvehandel</string>
         <string name="poi_pet">Dyrehandel</string>
         <string name="poi_radiotechnics">Radioteknik</string>
         <string name="poi_second_hand">Genbrugsbutik</string>
@@ -890,7 +890,7 @@
 	<string name="poi_pyrotechnics">Pyroteknik</string>
 	<string name="poi_weapons">Våbenbutik</string>
 
-	<string name="poi_furnace">Opvarmnings artikler</string>
+	<string name="poi_furnace">Opvarmningsartikler</string>
 	<string name="poi_free_flying">Freeflying udstyr</string>
 	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
 	<string name="poi_scuba_diving_shop">Scuba dykning udstyr</string>
@@ -2801,7 +2801,7 @@
 
 	<string name="poi_fire_hydrant_type_underground">Type: underjordisk</string>
 	<string name="poi_fire_hydrant_type_pillar">Type: søjle</string>
-	<string name="poi_fire_hydrant_type_dry_barrel">Type: dry barrel</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Brandhanetype: dry barrel</string>
 	<string name="poi_fire_hydrant_type_pond">Type: dam</string>
 	<string name="poi_fire_hydrant_type_wall">Type: væg</string>
 
@@ -2915,11 +2915,11 @@
 	<string name="poi_fire_hydrant_position_parking_lot">Brandhaneplacering: parkeringsplads</string>
 	<string name="poi_fire_hydrant_position_street">Brandhaneplacering: gaden</string>
 	<string name="poi_fire_hydrant_position_underground">Brandhaneplacering: under jorden</string>
-	<string name="poi_fire_hydrant_style_wsh">Brandhane stil: wsh</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Brandhane vandforsyningskilde: primær</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Brandhane vandforsyningskilde: dam</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Brandhane vandforsyningskilde: vandløb</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhane vandforsyningskilde: cisterne</string>
+	<string name="poi_fire_hydrant_style_wsh">Brandhanetype: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Brandhanevandforsyning: primær</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Brandhanevandforsyning: dam</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Brandhanevandforsyning: vandløb</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Brandhanevandforsyning: cisterne</string>
 	<string name="poi_in_service_yes">I tjeneste: ja</string>
 
 <string name="poi_street_cabinet_power">Gadeskabstype: eldistribution</string>
@@ -2939,7 +2939,7 @@
 
 <string name="poi_depth">Dybde</string>
 
-<string name="poi_salt_yes">Salt</string>
+<string name="poi_salt_yes">Salt: ja</string>
 	<string name="poi_salt_no">Salt: nej</string>
 
 <string name="poi_wheelchair_designated">Udpeget til kørestole</string>
