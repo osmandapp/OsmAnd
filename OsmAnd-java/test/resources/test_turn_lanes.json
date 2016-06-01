@@ -54,7 +54,7 @@
       "longitude": 35.46842032670975
     },
     "expectedResults": {
-      "26789": "+TU|+TL|+C,TL|C|C,TR"
+      "26789": "+TU|TL|C,TL|C|C,TR"
    }
   },
   {
@@ -85,6 +85,20 @@
     },
     "expectedResults": {
       "27091": "+TL|+TL|+TL|C|TR|TR"
+    }
+  },
+  {
+    "testName": "3.2 Motorway link from Ringweg Zuid TL Amstelveenseweg",
+    "startPoint": {
+      "latitude": 45.6971206184178,
+      "longitude": 35.51630312204361
+    },
+    "endPoint": {
+      "latitude": 45.69661945125,
+      "longitude": 35.51219849021
+    },
+    "expectedResults": {
+      "27091": "TL|TL|TL|+C|TR|TR"
     }
   },
   {
@@ -377,7 +391,7 @@
       "longitude": 35.63232659539227
     },
     "expectedResults": {
-      "202493001": "+TL,C|TR"
+      "202493001": "+C,TL|TR"
     }
   },
   {
