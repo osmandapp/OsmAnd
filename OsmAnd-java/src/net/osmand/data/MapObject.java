@@ -16,17 +16,17 @@ import net.sf.junidecode.Junidecode;
 
 
 public abstract class MapObject implements Comparable<MapObject> {
-	
+
 	public static final MapObjectComparator BY_NAME_COMPARATOR = new MapObjectComparator();
-	
-	
+
+
 	protected String name = null;
 	protected String enName = null;
 	protected Map<String, String> names = null;
 	protected LatLon location = null;
 	protected int fileOffset = 0;
 	protected Long id = null;
-	
+
 
 	public void setId(Long id) {
 		this.id = id;
@@ -162,7 +162,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public void setLocation(double latitude, double longitude) {
 		location = new LatLon(latitude, longitude);
 	}
-	
+
 	@Override
 	public int compareTo(MapObject o) {
 		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
@@ -171,14 +171,14 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public int getFileOffset() {
 		return fileOffset;
 	}
-	
+
 	public void setFileOffset(int fileOffset) {
 		this.fileOffset = fileOffset;
 	}
-	
+
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " " + name +"("+id+")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return getClass().getSimpleName() + " " + name + "(" + id + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	@Override
@@ -205,7 +205,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			return false;
 		return true;
 	}
-	
+
 	public static class MapObjectComparator implements Comparator<MapObject> {
 		private final String l;
 		Collator collator = OsmAndCollator.primaryCollator();
@@ -217,7 +217,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		public MapObjectComparator(String lang) {
 			this.l = lang;
 		}
-		
+
 		@Override
 		public int compare(MapObject o1, MapObject o2) {
 			if (o1 == null ^ o2 == null) {
@@ -238,6 +238,6 @@ public abstract class MapObject implements Comparable<MapObject> {
 				return collator.equals(o1.getName(l), o2.getName(l));
 			}
 		}
-	}	
+	}
 
 }
