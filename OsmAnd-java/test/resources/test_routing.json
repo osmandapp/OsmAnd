@@ -1,20 +1,21 @@
 [
   {
-    "testName": "1.Pedestrian Preston road TR Lorimar drive",
-    "startPoint": {
-      "latitude": 45.69539,
-      "longitude": 35.43936
-    },
-    "endPoint": {
-      "latitude": 45.69567,
-      "longitude": 35.440113
-    },
+    "testName": "3.Different routes depending on start coordinates https://github.com/osmandapp/Osmand/issues/1197",
     "params": {
       "vehicle": "car",
-      "short_way": "true" 
+      "short_way": "true"
+    },
+    "startPoint": {
+      "latitude": 45.90810929390909,
+      "longitude": 35.25023227930072
+    },
+    "endPoint": {
+      "latitude": 45.90951460825728,
+      "longitude": 35.24373865127566
     },
     "expectedResults": {
-      "26545": "TL|C|C|C"
+      "30657405": "true",
+      "178721843": "false",
     }
   },
     {
