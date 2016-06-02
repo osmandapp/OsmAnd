@@ -276,9 +276,13 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
+	private String normalizeSearchPoiByNameQuery(String query) {
+		return query.replace("\"", "").toLowerCase();
+	}
+
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
-		String query = req.nameQuery.toLowerCase();
+		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
 		CollatorStringMatcher matcher = new CollatorStringMatcher(query,
 				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		long time = System.currentTimeMillis();
