@@ -1278,7 +1278,7 @@ public class BinaryMapIndexReader {
 		return dataObject;
 	}
 
-	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req) throws IOException {
+	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, int[] typeFilter) throws IOException {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();
 		}
@@ -1287,11 +1287,15 @@ public class BinaryMapIndexReader {
 				codedIS.seek(reg.indexNameOffset);
 				int len = readInt();
 				int old = codedIS.pushLimit(len);
-				addressAdapter.searchAddressDataByName(reg, req, null);
+				addressAdapter.searchAddressDataByName(reg, req, typeFilter);
 				codedIS.popLimit(old);
 			}
 		}
 		return req.getSearchResults();
+	}
+
+	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req) throws IOException {
+		return searchAddressDataByName(req, null);
 	}
 
 	public void initCategories(PoiRegion poiIndex) throws IOException {
