@@ -8,7 +8,7 @@
 	<string name="poi_beverages">Butega de bèvidas</string>
 	<string name="poi_butcher">Bancu</string>
 	<string name="poi_deli">Gastronomia</string>
-	<string name="poi_farm">Butega prodotos de fatoria</string>
+	<string name="poi_farm">Butega de produtos de fatoria</string>
 	<string name="poi_greengrocer">Bendidore de frùtora</string>
 	<string name="poi_seafood">Pischeria</string>
 	<string name="poi_confectionery">Butega de durches</string>
@@ -19,7 +19,7 @@
 	<string name="poi_vending_machine">Distribudore automàticu</string>
 
 	<string name="poi_books">Libreria</string>
-	<string name="poi_bicycle">Butega de bitziclètas</string>
+	<string name="poi_bicycle">Butega de bitzicletas</string>
 	<string name="poi_anime">Butega de ànime</string>
 	<string name="poi_antiques">Anticuariadu</string>
 	<string name="poi_art">Butega d\'arte</string>
