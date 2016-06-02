@@ -72,6 +72,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	protected static final int MESSAGE_CLEAR_LIST = OsmAndConstants.UI_HANDLER_SEARCH + 2;
 	protected static final int MESSAGE_ADD_ENTITY = OsmAndConstants.UI_HANDLER_SEARCH + 3;
+	protected static final int MESSAGE_ADD_ENTITIES = OsmAndConstants.UI_HANDLER_SEARCH + 4;
 	protected static final String SELECT_ADDRESS = "SEQUENTIAL_SEARCH";
 	
 	protected ProgressBar progress;
@@ -402,29 +403,38 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 				updateTextBox(currentFilter, "", null, true);
 			} else if(msg.what == MESSAGE_ADD_ENTITY){
-				getListAdapter().add((T) msg.obj);
-				if (currentFilter.length() > 0) {
-					String shortText = getShortText((T) msg.obj);
-					int entries = !endingMap.containsKey(shortText) ? 0 : endingMap.get(shortText);
-					if (entries < minimalIndex) {
-						if(minimalText != null) {
-							endingMap.put(minimalText, endingMap.get(minimalText) - 1);
-						}
-						minimalIndex = entries;
-						minimalText = shortText;
-						endingMap.put(shortText, entries + 1);
-						String locEndingText;
-						if (shortText.toLowerCase().startsWith(currentFilter.toLowerCase())) {
-							locEndingText = shortText.substring(currentFilter.length());
-						} else {
-							locEndingText = " - " + shortText;
-						}
-						if (locEndingText.length() > MAX_VISIBLE_NAME) {
-							locEndingText = locEndingText.substring(0, MAX_VISIBLE_NAME) + "..";
-						}
-						updateTextBox(currentFilter, locEndingText, (T) msg.obj, true);
-						
+				final Object obj = msg.obj;
+				addObjectToAdapter(currentFilter, (T) obj);
+			} else if (msg.what == MESSAGE_ADD_ENTITIES) {
+				final List<T> objects = (List<T>) msg.obj;
+				for (T object : objects) {
+					addObjectToAdapter(currentFilter, object);
+				}
+			}
+		}
+
+		private void addObjectToAdapter(String currentFilter, T obj) {
+			getListAdapter().add(obj);
+			if (currentFilter.length() > 0) {
+				String shortText = getShortText(obj);
+				int entries = !endingMap.containsKey(shortText) ? 0 : endingMap.get(shortText);
+				if (entries < minimalIndex) {
+					if(minimalText != null) {
+						endingMap.put(minimalText, endingMap.get(minimalText) - 1);
 					}
+					minimalIndex = entries;
+					minimalText = shortText;
+					endingMap.put(shortText, entries + 1);
+					String locEndingText;
+					if (shortText.toLowerCase().startsWith(currentFilter.toLowerCase())) {
+						locEndingText = shortText.substring(currentFilter.length());
+					} else {
+						locEndingText = " - " + shortText;
+					}
+					if (locEndingText.length() > MAX_VISIBLE_NAME) {
+						locEndingText = locEndingText.substring(0, MAX_VISIBLE_NAME) + "..";
+					}
+					updateTextBox(currentFilter, locEndingText, obj, true);
 				}
 			}
 		}

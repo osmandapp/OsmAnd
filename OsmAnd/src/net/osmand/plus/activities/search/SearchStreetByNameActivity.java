@@ -1,10 +1,13 @@
 package net.osmand.plus.activities.search;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import android.os.AsyncTask;
+import android.os.Message;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -21,13 +24,11 @@ import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformatio
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.os.AsyncTask;
-import android.os.Message;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.FrameLayout;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
@@ -172,27 +173,30 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 
 	private void filter(String query, Collection<Street> list) {
 		boolean emptyQuery = query == null || query.length() == 0;
+		List<Street> streetsToSend = new ArrayList<>();
 		for (Street obj : list) {
 			if (namesFilter.isCancelled) {
 				break;
 			}
 			if (emptyQuery || CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get()), 
 					query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
-				msg.sendToTarget();
+				streetsToSend.add(obj);
+			}
+			if (!emptyQuery && CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get()),
+					query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
+				streetsToSend.add(obj);
 			}
 		}
-		if (!emptyQuery) {
-			for (Street obj : list) {
-				if (namesFilter.isCancelled) {
-					break;
-				}
-				if (CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get()), 
-						query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
-					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
-					msg.sendToTarget();
-				}
+
+		final int loopSize = 100;
+		for (int i = 0; i < streetsToSend.size(); i += loopSize) {
+			int endIndex = i + loopSize;
+			if (endIndex > streetsToSend.size()) {
+				endIndex = streetsToSend.size();
 			}
+			List<Street> listToSend = streetsToSend.subList(i, endIndex);
+			Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITIES, listToSend);
+			msg.sendToTarget();
 		}
 	}
 	
