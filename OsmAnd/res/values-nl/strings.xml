@@ -1936,7 +1936,7 @@
     <string name="favorite_category_add_new">Categorie toevoegen</string>
     <string name="favorite_category_select">Kies categorie</string>
     <string name="default_speed_system_descr">Eenheid voor de snelheid instellen</string>
-    <string name="default_speed_system">Snelheid weergeven in…</string>
+    <string name="default_speed_system">Eenheid van snelheid</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Zeemijlen</string>
     <string name="si_kmh">Kilometer per uur</string>
