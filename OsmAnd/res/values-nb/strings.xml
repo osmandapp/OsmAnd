@@ -53,7 +53,7 @@
     <string name="map_widget_vector_attributes">Opptegningsattributter</string>
     <string name="map_widget_renderer">Kartstil</string>
     <string name="layer_map_appearance">Skjerminnstilling</string>
-    <string name="show_lanes">Vis kjørefelt</string>
+    <string name="show_lanes">Kjørefelt</string>
     <string name="avoid_unpaved">Unngå uasfalterte veier</string>
     <string name="avoid_ferries">Unngå ferger</string>
     <string name="avoid_in_routing_title">Unngå…</string>
@@ -85,8 +85,8 @@
     <string name="bg_service_screen_unlock">Lås opp skjerm</string>
     <string name="bg_service_screen_lock_toast">Skjermen er låst</string>
     <string name="bg_service_interval">Sett oppvåkningsintervall:</string>
-    <string name="show_cameras">Vis fotobokser</string>
-    <string name="show_traffic_warnings">Vis trafikkvarsler</string>
+    <string name="show_cameras">Fotobokser</string>
+    <string name="show_traffic_warnings">Trafikkvarsler</string>
     <string name="avoid_toll_roads">Unngå bomveier</string>
     <string name="continue_follow_previous_route_auto">Forrige navigering var ikke ferdig. Fortsette å følge den? (%1$s sekunder)</string>
     <string name="route_updated_loc_found">Rute blir beregnet når posisjon blir funnet</string>
@@ -304,8 +304,8 @@
 
     <string name="shared_string_next">Neste</string>
     <string name="shared_string_previous">Forrige</string>
-    <string name="unit_of_length_descr">Endre lengde- og hastighetsenhet</string>
-    <string name="unit_of_length">Måleenhet</string>
+    <string name="unit_of_length_descr">Endre lengdeenhet</string>
+    <string name="unit_of_length">Lengdeenhet</string>
     <string name="si_km_m">Kilometer/meter</string>
     <string name="send_location_way_choose_title">Del posisjon ved bruk av</string>
     <string name="context_menu_item_share_location">Del posisjon</string>
@@ -1092,8 +1092,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Tysk veiatlas</string>
     <string name="traffic_warning_railways">Jernbaneovergang</string>
     <string name="traffic_warning_pedestrian">Fotgjengerovergang</string>
-    <string name="show_railway_warnings">Vis jernbaneoverganger</string>
-    <string name="show_pedestrian_warnings">Vis fotgjengeroverganger</string>
+    <string name="show_railway_warnings">Jernbaneoverganger</string>
+    <string name="show_pedestrian_warnings">Fotgjengeroverganger</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
     <string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
@@ -1451,8 +1451,8 @@
     <string name="tab_title_basic">Grunnleggende</string>
 	<string name="tab_title_advanced">Avansert</string>
 	<string name="shared_string_location">Posisjon</string>
-    <string name="default_speed_system_descr">Bestem system for hastighetsmåling</string>
-    <string name="default_speed_system">Hastighetsmåling</string>
+    <string name="default_speed_system_descr">Bestem hastighetsenhet</string>
+    <string name="default_speed_system">Hastighetsenhet</string>
     <string name="si_kmh">Kilometer i timen</string>
     <string name="si_m_s">Meter per sekund</string>
     <string name="si_min_km">Minutter per kilometer</string>
@@ -1666,4 +1666,6 @@
     <string name="lang_hu_formal">Ungarsk (formell)</string>
     <string name="lang_be_BY">Hviterussisk (latin)</string>
     <string name="lang_es_us">Spansk (Amerikansk)</string>
+    <string name="lang_en_gb">Engelsk (Storbritannia)</string>
+    <string name="lang_kn">Kannada</string>
     </resources>
