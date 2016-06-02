@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -31,6 +32,14 @@ import java.util.Map.Entry;
 public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
+
+	public static boolean isEmpty(Collection c) {
+		return c == null || c.size() == 0;
+	}
+
+	public static boolean isEmpty(Map map) {
+		return map == null || map.size() == 0;
+	}
 
 	public static boolean isEmpty(String s) {
 		return s == null || s.length() == 0;

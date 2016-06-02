@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -96,26 +95,24 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 
 	public void copyNames(Map<String, String> snames) {
-		if (snames != null && snames.containsKey("name:en")) {
-			enName = snames.get("name:en");
+		if (Algorithms.isEmpty(snames)) {
+			return;
 		}
-		if (snames != null && snames.containsKey("en")) {
+		if (snames.containsKey("name:en")) {
+			enName = snames.get("name:en");
+		} else if (snames.containsKey("en")) {
 			enName = snames.get("en");
 		}
-		if (snames != null) {
-			Iterator<Entry<String, String>> it = snames.entrySet().iterator();
-			while (it.hasNext()) {
-				Entry<String, String> e = it.next();
-				String key = e.getKey();
-				if (key.startsWith("name:")) {
-					key = key.substring("name:".length());
-				}
-				if (names == null) {
-					names = new HashMap<String, String>();
-				}
-				if (Algorithms.isEmpty(names.get(key))) {
-					names.put(key, e.getValue());
-				}
+		for (Entry<String, String> e : snames.entrySet()) {
+			String key = e.getKey();
+			if (key.startsWith("name:")) {
+				key = key.substring("name:".length());
+			}
+			if (names == null) {
+				names = new HashMap<String, String>();
+			}
+			if (Algorithms.isEmpty(names.get(key))) {
+				names.put(key, e.getValue());
 			}
 		}
 	}
