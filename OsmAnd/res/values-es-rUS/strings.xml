@@ -164,8 +164,8 @@
     <string name="rendering_value_highContrastRoads_name">Carreteras en alto contraste</string>
     <string name="traffic_warning_railways">Cruce de ferrocarril</string>
     <string name="traffic_warning_pedestrian">Cruce peatonal</string>
-    <string name="show_railway_warnings">Mostrar cruces de ferrocarril</string>
-    <string name="show_pedestrian_warnings">Mostrar cruces peatonales</string>
+    <string name="show_railway_warnings">Cruces de ferrocarril</string>
+    <string name="show_pedestrian_warnings">Cruces peatonales</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras americanos</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar reglas de navegación introducidas en v.1.9</string>
@@ -821,7 +821,7 @@
     <string name="poi_filter_food_shop">Alimentación</string>
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
-    <string name="show_warnings_title">Mostrar alarmas…</string>
+    <string name="show_warnings_title">Mostrar alertas…</string>
     <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, badenes), radares de velocidad, e información de carriles</string>
     <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección</string>
     <string name="use_compass_navigation">Usar brújula</string>
@@ -963,7 +963,7 @@
     <string name="map_widget_day_night">Mapa día/noche</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
-    <string name="show_lanes">Mostrar carriles</string>
+    <string name="show_lanes">Carriles</string>
     <string name="avoid_unpaved">Evitar carreteras sin pavimentar</string>
     <string name="avoid_ferries">Evitar ferris/transbordadores</string>
     <string name="avoid_in_routing_title">Evitar…</string>
@@ -997,8 +997,8 @@
     <string name="bg_service_screen_unlock">Desbloquear pantalla</string>
     <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
     <string name="bg_service_interval">Definir intervalo de activación:</string>
-    <string name="show_cameras">Mostrar radares</string>
-    <string name="show_traffic_warnings">Mostrar límites de velocidad</string>
+    <string name="show_cameras">Radares de velocidad</string>
+    <string name="show_traffic_warnings">Límites de velocidad</string>
     <string name="avoid_toll_roads">Evitar peajes</string>
     <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
     <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
@@ -1331,8 +1331,8 @@
     <string name="preferred_locale_descr">Elige el idioma de visualización (por favor, reinicia OsmAnd luego del cambio)</string>
     <string name="preferred_locale">Idioma de la pantalla</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
-    <string name="unit_of_length">Unidad de medida</string>
+    <string name="unit_of_length_descr">Cambia las unidades de longitud</string>
+    <string name="unit_of_length">Unidad de longitud</string>
     <string name="si_mi_foots">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
     <string name="si_km_m">Kilómetros/metros</string>
@@ -1857,8 +1857,8 @@
     <string name="favourites_edit_dialog_title">Información del favorito</string>
     <string name="favourites_context_menu_add">Añadir favorito</string>
     <string name="roads">Carreteras</string>
-    <string name="default_speed_system_descr">Define el sistema de medición de velocidad</string>
-    <string name="default_speed_system">Medición de la velocidad</string>
+    <string name="default_speed_system_descr">Define la unidad de velocidad</string>
+    <string name="default_speed_system">Unidad de velocidad</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Millas náuticas</string>
     <string name="si_kmh">Kilómetros por hora</string>
