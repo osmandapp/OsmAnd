@@ -699,8 +699,8 @@
     <string name="incomplete_locale">ufuldstændig</string>
 
 
-    <string name="unit_of_length_descr">Ændre enheder for afstand</string>
-    <string name="unit_of_length">Måleenhed</string>
+    <string name="unit_of_length_descr">Vælg enhed for afstand</string>
+    <string name="unit_of_length">Afstand</string>
     <string name="si_mi_foots">Mil/fod</string>
     <string name="si_mi_yard">Mil/yards</string>
     <string name="si_km_m">Kilometer/meter</string>
@@ -2021,7 +2021,7 @@
     <string name="shared_string_trip_recording">Optag ture</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Kører i baggrunden</string>
-    <string name="default_speed_system">Hastighedsenhed</string>
+    <string name="default_speed_system">Hastighed</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Sømil</string>
     <string name="si_kmh">Kilometer i timen</string>
