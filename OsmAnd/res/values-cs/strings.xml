@@ -296,8 +296,8 @@
     <string name="preferred_locale">Jazyk</string>
     <string name="shared_string_next">Další</string>
     <string name="shared_string_previous">Předchozí</string>
-    <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
-    <string name="unit_of_length">Jednotky vzdálenosti</string>
+    <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti</string>
+    <string name="unit_of_length">Jednotka vzdálenosti</string>
     <string name="si_mi_foots">Míle/stopy</string>
     <string name="si_mi_yard">Míle/yardy</string>
     <string name="si_km_m">Kilometry/metry</string>
@@ -752,8 +752,8 @@
     <string name="use_compass_navigation">Použít kompas</string>
     <string name="route_updated_loc_found">Trasa bude přepočítána, jakmile bude nalezena pozice</string>
     <string name="continue_follow_previous_route_auto">Předchozí trasa nebyla dokončena. Chcete pokračovat? (%1$s sekund)</string>
-    <string name="show_cameras">Zobrazovat dopravní radary</string>
-    <string name="show_traffic_warnings">Zobrazovat rychlostní omezení</string>
+    <string name="show_cameras">Dopravní radary</string>
+    <string name="show_traffic_warnings">Rychlostní omezení</string>
     <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
     <string name="map_widget_top_text">Jméno ulice</string>
     <string name="map_widget_config">Nastavení</string>
@@ -778,12 +778,12 @@
     <string name="bg_service_screen_unlock">Odemknout obrazovku</string>
     <string name="bg_service_sleep_mode_off">Zapnout\nslužbu na pozadí</string>
     <string name="bg_service_sleep_mode_on">Vypnout\nslužbu na pozadí</string>
-    <string name="show_lanes">Zobrazovat jízdní pruhy</string>
+    <string name="show_lanes">Jízdní pruhy</string>
     <string name="avoid_unpaved">Vyhnout se nezpevněným cestám</string>
     <string name="avoid_ferries">Vyhnout se trajektům</string>
     <string name="avoid_in_routing_title">Vyhnout se…</string>
     <string name="avoid_in_routing_descr">Vyhnout se trajektům, placeným a nezpevněným cestám</string>
-    <string name="show_warnings_title">Dopravní upozornění…</string>
+    <string name="show_warnings_title">Zobrazit upozornění…</string>
     <string name="show_warnings_descr">Zobrazit omezení rychlosti, rychlostní radary, retardéry a řazení do pruhů</string>
     <string name="map_widget_show_ruler">Měřítko</string>
     <string name="map_widget_transparent">Průhledné nástroje</string>
@@ -1132,7 +1132,7 @@
     <string name="lang_hu">Maďarština</string>
     <string name="lang_id">Indonéština</string>
     <string name="lang_it">Italština</string>
-    <string name="lang_ja">Japonština</string>
+    <string name="lang_ja">Japonsky</string>
     <string name="lang_ko">Korejština</string>
     <string name="lang_lv">Lotyština</string>
     <string name="lang_lt">Litevština</string>
@@ -1344,8 +1344,8 @@
     <string name="lang_fa">Perština</string>
     <string name="lang_sc">Sardština</string>
     <string name="lang_sr">Srbština</string>
-    <string name="lang_zh_CN">Zjednodušená čínština</string>
-    <string name="lang_zh_TW">Tradiční čínština</string>
+    <string name="lang_zh_CN">Čínština (Zjednodušená)</string>
+    <string name="lang_zh_TW">Čínština (Tradiční)</string>
     <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
     <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy a značky</string>
@@ -1460,8 +1460,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Německý Atlas cest</string>
     <string name="traffic_warning_railways">Železniční přejezd</string>
     <string name="traffic_warning_pedestrian">Přechod pro chodce</string>
-    <string name="show_railway_warnings">Zobrazovat železniční přejezdy</string>
-    <string name="show_pedestrian_warnings">Zobrazovat přechody pro chodce</string>
+    <string name="show_railway_warnings">Železniční přejezdy</string>
+    <string name="show_pedestrian_warnings">Přechody pro chodce</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký Atlas cest</string>
     <string name="routing_attr_no_new_routing_name">Nepoužívat routovací pravidla v1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívat pravidla výpočtu trasy zavedené ve verzi 1.9</string>
@@ -1699,7 +1699,7 @@
     <string name="lang_lb">Lucembursky</string>
     <string name="lang_os">Osetsky</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_es_ar">Argentínsko Španělsky</string>
+    <string name="lang_es_ar">Španělsky (Argentínská)</string>
     <string name="lang_nb">Norsky Bokmål</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thajsky</string>
@@ -1720,8 +1720,8 @@
     <string name="srtm_plugin_disabled">Vrstevnice vypnuté</string>
     <string name="favorite_category_add_new">Přidat nový</string>
     <string name="favorite_category_select">Zvolte kategorii</string>
-    <string name="default_speed_system_descr">Zvolte způsob měření rychlosti</string>
-    <string name="default_speed_system">Měření rychlosti</string>
+    <string name="default_speed_system_descr">Zvolte jednotku rychlosti</string>
+    <string name="default_speed_system">Jednotka rychlosti</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Námořní míle</string>
     <string name="si_kmh">Kilometry za hodinu</string>
@@ -2027,4 +2027,8 @@
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pro změnu umístění značky</string>
     <string name="lang_hu_formal">Maďarsky (formálně)</string>
     <string name="current_track">Současná trasa</string>
+    <string name="lang_es_us">Španělsky (Americká)</string>
+    <string name="lang_en_gb">Anglicky (UK)</string>
+    <string name="lang_be_BY">Bělorusky (Latinka)</string>
+    <string name="lang_kn">Kanada</string>
     </resources>
