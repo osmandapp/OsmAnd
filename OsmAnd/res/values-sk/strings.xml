@@ -318,8 +318,8 @@
     <string name="system_locale">Systémový</string>
     <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk (po zmene je potrebné reštartovať OsmAnd)</string>
     <string name="preferred_locale">Jazyk zobrazenia</string>
-    <string name="unit_of_length_descr">Zmena jednotiek dĺžky a rýchlosti</string>
-    <string name="unit_of_length">Jednotky dĺžky</string>
+    <string name="unit_of_length_descr">Zmeniť jednotky dĺžky</string>
+    <string name="unit_of_length">Jednotka dĺžky</string>
     <string name="si_mi_foots">Míle/stopy</string>
     <string name="si_mi_yard">Míle/yardy</string>
     <string name="si_km_m">Kilometre/metre</string>
@@ -787,8 +787,8 @@
     <string name="use_compass_navigation">Použiť kompas</string>
     <string name="route_updated_loc_found">Cesta bude prepočítaná, keď sa nájde umiestnenie</string>
     <string name="continue_follow_previous_route_auto">Predošlá navigácia nebola dokončená. Pokračovať v jej nasledovaní? (%1$s sekúnd)</string>
-    <string name="show_cameras">Radary</string>
-    <string name="show_traffic_warnings">Rýchlostné obmedzenia</string>
+    <string name="show_cameras">Rýchlostné radary</string>
+    <string name="show_traffic_warnings">Rýchlostné varovania</string>
     <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
     <string name="screen_is_locked">Na odomknutie obrazovky, kliknite na ikonu zámky</string>
     <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
@@ -1408,8 +1408,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Nemecký atlas ciest</string>
     <string name="traffic_warning_railways">Železničné priecestie</string>
     <string name="traffic_warning_pedestrian">Priechod pre chodcov</string>
-    <string name="show_railway_warnings">Zobrazovať varovania železnice</string>
-    <string name="show_pedestrian_warnings">Zobrazovať varovania chodcov</string>
+    <string name="show_railway_warnings">Železničné priecestia</string>
+    <string name="show_pedestrian_warnings">Priechody pre chodcov</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>
     <string name="routing_attr_no_new_routing_name">Bez smerovacích pravidiel verzie 1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívať pravidlá výpočtu trasy zavedené vo verzii 1.9</string>
@@ -1731,8 +1731,8 @@
     <string name="roads">Cesty</string>
     <string name="favorite_category_add_new">Pridať nový</string>
     <string name="favorite_category_select">Zvoľte kategóriu</string>
-    <string name="default_speed_system_descr">Zvoľte spôsob merania rýchlosti</string>
-    <string name="default_speed_system">Meranie rýchlosti</string>
+    <string name="default_speed_system_descr">Zvoľte jednotku rýchlosti</string>
+    <string name="default_speed_system">Jednotka rýchlosti</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Námorné míle</string>
     <string name="si_kmh">Kilometre za hodinu</string>
@@ -2047,4 +2047,5 @@
     <string name="lang_es_us">Španielsky (Americká)</string>
     <string name="lang_be_BY">Bielorusky (Latinka)</string>
     <string name="lang_kn">Kannada</string>
+    <string name="lang_en_gb">Anglicky (Veľká Británia)</string>
     </resources>
