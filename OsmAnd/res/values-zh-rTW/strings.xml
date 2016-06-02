@@ -65,7 +65,7 @@
 
 
     <string name="layer_map_appearance">組態螢幕顯示</string>
-    <string name="show_lanes">顯示車道數</string>
+    <string name="show_lanes">車道</string>
     <string name="avoid_unpaved">避開未鋪面道路</string>
     <string name="avoid_ferries">避開渡輪</string>
     <string name="avoid_in_routing_title">避開…</string>
@@ -106,8 +106,8 @@
     <string name="bg_service_screen_unlock">解鎖螢幕</string>
     <string name="bg_service_screen_lock_toast">螢幕已鎖</string>
     <string name="bg_service_interval">設定喚醒間隔：</string>
-    <string name="show_cameras">顯示測速照相</string>
-    <string name="show_traffic_warnings">顯示交通狀況警示</string>
+    <string name="show_cameras">測速照相</string>
+    <string name="show_traffic_warnings">交通狀況警示</string>
     <string name="avoid_toll_roads">避開收費道路</string>
     <string name="continue_follow_previous_route_auto">先前的導航未完成。要按照它繼續嗎？ (%1$s 秒)</string>
     <string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
@@ -469,8 +469,8 @@
 
     <string name="shared_string_next">下一頁</string>
     <string name="shared_string_previous">上一頁</string>
-    <string name="unit_of_length_descr">更改長度與速度單位</string>
-    <string name="unit_of_length">量測單位</string>
+    <string name="unit_of_length_descr">更改長度單位</string>
+    <string name="unit_of_length">長度單位</string>
     <string name="si_mi_foots">英哩/英呎</string>
     <string name="si_mi_yard">英哩/碼</string>
     <string name="si_km_m">公里/公尺</string>
@@ -1550,8 +1550,8 @@
     <string name="rendering_value_americanRoadAtlas_name">美國道路地圖集</string>
     <string name="traffic_warning_railways">鐵路平交道</string>
     <string name="traffic_warning_pedestrian">行人穿越道</string>
-    <string name="show_railway_warnings">顯示鐵路平交道</string>
-    <string name="show_pedestrian_warnings">顯示行人穿越道</string>
+    <string name="show_railway_warnings">鐵路平交道</string>
+    <string name="show_pedestrian_warnings">行人穿越道</string>
     <string name="speak_pedestrian">行人穿越道</string>
 
     <string name="navigation_over_track">沿著軌跡開始導航嗎？</string>
@@ -1871,8 +1871,8 @@
     <string name="shared_string_trip_recording">旅程錄製</string>
     <string name="shared_string_navigation">導航</string>
     <string name="osmand_running_in_background">在背景執行</string>
-    <string name="default_speed_system_descr">定義速度測定系統</string>
-    <string name="default_speed_system">測定速度</string>
+    <string name="default_speed_system_descr">定義速度的單位</string>
+    <string name="default_speed_system">速度的單位</string>
     <string name="si_nm">海里</string>
     <string name="nm">浬</string>
     <string name="si_kmh">公里每小時</string>
