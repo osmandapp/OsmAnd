@@ -18,49 +18,52 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.util.Algorithms;
 
 public class AudioVideoNoteMenuController extends MenuController {
-	private Recording recording;
-
-	private AudioVideoNotesPlugin plugin;
+	private Recording mRecording;
+	private AudioVideoNotesPlugin mPlugin;
+	private boolean mIsFileAvailable;
 
 	public AudioVideoNoteMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final Recording recording) {
 		super(new AudioVideoNoteMenuBuilder(app, recording), pointDescription, mapActivity);
-		this.recording = recording;
-		plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		this.mRecording = recording;
+		mPlugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		mIsFileAvailable = mRecording.getFile().exists();
 
-		leftTitleButtonController = new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
-				if (plugin != null) {
-					if (plugin.isPlaying(getRecording())) {
-						plugin.stopPlaying();
-					} else {
-						plugin.playRecording(getMapActivity(), getRecording());
-					}
-				}
-			}
-		};
-
-		rightTitleButtonController = new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
-				AlertDialog.Builder bld = new AlertDialog.Builder(getMapActivity());
-				bld.setMessage(R.string.recording_delete_confirm);
-				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (plugin != null) {
-							plugin.deleteRecording(getRecording(), true);
-							getMapActivity().getContextMenu().close();
+		if (mIsFileAvailable) {
+			leftTitleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					if (mPlugin != null) {
+						if (mPlugin.isPlaying(getRecording())) {
+							mPlugin.stopPlaying();
+						} else {
+							mPlugin.playRecording(getMapActivity(), getRecording());
 						}
 					}
-				});
-				bld.setNegativeButton(R.string.shared_string_no, null);
-				bld.show();
-			}
-		};
-		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+				}
+			};
+
+			rightTitleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					AlertDialog.Builder bld = new AlertDialog.Builder(getMapActivity());
+					bld.setMessage(R.string.recording_delete_confirm);
+					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (mPlugin != null) {
+								mPlugin.deleteRecording(getRecording(), true);
+								getMapActivity().getContextMenu().close();
+							}
+						}
+					});
+					bld.setNegativeButton(R.string.shared_string_no, null);
+					bld.show();
+				}
+			};
+			rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+			rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		}
 
 		updateData();
 	}
@@ -68,12 +71,13 @@ public class AudioVideoNoteMenuController extends MenuController {
 	@Override
 	protected void setObject(Object object) {
 		if (object instanceof Recording) {
-			this.recording = (Recording) object;
+			this.mRecording = (Recording) object;
+			mIsFileAvailable = mRecording.getFile().exists();
 		}
 	}
 
 	public Recording getRecording() {
-		return recording;
+		return mRecording;
 	}
 
 	@Override
@@ -83,9 +87,9 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		if (recording.isPhoto()) {
+		if (mRecording.isPhoto()) {
 			return getIcon(R.drawable.ic_action_photo_dark, R.color.audio_video_icon_color);
-		} else if (recording.isAudio()) {
+		} else if (mRecording.isAudio()) {
 			return getIcon(R.drawable.ic_action_micro_dark, R.color.audio_video_icon_color);
 		} else {
 			return getIcon(R.drawable.ic_action_video_dark, R.color.audio_video_icon_color);
@@ -94,12 +98,20 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return recording.getName(getMapActivity(), false);
+		if (mIsFileAvailable) {
+			return mRecording.getName(getMapActivity(), false);
+		} else {
+			return getMapActivity().getString(R.string.data_is_not_available);
+		}
 	}
 
 	@Override
 	public String getTypeStr() {
-		return recording.getType(getMapActivity());
+		if (mIsFileAvailable) {
+			return mRecording.getType(getMapActivity());
+		} else {
+			return super.getTypeStr();
+		}
 	}
 
 	@Override
@@ -114,16 +126,19 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public void updateData() {
+		if (!mIsFileAvailable) {
+			return;
+		}
 		boolean accessibilityEnabled = getMapActivity().getMyApplication().accessibilityEnabled();
 		rightTitleButtonController.visible = true;
-		if (!recording.isPhoto()) {
-			if (plugin.isPlaying(recording)) {
+		if (!mRecording.isPhoto()) {
+			if (mPlugin.isPlaying(mRecording)) {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_control_stop);
 				leftTitleButtonController.leftIconId = R.drawable.ic_action_rec_stop;
-				int pos = plugin.getPlayingPosition();
+				int pos = mPlugin.getPlayingPosition();
 				String durationStr;
 				if (pos == -1) {
-					durationStr = recording.getPlainDuration(accessibilityEnabled);
+					durationStr = mRecording.getPlainDuration(accessibilityEnabled);
 				} else {
 					durationStr = Algorithms.formatDuration(pos / 1000, accessibilityEnabled);
 				}
@@ -133,7 +148,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 			} else {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
 				leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
-				String durationStr = recording.getPlainDuration(accessibilityEnabled);
+				String durationStr = mRecording.getPlainDuration(accessibilityEnabled);
 				leftTitleButtonController.needRightText = true;
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
 			}
@@ -145,25 +160,29 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public void share(LatLon latLon, String title) {
-		String path = recording.getFile().getAbsolutePath();
-		MediaScannerConnection.scanFile(getMapActivity(), new String[]{path},
-				null, new MediaScannerConnection.OnScanCompletedListener() {
-					public void onScanCompleted(String path, Uri uri) {
-						Intent shareIntent = new Intent(
-								android.content.Intent.ACTION_SEND);
-						if (recording.isPhoto()) {
-							shareIntent.setType("image/*");
-						} else if (recording.isAudio()) {
-							shareIntent.setType("audio/*");
-						} else if (recording.isVideo()) {
-							shareIntent.setType("video/*");
+		if (mIsFileAvailable) {
+			String path = mRecording.getFile().getAbsolutePath();
+			MediaScannerConnection.scanFile(getMapActivity(), new String[]{path},
+					null, new MediaScannerConnection.OnScanCompletedListener() {
+						public void onScanCompleted(String path, Uri uri) {
+							Intent shareIntent = new Intent(
+									android.content.Intent.ACTION_SEND);
+							if (mRecording.isPhoto()) {
+								shareIntent.setType("image/*");
+							} else if (mRecording.isAudio()) {
+								shareIntent.setType("audio/*");
+							} else if (mRecording.isVideo()) {
+								shareIntent.setType("video/*");
+							}
+							shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+							shareIntent
+									.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+							getMapActivity().startActivity(Intent.createChooser(shareIntent,
+									getMapActivity().getString(R.string.share_note)));
 						}
-						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-						shareIntent
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-						getMapActivity().startActivity(Intent.createChooser(shareIntent,
-								getMapActivity().getString(R.string.share_note)));
-					}
-				});
+					});
+		} else {
+			super.share(latLon, title);
+		}
 	}
 }
