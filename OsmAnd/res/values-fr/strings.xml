@@ -224,8 +224,8 @@
 
     <string name="shared_string_next">Suivant</string>
     <string name="shared_string_previous">Précédent</string>
-    <string name="unit_of_length_descr">Sélectionnez les unités de longueur et de vitesse</string>
-    <string name="unit_of_length">Unités de mesure</string>
+    <string name="unit_of_length_descr">Modifier les unités de mesure des distances</string>
+    <string name="unit_of_length">Unités de distance</string>
     <string name="si_mi_foots">Miles/pieds</string>
     <string name="si_mi_yard">Miles/yards</string>
     <string name="si_km_m">Kilomètres/mètres</string>
@@ -835,8 +835,8 @@
     <string name="continue_follow_previous_route_auto">La navigation a été interrompue. Souhaitez-vous la reprendre ? (%1$s secondes)</string>
 
 
-    <string name="show_cameras">Afficher les radars</string>
-    <string name="show_traffic_warnings">Afficher les limitations de vitesse</string>
+    <string name="show_cameras">Radars</string>
+    <string name="show_traffic_warnings">Ralentissements</string>
     <string name="avoid_toll_roads">Éviter les routes à péage</string>
 
     <string name="screen_is_locked">Déverrouiller l\'écran en appuyant sur le cadenas</string>
@@ -869,12 +869,12 @@
 
 
     <string name="layer_map_appearance">Configurer l\'écran</string>
-    <string name="show_lanes">Afficher les voies de circulation</string>
+    <string name="show_lanes">Voies de circulation</string>
     <string name="avoid_unpaved">Éviter les voies non revêtues</string>
     <string name="avoid_ferries">Éviter les ferries</string>
     <string name="avoid_in_routing_title">Éviter</string>
     <string name="avoid_in_routing_descr">Éviter péages, voies non revêtues, ferries, autoroutes</string>
-    <string name="show_warnings_title">Annonces visuelles</string>
+    <string name="show_warnings_title">Annonces visuelles…</string>
     <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesse, stops, ralentisseurs, radars), les voies de circulation</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
     <string name="map_widget_show_ruler">Échelle</string>
@@ -1625,7 +1625,7 @@
     <string name="traffic_warning_railways">Passage à niveau</string>
     <string name="traffic_warning_pedestrian">Passage piéton</string>
     <string name="show_railway_warnings">Traversées de voie ferrée</string>
-    <string name="show_pedestrian_warnings">Afficher les passages piétons</string>
+    <string name="show_pedestrian_warnings">Passages piétons</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas des routes allemandes</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas des routes américaines</string>
     <string name="routing_attr_no_new_routing_description">Ne pas utiliser les règles de routage ajoutées dans la version 1.9</string>
