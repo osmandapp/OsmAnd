@@ -48,6 +48,14 @@ public class ApplicationMode {
 	public static final ApplicationMode TRUCK = create(R.string.app_mode_truck, "truck").speed(15.3f, 40).
 			carLocation().parent(CAR).
 			icon(R.drawable.ic_truck, R.drawable.ic_action_truck_dark).reg();
+
+	public static final ApplicationMode BUS = create(R.string.app_mode_bus, "bus").speed(15.3f, 40).
+			carLocation().parent(CAR).
+			icon(R.drawable.ic_action_bus2, R.drawable.ic_action_bus_dark).reg();
+
+	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(15.3f, 40).
+			carLocation().parent(CAR).
+			icon(R.drawable.ic_action_bus2, R.drawable.ic_action_bus_dark).reg();
 	
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[] { CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT };
