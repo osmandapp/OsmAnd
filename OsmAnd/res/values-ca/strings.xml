@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
-    <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+    <string name="show_warnings_title">Mostra alertes…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
     <string name="map_widget_show_ruler">Mostra el regle</string>
     <string name="map_widget_transparent">Ginys transparents</string>
@@ -13,8 +13,8 @@
     <string name="map_widget_distance">Objectiu</string>
     <string name="map_widget_altitude">Altitud</string>
     <string name="map_widget_time">Temps per arribar-hi</string>
-    <string name="show_cameras">Mostra les càmeres de velocitat</string>
-    <string name="show_traffic_warnings">Mostra els límits de velocitat</string>
+    <string name="show_cameras">Càmeres de velocitat</string>
+    <string name="show_traffic_warnings">Límits de velocitat</string>
     <string name="route_updated_loc_found">La ruta es tornarà a calcular quan es determini la localització</string>
     <string name="starting_point_too_far">El punt d\'inici és massa lluny de la carretera més propera.</string>
     <string name="osmand_parking_time_limit_title">Indica el temps límit d\'aparcament</string>
@@ -190,7 +190,7 @@
     <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM de la base de dades local</string>
     <string name="day_night_info">Informació de dia/nit</string>
     <string name="map_widget_day_night">Mapa dia/nit</string>
-    <string name="show_lanes">Mostra els carrils</string>
+    <string name="show_lanes">Carrils</string>
     <string name="avoid_ferries">Evita els ferris</string>
     <string name="avoid_in_routing_descr">Evita les carreteres de peatge, les no pavimentades i els ferris</string>
     <string name="osmand_parking_warning_text">Notificació que vau introduir a Calendari per treure el cotxe. Es mantindrà fins que l\'elimineu manualment.</string>
@@ -292,8 +292,8 @@
     <string name="system_locale">Sistema</string>
     <string name="shared_string_next">Endavant</string>
     <string name="shared_string_previous">Enrere</string>
-    <string name="unit_of_length_descr">Canvieu les unitats de longitud i velocitat</string>
-    <string name="unit_of_length">Unitat de mesura</string>
+    <string name="unit_of_length_descr">Canvia les unitats de longitud</string>
+    <string name="unit_of_length">Unitat de longitud</string>
     <string name="si_mi_foots">Milles/peus</string>
     <string name="si_mi_yard">Milles/iardes</string>
     <string name="si_km_m">Quilòmetres/metres</string>
@@ -1460,8 +1460,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Atles de carreteres alemany</string>
     <string name="traffic_warning_railways">Pas a nivell</string>
     <string name="traffic_warning_pedestrian">Pas de vianants</string>
-    <string name="show_railway_warnings">Mostra passos a nivell</string>
-    <string name="show_pedestrian_warnings">Mostra passos de zebra</string>
+    <string name="show_railway_warnings">Passos a nivell</string>
+    <string name="show_pedestrian_warnings">Passos de zebra</string>
     <string name="rendering_value_americanRoadAtlas_name">Atles de carreteres americà</string>
     <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
@@ -1732,8 +1732,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="osmand_running_in_background">Execució en procés de fons</string>
     <string name="favorite_category_add_new">Afegeix nova categoria</string>
     <string name="favorite_category_select">Selecciona categoria</string>
-    <string name="default_speed_system_descr">Defineix el sistema de mesura de velocitat</string>
-    <string name="default_speed_system">Mesura de velocitat</string>
+    <string name="default_speed_system_descr">Defineix les unitats de velocitat</string>
+    <string name="default_speed_system">Unitats de velocitat</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Milles marines</string>
     <string name="si_kmh">Quilòmetres per hora</string>
@@ -2039,4 +2039,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="current_track">Traça actual</string>
     <string name="lang_es_us">Espanyol (americà)</string>
     <string name="lang_be_BY">Bielorús (alfabet llatí)</string>
+    <string name="lang_en_gb">Anglès (Regne Unit)</string>
+    <string name="lang_kn">Kanarès</string>
     </resources>
