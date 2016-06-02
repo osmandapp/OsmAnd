@@ -4,7 +4,7 @@
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo de carretera</string>
-		<string name="poi_filling_station">Gasolineras</string>
+		<string name="poi_filling_station">Gasolinera</string>
 		<string name="poi_personal_transport">Transporte particular</string>
 		<string name="poi_public_transport">Transporte público</string>
 		<string name="poi_air_transport">Transporte aéreo</string>
@@ -82,20 +82,20 @@
 	<string name="poi_organic">Comida orgánica</string>
 	<string name="poi_outdoor">Tienda de actividades al aire libre</string>
 	<string name="poi_paint">Tienda de pintura</string>
-	<string name="poi_pet">Mascotas</string>
+	<string name="poi_pet">Tienda de mascotas</string>
 	<string name="poi_photo">Servicio fotográfico</string>
 	<string name="poi_second_hand">Tienda de segunda mano</string>
 	<string name="poi_sports">Artículos deportivos</string>
 	<string name="poi_stationery">Papelería</string>
-	<string name="poi_ticket">Boletería</string>
+	<string name="poi_ticket">Venta de entradas</string>
 	<string name="poi_toys">Juguetería</string>
 	<string name="poi_trade">Puesto comercial</string>
 	<string name="poi_variety_store">Bazar</string>
 	<string name="poi_video">Videoclub</string>
 	<string name="poi_department_store">Grandes almacenes</string>
 	<string name="poi_electronics">Tienda de electrónica</string>
-	<string name="poi_car">Concesionario de automóviles</string>
-	<string name="poi_car_parts">Piezas de automóvil</string>
+	<string name="poi_car">Venta de automóviles</string>
+	<string name="poi_car_parts">Recambios de automóvil</string>
 	<string name="poi_cosmetics">Cosméticos</string>
 	<string name="poi_marketplace">Mercado</string>
 	<string name="poi_police">Policía</string>
@@ -385,7 +385,7 @@
 	<string name="poi_dive">Equipo de buceo</string>
 	<string name="poi_erotic">Tienda erótica</string>
 	<string name="poi_bathroom_furnishing">Muebles de baño</string>
-	<string name="poi_carpet">Alfombras</string>
+	<string name="poi_carpet">Tienda de alfombras</string>
 	<string name="poi_charity">Tienda benéfica</string>
 	<string name="poi_confectionery">Confitería</string>
 	<string name="poi_clothes">Tienda de ropa</string>
@@ -441,7 +441,7 @@
 	<string name="poi_fabric">Mercería</string>
 	<string name="poi_bedding">Tienda de ropa de cama</string>
 	<string name="poi_ship_chandler">Proveedor naval</string>
-	<string name="poi_tableware">Vajillas</string>
+	<string name="poi_tableware">Tienda de vajillas</string>
 	<string name="poi_window_blind">Tienda de persianas</string>
 	<string name="poi_atv">Cuatriciclos</string>
 	<string name="poi_fire_flapper">Batefuegos</string>
@@ -476,7 +476,7 @@
 	<string name="poi_telephone_exchange">Central telefónica</string>
 
 	<string name="poi_landfill">Vertedero/Basural</string>
-	<string name="poi_waste_basket">Cesto de basura</string>
+	<string name="poi_waste_basket">Papelera</string>
 
 	<string name="poi_quarry">Cantera</string>
 	<string name="poi_vineyard">Viñedo</string>
@@ -841,9 +841,9 @@
 	<string name="poi_furnace">Tienda de calefactores</string>
 	<string name="poi_garden_furniture">Tienda de jardinería</string>
 	<string name="poi_leather">Marroquinería</string>
-	<string name="poi_music">Disquería</string>
+	<string name="poi_music">Tienda de música</string>
 	<string name="poi_scuba_diving_shop">Artículos de buceo</string>
-	<string name="poi_tyres">Neumáticos</string>
+	<string name="poi_tyres">Tienda de neumáticos</string>
 	<string name="poi_energy">Acumulador de energía</string>
 	<string name="poi_watches">Tienda de relojes de pulsera</string>
 	<string name="poi_swimming_pool_shop">Artículos de piscina</string>
