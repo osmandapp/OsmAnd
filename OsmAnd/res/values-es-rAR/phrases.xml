@@ -212,7 +212,7 @@
 	<string name="poi_public_transport_station">Estación de transporte público</string>
 	<string name="poi_bus_station">Estación de colectivo</string>
 	<string name="poi_railway_station">Estación de tren</string>
-	<string name="poi_railway_platform">Parada de tren</string>
+	<string name="poi_railway_platform">Andén de tren</string>
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_subway_entrance">Entrada de subte</string>
 	<string name="poi_subway_station">Estación de subte</string>
