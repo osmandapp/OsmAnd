@@ -18,14 +18,14 @@ import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
 
-public class Amenity extends MapObject  {
+public class Amenity extends MapObject {
 
 	public static final String WEBSITE = "website";
 	public static final String PHONE = "phone";
 	public static final String DESCRIPTION = "description";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String CONTENT = "content";
-	
+
 	private String subType;
 	private PoiCategory type;
 	// duplicate for fast access
@@ -33,39 +33,39 @@ public class Amenity extends MapObject  {
 	private Map<String, String> additionalInfo;
 	private AmenityRoutePoint routePoint; // for search on path
 
-	public Amenity(){
+	public Amenity() {
 	}
-	
+
 	public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
 		public Location pointB;
 	}
-	
-	public PoiCategory getType(){
+
+	public PoiCategory getType() {
 		return type;
 	}
-	
-	public String getSubType(){
+
+	public String getSubType() {
 		return subType;
 	}
-	
+
 	public void setType(PoiCategory type) {
 		this.type = type;
 	}
-	
+
 	public void setSubType(String subType) {
 		this.subType = subType;
 	}
-	
+
 	public String getOpeningHours() {
 //		 getAdditionalInfo("opening_hours");
 		return openingHours;
 	}
-	
-	public String getAdditionalInfo(String key){
-		if(additionalInfo == null) {
+
+	public String getAdditionalInfo(String key) {
+		if (additionalInfo == null) {
 			return null;
 		}
 		String str = additionalInfo.get(key);
@@ -100,20 +100,20 @@ public class Amenity extends MapObject  {
 		}
 		return str;
 	}
-	
+
 	public Map<String, String> getAdditionalInfo() {
-		if(additionalInfo == null) {
+		if (additionalInfo == null) {
 			return Collections.emptyMap();
 		}
 		return additionalInfo;
 	}
-	
+
 	public void setAdditionalInfo(Map<String, String> additionalInfo) {
 		this.additionalInfo = null;
 		openingHours = null;
-		if(additionalInfo != null) {
+		if (additionalInfo != null) {
 			Iterator<Entry<String, String>> it = additionalInfo.entrySet().iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Entry<String, String> e = it.next();
 				setAdditionalInfo(e.getKey(), e.getValue());
 			}
@@ -123,20 +123,20 @@ public class Amenity extends MapObject  {
 	public void setRoutePoint(AmenityRoutePoint routePoint) {
 		this.routePoint = routePoint;
 	}
-	
+
 	public AmenityRoutePoint getRoutePoint() {
 		return routePoint;
 	}
 
 	public void setAdditionalInfo(String tag, String value) {
-		if("name".equals(tag)) {
+		if ("name".equals(tag)) {
 			setName(value);
-		} else if("name:en".equals(tag)) {
+		} else if ("name:en".equals(tag)) {
 			setEnName(value);
-		} else if(tag.startsWith("name:")) {
+		} else if (tag.startsWith("name:")) {
 			setName(tag.substring("name:".length()), value);
 		} else {
-			if(this.additionalInfo == null){
+			if (this.additionalInfo == null) {
 				this.additionalInfo = new LinkedHashMap<String, String>();
 			}
 			this.additionalInfo.put(tag, value);
@@ -145,13 +145,13 @@ public class Amenity extends MapObject  {
 			}
 		}
 	}
-	
+
 
 	@Override
 	public String toString() {
-		return type.getKeyName() + " : " + subType + " "+ getName();
+		return type.getKeyName() + " : " + subType + " " + getName();
 	}
-	
+
 	public String getSite() {
 		return getAdditionalInfo(WEBSITE);
 	}
@@ -167,7 +167,7 @@ public class Amenity extends MapObject  {
 	public void setPhone(String phone) {
 		setAdditionalInfo(PHONE, phone);
 	}
-	
+
 	public String getContentSelected(String tag, String lang, String defLang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
@@ -183,13 +183,13 @@ public class Amenity extends MapObject  {
 		if (!Algorithms.isEmpty(enName)) {
 			return enName;
 		}
-		int maxLen = 0; 
+		int maxLen = 0;
 		String lng = defLang;
 		for (String nm : getAdditionalInfo().keySet()) {
-			if (nm.startsWith(tag+":")) {
+			if (nm.startsWith(tag + ":")) {
 				String key = nm.substring(tag.length() + 1);
-				String cnt = getAdditionalInfo(tag+":"+key);
-				if(!Algorithms.isEmpty(cnt) && cnt.length() > maxLen) {
+				String cnt = getAdditionalInfo(tag + ":" + key);
+				if (!Algorithms.isEmpty(cnt) && cnt.length() > maxLen) {
 					maxLen = cnt.length();
 					lng = key;
 				}
@@ -197,19 +197,19 @@ public class Amenity extends MapObject  {
 		}
 		return lng;
 	}
-	
+
 	public List<String> getNames(String tag, String defTag) {
 		List<String> l = new ArrayList<String>();
 		for (String nm : getAdditionalInfo().keySet()) {
-			if (nm.startsWith(tag+":")) {
-				l.add(nm.substring(tag.length() +1));
-			} else if(nm.equals(tag)) {
+			if (nm.startsWith(tag + ":")) {
+				l.add(nm.substring(tag.length() + 1));
+			} else if (nm.equals(tag)) {
 				l.add(defTag);
 			}
 		}
 		return l;
 	}
-	
+
 	public String getContentLang(String tag, String lang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
@@ -232,22 +232,22 @@ public class Amenity extends MapObject  {
 		}
 		return null;
 	}
-	
+
 	public String getDescription(String lang) {
 		String info = getContentLang(DESCRIPTION, lang);
-		if(!Algorithms.isEmpty(info)) {
+		if (!Algorithms.isEmpty(info)) {
 			return info;
 		}
 		return getContentLang(CONTENT, lang);
 	}
-	
+
 	public void setDescription(String description) {
 		setAdditionalInfo(DESCRIPTION, description);
 	}
-	
+
 	public void setOpeningHours(String openingHours) {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
 	}
-	
-	
+
+
 }
