@@ -896,7 +896,8 @@ public class VoiceRouter {
 		int soundClick = -1;
 		boolean success = true;
 		try {
-			soundClick = sp.load(settings.getContext().getAssets().openFd("sounds/airhorn.ogg"), 1);
+			// Taken unaltered from https://freesound.org/people/Corsica_S/sounds/91926/ under license http://creativecommons.org/licenses/by/3.0/ :
+			soundClick = sp.load(settings.getContext().getAssets().openFd("sounds/ding.ogg"), 1);
 		} catch (IOException e){
 			e.printStackTrace();
 			success = false;
