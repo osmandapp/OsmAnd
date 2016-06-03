@@ -97,7 +97,7 @@
     <string name="poi_filter_restaurants">Restavracije</string>
     <string name="poi_filter_sightseeing">Turistični ogledi</string>
     <string name="poi_filter_entertainment">Zabava</string>
-    <string name="show_warnings_title">Pokaži alarme …</string>
+    <string name="show_warnings_title">Pokaži opozorila …</string>
     <string name="show_warnings_descr">Prikaz opozoril prometa, omejitve hitrosti, hitrostnih kamer, grbin, podatki o voznih razmerah in druga opozorila</string>
     <string name="use_compass_navigation_descr">Uporabi kompas, ko drugače ni mogoče določiti smeri</string>
     <string name="use_compass_navigation">Uporabi kompas</string>
@@ -157,8 +157,8 @@
     <string name="bg_service_screen_unlock">Odkleni zaslon</string>
     <string name="bg_service_screen_lock_toast">Zaslon je zaklenjen</string>
     <string name="bg_service_interval">Nastavitev časovnega razmika prebujanja:</string>
-    <string name="show_cameras">Pokaži hitrostne kamere</string>
-    <string name="show_traffic_warnings">Prikaži omejitve hitrosti</string>
+    <string name="show_cameras">Hitrostne kamere</string>
+    <string name="show_traffic_warnings">Opozorila o prometu</string>
     <string name="avoid_toll_roads">Izogni se cestninjenju</string>
     <string name="continue_follow_previous_route_auto">Prejšnje vodenje še ni končano. Ali želite nadaljevati do tega cilja? (%1$s sekund)</string>
     <string name="route_updated_loc_found">Pot bo ponovno preračunana, ko bo določeno trenutno mesto</string>
@@ -216,8 +216,8 @@
     <string name="send_files_to_osm">Ali želite poslati datoteko GPX na OSM?</string>
     <string name="validate_gpx_upload_name_pwd">Določite uporabniško ime in geslo OSM za nalaganje datotek GPX.</string>
 
-    <string name="unit_of_length_descr">Spremeni enote dolžine in hitrosti</string>
-    <string name="unit_of_length">Merske enote</string>
+    <string name="unit_of_length_descr">Spremeni enote za dolžino</string>
+    <string name="unit_of_length">Enote dolžine</string>
     <string name="si_mi_foots">Milje/Čevlji</string>
     <string name="si_mi_yard">Milje/Jardi</string>
     <string name="si_km_m">Kilometri/Metri</string>
@@ -318,7 +318,7 @@
 
 
     <string name="layer_map_appearance">Nastavitve zaslona</string>
-    <string name="show_lanes">Pokaži vozne pasove</string>
+    <string name="show_lanes">Vozni pasovi</string>
     <string name="avoid_in_routing_title">Izogibanje …</string>
     <string name="avoid_ferries">Izogni se trajektom</string>
     <string name="avoid_unpaved">Izogni se neasfaltiranim potem</string>
@@ -1479,8 +1479,8 @@
     <string name="lang_al">Albanščina</string>
     <string name="lang_ar">Arabščina</string>
     <string name="lang_sr">Srbščina</string>
-    <string name="lang_zh_CN">Poenostavljena kitajščina</string>
-    <string name="lang_zh_TW">Tradicionalna kitajščina</string>
+    <string name="lang_zh_CN">Kitajščina (poenostavljena)</string>
+    <string name="lang_zh_TW">Kitajščina (tradicionalna)</string>
     <string name="lang_sc">Sardinščina</string>
     <string name="rendering_attr_subwayMode_name">Proge podzemne železnice</string>
     <string name="continue_navigation">Nadaljuj z navigacijo</string>
@@ -1584,8 +1584,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Nemški cestni atlas</string>
     <string name="traffic_warning_railways">Železniški prehod</string>
     <string name="traffic_warning_pedestrian">Prehod za pešce</string>
-    <string name="show_railway_warnings">Pokaži železniške prehode</string>
-    <string name="show_pedestrian_warnings">Pokaži prehode za pešce</string>
+    <string name="show_railway_warnings">Železniški prehodi</string>
+    <string name="show_pedestrian_warnings">Prehod za pešce</string>
     <string name="rendering_value_americanRoadAtlas_name">Ameriški cestni atlas</string>
     <string name="dash_download_msg_none">Ali želite prejeti zemljevide za navigacijo brez povezave?</string>
     <string name="dash_download_msg">Do sedaj ste prejeli %1$s zemljevidov za navigacijo brez povezave</string>
@@ -1785,7 +1785,7 @@
     <string name="lang_et">Estonščina</string>
     <string name="lang_ceb">Cebuanščina</string>
     <string name="archive_wikipedia_data">Nameščeni so zastareli in nepodprti podatki iz Wikipedije. Ali jih želite arhivirati?</string>
-    <string name="lang_es_ar">Argentinska španščina</string>
+    <string name="lang_es_ar">Španščina (argentinska)</string>
     <string name="lang_nb">Norveščina (Bokmål)</string>
     <string name="light_theme">Svetla</string>
     <string name="dark_theme">Temna</string>
@@ -1893,8 +1893,8 @@
     <string name="favourites_context_menu_add">Dodaj priljubljeno</string>
     <string name="favorite_category_add_new">Dodaj novo</string>
     <string name="favorite_category_select">Izberi kategorijo</string>
-    <string name="default_speed_system_descr">Določi sistem merjenja hitrosti</string>
-    <string name="default_speed_system">Merjenje hitrosti</string>
+    <string name="default_speed_system_descr">Določi enoto hitrosti</string>
+    <string name="default_speed_system">Enota hitrosti</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Morske milje</string>
     <string name="si_kmh">Kilometri na uro</string>
@@ -2204,4 +2204,10 @@
     <string name="lat_lon_pattern">ZŠir: %1$.6f ZDol: %2$.6f</string>
     <string name="map_widget_battery">Stanje baterije</string>
     <string name="lang_hu_formal">Madžarščina (uradna)</string>
+    <string name="current_track">Trenutna sled</string>
+    <string name="change_markers_position">Spremeni položaj oznake</string>
+    <string name="lang_es_us">Španščina (ameriška)</string>
+    <string name="lang_en_gb">Angleščina (Združeno kraljestvo)</string>
+    <string name="lang_be_BY">Beloruščina (latinica)</string>
+    <string name="lang_kn">Kanada</string>
     </resources>
