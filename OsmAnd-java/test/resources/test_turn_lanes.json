@@ -453,6 +453,20 @@
     "expectedResults": {
       "343841020": "TL|+C|+C|TR"
     }
+  },
+  {
+    "testName": "25.Blumberger Damm TR Warener Straße",
+    "startPoint": {
+      "latitude": 45.633618533007024,
+      "longitude": 35.43691737949851
+    },
+    "endPoint": {
+      "latitude": 45.63640923513949,
+      "longitude": 35.439041689038305
+    },
+    "expectedResults": {
+      "66218888": "TL|C|+TR,C"
+    }
   }
 
 ]
