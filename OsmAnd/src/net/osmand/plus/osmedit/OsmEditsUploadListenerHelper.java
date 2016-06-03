@@ -94,7 +94,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 	}
 
 	private static void showUploadItemsProgressDialog(Fragment fragment, OsmPoint[] toUpload) {
-		MapActivity activity = (MapActivity) fragment.getActivity();
+		FragmentActivity activity = fragment.getActivity();
 		OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(activity,
 				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
