@@ -186,7 +186,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.avoid_road) {
 						activity.getMyApplication().getAvoidSpecificRoads().addImpassableRoad(
-								activity, latLon, false, null);
+								activity, latLon, false, null, false);
 					}
 					return true;
 				}

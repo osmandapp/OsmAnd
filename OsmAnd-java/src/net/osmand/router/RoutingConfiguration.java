@@ -141,7 +141,6 @@ public class RoutingConfiguration {
 		public void removeImpassableRoad(RouteDataObject obj) {
 			impassableRoadLocations.remove(obj.id);
 			impassableRoads.remove(obj);
-			
 		}
 	}
 
