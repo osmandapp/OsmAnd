@@ -22,6 +22,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	protected String name = null;
 	protected String enName = null;
+	/**
+	 * Looks like: {ru=Москва, dz=མོསི་ཀོ...} and does not contain values of OSM tags "name" and "name:en",
+	 * see {@link name} and {@link enName} respectively.
+	 */
 	protected Map<String, String> names = null;
 	protected LatLon location = null;
 	protected int fileOffset = 0;
@@ -40,8 +44,8 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 
 	public String getName() {
-		if (this.name != null) {
-			return this.name;
+		if (name != null) {
+			return name;
 		}
 		return ""; //$NON-NLS-1$
 	}
@@ -51,11 +55,16 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 
 	public void setName(String lang, String name) {
-		if (names == null) {
-			names = new HashMap<String, String>();
-
+		if (Algorithms.isEmpty(lang)) {
+			setName(name);
+		} else if (lang.equals("en")) {
+			setEnName(name);
+		} else {
+			if (names == null) {
+				names = new HashMap<String, String>();
+			}
+			names.put(lang, name);
 		}
-		names.put(lang, name);
 	}
 
 	public Map<String, String> getNamesMap(boolean includeEn) {
@@ -84,37 +93,45 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return l;
 	}
 
-	public void copyNames(MapObject s) {
-		if (Algorithms.isEmpty(name)) {
-			name = s.name;
+	public void copyNames(String otherName, String otherEnName, Map<String, String> otherNames, boolean overwrite) {
+		if (!Algorithms.isEmpty(otherName) && (overwrite || Algorithms.isEmpty(name))) {
+			name = otherName;
 		}
-		if (Algorithms.isEmpty(enName)) {
-			enName = s.enName;
+		if (!Algorithms.isEmpty(otherEnName) && (overwrite || Algorithms.isEmpty(enName))) {
+			enName = otherEnName;
 		}
-		copyNames(s.names);
+		if (!Algorithms.isEmpty(otherNames)) {
+			if (otherNames.containsKey("name:en")) {
+				enName = otherNames.get("name:en");
+			} else if (otherNames.containsKey("en")) {
+				enName = otherNames.get("en");
+			}
+
+			for (Entry<String, String> e : otherNames.entrySet()) {
+				String key = e.getKey();
+				if (key.startsWith("name:")) {
+					key = key.substring("name:".length());
+				}
+				if (names == null) {
+					names = new HashMap<String, String>();
+				}
+				if (overwrite || Algorithms.isEmpty(names.get(key))) {
+					names.put(key, e.getValue());
+				}
+			}
+		}
 	}
 
-	public void copyNames(Map<String, String> snames) {
-		if (Algorithms.isEmpty(snames)) {
-			return;
-		}
-		if (snames.containsKey("name:en")) {
-			enName = snames.get("name:en");
-		} else if (snames.containsKey("en")) {
-			enName = snames.get("en");
-		}
-		for (Entry<String, String> e : snames.entrySet()) {
-			String key = e.getKey();
-			if (key.startsWith("name:")) {
-				key = key.substring("name:".length());
-			}
-			if (names == null) {
-				names = new HashMap<String, String>();
-			}
-			if (Algorithms.isEmpty(names.get(key))) {
-				names.put(key, e.getValue());
-			}
-		}
+	public void copyNames(String otherName, String otherEnName, Map<String, String> otherNames) {
+		copyNames(otherName, otherEnName, otherNames, false);
+	}
+
+	public void copyNames(MapObject s, boolean copyName, boolean copyEnName, boolean overwrite) {
+		copyNames((copyName ? s.name : null), (copyEnName ? s.enName : null), s.names, overwrite);
+	}
+
+	public void copyNames(MapObject s) {
+		copyNames(s, true, true, false);
 	}
 
 	public String getName(String lang) {
