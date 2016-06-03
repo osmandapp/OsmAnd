@@ -47,7 +47,8 @@ public class SearchByNameFilter extends PoiUIFilter {
 								elimit = true;
 							}
 							if (matcher.publish(object)) {
-								currentSearchResult.add(object);
+								// Causes concurrent modification exception (below)
+//								currentSearchResult.add(object);
 								return true;
 							}
 							return false;

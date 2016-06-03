@@ -152,10 +152,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return savedFilterByName;
 	}
 	
-	public List<Amenity> getCurrentSearchResult() {
-		return currentSearchResult;
-	}
-	
 	
 	public List<Amenity> searchAgain(double lat, double lon) {
 		List<Amenity> amenityList ;
