@@ -2229,4 +2229,5 @@
     <string name="access_direction_audio_feedback">Indication de la direction par sons</string>
     <string name="access_direction_haptic_feedback">Indication de la direction par vibrations</string>
     <string name="lang_be_BY">Biélorusse (Latin)</string>
+    <string name="lang_ast">Asturien</string>
     </resources>
