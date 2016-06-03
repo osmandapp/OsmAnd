@@ -1840,7 +1840,7 @@
     <string name="lang_ta">Tamoul</string>
     <string name="lang_ml">Malayâlam</string>
     <string name="lang_os">Ossète</string>
-    <string name="lang_nb">Norvégien, Bokmål</string>
+    <string name="lang_nb">Norvégien (Bokmål)</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_new">Néwari / Népal Bhasa</string>
     <string name="lang_ceb">Cébouano</string>
@@ -2224,4 +2224,9 @@
     <string name="change_markers_position">Modifier la position du marqueur</string>
     <string name="lang_es_us">Espagnol (américain)</string>
     <string name="lang_en_gb">Anglais (Royaume-Uni)</string>
+    <string name="access_direction_audio_feedback_descr">Indiquer la direction de la cible par des sons</string>
+    <string name="access_direction_haptic_feedback_descr">Indiquer la direction de la cible par des vibrations</string>
+    <string name="access_direction_audio_feedback">Indication de la direction par sons</string>
+    <string name="access_direction_haptic_feedback">Indication de la direction par vibrations</string>
+    <string name="lang_be_BY">Biélorusse (Latin)</string>
     </resources>
