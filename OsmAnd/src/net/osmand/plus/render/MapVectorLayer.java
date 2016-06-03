@@ -78,7 +78,7 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public int getMaximumShownMapZoom() {
-		return 23;
+		return 22;
 	}
 
 	@Override
