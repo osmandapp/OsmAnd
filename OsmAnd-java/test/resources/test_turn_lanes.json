@@ -439,6 +439,20 @@
     "expectedResults": {
       "176772179": "+TL|+TL,C|TR|TR"
     }
+  },
+  {
+    "testName": "24.Alt-Mahlsdorf S",
+    "startPoint": {
+      "latitude": 45.665177901535905,
+      "longitude": 35.69627156853679
+    },
+    "endPoint": {
+      "latitude": 45.66538830951218,
+      "longitude": 35.673745706677465
+    },
+    "expectedResults": {
+      "343841020": "TL|+C|+C|TR"
+    }
   }
 
 ]
