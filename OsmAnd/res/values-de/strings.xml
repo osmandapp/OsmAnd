@@ -491,7 +491,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 
 	<string name="shared_string_next">Weiter</string>
 	<string name="shared_string_previous">Zurück</string>
-	<string name="unit_of_length_descr">Längen- und Geschwindigkeitseinheiten auswählen</string>
+	<string name="unit_of_length_descr">Längeneinheiten auswählen</string>
 	<string name="unit_of_length">Längeneinheiten</string>
 	<string name="si_mi_foots">Meilen/Fuß</string>
 	<string name="si_mi_yard">Meilen/Yards</string>
@@ -1891,8 +1891,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="favorite_category_add_new_title">Neue Kategorie hinzufügen</string>
     <string name="srtm_plugin_disabled">Höhenlinien deaktiviert</string>
     <string name="favorite_category_select">Kategorie auswählen</string>
-    <string name="default_speed_system_descr">System zur Geschwindigkeitsmessung eingeben</string>
-    <string name="default_speed_system">Geschwindigkeitsmessung</string>
+    <string name="default_speed_system_descr">Geschwindigkeitseinheit auswählen</string>
+    <string name="default_speed_system">Geschwindigkeitseinheit</string>
     <string name="nm">sm</string>
     <string name="nm_h">sm/h</string>
     <string name="min_mile">min/m</string>
@@ -2169,4 +2169,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="lang_es_us">Spanisch (Amerikanisch)</string>
     <string name="lang_be_BY">Weißrussisch (Lateinische Schrift)</string>
     <string name="lang_kn">Kannada</string>
+    <string name="lang_en_gb">Englisch (Vereinigtes Königreich)</string>
     </resources>
