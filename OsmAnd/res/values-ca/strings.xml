@@ -1630,7 +1630,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_et">Estonià</string>
     <string name="lang_ceb">Cebuà</string>
     <string name="lang_es_ar">Espanyol (argentí)</string>
-    <string name="lang_nb">Noruec bokmål</string>
+    <string name="lang_nb">Noruec (bokmål)</string>
     <string name="light_theme">Lluminós</string>
     <string name="dark_theme">Fosc</string>
     <string name="lang_pms">Piamontès</string>
@@ -2041,4 +2041,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_be_BY">Bielorús (alfabet llatí)</string>
     <string name="lang_en_gb">Anglès (Regne Unit)</string>
     <string name="lang_kn">Kanarès</string>
+    <string name="lang_ast">Bable</string>
     </resources>
