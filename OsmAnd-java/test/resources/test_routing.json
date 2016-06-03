@@ -1,9 +1,11 @@
 [
   {
     "testName": "3.Different routes depending on start coordinates https://github.com/osmandapp/Osmand/issues/1197",
+    "description": "При planRoadDirection='-1' маршрут неверный, при 0 - верный",
     "params": {
       "vehicle": "car",
-      "short_way": "true"
+      "short_way": "true",
+      "planRoadDirection": "0"
     },
     "startPoint": {
       "latitude": 45.90810929390909,
@@ -19,22 +21,23 @@
     }
   },
     {
-    "testName": "2. Car Preston road TR Lorimar drive",
+    "testName": "5.Route depends on the distance to a junction, if routing engine takes the longer way https://github.com/osmandapp/Osmand/issues/1200",
+    "description": "Подтверждается только неверный маршрут. От дистанции не зависит, но зависит от planRoadDirection. При -1 маршрут верный, при 0 - нет",
     "params": {
-      "vehicle": "pedestrian",
-      "pedestrian": "true",
-      "short_way": "true" 
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "0"
     },
     "startPoint": {
-      "latitude": 45.69539,
-      "longitude": 35.43936
+      "latitude": 45.897117500680615,
+      "longitude": 35.3328966200352
     },
     "endPoint": {
-      "latitude": 45.69567,
-      "longitude": 35.440113
+      "latitude": 45.89920161032259,
+      "longitude": 35.335714280605345
     },
     "expectedResults": {
-      "26545": "TL|C|C|C|+TR"
+      "93014632": "false"
     }
   }
 ]
