@@ -731,7 +731,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				tb.setPixelDimensions(tbw, tbh);
 
 				tb.setLatLonCenter(latLonToShow.getLatitude(), latLonToShow.getLongitude());
-				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude())) {
+				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > 10) {
 					tb.setZoom(tb.getZoom() - 1);
 				}
 				//mapContextMenu.setMapZoom(settings.getMapZoomToShow());
