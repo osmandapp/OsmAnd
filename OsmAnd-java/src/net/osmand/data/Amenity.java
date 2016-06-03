@@ -131,8 +131,6 @@ public class Amenity extends MapObject {
 	public void setAdditionalInfo(String tag, String value) {
 		if ("name".equals(tag)) {
 			setName(value);
-		} else if ("name:en".equals(tag)) {
-			setEnName(value);
 		} else if (tag.startsWith("name:")) {
 			setName(tag.substring("name:".length()), value);
 		} else {

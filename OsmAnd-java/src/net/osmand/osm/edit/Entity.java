@@ -172,7 +172,17 @@ public abstract class Entity implements Serializable {
 		}
 		return tags.get(key);
 	}
-	
+
+	public Map<String, String> getNameTags() {
+		Map<String, String> result = new LinkedHashMap<String, String>();
+		for (Map.Entry<String, String> e : tags.entrySet()) {
+			if (e.getKey().startsWith("name:")) {
+				result.put(e.getKey(), e.getValue());
+			}
+		}
+		return result;
+	}
+
 	public int getVersion() {
 		return version;
 	}
@@ -274,4 +284,5 @@ public abstract class Entity implements Serializable {
 		}
 		return tags;
 	}
+
 }

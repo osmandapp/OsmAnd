@@ -271,9 +271,9 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.CityIndex.ATTRIBUTEVALUES_FIELD_NUMBER:
 				String nm = codedIS.readString();
-				if(additionalTags != null && additionalTags.size() > 0) {
+				if (additionalTags != null && additionalTags.size() > 0) {
 					String tg = additionalTags.pollFirst();
-					if(tg.startsWith("name:")) {
+					if (tg.startsWith("name:")) {
 						c.setName(tg.substring("name:".length()), nm);
 					}
 				}
