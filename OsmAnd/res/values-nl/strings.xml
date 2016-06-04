@@ -849,7 +849,7 @@
   
   
   <string name="show_cameras">Snelheidscontroles</string>
-  <string name="show_traffic_warnings">Verkeersopstoppingen</string>
+  <string name="show_traffic_warnings">Filemeldingen</string>
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
   
   <string name="map_widget_top_text">Straatnaam</string>
