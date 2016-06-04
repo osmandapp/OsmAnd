@@ -2045,9 +2045,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="application_dir_description">Escolha onde quer guardar os ficheiros de mapas.</string>
 
     <string name="other_menu_group">Outros</string>
-    <string name="use_osm_live_routing_description">Activar navegação para alterações OSM ao vivo (Beta)</string>
+    <string name="use_osm_live_routing_description">Ativar navegação para alterações OSM ao vivo (Beta)</string>
 	<string name="use_osm_live_routing">Navegação OSM ao vivo</string>
-    <string name="access_no_destination">Destino não está definido</string>
+    <string name="access_no_destination">Destino não definido</string>
     <string name="map_widget_magnetic_bearing">Rumo magnético</string>
     <string name="access_autoannounce_period">Período do anúncio automático</string>
     <string name="access_tree_list">Lista em árvore</string>
@@ -2129,4 +2129,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="show_free_version_banner">Mostrar propaganda da versão gratuita</string>
     <string name="downloads_left_template">Falta descarregar %1$s</string>
     <string name="roads">Estradas</string>
+    <string name="current_track">Faixa atual</string>
+    <string name="map_widget_battery">Nível de bateria</string>
+    <string name="change_markers_position">Alterar posição do marcador</string>
+    <string name="move_marker_bottom_sheet_title">Mova o mapa para alterar a posição do marcador</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">Siga-nos</string>
     </resources>
