@@ -203,8 +203,8 @@
     <string name="preferred_locale">Lingua interfaccia</string>
 
 
-    <string name="unit_of_length_descr">Cambia le unità di misura per lunghezza e velocità</string>
-    <string name="unit_of_length">Unità di misura</string>
+    <string name="unit_of_length_descr">Cambia le unità di misura di lunghezza</string>
+    <string name="unit_of_length">Unità di misura di lunghezza</string>
     <string name="si_mi_foots">Miglia/piede</string>
     <string name="si_mi_yard">Miglia/iarde</string>
     <string name="si_km_m">Chilometri/metri</string>
@@ -806,7 +806,7 @@
     <string name="continue_follow_previous_route_auto">La precedente navigazione non è stata completata. Continuare a seguirla? (%1$s secondi)</string>
 
 
-    <string name="show_cameras">Visualizza autovelox</string>
+    <string name="show_cameras">Autovelox</string>
     <string name="show_traffic_warnings">Visualizza limiti di velocità</string>
     <string name="avoid_toll_roads">Evita strade a pedaggio</string>
 
@@ -848,12 +848,12 @@
 
 
     <string name="layer_map_appearance">Configura lo schermo</string>
-    <string name="show_lanes">Visualizza le corsie</string>
+    <string name="show_lanes">Corsie</string>
     <string name="avoid_unpaved">Evita le strade non asfaltate</string>
     <string name="avoid_ferries">Evita i traghetti</string>
     <string name="avoid_in_routing_title">﻿Evita…</string>
     <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti</string>
-    <string name="show_warnings_title">Visualizza avvertimenti…</string>
+    <string name="show_warnings_title">Mostra avvisi…</string>
     <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori), avvisi autovelox e indicazioni di corsia</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
     <string name="map_widget_show_ruler">Scala grafica</string>
@@ -1601,8 +1601,8 @@
     <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9</string>
     <string name="traffic_warning_railways">Passaggio a livello</string>
     <string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
-    <string name="show_railway_warnings">Mostra i passaggi a livello</string>
-    <string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
+    <string name="show_railway_warnings">Passaggi a livello</string>
+    <string name="show_pedestrian_warnings">Attraversamenti pedonali</string>
     <string name="speak_pedestrian">Attraversamenti pedonali</string>
 
     <string name="navigation_over_track">Iniziare la navigazione sulla traccia?</string>
@@ -1829,7 +1829,7 @@
     <string name="local_recordings_delete_all_confirm">Stai per cancellare %1$d nota/e. Sei sicuro?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="lang_es_ar">Spagnolo (Argentino)</string>
-    <string name="lang_nb">Norvegese Bokmål</string>
+    <string name="lang_nb">Norvegese (Bokmål)</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thailandese</string>
     <string name="lang_te">Telugu</string>
@@ -1943,7 +1943,7 @@
     <string name="shared_string_navigation">Navigazione</string>
     <string name="osmand_running_in_background">Esecuzione in backgroung</string>
     <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità</string>
-    <string name="default_speed_system">Misurazione della velocità</string>
+    <string name="default_speed_system">Unità di misura della velocità</string>
     <string name="nm">NM</string>
     <string name="si_nm">Miglia nautiche</string>
     <string name="si_kmh">Chilometri all\'ora</string>
@@ -2226,9 +2226,9 @@
     <string name="number_of_gpx_files_selected_pattern">%s file GPX selezionati</string>
     <string name="access_default_color">Colore preimpostato</string>
     <string name="access_category_choice">Scegli la categoria</string>
-    <string name="access_hint_enter_name">Immetti il nome</string>
-    <string name="access_hint_enter_category">Immetti la categoria</string>
-    <string name="access_hint_enter_description">Immetti la descrizione</string>
+    <string name="access_hint_enter_name">Inserisci il nome</string>
+    <string name="access_hint_enter_category">Inserisci la categoria</string>
+    <string name="access_hint_enter_description">Inserisci la descrizione</string>
     <string name="access_map_linked_to_location">La mappa è collegata alla località</string>
     <string name="access_collapsed_list">Lista raggruppata</string>
     <string name="access_expanded_list">Lista espansa</string>
@@ -2254,13 +2254,16 @@
     <string name="follow_us">Seguici</string>
     <string name="access_direction_audio_feedback">Feedback sonoro di direzione</string>
     <string name="access_direction_audio_feedback_descr">Indica la direzione di destinazione con il suono</string>
-    <string name="access_direction_haptic_feedback">Feedback aptico della direzione</string>
+    <string name="access_direction_haptic_feedback">Feedback tattile di direzione</string>
     <string name="access_direction_haptic_feedback_descr">Indica la direzione di destinazione con la vibrazione</string>
     <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OSM Live (Beta)</string>
 	<string name="use_osm_live_routing">Navigazione OSM Live</string>
     <string name="map_widget_battery">Carica batteria</string>
     <string name="lang_hu_formal">Ungherese (formale)</string>
-    <string name="current_track">Traccia corrente</string>
+    <string name="current_track">Tracciato attuale</string>
     <string name="change_markers_position">Cambia la posizione del marcatore</string>
     <string name="lang_es_us">Spagnolo (Americano)</string>
+    <string name="lang_ast">Asturiano</string>
+    <string name="lang_en_gb">Inglese (Regno Unito)</string>
+    <string name="lang_kn">Kannada</string>
     </resources>
