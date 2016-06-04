@@ -2120,7 +2120,7 @@
     <string name="download_files_question_space_with_temp">Ali res želite prejeti datoteke {0}? Prejem zahteva {3} MB začasnega pomnilnika in {1} MB trajnega prostora na napravi. Trenutno je na voljo {2} MB.</string>
     <string name="upload_osm_note_description">Opombo OSM je mogoče poslati brezimno, v kolikor uporabljate profil OpenStreetMap.org.</string>
     <string name="upload_osm_note">Pošlji Opombo OSM</string>
-    <string name="upload_anonymously">Pošlji brezimno</string>
+    <string name="upload_anonymously">Pošlji anonimno</string>
 <string name="show_transparency_seekbar">Pokaži prosojno iskalno vrstico</string>
     <string name="donations">Donacije</string>
     <string name="osm_live_subscribe_btn">Naročanje</string>
@@ -2160,7 +2160,7 @@
     <string name="no_waypoints_found">Ni vmesnih točk</string>
     <string name="release_2_3">" • Uporabljajte OSM v živo. Pridobite si možnost urnih posodobitev zemljevidov. S podporo razvijalcem in skupnosti si pridobite dostop do trenutnih podatkov.\n\n • Z oznakami zemljevidov je mogoča enostavna izbira mest na zemljevidu.\n\n • Zemljevidi OSM so opremljeni s specifičnimi oznakami cest, dodani so tudi drugi podatki.\n\n • Uvedene so izboljšave uporabniške izkušnje pri pripravi poti potovanj.
 \n\n • Omogočene so različne posodobitve vsebinskega menija, kot je vsebinsko iskanje naslova.\n\n • Še in še in še ... "</string>
-    <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta. Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to odlične način za začetek sodelovanja.</string>
+    <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta. Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to dober način za začetek sodelovanja.</string>
     
     <string name="rendering_value_thin_name">Tanko</string>
     <string name="rendering_value_medium_name">Srednje</string>
@@ -2190,7 +2190,7 @@
     <string name="map_mode">Način zemljevida</string>
     <string name="number_of_gpx_files_selected_pattern">%s izbranih datotek GPX</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" Zemljevidi in navigacija OsmAnd - iskanje točk in preračunavanje poti v načinu brez povezave\nPripravite si zemljevide neznanih krajev, ki so na vaši poti.\n\nOsnovne zmožnosti:\n• na voljo so podrobni zemljevidi več kot 200 držav,\n• podprta je navigacija brez povezave z glasovnim vodenjem,\n• mogoče je iskanje naslovov v načinu brez povezave,\n• na voljo je izpis podrobnosti točk na zemljevidu: točke POI, gostilne, parkirišča trgovine in drugo,\n• omogočeno je dodajanje mest med priljubljene točke,\n• vmesnik je prilagojen voznikom avtomobilov in koles, pa tudi pohodnikom in drugim popotnikom.\n\nDodatne možnosti:\n• program podpira beleženje in pregledovanja sledi GPX,\n• prikazani so opisi točk, ki so zbrani na Wikipediji.\n• omogočeno je dodajanje slik, zvoka in videa k opombam zemljevida,\n• podprt je dnevno-nočni način prikaza zemljevida,\n• na voljo so podatki o javnem prevozu, poteh in postajališčih.\n\n• na voljo so natančne kolesarske in gorske poti ter\n• turistične pohodne poti po vsem svetu,\n• podprti so številni viri spletnih zemljevidov,\n• omogočeno je obveščanje o kakovosti podlage poti in javni razsvetljavi,\n• omogočeno je dodajanje, urejanje in brisanje točk POI (za uporabnike spletišča OpenStreetMap.org)\n• vstavek OsMo - sledenje prijavljenih naprav v Franciji, Nemčiji, Mehiki, Združenem kraljestvu, Španiji, Nizozemskem, ZDA, Rusiji, Braziliji in tudi drugod.\n\nVstavki:\n• prikaz izohips in senčenje terena je dodan v osnovni pogled https://goo.gl/7mojP8,\n• smučarski zemljevidi za urejena in prosta smučišča s podatki o žičnicah, namestitvah in drugih značilnostih https://goo.gl/pX6DxJ,\n• navtični zemljevidi s podatki o znakih in pravilih https://goo.gl/0hEdxm\n• Pomnjenje položaja parkiranja in obveščanje o dovoljenem času uporabe parkirišča oziroma parkirne ure https://goo.gl/6JxQXF.\n\nOstanite v stiku!\nTwitter: https://twitter.com/osmandapp\nFacebook: https://www.facebook.com/osmandapp\nSpletna stran: http://osmand.net\n\nV kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skupino za podporo prek elektronskega naslova support@osmand.net. "</string>
-    <string name="map_widget_bearing">Relativna mer</string>
+    <string name="map_widget_bearing">Relativna smer</string>
     <string name="access_no_destination">Lokacija še ni zaznana</string>
     <string name="map_widget_magnetic_bearing">Smer po magnetnem polju</string>
     <string name="use_osm_live_routing_description">Omogoči navigacijo za spremembe OSM v živo (beta)</string>
@@ -2210,4 +2210,5 @@
     <string name="lang_en_gb">Angleščina (Združeno kraljestvo)</string>
     <string name="lang_be_BY">Beloruščina (latinica)</string>
     <string name="lang_kn">Kanada</string>
+    <string name="lang_ast">Asturijski</string>
     </resources>
