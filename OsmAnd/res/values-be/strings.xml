@@ -251,7 +251,7 @@
 	<string name="poi_filter_food_shop">Прадуктовая крама</string>
 	<string name="poi_filter_for_tourists">Для турыстаў</string>
 	<string name="poi_filter_fuel">Паліва</string>
-	<string name="show_warnings_title">Папярэджваць…</string>
+	<string name="show_warnings_title">Паказваць папярэджваньні…</string>
 	<string name="show_warnings_descr">Наладзіць папярэджаньні руху (абмежаваньні хуткасьці, вымушаныя прыпынкі, штучныя няроўнасьці), камэры хуткасьці, інфармацыю па палосах</string>
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
@@ -282,7 +282,7 @@
 	
 	
 	<string name="layer_map_appearance">Сканфігураваць экран</string>
-	<string name="show_lanes">Паказваць палосы руху</string>
+	<string name="show_lanes">Палосы руху</string>
 	<string name="avoid_unpaved">Пазьбягаць дарог без пакрыцьця</string>
 	<string name="avoid_ferries">Пазьбягаць паромаў</string>
 	<string name="avoid_in_routing_title">Пазьбягаць…</string>
@@ -706,8 +706,8 @@
 	
 	
 	
-	<string name="unit_of_length_descr">Зьмяніць адзінкі адлегласьці й хуткасьці</string>
-	<string name="unit_of_length">Адзінкі вымярэньня</string>
+	<string name="unit_of_length_descr">Зьмяніць адзінкі адлегласьці</string>
+	<string name="unit_of_length">Адзінка вымярэньня адлегласьці</string>
 	<string name="si_mi_foots">Мілі/футы</string>
 	<string name="si_mi_yard">Мілі/ярды</string>
 	<string name="si_km_m">Кілямэтры/мэтры</string>
@@ -1568,10 +1568,10 @@
     <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць правілы маршрутызацыі ўведзеныя ў v1.9</string>
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
-    <string name="show_pedestrian_warnings">Паказваць пешаходныя пераходы</string>
+    <string name="show_pedestrian_warnings">Пешаходныя пераходы</string>
     <string name="traffic_warning_pedestrian">Пешаходны пераход</string>
 	<string name="traffic_warning_railways">Чыгуначны пераезд</string>
-	<string name="show_railway_warnings">Паказваць чыгуначныя пераезды</string>
+	<string name="show_railway_warnings">Чыгуначныя пераезды</string>
 	<string name="speak_pedestrian">Пешаходныя пераходы</string>
     
 	<string name="save_track_to_gpx_globally_headline">Запіс сьледу па запатрабаваньні</string>
@@ -1910,8 +1910,8 @@
     <string name="osmand_running_in_background">Працуе ў фоне</string>
     <string name="favorite_category_add_new">Дадаць новую</string>
     <string name="favorite_category_select">Абраць катэгорыю</string>
-    <string name="default_speed_system_descr">Вызначыць сыстэму вымярэньня хуткасьці</string>
-    <string name="default_speed_system">Вымярэньне хуткасьці</string>
+    <string name="default_speed_system_descr">Вызначыць адзінку вымярэньня хуткасьці</string>
+    <string name="default_speed_system">Адзінка вымярэньня хуткасьці</string>
     <string name="nm">м.мілі</string>
     <string name="si_nm">Марскія мілі</string>
     <string name="si_kmh">Кілямэтраў за гадзіну</string>
@@ -2220,4 +2220,5 @@
     <string name="current_track">Бягучы шлях</string>
     <string name="lang_kn">канада (Індыя)</string>
     <string name="use_osm_live_routing_description">Уключыць навігацыю для зьмен OSM Live (Beta)</string>
-	</resources>
+	<string name="lang_ast">Астурыйская</string>
+    </resources>
