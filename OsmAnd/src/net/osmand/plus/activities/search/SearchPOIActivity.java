@@ -179,7 +179,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 			}
 		}
-		updateButtonState();
+		updateButtonState(false);
 		return true;
 	}
 
@@ -296,7 +296,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	protected void onResume() {
 		super.onResume();
-		updateButtonState();
+		updateButtonState(false);
 		if (filter != null) {
 			String text = filter.getFilterByName() != null ? filter.getFilterByName() : "";
 			searchFilter.setText(text);
@@ -325,7 +325,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			filter.setFilterByName(queue.toString());
 			runNewSearchQuery(location, SEARCH_AGAIN);
 		}
-		updateButtonState();
+		updateButtonState(false);
 	}
 	
 
@@ -417,7 +417,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 	}
 
-	private void updateButtonState() {
+	private void updateButtonState(boolean next) {
 		if (showFilterItem != null) {
 			showFilterItem.setVisible(filter != null && !isNameSearch());
 		}
@@ -430,7 +430,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if(filter instanceof NominatimPoiFilter && !((NominatimPoiFilter) filter).isPlacesQuery()) {
 				// nothing to add
 			} else {
-				name += " " + filter.getSearchArea();
+				name += " " + filter.getSearchArea(next);
 			}
 			getSupportActionBar().setTitle(name);
 		}
@@ -497,7 +497,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			final int top = (v == null) ? 0 : v.getTop();
 			amenityAdapter.notifyDataSetChanged();
 			lv.setSelectionFromTop(index, top);
-			updateButtonState();
+			updateButtonState(false);
 			navigationInfo.updateLocation(location);
 		}
 
@@ -615,6 +615,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					updateExisting.add(getAmenityId(a));
 				}
 			}
+			updateButtonState(requestType == SEARCH_FURTHER);
 		}
 
 		private long getAmenityId(Amenity a) {
@@ -625,7 +626,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		protected void onPostExecute(List<Amenity> result) {
 			setSupportProgressBarIndeterminateVisibility(false);
 			currentSearchTask = null;
-			updateButtonState();
+			updateButtonState(false);
 			if (isNameSearch()) {
 				if (isNominatimFilter() && !Algorithms.isEmpty(((NominatimPoiFilter) filter).getLastError())) {
 					Toast.makeText(SearchPOIActivity.this, ((NominatimPoiFilter) filter).getLastError(),
