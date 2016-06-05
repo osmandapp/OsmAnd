@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -382,6 +383,25 @@ public class BinaryMapIndexReader {
 
 	public File getFile() {
 		return file;
+	}
+
+	private List<String> getCountryAndRegionNames() {
+		return new ArrayList<>(Arrays.asList(getRegionNames().get(0).split("_")));
+	}
+
+	public String getCountryName() {
+		return getCountryAndRegionNames().get(0);
+	}
+
+	private String getRegionName() {
+		List<String> names = getCountryAndRegionNames();
+		if (names.size() >= 2) {
+			String region = names.get(1);
+			region = region.substring(0, 1).toUpperCase() + region.substring(1);
+			return region;
+		} else {
+			return null;
+		}
 	}
 
 	public int readByte() throws IOException {
@@ -1278,7 +1298,7 @@ public class BinaryMapIndexReader {
 		return dataObject;
 	}
 
-	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, int[] typeFilter) throws IOException {
+	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();
 		}

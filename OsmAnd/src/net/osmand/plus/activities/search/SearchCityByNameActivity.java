@@ -124,7 +124,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	protected void filterLoop(String query, Collection<City> list) {
 		redefineSearchVillagesMode(query.length());
-		if (!initializeTaskIsFinished() || (query.length() <= 3 && !searchVillages())) {
+		if (!initializeTaskIsFinished() || !isVillagesSearchEnabled()) {
 			super.filterLoop(query, list);
 		} else {
 			region.fillWithSuggestedCities(query, new ResultMatcher<City>() {
@@ -139,19 +139,19 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 					msg.sendToTarget();
 					return true;
 				}
-			}, searchVillages(), locationToSearch);
+			}, isVillagesSearchEnabled(), locationToSearch);
 		}
 	}
 
 
-	private boolean searchVillages() {
+	private boolean isVillagesSearchEnabled() {
 		return searchVillagesMode >= 0;
 	}
 
 	private void redefineSearchVillagesMode(int queryLen) {
 		if (searchVillagesMode == 1) {
 			searchVillagesMode = 0;
-		} else if (searchVillagesMode == 0 && queryLen <= 3 && !initialListToFilter.isEmpty()) {
+		} else if (searchVillagesMode == 0 && !initialListToFilter.isEmpty() && queryLen == 0) {
 			searchVillagesMode = -1;
 			uiHandler.post(new Runnable() {
 				@Override
@@ -166,8 +166,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	public String getText(City obj) {
 		LatLon l = obj.getLocation();
-		if (getCurrentFilter().length() > 2) {
-			String name = getShortText(obj);
+		String name = getShortText(obj);
+		if (isVillagesSearchEnabled()) {
 			if (obj.getClosestCity() != null) {
 				name += " - " + obj.getClosestCity().getName(region.getLang());
 				LatLon loc = obj.getClosestCity().getLocation();
@@ -180,10 +180,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 					name += " - " + OsmAndFormatter.toPublicString(obj.getType(), getMyApplication());
 				}
 			}
-			return name;
-		} else {
-			return getShortText(obj);
 		}
+		return name;
 	}
 
 	@Override

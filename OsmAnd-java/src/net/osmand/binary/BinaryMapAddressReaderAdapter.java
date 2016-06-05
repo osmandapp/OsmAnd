@@ -1,9 +1,12 @@
 package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.TIntSet;
+import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,7 +43,7 @@ public class BinaryMapAddressReaderAdapter {
 	public final static int STREET_TYPE = 4;
 	
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapAddressReaderAdapter.class);
-	public final static int[] TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE };
+	public final static List<Integer> TYPES = Arrays.asList(CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE);
 	public final static int[] CITY_TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE };
 	
 	public static class AddressRegion extends BinaryIndexPart {
@@ -240,15 +243,15 @@ public class BinaryMapAddressReaderAdapter {
 			case 0:
 				if(matcher != null) {
 					boolean matches = matcher.matches(c.getName());
-					if(!matches) {
+					if (!matches) {
 						for(String n : c.getAllNames()) {
 							matches = matcher.matches(n);
-							if(matches) {
+							if (matches) {
 								break;
 							}
 						}
 					}
-					if(!matches ) {
+					if (!matches ) {
 						return null;
 					}
 				}
@@ -536,9 +539,9 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
-	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, int[] typeFilter) throws IOException {
+	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
 		TIntArrayList loffsets = new TIntArrayList();
-		CollatorStringMatcher matcher = new CollatorStringMatcher( req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		CollatorStringMatcher matcher = new CollatorStringMatcher(req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		long time = System.currentTimeMillis();
 		int indexOffset = 0;
 		while (true) {
@@ -593,13 +596,13 @@ public class BinaryMapAddressReaderAdapter {
 					}
 				}
 				if (typeFilter == null) {
-					typeFilter = new int[] { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE };
+					typeFilter = TYPES;
 				}
-				for (int i = 0; i < typeFilter.length && !req.isCancelled(); i++) {
-					TIntArrayList list = refs[typeFilter[i]];
-					if (typeFilter[i] == STREET_TYPE) {
+				for (int i = 0; i < typeFilter.size() && !req.isCancelled(); i++) {
+					TIntArrayList list = refs[typeFilter.get(i)];
+					if (typeFilter.get(i) == STREET_TYPE) {
 						for (int j = 0; j < list.size() && !req.isCancelled(); j += 2) {
-							City obj = null;
+							City obj;
 							{
 								codedIS.seek(list.get(j + 1));
 								int len = codedIS.readRawVarint32();
@@ -618,10 +621,10 @@ public class BinaryMapAddressReaderAdapter {
 										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
 												reg.attributeTagsTable);
 								boolean matches = matcher.matches(s.getName());
-								if(!matches) {
-									for(String n : s.getAllNames()) {
+								if (!matches) {
+									for (String n : s.getAllNames()) {
 										matches = matcher.matches(n);
-										if(matches) {
+										if (matches) {
 											break;
 										}
 									}
@@ -634,13 +637,16 @@ public class BinaryMapAddressReaderAdapter {
 						}
 					} else {
 						list.sort();
+						TIntSet published = new TIntHashSet();
 						for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
-							codedIS.seek(list.get(j));
+							int offset = list.get(j);
+							codedIS.seek(offset);
 							int len = codedIS.readRawVarint32();
 							int old = codedIS.pushLimit(len);
 							City obj = readCityHeader(matcher, list.get(j), reg.attributeTagsTable);
-							if (obj != null) {
+							if (obj != null && !published.contains(offset)) {
 								req.publish(obj);
+								published.add(offset);
 							}
 							codedIS.popLimit(old);
 						}

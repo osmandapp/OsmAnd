@@ -373,10 +373,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	protected void filterLoop(String query, Collection<T> list) {
 		for (T obj : list) {
-			if(namesFilter.isCancelled){
+			if (namesFilter.isCancelled){
 				break;
 			}
-			if(filterObject(obj, query)){
+			if (filterObject(obj, query)){
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 				msg.sendToTarget();
 			}
@@ -411,6 +411,12 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 			}
 		}
+
+//		private void filterOutObjectsInAdapter(String currentFilter) {
+//			for (int i = 0; i < getListAdapter().getCount(); i++) {
+//				if (getListAdapter().getItem(i).)
+//			}
+//		}
 
 		private void addObjectToAdapter(String currentFilter, T obj) {
 			getListAdapter().add(obj);
