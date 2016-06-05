@@ -283,7 +283,7 @@
     <string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
     <string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) v Androide. Chcete ísť na Market pozrieť iný TTS? Inak bude použitý prednastavený TTS jazyk.</string>
     <string name="tts_missing_language_data_title">Chýbajúce údaje</string>
-    <string name="tts_missing_language_data">Nie sú nainštalované údaje pre zvolený jazyk. Chcete ich inštalovať z Marketu?</string>
+    <string name="tts_missing_language_data">Nie sú nainštalované údaje pre zvolený jazyk. Chcete ich inštalovať z Obchodu?</string>
     <string name="gpx_option_reverse_route">Obrátiť GPX smerovanie</string>
     <string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
     <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
@@ -493,7 +493,7 @@
     <string name="voice_data_not_supported">Nepodporovaná verzia hlasových údajov</string>
     <string name="voice_data_corrupted">Vybrané hlasové údaje sú poškodené</string>
     <string name="voice_data_unavailable">Aktuálne hlasové údaje nie sú dostupné</string>
-    <string name="sd_unmounted">SD karta nie je prístupná.\nNebudete schopný vidieť mapu alebo niečo nájsť.</string>
+    <string name="sd_unmounted">SD karta nie je prístupná.\nNebudete môcť vidieť mapu alebo niečo nájsť.</string>
     <string name="sd_mounted_ro">SD karta je iba na čítanie.\nMôžete iba vidieť prednačítanú mapu a nemôžete sťahovať z internetu.</string>
     <string name="unzipping_file">Rozbaľuje sa súbor…</string>
     <string name="route_tr">Odbočte doprava a pokračujte</string>
@@ -849,7 +849,7 @@
     <string name="recording_error">Vyskytla sa chyba pri nahrávaní </string>
     <string name="recording_camera_not_available">Fotoaparát nie je k dispozícii</string>
     <string name="recording_is_recorded">Zvuk/video sa zaznamenáva. Záznam môžete zastaviť stlačením stop tlačidla na widgete.</string>
-    <string name="recording_playing">Je prehrávaný zvuk zo zadaného záznamu.\n%1$s</string>
+    <string name="recording_playing">Prehráva sa zvuk zo zadaného záznamu.\n%1$s</string>
     <string name="recording_open_external_player">Otvoriť externý prehrávač</string>
     <string name="recording_delete_confirm">Chcete odstrániť tento záznam?</string>
     <string name="recording_unavailable">nedostupné</string>
