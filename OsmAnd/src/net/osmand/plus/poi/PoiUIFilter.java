@@ -55,7 +55,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	
 	protected final OsmandApplication app;
 	
-	protected int distanceInd = 1;
+	protected int distanceInd = 0;
 	// in kilometers
 	protected double[] distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500};
 	
