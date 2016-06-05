@@ -227,15 +227,16 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<>(cities.values());
-		List<Integer> cityTypes = (searchVillages ?
-				Arrays.asList(BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE, BinaryMapAddressReaderAdapter.VILLAGES_TYPE) :
-				Collections.singletonList(BinaryMapAddressReaderAdapter.VILLAGES_TYPE));
+		List<Integer> cityTypes = new ArrayList<>();
+		cityTypes.add(BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+		if (searchVillages) {
+			cityTypes.add(BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+			if (searchVillages && name.length() >= POSTCODE_MIN_QUERY_LENGTH) {
+				cityTypes.add(BinaryMapAddressReaderAdapter.POSTCODES_TYPE);
+			}
+		}
 		try {
 			citiesToFill.addAll(fillWithCities(name, resultMatcher, cityTypes));
-			if (searchVillages && name.length() >= POSTCODE_MIN_QUERY_LENGTH) {
-				String postcode = Postcode.normalize(name, file.getCountryName());
-				citiesToFill.addAll(fillWithCities(postcode, resultMatcher, Collections.singletonList(BinaryMapAddressReaderAdapter.POSTCODES_TYPE)));
-			}
 		} catch (IOException e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}
@@ -272,6 +273,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			return fileName.substring(0, fileName.indexOf('.'));
 		}
 		return fileName;
+	}
+
+	@Override
+	public String getCountryName() {
+		return file.getCountryName();
 	}
 
 	@Override

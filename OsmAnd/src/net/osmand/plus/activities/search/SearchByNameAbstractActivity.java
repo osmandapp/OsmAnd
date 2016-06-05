@@ -412,12 +412,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			}
 		}
 
-//		private void filterOutObjectsInAdapter(String currentFilter) {
-//			for (int i = 0; i < getListAdapter().getCount(); i++) {
-//				if (getListAdapter().getItem(i).)
-//			}
-//		}
-
 		private void addObjectToAdapter(String currentFilter, T obj) {
 			getListAdapter().add(obj);
 			if (currentFilter.length() > 0) {

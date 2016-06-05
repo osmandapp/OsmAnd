@@ -13,9 +13,11 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
+import net.osmand.StringMatcher;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
+import net.osmand.data.Postcode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -123,7 +125,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	protected void filterLoop(String query, Collection<City> list) {
-		redefineSearchVillagesMode(query.length());
+		redefineSearchVillagesMode(query);
 		if (!initializeTaskIsFinished() || !isVillagesSearchEnabled()) {
 			super.filterLoop(query, list);
 		} else {
@@ -148,15 +150,23 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		return searchVillagesMode >= 0;
 	}
 
-	private void redefineSearchVillagesMode(int queryLen) {
+	private void redefineSearchVillagesMode(String query) {
 		if (searchVillagesMode == 1) {
 			searchVillagesMode = 0;
-		} else if (searchVillagesMode == 0 && !initialListToFilter.isEmpty() && queryLen == 0) {
+		} else if (searchVillagesMode == 0 && !initialListToFilter.isEmpty() && query.isEmpty()) {
 			searchVillagesMode = -1;
 			uiHandler.post(new Runnable() {
 				@Override
 				public void run() {
 					searchVillages.setVisibility(View.VISIBLE);
+				}
+			});
+		} else if (searchVillagesMode == -1 && Postcode.looksLikePostcodeStart(query, region.getCountryName())) {
+			searchVillagesMode = 0;
+			uiHandler.post(new Runnable() {
+				@Override
+				public void run() {
+					searchVillages.setVisibility(View.GONE);
 				}
 			});
 		}
