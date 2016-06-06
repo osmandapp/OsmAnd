@@ -182,7 +182,7 @@ public class BinaryMapAddressReaderAdapter {
 					}
 				}
 				codedIS.popLimit(oldLimit);
-				if(resultMatcher != null && resultMatcher.isCancelled()){
+				if (resultMatcher != null && resultMatcher.isCancelled()) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
 				break;
@@ -233,7 +233,7 @@ public class BinaryMapAddressReaderAdapter {
 		int y = 0;
 		City c = null;
 		LinkedList<String> additionalTags = null;
-		while(true){
+		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
@@ -263,7 +263,7 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.CityIndex.ATTRIBUTETAGIDS_FIELD_NUMBER :
 				int tgid = codedIS.readUInt32();
 				if(additionalTags == null) {
-					additionalTags = new LinkedList<String>();
+					additionalTags = new LinkedList<>();
 				}
 				if(additionalTagsTable != null && tgid < additionalTagsTable.size()) {
 					additionalTags.add(additionalTagsTable.get(tgid));
@@ -577,15 +577,15 @@ public class BinaryMapAddressReaderAdapter {
 					do {
 						int st = codedIS.readTag();
 						stag = WireFormat.getTagFieldNumber(st);
-						if(stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
+						if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
 							int slen = codedIS.readRawVarint32();
 							int soldLim = codedIS.pushLimit(slen);
 							readAddressNameData(req, refs, fp);
 							codedIS.popLimit(soldLim);
-						} else if(stag != 0){
+						} else if (stag != 0){
 							skipUnknownField(st);
 						}
-					} while(stag != 0);
+					} while (stag != 0);
 					
 					codedIS.popLimit(oldLim);
 					if (req.isCancelled()) {
@@ -659,8 +659,8 @@ public class BinaryMapAddressReaderAdapter {
 
 	private void readAddressNameData(SearchRequest<MapObject> req, TIntArrayList[] refs, int fp) throws IOException {
 		TIntArrayList toAdd = null;
-		while(true){
-			if(req.isCancelled()){
+		while (true) {
+			if (req.isCancelled()){
 				return;
 			}
 			int t = codedIS.readTag();
@@ -675,12 +675,12 @@ public class BinaryMapAddressReaderAdapter {
 				codedIS.readString();
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOCITYINDEX_FIELD_NUMBER :
-				if(toAdd != null) {
+				if (toAdd != null) {
 					toAdd.add(fp - codedIS.readInt32());
 				}
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOINDEX_FIELD_NUMBER :
-				if(toAdd != null) {
+				if (toAdd != null) {
 					toAdd.add(fp - codedIS.readInt32());
 				}
 				break;

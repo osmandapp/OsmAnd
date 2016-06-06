@@ -127,9 +127,9 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	protected void filterLoop(String query, Collection<Street> list) {
 		if(searchWithCity == -1){
 			filter(query, list);
-		} else if(searchWithCity == 0){
+		} else if (searchWithCity == 0) {
 			for (Street obj : list) {
-				if(namesFilter.isCancelled){
+				if (namesFilter.isCancelled) {
 					break;
 				}
 				if(filterObject(obj, query)){
@@ -143,7 +143,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 				@Override
 				public boolean publish(MapObject object) {
 					if (object instanceof Street) {
-						if(city == null ||
+						if (city == null ||
 								MapUtils.getDistance(city.getLocation(), object.getLocation()) < 100*1000) {
 							Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, object);
 							msg.sendToTarget();

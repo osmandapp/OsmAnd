@@ -176,7 +176,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		});
 		selectAddress = getIntent() != null && getIntent().hasExtra(SELECT_ADDRESS);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-		if(initializeTask != null){
+		if (initializeTask != null){
 			initializeTask.execute();
 		}
 	}
@@ -286,8 +286,8 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	protected void addObjectToInitialList(T initial){
 		initialListToFilter.add(initial);
-		if(!namesFilter.active){
-			if(filterObject(initial, currentFilter)) {
+		if (!namesFilter.active) {
+			if (filterObject(initial, currentFilter)) {
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, initial);
 				msg.sendToTarget();
 			}
@@ -335,7 +335,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		return matches;
 	}
 	
-
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -394,7 +393,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		@Override
 		public void handleMessage(Message msg) {
 			String currentFilter = SearchByNameAbstractActivity.this.currentFilter;
-			if (msg.what == MESSAGE_CLEAR_LIST){
+			if (msg.what == MESSAGE_CLEAR_LIST) {
 				minimalIndex = Integer.MAX_VALUE;
 				minimalText = null;
 				getListAdapter().clear();
@@ -457,7 +456,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		protected FilterResults performFiltering(CharSequence constraint) {
 			isCancelled = false;
 			String query = constraint.toString();
-			if(query.equals(newFilter)){
+			if (query.equals(newFilter)) {
 				active = true;
 				startTime = System.currentTimeMillis();
 				uiHandler.sendEmptyMessage(MESSAGE_CLEAR_LIST);
@@ -466,7 +465,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				filterLoop(query, list);
 				active = false;
 			}
-			if(!isCancelled){
+			if (!isCancelled) {
 				return new FilterResults();
 			}
 			
