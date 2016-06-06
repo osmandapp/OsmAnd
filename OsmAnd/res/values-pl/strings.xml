@@ -155,8 +155,8 @@
 
     <string name="shared_string_next">Naprzód</string>
     <string name="shared_string_previous">Wstecz</string>
-    <string name="unit_of_length_descr">Zmienia jednostki długości i prędkości</string>
-    <string name="unit_of_length">Jednostki miar</string>
+    <string name="unit_of_length_descr">Zmienia jednostki długości</string>
+    <string name="unit_of_length">Jednostki długości</string>
     <string name="si_mi_foots">Mile/stopy</string>
     <string name="si_mi_yard">Mile/jardy</string>
     <string name="si_km_m">Kilometry/metry</string>
@@ -831,7 +831,7 @@
 
 
     <string name="show_cameras">Fotoradary</string>
-    <string name="show_traffic_warnings">Ostrzeżenia</string>
+    <string name="show_traffic_warnings">Ostrzeżenia drogowe</string>
     <string name="avoid_toll_roads">Omijanie płatnych dróg</string>
 
     <string name="map_widget_top_text">Ulica</string>
@@ -1497,8 +1497,8 @@
     <string name="lang_fa">Perski</string>
     <string name="lang_sc">Sardyński</string>
     <string name="lang_sr">Serbski</string>
-    <string name="lang_zh_CN">Chiński uproszczony</string>
-    <string name="lang_zh_TW">Chiński tradycyjny</string>
+    <string name="lang_zh_CN">Chiński (uproszczony)</string>
+    <string name="lang_zh_TW">Chiński (tradycyjny)</string>
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
     <string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Więcej…</string>
@@ -1630,7 +1630,7 @@
     <string name="voices">Komunikaty głosowe</string>
     <string name="traffic_warning_railways">Przejazd kolejowy</string>
     <string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
-    <string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
+    <string name="show_railway_warnings">Przejazdy kolejowe</string>
     <string name="show_pedestrian_warnings">Przejścia dla pieszych</string>
     <string name="speak_pedestrian">Omijanie przejść dla pieszych</string>
 
@@ -1807,16 +1807,16 @@
     <string name="lang_ta">tamilski</string>
     <string name="lang_lb">luksemburski</string>
     <string name="lang_os">osetyjski</string>
-    <string name="lang_es_ar">argentyński hiszpański</string>
-    <string name="lang_nb">norweski</string>
+    <string name="lang_es_ar">Hiszpański (Argentyna)</string>
+    <string name="lang_nb">Norweski (Bokmål)</string>
     <string name="disable_recording_once_app_killed">Zapobiegaj automatycznemu rejestrowaniu</string>
     <string name="lang_te">Telugu (Indyjski)</string>
     <string name="lang_ceb">cebuański</string>
     <string name="lang_new">newarski</string>
-    <string name="lang_vo">wolapikijski</string>
+    <string name="lang_vo">Wolapik</string>
     <string name="lang_bpy">bisznuprija-manipuri (indyjski)</string>
     <string name="lang_ml">drawidyjski</string>
-    <string name="lang_eo">międzynarodowy (Esperanto)</string>
+    <string name="lang_eo">Esperanto</string>
     <string name="rendering_attr_currentTrackColor_name">Kolor śladu GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Szerokość śladu GPX</string>
     <string name="rendering_value_red_name">Czerwony</string>
@@ -1897,8 +1897,8 @@
     <string name="roads">Drogi</string>
     <string name="favorite_category_add_new">Dodaj nową</string>
     <string name="favorite_category_select">Proszę wybrać kategorię</string>
-    <string name="default_speed_system_descr">Definiuje jednostki pomiaru prędkości</string>
-    <string name="default_speed_system">Pomiar prędkości</string>
+    <string name="default_speed_system_descr">Definiuje jednostki prędkości</string>
+    <string name="default_speed_system">Jednostki prędkości</string>
     <string name="si_nm">Mile morskie</string>
     <string name="nm">węzły</string>
     <string name="si_kmh">Kilometry na godzinę</string>
