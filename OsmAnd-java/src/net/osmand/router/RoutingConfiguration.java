@@ -113,11 +113,13 @@ public class RoutingConfiguration {
 			return impassableRoadLocations;
 		}
 		
-		public void addImpassableRoad(RouteDataObject route, Location location) {
+		public boolean addImpassableRoad(RouteDataObject route, Location location) {
 			if (!impassableRoadLocations.containsKey(route.id)){
 				impassableRoadLocations.put(route.id, location);
 				impassableRoads.add(route);
+				return true;
 			}
+			return false;
 		}
 		
 		
