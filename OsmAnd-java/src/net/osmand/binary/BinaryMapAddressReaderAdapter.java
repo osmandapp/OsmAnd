@@ -263,7 +263,7 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.CityIndex.ATTRIBUTETAGIDS_FIELD_NUMBER :
 				int tgid = codedIS.readUInt32();
 				if(additionalTags == null) {
-					additionalTags = new LinkedList<>();
+					additionalTags = new LinkedList<String>();
 				}
 				if(additionalTagsTable != null && tgid < additionalTagsTable.size()) {
 					additionalTags.add(additionalTagsTable.get(tgid));
