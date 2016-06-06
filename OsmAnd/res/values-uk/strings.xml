@@ -363,8 +363,8 @@
   
   <string name="shared_string_next">Наступний</string>
   <string name="shared_string_previous">Попередній</string>
-  <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини і швидкості</string>
-  <string name="unit_of_length">Одиниці вимірювання</string>
+  <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини</string>
+  <string name="unit_of_length">Одиниці вимірювання довжини</string>
   <string name="si_mi_foots">Милі/фути</string>
   <string name="si_mi_yard">Милі/ярди</string>
   <string name="si_km_m">Кілометри/метри</string>
@@ -855,8 +855,8 @@
   
   
   
-  <string name="show_cameras">Відображати камери контролю швидкості</string>
-  <string name="show_traffic_warnings">Показувати обмеження швидкості</string>
+  <string name="show_cameras">Камери контролю швидкості</string>
+  <string name="show_traffic_warnings">Обмеження швидкості</string>
   <string name="avoid_toll_roads">Платні дороги</string>
   
   <string name="map_widget_top_text">Назва вулиці</string>
@@ -1041,7 +1041,7 @@
 	<string name="map_widget_vector_attributes">Налаштування візуалізації</string>
 	<string name="map_widget_renderer">Стиль мапи</string>
 	<string name="layer_map_appearance">Налаштування екрану</string>
-	<string name="show_lanes">Відображати смуги руху</string>
+	<string name="show_lanes">Смуги руху</string>
 	<string name="avoid_unpaved">Уникати польових доріг</string>
 	<string name="avoid_ferries">Уникати поромів</string>
 	<string name="avoid_in_routing_title">Уникати…</string>
@@ -1432,7 +1432,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
     <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
-    <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
+    <string name="rendering_attr_showAccess_name">Показати обмеження доступу та збір</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показати тип покриття</string>
     <string name="rendering_attr_showCycleRoutes_name">Показати веломаршрути</string>
@@ -1577,8 +1577,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="lang_ar">Арабська</string>
 	<string name="lang_sc">Сардинська</string>
 	<string name="lang_sr">Сербська</string>
-	<string name="lang_zh_CN">Китайська спрощена</string>
-	<string name="lang_zh_TW">Китайська традиційна</string>
+	<string name="lang_zh_CN">Китайська (спрощена)</string>
+	<string name="lang_zh_TW">Китайська (традиційна)</string>
 	<string name="lang_vi">В’єтнамська</string>
 	<string name="lang_cy">Валлійська</string>
 	<string name="index_name_canada">Північна Америка - Канада</string>
@@ -1818,8 +1818,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_germanRoadAtlas_name">Атлас доріг Німеччини</string>
 	<string name="traffic_warning_railways">Залізничний переїзд</string>
 	<string name="traffic_warning_pedestrian">Пішохідний перехід</string>
-	<string name="show_railway_warnings">Показувати залізничні переїзди</string>
-	<string name="show_pedestrian_warnings">Показувати пішохідні переходи</string>
+	<string name="show_railway_warnings">Залізничні переїзди</string>
+	<string name="show_pedestrian_warnings">Пішохідні переходи</string>
     <string name="rendering_value_americanRoadAtlas_name">Атлас доріг Америки</string>
     <string name="routing_attr_no_new_routing_description">Не використовувати для побудови маршруту алгоритм представлений у версії 1.9</string>
     <string name="dash_download_msg_none">Ви бажаєте завантажити оффлайн мапи?</string>
@@ -1985,8 +1985,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="lang_lb">Люксембурзька</string>
     <string name="lang_os">Осетинський</string>
     <string name="lang_eo">Есперанто</string>
-    <string name="lang_es_ar">Аргентинська Іспанська</string>
-    <string name="lang_nb">Норвезька (букмол)</string>
+    <string name="lang_es_ar">Іспанська (Аргентинська)</string>
+    <string name="lang_nb">Норвезька (Букмол)</string>
     <string name="lang_vo">Волапюк</string>
     <string name="lang_th">Тайська</string>
     <string name="lang_te">Телугу</string>
@@ -2384,4 +2384,11 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="map_widget_battery">Заряд батареї</string>
     <string name="move_marker_bottom_sheet_title">Пересуньте мапу, щоб змінити положення позначки</string>
     <string name="lat_lon_pattern">Шир: %1$.6f Дов: %2$.6f</string>
+    <string name="current_track">Поточний шлях</string>
+    <string name="change_markers_position">Змінити позицію вказівника</string>
+    <string name="lang_es_us">Іспанська (американська)</string>
+    <string name="lang_ast">Астурійська</string>
+    <string name="lang_en_gb">Англійська (Сполучене Королівство)</string>
+    <string name="lang_be_BY">Білоруська (Латинка)</string>
+    <string name="lang_kn">Каннада</string>
     </resources>
