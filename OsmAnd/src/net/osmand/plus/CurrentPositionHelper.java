@@ -86,7 +86,6 @@ public class CurrentPositionHelper {
 					return null;
 				}
 			}.execute((Void) null);
-
 			res = true;
 		}
 		return res;
