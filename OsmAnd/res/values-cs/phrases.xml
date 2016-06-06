@@ -1382,8 +1382,8 @@
 	<string name="poi_cypress">Cypřiš</string>
 	<string name="poi_bench_yes">S lavičkou</string>
 	<string name="poi_bench_no">Bez lavičky</string>
-	<string name="poi_waste_basket_yes">S odpadkovým košem</string>
-	<string name="poi_waste_basket_no">Bez odpadkového koše</string>
+	<string name="poi_bin_yes">S odpadkovým košem</string>
+	<string name="poi_bin_no">Bez odpadkového koše</string>
 
 	<string name="poi_shelter_type_public_transport">Přístřešek pro: hromadnou dopravu</string>
 	<string name="poi_shelter_type_picnic_shelter">Přístřešek pro: piknik</string>

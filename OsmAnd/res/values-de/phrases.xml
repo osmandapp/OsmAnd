@@ -1165,8 +1165,8 @@
 	<string name="poi_cypress">Zypresse</string>
 	<string name="poi_bench_yes">mit Sitzbank</string>
 	<string name="poi_bench_no">Ohne Sitzbank</string>
-	<string name="poi_waste_basket_yes">mit Abfalleimer</string>
-	<string name="poi_waste_basket_no">ohne Abfalleimer</string>
+	<string name="poi_bin_yes">mit Abfalleimer</string>
+	<string name="poi_bin_no">ohne Abfalleimer</string>
 
 	<string name="poi_internet_access_type_wlan">Internetzugang: WLAN</string>
 	<string name="poi_internet_access_type_terminal">Internetzugang: Arbeitsplatz</string>

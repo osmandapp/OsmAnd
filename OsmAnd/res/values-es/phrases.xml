@@ -1798,8 +1798,8 @@
 
 	<string name="poi_bench_yes">Con asientos</string>
 	<string name="poi_bench_no">Sin asientos</string>
-	<string name="poi_waste_basket_yes">Con cesto de basura</string>
-	<string name="poi_waste_basket_no">Sin cesto de basura</string>
+	<string name="poi_bin_yes">Con cesto de basura</string>
+	<string name="poi_bin_no">Sin cesto de basura</string>
 
 	<string name="poi_shelter_type_public_transport">Refugio para transporte público</string>
 	<string name="poi_shelter_type_picnic_shelter">Refugio para campamentos</string>

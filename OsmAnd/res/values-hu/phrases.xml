@@ -1385,8 +1385,8 @@
 
 	<string name="poi_bench_yes">Paddal</string>
 	<string name="poi_bench_no">Pad nélkül</string>
-	<string name="poi_waste_basket_yes">Szemetessel</string>
-	<string name="poi_waste_basket_no">Szemetes nélkül</string>
+	<string name="poi_bin_yes">Szemetessel</string>
+	<string name="poi_bin_no">Szemetes nélkül</string>
 
 	<string name="poi_resource_antimony">Antimon</string>
 	<string name="poi_resource_asbestos">Azbeszt</string>

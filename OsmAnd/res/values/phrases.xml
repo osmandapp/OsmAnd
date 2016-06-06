@@ -1782,8 +1782,8 @@
 
 	<string name="poi_bench_yes">With bench</string>
 	<string name="poi_bench_no">Without bench</string>
-	<string name="poi_waste_basket_yes">With basket</string>
-	<string name="poi_waste_basket_no">Without basket</string>
+	<string name="poi_bin_yes">With basket</string>
+	<string name="poi_bin_no">Without basket</string>
 
 	<string name="poi_shelter_type_public_transport">Shelter type: public transport</string>
 	<string name="poi_shelter_type_picnic_shelter">Shelter type: picnic shelter</string>

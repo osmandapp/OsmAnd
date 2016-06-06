@@ -1784,8 +1784,8 @@
 	<string name="poi_cypress">Cipreste</string>
 	<string name="poi_bench_yes">Com assento</string>
 	<string name="poi_bench_no">Sem assento</string>
-	<string name="poi_waste_basket_yes">Com lixeira</string>
-	<string name="poi_waste_basket_no">Sem lixeira</string>
+	<string name="poi_bin_yes">Com lixeira</string>
+	<string name="poi_bin_no">Sem lixeira</string>
 
 	<string name="poi_shelter_type_public_transport">Tipo de abrigo: transporte público</string>
 	<string name="poi_shelter_type_picnic_shelter">Tipo de abrigo: abrigo de piquenique</string>
