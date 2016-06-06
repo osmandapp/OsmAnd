@@ -1694,4 +1694,6 @@
     <string name="faq_item_description">Oftaj demandoj</string>
     <string name="dahboard_options_dialog_title">Agordi stirpanelon</string>
 
+    <string name="get_directions">Navigado</string>
+    <string name="layer_map">Map-fontoj…</string>
     </resources>
