@@ -18,7 +18,9 @@ import net.osmand.util.MapUtils;
 public interface RegionAddressRepository {
 	
 	public String getName();
-	
+
+	public String getCountryName();
+
 	public String getFileName() ;
 	
 	public String getLang();

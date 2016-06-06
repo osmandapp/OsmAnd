@@ -1,9 +1,12 @@
 package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.TIntSet;
+import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +25,7 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.Postcode;
 import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
@@ -40,7 +44,7 @@ public class BinaryMapAddressReaderAdapter {
 	public final static int STREET_TYPE = 4;
 	
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapAddressReaderAdapter.class);
-	public final static int[] TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE };
+	public final static List<Integer> TYPES = Arrays.asList(CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE);
 	public final static int[] CITY_TYPES = { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE };
 	
 	public static class AddressRegion extends BinaryIndexPart {
@@ -175,8 +179,8 @@ public class BinaryMapAddressReaderAdapter {
 				int fp = codedIS.getTotalBytesRead();
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
-				City c = readCityHeader(matcher, fp, additionalTagsTable);
-				if(c != null){
+				City c = readCityHeader(new DefaultCityMatcher(matcher), fp, additionalTagsTable);
+				if (c != null) {
 					if (resultMatcher == null || resultMatcher.publish(c)) {
 						cities.add(c);
 					}
@@ -227,8 +231,37 @@ public class BinaryMapAddressReaderAdapter {
 			}
 		}
 	}
+
+	interface CityMatcher {
+		boolean matches(City city);
+	}
+
+	private class DefaultCityMatcher implements CityMatcher {
+		private StringMatcher stringMatcher = null;
+
+		DefaultCityMatcher(StringMatcher stringMatcher) {
+			this.stringMatcher = stringMatcher;
+		}
+
+		@Override
+		public boolean matches(City city) {
+			if (stringMatcher == null) {
+				return true;
+			}
+			boolean matches = stringMatcher.matches(city.getName());
+			if (!matches) {
+				for (String n : city.getAllNames()) {
+					matches = stringMatcher.matches(n);
+					if (matches) {
+						break;
+					}
+				}
+			}
+			return matches;
+		}
+	}
 	
-	protected City readCityHeader(StringMatcher matcher, int filePointer, List<String> additionalTagsTable) throws IOException{
+	protected City readCityHeader(CityMatcher matcher, int filePointer, List<String> additionalTagsTable) throws IOException{
 		int x = 0;
 		int y = 0;
 		City c = null;
@@ -238,21 +271,7 @@ public class BinaryMapAddressReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if(matcher != null) {
-					boolean matches = matcher.matches(c.getName());
-					if(!matches) {
-						for(String n : c.getAllNames()) {
-							matches = matcher.matches(n);
-							if(matches) {
-								break;
-							}
-						}
-					}
-					if(!matches ) {
-						return null;
-					}
-				}
-				return c;
+				return (matcher == null || matcher.matches(c)) ? c : null;
 			case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER :
 				int type = codedIS.readUInt32();
 				c = new City(CityType.values()[type]);
@@ -536,9 +555,18 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
-	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, int[] typeFilter) throws IOException {
+	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
 		TIntArrayList loffsets = new TIntArrayList();
-		CollatorStringMatcher matcher = new CollatorStringMatcher( req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		CollatorStringMatcher stringMatcher = new CollatorStringMatcher(req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		String postcode = Postcode.normalize(req.nameQuery, map.getCountryName());
+		final CityMatcher postcodeMatcher = new DefaultCityMatcher(new CollatorStringMatcher(postcode, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+		final CityMatcher cityMatcher = new DefaultCityMatcher(stringMatcher);
+		final CityMatcher cityPostcodeMatcher = new CityMatcher() {
+			@Override
+			public boolean matches(City city) {
+				return city.isPostcode() ? postcodeMatcher.matches(city) : cityMatcher.matches(city);
+			}
+		};
 		long time = System.currentTimeMillis();
 		int indexOffset = 0;
 		while (true) {
@@ -555,7 +583,7 @@ public class BinaryMapAddressReaderAdapter {
 				indexOffset = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance
-				map.readIndexedStringTable(matcher.getCollator(), req.nameQuery, "", loffsets, 0);
+				map.readIndexedStringTable(stringMatcher.getCollator(), req.nameQuery, "", loffsets, 0);
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
@@ -593,13 +621,13 @@ public class BinaryMapAddressReaderAdapter {
 					}
 				}
 				if (typeFilter == null) {
-					typeFilter = new int[] { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE };
+					typeFilter = TYPES;
 				}
-				for (int i = 0; i < typeFilter.length && !req.isCancelled(); i++) {
-					TIntArrayList list = refs[typeFilter[i]];
-					if (typeFilter[i] == STREET_TYPE) {
+				for (int i = 0; i < typeFilter.size() && !req.isCancelled(); i++) {
+					TIntArrayList list = refs[typeFilter.get(i)];
+					if (typeFilter.get(i) == STREET_TYPE) {
 						for (int j = 0; j < list.size() && !req.isCancelled(); j += 2) {
-							City obj = null;
+							City obj;
 							{
 								codedIS.seek(list.get(j + 1));
 								int len = codedIS.readRawVarint32();
@@ -617,11 +645,11 @@ public class BinaryMapAddressReaderAdapter {
 								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
 										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
 												reg.attributeTagsTable);
-								boolean matches = matcher.matches(s.getName());
-								if(!matches) {
-									for(String n : s.getAllNames()) {
-										matches = matcher.matches(n);
-										if(matches) {
+								boolean matches = stringMatcher.matches(s.getName());
+								if (!matches) {
+									for (String n : s.getAllNames()) {
+										matches = stringMatcher.matches(n);
+										if (matches) {
 											break;
 										}
 									}
@@ -634,13 +662,16 @@ public class BinaryMapAddressReaderAdapter {
 						}
 					} else {
 						list.sort();
+						TIntSet published = new TIntHashSet();
 						for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
-							codedIS.seek(list.get(j));
+							int offset = list.get(j);
+							codedIS.seek(offset);
 							int len = codedIS.readRawVarint32();
 							int old = codedIS.pushLimit(len);
-							City obj = readCityHeader(matcher, list.get(j), reg.attributeTagsTable);
-							if (obj != null) {
+							City obj = readCityHeader(cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
+							if (obj != null && !published.contains(offset)) {
 								req.publish(obj);
+								published.add(offset);
 							}
 							codedIS.popLimit(old);
 						}

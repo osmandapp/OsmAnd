@@ -124,15 +124,17 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	}
 	
 	@Override
-	protected void filterLoop(String query, Collection<Street> list) {
-		if(searchWithCity == -1){
+	protected boolean filterLoop(String query, Collection<Street> list) {
+		final boolean[] result = {false};
+		if (searchWithCity == -1) {
 			filter(query, list);
 		} else if (searchWithCity == 0) {
 			for (Street obj : list) {
 				if (namesFilter.isCancelled) {
 					break;
 				}
-				if(filterObject(obj, query)){
+				if (filterObject(obj, query)) {
+					result[0] = true;
 					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 					msg.sendToTarget();
 				}
@@ -145,6 +147,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 					if (object instanceof Street) {
 						if (city == null ||
 								MapUtils.getDistance(city.getLocation(), object.getLocation()) < 100*1000) {
+							result[0] = true;
 							Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, object);
 							msg.sendToTarget();
 							return true;
@@ -166,8 +169,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 				}
 			});
 		}
-		
-		
+		return result[0];
 	}
 
 
