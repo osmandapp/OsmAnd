@@ -3,7 +3,6 @@ package net.osmand.plus.resources;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -24,12 +23,10 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.data.Postcode;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -38,7 +35,6 @@ import org.apache.commons.logging.Log;
 public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private static final Log log = PlatformUtil.getLog(RegionAddressRepositoryBinary.class);
 	private BinaryMapIndexReader file;
-
 
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
 	private int POSTCODE_MIN_QUERY_LENGTH = 2;
@@ -224,19 +220,23 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return result;
 	}
 
-	@Override
-	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
-		List<City> citiesToFill = new ArrayList<>(cities.values());
+	private List<Integer> getCityTypeFilter(String name, boolean searchVillages) {
 		List<Integer> cityTypes = new ArrayList<>();
 		cityTypes.add(BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
 		if (searchVillages) {
 			cityTypes.add(BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
-			if (searchVillages && name.length() >= POSTCODE_MIN_QUERY_LENGTH) {
+			if (name.length() >= POSTCODE_MIN_QUERY_LENGTH) {
 				cityTypes.add(BinaryMapAddressReaderAdapter.POSTCODES_TYPE);
 			}
 		}
+		return cityTypes;
+	}
+
+	@Override
+	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
+		List<City> citiesToFill = new ArrayList<>(cities.values());
 		try {
-			citiesToFill.addAll(fillWithCities(name, resultMatcher, cityTypes));
+			citiesToFill.addAll(fillWithCities(name, resultMatcher, getCityTypeFilter(name, searchVillages)));
 		} catch (IOException e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}

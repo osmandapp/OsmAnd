@@ -13,7 +13,6 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
@@ -124,12 +123,17 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	}
 
 	@Override
-	protected void filterLoop(String query, Collection<City> list) {
+	protected boolean filterLoop(String query, Collection<City> list) {
+		final boolean[] result = {false};
 		redefineSearchVillagesMode(query);
 		if (!initializeTaskIsFinished() || !isVillagesSearchEnabled()) {
-			super.filterLoop(query, list);
-		} else {
-			region.fillWithSuggestedCities(query, new ResultMatcher<City>() {
+			result[0] = super.filterLoop(query, list);
+			if (!result[0] && !isVillagesSearchEnabled()) {
+				setVillagesSearchEnabled(true);
+			}
+		}
+		if (!result[0]) {
+			ResultMatcher<City> resultMatcher = new ResultMatcher<City>() {
 				@Override
 				public boolean isCancelled() {
 					return namesFilter.isCancelled;
@@ -137,14 +141,26 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 				@Override
 				public boolean publish(City object) {
+					result[0] = true;
 					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, object);
 					msg.sendToTarget();
 					return true;
 				}
-			}, isVillagesSearchEnabled(), locationToSearch);
+			};
+			region.fillWithSuggestedCities(query, resultMatcher, isVillagesSearchEnabled(), locationToSearch);
 		}
+		return result[0];
 	}
 
+	private void setVillagesSearchEnabled(final boolean enable) {
+		searchVillagesMode = enable ? 0 : -1;
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				searchVillages.setVisibility(enable ? View.GONE : View.VISIBLE);
+			}
+		});
+	}
 
 	private boolean isVillagesSearchEnabled() {
 		return searchVillagesMode >= 0;
@@ -154,21 +170,9 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		if (searchVillagesMode == 1) {
 			searchVillagesMode = 0;
 		} else if (searchVillagesMode == 0 && !initialListToFilter.isEmpty() && query.isEmpty()) {
-			searchVillagesMode = -1;
-			uiHandler.post(new Runnable() {
-				@Override
-				public void run() {
-					searchVillages.setVisibility(View.VISIBLE);
-				}
-			});
+			setVillagesSearchEnabled(false);
 		} else if (searchVillagesMode == -1 && Postcode.looksLikePostcodeStart(query, region.getCountryName())) {
-			searchVillagesMode = 0;
-			uiHandler.post(new Runnable() {
-				@Override
-				public void run() {
-					searchVillages.setVisibility(View.GONE);
-				}
-			});
+			setVillagesSearchEnabled(true);
 		}
 	}
 

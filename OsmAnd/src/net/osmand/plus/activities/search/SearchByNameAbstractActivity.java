@@ -370,17 +370,19 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		namesFilter.cancelPreviousFilter(currentFilter);
 	}
 	
-	
-	protected void filterLoop(String query, Collection<T> list) {
+	protected boolean filterLoop(String query, Collection<T> list) {
+		boolean result = false;
 		for (T obj : list) {
 			if (namesFilter.isCancelled){
 				break;
 			}
 			if (filterObject(obj, query)){
+				result = true;
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 				msg.sendToTarget();
 			}
 		}
+		return result;
 	}
 	
 	

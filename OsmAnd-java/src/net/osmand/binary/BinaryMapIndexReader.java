@@ -1299,9 +1299,6 @@ public class BinaryMapIndexReader {
 	}
 
 	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
-		if (req.nameQuery == null || req.nameQuery.length() == 0) {
-			throw new IllegalArgumentException();
-		}
 		for (AddressRegion reg : addressIndexes) {
 			if (reg.indexNameOffset != -1) {
 				codedIS.seek(reg.indexNameOffset);
