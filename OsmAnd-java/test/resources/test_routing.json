@@ -20,7 +20,7 @@
       "178721843": "false"
     }
   },
-    {
+  {
     "testName": "5.Route depends on the distance to a junction, if routing engine takes the longer way https://github.com/osmandapp/Osmand/issues/1200",
     "description": "Подтверждается только неверный маршрут. От дистанции не зависит, но зависит от planRoadDirection. При -1 маршрут верный, при 0 - нет",
     "params": {
@@ -40,13 +40,13 @@
       "93014632": "false"
     }
   },
-    {
+  {
     "testName": "5.Osmand occasionally routes on and off freeways at the same exit https://groups.google.com/forum/#!msg/osmand/g9qXEne4Ers/1M3t0hM394UJ",
     "description": "Не воспроизводится",
     "params": {
       "vehicle": "car",
       "short_way": "true",
-      "planRoadDirection": "0"
+      "planRoadDirection": "-1"
     },
     "startPoint": {
       "latitude": 45.931599776352,
@@ -60,13 +60,13 @@
       "5570541": "false"
     }
   },
-    {
+  {
     "testName": "6.Intermediate destination is not routed on residential ways https://github.com/osmandapp/Osmand/issues/2362",
     "description": "Не воспроизводится",
     "params": {
       "vehicle": "car",
       "short_way": "true",
-      "planRoadDirection": "0"
+      "planRoadDirection": "-1"
     },
     "startPoint": {
       "latitude": 45.897651835396935,
@@ -82,6 +82,88 @@
     },
     "expectedResults": {
       "44358491": "true"
+    }
+  },
+  {
+    "testName": "10.Longer route preferred? https://github.com/osmandapp/Osmand/issues/1941",
+    "description": "short_way строит не самый короткий путь. Транзит через MEX 261 короче.",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.9011493841283,
+      "longitude": 35.493414759635954
+    },
+    "endPoint": {
+      "latitude": 45.88636204636078,
+      "longitude": 35.486109763383894
+    },
+    "expectedResults": {
+      "53445": "true"
+    }
+  },
+  {
+    "testName": "12.Bizarre navigation at Sundance dr & Sentinel dr in Fremont, CA, USA https://github.com/osmandapp/Osmand/issues/1743",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.84882743070033,
+      "longitude": 35.2621882259846
+    },
+    "endPoint": {
+      "latitude": 45.847528944857174,
+      "longitude": 35.27665740251544
+    },
+    "expectedResults": {
+      "6344915": "false",
+      "6346622": "true"
+    }
+  },
+  {
+    "testName": "12.1.Bizarre navigation at Sundance dr & Sentinel dr in Fremont, CA, USA (transit2 point) https://github.com/osmandapp/Osmand/issues/1743",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.84882743070033,
+      "longitude": 35.2621882259846
+    },
+    "transitPoint": {
+      "latitude": 45.84813,
+      "longitude": 35.275932
+    },
+    "endPoint": {
+      "latitude": 45.847528944857174,
+      "longitude": 35.27665740251544
+    },
+    "expectedResults": {
+      "6335573": "false"
+    }
+  },
+  {
+    "testName": "12.2.Bizarre navigation at Sundance dr & Sentinel dr in Fremont, CA, USA (reverse) https://github.com/osmandapp/Osmand/issues/1743",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.84747047681003,
+      "longitude": 35.276624009925854
+    },
+    "endPoint": {
+      "latitude": 45.84886985240254,
+      "longitude": 35.262113259155285
+    },
+    "expectedResults": {
+      "6346622": "true"
     }
   }
 ]
