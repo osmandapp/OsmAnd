@@ -472,7 +472,7 @@ public class RoutingHelper {
 		
 		// 2. check if intermediate found
 		if(route.getIntermediatePointsToPass()  > 0
-				&& route.getDistanceToNextIntermediate(lastFixedLocation) < POSITION_TOLERANCE * 2
+				&& route.getDistanceToNextIntermediate(lastFixedLocation) < POSITION_TOLERANCE * 2 * settings.ARRIVAL_DISTANCE_FACTOR.get()
 				&& !isRoutePlanningMode) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
