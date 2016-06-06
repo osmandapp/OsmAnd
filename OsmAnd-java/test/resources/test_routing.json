@@ -39,5 +39,49 @@
     "expectedResults": {
       "93014632": "false"
     }
+  },
+    {
+    "testName": "5.Osmand occasionally routes on and off freeways at the same exit https://groups.google.com/forum/#!msg/osmand/g9qXEne4Ers/1M3t0hM394UJ",
+    "description": "Не воспроизводится",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "0"
+    },
+    "startPoint": {
+      "latitude": 45.931599776352,
+      "longitude": 35.35250289738181
+    },
+    "endPoint": {
+      "latitude": 45.88367250724874,
+      "longitude": 35.35755617916587
+    },
+    "expectedResults": {
+      "5570541": "false"
+    }
+  },
+    {
+    "testName": "6.Intermediate destination is not routed on residential ways https://github.com/osmandapp/Osmand/issues/2362",
+    "description": "Не воспроизводится",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "0"
+    },
+    "startPoint": {
+      "latitude": 45.897651835396935,
+      "longitude": 35.38294060528281
+    },
+    "transitPoint": {
+      "latitude": 45.89895,
+      "longitude": 35.3849
+    },
+    "endPoint": {
+      "latitude": 45.89756970218551,
+      "longitude": 35.38740380108359
+    },
+    "expectedResults": {
+      "44358491": "true"
+    }
   }
 ]
