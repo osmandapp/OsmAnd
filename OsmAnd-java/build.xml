@@ -120,7 +120,7 @@
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
-		<javac srcdir="${src.absolute.dir}" destdir="${bin.absolute.dir}" encoding="${java.encoding}" classpathref="build.path" debug="on" source="1.6">
+		<javac srcdir="${src.absolute.dir}" destdir="${bin.absolute.dir}" encoding="${java.encoding}" classpathref="build.path" debug="on" source="1.7">
 			<include name="**/*.java" />
 			<exclude name="net/osmand/plus/**" />
 		</javac>
