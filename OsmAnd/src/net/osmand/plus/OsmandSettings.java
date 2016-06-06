@@ -2299,11 +2299,11 @@ public class OsmandSettings {
 		return mImpassableRoadsStorage.insertPoint(latitude, longitude, null, 0);
 	}
 
-	public boolean deleteImpassableRoad(int index) {
+	public boolean removeImpassableRoad(int index) {
 		return mImpassableRoadsStorage.deletePoint(index);
 	}
 
-	public boolean deleteImpassableRoad(LatLon latLon) {
+	public boolean removeImpassableRoad(LatLon latLon) {
 		return mImpassableRoadsStorage.deletePoint(latLon);
 	}
 

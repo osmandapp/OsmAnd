@@ -38,6 +38,9 @@ public class AvoidSpecificRoads {
 
 	public AvoidSpecificRoads(OsmandApplication app) {
 		this.app = app;
+	}
+
+	public void initPreservedData() {
 		List<LatLon> impassibleRoads = app.getSettings().getImpassableRoadPoints();
 		for (LatLon impassibleRoad : impassibleRoads) {
 			addImpassableRoad(null, impassibleRoad, false, null, true);
@@ -56,7 +59,7 @@ public class AvoidSpecificRoads {
 	}
 
 	public ArrayAdapter<RouteDataObject> createAdapter(final MapActivity ctx) {
-		final ArrayList<RouteDataObject> points = new ArrayList<RouteDataObject>();
+		final ArrayList<RouteDataObject> points = new ArrayList<>();
 		points.addAll(getMissingRoads());
 		final LatLon mapLocation = ctx.getMapLocation();
 		return new ArrayAdapter<RouteDataObject>(ctx,
@@ -67,7 +70,7 @@ public class AvoidSpecificRoads {
 				// User super class to create the View
 				View v = convertView;
 				if (v == null || v.findViewById(R.id.info_close) == null) {
-					v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
+					v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, parent, false);
 				}
 				final RouteDataObject obj = getItem(position);
 				v.findViewById(R.id.all_points).setVisibility(View.GONE);
@@ -86,9 +89,8 @@ public class AvoidSpecificRoads {
 
 					@Override
 					public void onClick(View v) {
-						app.getSettings().deleteImpassableRoad(getLocation(obj));
 						remove(obj);
-						getBuilder().removeImpassableRoad(obj);
+						removeImpassableRoad(obj);
 						notifyDataSetChanged();
 						RoutingHelper rh = app.getRoutingHelper();
 						if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
@@ -99,6 +101,11 @@ public class AvoidSpecificRoads {
 				return v;
 			}
 		};
+	}
+
+	public void removeImpassableRoad(RouteDataObject obj) {
+		app.getSettings().removeImpassableRoad(getLocation(obj));
+		getBuilder().removeImpassableRoad(obj);
 	}
 
 
@@ -222,10 +229,7 @@ public class AvoidSpecificRoads {
 
 			@Override
 			public boolean isCancelled() {
-				if (callback != null) {
-					return callback.isCancelled();
-				}
-				return false;
+				return callback != null && callback.isCancelled();
 			}
 		});
 	}
@@ -235,7 +239,9 @@ public class AvoidSpecificRoads {
 										   boolean showDialog,
 										   @Nullable MapActivity activity,
 										   @NonNull LatLon loc) {
-		getBuilder().addImpassableRoad(object, ll);
+		if(!getBuilder().addImpassableRoad(object, ll)) {
+			app.getSettings().removeImpassableRoad(getLocation(object));
+		}
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
 			rh.recalculateRouteDueToSettingsChange();

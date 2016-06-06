@@ -23,7 +23,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				app.getDefaultRoutingConfig().removeImpassableRoad(
+				app.getAvoidSpecificRoads().removeImpassableRoad(
 						ImpassibleRoadsMenuController.this.route);
 				RoutingHelper rh = app.getRoutingHelper();
 				if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
