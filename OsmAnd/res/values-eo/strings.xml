@@ -313,7 +313,7 @@
     <string name="osmo_share_my_location">Transsendi mian pozicion</string>
     <string name="shared_string_logoff">Elsaluti</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeroj de domoj</string>
-    <string name="application_dir_change_warning3">Ĉu vi ankaŭ volas kopii ĝiajn dutumdosierojn al la nova loko?</string>
+    <string name="application_dir_change_warning3">Ĉu vi ankaŭ volas kopii dutumdosierojn de OsmAnd al la nova loko?</string>
     <string name="specified_directiory_not_writeable">Ne povas krei mapojn en la difina dosierujo</string>
     <string name="copying_osmand_file_failed">Kopiado de dosieroj malsukcesis</string>
     <string name="storage_directory_external">Ekstera memorejo</string>
