@@ -178,7 +178,7 @@
     <string name="accessibility_preferences_descr">Tilgjengelighetsrelaterte innstillinger</string>
     <string name="shared_string_accessibility">Tilgjengelighet</string>
     <string name="rendering_out_of_memory">Ikke nok prosessminne til å vise valgt område</string>
-    <string name="use_fluorescent_overlays">Fluorescerende overlegging</string>
+    <string name="use_fluorescent_overlays">Fluorescerende overlegg</string>
     <string name="use_fluorescent_overlays_descr">Bruk fluorescerende farger til å vise spor og ruter</string>
     <string name="offline_edition">Frakoblet redigering</string>
     <string name="offline_edition_descr">Bruk alltid frakoblet redigering</string>
@@ -1670,4 +1670,10 @@
     <string name="lang_kn">Kannada</string>
     <string name="app_mode_bus">Buss</string>
  	<string name="app_mode_train">Tog</string>
+    <string name="voice_data_unavailable">Valgte taledata er ikke tilgjengelig</string>
+    <string name="voice_data_corrupted">Spesifisert taledata er ødelagt</string>
+    <string name="voice_data_not_supported">Taledataversjon som ikke støttes</string>
+    <string name="background_router_service_descr">Kjører OsmAnd i bakgrunnen for å spore posisjonen din mens skjermen er slått av</string>
+    <string name="share_fav_subject">Favoritter delt via OsmAnd</string>
+    <string name="import_file_favourites">Lagre data som GPX-fil eller importere rutepunkter til favoritter?</string>
     </resources>
