@@ -2049,4 +2049,6 @@
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Anglicky (Veľká Británia)</string>
     <string name="lang_ast">Astúrsky</string>
+    <string name="app_mode_bus">Autobus</string>
+ 	<string name="app_mode_train">Vlak</string>
     </resources>
