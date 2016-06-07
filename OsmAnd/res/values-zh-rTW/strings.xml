@@ -2197,4 +2197,6 @@
     <string name="lang_kn">康納達語</string>
     <string name="lang_en_gb">英語（英國）</string>
     <string name="lang_ast">阿斯圖里亞斯語</string>
+    <string name="app_mode_bus">公車</string>
+ 	<string name="app_mode_train">火車</string>
     </resources>
