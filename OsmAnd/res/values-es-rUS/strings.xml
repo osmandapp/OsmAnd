@@ -2186,4 +2186,7 @@
     <string name="lang_be_BY">Bielorruso (Latín)</string>
     <string name="lang_kn">Canarés</string>
     <string name="lang_en_gb">Inglés (Reino Unido)</string>
+    <string name="app_mode_bus">Autobús</string>
+ 	<string name="app_mode_train">Tren</string>
+    <string name="lang_ast">Asturiano</string>
     </resources>
