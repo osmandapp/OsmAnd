@@ -849,7 +849,7 @@
   
   
   <string name="show_cameras">Snelheidscontroles</string>
-  <string name="show_traffic_warnings">Filemeldingen</string>
+  <string name="show_traffic_warnings">Waarschuwingen</string>
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
   
   <string name="map_widget_top_text">Straatnaam</string>
@@ -1156,7 +1156,7 @@
 	
     <string name="speak_speed_limit">Snelheidsbeperking</string>
     <string name="speak_cameras">Snelheidscamera\'s</string>
-	<string name="speak_traffic_warnings">Verkeerswaarschuwingen</string>
+	<string name="speak_traffic_warnings">Waarschuwingen</string>
 	<string name="route_from">Van:</string>
     
     <string name="osb_author_or_password_not_specified">Specificeer OSM-gebruikersnaam en -wachtwoord in Instellingen</string>
@@ -1171,7 +1171,7 @@
     <string name="osb_author_dialog_password">OSM-wachtwoord (optioneel)</string>
 	<string name="announce_gpx_waypoints">GPX-routepunten</string>
     <string name="speak_title">Aankondigen…</string>
-	<string name="speak_descr">Aankondigen van straatnamen, verkeerswaarschuwingen (verplicht stoppen, drempels), snelheidscamera\'s of snelheidsbeperkingen</string>
+	<string name="speak_descr">Aankondigen van straatnamen, waarschuwingen (verplicht stoppen, drempels), snelheidscamera\'s of snelheidsbeperkingen</string>
 	<string name="speak_street_names">Straatnamen (TTS)</string>
         
     
@@ -1542,7 +1542,7 @@
     
     <string name="waypoints">Routepunt(en)</string>
     <string name="targets">Bestemming(en)</string>
-    <string name="way_alarms">Meldingen onderweg</string>
+    <string name="way_alarms">Waarschuwingen</string>
     <string name="speak_favorites">Favorieten in de buurt</string>
     <string name="speak_poi">Interessepunt in de buurt</string>
     <string name="shared_string_all">Alle</string>
@@ -1565,7 +1565,7 @@
     <string name="traffic_warning_stop">Stopbord</string>
     <string name="traffic_warning_calming">Verkeersdrempel</string>
     <string name="traffic_warning_speed_camera">Snelheidscontrole</string>
-    <string name="traffic_warning">Meldingen onderweg</string>
+    <string name="traffic_warning">Waarschuwing</string>
 	<string name="local_index_description">Tik om details te bekijken; houd ingedrukt om uit te schakelen of te verwijderen. Huidige gegevens op het toestel (%1$s beschikbaar):</string>
 	<string name="text_size_descr">De grootte van tekst op de kaart instellen.</string>
     <string name="text_size">Tekstgrootte</string>
@@ -1702,7 +1702,7 @@
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Annuleren</string>
-	<string name="shared_string_dismiss">Afwijzen</string>
+	<string name="shared_string_dismiss">Detailscherm sluiten</string>
 	<string name="shared_string_yes">Ja</string>
 	<string name="shared_string_no">Nee</string>
 	<string name="shared_string_on">Aan</string>
