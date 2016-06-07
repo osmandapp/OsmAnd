@@ -1158,7 +1158,7 @@
     <string name="screen_is_locked">Por malŝlosi ekranon, tuŝetu simbolon de pendseruro</string>
     <string name="map_widget_top_text">Stratnomo</string>
     <string name="map_widget_config">Agordi ekranon</string>
-    <string name="map_widget_back_to_loc">Kie mi estas?</string>
+    <string name="map_widget_back_to_loc">Kie mi estas</string>
     <string name="map_widget_lock_screen">Ŝlosi ekranon</string>
     <string name="map_widget_compass">Kompaso</string>
     <string name="map_widget_reset">Rekomencigi</string>
@@ -1696,4 +1696,6 @@
 
     <string name="get_directions">Navigado</string>
     <string name="layer_map">Map-fontoj…</string>
-    </resources>
+    <string name="app_mode_train">Vagonaro</string>
+    <string name="app_mode_bus">Aŭtobuso</string>
+ 	</resources>
