@@ -807,7 +807,7 @@
 
 
     <string name="show_cameras">Autovelox</string>
-    <string name="show_traffic_warnings">Visualizza limiti di velocità</string>
+    <string name="show_traffic_warnings">Avvisi di traffico</string>
     <string name="avoid_toll_roads">Evita strade a pedaggio</string>
 
     <string name="map_widget_top_text">Nome della strada</string>
