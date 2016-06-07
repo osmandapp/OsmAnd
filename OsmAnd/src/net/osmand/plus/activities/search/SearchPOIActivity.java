@@ -117,6 +117,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private MenuItem searchPOILevel;
 	private static int RESULT_REQUEST_CODE = 54;
 
+	private CharSequence tChange;
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu omenu) {
 		Menu menu = getClearToolbar(true).getMenu();
@@ -228,7 +230,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		searchFilter.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
-				changeFilter(s);
+				tChange = s;
+				// Issue #2667 (3)
+				if (currentSearchTask == null) {
+					changeFilter(tChange);
+				}
 			}
 
 			@Override
@@ -424,6 +430,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (filter != null) {
 			int maxLength = 24;
 			String name = filter.getGeneratedName(maxLength);
+
+			// Next displays the actual query term instead of the generic "Seach by name", can be enabled for debugging or in general
+			if (isNameSearch()) {
+				name = "'" + filter.getFilterByName() + "'";
+			}
+
 			if(name.length() >= maxLength) {
 				name = name.substring(0, maxLength) + getString(R.string.shared_string_ellipsis);
 			}
@@ -440,8 +452,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			boolean enabled = taskAlreadyFinished && location != null && 
 					filter != null && filter.isSearchFurtherAvailable();
 			if(isNameSearch() && !Algorithms.objectEquals(searchFilter.getText().toString(), filter.getFilterByName())) {
-				enabled = true;
 				title = R.string.search_button;
+				// Issue #2667 (2)
+				if (currentSearchTask == null) {
+					enabled = true;
+				}
 			}
 			searchPOILevel.setEnabled(enabled);
 			searchPOILevel.setTitle(title);
@@ -639,8 +654,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			} else {
 				amenityAdapter.setNewModel(result);
 			}
+			// Issue #2667 (1)
+			if (tChange != null) {
+				changeFilter(tChange);
+				tChange = null;
+			}
+			amenityAdapter.notifyDataSetChanged();
 			lastSearchedLocation = searchLocation;
-			
 		}
 
 		@Override
