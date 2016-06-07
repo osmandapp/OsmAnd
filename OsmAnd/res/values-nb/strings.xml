@@ -1668,4 +1668,6 @@
     <string name="lang_es_us">Spansk (Amerikansk)</string>
     <string name="lang_en_gb">Engelsk (Storbritannia)</string>
     <string name="lang_kn">Kannada</string>
+    <string name="app_mode_bus">Buss</string>
+ 	<string name="app_mode_train">Tog</string>
     </resources>
