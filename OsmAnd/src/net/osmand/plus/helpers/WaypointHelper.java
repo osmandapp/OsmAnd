@@ -55,7 +55,7 @@ public class WaypointHelper {
 	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
 
 	// don't annoy users by lots of announcements
-	private static final int APPROACH_POI_LIMIT = 3;
+	private static final int APPROACH_POI_LIMIT = 1;
 	private static final int ANNOUNCE_POI_LIMIT = 3;
 
 	OsmandApplication app;
