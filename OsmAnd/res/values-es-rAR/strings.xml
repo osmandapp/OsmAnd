@@ -1138,9 +1138,9 @@
     <string name="zoom_by_trackball_descr">Cambia la ampliación del mapa con movimientos horizontales de la rueda de desplazamiento</string>
     <string name="zoom_by_trackball">Usar la rueda de desplazamiento para controlar la ampliación</string>
     <string name="accessibility_preferences_descr">Preferencias de accesibilidad</string>
-    <string name="arrival_distance_factor_early">Cerca</string>
+    <string name="arrival_distance_factor_early">Lejos</string>
     <string name="arrival_distance_factor_normally">Normal</string>
-    <string name="arrival_distance_factor_late">Lejos</string>
+    <string name="arrival_distance_factor_late">Cerca</string>
     <string name="arrival_distance_factor_at_last">En los últimos metros</string>
     <string name="arrival_distance">Anuncio de llegada</string>
     <string name="arrival_distance_descr">¿Cuándo quieres el anuncio de llegada?</string>
