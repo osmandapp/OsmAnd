@@ -2031,4 +2031,6 @@
     <string name="lang_en_gb">Anglicky (UK)</string>
     <string name="lang_be_BY">Bělorusky (Latinka)</string>
     <string name="lang_kn">Kanada</string>
+    <string name="app_mode_bus">Autobus</string>
+ 	<string name="app_mode_train">Vlak</string>
     </resources>
