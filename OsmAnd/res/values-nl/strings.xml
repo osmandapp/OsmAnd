@@ -2287,4 +2287,6 @@
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Engels (Verenigd Koninkrijk)</string>
     <string name="lang_ast">Asturisch</string>
+    <string name="app_mode_bus">Lijnbus</string>
+ 	<string name="app_mode_train">Trein</string>
     </resources>
