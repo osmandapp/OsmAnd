@@ -101,8 +101,8 @@ public class DoubleTapScaleDetector {
 	}
 
 	private final boolean isConsideredDoubleTap(MotionEvent firstDown,
-										  MotionEvent firstUp,
-										  MotionEvent secondDown) {
+												MotionEvent firstUp,
+												MotionEvent secondDown) {
 		if (firstDown == null || firstUp == null || secondDown == null) {
 			return false;
 		}
@@ -123,7 +123,7 @@ public class DoubleTapScaleDetector {
 	}
 
 	private static final boolean isConfirmedScale(MotionEvent secondDown,
-										   MotionEvent moveEvent) {
+												  MotionEvent moveEvent) {
 		if (secondDown == null || moveEvent == null) {
 			return false;
 		}
@@ -139,12 +139,12 @@ public class DoubleTapScaleDetector {
 	}
 
 	public interface DoubleTapZoomListener {
-		public void onZoomStarted(PointF centerPoint);
+		void onZoomStarted(PointF centerPoint);
 
-		public void onZooming(double relativeToStart);
+		void onZooming(double relativeToStart);
 
-		public void onZoomEnded(double relativeToStart);
+		void onZoomEnded(double relativeToStart);
 
-		public void onGestureInit(float x1, float y1, float x2, float y2);
+		void onGestureInit(float x1, float y1, float x2, float y2);
 	}
 }
