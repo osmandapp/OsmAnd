@@ -1375,7 +1375,7 @@
     <string name="osmo_center_location">Centra nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
     <string name="osmo_use_server_name">Nome registrato</string>
-    <string name="osmo_connect_to_my_nickname">Nick name</string>
+    <string name="osmo_connect_to_my_nickname">Nickname</string>
     <string name="osmo_user_name">Utente</string>
 
 
@@ -2212,7 +2212,7 @@
     <string name="full_report">Rapporto completo</string>
     <string name="open_street_map_login_and_pass">Nome utente e password OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
-<string name="no_map_markers_found">Aggiungi i marcatori della mappa dalla mappa</string>
+<string name="no_map_markers_found">Aggiungi i marcatori della mappa sulla mappa</string>
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
     <string name="release_2_3">" • OSM Live. Sostiene i contributori della mappa e gli sviluppatori e si hanno gli aggiornamenti orari della mappa.\n\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.\n\n • Mappe OSM più dettagliate con scudetti dei nomi delle strade specifici per ogni nazione  e molte nuove caratteristiche.
 \n\n • Aspetto e gestione migliorati della preparazione del percorso.
