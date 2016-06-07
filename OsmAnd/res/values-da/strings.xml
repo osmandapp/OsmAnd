@@ -2377,4 +2377,6 @@
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Engelsk (Storbritannien)</string>
     <string name="lang_ast">Asturisk</string>
+    <string name="app_mode_bus">Bus</string>
+ 	<string name="app_mode_train">Tog</string>
     </resources>
