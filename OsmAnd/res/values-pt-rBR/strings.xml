@@ -226,7 +226,7 @@
     <string name="download_tab_local">Local</string>
 	<string name="no_internet_connection">Não foi possível baixar, por favor, verifique sua conexão com a Internet.</string>
     <string name="everything_up_to_date">Todos os arquivos foram atualizados</string>
-    <string name="use_opengl_render">Usar renderizador OpenGL</string>
+    <string name="use_opengl_render">Usar renderização OpenGL</string>
     <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (talvez não funcione em alguns aparelhos)</string>
     <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
     <string name="osmo_use_https_descr">Usar conexão segura com o servidor</string>
@@ -1185,7 +1185,7 @@
 	<string name="map_screen_orientation">Orientação do mapa</string>
 	<string name="transport_finish_search">Finalizar pesquisa</string>
 	<string name="map_screen_orientation_descr">Vertical, horizontal ou mesma do aparelho</string>
-	<string name="opening_hours_not_supported">O formato do horário de abertura não é suportado para edição</string>
+	<string name="opening_hours_not_supported">O formato do horário de funcionamento não é suportado para edição</string>
 	<string name="add_new_rule">Adicionar nova regra</string>
 	<string name="transport_Routes">Rotas</string>
 	<string name="transport_Stop">Parada</string>
@@ -1776,7 +1776,7 @@
     
 	<string name="contact_info">Informações de contato</string>
 	<string name="description">Descrição</string>
-	<string name="add_opening_hours">Adicionar o horário de funcionamento</string>
+	<string name="add_opening_hours">Adicionar horário de funcionamento</string>
 	<string name="poi_dialog_poi_type">Tipo de POI</string>
 	<string name="number_of_rows_in_dash">Número de linhas no traço de %1$s</string>
 
