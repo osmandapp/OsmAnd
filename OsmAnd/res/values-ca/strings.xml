@@ -2042,4 +2042,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_en_gb">Anglès (Regne Unit)</string>
     <string name="lang_kn">Kanarès</string>
     <string name="lang_ast">Asturià</string>
+    <string name="app_mode_bus">Bus</string>
+ 	<string name="app_mode_train">Tren</string>
     </resources>
