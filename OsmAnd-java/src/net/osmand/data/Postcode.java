@@ -203,8 +203,9 @@ public class Postcode {
 		boolean result = false;
 		if (isCountryKnown(country)) {
 			Matcher matcher = getMatcher(s, country);
-			result = (matcher != null && matcher.find()) || s.matches("(.+\\d+.*|.*\\d+.+)");
+			result = matcher != null && matcher.find();
 		}
+		result = result || s.matches("(.+\\d+.*|.*\\d+.+)");
 		return result;
 	}
 
