@@ -830,16 +830,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			animatedDraggingThread.stopAnimating();
 		}
 		for (int i = layers.size() - 1; i >= 0; i--) {
-			if (layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox())) {
-				return true;
-			}
+			layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 		}
-		if (!multiTouchSupport.onTouchEvent(event)) {
-			/* return */
-			doubleTapScaleDetector.onTouchEvent(event);
-			if (!doubleTapScaleDetector.isInZoomMode()) {
-				gestureDetector.onTouchEvent(event);
-			}
+		final boolean isMultiTouch = multiTouchSupport.onTouchEvent(event);
+		doubleTapScaleDetector.onTouchEvent(event);
+		if (!isMultiTouch && !doubleTapScaleDetector.isInZoomMode()) {
+			gestureDetector.onTouchEvent(event);
 		}
 		return true;
 	}
@@ -1100,13 +1096,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			LOG.debug("onDoubleTap getZoom()");
-			if (isZoomingAllowed(getZoom(), 1.1f)) {
-				final RotatedTileBox tb = getCurrentRotatedTileBox();
-				final double lat = tb.getLatFromPixel(e.getX(), e.getY());
-				final double lon = tb.getLonFromPixel(e.getX(), e.getY());
-				getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
+			if (!doubleTapScaleDetector.isInZoomMode()) {
+				if (isZoomingAllowed(getZoom(), 1.1f)) {
+					final RotatedTileBox tb = getCurrentRotatedTileBox();
+					final double lat = tb.getLatFromPixel(e.getX(), e.getY());
+					final double lon = tb.getLonFromPixel(e.getX(), e.getY());
+					getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
+				}
+				return true;
+			} else {
+				return false;
 			}
-			return true;
 		}
 	}
 
