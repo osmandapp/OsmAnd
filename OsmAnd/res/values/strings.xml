@@ -9,7 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
+  	<string name="app_mode_bus">Bus</string>
+ 	<string name="app_mode_train">Train</string>
     <string name="current_track">Current track</string>
     <string name="map_widget_battery">Battery level</string>
     <string name="change_markers_position">Change marker\'s position</string>

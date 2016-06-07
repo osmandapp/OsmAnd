@@ -472,8 +472,7 @@ public class RoutingHelper {
 		
 		// 2. check if intermediate found
 		if(route.getIntermediatePointsToPass()  > 0
-				&& route.getDistanceToNextIntermediate(lastFixedLocation) < POSITION_TOLERANCE * 2 * settings.ARRIVAL_DISTANCE_FACTOR.get()
-				&& !isRoutePlanningMode) {
+				&& route.getDistanceToNextIntermediate(lastFixedLocation) < getArrivalDistance() * 2f && !isRoutePlanningMode) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -505,7 +504,7 @@ public class RoutingHelper {
 		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if (currentRoute > routeNodes.size() - 3
-				&& currentLocation.distanceTo(lastPoint) < (((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get())
+				&& currentLocation.distanceTo(lastPoint) < getArrivalDistance()
 				&& !isRoutePlanningMode) {
 			//showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -533,6 +532,10 @@ public class RoutingHelper {
 
 		}
 		return false;
+	}
+
+	private float getArrivalDistance() {
+		return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get();
 	}
 	
 
