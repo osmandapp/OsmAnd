@@ -52,7 +52,7 @@ public class GpxImportHelper {
 		this.mapView = mapView;
 	}
 
-	public void handleContenImport(final Uri contentUri) {
+	public void handleContentImport(final Uri contentUri) {
 		final String name = getNameFromContentUri(contentUri);
 
 		handleFileImport(contentUri, name);
