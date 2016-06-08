@@ -2211,4 +2211,6 @@
     <string name="lang_be_BY">Beloruščina (latinica)</string>
     <string name="lang_kn">Kanada</string>
     <string name="lang_ast">Asturijski</string>
+    <string name="app_mode_bus">Avtobus</string>
+ 	<string name="app_mode_train">Vlak</string>
     </resources>
