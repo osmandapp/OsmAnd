@@ -1863,7 +1863,7 @@
     <string name="shared_string_upload">Отправить</string>
     <string name="osm_edit_created_poi">Создана OSM POI</string>
     
-    <string name="osmand_running_in_background">Работает в фоновом режиме</string>
+    <string name="osmand_running_in_background">Работа в фоне</string>
     <string name="av_locations">Места</string>
     <string name="downloading_number_of_files">Загрузка файла - %1$d</string>
 
