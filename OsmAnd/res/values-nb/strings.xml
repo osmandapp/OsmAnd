@@ -826,7 +826,7 @@
     <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
     <string name="safe_mode">Sikker modus</string>
     <string name="native_library_not_running">Programmet kjører i sikker modus (kan deaktiveres i Innstillinger).</string>
-    <string name="interrupt_music_descr">Avbryt musikk ved meldinger</string>
+    <string name="interrupt_music_descr">Avbryt musikk ved navigeringsanvisninger</string>
     <string name="interrupt_music">Avbryt musikk</string>
     <string name="gpxup_public">Offentlig</string>
     <string name="rendering_attr_appMode_description">Optimaliser kart for</string>
