@@ -970,7 +970,7 @@
 	<string name="poi_mobile">Mobiltelefon</string>
 	<string name="poi_animal_shelter_dog">Internat: hund</string>
 	<string name="poi_animal_shelter_cat">Internat: kat</string>
-	<string name="poi_animal_shelter_dog_cat">"Internat: hund,  kat"</string>
+	<string name="poi_animal_shelter_dog_cat">Internat: hund, kat</string>
 	<string name="poi_animal_shelter_bird">Internat: fugl</string>
 
 <string name="poi_shower">Bruser</string>
@@ -2967,7 +2967,7 @@
 	<string name="poi_crossing_activation_local">Overkørsel aktivering: lokal</string>
 	<string name="poi_crossing_activation_remote">Overkørsel aktivering: fjernbetjening</string>
 	<string name="poi_crossing_barrier_no">Overkørsel bom: nej</string>
-	<string name="poi_crossing_barrier_yes&gt;">Overkørsel bom</string>
+	<string name="poi_crossing_barrier_yes">Overkørsel bom</string>
 	<string name="poi_crossing_on_demand_yes">Overkørsel på forespørgsel</string>
 	<string name="poi_crossing_on_demand_no">Overkørsel på forespørgsel: nej</string>
 	</resources>

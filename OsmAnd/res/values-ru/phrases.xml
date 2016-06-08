@@ -2878,7 +2878,7 @@
 	<string name="poi_crossing_activation_local">Управление переездом: местное</string>
 	<string name="poi_crossing_activation_remote">Управление переездом: дистанционное</string>
 	<string name="poi_crossing_barrier_no">Барьер на перезде: нет</string>
-	<string name="poi_crossing_barrier_yes>">Барьер на переезде</string>
+	<string name="poi_crossing_barrier_yes">Барьер на переезде</string>
 	<string name="poi_crossing_barrier_full">Барьер на переезде: полный</string>
 	<string name="poi_crossing_barrier_half">Барьер на переезде: половинный</string>
 	<string name="poi_crossing_barrier_double_half">Барьер на переезде: двойной половинный</string>
@@ -2894,5 +2894,17 @@
 	<string name="poi_crossing_supervision_no">Наблюдение за переездом: отсутствует</string>
 	<string name="poi_crossing_supervision_attendant">Наблюдение за переездом: смотрящий</string>
 	<string name="poi_crossing_supervision_camera">Наблюдение за переездом: камера</string>
+
+	<string name="poi_dispensing_yes">Продажа лекарств по рецептам</string>
+	<string name="poi_dispensing_no">Продажа лекарств по рецептам: нет</string>
+
+	<string name="poi_aerodrome_type_international">Международный</string>
+	<string name="poi_aerodrome_type_regional">Региональный</string>
+	<string name="poi_aerodrome_type_public">Общественный</string>
+	<string name="poi_aerodrome_type_military">Военный</string>
+	<string name="poi_aerodrome_type_military_public">Военный/общественный</string>
+	<string name="poi_aerodrome_type_private">Частный</string>
+
+	<string name="poi_valley_balka">Балка</string>
 
 </resources>
