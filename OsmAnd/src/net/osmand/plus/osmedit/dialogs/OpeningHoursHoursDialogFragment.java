@@ -55,6 +55,7 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
+								timePicker.clearFocus();
 								int minute = timePicker.getCurrentMinute();
 								int hourOfDay = timePicker.getCurrentHour();
 								int time = minute + hourOfDay * 60;
@@ -111,5 +112,29 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		bundle.putInt(TIME_POSITION, timePosition);
 		fragment.setArguments(bundle);
 		return fragment;
+	}
+
+	private static class TimePreservingOnTimeChangedListener implements TimePicker.OnTimeChangedListener {
+		private int mHourOfDay;
+		private int mMinute;
+
+		public TimePreservingOnTimeChangedListener(int hourOfDay, int minute) {
+			this.mHourOfDay = hourOfDay;
+			this.mMinute = minute;
+		}
+
+		@Override
+		public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+			this.mHourOfDay = hourOfDay;
+			this.mMinute = minute;
+		}
+
+		public int getHourOfDay() {
+			return mHourOfDay;
+		}
+
+		public int getMinute() {
+			return mMinute;
+		}
 	}
 }
