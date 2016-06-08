@@ -15,7 +15,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -34,13 +33,13 @@ public class RoutingHelper {
 	
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RoutingHelper.class);
 	
-	public static interface IRouteInformationListener {
+	public interface IRouteInformationListener {
 		
-		public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast);
+		void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast);
 		
-		public void routeWasCancelled();
+		void routeWasCancelled();
 
-		public void routeWasFinished();
+		void routeWasFinished();
 	}
 	
 	private static final float POSITION_TOLERANCE = 60;
