@@ -2878,4 +2878,25 @@
 	<string name="poi_summer_camp">Summer camp</string>
 	<string name="poi_recreation_center">Recreation center</string>
 
+	<string name="poi_crossing_activation_automatic">Crossing activation: automatic</string>
+	<string name="poi_crossing_activation_local">Crossing activation: local</string>
+	<string name="poi_crossing_activation_remote">Crossing activation: remote</string>
+	<string name="poi_crossing_barrier_no">Crossing barrier: no</string>
+	<string name="poi_crossing_barrier_yes>">Crossing barrier</string>
+	<string name="poi_crossing_barrier_full">Crossing barrier: full</string>
+	<string name="poi_crossing_barrier_half">Crossing barrier: half</string>
+	<string name="poi_crossing_barrier_double_half">Crossing barrier: double half</string>
+	<string name="poi_crossing_bell_yes">Crossing bell</string>
+	<string name="poi_crossing_bell_no">Crossing bell: no</string>
+	<string name="poi_crossing_light_yes">Crossing light</string>
+	<string name="poi_crossing_light_no">Crossing light: no</string>
+	<string name="poi_crossing_on_demand_yes">Crossing on demand</string>
+	<string name="poi_crossing_on_demand_no">Crossing on demand: no</string>
+	<string name="poi_crossing_saltire_yes">Crossing saltire</string>
+	<string name="poi_crossing_saltire_no">Crossing saltire: no</string>
+	<string name="poi_crossing_supervision_yes">Crossing supervision</string>
+	<string name="poi_crossing_supervision_no">Crossing supervision: no</string>
+	<string name="poi_crossing_supervision_attendant">Crossing supervision: attendant</string>
+	<string name="poi_crossing_supervision_camera">Crossing supervision: camera</string>
+
 </resources>
