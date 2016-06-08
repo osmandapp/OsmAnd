@@ -1705,4 +1705,6 @@
     <string name="donations">Δωρεές</string>
     <string name="osm_live_subscribe_btn">Εγγραφή</string>
     <string name="osm_live_user_public_name">Δημόσιο Όνομα</string>
+    <string name="app_mode_bus">Λεωφορείο</string>
+ 	<string name="app_mode_train">Τρένο</string>
     </resources>
