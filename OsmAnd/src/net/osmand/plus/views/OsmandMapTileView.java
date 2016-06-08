@@ -978,6 +978,22 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			changeZoomPosition((float) dz, 0);
 		}
 
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			LOG.debug("onDoubleTap getZoom()");
+			if (!doubleTapScaleDetector.isInZoomMode()) {
+				if (isZoomingAllowed(getZoom(), 1.1f)) {
+					final RotatedTileBox tb = getCurrentRotatedTileBox();
+					final double lat = tb.getLatFromPixel(e.getX(), e.getY());
+					final double lon = tb.getLonFromPixel(e.getX(), e.getY());
+					getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		private void changeZoomPosition(float dz, float angle) {
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
 			float dx = cp.x - initialMultiTouchCenterPoint.x;
@@ -1091,22 +1107,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				return true;
 			}
 			return false;
-		}
-
-		@Override
-		public boolean onDoubleTap(MotionEvent e) {
-			LOG.debug("onDoubleTap getZoom()");
-			if (!doubleTapScaleDetector.isInZoomMode()) {
-				if (isZoomingAllowed(getZoom(), 1.1f)) {
-					final RotatedTileBox tb = getCurrentRotatedTileBox();
-					final double lat = tb.getLatFromPixel(e.getX(), e.getY());
-					final double lon = tb.getLonFromPixel(e.getX(), e.getY());
-					getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
-				}
-				return true;
-			} else {
-				return false;
-			}
 		}
 	}
 

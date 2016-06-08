@@ -56,13 +56,18 @@ public class DoubleTapScaleDetector {
 		}
 		long currentTime = System.currentTimeMillis();
 		if (event.getAction() == MotionEvent.ACTION_UP) {
-			secondDown = null;
 			if (isDoubleTapping) {
+				secondDown = null;
 				isDoubleTapping = false;
 				listener.onZoomEnded(scale);
 				return true;
 			} else {
+				if (secondDown != null &&
+						calculateSqaredDistance(secondDown, event) < mDoubleTapSlopSquare) {
+					listener.onDoubleTap(event);
+				}
 				firstUp = MotionEvent.obtain(event);
+				secondDown = null;
 			}
 		} else {
 			if (event.getAction() == MotionEvent.ACTION_DOWN && !isDoubleTapping) {
@@ -111,15 +116,16 @@ public class DoubleTapScaleDetector {
 			return false;
 		}
 
-		int deltaXDown = (int) firstDown.getX() - (int) secondDown.getX();
-		int deltaYDown = (int) firstDown.getY() - (int) secondDown.getY();
-		int squaredDown = deltaXDown * deltaXDown + deltaYDown * deltaYDown;
-
-		int deltaXUp = (int) firstUp.getX() - (int) secondDown.getX();
-		int deltaYUp = (int) firstUp.getY() - (int) secondDown.getY();
-		int squaredUp = deltaXUp * deltaXUp + deltaYUp * deltaYUp;
-
+		int squaredDown = calculateSqaredDistance(firstDown, secondDown);
+		int squaredUp = calculateSqaredDistance(firstUp, secondDown);
 		return squaredDown < mDoubleTapSlopSquare && squaredUp < mDoubleTapSlopSquare;
+	}
+
+	private static int calculateSqaredDistance(MotionEvent first,
+										   MotionEvent second) {
+		int deltaXDown = (int) first.getX() - (int) second.getX();
+		int deltaYDown = (int) first.getY() - (int) second.getY();
+		return deltaXDown * deltaXDown + deltaYDown * deltaYDown;
 	}
 
 	private static final boolean isConfirmedScale(MotionEvent secondDown,
@@ -146,5 +152,7 @@ public class DoubleTapScaleDetector {
 		void onZoomEnded(double relativeToStart);
 
 		void onGestureInit(float x1, float y1, float x2, float y2);
+
+		boolean onDoubleTap(MotionEvent e);
 	}
 }
