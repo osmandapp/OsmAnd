@@ -68,7 +68,7 @@ public class GPXUtilities {
 
 		@ColorInt
 		public int getColor(@ColorInt int defColor) {
-			if(extensions != null && extensions.containsKey("color")) {
+			if (extensions != null && extensions.containsKey("color")) {
 				try {
 					return Color.parseColor(extensions.get("color").toUpperCase());
 				} catch (IllegalArgumentException e) {
@@ -77,7 +77,7 @@ public class GPXUtilities {
 			}
 			return defColor;
 		}
-		
+
 		public void setColor(int color) {
 			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
 		}
@@ -105,8 +105,8 @@ public class GPXUtilities {
 		public double speed = 0;
 		public double hdop = Double.NaN;
 		public boolean deleted = false;
-		public int colourARGB = 0;					// point colour (used for altitude/speed colouring)
-		public double distance = 0.0;				// cumulative distance, if in a track
+		public int colourARGB = 0;                    // point colour (used for altitude/speed colouring)
+		public double distance = 0.0;                // cumulative distance, if in a track
 
 		public WptPt() {
 		}
@@ -155,7 +155,7 @@ public class GPXUtilities {
 			return lon;
 		}
 
-		
+
 		@Override
 		public PointDescription getPointDescription(Context ctx) {
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, name);
@@ -211,11 +211,11 @@ public class GPXUtilities {
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
 			return split(getDistanceMetric(), getTimeSplit(), meters);
 		}
-		
+
 		public List<GPXTrackAnalysis> splitByTime(int seconds) {
 			return split(getTimeSplit(), getDistanceMetric(), seconds);
 		}
-		
+
 		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit) {
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this);
@@ -242,7 +242,7 @@ public class GPXUtilities {
 		public List<WptPt> points = new ArrayList<WptPt>();
 
 	}
-	
+
 	public static class GPXTrackAnalysis {
 		public float totalDistance = 0;
 		public int totalTracks = 0;
@@ -257,13 +257,13 @@ public class GPXUtilities {
 		public double avgElevation = 0;
 		public double minElevation = 99999;
 		public double maxElevation = -100;
-		
+
 		public float maxSpeed = 0;
 		public float avgSpeed;
-		
+
 		public int points;
 		public int wptPoints = 0;
-		
+
 		public double metricEnd;
 		public double secondaryMetricEnd;
 		public WptPt locationStart;
@@ -272,24 +272,24 @@ public class GPXUtilities {
 		public boolean isTimeSpecified() {
 			return startTime != Long.MAX_VALUE && startTime != 0;
 		}
-		
+
 		public boolean isTimeMoving() {
 			return timeMoving != 0;
 		}
-		
+
 		public boolean isElevationSpecified() {
 			return maxElevation != -100;
 		}
-		
+
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
 		}
-		
-		
+
+
 		public static GPXTrackAnalysis segment(long filetimestamp, TrkSegment segment) {
 			return new GPXTrackAnalysis().prepareInformation(filetimestamp, new SplitSegment(segment));
 		}
-		
+
 		public GPXTrackAnalysis prepareInformation(long filestamp, SplitSegment... splitSegments) {
 			float[] calculations = new float[1];
 
@@ -298,7 +298,7 @@ public class GPXUtilities {
 			int speedCount = 0;
 			double totalSpeedSum = 0;
 			points = 0;
-			
+
 			double channelThresMin = 5;            // Minimum oscillation amplitude considered as noise for Up/Down analysis
 			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop
 			double channelBase;
@@ -319,10 +319,10 @@ public class GPXUtilities {
 				points += numberOfPoints;
 				for (int j = 0; j < numberOfPoints; j++) {
 					WptPt point = s.get(j);
-					if(j == 0 && locationStart == null) {
+					if (j == 0 && locationStart == null) {
 						locationStart = point;
 					}
-					if(j == numberOfPoints - 1) {
+					if (j == numberOfPoints - 1) {
 						locationEnd = point;
 					}
 					long time = point.time;
@@ -360,12 +360,12 @@ public class GPXUtilities {
 						if (point.ele > channelTop) {
 							channelTop = point.ele;
 							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0*point.hdop);  //Try empirical 2*hdop, may better serve very flat tracks, or high dop tracks
+								channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Try empirical 2*hdop, may better serve very flat tracks, or high dop tracks
 							}
 						} else if (point.ele < channelBottom) {
 							channelBottom = point.ele;
 							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0*point.hdop);
+								channelThres = Math.max(channelThres, 2.0 * point.hdop);
 							}
 						}
 						// Turnaround (breakout) detection
@@ -387,7 +387,7 @@ public class GPXUtilities {
 							channelThres = channelThresMin;
 						}
 						// End detection without breakout
-						if (j == (numberOfPoints -1)) {
+						if (j == (numberOfPoints - 1)) {
 							if ((channelTop - channelBase) >= channelThres) {
 								diffElevationUp += channelTop - channelBase;
 							}
@@ -424,7 +424,7 @@ public class GPXUtilities {
 					}
 				}
 			}
-			if(!isTimeSpecified()){
+			if (!isTimeSpecified()) {
 				startTime = filestamp;
 				endTime = filestamp;
 			}
@@ -437,35 +437,34 @@ public class GPXUtilities {
 			// 3. Time moving, if any
 			// 4. Elevation, eleUp, eleDown, if recorded
 			if (elevationPoints > 0) {
-				avgElevation =  totalElevation / elevationPoints;
+				avgElevation = totalElevation / elevationPoints;
 			}
 
 
-
 			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
-			if(speedCount > 0) {
-				if(timeMoving > 0){
-					avgSpeed = (float)totalDistanceMoving / (float)timeMoving * 1000f;
+			if (speedCount > 0) {
+				if (timeMoving > 0) {
+					avgSpeed = (float) totalDistanceMoving / (float) timeMoving * 1000f;
 				} else {
-					avgSpeed = (float)totalSpeedSum / (float)speedCount;
+					avgSpeed = (float) totalSpeedSum / (float) speedCount;
 				}
 			} else {
 				avgSpeed = -1;
 			}
 			return this;
 		}
-		
+
 	}
-	
+
 	private static class SplitSegment {
-		TrkSegment  segment;
+		TrkSegment segment;
 		double startCoeff = 0;
 		int startPointInd;
 		double endCoeff = 0;
 		int endPointInd;
 		double metricEnd;
 		double secondaryMetricEnd;
-		
+
 		public SplitSegment(TrkSegment s) {
 			startPointInd = 0;
 			startCoeff = 0;
@@ -473,28 +472,28 @@ public class GPXUtilities {
 			endCoeff = 1;
 			this.segment = s;
 		}
-		
+
 		public SplitSegment(TrkSegment s, int pointInd, double cf) {
 			this.segment = s;
 			this.startPointInd = pointInd;
 			this.startCoeff = cf;
 		}
-		
-		
+
+
 		public int getNumberOfPoints() {
 			return endPointInd - startPointInd + 2;
 		}
-		
+
 		public WptPt get(int j) {
 			final int ind = j + startPointInd;
-			if(j == 0) {
-				if(startCoeff == 0) {
+			if (j == 0) {
+				if (startCoeff == 0) {
 					return segment.points.get(ind);
 				}
 				return approx(segment.points.get(ind), segment.points.get(ind + 1), startCoeff);
 			}
-			if(j == getNumberOfPoints() - 1) {
-				if(endCoeff == 1) {
+			if (j == getNumberOfPoints() - 1) {
+				if (endCoeff == 1) {
 					return segment.points.get(ind);
 				}
 				return approx(segment.points.get(ind - 1), segment.points.get(ind), endCoeff);
@@ -502,7 +501,7 @@ public class GPXUtilities {
 			return segment.points.get(ind);
 		}
 
-		
+
 		private WptPt approx(WptPt w1, WptPt w2, double cf) {
 			long time = value(w1.time, w2.time, 0, cf);
 			double speed = value(w1.speed, w2.speed, 0, cf);
@@ -512,9 +511,9 @@ public class GPXUtilities {
 			double lon = value(w1.lon, w2.lon, -360, cf);
 			return new WptPt(lat, lon, time, ele, speed, hdop);
 		}
-		
+
 		private double value(double vl, double vl2, double none, double cf) {
-			if(vl == none || Double.isNaN(vl)) {
+			if (vl == none || Double.isNaN(vl)) {
 				return vl2;
 			} else if (vl2 == none || Double.isNaN(vl2)) {
 				return vl;
@@ -523,26 +522,26 @@ public class GPXUtilities {
 		}
 
 		private long value(long vl, long vl2, long none, double cf) {
-			if(vl == none) {
+			if (vl == none) {
 				return vl2;
-			} else if(vl2 == none) {
+			} else if (vl2 == none) {
 				return vl;
 			}
 			return vl + ((long) (cf * (vl2 - vl)));
 		}
 
-	
+
 		public double setLastPoint(int pointInd, double endCf) {
 			endCoeff = endCf;
 			endPointInd = pointInd;
 			return endCoeff;
 		}
-		
+
 	}
-	
+
 	private static SplitMetric getDistanceMetric() {
 		return new SplitMetric() {
-			
+
 			private float[] calculations = new float[1];
 
 			@Override
@@ -552,26 +551,26 @@ public class GPXUtilities {
 			}
 		};
 	}
-	
+
 	private static SplitMetric getTimeSplit() {
 		return new SplitMetric() {
-			
+
 			@Override
 			public double metric(WptPt p1, WptPt p2) {
-				if(p1.time != 0 && p2.time != 0) {
+				if (p1.time != 0 && p2.time != 0) {
 					return (int) Math.abs((p2.time - p1.time) / 1000l);
 				}
 				return 0;
 			}
 		};
 	}
-	
+
 	private abstract static class SplitMetric {
 
 		public abstract double metric(WptPt p1, WptPt p2);
 
 	}
-	
+
 	private static void splitSegment(SplitMetric metric, SplitMetric secondaryMetric,
 			double metricLimit, List<SplitSegment> splitSegments,
 			TrkSegment segment) {
@@ -579,7 +578,7 @@ public class GPXUtilities {
 		double secondaryMetricEnd = 0;
 		SplitSegment sp = new SplitSegment(segment, 0, 0);
 		double total = 0;
-		WptPt prev = null ;
+		WptPt prev = null;
 		for (int k = 0; k < segment.points.size(); k++) {
 			WptPt point = segment.points.get(k);
 			if (k > 0) {
@@ -587,12 +586,12 @@ public class GPXUtilities {
 				secondaryMetricEnd += secondaryMetric.metric(prev, point);
 				while (total + currentSegment > currentMetricEnd) {
 					double p = currentMetricEnd - total;
-					double cf = (p / currentSegment); 
+					double cf = (p / currentSegment);
 					sp.setLastPoint(k - 1, cf);
 					sp.metricEnd = currentMetricEnd;
 					sp.secondaryMetricEnd = secondaryMetricEnd;
 					splitSegments.add(sp);
-					
+
 					sp = new SplitSegment(segment, k - 1, cf);
 					currentMetricEnd += metricLimit;
 					prev = sp.get(0);
@@ -612,20 +611,20 @@ public class GPXUtilities {
 
 	private static List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
 		List<GPXTrackAnalysis> ls = new ArrayList<GPXUtilities.GPXTrackAnalysis>();
-		for(SplitSegment s : splitSegments) {
+		for (SplitSegment s : splitSegments) {
 			GPXTrackAnalysis a = new GPXTrackAnalysis();
 			a.prepareInformation(0, s);
 			ls.add(a);
 		}
 		return ls;
 	}
-	
+
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<Track>();
 		public List<WptPt> points = new ArrayList<WptPt>();
 		public List<Route> routes = new ArrayList<Route>();
-		
+
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
@@ -634,41 +633,41 @@ public class GPXUtilities {
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
-		
-		
+
+
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
-			for(int i = 0; i< tracks.size() ; i++){
+			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
-				for(TrkSegment segment : subtrack.segments){
-					g.totalTracks ++;
-					if(segment.points.size() > 1) {
+				for (TrkSegment segment : subtrack.segments) {
+					g.totalTracks++;
+					if (segment.points.size() > 1) {
 						splitSegments.add(new SplitSegment(segment));
 					}
 				}
 			}
 			g.prepareInformation(fileTimestamp, splitSegments.toArray(new SplitSegment[splitSegments.size()]));
-			return g ;
+			return g;
 		}
 
 
 		public boolean hasRtePt() {
-			for(Route r : routes) {
-				if(r.points.size() > 0) {
+			for (Route r : routes) {
+				if (r.points.size() > 0) {
 					return true;
 				}
 			}
 			return false;
 		}
-		
+
 		public boolean hasWptPt() {
 			return points.size() > 0;
 		}
-		
+
 		public boolean hasTrkPt() {
-			for(Track t  : tracks) {
+			for (Track t : tracks) {
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
 						return true;
@@ -751,7 +750,7 @@ public class GPXUtilities {
 			}
 			return tpoints;
 		}
-		
+
 		public WptPt getLastPoint() {
 			if (tracks.size() > 0) {
 				Track tk = tracks.get(tracks.size() - 1);
@@ -926,7 +925,7 @@ public class GPXUtilities {
 		}
 		writeNotNullText(serializer, "name", p.name);
 		writeNotNullText(serializer, "desc", p.desc);
-		if(p.link != null) {
+		if (p.link != null) {
 			serializer.startTag(null, "link");
 			serializer.attribute(null, "href", p.link);
 			serializer.endTag(null, "link");
@@ -1097,7 +1096,7 @@ public class GPXUtilities {
 							} else if (tag.equals("category")) {
 								((WptPt) parse).category = readText(parser, "category");
 							} else if (tag.equals("type")) {
-								if(((WptPt) parse).category == null) {
+								if (((WptPt) parse).category == null) {
 									((WptPt) parse).category = readText(parser, "type");
 								}
 							} else if (parser.getName().equals("ele")) {

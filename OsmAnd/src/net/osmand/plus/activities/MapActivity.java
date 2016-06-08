@@ -539,7 +539,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						gpxImportHelper.handleFileImport(data, new File(data.getPath()).getName());
 						setIntent(null);
 					} else if ("content".equals(scheme)) {
-						gpxImportHelper.handleContenImport(data);
+						gpxImportHelper.handleContentImport(data);
 						setIntent(null);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						parseNavigationIntent(data);
