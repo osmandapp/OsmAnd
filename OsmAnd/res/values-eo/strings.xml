@@ -1364,11 +1364,11 @@
     <string name="fav_export_confirmation">Dosiero kun antaŭ-elportitaj ŝatataj jam ekzistas. Ĉu vi volas anstataŭigi ĝin?</string>
     <string name="routing_settings">Navigado</string>
     <string name="profile_settings">Specifaj agordoj de profilo</string>
-    <string name="routing_settings_descr">Difinas navigadajn agordojn</string>
+    <string name="routing_settings_descr">Difinu agordojn de navigado</string>
     <string name="global_settings">Ĝeneralaj agordoj</string>
     <string name="index_settings">Administri map-dosierojn</string>
     <string name="general_settings">Ĝeneralaj</string>
-    <string name="general_settings_descr">Agordas vidigon kaj ĝenerale la aplikaĵon</string>
+    <string name="general_settings_descr">Agordu vidigon kaj ĝenerale la aplikaĵon</string>
     <string name="global_app_settings">Ĝeneralaj agordoj de aplikaĵo</string>
     <string name="user_name">Via OSM-uzantnomo</string>
     <string name="open_street_map_login_descr">Bezonata por sendadoj al openstreetmap.org</string>
@@ -1385,7 +1385,7 @@
     <string name="choose_auto_follow_route">Aŭtomate centrigi mapon</string>
     <string name="choose_auto_follow_route_descr">Tempo antaŭ map-vido samtempigos kun aktuala pozicio</string>
     <string name="keep_informing_never">Nur permane (tuŝu sageton)</string>
-    <string name="keep_informing_descr">Re-anoncas navigadajn sciigojn je regulaj temp-intervaloj</string>
+    <string name="keep_informing_descr">Re-anoncas sciigojn pri navigado je regulaj temp-intervaloj</string>
     <string name="keep_informing">Reanonci navigadajn sciigojn</string>
     <string name="auto_follow_route_navigation">Aŭtomate centrigi nur navigade</string>
     <string name="auto_follow_route_navigation_descr">Aŭtomate centrigas map-vidon nur dum navigado.</string>
@@ -1636,7 +1636,7 @@
     <string name="select_max_zoom_preload_area">Elektu maksimuman skalon por elŝuti</string>
     <string name="maps_could_not_be_downloaded">Tiu ĉi mapo ne povas esti elŝutita</string>
     <string name="continuous_rendering">Konstanta bildigado</string>
-    <string name="continuous_rendering_descr">Bildigas konstante anstataŭ bildigi po unu bildo per unu fojo</string>
+    <string name="continuous_rendering_descr">Bildigas konstante anstataŭ bildigi po unu bildo en unu fojo</string>
     <string name="rendering_exception">Eraro okazis dum bildigado de elektita areo</string>
     <string name="show_point_options">Uzi lokon…</string>
     <string name="renderer_load_sucess">Bildigilo ŝargita sukcese</string>
