@@ -727,7 +727,7 @@
 	<string name="poi_religious">Religious area</string>
 	<string name="poi_wayside_cross">Wayside cross</string>
 	<string name="poi_wayside_shrine">Wayside shrine</string>
-	<string name="poi_information">Tourist information</string>
+	<string name="poi_information">Information</string>
 	<string name="poi_clock">Clock</string>
 	<string name="poi_travel_agent">Travel agent</string>
 	<string name="poi_viewpoint">Viewpoint</string>
@@ -2912,5 +2912,14 @@
 	<string name="poi_valley_balka">Balka</string>
 
 	<string name="poi_ventilation_shaft">Ventilation shaft</string>
+
+	<string name="poi_pump_type_beam_pump">Pump type: beam pump</string>
+	<string name="poi_pump_type_india_mk_2_3">Pump type: India Mk II or III></string>
+	<string name="poi_pump_type_gravity">Pump type: gravity</string>
+	<string name="poi_pump_style_modern">Pump style: modern</string>
+	<string name="poi_pump_style_historic">Pump style: historic</string>
+	<string name="poi_pump_status_ok">Pump status: ok</string>
+	<string name="poi_pump_status_broken">Pump status: broken</string>
+	<string name="poi_pump_status_locked">Pump status: locked</string>
 
 </resources>

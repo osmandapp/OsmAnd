@@ -2909,4 +2909,13 @@
 
 	<string name="poi_ventilation_shaft">Вентиляционная шахта</string>
 
+	<string name="poi_pump_type_beam_pump">Тип насоса: станок-качалка</string>
+	<string name="poi_pump_type_india_mk_2_3">Тип насоса: India Mk II или III></string>
+	<string name="poi_pump_type_gravity">Тип насоса: гравитационный</string>
+	<string name="poi_pump_style_modern">Стиль насоса: современный</string>
+	<string name="poi_pump_style_historic">Стиль насоса: исторический</string>
+	<string name="poi_pump_status_ok">Состояние насоса: работает</string>
+	<string name="poi_pump_status_broken">Состояние насоса: сломан</string>
+	<string name="poi_pump_status_locked">Состояние насоса: заперт</string>
+
 </resources>
