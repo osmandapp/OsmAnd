@@ -2937,4 +2937,16 @@
 
 <string name="poi_crossing_saltire_yes">Con cruz de San Andrés</string>
 	<string name="poi_crossing_saltire_no">Sin cruz de San Andrés</string>
-	</resources>
+	<string name="poi_dispensing_yes">Vende con receta médica</string>
+	<string name="poi_dispensing_no">Vende sin receta médica</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Público</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_military_public">Militar/Público</string>
+	<string name="poi_aerodrome_type_private">Privado</string>
+
+	<string name="poi_ventilation_shaft">Conducto de ventilación</string>
+
+</resources>
