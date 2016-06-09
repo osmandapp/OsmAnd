@@ -2208,4 +2208,6 @@
     <string name="lang_be_BY">Bielorussu (caràteres latinos)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_ast">Asturianu</string>
+    <string name="app_mode_bus">Postale</string>
+ 	<string name="app_mode_train">Trenu</string>
     </resources>
