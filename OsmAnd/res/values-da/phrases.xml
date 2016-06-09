@@ -2992,4 +2992,5 @@
 	<string name="poi_pump_status_locked">Pumpestatus: låst</string>
 
 <string name="poi_pump_type_beam_pump">Pumpetype: beam pumpe</string>
+	<string name="poi_pump_type_india_mk_2_3">Pumpetype: Indien Mk II eller III</string>
 	</resources>
