@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -99,8 +100,14 @@ public class DestinationReachedMenuFragment extends Fragment {
 			}
 		});
 
-
 		Button findParkingButton = (Button) view.findViewById(R.id.findParkingButton);
+
+		ApplicationMode appMode = getMapActivity().getMyApplication().getRoutingHelper().getAppMode();
+
+		if (!appMode.isDerivedRoutingFrom(appMode.CAR)) {
+			findParkingButton.setVisibility(View.GONE);
+		}
+
 		findParkingButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_parking_dark, menu.isLight()), null, null, null);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), findParkingButton, !menu.isLight());
