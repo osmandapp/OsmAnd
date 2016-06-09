@@ -2970,8 +2970,8 @@
 	<string name="poi_crossing_barrier_yes">Overkørsel bom</string>
 	<string name="poi_crossing_on_demand_yes">Overkørsel på forespørgsel</string>
 	<string name="poi_crossing_on_demand_no">Overkørsel på forespørgsel: nej</string>
-	<string name="poi_dispensing_yes">Dispensering: Ja</string>
-	<string name="poi_dispensing_no">Dispensering: nej</string>
+	<string name="poi_dispensing_yes">Udlevering: ja</string>
+	<string name="poi_dispensing_no">Udlevering: nej</string>
 
 	<string name="poi_aerodrome_type_international">International</string>
 	<string name="poi_aerodrome_type_regional">Regional</string>
