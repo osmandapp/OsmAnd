@@ -2201,4 +2201,16 @@
     <string name="move_marker_bottom_sheet_title">Proszę przesunąć mapę, aby zmienić położenie znacznika</string>
     <string name="change_markers_position">Zmień położenie znacznika</string>
     <string name="current_track">Aktualna trasa</string>
+    <string name="app_mode_bus">Autobus</string>
+ 	<string name="app_mode_train">Pociąg</string>
+    <string name="follow_us">Podążaj za nami</string>
+    <string name="access_direction_haptic_feedback">Haptyczne powiadomienia o kierunku</string>
+    <string name="access_direction_haptic_feedback_descr">Wskazuje kierunek do celu używając wibracji</string>
+    <string name="use_osm_live_routing">Nawigacja OSM Live</string>
+    <string name="lang_es_us">Hiszpański (Ameryka)</string>
+    <string name="lang_ast">Asturyjski</string>
+    <string name="lang_en_gb">Angielski (Wielka Brytania)</string>
+    <string name="lang_be_BY">Białoruski (łaciński)</string>
+    <string name="lang_hu_formal">Węgierski (formalny)</string>
+    <string name="lang_kn">Kannada</string>
     </resources>
