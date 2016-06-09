@@ -1200,7 +1200,7 @@
     <string name="osmand_parking_choose_type">Elekti specon de parkumejo</string>
     <string name="osmand_parking_lim_text">Tempo-limigita</string>
     <string name="osmand_parking_no_lim_text">Sen templimo</string>
-    <string name="osmand_parking_add_event">Aldoni averton la kalendara aplikaĵo</string>
+    <string name="osmand_parking_add_event">Aldoni averton al kalendara aplikaĵo</string>
     <string name="osmand_parking_time_limit">Tempo-limigita parkumejo</string>
     <string name="osmand_parking_time_no_limit">Sen-templima parkumejo</string>
     <string name="osmand_parking_position_description">La pozicio de via parkumita aŭto. %1$s</string>
@@ -1869,7 +1869,7 @@
     <string name="favourites_remove_dialog_success">Ŝatata punkto {0} forigita sukcese.</string>
     <string name="poi_edit_title">Redakti Interesejon</string>
     <string name="poi_create_title">Krei Interesejon</string>
-    <string name="poi_error_poi_not_found">Ne povas trovi nodon aŭ servo ne estas unuopa nodo.</string>
+    <string name="poi_error_poi_not_found">Ne povas trovi nodon aŭ servo ne estas unuopa nodo</string>
     <string name="poi_remove_confirm_template">Ĉu forigi na {0} (entajpu komenton)?</string>
     <string name="poi_remove_title">Forigi Interesejon</string>
     <string name="poi_remove_success">Interesejo forigita sukcese</string>
@@ -2007,4 +2007,5 @@
     <string name="number_of_edits">Nombro da redaktoj</string>
     <string name="reports_for">Raportoj por</string>
     <string name="file_name_containes_illegal_char">Dosiernomo enhavas nepermesitan signon</string>
-</resources>
+<string name="items_were_selected">{0} ero(j) elektita(j)</string>
+    </resources>
