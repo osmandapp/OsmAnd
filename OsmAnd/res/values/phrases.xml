@@ -2882,7 +2882,7 @@
 	<string name="poi_crossing_activation_local">Crossing activation: local</string>
 	<string name="poi_crossing_activation_remote">Crossing activation: remote</string>
 	<string name="poi_crossing_barrier_no">Crossing barrier: no</string>
-	<string name="poi_crossing_barrier_yes>">Crossing barrier</string>
+	<string name="poi_crossing_barrier_yes">Crossing barrier</string>
 	<string name="poi_crossing_barrier_full">Crossing barrier: full</string>
 	<string name="poi_crossing_barrier_half">Crossing barrier: half</string>
 	<string name="poi_crossing_barrier_double_half">Crossing barrier: double half</string>
@@ -2898,5 +2898,19 @@
 	<string name="poi_crossing_supervision_no">Crossing supervision: no</string>
 	<string name="poi_crossing_supervision_attendant">Crossing supervision: attendant</string>
 	<string name="poi_crossing_supervision_camera">Crossing supervision: camera</string>
+
+	<string name="poi_dispensing_yes">Dispensing: yes</string>
+	<string name="poi_dispensing_no">Dispensing: no</string>
+
+	<string name="poi_aerodrome_type_international">International</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Public</string>
+	<string name="poi_aerodrome_type_military">Military</string>
+	<string name="poi_aerodrome_type_military_public">Military/public</string>
+	<string name="poi_aerodrome_type_private">Private</string>
+
+	<string name="poi_valley_balka">Balka</string>
+
+	<string name="poi_ventilation_shaft">Ventilation shaft</string>
 
 </resources>
