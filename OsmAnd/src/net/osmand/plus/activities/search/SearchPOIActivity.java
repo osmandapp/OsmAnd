@@ -656,11 +656,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					showOnMapItem.setEnabled(amenityAdapter.getCount() > 0);
 				}
 			}
-			// Issue #2667 (1)
-			if (tChange != null) {
-				changeFilter(tChange);
-				tChange = null;
-			}
 			amenityAdapter.setNewModel(result);
 			amenityAdapter.notifyDataSetChanged();
 			lastSearchedLocation = searchLocation;
@@ -668,6 +663,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			currentSearchTask = null;
 			stopSearching = false;
 			//Toast.makeText(SearchPOIActivity.this, "onPostExecute has run", Toast.LENGTH_SHORT).show();
+			// Issue #2667 (1)
+			if (tChange != null) {
+				changeFilter(tChange);
+				tChange = null;
+			}
 			updateButtonState(false);
 		}
 
