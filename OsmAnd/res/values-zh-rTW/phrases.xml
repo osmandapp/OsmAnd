@@ -130,7 +130,7 @@
 	<string name="poi_window_blind">窗簾店</string>
 	<string name="poi_department_store">百貨公司</string>
 	<string name="poi_electronics">3C產品商店</string>
-	<string name="poi_car">汽車展售店</string>
+	<string name="poi_car">汽車商</string>
 	<string name="poi_car_parts">汽車零件</string>
 	<string name="poi_cosmetics">化妝品</string>
 	<string name="poi_marketplace">市場</string>
@@ -280,7 +280,7 @@
 
 	<string name="poi_recycling">資源回收</string>
 	<string name="poi_landfill">垃圾掩埋場</string>
-	<string name="poi_waste_disposal">廢棄物處理</string>
+	<string name="poi_waste_disposal">廢棄物處置</string>
 	<string name="poi_waste_basket">垃圾桶</string>
 
 	<string name="poi_industrial">工業區</string>
@@ -527,7 +527,7 @@
 	<string name="poi_historic_monastery">古時的修道院</string>
 	<string name="poi_wayside_cross">路邊十字架</string>
 	<string name="poi_wayside_shrine">路邊神龕</string>
-	<string name="poi_information">旅遊資訊</string>
+	<string name="poi_information">資訊</string>
 	<string name="poi_clock">時鐘</string>
 	<string name="poi_travel_agent">旅行社</string>
 	<string name="poi_viewpoint">觀景點</string>
