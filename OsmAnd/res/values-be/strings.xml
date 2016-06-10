@@ -2221,4 +2221,6 @@
     <string name="lang_kn">канада (Індыя)</string>
     <string name="use_osm_live_routing_description">Уключыць навігацыю для зьмен OSM Live (Beta)</string>
 	<string name="lang_ast">Астурыйская</string>
+    <string name="app_mode_bus">Аўтобус</string>
+ 	<string name="app_mode_train">Цягнік</string>
     </resources>
