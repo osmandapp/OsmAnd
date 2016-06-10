@@ -30,6 +30,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchPOIActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -212,7 +213,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 				amenityList.remove(amenityList.size() - 1);
 			}
 		}
-		if (amenityList.size() == 0 && isAutomaticallyIncreaseSearch()) {
+		if (amenityList.size() == 0 && isAutomaticallyIncreaseSearch() && !SearchPOIActivity.stopSearching) {
 			int step = 5;
 			while (amenityList.size() == 0 && step-- > 0 && isSearchFurtherAvailable()) {
 				amenityList = searchFurther(lat, lon, matcher);
