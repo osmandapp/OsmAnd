@@ -188,6 +188,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	@Override
 	protected void onDestroy() {
+	// Issue 2657
 		super.onDestroy();
 		if (!(currentSearchTask == null || currentSearchTask.getStatus() == Status.FINISHED)) {
 			stopSearching = true;
