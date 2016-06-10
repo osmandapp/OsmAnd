@@ -796,11 +796,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		final int newZoom = mapView.getZoom() + stp;
 		final double zoomFrac = mapView.getZoomFractionalPart();
-		if (newZoom > MAX_ZOOM) {
+		if (newZoom > mapView.getMainLayer().getMaximumShownMapZoom()) {
 			Toast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
-		if (newZoom < 1) {
+		if (newZoom < mapView.getMainLayer().getMinimumShownMapZoom()) {
 			Toast.makeText(this, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
