@@ -213,9 +213,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 				amenityList.remove(amenityList.size() - 1);
 			}
 		}
-		if (amenityList.size() == 0 && isAutomaticallyIncreaseSearch() && !SearchPOIActivity.stopSearching) {
+		if (amenityList.size() == 0 && isAutomaticallyIncreaseSearch()) {
 			int step = 5;
-			while (amenityList.size() == 0 && step-- > 0 && isSearchFurtherAvailable()) {
+			while (amenityList.size() == 0 && step-- > 0 && isSearchFurtherAvailable() && !SearchPOIActivity.stopSearching) {
 				amenityList = searchFurther(lat, lon, matcher);
 			}
 		}
