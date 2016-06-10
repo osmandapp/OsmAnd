@@ -51,7 +51,7 @@
             android:id="@+id/map_transparency_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
+            android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="@dimen/map_button_size"
             android:orientation="horizontal">
 
