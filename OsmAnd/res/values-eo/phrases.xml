@@ -1,2 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_shop">Vendejo</string>
+		<string name="poi_shop_food">Manĝovendejo</string>
+	<string name="poi_emergency">ISS (Integra savsistemo)</string>
+	<string name="poi_transportation">Transporto</string>
+		<string name="poi_road_obstacle">Voja barilo</string>
+		<string name="poi_filling_station">Benzinejo</string>
+		<string name="poi_personal_transport">Transporto privata</string>
+		<string name="poi_public_transport">Transporto publika</string>
+		<string name="poi_air_transport">Aerotransporto</string>
+		<string name="poi_water_transport">Akvotransporto</string>
+		<string name="poi_bicycle_transport">Transporto bicikla</string>
+		<string name="poi_aerialway_transport">Kablotransporto</string>
+		</resources>
