@@ -1117,7 +1117,7 @@
     <string name="poi_filter_entertainment">Amuzaĵoj</string>
     <string name="poi_filter_accomodation">Loĝado</string>
     <string name="poi_filter_restaurants">Manĝejoj</string>
-    <string name="poi_filter_sightseeing">Vidintaĵoj</string>
+    <string name="poi_filter_sightseeing">Vidindaĵoj</string>
     <string name="poi_filter_car_aid">Aŭto-helpo</string>
     <string name="poi_filter_food_shop">Manĝovendejo</string>
     <string name="poi_filter_for_tourists">Por turistoj</string>
@@ -1592,7 +1592,7 @@
     <string name="context_menu_item_add_waypoint">Aldoni GPX-navigadpunkton</string>
     <string name="amenity_type_landuse">Utilkampoj</string>
     <string name="amenity_type_leisure">Ripozejoj</string>
-    <string name="amenity_type_man_made">Industrio</string>
+    <string name="amenity_type_man_made">Hom-kreaĵoj</string>
     <string name="amenity_type_military">Militejoj</string>
     <string name="amenity_type_natural">Naturo</string>
     <string name="amenity_type_office">Oficejoj</string>
@@ -1851,12 +1851,12 @@
     <string name="Closest_Amenities">Plej proksimaj servoj</string>
     <string name="position_on_map_center">Centre</string>
     <string name="position_on_map_bottom">Sube</string>
-    <string name="navigate_point_top_text">Entajpu latitudon kaj longitudon en la elektita formo (D - gradoj, M - arkminutoj, S - arksekundoj)</string>
+    <string name="navigate_point_top_text">Entajpu latitudon kaj longitudon en la elektita formo (G - gradoj, M - arkminutoj, S - arksekundoj)</string>
     <string name="navigate_point_latitude">Latitudo</string>
     <string name="navigate_point_longitude">Longitudo</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">GGG.GG</string>
+    <string name="navigate_point_format_DM">GGG MM.MM</string>
+    <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
     <string name="search_address_top_text">Elekti adreson</string>
     <string name="context_menu_item_create_poi">Krei Interesejon</string>
     <string name="add_favorite_dialog_top_text">Entajpu nomon de ŝatata ejo</string>
