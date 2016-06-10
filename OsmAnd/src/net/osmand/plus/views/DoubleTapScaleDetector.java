@@ -27,7 +27,7 @@ public class DoubleTapScaleDetector {
 
 	private int displayHeightPx;
 
-	private boolean isDoubleTapping = false;
+	private boolean mIsInZoomMode = false;
 	private float scale;
 	private MotionEvent firstDown;
 	private MotionEvent firstUp;
@@ -56,9 +56,9 @@ public class DoubleTapScaleDetector {
 		}
 		long currentTime = System.currentTimeMillis();
 		if (event.getAction() == MotionEvent.ACTION_UP) {
-			if (isDoubleTapping) {
+			if (mIsInZoomMode) {
 				secondDown = null;
-				isDoubleTapping = false;
+				mIsInZoomMode = false;
 				listener.onZoomEnded(scale);
 				return true;
 			} else {
@@ -70,7 +70,7 @@ public class DoubleTapScaleDetector {
 				secondDown = null;
 			}
 		} else {
-			if (event.getAction() == MotionEvent.ACTION_DOWN && !isDoubleTapping) {
+			if (event.getAction() == MotionEvent.ACTION_DOWN && !mIsInZoomMode) {
 				if (isConsideredDoubleTap(firstDown, firstUp, event)) {
 					secondDown = MotionEvent.obtain(event);
 					float x = event.getX();
@@ -83,9 +83,9 @@ public class DoubleTapScaleDetector {
 				}
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 				if (isConfirmedScale(secondDown, event)) {
-					isDoubleTapping = true;
+					mIsInZoomMode = true;
 				}
-				if (isDoubleTapping) {
+				if (mIsInZoomMode) {
 					float delta = convertPxToDp((int) (firstDown.getY() - event.getY()));
 					float scaleDelta = delta / (displayHeightPx / SCALE_PER_SCREEN);
 					scale = 1 - scaleDelta;
@@ -98,7 +98,7 @@ public class DoubleTapScaleDetector {
 	}
 
 	public boolean isInZoomMode() {
-		return isDoubleTapping;
+		return mIsInZoomMode;
 	}
 
 	private int convertPxToDp(int px) {
