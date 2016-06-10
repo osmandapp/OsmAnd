@@ -119,6 +119,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final int LONG_KEYPRESS_DELAY = 500;
 
 	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
+	public static final int MAX_ZOOM = 22;
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
@@ -795,7 +796,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		final int newZoom = mapView.getZoom() + stp;
 		final double zoomFrac = mapView.getZoomFractionalPart();
-		if (newZoom > 22) {
+		if (newZoom > MAX_ZOOM) {
 			Toast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
