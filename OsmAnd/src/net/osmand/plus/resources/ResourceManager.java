@@ -850,14 +850,15 @@ public class ResourceManager {
 				}
 			}
 		}
-//		int left = MapUtils.get31TileNumberX(leftLongitude);
-//		int top = MapUtils.get31TileNumberY(topLatitude);
-//		int right = MapUtils.get31TileNumberX(rightLongitude);
-//		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
-		int left = 0;
-		int top = 0;
-		int right = Integer.MAX_VALUE;
-		int bottom = Integer.MAX_VALUE;
+		int left = MapUtils.get31TileNumberX(leftLongitude);
+		int top = MapUtils.get31TileNumberY(topLatitude);
+		int right = MapUtils.get31TileNumberX(rightLongitude);
+		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
+		// Not using boundares results in very slow initial search if user has many maps installed
+//		int left = 0;
+//		int top = 0;
+//		int right = Integer.MAX_VALUE;
+//		int bottom = Integer.MAX_VALUE;
 		for (AmenityIndexRepositoryBinary index : list) {
 			if (matcher != null && matcher.isCancelled()) {
 				break;
