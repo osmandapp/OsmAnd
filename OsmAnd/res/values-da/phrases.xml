@@ -2942,12 +2942,12 @@
 <string name="poi_salt_yes">Salt: ja</string>
 	<string name="poi_salt_no">Salt: nej</string>
 
-<string name="poi_wheelchair_designated">Udpeget til kørestole</string>
+<string name="poi_wheelchair_designated">Egnet for kørestole</string>
 	<string name="poi_spoil_heap">Affaldsbjerg</string>
 
 <string name="poi_summer_camp">Sommerlejr</string>
 
-<string name="poi_recreation_center">Rekreationcenter</string>
+<string name="poi_recreation_center">Rekreationscenter</string>
 
 	<string name="poi_crossing_saltire_yes">Overkørsel med krydsmærke</string>
 	<string name="poi_crossing_saltire_no">Overkørsel med krydsmærke: nej</string>
@@ -2982,7 +2982,7 @@
 
 	<string name="poi_valley_balka">Balka</string>
 
-	<string name="poi_ventilation_shaft">Ventilationsskaft</string>
+	<string name="poi_ventilation_shaft">Ventilationsskakt</string>
 
 <string name="poi_pump_type_gravity">Pumpetype: tyngdekraft</string>
 	<string name="poi_pump_style_modern">Pumpestil: moderne</string>
@@ -2991,6 +2991,6 @@
 	<string name="poi_pump_status_broken">Pumpestatus: i stykket</string>
 	<string name="poi_pump_status_locked">Pumpestatus: låst</string>
 
-<string name="poi_pump_type_beam_pump">Pumpetype: beam pumpe</string>
+<string name="poi_pump_type_beam_pump">Pumpetype: pumpjack</string>
 	<string name="poi_pump_type_india_mk_2_3">Pumpetype: Indien Mk II eller III</string>
 	</resources>
