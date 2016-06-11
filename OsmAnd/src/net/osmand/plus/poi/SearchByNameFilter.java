@@ -22,7 +22,7 @@ public class SearchByNameFilter extends PoiUIFilter {
 		super(application);
 		this.name = application.getString(R.string.poi_filter_by_name);
 		this.filterId = FILTER_ID;
-		this.distanceToSearchValues = new double[] {100, 1000, 5000};
+		this.distanceToSearchValues = new double[] {100, 1000, 20000};
 	}
 	
 	@Override
