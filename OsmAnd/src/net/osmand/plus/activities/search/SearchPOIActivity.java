@@ -661,8 +661,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			amenityAdapter.notifyDataSetChanged();
 			lastSearchedLocation = searchLocation;
 			setSupportProgressBarIndeterminateVisibility(false);
-			currentSearchTask = null;
 			stopSearching = false;
+			currentSearchTask = null;
 			//Toast.makeText(SearchPOIActivity.this, "onPostExecute has run", Toast.LENGTH_SHORT).show();
 			// Issue #2667 (1)
 			if (tChange != null) {
