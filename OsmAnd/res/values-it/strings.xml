@@ -1552,7 +1552,7 @@
     <string name="configure_map">Configura la mappa</string>
     <string name="map_widget_appearance_rem">Elementi rimanenti</string>
     <string name="map_widget_top">Barra di stato</string>
-    <string name="search_radius_proximity">Nei pressi di</string>
+    <string name="search_radius_proximity">Nel raggio di</string>
 
     <string name="rendering_attr_trainLightrailRoutes_name">Percorsi in treno</string>
     <string name="rendering_attr_tramRoutes_name">Percorsi in tram</string>
