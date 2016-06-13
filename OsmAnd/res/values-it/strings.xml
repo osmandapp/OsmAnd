@@ -2266,4 +2266,6 @@
     <string name="lang_ast">Asturiano</string>
     <string name="lang_en_gb">Inglese (Regno Unito)</string>
     <string name="lang_kn">Kannada</string>
+    <string name="app_mode_bus">Autobus</string>
+ 	<string name="app_mode_train">Treno</string>
     </resources>
