@@ -723,7 +723,7 @@ public class OsmandSettings {
 		}
 
 		;
-	}.makeGlobal().cache();
+	}.makeGlobal();
 
 
 	public final OsmandPreference<SpeedConstants> SPEED_SYSTEM = new EnumIntPreference<SpeedConstants>(
@@ -753,7 +753,7 @@ public class OsmandSettings {
 
 		;
 
-	}.makeProfile().cache();
+	}.makeProfile();
 
 
 	// this value string is synchronized with settings_pref.xml preference name
