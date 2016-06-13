@@ -259,6 +259,7 @@ public class MapPoiTypes {
 		if (resourceName != null) {
 			this.resourceName = resourceName;
 		}
+		this.categories.clear();
 		try {
 			if (this.resourceName == null) {
 				is = MapPoiTypes.class.getResourceAsStream("poi_types.xml"); //$NON-NLS-1$
