@@ -45,7 +45,6 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.activities.search.SearchPOIActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -758,10 +757,6 @@ public class ResourceManager {
 		try {
 			if (!filter.isEmpty()) {
 				for (AmenityIndexRepository index : amenityRepositories.values()) {
-					if (SearchPOIActivity.stopSearching) {
-						searchAmenitiesInProgress = false;
-						break;
-					}
 					if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 						List<Amenity> r = index.searchAmenities(MapUtils.get31TileNumberY(topLatitude),
 								MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(bottomLatitude),
@@ -837,9 +832,6 @@ public class ResourceManager {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<AmenityIndexRepositoryBinary>();
 		for (AmenityIndexRepository index : amenityRepositories.values()) {
-			if (SearchPOIActivity.stopSearching) {
-				break;
-			}
 			if (index instanceof AmenityIndexRepositoryBinary) {
 				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 					if(index.checkContains(lat, lon)){
@@ -847,6 +839,7 @@ public class ResourceManager {
 					} else {
 						list.add((AmenityIndexRepositoryBinary) index);
 					}
+					
 				}
 			}
 		}
@@ -863,14 +856,12 @@ public class ResourceManager {
 			if (matcher != null && matcher.isCancelled()) {
 				break;
 			}
-			if (SearchPOIActivity.stopSearching) {
-				break;
-			}
 			List<Amenity> result = index.searchAmenitiesByName(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat),
 					left, top, right, bottom,
 					searchQuery, matcher);
 			amenities.addAll(result);
 		}
+
 		return amenities;
 	}
 	

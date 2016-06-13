@@ -118,7 +118,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static int RESULT_REQUEST_CODE = 54;
 
 	private CharSequence tChange;
-	public static boolean stopSearching = false;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu omenu) {
@@ -186,14 +185,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		return true;
 	}
 
-	@Override
-	protected void onDestroy() {
-	// Issue 2657
-		super.onDestroy();
-		if (!(currentSearchTask == null || currentSearchTask.getStatus() == Status.FINISHED)) {
-			stopSearching = true;
-		}
-	}
 
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.poiSplitbar);
@@ -210,7 +201,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					.show();
 			return true;
 		}
-		if ((isNameSearch() && !Algorithms.objectEquals(filter.getFilterByName(), query)) || stopSearching) {
+		if ((isNameSearch() && !Algorithms.objectEquals(filter.getFilterByName(), query)) ) {
 			filter.clearPreviousZoom();
 			filter.setFilterByName(query);
 			runNewSearchQuery(location, NEW_SEARCH_INIT);
@@ -474,7 +465,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	private synchronized void runNewSearchQuery(net.osmand.Location location, int requestType) {
-		if (currentSearchTask == null || currentSearchTask.getStatus() == Status.FINISHED) {
+		if (currentSearchTask == null || currentSearchTask.getStatus() == Status.FINISHED ) {
 			currentSearchTask = new SearchAmenityTask(location, requestType);
 			currentSearchTask.execute();
 		}
@@ -617,6 +608,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		public SearchAmenityTask(net.osmand.Location location, int requestType) {
 			this.searchLocation = location;
 			this.requestType = requestType;
+
 		}
 
 		net.osmand.Location getSearchedLocation() {
@@ -648,28 +640,28 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		@Override
 		protected void onPostExecute(List<Amenity> result) {
+			setSupportProgressBarIndeterminateVisibility(false);
+			currentSearchTask = null;
+			updateButtonState(false);
 			if (isNameSearch()) {
 				if (isNominatimFilter() && !Algorithms.isEmpty(((NominatimPoiFilter) filter).getLastError())) {
 					Toast.makeText(SearchPOIActivity.this, ((NominatimPoiFilter) filter).getLastError(),
 							Toast.LENGTH_LONG).show();
 				}
+				amenityAdapter.setNewModel(result);
 				if(showOnMapItem != null) {
 					showOnMapItem.setEnabled(amenityAdapter.getCount() > 0);
 				}
+			} else {
+				amenityAdapter.setNewModel(result);
 			}
-			amenityAdapter.setNewModel(result);
-			amenityAdapter.notifyDataSetChanged();
-			lastSearchedLocation = searchLocation;
-			setSupportProgressBarIndeterminateVisibility(false);
-			stopSearching = false;
-			currentSearchTask = null;
-			//Toast.makeText(SearchPOIActivity.this, "onPostExecute has run", Toast.LENGTH_SHORT).show();
 			// Issue #2667 (1)
 			if (tChange != null) {
 				changeFilter(tChange);
 				tChange = null;
 			}
-			updateButtonState(false);
+			amenityAdapter.notifyDataSetChanged();
+			lastSearchedLocation = searchLocation;
 		}
 
 		@Override
