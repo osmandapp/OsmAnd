@@ -280,11 +280,15 @@ public class RouteDataObject {
 			if(pref.contains("km")) {
 				f *= 1000;  
 			}
-			if(pref.contains("\"")) {
+			if(pref.contains("\"") ||  pref.contains("in")) {
 				f *= 0.0254; 
-			} else if (pref.contains("\'") || pref.contains("ft")) {
+			} else if (pref.contains("\'") || pref.contains("ft") || pref.contains("feet")) {
 				// foot to meters
 				f *= 0.3048;
+			} else if (pref.contains("cm")) {
+				f *= 0.01;
+			} else if (pref.contains("mile")) {
+				f *= 1609.34f;
 			}
 			return f + add;
 		}
@@ -467,14 +471,29 @@ public class RouteDataObject {
 	
 	public static void main(String[] args) {
 		assertTrueLength("10 km", 10000);
-		assertTrueLength("0.01 km", 10);
-		assertTrueLength("0.01 km 10 m", 20);
-		assertTrueLength("10 m", 10);
-		assertTrueLength("10m", 10);
-		assertTrueLength("3.4 m", 3.4f);
-		assertTrueLength("14'10\"", 4.5212f);
-		assertTrueLength("14.5'", 4.4196f);
-		assertTrueLength("15ft", 4.572f);
+  		assertTrueLength("0.01 km", 10);
+  		assertTrueLength("0.01 km 10 m", 20);
+  		assertTrueLength("10 m", 10);
+  		assertTrueLength("10m", 10);
+  		assertTrueLength("3.4 m", 3.4f);
+ 		assertTrueLength("3.40 m", 3.4f);
+ 		assertTrueLength("10 m 10m", 20);
+  		assertTrueLength("14'10\"", 4.5212f);
+  		assertTrueLength("14.5'", 4.4196f);
+ 		assertTrueLength("14.5 ft", 4.4196f);
+ 		assertTrueLength("14'0\"", 4.2672f);
+  		assertTrueLength("15ft", 4.572f);
+ 		assertTrueLength("15 ft 1 in", 4.5974f);
+ 		assertTrueLength("4.1 metres", 4.1f);
+ 		assertTrueLength("14'0''", 4.2672f);
+ 		assertTrueLength("14 feet", 4.2672f);
+ 		assertTrueLength("14 mile", 22530.76f);
+ 		assertTrueLength("14 cm", 0.14f);
+ 		
+// 		float badValue = -1;
+// 		assertTrueLength("none", badValue);
+// 		assertTrueLength("m 4.1", badValue);
+// 		assertTrueLength("1F4 m", badValue);
 	}
 
 	public String coordinates() {
