@@ -2099,7 +2099,7 @@
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
     <string name="upload_osm_note_description">Puedes subir tus notas OSM anónimamente si usas tu perfil de OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Subir Notas OSM</string>
+    <string name="upload_osm_note">Subir problema del mapa</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
     <string name="osm_user_stat">Ediciones %1$s, posición %2$s, ediciones totales %3$s</string>
