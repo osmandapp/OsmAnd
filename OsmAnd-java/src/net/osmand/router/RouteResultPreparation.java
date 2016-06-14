@@ -596,9 +596,20 @@ public class RouteResultPreparation {
 					active.activeStartIndex = active.activeStartIndex + target.activeStartIndex;
 					changed = true;
 				} else {
+					// cause the next-turn goes forward exclude left most and right most lane
+					if(active.activeStartIndex == 0) {
+						active.activeStartIndex ++;
+						active.activeLen--;
+					}
+					if(active.activeEndIndex == active.originalLanes.length - 1) {
+						active.activeEndIndex --;
+						active.activeLen--;
+					}
 					float ratio = (active.activeLen - target.activeLen) / 2f;
-					active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
-					active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
+					if(ratio > 0) {
+						active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
+						active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
+					}
 					changed = true;
 				}
 			}
@@ -750,26 +761,28 @@ public class RouteResultPreparation {
 			// but is allowed and being used here. This section adds in that indicator.  The same applies for where leftSide is true.
 			boolean leftTurn = TurnType.isLeftTurn(mainTurnType);
 			int ind = leftTurn? 0 : lanesArray.length - 1;
-			final int tt = TurnType.getPrimaryTurn(lanesArray[ind]);
+			int primaryTurn = TurnType.getPrimaryTurn(lanesArray[ind]);
 			final int st = TurnType.getSecondaryTurn(lanesArray[ind]);
 			if (leftTurn) {
-				if (!TurnType.isLeftTurn(tt)) {
+				if (!TurnType.isLeftTurn(primaryTurn)) {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TL);
-					TurnType.setSecondaryTurn(lanesArray, ind, tt);
+					TurnType.setSecondaryTurn(lanesArray, ind, primaryTurn);
 					TurnType.setTertiaryTurn(lanesArray, ind, st);
+					primaryTurn = TurnType.TL;
 					lanesArray[ind] |= 1;
 				}
 			} else {
-				if (!TurnType.isRightTurn(tt)) {
+				if (!TurnType.isRightTurn(primaryTurn)) {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TR);
-					TurnType.setSecondaryTurn(lanesArray, ind, tt);
+					TurnType.setSecondaryTurn(lanesArray, ind, primaryTurn);
 					TurnType.setTertiaryTurn(lanesArray, ind, st);
+					primaryTurn = TurnType.TR;
 					lanesArray[ind] |= 1;
 				}
 			}
-			setAllowedLanes(tt, lanesArray);
+			setAllowedLanes(primaryTurn, lanesArray);
 		}
 		return lanesArray;
 	}

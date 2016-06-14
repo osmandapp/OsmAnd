@@ -492,6 +492,7 @@ public class RouteDataObject {
 	public String toString() {
 		String name = getName();
 		String rf = getRef();
-		return MessageFormat.format("Road id {0} name {1} ref {2}", getId()+"", name == null ? "" : name, rf == null ? "" : rf);
+		return MessageFormat.format("Road id {0} name {1} ref {2}", (getId() / 64) + "", name == null ? "" : name,
+				rf == null ? "" : rf);
 	}
 }
