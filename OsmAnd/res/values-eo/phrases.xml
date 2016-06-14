@@ -4,7 +4,7 @@
 	<string name="poi_emergency">ISS (Integra savsistemo)</string>
 	<string name="poi_transportation">Transporto</string>
 		<string name="poi_road_obstacle">Voja barilo</string>
-		<string name="poi_filling_station">Benzinejo</string>
+		<string name="poi_filling_station">Benzinejoj</string>
 		<string name="poi_personal_transport">Transporto privata</string>
 		<string name="poi_public_transport">Transporto publika</string>
 		<string name="poi_air_transport">Aerotransporto</string>
@@ -22,7 +22,7 @@
 		<string name="poi_trash_disposal">Rubmastrumado</string>
 		<string name="poi_landuse">Utilkampoj</string>
 	<string name="poi_education">Edukado</string>
-	<string name="poi_administrative">Administrejo</string>
+	<string name="poi_administrative">Administrejoj</string>
 	<string name="poi_healthcare">Kuracado</string>
 	<string name="poi_office">Oficejoj</string>
 	<string name="poi_sport">Sporto</string>
@@ -30,7 +30,7 @@
 		<string name="poi_sightseeing">Vidindaĵoj</string>
 		<string name="poi_accomodation">Loĝado</string>
 		<string name="poi_internet_access">Interret-aliro</string>
-	<string name="poi_entertainment">Ripozado</string>
+	<string name="poi_entertainment">Amuzejoj</string>
 		<string name="poi_club">Klubo</string>
 	<string name="poi_sustenance">Manĝo</string>
 	<string name="poi_cafe_and_restaurant">Kafejoj kaj manĝejoj</string>
@@ -38,7 +38,7 @@
 		<string name="poi_craft">Metio</string>
 	<string name="poi_finance">Financo</string>
 	<string name="poi_natural">Naturo</string>
-	<string name="poi_seamark">Marejoj</string>
+	<string name="poi_seamark">Mar-navigado</string>
 	<string name="poi_military">Militejoj</string>
 	<string name="poi_osmwiki">Vikipedio</string>
 	<string name="poi_user_defined_other">Propre difinitaj</string>
@@ -120,4 +120,6 @@
 	<string name="poi_sauna">Ŝvitbanejo</string>
 	<string name="poi_toilets">Necesejo</string>
 	<string name="poi_note">Noto</string>
-	</resources>
+	<string name="poi_curtain">Kurten-vendejo</string>
+	<string name="poi_fabric">Teksaĵ-vendejo</string>
+</resources>
