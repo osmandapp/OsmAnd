@@ -496,7 +496,7 @@
 	<string name="poi_historic_monastery">Monasterio histórico</string>
 	<string name="poi_wayside_cross">Crucero</string>
 	<string name="poi_wayside_shrine">Ermita en el camino</string>
-	<string name="poi_information">Información turística</string>
+	<string name="poi_information">Información</string>
 	<string name="poi_clock">Reloj</string>
 	<string name="poi_travel_agent">Agente de viajes</string>
 	<string name="poi_viewpoint">Mirador</string>
@@ -2699,5 +2699,26 @@
 	<string name="poi_crossing_supervision_no">Cruce no supervisado</string>
 	<string name="poi_crossing_supervision_attendant">Cruce supervisado personalmente</string>
 	<string name="poi_crossing_supervision_camera">Cruce supervisado con cámara</string>
+
+<string name="poi_dispensing_yes">Vende con receta médica</string>
+	<string name="poi_dispensing_no">Vende sin receta médica</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Público</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_military_public">Militar/Público</string>
+	<string name="poi_aerodrome_type_private">Privado</string>
+
+	<string name="poi_ventilation_shaft">Conducto de ventilación</string>
+
+	<string name="poi_pump_type_beam_pump">Tipo de bomba: Viga</string>
+	<string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mk II o III</string>
+	<string name="poi_pump_type_gravity">Tipo de bomba: De gravedad</string>
+	<string name="poi_pump_style_modern">Estilo de bomba: Moderna</string>
+	<string name="poi_pump_style_historic">Estilo de bomba: Histórica</string>
+	<string name="poi_pump_status_ok">Bomba en buen estado</string>
+	<string name="poi_pump_status_broken">Bomba en mal estado</string>
+	<string name="poi_pump_status_locked">Bomba bloqueada</string>
 
 </resources>
