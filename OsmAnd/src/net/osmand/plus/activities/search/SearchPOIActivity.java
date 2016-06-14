@@ -185,6 +185,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		return true;
 	}
 
+	@Override
+	protected void onDestroy() {
+	// Issue 2657
+		super.onDestroy();
+		if (!(currentSearchTask == null || currentSearchTask.getStatus() == Status.FINISHED)) {
+			currentSearchTask.cancel(true);
+		}
+	}
 
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.poiSplitbar);

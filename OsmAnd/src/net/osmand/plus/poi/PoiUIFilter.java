@@ -215,6 +215,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		if (amenityList.size() == 0 && isAutomaticallyIncreaseSearch()) {
 			int step = 5;
 			while (amenityList.size() == 0 && step-- > 0 && isSearchFurtherAvailable()) {
+				if (matcher != null && matcher.isCancelled()) {
+					break;
+				}
 				amenityList = searchFurther(lat, lon, matcher);
 			}
 		}

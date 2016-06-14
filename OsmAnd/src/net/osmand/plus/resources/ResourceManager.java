@@ -757,6 +757,10 @@ public class ResourceManager {
 		try {
 			if (!filter.isEmpty()) {
 				for (AmenityIndexRepository index : amenityRepositories.values()) {
+					if (matcher != null && matcher.isCancelled()) {
+						searchAmenitiesInProgress = false;
+						break;
+					}
 					if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 						List<Amenity> r = index.searchAmenities(MapUtils.get31TileNumberY(topLatitude),
 								MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(bottomLatitude),
@@ -832,6 +836,9 @@ public class ResourceManager {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<AmenityIndexRepositoryBinary>();
 		for (AmenityIndexRepository index : amenityRepositories.values()) {
+			if (matcher != null && matcher.isCancelled()) {
+				break;
+			}
 			if (index instanceof AmenityIndexRepositoryBinary) {
 				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 					if(index.checkContains(lat, lon)){
