@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="av_locations">Allugamientos</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="av_locations">Allugamientos</string>
     <string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
     <string name="download_live_updates">Anovamientos en direuto</string>
@@ -228,4 +229,8 @@
     <string name="mark_point">Oxetivu</string>
     <string name="get_plugin">BAXAR</string>
     <string name="profile_settings">Axustes específicos de perfil</string>
+    <string name="map_widget_battery">Nivel de batería</string>
+    <string name="app_mode_bus">Bus</string>
+ 	<string name="app_mode_train">Tren</string>
+    <string name="lat_lon_pattern">Lla: %1$.6f Llo: %2$.6f</string>
     </resources>
