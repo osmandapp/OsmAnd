@@ -465,7 +465,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	private synchronized void runNewSearchQuery(net.osmand.Location location, int requestType) {
-		if (currentSearchTask == null || currentSearchTask.getStatus() == Status.FINISHED ) {
+		if (currentSearchTask == null || currentSearchTask.getStatus() == Status.FINISHED) {
 			currentSearchTask = new SearchAmenityTask(location, requestType);
 			currentSearchTask.execute();
 		}
@@ -516,7 +516,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			updateButtonState(false);
 			navigationInfo.updateLocation(location);
 		}
-
 	}
 
 	@Override
@@ -608,7 +607,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		public SearchAmenityTask(net.osmand.Location location, int requestType) {
 			this.searchLocation = location;
 			this.requestType = requestType;
-
 		}
 
 		net.osmand.Location getSearchedLocation() {
