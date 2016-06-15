@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Vendejoj</string>
 		<string name="poi_shop_food">Manĝovendejo</string>
-	<string name="poi_emergency">ISS (Integra savsistemo)</string>
+	<string name="poi_emergency">Vivsavado</string>
 	<string name="poi_transportation">Transporto</string>
 		<string name="poi_road_obstacle">Voja barilo</string>
 		<string name="poi_filling_station">Benzinejoj</string>
@@ -30,7 +30,7 @@
 		<string name="poi_sightseeing">Vidindaĵoj</string>
 		<string name="poi_accomodation">Loĝado</string>
 		<string name="poi_internet_access">Interret-aliro</string>
-	<string name="poi_entertainment">Amuzejoj</string>
+	<string name="poi_entertainment">Ripozejoj</string>
 		<string name="poi_club">Klubo</string>
 	<string name="poi_sustenance">Manĝo</string>
 	<string name="poi_cafe_and_restaurant">Kafejoj kaj manĝejoj</string>
@@ -79,7 +79,7 @@
 	<string name="poi_boutique">Galanteriejo</string>
 	<string name="poi_camera">Fotil-vendejo</string>
 	<string name="poi_carpet">Tapiŝ-vendejo</string>
-	<string name="poi_chemist">Apoteko</string>
+	<string name="poi_chemist">Drogejo</string>
 	<string name="poi_charity">Almoza vendejo</string>
 	<string name="poi_clothes">Vesto-vendejo</string>
 	<string name="poi_clothes_children">Infanvesto-vendejo</string>
@@ -116,7 +116,7 @@
 	<string name="poi_wiki_lang_pl">Vikipedio Pola</string>
 	<string name="poi_resource_gold">Oro</string>
 	<string name="poi_resource_mercury">Hidrargo</string>
-	<string name="poi_wiki_lang_eo">Vikipedio Esperanto</string>
+	<string name="poi_wiki_lang_eo">Vikipedio Esperanta</string>
 	<string name="poi_sauna">Ŝvitbanejo</string>
 	<string name="poi_toilets">Necesejo</string>
 	<string name="poi_note">Noto</string>
@@ -152,5 +152,47 @@
 	<string name="poi_school">Lernejo</string>
 	<string name="poi_kindergarten">Infanĝardeno</string>
 	<string name="poi_university">Universitato</string>
+
+	<string name="poi_hearing_aids">Aŭdhelpil-vendejo</string>
+	<string name="poi_herbalist">Herb-vendejo</string>
+	<string name="poi_hifi">Altfidel-son-vendejo</string>
+	<string name="poi_houseware">Mastrumaparat-vendejo</string>
+	<string name="poi_hunting">Ĉasil-vendejo</string>
+	<string name="poi_interior_decoration">Ensembl-vendejo</string>
+	<string name="poi_jewelry">Juvelejo</string>
+	<string name="poi_kiosk">Kiosko</string>
+	<string name="poi_garages">Garaĝaro</string>
+
+	<string name="poi_public_transport_platform">Haltejo</string>
+	<string name="poi_public_transport_platform_tram">Haltejo trama</string>
+	<string name="poi_tram_stop">Haltejo trama</string>
+	<string name="poi_public_transport_stop_position">Haltejo</string>
+	<string name="poi_public_transport_station">Stacidomo</string>
+	<string name="poi_bus_station">Stacidomo busa</string>
+	<string name="poi_railway_station">Stacidomo fervoja</string>
+	<string name="poi_halt">Haltejo fervoja</string>
+	<string name="poi_railway_platform">Kajo fervoja</string>
+	<string name="poi_subway_entrance">Metro-enirejo</string>
+	<string name="poi_subway_station">Stacidomo metroa</string>
+	<string name="poi_waste_basket">Rubujo</string>
+
+	<string name="poi_tower">Turo</string>
+	<string name="poi_prison">Mallibrejo</string>
+	<string name="poi_neighbourhood">Kvartalo</string>
+	<string name="poi_pharmacy">Apoteko</string>
+	<string name="poi_zoo">Bestoĝardeno</string>
+	<string name="poi_place_of_worship">Preĝejo</string>
+	<string name="poi_monastery">Monaĥejo</string>
+<string name="poi_information">Informejo</string>
+	<string name="poi_viewpoint">Videjo</string>
+	<string name="poi_cemetery">Tombejo</string>
+	<string name="poi_grave_yard">Tombejo (ĉirkaŭpreĝeja)</string>
+	<string name="poi_tomb">Tombo</string>
+	<string name="poi_park">Parko</string>
+	<string name="poi_restaurant">Restoracio</string>
+	<string name="poi_biergarten">Bierĝardeno</string>
+	<string name="poi_fast_food">Rapidmanĝejo</string>
+	<string name="poi_wiki_lang_vo">Vikipedio Volapuka</string>
+	<string name="poi_highway_crossing">Pasejo zebrostria</string>
 
 	</resources>
