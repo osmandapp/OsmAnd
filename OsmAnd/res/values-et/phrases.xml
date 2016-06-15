@@ -126,4 +126,13 @@
 	<string name="poi_pet">Lemmiklooma pood</string>
 	<string name="poi_photo">Fotopood</string>
 	<string name="poi_radiotechnics">Raadiotehnika pood</string>
+	<string name="poi_second_hand">Taaskasutuspood</string>
+	<string name="poi_scuba_diving_shop">Sukeldumisvahendite pood</string>
+	<string name="poi_ship_chandler">Laeva varustaja</string>
+	<string name="poi_sports">Spordikaubad</string>
+	<string name="poi_stationery">Kirjatarvete pood</string>
+	<string name="poi_tableware">Lauanõude pood</string>
+	<string name="poi_ticket">Piletimüük</string>
+	<string name="poi_tobacco">Tubaka pood</string>
+	<string name="poi_toys">Mänguasjapood</string>
 	</resources>
