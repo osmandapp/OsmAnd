@@ -87,4 +87,9 @@
     <string name="parking_place">Parkimise asukohad</string>
     <string name="gps_status">GPS staatus</string>
     <string name="rendering_attr_streetLighting_name">Tänava valgustus</string>
+    <string name="app_mode_bus">Buss</string>
+ 	<string name="app_mode_train">Rong</string>
+    <string name="map_widget_battery">Aku laetuse tase</string>
+    <string name="change_markers_position">Muuda markeri asukohta</string>
+    <string name="move_marker_bottom_sheet_title">Liiguta markeri asukoha muutmiseks kaarti</string>
     </resources>
