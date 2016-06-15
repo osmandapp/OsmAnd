@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff8f00</color>
+    <color name="colorPrimaryDark">#e68200</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="dividerColor">#F0F0F0</color>
+    <color name="windowBackgroundColor">#EAEAEA</color>
+    <color name="itemBackgroundColor">#FFF</color>
+    <color name="iconColor">#727272</color>
+    <color name="dialogTitleBackgroundColor">#2f7af5</color>
+
+    <color name="listBackgroundColor">#EAEAEA</color>
+    <color name="titleTextColor">#FFF</color>
+    <color name="listTextColor">#000</color>
+
+</resources>

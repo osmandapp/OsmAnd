@@ -1,0 +1,92 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // This is from OsmAndCore_android.aar - for some reason it's not inherited
+    aaptOptions {
+        // Don't compress any embedded resources
+        noCompress "qz"
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile "AndroidManifest.xml"
+            jni.srcDirs = []
+            jniLibs.srcDirs = ["libs"]
+            java.srcDirs = ["src"]
+            resources.srcDirs = ["src"]
+            renderscript.srcDirs = ["src"]
+            res.srcDirs = ["res"]
+            assets.srcDirs = ["assets"]
+        }
+    }
+
+    productFlavors {
+        x86 {
+            ndk {
+                abiFilter "x86"
+            }
+        }
+        mips {
+            ndk {
+                abiFilter "mips"
+            }
+        }
+        armv7 {
+            ndk {
+                abiFilter "armeabi-v7a"
+            }
+        }
+        armv5 {
+            ndk {
+                abiFilter "armeabi"
+            }
+        }
+        fat
+    }
+
+    buildTypes {
+        debug {
+            signingConfig android.signingConfigs.debug
+        }
+        nativeDebug {
+            signingConfig android.signingConfigs.debug
+        }
+        release {
+            signingConfig android.signingConfigs.debug
+        }
+    }
+}
+
+repositories {
+    ivy {
+        name = "OsmAndBinariesIvy"
+        url = "http://builder.osmand.net"
+        layout "pattern" , {
+            artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+        }
+    }
+}
+
+dependencies {
+    compile project(path: ':OsmAnd-java', configuration: 'android')
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile fileTree(dir: "libs", include: ["*.jar"])
+    compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+    debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+    nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
+    releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+}
