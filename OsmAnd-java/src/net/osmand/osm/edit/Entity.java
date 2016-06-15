@@ -2,6 +2,7 @@ package net.osmand.osm.edit;
 
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -257,6 +258,10 @@ public abstract class Entity implements Serializable {
 	public Set<String> getIsInNames() {
 		String values = getTag(OSMTagKey.IS_IN);
 		if (values == null) {
+			String city = getTag(OSMTagKey.ADDR_CITY);
+			if(!Algorithms.isEmpty(city)) {
+				return Collections.singleton(city.trim());	
+			}
 			return Collections.emptySet();
 		}
 		if (values.indexOf(';') != -1) {
