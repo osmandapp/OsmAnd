@@ -1306,7 +1306,7 @@
     <string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
     <string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
     <string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
-    <string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre tous les appareils d\'un groupe en temps réel. Il existe différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
+    <string name="osmo_plugin_description">"Ce greffon offre la possibilité d\'un suivi en temps-réel via OpenStreetMap, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre tous les appareils d\'un groupe en temps réel. Et permet aussi de voir les points et trajets partagés avec le groupe.\n\nLe groupe n\'a pas été supprimé depuis des mois, veuillez respecter les règles de création de groupe sur le site OsMo.mobi "</string>
     <string name="osmo_plugin_name">Suivi OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
 
@@ -1447,7 +1447,7 @@
     <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner, presser longuement sur une trace disponible.</string>
 
     <string name="local_index_select_gpx_file">Sélectionnez pour afficher</string>
-    <string name="osmo_group_information_desc">" - Tous les groupes créés sont publics ! Si vous souhaitez conserver l\'anonymat, connectez votre appareil directement via des identifiants Tracker.\n- Les groupes sont limités à 8 personnes.\n- En cas d\'inactivité ou d\'activité d\'un seul membre sur 2 semaines, le groupe sera automatiquement supprimé.\n- Vous pouvez gérer l\'accès au groupe grâce aux invitations, mais pour contrôler le groupe vous devez utiliser la console administrateur.\n- Si vous souhaitez créer un groupe sous d\'autres conditions, veuillez contacter http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - En créant un groupe donnez-lui un nom et remplissez la description\n- Depuis l\'application les groupes sont créés uniquement avec le type Simple, apprenez-en plus sur https://osmo.mobi/g/new\n- A partir d\'un site vous pouvez gérer un groupe, pour créer des trajets et points disponibles pour le groupe\n- Nous ne cautionnons pas les groupes avec un seul utilisateur, si ce n\'est un groupe POI\n- Les groupes privés sont limités à 8 personnes.\n- Une version plus détaillé du contrat se trouve sur le site OsMo.mobi\n- Si vous souhaitez créer un groupe sous d\'autres conditions, veuillez contacter le support: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Veuillez lire ceci avant de créer un groupe !</string>
     <string name="osmo_not_signed_in">L\'authentification OsMo a échoué</string>
     <string name="osmo_gpx_points_downloaded">Points OsMo %1$s téléchargés.</string>
@@ -2232,4 +2232,6 @@
     <string name="lang_ast">Asturien</string>
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Train</string>
+    <string name="access_map_linked_to_location">La carte est liée à l’emplacement</string>
+    <string name="lang_kn">Kannada</string>
     </resources>
