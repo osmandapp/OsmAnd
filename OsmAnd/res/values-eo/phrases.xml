@@ -122,4 +122,35 @@
 	<string name="poi_note">Noto</string>
 	<string name="poi_curtain">Kurten-vendejo</string>
 	<string name="poi_fabric">Teksaĵ-vendejo</string>
-</resources>
+<string name="poi_dive">Subakvadil-vendejo</string>
+	<string name="poi_doityourself">Il-vendejaro</string>
+	<string name="poi_doors">Pord-vendejo</string>
+	<string name="poi_erotic">Seks-vendejo</string>
+	<string name="poi_fashion">Mod-butiko</string>
+	<string name="poi_fishing">Fiŝkaptad-vendejo</string>
+	<string name="poi_florist">Florvendejo</string>
+	<string name="poi_frame">Kadroj-de-pentraĵoj-vendejo</string>
+	<string name="poi_free_flying">Paraŝutiloj-vendejo</string>
+	<string name="poi_furnace">Hejtil-vendejo</string>
+	<string name="poi_furniture">Mebl-vendejo</string>
+	<string name="poi_garden_centre">Ĝarden-vendejaro</string>
+	<string name="poi_garden_furniture">Ĝarden-mebl-vendejo</string>
+	<string name="poi_shop_yes">Ĝeneral-vendejo</string>
+	<string name="poi_gas">Gas-vendejo</string>
+	<string name="poi_gift">Suvenir-vendejo</string>
+	<string name="poi_hardware">Il-vendejo</string>
+	<string name="poi_glaziery">Vitristejo</string>
+	<string name="poi_newsagent">Gazet-vendejo</string>
+	<string name="poi_fire_hydrant">Hidranto</string>
+	<string name="poi_fuel">Benzinejo</string>
+	<string name="poi_car_wash">Aŭtopurigejo</string>
+	<string name="poi_bus_stop">Haltejo aŭtobusa</string>
+	<string name="poi_bridge">Ponto</string>
+
+	<string name="poi_post_office">Poŝtoficejo</string>
+	<string name="poi_post_box">Poŝtkesto</string>
+	<string name="poi_school">Lernejo</string>
+	<string name="poi_kindergarten">Infanĝardeno</string>
+	<string name="poi_university">Universitato</string>
+
+	</resources>
