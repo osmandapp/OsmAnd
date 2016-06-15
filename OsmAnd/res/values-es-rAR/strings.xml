@@ -31,7 +31,7 @@
     <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios local</string>
     <string name="mark_to_delete">Marcar para borrar</string>
     <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener una longitud de al menos 3 caracteres!</string>
-    <string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambio(s) a OSM. ¿Estás seguro?</string>
+    <string name="local_osm_changes_upload_all_confirm">Subirás %1$d cambio(s) a OSM. ¿Estás seguro?</string>
     <string name="confirmation_to_clear_history">¿Quieres vaciar el historial?</string>
     <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
@@ -124,7 +124,7 @@
     <string name="shared_string_currently_recording_track">Grabando traza actual</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
-    <string name="shared_string_photo">Foto</string>
+    <string name="shared_string_photo">Fotografía</string>
     <string name="route_points">Puntos de la ruta</string>
     <string name="track_segments">Segmentos de la traza</string>
     <string name="track_points">Puntos de la traza</string>
@@ -418,7 +418,7 @@
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
     <string name="routing_attr_short_way_name">Camino más corto</string>
-    <string name="routing_attr_short_way_description">Se usa el camino corto en lugar del rápido</string>
+    <string name="routing_attr_short_way_description">Usa el camino corto en lugar del rápido</string>
     <string name="routing_attr_avoid_toll_name">Evitar peajes</string>
     <string name="routing_attr_avoid_toll_description">Evita los caminos con peajes</string>
     <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin pavimentar</string>
@@ -472,9 +472,9 @@
 \n\nPuedes encontrar tu lugar y el tiempo de estacionamiento en la tarjeta del menú principal y en el control del mapa. Se puede añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
     <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de ampliación, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de tu ubicación.</string>
-    <string name="osm_editing_plugin_description">Este complemento se puede usar para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de errores y contribuir con archivos de trazas GPX.
+    <string name="osm_editing_plugin_description">Este complemento se puede usar para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar informes de problemas y contribuir con archivos de trazas GPX.
 \n\nOSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles, consulta https://openstreetmap.org/.
-\n\nSe aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, si especificas tus credenciales personales de OSM en la aplicación.</string>
+\n\nSe aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando tus credenciales personales de OSM en la aplicación.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o la guía de voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, necesita descargarse el mapa especial sin conexión</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita descargarse el mapa especial sin conexión</string>
@@ -530,7 +530,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
     <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro expiró.\n ¿Quieres realizar un nuevo registro?</string>
-    <string name="osmo_group_information_desc">" - Al crear un grupo, debes darle un nombre y completar la descripción.\n - Desde la aplicación, los grupo sólo se crean con el tipo Simple, lee más en el sitio web https://osmo.mobi/g/new\n - Puedes gestionar un grupo desde un sitio web, para ubicar todas las trazas y puntos disponibles\n - No avalamos el uso de grupos con sólo un usuario, si esto no es el grupo de PDI\n - Los grupos privados se limitan sólo a 8 personas\n - Los detalles sobre términos y condiciones, se encuentran en el sitio web OsMo.mobi\n - Si necesitas condiciones especiales, contacta con el soporte: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">" - Al crear un grupo, debes darle un nombre y completar la descripción.\n - Desde la aplicación, los grupos sólo se crean con el tipo Simple, lee más en el sitio web https://osmo.mobi/g/new\n - Puedes gestionar un grupo desde un sitio web, para ubicar todas las trazas y puntos disponibles\n - No avalamos el uso de grupos con sólo un usuario, si esto no es el grupo de PDI\n - Los grupos privados se limitan sólo a 8 personas\n - Los detalles sobre términos y condiciones, se encuentran en el sitio web OsMo.mobi\n - Si necesitas condiciones especiales, contacta con el soporte: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Falló conexión a OsMo</string>
     <string name="osmo_gpx_points_downloaded">%1$s puntos OsMo descargados.</string>
@@ -721,9 +721,9 @@
     <string name="precise_routing_mode_descr">Habilita el cálculo de rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
-    <string name="recording_photo_description">Foto %1$s %2$s</string>
-    <string name="av_def_action_picture">Sacar una foto</string>
-    <string name="recording_context_menu_precord">Sacar una foto</string>
+    <string name="recording_photo_description">Fotografía %1$s %2$s</string>
+    <string name="av_def_action_picture">Fotografiar</string>
+    <string name="recording_context_menu_precord">Fotografiar</string>
     <string name="dropbox_plugin_description">El complemento de Dropbox, permite sincronizar trazas y notas multimedia con tu cuenta de Dropbox.</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
@@ -737,7 +737,7 @@
     <string name="av_video_format">Formato de salida del video</string>
     <string name="av_use_external_recorder_descr">Usa la grabadora de video del sistema</string>
     <string name="av_use_external_recorder">Usar grabadora externa</string>
-    <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotos</string>
+    <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotografías</string>
     <string name="av_use_external_camera">Usar aplicación de la cámara</string>
     <string name="av_settings_descr">Configura los ajustes de audio y video</string>
     <string name="av_settings">"Ajustes de notas multimedia "</string>
@@ -1715,8 +1715,8 @@
     <string name="av_camera_focus_continuous">Enfoque continuo</string>
     <string name="av_photo_play_sound">Sonido al fotografiar</string>
     <string name="av_photo_play_sound_descr">Elige si reproducir sonido al fotografiar</string>
-    <string name="av_camera_pic_size">Tamaño de foto</string>
-    <string name="av_camera_pic_size_descr">Elige el tamaño interno de la foto</string>
+    <string name="av_camera_pic_size">Tamaño de fotografía</string>
+    <string name="av_camera_pic_size_descr">Elige el tamaño interno de la fotografía</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_description_title">Descripción</string>
     <string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este complemento.</string>
@@ -1948,10 +1948,10 @@
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
     <string name="context_menu_item_open_note">Informar problema del mapa</string>
-    <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
-    <string name="osm_edit_commented_note">Nota OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota OSM borrada</string>
-	<string name="osm_edit_created_note">Nota OSM creada</string>
+    <string name="osm_edit_reopened_note">Informe de problema reabierto</string>
+    <string name="osm_edit_commented_note">Informe de problema comentado</string>
+    <string name="osm_edit_removed_note">Informe de problema borrado</string>
+	<string name="osm_edit_created_note">Informe de problema creado</string>
 	<string name="osn_bug_name">Problema del mapa</string>
 	<string name="osn_add_dialog_title">Crear informe</string>
 	<string name="osn_comment_dialog_title">Añadir comentario</string>
@@ -2001,7 +2001,7 @@
     <string name="update_now">Actualizar</string>
 <string name="route_distance">Distancia:</string>
     <string name="route_duration">Duración:</string>
-    <string name="missing_write_external_storage_permission">La aplicación no tiene permiso de usar la tarjeta SD</string>
+    <string name="missing_write_external_storage_permission">La aplicación no tiene permiso para usar la tarjeta SD</string>
 <string name="no_location_permission">La aplicación no tiene permiso de acceso a los datos de ubicación.</string>
     <string name="no_camera_permission">La aplicación no tiene permiso de acceso a la cámara.</string>
     <string name="no_microphone_permission">La aplicación no tiene permiso de acceso al micrófono.</string>
@@ -2051,7 +2051,7 @@
     <string name="rendering_attr_hideUnderground_name">Objetos subterráneos</string>
     <string name="shared_string_read_more">Leer más</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation (mapas y navegación de OsmAnd), encuentra ubicaciones en el mapa y calcula rutas sin conectarte a Internet. Descarga el mapa de un país antes de viajar para encontrar lugares y rutas en áreas desconocidas.\n\nOpciones básicas:\n• Mapas detallados en 200 países\n• Navegación sin conexión con avisos de voz\n• Búsqueda de direcciones en modo sin conexión\n• Información sobre ubicaciones en el mapa: lugares de interés, cafés, estacionamientos, tiendas\n• Añade tus ubicaciones a los favoritos\n• Navegación en automóvil, bicicleta y caminando\n\nOpciones adicionales:\n• Capacidad para ver y grabar trazas GPX\n• Descripción de Wikipedia en PDI
-\n• Añade notas de fotos, audios y videos en el mapa
+\n• Añade notas de fotografías, audios y videos en el mapa
 \n• Modo de mapa Día y Noche para una conducción más cómoda\n• Información sobre rutas y paradas de transporte público
 \n• Rutas de ciclovías y senderos
 \n• Rutas de senderos para el turismo en todo el mundo\n• Mapas en línea de numerosas fuentes
@@ -2079,7 +2079,7 @@
     <string name="show_map_markers">Marcadores del mapa</string>
     <string name="show_map_markers_description">Activar función de marcadores del mapa</string>
     <string name="clear_active_markers_q">¿Quieres quitar todos los marcadores activos?</string>
-    <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcador del mapa?</string>
+    <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores del mapa?</string>
     <string name="active_markers">Marcadores activos</string>
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
@@ -2098,7 +2098,7 @@
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
-    <string name="upload_osm_note_description">Puedes subir tus notas OSM anónimamente si usas tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos aunque uses tu perfil de OpenStreetMap.org.</string>
     <string name="upload_osm_note">Subir problema del mapa</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
