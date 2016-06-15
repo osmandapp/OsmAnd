@@ -460,13 +460,13 @@ public class InAppHelper {
 									} else {
 										complain("SendToken Error: "
 												+ obj.getString("error")
-												+ " (userId=" + userId + " token=" + token + ")");
+												+ " (userId=" + userId + " token=" + token + " response=" + result + ")");
 									}
 								} catch (JSONException e) {
 									logError("SendToken", e);
 									complain("SendToken Error: "
 											+ (e.getMessage() != null ? e.getMessage() : "JSONException")
-											+ " (userId=" + userId + " token=" + token + ")");
+											+ " (userId=" + userId + " token=" + token + " response=" + result + ")");
 								}
 							}
 							if (listener != null) {
