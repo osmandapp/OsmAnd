@@ -1070,18 +1070,7 @@ public class BinaryInspector {
 				MapUtils.get31TileNumberY(verbose.lattop),
 				MapUtils.get31TileNumberY(verbose.latbottom),
 				verbose.getZoom(),
-				new SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-
-				},
+				BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {

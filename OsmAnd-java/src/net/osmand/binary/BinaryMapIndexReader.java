@@ -2180,18 +2180,7 @@ public class BinaryMapIndexReader {
 			println(" " + poiRegion.subcategories.get(i));
 		}
 
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, new SearchPoiTypeFilter() {
-			@Override
-			public boolean accept(PoiCategory type, String subcategory) {
-				return true;
-			}
-
-			@Override
-			public boolean isEmpty() {
-				return false;
-			}
-
-		}, null);
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, ACCEPT_ALL_POI_TYPE_FILTER, null);
 		List<Amenity> results = reader.searchPoi(req);
 		for (Amenity a : results) {
 			println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
