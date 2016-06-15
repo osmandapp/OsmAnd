@@ -1,0 +1,120 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="net.osmand.core.samples.android.sample1.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/clearButton"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/shared_string_close"
+            android:src="@drawable/ic_action_remove_dark"/>
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:background="@null"
+            android:hint="@string/search_hint"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:textColor="@color/titleTextColor"
+            tools:text="Search request"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="@drawable/bg_contextmenu_shadow"
+        android:foregroundGravity="top|fill_horizontal">
+
+        <net.osmand.core.android.AtlasMapRendererView
+            android:id="@+id/mapRendererView"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <ImageButton
+                android:id="@+id/map_azimuth_north_button"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_circle"
+                android:contentDescription="@string/azimuthNorth"
+                android:src="@drawable/map_compass_niu"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_zoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="10"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <ImageButton
+                    android:id="@+id/map_zoom_in_button"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_circle"
+                    android:contentDescription="@string/zoomIn"
+                    android:src="@drawable/map_zoom_in"/>
+
+                <ImageButton
+                    android:id="@+id/map_zoom_out_button"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_circle"
+                    android:contentDescription="@string/zoomOut"
+                    android:src="@drawable/map_zoom_out"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawSelectorOnTop="true"
+            android:background="@color/listBackgroundColor"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</LinearLayout>

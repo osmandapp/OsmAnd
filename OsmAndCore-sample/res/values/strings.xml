@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OsmAnd Core API sample 1 for Android OS</string>
+    <string name="title_activity_main">OsmAnd Core Sample 1</string>
+    <string name="zoomIn">Zoom in</string>
+    <string name="zoomOut">Zoom out</string>
+    <string name="azimuthNorth">Azimuth to North</string>
+    <string name="search_hint">Type and Search</string>
+    <string name="shared_string_close">Close</string>
+</resources>

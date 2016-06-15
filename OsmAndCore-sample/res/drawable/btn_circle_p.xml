@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <bitmap
+            android:gravity="fill"
+            android:src="@drawable/map_bt_round_1_shadow" />
+    </item>
+    <item>
+        
+        <inset
+            android:insetBottom="2dp"
+            android:insetLeft="2dp"
+            android:insetRight="2dp"
+            android:insetTop="2dp" >
+            <shape android:shape="oval" >
+                <solid android:color="#fff" />
+            </shape>
+        </inset>
+    </item>
+</layer-list>
