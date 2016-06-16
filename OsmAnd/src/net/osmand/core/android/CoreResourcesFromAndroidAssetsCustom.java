@@ -201,10 +201,15 @@ public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourc
 				+ name + "'");
 		System.out.println(resourceData.path.getAbsolutePath());
 		final SWIGTYPE_p_QByteArray data;
+		final String dataPath = resourceData.path.getAbsolutePath();
 		if (resourceData.offset == 0 && resourceData.size == resourceData.path.length()) {
-			data = SwigUtilities.qDecompress(SwigUtilities.readEntireFile(resourceData.path.getAbsolutePath()));
+			if (dataPath.endsWith(".qz")) {
+				data = SwigUtilities.qDecompress(SwigUtilities.readEntireFile(dataPath));
+			} else {
+				data = SwigUtilities.readEntireFile(dataPath);
+			}
 		} else {
-			data = SwigUtilities.qDecompress(SwigUtilities.readPartOfFile(resourceData.path.getAbsolutePath(),
+			data = SwigUtilities.qDecompress(SwigUtilities.readPartOfFile(dataPath,
 					resourceData.offset, resourceData.size));
 		}
 		if (data == null) {
@@ -238,15 +243,19 @@ public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourc
 			return SwigUtilities.emptyQByteArray();
 		}
 		System.out.println(resourceEntry.defaultVariant.path.getAbsolutePath());
-		final SWIGTYPE_p_QByteArray bt;
+		final SWIGTYPE_p_QByteArray data;
+		final String dataPath = resourceEntry.defaultVariant.path.getAbsolutePath();
 		if (resourceEntry.defaultVariant.offset == 0
 				&& resourceEntry.defaultVariant.size == resourceEntry.defaultVariant.path.length()) {
-			bt = SwigUtilities.readEntireFile(resourceEntry.defaultVariant.path.getAbsolutePath());
+			if (dataPath.endsWith(".qz")) {
+				data = SwigUtilities.qDecompress(SwigUtilities.readEntireFile(dataPath));
+			} else {
+				data = SwigUtilities.readEntireFile(dataPath);
+			}
 		} else {
-			bt = SwigUtilities.readPartOfFile(resourceEntry.defaultVariant.path.getAbsolutePath(),
-					resourceEntry.defaultVariant.offset, resourceEntry.defaultVariant.size);
+			data = SwigUtilities.qDecompress(SwigUtilities.readPartOfFile(dataPath,
+					resourceEntry.defaultVariant.offset, resourceEntry.defaultVariant.size));
 		}
-		final SWIGTYPE_p_QByteArray data = SwigUtilities.qDecompress(bt);
 		if (data == null) {
 			Log.e(TAG, "Failed to load data of '" + name + "'");
 			if (ok != null)
