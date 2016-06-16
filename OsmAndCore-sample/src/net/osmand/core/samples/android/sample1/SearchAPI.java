@@ -7,16 +7,15 @@ import net.osmand.core.jni.Amenity;
 import net.osmand.core.jni.Amenity.DecodedCategory;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.DecodedCategoryList;
-import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ISearch;
 import net.osmand.core.jni.LatLon;
 import net.osmand.core.jni.NullableAreaI;
-import net.osmand.core.jni.ObfInfo;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.Utilities;
+import net.osmand.osm.PoiType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,7 +149,7 @@ public class SearchAPI {
 			AmenitiesByNameSearch.Criteria criteria = new AmenitiesByNameSearch.Criteria();
 			criteria.setName(keyword);
 			if (obfAreaFilter != null) {
-				criteria.setObfInfoAreaFilter(new NullableAreaI(new AreaI(obfAreaFilter)));
+				criteria.setObfInfoAreaFilter(new NullableAreaI(obfAreaFilter));
 			}
 
 			ISearch.INewResultEntryCallback newResultEntryCallback = new ISearch.INewResultEntryCallback() {
@@ -160,18 +159,6 @@ public class SearchAPI {
 					searchItems.add(new AmenitySearchItem(amenity));
 					System.out.println("Poi found === " + amenity.getNativeName());
 					resCount++;
-				/*
-				QStringStringHash locNames = amenity.getLocalizedNames();
-				if (locNames.size() > 0) {
-					QStringList keys = locNames.keys();
-					StringBuilder sb = new StringBuilder("=== Localized names: ");
-					for (int i = 0; i < keys.size(); i++) {
-						String key = keys.get(i);
-						sb.append(key).append("=").append(locNames.get(key)).append(" | ");
-					}
-					System.out.println(sb.toString());
-				}
-				*/
 				}
 			};
 
@@ -255,15 +242,6 @@ public class SearchAPI {
 			if (locNames.has_key(MapUtils.LANGUAGE)) {
 				localizedName = locNames.get(MapUtils.LANGUAGE);
 			}
-			/*
-			if (locNames.size() > 0) {
-				QStringList keys = locNames.keys();
-				for (int i = 0; i < keys.size(); i++) {
-					String key = keys.get(i);
-					localizedNamesMap.put(key, locNames.get(key));
-				}
-			}
-			*/
 
 			DecodedCategoryList catList = amenity.getDecodedCategories();
 			if (catList.size() > 0) {
