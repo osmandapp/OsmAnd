@@ -6,6 +6,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".SampleApplication"
         android:icon="@mipmap/sample_app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">

@@ -34,8 +34,8 @@ import android.util.Log;
 // This class provides reverse mapping from 'embed-resources.list' to files&folders scheme used by OsmAndCore_android.aar package
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourcesProvider {
-	private static final String TAG = "CoreResourcesFromAndroidAssets";
-	private static final String NATIVE_TAG = "CoreResourcesFromAndroidAssets";
+	private static final String TAG = "CoreResFromAndAssets";
+	private static final String NATIVE_TAG = "CoreResFromAndAssets";
 
 	private CoreResourcesFromAndroidAssetsCustom(final Context context) {
 		_context = context;
@@ -84,7 +84,7 @@ public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourc
 			}
 
 			// Get location of this resource
-			final String path = "OsmAndCore_ResourcesBundle/" + resourceInBundle + ".qz";
+			final String path = "OsmAndCore_ResourcesBundle/" + resourceInBundle + (resourceInBundle.endsWith(".png") ? "" : ".qz");
 			final File extractedPath = ((OsmandApplication) _context.getApplicationContext()).getAppPath(path);
 			final ResourceData resourceData = new ResourceData();
 			if (!extractedPath.exists()) {

@@ -40,6 +40,8 @@ import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
+import net.osmand.core.jni.OsmAndCore;
+import net.osmand.core.jni.OsmAndCoreJNI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;

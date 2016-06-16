@@ -18,7 +18,7 @@ android {
     // This is from OsmAndCore_android.aar - for some reason it's not inherited
     aaptOptions {
         // Don't compress any embedded resources
-        noCompress "qz"
+        noCompress "qz", "png"
     }
 
     sourceSets {
@@ -27,7 +27,6 @@ android {
             jni.srcDirs = []
             jniLibs.srcDirs = ["libs"]
             java.srcDirs = ["src"]
-            resources.srcDirs = ["src"]
             renderscript.srcDirs = ["src"]
             res.srcDirs = ["res"]
             assets.srcDirs = ["assets"]
