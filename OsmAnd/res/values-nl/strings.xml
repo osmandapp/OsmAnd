@@ -132,7 +132,7 @@
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zelfgedefinieerd</string>
   <string name="fav_export_confirmation">Er is al een bestand met geëxporteerde favorieten. Wil je dat bestand overschrijven?</string>
-  <string name="profile_settings">Instellingen voor profiel ..</string>
+  <string name="profile_settings">Instellingen voor profiel…</string>
   <string name="settings_preset">Standaardprofiel</string>
   <string name="settings_preset_descr">Kaart- en navigatieinstellingen worden per profiel onthouden. Kies hier het standaardprofiel.</string>
   
@@ -232,7 +232,7 @@
   <string name="local_index_items_restored">%1$d van %2$d bestanden succesvol geactiveerd.</string>
   <string name="local_index_no_items_to_do">Voor %1$s: geen bestanden</string>
   <string name="local_index_action_do">U gaat %2$s bestanden %1$s. Doorgaan?</string>
-  <string name="local_index_descr_title">Kaartbeheer</string>
+  <string name="local_index_descr_title">Kaarten installeren en beheren</string>
   <string name="local_index_mi_restore">Activeer</string>
   <string name="local_index_mi_backup">Deactiveer</string>
   
