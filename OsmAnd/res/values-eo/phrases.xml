@@ -32,7 +32,7 @@
 		<string name="poi_internet_access">Interret-aliro</string>
 	<string name="poi_entertainment">Ripozejoj</string>
 		<string name="poi_club">Klubo</string>
-	<string name="poi_sustenance">Manĝo</string>
+	<string name="poi_sustenance">Manĝejoj</string>
 	<string name="poi_cafe_and_restaurant">Kafejoj kaj manĝejoj</string>
 	<string name="poi_service">Servoj</string>
 		<string name="poi_craft">Metio</string>
@@ -77,7 +77,7 @@
 	<string name="poi_bathroom_furnishing">Lavĉambro-akcesoraĵa vendejo</string>
 	<string name="poi_bed">Litaĵ-vendejo</string>
 	<string name="poi_boutique">Galanteriejo</string>
-	<string name="poi_camera">Fotil-vendejo</string>
+	<string name="poi_camera">Fotiloj k lensoj vendejo</string>
 	<string name="poi_carpet">Tapiŝ-vendejo</string>
 	<string name="poi_chemist">Drogejo</string>
 	<string name="poi_charity">Almoza vendejo</string>
@@ -194,5 +194,53 @@
 	<string name="poi_fast_food">Rapidmanĝejo</string>
 	<string name="poi_wiki_lang_vo">Vikipedio Volapuka</string>
 	<string name="poi_highway_crossing">Pasejo zebrostria</string>
+
+	<string name="poi_kitchen">Kuiril-vendejo</string>
+	<string name="poi_leather">Ledaĵ-vendejo</string>
+	<string name="poi_medical_supply">Medicinaĵ-vendejo</string>
+	<string name="poi_mobile_phone">Poŝtelefon-vendejo</string>
+	<string name="poi_motorcycle">Motorcikl-vendejo</string>
+	<string name="poi_music">Muzikvendejo</string>
+	<string name="poi_musical_instrument">Muzikinstrument-vendejo</string>
+	<string name="poi_optician">Optikbutiko</string>
+	<string name="poi_organic">Ekologi-manĝaĵa vendejo</string>
+	<string name="poi_outdoor">Vojaĝil-vendejo</string>
+	<string name="poi_paint">Farbovendejo</string>
+	<string name="poi_pet">Dombest-vendejo</string>
+	<string name="poi_photo">Fotovendejo</string>
+	<string name="poi_radiotechnics">Radioteĥnik-vendejo</string>
+	<string name="poi_second_hand">Brokantejo</string>
+	<string name="poi_scuba_diving_shop">Subakvadil-vendejo</string>
+	<string name="poi_ship_chandler">Ŝipekipistejo</string>
+	<string name="poi_sports">Sportovendejo</string>
+	<string name="poi_stationery">Papervaro-vendejo</string>
+	<string name="poi_tableware">Manĝil-vendejo</string>
+	<string name="poi_ticket">Bilet-butiko</string>
+	<string name="poi_tobacco">Tabak-vendejo</string>
+	<string name="poi_toys">Ludil-vendejo</string>
+	<string name="poi_trade">Staplejo</string>
+	<string name="poi_tyres">Aerbend-vendejo</string>
+	<string name="poi_vacuum_cleaner">Senpolvigil-vendejo</string>
+	<string name="poi_variety_store">Ĉio-po-unu-spesmilo vendejo</string>
+	<string name="poi_video">Filmovendejo</string>
+	<string name="poi_window_blind">Fenestr-kovrila vendejo</string>
+	<string name="poi_department_store">Ĉiovendejo</string>
+	<string name="poi_bicycle_parking">Parkumejo bicikla</string>
+
+	<string name="poi_orchard">Fruktoĝardeno</string>
+	<string name="poi_allotments">Familiaj ĝardenoj</string>
+	<string name="poi_place_allotments">Familiaj ĝardenoj</string>
+	<string name="poi_electronics">Elektronik-endejo</string>
+	<string name="poi_energy">Energi-vendejo</string>
+	<string name="poi_car">Aŭtomobil-vendejo</string>
+	<string name="poi_car_parts">Aŭtomobil-parta vendejo</string>
+	<string name="poi_shelter">Ŝirmejo</string>
+	<string name="poi_atm">Bankaŭtomato</string>
+	<string name="poi_bureau_de_change">Monŝanĝejo</string>
+	<string name="poi_volcano">Vulkano</string>
+	<string name="poi_tree">Arbo</string>
+	<string name="poi_wiki_lang_ar">Vikipedio Araba</string>
+	<string name="poi_library">Biblioteko</string>
+	<string name="poi_retail">Komercejo</string>
 
 	</resources>
