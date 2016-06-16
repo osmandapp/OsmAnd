@@ -2953,9 +2953,9 @@
 	<string name="poi_crossing_saltire_no">Overkørsel med krydsmærke: nej</string>
 	<string name="poi_crossing_supervision_yes">Overkørsel med opsyn</string>
 	<string name="poi_crossing_supervision_no">Overkørsel med opsyn: nej</string>
-	<string name="poi_crossing_barrier_full">Overkørsel med bom: hel</string>
-	<string name="poi_crossing_barrier_half">Overkørsel med bom: halv</string>
-	<string name="poi_crossing_barrier_double_half">Overkørsel med bom: dobbelt halv</string>
+	<string name="poi_crossing_barrier_full">Overkørsel med bom: helbom</string>
+	<string name="poi_crossing_barrier_half">Overkørsel med bom: halvbom</string>
+	<string name="poi_crossing_barrier_double_half">Overkørsel med bom: dobbelt halvbom</string>
 	<string name="poi_crossing_bell_yes">Overkørsel med klokke</string>
 	<string name="poi_crossing_bell_no">Overkørsel med klokke: nej</string>
 	<string name="poi_crossing_light_yes">Overkørsel med blinklys</string>
@@ -2963,9 +2963,9 @@
 	<string name="poi_crossing_supervision_attendant">Overkørsel med opsyn: ledsager</string>
 	<string name="poi_crossing_supervision_camera">Overkørsel med opsyn: kamera</string>
 
-<string name="poi_crossing_activation_automatic">Overkørsel aktivering: automatisk</string>
-	<string name="poi_crossing_activation_local">Overkørsel aktivering: lokal</string>
-	<string name="poi_crossing_activation_remote">Overkørsel aktivering: fjernbetjening</string>
+<string name="poi_crossing_activation_automatic">Overkørselaktivering: automatisk</string>
+	<string name="poi_crossing_activation_local">Overkørselaktivering: lokal</string>
+	<string name="poi_crossing_activation_remote">Overkørselaktivering: fjernbetjening</string>
 	<string name="poi_crossing_barrier_no">Overkørsel bom: nej</string>
 	<string name="poi_crossing_barrier_yes">Overkørsel bom</string>
 	<string name="poi_crossing_on_demand_yes">Overkørsel på forespørgsel</string>
