@@ -335,12 +335,6 @@ task appStart(type: Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
-clean.dependsOn 'cleanNoTranslate'
-
-task cleanNoTranslate() {
-	delete('res/values/no_translate.xml')
-}
-
 repositories {
 	ivy {
 		name = "OsmAndBinariesIvy"
