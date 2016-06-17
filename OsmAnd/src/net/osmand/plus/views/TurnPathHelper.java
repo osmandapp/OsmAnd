@@ -180,18 +180,18 @@ public class TurnPathHelper {
 
 			int out = turnType.getExitOut();
 			boolean leftSide = turnType.isLeftSide();
-			float radArrow = 35;
+			float radArrow = 37;
 			float radIn = 11;
-			float radOut = radIn + 7;
+			float radOut = radIn + 6;
 		
 			float radBottom = radOut + 8;
 			float radStepInter = radOut + 6;
-			float radAr = radOut + 2;
-			float radAr2 = radOut + 3;
+			float radAr = radOut + 4;
+			float radAr2 = radOut + 5;
 		
 			float widthStepIn = 8;
 			float widthStepInter = 6;
-			float widthArrow = 20;
+			float widthArrow = 22;
 			float cx = wa / 2 ;
 			float cy = ha / 2 ;
 		
