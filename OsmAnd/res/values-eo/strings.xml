@@ -326,7 +326,7 @@
     <string name="shared_string_message">Mesaĝo</string>
     <string name="shared_string_edit">Redakti</string>
     <string name="shared_string_places">Lokoj</string>
-    <string name="shared_string_search">Serĉilo</string>
+    <string name="shared_string_search">Serĉi</string>
     <string name="shared_string_show_description">Montri priskribon</string>
     <string name="welmode_download_maps">Elŝuti mapojn</string>
     <string name="shared_string_yes">Jes</string>
@@ -1677,7 +1677,7 @@
     <string name="map_orientation_portrait">Vertikala</string>
     <string name="map_orientation_default">Sama kiel aparato</string>
     <string name="favorite">Ŝatataj</string>
-    <string name="search_button">Serĉi</string>
+    <string name="search_button">Serĉilo</string>
     <string name="search_activity">Serĉi</string>
     <string name="search_address_region">Regiono</string>
     <string name="search_address_city">Urbo</string>
