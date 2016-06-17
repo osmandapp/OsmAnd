@@ -108,7 +108,7 @@
 	<string name="poi_gate">Bramka</string>
 	<string name="poi_city_wall">Mur miejski</string>
 	<string name="poi_lift_gate">Podnoszona bramka</string>
-	<string name="poi_toll_booth">Budka telefoniczna</string>
+	<string name="poi_toll_booth">Punkt poboru opłat</string>
 	<string name="poi_border_control">Kontrola graniczna</string>
 	<string name="poi_traffic_calming_bump">Krótki próg zwalniający</string>
 	<string name="poi_traffic_calming_hump">Długi próg zwalniający</string>
@@ -176,7 +176,7 @@
 	<string name="poi_bridge">Most</string>
 
 	<string name="poi_speed_camera">Fotoradar</string>
-	<string name="poi_emergency_access_point">Ambulatoryjne świadczenia zdrowotne</string>
+	<string name="poi_emergency_access_point">Ratunkowy znak orientacyjny</string>
 
 	<string name="poi_turning_circle">Miejsce do zawracania</string>
 	<string name="poi_motorway_junction">Zjazd z autostrady</string>
