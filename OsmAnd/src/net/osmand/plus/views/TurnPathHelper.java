@@ -5,6 +5,7 @@ import net.osmand.plus.R;
 import net.osmand.router.TurnType;
 import android.content.res.Resources;
 import android.graphics.Paint.Style;
+import android.graphics.Path.Direction;
 import android.graphics.drawable.Drawable;
 
 import java.util.Map;
@@ -19,7 +20,7 @@ public class TurnPathHelper {
 	private static final boolean SHOW_STEPS = true;
 
 	// 72x72
-	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform) {
+	public static void calcTurnPath(Path pathForTurn, Path outlay, TurnType turnType, Matrix transform) {
 		if(turnType == null){
 			return;
 		}
@@ -206,6 +207,10 @@ public class TurnPathHelper {
 			
 			RectF qrOut = new RectF(cx - radOut, cy - radOut, cx + radOut, cy + radOut);
 			RectF qrIn = new RectF(cx - radIn, cy - radIn, cx + radIn, cy + radIn);
+			if(outlay != null) {
+				outlay.addOval(qrOut, Direction.CW);
+				outlay.addOval(qrIn, Direction.CW);
+			}
 			
 			// move to bottom ring
 			pathForTurn.moveTo(getProjX(dfOut, cx, cy, radOut), getProjY(dfOut, cx, cy, radOut));
@@ -421,15 +426,22 @@ public class TurnPathHelper {
 	
 	public static class RouteDrawable extends Drawable {
 		Paint paintRouteDirection;
+		Paint paintRouteDirectionOutlay;
 		Path p = new Path();
 		Path dp = new Path();
+		Path pOutlay = new Path();
+		Path dpOutlay = new Path();
 		
 		public RouteDrawable(Resources resources){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
 			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
 			paintRouteDirection.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, TurnType.straight(), null);
+			paintRouteDirectionOutlay = new Paint();
+			paintRouteDirectionOutlay.setStyle(Style.STROKE);
+			paintRouteDirectionOutlay.setColor(Color.BLACK);
+			paintRouteDirectionOutlay.setAntiAlias(true);
+			TurnPathHelper.calcTurnPath(dp, dpOutlay, TurnType.straight(), null);
 		}
 
 		@Override
@@ -437,15 +449,17 @@ public class TurnPathHelper {
 			Matrix m = new Matrix();
 			m.setScale(bounds.width() / 72f, bounds.height() / 72f);
 			p.transform(m, dp);
+			pOutlay.transform(m, dpOutlay);
 		}
 		
 		public void setRouteType(TurnType t){
-			TurnPathHelper.calcTurnPath(p, t, null);
+			TurnPathHelper.calcTurnPath(p, pOutlay, t, null);
 			onBoundsChange(getBounds());
 		}
 
 		@Override
 		public void draw(Canvas canvas) {
+			canvas.drawPath(dpOutlay, paintRouteDirectionOutlay);
 			canvas.drawPath(dp, paintRouteDirection);
 		}
 

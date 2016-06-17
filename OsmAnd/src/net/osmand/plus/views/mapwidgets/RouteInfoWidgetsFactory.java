@@ -746,7 +746,7 @@ public class RouteInfoWidgetsFactory {
 		Matrix pathTransform = new Matrix();
 		pathTransform.postScale(coef, coef );
 		TurnType tp = TurnType.valueOf(laneType, false);
-		TurnPathHelper.calcTurnPath(p, tp, pathTransform);
+		TurnPathHelper.calcTurnPath(p, null, tp, pathTransform);
 		paths.set(laneType, p);
 		return p;
 	}
