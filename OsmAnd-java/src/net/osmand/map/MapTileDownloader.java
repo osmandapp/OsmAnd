@@ -39,51 +39,52 @@ public class MapTileDownloader {
 	public static final long TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS = 15000;
 	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 50;
 	private static final int CONNECTION_TIMEOUT = 30000;
-	
-	
+
+
 	private static MapTileDownloader downloader = null;
 	private static Log log = PlatformUtil.getLog(MapTileDownloader.class);
-	
+
 	public static String USER_AGENT = "OsmAnd~";
-	
-	
+
+
 	private ThreadPoolExecutor threadPoolExecutor;
 	private List<WeakReference<IMapDownloaderCallback>> callbacks = new LinkedList<WeakReference<IMapDownloaderCallback>>();
-	
+
 	private Set<File> pendingToDownload;
 	private Set<File> currentlyDownloaded;
-	
+
 	private int currentErrors = 0;
 	private long timeForErrorCounter = 0;
-	
-	
-	public static MapTileDownloader getInstance(String userAgent){
-		if(downloader == null){
+
+
+	public static MapTileDownloader getInstance(String userAgent) {
+		if (downloader == null) {
 			downloader = new MapTileDownloader(TILE_DOWNLOAD_THREADS);
-			if(userAgent != null) {
+			if (userAgent != null) {
 				MapTileDownloader.USER_AGENT = userAgent;
 			}
 		}
 		return downloader;
 	}
-	
+
 	/**
-	 * Callback for map downloader 
+	 * Callback for map downloader
 	 */
 	public interface IMapDownloaderCallback {
 
 		/**
 		 * Sometimes null cold be passed as request
 		 * That means that there were a lot of requests but
-		 * once method is called 
-		 * (in order to not create a collection of request & reduce calling times) 
+		 * once method is called
+		 * (in order to not create a collection of request & reduce calling times)
+		 *
 		 * @param fileSaved
 		 */
 		public void tileDownloaded(DownloadRequest request);
 	}
-	
+
 	/**
-	 * Download request could subclassed to create own detailed request 
+	 * Download request could subclassed to create own detailed request
 	 */
 	public static class DownloadRequest {
 		public final File fileToSave;
@@ -93,7 +94,7 @@ public class MapTileDownloader {
 		public final String url;
 		public String referer = null;
 		public boolean error;
-		
+
 		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom) {
 			this.url = url;
 			this.fileToSave = fileToSave;
@@ -101,7 +102,7 @@ public class MapTileDownloader {
 			this.yTile = yTile;
 			this.zoom = zoom;
 		}
-		
+
 		public DownloadRequest(String url, File fileToSave) {
 			this.url = url;
 			this.fileToSave = fileToSave;
@@ -109,11 +110,11 @@ public class MapTileDownloader {
 			yTile = -1;
 			zoom = -1;
 		}
-		
-		public void setError(boolean error){
+
+		public void setError(boolean error) {
 			this.error = error;
 		}
-		
+
 		public void saveTile(InputStream inputStream) throws IOException {
 			fileToSave.getParentFile().mkdirs();
 			OutputStream stream = null;
@@ -127,17 +128,17 @@ public class MapTileDownloader {
 			}
 		}
 	}
-	
-	
-	public MapTileDownloader(int numberOfThreads){
-		
-		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, TILE_DOWNLOAD_SECONDS_TO_WORK, 
+
+
+	public MapTileDownloader(int numberOfThreads) {
+
+		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, TILE_DOWNLOAD_SECONDS_TO_WORK,
 				TimeUnit.SECONDS, createQueue());
 		// 1.6 method but very useful to kill non-running threads
 //		threadPoolExecutor.allowCoreThreadTimeOut(true);
 		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
 		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
-		
+
 	}
 
 	protected BlockingQueue<Runnable> createQueue() {
@@ -148,7 +149,7 @@ public class MapTileDownloader {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		if(!loaded) {
+		if (!loaded) {
 			// for Android 2.2
 			return new LinkedBlockingQueue<Runnable>();
 		}
@@ -158,104 +159,104 @@ public class MapTileDownloader {
 	protected static BlockingQueue<Runnable> createDeque() {
 		return new net.osmand.util.LIFOBlockingDeque<Runnable>();
 	}
-	
-	public void addDownloaderCallback(IMapDownloaderCallback callback){
+
+	public void addDownloaderCallback(IMapDownloaderCallback callback) {
 		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<WeakReference<IMapDownloaderCallback>>(callbacks);
 		ncall.add(new WeakReference<MapTileDownloader.IMapDownloaderCallback>(callback));
 		callbacks = ncall;
 	}
-	
-	public void removeDownloaderCallback(IMapDownloaderCallback callback){
+
+	public void removeDownloaderCallback(IMapDownloaderCallback callback) {
 		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<WeakReference<IMapDownloaderCallback>>(callbacks);
 		Iterator<WeakReference<IMapDownloaderCallback>> it = ncall.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			IMapDownloaderCallback c = it.next().get();
-			if(c == callback) {
+			if (c == callback) {
 				it.remove();
 			}
 		}
 		callbacks = ncall;
 	}
-	
-	
+
+
 	public void clearCallbacks() {
 		callbacks = new LinkedList<WeakReference<IMapDownloaderCallback>>();
 	}
-	
+
 	public List<IMapDownloaderCallback> getDownloaderCallbacks() {
 		ArrayList<IMapDownloaderCallback> lst = new ArrayList<IMapDownloaderCallback>();
-		for(WeakReference<IMapDownloaderCallback> c : callbacks) {
+		for (WeakReference<IMapDownloaderCallback> c : callbacks) {
 			IMapDownloaderCallback ct = c.get();
-			if(ct != null) {
+			if (ct != null) {
 				lst.add(ct);
 			}
 		}
 		return lst;
 	}
-	
-	public boolean isFilePendingToDownload(File f){
+
+	public boolean isFilePendingToDownload(File f) {
 		return pendingToDownload.contains(f);
 	}
-	
-	public boolean isFileCurrentlyDownloaded(File f){
+
+	public boolean isFileCurrentlyDownloaded(File f) {
 		return currentlyDownloaded.contains(f);
 	}
-	
-	public boolean isSomethingBeingDownloaded(){
+
+	public boolean isSomethingBeingDownloaded() {
 		return !currentlyDownloaded.isEmpty();
 	}
-	
-	public int getRemainingWorkers(){
+
+	public int getRemainingWorkers() {
 		return (int) (threadPoolExecutor.getTaskCount());
 	}
-	
-	public void refuseAllPreviousRequests(){
+
+	public void refuseAllPreviousRequests() {
 		// That's very strange because exception in impl of queue (possibly wrong impl)
 //		threadPoolExecutor.getQueue().clear();
-		while(!threadPoolExecutor.getQueue().isEmpty()){
+		while (!threadPoolExecutor.getQueue().isEmpty()) {
 			threadPoolExecutor.getQueue().poll();
 		}
 		pendingToDownload.clear();
 	}
-	
-	public void requestToDownload(DownloadRequest request){
+
+	public void requestToDownload(DownloadRequest request) {
 		long now = System.currentTimeMillis();
-		if((int)(now - timeForErrorCounter) > TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS ) {
+		if ((int) (now - timeForErrorCounter) > TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS) {
 			timeForErrorCounter = now;
 			currentErrors = 0;
-		} else if(currentErrors > TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT){
+		} else if (currentErrors > TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT) {
 			return;
 		}
-		if(request.url == null){
+		if (request.url == null) {
 			return;
 		}
-		
+
 		if (!isFileCurrentlyDownloaded(request.fileToSave)
 				&& !isFilePendingToDownload(request.fileToSave)) {
 			pendingToDownload.add(request.fileToSave);
 			threadPoolExecutor.execute(new DownloadMapWorker(request));
 		}
 	}
-	
-	
+
+
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {
-		
+
 		private DownloadRequest request;
-		
-		private DownloadMapWorker(DownloadRequest request){
+
+		private DownloadMapWorker(DownloadRequest request) {
 			this.request = request;
 		}
-		
+
 		@Override
 		public void run() {
 			if (request != null && request.fileToSave != null && request.url != null) {
 				pendingToDownload.remove(request.fileToSave);
-				if(currentlyDownloaded.contains(request.fileToSave)){
+				if (currentlyDownloaded.contains(request.fileToSave)) {
 					return;
 				}
-				
+
 				currentlyDownloaded.add(request.fileToSave);
-				if(log.isDebugEnabled()){
+				if (log.isDebugEnabled()) {
 					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
 				}
 				long time = System.currentTimeMillis();
@@ -263,7 +264,7 @@ public class MapTileDownloader {
 				try {
 					URLConnection connection = NetworkUtils.getHttpURLConnection(request.url);
 					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
-					if(request.referer != null)
+					if (request.referer != null)
 						connection.setRequestProperty("Referer", request.referer); //$NON-NLS-1$
 					connection.setConnectTimeout(CONNECTION_TIMEOUT);
 					connection.setReadTimeout(CONNECTION_TIMEOUT);
@@ -289,24 +290,24 @@ public class MapTileDownloader {
 					fireLoadCallback(request);
 				}
 			}
-				
-		} 
-		
+
+		}
+
 		@Override
 		public int compareTo(DownloadMapWorker o) {
 			return 0; //(int) (time - o.time);
 		}
-		
+
 	}
 
 
 	public void fireLoadCallback(DownloadRequest request) {
 		Iterator<WeakReference<IMapDownloaderCallback>> it = callbacks.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			IMapDownloaderCallback c = it.next().get();
-			if(c != null) {
+			if (c != null) {
 				c.tileDownloaded(request);
 			}
-		}		
+		}
 	}
 }
