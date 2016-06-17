@@ -123,7 +123,7 @@
 	<string name="poi_curtain">Kurten-vendejo</string>
 	<string name="poi_fabric">Teksaĵ-vendejo</string>
 <string name="poi_dive">Subakvadil-vendejo</string>
-	<string name="poi_doityourself">Il-vendejaro</string>
+	<string name="poi_doityourself">Memfaradil-vendejo</string>
 	<string name="poi_doors">Pord-vendejo</string>
 	<string name="poi_erotic">Seks-vendejo</string>
 	<string name="poi_fashion">Mod-butiko</string>
@@ -230,7 +230,7 @@
 	<string name="poi_orchard">Fruktoĝardeno</string>
 	<string name="poi_allotments">Familiaj ĝardenoj</string>
 	<string name="poi_place_allotments">Familiaj ĝardenoj</string>
-	<string name="poi_electronics">Elektronik-endejo</string>
+	<string name="poi_electronics">Elektronik-vendejo</string>
 	<string name="poi_energy">Energi-vendejo</string>
 	<string name="poi_car">Aŭtomobil-vendejo</string>
 	<string name="poi_car_parts">Aŭtomobil-parta vendejo</string>
@@ -243,4 +243,41 @@
 	<string name="poi_library">Biblioteko</string>
 	<string name="poi_retail">Komercejo</string>
 
+	<string name="poi_atv">Ĉiuterenveurilo-vendejo</string>
+	<string name="poi_cosmetics">Kosmetikaĵ-vendejo</string>
+	<string name="poi_sewing">Pasamentejo</string>
+	<string name="poi_watches">Horloĝ-vendejo</string>
+	<string name="poi_swimming_pool_shop">Naĝejilo vendejo</string>
+	<string name="poi_games">Ludil-vendejo</string>
+	<string name="poi_model">Modelfar-vendejo</string>
+	<string name="poi_trophy">Pokaloj k premioj vendejo</string>
+	<string name="poi_video_games">Videolud-vendejo</string>
+	<string name="poi_pyrotechnics">Artfajraĵ-vendejo</string>
+	<string name="poi_weapons">Armil-vendejo</string>
+	<string name="poi_perfumery">Parfumejo</string>
+
+	<string name="poi_police">Policejo</string>
+	<string name="poi_fire_station">Fajrobrigadejo</string>
+	<string name="poi_emergency_phone">Alarma telefono</string>
+	<string name="poi_fire_extinguisher">Fajroestingilo</string>
+	<string name="poi_fire_flapper">Fajrobrigada balailo</string>
+	<string name="poi_fire_hose">Fajrobrigada tubo</string>
+	<string name="poi_fire_water_pond">Fajrobrigada akvorezervujo</string>
+	<string name="poi_grit_bin">Salujego</string>
+	<string name="poi_ambulance_station">Ambulanca stacio</string>
+	<string name="poi_ses_station">Stacio de civila defendo</string>
+	<string name="poi_emergency_access_point">Vivsava rekonebla signo</string>
+
+	<string name="poi_ford">Travadejo</string>
+	<string name="poi_ford_stepping_stones">Trravadejo ŝtona</string>
+	<string name="poi_mountain_pass">Montpasejo</string>
+	<string name="poi_gate">Pordego</string>
+	<string name="poi_city_wall">Muro urba</string>
+	<string name="poi_lift_gate">Bariero</string>
+	<string name="poi_toll_booth">Vojpagejo</string>
+	<string name="poi_border_control">Landlima kontrolejo</string>
+	<string name="poi_traffic_calming_bump">Stratĝibo kurta</string>
+	<string name="poi_traffic_calming_hump">Stratĝibo longa</string>
+	<string name="poi_fuel_lpg">Likva naftogaso (LPG)</string>
+	<string name="poi_traffic_calming_cushion">Stratĝibo kusena</string>
 	</resources>
