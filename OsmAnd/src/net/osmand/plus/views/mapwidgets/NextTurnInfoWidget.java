@@ -113,6 +113,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		protected Paint paintBlack;
 		protected Paint paintRouteDirection;
 		protected Path pathForTurn = new Path();
+		protected Path pathForTurnOutlay = new Path();
 		protected TurnType turnType = null;
 		protected int turnImminent;
 		protected boolean deviatedFromRoute;
@@ -135,11 +136,10 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		
 		@Override
 		protected void onBoundsChange(Rect bounds) {
-			if (pathForTurn != null) {
-				Matrix m = new Matrix();
-				m.setScale(bounds.width() / 72f, bounds.height() / 72f);
-				pathForTurn.transform(m, pathForTurn);
-			}
+			Matrix m = new Matrix();
+			m.setScale(bounds.width() / 72f, bounds.height() / 72f);
+			pathForTurn.transform(m, pathForTurn);
+			pathForTurnOutlay.transform(m, pathForTurnOutlay);
 		}
 		
 		public void setTurnImminent(int turnImminent, boolean deviatedFromRoute) {
@@ -163,6 +163,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		public void draw(Canvas canvas) {
 			/// small indent
 			// canvas.translate(0, 3 * scaleCoefficient);
+			canvas.drawPath(pathForTurnOutlay, paintBlack);
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
 		}
@@ -185,7 +186,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		public boolean setTurnType(TurnType turnType) {
 			if(turnType != this.turnType) {
 				this.turnType = turnType;
-				TurnPathHelper.calcTurnPath(pathForTurn, turnType, null);
+				TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null);
 				onBoundsChange(getBounds());
 				return true;
 			}
