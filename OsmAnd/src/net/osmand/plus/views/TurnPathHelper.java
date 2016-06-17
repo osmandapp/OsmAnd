@@ -25,6 +25,9 @@ public class TurnPathHelper {
 			return;
 		}
 		pathForTurn.reset();
+		if(outlay != null) {
+			outlay.reset();
+		}
 		int ha = 72;
 		int wa = 72;
 
@@ -174,16 +177,17 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(-harrowL / 2, harrowL / 2); // -15 15
 			pathForTurn.rLineTo(hpartArrowL + th, 0); //9 0
 		} else if(turnType != null && turnType.isRoundAbout() && USE_NEW_RNDB) {
+
 			int out = turnType.getExitOut();
 			boolean leftSide = turnType.isLeftSide();
 			float radArrow = 35;
 			float radIn = 11;
-			float radOut = radIn + 8;
+			float radOut = radIn + 7;
 		
 			float radBottom = radOut + 8;
-			float radStepInter = radOut + 7;
-			float radAr = radOut + 3;
-			float radAr2 = radOut + 2;
+			float radStepInter = radOut + 6;
+			float radAr = radOut + 2;
+			float radAr2 = radOut + 3;
 		
 			float widthStepIn = 8;
 			float widthStepInter = 6;
@@ -208,8 +212,10 @@ public class TurnPathHelper {
 			RectF qrOut = new RectF(cx - radOut, cy - radOut, cx + radOut, cy + radOut);
 			RectF qrIn = new RectF(cx - radIn, cy - radIn, cx + radIn, cy + radIn);
 			if(outlay != null) {
-				outlay.addOval(qrOut, Direction.CW);
-				outlay.addOval(qrIn, Direction.CW);
+				outlay.addArc(qrOut, 0, 360);
+				outlay.addArc(qrIn, 0, -360);
+//				outlay.addOval(qrOut, Direction.CCW);
+//				outlay.addOval(qrIn, Direction.CW);
 			}
 			
 			// move to bottom ring
@@ -217,7 +223,7 @@ public class TurnPathHelper {
 			if (out <= 1) {
 				showSteps = false;
 			}
-			if (showSteps) {
+			if (showSteps && outlay != null) {
 				double totalStepInter = (out - 1) * dfStepOut;
 				double st = (rot - 2 * dfOut - totalStepInter) / out;
 				if ((rot > 0) != (st > 0)) {
@@ -229,34 +235,39 @@ public class TurnPathHelper {
 				// double st = (rot - 2 * dfOut ) / (2 * out - 1);
 				// dfStepOut = st;
 				if (showSteps) {
+					outlay.moveTo(getProjX(dfOut, cx, cy, radOut), getProjY(dfOut, cx, cy, radOut));
 					for (int i = 0; i < out - 1; i++) {
-						pathForTurn.arcTo(qrOut, startArcAngle(dfOut + i * (st + dfStepOut)), sweepArcAngle(st));
-						arcLineTo(pathForTurn,
+						outlay.arcTo(qrOut, startArcAngle(dfOut + i * (st + dfStepOut)), sweepArcAngle(st));
+						arcLineTo(outlay,
 								dfOut + (i + 1) * (st + dfStepOut) - dfStepOut / 2 - dfStepInter / 2, cx, cy, radStepInter);
-						arcLineTo(pathForTurn, dfOut + (i + 1) * (st + dfStepOut) - dfStepOut / 2 + dfStepInter / 2, cx, cy, radStepInter);
-						arcLineTo(pathForTurn, dfOut + (i + 1) * (st + dfStepOut), cx, cy, radOut);
+						arcLineTo(outlay, dfOut + (i + 1) * (st + dfStepOut) - dfStepOut / 2 + dfStepInter / 2, cx, cy, radStepInter);
+						arcLineTo(outlay, dfOut + (i + 1) * (st + dfStepOut), cx, cy, radOut);
 						// pathForTurn.arcTo(qr1, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
 					}
-					pathForTurn.arcTo(qrOut, startArcAngle(rot - dfOut - st), sweepArcAngle(st));
+					outlay.arcTo(qrOut, startArcAngle(rot - dfOut - st), sweepArcAngle(st));
+					// swipe back
+					arcLineTo(outlay, rot - dfIn, cx, cy, radIn);
+					outlay.arcTo(qrIn, startArcAngle(rot - dfIn), -sweepArcAngle(rot - dfIn - dfIn));
 				}
 			} 
-			if(!showSteps) {
-				// arc
-				pathForTurn.arcTo(qrOut, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
-			}
+//			if(!showSteps) {
+//				// arc
+//				pathForTurn.arcTo(qrOut, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
+//			}
+			pathForTurn.arcTo(qrOut, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
 			
 			// up from arc
 			arcLineTo(pathForTurn, rot - dfAr, cx, cy, radAr);
 			// left triangle 
 //			arcLineTo(pathForTurn, rot - dfAr2, cx, cy, radAr2); // 1.
 //			arcQuadTo(pathForTurn, rot - dfAr2, radAr2, rot, radArrow, 0.9f, cx, cy); // 2.
-			arcQuadTo(pathForTurn, rot - dfAr, radAr, rot - dfAr2, radAr2, rot, radArrow, 0.7f, 0.3f, cx, cy); // 3.
+			arcQuadTo(pathForTurn, rot - dfAr, radAr, rot - dfAr2, radAr2, rot, radArrow, 4.5f, cx, cy); // 3.
 			
 //			arcLineTo(pathForTurn, rot, cx, cy, radArrow); // 1.
-			arcQuadTo(pathForTurn, rot - dfAr2, radAr2, rot, radArrow, rot + dfAr2, radAr2, 0.1f, 0.1f, cx, cy);
+			arcQuadTo(pathForTurn, rot - dfAr2, radAr2, rot, radArrow, rot + dfAr2, radAr2, 4.5f, cx, cy);
 			// right triangle 
 //			arcLineTo(pathForTurn, rot + dfAr2, cx, cy, radAr2); // 1.
-			arcQuadTo(pathForTurn, rot, radArrow, rot + dfAr2, radAr2, rot + dfAr, radAr, 0.3f, 0.7f, cx, cy);
+			arcQuadTo(pathForTurn, rot, radArrow, rot + dfAr2, radAr2, rot + dfAr, radAr, 4.5f, cx, cy);
 			
 			arcLineTo(pathForTurn, rot + dfAr, cx, cy, radAr);
 			// down to arc
@@ -268,6 +279,7 @@ public class TurnPathHelper {
 			// left
 			arcLineTo(pathForTurn, dfL, cx, cy, radBottom);
 			
+		
 		} else if (turnType != null && turnType.isRoundAbout()) {
 			float t = turnType.getTurnAngle();
 			boolean leftSide = turnType.isLeftSide();
@@ -386,14 +398,18 @@ public class TurnPathHelper {
 	}
 	
 	private static void arcQuadTo(Path pathForTurn, double angle0, float radius0, double angle, float radius, double angle2, float radius2,
-			float proc0, float proc2, float cx, float cy) {
+			float dl, float cx, float cy) {
 		float X0 = getProjX(angle0, cx, cy, radius0);
 		float Y0 = getProjY(angle0, cx, cy, radius0);
 		float X = getProjX(angle, cx, cy, radius);
 		float Y = getProjY(angle, cx, cy, radius);
 		float X2 = getProjX(angle2, cx, cy, radius2);
 		float Y2 = getProjY(angle2, cx, cy, radius2);
-		pathForTurn.lineTo(X0 * proc0 + X * (1 - proc0), Y0 * proc0 + Y * (1 - proc0));
+		float l2 = (float) Math.sqrt((X-X2)*(X-X2) + (Y-Y2)*(Y-Y2));
+		float l0 = (float) Math.sqrt((X-X0)*(X-X0) + (Y-Y0)*(Y-Y0));
+		float proc2 = (float) (dl / l2);
+		float proc = (float) (dl / l0);
+		pathForTurn.lineTo(X0 * proc + X * (1 - proc), Y0 * proc + Y * (1 - proc));
 		pathForTurn.quadTo(X, Y, X2 * proc2 + X * (1 - proc2), Y2 * proc2 + Y * (1 - proc2));
 	}
 	
