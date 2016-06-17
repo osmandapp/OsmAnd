@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Vendejoj</string>
-		<string name="poi_shop_food">Manĝovendejo</string>
+		<string name="poi_shop_food">Manĝovendejoj</string>
 	<string name="poi_emergency">Vivsavado</string>
 	<string name="poi_transportation">Transporto</string>
 		<string name="poi_road_obstacle">Voja barilo</string>
