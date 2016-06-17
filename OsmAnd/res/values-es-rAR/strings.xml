@@ -143,7 +143,7 @@
     <string name="share_note">Compartir informe</string>
     <string name="location_on_map">Ubicación:\n Lat %1$s\n Lon %2$s</string>
     <string name="watch">Ver</string>
-    <string name="notes">Informes</string>
+    <string name="notes">Notas</string>
     <string name="online_map">Mapa en línea</string>
     <string name="roads_only">Sólo caminos</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>
@@ -596,7 +596,7 @@
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Avión</string>
-    <string name="local_osm_changes_delete_all_confirm">Borrará %1$d cambio(s) OSM. ¿Estás seguro?</string>
+    <string name="local_osm_changes_delete_all_confirm">Borrarás %1$d cambio(s) OSM. ¿Estás seguro?</string>
     <string name="animate_routing_route_not_calculated">Primero calcula la ruta</string>
     <string name="animate_routing_route">"Simular, usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
@@ -1016,7 +1016,7 @@
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">La notificación para recoger tu automóvil fue previamente añadida al calendario. Permanecerá allí hasta que la borres manualmente.</string>
     <string name="osmand_parking_time_limit_title">Definir el límite de tiempo del estacionamiento</string>
-    <string name="osmand_parking_delete_confirm">¿Borrar el marcador del estacionamiento?</string>
+    <string name="osmand_parking_delete_confirm">¿Borrar marcador del estacionamiento?</string>
     <string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
     <string name="osmand_parking_choose_type">Elige el tipo de estacionamiento</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
@@ -1255,7 +1255,7 @@
     <string name="show_more_map_detail">Mostrar más detalle del mapa</string>
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles inferiores de ampliación</string>
     <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
-    <string name="favorite_delete_multiple">Borrará %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Estás seguro?</string>
+    <string name="favorite_delete_multiple">Borrarás %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Estás seguro?</string>
     <string name="favorite_home_category">Inicio</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
@@ -1739,7 +1739,7 @@
     <string name="shared_string_show_details">Ver detalles</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Seguro?</string>
+    <string name="local_recordings_delete_all_confirm">Borrarás %1$d nota(s). ¿Estás seguro?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quieres activarlo?</string>
@@ -2099,7 +2099,7 @@
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
     <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos aunque uses tu perfil de OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Subir problema del mapa</string>
+    <string name="upload_osm_note">Subir problema(s) del mapa</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
     <string name="osm_user_stat">Ediciones %1$s, posición %2$s, ediciones totales %3$s</string>
