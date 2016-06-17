@@ -1506,7 +1506,7 @@
     <string name="amenity_type_geocache">Geokaŝado</string>
     <string name="amenity_type_healthcare">Kuracado</string>
     <string name="amenity_type_historic">Historiejoj</string>
-    <string name="poi_filter_closest_poi">Plej proksimaj Interesejoj</string>
+    <string name="poi_filter_closest_poi">Proksimaj Interesejoj</string>
     <string name="daynight_mode_day">Taga</string>
     <string name="daynight_mode_night">Nokta</string>
     <string name="daynight_mode_auto">Sunleviĝa/sunsubira</string>
@@ -1848,7 +1848,7 @@
     <string name="incremental_search_building">Serĉi domon tajpante komencan ciferon</string>
     <string name="choose_available_region">Elekti regionon el listo</string>
     <string name="choose_intersected_street">Elekti intersekcan straton</string>
-    <string name="Closest_Amenities">Plej proksimaj servoj</string>
+    <string name="Closest_Amenities">Proksimaj servoj</string>
     <string name="position_on_map_center">Centre</string>
     <string name="position_on_map_bottom">Sube</string>
     <string name="navigate_point_top_text">Entajpu latitudon kaj longitudon en la elektita formo (G - gradoj, M - arkminutoj, S - arksekundoj)</string>
