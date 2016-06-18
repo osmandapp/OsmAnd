@@ -1,4 +1,4 @@
-package net.osmand.core.samples.android.sample1.search;
+package net.osmand.core.samples.android.sample1.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

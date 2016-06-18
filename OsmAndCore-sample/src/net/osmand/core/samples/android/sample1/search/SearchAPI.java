@@ -4,26 +4,14 @@ import android.os.AsyncTask;
 
 import net.osmand.core.jni.AmenitiesByNameSearch;
 import net.osmand.core.jni.Amenity;
-import net.osmand.core.jni.Amenity.DecodedCategory;
-import net.osmand.core.jni.Amenity.DecodedValue;
 import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.DecodedCategoryList;
-import net.osmand.core.jni.DecodedValueList;
 import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ISearch;
-import net.osmand.core.jni.LatLon;
 import net.osmand.core.jni.NullableAreaI;
 import net.osmand.core.jni.ObfsCollection;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QStringList;
-import net.osmand.core.jni.QStringStringHash;
-import net.osmand.core.jni.Utilities;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SearchAPI {
 
@@ -191,119 +179,6 @@ public class SearchAPI {
 	private static class ResultEntry extends AmenitiesByNameSearch.ResultEntry {
 		protected ResultEntry(ISearch.IResultEntry resultEntry) {
 			super(ISearch.IResultEntry.getCPtr(resultEntry), false);
-		}
-	}
-
-	public static abstract class SearchItem {
-
-		protected double latitude;
-		protected double longitude;
-
-		public SearchItem(double latitude, double longitude) {
-			this.latitude = latitude;
-			this.longitude = longitude;
-		}
-
-		public SearchItem(PointI location31) {
-			LatLon latLon = Utilities.convert31ToLatLon(location31);
-			latitude = latLon.getLatitude();
-			longitude = latLon.getLongitude();
-		}
-
-		public abstract String getName();
-
-		public abstract String getType();
-
-		public double getLatitude() {
-			return latitude;
-		}
-
-		public double getLongitude() {
-			return longitude;
-		}
-
-		@Override
-		public String toString() {
-			return getName() + " {lat:" + getLatitude() + " lon: " + getLongitude() + "}";
-		}
-	}
-
-	public static class AmenitySearchItem extends SearchItem {
-
-		private String nativeName;
-		private String category;
-		private String subcategory;
-		private Map<String, String> localizedNames = new HashMap<>();
-		private Map<String, String> values = new HashMap<>();
-
-		public AmenitySearchItem(Amenity amenity) {
-			super(amenity.getPosition31());
-
-			nativeName = amenity.getNativeName();
-			QStringStringHash locNames = amenity.getLocalizedNames();
-			QStringList locNamesKeys = locNames.keys();
-			for (int i = 0; i < locNamesKeys.size(); i++) {
-				String key = locNamesKeys.get(i);
-				String val = locNames.get(key);
-				localizedNames.put(key, val);
-			}
-
-			DecodedCategoryList catList = amenity.getDecodedCategories();
-			if (catList.size() > 0) {
-				DecodedCategory decodedCategory = catList.get(0);
-				category = decodedCategory.getCategory();
-				subcategory = decodedCategory.getSubcategory();
-			}
-
-			DecodedValueList decodedValueList = amenity.getDecodedValues();
-			if (decodedValueList.size() > 0) {
-				for (int i = 0; i < decodedValueList.size(); i++) {
-					DecodedValue decodedValue = decodedValueList.get(i);
-					String tag = decodedValue.getDeclaration().getTagName();
-					String value = decodedValue.getValue().toString();
-					values.put(tag, value);
-				}
-			}
-		}
-
-		public String getNativeName() {
-			return nativeName;
-		}
-
-		public String getCategory() {
-			return category;
-		}
-
-		public String getSubcategory() {
-			return subcategory;
-		}
-
-		public Map<String, String> getLocalizedNames() {
-			return localizedNames;
-		}
-
-		public Map<String, String> getValues() {
-			return values;
-		}
-
-		@Override
-		public String getName() {
-			return nativeName;
-		}
-
-		@Override
-		public String getType() {
-			return Algorithms.capitalizeFirstLetterAndLowercase(subcategory);
-		}
-
-		@Override
-		public double getLatitude() {
-			return latitude;
-		}
-
-		@Override
-		public double getLongitude() {
-			return longitude;
 		}
 	}
 }

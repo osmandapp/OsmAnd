@@ -45,10 +45,11 @@ import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
+import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
+import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchAPICallback;
-import net.osmand.core.samples.android.sample1.search.SearchListAdapter;
-import net.osmand.core.samples.android.sample1.search.SearchListItem;
+import net.osmand.core.samples.android.sample1.search.SearchItem;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -407,11 +408,11 @@ public class MainActivity extends Activity {
 		searchAPI.setObfAreaFilter(bounds31);
 		searchAPI.startSearch(keyword, MAX_SEARCH_RESULTS, new SearchAPICallback() {
 			@Override
-			public void onSearchFinished(List<SearchAPI.SearchItem> searchItems, boolean cancelled) {
+			public void onSearchFinished(List<SearchItem> searchItems, boolean cancelled) {
 				if (searchItems != null && !cancelled) {
 					LatLon latLon = Utilities.convert31ToLatLon(target31);
 					List<SearchListItem> rows = new ArrayList<>();
-					for (SearchAPI.SearchItem item : searchItems) {
+					for (SearchItem item : searchItems) {
 						SearchListItem row =
 								SearchListItem.buildListItem((SampleApplication)getApplication(), item);
 						rows.add(row);
