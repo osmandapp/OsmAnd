@@ -40,17 +40,15 @@ import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
-import net.osmand.core.jni.OsmAndCore;
-import net.osmand.core.jni.OsmAndCoreJNI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
-import net.osmand.core.samples.android.sample1.SearchAPI.SearchAPICallback;
-import net.osmand.core.samples.android.sample1.SearchAPI.SearchItem;
-import net.osmand.core.samples.android.sample1.SearchUIHelper.SearchListAdapter;
-import net.osmand.core.samples.android.sample1.SearchUIHelper.SearchRow;
+import net.osmand.core.samples.android.sample1.search.SearchAPI;
+import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchAPICallback;
+import net.osmand.core.samples.android.sample1.search.SearchListAdapter;
+import net.osmand.core.samples.android.sample1.search.SearchListItem;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -264,7 +262,7 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				hideSearchList();
 				mapView.requestFocus();
-				SearchRow item = adapter.getItem(position);
+				SearchListItem item = adapter.getItem(position);
 				PointI target = Utilities.convertLatLonTo31(new LatLon(item.getLatitude(), item.getLongitude()));
 				setTarget(target);
 				setZoom(17f);
@@ -409,24 +407,25 @@ public class MainActivity extends Activity {
 		searchAPI.setObfAreaFilter(bounds31);
 		searchAPI.startSearch(keyword, MAX_SEARCH_RESULTS, new SearchAPICallback() {
 			@Override
-			public void onSearchFinished(List<SearchItem> searchItems, boolean cancelled) {
+			public void onSearchFinished(List<SearchAPI.SearchItem> searchItems, boolean cancelled) {
 				if (searchItems != null && !cancelled) {
 					LatLon latLon = Utilities.convert31ToLatLon(target31);
-					List<SearchRow> rows = new ArrayList<>();
-					for (SearchItem item : searchItems) {
-						SearchRow row = new SearchRow(item);
+					List<SearchListItem> rows = new ArrayList<>();
+					for (SearchAPI.SearchItem item : searchItems) {
+						SearchListItem row =
+								SearchListItem.buildListItem((SampleApplication)getApplication(), item);
 						rows.add(row);
 					}
 
 					adapter.clear();
 					adapter.addAll(rows);
 					adapter.updateDistance(latLon.getLatitude(), latLon.getLongitude());
-					adapter.sort(new Comparator<SearchRow>() {
+					adapter.sort(new Comparator<SearchListItem>() {
 						@Override
-						public int compare(SearchRow lhs, SearchRow rhs) {
+						public int compare(SearchListItem lhs, SearchListItem rhs) {
 							int res = Double.compare(lhs.getDistance(), rhs.getDistance());
 							if (res == 0) {
-								return lhs.getSearchItem().getLocalizedName().compareToIgnoreCase(rhs.getSearchItem().getLocalizedName());
+								return lhs.getName().compareToIgnoreCase(rhs.getName());
 							} else {
 								return res;
 							}
