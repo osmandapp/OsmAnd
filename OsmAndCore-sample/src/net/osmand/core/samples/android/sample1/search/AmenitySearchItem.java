@@ -12,23 +12,15 @@ import java.util.Map;
 
 public class AmenitySearchItem extends SearchItem {
 
-	private String nativeName;
 	private String category;
 	private String subcategory;
-	private Map<String, String> localizedNames = new HashMap<>();
 	private Map<String, String> values = new HashMap<>();
 
 	public AmenitySearchItem(Amenity amenity) {
 		super(amenity.getPosition31());
 
-		nativeName = amenity.getNativeName();
-		QStringStringHash locNames = amenity.getLocalizedNames();
-		QStringList locNamesKeys = locNames.keys();
-		for (int i = 0; i < locNamesKeys.size(); i++) {
-			String key = locNamesKeys.get(i);
-			String val = locNames.get(key);
-			localizedNames.put(key, val);
-		}
+		setNativeName(amenity.getNativeName());
+		addLocalizedNames(amenity.getLocalizedNames());
 
 		DecodedCategoryList catList = amenity.getDecodedCategories();
 		if (catList.size() > 0) {
@@ -48,10 +40,6 @@ public class AmenitySearchItem extends SearchItem {
 		}
 	}
 
-	public String getNativeName() {
-		return nativeName;
-	}
-
 	public String getCategory() {
 		return category;
 	}
@@ -60,32 +48,12 @@ public class AmenitySearchItem extends SearchItem {
 		return subcategory;
 	}
 
-	public Map<String, String> getLocalizedNames() {
-		return localizedNames;
-	}
-
 	public Map<String, String> getValues() {
 		return values;
-	}
-
-	@Override
-	public String getName() {
-		return nativeName;
 	}
 
 	@Override
 	public String getType() {
 		return Algorithms.capitalizeFirstLetterAndLowercase(subcategory);
 	}
-
-	@Override
-	public double getLatitude() {
-		return latitude;
-	}
-
-	@Override
-	public double getLongitude() {
-		return longitude;
-	}
-
 }

@@ -3,6 +3,7 @@ package net.osmand.core.samples.android.sample1.adapters;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.core.samples.android.sample1.SampleApplication;
+import net.osmand.core.samples.android.sample1.search.AddressSearchItem;
 import net.osmand.core.samples.android.sample1.search.AmenitySearchItem;
 import net.osmand.core.samples.android.sample1.search.SearchItem;
 
@@ -21,6 +22,8 @@ public class SearchListItem {
 
 		if (item instanceof AmenitySearchItem) {
 			return new AmenitySearchListItem(app, (AmenitySearchItem) item);
+		} else if (item instanceof AddressSearchItem) {
+			return new AddressSearchListItem(app, (AddressSearchItem) item);
 		}
 		return null;
 	}

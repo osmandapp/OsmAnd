@@ -2,11 +2,14 @@ package net.osmand.core.samples.android.sample1.search;
 
 import android.os.AsyncTask;
 
+import net.osmand.core.jni.Address;
+import net.osmand.core.jni.AddressesByNameSearch;
 import net.osmand.core.jni.AmenitiesByNameSearch;
 import net.osmand.core.jni.Amenity;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ISearch;
+import net.osmand.core.jni.ISearch.INewResultEntryCallback;
 import net.osmand.core.jni.NullableAreaI;
 import net.osmand.core.jni.ObfsCollection;
 
@@ -102,7 +105,8 @@ public class SearchAPI {
 		private SearchAPICallback apiCallback;
 
 		private boolean cancelled;
-		private int resCount;
+		private int amenityResultsCounter;
+		private int addressResultsCounter;
 
 		public SearchRequest(String keyword, int maxSearchResults, SearchAPICallback apiCallback) {
 			this.keyword = keyword;
@@ -134,31 +138,58 @@ public class SearchAPI {
 
 		private List<SearchItem> doSearch(String keyword) {
 			System.out.println("=== Start search");
-			resCount = 0;
+			amenityResultsCounter = 0;
+			addressResultsCounter = 0;
 
 			final List<SearchItem> searchItems = new ArrayList<>();
 
-			AmenitiesByNameSearch byNameSearch = new AmenitiesByNameSearch(obfsCollection);
-			AmenitiesByNameSearch.Criteria criteria = new AmenitiesByNameSearch.Criteria();
-			criteria.setName(keyword);
+			// Setup Amenities by name search
+			AmenitiesByNameSearch amByNameSearch = new AmenitiesByNameSearch(obfsCollection);
+			AmenitiesByNameSearch.Criteria amByNameCriteria = new AmenitiesByNameSearch.Criteria();
+			amByNameCriteria.setName(keyword);
 			if (obfAreaFilter != null) {
-				criteria.setObfInfoAreaFilter(new NullableAreaI(obfAreaFilter));
+				amByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(obfAreaFilter));
 			}
-
-			ISearch.INewResultEntryCallback newResultEntryCallback = new ISearch.INewResultEntryCallback() {
+			INewResultEntryCallback amByNameResultCallback = new ISearch.INewResultEntryCallback() {
 				@Override
 				public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
-					Amenity amenity = new ResultEntry(resultEntry).getAmenity();
-					searchItems.add(new AmenitySearchItem(amenity));
-					System.out.println("Poi found === " + amenity.getNativeName());
-					resCount++;
+					Amenity amenity = new AmenityResultEntry(resultEntry).getAmenity();
+					AmenitySearchItem amenitySearchItem = new AmenitySearchItem(amenity);
+					searchItems.add(amenitySearchItem);
+					System.out.println("Poi found === " + amenitySearchItem.toString());
+					amenityResultsCounter++;
 				}
 			};
 
-			byNameSearch.performSearch(criteria, newResultEntryCallback.getBinding(), new IQueryController() {
+			// Setup Addresses by name search
+			AddressesByNameSearch addrByNameSearch = new AddressesByNameSearch(obfsCollection);
+			AddressesByNameSearch.Criteria addrByNameCriteria = new AddressesByNameSearch.Criteria();
+			addrByNameCriteria.setName(keyword);
+			if (obfAreaFilter != null) {
+				addrByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(obfAreaFilter));
+			}
+			INewResultEntryCallback addrByNameResultCallback = new ISearch.INewResultEntryCallback() {
+				@Override
+				public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
+					Address address = new AddressResultEntry(resultEntry).getAddress();
+					AddressSearchItem addrSearchItem = new AddressSearchItem(address);
+					searchItems.add(addrSearchItem);
+					System.out.println("Address found === " + addrSearchItem.toString());
+					addressResultsCounter++;
+				}
+			};
+
+			amByNameSearch.performSearch(amByNameCriteria, amByNameResultCallback.getBinding(), new IQueryController() {
 				@Override
 				public boolean isAborted() {
-					return resCount >= maxSearchResults || cancelled;
+					return amenityResultsCounter >= maxSearchResults || cancelled;
+				}
+			});
+
+			addrByNameSearch.performSearch(addrByNameCriteria, addrByNameResultCallback.getBinding(), new IQueryController() {
+				@Override
+				public boolean isAborted() {
+					return addressResultsCounter >= maxSearchResults || cancelled;
 				}
 			});
 
@@ -176,8 +207,14 @@ public class SearchAPI {
 		}
 	}
 
-	private static class ResultEntry extends AmenitiesByNameSearch.ResultEntry {
-		protected ResultEntry(ISearch.IResultEntry resultEntry) {
+	private static class AmenityResultEntry extends AmenitiesByNameSearch.ResultEntry {
+		protected AmenityResultEntry(ISearch.IResultEntry resultEntry) {
+			super(ISearch.IResultEntry.getCPtr(resultEntry), false);
+		}
+	}
+
+	private static class AddressResultEntry extends AddressesByNameSearch.ResultEntry {
+		protected AddressResultEntry(ISearch.IResultEntry resultEntry) {
 			super(ISearch.IResultEntry.getCPtr(resultEntry), false);
 		}
 	}

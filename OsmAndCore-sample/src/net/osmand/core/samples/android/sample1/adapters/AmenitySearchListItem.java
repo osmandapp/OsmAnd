@@ -35,7 +35,7 @@ public class AmenitySearchListItem extends SearchListItem {
 		for (Entry<String, String> entry : searchItem.getLocalizedNames().entrySet()) {
 			a.setName(entry.getKey(), entry.getValue());
 		}
-		//a.setAdditionalInfo(searchItem.getValues());
+		a.setAdditionalInfo(searchItem.getValues());
 
 		return a;
 	}
