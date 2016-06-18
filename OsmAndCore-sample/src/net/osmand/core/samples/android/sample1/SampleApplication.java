@@ -6,13 +6,6 @@ import android.os.Environment;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
 import java.lang.reflect.Field;
 
 public class SampleApplication extends Application
@@ -24,7 +17,7 @@ public class SampleApplication extends Application
 	{
 		super.onCreate();
 
-		//initPoiTypes();
+		initPoiTypes();
 	}
 
 	public MapPoiTypes getPoiTypes() {
