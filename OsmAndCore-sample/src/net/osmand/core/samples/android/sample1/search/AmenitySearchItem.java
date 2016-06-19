@@ -3,8 +3,6 @@ package net.osmand.core.samples.android.sample1.search;
 import net.osmand.core.jni.Amenity;
 import net.osmand.core.jni.DecodedCategoryList;
 import net.osmand.core.jni.DecodedValueList;
-import net.osmand.core.jni.QStringList;
-import net.osmand.core.jni.QStringStringHash;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -34,7 +32,7 @@ public class AmenitySearchItem extends SearchItem {
 			for (int i = 0; i < decodedValueList.size(); i++) {
 				Amenity.DecodedValue decodedValue = decodedValueList.get(i);
 				String tag = decodedValue.getDeclaration().getTagName();
-				String value = decodedValue.getValue().toString();
+				String value = decodedValue.getValue();
 				values.put(tag, value);
 			}
 		}
