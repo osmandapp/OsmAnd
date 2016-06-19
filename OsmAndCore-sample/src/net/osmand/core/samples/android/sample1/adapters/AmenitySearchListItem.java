@@ -2,7 +2,6 @@ package net.osmand.core.samples.android.sample1.adapters;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.core.jni.OsmAndCore;
 import net.osmand.core.samples.android.sample1.MapUtils;
 import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.search.AmenitySearchItem;
@@ -78,10 +77,7 @@ public class AmenitySearchListItem extends SearchListItem {
 		Drawable drawable = null;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
-			drawable = app.getIconsCache().getIcon("mx_" + st.getIconKeyName());
-			if (drawable == null) {
-				drawable = app.getIconsCache().getIcon("mx_" + st.getOsmTag() + "_" + st.getOsmValue());
-			}
+			drawable = app.getIconsCache().getIcon(st.getOsmTag() + "_" + st.getOsmValue());
 		}
 		return drawable;
 	}

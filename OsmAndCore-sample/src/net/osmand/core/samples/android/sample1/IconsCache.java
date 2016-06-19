@@ -2,16 +2,15 @@ package net.osmand.core.samples.android.sample1;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.core.jni.OsmAndCore;
-import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
-import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.samples.android.sample1.core.CoreResourcesFromAndroidAssetsCustom;
 
 public class IconsCache {
 
+	private CoreResourcesFromAndroidAssetsCustom assets;
 	private float displayDensityFactor;
 
-	public IconsCache(float displayDensityFactor) {
-		this.displayDensityFactor = displayDensityFactor;
+	public IconsCache(CoreResourcesFromAndroidAssetsCustom assets) {
+		this.assets = assets;
 	}
 
 	public float getDisplayDensityFactor() {
@@ -23,12 +22,6 @@ public class IconsCache {
 	}
 
 	public Drawable getIcon(String name) {
-		/*
-		SWIGTYPE_p_QByteArray byteArray =
-				OsmAndCore.getCoreResourcesProvider().getResource(name, displayDensityFactor);
-		String s = SwigUtilities.getDataFromQByteArray(byteArray);
-		*/
-
-		return null;
+		return assets.getIcon("map/icons/" + name + ".png", displayDensityFactor);
 	}
 }

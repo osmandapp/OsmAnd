@@ -3,13 +3,19 @@ package net.osmand.core.samples.android.sample1;
 import android.app.Application;
 import android.os.Environment;
 
+import net.osmand.core.android.NativeCore;
+import net.osmand.core.jni.LogSeverityLevel;
+import net.osmand.core.jni.Logger;
+import net.osmand.core.samples.android.sample1.core.CoreResourcesFromAndroidAssetsCustom;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 public class SampleApplication extends Application
 {
+	private CoreResourcesFromAndroidAssetsCustom assetsCustom;
 	private MapPoiTypes poiTypes;
 	private IconsCache iconsCache;
 
@@ -19,7 +25,19 @@ public class SampleApplication extends Application
 		super.onCreate();
 
 		initPoiTypes();
-		iconsCache = new IconsCache(2f);
+
+		// Initialize native core
+		if (NativeCore.isAvailable() && !NativeCore.isLoaded()) {
+			assetsCustom = CoreResourcesFromAndroidAssetsCustom.loadFromCurrentApplication(this);
+			NativeCore.load(assetsCustom);
+		}
+		Logger.get().setSeverityLevelThreshold(LogSeverityLevel.Debug);
+
+		iconsCache = new IconsCache(assetsCustom);
+	}
+
+	public CoreResourcesFromAndroidAssetsCustom getAssetsCustom() {
+		return assetsCustom;
 	}
 
 	public MapPoiTypes getPoiTypes() {
@@ -52,6 +70,17 @@ public class SampleApplication extends Application
 				return null;
 			}
 		});
+	}
+
+	public String getAbsoluteAppPath() {
+		return Environment.getExternalStorageDirectory() + "/osmand";
+	}
+
+	public File getAppPath(String path) {
+		if (path == null) {
+			path = "";
+		}
+		return new File(getAbsoluteAppPath(), path);
 	}
 
 	public String getLangTranslation(String l) {

@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.text.Editable;
@@ -24,7 +23,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.core.android.AtlasMapRendererView;
-import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IMapLayerProvider;
@@ -47,6 +45,7 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
 import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
+import net.osmand.core.samples.android.sample1.core.CoreResourcesFromAndroidAssetsCustom;
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchAPICallback;
 import net.osmand.core.samples.android.sample1.search.SearchItem;
@@ -111,18 +110,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+		SampleApplication app = getSampleApplication();
+
 		gestureDetector = new GestureDetector(this, new MapViewOnGestureListener());
 		multiTouchSupport = new MultiTouchSupport(this, new MapViewMultiTouchZoomListener());
 
-        long startTime = System.currentTimeMillis();
-
-        // Initialize native core prior (if needed)
-        if (NativeCore.isAvailable() && !NativeCore.isLoaded())
-            NativeCore.load(CoreResourcesFromAndroidAssets.loadFromCurrentApplication(this));
-
-		Logger.get().setSeverityLevelThreshold(LogSeverityLevel.Debug);
-
-        // Inflate views
+		// Inflate views
         setContentView(R.layout.activity_main);
 
         // Get map view
@@ -153,8 +146,7 @@ public class MainActivity extends Activity {
 		});
 
         // Additional log sink
-        fileLogSink = QIODeviceLogSink.createFileLogSink(
-                Environment.getExternalStorageDirectory() + "/osmand/osmandcore.log");
+        fileLogSink = QIODeviceLogSink.createFileLogSink(app.getAbsoluteAppPath() + "/osmandcore.log");
         Logger.get().addLogSink(fileLogSink);
 
         // Get device display density factor
@@ -178,8 +170,8 @@ public class MainActivity extends Activity {
 
         Log.i(TAG, "Going to prepare OBFs collection");
         obfsCollection = new ObfsCollection();
-        Log.i(TAG, "Will load OBFs from " + Environment.getExternalStorageDirectory() + "/osmand");
-        obfsCollection.addDirectory(Environment.getExternalStorageDirectory() + "/osmand", false);
+        Log.i(TAG, "Will load OBFs from " + app.getAbsoluteAppPath());
+        obfsCollection.addDirectory(app.getAbsoluteAppPath(), false);
 
         Log.i(TAG, "Going to prepare all resources for renderer");
         mapPresentationEnvironment = new MapPresentationEnvironment(
@@ -209,9 +201,7 @@ public class MainActivity extends Activity {
         mapLayerProvider0 = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
         mapView.setMapLayerProvider(0, mapLayerProvider0);
 
-		System.out.println("NATIVE_INITIALIZED = " + (System.currentTimeMillis() - startTime) / 1000f);
-
-		getSampleApplication().getIconsCache().setDisplayDensityFactor(displayDensityFactor);
+		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
 		//Setup search
 
