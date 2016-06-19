@@ -53,7 +53,7 @@
     <string name="av_video_quality_high">Calidá más alta</string>
     <string name="av_video_quality">Calidá de salida de videu</string>
     <string name="av_audio_format">Formatu de salida d\'audiu</string>
-    <string name="av_audio_bitrate">Bitrate d\'audiu</string>
+    <string name="av_audio_bitrate">Tasa de bits d\'audiu</string>
     <string name="osn_add_dialog_success">Creóse con ésitu la nota</string>
     <string name="osb_author_dialog_password">Contraseña d\'OSM (opcional)</string>
     <string name="osn_close_dialog_error">Asocedió una esceición: nun se zarró la nota</string>
@@ -75,10 +75,10 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_navigation">Navegación</string>
-    <string name="rendering_value_red_name">Colloráu</string>
-    <string name="rendering_value_translucent_red_name">Colloráu tresllúcido</string>
+    <string name="rendering_value_red_name">Bermeyu</string>
+    <string name="rendering_value_translucent_red_name">Bermeyu tresllúcido</string>
     <string name="rendering_value_orange_name">Naranxa</string>
-    <string name="rendering_value_translucent_orange_name">Naranxa tresllúcida</string>
+    <string name="rendering_value_translucent_orange_name">Naranxa tresllúcido</string>
     <string name="rendering_value_yellow_name">Mariellu</string>
     <string name="rendering_value_translucent_yellow_name">Mariellu tresllúcido</string>
     <string name="rendering_value_green_name">Verde</string>
@@ -268,4 +268,20 @@
     <string name="shared_string_undo_all">DESFACER TOO</string>
     <string name="rendering_attr_hideIcons_name">Iconos POI</string>
     <string name="shared_string_hide">Anubrir</string>
+    <string name="please_specify_poi_type_only_from_list">Especifica la triba POI correuta o sáltalo, por favor</string>
+    <string name="lang_fy">Frisón</string>
+    <string name="lang_als">Albanés (Tosk)</string>
+    <string name="go_to_map">Dir al mapa</string>
+    <string name="favorite_category_dublicate_message">Yá esiste el nome de la estaya especificada. Defini otru nome, por favor.</string>
+    <string name="default_speed_system">Unidá de velocidá</string>
+    <string name="nm">nmi</string>
+    <string name="nm_h">nmi/h</string>
+    <string name="rendering_attr_currentTrackColor_name">Color de GPX</string>
+    <string name="rendering_attr_currentTrackColor_description">Color de GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Anchor de GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Anchor de GPX</string>
+    <string name="rendering_value_lightgreen_name">Verde claro</string>
+    <string name="rendering_value_translucent_lightgreen_name">Verde claro tresllúcido</string>
+    <string name="rendering_value_lightblue_name">Azul claro</string>
+    <string name="rendering_value_translucent_lightblue_name">Azul claro tresllúcido</string>
     </resources>
