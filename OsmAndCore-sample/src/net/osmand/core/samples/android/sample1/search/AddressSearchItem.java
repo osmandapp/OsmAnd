@@ -23,7 +23,7 @@ public class AddressSearchItem extends SearchItem {
 				addLocalizedNames(street.getLocalizedNames());
 				if (street.getStreetGroup() != null) {
 					nameSuffix = "st.";
-					typeStr = getTypeStr(street.getStreetGroup());
+					typeStr = getTypeStr(street.getStreetGroup()) + " — " + street.getStreetGroup().getNativeName();
 				} else {
 					typeStr = "Street";
 				}
