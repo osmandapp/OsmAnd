@@ -45,7 +45,7 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
 import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
-import net.osmand.core.samples.android.sample1.core.CoreResourcesFromAndroidAssetsCustom;
+
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchAPICallback;
 import net.osmand.core.samples.android.sample1.search.SearchItem;
