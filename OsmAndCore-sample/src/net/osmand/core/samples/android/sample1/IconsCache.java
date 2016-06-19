@@ -2,14 +2,14 @@ package net.osmand.core.samples.android.sample1;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.core.samples.android.sample1.core.CoreResourcesFromAndroidAssetsCustom;
+import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 
 public class IconsCache {
 
-	private CoreResourcesFromAndroidAssetsCustom assets;
+	private CoreResourcesFromAndroidAssets assets;
 	private float displayDensityFactor;
 
-	public IconsCache(CoreResourcesFromAndroidAssetsCustom assets) {
+	public IconsCache(CoreResourcesFromAndroidAssets assets) {
 		this.assets = assets;
 	}
 

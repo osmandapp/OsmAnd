@@ -3,10 +3,10 @@ package net.osmand.core.samples.android.sample1;
 import android.app.Application;
 import android.os.Environment;
 
+import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.LogSeverityLevel;
 import net.osmand.core.jni.Logger;
-import net.osmand.core.samples.android.sample1.core.CoreResourcesFromAndroidAssetsCustom;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 
@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
 
 public class SampleApplication extends Application
 {
-	private CoreResourcesFromAndroidAssetsCustom assetsCustom;
+	private CoreResourcesFromAndroidAssets assetsCustom;
 	private MapPoiTypes poiTypes;
 	private IconsCache iconsCache;
 
@@ -28,16 +28,12 @@ public class SampleApplication extends Application
 
 		// Initialize native core
 		if (NativeCore.isAvailable() && !NativeCore.isLoaded()) {
-			assetsCustom = CoreResourcesFromAndroidAssetsCustom.loadFromCurrentApplication(this);
+			assetsCustom = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(this);
 			NativeCore.load(assetsCustom);
 		}
 		Logger.get().setSeverityLevelThreshold(LogSeverityLevel.Debug);
 
 		iconsCache = new IconsCache(assetsCustom);
-	}
-
-	public CoreResourcesFromAndroidAssetsCustom getAssetsCustom() {
-		return assetsCustom;
 	}
 
 	public MapPoiTypes getPoiTypes() {
