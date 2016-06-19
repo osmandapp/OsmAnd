@@ -2,12 +2,8 @@ package net.osmand.plus.views.corenative;
 
 import java.io.File;
 
-import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.WindowManager;
 import net.osmand.IndexConstants;
-import net.osmand.core.android.CoreResourcesFromAndroidAssetsCustom;
+import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.Logger;
@@ -17,6 +13,10 @@ import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import android.content.Context;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.WindowManager;
 
 /**
  * Created by Denis on 01.10.2014.
@@ -47,7 +47,7 @@ public class NativeCoreContext {
 	public static void init(OsmandApplication app) {
 		if (!init && NativeCore.isAvailable()) {
 			if (!NativeCore.isLoaded())
-				NativeCore.load(CoreResourcesFromAndroidAssetsCustom.loadFromCurrentApplication(app));
+				NativeCore.load(CoreResourcesFromAndroidAssets.loadFromCurrentApplication(app));
 			if (NativeCore.isLoaded()) {
 				
 				File directory = app.getAppPath("");
