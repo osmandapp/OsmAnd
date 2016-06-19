@@ -1,11 +1,15 @@
 package net.osmand.core.samples.android.sample1.adapters;
 
+import android.graphics.drawable.Drawable;
+
+import net.osmand.core.jni.OsmAndCore;
 import net.osmand.core.samples.android.sample1.MapUtils;
 import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.search.AmenitySearchItem;
 import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 
 import java.util.Map.Entry;
@@ -69,4 +73,16 @@ public class AmenitySearchListItem extends SearchListItem {
 		return Algorithms.capitalizeFirstLetterAndLowercase(amenity.getSubType().replace('_', ' '));
 	}
 
+	@Override
+	public Drawable getIcon() {
+		Drawable drawable = null;
+		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		if (st != null) {
+			drawable = app.getIconsCache().getIcon("mx_" + st.getIconKeyName());
+			if (drawable == null) {
+				drawable = app.getIconsCache().getIcon("mx_" + st.getOsmTag() + "_" + st.getOsmValue());
+			}
+		}
+		return drawable;
+	}
 }

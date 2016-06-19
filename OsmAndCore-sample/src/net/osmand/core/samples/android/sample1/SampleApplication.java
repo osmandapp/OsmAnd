@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 public class SampleApplication extends Application
 {
 	private MapPoiTypes poiTypes;
+	private IconsCache iconsCache;
 
 	@Override
 	public void onCreate()
@@ -18,10 +19,15 @@ public class SampleApplication extends Application
 		super.onCreate();
 
 		initPoiTypes();
+		iconsCache = new IconsCache(2f);
 	}
 
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
+	}
+
+	public IconsCache getIconsCache() {
+		return iconsCache;
 	}
 
 	private void initPoiTypes() {

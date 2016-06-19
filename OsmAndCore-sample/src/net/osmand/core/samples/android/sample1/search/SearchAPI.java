@@ -186,12 +186,14 @@ public class SearchAPI {
 				}
 			});
 
-			addrByNameSearch.performSearch(addrByNameCriteria, addrByNameResultCallback.getBinding(), new IQueryController() {
-				@Override
-				public boolean isAborted() {
-					return addressResultsCounter >= maxSearchResults || cancelled;
-				}
-			});
+			if (!cancelled) {
+				addrByNameSearch.performSearch(addrByNameCriteria, addrByNameResultCallback.getBinding(), new IQueryController() {
+					@Override
+					public boolean isAborted() {
+						return addressResultsCounter >= maxSearchResults || cancelled;
+					}
+				});
+			}
 
 			System.out.println("=== Finish search");
 

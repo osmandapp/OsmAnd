@@ -211,6 +211,8 @@ public class MainActivity extends Activity {
 
 		System.out.println("NATIVE_INITIALIZED = " + (System.currentTimeMillis() - startTime) / 1000f);
 
+		getSampleApplication().getIconsCache().setDisplayDensityFactor(displayDensityFactor);
+
 		//Setup search
 
 		searchAPI = new SearchAPI(obfsCollection);
@@ -293,6 +295,10 @@ public class MainActivity extends Activity {
 
         super.onDestroy();
     }
+
+	public SampleApplication getSampleApplication() {
+		return (SampleApplication) getApplication();
+	}
 
 	private AreaI getScreenBounds31() {
 		PointI topLeftPoint = new PointI();

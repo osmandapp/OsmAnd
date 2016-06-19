@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,9 +45,12 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 			view = (LinearLayout) convertView;
 		}
 
+		ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 		TextView title = (TextView) view.findViewById(R.id.title);
 		TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
 		TextView distance = (TextView) view.findViewById(R.id.distance);
+
+		imageView.setImageDrawable(listItem.getIcon());
 		title.setText(listItem.getName());
 		subtitle.setText(listItem.getType());
 		if (listItem.getDistance() == 0) {
@@ -54,10 +58,6 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		} else {
 			distance.setText(Utils.getFormattedDistance(listItem.getDistance()));
 		}
-
-		//text1.setTextColor(ctx.getResources().getColor(R.color.listTextColor));
-		//view.setCompoundDrawablesWithIntrinsicBounds(getIcon(ctx, item), null, null, null);
-		//view.setCompoundDrawablePadding(ctx.getResources().getDimensionPixelSize(R.dimen.list_content_padding));
 		return view;
 	}
 

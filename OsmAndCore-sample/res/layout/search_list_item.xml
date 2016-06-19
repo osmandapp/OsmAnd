@@ -12,10 +12,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginRight="8dp"
         android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:scaleType="centerInside"
+        android:visibility="visible"/>
 
     <LinearLayout
         android:layout_width="match_parent"
