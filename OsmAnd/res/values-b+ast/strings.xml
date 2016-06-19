@@ -237,4 +237,35 @@
     <string name="osmand_accessibility_description">Esti complementu fai que les carauterístiques d\'accesibilidá del preséu tean disponibles direutamente n\'OsmAnd. Facilita, por exemplu, l\'axuste de la tasa de fala pa voces TTS, configuración de la pantalla de navegación del mandu direicional, usu d\'un trackball pa controlar el zoom o usu de feedback pa testu a falar como pal anunciu automáticu de la to posición.</string>
     <string name="osm_editing_plugin_description">Pente esti complementu, OsmAnd pue usase pa facer collaboraciones n\'OSM como la creación o modificación d\'oxetos POI, apertura o comentar fallos y collaboración con ficheros GPX guardaos. OSM ta fechu pola comunidá, un proyeutu de cartografía de dominiu públicu. Pa detalles, por favor vete a http://openstreetmap.org. Agradezse la participación activa y les collaboraciones puen facese direutamente dende OsmAnd si especifiques les tos credenciales personales d\'OSM na aplicación.</string>
     <string name="osmand_distance_planning_plugin_description">Esti complementu apurre un widget cola pantalla del mapa pa crear caminos calcando nel mapa, o usar o modificar ficheros GPX esistentes pa planiar un viaxe y midir la distancia ente puntos. Los resultaos puen guardase como ficheru GPX pa usalos más sero como referencia.</string>
+    <string name="osm_live_thanks">¡Gracies por soscribite a los anovamientos en direuto!</string>
+    <string name="live_updates">En direuto</string>
+    <string name="safe_mode">Mou seguru</string>
+    <string name="native_library_not_running">L\'aplicación ta executándose en mou seguru (deshabilítalu nos Axustes).</string>
+    <string name="access_no_destination">Nun s\'afitó\'l destín</string>
+    <string name="access_smart_autoannounce_descr">Avisa namái al camudar la direición haza\'l puntu oxetivu</string>
+    <string name="access_autoannounce_period">Periodu d\'auto-anunciu</string>
+    <string name="access_autoannounce_period_descr">Intervalu de tiempu mínimu ente anuncios</string>
+    <string name="access_default_color">Color por defeutu</string>
+    <string name="access_map_linked_to_location">El mapa ta enllazáu al allugamientu</string>
+    <string name="access_shared_string_not_installed">Nun s\'instaló</string>
+    <string name="number_of_gpx_files_selected_pattern">%s ficheros GPX esbillaos</string>
+    <string name="osmo_plugin_name">Monitoréu d\'OpenStreetMap</string>
+    <string name="donations">Donaciones</string>
+    <string name="osm_live_email_desc">Precisámoslo p\'apurrite información tocante a los collaboradores</string>
+    <string name="osm_live_user_public_name">Nome públicu</string>
+    <string name="osm_live_month_cost"/>
+    <string name="osm_live_month_cost_desc">Pagu mensual</string>
+    <string name="osm_live_ask_for_purchase">Primero merca una soscripción d\'OSM Live, por favor</string>
+
+    <string name="shared_string_toolbar">Barra de ferramientes</string>
+    <string name="upload_osm_note_description">Pues xubir les tos notes d\'OSM anónimamente si uses el to perfil d\'OpenStreetMap.org.</string>
+    <string name="consider_turning_polygons_off">Aconséyase desactivar el renderizáu de polígonos.</string>
+    <string name="rendering_attr_hideUnderground_name">Oxetos soterraños</string>
+    <string name="data_is_not_available">Los datos nun tán disponibles</string>
+    <string name="shared_string_remove">Desaniciar</string>
+    <string name="shared_string_read_more">Llei más</string>
+    <string name="clear_updates_proposition_message">Pues desaniciar anovamientos baxaos y volver a la edición orixinal del mapa</string>
+    <string name="shared_string_undo_all">DESFACER TOO</string>
+    <string name="rendering_attr_hideIcons_name">Iconos POI</string>
+    <string name="shared_string_hide">Anubrir</string>
     </resources>
