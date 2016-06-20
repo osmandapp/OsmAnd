@@ -38,7 +38,7 @@
 
 
     <string name="layer_map_appearance">Konfigurera skärmen</string>
-    <string name="show_lanes">Visa körfält</string>
+    <string name="show_lanes">Körfält</string>
     <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
     <string name="avoid_ferries">Undvik färjor</string>
     <string name="avoid_in_routing_title">Undvik …</string>
@@ -92,8 +92,8 @@
     <string name="bg_service_screen_unlock">Lås upp skärmen</string>
     <string name="bg_service_screen_lock_toast">Skärmen är låst</string>
     <string name="bg_service_interval">Ställ in väckningsintervall:</string>
-    <string name="show_cameras">Visa fartkameror</string>
-    <string name="show_traffic_warnings">Visa hastighetsgränser</string>
+    <string name="show_cameras">Fartkameror</string>
+    <string name="show_traffic_warnings">Trafikvarningar</string>
     <string name="avoid_toll_roads">Undvik betalvägar</string>
     <string name="continue_follow_previous_route_auto">En tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
     <string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
@@ -469,8 +469,8 @@
 
     <string name="shared_string_next">Nästa</string>
     <string name="shared_string_previous">Föregående</string>
-    <string name="unit_of_length_descr">Ändra enheter för avstånd och hastighet</string>
-    <string name="unit_of_length">Måttenhet</string>
+    <string name="unit_of_length_descr">Ändra enheter för avstånd</string>
+    <string name="unit_of_length">Enhet för avstånd</string>
     <string name="si_mi_foots">Eng. mil/fot</string>
     <string name="si_mi_yard">Eng. mil/yard</string>
     <string name="si_km_m">Kilometer/meter</string>
@@ -1426,8 +1426,8 @@
     <string name="lang_ar">Arabiska</string>
     <string name="lang_sc">Sardinska</string>
     <string name="lang_sr">Serbiska</string>
-    <string name="lang_zh_CN">Förenklad kinesiska</string>
-    <string name="lang_zh_TW">Traditionell kinesiska</string>
+    <string name="lang_zh_CN">Kinesiska (förenklad)</string>
+    <string name="lang_zh_TW">Kinesiska (traditionell)</string>
     <string name="rendering_attr_subwayMode_name">Tunnelbanelinjer</string>
     <string name="continue_navigation">Fortsätt navigeringen</string>
     <string name="pause_navigation">Pausa navigeringen</string>
@@ -1539,8 +1539,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Tysk vägkarta</string>
     <string name="traffic_warning_railways">Järnvägskorsning</string>
     <string name="traffic_warning_pedestrian">Övergångsställe</string>
-    <string name="show_railway_warnings">Visa järnvägsövergångar</string>
-    <string name="show_pedestrian_warnings">Visa övergångsställen</string>
+    <string name="show_railway_warnings">Järnvägsövergångar</string>
+    <string name="show_pedestrian_warnings">Övergångsställen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
     <string name="routing_attr_no_new_routing_name">Inga regler från version 1.9-ruttning</string>
     <string name="routing_attr_no_new_routing_description">Använd inte de ruttningsregler som infördes i version 1.9</string>
@@ -1773,7 +1773,7 @@
     <string name="lang_gl">Galiciska</string>
     <string name="lang_et">Estniska</string>
     <string name="lang_ceb">Cebuano/Visaya</string>
-    <string name="lang_es_ar">Argentisk spanska</string>
+    <string name="lang_es_ar">Spanska (Argentina)</string>
     <string name="lang_nb">Norska (bokmål)</string>
     <string name="light_theme">Ljust</string>
     <string name="dark_theme">Mörkt</string>
@@ -1873,8 +1873,8 @@
     <string name="favourites_edit_dialog_title">Information om favoriter</string>
     <string name="roads">Vägar</string>
     <string name="favourites_context_menu_add">Lägg till favorit</string>
-    <string name="default_speed_system_descr">Ange system för hastighetsmätning</string>
-    <string name="default_speed_system">Hastighetsmätning</string>
+    <string name="default_speed_system_descr">Ange enhet för hastighet</string>
+    <string name="default_speed_system">Enhet för hastighet</string>
     <string name="si_nm">Sjömil</string>
     <string name="si_kmh">Kilometer i timmen</string>
     <string name="si_mph">Engelska mil i timmen</string>
