@@ -74,10 +74,11 @@ public class BinaryInspector {
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 //					"-vrouting",
 					"-vaddress", "-vcities","-vstreetgroups",
-					"-vstreets", "-vbuildings", "-vintersections",
+					"-vstreets", // "-vbuildings", "-vintersections",
+					"-lang=ru",
 //					"-bbox=12.8145,50.8025,12.9107,50.7365",
 //					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm" 
-					System.getProperty("maps.dir")+"/Map.obf"
+					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe.obf"
 			});
 		} else {
 			in.inspector(args);

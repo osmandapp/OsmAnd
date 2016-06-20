@@ -2,6 +2,7 @@ package net.osmand.binary;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Building;
 import net.osmand.data.Building.BuildingInterpolation;
@@ -276,7 +277,7 @@ public class GeocodingUtilities {
 						public boolean isCancelled() {
 							return result != null && result.isCancelled();
 						}
-					}, mainWord);
+					}, mainWord, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);// TODO search boundaries
 			reader.searchAddressDataByName(req);
 		}
 		
