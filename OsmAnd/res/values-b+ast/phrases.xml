@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_shop">Tienda</string>
-		<string name="poi_emergency">Emerxencia</string>
+<resources>
+	<string name="poi_shop">Tienda</string>
+	<string name="poi_emergency">Emerxencia</string>
 	<string name="poi_transportation">Tresporte</string>
-		<string name="poi_filling_station">Gasolinera</string>
-		<string name="poi_personal_transport">Tresporte personal</string>
-		<string name="poi_public_transport">Tresporte públicu</string>
-		<string name="poi_air_transport">Tresporte aereu</string>
-		<string name="poi_water_transport">Tresporte acuáticu</string>
-		<string name="poi_communication">Comunicación</string>
-		</resources>
+	<string name="poi_filling_station">Gasolinera</string>
+	<string name="poi_personal_transport">Tresporte personal</string>
+	<string name="poi_public_transport">Tresporte públicu</string>
+	<string name="poi_air_transport">Tresporte aereu</string>
+	<string name="poi_water_transport">Tresporte acuáticu</string>
+	<string name="poi_communication">Comunicación</string>
+</resources>
