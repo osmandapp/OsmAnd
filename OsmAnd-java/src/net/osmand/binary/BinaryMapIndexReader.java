@@ -1455,10 +1455,12 @@ public class BinaryMapIndexReader {
 	}
 
 
-	public static <T> SearchRequest<T> buildAddressByNameRequest(ResultMatcher<T> resultMatcher, String nameRequest) {
+	public static <T> SearchRequest<T> buildAddressByNameRequest(ResultMatcher<T> resultMatcher, String nameRequest, 
+			StringMatcherMode matcherMode) {
 		SearchRequest<T> request = new SearchRequest<T>();
 		request.resultMatcher = resultMatcher;
 		request.nameQuery = nameRequest;
+		request.matcherMode = matcherMode;
 		return request;
 	}
 
@@ -1651,7 +1653,7 @@ public class BinaryMapIndexReader {
 
 
 		String nameQuery = null;
-
+		StringMatcherMode matcherMode = StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 		SearchFilter searchFilter = null;
 
 		SearchPoiTypeFilter poiTypeFilter = null;
@@ -2000,8 +2002,9 @@ public class BinaryMapIndexReader {
 
 	private static boolean testMapSearch = false;
 	private static boolean testAddressSearch = false;
+	private static boolean testAddressSearchName = true;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = true;
+	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
 	private static int sleft = MapUtils.get31TileNumberX(6.3);
@@ -2015,8 +2018,8 @@ public class BinaryMapIndexReader {
 	}
 
 	public static void main(String[] args) throws IOException {
-//		File fl = new File("/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf");
-		File fl = new File("/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf");
+//		File fl = new File(System.getProperty("maps") + /Synthetic_test_rendering.obf");
+		File fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe_merge.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2026,8 +2029,10 @@ public class BinaryMapIndexReader {
 		if (testMapSearch) {
 			testMapSearch(reader);
 		}
-		if (testAddressSearch) {
+		if (testAddressSearchName) {
 			testAddressSearchByName(reader);
+		}
+		if (testAddressSearch) {
 			testAddressSearch(reader);
 		}
 		if (testAddressJustifySearch) {
@@ -2299,7 +2304,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Reynaldo");
+		}, "P", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 		reader.searchAddressDataByName(req);
 	}
 
@@ -2334,7 +2339,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, streetName);
+		}, streetName, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 		reader.searchAddressDataByName(req);
 		TreeMap<MapObject, Street> resMap = new TreeMap<MapObject, Street>(new Comparator<MapObject>() {
 

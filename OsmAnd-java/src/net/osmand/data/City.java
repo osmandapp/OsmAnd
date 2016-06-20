@@ -1,7 +1,9 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class City extends MapObject {
@@ -135,15 +137,23 @@ public class City extends MapObject {
 		this.isin = isin;
 	}
 
-	public void mergeWith(City city) {
+	public Map<Street, Street> mergeWith(City city) {
+		Map<Street, Street> m = new LinkedHashMap<>();
 		for (Street street : city.listOfStreets) {
 			if (listOfStreets.contains(street)) {
 				listOfStreets.get(listOfStreets.indexOf(street)).mergeWith(street);
 			} else {
-				listOfStreets.add(street);
+				Street s = new Street(this);
+				s.copyNames(street);
+				s.setLocation(street.getLocation().getLatitude(), street.getLocation().getLongitude());
+				s.setId(street.getId());
+				s.buildings.addAll(street.getBuildings());
+				m.put(street, s);
+				listOfStreets.add(s);
 			}
 		}
 		copyNames(city);
+		return m;
 	}
 
 }

@@ -555,9 +555,9 @@ public class BinaryMapAddressReaderAdapter {
 
 	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
 		TIntArrayList loffsets = new TIntArrayList();
-		CollatorStringMatcher stringMatcher = new CollatorStringMatcher(req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		CollatorStringMatcher stringMatcher = new CollatorStringMatcher(req.nameQuery, req.matcherMode);
 		String postcode = Postcode.normalize(req.nameQuery, map.getCountryName());
-		final CityMatcher postcodeMatcher = new DefaultCityMatcher(new CollatorStringMatcher(postcode, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+		final CityMatcher postcodeMatcher = new DefaultCityMatcher(new CollatorStringMatcher(postcode, req.matcherMode));
 		final CityMatcher cityMatcher = new DefaultCityMatcher(stringMatcher);
 		final CityMatcher cityPostcodeMatcher = new CityMatcher() {
 			@Override

@@ -20,6 +20,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		CHECK_ONLY_STARTS_WITH,
 		CHECK_STARTS_FROM_SPACE,
 		CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
+		CHECK_EQUALS_FROM_SPACE,
 		CHECK_CONTAINS
 	}
 
@@ -43,12 +44,14 @@ public class CollatorStringMatcher implements StringMatcher {
 		switch (mode) {
 		case CHECK_CONTAINS:
 			return ccontains(collator, base, part); 
+		case CHECK_EQUALS_FROM_SPACE:
+			return cstartsWith(collator, base, part, true, true, true);
 		case CHECK_STARTS_FROM_SPACE:
-			return cstartsWith(collator, base, part, true, true);
+			return cstartsWith(collator, base, part, true, true, false);
 		case CHECK_STARTS_FROM_SPACE_NOT_BEGINNING:
-			return cstartsWith(collator, base, part, false, true);
+			return cstartsWith(collator, base, part, false, true, false);
 		case CHECK_ONLY_STARTS_WITH:
-			return cstartsWith(collator, base, part, true, false);
+			return cstartsWith(collator, base, part, true, false, false);
 		}
 		return false;
 	}
@@ -97,7 +100,7 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * @return true if searchIn starts with token
 	 */
 	public static boolean cstartsWith(Collator collator, String searchInParam, String theStart, 
-			boolean checkBeginning, boolean checkSpaces) {
+			boolean checkBeginning, boolean checkSpaces, boolean equals) {
 		String searchIn = searchInParam.toLowerCase(Locale.getDefault());
 		int startLength = theStart.length();
 		int searchInLength = searchIn.length();
@@ -111,14 +114,26 @@ public class CollatorStringMatcher implements StringMatcher {
 		if (checkBeginning) {
 			boolean starts = collator.equals(searchIn.substring(0, startLength), theStart);
 			if (starts) {
-				return true;
+				if (equals) {
+					if (startLength == searchInLength || isSpace(searchIn.charAt(startLength))) {
+						return true;
+					}
+				} else {
+					return true;
+				}
 			}
 		}
 		if (checkSpaces) {
 			for (int i = 1; i <= searchInLength - startLength; i++) {
 				if (isSpace(searchIn.charAt(i - 1)) && !isSpace(searchIn.charAt(i))) {
 					if (collator.equals(searchIn.substring(i, i + startLength), theStart)) {
-						return true;
+						if(equals) {
+							if(i + startLength == searchInLength || isSpace(searchIn.charAt(i + startLength))) {
+								return true;
+							}
+						} else {
+							return true;
+						}
 					}
 				}
 			}

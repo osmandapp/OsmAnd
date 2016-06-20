@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -171,7 +172,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 //			StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING};
 
 	public synchronized List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher, List<Integer> typeFilter) {
-		SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(resultMatcher, name);
+		SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(resultMatcher, name,
+				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		try {
 			log.debug("file=" + file + "; req=" + req);
 			file.searchAddressDataByName(req, typeFilter);
