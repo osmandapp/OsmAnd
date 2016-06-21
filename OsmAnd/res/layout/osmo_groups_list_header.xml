@@ -40,6 +40,7 @@
 
         <ImageView
             android:id="@+id/share_my_location"
+            android:contentDescription="@string/shared_string_share"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
