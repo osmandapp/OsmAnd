@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.access.RelativeDirectionStyle;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 
@@ -193,7 +194,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			RelativeDirection direction = null;
 			String result = distanceString(point);
 			result += " "; //$NON-NLS-1$
-			if (currentLocation.hasBearing())
+			if (currentLocation.hasBearing() && !MapViewTrackingUtilities.isSmallSpeedForCompass(currentLocation))
 				direction = new RelativeDirection(point);
 			else if (heading != null)
 				direction = new RelativeDirection(point, heading);
@@ -250,7 +251,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		if (autoAnnounce && app.accessibilityEnabled()) {
 			final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
 			if (point != null) {
-				if ((currentLocation != null) && currentLocation.hasBearing()) {
+				if ((currentLocation != null) && currentLocation.hasBearing() && !MapViewTrackingUtilities.isSmallSpeedForCompass(currentLocation)) {
 					final long now = SystemClock.uptimeMillis();
 					if ((now - lastNotificationTime) >= settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.get()) {
 						Location destination = new Location("map"); //$NON-NLS-1$

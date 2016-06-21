@@ -187,7 +187,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	private boolean isSmallSpeedForCompass(Location location) {
+	public static boolean isSmallSpeedForCompass(Location location) {
 		return !location.hasSpeed() || location.getSpeed() < 0.5;
 	}
 	
