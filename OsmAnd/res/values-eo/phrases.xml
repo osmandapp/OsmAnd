@@ -319,12 +319,12 @@
 	<string name="poi_fuel_gtl_diesel">Dizeloleo sinteza</string>
 	<string name="poi_fuel_hgv_diesel">Dizeloleo (kamionoj)</string>
 	<string name="poi_fuel_biodiesel">Biodizeloleo</string>
-	<string name="poi_fuel_octane_80">Oktannombro 80</string>
-	<string name="poi_fuel_octane_91">Oktannombro 91</string>
-	<string name="poi_fuel_octane_92">Oktannombro 92</string>
-	<string name="poi_fuel_octane_95">Oktannombro 95</string>
-	<string name="poi_fuel_octane_98">Oktannombro 95</string>
-	<string name="poi_fuel_octane_100">Oktannombro 100</string>
+	<string name="poi_fuel_octane_80">Benzino 80-oktannombra</string>
+	<string name="poi_fuel_octane_91">Benzino 91-oktannombra</string>
+	<string name="poi_fuel_octane_92">Benzino 92-oktannombra</string>
+	<string name="poi_fuel_octane_95">Benzino 95-oktannombra</string>
+	<string name="poi_fuel_octane_98">Benzino 98-oktannombra</string>
+	<string name="poi_fuel_octane_100">Benzino 100-oktannombra</string>
 	<string name="poi_fuel_cng">Tergaso kunpremita (CNG)</string>
 	<string name="poi_fuel_1_25">Brulaĵo 1:25</string>
 	<string name="poi_fuel_1_50">Brulaĵo 1:50</string>
@@ -342,5 +342,23 @@
 
 	<string name="poi_railway_buffer_stop">Baraĵo trakfina</string>
 	<string name="poi_helipad">Surteriĝejo helikoptera</string>
-	<string name="poi_basin">Akvujo</string>
+	<string name="poi_basin">Baseno</string>
+	<string name="poi_runway">Avia dromo</string>
+	<string name="poi_aeroway_terminal">Flugstacio</string>
+	<string name="poi_meadow">Herbejo</string>
+	<string name="poi_aeroway_gate">Aerodroma enirejo</string>
+
+	<string name="poi_slipway">Ŝipglitejo</string>
+	<string name="poi_ferry_terminal">Pramstacio</string>
+	<string name="poi_bicycle_rental">Bicikl-pruntejo</string>
+	<string name="poi_speed_camera">Rapid-kontrolejo</string>
+	<string name="poi_telephone">Telefonbudo</string>
+	<string name="poi_motel">Aŭtohotelo</string>
+	<string name="poi_hostel">Gastejo</string>
+	<string name="poi_wayside_shrine">Adorejo apudvoja</string>
+	<string name="poi_wayside_cross">Krucifikso apudvoja</string>
+	<string name="poi_geyser">Gejsero</string>
+	<string name="poi_club_linux">Linuksa klubo</string>
+	<string name="poi_glacier">Glacirivero</string>
+	<string name="poi_stone">Roko</string>
 	</resources>
