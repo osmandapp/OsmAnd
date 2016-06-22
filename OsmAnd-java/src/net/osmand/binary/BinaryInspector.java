@@ -74,11 +74,11 @@ public class BinaryInspector {
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 //					"-vrouting",
 					"-vaddress", "-vcities","-vstreetgroups",
-					"-vstreets", // "-vbuildings", "-vintersections",
+					"-vstreets", "-vbuildings", "-vintersections",
 					"-lang=ru",
-//					"-bbox=12.8145,50.8025,12.9107,50.7365",
+					"-bbox=4.8486,52.3084,4.8747,52.2970",
 //					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm" 
-					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe.obf"
+					System.getProperty("maps.dir")+"/Netherlands_noord-holland_europe.obf"
 			});
 		} else {
 			in.inspector(args);
@@ -666,8 +666,8 @@ public class BinaryInspector {
 					if (buildings != null && !buildings.isEmpty() && verbose.vbuildings) {
 						println("\t\t\t\tBuildings:");
 						for (Building b : buildings) {
-							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#}]",
-									new Object[]{b.getName(verbose.lang), b.getId()}));
+							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#} {2} ]",
+									new Object[]{b.getName(verbose.lang), b.getId(), b.getPostcode() == null ? "" : b.getPostcode()}));
 						}
 					}
 
