@@ -1,4 +1,4 @@
-package net.osmand.core.samples.android.sample1.search;
+package net.osmand.core.samples.android.sample1.search.items;
 
 import net.osmand.core.jni.Amenity;
 import net.osmand.core.jni.DecodedCategoryList;

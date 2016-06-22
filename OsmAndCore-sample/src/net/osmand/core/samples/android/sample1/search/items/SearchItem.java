@@ -1,4 +1,4 @@
-package net.osmand.core.samples.android.sample1.search;
+package net.osmand.core.samples.android.sample1.search.items;
 
 import net.osmand.core.jni.LatLon;
 import net.osmand.core.jni.PointI;
@@ -15,6 +15,9 @@ public abstract class SearchItem {
 	protected double longitude;
 	protected String nativeName;
 	protected Map<String, String> localizedNames = new HashMap<>();
+
+	private double distance;
+	private float priority;
 
 	protected SearchItem() {
 	}
@@ -69,6 +72,22 @@ public abstract class SearchItem {
 			String val = localizedNames.get(key);
 			this.localizedNames.put(key, val);
 		}
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public float getPriority() {
+		return priority;
+	}
+
+	public void setPriority(float priority) {
+		this.priority = priority;
 	}
 
 	@Override

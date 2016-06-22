@@ -23,12 +23,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.core.android.AtlasMapRendererView;
-import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IMapLayerProvider;
 import net.osmand.core.jni.IMapStylesCollection;
 import net.osmand.core.jni.LatLon;
-import net.osmand.core.jni.LogSeverityLevel;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
@@ -45,12 +43,12 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
 import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
-
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
-import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchAPICallback;
-import net.osmand.core.samples.android.sample1.search.SearchItem;
+import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchCallback;
+import net.osmand.core.samples.android.sample1.search.items.SearchItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -86,7 +84,8 @@ public class MainActivity extends Activity {
 	private SearchAPI searchAPI;
 	private ListView searchListView;
 	private SearchListAdapter adapter;
-	private final static int MAX_SEARCH_RESULTS = 50;
+	private final static int MAX_SEARCH_RESULTS_CORE = 500;
+	private final static int MAX_SEARCH_RESULTS_IU = 50;
 
 	// Germany
 	private final static float INIT_LAT = 49.353953f;
@@ -402,41 +401,50 @@ public class MainActivity extends Activity {
 	private void runSearch(AreaI bounds31, String keyword) {
 
 		searchAPI.setObfAreaFilter(bounds31);
-		searchAPI.startSearch(keyword, MAX_SEARCH_RESULTS, new SearchAPICallback() {
-			@Override
-			public void onSearchFinished(List<SearchItem> searchItems, boolean cancelled) {
-				if (searchItems != null && !cancelled) {
-					LatLon latLon = Utilities.convert31ToLatLon(target31);
-					List<SearchListItem> rows = new ArrayList<>();
-					for (SearchItem item : searchItems) {
-						SearchListItem row =
-								SearchListItem.buildListItem((SampleApplication)getApplication(), item);
-						rows.add(row);
+		searchAPI.startSearch(keyword, MAX_SEARCH_RESULTS_CORE,
+				// Intermediate search callback
+				new SearchCallback() {
+					@Override
+					public void onSearchFinished(List<SearchItem> searchItems) {
+						processSearchResult(searchItems);
 					}
-
-					adapter.clear();
-					adapter.addAll(rows);
-					adapter.updateDistance(latLon.getLatitude(), latLon.getLongitude());
-					adapter.sort(new Comparator<SearchListItem>() {
-						@Override
-						public int compare(SearchListItem lhs, SearchListItem rhs) {
-							int res = Double.compare(lhs.getDistance(), rhs.getDistance());
-							if (res == 0) {
-								return lhs.getName().compareToIgnoreCase(rhs.getName());
-							} else {
-								return res;
-							}
-						}
-					});
-					adapter.notifyDataSetChanged();
-					if (adapter.getCount() > 0) {
-						searchListView.setSelection(0);
+				},
+				// Core search callback
+				new SearchCallback() {
+					@Override
+					public void onSearchFinished(List<SearchItem> searchItems) {
+						processSearchResult(searchItems);
 					}
+				});
+	}
 
-					showSearchList();
+	private void processSearchResult(List<SearchItem> searchItems) {
+		if (searchItems != null) {
+			LatLon latLon = Utilities.convert31ToLatLon(target31);
+			double latitude = latLon.getLatitude();
+			double longitude = latLon.getLongitude();
+			List<SearchListItem> rows = new ArrayList<>();
+			for (SearchItem item : searchItems) {
+				SearchListItem listItem =
+						SearchListItem.buildListItem((SampleApplication)getApplication(), item);
+				if (listItem != null) {
+					rows.add(listItem);
 				}
 			}
-		});
+
+			if (rows.size() > MAX_SEARCH_RESULTS_IU) {
+				rows = rows.subList(0, MAX_SEARCH_RESULTS_IU);
+			}
+
+			adapter.clear();
+			adapter.addAll(rows);
+			adapter.notifyDataSetChanged();
+			if (adapter.getCount() > 0) {
+				searchListView.setSelection(0);
+			}
+
+			showSearchList();
+		}
 	}
 
 	private class MapViewOnGestureListener extends SimpleOnGestureListener {

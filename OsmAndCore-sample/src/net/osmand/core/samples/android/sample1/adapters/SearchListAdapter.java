@@ -26,8 +26,7 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		for (int i = 0; i < getCount(); i++) {
 			SearchListItem item = getItem(i);
 			item.setDistance(Utilities.distance(
-					longitude, latitude,
-					item.getLongitude(), item.getLatitude()));
+					longitude, latitude, item.getLongitude(), item.getLatitude()));
 		}
 	}
 
