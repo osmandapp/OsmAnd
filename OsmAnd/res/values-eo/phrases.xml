@@ -33,7 +33,7 @@
 	<string name="poi_entertainment">Ripozejoj</string>
 		<string name="poi_club">Klubo</string>
 	<string name="poi_sustenance">Manĝejoj</string>
-	<string name="poi_cafe_and_restaurant">Kafejoj kaj manĝejoj</string>
+	<string name="poi_cafe_and_restaurant">Kafejoj kaj restoracioj</string>
 	<string name="poi_service">Servoj</string>
 		<string name="poi_craft">Metio</string>
 	<string name="poi_finance">Financo</string>
@@ -86,7 +86,7 @@
 	<string name="poi_shoes">Ŝuo-vendejo</string>
 	<string name="poi_candles">Kandel-vendejo</string>
 	<string name="poi_computer">Komputil-vendejo</string>
-	<string name="poi_copyshop">Fotokopiiloejo</string>
+	<string name="poi_copyshop">Fotokopiilejo</string>
 	<string name="poi_marketplace">Bazaro</string>
 	<string name="poi_public_transport_platform_bus">Haltejo aŭtobusa</string>
 	<string name="poi_public_transport_platform_trolleybus">Haltejo trolebusa</string>
@@ -269,7 +269,7 @@
 	<string name="poi_emergency_access_point">Vivsava rekonebla signo</string>
 
 	<string name="poi_ford">Travadejo</string>
-	<string name="poi_ford_stepping_stones">Trravadejo ŝtona</string>
+	<string name="poi_ford_stepping_stones">Travadejo ŝtona</string>
 	<string name="poi_mountain_pass">Montpasejo</string>
 	<string name="poi_gate">Pordego</string>
 	<string name="poi_city_wall">Muro urba</string>
@@ -278,6 +278,69 @@
 	<string name="poi_border_control">Landlima kontrolejo</string>
 	<string name="poi_traffic_calming_bump">Stratĝibo kurta</string>
 	<string name="poi_traffic_calming_hump">Stratĝibo longa</string>
-	<string name="poi_fuel_lpg">Likva naftogaso (LPG)</string>
+	<string name="poi_fuel_lpg">Naftogaso likva (LPG)</string>
 	<string name="poi_traffic_calming_cushion">Stratĝibo kusena</string>
+	<string name="poi_traffic_calming_chicane">Voj-ĉikano</string>
+	<string name="poi_traffic_calming_table">Stratĝiba pasejo zebrostria</string>
+	<string name="poi_traffic_calming_choker">Mallarĝigo</string>
+	<string name="poi_traffic_calming_rumble_strip">Trembruaj strietoj</string>
+	<string name="poi_traffic_calming_island">Trafik-insuleto</string>
+	<string name="poi_traffic_signals">Trafiklumoj</string>
+
+	<string name="poi_fuel_lh2">Hidrogeno likva</string>
+	<string name="poi_motorcycle_parking">Parkumejo motorcikla</string>
+	<string name="poi_parking_entrance">Enveturejo de parkumejo</string>
+	<string name="poi_compressed_air">Gaskunpremilo</string>
+	<string name="poi_lighthouse">Lumturo</string>
+
+	<string name="poi_tunnel">Tunelo</string>
+	<string name="poi_junction">Vojkruciĝo</string>
+	<string name="poi_rest_area">Servejo de vojaĝantoj</string>
+
+	<string name="poi_water_well">Puto</string>
+	<string name="poi_bell_tower">Sonorilturo</string>
+	<string name="poi_table_tennis">Tabloteniso</string>
+	<string name="poi_castle">Kastelo</string>
+	<string name="poi_fountain">Fontano</string>
+	<string name="poi_hotel">Hotelo</string>
+	<string name="poi_religion_christian">Kristanismo</string>
+	<string name="poi_religion_jewish">Judismo</string>
+	<string name="poi_religion_muslim">Islamo</string>
+	<string name="poi_theatre">Teatro</string>
+	<string name="poi_circus">Cirko</string>
+	<string name="poi_nightclub">Noktoklubo</string>
+	<string name="poi_playground">Infana ludejo</string>
+	<string name="poi_bank">Bankejo</string>
+	<string name="poi_beach">Sablobordo</string>
+	<string name="poi_car_repair">Aŭtoriparejo</string>
+	<string name="poi_service_tyres">Aerbendoj</string>
+	<string name="poi_vehicle_inspection">Aŭtokontrolejo</string>
+	<string name="poi_fuel_diesel">Dizeloleo</string>
+	<string name="poi_fuel_gtl_diesel">Dizeloleo sinteza</string>
+	<string name="poi_fuel_hgv_diesel">Dizeloleo (kamionoj)</string>
+	<string name="poi_fuel_biodiesel">Biodizeloleo</string>
+	<string name="poi_fuel_octane_80">Oktannombro 80</string>
+	<string name="poi_fuel_octane_91">Oktannombro 91</string>
+	<string name="poi_fuel_octane_92">Oktannombro 92</string>
+	<string name="poi_fuel_octane_95">Oktannombro 95</string>
+	<string name="poi_fuel_octane_98">Oktannombro 95</string>
+	<string name="poi_fuel_octane_100">Oktannombro 100</string>
+	<string name="poi_fuel_cng">Tergaso kunpremita (CNG)</string>
+	<string name="poi_fuel_1_25">Brulaĵo 1:25</string>
+	<string name="poi_fuel_1_50">Brulaĵo 1:50</string>
+	<string name="poi_fuel_ethanol">Etanolo</string>
+	<string name="poi_fuel_methanol">Metanolo</string>
+	<string name="poi_fuel_svo">Manĝoleo (SVO)</string>
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_fuel_biogas">Biogaso</string>
+	<string name="poi_fuel_electricity">Elektro</string>
+	<string name="poi_charging_station">Ŝargostacio</string>
+	<string name="poi_vehicle_ramp">Aŭtoripara fosaĵeto</string>
+	<string name="poi_taxi">Taksistacio</string>
+
+	<string name="poi_railway_buffer_stop">Baraĵo trakfina</string>
+	<string name="poi_helipad">Surteriĝejo helikoptera</string>
+	<string name="poi_basin">Akvujo</string>
 	</resources>
