@@ -214,6 +214,10 @@ task collectVoiceAssets(type: Sync) {
 	include "**/*.p"
 }
 
+task cleanNoTranslate() {
+	delete('res/values/no_translate.xml')
+}
+
 
 task collectFonts(type: Copy) {
 	from "../../resources/fonts"
