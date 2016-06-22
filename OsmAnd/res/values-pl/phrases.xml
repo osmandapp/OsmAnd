@@ -29,7 +29,7 @@
 	<string name="poi_bed">Sklep z pościelą</string>
 	<string name="poi_boutique">Butik</string>
 	<string name="poi_carpet">Sklep z dywanami</string>
-	<string name="poi_chemist">Apteka / Drogeria</string>
+	<string name="poi_chemist">Drogeria</string>
 	<string name="poi_clothes">Sklep odzieżowy</string>
 	<string name="poi_clothes_children">Sklep odzieżowy dla dzieci</string>
 	<string name="poi_shoes">Sklep obuwniczy</string>
@@ -181,7 +181,7 @@
 	<string name="poi_turning_circle">Miejsce do zawracania</string>
 	<string name="poi_motorway_junction">Zjazd z autostrady</string>
 
-	<string name="poi_water_well">Wodospad</string>
+	<string name="poi_water_well">Studnia</string>
 	<string name="poi_standpipe">Rura</string>
 	<string name="poi_water_works">Wodociąg</string>
 	<string name="poi_boatyard">Stocznia</string>
@@ -352,8 +352,8 @@
 	<string name="poi_information">Informacja</string>
 	<string name="poi_clock">Zegar</string>
 	<string name="poi_geyser">Gejzer</string>
-	<string name="poi_cemetery">Cmentarz</string>
-	<string name="poi_grave_yard">Cmentarzyk</string>
+	<string name="poi_cemetery">Cmentarz (komunalny)</string>
+	<string name="poi_grave_yard">Cmentarz</string>
 	<string name="poi_library">Biblioteka</string>
 	<string name="poi_arts_centre">Centrum sztuki</string>
 	<string name="poi_cinema">Kino</string>
@@ -510,7 +510,7 @@
 	<string name="poi_fuel_cng">CNG</string>
 	<string name="poi_public_transport_stop_position">"Przystanek transportu  publicznego"</string>
 	<string name="poi_halt">Przystanek kolejowy</string>
-	<string name="poi_rest_area">Miejsce odpoczynku</string>
+	<string name="poi_rest_area">Miejsce obsługi podróżnych</string>
 
 	<string name="poi_industrial">Tereny przemysłowe</string>
 	<string name="poi_emergency">SOR</string>
@@ -522,7 +522,7 @@
 	<string name="poi_medical_supply">Artykuły medyczne</string>
 	<string name="poi_fuel_diesel">Olej napędowy</string>
 	<string name="poi_fuel_gtl_diesel">Modyfikowany olej napędowy</string>
-	<string name="poi_fuel_hgv_diesel">Ulepszony olej napędowy</string>
+	<string name="poi_fuel_hgv_diesel">Olej napędowy (ciężarówki)</string>
 	<string name="poi_fuel_octane_80">Benzyna 80 oktanów</string>
 	<string name="poi_fuel_octane_91">Benzyna 91 oktanów</string>
 	<string name="poi_fuel_octane_92">Benzyna 92 oktany</string>
@@ -886,7 +886,7 @@
 	<string name="poi_breakwater">Falochron</string>
 	<string name="poi_groyne">Ostroga brzegowa</string>
 
-	<string name="poi_basin">Umywalka</string>
+	<string name="poi_basin">Basen</string>
 	<string name="poi_conservation">Obszar chroniony</string>
 
 	<string name="poi_crane">Dźwig</string>
