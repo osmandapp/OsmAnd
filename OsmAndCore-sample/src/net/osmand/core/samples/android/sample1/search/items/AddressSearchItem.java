@@ -1,16 +1,22 @@
-package net.osmand.core.samples.android.sample1.search;
+package net.osmand.core.samples.android.sample1.search.items;
 
 import net.osmand.core.jni.Address;
 import net.osmand.core.jni.ObfAddressStreetGroupSubtype;
+import net.osmand.core.jni.ObfAddressStreetGroupType;
 import net.osmand.core.jni.Street;
 import net.osmand.core.jni.StreetGroup;
 import net.osmand.util.Algorithms;
+
+import java.math.BigInteger;
 
 public class AddressSearchItem extends SearchItem {
 
 	private String namePrefix;
 	private String nameSuffix;
 	private String typeStr;
+
+	private BigInteger parentCityObfId;
+	private BigInteger parentPostcodeObfId;
 
 	public AddressSearchItem(Address address) {
 		super();
@@ -22,8 +28,14 @@ public class AddressSearchItem extends SearchItem {
 				setNativeName(street.getNativeName());
 				addLocalizedNames(street.getLocalizedNames());
 				if (street.getStreetGroup() != null) {
+					StreetGroup streetGroup = street.getStreetGroup();
 					nameSuffix = "st.";
-					typeStr = street.getStreetGroup().getNativeName() + " — " + getTypeStr(street.getStreetGroup());
+					typeStr = streetGroup.getNativeName() + " — " + getTypeStr(streetGroup);
+					if (streetGroup.getType() == ObfAddressStreetGroupType.Postcode) {
+						parentPostcodeObfId = streetGroup.getId().getId();
+					} else {
+						parentCityObfId = streetGroup.getId().getId();
+					}
 				} else {
 					typeStr = "Street";
 				}
@@ -75,6 +87,14 @@ public class AddressSearchItem extends SearchItem {
 			typeStr = streetGroup.getType().name();
 		}
 		return typeStr;
+	}
+
+	public BigInteger getParentCityObfId() {
+		return parentCityObfId;
+	}
+
+	public BigInteger getParentPostcodeObfId() {
+		return parentPostcodeObfId;
 	}
 
 	private class StreetInternal extends Street {

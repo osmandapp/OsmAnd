@@ -2,7 +2,7 @@ package net.osmand.core.samples.android.sample1.adapters;
 
 import net.osmand.core.samples.android.sample1.MapUtils;
 import net.osmand.core.samples.android.sample1.SampleApplication;
-import net.osmand.core.samples.android.sample1.search.AddressSearchItem;
+import net.osmand.core.samples.android.sample1.search.items.AddressSearchItem;
 import net.osmand.util.Algorithms;
 
 public class AddressSearchListItem extends SearchListItem {

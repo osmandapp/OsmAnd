@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import net.osmand.core.samples.android.sample1.MapUtils;
 import net.osmand.core.samples.android.sample1.SampleApplication;
-import net.osmand.core.samples.android.sample1.search.AmenitySearchItem;
+import net.osmand.core.samples.android.sample1.search.items.AmenitySearchItem;
 import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
