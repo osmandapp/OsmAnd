@@ -214,8 +214,8 @@ task collectVoiceAssets(type: Sync) {
 	include "**/*.p"
 }
 
-task cleanNoTranslate() {
-	delete('res/values/no_translate.xml')
+task cleanNoTranslate(type: Delete) {
+     delete('res/values/no_translate.xml')
 }
 
 
