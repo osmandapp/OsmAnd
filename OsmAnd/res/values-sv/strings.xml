@@ -2181,4 +2181,14 @@
     <string name="current_track">Nuvarande spår</string>
     <string name="map_widget_battery">Batterinivå</string>
     <string name="change_markers_position">Ändra markörens position</string>
+    <string name="app_mode_bus">Buss</string>
+ 	<string name="app_mode_train">Tåg</string>
+    <string name="use_osm_live_routing_description">Aktivera navigering för OSM Live-förändringar (beta)</string>
+	<string name="use_osm_live_routing">OSM Live-navigering</string>
+    <string name="lang_kn">Kannada</string>
+    <string name="lang_en_gb">Engelska (UK)</string>
+    <string name="lang_be_BY">Vitryska (latinsk)</string>
+    <string name="lang_hu_formal">Ungerska (formell)</string>
+    <string name="lang_es_us">Spanska (amerikansk)</string>
+    <string name="lang_ast">Asturiska</string>
     </resources>
