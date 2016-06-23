@@ -2234,4 +2234,5 @@
  	<string name="app_mode_train">Train</string>
     <string name="access_map_linked_to_location">La carte est liée à l’emplacement</string>
     <string name="lang_kn">Kannada</string>
+    <string name="access_shared_string_navigate_up">Monter</string>
     </resources>
