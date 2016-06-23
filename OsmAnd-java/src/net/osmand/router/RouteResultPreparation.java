@@ -52,9 +52,39 @@ public class RouteResultPreparation {
 		}
 		
 		determineTurnsToMerge(ctx.leftSideNavigation, result);
+		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		addTurnInfoDescriptions(result);
 		return result;
+	}
+
+	protected void ignorePrecedingStraightsOnSameIntersection(boolean leftside, List<RouteSegmentResult> result) {
+		//Issue 2571: Ignore TurnType.C if immediately followed by another turn in non-motorway cases, as these likely belong to the very same intersection
+		RouteSegmentResult nextSegment = null;
+		double distanceToNextTurn = 999999;
+		for (int i = result.size() - 1; i >= 0; i--) {
+			// Mark next "real" turn
+			if (nextSegment != null && nextSegment.getTurnType() != null &&
+					nextSegment.getTurnType().getValue() != TurnType.C &&
+					!isMotorway(nextSegment)) {
+				if (distanceToNextTurn == 999999) {
+					distanceToNextTurn = 0;
+				}
+			}
+			RouteSegmentResult currentSegment = result.get(i);
+			// Identify preceding goStraights within distance limit and suppress
+			if (currentSegment != null) {
+				distanceToNextTurn += currentSegment.getDistance();
+				if (currentSegment.getTurnType() != null &&
+						currentSegment.getTurnType().getValue() == TurnType.C &&
+						distanceToNextTurn <= 100) {
+					result.get(i).getTurnType().setSkipToSpeak(true);
+				} else {
+					nextSegment = currentSegment;
+					distanceToNextTurn = 999999;
+				}
+			}
+		}
 	}
 
 	private void justifyUTurns(boolean leftSide, List<RouteSegmentResult> result) {
@@ -917,9 +947,6 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		// Issue 2571
-		// Is caused by not suppressing 'ghost turns' (rs.speak=false), either when lanes split with no action (go straight), or where a subsequent "regular" turn at the end of the turn lane will be announced anyway
-		// Having rs.speak=true in these cases inserts an extra intermediate route direction to "continue" (to the point of the ghost turn)
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(rawLanes);
 		return t;
