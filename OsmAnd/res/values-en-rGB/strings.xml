@@ -54,4 +54,5 @@
 	<string name="search_position_map_view">Current map centre</string>
 	<string name="search_near_map">Search near current map centre</string>
 	<string name="position_on_map_center">Centre</string>
+	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 </resources>
