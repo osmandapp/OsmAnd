@@ -375,4 +375,6 @@
 	<string name="poi_aerialway_magic_carpet">Ŝtuparlifto skiada</string>
 	<string name="poi_aerialway_pylon">Kablovoja fosto</string>
 
+	<string name="poi_motorway_junction">Elveturejo el aŭtovojo</string>
+	<string name="poi_turning_circle">Ejo por ĝirado U-forma</string>
 	</resources>
