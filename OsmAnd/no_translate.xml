@@ -7,7 +7,7 @@
              X.X.X#YYYYZ , where
              X.X.X         is the above base (released) "app_version",
                    YYYY    is the build number of build branch Z
-                       Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
+                       Z : M=-master, D=-main-default, B=-Blackberry, Des=-design, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
     -->
 
     <!-- Not translatable -->
