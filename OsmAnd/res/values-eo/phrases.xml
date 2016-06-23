@@ -361,4 +361,18 @@
 	<string name="poi_club_linux">Linuksa klubo</string>
 	<string name="poi_glacier">Glacirivero</string>
 	<string name="poi_stone">Roko</string>
+	<string name="poi_aerialway_station">Kablovoja stacio</string>
+	<string name="poi_aerialway_cable_car">Telfero unu-vagoneta (ir-reira)</string>
+	<string name="poi_aerialway_chair_lift">Telfero seĝa</string>
+	<string name="poi_aerialway_gondola">Telfero plur-vagoneta</string>
+	<string name="poi_aerialway_t_bar">Skitelfero du-persona (T-forma)</string>
+	<string name="poi_aerialway_j_bar">Skitelfero unu-persona (J-forma)</string>
+	<string name="poi_aerialway_platter">Skitelfero unu-persona (teler-forma)</string>
+	<string name="poi_aerialway_mixed_lift">Telfero plurspeca</string>
+	<string name="poi_aerialway_drag_lift">Skitelfero</string>
+	<string name="poi_aerialway_rope_tow">Skitelfero ŝnur-tira</string>
+	<string name="poi_aerialway_goods">Telfero vara</string>
+	<string name="poi_aerialway_magic_carpet">Ŝtuparlifto skiada</string>
+	<string name="poi_aerialway_pylon">Kablovoja fosto</string>
+
 	</resources>
