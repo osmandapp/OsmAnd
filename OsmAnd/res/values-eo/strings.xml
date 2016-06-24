@@ -83,7 +83,7 @@
     <string name="available_maps">Disponeblaj mapoj</string>
     <string name="live_updates">Aŭtomataj ĝisdatigoj perinterretaj</string>
     <string name="rec_split_storage_size">Memoreja kapacito</string>
-    <string name="rec_split_storage_size_desc">Kvanto de spaco kiu povas okupita per ĉiuj registritaj sonaĵoj</string>
+    <string name="rec_split_storage_size_desc">Kvanto da spaco kiu povas okupita per ĉiuj registritaj sonaĵoj</string>
     <string name="select_voice_provider">Elekti dialogan helpon</string>
     <string name="select_voice_provider_descr">Elektu aŭ elŝutu dialogan helpon en via lingvo</string>
     <string name="impassable_road_desc">Elektu vojojn kiujn vi volas eviti dum navigado</string>
@@ -102,7 +102,7 @@
     <string name="av_video_quality">Kvalito de videa eligo</string>
     <string name="av_video_quality_descr">Elektu kvaliton de videa eligo</string>
     <string name="av_audio_format">Eliga sonformato</string>
-    <string name="av_audio_format_descr">Elekti formaton de eliga sondosiero</string>
+    <string name="av_audio_format_descr">Elektu formaton de eliga sondosiero</string>
     <string name="av_audio_bitrate">Sona bitrapido</string>
     <string name="av_audio_bitrate_descr">Elektu bitrapidon de sondosiero</string>
     <string name="please_specify_poi_type_only_from_list">Bonvolu difini korektan specon de Interesejo aŭ transsalti tion ĉi</string>
