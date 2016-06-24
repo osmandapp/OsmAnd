@@ -27,11 +27,11 @@
     <string name="file_can_not_be_renamed">Nie można zmienić nazwy pliku.</string>
     <string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
     <string name="gpx_navigation">Trasa GPX</string>
-    <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania POI.</string>
+    <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania UM.</string>
     <string name="poi_filter_by_name">Szukaj wg nazwy</string>
-    <string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi POI jest nadmiarowy i można go usunąć.</string>
-    <string name="update_poi_file_not_found">Nie znaleziono lokalnego pliku z POI i nie może on zostać utworzony.</string>
-    <string name="update_poi_does_not_change_indexes">Zmiana POI w aplikacji nie powoduje zmian w mapie, a jedynie jest zapisywana w pliku lokalnym.</string>
+    <string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi UM jest nadmiarowy i można go usunąć.</string>
+    <string name="update_poi_file_not_found">Nie znaleziono lokalnego pliku z UM i nie może on zostać utworzony.</string>
+    <string name="update_poi_does_not_change_indexes">Zmiana UM w aplikacji nie powoduje zmian w mapie, a jedynie jest zapisywana w pliku lokalnym.</string>
     <string name="button_upgrade_osmandplus">Uaktualnij OsmAnd+</string>
     <string name="map_version_changed_info">Na serwerze są mapy, które są niekompatybilne z tą wersją programu. Aby je pobrać i używać, musisz zaktualizować program do nowszej wersji.</string>
     <string name="shared_string_rename">Zmień nazwę</string>
@@ -84,7 +84,7 @@
     <string name="local_index_mi_reload">Odśwież</string>
     <string name="shared_string_download">Pobierz</string>
 
-    <string name="local_index_poi_data">Dane POI</string>
+    <string name="local_index_poi_data">Dane UM</string>
     <string name="local_index_address_data">Dane adresowe</string>
     <string name="local_index_transport_data">Dane transportu publicznego</string>
     <string name="local_index_map_data">Dane mapy</string>
@@ -94,7 +94,7 @@
 
     <string name="local_indexes_cat_tile">Mapy online i buforowane kafelki</string>
     <string name="local_indexes_cat_map">Mapy standardowe (wektorowe)</string>
-    <string name="local_indexes_cat_poi">Dane POI</string>
+    <string name="local_indexes_cat_poi">Dane UM</string>
     <string name="ttsvoice">Głos syntezowany</string>
     <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
     <string name="map_text_size_descr">Wybierz rozmiar tekstu dla nazw na mapie</string>
@@ -203,7 +203,7 @@
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Przestarzały format danych \'\'{0}\'\' nie jest wspierany</string>
     <string name="poi_filter_car_aid">Pomoc drogowa</string>
-    <string name="poi_filter_closest_poi">Najbliższe POI</string>
+    <string name="poi_filter_closest_poi">Najbliższe Użyteczne Miejsca</string>
     <string name="poi_filter_custom_filter">Własny filtr</string>
     <string name="poi_filter_food_shop">Sklep spożywczy</string>
     <string name="poi_filter_for_tourists">Dla turystów</string>
@@ -262,8 +262,8 @@
     <string name="renderer_load_exception">Wystąpił błąd: nie wczytano renderera</string>
     <string name="renderers">Renderer wektorowy</string>
     <string name="renderers_descr">Wybierz wygląd mapy wektorowej offline</string>
-    <string name="poi_context_menu_website">Wyświetl stronę internetową POI</string>
-    <string name="poi_context_menu_call">Wyświetl nr telefonu POI</string>
+    <string name="poi_context_menu_website">Wyświetl stronę internetową Miejsca</string>
+    <string name="poi_context_menu_call">Wyświetl nr telefonu Miejsca</string>
     <string name="website">Strona WWW</string>
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">Proszę wprowadzić tekst, aby filtrować dane</string>
@@ -287,8 +287,8 @@
     <string name="transport_context_menu">Wyszukaj komunikację na przystanku</string>
 
 
-    <string name="poi_context_menu_modify">Modyfikuj POI</string>
-    <string name="poi_context_menu_delete">Usuń POI</string>
+    <string name="poi_context_menu_modify">Modyfikuj UM</string>
+    <string name="poi_context_menu_delete">Usuń UM</string>
     <string name="rotate_map_compass_opt">Względem kompasu</string>
     <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
     <string name="rotate_map_none_opt">Bez obracania (północ na górze)</string>
@@ -313,10 +313,10 @@
     <string name="shared_string_favorites">Ulubione</string>
     <string name="layer_osm_bugs">Notatki OSM (online)</string>
     <string name="layer_transport">Przystanki</string>
-    <string name="layer_poi">POI…</string>
+    <string name="layer_poi">Użyteczne Miejsca…</string>
     <string name="layer_map">Zasób mapy…</string>
     <string name="menu_layers">Warstwy mapy</string>
-    <string name="context_menu_item_search_poi">Szukaj POI</string>
+    <string name="context_menu_item_search_poi">Szukaj Miejsc</string>
 
     <string name="use_trackball_descr">Umożliwia przesuwanie mapy za pomocą trackballa</string>
     <string name="use_trackball">Używanie trackballa</string>
@@ -363,7 +363,7 @@
     <string name="route_head">Prosto</string>
     <string name="first_time_continue">Kontynuuj</string>
     <string name="first_time_download">Pobierz region</string>
-    <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzanie plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i transport publiczny.</string>
+    <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzanie plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, Użyteczne Miejsca i transport publiczny.</string>
     <string name="search_poi_location">Wyszukiwanie sygnału…</string>
     <string name="search_near_map">Szukaj w pobliżu aktualnego środka mapy</string>
     <string name="search_nearby">Szukaj w pobliżu</string>
@@ -390,12 +390,12 @@
     <string name="show_transport_over_map_description">Pokaż na mapie przystanki transportu publicznego</string>
     <string name="show_transport_over_map">Pokaż przystanki</string>
     <string name="hello">Program do nawigacji satelitarnej OsmAnd</string>
-    <string name="update_poi_success">Uaktualniono dane POI (wczytano {0})</string>
-    <string name="update_poi_error_local">Błąd uaktualniania lokalnej listy POI</string>
+    <string name="update_poi_success">Uaktualniono dane UM (wczytano {0})</string>
+    <string name="update_poi_error_local">Błąd uaktualniania lokalnej listy UM</string>
     <string name="update_poi_error_loading">Błąd pobierania danych z serwera</string>
-    <string name="update_poi_no_offline_poi_index">Brak danych offline POI dla tego rejonu</string>
-    <string name="update_poi_is_not_available_for_zoom">Uaktualnianie POI jest niedostępne dla małych poziomów przybliżenia</string>
-    <string name="context_menu_item_update_poi">Uaktualnij POI</string>
+    <string name="update_poi_no_offline_poi_index">Brak danych offline UM dla tego rejonu</string>
+    <string name="update_poi_is_not_available_for_zoom">Uaktualnianie UM jest niedostępne dla małych poziomów przybliżenia</string>
+    <string name="context_menu_item_update_poi">Uaktualnij UM</string>
     <string name="context_menu_item_update_map_confirm">Uaktualnić dane lokalne przez Internet?</string>
     <string name="search_history_city">Miasto: {0}</string>
     <string name="search_history_street">Ulica: {0}, {1}</string>
@@ -442,7 +442,7 @@
     <string name="opening_changeset">Otwieranie zestawu zmian…</string>
     <string name="closing_changeset">Zamykanie zestawu zmian…</string>
     <string name="commiting_node">Zapisywanie węzła…</string>
-    <string name="loading_poi_obj">Wczytywanie POI…</string>
+    <string name="loading_poi_obj">Wczytywanie UM…</string>
     <string name="auth_failed">Autoryzacja nie powiodła się</string>
     <string name="failed_op">nie powiodło się</string>
     <string name="converting_names">Konwertowanie natywnych/angielskich nazw…</string>
@@ -451,7 +451,7 @@
     <string name="loading_streets">Wczytywanie ulic…</string>
     <string name="loading_cities">Wczytywanie miast…</string>
 
-    <string name="poi">POI</string>
+    <string name="poi">Użyteczne Miejsce</string>
     <string name="error_occurred_saving_gpx">Błąd podczas zapisywania śladu GPX</string>
     <string name="error_calculating_route">Błąd obliczania trasy</string>
     <string name="error_calculating_route_occured">Wystąpił błąd podczas obliczania trasy</string>
@@ -512,8 +512,8 @@
     <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
     <string name="map_view_3d_descr">Włącz widok 3D mapy</string>
     <string name="map_view_3d">Widok 3D mapy</string>
-    <string name="show_poi_over_map_description">Pokaż POI na mapie (użyj ostatnio wybranego filtru)</string>
-    <string name="show_poi_over_map">Pokaż POI</string>
+    <string name="show_poi_over_map_description">Pokaż Użyteczne Miejsca na mapie (użyj ostatnio wybranego filtru)</string>
+    <string name="show_poi_over_map">Pokaż UM</string>
     <string name="map_tile_source_descr">Proszę wybrać zasób map kafelkowych online lub offline</string>
     <string name="map_tile_source">Zasób mapy kafelkowej</string>
     <string name="map_source">Zasób mapy</string>
@@ -529,7 +529,7 @@
 
     <string name="search_button">Wyszukaj</string>
     <string name="search_activity">Wyszukaj</string>
-    <string name="searchpoi_activity">Wybierz POI</string>
+    <string name="searchpoi_activity">Wybierz Miejsca</string>
     <string name="search_POI_level_btn">Znajdź więcej</string>
     <string name="incremental_search_city">Znajdź miejscowość wpisując pierwsze litery</string>
     <string name="incremental_search_street">Znajdź ulicę</string>
@@ -562,7 +562,7 @@
 
     <string name="context_menu_item_update_map">Uaktualnij mapę</string>
 
-    <string name="context_menu_item_create_poi">Utwórz POI</string>
+    <string name="context_menu_item_create_poi">Utwórz UM</string>
     <string name="shared_string_yes">Tak</string>
     <string name="shared_string_cancel">Anuluj</string>
     <string name="shared_string_apply">Zastosuj</string>
@@ -585,13 +585,13 @@
     <string name="osb_comment_dialog_error">Wystąpił błąd: nie dodano komentarza</string>
 
 
-    <string name="poi_edit_title">Edytuj POI</string>
-    <string name="poi_create_title">Dodaj POI</string>
+    <string name="poi_edit_title">Edytuj UM</string>
+    <string name="poi_create_title">Dodaj UM</string>
     <string name="poi_error_poi_not_found">Nie można odnaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
     <string name="poi_remove_confirm_template">Usunąć {0} (wprowadź komentarz)?</string>
-    <string name="poi_remove_title">Usuń POI</string>
+    <string name="poi_remove_title">Usuń UM</string>
     <string name="shared_string_delete">Usuń</string>
-    <string name="poi_remove_success">Usunięto POI</string>
+    <string name="poi_remove_success">Usunięto UM</string>
     <string name="poi_action_add">dodaj</string>
     <string name="poi_action_change">zmień</string>
     <string name="poi_action_succeded_template">Zakończono czynność {0}.</string>
@@ -601,7 +601,7 @@
     <string name="poi_dialog_name">Nazwa</string>
     <string name="poi_dialog_opening_hours">Otwarte</string>
     <string name="poi_dialog_comment">Komentarz</string>
-    <string name="poi_dialog_comment_default">Zmiana POI</string>
+    <string name="poi_dialog_comment_default">Zmiana UM</string>
     <string name="poi_dialog_other_tags_message">Wszystkie pozostałe tagi pozostają bez zmian</string>
     <string name="default_buttons_commit">Wyślij</string>
     <string name="shared_string_clear">Wyczyść</string>
@@ -715,14 +715,14 @@
     <string name="offline_edition_descr">Zawsze wprowadza modyfikacje w trybie offline</string>
 
     <string name="local_openstreetmap_uploading">Wysyłanie…</string>
-    <string name="local_openstreetmap_were_uploaded">Wysłano {0} POI/notatek</string>
+    <string name="local_openstreetmap_were_uploaded">Wysłano {0} UM/notatek</string>
     <string name="local_openstreetmap_uploadall">Wyślij wszystkie</string>
 
     <string name="local_openstreetmap_upload">Wyślij modyfikacje do OSM</string>
     <string name="local_openstreetmap_delete">Usuń modyfikacje</string>
     <string name="local_openstreetmap_descr_title">Asynchroniczna edycja OSM:</string>
-    <string name="local_openstreetmap_settings">Lokalnie zapisane POI/Notatki OSM</string>
-    <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Notatkami OSM zapisanymi w lokalnej bazie danych</string>
+    <string name="local_openstreetmap_settings">Lokalnie zapisane UM/Notatki OSM</string>
+    <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj UM/Notatkami OSM zapisanymi w lokalnej bazie danych</string>
 
 
     <string name="live_monitoring_interval_descr">Określa tempo wysyłania danych o położeniu</string>
@@ -734,7 +734,7 @@
 
     <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań i nie obsługuje artykułów Wikipedii w trybie offline.</string>
     <string name="free_version_title">Wersja darmowa</string>
-    <string name="poi_context_menu_showdescription">Pokaż opis POI</string>
+    <string name="poi_context_menu_showdescription">Pokaż opis UM</string>
     <string name="index_name_north_america">Ameryka Północna</string>
     <string name="index_name_us">Ameryka Północna - Stany Zjednoczone</string>
     <string name="index_name_central_america">Ameryka Środkowa</string>
@@ -747,7 +747,7 @@
     <string name="index_name_asia">Azja</string>
     <string name="index_name_oceania">Australia i Oceania</string>
     <string name="index_name_other">Mapy świata i tematyczne</string>
-    <string name="index_name_wiki">Wikipedia dla POI</string>
+    <string name="index_name_wiki">Wikipedia dla UM</string>
     <string name="index_name_voice">Komunikaty głosowe (nagrane, ograniczone możliwości)</string>
     <string name="index_name_tts_voice">Komunikaty głosowe (syntezowane, zalecane)</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
@@ -760,7 +760,7 @@
 
     <string name="download_files_not_enough_space">Nie ma wystarczająco miejsca, aby pobrać %1$s MB (dostępne miejsce: %2$s).</string>
     <string name="download_files_question_space">Czy pobrać {0} plik(-i/-ów)? To potrzebuje {1} MB na stałe. Obecnie posiadasz dostępne {2} MB.</string>
-    <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii POI odpowiadających zapytaniu:</string>
+    <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii UM odpowiadających zapytaniu:</string>
     <string name="favourites_edit_dialog_name">Nazwa</string>
     <string name="favourites_edit_dialog_category">Kategoria</string>
     <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
@@ -768,7 +768,7 @@
 <u>Online OSM</u> map classification with images"</string>
     <string name="local_index_routing_data">Dane trasowania</string>
     <string name="navigate_point_format">Format</string>
-    <string name="poi_search_desc">Wyszukiwanie POI</string>
+    <string name="poi_search_desc">Wyszukiwanie Użytecznych Miejsc</string>
     <string name="address_search_desc">Wyszukiwanie adresu</string>
     <string name="navpoint_search_desc">Współrzędne</string>
     <string name="transport_search_desc">Wyszukiwanie transportu publicznego</string>
@@ -786,7 +786,7 @@
     <string name="route_kl">Trzymaj się lewej strony</string>
     <string name="route_kr">Trzymaj się prawej strony</string>
 
-    <string name="asap">ASAP</string>
+    <string name="asap">Natychmiast</string>
 
     <string name="gpxup_public">Publiczny</string>
     <string name="gpxup_identifiable">Identyfikowalny</string>
@@ -1536,7 +1536,7 @@
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pobliskie ulubione</string>
-    <string name="speak_poi">Pobliskie POI</string>
+    <string name="speak_poi">Pobliskie Miejsca</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
@@ -1717,7 +1717,7 @@
     <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian do OSM?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
     <string name="delay_to_start_navigation_descr">Określa czas wyświetlania ekranu planowania trasy</string>
-    <string name="delay_to_start_navigation">Rozpocznij nawigację turn-by-turn za…</string>
+    <string name="delay_to_start_navigation">Rozpocznij nawigację zakręt-po-zakręcie za…</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
     <string name="agps_info">Informacje A-GPS</string>
@@ -1773,12 +1773,12 @@
     <string name="rendering_value_disabled_name">Wyłączony</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorowanie wg przeznaczenia trasy</string>
     <string name="osm_edit_context_menu_delete">Usuń edycje OSM</string>
-    <string name="lang_th">tajski</string>
-    <string name="lang_nn">norweski</string>
-    <string name="lang_ms">malezyjski</string>
-    <string name="lang_ht">haitański</string>
-    <string name="lang_gl">galicyjski</string>
-    <string name="lang_et">estoński</string>
+    <string name="lang_th">Tajski</string>
+    <string name="lang_nn">Norweski (Nynorsk)</string>
+    <string name="lang_ms">Malezyjski</string>
+    <string name="lang_ht">Haitański</string>
+    <string name="lang_gl">Galicyjski</string>
+    <string name="lang_et">Estoński</string>
     <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Czy chcesz je zarchiwizować?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
@@ -1792,30 +1792,30 @@
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="light_theme">Jasny</string>
     <string name="dark_theme">Ciemny</string>
-    <string name="lang_pms">piemoncki</string>
-    <string name="lang_bn">bengalski</string>
-    <string name="lang_tl">tagalski</string>
-    <string name="lang_sh">serbsko-chorwacki</string>
-    <string name="lang_az">azerski</string>
-    <string name="lang_br">bretoński</string>
-    <string name="lang_sq">albański</string>
-    <string name="lang_is">islandzki</string>
-    <string name="lang_ga">irlandzki</string>
-    <string name="lang_la">łaciński</string>
-    <string name="lang_nv">nawaho</string>
-    <string name="lang_ku">kurdyjski</string>
-    <string name="lang_ta">tamilski</string>
-    <string name="lang_lb">luksemburski</string>
-    <string name="lang_os">osetyjski</string>
+    <string name="lang_pms">Piemoncki</string>
+    <string name="lang_bn">Bengalski</string>
+    <string name="lang_tl">Tagalski</string>
+    <string name="lang_sh">Serbsko-chorwacki</string>
+    <string name="lang_az">Azerski</string>
+    <string name="lang_br">Bretoński</string>
+    <string name="lang_sq">Albański</string>
+    <string name="lang_is">Islandzki</string>
+    <string name="lang_ga">Irlandzki</string>
+    <string name="lang_la">Łacina</string>
+    <string name="lang_nv">Nawaho</string>
+    <string name="lang_ku">Kurdyjski</string>
+    <string name="lang_ta">Tamilski</string>
+    <string name="lang_lb">Luksemburski</string>
+    <string name="lang_os">Osetyjski</string>
     <string name="lang_es_ar">Hiszpański (Argentyna)</string>
     <string name="lang_nb">Norweski (Bokmål)</string>
     <string name="disable_recording_once_app_killed">Zapobiegaj automatycznemu rejestrowaniu</string>
     <string name="lang_te">Telugu (Indyjski)</string>
-    <string name="lang_ceb">cebuański</string>
-    <string name="lang_new">newarski</string>
+    <string name="lang_ceb">Cebuano</string>
+    <string name="lang_new">Newarski</string>
     <string name="lang_vo">Wolapik</string>
-    <string name="lang_bpy">bisznuprija-manipuri (indyjski)</string>
-    <string name="lang_ml">drawidyjski</string>
+    <string name="lang_bpy">Bisznuprija-manipuri (indyjski)</string>
+    <string name="lang_ml">Malajalam</string>
     <string name="lang_eo">Esperanto</string>
     <string name="rendering_attr_currentTrackColor_name">Kolor śladu GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Szerokość śladu GPX</string>
@@ -1852,7 +1852,7 @@
     <string name="av_locations">Położenia</string>
     <string name="plugin_settings">Wtyczki</string>
     <string name="routing_attr_avoid_shuttle_train_name">Omijanie pociągów wahadłowych</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Omijanie pociągów wahadłowych</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Omijanie pociągów wahadłowych transportujących auta</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
     <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
     <string name="dahboard_options_dialog_title">Opcje kokpitu</string>
@@ -1861,16 +1861,16 @@
     <string name="shared_string_skip">Pomiń</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Mapy offline\ni nawigacja</string>
-    <string name="please_specify_poi_type">Proszę określić typ POI.</string>
+    <string name="please_specify_poi_type">Proszę określić typ UM.</string>
     <string name="number_of_rows_in_dash">Ilość wierszy na ekranie głównym %1$s</string>
     <string name="description">Opis</string>
-    <string name="poi_dialog_poi_type">Rodzaj POI</string>
+    <string name="poi_dialog_poi_type">Rodzaj UM</string>
     <string name="poi_action_delete">usuń</string>
     <string name="building_number">Numer wersji</string>
     <string name="av_locations_descr">Plik GPS z notatkami o lokalizacjach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
-    <string name="commit_poi">Wyślij POI</string>
+    <string name="commit_poi">Wyślij UM</string>
     <string name="tab_title_basic">Podstawowe</string>
     <string name="tab_title_advanced">Zaawansowane</string>
     <string name="next_proceed">Następny</string>
@@ -1884,7 +1884,7 @@
     <string name="recent_places">Ostatnie miejsca</string>
     <string name="favourites">Ulubione</string>
     <string name="saved_at_time">Zapisano o: %1$s</string>
-    <string name="poi_deleted_localy">POI zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
+    <string name="poi_deleted_localy">UM zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
     <string name="show_gpx">Wyświetlanie GPX</string>
     <string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
     <string name="count_of_lines">Liczba linii</string>
@@ -1900,7 +1900,7 @@
     <string name="default_speed_system_descr">Definiuje jednostki prędkości</string>
     <string name="default_speed_system">Jednostki prędkości</string>
     <string name="si_nm">Mile morskie</string>
-    <string name="nm">węzły</string>
+    <string name="nm">Mm</string>
     <string name="si_kmh">Kilometry na godzinę</string>
     <string name="si_mph">Mile na godzinę</string>
     <string name="si_m_s">Metry na sekundę</string>
@@ -1955,7 +1955,7 @@
     <string name="rendering_attr_hideProposed_name">Proponowane obiekty</string>
     <string name="shared_string_update">Aktualizuj</string>
     <string name="shared_string_upload">Prześlij</string>
-    <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
+    <string name="osm_edit_created_poi">Utworzono Użyteczne Miejsce OSM</string>
 
     <string name="simulate_initial_startup_descr">Ustala flagę wskazującą pierwsze uruchomienie programu zachowując wszystkie pozostałe ustawienia</string>
     <string name="share_geo">geo:</string>
@@ -1983,7 +1983,7 @@
     <string name="feedback">Informacje zwrotne</string>
     <string name="contact_us">Kontakt z nami</string>
     <string name="map_legend">Legenda mapy</string>
-    <string name="save_poi_without_poi_type_message">Zapisać POI bez określonego rodzaju?</string>
+    <string name="save_poi_without_poi_type_message">Zapisać UM bez określonego rodzaju?</string>
     <string name="access_from_map_description">Wyświetla kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
@@ -2005,9 +2005,9 @@
     <string name="use_drawer_btn">Używaj menu</string>
     <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
-    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj POI lub pominąć go</string>
-    <string name="osm_edit_modified_poi">Zmodyfikowano POI OSM</string>
-    <string name="osm_edit_deleted_poi">Usunięto POI OSM</string>
+    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj Użytecznego Miejsca lub pominąć go</string>
+    <string name="osm_edit_modified_poi">Zmodyfikowano UM OSM</string>
+    <string name="osm_edit_deleted_poi">Usunięto UM OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
     <string name="osm_edit_commented_note">Skomentowano notatkę OSM</string>
     <string name="osm_edit_removed_note">Skasowano notatkę OSM</string>
@@ -2076,7 +2076,7 @@
     <string name="night">Noc</string>
     <string name="select_month_and_country">Proszę wybrać miesiąc i kraj</string>
 <string name="shared_string_remove">Usuń</string>
-    <string name="data_is_not_available">Data nie jest dostępna</string>
+    <string name="data_is_not_available">Dane nie są dostępne</string>
     <string name="shared_string_select">Wybierz</string>
     <string name="clear_updates_proposition_message">Można usunąć pobrane uaktualnienia i przywrócić pierwotną wersję mapy</string>
     <string name="number_of_edits">Liczba edycji</string>
@@ -2116,7 +2116,7 @@
     <string name="add_time_span">Dodaj przedział czasowy</string>
     <string name="road_blocked">Droga zablokowana</string>
     <string name="switch_start_finish">Odwróć kolejność punktów startu i celu</string>
-    <string name="rendering_attr_hideIcons_name">Ikony POI</string>
+    <string name="rendering_attr_hideIcons_name">Ikony Użytecznych Miejsc</string>
     <string name="rec_split">Podział rejestratora</string>
     <string name="rec_split_title">Użyj podziału rejestratora</string>
     <string name="rec_split_desc">Przenieś pliki gdy wykorzystana przestrzeń przekracza rozmiar pamięci nośnika</string>
