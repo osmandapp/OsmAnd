@@ -352,8 +352,8 @@
 	<string name="poi_information">Informacja</string>
 	<string name="poi_clock">Zegar</string>
 	<string name="poi_geyser">Gejzer</string>
-	<string name="poi_cemetery">Cmentarz (komunalny)</string>
-	<string name="poi_grave_yard">Cmentarz</string>
+	<string name="poi_cemetery">Cmentarz</string>
+	<string name="poi_grave_yard">Cmentarz (przykościelny)</string>
 	<string name="poi_library">Biblioteka</string>
 	<string name="poi_arts_centre">Centrum sztuki</string>
 	<string name="poi_cinema">Kino</string>
