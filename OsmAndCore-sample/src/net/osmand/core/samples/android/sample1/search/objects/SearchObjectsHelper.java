@@ -1,6 +1,7 @@
 package net.osmand.core.samples.android.sample1.search.objects;
 
 import net.osmand.core.jni.Address;
+import net.osmand.core.jni.OsmAndCoreJNI;
 import net.osmand.core.jni.Street;
 import net.osmand.core.jni.StreetGroup;
 
@@ -30,13 +31,13 @@ public class SearchObjectsHelper {
 
 	private static class StreetInternal extends Street {
 		public StreetInternal(Address address) {
-			super(Address.getCPtr(address), false);
+			super(OsmAndCoreJNI.Street_SWIGSmartPtrUpcast(Address.getCPtr(address)), false);
 		}
 	}
 
 	private static class StreetGroupInternal extends StreetGroup {
 		public StreetGroupInternal(Address address) {
-			super(Address.getCPtr(address), false);
+			super(OsmAndCoreJNI.StreetGroup_SWIGSmartPtrUpcast(Address.getCPtr(address)), false);
 		}
 	}
 }

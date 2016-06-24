@@ -6,7 +6,7 @@ import net.osmand.core.samples.android.sample1.MapUtils;
 import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.search.objects.StreetSearchObject;
 
-public class StreetSearchListItem extends SearchListItem {
+public class StreetSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 

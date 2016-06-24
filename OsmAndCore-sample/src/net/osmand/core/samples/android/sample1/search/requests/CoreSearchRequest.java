@@ -10,6 +10,7 @@ import net.osmand.core.jni.Amenity;
 import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ISearch;
 import net.osmand.core.jni.NullableAreaI;
+import net.osmand.core.jni.OsmAndCoreJNI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchCallbackInternal;
 import net.osmand.core.samples.android.sample1.search.SearchScope;
@@ -183,13 +184,13 @@ public class CoreSearchRequest extends SearchRequest {
 
 	private class AmenityResultEntry extends AmenitiesByNameSearch.ResultEntry {
 		protected AmenityResultEntry(ISearch.IResultEntry resultEntry) {
-			super(ISearch.IResultEntry.getCPtr(resultEntry), false);
+			super(OsmAndCoreJNI.AmenitiesByNameSearch_ResultEntry_SWIGUpcast(ISearch.IResultEntry.getCPtr(resultEntry)), false);
 		}
 	}
 
 	private class AddressResultEntry extends AddressesByNameSearch.ResultEntry {
 		protected AddressResultEntry(ISearch.IResultEntry resultEntry) {
-			super(ISearch.IResultEntry.getCPtr(resultEntry), false);
+			super(OsmAndCoreJNI.AddressesByNameSearch_ResultEntry_SWIGUpcast(ISearch.IResultEntry.getCPtr(resultEntry)), false);
 		}
 	}
 }
