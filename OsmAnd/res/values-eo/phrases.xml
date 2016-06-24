@@ -351,7 +351,7 @@
 	<string name="poi_slipway">Ŝipglitejo</string>
 	<string name="poi_ferry_terminal">Pramstacio</string>
 	<string name="poi_bicycle_rental">Bicikl-pruntejo</string>
-	<string name="poi_speed_camera">Rapid-kontrolejo</string>
+	<string name="poi_speed_camera">Rapid-kontrolilo</string>
 	<string name="poi_telephone">Telefonbudo</string>
 	<string name="poi_motel">Aŭtohotelo</string>
 	<string name="poi_hostel">Gastejo</string>
@@ -377,4 +377,27 @@
 
 	<string name="poi_motorway_junction">Elveturejo el aŭtovojo</string>
 	<string name="poi_turning_circle">Ejo por ĝirado U-forma</string>
+	<string name="poi_standpipe">Hidranto senprema</string>
+	<string name="poi_water_tower">Akvoturo</string>
+	<string name="poi_water_works">Akvo-trinkebligejo</string>
+	<string name="poi_wastewater_plant">Akvo-purigejo</string>
+	<string name="poi_boatyard">Ŝipfarejo</string>
+	<string name="poi_lock_gate">Kluzo</string>
+	<string name="poi_power_plant">Elektrocentralo</string>
+	<string name="poi_observation_tower">Vidturo</string>
+	<string name="poi_recycling">Recikligejo</string>
+
+	<string name="poi_recycling_centre">Speco: centro de recikligo</string>
+	<string name="poi_recycling_container">Speco: ujo</string>
+	<string name="poi_recycling_glass">Vitro</string>
+	<string name="poi_recycling_paper">Papero</string>
+	<string name="poi_recycling_clothes">Vestaĵoj</string>
+	<string name="poi_recycling_cans">Trinkaĵujoj</string>
+	<string name="poi_recycling_glass_bottles">Vitr-boteloj</string>
+	<string name="poi_watermill">Akvomuelejo</string>
+	<string name="poi_recycling_hydrargyrum">Hidrargo</string>
+	<string name="poi_recycling_rubble">Ŝtonrubo</string>
+	<string name="poi_works">Fabriko</string>
+	<string name="poi_driving_school">Stirlernejo</string>
+	<string name="poi_college">Kolegio</string>
 	</resources>
