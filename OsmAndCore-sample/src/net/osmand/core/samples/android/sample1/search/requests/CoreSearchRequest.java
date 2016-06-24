@@ -10,12 +10,16 @@ import net.osmand.core.jni.Amenity;
 import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ISearch;
 import net.osmand.core.jni.NullableAreaI;
-import net.osmand.core.samples.android.sample1.search.SearchAPI;
-import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchCallback;
-import net.osmand.core.samples.android.sample1.search.items.AddressSearchItem;
-import net.osmand.core.samples.android.sample1.search.items.AmenitySearchItem;
-import net.osmand.core.samples.android.sample1.search.items.SearchItem;
+import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
+import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchCallbackInternal;
+import net.osmand.core.samples.android.sample1.search.SearchScope;
+import net.osmand.core.samples.android.sample1.search.SearchString;
+import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObjectsHelper;
+import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +28,18 @@ public class CoreSearchRequest extends SearchRequest {
 
 	private IntermediateSearchRequest intermediateSearchRequest;
 	private boolean intermediateSearchDone;
+	private SearchCallbackInternal internalCallback;
 
 	private int amenityResultsCounter;
 	private int addressResultsCounter;
 
 	public CoreSearchRequest(@Nullable IntermediateSearchRequest intermediateSearchRequest,
-							 @NonNull SearchAPI searchAPI, int maxSearchResults, @Nullable SearchCallback searchCallback) {
-		super(searchAPI, maxSearchResults, searchCallback);
+							 @NonNull SearchScope searchScope, int maxSearchResults,
+							 @Nullable SearchApiCallback searchCallback,
+							 @Nullable SearchCallbackInternal internalCallback) {
+		super(searchScope, maxSearchResults, searchCallback);
 		this.intermediateSearchRequest = intermediateSearchRequest;
+		this.internalCallback = internalCallback;
 	}
 
 	@Override
@@ -51,11 +59,13 @@ public class CoreSearchRequest extends SearchRequest {
 	}
 
 	@Override
-	protected void onSearchRequestPostExecute(List<SearchItem> searchItems) {
+	protected void onSearchRequestPostExecute(List<SearchObject> searchObjects) {
 		if (intermediateSearchRequest != null && !intermediateSearchDone) {
 			intermediateSearchRequest.cancel();
 		}
-		searchAPI.setSearchItems(searchItems);
+		if (internalCallback != null) {
+			internalCallback.onSearchObjectsFound(searchObjects);
+		}
 	}
 
 	@Override
@@ -67,37 +77,42 @@ public class CoreSearchRequest extends SearchRequest {
 	}
 
 	@Override
-	protected List<SearchItem> doSearch() {
+	protected List<SearchObject> doSearch() {
 
-		List<SearchItem> res = new ArrayList<>();
+		List<SearchObject> res = new ArrayList<>();
 
+		SearchString searchString = searchScope.getSearchString();
+		SearchToken lastToken = searchString.getLastToken();
 		SearchToken token = searchString.getNextNameFilterToken();
 		while (token != null && !cancelled) {
-			if (token.getType() == SearchToken.TokenType.NAME_FILTER) {
-				List<SearchItem> searchItems = doCoreSearch(token);
-				res.clear();
-				res.addAll(searchItems);
+			if (token.getType() == SearchToken.TokenType.NAME_FILTER
+					&& !Algorithms.isEmpty(token.getQueryText())) {
+				res = doCoreSearch(token);
 			}
-			token = searchString.getNextNameFilterToken();
+			if (token != lastToken) {
+				token = searchString.getNextNameFilterToken();
+			} else {
+				break;
+			}
 		}
 
 		return res;
 	}
 
-	private List<SearchItem> doCoreSearch(@NonNull SearchToken token) {
+	private List<SearchObject> doCoreSearch(@NonNull SearchToken token) {
 		System.out.println("=== Start search");
 		amenityResultsCounter = 0;
 		addressResultsCounter = 0;
 
 		String keyword = token.getQueryText();
-		final List<SearchItem> searchItems = new ArrayList<>();
+		final List<SearchObject> searchObjects = new ArrayList<>();
 
 		// Setup Amenities by name search
-		AmenitiesByNameSearch amByNameSearch = new AmenitiesByNameSearch(searchAPI.getObfsCollection());
+		AmenitiesByNameSearch amByNameSearch = new AmenitiesByNameSearch(searchScope.getObfsCollection());
 		AmenitiesByNameSearch.Criteria amenityByNameCriteria = new AmenitiesByNameSearch.Criteria();
 		amenityByNameCriteria.setName(keyword);
-		if (searchAPI.getObfAreaFilter() != null) {
-			amenityByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(searchAPI.getObfAreaFilter()));
+		if (searchScope.getObfAreaFilter() != null) {
+			amenityByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(searchScope.getObfAreaFilter()));
 		}
 		searchScope.setupAmenitySearchCriteria(amenityByNameCriteria);
 
@@ -105,9 +120,9 @@ public class CoreSearchRequest extends SearchRequest {
 			@Override
 			public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
 				Amenity amenity = new AmenityResultEntry(resultEntry).getAmenity();
-				AmenitySearchItem amenitySearchItem = new AmenitySearchItem(amenity);
-				if (searchScope.processAmenitySearchItem(amenitySearchItem)) {
-					searchItems.add(amenitySearchItem);
+				PoiSearchObject amenitySearchItem = new PoiSearchObject(amenity);
+				if (searchScope.processPoiSearchObject(amenitySearchItem)) {
+					searchObjects.add(amenitySearchItem);
 				}
 				System.out.println("Poi found === " + amenitySearchItem.toString());
 				amenityResultsCounter++;
@@ -115,11 +130,11 @@ public class CoreSearchRequest extends SearchRequest {
 		};
 
 		// Setup Addresses by name search
-		AddressesByNameSearch addrByNameSearch = new AddressesByNameSearch(searchAPI.getObfsCollection());
-		AddressesByNameSearch.Criteria addrByNameCriteria = new AddressesByNameSearch.Criteria();
+		AddressesByNameSearch addrByNameSearch = new AddressesByNameSearch(searchScope.getObfsCollection());
+		final AddressesByNameSearch.Criteria addrByNameCriteria = new AddressesByNameSearch.Criteria();
 		addrByNameCriteria.setName(keyword);
-		if (searchAPI.getObfAreaFilter() != null) {
-			addrByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(searchAPI.getObfAreaFilter()));
+		if (searchScope.getObfAreaFilter() != null) {
+			addrByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(searchScope.getObfAreaFilter()));
 		}
 		searchScope.setupAddressSearchCriteria(addrByNameCriteria);
 
@@ -127,12 +142,14 @@ public class CoreSearchRequest extends SearchRequest {
 			@Override
 			public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
 				Address address = new AddressResultEntry(resultEntry).getAddress();
-				AddressSearchItem addrSearchItem = new AddressSearchItem(address);
-				if (searchScope.processAddressSearchItem(addrSearchItem)) {
-					searchItems.add(addrSearchItem);
+				SearchPositionObject addressSearchObject = SearchObjectsHelper.getAddressObject(address);
+				if (addressSearchObject != null) {
+					if (searchScope.processAddressSearchObject(addressSearchObject)) {
+						searchObjects.add(addressSearchObject);
+					}
+					System.out.println("Address found === " + addressSearchObject.toString());
+					addressResultsCounter++;
 				}
-				System.out.println("Address found === " + addrSearchItem.toString());
-				addressResultsCounter++;
 			}
 		};
 
@@ -153,12 +170,15 @@ public class CoreSearchRequest extends SearchRequest {
 		}
 
 		if (!cancelled) {
-			searchScope.processSearchResult(searchItems);
+			SearchToken newToken = searchScope.processSearchResult(token, searchObjects);
+			if (newToken != null && internalCallback != null) {
+				internalCallback.onNewTokenFound(token, newToken);
+			}
 		}
 
 		System.out.println("=== Finish search");
 
-		return searchItems;
+		return searchObjects;
 	}
 
 	private class AmenityResultEntry extends AmenitiesByNameSearch.ResultEntry {

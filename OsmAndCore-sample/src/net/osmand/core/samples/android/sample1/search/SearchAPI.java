@@ -5,11 +5,13 @@ import android.support.annotation.NonNull;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.samples.android.sample1.search.items.SearchItem;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.requests.CoreSearchRequest;
 import net.osmand.core.samples.android.sample1.search.requests.IntermediateSearchRequest;
 import net.osmand.core.samples.android.sample1.search.requests.SearchRequest;
+import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAPI {
@@ -17,23 +19,44 @@ public class SearchAPI {
 	private ObfsCollection obfsCollection;
 	private AreaI searchableArea;
 	private AreaI obfAreaFilter;
-	private PointI searchLocation;
+	private PointI searchLocation31;
 	private double searchRadius;
+	private String lang;
 
 	private SearchRequestExecutor executor;
 	private SearchString searchString;
-	private SearchScope searchScope;
-	private List<SearchItem> searchItems;
+	private List<SearchObject> searchObjects;
 
-	public interface SearchCallback {
-		void onSearchFinished(List<SearchItem> searchItems);
+	private SearchCallbackInternal internalCallback = new SearchCallbackInternal() {
+		@Override
+		public void onSearchObjectsFound(List<SearchObject> searchObjects) {
+			setSearchObjects(searchObjects);
+		}
+
+		@Override
+		public void onNewTokenFound(SearchToken oldToken, SearchToken newToken) {
+			searchString.replaceToken(oldToken, newToken);
+		}
+	};
+
+	public interface SearchApiCallback {
+		void onSearchFinished(List<SearchObject> searchObjects);
 	}
 
-	public SearchAPI(@NonNull ObfsCollection obfsCollection) {
+	public interface SearchCallbackInternal {
+		void onSearchObjectsFound(List<SearchObject> searchObjects);
+		void onNewTokenFound(SearchToken oldToken, SearchToken newToken);
+	}
+
+	public SearchAPI(@NonNull ObfsCollection obfsCollection, String lang) {
 		this.obfsCollection = obfsCollection;
 		this.executor = new SearchRequestExecutor();
 		this.searchString = new SearchString();
-		this.searchScope = new SearchScope(this);
+		this.lang = lang;
+	}
+
+	public String getLang() {
+		return lang;
 	}
 
 	public AreaI getSearchableArea() {
@@ -52,12 +75,12 @@ public class SearchAPI {
 		this.obfAreaFilter = obfAreaFilter;
 	}
 
-	public PointI getSearchLocation() {
-		return searchLocation;
+	public PointI getSearchLocation31() {
+		return searchLocation31;
 	}
 
-	public void setSearchLocation(PointI searchLocation) {
-		this.searchLocation = searchLocation;
+	public void setSearchLocation31(PointI position31) {
+		this.searchLocation31 = position31;
 	}
 
 	public double getSearchRadius() {
@@ -72,35 +95,32 @@ public class SearchAPI {
 		return obfsCollection;
 	}
 
-	public SearchString getSearchString() {
-		return searchString;
+	public SearchString getSearchStringCopy() {
+		return searchString.copy();
 	}
 
-	public SearchScope getSearchScope() {
-		return searchScope;
+	public List<SearchObject> getSearchObjects() {
+		return searchObjects;
 	}
 
-	public List<SearchItem> getSearchItems() {
-		return searchItems;
-	}
-
-	public void setSearchItems(List<SearchItem> searchItems) {
-		this.searchItems = searchItems;
+	public void setSearchObjects(List<SearchObject> searchObjects) {
+		this.searchObjects = searchObjects;
 	}
 
 	public void startSearch(String query, int maxSearchResults,
-							SearchCallback intermediateSearchCallback,
-							SearchCallback coreSearchCallback) {
+							SearchApiCallback intermediateSearchCallback,
+							SearchApiCallback coreSearchCallback) {
 
 		searchString.setQueryText(query);
-		searchScope.updateScope();
+		SearchScope searchScope = new SearchScope(this);
 		IntermediateSearchRequest intermediateSearchRequest = null;
-		if (searchItems != null && !searchItems.isEmpty()) {
+		if (searchObjects != null && !searchObjects.isEmpty()) {
 			intermediateSearchRequest =
-					new IntermediateSearchRequest(this, maxSearchResults, intermediateSearchCallback);
+					new IntermediateSearchRequest(searchScope, new ArrayList<>(searchObjects),
+							maxSearchResults, intermediateSearchCallback);
 		}
-		executor.run(new CoreSearchRequest(intermediateSearchRequest, this,
-				maxSearchResults, coreSearchCallback), true);
+		executor.run(new CoreSearchRequest(intermediateSearchRequest, searchScope,
+				maxSearchResults, coreSearchCallback, internalCallback), true);
 	}
 
 	public void cancelSearch() {

@@ -1,29 +1,24 @@
 package net.osmand.core.samples.android.sample1.search.tokens;
 
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
+
 public abstract class SearchToken {
 
 	public enum TokenType {
-		CITY,
-		POSTCODE,
-		STREET,
-		BUILDING,
-		POI_CATEGORY,
-		POI_FILTER,
-		POI_TYPE,
-		LOCATION,
+		SEARCH_OBJECT,
 		NAME_FILTER
 	}
 
 	private TokenType type;
+	private SearchObject searchObject;
 	private int startIndex;
 	protected String queryText;
-	protected String name;
 
-	public SearchToken(TokenType type, int startIndex, String queryText, String name) {
+	public SearchToken(TokenType type, int startIndex, String queryText, SearchObject searchObject) {
 		this.type = type;
 		this.startIndex = startIndex;
 		this.queryText = queryText;
-		this.name = name;
+		this.searchObject = searchObject;
 	}
 
 	public TokenType getType() {
@@ -50,7 +45,7 @@ public abstract class SearchToken {
 		return queryText.length();
 	}
 
-	public String getName() {
-		return name;
+	public SearchObject getSearchObject() {
+		return searchObject;
 	}
 }

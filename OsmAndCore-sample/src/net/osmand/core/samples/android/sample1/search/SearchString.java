@@ -1,8 +1,10 @@
 package net.osmand.core.samples.android.sample1.search;
 
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
 import net.osmand.core.samples.android.sample1.search.tokens.NameFilterSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken.TokenType;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +19,18 @@ public class SearchString {
 	public SearchString() {
 	}
 
+	public SearchString copy() {
+		SearchString res = new SearchString();
+		res.queryText = queryText;
+		res.tokens = new ArrayList<>(tokens);
+		return res;
+	}
+
 	public String getQueryText() {
 		return queryText;
 	}
 
-	public synchronized void setQueryText(String queryText) {
+	public void setQueryText(String queryText) {
 		int newTextLength = queryText.length();
 		int currTextLength = this.queryText.length();
 		boolean isNewText = currTextLength == 0
@@ -73,10 +82,17 @@ public class SearchString {
 			if (firstWordIndex <= newTextLength - 1) {
 				SearchToken token = new NameFilterSearchToken(firstWordIndex, queryText.substring(firstWordIndex));
 				tokens.add(token);
+			} else if (endWithDelimeter(queryText)) {
+				SearchToken token = new NameFilterSearchToken(firstWordIndex, "");
+				tokens.add(token);
 			}
 		}
 
 		this.queryText = queryText;
+	}
+
+	private boolean endWithDelimeter(String text) {
+		return !Algorithms.isEmpty(text) && isDelimiterChar(text.charAt(text.length() - 1));
 	}
 
 	private boolean startWithDelimiter(String text) {
@@ -88,7 +104,7 @@ public class SearchString {
 		return c == ',' || c == ' ';
 	}
 
-	public synchronized SearchToken getNextNameFilterToken() {
+	public SearchToken getNextNameFilterToken() {
 		SearchToken res = null;
 		if (!tokens.isEmpty()) {
 			for (int i = tokens.size() - 1; i >= 0; i--) {
@@ -103,18 +119,18 @@ public class SearchString {
 		return res;
 	}
 
-	public synchronized SearchToken getLastToken() {
+	public SearchToken getLastToken() {
 		if (!tokens.isEmpty()) {
 			return tokens.get(tokens.size() - 1);
 		}
 		return null;
 	}
 
-	public synchronized boolean hasNameFilterTokens() {
+	public boolean hasNameFilterTokens() {
 		return getNextNameFilterToken() != null;
 	}
 
-	public synchronized boolean replaceToken(SearchToken oldToken, SearchToken newToken) {
+	public boolean replaceToken(SearchToken oldToken, SearchToken newToken) {
 		int index = tokens.indexOf(oldToken);
 		if (index != -1) {
 			tokens.set(index, newToken);
@@ -123,11 +139,11 @@ public class SearchString {
 		return false;
 	}
 
-	public synchronized Map<TokenType, SearchToken> getResolvedTokens() {
-		Map<TokenType, SearchToken> map = new HashMap<>();
+	public Map<SearchObjectType, SearchToken> getObjectTokens() {
+		Map<SearchObjectType, SearchToken> map = new HashMap<>();
 		for (SearchToken token : tokens) {
-			if (token.getType() != SearchToken.TokenType.NAME_FILTER) {
-				map.put(token.getType(), token);
+			if (token.getType() == TokenType.SEARCH_OBJECT) {
+				map.put(token.getSearchObject().getType(), token);
 			}
 		}
 		return map;
