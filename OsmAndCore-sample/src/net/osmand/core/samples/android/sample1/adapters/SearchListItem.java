@@ -3,52 +3,49 @@ package net.osmand.core.samples.android.sample1.adapters;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.core.samples.android.sample1.SampleApplication;
-import net.osmand.core.samples.android.sample1.search.items.AddressSearchItem;
-import net.osmand.core.samples.android.sample1.search.items.AmenitySearchItem;
-import net.osmand.core.samples.android.sample1.search.items.SearchItem;
+import net.osmand.core.samples.android.sample1.search.objects.CitySearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.PostcodeSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.StreetSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.VillageSearchObject;
 
 public class SearchListItem {
 
 	protected SampleApplication app;
-	private SearchItem searchItem;
+	private SearchObject searchObject;
 
-	public SearchListItem(SampleApplication app, SearchItem searchItem) {
+	public SearchListItem(SampleApplication app, SearchObject searchObject) {
 		this.app = app;
-		this.searchItem = searchItem;
+		this.searchObject = searchObject;
 	}
 
-	public static SearchListItem buildListItem(SampleApplication app, SearchItem item) {
-
-		if (item instanceof AmenitySearchItem) {
-			return new AmenitySearchListItem(app, (AmenitySearchItem) item);
-		} else if (item instanceof AddressSearchItem) {
-			return new AddressSearchListItem(app, (AddressSearchItem) item);
+	public static SearchListItem buildListItem(SampleApplication app, SearchObject item) {
+		switch (item.getType()) {
+			case POI:
+				return new PoiSearchListItem(app, (PoiSearchObject) item);
+			case STREET:
+				return new StreetSearchListItem(app, (StreetSearchObject) item);
+			case CITY:
+				return new CitySearchListItem(app, (CitySearchObject) item);
+			case VILLAGE:
+				return new VillageSearchListItem(app, (VillageSearchObject) item);
+			case POSTCODE:
+				return new PostcodeSearchListItem(app, (PostcodeSearchObject) item);
 		}
 		return null;
 	}
 
-	public double getLatitude() {
-		return searchItem.getLatitude();
-	}
-
-	public double getLongitude() {
-		return searchItem.getLongitude();
+	protected SearchObject getSearchObject() {
+		return searchObject;
 	}
 
 	public String getName() {
-		return searchItem.getName();
+		return searchObject.getNativeName();
 	}
 
-	public String getType() {
-		return searchItem.getType();
-	}
-
-	public double getDistance() {
-		return searchItem.getDistance();
-	}
-
-	public void setDistance(double distance) {
-		searchItem.setDistance(distance);
+	public String getTypeName() {
+		return searchObject.getType().name();
 	}
 
 	public Drawable getIcon() {

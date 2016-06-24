@@ -25,8 +25,11 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 	public void updateDistance(double latitude, double longitude) {
 		for (int i = 0; i < getCount(); i++) {
 			SearchListItem item = getItem(i);
-			item.setDistance(Utilities.distance(
-					longitude, latitude, item.getLongitude(), item.getLatitude()));
+			if (item instanceof SearchListPositionItem) {
+				SearchListPositionItem positionItem = (SearchListPositionItem) item;
+				positionItem.setDistance(Utilities.distance(
+						longitude, latitude, positionItem.getLongitude(), positionItem.getLatitude()));
+			}
 		}
 	}
 
@@ -51,11 +54,17 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 
 		imageView.setImageDrawable(listItem.getIcon());
 		title.setText(listItem.getName());
-		subtitle.setText(listItem.getType());
-		if (listItem.getDistance() == 0) {
-			distance.setText("");
+		subtitle.setText(listItem.getTypeName());
+		if (listItem instanceof SearchListPositionItem) {
+			SearchListPositionItem positionItem = (SearchListPositionItem) listItem;
+			if (positionItem.getDistance() == 0) {
+				distance.setText("");
+			} else {
+				distance.setText(Utils.getFormattedDistance(positionItem.getDistance()));
+			}
+			distance.setVisibility(View.VISIBLE);
 		} else {
-			distance.setText(Utils.getFormattedDistance(listItem.getDistance()));
+			distance.setVisibility(View.INVISIBLE);
 		}
 		return view;
 	}

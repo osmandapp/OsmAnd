@@ -43,13 +43,12 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
 import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
+import net.osmand.core.samples.android.sample1.adapters.SearchListPositionItem;
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
-import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchCallback;
-import net.osmand.core.samples.android.sample1.search.items.SearchItem;
+import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -84,7 +83,7 @@ public class MainActivity extends Activity {
 	private SearchAPI searchAPI;
 	private ListView searchListView;
 	private SearchListAdapter adapter;
-	private final static int MAX_SEARCH_RESULTS_CORE = 500;
+	private final static int MAX_SEARCH_RESULTS_CORE = 300;
 	private final static int MAX_SEARCH_RESULTS_IU = 50;
 
 	// Germany
@@ -204,7 +203,7 @@ public class MainActivity extends Activity {
 
 		//Setup search
 
-		searchAPI = new SearchAPI(obfsCollection);
+		searchAPI = new SearchAPI(obfsCollection, MapUtils.LANGUAGE);
 
 		final EditText searchEditText = (EditText) findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {
@@ -218,9 +217,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if (s.length() > 2) {
-					runSearch(getScreenBounds31(), s.toString());
-				}
+				runSearch(getScreenCenter31(), getScreenBounds31(), s.toString());
 			}
 		});
 		searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -255,9 +252,13 @@ public class MainActivity extends Activity {
 				hideSearchList();
 				mapView.requestFocus();
 				SearchListItem item = adapter.getItem(position);
-				PointI target = Utilities.convertLatLonTo31(new LatLon(item.getLatitude(), item.getLongitude()));
-				setTarget(target);
-				setZoom(17f);
+				if (item instanceof SearchListPositionItem) {
+					SearchListPositionItem positionItem = (SearchListPositionItem) item;
+					PointI target = Utilities.convertLatLonTo31(
+							new LatLon(positionItem.getLatitude(), positionItem.getLongitude()));
+					setTarget(target);
+					setZoom(17f);
+				}
 			}
 		});
 
@@ -287,6 +288,12 @@ public class MainActivity extends Activity {
 
 	public SampleApplication getSampleApplication() {
 		return (SampleApplication) getApplication();
+	}
+
+	private PointI getScreenCenter31() {
+		PointI point = new PointI();
+		mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth() / 2, mapView.getHeight() / 2), point);
+		return point;
 	}
 
 	private AreaI getScreenBounds31() {
@@ -398,33 +405,31 @@ public class MainActivity extends Activity {
 				|| gestureDetector.onTouchEvent(event);
 	}
 
-	private void runSearch(AreaI bounds31, String keyword) {
+	private void runSearch(PointI position31, AreaI bounds31, String keyword) {
 
+		searchAPI.setSearchLocation31(position31);
 		searchAPI.setObfAreaFilter(bounds31);
 		searchAPI.startSearch(keyword, MAX_SEARCH_RESULTS_CORE,
 				// Intermediate search callback
-				new SearchCallback() {
+				new SearchApiCallback() {
 					@Override
-					public void onSearchFinished(List<SearchItem> searchItems) {
-						processSearchResult(searchItems);
+					public void onSearchFinished(List<SearchObject> searchObjects) {
+						processSearchResult(searchObjects);
 					}
 				},
 				// Core search callback
-				new SearchCallback() {
+				new SearchApiCallback() {
 					@Override
-					public void onSearchFinished(List<SearchItem> searchItems) {
-						processSearchResult(searchItems);
+					public void onSearchFinished(List<SearchObject> searchObjects) {
+						processSearchResult(searchObjects);
 					}
 				});
 	}
 
-	private void processSearchResult(List<SearchItem> searchItems) {
-		if (searchItems != null) {
-			LatLon latLon = Utilities.convert31ToLatLon(target31);
-			double latitude = latLon.getLatitude();
-			double longitude = latLon.getLongitude();
+	private void processSearchResult(List<SearchObject> searchObjects) {
+		if (searchObjects != null) {
 			List<SearchListItem> rows = new ArrayList<>();
-			for (SearchItem item : searchItems) {
+			for (SearchObject item : searchObjects) {
 				SearchListItem listItem =
 						SearchListItem.buildListItem((SampleApplication)getApplication(), item);
 				if (listItem != null) {
