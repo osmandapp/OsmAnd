@@ -2191,4 +2191,8 @@
     <string name="lang_hu_formal">Ungerska (formell)</string>
     <string name="lang_es_us">Spanska (amerikansk)</string>
     <string name="lang_ast">Asturiska</string>
+    <string name="access_direction_audio_feedback_descr">Ange riktningen till målet med ljud</string>
+    <string name="access_direction_haptic_feedback_descr">Ange riktningen till målet med vibration</string>
+    <string name="access_direction_audio_feedback">Riktning (ljudåterkoppling)</string>
+    <string name="access_direction_haptic_feedback">Riktning (vibrationsåterkoppling)</string>
     </resources>
