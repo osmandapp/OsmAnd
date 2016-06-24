@@ -234,7 +234,7 @@ public class GeocodingUtilities {
 	}
 
 	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult road, BinaryMapIndexReader reader,
-			double knownMinBuidlingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
+			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		// test address index search
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
 		final List<String> streetNamePacked = prepareStreetName(road.streetName);
@@ -297,14 +297,14 @@ public class GeocodingUtilities {
 				Collections.sort(streetBuildings, DISTANCE_COMPARATOR);
 				if (streetBuildings.size() > 0) {
 					Iterator<GeocodingResult> it = streetBuildings.iterator();
-					if (knownMinBuidlingDistance == 0) {
+					if (knownMinBuildingDistance == 0) {
 						GeocodingResult firstBld = it.next();
-						knownMinBuidlingDistance = firstBld.getDistance();
+						knownMinBuildingDistance = firstBld.getDistance();
 						res.add(firstBld);
 					}
 					while (it.hasNext()) {
 						GeocodingResult nextBld = it.next();
-						if (nextBld.getDistance() > knownMinBuidlingDistance
+						if (nextBld.getDistance() > knownMinBuildingDistance
 								* THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER) {
 							break;
 						}
