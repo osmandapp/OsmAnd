@@ -1536,7 +1536,7 @@
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pobliskie ulubione</string>
-    <string name="speak_poi">Pobliskie Miejsca</string>
+    <string name="speak_poi">Pobliskie Użyteczne Miejsca</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
@@ -1973,7 +1973,7 @@
     <string name="first_usage_item_description">Jak pobrać mapy, ustawić podstawowe ustawienia</string>
     <string name="navigation_item_description">Konfiguracja nawigacja</string>
     <string name="planning_trip_item">Planowanie podróży</string>
-    <string name="faq_item">FAQ</string>
+    <string name="faq_item">Częste pytania</string>
     <string name="faq_item_description">Często zadawane pytania</string>
     <string name="map_viewing_item">Przeglądanie map</string>
     <string name="search_on_the_map_item">Wyszukiwanie na mapie</string>
