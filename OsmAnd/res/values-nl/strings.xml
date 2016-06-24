@@ -1844,7 +1844,7 @@
     <string name="rendering_value_disabled_name">Uitgeschakeld</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kleuren naar afstandscategorie</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kleuring volgens OSMC</string>
-    <string name="osmo_share_my_location">Deel Huidige Positie</string>
+    <string name="osmo_share_my_location">Deel huidige positie</string>
     <string name="shared_string_logoff">Uitloggen</string>
     <string name="gps_network_not_enabled">Locatiedienst is niet ingeschakeld. Wil je ze aanzetten?</string>
     <string name="read_full_article">Lees volledig artikel (online)</string>
@@ -2280,7 +2280,7 @@
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="map_widget_battery">Accuniveau</string>
     <string name="lang_hu_formal">Hongaars (formeel)</string>
-    <string name="current_track">Huidige track</string>
+    <string name="current_track">Huidig pad</string>
     <string name="change_markers_position">Verschuif markering</string>
     <string name="lang_es_us">Spaans (Amerikaans)</string>
     <string name="lang_be_BY">Wit-Russisch (latijns)</string>
