@@ -7,30 +7,51 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/clearButton"
-            style="@style/Widget.AppCompat.ActionButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:contentDescription="@string/shared_string_close"
-            android:src="@drawable/ic_action_remove_dark"/>
-
-        <EditText
-            android:id="@+id/searchEditText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:background="@null"
-            android:hint="@string/search_hint"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/clearButton"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/shared_string_close"
+                android:src="@drawable/ic_action_remove_dark"/>
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/search_hint"
+                android:lines="1"
+                android:textColor="@color/titleTextColor"
+                tools:text="Search request"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/searchDetailsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center_vertical"
             android:lines="1"
             android:textColor="@color/titleTextColor"
-            tools:text="Search request"/>
+            android:visibility="gone"
+            tools:text="City • Street"
+            tools:visibility="visible"/>
+
     </LinearLayout>
 
     <FrameLayout
@@ -41,10 +62,10 @@
 
         <net.osmand.core.android.AtlasMapRendererView
             android:id="@+id/mapRendererView"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -111,8 +132,8 @@
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawSelectorOnTop="true"
             android:background="@color/listBackgroundColor"
+            android:drawSelectorOnTop="true"
             android:visibility="gone"/>
 
     </FrameLayout>

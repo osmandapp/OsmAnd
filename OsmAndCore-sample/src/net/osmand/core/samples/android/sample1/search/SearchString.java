@@ -1,13 +1,18 @@
 package net.osmand.core.samples.android.sample1.search;
 
+import android.support.annotation.NonNull;
+
+import net.osmand.core.samples.android.sample1.MapUtils;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
 import net.osmand.core.samples.android.sample1.search.tokens.NameFilterSearchToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken.TokenType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,12 +20,14 @@ public class SearchString {
 
 	private String queryText = "";
 	private List<SearchToken> tokens = new ArrayList<>();
+	private String lang;
 
-	public SearchString() {
+	public SearchString(String lang) {
+		this.lang = lang;
 	}
 
 	public SearchString copy() {
-		SearchString res = new SearchString();
+		SearchString res = new SearchString(lang);
 		res.queryText = queryText;
 		res.tokens = new ArrayList<>(tokens);
 		return res;
@@ -91,6 +98,23 @@ public class SearchString {
 		this.queryText = queryText;
 	}
 
+	public void completeQuery(@NonNull SearchObject searchObject) {
+		String newQueryText;
+		String objectName = searchObject.getName(lang);
+		int startIndex;
+		SearchToken lastToken = getLastToken();
+		if (lastToken.hasEmptyQuery()) {
+			startIndex = queryText.length();
+			newQueryText = queryText + objectName + " ";
+		} else {
+			startIndex = lastToken.getStartIndex();
+			newQueryText = queryText.substring(0, startIndex) + objectName + " ";
+		}
+		ObjectSearchToken token = new ObjectSearchToken(startIndex, objectName, searchObject);
+		tokens.set(tokens.size() - 1, token);
+		queryText = newQueryText;
+	}
+
 	private boolean endWithDelimeter(String text) {
 		return !Algorithms.isEmpty(text) && isDelimiterChar(text.charAt(text.length() - 1));
 	}
@@ -104,13 +128,13 @@ public class SearchString {
 		return c == ',' || c == ' ';
 	}
 
-	public SearchToken getNextNameFilterToken() {
-		SearchToken res = null;
+	public NameFilterSearchToken getNextNameFilterToken() {
+		NameFilterSearchToken res = null;
 		if (!tokens.isEmpty()) {
 			for (int i = tokens.size() - 1; i >= 0; i--) {
 			    SearchToken token = tokens.get(i);
 				if (token.getType() == TokenType.NAME_FILTER) {
-					res = token;
+					res = (NameFilterSearchToken) token;
 				} else {
 					break;
 				}
@@ -126,8 +150,19 @@ public class SearchString {
 		return null;
 	}
 
-	public boolean hasNameFilterTokens() {
-		return getNextNameFilterToken() != null;
+	public ObjectSearchToken getLastObjectToken() {
+		ObjectSearchToken res = null;
+		if (!tokens.isEmpty()) {
+			for (int i = tokens.size() - 1; i >= 0; i--) {
+				SearchToken token = tokens.get(i);
+				if (token.getType() == TokenType.SEARCH_OBJECT) {
+					res = (ObjectSearchToken) token;
+				} else {
+					break;
+				}
+			}
+		}
+		return res;
 	}
 
 	public boolean replaceToken(SearchToken oldToken, SearchToken newToken) {
@@ -140,7 +175,7 @@ public class SearchString {
 	}
 
 	public Map<SearchObjectType, SearchToken> getObjectTokens() {
-		Map<SearchObjectType, SearchToken> map = new HashMap<>();
+		Map<SearchObjectType, SearchToken> map = new LinkedHashMap<>();
 		for (SearchToken token : tokens) {
 			if (token.getType() == TokenType.SEARCH_OBJECT) {
 				map.put(token.getSearchObject().getType(), token);
@@ -151,7 +186,7 @@ public class SearchString {
 
 	public static void main(String[] args){
 		//test
-		SearchString searchString = new SearchString();
+		SearchString searchString = new SearchString(MapUtils.LANGUAGE);
 		searchString.setQueryText("cit");
 		searchString.setQueryText("city");
 		searchString.setQueryText("city ");

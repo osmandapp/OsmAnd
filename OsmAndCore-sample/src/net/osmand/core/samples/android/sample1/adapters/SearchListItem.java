@@ -36,7 +36,7 @@ public class SearchListItem {
 		return null;
 	}
 
-	protected SearchObject getSearchObject() {
+	public SearchObject getSearchObject() {
 		return searchObject;
 	}
 

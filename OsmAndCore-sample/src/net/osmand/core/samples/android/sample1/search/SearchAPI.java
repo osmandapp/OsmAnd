@@ -6,6 +6,7 @@ import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
 import net.osmand.core.samples.android.sample1.search.requests.CoreSearchRequest;
 import net.osmand.core.samples.android.sample1.search.requests.IntermediateSearchRequest;
 import net.osmand.core.samples.android.sample1.search.requests.SearchRequest;
@@ -13,6 +14,7 @@ import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SearchAPI {
 
@@ -51,7 +53,7 @@ public class SearchAPI {
 	public SearchAPI(@NonNull ObfsCollection obfsCollection, String lang) {
 		this.obfsCollection = obfsCollection;
 		this.executor = new SearchRequestExecutor();
-		this.searchString = new SearchString();
+		this.searchString = new SearchString(lang);
 		this.lang = lang;
 	}
 
@@ -107,11 +109,31 @@ public class SearchAPI {
 		this.searchObjects = searchObjects;
 	}
 
+	public Map<SearchObjectType, SearchToken> getObjectTokens() {
+		return searchString.getObjectTokens();
+	}
+
 	public void startSearch(String query, int maxSearchResults,
 							SearchApiCallback intermediateSearchCallback,
 							SearchApiCallback coreSearchCallback) {
 
 		searchString.setQueryText(query);
+		startSearchInternal(maxSearchResults, intermediateSearchCallback, coreSearchCallback);
+	}
+
+	public String completeSearch(SearchObject searchObject, int maxSearchResults,
+							   SearchApiCallback intermediateSearchCallback,
+							   SearchApiCallback coreSearchCallback) {
+
+		searchString.completeQuery(searchObject);
+		startSearchInternal(maxSearchResults, intermediateSearchCallback, coreSearchCallback);
+		return searchString.getQueryText();
+	}
+
+	private void startSearchInternal(int maxSearchResults,
+							SearchApiCallback intermediateSearchCallback,
+							SearchApiCallback coreSearchCallback) {
+
 		SearchScope searchScope = new SearchScope(this);
 		IntermediateSearchRequest intermediateSearchRequest = null;
 		if (searchObjects != null && !searchObjects.isEmpty()) {

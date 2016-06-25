@@ -17,7 +17,6 @@ import net.osmand.core.samples.android.sample1.search.objects.StreetGroupSearchO
 import net.osmand.core.samples.android.sample1.search.objects.StreetSearchObject;
 import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
-import net.osmand.util.Algorithms;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -125,7 +124,7 @@ public class SearchScope {
 			});
 
 			if (token.getType() == SearchToken.TokenType.NAME_FILTER
-					&& !Algorithms.isEmpty(token.getQueryText())) {
+					&& !token.hasEmptyQuery()) {
 				newToken = new ObjectSearchToken(token, searchObjects.get(0));
 			}
 		}

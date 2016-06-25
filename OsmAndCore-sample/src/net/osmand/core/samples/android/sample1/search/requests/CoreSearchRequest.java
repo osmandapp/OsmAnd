@@ -19,8 +19,9 @@ import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObjectsHelper;
 import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
+import net.osmand.core.samples.android.sample1.search.tokens.NameFilterSearchToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,10 +85,9 @@ public class CoreSearchRequest extends SearchRequest {
 
 		SearchString searchString = searchScope.getSearchString();
 		SearchToken lastToken = searchString.getLastToken();
-		SearchToken token = searchString.getNextNameFilterToken();
+		NameFilterSearchToken token = searchString.getNextNameFilterToken();
 		while (token != null && !cancelled) {
-			if (token.getType() == SearchToken.TokenType.NAME_FILTER
-					&& !Algorithms.isEmpty(token.getQueryText())) {
+			if (!token.hasEmptyQuery()) {
 				res = doCoreSearch(token);
 			}
 			if (token != lastToken) {
@@ -97,11 +97,26 @@ public class CoreSearchRequest extends SearchRequest {
 			}
 		}
 
+		if (lastToken == null || lastToken.hasEmptyQuery()) {
+			// todo 2.4
+			// 2.4 Search considered to be complete if there no NF in the end (not finished or not regonized objects)
+			ObjectSearchToken lastObjectToken = searchString.getLastObjectToken();
+			if (lastObjectToken == null) {
+				//		Last object = [] - none. We display list of poi categories (recents separate tab)
+			} else {
+				//		Last object - poi category/poi filter/poi type. Display: poi filters (if it is poi category & pois around location (if it is specified in query by any previous object) + Search more radius
+				//		For example: Leiden ice hockey, we display all ice hockey around Leiden
+				//		Last object - City. Display (list of streets could be quite long)
+				//		Last object - Street. Display building and intersetcting street
+				//		Last object - Postcode. Display building and streets
+				//		Last object - Building/POI - object is found
+			}
+		}
+
 		return res;
 	}
 
 	private List<SearchObject> doCoreSearch(@NonNull SearchToken token) {
-		System.out.println("=== Start search");
 		amenityResultsCounter = 0;
 		addressResultsCounter = 0;
 
@@ -125,7 +140,6 @@ public class CoreSearchRequest extends SearchRequest {
 				if (searchScope.processPoiSearchObject(amenitySearchItem)) {
 					searchObjects.add(amenitySearchItem);
 				}
-				System.out.println("Poi found === " + amenitySearchItem.toString());
 				amenityResultsCounter++;
 			}
 		};
@@ -148,7 +162,6 @@ public class CoreSearchRequest extends SearchRequest {
 					if (searchScope.processAddressSearchObject(addressSearchObject)) {
 						searchObjects.add(addressSearchObject);
 					}
-					System.out.println("Address found === " + addressSearchObject.toString());
 					addressResultsCounter++;
 				}
 			}
@@ -176,8 +189,6 @@ public class CoreSearchRequest extends SearchRequest {
 				internalCallback.onNewTokenFound(token, newToken);
 			}
 		}
-
-		System.out.println("=== Finish search");
 
 		return searchObjects;
 	}

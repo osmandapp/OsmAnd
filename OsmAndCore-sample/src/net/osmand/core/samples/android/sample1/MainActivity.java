@@ -47,9 +47,12 @@ import net.osmand.core.samples.android.sample1.adapters.SearchListPositionItem;
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
+import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends Activity {
     private static final String TAG = "OsmAndCoreSample";
@@ -81,8 +84,11 @@ public class MainActivity extends Activity {
 	private MultiTouchSupport multiTouchSupport;
 
 	private SearchAPI searchAPI;
+	private EditText searchEditText;
+	private TextView searchDetailsText;
 	private ListView searchListView;
 	private SearchListAdapter adapter;
+	private String queryText = "";
 	private final static int MAX_SEARCH_RESULTS_CORE = 300;
 	private final static int MAX_SEARCH_RESULTS_IU = 50;
 
@@ -103,6 +109,34 @@ public class MainActivity extends Activity {
 	private static final String PREF_MAP_AZIMUTH = "MAP_AZIMUTH";
 	private static final String PREF_MAP_ZOOM = "MAP_ZOOM";
 	private static final String PREF_MAP_ELEVATION_ANGLE = "MAP_ELEVATION_ANGLE";
+
+	private SearchApiCallback intermediateSearchCallback = new SearchApiCallback() {
+		@Override
+		public void onSearchFinished(List<SearchObject> searchObjects) {
+			processSearchResult(searchObjects);
+		}
+	};
+
+	private SearchApiCallback coreSearchCallback = new SearchApiCallback() {
+		@Override
+		public void onSearchFinished(List<SearchObject> searchObjects) {
+			processSearchResult(searchObjects);
+			StringBuilder sb = new StringBuilder();
+			Map<SearchObjectType, SearchToken> objectTokensMap = searchAPI.getObjectTokens();
+			for (SearchToken token : objectTokensMap.values()) {
+				if (sb.length() > 0) {
+					sb.append(" • ");
+				}
+				sb.append(token.getSearchObject().getName(MapUtils.LANGUAGE));
+			}
+			if (sb.length() == 0) {
+				searchDetailsText.setVisibility(View.GONE);
+			} else {
+				searchDetailsText.setText(sb.toString());
+				searchDetailsText.setVisibility(View.VISIBLE);
+			}
+		}
+	};
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,7 +239,7 @@ public class MainActivity extends Activity {
 
 		searchAPI = new SearchAPI(obfsCollection, MapUtils.LANGUAGE);
 
-		final EditText searchEditText = (EditText) findViewById(R.id.searchEditText);
+		searchEditText = (EditText) findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -217,7 +251,11 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				runSearch(getScreenCenter31(), getScreenBounds31(), s.toString());
+				String newQueryText = s.toString();
+				if (!queryText.equalsIgnoreCase(newQueryText)) {
+					queryText = newQueryText;
+					runSearch(getScreenCenter31(), getScreenBounds31(), queryText);
+				}
 			}
 		});
 		searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -231,6 +269,8 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+
+		searchDetailsText = (TextView) findViewById(R.id.searchDetailsText);
 
 		ImageButton clearButton = (ImageButton) findViewById(R.id.clearButton);
 		clearButton.setOnClickListener(new View.OnClickListener() {
@@ -249,15 +289,18 @@ public class MainActivity extends Activity {
 		searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				hideSearchList();
-				mapView.requestFocus();
 				SearchListItem item = adapter.getItem(position);
-				if (item instanceof SearchListPositionItem) {
-					SearchListPositionItem positionItem = (SearchListPositionItem) item;
-					PointI target = Utilities.convertLatLonTo31(
-							new LatLon(positionItem.getLatitude(), positionItem.getLongitude()));
-					setTarget(target);
-					setZoom(17f);
+				SearchObject searchObject = item.getSearchObject();
+				if (searchObject.getType() == SearchObjectType.POI
+						|| searchObject.getType() == SearchObjectType.BUILDING
+						|| searchObject.getType() == SearchObjectType.COORDINATES) {
+					// show on map
+					hideSearchList();
+					mapView.requestFocus();
+					showOnMap((SearchListPositionItem) item);
+				} else {
+					// complete search query with selected object
+					completeQueryWithObject(item.getSearchObject());
 				}
 			}
 		});
@@ -288,6 +331,13 @@ public class MainActivity extends Activity {
 
 	public SampleApplication getSampleApplication() {
 		return (SampleApplication) getApplication();
+	}
+
+	private void showOnMap(SearchListPositionItem positionItem) {
+		PointI target = Utilities.convertLatLonTo31(
+				new LatLon(positionItem.getLatitude(), positionItem.getLongitude()));
+		setTarget(target);
+		setZoom(17f);
 	}
 
 	private PointI getScreenCenter31() {
@@ -410,20 +460,14 @@ public class MainActivity extends Activity {
 		searchAPI.setSearchLocation31(position31);
 		searchAPI.setObfAreaFilter(bounds31);
 		searchAPI.startSearch(keyword, MAX_SEARCH_RESULTS_CORE,
-				// Intermediate search callback
-				new SearchApiCallback() {
-					@Override
-					public void onSearchFinished(List<SearchObject> searchObjects) {
-						processSearchResult(searchObjects);
-					}
-				},
-				// Core search callback
-				new SearchApiCallback() {
-					@Override
-					public void onSearchFinished(List<SearchObject> searchObjects) {
-						processSearchResult(searchObjects);
-					}
-				});
+				intermediateSearchCallback, coreSearchCallback);
+	}
+
+	private void completeQueryWithObject(SearchObject searchObject) {
+		queryText = searchAPI.completeSearch(searchObject, MAX_SEARCH_RESULTS_CORE,
+				intermediateSearchCallback, coreSearchCallback);
+		searchEditText.setText(queryText);
+		searchEditText.setSelection(queryText.length());
 	}
 
 	private void processSearchResult(List<SearchObject> searchObjects) {

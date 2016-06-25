@@ -1,6 +1,7 @@
 package net.osmand.core.samples.android.sample1.search.tokens;
 
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
+import net.osmand.util.Algorithms;
 
 public abstract class SearchToken {
 
@@ -29,10 +30,6 @@ public abstract class SearchToken {
 		return startIndex;
 	}
 
-	public void setStartIndex(int startIndex) {
-		this.startIndex = startIndex;
-	}
-
 	public String getQueryText() {
 		return queryText;
 	}
@@ -41,11 +38,11 @@ public abstract class SearchToken {
 		return startIndex + queryText.length() - 1;
 	}
 
-	public int getQueryTextLenght() {
-		return queryText.length();
-	}
-
 	public SearchObject getSearchObject() {
 		return searchObject;
+	}
+
+	public boolean hasEmptyQuery() {
+		return Algorithms.isEmpty(queryText);
 	}
 }
