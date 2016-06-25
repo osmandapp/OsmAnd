@@ -17,6 +17,39 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/searchProgressBar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_search_dark"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/search_hint"
+                android:lines="1"
+                android:textColor="@color/titleTextColor"
+                tools:text="Search request"/>
+
             <ImageButton
                 android:id="@+id/clearButton"
                 style="@style/Widget.AppCompat.ActionButton"
@@ -25,24 +58,13 @@
                 android:contentDescription="@string/shared_string_close"
                 android:src="@drawable/ic_action_remove_dark"/>
 
-            <EditText
-                android:id="@+id/searchEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
-                android:background="@null"
-                android:gravity="center_vertical"
-                android:hint="@string/search_hint"
-                android:lines="1"
-                android:textColor="@color/titleTextColor"
-                tools:text="Search request"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/searchDetailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="64dp"
+            android:layout_marginLeft="56dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center_vertical"

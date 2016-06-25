@@ -19,7 +19,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.core.android.AtlasMapRendererView;
@@ -85,13 +87,17 @@ public class MainActivity extends Activity {
 	private MultiTouchSupport multiTouchSupport;
 
 	private SearchAPI searchAPI;
+
 	private EditText searchEditText;
 	private TextView searchDetailsText;
+	private ImageView searchIcon;
+	private ProgressBar progressBar;
+
 	private ListView searchListView;
 	private SearchListAdapter adapter;
 	private String queryText = "";
 	private final static int MAX_SEARCH_RESULTS_CORE = 0;
-	private final static int MAX_SEARCH_RESULTS_IU = 50;
+	private final static int MAX_SEARCH_RESULTS_IU = 150;
 
 	// Germany
 	private final static float INIT_LAT = 49.353953f;
@@ -143,6 +149,7 @@ public class MainActivity extends Activity {
 				searchDetailsText.setText(sb.toString());
 				searchDetailsText.setVisibility(View.VISIBLE);
 			}
+			hideProgressBar();
 		}
 	};
 
@@ -262,6 +269,7 @@ public class MainActivity extends Activity {
 				String newQueryText = s.toString();
 				if (!queryText.equalsIgnoreCase(newQueryText)) {
 					queryText = newQueryText;
+					showProgressBar();
 					runSearch(getScreenCenter31(), getScreenBounds31(), queryText);
 				}
 			}
@@ -279,6 +287,8 @@ public class MainActivity extends Activity {
 		});
 
 		searchDetailsText = (TextView) findViewById(R.id.searchDetailsText);
+		searchIcon = (ImageView) findViewById(R.id.searchIcon);
+		progressBar = (ProgressBar) findViewById(R.id.searchProgressBar);
 
 		ImageButton clearButton = (ImageButton) findViewById(R.id.clearButton);
 		clearButton.setOnClickListener(new View.OnClickListener() {
@@ -360,6 +370,16 @@ public class MainActivity extends Activity {
 		mapView.getLocationFromScreenPoint(new PointI(0, 0), topLeftPoint);
 		mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth(), mapView.getHeight()), bottomRightPoint);
 		return new AreaI(topLeftPoint, bottomRightPoint);
+	}
+
+	private void showProgressBar() {
+		searchIcon.setVisibility(View.GONE);
+		progressBar.setVisibility(View.VISIBLE);
+	}
+
+	private void hideProgressBar() {
+		progressBar.setVisibility(View.GONE);
+		searchIcon.setVisibility(View.VISIBLE);
 	}
 
 	private boolean isSearchListHidden() {
