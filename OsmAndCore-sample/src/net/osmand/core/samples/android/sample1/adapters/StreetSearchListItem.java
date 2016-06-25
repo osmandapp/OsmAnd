@@ -29,7 +29,7 @@ public class StreetSearchListItem extends SearchListPositionItem {
 			try {
 				typeStr = streetGroup.getSubtype().name();
 			} catch (IllegalArgumentException e) {
-				typeStr = "Out of type";
+				typeStr = "Out of subtype";
 			}
 		} else {
 			try {

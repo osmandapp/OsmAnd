@@ -48,6 +48,7 @@ import net.osmand.core.samples.android.sample1.search.SearchAPI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.ArrayList;
@@ -123,11 +124,18 @@ public class MainActivity extends Activity {
 			processSearchResult(searchObjects);
 			StringBuilder sb = new StringBuilder();
 			Map<SearchObjectType, SearchToken> objectTokensMap = searchAPI.getObjectTokens();
+			ObjectSearchToken lastObjectToken = searchAPI.getLastObjectToken();
 			for (SearchToken token : objectTokensMap.values()) {
 				if (sb.length() > 0) {
 					sb.append(" • ");
 				}
 				sb.append(token.getSearchObject().getName(MapUtils.LANGUAGE));
+			}
+			if (lastObjectToken != null && lastObjectToken.isSuggestion()) {
+				if (sb.length() > 0) {
+					sb.append(" • ");
+				}
+				sb.append(lastObjectToken.getSearchObject().getName(MapUtils.LANGUAGE));
 			}
 			if (sb.length() == 0) {
 				searchDetailsText.setVisibility(View.GONE);

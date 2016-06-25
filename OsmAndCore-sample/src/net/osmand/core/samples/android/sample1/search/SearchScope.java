@@ -20,6 +20,7 @@ import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class SearchScope {
 		obfsCollection = searchAPI.getObfsCollection();
 		lang = searchAPI.getLang();
 		searchString = searchAPI.getSearchStringCopy();
-		objectTokens = searchString.getObjectTokens();
+		objectTokens = searchString.getCompleteObjectTokens();
 		searchLocation31 = searchAPI.getSearchLocation31();
 		searchableArea = searchAPI.getSearchableArea();
 		obfAreaFilter = searchAPI.getObfAreaFilter();
@@ -67,10 +68,6 @@ public class SearchScope {
 
 	public SearchString getSearchString() {
 		return searchString;
-	}
-
-	public Map<SearchObjectType, SearchToken> getObjectTokens() {
-		return objectTokens;
 	}
 
 	public PointI getSearchLocation31() {
@@ -123,73 +120,93 @@ public class SearchScope {
 				}
 			});
 
+			Iterator<SearchObject> it = searchObjects.iterator();
+			while (it.hasNext()) {
+				SearchObject searchObject = it.next();
+				boolean accept;
+				switch (searchObject.getType()) {
+					case POI:
+						accept = poiByNameCounter < resultLimitPoiByName;
+						if (accept) {
+							poiByNameCounter++;
+						}
+						break;
+					case CITY:
+					case VILLAGE:
+					case POSTCODE:
+						accept = cityByNameCounter < resultLimitCityByName;
+						if (accept) {
+							cityByNameCounter++;
+						}
+						break;
+
+					case STREET:
+						accept = streetByNameCounter < resultLimitStreetByName;
+						if (accept) {
+							streetByNameCounter++;
+						}
+					default:
+						accept = true;
+						break;
+				}
+				if (!accept) {
+					it.remove();
+				}
+			}
+
 			if (token.getType() == SearchToken.TokenType.NAME_FILTER
 					&& !token.hasEmptyQuery()) {
-				newToken = new ObjectSearchToken(token, searchObjects.get(0));
+				newToken = new ObjectSearchToken(token, searchObjects.get(0), true);
 			}
 		}
 		return newToken;
 	}
 
 	private boolean processSearchObject(SearchObject searchObject) {
-		boolean accept = true;
-		float priority = 0f;
+		double priority = 0d;
 		boolean sortByName = false;
 		switch (searchObject.getType()) {
 			case POI:
-				accept = poiByNameCounter < resultLimitPoiByName;
-				if (accept) {
-					poiByNameCounter++;
-					priority = getPriorityByDistance(10, ((PoiSearchObject) searchObject).getDistance());
-				}
+				priority = getPriorityByDistance(10, ((PoiSearchObject) searchObject).getDistance());
 				break;
 			case CITY:
 			case VILLAGE:
 			case POSTCODE:
-				accept = cityByNameCounter < resultLimitCityByName;
-				if (accept) {
-					cityByNameCounter++;
-					float cityType = getCityType((StreetGroupSearchObject) searchObject);
-					priority = (getPriorityByDistance(cityPostcodeSelected
-							? 20f : 7f + cityType, ((StreetGroupSearchObject) searchObject).getDistance()));
-				}
+				float cityType = getCityType((StreetGroupSearchObject) searchObject);
+				priority = (getPriorityByDistance(cityPostcodeSelected
+						? 20f : 7f + cityType, ((StreetGroupSearchObject) searchObject).getDistance()));
 				break;
 
 			case STREET:
-				accept = streetByNameCounter < resultLimitStreetByName;
-				if (accept) {
-					streetByNameCounter++;
-					StreetSearchObject streetSearchObject = (StreetSearchObject) searchObject;
-					Street street = streetSearchObject.getStreet();
-					if (!cityPostcodeSelected) {
-						priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
-					} else {
-						boolean streetFromSelectedCity = false;
-						for (SearchToken st : objectTokens.values()) {
-							if (st.getSearchObject() instanceof StreetGroupSearchObject) {
-								StreetGroupSearchObject streetGroupSearchObject = (StreetGroupSearchObject) st.getSearchObject();
-								if (streetGroupSearchObject.getStreetGroup().getId().getId()
-										.equals(street.getStreetGroup().getId().getId())) {
-									streetFromSelectedCity = true;
-									break;
-								}
+				StreetSearchObject streetSearchObject = (StreetSearchObject) searchObject;
+				Street street = streetSearchObject.getStreet();
+				if (!cityPostcodeSelected) {
+					priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
+				} else {
+					boolean streetFromSelectedCity = false;
+					for (SearchToken st : objectTokens.values()) {
+						if (st.getSearchObject() instanceof StreetGroupSearchObject) {
+							StreetGroupSearchObject streetGroupSearchObject = (StreetGroupSearchObject) st.getSearchObject();
+							if (streetGroupSearchObject.getStreetGroup().getId().getId()
+									.equals(street.getStreetGroup().getId().getId())) {
+								streetFromSelectedCity = true;
+								break;
 							}
 						}
-						if (streetFromSelectedCity) {
-							priority = 3f;
-							sortByName = true;
-						} else {
-							priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
-						}
+					}
+					if (streetFromSelectedCity) {
+						priority = 3f;
+						sortByName = true;
+					} else {
+						priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
 					}
 				}
 				break;
 		}
-		if (accept) {
-			searchObject.setPriority(priority);
-			searchObject.setSortByName(sortByName);
-		}
-		return accept;
+		searchObject.setPriority(priority);
+		searchObject.setSortByName(sortByName);
+
+		return true;
 	}
 
 	private float getCityType(StreetGroupSearchObject searchObject) {
@@ -203,8 +220,8 @@ public class SearchScope {
 		return 2.5f;
 	}
 
-	private float getPriorityByDistance(float priority, double distance) {
-		return priority + 1f - (float)(1f / (1f + distance));
+	private double getPriorityByDistance(double priority, double distance) {
+		return priority + 1d - (1d / (1d + distance));
 	}
 
 	private void updateDistance(SearchPositionObject item) {

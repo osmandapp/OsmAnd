@@ -19,7 +19,7 @@ public abstract class SearchObject {
 	private SearchObjectType type;
 	private Object internalObject;
 
-	private float priority;
+	private double priority;
 	private boolean sortByName;
 
 	protected SearchObject(SearchObjectType type, Object internalObject) {
@@ -59,11 +59,11 @@ public abstract class SearchObject {
 		}
 	}
 
-	public float getPriority() {
+	public double getPriority() {
 		return priority;
 	}
 
-	public void setPriority(float priority) {
+	public void setPriority(double priority) {
 		this.priority = priority;
 	}
 

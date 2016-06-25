@@ -54,6 +54,7 @@ public class SearchString {
 				SearchToken token = tokens.get(i);
 				int lastTokenIndex = token.getLastIndex();
 				if (lastTokenIndex > newTextLength - 1
+						|| token.hasEmptyQuery()
 						|| (lastTokenIndex < newTextLength - 1 && !startWithDelimiter(queryText.substring(lastTokenIndex + 1)))) {
 					brokenTokenIndex = i;
 					break;
@@ -90,6 +91,10 @@ public class SearchString {
 				SearchToken token = new NameFilterSearchToken(firstWordIndex, queryText.substring(firstWordIndex));
 				tokens.add(token);
 			} else if (endWithDelimeter(queryText)) {
+				SearchToken lastToken = getLastToken();
+				if (lastToken.getType() == TokenType.SEARCH_OBJECT) {
+					((ObjectSearchToken) lastToken).applySuggestion();
+				}
 				SearchToken token = new NameFilterSearchToken(firstWordIndex, "");
 				tokens.add(token);
 			}
@@ -110,7 +115,7 @@ public class SearchString {
 			startIndex = lastToken.getStartIndex();
 			newQueryText = queryText.substring(0, startIndex) + objectName + " ";
 		}
-		ObjectSearchToken token = new ObjectSearchToken(startIndex, objectName, searchObject);
+		ObjectSearchToken token = new ObjectSearchToken(startIndex, objectName, searchObject, false);
 		tokens.set(tokens.size() - 1, token);
 		queryText = newQueryText;
 	}
@@ -157,7 +162,6 @@ public class SearchString {
 				SearchToken token = tokens.get(i);
 				if (token.getType() == TokenType.SEARCH_OBJECT) {
 					res = (ObjectSearchToken) token;
-				} else {
 					break;
 				}
 			}
@@ -174,10 +178,10 @@ public class SearchString {
 		return false;
 	}
 
-	public Map<SearchObjectType, SearchToken> getObjectTokens() {
+	public Map<SearchObjectType, SearchToken> getCompleteObjectTokens() {
 		Map<SearchObjectType, SearchToken> map = new LinkedHashMap<>();
 		for (SearchToken token : tokens) {
-			if (token.getType() == TokenType.SEARCH_OBJECT) {
+			if (token.getType() == TokenType.SEARCH_OBJECT && !((ObjectSearchToken)token).isSuggestion()) {
 				map.put(token.getSearchObject().getType(), token);
 			}
 		}
