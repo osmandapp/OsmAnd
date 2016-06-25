@@ -170,7 +170,7 @@ public class CoreSearchRequest extends SearchRequest {
 		amByNameSearch.performSearch(amenityByNameCriteria, amenityByNameResultCallback.getBinding(), new IQueryController() {
 			@Override
 			public boolean isAborted() {
-				return amenityResultsCounter >= maxSearchResults || cancelled;
+				return (maxSearchResults > 0 && amenityResultsCounter >= maxSearchResults) || cancelled;
 			}
 		});
 
@@ -178,7 +178,7 @@ public class CoreSearchRequest extends SearchRequest {
 			addrByNameSearch.performSearch(addrByNameCriteria, addrByNameResultCallback.getBinding(), new IQueryController() {
 				@Override
 				public boolean isAborted() {
-					return addressResultsCounter >= maxSearchResults || cancelled;
+					return (maxSearchResults > 0 && addressResultsCounter >= maxSearchResults) || cancelled;
 				}
 			});
 		}

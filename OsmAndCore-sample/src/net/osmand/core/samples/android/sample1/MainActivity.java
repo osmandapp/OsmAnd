@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 	private ListView searchListView;
 	private SearchListAdapter adapter;
 	private String queryText = "";
-	private final static int MAX_SEARCH_RESULTS_CORE = 300;
+	private final static int MAX_SEARCH_RESULTS_CORE = 0;
 	private final static int MAX_SEARCH_RESULTS_IU = 50;
 
 	// Germany

@@ -26,9 +26,17 @@ public class StreetSearchListItem extends SearchListPositionItem {
 	private String getTypeStr(StreetGroup streetGroup) {
 		String typeStr;
 		if (streetGroup.getSubtype() != ObfAddressStreetGroupSubtype.Unknown) {
-			typeStr = streetGroup.getSubtype().name();
+			try {
+				typeStr = streetGroup.getSubtype().name();
+			} catch (IllegalArgumentException e) {
+				typeStr = "Out of type";
+			}
 		} else {
-			typeStr = streetGroup.getType().name();
+			try {
+				typeStr = streetGroup.getType().name();
+			} catch (IllegalArgumentException e) {
+				typeStr = "Out of type";
+			}
 		}
 		return typeStr;
 	}
