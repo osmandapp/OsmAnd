@@ -34,6 +34,14 @@ public class SearchScope {
 	private AreaI searchableArea;
 	private AreaI obfAreaFilter;
 	private double searchRadius;
+	boolean cityPostcodeSelected;
+
+	private int resultLimitPoiByName = 25;
+	private int poiByNameCounter = 0;
+	private int resultLimitCityByName = 25;
+	private int cityByNameCounter = 0;
+	private int resultLimitStreetByName = 50;
+	private int streetByNameCounter = 0;
 
 	public SearchScope(SearchAPI searchAPI) {
 		obfsCollection = searchAPI.getObfsCollection();
@@ -44,6 +52,10 @@ public class SearchScope {
 		searchableArea = searchAPI.getSearchableArea();
 		obfAreaFilter = searchAPI.getObfAreaFilter();
 		searchRadius = searchAPI.getSearchRadius();
+
+		cityPostcodeSelected = objectTokens.containsKey(SearchObjectType.CITY)
+				|| objectTokens.containsKey(SearchObjectType.VILLAGE)
+				|| objectTokens.containsKey(SearchObjectType.POSTCODE);
 	}
 
 	public ObfsCollection getObfsCollection() {
@@ -88,67 +100,17 @@ public class SearchScope {
 
 	public boolean processPoiSearchObject(PoiSearchObject poiSearchObject) {
 		updateDistance(poiSearchObject);
-		return true;
+		return processSearchObject(poiSearchObject);
 	}
 
 	public boolean processAddressSearchObject(SearchPositionObject addressSearchObject) {
 		updateDistance(addressSearchObject);
-		return true;
+		return processSearchObject(addressSearchObject);
 	}
 
 	public SearchToken processSearchResult(SearchToken token, List<SearchObject> searchObjects) {
 
 		SearchToken newToken = null;
-
-		boolean cityVillagePostcodeSelected = objectTokens.containsKey(SearchObjectType.CITY)
-				|| objectTokens.containsKey(SearchObjectType.VILLAGE)
-				|| objectTokens.containsKey(SearchObjectType.POSTCODE);
-
-		for (SearchObject searchObject : searchObjects) {
-			float priority = 0f;
-			boolean sortByName = false;
-			switch (searchObject.getType()) {
-				case POI:
-					priority = getPriorityByDistance(10, ((PoiSearchObject) searchObject).getDistance());
-					break;
-				case CITY:
-				case VILLAGE:
-				case POSTCODE:
-					float cityType = getCityType((StreetGroupSearchObject) searchObject);
-					priority = (getPriorityByDistance(cityVillagePostcodeSelected
-							? 20f : 7f + cityType, ((StreetGroupSearchObject) searchObject).getDistance()));
-					break;
-
-				case STREET:
-					StreetSearchObject streetSearchObject = (StreetSearchObject) searchObject;
-					Street street = streetSearchObject.getStreet();
-					if (!cityVillagePostcodeSelected) {
-						priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
-					} else {
-						boolean streetFromSelectedCity = false;
-						for (SearchToken st : objectTokens.values()) {
-							if (st.getSearchObject() instanceof StreetGroupSearchObject) {
-								StreetGroupSearchObject streetGroupSearchObject = (StreetGroupSearchObject) st.getSearchObject();
-								if (streetGroupSearchObject.getStreetGroup().getId().getId()
-										.equals(street.getStreetGroup().getId().getId())) {
-									streetFromSelectedCity = true;
-									break;
-								}
-							}
-						}
-						if (streetFromSelectedCity) {
-							priority = 3f;
-							sortByName = true;
-						} else {
-							priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
-						}
-					}
-					break;
-			}
-			searchObject.setPriority(priority);
-			searchObject.setSortByName(sortByName);
-		}
-
 		if (searchObjects.size() > 0) {
 			Collections.sort(searchObjects, new Comparator<SearchObject>() {
 				@Override
@@ -170,6 +132,67 @@ public class SearchScope {
 		return newToken;
 	}
 
+	private boolean processSearchObject(SearchObject searchObject) {
+		boolean accept = true;
+		float priority = 0f;
+		boolean sortByName = false;
+		switch (searchObject.getType()) {
+			case POI:
+				accept = poiByNameCounter < resultLimitPoiByName;
+				if (accept) {
+					poiByNameCounter++;
+					priority = getPriorityByDistance(10, ((PoiSearchObject) searchObject).getDistance());
+				}
+				break;
+			case CITY:
+			case VILLAGE:
+			case POSTCODE:
+				accept = cityByNameCounter < resultLimitCityByName;
+				if (accept) {
+					cityByNameCounter++;
+					float cityType = getCityType((StreetGroupSearchObject) searchObject);
+					priority = (getPriorityByDistance(cityPostcodeSelected
+							? 20f : 7f + cityType, ((StreetGroupSearchObject) searchObject).getDistance()));
+				}
+				break;
+
+			case STREET:
+				accept = streetByNameCounter < resultLimitStreetByName;
+				if (accept) {
+					streetByNameCounter++;
+					StreetSearchObject streetSearchObject = (StreetSearchObject) searchObject;
+					Street street = streetSearchObject.getStreet();
+					if (!cityPostcodeSelected) {
+						priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
+					} else {
+						boolean streetFromSelectedCity = false;
+						for (SearchToken st : objectTokens.values()) {
+							if (st.getSearchObject() instanceof StreetGroupSearchObject) {
+								StreetGroupSearchObject streetGroupSearchObject = (StreetGroupSearchObject) st.getSearchObject();
+								if (streetGroupSearchObject.getStreetGroup().getId().getId()
+										.equals(street.getStreetGroup().getId().getId())) {
+									streetFromSelectedCity = true;
+									break;
+								}
+							}
+						}
+						if (streetFromSelectedCity) {
+							priority = 3f;
+							sortByName = true;
+						} else {
+							priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
+						}
+					}
+				}
+				break;
+		}
+		if (accept) {
+			searchObject.setPriority(priority);
+			searchObject.setSortByName(sortByName);
+		}
+		return accept;
+	}
+
 	private float getCityType(StreetGroupSearchObject searchObject) {
 		if (searchObject.getStreetGroup().getType() == ObfAddressStreetGroupType.CityOrTown) {
 			if (searchObject.getStreetGroup().getSubtype() == ObfAddressStreetGroupSubtype.City) {
@@ -182,7 +205,7 @@ public class SearchScope {
 	}
 
 	private float getPriorityByDistance(float priority, double distance) {
-		return priority + (float)(1 / (1 + distance));
+		return priority + 1f - (float)(1f / (1f + distance));
 	}
 
 	private void updateDistance(SearchPositionObject item) {
