@@ -8,6 +8,7 @@ import net.osmand.core.jni.ObfAddressStreetGroupType;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.Street;
+import net.osmand.core.jni.StreetGroup;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
@@ -34,7 +35,7 @@ public class SearchScope {
 	private AreaI searchableArea;
 	private AreaI obfAreaFilter;
 	private double searchRadius;
-	boolean cityPostcodeSelected;
+	boolean citySelected;
 
 	private int resultLimitPoiByName = 25;
 	private int poiByNameCounter = 0;
@@ -47,15 +48,19 @@ public class SearchScope {
 		obfsCollection = searchAPI.getObfsCollection();
 		lang = searchAPI.getLang();
 		searchString = searchAPI.getSearchStringCopy();
-		objectTokens = searchString.getCompleteObjectTokens();
 		searchLocation31 = searchAPI.getSearchLocation31();
 		searchableArea = searchAPI.getSearchableArea();
 		obfAreaFilter = searchAPI.getObfAreaFilter();
 		searchRadius = searchAPI.getSearchRadius();
+		updateScope();
+	}
 
-		cityPostcodeSelected = objectTokens.containsKey(SearchObjectType.CITY)
+	public void updateScope() {
+		objectTokens = searchString.getCompleteObjectTokens();
+		citySelected = objectTokens.containsKey(SearchObjectType.CITY)
 				|| objectTokens.containsKey(SearchObjectType.VILLAGE)
-				|| objectTokens.containsKey(SearchObjectType.POSTCODE);
+				|| objectTokens.containsKey(SearchObjectType.POSTCODE)
+				|| objectTokens.containsKey(SearchObjectType.STREET);
 	}
 
 	public ObfsCollection getObfsCollection() {
@@ -156,7 +161,9 @@ public class SearchScope {
 
 			if (token.getType() == SearchToken.TokenType.NAME_FILTER
 					&& !token.hasEmptyQuery()) {
-				newToken = new ObjectSearchToken(token, searchObjects.get(0), true);
+				boolean suggeston = token == searchString.getLastToken();
+				newToken = new ObjectSearchToken(token, searchObjects.get(0), suggeston);
+				searchString.replaceToken(token, newToken);
 			}
 		}
 		return newToken;
@@ -173,22 +180,29 @@ public class SearchScope {
 			case VILLAGE:
 			case POSTCODE:
 				float cityType = getCityType((StreetGroupSearchObject) searchObject);
-				priority = (getPriorityByDistance(cityPostcodeSelected
+				priority = (getPriorityByDistance(citySelected
 						? 20f : 7f + cityType, ((StreetGroupSearchObject) searchObject).getDistance()));
 				break;
 
 			case STREET:
 				StreetSearchObject streetSearchObject = (StreetSearchObject) searchObject;
 				Street street = streetSearchObject.getStreet();
-				if (!cityPostcodeSelected) {
+				if (!citySelected) {
 					priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
 				} else {
 					boolean streetFromSelectedCity = false;
 					for (SearchToken st : objectTokens.values()) {
 						if (st.getSearchObject() instanceof StreetGroupSearchObject) {
-							StreetGroupSearchObject streetGroupSearchObject = (StreetGroupSearchObject) st.getSearchObject();
-							if (streetGroupSearchObject.getStreetGroup().getId().getId()
-									.equals(street.getStreetGroup().getId().getId())) {
+							StreetGroup streetGroup =
+									((StreetGroupSearchObject) st.getSearchObject()).getStreetGroup();
+							if (streetGroup.getId().getId().equals(street.getStreetGroup().getId().getId())) {
+								streetFromSelectedCity = true;
+								break;
+							}
+						} else if (st.getSearchObject() instanceof StreetSearchObject) {
+							StreetGroup streetGroup =
+									((StreetSearchObject) st.getSearchObject()).getStreet().getStreetGroup();
+							if (streetGroup.getId().getId().equals(street.getStreetGroup().getId().getId())) {
 								streetFromSelectedCity = true;
 								break;
 							}

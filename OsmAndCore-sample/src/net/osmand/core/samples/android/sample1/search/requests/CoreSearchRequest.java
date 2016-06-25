@@ -91,6 +91,7 @@ public class CoreSearchRequest extends SearchRequest {
 				res = doCoreSearch(token);
 			}
 			if (token != lastToken) {
+				searchScope.updateScope();
 				token = searchString.getNextNameFilterToken();
 			} else {
 				break;
