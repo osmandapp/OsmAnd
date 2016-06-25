@@ -1235,7 +1235,7 @@
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
     <string name="voice_pref_title">聲音</string>
     <string name="localization_pref_title">在地化</string>
-    <string name="interrupt_music_descr">當語音預告時中斷音樂</string>
+    <string name="interrupt_music_descr">當語音預告時中斷音樂 (也可以模擬電話打到車的 BT 音響)</string>
     <string name="interrupt_music">中斷音樂</string>
     <string name="misc_pref_title">雜項</string>
     <string name="share_route_as_gpx">以 GPX 檔案分享路線</string>
