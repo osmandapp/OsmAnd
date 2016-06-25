@@ -96,7 +96,7 @@ public class SearchScope {
 	}
 
 	public void setupAddressSearchCriteria(AddressesByNameSearch.Criteria criteria) {
-		//not implemented
+		// not implemented
 	}
 
 	public boolean processPoiSearchObject(PoiSearchObject poiSearchObject) {

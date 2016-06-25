@@ -10,6 +10,7 @@ public class SearchObjectsHelper {
 	public static SearchPositionObject getAddressObject(Address address) {
 
 		switch (address.getAddressType()) {
+			//todo add Building type to Address class
 			case Street:
 				StreetInternal street = new StreetInternal(address);
 				return new StreetSearchObject(street);
