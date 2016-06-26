@@ -77,17 +77,17 @@ public class ApplicationMode {
 		regWidget("time", exceptDefault);
 		regWidget("speed", exceptPedestrianAndDefault);
 		regWidget("max_speed", CAR);
-		regWidget("gps_info", none);
 		regWidget("altitude", pedestrianBicycle);
+		regWidget("gps_info", none);
 		
 		// top
-		regWidget("compass", all);
 		regWidget("config", none);
+		regWidget("layers", none);
+		regWidget("compass", all);
 		regWidget("street_name", exceptAirBoatDefault);
 		regWidget("back_to_location", all);
 		regWidget("monitoring_services", none);
 		regWidget("bgService", none);
-		regWidget("layers", none);
 	}
 	
 	

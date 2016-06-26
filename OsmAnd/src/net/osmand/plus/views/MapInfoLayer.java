@@ -118,11 +118,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
 		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, "next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
-		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
-				10);
+		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true, 10);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
 		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
-		// right stack
+
+		// register right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
 		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map);
@@ -144,12 +144,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		TextInfoWidget speed = ric.createSpeedControl(map);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, "speed", false, 15);
-		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
-		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
 		registerSideWidget(maxspeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map);
 		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, "altitude", false, 20);
+		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
+		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, "gps_info", false, 23);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
 		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, "plain_time", false, 25);
 		TextInfoWidget battery = ric.createBatteryControl(map);
@@ -157,12 +157,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void recreateControls() {
-		rightStack.removeAllViews();
-		mapInfoControls.populateStackControl(rightStack, settings.getApplicationMode(), false, expanded);
 		leftStack.removeAllViews();
 		mapInfoControls.populateStackControl(leftStack, settings.getApplicationMode(), true, expanded);
 		leftStack.requestLayout();
+
+		rightStack.removeAllViews();
+		mapInfoControls.populateStackControl(rightStack, settings.getApplicationMode(), false, expanded);
 		rightStack.requestLayout();
+
 		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode())? 
 				View.VISIBLE : View.GONE);
 		this.expand.setImageResource(expanded ? R.drawable.map_up :
