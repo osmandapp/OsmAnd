@@ -162,7 +162,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 		if (layer != null) {
 			osmoControl = createOsMoControl(activity);
 			layer.registerSideWidget(osmoControl, R.drawable.ic_osmo_dark, R.string.osmo_control, "osmo_control",
-					false, 18);
+					false, 31);
 			layer.recreateControls();
 		}
 	}

@@ -700,7 +700,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				setRecordListener(recordControl, activity);
 			}
 			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_micro_dark,
-					R.string.map_widget_av_notes, "audionotes", false, 22);
+					R.string.map_widget_av_notes, "audionotes", false, 32);
 			mapInfoLayer.recreateControls();
 		}
 	}

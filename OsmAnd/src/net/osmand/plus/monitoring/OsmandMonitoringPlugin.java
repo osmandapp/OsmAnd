@@ -106,7 +106,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		monitoringControl = createMonitoringControl(activity);
 		
 		layer.registerSideWidget(monitoringControl,
-				R.drawable.ic_action_play_dark, R.string.map_widget_monitoring, "monitoring", false, 18);
+				R.drawable.ic_action_play_dark, R.string.map_widget_monitoring, "monitoring", false, 30);
 		layer.recreateControls();
 	}
 
