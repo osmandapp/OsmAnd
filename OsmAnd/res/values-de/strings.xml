@@ -740,7 +740,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="search_online_address">Online-Suche</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
-	<string name="route_general_information">Gesamtentfernung: %1$s, Reisezeit: %2$d h %3$d min</string>
+	<string name="route_general_information">Gesamtentfernung %1$s, Reisezeit %2$d h %3$d min.</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen</string>
 	<string name="router_service">Navigationsdienst</string>
 	<string name="sd_dir_not_accessible">Auf den Daten-Ordner auf der SD-Karte kann nicht zugegriffen werden!</string>
@@ -1880,7 +1880,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="whats_new">Neuerungen in</string>
     <string name="osm_edit_created_poi">OSM-POI erstellt</string>
     
-    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Lade bitte die Welt-Basiskarte herunter.</string>
+    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Lade bitte die Basis-Weltkarte herunter.</string>
     <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert</string>
     <string name="simulate_initial_startup">Ersten App-Start simulieren</string>
     <string name="share_geo">geo:</string>
@@ -2160,7 +2160,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="follow_us">Folge uns</string>
     <string name="use_osm_live_routing_description">Navigation für OSM-Live Änderungen aktivieren (Beta)</string>
-	<string name="access_direction_audio_feedback">Richtung Audio Feedback</string>
+	<string name="access_direction_audio_feedback">akustische Rückmeldung zur Richtung</string>
     <string name="access_direction_audio_feedback_descr">Zeige Richtung des Zielpunktes durch Ton</string>
     <string name="access_direction_haptic_feedback">Richtung angeben über haptisches Feedback</string>
     <string name="access_direction_haptic_feedback_descr">Zeige Richtung des Zielpunkt durch Vibration</string>
@@ -2171,4 +2171,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Englisch (Vereinigtes Königreich)</string>
     <string name="lang_ast">asturisch</string>
+    <string name="app_mode_bus">Bus</string>
+ 	<string name="app_mode_train">Zug</string>
     </resources>
