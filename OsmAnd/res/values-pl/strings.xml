@@ -2203,7 +2203,7 @@
     <string name="current_track">Aktualna trasa</string>
     <string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Pociąg</string>
-    <string name="follow_us">Podążaj za nami</string>
+    <string name="follow_us">Śledź nas</string>
     <string name="access_direction_haptic_feedback">Haptyczne powiadomienia o kierunku</string>
     <string name="access_direction_haptic_feedback_descr">Wskazuje kierunek do celu używając wibracji</string>
     <string name="use_osm_live_routing">Nawigacja OSM Live</string>
