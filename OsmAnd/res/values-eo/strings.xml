@@ -903,7 +903,7 @@
     <string name="app_mode_aircraft">Aviadilo</string>
     <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM-ajn ŝanĝojn?</string>
     <string name="animate_routing_route_not_calculated">Bonvolu antaŭe kalkuli la kurson</string>
-    <string name="follow_us">Sekvu nin</string>
+    <string name="follow_us">Observi nin</string>
     <string name="animate_routing_route">"Simuli uzante kalkulitan kurson "</string>
     <string name="animate_routing_gpx">Simuli uzante GPX-kurson</string>
     <string name="route_is_too_long">Eksterreta kalkulado de kurso povos okupi multe da tempo (aŭ eĉ ĝi povos malfunkcii) por punktoj pli malproksimaj ol 200km. Eble vi provos aldoni interajn celojn por plibonigi rendimenton.</string>
@@ -978,7 +978,7 @@
     <string name="distance_measurement_load_gpx">Malfermi GPX-dosieron</string>
     <string name="wait_current_task_finished">Bonvolu atendi ĝis nuna tasko finis</string>
     <string name="use_kalman_filter_compass">Uzi filtrilon de Kalman</string>
-    <string name="use_kalman_filter_compass_descr">Etigas bruojn en logoj de kompaso sed egigas inertecon</string>
+    <string name="use_kalman_filter_compass_descr">Etigas bruojn en legoj de kompaso sed egigas inertecon</string>
     <string name="use_magnetic_sensor">Uzi magneto-sentilon</string>
     <string name="use_magnetic_sensor_descr">Uzas magneto-sentilon anstataŭ orientiĝo-sentilon por legi kompasan direkton</string>
     <string name="other_location">Alia</string>
