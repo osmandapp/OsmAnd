@@ -2950,7 +2950,7 @@
 	<string name="poi_ventilation_shaft">Conducto de ventilación</string>
 
 <string name="poi_pump_type_beam_pump">Tipo de bomba: Viga</string>
-	<string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mk II o III</string>
+	<string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mark II o III</string>
 	<string name="poi_pump_type_gravity">Tipo de bomba: De gravedad</string>
 	<string name="poi_pump_style_modern">Estilo de bomba: Moderna</string>
 	<string name="poi_pump_style_historic">Estilo de bomba: Histórica</string>
@@ -2958,4 +2958,6 @@
 	<string name="poi_pump_status_broken">Bomba en mal estado</string>
 	<string name="poi_pump_status_locked">Bomba bloqueada</string>
 
-</resources>
+<string name="poi_valley_balka">Montes Balcanes</string>
+
+	</resources>
