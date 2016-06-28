@@ -148,7 +148,6 @@ public class CoreSearchRequest extends SearchRequest {
 		// Setup Addresses by name search
 		AddressesByNameSearch addrByNameSearch = new AddressesByNameSearch(searchScope.getObfsCollection());
 		final AddressesByNameSearch.Criteria addrByNameCriteria = new AddressesByNameSearch.Criteria();
-		//todo implement StreetGroup and Street parameters in AddressesByNameSearch.Criteria and apply them here
 		addrByNameCriteria.setName(keyword);
 		if (searchScope.getObfAreaFilter() != null) {
 			addrByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(searchScope.getObfAreaFilter()));

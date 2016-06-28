@@ -10,10 +10,10 @@ public class VillageSearchListItem extends SearchListPositionItem{
 	private String nameStr;
 	private String typeStr;
 
-	public VillageSearchListItem(SampleApplication app, VillageSearchObject searchItem) {
-		super(app, searchItem);
+	public VillageSearchListItem(SampleApplication app, VillageSearchObject searchObject) {
+		super(app, searchObject);
 
-		nameStr = searchItem.getName(MapUtils.LANGUAGE);
+		nameStr = searchObject.getName(MapUtils.LANGUAGE);
 		typeStr = "Village";
 	}
 

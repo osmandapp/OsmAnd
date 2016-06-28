@@ -9,6 +9,7 @@ public abstract class SearchObject {
 		VILLAGE,
 		POSTCODE,
 		STREET,
+		STREET_INTERSECTION,
 		BUILDING,
 		POI_TYPE,
 		POI_FILTER,
@@ -20,7 +21,6 @@ public abstract class SearchObject {
 	private Object internalObject;
 
 	private double priority;
-	private boolean sortByName;
 
 	protected SearchObject(SearchObjectType type, Object internalObject) {
 		this.type = type;
@@ -65,14 +65,6 @@ public abstract class SearchObject {
 
 	public void setPriority(double priority) {
 		this.priority = priority;
-	}
-
-	public boolean isSortByName() {
-		return sortByName;
-	}
-
-	public void setSortByName(boolean sortByName) {
-		this.sortByName = sortByName;
 	}
 
 	protected abstract QStringStringHash getLocalizedNames();
