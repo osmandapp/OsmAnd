@@ -100,7 +100,7 @@
 	<string name="poi_hamlet">Vilaĝego</string>
 	<string name="poi_suburb">Antaŭurbo</string>
 	<string name="poi_hospital">Malsanulejo</string>
-	<string name="poi_ice_rink">Glitejo</string>
+	<string name="poi_ice_rink">Glitkurejo (halo)</string>
 	<string name="poi_attraction_maze">Labirinto</string>
 	<string name="poi_clock">Horloĝo</string>
 	<string name="poi_cinema">Kinejo</string>
@@ -400,4 +400,30 @@
 	<string name="poi_works">Fabriko</string>
 	<string name="poi_driving_school">Stirlernejo</string>
 	<string name="poi_college">Kolegio</string>
+	<string name="poi_waterway_turning_point">Marnavigada turniĝejo</string>
+	<string name="poi_dam">Digo</string>
+	<string name="poi_weir">Riversojlo</string>
+	<string name="poi_breakwater">Ondorompilo</string>
+	<string name="poi_groyne">Ondorompileto</string>
+
+	<string name="poi_power_substation">Elektrosubcentralo</string>
+	<string name="poi_power_transformer">Transformilo</string>
+	<string name="poi_power_cable_distribution_cabinet">Ŝranko distribua (elektro)</string>
+	<string name="poi_power_generator">Elektrogenerilo</string>
+	<string name="poi_power_tower">Elektrofosto (alttensia k meztensia)</string>
+	<string name="poi_power_pole">Elektrofosto (baztensia)</string>
+
+	<string name="poi_communication_tower">Turo telekomunika</string>
+	<string name="poi_cooling_tower">Malvarmiga turo</string>
+	<string name="poi_lighting_tower">Luma masto</string>
+	<string name="poi_telephone_exchange">Telefona centralo</string>
+
+	<string name="poi_recycling_plastic">Plasto</string>
+	<string name="poi_recycling_batteries">Piloj</string>
+	<string name="poi_recycling_scrap_metal">Ferrubo</string>
+	<string name="poi_recycling_plastic_bottles">Plastaj boteloj</string>
+	<string name="poi_picnic_table">Piknika tablo</string>
+	<string name="poi_picnic_site">Piknika ejo</string>
+	<string name="poi_bar">Drinkejo</string>
+	<string name="poi_pub">Taverno</string>
 	</resources>
