@@ -26,9 +26,9 @@ public class PoiSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 
-	public PoiSearchListItem(SampleApplication app, PoiSearchObject searchItem) {
-		super(app, searchItem);
-		amenity = parseAmenity(searchItem);
+	public PoiSearchListItem(SampleApplication app, PoiSearchObject searchObject) {
+		super(app, searchObject);
+		amenity = parseAmenity(searchObject);
 		nameStr = amenity.getName(MapUtils.LANGUAGE);
 		typeStr = getTypeStr();
 	}

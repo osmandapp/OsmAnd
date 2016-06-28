@@ -11,6 +11,7 @@ import net.osmand.core.jni.Street;
 import net.osmand.core.jni.StreetGroup;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.PostcodeSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
 import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
@@ -96,7 +97,25 @@ public class SearchScope {
 	}
 
 	public void setupAddressSearchCriteria(AddressesByNameSearch.Criteria criteria) {
-		// not implemented
+		if (objectTokens.containsKey(SearchObjectType.STREET)) {
+			StreetSearchObject streetSearchObject =
+					(StreetSearchObject) objectTokens.get(SearchObjectType.STREET).getSearchObject();
+			criteria.setAddressFilter(streetSearchObject.getStreet());
+			if (objectTokens.containsKey(SearchObjectType.POSTCODE)) {
+				PostcodeSearchObject postcodeSearchObject =
+						(PostcodeSearchObject) objectTokens.get(SearchObjectType.POSTCODE).getSearchObject();
+				criteria.setPostcode(postcodeSearchObject.getNativeName());
+			}
+		} else if (objectTokens.containsKey(SearchObjectType.CITY)) {
+			criteria.setAddressFilter(((StreetGroupSearchObject) objectTokens.get(SearchObjectType.CITY)
+					.getSearchObject()).getStreetGroup());
+		} else if (objectTokens.containsKey(SearchObjectType.VILLAGE)) {
+			criteria.setAddressFilter(((StreetGroupSearchObject) objectTokens.get(SearchObjectType.VILLAGE)
+					.getSearchObject()).getStreetGroup());
+		} else if (objectTokens.containsKey(SearchObjectType.POSTCODE)) {
+			criteria.setAddressFilter(((StreetGroupSearchObject) objectTokens.get(SearchObjectType.POSTCODE)
+					.getSearchObject()).getStreetGroup());
+		}
 	}
 
 	public boolean processPoiSearchObject(PoiSearchObject poiSearchObject) {
@@ -117,7 +136,7 @@ public class SearchScope {
 				@Override
 				public int compare(SearchObject lhs, SearchObject rhs) {
 					int res = Double.compare(lhs.getPriority(), rhs.getPriority());
-					if (res == 0 && lhs.isSortByName() && rhs.isSortByName()) {
+					if (res == 0) {
 						return lhs.getName(lang).compareToIgnoreCase(rhs.getName(lang));
 					} else {
 						return res;
@@ -170,25 +189,27 @@ public class SearchScope {
 	}
 
 	private boolean processSearchObject(SearchObject searchObject) {
-		double priority = 0d;
-		boolean sortByName = false;
+		double priority = 0.0;
 		switch (searchObject.getType()) {
+			case BUILDING:
+				priority = 3.0;
+				break;
 			case POI:
-				priority = getPriorityByDistance(10, ((PoiSearchObject) searchObject).getDistance());
+				priority = getPriorityByDistance(10.0, ((PoiSearchObject) searchObject).getDistance());
 				break;
 			case CITY:
 			case VILLAGE:
 			case POSTCODE:
-				float cityType = getCityType((StreetGroupSearchObject) searchObject);
+				double cityType = getCityType((StreetGroupSearchObject) searchObject);
 				priority = (getPriorityByDistance(citySelected
-						? 20f : 7f + cityType, ((StreetGroupSearchObject) searchObject).getDistance()));
+						? 20.0 : 7.0 + cityType, ((StreetGroupSearchObject) searchObject).getDistance()));
 				break;
 
 			case STREET:
 				StreetSearchObject streetSearchObject = (StreetSearchObject) searchObject;
 				Street street = streetSearchObject.getStreet();
 				if (!citySelected) {
-					priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
+					priority = getPriorityByDistance(9.0, streetSearchObject.getDistance());
 				} else {
 					boolean streetFromSelectedCity = false;
 					for (SearchToken st : objectTokens.values()) {
@@ -209,33 +230,31 @@ public class SearchScope {
 						}
 					}
 					if (streetFromSelectedCity) {
-						priority = 3f;
-						sortByName = true;
+						priority = 3.0;
 					} else {
-						priority = getPriorityByDistance(9f, streetSearchObject.getDistance());
+						priority = getPriorityByDistance(9.0, streetSearchObject.getDistance());
 					}
 				}
 				break;
 		}
 		searchObject.setPriority(priority);
-		searchObject.setSortByName(sortByName);
 
 		return true;
 	}
 
-	private float getCityType(StreetGroupSearchObject searchObject) {
+	private double getCityType(StreetGroupSearchObject searchObject) {
 		if (searchObject.getStreetGroup().getType() == ObfAddressStreetGroupType.CityOrTown) {
 			if (searchObject.getStreetGroup().getSubtype() == ObfAddressStreetGroupSubtype.City) {
-				return 1f;
+				return 1.0;
 			} else if (searchObject.getStreetGroup().getSubtype() == ObfAddressStreetGroupSubtype.Town) {
-				return 1.5f;
+				return 1.5;
 			}
 		}
-		return 2.5f;
+		return 2.5;
 	}
 
 	private double getPriorityByDistance(double priority, double distance) {
-		return priority + 1d - (1d / (1d + distance));
+		return priority + 1.0 - (1.0 / (1.0 + distance));
 	}
 
 	private void updateDistance(SearchPositionObject item) {

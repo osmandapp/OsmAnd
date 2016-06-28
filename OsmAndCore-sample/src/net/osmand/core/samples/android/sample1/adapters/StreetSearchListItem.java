@@ -10,12 +10,12 @@ public class StreetSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 
-	public StreetSearchListItem(SampleApplication app, StreetSearchObject searchItem) {
-		super(app, searchItem);
+	public StreetSearchListItem(SampleApplication app, StreetSearchObject searchObject) {
+		super(app, searchObject);
 
-		nameStr = searchItem.getName(MapUtils.LANGUAGE);
+		nameStr = searchObject.getName(MapUtils.LANGUAGE);
 
-		StreetGroup streetGroup = searchItem.getStreet().getStreetGroup();
+		StreetGroup streetGroup = searchObject.getStreet().getStreetGroup();
 		if (streetGroup != null) {
 			typeStr = streetGroup.getNativeName() + " — " + getTypeStr(streetGroup);
 		} else {
@@ -26,17 +26,9 @@ public class StreetSearchListItem extends SearchListPositionItem {
 	private String getTypeStr(StreetGroup streetGroup) {
 		String typeStr;
 		if (streetGroup.getSubtype() != ObfAddressStreetGroupSubtype.Unknown) {
-			try {
-				typeStr = streetGroup.getSubtype().name();
-			} catch (IllegalArgumentException e) {
-				typeStr = "Out of subtype";
-			}
+			typeStr = streetGroup.getSubtype().name();
 		} else {
-			try {
-				typeStr = streetGroup.getType().name();
-			} catch (IllegalArgumentException e) {
-				typeStr = "Out of type";
-			}
+			typeStr = streetGroup.getType().name();
 		}
 		return typeStr;
 	}
