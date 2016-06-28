@@ -1158,7 +1158,7 @@
 	<string name="poi_cross">Krzyż</string>
 	<string name="poi_ford_stepping_stones">Przejście przez bród po przygotowanych kamieniach</string>
 	<string name="poi_traffic_calming_island">Wysepka spowalniająca</string>
-	<string name="poi_power_tower">Wieża trakcji elektrycznej</string>
+	<string name="poi_power_tower">Słup wysokiego napięcia</string>
 	<string name="poi_denomination_greek_catholic">Grekokatolicki</string>
 	<string name="poi_power_cable_distribution_cabinet">Rozdzielcza szafa kablowa</string>
 	<string name="poi_recycling_fridge_and_freezer">Lodówka z zamrażarką</string>
@@ -1252,7 +1252,7 @@
 
 	<string name="poi_amenity_vacuum_cleaner">Odkurzacz</string>
 
-	<string name="poi_cooling_tower">Chłodnia przemysłowa</string>
+	<string name="poi_cooling_tower">Chłodnia kominowa</string>
 	<string name="poi_bunker_silo">Silos do składowania sypkich materiałów</string>
 	<string name="poi_denomination_nondenominational">Bezwyznaniowy</string>
 	<string name="poi_denomination_congregational">Kongregacyjny</string>
