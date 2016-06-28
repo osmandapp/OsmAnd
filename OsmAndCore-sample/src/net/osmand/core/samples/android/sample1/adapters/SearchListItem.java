@@ -6,6 +6,7 @@ import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.search.objects.BuildingSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.CitySearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.PostcodeSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.StreetIntersectionSearchObject;
@@ -24,6 +25,8 @@ public class SearchListItem {
 
 	public static SearchListItem buildListItem(SampleApplication app, SearchObject searchObject) {
 		switch (searchObject.getType()) {
+			case POI_TYPE:
+				return new PoiTypeSearchListItem(app, (PoiTypeSearchObject) searchObject);
 			case POI:
 				return new PoiSearchListItem(app, (PoiSearchObject) searchObject);
 			case BUILDING:

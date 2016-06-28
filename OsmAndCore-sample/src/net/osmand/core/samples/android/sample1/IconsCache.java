@@ -21,7 +21,7 @@ public class IconsCache {
 		this.displayDensityFactor = displayDensityFactor;
 	}
 
-	public Drawable getIcon(String name) {
+	public Drawable getMapIcon(String name) {
 		return assets.getIcon("map/icons/" + name + ".png", displayDensityFactor);
 	}
 }

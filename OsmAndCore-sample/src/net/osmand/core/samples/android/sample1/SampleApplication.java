@@ -17,6 +17,7 @@ public class SampleApplication extends Application
 {
 	private CoreResourcesFromAndroidAssets assetsCustom;
 	private MapPoiTypes poiTypes;
+	private PoiTypesHelper poiTypesHelper;
 	private IconsCache iconsCache;
 
 	@Override
@@ -25,6 +26,7 @@ public class SampleApplication extends Application
 		super.onCreate();
 
 		initPoiTypes();
+		poiTypesHelper = new PoiTypesHelper(this);
 
 		// Initialize native core
 		if (NativeCore.isAvailable() && !NativeCore.isLoaded()) {
@@ -38,6 +40,10 @@ public class SampleApplication extends Application
 
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
+	}
+
+	public PoiTypesHelper getPoiTypesHelper() {
+		return poiTypesHelper;
 	}
 
 	public IconsCache getIconsCache() {

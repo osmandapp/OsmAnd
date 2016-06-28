@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.text.Editable;
@@ -24,6 +25,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IMapLayerProvider;
@@ -48,12 +50,21 @@ import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
 import net.osmand.core.samples.android.sample1.adapters.SearchListPositionItem;
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
+import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject.ObjectType;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
 import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -93,11 +104,11 @@ public class MainActivity extends Activity {
 	private ImageView searchIcon;
 	private ProgressBar progressBar;
 
+	private final static int MAX_SEARCH_RESULTS_CORE = 0;
+	private final static int MAX_SEARCH_RESULTS_IU = 150;
 	private ListView searchListView;
 	private SearchListAdapter adapter;
 	private String queryText = "";
-	private final static int MAX_SEARCH_RESULTS_CORE = 0;
-	private final static int MAX_SEARCH_RESULTS_IU = 150;
 
 	// Germany
 	private final static float INIT_LAT = 49.353953f;
@@ -118,6 +129,13 @@ public class MainActivity extends Activity {
 	private static final String PREF_MAP_ELEVATION_ANGLE = "MAP_ELEVATION_ANGLE";
 
 	private SearchApiCallback intermediateSearchCallback = new SearchApiCallback() {
+
+		@Override
+		@Nullable
+		public List<SearchObject> fetchExternalObjects(String keyword, @Nullable List<SearchObject> completeObjects) {
+			return null;
+		}
+
 		@Override
 		public void onSearchFinished(List<SearchObject> searchObjects) {
 			processSearchResult(searchObjects);
@@ -125,9 +143,96 @@ public class MainActivity extends Activity {
 	};
 
 	private SearchApiCallback coreSearchCallback = new SearchApiCallback() {
+
+		@Override
+		@Nullable
+		public List<SearchObject> fetchExternalObjects(String keyword, @Nullable List<SearchObject> completeObjects) {
+			List<SearchObject> result = new ArrayList<>();
+			boolean poiTypeSelected = false;
+			PoiCategory selectedPoiCategory = null;
+			PoiFilter selectedPoiFilter = null;
+			if (completeObjects != null) {
+				for (SearchObject searchObject : completeObjects) {
+					if (searchObject.getType() == SearchObjectType.POI_TYPE) {
+						PoiTypeSearchObject ptObj = (PoiTypeSearchObject) searchObject;
+						switch (ptObj.getObjectType()) {
+							case CATEGORY:
+								selectedPoiCategory = getSampleApplication().getPoiTypes().getPoiCategoryByName(ptObj.getKeyName());
+								break;
+							case FILTER:
+								PoiCategory category = getSampleApplication().getPoiTypes().getPoiCategoryByName(ptObj.getCategoryKeyName());
+								for (PoiFilter filter : category.getPoiFilters()) {
+									if (filter.getKeyName().equalsIgnoreCase(ptObj.getKeyName())) {
+										selectedPoiFilter = filter;
+										break;
+									}
+								}
+								break;
+							case TYPE:
+								poiTypeSelected = true;
+								break;
+						}
+						if (poiTypeSelected || selectedPoiCategory != null || selectedPoiFilter != null) {
+							break;
+						}
+					}
+				}
+
+				if (poiTypeSelected) {
+					return null;
+				}
+			}
+
+			PoiTypesHelper poiTypesHelper = getSampleApplication().getPoiTypesHelper();
+			List<AbstractPoiType> res;
+			if (selectedPoiCategory != null) {
+				res = poiTypesHelper.getPoiCategoryTypesTranslatedNames(selectedPoiCategory,
+						new CollatorStringMatcher(keyword, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+				final Collator inst = Collator.getInstance();
+				Collections.sort(res, new Comparator<AbstractPoiType>() {
+					@Override
+					public int compare(AbstractPoiType lhs, AbstractPoiType rhs) {
+						return inst.compare(lhs.getTranslation(), rhs.getTranslation());
+					}
+				});
+			} else if (selectedPoiFilter != null) {
+				res = poiTypesHelper.getPoiFilterTypesTranslatedNames(selectedPoiFilter,
+						new CollatorStringMatcher(keyword, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+				final Collator inst = Collator.getInstance();
+				Collections.sort(res, new Comparator<AbstractPoiType>() {
+					@Override
+					public int compare(AbstractPoiType lhs, AbstractPoiType rhs) {
+						return inst.compare(lhs.getTranslation(), rhs.getTranslation());
+					}
+
+				});
+			} else {
+				res = poiTypesHelper.findPoiTypes(keyword);
+			}
+
+			for (AbstractPoiType pt : res) {
+				if (pt instanceof PoiCategory) {
+					result.add(new PoiTypeSearchObject(ObjectType.CATEGORY,
+							pt.getTranslation(), pt.getKeyName(), null));
+				} else if (pt instanceof PoiFilter) {
+					PoiFilter poiFilter = (PoiFilter) pt;
+					result.add(new PoiTypeSearchObject(ObjectType.FILTER,
+							poiFilter.getTranslation(), poiFilter.getKeyName(), poiFilter.getPoiCategory().getKeyName()));
+				} else if (pt instanceof PoiType) {
+					PoiType poiType = (PoiType) pt;
+					result.add(new PoiTypeSearchObject(ObjectType.TYPE,
+							poiType.getTranslation(), poiType.getKeyName(), poiType.getCategory().getKeyName()));
+				}
+			}
+
+			return result;
+		}
+
 		@Override
 		public void onSearchFinished(List<SearchObject> searchObjects) {
+
 			processSearchResult(searchObjects);
+
 			StringBuilder sb = new StringBuilder();
 			Map<SearchObjectType, SearchToken> objectTokensMap = searchAPI.getObjectTokens();
 			ObjectSearchToken lastObjectToken = searchAPI.getLastObjectToken();
@@ -251,7 +356,6 @@ public class MainActivity extends Activity {
 		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
 		//Setup search
-
 		searchAPI = new SearchAPI(obfsCollection, MapUtils.LANGUAGE);
 
 		searchEditText = (EditText) findViewById(R.id.searchEditText);
@@ -270,18 +374,22 @@ public class MainActivity extends Activity {
 				if (!queryText.equalsIgnoreCase(newQueryText)) {
 					queryText = newQueryText;
 					showProgressBar();
-					runSearch(getScreenCenter31(), getScreenBounds31(), queryText);
+					runSearch();
 				}
 			}
 		});
 		searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus && adapter.getCount() > 0 && isSearchListHidden()) {
+				if (hasFocus && isSearchListHidden()) {
 					showSearchList();
-					LatLon latLon = Utilities.convert31ToLatLon(target31);
-					adapter.updateDistance(latLon.getLatitude(), latLon.getLongitude());
-					adapter.notifyDataSetChanged();
+					if (adapter.getCount() > 0) {
+						LatLon latLon = Utilities.convert31ToLatLon(target31);
+						adapter.updateDistance(latLon.getLatitude(), latLon.getLongitude());
+						adapter.notifyDataSetChanged();
+					} else {
+						runSearch();
+					}
 				}
 			}
 		});
@@ -309,6 +417,7 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				SearchListItem item = adapter.getItem(position);
 				SearchObject searchObject = item.getSearchObject();
+
 				if (searchObject.getType() == SearchObjectType.POI
 						|| searchObject.getType() == SearchObjectType.BUILDING
 						|| searchObject.getType() == SearchObjectType.COORDINATES) {
@@ -483,6 +592,10 @@ public class MainActivity extends Activity {
 				|| gestureDetector.onTouchEvent(event);
 	}
 
+	private void runSearch() {
+		runSearch(getScreenCenter31(), getScreenBounds31(), queryText);
+	}
+
 	private void runSearch(PointI position31, AreaI bounds31, String keyword) {
 
 		searchAPI.setSearchLocation31(position31);
@@ -503,24 +616,23 @@ public class MainActivity extends Activity {
 			List<SearchListItem> rows = new ArrayList<>();
 			for (SearchObject item : searchObjects) {
 				SearchListItem listItem =
-						SearchListItem.buildListItem((SampleApplication)getApplication(), item);
+						SearchListItem.buildListItem(getSampleApplication(), item);
 				if (listItem != null) {
 					rows.add(listItem);
 				}
 			}
-
 			if (rows.size() > MAX_SEARCH_RESULTS_IU) {
 				rows = rows.subList(0, MAX_SEARCH_RESULTS_IU);
 			}
-
-			adapter.clear();
-			adapter.addAll(rows);
-			adapter.notifyDataSetChanged();
-			if (adapter.getCount() > 0) {
-				searchListView.setSelection(0);
-			}
-
+			updateListAdapter(rows);
 			showSearchList();
+		}
+	}
+
+	private void updateListAdapter(List<SearchListItem> listItems) {
+		adapter.setListItems(listItems);
+		if (adapter.getCount() > 0) {
+			searchListView.setSelection(0);
 		}
 	}
 
