@@ -725,10 +725,12 @@ public class GPXUtilities {
 			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			if (routes.size() > 0) {
 				for (Route r : routes) {
+					int routeColor = r.getColor(getColor(0));
 					if (r.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(r.points);
+						sgmt.setColor(routeColor);
 					}
 				}
 			}
