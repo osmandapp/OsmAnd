@@ -12,7 +12,6 @@ public abstract class SearchObject {
 		STREET_INTERSECTION,
 		BUILDING,
 		POI_TYPE,
-		POI_FILTER,
 		POI,
 		COORDINATES
 	}

@@ -108,7 +108,7 @@ public class SearchString {
 		String objectName = searchObject.getName(lang);
 		int startIndex;
 		SearchToken lastToken = getLastToken();
-		if (lastToken.hasEmptyQuery()) {
+		if (lastToken == null || lastToken.hasEmptyQuery()) {
 			startIndex = queryText.length();
 			newQueryText = queryText + objectName + " ";
 		} else {
@@ -116,7 +116,12 @@ public class SearchString {
 			newQueryText = queryText.substring(0, startIndex) + objectName + " ";
 		}
 		ObjectSearchToken token = new ObjectSearchToken(startIndex, objectName, searchObject, false);
-		tokens.set(tokens.size() - 1, token);
+		if (lastToken == null) {
+			tokens.add(token);
+		} else {
+			tokens.set(tokens.size() - 1, token);
+		}
+		tokens.add(new NameFilterSearchToken(newQueryText.length(), ""));
 		queryText = newQueryText;
 	}
 
@@ -186,6 +191,16 @@ public class SearchString {
 			}
 		}
 		return map;
+	}
+
+	public List<SearchObject> getCompleteObjects() {
+		List<SearchObject> list = new ArrayList<>();
+		for (SearchToken token : tokens) {
+			if (token.getType() == TokenType.SEARCH_OBJECT && !((ObjectSearchToken)token).isSuggestion()) {
+				list.add(token.getSearchObject());
+			}
+		}
+		return list;
 	}
 
 	public static void main(String[] args){

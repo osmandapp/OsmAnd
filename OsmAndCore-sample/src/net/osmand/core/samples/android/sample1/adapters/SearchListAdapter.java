@@ -13,6 +13,8 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.R;
 import net.osmand.core.samples.android.sample1.Utils;
 
+import java.util.List;
+
 public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 
 	private Context ctx;
@@ -20,6 +22,19 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 	public SearchListAdapter(Context ctx) {
 		super(ctx, R.layout.search_list_item);
 		this.ctx = ctx;
+	}
+
+	public void setListItems(List<SearchListItem> items) {
+		setNotifyOnChange(false);
+		clear();
+		addAll(items);
+		setNotifyOnChange(true);
+		notifyDataSetInvalidated();
+	}
+
+	@Override
+	public SearchListItem getItem(int position) {
+		return super.getItem(position);
 	}
 
 	public void updateDistance(double latitude, double longitude) {

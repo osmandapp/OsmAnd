@@ -89,6 +89,10 @@ public class CoreSearchRequest extends SearchRequest {
 		while (token != null && !cancelled) {
 			if (!token.hasEmptyQuery()) {
 				res = doCoreSearch(token);
+				List<SearchObject> externalObjects = searchCallback.fetchExternalObjects(token.getQueryText(), searchString.getCompleteObjects());
+				if (externalObjects != null) {
+					res.addAll(externalObjects);
+				}
 			}
 			if (token != lastToken) {
 				searchScope.updateScope();
@@ -99,18 +103,44 @@ public class CoreSearchRequest extends SearchRequest {
 		}
 
 		if (lastToken == null || lastToken.hasEmptyQuery()) {
-			// todo 2.4
 			// 2.4 Search considered to be complete if there no NF in the end (not finished or not regonized objects)
 			ObjectSearchToken lastObjectToken = searchString.getLastObjectToken();
 			if (lastObjectToken == null) {
-				//		Last object = [] - none. We display list of poi categories (recents separate tab)
+				// Last object = [] - none. We display list of poi categories (recents separate tab)
+				List<SearchObject> externalObjects = searchCallback.fetchExternalObjects("", null);
+				if (externalObjects != null) {
+					res = externalObjects;
+				}
 			} else {
-				//		Last object - poi category/poi filter/poi type. Display: poi filters (if it is poi category & pois around location (if it is specified in query by any previous object) + Search more radius
-				//		For example: Leiden ice hockey, we display all ice hockey around Leiden
-				//		Last object - City. Display (list of streets could be quite long)
-				//		Last object - Street. Display building and intersetcting street
-				//		Last object - Postcode. Display building and streets
-				//		Last object - Building/POI - object is found
+				SearchObject searchObject = lastObjectToken.getSearchObject();
+				switch (searchObject.getType()) {
+					case POI_TYPE:
+						// Last object - poi category/poi filter/poi type. Display: poi filters (if it is poi category & pois around location (if it is specified in query by any previous object) + Search more radius
+						// For example: Leiden ice hockey, we display all ice hockey around Leiden
+						List<SearchObject> externalObjects = searchCallback.fetchExternalObjects("", searchString.getCompleteObjects());
+						if (externalObjects != null) {
+							res = externalObjects;
+						}
+						break;
+					case CITY:
+						// todo - no SWIG
+						// Last object - City. Display (list of streets could be quite long)
+						break;
+					case STREET:
+						// todo - no SWIG
+						// Last object - Street. Display building and intersetcting street
+						break;
+					case POSTCODE:
+						// todo - no SWIG
+						// Last object - Postcode. Display building and streets
+						break;
+					case BUILDING:
+						// Last object - Building - object is found
+						break;
+					case POI:
+						// Last object - POI - object is found
+						break;
+				}
 			}
 		}
 

@@ -1,6 +1,7 @@
 package net.osmand.core.samples.android.sample1.search;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ObfsCollection;
@@ -43,6 +44,10 @@ public class SearchAPI {
 	};
 
 	public interface SearchApiCallback {
+
+		@Nullable
+		List<SearchObject> fetchExternalObjects(String keyword, @Nullable List<SearchObject> completeObjects);
+
 		void onSearchFinished(List<SearchObject> searchObjects);
 	}
 

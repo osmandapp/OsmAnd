@@ -7,10 +7,12 @@ import net.osmand.core.jni.ObfAddressStreetGroupSubtype;
 import net.osmand.core.jni.ObfAddressStreetGroupType;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QStringStringListHash;
 import net.osmand.core.jni.Street;
 import net.osmand.core.jni.StreetGroup;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.PostcodeSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
@@ -37,6 +39,7 @@ public class SearchScope {
 	private AreaI obfAreaFilter;
 	private double searchRadius;
 	boolean citySelected;
+	boolean poiTypeSelected;
 
 	private int resultLimitPoiByName = 25;
 	private int poiByNameCounter = 0;
@@ -62,6 +65,7 @@ public class SearchScope {
 				|| objectTokens.containsKey(SearchObjectType.VILLAGE)
 				|| objectTokens.containsKey(SearchObjectType.POSTCODE)
 				|| objectTokens.containsKey(SearchObjectType.STREET);
+		poiTypeSelected = objectTokens.containsKey(SearchObjectType.POI_TYPE);
 	}
 
 	public ObfsCollection getObfsCollection() {
@@ -93,7 +97,13 @@ public class SearchScope {
 	}
 
 	public void setupAmenitySearchCriteria(AmenitiesByNameSearch.Criteria criteria) {
-		//todo criteria.setCategoriesFilter() if needed;
+		if (objectTokens.containsKey(SearchObjectType.POI_TYPE)) {
+			PoiTypeSearchObject searchObject =
+					(PoiTypeSearchObject) objectTokens.get(SearchObjectType.POI_TYPE).getSearchObject();
+			QStringStringListHash filter = new QStringStringListHash();
+			// todo SWIG!!! filter.set(searchObject.getCategoryKeyName(), new QStringList(searchObject.getKeyName()));
+			criteria.setCategoriesFilter(filter);
+		}
 	}
 
 	public void setupAddressSearchCriteria(AddressesByNameSearch.Criteria criteria) {
@@ -193,6 +203,9 @@ public class SearchScope {
 		switch (searchObject.getType()) {
 			case BUILDING:
 				priority = 3.0;
+				break;
+			case POI_TYPE:
+				priority = poiTypeSelected ? 10.0 : 9.0;
 				break;
 			case POI:
 				priority = getPriorityByDistance(10.0, ((PoiSearchObject) searchObject).getDistance());

@@ -4,14 +4,12 @@ import net.osmand.core.jni.LatLon;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.SampleApplication;
-import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
 
 public class SearchListPositionItem extends SearchListItem {
 
 	private double latitude;
 	private double longitude;
-
 
 	public SearchListPositionItem(SampleApplication app, SearchPositionObject searchObject) {
 		super(app, searchObject);

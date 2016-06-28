@@ -112,7 +112,7 @@ public class PoiSearchListItem extends SearchListPositionItem {
 		Drawable drawable = null;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
-			drawable = app.getIconsCache().getIcon(st.getOsmTag() + "_" + st.getOsmValue());
+			drawable = app.getIconsCache().getMapIcon(st.getOsmTag() + "_" + st.getOsmValue());
 		}
 		return drawable;
 	}
