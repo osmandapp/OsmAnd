@@ -203,7 +203,7 @@
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Przestarzały format danych \'\'{0}\'\' nie jest wspierany</string>
     <string name="poi_filter_car_aid">Pomoc drogowa</string>
-    <string name="poi_filter_closest_poi">Najbliższe Użyteczne Miejsca</string>
+    <string name="poi_filter_closest_poi">Pobliskie Użyteczne Miejsca</string>
     <string name="poi_filter_custom_filter">Własny filtr</string>
     <string name="poi_filter_food_shop">Sklep spożywczy</string>
     <string name="poi_filter_for_tourists">Dla turystów</string>
@@ -536,7 +536,7 @@
     <string name="incremental_search_building">Znajdź numer domu</string>
     <string name="choose_available_region">Proszę wybrać region z listy</string>
     <string name="choose_intersected_street">Ulica przecinająca</string>
-    <string name="Closest_Amenities">Najbliższe usługi</string>
+    <string name="Closest_Amenities">Pobliskie usługi</string>
     <string name="app_mode_default">Przeglądanie mapy</string>
     <string name="app_mode_car">Samochód</string>
     <string name="app_mode_bicycle">Rower</string>
@@ -1814,7 +1814,7 @@
     <string name="lang_ceb">Cebuano</string>
     <string name="lang_new">Newarski</string>
     <string name="lang_vo">Wolapik</string>
-    <string name="lang_bpy">Bisznuprija-manipuri (indyjski)</string>
+    <string name="lang_bpy">Bisznuprija-manipuri (Indyjski)</string>
     <string name="lang_ml">Malajalam</string>
     <string name="lang_eo">Esperanto</string>
     <string name="rendering_attr_currentTrackColor_name">Kolor śladu GPX</string>
