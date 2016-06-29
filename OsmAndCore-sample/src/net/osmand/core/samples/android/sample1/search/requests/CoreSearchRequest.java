@@ -123,16 +123,16 @@ public class CoreSearchRequest extends SearchRequest {
 						}
 						break;
 					case CITY:
-						// todo - no SWIG
 						// Last object - City. Display (list of streets could be quite long)
+						res = doCoreSearch(new NameFilterSearchToken(0, ""));
 						break;
 					case STREET:
-						// todo - no SWIG
 						// Last object - Street. Display building and intersetcting street
+						res = doCoreSearch(new NameFilterSearchToken(0, ""));
 						break;
 					case POSTCODE:
-						// todo - no SWIG
 						// Last object - Postcode. Display building and streets
+						res = doCoreSearch(new NameFilterSearchToken(0, ""));
 						break;
 					case BUILDING:
 						// Last object - Building - object is found
@@ -154,26 +154,31 @@ public class CoreSearchRequest extends SearchRequest {
 		String keyword = token.getQueryText();
 		final List<SearchObject> searchObjects = new ArrayList<>();
 
-		// Setup Amenities by name search
-		AmenitiesByNameSearch amByNameSearch = new AmenitiesByNameSearch(searchScope.getObfsCollection());
-		AmenitiesByNameSearch.Criteria amenityByNameCriteria = new AmenitiesByNameSearch.Criteria();
-		amenityByNameCriteria.setName(keyword);
-		if (searchScope.getObfAreaFilter() != null) {
-			amenityByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(searchScope.getObfAreaFilter()));
-		}
-		searchScope.setupAmenitySearchCriteria(amenityByNameCriteria);
-
-		ISearch.INewResultEntryCallback amenityByNameResultCallback = new ISearch.INewResultEntryCallback() {
-			@Override
-			public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
-				Amenity amenity = new AmenityResultEntry(resultEntry).getAmenity();
-				PoiSearchObject amenitySearchItem = new PoiSearchObject(amenity);
-				if (searchScope.processPoiSearchObject(amenitySearchItem)) {
-					searchObjects.add(amenitySearchItem);
-				}
-				amenityResultsCounter++;
+		AmenitiesByNameSearch amByNameSearch = null;
+		AmenitiesByNameSearch.Criteria amenityByNameCriteria = null;
+		ISearch.INewResultEntryCallback amenityByNameResultCallback = null;
+		if (!keyword.isEmpty()) {
+			// Setup Amenities by name search
+			amByNameSearch = new AmenitiesByNameSearch(searchScope.getObfsCollection());
+			amenityByNameCriteria = new AmenitiesByNameSearch.Criteria();
+			amenityByNameCriteria.setName(keyword);
+			if (searchScope.getObfAreaFilter() != null) {
+				amenityByNameCriteria.setObfInfoAreaFilter(new NullableAreaI(searchScope.getObfAreaFilter()));
 			}
-		};
+			searchScope.setupAmenitySearchCriteria(amenityByNameCriteria);
+
+			amenityByNameResultCallback = new ISearch.INewResultEntryCallback() {
+				@Override
+				public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
+					Amenity amenity = new AmenityResultEntry(resultEntry).getAmenity();
+					PoiSearchObject amenitySearchItem = new PoiSearchObject(amenity);
+					if (searchScope.processPoiSearchObject(amenitySearchItem)) {
+						searchObjects.add(amenitySearchItem);
+					}
+					amenityResultsCounter++;
+				}
+			};
+		}
 
 		// Setup Addresses by name search
 		AddressesByNameSearch addrByNameSearch = new AddressesByNameSearch(searchScope.getObfsCollection());
@@ -198,12 +203,14 @@ public class CoreSearchRequest extends SearchRequest {
 			}
 		};
 
-		amByNameSearch.performSearch(amenityByNameCriteria, amenityByNameResultCallback.getBinding(), new IQueryController() {
-			@Override
-			public boolean isAborted() {
-				return (maxSearchResults > 0 && amenityResultsCounter >= maxSearchResults) || cancelled;
-			}
-		});
+		if (amByNameSearch != null) {
+			amByNameSearch.performSearch(amenityByNameCriteria, amenityByNameResultCallback.getBinding(), new IQueryController() {
+				@Override
+				public boolean isAborted() {
+					return (maxSearchResults > 0 && amenityResultsCounter >= maxSearchResults) || cancelled;
+				}
+			});
+		}
 
 		if (!cancelled) {
 			addrByNameSearch.performSearch(addrByNameCriteria, addrByNameResultCallback.getBinding(), new IQueryController() {
