@@ -58,7 +58,11 @@ public class PoiTypesHelper {
 				}
 				break;
 			case TYPE:
-				return app.getPoiTypes().getPoiTypeByKey(poiTypeObject.getKeyName());
+				AbstractPoiType p = app.getPoiTypes().getPoiTypeByKey(poiTypeObject.getKeyName());
+				if(p == null) {
+					return app.getPoiTypes().getAnyPoiAdditionalTypeByKey(poiTypeObject.getKeyName());
+				}
+				return p;
 		}
 		return null;
 	}
