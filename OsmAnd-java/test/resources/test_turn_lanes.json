@@ -467,6 +467,20 @@
     "expectedResults": {
       "66218888": "TL|C|+TR,C"
     }
+  },
+  {
+    "testName": "26.Spieringweg TL Kruisweg",
+    "startPoint": {
+      "latitude": 45.63933380187198,
+      "longitude": 35.4753301003762
+    },
+    "endPoint": {
+      "latitude": 45.63545549083473,
+      "longitude": 35.47344182522971
+    },
+    "expectedResults": {
+      "7406182": "+TL,C|TR"
+    }
   }
 
 ]
