@@ -1,3 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-</resources>
+<string name="poi_shop">wobchod</string>
+		<string name="poi_shop_food">žiwidłowy wobchod</string>
+	<string name="poi_emergency">nuzowy pad</string>
+	<string name="poi_public_transport">zjawny transport</string>
+		<string name="poi_hiking_routes">pućowanske šćežki</string>
+		<string name="poi_communication">komunikacija</string>
+		<string name="poi_office">běrow</string>
+	<string name="poi_sport">sport</string>
+	<string name="poi_tourism">turizm</string>
+		<string name="poi_sightseeing">widźenja hódne</string>
+		<string name="poi_accomodation">nóclěh</string>
+		<string name="poi_entertainment">zabawa</string>
+		<string name="poi_club">klub</string>
+	<string name="poi_cafe_and_restaurant">kofejownja a hosćenc</string>
+	</resources>
