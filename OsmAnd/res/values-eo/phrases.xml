@@ -426,4 +426,19 @@
 	<string name="poi_picnic_site">Piknika ejo</string>
 	<string name="poi_bar">Drinkejo</string>
 	<string name="poi_pub">Taverno</string>
+	<string name="poi_recycling_green_waste">Bioruboj</string>
+	<string name="poi_recycling_waste">Ruboj specigitaj ensakigitaj</string>
+	<string name="poi_recycling_plastic_packaging">Plastaj ujoj</string>
+	<string name="poi_recycling_newspaper">Gazetoj</string>
+	<string name="poi_recycling_cartons">Paperkestoj</string>
+	<string name="poi_recycling_cardboard">Kartonoj</string>
+	<string name="poi_recycling_magazines">Gazetoj (revuoj)</string>
+	<string name="poi_recycling_paper_packaging">Paperaj ujoj</string>
+	<string name="poi_recycling_small_appliances">Etaj elektronikaj aparatoj</string>
+	<string name="poi_recycling_wood">Ligno</string>
+	<string name="poi_recycling_books">Libroj</string>
+	<string name="poi_recycling_shoes">Ŝuoj</string>
+	<string name="poi_recycling_aluminium">Aluminio</string>
+	<string name="poi_recycling_organic">Bioruboj (manĝaĵoj)</string>
+	<string name="poi_recycling_garden_waste">Bioruboj (ĝardenaj)</string>
 	</resources>
