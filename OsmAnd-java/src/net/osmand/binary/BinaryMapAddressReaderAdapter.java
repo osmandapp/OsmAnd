@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
 
@@ -587,9 +588,12 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
 				// also offsets can be randomly skipped by limit
 				loffsets.sort();
+				
 				TIntArrayList[] refs = new TIntArrayList[5];
+				TIntArrayList[] refsContainer = new TIntArrayList[5];
 				for (int i = 0; i < refs.length; i++) {
 					refs[i] = new TIntArrayList();
+					refsContainer[i] = new TIntArrayList();
 				}
 
 				LOG.info("Searched address structure in " + (System.currentTimeMillis() - time) + "ms. Found " + loffsets.size()
@@ -606,7 +610,7 @@ public class BinaryMapAddressReaderAdapter {
 						if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
 							int slen = codedIS.readRawVarint32();
 							int soldLim = codedIS.pushLimit(slen);
-							readAddressNameData(req, refs, fp);
+							readAddressNameData(req, refs, refsContainer, fp);
 							codedIS.popLimit(soldLim);
 						} else if (stag != 0) {
 							skipUnknownField(st);
@@ -623,23 +627,35 @@ public class BinaryMapAddressReaderAdapter {
 				}
 				for (int i = 0; i < typeFilter.size() && !req.isCancelled(); i++) {
 					TIntArrayList list = refs[typeFilter.get(i)];
+					TIntArrayList listContainer = refsContainer[typeFilter.get(i)];
+					
 					if (typeFilter.get(i) == STREET_TYPE) {
-						for (int j = 0; j < list.size() && !req.isCancelled(); j += 2) {
+						TIntLongHashMap mp = new TIntLongHashMap();
+						for (int j = 0; j < list.size(); j++) {
+							mp.put(list.get(j), listContainer.get(j));
+						}
+						list.sort();
+						for (int j = 0; j < list.size() && !req.isCancelled(); j ++) {
+							int offset = list.get(j);
+							if (j > 0 &&  offset == list.get(j - 1)) {
+								continue;
+							}
 							City obj;
 							{
-								codedIS.seek(list.get(j + 1));
+								int contOffset = (int) mp.get(offset);
+								codedIS.seek(contOffset);
 								int len = codedIS.readRawVarint32();
 								int old = codedIS.pushLimit(len);
-								obj = readCityHeader(null, list.get(j + 1), null);
+								obj = readCityHeader(null, contOffset, null);
 								codedIS.popLimit(old);
 							}
 							if (obj != null) {
-								codedIS.seek(list.get(j));
+								codedIS.seek(offset);
 								int len = codedIS.readRawVarint32();
 								int old = codedIS.pushLimit(len);
 								LatLon l = obj.getLocation();
 								Street s = new Street(obj);
-								s.setFileOffset(list.get(j));
+								s.setFileOffset(offset);
 								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
 										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
 										reg.attributeTagsTable);
@@ -663,6 +679,9 @@ public class BinaryMapAddressReaderAdapter {
 						TIntSet published = new TIntHashSet();
 						for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
 							int offset = list.get(j);
+							if (j > 0 && offset == list.get(j - 1)) {
+								continue;
+							}
 							codedIS.seek(offset);
 							int len = codedIS.readRawVarint32();
 							int old = codedIS.pushLimit(len);
@@ -686,8 +705,10 @@ public class BinaryMapAddressReaderAdapter {
 
 	}
 
-	private void readAddressNameData(SearchRequest<MapObject> req, TIntArrayList[] refs, int fp) throws IOException {
+	private void readAddressNameData(SearchRequest<MapObject> req, TIntArrayList[] refs,
+			TIntArrayList[] refsContainer, int fp) throws IOException {
 		TIntArrayList toAdd = null;
+		TIntArrayList toAddCity = null;
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -704,8 +725,8 @@ public class BinaryMapAddressReaderAdapter {
 				codedIS.readString();
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOCITYINDEX_FIELD_NUMBER:
-				if (toAdd != null) {
-					toAdd.add(fp - codedIS.readInt32());
+				if (toAddCity != null) {
+					toAddCity.add(fp - codedIS.readInt32());
 				}
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOINDEX_FIELD_NUMBER:
@@ -716,6 +737,7 @@ public class BinaryMapAddressReaderAdapter {
 			case AddressNameIndexDataAtom.TYPE_FIELD_NUMBER:
 				int type = codedIS.readInt32();
 				toAdd = refs[type];
+				toAddCity = refsContainer[type];
 				break;
 			default:
 				skipUnknownField(t);

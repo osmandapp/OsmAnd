@@ -2019,7 +2019,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 //		File fl = new File(System.getProperty("maps") + /Synthetic_test_rendering.obf");
-		File fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe_merge.obf");
+		File fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2304,7 +2304,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "P", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "Amstelvee", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 		reader.searchAddressDataByName(req);
 	}
 

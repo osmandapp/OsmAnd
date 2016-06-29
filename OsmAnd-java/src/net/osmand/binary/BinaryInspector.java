@@ -75,7 +75,7 @@ public class BinaryInspector {
 //					"-vrouting",
 					"-vaddress", "-vcities","-vstreetgroups",
 					"-vstreets", "-vbuildings", "-vintersections",
-					"-lang=ru",
+//					"-lang=ru",
 					"-bbox=4.8486,52.3084,4.8747,52.2970",
 //					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm" 
 					System.getProperty("maps.dir")+"/Netherlands_noord-holland_europe.obf"
