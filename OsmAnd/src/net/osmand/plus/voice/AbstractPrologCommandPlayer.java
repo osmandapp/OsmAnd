@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import android.media.AudioManager;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -279,6 +281,13 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		if (mAudioFocusHelper != null) {
 			mAudioFocusHelper.requestFocus(ctx, streamType);
 		}
+		if (ctx.getSettings().INTERRUPT_MUSIC.get()) {
+			// TODO: Delay the prompts a bit until connection is established
+				startBtSco(ctx);
+			//if (btScoStatus == false) {
+			//	Toast.makeText(this, R.string."BT connection error: ", Toast.LENGTH_SHORT).show();
+			//}
+		}
 	}
 
 	private AudioFocusHelper getAudioFocus() {
@@ -292,10 +301,48 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	
 	protected void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
+		if (ctx.getSettings().INTERRUPT_MUSIC.get()) {
+			stopBtSco(ctx);
+		}
 		if (mAudioFocusHelper != null) {
 			mAudioFocusHelper.abandonFocus(ctx, streamType);
 			mAudioFocusHelper = null;
 		}
 	}
-	
+
+	private boolean btScoStatus = false;
+
+	private boolean startBtSco(Context context) {
+	// Establish a low quality Synchronous Connection-Oriented link to BT to e.g. interrupt a car stereo
+	// http://stackoverflow.com/questions/2144694/routing-audio-to-bluetooth-headset-non-a2dp-on-android
+		try {
+			AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+			if (mAudioManager == null) {
+				return false;
+			}
+			mAudioManager.setMode(0);
+			mAudioManager.setBluetoothScoOn(true);
+			mAudioManager.startBluetoothSco();
+			mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+			btScoStatus = true;
+		} catch (Exception e) {
+			System.out.println("Exception starting BT SCO " + e.getMessage() );
+			btScoStatus = false;
+			return false;
+		}
+		return btScoStatus;
+	}
+
+	private boolean stopBtSco(Context context) {
+		btScoStatus = false;
+		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+		if (mAudioManager == null) {
+			return false;
+		}
+		mAudioManager.setBluetoothScoOn(false);
+		mAudioManager.stopBluetoothSco();
+		mAudioManager.setMode(AudioManager.MODE_NORMAL);
+		return true;
+	}
+
 }
