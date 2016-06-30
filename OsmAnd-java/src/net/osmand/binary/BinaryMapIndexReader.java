@@ -2304,7 +2304,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Amstelvee", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "Logger", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 		reader.searchAddressDataByName(req);
 	}
 
