@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import net.osmand.core.samples.android.sample1.MapUtils;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
-import net.osmand.core.samples.android.sample1.search.tokens.NameFilterSearchToken;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
+import net.osmand.core.samples.android.sample1.search.tokens.NameFilterToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken.TokenType;
 import net.osmand.util.Algorithms;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class SearchString {
 
-	private String queryText = "";
+	private String plainText = "";
 	private List<SearchToken> tokens = new ArrayList<>();
 	private String lang;
 
@@ -28,21 +28,21 @@ public class SearchString {
 
 	public SearchString copy() {
 		SearchString res = new SearchString(lang);
-		res.queryText = queryText;
+		res.plainText = plainText;
 		res.tokens = new ArrayList<>(tokens);
 		return res;
 	}
 
-	public String getQueryText() {
-		return queryText;
+	public String getPlainText() {
+		return plainText;
 	}
 
-	public void setQueryText(String queryText) {
-		int newTextLength = queryText.length();
-		int currTextLength = this.queryText.length();
+	public void setPlainText(String plainText) {
+		int newTextLength = plainText.length();
+		int currTextLength = this.plainText.length();
 		boolean isNewText = currTextLength == 0
 				|| newTextLength == 0
-				|| !this.queryText.regionMatches(0, queryText, 0,
+				|| !this.plainText.regionMatches(0, plainText, 0,
 					newTextLength > currTextLength ? currTextLength : newTextLength);
 
 		int lastKnownTokenIndex = -1;
@@ -55,7 +55,7 @@ public class SearchString {
 				int lastTokenIndex = token.getLastIndex();
 				if (lastTokenIndex > newTextLength - 1
 						|| token.hasEmptyQuery()
-						|| (lastTokenIndex < newTextLength - 1 && !startWithDelimiter(queryText.substring(lastTokenIndex + 1)))) {
+						|| (lastTokenIndex < newTextLength - 1 && !startWithDelimiter(plainText.substring(lastTokenIndex + 1)))) {
 					brokenTokenIndex = i;
 					break;
 				}
@@ -76,53 +76,53 @@ public class SearchString {
 		if (newTextLength - 1 > lastKnownTokenIndex) {
 			int firstWordIndex = lastKnownTokenIndex + 1;
 			for (int i = lastKnownTokenIndex + 1; i < newTextLength; i++) {
-				char c = queryText.charAt(i);
+				char c = plainText.charAt(i);
 				if (isDelimiterChar(c)) {
 					if (i == firstWordIndex) {
 						firstWordIndex++;
 					} else {
-						SearchToken token = new NameFilterSearchToken(firstWordIndex, queryText.substring(firstWordIndex, i));
+						SearchToken token = new NameFilterToken(firstWordIndex, plainText.substring(firstWordIndex, i));
 						tokens.add(token);
 						firstWordIndex = i + 1;
 					}
 				}
 			}
 			if (firstWordIndex <= newTextLength - 1) {
-				SearchToken token = new NameFilterSearchToken(firstWordIndex, queryText.substring(firstWordIndex));
+				SearchToken token = new NameFilterToken(firstWordIndex, plainText.substring(firstWordIndex));
 				tokens.add(token);
-			} else if (endWithDelimeter(queryText)) {
+			} else if (endWithDelimeter(plainText)) {
 				SearchToken lastToken = getLastToken();
-				if (lastToken.getType() == TokenType.SEARCH_OBJECT) {
-					((ObjectSearchToken) lastToken).applySuggestion();
+				if (lastToken.getType() == TokenType.OBJECT) {
+					((ObjectToken) lastToken).applySuggestion();
 				}
-				SearchToken token = new NameFilterSearchToken(firstWordIndex, "");
+				SearchToken token = new NameFilterToken(firstWordIndex, "");
 				tokens.add(token);
 			}
 		}
 
-		this.queryText = queryText;
+		this.plainText = plainText;
 	}
 
 	public void completeQuery(@NonNull SearchObject searchObject) {
-		String newQueryText;
+		String text;
 		String objectName = searchObject.getName(lang);
 		int startIndex;
 		SearchToken lastToken = getLastToken();
 		if (lastToken == null || lastToken.hasEmptyQuery()) {
-			startIndex = queryText.length();
-			newQueryText = queryText + objectName + " ";
+			startIndex = plainText.length();
+			text = plainText + objectName + " ";
 		} else {
 			startIndex = lastToken.getStartIndex();
-			newQueryText = queryText.substring(0, startIndex) + objectName + " ";
+			text = plainText.substring(0, startIndex) + objectName + " ";
 		}
-		ObjectSearchToken token = new ObjectSearchToken(startIndex, objectName, searchObject, false);
+		ObjectToken token = new ObjectToken(startIndex, objectName, searchObject, false);
 		if (lastToken == null) {
 			tokens.add(token);
 		} else {
 			tokens.set(tokens.size() - 1, token);
 		}
-		tokens.add(new NameFilterSearchToken(newQueryText.length(), ""));
-		queryText = newQueryText;
+		tokens.add(new NameFilterToken(text.length(), ""));
+		plainText = text;
 	}
 
 	private boolean endWithDelimeter(String text) {
@@ -138,13 +138,13 @@ public class SearchString {
 		return c == ',' || c == ' ';
 	}
 
-	public NameFilterSearchToken getNextNameFilterToken() {
-		NameFilterSearchToken res = null;
+	public NameFilterToken getNextNameFilterToken() {
+		NameFilterToken res = null;
 		if (!tokens.isEmpty()) {
 			for (int i = tokens.size() - 1; i >= 0; i--) {
 			    SearchToken token = tokens.get(i);
 				if (token.getType() == TokenType.NAME_FILTER) {
-					res = (NameFilterSearchToken) token;
+					res = (NameFilterToken) token;
 				} else {
 					break;
 				}
@@ -160,13 +160,13 @@ public class SearchString {
 		return null;
 	}
 
-	public ObjectSearchToken getLastObjectToken() {
-		ObjectSearchToken res = null;
+	public ObjectToken getLastObjectToken() {
+		ObjectToken res = null;
 		if (!tokens.isEmpty()) {
 			for (int i = tokens.size() - 1; i >= 0; i--) {
 				SearchToken token = tokens.get(i);
-				if (token.getType() == TokenType.SEARCH_OBJECT) {
-					res = (ObjectSearchToken) token;
+				if (token.getType() == TokenType.OBJECT) {
+					res = (ObjectToken) token;
 					break;
 				}
 			}
@@ -183,11 +183,11 @@ public class SearchString {
 		return false;
 	}
 
-	public Map<SearchObjectType, SearchToken> getCompleteObjectTokens() {
-		Map<SearchObjectType, SearchToken> map = new LinkedHashMap<>();
+	public Map<SearchObjectType, ObjectToken> getCompleteObjectTokens() {
+		Map<SearchObjectType, ObjectToken> map = new LinkedHashMap<>();
 		for (SearchToken token : tokens) {
-			if (token.getType() == TokenType.SEARCH_OBJECT && !((ObjectSearchToken)token).isSuggestion()) {
-				map.put(token.getSearchObject().getType(), token);
+			if (token.getType() == TokenType.OBJECT && !((ObjectToken)token).isSuggestion()) {
+				map.put(((ObjectToken)token).getSearchObject().getType(), (ObjectToken)token);
 			}
 		}
 		return map;
@@ -196,8 +196,8 @@ public class SearchString {
 	public List<SearchObject> getCompleteObjects() {
 		List<SearchObject> list = new ArrayList<>();
 		for (SearchToken token : tokens) {
-			if (token.getType() == TokenType.SEARCH_OBJECT && !((ObjectSearchToken)token).isSuggestion()) {
-				list.add(token.getSearchObject());
+			if (token.getType() == TokenType.OBJECT && !((ObjectToken)token).isSuggestion()) {
+				list.add(((ObjectToken)token).getSearchObject());
 			}
 		}
 		return list;
@@ -206,13 +206,13 @@ public class SearchString {
 	public static void main(String[] args){
 		//test
 		SearchString searchString = new SearchString(MapUtils.LANGUAGE);
-		searchString.setQueryText("cit");
-		searchString.setQueryText("city");
-		searchString.setQueryText("city ");
-		searchString.setQueryText("city s");
-		searchString.setQueryText("city st");
-		searchString.setQueryText("city street ");
-		searchString.setQueryText("city street 8");
-		searchString.setQueryText("new");
+		searchString.setPlainText("cit");
+		searchString.setPlainText("city");
+		searchString.setPlainText("city ");
+		searchString.setPlainText("city s");
+		searchString.setPlainText("city st");
+		searchString.setPlainText("city street ");
+		searchString.setPlainText("city street 8");
+		searchString.setPlainText("new");
 	}
 }

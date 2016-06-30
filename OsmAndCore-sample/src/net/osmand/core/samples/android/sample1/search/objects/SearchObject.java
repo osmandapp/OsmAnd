@@ -2,7 +2,7 @@ package net.osmand.core.samples.android.sample1.search.objects;
 
 import net.osmand.core.jni.QStringStringHash;
 
-public abstract class SearchObject {
+public abstract class SearchObject<T> {
 
 	public enum SearchObjectType {
 		CITY,
@@ -17,21 +17,21 @@ public abstract class SearchObject {
 	}
 
 	private SearchObjectType type;
-	private Object internalObject;
+	private T baseObject;
 
 	private double priority;
 
-	protected SearchObject(SearchObjectType type, Object internalObject) {
+	protected SearchObject(SearchObjectType type, T baseObject) {
 		this.type = type;
-		this.internalObject = internalObject;
+		this.baseObject = baseObject;
 	}
 
 	public SearchObjectType getType() {
 		return type;
 	}
 
-	protected Object getInternalObject() {
-		return internalObject;
+	public T getBaseObject() {
+		return baseObject;
 	}
 
 	public abstract String getNativeName();

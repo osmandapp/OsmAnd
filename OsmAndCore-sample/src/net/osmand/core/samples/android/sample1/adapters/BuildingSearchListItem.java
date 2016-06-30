@@ -11,12 +11,12 @@ public class BuildingSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 
-	public BuildingSearchListItem(SampleApplication app, BuildingSearchObject searchObject) {
-		super(app, searchObject);
+	public BuildingSearchListItem(SampleApplication app, BuildingSearchObject buildingObject) {
+		super(app, buildingObject);
 
-		nameStr = searchObject.getName(MapUtils.LANGUAGE);
+		nameStr = buildingObject.getName(MapUtils.LANGUAGE);
 
-		Building building = searchObject.getBuilding();
+		Building building = buildingObject.getBaseObject();
 
 		Street street = building.getStreet();
 		if (street != null) {

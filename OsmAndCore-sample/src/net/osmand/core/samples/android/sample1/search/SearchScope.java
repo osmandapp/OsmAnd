@@ -19,7 +19,7 @@ import net.osmand.core.samples.android.sample1.search.objects.SearchObject.Searc
 import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
 import net.osmand.core.samples.android.sample1.search.objects.StreetGroupSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.StreetSearchObject;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class SearchScope {
 	private ObfsCollection obfsCollection;
 	private SearchString searchString;
 	private String lang;
-	private Map<SearchObjectType, SearchToken> objectTokens;
+	private Map<SearchObjectType, ObjectToken> objectTokens;
 	private PointI searchLocation31;
 	private AreaI searchableArea;
 	private AreaI obfAreaFilter;
@@ -110,7 +110,7 @@ public class SearchScope {
 		if (objectTokens.containsKey(SearchObjectType.STREET)) {
 			StreetSearchObject streetSearchObject =
 					(StreetSearchObject) objectTokens.get(SearchObjectType.STREET).getSearchObject();
-			criteria.setAddressFilter(streetSearchObject.getStreet());
+			criteria.setAddressFilter(streetSearchObject.getBaseObject());
 			if (objectTokens.containsKey(SearchObjectType.POSTCODE)) {
 				PostcodeSearchObject postcodeSearchObject =
 						(PostcodeSearchObject) objectTokens.get(SearchObjectType.POSTCODE).getSearchObject();
@@ -118,13 +118,13 @@ public class SearchScope {
 			}
 		} else if (objectTokens.containsKey(SearchObjectType.CITY)) {
 			criteria.setAddressFilter(((StreetGroupSearchObject) objectTokens.get(SearchObjectType.CITY)
-					.getSearchObject()).getStreetGroup());
+					.getSearchObject()).getBaseObject());
 		} else if (objectTokens.containsKey(SearchObjectType.VILLAGE)) {
 			criteria.setAddressFilter(((StreetGroupSearchObject) objectTokens.get(SearchObjectType.VILLAGE)
-					.getSearchObject()).getStreetGroup());
+					.getSearchObject()).getBaseObject());
 		} else if (objectTokens.containsKey(SearchObjectType.POSTCODE)) {
 			criteria.setAddressFilter(((StreetGroupSearchObject) objectTokens.get(SearchObjectType.POSTCODE)
-					.getSearchObject()).getStreetGroup());
+					.getSearchObject()).getBaseObject());
 		}
 	}
 
@@ -191,7 +191,7 @@ public class SearchScope {
 			if (token.getType() == SearchToken.TokenType.NAME_FILTER
 					&& !token.hasEmptyQuery()) {
 				boolean suggeston = token == searchString.getLastToken();
-				newToken = new ObjectSearchToken(token, searchObjects.get(0), suggeston);
+				newToken = new ObjectToken(token, searchObjects.get(0), suggeston);
 				searchString.replaceToken(token, newToken);
 			}
 		}
@@ -220,22 +220,22 @@ public class SearchScope {
 
 			case STREET:
 				StreetSearchObject streetSearchObject = (StreetSearchObject) searchObject;
-				Street street = streetSearchObject.getStreet();
+				Street street = streetSearchObject.getBaseObject();
 				if (!citySelected) {
 					priority = getPriorityByDistance(9.0, streetSearchObject.getDistance());
 				} else {
 					boolean streetFromSelectedCity = false;
-					for (SearchToken st : objectTokens.values()) {
+					for (ObjectToken st : objectTokens.values()) {
 						if (st.getSearchObject() instanceof StreetGroupSearchObject) {
 							StreetGroup streetGroup =
-									((StreetGroupSearchObject) st.getSearchObject()).getStreetGroup();
+									((StreetGroupSearchObject) st.getSearchObject()).getBaseObject();
 							if (streetGroup.getId().getId().equals(street.getStreetGroup().getId().getId())) {
 								streetFromSelectedCity = true;
 								break;
 							}
 						} else if (st.getSearchObject() instanceof StreetSearchObject) {
 							StreetGroup streetGroup =
-									((StreetSearchObject) st.getSearchObject()).getStreet().getStreetGroup();
+									((StreetSearchObject) st.getSearchObject()).getBaseObject().getStreetGroup();
 							if (streetGroup.getId().getId().equals(street.getStreetGroup().getId().getId())) {
 								streetFromSelectedCity = true;
 								break;
@@ -256,10 +256,10 @@ public class SearchScope {
 	}
 
 	private double getCityType(StreetGroupSearchObject searchObject) {
-		if (searchObject.getStreetGroup().getType() == ObfAddressStreetGroupType.CityOrTown) {
-			if (searchObject.getStreetGroup().getSubtype() == ObfAddressStreetGroupSubtype.City) {
+		if (searchObject.getBaseObject().getType() == ObfAddressStreetGroupType.CityOrTown) {
+			if (searchObject.getBaseObject().getSubtype() == ObfAddressStreetGroupSubtype.City) {
 				return 1.0;
-			} else if (searchObject.getStreetGroup().getSubtype() == ObfAddressStreetGroupSubtype.Town) {
+			} else if (searchObject.getBaseObject().getSubtype() == ObfAddressStreetGroupSubtype.Town) {
 				return 1.5;
 			}
 		}

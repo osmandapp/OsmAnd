@@ -2,12 +2,12 @@ package net.osmand.core.samples.android.sample1.search.objects;
 
 import net.osmand.core.jni.PointI;
 
-public abstract class SearchPositionObject extends SearchObject {
+public abstract class SearchPositionObject<T> extends SearchObject<T> {
 
 	private double distance;
 
-	public SearchPositionObject(SearchObjectType type, Object internalObject) {
-		super(type, internalObject);
+	public SearchPositionObject(SearchObjectType type, T object) {
+		super(type, object);
 	}
 
 	public abstract PointI getPosition31();

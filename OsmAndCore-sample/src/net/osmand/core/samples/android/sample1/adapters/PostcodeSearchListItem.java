@@ -10,10 +10,10 @@ public class PostcodeSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 
-	public PostcodeSearchListItem(SampleApplication app, PostcodeSearchObject searchObject) {
-		super(app, searchObject);
+	public PostcodeSearchListItem(SampleApplication app, PostcodeSearchObject postcodeObject) {
+		super(app, postcodeObject);
 
-		nameStr = searchObject.getNativeName();
+		nameStr = postcodeObject.getNativeName();
 		typeStr = "Postcode";
 	}
 

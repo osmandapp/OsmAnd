@@ -26,20 +26,20 @@ public class PoiSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 
-	public PoiSearchListItem(SampleApplication app, PoiSearchObject searchObject) {
-		super(app, searchObject);
-		amenity = parseAmenity(searchObject);
+	public PoiSearchListItem(SampleApplication app, PoiSearchObject poiObject) {
+		super(app, poiObject);
+		amenity = parseAmenity(poiObject);
 		nameStr = amenity.getName(MapUtils.LANGUAGE);
 		typeStr = getTypeStr();
 	}
 
-	private Amenity parseAmenity(PoiSearchObject searchItem) {
+	private Amenity parseAmenity(PoiSearchObject poiObject) {
 
 		String categoryName = "";
 		String subcategoryName = "";
 		Map<String, String> values = new HashMap<>();
 
-		net.osmand.core.jni.Amenity coreAmenity = searchItem.getAmenity();
+		net.osmand.core.jni.Amenity coreAmenity = poiObject.getBaseObject();
 		DecodedCategoryList catList = coreAmenity.getDecodedCategories();
 		if (catList.size() > 0) {
 			DecodedCategory decodedCategory = catList.get(0);
@@ -63,7 +63,7 @@ public class PoiSearchListItem extends SearchListPositionItem {
 		PoiCategory category = poiTypes.getPoiCategoryByName(categoryName);
 		a.setType(category);
 		a.setSubType(subcategoryName);
-		a.setName(searchItem.getNativeName());
+		a.setName(poiObject.getNativeName());
 
 		QStringStringHash localizedNamesMap = coreAmenity.getLocalizedNames();
 		QStringList locNamesKeys = localizedNamesMap.keys();

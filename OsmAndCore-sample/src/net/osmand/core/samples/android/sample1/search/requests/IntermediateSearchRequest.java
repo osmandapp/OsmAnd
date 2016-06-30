@@ -23,7 +23,7 @@ public class IntermediateSearchRequest extends SearchRequest {
 
 		SearchToken token = searchScope.getSearchString().getLastToken();
 		if (token != null && token.getType() == SearchToken.TokenType.NAME_FILTER) {
-			keyword = token.getQueryText().toLowerCase();
+			keyword = token.getPlainText().toLowerCase();
 		}
 	}
 
