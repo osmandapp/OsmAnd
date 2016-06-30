@@ -2032,7 +2032,7 @@
 
     <string name="rendering_attr_hideProposed_name">Oggetti proposti</string>
     <string name="read_more">Altro</string>
-    <string name="whats_new">Novità</string>
+    <string name="whats_new">Novità di</string>
     <string name="share_osm_edits_subject">Modifiche OSM condivise tramite OsmAnd</string>
     <string name="lang_nds">Basso tedesco</string>
     <string name="lang_mk">Macedone</string>
@@ -2258,7 +2258,7 @@
     <string name="access_direction_haptic_feedback_descr">Indica la direzione di destinazione con la vibrazione</string>
     <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OSM Live (Beta)</string>
 	<string name="use_osm_live_routing">Navigazione OSM Live</string>
-    <string name="map_widget_battery">Carica batteria</string>
+    <string name="map_widget_battery">Livello della batteria</string>
     <string name="lang_hu_formal">Ungherese (formale)</string>
     <string name="current_track">Tracciato attuale</string>
     <string name="change_markers_position">Cambia la posizione del marcatore</string>
@@ -2268,4 +2268,5 @@
     <string name="lang_kn">Kannada</string>
     <string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Treno</string>
+    <string name="lang_be_BY">Bielorusso (Latino)</string>
     </resources>
