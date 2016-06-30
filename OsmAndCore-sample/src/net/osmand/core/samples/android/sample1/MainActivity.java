@@ -50,12 +50,12 @@ import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
 import net.osmand.core.samples.android.sample1.adapters.SearchListPositionItem;
 import net.osmand.core.samples.android.sample1.search.SearchAPI;
 import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
+import net.osmand.core.samples.android.sample1.search.objects.PoiTypeObject;
 import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject.ObjectType;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectToken;
-import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -210,22 +210,20 @@ public class MainActivity extends Activity {
 				res = poiTypesHelper.findPoiTypes(keyword);
 			}
 
-			/*
 			for (AbstractPoiType pt : res) {
 				if (pt instanceof PoiCategory) {
 					result.add(new PoiTypeSearchObject(ObjectType.CATEGORY,
-							pt.getTranslation(), pt.getKeyName(), null));
+							new PoiTypeObject(pt.getTranslation(), pt.getKeyName(), null)));
 				} else if (pt instanceof PoiFilter) {
 					PoiFilter poiFilter = (PoiFilter) pt;
 					result.add(new PoiTypeSearchObject(ObjectType.FILTER,
-							poiFilter.getTranslation(), poiFilter.getKeyName(), poiFilter.getPoiCategory().getKeyName()));
+							new PoiTypeObject(poiFilter.getTranslation(), poiFilter.getKeyName(), poiFilter.getPoiCategory().getKeyName())));
 				} else if (pt instanceof PoiType) {
 					PoiType poiType = (PoiType) pt;
 					result.add(new PoiTypeSearchObject(ObjectType.TYPE,
-							poiType.getTranslation(), poiType.getKeyName(), poiType.getCategory().getKeyName()));
+							new PoiTypeObject(poiType.getTranslation(), poiType.getKeyName(), poiType.getCategory().getKeyName())));
 				}
 			}
-			*/
 
 			return result;
 		}
@@ -236,9 +234,9 @@ public class MainActivity extends Activity {
 			processSearchResult(searchObjects);
 
 			StringBuilder sb = new StringBuilder();
-			Map<SearchObjectType, ObjectToken> objectTokensMap = searchAPI.getObjectTokens();
-			ObjectToken lastObjectToken = searchAPI.getLastObjectToken();
-			for (ObjectToken token : objectTokensMap.values()) {
+			Map<SearchObjectType, ObjectSearchToken> objectTokensMap = searchAPI.getObjectTokens();
+			ObjectSearchToken lastObjectToken = searchAPI.getLastObjectToken();
+			for (ObjectSearchToken token : objectTokensMap.values()) {
 				if (sb.length() > 0) {
 					sb.append(" • ");
 				}

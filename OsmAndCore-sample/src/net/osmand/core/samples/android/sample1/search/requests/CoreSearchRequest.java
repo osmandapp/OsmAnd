@@ -19,8 +19,8 @@ import net.osmand.core.samples.android.sample1.search.objects.PoiSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.SearchObjectsHelper;
 import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
-import net.osmand.core.samples.android.sample1.search.tokens.NameFilterToken;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectToken;
+import net.osmand.core.samples.android.sample1.search.tokens.NameFilterSearchToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class CoreSearchRequest extends SearchRequest {
 
 		SearchString searchString = searchScope.getSearchString();
 		SearchToken lastToken = searchString.getLastToken();
-		NameFilterToken token = searchString.getNextNameFilterToken();
+		NameFilterSearchToken token = searchString.getNextNameFilterToken();
 		while (token != null && !cancelled) {
 			if (!token.hasEmptyQuery()) {
 				res = doCoreSearch(token);
@@ -104,7 +104,7 @@ public class CoreSearchRequest extends SearchRequest {
 
 		if (lastToken == null || lastToken.hasEmptyQuery()) {
 			// 2.4 Search considered to be complete if there no NF in the end (not finished or not regonized objects)
-			ObjectToken lastObjectToken = searchString.getLastObjectToken();
+			ObjectSearchToken lastObjectToken = searchString.getLastObjectToken();
 			if (lastObjectToken == null) {
 				// Last object = [] - none. We display list of poi categories (recents separate tab)
 				List<SearchObject> externalObjects = searchCallback.fetchExternalObjects("", null);
@@ -124,15 +124,15 @@ public class CoreSearchRequest extends SearchRequest {
 						break;
 					case CITY:
 						// Last object - City. Display (list of streets could be quite long)
-						res = doCoreSearch(new NameFilterToken(0, ""));
+						res = doCoreSearch(new NameFilterSearchToken(0, ""));
 						break;
 					case STREET:
 						// Last object - Street. Display building and intersetcting street
-						res = doCoreSearch(new NameFilterToken(0, ""));
+						res = doCoreSearch(new NameFilterSearchToken(0, ""));
 						break;
 					case POSTCODE:
 						// Last object - Postcode. Display building and streets
-						res = doCoreSearch(new NameFilterToken(0, ""));
+						res = doCoreSearch(new NameFilterSearchToken(0, ""));
 						break;
 					case BUILDING:
 						// Last object - Building - object is found

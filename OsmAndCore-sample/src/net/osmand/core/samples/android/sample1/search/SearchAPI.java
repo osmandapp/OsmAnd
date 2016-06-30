@@ -11,7 +11,7 @@ import net.osmand.core.samples.android.sample1.search.objects.SearchObject.Searc
 import net.osmand.core.samples.android.sample1.search.requests.CoreSearchRequest;
 import net.osmand.core.samples.android.sample1.search.requests.IntermediateSearchRequest;
 import net.osmand.core.samples.android.sample1.search.requests.SearchRequest;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.ArrayList;
@@ -115,11 +115,11 @@ public class SearchAPI {
 		this.searchObjects = searchObjects;
 	}
 
-	public Map<SearchObjectType, ObjectToken> getObjectTokens() {
+	public Map<SearchObjectType, ObjectSearchToken> getObjectTokens() {
 		return searchString.getCompleteObjectTokens();
 	}
 
-	public ObjectToken getLastObjectToken() {
+	public ObjectSearchToken getLastObjectToken() {
 		return searchString.getLastObjectToken();
 	}
 

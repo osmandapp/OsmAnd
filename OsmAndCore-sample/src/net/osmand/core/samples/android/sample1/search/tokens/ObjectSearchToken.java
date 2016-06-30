@@ -2,18 +2,18 @@ package net.osmand.core.samples.android.sample1.search.tokens;
 
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 
-public class ObjectToken extends SearchToken {
+public class ObjectSearchToken extends SearchToken {
 
 	private SearchObject searchObject;
 	private boolean suggestion = true;
 
-	public ObjectToken(SearchToken searchToken, SearchObject searchObject, boolean suggestion) {
+	public ObjectSearchToken(SearchToken searchToken, SearchObject searchObject, boolean suggestion) {
 		super(TokenType.OBJECT, searchToken.getStartIndex(), searchToken.getPlainText());
 		this.searchObject = searchObject;
 		this.suggestion = suggestion;
 	}
 
-	public ObjectToken(int startIndex, String plainText, SearchObject searchObject, boolean suggestion) {
+	public ObjectSearchToken(int startIndex, String plainText, SearchObject searchObject, boolean suggestion) {
 		super(TokenType.OBJECT, startIndex, plainText);
 		this.searchObject = searchObject;
 		this.suggestion = suggestion;

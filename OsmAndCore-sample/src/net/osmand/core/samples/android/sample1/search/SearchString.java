@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import net.osmand.core.samples.android.sample1.MapUtils;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
-import net.osmand.core.samples.android.sample1.search.tokens.NameFilterToken;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectToken;
+import net.osmand.core.samples.android.sample1.search.tokens.NameFilterSearchToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken.TokenType;
 import net.osmand.util.Algorithms;
@@ -81,21 +81,21 @@ public class SearchString {
 					if (i == firstWordIndex) {
 						firstWordIndex++;
 					} else {
-						SearchToken token = new NameFilterToken(firstWordIndex, plainText.substring(firstWordIndex, i));
+						SearchToken token = new NameFilterSearchToken(firstWordIndex, plainText.substring(firstWordIndex, i));
 						tokens.add(token);
 						firstWordIndex = i + 1;
 					}
 				}
 			}
 			if (firstWordIndex <= newTextLength - 1) {
-				SearchToken token = new NameFilterToken(firstWordIndex, plainText.substring(firstWordIndex));
+				SearchToken token = new NameFilterSearchToken(firstWordIndex, plainText.substring(firstWordIndex));
 				tokens.add(token);
 			} else if (endWithDelimeter(plainText)) {
 				SearchToken lastToken = getLastToken();
 				if (lastToken.getType() == TokenType.OBJECT) {
-					((ObjectToken) lastToken).applySuggestion();
+					((ObjectSearchToken) lastToken).applySuggestion();
 				}
-				SearchToken token = new NameFilterToken(firstWordIndex, "");
+				SearchToken token = new NameFilterSearchToken(firstWordIndex, "");
 				tokens.add(token);
 			}
 		}
@@ -115,13 +115,13 @@ public class SearchString {
 			startIndex = lastToken.getStartIndex();
 			text = plainText.substring(0, startIndex) + objectName + " ";
 		}
-		ObjectToken token = new ObjectToken(startIndex, objectName, searchObject, false);
+		ObjectSearchToken token = new ObjectSearchToken(startIndex, objectName, searchObject, false);
 		if (lastToken == null) {
 			tokens.add(token);
 		} else {
 			tokens.set(tokens.size() - 1, token);
 		}
-		tokens.add(new NameFilterToken(text.length(), ""));
+		tokens.add(new NameFilterSearchToken(text.length(), ""));
 		plainText = text;
 	}
 
@@ -138,13 +138,13 @@ public class SearchString {
 		return c == ',' || c == ' ';
 	}
 
-	public NameFilterToken getNextNameFilterToken() {
-		NameFilterToken res = null;
+	public NameFilterSearchToken getNextNameFilterToken() {
+		NameFilterSearchToken res = null;
 		if (!tokens.isEmpty()) {
 			for (int i = tokens.size() - 1; i >= 0; i--) {
 			    SearchToken token = tokens.get(i);
 				if (token.getType() == TokenType.NAME_FILTER) {
-					res = (NameFilterToken) token;
+					res = (NameFilterSearchToken) token;
 				} else {
 					break;
 				}
@@ -160,13 +160,13 @@ public class SearchString {
 		return null;
 	}
 
-	public ObjectToken getLastObjectToken() {
-		ObjectToken res = null;
+	public ObjectSearchToken getLastObjectToken() {
+		ObjectSearchToken res = null;
 		if (!tokens.isEmpty()) {
 			for (int i = tokens.size() - 1; i >= 0; i--) {
 				SearchToken token = tokens.get(i);
 				if (token.getType() == TokenType.OBJECT) {
-					res = (ObjectToken) token;
+					res = (ObjectSearchToken) token;
 					break;
 				}
 			}
@@ -183,11 +183,11 @@ public class SearchString {
 		return false;
 	}
 
-	public Map<SearchObjectType, ObjectToken> getCompleteObjectTokens() {
-		Map<SearchObjectType, ObjectToken> map = new LinkedHashMap<>();
+	public Map<SearchObjectType, ObjectSearchToken> getCompleteObjectTokens() {
+		Map<SearchObjectType, ObjectSearchToken> map = new LinkedHashMap<>();
 		for (SearchToken token : tokens) {
-			if (token.getType() == TokenType.OBJECT && !((ObjectToken)token).isSuggestion()) {
-				map.put(((ObjectToken)token).getSearchObject().getType(), (ObjectToken)token);
+			if (token.getType() == TokenType.OBJECT && !((ObjectSearchToken)token).isSuggestion()) {
+				map.put(((ObjectSearchToken)token).getSearchObject().getType(), (ObjectSearchToken)token);
 			}
 		}
 		return map;
@@ -196,8 +196,8 @@ public class SearchString {
 	public List<SearchObject> getCompleteObjects() {
 		List<SearchObject> list = new ArrayList<>();
 		for (SearchToken token : tokens) {
-			if (token.getType() == TokenType.OBJECT && !((ObjectToken)token).isSuggestion()) {
-				list.add(((ObjectToken)token).getSearchObject());
+			if (token.getType() == TokenType.OBJECT && !((ObjectSearchToken)token).isSuggestion()) {
+				list.add(((ObjectSearchToken)token).getSearchObject());
 			}
 		}
 		return list;

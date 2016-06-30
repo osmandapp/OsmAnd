@@ -19,7 +19,7 @@ import net.osmand.core.samples.android.sample1.search.objects.SearchObject.Searc
 import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
 import net.osmand.core.samples.android.sample1.search.objects.StreetGroupSearchObject;
 import net.osmand.core.samples.android.sample1.search.objects.StreetSearchObject;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectToken;
+import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
 import net.osmand.core.samples.android.sample1.search.tokens.SearchToken;
 
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class SearchScope {
 	private ObfsCollection obfsCollection;
 	private SearchString searchString;
 	private String lang;
-	private Map<SearchObjectType, ObjectToken> objectTokens;
+	private Map<SearchObjectType, ObjectSearchToken> objectTokens;
 	private PointI searchLocation31;
 	private AreaI searchableArea;
 	private AreaI obfAreaFilter;
@@ -191,7 +191,7 @@ public class SearchScope {
 			if (token.getType() == SearchToken.TokenType.NAME_FILTER
 					&& !token.hasEmptyQuery()) {
 				boolean suggeston = token == searchString.getLastToken();
-				newToken = new ObjectToken(token, searchObjects.get(0), suggeston);
+				newToken = new ObjectSearchToken(token, searchObjects.get(0), suggeston);
 				searchString.replaceToken(token, newToken);
 			}
 		}
@@ -225,7 +225,7 @@ public class SearchScope {
 					priority = getPriorityByDistance(9.0, streetSearchObject.getDistance());
 				} else {
 					boolean streetFromSelectedCity = false;
-					for (ObjectToken st : objectTokens.values()) {
+					for (ObjectSearchToken st : objectTokens.values()) {
 						if (st.getSearchObject() instanceof StreetGroupSearchObject) {
 							StreetGroup streetGroup =
 									((StreetGroupSearchObject) st.getSearchObject()).getBaseObject();
