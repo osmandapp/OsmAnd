@@ -96,7 +96,7 @@ public class SearchCore {
 		public List<SearchResult> search(SearchPhrase phrase, int radiusLevel, SearchCallback callback,
 				List<SearchResult> existingSearchResults) {
 			//  (search streets in neighboor cities for radiusLevel > 2)
-			if((isLastWordPoi(phrase) || isNoSelectedType(phrase) || raidusLevel >= 2
+			if((isLastWordPoi(phrase) || isNoSelectedType(phrase) || radiusLevel >= 2
 				) && !(phrase.isEmpty())) {
 				int typedLettersInStreet = 1;
 				QuadRect bbox = getBBoxToSearch(20000 * typedLettersInStreet, radiusLevel, phrase.getLastTokenLocation());
