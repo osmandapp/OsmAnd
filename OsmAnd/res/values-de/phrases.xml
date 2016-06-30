@@ -31,7 +31,7 @@
 	<string name="poi_archery">Bogenschießen</string>
 	<string name="poi_architect">Architekturbüro</string>
 	<string name="poi_art">Kunsthandlung</string>
-	<string name="poi_arts_centre">Kulturzentrum</string>
+	<string name="poi_arts_centre">Kunstzentrum</string>
 	<string name="poi_artwork">Kunstwerk</string>
 	<string name="poi_astronomical_observatory">Observatorium</string>
 	<string name="poi_athletics">Sport</string>
@@ -536,7 +536,7 @@
 	<string name="poi_toboggan">Rodelschlitten</string>
 	<string name="poi_toilets">Toilette</string>
 	<string name="poi_toll_booth">Mautstelle</string>
-	<string name="poi_information">Information für Touristen</string>
+	<string name="poi_information">Informationen</string>
 	<string name="poi_town">Kleinstadt</string>
 	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
@@ -2863,5 +2863,34 @@
 	<string name="poi_salt_no">Salz: Nein</string>
 	<string name="poi_wheelchair_designated">Ausgeschrieben für Rollstuhlfahrer</string>
 	<string name="poi_spoil_heap">Abraumhalde</string>
+
+<string name="poi_summer_camp">Sommerlager</string>
+	<string name="poi_recreation_center">Erholungszentrum</string>
+
+	<string name="poi_crossing_activation_automatic">Überquerungsaktivierung: automatisch</string>
+	<string name="poi_crossing_activation_local">Überquerungsaktivierung: lokal</string>
+	<string name="poi_crossing_activation_remote">Überquerungsaktivierung: aus der Entfernung</string>
+	<string name="poi_crossing_barrier_no">Kreuzungsbarriere: keine</string>
+	<string name="poi_crossing_barrier_yes">Kreuzungsbarriere</string>
+	<string name="poi_crossing_barrier_full">Kreuzungsbarriere: vollständig</string>
+	<string name="poi_crossing_barrier_half">Kreuzungsbarriere: halb</string>
+	<string name="poi_crossing_barrier_double_half">Kreuzungsbarriere: doppelte Hälfte</string>
+	<string name="poi_aerodrome_type_international">International</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Öffentlich</string>
+	<string name="poi_aerodrome_type_military">Militärisch</string>
+	<string name="poi_aerodrome_type_military_public">Militärisch/öffentlich</string>
+	<string name="poi_aerodrome_type_private">Privat</string>
+
+	<string name="poi_ventilation_shaft">Lüftungsschacht</string>
+
+	<string name="poi_pump_type_beam_pump">Pumpentyp: Strahl Pumpe</string>
+	<string name="poi_pump_type_india_mk_2_3">Pumpentyp: Indien Mk II oder III &gt;</string>
+	<string name="poi_pump_type_gravity">Pumpentyp: Schwerkraft</string>
+	<string name="poi_pump_style_modern">Pumpen Stil: modern</string>
+	<string name="poi_pump_style_historic">Pumpen Stil: historisch</string>
+	<string name="poi_pump_status_ok">Pumpenzustand: ok</string>
+	<string name="poi_pump_status_broken">Pumpenzustand: defekt</string>
+	<string name="poi_pump_status_locked">Pumpenzustand: gesperrt</string>
 
 </resources>
