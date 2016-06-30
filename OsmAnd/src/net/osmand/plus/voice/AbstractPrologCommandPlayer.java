@@ -301,7 +301,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	
 	protected void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if (ctx.getSettings().INTERRUPT_MUSIC.get()) {
+		if (ctx.getSettings().INTERRUPT_MUSIC.get() || (btScoStatus == true)) {
 			stopBtSco(ctx);
 		}
 		if (mAudioFocusHelper != null) {
