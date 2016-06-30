@@ -4,28 +4,24 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.StreetGroup;
 
-public abstract class StreetGroupSearchObject extends SearchPositionObject {
+public abstract class StreetGroupSearchObject extends SearchPositionObject<StreetGroup> {
 
 	public StreetGroupSearchObject(SearchObjectType type, StreetGroup streetGroup) {
 		super(type, streetGroup);
 	}
 
-	public StreetGroup getStreetGroup() {
-		return (StreetGroup) getInternalObject();
-	}
-
 	@Override
 	public PointI getPosition31() {
-		return getStreetGroup().getPosition31();
+		return getBaseObject().getPosition31();
 	}
 
 	@Override
 	public String getNativeName() {
-		return getStreetGroup().getNativeName();
+		return getBaseObject().getNativeName();
 	}
 
 	@Override
 	protected QStringStringHash getLocalizedNames() {
-		return getStreetGroup().getLocalizedNames();
+		return getBaseObject().getLocalizedNames();
 	}
 }

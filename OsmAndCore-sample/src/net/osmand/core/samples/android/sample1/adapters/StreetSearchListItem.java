@@ -10,12 +10,12 @@ public class StreetSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 
-	public StreetSearchListItem(SampleApplication app, StreetSearchObject searchObject) {
-		super(app, searchObject);
+	public StreetSearchListItem(SampleApplication app, StreetSearchObject streetObject) {
+		super(app, streetObject);
 
-		nameStr = searchObject.getName(MapUtils.LANGUAGE);
+		nameStr = streetObject.getName(MapUtils.LANGUAGE);
 
-		StreetGroup streetGroup = searchObject.getStreet().getStreetGroup();
+		StreetGroup streetGroup = streetObject.getBaseObject().getStreetGroup();
 		if (streetGroup != null) {
 			typeStr = streetGroup.getNativeName() + " — " + getTypeStr(streetGroup);
 		} else {

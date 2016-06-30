@@ -1,25 +1,22 @@
 package net.osmand.core.samples.android.sample1.search.tokens;
 
-import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
 import net.osmand.util.Algorithms;
 
 public abstract class SearchToken {
 
 	public enum TokenType {
-		SEARCH_OBJECT,
+		OBJECT,
 		NAME_FILTER
 	}
 
 	private TokenType type;
-	private SearchObject searchObject;
 	private int startIndex;
-	protected String queryText;
+	protected String plainText;
 
-	public SearchToken(TokenType type, int startIndex, String queryText, SearchObject searchObject) {
+	public SearchToken(TokenType type, int startIndex, String plainText) {
 		this.type = type;
 		this.startIndex = startIndex;
-		this.queryText = queryText;
-		this.searchObject = searchObject;
+		this.plainText = plainText;
 	}
 
 	public TokenType getType() {
@@ -30,19 +27,15 @@ public abstract class SearchToken {
 		return startIndex;
 	}
 
-	public String getQueryText() {
-		return queryText;
+	public String getPlainText() {
+		return plainText;
 	}
 
 	public int getLastIndex() {
-		return startIndex + queryText.length() - 1;
-	}
-
-	public SearchObject getSearchObject() {
-		return searchObject;
+		return startIndex + plainText.length() - 1;
 	}
 
 	public boolean hasEmptyQuery() {
-		return Algorithms.isEmpty(queryText);
+		return Algorithms.isEmpty(plainText);
 	}
 }

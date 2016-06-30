@@ -3,7 +3,7 @@ package net.osmand.core.samples.android.sample1.search.objects;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QStringStringHash;
 
-public class CoordinatesSearchObject extends SearchPositionObject {
+public class CoordinatesSearchObject extends SearchPositionObject<PointI> {
 
 	public CoordinatesSearchObject(PointI position31) {
 		super(SearchObjectType.COORDINATES, position31);
@@ -11,7 +11,7 @@ public class CoordinatesSearchObject extends SearchPositionObject {
 
 	@Override
 	public PointI getPosition31() {
-		return (PointI) getInternalObject();
+		return getBaseObject();
 	}
 
 	@Override

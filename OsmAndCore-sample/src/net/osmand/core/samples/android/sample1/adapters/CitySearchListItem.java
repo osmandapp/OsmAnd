@@ -9,10 +9,10 @@ public class CitySearchListItem extends SearchListPositionItem{
 	private String nameStr;
 	private String typeStr;
 
-	public CitySearchListItem(SampleApplication app, CitySearchObject searchObject) {
-		super(app, searchObject);
+	public CitySearchListItem(SampleApplication app, CitySearchObject cityObject) {
+		super(app, cityObject);
 
-		nameStr = searchObject.getName(MapUtils.LANGUAGE);
+		nameStr = cityObject.getName(MapUtils.LANGUAGE);
 		typeStr = "City";
 	}
 

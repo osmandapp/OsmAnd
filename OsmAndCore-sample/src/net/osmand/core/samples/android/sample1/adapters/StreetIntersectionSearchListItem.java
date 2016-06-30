@@ -11,12 +11,12 @@ public class StreetIntersectionSearchListItem extends SearchListPositionItem {
 	private String nameStr;
 	private String typeStr;
 
-	public StreetIntersectionSearchListItem(SampleApplication app, StreetIntersectionSearchObject searchObject) {
-		super(app, searchObject);
+	public StreetIntersectionSearchListItem(SampleApplication app, StreetIntersectionSearchObject intersectionObject) {
+		super(app, intersectionObject);
 
-		nameStr = searchObject.getName(MapUtils.LANGUAGE);
+		nameStr = intersectionObject.getName(MapUtils.LANGUAGE);
 
-		StreetIntersection streetIntersection = searchObject.getStreetIntersection();
+		StreetIntersection streetIntersection = intersectionObject.getBaseObject();
 
 		Street street = streetIntersection.getStreet();
 		if (street != null) {

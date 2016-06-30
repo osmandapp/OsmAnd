@@ -11,9 +11,9 @@ public class SearchListPositionItem extends SearchListItem {
 	private double latitude;
 	private double longitude;
 
-	public SearchListPositionItem(SampleApplication app, SearchPositionObject searchObject) {
-		super(app, searchObject);
-		PointI position31 = searchObject.getPosition31();
+	public SearchListPositionItem(SampleApplication app, SearchPositionObject positionObject) {
+		super(app, positionObject);
+		PointI position31 = positionObject.getPosition31();
 		LatLon latLon = Utilities.convert31ToLatLon(position31);
 		latitude = latLon.getLatitude();
 		longitude = latLon.getLongitude();

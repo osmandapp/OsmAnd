@@ -2,12 +2,9 @@ package net.osmand.core.samples.android.sample1.search.objects;
 
 import net.osmand.core.jni.QStringStringHash;
 
-public class PoiTypeSearchObject extends SearchObject {
+public class PoiTypeSearchObject extends SearchObject<PoiTypeObject> {
 
 	private ObjectType objectType;
-	private String name;
-	private String keyName;
-	private String categoryKeyName;
 
 	public enum ObjectType {
 		CATEGORY,
@@ -15,12 +12,9 @@ public class PoiTypeSearchObject extends SearchObject {
 		TYPE
 	}
 
-	public PoiTypeSearchObject(ObjectType objectType, String name, String keyName, String categoryKeyName) {
-		super(SearchObjectType.POI_TYPE, null);
+	public PoiTypeSearchObject(ObjectType objectType, PoiTypeObject poiTypeObject) {
+		super(SearchObjectType.POI_TYPE, poiTypeObject);
 		this.objectType = objectType;
-		this.name = name;
-		this.keyName = keyName;
-		this.categoryKeyName = categoryKeyName;
 	}
 
 	public ObjectType getObjectType() {
@@ -28,16 +22,16 @@ public class PoiTypeSearchObject extends SearchObject {
 	}
 
 	public String getKeyName() {
-		return keyName;
+		return getBaseObject().getKeyName();
 	}
 
 	public String getCategoryKeyName() {
-		return categoryKeyName;
+		return getBaseObject().getCategoryKeyName();
 	}
 
 	@Override
 	public String getNativeName() {
-		return name;
+		return getBaseObject().getName();
 	}
 
 	@Override
