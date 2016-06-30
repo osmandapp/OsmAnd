@@ -14,4 +14,35 @@
 		<string name="poi_entertainment">zabawa</string>
 		<string name="poi_club">klub</string>
 	<string name="poi_cafe_and_restaurant">kofejownja a hosćenc</string>
+	<string name="poi_filling_station">tankownja</string>
+		<string name="poi_personal_transport">wosobowy transport</string>
+		<string name="poi_water_transport">transport na wodźe</string>
+		<string name="poi_water_supply">zastaranje z wodu</string>
+		<string name="poi_power">energija</string>
+		<string name="poi_administrative">administratiwne</string>
+	<string name="poi_healthcare">strowotnistwo</string>
+	<string name="poi_education">kubłanje</string>
+	<string name="poi_internet_access">přistup k internetej</string>
+	<string name="poi_service">Posłužby</string>
+		<string name="poi_craft">Rjemjesło</string>
+	<string name="poi_finance">Financowstwo</string>
+	<string name="poi_natural">Přiroda</string>
+	<string name="poi_military">Wójsko</string>
+	<string name="poi_osmwiki">Wikipedija</string>
+	<string name="poi_seamark">Łódźnistwo</string>
+	<string name="poi_user_defined_other">Swójske</string>
+
+	<string name="poi_bakery">Pjekarnja</string>
+	<string name="poi_alcohol">Alkoholne napoje</string>
+	<string name="poi_cheese">Twarožkowy wobchod</string>
+	<string name="poi_chocolate">Šokoladowy wobchod</string>
+	<string name="poi_coffee">Kofejowy wobchod</string>
+	<string name="poi_mall">Nakupowanski centrum</string>
+	<string name="poi_beverages">Napoje</string>
+	<string name="poi_supermarket">Superwiki</string>
+	<string name="poi_tea">Čajowy wobchod</string>
+	<string name="poi_wine">Winowy wobchod</string>
+	<string name="poi_books">Kniharnja</string>
+	<string name="poi_bicycle">Kolesowy wobchod</string>
+	<string name="poi_vending_machine">Bankomat</string>
 	</resources>
