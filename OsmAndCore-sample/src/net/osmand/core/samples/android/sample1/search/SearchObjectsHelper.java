@@ -1,4 +1,4 @@
-package net.osmand.core.samples.android.sample1.search.objects;
+package net.osmand.core.samples.android.sample1.search;
 
 import net.osmand.core.jni.Address;
 import net.osmand.core.jni.Building;
@@ -6,6 +6,13 @@ import net.osmand.core.jni.OsmAndCoreJNI;
 import net.osmand.core.jni.Street;
 import net.osmand.core.jni.StreetGroup;
 import net.osmand.core.jni.StreetIntersection;
+import net.osmand.core.samples.android.sample1.search.objects.BuildingSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.CitySearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.PostcodeSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.SearchPositionObject;
+import net.osmand.core.samples.android.sample1.search.objects.StreetIntersectionSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.StreetSearchObject;
+import net.osmand.core.samples.android.sample1.search.objects.VillageSearchObject;
 
 public class SearchObjectsHelper {
 
