@@ -510,4 +510,7 @@
 	<string name="poi_construction">Konstruejo</string>
 	<string name="poi_brownfield">Antaŭ-konstruejo (post-malkonstruado)</string>
 	<string name="poi_greenfield">Antaŭ-konstruejo (virga)</string>
+	<string name="poi_mineshaft">Ŝakto</string>
+	<string name="poi_adit">Koridoro de minejo</string>
+	<string name="poi_petroleum_well">Ŝakto nafta</string>
 	</resources>
