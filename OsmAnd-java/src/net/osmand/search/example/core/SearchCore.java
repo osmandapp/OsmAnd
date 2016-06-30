@@ -43,7 +43,19 @@ public class SearchCore {
 	}
 	
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
-		
+		// BBOX QuadRect bbox = getBBoxToSearch(10000 * typedLettersInStreet, radiusLevel, phrase.getLastTokenLocation());
+		// if(poiObjectNotSelected) {
+		// 	LIMIT 100
+		//      if(poiTypeSelected) { 
+		//        BBOX - result priority 5, distPriority 1
+		//      } else  {
+		//	  BBOX - result priority 5, distPriority 4
+		//    	}
+		// }
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			return 10;
+		}
 	}
 	
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
@@ -83,12 +95,18 @@ public class SearchCore {
 		@Override
 		public List<SearchResult> search(SearchPhrase phrase, int radiusLevel, SearchCallback callback,
 				List<SearchResult> existingSearchResults) {
-			if((isLastWordPoi(phrase) || isNoSelectedType(phrase)) && !(phrase.isEmpty())) {
+			//  (search streets in neighboor cities for radiusLevel > 2)
+			if((isLastWordPoi(phrase) || isNoSelectedType(phrase) || raidusLevel >= 2
+				) && !(phrase.isEmpty())) {
 				int typedLettersInStreet = 1;
-				QuadRect bbox = getBBoxToSearch(30000 * typedLettersInStreet, radiusLevel, phrase.getLastTokenLocation());
+				QuadRect bbox = getBBoxToSearch(20000 * typedLettersInStreet, radiusLevel, phrase.getLastTokenLocation());
 				int priority = isNoSelectedType(phrase) ? 1 : 3;
 				// priority 
-				// TODO LIMIT 100 * radiusLevel, BBOX - result priority 5, distPriority ${priority}
+				//  LIMIT 100 * radiusLevel
+				//  BBOX streets  - result priority 5, distPriority ${priority} 
+				//  BBOX postcodes  - result priority 5, distPriority ${priority} 
+				//  BBOX / 3 (3 times smaller) villages - result priority 5, distPriority ${priority} 
+				//  BBOX * 4 (3 times smaller) cities/towns - result priority 5, distPriority (${priority}/10) 
 			}
 			return Collections.emptyList();
 		}
