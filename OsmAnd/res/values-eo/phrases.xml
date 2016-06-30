@@ -514,4 +514,13 @@
 	<string name="poi_adit">Koridoro de minejo</string>
 	<string name="poi_petroleum_well">Ŝakto nafta</string>
 	<string name="poi_survey_point">Geodezia vertico</string>
+	<string name="poi_windmill">Muelejo venta</string>
+	<string name="poi_salt_pond">Salejo</string>
+	<string name="poi_reservoir">Lago artefarita</string>
+	<string name="poi_cricket_nets">Retoj por ekzerci kriketon</string>
+	<string name="poi_gasometer">Gasujo</string>
+	<string name="poi_silo">Tur-stokejo</string>
+	<string name="poi_bunker_silo">Stokejo senkovra</string>
+	<string name="poi_storage_tank">Rezervujo</string>
+
 	</resources>
