@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.core.android.AtlasMapRendererView;
@@ -642,6 +643,16 @@ public class MainActivity extends Activity {
 		public boolean onSingleTapUp(MotionEvent e) {
 			mapView.requestFocus();
 			return true;
+		}
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+			PointI point = new PointI();
+			mapView.getLocationFromScreenPoint(new PointI((int) e.getX(), (int) e.getY()), point);
+			LatLon latLon = Utilities.convert31ToLatLon(point);
+			Toast.makeText(MainActivity.this,
+					"Hello, this is long tap from\n" +
+							"lat=" + latLon.getLatitude() + " lon=" + latLon.getLongitude(), Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
