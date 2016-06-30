@@ -496,6 +496,18 @@
 	<string name="poi_casino">Monludejo</string>
 	<string name="poi_population">Loĝantaro</string>
 	<string name="poi_landuse_railway">Fervoja tereno</string>
-	<string name="poi_conservation">Naturrezerverjo</string>
+	<string name="poi_conservation">Naturrezervejo</string>
 
+	<string name="poi_canal">Akvovojo</string>
+	<string name="poi_pier">Marponto</string>
+	<string name="poi_surveillance">Fara kontrolado</string>
+	<string name="poi_observatory">Observejo</string>
+	<string name="poi_astronomical_observatory">Astro-observejo</string>
+	<string name="poi_mast">Masto</string>
+	<string name="poi_monitoring_station">Kontrol-stacio</string>
+	<string name="poi_radar">Radaro</string>
+	<string name="poi_crane">Levmaŝino</string>
+	<string name="poi_construction">Konstruejo</string>
+	<string name="poi_brownfield">Antaŭ-konstruejo (post-malkonstruado)</string>
+	<string name="poi_greenfield">Antaŭ-konstruejo (virga)</string>
 	</resources>
