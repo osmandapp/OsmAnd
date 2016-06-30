@@ -495,4 +495,7 @@
 	<string name="poi_denomination_jehovahs_witness">Atestantoj de Jehovo</string>
 	<string name="poi_casino">Monludejo</string>
 	<string name="poi_population">Loĝantaro</string>
+	<string name="poi_landuse_railway">Fervoja tereno</string>
+	<string name="poi_conservation">Naturrezerverjo</string>
+
 	</resources>
