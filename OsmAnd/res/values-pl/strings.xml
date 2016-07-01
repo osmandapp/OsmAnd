@@ -2213,4 +2213,6 @@
     <string name="lang_be_BY">Białoruski (łaciński)</string>
     <string name="lang_hu_formal">Węgierski (formalny)</string>
     <string name="lang_kn">Kannada</string>
-    </resources>
+    <string name="coords_format">Format współrzędnych</string>
+    <string name="coords_format_descr">Format współrzędnych geograficznych</string>
+  	</resources>
