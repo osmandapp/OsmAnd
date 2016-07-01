@@ -303,7 +303,22 @@ public class PointDescription {
 	public static final int FORMAT_SECONDS = 2;
 	public static final int UTM_FORMAT = 3;
 	private static final char DELIM = ':';
-	
+
+	public static String formatToHumanString(Context ctx, int format) {
+		switch (format) {
+			case FORMAT_DEGREES:
+				return ctx.getString(R.string.navigate_point_format_D);
+			case FORMAT_MINUTES:
+				return ctx.getString(R.string.navigate_point_format_DM);
+			case FORMAT_SECONDS:
+				return ctx.getString(R.string.navigate_point_format_DMS);
+			case UTM_FORMAT:
+				return "UTM";
+			default:
+				return "Unknown format";
+		}
+	}
+
 	/**
      * Converts a String in one of the formats described by
      * FORMAT_DEGREES, FORMAT_MINUTES, or FORMAT_SECONDS into a

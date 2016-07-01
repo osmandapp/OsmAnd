@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.data.PointDescription;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -149,6 +150,18 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 			entries[i] = mvls[i].toHumanString(getMyApplication());
 		}
 		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
+
+		Integer[] cvls  = new Integer[4];
+		cvls[0] = PointDescription.FORMAT_DEGREES;
+		cvls[1] = PointDescription.FORMAT_MINUTES;
+		cvls[2] = PointDescription.FORMAT_SECONDS;
+		cvls[3] = PointDescription.UTM_FORMAT;
+		entries = new String[4];
+		entries[0] = PointDescription.formatToHumanString(this, PointDescription.FORMAT_DEGREES);
+		entries[1] = PointDescription.formatToHumanString(this, PointDescription.FORMAT_MINUTES);
+		entries[2] = PointDescription.formatToHumanString(this, PointDescription.FORMAT_SECONDS);
+		entries[3] = PointDescription.formatToHumanString(this, PointDescription.UTM_FORMAT);
+		registerListPreference(settings.COORDINATES_FORMAT, screen, entries, cvls);
 
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		// Hardy maintenance 2016-05-29:

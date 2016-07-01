@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="coords_format">Coordinate format</string>
+    <string name="coords_format_descr">Format for the geographical coordinates</string>
   	<string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Train</string>
     <string name="current_track">Current track</string>
