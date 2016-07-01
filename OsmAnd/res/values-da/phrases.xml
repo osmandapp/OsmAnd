@@ -2993,4 +2993,7 @@
 
 <string name="poi_pump_type_beam_pump">Pumpetype: pumpjack</string>
 	<string name="poi_pump_type_india_mk_2_3">Pumpetype: Indien Mk II eller III</string>
-	</resources>
+	<string name="poi_payment_troika_yes">Troika kort accepteret</string>
+	<string name="poi_payment_troika_no">Troika kort ikke accepteret</string>
+
+</resources>
