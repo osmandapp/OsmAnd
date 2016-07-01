@@ -133,8 +133,8 @@
     <string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
     <string name="local_index_action_do">Stai per %1$s %2$s oggetto/i. Continuare?</string>
     <string name="local_index_descr_title">Gestisci i file delle mappe</string>
-    <string name="local_index_mi_restore">Attiva</string>
-    <string name="local_index_mi_backup">Disattiva</string>
+    <string name="local_index_mi_restore">Attivato</string>
+    <string name="local_index_mi_backup">Disattivato</string>
 
     <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
     <string name="local_index_poi_data">Dati PDI</string>
