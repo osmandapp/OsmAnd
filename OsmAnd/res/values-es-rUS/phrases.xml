@@ -152,7 +152,7 @@
 	<string name="poi_lift_gate">Barrera levadiza</string>
 	<string name="poi_toll_booth">Peaje</string>
 	<string name="poi_border_control">Control fronterizo</string>
-	<string name="poi_traffic_calming_bump">Lomo de burro</string>
+	<string name="poi_traffic_calming_bump">Reductor de velocidad (corto)</string>
 	<string name="poi_traffic_calming_hump">Resalte</string>
 	<string name="poi_traffic_calming_cushion">Cojín</string>
 	<string name="poi_traffic_calming_chicane">Chicana</string>
