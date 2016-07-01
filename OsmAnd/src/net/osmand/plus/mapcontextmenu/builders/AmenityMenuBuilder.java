@@ -258,6 +258,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						textColor = R.color.color_invalid;
 					}
 				}
+				needLinks = false;
 
 			} else if (Amenity.PHONE.equals(key)) {
 				iconId = R.drawable.ic_action_call_dark;
