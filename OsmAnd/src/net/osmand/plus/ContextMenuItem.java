@@ -10,7 +10,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 
 public class ContextMenuItem {
-	public static final int INVALID_ID = 0;
+	public static final int INVALID_ID = -1;
 
 	@StringRes
 	private final int titleId;
