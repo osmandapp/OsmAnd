@@ -2173,4 +2173,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="lang_ast">asturisch</string>
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Zug</string>
-    </resources>
+    <string name="coords_format">Koordinatenformat</string>
+    <string name="coords_format_descr">Format der geographischen Koordinaten</string>
+  	</resources>
