@@ -2379,4 +2379,6 @@
     <string name="lang_ast">Asturisk</string>
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Tog</string>
-    </resources>
+    <string name="coords_format">Koordinatformat</string>
+    <string name="coords_format_descr">Format for geografiske koordinater</string>
+  	</resources>
