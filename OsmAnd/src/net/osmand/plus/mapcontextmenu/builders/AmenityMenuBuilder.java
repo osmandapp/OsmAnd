@@ -237,6 +237,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 					hasWiki = true;
 					isWiki = true;
+					needLinks = false;
 				} else {
 					continue;
 				}
