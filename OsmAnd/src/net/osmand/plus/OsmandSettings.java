@@ -1495,7 +1495,11 @@ public class OsmandSettings {
 	public PointDescription getAndClearMapLabelToShow(LatLon l) {
 		String label = settingsAPI.getString(globalPreferences, MAP_LABEL_TO_SHOW, null);
 		settingsAPI.edit(globalPreferences).remove(MAP_LABEL_TO_SHOW).commit();
-		return PointDescription.deserializeFromString(label, l);
+		if (label != null) {
+			return PointDescription.deserializeFromString(label, l);
+		} else {
+			return null;
+		}
 	}
 
 	private Object objectToShow;
