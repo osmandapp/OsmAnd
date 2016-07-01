@@ -11,15 +11,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.InputDevice;
@@ -142,10 +139,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private AnimateDraggingMapThread animatedDraggingThread;
 
-	private GestureDetector gestureDetector;
-
-	private MultiTouchSupport multiTouchSupport;
-
 	Paint paintGrayFill;
 	Paint paintBlackFill;
 	Paint paintWhiteFill;
@@ -160,19 +153,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private Paint paintImg;
 
-	private boolean afterTwoFingerTap = false;
+	private GestureDetector gestureDetector;
+	private MultiTouchSupport multiTouchSupport;
 	private DoubleTapScaleDetector doubleTapScaleDetector;
-	TwoFingerTapDetector twoFingerTapDetector = new TwoFingerTapDetector() {
-		@Override
-		public void onTwoFingerTap() {
-			afterTwoFingerTap = true;
-			if (isZoomingAllowed(getZoom(), -1)) {
-				getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
-			}
-		}
-	};
-
-	private int displayHeightPx;
+	private TwoFingerTapDetector twoFingersTapDetector;
+	private boolean afterTwoFingersTap = false;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -218,6 +203,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
 		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
 		doubleTapScaleDetector = new DoubleTapScaleDetector(activity, new MapTileViewMultiTouchZoomListener());
+		twoFingersTapDetector = new TwoFingerTapDetector() {
+			@Override
+			public void onTwoFingerTap() {
+				afterTwoFingersTap = true;
+				if (isZoomingAllowed(getZoom(), -1)) {
+					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
+				}
+			}
+		};
 
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -228,15 +222,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				setPixelDimensions(w, h).build();
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
-
-		Display defaultDisplay = ctx.getWindowManager().getDefaultDisplay();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-			Point size = new Point();
-			defaultDisplay.getSize(size);
-			displayHeightPx = size.y;
-		} else {
-			displayHeightPx = defaultDisplay.getHeight();
-		}
 	}
 
 	public void setView(View view) {
@@ -827,7 +812,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				mapRenderer.resumeSymbolsUpdate();
 			}
 		}
-		if (twoFingerTapDetector.onTouchEvent(event)) {
+		if (twoFingersTapDetector.onTouchEvent(event)) {
 			ContextMenuLayer contextMenuLayer = getLayerByClass(ContextMenuLayer.class);
 			if (contextMenuLayer != null) {
 				contextMenuLayer.onTouchEvent(event, getCurrentRotatedTileBox());
@@ -1068,8 +1053,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onLongPress(MotionEvent e) {
 			if (multiTouchSupport.isInZoomMode()
 					|| doubleTapScaleDetector.isInZoomMode()
-					|| afterTwoFingerTap) {
-				afterTwoFingerTap = false;
+					|| afterTwoFingersTap) {
+				afterTwoFingersTap = false;
 				return;
 			}
 			if (LOG.isDebugEnabled()) {
