@@ -98,7 +98,7 @@
 	<string name="poi_town">Urbeto</string>
 	<string name="poi_village">Vilaĝo</string>
 	<string name="poi_hamlet">Vilaĝego</string>
-	<string name="poi_suburb">Antaŭurbo</string>
+	<string name="poi_suburb">Kvartalego</string>
 	<string name="poi_hospital">Malsanulejo</string>
 	<string name="poi_ice_rink">Glitkurejo (halo)</string>
 	<string name="poi_attraction_maze">Labirinto</string>
@@ -178,7 +178,7 @@
 
 	<string name="poi_tower">Turo</string>
 	<string name="poi_prison">Mallibrejo</string>
-	<string name="poi_neighbourhood">Kvartalo</string>
+	<string name="poi_neighbourhood">Kvartaleto</string>
 	<string name="poi_pharmacy">Apoteko</string>
 	<string name="poi_zoo">Bestoĝardeno</string>
 	<string name="poi_place_of_worship">Preĝejo</string>
@@ -524,4 +524,44 @@
 	<string name="poi_storage_tank">Rezervujo</string>
 
 	<string name="poi_training">Ekzercejo</string>
+	<string name="poi_social_facility">Socia servejo</string>
+	<string name="poi_courthouse">Juĝdomo</string>
+	<string name="poi_register_office">Oficejo de civila stato</string>
+	<string name="poi_embassy">Ambasadejo</string>
+	<string name="poi_government">Registara oficejo</string>
+	<string name="poi_bailiff">Oficejo de balifo</string>
+	<string name="poi_prosecutor">Oficejo de prokuroro</string>
+	<string name="poi_pension_fund">Oficejo de pensiado</string>
+	<string name="poi_migration">Oficejo de enmigrado</string>
+	<string name="poi_tax_inspection">Oficejo de impostado</string>
+	<string name="poi_office_administrative">Administra oficejo</string>
+	<string name="poi_customs">Doganejo</string>
+	<string name="poi_isolated_dwelling">Solstaranta domo</string>
+	<string name="poi_quarter">Kvartalo</string>
+	<string name="poi_locality">Ejo</string>
+	<string name="poi_place_farm">Farmejo</string>
+	<string name="poi_residential">Privatdoma tereno</string>
+
+	<string name="poi_doctors">Kuracistejo</string>
+	<string name="poi_clinic">Kliniko</string>
+	<string name="poi_first_aid">Tujhelpejo</string>
+	<string name="poi_dentist">Dentistejo</string>
+	<string name="poi_townhall">Urbodomo</string>
+	<string name="poi_stadium">Stadiono</string>
+	<string name="poi_bowls">Kegloludejo</string>
+	<string name="poi_monument">Monumento</string>
+	<string name="poi_entrance_main">Enirejo ĉefa</string>
+	<string name="poi_entrance">Enirejo</string>
+	<string name="poi_entrance_exit">Elirejo</string>
+
+	<string name="poi_description">Priskribo</string>
+	<string name="poi_opening_hours">Malfermaj horoj</string>
+	<string name="poi_maxheight">Maksimuma alto</string>
+	<string name="poi_maxweight">Maksimuma pezo</string>
+	<string name="poi_height">Alto</string>
+	<string name="poi_brand">Marko</string>
+	<string name="poi_trees_plum">Prunujo</string>
+	<string name="poi_building">Konstruaĵo</string>
+	<string name="poi_garden">Ĝardeno</string>
+
 	</resources>
