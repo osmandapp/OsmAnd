@@ -1159,7 +1159,7 @@
     <string name="voice_pref_title">Veu</string>
     <string name="misc_pref_title">Miscel·lània</string>
     <string name="localization_pref_title">Ubicació</string>
-    <string name="interrupt_music_descr">Pausa la música en fer indicacions</string>
+    <string name="interrupt_music_descr">Pausa la música en fer indicacions (com si fos una trucada en el mans lliures del cotxe)</string>
     <string name="interrupt_music">Pausa la música</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
@@ -2044,4 +2044,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_ast">Asturià</string>
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Tren</string>
-    </resources>
+    <string name="coords_format">Format de coordenades</string>
+    <string name="coords_format_descr">Format de les coordenades geogràfiques</string>
+  	</resources>
