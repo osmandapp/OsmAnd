@@ -665,7 +665,7 @@
 \n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
     <string name="choose_audio_stream">Audiokanal for talevejledning</string>
     <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning (systemafhængig)</string>
-    <string name="voice_stream_voice_call">Telefonopkald lyd</string>
+    <string name="voice_stream_voice_call">Telefonopkald lyd (forsøger også at afbryde Bluetooth bilradio)</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/musiklyd</string>
     <string name="warning_tile_layer_not_downloadable">Programmet kan ikke hente kortlaget %1$s, prøv at installere igen.</string>
@@ -1365,7 +1365,7 @@
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
-    <string name="interrupt_music_descr">Afbryd musik ved navigationsinstruktioner (også som simuleret telefonopkald til Bluetooth bilradio)</string>
+    <string name="interrupt_music_descr">Afbryd musik ved navigationsinstruktioner</string>
     <string name="interrupt_music">Afbryd musik</string>
     <string name="share_route_as_gpx">Del rute som GPX-fil</string>
     <string name="share_route_subject">Ruten deles via OsmAnd</string>
