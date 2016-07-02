@@ -37,11 +37,11 @@ public class GeocodingUtilities {
 
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
 
-	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 4;
-	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 100;
+	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 5;
+	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 200;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 
-	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
+	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
 	public static final float DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME = 1000;
 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
@@ -258,6 +258,7 @@ public class GeocodingUtilities {
 									&& prepareStreetName(object.getName()).equals(streetNamePacked)) {
 								double d = MapUtils.getDistance(object.getLocation(), road.searchPoint.getLatitude(),
 										road.searchPoint.getLongitude());
+								// double check to suport old format
 								if (d < DISTANCE_STREET_NAME_PROXIMITY_BY_NAME) {
 									GeocodingResult rs = new GeocodingResult(road);
 									rs.street = (Street) object;
@@ -277,7 +278,7 @@ public class GeocodingUtilities {
 							return result != null && result.isCancelled();
 						}
 					}, mainWord, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-			req.setBBoxRadius(road.getLocation().getLatitude(), road.getLocation().getLongitude(), 20000);
+			req.setBBoxRadius(road.getLocation().getLatitude(), road.getLocation().getLongitude(), DISTANCE_STREET_NAME_PROXIMITY_BY_NAME);
 			reader.searchAddressDataByName(req);
 		}
 
