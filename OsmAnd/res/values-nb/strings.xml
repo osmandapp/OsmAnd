@@ -843,7 +843,7 @@
     <string name="keep_informing">Gjenta navigeringsinstruksjoner</string>
     <string name="show_more_map_detail_descr">Vis noen vektorkartdetaljer (veier etc.) allerede ved lavere zoom</string>
     <string name="choose_audio_stream">Utdata for taleveiledning</string>
-    <string name="choose_audio_stream_descr">Velg kanal til å avspille taleveiledning (systemavhengig)</string>
+    <string name="choose_audio_stream_descr">Velg høyttaler til å avspille taleveiledning (systemavhengig)</string>
     <string name="voice_stream_voice_call">Taleanropslyd</string>
     <string name="voice_stream_notification">Varslingslyd</string>
     <string name="voice_stream_music">Media-/musikklyd</string>
@@ -1676,4 +1676,6 @@
     <string name="background_router_service_descr">Kjører OsmAnd i bakgrunnen for å spore posisjonen din mens skjermen er slått av</string>
     <string name="share_fav_subject">Favoritter delt via OsmAnd</string>
     <string name="import_file_favourites">Lagre data som GPX-fil eller importere rutepunkter til favoritter?</string>
+    <string name="coords_format_descr">Format for geografiske koordinater</string>
+  	<string name="coords_format">Koordinatformat</string>
     </resources>
