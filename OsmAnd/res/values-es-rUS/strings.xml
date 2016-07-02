@@ -830,7 +830,7 @@
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
     <string name="snap_to_road_descr">﻿Ajustar posición a las carreteras durante la navegación</string>
     <string name="snap_to_road">Ajustar a carreteras</string>
-    <string name="interrupt_music_descr">Interrumpe la música al hacer avisos (también las llamadas simuladas en estéreos con Bluetooth)</string>
+    <string name="interrupt_music_descr">Interrumpe la música al anunciar</string>
     <string name="interrupt_music">Interrumpir música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM con y sin conexión</string>
@@ -1303,7 +1303,7 @@
 \n\t\n\tPara usarlo activa \'Menú\'→\'Configurar mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
     <string name="choose_audio_stream">Salida de indicaciones por voz</string>
     <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz (dependiente del sistema)</string>
-    <string name="voice_stream_voice_call">Audio de llamada telefónica</string>
+    <string name="voice_stream_voice_call">Audio de llamada telefónica (también intenta en altavoces estéreos con Bluetooth)</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
     <string name="voice_stream_music">Audio de multimedia</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa %1$s del mapa, intenta reinstalando.</string>
