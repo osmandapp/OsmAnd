@@ -709,12 +709,25 @@ public class BinaryMapAddressReaderAdapter {
 			TIntArrayList[] refsContainer, int fp) throws IOException {
 		TIntArrayList toAdd = null;
 		TIntArrayList toAddCity = null;
+		int shiftindex = 0;
+		int shiftcityindex = 0;
+		boolean add = true; 
 		while (true) {
 			if (req.isCancelled()) {
 				return;
 			}
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
+			if(tag == 0 || tag == AddressNameIndexDataAtom.SHIFTTOINDEX_FIELD_NUMBER) {
+				if (toAdd != null && add) {
+					if(shiftindex != 0) {
+						toAdd.add(shiftindex);
+					}
+					if(shiftcityindex != 0) {
+						toAddCity.add(shiftcityindex);
+					}
+				}
+			}
 			switch (tag) {
 			case 0:
 				return;
@@ -726,13 +739,17 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOCITYINDEX_FIELD_NUMBER:
 				if (toAddCity != null) {
-					toAddCity.add(fp - codedIS.readInt32());
+					shiftcityindex = fp - codedIS.readInt32();
 				}
 				break;
+			case AddressNameIndexDataAtom.XY16_FIELD_NUMBER:
+				int in32 = codedIS.readInt32();
+				int x16 = (in32 >>> 16) << 15;
+				int y16 = (in32 & ((1 << 16) - 1)) << 15;
+				add = !req.isBboxSpecified() || req.contains(x16, y16, x16, y16);
+				break;
 			case AddressNameIndexDataAtom.SHIFTTOINDEX_FIELD_NUMBER:
-				if (toAdd != null) {
-					toAdd.add(fp - codedIS.readInt32());
-				}
+				shiftindex = fp - codedIS.readInt32();
 				break;
 			case AddressNameIndexDataAtom.TYPE_FIELD_NUMBER:
 				int type = codedIS.readInt32();

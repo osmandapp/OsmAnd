@@ -1686,6 +1686,19 @@ public class BinaryMapIndexReader {
 			return (x << SearchRequest.ZOOM_TO_SEARCH_POI) | y;
 		}
 
+		public void setBBoxRadius(double lat, double lon, int radiusMeters) {
+			double dx = MapUtils.getTileNumberX(16, lon);
+			double half16t = MapUtils.getDistance(lat, MapUtils.getLongitudeFromTile(16, ((int) dx) + 0.5), 
+					lat, MapUtils.getLongitudeFromTile(16, (int) dx));
+			double cf31 = ((double) radiusMeters / (half16t * 2)) * (1 << 15);
+			int y31 = MapUtils.get31TileNumberY(lat);
+			int x31 = MapUtils.get31TileNumberX(lon);
+			left = (int) (x31 - cf31);
+			right = (int) (x31 + cf31);
+			top = (int) (y31 - cf31);
+			bottom = (int) (y31 + cf31);
+			
+		}
 
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
@@ -1772,6 +1785,10 @@ public class BinaryMapIndexReader {
 			numberOfAcceptedObjects = 0;
 			numberOfReadSubtrees = 0;
 			numberOfAcceptedSubtrees = 0;
+		}
+
+		public boolean isBboxSpecified() {
+			return left != 0 || right != 0;
 		}
 	}
 
@@ -2019,7 +2036,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 //		File fl = new File(System.getProperty("maps") + /Synthetic_test_rendering.obf");
-		File fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe.obf");
+		File fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe_merge.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2170,6 +2187,7 @@ public class BinaryMapIndexReader {
 		println("Searching by name...");
 		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "Belar",
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
+		
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {
 			println(a.getType().getTranslation() +
@@ -2304,7 +2322,8 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Logger", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "Benelux", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+//		req.setBBoxRadius(52.276142, 4.8608723, 15000);
 		reader.searchAddressDataByName(req);
 	}
 
