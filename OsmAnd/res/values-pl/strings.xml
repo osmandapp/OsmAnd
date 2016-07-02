@@ -119,7 +119,7 @@
 
     <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
     <string name="choose_audio_stream_descr">Określa głośnik do odtwarzania nawigacji głosowej (zależne od systemu)</string>
-    <string name="voice_stream_voice_call">Kanał głosowy</string>
+    <string name="voice_stream_voice_call">Kanał głosowy (także próbuje przerwać muzykę z głośników)</string>
     <string name="voice_stream_notification">Kanał powiadomień</string>
     <string name="voice_stream_music">Kanał media/music</string>
     <string name="warning_tile_layer_not_downloadable">Program nie może pobrać warstwy %1$s, spróbuj ją przeinstalować.</string>
@@ -1302,7 +1302,7 @@
     <string name="index_item_nation_addresses">Adresy krajowe</string>
     <string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Wstrzymuje odtwarzanie muzyki podczas komunikatów (tak jak rozmowy telefoniczne przez zestaw głośnomówiący)</string>
+    <string name="interrupt_music_descr">Wstrzymuje odtwarzanie muzyki podczas komunikatów</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
     <string name="always_center_position_on_map">Zawsze wyśrodkowana pozycja</string>
     <string name="voice_pref_title">Głos</string>
@@ -1866,7 +1866,7 @@
     <string name="description">Opis</string>
     <string name="poi_dialog_poi_type">Rodzaj UM</string>
     <string name="poi_action_delete">usuń</string>
-    <string name="building_number">Numer wersji</string>
+    <string name="building_number">Numer domu</string>
     <string name="av_locations_descr">Plik GPS z notatkami o lokalizacjach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
