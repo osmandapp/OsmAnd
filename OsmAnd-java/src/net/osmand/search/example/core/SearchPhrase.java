@@ -10,53 +10,21 @@ import net.osmand.data.LatLon;
 
 public class SearchPhrase {
 	
-	public static class SearchWord {
-		public String word;
-		public ObjectType type;
-		
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((type == null) ? 0 : type.hashCode());
-			result = prime * result + ((word == null) ? 0 : word.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			SearchWord other = (SearchWord) obj;
-			if (type != other.type)
-				return false;
-			if (word == null) {
-				if (other.word != null)
-					return false;
-			} else if (!word.equals(other.word))
-				return false;
-			return true;
-		}
-
-
-		@Override
-		public String toString() {
-			return word;
-		}
+	private List<SearchWord> words = new ArrayList<>();
+	private LatLon originalPhraseLocation;
+	
+	public SearchPhrase(LatLon location) {
+		this.originalPhraseLocation = location;
 	}
 	
-	public List<SearchWord> words = new ArrayList<>();
-	
-	public LatLon myLocationOrVisibleMap = new LatLon(0, 0); 
+	public List<SearchWord> getWords() {
+		return words;
+	}
 	
 	public List<SearchWord> excludefilterWords() {
 		 List<SearchWord> w = new ArrayList<>();
 		 for(SearchWord s : words) {
-			 if(s.type != ObjectType.NAME_FILTER) {
+			 if(s.getType() != ObjectType.NAME_FILTER) {
 				 w.add(s);
 			 }
 		 }
@@ -64,10 +32,19 @@ public class SearchPhrase {
 	}
 	
 	public boolean isLastWord(ObjectType p) {
-		return true; // TODO
+		for(int i = words.size() - 1; i >= 0; i--) {
+			SearchWord sw = words.get(i);
+			if(sw.getType() == ObjectType.POI) {
+				return true;
+			} else if(sw.getType() != ObjectType.NAME_FILTER) {
+				return false;
+			}
+		}
+		return false;
 	}
 	
 	public StringMatcher getNameStringMatcher() {
+		// TODO
 		return new CollatorStringMatcher("NameFitler", StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 	}
 	
@@ -75,10 +52,17 @@ public class SearchPhrase {
 		return excludefilterWords().equals(p.excludefilterWords());
 	}
 	
+	public String getStringRerpresentation() {
+		StringBuilder sb = new StringBuilder();
+		for(SearchWord s : words) {
+			sb.append(s).append(", ");
+		}
+		return sb.toString();
+	}
+	
 	@Override
 	public String toString() {
-		String w = words.toString();
-		return w.substring(1, w.length() - 1);
+		return getStringRerpresentation();
 	}
 
 	public boolean isNoSelectedType() {
@@ -86,12 +70,18 @@ public class SearchPhrase {
 	}
 
 	public boolean isEmpty() {
-		return false;
+		return words.isEmpty();
 	}
 
 	public LatLon getLastTokenLocation() {
+		for(int i = words.size() - 1; i >= 0; i--) {
+			SearchWord sw = words.get(i);
+			if(sw.getLocation() != null) {
+				return sw.getLocation();
+			}
+		}
 		// last token or myLocationOrVisibleMap if not selected 
-		return myLocationOrVisibleMap;
+		return originalPhraseLocation;
 	}
 
 }

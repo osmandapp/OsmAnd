@@ -1,5 +1,14 @@
 package net.osmand.search.example.core;
 
 public enum ObjectType {
-	CITY, VILLAGE, POSTCODE, STREET, HOUSE, POI_TYPE, POI, LOCATION, NAME_FILTER
+	CITY(true), VILLAGE(true), POSTCODE(true), STREET(true), HOUSE(true),
+	POI_TYPE(false), POI(true), LOCATION(true), FAVORITE(true),
+	RECENT_OBJ(true), WPT(true), NAME_FILTER(false);
+	private boolean hasLocation;
+	private ObjectType(boolean location) {
+		this.hasLocation = location;
+	}
+	public boolean hasLocation() {
+		return hasLocation;
+	}
 }
