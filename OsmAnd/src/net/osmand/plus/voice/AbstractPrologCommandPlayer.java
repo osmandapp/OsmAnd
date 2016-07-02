@@ -281,12 +281,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		if (mAudioFocusHelper != null) {
 			mAudioFocusHelper.requestFocus(ctx, streamType);
 		}
-		if (ctx.getSettings().INTERRUPT_MUSIC.get()) {
+		// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
+		if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 			// TODO: Delay the prompts a bit until connection is established
-				startBtSco(ctx);
-			//if (btScoStatus == false) {
-			//	Toast.makeText(this, R.string."BT connection error: ", Toast.LENGTH_SHORT).show();
-			//}
+			startBtSco();
 		}
 	}
 
@@ -301,8 +299,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	
 	protected void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if (ctx.getSettings().INTERRUPT_MUSIC.get() || (btScoStatus == true)) {
-			stopBtSco(ctx);
+		if ((ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) || (btScoStatus == true)) {
+			stopBtSco();
 		}
 		if (mAudioFocusHelper != null) {
 			mAudioFocusHelper.abandonFocus(ctx, streamType);
@@ -312,12 +310,12 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	private static boolean btScoStatus = false;
 
-	private boolean startBtSco(Context context) {
+	private boolean startBtSco() {
 	// Establish a low quality Synchronous Connection-Oriented link to BT to e.g. interrupt a car stereo
 	// http://stackoverflow.com/questions/2144694/routing-audio-to-bluetooth-headset-non-a2dp-on-android
 		try {
-			AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-			if (mAudioManager == null) {
+			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
+			if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
 				return false;
 			}
 			mAudioManager.setMode(0);
@@ -333,9 +331,9 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		return btScoStatus;
 	}
 
-	private boolean stopBtSco(Context context) {
+	private boolean stopBtSco() {
 		btScoStatus = false;
-		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+		AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 		if (mAudioManager == null) {
 			return false;
 		}
