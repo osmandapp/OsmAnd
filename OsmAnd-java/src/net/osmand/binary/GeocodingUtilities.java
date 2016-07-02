@@ -37,8 +37,9 @@ public class GeocodingUtilities {
 
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
 
+	// Location to test parameters http://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 5;
-	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 200;
+	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 250;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 
 	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
