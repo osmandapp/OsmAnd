@@ -664,8 +664,8 @@
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 \n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
     <string name="choose_audio_stream">Stemmevejledning udgang</string>
-    <string name="choose_audio_stream_descr">Vælg audiokanal til at afspille stemmevejledning (system afhængig)</string>
-    <string name="voice_stream_voice_call">Stemmeopkald lyd</string>
+    <string name="choose_audio_stream_descr">Vælg højttaler til at afspille stemmevejledning (system-afhængig)</string>
+    <string name="voice_stream_voice_call">Telefonopkald lyd</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/musiklyd</string>
     <string name="warning_tile_layer_not_downloadable">Programmet kan ikke hente kortlaget %1$s, prøv at installere igen.</string>
