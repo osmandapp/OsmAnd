@@ -310,7 +310,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		}
 	}
 
-	private boolean btScoStatus = false;
+	private static boolean btScoStatus = false;
 
 	private boolean startBtSco(Context context) {
 	// Establish a low quality Synchronous Connection-Oriented link to BT to e.g. interrupt a car stereo
@@ -321,8 +321,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 				return false;
 			}
 			mAudioManager.setMode(0);
-			mAudioManager.setBluetoothScoOn(true);
 			mAudioManager.startBluetoothSco();
+			mAudioManager.setBluetoothScoOn(true);
 			mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 			btScoStatus = true;
 		} catch (Exception e) {
