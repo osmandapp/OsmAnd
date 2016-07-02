@@ -31,6 +31,7 @@
 package com.google.protobuf;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
@@ -52,7 +53,6 @@ public final class CodedOutputStream {
   private final byte[] buffer;
   private final int limit;
   private int position;
-  // + Change 
   private long writtenBytes = 0;
 
   private final OutputStream output;
@@ -383,9 +383,8 @@ public final class CodedOutputStream {
 
   /** Write a {@code bytes} field to the stream. */
   public void writeBytesNoTag(final ByteString value) throws IOException {
-    final byte[] bytes = value.toByteArray();
-    writeRawVarint32(bytes.length);
-    writeRawBytes(bytes);
+    writeRawVarint32(value.size());
+    writeRawBytes(value);
   }
 
   /** Write a {@code uint32} field to the stream. */
@@ -398,7 +397,7 @@ public final class CodedOutputStream {
    * for converting the enum value to its numeric value.
    */
   public void writeEnumNoTag(final int value) throws IOException {
-    writeRawVarint32(value);
+    writeInt32NoTag(value);
   }
 
   /** Write an {@code sfixed32} field to the stream. */
@@ -542,6 +541,15 @@ public final class CodedOutputStream {
   }
 
   /**
+   * Compute the number of bytes that would be needed to encode an
+   * embedded message in lazy field, including tag.
+   */
+  public static int computeLazyFieldSize(final int fieldNumber,
+                                         final LazyField value) {
+    return computeTagSize(fieldNumber) + computeLazyFieldSizeNoTag(value);
+  }
+
+  /**
    * Compute the number of bytes that would be needed to encode a
    * {@code uint32} field, including tag.
    */
@@ -616,6 +624,18 @@ public final class CodedOutputStream {
            computeBytesSize(WireFormat.MESSAGE_SET_MESSAGE, value);
   }
 
+  /**
+   * Compute the number of bytes that would be needed to encode an
+   * lazily parsed MessageSet extension field to the stream.  For
+   * historical reasons, the wire format differs from normal fields.
+   */
+  public static int computeLazyFieldMessageSetExtensionSize(
+      final int fieldNumber, final LazyField value) {
+    return computeTagSize(WireFormat.MESSAGE_SET_ITEM) * 2 +
+           computeUInt32Size(WireFormat.MESSAGE_SET_TYPE_ID, fieldNumber) +
+           computeLazyFieldSize(WireFormat.MESSAGE_SET_MESSAGE, value);
+  }
+  
   // -----------------------------------------------------------------
 
   /**
@@ -732,6 +752,15 @@ public final class CodedOutputStream {
   }
 
   /**
+   * Compute the number of bytes that would be needed to encode an embedded
+   * message stored in lazy field.
+   */
+  public static int computeLazyFieldSizeNoTag(final LazyField value) {
+    final int size = value.getSerializedSize();
+    return computeRawVarint32Size(size) + size;
+  }
+
+  /**
    * Compute the number of bytes that would be needed to encode a
    * {@code bytes} field.
    */
@@ -753,7 +782,7 @@ public final class CodedOutputStream {
    * Caller is responsible for converting the enum value to its numeric value.
    */
   public static int computeEnumSizeNoTag(final int value) {
-    return computeRawVarint32Size(value);
+    return computeInt32SizeNoTag(value);
   }
 
   /**
@@ -816,13 +845,6 @@ public final class CodedOutputStream {
       refreshBuffer();
     }
   }
-  
-  /**
-   * @return current offset in the output file
-   */
-  public long getWrittenBytes() {
-	return writtenBytes + position;
-  }
 
   /**
    * If writing to a flat array, return the space left in the array.
@@ -836,6 +858,13 @@ public final class CodedOutputStream {
         "spaceLeft() can only be called on CodedOutputStreams that are " +
         "writing to a flat array.");
     }
+  }
+  
+  /**
+    * @return current offset in the output file
+    */
+  public long getWrittenBytes() {
+  	return writtenBytes + position;
   }
 
   /**
@@ -880,6 +909,11 @@ public final class CodedOutputStream {
     writeRawByte((byte) value);
   }
 
+  /** Write a byte string. */
+  public void writeRawBytes(final ByteString value) throws IOException {
+    writeRawBytes(value, 0, value.size());
+  }
+
   /** Write an array of bytes. */
   public void writeRawBytes(final byte[] value) throws IOException {
     writeRawBytes(value, 0, value.length);
@@ -913,6 +947,54 @@ public final class CodedOutputStream {
         // Write is very big.  Let's do it all at once.
         output.write(value, offset, length);
         writtenBytes += length;
+      }
+    }
+  }
+
+  /** Write part of a byte string. */
+  public void writeRawBytes(final ByteString value, int offset, int length)
+                            throws IOException {
+    if (limit - position >= length) {
+      // We have room in the current buffer.
+      value.copyTo(buffer, offset, position, length);
+      position += length;
+    } else {
+      // Write extends past current buffer.  Fill the rest of this buffer and
+      // flush.
+      final int bytesWritten = limit - position;
+      value.copyTo(buffer, offset, position, bytesWritten);
+      offset += bytesWritten;
+      length -= bytesWritten;
+      position = limit;
+      refreshBuffer();
+
+      // Now deal with the rest.
+      // Since we have an output stream, this is our buffer
+      // and buffer offset == 0
+      if (length <= limit) {
+        // Fits in new buffer.
+        value.copyTo(buffer, offset, 0, length);
+        position = length;
+      } else {
+        // Write is very big, but we can't do it all at once without allocating
+        // an a copy of the byte array since ByteString does not give us access
+        // to the underlying bytes. Use the InputStream interface on the
+        // ByteString and our buffer to copy between the two.
+        InputStream inputStreamFrom = value.newInput();
+        if (offset != inputStreamFrom.skip(offset)) {
+          throw new IllegalStateException("Skip failed? Should never happen.");
+        }
+        // Use the buffer as the temporary buffer to avoid allocating memory.
+        while (length > 0) {
+          int bytesToRead = Math.min(length, limit);
+          int bytesRead = inputStreamFrom.read(buffer, 0, bytesToRead);
+          if (bytesRead != bytesToRead) {
+            throw new IllegalStateException("Read failed? Should never happen");
+          }
+          output.write(buffer, 0, bytesRead);
+          writtenBytes += bytesRead;
+          length -= bytesRead;
+        }
       }
     }
   }

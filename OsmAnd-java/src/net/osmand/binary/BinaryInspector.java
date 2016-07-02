@@ -70,12 +70,12 @@ public class BinaryInspector {
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[]{
-//					"-vpoi",
-//					"-vmap", "-vmapobjects", // "-vmapcoordinates",
-//					"-vrouting",
+					"-vpoi",
+					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+					"-vrouting",
 					"-vaddress", "-vcities","-vstreetgroups",
 					"-vstreets", "-vbuildings", "-vintersections",
-//					"-lang=ru",
+					"-lang=ru",
 					"-bbox=4.8486,52.3084,4.8747,52.2970",
 //					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm" 
 					System.getProperty("maps.dir")+"/Netherlands_noord-holland_europe.obf"

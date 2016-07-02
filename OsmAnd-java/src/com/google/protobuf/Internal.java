@@ -100,6 +100,38 @@ public class Internal {
   }
 
   /**
+   * Helper called by generated code to determine if a byte array is a valid
+   * UTF-8 encoded string such that the original bytes can be converted to
+   * a String object and then back to a byte array round tripping the bytes
+   * without loss.  More precisely, returns {@code true} whenever:
+   * <pre>   {@code
+   * Arrays.equals(byteString.toByteArray(),
+   *     new String(byteString.toByteArray(), "UTF-8").getBytes("UTF-8"))
+   * }</pre>
+   *
+   * <p>This method rejects "overlong" byte sequences, as well as
+   * 3-byte sequences that would map to a surrogate character, in
+   * accordance with the restricted definition of UTF-8 introduced in
+   * Unicode 3.1.  Note that the UTF-8 decoder included in Oracle's
+   * JDK has been modified to also reject "overlong" byte sequences,
+   * but currently (2011) still accepts 3-byte surrogate character
+   * byte sequences.
+   *
+   * <p>See the Unicode Standard,</br>
+   * Table 3-6. <em>UTF-8 Bit Distribution</em>,</br>
+   * Table 3-7. <em>Well Formed UTF-8 Byte Sequences</em>.
+   *
+   * <p>As of 2011-02, this method simply returns the result of {@link
+   * ByteString#isValidUtf8()}.  Calling that method directly is preferred.
+   *
+   * @param byteString the string to check
+   * @return whether the byte array is round trippable
+   */
+  public static boolean isValidUtf8(ByteString byteString) {
+    return byteString.isValidUtf8();
+  }
+
+  /**
    * Interface for an enum value or value descriptor, to be used in FieldSet.
    * The lite library stores enum values directly in FieldSets but the full
    * library stores EnumValueDescriptors in order to better support reflection.

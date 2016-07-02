@@ -31,22 +31,30 @@
 package com.google.protobuf;
 
 /**
- * Thrown by blocking RPC methods when a failure occurs.
+ * Base interface for methods common to {@link MessageLite}
+ * and {@link MessageLite.Builder} to provide type equivalency.
  *
- * @author cpovirk@google.com (Chris Povirk)
+ * @author jonp@google.com (Jon Perlow)
  */
-public class ServiceException extends Exception {
-  private static final long serialVersionUID = -1219262335729891920L;
+public interface MessageLiteOrBuilder {
+  /**
+   * Get an instance of the type with no fields set. Because no fields are set,
+   * all getters for singular fields will return default values and repeated
+   * fields will appear empty.
+   * This may or may not be a singleton.  This differs from the
+   * {@code getDefaultInstance()} method of generated message classes in that
+   * this method is an abstract method of the {@code MessageLite} interface
+   * whereas {@code getDefaultInstance()} is a static method of a specific
+   * class.  They return the same thing.
+   */
+  MessageLite getDefaultInstanceForType();
 
-  public ServiceException(final String message) {
-    super(message);
-  }
+  /**
+   * Returns true if all required fields in the message and all embedded
+   * messages are set, false otherwise.
+   *
+   * <p>See also: {@link MessageOrBuilder#getInitializationErrorString()}
+   */
+  boolean isInitialized();
 
-  public ServiceException(final Throwable cause) {
-    super(cause);
-  }
-
-  public ServiceException(final String message, final Throwable cause) {
-    super(message, cause);
-  }
 }

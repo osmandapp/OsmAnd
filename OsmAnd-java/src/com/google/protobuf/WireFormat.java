@@ -45,12 +45,12 @@ public final class WireFormat {
   // Do not allow instantiation.
   private WireFormat() {}
 
-  static final int WIRETYPE_VARINT           = 0;
-  static final int WIRETYPE_FIXED64          = 1;
-  static final int WIRETYPE_LENGTH_DELIMITED = 2;
-  static final int WIRETYPE_START_GROUP      = 3;
-  static final int WIRETYPE_END_GROUP        = 4;
-  static final int WIRETYPE_FIXED32          = 5;
+  public static final int WIRETYPE_VARINT           = 0;
+  public static final int WIRETYPE_FIXED64          = 1;
+  public static final int WIRETYPE_LENGTH_DELIMITED = 2;
+  public static final int WIRETYPE_START_GROUP      = 3;
+  public static final int WIRETYPE_END_GROUP        = 4;
+  public static final int WIRETYPE_FIXED32          = 5;
   // Osmand Delta change
   public static final int WIRETYPE_FIXED32_LENGTH_DELIMITED = 6;
 
@@ -148,7 +148,7 @@ public final class WireFormat {
     public boolean isPackable() { return true; }
   }
 
-  // Field numbers for feilds in MessageSet wire format.
+  // Field numbers for fields in MessageSet wire format.
   static final int MESSAGE_SET_ITEM    = 1;
   static final int MESSAGE_SET_TYPE_ID = 2;
   static final int MESSAGE_SET_MESSAGE = 3;

@@ -62,22 +62,39 @@ public final class CodedInputStream {
   public static CodedInputStream newInstance(final byte[] buf) {
     return newInstance(buf, 0, buf.length);
   }
+  
+  // begin osmand change
+  public static CodedInputStream newInstance(RandomAccessFile raf) {
+    return new CodedInputStream(raf);
+  }
 
   /**
    * Create a new CodedInputStream wrapping the given byte array slice.
    */
   public static CodedInputStream newInstance(final byte[] buf, final int off,
                                              final int len) {
-    return new CodedInputStream(buf, off, len);
+    CodedInputStream result = new CodedInputStream(buf, off, len);
+    try {
+      // Some uses of CodedInputStream can be more efficient if they know
+      // exactly how many bytes are available.  By pushing the end point of the
+      // buffer as a limit, we allow them to get this information via
+      // getBytesUntilLimit().  Pushing a limit that we know is at the end of
+      // the stream can never hurt, since we can never past that point anyway.
+      result.pushLimit(len);
+    } catch (InvalidProtocolBufferException ex) {
+      // The only reason pushLimit() might throw an exception here is if len
+      // is negative. Normally pushLimit()'s parameter comes directly off the
+      // wire, so it's important to catch exceptions in case of corrupt or
+      // malicious data. However, in this case, we expect that len is not a
+      // user-supplied value, so we can assume that it being negative indicates
+      // a programming error. Therefore, throwing an unchecked exception is
+      // appropriate.
+      throw new IllegalArgumentException(ex);
+    }
+    return result;
   }
 
   // -----------------------------------------------------------------
-  // begin osmand change
-  public static CodedInputStream newInstance(RandomAccessFile raf) {
-    return new CodedInputStream(raf);
-  }
-  // end osmand change
-
 
   /**
    * Attempt to read a field tag, returning zero if we have reached EOF.
@@ -232,6 +249,23 @@ public final class CodedInputStream {
     --recursionDepth;
   }
 
+  /** Read a {@code group} field value from the stream. */
+  public <T extends MessageLite> T readGroup(
+      final int fieldNumber,
+      final Parser<T> parser,
+      final ExtensionRegistryLite extensionRegistry)
+      throws IOException {
+    if (recursionDepth >= recursionLimit) {
+      throw InvalidProtocolBufferException.recursionLimitExceeded();
+    }
+    ++recursionDepth;
+    T result = parser.parsePartialFrom(this, extensionRegistry);
+    checkLastTagWas(
+      WireFormat.makeTag(fieldNumber, WireFormat.WIRETYPE_END_GROUP));
+    --recursionDepth;
+    return result;
+  }
+
   /**
    * Reads a {@code group} field value from the stream and merges it into the
    * given {@link UnknownFieldSet}.
@@ -267,10 +301,30 @@ public final class CodedInputStream {
     popLimit(oldLimit);
   }
 
+  /** Read an embedded message field value from the stream. */
+  public <T extends MessageLite> T readMessage(
+      final Parser<T> parser,
+      final ExtensionRegistryLite extensionRegistry)
+      throws IOException {
+    int length = readRawVarint32();
+    if (recursionDepth >= recursionLimit) {
+      throw InvalidProtocolBufferException.recursionLimitExceeded();
+    }
+    final int oldLimit = pushLimit(length);
+    ++recursionDepth;
+    T result = parser.parsePartialFrom(this, extensionRegistry);
+    checkLastTagWas(0);
+    --recursionDepth;
+    popLimit(oldLimit);
+    return result;
+  }
+
   /** Read a {@code bytes} field value from the stream. */
   public ByteString readBytes() throws IOException {
     final int size = readRawVarint32();
-    if (size <= (bufferSize - bufferPos) && size > 0) {
+    if (size == 0) {
+      return ByteString.EMPTY;
+    } else if (size <= (bufferSize - bufferPos) && size > 0) {
       // Fast path:  We already have the bytes in a contiguous buffer, so
       //   just copy directly from it.
       final ByteString result = ByteString.copyFrom(buffer, bufferPos, size);
@@ -375,8 +429,8 @@ public final class CodedInputStream {
    * has already read one byte.  This allows the caller to determine if EOF
    * has been reached before attempting to read.
    */
-  static int readRawVarint32(final int firstByte,
-                             final InputStream input) throws IOException {
+  public static int readRawVarint32(
+      final int firstByte, final InputStream input) throws IOException {
     if ((firstByte & 0x80) == 0) {
       return firstByte;
     }
@@ -514,7 +568,6 @@ public final class CodedInputStream {
   private static final int DEFAULT_SIZE_LIMIT = 64 << 20;  // 64MB
   private static final int BUFFER_SIZE = 5 * 1024;
 
-
   private CodedInputStream(final byte[] buffer, final int off, final int len) {
     this.buffer = buffer;
     bufferSize = off + len;
@@ -523,21 +576,22 @@ public final class CodedInputStream {
     input = null;
   }
 
+  // osmand change
+	private CodedInputStream(final RandomAccessFile raf) {
+		buffer = new byte[BUFFER_SIZE];
+		this.bufferSize = 0;
+		bufferPos = 0;
+		totalBytesRetired = 0;
+		this.raf = raf;
+		input = null;
+	}
+
   private CodedInputStream(final InputStream input) {
     buffer = new byte[BUFFER_SIZE];
     bufferSize = 0;
     bufferPos = 0;
     totalBytesRetired = 0;
     this.input = input;
-  }
-  
-  private CodedInputStream(final RandomAccessFile raf) {
-	 buffer = new byte[BUFFER_SIZE];
-	 this.bufferSize = 0;
-	 bufferPos = 0;
-	 totalBytesRetired = 0;
-	 this.raf = raf;
-	 input = null;
   }
 
   /**
@@ -599,7 +653,7 @@ public final class CodedInputStream {
    * refreshing its buffer.  If you need to prevent reading past a certain
    * point in the underlying {@code InputStream} (e.g. because you expect it to
    * contain more data after the end of the message which you need to handle
-   * differently) then you must place a wrapper around you {@code InputStream}
+   * differently) then you must place a wrapper around your {@code InputStream}
    * which limits the amount of data that can be read from it.
    *
    * @return the old limit.
@@ -674,7 +728,7 @@ public final class CodedInputStream {
 
   /**
    * Called with {@code this.buffer} is empty to read more bytes from the
-   * input.  If {@code mustSucceed} is true, refillBuffer() gurantees that
+   * input.  If {@code mustSucceed} is true, refillBuffer() guarantees that
    * either there will be at least one byte in the buffer when it returns
    * or it will throw an exception.  If {@code mustSucceed} is false,
    * refillBuffer() returns false if no more bytes were available.
@@ -698,7 +752,8 @@ public final class CodedInputStream {
 
     bufferPos = 0;
     if (raf != null) {
-        // osmand change
+    	// osmand change
+     totalBytesRetired = (int) raf.getFilePointer();
     	long remain = raf.length() - raf.getFilePointer();
     	bufferSize = (int) Math.min(remain, buffer.length);
     	if(bufferSize > 0) {
@@ -822,16 +877,15 @@ public final class CodedInputStream {
         final byte[] chunk = new byte[Math.min(sizeLeft, BUFFER_SIZE)];
         int pos = 0;
         while (pos < chunk.length) {
-        	
-          final int n;
-          // osmand change
-          if(raf != null) {
-        	  raf.readFully(chunk, pos, chunk.length - pos);
-        	  n = chunk.length - pos;
-          } else {
-              n = (input == null) ? -1 :
-              input.read(chunk, pos, chunk.length - pos);
-          }
+        	final int n;
+        	// osmand change
+        	if(raf != null) {
+        		raf.readFully(chunk, pos, chunk.length - pos);
+        		n = chunk.length - pos;
+        	} else {
+        		n = (input == null) ? -1 :
+        	    input.read(chunk, pos, chunk.length - pos);
+        	}
           if (n == -1) {
             throw InvalidProtocolBufferException.truncatedMessage();
           }
@@ -854,6 +908,7 @@ public final class CodedInputStream {
         System.arraycopy(chunk, 0, bytes, pos, chunk.length);
         pos += chunk.length;
       }
+
       // Done.
       return bytes;
     }
@@ -883,42 +938,46 @@ public final class CodedInputStream {
     } else {
       // Skipping more bytes than are in the buffer.  First skip what we have.
       int pos = bufferSize - bufferPos;
-      totalBytesRetired += bufferSize; // ? pos incorrect
-      bufferPos = 0;
-      bufferSize = 0;
+      bufferPos = bufferSize;
 
-      // Then skip directly from the InputStream for the rest.
-      while (pos < size) {
-    	// osmand change
-    	final int n ;
-    	if(raf != null) {
-    	 n = raf.skipBytes(size - pos);
-    	} else {
-    	 n = (input == null) ? -1 : (int) input.skip(size - pos);
-    	}
-        if (n <= 0) {
-          throw InvalidProtocolBufferException.truncatedMessage();
-        }
-        pos += n;
-        totalBytesRetired += n;
+      // osmand change
+      if(raf != null) {
+         bufferPos = 0;
+         bufferSize = 0;
+      	 int n = raf.skipBytes(size - pos);
+        totalBytesRetired = (int) raf.getFilePointer();
+      	 if (n <= 0) {
+             throw InvalidProtocolBufferException.truncatedMessage();
+         }
+      } else {
+      // Keep refilling the buffer until we get to the point we wanted to skip
+      // to.  This has the side effect of ensuring the limits are updated
+      // correctly.
+      refillBuffer(true);
+      while (size - pos > bufferSize) {
+        pos += bufferSize;
+        bufferPos = bufferSize;
+        refillBuffer(true);
+      }
+
+      bufferPos = size - pos;
       }
     }
   }
   
-  // osmand change
-	public void seek(long pointer) throws IOException {
-		if (pointer - totalBytesRetired >= 0 && pointer - totalBytesRetired < bufferSize) {
-			if (pointer > currentLimit) {
-				// Then fail.
-				throw InvalidProtocolBufferException.truncatedMessage();
-			}
-			bufferPos = (int) (pointer - totalBytesRetired);
-		} else {
-			totalBytesRetired = (int) pointer;
-			bufferSizeAfterLimit = 0;
-			raf.seek(pointer);
-			bufferPos = 0;
-			bufferSize = 0;
-		}
-	}
+  public void seek(long pointer) throws IOException {
+	  if (pointer - totalBytesRetired >= 0 && pointer - totalBytesRetired < bufferSize) {
+		  if (pointer > currentLimit) {
+		  // Then fail.
+			  throw InvalidProtocolBufferException.truncatedMessage();
+		  }
+		  bufferPos = (int) (pointer - totalBytesRetired);
+	  } else {
+		  totalBytesRetired = (int) pointer;
+		  bufferSizeAfterLimit = 0;
+		  raf.seek(pointer);
+		  bufferPos = 0;
+		  bufferSize = 0;
+	  }
+  }
 }
