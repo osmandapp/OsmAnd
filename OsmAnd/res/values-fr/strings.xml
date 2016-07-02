@@ -186,7 +186,7 @@
   <string name="switch_to_vector_map_to_see">Cartes vectorielles hors-lignes disponibles pour cette position.
 \n\t\n\tPour activer : \'Menu\' → \'Configurer la carte\' → \'Carte en ligne…\' → \'Cartes vectorielles hors ligne\'.</string>
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
-    <string name="choose_audio_stream_descr">Sélectionnez le canal audio de sortie à utiliser pour le guidage vocal (selon les capacités de votre appareil)</string>
+    <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal (selon votre appareil)</string>
     <string name="voice_stream_voice_call">Sortie téléphonie</string>
     <string name="voice_stream_notification">Sortie notifications</string>
     <string name="voice_stream_music">Sortie musique</string>
@@ -2235,4 +2235,6 @@
     <string name="access_map_linked_to_location">La carte est liée à l’emplacement</string>
     <string name="lang_kn">Kannada</string>
     <string name="access_shared_string_navigate_up">Monter</string>
-    </resources>
+    <string name="coords_format">Format des coordonnées</string>
+    <string name="coords_format_descr">Format des coordonnées géographiques</string>
+  	</resources>
