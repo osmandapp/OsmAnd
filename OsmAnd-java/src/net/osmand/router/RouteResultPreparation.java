@@ -504,7 +504,7 @@ public class RouteResultPreparation {
 			if (currentTurn == null || currentTurn.getLanes() == null) {
 				// skip
 			} else {
-				boolean changed = false;
+				boolean merged = false;
 				if (nextSegment != null) {
 					String hw = currentSegment.getObject().getHighway();
 					double mergeDistance = 200;
@@ -512,10 +512,11 @@ public class RouteResultPreparation {
 						mergeDistance = 400;
 					}
 					if (dist < mergeDistance) {
-						changed = mergeTurnLanes(leftside, currentSegment, nextSegment);
+						mergeTurnLanes(leftside, currentSegment, nextSegment);
+						merged = true;
 					}
 				}
-				if (!changed) {
+				if (!merged) {
 					TurnType tt = currentSegment.getTurnType();
 					inferActiveTurnLanesFromTurn(tt, TurnType.C);
 				}
