@@ -226,7 +226,7 @@
     <string name="save_current_track_descr">Guarda ahora la traza actual en la SD</string>
     <string name="save_current_track">Guardar traza GPX actual</string>
     <string name="save_track_interval_globally">Intervalo de guardado</string>
-    <string name="voice_provider">Indicaciones de voz</string>
+    <string name="voice_provider">Indicaciones por voz</string>
     <string name="enable_proxy_title">Activar Proxy HTTP</string>
     <string name="proxy_port_title">Puerto Proxy</string>
     <string name="monitoring_settings">Grabación de viaje</string>
@@ -505,7 +505,7 @@
     <string name="save_track_to_gpx_descrp">Las trazas se guardarán en la carpeta de trazas durante la navegación</string>
     <string name="save_track_interval">Intervalo de guardado durante navegación</string>
     <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación</string>
-    <string name="voice_provider_descr">Elige las indicaciones de voz para la navegación</string>
+    <string name="voice_provider_descr">Elige las indicaciones por voz para la navegación</string>
     <string name="enable_proxy_descr">Configura un Proxy HTTP para todas las peticiones de red</string>
     <string name="proxy_host_title">Servidor proxy</string>
     <string name="proxy_host_descr">Configura el nombre de tu proxy (p.e. 127.0.0.1)</string>
@@ -1301,7 +1301,7 @@
     <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
     <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación.
 \n\t\n\tPara usarlo activa \'Menú\'→\'Configurar mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
-    <string name="choose_audio_stream">Salida de indicaciones de voz</string>
+    <string name="choose_audio_stream">Salida del indicaciones por voz</string>
     <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz (dependiente del sistema)</string>
     <string name="voice_stream_voice_call">Audio de llamada telefónica</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
@@ -1395,7 +1395,7 @@
     <string name="loading_builds">Cargando compilaciones OsmAnd…</string>
     <string name="select_build_to_install">Elige una compilación OsmAnd a instalar</string>
     <string name="gps_status_app_not_found">La aplicación GPS Status no está instalada. ¿Buscar en la Tienda?</string>
-    <string name="voice_is_not_available_msg">Las indicaciones de voz no están disponibles, vaya a \'Opciones\' → \'General\' → \'Indicaciones de voz\' y elige o descarga un paquete de mensajes de voz.</string>
+    <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, vaya a \'Opciones\' → \'General\' → \'Indicaciones por voz\' y elige o descarga un paquete de indicaciones por voz.</string>
     <string name="voice_is_not_available_title">No se eligieron indicaciones por voz</string>
     <string name="daynight_mode_day">Día</string>
     <string name="daynight_mode_night">Noche</string>
@@ -2007,8 +2007,8 @@
     <string name="no_microphone_permission">La aplicación no tiene permiso de acceso al micrófono.</string>
     <string name="impassable_road_desc">Elige caminos a evitar durante la navegación</string>
     <string name="shared_string_sound">Sonido</string>
-    <string name="select_voice_provider">Elige el aviso de voz</string>
-    <string name="select_voice_provider_descr">Elige o descarga el aviso de voz para tu idioma</string>
+    <string name="select_voice_provider">Elige las indicaciones por voz</string>
+    <string name="select_voice_provider_descr">Elige o descarga las indicaciones por voz para tu idioma</string>
     <string name="live_updates">Actualizaciones en vivo</string>
     <string name="available_maps">Mapas disponibles</string>
     <string name="last_update">Última actualización: %s</string>
