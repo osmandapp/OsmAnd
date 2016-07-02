@@ -1474,8 +1474,8 @@
     <string name="switch_to_vector_map_to_see">Eksterreta vektora mapo disponebla por tiu ĉi loko.
 \n\t\n\tPor uzi ĝin, elektu \'Menuo\' → \'Agordi mapon\' → \'Map-fontaj…\' → \'Eksterretaj vektoraj mapoj\'.</string>
     <string name="choose_audio_stream">Eligo de gvidata voĉo</string>
-    <string name="voice_stream_voice_call">Voĉa aŭd-kanalo</string>
-    <string name="choose_audio_stream_descr">Elektu kanalon por ludi gvidatan voĉon (sistem-dependa)</string>
+    <string name="voice_stream_voice_call">Telefon-parola aŭd-kanalo</string>
+    <string name="choose_audio_stream_descr">Elektu laŭtparolilon por ludi gvidatan voĉon (sistem-dependa)</string>
     <string name="voice_stream_notification">Sciiga aŭd-kanalo</string>
     <string name="voice_stream_music">Aŭdvidaĵa/muzika kanalo</string>
     <string name="warning_tile_layer_not_downloadable">Programo ne povas elŝuti map-tavolon %1$s, bonvolu provi reinstali ĝin.</string>
