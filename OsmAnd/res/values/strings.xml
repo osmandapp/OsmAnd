@@ -1816,8 +1816,8 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="gpx_option_from_start_point">Pass along entire track</string>
     <string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map Source…\' → \'Offline vector maps\'.</string>
     <string name="choose_audio_stream">Voice guidance output</string>
-    <string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
-    <string name="voice_stream_voice_call">Voice call audio</string>
+    <string name="choose_audio_stream_descr">Choose speaker to play voice guidance (system-dependent)</string>
+    <string name="voice_stream_voice_call">Phone call audio</string>
     <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Media/music audio</string>
     <string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
