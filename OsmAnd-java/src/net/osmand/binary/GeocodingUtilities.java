@@ -276,7 +276,8 @@ public class GeocodingUtilities {
 						public boolean isCancelled() {
 							return result != null && result.isCancelled();
 						}
-					}, mainWord, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);// TODO search boundaries
+					}, mainWord, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+			req.setBBoxRadius(road.getLocation().getLatitude(), road.getLocation().getLongitude(), 20000);
 			reader.searchAddressDataByName(req);
 		}
 
