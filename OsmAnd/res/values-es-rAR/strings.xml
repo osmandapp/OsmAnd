@@ -1302,8 +1302,8 @@
     <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación.
 \n\t\n\tPara usarlo activa \'Menú\'→\'Configurar mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
     <string name="choose_audio_stream">Salida de indicaciones de voz</string>
-    <string name="choose_audio_stream_descr">Elige el canal para reproducir indicaciones por voz (dependiente del sistema)</string>
-    <string name="voice_stream_voice_call">Audio de llamada de voz</string>
+    <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz (dependiente del sistema)</string>
+    <string name="voice_stream_voice_call">Audio de llamada telefónica</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
     <string name="voice_stream_music">Audio de multimedia</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa %1$s del mapa, intenta reinstalando.</string>
