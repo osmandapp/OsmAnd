@@ -186,8 +186,12 @@ public class ContextMenuAdapter {
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 					int colorRes = item.getColorRes();
-					if (colorRes == ContextMenuItem.INVALID_ID && !item.shouldSkipPainting()) {
-						colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
+					if (colorRes == ContextMenuItem.INVALID_ID) {
+						if (!item.shouldSkipPainting()) {
+							colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
+						} else {
+							colorRes = 0;
+						}
 					}
 					final Drawable drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
