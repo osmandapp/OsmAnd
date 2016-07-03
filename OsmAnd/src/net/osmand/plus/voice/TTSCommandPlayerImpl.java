@@ -108,6 +108,16 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			if (ttsRequests++ == 0)
 				requestAudioFocus();
 			log.debug("ttsRequests="+ttsRequests);
+			// Delay prompts to allow BT SCO connection being established
+			if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+				ttsRequests++;
+				if (android.os.Build.VERSION.SDK_INT <= 21) {
+					params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
+					mTts.playSilence(BT_SCO_DELAY, TextToSpeech.QUEUE_ADD, params);
+				} else {
+					mTts.playSilentUtterance(BT_SCO_DELAY, TextToSpeech.QUEUE_ADD, ""+System.currentTimeMillis());
+				}
+			}
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
