@@ -1365,8 +1365,8 @@
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
-    <string name="interrupt_music_descr">Afbryd musik ved navigationsinstruktioner</string>
-    <string name="interrupt_music">Afbryd musik</string>
+    <string name="interrupt_music_descr">Pause musik under talemeddelelser (ikke bare sænke volumen)</string>
+    <string name="interrupt_music">Pause musik</string>
     <string name="share_route_as_gpx">Del rute som GPX-fil</string>
     <string name="share_route_subject">Ruten deles via OsmAnd</string>
     <string name="navigation_intent_invalid">Ugyldigt format: %s</string>
