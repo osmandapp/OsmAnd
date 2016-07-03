@@ -1825,4 +1825,6 @@
     <string name="lang_als">Albaniera (Tosk)</string>
     <string name="osm_edit_created_poi">Sortutako OSM POIa</string>
 
-    </resources>
+    <string name="map_downloaded_descr">%1$s mapa deskargatu da. Joan atzera mapara erabiltzen hasteko.</string>
+    <string name="file_name_containes_illegal_char">Fitxategiaren izenak karaktere baliogaberen bat du</string>
+</resources>
