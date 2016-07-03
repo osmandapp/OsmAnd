@@ -345,7 +345,7 @@
     <string name="no_buildings_found">Perunu edifìtziu agatau.</string>
     <string name="incremental_search_city">Chirca incrementale de sa tzitade</string>
     <string name="search_villages_and_postcodes">Chirca àteras biddas/còdighes postales</string>
-    <string name="voice_stream_voice_call">Àudio mutidas bogales</string>
+    <string name="voice_stream_voice_call">Àudio mutidas bogales (chircat fintzas de firmare sa mùsica)</string>
     <string name="voice_stream_notification">Àudio notìficas</string>
     <string name="voice_stream_music">Àudio media/mùsica</string>
     <string name="rendering_attr_showRoadMaps_description">Issèbera cando ammustrare mapas cun petzi sas istradas:</string>
@@ -405,7 +405,7 @@
     <string name="auto_zoom_map">Zoom automàticu mapa</string>
     <string name="snap_to_road_descr">Arrea sa positzione in subra de sas istradas durante su nàvigu</string>
     <string name="snap_to_road">Arrea in subra de sas istradas</string>
-    <string name="interrupt_music_descr">Firma sa mùsica pro fàghere sos annùntzios</string>
+    <string name="interrupt_music_descr">Firma sa mùsica pro fàghere sos annùntzios vocales (no abbasses petzi su volume)</string>
     <string name="interrupt_music">Firma sa mùsica</string>
 
     <string name="osmand_play_title_30_chars">OsmAnd Mapas &amp; Nàvigu</string>
@@ -1029,7 +1029,7 @@
 \n\t\n\tPro l\'impreare ativare \'Menù\' → \'Cunfigura sa mapa\' → \'Mitza mapa…\' → \'Mapas vetoriales non in lìnia\'.</string>
     <string name="vector_data">Mapas vetoriales non in lìnia</string>
     <string name="choose_audio_stream">Canale d\'essida de sa boghe de ghia</string>
-    <string name="choose_audio_stream_descr">Issèbera su canale pro sa ghia vocale (dipendet dae su sistema)</string>
+    <string name="choose_audio_stream_descr">Issèbera sa mitza pro sa ghia vocale (dipendet dae su sistema)</string>
     <string name="warning_tile_layer_not_downloadable">S’aplicu non resessit a iscarrigare s’istratu de sa mapa %1$s, proa a lu torrare a installare.</string>
     <string name="overlay_transparency_descr">Muda trasparèntzia suprapositzione</string>
     <string name="overlay_transparency">Trasparèntzia subrapositzione</string>
@@ -2210,4 +2210,6 @@
     <string name="lang_ast">Asturianu</string>
     <string name="app_mode_bus">Postale</string>
  	<string name="app_mode_train">Trenu</string>
-    </resources>
+    <string name="coords_format">Formatu de sas coordinatas</string>
+    <string name="coords_format_descr">Formatu de sas coordinatas geogràficas</string>
+  	</resources>
