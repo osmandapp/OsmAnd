@@ -209,7 +209,7 @@
   <string name="safe_mode_description">Exekutatu aplikazioa modu seguruan (erabili Android geldoagoa kode natiboaren ordez).</string>
   <string name="safe_mode">Modu seguroa</string>
   <string name="native_library_not_running">Aplikazioa modu seguruan ari da (ezgaitu Ezarpenetatik).</string>
-  <string name="background_service_is_enabled_question">OsmAnden esekidura moduko zerbitzua oraindik martxan dago. Itzali nahi al duzu?</string>
+  <string name="background_service_is_enabled_question">OsmAnd bigarren planoko zerbitzua oraindik martxan dago. Hura ere gelditu nahi al duzu?</string>
   
   
   <string name="close_changeset">Itxi aldaketa multzoa</string>
@@ -277,7 +277,7 @@
   <string name="day_night_info_description">Egunsentia: %1$s ⏎\nIlunabarra: %2$s</string>
   <string name="day_night_info">Egun/gau info</string>
   <string name="map_widget_day_night">Egun/gau mapa</string>
-  <string name="map_widget_vector_attributes">Errenderizazio atributuak:</string>
+  <string name="map_widget_vector_attributes">Errendatze atributuak</string>
   <string name="map_widget_renderer">Mapa estiloa</string>
   
   
@@ -882,7 +882,7 @@
   <string name="int_seconds">segundoak</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">"Ezarri esekite moduko zerbitzua erabiltzen duen esnaratze tartea "</string>
-  <string name="background_service_int">Esnaratze tartea</string>
+  <string name="background_service_int">GPSaren esnarazte tartea</string>
   <string name="background_service_provider_descr">Aukeatu esekidura moduko zerbitzuaren kokapen hornitzailea</string>
   <string name="background_service_provider">Kokapen hornitzailea</string>
   <string name="background_router_service_descr">OsmAnd bigarren planoan exekutatzen du zure kokapena pantaila itzalia dagoenean jarraitzeko</string>
@@ -893,7 +893,7 @@
   <string name="search_poi_filter">Filtroa</string>
   <string name="menu_mute_off">Soinua gaitua dago</string>
   <string name="menu_mute_on">Soinua ezgaitua dago</string>
-  <string name="voice_provider_descr">Aukeratu nabigaziorako ahots gidaritza (begiratu ISO 639-1 hizkuntza kodeentzat)</string>
+  <string name="voice_provider_descr">Aukeratu nabigaziorako ahots gidaritza</string>
   <string name="voice_provider">Ahots bidezko gidaritza</string>
   <string name="voice_data_initializing">Ahots datuak hasieratzen…</string>
   <string name="voice_data_not_supported">Ahots datuen bertsioa ez da onartzen</string>
@@ -1028,7 +1028,7 @@
   <string name="shared_string_settings">Ezarpenak</string>
   <string name="save_current_track_descr">Gorde uneko lorratza SDan orain</string>
   <string name="save_current_track">Gorde uneko GPX lorratza</string>
-  <string name="save_track_interval">Jarraipen tartea</string>
+  <string name="save_track_interval">Erregistroen tartea nabigazioan</string>
   <string name="save_track_interval_descr">Aukeratu erregistratze maiztasuna nabigazio bitarteko lorratz grabaketarako</string>
   <string name="save_track_to_gpx_descrp">Lorratzak lorratzen direktorioan gordeko dira nabigazioan zehar</string>
   <string name="save_track_to_gpx">Erregistratu lorratza GPX fitxategian nabigazioan zehar</string>
@@ -1201,7 +1201,7 @@
     
     <string name="routing_attr_short_way_name">Ibilbide laburra</string>
 	<string name="routing_attr_short_way_description">Ibilbide laburra erabili</string>
-	<string name="rendering_attr_coloredBuildings_name">Koloreetako eraikinak</string>
+	<string name="rendering_attr_coloredBuildings_name">Koloreztatu eraikinak motaren arabera</string>
     <string name="osmo_invite">Gonbidatu…</string>
     <string name="osmo_leave_confirmation_msg">%1$s taldea utzi nahi duzu?</string>
     <string name="osmo_specify_tracker_id">Zehaztu IDa</string>
@@ -1210,22 +1210,22 @@
     <string name="rendering_attr_subwayMode_name">Metro ibilbideak</string>
  	<string name="keep_navigation_service">Mantendu</string>
 	<string name="stop_navigation_service">Gelditu</string>
-	<string name="sleep_mode_stop_dialog">GPSa piztuta mantendu?</string>
+	<string name="sleep_mode_stop_dialog">Gelditu GPSaren bigarren planoko modua?</string>
 	<string name="local_map_names">Izen lokalak</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreera</string>
     <string name="forward">Aurrera</string>
     <string name="home">Kontrol panela</string>
-    <string name="gpx_monitoring_start">Hasi grabatzen GPXa</string>
-	<string name="gpx_monitoring_stop">Gelditu grabatzen GPXa</string>
+    <string name="gpx_monitoring_start">Hasi GPXa grabatzen</string>
+	<string name="gpx_monitoring_stop">Gelditu GPX grabaketa</string>
     <string name="gpx_start_new_segment">Hasi segmentu berria</string>
-    <string name="rendering_attr_hideBuildings_name">Eraikinak ezkutatu</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Ezkutatu ez-ibilgailu bideak</string>
-    <string name="rendering_attr_hideText_name">Ezkutatu testua</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Ezkutatu egurra eta sastrakak</string>
-    <string name="rendering_attr_buildings15zoom_name">15 zoomean eraikinak</string>
-    <string name="rendering_attr_moreDetailed_name">Zehaztasun gehiago</string>
-    <string name="rendering_attr_lessDetailed_name">Zehaztasun gutxiago</string>
+    <string name="rendering_attr_hideBuildings_name">Eraikinak</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Ez-ibilgailu bideak</string>
+    <string name="rendering_attr_hideText_name">Testua</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Egurra eta sastrakak</string>
+    <string name="rendering_attr_buildings15zoom_name">Eraikinak 15 zoomean</string>
+    <string name="rendering_attr_moreDetailed_name">Xehetasun gehiago</string>
+    <string name="rendering_attr_lessDetailed_name">Xehetasun gutxiago</string>
     
 <string name="av_camera_pic_size">Kameraren irudiaren tamaina</string>
 	<string name="av_camera_pic_size_descr">Aukeratu kameraren irudiaren barneko tamaina</string>
@@ -1271,7 +1271,7 @@
     <string name="animate_routing_route_not_calculated">Kalkulatu ibilbidea aurretik</string>
     <string name="animate_routing_route">"Simulatu kalkulatutako ibilbidea erabiliz "</string>
     <string name="animate_routing_gpx">Simulatu GPX lorratza erabiliz</string>
-    <string name="enable_sleep_mode">Gaitu esekidura modua</string>
+    <string name="enable_sleep_mode">Gaitu GPSaren bigarren planoko modua</string>
 	<string name="gps_wake_up_timer">GPS esnatze tartea</string>
 	<string name="map_preferred_locale">Mapan hobetsitako hizkuntza</string>
     <string name="map_preferred_locale_descr">Hobetsitako hizkuntza mapako etiketentzat (erabilgarri ez badago izen Ingelesera edo lokalera aldatuko da)</string>
@@ -1564,8 +1564,8 @@
     <string name="srtm_plugin_disabled">Sestra-kurbak desgaituta</string>
     <string name="favorite_category_add_new">Gehitu berria</string>
     <string name="favorite_category_select">Hautatu kategoria</string>
-    <string name="default_speed_system_descr">Zehaztu abiadura neurtzeko sistema</string>
-    <string name="default_speed_system">Abiadura neurketa</string>
+    <string name="default_speed_system_descr">Zehaztu abiadura unitatea</string>
+    <string name="default_speed_system">Abiadura unitatea</string>
     <string name="si_kmh">Kilometroak orduko</string>
     <string name="si_m_s">Metroak segundoko</string>
     <string name="si_min_km">Minutuak kilometroko</string>
@@ -1728,7 +1728,7 @@
     <string name="rendering_value_germanRoadAtlas_name">Alemaniako errepide atlasa</string>
     <string name="rendering_value_highContrastRoads_name">Kontraste handiko errepideak</string>
     <string name="traffic_warning_railways">Trenbide gurutzea</string>
-    <string name="show_railway_warnings">Bistaratu trenbide gurutzeak</string>
+    <string name="show_railway_warnings">Trenbide gurutzeak</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikako errepide atlasa</string>
     <string name="impassable_road">Saihestu errepideak…</string>
     <string name="rendering_attr_showSurfaceGrade_name">Bistaratu errepidearen kalitatea</string>
