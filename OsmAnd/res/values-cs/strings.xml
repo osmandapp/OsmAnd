@@ -1921,7 +1921,7 @@
     <string name="find_parking">Najít parkování</string>
     <string name="shared_string_status">Stav</string>
     <string name="shared_string_save_changes">Uložit změny</string>
-    <string name="shared_string_read_more">Více...</string>
+    <string name="shared_string_read_more">Číst více</string>
     <string name="select_map_marker">Vyberte mapovou značku</string>
     <string name="map_markers_other">Ostatní značky</string>
     <string name="upload_anonymously">Nahrát anonymně</string>
@@ -2034,4 +2034,6 @@
     <string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Vlak</string>
     <string name="lang_ast">Asturština</string>
-    </resources>
+    <string name="coords_format">Formát umístění</string>
+    <string name="coords_format_descr">Formát geografického údaje umístění</string>
+  	</resources>
