@@ -32,8 +32,10 @@ public class DoubleTapScaleDetector {
 	private MotionEvent firstDown;
 	private MotionEvent firstUp;
 	private MotionEvent secondDown;
+	private int mTouchSlopSquare;
 	private int mDoubleTapSlopSquare;
 	private boolean mIsDoubleTapping;
+	private boolean mScrolling;
 
 	public DoubleTapScaleDetector(Activity ctx, DoubleTapZoomListener listener) {
 		this.ctx = ctx;
@@ -49,6 +51,8 @@ public class DoubleTapScaleDetector {
 			centerScreen = new PointF(defaultDisplay.getWidth() / 2, defaultDisplay.getHeight() / 2);
 		}
 		final ViewConfiguration configuration = ViewConfiguration.get(ctx);
+		int touchSlop = configuration.getScaledTouchSlop();
+		mTouchSlopSquare = touchSlop * touchSlop;
 		int doubleTapSlop = (int) (configuration.getScaledDoubleTapSlop() * 0.5);
 		mDoubleTapSlopSquare = doubleTapSlop * doubleTapSlop;
 	}
@@ -57,6 +61,7 @@ public class DoubleTapScaleDetector {
 		if (event.getPointerCount() != 1) {
 			resetEvents();
 			mIsDoubleTapping = false;
+			mScrolling = false;
 			return false;
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -71,14 +76,17 @@ public class DoubleTapScaleDetector {
 					listener.onDoubleTap(event);
 				}
 				handled = true;
-			} else {
+			} else if (!mScrolling) {
 				firstUp = MotionEvent.obtain(event);
+			} else {
+				resetEvents();
 			}
 
 			if (handled) {
 				resetEvents();
 			}
 			mIsDoubleTapping = false;
+			mScrolling = false;
 			return handled;
 		} else {
 			if (event.getAction() == MotionEvent.ACTION_DOWN && !mIsInZoomMode) {
@@ -94,6 +102,9 @@ public class DoubleTapScaleDetector {
 					firstDown = MotionEvent.obtain(event);
 				}
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+				if (!mScrolling && secondDown == null && firstDown != null) {
+					mScrolling = calculateSqaredDistance(firstDown, event) > mTouchSlopSquare;
+				}
 				if (isConfirmedScale(secondDown, event)) {
 					mIsInZoomMode = true;
 				}
