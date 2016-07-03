@@ -1104,7 +1104,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 									   final boolean centered) {
 		try {
 
-			if (menu.getLatLon() == null) {
+			if (menu.getLatLon() == null || mapActivity.isActivityDestroyed()) {
 				return false;
 			}
 

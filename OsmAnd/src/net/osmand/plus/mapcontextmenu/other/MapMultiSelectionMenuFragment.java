@@ -100,6 +100,11 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {
+
+		if (mapActivity.isActivityDestroyed()) {
+			return;
+		}
+
 		MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 
 		int slideInAnim = menu.getSlideInAnimation();
