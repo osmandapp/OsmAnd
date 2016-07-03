@@ -776,7 +776,7 @@
     <string name="shared_string_clear">Neteja</string>
     <string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
     <string name="no_route">Sense ruta</string>
-    <string name="voice_stream_voice_call">Àudio de trucada de veu</string>
+    <string name="voice_stream_voice_call">Àudio de trucada telefònica (voldrà aturar també la música del cotxe)</string>
     <string name="enable_plugin_monitoring_services">Habilita el connector de monitorització (enregistrament GPX, seguiment en viu) per poder utilitzar els serveis de registre d\'ubicació</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
     <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar a Google Play?</string>
@@ -1159,8 +1159,8 @@
     <string name="voice_pref_title">Veu</string>
     <string name="misc_pref_title">Miscel·lània</string>
     <string name="localization_pref_title">Ubicació</string>
-    <string name="interrupt_music_descr">Pausa la música en fer indicacions</string>
-    <string name="interrupt_music">Pausa la música</string>
+    <string name="interrupt_music_descr">Atura completament qualsevol música mentre les indicacions de veu (no tant sols baixar-ne el volum)</string>
+    <string name="interrupt_music">Interrompre la música</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
     <string name="osmo_plugin_description">"Aquest connector us ofereix parcialment la funcionalitat de la Monitorització OpenStreetmap, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment de tots els dispositius que integrin un grup en temps real. També podeu consultar les fites i traces pujades en el grup on sigueu.\n\nEl grups creats fa mesos s\'han d\'actualitzar amb les normes actuals de creació de grups a la seu  OsMo.mobi "</string>
