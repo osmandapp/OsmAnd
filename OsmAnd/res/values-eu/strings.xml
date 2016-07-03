@@ -859,12 +859,12 @@
   <string name="none_region_found">SD txartelan ez dira eskualdeentzako lineaz kanpoko daturik aurkitu. Eskualdeak Internetetik deskargatu.</string>
   <string name="poi_namefinder_query_empty">Bilaketa terminoak sartu POIak aurkitzeko</string>
   <string name="any_poi">Edozein</string>
-  <string name="layer_transport_route">Garraio ibilbidea</string>
+  <string name="layer_transport_route">Garraioaren ibilbidea</string>
   <string name="thanks_yandex_traffic">Eskerrak Yandexi trafikoari buruzko informazioagatik.</string>
   <string name="layer_yandex_traffic">Yandex trafikoa</string>
   <string name="layer_route">Ibilbidea</string>
   <string name="shared_string_favorites">Gogokoenak</string>
-  <string name="layer_osm_bugs">OSM akatsak (sarean)</string>
+  <string name="layer_osm_bugs">OSM Oharrak (sarean)</string>
   <string name="layer_transport">Garraioaren geldialdiak</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Mapa iturburua…</string>
@@ -881,13 +881,13 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundoak</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">"Ezarri esekite moduko zerbitzua erabiltzen duen esnaratze tartea "</string>
+  <string name="background_service_int_descr">Ezarri bigarren planoko zerbitzuaren esnatze tartea</string>
   <string name="background_service_int">GPSaren esnarazte tartea</string>
-  <string name="background_service_provider_descr">Aukeatu esekidura moduko zerbitzuaren kokapen hornitzailea</string>
+  <string name="background_service_provider_descr">Aukeratu bigarren planoko zerbitzuak darabilen kokapen hornitzailea</string>
   <string name="background_service_provider">Kokapen hornitzailea</string>
   <string name="background_router_service_descr">OsmAnd bigarren planoan exekutatzen du zure kokapena pantaila itzalia dagoenean jarraitzeko</string>
-  <string name="background_router_service">Esekidura moduan exekutatu</string>
-  <string name="off_router_service_no_gps_available">Esekidura moduko nabigazio zerbitzuak kokapen hornitzaile bat gaitua behar du.</string>
+  <string name="background_router_service">Abiatu OsmAnd bigarren planoan</string>
+  <string name="off_router_service_no_gps_available">Bigarren planoko nabigazio zerbitzuak kokapen hornitzaile bat gaitua behar du.</string>
   <string name="hide_poi_filter">Filtroa ezkutatu</string>
   <string name="show_poi_filter">Filtroa erakutsi</string>
   <string name="search_poi_filter">Filtroa</string>
@@ -913,7 +913,7 @@
   <string name="first_time_continue">Geroago</string>
   <string name="first_time_download">Eskualdeak deskargatu</string>
   <string name="search_poi_location">Seinalea bilatzen…</string>
-  <string name="search_near_map">Hurbilen dagoen mapa kokapena bilatu</string>
+  <string name="search_near_map">Bilatu maparen zentrotik hurbil</string>
   <string name="search_nearby">Bilatu inguruan</string>
   <string name="map_orientation_default">Gailuaren berdina</string>
   <string name="map_orientation_portrait">Bertikalean</string>
@@ -963,7 +963,7 @@
   <string name="search_online_address">Sareko bilaketa</string>
   <string name="max_level_download_tile">Sareko zoom maximoa</string>
   <string name="max_level_download_tile_descr">Aukeratu sareko tesela mapentzat deskargatzeko zoom maila maximoa</string>
-  <string name="route_general_information">Guztira distantzia %1$s,\n bidean denbora %2$d h %3$d m.</string>
+  <string name="route_general_information">Distantzia guztira %1$s,\n bidai-denbora %2$d h %3$d m.</string>
   <string name="router_service_descr">Aukeratu sareko edo lineaz kanpoko nabigazio zerbitzu bat</string>
   <string name="router_service">Nabigazio zerbitzua</string>
   <string name="sd_dir_not_accessible">SD txarteleko datuen karpeta ez dago erabilgarri!</string>
@@ -1045,7 +1045,7 @@
   <string name="search_address">Bilatu helbidea</string>
   <string name="choose_building">Eraikina aukeratu</string>
   <string name="choose_street">Kalea aukeratu</string>
-  <string name="choose_city">Herria aukeratu</string>
+  <string name="choose_city">Aukeratu herria edo postakodea</string>
   <string name="ChooseCountry">Herrialdea aukeratu</string>
   <string name="show_view_angle">Erakutsi ikuspegiaren norabidea</string>
   <string name="map_view_3d_descr">Gaitu mapan 3D ikuspegia</string>
@@ -1056,7 +1056,7 @@
   <string name="map_tile_source">Tesela maparen iturburua</string>
   <string name="map_source">Mapa iturburua</string>
   <string name="use_internet">Internet erabili</string>
-  <string name="show_location">Kokapena erakutsi</string>
+  <string name="show_location">Erakutsi zure kokapena</string>
   
   
   <string name="show_gps_coordinates_text">Erakutsi GPS kordenadak mapa</string>
@@ -1232,7 +1232,7 @@
     <string name="navigation_intent_invalid">Baliogabeko formatuak: %s</string>
     
     <string name="shared_string_share">Banatu</string>
-	<string name="share_fav_subject">Banatutako gogokoenak OsmAnd bidez</string>
+	<string name="share_fav_subject">OsmAnd bidez partekatutako gogokoak</string>
 	
 	<string name="import_file_favourites">Gorde datuak GPX fitxategi bezala edo inportatu bide-puntuak gogokoetara?</string>
 	
@@ -1800,4 +1800,29 @@
     <string name="create_poi_link_to_osm_doc"><u>Sareko OSM</u> mapa klasifikazioa irudiekin</string>
     <string name="confirm_usage_speed_cameras">Herrialde askotan (Besteak beste Alemania, Frantzia Italia...) Radar abisuak jasotzea legez debekatuta dago. OsmAndek ez du erantzukizunik onartuko legea jarraitzen ez baduzu. Mesedez sakatu bai soilik ezaugarri hau erabiltzeko eskubidea baduzu.</string>
     <string name="traffic_warning_speed_camera">Radarra</string>
+    <string name="coords_format">Koordenatuen formatua</string>
+    <string name="coords_format_descr">Koordenatu geografikoen formatua</string>
+  	<string name="app_mode_bus">Bus</string>
+ 	<string name="app_mode_train">Trena</string>
+    <string name="current_track">Uneko pista</string>
+    <string name="map_widget_battery">Bateriaren maila</string>
+    <string name="change_markers_position">Aldatu markatzailearen posizioa</string>
+    <string name="move_marker_bottom_sheet_title">Mugitu mapa markatzailearen posizioa aldatzeko</string>
+    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="follow_us">Jarraitu gaitzazu</string>
+    <string name="access_direction_audio_feedback">Norabidearen soinu erantzuna</string>
+    <string name="access_direction_audio_feedback_descr">Helburura norabidearen berri eman soinu bidez</string>
+    <string name="access_direction_haptic_feedback">Norabidearen erantzun haptikoa</string>
+    <string name="access_direction_haptic_feedback_descr">Helburura norabidearen berri eman dardararen bidez</string>
+    <string name="use_osm_live_routing_description">Gaitu nabigazioa OSM Live aldaketentzako (beta)</string>
+	<string name="use_osm_live_routing">OSM Live nabigazioa</string>
+    <string name="osm_edit_modified_poi">Aldatutako OSM POIa</string>
+    <string name="osm_edit_deleted_poi">Ezabatutako OSM POIa</string>
+    <string name="share_osm_edits_subject">OSM edizioak OsmAnd bidez partekatuak</string>
+    <string name="lang_nds">Behe Alemaniera</string>
+    <string name="lang_mk">Mazedoniera</string>
+    <string name="lang_fy">Frisiera</string>
+    <string name="lang_als">Albaniera (Tosk)</string>
+    <string name="osm_edit_created_poi">Sortutako OSM POIa</string>
+
     </resources>
