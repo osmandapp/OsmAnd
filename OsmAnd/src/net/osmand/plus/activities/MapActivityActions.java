@@ -305,6 +305,10 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					mapActivity.getContextMenu().hide();
+					if (settings.USE_MAP_MARKERS.get()
+							&& getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
+						setFirstMapMarkerAsTarget();
+					}
 					enterRoutePlanningMode(new LatLon(latitude, longitude),
 							mapActivity.getContextMenu().getPointDescription());
 				}

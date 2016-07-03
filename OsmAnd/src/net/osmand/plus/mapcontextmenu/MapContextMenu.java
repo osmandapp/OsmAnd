@@ -26,6 +26,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -501,8 +502,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			DirectionsDialogs.addWaypointDialogAndLaunchMap(mapActivity, latLon.getLatitude(),
 					latLon.getLongitude(), getPointDescriptionForTarget());
 		} else if (targets.getIntermediatePoints().isEmpty()) {
+			boolean hasPointToStart = settings.restorePointToStart();
 			targets.navigateToPoint(latLon, true, -1, getPointDescriptionForTarget());
-			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+			if (!hasPointToStart) {
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+			} else {
+				TargetPoint start = targets.getPointToStart();
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
+			}
 			close();
 		} else {
 			Builder bld = new AlertDialog.Builder(mapActivity);
