@@ -186,7 +186,7 @@ public class VoiceRouter {
 			btScoDelayDistance = currentSpeed * (double) AbstractPrologCommandPlayer.BT_SCO_DELAY / 1000;
 		}
 
-		if((dist < etalon + btScoDelayDistance) || ((dist - btScoDelayDistance) / currentSpeed) < (etalon / defSpeed))){
+		if((dist < etalon + btScoDelayDistance) || ((dist - btScoDelayDistance) / currentSpeed) < (etalon / defSpeed)){
 			return true;
 		}
 		return false;
