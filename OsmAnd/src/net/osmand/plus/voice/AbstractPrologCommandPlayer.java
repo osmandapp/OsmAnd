@@ -283,7 +283,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		}
 		// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
 		if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			// TODO: Delay the prompts a bit until connection is established
 			startBtSco();
 		}
 	}
@@ -310,12 +309,15 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	private static boolean btScoStatus = false;
 
+	public static final int BT_SCO_DELAY = 1500;
+
 	private boolean startBtSco() {
 	// Establish a low quality Synchronous Connection-Oriented link to BT to e.g. interrupt a car stereo
 	// http://stackoverflow.com/questions/2144694/routing-audio-to-bluetooth-headset-non-a2dp-on-android
 		try {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
-			if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
+			//if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
+			if (mAudioManager == null) {
 				return false;
 			}
 			mAudioManager.setMode(0);
