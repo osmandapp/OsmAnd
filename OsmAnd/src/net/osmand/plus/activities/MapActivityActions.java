@@ -272,10 +272,8 @@ public class MapActivityActions implements DialogProvider {
 		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
 		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_search, mapActivity)
 				.setIcon(R.drawable.ic_action_search_dark).createItem());
-		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
-			adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-					.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
-		}
+		adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
+				.setIcon(R.drawable.ic_action_gdirections_dark).createItem());
 		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null &&
 				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
 			adapter.addItem(itemBuilder.setTitleId(R.string.context_menu_item_last_intermediate_point, mapActivity)
@@ -309,8 +307,13 @@ public class MapActivityActions implements DialogProvider {
 							&& getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
 						setFirstMapMarkerAsTarget();
 					}
-					enterRoutePlanningMode(new LatLon(latitude, longitude),
-							mapActivity.getContextMenu().getPointDescription());
+					if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+						enterRoutePlanningMode(new LatLon(latitude, longitude),
+								mapActivity.getContextMenu().getPointDescription());
+					} else {
+						getMyApplication().getTargetPointsHelper().setStartPoint(new LatLon(latitude, longitude),
+								true, mapActivity.getContextMenu().getPointDescription());
+					}
 				}
 			}
 		});
