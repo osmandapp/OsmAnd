@@ -283,7 +283,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		}
 		// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
 		if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			startBtSco(ctx);
+			startBtSco();
 		}
 	}
 
@@ -299,7 +299,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	protected void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
 		if ((ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) || (btScoStatus == true)) {
-			stopBtSco(ctx);
+			stopBtSco();
 		}
 		if (mAudioFocusHelper != null) {
 			mAudioFocusHelper.abandonFocus(ctx, streamType);
@@ -311,11 +311,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	public static final int BT_SCO_DELAY = 1500;
 
-	private boolean startBtSco(Context context) {
+	private boolean startBtSco() {
 	// Establish a low quality Synchronous Connection-Oriented link to BT to e.g. interrupt a car stereo
 	// http://stackoverflow.com/questions/2144694/routing-audio-to-bluetooth-headset-non-a2dp-on-android
 		try {
-			AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 			//if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
 			if (mAudioManager == null) {
 				return false;
@@ -333,8 +333,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		return btScoStatus;
 	}
 
-	private boolean stopBtSco(Context context) {
-		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+	private boolean stopBtSco() {
+		AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 		if (mAudioManager == null) {
 			return false;
 		}
