@@ -601,6 +601,8 @@ public class MapRenderRepositories {
 	public synchronized void loadMap(RotatedTileBox tileRect, MapTileDownloader mapTileDownloader) {
 		boolean prevInterrupted = interrupted;
 		interrupted = false;
+		// added to avoid zoomAnimation != 0 which produces wrong map position on the screen
+		tileRect.setZoomAndAnimation(tileRect.getZoom(), 0);
 		// prevent editing
 		requestedBox = new RotatedTileBox(tileRect);
 		log.info("RENDER MAP: new request " + tileRect ); 
