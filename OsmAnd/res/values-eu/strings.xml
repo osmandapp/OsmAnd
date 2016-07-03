@@ -27,10 +27,10 @@
   
   <string name="announce_gpx_waypoints">GPX bide-puntuak</string>
   <string name="speak_title">Iragarri…</string>
-  <string name="speak_descr">Konfiguratu kaleen izenen, trafiko abixuen (geldialdi behartuak, abiadura mugak) eta radarren berri emateko</string>
+  <string name="speak_descr">Konfiguratu kaleen izenen, trafiko abisuen (geldialdi behartuak, abiadura mugak) eta radarren berri emateko</string>
   <string name="speak_street_names">Kaleen izenak (TTS)</string>
   <string name="speak_speed_limit">Abiadura muga</string>
-  <string name="speak_cameras">Erradarrak</string>
+  <string name="speak_cameras">Radarrak</string>
   <string name="speak_traffic_warnings">Trafiko abisuak</string>
   
   <string name="osb_author_or_password_not_specified">Mesedez zehaztu OSM erabiltzailea eta pasahitza Ezarpenetan</string>
@@ -193,7 +193,7 @@
   <string name="download_regular_maps">Mapa estandarra</string>
   <string name="download_roads_only_maps">Errepideak-bakarrik mapa</string>
   <string name="rendering_attr_noAdminboundaries_name">Mugak ezkutatu</string>
-  <string name="rendering_attr_noAdminboundaries_description">Eskualde mailak ez erakutsi (5-9 admin mailak)</string>
+  <string name="rendering_attr_noAdminboundaries_description">"Ez erakutsi  eskualde mailako mugak (5-9 admin mailak)"</string>
   
   
   
@@ -203,7 +203,7 @@
   <string name="monitoring_control_start">GPX</string>
   <string name="no_buildings_found">Ez da eraikinik aurkitu.</string>
   <string name="incremental_search_city">Herria inkrementalki bilatu</string>
-  <string name="search_villages_and_postcodes">Bilatu herriak/posta-kodeak</string>
+  <string name="search_villages_and_postcodes">Bilatu herri/posta-kode gehiago</string>
   <string name="rendering_attr_showRoadMaps_description">Aukeratu noiz erakutsi errepideak-bakarrik mapak:</string>
   <string name="rendering_attr_showRoadMaps_name">Errepideak-bakarrik mapak</string>
   <string name="safe_mode_description">Exekutatu aplikazioa modu seguruan (erabili Android geldoagoa kode natiboaren ordez).</string>
@@ -213,7 +213,7 @@
   
   
   <string name="close_changeset">Itxi aldaketa multzoa</string>
-  <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikazioa ez dago instalatua. Marketean bilatu nahi duzu?</string>
+  <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikazioa ez dago instalatua. Google Playn bilatu nahi duzu?</string>
   <string name="rendering_attr_roadColors_description">Aukeratu errepideentzako kolore paleta:</string>
   <string name="rendering_attr_roadColors_name">Errepideentzako kolore paleta</string>
   <string name="map_widget_show_destination_arrow">Erakutsi helmugara noranzkoa</string>
@@ -223,26 +223,26 @@
   
   <string name="map_widget_monitoring_services">Jarraipen zerbitzuak</string>
   <string name="no_route">Ibilbiderik ez</string>
-  <string name="delete_target_point">Ezabatu bide puntua</string>
-  <string name="target_point">%1$s bide puntua</string>
-  <string name="intermediate_point">%1$s bide puntua</string>
-  <string name="context_menu_item_last_intermediate_point">Gehitu azkeneko bide puntu bezala</string>
-  <string name="context_menu_item_first_intermediate_point">Gehitu lehenengo bide puntu bezala</string>
-  <string name="add_as_last_destination_point">Gehitu azken bide puntu bezala</string>
-  <string name="add_as_first_destination_point">Gehitu lehen bide puntu bezala</string>
+  <string name="delete_target_point">Ezabatu helburua</string>
+  <string name="target_point">%1$s helburua</string>
+  <string name="intermediate_point">%1$s erdibideko helburua</string>
+  <string name="context_menu_item_last_intermediate_point">Gehitu azken erdibideko helburu gisa</string>
+  <string name="context_menu_item_first_intermediate_point">Gehitu lehen erdibideko helburu gisa</string>
+  <string name="add_as_last_destination_point">Gehitu azken erdibideko helburu gisa</string>
+  <string name="add_as_first_destination_point">Gehitu lehen erdibideko helburu gisa</string>
   <string name="replace_destination_point">Ordeztu helmuga puntua</string>
   <string name="new_destination_point_dialog">Baduzu dagoeneko helmuga puntua ezarria.</string>
-  <string name="target_points">Bide puntuak</string>
+  <string name="target_points">Helburuak</string>
   <string name="intermediate_point_too_far">%1$s tarteko helburua urrutiegi dago gertuen dagoen bidetik.</string>
-  <string name="arrived_at_intermediate_point">Zure bide puntura iritsi zara</string>
-  <string name="context_menu_item_intermediate_point">Bide puntu bezala gehitu</string>
-  <string name="map_widget_intermediate_distance">Bide puntua</string>
+  <string name="arrived_at_intermediate_point">Zure erdibideko helburura heldu zara</string>
+  <string name="context_menu_item_intermediate_point">Gehitu erdibideko helburu gisa</string>
+  <string name="map_widget_intermediate_distance">Erdibideko helburua</string>
   <string name="ending_point_too_far">Bukaera puntua errepide gertuenetik urrutiegi dago.</string>
   <string name="add_tag">Etiketa gehitu</string>
   <string name="btn_advanced_mode">Modu Aurreratua…</string>
   <string name="poi_filter_parking">Aparkalekua</string>
   <string name="poi_filter_emergency">Larrialdiak</string>
-  <string name="poi_filter_public_transport">Garraio Publikoa</string>
+  <string name="poi_filter_public_transport">Garraio publikoa</string>
   <string name="poi_filter_entertainment">Entretenimendua</string>
   <string name="poi_filter_accomodation">Ostatuak</string>
   <string name="poi_filter_restaurants">Jatetxeak</string>
@@ -251,7 +251,7 @@
   <string name="poi_filter_food_shop">Elikagai dendak</string>
   <string name="poi_filter_for_tourists">Turistentzako</string>
   <string name="poi_filter_fuel">Gasolina</string>
-  <string name="show_warnings_title">Alarmak erakutsi…</string>
+  <string name="show_warnings_title">Erakutsi alarmak…</string>
   <string name="show_warnings_descr">Trafiko abisuak konfiguratu (abiadura mugak, geldialdi behartuak, abiadura aldaketak), radar abisuak eta erraien informazioa</string>
   <string name="use_compass_navigation_descr">Erabili iparrorratza bestelako norabiderik antzematen ez denean</string>
   <string name="use_compass_navigation">Iparrorratza erabili</string>
@@ -284,7 +284,7 @@
   
   
   <string name="layer_map_appearance">Konfiguratu pantaila</string>
-  <string name="show_lanes">Erreilak erakutsi</string>
+  <string name="show_lanes">Erreiak</string>
   <string name="avoid_unpaved">Saihestu asfaltatu gabeko bideak</string>
   <string name="avoid_ferries">Saihestu ferryak</string>
   <string name="avoid_in_routing_title">Saihestu…</string>
@@ -293,11 +293,11 @@
   <string name="map_widget_show_ruler">Erregela</string>
   
   <string name="map_widget_view_direction">Ikuspegiaren norabidea</string>
-  <string name="map_widget_transparent">Azal gardena</string>
+  <string name="map_widget_transparent">Trepeta gardenak</string>
   
   
-  <string name="bg_service_sleep_mode_off">Gaitu\nesekite modua</string>
-  <string name="bg_service_sleep_mode_on">Ezgaitu\n esekite modua</string>
+  <string name="bg_service_sleep_mode_off">Abiatu\naplikazioa bigarren planoan</string>
+  <string name="bg_service_sleep_mode_on">Gelditu\nbigarren planoko aplikazioa</string>
   <string name="gps_wakeup_interval">GPSaren esnatze tartea: %s</string>
   <string name="int_continuosly">Etengabeko</string>
   <string name="screen_is_locked">Pantaila desblokeatzeko sakatu giltrarrapoearen ikonoa</string>
@@ -311,7 +311,7 @@
   
   
   <string name="map_widget_parking">Aparkalekua</string>
-  <string name="map_widget_monitoring">Jarraipena</string>
+  <string name="map_widget_monitoring">GPX grabaketa</string>
   <string name="map_widget_speed">Abiadura</string>
   <string name="map_widget_distance">Helmuga</string>
   <string name="map_widget_altitude">Altuera</string>
@@ -324,14 +324,14 @@
   <string name="bg_service_screen_unlock">Pantaila desblokeatu</string>
   <string name="bg_service_screen_lock_toast">Pantaila blokeatuta dago</string>
   <string name="bg_service_interval">Esnatze tartea ezarri:</string>
-  <string name="show_cameras">Radarrak erakutsi</string>
-  <string name="show_traffic_warnings">Abiadura abixuak erakutsi</string>
+  <string name="show_cameras">Radarrak</string>
+  <string name="show_traffic_warnings">Trafiko abisuak</string>
   <string name="avoid_toll_roads">Saihestu bidesariak</string>
   <string name="continue_follow_previous_route_auto">Aurreko nabigazioa ez da amaitu. Jarraitu jarraipena egiten? (%1$s segundo)</string>
   <string name="route_updated_loc_found">Ibilbidea kokapena aurkitzean kalkulatuko da</string>
   <string name="osmand_parking_hours">Orduak</string>
   <string name="osmand_parking_minutes">Minutuak</string>
-  <string name="osmand_parking_position_description_add_time">Kotxea hemen aparkatua zegoen:</string>
+  <string name="osmand_parking_position_description_add_time">Kotxea hemen aparkatua zegoen</string>
   
   <string name="select_animate_speedup">Aukeratu ibilbide simulazioaren abiadura</string>
   <string name="global_app_allocated_memory_descr">%1$s MB memoria erreserbatuta (Android muga %2$s MB da, Dalvikena %3$s MB).</string>
@@ -345,7 +345,7 @@
   <string name="osmand_parking_warning">Kontuz</string>
   <string name="osmand_parking_warning_text">Kotxea hartzeko jakinarazpena zure Egutegira gehitua izan da. Hor egongo da eskuz ezabatu arte.</string>
   <string name="osmand_parking_time_limit_title">Ezarri aparkatzeko denbora maximoa</string>
-  <string name="osmand_parking_delete_confirm">Aparkatua dagoen kotxearen kokapena ezabatu nahi al duzu?</string>
+  <string name="osmand_parking_delete_confirm">Aparkalekuaren kokapena ezabatu nahi al duzu?</string>
   <string name="osmand_parking_delete">Aparkaleku markatzaile bat ezabatu</string>
   <string name="osmand_parking_choose_type">Aparkaleku mota aukeratu</string>
   <string name="osmand_parking_lim_text">Denboraz mugatua</string>
@@ -380,11 +380,11 @@
   <string name="rendering_attr_hmRendered_description">Mapa xehetasun gehiago erakutsi</string>
   <string name="rendering_attr_hmRendered_name">Mapa xehetasun gehiago erakutsi</string>
   <string name="local_index_routing_data">Ibilbide datuak</string>
-  <string name="navigate_point_format">Formatua:</string>
+  <string name="navigate_point_format">Formatua</string>
   <string name="poi_search_desc">POI (Point of interest) bilaketa</string>
   <string name="address_search_desc">Helbide bilaketa</string>
   <string name="navpoint_search_desc">Koordinatuak</string>
-  <string name="transport_search_desc">Garraio bilaketa</string>
+  <string name="transport_search_desc">Garraio publikoaren bilaketa</string>
   <string name="favourites_search_desc">Gogokoenen bilaketa</string>
   
   <string name="offline_navigation_not_available">Lineaz kanpoko nabigazioa ez dago erabilgarri orain.</string>
@@ -395,12 +395,12 @@
   <string name="unknown_location">Kokapen ezezaguna oraindik</string>
   <string name="modify_transparency">Gardentasuna aldatu (0 - gardena, 255 - opakua)</string>
   <string name="confirm_interrupt_download">Deskarga bertan behera utzi nahi duzu?</string>
-  <string name="first_time_msg">Eskerrik asko OsmAnd erabiltzeagatik. Aplikazioaren ezaugarri nagusiak erabiltzeko herrialdeen lineaz kanpoko datuak behar dituzu, deskarga ditzakezu \'Ezarpenak\' → \'Kudeatu mapen fitxategiak\'. Ondoren, mapak ikusu, helbideak, Interes-Puntuak eta garraio publikoak bilatu ahal izango dituzu.</string>
+  <string name="first_time_msg">Eskerrik asko OsmAnd erabiltzeagatik. Aplikazioaren ezaugarri nagusiak erabiltzeko herrialdeen lineaz kanpoko datuak behar dituzu, deskarga ditzakezu \'Ezarpenak\' → \'Kudeatu mapen fitxategiak\'. Ondoren, mapak ikusi, helbideak, Interes-Puntuak eta garraio publikoak bilatu ahal izango dituzu.</string>
   <string name="basemap_was_selected_to_download">Mapa basea beharrezkoa da aplikazioaren funtzionamendurako eta deskargatzeko hautatu da.</string>
   <string name="select_index_file_to_download">Ez da ezer aurkitu. Zure herrialdea ezin baduzu aurkitu, zuk prestatu dezakezu (begiratu http://osmand.net).</string>
-  <string name="local_indexes_cat_tile">Sare eta tesela mapak</string>
-  <string name="local_indexes_cat_map">Lineaz kanpoko (bektore) Mapak</string>
-  <string name="index_settings_descr">Mapak deskargatu, eta zure gailuan gordetako lineaz kanpoko datuak kudeatu</string>
+  <string name="local_indexes_cat_tile">Sareko eta cacheatutako tesela mapak</string>
+  <string name="local_indexes_cat_map">Mapa estandarrak (bektorialak)</string>
+  <string name="index_settings_descr">Deskargatu mapak eta zure gailuan gordetako lineaz kanpoko mapa fitxategiak kudeatu</string>
   <string name="map_online_plugin_is_not_installed">Gaitu sareko mapen plugina mapen iturburu ezberdinak aukeratzeko</string>
   <string name="map_online_data">Sare eta tesela mapak</string>
   <string name="map_online_data_descr">Erabili sareko mapak (deskargatu eta katxeatu teselak SD txartelan)</string>
@@ -421,7 +421,7 @@
   
   <string name="osm_editing_plugin_description">Erakutsi OSMri laguntzeko beharrezkoak diren ezarpenak, POI objektuak sortzea / eraldatzea, OSM akats jakinarazpenak irekitzea / komentatzea eta sortutako GPX fitxategiak bidaltzea esaterako (OSM kredentzialak beharrezkoak ditu).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Ziurrenik bektore mapak azkarrago kargatu. Baliteke gailu batzuetan ongi ez funtzionatzea.</string>
-  <string name="play_commands_of_currently_selected_voice">Unean aukeratutako ahotsaren komandoak erreproduzitu</string>
+  <string name="play_commands_of_currently_selected_voice">Erreproduzitu aukeratutako ahotsaren komandoak</string>
   <string name="debugging_and_development">OsmAnden garatzea</string>
   <string name="native_rendering">Errenderizazio natiboa</string>
   <string name="test_voice_prompts">Probatu ahotsezko abisuak</string>
@@ -448,7 +448,7 @@
   <string name="backToMenu">Menura Itzuli</string>
   <string name="zoomOut">Urrundu</string>
   <string name="zoomIn">Hurbildu</string>
-  <string name="zoomIs">Zooma da</string>
+  <string name="zoomIs">Zoom maila da</string>
   <string name="north">iparra</string>
   <string name="north_north_east">ipar-ipar-ekialdea</string>
   <string name="north_east">ipar-ekialdea</string>
@@ -465,14 +465,14 @@
   <string name="west_north_west">mendebalde-ipar-mendebaldea</string>
   <string name="north_west">ipar-mendebaldea</string>
   <string name="north_north_west">ipar-ipar-mendebaldea</string>
-  <string name="front">Aurrekaldea</string>
-  <string name="front_right">Aurre eskuinaldea</string>
-  <string name="right">Eskuinaldea</string>
-  <string name="back_right">Atze eskuinaldea</string>
-  <string name="back">Atzekaldea</string>
-  <string name="back_left">Atze ezkerraldea</string>
-  <string name="left">Ezkerraldea</string>
-  <string name="front_left">Aurre ezkerraldea</string>
+  <string name="front">aurrealdera</string>
+  <string name="front_right">eskuin-aurrealdera</string>
+  <string name="right">eskuinaldera</string>
+  <string name="back_right">eskuin-atzealdera</string>
+  <string name="back">atzealdera</string>
+  <string name="back_left">ezker-atzealdera</string>
+  <string name="left">ezkerraldera</string>
+  <string name="front_left">ezker-aurrealdera</string>
   <string name="oclock">puntuan</string>
   <string name="towards">bidean</string>
   <string name="accuracy">Zehastasuna</string>
@@ -482,8 +482,8 @@
   <string name="direction_style_clockwise">Eskubiruntz (12 sektore)</string>
   <string name="settings_direction_style">Jarraibideen estiloa</string>
   <string name="settings_direction_style_descr">Aukeratu mugimenduan egotean ematen diren jarraibide erlatiboen estiloa</string>
-  <string name="auto_announce_on">Iragarpen automatikoa hasi</string>
-  <string name="auto_announce_off">Iragarpen automatikoa gelditu</string>
+  <string name="auto_announce_on">Hasi iragarpen automatikoa</string>
+  <string name="auto_announce_off">Gelditu iragarpen automatikoa</string>
   <string name="i_am_here">Hemen nago</string>
   <string name="zoom_by_trackball_descr">Maparen zooma aldatu trackball-aren mugimendu horizontalaren bidez</string>
   <string name="zoom_by_trackball">Trackball-a erabili zooma kontrolatzeko</string>
@@ -497,14 +497,14 @@
   
   <string name="update_poi_does_not_change_indexes">Aplikazioaren barneko POI aldaketek ez diete deskargatutako mapen fitxategiei eragiten, aldaketak modu lokalean gordetzen dira.</string>
   <string name="local_openstreetmap_uploading">Igotzen …</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Akats izan dira igoak</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/Oharrak igo dira</string>
   <string name="local_openstreetmap_uploadall">Guztia igo</string>
   
   <string name="local_openstreetmap_upload">Aldaketa OSMra igo</string>
   <string name="local_openstreetmap_delete">Aldaketa ezabatu</string>
   <string name="local_openstreetmap_descr_title">OSM edizio asinkronoa:</string>
-  <string name="local_openstreetmap_settings">Lokalki gordetako OSM POI/Akatsak</string>
-  <string name="local_openstreetmap_settings_descr">Erakutsi eta kudeatu datubase lokaleko OSM POI/Akatsak</string>
+  <string name="local_openstreetmap_settings">Lokalki gordetako OSM POI/Oharrak</string>
+  <string name="local_openstreetmap_settings_descr">Erakutsi eta kudeatu datu-base lokaleko OSM POI/Oharrak</string>
   
   
   <string name="live_monitoring_interval_descr">Aukeratu sare bidezko jarraipeneko tartea</string>
@@ -524,13 +524,13 @@
   <string name="index_name_europe">Europa</string>
   <string name="index_name_france">Europa - Frantzia</string>
   <string name="index_name_germany">Europa - Alemania</string>
-  <string name="index_name_russia">Europa/Asia - Errusia</string>
+  <string name="index_name_russia">Errusia</string>
   <string name="index_name_africa">Afrika</string>
   <string name="index_name_asia">Asia</string>
-  <string name="index_name_oceania">Ozeania</string>
+  <string name="index_name_oceania">Australia eta Ozeania</string>
   <string name="index_name_other">Mundu osoko eta gaietako mapak</string>
   <string name="index_name_wiki">Mundu osoko Wikipediako POIak</string>
-  <string name="index_name_voice">Ahots paketeak (grabatuak, mugatutako ezaugarriak)</string>
+  <string name="index_name_voice">Ahots abisuak (grabatuak, mugatutako ezaugarriak)</string>
   <string name="index_name_tts_voice">Ahots paketeak (TTS bidez sintetizatuak, hobetsia)</string>
   <string name="amenity_type_osmwiki">Wikipedia (lineaz kanpo)</string>
   <string name="amenity_type_user_defined">Erabiltzaileak definituak</string>
@@ -547,8 +547,8 @@
   <string name="open_street_map_login_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat</string>
   <string name="user_password">Zure OSMeko pasahitza</string>
   <string name="user_password_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat</string>
-  <string name="osmand_service">Esekite moduko funtzionalitatea</string>
-  <string name="osmand_service_descr">Erabili pantaila itzalia dagoen bitartean OsmAnd exekutatzeko</string>
+  <string name="osmand_service">Bigarren planoko modua</string>
+  <string name="osmand_service_descr">OsmAnd bigarren planoan dabil pantaila itzalia dagoen bitartean</string>
   
   
   
@@ -598,13 +598,13 @@
   
   <string name="poi_filter_nominatim">Online Nominatim</string>
   <string name="search_position_current_location_search">Kokapena bilatzen…</string>
-  <string name="search_position_current_location_found">Kokapena (aurkitua)</string>
+  <string name="search_position_current_location_found">Nire kokapena (aurkitua)</string>
   <string name="search_position_address">Helbidea…</string>
   <string name="search_position_favorites">Gogokoenak…</string>
   <string name="search_position_undefined">Indefinitua</string>
   
   
-  <string name="search_position_map_view">Azkeneko mapa ikuspegia</string>
+  <string name="search_position_map_view">Uneko maparen zentroa</string>
   <string name="select_search_position">Jatorria:</string>
   <string name="context_menu_item_search">Honen ondoan bilatu</string>
   
@@ -634,7 +634,7 @@
   
   
   
-  <string name="local_index_installed">Edizioa</string>
+  <string name="local_index_installed">Bertsio lokala</string>
   <string name="local_index_items_backuped">%2$d-tik %1$d elementu arrakastarekin ezgaituak.</string>
   <string name="local_index_items_deleted">%2$d-tik %1$d elementu arrakastarekin ezabatuak.</string>
   <string name="local_index_items_restored">%2$d-tik %1$d elementu arrakastarekin gaituak.</string>
@@ -648,14 +648,14 @@
   <string name="shared_string_download">Deskargatu</string>
   <string name="local_index_poi_data">POI datuak</string>
   <string name="local_index_address_data">Helbide datuak</string>
-  <string name="local_index_transport_data">Garraio datuak</string>
+  <string name="local_index_transport_data">Garraio publikoaren datuak</string>
   <string name="local_index_map_data">Mapa datuak</string>
   <string name="local_indexes_cat_backup">Esgaitua</string>
-  <string name="local_indexes_cat_tts">Ahots datuak (TTS)</string>
-  <string name="local_indexes_cat_voice">Ahots datuak (grabatua)</string>
+  <string name="local_indexes_cat_tts">Ahots abisuak (TTS)</string>
+  <string name="local_indexes_cat_voice">Ahots abisuak (grabatua)</string>
   
   <string name="local_indexes_cat_poi">POI datuak</string>
-  <string name="ttsvoice">TTS Ahotsa</string>
+  <string name="ttsvoice">TTS ahotsa</string>
   <string name="search_offline_clear_search">Bilaketa Berria</string>
   <string name="map_text_size_descr">Aukeratu letra tamaina mapako izenentzat</string>
   <string name="map_text_size">Maparen letra tamaina</string>
@@ -666,7 +666,7 @@
   
   
   <string name="installing_new_resources">Datu berriak desenpaketatzen…</string>
-  <string name="internet_connection_required_for_online_route">Sareako nabigazio zerbitzu bat izan da aukeratua baina ez dago interneterako konexiorik.</string>
+  <string name="internet_connection_required_for_online_route">Sareko nabigazio zerbitzu bat aukeratu da baina ez dago interneterako konexiorik.</string>
   <string name="tts_language_not_supported_title">Hizkuntza ez da onartzen</string>
   <string name="tts_language_not_supported">Aukeratutako hizkuntza instalatutako Android TTS (text-to-speech) motorrak ez du jasaten. Beste TTS motor bat bilatu nahi duzu Marketen? Bestela, oraingo TTS hizkuntza erabiliko da.</string>
   <string name="tts_missing_language_data_title">Falta diren datuak</string>
@@ -676,8 +676,8 @@
   <string name="gpx_option_from_start_point">Pasatu lorratz osotik</string>
   <string name="switch_to_vector_map_to_see">Lineaz kanpoko bektore mapa bat dago kokapen honentzat. ⏎\n⇥⏎\n⇥Erabiltzeko, aktibatu \'Menua\' -&gt; \'Konfiguratu mapa\' -&gt; \'Mapa Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
   <string name="choose_audio_stream">Ahots gidaritzaren irteera</string>
-  <string name="choose_audio_stream_descr">Aukeratu ahots gidaritza erreproduzituko den kanala (sistemaren araberakoa)</string>
-  <string name="voice_stream_voice_call">Ahots deiaren audioa</string>
+  <string name="choose_audio_stream_descr">Aukeratu ahots gidaritza erreproduzitzeko bozgorailua (sistemaren araberakoa)</string>
+  <string name="voice_stream_voice_call">Ahots deiaren audioa (Kotxearen BT estereoak ere eteten saiatzen da)</string>
   <string name="voice_stream_notification">Notifikazioen audioa</string>
   <string name="voice_stream_music">Media/musikaren audioa</string>
   <string name="warning_tile_layer_not_downloadable">Aplikazioak ezin du %1$s geruza mapa deskargatu, saiatu mesedez berrinstalatzen.</string>
@@ -694,7 +694,7 @@
   <string name="map_overlay_descr">Aukeratu gainazal mapa</string>
   <string name="tile_source_already_installed">Mapa iadanik instalatuta dago, ezarpenak eguneratuak izango dira</string>
   <string name="select_tile_source_to_install">Aukeratu (tesela) mapak instalatu edo eguneratzeko</string>
-  <string name="internet_not_available">Eragiketa honentzat Interneteko konexioa beharrezkoa da</string>
+  <string name="internet_not_available">Eragiketa honentzat Interneteko konexioa beharrezkoa da baina ez dago eskuragarri</string>
   <string name="install_more">Gehiago instalatu…</string>
   <string name="level_to_switch_vector_raster_descr">Bektore mapak erabiltzeko zoom maila minimoa</string>
   <string name="level_to_switch_vector_raster">Bektoreen zoom maila min.</string>
@@ -706,7 +706,7 @@
   <string name="search_offline_geo_error">Ezin izan da \'%s\' geo asmoa pasa</string>
   <string name="search_osm_offline">Bilatu geo kokapena</string>
   <string name="system_locale">Sistema</string>
-  <string name="preferred_locale_descr">Aukeratu bistaratze hizkuntza</string>
+  <string name="preferred_locale_descr">Aukeratu bistaratze hizkuntza (berrabiarazi OsmAnd aldatu eta gero)</string>
   <string name="preferred_locale">Bistaratze hizkuntza</string>
   <string name="incomplete_locale">osatu gabea</string>
   
@@ -723,8 +723,8 @@
   
   <string name="shared_string_next">Hurrengoa</string>
   <string name="shared_string_previous">Aurrekoa</string>
-  <string name="unit_of_length_descr">Luzeera eta abiaduraren unitateak aldatu</string>
-  <string name="unit_of_length">Neurtze unitatea</string>
+  <string name="unit_of_length_descr">Aldatu luzera unitateak</string>
+  <string name="unit_of_length">Luzera unitatea</string>
   <string name="si_mi_foots">Milak/oinak</string>
   <string name="si_mi_yard">Milak/yardak</string>
   <string name="si_km_m">Kilometroak/metroak</string>
@@ -779,7 +779,7 @@
   <string name="use_osmand_routing_service">OsmAnd nabigatzailea &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Erabili OsmAnd lineaz kanpoko nabigatzailea, &gt; 20 km ibilbideetan erabili daiteke (esperimentala)</string>
   <string name="osmand_routing_experimental">OsmAnden lineaz kanpoko nabigazioa ezaugarri esperimentala da eta ez du 20 km baina gehiagoko distantziekin lan egiten.⏎\n⏎\nNabigazio zerbitzuak oraingoz sarean dagoen CloudMade zerbitzua erabiltzen du.</string>
-  <string name="specified_dir_doesnt_exist">Ezin izan da eskatutako direktorioa aurkitu.</string>
+  <string name="specified_dir_doesnt_exist">Ezin izan da zehaztutako karpeta aurkitu.</string>
   <string name="application_dir">Datuak gordetzeko direktorioa</string>
   
   <string name="osmand_net_previously_installed">OsmAnden bertsio zaharrago bat dago instalatuta. Aplikazio berriak lineaz kanpoko datu guztiak erabili ditzake. Hala ere, Puntu Gogokoenak aplikazio zaharrean esportatu eta berrian inportatuak izan beharko lirateke.</string>
@@ -789,8 +789,8 @@
   <string name="loading_builds_failed">Eraikitako OsmAnden zerrendaren eskuratzean errorea</string>
   <string name="loading_builds">Eraikitako OsmAndak kargatzen…</string>
   <string name="select_build_to_install">Instalatzeko eraikitako OsmAnd bat aukeratu</string>
-  <string name="gps_status_app_not_found">GPS Status aplikazioa ez dago instalatua. Marketan bilatu?</string>
-  <string name="voice_is_not_available_msg">Ahots bidezko gidaritza ez dago eskuragarri. Mesedez joan ezarpenetara, aukeratu nahiago duzun ahots paketea eta deskargatu ezazu.</string>
+  <string name="gps_status_app_not_found">GPS status aplikazioa ez dago instalatua. Bilatu?</string>
+  <string name="voice_is_not_available_msg">"Ahots bidezko gidaritza ez dago eskuragarri. Mesedez joan \'Ezarpenak\' → \'Orokorra\' → \'Ahots bidezko gidaritza\'  atalera eta deskargatu ahots pakete bat."</string>
   <string name="voice_is_not_available_title">Ez da ahots bidezko gidaritzarik aukeratu</string>
   <string name="daynight_mode_day">Eguna</string>
   <string name="daynight_mode_night">Gaua</string>
@@ -824,13 +824,13 @@
   <string name="use_high_res_maps">Erresoluzio handiko bistaratzea</string>
   <string name="use_high_res_maps_descr">Ez luzatu (eta lausotu) mapa teselak erresoluzio handiko bistaratzetan</string>
   
-  <string name="context_menu_item_search_transport">Garraioa bilatu</string>
+  <string name="context_menu_item_search_transport">Garraio publikoa bilatu</string>
   <string name="transport_searching_transport">Garraioaren emaitzak (helmugarik gabe):</string>
   <string name="transport_searching_route">Garraioaren emaitzak ({0} helmuga):</string>
   
-  <string name="transport_search_again">Garraio bilaketa berrezarri</string>
+  <string name="transport_search_again">Berrezarri garraio bilaketa</string>
   
-  <string name="voice">Ahotsa</string>
+  <string name="voice">Grabatutako ahotsa</string>
   <string name="no_vector_map_loaded">Bektore mapak ez dira kargatuak izan</string>
   <string name="map_route_by_gpx">GPX erabiltzen nabigatu</string>
   <string name="gpx_files_not_found">Ez da GPX fitxategirik aurkitu lorratzen direktorioan</string>
@@ -1244,10 +1244,10 @@
     <string name="arrival_distance_factor_late">Berandu</string>
     <string name="arrival_distance_factor_at_last">Azkeneko metrotan</string>
     <string name="arrival_distance">Iristearen iragarpena</string>
-    <string name="arrival_distance_descr">Nolako goiz nahi duzu iristearen iragarkia?</string>
+    <string name="arrival_distance_descr">Noizko nahi duzu iristearen iragarkia?</string>
     <string name="share_route_subject">Ibilbidea OsmAnd bidez partekatu da</string>
 	<string name="share_route_as_gpx">Partekatu ibilbidea GPX fitxategi bezala</string>
-	<string name="interrupt_music_descr">Iragarkiak egiterakoan musika eten</string>
+	<string name="interrupt_music_descr">Eten musika iragarkiak egiterakoan</string>
 	<string name="interrupt_music">Musika eten</string>
 	<string name="index_item_world_altitude_correction">Munduko Altitude Zuzenketa</string>
 	<string name="rendering_attr_alpineHiking_name">SAC Alpetar ibilbide ikuspegia (Suitzako klub alpinoa)</string>
@@ -1797,5 +1797,7 @@
     <string name="auto_zoom_farthest">Aldendu</string>
     <string name="map_magnifier">Mapa handitzailea</string>
     <string name="base_world_map">Mundu oinarri mapa</string>
-    <string name="create_poi_link_to_osm_doc"><u>Sareko OSM</u>ren mapa klasifikazioa irudiekin</string>
+    <string name="create_poi_link_to_osm_doc"><u>Sareko OSM</u> mapa klasifikazioa irudiekin</string>
+    <string name="confirm_usage_speed_cameras">Herrialde askotan (Besteak beste Alemania, Frantzia Italia...) Radar abisuak jasotzea legez debekatuta dago. OsmAndek ez du erantzukizunik onartuko legea jarraitzen ez baduzu. Mesedez sakatu bai soilik ezaugarri hau erabiltzeko eskubidea baduzu.</string>
+    <string name="traffic_warning_speed_camera">Radarra</string>
     </resources>
