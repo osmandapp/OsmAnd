@@ -457,7 +457,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (systemabhängig)</string>
-	<string name="voice_stream_voice_call">Wie Anrufe</string>
+	<string name="voice_stream_voice_call">Wie Anrufe (simuliert auch Anrufe zur Auto Stereo Anlage)</string>
 	<string name="voice_stream_notification">Wie Benachrichtigungen</string>
 	<string name="voice_stream_music">Wie Medien/Musik</string>
 	<string name="warning_tile_layer_not_downloadable">Kartenebene %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
@@ -1280,7 +1280,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel wählen</string>
-	<string name="interrupt_music_descr">Musikwiedergabe bei Navigationsanweisung unterbrechen (auch simulierte Anrufe zur Auto Stereo Anlage)</string>
+	<string name="interrupt_music_descr">Musikwiedergabe bei Navigationsanweisung vollständig unterbrechen (anstatt nur leiser zu spielen)</string>
 	<string name="always_center_position_on_map">Position immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
 	<string name="misc_pref_title">Verschiedenes</string>
