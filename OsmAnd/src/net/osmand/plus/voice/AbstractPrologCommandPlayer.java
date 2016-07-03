@@ -334,7 +334,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	}
 
 	private boolean stopBtSco(Context context) {
-		btScoStatus = false;
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		if (mAudioManager == null) {
 			return false;
@@ -342,6 +341,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		mAudioManager.setBluetoothScoOn(false);
 		mAudioManager.stopBluetoothSco();
 		mAudioManager.setMode(AudioManager.MODE_NORMAL);
+		btScoStatus = false;
 		return true;
 	}
 
