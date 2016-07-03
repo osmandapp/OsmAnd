@@ -1631,6 +1631,18 @@ public class OsmandSettings {
 				.commit();
 	}
 
+	public boolean restorePointToStart() {
+		if (settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LAT_BACKUP, 0) == 0) {
+			settingsAPI.edit(globalPreferences)
+					.putFloat(START_POINT_LAT, settingsAPI.getFloat(globalPreferences, START_POINT_LAT_BACKUP, 0))
+					.putFloat(START_POINT_LON, settingsAPI.getFloat(globalPreferences, START_POINT_LON_BACKUP, 0))
+					.commit();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public LatLon getPointToNavigate() {
 		float lat = settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LAT, 0);
 		float lon = settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LON, 0);
