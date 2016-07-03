@@ -170,7 +170,9 @@ public class VoiceRouter {
 			TURN_DISTANCE = (int) (DEFAULT_SPEED * 7);
 		}
 	}
-	
+
+	private double btScoDelayDistance = 0;
+
 	public boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed){
 		if(defSpeed <= 0) {
 			defSpeed = DEFAULT_SPEED;
@@ -178,7 +180,13 @@ public class VoiceRouter {
 		if(currentSpeed <= 0) {
 			currentSpeed = DEFAULT_SPEED;
 		}
-		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
+
+		// Trigger close prompts earlier to allow for BT SCO connection delay
+		if (settings.AUDIO_STREAM_GUIDANCE.get() == 0) {
+			btScoDelayDistance = currentSpeed * (double) AbstractPrologCommandPlayer.BT_SCO_DELAY / 1000;
+		}
+
+		if((dist < etalon + btScoDelayDistance) || ((dist / currentSpeed) < ((etalon + btScoDelayDistance) / defSpeed))){
 			return true;
 		}
 		return false;
@@ -480,9 +488,9 @@ public class VoiceRouter {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
 				if ((isDistanceLess(speed, nextNextInfo.distanceTo, TURN_DISTANCE, 0f) || nextNextInfo.distanceTo < TURN_IN_DISTANCE_END) &&
 						nextNextInfo != null) {
-					playMakeTurnIn(currentSegment, next, dist, nextNextInfo.directionInfo);
+					playMakeTurnIn(currentSegment, next, dist - (int) btScoDelayDistance, nextNextInfo.directionInfo);
 				} else {
-					playMakeTurnIn(currentSegment, next, dist, null);
+					playMakeTurnIn(currentSegment, next, dist - (int) btScoDelayDistance, null);
 				}
 				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
