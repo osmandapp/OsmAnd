@@ -161,6 +161,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		favorite.setName(name);
 		favorite.setCategory(category);
 		favorite.setDescription(description);
+		getMyApplication().getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
 		helper.addFavourite(favorite);
 	}
 

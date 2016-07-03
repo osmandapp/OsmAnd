@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.Algorithms;
 
 public class FavoritePointEditor extends PointEditor {
 
@@ -28,8 +29,11 @@ public class FavoritePointEditor extends PointEditor {
 			return;
 		}
 		isNew = true;
-		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title,
-				app.getSettings().LAST_FAV_CATEGORY_ENTERED.get());
+		String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
+		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
+			lastCategory = "";
+		}
+		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory);
 		favorite.setDescription("");
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
