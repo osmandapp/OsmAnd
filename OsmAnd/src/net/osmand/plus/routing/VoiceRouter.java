@@ -182,7 +182,7 @@ public class VoiceRouter {
 		}
 
 		// Trigger close prompts earlier to allow for BT SCO connection delay
-		if (settings.AUDIO_STREAM_GUIDANCE.get() == 0) {
+		if ((settings.AUDIO_STREAM_GUIDANCE.get() == 0) && !AbstractPrologCommandPlayer.btScoStatus) {
 			btScoDelayDistance = currentSpeed * (double) AbstractPrologCommandPlayer.BT_SCO_DELAY / 1000;
 		}
 

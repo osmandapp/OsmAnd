@@ -307,7 +307,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		}
 	}
 
-	private static boolean btScoStatus = false;
+	public static boolean btScoStatus = false;
 
 	public static final int BT_SCO_DELAY = 1500;
 
