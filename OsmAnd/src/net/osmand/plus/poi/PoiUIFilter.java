@@ -356,11 +356,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 	
 	public String getNameToken24H() {
-		return "24/7";
+		return app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
 	}
 	
 	public String getNameTokenOpen() {
-		return app.getString(R.string.shared_string_is_open);
+		return app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
 	}
 
 	private ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
