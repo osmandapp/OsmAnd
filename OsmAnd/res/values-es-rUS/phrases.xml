@@ -2712,7 +2712,7 @@
 
 	<string name="poi_ventilation_shaft">Conducto de ventilación</string>
 
-	<string name="poi_pump_type_beam_pump">Tipo de bomba: Viga</string>
+	<string name="poi_pump_type_beam_pump">Tipo de bomba: De balancín</string>
 	<string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mk II o III</string>
 	<string name="poi_pump_type_gravity">Tipo de bomba: De gravedad</string>
 	<string name="poi_pump_style_modern">Estilo de bomba: Moderna</string>
@@ -2725,5 +2725,19 @@
 
 	<string name="poi_payment_troika_yes">Acepta tarjeta Troika</string>
 	<string name="poi_payment_troika_no">No acepta tarjeta Troika</string>
+
+<string name="poi_telescope">Telescopio</string>
+	<string name="poi_telescope_type_optical">Tipo de telescopio: Óptico</string>
+	<string name="poi_telescope_type_radio">Tipo de telescopio: Radiotelescopio</string>
+	<string name="poi_telescope_type_gamma">Tipo de telescopio: Rayos gamma</string>
+	<string name="poi_telescope_diameter">Diámetro</string>
+	<string name="poi_telescope_spectrum">Espectro</string>
+	<string name="poi_telescope_usage_education">Uso: Educativo</string>
+	<string name="poi_telescope_usage_espionage">Uso: Espionaje</string>
+	<string name="poi_telescope_usage_research">Uso: Investigación</string>
+
+	<string name="poi_observatory_type_espionage">Uso: Espionaje</string>
+	<string name="poi_observatory_type_meteorological">Uso: Meteorológico</string>
+	<string name="poi_observatory_type_gravitational">Uso: Gravitacional</string>
 
 </resources>
