@@ -2921,4 +2921,18 @@
 	<string name="poi_payment_troika_yes">Принимаются карты Тройка</string>
 	<string name="poi_payment_troika_no">Карты Тройка не принимаются</string>
 
+	<string name="poi_telescope">Телескоп</string>
+	<string name="poi_telescope_type_optical">Телескоп: оптический</string>
+	<string name="poi_telescope_type_radio">Телескоп: радио</string>
+	<string name="poi_telescope_type_gamma">Телескоп: гамма</string>
+	<string name="poi_telescope_diameter">Диаметр</string>
+	<string name="poi_telescope_spectrum">Рабочий диапазон частот</string>
+	<string name="poi_telescope_usage_education">Назначение: образование</string>
+	<string name="poi_telescope_usage_espionage">Назначение: шпионаж</string>
+	<string name="poi_telescope_usage_research">Назначение: исследования</string>
+
+	<string name="poi_observatory_type_espionage">Назначение: шпионаж</string>
+	<string name="poi_observatory_type_meteorological">Назначение: метеорологическая</string>
+	<string name="poi_observatory_type_gravitational">Назначение: гравитационная</string>
+
 </resources>
