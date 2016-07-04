@@ -119,7 +119,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 
 		View memoryStickRow = view.findViewById(R.id.memoryStickRow);
 		if (hasExternalStoragePermission && cardStorage != null) {
-			memoryStickRow.setOnClickListener(memoryStickOnClickListenesr);
+			memoryStickRow.setOnClickListener(memoryStickOnClickListener);
 			ImageView memoryStickImageView = (ImageView) view.findViewById(R.id.memoryStickImageView);
 			memoryStickImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
 			TextView memoryStickDescription = (TextView) view.findViewById(R.id.memoryStickDescription);
@@ -199,7 +199,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				}
 			};
 
-	private View.OnClickListener memoryStickOnClickListenesr =
+	private View.OnClickListener memoryStickOnClickListener =
 			new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
