@@ -428,7 +428,7 @@
     <string name="open_street_map_login_and_pass">Uzantnomo kaj pasvorto al OpenStreetMap</string>
     <string name="application_dir">Datum-konservada dosierujo</string>
     <string name="filter_poi_hint">Filtri laŭ nomo</string>
-    <string name="shared_string_open">malfermajn</string>
+    <string name="shared_string_open">Malfermi</string>
     <string name="search_poi_category_hint">Entajpu por serĉi ĉie</string>
     <string name="agps_info">A-GPS informoj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
@@ -2011,4 +2011,5 @@
     <string name="coords_format">Formo de koordinatoj</string>
     <string name="coords_format_descr">Formo de geografiaj koordinatoj</string>
   	<string name="storage_directory_card">Memorkarto</string>
+    <string name="shared_string_is_open">Malfermaj</string>
     </resources>
