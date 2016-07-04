@@ -2713,7 +2713,7 @@
 	<string name="poi_ventilation_shaft">Conducto de ventilación</string>
 
 	<string name="poi_pump_type_beam_pump">Tipo de bomba: De balancín</string>
-	<string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mk II o III</string>
+	<string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mark II o III</string>
 	<string name="poi_pump_type_gravity">Tipo de bomba: De gravedad</string>
 	<string name="poi_pump_style_modern">Estilo de bomba: Moderna</string>
 	<string name="poi_pump_style_historic">Estilo de bomba: Histórica</string>
@@ -2739,5 +2739,52 @@
 	<string name="poi_observatory_type_espionage">Uso: Espionaje</string>
 	<string name="poi_observatory_type_meteorological">Uso: Meteorológico</string>
 	<string name="poi_observatory_type_gravitational">Uso: Gravitacional</string>
+
+<string name="poi_greenhouse_horticulture">Horticultura en invernadero</string>
+
+	<string name="poi_voltage">Voltaje</string>
+	<string name="poi_generator_output_electricity">Potencia de salida</string>
+	<string name="poi_generator_output_electricity_yes">Salida: Electricidad</string>
+	<string name="poi_generator_output_hot_water">Potencia de salida de agua caliente</string>
+	<string name="poi_generator_output_hot_water_yes">Salida: Agua caliente</string>
+	<string name="poi_generator_output_steam_yes">Salida: Vapor</string>
+	<string name="poi_generator_output_hot_air_yes">Salida: Aire caliente</string>
+	<string name="poi_generator_output_cold_water_yes">Salida: Agua fría</string>
+	<string name="poi_generator_output_compressed_air">Potencia de salida de aire comprimido</string>
+	<string name="poi_generator_output_compressed_air_yes">Salida: Aire comprimido</string>
+	<string name="poi_generator_output_vacuum_yes">Salida: Vacío</string>
+	<string name="poi_generator_output_biogas">Potencia de salida de Biogas</string>
+	<string name="poi_generator_output_biogas_yes">Salida: Biogas</string>
+
+	<string name="poi_pumping_station">Estación de bombeo</string>
+
+	<string name="poi_display_yes">Con pantalla</string>
+	<string name="poi_display_no">Sin pantalla</string>
+	<string name="poi_display_analog_yes">Con pantalla análoga</string>
+	<string name="poi_display_digital_yes">Con pantalla digital</string>
+	<string name="poi_display_sundial_yes">Con reloj solar</string>
+
+	<string name="poi_barometer_yes">Con barómetro</string>
+	<string name="poi_barometer_no">Sin barómetro</string>
+	<string name="poi_thermometer_yes">Con termómetro</string>
+	<string name="poi_thermometer_no">Sin termómetro</string>
+	<string name="poi_hygrometer_yes">Con higrómetro</string>
+	<string name="poi_hygrometer_no">Sin higrómetro</string>
+	<string name="poi_date_yes">Muestra la fecha</string>
+	<string name="poi_date_no">No muestra la fecha</string>
+
+	<string name="poi_support_pole">Soporte: Poste</string>
+	<string name="poi_support_wall_mounted">Soporte: Muro</string>
+	<string name="poi_support_tree">Soporte: Árbol</string>
+	<string name="poi_support_pedestal">Soporte: Pedestal</string>
+	<string name="poi_support_ground">Soporte: Suelo</string>
+	<string name="poi_support_billboard">Soporte: Cartelera</string>
+	<string name="poi_support_ceiling">Soporte: Cielo raso</string>
+	<string name="poi_support_suspended">Soporte: Suspendido</string>
+	<string name="poi_support_roof">Soporte: Techo</string>
+	<string name="poi_support_tower">Soporte: Torre</string>
+
+	<string name="poi_passenger_information_display_yes">Con pantalla de información para pasajeros</string>
+	<string name="poi_passenger_information_display_no">Sin pantalla de información para pasajeros</string>
 
 </resources>
