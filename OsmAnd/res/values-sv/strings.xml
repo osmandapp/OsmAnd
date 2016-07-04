@@ -436,8 +436,8 @@
 <string name="switch_to_vector_map_to_see"><![CDATA[En offline vektor-karta finns tillgänglig för den här platsen.
 \n\t\n\tFör användning aktivera \'Meny\' -> \'Konfigurera karta\' -> \'Kartkälla…\' -> \'Offline vektor-kartor\'.]]></string>
     <string name="choose_audio_stream">Röstväglednings-output</string>
-    <string name="choose_audio_stream_descr">Välj kanal för uppspelning av röstvägledning (systemberoende)</string>
-    <string name="voice_stream_voice_call">Röstsamtal ljud</string>
+    <string name="choose_audio_stream_descr">Välj högtalare för uppspelning av röstvägledning (systemberoende)</string>
+    <string name="voice_stream_voice_call">Röstsamtal ljud (försöker även avbryta bluetooth bilstereo)</string>
     <string name="voice_stream_notification">Ljudnotifiering</string>
     <string name="voice_stream_music">Media-/musikljud</string>
     <string name="warning_tile_layer_not_downloadable">Appen kan inte hämta kartlager %1$s. Försök installera om det.</string>
@@ -1245,8 +1245,8 @@
     <string name="osmo_plugin_name">OpenStreetMap-spårning</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_plugin_description">"Det insticksprogrammet erbjuder delvis funktionaliteten för spårning med OpenStreetMap. Besök http://osmo.mobi.\n\nDu kan spåra alla enheter som är medlemmar i en grupp i realtid och ni kan kommunicera med varandra. Det finns olika alternativ för sessionsspårning eller permanent spårning.\n\nAnonyma grupper kan skapas för ett specificerat antal dagar och begränsas till bestämda funktioner, d.v.s. det finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper kan å andra sidan skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
-    <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
-    <string name="interrupt_music">Avbryt musik</string>
+    <string name="interrupt_music_descr">Avbryt all musik vid meddelanden (sänk inte endast volymen)</string>
+    <string name="interrupt_music">Pausa musikeb</string>
     <string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
     <string name="share_route_subject">Utdelad rutt via OsmAnd</string>
     <string name="keep_informing_never">Endast manuellt (tryck på pilen)</string>
