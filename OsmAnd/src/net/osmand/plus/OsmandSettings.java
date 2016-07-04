@@ -1309,7 +1309,14 @@ public class OsmandSettings {
 		if (Build.VERSION.SDK_INT < 19) {
 			setExternalStorageDirectoryPre19(getInternalAppPath().getAbsolutePath());
 		} else {
-			setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_INTERNAL_FILE, getInternalAppPath().getAbsolutePath());
+			File externalStorage = getExternal1AppPath();
+			if (externalStorage != null && OsmandSettings.isWritable(externalStorage)) {
+				setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE,
+						getExternal1AppPath().getAbsolutePath());
+			} else {
+				setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_INTERNAL_FILE,
+						getInternalAppPath().getAbsolutePath());
+			}
 		}
 	}
 
@@ -1325,7 +1332,6 @@ public class OsmandSettings {
 		}
 	}
 
-	@TargetApi(19)
 	public File getInternalAppPath() {
 		if (Build.VERSION.SDK_INT >= 21) {
 			File fl = getNoBackupPath();
@@ -1334,6 +1340,16 @@ public class OsmandSettings {
 			}
 		}
 		return ctx.getFilesDir();
+	}
+
+	@TargetApi(19)
+	public File getExternal1AppPath() {
+		File[] externals = ctx.getExternalFilesDirs(null);
+		if (externals != null && externals.length > 0) {
+			return externals[0];
+		} else {
+			return null;
+		}
 	}
 
 	@TargetApi(21)
