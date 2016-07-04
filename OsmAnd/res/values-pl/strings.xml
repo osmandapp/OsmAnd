@@ -2215,4 +2215,5 @@
     <string name="lang_kn">Kannada</string>
     <string name="coords_format">Format współrzędnych</string>
     <string name="coords_format_descr">Format współrzędnych geograficznych</string>
-  	</resources>
+  	<string name="storage_directory_card">Karta pamięci</string>
+    </resources>
