@@ -2046,4 +2046,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
  	<string name="app_mode_train">Tren</string>
     <string name="coords_format">Format de coordenades</string>
     <string name="coords_format_descr">Format de les coordenades geogràfiques</string>
-  	</resources>
+  	<string name="shared_string_open_POIs">PDIs oberts</string>
+	<string name="shared_string_open_24_7">Obert 24h/7d</string>
+    <string name="storage_directory_card">Tarja de memòria</string>
+    </resources>
