@@ -362,7 +362,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 		});
 		addFilter(optionsMenu, getString(R.string.shared_string_open_POIs));
-		addFilter(optionsMenu, getString(R.string.shared_string_open_open_24_7));
+		addFilter(optionsMenu, getString(R.string.shared_string_open_24_7));
 		Map<String, PoiType> poiAdditionals = f.getPoiAdditionals();
 		if(poiAdditionals != null) {
 			TreeMap<String, PoiType> adds = new TreeMap<String, PoiType>();
