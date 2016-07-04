@@ -2382,6 +2382,5 @@
     <string name="coords_format">Koordinatformat</string>
     <string name="coords_format_descr">Format for geografiske koordinater</string>
   	<string name="storage_directory_card">Hukommelseskort</string>
-    <string name="shared_string_open_POIs">Åben IP\'er</string>
 	<string name="shared_string_open_24_7">Åben 24/7</string>
     </resources>
