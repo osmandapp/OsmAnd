@@ -29,9 +29,13 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	public static final String TAG = "DataStoragePlaceDialogFragment";
 	private static final String STORAGE_READOLNY_KEY = "storage_readolny_key";
 
-	private File internalStorage;
+	private File deviceStorage;
+	private int deviceStorageType;
+	private String deviceStorageName;
 	private File sharedStorage;
-	private File externalStorage;
+	private int sharedStorageType = OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT;
+	private File cardStorage;
+	private int cardStorageType = OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE;
 	public static boolean isInterestedInFirstTime = true;
 	boolean storageReadOnly;
 	boolean hasExternalStoragePermission;
@@ -52,12 +56,24 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		hasExternalStoragePermission = DownloadActivity.hasPermissionToWriteExternalStorage(getActivity());
+		Activity activity = getActivity();
 
-		internalStorage = getInternalStorageDirectory(getActivity());
+		hasExternalStoragePermission = DownloadActivity.hasPermissionToWriteExternalStorage(activity);
+
+		File internalStorage = getInternalStorageDirectory(activity);
+		File external1Storage = getExternal1StorageDirectory(activity);
+		if (external1Storage != null && external1Storage.exists() && OsmandSettings.isWritable(external1Storage)) {
+			deviceStorage = external1Storage;
+			deviceStorageType = OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE;
+			deviceStorageName = getString(R.string.storage_directory_external);
+		} else {
+			deviceStorage = internalStorage;
+			deviceStorageType = OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE;
+			deviceStorageName = getString(R.string.storage_directory_default);
+		}
 		if (hasExternalStoragePermission) {
-			sharedStorage = getSharedStorageDirectory(getActivity());
-			externalStorage = getMyApplication().getSettings().getSecondaryStorage();
+			sharedStorage = getSharedStorageDirectory(activity);
+			cardStorage = getMyApplication().getSettings().getSecondaryStorage();
 		}
 
 		Bundle args = null;
@@ -81,12 +97,13 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 					.setText(getString(R.string.storage_directory_readonly_desc));
 		}
 
-		View internalStorageRow = view.findViewById(R.id.deviceMemoryRow);
-		internalStorageRow.setOnClickListener(internalMemoryOnClickListener);
-		ImageView internalStorageImageView = (ImageView) view.findViewById(R.id.deviceMemoryImageView);
-		internalStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
-		TextView internalStorageDescription = (TextView) view.findViewById(R.id.deviceMemoryDescription);
-		internalStorageDescription.setText(getFreeSpace(internalStorage));
+		View deviceStorageRow = view.findViewById(R.id.deviceMemoryRow);
+		deviceStorageRow.setOnClickListener(deviceMemoryOnClickListener);
+		ImageView deviceStorageImageView = (ImageView) view.findViewById(R.id.deviceMemoryImageView);
+		deviceStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+		TextView deviceStorageDescription = (TextView) view.findViewById(R.id.deviceMemoryDescription);
+		deviceStorageDescription.setText(deviceStorageName);
+		deviceStorageDescription.setText(getFreeSpace(internalStorage));
 
 		View sharedMemoryRow = view.findViewById(R.id.sharedMemoryRow);
 		if (hasExternalStoragePermission && sharedStorage != null) {
@@ -101,12 +118,12 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		}
 
 		View memoryStickRow = view.findViewById(R.id.memoryStickRow);
-		if (hasExternalStoragePermission && externalStorage != null) {
-			memoryStickRow.setOnClickListener(externalMemoryOnClickListener);
+		if (hasExternalStoragePermission && cardStorage != null) {
+			memoryStickRow.setOnClickListener(memoryStickOnClickListenesr);
 			ImageView memoryStickImageView = (ImageView) view.findViewById(R.id.memoryStickImageView);
 			memoryStickImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
 			TextView memoryStickDescription = (TextView) view.findViewById(R.id.memoryStickDescription);
-			memoryStickDescription.setText(getFreeSpace(externalStorage));
+			memoryStickDescription.setText(getFreeSpace(cardStorage));
 		} else {
 			view.findViewById(R.id.divExtStorage).setVisibility(View.GONE);
 			memoryStickRow.setVisibility(View.GONE);
@@ -135,6 +152,11 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				.getInternalAppPath();
 	}
 
+	public static File getExternal1StorageDirectory(Activity activity) {
+		return ((OsmandApplication) activity.getApplication()).getSettings()
+				.getExternal1AppPath();
+	}
+
 	public static File getSharedStorageDirectory(Activity activity) {
 		return ((OsmandApplication) activity.getApplication()).getSettings()
 				.getDefaultInternalStorage();
@@ -157,12 +179,11 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		return sz;
 	}
 
-	private View.OnClickListener internalMemoryOnClickListener =
+	private View.OnClickListener deviceMemoryOnClickListener =
 			new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE,
-							internalStorage, getActivity());
+					saveFilesLocation(deviceStorageType, deviceStorage, getActivity());
 					isInterestedInFirstTime = false;
 					dismiss();
 				}
@@ -172,19 +193,17 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 			new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT,
-							sharedStorage, getActivity());
+					saveFilesLocation(sharedStorageType, sharedStorage, getActivity());
 					isInterestedInFirstTime = false;
 					dismiss();
 				}
 			};
 
-	private View.OnClickListener externalMemoryOnClickListener =
+	private View.OnClickListener memoryStickOnClickListenesr =
 			new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					boolean res = saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE,
-							externalStorage, getActivity());
+					boolean res = saveFilesLocation(cardStorageType, cardStorage, getActivity());
 					isInterestedInFirstTime = false;
 					if (res) {
 						dismiss();
