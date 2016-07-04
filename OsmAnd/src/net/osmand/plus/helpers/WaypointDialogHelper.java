@@ -386,6 +386,7 @@ public class WaypointDialogHelper {
 								} else {
 									reloadListAdapter(listAdapter);
 								}
+								//updateRouteInfoMenu(ctx);
 							}
 						}, null);
 						app.getGeocodingLookupService().lookupAddress(lookupRequest);
@@ -433,6 +434,9 @@ public class WaypointDialogHelper {
 
 						final PopupMenu optionsMenu = new PopupMenu(ctx, more);
 						DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+						final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+						final TargetPoint start = targetPointsHelper.getPointToStart();
+						final TargetPoint finish = targetPointsHelper.getPointToNavigate();
 						MenuItem item;
 						if (hasActivePoints) {
 							item = optionsMenu.getMenu().add(
@@ -452,28 +456,33 @@ public class WaypointDialogHelper {
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
-									// switch start & finish
-									TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-									TargetPoint start = targetPointsHelper.getPointToStart();
-									TargetPoint finish = targetPointsHelper.getPointToNavigate();
-									targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
-											finish.getLongitude()), false, finish.getPointDescription(ctx));
-									if (start == null) {
-										Location loc = app.getLocationProvider().getLastKnownLocation();
-										if (loc != null) {
-											targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
-													loc.getLongitude()), true, -1);
-										}
-									} else {
-										targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
-												start.getLongitude()), true, -1, start.getPointDescription(ctx));
-									}
-									if (helper.helperCallbacks != null) {
-										helper.helperCallbacks.reloadAdapter();
-									}
+									switchStartAndFinish(targetPointsHelper, finish, ctx, start, app, helper);
 									return true;
 								}
 							});
+							if (start != null) {
+								if (targetPointsHelper.getIntermediatePoints().size() > 0) {
+									item = optionsMenu.getMenu().add(R.string.shared_string_move_down)
+											.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
+									item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+										@Override
+										public boolean onMenuItemClick(MenuItem item) {
+											switchStartAndFirstIntermediate(targetPointsHelper, ctx, start, helper);
+											return true;
+										}
+									});
+								}
+								item = optionsMenu.getMenu().add(R.string.shared_string_remove)
+										.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
+								item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+									@Override
+									public boolean onMenuItemClick(MenuItem item) {
+										targetPointsHelper.setStartPoint(null, true, null);
+										updateControls(ctx, helper);
+										return true;
+									}
+								});
+							}
 						}
 						if (optionsMenu.getMenu().size() > 0) {
 							optionsMenu.show();
@@ -511,15 +520,20 @@ public class WaypointDialogHelper {
 						}
 						final int index = t;
 						MenuItem item;
-						if (index > 0 && count > 1) {
+						final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+						final TargetPoint start = targetPointsHelper.getPointToStart();
+						if (count > 1 && (index > 0 || start != null)) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_move_up)
 									.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_up));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
 								public boolean onMenuItemClick(MenuItem item) {
-									if (helper != null && helper.helperCallbacks != null) {
+									if (index == 0) {
+										switchStartAndFirstIntermediate(targetPointsHelper, ctx, start, helper);
+									} else if (helper != null && helper.helperCallbacks != null) {
 										helper.helperCallbacks.exchangeWaypoints(index, index - 1);
 									}
+									updateRouteInfoMenu(ctx);
 									return true;
 								}
 							});
@@ -533,6 +547,7 @@ public class WaypointDialogHelper {
 									if (helper != null && helper.helperCallbacks != null) {
 										helper.helperCallbacks.exchangeWaypoints(index, index + 1);
 									}
+									updateRouteInfoMenu(ctx);
 									return true;
 								}
 							});
@@ -543,7 +558,7 @@ public class WaypointDialogHelper {
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								deletePoint(app, adapter, helper, point, deletedPoints, true);
+								deletePoint(app, ctx, adapter, helper, point, deletedPoints, true);
 								return true;
 							}
 						});
@@ -560,14 +575,62 @@ public class WaypointDialogHelper {
 			remove.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					deletePoint(app, adapter, helper, point, deletedPoints, true);
+					deletePoint(app, ctx, adapter, helper, point, deletedPoints, true);
 				}
 			});
 		}
 		return v;
 	}
 
-	public static void deletePoint(final OsmandApplication app, final ArrayAdapter adapter,
+	private static void updateRouteInfoMenu(Activity ctx) {
+		if (ctx instanceof MapActivity) {
+			((MapActivity) ctx).getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
+		}
+	}
+
+	// switch start & finish
+	private static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
+											 Activity ctx, TargetPoint start, OsmandApplication app,
+											 WaypointDialogHelper helper) {
+		targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
+				finish.getLongitude()), false, finish.getPointDescription(ctx));
+		if (start == null) {
+			Location loc = app.getLocationProvider().getLastKnownLocation();
+			if (loc != null) {
+				targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
+						loc.getLongitude()), true, -1);
+			}
+		} else {
+			targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
+					start.getLongitude()), true, -1, start.getPointDescription(ctx));
+		}
+		updateControls(ctx, helper);
+	}
+
+	private static void updateControls(Activity ctx, WaypointDialogHelper helper) {
+		if (helper != null && helper.helperCallbacks != null) {
+			helper.helperCallbacks.reloadAdapter();
+		}
+		updateRouteInfoMenu(ctx);
+	}
+
+	// switch start & first intermediate point
+	private static void switchStartAndFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
+														TargetPoint start, WaypointDialogHelper helper) {
+		List<TargetPoint> intermediatePoints =  targetPointsHelper.getIntermediatePointsWithTarget();
+		TargetPoint firstIntermediate = intermediatePoints.remove(0);
+		targetPointsHelper.setStartPoint(new LatLon(firstIntermediate.getLatitude(),
+				firstIntermediate.getLongitude()), false, firstIntermediate.getPointDescription(ctx));
+		TargetPoint destination = new TargetPoint(new LatLon(start.getLatitude(),
+				start.getLongitude()), start.getPointDescription(ctx));
+		intermediatePoints.add(0, destination);
+		targetPointsHelper.reorderAllTargetPoints(intermediatePoints, true);
+
+		updateControls(ctx, helper);
+	}
+
+	public static void deletePoint(final OsmandApplication app, Activity ctx,
+								   final ArrayAdapter adapter,
 								   final WaypointDialogHelper helper,
 								   final Object item,
 								   final List<LocationPointWrapper> deletedPoints,
@@ -580,6 +643,7 @@ public class WaypointDialogHelper {
 				if (helper != null && helper.helperCallbacks != null && needCallback) {
 					helper.helperCallbacks.deleteWaypoint(stableAdapter.getPosition(item));
 				}
+				updateRouteInfoMenu(ctx);
 			} else {
 				ArrayList<LocationPointWrapper> arr = new ArrayList<>();
 				arr.add(point);
@@ -975,6 +1039,7 @@ public class WaypointDialogHelper {
 				if (helper.helperCallbacks != null) {
 					helper.helperCallbacks.reloadAdapter();
 				}
+				updateRouteInfoMenu(activity);
 			}
 
 		}.execute();

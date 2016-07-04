@@ -508,7 +508,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
 			} else {
 				TargetPoint start = targets.getPointToStart();
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
+				if (start != null) {
+					mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
+				} else {
+					mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+				}
 			}
 			close();
 		} else {
