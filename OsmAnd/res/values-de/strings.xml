@@ -1673,7 +1673,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">Ausgewählt</string>
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
-	<string name="shared_string_open">Offen</string>
+	<string name="shared_string_is_open">Offen</string>
 
 	<string name="rendering_attr_hideHouseNumbers_name">Hausnummern</string>
 	<string name="application_dir_change_warning3">Soll OsmAnd auch die Datendateien an den neuen Ort kopieren?</string>

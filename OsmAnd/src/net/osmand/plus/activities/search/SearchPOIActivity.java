@@ -361,8 +361,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				return true;
 			}
 		});
-		addFilter(optionsMenu, getString(R.string.shared_string_open_POIs));
-		addFilter(optionsMenu, getString(R.string.shared_string_open_24_7));
+		addFilter(optionsMenu, getString(R.string.shared_string_is_open).toLowerCase());
+		addFilter(optionsMenu, "24/7");
 		Map<String, PoiType> poiAdditionals = f.getPoiAdditionals();
 		if(poiAdditionals != null) {
 			TreeMap<String, PoiType> adds = new TreeMap<String, PoiType>();
@@ -389,7 +389,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				if(searchFilterLayout.getVisibility() == View.GONE) {
 					searchFilterLayout.setVisibility(View.VISIBLE);
 				}
-				searchFilter.setText((searchFilter.getText().toString() + ": " + value).trim());
+				searchFilter.setText((searchFilter.getText().toString() + " " + value).trim());
 				return true;
 			}
 		});

@@ -9,8 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="shared_string_open_POIs">Open POIs</string>
-	<string name="shared_string_open_24_7">Open 24/7</string>
+	<string name="shared_string_is_open">Open</string>
     <string name="storage_directory_card">Memory card</string>
     <string name="coords_format">Coordinate format</string>
     <string name="coords_format_descr">Format for the geographical coordinates</string>
