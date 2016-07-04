@@ -1082,7 +1082,7 @@
     <string name="lang_zh">Čínsky (中国的)</string>
     <string name="index_name_canada">Severná Amerika - Kanada</string>
     <string name="interrupt_music">Pozastaviť hudbu</string>
-    <string name="interrupt_music_descr">Prerušiť hudbu keď prichádza oznam</string>
+    <string name="interrupt_music_descr">Pozastaviť hudbu keď prichádza hlasový povel (nie len znížiť hlasitosť)</string>
     <string name="always_center_position_on_map">Zobraziť pozíciu vždy v strede</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="misc_pref_title">Rôzne</string>
