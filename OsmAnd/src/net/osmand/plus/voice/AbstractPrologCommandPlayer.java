@@ -312,11 +312,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public static final int BT_SCO_DELAY = 1500;
 
 	private boolean startBtSco() {
-	// Establish a low quality Synchronous Connection-Oriented link to BT to e.g. interrupt a car stereo
-	// http://stackoverflow.com/questions/2144694/routing-audio-to-bluetooth-headset-non-a2dp-on-android
+	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
 		try {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
-			//if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
+			// Should we get error reports from users, let's check for "|| !mAudioManager.isBluetoothScoAvailableOffCall()" or even BT=ON here:
 			if (mAudioManager == null) {
 				return false;
 			}

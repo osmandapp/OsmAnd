@@ -73,6 +73,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		// If we have not already started to play audio, start.
 		if (mediaPlayer == null) {
 			requestAudioFocus();
+			// TODO: Delay first prompt of each batch to allow BT SCO connection being established (cf TTSCommandPlayerImpl)
 			playQueue();
 		}
 	}

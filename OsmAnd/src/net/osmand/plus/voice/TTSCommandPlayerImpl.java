@@ -107,7 +107,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (mTts != null && !vrt.isMute()) {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
-				// Delay prompts to allow BT SCO connection being established
+				// Delay first prompt of each batch to allow BT SCO connection being established
 				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 					ttsRequests++;
 					if (android.os.Build.VERSION.SDK_INT <= 21) {
