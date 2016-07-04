@@ -2381,4 +2381,5 @@
  	<string name="app_mode_train">Tog</string>
     <string name="coords_format">Koordinatformat</string>
     <string name="coords_format_descr">Format for geografiske koordinater</string>
-  	</resources>
+  	<string name="storage_directory_card">Hukommelseskort</string>
+    </resources>
