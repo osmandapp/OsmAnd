@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.PointF;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -31,6 +33,8 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IMapLayerProvider;
 import net.osmand.core.jni.IMapStylesCollection;
+import net.osmand.core.jni.IQueryController;
+import net.osmand.core.jni.ISearch;
 import net.osmand.core.jni.LatLon;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
@@ -39,11 +43,15 @@ import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
+import net.osmand.core.jni.NullablePointI;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
+import net.osmand.core.jni.OsmAndCoreJNI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;
+import net.osmand.core.jni.ReverseGeocoder;
+import net.osmand.core.jni.RoadLocator;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
@@ -70,22 +78,23 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
-    private static final String TAG = "OsmAndCoreSample";
+	private static final String TAG = "OsmAndCoreSample";
 
-    private float displayDensityFactor;
-    private int referenceTileSize;
-    private int rasterTileSize;
-    private IMapStylesCollection mapStylesCollection;
-    private ResolvedMapStyle mapStyle;
-    private ObfsCollection obfsCollection;
-    private MapPresentationEnvironment mapPresentationEnvironment;
-    private MapPrimitiviser mapPrimitiviser;
-    private ObfMapObjectsProvider obfMapObjectsProvider;
-    private MapPrimitivesProvider mapPrimitivesProvider;
-    private MapObjectsSymbolsProvider mapObjectsSymbolsProvider;
-    private IMapLayerProvider mapLayerProvider0;
-    private IMapLayerProvider mapLayerProvider1;
-    private QIODeviceLogSink fileLogSink;
+	private float displayDensityFactor;
+	private int referenceTileSize;
+	private int rasterTileSize;
+	private IMapStylesCollection mapStylesCollection;
+	private ResolvedMapStyle mapStyle;
+	private ObfsCollection obfsCollection;
+	private RoadLocator roadLocator;
+	private MapPresentationEnvironment mapPresentationEnvironment;
+	private MapPrimitiviser mapPrimitiviser;
+	private ObfMapObjectsProvider obfMapObjectsProvider;
+	private MapPrimitivesProvider mapPrimitivesProvider;
+	private MapObjectsSymbolsProvider mapObjectsSymbolsProvider;
+	private IMapLayerProvider mapLayerProvider0;
+	private IMapLayerProvider mapLayerProvider1;
+	private QIODeviceLogSink fileLogSink;
 
 	private AtlasMapRendererView mapView;
 	private TextView textZoom;
@@ -260,8 +269,8 @@ public class MainActivity extends Activity {
 	};
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		SampleApplication app = getSampleApplication();
 
@@ -269,10 +278,10 @@ public class MainActivity extends Activity {
 		multiTouchSupport = new MultiTouchSupport(this, new MapViewMultiTouchZoomListener());
 
 		// Inflate views
-        setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main);
 
-        // Get map view
-        mapView = (AtlasMapRendererView) findViewById(R.id.mapRendererView);
+		// Get map view
+		mapView = (AtlasMapRendererView) findViewById(R.id.mapRendererView);
 
 		textZoom = (TextView) findViewById(R.id.text_zoom);
 		azimuthNorthButton = (ImageButton) findViewById(R.id.map_azimuth_north_button);
@@ -298,61 +307,62 @@ public class MainActivity extends Activity {
 			}
 		});
 
-        // Additional log sink
-        fileLogSink = QIODeviceLogSink.createFileLogSink(app.getAbsoluteAppPath() + "/osmandcore.log");
-        Logger.get().addLogSink(fileLogSink);
+		// Additional log sink
+		fileLogSink = QIODeviceLogSink.createFileLogSink(app.getAbsoluteAppPath() + "/osmandcore.log");
+		Logger.get().addLogSink(fileLogSink);
 
-        // Get device display density factor
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        displayDensityFactor = displayMetrics.densityDpi / 160.0f;
-        referenceTileSize = (int)(256 * displayDensityFactor);
-        rasterTileSize = Integer.highestOneBit(referenceTileSize - 1) * 2;
-        Log.i(TAG, "displayDensityFactor = " + displayDensityFactor);
-        Log.i(TAG, "referenceTileSize = " + referenceTileSize);
-        Log.i(TAG, "rasterTileSize = " + rasterTileSize);
+		// Get device display density factor
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+		displayDensityFactor = displayMetrics.densityDpi / 160.0f;
+		referenceTileSize = (int) (256 * displayDensityFactor);
+		rasterTileSize = Integer.highestOneBit(referenceTileSize - 1) * 2;
+		Log.i(TAG, "displayDensityFactor = " + displayDensityFactor);
+		Log.i(TAG, "referenceTileSize = " + referenceTileSize);
+		Log.i(TAG, "rasterTileSize = " + rasterTileSize);
 
-        Log.i(TAG, "Going to resolve default embedded style...");
-        mapStylesCollection = new MapStylesCollection();
-        mapStyle = mapStylesCollection.getResolvedStyleByName("default");
-        if (mapStyle == null)
-        {
-            Log.e(TAG, "Failed to resolve style 'default'");
-            System.exit(0);
-        }
+		Log.i(TAG, "Going to resolve default embedded style...");
+		mapStylesCollection = new MapStylesCollection();
+		mapStyle = mapStylesCollection.getResolvedStyleByName("default");
+		if (mapStyle == null) {
+			Log.e(TAG, "Failed to resolve style 'default'");
+			System.exit(0);
+		}
 
-        Log.i(TAG, "Going to prepare OBFs collection");
-        obfsCollection = new ObfsCollection();
-        Log.i(TAG, "Will load OBFs from " + app.getAbsoluteAppPath());
-        obfsCollection.addDirectory(app.getAbsoluteAppPath(), false);
+		Log.i(TAG, "Going to prepare OBFs collection");
+		obfsCollection = new ObfsCollection();
+		Log.i(TAG, "Will load OBFs from " + app.getAbsoluteAppPath());
+		obfsCollection.addDirectory(app.getAbsoluteAppPath(), false);
 
-        Log.i(TAG, "Going to prepare all resources for renderer");
-        mapPresentationEnvironment = new MapPresentationEnvironment(
+		roadLocator = new RoadLocator(obfsCollection);
+
+		Log.i(TAG, "Going to prepare all resources for renderer");
+		mapPresentationEnvironment = new MapPresentationEnvironment(
 				mapStyle,
 				displayDensityFactor,
-                1.0f,
-                1.0f,
+				1.0f,
+				1.0f,
 				MapUtils.LANGUAGE);
-        //mapPresentationEnvironment->setSettings(configuration.styleSettings);
-        mapPrimitiviser = new MapPrimitiviser(
+		//mapPresentationEnvironment->setSettings(configuration.styleSettings);
+		mapPrimitiviser = new MapPrimitiviser(
 				mapPresentationEnvironment);
-        obfMapObjectsProvider = new ObfMapObjectsProvider(
+		obfMapObjectsProvider = new ObfMapObjectsProvider(
 				obfsCollection);
-        mapPrimitivesProvider = new MapPrimitivesProvider(
+		mapPrimitivesProvider = new MapPrimitivesProvider(
 				obfMapObjectsProvider,
 				mapPrimitiviser,
 				rasterTileSize);
-        mapObjectsSymbolsProvider = new MapObjectsSymbolsProvider(
+		mapObjectsSymbolsProvider = new MapObjectsSymbolsProvider(
 				mapPrimitivesProvider,
 				rasterTileSize);
 
-        mapView.setReferenceTileSizeOnScreenInPixels(referenceTileSize);
-        mapView.addSymbolsProvider(mapObjectsSymbolsProvider);
+		mapView.setReferenceTileSizeOnScreenInPixels(referenceTileSize);
+		mapView.addSymbolsProvider(mapObjectsSymbolsProvider);
 
 		restoreMapState();
 
-        mapLayerProvider0 = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
-        mapView.setMapLayerProvider(0, mapLayerProvider0);
+		mapLayerProvider0 = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
+		mapView.setMapLayerProvider(0, mapLayerProvider0);
 
 		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
@@ -436,26 +446,26 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-    protected void onResume() {
-        super.onResume();
+	protected void onResume() {
+		super.onResume();
 
-        mapView.handleOnResume();
-    }
+		mapView.handleOnResume();
+	}
 
-    @Override
-    protected void onPause() {
+	@Override
+	protected void onPause() {
 		saveMapState();
-        mapView.handleOnPause();
+		mapView.handleOnPause();
 
-        super.onPause();
-    }
+		super.onPause();
+	}
 
-    @Override
-    protected void onDestroy() {
-        mapView.handleOnDestroy();
+	@Override
+	protected void onDestroy() {
+		mapView.handleOnDestroy();
 
-        super.onDestroy();
-    }
+		super.onDestroy();
+	}
 
 	public SampleApplication getSampleApplication() {
 		return (SampleApplication) getApplication();
@@ -527,8 +537,8 @@ public class MainActivity extends Activity {
 		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		Editor edit = prefs.edit();
 		LatLon latLon = Utilities.convert31ToLatLon(target31);
-		edit.putFloat(PREF_MAP_CENTER_LAT, (float)latLon.getLatitude());
-		edit.putFloat(PREF_MAP_CENTER_LON, (float)latLon.getLongitude());
+		edit.putFloat(PREF_MAP_CENTER_LAT, (float) latLon.getLatitude());
+		edit.putFloat(PREF_MAP_CENTER_LON, (float) latLon.getLongitude());
 		edit.putFloat(PREF_MAP_AZIMUTH, azimuth);
 		edit.putFloat(PREF_MAP_ZOOM, zoom);
 		edit.putFloat(PREF_MAP_ELEVATION_ANGLE, elevationAngle);
@@ -637,6 +647,37 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void geocode(@NonNull PointI point31) {
+		new AsyncTask<PointI, Void, String>() {
+			@Override
+			protected String doInBackground(PointI... params) {
+				final String[] resultString = {null};
+				ReverseGeocoder geocoder = new ReverseGeocoder(obfsCollection, roadLocator);
+				final ReverseGeocoder.Criteria criteria = new ReverseGeocoder.Criteria();
+				criteria.setPosition31(new NullablePointI(params[0]));
+				ISearch.INewResultEntryCallback geocoderResultCallback = new ISearch.INewResultEntryCallback() {
+					@Override
+					public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
+						ReverseGeocoderResultEntry result = new ReverseGeocoderResultEntry(resultEntry);
+						resultString[0] = result.toString();
+					}
+				};
+				geocoder.performSearch(criteria, geocoderResultCallback.getBinding(), new IQueryController() {
+					@Override
+					public boolean isAborted() {
+						return false;
+					}
+				});
+				return resultString[0];
+			}
+
+			@Override
+			protected void onPostExecute(String s) {
+				Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+			}
+		}.execute(point31);
+	}
+
 	private class MapViewOnGestureListener extends SimpleOnGestureListener {
 
 		@Override
@@ -647,12 +688,10 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onLongPress(MotionEvent e) {
-			PointI point = new PointI();
-			mapView.getLocationFromScreenPoint(new PointI((int) e.getX(), (int) e.getY()), point);
-			LatLon latLon = Utilities.convert31ToLatLon(point);
-			Toast.makeText(MainActivity.this,
-					"Hello, this is long tap from\n" +
-							"lat=" + latLon.getLatitude() + " lon=" + latLon.getLongitude(), Toast.LENGTH_SHORT).show();
+			PointI point31 = new PointI();
+			mapView.getLocationFromScreenPoint(new PointI((int) e.getX(), (int) e.getY()), point31);
+			geocode(point31);
+			Toast.makeText(MainActivity.this, "Geocoding...", Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
@@ -666,7 +705,7 @@ public class MainActivity extends Activity {
 			float dy = (fromY - toY);
 
 			PointI newTarget = new PointI();
-			mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth() / 2 + (int)dx, mapView.getHeight() / 2 + (int)dy), newTarget);
+			mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth() / 2 + (int) dx, mapView.getHeight() / 2 + (int) dy), newTarget);
 
 			setTarget(newTarget);
 
@@ -702,15 +741,15 @@ public class MainActivity extends Activity {
 
 			PointI centerLocationBefore = new PointI();
 			mapView.getLocationFromScreenPoint(
-					new PointI((int)centerPoint.x, (int)centerPoint.y), centerLocationBefore);
+					new PointI((int) centerPoint.x, (int) centerPoint.y), centerLocationBefore);
 
 			// Change zoom
-			setZoom(initialZoom + (float)(Math.log(scale) / Math.log(2)));
+			setZoom(initialZoom + (float) (Math.log(scale) / Math.log(2)));
 
 			// Adjust current target position to keep touch center the same
 			PointI centerLocationAfter = new PointI();
 			mapView.getLocationFromScreenPoint(
-					new PointI((int)centerPoint.x, (int)centerPoint.y), centerLocationAfter);
+					new PointI((int) centerPoint.x, (int) centerPoint.y), centerLocationAfter);
 			PointI centerLocationDelta = new PointI(
 					centerLocationAfter.getX() - centerLocationBefore.getX(),
 					centerLocationAfter.getY() - centerLocationBefore.getY());
@@ -749,4 +788,11 @@ public class MainActivity extends Activity {
 			setElevationAngle(initialElevation - angle);
 		}
 	}
+
+	private class ReverseGeocoderResultEntry extends ReverseGeocoder.ResultEntry {
+		protected ReverseGeocoderResultEntry(ISearch.IResultEntry resultEntry) {
+			super(OsmAndCoreJNI.ReverseGeocoder_ResultEntry_SWIGUpcast(ISearch.IResultEntry.getCPtr(resultEntry)), false);
+		}
+	}
+
 }
