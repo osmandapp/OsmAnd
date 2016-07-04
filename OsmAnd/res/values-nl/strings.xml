@@ -272,7 +272,7 @@
 \n\t\n\tOm deze te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
   <string name="choose_audio_stream">Audiokanaal stembegeleiding</string>
   <string name="choose_audio_stream_descr">Audiokanaal voor de stembegeleiding kiezen (systeemafhankelijk)</string>
-  <string name="voice_stream_voice_call">als telefoongesprek</string>
+  <string name="voice_stream_voice_call">Telefoongesprek</string>
   <string name="voice_stream_notification">als melding</string>
   <string name="voice_stream_music">als media/muziek</string>
   <string name="warning_tile_layer_not_downloadable">Kaartlaag %1$s kan niet worden gedownload. Probeer deze opnieuw te installeren.</string>
@@ -2289,4 +2289,5 @@
     <string name="lang_ast">Asturisch</string>
     <string name="app_mode_bus">Lijnbus</string>
  	<string name="app_mode_train">Trein</string>
+    <string name="coords_format">Coördinatenformaat</string>
     </resources>
