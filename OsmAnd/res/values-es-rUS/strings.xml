@@ -2191,4 +2191,6 @@
     <string name="lang_ast">Asturiano</string>
     <string name="coords_format">Formato de coordenadas</string>
     <string name="coords_format_descr">Formato para las coordenadas geográficas</string>
-  	</resources>
+  	<string name="shared_string_is_open">Abrir</string>
+    <string name="storage_directory_card">Tarjeta de memoria</string>
+    </resources>
