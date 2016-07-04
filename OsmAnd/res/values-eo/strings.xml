@@ -2010,4 +2010,5 @@
 <string name="items_were_selected">{0} ero(j) elektita(j)</string>
     <string name="coords_format">Formo de koordinatoj</string>
     <string name="coords_format_descr">Formo de geografiaj koordinatoj</string>
-  	</resources>
+  	<string name="storage_directory_card">Memorkarto</string>
+    </resources>
