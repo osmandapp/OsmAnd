@@ -428,7 +428,7 @@
     <string name="open_street_map_login_and_pass">Uzantnomo kaj pasvorto al OpenStreetMap</string>
     <string name="application_dir">Datum-konservada dosierujo</string>
     <string name="filter_poi_hint">Filtri laŭ nomo</string>
-    <string name="shared_string_open">Malfermi</string>
+    <string name="shared_string_open">malfermajn</string>
     <string name="search_poi_category_hint">Entajpu por serĉi ĉie</string>
     <string name="agps_info">A-GPS informoj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
@@ -1132,7 +1132,7 @@
     <string name="snap_to_road_descr">Proksimumigas pozicion al vojo dum navigado</string>
     <string name="snap_to_road">Proksimumigi al vojo</string>
     <string name="interrupt_music">Paŭzi muzikon</string>
-    <string name="interrupt_music_descr">Paŭzas muzikon dum sciigoj</string>
+    <string name="interrupt_music_descr">Tute paŭzas iun muzikon dum sciigoj (ne nur mallaŭtigas ĝin)</string>
     <string name="osmand_short_description_80_chars">Foliumi tutmondajn mapojn kaj navigadi uzante eksterretajn kaj enretajn OSM mapojn</string>
 	<string name="osmand_plus_short_description_80_chars">Foliumi tutmondajn mapojn kaj navigadi uzante eksterretajn kaj enretajn OSM mapojn</string>
 	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo)\nOsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj.\nĈefaj eblecoj:\n - Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo)\n - Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo\n - Elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo\n - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, Interesejoj, ŝatataj ejoj, nivelkurboj publiktransportaj haltejoj, ekstraj mapoj kun ŝanĝebla diafaneco\n - Serĉi eksterrete adresojn kaj interesajn ejojn (Interesejojn)\n - Difini kursojn por mallongaj distancoj eksterrete (iafoje malfunkcias)\n - Aŭta, bicikla, kaj perpiedanta reĝimoj kun:\n  - agordebla aŭtomata/taga/nokta aspekto\n  - agordebla rapid-dependa map-skalado\n  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso\n  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj\nLimoj en tiu ĉi senpaga versio de OsmAnd:\n - Limigita nombro da elŝutoj de mapoj\n - Sen aliro al eksterretaj Vikipediaj Interesejoj\nOsmAnd estas konstante disvolviĝanta kaj ĝia plua disvolviĝo dependas de monaj donacoj por subteni programadon kaj testadon de novaj eblecoj. Bonvolu konsideri aĉeti na OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto je osmand.net. "</string>
@@ -1474,7 +1474,7 @@
     <string name="switch_to_vector_map_to_see">Eksterreta vektora mapo disponebla por tiu ĉi loko.
 \n\t\n\tPor uzi ĝin, elektu \'Menuo\' → \'Agordi mapon\' → \'Map-fontaj…\' → \'Eksterretaj vektoraj mapoj\'.</string>
     <string name="choose_audio_stream">Eligo de gvidata voĉo</string>
-    <string name="voice_stream_voice_call">Telefon-parola aŭd-kanalo (ankaŭ provas paŭzi muzikon de laŭtparoliloj de aŭto)</string>
+    <string name="voice_stream_voice_call">Voĉa aŭd-kanalo (ankaŭ provas paŭzi muzikon de laŭtparoliloj de aŭto)</string>
     <string name="choose_audio_stream_descr">Elektu laŭtparolilon por ludi gvidatan voĉon (sistem-dependa)</string>
     <string name="voice_stream_notification">Sciiga aŭd-kanalo</string>
     <string name="voice_stream_music">Aŭdvidaĵa/muzika kanalo</string>
@@ -1728,7 +1728,7 @@
     <string name="off_router_service_no_gps_available">La fona navigad-servo postulas pozicitrovan servon aktivigitan.</string>
     <string name="hide_poi_filter">Kaŝi filtrilon</string>
     <string name="show_poi_filter">Montri filtrilon</string>
-    <string name="search_poi_filter">Filtrilo</string>
+    <string name="search_poi_filter">Filtri</string>
     <string name="menu_mute_off">Aktivigi sonon</string>
     <string name="menu_mute_on">Malaktivigi sonon</string>
     <string name="voice_data_initializing">Inicanta voĉajn datumojn…</string>
