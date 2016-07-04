@@ -381,7 +381,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 	private void addFilter(PopupMenu optionsMenu, final String value) {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
-		MenuItem item = optionsMenu.getMenu().add(getString(R.string.search_poi_filter) + ": " + value)
+		MenuItem item = optionsMenu.getMenu().add(getString(R.string.search_poi_filter) + " " + value)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
