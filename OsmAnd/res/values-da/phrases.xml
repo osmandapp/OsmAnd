@@ -2996,4 +2996,18 @@
 	<string name="poi_payment_troika_yes">Troika kort accepteres</string>
 	<string name="poi_payment_troika_no">Troika kort accepteres ikke</string>
 
+<string name="poi_telescope">Teleskop</string>
+	<string name="poi_telescope_type_optical">Teleskop: optisk</string>
+	<string name="poi_telescope_type_radio">Teleskop: radio</string>
+	<string name="poi_telescope_type_gamma">Teleskop: gamma</string>
+	<string name="poi_telescope_diameter">Diameter</string>
+	<string name="poi_telescope_spectrum">Spektrum</string>
+	<string name="poi_telescope_usage_education">Anvendelse: uddannelse</string>
+	<string name="poi_telescope_usage_espionage">Anvendelse: spionage</string>
+	<string name="poi_telescope_usage_research">Anvendelse: forskning</string>
+
+	<string name="poi_observatory_type_espionage">Anvendelse: spionage</string>
+	<string name="poi_observatory_type_meteorological">Anvendelse: meteorologisk</string>
+	<string name="poi_observatory_type_gravitational">Anvendelse: gravitationel</string>
+
 </resources>
