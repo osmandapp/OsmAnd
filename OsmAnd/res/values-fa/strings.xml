@@ -1883,7 +1883,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="shared_string_copy">کپی</string>
     <string name="filter_poi_hint">فیلتر بر اساس نام</string>
     <string name="search_poi_category_hint">جستجوی همه</string>
-    <string name="shared_string_open">باز کزدن</string>
+    <string name="shared_string_is_open">باز کزدن</string>
     <string name="agps_info">اطلاعات A-GPS</string>
 	<string name="shared_string_manage">مدیریت</string>
 	<string name="shared_string_edit">ویرایش</string>

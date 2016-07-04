@@ -1621,7 +1621,7 @@
     <string name="shared_string_copy">Kopiatu</string>
     <string name="filter_poi_hint">Iragazi izenez</string>
     <string name="search_poi_category_hint">Idatzi denak bilatzeko</string>
-    <string name="shared_string_open">Ireki</string>
+    <string name="shared_string_is_open">Ireki</string>
     <string name="agps_info">A-GPS informazioa</string>
     <string name="shared_string_manage">Kudeatu</string>
     <string name="shared_string_edit">Editatu</string>

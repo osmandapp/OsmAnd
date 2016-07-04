@@ -1598,7 +1598,7 @@
     <string name="storage_directory_manual">Καθορισμένο χειροκίνητα</string>
     <string name="storage_directory_default">Εσωτερική μνήμη</string>
     <string name="shared_string_copy">Αντιγραφή</string>
-    <string name="shared_string_open">Άνοιγμα</string>
+    <string name="shared_string_is_open">Άνοιγμα</string>
     <string name="shared_string_edit">Επεξεργασία</string>
 	<string name="shared_string_places">Μέρη</string>
 	<string name="shared_string_search">Αναζήτηση</string>

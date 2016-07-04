@@ -1735,7 +1735,7 @@
     <string name="shared_string_copy">Copie</string>
     <string name="filter_poi_hint">Filtrează după nume</string>
     <string name="search_poi_category_hint">Caută pentru toate punctele de interes</string>
-    <string name="shared_string_open">Deschide</string>
+    <string name="shared_string_is_open">Deschide</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM maper asistent</string>
     <string name="agps_info">Info A-GPS</string>
     <string name="shared_string_manage">Administrează</string>

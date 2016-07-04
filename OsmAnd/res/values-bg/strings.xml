@@ -1356,7 +1356,7 @@
     <string name="storage_directory">Съхраняване на карти</string>
     <string name="shared_string_copy">Копиране</string>
     <string name="filter_poi_hint">Филтриране по име</string>
-    <string name="shared_string_open">Отвори</string>
+    <string name="shared_string_is_open">Отвори</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM mapper помощник</string>
     <string name="agps_info">A-GPS информация</string>
     <string name="shared_string_manage">Управление</string>

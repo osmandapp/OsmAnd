@@ -1212,7 +1212,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_copy">نسخ</string>
     <string name="filter_poi_hint">فلترة حسب الاسم</string>
     <string name="search_poi_category_hint">اكتب للبحث عن الجميع</string>
-    <string name="shared_string_open">فتح</string>
+    <string name="shared_string_is_open">فتح</string>
     <string name="rendering_attr_OSMMapperAssistant_name">مساعد OSM mapper</string>
 	<string name="agps_info">معلومات A-GPS</string>
 	<string name="shared_string_manage">إدارة</string>

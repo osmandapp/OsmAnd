@@ -460,7 +460,7 @@
 	<string name="system_locale">सिस्टिम</string>
 	
 	<string name="rendering_attr_hideHouseNumbers_name">घरक्रमांक</string>
-    <string name="shared_string_open">उघडा</string>
+    <string name="shared_string_is_open">उघडा</string>
     <string name="shared_string_places">ठिकाणे</string>
 	<string name="shared_string_search">शोध</string>
 	<string name="shared_string_show_description">तपशील दाखवा</string>

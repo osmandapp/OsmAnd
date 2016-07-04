@@ -1656,7 +1656,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_copy">Copiar</string>
     <string name="filter_poi_hint">Filtrar por nome</string>
     <string name="search_poi_category_hint">Digite para pesquisar por todos</string>
-    <string name="shared_string_open">Abrir</string>
+    <string name="shared_string_is_open">Abrir</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Assistente de mapeador OSM</string>
 	<string name="agps_info">A-GPS info</string>
 	<string name="shared_string_manage">Gerenciar</string>

@@ -1695,7 +1695,7 @@
     <string name="online_map">Spletni zemljevid</string>
     <string name="roads_only">Le ceste</string>
     <string name="shared_string_release">Izdano</string>
-    <string name="shared_string_open">Odpri</string>
+    <string name="shared_string_is_open">Odpri</string>
     <string name="shared_string_message">Sporočilo</string>
     <string name="welcome_header">Dobrodošli</string>
     <string name="shared_string_go">Začni</string>

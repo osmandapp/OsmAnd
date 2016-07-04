@@ -1244,7 +1244,7 @@
     <string name="settings_privacy">Personvern</string>
     <string name="download_type_to_filter">Filtrer</string>
     <string name="get_plugin">Hent</string>
-    <string name="shared_string_open">Åpne</string>
+    <string name="shared_string_is_open">Åpne</string>
     <string name="application_dir_change_warning3">Vil du at OsmAnd også kopierer sine datafiler til den nye destinasjonen?</string>
     <string name="specified_directiory_not_writeable">Kart kunne ikke opprettes i angitte mappe</string>
     <string name="copying_osmand_file_failed">Kopiering av filer mislyktes</string>

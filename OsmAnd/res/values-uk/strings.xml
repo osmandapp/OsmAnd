@@ -1896,7 +1896,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="local_osm_changes_upload_all_confirm">Ви збираєтесь надіслати %1$d змін до OSM. Ви впевнені?</string>
     <string name="confirmation_to_clear_history">Бажаєте очистити історію?</string>
     <string name="delay_to_start_navigation_descr">Вкажіть час очікування для перебування на екрані планування маршруту</string>
-    <string name="shared_string_open">Відкрито</string>
+    <string name="shared_string_is_open">Відкрито</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Помічник мапера OSM</string>
 	<string name="agps_info">Інформація A-GPS</string>
 	<string name="shared_string_manage">Керування</string>

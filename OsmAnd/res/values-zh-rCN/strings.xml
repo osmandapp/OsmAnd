@@ -1167,7 +1167,7 @@
     <string name="shared_string_copy">复制</string>
     <string name="filter_poi_hint">按名称筛选</string>
     <string name="search_poi_category_hint">键入以搜索全部</string>
-    <string name="shared_string_open">打开</string>
+    <string name="shared_string_is_open">打开</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM 制图助手</string>
     <string name="agps_info">A-GPS 信息</string>
     <string name="shared_string_edit">编辑</string>

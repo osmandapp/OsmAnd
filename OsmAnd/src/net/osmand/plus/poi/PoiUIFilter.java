@@ -360,7 +360,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 	
 	public String getNameTokenOpen() {
-		return app.getString(R.string.shared_string_open);
+		return app.getString(R.string.shared_string_is_open);
 	}
 
 	private ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {

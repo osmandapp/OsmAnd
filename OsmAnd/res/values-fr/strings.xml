@@ -1754,7 +1754,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">Assistant pour la cartographie OSM</string>
     <string name="shared_string_manage">Gérer</string>
     <string name="shared_string_edit">Modifier</string>
-    <string name="shared_string_open">Ouvrir</string>
+    <string name="shared_string_is_open">Ouvrir</string>
     <string name="filter_poi_hint">Filtrer par nom</string>
     <string name="search_poi_category_hint">Rechercher partout</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>

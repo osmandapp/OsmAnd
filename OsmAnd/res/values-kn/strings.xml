@@ -18,7 +18,7 @@
     <string name="shared_string_copy">ಪ್ರತಿ</string>
     <string name="filter_poi_hint">ಹೆಸರಿನಿಂದ ಶೋಧಿಸು</string>
     <string name="search_poi_category_hint">ಎಲ್ಲವನ್ನು ಹುಡುಕಲು ಟೈಪಿಸಿ</string>
-    <string name="shared_string_open">ತೆರೆ</string>
+    <string name="shared_string_is_open">ತೆರೆ</string>
     <string name="agps_info">ಎ-ಜಿಪಿಎಸ್ ಮಾಹಿತಿ</string>
 	<string name="shared_string_manage">ನಿಭಾಯಿಸು</string>
 	<string name="shared_string_edit">ಸಂಪಾದಿಸು</string>

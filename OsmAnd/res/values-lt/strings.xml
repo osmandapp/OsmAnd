@@ -1736,7 +1736,7 @@
     <string name="shared_string_release">Išleista</string>
     <string name="rendering_attr_pisteGrooming_name">Tako priežiūra</string>
     <string name="filter_poi_hint">Filtruoti pagal pavadinimą</string>
-    <string name="shared_string_open">Atidaryti</string>
+    <string name="shared_string_is_open">Atidaryti</string>
     <string name="shared_string_places">Vietovės</string>
     <string name="shared_string_search">Paieška</string>
     <string name="shared_string_show_description">Rodyti aprašymą</string>

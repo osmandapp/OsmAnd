@@ -1638,7 +1638,7 @@
     <string name="shared_string_show_description">Показать описание</string>
     <string name="shared_string_places">Места</string>
     <string name="shared_string_search">Поиск</string>
-    <string name="shared_string_open">Открыто</string>
+    <string name="shared_string_is_open">Открыто</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Помощник картографа OSM</string>
     <string name="shared_string_manage">Управление</string>
     <string name="shared_string_edit">Редактировать</string>

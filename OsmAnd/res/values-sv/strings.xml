@@ -1722,7 +1722,7 @@
     <string name="shared_string_search">Sök</string>
     <string name="shared_string_places">Platser</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kartassistent</string>
-    <string name="shared_string_open">Öppna</string>
+    <string name="shared_string_is_open">Öppna</string>
     <string name="shared_string_manage">Hantera</string>
     <string name="shared_string_edit">Redigera</string>
     <string name="filter_poi_hint">Filtrera efter namn</string>

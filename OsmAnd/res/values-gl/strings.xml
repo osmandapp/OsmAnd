@@ -1679,7 +1679,7 @@
     <string name="shared_string_copy">Copiar</string>
     <string name="filter_poi_hint">Filtrar polo nome</string>
     <string name="search_poi_category_hint">Escriba para buscar todo</string>
-    <string name="shared_string_open">Abrir</string>
+    <string name="shared_string_is_open">Abrir</string>
     <string name="shared_string_manage">Xestionar</string>
 	<string name="shared_string_edit">Editar</string>
 	<string name="shared_string_places">Lugares</string>

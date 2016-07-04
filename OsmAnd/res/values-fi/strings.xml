@@ -693,7 +693,7 @@
 	<string name="driving_region_uk">Iso Britannia, Intia, Australia ja muut</string>
 	<string name="amenity_type_seamark">Merimerkki</string>
     <string name="app_modes_choose_descr">Valitse näkyvät profiilit</string>
-    <string name="shared_string_open">Avaa</string>
+    <string name="shared_string_is_open">Avaa</string>
     <string name="shared_string_edit">Muokkaa</string>
 	<string name="shared_string_places">Paikat</string>
 	<string name="shared_string_search">Etsi</string>

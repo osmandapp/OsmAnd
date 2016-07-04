@@ -1810,7 +1810,7 @@
 	<string name="agps_data_last_downloaded">Laatste A-GPS data gedownload: %1$s</string>
     <string name="filter_poi_hint">Filter op naam</string>
     <string name="search_poi_category_hint">Tik om alles te doorzoeken</string>
-    <string name="shared_string_open">Open</string>
+    <string name="shared_string_is_open">Open</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-kaart: [fixme] tonen</string>
 	<string name="shared_string_manage">Beheer</string>
 	<string name="shared_string_edit">Bewerk</string>

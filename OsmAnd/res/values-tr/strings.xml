@@ -1107,7 +1107,7 @@
     <string name="shared_string_copy">Kopyala</string>
     <string name="filter_poi_hint">Ada göre süz</string>
     <string name="search_poi_category_hint">Tümünü aramak için yazın</string>
-    <string name="shared_string_open">Aç</string>
+    <string name="shared_string_is_open">Aç</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM Eşleştiricisi Yardımcısı</string>
 	<string name="agps_info">A-GPS bilgisi</string>
 	<string name="shared_string_manage">Yönet</string>

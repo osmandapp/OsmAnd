@@ -1577,7 +1577,7 @@
     <string name="shared_string_show_description">Zobraziť popis</string>
     <string name="shared_string_places">Miesta</string>
     <string name="shared_string_search">Hľadať</string>
-    <string name="shared_string_open">Otvoriť</string>
+    <string name="shared_string_is_open">Otvoriť</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistent mapera OSM</string>
     <string name="shared_string_manage">Spravovať</string>
     <string name="shared_string_edit">Upraviť</string>

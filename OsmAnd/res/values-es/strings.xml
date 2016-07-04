@@ -1701,7 +1701,7 @@
     <string name="shared_string_do_not_use">No utilizar</string>
     <string name="shared_string_address">Dirección</string>
     <string name="shared_string_show_description">Mostrar información</string>
-    <string name="shared_string_open">Abierto</string>
+    <string name="shared_string_is_open">Abierto</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistente mapeador OSM</string>
     <string name="shared_string_manage">Gestionar</string>
     <string name="shared_string_edit">Editar</string>

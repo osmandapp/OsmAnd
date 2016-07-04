@@ -1570,7 +1570,7 @@
     <string name="shared_string_search">Hledat</string>
     <string name="shared_string_manage">Spravovat</string>
     <string name="shared_string_edit">Upravit</string>
-    <string name="shared_string_open">Otevřít</string>
+    <string name="shared_string_is_open">Otevřít</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Pomocník OSM editorů</string>
     <string name="filter_poi_hint">Filtrovat podle jména</string>
     <string name="search_poi_category_hint">Pište pro vyhledání ve všech</string>

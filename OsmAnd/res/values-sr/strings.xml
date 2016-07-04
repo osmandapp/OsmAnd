@@ -543,7 +543,7 @@
     <string name="shared_string_copy">Умножи</string>
     <string name="filter_poi_hint">Распореди по имену</string>
     <string name="search_poi_category_hint">Куцајте за претрагу свега</string>
-    <string name="shared_string_open">Отвори</string>
+    <string name="shared_string_is_open">Отвори</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Помоћник карата ОСМ-а</string>
     <string name="agps_info">Обавештења А-ГПС-а</string>
     <string name="shared_string_manage">Управљај</string>

@@ -1355,7 +1355,7 @@
     <string name="shared_string_copy">Kopiraj</string>
     <string name="filter_poi_hint">Filtriraj po imenu</string>
     <string name="search_poi_category_hint">Upiši za pretragu</string>
-    <string name="shared_string_open">Otvori</string>
+    <string name="shared_string_is_open">Otvori</string>
     <string name="agps_info">A-GPS informacije</string>
 	<string name="shared_string_manage">Upravljaj</string>
 	<string name="shared_string_edit">Uredi</string>

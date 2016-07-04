@@ -1744,7 +1744,7 @@
     <string name="shared_string_copy">Kopēt</string>
     <string name="filter_poi_hint">Filtrēt pēc nosaukuma</string>
     <string name="search_poi_category_hint">Rakstiet lai meklētu visu</string>
-    <string name="shared_string_open">Atvērt</string>
+    <string name="shared_string_is_open">Atvērt</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kartētāja asistents</string>
 	<string name="agps_info">A-GPS info</string>
 	<string name="shared_string_manage">Pārvaldīt</string>

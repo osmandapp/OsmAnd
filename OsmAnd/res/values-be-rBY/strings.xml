@@ -1929,7 +1929,7 @@
     <string name="shared_string_copy">Kapіjavać</string>
     <string name="filter_poi_hint">Fіltravać pavodle nazvy</string>
     <string name="search_poi_category_hint">Drukujcie, kab znajścі ŭsio</string>
-    <string name="shared_string_open">Adčynіć</string>
+    <string name="shared_string_is_open">Adčynіć</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Pamahaty kartohrafa OSM</string>
     <string name="agps_info">Іnfarmacyja pra A-GPS</string>
     <string name="shared_string_manage">Kіravać</string>
