@@ -2212,4 +2212,5 @@
  	<string name="app_mode_train">Trenu</string>
     <string name="coords_format">Formatu de sas coordinatas</string>
     <string name="coords_format_descr">Formatu de sas coordinatas geogràficas</string>
-  	</resources>
+  	<string name="storage_directory_card">Ischeda de memòria</string>
+    </resources>
