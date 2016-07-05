@@ -456,7 +456,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 		\n\t
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
-	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (systemabhängig)</string>
+	<string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen wählen (systemabhängig)</string>
 	<string name="voice_stream_voice_call">Wie Anrufe (simuliert auch Anrufe zur Auto Stereo Anlage)</string>
 	<string name="voice_stream_notification">Wie Benachrichtigungen</string>
 	<string name="voice_stream_music">Wie Medien/Musik</string>
@@ -1280,14 +1280,14 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel wählen</string>
-	<string name="interrupt_music_descr">Musikwiedergabe bei Navigationsanweisung vollständig unterbrechen (anstatt nur leiser zu spielen)</string>
+	<string name="interrupt_music_descr">Jegliche Musikwiedergabe bei Sprachhinweisen vollständig pausieren (nicht nur leiser spielen)</string>
 	<string name="always_center_position_on_map">Position immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
 	<string name="misc_pref_title">Verschiedenes</string>
 	<string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
 	<string name="share_route_subject">Route über OsmAnd teilen</string>
 	<string name="localization_pref_title">Ländereinstellungen</string>
-	<string name="interrupt_music">Musikwiedergabe unterbrechen</string>
+	<string name="interrupt_music">Musikwiedergabe pausieren</string>
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
 	<string name="shared_string_share">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
@@ -2175,4 +2175,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
     <string name="coords_format_descr">Format der geographischen Koordinaten</string>
-  	</resources>
+  	<string name="storage_directory_card">Speicherkarte</string>
+    <string name="shared_string_open">Öffnen</string>
+    </resources>
