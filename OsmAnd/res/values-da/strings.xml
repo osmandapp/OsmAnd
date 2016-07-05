@@ -1624,7 +1624,7 @@
     <string name="anonymous_user">Anonym bruger</string>
     <string name="logged_as">Logget ind som %1$s</string>
     <string name="configure_map">Konfigurer kort</string>
-    <string name="search_radius_proximity">I nærheden af</string>
+    <string name="search_radius_proximity">Inden for</string>
     <string name="rendering_category_details">Detaljer</string>
     <string name="rendering_category_transport">Transport</string>
     <string name="rendering_category_others">Andre kortattributter</string>
