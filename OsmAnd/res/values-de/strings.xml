@@ -1556,7 +1556,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="map_widget_left">Linkes Panel</string>
     <string name="shared_string_show">Anzeigen</string>
 	<string name="configure_map">Karte konfigurieren</string>
-    <string name="search_radius_proximity">Im Umkreis von</string>
+    <string name="search_radius_proximity">Innerhalb</string>
     
     <string name="rendering_category_others">Weitere Kartenmerkmale</string>
     <string name="rendering_attr_tramRoutes_name">Straßenbahnlinien</string>
