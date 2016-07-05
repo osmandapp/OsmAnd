@@ -1538,7 +1538,7 @@
     <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in unu pannellu de controllu in su giassu/situ web.</string>
     <string name="rendering_category_details">Minujas</string>
     <string name="configure_map">Cunfigura sa mapa</string>
-    <string name="search_radius_proximity">A curtzu de</string>
+    <string name="search_radius_proximity">Intre</string>
     <string name="map_widget_right">Pannellu de destra</string>
     <string name="map_widget_left">Pannellu de manca</string>
     <string name="rendering_category_routes">Àndalas</string>
@@ -2213,4 +2213,5 @@
     <string name="coords_format">Formatu de sas coordinatas</string>
     <string name="coords_format_descr">Formatu de sas coordinatas geogràficas</string>
   	<string name="storage_directory_card">Ischeda de memòria</string>
+    <string name="shared_string_is_open_24_7">Abertu 24/7</string>
     </resources>
