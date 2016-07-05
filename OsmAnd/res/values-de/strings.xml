@@ -125,7 +125,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
 	
-	<string name="download_hillshade_maps">Reliefkarte</string>
+	<string name="download_hillshade_maps">Relief</string>
 	
 	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe (Administrationsebenen 5 - 9)</string>
@@ -204,7 +204,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="native_rendering">Natives Rendern</string>
 	
 	<string name="test_voice_prompts">Sprachansagen testen</string>
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Offline-Karte über \'Einstellungen\' → \'Karten-Management\' herunterladen oder alternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
+	<string name="switch_to_raster_map_to_see">Keine offline Vektorkarte für dieses Gebiet vorhanden. Bitte offline Karte über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen oder alternativ auf online Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
 	<string name="send_files_to_osm">GPX-Dateien an OSM senden?</string>
 	<string name="validate_gpx_upload_name_pwd">Bitte tragen Sie Ihren OSM-Benutzernamen und Passwort ein, um GPX-Dateien hochzuladen.</string>
 	<string name="default_buttons_support">Unterstütze OsmAnd</string>
@@ -331,7 +331,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="routing_settings_2">Navigationseinstellungen</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
-	<string name="index_settings">Karten-Management</string>
+	<string name="index_settings">Kartenverwaltung</string>
 	<string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien</string>
 	<string name="general_settings">Allgemein</string>
 	<string name="general_settings_2">Allgemeine Einstellungen</string>
@@ -419,8 +419,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
 	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
-	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
-	<string name="local_index_descr_title">Karten-Management</string>
+	<string name="local_index_action_do">Sie wollen %2$s Element(e) %1$s. Fortfahren?</string>
+	<string name="local_index_descr_title">Kartenverwaltung</string>
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	
@@ -642,7 +642,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="layer_osm_bugs">OSM-Hinweise (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
-	<string name="layer_amenity_label">POI Name</string>
+	<string name="layer_amenity_label">POI Namen</string>
 	<string name="layer_map">Kartenquelle…</string>
 	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
@@ -688,7 +688,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter \'Karten-Management\' herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen sowie Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind offline Karten erforderlich, die Sie in über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen können. Danach können Sie Landkarten ansehen sowie Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
