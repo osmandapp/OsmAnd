@@ -642,7 +642,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="layer_osm_bugs">OSM-Hinweise (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
-	<string name="layer_amenity_label">Punktnamen</string>
+	<string name="layer_amenity_label">POI Name</string>
 	<string name="layer_map">Kartenquelle…</string>
 	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
