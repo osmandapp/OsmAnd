@@ -2201,4 +2201,6 @@
  	<string name="app_mode_train">火車</string>
     <string name="coords_format">坐標格式</string>
     <string name="coords_format_descr">地理座標格式</string>
-  	</resources>
+  	<string name="shared_string_is_open">開啟</string>
+    <string name="storage_directory_card">記憶卡</string>
+    </resources>
