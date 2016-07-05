@@ -2039,4 +2039,8 @@
     <string name="lang_en_gb">Jendźelšćina (Zjednoćene kralestwo)</string>
     <string name="lang_be_BY">Běłorušćina (łaćonsce)</string>
     <string name="lang_kn">Kannadašćina</string>
-    </resources>
+    <string name="shared_string_is_open_24_7">Bjez přestawki wočinjene</string>
+    <string name="storage_directory_card">Składowanska karta</string>
+    <string name="coords_format">Format koordinatow</string>
+    <string name="coords_format_descr">Format za geografiske koordinaty</string>
+  	</resources>
