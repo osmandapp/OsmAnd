@@ -1575,7 +1575,7 @@
     <string name="map_widget_left">Panneau de gauche</string>
     <string name="shared_string_show">Afficher</string>
     <string name="configure_map">Configurer la carte</string>
-    <string name="search_radius_proximity">A l\'intérieur</string>
+    <string name="search_radius_proximity">Dans</string>
     <string name="rendering_category_routes">Itinéraires</string>
 
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
