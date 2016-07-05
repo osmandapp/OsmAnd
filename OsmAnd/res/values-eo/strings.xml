@@ -2011,4 +2011,5 @@
     <string name="coords_format">Formo de koordinatoj</string>
     <string name="coords_format_descr">Formo de geografiaj koordinatoj</string>
   	<string name="storage_directory_card">Memorkarto</string>
+    <string name="shared_string_is_open">Malfermaj</string>
     </resources>

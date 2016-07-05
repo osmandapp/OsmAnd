@@ -125,7 +125,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
 	
-	<string name="download_hillshade_maps">Reliefkarte</string>
+	<string name="download_hillshade_maps">Relief</string>
 	
 	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe (Administrationsebenen 5 - 9)</string>
@@ -204,7 +204,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="native_rendering">Natives Rendern</string>
 	
 	<string name="test_voice_prompts">Sprachansagen testen</string>
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Offline-Karte über \'Einstellungen\' → \'Karten-Management\' herunterladen oder alternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
+	<string name="switch_to_raster_map_to_see">Keine offline Vektorkarte für dieses Gebiet vorhanden. Bitte offline Karte über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen oder alternativ auf online Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
 	<string name="send_files_to_osm">GPX-Dateien an OSM senden?</string>
 	<string name="validate_gpx_upload_name_pwd">Bitte tragen Sie Ihren OSM-Benutzernamen und Passwort ein, um GPX-Dateien hochzuladen.</string>
 	<string name="default_buttons_support">Unterstütze OsmAnd</string>
@@ -331,7 +331,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="routing_settings_2">Navigationseinstellungen</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
-	<string name="index_settings">Karten-Management</string>
+	<string name="index_settings">Kartenverwaltung</string>
 	<string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien</string>
 	<string name="general_settings">Allgemein</string>
 	<string name="general_settings_2">Allgemeine Einstellungen</string>
@@ -419,8 +419,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
 	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
-	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
-	<string name="local_index_descr_title">Karten-Management</string>
+	<string name="local_index_action_do">Sie wollen %2$s Element(e) %1$s. Fortfahren?</string>
+	<string name="local_index_descr_title">Kartenverwaltung</string>
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	
@@ -456,7 +456,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 		\n\t
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
-	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (systemabhängig)</string>
+	<string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen wählen (systemabhängig)</string>
 	<string name="voice_stream_voice_call">Wie Anrufe (simuliert auch Anrufe zur Auto Stereo Anlage)</string>
 	<string name="voice_stream_notification">Wie Benachrichtigungen</string>
 	<string name="voice_stream_music">Wie Medien/Musik</string>
@@ -642,7 +642,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="layer_osm_bugs">OSM-Hinweise (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
-	<string name="layer_amenity_label">Punktnamen</string>
+	<string name="layer_amenity_label">POI Namen</string>
 	<string name="layer_map">Kartenquelle…</string>
 	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
@@ -688,7 +688,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter \'Karten-Management\' herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen sowie Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind offline Karten erforderlich, die Sie in über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen können. Danach können Sie Landkarten ansehen sowie Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
@@ -1280,14 +1280,14 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel wählen</string>
-	<string name="interrupt_music_descr">Musikwiedergabe bei Navigationsanweisung vollständig unterbrechen (anstatt nur leiser zu spielen)</string>
+	<string name="interrupt_music_descr">Jegliche Musikwiedergabe bei Sprachhinweisen vollständig pausieren (nicht nur leiser spielen)</string>
 	<string name="always_center_position_on_map">Position immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
 	<string name="misc_pref_title">Verschiedenes</string>
 	<string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
 	<string name="share_route_subject">Route über OsmAnd teilen</string>
 	<string name="localization_pref_title">Ländereinstellungen</string>
-	<string name="interrupt_music">Musikwiedergabe unterbrechen</string>
+	<string name="interrupt_music">Musikwiedergabe pausieren</string>
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
 	<string name="shared_string_share">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
@@ -1899,7 +1899,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
-    <string name="osmand_running_in_background">Hintergrundbetrieb</string>
+    <string name="osmand_running_in_background">Läuft im Hintergrund</string>
     <string name="favourites_edit_dialog_title">Favoriteninformationen</string>
     <string name="simulate_your_location_stop_descr">Positions-Simulation stoppen</string>
     <string name="simulate_your_location_descr">Simulieren durch eine berechnete Route oder einer aufgezeichneten GPX-Spur</string>
@@ -2119,7 +2119,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="osm_live_support_region">Unterstützter Region</string>
     <string name="report">Bericht</string>
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
-    <string name="shared_string_move_up">Hoch bewegen</string>
+    <string name="shared_string_move_up">Nach oben verschieben</string>
     <string name="shared_string_move_down">Nach unten verschieben</string>
     <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
 <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
@@ -2175,5 +2175,11 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
     <string name="coords_format_descr">Format der geographischen Koordinaten</string>
+<<<<<<< HEAD
 		<string name="shared_string_is_open_24_7">Offen 7x24h</string>
   	</resources>
+=======
+  	<string name="storage_directory_card">Speicherkarte</string>
+    <string name="shared_string_open">Öffnen</string>
+    </resources>
+>>>>>>> weblate/master

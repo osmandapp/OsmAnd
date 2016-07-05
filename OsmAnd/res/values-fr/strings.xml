@@ -2239,4 +2239,5 @@
     <string name="coords_format_descr">Format des coordonnées géographiques</string>
   	<string name="storage_directory_card">Carte mémoire</string>
 	<string name="shared_string_open_24_7">Ouvert 24/7</string>
+    <string name="shared_string_is_open">Ouvrir</string>
     </resources>
