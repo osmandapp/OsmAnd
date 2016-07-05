@@ -201,7 +201,7 @@
     <string name="map_widget_right">Panel derecho</string>
     <string name="map_widget_left">Panel izquierdo</string>
     <string name="configure_map">Configurar mapa</string>
-    <string name="search_radius_proximity">En las proximidades de</string>
+    <string name="search_radius_proximity">En un radio de</string>
     <string name="osmo_device_not_found">Dispositivo no encontrado</string>
     <string name="osmo_no_connection_msg">No se pudo conectar con el servicio OsMo:\n- comprueba tu conexión a Internet;\n- comprueba los ajustes;\n- visita nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Usuario anónimo</string>
@@ -2190,6 +2190,7 @@
     <string name="lang_ast">Asturiano</string>
     <string name="coords_format">Formato de coordenadas</string>
     <string name="coords_format_descr">Formato para las coordenadas geográficas</string>
-  	<string name="shared_string_is_open">Abrir</string>
+  	<string name="shared_string_is_open">Abierto ahora</string>
     <string name="storage_directory_card">Tarjeta de memoria</string>
+    <string name="shared_string_is_open_24_7">Abierto 24/7</string>
     </resources>
