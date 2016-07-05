@@ -1899,7 +1899,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
-    <string name="osmand_running_in_background">Hintergrundbetrieb</string>
+    <string name="osmand_running_in_background">Läuft im Hintergrund</string>
     <string name="favourites_edit_dialog_title">Favoriteninformationen</string>
     <string name="simulate_your_location_stop_descr">Positions-Simulation stoppen</string>
     <string name="simulate_your_location_descr">Simulieren durch eine berechnete Route oder einer aufgezeichneten GPX-Spur</string>
@@ -2119,7 +2119,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="osm_live_support_region">Unterstützter Region</string>
     <string name="report">Bericht</string>
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
-    <string name="shared_string_move_up">Hoch bewegen</string>
+    <string name="shared_string_move_up">Nach oben verschieben</string>
     <string name="shared_string_move_down">Nach unten verschieben</string>
     <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
 <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
