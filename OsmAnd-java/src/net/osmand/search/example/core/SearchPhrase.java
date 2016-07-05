@@ -11,20 +11,49 @@ import net.osmand.data.LatLon;
 public class SearchPhrase {
 	
 	private List<SearchWord> words = new ArrayList<>();
-	private LatLon originalPhraseLocation;
+	private LatLon originalLocation;
+	private String text = "";
+	private String lastWord = "";
+	private CollatorStringMatcher sm;
 	
 	public SearchPhrase(LatLon location) {
-		this.originalPhraseLocation = location;
+		this.originalLocation = location;
 	}
 	
 	public List<SearchWord> getWords() {
 		return words;
 	}
 	
+	public SearchPhrase generateNewPhrase(String text) {
+		SearchPhrase sp = new SearchPhrase(originalLocation);
+		String atext = text;
+		if (text.startsWith((this.text + this.lastWord).trim())) {
+			// string is longer
+			atext = text.substring(this.text.length());
+			sp.text = this.text;
+			sp.words = new ArrayList<>(this.words);
+		} else {
+			sp.text = "";
+		}
+		// TODO Reuse previous search words if it is shorter
+		if (!atext.contains(",")) {
+			sp.lastWord = atext;
+		} else {
+			String[] ws = atext.split(",");
+			for (int i = 0; i < ws.length - 1; i++) {
+				if (ws[i].trim().length() > 0) {
+					sp.words.add(new SearchWord(ws[i].trim()));
+				}
+				sp.text += ws[i] + ",";
+			}
+		}
+		return sp;
+	}
+	
 	public List<SearchWord> excludefilterWords() {
 		 List<SearchWord> w = new ArrayList<>();
 		 for(SearchWord s : words) {
-			 if(s.getType() != ObjectType.NAME_FILTER) {
+			 if(s.getResult() == null) {
 				 w.add(s);
 			 }
 		 }
@@ -36,7 +65,7 @@ public class SearchPhrase {
 			SearchWord sw = words.get(i);
 			if(sw.getType() == ObjectType.POI) {
 				return true;
-			} else if(sw.getType() != ObjectType.NAME_FILTER) {
+			} else if(sw.getType() != ObjectType.UNKNOWN_NAME_FILTER) {
 				return false;
 			}
 		}
@@ -44,8 +73,11 @@ public class SearchPhrase {
 	}
 	
 	public StringMatcher getNameStringMatcher() {
-		// TODO
-		return new CollatorStringMatcher("NameFitler", StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		if(sm != null) {
+			return sm;
+		}
+		sm = new CollatorStringMatcher(lastWord, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		return sm;
 	}
 	
 	public boolean hasSameConstantWords(SearchPhrase p) {
@@ -55,8 +87,9 @@ public class SearchPhrase {
 	public String getStringRerpresentation() {
 		StringBuilder sb = new StringBuilder();
 		for(SearchWord s : words) {
-			sb.append(s).append(", ");
+			sb.append(s.getWord()).append(", ");
 		}
+		sb.append(lastWord);
 		return sb.toString();
 	}
 	
@@ -66,11 +99,16 @@ public class SearchPhrase {
 	}
 
 	public boolean isNoSelectedType() {
-		return true;
+		return words.isEmpty();
 	}
 
 	public boolean isEmpty() {
-		return words.isEmpty();
+		return words.isEmpty() && lastWord.isEmpty();
+	}
+	
+	
+	public String getLastWord() {
+		return lastWord;
 	}
 
 	public LatLon getLastTokenLocation() {
@@ -81,7 +119,9 @@ public class SearchPhrase {
 			}
 		}
 		// last token or myLocationOrVisibleMap if not selected 
-		return originalPhraseLocation;
+		return originalLocation;
 	}
+
+	
 
 }

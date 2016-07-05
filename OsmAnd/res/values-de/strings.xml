@@ -2175,11 +2175,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
     <string name="coords_format_descr">Format der geographischen Koordinaten</string>
-<<<<<<< HEAD
 		<string name="shared_string_is_open_24_7">Offen 7x24h</string>
-  	</resources>
-=======
   	<string name="storage_directory_card">Speicherkarte</string>
     <string name="shared_string_open">Öffnen</string>
-    </resources>
->>>>>>> weblate/master
+</resources>

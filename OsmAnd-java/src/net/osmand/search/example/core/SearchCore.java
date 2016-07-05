@@ -180,8 +180,8 @@ public class SearchCore {
 	
 	private void callToSearchCoreAPI(
 			SearchPhrase p,
-			ResultMatcher<List<SearchResult<?>>> publisher,
-			ResultMatcher<SearchResult<?>> visitor) {
+			ResultMatcher<List<SearchResult>> publisher,
+			ResultMatcher<SearchResult> visitor) {
 		// sort apis by prioirity to search phrase
 		// call apis in for loop
 	}

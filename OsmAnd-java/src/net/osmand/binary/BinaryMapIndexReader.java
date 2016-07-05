@@ -385,24 +385,27 @@ public class BinaryMapIndexReader {
 		return file;
 	}
 
-	private List<String> getCountryAndRegionNames() {
-		return new ArrayList<>(Arrays.asList(getRegionNames().get(0).split("_")));
-	}
 
 	public String getCountryName() {
-		return getCountryAndRegionNames().get(0);
+		List<String> rg = getRegionNames();
+		if(rg.size() > 0) {
+			return rg.get(0).split("_")[0];			
+		}
+		return "";
+	}
+	
+	public String getRegionName() {
+		List<String> rg = getRegionNames();
+		if (rg.size() == 0) {
+			rg.add(file.getName());
+		}
+		String ls = rg.get(0);
+		if (ls.lastIndexOf('_') != -1) {
+			return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+		}
+		return ls;
 	}
 
-	private String getRegionName() {
-		List<String> names = getCountryAndRegionNames();
-		if (names.size() >= 2) {
-			String region = names.get(1);
-			region = region.substring(0, 1).toUpperCase() + region.substring(1);
-			return region;
-		} else {
-			return null;
-		}
-	}
 
 	public int readByte() throws IOException {
 		byte b = codedIS.readRawByte();
