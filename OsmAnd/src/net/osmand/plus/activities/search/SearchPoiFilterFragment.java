@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package net.osmand.plus.activities.search;
 
@@ -51,7 +51,6 @@ import java.util.Comparator;
 import java.util.List;
 
 
-
 public class SearchPoiFilterFragment extends OsmAndListFragment implements SearchActivityChild {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
@@ -61,21 +60,21 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	private EditText searchEditText;
 	private SearchPoiByNameTask currentTask = null;
 	private PoiFiltersAdapter poiFitlersAdapter;
-	
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.searchpoi, container, false);
-        v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
-        ((EditText)v.findViewById(R.id.searchEditText)).setHint(R.string.search_poi_category_hint);
-        ((ImageView)v.findViewById(R.id.search_icon)).setImageDrawable(
-        		getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark));
-        
-        setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
-        setupOptions((ImageView) v.findViewById(R.id.options));
-        v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
-        return v;
-    }
-	
+	                         Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.searchpoi, container, false);
+		v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
+		((EditText) v.findViewById(R.id.searchEditText)).setHint(R.string.search_poi_category_hint);
+		((ImageView) v.findViewById(R.id.search_icon)).setImageDrawable(
+				getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark));
+
+		setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
+		setupOptions((ImageView) v.findViewById(R.id.options));
+		v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
+		return v;
+	}
+
 	private void setupOptions(ImageView options) {
 		options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		options.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +84,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			}
 		});
 	}
-	
+
 	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return poiFitlersAdapter;
@@ -104,7 +103,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if(currentTask != null) {
+				if (currentTask != null) {
 					currentTask.cancel(true);
 				}
 				currentTask = new SearchPoiByNameTask();
@@ -125,8 +124,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			}
 		});
 	}
-	
-	
+
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -134,7 +133,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		setListAdapter(poiFitlersAdapter);
 		setHasOptionsMenu(true);
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -142,17 +141,17 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	}
 
 	public List<Object> getFilters(String s) {
-		List<Object> filters = new ArrayList<Object>() ;
+		List<Object> filters = new ArrayList<Object>();
 		OsmandApplication app = getApp();
-		if(app == null) {
+		if (app == null) {
 			return filters;
 		}
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
 		if (Algorithms.isEmpty(s)) {
 			filters.addAll(poiFilters.getTopDefinedPoiFilters());
 		} else {
-			for(PoiUIFilter pf : poiFilters.getTopDefinedPoiFilters()) {
-				if(!pf.isStandardFilter() && pf.getName().toLowerCase().startsWith(s.toLowerCase())) {
+			for (PoiUIFilter pf : poiFilters.getTopDefinedPoiFilters()) {
+				if (!pf.isStandardFilter() && pf.getName().toLowerCase().startsWith(s.toLowerCase())) {
 					filters.add(pf);
 				}
 			}
@@ -164,30 +163,30 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 				public int compare(AbstractPoiType lhs, AbstractPoiType rhs) {
 					return inst.compare(lhs.getTranslation(), rhs.getTranslation());
 				}
-				
+
 			});
-			for(AbstractPoiType p : res) {
+			for (AbstractPoiType p : res) {
 				filters.add(p);
 			}
 			filters.add(poiFilters.getSearchByNamePOIFilter());
-			if(OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+			if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 				filters.add(poiFilters.getNominatimPOIFilter());
 				filters.add(poiFilters.getNominatimAddressFilter());
 			}
 		}
 		return filters;
 	}
-	
-	public OsmandApplication getApp(){
+
+	public OsmandApplication getApp() {
 		FragmentActivity activity = getActivity();
-		if(activity == null) {
+		if (activity == null) {
 			return null;
 		}
 		return (OsmandApplication) getActivity().getApplication();
 	}
-	
-	
-	private void updateIntentToLaunch(Intent intentToLaunch){
+
+
+	private void updateIntentToLaunch(Intent intentToLaunch) {
 		LatLon loc = null;
 		boolean searchAround = false;
 		FragmentActivity parent = getActivity();
@@ -198,11 +197,11 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		if (loc == null) {
 			loc = getApp().getSettings().getLastKnownMapLocation();
 		}
-		if(loc != null) {
+		if (loc != null) {
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 		}
-		if(searchAround) {
+		if (searchAround) {
 			intentToLaunch.putExtra(SearchActivity.SEARCH_NEARBY, true);
 		}
 	}
@@ -226,8 +225,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			showFilterActivity(model.getFilterId());
 		} else {
 			PoiUIFilter custom = getApp().getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ((AbstractPoiType) item).getKeyName());
-			if(custom != null) {
-				if(item instanceof PoiType && ((PoiType) item).isAdditional()) {
+			if (custom != null) {
+				if (item instanceof PoiType && ((PoiType) item).isAdditional()) {
 					// it is already set
 				} else {
 					custom.setFilterByName(null);
@@ -254,19 +253,19 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			String filter = params[0];
 			return getFilters(filter);
 		}
-		
+
 		@Override
 		protected void onPostExecute(List<Object> result) {
-			if(!isCancelled() && isVisible()){
+			if (!isCancelled() && isVisible()) {
 				poiFitlersAdapter.setResult(result);
 			}
 		}
-		
+
 	}
 
 
 	class PoiFiltersAdapter extends ArrayAdapter<Object> {
-		
+
 		PoiFiltersAdapter(List<Object> list) {
 			super(getActivity(), R.layout.searchpoifolder_list, list);
 		}
@@ -274,7 +273,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		public void setResult(List<Object> filters) {
 			setNotifyOnChange(false);
 			clear();
-			for(Object o : filters) {
+			for (Object o : filters) {
 				add(o);
 			}
 			setNotifyOnChange(true);
@@ -296,8 +295,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 				final PoiUIFilter model = (PoiUIFilter) item;
 				if (RenderingIcons.containsBigIcon(model.getIconId())) {
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getIconId()));
-				} else if(PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) || 
-						model instanceof NominatimPoiFilter){
+				} else if (PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) ||
+						model instanceof NominatimPoiFilter) {
 					icon.setImageResource(R.drawable.mx_name_finder);
 				} else {
 					icon.setImageResource(R.drawable.mx_user_defined);
@@ -309,22 +308,22 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), st.getIconKeyName()));
 				} else if (st instanceof PoiType
 						&& RenderingIcons.containsBigIcon(((PoiType) st).getOsmTag() + "_"
-								+ ((PoiType) st).getOsmValue())) {
+						+ ((PoiType) st).getOsmValue())) {
 					icon.setImageResource(RenderingIcons.getBigIconResourceId(((PoiType) st).getOsmTag() + "_"
 							+ ((PoiType) st).getOsmValue()));
 				} else {
 					icon.setImageDrawable(null);
 				}
 				name = st.getTranslation();
-				if(st.isAdditional()) {
-					name += " (" + ((PoiType) st).getParentType().getTranslation() + ")"; 
+				if (st.isAdditional()) {
+					name += " (" + ((PoiType) st).getParentType().getTranslation() + ")";
 				}
 			}
 			label.setText(name);
 			return (row);
 		}
 	}
-	
+
 	private void showOptionsMenu(View v) {
 		// Show menu with search all, name finder, name finder poi
 		IconsCache iconsCache = getMyApplication().getIconsCache();
@@ -347,7 +346,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
-		if(getActivity() instanceof SearchActivity) {
+		if (getActivity() instanceof SearchActivity) {
 			((SearchActivity) getActivity()).getClearToolbar(false);
 		}
 	}
