@@ -2215,5 +2215,6 @@
     <string name="coords_format">Format współrzędnych</string>
     <string name="coords_format_descr">Format współrzędnych geograficznych</string>
   	<string name="storage_directory_card">Karta pamięci</string>
-    <string name="shared_string_is_open">Otwarte</string>
+    <string name="shared_string_is_open">Otwarte teraz</string>
+    <string name="shared_string_is_open_24_7">Otwarte 24/7</string>
     </resources>
