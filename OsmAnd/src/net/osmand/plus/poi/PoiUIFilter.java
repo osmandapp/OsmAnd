@@ -38,12 +38,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter> {
-	
+
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
-	
+
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
 			LinkedHashSet<String>>();
 	private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
@@ -52,15 +52,15 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	protected String standardIconId = "";
 	protected String name;
 	protected boolean isStandardFilter;
-	
+
 	protected final OsmandApplication app;
-	
+
 	protected int distanceInd = 0;
 	// in kilometers
-	protected double[] distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500};
-	
+	protected double[] distanceToSearchValues = new double[]{1, 2, 5, 10, 20, 50, 100, 200, 500};
+
 	private final MapPoiTypes poiTypes;
-	
+
 	protected String filterByName = null;
 	protected String savedFilterByName = null;
 	protected List<Amenity> currentSearchResult = null;
@@ -71,21 +71,21 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		isStandardFilter = true;
 		standardIconId = (type == null ? null : type.getKeyName());
 		filterId = STD_PREFIX + standardIconId + idSuffix;
-		
+
 		poiTypes = application.getPoiTypes();
 		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : (type.getTranslation() + idSuffix); //$NON-NLS-1$
 		if (type == null) {
 			initSearchAll();
 			updatePoiAdditionals();
 		} else {
-			if(type.isAdditional()) {
+			if (type.isAdditional()) {
 				setSavedFilterByName(type.getKeyName().replace('_', ':'));
 			}
 			updateTypesToAccept(type);
 		}
 	}
-	
-	
+
+
 	// search by name standard
 	protected PoiUIFilter(OsmandApplication application) {
 		this.app = application;
@@ -95,8 +95,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	// constructor for user defined filters
-	public PoiUIFilter(String name, String filterId, 
-			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
+	public PoiUIFilter(String name, String filterId,
+	                   Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, OsmandApplication app) {
 		this.app = app;
 		isStandardFilter = false;
 		poiTypes = app.getPoiTypes();
@@ -123,38 +123,38 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public String getFilterByName() {
 		return filterByName;
 	}
-	
+
 	public void setFilterByName(String filterByName) {
 		this.filterByName = filterByName;
 		updateFilterResults();
 	}
-	
+
 	public void updateFilterResults() {
 		List<Amenity> prev = currentSearchResult;
 		if (prev != null) {
 			AmenityNameFilter nameFilter = getNameFilter(filterByName);
 			List<Amenity> newResults = new ArrayList<Amenity>();
-			for(Amenity a : prev) {
-				if(nameFilter.accept(a)) {
+			for (Amenity a : prev) {
+				if (nameFilter.accept(a)) {
 					newResults.add(a);
 				}
 			}
 			currentSearchResult = newResults;
 		}
 	}
-	
+
 	public void setSavedFilterByName(String filterByName) {
 		this.filterByName = filterByName;
 		this.savedFilterByName = filterByName;
 	}
-	
+
 	public String getSavedFilterByName() {
 		return savedFilterByName;
 	}
-	
-	
+
+
 	public List<Amenity> searchAgain(double lat, double lon) {
-		List<Amenity> amenityList ;
+		List<Amenity> amenityList;
 		if (currentSearchResult != null) {
 			amenityList = currentSearchResult;
 		} else {
@@ -163,47 +163,47 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}
-	
 
-	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher){
+
+	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher) {
 		if (distanceInd < distanceToSearchValues.length - 1) {
-			distanceInd ++;
+			distanceInd++;
 		}
-		List<Amenity> amenityList = searchAmenities( latitude, longitude, matcher);
+		List<Amenity> amenityList = searchAmenities(latitude, longitude, matcher);
 		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
 		return amenityList;
 	}
 
-	private void initSearchAll(){
-		for(PoiCategory t : poiTypes.getCategories(false)){
+	private void initSearchAll() {
+		for (PoiCategory t : poiTypes.getCategories(false)) {
 			acceptedTypes.put(t, null);
 		}
-		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
+		distanceToSearchValues = new double[]{0.5, 1, 2, 5, 10, 20, 50, 100};
 	}
 
-	public boolean isSearchFurtherAvailable(){
+	public boolean isSearchFurtherAvailable() {
 		return distanceInd < distanceToSearchValues.length - 1;
 	}
 
 	public String getSearchArea(boolean next) {
 		int distInd = distanceInd;
 		if (next && (distanceInd < distanceToSearchValues.length - 1)) {
-		//This is workaround for the SearchAmenityTask.onPreExecute() case
+			//This is workaround for the SearchAmenityTask.onPreExecute() case
 			distInd = distanceInd + 1;
 		}
 		double val = distanceToSearchValues[distInd];
-		if(val >= 1){
-			return " < " + OsmAndFormatter.getFormattedDistance(((int)val * 1000), app);  //$NON-NLS-1$//$NON-NLS-2$
+		if (val >= 1) {
+			return " < " + OsmAndFormatter.getFormattedDistance(((int) val * 1000), app);  //$NON-NLS-1$//$NON-NLS-2$
 		} else {
 			return " < " + OsmAndFormatter.getFormattedDistance(500, app);  //$NON-NLS-1$
 		}
 	}
-	
-	public void clearPreviousZoom(){
+
+	public void clearPreviousZoom() {
 		distanceInd = 0;
 	}
-	
-	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit, ResultMatcher<Amenity> matcher){
+
+	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit, ResultMatcher<Amenity> matcher) {
 		clearPreviousZoom();
 		List<Amenity> amenityList = searchAmenities(lat, lon, matcher);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
@@ -221,24 +221,24 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 				amenityList = searchFurther(lat, lon, matcher);
 			}
 		}
-		return amenityList; 
+		return amenityList;
 	}
-	
+
 	public boolean isAutomaticallyIncreaseSearch() {
 		return true;
 	}
-	
+
 	private List<Amenity> searchAmenities(double lat, double lon, ResultMatcher<Amenity> matcher) {
 		double baseDistY = MapUtils.getDistance(lat, lon, lat - 1, lon);
 		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
 		double distance = distanceToSearchValues[distanceInd] * 1000;
-		double topLatitude = Math.min(lat + (distance/ baseDistY ), 84.);
-		double bottomLatitude = Math.max(lat - (distance/ baseDistY ), -84.);
+		double topLatitude = Math.min(lat + (distance / baseDistY), 84.);
+		double bottomLatitude = Math.max(lat - (distance / baseDistY), -84.);
 		double leftLongitude = Math.max(lon - (distance / baseDistX), -180);
-		double rightLongitude = Math.min(lon + (distance/ baseDistX), 180);
+		double rightLongitude = Math.min(lon + (distance / baseDistX), 180);
 		return searchAmenitiesInternal(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
 	}
-	
+
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom,
 			ResultMatcher<Amenity> matcher) {
 		List<Amenity> results = new ArrayList<Amenity>();
@@ -259,21 +259,21 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		results.addAll(amenities);
 		return results;
 	}
-	
+
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locs, int poiSearchDeviationRadius) {
 		return app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius, this, wrapResultMatcher(null));
 	}
-	
+
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenities(this, 
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, -1, wrapResultMatcher(matcher));
 	}
-	
+
 	public AmenityNameFilter getNameFilter(String filter) {
 		if (Algorithms.isEmpty(filter)) {
 			return new AmenityNameFilter() {
-				
+
 				@Override
 				public boolean accept(Amenity a) {
 					return true;
@@ -284,16 +284,16 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		String[] items = filter.split(" ");
 		boolean allTime = false;
 		boolean open = false;
-		Map<PoiType, String> poiAdditionalsFilter =  null;
-		for(String s : items) {
+		Map<PoiType, String> poiAdditionalsFilter = null;
+		for (String s : items) {
 			s = s.trim();
-			if(!Algorithms.isEmpty(s)){
-				if(getNameToken24H().equalsIgnoreCase(s)){
+			if (!Algorithms.isEmpty(s)) {
+				if (getNameToken24H().equalsIgnoreCase(s)) {
 					allTime = true;
-				} else if(getNameTokenOpen().equalsIgnoreCase(s)){
+				} else if (getNameTokenOpen().equalsIgnoreCase(s)) {
 					open = true;
-				} else if(poiAdditionals.containsKey(s.toLowerCase())) {
-					if(poiAdditionalsFilter == null) {
+				} else if (poiAdditionals.containsKey(s.toLowerCase())) {
+					if (poiAdditionalsFilter == null) {
 						poiAdditionalsFilter = new LinkedHashMap<PoiType, String>();
 					}
 					poiAdditionalsFilter.put(poiAdditionals.get(s.toLowerCase()), null);
@@ -311,7 +311,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 				nmFilter.length() > 0 ?
 				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
 		return new AmenityNameFilter() {
-			
+
 			@Override
 			public boolean accept(Amenity a) {
 				if (sm != null) {
@@ -320,14 +320,14 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 						return false;
 					}
 				}
-				if(poiAdditionals != null) {
+				if (poiAdditionals != null) {
 					Iterator<Entry<PoiType, String>> it = poiAdditionals.entrySet().iterator();
-					while(it.hasNext()) {
+					while (it.hasNext()) {
 						Entry<PoiType, String> e = it.next();
 						String inf = a.getAdditionalInfo(e.getKey().getKeyName());
-						if(inf == null) {
+						if (inf == null) {
 							return false;
-						} else if(e.getValue() != null && !e.getValue().equalsIgnoreCase(inf)) {
+						} else if (e.getValue() != null && !e.getValue().equalsIgnoreCase(inf)) {
 							return false;
 						}
 					}
@@ -354,11 +354,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			}
 		};
 	}
-	
+
 	public String getNameToken24H() {
 		return app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
 	}
-	
+
 	public String getNameTokenOpen() {
 		return app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
 	}
@@ -366,7 +366,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	private ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
 		final AmenityNameFilter nm = getNameFilter(filterByName);
 		return new ResultMatcher<Amenity>() {
-			
+
 			@Override
 			public boolean publish(Amenity a) {
 				if (nm.accept(a)) {
@@ -383,11 +383,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			}
 		};
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
-	
+
 	public String getGeneratedName(int chars) {
 		if (!filterId.equals(CUSTOM_FILTER_ID) ||
 				areAllTypesAccepted() || acceptedTypes.isEmpty()) {
@@ -425,31 +425,31 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		}
 		return res.toString();
 	}
-	
+
 	/**
 	 * @param type
 	 * @return null if all subtypes are accepted/ empty list if type is not accepted at all
 	 */
-	public Set<String> getAcceptedSubtypes(PoiCategory type){
-		if(!acceptedTypes.containsKey(type)){
+	public Set<String> getAcceptedSubtypes(PoiCategory type) {
+		if (!acceptedTypes.containsKey(type)) {
 			return Collections.emptySet();
 		}
 		return acceptedTypes.get(type);
 	}
-	
-	public boolean isTypeAccepted(PoiCategory t){
+
+	public boolean isTypeAccepted(PoiCategory t) {
 		return acceptedTypes.containsKey(t);
 	}
-	
+
 	public void clearFilter() {
 		acceptedTypes = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
 		poiAdditionals.clear();
 	}
-	
-	public boolean areAllTypesAccepted(){
-		if(poiTypes.getCategories(false).size() == acceptedTypes.size()){
-			for(PoiCategory a : acceptedTypes.keySet()){
-				if(acceptedTypes.get(a) != null){
+
+	public boolean areAllTypesAccepted() {
+		if (poiTypes.getCategories(false).size() == acceptedTypes.size()) {
+			for (PoiCategory a : acceptedTypes.keySet()) {
+				if (acceptedTypes.get(a) != null) {
 					return false;
 				}
 			}
@@ -466,19 +466,19 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			fillPoiAdditionals(pt);
 		}
 	}
-	
+
 	private void fillPoiAdditionals(AbstractPoiType pt) {
 		for (PoiType add : pt.getPoiAdditionals()) {
 			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
 			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
 		}
 		if (pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
-			for(PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
+			for (PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
 				fillPoiAdditionals(ps);
 			}
 		}
 	}
-	
+
 	private void updatePoiAdditionals() {
 		Iterator<Entry<PoiCategory, LinkedHashSet<String>>> e = acceptedTypes.entrySet().iterator();
 		poiAdditionals.clear();
@@ -527,15 +527,15 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		combineWithPoiFilter(f);
 	}
 
-	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes(){
+	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes() {
 		return new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(acceptedTypes);
 	}
-	
-	public void selectSubTypesToAccept(PoiCategory t, LinkedHashSet<String> accept){
+
+	public void selectSubTypesToAccept(PoiCategory t, LinkedHashSet<String> accept) {
 		acceptedTypes.put(t, accept);
 		fillPoiAdditionals(t);
 	}
-	
+
 	public void setTypeToAccept(PoiCategory poiCategory, boolean b) {
 		if (b) {
 			acceptedTypes.put(poiCategory, null);
@@ -544,16 +544,16 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		}
 		updatePoiAdditionals();
 	}
-	
-	public String getFilterId(){
+
+	public String getFilterId() {
 		return filterId;
 	}
-	
+
 	public Map<String, PoiType> getPoiAdditionals() {
 		return poiAdditionals;
 	}
-	
-	public String getIconId(){
+
+	public String getIconId() {
 		if (filterId.startsWith(STD_PREFIX)) {
 			return standardIconId;
 		} else if (filterId.startsWith(USER_PREFIX)) {
@@ -561,19 +561,19 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		}
 		return filterId;
 	}
-	
+
 	public boolean isStandardFilter() {
 		return isStandardFilter;
 	}
-	
+
 	public void setStandardFilter(boolean isStandardFilter) {
 		this.isStandardFilter = isStandardFilter;
 	}
-	
+
 	public Context getApplication() {
 		return app;
 	}
-	
+
 	@Override
 	public boolean accept(PoiCategory type, String subtype) {
 		if (type == null) {
@@ -582,11 +582,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		if (!poiTypes.isRegisteredType(type)) {
 			type = poiTypes.getOtherPoiCategory();
 		}
-		if (!acceptedTypes.containsKey(type)){
+		if (!acceptedTypes.containsKey(type)) {
 			return false;
 		}
 		LinkedHashSet<String> set = acceptedTypes.get(type);
-		if (set == null){
+		if (set == null) {
 			return true;
 		}
 		return set.contains(subtype);
@@ -603,13 +603,13 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		if (another.filterId.equals(this.filterId)) {
 			return 0;
 		} else {
-            return this.name.compareTo(another.name);
+			return this.name.compareTo(another.name);
 		}
 	}
 
 	public interface AmenityNameFilter {
-		
-		public boolean accept(Amenity a) ;
+
+		public boolean accept(Amenity a);
 	}
 
 }
