@@ -419,7 +419,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 		} else {
 			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice())) {
-				appInitializer.	initVoiceDataInDifferentThread(uiContext, voiceProvider, run, showDialog);
+				appInitializer.initVoiceDataInDifferentThread(uiContext, voiceProvider, run, showDialog);
 			}
 		}
 
