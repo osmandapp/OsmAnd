@@ -13,7 +13,6 @@
     <string name="shared_string_copy">Copiar</string>
     <string name="filter_poi_hint">Filtrar por nombre</string>
     <string name="search_poi_category_hint">Escribe para buscar todas</string>
-    <string name="shared_string_is_open">Abrir</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistente al mapeador OSM</string>
     <string name="agps_info">Información A-GPS</string>
     <string name="shared_string_manage">Gestionar</string>

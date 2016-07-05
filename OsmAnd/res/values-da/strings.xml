@@ -1863,7 +1863,6 @@
     <string name="shared_string_search">Søg</string>
     <string name="shared_string_places">Steder</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kortassistent</string>
-    <string name="shared_string_is_open">Åben</string>
     <string name="shared_string_manage">Administrer</string>
     <string name="shared_string_edit">Rediger</string>
     <string name="filter_poi_hint">Filtrer efter navn</string>
