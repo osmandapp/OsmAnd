@@ -1575,7 +1575,7 @@
     <string name="map_widget_left">Panneau de gauche</string>
     <string name="shared_string_show">Afficher</string>
     <string name="configure_map">Configurer la carte</string>
-    <string name="search_radius_proximity">A proximité de</string>
+    <string name="search_radius_proximity">A l\'intérieur</string>
     <string name="rendering_category_routes">Itinéraires</string>
 
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
@@ -1754,7 +1754,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">Assistant pour la cartographie OSM</string>
     <string name="shared_string_manage">Gérer</string>
     <string name="shared_string_edit">Modifier</string>
-    <string name="shared_string_is_open">Ouvrir</string>
+    <string name="shared_string_is_open">Ouvert</string>
     <string name="filter_poi_hint">Filtrer par nom</string>
     <string name="search_poi_category_hint">Rechercher partout</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
@@ -2239,4 +2239,5 @@
     <string name="coords_format_descr">Format des coordonnées géographiques</string>
   	<string name="storage_directory_card">Carte mémoire</string>
 	<string name="shared_string_open_24_7">Ouvert 24/7</string>
+    <string name="shared_string_is_open_24_7">Ouvert 24/7</string>
     </resources>
