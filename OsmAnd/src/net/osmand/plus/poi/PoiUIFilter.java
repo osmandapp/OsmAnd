@@ -333,7 +333,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 					}
 				}
 				if (allTime) {
-					if (!"24/7".equalsIgnoreCase(a.getOpeningHours())) {
+					if (!"24/7".equalsIgnoreCase(a.getOpeningHours()) && !"Mo-Su 00:00-24:00".equalsIgnoreCase(a.getOpeningHours()) && !"Su-Mo 00:00-24:00".equalsIgnoreCase(a.getOpeningHours())) {
 						return false;
 					}
 				}
