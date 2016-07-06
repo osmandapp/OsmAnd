@@ -132,6 +132,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (mTts != null){
 			mTts.stop();
 		}
+		ttsRequests = 0;
 	}
 
 	public void sendAlertToPebble(String bld) {
