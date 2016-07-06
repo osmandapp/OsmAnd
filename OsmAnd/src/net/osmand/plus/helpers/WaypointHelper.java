@@ -49,7 +49,7 @@ public class WaypointHelper {
 	private static final int ANNOUNCED_DONE = 2;
 
 	private int searchDeviationRadius = 500;
-	private int poiSearchDeviationRadius = 150;
+	private int poiSearchDeviationRadius = 100;
 	private static final int LONG_ANNOUNCE_RADIUS = 700;
 	private static final int SHORT_ANNOUNCE_RADIUS = 150;
 	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
