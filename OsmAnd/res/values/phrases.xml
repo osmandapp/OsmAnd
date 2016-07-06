@@ -2941,4 +2941,18 @@
 
 	<string name="poi_greenhouse_horticulture">Greenhouse horticulture</string>
 
+	<string name="poi_voltage">Voltage</string>
+	<string name="poi_generator_output_electricity">Output power</string>
+	<string name="poi_generator_output_electricity_yes">Output: electricity</string>
+	<string name="poi_generator_output_hot_water">Output power of hot water</string>
+	<string name="poi_generator_output_hot_water_yes">Output: hot water</string>
+	<string name="poi_generator_output_steam_yes">Output: steam</string>
+	<string name="poi_generator_output_hot_air_yes">Output: hot air</string>
+	<string name="poi_generator_output_cold_water_yes">Output: cold water</string>
+	<string name="poi_generator_output_compressed_air">Output power of compressed air</string>
+	<string name="poi_generator_output_compressed_air_yes">Output: compressed air</string>
+	<string name="poi_generator_output_vacuum_yes">Output: vacuum</string>
+	<string name="poi_generator_output_biogas">Output power of biogas</string>
+	<string name="poi_generator_output_biogas_yes">Output: biogas</string>
+
 </resources>

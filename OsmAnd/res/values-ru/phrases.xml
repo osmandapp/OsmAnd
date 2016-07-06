@@ -2937,4 +2937,18 @@
 
 	<string name="poi_greenhouse_horticulture">Парниковое садоводство</string>
 
+	<string name="poi_voltage">Напряжение</string>
+	<string name="poi_generator_output_electricity">Выходная мощность</string>
+	<string name="poi_generator_output_electricity_yes">Вырабатывает электричество</string>
+	<string name="poi_generator_output_hot_water">Выходная мощность горячей воды</string>
+	<string name="poi_generator_output_hot_water_yes">Вырабатывает горячую воду</string>
+	<string name="poi_generator_output_steam_yes">Вырабатывает пар</string>
+	<string name="poi_generator_output_hot_air_yes">Вырабатывает горячий воздух</string>
+	<string name="poi_generator_output_cold_water_yes">Производит: холодная вода</string>
+	<string name="poi_generator_output_compressed_air">Выходная мощность сжатого воздуха</string>
+	<string name="poi_generator_output_compressed_air_yes">Производит: сжатый воздух</string>
+	<string name="poi_generator_output_vacuum_yes">Производит: вакуум</string>
+	<string name="poi_generator_output_biogas">Выходная мощность биогаза</string>
+	<string name="poi_generator_output_biogas_yes">Производит: биогаз</string>
+
 </resources>
