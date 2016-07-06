@@ -58,7 +58,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		gl.setPadding(3, 3, 3, 3);
 		
 		TextView tv = new TextView(this);
-		tv.setText("Press buttons and listen various voice instructions, if you don't hear anything probably they are missed.");
+		tv.setText("Tap a button and listen to the corresponding voice prompt to identify missing or faulty propmts.");
 		tv.setPadding(0, 5, 0, 7);
 		
 		ScrollView sv = new ScrollView(this);
@@ -111,6 +111,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				final OsmandApplication app = (OsmandApplication) getApplication();
+				getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ")");
 				app.getSettings().VOICE_PROVIDER.set(entrieValues[which]);
 				app.showDialogInitializingCommandPlayer(TestVoiceActivity.this, true, new Runnable() {
 					
