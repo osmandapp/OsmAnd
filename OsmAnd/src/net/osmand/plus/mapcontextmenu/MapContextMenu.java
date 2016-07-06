@@ -27,6 +27,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -49,7 +50,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
-		MapMarkerChangedListener {
+		MapMarkerChangedListener, TargetPointChangedListener {
 
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
@@ -79,6 +80,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private int favActionIconId;
 
 	private MenuAction searchDoneAction;
+
+	public MapContextMenu() {
+	}
 
 	@Override
 	public MapActivity getMapActivity() {
@@ -214,9 +218,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController;
 	}
 
-	public MapContextMenu() {
-	}
-
 	public boolean init(@NonNull LatLon latLon,
 						@Nullable PointDescription pointDescription,
 						@Nullable Object object) {
@@ -281,6 +282,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 		if (object instanceof MapMarker) {
 			mapActivity.getMyApplication().getMapMarkersHelper().addListener(this);
+		} else if (object instanceof TargetPoint) {
+			mapActivity.getMyApplication().getTargetPointsHelper().addPointListener(this);
 		}
 
 		return true;
@@ -382,18 +385,30 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	@Override
 	public void onMapMarkerChanged(MapMarker mapMarker) {
-		if (object.equals(mapMarker)) {
+		if (object != null && object.equals(mapMarker)) {
 			String address = mapMarker.getOnlyName();
-			nameStr = address;
-			pointDescription.setName(address);
-			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
-			if (fragmentRef != null)
-				fragmentRef.get().refreshTitle();
+			updateTitle(address);
 		}
 	}
 
 	@Override
 	public void onMapMarkersChanged() {
+	}
+
+	@Override
+	public void onTargetPointChanged(TargetPoint targetPoint) {
+		if (object != null && object.equals(targetPoint)) {
+			String address = targetPoint.getOnlyName();
+			updateTitle(address);
+		}
+	}
+
+	private void updateTitle(String address) {
+		nameStr = address;
+		pointDescription.setName(address);
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().refreshTitle();
 	}
 
 	@Override
