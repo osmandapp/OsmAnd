@@ -123,7 +123,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 							addButtons(ll, p);
 						}						
 					}
-				}, true);
+				}, true, true);
 				dialog.dismiss();
 			}
 		});
