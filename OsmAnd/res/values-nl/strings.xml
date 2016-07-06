@@ -2293,4 +2293,5 @@
     <string name="shared_string_is_open_24_7">24 x 7 geopend</string>
     <string name="storage_directory_card">Geheugenkaart</string>
     <string name="coords_format_descr">Formaat voor de geografische coördinaten</string>
-  	</resources>
+  	<string name="map_widget_search">Zoek</string>
+	</resources>
