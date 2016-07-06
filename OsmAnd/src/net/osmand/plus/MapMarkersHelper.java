@@ -90,25 +90,15 @@ public class MapMarkersHelper {
 
 			if (colorIndex != mapMarker.colorIndex) return false;
 			if (pos != mapMarker.pos) return false;
-			//if (index != mapMarker.index) return false;
-			//if (history != mapMarker.history) return false;
-			//if (selected != mapMarker.selected) return false;
-			//if (dist != mapMarker.dist) return false;
 			return point.equals(mapMarker.point);
-			//return pointDescription != null ? pointDescription.equals(mapMarker.pointDescription) : mapMarker.pointDescription == null;
 
 		}
 
 		@Override
 		public int hashCode() {
 			int result = point.hashCode();
-			result = 31 * result + (pointDescription != null ? pointDescription.hashCode() : 0);
 			result = 31 * result + colorIndex;
 			result = 31 * result + pos;
-			result = 31 * result + index;
-			result = 31 * result + (history ? 1 : 0);
-			result = 31 * result + (selected ? 1 : 0);
-			result = 31 * result + dist;
 			return result;
 		}
 	}

@@ -268,14 +268,15 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
 									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
 		boolean result = false;
+		TargetPoint newTargetPoint = null;
 		if (o instanceof TargetPoint) {
-			TargetPoint point = (TargetPoint) o;
-			TargetPointsHelper tph = map.getMyApplication().getTargetPointsHelper();
-			tph.navigateToPoint(position, true, -1, point.getPointDescription(map));
+			TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
+			targetPointsHelper.navigateToPoint(position, true, -1, new PointDescription(PointDescription.POINT_TYPE_LOCATION, ""));
+			newTargetPoint = targetPointsHelper.getPointToNavigate();
 			result = true;
 		}
 		if (callback != null) {
-			callback.onApplyMovedObject(result, o);
+			callback.onApplyMovedObject(result, newTargetPoint == null ? o : newTargetPoint);
 		}
 	}
 }

@@ -26,10 +26,15 @@ public class TargetPointsHelper {
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 	private List<StateChangedListener<Void>> listeners = new ArrayList<>();
+	private List<TargetPointChangedListener> pointListeners = new ArrayList<>();
 	private OsmandApplication ctx;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
+
+	public interface TargetPointChangedListener {
+		void onTargetPointChanged(TargetPoint targetPoint);
+	}
 
 	public static class TargetPoint implements LocationPoint {
 		public LatLon point;
@@ -49,7 +54,30 @@ public class TargetPointsHelper {
 			this.index = index;
 			this.intermediate = true;
 		}
-		
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+
+			TargetPoint targetPoint = (TargetPoint) o;
+
+			if (start != targetPoint.start) return false;
+			if (intermediate != targetPoint.intermediate) return false;
+			if (index != targetPoint.index) return false;
+			return point.equals(targetPoint.point);
+
+		}
+
+		@Override
+		public int hashCode() {
+			int result = point.hashCode();
+			result = 31 * result + index;
+			result = 31 * result + (start ? 10 : 20);
+			result = 31 * result + (intermediate ? 100 : 200);
+			return result;
+		}
+
 		@SuppressLint("StringFormatInvalid")
 		public PointDescription getPointDescription(Context ctx) {
 			if (!intermediate) {
@@ -154,6 +182,7 @@ public class TargetPointsHelper {
 							settings.updateIntermediatePoint(p.point.getLatitude(), p.point.getLongitude(),
 									p.pointDescription);
 							updateRouteAndRefresh(false);
+							updateTargetPoint(p);
 							break;
 						}
 					}
@@ -176,6 +205,7 @@ public class TargetPointsHelper {
 						settings.setPointToStart(pointToStart.point.getLatitude(), pointToStart.point.getLongitude(),
 								pointToStart.pointDescription);
 						updateRouteAndRefresh(false);
+						updateTargetPoint(pointToStart);
 					}
 				}
 			}, null);
@@ -196,6 +226,7 @@ public class TargetPointsHelper {
 						settings.setPointToNavigate(pointToNavigate.point.getLatitude(), pointToNavigate.point.getLongitude(),
 								pointToNavigate.pointDescription);
 						updateRouteAndRefresh(false);
+						updateTargetPoint(pointToNavigate);
 					}
 				}
 			}, null);
@@ -556,6 +587,22 @@ public class TargetPointsHelper {
 	private void cancelPointAddressRequests(LatLon latLon) {
 		if (latLon != null) {
 			ctx.getGeocodingLookupService().cancel(latLon);
+		}
+	}
+
+	public void addPointListener(TargetPointChangedListener l) {
+		if (!pointListeners.contains(l)) {
+			pointListeners.add(l);
+		}
+	}
+
+	public void removePointListener(TargetPointChangedListener l) {
+		pointListeners.remove(l);
+	}
+
+	private void updateTargetPoint(TargetPoint targetPoint) {
+		for (TargetPointChangedListener l : pointListeners) {
+			l.onTargetPointChanged(targetPoint);
 		}
 	}
 }
