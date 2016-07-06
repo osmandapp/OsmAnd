@@ -100,7 +100,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		for (String s : voiceFiles) {
 			entries[k] = s;
 			entrieValues[k] = s;
-			if(s.equals(((OsmandApplication) getApplication()).getSettings().VOICE_PROVIDER)) {
+			if(s.equals(((OsmandApplication) getApplication()).getSettings().VOICE_PROVIDER.get())) {
 				selected = k;
 			}
 			k++;
