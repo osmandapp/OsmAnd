@@ -135,15 +135,15 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 
 	public void sendAlertToPebble(String bld) {
-	    final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
-	    final Map<String, Object> data = new HashMap<String, Object>();
-	    data.put("title", "Voice");
-	    data.put("body", bld.toString());
-	    final JSONObject jsonData = new JSONObject(data);
-	    final String notificationData = new JSONArray().put(jsonData).toString();
-	    i.putExtra("messageType", PEBBLE_ALERT);
-	    i.putExtra("sender", "OsmAnd");
-	    i.putExtra("notificationData", notificationData);
+		final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
+		final Map<String, Object> data = new HashMap<String, Object>();
+		data.put("title", "Voice");
+		data.put("body", bld.toString());
+		final JSONObject jsonData = new JSONObject(data);
+		final String notificationData = new JSONArray().put(jsonData).toString();
+		i.putExtra("messageType", PEBBLE_ALERT);
+		i.putExtra("sender", "OsmAnd");
+		i.putExtra("notificationData", notificationData);
 		if (ctx != null) {
 			ctx.sendBroadcast(i);
 			log.info("Send message to pebble " + bld.toString());
@@ -165,8 +165,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					if (status != TextToSpeech.SUCCESS) {
 						internalClear();
 					} else if (mTts != null) {
-						switch (mTts.isLanguageAvailable(new Locale(language)))
-						{
+						switch (mTts.isLanguageAvailable(new Locale(language))) {
 							case TextToSpeech.LANG_MISSING_DATA:
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
