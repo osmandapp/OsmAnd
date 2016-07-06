@@ -2290,4 +2290,6 @@
     <string name="app_mode_bus">Lijnbus</string>
  	<string name="app_mode_train">Trein</string>
     <string name="coords_format">Coördinatenformaat</string>
+    <string name="shared_string_is_open_24_7">24 x 7 geopend</string>
+    <string name="storage_directory_card">Geheugenkaart</string>
     </resources>
