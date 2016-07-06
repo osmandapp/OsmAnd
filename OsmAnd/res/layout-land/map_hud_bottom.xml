@@ -66,9 +66,7 @@
                     layout="@layout/recording_note_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|left"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
+                    android:layout_gravity="bottom|left"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
