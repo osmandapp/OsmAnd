@@ -2055,4 +2055,5 @@
     <string name="coords_format_descr">Formát pre zemepisné súradnice</string>
   	<string name="storage_directory_card">Pamäťová karta</string>
     <string name="shared_string_is_open_24_7">Otvorené nonstop</string>
-    </resources>
+    <string name="map_widget_search">Hľadať</string>
+	</resources>
