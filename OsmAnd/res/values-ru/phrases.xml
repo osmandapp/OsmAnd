@@ -2935,4 +2935,6 @@
 	<string name="poi_observatory_type_meteorological">Назначение: метеорологическая</string>
 	<string name="poi_observatory_type_gravitational">Назначение: гравитационная</string>
 
+	<string name="poi_greenhouse_horticulture">Парниковое садоводство</string>
+
 </resources>
