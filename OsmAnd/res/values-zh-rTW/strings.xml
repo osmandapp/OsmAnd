@@ -1501,7 +1501,7 @@
     <string name="map_widget_right">右面板</string>
     <string name="map_widget_left">左面板</string>
     <string name="configure_map">組態地圖</string>
-    <string name="search_radius_proximity">在接近度上</string>
+    <string name="search_radius_proximity">範圍內</string>
 
     <string name="rendering_category_routes">導航路線</string>
     <string name="rendering_attr_trainLightrailRoutes_name">火車路線</string>
@@ -2202,4 +2202,5 @@
     <string name="coords_format">坐標格式</string>
     <string name="coords_format_descr">地理座標格式</string>
     <string name="storage_directory_card">記憶卡</string>
+    <string name="shared_string_is_open_24_7">開啟 24/7</string>
     </resources>
