@@ -1414,7 +1414,7 @@
     <string name="map_widget_left">Tauler esquerre</string>
     <string name="shared_string_show">Mostra</string>
     <string name="configure_map">Configura el mapa</string>
-    <string name="search_radius_proximity">A prop de</string>
+    <string name="search_radius_proximity">Dins de</string>
     <string name="rendering_category_routes">Rutes</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutes de tren</string>
     <string name="rendering_attr_tramRoutes_name">Rutes de tramvia</string>
@@ -2047,5 +2047,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="coords_format_descr">Format de les coordenades geogràfiques</string>
 	<string name="shared_string_open_24_7">Obert 24h/7d</string>
     <string name="storage_directory_card">Tarja de memòria</string>
-    <string name="shared_string_is_open">Obert</string>
+    <string name="shared_string_is_open">Obert ara mateix</string>
+    <string name="shared_string_is_open_24_7">Obert 24h/7d</string>
     </resources>
