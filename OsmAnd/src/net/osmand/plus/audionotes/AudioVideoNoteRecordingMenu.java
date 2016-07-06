@@ -205,7 +205,7 @@ public class AudioVideoNoteRecordingMenu {
 		CurrentRecording recording = plugin.getCurrentRecording();
 		boolean show = showViewfinder && recording != null && recording.getType() != AVActionType.REC_AUDIO;
 		if (isLandscapeLayout() && mapActivity != null) {
-			int buttonsHeight = view.findViewById(R.id.buttonsContainer).getHeight();
+			int buttonsHeight = (int) view.getResources().getDimension(R.dimen.map_route_buttons_height);
 			int tileBoxHeight = mapActivity.getMapView().getCurrentRotatedTileBox().getPixHeight();
 			int h = show ? tileBoxHeight : buttonsHeight;
 			view.setLayoutParams(new LinearLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 320f), h));

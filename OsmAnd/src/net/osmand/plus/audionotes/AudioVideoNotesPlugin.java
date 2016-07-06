@@ -1503,7 +1503,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void updateRecordControl(final MapActivity mapActivity, final File f) {
 		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
-		recordControl.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.widget_icon_av_active));
+		recordControl.setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active);
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		if (!recordControl.isVisible()) {
 			recordControl.setExplicitlyVisible(true);
