@@ -3012,4 +3012,18 @@
 
 <string name="poi_greenhouse_horticulture">Drivhus havebrug</string>
 
+<string name="poi_voltage">Spænding</string>
+	<string name="poi_generator_output_electricity">Udgangseffekt</string>
+	<string name="poi_generator_output_electricity_yes">Output: elektricitet</string>
+	<string name="poi_generator_output_hot_water">Udgangseffekt af varmt vand</string>
+	<string name="poi_generator_output_hot_water_yes">Output: varmt vand</string>
+	<string name="poi_generator_output_steam_yes">Output: damp</string>
+	<string name="poi_generator_output_hot_air_yes">Output: varm luft</string>
+	<string name="poi_generator_output_cold_water_yes">Output: koldt vand</string>
+	<string name="poi_generator_output_compressed_air">Udgangseffekt af trykluft</string>
+	<string name="poi_generator_output_compressed_air_yes">Output: trykluft</string>
+	<string name="poi_generator_output_vacuum_yes">Output: vakuum</string>
+	<string name="poi_generator_output_biogas">Udgangseffekt af biogas</string>
+	<string name="poi_generator_output_biogas_yes">Output: biogas</string>
+
 </resources>
