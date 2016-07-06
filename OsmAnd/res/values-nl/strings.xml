@@ -1323,7 +1323,7 @@
     <string name="voice_pref_title">Stem</string>
     <string name="misc_pref_title">Diversen</string>
     <string name="localization_pref_title">Regiogebonden</string>
-    <string name="interrupt_music_descr">Onderbreek muziekweergave bij aankondigingen (ook voor bluetooth autoradio\'s)</string>
+    <string name="interrupt_music_descr">Onderbreek muziek bij aankondigingen (niet alleen volume verlagen)</string>
 	<string name="interrupt_music">Muziek onderbreken</string>
 	<string name="share_route_as_gpx">Deel route als GPX-bestand</string>
 	<string name="share_route_subject">Route gedeeld via OsmAnd</string>
@@ -1584,7 +1584,7 @@
 	<string name="map_widget_right">Widgets Rechter Kolom</string>
 	<string name="map_widget_left">Widgets Linker Kolom</string>
 	<string name="configure_map">Kaart instellen</string>
-    <string name="search_radius_proximity">In de buurt van</string>
+    <string name="search_radius_proximity">Binnen</string>
     <string name="osmo_device_not_found">Apparaat niet gevonden</string>
     <string name="osmo_no_connection_msg">OsMo service is niet bereikbaar:\n- Controleer de verbinding;\n- Controleer de instellingen;\n- Kijk op Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">een anonieme gebruiker kan niet:\n- een groep aanmaken;\n- groepen en apparaten synchroniseren met de server;\n- groepen en apparaten beheren in een eigen omgeving.</string>
