@@ -2953,4 +2953,33 @@
 
 	<string name="poi_pumping_station">Насосная станция</string>
 
+	<string name="poi_display_yes">Дисплей: есть</string>
+	<string name="poi_display_no">Дисплей: отсутствует</string>
+	<string name="poi_display_analog_yes">Аналоговый дисплей</string>
+	<string name="poi_display_digital_yes">Цифровой дисплей</string>
+	<string name="poi_display_sundial_yes">Солнечные часы</string>
+
+	<string name="poi_barometer_yes">Барометр: есть</string>
+	<string name="poi_barometer_no">Барометр: отсутствует</string>
+	<string name="poi_thermometer_yes">Термометр: есть</string>
+	<string name="poi_thermometer_no">Термометр: отсутствует</string>
+	<string name="poi_hygrometer_yes">Гигрометр: есть</string>
+	<string name="poi_hygrometer_no">Гигрометр: отсутствует</string>
+	<string name="poi_date_yes">Дата: есть</string>
+	<string name="poi_date_no">Дата: нет</string>
+
+	<string name="poi_support_pole">Опора: столб</string>
+	<string name="poi_support_wall_mounted">Опора: стена</string>
+	<string name="poi_support_tree">Опора: дерево</string>
+	<string name="poi_support_pedestal">Опора: пьедестал</string>
+	<string name="poi_support_ground">Опора: земля</string>
+	<string name="poi_support_billboard">Опора: рекламный щит</string>
+	<string name="poi_support_ceiling">Опора: потолок</string>
+	<string name="poi_support_suspended">Опора: подвешено</string>
+	<string name="poi_support_roof">Опора: крыша</string>
+	<string name="poi_support_tower">Опора: башня</string>
+
+	<string name="poi_passenger_information_display_yes">Информационный дисплей пассажира: есть</string>
+	<string name="poi_passenger_information_display_no">Информационный дисплей пассажира: отсутствует</string>
+
 </resources>

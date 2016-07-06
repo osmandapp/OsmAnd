@@ -2957,4 +2957,33 @@
 
 	<string name="poi_pumping_station">Pumping station</string>
 
+	<string name="poi_display_yes">Display: yes</string>
+	<string name="poi_display_no">Display: no</string>
+	<string name="poi_display_analog_yes">Analog display</string>
+	<string name="poi_display_digital_yes">Digital display</string>
+	<string name="poi_display_sundial_yes">Sundial</string>
+
+	<string name="poi_barometer_yes">Barometer: yes</string>
+	<string name="poi_barometer_no">Barometer: no</string>
+	<string name="poi_thermometer_yes">Thermometer: yes</string>
+	<string name="poi_thermometer_no">Thermometer: no</string>
+	<string name="poi_hygrometer_yes">Hygrometer: yes</string>
+	<string name="poi_hygrometer_no">Hygrometer: no</string>
+	<string name="poi_date_yes">Date display: yes</string>
+	<string name="poi_date_no">Date display: no</string>
+
+	<string name="poi_support_pole">Support: pole</string>
+	<string name="poi_support_wall_mounted">Support: wall</string>
+	<string name="poi_support_tree">Support: tree</string>
+	<string name="poi_support_pedestal">Support: pedestal</string>
+	<string name="poi_support_ground">Support: ground</string>
+	<string name="poi_support_billboard">Support: billboard</string>
+	<string name="poi_support_ceiling">Support: ceiling</string>
+	<string name="poi_support_suspended">Support: suspended</string>
+	<string name="poi_support_roof">Support: roof</string>
+	<string name="poi_support_tower">Support: tower</string>
+
+	<string name="poi_passenger_information_display_yes">Passenger information display: yes</string>
+	<string name="poi_passenger_information_display_no">Passenger information display: no</string>
+
 </resources>
