@@ -382,8 +382,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	@Override
 	public void onMapMarkerChanged(MapMarker mapMarker) {
-		if (object == mapMarker) {
-			String address = ((MapMarker) object).getOnlyName();
+		if (object.equals(mapMarker)) {
+			String address = mapMarker.getOnlyName();
 			nameStr = address;
 			pointDescription.setName(address);
 			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();

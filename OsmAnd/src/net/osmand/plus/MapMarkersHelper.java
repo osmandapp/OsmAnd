@@ -90,13 +90,12 @@ public class MapMarkersHelper {
 
 			if (colorIndex != mapMarker.colorIndex) return false;
 			if (pos != mapMarker.pos) return false;
-			if (index != mapMarker.index) return false;
-			if (history != mapMarker.history) return false;
-			if (selected != mapMarker.selected) return false;
-			if (dist != mapMarker.dist) return false;
-			//noinspection SimplifiableIfStatement
-			if (!point.equals(mapMarker.point)) return false;
-			return pointDescription != null ? pointDescription.equals(mapMarker.pointDescription) : mapMarker.pointDescription == null;
+			//if (index != mapMarker.index) return false;
+			//if (history != mapMarker.history) return false;
+			//if (selected != mapMarker.selected) return false;
+			//if (dist != mapMarker.dist) return false;
+			return point.equals(mapMarker.point);
+			//return pointDescription != null ? pointDescription.equals(mapMarker.pointDescription) : mapMarker.pointDescription == null;
 
 		}
 
@@ -399,6 +398,7 @@ public class MapMarkersHelper {
 		if (marker != null) {
 			settings.moveMapMarker(new LatLon(marker.getLatitude(), marker.getLongitude()), latLon,
 					marker.pointDescription, marker.colorIndex, marker.pos, marker.selected);
+			marker.point = new LatLon(latLon.getLatitude(), latLon.getLongitude());
 			readFromSettings();
 			refresh();
 		}
