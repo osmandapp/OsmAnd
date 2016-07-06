@@ -1365,7 +1365,7 @@
     <string name="map_widget_right">Pravý panel</string>
     <string name="map_widget_left">Ľavý panel</string>
     <string name="configure_map">Nastaviť mapu</string>
-    <string name="search_radius_proximity">Blízko k</string>
+    <string name="search_radius_proximity">Vovnútri</string>
     <string name="rendering_category_routes">Trasy</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vlakové linky</string>
     <string name="rendering_attr_tramRoutes_name">Električkové linky</string>
@@ -2054,4 +2054,5 @@
     <string name="coords_format">Formát súradníc</string>
     <string name="coords_format_descr">Formát pre zemepisné súradnice</string>
   	<string name="storage_directory_card">Pamäťová karta</string>
+    <string name="shared_string_is_open_24_7">Otvorené nonstop</string>
     </resources>
