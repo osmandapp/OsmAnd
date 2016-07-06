@@ -144,19 +144,21 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	    i.putExtra("messageType", PEBBLE_ALERT);
 	    i.putExtra("sender", "OsmAnd");
 	    i.putExtra("notificationData", notificationData);
-	    mTtsContext.sendBroadcast(i);
+	    if (mTtsContext != null) {
+		mTtsContext.sendBroadcast(i);
+		log.info("Send message to pebble failed" + bld.toString());
+	    }
 	    log.info("Send message to pebble " + bld.toString());
 	}
 
 
 	private void initializeEngine(final Context ctx, final Activity act)
 	{
-		if (mTts != null && mTtsContext != ctx) {
+		if (mTtsContext != ctx) {
 			internalClear();
 		}
 		if (mTts == null) {
 			mTtsContext = ctx;
-			ttsRequests = 0;
 			final float speechRate = cSpeechRate; 
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
 				@Override
@@ -235,10 +237,10 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private void internalClear() {
 		if (mTts != null) {
 			mTts.shutdown();
-			mTtsContext = null;
 			mTts = null;
-			ttsRequests = 0;
 		}
+		mTtsContext = null;
+		ttsRequests = 0;
 	}
 	
 	@Override
