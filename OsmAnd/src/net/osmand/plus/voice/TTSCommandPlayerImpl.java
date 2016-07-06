@@ -144,10 +144,10 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	    i.putExtra("messageType", PEBBLE_ALERT);
 	    i.putExtra("sender", "OsmAnd");
 	    i.putExtra("notificationData", notificationData);
-	    if (cxt != null) {
-		ctx.sendBroadcast(i);
-		log.info("Send message to pebble " + bld.toString());
-	    }
+		if (ctx != null) {
+			ctx.sendBroadcast(i);
+			log.info("Send message to pebble " + bld.toString());
+		}
 	}
 
 
