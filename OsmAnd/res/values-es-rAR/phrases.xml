@@ -2977,4 +2977,20 @@
 	<string name="poi_observatory_type_meteorological">Uso: Meteorológico</string>
 	<string name="poi_observatory_type_gravitational">Uso: Gravitacional</string>
 
+<string name="poi_greenhouse_horticulture">Horticultura en invernadero</string>
+
+	<string name="poi_voltage">Voltaje</string>
+	<string name="poi_generator_output_electricity">Potencia de salida</string>
+	<string name="poi_generator_output_electricity_yes">Salida: Electricidad</string>
+	<string name="poi_generator_output_hot_water">Potencia de salida de agua caliente</string>
+	<string name="poi_generator_output_hot_water_yes">Salida: Agua caliente</string>
+	<string name="poi_generator_output_steam_yes">Salida: Vapor</string>
+	<string name="poi_generator_output_hot_air_yes">Salida: Aire caliente</string>
+	<string name="poi_generator_output_cold_water_yes">Salida: Agua fría</string>
+	<string name="poi_generator_output_compressed_air">Potencia de salida de aire comprimido</string>
+	<string name="poi_generator_output_compressed_air_yes">Salida: Aire comprimido</string>
+	<string name="poi_generator_output_vacuum_yes">Salida: Vacío</string>
+	<string name="poi_generator_output_biogas">Potencia de salida de Biogas</string>
+	<string name="poi_generator_output_biogas_yes">Salida: Biogas</string>
+
 </resources>
