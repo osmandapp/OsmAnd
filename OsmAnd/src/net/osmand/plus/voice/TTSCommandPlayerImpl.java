@@ -155,6 +155,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		if (mTts == null) {
 			mTtsContext = ctx;
+			ttsRequests = 0;
 			final float speechRate = cSpeechRate; 
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
 				@Override
