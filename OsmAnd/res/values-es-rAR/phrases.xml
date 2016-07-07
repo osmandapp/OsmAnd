@@ -83,7 +83,7 @@
 	<string name="poi_bedding">Tienda de ropa de cama</string>
 	<string name="poi_dive">Equipo de buceo</string>
 	<string name="poi_doityourself">Mejoras para el hogar</string>
-	<string name="poi_erotic">Sexshop</string>
+	<string name="poi_erotic">Artículos eróticos</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_florist">Florería</string>
 	<string name="poi_frame">Marcos para cuadros</string>
@@ -373,7 +373,7 @@
 	<string name="poi_speech_therapist">Fonoaudiólogo</string>
 	<string name="poi_healthcare_yes">Atención médica</string>
 
-	<string name="poi_company">Empresa</string>
+	<string name="poi_company">Empresa privada</string>
 	<string name="poi_insurance">Aseguradora</string>
 	<string name="poi_estate_agent">Inmobiliaria</string>
 	<string name="poi_lawyer">Abogado</string>
@@ -411,7 +411,7 @@
 	<string name="poi_basketball">Baloncesto</string>
 	<string name="poi_beachvolleyball">Voley playero</string>
 	<string name="poi_bmx">BMX</string>
-	<string name="poi_boules">Bolos</string>
+	<string name="poi_boules">Bochas</string>
 	<string name="poi_bowls">Bolos</string>
 	<string name="poi_canadian_football">Fútbol canadiense</string>
 	<string name="poi_canoe">Canoa</string>
@@ -544,8 +544,8 @@
 	<string name="poi_funicular">Funicular</string>
 	<string name="poi_resort">Complejo turístico</string>
 	<string name="poi_hanami">Hanami</string>
-	<string name="poi_wine_cellar">Cava</string>
-	<string name="poi_winery">Bodega</string>
+	<string name="poi_wine_cellar">Cava (bodega)</string>
+	<string name="poi_winery">Bodega (vinicultura)</string>
 
 	<string name="poi_club_art">Club de arte</string>
 	<string name="poi_club_astronomy">Club de astronomía</string>
@@ -597,7 +597,7 @@
 	<string name="poi_nightclub">Boliche</string>
 	<string name="poi_stripclub">Club de striptease</string>
 	<string name="poi_ski_resort">Estación de esquí</string>
-	<string name="poi_beach_resort">Complejo turístico de playa</string>
+	<string name="poi_beach_resort">Balneario</string>
 	<string name="poi_dog_park">Parque canino</string>
 	<string name="poi_leisure_fishing">Lugar de pesca</string>
 	<string name="poi_hunting_stand">Choza de caza</string>
@@ -766,7 +766,7 @@
 	<string name="poi_radio_station">Estación de radio náutica</string>
 	<string name="poi_signal_station_traffic">Estación de señales de tráfico</string>
 	<string name="poi_signal_station_warning">Estación de señales de advertencia</string>
-	<string name="poi_small_craft_facility">Instalaciones para pequeñas embarcaciones</string>
+	<string name="poi_small_craft_facility">Centro para pequeñas embarcaciones</string>
 	<string name="poi_topmark">Tope náutico</string>
 	<string name="poi_seamark_rock">Roca náutica</string>
 	<string name="poi_seamark_wreck">Restos náuticos</string>
@@ -965,7 +965,7 @@
 	<string name="poi_recycling_glass_bottles">Botellas de vidrio</string>
 	<string name="poi_recycling_plastic">Plásticos</string>
 	<string name="poi_recycling_scrap_metal">Chatarra</string>
-	<string name="poi_recycling_batteries">Baterias</string>
+	<string name="poi_recycling_batteries">Baterías</string>
 	<string name="poi_recycling_plastic_bottles">Botellas de plástico</string>
 	<string name="poi_recycling_green_waste">Residuos verdes</string>
 	<string name="poi_recycling_waste">Residuos (bolsas negras)</string>
@@ -1205,13 +1205,13 @@
 	<string name="poi_trees_coca">Coca</string>
 	<string name="poi_trees_kiwi">Kiwi</string>
 	<string name="poi_trees_meadow_orchard">Huerto</string>
-	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_mango">Mango/Melocotón</string>
 	<string name="poi_trees_rubber">Caucho</string>
 	<string name="poi_trees_date">Fecha</string>
 	<string name="poi_trees_coffea">Café</string>
 	<string name="poi_trees_pomegranate">Granada</string>
 
-	<string name="poi_trees_nectorine">Nectarina</string>
+	<string name="poi_trees_nectorine">Pelón/Nectarina</string>
 	<string name="poi_height">Altura</string>
 	<string name="poi_ele">Elevación sobre el nivel del mar</string>
 	<string name="poi_aerialway_pylon">Torre de teleférico</string>
@@ -2664,8 +2664,8 @@
 	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitud de la zona cero</string>
 	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitud de las ondas de cuerpo</string>
 	<string name="poi_nuclear_explosion_crater_diameter">Explosión: Diámetro del cráter</string>
-	<string name="poi_nuclear_explosion_warhead">Explosión: Ojiva de guerra</string>
-	<string name="poi_nuclear_explosion_device">Explosión: Dispositivo</string>
+	<string name="poi_nuclear_explosion_warhead">Ojiva explosiva</string>
+	<string name="poi_nuclear_explosion_device">Dispositivo explosivo</string>
 
 <string name="poi_nuclear_explosion_shot_name_en">Nombre del disparo (en)</string>
 	<string name="poi_nuclear_explosion_yield">Rendimiento de la explosión</string>
@@ -2908,8 +2908,8 @@
 
 <string name="poi_depth">Profundidad</string>
 
-<string name="poi_salt_yes">Con sal</string>
-	<string name="poi_salt_no">Sin sal</string>
+<string name="poi_salt_yes">Salado: Sí</string>
+	<string name="poi_salt_no">Salado: No</string>
 	<string name="poi_wheelchair_designated">Designado para sillas de ruedas</string>
 	<string name="poi_spoil_heap">Escombrera</string>
 
@@ -3007,8 +3007,8 @@
 	<string name="poi_thermometer_no">Sin termómetro</string>
 	<string name="poi_hygrometer_yes">Con higrómetro</string>
 	<string name="poi_hygrometer_no">Sin higrómetro</string>
-	<string name="poi_date_yes">Con pantalla de fecha</string>
-	<string name="poi_date_no">Sin pantalla de fecha</string>
+	<string name="poi_date_yes">Muestra la fecha</string>
+	<string name="poi_date_no">No muestra la fecha</string>
 
 	<string name="poi_support_pole">Soporte: Poste</string>
 	<string name="poi_support_wall_mounted">Soporte: Muro</string>
