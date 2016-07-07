@@ -94,6 +94,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	 */
 	private static int ttsRequests;
 	private float cSpeechRate = 1;
+	private boolean speechAllowed = false;
 	
 	// Called from the calculating route thread.
 	@Override
@@ -104,7 +105,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			bld.append(s).append(' ');
 		}
 		sendAlertToPebble(bld.toString());
-		if (mTts != null && !vrt.isMute()) {
+		if (mTts != null && !vrt.isMute() && speechAllowed) {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
 				// Delay first prompt of each batch to allow BT SCO connection being established
@@ -166,6 +167,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					if (status != TextToSpeech.SUCCESS) {
 						internalClear();
 					} else if (mTts != null) {
+						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(new Locale(language))) {
 							case TextToSpeech.LANG_MISSING_DATA:
 								if (isSettingsActivity(act)) {
@@ -240,6 +242,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		mTtsContext = null;
 		ttsRequests = 0;
+		speechAllowed = false;
 	}
 	
 	@Override
