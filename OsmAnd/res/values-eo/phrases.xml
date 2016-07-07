@@ -573,4 +573,6 @@
 	<string name="poi_healthcare_alternative">Medicino alternativa</string>
 	<string name="poi_blood_bank">Sangobanko</string>
 	<string name="poi_healthcare_centre">Medicina centro</string>
+	<string name="poi_midwife">Akuŝisto</string>
+	<string name="poi_occupational_therapist">Okup-terapiisto</string>
 	</resources>
