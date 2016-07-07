@@ -575,4 +575,40 @@
 	<string name="poi_healthcare_centre">Medicina centro</string>
 	<string name="poi_midwife">Akuŝisto</string>
 	<string name="poi_occupational_therapist">Okup-terapiisto</string>
+	<string name="poi_optometrist">Okulisto</string>
+	<string name="poi_physiotherapist">Fizioterapiisto</string>
+	<string name="poi_podiatrist">Piedisto</string>
+	<string name="poi_psychotherapist">Psiĥoterapiisto</string>
+	<string name="poi_healthcare_rehabilitation">Rekapabligo</string>
+	<string name="poi_speech_therapist">Parolkuracisto</string>
+	<string name="poi_healthcare_yes">Medicinejo</string>
+	<string name="poi_paediatrics">Infanmedicino</string>
+
+	<string name="poi_company">Oficejo de firmao</string>
+	<string name="poi_insurance">Asekurkompaniejo</string>
+	<string name="poi_estate_agent">Nemoveblaĵista oficejo</string>
+	<string name="poi_lawyer">Leĝista oficejo</string>
+	<string name="poi_office_telecommunication">Telekomunikada oficejo</string>
+	<string name="poi_ngo">Oficejo de ne-registara organizaĵo</string>
+	<string name="poi_employment_agency">Dungoficejo</string>
+	<string name="poi_research">Oficejo de esploroj</string>
+	<string name="poi_it">Informa teĥnologia oficejo</string>
+	<string name="poi_newspaper">Gazet-redaktejo</string>
+	<string name="poi_architect">Arĥitekturistejo</string>
+	<string name="poi_advertising_agency">Reklamistejo</string>
+	<string name="poi_educational_institution">Oficejo de edukada institucio</string>
+	<string name="poi_studio">Studio</string>
+	<string name="poi_bookmaker">Vetperisto</string>
+	<string name="poi_office_religion">Kancelario religia</string>
+	<string name="poi_association">Oficejo de ne-profita organizaĵo</string>
+	<string name="poi_financial">Financa oficejo</string>
+	<string name="poi_political_party">Oficejo de partio politika</string>
+	<string name="poi_notary">Kancelario de notario</string>
+	<string name="poi_foundation">Oficejo de fondaĵo</string>
+	<string name="poi_tax_advisor">Oficejo de impost-konsilisto</string>
+
+	<string name="poi_sports_centre">Sporta centro</string>
+	<string name="poi_golf_course">Golfludejo</string>
+	<string name="poi_pitch">Ludkampo</string>
+	<string name="poi_leisure_track">Kurejo</string>
 	</resources>
