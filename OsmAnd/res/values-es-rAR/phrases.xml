@@ -2993,4 +2993,35 @@
 	<string name="poi_generator_output_biogas">Potencia de salida de Biogas</string>
 	<string name="poi_generator_output_biogas_yes">Salida: Biogas</string>
 
+<string name="poi_pumping_station">Estación de bombeo</string>
+
+	<string name="poi_display_yes">Con pantalla</string>
+	<string name="poi_display_no">Sin pantalla</string>
+	<string name="poi_display_analog_yes">Con pantalla análoga</string>
+	<string name="poi_display_digital_yes">Con pantalla digital</string>
+	<string name="poi_display_sundial_yes">Con reloj solar</string>
+
+	<string name="poi_barometer_yes">Con barómetro</string>
+	<string name="poi_barometer_no">Sin barómetro</string>
+	<string name="poi_thermometer_yes">Con termómetro</string>
+	<string name="poi_thermometer_no">Sin termómetro</string>
+	<string name="poi_hygrometer_yes">Con higrómetro</string>
+	<string name="poi_hygrometer_no">Sin higrómetro</string>
+	<string name="poi_date_yes">Con pantalla de fecha</string>
+	<string name="poi_date_no">Sin pantalla de fecha</string>
+
+	<string name="poi_support_pole">Soporte: Poste</string>
+	<string name="poi_support_wall_mounted">Soporte: Muro</string>
+	<string name="poi_support_tree">Soporte: Árbol</string>
+	<string name="poi_support_pedestal">Soporte: Pedestal</string>
+	<string name="poi_support_ground">Soporte: Suelo</string>
+	<string name="poi_support_billboard">Soporte: Cartelera</string>
+	<string name="poi_support_ceiling">Soporte: Cielo raso</string>
+	<string name="poi_support_suspended">Soporte: Suspendido</string>
+	<string name="poi_support_roof">Soporte: Techo</string>
+	<string name="poi_support_tower">Soporte: Torre</string>
+
+	<string name="poi_passenger_information_display_yes">Con pantalla de información para pasajeros</string>
+	<string name="poi_passenger_information_display_no">Sin pantalla de información para pasajeros</string>
+
 </resources>
