@@ -2269,4 +2269,8 @@
     <string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Treno</string>
     <string name="lang_be_BY">Bielorusso (Latino)</string>
-    </resources>
+    <string name="shared_string_is_open_24_7">Aperto 24/7</string>
+    <string name="storage_directory_card">Scheda di memoria</string>
+    <string name="coords_format">Formato coordinate</string>
+    <string name="coords_format_descr">Formato per le coordinate geografiche</string>
+  	</resources>
