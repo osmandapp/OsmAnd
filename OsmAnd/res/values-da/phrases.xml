@@ -3050,7 +3050,7 @@
 	<string name="poi_support_ground">Support: jorden</string>
 	<string name="poi_support_billboard">Support: skilt</string>
 	<string name="poi_support_ceiling">Support: loft</string>
-	<string name="poi_support_suspended">Support: suspenderet</string>
+	<string name="poi_support_suspended">Support: ophængt</string>
 	<string name="poi_support_roof">Support: tag</string>
 	<string name="poi_support_tower">Support: tårn</string>
 
