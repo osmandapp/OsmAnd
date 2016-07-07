@@ -33,7 +33,7 @@
 	<string name="poi_dairy">Productes làctics</string>
 	<string name="poi_vending_machine">Màquina expenedora</string>
 
-	<string name="poi_bicycle">Taller de bicicletes</string>
+	<string name="poi_bicycle">Botiga de bicicletes</string>
 	<string name="poi_anime">Botiga d\'anime</string>
 	<string name="poi_baby_goods">Articles per nadons</string>
 	<string name="poi_bathroom_furnishing">Mobles de bany</string>
@@ -360,14 +360,14 @@
 	<string name="poi_historic_ship">Vaixell històric</string>
 	<string name="poi_dyke">Dic</string>
 	<string name="poi_floating_dock">Moll flotant</string>
-	<string name="poi_shop">Botiga</string>
+	<string name="poi_shop">Magatzem</string>
 		<string name="poi_shop_food">Queviures</string>
 	<string name="poi_public_transport">Transport públic</string>
 		<string name="poi_air_transport">Transport aeri</string>
 		<string name="poi_personal_transport">Transport privat</string>
 		<string name="poi_transportation">Transport</string>
 		<string name="poi_emergency">Emergències</string>
-	<string name="poi_filling_station">Punt de proveïment</string>
+	<string name="poi_filling_station">Benzinera</string>
 		<string name="poi_water_transport">Transport naval</string>
 		<string name="poi_bicycle_transport">Transport en bicicleta</string>
 		<string name="poi_aerialway_transport">Transport per cable</string>
