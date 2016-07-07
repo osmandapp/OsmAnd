@@ -2986,4 +2986,18 @@
 	<string name="poi_passenger_information_display_yes">Passenger information display: yes</string>
 	<string name="poi_passenger_information_display_no">Passenger information display: no</string>
 
+	<string name="poi_aquaculture">Aquaculture</string>
+	<string name="poi_aquaculture_shrimp">Aquaculture: shrimp</string>
+	<string name="poi_aquaculture_fish">Aquaculture: fish</string>
+	<string name="poi_aquaculture_mussels">Aquaculture: mussels</string>
+
+	<string name="poi_mdf">Main Distribution Frame</string>
+	<string name="poi_min_age">Minimum age</string>
+
+	<string name="poi_organic_yes">Organic food: yes</string>
+	<string name="poi_organic_no">Organic food: no</string>
+	<string name="poi_organic_only">Organic food only</string>
+
+	<string name="poi_traffic_mirror">Traffic mirror</string>
+
 </resources>
