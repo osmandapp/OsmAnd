@@ -151,7 +151,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, "altitude", false, 23);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
 
-		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, "gps_info", false,40);
+		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, "gps_info", false, 28);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
 		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, "plain_time", false, 41);
 		TextInfoWidget battery = ric.createBatteryControl(map);
