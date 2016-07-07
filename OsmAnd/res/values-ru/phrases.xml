@@ -74,7 +74,7 @@
 	<string name="poi_music">Аудиозаписи</string>
 	<string name="poi_newsagent">Журнальный киоск</string>
 	<string name="poi_optician">Оптика</string>
-	<string name="poi_organic">Натуральные продукты</string>
+	<string name="poi_organic">Биопродукты</string>
 	<string name="poi_outdoor">Товары для активного отдыха</string>
 	<string name="poi_paint">Краски</string>
 	<string name="poi_pet">Зоомагазин</string>
@@ -2981,5 +2981,19 @@
 
 	<string name="poi_passenger_information_display_yes">Информационный дисплей пассажира: есть</string>
 	<string name="poi_passenger_information_display_no">Информационный дисплей пассажира: отсутствует</string>
+
+	<string name="poi_aquaculture">Аквакультура</string>
+	<string name="poi_aquaculture_shrimp">Разведение креветок</string>
+	<string name="poi_aquaculture_fish">Разведение рыбы</string>
+	<string name="poi_aquaculture_mussels">Разведение моллюсков</string>
+
+	<string name="poi_mdf">Главный кросс</string>
+	<string name="poi_min_age">Минимальный возраст</string>
+
+	<string name="poi_organic_yes">Биопродукты: есть</string>
+	<string name="poi_organic_no">Биопродукты: отсутствуют</string>
+	<string name="poi_organic_only">Только биопродукты</string>
+
+	<string name="poi_traffic_mirror">Дорожное зеркало</string>
 
 </resources>
