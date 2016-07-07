@@ -3028,4 +3028,33 @@
 
 <string name="poi_pumping_station">Pumpestation</string>
 
+<string name="poi_display_yes">Skærm: ja</string>
+	<string name="poi_display_no">Skærm: nej</string>
+	<string name="poi_display_analog_yes">Analog skærm</string>
+	<string name="poi_display_digital_yes">Digital skærm</string>
+	<string name="poi_display_sundial_yes">Solur</string>
+
+	<string name="poi_barometer_yes">Barometer: ja</string>
+	<string name="poi_barometer_no">Barometer: nej</string>
+	<string name="poi_thermometer_yes">Termometer: ja</string>
+	<string name="poi_thermometer_no">Termometer: nej</string>
+	<string name="poi_hygrometer_yes">Hygrometer: ja</string>
+	<string name="poi_hygrometer_no">Hygrometer: nej</string>
+	<string name="poi_date_yes">Dato skærm: ja</string>
+	<string name="poi_date_no">Dato skærm: nej</string>
+
+	<string name="poi_support_pole">Support: pæl</string>
+	<string name="poi_support_wall_mounted">Support: væg</string>
+	<string name="poi_support_tree">Support: træ</string>
+	<string name="poi_support_pedestal">Support: piedestal</string>
+	<string name="poi_support_ground">Support: jorden</string>
+	<string name="poi_support_billboard">Support: skilt</string>
+	<string name="poi_support_ceiling">Support: loft</string>
+	<string name="poi_support_suspended">Support: suspenderet</string>
+	<string name="poi_support_roof">Support: tag</string>
+	<string name="poi_support_tower">Support: tårn</string>
+
+	<string name="poi_passenger_information_display_yes">Passager informationsskærm: ja</string>
+	<string name="poi_passenger_information_display_no">Passager informationsskærm: nej</string>
+
 </resources>
