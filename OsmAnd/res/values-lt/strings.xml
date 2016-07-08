@@ -339,7 +339,7 @@
   <string name="switch_to_vector_map_to_see">Šiai vietovei yra parsiųstas žemėlapis.
 \n\t\n\tJo aktyvavimui nueikite į \'Meniu\' → \'Konfigūruoti žemėlapį\' → \'Žemėlapių šaltiniai…\' → \'Parsiųsti vektoriniai žemėlapiai\'.</string>
     <string name="choose_audio_stream">Balso nurodymų išvestis</string>
-    <string name="choose_audio_stream_descr">Pasirinkite kanalą, kuriuo skambės balso nurodymai (priklauso nuo sistemos)</string>
+    <string name="choose_audio_stream_descr">Pasirinkite kanalą, kuriuo skambės balso nurodymai</string>
     <string name="voice_stream_voice_call">Balso skambučio audio</string>
     <string name="voice_stream_notification">Perspėjimų audio</string>
     <string name="voice_stream_music">Multimedijos/muzikos audio</string>

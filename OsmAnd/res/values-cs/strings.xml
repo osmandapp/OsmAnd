@@ -265,7 +265,7 @@
     <string name="gpx_option_from_start_point">Projet celou trasu</string>
     <string name="switch_to_vector_map_to_see">Pro tuto oblast je k dispozici offline vektorová mapa.\n\t\n\t Pro zobrazení zvolte \'Menu\' -&gt; \'Nastavení mapy\' -&gt; \'Zdroj map…\' -&gt; \'Vektorové mapy OSM\'.</string>
     <string name="choose_audio_stream">Kanál pro navádění</string>
-    <string name="choose_audio_stream_descr">Zvolte kanál poskytující hlasové navádění (závisí na systémové konfiguraci)</string>
+    <string name="choose_audio_stream_descr">Zvolte kanál poskytující hlasové navádění</string>
     <string name="voice_stream_voice_call">Volání</string>
     <string name="voice_stream_notification">Upozornění</string>
     <string name="voice_stream_music">Hudba</string>

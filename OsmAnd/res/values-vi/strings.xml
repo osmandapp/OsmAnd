@@ -128,7 +128,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	
 	 
 	<string name="choose_audio_stream">Đầu ra hướng dẫn bằng giọng nói</string>
-	<string name="choose_audio_stream_descr">Chọn kênh để chạy hướng dẫn bằng giọng nói (phụ thuộc vào hệ thống)</string>
+	<string name="choose_audio_stream_descr">Chọn kênh để chạy hướng dẫn bằng giọng nói</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
 	<string name="voice_stream_notification">Âm thanh thông báo</string>
 	<string name="voice_stream_music">Media/Nhạc</string>

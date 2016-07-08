@@ -468,7 +468,7 @@
 	<string name="switch_to_vector_map_to_see">קיימת מפה וקטורית עבור מיקום זה.
 \n\t\n\tכדי להשתמש בה יש להפעיל את \'תפריט\' -&gt; \'הגדרת תצוגה\' -&gt; \'מקור המפה…\' -&gt; \'מפות וקטוריות בלתי מקוונות\'.</string>
 	<string name="choose_audio_stream">פלט ההנחיה הקולית</string>
-	<string name="choose_audio_stream_descr">נא לבחור בערוץ להשמעת ההנחיה הקולית (תלוי מערכת)</string>
+	<string name="choose_audio_stream_descr">נא לבחור בערוץ להשמעת ההנחיה הקולית</string>
 	<string name="voice_stream_voice_call">שמע לשיחה קולית</string>
 	<string name="voice_stream_notification">שמע להתרעה</string>
 	<string name="voice_stream_music">שמע למוזיקה/מדיה</string>

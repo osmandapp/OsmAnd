@@ -260,7 +260,7 @@
 	<string name="switch_to_vector_map_to_see">이 위치에 대해 존재하는 오프라인 벡터 맵.
 \n\t\n\t사용하려면 [메뉴-&gt;계층 지도-&gt;맵 소스…-&gt;\'오프라인 벡터 맵] 을 활성화합니다.</string>
 	<string name="choose_audio_stream">음성 안내 출력</string>
-	<string name="choose_audio_stream_descr">음성 안내를 재생할 채널을 선택합니다 (시스템 의존)</string>
+	<string name="choose_audio_stream_descr">음성 안내를 재생할 채널을 선택합니다</string>
 	<string name="voice_stream_voice_call">음성 호출 스트림(통화음)</string>
 	<string name="voice_stream_notification">소리 알림</string>
 	<string name="voice_stream_music">미디어/음악 스트림(통화음)</string>

@@ -118,7 +118,7 @@
 \n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
 
     <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
-    <string name="choose_audio_stream_descr">Określa głośnik do odtwarzania nawigacji głosowej (zależne od systemu)</string>
+    <string name="choose_audio_stream_descr">Określa głośnik do odtwarzania nawigacji głosowej</string>
     <string name="voice_stream_voice_call">Kanał głosowy (także próbuje przerwać muzykę z głośników)</string>
     <string name="voice_stream_notification">Kanał powiadomień</string>
     <string name="voice_stream_music">Kanał media/music</string>

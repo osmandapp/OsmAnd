@@ -186,7 +186,7 @@
   <string name="switch_to_vector_map_to_see">Cartes vectorielles hors-lignes disponibles pour cette position.
 \n\t\n\tPour activer : \'Menu\' → \'Configurer la carte\' → \'Carte en ligne…\' → \'Cartes vectorielles hors ligne\'.</string>
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
-    <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal (selon votre appareil)</string>
+    <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal</string>
     <string name="voice_stream_voice_call">Sortie téléphonie</string>
     <string name="voice_stream_notification">Sortie notifications</string>
     <string name="voice_stream_music">Sortie musique</string>

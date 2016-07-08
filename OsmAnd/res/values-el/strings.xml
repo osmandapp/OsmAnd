@@ -436,7 +436,7 @@
 	<string name="gpx_option_from_start_point">Πέρασμα κατά μήκος ολόκληρου του ίχνους</string>
 	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\'→ \'Διαμόρφωση χάρτη\' → \'Πηγή χάρτη…\' → \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="choose_audio_stream">Έξοδος φωνητικής καθοδήγησης</string>
-	<string name="choose_audio_stream_descr">Επιλέξτε το κανάλι εκτέλεσης της φωνητικής καθοδήγησης (εξαρτώμενο από το σύστημα)</string>
+	<string name="choose_audio_stream_descr">Επιλέξτε το κανάλι εκτέλεσης της φωνητικής καθοδήγησης</string>
 	<string name="voice_stream_voice_call">Ήχος κλήσης φωνής</string>
 	<string name="voice_stream_notification">Ήχος ειδοποίησης</string>
 	<string name="voice_stream_music">Ήχος πολυμέσων/μουσικής</string>

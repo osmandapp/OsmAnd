@@ -475,7 +475,7 @@
 	<string name="gpx_option_from_start_point">Parcurge întreg traseul</string>
 	<string name="switch_to_vector_map_to_see">Nu există o hartă vectorială offline setată pentru această poziție. \n\t\n\tPentru a folosi una, o puteți activa la \'Meniu\' -&gt; \'Straturi\' -&gt; \'Surse pentru hartă…\' -&gt; \'Hărți vectoriale offline\'.</string>
 	<string name="choose_audio_stream">Canal voce de ghidare</string>
-	<string name="choose_audio_stream_descr">Alegerea canalului audio pentru vocea de ghidare (dependent de dispozitiv)</string>
+	<string name="choose_audio_stream_descr">Alegerea canalului audio pentru vocea de ghidare</string>
 	<string name="voice_stream_voice_call">Canal voce apel telefonic</string>
 	<string name="voice_stream_notification">Canal audio notificări de sistem</string>
 	<string name="voice_stream_music">Canal muzică/media</string>

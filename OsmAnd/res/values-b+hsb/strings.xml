@@ -1519,7 +1519,7 @@
     <string name="switch_to_vector_map_to_see">Offline vector map present for this location.
 \n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map Source…\' → \'Offline vector maps\'.</string>
     <string name="choose_audio_stream">Hłós nawigacije</string>
-    <string name="choose_audio_stream_descr">Wašnje wudawanja připowědźow wubrać (wotwisne wot systema)</string>
+    <string name="choose_audio_stream_descr">Wašnje wudawanja připowědźow wubrać</string>
     <string name="voice_stream_voice_call">Kaž telefon</string>
     <string name="voice_stream_notification">Kaž zdźělenki</string>
     <string name="voice_stream_music">Kaž medije/hudźba</string>

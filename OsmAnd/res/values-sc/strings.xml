@@ -1029,7 +1029,7 @@
 \n\t\n\tPro l\'impreare ativare \'Menù\' → \'Cunfigura sa mapa\' → \'Mitza mapa…\' → \'Mapas vetoriales non in lìnia\'.</string>
     <string name="vector_data">Mapas vetoriales non in lìnia</string>
     <string name="choose_audio_stream">Canale d\'essida de sa boghe de ghia</string>
-    <string name="choose_audio_stream_descr">Issèbera sa mitza pro sa ghia vocale (dipendet dae su sistema)</string>
+    <string name="choose_audio_stream_descr">Issèbera sa mitza pro sa ghia vocale</string>
     <string name="warning_tile_layer_not_downloadable">S’aplicu non resessit a iscarrigare s’istratu de sa mapa %1$s, proa a lu torrare a installare.</string>
     <string name="overlay_transparency_descr">Muda trasparèntzia suprapositzione</string>
     <string name="overlay_transparency">Trasparèntzia subrapositzione</string>

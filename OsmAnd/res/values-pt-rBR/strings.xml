@@ -1277,7 +1277,7 @@
 	<string name="switch_to_vector_map_to_see">Mapa vetorial off-line presente para esse local.
 \n\t\n\tPara usá-lo, ative em \'Menu\' → \'Configurar mapa\' → \'Fonte de mapas…\' → \'Mapas vetoriais off-line\'.</string>
 	<string name="choose_audio_stream">Saída para orientação por voz</string>
-	<string name="choose_audio_stream_descr">Escolha o canal para orientação por voz (dependente do sistema)</string>
+	<string name="choose_audio_stream_descr">Escolha o canal para orientação por voz</string>
 	<string name="voice_stream_voice_call">Áudio de chamada de voz</string>
 	<string name="voice_stream_music">Áudio de media/música</string>
 	<string name="warning_tile_layer_not_downloadable">Aplicativo não pode baixar camada %1$s do mapa, por favor, tente reinstalá-lo.</string>

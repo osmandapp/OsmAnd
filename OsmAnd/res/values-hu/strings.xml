@@ -253,7 +253,7 @@
     <string name="gpx_option_from_start_point">Végig az egész útvonalon</string>
     <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'Menü\' → \'Térkép beállítása\' → \'Térképforrás…\' → \'Offline vektoros térképek\' menüben tudod.</string>
     <string name="choose_audio_stream">Hangnavigáció kimenete</string>
-    <string name="choose_audio_stream_descr">Hangnavigáció csatornájának kiválasztása (rendszer-konfigurációtól függ)</string>
+    <string name="choose_audio_stream_descr">Hangnavigáció csatornájának kiválasztása</string>
     <string name="voice_stream_voice_call">Telefonhívás hangcsatorna</string>
     <string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
     <string name="voice_stream_music">Zene hangcsatorna</string>

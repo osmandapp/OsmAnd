@@ -316,7 +316,7 @@
   <string name="gpx_option_from_start_point">Пройти увесь шлях спочатку</string>
   <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \'Налаштування Мапи\' → \'Джерело мапи…\' → \'Локальні векторні мапи\'.</string>
   <string name="choose_audio_stream">Голосові інструкції</string>
-  <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій (залежить від системи)</string>
+  <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій</string>
   <string name="voice_stream_voice_call">Потік голосових дзвінків</string>
   <string name="voice_stream_notification">Повідомлення аудіо</string>
   <string name="voice_stream_music">Медіа / аудіо музика</string>

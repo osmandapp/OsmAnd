@@ -646,7 +646,7 @@
     <string name="gpx_option_from_start_point">Преминахте по целия маршрут</string>
     <string name="switch_to_vector_map_to_see">За този район има карта в офлайн режим.\n\t\n\tАктивирайте я от \'Меню\' → \'Настройки карта\' → \'Карта източник…\' → \'Офлайн векторни карти\'.</string>
     <string name="choose_audio_stream">Канал за гласовите напътствия</string>
-    <string name="choose_audio_stream_descr">Избор на звуков канал за гласовите напътствия (зависи от настройките на Вашето устройство)</string>
+    <string name="choose_audio_stream_descr">Избор на звуков канал за гласовите напътствия</string>
     <string name="voice_stream_voice_call">Канал за гласови данни (за предпочитане)</string>
     <string name="voice_stream_notification">Канал за системни предупреждения</string>
     <string name="voice_stream_music">Канал за медия/музика</string>

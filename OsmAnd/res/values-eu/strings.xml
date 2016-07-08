@@ -676,7 +676,7 @@
   <string name="gpx_option_from_start_point">Pasatu lorratz osotik</string>
   <string name="switch_to_vector_map_to_see">Lineaz kanpoko bektore mapa bat dago kokapen honentzat. ⏎\n⇥⏎\n⇥Erabiltzeko, aktibatu \'Menua\' -&gt; \'Konfiguratu mapa\' -&gt; \'Mapa Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
   <string name="choose_audio_stream">Ahots gidaritzaren irteera</string>
-  <string name="choose_audio_stream_descr">Aukeratu ahots gidaritza erreproduzitzeko bozgorailua (sistemaren araberakoa)</string>
+  <string name="choose_audio_stream_descr">Aukeratu ahots gidaritza erreproduzitzeko bozgorailua</string>
   <string name="voice_stream_voice_call">Ahots deiaren audioa (Kotxearen BT estereoak ere eteten saiatzen da)</string>
   <string name="voice_stream_notification">Notifikazioen audioa</string>
   <string name="voice_stream_music">Media/musikaren audioa</string>

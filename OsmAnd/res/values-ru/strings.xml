@@ -286,7 +286,7 @@
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
     <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите в \"Меню\" → \"Настройка карты\" → \"Источник карты…\" → \"Векторные карты\".</string>
     <string name="choose_audio_stream">Голосовые инструкции</string>
-    <string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций (зависит от системы)</string>
+    <string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций</string>
     <string name="voice_stream_voice_call">Поток голосовых звонков</string>
     <string name="voice_stream_notification">Поток уведомлений</string>
     <string name="voice_stream_music">Поток музыки</string>

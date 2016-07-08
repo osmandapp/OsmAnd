@@ -436,7 +436,7 @@
 <string name="switch_to_vector_map_to_see"><![CDATA[En offline vektor-karta finns tillgänglig för den här platsen.
 \n\t\n\tFör användning aktivera \'Meny\' -> \'Konfigurera karta\' -> \'Kartkälla…\' -> \'Offline vektor-kartor\'.]]></string>
     <string name="choose_audio_stream">Röstväglednings-output</string>
-    <string name="choose_audio_stream_descr">Välj högtalare för uppspelning av röstvägledning (systemberoende)</string>
+    <string name="choose_audio_stream_descr">Välj högtalare för uppspelning av röstvägledning</string>
     <string name="voice_stream_voice_call">Röstsamtal ljud (försöker även avbryta bluetooth bilstereo)</string>
     <string name="voice_stream_notification">Ljudnotifiering</string>
     <string name="voice_stream_music">Media-/musikljud</string>

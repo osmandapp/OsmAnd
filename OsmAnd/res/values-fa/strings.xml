@@ -1269,7 +1269,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="trace_rendering">ارائه اطلاعات اشکال زدایی</string>
 	<string name="trace_rendering_descr">نمایش عملکرد رندرینگ</string>
 	
-	<string name="choose_audio_stream_descr">انتخاب کانال پخش راهنمای صوتی (وابسته به سیستم)</string>
+	<string name="choose_audio_stream_descr">انتخاب کانال پخش راهنمای صوتی</string>
 	<string name="voice_stream_voice_call">تماس صوتی</string>
 	<string name="voice_stream_notification">اطلاع رسانی صوتی</string>
 	<string name="voice_stream_music">رسانه ها/موسیقی صوتی</string>

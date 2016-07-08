@@ -664,7 +664,7 @@
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 \n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
     <string name="choose_audio_stream">Audiokanal for talevejledning</string>
-    <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning (systemafhængig)</string>
+    <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning</string>
     <string name="voice_stream_voice_call">Telefonopkald lyd (forsøger også at afbryde Bluetooth bilradio)</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/musiklyd</string>

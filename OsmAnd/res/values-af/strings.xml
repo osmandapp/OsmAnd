@@ -361,7 +361,7 @@
   <string name="gpx_option_from_start_point">Ry oor die hele spoor</string>
   <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Kaarte\' -&gt; \'Kaartbron...\' -&gt; \'Aflyn vektor kaarte\'.</string>
   <string name="choose_audio_stream">Stem begeleiding uitset</string>
-  <string name="choose_audio_stream_descr">Kies kanaal om stem begeleiding oor te speel (stelsel afhanklik)</string>
+  <string name="choose_audio_stream_descr">Kies kanaal om stem begeleiding oor te speel</string>
   <string name="voice_stream_voice_call">Stem oproep klank</string>
   <string name="voice_stream_notification">Kennisgewing klank</string>
   <string name="voice_stream_music">Media/musiek klank</string>

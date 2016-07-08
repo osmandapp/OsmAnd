@@ -168,7 +168,7 @@
     <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
     <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\' → \'Configura la mappa\' → \'Sorgente mappa…\' → \'Mappe vettoriali offline\'.</string>
     <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
-    <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
+    <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale</string>
     <string name="voice_stream_voice_call">Audio chiamate vocali</string>
     <string name="voice_stream_notification">Notifiche stream</string>
     <string name="voice_stream_music">Audio media/musica</string>

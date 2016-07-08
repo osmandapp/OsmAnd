@@ -1050,7 +1050,7 @@
 	<string name="gpx_option_from_start_point">Pasar por toda a pista</string>
 	<string name="switch_to_vector_map_to_see">Hai un mapa vectorial se conexión para este sitio.\n\t\n\tPara empregalo active «Menú» → «Configurar o mapa» → «Fonte de mapas…» → «Mapas vectoriais sen conexión».</string>
 	<string name="choose_audio_stream">Saída da orientación por voz</string>
-	<string name="choose_audio_stream_descr">Escoller a canle pola que reproducir a orientación por voz (dependente do sistema)</string>
+	<string name="choose_audio_stream_descr">Escoller a canle pola que reproducir a orientación por voz</string>
 	<string name="voice_stream_voice_call">Son de chamada telefónica</string>
 	<string name="voice_stream_notification">Son de notificaión</string>
 	<string name="voice_stream_music">Son de música</string>

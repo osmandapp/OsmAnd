@@ -843,7 +843,7 @@
     <string name="keep_informing">Gjenta navigeringsinstruksjoner</string>
     <string name="show_more_map_detail_descr">Vis noen vektorkartdetaljer (veier etc.) allerede ved lavere zoom</string>
     <string name="choose_audio_stream">Utdata for taleveiledning</string>
-    <string name="choose_audio_stream_descr">Velg høyttaler til å avspille taleveiledning (systemavhengig)</string>
+    <string name="choose_audio_stream_descr">Velg høyttaler til å avspille taleveiledning</string>
     <string name="voice_stream_voice_call">Taleanropslyd</string>
     <string name="voice_stream_notification">Varslingslyd</string>
     <string name="voice_stream_music">Media-/musikklyd</string>

@@ -20,7 +20,7 @@
      <string name="switch_to_vector_map_to_see">現在地のベクターマップを見るには\n\t\n\t\'メニュー\' →\'マップ設定\' →\'マップソース…\' →\'オフラインベクターマップ\'を有効にします。</string>
      
      <string name="choose_audio_stream">音声案内ストリーム</string>
-     <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します(使用可否はシステムに依存します)</string>
+     <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します</string>
      <string name="voice_stream_voice_call">音声呼出ストリーム(通話音)</string>
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>

@@ -456,7 +456,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 		\n\t
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
-	<string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen wählen (systemabhängig)</string>
+	<string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen wählen</string>
 	<string name="voice_stream_voice_call">Wie Anrufe (simuliert auch Anrufe zur Auto Stereo Anlage)</string>
 	<string name="voice_stream_notification">Wie Benachrichtigungen</string>
 	<string name="voice_stream_music">Wie Medien/Musik</string>

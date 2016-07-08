@@ -1023,7 +1023,7 @@
 	<string name="gpx_option_reverse_route">GPX yönünü tersine çevir</string>
 	<string name="switch_to_vector_map_to_see">Bu konum için çevrimdışı vektör haritası. \n\t\n\tKullanmak için \'Menü\' → \'Harita Katmanları\' → \'Harita Kaynağı…\' → \'Çevrimdışı vektör haritalar\'.</string>
 	<string name="choose_audio_stream">Sesli kılavuz çıktısı</string>
-	<string name="choose_audio_stream_descr">Sesli kılavuzu oynatmaya kanal seçin. (sisteme bağımlı)</string>
+	<string name="choose_audio_stream_descr">Sesli kılavuzu oynatmaya kanal seçin</string>
 	<string name="voice_stream_voice_call">Sesli çağrı sesi</string>
 	<string name="map_transparency_descr">Temel harita saydamlığını değiştirin</string>
 	<string name="map_transparency">Temel harita saydamlığı</string>

@@ -1004,7 +1004,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
 	<string name="switch_to_vector_map_to_see">لعرض الخرائط المتجهية المحفوظة لهذا الموقع.\n\t اضغط زر القائمة → \'ضبط الخريطة\' → \'مصدر الخريطة… \' → \'خرائط متجهية بدون إتصال\'.</string>
 	<string name="choose_audio_stream">خروج التوجيه الصوتي</string>
-	<string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي (التي تعتمد على النظام)</string>
+	<string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي</string>
 	<string name="voice_stream_voice_call">المكالمات الصوتية السمعية</string>
 	<string name="voice_stream_notification">صوت الاشعارات</string>
 	<string name="voice_stream_music">صوت الوسائط</string>

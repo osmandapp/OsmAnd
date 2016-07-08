@@ -300,7 +300,7 @@
   <string name="gpx_option_from_start_point">მიმდინარე ბილიკის დევნა</string>
   <string name="switch_to_vector_map_to_see">ამ ლოკაციისათვის არსებობს გათიშული ვექტორული რუკა.\n\t\n\tაქტივაციისათვის \'მენიუ\' -&gt; \'ხედის გამართვა\' -&gt; \'რუკის წყარო…\' -&gt; \'გათიშული ვექტორული რუკები\'.</string>
   <string name="choose_audio_stream">ხმოვანი ბრძანების შედეგი</string>
-  <string name="choose_audio_stream_descr">აირჩიეთ არხი ხმოვანი ბრძანებებისათვის (დამოკიდებულია სისტემაზე)</string>
+  <string name="choose_audio_stream_descr">აირჩიეთ არხი ხმოვანი ბრძანებებისათვის</string>
   <string name="voice_stream_voice_call">ხმოვანი დარეკვა</string>
   <string name="voice_stream_notification">შეტყობინების ხმა</string>
   <string name="voice_stream_music">მუსიკის ხმა</string>

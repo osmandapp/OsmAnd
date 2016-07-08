@@ -436,7 +436,7 @@
     <string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
     <string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'組態地圖\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
     <string name="choose_audio_stream">語音導航輸出</string>
-    <string name="choose_audio_stream_descr">選擇揚聲器播放語音導航(依靠系統)</string>
+    <string name="choose_audio_stream_descr">選擇揚聲器播放語音導航</string>
     <string name="voice_stream_voice_call">通話音訊 (也會嘗試中斷汽車 BT 音響)</string>
     <string name="voice_stream_notification">通知音訊</string>
     <string name="voice_stream_music">多媒體/音樂音訊</string>

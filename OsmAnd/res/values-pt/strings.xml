@@ -722,7 +722,7 @@
   <string name="switch_to_vector_map_to_see">Mapa vetorial Offline disponível para esta localização.
 \n\t\n\t Para usar, ative \'Menu\' -&gt; \'Definir Vista\' -&gt; \'Origem de Mapa…\' -&gt; \'Mapas Vetoriais Offline\'.</string>
   <string name="choose_audio_stream">Saída para orientação por voz</string>
-  <string name="choose_audio_stream_descr">Escolha o canal para orientação por voz (dependente do sistema)</string>
+  <string name="choose_audio_stream_descr">Escolha o canal para orientação por voz</string>
   <string name="voice_stream_voice_call">Áudio da chamada de voz</string>
   <string name="voice_stream_notification">Áudio de Notificação</string>
   <string name="voice_stream_music">Áudio de Media/Música</string>

@@ -289,7 +289,7 @@
     <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
     <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.\n\t\n\tNa jej použitie aktivujte Menu → Zobrazenie → Zdroj mapy… → Vektorové OSM mapy.</string>
     <string name="choose_audio_stream">Výstup hlasových pokynov</string>
-    <string name="choose_audio_stream_descr">Výber reproduktora pre prehrávanie hlasových pokynov (závisí od systémovej konfigurácie)</string>
+    <string name="choose_audio_stream_descr">Výber reproduktora pre prehrávanie hlasových pokynov</string>
     <string name="voice_stream_voice_call">Zvuk telefónneho hovoru (tiež sa pokúsi prerušiť Bluetooth stereo v aute)</string>
     <string name="voice_stream_notification">Oznámenia</string>
     <string name="voice_stream_music">Hudba/médiá</string>

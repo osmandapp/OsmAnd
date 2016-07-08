@@ -271,7 +271,7 @@
   <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie.
 \n\t\n\tOm deze te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
   <string name="choose_audio_stream">Audiokanaal stembegeleiding</string>
-  <string name="choose_audio_stream_descr">Audiokanaal voor de stembegeleiding kiezen (systeemafhankelijk)</string>
+  <string name="choose_audio_stream_descr">Audiokanaal voor de stembegeleiding kiezen</string>
   <string name="voice_stream_voice_call">Telefoongesprek</string>
   <string name="voice_stream_notification">als melding</string>
   <string name="voice_stream_music">als media/muziek</string>
