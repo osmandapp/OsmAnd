@@ -2809,4 +2809,6 @@
 	<string name="poi_diplomatic_high_commission">Alto comisionado</string>
 
 <string name="poi_mdf">Red de distribución principal (MDF)</string>
-	</resources>
+	<string name="poi_fire_operator">Operador de fuego</string>
+
+</resources>
