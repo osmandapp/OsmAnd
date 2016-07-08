@@ -3057,4 +3057,18 @@
 	<string name="poi_passenger_information_display_yes">Passager informationsskærm: ja</string>
 	<string name="poi_passenger_information_display_no">Passager informationsskærm: nej</string>
 
+<string name="poi_aquaculture">Akvakultur</string>
+	<string name="poi_aquaculture_shrimp">Akvakultur: rejer</string>
+	<string name="poi_aquaculture_fish">Akvakultur: fisk</string>
+	<string name="poi_aquaculture_mussels">Akvakultur: muslinger</string>
+
+	<string name="poi_mdf">Vigtigste hovedfordeler</string>
+	<string name="poi_min_age">Minimumsalder</string>
+
+	<string name="poi_organic_yes">Økologiske fødevarer: ja</string>
+	<string name="poi_organic_no">Økologiske fødevarer: nej</string>
+	<string name="poi_organic_only">Kun økologiske fødevarer</string>
+
+	<string name="poi_traffic_mirror">Trafik spejl</string>
+
 </resources>
