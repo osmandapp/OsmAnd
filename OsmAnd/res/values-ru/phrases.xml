@@ -2996,4 +2996,12 @@
 
 	<string name="poi_traffic_mirror">Дорожное зеркало</string>
 
+	<string name="poi_diplomatic_consulate">Консульство</string>
+	<string name="poi_diplomatic_consulate_general">Генеральное консульство</string>
+	<string name="poi_diplomatic_honorary_consulate">Почетное консульство</string>
+	<string name="poi_diplomatic_permanent_mission">Постоянное представительство</string>
+	<string name="poi_diplomatic_delegation">Делегация</string>
+	<string name="poi_diplomatic_ambassadors_residence">Резиденция посла</string>
+	<string name="poi_diplomatic_high_commission">Верховный комиссариат</string>
+
 </resources>

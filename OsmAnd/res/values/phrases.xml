@@ -3000,4 +3000,12 @@
 
 	<string name="poi_traffic_mirror">Traffic mirror</string>
 
+	<string name="poi_diplomatic_consulate">Consulate</string>
+	<string name="poi_diplomatic_consulate_general">Consulate general</string>
+	<string name="poi_diplomatic_honorary_consulate">Honorary consulate</string>
+	<string name="poi_diplomatic_permanent_mission">Permanent mission</string>
+	<string name="poi_diplomatic_delegation">Delegation</string>
+	<string name="poi_diplomatic_ambassadors_residence">Ambassador's residence</string>
+	<string name="poi_diplomatic_high_commission">High commission</string>
+
 </resources>
