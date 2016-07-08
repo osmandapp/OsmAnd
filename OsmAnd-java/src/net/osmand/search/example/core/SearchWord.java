@@ -5,10 +5,14 @@ import net.osmand.data.LatLon;
 public class SearchWord {
 	private String word;
 	private SearchResult result;
-	private LatLon location;
 	
 	public SearchWord(String word) {
-		this.word = word;
+		this.word = word.trim();
+	}
+	
+	public SearchWord(String word, SearchResult res) {
+		this.word = word.trim();
+		this.result = res;
 	}
 	
 	public ObjectType getType() {
@@ -24,7 +28,7 @@ public class SearchWord {
 	}
 	
 	public LatLon getLocation() {
-		return location;
+		return result == null ? null : result.location;
 	}
 	
 	@Override

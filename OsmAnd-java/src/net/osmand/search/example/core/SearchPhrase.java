@@ -6,49 +6,55 @@ import java.util.List;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 
+//immutable object
 public class SearchPhrase {
 	
 	private List<SearchWord> words = new ArrayList<>();
-	private LatLon originalLocation;
 	private String text = "";
 	private String lastWord = "";
 	private CollatorStringMatcher sm;
+	private SearchSettings settings;
+	private List<BinaryMapIndexReader> indexes;
 	
-	public SearchPhrase(LatLon location) {
-		this.originalLocation = location;
+	public SearchPhrase(SearchSettings settings) {
+		this.settings = settings;
 	}
-	
+
 	public List<SearchWord> getWords() {
 		return words;
 	}
 	
-	public SearchPhrase generateNewPhrase(String text) {
-		SearchPhrase sp = new SearchPhrase(originalLocation);
-		String atext = text;
-		if (text.startsWith((this.text + this.lastWord).trim())) {
-			// string is longer
-			atext = text.substring(this.text.length());
-			sp.text = this.text;
-			sp.words = new ArrayList<>(this.words);
-		} else {
-			sp.text = "";
+	public List<BinaryMapIndexReader> getOfflineIndexes() {
+		if(indexes != null) {
+			return indexes; 
 		}
-		// TODO Reuse previous search words if it is shorter
-		if (!atext.contains(",")) {
-			sp.lastWord = atext;
-		} else {
-			String[] ws = atext.split(",");
-			for (int i = 0; i < ws.length - 1; i++) {
-				if (ws[i].trim().length() > 0) {
-					sp.words.add(new SearchWord(ws[i].trim()));
-				}
-				sp.text += ws[i] + ",";
-			}
-		}
+		return settings.getOfflineIndexes();
+	}
+	
+	public SearchSettings getSettings() {
+		return settings;
+	}
+	
+	
+	public int getRadiusLevel() {
+		return settings.getRadiusLevel();
+	}
+	
+	public SearchPhrase selectWord(SearchResult res) {
+		SearchPhrase sp = new SearchPhrase(this.settings);
+		sp.words.addAll(this.words);
+		SearchWord sw = new SearchWord(res.mainName.trim(), res);
+		sp.words.add(sw);
+		// sp.text = this.text + sw.getWord() + ", ";
+		// TODO FIX
+		sp.text = this.text + " " + sw.getWord() + ", ";
 		return sp;
 	}
+	
+	
 	
 	public List<SearchWord> excludefilterWords() {
 		 List<SearchWord> w = new ArrayList<>();
@@ -61,11 +67,11 @@ public class SearchPhrase {
 	}
 	
 	public boolean isLastWord(ObjectType p) {
-		for(int i = words.size() - 1; i >= 0; i--) {
+		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if(sw.getType() == ObjectType.POI) {
+			if (sw.getType() == p) {
 				return true;
-			} else if(sw.getType() != ObjectType.UNKNOWN_NAME_FILTER) {
+			} else if (sw.getType() != ObjectType.UNKNOWN_NAME_FILTER) {
 				return false;
 			}
 		}
@@ -84,10 +90,23 @@ public class SearchPhrase {
 		return excludefilterWords().equals(p.excludefilterWords());
 	}
 	
+	public boolean hasObjectType(ObjectType p) {
+		for(SearchWord s : words) {
+			if(s.getType() == p) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	
 	public String getStringRerpresentation() {
 		StringBuilder sb = new StringBuilder();
 		for(SearchWord s : words) {
-			sb.append(s.getWord()).append(", ");
+			sb.append(s.getWord()).append(" [" + s.getType() + "], ");
 		}
 		sb.append(lastWord);
 		return sb.toString();
@@ -119,9 +138,55 @@ public class SearchPhrase {
 			}
 		}
 		// last token or myLocationOrVisibleMap if not selected 
-		return originalLocation;
+		return settings.getOriginalLocation();
 	}
 
 	
+	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
+		SearchPhrase sp = new SearchPhrase(settings);
+		String atext = text;
+		List<SearchWord> leftWords = this.words;
+		if (text.startsWith((this.text + this.lastWord).trim())) {
+			// string is longer
+			atext = text.substring(this.text.length());
+			sp.text = this.text;
+			sp.words = new ArrayList<>(this.words);
+			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
+		} else {
+			sp.text = "";
+		}
+		if (!atext.contains(",")) {
+			sp.lastWord = atext;
+		} else {
+			String[] ws = atext.split(",");
+			for (int i = 0; i < ws.length - 1; i++) {
+				boolean unknown = true;
+				if (ws[i].trim().length() > 0) {
+					if (leftWords.size() > 0) {
+						if (leftWords.get(0).getWord().equalsIgnoreCase(ws[i].trim())) {
+							sp.words.add(leftWords.get(0));
+							leftWords = leftWords.subList(1, leftWords.size());
+							unknown = false;
+						}
+					}
+					if(unknown) {
+						sp.words.add(new SearchWord(ws[i].trim()));
+					}
+					sp.text += ws[i] + ", ";
+				}
+				
+			}
+		}
+		sp.text = sp.text.trim();
+		return sp;
+	}
 
+
+
+	public void selectFile(BinaryMapIndexReader object) {
+		if(indexes == null) {
+			indexes = new ArrayList<>();
+		}
+		this.indexes.add(object);
+	}
 }

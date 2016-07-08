@@ -17,7 +17,6 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -1462,7 +1461,7 @@ public class BinaryMapIndexReader {
 			StringMatcherMode matcherMode) {
 		SearchRequest<T> request = new SearchRequest<T>();
 		request.resultMatcher = resultMatcher;
-		request.nameQuery = nameRequest;
+		request.nameQuery = nameRequest.trim();
 		request.matcherMode = matcherMode;
 		return request;
 	}
@@ -1553,7 +1552,7 @@ public class BinaryMapIndexReader {
 		request.top = stop;
 		request.bottom = sbottom;
 		request.resultMatcher = resultMatcher;
-		request.nameQuery = nameFilter;
+		request.nameQuery = nameFilter.trim();
 		return request;
 	}
 

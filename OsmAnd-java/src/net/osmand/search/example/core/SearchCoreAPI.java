@@ -1,20 +1,13 @@
 package net.osmand.search.example.core;
 
-import java.util.List;
+import java.io.IOException;
+
+import net.osmand.search.example.SearchUICore.SearchResultMatcher;
 
 public interface SearchCoreAPI {
-	
+
 	public int getSearchPriority(SearchPhrase p);
-	
-	public interface SearchCallback {
-		
-		public boolean accept(SearchResult r);
-	}
-	
-	public List<SearchResult> search(
-			SearchPhrase phrase,
-			int radiusLevel,
-			SearchCallback callback,
-			List<SearchResult> existingSearchResults);
+
+	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException;
 
 }
