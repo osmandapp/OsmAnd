@@ -291,7 +291,7 @@
 
     <string name="shared_string_next">Következő</string>
     <string name="shared_string_previous">Előző</string>
-    <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
+    <string name="unit_of_length_descr">Hosszúság mértékegységének megváltoztatása</string>
     <string name="unit_of_length">Hosszmértékegység</string>
     <string name="si_mi_foots">Mérföld/láb</string>
     <string name="si_mi_yard">Mérföld/yard</string>
@@ -834,8 +834,8 @@
     <string name="continue_follow_previous_route_auto">Az előző navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
 
 
-    <string name="show_cameras">Traffipaxok megjelenítése</string>
-    <string name="show_traffic_warnings">Sebességhatárok megjelenítése</string>
+    <string name="show_cameras">Traffipaxok</string>
+    <string name="show_traffic_warnings">Sebességhatárok</string>
     <string name="avoid_toll_roads">Fizetős utak elkerülése</string>
 
     <string name="map_widget_top_text">Utcanév</string>
@@ -867,7 +867,7 @@
     <string name="bg_service_sleep_mode_on">Háttérben futás\n leállítása</string>
     <string name="avoid_in_routing_title">Elkerülés…</string>
     <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése</string>
-    <string name="show_warnings_title">Riasztások megjelenítése…</string>
+    <string name="show_warnings_title">Figyelmeztetések megjelenítése…</string>
     <string name="show_warnings_descr">Sebességhatárok, traffipaxok, fekvőrendőrök, sávinformációk jelzése</string>
     <string name="map_widget_fluorescent">Élénk színű utak</string>
     <string name="map_widget_show_ruler">Lépték</string>
@@ -881,7 +881,7 @@
 
 
     <string name="layer_map_appearance">Képernyő beállítása</string>
-    <string name="show_lanes">Sávok megjelenítése</string>
+    <string name="show_lanes">Sávok</string>
     <string name="avoid_unpaved">Burkolat nélküli utak elkerülése</string>
     <string name="avoid_ferries">Komp elkerülése</string>
     <string name="email">email</string>
@@ -1302,8 +1302,8 @@
     <string name="index_item_world_bitcoin_payments">Bitcoin fizetőhelyek (globális)</string>
     <string name="index_item_world_basemap">Áttekintő világtérkép</string>
     <string name="index_item_world_ski">Sítérkép</string>
-    <string name="interrupt_music_descr">Zene megszakítása bemondás közben</string>
-    <string name="interrupt_music">Zene megszakítása</string>
+    <string name="interrupt_music_descr">Zene szüneteltetése bemondás közben (nem csak halkítás)</string>
+    <string name="interrupt_music">Zene szüneteltetése</string>
     <string name="share_route_as_gpx">Útvonal megosztása GPX-ben</string>
     <string name="share_route_subject">OsmAnd segítségével megosztott útvonal</string>
     <string name="arrival_distance">Megérkezés bemondása</string>
@@ -1569,7 +1569,7 @@
     <string name="map_widget_left">Bal panel</string>
     <string name="shared_string_show">Megjelenítés</string>
     <string name="configure_map">Térképi tartalom</string>
-    <string name="search_radius_proximity">Ennek a közelében</string>
+    <string name="search_radius_proximity">Ezen belül</string>
 
     <string name="impassable_road">Utak elkerülése…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Villamos- és vasútvonalak</string>
@@ -1619,8 +1619,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Német autós atlasz</string>
     <string name="traffic_warning_railways">Vasúti kereszteződés</string>
     <string name="traffic_warning_pedestrian">Gyalogátkelőhely</string>
-    <string name="show_railway_warnings">Vasúti kereszteződések megjelenítése</string>
-    <string name="show_pedestrian_warnings">Gyalogátkelőhelyek megjelenítése</string>
+    <string name="show_railway_warnings">Vasúti kereszteződések</string>
+    <string name="show_pedestrian_warnings">Gyalogátkelőhelyek</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikai autós atlasz</string>
     <string name="routing_attr_no_new_routing_name">Nincsenek v1.9-es útvonalszabályok</string>
     <string name="routing_attr_no_new_routing_description">Ne használja az 1.9-es verzióban bevezetett útvonalszabályokat</string>
@@ -1798,7 +1798,7 @@
     <string name="archive_wikipedia_data">Régi, összeférhetetlen Wikipédia adatok lettek letöltve. Szeretnéd archiválni?</string>
     <string name="download_wikipedia_files">Szeretnél további Wikipédia adatokat letölteni (%1$s MB)?</string>
     <string name="lang_es_ar">spanyol (argentin)</string>
-    <string name="lang_nb">norvég bokmål</string>
+    <string name="lang_nb">norvég (bokmål)</string>
     <string name="light_theme">Világos</string>
     <string name="dark_theme">Sötét</string>
     <string name="lang_pms">piemonti</string>
@@ -1890,7 +1890,7 @@
     <string name="srtm_plugin_disabled">Szintvonalak letiltva</string>
     <string name="favorite_category_add_new">Új hozzáadása</string>
     <string name="favorite_category_select">Válassz kategóriát</string>
-    <string name="default_speed_system_descr">Sebességmérési rendszer megadása</string>
+    <string name="default_speed_system_descr">Sebesség mértékegységének megadása</string>
     <string name="default_speed_system">Sebesség mértékegysége</string>
     <string name="nm">tm</string>
     <string name="si_nm">Tengeri mérföld</string>
@@ -2210,4 +2210,12 @@
     <string name="lang_es_us">spanyol (amerikai)</string>
     <string name="lang_be_BY">belorusz (latin)</string>
     <string name="lang_kn">kannada</string>
+    <string name="shared_string_is_open_24_7">Éjjel-nappal nyitva</string>
+    <string name="storage_directory_card">Memóriakártya</string>
+    <string name="coords_format">Koordináta formátum</string>
+    <string name="coords_format_descr">A földrajzi koordináták formátuma</string>
+  	<string name="app_mode_bus">Busz</string>
+ 	<string name="app_mode_train">Vonat</string>
+    <string name="lang_ast">asztúriai</string>
+    <string name="lang_en_gb">angol (Egyesült Királyság)</string>
     </resources>
