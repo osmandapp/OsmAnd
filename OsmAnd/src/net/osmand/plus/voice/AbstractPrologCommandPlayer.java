@@ -315,8 +315,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
 		try {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
-			// Should we get error reports from users, let's check for "|| !mAudioManager.isBluetoothScoAvailableOffCall()" or even BT=ON here:
-			//if (mAudioManager == null) {
 			if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
 				return false;
 			}
