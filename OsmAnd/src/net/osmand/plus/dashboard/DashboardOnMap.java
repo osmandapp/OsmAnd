@@ -228,6 +228,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		// by default they handle touches for their list items... i.e. they're in charge of drawing
 		// the pressed state (the list selector), handling list item clicks, etc.
 		swipeDismissListener = new SwipeDismissListViewTouchListener(
+				mapActivity,
 				listView,
 				new DismissCallbacks() {
 

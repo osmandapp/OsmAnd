@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
@@ -187,7 +188,7 @@ public class GpxUiHelper {
 			}
 
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx);
-			return createDialog(activity, showCurrentGpx, false, callbackWithObject, list, adapter);
+			return createSingleChoiceDialog(activity, showCurrentGpx, callbackWithObject, list, adapter);
 		}
 		return null;
 	}
@@ -248,6 +249,98 @@ public class GpxUiHelper {
 				return true;
 			}
 		}, dir, null, filename);
+	}
+
+	private static AlertDialog createSingleChoiceDialog(final Activity activity,
+											final boolean showCurrentGpx,
+											final CallbackWithObject<GPXFile[]> callbackWithObject,
+											final List<String> list,
+											final ContextMenuAdapter adapter) {
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final IconsCache iconsCache = app.getIconsCache();
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final int layout = R.layout.list_menu_item_native_singlechoice;
+
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.text1,
+				adapter.getItemNames()) {
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				// User super class to create the View
+				View v = convertView;
+				if (v == null) {
+					v = activity.getLayoutInflater().inflate(layout, null);
+				}
+				final ContextMenuItem item = adapter.getItem(position);
+				TextView tv = (TextView) v.findViewById(R.id.text1);
+				Drawable icon;
+				if (showCurrentGpx && position == 0) {
+					icon = null;
+				} else {
+					icon = iconsCache.getThemedIcon(item.getIcon());
+				}
+				tv.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity, 10f));
+				tv.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				tv.setText(item.getTitle());
+				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+				return v;
+			}
+		};
+
+		int selectedIndex = 0;
+		String prevSelectedGpx = app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.get();
+		if (prevSelectedGpx != null) {
+			selectedIndex = list.indexOf(prevSelectedGpx);
+		}
+		if (selectedIndex == -1) {
+			selectedIndex = 0;
+		}
+
+		final int[] selectedPosition = {selectedIndex};
+		builder.setSingleChoiceItems(listAdapter, selectedIndex, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int position) {
+				selectedPosition[0] = position;
+			}
+		});
+		builder.setTitle(R.string.select_gpx)
+				.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						int position = selectedPosition[0];
+						if (position != -1) {
+							if (showCurrentGpx && position == 0) {
+								callbackWithObject.processResult(null);
+								app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.set(null);
+							} else {
+								String fileName = list.get(position);
+								app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.set(fileName);
+								SelectedGpxFile selectedGpxFile =
+										app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+								if (selectedGpxFile != null) {
+									callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
+								} else {
+									loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
+								}
+							}
+						}
+					}
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null);
+
+		final AlertDialog dlg = builder.create();
+		dlg.setCanceledOnTouchOutside(false);
+		dlg.show();
+		try {
+			dlg.getListView().setFastScrollEnabled(true);
+		} catch (Exception e) {
+			// java.lang.ClassCastException: com.android.internal.widget.RoundCornerListAdapter
+			// Unknown reason but on some devices fail
+		}
+		return dlg;
 	}
 
 	private static AlertDialog createDialog(final Activity activity,

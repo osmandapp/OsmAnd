@@ -349,7 +349,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	 * @param callbacks The callback to trigger when the user has indicated that she would like to
 	 *                  dismiss one or more list items.
 	 */
-	public SwipeDismissListViewTouchListener(ListView listView, DismissCallbacks callbacks) {
+	public SwipeDismissListViewTouchListener(Context ctx, ListView listView, DismissCallbacks callbacks) {
 		ViewConfiguration vc = ViewConfiguration.get(listView.getContext());
 		mSlop = vc.getScaledTouchSlop();
 		mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 16;
@@ -360,7 +360,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 		mCallbacks = callbacks;
 
 		// Initialize undo popup
-		LayoutInflater inflater = (LayoutInflater) listView.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View undoView = inflater.inflate(R.layout.undo_popup, null);
 		mUndoButton = (Button) undoView.findViewById(R.id.undo);
 		mUndoButton.setOnClickListener(new UndoClickListener());
