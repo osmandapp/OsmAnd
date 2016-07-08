@@ -316,7 +316,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		try {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 			// Should we get error reports from users, let's check for "|| !mAudioManager.isBluetoothScoAvailableOffCall()" or even BT=ON here:
-			if (mAudioManager == null) {
+			//if (mAudioManager == null) {
+			if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
 				return false;
 			}
 			mAudioManager.setMode(0);
