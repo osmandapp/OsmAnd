@@ -15,33 +15,24 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
 public abstract class PointEditorFragment extends Fragment {
 
 	private View view;
-	private int mainViewHeight;
 	private EditText nameEdit;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -49,37 +40,10 @@ public abstract class PointEditorFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
-
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
 
 		getEditor().updateLandscapePortrait();
 		getEditor().updateNightMode();
-
-		if (getEditor().isLandscapeLayout()) {
-			AndroidUtils.setBackground(view.getContext(), view, !getEditor().isLight(),
-					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
-		} else {
-			AndroidUtils.setBackground(view.getContext(), view.findViewById(R.id.title_view), !getEditor().isLight(),
-					R.drawable.bg_point_editor_view_light, R.drawable.bg_point_editor_view_dark);
-		}
-
-		View editorScrollView = view.findViewById(R.id.editor_scroll_view);
-		if (editorScrollView != null && getEditor().isLandscapeLayout()) {
-			if (getEditor().isLight()) {
-				editorScrollView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-			} else {
-				editorScrollView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
-			}
-		}
-		View descriptionInfoView = view.findViewById(R.id.description_info_view);
-		if (descriptionInfoView != null) {
-			if (getEditor().isLight()) {
-				descriptionInfoView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_light));
-			} else {
-				descriptionInfoView.setBackgroundColor(getResources().getColor(R.color.ctx_menu_info_view_bg_dark));
-			}
-		}
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
@@ -93,17 +57,7 @@ public abstract class PointEditorFragment extends Fragment {
 			}
 		});
 
-		View scrollViewHeader = view.findViewById(R.id.editor_scroll_view_header);
-		if (scrollViewHeader != null) {
-			scrollViewHeader.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dismiss();
-				}
-			});
-		}
-
-		Button saveButton = (Button) toolbar.findViewById(R.id.save_button);
+		Button saveButton = (Button) view.findViewById(R.id.save_button);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -111,15 +65,15 @@ public abstract class PointEditorFragment extends Fragment {
 			}
 		});
 
-		ImageButton okButton = (ImageButton) toolbar.findViewById(R.id.ok_button);
-		okButton.setOnClickListener(new View.OnClickListener() {
+		Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
+		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				savePressed();
+				dismiss();
 			}
 		});
 
-		ImageButton deleteButton = (ImageButton) toolbar.findViewById(R.id.delete_button);
+		Button deleteButton = (Button) view.findViewById(R.id.delete_button);
 		deleteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -128,15 +82,11 @@ public abstract class PointEditorFragment extends Fragment {
 		});
 
 		if (getEditor().isNew()) {
-			okButton.setVisibility(View.GONE);
 			deleteButton.setVisibility(View.GONE);
 		} else {
-			saveButton.setVisibility(View.GONE);
+			deleteButton.setVisibility(View.VISIBLE);
 		}
 
-		TextView headerCaption = (TextView) view.findViewById(R.id.header_caption);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), headerCaption, !getEditor().isLight());
-		headerCaption.setText(getHeaderCaption());
 		TextView nameCaption = (TextView) view.findViewById(R.id.name_caption);
 		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption, !getEditor().isLight());
 		nameCaption.setText(getNameCaption());
@@ -165,12 +115,22 @@ public abstract class PointEditorFragment extends Fragment {
 			}
 		});
 
-		EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
+		final EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, !getEditor().isLight());
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, !getEditor().isLight());
 		if (getDescriptionInitValue() != null) {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
+
+		view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+			@Override
+			public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+				if (descriptionEdit.isFocused()) {
+					ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
+					scrollView.scrollTo(0, bottom);
+				}
+			}
+		});
 
 		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
 		nameImage.setImageDrawable(getNameIcon());
@@ -181,15 +141,12 @@ public abstract class PointEditorFragment extends Fragment {
 		descriptionImage.setImageDrawable(getRowIcon(R.drawable.ic_action_note_dark));
 
 		if (getMyApplication().accessibilityEnabled()) {
-			headerCaption.setFocusable(true);
 			nameCaption.setFocusable(true);
 			categoryCaption.setFocusable(true);
 			nameEdit.setHint(R.string.access_hint_enter_name);
 			categoryEdit.setHint(R.string.access_hint_enter_category);
 			descriptionEdit.setHint(R.string.access_hint_enter_description);
 		}
-
-		runLayoutListener();
 
 		return view;
 	}
@@ -229,82 +186,6 @@ public abstract class PointEditorFragment extends Fragment {
 			save(false);
 		}
 		super.onDestroyView();
-		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
-	}
-
-	private void adjustMapPosition(boolean animated) {
-		OsmandMapTileView map = getMapActivity().getMapView();
-		MapContextMenu menu = getMapActivity().getContextMenu();
-		double markerLat = menu.getLatLon().getLatitude();
-		double markerLon = menu.getLatLon().getLongitude();
-
-		RotatedTileBox box = map.getCurrentRotatedTileBox();
-		int origMarkerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
-
-		int markerPaddingPx = AndroidUtils.dpToPx(getMapActivity(), MapContextMenuFragment.MARKER_PADDING_DP);
-
-		int y = view.getHeight() - mainViewHeight;
-
-		if (!menu.isLandscapeLayout()) {
-			int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
-			if (markerY + markerPaddingPx > y || markerY < origMarkerY) {
-				int dy = markerY - (y - markerPaddingPx);
-				if (markerY - dy <= origMarkerY) {
-					QuadPoint cp = box.getCenterPixelPoint();
-					LatLon latlon = box.getLatLonFromPixel(cp.x + 0, cp.y + dy);
-					double destLat = latlon.getLatitude();
-					double destLon = latlon.getLongitude();
-					if (animated) {
-						AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-						int fZoom = map.getZoom();
-						double flat = destLat;
-						double flon = destLon;
-
-						RotatedTileBox cbox = map.getCurrentRotatedTileBox().copy();
-						cbox.setCenterLocation(0.5f, 0.5f);
-						cbox.setLatLonCenter(flat, flon);
-						flat = cbox.getLatFromPixel(cbox.getPixWidth() / 2, cbox.getPixHeight() / 2);
-						flon = cbox.getLonFromPixel(cbox.getPixWidth() / 2, cbox.getPixHeight() / 2);
-
-						thread.startMoving(flat, flon, fZoom, true);
-					} else {
-						map.setLatLon(destLat, destLon);
-					}
-				}
-			}
-		}
-	}
-
-	private void runLayoutListener() {
-		ViewTreeObserver vto = view.getViewTreeObserver();
-		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-			@Override
-			public void onGlobalLayout() {
-				mainViewHeight = view.findViewById(R.id.main_view).getHeight();
-
-				ViewTreeObserver obs = view.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-				updateScrollHeaderHeight();
-				adjustMapPosition(true);
-			}
-
-		});
-	}
-
-	private void updateScrollHeaderHeight() {
-		View scrollViewHeader = view.findViewById(R.id.editor_scroll_view_header);
-		if (scrollViewHeader != null) {
-			View scrollView = view.findViewById(R.id.editor_scroll_view);
-			int headerHeight = scrollView.getHeight() - mainViewHeight;
-			ViewGroup.LayoutParams p = scrollViewHeader.getLayoutParams();
-			p.height = headerHeight;
-			scrollViewHeader.setLayoutParams(p);
-		}
 	}
 
 	private void hideKeyboard() {

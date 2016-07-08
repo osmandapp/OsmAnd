@@ -52,9 +52,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null && editor.isNew()) {
-			Button btnReplace = (Button) view.findViewById(R.id.button_replace);
-			btnReplace.setVisibility(View.VISIBLE);
-			btnReplace.setOnClickListener(new View.OnClickListener() {
+			Button replaceButton = (Button) view.findViewById(R.id.replace_button);
+			replaceButton.setVisibility(View.VISIBLE);
+			replaceButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					Bundle args = new Bundle();
