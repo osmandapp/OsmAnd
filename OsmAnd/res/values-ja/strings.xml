@@ -2248,4 +2248,19 @@ POIの更新は利用できません</string>
     <string name="number_of_edits">編集数</string>
     <string name="reports_for">表示レポート</string>
     <string name="share_geo">geo:</string>
+    <string name="coords_format">座標の形式</string>
+    <string name="coords_format_descr">地理座標系形式</string>
+  	<string name="app_mode_bus">バス</string>
+ 	<string name="app_mode_train">鉄道</string>
+    <string name="current_track">現在の経路</string>
+    <string name="map_widget_battery">バッテリ ーレベル</string>
+    <string name="change_markers_position">マーカーの位置を変更</string>
+    <string name="move_marker_bottom_sheet_title">マーカー位置変更の為マップに移動</string>
+    <string name="lat_lon_pattern">"緯度:%1$.6f  経度:%2$.6f"</string>
+    <string name="access_direction_audio_feedback_descr">目標地点の方向を音声で示す</string>
+    <string name="access_direction_haptic_feedback_descr">目標地点の方向を振動で示す</string>
+    <string name="use_osm_live_routing_description">OSMライブ更新(ベータ版)でのナビゲーションを有効化</string>
+	<string name="use_osm_live_routing">OSMライブナビゲーション</string>
+    <string name="access_no_destination">目的地が設定されていません</string>
+    <string name="access_disable_offroute_recalc">ルートを外れてもリルート(再設定)を行わない</string>
     </resources>
