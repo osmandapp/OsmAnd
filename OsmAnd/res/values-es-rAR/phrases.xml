@@ -3024,4 +3024,26 @@
 	<string name="poi_passenger_information_display_yes">Con pantalla de información para pasajeros</string>
 	<string name="poi_passenger_information_display_no">Sin pantalla de información para pasajeros</string>
 
-</resources>
+<string name="poi_aquaculture">Acuicultura</string>
+	<string name="poi_aquaculture_shrimp">Acuicultura: Camarón</string>
+	<string name="poi_aquaculture_fish">Acuicultura: Peces</string>
+	<string name="poi_aquaculture_mussels">Acuicultura: Mejillones</string>
+
+	<string name="poi_min_age">Edad mínima</string>
+
+	<string name="poi_organic_yes">Con comida orgánica</string>
+	<string name="poi_organic_no">Sin comida orgánica</string>
+	<string name="poi_organic_only">Sólo comida orgánica</string>
+
+	<string name="poi_traffic_mirror">Espejo del tránsito</string>
+
+	<string name="poi_diplomatic_consulate">Consulado</string>
+	<string name="poi_diplomatic_consulate_general">Consulado general</string>
+	<string name="poi_diplomatic_honorary_consulate">Consulado honorario</string>
+	<string name="poi_diplomatic_permanent_mission">Misión permanente</string>
+	<string name="poi_diplomatic_delegation">Delegación</string>
+	<string name="poi_diplomatic_ambassadors_residence">Residencia del embajador</string>
+	<string name="poi_diplomatic_high_commission">Alto comisionado</string>
+
+<string name="poi_mdf">Red de distribución principal (MDF)</string>
+	</resources>
