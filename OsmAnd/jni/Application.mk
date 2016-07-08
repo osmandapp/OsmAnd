@@ -6,7 +6,11 @@ APP_SHORT_COMMANDS := true
 APP_PLATFORM := android-9
 
 ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.7),)
-	NDK_TOOLCHAIN_VERSION := 4.8
+	ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.8),)
+		NDK_TOOLCHAIN_VERSION := 4.9
+	else
+		NDK_TOOLCHAIN_VERSION := 4.8
+	endif
 else
 	NDK_TOOLCHAIN_VERSION := 4.7
 endif
