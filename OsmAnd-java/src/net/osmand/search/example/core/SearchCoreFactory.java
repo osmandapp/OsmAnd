@@ -96,9 +96,6 @@ public class SearchCoreFactory {
 			return p.isLastWord(ObjectType.POI);
 		}
 		
-		public boolean isLastWordRegion(SearchPhrase p) {
-			return p.isLastWord(ObjectType.REGION);
-		}
 
 		public boolean isNoSelectedType(SearchPhrase p) {
 			return p.isNoSelectedType();
@@ -113,8 +110,9 @@ public class SearchCoreFactory {
 				return false;
 			}
 			// (search streets in neighboor cities for radiusLevel > 2)
-			if (isLastWordPoi(phrase) || isNoSelectedType(phrase) || 
-					isLastWordRegion(phrase) || phrase.getRadiusLevel() >= 2) {
+			if (isLastWordPoi(phrase) || isNoSelectedType(phrase) ||
+					phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || 
+					phrase.isLastWord(ObjectType.REGION) || phrase.getRadiusLevel() >= 2) {
 				int letters = phrase.getLastWord().length() / 3 + 1;
 				final boolean locSpecified = false; // phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();

@@ -13,7 +13,6 @@ import net.osmand.data.LatLon;
 public class SearchPhrase {
 	
 	private List<SearchWord> words = new ArrayList<>();
-	private String text = "";
 	private String lastWord = "";
 	private CollatorStringMatcher sm;
 	private SearchSettings settings;
@@ -50,7 +49,7 @@ public class SearchPhrase {
 		sp.words.add(sw);
 		// sp.text = this.text + sw.getWord() + ", ";
 		// TODO FIX
-		sp.text = this.text + " " + sw.getWord() + ", ";
+//		sp.text = this.text + " " + sw.getWord() + ", ";
 		return sp;
 	}
 	
@@ -66,17 +65,24 @@ public class SearchPhrase {
 		 return w;
 	}
 	
-	public boolean isLastWord(ObjectType p) {
+	
+	
+	public boolean isLastWord(ObjectType... p) {
 		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if (sw.getType() == p) {
-				return true;
-			} else if (sw.getType() != ObjectType.UNKNOWN_NAME_FILTER) {
+			for(ObjectType o : p) {
+				if (sw.getType() == o) {
+					return true;
+				}
+			}
+			if (sw.getType() != ObjectType.UNKNOWN_NAME_FILTER) {
 				return false;
 			}
 		}
 		return false;
 	}
+	
+	
 	
 	public StringMatcher getNameStringMatcher() {
 		if(sm != null) {
@@ -99,8 +105,15 @@ public class SearchPhrase {
 		return false;
 	}
 	
-	public String getText() {
-		return text;
+	public String getText(boolean includeLastWord) {
+		StringBuilder sb = new StringBuilder();
+		for(SearchWord s : words) {
+			sb.append(s.getWord()).append(", ");
+		}
+		if(includeLastWord) {
+			sb.append(lastWord);
+		}
+		return sb.toString();
 	}
 	
 	public String getStringRerpresentation() {
@@ -146,14 +159,12 @@ public class SearchPhrase {
 		SearchPhrase sp = new SearchPhrase(settings);
 		String atext = text;
 		List<SearchWord> leftWords = this.words;
-		if (text.startsWith((this.text + this.lastWord).trim())) {
+		String thisTxt = getText(true);
+		if (text.startsWith(thisTxt)) {
 			// string is longer
-			atext = text.substring(this.text.length());
-			sp.text = this.text;
+			atext = text.substring(getText(false).length());
 			sp.words = new ArrayList<>(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
-		} else {
-			sp.text = "";
 		}
 		if (!atext.contains(",")) {
 			sp.lastWord = atext;
@@ -172,12 +183,12 @@ public class SearchPhrase {
 					if(unknown) {
 						sp.words.add(new SearchWord(ws[i].trim()));
 					}
-					sp.text += ws[i] + ", ";
+					// sp.text += ws[i] + ", ";
 				}
-				
 			}
+			sp.lastWord = ws[ws.length - 1];
 		}
-		sp.text = sp.text.trim();
+		//sp.text = sp.text.trim();
 		return sp;
 	}
 
