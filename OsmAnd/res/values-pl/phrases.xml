@@ -281,7 +281,7 @@
 	<string name="poi_golf_course">Pole golfowe</string>
 	<string name="poi_ice_rink">Lodowisko</string>
 	<string name="poi_pitch">Boisko</string>
-	<string name="poi_running_track">Bieżnia</string>
+	<string name="poi_running_track">Biegi</string>
 	<string name="poi_horse_track">Tor wyścigów konnych</string>
 	<string name="poi_raceway">Tor wyścigowy</string>
 	<string name="poi_archery">Łucznictwo</string>
@@ -574,7 +574,7 @@
 	<string name="poi_architect">Biuro architekta</string>
 	<string name="poi_leisure_track">Tor sportowy</string>
 	<string name="poi_bicycle_track">Tor rowerowy</string>
-	<string name="poi_9pin">Kręgielnia</string>
+	<string name="poi_9pin">Kręgle klasyczne (9 kręgli)</string>
 	<string name="poi_climbing">Wspinaczka</string>
 	<string name="poi_canoe">Kajak</string>
 	<string name="poi_croquet">Krokiet</string>
@@ -633,11 +633,11 @@
 
 	<string name="poi_charity">Sklep charytatywny</string>
 	<string name="poi_photo">Sklep fotograficzny</string>
-	<string name="poi_10pin">Bowling</string>
+	<string name="poi_10pin">Bowling (10 kręgli)</string>
 	<string name="poi_bowls">Bowls</string>
 	<string name="poi_sport_motor">Sporty motorowe</string>
-	<string name="poi_rugby_union">Związek rugby</string>
-	<string name="poi_rugby_league">Liga Rugby</string>
+	<string name="poi_rugby_union">Rugby union</string>
+	<string name="poi_rugby_league">Rugby league</string>
 	<string name="poi_shooting">Strzelanie</string>
 	<string name="poi_lodging">Noclegi/Kwatery</string>
 	<string name="poi_alpine_hut">Chata alpejska</string>
@@ -665,12 +665,12 @@
 	<string name="poi_cafe">Kawiarnia</string>
 	<string name="poi_fast_food">Bar szybkiej obsługi</string>
 	<string name="poi_craft_handicraft">Rzemiosło</string>
-	<string name="poi_paddle_tennis">Tenis stołowy</string>
+	<string name="poi_paddle_tennis">Tenis wiosłowy (paddle tennis)</string>
 	<string name="poi_observation_tower">Wieża widokowa</string>
 	<string name="poi_bell_tower">Dzwonnica</string>
-	<string name="poi_korfbal">Koszykówka</string>
+	<string name="poi_korfbal">Korfball</string>
 	<string name="poi_sport_multi">Wiele dyscyplin</string>
-	<string name="poi_pelota">Piłika</string>
+	<string name="poi_pelota">Palant (pelota)</string>
 	<string name="poi_racquet">Rakieta</string>
 	<string name="poi_roller_skating">Jazda na rolkach</string>
 	<string name="poi_skateboard">Skate park</string>
@@ -717,7 +717,7 @@
 	<string name="poi_transport_construction">Roboty drogowe</string>
 		<string name="poi_base">Miejsce do base jumpingu</string>
 	<string name="poi_ice_stock">Miejsce do gry ice stock</string>
-	<string name="poi_artwork">Wytwory artystyczne</string>
+	<string name="poi_artwork">Dzieło sztuki</string>
 	<string name="poi_attraction_amusement_ride">Karuzela</string>
 	<string name="poi_attraction_animal">Zwierzę (atrakcja)</string>
 	<string name="poi_attraction_swing_carousel">Bujana karuzela</string>
