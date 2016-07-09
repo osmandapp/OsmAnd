@@ -21,7 +21,7 @@
      
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します</string>
-     <string name="voice_stream_voice_call">音声呼出ストリーム(通話音)</string>
+     <string name="voice_stream_voice_call">音声呼出ストリーム(通話音とBT接続されたカーステレオの音楽)</string>
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>
      <string name="warning_tile_layer_not_downloadable">アプリケーションはマップレイヤー %1$sをダウンロードできません、再度インストールしてみてください。</string>
@@ -88,7 +88,7 @@
      <string name="shared_string_next">次へ</string>
      <string name="shared_string_previous">前へ</string>
 
-     <string name="unit_of_length_descr">長さと速度の単位を変更出来ます</string>
+     <string name="unit_of_length_descr">長さの単位を変更出来ます</string>
      <string name="unit_of_length">長さの単位</string>
      <string name="si_mi_foots">マイル/フィート</string>
      <string name="si_mi_yard">マイル/ヤード</string>
@@ -854,7 +854,7 @@ POIの更新は利用できません</string>
     <string name="poi_filter_restaurants">レストラン(Restaurants)</string>
     <string name="poi_filter_sightseeing">観光(Sightseeing)</string>
     <string name="poi_filter_accomodation">収容施設(Accommodation)</string>
-    <string name="show_warnings_title">アラームの表示設定…</string>
+    <string name="show_warnings_title">警告の表示設定…</string>
 	<string name="show_warnings_descr">トラフィック警告(制限速度、強制停止、スピードバンプ)、スピードカメラ、車線等の通知を設定します</string>
 	<string name="use_compass_navigation_descr">方向が全く検出できない場合電子コンパスを使用します</string>
 	<string name="use_compass_navigation">電子コンパスを使用</string>
@@ -875,7 +875,7 @@ POIの更新は利用できません</string>
 	
 	
 	<string name="layer_map_appearance">画面設定</string>
-	<string name="show_lanes">車線を通知</string>
+	<string name="show_lanes">車線</string>
 	<string name="avoid_unpaved">未舗装の道路を使用しない</string>
 	<string name="avoid_ferries">フェリーを使用しない</string>
 	<string name="avoid_in_routing_title">使用しない道路の指定…</string>
@@ -915,8 +915,8 @@ POIの更新は利用できません</string>
 	<string name="bg_service_screen_unlock">画面ロックの解除</string>
 	<string name="bg_service_screen_lock_toast">画面はロックされています</string>
 	<string name="bg_service_interval">呼び出し間隔の設定:</string>
-	<string name="show_cameras">スピード監視カメラ(オービス等)を通知</string>
-	<string name="show_traffic_warnings">通行に関する警告を通知</string>
+	<string name="show_cameras">スピード監視カメラ(オービス等)</string>
+	<string name="show_traffic_warnings">通行に関する警告</string>
 	<string name="avoid_toll_roads">有料道路を使用しない</string>
 	<string name="continue_follow_previous_route_auto">前回のナビゲーションがまだ終わっていません。続行しますか？ (%1$s seconds)</string>
 	<string name="route_updated_loc_found">現在位置が見つかるとルートを検索します</string>
@@ -1355,15 +1355,15 @@ POIの更新は利用できません</string>
 	<string name="live_monitoring_stop">オンライントラッキング停止</string>
 	<string name="gpx_monitoring_start">GPXログ開始</string>
 	<string name="gpx_monitoring_stop">GPSログ停止</string>
-    <string name="rendering_attr_hideBuildings_name">建物を隠す</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">自動車以外の専用道路を隠す</string>
-    <string name="rendering_attr_hideText_name">文字列を隠す</string>
-    <string name="rendering_attr_hideWoodScrubs_name">森林、低木等を隠す</string>
+    <string name="rendering_attr_hideBuildings_name">建物</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">自動車以外の専用道路</string>
+    <string name="rendering_attr_hideText_name">文字列</string>
+    <string name="rendering_attr_hideWoodScrubs_name">森林、低木等</string>
     <string name="rendering_attr_buildings15zoom_name">ズーム15で建物表示</string>
     <string name="rendering_attr_moreDetailed_name">細かな施設も表示</string>
     <string name="rendering_attr_lessDetailed_name">詳細を省く</string>
-    <string name="rendering_attr_hideAccess_name">アクセス制限を非表示</string>
-    <string name="rendering_attr_showAccess_name">アクセス制限を表示</string>
+    <string name="rendering_attr_hideAccess_name">通行制限</string>
+    <string name="rendering_attr_showAccess_name">通行制限と料金所を表示します</string>
     <string name="rendering_attr_showSurfaceGrade_name">道路の質(等級)を表示</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
     <string name="rendering_attr_showCycleRoutes_name">自転車道を表示</string>
@@ -1567,12 +1567,12 @@ POIの更新は利用できません</string>
 	<string name="lang_ru">ロシア語</string>
 	<string name="lang_sc">サルデーニャ語</string>
 	<string name="lang_sr">セルビア語</string>
-	<string name="lang_zh_CN">簡体字中国語</string>
+	<string name="lang_zh_CN">中国語 (簡体字)</string>
 	<string name="lang_sk">スロバキア語</string>
 	<string name="lang_sl">スロベニア語</string>
 	<string name="lang_es">スペイン語</string>
 	<string name="lang_sv">スウェーデン語</string>
-	<string name="lang_zh_TW">繁体字中国語</string>
+	<string name="lang_zh_TW">中国語 (繁体字)</string>
 	<string name="lang_tr">トルコ語</string>
 	<string name="lang_uk">ウクライナ語</string>
 	<string name="lang_vi">ベトナム人</string>
@@ -1588,7 +1588,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMCトレースに従って道を描写</string>
     
 	<string name="interrupt_music_descr">有効にすると音声案内時に音楽を一時停止します</string>
-	<string name="interrupt_music">音楽再生時の割り込み</string>
+	<string name="interrupt_music">再生音楽の一時停止</string>
 	<string name="share_route_as_gpx">GPXファイルとしてルートを共有</string>
 	<string name="share_route_subject">ルートをOsmAndを介して共有</string>
 	<string name="arrival_distance_factor_early">早め</string>
@@ -1714,8 +1714,8 @@ POIの更新は利用できません</string>
     <string name="rendering_value_germanRoadAtlas_name">ドイツの道路マップ</string>
 	<string name="traffic_warning_railways">踏切</string>
 	<string name="traffic_warning_pedestrian">横断歩道</string>
-	<string name="show_railway_warnings">踏切をアナウンス</string>
-	<string name="show_pedestrian_warnings">横断歩道を通知</string>
+	<string name="show_railway_warnings">踏切</string>
+	<string name="show_pedestrian_warnings">横断歩道</string>
     <string name="rendering_value_americanRoadAtlas_name">アメリカの道路マップ</string>
     <string name="routing_attr_no_new_routing_name">ver1.9のルート検索をしない</string>
     <string name="routing_attr_no_new_routing_description">バージョン1.9で導入されたルート検索方法を使用しない</string>
@@ -1838,7 +1838,7 @@ POIの更新は利用できません</string>
     <string name="index_name_netherlands">ヨーロッパ - オランダ</string>
 	<string name="rendering_value__name">標準</string>
     <string name="rendering_value_highContrastRoads_name">ハイコントラスト道路</string>
-	<string name="rendering_attr_hideHouseNumbers_name">番地を非表示</string>
+	<string name="rendering_attr_hideHouseNumbers_name">番地</string>
     <string name="application_dir_change_warning3">OsmAndとそのデータファイルを新しい保存先にコピーしますか？</string>
     <string name="specified_directiory_not_writeable">指定したディレクトリ内にマップを作成(あるいは書き込みが)できませんでした</string>
 	<string name="copying_osmand_file_failed">ファイルのコピーに失敗しました</string>    
@@ -1879,8 +1879,8 @@ POIの更新は利用できません</string>
     <string name="lang_lb">ルクセンブルク語</string>
     <string name="lang_os">オセット語</string>
     <string name="lang_eo">エスペラント語</string>
-    <string name="lang_es_ar">アルゼンチンのスペイン語</string>
-    <string name="lang_nb">ノルウェー語(ブークモール)</string>
+    <string name="lang_es_ar">スペイン語 (アルゼンチン)</string>
+    <string name="lang_nb">ノルウェー語 (ブークモール)</string>
     <string name="lang_vo">ボラピューク語</string>
     <string name="lang_th">タイ語</string>
     <string name="lang_te">テルグ語</string>
@@ -1988,8 +1988,8 @@ POIの更新は利用できません</string>
     <string name="srtm_plugin_disabled">等高線無効</string>
     <string name="favorite_category_add_new">新規追加</string>
     <string name="favorite_category_select">カテゴリを選択</string>
-    <string name="default_speed_system_descr">移動速度の表示形式を設定します</string>
-    <string name="default_speed_system">速度表示形式</string>
+    <string name="default_speed_system_descr">速度の単位を設定します</string>
+    <string name="default_speed_system">速度の単位</string>
     <string name="nm">nmi</string>
     <string name="si_nm">海里</string>
     <string name="si_kmh">キロメートル毎時(km/h)</string>
@@ -2068,7 +2068,7 @@ POIの更新は利用できません</string>
     <string name="lang_als">アルバニア語 (トスク)</string>
     <string name="read_more">続きを読む</string>
     <string name="whats_new">新機能</string>
-    <string name="rendering_attr_hideProposed_name">指定オブジェクトを非表示</string>
+    <string name="rendering_attr_hideProposed_name">指定オブジェクト</string>
     <string name="shared_string_update">更新</string>
     <string name="shared_string_upload">アップロード</string>
     <string name="osm_edit_created_poi">OSMのPOIが作成されました</string>
@@ -2115,7 +2115,7 @@ POIの更新は利用できません</string>
 	<string name="shared_string_status">状態</string>
     <string name="shared_string_save_changes">変更の保存</string>
     <string name="shared_string_email_address">電子メールアドレス</string>
-    <string name="rendering_attr_hideUnderground_name">地下の建造物を非表示</string>
+    <string name="rendering_attr_hideUnderground_name">地下の建造物</string>
     <string name="data_is_not_available">データは利用できません</string>
     <string name="shared_string_remove">削除</string>
     <string name="shared_string_read_more">続きを読む</string>
@@ -2123,7 +2123,7 @@ POIの更新は利用できません</string>
     <string name="add_time_span">時間間隔の追加</string>
     <string name="shared_string_select">選択</string>
     <string name="switch_start_finish">出発地と目的地の入れ替え</string>
-    <string name="rendering_attr_hideIcons_name">POIアイコンを非表示</string>
+    <string name="rendering_attr_hideIcons_name">POIアイコン</string>
     <string name="item_removed">項目の削除</string>
     <string name="n_items_removed">項目は削除されました</string>
     <string name="shared_string_undo_all">すべて元に戻す</string>
@@ -2263,4 +2263,32 @@ POIの更新は利用できません</string>
 	<string name="use_osm_live_routing">OSMライブナビゲーション</string>
     <string name="access_no_destination">目的地が設定されていません</string>
     <string name="access_disable_offroute_recalc">ルートを外れてもリルート(再設定)を行わない</string>
+    <string name="access_disable_wrong_direction_recalc">誤った方向に進んだ場合リルートしない</string>
+    <string name="access_disable_wrong_direction_recalc_descr">目的地の方向と逆進した場合、自動的にルートを再計算されるのを防ぎます</string>
+    <string name="access_smart_autoannounce">スマート音声案内</string>
+    <string name="access_smart_autoannounce_descr">目的地への方向が変更されたときのみ通知します</string>
+    <string name="access_autoannounce_period">自動音声案内間隔</string>
+    <string name="access_autoannounce_period_descr">音声案内間隔の最小時間を設定します</string>
+    <string name="access_default_color">既定色</string>
+    <string name="access_category_choice">カテゴリ選択</string>
+    <string name="access_hint_enter_name">名前の入力</string>
+    <string name="access_hint_enter_category">カテゴリの入力</string>
+    <string name="access_hint_enter_description">詳細の入力</string>
+    <string name="access_collapsed_list">たたまれたリスト</string>
+    <string name="access_expanded_list">展開されたリスト</string>
+    <string name="access_empty_list">空のリスト</string>
+    <string name="access_tree_list">ツリーリスト</string>
+    <string name="access_shared_string_not_installed">インストールされていません</string>
+    <string name="access_widget_expand">展開</string>
+    <string name="access_sort">並べ替え</string>
+    <string name="map_mode">マップモード</string>
+    <string name="number_of_gpx_files_selected_pattern">%s個のGPXファイルが選択済み</string>
+    <string name="rendering_value_thin_name">細字</string>
+    <string name="rendering_value_medium_name">標準</string>
+    <string name="rendering_value_bold_name">太字</string>
+    <string name="lang_es_us">スペイン語 (アメリカ)</string>
+    <string name="lang_ast">アストゥリア語</string>
+    <string name="lang_en_gb">英語 (イギリス)</string>
+    <string name="lang_be_BY">ベラルーシ語 (ラテン)</string>
+    <string name="lang_kn">カンナダ語</string>
     </resources>
