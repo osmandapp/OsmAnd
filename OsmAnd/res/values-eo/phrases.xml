@@ -44,7 +44,7 @@
 	<string name="poi_user_defined_other">Propre difinitaj</string>
 
 	<string name="poi_bakery">Panejo</string>
-	<string name="poi_palaeontological_site">Paleontologa ejo</string>
+	<string name="poi_palaeontological_site">Paleontologa fosejo</string>
 
 	<string name="poi_alcohol">Alkohol-vendejo</string>
 	<string name="poi_cheese">Framaĝ-vendejo</string>
@@ -650,4 +650,30 @@
 	<string name="poi_ice_skating">Glitkurado</string>
 	<string name="poi_ice_stock">Glitŝtonludo bavara (Eisstockschießen)</string>
 	<string name="poi_korfbal">Korfpilkado (nederlanda korbopilkado)</string>
+	<string name="poi_sport_motor">Motorsporto</string>
+	<string name="poi_sport_multi">Plur-sporta ludejo</string>
+	<string name="poi_orienteering">Orientiĝa kuro</string>
+	<string name="poi_paddle_tennis">Pagaj-teniso (paddle tennis)</string>
+	<string name="poi_paragliding">Glisparaŝutado</string>
+	<string name="poi_pelota">Pilkludo (pelota)</string>
+	<string name="poi_racquet">Rakedopilkado</string>
+	<string name="poi_roller_skating">Rolŝuado</string>
+	<string name="poi_rowing">Remado</string>
+	<string name="poi_rugby_union">Rugbeo 15</string>
+	<string name="poi_rugby_league">Rugbeo 13</string>
+	<string name="poi_sailing">Velado</string>
+	<string name="poi_shooting">Pafada sporto</string>
+	<string name="poi_skating">Rolŝuado aŭ glitkurado</string>
+	<string name="poi_skateboard">Rultabulumado</string>
+	<string name="poi_skiing">Skiado</string>
+	<string name="poi_soccer">Futbalo</string>
+	<string name="poi_surfing">Ondorajdado</string>
+	<string name="poi_swimming">Naĝado</string>
+	<string name="poi_tennis">Teniso</string>
+	<string name="poi_toboggan">Skeletonado (toboganado)</string>
+	<string name="poi_volleyball">Flugpilkado</string>
+
+	<string name="poi_artwork">Artverko</string>
+	<string name="poi_archaeological_site">Arĥeologia fosejo</string>
+	<string name="poi_battlefield">Batalejo</string>
 	</resources>
