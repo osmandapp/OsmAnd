@@ -568,7 +568,7 @@
 	<string name="poi_veterinary">Bestokuracistejo</string>
 	<string name="poi_audiologist">Aŭdologo</string>
 	<string name="poi_nursing_home">Domo de permanenta zorgado</string>
-	<string name="poi_baby_hatch">Benokesto</string>
+	<string name="poi_baby_hatch">Bebokesto</string>
 	<string name="poi_sanatorium">Kuracdomo</string>
 	<string name="poi_healthcare_alternative">Medicino alternativa</string>
 	<string name="poi_blood_bank">Sangobanko</string>
@@ -676,4 +676,30 @@
 	<string name="poi_artwork">Artverko</string>
 	<string name="poi_archaeological_site">Arĥeologia fosejo</string>
 	<string name="poi_battlefield">Batalejo</string>
+	<string name="poi_boundary_stone">Limŝtono</string>
+	<string name="poi_historic_cannon">Pafilego historia</string>
+	<string name="poi_city_gate">Pordego urba</string>
+	<string name="poi_fort">Fortikaĵo</string>
+	<string name="poi_historic_ruins">Ruino historia</string>
+	<string name="poi_rune_stone">Runŝtono</string>
+	<string name="poi_wreck">Ruinoj de ŝipo</string>
+	<string name="poi_historic_ship">Ŝipo historia</string>
+	<string name="poi_historic_mine">Minejo historia</string>
+	<string name="poi_theme_park">Amuzparko</string>
+
+	<string name="poi_attraction">Turisma vidindaĵo</string>
+<string name="poi_tourism_yes">Turisma objekto</string>
+	<string name="poi_attraction_amusement_ride">Atrakcio</string>
+	<string name="poi_attraction_big_wheel">Spektoradego</string>
+	<string name="poi_attraction_carousel">Karuselo</string>
+	<string name="poi_attraction_roller_coaster">Onda fervojo</string>
+	<string name="poi_attraction_slide">Deglitejo</string>
+	<string name="poi_attraction_summer_toboggan">Sumera toboganejo</string>
+	<string name="poi_attraction_swing_carousel">Karuselo ĉenseĝa</string>
+	<string name="poi_attraction_train">Vagonareto (atrakcio)</string>
+	<string name="poi_attraction_water_slide">Akvo-deglitejo</string>
+
+	<string name="poi_religion_voodoo">Voduo</string>
+	<string name="poi_religion_taoist">Daŭismo</string>
+	<string name="poi_alpine_hut">Montara kabano</string>
 	</resources>
