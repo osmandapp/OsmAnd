@@ -1,26 +1,72 @@
 package net.osmand.search.example.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.util.MapUtils;
 
 //immutable object
 public class SearchPhrase {
 	
 	private List<SearchWord> words = new ArrayList<>();
 	private String lastWord = "";
-	private CollatorStringMatcher sm;
+	private NameStringMatcher sm;
 	private SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
+	private String lastWordTrim;
 	
 	public SearchPhrase(SearchSettings settings) {
 		this.settings = settings;
 	}
+	
+	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
+		SearchPhrase sp = new SearchPhrase(settings);
+		String atext = text;
+		List<SearchWord> leftWords = this.words;
+		String thisTxt = getText(true);
+		if (text.startsWith(thisTxt)) {
+			// string is longer
+			atext = text.substring(getText(false).length());
+			sp.words = new ArrayList<>(this.words);
+			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
+		}
+		if (!atext.contains(",")) {
+			sp.lastWord = atext;
+			
+		} else {
+			String[] ws = atext.split(",");
+			for (int i = 0; i < ws.length - 1; i++) {
+				boolean unknown = true;
+				if (ws[i].trim().length() > 0) {
+					if (leftWords.size() > 0) {
+						if (leftWords.get(0).getWord().equalsIgnoreCase(ws[i].trim())) {
+							sp.words.add(leftWords.get(0));
+							leftWords = leftWords.subList(1, leftWords.size());
+							unknown = false;
+						}
+					}
+					if(unknown) {
+						sp.words.add(new SearchWord(ws[i].trim()));
+					}
+					// sp.text += ws[i] + ", ";
+				}
+			}
+			sp.lastWord = ws[ws.length - 1];
+		}
+		sp.lastWordTrim = sp.lastWord.trim();
+		//sp.text = sp.text.trim();
+		return sp;
+	}
+	
 
 	public List<SearchWord> getWords() {
 		return words;
@@ -45,11 +91,8 @@ public class SearchPhrase {
 	public SearchPhrase selectWord(SearchResult res) {
 		SearchPhrase sp = new SearchPhrase(this.settings);
 		sp.words.addAll(this.words);
-		SearchWord sw = new SearchWord(res.mainName.trim(), res);
+		SearchWord sw = new SearchWord(res.localeName.trim(), res);
 		sp.words.add(sw);
-		// sp.text = this.text + sw.getWord() + ", ";
-		// TODO FIX
-//		sp.text = this.text + " " + sw.getWord() + ", ";
 		return sp;
 	}
 	
@@ -84,11 +127,14 @@ public class SearchPhrase {
 	
 	
 	
-	public StringMatcher getNameStringMatcher() {
+	 
+	
+	
+	public NameStringMatcher getNameStringMatcher() {
 		if(sm != null) {
 			return sm;
 		}
-		sm = new CollatorStringMatcher(lastWord, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		sm = new NameStringMatcher(lastWordTrim, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		return sm;
 	}
 	
@@ -140,9 +186,28 @@ public class SearchPhrase {
 	
 	
 	public String getLastWord() {
-		return lastWord;
+		return lastWordTrim;
+	}
+	
+	
+	public SearchWord getLastSelectedWord() {
+		if(words.isEmpty()) {
+			return null;
+		}
+		return words.get(words.size() - 1);
 	}
 
+	
+	public LatLon getWordLocation() {
+		for(int i = words.size() - 1; i >= 0; i--) {
+			SearchWord sw = words.get(i);
+			if(sw.getLocation() != null) {
+				return sw.getLocation();
+			}
+		}
+		return null;
+	}
+	
 	public LatLon getLastTokenLocation() {
 		for(int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
@@ -154,50 +219,58 @@ public class SearchPhrase {
 		return settings.getOriginalLocation();
 	}
 
-	
-	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
-		SearchPhrase sp = new SearchPhrase(settings);
-		String atext = text;
-		List<SearchWord> leftWords = this.words;
-		String thisTxt = getText(true);
-		if (text.startsWith(thisTxt)) {
-			// string is longer
-			atext = text.substring(getText(false).length());
-			sp.words = new ArrayList<>(this.words);
-			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
-		}
-		if (!atext.contains(",")) {
-			sp.lastWord = atext;
-		} else {
-			String[] ws = atext.split(",");
-			for (int i = 0; i < ws.length - 1; i++) {
-				boolean unknown = true;
-				if (ws[i].trim().length() > 0) {
-					if (leftWords.size() > 0) {
-						if (leftWords.get(0).getWord().equalsIgnoreCase(ws[i].trim())) {
-							sp.words.add(leftWords.get(0));
-							leftWords = leftWords.subList(1, leftWords.size());
-							unknown = false;
-						}
-					}
-					if(unknown) {
-						sp.words.add(new SearchWord(ws[i].trim()));
-					}
-					// sp.text += ws[i] + ", ";
-				}
-			}
-			sp.lastWord = ws[ws.length - 1];
-		}
-		//sp.text = sp.text.trim();
-		return sp;
-	}
-
-
 
 	public void selectFile(BinaryMapIndexReader object) {
 		if(indexes == null) {
 			indexes = new ArrayList<>();
 		}
 		this.indexes.add(object);
+	}
+
+	public void sortFiles() {
+		if(indexes == null) {
+			indexes = new ArrayList<>(getOfflineIndexes());
+		}
+		final LatLon ll = getLastTokenLocation();
+		if(ll != null) {
+			Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
+
+				@Override
+				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
+					LatLon rc1 = o1.getRegionCenter();
+					LatLon rc2 = o2.getRegionCenter();
+					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
+					double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
+					return Double.compare(d1, d2);
+				}
+			});
+		}
+	}
+	
+	public static class NameStringMatcher implements StringMatcher {
+
+		private CollatorStringMatcher sm;
+
+		public NameStringMatcher(String lastWordTrim, StringMatcherMode checkStartsFromSpace) {
+			sm = new CollatorStringMatcher(lastWordTrim, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		}
+		
+		public boolean matches(Collection<String> map) {
+			if(map == null) {
+				return false;
+			}
+			for(String v : map) {
+				if(sm.matches(v)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public boolean matches(String name) {
+			return sm.matches(name);
+		}
+		
 	}
 }

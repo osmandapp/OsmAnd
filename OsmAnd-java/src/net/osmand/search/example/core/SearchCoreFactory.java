@@ -1,33 +1,61 @@
 package net.osmand.search.example.core;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
+import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
 import net.osmand.search.example.SearchUICore.SearchResultMatcher;
+import net.osmand.search.example.core.SearchPhrase.NameStringMatcher;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 
 public class SearchCoreFactory {
-	// TODO sort offline indexes by location
-	// TODO test add and delete characters
+ 
+	// TODO display more (+)
+
+	// TODO streets by city
+	// TODO search only closest file
+	// TODO limit to one file if city/street/village/poi selected
+	
 	// TODO add location parse
 	// TODO add url parse (geo)
-	// TODO ? boolean hasSameConstantWords = p.hasSameConstantWords(this.phrase);
-	// TODO amenity types
+	// TODO amenity by name
 	// TODO amenity by type
-	// TODO streets by city
-	// TODO buildings by street
-	// TODO display closest city to villages
+
+	// TODO display closest city to villages (and city to street)
 	// TODO automatically increase radius if nothing found
+	// TODO buildings interpolation
+	// TODO show buildings if street is one or default ( <CITY>, CITY (den ilp), 1186RM)
+	// TODO exclude duplicate streets/cities...
+
+	// TODO map creator (setting for locale)
+	
+	// TODO add full text search with comma
+	// TODO add full text search without comma
+
 	
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 		@Override
@@ -52,7 +80,7 @@ public class SearchCoreFactory {
 		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			return 10;
+			return 1;
 		}
 	}
 	
@@ -66,14 +94,16 @@ public class SearchCoreFactory {
 			for (BinaryMapIndexReader bmir : phrase.getOfflineIndexes()) {
 				if (bmir.getRegionCenter() != null) {
 					SearchResult sr = new SearchResult(phrase);
-					sr.mainName = bmir.getRegionName();
+					sr.localeName = bmir.getRegionName();
 					sr.object = bmir;
+					sr.file = bmir;
+					sr.priority = 3;
 					sr.objectType = ObjectType.REGION;
 					sr.location = bmir.getRegionCenter();
 					sr.preferredZoom = 6;
-					if (phrase.getLastWord().length() <= 2 && phrase.isNoSelectedType()) {
+					if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
-					} else if (phrase.getNameStringMatcher().matches(sr.mainName)) {
+					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
 					}
 				}
@@ -83,13 +113,16 @@ public class SearchCoreFactory {
 		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
+			if(p.getWordLocation() != null) {
+				return -1;
+			}
 			return 1;
 		}
 	}
 	
 	public static class SearchAddressByNameAPI extends SearchBaseAPI {
 		
-		private static final int DEFAULT_BBOX_RADIUS = 1000*10000;
+		private static final int DEFAULT_BBOX_RADIUS = 1000*1000;
 		private static final int LIMIT = 100;
 
 		public boolean isLastWordPoi(SearchPhrase p) {
@@ -103,28 +136,29 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (!phrase.hasObjectType(ObjectType.REGION)) {
-				return false;
-			}
+//			if (!phrase.hasObjectType(ObjectType.REGION)) {
+//				return false;
+//			}
 			if (phrase.getLastWord().isEmpty()) {
 				return false;
 			}
-			// (search streets in neighboor cities for radiusLevel > 2)
-			if (isLastWordPoi(phrase) || isNoSelectedType(phrase) ||
-					phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || 
+			// (search streets in neighbor cities for radiusLevel > 2)
+			if (phrase.isNoSelectedType() ||
+					phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) ||  // ?
 					phrase.isLastWord(ObjectType.REGION) || phrase.getRadiusLevel() >= 2) {
 				int letters = phrase.getLastWord().length() / 3 + 1;
 				final boolean locSpecified = false; // phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
-				final QuadRect streetBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS * letters, phrase.getRadiusLevel(),
+				final QuadRect streetBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS, phrase.getRadiusLevel(),
 						phrase.getLastTokenLocation());
-				final QuadRect postcodeBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS * 2 * letters, phrase.getRadiusLevel(),
+				final QuadRect postcodeBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS * 5, phrase.getRadiusLevel(),
 						phrase.getLastTokenLocation());
-				final QuadRect villagesBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS * letters, phrase.getRadiusLevel(),
+				final QuadRect villagesBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS * 5, phrase.getRadiusLevel(),
 						phrase.getLastTokenLocation());
-				final QuadRect cityBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS * 4 * letters, phrase.getRadiusLevel(),
+				final QuadRect cityBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS * 10, phrase.getRadiusLevel(),
 						phrase.getLastTokenLocation());
 				final int priority = isNoSelectedType(phrase) ? 1 : 3;
+				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1]; 
 				ResultMatcher<MapObject> rm = new ResultMatcher<MapObject>() {
 					int limit = 0;
 					@Override
@@ -134,7 +168,9 @@ public class SearchCoreFactory {
 						}
 						SearchResult sr = new SearchResult(phrase);
 						sr.object = object;
-						sr.mainName = object.getName();
+						sr.file = currentFile[0];
+						sr.localeName = object.getName(phrase.getSettings().getLang());
+						sr.otherNames = object.getAllNames(true);
 						sr.location = object.getLocation();
 						sr.priorityDistance = 1;
 						sr.priority = priority;
@@ -179,10 +215,11 @@ public class SearchCoreFactory {
 					}
 				};
 				for(BinaryMapIndexReader r : phrase.getOfflineIndexes()) {
+					currentFile[0] = r;
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, 
-							phrase.getLastWord().toLowerCase(), StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+							phrase.getLastWord().toLowerCase(), StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					if(locSpecified) {
-						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), DEFAULT_BBOX_RADIUS * 4 * letters);
+						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), DEFAULT_BBOX_RADIUS * 20);
 					}
 					r.searchAddressDataByName(req);
 				}
@@ -192,11 +229,8 @@ public class SearchCoreFactory {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if (isNoSelectedType(p)) {
+			if (p.isNoSelectedType()) {
 				return 5;
-			}
-			if (isLastWordPoi(p)) {
-				return 8;
 			}
 			return 10;
 		}
@@ -216,7 +250,63 @@ public class SearchCoreFactory {
 		// }
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			return 10;
+			return -1;
+		}
+	}
+	
+	
+	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
+
+		
+		private Map<String, PoiType> translatedNames;
+		private List<PoiFilter> topVisibleFilters;
+		private TreeSet<AbstractPoiType> results;
+
+		public SearchAmenityTypesAPI(MapPoiTypes types) {
+			translatedNames = types.getAllTranslatedNames(false);
+			topVisibleFilters = types.getTopVisibleFilters();
+			final net.osmand.Collator clt = OsmAndCollator.primaryCollator();
+			results = new TreeSet<>(new Comparator<AbstractPoiType>() {
+
+				@Override
+				public int compare(AbstractPoiType o1, AbstractPoiType o2) {
+					return clt.compare(o1.getTranslation(), o2.getTranslation());
+				}
+			});
+		}
+		
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			results.clear();
+			if(Algorithms.isEmpty(phrase.getLastWord())) {
+				results.addAll(topVisibleFilters);
+			} else {
+				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
+				StringMatcher nm = phrase.getNameStringMatcher();
+				while (it.hasNext()) {
+					Entry<String, PoiType> e = it.next();
+					if (nm.matches(e.getKey())) {
+						results.add(e.getValue());
+					}
+				}
+			}
+			for(AbstractPoiType p : results) {
+				SearchResult res = new SearchResult(phrase);
+				res.localeName = p.getTranslation();
+				res.object = p;
+				res.priority = 2;
+				res.objectType = ObjectType.POI_TYPE;
+				resultMatcher.publish(res);
+			}
+			return true;
+		}
+		
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			if(p.hasObjectType(ObjectType.POI) ||p.hasObjectType(ObjectType.POI_TYPE)) {
+				return -1;
+			}
+			return 1;
 		}
 	}
 	
@@ -250,7 +340,7 @@ public class SearchCoreFactory {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			if(isLastWordCityGroup(phrase)) {
 				// search all streets 
-				// TODO LIMIT 100 * radiusLevel -  priority 1, distPriority 0 (alphabetic)
+				// LIMIT 100 * radiusLevel -  priority 1, distPriority 0 (alphabetic)
 			}
 			return true;
 		}
@@ -270,22 +360,87 @@ public class SearchCoreFactory {
 	
 	
 	public static class SearchBuildingAndIntersectionsByStreetAPI extends SearchBaseAPI {
+		Street cacheBuilding;
 		
 		@Override
-		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			if(isLastWordStreet(phrase)) {
-				// search all buildings 
-				// TODO NO LIMIT - priority 1, distPriority 0 (alphabetic)
+		public boolean search(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
+			if(phrase.isLastWord(ObjectType.STREET)) {
+				Street s =  (Street) phrase.getLastSelectedWord().getResult().object;
+				BinaryMapIndexReader file = phrase.getLastSelectedWord().getResult().file;
+				String lw = phrase.getLastWord();
+				NameStringMatcher sm = phrase.getNameStringMatcher();
+				if (cacheBuilding != s) {
+					cacheBuilding = s;
+					SearchRequest<Building> sr = BinaryMapIndexReader
+							.buildAddressRequest(new ResultMatcher<Building>() {
+
+								@Override
+								public boolean publish(Building object) {
+									return true;
+								}
+
+								@Override
+								public boolean isCancelled() {
+									return resultMatcher.isCancelled();
+								}
+							});
+					file.preloadBuildings(s, sr);
+					Collections.sort(s.getBuildings(), new Comparator<Building>() {
+
+						@Override
+						public int compare(Building o1, Building o2) {
+							int i1 = Algorithms.extractFirstIntegerNumber(o1.getName());
+							int i2 = Algorithms.extractFirstIntegerNumber(o2.getName());
+							if (i1 == i2) {
+								return 0;
+							}
+							return Algorithms.compare(i1, i2);
+						}
+					});
+				}
+				for(Building b : s.getBuildings()) {
+					SearchResult res = new SearchResult(phrase);
+					if(!sm.matches(b.getName())) {
+						continue;
+					}
+					res.localeName = b.getName(phrase.getSettings().getLang());
+					res.otherNames = b.getAllNames(true);
+					res.object = b;
+					res.file = file;
+					res.objectType = ObjectType.HOUSE;
+					res.location = b.getLocation();
+					res.preferredZoom = 16;
+					resultMatcher.publish(res);
+				}
+				if(!Algorithms.isEmpty(lw) && !Character.isDigit(lw.charAt(0))) {
+					for(Street street : s.getIntersectedStreets()) {
+						SearchResult res = new SearchResult(phrase);
+						if(!sm.matches(street.getName()) && !sm.matches(street.getAllNames(true))) {
+							continue;
+						}
+						res.otherNames = street.getAllNames(true);
+						res.localeName = street.getName(phrase.getSettings().getLang());
+						res.object = street;
+						res.file = file;
+						res.objectType = ObjectType.STREET_INTERSECTION;
+						res.location = street.getLocation();
+						res.preferredZoom = 16;
+						resultMatcher.publish(res);
+					}
+				}
+				
+				
+				
 			}
 			return true;
 		}
 
-		public boolean isLastWordStreet(SearchPhrase p ) {
-			return p.isLastWord(ObjectType.STREET);
-		}
 		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
+			if(!p.isLastWord(ObjectType.STREET)) {
+				return -1;
+			}
 			return 1;
 		}
 	}
