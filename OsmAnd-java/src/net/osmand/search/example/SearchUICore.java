@@ -68,8 +68,8 @@ public class SearchUICore {
 	
 	public void init() {
 		apis.add(new SearchCoreFactory.SearchAmenityTypesAPI(poiTypes));
+		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes));
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
-		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI());
 		apis.add(new SearchCoreFactory.SearchStreetByCityAPI());
 		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
 		apis.add(new SearchCoreFactory.SearchRegionByNameAPI());

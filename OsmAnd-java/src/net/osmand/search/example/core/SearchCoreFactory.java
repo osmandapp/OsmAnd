@@ -14,7 +14,9 @@ import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
@@ -24,6 +26,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.search.example.SearchUICore.SearchResultMatcher;
@@ -33,8 +36,10 @@ import net.osmand.util.MapUtils;
 
 
 public class SearchCoreFactory {
- 
 	// TODO display more (+)
+	// TODO fix search bbox (+) 
+	// TODO fix search amenity by type (category/additional)
+	
 
 	// TODO streets by city
 	// TODO search only closest file
@@ -43,13 +48,14 @@ public class SearchCoreFactory {
 	// TODO add location parse
 	// TODO add url parse (geo)
 	// TODO amenity by name
-	// TODO amenity by type
+
 
 	// TODO display closest city to villages (and city to street)
 	// TODO automatically increase radius if nothing found
 	// TODO buildings interpolation
 	// TODO show buildings if street is one or default ( <CITY>, CITY (den ilp), 1186RM)
 	// TODO exclude duplicate streets/cities...
+	// TODO display results momentarily
 
 	// TODO map creator (setting for locale)
 	
@@ -75,7 +81,8 @@ public class SearchCoreFactory {
 			double topLeftY = ty - coeff;
 			double bottomRightX = tx + coeff;
 			double bottomRightY = ty + coeff;
-			return new QuadRect(topLeftX, bottomRightY, bottomRightX, topLeftY);
+			double pw = MapUtils.getPowZoom(31 - SearchRequest.ZOOM_TO_SEARCH_POI);
+			return new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
 		}
 		
 		@Override
@@ -146,8 +153,8 @@ public class SearchCoreFactory {
 			if (phrase.isNoSelectedType() ||
 					phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) ||  // ?
 					phrase.isLastWord(ObjectType.REGION) || phrase.getRadiusLevel() >= 2) {
-				int letters = phrase.getLastWord().length() / 3 + 1;
-				final boolean locSpecified = false; // phrase.getLastTokenLocation() != null;
+				// int letters = phrase.getLastWord().length() / 3 + 1;
+				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
 				final QuadRect streetBbox = getBBoxToSearch(DEFAULT_BBOX_RADIUS, phrase.getRadiusLevel(),
 						phrase.getLastTokenLocation());
@@ -169,7 +176,7 @@ public class SearchCoreFactory {
 						SearchResult sr = new SearchResult(phrase);
 						sr.object = object;
 						sr.file = currentFile[0];
-						sr.localeName = object.getName(phrase.getSettings().getLang());
+						sr.localeName = object.getName(phrase.getSettings().getLang(), true);
 						sr.otherNames = object.getAllNames(true);
 						sr.location = object.getLocation();
 						sr.priorityDistance = 1;
@@ -311,25 +318,92 @@ public class SearchCoreFactory {
 	}
 	
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
+		
+		private MapPoiTypes types;
+
+		public SearchAmenityByTypeAPI(MapPoiTypes types) {
+			this.types = types;
+		}
 		public boolean isLastWordPoi(SearchPhrase p ) {
 			return p.isLastWord(ObjectType.POI_TYPE);
 		}
 		
 		@Override
-		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			if(isLastWordPoi(phrase)) {
+		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
+			if(phrase.isLastWord(ObjectType.POI_TYPE)) {
+				final AbstractPoiType pt = (AbstractPoiType) phrase.getLastSelectedWord().getResult().object;
 				QuadRect bbox = getBBoxToSearch(10000, phrase.getRadiusLevel(), phrase.getLastTokenLocation());
-				// TODO NO LIMIT , BBOX - result priority 5, distPriority 1
+				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
+				final BinaryMapIndexReader[] selected = new BinaryMapIndexReader[1];
+				final NameStringMatcher ns = phrase.getNameStringMatcher();
+				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest((int)bbox.left, (int)bbox.right, (int)bbox.top, (int)bbox.bottom, -1,
+						new SearchPoiTypeFilter() {
+							
+							@Override
+							public boolean isEmpty() {
+								return false;
+							}
+							
+							@Override
+							public boolean accept(PoiCategory type, String subcategory) {
+								PoiType st = types.getPoiTypeByKey(subcategory);
+								if(st != null && pt.getKeyName().equals(st.getKeyName())) {
+									return true;
+								}
+								return false;
+							}
+						}, 
+						new ResultMatcher<Amenity>() {
+					
+					@Override
+					public boolean publish(Amenity object) {
+						SearchResult res = new SearchResult(phrase);
+						res.localeName = object.getName(phrase.getSettings().getLang(), true);
+						res.otherNames = object.getAllNames(true);
+						if(!Algorithms.isEmpty(phrase.getLastWord()) &&
+								!(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
+							return false;
+						}
+						if(Algorithms.isEmpty(res.localeName)) {
+							AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
+							if(st != null) {
+								res.localeName = st.getTranslation();
+							} else {
+								res.localeName = "sub:" + object.getSubType();
+							}
+						}
+						res.object = object;
+						res.preferredZoom = 17;
+						res.file = selected[0];
+						res.location = object.getLocation();
+						res.priority = 5;
+						res.priorityDistance = 1;
+						res.objectType = ObjectType.POI;
+						resultMatcher.publish(res);
+						return false;
+					}
+					
+					@Override
+					public boolean isCancelled() {
+						return resultMatcher.isCancelled();
+					}
+				});
+				for(BinaryMapIndexReader o : oo) {
+					selected[0] = o;
+					
+					 o.searchPoi(req);
+				}
 			}
 			return true;
 		}
 	
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if(isLastWordPoi(p)) {
+			if(p.isLastWord(ObjectType.POI_TYPE) && 
+					p.getLastTokenLocation() != null) {
 				return 1;
 			}
-			return 10;
+			return -1;
 		}
 	}
 	
@@ -403,13 +477,13 @@ public class SearchCoreFactory {
 					if(!sm.matches(b.getName())) {
 						continue;
 					}
-					res.localeName = b.getName(phrase.getSettings().getLang());
+					res.localeName = b.getName(phrase.getSettings().getLang(), true);
 					res.otherNames = b.getAllNames(true);
 					res.object = b;
 					res.file = file;
 					res.objectType = ObjectType.HOUSE;
 					res.location = b.getLocation();
-					res.preferredZoom = 16;
+					res.preferredZoom = 17;
 					resultMatcher.publish(res);
 				}
 				if(!Algorithms.isEmpty(lw) && !Character.isDigit(lw.charAt(0))) {
@@ -419,7 +493,7 @@ public class SearchCoreFactory {
 							continue;
 						}
 						res.otherNames = street.getAllNames(true);
-						res.localeName = street.getName(phrase.getSettings().getLang());
+						res.localeName = street.getName(phrase.getSettings().getLang(), true);
 						res.object = street;
 						res.file = file;
 						res.objectType = ObjectType.STREET_INTERSECTION;
