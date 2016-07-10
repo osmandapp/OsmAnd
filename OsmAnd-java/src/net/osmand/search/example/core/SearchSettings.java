@@ -14,10 +14,12 @@ public class SearchSettings {
 	private List<BinaryMapIndexReader> offlineIndexes = new ArrayList<>();
 	private int radiusLevel = 1;
 	private int totalLimit = -1;
+	private String lang;
 	
 	public SearchSettings(SearchSettings s) {
 		if(s != null) {
 			this.radiusLevel = s.radiusLevel;
+			this.lang = s.lang;
 			this.totalLimit = s.totalLimit;
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
@@ -37,8 +39,30 @@ public class SearchSettings {
 		return radiusLevel;
 	}
 	
+	public String getLang() {
+		return lang;
+	}
+	
+	public SearchSettings setLang(String lang) {
+		SearchSettings s = new SearchSettings(this);
+		s.lang = lang;
+		return s;
+	}
+	
+	public SearchSettings setRadiusLevel(int radiusLevel) {
+		SearchSettings s = new SearchSettings(this);
+		s.radiusLevel = radiusLevel;
+		return s;
+	}
+	
 	public int getTotalLimit() {
 		return totalLimit;
+	}
+	
+	public SearchSettings setTotalLimit(int totalLimit) {
+		SearchSettings s = new SearchSettings(this);
+		s.totalLimit = totalLimit;
+		return s;
 	}
 	
 	public LatLon getOriginalLocation() {
@@ -50,5 +74,6 @@ public class SearchSettings {
 		s.originalLocation = l;
 		return s;
 	}
+
 
 }

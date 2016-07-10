@@ -1,5 +1,8 @@
 package net.osmand.search.example.core;
 
+import java.util.Collection;
+
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 
@@ -9,6 +12,7 @@ public class SearchResult {
 	
 	public Object object;
 	public ObjectType objectType;
+	public BinaryMapIndexReader file;
 	
 	public double priority;
 	public double priorityDistance;
@@ -26,6 +30,8 @@ public class SearchResult {
 	
 	public LatLon location;
 	public int preferredZoom = 15;
-	public String mainName;
+	public String localeName;
+	public Collection<String> otherNames;
+	
 
 }

@@ -19,10 +19,12 @@ import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.example.core.ObjectType;
 import net.osmand.search.example.core.SearchCoreAPI;
 import net.osmand.search.example.core.SearchCoreFactory;
 import net.osmand.search.example.core.SearchPhrase;
+import net.osmand.search.example.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.example.core.SearchResult;
 import net.osmand.search.example.core.SearchSettings;
 import net.osmand.search.example.core.SearchWord;
@@ -38,16 +40,19 @@ public class SearchUICore {
 	private LinkedBlockingQueue<Runnable> taskQueue;
 	private Runnable onResultsComplete = null;
 	private AtomicInteger requestNumber = new AtomicInteger();
-	private int totalLimit = 20; // -1 unlimited
+	private int totalLimit = -1; // -1 unlimited - not used
 	
 	List<SearchCoreAPI> apis = new ArrayList<>();
 	private SearchSettings searchSettings;
+	private MapPoiTypes poiTypes;
 	
 	
-	public SearchUICore(BinaryMapIndexReader[] searchIndexes) {
+	public SearchUICore(MapPoiTypes poiTypes, String locale, BinaryMapIndexReader[] searchIndexes) {
+		this.poiTypes = poiTypes;
 		List<BinaryMapIndexReader> searchIndexesList = Arrays.asList(searchIndexes);
 		taskQueue = new LinkedBlockingQueue<Runnable>();
 		searchSettings = new SearchSettings(searchIndexesList);
+		searchSettings = searchSettings.setLang(locale);
 		phrase = new SearchPhrase(searchSettings);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 		init();
@@ -62,11 +67,11 @@ public class SearchUICore {
 	}
 	
 	public void init() {
-//		apis.add(new SearchAmenityByNameAPI());
-//		apis.add(new SearchAmenityByTypeAPI());
-//		apis.add(new SearchAddressByNameAPI());
-//		apis.add(new SearchStreetByCityAPI());
-//		apis.add(new SearchBuildingAndIntersectionsByStreetAPI());
+		apis.add(new SearchCoreFactory.SearchAmenityTypesAPI(poiTypes));
+		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
+		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI());
+		apis.add(new SearchCoreFactory.SearchStreetByCityAPI());
+		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
 		apis.add(new SearchCoreFactory.SearchRegionByNameAPI());
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI());
 	}
@@ -84,11 +89,10 @@ public class SearchUICore {
 	}
 	
 	
-	public void setSearchLocation(LatLon l) {
-		searchSettings = searchSettings.setOriginalLocation(l);
+	public void updateSettings(SearchSettings settings) {
+		searchSettings = settings;
 	}
 	
-
 	private List<SearchResult> filterCurrentResults(SearchPhrase phrase) {
 		List<SearchResult> rr = new ArrayList<>();
 		List<SearchResult> l = currentSearchResults;
@@ -101,9 +105,8 @@ public class SearchUICore {
 	}
 	
 	private boolean filterOneResult(SearchResult object, SearchPhrase phrase) {
-		StringMatcher nameStringMatcher = phrase.getNameStringMatcher();
-		
-		return nameStringMatcher.matches(object.mainName);
+		NameStringMatcher nameStringMatcher = phrase.getNameStringMatcher();
+		return nameStringMatcher.matches(object.localeName) || nameStringMatcher.matches(object.otherNames); 
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
@@ -127,7 +130,7 @@ public class SearchUICore {
 					if(rm.isCancelled()) {
 						return;
 					}
-					Thread.sleep(200); // FIXME
+					Thread.sleep(200); // FIXME remove timeout
 					searchInBackground(phrase, rm);
 					if (!rm.isCancelled()) {
 						sortSearchResults(phrase, rm.getRequestResults());
@@ -154,6 +157,7 @@ public class SearchUICore {
 				phrase.selectFile((BinaryMapIndexReader) sw.getResult().object);
 			}
 		}
+		phrase.sortFiles();
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
 
@@ -166,6 +170,9 @@ public class SearchUICore {
 		for(SearchCoreAPI api : lst) {
 			if(matcher.isCancelled()) {
 				break;
+			}
+			if(api.getSearchPriority(phrase) == -1) {
+				continue;
 			}
 			try {
 				api.search(phrase, matcher);
@@ -194,7 +201,7 @@ public class SearchUICore {
 				if(cmp != 0) {
 					return cmp;
 				}
-				return clt.compare(o1.mainName, o2.mainName);
+				return clt.compare(o1.localeName, o2.localeName);
 			}
 		});
 	}

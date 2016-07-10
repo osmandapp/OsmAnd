@@ -92,6 +92,18 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 		return l;
 	}
+	
+	public List<String> getAllNames(boolean transliterate) {
+		List<String> l = new ArrayList<String>();
+		String enName = getEnName(transliterate); 
+		if (!Algorithms.isEmpty(enName)) {
+			l.add(enName);
+		}
+		if (names != null) {
+			l.addAll(names.values());
+		}
+		return l;
+	}
 
 	public void copyNames(String otherName, String otherEnName, Map<String, String> otherNames, boolean overwrite) {
 		if (!Algorithms.isEmpty(otherName) && (overwrite || Algorithms.isEmpty(name))) {
