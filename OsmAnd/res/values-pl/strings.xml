@@ -203,7 +203,7 @@
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Przestarzały format danych \'\'{0}\'\' nie jest wspierany</string>
     <string name="poi_filter_car_aid">Pomoc drogowa</string>
-    <string name="poi_filter_closest_poi">Pobliskie Użyteczne Miejsca</string>
+    <string name="poi_filter_closest_poi">Pobliskie użyteczne miejsca</string>
     <string name="poi_filter_custom_filter">Własny filtr</string>
     <string name="poi_filter_food_shop">Sklep spożywczy</string>
     <string name="poi_filter_for_tourists">Dla turystów</string>
@@ -313,7 +313,7 @@
     <string name="shared_string_favorites">Ulubione</string>
     <string name="layer_osm_bugs">Notatki OSM (online)</string>
     <string name="layer_transport">Przystanki</string>
-    <string name="layer_poi">Użyteczne Miejsca…</string>
+    <string name="layer_poi">Użyteczne miejsca…</string>
     <string name="layer_map">Zasób mapy…</string>
     <string name="menu_layers">Warstwy mapy</string>
     <string name="context_menu_item_search_poi">Szukaj Miejsc</string>
@@ -363,7 +363,7 @@
     <string name="route_head">Prosto</string>
     <string name="first_time_continue">Kontynuuj</string>
     <string name="first_time_download">Pobierz region</string>
-    <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzanie plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, Użyteczne Miejsca i transport publiczny.</string>
+    <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Większość funkcjonalności programu wymaga danych o wybranym regionie, które można pobrać w menu „Ustawienia„” → „Zarządzaj mapami”. Dzięki nim będzie można przeglądać mapy, wyszukiwać adresy, użyteczne miejsca i transport publiczny.</string>
     <string name="search_poi_location">Wyszukiwanie sygnału…</string>
     <string name="search_near_map">Szukaj w pobliżu aktualnego środka mapy</string>
     <string name="search_nearby">Szukaj w pobliżu</string>
@@ -386,7 +386,7 @@
     <string name="transport_stops_to_pass">przystanków do przejechania</string>
     <string name="transport_route_distance">Długość rozkładu jazdy</string>
     <string name="transport">Transport publiczny</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Zatwierdź</string>
     <string name="show_transport_over_map_description">Pokaż na mapie przystanki transportu publicznego</string>
     <string name="show_transport_over_map">Pokaż przystanki</string>
     <string name="hello">Program do nawigacji satelitarnej OsmAnd</string>
@@ -512,13 +512,13 @@
     <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
     <string name="map_view_3d_descr">Włącz widok 3D mapy</string>
     <string name="map_view_3d">Widok 3D mapy</string>
-    <string name="show_poi_over_map_description">Pokaż Użyteczne Miejsca na mapie (użyj ostatnio wybranego filtru)</string>
-    <string name="show_poi_over_map">Pokaż UM</string>
+    <string name="show_poi_over_map_description">Pokaż użyteczne miejsca na mapie (użyj ostatnio wybranego filtru)</string>
+    <string name="show_poi_over_map">Wyświetlanie użytecznych miejsc</string>
     <string name="map_tile_source_descr">Proszę wybrać zasób map kafelkowych online lub offline</string>
     <string name="map_tile_source">Zasób mapy kafelkowej</string>
     <string name="map_source">Zasób mapy</string>
     <string name="use_internet">Używanie połączenia internetowego</string>
-    <string name="show_location">Pokaż lokalizację</string>
+    <string name="show_location">Pokaż aktualne położenie</string>
 
 
     <string name="show_gps_coordinates_text">Pokaż współrzędne GPS na mapie</string>
@@ -529,8 +529,8 @@
 
     <string name="search_button">Wyszukaj</string>
     <string name="search_activity">Wyszukaj</string>
-    <string name="searchpoi_activity">Wybierz Miejsca</string>
-    <string name="search_POI_level_btn">Znajdź więcej</string>
+    <string name="searchpoi_activity">Wybierz użyteczne miejsca</string>
+    <string name="search_POI_level_btn">Wyszukaj więcej</string>
     <string name="incremental_search_city">Znajdź miejscowość wpisując pierwsze litery</string>
     <string name="incremental_search_street">Znajdź ulicę</string>
     <string name="incremental_search_building">Znajdź numer domu</string>
@@ -1536,7 +1536,7 @@
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pobliskie ulubione</string>
-    <string name="speak_poi">Pobliskie Użyteczne Miejsca</string>
+    <string name="speak_poi">Pobliskie użyteczne miejsca</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
@@ -1602,7 +1602,7 @@
 
     <string name="shared_string_show_all">Wyświetl wszystko</string>
     <string name="coordinates">Współrzędne</string>
-    <string name="shared_string_dismiss">Odrzuć</string>
+    <string name="shared_string_dismiss">Anuluj</string>
     <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
     <string name="use_opengl_render">Renderowanie OpenGL</string>
     <string name="use_opengl_render_descr">Używa sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>
@@ -2190,8 +2190,8 @@
     <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
 	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega zmianie wyznaczonej trasy podczas poruszania się w niewłaściwym kierunku</string>
     <string name="map_widget_battery">Poziom akumulatora</string>
-    <string name="access_direction_audio_feedback_descr">Powiadamia dźwiękiem o kierunku do punktu docelowego</string>
-    <string name="access_direction_audio_feedback">Komunikaty dźwiękowe o kierunku</string>
+    <string name="access_direction_audio_feedback_descr">Wskazuje kierunek do celu używając dźwięku</string>
+    <string name="access_direction_audio_feedback">Dźwiękowe powiadomienia o kierunku</string>
     <string name="lat_lon_pattern">Długość: %1$.6f Szerokość: %2$.6f</string>
     <string name="access_smart_autoannounce_descr">Informuje tylko jeśli zmieni się kierunek do punktu docelowego</string>
     <string name="access_smart_autoannounce">Inteligentne powiadamianie</string>
