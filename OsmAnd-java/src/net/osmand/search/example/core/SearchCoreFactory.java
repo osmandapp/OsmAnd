@@ -127,7 +127,7 @@ public class SearchCoreFactory {
 	public static class SearchAddressByNameAPI extends SearchBaseAPI {
 		
 		private static final int DEFAULT_BBOX_RADIUS = 1000*1000;
-		private static final int LIMIT = 100;
+		private static final int LIMIT = 10000;
 
 		public boolean isLastWordPoi(SearchPhrase p) {
 			return p.isLastWord(ObjectType.POI);
