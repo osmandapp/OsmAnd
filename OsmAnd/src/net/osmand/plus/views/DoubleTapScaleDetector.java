@@ -1,17 +1,15 @@
 package net.osmand.plus.views;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Point;
 import android.graphics.PointF;
-import android.os.Build;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.RotatedTileBox;
 
 import org.apache.commons.logging.Log;
 
@@ -22,10 +20,11 @@ public class DoubleTapScaleDetector {
 	public static final int SCALE_PER_SCREEN = 4;
 
 	private final DoubleTapZoomListener listener;
-	protected final Context ctx;
+	protected final OsmandMapTileView view;
 
 	private int displayHeightPx;
 	private PointF centerScreen;
+	private PointF zoomCenter;
 
 	private boolean mIsInZoomMode = false;
 	private float scale;
@@ -37,20 +36,16 @@ public class DoubleTapScaleDetector {
 	private boolean mIsDoubleTapping;
 	private boolean mScrolling;
 
-	public DoubleTapScaleDetector(Activity ctx, DoubleTapZoomListener listener) {
-		this.ctx = ctx;
+	public DoubleTapScaleDetector(OsmandMapTileView view, DoubleTapZoomListener listener) {
+		this.view = view;
 		this.listener = listener;
-		Display defaultDisplay = ctx.getWindowManager().getDefaultDisplay();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-			Point size = new Point();
-			defaultDisplay.getSize(size);
-			displayHeightPx = size.y;
-			centerScreen = new PointF(size.x / 2, size.y / 2);
-		} else {
-			displayHeightPx = defaultDisplay.getHeight();
-			centerScreen = new PointF(defaultDisplay.getWidth() / 2, defaultDisplay.getHeight() / 2);
-		}
-		final ViewConfiguration configuration = ViewConfiguration.get(ctx);
+
+		RotatedTileBox tileBox = view.getCurrentRotatedTileBox();
+		centerScreen = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		displayHeightPx = tileBox.getPixHeight();
+		zoomCenter = new PointF(centerScreen.x, centerScreen.y);
+
+		final ViewConfiguration configuration = ViewConfiguration.get(view.getContext());
 		int touchSlop = configuration.getScaledTouchSlop();
 		mTouchSlopSquare = touchSlop * touchSlop;
 		int doubleTapSlop = (int) (configuration.getScaledDoubleTapSlop() * 0.5);
@@ -62,6 +57,7 @@ public class DoubleTapScaleDetector {
 			resetEvents();
 			mIsDoubleTapping = false;
 			mScrolling = false;
+			mIsInZoomMode = false;
 			return false;
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -96,7 +92,8 @@ public class DoubleTapScaleDetector {
 					float x = event.getX();
 					float y = event.getY();
 					listener.onGestureInit(x, y, x, y);
-					listener.onZoomStarted(centerScreen);
+					zoomCenter = isXLargeDevice(view.getContext()) ? new PointF(x, y) : centerScreen;
+					listener.onZoomStarted(zoomCenter);
 					return true;
 				} else {
 					firstDown = MotionEvent.obtain(event);
@@ -163,12 +160,17 @@ public class DoubleTapScaleDetector {
 		return calculateSqaredDistance(secondDown, moveEvent) > mDoubleTapSlopSquare;
 	}
 
+	private boolean isXLargeDevice(Context ctx) {
+		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
+		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+	}
+
 	public float getCenterX() {
-		return firstUp.getX();
+		return zoomCenter.x;
 	}
 
 	public float getCenterY() {
-		return firstUp.getY();
+		return zoomCenter.y;
 	}
 
 	public interface DoubleTapZoomListener {

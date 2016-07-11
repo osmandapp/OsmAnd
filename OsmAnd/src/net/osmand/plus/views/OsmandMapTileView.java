@@ -200,18 +200,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		handler = new Handler();
 		baseHandler = new Handler(application.getResourceManager().getRenderingBufferImageThread().getLooper());
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
-		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
-		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
-		doubleTapScaleDetector = new DoubleTapScaleDetector(activity, new MapTileViewMultiTouchZoomListener());
-		twoFingersTapDetector = new TwoFingerTapDetector() {
-			@Override
-			public void onTwoFingerTap() {
-				afterTwoFingersTap = true;
-				if (isZoomingAllowed(getZoom(), -1)) {
-					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
-				}
-			}
-		};
 
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -222,6 +210,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				setPixelDimensions(w, h).build();
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
+
+		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
+		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
+		doubleTapScaleDetector = new DoubleTapScaleDetector(this, new MapTileViewMultiTouchZoomListener());
+		twoFingersTapDetector = new TwoFingerTapDetector() {
+			@Override
+			public void onTwoFingerTap() {
+				afterTwoFingersTap = true;
+				if (isZoomingAllowed(getZoom(), -1)) {
+					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
+				}
+			}
+		};
 	}
 
 	public void setView(View view) {
@@ -1052,6 +1053,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onLongPress(MotionEvent e) {
 			if (multiTouchSupport.isInZoomMode()
 					|| doubleTapScaleDetector.isInZoomMode()
+					|| doubleTapScaleDetector.isDoubleTapping()
 					|| afterTwoFingersTap) {
 				afterTwoFingersTap = false;
 				return;
