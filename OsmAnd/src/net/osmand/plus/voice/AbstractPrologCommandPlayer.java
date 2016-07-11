@@ -263,6 +263,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public void clear() {
 		if(ctx != null && ctx.getSettings() != null) {
 			ctx.getSettings().APPLICATION_MODE.removeListener(this);
+			abandonAudioFocus();
 		}
 		ctx = null;
 		prologSystem = null;
