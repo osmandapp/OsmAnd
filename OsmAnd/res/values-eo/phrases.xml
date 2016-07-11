@@ -705,4 +705,39 @@
 	<string name="poi_guest_house">Pensiono</string>
 	<string name="poi_chalet">Dometo feria</string>
 	<string name="poi_apartment">Apartamento feria</string>
+	<string name="poi_wilderness_hut">Sovaĝeja kabano</string>
+	<string name="poi_lean_to">Senflankmura ŝirmejo</string>
+	<string name="poi_cabin">Kabano</string>
+	<string name="poi_hunting_lodge">Ĉasista dometo</string>
+
+	<string name="poi_religion_sikh">Sikismo</string>
+	<string name="poi_religion_buddhist">Budaismo</string>
+	<string name="poi_religion_hindu">Hinduismo</string>
+	<string name="poi_religion_shinto">Ŝintoismo</string>
+	<string name="poi_religion_unitarian_universalist">Unitaria Universalismo</string>
+	<string name="poi_religion_multifaith">Multreligia</string>
+	<string name="poi_religion_jain">Ĝajnismo</string>
+	<string name="poi_religion_spiritualist">Spiritualismo</string>
+	<string name="poi_religion_bahai">Bahaismo</string>
+	<string name="poi_religion_scientologist">Scientologio</string>
+	<string name="poi_religion_pagan">Paganismo</string>
+	<string name="poi_religion_tenrikyo">Tenrikjo</string>
+	<string name="poi_religion_zoroastrian">Zaratuŝtrismo</string>
+
+	<string name="poi_denomination_baptist">Baptismo</string>
+	<string name="poi_denomination_orthodox">Ortodoksismo</string>
+	<string name="poi_denomination_lutheran">Luteranismo</string>
+	<string name="poi_denomination_sunni">Sunaismo</string>
+	<string name="poi_denomination_protestant">Protestantismo</string>
+	<string name="poi_denomination_methodist">Metodismo</string>
+	<string name="poi_denomination_anglican">Anglikanismo</string>
+	<string name="poi_denomination_presbyterian">Presbiteriismo</string>
+	<string name="poi_denomination_evangelical">Evangeliismo</string>
+	<string name="poi_denomination_russian_orthodox">Rusa Ortodoksa Eklezio</string>
+	<string name="poi_denomination_pentecostal">Pentekosta Kristanismo</string>
+	<string name="poi_denomination_mormon">Mormonismo</string>
+	<string name="poi_denomination_greek_orthodox">Greke Ortodoksa Eklezio</string>
+	<string name="poi_denomination_reformed">Kalvinismo</string>
+	<string name="poi_denomination_seventh_day_adventist">Sepataga Adventisma Eklezio</string>
+	<string name="poi_denomination_new_apostolic">Novapostola Eklezio</string>
 	</resources>
