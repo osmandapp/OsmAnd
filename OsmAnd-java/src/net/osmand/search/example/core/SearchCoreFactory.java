@@ -40,7 +40,6 @@ public class SearchCoreFactory {
 	// TODO fix search bbox (+) 
 	// TODO fix search amenity by type (category/additional)
 	
-
 	// TODO streets by city
 	// TODO search only closest file
 	// TODO limit to one file if city/street/village/poi selected
@@ -57,8 +56,6 @@ public class SearchCoreFactory {
 	// TODO exclude duplicate streets/cities...
 	// TODO display results momentarily
 
-	// TODO map creator (setting for locale)
-	
 	// TODO add full text search with comma
 	// TODO add full text search without comma
 

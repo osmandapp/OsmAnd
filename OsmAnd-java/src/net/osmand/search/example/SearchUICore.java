@@ -12,11 +12,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
@@ -30,11 +27,13 @@ import net.osmand.search.example.core.SearchSettings;
 import net.osmand.search.example.core.SearchWord;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 public class SearchUICore {
 
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class); 
 	private SearchPhrase phrase;
-	private List<SearchResult> currentSearchResults = new ArrayList<>();
+	private SearchResultCollection currentSearchResult = new SearchResultCollection(); 
 	
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private LinkedBlockingQueue<Runnable> taskQueue;
@@ -58,6 +57,28 @@ public class SearchUICore {
 		init();
 	}
 	
+	public static class SearchResultCollection {
+		private List<SearchResult> searchResults;
+		private SearchPhrase phrase;
+		
+		public SearchResultCollection(List<SearchResult> requestResults, SearchPhrase phrase) {
+			searchResults = requestResults;
+			this.phrase = phrase;
+		}
+		
+		public SearchResultCollection() {
+			searchResults = new ArrayList<>();
+		}
+
+		public List<SearchResult> getCurrentSearchResults() {
+			return searchResults;
+		}
+		
+		public SearchPhrase getPhrase() {
+			return phrase;
+		}
+	}
+	
 	public int getTotalLimit() {
 		return totalLimit;
 	}
@@ -76,8 +97,9 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI());
 	}
 	
-	public List<SearchResult> getCurrentSearchResults() {
-		return currentSearchResults;
+	
+	public SearchResultCollection getCurrentSearchResult() {
+		return currentSearchResult;
 	}
 	
 	public SearchPhrase getPhrase() {
@@ -93,9 +115,8 @@ public class SearchUICore {
 		searchSettings = settings;
 	}
 	
-	private List<SearchResult> filterCurrentResults(SearchPhrase phrase) {
-		List<SearchResult> rr = new ArrayList<>();
-		List<SearchResult> l = currentSearchResults;
+	private List<SearchResult> filterCurrentResults(List<SearchResult> rr, SearchPhrase phrase) {
+		List<SearchResult> l = currentSearchResult.searchResults;
 		for(SearchResult r : l) {
 			if(filterOneResult(r, phrase)) {
 				rr.add(r);
@@ -114,13 +135,14 @@ public class SearchUICore {
 		return true;
 	}
 	
-	public List<SearchResult> search(final String text, final ResultMatcher<SearchResult> matcher) {
-		List<SearchResult> list = new ArrayList<>();
+	public SearchResultCollection search(final String text, final ResultMatcher<SearchResult> matcher) {
+		SearchResultCollection quickRes = new SearchResultCollection();
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
-		list.addAll(filterCurrentResults(phrase));
-		System.out.println("> Search phrase " + phrase + " " + list.size());
+		quickRes.phrase = phrase;
+		filterCurrentResults(quickRes.searchResults, phrase);
+		System.out.println("> Search phrase " + phrase + " " + quickRes.searchResults.size());
 		singleThreadedExecutor.submit(new Runnable() {
 
 			@Override
@@ -135,7 +157,9 @@ public class SearchUICore {
 					if (!rm.isCancelled()) {
 						sortSearchResults(phrase, rm.getRequestResults());
 						System.out.println(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
-						currentSearchResults = rm.getRequestResults();
+						SearchResultCollection collection = new SearchResultCollection(rm.getRequestResults(),
+								phrase);
+						currentSearchResult = collection;
 						if (onResultsComplete != null) {
 							onResultsComplete.run();
 						}
@@ -148,7 +172,7 @@ public class SearchUICore {
 
 			
 		});
-		return list;
+		return quickRes;
 	}
 
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
