@@ -9,15 +9,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.R;
-import net.osmand.core.samples.android.sample1.Utils;
+import net.osmand.data.LatLon;
+import net.osmand.search.example.core.SearchResult;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 
 	private Context ctx;
+	private LatLon location;
 
 	public SearchListAdapter(Context ctx) {
 		super(ctx, R.layout.search_list_item);
@@ -32,12 +34,21 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		notifyDataSetInvalidated();
 	}
 
+	public LatLon getLocation() {
+		return location;
+	}
+
+	public void setLocation(LatLon location) {
+		this.location = location;
+	}
+
 	@Override
 	public SearchListItem getItem(int position) {
 		return super.getItem(position);
 	}
 
 	public void updateDistance(double latitude, double longitude) {
+		/*
 		for (int i = 0; i < getCount(); i++) {
 			SearchListItem item = getItem(i);
 			if (item instanceof SearchListPositionItem) {
@@ -46,6 +57,7 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 						longitude, latitude, positionItem.getLongitude(), positionItem.getLatitude()));
 			}
 		}
+		*/
 	}
 
 	@Override
@@ -70,12 +82,12 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		imageView.setImageDrawable(listItem.getIcon());
 		title.setText(listItem.getName());
 		subtitle.setText(listItem.getTypeName());
-		if (listItem instanceof SearchListPositionItem) {
-			SearchListPositionItem positionItem = (SearchListPositionItem) listItem;
-			if (positionItem.getDistance() == 0) {
+		if (location != null && listItem.getSearchResult().location != null) {
+			double dist = listItem.getDistance();
+			if (dist == 0) {
 				distance.setText("");
 			} else {
-				distance.setText(Utils.getFormattedDistance(positionItem.getDistance()));
+				distance.setText(getFormattedDistance(dist));
 			}
 			distance.setVisibility(View.VISIBLE);
 		} else {
@@ -84,4 +96,17 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		return view;
 	}
 
+	public static String getFormattedDistance(double meters) {
+		double mainUnitInMeters = 1000;
+		String mainUnitStr = "km";
+		if (meters >= 100 * mainUnitInMeters) {
+			return (int) (meters / mainUnitInMeters + 0.5) + " " + mainUnitStr;
+		} else if (meters > 9.99f * mainUnitInMeters) {
+			return MessageFormat.format("{0,number,#.#} " + mainUnitStr, ((float) meters) / mainUnitInMeters).replace('\n', ' ');
+		} else if (meters > 0.999f * mainUnitInMeters) {
+			return MessageFormat.format("{0,number,#.##} " + mainUnitStr, ((float) meters) / mainUnitInMeters).replace('\n', ' ');
+		} else {
+			return ((int) (meters + 0.5)) + " m";
+		}
+	}
 }

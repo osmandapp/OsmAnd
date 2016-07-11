@@ -5,6 +5,8 @@ import android.graphics.PointF;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import net.osmand.util.MapUtils;
+
 import java.lang.reflect.Method;
 
 public class MultiTouchSupport {
