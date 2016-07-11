@@ -123,7 +123,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
-		} else {
+		} else if (ctx != null) {
 			sendAlertToAndroidWear(ctx, bld.toString());
 		}
 	}
@@ -134,6 +134,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			mTts.stop();
 		}
 		ttsRequests = 0;
+		if (ctx != null) {
+			abandonAudioFocus();
+		}
 	}
 
 	public void sendAlertToPebble(String bld) {
@@ -243,6 +246,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		mTtsContext = null;
 		ttsRequests = 0;
 		speechAllowed = false;
+		if (ctx != null) {
+			abandonAudioFocus();
+		}
 	}
 	
 	@Override

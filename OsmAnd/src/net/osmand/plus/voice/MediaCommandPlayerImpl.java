@@ -55,6 +55,9 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		if (mediaPlayer != null){
 			mediaPlayer.stop();
 		}
+		if (ctx != null) {
+			abandonAudioFocus();
+		}
 	}
 
 	//  Called from the calculating route thread.
