@@ -771,4 +771,7 @@
 	<string name="poi_denomination_united_church_of_christ">Unuigita Eklezio de Kristo</string>
 	<string name="poi_denomination_church_of_christ">Eklezio de Kristo</string>
 	<string name="poi_denomination_georgian_orthodox">Kartvela Ortodoksa Eklezio</string>
+	<string name="poi_denomination_scientist">Kristana Scienco</string>
+	<string name="poi_denomination_romanian_orthodox">Rumana Ortodoksa Eklezio</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopia Ortodoksa Eklezio</string>
 	</resources>
