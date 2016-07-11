@@ -36,18 +36,15 @@ import net.osmand.util.MapUtils;
 
 
 public class SearchCoreFactory {
-	// TODO display more (+)
-	// TODO fix search bbox (+) 
 	// TODO fix search amenity by type (category/additional)
 	
 	// TODO streets by city
-	// TODO search only closest file
+	// TODO search only closest file (global bbox)
 	// TODO limit to one file if city/street/village/poi selected
 	
 	// TODO add location parse
 	// TODO add url parse (geo)
 	// TODO amenity by name
-
 
 	// TODO display closest city to villages (and city to street)
 	// TODO automatically increase radius if nothing found
@@ -175,6 +172,7 @@ public class SearchCoreFactory {
 						sr.file = currentFile[0];
 						sr.localeName = object.getName(phrase.getSettings().getLang(), true);
 						sr.otherNames = object.getAllNames(true);
+						sr.localeOtherName = sr.file.getRegionName();
 						sr.location = object.getLocation();
 						sr.priorityDistance = 1;
 						sr.priority = priority;
@@ -185,6 +183,7 @@ public class SearchCoreFactory {
 								return false;
 							}
 							sr.objectType = ObjectType.STREET;
+							sr.localeOtherName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), true);
 						} else if (object instanceof City) {
 							CityType type = ((City)object).getType();
 							if (type == CityType.CITY || type == CityType.TOWN) {
