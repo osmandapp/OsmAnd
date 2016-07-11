@@ -2,6 +2,8 @@ package net.osmand.core.samples.android.sample1;
 
 import android.app.Application;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.NativeCore;
@@ -17,16 +19,16 @@ public class SampleApplication extends Application
 {
 	private CoreResourcesFromAndroidAssets assetsCustom;
 	private MapPoiTypes poiTypes;
-	private PoiTypesHelper poiTypesHelper;
 	private IconsCache iconsCache;
+	Handler uiHandler;
 
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
+		uiHandler = new Handler();
 
 		initPoiTypes();
-		poiTypesHelper = new PoiTypesHelper(this);
 
 		// Initialize native core
 		if (NativeCore.isAvailable() && !NativeCore.isLoaded()) {
@@ -40,10 +42,6 @@ public class SampleApplication extends Application
 
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
-	}
-
-	public PoiTypesHelper getPoiTypesHelper() {
-		return poiTypesHelper;
 	}
 
 	public IconsCache getIconsCache() {
@@ -96,5 +94,13 @@ public class SampleApplication extends Application
 			System.err.println(e.getMessage());
 		}
 		return l;
+	}
+
+	public void runInUIThread(Runnable run) {
+		uiHandler.post(run);
+	}
+
+	public void runInUIThread(Runnable run, long delay) {
+		uiHandler.postDelayed(run, delay);
 	}
 }

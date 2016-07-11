@@ -8,7 +8,6 @@ import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.text.Editable;
@@ -28,14 +27,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.CollatorStringMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.AtlasMapRendererView;
-import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IMapLayerProvider;
 import net.osmand.core.jni.IMapStylesCollection;
 import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ISearch;
-import net.osmand.core.jni.LatLon;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
@@ -56,26 +53,19 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
 import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
-import net.osmand.core.samples.android.sample1.adapters.SearchListPositionItem;
-import net.osmand.core.samples.android.sample1.search.SearchAPI;
-import net.osmand.core.samples.android.sample1.search.SearchAPI.SearchApiCallback;
-import net.osmand.core.samples.android.sample1.search.objects.PoiTypeObject;
-import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject;
-import net.osmand.core.samples.android.sample1.search.objects.PoiTypeSearchObject.ObjectType;
-import net.osmand.core.samples.android.sample1.search.objects.SearchObject;
-import net.osmand.core.samples.android.sample1.search.objects.SearchObject.SearchObjectType;
-import net.osmand.core.samples.android.sample1.search.tokens.ObjectSearchToken;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
+import net.osmand.data.LatLon;
+import net.osmand.search.example.SearchUICore;
+import net.osmand.search.example.SearchUICore.SearchResultCollection;
+import net.osmand.search.example.core.ObjectType;
+import net.osmand.search.example.core.SearchResult;
+import net.osmand.search.example.core.SearchSettings;
+import net.osmand.util.MapUtils;
 
-import java.text.Collator;
+import java.io.File;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "OsmAndCoreSample";
@@ -93,7 +83,6 @@ public class MainActivity extends Activity {
 	private MapPrimitivesProvider mapPrimitivesProvider;
 	private MapObjectsSymbolsProvider mapObjectsSymbolsProvider;
 	private IMapLayerProvider mapLayerProvider0;
-	private IMapLayerProvider mapLayerProvider1;
 	private QIODeviceLogSink fileLogSink;
 
 	private AtlasMapRendererView mapView;
@@ -107,7 +96,7 @@ public class MainActivity extends Activity {
 	private float elevationAngle;
 	private MultiTouchSupport multiTouchSupport;
 
-	private SearchAPI searchAPI;
+	private SearchUICore searchUICore;
 
 	private EditText searchEditText;
 	private TextView searchDetailsText;
@@ -138,135 +127,15 @@ public class MainActivity extends Activity {
 	private static final String PREF_MAP_ZOOM = "MAP_ZOOM";
 	private static final String PREF_MAP_ELEVATION_ANGLE = "MAP_ELEVATION_ANGLE";
 
-	private SearchApiCallback intermediateSearchCallback = new SearchApiCallback() {
+	public static final String LANGUAGE;
 
-		@Override
-		@Nullable
-		public List<SearchObject> fetchExternalObjects(String keyword, @Nullable List<SearchObject> completeObjects) {
-			return null;
+	static {
+		String langCode = Locale.getDefault().getLanguage();
+		if (langCode.isEmpty()) {
+			langCode = "en";
 		}
-
-		@Override
-		public void onSearchFinished(List<SearchObject> searchObjects) {
-			processSearchResult(searchObjects);
-		}
-	};
-
-	private SearchApiCallback coreSearchCallback = new SearchApiCallback() {
-
-		@Override
-		@Nullable
-		public List<SearchObject> fetchExternalObjects(String keyword, @Nullable List<SearchObject> completeObjects) {
-			List<SearchObject> result = new ArrayList<>();
-			boolean poiTypeSelected = false;
-			PoiCategory selectedPoiCategory = null;
-			PoiFilter selectedPoiFilter = null;
-			if (completeObjects != null) {
-				for (SearchObject searchObject : completeObjects) {
-					if (searchObject.getType() == SearchObjectType.POI_TYPE) {
-						PoiTypeSearchObject ptObj = (PoiTypeSearchObject) searchObject;
-						switch (ptObj.getObjectType()) {
-							case CATEGORY:
-								selectedPoiCategory = getSampleApplication().getPoiTypes().getPoiCategoryByName(ptObj.getKeyName());
-								break;
-							case FILTER:
-								PoiCategory category = getSampleApplication().getPoiTypes().getPoiCategoryByName(ptObj.getCategoryKeyName());
-								for (PoiFilter filter : category.getPoiFilters()) {
-									if (filter.getKeyName().equalsIgnoreCase(ptObj.getKeyName())) {
-										selectedPoiFilter = filter;
-										break;
-									}
-								}
-								break;
-							case TYPE:
-								poiTypeSelected = true;
-								break;
-						}
-						if (poiTypeSelected || selectedPoiCategory != null || selectedPoiFilter != null) {
-							break;
-						}
-					}
-				}
-
-				if (poiTypeSelected) {
-					return null;
-				}
-			}
-
-			PoiTypesHelper poiTypesHelper = getSampleApplication().getPoiTypesHelper();
-			List<AbstractPoiType> res;
-			if (selectedPoiCategory != null) {
-				res = poiTypesHelper.getPoiCategoryTypesTranslatedNames(selectedPoiCategory,
-						new CollatorStringMatcher(keyword, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE));
-				final Collator inst = Collator.getInstance();
-				Collections.sort(res, new Comparator<AbstractPoiType>() {
-					@Override
-					public int compare(AbstractPoiType lhs, AbstractPoiType rhs) {
-						return inst.compare(lhs.getTranslation(), rhs.getTranslation());
-					}
-				});
-			} else if (selectedPoiFilter != null) {
-				res = poiTypesHelper.getPoiFilterTypesTranslatedNames(selectedPoiFilter,
-						new CollatorStringMatcher(keyword, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE));
-				final Collator inst = Collator.getInstance();
-				Collections.sort(res, new Comparator<AbstractPoiType>() {
-					@Override
-					public int compare(AbstractPoiType lhs, AbstractPoiType rhs) {
-						return inst.compare(lhs.getTranslation(), rhs.getTranslation());
-					}
-
-				});
-			} else {
-				res = poiTypesHelper.findPoiTypes(keyword);
-			}
-
-			for (AbstractPoiType pt : res) {
-				if (pt instanceof PoiCategory) {
-					result.add(new PoiTypeSearchObject(ObjectType.CATEGORY,
-							new PoiTypeObject(pt.getTranslation(), pt.getKeyName(), null)));
-				} else if (pt instanceof PoiFilter) {
-					PoiFilter poiFilter = (PoiFilter) pt;
-					result.add(new PoiTypeSearchObject(ObjectType.FILTER,
-							new PoiTypeObject(poiFilter.getTranslation(), poiFilter.getKeyName(), poiFilter.getPoiCategory().getKeyName())));
-				} else if (pt instanceof PoiType) {
-					PoiType poiType = (PoiType) pt;
-					result.add(new PoiTypeSearchObject(ObjectType.TYPE,
-							new PoiTypeObject(poiType.getTranslation(), poiType.getKeyName(), poiType.getCategory().getKeyName())));
-				}
-			}
-
-			return result;
-		}
-
-		@Override
-		public void onSearchFinished(List<SearchObject> searchObjects) {
-
-			processSearchResult(searchObjects);
-
-			StringBuilder sb = new StringBuilder();
-			Map<SearchObjectType, ObjectSearchToken> objectTokensMap = searchAPI.getObjectTokens();
-			ObjectSearchToken lastObjectToken = searchAPI.getLastObjectToken();
-			for (ObjectSearchToken token : objectTokensMap.values()) {
-				if (sb.length() > 0) {
-					sb.append(" • ");
-				}
-				sb.append(token.getSearchObject().getName(MapUtils.LANGUAGE));
-			}
-			if (lastObjectToken != null && lastObjectToken.isSuggestion()) {
-				if (sb.length() > 0) {
-					sb.append(" • ");
-				}
-				sb.append(lastObjectToken.getSearchObject().getName(MapUtils.LANGUAGE));
-			}
-			if (sb.length() == 0) {
-				searchDetailsText.setVisibility(View.GONE);
-			} else {
-				searchDetailsText.setText(sb.toString());
-				searchDetailsText.setVisibility(View.VISIBLE);
-			}
-			hideProgressBar();
-		}
-	};
+		LANGUAGE = langCode;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -342,7 +211,7 @@ public class MainActivity extends Activity {
 				displayDensityFactor,
 				1.0f,
 				1.0f,
-				MapUtils.LANGUAGE);
+				LANGUAGE);
 		//mapPresentationEnvironment->setSettings(configuration.styleSettings);
 		mapPrimitiviser = new MapPrimitiviser(
 				mapPresentationEnvironment);
@@ -366,8 +235,7 @@ public class MainActivity extends Activity {
 
 		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
-		//Setup search
-		searchAPI = new SearchAPI(obfsCollection, MapUtils.LANGUAGE);
+		setupSearch();
 
 		searchEditText = (EditText) findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {
@@ -392,14 +260,23 @@ public class MainActivity extends Activity {
 		searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus && isSearchListHidden()) {
-					showSearchList();
-					if (adapter.getCount() > 0) {
-						LatLon latLon = Utilities.convert31ToLatLon(target31);
-						adapter.updateDistance(latLon.getLatitude(), latLon.getLongitude());
-						adapter.notifyDataSetChanged();
-					} else {
-						runSearch();
+				if (hasFocus) {
+					net.osmand.core.jni.LatLon latLon = Utilities.convert31ToLatLon(target31);
+					SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
+							new LatLon(latLon.getLatitude(), latLon.getLongitude()));
+					settings = settings.setLang(LANGUAGE);
+					searchUICore.updateSettings(settings);
+
+					adapter.setLocation(new LatLon(latLon.getLatitude(), latLon.getLongitude()));
+
+					if (isSearchListHidden()) {
+						showSearchList();
+						if (adapter.getCount() > 0) {
+							adapter.updateDistance(latLon.getLatitude(), latLon.getLongitude());
+							adapter.notifyDataSetChanged();
+						} else {
+							runSearch();
+						}
 					}
 				}
 			}
@@ -427,22 +304,56 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				SearchListItem item = adapter.getItem(position);
-				SearchObject searchObject = item.getSearchObject();
+				SearchResult sr = item.getSearchResult();
 
-				if (searchObject.getType() == SearchObjectType.POI
-						|| searchObject.getType() == SearchObjectType.BUILDING
-						|| searchObject.getType() == SearchObjectType.COORDINATES) {
-					// show on map
+				if (sr.objectType == ObjectType.POI
+						|| sr.objectType == ObjectType.LOCATION
+						|| sr.objectType == ObjectType.HOUSE
+						|| sr.objectType == ObjectType.FAVORITE
+						|| sr.objectType == ObjectType.RECENT_OBJ
+						|| sr.objectType == ObjectType.WPT
+						|| sr.objectType == ObjectType.STREET_INTERSECTION) {
+
 					hideSearchList();
 					mapView.requestFocus();
-					showOnMap((SearchListPositionItem) item);
-				} else {
-					// complete search query with selected object
-					completeQueryWithObject(item.getSearchObject());
 				}
+				completeQueryWithObject(item.getSearchResult());
 			}
 		});
 
+	}
+
+	private void setupSearch() {
+		final SampleApplication app = getSampleApplication();
+		List<BinaryMapIndexReader> files = new ArrayList<>();
+		File file = new File(app.getAbsoluteAppPath());
+		if (file.exists() && file.listFiles() != null) {
+			for (File obf : file.listFiles()) {
+				if (!obf.isDirectory() && obf.getName().endsWith(".obf")) {
+					try {
+						BinaryMapIndexReader bmir = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
+						files.add(bmir);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		}
+
+		searchUICore = new SearchUICore(app.getPoiTypes(), LANGUAGE, files.toArray(new BinaryMapIndexReader[files.size()]));
+
+		searchUICore.setOnResultsComplete(new Runnable() {
+			@Override
+			public void run() {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						hideProgressBar();
+						updateSearchResult(searchUICore.getCurrentSearchResult(), true);
+					}
+				});
+			}
+		});
 	}
 
 	@Override
@@ -471,25 +382,19 @@ public class MainActivity extends Activity {
 		return (SampleApplication) getApplication();
 	}
 
-	private void showOnMap(SearchListPositionItem positionItem) {
-		PointI target = Utilities.convertLatLonTo31(
-				new LatLon(positionItem.getLatitude(), positionItem.getLongitude()));
-		setTarget(target);
-		setZoom(17f);
+	private void showOnMap(LatLon latLon, int zoom) {
+		if (latLon != null) {
+			PointI target = Utilities.convertLatLonTo31(
+					new net.osmand.core.jni.LatLon(latLon.getLatitude(), latLon.getLongitude()));
+			setTarget(target);
+			setZoom(zoom);
+		}
 	}
 
 	private PointI getScreenCenter31() {
 		PointI point = new PointI();
 		mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth() / 2, mapView.getHeight() / 2), point);
 		return point;
-	}
-
-	private AreaI getScreenBounds31() {
-		PointI topLeftPoint = new PointI();
-		PointI bottomRightPoint = new PointI();
-		mapView.getLocationFromScreenPoint(new PointI(0, 0), topLeftPoint);
-		mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth(), mapView.getHeight()), bottomRightPoint);
-		return new AreaI(topLeftPoint, bottomRightPoint);
 	}
 
 	private void showProgressBar() {
@@ -536,7 +441,7 @@ public class MainActivity extends Activity {
 	public void saveMapState() {
 		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		Editor edit = prefs.edit();
-		LatLon latLon = Utilities.convert31ToLatLon(target31);
+		net.osmand.core.jni.LatLon latLon = Utilities.convert31ToLatLon(target31);
 		edit.putFloat(PREF_MAP_CENTER_LAT, (float) latLon.getLatitude());
 		edit.putFloat(PREF_MAP_CENTER_LON, (float) latLon.getLongitude());
 		edit.putFloat(PREF_MAP_AZIMUTH, azimuth);
@@ -555,7 +460,7 @@ public class MainActivity extends Activity {
 
 		setAzimuth(prefAzimuth);
 		setElevationAngle(prefElevationAngle);
-		setTarget(Utilities.convertLatLonTo31(new LatLon(prefLat, prefLon)));
+		setTarget(Utilities.convertLatLonTo31(new net.osmand.core.jni.LatLon(prefLat, prefLon)));
 		setZoom(prefZoom);
 	}
 
@@ -604,36 +509,79 @@ public class MainActivity extends Activity {
 	}
 
 	private void runSearch() {
-		runSearch(getScreenCenter31(), getScreenBounds31(), queryText);
+		runSearch(queryText);
 	}
 
-	private void runSearch(PointI position31, AreaI bounds31, String keyword) {
+	private void runSearch(String text) {
 
-		searchAPI.setSearchLocation31(position31);
-		searchAPI.setObfAreaFilter(bounds31);
-		searchAPI.startSearch(keyword, MAX_SEARCH_RESULTS_CORE,
-				intermediateSearchCallback, coreSearchCallback);
+		SearchSettings settings = searchUICore.getPhrase().getSettings();
+		if(settings.getRadiusLevel() != 1){
+			searchUICore.updateSettings(settings.setRadiusLevel(1));
+		}
+		searchUICore.search(text, null);
+		SearchResultCollection c = searchUICore.search(text, null);
+		updateSearchResult(c, false);
 	}
 
-	private void completeQueryWithObject(SearchObject searchObject) {
-		queryText = searchAPI.completeSearch(searchObject, MAX_SEARCH_RESULTS_CORE,
-				intermediateSearchCallback, coreSearchCallback);
-		searchEditText.setText(queryText);
-		searchEditText.setSelection(queryText.length());
+	private void completeQueryWithObject(SearchResult sr) {
+
+		if (sr.location != null) {
+			showOnMap(sr.location, sr.preferredZoom);
+		}
+		searchUICore.selectSearchResult(sr);
+		String txt = searchUICore.getPhrase().getText(true);
+		queryText = txt;
+		searchEditText.setText(txt);
+		searchEditText.setSelection(txt.length());
+
+		searchUICore.search(txt, null);
 	}
 
-	private void processSearchResult(List<SearchObject> searchObjects) {
-		if (searchObjects != null) {
+	private void updateSearchResult(SearchResultCollection res, boolean addMore) {
+
+		SampleApplication app = getSampleApplication();
+
+		if (res.getCurrentSearchResults().size() > 0) {
 			List<SearchListItem> rows = new ArrayList<>();
-			for (SearchObject item : searchObjects) {
-				SearchListItem listItem =
-						SearchListItem.buildListItem(getSampleApplication(), item);
-				if (listItem != null) {
-					rows.add(listItem);
+			for (final SearchResult sr : res.getCurrentSearchResults()) {
+
+				int count = 30;
+				/*
+				if(addMore) {
+					JMenuItem mi = new JMenuItem();
+					mi.setText("Results " + res.getCurrentSearchResults().size() + ", radius " + res.getPhrase().getRadiusLevel()+
+							" (show more...)");
+					mi.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							SearchSettings settings = searchUICore.getPhrase().getSettings();
+							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
+							searchUICore.search(statusField.getText(), null);
+							updateSearchResult(statusField, new SearchResultCollection(), false);
+						}
+					});
+					popup.add(mi);
 				}
-			}
-			if (rows.size() > MAX_SEARCH_RESULTS_IU) {
-				rows = rows.subList(0, MAX_SEARCH_RESULTS_IU);
+				*/
+
+				count--;
+				if (count == 0) {
+//					break;
+				}
+				//LatLon location = res.getPhrase().getLastTokenLocation();
+				//String locationString = "";
+				//if (sr.location != null) {
+				//	locationString = ((int) MapUtils.getDistance(location, sr.location)) + " m";
+				//}
+				//mi.setText(sr.localeName + " [" + sr.objectType + "] " + locationString);
+
+				SearchListItem listItem = new SearchListItem(app, sr);
+				if (sr.location != null) {
+					LatLon location = res.getPhrase().getLastTokenLocation();
+					listItem.setDistance(MapUtils.getDistance(location, sr.location));
+				}
+				rows.add(listItem);
 			}
 			updateListAdapter(rows);
 			showSearchList();
