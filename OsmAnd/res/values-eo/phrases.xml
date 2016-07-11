@@ -592,7 +592,7 @@
 	<string name="poi_ngo">Oficejo de ne-registara organizaĵo</string>
 	<string name="poi_employment_agency">Dungoficejo</string>
 	<string name="poi_research">Oficejo de esploroj</string>
-	<string name="poi_it">Informa teĥnologia oficejo</string>
+	<string name="poi_it">Inform-teĥnologia oficejo</string>
 	<string name="poi_newspaper">Gazet-redaktejo</string>
 	<string name="poi_architect">Arĥitekturistejo</string>
 	<string name="poi_advertising_agency">Reklamistejo</string>
@@ -680,7 +680,7 @@
 	<string name="poi_historic_cannon">Pafilego historia</string>
 	<string name="poi_city_gate">Pordego urba</string>
 	<string name="poi_fort">Fortikaĵo</string>
-	<string name="poi_historic_ruins">Ruino historia</string>
+	<string name="poi_historic_ruins">Ruinoj historiaj</string>
 	<string name="poi_rune_stone">Runŝtono</string>
 	<string name="poi_wreck">Ruinoj de ŝipo</string>
 	<string name="poi_historic_ship">Ŝipo historia</string>
@@ -702,4 +702,7 @@
 	<string name="poi_religion_voodoo">Voduo</string>
 	<string name="poi_religion_taoist">Daŭismo</string>
 	<string name="poi_alpine_hut">Montara kabano</string>
+	<string name="poi_guest_house">Pensiono</string>
+	<string name="poi_chalet">Dometo feria</string>
+	<string name="poi_apartment">Apartamento feria</string>
 	</resources>
