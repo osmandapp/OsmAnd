@@ -846,7 +846,7 @@
 	<string name="poi_model">Modelarski</string>
 	<string name="poi_weapons">Sklep z bronią</string>
 
-	<string name="poi_highway_crossing">Przejście autostradowe</string>
+	<string name="poi_highway_crossing">Przejście dla pieszych</string>
 
 <string name="poi_entrance">Wejście</string>
 	<string name="poi_entrance_exit">Wyjście</string>
@@ -1180,7 +1180,7 @@
 	<string name="poi_brownfield">Tereny przemysłowe</string>
 	<string name="poi_association">Biura stowarzyszenia</string>
 	<string name="poi_financial">Biuro finansowe</string>
-	<string name="poi_denomination_episcopal">Biskupi</string>
+	<string name="poi_denomination_episcopal">Kościół episkopalny</string>
 	<string name="poi_aerialway_pylon">Słup podtrzymujący kable wyciągu</string>
 
 	<string name="poi_lighting_tower">Maszt oświetleniowy</string>
@@ -1188,7 +1188,7 @@
 	<string name="poi_capital">Stolica</string>
 	<string name="poi_religion_multifaith">Wielowyznaniowość</string>
 	<string name="poi_denomination_shia">Szyityzm</string>
-	<string name="poi_denomination_united">Kościół Unicki (grecko-katolicki)</string>
+	<string name="poi_denomination_united">Zjednoczony Kościół Kanady</string>
 	<string name="poi_denomination_tibetan">Buddyzm tybetański</string>
 	<string name="poi_denomination_united_reformed">Kościół Zjednoczony (Unijny)</string>
 	<string name="poi_denomination_mennonite">Mennonici</string>
