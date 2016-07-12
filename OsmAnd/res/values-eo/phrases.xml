@@ -308,7 +308,7 @@
 	<string name="poi_religion_muslim">Islamo</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_circus">Cirko</string>
-	<string name="poi_nightclub">Noktoklubo</string>
+	<string name="poi_nightclub">Noktoklubejo</string>
 	<string name="poi_playground">Infana ludejo</string>
 	<string name="poi_bank">Bankejo</string>
 	<string name="poi_beach">Sablobordo</string>
@@ -839,4 +839,24 @@
 	<string name="poi_piste">Skivojo</string>
 	<string name="poi_piste_downhill">Skivojo alpa (malsuprenira)</string>
 	<string name="poi_piste_nordic">Skivojo nordia (skikurada)</string>
+	<string name="poi_piste_skitour">Skivojo ski-ekskursuma</string>
+	<string name="poi_piste_hike">Skivojo skikurada</string>
+	<string name="poi_piste_sleigh">Skivojo glitveturila</string>
+	<string name="poi_piste_sled">Skivoja glitveturila (tiranta de hundoj)</string>
+	<string name="poi_piste_snow_park">Skivojo neĝ-parka</string>
+	<string name="poi_piste_playground">Skivojo infanludeja</string>
+	<string name="poi_piste_ice_skate">Skivojo glitkurada</string>
+	<string name="poi_ski_rental">Ski-pruntejo</string>
+
+	<string name="poi_arts_centre">Belart-centro</string>
+	<string name="poi_community_centre">Komunuma centro</string>
+	<string name="poi_social_centre">Centro de socio</string>
+	<string name="poi_gallery">Artgalerio</string>
+	<string name="poi_dance_floor">Dancejo</string>
+	<string name="poi_stripclub">Striptiz-klubejo</string>
+	<string name="poi_ski_resort">Skiada centro</string>
+	<string name="poi_beach_resort">Apudmara ripoz-centro</string>
+	<string name="poi_dog_park">Hund-parko</string>
+	<string name="poi_leisure_fishing">Fiŝkaptadejo</string>
+	<string name="poi_hunting_stand">Altembusko ĉasada</string>
 	</resources>
