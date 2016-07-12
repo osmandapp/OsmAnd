@@ -11,4 +11,5 @@ public enum ObjectType {
 	public boolean hasLocation() {
 		return hasLocation;
 	}
+	
 }

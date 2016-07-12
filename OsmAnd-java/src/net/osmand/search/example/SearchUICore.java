@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -93,7 +94,7 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		apis.add(new SearchCoreFactory.SearchStreetByCityAPI());
 		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
-		
+		apis.add(new SearchCoreFactory.SearchUrlAPI());
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI());
 	}
 	
@@ -146,7 +147,7 @@ public class SearchUICore {
 		this.phrase = phrase;
 		quickRes.phrase = phrase;
 		filterCurrentResults(quickRes.searchResults, phrase);
-		System.out.println("> Search phrase " + phrase + " " + quickRes.searchResults.size());
+		LOG.info("> Search phrase " + phrase + " " + quickRes.searchResults.size());
 		singleThreadedExecutor.submit(new Runnable() {
 
 			@Override
@@ -160,7 +161,7 @@ public class SearchUICore {
 					searchInBackground(phrase, rm);
 					if (!rm.isCancelled()) {
 						sortSearchResults(phrase, rm.getRequestResults());
-						System.out.println(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
+						LOG.info(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
 						SearchResultCollection collection = new SearchResultCollection(rm.getRequestResults(),
 								phrase);
 						currentSearchResult = collection;
@@ -204,9 +205,9 @@ public class SearchUICore {
 			}
 			try {
 				api.search(phrase, matcher);
-			} catch (IOException e) {
-				LOG.error(e.getMessage(), e);
+			} catch (Throwable e) {
 				e.printStackTrace();
+				LOG.error(e.getMessage(), e);
 			}
 		}
 	}
@@ -218,7 +219,7 @@ public class SearchUICore {
 	private void sortSearchResults(SearchPhrase sp, List<SearchResult> searchResults) {
 		// sort SearchResult by 1. searchDistance 2. Name
 		final LatLon loc = sp.getLastTokenLocation();
-		final Collator clt = Collator.getInstance();
+		final net.osmand.Collator clt = OsmAndCollator.primaryCollator();
 		Collections.sort(searchResults, new Comparator<SearchResult>() {
 
 			@Override
@@ -254,6 +255,7 @@ public class SearchUICore {
 		public List<SearchResult> getRequestResults() {
 			return requestResults;
 		}
+		
 		@Override
 		public boolean publish(SearchResult object) {
 			if(matcher == null || matcher.publish(object)) {

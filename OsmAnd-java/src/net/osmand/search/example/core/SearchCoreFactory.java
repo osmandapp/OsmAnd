@@ -38,25 +38,26 @@ import net.osmand.search.example.SearchUICore.SearchResultMatcher;
 import net.osmand.search.example.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.example.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoPointParserUtil;
+import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.MapUtils;
 
 
 public class SearchCoreFactory {
-	// TODO streets by city
-	// TODO amenity by name
-	// TODO ignore streets with <> 
+	// TODO streets by city (+)
+	// TODO add url parse (geo) (+)
+	// TODO amenity by name (+)
+	// TODO show buildings if street is one or default ( <CITY>, CITY (den ilp), 1186RM) Зеленогорск? (+)
+	// TODO ignore streets with <> when search by name (+)
 	
-	// TODO add url parse (geo)
-	// TODO add location parse
-	// TODO show buildings if street is one or default ( <CITY>, CITY (den ilp), 1186RM)
-	
-	// TODO exclude duplicate streets/cities...
 	// TODO add full text search with comma correct order
+	// TODO MED add full text search without comma and different word order
+	// TODO add location parse 
+	// TODO geo:34.99393,-106.61568 (Treasure Island) and display url parse
+	// TODO exclude duplicate streets/cities...
 	
 	// TODO MED support poi additional select type and search
-	// TODO MED display results momentarily
-	// TODO MED add full text search without comma and different word order
-	
+	// TODO LOW display results momentarily
 	// TODO LOW automatically increase radius if nothing found (log radius search)
 
 	
@@ -82,7 +83,7 @@ public class SearchCoreFactory {
 					sr.localeName = bmir.getRegionName();
 					sr.object = bmir;
 					sr.file = bmir;
-					sr.priority = 3;
+					sr.priority = 10;
 					sr.objectType = ObjectType.REGION;
 					sr.location = bmir.getRegionCenter();
 					sr.preferredZoom = 6;
@@ -101,7 +102,7 @@ public class SearchCoreFactory {
 			if(!p.isNoSelectedType()) {
 				return -1;
 			}
-			return 1;
+			return 3;
 		}
 	}
 	
@@ -137,7 +138,7 @@ public class SearchCoreFactory {
 
 
 		private void initAndSearchCities(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			QuadRect bbox = phrase.getBBoxToSearch(phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10));
+			QuadRect bbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10);
 			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
 			while(offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
@@ -187,11 +188,11 @@ public class SearchCoreFactory {
 			if(phrase.getRadiusLevel() > 1 || phrase.getLastWord().length() > 3) {
 				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
-				final QuadRect streetBbox = phrase.getBBoxToSearch(phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS));
-				final QuadRect postcodeBbox = phrase.getBBoxToSearch(phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
-				final QuadRect villagesBbox = phrase.getBBoxToSearch(phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3));
-				final QuadRect cityBbox = phrase.getBBoxToSearch(phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10));
-				final int priority = phrase.isNoSelectedType() ? 1 : 3;
+				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
+				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
+				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
+				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10);
+				final int priority = phrase.isNoSelectedType() ? 3 : 5;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1]; 
 				ResultMatcher<MapObject> rm = new ResultMatcher<MapObject>() {
 					int limit = 0;
@@ -214,6 +215,9 @@ public class SearchCoreFactory {
 						List<City> closestCities = null;
 						if (object instanceof Street) {
 							if(locSpecified && !streetBbox.contains(x, y, x, y)) {
+								return false;
+							}
+							if(object.getName().startsWith("<")) {
 								return false;
 							}
 							sr.objectType = ObjectType.STREET;
@@ -245,11 +249,14 @@ public class SearchCoreFactory {
 									closestCities = townCitiesQR.queryInBox(villagesBbox, new ArrayList<City>());
 								}
 								double minDist = -1;
+								double pDist = -1;
 								for(City s : closestCities) {
 									double ll = MapUtils.getDistance(s.getLocation(), object.getLocation());
-									if(minDist == -1 || ll < minDist) {
+									double pd = s.getType() == CityType.CITY ? ll : ll * 10;
+									if(minDist == -1 || pd < pDist) {
 										c = s;
 										minDist = ll;
+										pDist = pd ;
 									}
 								}
 								if(c != null) {
@@ -272,7 +279,7 @@ public class SearchCoreFactory {
 								resultMatcher.isCancelled();
 					}
 				};
-				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getOfflineIndexes(phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10), 
+				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 10, 
 						SearchPhraseDataType.ADDRESS);
 				while (offlineIterator.hasNext()) {
 					BinaryMapIndexReader r = offlineIterator.next();
@@ -291,18 +298,73 @@ public class SearchCoreFactory {
 	}
 	
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
-		// TODO
-		// BBOX QuadRect bbox = getBBoxToSearch(10000 * typedLettersInStreet, radiusLevel, phrase.getLastTokenLocation());
-		// if(poiObjectNotSelected) {
-		// 	LIMIT 100
-		//      if(poiTypeSelected) { 
-		//        BBOX - result priority 5, distPriority 1
-		//      } else  {
-		//	  BBOX - result priority 5, distPriority 4
-		//    	}
-		// }
+		private static final int LIMIT = 10000;
+		private static final int BBOX_RADIUS = 1000 * 1000;
+		@Override
+		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
+			if(phrase.getLastWord().length() == 0) {
+				return false;
+			}
+			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
+			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS, 
+					SearchPhraseDataType.POI);
+			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
+			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+					(int)bbox.centerX(), (int)bbox.centerY(),
+					phrase.getLastWord(), 
+					(int)bbox.left, (int)bbox.right, 
+					(int)bbox.top, (int)bbox.bottom,
+					new ResultMatcher<Amenity>() {
+						int limit = 0;
+						@Override
+						public boolean publish(Amenity object) {
+							if(limit ++ > LIMIT) {
+								return false;
+							}
+							SearchResult sr = new SearchResult(phrase);
+							sr.otherNames = object.getAllNames(true);
+							sr.localeName = object.getName(phrase.getSettings().getLang(), true);
+							sr.object = object;
+							sr.preferredZoom = 17;
+							sr.file = currentFile[0];
+							sr.location = object.getLocation();
+							sr.priority = 3;
+							sr.priorityDistance = 1;
+							sr.objectType = ObjectType.POI;
+							
+							resultMatcher.publish(sr);
+							return false;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return resultMatcher.isCancelled() && (limit < LIMIT) ;
+						}
+					});
+			while (offlineIterator.hasNext()) {
+				BinaryMapIndexReader r = offlineIterator.next();
+				currentFile[0] = r;
+				r.searchPoiByName(req);
+			}
+			return true;
+		}
+		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
+			if(p.hasObjectType(ObjectType.POI) || 
+					p.getLastWord().length() == 0) {
+				return -1;
+			}
+			if(p.hasObjectType(ObjectType.POI_TYPE)) {
+				if(p.getRadiusLevel() > 1) {
+					return 5;
+				} else {
+					return -1;
+				}
+			}
+			if(p.getLastWord().length() > 3 || p.getRadiusLevel() > 1) {
+				return 3;
+			}
 			return -1;
 		}
 	}
@@ -330,7 +392,15 @@ public class SearchCoreFactory {
 		
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			results.clear();
+//			results.clear();
+//			final net.osmand.Collator clt = OsmAndCollator.primaryCollator();
+			TreeSet<AbstractPoiType> results = new TreeSet<>(new Comparator<AbstractPoiType>() {
+
+				@Override
+				public int compare(AbstractPoiType o1, AbstractPoiType o2) {
+					return o1.getKeyName().compareTo(o2.getKeyName());
+				}
+			});
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			for (PoiFilter pf : topVisibleFilters) {
 				if (Algorithms.isEmpty(phrase.getLastWord()) || nm.matches(pf.getTranslation())) {
@@ -350,7 +420,8 @@ public class SearchCoreFactory {
 				SearchResult res = new SearchResult(phrase);
 				res.localeName = p.getTranslation();
 				res.object = p;
-				res.priority = 2;
+				res.priority = 5;
+				res.priorityDistance = 0;
 				res.objectType = ObjectType.POI_TYPE;
 				resultMatcher.publish(res);
 			}
@@ -410,7 +481,7 @@ public class SearchCoreFactory {
 				poiAdditionals.clear();
 				updateTypesToAccept(pt);
 				
-				QuadRect bbox = phrase.getBBoxToSearch(phrase.getRadiusSearch(10000));
+				QuadRect bbox = phrase.getRadiusBBoxToSearch(10000);
 				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
 				final BinaryMapIndexReader[] selected = new BinaryMapIndexReader[1];
 				final NameStringMatcher ns = phrase.getNameStringMatcher();
@@ -442,42 +513,41 @@ public class SearchCoreFactory {
 								}
 								return set.contains(subtype);
 							}
-						}, 
-						new ResultMatcher<Amenity>() {
-					
-					@Override
-					public boolean publish(Amenity object) {
-						SearchResult res = new SearchResult(phrase);
-						res.localeName = object.getName(phrase.getSettings().getLang(), true);
-						res.otherNames = object.getAllNames(true);
-						if(!Algorithms.isEmpty(phrase.getLastWord()) &&
-								!(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
-							return false;
-						}
-						if(Algorithms.isEmpty(res.localeName)) {
-							AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
-							if(st != null) {
-								res.localeName = st.getTranslation();
-							} else {
-								res.localeName = "sub:" + object.getSubType();
+						}, new ResultMatcher<Amenity>() {
+
+							@Override
+							public boolean publish(Amenity object) {
+								SearchResult res = new SearchResult(phrase);
+								res.localeName = object.getName(phrase.getSettings().getLang(), true);
+								res.otherNames = object.getAllNames(true);
+								if (!Algorithms.isEmpty(phrase.getLastWord())
+										&& !(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
+									return false;
+								}
+								if (Algorithms.isEmpty(res.localeName)) {
+									AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
+									if (st != null) {
+										res.localeName = st.getTranslation();
+									} else {
+										res.localeName = object.getSubType();
+									}
+								}
+								res.object = object;
+								res.preferredZoom = 17;
+								res.file = selected[0];
+								res.location = object.getLocation();
+								res.priority = 3;
+								res.priorityDistance = 1;
+								res.objectType = ObjectType.POI;
+								resultMatcher.publish(res);
+								return false;
 							}
-						}
-						res.object = object;
-						res.preferredZoom = 17;
-						res.file = selected[0];
-						res.location = object.getLocation();
-						res.priority = 5;
-						res.priorityDistance = 1;
-						res.objectType = ObjectType.POI;
-						resultMatcher.publish(res);
-						return false;
-					}
-					
-					@Override
-					public boolean isCancelled() {
-						return resultMatcher.isCancelled();
-					}
-				});
+
+							@Override
+							public boolean isCancelled() {
+								return resultMatcher.isCancelled();
+							}
+						});
 				for (BinaryMapIndexReader o : oo) {
 					selected[0] = o;
 					o.searchPoi(req);
@@ -490,7 +560,7 @@ public class SearchCoreFactory {
 		public int getSearchPriority(SearchPhrase p) {
 			if(p.isLastWord(ObjectType.POI_TYPE) && 
 					p.getLastTokenLocation() != null) {
-				return 1;
+				return 3;
 			}
 			return -1;
 		}
@@ -499,36 +569,94 @@ public class SearchCoreFactory {
 	
 	
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {
+		private static int LIMIT = 10000;
 		@Override
-		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			if(isLastWordCityGroup(phrase)) {
-				// search all streets 
-				// LIMIT 100 * radiusLevel -  priority 1, distPriority 0 (alphabetic)
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			SearchWord sw = phrase.getLastSelectedWord();
+			if (isLastWordCityGroup(phrase) && sw.getResult() != null && sw.getResult().file != null) {
+				City c = (City) sw.getResult().object;
+				if (c.getStreets().isEmpty()) {
+					sw.getResult().file.preloadStreets(c, null);
+				}
+				int limit = 0;
+				NameStringMatcher nm = phrase.getNameStringMatcher();
+				for (Street object : c.getStreets()) {
+
+					SearchResult res = new SearchResult(phrase);
+					res.localeName = object.getName(phrase.getSettings().getLang(), true);
+					res.otherNames = object.getAllNames(true);
+					if(object.getName().startsWith("<")) {
+						// streets related to city
+						continue;
+					}
+					if (!Algorithms.isEmpty(phrase.getLastWord())
+							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
+						continue;
+					}
+					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), true);
+					res.object = object;
+					res.preferredZoom = 17;
+					res.file = sw.getResult().file;
+					res.location = object.getLocation();
+					res.priority = 1;
+					//res.priorityDistance = 1;
+					res.objectType = ObjectType.STREET;
+					if (limit++ > LIMIT) {
+						break;
+					}
+					resultMatcher.publish(res);
+				}
+				return true;
 			}
 			return true;
 		}
 
-		public boolean isLastWordCityGroup(SearchPhrase p ) {
-			return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) || 
-					p.isLastWord(ObjectType.VILLAGE);
-		}
 		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			return 1;
+			if(isLastWordCityGroup(p)) {
+				return 1;
+			}
+			return -1;
 		}
 		
 	}
 	
-	
+	public static boolean isLastWordCityGroup(SearchPhrase p ) {
+		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) || 
+				p.isLastWord(ObjectType.VILLAGE);
+	}	
 	
 	public static class SearchBuildingAndIntersectionsByStreetAPI extends SearchBaseAPI {
 		Street cacheBuilding;
 		
 		@Override
 		public boolean search(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
+			Street s = null;
+			int priority = 1;
 			if(phrase.isLastWord(ObjectType.STREET)) {
-				Street s =  (Street) phrase.getLastSelectedWord().getResult().object;
+				s =  (Street) phrase.getLastSelectedWord().getResult().object;
+			}
+			if(isLastWordCityGroup(phrase)) {
+				priority = 3;
+				Object o = phrase.getLastSelectedWord().getResult().object;
+				if(o instanceof City) {
+					List<Street> streets = ((City) o).getStreets();
+					if(streets.size() == 1) {
+						s = streets.get(0);
+					} else {
+						for(Street st : streets) {
+							if(st.getName().equals(((City) o).getName()) ||
+									st.getName().equals("<"+((City) o).getName()+">")) {
+								s = st;
+								break;	
+							}
+						}
+					}
+				}
+			}
+			
+			if(s != null) {
 				BinaryMapIndexReader file = phrase.getLastSelectedWord().getResult().file;
 				String lw = phrase.getLastWord();
 				NameStringMatcher sm = phrase.getNameStringMatcher();
@@ -572,6 +700,7 @@ public class SearchCoreFactory {
 					res.otherNames = b.getAllNames(true);
 					res.object = b;
 					res.file = file;
+					res.priority = priority;
 					res.priorityDistance = 0;
 					res.objectType = ObjectType.HOUSE;
 					if(interpolation) {
@@ -609,6 +738,9 @@ public class SearchCoreFactory {
 		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
+			if(isLastWordCityGroup(p)) {
+				return 10;
+			}
 			if(!p.isLastWord(ObjectType.STREET)) {
 				return -1;
 			}
@@ -618,6 +750,31 @@ public class SearchCoreFactory {
 	
 	
 	
+	public static class SearchUrlAPI extends SearchBaseAPI {
+		
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			if(phrase.getLastWord().length() == 0) {
+				return false;
+			}
+			GeoParsedPoint pnt = GeoPointParserUtil.parse(phrase.getLastWord());
+			if(pnt != null && pnt.isGeoPoint()) {
+				SearchResult sp = new SearchResult(phrase);
+				sp.priority = 0;
+				sp.object = pnt;
+				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
+				sp.localeName = "geo:" + ((float)pnt.getLatitude()) +", " + ((float) pnt.getLongitude());
+				sp.objectType = ObjectType.LOCATION;
+				resultMatcher.publish(sp);
+			}
+			return super.search(phrase, resultMatcher);
+		}
+		
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			return 1;
+		}
+	}
 	
 	
 	

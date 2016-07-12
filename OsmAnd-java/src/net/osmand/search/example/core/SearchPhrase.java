@@ -81,7 +81,8 @@ public class SearchPhrase {
 	
 	
 	
-	public QuadRect getBBoxToSearch(int radiusInMeters) {
+	public QuadRect getRadiusBBoxToSearch(int radius) {
+		int radiusInMeters = getRadiusSearch(radius);
 		QuadRect cache1kmRect = get1km31Rect();
 		if(cache1kmRect == null) {
 			return null;
@@ -118,8 +119,8 @@ public class SearchPhrase {
 	}
 	
 	
-	public Iterator<BinaryMapIndexReader> getOfflineIndexes(int meters, final SearchPhraseDataType dt) {
-		final QuadRect rect = meters > 0 ? getBBoxToSearch(meters) : null;
+	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int meters, final SearchPhraseDataType dt) {
+		final QuadRect rect = meters > 0 ? getRadiusBBoxToSearch(meters) : null;
 		return getOfflineIndexes(rect, dt);
 		
 	}
@@ -323,7 +324,9 @@ public class SearchPhrase {
 		if(indexes == null) {
 			indexes = new ArrayList<>();
 		}
-		this.indexes.add(object);
+		if(!this.indexes.contains(object)) {
+			this.indexes.add(object);
+		}
 	}
 
 	public void sortFiles() {
