@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +16,6 @@ import java.util.TreeSet;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -41,24 +42,20 @@ import net.osmand.util.MapUtils;
 
 
 public class SearchCoreFactory {
-	// TODO display closest city to villages (+)
-	// TODO search only closest file (global bbox) (+)
 
-	// TODO buildings interpolation
-	// TODO limit to one file if city/street/village/poi selected
-	
-	// TODO fix search amenity by type (category/additional/filter)
 	// TODO streets by city
 	// TODO amenity by name
 	
 	// TODO add location parse
 	// TODO add url parse (geo)
-
 	// TODO show buildings if street is one or default ( <CITY>, CITY (den ilp), 1186RM)
+	
 	// TODO exclude duplicate streets/cities...
 
+	// TODO add full text search with comma
+	
+	// TODO MED support poi additional select type and search
 	// TODO MED display results momentarily
-	// TODO MED add full text search with comma
 	// TODO MED add full text search without comma
 	
 	// TODO LOW automatically increase radius if nothing found
@@ -313,11 +310,14 @@ public class SearchCoreFactory {
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			results.clear();
-			if(Algorithms.isEmpty(phrase.getLastWord())) {
-				results.addAll(topVisibleFilters);
-			} else {
+			NameStringMatcher nm = phrase.getNameStringMatcher();
+			for (PoiFilter pf : topVisibleFilters) {
+				if (Algorithms.isEmpty(phrase.getLastWord()) || nm.matches(pf.getTranslation())) {
+					results.add(pf);
+				}
+			}
+			if (!Algorithms.isEmpty(phrase.getLastWord())) {
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
-				StringMatcher nm = phrase.getNameStringMatcher();
 				while (it.hasNext()) {
 					Entry<String, PoiType> e = it.next();
 					if (nm.matches(e.getKey())) {
@@ -325,7 +325,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
-			for(AbstractPoiType p : results) {
+			for (AbstractPoiType p : results) {
 				SearchResult res = new SearchResult(phrase);
 				res.localeName = p.getTranslation();
 				res.object = p;
@@ -356,14 +356,44 @@ public class SearchCoreFactory {
 			return p.isLastWord(ObjectType.POI_TYPE);
 		}
 		
+
+		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
+				LinkedHashSet<String>>();
+		private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
+		public void updateTypesToAccept(AbstractPoiType pt) {
+			pt.putTypes(acceptedTypes);
+			if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
+				fillPoiAdditionals(((PoiType) pt).getParentType());
+			} else {
+				fillPoiAdditionals(pt);
+			}
+		}
+
+		private void fillPoiAdditionals(AbstractPoiType pt) {
+			for (PoiType add : pt.getPoiAdditionals()) {
+				poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
+				poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
+			}
+			if (pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
+				for (PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
+					fillPoiAdditionals(ps);
+				}
+			}
+		}
+		
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			if(phrase.isLastWord(ObjectType.POI_TYPE)) {
 				final AbstractPoiType pt = (AbstractPoiType) phrase.getLastSelectedWord().getResult().object;
+				acceptedTypes.clear();
+				poiAdditionals.clear();
+				updateTypesToAccept(pt);
+				
 				QuadRect bbox = getBBoxToSearch(phrase, 10000);
 				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
 				final BinaryMapIndexReader[] selected = new BinaryMapIndexReader[1];
 				final NameStringMatcher ns = phrase.getNameStringMatcher();
+
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 						(int)bbox.left, (int)bbox.right, 
 						(int)bbox.top, (int)bbox.bottom, -1,
@@ -375,12 +405,21 @@ public class SearchCoreFactory {
 							}
 							
 							@Override
-							public boolean accept(PoiCategory type, String subcategory) {
-								PoiType st = types.getPoiTypeByKey(subcategory);
-								if(st != null && pt.getKeyName().equals(st.getKeyName())) {
+							public boolean accept(PoiCategory type, String subtype) {
+								if (type == null) {
 									return true;
 								}
-								return false;
+								if (!types.isRegisteredType(type)) {
+									type = types.getOtherPoiCategory();
+								}
+								if (!acceptedTypes.containsKey(type)) {
+									return false;
+								}
+								LinkedHashSet<String> set = acceptedTypes.get(type);
+								if (set == null) {
+									return true;
+								}
+								return set.contains(subtype);
 							}
 						}, 
 						new ResultMatcher<Amenity>() {
