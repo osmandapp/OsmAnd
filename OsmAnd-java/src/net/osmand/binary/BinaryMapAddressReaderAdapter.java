@@ -16,6 +16,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex;
 import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData;
@@ -55,6 +56,10 @@ public class BinaryMapAddressReaderAdapter {
 		List<CitiesBlock> cities = new ArrayList<BinaryMapAddressReaderAdapter.CitiesBlock>();
 
 		LatLon calculatedCenter = null;
+		public int bottom31;
+		public int top31;
+		public int right31;
+		public int left31;
 
 		public String getEnName() {
 			return enName;
@@ -108,12 +113,40 @@ public class BinaryMapAddressReaderAdapter {
 	private int readInt() throws IOException {
 		return map.readInt();
 	}
+	
+	private void readBoundariesIndex(AddressRegion region) throws IOException {
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.OsmAndTileBox.LEFT_FIELD_NUMBER:
+				region.left31 = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndTileBox.RIGHT_FIELD_NUMBER:
+				region.right31 = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndTileBox.TOP_FIELD_NUMBER:
+				region.top31 = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndTileBox.BOTTOM_FIELD_NUMBER:
+				region.bottom31 = codedIS.readUInt32();
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
 
 
 	protected void readAddressIndex(AddressRegion region) throws IOException {
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
+			int length;
+			int oldLimit;
 			switch (tag) {
 			case 0:
 				if (region.enName == null || region.enName.length() == 0) {
@@ -126,9 +159,16 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.OsmAndAddressIndex.NAME_EN_FIELD_NUMBER:
 				region.enName = codedIS.readString();
 				break;
+			case OsmandOdb.OsmAndAddressIndex.BOUNDARIES_FIELD_NUMBER:
+				length = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(length);
+				readBoundariesIndex(region);
+				codedIS.popLimit(oldLimit);
+				region.enName = codedIS.readString();
+				break;
 			case OsmandOdb.OsmAndAddressIndex.ATTRIBUTETAGSTABLE_FIELD_NUMBER:
-				int length2 = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length2);
+				length = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(length);
 				region.attributeTagsTable = map.readStringTable();
 				codedIS.popLimit(oldLimit);
 				break;
@@ -156,7 +196,7 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndAddressIndex.NAMEINDEX_FIELD_NUMBER:
 				region.indexNameOffset = codedIS.getTotalBytesRead();
-				int length = readInt();
+				length = readInt();
 				codedIS.seek(region.indexNameOffset + length + 4);
 				break;
 			default:

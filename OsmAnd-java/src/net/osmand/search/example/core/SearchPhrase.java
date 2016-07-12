@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.util.MapUtils;
 
 //immutable object
@@ -23,6 +26,12 @@ public class SearchPhrase {
 	private SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
 	private String lastWordTrim;
+	private QuadRect cache1kmRect;
+	
+	public enum SearchPhraseDataType {
+		MAP, ADDRESS, ROUTING, POI
+	}
+	
 	
 	public SearchPhrase(SearchSettings settings) {
 		this.settings = settings;
@@ -70,6 +79,93 @@ public class SearchPhrase {
 
 	public List<SearchWord> getWords() {
 		return words;
+	}
+	
+	
+	
+	
+	public QuadRect getBBoxToSearch(int radiusInMeters) {
+		QuadRect cache1kmRect = get1km31Rect();
+		if(cache1kmRect == null) {
+			return null;
+		}
+		int max = (1 << 31) - 1;
+		double dx = (cache1kmRect.width() / 2) * radiusInMeters / 1000;
+		double dy = (cache1kmRect.height() / 2) * radiusInMeters / 1000;
+		double topLeftX = Math.max(0, cache1kmRect.left - dx);
+		double topLeftY = Math.max(0, cache1kmRect.top - dy);
+		double bottomRightX = Math.min(max, cache1kmRect.right + dx);
+		double bottomRightY = Math.min(max, cache1kmRect.bottom + dy);
+		return new QuadRect(topLeftX, topLeftY, bottomRightX, bottomRightY);
+	}
+	
+	public QuadRect get1km31Rect() {
+		if(cache1kmRect != null) {
+			return cache1kmRect;
+		}
+		LatLon l = getLastTokenLocation();
+		if (l == null) {
+			return null;
+		}
+		float coeff = (float) (1000 / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
+		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
+		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
+		double topLeftX = Math.max(0, tx - coeff);
+		double topLeftY = Math.max(0, ty - coeff);
+		int max = (1 << SearchRequest.ZOOM_TO_SEARCH_POI)  - 1;
+		double bottomRightX = Math.min(max, tx + coeff);
+		double bottomRightY = Math.min(max, ty + coeff);
+		double pw = MapUtils.getPowZoom(31 - SearchRequest.ZOOM_TO_SEARCH_POI);
+		cache1kmRect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
+		return cache1kmRect;
+	}
+	
+	
+	public Iterator<BinaryMapIndexReader> getOfflineIndexes(int meters, final SearchPhraseDataType dt) {
+		List<BinaryMapIndexReader> list = indexes != null ? indexes : settings.getOfflineIndexes();
+		final Iterator<BinaryMapIndexReader> lit = list.iterator();
+		final QuadRect rect = meters > 0 ? getBBoxToSearch(meters) : null;
+		return new Iterator<BinaryMapIndexReader>() {
+			BinaryMapIndexReader next = null;
+			@Override
+			public boolean hasNext() {
+				while (lit.hasNext()) {
+					next = lit.next();
+					if(rect != null) {
+						if(dt == SearchPhraseDataType.POI) {
+							if(next.containsPoiData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom)) {
+								return true;
+							}
+						} else if(dt == SearchPhraseDataType.ADDRESS) {
+							if(next.containsAddressData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom)) {
+								return true;
+							}
+						} else if(dt == SearchPhraseDataType.ROUTING) {
+							if(next.containsRouteData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom, 15)) {
+								return true;
+							}
+						} else {
+							if(next.containsMapData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom, 15)) {
+								return true;
+							}
+						}
+					} else {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public BinaryMapIndexReader next() {
+				return next;
+			}
+
+			@Override
+			public void remove() {
+			}
+		};
+		
 	}
 	
 	public List<BinaryMapIndexReader> getOfflineIndexes() {
