@@ -252,8 +252,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				builder.play();
-				if (description.startsWith("(11.1)")) {
-					displayBtScoAvailability();
+				if (description.startsWith("(11.1)") && (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0)) {
+					Toast.makeText(TestVoiceActivity.this, AbstractPrologCommandPlayer.btScoInit, Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -268,23 +268,5 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			return true;
 		}
 		return false;
-	}
-
-	private void displayBtScoAvailability() {
-		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			String notification;
-			if (AbstractPrologCommandPlayer.btScoAvailable == true) {
-				notification = "BT SCO available:   YES";
-			} else {
-				notification = "BT SCO available:   NO";
-			}
-			if ("".equals(AbstractPrologCommandPlayer.btScoException)) {
-				notification = notification + "\n" + "BT SCO initializes: YES";
-			} else {
-				notification = notification + "\n" + "BT SCO initializes: NO" + "\n(" + AbstractPrologCommandPlayer.btScoException + ")";
-			}
-			notification = notification + "\n" + "BT SCO init delay:  " + AbstractPrologCommandPlayer.BT_SCO_DELAY;
-			Toast.makeText(TestVoiceActivity.this, notification, Toast.LENGTH_LONG).show();
-		}
 	}
 }

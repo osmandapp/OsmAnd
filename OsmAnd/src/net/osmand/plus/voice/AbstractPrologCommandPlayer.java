@@ -312,20 +312,17 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	public static final int BT_SCO_DELAY = 1500;
 
-	// These 2 only needed for status debugging in TestVoiceActivity:
-					public static boolean btScoAvailable = false;
-					public static String btScoException = "";
+	// This only needed for init debugging in TestVoiceActivity:
+				  public static String btScoInit = "";
 
 	private boolean startBtSco() {
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
 		try {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 			if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
-					btScoAvailable = false;
-					btScoException = "N/A";
+				  btScoInit = "BT SCO available:   NO";
 				return false;
 			}
-					btScoAvailable = true;
 			mAudioManager.setMode(0);
 			mAudioManager.startBluetoothSco();
 			mAudioManager.setBluetoothScoOn(true);
@@ -334,10 +331,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		} catch (Exception e) {
 			System.out.println("Exception starting BT SCO " + e.getMessage() );
 			btScoStatus = false;
-					btScoException = e.getMessage();
+				  btScoInit = "BT SCO available:   YES\nBT SCO initializes: NO\n(" + e.getMessage() + ")";
 			return false;
 		}
-					btScoException = "";
+				  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES\nBT SCO init delay:  " + BT_SCO_DELAY;
 		return true;
 	}
 
