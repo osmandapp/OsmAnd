@@ -340,6 +340,24 @@ public class BinaryMapIndexReader {
 		}
 		return false;
 	}
+	
+	public boolean containsPoiData(int left31x, int top31y, int right31x, int bottom31y) {
+		for (PoiRegion index : poiIndexes) {
+			if (right31x >= index.left31 && left31x <= index.right31 && index.top31 <= bottom31y && index.bottom31 >= top31y) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean containsAddressData(int left31x, int top31y, int right31x, int bottom31y) {
+		for (AddressRegion index : addressIndexes) {
+			if (right31x >= index.left31 && left31x <= index.right31 && index.top31 <= bottom31y && index.bottom31 >= top31y) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public boolean containsMapData(int tile31x, int tile31y, int zoom) {
 		for (MapIndex mapIndex : mapIndexes) {

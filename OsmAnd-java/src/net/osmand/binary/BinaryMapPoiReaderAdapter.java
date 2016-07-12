@@ -59,6 +59,10 @@ public class BinaryMapPoiReaderAdapter {
 		double rightLongitude;
 		double topLatitude;
 		double bottomLatitude;
+		int left31;
+		int right31;
+		int top31;
+		int bottom31;
 
 		public double getLeftLongitude() {
 			return leftLongitude;
@@ -134,16 +138,20 @@ public class BinaryMapPoiReaderAdapter {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndTileBox.LEFT_FIELD_NUMBER:
-				region.leftLongitude = MapUtils.get31LongitudeX(codedIS.readUInt32());
+				region.left31 = codedIS.readUInt32();
+				region.leftLongitude = MapUtils.get31LongitudeX(region.left31);
 				break;
 			case OsmandOdb.OsmAndTileBox.RIGHT_FIELD_NUMBER:
-				region.rightLongitude = MapUtils.get31LongitudeX(codedIS.readUInt32());
+				region.right31 = codedIS.readUInt32();
+				region.rightLongitude = MapUtils.get31LongitudeX(region.right31);
 				break;
 			case OsmandOdb.OsmAndTileBox.TOP_FIELD_NUMBER:
-				region.topLatitude = MapUtils.get31LatitudeY(codedIS.readUInt32());
+				region.top31 = codedIS.readUInt32();
+				region.topLatitude = MapUtils.get31LatitudeY(region.top31);
 				break;
 			case OsmandOdb.OsmAndTileBox.BOTTOM_FIELD_NUMBER:
-				region.bottomLatitude = MapUtils.get31LatitudeY(codedIS.readUInt32());
+				region.bottom31 = codedIS.readUInt32();
+				region.bottomLatitude = MapUtils.get31LatitudeY(region.bottom31);
 				break;
 			default:
 				skipUnknownField(t);
