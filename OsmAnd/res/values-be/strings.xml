@@ -667,8 +667,8 @@
 	<string name="gpx_option_from_start_point">Прайсьці ўвесь шлях спачатку</string>
 	<string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лякальныя вэктарныя мапы.\n\t\n\tДля іх выкарыстаньня абярыце пункт мэню \'Налада мапы\' → \'Крыніца мапы…\' → \'Лякальныя вэктарныя мапы\'.</string>
 	<string name="choose_audio_stream">Вывад галасавых падказак</string>
-	<string name="choose_audio_stream_descr">Абярыце канал прайграваньня галасавых падказак</string>
-	<string name="voice_stream_voice_call">Канал телефанаваньня</string>
+	<string name="choose_audio_stream_descr">Абярыце канал для галасавых падказак</string>
+	<string name="voice_stream_voice_call">Канал телефанаваньня (таксама спрабуе спыніць музыку з дынамікаў)</string>
 	<string name="voice_stream_notification">Канал апавяшчэньня</string>
 	<string name="voice_stream_music">Мэдыя/музычны канал</string>
 	<string name="warning_tile_layer_not_downloadable">Дастасаваньне не можа сьцягнуць слой мапы %1$s, паспрабуйце пераўсталяваць яе.</string>
@@ -1247,7 +1247,7 @@
     <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
     <string name="route_descr_destination">Пункт прызначэньня</string>
-    <string name="interrupt_music_descr">Перапыняць музыку робячы аб\'яву</string>
+    <string name="interrupt_music_descr">Цалкам прыпыніць любую музыку падчас галасавых падказак (а не толькі знізіць яе гучнасьць)</string>
 	<string name="share_route_as_gpx">Падзяліцца маршрутам праз GPX файл</string>
 	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
 	<string name="navigation_intent_invalid">Няправільны фармат: %s</string>
@@ -1513,7 +1513,7 @@
 	<string name="osmo_no_connection_msg">Сэрвіс OsMo не даступны:\n- Праверце Інтэрнэт-злучэньне;\n- Праверце налады;\n- Праверце наш Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Ананімнаму карыстальніку недаступныя:\n- Стварэньне груп;\n- Сінхранізацыя груп і прыстасаваньняў з серверам;\n- Кіраваньне групамі і прыстасаваньнямі ў асабістым кабінеце.</string>
     <string name="configure_map">Налады мапы</string>
-    <string name="search_radius_proximity">Паблізу ад</string>
+    <string name="search_radius_proximity">На адлегласьці</string>
     <string name="rendering_category_details">Падрабязнасьці</string>
     <string name="rendering_category_transport">Транспарт</string>
 	<string name="map_widget_top">Радок стану</string>
@@ -2223,4 +2223,8 @@
 	<string name="lang_ast">Астурыйская</string>
     <string name="app_mode_bus">Аўтобус</string>
  	<string name="app_mode_train">Цягнік</string>
+    <string name="storage_directory_card">Картка памяці</string>
+    <string name="coords_format">Фармат каардынатаў</string>
+    <string name="coords_format_descr">Фармат для геаграфічных каардынатаў</string>
+  	<string name="shared_string_is_open_24_7">Адкрыта 24/7</string>
     </resources>
