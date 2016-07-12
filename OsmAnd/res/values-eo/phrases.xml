@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_shop">Vendejoj</string>
-		<string name="poi_shop_food">Manĝovendejoj</string>
+<resources><string name="poi_shop">Vendejo</string>
+		<string name="poi_shop_food">Manĝovendejo</string>
 	<string name="poi_emergency">Vivsavado</string>
 	<string name="poi_transportation">Transporto</string>
 		<string name="poi_road_obstacle">Voja barilo</string>
-		<string name="poi_filling_station">Benzinejoj</string>
+		<string name="poi_filling_station">Benzinejo</string>
 		<string name="poi_personal_transport">Transporto privata</string>
 		<string name="poi_public_transport">Transporto publika</string>
 		<string name="poi_air_transport">Aerotransporto</string>
@@ -14,34 +14,34 @@
 		<string name="poi_node_networks">Nodoj de bicikla/piedirada reto</string>
 		<string name="poi_hiking_routes">Piediradaj kursoj</string>
 		<string name="poi_traffic_enforcement">Trafik-kontrolado</string>
-	<string name="poi_man_made">Hom-kreaĵoj</string>
+	<string name="poi_man_made">Hom-kreaĵo</string>
 		<string name="poi_transport_construction">Stratlaboroj</string>
 		<string name="poi_water_supply">Akvo-konduktilo</string>
 		<string name="poi_power">Energio</string>
 		<string name="poi_communication">Komunikado</string>
 		<string name="poi_trash_disposal">Rubmastrumado</string>
-		<string name="poi_landuse">Utilkampoj</string>
+		<string name="poi_landuse">Utilkampo</string>
 	<string name="poi_education">Edukado</string>
-	<string name="poi_administrative">Administrejoj</string>
+	<string name="poi_administrative">Administrejo</string>
 	<string name="poi_healthcare">Kuracado</string>
-	<string name="poi_office">Oficejoj</string>
+	<string name="poi_office">Oficejo</string>
 	<string name="poi_sport">Sporto</string>
 	<string name="poi_tourism">Turismo</string>
-		<string name="poi_sightseeing">Vidindaĵoj</string>
+		<string name="poi_sightseeing">Vidindaĵo</string>
 		<string name="poi_accomodation">Loĝado</string>
 		<string name="poi_internet_access">Interret-aliro</string>
-	<string name="poi_entertainment">Ripozejoj</string>
+	<string name="poi_entertainment">Ripozejo</string>
 		<string name="poi_club">Klubo</string>
-	<string name="poi_sustenance">Manĝejoj</string>
-	<string name="poi_cafe_and_restaurant">Kafejoj kaj restoracioj</string>
-	<string name="poi_service">Servoj</string>
+	<string name="poi_sustenance">Manĝejo</string>
+	<string name="poi_cafe_and_restaurant">Kafejo kaj restoracio</string>
+	<string name="poi_service">Servo</string>
 		<string name="poi_craft">Metio</string>
 	<string name="poi_finance">Financo</string>
 	<string name="poi_natural">Naturo</string>
 	<string name="poi_seamark">Mar-navigado</string>
-	<string name="poi_military">Militejoj</string>
+	<string name="poi_military">Militejo</string>
 	<string name="poi_osmwiki">Vikipedio</string>
-	<string name="poi_user_defined_other">Propre difinitaj</string>
+	<string name="poi_user_defined_other">Propre difinita</string>
 
 	<string name="poi_bakery">Panejo</string>
 	<string name="poi_palaeontological_site">Paleontologa fosejo</string>
@@ -358,7 +358,7 @@
 	<string name="poi_wayside_shrine">Adorejo apudvoja</string>
 	<string name="poi_wayside_cross">Krucifikso apudvoja</string>
 	<string name="poi_geyser">Gejsero</string>
-	<string name="poi_club_linux">Linuksa klubo</string>
+	<string name="poi_club_linux">Linuksa klubejo</string>
 	<string name="poi_glacier">Glacirivero</string>
 	<string name="poi_stone">Roko</string>
 	<string name="poi_aerialway_station">Kablovoja stacio</string>
@@ -796,7 +796,7 @@
 	<string name="poi_caravan_site">Kampadveturil-parkumejo</string>
 	<string name="poi_spring">Akvofonto</string>
 	<string name="poi_hot_spring">Tervarma akvofonto</string>
-	<string name="poi_club_cinema">Kina klubo</string>
+	<string name="poi_club_cinema">Kina klubejo</string>
 	<string name="poi_trees_date">Daktilpalmo</string>
 	<string name="poi_int_name">Internacia nomo</string>
 	<string name="poi_nat_name">Nacia nomo</string>
@@ -806,5 +806,34 @@
 	<string name="poi_alt_name">Alternativa nomo</string>
 
 	<string name="poi_cuisine">Kuirarto</string>
+
+	<string name="poi_internet_access_wlan">Interret-aliro: sendrata</string>
+	<string name="poi_resort">Turisma centro</string>
+	<string name="poi_hanami">Hanami (florvidado)</string>
+	<string name="poi_wine_cellar">Vinejo</string>
+	<string name="poi_winery">Vinejo</string>
+
+	<string name="poi_club_art">Artisma klubejo</string>
+	<string name="poi_club_astronomy">Stelscienca klubejo</string>
+	<string name="poi_club_computer">Komputila klubejo</string>
+	<string name="poi_club_board_games">Tabulluda klubejo</string>
+	<string name="poi_club_motorcycle">Motorcikla klubejo</string>
+	<string name="poi_club_sport">Sporta klubejo</string>
+	<string name="poi_club_game">Luda klubejo</string>
+	<string name="poi_club_automobile">Aŭtomobila klubejo</string>
+	<string name="poi_club_chess">Ŝaka klubejo</string>
+	<string name="poi_club_fan">Fan-klubejo</string>
+	<string name="poi_club_fishing">Fiŝkaptada klubejo</string>
+	<string name="poi_club_veterans">Ekssoldata klubejo</string>
+	<string name="poi_club_theatre">Teatra klubejo</string>
+	<string name="poi_club_history">Historia klubejo</string>
+	<string name="poi_club_music">Muzika klubejo</string>
+	<string name="poi_club_ethnic">Etna klubejo</string>
+	<string name="poi_club_nature">Natura klubejo</string>
+	<string name="poi_club_photography">Fotografa klubejo</string>
+	<string name="poi_club_hunting">Ĉasa klubejo</string>
+	<string name="poi_club_shooting">Pafada klubejo</string>
+	<string name="poi_club_tourism">Turisma klubejo</string>
+	<string name="poi_club_charity">Almoza klubejo</string>
 
 	</resources>
