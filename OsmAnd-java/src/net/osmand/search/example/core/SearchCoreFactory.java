@@ -16,7 +16,6 @@ import java.util.TreeSet;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -43,12 +42,7 @@ import net.osmand.util.MapUtils;
 
 
 public class SearchCoreFactory {
-	// TODO buildings interpolation (+)
-	// TODO display closest city to villages (+)
-	// TODO search only closest file (global bbox) (+)
-	// TODO limit to one file if city/street/village/poi selected (+)
 
-	// TODO fix search amenity by type (category/additional/filter)
 	// TODO streets by city
 	// TODO amenity by name
 	
@@ -58,8 +52,10 @@ public class SearchCoreFactory {
 	
 	// TODO exclude duplicate streets/cities...
 
+	// TODO add full text search with comma
+	
+	// TODO MED support poi additional select type and search
 	// TODO MED display results momentarily
-	// TODO MED add full text search with comma
 	// TODO MED add full text search without comma
 	
 	// TODO LOW automatically increase radius if nothing found
