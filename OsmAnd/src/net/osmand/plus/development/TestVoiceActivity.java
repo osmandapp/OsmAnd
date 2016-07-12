@@ -278,10 +278,10 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			} else {
 				notification = "BT SCO available:   NO";
 			}
-			if (AbstractPrologCommandPlayer.btScoInitializes == true) {
+			if ("".equals(AbstractPrologCommandPlayer.btScoException)) {
 				notification = notification + "\n" + "BT SCO initializes: YES";
 			} else {
-				notification = notification + "\n" + "BT SCO initializes: NO";
+				notification = notification + "\n" + "BT SCO initializes: NO" + "\n(" + AbstractPrologCommandPlayer.btScoException + ")";
 			}
 			notification = notification + "\n" + "BT SCO init delay:  " + AbstractPrologCommandPlayer.BT_SCO_DELAY;
 			Toast.makeText(TestVoiceActivity.this, notification, Toast.LENGTH_LONG).show();
