@@ -84,17 +84,23 @@ public class Building extends MapObject {
 	
 
 	public float interpolation(String hno) {
-		if(getInterpolationType() != null || getInterpolationInterval() > 0) {
+		if(getInterpolationType() != null || getInterpolationInterval() > 0 || super.getName().contains("-")) {
 			int num = Algorithms.extractFirstIntegerNumber(hno);
-			int numB = Algorithms.extractFirstIntegerNumber(super.getName());
+			String fname = super.getName();
+			int numB = Algorithms.extractFirstIntegerNumber(fname);
 			int numT = numB; 
 			if (num >= numB) {
-				if (getName2() != null) {
-					numT = Algorithms.extractFirstIntegerNumber(getName2());
+				String sname = getName2();
+				if(fname.contains("-") && sname == null){
+					int l = fname.indexOf('-');
+					sname = fname.substring(l + 1, fname.length());
+				}
+				if (sname != null) {
+					numT = Algorithms.extractFirstIntegerNumber(sname);
 					if(numT < num) {
 						return -1;
 					}
-				}
+				} 
 				if (getInterpolationType() == BuildingInterpolation.EVEN && num % 2 == 1) {
 					return -1;
 				}

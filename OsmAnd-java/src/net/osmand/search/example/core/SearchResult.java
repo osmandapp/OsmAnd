@@ -20,12 +20,13 @@ public class SearchResult {
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
 	}
+
 	public double getSearchDistance(LatLon location) {
 		double distance = 0;
-		if(location != null && this.location != null) {
+		if (location != null && this.location != null) {
 			distance = MapUtils.getDistance(location, this.location);
 		}
-		return priority -  1 / ( 1 + priorityDistance * distance);
+		return priority - 1 / (1 + priorityDistance * distance);
 	}
 	
 	public LatLon location;
@@ -36,6 +37,7 @@ public class SearchResult {
 	
 	public String localeRelatedObjectName;
 	public double distRelatedObjectName;
+
 
 	
 	

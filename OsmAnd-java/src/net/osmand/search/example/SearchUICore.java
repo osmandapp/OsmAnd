@@ -225,6 +225,11 @@ public class SearchUICore {
 				if(cmp != 0) {
 					return cmp;
 				}
+				int st1 = Algorithms.extractFirstIntegerNumber(o1.localeName);
+				int st2 = Algorithms.extractFirstIntegerNumber(o2.localeName);
+				if(st1 != st2) {
+					return Algorithms.compare(st1, st2);
+				}
 				return clt.compare(o1.localeName, o2.localeName);
 			}
 		});
