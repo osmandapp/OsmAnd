@@ -50,14 +50,13 @@ import com.jwetherell.openmap.common.UTMPoint;
 public class SearchCoreFactory {
 	// TODO add location parse (+)
 	// TODO add location partial (+)
+	// TODO geo:34.99393,-106.61568 (Treasure Island) and display url parse (+)
 	
 	// TODO add UTM support
-	// TODO geo:34.99393,-106.61568 (Treasure Island) and display url parse
-	
-	
 	// TODO add full text search with comma correct order
 	// TODO MED add full text search without comma and different word order
-	// TODO exclude duplicate streets/cities...
+	// TODO MED edit in the middle (with words and comma)?
+	// TODO exclude duplicate streets/cities/pois...
 	
 	// TODO MED support poi additional select type and search
 	// TODO LOW display results momentarily
@@ -822,13 +821,32 @@ public class SearchCoreFactory {
 
 
 		private void parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			GeoParsedPoint pnt = GeoPointParserUtil.parse(phrase.getLastWord());
+			String text = phrase.getLastWord();
+			GeoParsedPoint pnt = GeoPointParserUtil.parse(text);
+			int wordsSpan= 1;
+			List<SearchWord> lst = phrase.getWords();
+			for (int i = lst.size() - 1; i >= 0 && (pnt == null || !pnt.isGeoPoint()); i--) {
+				SearchWord w = lst.get(i);
+				if (w.getType() != ObjectType.UNKNOWN_NAME_FILTER) {
+					break;
+				}
+				text = w.getWord() + "," + text;
+				wordsSpan++;
+				pnt = GeoPointParserUtil.parse(text);
+				if (pnt != null && pnt.isGeoPoint()) {
+					break;
+				}
+			}
 			if(pnt != null && pnt.isGeoPoint()) {
 				SearchResult sp = new SearchResult(phrase);
 				sp.priority = 0;
 				sp.object = pnt;
+				sp.wordsSpan = wordsSpan;
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
 				sp.localeName = ((float)pnt.getLatitude()) +", " + ((float) pnt.getLongitude());
+				if(pnt.getZoom() > 0) {
+					sp.preferredZoom = pnt.getZoom();
+				}
 				sp.objectType = ObjectType.LOCATION;
 				resultMatcher.publish(sp);
 			}
