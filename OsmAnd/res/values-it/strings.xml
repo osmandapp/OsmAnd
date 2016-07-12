@@ -169,7 +169,7 @@
     <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\' → \'Configura la mappa\' → \'Sorgente mappa…\' → \'Mappe vettoriali offline\'.</string>
     <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
     <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale</string>
-    <string name="voice_stream_voice_call">Audio chiamate vocali</string>
+    <string name="voice_stream_voice_call">Audio chiamate vocali (prova a interrompere anche la musica stereo auto BT)</string>
     <string name="voice_stream_notification">Notifiche stream</string>
     <string name="voice_stream_music">Audio media/musica</string>
     <string name="warning_tile_layer_not_downloadable">L\'applicazione non riesce a scaricare il livello della mappa %1$s, prova a reinstallarlo.</string>
@@ -1285,8 +1285,8 @@
     <string name="voice_pref_title">Voce</string>
     <string name="misc_pref_title">Varie</string>
     <string name="localization_pref_title">Localizzazione</string>
-    <string name="interrupt_music">Interrompi la musica</string>
-    <string name="interrupt_music_descr">Interrompi la musica per fare gli annunci</string>
+    <string name="interrupt_music">Metti in pausa la musica</string>
+    <string name="interrupt_music_descr">Interrompi la musica per fare gli annunci (non semplicemente abbassarne il volume)</string>
     <string name="share_route_as_gpx">Condividi il percorso come file GPX</string>
     <string name="share_route_subject">Percorso condiviso tramite OsmAnd</string>
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
