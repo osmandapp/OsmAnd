@@ -239,7 +239,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		return p.newCommandBuilder();
 	}
 
-	public void addButton(ViewGroup layout, String description, final CommandBuilder builder){
+	public void addButton(ViewGroup layout, final String description, final CommandBuilder builder){
 		Button button = new Button(this);
 		button.setGravity(Gravity.LEFT);
 		button.setText(description);
