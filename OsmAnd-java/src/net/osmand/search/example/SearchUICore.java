@@ -94,7 +94,7 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		apis.add(new SearchCoreFactory.SearchStreetByCityAPI());
 		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
-		apis.add(new SearchCoreFactory.SearchUrlAPI());
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI());
 	}
 	

@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.TreeSet;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.LocationConvert;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
@@ -42,18 +43,20 @@ import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.MapUtils;
 
+import com.jwetherell.openmap.common.LatLonPoint;
+import com.jwetherell.openmap.common.UTMPoint;
+
 
 public class SearchCoreFactory {
-	// TODO streets by city (+)
-	// TODO add url parse (geo) (+)
-	// TODO amenity by name (+)
-	// TODO show buildings if street is one or default ( <CITY>, CITY (den ilp), 1186RM) Зеленогорск? (+)
-	// TODO ignore streets with <> when search by name (+)
+	// TODO add location parse (+)
+	// TODO add location partial (+)
+	
+	// TODO add UTM support
+	// TODO geo:34.99393,-106.61568 (Treasure Island) and display url parse
+	
 	
 	// TODO add full text search with comma correct order
 	// TODO MED add full text search without comma and different word order
-	// TODO add location parse 
-	// TODO geo:34.99393,-106.61568 (Treasure Island) and display url parse
 	// TODO exclude duplicate streets/cities...
 	
 	// TODO MED support poi additional select type and search
@@ -750,24 +753,85 @@ public class SearchCoreFactory {
 	
 	
 	
-	public static class SearchUrlAPI extends SearchBaseAPI {
+	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
+		
+//		newFormat = PointDescription.FORMAT_DEGREES;
+//		newFormat = PointDescription.FORMAT_MINUTES;
+//		newFormat = PointDescription.FORMAT_SECONDS;
+		public void testUTM() {
+			double northing = 0;
+			double easting = 0;
+			String zone = "";
+			char c = zone.charAt(zone.length() -1);
+			int z = Integer.parseInt(zone.substring(0, zone.length() - 1));
+			UTMPoint upoint = new UTMPoint(northing, easting, z, c);
+			LatLonPoint ll = upoint.toLatLonPoint();
+			LatLon loc = new LatLon(ll.getLatitude(), ll.getLongitude());
+		}
 		
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			if(phrase.getLastWord().length() == 0) {
 				return false;
 			}
+			parseLocation(phrase, resultMatcher);
+			parseUrl(phrase, resultMatcher);
+			return super.search(phrase, resultMatcher);
+		}
+		private boolean isKindOfNumber(String s) {
+			for(int i = 0; i < s.length(); i ++) {
+				char c = s.charAt(i);
+				if(c >= '0' && c <= '9') {
+				} else if(c == ':' || c == '.' || c == '#' || c == ',' || c == '-' || c == '\'' || c == '"') {
+				} else {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+			String lw = phrase.getLastWord();
+			SearchWord sw = phrase.getLastSelectedWord();
+			double dd = LocationConvert.convert(lw, false);
+			if(!Double.isNaN(dd)) {
+				double pd = Double.NaN;
+				if(sw != null && sw.getType() == ObjectType.UNKNOWN_NAME_FILTER) {
+					if(isKindOfNumber(sw.getWord())) {
+						pd = LocationConvert.convert(sw.getWord(), false);
+					}
+				}
+				if(!Double.isNaN(pd)) {
+					SearchResult sp = new SearchResult(phrase);
+					sp.priority = 0;
+					sp.object = sp.location = new LatLon(pd, dd);
+					sp.localeName = ((float)sp.location.getLatitude()) +", " + ((float) sp.location.getLongitude());
+					sp.objectType = ObjectType.LOCATION;
+					sp.wordsSpan = 2;
+					resultMatcher.publish(sp);
+				} else {
+					SearchResult sp = new SearchResult(phrase);
+					sp.priority = 0;
+					sp.object = sp.location = new LatLon(dd, 0);
+					sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
+					sp.objectType = ObjectType.PARTIAL_LOCATION;
+					resultMatcher.publish(sp);
+				}
+			}
+		}
+
+
+		private void parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			GeoParsedPoint pnt = GeoPointParserUtil.parse(phrase.getLastWord());
 			if(pnt != null && pnt.isGeoPoint()) {
 				SearchResult sp = new SearchResult(phrase);
 				sp.priority = 0;
 				sp.object = pnt;
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
-				sp.localeName = "geo:" + ((float)pnt.getLatitude()) +", " + ((float) pnt.getLongitude());
+				sp.localeName = ((float)pnt.getLatitude()) +", " + ((float) pnt.getLongitude());
 				sp.objectType = ObjectType.LOCATION;
 				resultMatcher.publish(sp);
 			}
-			return super.search(phrase, resultMatcher);
 		}
 		
 		@Override

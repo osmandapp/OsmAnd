@@ -191,6 +191,12 @@ public class SearchPhrase {
 	public SearchPhrase selectWord(SearchResult res) {
 		SearchPhrase sp = new SearchPhrase(this.settings);
 		sp.words.addAll(this.words);
+		while(res.wordsSpan > 1) {
+			if(sp.words.size() > 0) {
+				sp.words.remove(sp.words.size() - 1);
+			}
+			res.wordsSpan--;
+		}
 		SearchWord sw = new SearchWord(res.localeName.trim(), res);
 		sp.words.add(sw);
 		return sp;

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
+import net.osmand.LocationConvert;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -166,14 +167,14 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			northingEdit.setText(((long)pnt.northing)+"");
 			eastingEdit.setText(((long)pnt.easting)+"");
 		} else {
-			latEdit.setText(PointDescription. convert(MapUtils.checkLatitude(l.getLatitude()), currentFormat));
-			lonEdit.setText(PointDescription. convert(MapUtils.checkLongitude(l.getLongitude()), currentFormat));
+			latEdit.setText(LocationConvert.convert(MapUtils.checkLatitude(l.getLatitude()), currentFormat));
+			lonEdit.setText(LocationConvert.convert(MapUtils.checkLongitude(l.getLongitude()), currentFormat));
 		}
 	}
 
 	protected LatLon parseLocation() {
 		LatLon loc ;
-		if(currentFormat == PointDescription.UTM_FORMAT) { 
+		if(currentFormat == LocationConvert.UTM_FORMAT) { 
 			double northing = Double.parseDouble(((EditText)view.findViewById(R.id.NorthingEdit)).getText().toString());
 			double easting = Double.parseDouble(((EditText)view.findViewById(R.id.EastingEdit)).getText().toString());
 			String zone = ((EditText)view.findViewById(R.id.ZoneEdit)).getText().toString();
@@ -183,8 +184,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			LatLonPoint ll = upoint.toLatLonPoint();
 			loc = new LatLon(ll.getLatitude(), ll.getLongitude());
 		} else {
-			double lat = PointDescription. convert(((EditText) view.findViewById(R.id.LatitudeEdit)).getText().toString());
-			double lon = PointDescription. convert(((EditText) view.findViewById(R.id.LongitudeEdit)).getText().toString());
+			double lat = LocationConvert.convert(((EditText) view.findViewById(R.id.LatitudeEdit)).getText().toString(), true);
+			double lon = LocationConvert.convert(((EditText) view.findViewById(R.id.LongitudeEdit)).getText().toString(), true);
 			loc = new LatLon(lat, lon);	
 		}
 		return loc;

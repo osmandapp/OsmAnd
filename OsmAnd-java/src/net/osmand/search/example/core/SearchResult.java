@@ -37,6 +37,8 @@ public class SearchResult {
 	
 	public String localeRelatedObjectName;
 	public double distRelatedObjectName;
+	
+	public int wordsSpan = 1;
 
 
 	

@@ -1,20 +1,15 @@
 package net.osmand.data;
 
+import net.osmand.LocationConvert;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
-
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-import java.util.StringTokenizer;
 
 public class PointDescription {
 	private String type = "";
@@ -150,8 +145,8 @@ public class PointDescription {
 					+ ((long) pnt.easting);
 		} else {
 			try {
-				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, convert(lat, f),
-						convert(lon, f));
+				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, LocationConvert.convert(lat, f),
+						LocationConvert.convert(lon, f));
 			} catch(RuntimeException e) {
 				e.printStackTrace();
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0); 
@@ -294,136 +289,24 @@ public class PointDescription {
 		return pd;
 	}
 	
-
-	////////////////////////////////////////////////////////////////////////////
-	// THIS code is copied from Location.convert() in order to change locale
-	// and to fix bug in android implementation : doesn't convert if min = 59.23 or sec = 59.32 or deg=179.3
- 	public static final int FORMAT_DEGREES = 0;
-	public static final int FORMAT_MINUTES = 1;
-	public static final int FORMAT_SECONDS = 2;
-	public static final int UTM_FORMAT = 3;
-	private static final char DELIM = ':';
-
+	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
+	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
+	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
+	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
+	
 	public static String formatToHumanString(Context ctx, int format) {
 		switch (format) {
-			case FORMAT_DEGREES:
+			case LocationConvert.FORMAT_DEGREES:
 				return ctx.getString(R.string.navigate_point_format_D);
-			case FORMAT_MINUTES:
+			case LocationConvert.FORMAT_MINUTES:
 				return ctx.getString(R.string.navigate_point_format_DM);
-			case FORMAT_SECONDS:
+			case LocationConvert.FORMAT_SECONDS:
 				return ctx.getString(R.string.navigate_point_format_DMS);
-			case UTM_FORMAT:
+			case LocationConvert.UTM_FORMAT:
 				return "UTM";
 			default:
 				return "Unknown format";
 		}
-	}
-
-	/**
-     * Converts a String in one of the formats described by
-     * FORMAT_DEGREES, FORMAT_MINUTES, or FORMAT_SECONDS into a
-     * double.
-     *
-     * @throws NullPointerException if coordinate is null
-     * @throws IllegalArgumentException if the coordinate is not
-     * in one of the valid formats.
-     */
-    public static double convert(String coordinate) {
-    	coordinate = coordinate.replace(' ', ':').replace('#', ':').replace(',', '.');
-        if (coordinate == null) {
-            throw new NullPointerException("coordinate");
-        }
-
-        boolean negative = false;
-        if (coordinate.charAt(0) == '-') {
-            coordinate = coordinate.substring(1);
-            negative = true;
-        }
-
-        StringTokenizer st = new StringTokenizer(coordinate, ":");
-        int tokens = st.countTokens();
-        if (tokens < 1) {
-            throw new IllegalArgumentException("coordinate=" + coordinate);
-        }
-        try {
-            String degrees = st.nextToken();
-            double val;
-            if (tokens == 1) {
-                val = Double.parseDouble(degrees);
-                return negative ? -val : val;
-            }
-
-            String minutes = st.nextToken();
-            int deg = Integer.parseInt(degrees);
-            double min;
-            double sec = 0.0;
-
-            if (st.hasMoreTokens()) {
-                min = Integer.parseInt(minutes);
-                String seconds = st.nextToken();
-                sec = Double.parseDouble(seconds);
-            } else {
-                min = Double.parseDouble(minutes);
-            }
-
-            boolean isNegative180 = negative && (deg == 180) &&
-                (min == 0) && (sec == 0);
-
-            // deg must be in [0, 179] except for the case of -180 degrees
-            if ((deg < 0.0) || (deg > 180 && !isNegative180)) {
-                throw new IllegalArgumentException("coordinate=" + coordinate);
-            }
-            if (min < 0 || min > 60d) {
-                throw new IllegalArgumentException("coordinate=" +
-                        coordinate);
-            }
-            if (sec < 0 || sec > 60d) {
-                throw new IllegalArgumentException("coordinate=" +
-                        coordinate);
-            }
-
-            val = deg*3600.0 + min*60.0 + sec;
-            val /= 3600.0;
-            return negative ? -val : val;
-        } catch (NumberFormatException nfe) {
-            throw new IllegalArgumentException("coordinate=" + coordinate);
-        }
-    }
-
-
-	public static String convert(double coordinate, int outputType) {
-		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
-			throw new IllegalArgumentException("coordinate=" + coordinate); //$NON-NLS-1$
-		}
-		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType != FORMAT_SECONDS)) {
-			throw new IllegalArgumentException("outputType=" + outputType); //$NON-NLS-1$
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		// Handle negative values
-		if (coordinate < 0) {
-			sb.append('-');
-			coordinate = -coordinate;
-		}
-
-		DecimalFormat df = new DecimalFormat("###.#####", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
-		if (outputType == FORMAT_MINUTES || outputType == FORMAT_SECONDS) {
-			int degrees = (int) Math.floor(coordinate);
-			sb.append(degrees);
-			sb.append(DELIM);
-			coordinate -= degrees;
-			coordinate *= 60.0;
-			if (outputType == FORMAT_SECONDS) {
-				int minutes = (int) Math.floor(coordinate);
-				sb.append(minutes);
-				sb.append(DELIM);
-				coordinate -= minutes;
-				coordinate *= 60.0;
-			}
-		}
-		sb.append(df.format(coordinate));
-		return sb.toString();
 	}
 
 }
