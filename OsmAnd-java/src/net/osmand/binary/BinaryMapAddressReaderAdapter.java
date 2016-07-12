@@ -56,10 +56,10 @@ public class BinaryMapAddressReaderAdapter {
 		List<CitiesBlock> cities = new ArrayList<BinaryMapAddressReaderAdapter.CitiesBlock>();
 
 		LatLon calculatedCenter = null;
-		public int bottom31;
-		public int top31;
-		public int right31;
-		public int left31;
+		int bottom31;
+		int top31;
+		int right31;
+		int left31;
 
 		public String getEnName() {
 			return enName;

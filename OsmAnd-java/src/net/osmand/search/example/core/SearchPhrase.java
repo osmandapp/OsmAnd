@@ -133,19 +133,21 @@ public class SearchPhrase {
 					next = lit.next();
 					if(rect != null) {
 						if(dt == SearchPhraseDataType.POI) {
-							if(next.containsPoiData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom)) {
+							if(next.containsPoiData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom)) {
 								return true;
 							}
 						} else if(dt == SearchPhraseDataType.ADDRESS) {
-							if(next.containsAddressData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom)) {
+							// containsAddressData not all maps supported
+							if(next.containsPoiData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom) && 
+									next.containsAddressData()) {
 								return true;
 							}
 						} else if(dt == SearchPhraseDataType.ROUTING) {
-							if(next.containsRouteData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom, 15)) {
+							if(next.containsRouteData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom, 15)) {
 								return true;
 							}
 						} else {
-							if(next.containsMapData((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom, 15)) {
+							if(next.containsMapData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom, 15)) {
 								return true;
 							}
 						}
