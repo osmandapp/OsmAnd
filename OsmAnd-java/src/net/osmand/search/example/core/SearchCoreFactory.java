@@ -43,7 +43,8 @@ import net.osmand.util.MapUtils;
 public class SearchCoreFactory {
 	// TODO display closest city to villages (+)
 	// TODO search only closest file (global bbox) (+)
-	
+
+	// TODO buildings interpolation
 	// TODO limit to one file if city/street/village/poi selected
 	
 	// TODO fix search amenity by type (category/additional/filter)
@@ -53,10 +54,8 @@ public class SearchCoreFactory {
 	// TODO add location parse
 	// TODO add url parse (geo)
 
-	// TODO buildings interpolation
 	// TODO show buildings if street is one or default ( <CITY>, CITY (den ilp), 1186RM)
 	// TODO exclude duplicate streets/cities...
-
 
 	// TODO MED display results momentarily
 	// TODO MED add full text search with comma
@@ -504,15 +503,22 @@ public class SearchCoreFactory {
 				}
 				for(Building b : s.getBuildings()) {
 					SearchResult res = new SearchResult(phrase);
-					if(!sm.matches(b.getName())) {
+					boolean interpolation = b.belongsToInterpolation(lw);
+					if(!sm.matches(b.getName()) && !interpolation) {
 						continue;
 					}
+					
 					res.localeName = b.getName(phrase.getSettings().getLang(), true);
 					res.otherNames = b.getAllNames(true);
 					res.object = b;
 					res.file = file;
+					res.priorityDistance = 0;
 					res.objectType = ObjectType.HOUSE;
-					res.location = b.getLocation();
+					if(interpolation) {
+						res.location = b.getLocation(b.interpolation(lw));
+					} else {
+						res.location = b.getLocation();
+					}
 					res.preferredZoom = 17;
 					resultMatcher.publish(res);
 				}
@@ -526,6 +532,7 @@ public class SearchCoreFactory {
 						res.localeName = street.getName(phrase.getSettings().getLang(), true);
 						res.object = street;
 						res.file = file;
+						res.priorityDistance = 0;
 						res.objectType = ObjectType.STREET_INTERSECTION;
 						res.location = street.getLocation();
 						res.preferredZoom = 16;
