@@ -229,6 +229,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(10.2) GPS signal recovered", builder(p).gpsLocationRecover());
 		addButton(ll, "(10.3) You have been off the route for 1050m", builder(p).offRoute(1050));
 		addButton(ll, "(10.4) You are back on the route", builder(p).backOnRoute());
+
+		addButton(ll, "       System checks:", builder(p));
+		addButton(ll, "(11.1) Display BT SCO availability (Phone call audio only)", builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -249,6 +252,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				builder.play();
+				if (description.startsWith("(11.1)")) {
+					displayBtScoAvailability();
+				}
 			}
 		});
 	}
@@ -262,5 +268,23 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			return true;
 		}
 		return false;
+	}
+
+	private void displayBtScoAvailability() {
+		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+			String notification;
+			if (AbstractPrologCommandPlayer.btScoAvailable == true) {
+				notification = "BT SCO available:   YES";
+			} else {
+				notification = "BT SCO available:   NO";
+			}
+			if (AbstractPrologCommandPlayer.btScoInitializes == true) {
+				notification = notification + "\n" + "BT SCO initializes: YES";
+			} else {
+				notification = notification + "\n" + "BT SCO initializes: NO";
+			}
+			notification = notification + "\n" + "BT SCO init delay:  " + AbstractPrologCommandPlayer.BT_SCO_DELAY;
+			Toast.makeText(TestVoiceActivity.this, notification, Toast.LENGTH_LONG).show();
+		}
 	}
 }
