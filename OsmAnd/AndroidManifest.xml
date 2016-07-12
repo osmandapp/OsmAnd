@@ -24,6 +24,10 @@
 	<uses-permission android:name="com.android.vending.BILLING" />
 	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
+    <!-- The 2 below seem necessary only for Android < v4.4 (to initialize BT SCO), Android >= 4.4 does not need these (?!?) -->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
 	<uses-feature android:name="android.hardware.camera" android:required="false" />
 	<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 	<uses-feature android:name="android.hardware.microphone" android:required="false" />
