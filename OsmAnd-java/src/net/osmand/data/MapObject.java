@@ -30,6 +30,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected LatLon location = null;
 	protected int fileOffset = 0;
 	protected Long id = null;
+	private Object referenceFile = null;
 
 
 	public void setId(Long id) {
@@ -267,6 +268,14 @@ public abstract class MapObject implements Comparable<MapObject> {
 				return collator.equals(o1.getName(l), o2.getName(l));
 			}
 		}
+	}
+	
+	public void setReferenceFile(Object referenceFile) {
+		this.referenceFile = referenceFile;
+	}
+	
+	public Object getReferenceFile() {
+		return referenceFile;
 	}
 
 }

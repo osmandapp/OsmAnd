@@ -6,11 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import net.osmand.CollatorStringMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
@@ -66,13 +65,11 @@ public class SearchPhrase {
 					if(unknown) {
 						sp.words.add(new SearchWord(ws[i].trim()));
 					}
-					// sp.text += ws[i] + ", ";
 				}
 			}
 			sp.lastWord = ws[ws.length - 1];
 		}
 		sp.lastWordTrim = sp.lastWord.trim();
-		//sp.text = sp.text.trim();
 		return sp;
 	}
 	
@@ -122,9 +119,14 @@ public class SearchPhrase {
 	
 	
 	public Iterator<BinaryMapIndexReader> getOfflineIndexes(int meters, final SearchPhraseDataType dt) {
+		final QuadRect rect = meters > 0 ? getBBoxToSearch(meters) : null;
+		return getOfflineIndexes(rect, dt);
+		
+	}
+
+	public Iterator<BinaryMapIndexReader> getOfflineIndexes(final QuadRect rect, final SearchPhraseDataType dt) {
 		List<BinaryMapIndexReader> list = indexes != null ? indexes : settings.getOfflineIndexes();
 		final Iterator<BinaryMapIndexReader> lit = list.iterator();
-		final QuadRect rect = meters > 0 ? getBBoxToSearch(meters) : null;
 		return new Iterator<BinaryMapIndexReader>() {
 			BinaryMapIndexReader next = null;
 			@Override
@@ -167,7 +169,6 @@ public class SearchPhrase {
 			public void remove() {
 			}
 		};
-		
 	}
 	
 	public List<BinaryMapIndexReader> getOfflineIndexes() {
@@ -370,5 +371,9 @@ public class SearchPhrase {
 			return sm.matches(name);
 		}
 		
+	}
+
+	public int getRadiusSearch(int meters) {
+		return getRadiusLevel() * meters;
 	}
 }

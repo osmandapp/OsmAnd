@@ -93,8 +93,12 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		apis.add(new SearchCoreFactory.SearchStreetByCityAPI());
 		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
-		apis.add(new SearchCoreFactory.SearchRegionByNameAPI());
+		
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI());
+	}
+	
+	public void registerAPI(SearchCoreAPI api) {
+		apis.add(api);
 	}
 	
 	
