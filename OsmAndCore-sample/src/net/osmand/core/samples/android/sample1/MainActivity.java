@@ -306,6 +306,7 @@ public class MainActivity extends Activity {
 				SearchListItem item = adapter.getItem(position);
 				SearchResult sr = item.getSearchResult();
 
+				boolean updateEditText = true;
 				if (sr.objectType == ObjectType.POI
 						|| sr.objectType == ObjectType.LOCATION
 						|| sr.objectType == ObjectType.HOUSE
@@ -316,8 +317,9 @@ public class MainActivity extends Activity {
 
 					hideSearchList();
 					mapView.requestFocus();
+					updateEditText = false;
 				}
-				completeQueryWithObject(item.getSearchResult());
+				completeQueryWithObject(item.getSearchResult(), updateEditText);
 			}
 		});
 
@@ -523,16 +525,18 @@ public class MainActivity extends Activity {
 		updateSearchResult(c, false);
 	}
 
-	private void completeQueryWithObject(SearchResult sr) {
+	private void completeQueryWithObject(SearchResult sr, boolean updateEditText) {
 
 		if (sr.location != null) {
 			showOnMap(sr.location, sr.preferredZoom);
 		}
 		searchUICore.selectSearchResult(sr);
 		String txt = searchUICore.getPhrase().getText(true);
-		queryText = txt;
-		searchEditText.setText(txt);
-		searchEditText.setSelection(txt.length());
+		if (updateEditText) {
+			queryText = txt;
+			searchEditText.setText(txt);
+			searchEditText.setSelection(txt.length());
+		}
 
 		searchUICore.search(txt, null);
 	}
