@@ -25,6 +25,7 @@
 	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <!-- The 2 below seem necessary only for Android < v4.2 (to initialize BT SCO) -->
+    <!-- TODO Hardy: v4.2, v4.3 still untested. >= v4.4 OK. -->
     <uses-permission android:name="android.permission.BROADCAST_STICKY" android:maxSdkVersion="16" />
     <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="16" />
 
