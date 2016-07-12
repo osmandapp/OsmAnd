@@ -57,7 +57,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	protected int distanceInd = 0;
 	// in kilometers
-	protected double[] distanceToSearchValues = new double[]{1, 2, 5, 10, 20, 50, 100, 200, 500};
+	protected double[] distanceToSearchValues = new double[] { 1, 2, 5, 10, 20, 50, 100, 200, 500 };
 
 	private final MapPoiTypes poiTypes;
 

@@ -177,8 +177,8 @@ public class SearchUICore {
 
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		for (SearchWord sw : phrase.getWords()) {
-			if (sw.getType() == ObjectType.REGION) {
-				phrase.selectFile((BinaryMapIndexReader) sw.getResult().object);
+			if(sw.getResult() != null && sw.getResult().file != null) {
+				phrase.selectFile(sw.getResult().file);
 			}
 		}
 		phrase.sortFiles();
