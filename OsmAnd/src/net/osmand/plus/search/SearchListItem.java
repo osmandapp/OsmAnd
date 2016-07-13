@@ -9,6 +9,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -44,7 +45,7 @@ public class SearchListItem {
 					return Algorithms.capitalizeFirstLetterAndLowercase(city.getType().toString())
 							+ " near "
 							+ searchResult.localeRelatedObjectName
-							+ (searchResult.distRelatedObjectName > 0 ? " (" + SearchListAdapter.getFormattedDistance(searchResult.distRelatedObjectName) + ")" : "");
+							+ (searchResult.distRelatedObjectName > 0 ? " (" + OsmAndFormatter.getFormattedDistance((float)searchResult.distRelatedObjectName, app) + ")" : "");
 				} else {
 					return Algorithms.capitalizeFirstLetterAndLowercase(city.getType().toString());
 				}
@@ -53,7 +54,7 @@ public class SearchListItem {
 				City streetCity = street.getCity();
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					return searchResult.localeRelatedObjectName
-							+ (searchResult.distRelatedObjectName > 0 ? "(" + SearchListAdapter.getFormattedDistance(searchResult.distRelatedObjectName) + ")" : "");
+							+ (searchResult.distRelatedObjectName > 0 ? "(" + OsmAndFormatter.getFormattedDistance((float)searchResult.distRelatedObjectName, app) + ")" : "");
 				} else {
 					return streetCity.getName() + " - " + Algorithms.capitalizeFirstLetterAndLowercase(streetCity.getType().name());
 				}

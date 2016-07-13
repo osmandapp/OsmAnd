@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -77,7 +79,7 @@ public class QuickSearchDialogFragment extends DialogFragment {
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		toolbar.setNavigationOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
@@ -138,24 +140,28 @@ public class QuickSearchDialogFragment extends DialogFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				SearchListItem item = listAdapter.getItem(position);
-				SearchResult sr = item.getSearchResult();
+				if (item instanceof SearchMoreListItem) {
+					((SearchMoreListItem) item).getOnClickListener().onClick(view);
+				} else {
+					SearchResult sr = item.getSearchResult();
 
-				boolean updateEditText = true;
-				if (sr.objectType == ObjectType.POI
-						|| sr.objectType == ObjectType.LOCATION
-						|| sr.objectType == ObjectType.HOUSE
-						|| sr.objectType == ObjectType.FAVORITE
-						|| sr.objectType == ObjectType.RECENT_OBJ
-						|| sr.objectType == ObjectType.WPT
-						|| sr.objectType == ObjectType.STREET_INTERSECTION) {
+					boolean updateEditText = true;
+					if (sr.objectType == ObjectType.POI
+							|| sr.objectType == ObjectType.LOCATION
+							|| sr.objectType == ObjectType.HOUSE
+							|| sr.objectType == ObjectType.FAVORITE
+							|| sr.objectType == ObjectType.RECENT_OBJ
+							|| sr.objectType == ObjectType.WPT
+							|| sr.objectType == ObjectType.STREET_INTERSECTION) {
 
-					updateEditText = false;
-					dismiss();
-					if (sr.location != null) {
-						showOnMap(sr);
+						updateEditText = false;
+						dismiss();
+						if (sr.location != null) {
+							showOnMap(sr);
+						}
 					}
+					completeQueryWithObject(item.getSearchResult(), updateEditText);
 				}
-				completeQueryWithObject(item.getSearchResult(), updateEditText);
 			}
 		});
 
@@ -174,7 +180,6 @@ public class QuickSearchDialogFragment extends DialogFragment {
 				String newQueryText = s.toString();
 				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 					searchQuery = newQueryText;
-					showProgressBar();
 					runSearch();
 				}
 			}
@@ -182,7 +187,7 @@ public class QuickSearchDialogFragment extends DialogFragment {
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
-		clearButton.setOnClickListener(new View.OnClickListener() {
+		clearButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (searchEditText.getText().length() == 0) {
@@ -238,17 +243,21 @@ public class QuickSearchDialogFragment extends DialogFragment {
 	}
 
 	private void runSearch(String text) {
-
+		showProgressBar();
 		SearchSettings settings = searchUICore.getPhrase().getSettings();
 		if(settings.getRadiusLevel() != 1){
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
-		SearchUICore.SearchResultCollection c = searchUICore.search(text, null);
+		SearchResultCollection c = runCoreSearch(text);
 		updateSearchResult(c, false);
 	}
 
-	private void completeQueryWithObject(SearchResult sr, boolean updateEditText) {
+	private SearchResultCollection runCoreSearch(String text) {
+		showProgressBar();
+		return searchUICore.search(text, null);
+	}
 
+	private void completeQueryWithObject(SearchResult sr, boolean updateEditText) {
 		searchUICore.selectSearchResult(sr);
 		String txt = searchUICore.getPhrase().getText(true);
 		if (updateEditText) {
@@ -256,49 +265,29 @@ public class QuickSearchDialogFragment extends DialogFragment {
 			searchEditText.setText(txt);
 			searchEditText.setSelection(txt.length());
 		}
-
-		searchUICore.search(txt, null);
+		runCoreSearch(txt);
 	}
 
-	private void updateSearchResult(SearchUICore.SearchResultCollection res, boolean addMore) {
+	private void updateSearchResult(SearchResultCollection res, boolean addMore) {
 
 		OsmandApplication app = getMyApplication();
 
 		List<SearchListItem> rows = new ArrayList<>();
 		if (res.getCurrentSearchResults().size() > 0) {
+			if (addMore) {
+				SearchMoreListItem moreListItem = new SearchMoreListItem(app, "Results " + res.getCurrentSearchResults().size() + ", radius " + res.getPhrase().getRadiusLevel() +
+						" (show more...)", new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						SearchSettings settings = searchUICore.getPhrase().getSettings();
+						searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
+						runCoreSearch(searchQuery);
+						updateSearchResult(new SearchResultCollection(), false);
+					}
+				});
+				rows.add(moreListItem);
+			}
 			for (final SearchResult sr : res.getCurrentSearchResults()) {
-
-				int count = 30;
-				/*
-				if(addMore) {
-					JMenuItem mi = new JMenuItem();
-					mi.setText("Results " + res.getCurrentSearchResults().size() + ", radius " + res.getPhrase().getRadiusLevel()+
-							" (show more...)");
-					mi.addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							SearchSettings settings = searchUICore.getPhrase().getSettings();
-							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
-							searchUICore.search(statusField.getText(), null);
-							updateSearchResult(statusField, new SearchResultCollection(), false);
-						}
-					});
-					popup.add(mi);
-				}
-				*/
-
-				count--;
-				if (count == 0) {
-//					break;
-				}
-				//LatLon location = res.getPhrase().getLastTokenLocation();
-				//String locationString = "";
-				//if (sr.location != null) {
-				//	locationString = ((int) MapUtils.getDistance(location, sr.location)) + " m";
-				//}
-				//mi.setText(sr.localeName + " [" + sr.objectType + "] " + locationString);
-
 				SearchListItem listItem = new SearchListItem(app, sr);
 				if (sr.location != null) {
 					LatLon location = res.getPhrase().getLastTokenLocation();
