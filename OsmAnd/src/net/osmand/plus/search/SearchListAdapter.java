@@ -12,6 +12,7 @@ import android.widget.TextView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -81,8 +82,15 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 			TextView distance = (TextView) view.findViewById(R.id.distance);
 
 			imageView.setImageDrawable(listItem.getIcon());
-			title.setText(listItem.getName());
-			subtitle.setText(listItem.getTypeName());
+			String name = listItem.getName();
+			title.setText(name);
+			String desc = listItem.getTypeName();
+			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
+				subtitle.setText(desc);
+				subtitle.setVisibility(View.VISIBLE);
+			} else {
+				subtitle.setVisibility(View.GONE);
+			}
 			float dist = (float) listItem.getDistance();
 			if (dist == 0) {
 				distance.setText("");

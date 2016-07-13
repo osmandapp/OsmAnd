@@ -15,7 +15,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginRight="8dp"
-        android:layout_gravity="top"
+        android:layout_gravity="center_vertical"
         android:scaleType="centerInside"
         android:visibility="visible"/>
 
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
         android:orientation="vertical">
 
         <LinearLayout

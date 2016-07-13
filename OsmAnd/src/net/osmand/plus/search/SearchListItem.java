@@ -11,6 +11,8 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
@@ -59,17 +61,17 @@ public class SearchListItem {
 					return streetCity.getName() + " - " + Algorithms.capitalizeFirstLetterAndLowercase(streetCity.getType().name());
 				}
 			case HOUSE:
-				return "House";
+				return "";
 			case STREET_INTERSECTION:
-				return "Street intersection";
+				return "";
 			case POI_TYPE:
 				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
 				String res;
 				if (abstractPoiType instanceof PoiCategory) {
-					res = "POI category";
+					res = "";
 				} else if (abstractPoiType instanceof PoiFilter) {
 					PoiFilter poiFilter = (PoiFilter) abstractPoiType;
-					res = poiFilter.getPoiCategory() != null ? poiFilter.getPoiCategory().getTranslation() : "POI filter";
+					res = poiFilter.getPoiCategory() != null ? poiFilter.getPoiCategory().getTranslation() : "";
 
 				} else if (abstractPoiType instanceof PoiType) {
 					PoiType poiType = (PoiType) abstractPoiType;
@@ -78,15 +80,23 @@ public class SearchListItem {
 						res = poiType.getCategory() != null ? poiType.getCategory().getTranslation() : null;
 					}
 					if (res == null) {
-						res = "POI type";
+						res = "";
 					}
 				} else {
-					res = "POI type";
+					res = "";
 				}
 				return res;
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				return amenity.getType().toString();
+				PoiCategory pc = amenity.getType();
+				PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
+				String typeStr = amenity.getSubType();
+				if (pt != null) {
+					typeStr = pt.getTranslation();
+				} else if (typeStr != null) {
+					typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
+				}
+				return typeStr;
 			case LOCATION:
 				break;
 			case FAVORITE:
@@ -118,15 +128,32 @@ public class SearchListItem {
 			case STREET_INTERSECTION:
 				break;
 			case POI_TYPE:
-				break;
+				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
+				if (RenderingIcons.containsBigIcon(abstractPoiType.getIconKeyName())) {
+					int iconId = RenderingIcons.getBigIconResourceId(abstractPoiType.getIconKeyName());
+					return app.getIconsCache().getIcon(iconId,
+							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				} else {
+					return null;
+				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				Drawable drawable = null;
+				String id = null;
 				PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 				if (st != null) {
-					//drawable = app.getIconsCache().getMapIcon(st.getOsmTag() + "_" + st.getOsmValue());
+					if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
+						id = st.getIconKeyName();
+					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+						id = st.getOsmTag() + "_" + st.getOsmValue();
+					}
 				}
-				return drawable;
+				if (id != null) {
+					int iconId = RenderingIcons.getBigIconResourceId(id);
+					return app.getIconsCache().getIcon(iconId,
+							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				} else {
+					return null;
+				}
 			case LOCATION:
 				break;
 			case FAVORITE:

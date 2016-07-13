@@ -3,6 +3,8 @@ package net.osmand.plus.search;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityManagerCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -88,25 +90,6 @@ public class QuickSearchDialogFragment extends DialogFragment {
 
 		// Setup search
 		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		/*
-		List<BinaryMapIndexReader> files = new ArrayList<>();
-		File file = new File(Environment.getExternalStorageDirectory() + "/osmand");
-		if (file.exists() && file.listFiles() != null) {
-			for (File obf : file.listFiles()) {
-				if (!obf.isDirectory() && obf.getName().endsWith(".obf")) {
-					try {
-						BinaryMapIndexReader bmir = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
-						files.add(bmir);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		}
-
-		searchUICore = new SearchUICore(app.getPoiTypes(), locale, files.toArray(new BinaryMapIndexReader[files.size()]));
-		*/
-
 		Collection<RegionAddressRepository> regionAddressRepositories = app.getResourceManager().getAddressRepositories();
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = new BinaryMapIndexReader[regionAddressRepositories.size()];
 		int i = 0;
@@ -381,10 +364,7 @@ public class QuickSearchDialogFragment extends DialogFragment {
 		bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
 		QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
 		fragment.setArguments(bundle);
-		mapActivity.getSupportFragmentManager().beginTransaction()
-				//.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left)
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
+		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 	}
 
 	private MapActivity getMapActivity() {
