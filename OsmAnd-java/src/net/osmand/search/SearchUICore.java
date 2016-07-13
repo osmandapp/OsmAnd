@@ -16,6 +16,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
@@ -202,6 +203,7 @@ public class SearchUICore {
 			}
 			try {
 				api.search(phrase, matcher);
+				matcher.apiSearchFinished(api, phrase);
 			} catch (Throwable e) {
 				e.printStackTrace();
 				LOG.error(e.getMessage(), e);
@@ -213,7 +215,7 @@ public class SearchUICore {
 	
 
 	
-	private void sortSearchResults(SearchPhrase sp, List<SearchResult> searchResults) {
+	public void sortSearchResults(SearchPhrase sp, List<SearchResult> searchResults) {
 		// sort SearchResult by 1. searchDistance 2. Name
 		final LatLon loc = sp.getLastTokenLocation();
 		final net.osmand.Collator clt = OsmAndCollator.primaryCollator();
@@ -256,6 +258,15 @@ public class SearchUICore {
 		
 		public List<SearchResult> getRequestResults() {
 			return requestResults;
+		}
+		
+		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {
+			if(matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_API_FINISHED;
+				sr.object = api;
+				matcher.publish(sr);
+			}
 		}
 		
 		@Override
