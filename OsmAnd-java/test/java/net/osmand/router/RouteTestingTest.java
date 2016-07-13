@@ -19,6 +19,7 @@ import net.osmand.data.LatLon;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -31,6 +32,7 @@ import com.google.gson.GsonBuilder;
  */
 
 @RunWith(Parameterized.class)
+@Ignore
 public class RouteTestingTest {
 
 
