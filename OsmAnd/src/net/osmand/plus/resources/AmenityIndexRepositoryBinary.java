@@ -40,12 +40,14 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public boolean checkContains(double latitude, double longitude) {
-		return index.containsPoiData(latitude, longitude);
+		int x31 = MapUtils.get31TileNumberX(longitude);
+		int y31 = MapUtils.get31TileNumberY(latitude);
+		return index.containsPoiData(x31, y31, x31, y31);
 	}
 
 	@Override
-	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-		return index.containsPoiData(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
+	public boolean checkContainsInt(int top31, int left31, int bottom31, int right31) {
+		return index.containsPoiData(top31, left31, bottom31, right31);
 	}
 	
 	

@@ -321,25 +321,7 @@ public class BinaryMapIndexReader {
 		return false;
 	}
 
-	public boolean containsPoiData(double latitude, double longitude) {
-		for (PoiRegion index : poiIndexes) {
-			if (index.rightLongitude >= longitude && index.leftLongitude <= longitude &&
-					index.topLatitude >= latitude && index.bottomLatitude <= latitude) {
-				return true;
-			}
-		}
-		return false;
-	}
 
-	public boolean containsPoiData(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-		for (PoiRegion index : poiIndexes) {
-			if (index.rightLongitude >= leftLongitude && index.leftLongitude <= rightLongitude &&
-					index.topLatitude >= bottomLatitude && index.bottomLatitude <= topLatitude) {
-				return true;
-			}
-		}
-		return false;
-	}
 	
 	public boolean containsPoiData(int left31x, int top31y, int right31x, int bottom31y) {
 		for (PoiRegion index : poiIndexes) {
@@ -2216,8 +2198,10 @@ public class BinaryMapIndexReader {
 	}
 
 	private static void testPoiSearch(BinaryMapIndexReader reader, PoiRegion poiRegion) throws IOException {
-		println(poiRegion.leftLongitude + " " + poiRegion.rightLongitude + " " + poiRegion.bottomLatitude + " "
-				+ poiRegion.topLatitude);
+		
+		println(MapUtils.get31LongitudeX(poiRegion.left31) + " " + MapUtils.get31LongitudeX(poiRegion.right31) +
+				" " +MapUtils.get31LatitudeY( poiRegion.bottom31 )+ " "
+				+ MapUtils.get31LatitudeY(poiRegion.top31));
 		for (int i = 0; i < poiRegion.categories.size(); i++) {
 			println(poiRegion.categories.get(i));
 			println(" " + poiRegion.subcategories.get(i));

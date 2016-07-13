@@ -756,15 +756,18 @@ public class ResourceManager {
 		searchAmenitiesInProgress = true;
 		try {
 			if (!filter.isEmpty()) {
+				int top31 = MapUtils.get31TileNumberY(topLatitude);
+				int left31 = MapUtils.get31TileNumberX(leftLongitude);
+				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
+				int right31 = MapUtils.get31TileNumberX(rightLongitude);
 				for (AmenityIndexRepository index : amenityRepositories.values()) {
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
 					}
-					if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-						List<Amenity> r = index.searchAmenities(MapUtils.get31TileNumberY(topLatitude),
-								MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(bottomLatitude),
-								MapUtils.get31TileNumberX(rightLongitude), zoom, filter, matcher);
+					if (index.checkContainsInt(top31, left31, bottom31, right31)) {
+						List<Amenity> r = index.searchAmenities(top31,
+								left31, bottom31, right31, zoom, filter, matcher);
 						if(r != null) {
 							amenities.addAll(r);
 						}
@@ -796,7 +799,11 @@ public class ResourceManager {
 				}
 				if (!filter.isEmpty()) {
 					for (AmenityIndexRepository index : amenityRepositories.values()) {
-						if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+						if (index.checkContainsInt(
+								MapUtils.get31TileNumberY(topLatitude), 
+								MapUtils.get31TileNumberX(leftLongitude), 
+								MapUtils.get31TileNumberY(bottomLatitude), 
+								MapUtils.get31TileNumberX(rightLongitude))) {
 							repos.add(index);
 						}
 					}
@@ -835,12 +842,16 @@ public class ResourceManager {
 			double lat, double lon, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<AmenityIndexRepositoryBinary>();
+		int left = MapUtils.get31TileNumberX(leftLongitude);
+		int top = MapUtils.get31TileNumberY(topLatitude);
+		int right = MapUtils.get31TileNumberX(rightLongitude);
+		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
 		for (AmenityIndexRepository index : amenityRepositories.values()) {
 			if (matcher != null && matcher.isCancelled()) {
 				break;
 			}
 			if (index instanceof AmenityIndexRepositoryBinary) {
-				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+				if (index.checkContainsInt(top, left, bottom, right)) {
 					if(index.checkContains(lat, lon)){
 						list.add(0, (AmenityIndexRepositoryBinary) index);
 					} else {
@@ -850,10 +861,7 @@ public class ResourceManager {
 				}
 			}
 		}
-		int left = MapUtils.get31TileNumberX(leftLongitude);
-		int top = MapUtils.get31TileNumberY(topLatitude);
-		int right = MapUtils.get31TileNumberX(rightLongitude);
-		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
+		
 		// Not using boundares results in very slow initial search if user has many maps installed
 //		int left = 0;
 //		int top = 0;

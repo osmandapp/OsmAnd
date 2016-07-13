@@ -1098,8 +1098,11 @@ public class BinaryInspector {
 
 		index.initCategories(p);
 		println("\tRegion: " + p.name);
-		println("\t\tBounds " + formatLatBounds(p.getLeftLongitude(), p.getRightLongitude(),
-				p.getTopLatitude(), p.getBottomLatitude()));
+		
+		println("\t\tBounds " + formatLatBounds(MapUtils.get31LongitudeX(p.left31), 
+				MapUtils.get31LongitudeX(p.right31),
+				MapUtils.get31LatitudeY(p.top31), 
+				MapUtils.get31LatitudeY(p.bottom31)));
 		println("\t\tCategories:");
 		for (int i = 0; i < p.categories.size(); i++) {
 			println("\t\t\t" + p.categories.get(i));
