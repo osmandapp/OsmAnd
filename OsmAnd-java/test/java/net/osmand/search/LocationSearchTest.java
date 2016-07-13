@@ -2,15 +2,14 @@ package net.osmand.search;
 
 import java.io.IOException;
 
-import junit.framework.TestCase;
 import net.osmand.data.LatLon;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchCoreFactory;
-import net.osmand.search.core.SearchCoreFactory.SearchLocationAndUrlAPI;
 import net.osmand.search.core.SearchPhrase;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 
 public class LocationSearchTest {
 	
