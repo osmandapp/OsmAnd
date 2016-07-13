@@ -812,7 +812,7 @@ public class SearchCoreFactory {
 					sp.objectType = ObjectType.LOCATION;
 					sp.wordsSpan = 2;
 					resultMatcher.publish(sp);
-				} else {
+				} else if (phrase.isNoSelectedType()) {
 					SearchResult sp = new SearchResult(phrase);
 					sp.priority = 0;
 					sp.object = sp.location = new LatLon(dd, 0);
