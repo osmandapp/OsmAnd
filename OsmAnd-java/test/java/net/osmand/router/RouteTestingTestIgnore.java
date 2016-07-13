@@ -32,8 +32,7 @@ import com.google.gson.GsonBuilder;
  */
 
 @RunWith(Parameterized.class)
-@Ignore
-public class RouteTestingTest {
+public class RouteTestingTestIgnore {
 
 
     private LatLon startPoint;
@@ -42,7 +41,7 @@ public class RouteTestingTest {
 	private Map<String, String> params;
 
 
-    public RouteTestingTest(String testName, LatLon startPoint, LatLon endPoint, Map<Long, String> expectedResults, 
+    public RouteTestingTestIgnore(String testName, LatLon startPoint, LatLon endPoint, Map<Long, String> expectedResults, 
     		Map<String, String> params) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
@@ -58,7 +57,7 @@ public class RouteTestingTest {
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() throws IOException {
         String fileName = "/test_routing.json";
-        Reader reader = new InputStreamReader(RouteTestingTest.class.getResourceAsStream(fileName));
+        Reader reader = new InputStreamReader(RouteTestingTestIgnore.class.getResourceAsStream(fileName));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> twoDArray = new ArrayList<Object[]>();

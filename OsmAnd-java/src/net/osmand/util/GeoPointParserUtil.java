@@ -211,7 +211,7 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://download.osmand.net/go?lat=c&lon=-106.61568&z=11
+		// http://download.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
 		url = "http://download.osmand.net/go?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
@@ -828,7 +828,6 @@ public class GeoPointParserUtil {
 	 * @return {@link GeoParsedPoint}
 	 */
 	public static GeoParsedPoint parse(final String uriString) {
-		System.out.println("parse(" + "uriString=" + uriString + ")");
 		URI uri;
 		try {
 			// amap.com uses | in their URLs, which is an illegal character for a URL
