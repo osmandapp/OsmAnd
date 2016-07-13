@@ -41,6 +41,7 @@ import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapHudButton backToLocationControl;
 	private MapHudButton menuControl;
 	private MapHudButton compassHud;
+	private MapHudButton quickSearch;
 	private float cachedRotate = 0;
 	private ImageView appModeIcon;
 	private TextView zoomText;
@@ -209,6 +211,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
+			}
+		});
+
+		View search = mapActivity.findViewById(R.id.map_search_button);
+		quickSearch = createHudButton(search, R.drawable.map_search_dark)
+				.setIconsId(R.drawable.map_search_dark, R.drawable.map_search_night)
+				.setIconColorId(0)
+				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+		controls.add(quickSearch);
+		search.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				QuickSearchDialogFragment.showInstance(mapActivity, "");
 			}
 		});
 
@@ -525,6 +540,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapZoomOut.updateVisibility(!dialogOpened);
 		compassHud.updateVisibility(!dialogOpened);
 		layersHud.updateVisibility(!dialogOpened);
+		quickSearch.updateVisibility(!dialogOpened);
 
 		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {

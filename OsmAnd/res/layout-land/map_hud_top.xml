@@ -361,22 +361,39 @@
                 android:layout_marginTop="@dimen/map_button_margin"
                 android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <ImageButton
                     android:id="@+id/map_layers_button"
-                    android:contentDescription="@string/configure_map"
                     android:layout_width="@dimen/map_small_button_size"
                     android:layout_height="@dimen/map_small_button_size"
                     android:background="@drawable/btn_inset_circle_trans"
+                    android:contentDescription="@string/configure_map"
                     android:src="@drawable/ic_action_test_light"/>
 
                 <ImageButton
                     android:id="@+id/map_compass_button"
-                    android:contentDescription="@string/map_widget_compass"
                     android:layout_width="@dimen/map_small_button_size"
                     android:layout_height="@dimen/map_small_button_size"
-                    android:layout_marginLeft="@dimen/map_small_button_margin"
+                    android:layout_marginTop="@dimen/map_small_button_margin"
                     android:background="@drawable/btn_inset_circle_trans"
+                    android:contentDescription="@string/map_widget_compass"
                     android:src="@drawable/ic_action_test_light"/>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/map_search_button"
+                android:layout_width="@dimen/map_small_button_size"
+                android:layout_height="@dimen/map_small_button_size"
+                android:layout_marginLeft="@dimen/map_small_button_margin"
+                android:background="@drawable/btn_inset_circle_trans"
+                android:contentDescription="@string/map_widget_search"
+                tools:src="@drawable/ic_action_test_light"/>
+
             </LinearLayout>
 
             <LinearLayout

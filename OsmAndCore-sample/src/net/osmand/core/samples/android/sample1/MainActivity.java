@@ -54,11 +54,11 @@ import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomL
 import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
 import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
 import net.osmand.data.LatLon;
-import net.osmand.search.example.SearchUICore;
-import net.osmand.search.example.SearchUICore.SearchResultCollection;
-import net.osmand.search.example.core.ObjectType;
-import net.osmand.search.example.core.SearchResult;
-import net.osmand.search.example.core.SearchSettings;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -99,7 +99,6 @@ public class MainActivity extends Activity {
 	private SearchUICore searchUICore;
 
 	private EditText searchEditText;
-	private TextView searchDetailsText;
 	private ImageView searchIcon;
 	private ProgressBar progressBar;
 
@@ -282,7 +281,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		searchDetailsText = (TextView) findViewById(R.id.searchDetailsText);
 		searchIcon = (ImageView) findViewById(R.id.searchIcon);
 		progressBar = (ProgressBar) findViewById(R.id.searchProgressBar);
 

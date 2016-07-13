@@ -1,8 +1,7 @@
-package net.osmand.core.samples.android.sample1.adapters;
+package net.osmand.plus.search;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.Street;
@@ -10,16 +9,17 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 public class SearchListItem {
 
-	protected SampleApplication app;
+	protected OsmandApplication app;
 	private SearchResult searchResult;
 	private double distance;
 
-	public SearchListItem(SampleApplication app, SearchResult searchResult) {
+	public SearchListItem(OsmandApplication app, SearchResult searchResult) {
 		this.app = app;
 		this.searchResult = searchResult;
 	}
@@ -123,7 +123,7 @@ public class SearchListItem {
 				Drawable drawable = null;
 				PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 				if (st != null) {
-					drawable = app.getIconsCache().getMapIcon(st.getOsmTag() + "_" + st.getOsmValue());
+					//drawable = app.getIconsCache().getMapIcon(st.getOsmTag() + "_" + st.getOsmValue());
 				}
 				return drawable;
 			case LOCATION:

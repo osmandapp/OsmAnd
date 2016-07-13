@@ -1,4 +1,4 @@
-package net.osmand.core.samples.android.sample1.adapters;
+package net.osmand.plus.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,19 +9,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.core.samples.android.sample1.R;
 import net.osmand.data.LatLon;
-import net.osmand.search.core.SearchResult;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 import java.text.MessageFormat;
 import java.util.List;
 
 public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 
-	private Context ctx;
-	private LatLon location;
+	private OsmandApplication ctx;
 
-	public SearchListAdapter(Context ctx) {
+	public SearchListAdapter(OsmandApplication ctx) {
 		super(ctx, R.layout.search_list_item);
 		this.ctx = ctx;
 	}
@@ -32,14 +32,6 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		addAll(items);
 		setNotifyOnChange(true);
 		notifyDataSetInvalidated();
-	}
-
-	public LatLon getLocation() {
-		return location;
-	}
-
-	public void setLocation(LatLon location) {
-		this.location = location;
 	}
 
 	@Override
@@ -82,16 +74,13 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		imageView.setImageDrawable(listItem.getIcon());
 		title.setText(listItem.getName());
 		subtitle.setText(listItem.getTypeName());
-		if (location != null && listItem.getSearchResult().location != null) {
-			double dist = listItem.getDistance();
-			if (dist == 0) {
-				distance.setText("");
-			} else {
-				distance.setText(getFormattedDistance(dist));
-			}
-			distance.setVisibility(View.VISIBLE);
-		} else {
+		float dist = (float) listItem.getDistance();
+		if (dist == 0) {
+			distance.setText("");
 			distance.setVisibility(View.INVISIBLE);
+		} else {
+			distance.setText(OsmAndFormatter.getFormattedDistance(dist, ctx));
+			distance.setVisibility(View.VISIBLE);
 		}
 		return view;
 	}
