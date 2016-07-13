@@ -467,7 +467,7 @@
 	<string name="poi_bag">Maroquinerie</string>
 	<string name="poi_military_airfield">Aérodrome militaire</string>
 	<string name="poi_bedding">Magasin de literie</string>
-	<string name="poi_erotic">Boutique coquine</string>
+	<string name="poi_erotic">Boutique érotique</string>
 	<string name="poi_herbalist">Herboriste</string>
 	<string name="poi_kitchen">Boutique d\'ustensiles de cuisine</string>
 	<string name="poi_stationery">Papeterie</string>
@@ -674,7 +674,7 @@
 	<string name="poi_club">Club</string>
 	<string name="poi_cafe_and_restaurant">Restaurant et café</string>
 	<string name="poi_craft">Artisanat</string>
-	<string name="poi_filling_station">Pompe à carburant</string>
+	<string name="poi_filling_station">Station essence</string>
 		<string name="poi_personal_transport">Transport individuel</string>
 		<string name="poi_water_supply">Alimentation en eau potable</string>
 		<string name="poi_trash_disposal">Traitement des ordures ménagères</string>
@@ -1977,4 +1977,154 @@
 	<string name="poi_backrest_yes">Avec dossier</string>
 	<string name="poi_backrest_no">Sans dossier</string>
 
+	<string name="poi_information_tactile_model">Modèle tactile</string>
+	<string name="poi_bird_hide">Poste d\'observation d\'oiseaux</string>
+	<string name="poi_horse_riding">Randonnée à cheval</string>
+	<string name="poi_heath">Santé</string>
+	<string name="poi_piste_grooming_mogul">Piste damée : bosses</string>
+
+	<string name="poi_piste_grooming_no">Piste damée : non</string>
+	<string name="poi_piste_grooming_classic">Piste damée : classique</string>
+	<string name="poi_piste_grooming_classic_skating">Piste damée : classique + skating</string>
+	<string name="poi_piste_grooming_skating">Piste damée : skating</string>
+	<string name="poi_capacity_disabled_no">Pas de place réservée pour handicapés</string>
+	<string name="poi_capacity_women_no">Pas de place réservée pour femmes</string>
+	<string name="poi_description_payment">Description de paiement</string>
+
+	<string name="poi_diet_lactose_free_only">Uniquement régime sans lactose</string>
+	<string name="poi_diet_lactose_free_yes">Régime sans lactose</string>
+	<string name="poi_diet_lactose_free_no">Régime sans lactose : non</string>
+	<string name="poi_outdoor_seating_terrace">Extérieur : terrasse</string>
+	<string name="poi_outdoor_seating_sidewalk">Extérieur : trottoir</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Extérieur : zone piétonne</string>
+	<string name="poi_outdoor_seating_garden">Extérieur : jardin</string>
+	<string name="poi_outdoor_seating_patio">Extérieur : patio</string>
+
+	<string name="poi_service_repair_no">Pas de réparation</string>
+	<string name="poi_vending_public_transport_tickets">Tickets de transport public</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Tickets de parking; tickets de transport en commun</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Type : terminal multi-modal de marchandises</string>
+	<string name="poi_honey">Magasin à miel</string>
+
+	<string name="poi_guide">Bureau des guides</string>
+	<string name="poi_backcountry_yes">Camping sauvage</string>
+	<string name="poi_backcountry_no">Camping sauvage : non</string>
+	<string name="poi_social_facility_for_homeless">Population : sans abri</string>
+	<string name="poi_social_facility_for_migrant">Population : migrants</string>
+	<string name="poi_social_facility_for_drug_addicted">Population : drogués</string>
+	<string name="poi_social_facility_for_unemployed">Population : chômeurs</string>
+	<string name="poi_social_facility_for_child_juvenile">Population : enfants, adolescents</string>
+
+	<string name="poi_social_facility_for_mental_health">Population : handicapés mentaux</string>
+	<string name="poi_social_facility_for_juvenile">Population : adolescents</string>
+	<string name="poi_social_facility_for_underprivileged">Population : personnes défavorisées</string>
+	<string name="poi_historic_railway_station">Gare ferroviaire historique</string>
+
+	<string name="poi_square">Carré</string>
+	<string name="poi_prison_camp">Ancienne prison</string>
+	<string name="poi_bathing_yes">Baignade : oui</string>
+	<string name="poi_bathing_no">Baignade : non</string>
+
+	<string name="poi_hackerspace">Hackerspace</string>
+
+	<string name="poi_craft_electronics">Réparations électroniques</string>
+	<string name="poi_fireworks">Magasin de feux d\'artifice</string>
+
+	<string name="poi_aerialway_length">Longueur</string>
+
+	<string name="poi_running">Course à pied</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_protected_area">Zone protégée</string>
+	<string name="poi_religion">Objets religieux</string>
+
+	<string name="poi_compressed_air_yes">Compresseur : oui</string>
+	<string name="poi_compressed_air_no">Compresseur : non</string>
+
+	<string name="poi_car_wash_yes">Lavage de véhicule : oui</string>
+
+	<string name="poi_vacuum_cleaner_yes">Aspirateur : oui</string>
+	<string name="poi_vacuum_cleaner_no">Aspirateur : non</string>
+	<string name="poi_amenity_vacuum_cleaner">Aspirateur</string>
+
+	<string name="poi_free_flying_paragliding_yes">Parapente : oui</string>
+	<string name="poi_free_flying_paragliding_no">Parapente : non</string>
+	<string name="poi_solarium">Solarium</string>
+
+	<string name="poi_suction_point">Point d\'aspiration</string>
+
+	<string name="poi_fire_hydrant_type_underground">Type : sous-terrain</string>
+	<string name="poi_fire_hydrant_type_pillar">Type : pilier</string>
+	<string name="poi_fire_hydrant_type_pond">Type : étang</string>
+	<string name="poi_fire_hydrant_type_wall">Type : mur</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Kit de premier soin</string>
+	<string name="poi_capacity_beds">Capacité (lits)</string>
+
+	<string name="poi_emergency_yes">Urgences : oui</string>
+	<string name="poi_emergency_no">Urgences : non</string>
+	<string name="poi_home_visit_yes">Visites à domicile : oui</string>
+	<string name="poi_home_visit_no">Visites à domicile : non</string>
+
+	<string name="poi_disease_malaria_yes">Malaria : oui</string>
+	<string name="poi_disease_malaria_no">Malaria : non</string>
+	<string name="poi_disease_ebola_yes">Ebola : oui</string>
+	<string name="poi_disease_ebola_no">Ebola : non</string>
+	<string name="poi_disease_autism_yes">Autisme : oui</string>
+	<string name="poi_disease_autism_no">Autisme : non</string>
+	<string name="poi_disease_aids_yes">SIDA : oui</string>
+	<string name="poi_disease_aids_no">SIDA : non</string>
+
+	<string name="poi_in_service_yes">En service : oui</string>
+
+	<string name="poi_depth">Profondeur</string>
+
+	<string name="poi_salt_yes">Salé</string>
+	<string name="poi_salt_no">Salé : non</string>
+	<string name="poi_recreation_center">Centre de loisirs</string>
+
+	<string name="poi_aerodrome_type_international">International</string>
+	<string name="poi_aerodrome_type_regional">Régional</string>
+	<string name="poi_aerodrome_type_public">Public</string>
+	<string name="poi_aerodrome_type_military">Militaire</string>
+	<string name="poi_aerodrome_type_private">Privé</string>
+
+	<string name="poi_telescope">Télescope</string>
+	<string name="poi_telescope_type_optical">Télescope : optique</string>
+	<string name="poi_telescope_type_radio">Télescope : radio</string>
+	<string name="poi_telescope_type_gamma">Télescope : gamma</string>
+	<string name="poi_telescope_diameter">Diamètre</string>
+	<string name="poi_telescope_spectrum">Spectre</string>
+	<string name="poi_telescope_usage_education">Usage : enseignement</string>
+	<string name="poi_telescope_usage_espionage">Usage : espionnage</string>
+	<string name="poi_telescope_usage_research">Usage : recherche</string>
+
+	<string name="poi_observatory_type_espionage">Usage : espionnage</string>
+	<string name="poi_observatory_type_meteorological">Usage: météorologie</string>
+	<string name="poi_voltage">Voltage</string>
+	<string name="poi_generator_output_electricity">Puissance de sortie</string>
+	<string name="poi_pumping_station">Station de pompage</string>
+
+	<string name="poi_display_yes">Affichage : oui</string>
+	<string name="poi_display_no">Affichage : non</string>
+	<string name="poi_display_analog_yes">Affichage analogique</string>
+	<string name="poi_display_digital_yes">Affichage numérique</string>
+	<string name="poi_barometer_yes">Baromètre : oui</string>
+	<string name="poi_barometer_no">Baromètre : non</string>
+	<string name="poi_thermometer_yes">Thermomètre : oui</string>
+	<string name="poi_thermometer_no">Thermomètre : non</string>
+	<string name="poi_hygrometer_yes">Hygromètre : oui</string>
+	<string name="poi_hygrometer_no">Hygromètre : non</string>
+	<string name="poi_date_yes">Affichage de la date : oui</string>
+	<string name="poi_date_no">Affichage de la date : non</string>
+
+	<string name="poi_support_wall_mounted">Support : mur</string>
+	<string name="poi_support_tree">Support : arbre</string>
+	<string name="poi_support_pedestal">Support : piédestal</string>
+	<string name="poi_support_ground">Support : sol</string>
+	<string name="poi_support_ceiling">Support : plafond</string>
+	<string name="poi_support_suspended">Support : suspendu</string>
+	<string name="poi_support_roof">Support : toit</string>
+	<string name="poi_support_tower">Support : tour</string>
+
+	<string name="poi_aquaculture">Aquaculture</string>
 	</resources>
