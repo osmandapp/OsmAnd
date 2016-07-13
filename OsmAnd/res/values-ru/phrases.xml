@@ -3004,4 +3004,6 @@
 	<string name="poi_diplomatic_ambassadors_residence">Резиденция посла</string>
 	<string name="poi_diplomatic_high_commission">Верховный комиссариат</string>
 
+	<string name="poi_fire_operator">Пожарный оператор</string>
+
 </resources>
