@@ -1,7 +1,5 @@
-package net.osmand.search.example;
+package net.osmand.search;
 
-import java.io.IOException;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,14 +16,13 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.search.example.core.ObjectType;
-import net.osmand.search.example.core.SearchCoreAPI;
-import net.osmand.search.example.core.SearchCoreFactory;
-import net.osmand.search.example.core.SearchPhrase;
-import net.osmand.search.example.core.SearchPhrase.NameStringMatcher;
-import net.osmand.search.example.core.SearchResult;
-import net.osmand.search.example.core.SearchSettings;
-import net.osmand.search.example.core.SearchWord;
+import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchWord;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -153,7 +150,7 @@ public class SearchUICore {
 			@Override
 			public void run() {
 				try {
-					SearchResultMatcher rm = new SearchResultMatcher(matcher, request);
+					SearchResultMatcher rm = new SearchResultMatcher(matcher, request, requestNumber, totalLimit);
 					if(rm.isCancelled()) {
 						return;
 					}
@@ -240,16 +237,21 @@ public class SearchUICore {
 		});
 	}
 	
-	public class SearchResultMatcher implements  ResultMatcher<SearchResult>{
+	public static class SearchResultMatcher implements  ResultMatcher<SearchResult>{
 		private final List<SearchResult> requestResults = new ArrayList<>();
-		private ResultMatcher<SearchResult> matcher;
+		private final ResultMatcher<SearchResult> matcher;
 		private final int request;
+		private final int totalLimit;
+		private final AtomicInteger requestNumber;
 		int count = 0;
 		
 		
-		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, int request) {
+		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, int request, 
+				AtomicInteger requestNumber, int totalLimit) {
 			this.matcher = matcher;
 			this.request = request;
+			this.requestNumber = requestNumber;
+			this.totalLimit = totalLimit;
 		}
 		
 		public List<SearchResult> getRequestResults() {

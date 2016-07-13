@@ -1,8 +1,8 @@
-package net.osmand.search.example.core;
+package net.osmand.search.core;
 
 import java.io.IOException;
 
-import net.osmand.search.example.SearchUICore.SearchResultMatcher;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
 
 public interface SearchCoreAPI {
 

@@ -1,4 +1,4 @@
-package net.osmand.search.example.core;
+package net.osmand.search.core;
 
 public enum ObjectType {
 	CITY(true), VILLAGE(true), POSTCODE(true), STREET(true), HOUSE(true),

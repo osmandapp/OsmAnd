@@ -1,4 +1,4 @@
-package net.osmand.search.example.core;
+package net.osmand.search.core;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,9 +35,9 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.search.example.SearchUICore.SearchResultMatcher;
-import net.osmand.search.example.core.SearchPhrase.NameStringMatcher;
-import net.osmand.search.example.core.SearchPhrase.SearchPhraseDataType;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
@@ -52,9 +52,13 @@ public class SearchCoreFactory {
 	// TODO add location partial (+)
 	// TODO geo:34.99393,-106.61568 (Treasure Island) and display url parse (+)
 	
+	// TODO location 43°38′33.24″N 79°23′13.7″W,
+	// TODO tests for geo:, location,
 	// TODO add UTM support
+	
 	// TODO add full text search with comma correct order
 	// TODO MED add full text search without comma and different word order
+	
 	// TODO MED edit in the middle (with words and comma)?
 	// TODO exclude duplicate streets/cities/pois...
 	
@@ -858,6 +862,15 @@ public class SearchCoreFactory {
 		}
 	}
 	
-	
+	public static void main(String[] args) throws IOException {
+		testSearchLocationAndUrlAPI(new SearchLocationAndUrlAPI());
+	}
+
+	private static void testSearchLocationAndUrlAPI(SearchLocationAndUrlAPI api) throws IOException {
+		SearchResultMatcher srm = new SearchResultMatcher(null, 0, null, 10);
+		api.search(new SearchPhrase(null).generateNewPhrase("17R 419230 2714967", null), srm);
+		System.out.println(srm.getRequestResults());
+		
+	}
 	
 }

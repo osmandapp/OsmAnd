@@ -1,4 +1,4 @@
-package net.osmand.search.example.core;
+package net.osmand.search.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
