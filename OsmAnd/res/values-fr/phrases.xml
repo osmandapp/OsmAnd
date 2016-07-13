@@ -73,8 +73,8 @@
 	<string name="poi_camp_site">Camping</string>
 	<string name="poi_canoe">Canoë-kayak</string>
 	<string name="poi_cape">Cap</string>
-	<string name="poi_car">Magasin de voitures</string>
-	<string name="poi_car_parts">Pièces d\'automobile</string>
+	<string name="poi_car">Concession automobile</string>
+	<string name="poi_car_parts">Pièces détachées automobiles</string>
 	<string name="poi_car_rental">Location de voitures</string>
 	<string name="poi_car_repair">Atelier de réparation automobile</string>
 	<string name="poi_car_sharing">Autopartage</string>
@@ -188,7 +188,7 @@
 	<string name="poi_ice_cream">Crème glacée</string>
 	<string name="poi_ice_rink">Patinoire</string>
 	<string name="poi_ice_stock">Eisstock</string>
-	<string name="poi_information">Informations touristiques</string>
+	<string name="poi_information">Informations</string>
 	<string name="poi_insurance">Assurance</string>
 	<string name="poi_island">Île</string>
 	<string name="poi_islet">Îlot</string>
@@ -249,7 +249,7 @@
 	<string name="poi_pawnbroker">Mont-de-piété</string>
 	<string name="poi_peak">Sommet</string>
 	<string name="poi_pelota">Pelote basque</string>
-	<string name="poi_pet">Magasin d\'animaux</string>
+	<string name="poi_pet">Animalerie</string>
 	<string name="poi_petroleum_well">Puits de pétrole</string>
 	<string name="poi_pharmacy">Pharmacie</string>
 	<string name="poi_photo">Magasin de photographie</string>
@@ -305,7 +305,7 @@
 	<string name="poi_skiing">Ski</string>
 	<string name="poi_slipway">Cale de lancement</string>
 	<string name="poi_soccer">Football</string>
-	<string name="poi_social_centre">Communauté</string>
+	<string name="poi_social_centre">Centre social</string>
 	<string name="poi_social_facility">Service social</string>
 	<string name="poi_speed_camera">Radar automatique</string>
 	<string name="poi_sports">Magasin de sport</string>
@@ -472,7 +472,7 @@
 	<string name="poi_kitchen">Boutique d\'ustensiles de cuisine</string>
 	<string name="poi_stationery">Papeterie</string>
 	<string name="poi_tableware">Boutique de vaisselle</string>
-	<string name="poi_ticket">Guichet</string>
+	<string name="poi_ticket">Vente de tickets</string>
 	<string name="poi_vacuum_cleaner">Boutique de gadgets</string>
 	<string name="poi_mountain_pass">Col</string>
 	<string name="poi_garages">Garages</string>
@@ -1966,8 +1966,8 @@
 
 	<string name="poi_bicycle_parking_shed">Abri à vélos</string>
 	<string name="poi_bicycle_parking_bollard">Borne à vélo</string>
-	<string name="poi_nudism_customary">Nudisme: toléré</string>
-	<string name="poi_parking_multi_storey">Parking à étages</string>
+	<string name="poi_nudism_customary">Nudisme : toléré</string>
+	<string name="poi_parking_multi_storey">Type : à étages</string>
 
 	<string name="poi_trade_tile">Fournitures de tuiles</string>
 
@@ -2127,4 +2127,8 @@
 	<string name="poi_support_tower">Support : tour</string>
 
 	<string name="poi_aquaculture">Aquaculture</string>
+	<string name="poi_aquaculture_fish">Aquaculture : poissons</string>
+	<string name="poi_min_age">Age minimum</string>
+
+	<string name="poi_diplomatic_permanent_mission">Mission permanente</string>
 	</resources>
