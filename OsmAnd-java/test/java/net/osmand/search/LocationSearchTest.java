@@ -12,11 +12,11 @@ import net.osmand.search.core.SearchPhrase;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestLocationSearch {
+public class LocationSearchTest {
 	
 
 	@Test
-	public void testLocationSearch() throws IOException {
+	public void testBasicSearch() throws IOException {
 		search("5.0,3.0", new LatLon(5, 3));
 	}
 
