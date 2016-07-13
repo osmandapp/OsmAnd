@@ -111,10 +111,10 @@ public class CachedOsmandIndexes {
 			if(index.getName() != null) {
 				poi.setName(index.getName());
 			}
-			poi.setLeft(MapUtils.get31TileNumberX(index.getLeftLongitude()));
-			poi.setRight(MapUtils.get31TileNumberX(index.getRightLongitude()));
-			poi.setTop(MapUtils.get31TileNumberY(index.getTopLatitude()));
-			poi.setBottom(MapUtils.get31TileNumberY(index.getBottomLatitude()));
+			poi.setLeft(index.left31);
+			poi.setRight(index.right31);
+			poi.setTop(index.top31);
+			poi.setBottom(index.bottom31);
 			fileIndex.addPoiIndex(poi.build());
 		}
 		
@@ -250,10 +250,10 @@ public class CachedOsmandIndexes {
 			mi.length = (int) index.getSize();
 			mi.filePointer = (int) index.getOffset();
 			mi.name = index.getName();
-			mi.leftLongitude = MapUtils.get31LongitudeX(index.getLeft());
-			mi.rightLongitude = MapUtils.get31LongitudeX(index.getRight());
-			mi.topLatitude =MapUtils.get31LatitudeY(index.getTop());
-			mi.bottomLatitude = MapUtils.get31LatitudeY(index.getBottom());
+			mi.left31 = index.getLeft();
+			mi.right31 = index.getRight();
+			mi.top31 = index.getTop();
+			mi.bottom31 = index.getBottom();
 			reader.poiIndexes.add(mi);
 			reader.indexes.add(mi);
 		}

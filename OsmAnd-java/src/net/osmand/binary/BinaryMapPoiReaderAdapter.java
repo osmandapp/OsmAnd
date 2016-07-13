@@ -55,18 +55,10 @@ public class BinaryMapPoiReaderAdapter {
 		List<List<String>> subcategories = new ArrayList<List<String>>();
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
 
-		double leftLongitude;
-		double rightLongitude;
-		double topLatitude;
-		double bottomLatitude;
 		int left31;
 		int right31;
 		int top31;
 		int bottom31;
-
-		public double getLeftLongitude() {
-			return leftLongitude;
-		}
 
 		public String getPartName() {
 			return "POI";
@@ -98,17 +90,6 @@ public class BinaryMapPoiReaderAdapter {
 			return null;
 		}
 
-		public double getRightLongitude() {
-			return rightLongitude;
-		}
-
-		public double getTopLatitude() {
-			return topLatitude;
-		}
-
-		public double getBottomLatitude() {
-			return bottomLatitude;
-		}
 	}
 
 	private CodedInputStream codedIS;
@@ -139,19 +120,15 @@ public class BinaryMapPoiReaderAdapter {
 				return;
 			case OsmandOdb.OsmAndTileBox.LEFT_FIELD_NUMBER:
 				region.left31 = codedIS.readUInt32();
-				region.leftLongitude = MapUtils.get31LongitudeX(region.left31);
 				break;
 			case OsmandOdb.OsmAndTileBox.RIGHT_FIELD_NUMBER:
 				region.right31 = codedIS.readUInt32();
-				region.rightLongitude = MapUtils.get31LongitudeX(region.right31);
 				break;
 			case OsmandOdb.OsmAndTileBox.TOP_FIELD_NUMBER:
 				region.top31 = codedIS.readUInt32();
-				region.topLatitude = MapUtils.get31LatitudeY(region.top31);
 				break;
 			case OsmandOdb.OsmAndTileBox.BOTTOM_FIELD_NUMBER:
 				region.bottom31 = codedIS.readUInt32();
-				region.bottomLatitude = MapUtils.get31LatitudeY(region.bottom31);
 				break;
 			default:
 				skipUnknownField(t);

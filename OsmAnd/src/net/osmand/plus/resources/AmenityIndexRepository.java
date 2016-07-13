@@ -13,7 +13,7 @@ public interface AmenityIndexRepository {
 	
 	public boolean checkContains(double latitude, double longitude);
 
-	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude);
+	public boolean checkContainsInt(int top31, int left31, int bottom31, int right31);
 
 	/**
 	 * Search amenities in the specified box doesn't cache results 
