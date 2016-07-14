@@ -975,7 +975,7 @@
     <string name="distance_measurement_clear_route">Vakigi ĉiujn punktojn</string>
     <string name="distance_measurement_finish_subtrack">Eki novan subkurson</string>
     <string name="distance_measurement_load_gpx">Malfermi GPX-dosieron</string>
-    <string name="wait_current_task_finished">Bonvolu atendi ĝis nuna tasko finis</string>
+    <string name="wait_current_task_finished">Bonvolu atendi ĝis nuna tasko finos</string>
     <string name="use_kalman_filter_compass">Uzi filtrilon de Kalman</string>
     <string name="use_kalman_filter_compass_descr">Etigas bruojn en legoj de kompaso sed egigas inertecon</string>
     <string name="use_magnetic_sensor">Uzi magneto-sentilon</string>
@@ -2012,4 +2012,5 @@
   	<string name="storage_directory_card">Memorkarto</string>
     <string name="shared_string_is_open">Malfermaj nun</string>
     <string name="shared_string_is_open_24_7">Malfermaj 24/7</string>
-    </resources>
+    <string name="map_widget_search">Serĉilo</string>
+	</resources>
