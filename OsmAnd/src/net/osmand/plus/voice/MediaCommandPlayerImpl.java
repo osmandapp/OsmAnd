@@ -68,7 +68,9 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			for (String s : builder.execute()) {
 				bld.append(s).append(' ');
 			}
-			sendAlertToAndroidWear(ctx, bld.toString());
+			if (ctx != null) {
+				sendAlertToAndroidWear(ctx, bld.toString());
+			}
 			return;
 		}
 		filesToPlay.addAll(builder.execute());
@@ -77,7 +79,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		if (mediaPlayer == null) {
 			requestAudioFocus();
 			// Delay first prompt of each batch to allow BT SCO connection being established
-			if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+			if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 				try {
 					log.debug("Delaying MediaCommandPlayer for BT SCO");
 					Thread.sleep(BT_SCO_DELAY);
