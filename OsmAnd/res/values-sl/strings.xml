@@ -431,7 +431,7 @@
     <string name="local_indexes_cat_voice">Podatki govora (posnetki)</string>
     <string name="ttsvoice">Sintetiziran govor (TTS)</string>
     <string name="choose_audio_stream">Odvod glasovnega vodenja</string>
-    <string name="choose_audio_stream_descr">Izbor kanala, po katerem naj se predvaja sintetiziran govor navodil navigacije</string>
+    <string name="choose_audio_stream_descr">Izbor glasu sintetiziranega govora navodil navigacije</string>
     <string name="voice_is_not_available_msg">Glasovno vodenje ni na voljo. V nastavitvah je treba izbrati in prejeti ustrezen glasovni paket.</string>
     <string name="voice_is_not_available_title">Izbrano ni nobeno glasovno vodenje</string>
     <string name="voice">Posneti glas</string>
@@ -440,7 +440,7 @@
     <string name="voice_data_not_supported">Nepodprta različica podatkov govora</string>
     <string name="voice_data_corrupted">Izbrani podatki govora so okvarjeni</string>
     <string name="voice_data_unavailable">Izbrani podatki govora niso na voljo</string>
-    <string name="voice_stream_voice_call">Zvok glasovnega klica</string>
+    <string name="voice_stream_voice_call">Zvok glasovnega klica (lahko prekine tudi stereo BT)</string>
     <string name="voice_provider">Jezik glasovnega vodenja</string>
     <string name="settings_preset_descr">Izbor uporabniškega profila s prilagojenimi nastavitvami navigacije in izrisa zemljevida.</string>
 
@@ -1287,7 +1287,7 @@
     <string name="route_preferences">Nastavitve poti</string>
     <string name="route_info">Podrobnosti poti</string>
     <string name="calculate_osmand_route_gpx">Izračun poti brez povezave</string>
-    <string name="interrupt_music_descr">Ob najavah prekini predvajanje glasbe</string>
+    <string name="interrupt_music_descr">Ob najavah prekini predvajanje glasbe (in ne le zmanjšaj glasnosti)</string>
     <string name="interrupt_music">Prekini predvajanje glasbe</string>
     <string name="share_route_as_gpx">Objavi pot kot datoteko GPX</string>
     <string name="share_route_subject">Objavi pot preko spletišča OsmAnd</string>
@@ -1560,7 +1560,7 @@
     <string name="map_widget_left">Levi pult</string>
     <string name="shared_string_show">Pokaži</string>
     <string name="configure_map">Nastavitve zemljevida</string>
-    <string name="search_radius_proximity">V bližini</string>
+    <string name="search_radius_proximity">Znotraj</string>
     <string name="osmo_device_not_found">Naprave ni mogoče najti</string>
     <string name="osmo_no_connection_msg">Ni se mogoče povezati s strežnikom OsMo:\n- Preverite internetno povezavo\n- Preverite nastavitve\n- Spremljajte novice na Twitterju: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Brezimni uporabnik ne more:\n- Ustvariti skupin\n- Usklajevati skupin in naprav s strežnikom\n- Zasebno upravljati skupin in naprav prek spletnega vmesnika.</string>
@@ -2213,4 +2213,9 @@
     <string name="lang_ast">Asturijski</string>
     <string name="app_mode_bus">Avtobus</string>
  	<string name="app_mode_train">Vlak</string>
-    </resources>
+    <string name="map_widget_search">Poišči</string>
+	<string name="shared_string_is_open_24_7">Odprto 24/7</string>
+    <string name="storage_directory_card">Pomnilniška kartica</string>
+    <string name="coords_format">Zapis koordinat</string>
+    <string name="coords_format_descr">Zapis geografskih koordinat</string>
+  	</resources>
