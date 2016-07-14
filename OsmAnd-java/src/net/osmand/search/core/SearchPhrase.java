@@ -383,6 +383,6 @@ public class SearchPhrase {
 	}
 
 	public int getRadiusSearch(int meters) {
-		return getRadiusLevel() * meters;
+		return (1 << (getRadiusLevel() - 1)) * meters;
 	}
 }
