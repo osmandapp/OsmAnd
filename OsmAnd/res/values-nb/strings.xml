@@ -765,7 +765,7 @@
     <string name="rendering_attr_hideBuildings_name">Bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>
     <string name="wake_on_voice_descr">Slå på enhetens skjerm (hvis av) når du nærmer deg en sving</string>
-    <string name="search_radius_proximity">I nærhet av</string>
+    <string name="search_radius_proximity">Innen</string>
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
     <string name="fav_point_dublicate">Duplisering av favorittpunktnavn</string>
     <string name="traffic_warning_payment">Bomstasjon</string>
@@ -1244,7 +1244,7 @@
     <string name="settings_privacy">Personvern</string>
     <string name="download_type_to_filter">Filtrer</string>
     <string name="get_plugin">Hent</string>
-    <string name="shared_string_is_open">Åpne</string>
+    <string name="shared_string_is_open">Åpen nå</string>
     <string name="application_dir_change_warning3">Vil du at OsmAnd også kopierer sine datafiler til den nye destinasjonen?</string>
     <string name="specified_directiory_not_writeable">Kart kunne ikke opprettes i angitte mappe</string>
     <string name="copying_osmand_file_failed">Kopiering av filer mislyktes</string>
@@ -1678,4 +1678,7 @@
     <string name="import_file_favourites">Lagre data som GPX-fil eller importere rutepunkter til favoritter?</string>
     <string name="coords_format_descr">Format for geografiske koordinater</string>
   	<string name="coords_format">Koordinatformat</string>
+    <string name="map_widget_search">Søk</string>
+	<string name="shared_string_is_open_24_7">Åpen 24/7</string>
+    <string name="storage_directory_card">Minnekort</string>
     </resources>
