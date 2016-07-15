@@ -15,7 +15,6 @@ import java.util.TreeSet;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LocationConvert;
-import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -48,24 +47,43 @@ import com.jwetherell.openmap.common.UTMPoint;
 
 
 public class SearchCoreFactory {
-	// TODO add location parse (+)
-	// TODO add location partial (+)
-	// TODO geo:34.99393,-106.61568 (Treasure Island) and display url parse (+)
-	
-	// TODO location 43°38′33.24″N 79°23′13.7″W,
-	// TODO tests for geo:, location,
-	// TODO add UTM support
+	// TODO partial location (+)
 	
 	// TODO add full text search with comma correct order
 	// TODO MED add full text search without comma and different word order
-	
 	// TODO MED edit in the middle (with words and comma)?
+	
 	// TODO exclude duplicate streets/cities/pois...
 	
-	// TODO MED support poi additional select type and search
-	// TODO LOW display results momentarily
-	// TODO LOW automatically increase radius if nothing found (log radius search)
-
+	// TODO UI support poi additional select type and search
+	// TODO UI display results momentarily
+	// TODO UI automatically increase radius if nothing found (log radius search)
+	
+	
+	//////////////// CONSTANTS //////////
+	public static final int SEARCH_REGION_API_PRIORITY = 3;
+	public static final int SEARCH_REGION_OBJECT_PRIORITY = 10;
+	
+	// context less
+	public static final int SEARCH_LOCATION_PRIORITY = 0;
+	public static final int SEARCH_AMENITY_TYPE_PRIORITY = 1;
+	public static final int SEARCH_AMENITY_TYPE_API_PRIORITY = 1;
+	
+	// context	
+	public static final int SEARCH_STREET_BY_CITY_PRIORITY = 2;
+	public static final int SEARCH_BUILDING_BY_CITY_PRIORITY = 3;
+	public static final int SEARCH_BUILDING_BY_STREET_PRIORITY = 1;
+	public static final int SEARCH_AMENITY_BY_TYPE_PRIORITY = 3;
+	
+	// context less (slow)
+	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY = 5;
+	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2 = 5;
+	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY = 5; 
+	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2 = 5;
+	// context less (slower)	
+	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 7;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 7;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 7;
 	
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 		@Override
@@ -79,7 +97,10 @@ public class SearchCoreFactory {
 		}
 	}
 	
+	
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
+
+		
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
@@ -89,7 +110,7 @@ public class SearchCoreFactory {
 					sr.localeName = bmir.getRegionName();
 					sr.object = bmir;
 					sr.file = bmir;
-					sr.priority = 10;
+					sr.priority = SEARCH_REGION_OBJECT_PRIORITY;
 					sr.objectType = ObjectType.REGION;
 					sr.location = bmir.getRegionCenter();
 					sr.preferredZoom = 6;
@@ -108,7 +129,7 @@ public class SearchCoreFactory {
 			if(!p.isNoSelectedType()) {
 				return -1;
 			}
-			return 3;
+			return SEARCH_REGION_API_PRIORITY;
 		}
 	}
 	
@@ -116,6 +137,8 @@ public class SearchCoreFactory {
 		
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 1000*1000;
 		private static final int LIMIT = 10000;
+		
+		
 		private Map<BinaryMapIndexReader, List<City>> townCities = new LinkedHashMap<>();
 		private QuadTree<City> townCitiesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
@@ -123,10 +146,13 @@ public class SearchCoreFactory {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if (p.isNoSelectedType()) {
-				return 5;
+			if (!p.isNoSelectedType() && p.getRadiusLevel() == 1) {
+				return -1;
 			}
-			return 10;
+			if (p.isNoSelectedType()) {
+				return SEARCH_ADDRESS_BY_NAME_API_PRIORITY;
+			}
+			return SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2;
 		}
 
 		@Override
@@ -198,7 +224,8 @@ public class SearchCoreFactory {
 				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
 				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
 				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10);
-				final int priority = phrase.isNoSelectedType() ? 3 : 5;
+				final int priority = phrase.isNoSelectedType() ? 
+						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1]; 
 				ResultMatcher<MapObject> rm = new ResultMatcher<MapObject>() {
 					int limit = 0;
@@ -306,6 +333,7 @@ public class SearchCoreFactory {
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 1000 * 1000;
+		
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			if(phrase.getLastWord().length() == 0) {
@@ -334,7 +362,7 @@ public class SearchCoreFactory {
 							sr.preferredZoom = 17;
 							sr.file = currentFile[0];
 							sr.location = object.getLocation();
-							sr.priority = 3;
+							sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
 							sr.priorityDistance = 1;
 							sr.objectType = ObjectType.POI;
 							
@@ -363,13 +391,13 @@ public class SearchCoreFactory {
 			}
 			if(p.hasObjectType(ObjectType.POI_TYPE)) {
 				if(p.getRadiusLevel() > 1) {
-					return 5;
+					return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE;
 				} else {
 					return -1;
 				}
 			}
 			if(p.getLastWord().length() > 3 || p.getRadiusLevel() > 1) {
-				return 3;
+				return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR;
 			}
 			return -1;
 		}
@@ -378,28 +406,17 @@ public class SearchCoreFactory {
 	
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
-		
 		private Map<String, PoiType> translatedNames;
 		private List<PoiFilter> topVisibleFilters;
-		private TreeSet<AbstractPoiType> results;
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			translatedNames = types.getAllTranslatedNames(false);
 			topVisibleFilters = types.getTopVisibleFilters();
-			final net.osmand.Collator clt = OsmAndCollator.primaryCollator();
-			results = new TreeSet<>(new Comparator<AbstractPoiType>() {
-
-				@Override
-				public int compare(AbstractPoiType o1, AbstractPoiType o2) {
-					return clt.compare(o1.getTranslation(), o2.getTranslation());
-				}
-			});
 		}
 		
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 //			results.clear();
-//			final net.osmand.Collator clt = OsmAndCollator.primaryCollator();
 			TreeSet<AbstractPoiType> results = new TreeSet<>(new Comparator<AbstractPoiType>() {
 
 				@Override
@@ -426,7 +443,7 @@ public class SearchCoreFactory {
 				SearchResult res = new SearchResult(phrase);
 				res.localeName = p.getTranslation();
 				res.object = p;
-				res.priority = 5;
+				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 				res.priorityDistance = 0;
 				res.objectType = ObjectType.POI_TYPE;
 				resultMatcher.publish(res);
@@ -436,14 +453,15 @@ public class SearchCoreFactory {
 		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if(p.hasObjectType(ObjectType.POI) ||p.hasObjectType(ObjectType.POI_TYPE)) {
+			if (p.hasObjectType(ObjectType.POI) || p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
 			}
-			return 1;
+			return SEARCH_AMENITY_TYPE_API_PRIORITY;
 		}
 	}
 	
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
+		
 		
 		private MapPoiTypes types;
 
@@ -542,7 +560,7 @@ public class SearchCoreFactory {
 								res.preferredZoom = 17;
 								res.file = selected[0];
 								res.location = object.getLocation();
-								res.priority = 3;
+								res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
 								res.priorityDistance = 1;
 								res.objectType = ObjectType.POI;
 								resultMatcher.publish(res);
@@ -566,7 +584,7 @@ public class SearchCoreFactory {
 		public int getSearchPriority(SearchPhrase p) {
 			if(p.isLastWord(ObjectType.POI_TYPE) && 
 					p.getLastTokenLocation() != null) {
-				return 3;
+				return SEARCH_AMENITY_BY_TYPE_PRIORITY;
 			}
 			return -1;
 		}
@@ -575,6 +593,7 @@ public class SearchCoreFactory {
 	
 	
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {
+		
 		private static int LIMIT = 10000;
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
@@ -604,7 +623,7 @@ public class SearchCoreFactory {
 					res.preferredZoom = 17;
 					res.file = sw.getResult().file;
 					res.location = object.getLocation();
-					res.priority = 1;
+					res.priority = SEARCH_STREET_BY_CITY_PRIORITY;
 					//res.priorityDistance = 1;
 					res.objectType = ObjectType.STREET;
 					if (limit++ > LIMIT) {
@@ -621,7 +640,7 @@ public class SearchCoreFactory {
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			if(isLastWordCityGroup(p)) {
-				return 1;
+				return SEARCH_STREET_BY_CITY_PRIORITY;
 			}
 			return -1;
 		}
@@ -639,12 +658,12 @@ public class SearchCoreFactory {
 		@Override
 		public boolean search(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			Street s = null;
-			int priority = 1;
+			int priority = SEARCH_BUILDING_BY_STREET_PRIORITY;
 			if(phrase.isLastWord(ObjectType.STREET)) {
 				s =  (Street) phrase.getLastSelectedWord().getResult().object;
 			}
 			if(isLastWordCityGroup(phrase)) {
-				priority = 3;
+				priority = SEARCH_BUILDING_BY_CITY_PRIORITY;
 				Object o = phrase.getLastSelectedWord().getResult().object;
 				if(o instanceof City) {
 					List<Street> streets = ((City) o).getStreets();
@@ -745,19 +764,21 @@ public class SearchCoreFactory {
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			if(isLastWordCityGroup(p)) {
-				return 10;
+				return SEARCH_BUILDING_BY_CITY_PRIORITY;
 			}
 			if(!p.isLastWord(ObjectType.STREET)) {
 				return -1;
 			}
-			return 1;
+			return SEARCH_BUILDING_BY_STREET_PRIORITY;
 		}
 	}
 	
 	
 	
+	
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 		
+
 //		newFormat = PointDescription.FORMAT_DEGREES;
 //		newFormat = PointDescription.FORMAT_MINUTES;
 //		newFormat = PointDescription.FORMAT_SECONDS;
@@ -777,8 +798,10 @@ public class SearchCoreFactory {
 			if(phrase.getLastWord().length() == 0) {
 				return false;
 			}
-			parseLocation(phrase, resultMatcher);
-			parseUrl(phrase, resultMatcher);
+			boolean parseUrl = parseUrl(phrase, resultMatcher);
+			if(!parseUrl) {
+				parseLocation2(phrase, resultMatcher);
+			}
 			return super.search(phrase, resultMatcher);
 		}
 		private boolean isKindOfNumber(String s) {
@@ -791,6 +814,310 @@ public class SearchCoreFactory {
 				}
 			}
 			return true;
+		}
+		
+		LatLon parsePartialLocation(String s) {
+			s = s.trim();
+			if(s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
+					 || s.charAt(0) == 'S' || s.charAt(0) == 's' 
+					 || s.charAt(0) == 'N' || s.charAt(0) == 'n' 
+					 || s.contains("://"))) {
+				return null;
+			}
+			List<Double> d = new ArrayList<>();
+			List<Object> all = new ArrayList<>();
+			List<String> strings = new ArrayList<>();
+			splitObjects(s, d, all, strings);
+			if(d.size() == 0) {
+				return null;
+			}
+			double lat = parse1Coordinate(all, 0, all.size());
+			return new LatLon(lat, 0);
+		}
+		
+		LatLon parseLocation(String s) {
+			s = s.trim();
+			if(s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
+					 || s.charAt(0) == 'S' || s.charAt(0) == 's' 
+					 || s.charAt(0) == 'N' || s.charAt(0) == 'n' 
+					 || s.contains("://"))) {
+				return null;
+			}
+			List<Double> d = new ArrayList<>();
+			List<Object> all = new ArrayList<>();
+			List<String> strings = new ArrayList<>();
+			splitObjects(s, d, all, strings);
+			if(d.size() == 0) {
+				return null;
+			}
+			// detect UTM
+			if (all.size() == 4 && d.size() == 3 && all.get(1) instanceof String) {
+				char ch = all.get(1).toString().charAt(0);
+				if (Character.isLetter(ch)) {
+					UTMPoint upoint = new UTMPoint(d.get(2), d.get(1), d.get(0).intValue(), ch);
+					LatLonPoint ll = upoint.toLatLonPoint();
+					return new LatLon(ll.getLatitude(), ll.getLongitude());
+				}
+			}
+
+			if (all.size() == 3 && d.size() == 2 && all.get(1) instanceof String) {
+				char ch = all.get(1).toString().charAt(0);
+				String combined = strings.get(2);
+				if (Character.isLetter(ch)) {
+					try {
+						String east = combined.substring(0, combined.length() / 2);
+						String north = combined.substring(combined.length() / 2, combined.length());
+						UTMPoint upoint = new UTMPoint(Double.parseDouble(north), Double.parseDouble(east), d.get(0)
+								.intValue(), ch);
+						LatLonPoint ll = upoint.toLatLonPoint();
+						return new LatLon(ll.getLatitude(), ll.getLongitude());
+					} catch (NumberFormatException e) {
+					}
+				}
+			}
+			// try to find split lat/lon position
+			int jointNumbers = 0;
+			int lastJoin = 0;
+			int degSplit = -1;
+			int degType = -1; // 0 - degree, 1 - minutes, 2 - seconds
+			boolean finishDegSplit = false;
+			int northSplit = -1;
+			int eastSplit = -1;
+			for(int i = 1; i < all.size(); i++ ) {
+				if(all.get(i - 1) instanceof Double && all.get(i) instanceof Double) {
+					jointNumbers ++;
+					lastJoin = i;
+				}
+				if(all.get(i).equals("n") || all.get(i).equals("s") || 
+						all.get(i).equals("N") || all.get(i).equals("S")) {
+					northSplit = i + 1;
+				}
+				if(all.get(i).equals("e") || all.get(i).equals("w") || 
+						all.get(i).equals("E") || all.get(i).equals("W")) {
+					eastSplit = i;
+				}
+				int dg = -1;
+				if (all.get(i).equals("°")) {
+					dg = 0;
+				} else if (all.get(i).equals("\'") || all.get(i).equals("′")) {
+					dg = 1;
+				} else if (all.get(i).equals("″") || all.get(i).equals("\"")) {
+					dg = 2;
+				}
+				if (dg != -1) {
+					if (!finishDegSplit) {
+						if (degType < dg) {
+							degSplit = i + 1;
+							degType = dg;
+						} else {
+							finishDegSplit = true;
+							degType = dg;
+						}
+					} else {
+						if (degType < dg) {
+							degType = dg;
+						} else {
+							// reject delimiter
+							degSplit = -1;
+						}
+					}
+				}
+			}
+			int split = -1;
+			if(jointNumbers == 1) {
+				split = lastJoin;
+			}
+			if(northSplit != -1 && northSplit < all.size() -1) {
+				split = northSplit;
+			} else if(eastSplit != -1 && eastSplit < all.size() -1) {
+				split = eastSplit;
+			} else if(degSplit != -1 && degSplit < all.size() -1) {
+				split = degSplit;
+			}
+			
+			if(split != -1) {
+				double lat = parse1Coordinate(all, 0, split);
+				double lon = parse1Coordinate(all, split, all.size());
+				return new LatLon(lat, lon);
+			}
+			if(d.size() == 2) {
+				return new LatLon(d.get(0), d.get(1));
+			}
+			// simple url case
+			if (s.contains("://")) {
+				double lat = 0;
+				double lon = 0;
+				boolean only2decimals = true;
+				for (int i = 0; i < d.size(); i++) {
+					if (d.get(i).doubleValue() != d.get(i).intValue()) {
+						if (lat == 0) {
+							lat = d.get(i);
+						} else if (lon == 0) {
+							lon = d.get(i);
+						} else {
+							only2decimals = false;
+						}
+					}
+				}
+				if (lat != 0 && lon != 0 && only2decimals) {
+					return new LatLon(lat, lon);
+				}
+			}
+			// split by equal number of digits
+			if (d.size() > 2 && d.size() % 2 == 0) {
+				int ind = d.size() / 2 + 1;
+				int splitEq = -1;
+				for (int i = 0; i < all.size(); i++) {
+					if(all.get(i) instanceof Double) {
+						ind --;
+					}
+					if(ind == 0) {
+						splitEq = i;
+						break;
+					}
+				}
+				if (splitEq != -1) {
+					double lat = parse1Coordinate(all, 0, splitEq);
+					double lon = parse1Coordinate(all, splitEq, all.size());
+					return new LatLon(lat, lon);
+				}
+			}
+			return null;
+			
+		}
+		
+		public double parse1Coordinate(List<Object> all, int begin, int end) {
+			boolean neg = false;
+			double d = 0;
+			int type = 0; // degree - 0, minutes - 1, seconds = 2
+			Double prevDouble = null;
+			for(int i = begin; i <= end; i++) {
+				Object o = i == end ? "" : all.get(i);
+				if(o.equals("S") || o.equals("W"))  {
+					neg = !neg;
+				}
+				if (prevDouble != null) {
+					if(o.equals("°")) {
+						type = 0;
+					} else if(o.equals("′") /*o.equals("'")*/) {
+						// ' can be used as delimeter ignore it
+						type = 1;
+					} else if(o.equals("\"") || o.equals("″")) {
+						type = 2;
+					}
+					if (type == 0) {
+						double ld = prevDouble.doubleValue();
+						if(ld < 0) {
+							ld = -ld;
+							neg = true;
+						}
+						d += ld;
+					} else if (type == 1) {
+						d += prevDouble.doubleValue() / 60.f;
+					} else /*if (type == 1) */ {
+						d += prevDouble.doubleValue() / 3600.f;
+					}
+					type++;
+				}
+				if(o instanceof Double) {
+					prevDouble = (Double) o;
+				} else {
+					prevDouble = null;
+				}
+			}
+			if(neg) {
+				d = -d;
+			}
+			return d;
+		}
+
+		private void splitObjects(String s, List<Double> d, List<Object> all, List<String> strings) {
+			boolean digit = false;
+			int word = -1;
+			for(int i = 0; i <= s.length(); i++) {
+				char ch = i == s.length() ? ' ' : s.charAt(i);
+				boolean dg = Character.isDigit(ch);
+				boolean nonwh = ch != ',' && ch != ' ' && ch != ';';
+				if (ch == '.' || dg || ch == '-' ) {
+					if(!digit) {
+						if(word != -1) {
+							all.add(s.substring(word, i));
+							strings.add(s.substring(word, i));
+						}
+						digit = true;
+						word = i;
+					} else {
+						if(word == -1) {
+							word = i;
+						}
+						// if digit
+						// continue
+					}
+				} else {
+					if(digit){
+						try {
+							double dl = Double.parseDouble(s.substring(word, i));
+							d.add(dl);
+							all.add(dl);
+							strings.add(s.substring(word, i));
+							digit = false;
+							word = -1;
+						} catch (NumberFormatException e) {
+						}
+					}
+					if(nonwh) {
+						if(!Character.isLetter(ch)) {
+							if(word != -1) {
+								all.add(s.substring(word, i));
+								strings.add(s.substring(word, i));
+							}
+							all.add(s.substring(i, i + 1));
+							strings.add(s.substring(i, i +1));
+							word = -1;
+						} else if(word == -1) {
+							word = i;
+						} 
+					} else {
+						if(word != -1) {
+							all.add(s.substring(word, i));
+							strings.add(s.substring(word, i));
+						}
+						word = -1;
+					}
+				}
+			}
+		}
+		
+		private void parseLocation2(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+			String lw = phrase.getLastWord();
+			SearchWord sw = phrase.getLastSelectedWord();
+			LatLon l = null;
+			if (sw != null && sw.getType() == ObjectType.UNKNOWN_NAME_FILTER) {
+				l = parseLocation(sw.getWord() + ", " + lw);
+			}
+			if (l == null) {
+				l = parseLocation(lw);
+			}
+			if (l != null) {
+				SearchResult sp = new SearchResult(phrase);
+				sp.priority = SEARCH_LOCATION_PRIORITY;
+				sp.object = sp.location = l;
+				sp.localeName = ((float) sp.location.getLatitude()) + ", " + ((float) sp.location.getLongitude());
+				sp.objectType = ObjectType.LOCATION;
+				sp.wordsSpan = 2;
+				resultMatcher.publish(sp);
+			} else if (phrase.isNoSelectedType()) {
+				LatLon ll = parsePartialLocation(lw);
+				if (ll != null) {
+					SearchResult sp = new SearchResult(phrase);
+					sp.priority = SEARCH_LOCATION_PRIORITY;
+
+					sp.object = sp.location = ll;
+					sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
+					sp.objectType = ObjectType.PARTIAL_LOCATION;
+					resultMatcher.publish(sp);
+				}
+			}
 		}
 		
 		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
@@ -806,17 +1133,17 @@ public class SearchCoreFactory {
 				}
 				if(!Double.isNaN(pd)) {
 					SearchResult sp = new SearchResult(phrase);
-					sp.priority = 0;
+					sp.priority = SEARCH_LOCATION_PRIORITY;
 					sp.object = sp.location = new LatLon(pd, dd);
-					sp.localeName = ((float)sp.location.getLatitude()) +", " + ((float) sp.location.getLongitude());
+					sp.localeName = ((float)sp.location.getLatitude()) +" " + ((float) sp.location.getLongitude());
 					sp.objectType = ObjectType.LOCATION;
 					sp.wordsSpan = 2;
 					resultMatcher.publish(sp);
 				} else if (phrase.isNoSelectedType()) {
 					SearchResult sp = new SearchResult(phrase);
-					sp.priority = 0;
+					sp.priority = SEARCH_LOCATION_PRIORITY;
 					sp.object = sp.location = new LatLon(dd, 0);
-					sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
+					sp.localeName = ((float) sp.location.getLatitude()) + " <longitude> ";
 					sp.objectType = ObjectType.PARTIAL_LOCATION;
 					resultMatcher.publish(sp);
 				}
@@ -824,7 +1151,7 @@ public class SearchCoreFactory {
 		}
 
 
-		private void parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+		private boolean parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			String text = phrase.getLastWord();
 			GeoParsedPoint pnt = GeoPointParserUtil.parse(text);
 			int wordsSpan= 1;
@@ -853,24 +1180,15 @@ public class SearchCoreFactory {
 				}
 				sp.objectType = ObjectType.LOCATION;
 				resultMatcher.publish(sp);
+				return true;
 			}
+			return false;
 		}
 		
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			return 1;
+			return SEARCH_LOCATION_PRIORITY;
 		}
-	}
-	
-	public static void main(String[] args) throws IOException {
-		testSearchLocationAndUrlAPI(new SearchLocationAndUrlAPI());
-	}
-
-	private static void testSearchLocationAndUrlAPI(SearchLocationAndUrlAPI api) throws IOException {
-		SearchResultMatcher srm = new SearchResultMatcher(null, 0, null, 10);
-		api.search(new SearchPhrase(null).generateNewPhrase("17R 419230 2714967", null), srm);
-		System.out.println(srm.getRequestResults());
-		
 	}
 	
 }

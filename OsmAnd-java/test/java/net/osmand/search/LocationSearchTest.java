@@ -17,8 +17,8 @@ public class LocationSearchTest {
 		SearchResultMatcher srm = new SearchUICore.SearchResultMatcher(null, 0, null, 100);
 		new SearchCoreFactory.SearchLocationAndUrlAPI().
 			search(new SearchPhrase(null).generateNewPhrase(string, null), srm);
-		Assert.assertEquals(srm.getRequestResults().size(), 1);
-		Assert.assertEquals(srm.getRequestResults().get(0).location, latLon);
+		Assert.assertEquals(1, srm.getRequestResults().size());
+		Assert.assertEquals(latLon, srm.getRequestResults().get(0).location);
 	}
 	
 	@Test
@@ -33,33 +33,52 @@ public class LocationSearchTest {
 		search("5.445,3.523", new LatLon(5.445, 3.523));
 		search("5:1:1,3:1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 	}
-
+	
+	@Test
+	public void testUTMSearch() throws IOException {
+		search("17N6734294749123", new LatLon(42.875017, -78.87659050764749));
+		search("17 N 673429 4749123", new LatLon(42.875017, -78.87659050764749));
+	}
+	
 	@Test
 	public void testBasicSpaceSearch() throws IOException {
 		search("5.0 3.0", new LatLon(5, 3));
+		search("-5.0 -3.0", new LatLon(-5, -3));
+		search("-45.5 3.0S", new LatLon(-45.5, -3));
+		search("45.5S 3.0 W", new LatLon(-45.5, -3));
 		search("5.445 3.523", new LatLon(5.445, 3.523));
 		search("5:1:1 3:1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
+		search("5:1#1 3#1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
+		search("5#1#1 3#1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
+		search("5'1'1 3'1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 	}
-	// TODO 17R 419230 2714967
-//	17N6734294749123
-//	45° 30'30"W
-//	-45
-//	45 W
-//	45 S
-//	45.50W
-//	45.50S
-//	W45
-//	S45
-//	45 30.5W
-//	44 30.5S
-//	45 30 30 W
-//	45 30 30 N
-//	-45 30 30
-//	45 30 30
-//	45 30.50W
-//	45 30.50
 	
-
+	@Test
+	public void testSimpleURLSearch() throws IOException {
+		search("ftp://simpleurl?lat=34.23&lon=-53.2&z=15", new LatLon(34.23, -53.2));
+		search("ftp://simpleurl?z=15&lat=34.23&lon=-53.2", new LatLon(34.23, -53.2));
+	}
+	
+	@Test
+	public void testAdvancedSpaceSearch() throws IOException {
+		search("5 30 30 N 4 30 W", new LatLon(5.5 + 30 / 3600f, -4.5));
+		search("5 30  -4 30", new LatLon(5.5, -4.5));
+		search("S 5 30  4 30 W", new LatLon(-5.5, -4.5));
+		search("S5.4232  4.30W", new LatLon(-5.4232, -4.3));
+		search("S5.4232  W4.30", new LatLon(-5.4232, -4.3));
+		search("5.4232, W4.30", new LatLon(5.4232, -4.3));
+		search("5.4232N, 45 30.5W", new LatLon(5.4232, -(45 + 30.5 / 60f)));
+	}
+	
+	@Test
+	public void testArcgisSpaceSearch() throws IOException {
+		search("43°S 79°23′13.7″W", new LatLon(-43,-(79 + 23/60f + 13.7/3600f)));
+		search("43°38′33.24″N 79°23′13.7″W", new LatLon(43 + 38/60f + 33.24/3600f,-(79 + 23/60f + 13.7/3600f)));
+		search("45° 30'30\"W 3.0", new LatLon(45 + 0.5 + 1 / 120f, -3));
+		search("43° 79°23′13.7″E", new LatLon(43,79 + 23/60f + 13.7/3600f));
+		search("43°38′ 79°23′13.7″E", new LatLon(43 + 38/60f,79 + 23/60f + 13.7/3600f));
+		search("43°38′23\" 79°23′13.7″E", new LatLon(43 + 38/60f + 23/3600f,79 + 23/60f + 13.7/3600f));
+	}
 	
 
 	
