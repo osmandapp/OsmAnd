@@ -2092,11 +2092,11 @@ POIの更新は利用できません</string>
     <string name="plugins_menu_group">プラグイン</string>
     <string name="first_usage_item_description">マップのダウンロード方法と基本設定</string>
     <string name="navigation_item_description">ナビゲーションに関する設定</string>
-    <string name="planning_trip_item">旅行を計画</string>
+    <string name="planning_trip_item">ルートの指定方法</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">よくある質問</string>
     <string name="map_viewing_item">マップ表示</string>
-    <string name="search_on_the_map_item">マップ検索中</string>
+    <string name="search_on_the_map_item">マップ内検索方法</string>
     <string name="instalation_troubleshooting_item">インストールとトラブルシューティング</string>
     <string name="techical_articles_item">技術的項目</string>
     <string name="versions_item">バージョン</string>
@@ -2217,7 +2217,7 @@ POIの更新は利用できません</string>
     <string name="av_audio_bitrate_descr">音声のビットレートを選択します</string>
     <string name="looking_up_address">道路名及び市町村名を取得中</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - インターネットに接続することなく目的の場所を探したりルートを検索することが出来ます。なじみのない場所やルートを検索出来るように旅行の前に、その地域の地図をダウンロードしてください。基本的な機能:・200カ国の詳細なマップ・オフラインでの音声ナビゲーション・オフラインでの住所検索・地図上の場所についての情報、観光、喫茶店、駐車場、店舗・お気に入りの場所の追加・乗用車、自転車、徒歩移動ごとのナビゲーション設定・GPX経路を表示、記録機能・POIに関するWikipedia情報利用・マップに追加できる音声やビデオメモ機能・運転時に分かりやすい昼と夜のマップモード・公共交通機関のルートや停留所・自転車道や歩道小道・世界中の観光向けトレイルコース・様々なオンラインマップにも対応・道路の舗装状況や街路照明の情報・POIの追加、編集、削除(OpenStreetMap.orgユーザー向け)・OSM - 他のデバイスのライブモニタリング機能はその国に通じた信頼性の高いナビゲーターを得るのと同等 - フランス、ドイツ、メキシコ、イギリス、スペイン、オランダ、アメリカ、ロシア、ブラジルやその他の地域。プラグイン:・等高線 https://goo.gl/7mojP8 既存マップに等高線や地形の陰影表示を追加で描写可能。・スキーマップ https://goo.gl/pX6DxJ スキーゲレンデ、クロスカントリースキーコース、ロープウェイやリフトの情報。・航海マップ https://goo.gl/0hEdxm 沿岸や航海時のナビゲーションを補助する特殊スタイルマップ。・駐車位置 https://goo.gl/6JxQXF 車両の駐車位置や駐車料金、残り駐車時間などの表示。等々乞うご期待！Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp サイト: http://osmand.net OsmAndアプリについてのヘルプが必要な場合はサポートチームにご連絡ください: support@osmand.net. "</string>
-    <string name="begin_with_osmand_menu_group">OsmAndの最初のステップ</string>
+    <string name="begin_with_osmand_menu_group">OsmAndを初めて使う方へ</string>
     <string name="first_usage_item">使用方法の簡易説明</string>
     <string name="update">更新</string>
     <string name="only_download_over_wifi">Wi-Fi経由でのみダウンロード</string>
