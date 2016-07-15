@@ -60,6 +60,9 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		}
 		if (mediaPlayer != null){
 			mediaPlayer.stop();
+			//Test to see if this fixes #1351
+			mediaPlayer.release();
+			mediaPlayer = null;
 		}
 		if (ctx != null) {
 			abandonAudioFocus();
@@ -111,7 +114,6 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			if (mediaPlayer != null) {
 				mediaPlayer.release();
 				mediaPlayer = null;
-
 				abandonAudioFocus();
 			}
 		}
