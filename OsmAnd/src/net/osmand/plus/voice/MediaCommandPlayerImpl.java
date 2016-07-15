@@ -44,6 +44,12 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	@Override
 	public void clear() {
 		super.clear();
+		if (filesToPlay != null){
+			filesToPlay.clear();
+		}
+		if (mediaPlayer != null){
+			mediaPlayer.release();
+		}
 		mediaPlayer = null;
 	}
 
