@@ -47,10 +47,7 @@ import com.jwetherell.openmap.common.UTMPoint;
 
 
 public class SearchCoreFactory {
-	// TODO tests for geo:, location (+)
-	// TODO add UTM support (+)	
-	// TODO location 43°38′33.24″N 79°23′13.7″W (+)
-	// TODO partial location
+	// TODO partial location (+)
 	
 	// TODO add full text search with comma correct order
 	// TODO MED add full text search without comma and different word order
@@ -819,6 +816,25 @@ public class SearchCoreFactory {
 			return true;
 		}
 		
+		LatLon parsePartialLocation(String s) {
+			s = s.trim();
+			if(s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
+					 || s.charAt(0) == 'S' || s.charAt(0) == 's' 
+					 || s.charAt(0) == 'N' || s.charAt(0) == 'n' 
+					 || s.contains("://"))) {
+				return null;
+			}
+			List<Double> d = new ArrayList<>();
+			List<Object> all = new ArrayList<>();
+			List<String> strings = new ArrayList<>();
+			splitObjects(s, d, all, strings);
+			if(d.size() == 0) {
+				return null;
+			}
+			double lat = parse1Coordinate(all, 0, all.size());
+			return new LatLon(lat, 0);
+		}
+		
 		LatLon parseLocation(String s) {
 			s = s.trim();
 			if(s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
@@ -1091,12 +1107,16 @@ public class SearchCoreFactory {
 				sp.wordsSpan = 2;
 				resultMatcher.publish(sp);
 			} else if (phrase.isNoSelectedType()) {
-				// SearchResult sp = new SearchResult(phrase);
-				// sp.priority = SEARCH_LOCATION_PRIORITY;
-				// sp.object = sp.location = new LatLon(dd, 0);
-				// sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
-				// sp.objectType = ObjectType.PARTIAL_LOCATION;
-				// resultMatcher.publish(sp);
+				LatLon ll = parsePartialLocation(lw);
+				if (ll != null) {
+					SearchResult sp = new SearchResult(phrase);
+					sp.priority = SEARCH_LOCATION_PRIORITY;
+
+					sp.object = sp.location = ll;
+					sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
+					sp.objectType = ObjectType.PARTIAL_LOCATION;
+					resultMatcher.publish(sp);
+				}
 			}
 		}
 		
@@ -1115,7 +1135,7 @@ public class SearchCoreFactory {
 					SearchResult sp = new SearchResult(phrase);
 					sp.priority = SEARCH_LOCATION_PRIORITY;
 					sp.object = sp.location = new LatLon(pd, dd);
-					sp.localeName = ((float)sp.location.getLatitude()) +", " + ((float) sp.location.getLongitude());
+					sp.localeName = ((float)sp.location.getLatitude()) +" " + ((float) sp.location.getLongitude());
 					sp.objectType = ObjectType.LOCATION;
 					sp.wordsSpan = 2;
 					resultMatcher.publish(sp);
@@ -1123,7 +1143,7 @@ public class SearchCoreFactory {
 					SearchResult sp = new SearchResult(phrase);
 					sp.priority = SEARCH_LOCATION_PRIORITY;
 					sp.object = sp.location = new LatLon(dd, 0);
-					sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
+					sp.localeName = ((float) sp.location.getLatitude()) + " <longitude> ";
 					sp.objectType = ObjectType.PARTIAL_LOCATION;
 					resultMatcher.publish(sp);
 				}
