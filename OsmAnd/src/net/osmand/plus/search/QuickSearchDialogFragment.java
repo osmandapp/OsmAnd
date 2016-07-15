@@ -3,8 +3,6 @@ package net.osmand.plus.search;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityManagerCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -21,17 +19,24 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
@@ -53,6 +58,13 @@ public class QuickSearchDialogFragment extends DialogFragment {
 
 	private SearchUICore searchUICore;
 	private String searchQuery = "";
+	private SearchResultCollection resultCollection;
+
+	public static final int SEARCH_FAVORITE_API_PRIORITY = 3;
+	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
+	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
+	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +77,6 @@ public class QuickSearchDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
 		final MapActivity mapActivity = getMapActivity();
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
 
@@ -88,33 +99,7 @@ public class QuickSearchDialogFragment extends DialogFragment {
 			}
 		});
 
-		// Setup search
-		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		Collection<RegionAddressRepository> regionAddressRepositories = app.getResourceManager().getAddressRepositories();
-		BinaryMapIndexReader[] binaryMapIndexReaderArray = new BinaryMapIndexReader[regionAddressRepositories.size()];
-		int i = 0;
-		for (RegionAddressRepository rep : regionAddressRepositories) {
-			binaryMapIndexReaderArray[i++] = rep.getFile();
-		}
-		searchUICore = new SearchUICore(app.getPoiTypes(), locale, binaryMapIndexReaderArray);
-
-		LatLon centerLatLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-		SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
-				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
-		settings = settings.setLang(locale);
-		searchUICore.updateSettings(settings);
-		searchUICore.setOnResultsComplete(new Runnable() {
-			@Override
-			public void run() {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						hideProgressBar();
-						updateSearchResult(searchUICore.getCurrentSearchResult(), true);
-					}
-				});
-			}
-		});
+		setupSearch(mapActivity);
 
 		listView = (ListView) view.findViewById(android.R.id.list);
 		listAdapter = new SearchListAdapter(getMyApplication());
@@ -188,6 +173,124 @@ public class QuickSearchDialogFragment extends DialogFragment {
 		return view;
 	}
 
+	private void setupSearch(final MapActivity mapActivity) {
+
+		final OsmandApplication app = mapActivity.getMyApplication();
+
+		// Setup search core
+		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+
+		Collection<RegionAddressRepository> regionAddressRepositories = app.getResourceManager().getAddressRepositories();
+		BinaryMapIndexReader[] binaryMapIndexReaderArray = new BinaryMapIndexReader[regionAddressRepositories.size()];
+		int i = 0;
+		for (RegionAddressRepository rep : regionAddressRepositories) {
+			binaryMapIndexReaderArray[i++] = rep.getFile();
+		}
+		searchUICore = new SearchUICore(app.getPoiTypes(), locale, binaryMapIndexReaderArray);
+
+		/*
+		List<BinaryMapIndexReader> files = new ArrayList<>();
+		File file = new File(Environment.getExternalStorageDirectory() + "/osmand");
+		if (file.exists() && file.listFiles() != null) {
+			for (File obf : file.listFiles()) {
+				if (!obf.isDirectory() && obf.getName().endsWith(".obf")) {
+					try {
+						BinaryMapIndexReader bmir = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
+						files.add(bmir);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		}
+
+		searchUICore = new SearchUICore(app.getPoiTypes(), locale, files.toArray(new BinaryMapIndexReader[files.size()]));
+		*/
+
+		LatLon centerLatLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
+				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+		settings = settings.setLang(locale);
+		searchUICore.updateSettings(settings);
+		searchUICore.setOnResultsComplete(new Runnable() {
+			@Override
+			public void run() {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						hideProgressBar();
+						//updateSearchResult(searchUICore.getCurrentSearchResult(), true);
+					}
+				});
+			}
+		});
+
+		// Setup favorites search api
+		searchUICore.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
+
+			@Override
+			public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+				List<FavouritePoint> favList = getMyApplication().getFavorites().getFavouritePoints();
+				for (FavouritePoint point : favList) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = point.getName();
+					sr.object = point;
+					sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
+					sr.objectType = ObjectType.FAVORITE;
+					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+					sr.preferredZoom = 17;
+					if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
+						resultMatcher.publish(sr);
+					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+						resultMatcher.publish(sr);
+					}
+				}
+				return true;
+			}
+
+			@Override
+			public int getSearchPriority(SearchPhrase p) {
+				if(!p.isNoSelectedType()) {
+					return -1;
+				}
+				return SEARCH_FAVORITE_API_PRIORITY;
+			}
+		});
+
+		// Setup history search api
+		searchUICore.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
+			@Override
+			public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+				SearchHistoryHelper helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity()
+						.getApplicationContext());
+				List<HistoryEntry> points = helper.getHistoryEntries();
+				for (HistoryEntry point : points) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = point.getName().getName();
+					sr.object = point;
+					sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY;
+					sr.objectType = ObjectType.RECENT_OBJ;
+					sr.location = new LatLon(point.getLat(), point.getLon());
+					sr.preferredZoom = 17;
+					if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
+						resultMatcher.publish(sr);
+					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+						resultMatcher.publish(sr);
+					}
+				}
+				return true;
+			}
+
+			@Override
+			public int getSearchPriority(SearchPhrase p) {
+				if(!p.isNoSelectedType()) {
+					return -1;
+				}
+				return SEARCH_HISTORY_API_PRIORITY;
+			}
+		});
+	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -237,7 +340,45 @@ public class QuickSearchDialogFragment extends DialogFragment {
 
 	private SearchResultCollection runCoreSearch(String text) {
 		showProgressBar();
-		return searchUICore.search(text, null);
+		return searchUICore.search(text, new ResultMatcher<SearchResult>() {
+
+			List<SearchResult> results = new ArrayList<>();
+
+			@Override
+			public boolean publish(SearchResult object) {
+
+				switch (object.objectType) {
+					case SEARCH_API_FINISHED:
+						final List<SearchResult> apiResults = results;
+						final SearchPhrase phrase = object.requiredSearchPhrase;
+						results = new ArrayList<>();
+						searchUICore.sortSearchResults(phrase, apiResults);
+						getMyApplication().runInUIThread(new Runnable() {
+							@Override
+							public void run() {
+								if (resultCollection == null || resultCollection.getPhrase() != phrase) {
+									resultCollection = new SearchResultCollection(apiResults, phrase);
+								} else {
+									resultCollection.getCurrentSearchResults().addAll(apiResults);
+								}
+								updateSearchResult(resultCollection, true);
+							}
+						});
+						break;
+					case SEARCH_API_REGION_FINISHED:
+						break;
+					default:
+						results.add(object);
+				}
+
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		});
 	}
 
 	private void completeQueryWithObject(SearchResult sr, boolean updateEditText) {
