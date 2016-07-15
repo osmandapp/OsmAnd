@@ -863,7 +863,8 @@ public class SearchCoreFactory {
 			int jointNumbers = 0;
 			int lastJoin = 0;
 			int degSplit = -1;
-			int degType = -1; // 0 - degree, 1 - minutes, 2 - seconds 
+			int degType = -1; // 0 - degree, 1 - minutes, 2 - seconds
+			boolean finishDegSplit = false;
 			int northSplit = -1;
 			int eastSplit = -1;
 			for(int i = 1; i < all.size(); i++ ) {
@@ -887,11 +888,22 @@ public class SearchCoreFactory {
 				} else if (all.get(i).equals("″") || all.get(i).equals("\"")) {
 					dg = 2;
 				}
-				if (dg != -1 && degType != -2) {
-					if (degType < dg) {
-						degSplit = i + 1;
+				if (dg != -1) {
+					if (!finishDegSplit) {
+						if (degType < dg) {
+							degSplit = i + 1;
+							degType = dg;
+						} else {
+							finishDegSplit = true;
+							degType = dg;
+						}
 					} else {
-						degType = -2; // finish search
+						if (degType < dg) {
+							degType = dg;
+						} else {
+							// reject delimiter
+							degSplit = -1;
+						}
 					}
 				}
 			}
@@ -901,11 +913,9 @@ public class SearchCoreFactory {
 			}
 			if(northSplit != -1 && northSplit < all.size() -1) {
 				split = northSplit;
-			}
-			if(eastSplit != -1 && eastSplit < all.size() -1) {
+			} else if(eastSplit != -1 && eastSplit < all.size() -1) {
 				split = eastSplit;
-			}
-			if(degSplit != -1 && degSplit < all.size() -1) {
+			} else if(degSplit != -1 && degSplit < all.size() -1) {
 				split = degSplit;
 			}
 			

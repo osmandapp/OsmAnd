@@ -49,8 +49,8 @@ public class LocationSearchTest {
 		search("5.445 3.523", new LatLon(5.445, 3.523));
 		search("5:1:1 3:1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 		search("5:1#1 3#1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
-		search("5'1'1 3'1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 		search("5#1#1 3#1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
+		search("5'1'1 3'1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 	}
 	
 	@Test
@@ -72,11 +72,12 @@ public class LocationSearchTest {
 	
 	@Test
 	public void testArcgisSpaceSearch() throws IOException {
+		search("43°S 79°23′13.7″W", new LatLon(-43,-(79 + 23/60f + 13.7/3600f)));
 		search("43°38′33.24″N 79°23′13.7″W", new LatLon(43 + 38/60f + 33.24/3600f,-(79 + 23/60f + 13.7/3600f)));
 		search("45° 30'30\"W 3.0", new LatLon(45 + 0.5 + 1 / 120f, -3));
-		search("43°S 79°23′13.7″W", new LatLon(-43,-(79 + 23/60f + 13.7/3600f)));
 		search("43° 79°23′13.7″E", new LatLon(43,79 + 23/60f + 13.7/3600f));
 		search("43°38′ 79°23′13.7″E", new LatLon(43 + 38/60f,79 + 23/60f + 13.7/3600f));
+		search("43°38′23\" 79°23′13.7″E", new LatLon(43 + 38/60f + 23/3600f,79 + 23/60f + 13.7/3600f));
 	}
 	
 
