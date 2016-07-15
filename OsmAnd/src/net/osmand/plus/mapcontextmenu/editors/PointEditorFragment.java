@@ -58,6 +58,7 @@ public abstract class PointEditorFragment extends Fragment {
 		});
 
 		Button saveButton = (Button) view.findViewById(R.id.save_button);
+		saveButton.setTextColor(getResources().getColor(!getEditor().isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -66,6 +67,7 @@ public abstract class PointEditorFragment extends Fragment {
 		});
 
 		Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
+		cancelButton.setTextColor(getResources().getColor(!getEditor().isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -74,6 +76,7 @@ public abstract class PointEditorFragment extends Fragment {
 		});
 
 		Button deleteButton = (Button) view.findViewById(R.id.delete_button);
+		deleteButton.setTextColor(getResources().getColor(!getEditor().isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
 		deleteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -86,6 +89,11 @@ public abstract class PointEditorFragment extends Fragment {
 		} else {
 			deleteButton.setVisibility(View.VISIBLE);
 		}
+
+		view.findViewById(R.id.background_layout).setBackgroundResource(!getEditor().isLight() ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+		view.findViewById(R.id.buttons_layout).setBackgroundResource(!getEditor().isLight() ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+		view.findViewById(R.id.title_view).setBackgroundResource(!getEditor().isLight() ? R.color.bg_color_dark : R.color.bg_color_light);
+		view.findViewById(R.id.description_info_view).setBackgroundResource(!getEditor().isLight() ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 
 		TextView nameCaption = (TextView) view.findViewById(R.id.name_caption);
 		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption, !getEditor().isLight());

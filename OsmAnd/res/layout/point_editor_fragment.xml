@@ -9,9 +9,11 @@
     android:background="@android:color/transparent">
 
     <LinearLayout
+        android:id="@+id/background_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/ctx_menu_info_view_bg"
+        android:clickable="true"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -244,6 +246,7 @@
             android:background="@color/divider_color"/>
 
         <LinearLayout
+            android:id="@+id/buttons_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/ctx_menu_info_view_bg"
