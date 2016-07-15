@@ -2102,7 +2102,7 @@ POIの更新は利用できません</string>
     <string name="versions_item">バージョン</string>
     <string name="feedback">フィードバック</string>
     <string name="contact_us">問い合わせ先</string>
-    <string name="map_legend">マップの凡例</string>
+    <string name="map_legend">マップの簡易説明</string>
     <string name="save_poi_without_poi_type_message">種類を指定せずにPOIを保存してもよろしいですか？</string>
     <string name="poi_context_menu_modify_osm_change">修正をOSMに反映</string>
     <string name="use_dashboard_btn">ダッシュボードを使用</string>
@@ -2291,4 +2291,5 @@ POIの更新は利用できません</string>
     <string name="lang_en_gb">英語 (イギリス)</string>
     <string name="lang_be_BY">ベラルーシ語 (ラテン)</string>
     <string name="lang_kn">カンナダ語</string>
+    <string name="follow_us">フォローはこちらから</string>
     </resources>
