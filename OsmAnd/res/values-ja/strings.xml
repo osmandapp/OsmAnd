@@ -616,7 +616,7 @@ POIの更新は利用できません</string>
 
 
 <string name="av_photo_play_sound_descr">撮影時シャッター音を鳴らします</string>
-<string name="base_world_map">基本世界地図(ワールドベースマップ)</string>
+<string name="base_world_map">世界地図(ワールドベースマップ)</string>
 	
 	
     
@@ -2029,14 +2029,14 @@ POIの更新は利用できません</string>
     <string name="update_all">全て更新(%1$s MB)</string>
     <string name="free_downloads_used">使用済み無料ダウンロード枠</string>
     <string name="free_downloads_used_description">使用した無料ダウンロード枠を表示します</string>
-<string name="world_map_download_descr">基本世界地図(ズーム最小時世界中をカバーする為の物)が見当たらないか古くなっています。使用環境に対応した基本世界地図を再度ダウンロードしてください。</string>
+<string name="world_map_download_descr">世界地図(ワールドベースマップ／ズーム最小時世界中をカバーする為の物)が見当たらないか古くなっています。使用環境に対応した世界地図を再度ダウンロードしてください。</string>
     <string name="shared_string_qr_code">QRコード</string>
     <string name="map_downloaded_descr">%1$sのマップはダウンロード済みです。対応した地点を参照することでマップを使用できます。</string>
     <string name="go_to_map">マップに移動します</string>
     <string name="please_specify_poi_type_only_from_list">正しいPOIの種類を指定するか、そうでなければ省略してください</string>
     <string name="access_from_map_description">メニューボタンでメニューではなくダッシュボードを開きます</string>
     <string name="access_from_map">マップ画面から開く</string>
-    <string name="show_on_start_description">OFFの場合、起動時マップのみ表示します</string>
+    <string name="show_on_start_description">ONでOsmAnd起動時ダッシュボードメニューを自動的に表示します</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
     <string name="release_2_2">" • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新\n\n • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更\n\n • ダッシュボード設定で任意の項目だけ表示できる様に変更可能\n\n • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能\n\n • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に\n\n • POI検索時より具体的に検索できる様に変更\n\n • POIやOSMの項目編集機能を改善\n\n • マップやその他データのダウンロード構造とUIを刷新\n\n他多数… "</string>
     <string name="osm_save_offline">ｵﾌﾗｲﾝで保存</string>
