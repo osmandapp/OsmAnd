@@ -27,6 +27,8 @@ public class SearchPhrase {
 	private List<BinaryMapIndexReader> indexes;
 	private String lastWordTrim;
 	private QuadRect cache1kmRect;
+	private static final String DELIMITER = " ";
+	
 	
 	public enum SearchPhraseDataType {
 		MAP, ADDRESS, ROUTING, POI
@@ -39,34 +41,29 @@ public class SearchPhrase {
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
 		SearchPhrase sp = new SearchPhrase(settings);
-		String atext = text;
+		String restText = text;
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		if (text.startsWith(thisTxt)) {
 			// string is longer
-			atext = text.substring(getText(false).length());
+			restText = text.substring(getText(false).length());
 			sp.words = new ArrayList<>(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
 		}
-		if (!atext.contains(",")) {
-			sp.lastWord = atext;
-			
+		if (!restText.contains(DELIMITER)) {
+			sp.lastWord = restText;
 		} else {
-			String[] ws = atext.split(",");
-			for (int i = 0; i < ws.length - 1; i++) {
-				boolean unknown = true;
-				if (ws[i].trim().length() > 0) {
-					if (leftWords.size() > 0) {
-						if (leftWords.get(0).getWord().equalsIgnoreCase(ws[i].trim())) {
-							sp.words.add(leftWords.get(0));
-							leftWords = leftWords.subList(1, leftWords.size());
-							unknown = false;
-						}
-					}
-					if(unknown) {
-						sp.words.add(new SearchWord(ws[i].trim()));
-					}
+			for(SearchWord w : leftWords) {
+				if(restText.startsWith(w.getWord() + DELIMITER)) {
+					sp.words.add(w);
+					restText = restText.substring(w.getWord().length() + DELIMITER.length()).trim();
+				} else {
+					break;
 				}
+			}
+			String[] ws = restText.split(DELIMITER);
+			for (int i = 0; i < ws.length - 1; i++) {
+				sp.words.add(new SearchWord(ws[i].trim()));
 			}
 			sp.lastWord = ws[ws.length - 1];
 		}
@@ -261,7 +258,7 @@ public class SearchPhrase {
 	public String getText(boolean includeLastWord) {
 		StringBuilder sb = new StringBuilder();
 		for(SearchWord s : words) {
-			sb.append(s.getWord()).append(", ");
+			sb.append(s.getWord()).append(DELIMITER.trim() + " ");
 		}
 		if(includeLastWord) {
 			sb.append(lastWord);

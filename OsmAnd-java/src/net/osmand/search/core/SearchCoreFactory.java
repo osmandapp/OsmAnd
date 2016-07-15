@@ -49,12 +49,12 @@ import com.jwetherell.openmap.common.UTMPoint;
 public class SearchCoreFactory {
 	// TODO add full text search with comma correct order
 	// TODO MED add full text search without comma and different word order
-	// TODO MED edit in the middle (with words and comma)?
 	// TODO exclude duplicate streets/cities/pois...
-	
-	// TODO UI support poi additional select type and search
-	// TODO UI display results momentarily
-	// TODO UI automatically increase radius if nothing found (log radius search)
+
+	// UI edit in the middle (with words and comma)?
+	// UI support poi additional select type and search
+	// UI display results momentarily
+	// UI automatically increase radius if nothing found (log radius search)
 	
 	
 	//////////////// CONSTANTS //////////
@@ -454,6 +454,9 @@ public class SearchCoreFactory {
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			if (p.hasObjectType(ObjectType.POI) || p.hasObjectType(ObjectType.POI_TYPE)) {
+				return -1;
+			}
+			if(!p.isNoSelectedType() && p.getLastWord().isEmpty()) {
 				return -1;
 			}
 			return SEARCH_AMENITY_TYPE_API_PRIORITY;

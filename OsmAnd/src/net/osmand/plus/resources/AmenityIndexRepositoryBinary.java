@@ -15,7 +15,6 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
