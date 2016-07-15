@@ -269,6 +269,16 @@ public class SearchUICore {
 			}
 		}
 		
+		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
+			if(matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
+				sr.object = api;
+				sr.file = region;
+				matcher.publish(sr);
+			}
+		}
+		
 		@Override
 		public boolean publish(SearchResult object) {
 			if(matcher == null || matcher.publish(object)) {

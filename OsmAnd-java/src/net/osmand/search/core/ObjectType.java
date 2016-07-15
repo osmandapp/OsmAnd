@@ -9,8 +9,10 @@ public enum ObjectType {
 	LOCATION(true), PARTIAL_LOCATION(false),
 	// UI OBJECTS
 	FAVORITE(true), WPT(true), RECENT_OBJ(true), 
+	
 	REGION(true), 
-	SEARCH_API_FINISHED(false), UNKNOWN_NAME_FILTER(false);
+	SEARCH_API_FINISHED(false), SEARCH_API_REGION_FINISHED(false), 
+	UNKNOWN_NAME_FILTER(false);
 	private boolean hasLocation;
 	private ObjectType(boolean location) {
 		this.hasLocation = location;

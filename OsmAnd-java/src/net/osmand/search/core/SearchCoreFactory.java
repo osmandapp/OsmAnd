@@ -160,6 +160,7 @@ public class SearchCoreFactory {
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
 			if (phrase.isNoSelectedType() || phrase.getRadiusLevel() >= 2) {
 				initAndSearchCities(phrase, resultMatcher);
+				resultMatcher.apiSearchFinished(this, phrase);
 				searchByName(phrase, resultMatcher);
 			}
 			return true;
@@ -320,6 +321,7 @@ public class SearchCoreFactory {
 						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10));
 					}
 					r.searchAddressDataByName(req);
+					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
 			}
 		}
@@ -376,6 +378,7 @@ public class SearchCoreFactory {
 				BinaryMapIndexReader r = offlineIterator.next();
 				currentFile[0] = r;
 				r.searchPoiByName(req);
+				resultMatcher.apiSearchRegionFinished(this, r, phrase);
 			}
 			return true;
 		}
@@ -572,6 +575,7 @@ public class SearchCoreFactory {
 				for (BinaryMapIndexReader o : oo) {
 					selected[0] = o;
 					o.searchPoi(req);
+					resultMatcher.apiSearchRegionFinished(this, o, phrase);
 				}
 			}
 			return true;
