@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
@@ -12,6 +13,9 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchHistoryFragment;
+import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -56,7 +60,7 @@ public class SearchListItem {
 				City streetCity = street.getCity();
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					return searchResult.localeRelatedObjectName
-							+ (searchResult.distRelatedObjectName > 0 ? "(" + OsmAndFormatter.getFormattedDistance((float)searchResult.distRelatedObjectName, app) + ")" : "");
+							+ (searchResult.distRelatedObjectName > 0 ? " (" + OsmAndFormatter.getFormattedDistance((float)searchResult.distRelatedObjectName, app) + ")" : "");
 				} else {
 					return streetCity.getName() + " - " + Algorithms.capitalizeFirstLetterAndLowercase(streetCity.getType().name());
 				}
@@ -100,11 +104,19 @@ public class SearchListItem {
 			case LOCATION:
 				break;
 			case FAVORITE:
-				break;
+				FavouritePoint fav = (FavouritePoint) searchResult.object;
+				return fav.getCategory().length() == 0 ?
+						app.getString(R.string.shared_string_favorites) : fav.getCategory();
 			case REGION:
 				break;
 			case RECENT_OBJ:
-				break;
+				HistoryEntry entry = (HistoryEntry) searchResult.object;
+				boolean hasTypeInDescription = !Algorithms.isEmpty(entry.getName().getTypeName());
+				if (hasTypeInDescription) {
+					return entry.getName().getTypeName();
+				} else {
+					return app.getString(R.string.shared_string_history);
+				}
 			case WPT:
 				break;
 			case UNKNOWN_NAME_FILTER:
@@ -116,17 +128,21 @@ public class SearchListItem {
 	public Drawable getIcon() {
 		switch (searchResult.objectType) {
 			case CITY:
-				break;
+				return app.getIconsCache().getIcon(R.drawable.ic_action_building_number,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case VILLAGE:
-				break;
+				return app.getIconsCache().getIcon(R.drawable. ic_action_home_dark,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case POSTCODE:
-				break;
 			case STREET:
-				break;
+				return app.getIconsCache().getIcon(R.drawable.ic_action_street_name,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case HOUSE:
-				break;
+				return app.getIconsCache().getIcon(R.drawable.ic_action_building,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case STREET_INTERSECTION:
-				break;
+				return app.getIconsCache().getIcon(R.drawable.ic_action_intersection,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case POI_TYPE:
 				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
 				if (RenderingIcons.containsBigIcon(abstractPoiType.getIconKeyName())) {
@@ -155,15 +171,21 @@ public class SearchListItem {
 					return null;
 				}
 			case LOCATION:
-				break;
+				return app.getIconsCache().getIcon(R.drawable.ic_action_coordinates_latitude,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case FAVORITE:
-				break;
+				FavouritePoint fav = (FavouritePoint) searchResult.object;
+				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false);
 			case REGION:
-				break;
+				return app.getIconsCache().getIcon(R.drawable.ic_world_globe_dark,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case RECENT_OBJ:
-				break;
+				HistoryEntry entry = (HistoryEntry) searchResult.object;
+				return app.getIconsCache().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()),
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case WPT:
-				break;
+				return app.getIconsCache().getIcon(R.drawable.map_action_flag_dark,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}
