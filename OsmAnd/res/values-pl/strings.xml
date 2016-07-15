@@ -945,7 +945,7 @@
     <string name="safe_mode_description">Uruchamia program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego)</string>
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
-    <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. czy również ją zatrzymać?</string>
+    <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy ją również zatrzymać?</string>
 
     <string name="close_changeset">Zamknij zestaw zmian</string>
     <string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
