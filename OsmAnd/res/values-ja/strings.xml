@@ -1199,7 +1199,7 @@ POIの更新は利用できません</string>
 	<string name="show_more_map_detail">マップの詳細をさらに表示する</string>
 	<string name="show_more_map_detail_descr">下段ズームでベクター形式マップの詳細(道路など)を表示します</string>
 	<string name="favourites_delete_multiple_succesful">お気に入りポイントは正常に削除されました。</string>
-	<string name="favorite_delete_multiple">%1$dのお気に入りと、%2$dのお気に入りグループを削除しようとしています。本当に削除しますか？</string>
+	<string name="favorite_delete_multiple">%1$d個のお気に入りと、%2$d個のお気に入りグループを削除しようとしています。本当に削除しますか？</string>
 	<string name="favorite_home_category">自宅</string>
 	<string name="favorite_friends_category">友人宅</string>
 	<string name="favorite_places_category">場所</string>
@@ -1732,7 +1732,7 @@ POIの更新は利用できません</string>
     <string name="download_tab_updates">更新</string>
     <string name="download_tab_local">ローカル</string>
 	<string name="no_internet_connection">ダウンロード出来ません、インターネット接続を確認してください。</string>
-    <string name="shared_string_dismiss">維持</string>
+    <string name="shared_string_dismiss">何もしない</string>
     <string name="everything_up_to_date">すべてのファイルを最新状態に</string>
     <string name="use_opengl_render">OpenGLレンダリングを使用</string>
     <string name="use_opengl_render_descr">ハードウェアのOpenGLレンダリングを使用します(デバイスによっては動作しません)</string>
@@ -1808,7 +1808,7 @@ POIの更新は利用できません</string>
     <string name="world_ski_missing">スキーマップを表示するためには専用のオフラインマップのダウンロードが必要</string>
     <string name="nautical_maps_missing">航海マップを表示するためには専用のオフラインマップのダウンロードが必要</string>
 	<string name="edit_group">グループ編集</string>
-    <string name="shared_string_release">解放済み</string>
+    <string name="shared_string_release">リリース</string>
 	<string name="plugin_description_title">説明</string>
 	<string name="plugin_install_needs_network">このプラグインのインストールには、インターネット接続が必要です。</string>
 	<string name="get_plugin">取得</string>
@@ -2160,8 +2160,8 @@ POIの更新は利用できません</string>
     <string name="map_markers_other">その他のマーカー</string>
     <string name="upload_anonymously">匿名でアップロード</string>
     <string name="show_transparency_seekbar">透過タイプシークバーを表示</string>
-    <string name="download_files_error_not_enough_space">空き容量が足りません! 一時ファイルの置き場に {3}MB、維持のため {1}MBが必要で、現在利用可能なのは {2}MBです。</string>
-    <string name="download_files_question_space_with_temp">{0}個のファイルを本当にダウンロードしますか? 一時的に {3}MB 維持のために {1}MB が必要です。現在利用可能なのは {2}MBです。</string>
+    <string name="download_files_error_not_enough_space">空き容量が足りません! 一時ファイルの置き場に {3}MB、保存のため {1}MBが必要で、現在利用可能なのは {2}MBです。</string>
+    <string name="download_files_question_space_with_temp">{0}個のファイルを本当にダウンロードしますか? 一時的に {3}MB 保存のために {1}MB が必要です。現在利用可能なのは {2}MBです。</string>
     <string name="upload_osm_note_description">OpenStreetMap.orgプロファイルを使用する場合は、OSMメモを匿名でアップロードできます。</string>
     <string name="upload_osm_note">OSMメモをアップロード</string>
     <string name="map_marker_1st">最初のマップマーカー</string>
