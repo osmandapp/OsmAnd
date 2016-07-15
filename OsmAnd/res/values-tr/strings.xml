@@ -79,8 +79,8 @@
 	<string name="avoid_toll_roads">Ücretli yollardan sakın</string>
 	<string name="osmand_parking_hours">Saat</string>
 	<string name="osmand_parking_minutes">Dakika</string>
-	<string name="global_app_allocated_memory">Ayrılmış hafıza</string>
-	<string name="native_app_allocated_memory">Toplam gerçek hafıza</string>
+	<string name="global_app_allocated_memory">Ayrılmış bellek</string>
+	<string name="native_app_allocated_memory">Toplam yerel bellek</string>
 	
 	<string name="osmand_parking_warning">Uyarı</string>
 	<string name="osmand_parking_add_event">Takvim uygulamasına bir bildirim ekle</string>
@@ -94,7 +94,7 @@
     
     
 	<string name="local_indexes_cat_av">Ses/Video verisi</string>
-    <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinizden emin misiniz?</string>
+    <string name="stop_routing_confirm">Yolbulu durdurmak istediğinizden emin misiniz?</string>
     <string name="clear_dest_confirm">Varış noktasını silmek istediğinizden emin misiniz (ve ara hedefler)?</string>
     <string name="precise_routing_mode">Hassas yönlendirme (alfa)</string>
     <string name="recording_context_menu_show">Göster</string>
@@ -171,7 +171,7 @@
     
 	
 	
-    <string name="map_widget_max_speed">Hız limiti</string>
+    <string name="map_widget_max_speed">Hız sınırı</string>
     <string name="route_descr_lat_lon">Enlem %1$.3f, boylam %2$.3f</string>
     
     
@@ -328,7 +328,7 @@
 	<string name="shared_string_select_all">Hepsini seç</string>
 	<string name="shared_string_refresh">Yenile</string>
 	<string name="fast_route_mode">En hızlı rota</string>
-	<string name="shared_string_download_map">Haritayı indir</string>
+	<string name="shared_string_download_map">Harita indir</string>
 	<string name="maps_could_not_be_downloaded">Bu harita indirilemedi</string>
 	<string name="phone">Telefon</string>
 	<string name="use_high_res_maps">Yüksek çözünürlüklü ekran</string>
@@ -395,7 +395,7 @@
 	
 	
 	<string name="use_online_routing_descr">Rotayı hesaplamak için interneti kullanın</string>
-	<string name="use_online_routing">İnternete bağlı navigasyonu kullanın</string>
+	<string name="use_online_routing">Çevrim içi yolbulu kullan</string>
 	<string name="data_settings">Veriler</string>
 	<string name="additional_settings">İlave ayarlar</string>
 	<string name="shared_string_settings">Ayarlar</string>
@@ -488,7 +488,7 @@
 	<string name="rendering_attr_appMode_name">işleme modu</string>
 	<string name="rendering_attr_appMode_description">Için haritayı optimize et</string>
 	<string name="rendering_attr_contourLines_description">Yakınlaştırma düzeyindenekran(gerektirir kontur veriler):</string>
-	<string name="rendering_attr_contourLines_name">Göster kontur çizgileri</string>
+	<string name="rendering_attr_contourLines_name">Çevre çizgileri göster</string>
 	<string name="rendering_attr_hmRendered_description">Gösterilen haritanın detay miktarını artırın</string>
 	<string name="local_index_routing_data">Rota edilen veri</string>
 	<string name="navigate_point_format">Biçim</string>
@@ -504,7 +504,7 @@
 	<string name="basemap_was_selected_to_download">Baz haritası doğru uygulama çalışması için gereklidir ve indirmek için seçildi.</string>
 	<string name="local_indexes_cat_tile">Çevrimiçi ve önbelleğe çini haritaları</string>
 	
-	<string name="index_settings_descr">Cihazınızda saklanan çevrimdışı harita dosyaları indirin ve yönetmek</string>
+	<string name="index_settings_descr">Aygıtınızda saklanan çevrim dışı harita dosyaları yönet ve indir</string>
 	<string name="map_online_plugin_is_not_installed">Farklı harita kaynaklarını seçmek için Online haritalar eklentisi etkinleştirme</string>
 	<string name="map_online_data">Çevrimiçi ve çini harita</string>
 	<string name="map_online_data_descr">Çevrimiçi haritalar kullan (SD kart üzerine indirme ve önbellek verisi)</string>
@@ -521,7 +521,7 @@
 	<string name="prefs_plugins">Eklentiler</string>
 	
 	<string name="osm_editing_plugin_description">Bu eklenti Osmand aracılığıyla oluşturma veya değiştirme OSM POI nesneleri açma veya OSM hataları yorumlama ve kaydedilen GPX dosyaları katkıda gibi OSM katkıda bulunmak için kullanılabilir. OSM bir topluluk odaklı, küresel kamu malı haritalama projesidir. Detaylar için http://openstreetmap.org başvurun. Aktif katılım takdir ve app kişisel OSM kimlik belirtirseniz katkıları, Osmand doğrudan yapılabilir.</string>
-	<string name="vector_maps_may_display_faster_on_some_devices">Hızlı Vektörel haritalar olasılıkla ekran. Bazı cihazlarda düzgün çalışmayabilir.</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Vektörel haritalar daha hızlı görüntülenir. Bazı aygıtlarda düzgün çalışmayabilir.</string>
 	<string name="play_commands_of_currently_selected_voice">Seçili ses komutları oynat</string>
 	<string name="debugging_and_development">OsmAnd gelişimi</string>
 	<string name="native_rendering">Yerel render etme</string>
@@ -604,7 +604,7 @@
 	<string name="gpx_monitoring_disabled_warn">Yolculuk kaydını GPX aracı veya \'Yolculuk kaydı\' ayarları ile yap.</string>
 	<string name="show_current_gpx_title">Geçerli izi göster</string>
 	    
-	<string name="free_version_message">Bu ücretsiz OsmAnd sürüm ile sınırlı %1$s indirmeler ve çevrimdışı Vikipedi makaleleri desteklemez.</string>
+	<string name="free_version_message">Bu ücretsiz OsmAnd sürümü %1$s indirmeyle sınırlanmıştır ve çevrimdışı Vikipedi maddelerini desteklemez.</string>
 	<string name="free_version_title">Ücretsiz sürüm</string>
 	<string name="index_name_north_america">Kuzey Amerika</string>
 	<string name="index_name_us">Kuzey Amerika - Amerika Birleşik Devletleri</string>
@@ -620,7 +620,7 @@
 	<string name="routing_settings">Navigasyon</string>
 	<string name="routing_settings_descr">Navigasyon için seçenekleri belirtin</string>
 	<string name="global_settings">Genel ayarlar</string>
-	<string name="index_settings">Harita dosyaları yönetin</string>
+	<string name="index_settings">Harita dosyalarını yönet</string>
 	<string name="general_settings">Genel</string>
 	<string name="general_settings_descr">Uygulama için ekran ve ortak ayarları yapılandırma</string>
 	<string name="global_app_settings">Genel uygulama ayarları</string>
@@ -639,7 +639,7 @@
 	 
 	
 	<string name="use_transparent_map_theme">Şeffaf tema</string>
-	<string name="native_library_not_supported">Yerli kitaplığı bu cihazda desteklenmiyor.</string>
+	<string name="native_library_not_supported">Yerel kütüphane bu aygıtta desteklenmiyor.</string>
 	<string name="init_native_library">Yerel kütüphane başlatılıyor…</string>
 	<string name="choose_auto_follow_route">Otomatik merkezi harita görünümü</string>
 	<string name="choose_auto_follow_route_descr">Harita görünümüne kadar zaman mevcut pozisyonu senkronize eder</string>
@@ -658,7 +658,7 @@
 	<string name="city_type_city">Şehir</string>
 	
 	
-	<string name="map_widget_gps_info">GPS Bilgisi</string>
+	<string name="map_widget_gps_info">GPS bilgisi</string>
     <string name="access_arrival_time">Varış Zamanı</string>
     <string name="item_checked">işaretli</string>
     <string name="item_unchecked">işaretsiz</string>
@@ -773,7 +773,7 @@
     <string name="other_location">Diğer</string>
     <string name="install_paid">Tam sürüm</string>
     <string name="cancel_route">Rotayı bırak</string>
-    <string name="cancel_navigation">Navigasyonu durdur</string>
+    <string name="cancel_navigation">Yolbulu durdur</string>
     <string name="clear_destination">Varış noktasını temizle</string>
     <string name="download_using_mobile_internet">Şu anda Wifi ağına bağlı değil. Mevcut internet bağlantısı ile indirilsin mi?</string>
     <string name="street_name">Sokak Adı</string>
@@ -934,10 +934,10 @@
 	<string name="sd_mounted_ro">SD kart sadece okunabilir.\nSadece önceden yüklenen haritaları görebilirsiniz ve genel ağdan (internetten) indiremezsiniz.</string>
 	<string name="first_time_download">Bölgeleri indir</string>
 	<string name="search_nearby">Yakınlarda ara</string>
-	<string name="map_orientation_default">Cihaz ile aynı</string>
+	<string name="map_orientation_default">Aygıt ile aynı</string>
 	<string name="map_orientation_portrait">Dikey</string>
 	<string name="map_orientation_landscape">Yatay</string>
-	<string name="map_screen_orientation_descr">Dikey, yatay veya cihaz</string>
+	<string name="map_screen_orientation_descr">Dikey, yatay veya aygıt</string>
 	<string name="add_new_rule">Yeni kural ekle</string>
 	<string name="transport_Stop">Durak</string>
 	<string name="transport_stops">durak</string>
@@ -1088,7 +1088,7 @@
 	<string name="auto_zoom_close">yakın</string>
 	<string name="auto_zoom_far">menzil</string>
 	<string name="auto_zoom_farthest">uzun menzilli</string>
-	<string name="map_magnifier">Büyütme haritası</string>
+	<string name="map_magnifier">Harita büyüteci</string>
 	<string name="base_world_map">Dünya Haritası</string>
 	
 	<string name="local_index_tile_data_zooms">Zvmhay indirildi : %1$s</string>
@@ -1100,9 +1100,9 @@
 	<string name="copying_osmand_file_failed">Dosyaları kopyalama başarısız oldu</string>    
     <string name="storage_directory_external">Harici depolama</string>
     <string name="storage_directory_multiuser">Çok kullanıcılı depolama</string>
-    <string name="storage_directory_internal_app">Dahili uygulama hafızası</string>
+    <string name="storage_directory_internal_app">Dahili uygulama belleği</string>
     <string name="storage_directory_manual">El ile belirtilmiş</string>
-    <string name="storage_directory_default">Dahili hafıza</string>
+    <string name="storage_directory_default">Dahili bellek</string>
     <string name="storage_directory">Harita Depolama</string>
     <string name="shared_string_copy">Kopyala</string>
     <string name="filter_poi_hint">Ada göre süz</string>
@@ -1206,7 +1206,7 @@
 	<string name="notes">Notlar</string>
 	<string name="online_map">Çevrimiçi harita</string>
 	<string name="roads_only">Sadece yollar</string>
-    <string name="device_memory">Cihaz hafızası</string>
+    <string name="device_memory">Aygıt belleği</string>
     <string name="edit_group">Grubu düzenle</string>
     <string name="parking_place">Park yeri</string>
     <string name="gps_status">GPS durumu</string>
@@ -1234,9 +1234,9 @@
 	<string name="map_widget_right">Sağ panel</string>
 	<string name="map_widget_left">Sol panel</string>
 	<string name="configure_map">Haritayı yapılandır</string>
-    <string name="osmo_device_not_found">Cihaz bulunamadı</string>
+    <string name="osmo_device_not_found">Aygıt bulunamadı</string>
     <string name="speed_limit_exceed">Hız limiti toleransı</string>
-	<string name="traffic_warning_speed_limit">Hız limiti</string>
+	<string name="traffic_warning_speed_limit">Hız sınırı</string>
     <string name="traffic_warning_stop">Dur işareti</string>
     <string name="traffic_warning_speed_camera">Hız kamerası</string>
     <string name="traffic_warning">Trafik uyarısı</string>
@@ -1259,7 +1259,7 @@
     <string name="rendering_value_bicycle_name">Bisiklet</string>
     <string name="rendering_value_pedestrian_name">Yaya</string>
     <string name="osmo_invite">Davet et…</string>
-    <string name="pause_navigation">Navigasyonu Duraklat</string>
+    <string name="pause_navigation">Yolbulu Duraklat</string>
  	<string name="continue_navigation">Navigasyona Devam Et</string>
     <string name="local_map_names">Yerel isimler</string>
     <string name="home">Pano</string>
@@ -1402,7 +1402,7 @@
     <string name="shared_string_upload">Yükleme</string>
     <string name="osm_edit_created_poi">OSM POI oluşturmak</string>
     
-    <string name="world_map_download_descr">Dünya basemap (küçük yakınlaştırır de tüm dünyayı kapsayan) eksik veya eski. Tam bir çevre için Dünya basemap indirirken düşünün lütfen.</string>
+    <string name="world_map_download_descr">Dünya genel bakış haritası (küçük yakınlaştırmalarda tüm dünyayı kapsar) eksik veya eski. Tam bir çevre için dünya genel bakış haritasını indirmeyi düşünün.</string>
     <string name="shared_string_qr_code">QR Kod</string>
     <string name="map_downloaded">Harita indirildi</string>
     <string name="map_downloaded_descr">%1$s Haritası indirildi. Kullanmaya başlamak için geri haritaya gidin.</string>
@@ -1443,7 +1443,7 @@
     <string name="search_on_the_map_item">Harita arama</string>
     <string name="application_dir_description">Eğer harita dosyaları kaydetmek istediğiniz yeri seçin.</string>
     
-    <string name="enter_country_name">Ülke adını girin</string>
+    <string name="enter_country_name">Ülke adı girin</string>
     <string name="confirm_download_roadmaps">Eğer zaten standart (tam) harita var olsa bile, yollar sadece harita indirmek istediğinizden emin misiniz?</string>
     <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
@@ -1466,7 +1466,7 @@
 	<string name="count_of_lines">Hatlarının Sayısı</string>
 	<string name="are_you_sure">Emin misiniz?</string>
 	<string name="unsaved_changes_will_be_lost">Herhangi kaydedilmemiş değişiklikler kaybolur. Devam?</string>
-	<string name="downloads_left_template">%1$s indirme sol</string>
+	<string name="downloads_left_template">%1$s indirme kaldı</string>
 	<string name="shared_string_near">Yakın</string>
     <string name="shared_string_hide">Gizlemek</string>
     <string name="av_video_quality_low">En düşük kalite</string>
@@ -1504,7 +1504,7 @@
     <string name="navigation_intent_invalid">Geçersiz format:%s</string>
 	<string name="plugin_description_title">Açıklama</string>
 	<string name="plugin_install_needs_network">Bu eklentiyi yüklemek için bir internet bağlantısına ihtiyacınız vardır.</string>
-	<string name="get_plugin">Almak</string>
+	<string name="get_plugin">Al</string>
 	<string name="use_fast_recalculation">Akıllı rota yeniden hesaplama</string>
 	<string name="use_fast_recalculation_desc">Uzun yolculuklar için rotanın yalnızca ilk bölümünü yeniden hesapla</string>
 	<string name="do_you_like_osmand">OsmAnd\'ı Sevdinizmi?</string>
@@ -1515,9 +1515,9 @@
 	
 	<string name="shared_string_card_was_hidden">Kart gizlidir</string>
 	<string name="shared_string_undo">UNDO</string>
-	<string name="shared_string_skip">Atlamak</string>
+	<string name="shared_string_skip">Atla</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="offline_maps_and_navigation">Çevrimdışı Haritalar\n&amp; Navigasyon</string>
+	<string name="offline_maps_and_navigation">Çevrim Dışı Haritalar\n&amp; Yolbul</string>
 	<string name="use_english_names_descr">Yerli ve İngilizce isimleri arasında seçin</string>
 	<string name="show_view_angle">Ekran görüntüleme yönü</string>
 	<string name="show_poi_over_map_description">POI\'leri harita üzerinde göster (kullanımının son seçilen filtre)</string>
@@ -1721,7 +1721,7 @@
     <string name="osmo_io_error">"Osmo bağlantı sorunu: "</string>
     <string name="osmo_session_token">Oturum belirteç:%1$s</string>
     <string name="osmo_auth_pending">Yetki bekleniyor …</string>
-    <string name="osmo_settings_uuid">Benzersiz cihaz kimliği</string>
+    <string name="osmo_settings_uuid">Benzersiz aygıt kimliği</string>
     <string name="use_points_as_intermediates">Noktalar arasındaki rotayı hesaplamak</string>
     <string name="osmo_mode_restart">Osmo oturumu yeniden başlatın</string>
     <string name="osmo_mode_on">Osmo oturumu durdurun</string>
@@ -1729,14 +1729,14 @@
     <string name="osmo_settings_debug">Hata ayıklama bilgisi</string>
     <string name="osmo_settings_descr">İzleme ayarlarını ve kurulum kişisel izleme kanalını yapılandırma</string>
     <string name="osmo_settings">Osmo</string>
-    <string name="always_center_position_on_map">Merkezde her zaman Ekran pozisyonu</string>
+    <string name="always_center_position_on_map">Konumu sürekli ortada tut</string>
     <string name="voice_pref_title">Ses</string>
     <string name="misc_pref_title">Çeşitli</string>
     <string name="localization_pref_title">Yerelleştirme</string>
     <string name="index_item_nation_addresses">Ülke adresleri</string>
     <string name="index_item_world_altitude_correction">Dünya rakım düzeltme</string>
-    <string name="index_item_world_seamarks">Dünya seamarks</string>
-    <string name="osmo_connect_to_device">Cihazla bağlantı</string>
+    <string name="index_item_world_seamarks">Dünya deniz işaretleri</string>
+    <string name="osmo_connect_to_device">Aygıtla bağlantı</string>
     <string name="osmo_connect_to_group">Grubu ile bağlantı</string>
     <string name="osmo_connect">Katıl</string>
     <string name="osmo_create_group">Grup oluştur</string>
@@ -1747,7 +1747,7 @@
     <string name="hours_ago">saatler önce</string>
     <string name="minutes_ago">Dakkika önce</string>
     <string name="seconds_ago">Saniye önce</string>
-    <string name="osmo_connected_devices">Bağlı cihazları</string>
+    <string name="osmo_connected_devices">Bağlı aygıtlar</string>
     <string name="osmo_groups">OsMo Grupları / Aygıtlar</string>
     <string name="osmo_auto_send_locations_descr">Uygulama başladığında otomatik olarak gezintiyi başlat ve lokasyonları gönder</string>
     <string name="osmo_auto_send_locations">Otomatik olarak gezinti oturumu başlatın</string>
@@ -1789,7 +1789,7 @@
     <string name="osmo_sign_in">Oturum aç</string>
     <string name="osmo_create_groups_confirm">Grupları oluşturmak için size Osmo bir kayıtlı kullanıcı olmanız gerekmektedir.</string>
     <string name="osmo_credentials_not_valid">Sizin osmo kimlik bilgileri geçerli değildir.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Kişisel kimlikleri yenileyici emin misiniz? Size bağlı tüm cihazlar, bir daha sizi takip etmek mümkün olmayacaktır.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Kişisel kimliklerinizi yenilemek istediğinize emin misiniz? Size bağlanan tüm aygıtlar artık sizi takip edemeyecek.</string>
     <string name="osmo_regenerate_login_ids">Kullanıcı kimliği Regenerate</string>
     <string name="osmo_cancel_moving_target">Hareketli hedef İptal</string>
     <string name="osmo_center_location">Ekranda Merkezi</string>
@@ -1802,11 +1802,11 @@
     <string name="osmo_group_info">Bilgi</string>
     <string name="osmo_group">Osmo grubu</string>
     <string name="osmo_group_share">Grup%2$s bağlayın belirttiğiniz grup kimliği (%1$s) ya da%3$s tıklayın amacıyla.</string>
-    <string name="osmo_share_connect_device">Bu cihazı izleyin kalıcı edelim</string>
+    <string name="osmo_share_connect_device">Bu aygıtı kalıcı olarak takip et</string>
     <string name="osmo_share_current_session">Tarayıcıda Geçerli oturumu paylaşın</string>
     <string name="osmo_session_not_available">Mevcut değil Session, konumlarını Gönder \'olmadığını kontrol edin açıktır.</string>
     <string name="osmo_share_session">Hisse oturumu</string>
-    <string name="osmo_session_id_share">Oturum url cihazı (%1$s) izlemek için</string>
+    <string name="osmo_session_id_share">(%1$s) aygıtını takip için oturum adresi</string>
     <string name="osmo_tracker_id_share">Hedef cihaz%2$s bağlayın amacıyla, bağlantı%3$s tıklayabilir veya izci id (%1$s) belirtmek</string>
     <string name="osmo_track_interval">Günlük aralığı</string>
     <string name="osmo_track_interval_descr">Konumu göndermek için zaman aralığını seçin</string>
@@ -1871,8 +1871,8 @@
     <string name="version_settings_descr">Yenilemesini indir</string>
     <string name="version_settings">kurar</string>
     <string name="rendering_attr_streetLighting_name">Sokak Aydınlatma</string>
-    <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Bir proxy internet iletişim Kurulumu</string>
+    <string name="proxy_pref_title">Vekil sunucu</string>
+    <string name="proxy_pref_descr">Vekil sunucu internet iletişimi kurun</string>
     <string name="settings_privacy">Gizlilik</string>
     <string name="navigation_over_track">İz boyunca navigasyon başlat?</string>
     <string name="avoid_roads_msg">Sen önlemek için yollar seçerek alternatif bir yol tetikleyebilir</string>
@@ -1901,7 +1901,7 @@
     <string name="rendering_attr_subwayMode_name">Metro güzergah</string>
     <string name="lock_screen_request_explanation">%1$s ihtiyaçları güç tasarrufu özelliği ekranını kapatmak için bu izni.</string>
     <string name="wake_on_voice">Ekranı açın</string>
-    <string name="wake_on_voice_descr">Bir dönüşe yaklaşırken cihaz ekranında (kapalı ise) açın</string>
+    <string name="wake_on_voice_descr">Bir dönüşe yaklaşırken (kapalı ise) aygıtın ekranını aç</string>
     <string name="impassable_road">Yolları kaçının …</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Tren yolları</string>
     <string name="rendering_attr_tramRoutes_name">Tramvay yolları</string>
@@ -1943,12 +1943,12 @@
     <string name="save_track_interval">Navigasyon sırasında aralığı Günlüğü</string>
     <string name="save_track_interval_descr">Navigasyon sırasında iz kaydı için oturum aralığını seçin</string>
     <string name="voice_provider_descr">Navigasyon için sesli yönlendirme seçin</string>
-    <string name="enable_proxy_title">HTTP proxy Enable</string>
-    <string name="enable_proxy_descr">Tüm ağ istekleri için HTTP proxy yapılandırma</string>
-    <string name="proxy_host_title">Proxy ana bilgisayarı</string>
-    <string name="proxy_host_descr">Senin proxy\'nın hostname yapılandırın (ör 127.0.0.1)</string>
-    <string name="proxy_port_title">Proxy bağlantı noktası</string>
-    <string name="proxy_port_descr">Senin proxy bağlantı noktası numarasını (örneğin 8118) yapılandırma</string>
+    <string name="enable_proxy_title">HTTP vekil sunucuyu etkinleştir</string>
+    <string name="enable_proxy_descr">Tüm ağ istekleri için HTTP vekil sunucusu yapılandır</string>
+    <string name="proxy_host_title">Vekil sunucu ana bilgisayarı</string>
+    <string name="proxy_host_descr">Vekil sunucunuzun ana bilgisayar adını yapılandırın (ör 127.0.0.1)</string>
+    <string name="proxy_port_title">Vekil sunucu bağlantı noktası</string>
+    <string name="proxy_port_descr">Vekil sunucunuzun bağlantı noktasını yapılandırın (ör 8118)</string>
     <string name="int_hour">h</string>
     <string name="index_tours">Turlar</string>
     <string name="shared_string_all">Tüm</string>
@@ -1989,8 +1989,8 @@
     <string name="route_duration">Zaman:</string>
     <string name="update_now">Şimdi güncelle</string>
 <string name="missing_write_external_storage_permission">App SD kartı kullanma iznine sahip değil.</string>
-<string name="select_voice_provider">Sesli rehberlik Seç</string>
-    <string name="select_voice_provider_descr">Dil Seçin veya sesli yönlendirmeyi karşıdan Yükleyin</string>
+<string name="select_voice_provider">Sesli yönlendirme seç</string>
+    <string name="select_voice_provider_descr">Diliniz için sesli yönlendirme indirin veya seçin</string>
     <string name="impassable_road_desc">Yol seçimini navigasyon sırasında önlemek istiyorsanız</string>
     <string name="shared_string_sound">Ses</string>
     <string name="no_location_permission">App\'in konum verilerine erişme izni yok.</string>
@@ -2117,7 +2117,7 @@
     <string name="access_shared_string_not_installed">Yüklü değil</string>
     <string name="access_widget_expand">Genişlet</string>
     <string name="access_sort">Sırala</string>
-    <string name="map_mode">Harita modu</string>
+    <string name="map_mode">Harita kipi</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX dosyalar seçildi</string>
     <string name="rendering_value_thin_name">İnce</string>
     <string name="rendering_value_medium_name">Orta</string>
@@ -2126,4 +2126,15 @@
     <string name="full_report">Full rapor</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap oturum açma ve parola</string>
     <string name="file_name_containes_illegal_char">Dosya adı uygunsuz karakter içeriyor</string>
-</resources>
+<string name="shared_string_is_open_24_7">7/24 açık</string>
+    <string name="storage_directory_card">Bellek kartı</string>
+    <string name="coords_format">Koordinat biçimi</string>
+    <string name="coords_format_descr">Coğrafi koordinatlar için biçim</string>
+  	<string name="app_mode_bus">Otobüs</string>
+ 	<string name="app_mode_train">Tren</string>
+    <string name="current_track">Şimdiki yol</string>
+    <string name="map_widget_battery">Pil seviyesi</string>
+    <string name="change_markers_position">İmlecin konumunu değiştir</string>
+    <string name="follow_us">Bizi takip edin</string>
+    <string name="map_widget_bearing">Nispi yön</string>
+    </resources>
