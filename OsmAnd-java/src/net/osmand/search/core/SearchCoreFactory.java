@@ -47,12 +47,9 @@ import com.jwetherell.openmap.common.UTMPoint;
 
 
 public class SearchCoreFactory {
-	// TODO partial location (+)
-	
 	// TODO add full text search with comma correct order
 	// TODO MED add full text search without comma and different word order
 	// TODO MED edit in the middle (with words and comma)?
-	
 	// TODO exclude duplicate streets/cities/pois...
 	
 	// TODO UI support poi additional select type and search
