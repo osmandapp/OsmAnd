@@ -64,7 +64,7 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		addAll(items);
 		hasSearchMoreItem = items.size() > 0 && items.get(0) instanceof SearchMoreListItem;
 		setNotifyOnChange(true);
-		notifyDataSetInvalidated();
+		notifyDataSetChanged();
 	}
 
 	@Override

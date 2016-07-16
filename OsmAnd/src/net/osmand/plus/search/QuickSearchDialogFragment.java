@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -67,8 +69,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private net.osmand.Location location = null;
 	private Float heading = null;
 
-	private int screenOrientation;
-
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 3;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
@@ -84,6 +84,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
+	@SuppressLint("PrivateResource")
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
@@ -317,7 +318,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void onResume() {
 		super.onResume();
-		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
+		int screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
 		listAdapter.setScreenOrientation(screenOrientation);
 		OsmandApplication app = getMyApplication();
 		app.getLocationProvider().addCompassListener(this);
@@ -360,13 +361,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
 		SearchResultCollection c = runCoreSearch(text);
-		updateSearchResult(c, false);
+		updateSearchResult(c, false, false);
 	}
 
 	private SearchResultCollection runCoreSearch(String text) {
 		showProgressBar();
 		return searchUICore.search(text, new ResultMatcher<SearchResult>() {
 
+			SearchResultCollection regionResultCollection = null;
+			SearchCoreAPI regionResultApi = null;
 			List<SearchResult> results = new ArrayList<>();
 
 			@Override
@@ -374,23 +377,63 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				switch (object.objectType) {
 					case SEARCH_API_FINISHED:
-						final List<SearchResult> apiResults = results;
+						final SearchCoreAPI searchApi = (SearchCoreAPI) object.object;
+
+						final List<SearchResult> apiResults;
 						final SearchPhrase phrase = object.requiredSearchPhrase;
+						final SearchCoreAPI regionApi = regionResultApi;
+						final SearchResultCollection regionCollection = regionResultCollection;
+
+						final boolean hasRegionCollection = (searchApi == regionApi && regionCollection != null);
+						if (hasRegionCollection) {
+							apiResults = regionCollection.getCurrentSearchResults();
+						} else {
+							apiResults = results;
+							searchUICore.sortSearchResults(phrase, apiResults);
+						}
+
+						regionResultApi = null;
+						regionResultCollection = null;
 						results = new ArrayList<>();
-						searchUICore.sortSearchResults(phrase, apiResults);
+
 						getMyApplication().runInUIThread(new Runnable() {
 							@Override
 							public void run() {
+								boolean appended = false;
 								if (resultCollection == null || resultCollection.getPhrase() != phrase) {
 									resultCollection = new SearchResultCollection(apiResults, phrase);
 								} else {
 									resultCollection.getCurrentSearchResults().addAll(apiResults);
+									appended = true;
 								}
-								updateSearchResult(resultCollection, true);
+								if (!hasRegionCollection) {
+									updateSearchResult(resultCollection, true, appended);
+								}
 							}
 						});
 						break;
 					case SEARCH_API_REGION_FINISHED:
+						regionResultApi = (SearchCoreAPI) object.object;
+
+						final List<SearchResult> regionResults = new ArrayList<>(results);
+						final SearchPhrase regionPhrase = object.requiredSearchPhrase;
+						searchUICore.sortSearchResults(regionPhrase, regionResults);
+
+						getMyApplication().runInUIThread(new Runnable() {
+							@Override
+							public void run() {
+								boolean appended = resultCollection != null && resultCollection.getPhrase() == regionPhrase;
+								regionResultCollection = new SearchResultCollection(regionResults, regionPhrase);
+								if (appended) {
+									List<SearchResult> res = new ArrayList<>(resultCollection.getCurrentSearchResults());
+									res.addAll(regionResults);
+									SearchResultCollection resCollection = new SearchResultCollection(res, regionPhrase);
+									updateSearchResult(resCollection, true, true);
+								} else {
+									updateSearchResult(regionResultCollection, true, false);
+								}
+							}
+						});
 						break;
 					default:
 						results.add(object);
@@ -417,7 +460,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		runCoreSearch(txt);
 	}
 
-	private void updateSearchResult(SearchResultCollection res, boolean addMore) {
+	private void updateSearchResult(SearchResultCollection res, boolean addMore, boolean appended) {
 
 		OsmandApplication app = getMyApplication();
 
@@ -431,7 +474,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						SearchSettings settings = searchUICore.getPhrase().getSettings();
 						searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 						runCoreSearch(searchQuery);
-						updateSearchResult(new SearchResultCollection(), false);
+						updateSearchResult(new SearchResultCollection(), false, false);
 					}
 				});
 				rows.add(moreListItem);
@@ -440,12 +483,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				rows.add(new SearchListItem(app, sr));
 			}
 		}
-		updateListAdapter(rows);
+		updateListAdapter(rows, appended);
 	}
 
-	private void updateListAdapter(List<SearchListItem> listItems) {
+	private void updateListAdapter(List<SearchListItem> listItems, boolean appended) {
 		listAdapter.setListItems(listItems);
-		if (listAdapter.getCount() > 0) {
+		if (listAdapter.getCount() > 0 && !appended) {
 			listView.setSelection(0);
 		}
 	}
