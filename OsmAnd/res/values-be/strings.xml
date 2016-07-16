@@ -2228,4 +2228,5 @@
     <string name="coords_format_descr">Фармат для геаграфічных каардынатаў</string>
   	<string name="shared_string_is_open_24_7">Адкрыта 24/7</string>
     <string name="map_widget_search">Шукаць</string>
-	</resources>
+	<string name="shared_string_from">з</string>
+    </resources>
