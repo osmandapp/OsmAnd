@@ -873,11 +873,20 @@
 	<string name="poi_barbecue">Rostilo</string>
 
 	<string name="poi_craft_agricultural_engines">Oficejo de isto de agrokulturaj maŝinoj</string>
-	<string name="poi_craft_basket_maker">Korb-faristejo</string>
+	<string name="poi_craft_basket_maker">Korb-laborejo</string>
 	<string name="poi_craft_beekeeper">Abelistejo</string>
 	<string name="poi_craft_blacksmith">Forĝejo</string>
 	<string name="poi_craft_brewery">Bierfarejo</string>
-	<string name="poi_craft_boatbuilder">Boat-konstruistejo</string>
+	<string name="poi_craft_boatbuilder">Boat-konstruejo</string>
 	<string name="poi_craft_bookbinder">Librobindejo</string>
-	<string name="poi_craft_carpenter">Ĉarpentistejo</string>
+	<string name="poi_craft_carpenter">Ĉarpentist-laborejo</string>
+	<string name="poi_craft_carpet_layer">Tapiŝ-metista laborejo</string>
+	<string name="poi_craft_caterer">Manĝ-provizista oficejo</string>
+	<string name="poi_craft_clockmaker">Horloĝistejo</string>
+	<string name="poi_craft_dressmaker">Tajloristejo</string>
+	<string name="poi_craft_electrician">Elektristejo</string>
+	<string name="poi_craft_gardener">Ĝardenistejo</string>
+	<string name="poi_craft_glaziery">Vitristejo</string>
+	<string name="poi_craft_handicraft">Manmetistejo</string>
+	<string name="poi_craft_hvac">Oficejo de isto de hejtado, aerumado,</string>
 	</resources>
