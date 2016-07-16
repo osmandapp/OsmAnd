@@ -2204,4 +2204,7 @@
     <string name="storage_directory_card">記憶卡</string>
     <string name="shared_string_is_open_24_7">開啟 24/7</string>
     <string name="map_widget_search">查詢</string>
-	</resources>
+	<string name="shared_string_from">從</string>
+    <string name="city_type_district">地區</string>
+    <string name="city_type_neighbourhood">鄰近</string>
+    </resources>
