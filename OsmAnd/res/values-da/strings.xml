@@ -2385,4 +2385,7 @@
     <string name="shared_string_is_open">Åben nu</string>
     <string name="shared_string_is_open_24_7">Åben 24/7</string>
     <string name="map_widget_search">Søg</string>
-	</resources>
+	<string name="shared_string_from">fra</string>
+    <string name="city_type_district">Distrikt</string>
+    <string name="city_type_neighbourhood">Kvarter</string>
+    </resources>
