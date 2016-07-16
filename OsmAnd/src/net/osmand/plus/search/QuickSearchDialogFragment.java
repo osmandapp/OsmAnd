@@ -265,7 +265,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public int getSearchPriority(SearchPhrase p) {
-				if(!p.isNoSelectedType()) {
+				if(!p.isNoSelectedType() || p.getLastWord().isEmpty()) {
 					return -1;
 				}
 				return SEARCH_FAVORITE_API_PRIORITY;
