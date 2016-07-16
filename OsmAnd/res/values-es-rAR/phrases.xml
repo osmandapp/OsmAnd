@@ -248,7 +248,7 @@
 	<string name="poi_tunnel">Túnel</string>
 	<string name="poi_bridge">Puente</string>
 
-	<string name="poi_speed_camera">Radar</string>
+	<string name="poi_speed_camera">Radar de velocidad</string>
 	<string name="poi_turning_circle">Círculo de giro</string>
 	<string name="poi_motorway_junction">Salida de autopista</string>
 	<string name="poi_junction">Cruce</string>
@@ -2940,12 +2940,12 @@
 	<string name="poi_dispensing_yes">Vende con receta médica</string>
 	<string name="poi_dispensing_no">Vende sin receta médica</string>
 
-	<string name="poi_aerodrome_type_international">Internacional</string>
-	<string name="poi_aerodrome_type_regional">Regional</string>
-	<string name="poi_aerodrome_type_public">Público</string>
-	<string name="poi_aerodrome_type_military">Militar</string>
-	<string name="poi_aerodrome_type_military_public">Militar/Público</string>
-	<string name="poi_aerodrome_type_private">Privado</string>
+	<string name="poi_aerodrome_type_international">Tipo: Internacional</string>
+	<string name="poi_aerodrome_type_regional">Tipo: Regional</string>
+	<string name="poi_aerodrome_type_public">Tipo: Público</string>
+	<string name="poi_aerodrome_type_military">Tipo: Militar</string>
+	<string name="poi_aerodrome_type_military_public">Tipo: Militar/Público</string>
+	<string name="poi_aerodrome_type_private">Tipo: Privado</string>
 
 	<string name="poi_ventilation_shaft">Conducto de ventilación</string>
 
