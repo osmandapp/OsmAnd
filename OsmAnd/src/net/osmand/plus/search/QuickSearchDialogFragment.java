@@ -69,7 +69,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private net.osmand.Location location = null;
 	private Float heading = null;
 
-	public static final int SEARCH_FAVORITE_API_PRIORITY = 3;
+	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
@@ -217,7 +217,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchUICore = new SearchUICore(app.getPoiTypes(), locale, files.toArray(new BinaryMapIndexReader[files.size()]));
 		*/
 
-		LatLon centerLatLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		LatLon centerLatLon;
+		if (location != null) {
+			centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+		} else {
+			centerLatLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		}
 		SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
 				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 		settings = settings.setLang(locale);
@@ -268,6 +273,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		});
 
 		// Setup history search api
+		/*
 		searchUICore.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
 			@Override
 			public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
@@ -299,6 +305,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return SEARCH_HISTORY_API_PRIORITY;
 			}
 		});
+		*/
 	}
 
 	@Override
