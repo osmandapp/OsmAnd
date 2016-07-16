@@ -2241,4 +2241,7 @@
 	<string name="shared_string_open_24_7">Ouvert 24/7</string>
     <string name="shared_string_is_open_24_7">Ouvert 24/7</string>
     <string name="map_widget_search">Rechercher</string>
-	</resources>
+	<string name="shared_string_from">de</string>
+    <string name="city_type_district">District</string>
+    <string name="city_type_neighbourhood">Quartier</string>
+    </resources>
