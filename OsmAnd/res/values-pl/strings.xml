@@ -2218,4 +2218,7 @@
     <string name="shared_string_is_open">Otwarte teraz</string>
     <string name="shared_string_is_open_24_7">Otwarte 24/7</string>
     <string name="map_widget_search">Szukaj</string>
-	</resources>
+	<string name="shared_string_from">z</string>
+    <string name="city_type_district">Dzielnica</string>
+    <string name="city_type_neighbourhood">Sąsiedztwo</string>
+    </resources>
