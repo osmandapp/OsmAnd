@@ -417,7 +417,7 @@
 	<string name="poi_dock">Dok</string>
 	<string name="poi_toilets">Toalety</string>
 	<string name="poi_sauna">Sauna</string>
-	<string name="poi_brothel">Dom publiczny</string>
+	<string name="poi_brothel">Burdel</string>
 	<string name="poi_mortuary">Kostnica</string>
 	<string name="poi_crematorium">Krematorium</string>
 	<string name="poi_internet_cafe">Kawiarenka internetowa</string>
@@ -695,8 +695,8 @@
 	<string name="poi_sinkhole">Dolina</string>
 	<string name="poi_water">Zbiornik wodny</string>
 	<string name="poi_wood">Las</string>
-	<string name="poi_car_sharing">Wypozyczalnia samochodów</string>
-	<string name="poi_boat_sharing">Wypozyczalnia łodzi</string>
+	<string name="poi_car_sharing">Społecznościowa wypożyczalnia samochodów (car-sharing)</string>
+	<string name="poi_boat_sharing">Społecznościowa wypożyczalnia łodzi</string>
 	<string name="poi_mooring">Cumowanie</string>
 	<string name="poi_notice">Wskazówka, znak wodny</string>
 	<string name="poi_radar_transponder">Transponder radarowy, znak wodny</string>
@@ -755,7 +755,7 @@
 
 	<string name="poi_funeral_directors">Grabarze</string>
 	<string name="poi_craft_computer">Składanie komputerów</string>
-	<string name="poi_smoking_area">Obszar dla palaczy</string>
+	<string name="poi_smoking_area">Palarnia</string>
 	<string name="poi_pawnbroker">Lombard</string>
 	<string name="poi_anchorage">Kotwicowisko</string>
 	<string name="poi_anchor_berth">Boja kotwiczna</string>
@@ -892,7 +892,7 @@
 	<string name="poi_crane">Dźwig</string>
 	<string name="poi_country">Kraj</string>
 	<string name="poi_tourism_attraction">Atrakcja turystyczna</string>
-	<string name="poi_cutline">Tablica wyjaśniająca</string>
+	<string name="poi_cutline">Przecinka leśna</string>
 	<string name="poi_tree">Drzewo</string>
 	<string name="poi_kent_carriage_gap">Bramka (szerokość powozu)</string>
 	<string name="poi_icn_ref">Punkt międzynarodowej trasy rowerowej</string>
