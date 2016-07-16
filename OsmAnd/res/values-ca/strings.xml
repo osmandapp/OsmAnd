@@ -2049,4 +2049,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="storage_directory_card">Tarja de memòria</string>
     <string name="shared_string_is_open">Obert ara mateix</string>
     <string name="shared_string_is_open_24_7">Obert 24h/7d</string>
-    </resources>
+    <string name="shared_string_from">des de</string>
+    <string name="city_type_district">Districte</string>
+    <string name="city_type_neighbourhood">Barri</string>
+    <string name="map_widget_search">Cerca</string>
+	</resources>
