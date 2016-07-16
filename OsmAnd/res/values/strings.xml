@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_from">from</string>
+    <string name="city_type_district">District</string>
+    <string name="city_type_neighbourhood">Neighbourhood</string>
     <string name="map_widget_search">Search</string>
 	<string name="shared_string_is_open_24_7">Open 24/7</string>
     <string name="storage_directory_card">Memory card</string>

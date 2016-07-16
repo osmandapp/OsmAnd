@@ -158,10 +158,10 @@ public class QuickSearchDialogFragment extends DialogFragment {
 		clearButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (searchEditText.getText().length() == 0) {
-					dismiss();
-				} else {
-					searchEditText.setText("");
+				if (searchEditText.getText().length() > 0) {
+					String newText = searchUICore.getPhrase().getTextWithoutLastWord();
+					searchEditText.setText(newText);
+					searchEditText.setSelection(newText.length());
 				}
 			}
 		});
