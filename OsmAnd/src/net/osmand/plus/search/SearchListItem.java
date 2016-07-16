@@ -2,8 +2,10 @@ package net.osmand.plus.search;
 
 import android.graphics.drawable.Drawable;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
+import net.osmand.data.City.CityType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
@@ -35,6 +37,27 @@ public class SearchListItem {
 		return searchResult;
 	}
 
+	private String getCityTypeStr(CityType type) {
+		switch (type) {
+			case CITY:
+				return app.getString(R.string.city_type_city);
+			case TOWN:
+				return app.getString(R.string.city_type_town);
+			case VILLAGE:
+				return app.getString(R.string.city_type_village);
+			case HAMLET:
+				return app.getString(R.string.city_type_hamlet);
+			case SUBURB:
+				return app.getString(R.string.city_type_suburb);
+			case DISTRICT:
+				return app.getString(R.string.city_type_district);
+			case NEIGHBOURHOOD:
+				return app.getString(R.string.city_type_neighbourhood);
+			default:
+				return app.getString(R.string.city_type_city);
+		}
+	}
+
 	public String getName() {
 		return searchResult.localeName;
 	}
@@ -44,25 +67,37 @@ public class SearchListItem {
 			case CITY:
 			case POSTCODE:
 				City city = (City) searchResult.object;
-				return Algorithms.capitalizeFirstLetterAndLowercase(city.getType().toString());
+				return getCityTypeStr(city.getType());
 			case VILLAGE:
 				city = (City) searchResult.object;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
-					return Algorithms.capitalizeFirstLetterAndLowercase(city.getType().toString())
-							+ " near "
-							+ searchResult.localeRelatedObjectName
-							+ (searchResult.distRelatedObjectName > 0 ? " (" + OsmAndFormatter.getFormattedDistance((float)searchResult.distRelatedObjectName, app) + ")" : "");
+					if (searchResult.distRelatedObjectName > 0) {
+						return getCityTypeStr(city.getType())
+								+ ", "
+								+ OsmAndFormatter.getFormattedDistance((float) searchResult.distRelatedObjectName, app)
+								+ " " + app.getString(R.string.shared_string_from) + " "
+								+ searchResult.localeRelatedObjectName;
+					} else {
+						return getCityTypeStr(city.getType())
+								+ ", "
+								+ searchResult.localeRelatedObjectName;
+					}
 				} else {
-					return Algorithms.capitalizeFirstLetterAndLowercase(city.getType().toString());
+					return getCityTypeStr(city.getType());
 				}
 			case STREET:
 				Street street = (Street) searchResult.object;
 				City streetCity = street.getCity();
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
-					return searchResult.localeRelatedObjectName
-							+ (searchResult.distRelatedObjectName > 0 ? " (" + OsmAndFormatter.getFormattedDistance((float)searchResult.distRelatedObjectName, app) + ")" : "");
+					if (searchResult.distRelatedObjectName > 0) {
+						return OsmAndFormatter.getFormattedDistance((float) searchResult.distRelatedObjectName, app)
+								+ " " + app.getString(R.string.shared_string_from) + " "
+								+ searchResult.localeRelatedObjectName;
+					} else {
+						return searchResult.localeRelatedObjectName;
+					}
 				} else {
-					return streetCity.getName() + " - " + Algorithms.capitalizeFirstLetterAndLowercase(streetCity.getType().name());
+					return getCityTypeStr(streetCity.getType()) + ", " + streetCity.getName();
 				}
 			case HOUSE:
 				return "";
@@ -108,6 +143,8 @@ public class SearchListItem {
 				return fav.getCategory().length() == 0 ?
 						app.getString(R.string.shared_string_favorites) : fav.getCategory();
 			case REGION:
+				BinaryMapIndexReader binaryMapIndexReader = (BinaryMapIndexReader) searchResult.object;
+				System.out.println(binaryMapIndexReader.getFile().getAbsolutePath() + " " + binaryMapIndexReader.getCountryName());
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) searchResult.object;

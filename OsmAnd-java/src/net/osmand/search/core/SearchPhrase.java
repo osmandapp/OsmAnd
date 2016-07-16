@@ -14,6 +14,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 //immutable object
@@ -267,7 +268,19 @@ public class SearchPhrase {
 		}
 		return sb.toString();
 	}
-	
+
+	public String getTextWithoutLastWord() {
+		StringBuilder sb = new StringBuilder();
+		List<SearchWord> words = new ArrayList<>(this.words);
+		if(Algorithms.isEmpty(lastWordTrim) && words.size() > 0) {
+			words.remove(words.size() - 1);
+		}
+		for(SearchWord s : words) {
+			sb.append(s.getWord()).append(", ");
+		}
+		return sb.toString();
+	}
+
 	public String getStringRerpresentation() {
 		StringBuilder sb = new StringBuilder();
 		for(SearchWord s : words) {
