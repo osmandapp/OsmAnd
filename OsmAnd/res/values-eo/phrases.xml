@@ -308,7 +308,7 @@
 	<string name="poi_religion_muslim">Islamo</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_circus">Cirko</string>
-	<string name="poi_nightclub">Noktoklubejo</string>
+	<string name="poi_nightclub">Noktoklubo</string>
 	<string name="poi_playground">Infana ludejo</string>
 	<string name="poi_bank">Bankejo</string>
 	<string name="poi_beach">Sablobordo</string>
@@ -853,10 +853,31 @@
 	<string name="poi_social_centre">Centro de socio</string>
 	<string name="poi_gallery">Artgalerio</string>
 	<string name="poi_dance_floor">Dancejo</string>
-	<string name="poi_stripclub">Striptiz-klubejo</string>
+	<string name="poi_stripclub">Striptiz-klubo</string>
 	<string name="poi_ski_resort">Skiada centro</string>
 	<string name="poi_beach_resort">Apudmara ripoz-centro</string>
 	<string name="poi_dog_park">Hund-parko</string>
 	<string name="poi_leisure_fishing">Fiŝkaptadejo</string>
 	<string name="poi_hunting_stand">Altembusko ĉasada</string>
+	<string name="poi_lodging">Loĝado</string>
+	<string name="poi_harbour">Haveno</string>
+	<string name="poi_marina">Jaĥt-haveno</string>
+	<string name="poi_miniature_golf">Minigolfludejo</string>
+	<string name="poi_water_park">Akvoparko</string>
+	<string name="poi_recreation_ground">Ripoza tereno</string>
+	<string name="poi_village_green">Verda tereno</string>
+	<string name="poi_trail_riding_station">Parkumejo ĉevala</string>
+
+	<string name="poi_food_court">Manĝo-bazaro</string>
+	<string name="poi_drinking_water">Trinkakvejo</string>
+	<string name="poi_barbecue">Rostilo</string>
+
+	<string name="poi_craft_agricultural_engines">Oficejo de isto de agrokulturaj maŝinoj</string>
+	<string name="poi_craft_basket_maker">Korb-faristejo</string>
+	<string name="poi_craft_beekeeper">Abelistejo</string>
+	<string name="poi_craft_blacksmith">Forĝejo</string>
+	<string name="poi_craft_brewery">Bierfarejo</string>
+	<string name="poi_craft_boatbuilder">Boat-konstruistejo</string>
+	<string name="poi_craft_bookbinder">Librobindejo</string>
+	<string name="poi_craft_carpenter">Ĉarpentistejo</string>
 	</resources>
