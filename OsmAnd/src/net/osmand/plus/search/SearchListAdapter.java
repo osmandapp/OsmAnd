@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,21 +10,52 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
 public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 
-	private OsmandApplication ctx;
+	private OsmandApplication app;
+	private Activity activity;
+	private LatLon location;
+	private Float heading;
 	private boolean hasSearchMoreItem;
+	private int screenOrientation;
 
-	public SearchListAdapter(OsmandApplication ctx) {
-		super(ctx, R.layout.search_list_item);
-		this.ctx = ctx;
+	public SearchListAdapter(OsmandApplication app, Activity activity) {
+		super(app, R.layout.search_list_item);
+		this.app = app;
+		this.activity = activity;
+	}
+
+	public int getScreenOrientation() {
+		return screenOrientation;
+	}
+
+	public void setScreenOrientation(int screenOrientation) {
+		this.screenOrientation = screenOrientation;
+	}
+
+	public LatLon getLocation() {
+		return location;
+	}
+
+	public void setLocation(LatLon location) {
+		this.location = location;
+	}
+
+	public Float getHeading() {
+		return heading;
+	}
+
+	public void setHeading(Float heading) {
+		this.heading = heading;
 	}
 
 	public void setListItems(List<SearchListItem> items) {
@@ -57,7 +89,7 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 		LinearLayout view;
 		if (viewType == 0) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) ctx
+				LayoutInflater inflater = (LayoutInflater) app
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				view = (LinearLayout) inflater.inflate(
 						R.layout.search_more_list_item, null);
@@ -68,7 +100,7 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
 		} else {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) ctx
+				LayoutInflater inflater = (LayoutInflater) app
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				view = (LinearLayout) inflater.inflate(
 						R.layout.search_list_item, null);
@@ -79,7 +111,6 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 			ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 			TextView title = (TextView) view.findViewById(R.id.title);
 			TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
-			TextView distance = (TextView) view.findViewById(R.id.distance);
 
 			imageView.setImageDrawable(listItem.getIcon());
 			String name = listItem.getName();
@@ -91,15 +122,37 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 			} else {
 				subtitle.setVisibility(View.GONE);
 			}
-			float dist = (float) listItem.getDistance();
-			if (dist == 0) {
-				distance.setText("");
-				distance.setVisibility(View.INVISIBLE);
-			} else {
-				distance.setText(OsmAndFormatter.getFormattedDistance(dist, ctx));
-				distance.setVisibility(View.VISIBLE);
-			}
+			updateCompassVisibility(view, listItem);
 		}
 		return view;
+	}
+
+	private void updateCompassVisibility(View view, SearchListItem listItem) {
+		View compassView = view.findViewById(R.id.compass_layout);
+		Location ll = app.getLocationProvider().getLastKnownLocation();
+		boolean showCompass = location != null && listItem.getSearchResult().location != null;
+		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
+		if (gpsFixed && showCompass) {
+			updateDistanceDirection(view, listItem);
+			compassView.setVisibility(View.VISIBLE);
+		} else {
+			if (!showCompass) {
+				compassView.setVisibility(View.GONE);
+			} else {
+				compassView.setVisibility(View.INVISIBLE);
+			}
+		}
+	}
+
+	private void updateDistanceDirection(View view, SearchListItem listItem) {
+		TextView distanceText = (TextView) view.findViewById(R.id.distance);
+		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+
+		float myHeading = heading == null ? 0f : heading;
+		DashLocationFragment.updateLocationView(false, location,
+				myHeading, direction, distanceText,
+				listItem.getSearchResult().location.getLatitude(),
+				listItem.getSearchResult().location.getLongitude(),
+				screenOrientation, app, activity);
 	}
 }
