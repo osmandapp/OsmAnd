@@ -7,6 +7,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
@@ -26,7 +27,6 @@ public class SearchListItem {
 
 	protected OsmandApplication app;
 	private SearchResult searchResult;
-	private double distance;
 
 	public SearchListItem(OsmandApplication app, SearchResult searchResult) {
 		this.app = app;
@@ -227,13 +227,5 @@ public class SearchListItem {
 				break;
 		}
 		return null;
-	}
-
-	public double getDistance() {
-		return distance;
-	}
-
-	public void setDistance(double distance) {
-		this.distance = distance;
 	}
 }

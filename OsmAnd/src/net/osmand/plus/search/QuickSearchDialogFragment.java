@@ -19,15 +19,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -46,7 +50,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class QuickSearchDialogFragment extends DialogFragment {
+public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "QuickSearchDialogFragment";
 	private static final String QUICK_SEARCH_QUERY_KEY = "quick_search_query_key";
@@ -59,6 +63,11 @@ public class QuickSearchDialogFragment extends DialogFragment {
 	private SearchUICore searchUICore;
 	private String searchQuery = "";
 	private SearchResultCollection resultCollection;
+
+	private net.osmand.Location location = null;
+	private Float heading = null;
+
+	private int screenOrientation;
 
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 3;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
@@ -102,7 +111,7 @@ public class QuickSearchDialogFragment extends DialogFragment {
 		setupSearch(mapActivity);
 
 		listView = (ListView) view.findViewById(android.R.id.list);
-		listAdapter = new SearchListAdapter(getMyApplication());
+		listAdapter = new SearchListAdapter(getMyApplication(), getActivity());
 		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -308,10 +317,26 @@ public class QuickSearchDialogFragment extends DialogFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
+		listAdapter.setScreenOrientation(screenOrientation);
+		OsmandApplication app = getMyApplication();
+		app.getLocationProvider().addCompassListener(this);
+		app.getLocationProvider().addLocationListener(this);
+		location = app.getLocationProvider().getLastKnownLocation();
+		updateLocation(location);
+
 		if (!Algorithms.isEmpty(searchQuery)) {
 			searchEditText.setText(searchQuery);
 			searchEditText.setSelection(searchQuery.length());
 		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		OsmandApplication app = getMyApplication();
+		app.getLocationProvider().removeLocationListener(this);
+		app.getLocationProvider().removeCompassListener(this);
 	}
 
 	private void showProgressBar() {
@@ -412,12 +437,7 @@ public class QuickSearchDialogFragment extends DialogFragment {
 				rows.add(moreListItem);
 			}
 			for (final SearchResult sr : res.getCurrentSearchResults()) {
-				SearchListItem listItem = new SearchListItem(app, sr);
-				if (sr.location != null) {
-					LatLon location = res.getPhrase().getLastTokenLocation();
-					listItem.setDistance(MapUtils.getDistance(location, sr.location));
-				}
-				rows.add(listItem);
+				rows.add(new SearchListItem(app, sr));
 			}
 		}
 		updateListAdapter(rows);
@@ -516,4 +536,44 @@ public class QuickSearchDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	@Override
+	public void updateCompassValue(final float value) {
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			final Location location = this.location;
+			getMyApplication().runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					updateLocationUI(location, value);
+				}
+			});
+		} else {
+			heading = lastHeading;
+		}
+	}
+
+	@Override
+	public void updateLocation(final Location location) {
+		this.location = location;
+		final Float heading = this.heading;
+		getMyApplication().runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				updateLocationUI(location, heading);
+			}
+		});
+	}
+
+	private void updateLocationUI(Location location, Float heading) {
+		LatLon latLon = null;
+		if (location != null) {
+			latLon = new LatLon(location.getLatitude(), location.getLongitude());
+		}
+		listAdapter.setLocation(latLon);
+		listAdapter.setHeading(heading);
+		listAdapter.notifyDataSetChanged();
+	}
 }
