@@ -134,7 +134,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (mTts != null){
 			mTts.stop();
 			//Test to see if this fixes #2810
-			mTts = null;
+			//mTts = null;
 		}
 		if (ctx != null) {
 			abandonAudioFocus();
