@@ -2179,4 +2179,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
   	<string name="storage_directory_card">Speicherkarte</string>
     <string name="shared_string_open">Öffnen</string>
 <string name="map_widget_search">Suche</string>
-	</resources>
+	<string name="shared_string_from">von</string>
+    <string name="city_type_district">Stadtteil</string>
+    <string name="city_type_neighbourhood">Nachbarschaft</string>
+    </resources>
