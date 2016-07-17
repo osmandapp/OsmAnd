@@ -363,14 +363,14 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(final Activity uiContext) {
-		showDialogInitializingCommandPlayer(uiContext, true, null, false, false);
+		initVoiceCommandPlayer(uiContext, true, null, false, false);
 	}
 
-	public void showDialogInitializingCommandPlayer(final Activity uiContext, boolean warningNoneProvider) {
-		showDialogInitializingCommandPlayer(uiContext, warningNoneProvider, null, true, false);
+	public void initVoiceCommandPlayer(final Activity uiContext, boolean warningNoneProvider) {
+		initVoiceCommandPlayer(uiContext, warningNoneProvider, null, true, false);
 	}
 
-	public void showDialogInitializingCommandPlayer(final Activity uiContext, boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
+	public void initVoiceCommandPlayer(final Activity uiContext, boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
