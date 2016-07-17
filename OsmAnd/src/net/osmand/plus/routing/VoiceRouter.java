@@ -804,13 +804,13 @@ public class VoiceRouter {
 				// Suppress "route recalculated" prompt for 60sec (this workaround now outdated after more intelligent route recalculation and directional voice prompt suppression)
 				//if (router.getCurrentGPXRoute() == null && (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000)) {
 				// Suppress "route recalculated" prompt for GPX-routing, it makes no sense
-				if (router.getCurrentGPXRoute() == null) {
+				//if (router.getCurrentGPXRoute() == null) {
 					notifyOnVoiceMessage();
 					play.routeRecalculated(router.getLeftDistance(), router.getLeftTime()).play();
 					currentStatus = STATUS_UNKNOWN;
 					suppressDest = false;
 					//lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
-				}
+				//}
 			} else {
 				notifyOnVoiceMessage();
 				play.newRouteCalculated(router.getLeftDistance(), router.getLeftTime()).play();
