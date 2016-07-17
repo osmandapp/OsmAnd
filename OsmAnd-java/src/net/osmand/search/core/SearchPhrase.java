@@ -27,7 +27,7 @@ public class SearchPhrase {
 	private List<BinaryMapIndexReader> indexes;
 	private String lastWordTrim;
 	private QuadRect cache1kmRect;
-	private static final String DELIMITER = " ";
+	private static final String DELIMITER = ",";
 	
 	
 	public enum SearchPhraseDataType {
