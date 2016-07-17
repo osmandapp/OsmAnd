@@ -2195,4 +2195,12 @@
     <string name="access_direction_haptic_feedback_descr">Ange riktningen till målet med vibration</string>
     <string name="access_direction_audio_feedback">Riktning (ljudåterkoppling)</string>
     <string name="access_direction_haptic_feedback">Riktning (vibrationsåterkoppling)</string>
-    </resources>
+    <string name="shared_string_from">från</string>
+    <string name="city_type_district">Distrikt</string>
+    <string name="city_type_neighbourhood">Grannskap</string>
+    <string name="map_widget_search">Sök</string>
+	<string name="shared_string_is_open_24_7">Öppet 24/7</string>
+    <string name="storage_directory_card">Minneskort</string>
+    <string name="coords_format">Koordinatformat</string>
+    <string name="coords_format_descr">Format för de geografiska koordinaterna</string>
+  	</resources>
