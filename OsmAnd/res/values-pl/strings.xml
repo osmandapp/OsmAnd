@@ -76,7 +76,7 @@
     <string name="local_index_items_deleted">Skasowano %1$d z %2$d.</string>
     <string name="local_index_items_restored">Przywrócono %1$d z %2$d.</string>
     <string name="local_index_no_items_to_do">Brak elementów %1$s</string>
-    <string name="local_index_action_do">Zamierzasz %1$s %2$s elementów. Kontynuować?</string>
+    <string name="local_index_action_do">Zostanie %1$s %2$s elementów. Kontynuować?</string>
     <string name="local_index_descr_title">Zarządzanie plikami map</string>
     <string name="local_index_mi_restore">Przywróć</string>
     <string name="local_index_mi_backup">Zarchiwizuj</string>
@@ -1074,7 +1074,7 @@
     <string name="local_indexes_cat_srtm">Poziomice</string>
     <string name="use_kalman_filter_compass_descr">Redukuje szumy w odczytach kompasu, ale zwiększa bezwładność</string>
     <string name="use_kalman_filter_compass">Używanie filtra Kalmana</string>
-    <string name="wait_current_task_finished">Zaczekaj aż bieżące zadanie zostanie zakończone</string>
+    <string name="wait_current_task_finished">Proszę zaczekać, aż bieżące zadanie zostanie zakończone</string>
     <string name="shared_string_downloading">Pobieranie</string>
     <string name="plugin_distance_point_time">czas</string>
     <string name="plugin_distance_point_hdop">precyzja</string>
