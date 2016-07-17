@@ -269,7 +269,7 @@ public class RoutePreferencesMenu {
 
 	public static void applyVoiceProvider(MapActivity mapActivity, String provider) {
 		mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.set(provider);
-		mapActivity.getMyApplication().showDialogInitializingCommandPlayer(mapActivity, false);
+		mapActivity.getMyApplication().initVoiceCommandPlayer(mapActivity, false);
 	}
 
 	private static Set<String> getVoiceFiles(MapActivity mapActivity) {
