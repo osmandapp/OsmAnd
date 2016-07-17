@@ -130,12 +130,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 	@Override
 	public void stop(){
+		ttsRequests = 0;
 		if (mTts != null){
 			mTts.stop();
 			//Test to see if this fixes #2810
 			mTts = null;
 		}
-		ttsRequests = 0;
 		if (ctx != null) {
 			abandonAudioFocus();
 		}
@@ -241,13 +241,13 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 		
 	private void internalClear() {
+		ttsRequests = 0;
+		speechAllowed = false;
 		if (mTts != null) {
 			mTts.shutdown();
 			mTts = null;
 		}
 		mTtsContext = null;
-		ttsRequests = 0;
-		speechAllowed = false;
 		if (ctx != null) {
 			abandonAudioFocus();
 		}
