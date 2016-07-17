@@ -3040,8 +3040,8 @@
 	<string name="poi_thermometer_no">Termometer: nej</string>
 	<string name="poi_hygrometer_yes">Hygrometer: ja</string>
 	<string name="poi_hygrometer_no">Hygrometer: nej</string>
-	<string name="poi_date_yes">Dato skærm: ja</string>
-	<string name="poi_date_no">Dato skærm: nej</string>
+	<string name="poi_date_yes">Datoskærm: ja</string>
+	<string name="poi_date_no">Datoskærm: nej</string>
 
 	<string name="poi_support_pole">Support: pæl</string>
 	<string name="poi_support_wall_mounted">Support: væg</string>
@@ -3079,7 +3079,7 @@
 	<string name="poi_diplomatic_ambassadors_residence">Ambassadørens residens</string>
 	<string name="poi_diplomatic_high_commission">Højkommissær</string>
 
-<string name="poi_fire_operator">Brand operatør</string>
+<string name="poi_fire_operator">Brandoperatør</string>
 
 <string name="poi_diaper_table_count">Blepuslebord</string>
 
