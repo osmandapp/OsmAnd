@@ -76,6 +76,8 @@ public class GeoPointParserUtil {
 			System.out.println(" Passed!");
 		}
 
+		
+		
 		// geo:34,-106
 		url = "geo:" + ilat + "," + ilon;
 		System.out.println("url: " + url);
@@ -228,6 +230,12 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, -Math.abs(dlon)));
+		
+		
+		url = "http://maps.google.com/maps?f=d&saddr=" + dlat +"," +dlon +"&daddr=" +dlat +"," +dlon+"&hl=en"; 
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
 
 		// http://www.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
 		url = "http://www.osmand.net/go.html?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
