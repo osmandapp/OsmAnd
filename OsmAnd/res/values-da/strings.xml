@@ -2388,4 +2388,5 @@
 	<string name="shared_string_from">fra</string>
     <string name="city_type_district">Distrikt</string>
     <string name="city_type_neighbourhood">Kvarter</string>
+    <string name="postcode">Postnummer</string>
     </resources>
