@@ -2182,4 +2182,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="shared_string_from">von</string>
     <string name="city_type_district">Stadtteil</string>
     <string name="city_type_neighbourhood">Nachbarschaft</string>
+    <string name="postcode">Postleitzahl</string>
     </resources>
