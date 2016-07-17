@@ -456,7 +456,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				startActivity(intent);
 			} else {
 				super.onPreferenceChange(preference, newValue);
-				getMyApplication().initVoiceCommandPlayer(this, false);
+				getMyApplication().initVoiceCommandPlayer(this, false, null, true, false);
 			}
 			return true;
 		}
