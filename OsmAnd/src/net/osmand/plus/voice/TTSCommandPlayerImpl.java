@@ -132,6 +132,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	public void stop(){
 		if (mTts != null){
 			mTts.stop();
+			//Test to see if this fixes #2810
+			mTts = null;
 		}
 		ttsRequests = 0;
 		if (ctx != null) {
