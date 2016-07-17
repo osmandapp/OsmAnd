@@ -2229,4 +2229,6 @@
   	<string name="shared_string_is_open_24_7">Адкрыта 24/7</string>
     <string name="map_widget_search">Шукаць</string>
 	<string name="shared_string_from">з</string>
+    <string name="city_type_neighbourhood">Суседства</string>
+    <string name="city_type_district">Раён</string>
     </resources>
