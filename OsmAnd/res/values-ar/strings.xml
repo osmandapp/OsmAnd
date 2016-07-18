@@ -1837,4 +1837,19 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_disable_offroute_recalc_descr">منع إعادة الحساب التلقائي للمسار عندما تبتعد قليلا عن الطريق الصحيح</string>
     <string name="access_disable_wrong_direction_recalc">لا تغير المسار باتجاه خاطئ</string>
     <string name="access_smart_autoannounce">الإخطار الآلي الذكي</string>
+    <string name="access_smart_autoannounce_descr">الإشعار فقط عند تغير الوجهة نحو نقطة الهدف</string>
+    <string name="access_autoannounce_period">مهلة الإخطار الآلي</string>
+    <string name="access_autoannounce_period_descr">اقل مهلة بين الاخطارات</string>
+    <string name="access_map_linked_to_location">الخريطة مرتبطة بالموقع</string>
+    <string name="rendering_value_bold_name">عريض</string>
+    <string name="osmo_group_information_desc">" - جاري إنشاء مجموعة, رجاءا اعط تسمية لها واملأ الوصف\n- من مجموعة التطبيق تم إنشاؤها فقط باستخدام نوع بسيط, اقرأ المزيد على الموقع https://osmo.mobi/g/new\n- باستخدام موقع ويب يمكنك ادارة مجموعة, لوضع العلامات والنقاط متاحة جميعا\n- نحن لا نؤيد استخدام مجموعة مستخدم واحد فقط, اذا لم تكن هذه مجموعة POI\n- المجموعات الخاصة محدودة لـ 8 أشخاص\n- الأحكام والشروط متوفرة دائما بشكل مفصل على الموقع OsMo.mobi\n- اذ كنت بحاجة لشروط خاصة - رجاءا تواصل مع الدعم : osmo.mobi@gmail.com "</string>
+    <string name="osmo_no_connection_msg">تعذر الاتصال بالخادم OsMo:\n- تحقق من اتصالك بالإنترنت\n- تحقق من الإعدادات\n- تفقد تويتر الخاص بنا : https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">مستخدم مجهول لا يمكنه :\n- إنشاء مجموعة;\n- مزامنة المجموعات والأجهزة مع الخادم;\n- إدارة المجموعات والأجهزة من خلال لوحة تحكم خاصة على الموقع.</string>
+    <string name="osmo_auto_send_locations_descr">ابدأ الرحلة و قم بإرسال المواقع تلقائيا بعد تشغيل التطبيق</string>
+    <string name="osmo_auto_send_locations">ابدا الرحلة تلقائيا</string>
+    <string name="osmo_connect_to_device_tracker_id">معرف المتعقب</string>
+    <string name="osmo_connect_to_group_id">معرف المجموعة</string>
+    <string name="osmo_tracker_id">معرف المتعقب</string>
+    <string name="osmo_tracker_id_descr">اضغط لمعاينة معرف المتعقب</string>
+    <string name="osmo_share_my_location">حول الموقع</string>
     </resources>
