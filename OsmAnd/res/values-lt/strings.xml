@@ -376,8 +376,8 @@
 
     <string name="shared_string_next">Kitas</string>
     <string name="shared_string_previous">Ankstesnis</string>
-    <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
-    <string name="unit_of_length">Matavimo vienetai</string>
+    <string name="unit_of_length_descr">Pakeisti ilgio matavimo vienetus</string>
+    <string name="unit_of_length">Ilgio matavimo vienetai</string>
     <string name="si_mi_foots">Mylios/pėdos</string>
     <string name="si_mi_yard">Mylios/jardai</string>
     <string name="si_km_m">Kilometrai/metrai</string>
@@ -834,8 +834,8 @@
     <string name="continue_follow_previous_route_auto">Paskutinis maršrutas nebuvo baigtas. Tęsti jį toliau? (%1$s sekundės)</string>
 
 
-    <string name="show_cameras">Rodyti greičio radarus</string>
-    <string name="show_traffic_warnings">Rodyti greičio ribojimus</string>
+    <string name="show_cameras">Greičio radarai</string>
+    <string name="show_traffic_warnings">Greičio ribojimai</string>
     <string name="avoid_toll_roads">Vengti mokamų kelių</string>
 
     <string name="map_widget_top_text">Gatvės pavadinimas</string>
@@ -870,7 +870,7 @@
     <string name="int_continuosly">Tolydžiai</string>
     <string name="email">el. paštas</string>
     <string name="layer_map_appearance">Konfigūruoti ekraną</string>
-    <string name="show_lanes">Rodyti juostas</string>
+    <string name="show_lanes">Juostos</string>
     <string name="avoid_unpaved">Vengti negrįstų kelių</string>
     <string name="avoid_ferries">Vengti keltų</string>
     <string name="avoid_in_routing_title">Vengti…</string>
@@ -1303,7 +1303,7 @@
     <string name="voice_pref_title">Balsas</string>
     <string name="misc_pref_title">Įvairūs</string>
     <string name="localization_pref_title">Lokalizacija</string>
-    <string name="interrupt_music_descr">Pristabdyti muziką skelbiant pranešimą</string>
+    <string name="interrupt_music_descr">Pristabdyti muziką skelbiant pranešimą (ne tik pamažinti garsumą)</string>
     <string name="interrupt_music">Pristabdyti muziką</string>
     <string name="share_route_as_gpx">Bendrinti maršruto GPX failą</string>
     <string name="share_route_subject">Maršrutas bendrintas per OsmAnd</string>
@@ -1497,9 +1497,9 @@
     <string name="lang_al">Albanų</string>
     <string name="lang_ar">Arabų</string>
     <string name="lang_sr">Serbų</string>
-    <string name="lang_zh_TW">Tradicinė kinų</string>
+    <string name="lang_zh_TW">Kinų (Tradicinė)</string>
     <string name="lang_sc">Sardinų</string>
-    <string name="lang_zh_CN">Supaprastinta kinų</string>
+    <string name="lang_zh_CN">Kinų (supaprastinta)</string>
     <string name="rendering_attr_subwayMode_name">Metro maršrutai</string>
     <string name="continue_navigation">Tęsti navigaciją</string>
     <string name="pause_navigation">Pristabdyti navigaciją</string>
@@ -1630,8 +1630,8 @@
     <string name="shared_string_dismiss">Nesiųsti</string>
     <string name="traffic_warning_railways">Geležinkelio pervaža</string>
 
-    <string name="show_railway_warnings">Rodyti geležinkelių pervažas</string>
-    <string name="show_pedestrian_warnings">Rodyti pėsčiųjų perėjas</string>
+    <string name="show_railway_warnings">Geležinkelių pervažos</string>
+    <string name="show_pedestrian_warnings">Pėsčiųjų perėjos</string>
     <string name="speak_pedestrian">Pėsčiųjų perėjos</string>
     <string name="traffic_warning_pedestrian">Pėčiųjų perėja</string>
 
@@ -1810,7 +1810,7 @@
     <string name="lang_ga">Airių</string>
     <string name="lang_lb">Liuksemburgiečių</string>
     <string name="lang_es_ar">Ispanų (Argentina)</string>
-    <string name="lang_nb">Norvegų Bokmål</string>
+    <string name="lang_nb">Norvegų (Bokmål)</string>
     <string name="lang_vo">Volapiukų</string>
     <string name="lang_th">Tajų</string>
     <string name="lang_te">Telugų</string>
@@ -2153,4 +2153,27 @@
     <string name="rendering_value_medium_name">Vidutinis</string>
     <string name="rendering_value_bold_name">Storas</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap vartotojo vardas ir slaptažodis</string>
+    <string name="postcode">Pašto kodas</string>
+    <string name="city_type_district">Mikrorajonas</string>
+    <string name="map_widget_search">Ieškoti</string>
+	<string name="shared_string_is_open_24_7">Atidaryta 24/7</string>
+    <string name="storage_directory_card">Atminties kortelė</string>
+    <string name="coords_format">Koordinačių formatas</string>
+    <string name="app_mode_bus">Autobusas</string>
+ 	<string name="app_mode_train">Traukinys</string>
+    <string name="access_autoannounce_period_descr">Trumpiausias laiko tarpas tarp pranešimų</string>
+    <string name="access_hint_enter_name">Įrašykite pavadinimą</string>
+    <string name="access_collapsed_list">Sutrauktas sąrašas</string>
+    <string name="access_expanded_list">Išskleistas sąrašas</string>
+    <string name="access_tree_list">Hierarchinis sąrašas</string>
+    <string name="access_widget_expand">Išskleisti</string>
+    <string name="osm_editors_ranking">OSM redaktorių reitingas</string>
+    <string name="osm_live_subscription">OSM Live prenumerata</string>
+    <string name="osm_live_header">Prenumerata leidžia kas valandą gauti viso žemėlapio atnaujinimus. Didžioji pajamų dalis grįžta OSM bendruomenei ir apmokamaas kiekvienas indėlis į OSM. Jei jums patinka OsmAnd ir OSMir norite jį patemti, tai yra idealus būdas tai padaryti.</string>
+    
+    <string name="download_files_question_space_with_temp">Tikrai siųsti {0} failų? Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui. Šiuo metu prieinama tik {2} MB vietos.</string>
+    <string name="lang_es_us">Ispanų (Amerikos)</string>
+    <string name="lang_en_gb">Anglų (Junginė Karalystė)</string>
+    <string name="lang_be_BY">Belarusų (Lotynų)</string>
+    <string name="lang_hu_formal">Vengrų (oficiali)</string>
     </resources>
