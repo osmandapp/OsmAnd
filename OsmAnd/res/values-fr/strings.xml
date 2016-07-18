@@ -2107,7 +2107,7 @@
     <string name="rendering_attr_hideIcons_name">Icônes des PI</string>
     <string name="number_of_contributors">Nombre de contributeurs</string>
     <string name="number_of_edits">Nombre de modifications</string>
-    <string name="reports_for">Signaler pour</string>
+    <string name="reports_for">Rapport pour</string>
 <string name="shared_string_select">Sélectionner</string>
     <string name="shared_string_remove">Supprimer</string>
     <string name="clear_updates_proposition_message">Vous pouvez supprimer les mises à jour et retrouver la carte précédente</string>
@@ -2168,7 +2168,7 @@
     <string name="osm_live_subscription">Abonnement à OSM Live</string>
     <string name="no_map_markers_found">Ajoutez des marqueurs depuis la carte</string>
     <string name="no_waypoints_found">Aucun point de passage trouvé</string>
-    <string name="report">Signaler</string>
+    <string name="report">Rapport</string>
     <string name="select_map_marker">Sélectionner un marqueur</string>
     <string name="map_markers_other">Autres marqueurs</string>
     <string name="map_marker_1st">Premier marqueur</string>
