@@ -65,4 +65,5 @@
 	<string name="poi_road_obstacle">عائق في الطريق</string>
 		<string name="poi_shop_food">متجر طعام</string>
 	<string name="poi_bicycle_transport">دراجات النقل</string>
-		</resources>
+		<string name="poi_farm">مخزن المزرعة</string>
+	</resources>
