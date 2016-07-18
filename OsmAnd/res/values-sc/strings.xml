@@ -2214,4 +2214,9 @@
     <string name="coords_format_descr">Formatu de sas coordinatas geogràficas</string>
   	<string name="storage_directory_card">Ischeda de memòria</string>
     <string name="shared_string_is_open_24_7">Abertu 24/7</string>
+    <string name="postcode">Còdighe postale</string>
+    <string name="shared_string_from">dae</string>
+    <string name="city_type_neighbourhood">Bighinadu</string>
+    <string name="map_widget_search">Chirca</string>
+	<string name="city_type_district">Distretu</string>
     </resources>
