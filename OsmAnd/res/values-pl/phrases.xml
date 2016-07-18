@@ -306,7 +306,7 @@
 	<string name="poi_orienteering">Biegi na orientację</string>
 	<string name="poi_paragliding">Paralotniarstwo</string>
 	<string name="poi_rowing">Wioślarstwo</string>
-	<string name="poi_skating">Łyżwiarstwo</string>
+	<string name="poi_skating">Jazda na rolkach lub Łyżwiarstwo</string>
 	<string name="poi_skiing">Jazda na nartach</string>
 	<string name="poi_soccer">Piłka nożna</string>
 	<string name="poi_surfing">Surfing</string>
@@ -690,9 +690,9 @@
 	<string name="poi_cave_entrance">Wejście do jaskini</string>
 	<string name="poi_rapids">Katarakta</string>
 	<string name="poi_stone">Głaz</string>
-	<string name="poi_ridge">Wzgórze</string>
-	<string name="poi_saddle">Przełęcz</string>
-	<string name="poi_sinkhole">Dolina</string>
+	<string name="poi_ridge">Grzbiet górski</string>
+	<string name="poi_saddle">Punkt siodłowy (przełęcz)</string>
+	<string name="poi_sinkhole">Lej krasowy</string>
 	<string name="poi_water">Zbiornik wodny</string>
 	<string name="poi_wood">Las</string>
 	<string name="poi_car_sharing">Społecznościowa wypożyczalnia samochodów (car-sharing)</string>
@@ -771,9 +771,9 @@
 	<string name="poi_buoy_lateral">Boja równoległa</string>
 	<string name="poi_buoy_safe_water">Boja bezpiecznych wód</string>
 	<string name="poi_buoy_special_purpose">Boja specjalna</string>
-	<string name="poi_daymark">Oznaczenie dnia</string>
+	<string name="poi_daymark">Znacznik dzienny</string>
 	<string name="poi_distance_mark">Znacznik odległości</string>
-	<string name="poi_fog_signal">Syrena mgłowa</string>
+	<string name="poi_fog_signal">Nautofon</string>
 	<string name="poi_harbour_basin">Basen portowy</string>
 	<string name="poi_seamark_light">Znak wodny: światło</string>
 	<string name="poi_seamark_light_major">Znak wodny: główne światło</string>
@@ -1405,4 +1405,5 @@
 	<string name="poi_depth">Głębokość</string>
 
 <string name="poi_office_psychologist">Psycholog</string>
+	<string name="poi_seamark_dyke">Znak wodny: nasyp</string>
 	</resources>
