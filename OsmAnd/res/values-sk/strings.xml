@@ -2056,4 +2056,8 @@
   	<string name="storage_directory_card">Pamäťová karta</string>
     <string name="shared_string_is_open_24_7">Otvorené nonstop</string>
     <string name="map_widget_search">Hľadať</string>
-	</resources>
+	<string name="postcode">Poštové smerovacie číslo</string>
+    <string name="shared_string_from">od</string>
+    <string name="city_type_district">Okres</string>
+    <string name="city_type_neighbourhood">Okolie</string>
+    </resources>
