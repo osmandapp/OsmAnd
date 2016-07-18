@@ -1681,4 +1681,8 @@
     <string name="map_widget_search">Søk</string>
 	<string name="shared_string_is_open_24_7">Åpen 24/7</string>
     <string name="storage_directory_card">Minnekort</string>
+    <string name="postcode">Postnummer</string>
+    <string name="city_type_district">Distrikt</string>
+    <string name="city_type_neighbourhood">Nabolag</string>
+    <string name="shared_string_from">fra</string>
     </resources>
