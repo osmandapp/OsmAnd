@@ -16,4 +16,50 @@
 	<string name="poi_kiosk">كشك</string>
 	<string name="poi_mobile_phone">متجر هواتف نقّالة</string>
 	<string name="poi_motorcycle">متجر درّاجات ناريّة</string>
+	<string name="poi_emergency">حالات الطوارئ</string>
+	<string name="poi_transportation">النقل</string>
+		<string name="poi_filling_station">محطة بنزين</string>
+		<string name="poi_air_transport">النقل الجوي</string>
+		<string name="poi_water_transport">النقل البحري</string>
+		<string name="poi_man_made">من صنع الإنسان</string>
+		<string name="poi_water_supply">الإمداد بالمياه</string>
+		<string name="poi_power">الطاقة</string>
+		<string name="poi_communication">الاتصالات</string>
+		<string name="poi_landuse">استخدام الأراضي</string>
+	<string name="poi_education">التعليم</string>
+	<string name="poi_administrative">الإدارية</string>
+	<string name="poi_sport">الرياضة</string>
+	<string name="poi_tourism">السياحة</string>
+		<string name="poi_sightseeing">مشاهدة المعالم السياحية</string>
+		<string name="poi_internet_access">الوصول إلى شبكة الإنترنت</string>
+	<string name="poi_sustenance">المواد الغذائية</string>
+	<string name="poi_service">الخدمات</string>
+		<string name="poi_craft">الحرف اليدوية</string>
+	<string name="poi_natural">الطبيعية</string>
+	<string name="poi_military">العسكرية</string>
+	<string name="poi_user_defined_other">المحددة من قبل المستخدم</string>
+
+	<string name="poi_palaeontological_site">موقع الكتابات القديمة</string>
+
+	<string name="poi_bakery">مخبزة</string>
+	<string name="poi_alcohol">محل الخمور</string>
+	<string name="poi_cheese">متجر الجبن</string>
+	<string name="poi_convenience">متجر</string>
+	<string name="poi_supermarket">سوبر ماركت</string>
+	<string name="poi_pasta">متجر المعكرونة</string>
+	<string name="poi_antiques">متجر التحف</string>
+	<string name="poi_bathroom_furnishing">أثاث الحمام</string>
+	<string name="poi_camera">الكاميرات والعدسات</string>
+	<string name="poi_diplomatic_high_commission">اللجنة العليا</string>
+
+	<string name="poi_diplomatic_ambassadors_residence">مقر إقامة السفير</string>
+	<string name="poi_diplomatic_delegation">الوفد</string>
+	<string name="poi_diplomatic_permanent_mission">البعثة الدائمة</string>
+	<string name="poi_diplomatic_consulate_general">القنصلية العامة</string>
+	<string name="poi_diplomatic_consulate">القنصلية</string>
+	<string name="poi_min_age">الحد الأدنى للسن</string>
+
+	<string name="poi_aquaculture">تربية الأحياء المائية</string>
+	<string name="poi_pumping_station">محطة الضخ</string>
+
 	</resources>
