@@ -2218,4 +2218,8 @@
     <string name="storage_directory_card">Pomnilniška kartica</string>
     <string name="coords_format">Zapis koordinat</string>
     <string name="coords_format_descr">Zapis geografskih koordinat</string>
-  	</resources>
+  	<string name="postcode">Poštna številka</string>
+    <string name="shared_string_from">od</string>
+    <string name="city_type_district">Območje</string>
+    <string name="city_type_neighbourhood">Soseska</string>
+    </resources>
