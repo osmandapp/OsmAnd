@@ -2016,4 +2016,5 @@
 	<string name="shared_string_from">el</string>
     <string name="city_type_district">Distrikto</string>
     <string name="city_type_neighbourhood">Kvartaleto</string>
+    <string name="postcode">Poŝtkodo</string>
     </resources>
