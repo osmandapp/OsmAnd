@@ -1749,7 +1749,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_direction_audio_feedback">اتجاه صدى الصوت</string>
     <string name="use_osm_live_routing">الملاحة عبر OSM Live</string>
     <string name="access_no_destination">لم يتم تعيين الوجهة</string>
-    <string name="access_disable_wrong_direction_recalc_descr">منع إعادة الحساب التلقائي للمسار عندما تسير في الاتجاه الخاطئ</string>
+    <string name="access_disable_wrong_direction_recalc_descr">"منع إعادة الحساب التلقائي للمسار عند السير في  اتجاه خاطئ"</string>
     <string name="access_default_color">اللون الافتراضي</string>
     <string name="access_category_choice">اختر فئة</string>
     <string name="access_hint_enter_name">أدخل الاسم</string>
@@ -1828,4 +1828,13 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="file_name_containes_illegal_char">يحتوي اسم الملف على حرف غير قانوني</string>
 <string name="reports_for">تقرير عن</string>
     <string name="world_maps">خرائط العالم</string>
+    <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان العلامة</string>
+    <string name="lat_lon_pattern">خط العرض: %1$.6f خط الطول: %2$.6f</string>
+    <string name="access_direction_audio_feedback_descr">اشر عن اتجاه نقطة الهدف بالصوت</string>
+    <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز</string>
+    <string name="use_osm_live_routing_description">اتح الملاحة لتغييرات OSM Live (تجريبي)</string>
+	<string name="access_disable_offroute_recalc">لا تغير المسار عندما تكون خارج الطريق</string>
+    <string name="access_disable_offroute_recalc_descr">منع إعادة الحساب التلقائي للمسار عندما تبتعد قليلا عن الطريق الصحيح</string>
+    <string name="access_disable_wrong_direction_recalc">لا تغير المسار باتجاه خاطئ</string>
+    <string name="access_smart_autoannounce">الإخطار الآلي الذكي</string>
     </resources>
