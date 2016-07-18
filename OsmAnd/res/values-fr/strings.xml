@@ -2168,7 +2168,7 @@
     <string name="osm_live_subscription">Abonnement à OSM Live</string>
     <string name="no_map_markers_found">Ajoutez des marqueurs depuis la carte</string>
     <string name="no_waypoints_found">Aucun point de passage trouvé</string>
-    <string name="report">Rapport</string>
+    <string name="report">Signaler</string>
     <string name="select_map_marker">Sélectionner un marqueur</string>
     <string name="map_markers_other">Autres marqueurs</string>
     <string name="map_marker_1st">Premier marqueur</string>
