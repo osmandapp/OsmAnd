@@ -799,7 +799,11 @@ public class VoiceRouter {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			notifyOnVoiceMessage();
-			play.routeRecalculated(router.getLeftDistance(), router.getLeftTime()).play();
+			if (!newRoute) {
+				play.routeRecalculated(router.getLeftDistance(), router.getLeftTime()).play();
+			} else {
+				play.newRouteCalculated(router.getLeftDistance(), router.getLeftTime()).play();
+			}
 		} else if (player == null) {
 			pendingCommand = new VoiceCommandPending(!newRoute ? VoiceCommandPending.ROUTE_RECALCULATED : VoiceCommandPending.ROUTE_CALCULATED, this);
 		}
