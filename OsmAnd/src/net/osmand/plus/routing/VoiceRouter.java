@@ -462,7 +462,7 @@ public class VoiceRouter {
 		if (currentStatus == STATUS_UNKNOWN) {
 			// Play "Continue for ..." if (1) after route calculation no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 			if ((playGoAheadDist == -1) || (dist > PREPARE_LONG_DISTANCE)) {
-				playGoAheadDist = dist - 80;
+				playGoAheadDist = dist - 3 * TURN_DISTANCE;
 			}
 		}
 
