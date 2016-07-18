@@ -115,7 +115,7 @@ public class VoiceRouter {
 		if(player == null){
 			return null;
 		}
-        lastAnnouncement = System.currentTimeMillis();
+		lastAnnouncement = System.currentTimeMillis();
 		return player.newCommandBuilder();
 	}
 	
@@ -800,33 +800,17 @@ public class VoiceRouter {
 	public void newRouteIsCalculated(boolean newRoute) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
-			if (!newRoute) {
-				// Suppress "route recalculated" prompt for 60sec (this workaround now outdated after more intelligent route recalculation and directional voice prompt suppression)
-				//if (router.getCurrentGPXRoute() == null && (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000)) {
-				// Suppress "route recalculated" prompt for GPX-routing, it makes no sense
-				//if (router.getCurrentGPXRoute() == null) {
-					notifyOnVoiceMessage();
-					play.routeRecalculated(router.getLeftDistance(), router.getLeftTime()).play();
-					currentStatus = STATUS_UNKNOWN;
-					suppressDest = false;
-					//lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
-				//}
-			} else {
-				notifyOnVoiceMessage();
-				play.newRouteCalculated(router.getLeftDistance(), router.getLeftTime()).play();
-				playGoAheadDist = -1;
-				currentStatus = STATUS_UNKNOWN;
-				suppressDest = false;
-			}
+			notifyOnVoiceMessage();
+			play.routeRecalculated(router.getLeftDistance(), router.getLeftTime()).play();
 		} else if (player == null) {
 			pendingCommand = new VoiceCommandPending(!newRoute ? VoiceCommandPending.ROUTE_RECALCULATED
 					: VoiceCommandPending.ROUTE_CALCULATED, this);
-			if (newRoute) {
-				playGoAheadDist = -1;
-			}
-			currentStatus = STATUS_UNKNOWN;
-			suppressDest = false;
 		}
+		if (newRoute) {
+			playGoAheadDist = -1;
+		}
+		currentStatus = STATUS_UNKNOWN;
+		suppressDest = false;
 		nextRouteDirection = null;
 	}
 
