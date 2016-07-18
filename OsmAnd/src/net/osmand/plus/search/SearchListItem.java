@@ -7,7 +7,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
@@ -65,9 +64,10 @@ public class SearchListItem {
 	public String getTypeName() {
 		switch (searchResult.objectType) {
 			case CITY:
-			case POSTCODE:
 				City city = (City) searchResult.object;
 				return getCityTypeStr(city.getType());
+			case POSTCODE:
+				return app.getString(R.string.postcode);
 			case VILLAGE:
 				city = (City) searchResult.object;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
