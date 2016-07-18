@@ -1306,7 +1306,7 @@
     <string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
     <string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
     <string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
-    <string name="osmo_plugin_description">"Ce greffon offre la possibilité d\'un suivi en temps-réel via OpenStreetMap, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre tous les appareils d\'un groupe en temps réel. Et permet aussi de voir les points et trajets partagés avec le groupe.\n\nLe groupe n\'a pas été supprimé depuis des mois, veuillez respecter les règles de création de groupe sur le site OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Ce greffon offre la possibilité d\'un suivi en temps-réel via OpenStreetMap, voir http://osmo.mobi.\n\nVous avez la possibilité de suivre tous les appareils d\'un groupe en temps réel. Ce greffon permet aussi de voir les points et trajets partagés avec le groupe auquel vous appartenez.\n\nSi le groupe n\'a pas été supprimé depuis des mois, réactivez-le en suivant les règles de création de groupe sur le site OsMo.mobi "</string>
     <string name="osmo_plugin_name">Suivi OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
 
@@ -1687,9 +1687,7 @@
 \n\nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de voie (routes, pistes, chemins …) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage desitinéraires cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
 \n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
     <string name="plugin_touringview_name">Grand tourisme</string>
-	<string name="plugin_nautical_descr">"Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.
-\n\nUne carte marine mondiale est disponible en un seul téléchargement nommé \"Carte marine\".
-\n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
+	<string name="plugin_nautical_descr">"Ce greffon enrichit la carte OsmAnd ainsi que l\'application de navigation afin d\'afficher également des cartes marines pour la navigation de plaisance, la voile et pour les autres types de sports nautiques.\n\nCe greffon spécial pour OsmAnd affichera toutes marques nautiques de navigation et symboles graphiques, sur terre aussi bien en ce qui concerne la navigation près du rivage. La description de chaque marque de navigation affiche les détails nécessaires afin de pourvoir les identifier et connaître leurs signification (catégorie, forme, couleur, séquence, référence, etc.).\n\nPour revenir à l’un des styles de cartes classiques de OsmAnd, veuillez désactiver ce greffon, ou changez le «style de la carte» dans le menu «Configurer la carte». "</string>
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
