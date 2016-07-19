@@ -1954,4 +1954,12 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="coords_format">تنسيق الاحداثيات</string>
     <string name="night">ليل</string>
     <string name="osmo_plugin_description">"هذه الاضافة تتيح جزئيا وظيفة المراقبة لاوبن ستريت ماب، انظر https://osmo.mobi\nيمكنك تعقب جميع اجهزة مجموعة المشاركة في الوقت الفعلي.يمكنك ايضا مشاهدة النقاط والتعقبات التي تم رفعها في المجموعة المنضم اليها.\nالمجموعات لم بتم حذفها بعد اشهر، اجعلها تتماشى مع القوانين التي انشئت بها المجموعة على الموقع OsMo.mobi. "</string>
+    <string name="release_2_3">" OSM Live. يدعم خرائط المساهمين والمطورين ويقوم بتحديث الخرائط كل ساعة.\n\nالعلامات الموضعية. طريقة جديدة لتحديد الاماكن على الخريطة بسرعة.\n\nخرائط OSM اكثر مفصلة اكثر بتحديد حدود الدول والعديد من مزايا الخرائط الجديدة.\n\nمظهر محسن.\n\nالعديد من التحسينات على قائمة محتوى الخريطة مثل محتويات بحث البحث عن العناوين.\n\nهذا واكثر.... "</string>
+    <string name="shared_string_move_up">حرك للاعلى</string>
+    <string name="shared_string_move_down">حرك للاسفل</string>
+    <string name="open_street_map_login_and_pass">اسم المستخدم وكلمة المرور ل اوبن ستريت ماب</string>
+    <string name="osm_live_email_desc">مطلوبة لتزويدك بمعلومات عن المساهمات.</string>
+    <string name="select_map_marker">اختر علامة موضعية</string>
+    <string name="show_transparency_seekbar">اظهر شفافية شريط البحث</string>
+    <string name="download_files_error_not_enough_space">لا يوجد مساحة كافية! قد يحتاج هذا الى {3} ميغابايت مؤقتا و {1} ميغابايت دائمة. حاليا هناك {2} ميغابايت متوفرة.</string>
     </resources>
