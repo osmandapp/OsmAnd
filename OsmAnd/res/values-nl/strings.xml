@@ -2294,4 +2294,9 @@
     <string name="storage_directory_card">Geheugenkaart</string>
     <string name="coords_format_descr">Formaat voor de geografische coördinaten</string>
   	<string name="map_widget_search">Zoek</string>
-	</resources>
+	<string name="search_categories">Categorie</string>
+    <string name="postcode">Postcode</string>
+    <string name="shared_string_from">van</string>
+    <string name="city_type_district">Stadsdeel</string>
+    <string name="city_type_neighbourhood">Wijk</string>
+    </resources>
