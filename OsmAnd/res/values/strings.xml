@@ -169,7 +169,7 @@
     <string name="rendering_attr_showMtbRoutes_name">Show MTB routes</string>
     <string name="show_polygons">Show polygons</string>
     <!-- string name="underlay_transparency">Underlay transparency</string -->
-    <string name="find_parking">Find a parking</string>
+    <string name="find_parking">Find parking</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Save changes</string>
     <string name="shared_string_email_address">E-mail address</string>
