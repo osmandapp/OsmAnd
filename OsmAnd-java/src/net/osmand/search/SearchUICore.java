@@ -112,8 +112,11 @@ public class SearchUICore {
 	public void setOnResultsComplete(Runnable onResultsComplete) {
 		this.onResultsComplete = onResultsComplete;
 	}
-	
-	
+
+	public SearchSettings getSearchSettings() {
+		return searchSettings;
+	}
+
 	public void updateSettings(SearchSettings settings) {
 		searchSettings = settings;
 	}

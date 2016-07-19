@@ -52,6 +52,9 @@
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
+        <item name="searchbar_text">@color/searchbar_text_light</item>
+        <item name="searchbar_text_hint">@color/searchbar_text_hint_light</item>
         <item name="list_divider">@color/list_divider_dark</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_light</item>
@@ -113,6 +116,7 @@
         <item name="dialog_inactive_text_color">@color/icon_color_light</item>
         <item name="secondary_icon_color">@color/icon_color_light</item>
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
+        <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
         <item name="android:textColorSecondary">@color/icon_color</item>
@@ -150,6 +154,14 @@
         <!--<item name="actionMenuTextColor">@color/color_white</item>-->
     </style>
 
+    <style name="OsmandLightTheme.SearchTabbar">
+        <item name="android:textColorPrimary">@color/osmand_orange</item>
+        <item name="colorAccent">@color/osmand_orange</item>
+        <item name="android:textColorSecondary">@color/searchbar_tab_inactive_light</item>
+        <item name="android:textColorHint">@color/searchbar_tab_inactive_light</item>
+        <item name="android:background">@color/ctx_menu_info_view_bg_light</item>
+    </style>
+
     <style name="OsmandLightTheme.Toolbar">
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="android:textColorSecondary">@color/color_white</item>
@@ -171,6 +183,13 @@
         <item name="colorAccent">@color/color_white</item>
     </style>
 
+    <style name="OsmandDarkTheme.SearchTabbar">
+        <item name="android:textColorPrimary">@color/osmand_orange</item>
+        <item name="colorAccent">@color/osmand_orange</item>
+        <item name="android:textColorSecondary">@color/searchbar_tab_inactive_dark</item>
+        <item name="android:textColorHint">@color/searchbar_tab_inactive_dark</item>
+        <item name="android:background">@color/ctx_menu_info_view_bg_dark</item>
+    </style>
 
     <style name="OsmandLightTheme.BottomSheet">
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
@@ -196,6 +215,9 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>
+        <item name="searchbar_text">@color/searchbar_text_dark</item>
+        <item name="searchbar_text_hint">@color/searchbar_text_hint_dark</item>
         <item name="list_divider">@color/list_divider_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>
@@ -245,6 +267,7 @@
         <item name="dialog_inactive_text_color">@color/dialog_inactive_text_color_dark</item>
         <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
+        <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
         <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>

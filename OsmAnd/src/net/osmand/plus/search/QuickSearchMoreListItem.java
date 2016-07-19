@@ -4,13 +4,13 @@ import android.view.View.OnClickListener;
 
 import net.osmand.plus.OsmandApplication;
 
-public class SearchMoreListItem extends SearchListItem {
+public class QuickSearchMoreListItem extends QuickSearchListItem {
 
 	private String name;
 	private OnClickListener onClickListener;
 
-	public SearchMoreListItem(OsmandApplication app, String name, OnClickListener onClickListener) {
-		super(app, null);
+	public QuickSearchMoreListItem(OsmandApplication app, String name, OnClickListener onClickListener) {
+		super(app, null, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
 	}

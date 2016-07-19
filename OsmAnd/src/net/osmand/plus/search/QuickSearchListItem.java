@@ -7,6 +7,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
@@ -22,14 +23,16 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
-public class SearchListItem {
+public class QuickSearchListItem {
 
 	protected OsmandApplication app;
 	private SearchResult searchResult;
+	private String lang;
 
-	public SearchListItem(OsmandApplication app, SearchResult searchResult) {
+	public QuickSearchListItem(OsmandApplication app, SearchResult searchResult, String lang) {
 		this.app = app;
 		this.searchResult = searchResult;
+		this.lang = lang;
 	}
 
 	public SearchResult getSearchResult() {
@@ -58,6 +61,17 @@ public class SearchListItem {
 	}
 
 	public String getName() {
+		switch (searchResult.objectType) {
+			case STREET_INTERSECTION:
+				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
+					return searchResult.localeName + " - " + searchResult.localeRelatedObjectName;
+				}
+				break;
+			case RECENT_OBJ:
+				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
+				PointDescription pd = historyEntry.getName();
+				return pd.getSimpleName(app, false);
+		}
 		return searchResult.localeName;
 	}
 
@@ -73,7 +87,7 @@ public class SearchListItem {
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					if (searchResult.distRelatedObjectName > 0) {
 						return getCityTypeStr(city.getType())
-								+ ", "
+								+ " • "
 								+ OsmAndFormatter.getFormattedDistance((float) searchResult.distRelatedObjectName, app)
 								+ " " + app.getString(R.string.shared_string_from) + " "
 								+ searchResult.localeRelatedObjectName;
@@ -86,22 +100,25 @@ public class SearchListItem {
 					return getCityTypeStr(city.getType());
 				}
 			case STREET:
-				Street street = (Street) searchResult.object;
-				City streetCity = street.getCity();
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
-					if (searchResult.distRelatedObjectName > 0) {
-						return OsmAndFormatter.getFormattedDistance((float) searchResult.distRelatedObjectName, app)
-								+ " " + app.getString(R.string.shared_string_from) + " "
-								+ searchResult.localeRelatedObjectName;
+					return searchResult.localeRelatedObjectName;
+				}
+				return "";
+			case HOUSE:
+				if (searchResult.relatedObject != null) {
+					Street relatedStreet = (Street) searchResult.relatedObject;
+					if (relatedStreet.getCity() != null) {
+						return searchResult.localeRelatedObjectName + ", " + relatedStreet.getCity().getName(lang, true);
 					} else {
 						return searchResult.localeRelatedObjectName;
 					}
-				} else {
-					return getCityTypeStr(streetCity.getType()) + ", " + streetCity.getName();
 				}
-			case HOUSE:
 				return "";
 			case STREET_INTERSECTION:
+				Street street = (Street) searchResult.object;
+				if (street.getCity() != null) {
+					return street.getCity().getName(lang, true);
+				}
 				return "";
 			case POI_TYPE:
 				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
@@ -160,6 +177,22 @@ public class SearchListItem {
 				break;
 		}
 		return searchResult.objectType.name();
+	}
+
+	public Drawable getTypeIcon() {
+		switch (searchResult.objectType) {
+			case FAVORITE:
+				return app.getIconsCache().getThemedIcon(R.drawable.ic_small_group);
+			case RECENT_OBJ:
+				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
+				String typeName = historyEntry.getName().getTypeName();
+				if (typeName != null && !typeName.isEmpty()) {
+					return app.getIconsCache().getThemedIcon(R.drawable.ic_small_group);
+				} else {
+					return null;
+				}
+		}
+		return null;
 	}
 
 	public Drawable getIcon() {
