@@ -2198,4 +2198,5 @@
     <string name="city_type_district">Distrito</string>
     <string name="city_type_neighbourhood">Vecindario</string>
     <string name="postcode">Código postal</string>
+    <string name="search_categories">Categorías</string>
     </resources>
