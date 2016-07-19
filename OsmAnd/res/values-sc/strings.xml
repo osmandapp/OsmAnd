@@ -1542,7 +1542,7 @@
     <string name="map_widget_right">Pannellu de destra</string>
     <string name="map_widget_left">Pannellu de manca</string>
     <string name="rendering_category_routes">Àndalas</string>
-    <string name="rendering_category_transport">Carronzu/trasportu</string>
+    <string name="rendering_category_transport">Trasportu pùblicu</string>
     <string name="rendering_category_others">Àteros atributos de sa mapa</string>
     <string name="map_widget_appearance_rem">Elementos chi abarrant</string>
     <string name="map_widget_top">Barra de istadu</string>
