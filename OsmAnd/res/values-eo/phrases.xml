@@ -1004,7 +1004,7 @@
 	<string name="poi_notice">Marmarko: informejo</string>
 	<string name="poi_topmark">Marmarko: supra-marko</string>
 	<string name="poi_small_craft_facility">Marnavigado: eta metiejo</string>
-	<string name="poi_pile">Marmarko: paliso</string>
+	<string name="poi_pile">Marmarko: bolardo</string>
 	<string name="poi_radar_transponder">Marmarko: radara transsend-respond-ilo (ang. transponder)</string>
 	<string name="poi_radio_station">Marmarko: radiostacio</string>
 	<string name="poi_signal_station_traffic">Signalstacio: trafiko</string>
@@ -1065,4 +1065,14 @@
 
 	<string name="facebook">Fejsbuko</string>
 	<string name="poi_skype">Skajpo</string>
+	<string name="poi_bollard">Paliseto</string>
+	<string name="poi_cycle_barrier">Barilo kontraŭbicikla</string>
+	<string name="poi_motorcycle_barrier">Barilo kontraŭmotorcikla</string>
+	<string name="poi_block">Bloko</string>
+	<string name="poi_bus_trap">Kaptilo kontraŭpersonaŭta</string>
+	<string name="poi_cattle_grid">Barilo kontraŭbruta</string>
+	<string name="poi_full_height_turnstile">Rotacia-barilpordo homalta</string>
+	<string name="poi_bump_gate">Aŭto-puŝebla pordego</string>
+	<string name="poi_general_barrier">Ĝenerala barilo</string>
+	<string name="poi_stile">Trans-baril-ejo</string>
 	</resources>
