@@ -36,6 +36,7 @@ public class SearchResult {
 	public Collection<String> otherNames;
 	
 	public String localeRelatedObjectName;
+	public Object relatedObject;
 	public double distRelatedObjectName;
 	
 	public int wordsSpan = 1;

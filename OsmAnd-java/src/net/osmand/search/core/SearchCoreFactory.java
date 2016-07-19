@@ -81,6 +81,8 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 7;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 7;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 7;
+	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
+	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 	
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 		@Override
@@ -198,6 +200,7 @@ public class SearchCoreFactory {
 					sr.localeName = c.getName(phrase.getSettings().getLang(), true);
 					sr.otherNames = c.getAllNames(true);
 					sr.localeRelatedObjectName = sr.file.getRegionName();
+					sr.relatedObject = sr.file;
 					sr.location = c.getLocation();
 					sr.priority = 1;
 					sr.priorityDistance = 0.1;
@@ -238,6 +241,7 @@ public class SearchCoreFactory {
 						sr.localeName = object.getName(phrase.getSettings().getLang(), true);
 						sr.otherNames = object.getAllNames(true);
 						sr.localeRelatedObjectName = sr.file.getRegionName();
+						sr.relatedObject = sr.file;
 						sr.location = object.getLocation();
 						sr.priorityDistance = 1;
 						sr.priority = priority;
@@ -253,6 +257,7 @@ public class SearchCoreFactory {
 							}
 							sr.objectType = ObjectType.STREET;
 							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), true);
+							sr.relatedObject = ((Street)object).getCity();
 						} else if (object instanceof City) {
 							CityType type = ((City)object).getType();
 							if (type == CityType.CITY || type == CityType.TOWN) {
@@ -292,6 +297,7 @@ public class SearchCoreFactory {
 								}
 								if(c != null) {
 									sr.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), true);
+									sr.relatedObject = c;
 									sr.distRelatedObjectName = minDist; 
 								}
 								sr.objectType = ObjectType.VILLAGE;
@@ -332,6 +338,8 @@ public class SearchCoreFactory {
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 1000 * 1000;
+		private static final int BBOX_RADIUS_INSIDE = 10000 * 1000; // to support city search for basemap
+		
 		
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
@@ -341,7 +349,7 @@ public class SearchCoreFactory {
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS, 
 					SearchPhraseDataType.POI);
-			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
+			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
 					phrase.getLastWord(), 
@@ -361,8 +369,16 @@ public class SearchCoreFactory {
 							sr.preferredZoom = 17;
 							sr.file = currentFile[0];
 							sr.location = object.getLocation();
+							if(object.getSubType().equals("city") || 
+									object.getSubType().equals("country")) {
+								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
+							} else if(object.getSubType().equals("town")) {
+								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
+							} else {
+								sr.priorityDistance = 1;	
+							}
 							sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
-							sr.priorityDistance = 1;
+							
 							sr.objectType = ObjectType.POI;
 							
 							resultMatcher.publish(sr);
@@ -731,6 +747,8 @@ public class SearchCoreFactory {
 					res.file = file;
 					res.priority = priority;
 					res.priorityDistance = 0;
+					res.relatedObject = s;
+					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), true);
 					res.objectType = ObjectType.HOUSE;
 					if(interpolation) {
 						res.location = b.getLocation(b.interpolation(lw));
@@ -750,6 +768,8 @@ public class SearchCoreFactory {
 						res.localeName = street.getName(phrase.getSettings().getLang(), true);
 						res.object = street;
 						res.file = file;
+						res.relatedObject = s;
+						res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), true);
 						res.priorityDistance = 0;
 						res.objectType = ObjectType.STREET_INTERSECTION;
 						res.location = street.getLocation();
