@@ -2054,4 +2054,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="city_type_neighbourhood">Barri</string>
     <string name="map_widget_search">Cerca</string>
 	<string name="postcode">Codi postal</string>
+    <string name="search_categories">Categories</string>
     </resources>
