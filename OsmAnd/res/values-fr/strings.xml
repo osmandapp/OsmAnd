@@ -2243,4 +2243,5 @@
     <string name="city_type_district">District</string>
     <string name="city_type_neighbourhood">Quartier</string>
     <string name="postcode">Code postal</string>
+    <string name="search_categories">Catégories</string>
     </resources>
