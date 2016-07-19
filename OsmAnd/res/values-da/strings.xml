@@ -2260,7 +2260,7 @@
     <string name="shared_string_email_address">Email adresse</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Gem ændringer</string>
-    <string name="find_parking">Find en parkeringsplads</string>
+    <string name="find_parking">Find parkering</string>
     <string name="show_polygons">Vis polygoner</string>
     <string name="underlay_transparency">Underlejringsgennemsigtighed</string>
     <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>

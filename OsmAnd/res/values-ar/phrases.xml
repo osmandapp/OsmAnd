@@ -66,4 +66,10 @@
 		<string name="poi_shop_food">متجر طعام</string>
 	<string name="poi_bicycle_transport">دراجات النقل</string>
 		<string name="poi_farm">مخزن المزرعة</string>
+	<string name="poi_accomodation">أماكن الإقامة</string>
+		<string name="poi_entertainment">أوقات الفراغ</string>
+		<string name="poi_aquaculture_mussels">تربية الأحياء المائية: بلح البحر</string>
+
+	<string name="poi_aquaculture_fish">تربية الأحياء المائية: الأسماك</string>
+	<string name="poi_aquaculture_shrimp">تربية الأحياء المائية: الجمبري</string>
 	</resources>

@@ -133,7 +133,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		ttsRequests = 0;
 		if (mTts != null){
 			mTts.stop();
-			//Test to see if this fixes #2810
+			//Nullifying here may fix #2810, but should be overkill. Let's see if static status variables in VoiceRouter do the job as well.
 			//mTts = null;
 		}
 		if (ctx != null) {

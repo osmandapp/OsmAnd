@@ -60,9 +60,9 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		}
 		if (mediaPlayer != null){
 			mediaPlayer.stop();
-			//Test to see if this fixes #1351
-			mediaPlayer.release();
-			mediaPlayer = null;
+			//Nullifying here fixes #1351, but may be overkill. Let's see if static status variables in VoiceRouter do the job as well.
+			//mediaPlayer.release();
+			//mediaPlayer = null;
 		}
 		if (ctx != null) {
 			abandonAudioFocus();
