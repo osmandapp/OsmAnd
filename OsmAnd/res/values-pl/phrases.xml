@@ -97,7 +97,7 @@
 	<string name="poi_emergency_phone">Telefon alarmowy</string>
 	<string name="poi_fire_hydrant">Hydrant</string>
 	<string name="poi_fire_extinguisher">Gaśnica</string>
-	<string name="poi_fire_flapper">Koc gaśniczy</string>
+	<string name="poi_fire_flapper">Tłumica (pożarnictwo)</string>
 	<string name="poi_fire_hose">Wąż pożarniczy</string>
 	<string name="poi_fire_water_pond">Zbiornik przeciwpożarowy</string>
 	<string name="poi_grit_bin">Piasek gaśniczy</string>
@@ -1406,4 +1406,9 @@
 
 <string name="poi_office_psychologist">Psycholog</string>
 	<string name="poi_seamark_dyke">Znak wodny: nasyp</string>
+	<string name="poi_denomination_scientist">Stowarzyszenie Chrześcijańskiej Nauki</string>
+	<string name="poi_denomination_unitarian">Unitarianizm</string>
+	<string name="poi_supervised_yes">Nadzorowany</string>
+	<string name="poi_rural">Wiejski</string>
+
 	</resources>
