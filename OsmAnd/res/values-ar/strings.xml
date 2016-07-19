@@ -1938,4 +1938,16 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="lang_bn">البنغالية</string>
     <string name="lang_et">الإستونية</string>
     <string name="lang_ga">الأيرلندية</string>
+    <string name="lang_is">الإسلندية</string>
+    <string name="lang_ku">الكردية</string>
+    <string name="lang_la">اللاتينية</string>
+    <string name="lang_mk">المقدونية</string>
+    <string name="lang_ms">الماليزية</string>
+    <string name="lang_lb">اللوكسمبرجية</string>
+    <string name="lang_os">الأوسيتية</string>
+    <string name="lang_th">التايلاندية</string>
+    <string name="lang_vo">فولابوك</string>
+    <string name="lang_te">التيلوغوية</string>
+    <string name="lang_tl">التاغالوغية</string>
+    <string name="lang_nv">النافاجونية</string>
     </resources>
