@@ -273,7 +273,7 @@
 	<string name="poi_mountain_pass">Montpasejo</string>
 	<string name="poi_gate">Pordego</string>
 	<string name="poi_city_wall">Muro urba</string>
-	<string name="poi_lift_gate">Bariero</string>
+	<string name="poi_lift_gate">Bariero (levebla)</string>
 	<string name="poi_toll_booth">Vojpagejo</string>
 	<string name="poi_border_control">Landlima kontrolejo</string>
 	<string name="poi_traffic_calming_bump">Stratĝibo kurta</string>
@@ -1071,8 +1071,49 @@
 	<string name="poi_block">Bloko</string>
 	<string name="poi_bus_trap">Kaptilo kontraŭpersonaŭta</string>
 	<string name="poi_cattle_grid">Barilo kontraŭbruta</string>
-	<string name="poi_full_height_turnstile">Rotacia-barilpordo homalta</string>
+	<string name="poi_full_height_turnstile">Turniĝebla barilpordo (hom-alta)</string>
 	<string name="poi_bump_gate">Aŭto-puŝebla pordego</string>
 	<string name="poi_general_barrier">Ĝenerala barilo</string>
 	<string name="poi_stile">Trans-baril-ejo</string>
+	<string name="poi_debris">Ŝtonruba barilo</string>
+	<string name="poi_jersey_barrier">Interkoridora (nov-ĵerzeja) barilo</string>
+	<string name="poi_height_restrictor">Alt-limigilo</string>
+	<string name="poi_horse_stile">Ĉeval-trairejo</string>
+	<string name="poi_turnstile">Turniĝebla barilpordo (duonhom-alta)</string>
+	<string name="poi_kissing_gate">Nurhoma pordego</string>
+	<string name="poi_sally_port">Pordego enmura</string>
+	<string name="poi_swing_gate">Bariero (turnebla)</string>
+	<string name="poi_kent_carriage_gap">Kaleŝ-trairejo (kontraŭaŭta)</string>
+	<string name="poi_barrier_entrance">Trairejo</string>
+	<string name="poi_ncn_ref">Punkto de biciklovojo nacia</string>
+	<string name="poi_rcn_ref">Punkto de biciklovojo regiona</string>
+	<string name="poi_lcn_ref">Punkto de biciklovojo loka</string>
+	<string name="poi_iwn_ref">Punkto de piedirada vojo internacia</string>
+	<string name="poi_icn_ref">Punkto de biciklovojo internacia</string>
+	<string name="poi_nwn_ref">Punkto de piedirada vojo nacia</string>
+	<string name="poi_rwn_ref">Punkto de piedirada vojo regiona</string>
+	<string name="poi_lwn_ref">Punkto de piedirada vojo loka</string>
+
+	<string name="poi_route_hiking_iwn_poi">Piedirada vojo internacia</string>
+	<string name="poi_route_hiking_nwn_poi">Piedirada vojo nacia</string>
+	<string name="poi_route_hiking_rwn_poi">Piedirada vojo regiona</string>
+	<string name="poi_route_hiking_lwn_poi">Piedirada vojo loko</string>
+	<string name="poi_route_hiking_ref_poi">Referenco pri piedirada vojo</string>
+
+	<string name="poi_collection_times">Prenoj de postaĵoj je</string>
+	<string name="poi_phone">Telefono</string>
+	<string name="poi_website">Retpaĝo</string>
+	<string name="poi_email">Retpoŝto</string>
+	<string name="poi_fax">Telekopiilo</string>
+	<string name="twitter">Twitter</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_mobile">Poŝtelefono</string>
+	<string name="poi_ele">Altitudo</string>
+	<string name="poi_abandoned">Forlasita</string>
+	<string name="poi_abandoned_poi">Forlasita objekto</string>
+	<string name="poi_disused">Neuzata</string>
+
 	</resources>
