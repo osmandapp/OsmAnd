@@ -1951,4 +1951,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="lang_tl">التاغالوغية</string>
     <string name="lang_nv">النافاجونية</string>
     <string name="map_widget_magnetic_bearing">تأثير مغناطيسي</string>
+    <string name="coords_format">تنسيق الاحداثيات</string>
+    <string name="night">ليل</string>
+    <string name="osmo_plugin_description">"هذه الاضافة تتيح جزئيا وظيفة المراقبة لاوبن ستريت ماب، انظر https://osmo.mobi\nيمكنك تعقب جميع اجهزة مجموعة المشاركة في الوقت الفعلي.يمكنك ايضا مشاهدة النقاط والتعقبات التي تم رفعها في المجموعة المنضم اليها.\nالمجموعات لم بتم حذفها بعد اشهر، اجعلها تتماشى مع القوانين التي انشئت بها المجموعة على الموقع OsMo.mobi. "</string>
     </resources>
