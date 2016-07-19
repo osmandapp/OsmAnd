@@ -116,8 +116,8 @@
 	<string name="poi_carpet">Botiga de catifes</string>
 	<string name="poi_clothes">Magatzem de roba</string>
 	<string name="poi_clothes_children">Roba infantil</string>
-	<string name="poi_curtain">Pelleteria</string>
-	<string name="poi_fabric">Botiga de teixits</string>
+	<string name="poi_curtain">Cortines</string>
+	<string name="poi_fabric">Merceria</string>
 	<string name="poi_public_transport_platform">Parada de transport públic</string>
 	<string name="poi_bus_station">Estació d\'autobusos</string>
 	<string name="poi_railway_station">Estació de tren</string>
@@ -2225,5 +2225,31 @@
 	<string name="poi_free_flying_guest_guidelines_no">Directrius de convidat pel vol lliure: no</string>
 
 	<string name="poi_solarium">Solàrium</string>
+
+	<string name="poi_provided_for_girl_yes">Adient per noies: sí</string>
+	<string name="poi_provided_for_woman_yes">Adient per dones: sí</string>
+	<string name="poi_provided_for_infant_yes">Adient per nadons: sí</string>
+	<string name="poi_provided_for_infant_no">Adient per nadons: no</string>
+	<string name="poi_provided_for_toddler_yes">Adient per quitxalla: sí</string>
+	<string name="poi_provided_for_toddler_no">Adient per quitxalla: no</string>
+	<string name="poi_provided_for_child_yes">Adient per nens: sí</string>
+	<string name="poi_provided_for_child_no">Adient per nens: no</string>
+	<string name="poi_provided_for_adult_yes">Adient per adults: sí</string>
+	<string name="poi_provided_for_adult_no">Adient per adults: no</string>
+	<string name="poi_provided_for_woman_no">Adient per dones: no</string>
+	<string name="poi_provided_for_senior_yes">Adient per gent gran: sí</string>
+	<string name="poi_provided_for_senior_no">Adient per gent gran: no</string>
+	<string name="poi_provided_for_girl_no">Adient per noies: no</string>
+	<string name="poi_provided_for_man_yes">Adient per homes: sí</string>
+	<string name="poi_provided_for_man_no">Adient per homes: no</string>
+	<string name="poi_provided_for_boy_yes">Adient per nois: sí</string>
+	<string name="poi_provided_for_boy_no">Adient per nois: no</string>
+
+	<string name="poi_capacity_beds">Capacitat (llits)</string>
+
+	<string name="poi_emergency_yes">Urgències: sí</string>
+	<string name="poi_emergency_no">Urgències: no</string>
+	<string name="poi_home_visit_yes">Visites a domicili: sí</string>
+	<string name="poi_home_visit_no">Visites a domicili: no</string>
 
 	</resources>
