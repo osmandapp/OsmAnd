@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="searchbar_text_dark">#fff</color>
+    <color name="searchbar_text_light">#212121</color>
+    <color name="searchbar_text_hint_dark">#7a8c99</color>
+    <color name="searchbar_text_hint_light">#727272</color>
+
+	<color name="searchbar_tab_inactive_dark">#5b6872</color>
+	<color name="searchbar_tab_inactive_light">#727272</color>
+
     <color name="markers_top_bar_background">#0f5257</color>
     <color name="markers_top_bar_2nd_background">#0c4347</color>
     <color name="marker_top_2nd_line_color">#859899</color>
@@ -77,7 +85,7 @@
 	<color name="tool_bar_color_dark">#CC080B0D</color>
 	<color name="actionbar_light_color">#ff8f00</color>
 	<color name="tool_bar_color_light">#b4ff8f00</color>
-	
+
 	<color name="download_pressed_light">#8cff8f00</color>
 	<color name="download_pressed_dark">#be39464d</color>
 

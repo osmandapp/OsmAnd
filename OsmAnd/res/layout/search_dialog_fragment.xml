@@ -13,12 +13,11 @@
             android:id="@+id/toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
-            android:background="?attr/pstsTabBackground"
+            android:background="?attr/bg_color"
             android:minHeight="@dimen/dashboard_map_toolbar"
             android:theme="?attr/toolbar_theme"
             app:contentInsetLeft="54dp"
             app:contentInsetStart="54dp">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,6 +33,8 @@
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:hint="@string/search_poi_category_hint"
+                    android:textColor="?attr/searchbar_text"
+                    android:textColorHint="?attr/searchbar_text_hint"
                     android:lines="1"
                     android:singleLine="true"/>
 
@@ -57,18 +58,51 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <LinearLayout
+            android:id="@+id/tab_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/ctx_menu_info_divider"/>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="?attr/search_tabbar_layout_theme"
+                app:tabGravity="fill"
+                app:tabMaxWidth="0dp"
+                app:tabMode="fixed"/>
+
+        </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
 
-    <ListView
-        android:id="@android:id/list"
+    <LinearLayout
+        android:id="@+id/tabs_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_weight="1"
-        android:drawSelectorOnTop="true"
-        android:groupIndicator="@android:color/transparent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+    </LinearLayout>
 
 </LinearLayout>
