@@ -73,6 +73,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/ctx_menu_info_view_bg"
                 android:theme="?attr/search_tabbar_layout_theme"
                 app:tabGravity="fill"
                 app:tabMaxWidth="0dp"

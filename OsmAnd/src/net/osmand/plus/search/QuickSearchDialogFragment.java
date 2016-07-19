@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -749,6 +750,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		private QuickSearchDialogFragment dialogFragment;
 		private QuickSearchListAdapter listAdapter;
+		private boolean touching;
 
 		enum SearchListFragmentType {
 			HISTORY,
@@ -764,8 +766,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 
 		@Override
+		public void onViewCreated(View view, Bundle savedInstanceState) {
+			super.onViewCreated(view, savedInstanceState);
+			ListView listView = getListView();
+			if (listView != null) {
+				View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);
+				View footer = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_footer, null);
+				listView.addHeaderView(header, null, false);
+				listView.addFooterView(footer, null, false);
+			}
+		}
+
+		@Override
 		public void onListItemClick(ListView l, View view, int position, long id) {
-			QuickSearchListItem item = listAdapter.getItem(position);
+			QuickSearchListItem item = listAdapter.getItem(position - l.getHeaderViewsCount());
 			if (item instanceof QuickSearchMoreListItem) {
 				((QuickSearchMoreListItem) item).getOnClickListener().onClick(view);
 			} else {
@@ -795,17 +809,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 			listAdapter = new QuickSearchListAdapter(getMyApplication(), getActivity());
 			setListAdapter(listAdapter);
+			ListView listView = getListView();
+			listView.setBackgroundColor(getResources().getColor(
+							getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
+									: R.color.ctx_menu_info_view_bg_dark));
+			listView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					switch (event.getAction()) {
+						case MotionEvent.ACTION_DOWN:
+						case MotionEvent.ACTION_POINTER_DOWN:
+							touching = true;
+							break;
+						case MotionEvent.ACTION_UP:
+						case MotionEvent.ACTION_POINTER_UP:
+						case MotionEvent.ACTION_CANCEL:
+							touching = false;
+							break;
+					}
+					return false;
+				}
+			});
 		}
-
-		/*
-						} else if (topDividerView) {
-					v = ctx.getLayoutInflater().inflate(R.layout.card_top_divider, null);
-					AndroidUtils.setListBackground(mapActivity, v, nightMode);
-				} else if (bottomDividerView) {
-					v = ctx.getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
-					AndroidUtils.setListBackground(mapActivity, v, nightMode);
-
-		 */
 
 		public ArrayAdapter<?> getAdapter() {
 			return listAdapter;
@@ -863,7 +888,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 
 		public void updateLocation(LatLon latLon, Float heading) {
-			if (listAdapter != null) {
+			if (listAdapter != null && !touching) {
 				listAdapter.setLocation(latLon);
 				listAdapter.setHeading(heading);
 				listAdapter.notifyDataSetChanged();
