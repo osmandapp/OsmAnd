@@ -1956,7 +1956,7 @@
 	<string name="poi_genus">Genre</string>
 	<string name="poi_leaf_type_needleleaved">Arbres avec aiguilles</string>
 	<string name="poi_leaf_type_mixed">Mélangé</string>
-	<string name="poi_trees_kiwi">Actinidier</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
 	<string name="poi_information_wildlife">Indicateur d’information : vie sauvage</string>
 	<string name="poi_information_history">Indicateur d’information : historique</string>
 	<string name="poi_information_route_marker">Indicateur d’itinéraire</string>
@@ -2131,4 +2131,9 @@
 	<string name="poi_min_age">Age minimum</string>
 
 	<string name="poi_diplomatic_permanent_mission">Mission permanente</string>
+	<string name="poi_leaf_type_leafless">Sans feuilles</string>
+	<string name="poi_deadlock">Impasse</string>
+
+	<string name="poi_water_characteristic_mineral">Caractéristique de l’eau : minéral</string>
+	<string name="poi_information_guidepost">Point de repère</string>
 	</resources>
