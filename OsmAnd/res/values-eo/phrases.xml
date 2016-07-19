@@ -1116,4 +1116,32 @@
 	<string name="poi_abandoned_poi">Forlasita objekto</string>
 	<string name="poi_disused">Neuzata</string>
 
+	<string name="poi_operator">Administranto</string>
+	<string name="poi_fee_yes">Pagenda</string>
+	<string name="poi_fee_no">Senpaga</string>
+	<string name="poi_drinking_water_yes">Trinkebla akvo: jes</string>
+	<string name="poi_drinking_water_no">Trinkebla akvo: ne</string>
+	<string name="poi_supervised_yes">Gardata</string>
+	<string name="poi_supervised_no">Ne-gardata</string>
+	<string name="poi_seasonal_yes">Sezona</string>
+	<string name="poi_seasonal_no">Tutjara</string>
+	<string name="poi_seasonal_dry_season">Seka sezono</string>
+	<string name="poi_seasonal_wet_season">Pluva sezono</string>
+	<string name="poi_seasonal_spring">Printempo</string>
+	<string name="poi_seasonal_summer">Somero</string>
+	<string name="poi_seasonal_autumn">Aŭtuno</string>
+	<string name="poi_seasonal_winter">Vintro</string>
+	<string name="poi_crossing_traffic_signals">Trafiklumoj</string>
+	<string name="poi_crossing_uncontrolled">Sen trafiklumoj</string>
+	<string name="poi_crossing_unmarked">Nemarkita</string>
+	<string name="poi_start_date">Ekestis je</string>
+	<string name="poi_wheelchair">Rulseĝoj</string>
+	<string name="poi_wheelchair_no">Rulseĝoj: nealirebla</string>
+	<string name="poi_wheelchair_limited">Rulseĝoj: limigita alireblo</string>
+	<string name="poi_wholesale">Pogranda komerco</string>
+
+	<string name="poi_access_private">Aliro nur sub privata permeso</string>
+	<string name="poi_access_no">Sen aliro</string>
+	<string name="poi_access_customers">Aliro nur por klientoj</string>
+	<string name="poi_access_destination">Aliro nur al celo</string>
 	</resources>
