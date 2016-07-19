@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -31,11 +32,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private Float heading;
 	private int searchMoreItemPosition;
 	private int screenOrientation;
+	private int dp56;
+	private int dp1;
 
 	public QuickSearchListAdapter(OsmandApplication app, Activity activity) {
 		super(app, R.layout.search_list_item);
 		this.app = app;
 		this.activity = activity;
+		dp56 = AndroidUtils.dpToPx(app, 56f);
+		dp1 = AndroidUtils.dpToPx(app, 1f);
 	}
 
 	public int getScreenOrientation() {
@@ -175,6 +180,25 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			updateCompassVisibility(view, listItem);
+		}
+		view.setBackgroundColor(app.getResources().getColor(
+						app.getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
+		View divider = view.findViewById(R.id.divider);
+		if (divider != null) {
+			if (position == getCount() - 1) {
+				divider.setVisibility(View.GONE);
+			} else {
+				divider.setVisibility(View.VISIBLE);
+				if (position + 1 == searchMoreItemPosition) {
+					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
+					p.setMargins(0, 0, 0 ,0);
+					divider.setLayoutParams(p);
+				} else {
+					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
+					p.setMargins(dp56, 0, 0 ,0);
+					divider.setLayoutParams(p);
+				}
+			}
 		}
 		return view;
 	}

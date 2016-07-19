@@ -159,7 +159,6 @@
         <item name="colorAccent">@color/osmand_orange</item>
         <item name="android:textColorSecondary">@color/searchbar_tab_inactive_light</item>
         <item name="android:textColorHint">@color/searchbar_tab_inactive_light</item>
-        <item name="android:background">@color/ctx_menu_info_view_bg_light</item>
     </style>
 
     <style name="OsmandLightTheme.Toolbar">
@@ -188,7 +187,6 @@
         <item name="colorAccent">@color/osmand_orange</item>
         <item name="android:textColorSecondary">@color/searchbar_tab_inactive_dark</item>
         <item name="android:textColorHint">@color/searchbar_tab_inactive_dark</item>
-        <item name="android:background">@color/ctx_menu_info_view_bg_dark</item>
     </style>
 
     <style name="OsmandLightTheme.BottomSheet">
