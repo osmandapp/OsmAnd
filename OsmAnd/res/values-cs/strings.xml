@@ -266,7 +266,7 @@
     <string name="switch_to_vector_map_to_see">Pro tuto oblast je k dispozici offline vektorová mapa.\n\t\n\t Pro zobrazení zvolte \'Menu\' -&gt; \'Nastavení mapy\' -&gt; \'Zdroj map…\' -&gt; \'Vektorové mapy OSM\'.</string>
     <string name="choose_audio_stream">Kanál pro navádění</string>
     <string name="choose_audio_stream_descr">Zvolte kanál poskytující hlasové navádění</string>
-    <string name="voice_stream_voice_call">Volání</string>
+    <string name="voice_stream_voice_call">Zvuk telefonního hovoru (také se pokusí přerušit Bluetooth hudební výstup)</string>
     <string name="voice_stream_notification">Upozornění</string>
     <string name="voice_stream_music">Hudba</string>
     <string name="warning_tile_layer_not_downloadable">Data pro mapovou vrstvu %1$s nelze stáhnout, zkuste je prosím znovu nainstalovat.</string>
@@ -1220,7 +1220,7 @@
     <string name="osmo_io_error">Problém s připojením OsMo: </string>
     <string name="osmo_settings_uuid">Jedinečné ID zařízení</string>
     <string name="interrupt_music_descr">Přerušit hudbu při oznámení</string>
-    <string name="interrupt_music">Přerušit hudbu</string>
+    <string name="interrupt_music">Pozastavit hudbu</string>
     <string name="share_route_as_gpx">Sdílet trasu jako GPX soubor</string>
     <string name="share_route_subject">Sdílená trasa přes OsmAnd</string>
     <string name="arrival_distance">Oznámení příjezdu</string>
@@ -1412,7 +1412,7 @@
     <string name="configure_map">Nastavení mapy</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
-    <string name="search_radius_proximity">Blíže než</string>
+    <string name="search_radius_proximity">Uvnitř</string>
     <string name="rendering_category_routes">Trasy</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vlakové linky</string>
     <string name="rendering_attr_tramRoutes_name">Tramvajové linky</string>
@@ -2036,4 +2036,11 @@
     <string name="lang_ast">Asturština</string>
     <string name="coords_format">Formát umístění</string>
     <string name="coords_format_descr">Formát geografického údaje umístění</string>
-  	</resources>
+  	<string name="shared_string_from">od</string>
+    <string name="city_type_district">Okres</string>
+    <string name="city_type_neighbourhood">Okolí</string>
+    <string name="map_widget_search">Hledat</string>
+	<string name="shared_string_is_open_24_7">Otevřeno nonstop</string>
+    <string name="storage_directory_card">Paměťová karta</string>
+    <string name="postcode">Poštovní směrovací číslo</string>
+    </resources>
