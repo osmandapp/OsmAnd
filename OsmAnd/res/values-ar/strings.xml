@@ -14,7 +14,7 @@
 <string name="email">بريد إلكتروني</string>
 	
 	<string name="filter_current_poiButton">تصفية</string>
-	<string name="shared_string_clear">إعادة تعيين</string>
+	<string name="shared_string_clear">محو</string>
 	<string name="poi_dialog_opening_hours">فتح</string>
 	<string name="poi_dialog_name">الاسم</string>
 	<string name="poi_action_add">إضافة</string>
@@ -108,7 +108,7 @@
 	<string name="int_continuosly">متواصل</string>
 	<string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
 	<string name="map_widget_top_text">اسم الشارع</string>
-	<string name="map_widget_reset">إعادة تعيين إلى الافتراضي</string>
+	<string name="map_widget_reset">إعادة التعيين إلى الافتراضي</string>
 	<string name="map_widget_parking">موقف سيارات</string>
 	<string name="map_widget_monitoring">تسجيل GPX</string>
 	<string name="map_widget_speed">سرعة</string>
@@ -456,11 +456,11 @@
     	<string name="global_app_allocated_memory_descr">الذاكرة المخصصة %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
 	<string name="native_app_allocated_memory">إجمالي الذاكرة الأصلية</string>
 	<string name="starting_point_too_far">نقطة الانطلاق بعيدة جدا عن أقرب طريق.</string>
-	<string name="shared_location">موقع مشارك</string>
+	<string name="shared_location">موقع مشترك</string>
 	<string name="osmand_parking_event">استرجع السيارة من الموقف</string>
 	<string name="osmand_parking_warning_text">لقد أضيف تنبيه لأخذ سيارتك مسبقا إلى تقويمك. سيظل هناك حتى تقوم بحذفه يدويا.</string>    
 	<string name="osmand_parking_time_limit_title">حدد المهلة القصوى لموقف السياراة</string>
-	<string name="osmand_parking_delete_confirm">هل تريد إزالة موقع موقف السيارة ؟</string>
+	<string name="osmand_parking_delete_confirm">هل تريد إزالة علامة موقع ركن السيارة ؟</string>
 	<string name="osmand_parking_delete">إزالة علامة وقوف السيارة</string>
 	<string name="osmand_parking_choose_type">اختر نوع مواقف السيارات</string>
 	<string name="osmand_parking_lim_text">وقت محدود</string>
@@ -514,7 +514,7 @@
 	<string name="map_online_plugin_is_not_installed">تمكين ملحق الخرائط على الإنترنت من تحديد مصادر مختلفة للخرائط</string>
 	<string name="map_online_data">خرائط من الانترنت وتجانبية</string>
 	<string name="map_online_data_descr">استخدام الخرائط من الإنترنت (تنزيل وحفظ التجانبيات منها على بطاقة SD)</string>
-	<string name="shared_string_online_maps">خرائط المتصلة بالانترنت</string>
+	<string name="shared_string_online_maps">الخرائط المتصلة بالانترنت</string>
 	<string name="online_map_settings_descr">ضبط مصادر الخرائط التجانبية على الإنترنت أو المخزنة مؤقتا</string>
 	<string name="auto_zoom_farthest">إلى مدى الطويل</string>
 	<string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات</string>
@@ -625,7 +625,7 @@
 	<string name="auto_announce_off">إيقاف الإخطار التلقائي</string>
 	<string name="auto_announce_on">تفعيل الإخطار التلقائي</string>
 	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لا يتمكن جهاز توجيه OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المحتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
-	<string name="audionotes_location_not_defined">لم يعين المكان المرتبط بالملاحظة. استخدم \"استخدم المكان …\" لتعيين ملاحظة لمكان محدد</string>
+	<string name="audionotes_location_not_defined">لم يتم ربط الملاحظة بأي موقع. إضغط على \"استخدم المكان …\" لترفق مكانا ما بملاحظة</string>
 	<string name="animate_routing_route_not_calculated">الرجاء، احتسب المسار أولا</string>
     <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
@@ -1037,7 +1037,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="poi_error_io_error_template">وقعت I / O خطأ أثناء ممارسة العمل {0}.</string>
 	<string name="error_doing_search">حدث خطا اثناء البحث</string>
 	<string name="search_offline_geo_error">لا يمكن تحليل نوايا الجغرافية \'٪ ق \'</string>
-	<string name="search_osm_offline">موقع البحث الجغرافي</string>
+	<string name="search_osm_offline">البحث عن موقع جغرافي</string>
 	<string name="system_locale">النظام</string>
 	<string name="preferred_locale_descr">اختر لغة العرض (برجاء إعادة تشغيل OsmAnd بعد التغيير)</string>
 	<string name="preferred_locale">لغة العرض</string>
@@ -1063,11 +1063,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="foot">قدم</string>
 	<string name="mile_per_hour">ميل ساعة</string>
 	<string name="mile">ميل</string>
-	<string name="send_location_way_choose_title">حصة الموقع باستخدام</string>
-	<string name="send_location_sms_pattern">المكان</string>
-	<string name="send_location_email_pattern">لرؤية الموقع اتبع الرابط متصفح الويب ٪1$s أو الروبوت الرابط نية ٪2$s</string>
+	<string name="send_location_way_choose_title">إشترك المكان باستخدام</string>
+	<string name="send_location_sms_pattern">الموقع : %1$s\n%2$s</string>
+	<string name="send_location_email_pattern">إتبع رابط متصفح الويب لمشاهدة المكان ٪1$s أو استعمل رابط أندرويد الخاص ٪2$s</string>
 	<string name="send_location">ارسال الموقع</string>
-	<string name="context_menu_item_share_location">مشاركة الموقع</string>
+	<string name="context_menu_item_share_location">مشاركة المكان</string>
 	<string name="add_waypoint_dialog_added">أُضيفت إحداثية GPX \'\' {0} \'\' بنجاح</string>
 	<string name="add_waypoint_dialog_title">إضافة إحداثية لمسار GPX المسجل</string>
 	<string name="context_menu_item_add_waypoint">إضافة GPX إحداثية</string>
@@ -1223,8 +1223,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_message">رسالة</string>
 	<string name="welmode_download_maps">حمل الخرائط</string>
 	<string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
-	<string name="shared_string_add_to_favorites">إضافة إلى المفضلة</string>
-	<string name="shared_string_my_places">المفضلة</string>
+	<string name="shared_string_add_to_favorites">إضافة إلى المواقع المفضلة</string>
+	<string name="shared_string_my_places">مواقعي</string>
 	<string name="days_behind">يوما متأخرة</string>
 	<string name="watch">شاهد</string>
 	<string name="routing_attr_no_new_routing_name">لا تستخدم قواعد الإصدار 1.9</string>
@@ -1278,7 +1278,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_show">عرض</string>
 	<string name="shared_string_show_all">عرض الكل</string>
 	<string name="shared_string_favorite">مفضلة</string>
-	<string name="shared_string_favorites">المفضلة</string>
+	<string name="shared_string_favorites">المواقع المفضلة</string>
 	<string name="shared_string_address">عنوان</string>
 	<string name="shared_string_my_location">موقعي</string>
 	<string name="shared_string_my_favorites">مفضلتي</string>
@@ -1309,7 +1309,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
 	<string name="voice">صوت مسج</string>
 	<string name="get_directions">الاتجاهات</string>
-	<string name="show_point_options">استخدام الموقع…</string>
+	<string name="show_point_options">إستخدام الموقع …</string>
 	<string name="favorite">مفضلة</string>
 	<string name="speak_favorites">نقاط مفضلة قريبة</string>
 	<string name="save_as_favorites_points">إحفظ كمجموعة مفضلة</string>
@@ -1321,9 +1321,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="fav_imported_sucessfully">تم بنجاح استيراد المفضلة</string>
 	<string name="fav_file_to_load_not_found">لم يتم العثور على ملف GPX يحتوي على الأماكن المفضلة في {0}</string>
 	<string name="fav_saved_sucessfully">المفضلة تم حفظها بنجاح إلى {0}</string>
-	<string name="no_fav_to_save">لا توجد نقاط مفضلة للحفظ</string>
+	<string name="no_fav_to_save">لم يتم العثور على نقاط أماكن مفضلة للقيام بالاحتفاظ بها</string>
 	<string name="fav_points_edited">تم تحرير النقطة المفضلة</string>
-	<string name="fav_points_not_exist">لا توجد نقاط مفضلة</string>
+	<string name="fav_points_not_exist">لا وجود لأية نقطة مفضلة</string>
 	<string name="favourites_context_menu_edit">تحرير المفضلة</string>
 	<string name="favourites_context_menu_delete">حذف المفضلة</string>
 	<string name="favourites_remove_dialog_msg">إزالة النقطة المفضلة \'%s\' ؟</string>
@@ -1339,7 +1339,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="rename_failed">فشل إعادة التسمية.</string>
 	<string name="back_to_map">العودة إلى الخريطة</string>
 	<string name="share_note">مشاركة ملاحظة</string>
-    <string name="location_on_map">"الموقع:\nالعرض %1$s\nالطول  %2$s"</string>
+    <string name="location_on_map">"الموقع :\nالعرض %1$s\nالطول  %2$s"</string>
 	<string name="notes">ملاحظات</string>
 	<string name="online_map">خريطة على الإنترنت</string>
 	<string name="roads_only">الطرق فقط</string>
@@ -1635,8 +1635,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="show_poi_filter">عرض الفلتر</string>
 	<string name="hide_poi_filter">إخفاء الفلتر</string>
 	<string name="background_router_service">تشغيل أوسماند OSMAnd في الخلفية</string>
-	<string name="background_service_provider">مزود تحديد مواقع</string>
-	<string name="background_service_provider_descr">اختر مزود تحديد المواقع لاستخدامه في خدمة وضعية السكون</string>
+	<string name="background_service_provider">مزود تحديد المواقع</string>
+	<string name="background_service_provider_descr">اختر مزود تحديد المواقع لاستخدامه في الخلفية</string>
 	<string name="int_seconds">ثانية</string>
 	<string name="int_min">دقيقة</string>
 	<string name="gps_provider">GPS</string>
@@ -1680,7 +1680,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="layer_transport_route">طريق وسائل النقل</string>
 	<string name="background_service_int_descr">حدد الفاصل الزمني للإيقاظ لخدمة وضعية السكون</string>
 	<string name="background_router_service_descr">تُشغل OsmAnd في الخلفية بحيث يتتبع موقعك أثناء إغلاق الشاشة</string>
-	<string name="off_router_service_no_gps_available">خدمة الملاحة في الخلفية يتطلب تفعيل مزود مواقع.</string>
+	<string name="off_router_service_no_gps_available">خدمة الملاحة في الخلفية تتطلب تفعيل مزود مواقع.</string>
 	<string name="first_time_download">تحميل المناطق</string>
 	<string name="transport_finish_search">إنهاء البحث</string>
 	<string name="search_nothing_found">لا شيء موجود</string>
@@ -1778,13 +1778,13 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="recalculate_route">إعادة حساب المسار</string>
     <string name="number_of_recipients">عدد المستلمين</string>
     <string name="osm_editors_ranking">ترتيب المحررين OSM</string>
-    <string name="osm_live_subscription">اشتراك لايف OSM</string>
+    <string name="osm_live_subscription">اشتراك OSM Live</string>
     <string name="osm_live_subscribe_btn">الاشتراك</string>
     <string name="osm_live_support_region">دعم المنطقة</string>
     <string name="osm_live_month_cost">تكلفة الشهر</string>
     <string name="osm_live_month_cost_desc">الدفع الشهري</string>
     <string name="osm_live_region_desc">سيتم إرسال جزء من التبرع إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الخريطة في تلك المنطقة</string>
-    <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك لايف OSM أولاً</string>
+    <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك OSM Live أولاً</string>
 
     <string name="osm_live_header">يتيح هذا الاشتراك التحديثات كل ساعة لجميع الخرائط العالم. جزء كبير من الدخل سيعود إلى مجتمع OSM وتدفع لكل مساهمة OSM. في حال كنت تحب أوسماند و OSM وترغب في دعم ذلك، هذه هي الطريقة المثلى للقيام بذلك.</string>
     
@@ -1851,7 +1851,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_connect_to_group_id">معرف المجموعة</string>
     <string name="osmo_tracker_id">معرف المتعقب</string>
     <string name="osmo_tracker_id_descr">اضغط لمعاينة معرف المتعقب</string>
-    <string name="osmo_share_my_location">حول الموقع</string>
+    <string name="osmo_share_my_location">إبعث هذا الموقع</string>
     <string name="hello">تطبيق الملاحة أوسماند OSMAnd</string>
     <string name="update_poi_error_loading">خطأ أثناء تحميل البيانات من الخادم</string>
     <string name="context_menu_item_update_map_confirm">تحديث البيانات المحلية عبر الإنترنت ؟</string>
@@ -1969,7 +1969,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="download_live_updates">تحديثات آنية</string>
     <string name="route_distance">المسافة :</string>
     <string name="route_duration">المدة الزمنية :</string>
-    <string name="route_tr">در يمينا و اسلك</string>
+    <string name="route_tr">در يمينا ثم واصل</string>
     <string name="route_tl">در يسارا و اسلك</string>
     <string name="plugin_nautical_descr"/>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
@@ -1980,4 +1980,16 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل</string>
     <string name="search_categories">الفئات\n</string>
     <string name="shared_string_near">بالقرب من</string>
+    <string name="route_tslr">در قليلا إلى اليمين ثم واصل</string>
+    <string name="route_tsll">در قليلا إلى اليسار ثم واصل</string>
+    <string name="no_address_found">لم يتم تحديد أي عنوان</string>
+    <string name="shared_string_location">الموقع</string>
+    <string name="share_menu_location">شارك الموقع</string>
+    <string name="av_locations_descr">ملف GPX مرفوق بملاحظات عن المواقع و الأماكن</string>
+    <string name="av_locations">المواقع</string>
+    <string name="gps_network_not_enabled">هل تريد تشغيل خدمة المواقع ؟ إنه غير مفعل.</string>
+    <string name="osmo_track_interval_descr">اختر الفاصل الزمني بين كل ارسال حول الموقع</string>
+    <string name="update_now">حدث الآن</string>
+    <string name="last_map_change">آخر تغيير طرأ على الخريطة : %s</string>
+    <string name="available_maps">الخرائط الموجودة</string>
     </resources>
