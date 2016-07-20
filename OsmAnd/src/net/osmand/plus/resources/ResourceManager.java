@@ -676,7 +676,7 @@ public class ResourceManager {
 						changesManager.indexMainMap(f, dateCreated);
 						indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
 					}
-					if (!mapReader.getRegionNames().isEmpty() || mapReader.isBasemap()) {
+					if (!mapReader.getRegionNames().isEmpty() || mapReader.containsPoiData()) {
 						try {
 							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
 							RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this,
