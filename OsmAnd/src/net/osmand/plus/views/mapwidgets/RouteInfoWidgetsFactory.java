@@ -386,7 +386,7 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				float mx = 0; 
-				if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()) {
+				if ((rh == null || !rh.isFollowingMode() || rh.isDeviatedFromRoute()) && trackingUtilities.isMapLinkedToLocation()) {
 					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 					if(ro != null) {
 						boolean direction = true;
@@ -793,7 +793,7 @@ public class RouteInfoWidgetsFactory {
 			int[] loclanes = null;
 			int dist = 0;
 			// TurnType primary = null;
-			if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()
+			if ((rh == null || !rh.isFollowingMode() || rh.isDeviatedFromRoute()) && trackingUtilities.isMapLinkedToLocation()
 					&& settings.SHOW_LANES.get()) {
 				RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 				Location lp = locationProvider.getLastKnownLocation();
@@ -1139,7 +1139,7 @@ public class RouteInfoWidgetsFactory {
 			boolean eval = rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation();
 			if ((trafficWarnings || cams) && eval) {
 				AlarmInfo alarm ;
-				if(rh.isFollowingMode()) { 
+				if(rh.isFollowingMode() && !rh.isDeviatedFromRoute()) {
 					alarm = wh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
 				} else {
 					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
