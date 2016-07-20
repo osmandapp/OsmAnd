@@ -1237,7 +1237,7 @@
     <string name="rendering_attr_coloredBuildings_name">Оцветяване на сградите в зависимост от типа им</string>
     <string name="osmo_invite">Покани…</string>
     <string name="osmo_leave_confirmation_msg">Ще напуснете ли групата %1$s?</string>
-    <string name="osmo_specify_tracker_id">Уточнете id</string>
+    <string name="osmo_specify_tracker_id">Въведете ID</string>
     <string name="continue_navigation">Продължи навигацията</string>
     <string name="pause_navigation">Пауза на навигацията</string>
     <string name="rendering_attr_subwayMode_name">Подземен транспорт</string>
@@ -1872,7 +1872,7 @@
     <string name="dashboard_or_drawer_title">Табло за управление или меню</string>
     <string name="use_dashboard_btn">Използване на таблото</string>
     <string name="use_drawer_btn">Използване на менюто</string>
-    <string name="save_poi_without_poi_type_message">Наистина ли ще запазите POI без да укажете типа му?</string>
+    <string name="save_poi_without_poi_type_message">Наистина ли ще запазите POI без да укажете тип?</string>
     <string name="feedback">Обратна връзка</string>
     <string name="versions_item">Версии</string>
     <string name="techical_articles_item">Технически статии</string>
@@ -2116,4 +2116,26 @@
     <string name="osm_live_header">Този абонамент позволява актуализиране на всички карти на всеки час. Голяма част от прихода отива за общността на OSM, за потребителите които са допринесли за картата. В случай че харесвате OsmAnd и OSM и искате да помогнете, това е перфектният начин да го сторите.</string>
     
     <string name="show_transparency_seekbar">Показване на прозрачна лента</string>
+    <string name="search_categories">Категории</string>
+    <string name="postcode">Пощенски код</string>
+    <string name="shared_string_from">от</string>
+    <string name="city_type_district">Окръг</string>
+    <string name="city_type_neighbourhood">Квартал</string>
+    <string name="map_widget_search">Търсене</string>
+	<string name="shared_string_is_open_24_7">Денонощен</string>
+    <string name="storage_directory_card">Карта с памет</string>
+    <string name="coords_format">Формат на координати</string>
+    <string name="coords_format_descr">Формат на географските координати</string>
+  	<string name="app_mode_bus">Автобус</string>
+ 	<string name="app_mode_train">Влак</string>
+    <string name="current_track">Текуща следа</string>
+    <string name="map_widget_battery">Ниво на батерията</string>
+    <string name="change_markers_position">Промяна позицията на маркера</string>
+    <string name="move_marker_bottom_sheet_title">Преместете картата за да смените позицията на маркера</string>
+    <string name="lat_lon_pattern">Шир.: %1$.6f Дълж.: %2$.6f</string>
+    <string name="follow_us">Следвайте ни</string>
+    <string name="access_no_destination">Не е зададено местоназначение</string>
+    <string name="map_widget_magnetic_bearing">Посока по магнитния компас</string>
+    <string name="map_widget_bearing">Относителна посока</string>
+    <string name="access_disable_offroute_recalc">Маршрутът да не се променя, когато сте извън пътя</string>
     </resources>
