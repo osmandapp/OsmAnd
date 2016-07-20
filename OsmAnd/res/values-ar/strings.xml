@@ -2103,4 +2103,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_use_server_name">الإسم المسجل</string>
     <string name="osmo_auth_pending">في انتظار التصريح للدخول …</string>
     <string name="osmo_settings">OsMO</string>
+    <string name="download_wikipedia_maps">ويكيبيديا</string>
     </resources>
