@@ -2115,4 +2115,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_from_map">الولوج عبر الخريطة</string>
     <string name="show_on_start">إظهار عند البدء</string>
     <string name="osmo_enable_tracker">إرسل نقاط وضعيتي</string>
+    <string name="map_widget_bearing">تاثير نسبي</string>
+    <string name="download_files_question_space_with_temp">هل تريد حقا تحميل {0} ملف؟\nهذا يحتاج {3} مب مؤقتة و {1} مب دائمة . حاليا هناك، {2} مب متاحة.</string>
     </resources>
