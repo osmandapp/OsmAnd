@@ -1411,4 +1411,15 @@
 	<string name="poi_supervised_yes">Nadzorowany</string>
 	<string name="poi_rural">Wiejski</string>
 
+	<string name="poi_military_office">Koszary</string>
+	<string name="poi_debris">Ruiny</string>
+	<string name="poi_supervised_no">Bez nadzoru</string>
+	<string name="poi_wheelchair_limited">Wózek inwalidzki: ograniczony</string>
+	<string name="poi_wholesale">Hurtownia</string>
+
+	<string name="poi_access_permissive">Dostęp dozwolony</string>
+	<string name="poi_access_destination">Dostęp tylko jako do celu</string>
+	<string name="poi_access_delivery">Dostęp tylko dla dostarczenia</string>
+	<string name="poi_access_agricultural">Dostęp rolniczy</string>
+
 	</resources>
