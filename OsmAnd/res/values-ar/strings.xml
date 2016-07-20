@@ -2120,4 +2120,18 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="transport_route_distance">مسافة المسلك</string>
     <string name="update_poi_error_local">خطأ تحيين القائمة المحلية للPOI</string>
     <string name="context_menu_item_update_poi">تحيين الPOI</string>
+    <string name="upload_osm_note_description">يمكنك رفع ملاحظات OSM الخاصة بك بصفة مخفية اذا استخدمت حسابك على openstreetmap.org .</string>
+    <string name="add_points_to_map_markers_q">هل تريد اضافة جميع النقاط الى العلامات الموضعية؟</string>
+    <string name="clear_markers_history_q">هل تريد مسح جميع محفوظات العلامات الموضعية؟</string>
+    <string name="rendering_attr_showMtbRoutes_name">اظهر طرق MTB</string>
+    <string name="clear_updates_proposition_message">يمكنك ازالة التحديثات المحملة والرجوع الى الاصدار الاصلي للخريطة</string>
+    <string name="add_time_span">اضافة مجال زمني</string>
+    <string name="item_removed">تمت ازالة العنصر</string>
+    <string name="n_items_removed">تمت ازالة العناصر</string>
+    <string name="rec_split_desc">اعد كتابة اللقطات عند تجاوز المساحة المتستخدمة لمساحة التخزين</string>
+    <string name="rec_split_clip_length_desc">طول اللقطات المسجلة لن يتجاوز المجال الزمني المحدد</string>
+    <string name="no_camera_permission">التطبيق ليس لديه اذن الوصول للكاميرا</string>
+    <string name="no_microphone_permission">التطبيق ليس لديه اذن الوصول للميكروفون</string>
+    <string name="av_audio_format">صيغة اخراج الصوت</string>
+    <string name="av_audio_format_descr">حدد صيغة الصوت المخرج</string>
     </resources>
