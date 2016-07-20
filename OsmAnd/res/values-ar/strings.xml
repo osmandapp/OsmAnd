@@ -1992,7 +1992,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="update_now">حدث الآن</string>
     <string name="last_map_change">آخر تغيير طرأ على الخريطة : %s</string>
     <string name="available_maps">الخرائط الموجودة</string>
-    <string name="access_shared_string_navigate_up">الانتقال لأعلى</string>
+    <string name="access_shared_string_navigate_up">إنتقال للأعلى</string>
     <string name="osmo_plugin_name">OsMo للتتبع</string>
     <string name="osm_user_stat">التعديلات %1$s ، الرتبة %2$s ، مجموع التعديلات %3$s</string>
     <string name="map_marker_1st">العلامة الأولى للخريطة</string>
@@ -2097,4 +2097,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_regenerate_login_ids">إعادة إنشاء معرف ID المستخدم</string>
     <string name="av_video_quality_descr">تحديد نوعية مخرج الفيديو</string>
     <string name="favorite_category_add_new">أضفة جديدة</string>
+    <string name="shared_string_undo_all">إلغاء كلي</string>
+    <string name="av_video_quality">جودة مخرج الفيديو</string>
     </resources>
