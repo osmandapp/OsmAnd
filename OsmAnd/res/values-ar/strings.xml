@@ -2101,4 +2101,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="av_video_quality">جودة مخرج الفيديو</string>
     <string name="osm_edit_deleted_poi">حذف OSM POI</string>
     <string name="osmo_use_server_name">الإسم المسجل</string>
+    <string name="osmo_auth_pending">في انتظار التصريح للدخول …</string>
     </resources>
