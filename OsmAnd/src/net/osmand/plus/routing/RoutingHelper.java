@@ -75,7 +75,7 @@ public class RoutingHelper {
 	private RouteProvider provider;
 	private static VoiceRouter voiceRouter;
 
-	private boolean isDeviatedFromRoute = false;
+	private static boolean isDeviatedFromRoute = false;
 	private long deviateFromRouteDetected = 0;
 	//private long wrongMovementDetected = 0;
 
@@ -329,7 +329,9 @@ public class RoutingHelper {
 					calculateRoute = true;
 				}
 				// 4. Identify if UTurn is needed
-				boolean uTurnIsNeeded = identifyUTurnIsNeeded(currentLocation, posTolerance);
+				if (identifyUTurnIsNeeded(currentLocation, posTolerance)) {
+					isDeviatedFromRoute = true;
+				}
 				// 5. Update Voice router
 				// Do not update in route planning mode
 				if (isFollowingMode) {
@@ -541,10 +543,9 @@ public class RoutingHelper {
 	}
 	
 
-	public boolean identifyUTurnIsNeeded(Location currentLocation, float posTolerance) {
+	private boolean identifyUTurnIsNeeded(Location currentLocation, float posTolerance) {
 		if (finalLocation == null || currentLocation == null || !route.isCalculated()) {
-			this.isDeviatedFromRoute = false;
-			return isDeviatedFromRoute;
+			return false;
 		}
 		boolean isOffRoute = false;
 		if (currentLocation.hasBearing()) {
@@ -570,7 +571,6 @@ public class RoutingHelper {
 				deviateFromRouteDetected = 0;
 			}
 		}
-		this.isDeviatedFromRoute = this.isDeviatedFromRoute || isOffRoute;
 		return isOffRoute;
 	}
 	
