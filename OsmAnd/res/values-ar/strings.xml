@@ -1678,7 +1678,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="none_region_found">لا توجد أي بيانات بدون اتصال للمناطق والأقاليم على الذاكرة. قم بتحميل المناطق من الإنترنت.</string>
 	<string name="any_poi">أي</string>
 	<string name="layer_transport_route">طريق وسائل النقل</string>
-	<string name="background_service_int_descr">حدد الفاصل الزمني للإيقاظ لخدمة وضعية السكون</string>
+	<string name="background_service_int_descr">حدد الفاصل الزمني للإيقاظ لخدمة الخلفية</string>
 	<string name="background_router_service_descr">تُشغل OsmAnd في الخلفية بحيث يتتبع موقعك أثناء إغلاق الشاشة</string>
 	<string name="off_router_service_no_gps_available">خدمة الملاحة في الخلفية تتطلب تفعيل مزود مواقع.</string>
 	<string name="first_time_download">تحميل المناطق</string>
