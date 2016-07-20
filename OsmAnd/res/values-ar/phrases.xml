@@ -72,4 +72,25 @@
 
 	<string name="poi_aquaculture_fish">تربية الأحياء المائية: الأسماك</string>
 	<string name="poi_aquaculture_shrimp">تربية الأحياء المائية: الجمبري</string>
+	<string name="poi_hiking_routes">مسارات المشي</string>
+		<string name="poi_tea">قاعة شاي</string>
+	<string name="poi_pastry">متجر الحلويات</string>
+	<string name="poi_vending_machine">آلة بيع</string>
+	<string name="poi_bag">متجر حقائب</string>
+	<string name="poi_bed">متجر أفرشة</string>
+	<string name="poi_carpet">متجر السجاد</string>
+	<string name="poi_chemist">صيدلية</string>
+	<string name="poi_clothes_children">ملابس أطفال</string>
+	<string name="poi_shoes">متجر الأحذية</string>
+	<string name="poi_candles">متجر شموع</string>
+	<string name="poi_computer">متجر كمبيوتر</string>
+	<string name="poi_fabric">متجر الأقمشة</string>
+<string name="poi_dive">معدات الغطس</string>
+	<string name="poi_doors">أبواب</string>
+	<string name="poi_fashion">متجر أزياء</string>
+	<string name="poi_fishing">معدات الصيد</string>
+	<string name="poi_florist">محل بيع الزهور</string>
+	<string name="poi_frame">متجر إطار الصورة</string>
+	<string name="poi_furnace">متجر وحدات التدفئة</string>
+	<string name="poi_furniture">متجر أثاث</string>
 	</resources>
