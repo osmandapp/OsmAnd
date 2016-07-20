@@ -2104,5 +2104,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_auth_pending">في انتظار التصريح للدخول …</string>
     <string name="osmo_settings">OsMO</string>
     <string name="download_wikipedia_maps">ويكيبيديا</string>
-    <string name="voice_is_not_available_title">لم يتم تحديد صوت القيادة</string>
+    <string name="voice_is_not_available_title">لم يتم تحديد صوت للتوجيه</string>
     </resources>
