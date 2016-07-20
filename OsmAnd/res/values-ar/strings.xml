@@ -2113,4 +2113,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="unzipping_file">تفكيك ظغط الملف …</string>
     <string name="search_poi_location">جاري البحث عن الإشارة …</string>
     <string name="access_from_map">الولوج عبر الخريطة</string>
+    <string name="show_on_start">إظهار عند البدء</string>
+    <string name="osmo_enable_tracker">أرسل موضيعي</string>
     </resources>
