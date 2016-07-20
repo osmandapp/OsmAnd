@@ -2099,4 +2099,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="favorite_category_add_new">أضفة جديدة</string>
     <string name="shared_string_undo_all">إلغاء كلي</string>
     <string name="av_video_quality">جودة مخرج الفيديو</string>
+    <string name="osm_edit_deleted_poi">حذف OSM POI</string>
+    <string name="osmo_use_server_name">الإسم المسجل</string>
     </resources>
