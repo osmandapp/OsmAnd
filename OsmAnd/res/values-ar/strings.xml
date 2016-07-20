@@ -1859,7 +1859,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="search_history_int_streets">تقاطع : {0} x {1} في {2}</string>
     <string name="uploading_data">تحميل البيانات …</string>
     <string name="searching_address">البحث عن عنوان …</string>
-    <string name="search_osm_nominatim">البحث على الإنترنت باستخدام نوميناتيم OSM</string>
+    <string name="search_osm_nominatim">"بحث متصل  بالإنترنت باستخدام نوميناتيم OSM"</string>
     <string name="hint_search_online">البحث على الإنترنت : رقم منزل، شارع، أو مدينة</string>
     <string name="download_question">تنزيل {0} - {1} ؟</string>
     <string name="opening_hours">ساعات العمل</string>
@@ -2117,4 +2117,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_enable_tracker">إرسل نقاط وضعيتي</string>
     <string name="map_widget_bearing">تاثير نسبي</string>
     <string name="download_files_question_space_with_temp">هل تريد حقا تحميل {0} ملف؟\nهذا يحتاج {3} مب مؤقتة و {1} مب دائمة . حاليا هناك، {2} مب متاحة.</string>
+    <string name="transport_route_distance">مسافة المسلك</string>
+    <string name="update_poi_error_local">خطأ تحيين القائمة المحلية للPOI</string>
+    <string name="context_menu_item_update_poi">تحيين الPOI</string>
     </resources>
