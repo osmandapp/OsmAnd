@@ -95,8 +95,8 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 				} catch (InterruptedException e) {
 				}
 			}
-			playQueue();
 		}
+		playQueue();
 	}
 	
 	private synchronized void playQueue() {
