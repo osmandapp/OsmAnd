@@ -364,6 +364,7 @@ public class SearchCoreFactory {
 							if(object.getSubType().equals("city") || 
 									object.getSubType().equals("country")) {
 								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
+								sr.preferredZoom = object.getSubType().equals("country") ? 8 : 13;
 							} else if(object.getSubType().equals("town")) {
 								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
 							} else {
