@@ -120,7 +120,7 @@
 	<string name="bg_service_screen_lock">قفل الشاشة</string>
 	<string name="bg_service_screen_unlock">فتح الشاشة</string>
 	<string name="show_cameras">كاميرات السرعة</string>
-	<string name="show_traffic_warnings">أظهر تحذيرات المرور</string>
+	<string name="show_traffic_warnings">تحذيرات حركة المرور</string>
 	<string name="avoid_toll_roads">تجنب الطرق ذات الرسوم</string>
 	<string name="osmand_parking_hours">ساعات</string>
 	<string name="osmand_parking_minutes">دقيقة</string>
@@ -331,7 +331,7 @@
 	<string name="speak_street_names">نطق أسماء الشوارع ( نطق آلي TTS )</string>
     <string name="speak_speed_limit">السرعة القصوى</string>
     <string name="speak_cameras">كاميرات السرعة</string>
-	<string name="speak_traffic_warnings">إعلان عن تحذيرات المرور</string>
+	<string name="speak_traffic_warnings">تحذيرات حركة المرور</string>
     <string name="route_descr_map_location">الخريطة: </string>
     <string name="destination_point">الوجهة %1$s</string>
     <string name="search_street_in_neighborhood_cities">البحث عن الشارع في المدن المجاورة</string>
@@ -1005,7 +1005,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="switch_to_vector_map_to_see">لعرض الخرائط المتجهية المحفوظة لهذا الموقع.\n\t اضغط زر القائمة → \'ضبط الخريطة\' → \'مصدر الخريطة… \' → \'خرائط متجهية بدون إتصال\'.</string>
 	<string name="choose_audio_stream">خروج التوجيه الصوتي</string>
 	<string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي</string>
-	<string name="voice_stream_voice_call">المكالمات الصوتية السمعية</string>
+	<string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
 	<string name="voice_stream_notification">صوت الاشعارات</string>
 	<string name="voice_stream_music">صوت الوسائط</string>
 	<string name="warning_tile_layer_not_downloadable">تعذر على التطبيق تنزيل طبقة الخريطة %1$s، نرجو أن تحاول إعادة تثبيته.</string>
@@ -1132,7 +1132,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="routing_attr_short_way_name">أقصر طريق</string>
 	<string name="copying_osmand_files">جاري نسخ ملفات بيانات OsmAnd…</string>
     <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
-    <string name="interrupt_music_descr">اقطع تشغيل الصوتيات عند ورود إعلان ما</string>
+    <string name="interrupt_music_descr">إقطع تشغيل الموسيقى عند ورود إعلان ما</string>
 	<string name="interrupt_music">إيقاف الموسيقى</string>
 	
     <string name="loading_smth">جاري التحميل %1$s …</string>
@@ -1184,7 +1184,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="routing_attr_avoid_unpaved_description">اجتناب الطرق الترابية والوعرة</string>
 	<string name="routing_attr_avoid_ferries_name">تجنب العبّارات</string>
 	<string name="routing_attr_weight_name">حد الوزن المسموح</string>
-	<string name="android_19_location_disabled">"منذ نسخة أندرويد كتكات، لا يمكنك تنزيل أو رفع الخرائط في موقع التخزين السابق (%s). هل تريد تغيير الموقع إلى موقع مسموح ونسخ كل الملفات إليه؟\nملاحظة: لن تُلمس الملفات القديمة.\nملاحظة: لا يمكن مشاركة الملفات بين OsmAnd وOsmAnd+ "</string>
+	<string name="android_19_location_disabled">منذ نسخة أندرويد كتكات 4.4، لا يمكنك تنزيل أو تحديث الخرائط في موقع التخزين السابق (%s). هل تريد تغيير الموقع إلى موقع مسموح ونسخ كل الملفات إليه ؟\n ملاحظة 1 : لن تُلمس الملفات القديمة.\n ملاحظة 2 : لا يمكن مشاركة الملفات بين OsmAnd و OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">ينسخ الملف (%s) إلى مساره الجديد…</string>
     <string name="arrival_distance">إخطار الوصول</string>
     <string name="arrival_distance_descr">هل تريد أن يعلمك البرنامج عند الوصول إلى مقصدك؟</string>
@@ -2114,5 +2114,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="search_poi_location">جاري البحث عن الإشارة …</string>
     <string name="access_from_map">الولوج عبر الخريطة</string>
     <string name="show_on_start">إظهار عند البدء</string>
-    <string name="osmo_enable_tracker">أرسل موضيعي</string>
+    <string name="osmo_enable_tracker">إرسل نقاط وضعيتي</string>
     </resources>
