@@ -2207,4 +2207,6 @@
 	<string name="shared_string_from">從</string>
     <string name="city_type_district">地區</string>
     <string name="city_type_neighbourhood">鄰近</string>
+    <string name="search_categories">種類</string>
+    <string name="postcode">郵遞區號</string>
     </resources>
