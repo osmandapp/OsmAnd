@@ -283,7 +283,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			mAudioFocusHelper.requestFocus(ctx, streamType);
 		}
 		// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
-		if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+		if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 			startBtSco();
 		}
 	}
