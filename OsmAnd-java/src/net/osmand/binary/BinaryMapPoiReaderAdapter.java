@@ -546,11 +546,13 @@ public class BinaryMapPoiReaderAdapter {
 								break;
 							}
 						}
-						Map<String, String> lt = am.getAdditionalInfo();
-						for (Entry<String, String> e : lt.entrySet()) {
-							matches = matcher.matches(e.getValue());
-							if (matches) {
-								break;
+						if (!matches) {
+							Map<String, String> lt = am.getAdditionalInfo();
+							for (Entry<String, String> e : lt.entrySet()) {
+								matches = matcher.matches(e.getValue());
+								if (matches) {
+									break;
+								}
 							}
 						}
 					}
