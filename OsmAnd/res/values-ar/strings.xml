@@ -550,7 +550,7 @@
 	<string name="routing_settings_descr">تحديد الخيارات للإبحار</string>
 	<string name="index_settings">إدارة بيانات الخرائط</string>
 	<string name="general_settings">عام</string>
-	<string name="general_settings_descr">ضبط العرض وإعدادات عامة للتطبيق</string>
+	<string name="general_settings_descr">ضبط العرض والإعدادات العامة للتطبيق</string>
 	<string name="open_street_map_login_descr">مطلوب للمساهمة في openstreetmap.org</string>
 	<string name="user_password_descr">مطلوبة للمساهمة في openstreetmap.org</string>
 	<string name="local_openstreetmap_uploading">يرفع …</string>
@@ -1316,7 +1316,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="add_favorite_dialog_top_text">أدخل اسم المفضلة</string>
 	<string name="add_favorite_dialog_favourite_added_template">"تم إضافة النقطة المفضلة  \'\'{0}\'\' بنجاح."</string>
 	<string name="update_existing">استبدال</string>
-	<string name="fav_point_dublicate">تكرار اسم النقطة المفضلة</string>
+	<string name="fav_point_dublicate">تكرار في إسم النقطة المفضلة</string>
     <string name="fav_point_dublicate_message">تم تغيير اسم النقطة المفضلة الخاصة بك إلى %1$s لتجنب الأسماء المكررة.</string>
     <string name="fav_imported_sucessfully">تم بنجاح استيراد المفضلة</string>
 	<string name="fav_file_to_load_not_found">لم يتم العثور على ملف GPX يحتوي على الأماكن المفضلة في {0}</string>
