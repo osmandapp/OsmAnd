@@ -279,7 +279,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		if (android.os.Build.VERSION.SDK_INT >= 8) {
 			mAudioFocusHelper = getAudioFocus();
 		}
-		if (mAudioFocusHelper != null) {
+		if (mAudioFocusHelper != null && ctx != null) {
 			mAudioFocusHelper.requestFocus(ctx, streamType);
 		}
 		// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
