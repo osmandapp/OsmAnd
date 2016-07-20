@@ -44,16 +44,15 @@ public class VoiceRouter {
 	private static boolean playedAndArriveAtTarget = false;
 	private static float playGoAheadDist = 0;
 	private static long lastAnnouncedSpeedLimit = 0;
-	private static long lastAnnouncedOffRoute = 0;
 	private static long waitAnnouncedSpeedLimit = 0;
+	private static long lastAnnouncedOffRoute = 0;
 	private static long waitAnnouncedOffRoute = 0;
 	private static boolean suppressDest = false;
 	private static boolean announceBackOnRoute = false;
 
 	// private static long lastTimeRouteRecalcAnnounced = 0;
 	
-	// default speed to have comfortable announcements (if actual speed is higher than it would be problem)
-	// Speed in m/s 
+	// Default speed to have comfortable announcements (Speed in m/s)
 	protected float DEFAULT_SPEED = 12;
 	protected float TURN_DEFAULT_SPEED = 5;
 		
@@ -69,20 +68,19 @@ public class VoiceRouter {
 	private static RouteDirectionInfo nextRouteDirection;
 	private Term empty;
 
-    //remember when last announcement was made
-    private static long lastAnnouncement = 0;
+	// Remember when last announcement was made
+	private static long lastAnnouncement = 0;
 
+	public interface VoiceMessageListener {
+		void onVoiceMessage();
+	}
 
-    public interface VoiceMessageListener {
-    	void onVoiceMessage();
-    }
-    private ConcurrentHashMap<VoiceMessageListener, Integer> voiceMessageListeners;
+	private ConcurrentHashMap<VoiceMessageListener, Integer> voiceMessageListeners;
     
 	public VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
-        this.settings = settings;
-        this.mute = settings.VOICE_MUTE.get();
-
+		this.settings = settings;
+		this.mute = settings.VOICE_MUTE.get();
 		empty = new Struct("");
 		voiceMessageListeners = new ConcurrentHashMap<VoiceRouter.VoiceMessageListener, Integer>();
 	}
@@ -122,7 +120,7 @@ public class VoiceRouter {
 	
 	
 	public void updateAppMode() {
-		// turn prompt starts either at distance, or additionally (TURN_IN and TURN only) if actual-lead-time(currentSpeed) < maximum-lead-time(defined by default speed)
+		// Turn prompt starts either at distance, or additionally (TURN_IN and TURN only) if actual-lead-time(currentSpeed) < maximum-lead-time(defined by default speed)
 		if (router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			PREPARE_LONG_DISTANCE = 3500;             // [105 sec @ 120 km/h]
 			// Issue 1411: Do not play prompts for PREPARE_LONG_DISTANCE, not needed.
@@ -149,7 +147,7 @@ public class VoiceRouter {
 			PREPARE_LONG_DISTANCE = 500;
 			// Do not play:
 			PREPARE_LONG_DISTANCE_END = 300 + 300;
-			// prepare distance is not needed for pedestrian
+			// Prepare distance is not needed for pedestrian
 			PREPARE_DISTANCE = 200;                    // [100 sec]
 			// Do not play:
 			PREPARE_DISTANCE_END = 150 + 100;          // [ 75 sec]
@@ -322,7 +320,7 @@ public class VoiceRouter {
 	protected String getText(Location location, List<LocationPointWrapper> points, double[] dist) {
 		String text = "";
 		for (LocationPointWrapper point : points) {
-			// need to calculate distance to nearest point
+			// Need to calculate distance to nearest point
 			if (text.length() == 0) {
 				if (location != null && dist != null) {
 					dist[0] = point.getDeviationDistance() + 
@@ -364,7 +362,7 @@ public class VoiceRouter {
 					notifyOnVoiceMessage();
 					p.attention(type+"").play();
 				}
-				//See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
+				// See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
 				if (type == AlarmInfoType.TOLL_BOOTH) {
 					suppressDest = false;
 				}
@@ -375,12 +373,12 @@ public class VoiceRouter {
 	public void announceSpeedAlarm(int maxSpeed, float speed) {
 		long ms = System.currentTimeMillis();
 		if (waitAnnouncedSpeedLimit == 0) {
-			// wait 10 seconds before announcement
+			//  Wait 10 seconds before announcement
 			if (ms - lastAnnouncedSpeedLimit > 120 * 1000) {
 				waitAnnouncedSpeedLimit = ms;
 			}	
 		} else {
-			// if we wait before more than 20 sec (reset counter)
+			// If we wait before more than 20 sec (reset counter)
 			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
 				waitAnnouncedSpeedLimit = 0;
 			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
@@ -467,7 +465,7 @@ public class VoiceRouter {
 		}
 
 		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), true);  //I think "true" is correct here, not "!repeat"
-		//Note: getNextRouteDirectionInfoAfter(nextInfo, x, y).distanceTo is distance from nextInfo, not from current position!
+		// Note: getNextRouteDirectionInfoAfter(nextInfo, x, y).distanceTo is distance from nextInfo, not from current position!
 
 		// STATUS_TURN = "Turn (now)"
 		if ((repeat || statusNotPassed(STATUS_TURN)) && isDistanceLess(speed, dist, TURN_DISTANCE, TURN_DEFAULT_SPEED)) {
@@ -477,7 +475,7 @@ public class VoiceRouter {
 				playMakeTurn(currentSegment, next, null);
 			}
 			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
-				if (!next.getTurnType().goAhead()) {  // avoids isolated "and arrive.." prompt
+				if (!next.getTurnType().goAhead()) {  // Avoids isolated "and arrive.." prompt
 					andSpeakArriveAtPoint(nextNextInfo);
 				}
 			}
@@ -500,7 +498,7 @@ public class VoiceRouter {
 		} else if ((repeat || statusNotPassed(STATUS_PREPARE)) && (dist <= PREPARE_DISTANCE)) {
 			if (repeat || dist >= PREPARE_DISTANCE_END) {
 				if (!repeat && (next.getTurnType().keepLeft() || next.getTurnType().keepRight())) {
-					// do not play prepare for keep left/right
+					// Do not play prepare for keep left/right
 				} else {
 					playPrepareTurn(currentSegment, next, dist);
 					playAndArriveAtDestination(repeat, nextInfo, currentSegment);
@@ -518,7 +516,7 @@ public class VoiceRouter {
 
 		// STATUS_UNKNOWN = "Continue for ..." if (1) after route calculation no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 		} else if (statusNotPassed(STATUS_UNKNOWN)) {
-			// strange how we get here but
+			// Strange how we get here but
 			nextStatusAfter(STATUS_UNKNOWN);
 		} else if (repeat || (statusNotPassed(STATUS_PREPARE) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
@@ -575,7 +573,7 @@ public class VoiceRouter {
 		}
 		if (player != null && player.supportsStructuredStreetNames()) {
 			Term next = empty;
-			//Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
+			// Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
 			if (includeDest == true) {
 				next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
 						getTermString(getSpeakablePointName(i.getStreetName())),
@@ -587,7 +585,7 @@ public class VoiceRouter {
 			}
 			Term current = empty;
 			if (currentSegment != null) {
-				//Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
+				// Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
 				if (includeDest == true) {
 					RouteDataObject obj = currentSegment.getObject();
 					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
@@ -662,7 +660,7 @@ public class VoiceRouter {
 				suppressDest = true;
 			} else if (next.getTurnType().isRoundAbout()) {
 				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
-				//Other than in prepareTurn, in prepareRoundabout we do not announce destination, so we can repeat it one more time
+				// Other than in prepareTurn, in prepareRoundabout we do not announce destination, so we can repeat it one more time
 				suppressDest = false;
 			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
 				play.makeUT(dist, getSpeakableStreetName(currentSegment, next, true));
@@ -718,13 +716,13 @@ public class VoiceRouter {
 				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, !suppressDest));
 			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
 				play.makeUT(getSpeakableStreetName(currentSegment, next, !suppressDest));
-			// do not announce goAHeads
+			// Do not announce goAheads
 			//} else if (next.getTurnType().getValue() == TurnType.C)) {
 			//	play.goAhead();
 			} else {
 				isplay = false;
 			}
-			// add turn after next
+			// Add turn after next
 			if ((nextNextInfo != null) && (nextNextInfo.directionInfo != null)) {
 
 				// This case only needed should we want a prompt at the end of straight segments (equivalent of makeTurn) when nextNextInfo should be announced again there.
