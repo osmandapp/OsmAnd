@@ -78,6 +78,7 @@ public class RoutingHelper {
 	private static boolean isDeviatedFromRoute = false;
 	private long deviateFromRouteDetected = 0;
 	//private long wrongMovementDetected = 0;
+	private static boolean voiceRouterStopped = false;
 
 	private RouteCalculationProgressCallback progressRoute;
 
@@ -338,8 +339,10 @@ public class RoutingHelper {
 					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
-					} else if (isDeviatedFromRoute) {
+						voiceRouterStopped = false;
+					} else if (isDeviatedFromRoute && !voiceRouterStopped) {
 						voiceRouter.interruptRouteCommands();
+						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
 					if (distOrth > 350) {
 						voiceRouter.announceOffRoute(distOrth);
