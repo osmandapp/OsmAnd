@@ -2110,6 +2110,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="poi_context_menu_call">إظهار الهاتف لل POI</string>
     <string name="use_high_res_maps">عرض عالي الجودة</string>
     <string name="poi_context_menu_modify">تعديل الPOI</string>
-    <string name="unzipping_file">تفكيك ظغط الملف ...</string>
-    <string name="search_poi_location">البحث عن الإشارة......</string>
+    <string name="unzipping_file">تفكيك ظغط الملف …</string>
+    <string name="search_poi_location">جاري البحث عن الإشارة …</string>
     </resources>
