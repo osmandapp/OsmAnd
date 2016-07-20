@@ -2102,4 +2102,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osm_edit_deleted_poi">حذف OSM POI</string>
     <string name="osmo_use_server_name">الإسم المسجل</string>
     <string name="osmo_auth_pending">في انتظار التصريح للدخول …</string>
+    <string name="osmo_settings">OsMO</string>
     </resources>
