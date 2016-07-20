@@ -2095,4 +2095,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_not_signed_in">فشل تسجيل الدخول إلى خدمة OsMo</string>
     <string name="osmo_auto_connect_descr">الربط بالخدمة تلقائياً بعد بدء تشغيل التطبيق</string>
     <string name="osmo_regenerate_login_ids">إعادة إنشاء معرف ID المستخدم</string>
+    <string name="av_video_quality_descr">تحديد نوعية مخرج الفيديو</string>
+    <string name="favorite_category_add_new">أضفة جديدة</string>
     </resources>
