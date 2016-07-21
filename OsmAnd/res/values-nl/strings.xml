@@ -826,7 +826,7 @@
   <string name="osmand_parking_pm">\'s-middags</string>
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
-  <string name="osmand_parking_plugin_description">De parkeerplaats-plugin bewaatt de locatie waar de auto geparkeerd staat en de gekozen parkeertijd. U kunt uw parkeerplaats en resterende parkeertijd vinden op het Osmand dashboard en op de kaart zelf.\nKan ter herinnering ook een afspraak in uw agenda zetten.</string>
+  <string name="osmand_parking_plugin_description">De parkeerplaats-plugin bewaart de locatie waar de auto geparkeerd staat en de gekozen parkeertijd. U kunt uw parkeerplaats en resterende parkeertijd vinden op het Osmand dashboard en op de kaart zelf.\nKan ter herinnering ook een afspraak in uw agenda zetten.</string>
   <string name="osmand_parking_plugin_name">Parkeerplaats</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
