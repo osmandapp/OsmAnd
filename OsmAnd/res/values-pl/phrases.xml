@@ -1248,7 +1248,7 @@
 
 	<string name="poi_water_characteristic_mineral">Charakterystyka wody: mineralna</string>
 	<string name="poi_water_characteristic_mud">Charakterystyka wody: mętna</string>
-	<string name="poi_water_characteristic_sulfuric">Charakterystyka wody: siarczkowa</string>
+	<string name="poi_water_characteristic_sulfuric">Charakterystyka wody: siarczan(VI)owa</string>
 
 	<string name="poi_amenity_vacuum_cleaner">Odkurzacz</string>
 
