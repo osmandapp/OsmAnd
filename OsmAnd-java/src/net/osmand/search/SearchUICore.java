@@ -240,7 +240,7 @@ public class SearchUICore {
 				if(a1 != null && a2 != null) {
 					if(a1.getType().getKeyName().equals("natural") && 
 							a2.getType().getKeyName().equals("natural")) {
-						similarityRadius = 1000;
+						similarityRadius = 10000;
 					}
 				}
 				return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
