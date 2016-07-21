@@ -65,6 +65,14 @@ public class QuickSearchListItem {
 
 	public static String getName(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
+			case STREET:
+				if (searchResult.localeName.endsWith(")")) {
+					int i = searchResult.localeName.indexOf('(');
+					if (i > 0) {
+						return searchResult.localeName.substring(0, i).trim();
+					}
+				}
+				break;
 			case STREET_INTERSECTION:
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					return searchResult.localeName + " - " + searchResult.localeRelatedObjectName;
@@ -107,10 +115,20 @@ public class QuickSearchListItem {
 					return getCityTypeStr(app, city.getType());
 				}
 			case STREET:
-				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
-					return searchResult.localeRelatedObjectName;
+				StringBuilder streetBuilder = new StringBuilder();
+				if (searchResult.localeName.endsWith(")")) {
+					int i = searchResult.localeName.indexOf('(');
+					if (i > 0) {
+						streetBuilder.append(searchResult.localeName.substring(i + 1, searchResult.localeName.length() - 1));
+					}
 				}
-				return "";
+				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
+					if (streetBuilder.length() > 0) {
+						streetBuilder.append(", ");
+					}
+					streetBuilder.append(searchResult.localeRelatedObjectName);
+				}
+				return streetBuilder.toString();
 			case HOUSE:
 				if (searchResult.relatedObject != null) {
 					Street relatedStreet = (Street) searchResult.relatedObject;
