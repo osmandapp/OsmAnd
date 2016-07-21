@@ -315,7 +315,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	// This only needed for init debugging in TestVoiceActivity:
 					  public static String btScoInit = "";
 
-	private synchronized boolean toggleBtSco(booelan on) {
+	private synchronized boolean toggleBtSco(boolean on) {
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
 		if (on=true) {
 			try {
