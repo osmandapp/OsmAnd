@@ -931,14 +931,14 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="shared_location">Mitgeteilter Standort</string>
 	<string name="osmand_parking_event">Fahrzeug vom Parkplatz abholen</string>
 	<string name="osmand_parking_warning">Warnung</string>
-	<string name="osmand_parking_warning_text">Hinweis zum Abholen des Fahrzeugs wurde vormals zum Kalender hinzugefügt. Hinweis besteht solange, bis dieser manuell gelöscht wird.</string>
-	<string name="osmand_parking_time_limit_title">Zeitlimit für Parken setzen</string>
+	<string name="osmand_parking_warning_text">Ein Eintrag zum Abholen des Fahrzeugs wurde zum Kalender hinzugefügt. Dieser besteht solange, bis er manuell gelöscht wird.</string>
+	<string name="osmand_parking_time_limit_title">Parkzeitbegrenzung setzen</string>
 	<string name="osmand_parking_delete_confirm">Soll der Standorthinweis des geparkten Fahrzeugs gelöscht werden?</string>
 	<string name="osmand_parking_delete">Parkplatz-Marker löschen</string>
 	<string name="osmand_parking_choose_type">Parkplatz-Eigenschaft wählen</string>
 	<string name="osmand_parking_lim_text">zeitlich beschränkt</string>
 	<string name="osmand_parking_no_lim_text">zeitlich unbeschränkt</string>
-	<string name="osmand_parking_add_event">Eintrag in Kalender hinzufügen</string>
+	<string name="osmand_parking_add_event">Einen Eintrag in der Kalender App hinzufügen</string>
 	<string name="osmand_parking_time_limit">zeitlich begrenztes Parken</string>
 	<string name="osmand_parking_time_no_limit">zeitlich unbegrenztes Parken</string>
 	<string name="osmand_parking_position_description">Standort des geparkten Fahrzeugs. %1$s</string>
@@ -946,7 +946,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Park-Position</string>
-	<string name="osmand_parking_plugin_description">Dieses Plugin ermöglicht das Speichern des Standorts eines geparkten Fahrzeugs sowie die Anzeige der restlichen Parkzeit (falls das Parken zeitlich begrenzt ist).\n\nParkplatz und Restzeit werden sowohl auf dem OsmAnd-Info-Bildschirm wie auch auf dem Kartenbildschirm dargestellt. Optional kann ein Kalendereintrag als Erinnerung erstellt werden.</string>
+	<string name="osmand_parking_plugin_description">Dieses Plugin ermöglicht es den Standort eines geparkten Fahrzeugs zu speichern sowie die restliche Parkzeit anzuzeigen (falls das Parken zeitlich begrenzt ist).\nParkplatz und Restzeit werden sowohl auf dem OsmAnd Dashboard wie auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android Kalender als Erinnerung hinzugefügt werden.</string>
 	<string name="osmand_parking_plugin_name">Parkplatz-Standort</string>
 	<string name="context_menu_item_add_parking_point">Parkplatz-Standort festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -1615,7 +1615,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus aus v1.9 nicht verwenden</string>
     <string name="speak_pedestrian">Fußgängerübergänge</string>
     
-    <string name="parking_place">Parkplätze</string>
+    <string name="parking_place">Parkplatz</string>
     <string name="remove_the_tag">TAG ENTFERNEN</string>
     <string name="gps_status">GPS-Status</string>
     <string name="version_settings_descr">Nightly-Builds herunterladen</string>
@@ -2183,4 +2183,6 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="city_type_district">Stadtteil</string>
     <string name="city_type_neighbourhood">Nachbarschaft</string>
     <string name="postcode">Postleitzahl</string>
+    <string name="search_categories">Kategorien</string>
+    <string name="lang_hsb">Obersorbisch</string>
     </resources>
