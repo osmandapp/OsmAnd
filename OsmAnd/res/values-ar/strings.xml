@@ -232,7 +232,7 @@
     <string name="plugin_distance_point">نقطة</string>
     <string name="gpx_file_name">GPX اسم الملف</string>
     <string name="gpx_saved_sucessfully">ملف GPX حفظها بنجاح {0}</string>
-    <string name="osmand_distance_planning_plugin_description">إنشاء مسارات (أو استخدام / تعديل الملفات الموجودة GPX) لقياس المسافة بين نقاط. حفظ ك GPX، ويمكن استخدامها لتخطيط المسارات GPX.</string>
+    <string name="osmand_distance_planning_plugin_description"/>
     <string name="osmand_distance_planning_plugin_name">حاسبة مسافة وأداة التخطيط</string>
     <string name="shared_string_do_not_show_again">لا تظهر مرة أخرى</string>
     <string name="distance_measurement_start_editing">بدء تحرير</string>
@@ -357,15 +357,15 @@
     <string name="map_widget_av_notes">ملاحظات الصوت/الفيديو</string>
     <string name="audionotes_plugin_description">تدوين الملاحظات السمعية/البصرية أثناء الرحلة</string>
     <string name="audionotes_plugin_name">الملاحظات الصوتية / الفيديو</string>
-    <string name="download_roads_only_maps">خرائط الطرق فقط</string>
+    <string name="download_roads_only_maps">خرائط الطرقات فقط</string>
     
 	<string name="rendering_attr_noAdminboundaries_description">"منع عرض الحدود الإقليمية ( مستويات إدارية  5- 9 )"</string>
     
     
 	
 	<string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرق فقط:</string>
-	<string name="rendering_attr_showRoadMaps_name">خرائط الطرق فقط</string>
+    <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرقات فقط :</string>
+	<string name="rendering_attr_showRoadMaps_name">خرائط الطرقات فقط</string>
     <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام تعليمات أندرويد البطيئة بدلا من التعليمات البرمجية الأصلية) .</string>
     <string name="native_library_not_running">يعمل التطبيق في الوضع الآمن ( عطّله من إعدادات ).</string>
     <string name="background_service_is_enabled_question">خدمة وضع السكون لـOsmAnd لا تزال قيد التشغيل. هل تريد إيقافها ؟</string>
@@ -451,21 +451,21 @@
 	<string name="bg_service_interval">تعيين الفاصل الزمني للتنبيه:</string>
 	<string name="continue_follow_previous_route_auto">المسار السابق لم يكتمل. هل تريد متابعته؟ (%1$s ثانية)</string>
 	<string name="route_updated_loc_found">سيعاد احتساب المسار حالما يتم العثور على الموقع</string>
-	<string name="osmand_parking_position_description_add_time">السيارة متوقفة على</string>
+	<string name="osmand_parking_position_description_add_time">لقد ركنت سيارتك على</string>
 	<string name="select_animate_speedup">حدد سرعة محاكاة المسار</string>
     	<string name="global_app_allocated_memory_descr">الذاكرة المخصصة %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
 	<string name="native_app_allocated_memory">إجمالي الذاكرة الأصلية</string>
 	<string name="starting_point_too_far">نقطة الانطلاق بعيدة جدا عن أقرب طريق.</string>
 	<string name="shared_location">موقع مشترك</string>
 	<string name="osmand_parking_event">استرجع السيارة من الموقف</string>
-	<string name="osmand_parking_warning_text">لقد أضيف تنبيه لأخذ سيارتك مسبقا إلى تقويمك. سيظل هناك حتى تقوم بحذفه يدويا.</string>    
+	<string name="osmand_parking_warning_text">لقد أضيف تنبيه لاسترجاع سيارتك مسبقا إلى تقويمك. سيظل التنبيه هناك حتى تقوم بحذفه يدويا.</string>    
 	<string name="osmand_parking_time_limit_title">حدد المهلة القصوى لموقف السياراة</string>
 	<string name="osmand_parking_delete_confirm">هل تريد إزالة علامة موقع ركن السيارة ؟</string>
 	<string name="osmand_parking_delete">إزالة علامة وقوف السيارة</string>
 	<string name="osmand_parking_choose_type">اختر نوع مواقف السيارات</string>
 	<string name="osmand_parking_lim_text">وقت محدود</string>
 	<string name="osmand_parking_no_lim_text">وقت غير محدود</string>
-	<string name="osmand_parking_add_event">اضف إخطارا إلى تطبيق التقويم</string>
+	<string name="osmand_parking_add_event">أضف إخطارا إلى تطبيق التقويم</string>
 	<string name="osmand_parking_time_limit">مواقف محدودة زمنيا</string>
 	<string name="osmand_parking_time_no_limit">مواقف غير محدودة زمنيا</string>
 	<string name="av_photo_play_sound_descr">فعّل هذا في حال رغبتك بسماع نغمة التقاط الصّور</string>
@@ -486,9 +486,9 @@
 	<string name="osmand_parking_pm">م</string>
 	<string name="osmand_parking_am">ص</string>
 	<string name="osmand_parking_position_name">نقطة وقوف السيارات</string>
-	<string name="osmand_parking_plugin_description">هذا الملحق يسمح لك بتخزين أماكن مواقف سيارتك.</string>
+	<string name="osmand_parking_plugin_description"/>
 	<string name="osmand_parking_plugin_name">ملحق مواقف السيارة</string>
-	<string name="context_menu_item_add_parking_point">علّم كموقف السيارات</string>
+	<string name="context_menu_item_add_parking_point">أشر إليه كموقف السيارات</string>
 	<string name="context_menu_item_delete_parking_point">احذف علامة وقوف السيارات</string>
 	<string name="asap">في أسرع وقت ممكن</string>
 	<string name="route_roundabout">دوّار: خذ المخرج %1$d ثم استمر</string>
@@ -520,13 +520,13 @@
 	<string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات</string>
     
 	
-	<string name="osmand_accessibility_description">اعرض إعدادات مميزات الإتاحة الخاصة.</string>
+	<string name="osmand_accessibility_description"/>
 	
 	<string name="osmand_development_plugin_description">عرض إعدادات مميزات التطوير والتنقيح من مثل محاكاة المسار أو عرض أداء التصيير.</string>
 	<string name="plugins_screen">ملحقات</string>
 	
 	<string name="prefs_plugins_descr">تفعّل الملحقات إعداداتٍ متقدمة ووظائف إضافية</string>
-	<string name="osm_editing_plugin_description">تظهر الإعدادات اللازمة للتغذية الراجعة لموقع OSM  من مثل تجميع/تحرير كائنات النقاط المهمة، فتح/تعليق علل OSM والمساهمة بلمفات GPX المسجلة (يتطلب حساب OSM).</string>
+	<string name="osm_editing_plugin_description"/>
 	<string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
 	<string name="play_commands_of_currently_selected_voice">شغل أوامر الصوت المحدد الحالي</string>
 	<string name="switch_to_raster_map_to_see">لا توجد خرائط متجهية محلية لهذا المكان. يمكنك تنزيل إحداها من الإعدادات (إدارة ملفات الخرائط)، أو التغيير لخرائط الانترنت (فعّل ملحق الخرائط عبر الإنترنت لهذا).</string>
@@ -655,7 +655,7 @@
     <string name="shared_string_delete_all">احذف الكل</string>
     
     <string name="osmand_srtm_long_description_1000_chars">يوفر هذا البرنامج المساعد الخطوط الكنتورية التي يمكن عرضها في OsmAnd \'ق حاليا الخرائط. ويستند البيانات العالمية (بين 70 درجة شمالا و 70 درجة جنوبا) على القياسات التي كتبها SRTM (المكوك بعثة الطوبوغرافيا الرادار) وASTER (المتقدم المحمول في الفضاء الانبعاث الحراري وانعكاس الإشعاع)، أداة التصوير على متن تيرا، القمر الصناعي الرئيسي من وكالة ناسا \'ق نظام مراقبة الأرض. ASTER هو جهد تعاوني بين وكالة ناسا واليابان \'ق وزارة الاقتصاد والتجارة والصناعة (METI)، وأنظمة الفضاء اليابانية (J-spacesystems)</string>
-    <string name="srtm_plugin_description">يسهل تحميله خطوط الكنتورية وحاليا hillshades (\'إعدادات \' \ → \'إدارة البيانات \' → \'تحميل \' → حدد المطلوب نوع الخريطة).</string>
+    <string name="srtm_plugin_description"/>
     
     <string name="osmand_long_description_1000_chars">
 		↵
@@ -756,7 +756,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 قائمة البلدان المدعومة ( أساسا في جميع أنحاء العالم ! ) : ↵
 أفغانستان ، ألبانيا ، الجزائر ، أندورا ، أنغولا ، أنغيلا ، أنتيغوا و بربودا، الأرجنتين، أرمينيا، أروبا، أستراليا ، النمسا ، أذربيجان ، جزر البهاما، البحرين ، بنغلاديش ، بربادوس، بيلاروس ، بلجيكا، بليز، بنن ، برمودا ، بوتان ، بوليفيا ، بونير ، البوسنة و الهرسك ، بوتسوانا ، البرازيل ، جزر فيرجين البريطانية ، بروناي ، بلغاريا ، بوركينا فاسو، بوروندي ، كمبوديا ، الكاميرون، كندا، الرأس الأخضر ، جمهورية أفريقيا الوسطى ، تشاد ، شيلي ، الصين ، كولومبيا ، جزر القمر، الكونغو ، كوستاريكا وساحل العاج و كرواتيا وكوبا و جزر الأنتيل ، قبرص ، جمهورية التشيك ، الدنمارك ، جيبوتي ، دومينيكا ، جمهورية الدومينيكان ، الإكوادور ، مصر ، السلفادور ، غينيا الاستوائية ، إريتريا ، إستونيا ، إثيوبيا ، فيجي ، فنلندا ، فرنسا ، غيانا الفرنسية، الفرنسية بولينيزيا، الغابون ، غامبيا ، جورجيا ، ألمانيا، غانا ، جبل طارق، اليونان ، جرينلاند ، وغرينادا ، جوادلوب ، وغوام ، وغواتيمالا، غيرنسي ، وغينيا ، وغينيا بيساو ، وغيانا، وهايتي، و الفاتيكان ، وهندوراس، هونغ كونغ ، هنغاريا، آيسلندا ، الهند ، إندونيسيا ، إيران ، العراق ، ايرلندا ، جزيرة مان ، اسرائيل، ايطاليا ، جامايكا ، اليابان ، جيرسي، الأردن ، كازاخستان، كينيا ، كيريباتي ، كوريا الشمالية وكوريا الجنوبية، الكويت ، قرغيزستان ، لاوس ، لاتفيا، لبنان ، ليسوتو ، ليبيريا ، ليبيا ، ليختنشتاين، ليتوانيا ، لوكسمبورغ، ماكاو ، مقدونيا ، مدغشقر ، ملاوي ، ماليزيا ، جزر المالديف ، مالي ، مالطا ، مارتينيك، موريتانيا ، موريشيوس ، مايوت ، المكسيك ، ميكرونيزيا، مولدوفا ، موناكو ، ومنغوليا، الجبل الأسود ، ومونتسيرات، و المغرب وموزامبيق ، ميانمار ، ناميبيا ، ناورو ، نيبال، هولندا ، جزر الأنتيل الهولندية ، كاليدونيا الجديدة، نيوزيلندا ، نيكاراغوا ، النيجر ، نيجيريا ، النرويج، عمان، باكستان ، بالاو، الأراضي الفلسطينية ، بنما ، بابوا غينيا الجديدة ، باراغواي ، بيرو ، الفلبين ، بولندا ، البرتغال ، بورتوريكو، قطر ، رومانيا ، روسيا ، رواندا ، سانت بارتيليمي ، وسانت هيلانة ، وسانت كيتس و نيفيس ، سانت لوسيا ، وسانت مارتن ، وسانت بيير و ميكلون، سانت فنسنت وجزر غرينادين ، ساموا ، سان مارينو ، المملكة العربية السعودية، السنغال ، صربيا ، سيشيل ، سيراليون ، سنغافورة ، سلوفاكيا ، سلوفينيا ، الصومال ، جنوب أفريقيا ، جورجيا الجنوبية ، وجنوب السودان، أسبانيا، سري ل انكا، السودان، سورينام ، سوازيلاند ، السويد، سويسرا، سوريا، تايوان ، طاجيكستان ، تنزانيا ، تايلاند ، وتيمور الشرقية ، وتوغو ، وتوكيلاو ، وتونغا ، وترينيداد و توباغو، تونس، تركيا ، تركمانستان ، توفالو، أوغندا ، أوكرانيا ، الإمارات العربية المتحدة ، المملكة المتحدة (UK ) ، الولايات المتحدة الأمريكية (USA) ، أوروغواي ، أوزبكستان ، فانواتو ، فنزويلا ، فيتنام ، واليس و فوتونا، الصحراء الغربية ، اليمن ، زامبيا ، زيمبابوي. ↵
 	</string>
-	<string name="osmand_rastermaps_plugin_description">"عن طريق هذه الإضافة يمكنك الوصول إلى أنواع عديدة من الخرائط الحية (مسبقة التجهيز)، بدءا من خرائط Openstreetmap مسبقة التجهيز (مثل Mapnik) إلى صور الأقمار الصناعية والطبقات محددة الغرض مثل خرائط الطقس، وخرائط المناخ، والخرائط الجيولوجية،،، إلخ.\n\nأي من هذه الخرائط يمكن استخدامه كخريطة أساسية (قاعدة) لعرضها على واجهة خريطة OsmAnd، أو كخريطة فوقية أو تحتية لخريطة أساسية أخرى (مثل خرائط أوسمند العادية). ولكي تجعل أي خريطة تحتية أكثر ظهورا، فيمكنك إخفاء عناصر محددة من خرائط OsmAnd المتجهية عن طريق قائمة \'ضبط الخريطة\' كما ترغب.\n\nالخرائط مسبقة التجهيز يمكن الحصول عليها إما مباشرة من مصادر أونلاين، أو يمكن تجهيزها للاستخدام بدون اتصال (ونسخها يدويا إلى مجلد بيانات OsmAnd) بصيغة قواعد بيانات sqlite والتي يمكن إنشاؤها من خلال أدوات خارجية متوفرة ومتنوعة لإعداد الخرائط. "</string>
+	<string name="osmand_rastermaps_plugin_description">"عن طريق هذه الإضافة يمكنك الوصول إلى أنواع عديدة من الخرائط الحية (مسبقة التجهيز)، بدءا من خرائط OpenStreetMap مسبقة التجهيز (مثل Mapnik) إلى صور الأقمار الصناعية والطبقات محددة الغرض مثل خرائط الطقس، وخرائط المناخ، والخرائط الجيولوجية،،، إلخ.\n\nأي من هذه الخرائط يمكن استخدامه كخريطة أساسية (قاعدة) لعرضها على واجهة خريطة OsmAnd، أو كخريطة فوقية أو تحتية لخريطة أساسية أخرى (مثل خرائط أوسمند العادية). ولكي تجعل أي خريطة تحتية أكثر ظهورا، فيمكنك إخفاء عناصر محددة من خرائط OSMAnd المتجهية عن طريق قائمة ضبط الخريطة كما ترغب.\n\nالخرائط مسبقة التجهيز يمكن الحصول عليها إما مباشرة من مصادر أونلاين، أو يمكن تجهيزها للاستخدام بدون اتصال (ونسخها يدويا إلى مجلد بيانات OSMAnd) بصيغة قواعد بيانات sqlite والتي يمكن إنشاؤها من خلال أدوات خارجية متوفرة ومتنوعة لإعداد الخرائط. "</string>
 	
 	<string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
 	<string name="av_camera_focus_descr">تحديد نوع الكاميرا الداخلية ,التركيز</string>
