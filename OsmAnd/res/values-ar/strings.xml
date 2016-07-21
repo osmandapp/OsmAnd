@@ -2130,12 +2130,12 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="n_items_removed">تمت ازالة العناصر</string>
     <string name="rec_split_desc">اعد كتابة اللقطات عند تجاوز المساحة المتستخدمة لمساحة التخزين</string>
     <string name="rec_split_clip_length_desc">طول اللقطات المسجلة لن يتجاوز المجال الزمني المحدد</string>
-    <string name="no_camera_permission">التطبيق ليس لديه اذن الوصول للكاميرا</string>
-    <string name="no_microphone_permission">التطبيق ليس لديه اذن الوصول للميكروفون</string>
+    <string name="no_camera_permission">لايسمح للتطبيق الوصول إلى الكاميرا.</string>
+    <string name="no_microphone_permission">ليس للتطبيق إذن للوصول إلى الميكروفون.</string>
     <string name="av_audio_format">صيغة اخراج الصوت</string>
     <string name="av_audio_format_descr">حدد صيغة الصوت المخرج</string>
     <string name="opening_changeset">فتح مجموعة التغييرات …</string>
-    <string name="loading_poi_obj">تحميل الPOI</string>
+    <string name="loading_poi_obj">تحميل ال POI …</string>
     <string name="auth_failed">فشل الترخيص</string>
     <string name="show_poi_over_map">إظهار الPOI</string>
     <string name="searchpoi_activity">إختار الPOI</string>
@@ -2156,7 +2156,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="tab_title_basic">اساسي</string>
     <string name="next_proceed">التالي</string>
     <string name="poi_dialog_poi_type">نوع الPOI</string>
-    <string name="please_specify_poi_type">منفضلك حدد نوع الPOI</string>
+    <string name="please_specify_poi_type">منفضلك حدد نوع ال POI.</string>
     <string name="free_downloads_used">التحميلات المجانية المستخدمة</string>
     <string name="other_menu_group">آخرى</string>
     <string name="navigation_item_description">تنصيب الملاحة</string>
