@@ -1811,7 +1811,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="default_speed_system">وحدة السرعة</string>
     <string name="plugin_settings">ملحقات</string>
     <string name="plugins_menu_group">ملحقات</string>
-    <string name="show_free_version_banner">إظهار شعار ”نسخة مجانية“</string>
+    <string name="show_free_version_banner">إظهار شريط ”نسخة مجانية“</string>
     <string name="show_free_version_banner_description">حتى و إن كنت قد دفعت النسخة ، يمكنك استظهار شعار ”نسخة مجانية“</string>
     <string name="rendering_value_red_name">أحمر</string>
     <string name="rendering_value_translucent_red_name">أحمر شفاف</string>
@@ -2134,4 +2134,33 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="no_microphone_permission">التطبيق ليس لديه اذن الوصول للميكروفون</string>
     <string name="av_audio_format">صيغة اخراج الصوت</string>
     <string name="av_audio_format_descr">حدد صيغة الصوت المخرج</string>
+    <string name="opening_changeset">فتح مجموعة التغييرات …</string>
+    <string name="loading_poi_obj">تحميل الPOI</string>
+    <string name="auth_failed">فشل الترخيص</string>
+    <string name="show_poi_over_map">إظهار الPOI</string>
+    <string name="searchpoi_activity">إختار الPOI</string>
+    <string name="incremental_search_street">إختيار تدريجي للشارع</string>
+    <string name="incremental_search_building">إختيار تدريجي للبناية</string>
+    <string name="choose_intersected_street">إختار تقاطع الطرق</string>
+    <string name="favourites_context_menu_add">أضف للمفضلة</string>
+    <string name="poi_edit_title">تحرير الPOI</string>
+    <string name="poi_remove_confirm_template">مسح{0}(أضف تعليق)؟</string>
+    <string name="use_fast_recalculation">إعادة حساب الطريق الذكي</string>
+    <string name="failed_to_upload">فشل الرفع</string>
+    <string name="delete_change">مسع التعديل</string>
+    <string name="successfully_uploaded_pattern">تم الرفع بنجاح{0}/{1}</string>
+    <string name="error_message_pattern">خطأ:{0}</string>
+    <string name="dahboard_options_dialog_title">إعدادت سطح المكتب</string>
+
+    <string name="shared_string_card_was_hidden">"تم إخفاء  البطاقة"</string>
+    <string name="tab_title_basic">اساسي</string>
+    <string name="next_proceed">التالي</string>
+    <string name="poi_dialog_poi_type">نوع الPOI</string>
+    <string name="please_specify_poi_type">منفضلك حدد نوع الPOI</string>
+    <string name="free_downloads_used">التحميلات المجانية المستخدمة</string>
+    <string name="other_menu_group">آخرى</string>
+    <string name="navigation_item_description">تنصيب الملاحة</string>
+    <string name="map_viewing_item">شاهد الخريطة</string>
+    <string name="use_dashboard_btn">إستعمل لوحة التحكم</string>
+    <string name="use_drawer_btn">إستعمل القائمة</string>
     </resources>
