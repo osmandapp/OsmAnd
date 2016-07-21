@@ -2178,4 +2178,6 @@
     <string name="lang_hu_formal">Vengrų (oficiali)</string>
     <string name="search_categories">Kategorijos</string>
     <string name="map_widget_battery">Akumuliatoriaus įkrova</string>
+    <string name="city_type_neighbourhood">Kaimynystė</string>
+    <string name="shared_string_from">iš</string>
     </resources>
