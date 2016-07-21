@@ -211,7 +211,7 @@
     <string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
     <string name="osmand_parking_hours">Timer</string>
     <string name="osmand_parking_minutes">Minutter</string>
-    <string name="osmand_parking_position_description_add_time">Bilen blev parkeret kl.</string>
+    <string name="osmand_parking_position_description_add_time">Bilen er parkeret kl.</string>
 
     <string name="select_animate_speedup">Vælg hastighed for rutesimulering</string>
     <string name="global_app_allocated_memory_descr">Tildelt hukommelse %1$s MB (Android grænse %2$s MB, Dalvik %3$s MB).</string>
@@ -223,20 +223,20 @@
     <string name="shared_location">Delt placering</string>
     <string name="osmand_parking_event">Hent bilen fra parkering</string>
     <string name="osmand_parking_warning">Advarsel</string>
-    <string name="osmand_parking_warning_text">Påmindelse om at afhente bil blev tidligere tilføjet til kalender. Den forblive der, indtil den slettes manuelt.</string>
+    <string name="osmand_parking_warning_text">En påmindelse om at afhente bilen er blevet tilføjet til kalenderen. Der forbliver den, indtil den slettes manuelt.</string>
     <string name="osmand_parking_time_limit_title">Indstil tidsgrænsen for parkering</string>
     <string name="osmand_parking_delete_confirm">Slet parkeringsmarkør?</string>
     <string name="osmand_parking_delete">Slet P-plads markør</string>
     <string name="osmand_parking_choose_type">Vælg parkeringstype</string>
     <string name="osmand_parking_lim_text">Tidsbegrænset</string>
     <string name="osmand_parking_no_lim_text">Tidsubegrænset</string>
-    <string name="osmand_parking_add_event">Tilføj en meddelelse til kalender</string>
+    <string name="osmand_parking_add_event">Tilføj en påmindelse til kalenderen</string>
     <string name="osmand_parking_time_limit">Tidsbegrænset parkering</string>
     <string name="osmand_parking_time_no_limit">Ikke tidsbgrænset parkering</string>
-    <string name="osmand_parking_position_description">Den parkerede bils position. %1$s</string>
+    <string name="osmand_parking_position_description">Den parkerede bils placering. %1$s</string>
     <string name="osmand_parking_position_description_add">Afhent bilen:</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Parkeringssted</string>
+    <string name="osmand_parking_position_name">Parkeringsplads</string>
     <string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget tid der er tilbage (hvis der er en tidsfrist).\nBåde placering og tid er synlige på betjeningspanel samt i modul på kortskærmen. En alarm kan tilføjes til kalenderen, som en påmindelse.</string>
     <string name="osmand_parking_plugin_name">Parkering</string>
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
@@ -2390,4 +2390,5 @@
     <string name="city_type_neighbourhood">Kvarter</string>
     <string name="postcode">Postnummer</string>
     <string name="search_categories">Kategorier</string>
+    <string name="lang_hsb">Sorbisk (øvresorbisk)</string>
     </resources>
