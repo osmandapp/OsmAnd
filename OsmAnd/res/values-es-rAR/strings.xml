@@ -1013,7 +1013,7 @@
     <string name="shared_location">Compartir ubicación</string>
     <string name="osmand_parking_event">Buscar el auto del estacionamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
-    <string name="osmand_parking_warning_text">Una notificación para recoger tu automóvil fue añadida al calendario. Permanecerá allí hasta que la borres manualmente.</string>
+    <string name="osmand_parking_warning_text">Una notificación para recoger tu automóvil se añadió al Calendario. Permanecerá allí hasta que la borres manualmente.</string>
     <string name="osmand_parking_time_limit_title">Definir el tiempo límite del estacionamiento</string>
     <string name="osmand_parking_delete_confirm">¿Borrar marcador del estacionamiento?</string>
     <string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
