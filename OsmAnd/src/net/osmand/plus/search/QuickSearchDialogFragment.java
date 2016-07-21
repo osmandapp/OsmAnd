@@ -30,10 +30,13 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
+import net.osmand.data.Building;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -376,7 +379,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					List<QuickSearchListItem> rows = new ArrayList<>();
 					OsmandApplication app = getMyApplication();
 					for (SearchResult sr : history) {
-						rows.add(new QuickSearchListItem(app, sr, sp.getSettings().getLang()));
+						rows.add(new QuickSearchListItem(app, sr));
 					}
 					searchListFragment.updateListAdapter(rows, false);
 				}
@@ -411,7 +414,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					List<QuickSearchListItem> rows = new ArrayList<>();
 					OsmandApplication app = getMyApplication();
 					for (SearchResult sr : amenityTypes) {
-						rows.add(new QuickSearchListItem(app, sr, sp.getSettings().getLang()));
+						rows.add(new QuickSearchListItem(app, sr));
 					}
 					searchListFragment.updateListAdapter(rows, false);
 				}
@@ -566,7 +569,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		List<QuickSearchListItem> rows = new ArrayList<>();
 		if (res.getCurrentSearchResults().size() > 0) {
 			for (final SearchResult sr : res.getCurrentSearchResults()) {
-				rows.add(new QuickSearchListItem(app, sr, searchUICore.getPhrase().getSettings().getLang()));
+				rows.add(new QuickSearchListItem(app, sr));
 			}
 		}
 		if (mainSearchFragment != null) {
@@ -846,11 +849,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		private void showOnMap(SearchResult searchResult) {
 			if (searchResult.location != null) {
+				OsmandApplication app = getMyApplication();
 				PointDescription pointDescription = null;
 				Object object = searchResult.object;
 				switch (searchResult.objectType) {
 					case POI:
-						pointDescription = getMapActivity().getMapLayers().getPoiMapLayer().getObjectName(object);
+						String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(
+								(Amenity) object, searchResult.requiredSearchPhrase.getSettings().getLang());
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 						break;
 					case RECENT_OBJ:
 						HistoryEntry entry = (HistoryEntry) object;
@@ -861,14 +867,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						pointDescription = fav.getPointDescription();
 						break;
 					case HOUSE:
-						pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
+								QuickSearchListItem.getName(app, searchResult) + ", " + QuickSearchListItem.getTypeName(app, searchResult));
 						break;
 					case LOCATION:
 						LatLon latLon = (LatLon) object;
 						pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
 						break;
 					case STREET_INTERSECTION:
-						pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
+								QuickSearchListItem.getName(app, searchResult));
 						break;
 					case WPT:
 						WptPt wpt = (WptPt) object;

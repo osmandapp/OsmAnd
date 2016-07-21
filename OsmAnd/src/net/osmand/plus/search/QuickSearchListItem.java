@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.binary.BinaryMapIndexReader;
@@ -27,40 +28,42 @@ public class QuickSearchListItem {
 
 	protected OsmandApplication app;
 	private SearchResult searchResult;
-	private String lang;
 
-	public QuickSearchListItem(OsmandApplication app, SearchResult searchResult, String lang) {
+	public QuickSearchListItem(OsmandApplication app, SearchResult searchResult) {
 		this.app = app;
 		this.searchResult = searchResult;
-		this.lang = lang;
 	}
 
 	public SearchResult getSearchResult() {
 		return searchResult;
 	}
 
-	private String getCityTypeStr(CityType type) {
+	public static String getCityTypeStr(Context ctx, CityType type) {
 		switch (type) {
 			case CITY:
-				return app.getString(R.string.city_type_city);
+				return ctx.getString(R.string.city_type_city);
 			case TOWN:
-				return app.getString(R.string.city_type_town);
+				return ctx.getString(R.string.city_type_town);
 			case VILLAGE:
-				return app.getString(R.string.city_type_village);
+				return ctx.getString(R.string.city_type_village);
 			case HAMLET:
-				return app.getString(R.string.city_type_hamlet);
+				return ctx.getString(R.string.city_type_hamlet);
 			case SUBURB:
-				return app.getString(R.string.city_type_suburb);
+				return ctx.getString(R.string.city_type_suburb);
 			case DISTRICT:
-				return app.getString(R.string.city_type_district);
+				return ctx.getString(R.string.city_type_district);
 			case NEIGHBOURHOOD:
-				return app.getString(R.string.city_type_neighbourhood);
+				return ctx.getString(R.string.city_type_neighbourhood);
 			default:
-				return app.getString(R.string.city_type_city);
+				return ctx.getString(R.string.city_type_city);
 		}
 	}
 
 	public String getName() {
+		return getName(app, searchResult);
+	}
+
+	public static String getName(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
 			case STREET_INTERSECTION:
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
@@ -76,28 +79,32 @@ public class QuickSearchListItem {
 	}
 
 	public String getTypeName() {
+		return getTypeName(app, searchResult);
+	}
+
+	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
 			case CITY:
 				City city = (City) searchResult.object;
-				return getCityTypeStr(city.getType());
+				return getCityTypeStr(app, city.getType());
 			case POSTCODE:
 				return app.getString(R.string.postcode);
 			case VILLAGE:
 				city = (City) searchResult.object;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					if (searchResult.distRelatedObjectName > 0) {
-						return getCityTypeStr(city.getType())
+						return getCityTypeStr(app, city.getType())
 								+ " • "
 								+ OsmAndFormatter.getFormattedDistance((float) searchResult.distRelatedObjectName, app)
 								+ " " + app.getString(R.string.shared_string_from) + " "
 								+ searchResult.localeRelatedObjectName;
 					} else {
-						return getCityTypeStr(city.getType())
+						return getCityTypeStr(app, city.getType())
 								+ ", "
 								+ searchResult.localeRelatedObjectName;
 					}
 				} else {
-					return getCityTypeStr(city.getType());
+					return getCityTypeStr(app, city.getType());
 				}
 			case STREET:
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
@@ -108,7 +115,8 @@ public class QuickSearchListItem {
 				if (searchResult.relatedObject != null) {
 					Street relatedStreet = (Street) searchResult.relatedObject;
 					if (relatedStreet.getCity() != null) {
-						return searchResult.localeRelatedObjectName + ", " + relatedStreet.getCity().getName(lang, true);
+						return searchResult.localeRelatedObjectName + ", "
+								+ relatedStreet.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
 					} else {
 						return searchResult.localeRelatedObjectName;
 					}
@@ -117,7 +125,7 @@ public class QuickSearchListItem {
 			case STREET_INTERSECTION:
 				Street street = (Street) searchResult.object;
 				if (street.getCity() != null) {
-					return street.getCity().getName(lang, true);
+					return street.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
 				}
 				return "";
 			case POI_TYPE:
@@ -180,6 +188,10 @@ public class QuickSearchListItem {
 	}
 
 	public Drawable getTypeIcon() {
+		return getTypeIcon(app, searchResult);
+	}
+
+	public static Drawable getTypeIcon(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
 			case FAVORITE:
 				return app.getIconsCache().getThemedIcon(R.drawable.ic_small_group);
@@ -196,6 +208,10 @@ public class QuickSearchListItem {
 	}
 
 	public Drawable getIcon() {
+		return getIcon(app, searchResult);
+	}
+
+	public static Drawable getIcon(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
 			case CITY:
 				return app.getIconsCache().getIcon(R.drawable.ic_action_building_number,
