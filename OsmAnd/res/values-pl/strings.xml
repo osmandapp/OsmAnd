@@ -794,7 +794,7 @@
     <string name="gpxup_private">Prywatny</string>
     <string name="osmand_parking_event">Odbierz samochód z parkingu</string>
     <string name="osmand_parking_warning">Uwaga</string>
-    <string name="osmand_parking_warning_text">Powiadomienie o odebraniu samochodu zostało wcześniej dodane do kalendarza. Pozostanie ono tam, dopóki nie usuniesz go ręcznie.</string>
+    <string name="osmand_parking_warning_text">Powiadomienie o odebraniu samochodu zostało dodane do kalendarza. Pozostanie ono tam, dopóki nie usuniesz go ręcznie.</string>
     <string name="osmand_parking_time_limit_title">Ustaw limit czasu parkowania</string>
     <string name="osmand_parking_delete_confirm">Usunąć oznaczenie położenia zaparkowanego samochodu?</string>
     <string name="osmand_parking_delete">Usuń znacznik parkowania</string>
