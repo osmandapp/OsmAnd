@@ -538,7 +538,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		mapZoomIn.updateVisibility(!dialogOpened);
 		mapZoomOut.updateVisibility(!dialogOpened);
-		compassHud.updateVisibility(!dialogOpened && cachedRotate != 0);
+		compassHud.updateVisibility(!dialogOpened);
 		layersHud.updateVisibility(!dialogOpened);
 		quickSearch.updateVisibility(!dialogOpened);
 
@@ -584,7 +584,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_white : R.drawable.map_compass);
 			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_compass_opt));
 		}
-		compassHud.updateVisibility(cachedRotate != 0);
 	}
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
