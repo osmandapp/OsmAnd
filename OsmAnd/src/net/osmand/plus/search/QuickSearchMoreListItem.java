@@ -10,7 +10,7 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	private OnClickListener onClickListener;
 
 	public QuickSearchMoreListItem(OsmandApplication app, String name, OnClickListener onClickListener) {
-		super(app, null, null);
+		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
 	}
