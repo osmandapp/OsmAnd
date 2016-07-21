@@ -538,7 +538,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		mapZoomIn.updateVisibility(!dialogOpened);
 		mapZoomOut.updateVisibility(!dialogOpened);
-		compassHud.updateVisibility(!dialogOpened);
+		compassHud.updateVisibility(!dialogOpened && cachedRotate != 0);
 		layersHud.updateVisibility(!dialogOpened);
 		quickSearch.updateVisibility(!dialogOpened);
 
@@ -571,7 +571,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		float mapRotate = mapActivity.getMapView().getRotate();
 		if (mapRotate != cachedRotate) {
 			cachedRotate = mapRotate;
-			// Aply animation to image view
+			// Apply animation to image view
 			compassHud.iv.invalidate();
 		}
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
@@ -584,6 +584,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_white : R.drawable.map_compass);
 			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_compass_opt));
 		}
+		compassHud.updateVisibility(cachedRotate != 0);
 	}
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
