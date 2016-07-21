@@ -2183,7 +2183,7 @@
     <string name="coords_format_descr">Pritaikyti geografinėms koordinatėms</string>
   	<string name="change_markers_position">Pakeisti žymeklio vietą</string>
     <string name="move_marker_bottom_sheet_title">Slinkti žemėlapį, kad pakeisti žymeklio vietą</string>
-    <string name="access_direction_audio_feedback"/>
+    <string name="access_direction_audio_feedback">Garsinis krypties indikavimas</string>
     <string name="access_disable_offroute_recalc">Nekeisti maršruto, kai jūs esate iš kelio</string>
     <string name="access_disable_offroute_recalc_descr">Nevykdyti automatinio maršruto perskaičiavimo, kai jūs esate ganėtinai toli nuo teisingo kelio</string>
     <string name="access_disable_wrong_direction_recalc">Nekeisti maršruto važiuojant neteisinga kryptimi</string>
@@ -2202,6 +2202,20 @@
     <string name="shared_string_topbar">Viršutinė lentelė</string>
     <string name="osm_user_stat">Pakeitimai %1$s, pozicija %2$s, viso pakeitimų %3$s</string>
     <string name="show_transparency_seekbar">Rodyti permatomumo būklės lentelę</string>
-    <string name="upload_osm_note_description"/>
+    <string name="upload_osm_note_description">Savo OSM pastabą galite įkelti anonimiškai jei naudojate savo OpenStreetMap.org paskyrą.</string>
     <string name="upload_osm_note">Įkelti OSM pastabą</string>
+    <string name="current_track">Dabartinis kelias</string>
+    <string name="access_direction_audio_feedback_descr">Garsu nurodyti kelionės tikslo kryptį</string>
+    <string name="access_direction_haptic_feedback">Krypties nurodymo liečiamasis atsakas</string>
+    <string name="access_direction_haptic_feedback_descr">Kelionės tikslo krypty nurodyti vibravimu</string>
+    <string name="use_osm_live_routing_description">Įjungti navigaciją su OSM Live atnaujinimais (Beta)</string>
+	<string name="map_widget_magnetic_bearing">Magnetinė kryptis</string>
+    <string name="map_widget_bearing">Reliatyvi kryptis</string>
+    <string name="storage_directory_readonly_desc">Šiuo metu pasirinktas duomenų saugyklos segtuvas neleidžia įrašinėti. Saugyklos segtuvas buvo laikinai perkeltas į vidinę atmintį. Prašome pasirinkti tinkamą saugyklos segtuvą.</string>
+    <string name="storage_directory_shared">Bendroji saugykla</string>
+    <string name="number_of_recipients">Gavėjų skaičius</string>
+    <string name="osm_live_email_desc">Mums to reikia tam, kad galėtum pateikti jums informaciją apie kontribucijas</string>
+    <string name="osm_live_support_region">Palaikomas regionas</string>
+    <string name="osm_live_thanks">Ačiū kad užsiprenumeravote tiesioginius atnaujinimus!</string>
+    <string name="osm_live_region_desc">Dalis jūsų paramos bus persiųsta OSM naudotojams, kurie teikia žemėlapio pakeitimus tame regione</string>
     </resources>
