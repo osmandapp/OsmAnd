@@ -754,7 +754,7 @@
     <string name="gpxup_private">Súkromná</string>
     <string name="osmand_parking_event">Vyzdvihnúť auto z parkoviska</string>
     <string name="osmand_parking_warning">Upozornenie</string>
-    <string name="osmand_parking_warning_text">Predošle bola pridaná do kalendára pripomienka na vyzdvihnutie Vášho auta. Zostane tam, pokiaľ ju ručne nezmažete.</string>
+    <string name="osmand_parking_warning_text">Do kalendára bola pridaná pripomienka na vyzdvihnutie Vášho auta. Zostane tam, pokiaľ ju ručne nezmažete.</string>
     <string name="osmand_parking_time_limit_title">Nastavte časový limit parkovania</string>
     <string name="osmand_parking_delete_confirm">Chcete zmazať značku parkovacieho miesta?</string>
     <string name="osmand_parking_delete">Zmazať parkovaciu značku</string>
@@ -768,8 +768,8 @@
     <string name="osmand_parking_position_description_add">Vyzdvihnúť auto o:</string>
     <string name="osmand_parking_pm">popoludní</string>
     <string name="osmand_parking_am">dopoludnia</string>
-    <string name="osmand_parking_position_name">Parkovací bod</string>
-    <string name="osmand_parking_plugin_description">Modul Parkovacie miesto umožňuje zapamätať si kedy bolo auto zaparkované a koľko zostáva času (ak je parkovanie časovo obmedzené).\nMiesto aj čas zaparkovania môžete nájsť na nástroji na mape aj úvodnom paneli OsmAnd. Tiež je možné pridať pripomienku do kalendára.</string>
+    <string name="osmand_parking_position_name">Parkovacie miesto</string>
+    <string name="osmand_parking_plugin_description">Modul Parkovacie miesto umožňuje zapamätať si kde bolo auto zaparkované a koľko zostáva času (ak je parkovanie časovo obmedzené).\nMiesto aj čas zaparkovania môžete nájsť na nástroji na mape aj úvodnom paneli OsmAnd. Tiež je možné pridať pripomienku do kalendára.</string>
     <string name="osmand_parking_plugin_name">Parkovacie miesto</string>
     <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
     <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
@@ -782,7 +782,7 @@
     <string name="select_animate_speedup">Vybrať zrýchlenie animovania trasy</string>
     <string name="osmand_parking_hours">Hodín</string>
     <string name="osmand_parking_minutes">Minút</string>
-    <string name="osmand_parking_position_description_add_time">Automobil bol zaparkovaný o</string>
+    <string name="osmand_parking_position_description_add_time">Automobil je zaparkovaný na</string>
     <string name="use_compass_navigation_descr">Použitie kompasu ak nie je zistený smer pohybu</string>
     <string name="use_compass_navigation">Použiť kompas</string>
     <string name="route_updated_loc_found">Cesta bude prepočítaná, keď sa nájde umiestnenie</string>
@@ -1430,7 +1430,7 @@
     <string name="version_settings_descr">Stiahnuť vývojové verzie</string>
     <string name="version_settings">Verzie</string>
     <string name="points">Body</string>
-    <string name="parking_place">Parkovacie miesto</string>
+    <string name="parking_place">Miesto zaparkovania</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
     <string name="gps_status">Stav GPS</string>
     <string name="edit_group">Upraviť skupinu</string>
@@ -2061,4 +2061,5 @@
     <string name="city_type_district">Okres</string>
     <string name="city_type_neighbourhood">Okolie</string>
     <string name="search_categories">Kategórie</string>
+    <string name="lang_hsb">Lužickosrbsky</string>
     </resources>
