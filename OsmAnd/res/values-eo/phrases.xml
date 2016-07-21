@@ -308,7 +308,7 @@
 	<string name="poi_religion_muslim">Islamo</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_circus">Cirko</string>
-	<string name="poi_nightclub">Noktoklubo</string>
+	<string name="poi_nightclub">Noktoklubejo</string>
 	<string name="poi_playground">Infana ludejo</string>
 	<string name="poi_bank">Bankejo</string>
 	<string name="poi_beach">Sablobordo</string>
@@ -560,7 +560,7 @@
 	<string name="poi_maxweight">Maksimuma pezo</string>
 	<string name="poi_height">Alto</string>
 	<string name="poi_brand">Marko</string>
-	<string name="poi_trees_plum">Prunujo</string>
+	<string name="poi_trees_plum">Prunujoj</string>
 	<string name="poi_building">Konstruaĵo</string>
 	<string name="poi_garden">Ĝardeno</string>
 
@@ -797,7 +797,7 @@
 	<string name="poi_spring">Akvofonto</string>
 	<string name="poi_hot_spring">Tervarma akvofonto</string>
 	<string name="poi_club_cinema">Kina klubejo</string>
-	<string name="poi_trees_date">Daktilpalmo</string>
+	<string name="poi_trees_date">Daktilpalmoj</string>
 	<string name="poi_int_name">Internacia nomo</string>
 	<string name="poi_nat_name">Nacia nomo</string>
 	<string name="poi_reg_name">Regiona nomo</string>
@@ -853,7 +853,7 @@
 	<string name="poi_social_centre">Centro de socio</string>
 	<string name="poi_gallery">Artgalerio</string>
 	<string name="poi_dance_floor">Dancejo</string>
-	<string name="poi_stripclub">Striptiz-klubo</string>
+	<string name="poi_stripclub">Striptiz-klubejo</string>
 	<string name="poi_ski_resort">Skiada centro</string>
 	<string name="poi_beach_resort">Apudmara ripoz-centro</string>
 	<string name="poi_dog_park">Hund-parko</string>
@@ -1144,4 +1144,85 @@
 	<string name="poi_access_no">Sen aliro</string>
 	<string name="poi_access_customers">Aliro nur por klientoj</string>
 	<string name="poi_access_destination">Aliro nur al celo</string>
+	<string name="poi_access_permissive">Verŝajne alirebla</string>
+	<string name="poi_access_delivery">Aliro nur por liverantoj</string>
+	<string name="poi_access_agricultural">Aliro nur por traktoroj</string>
+
+	<string name="poi_content_silage">Enhavo: insilaĵo</string>
+	<string name="poi_content_water">Enhavo: akvo</string>
+	<string name="poi_content_slurry">Enhavo: ŝlimo</string>
+	<string name="poi_content_oil">Enhavo: petrolo kruda</string>
+	<string name="poi_content_fuel">Enhavo: brulaĵo</string>
+	<string name="poi_content_manure">Enhavo: stala sterko</string>
+	<string name="poi_content_wine">Enhavo: vino</string>
+	<string name="poi_content_sewage">Enhavo: kloakakvo</string>
+	<string name="poi_content_gas">Enhavo: tergaso</string>
+	<string name="poi_content_biomass">Enhavo: biomaso</string>
+	<string name="poi_content_wastewater">Enhavo: kloakakvo</string>
+	<string name="poi_content_crop">Enhavo: rikoltaĵo</string>
+	<string name="poi_content_fodder">Enhavo: nutraĵo</string>
+	<string name="poi_content_beer">Enhavo: biero</string>
+	<string name="poi_content_salt">Enhavo: salo</string>
+	<string name="poi_content_grain">Enhavo: panherbo</string>
+
+	<string name="poi_nudism_yes">Nudeco: permesita</string>
+	<string name="poi_nudism_no">Nudeco: malpermesita</string>
+	<string name="poi_nudism_obligatory">Nudeco: deviga</string>
+	<string name="poi_nudism_customary">Nudeco: konsilinda</string>
+	<string name="poi_nudism_permissive">Nudeco: verŝajne permesita</string>
+
+	<string name="poi_trade_building_supplies">Konstrumaterialoj</string>
+	<string name="poi_trade_plumbing">Tuboj</string>
+	<string name="poi_trade_wood">Ligno</string>
+	<string name="poi_trade_agricultural_supplies">Agrokultura ilaro</string>
+	<string name="poi_trade_tile">Kaheloj</string>
+
+	<string name="poi_parking_underground">Speco: subtera</string>
+	<string name="poi_parking_multi_storey">Speco: multetaĝa</string>
+
+	<string name="poi_bicycle_parking_anchors">Ankroj</string>
+	<string name="poi_trees_apple">Pomujoj</string>
+	<string name="poi_bicycle_parking_stands">Rakoj simplaj</string>
+	<string name="poi_bicycle_parking_wall_loops">Rakoj rad-kaptantaj</string>
+	<string name="poi_bicycle_parking_rack">Rakoj</string>
+	<string name="poi_bicycle_parking_building">Speciala konstruaĵo</string>
+	<string name="poi_bicycle_parking_shed">Budo</string>
+	<string name="poi_bicycle_parking_bollard">Paliseto</string>
+	<string name="poi_bicycle_parking_informal">Neformala</string>
+
+	<string name="poi_leaf_type_broadleaved">Folihavaj</string>
+	<string name="poi_leaf_type_needleleaved">Pinglofoliaj</string>
+	<string name="poi_leaf_type_mixed">Plurspecaj</string>
+	<string name="poi_leaf_type_leafless">Senfoliaj</string>
+	<string name="poi_species">Specio</string>
+	<string name="poi_genus">Genro</string>
+	<string name="poi_taxon">Taksono</string>
+
+	<string name="poi_trees_olive">Olivujoj</string>
+	<string name="poi_trees_oil">Palmoj oleodonaj (Elaeis guineensis k Elaeis oleifera)</string>
+	<string name="poi_trees_orange">Oranĝujoj</string>
+	<string name="poi_trees_almond">Migdalujoj</string>
+	<string name="poi_trees_banana">Bananujoj</string>
+	<string name="poi_trees_hazel">Avelujoj</string>
+	<string name="poi_trees_coconut">Kokospalmoj</string>
+	<string name="poi_trees_persimmon">Persimonujoj (Kakinokujoj)</string>
+	<string name="poi_trees_cherry">Ĉerizujoj</string>
+	<string name="poi_trees_walnut">Reĝaj juglandoj</string>
+	<string name="poi_trees_peach">Persikujoj</string>
+	<string name="poi_trees_tea">Teoarbedoj</string>
+	<string name="poi_trees_coca">Kakaujo</string>
+	<string name="poi_trees_kiwi">Kivujoj</string>
+	<string name="poi_trees_meadow_orchard">Fruktarba herbejo</string>
+	<string name="poi_trees_nectorine">Nektarinujoj</string>
+	<string name="poi_trees_mango">Mangujoj</string>
+	<string name="poi_trees_rubber">Kaŭĉukarboj (Heveoj)</string>
+	<string name="poi_trees_coffea">Kafarboj</string>
+	<string name="poi_trees_pomegranate">Granatujoj</string>
+
+	<string name="poi_urban">Urba</string>
+	<string name="poi_rural">Vilaĝa</string>
+
+	<string name="poi_fireplace_yes">Kameno</string>
+	<string name="poi_fireplace_no">Sen kameno</string>
+
 	</resources>
