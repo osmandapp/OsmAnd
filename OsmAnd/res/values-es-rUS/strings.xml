@@ -467,7 +467,7 @@
     <string name="plugin_ski_descr">"Este complemento para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad y representados con un estilo del mapa especial \'Invierno\' que lo asemeja a un paisaje invernal nevado.
 \n\nActivando esta vista, cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando lo desees. "</string>
     <string name="audionotes_plugin_description">El complemento de notas multimedia, proporciona la funcionalidad para tomar notas de audio/fotografía/video durante un viaje, usando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
-    <string name="osmand_parking_plugin_description">El complemento de estacionamiento te deja memorizar fácilmente cuándo se estacionó el automóvil y cuánto tiempo queda si el estacionamiento está limitado por tiempo.
+    <string name="osmand_parking_plugin_description">Este complemento, te recuerda fácilmente dónde se estacionó el automóvil y cuánto tiempo queda si el estacionamiento está limitado por tiempo.
 \n\nPuedes encontrar tu lugar y el tiempo de estacionamiento en la tarjeta del menú principal y en el control del mapa. Se puede añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
     <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear carreteras pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de ampliación, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de tu ubicación.</string>
@@ -1013,21 +1013,21 @@
     <string name="shared_location">Compartir ubicación</string>
     <string name="osmand_parking_event">Buscar el auto del estacionamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
-    <string name="osmand_parking_warning_text">La notificación para recoger tu automóvil fue previamente añadida al calendario. Permanecerá allí hasta que la borres manualmente.</string>
-    <string name="osmand_parking_time_limit_title">Definir el límite de tiempo del estacionamiento</string>
+    <string name="osmand_parking_warning_text">Una notificación para recoger tu automóvil se añadió al Calendario. Permanecerá allí hasta que la borres manualmente.</string>
+    <string name="osmand_parking_time_limit_title">Definir el tiempo límite del estacionamiento</string>
     <string name="osmand_parking_delete_confirm">¿Borrar marcador del estacionamiento?</string>
     <string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
     <string name="osmand_parking_choose_type">Elige el tipo de estacionamiento</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
     <string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
-    <string name="osmand_parking_add_event">Añadir notificación en el Calendario</string>
+    <string name="osmand_parking_add_event">Añadir una notificación al Calendario</string>
     <string name="osmand_parking_time_limit">Estacionamiento de tiempo limitado</string>
     <string name="osmand_parking_time_no_limit">Estacionamiento de tiempo ilimitado</string>
     <string name="osmand_parking_position_description">Ubicación del automóvil estacionado. %1$s</string>
     <string name="osmand_parking_position_description_add">Buscar el automóvil a las:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Punto de estacionamiento</string>
+    <string name="osmand_parking_position_name">Lugar del estacionamiento</string>
     <string name="context_menu_item_add_parking_point">Marcar como estacionamiento</string>
     <string name="context_menu_item_delete_parking_point">Quitar marcador de estacionamiento</string>
     <string name="gpxup_public">Público</string>
@@ -2199,4 +2199,5 @@
     <string name="city_type_neighbourhood">Vecindario</string>
     <string name="postcode">Código postal</string>
     <string name="search_categories">Categorías</string>
+    <string name="lang_hsb">Sorabo (Alto)</string>
     </resources>
