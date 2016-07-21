@@ -82,7 +82,7 @@ public class RouteInfoWidgetsFactory {
 				int turnImminent = 0;
 				int nextTurnDistance = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated() && followingMode) {
-					deviatedFromRoute = routingHelper.isDeviatedFromRoute() ;
+					deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 					
 					if (deviatedFromRoute) {
 						turnImminent = 0;
@@ -124,7 +124,7 @@ public class RouteInfoWidgetsFactory {
 //				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
-				if(routingHelper.isRouteCalculated()) {
+				if(routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 					routingHelper.getVoiceRouter().announceCurrentDirection(null);
 				}
 			}
