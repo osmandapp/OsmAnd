@@ -29,11 +29,11 @@
     <string name="continue_follow_previous_route_auto">La navegació anterior no ha estat finalitzada. Desitgeu continuar-la? (%1$s segons)</string>
     <string name="osmand_parking_hours">Hores</string>
     <string name="osmand_parking_minutes">Minuts</string>
-    <string name="osmand_parking_position_description_add_time">El cotxe es va aparcar a</string>
+    <string name="osmand_parking_position_description_add_time">El cotxe està aparcat a</string>
     <string name="use_compass_navigation_descr">Usa la brúixola quan no es pugui determinar la direcció</string>
     <string name="use_compass_navigation">Usa la brúixola</string>
     <string name="shared_location">Localització compartida</string>
-    <string name="osmand_parking_position_description">Posició del vostre cotxe aparcat. %1$s</string>
+    <string name="osmand_parking_position_description">Localització del vostre cotxe aparcat. %1$s</string>
     <string name="gpxup_public">Públic</string>
     <string name="gpxup_private">Privat</string>
     <string name="layer_map_appearance">Configura l\'aparença</string>
@@ -55,8 +55,8 @@
     <string name="osmand_parking_time_no_limit">Aparcament de temps il·limitat</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Punt d\'aparcament</string>
-    <string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar quan es va aparcar el vostre cotxe i quant temps us queda, si l\'aparcament té una limitació de temps màxim.
+    <string name="osmand_parking_position_name">Aparcament alternatiu</string>
+    <string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar on està aparcat el vostre cotxe i quant temps li queda (si l\'aparcament té una limitació de temps).
 \nTant la situació com el temps que us queda es mostren al tauler de l\'OsmAnd així com al giny en el mapa. Es pot afegir una alarma al vostre calendari d\'Android com a recordatori.</string>
     <string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
     <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
@@ -193,7 +193,7 @@
     <string name="show_lanes">Carrils</string>
     <string name="avoid_ferries">Evita els ferris</string>
     <string name="avoid_in_routing_descr">Evita les carreteres de peatge, les no pavimentades i els ferris</string>
-    <string name="osmand_parking_warning_text">Notificació que vau introduir a Calendari per treure el cotxe. Es mantindrà fins que l\'elimineu manualment.</string>
+    <string name="osmand_parking_warning_text">S\'ha afegit una notificació al vostre Calendari per retirar el vostre cotxe. Es mantindrà fins que l\'elimineu manualment.</string>
     <string name="route_kl">Mantingueu-vos a l\'esquerra i continueu</string>
     <string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
     <string name="test_voice_prompts">Prova els indicadors de veu</string>
@@ -1484,7 +1484,7 @@
     <string name="version_settings">Versions</string>
     <string name="rendering_attr_streetLighting_name">Enllumenat dels carrers</string>
     <string name="gps_status">Estat del GPS</string>
-    <string name="parking_place">Lloc d\'aparcament</string>
+    <string name="parking_place">Aparcament alternatiu</string>
     <string name="remove_the_tag">Treure l\'etiqueta</string>
     <string name="shared_string_disabled">Desactivat</string>
     <string name="shared_string_enabled">Activat</string>
@@ -2055,4 +2055,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="map_widget_search">Cerca</string>
 	<string name="postcode">Codi postal</string>
     <string name="search_categories">Categories</string>
+    <string name="lang_hsb">Alt sòrab</string>
     </resources>
