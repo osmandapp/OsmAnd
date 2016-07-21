@@ -17,14 +17,11 @@
     <string name="access_empty_list">Prózdna lisćina</string>
     <string name="access_shared_string_not_installed">Njeinstalowane</string>
     <string name="osmo_share_my_location">Městno zdźělić</string>
-    <string name="osmo_plugin_name">OpenStreetMap Monitoring</string>
     <string name="shared_string_move_up">Horje</string>
     <string name="shared_string_move_down">Dele</string>
     <string name="finish_navigation">Nawigaciju zakónčić</string>
     <string name="avoid_road">Dróhu wobeńć</string>
-    <string name="storage_directory_readonly_desc">Currently selected Data storage folder is readonly. The storage folder was temporarily switched to Internal memory. Please choose valid storage directory.</string>
     <string name="storage_directory_shared">Zhromadny skład</string>
-    <string name="shared_string_topbar">Topbar</string>
     <string name="full_report">Dospołna rozprawa</string>
     <string name="recalculate_route">Čaru znowa wobličić</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap konto a hesło</string>
@@ -40,18 +37,10 @@
     <string name="osm_live_enter_email">Prošu zapodajće płaćiwu mejlkowu adresu</string>
     <string name="osm_live_enter_user_name">Prošu zapodajće zjawne mjeno</string>
     <string name="upload_anonymously">Anonymnje nahrać</string>
-    <string name="show_transparency_seekbar">Show transparency seekbar</string>
-    <string name="download_files_error_not_enough_space">Not enough space! This would need {3} MB temporarily and {1} MB permanently. Currently, there are only {2} MB available.</string>
-    <string name="download_files_question_space_with_temp">Really download {0} file(s)? This needs {3} MB temporarily and {1} MB permanently. Currently, there are {2} MB available.</string>
-    <string name="download_files_question_space">Really download {0} file(s)? This needs {1} MB permanently. Currently, there are {2} MB available.</string>
-    <string name="upload_osm_note_description">You can upload your OSM Note anonymously if you use your OpenStreetMap.org profile.</string>
     <string name="upload_osm_note">OSM-noticu nahrać</string>
-    <string name="shared_string_toolbar">Toolbar</string>
-    <string name="shared_string_widgets">Widgets</string>
     <string name="find_parking">Parkowanišćo namakać</string>
     <string name="shared_string_save_changes">Změny składować</string>
     <string name="shared_string_email_address">Mejlowa adresa</string>
-    <string name="rendering_attr_hideUnderground_name">Underground objects</string>
     <string name="data_is_not_available">Daty k dispoziciji njesteja</string>
     <string name="shared_string_remove">Wotstronić</string>
     <string name="shared_string_read_more">Wjace čitać</string>
@@ -61,7 +50,6 @@
     <string name="starting_point">Startowy dypk</string>
     <string name="shared_string_not_selected">Njeje wubrane</string>
     <string name="rec_split_storage_size">Wulkosć składowaka</string>
-    <string name="rec_split_storage_size_desc">Amount of space that can be occupied by all recorded clips</string>
     <string name="available_maps">Přistupne karty</string>
     <string name="impassable_road_desc">Wubjerće puće, kiž chceće při nawigaciji wobeńć</string>
     <string name="shared_string_sound">Zwuk</string>
@@ -82,7 +70,6 @@
     <string name="av_audio_bitrate_descr">Wubjerće awdijo-bitrate</string>
     <string name="access_from_map">Přistup z karty</string>
     <string name="show_on_start">Wot započatka pokazać</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="osm_save_offline">Offline składować</string>
     <string name="osm_edit_modified_poi">Změnjene OSM POI-dypki</string>
     <string name="osm_edit_deleted_poi">Wotstronjene OSM POI-dypki</string>
@@ -133,7 +120,6 @@
     <string name="favorite_category_select">Kategoriju wubrać</string>
     <string name="default_speed_system_descr">Define speed measurement system</string>
     <string name="default_speed_system">Speed measurement</string>
-    <string name="nm">nmi</string>
     <string name="si_nm">Nawtiske mile</string>
     <string name="si_kmh">Kilometrow za hodźinu</string>
     <string name="si_mph">Milow za hodźinu</string>
@@ -149,7 +135,6 @@
     <string name="osmand_running_in_background">Běži w pozadku</string>
     <string name="looking_up_address">Adresu pytać</string>
     <string name="plugin_settings">Rozšěrjenja</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-barba</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-barba</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-šěrokosć</string>
@@ -169,7 +154,6 @@
     <string name="rendering_value_blue_name">Módre</string>
     <string name="rendering_value_translucent_blue_name">Transparentne módre</string>
     <string name="rendering_value_purple_name">Fiałkojte</string>
-    <string name="rendering_value_pink_name">Pink</string>
     <string name="rendering_value_brown_name">Brune</string>
     <string name="rendering_value_translucent_purple_name">Transparentne fijałkojte</string>
     <string name="restart_is_required">Prošu startujće aplikaciju znowa, zo bychu so wšitke změny pokazali.</string>
@@ -208,9 +192,6 @@
     <string name="read_full_article">Cyły zapis čitać (online)</string>
     <string name="shared_string_wikipedia">Wikipedija</string>
     <string name="local_indexes_cat_wiki">Wikipedija</string>
-    <string name="shared_string_show_details">Show details</string>
-    <string name="osm_edit_context_menu_delete">Delete OSM edit</string>
-    <string name="rendering_value_disabled_name">Disabled</string>
     <string name="rendering_attr_hideHouseNumbers_name">Domowe čisła</string>
     <string name="application_dir">Městno składowanja datow</string>
     <string name="storage_directory">Skład kartow</string>
@@ -220,7 +201,6 @@
     <string name="your_edits">Waše změny</string>
     <string name="waypoint_visit_after">Potom wopytać</string>
     <string name="waypoint_visit_before">Do toho wopytać</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Časte prašenja, aktualne změny a druhe</string>
     <string name="routing_settings_2">Nastajenja nawigacije</string>
     <string name="general_settings_2">Powšitkowne nastajenja</string>
@@ -244,7 +224,6 @@
     <string name="shared_string_more">Wjace…</string>
     <string name="shared_string_show">Pokazać</string>
     <string name="shared_string_show_all">Wšě pokazać</string>
-    <string name="shared_string_collapse">Collapse</string>
     <string name="shared_string_show_on_map">Na karće pokazać</string>
     <string name="shared_string_map">Karta</string>
     <string name="shared_string_favorite">Faworit</string>
@@ -253,9 +232,7 @@
     <string name="shared_string_my_location">Moje stejišćo</string>
     <string name="shared_string_my_places">Moje městna</string>
     <string name="shared_string_my_favorites">Moje fawority</string>
-    <string name="shared_string_my_tracks">My Tracks</string>
     <string name="back_to_map">Wróćo ke karće</string>
-    <string name="share_note">Share note</string>
     <string name="settings_privacy">Priwatnosć</string>
     <string name="dash_download_new_one">Nowu kartu sćahnyć</string>
     <string name="map_locale">Rěč na karće</string>
@@ -420,7 +397,6 @@
     <string name="please_select_address">Wubjerće najprjedy městno abo dróhu</string>
     <string name="delete_point">Dypk wotstronić</string>
     <string name="plugin_distance_point_time">čas</string>
-    <string name="plugin_distance_point_hdop">precision</string>
     <string name="plugin_distance_point_speed">spěšnosć</string>
     <string name="plugin_distance_point_ele">wysokosć</string>
     <string name="plugin_distance_point">Dypk</string>
@@ -436,7 +412,6 @@
     <string name="choose_osmand_theme">Napohlad aplikacije</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
-    <string name="download_hillshade_maps">Hillshades</string>
     <string name="recording_error">"Zmylk occurred while recording "</string>
     <string name="safe_mode_description">Aplikacija běži w zawěsćenym modusu (za pomałše wersije Androida).</string>
     <string name="safe_mode">Zawěsćeny modus</string>
@@ -550,16 +525,13 @@
     <string name="favourites_search_desc">Pytanje za faworitami</string>
     <string name="offline_navigation_not_available">OsmAnd offline-nawigacija tuchwilu přistupna njeje.</string>
     <string name="unknown_location">Stejišćo hišće njenamakane</string>
-    <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
     <string name="confirm_interrupt_download">Chceće sćehnjenje dataje přetorhnyć?</string>
     <string name="local_indexes_cat_map">Standardne karty (wektor)</string>
-    <string name="map_online_plugin_is_not_installed">Enable the Online maps plugin to select different map sources</string>
     <string name="gpx_description_txt">Wopis</string>
     <string name="default_buttons_support">OsmAnd podpěrać</string>
     <string name="support_new_features">Nowe funkcije podpěrać</string>
     <string name="back_to_location">Wróćo k stejišću</string>
 
-    <string name="accessibility_mode_descr">Turns on the accessibility features</string>
     <string name="north">sewjer</string>
     <string name="north_east">sewjerowuchod</string>
     <string name="east">wuchod</string>
@@ -586,9 +558,7 @@
     <string name="arrival_distance_factor_normally">Normalnje</string>
     <string name="arrival_distance_factor_late">Pozdźe</string>
     <string name="arrival_distance_factor_at_last">Na poslednich metrach</string>
-    <string name="arrival_distance">Arrival announcement</string>
     <string name="local_openstreetmap_uploading">Nahrawanje …</string>
-    <string name="local_openstreetmap_were_uploaded">{0} POI/Notes were uploaded</string>
     <string name="local_openstreetmap_uploadall">Wšě nahrać</string>
     <string name="free_version_title">Bjezpłatna wersija</string>
     <string name="poi_context_menu_showdescription">POI-wopis pokazać</string>
@@ -604,10 +574,7 @@
     <string name="index_name_africa">Afrika</string>
     <string name="index_name_asia">Azija</string>
     <string name="index_name_oceania">Awstralija a Oceanija</string>
-    <string name="index_name_other">Worldwide and topic maps</string>
     <string name="index_name_wiki">Worldwide Wikipedija POIs</string>
-    <string name="index_name_voice">Voice prompts (recorded, limited features)</string>
-    <string name="index_name_tts_voice">Voice prompts (TTS-synthesized, prefer)</string>
     <string name="amenity_type_osmwiki">Wikipedija (offline)</string>
     <string name="profile_settings">Specifiske nastajenja za profile</string>
     <string name="routing_settings">Nawigacija</string>
@@ -621,7 +588,6 @@
     <string name="download_files_not_enough_space">Njeje dosć swobodneho městna za download %1$s MB (swobodne: %2$s).</string>
     <string name="choose_auto_follow_route">Kartu sobuwzać</string>
     <string name="choose_auto_follow_route_descr">Čakanski čas hač do synchronizowanju karty z aktualnym stejišćom</string>
-    <string name="keep_informing_never">Only manually (tap arrow)</string>
     <string name="pref_raster_map">Nastajenja kartowych žórłow</string>
     <string name="pref_vector_map">Nastajenja wektorowych kartow</string>
     <string name="city_type_suburb">Měšćanski dźěl</string>
@@ -635,7 +601,6 @@
     <string name="search_position_current_location_found">Moje stejišćo (namakane)</string>
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Fawority…</string>
-    <string name="search_position_undefined">Undefined</string>
     <string name="search_position_map_view">Tuchwilne srjedźišćo karty</string>
     <string name="select_search_position">Wuchadźišćo:</string>
     <string name="context_menu_item_search">We wokolinje pytać</string>
@@ -651,7 +616,6 @@
     <string name="local_index_installed">Lokalna wersija</string>
     <string name="local_index_mi_restore">Zapinyć</string>
     <string name="local_index_mi_backup">Wupinyć</string>
-    <string name="local_index_mi_reload">Reload from sdcard</string>
     <string name="local_index_poi_data">POI-daty</string>
     <string name="local_index_address_data">Adresowe daty</string>
     <string name="local_index_transport_data">Daty wo zjawnym transporće</string>
@@ -663,7 +627,6 @@
     <string name="map_text_size_descr">Wubjerće wulkosć mjenow na karće</string>
     <string name="map_text_size">Wulkosć kartoweho teksta</string>
     <string name="gpx_option_destination_point">Tuchwilny cil přewzać</string>
-    <string name="gpx_option_from_start_point">Pass along entire track</string>
     <string name="choose_audio_stream">Hłós nawigacije</string>
     <string name="choose_audio_stream_descr">Wašnje wudawanja připowědźow wubrać</string>
     <string name="voice_stream_voice_call">Kaž telefon</string>
@@ -890,7 +853,6 @@
     <string name="edit_filter_save_as_menu_item">Składuj jako</string>
     <string name="email">mejlka</string>
     <string name="av_camera_focus_auto">Awtofokus</string>
-    <string name="av_camera_focus_hiperfocal">Hyperfocal focus</string>
     <string name="navigation_intent_invalid">Njepłaćiwy format: %s</string>
     <string name="plugin_description_title">Wopisanje</string>
     <string name="plugin_install_needs_network">Trjebaš zwisk z internetom za instalowanje.</string>
@@ -898,7 +860,6 @@
     <string name="rate_this_app">Pohódnóć tutu app</string>
     <string name="failed_to_upload">Nahrawanje zwrěšćiło</string>
     <string name="delete_change">Změnu wušmórnyć</string>
-    <string name="successfully_uploaded_pattern">Successfully uploaded {0}/{1}</string>
     <string name="try_again">Znowa spytać</string>
     <string name="error_message_pattern">Zmylk: {0}</string>
     <string name="dahboard_options_dialog_title">Konfigurować dashboard</string>
