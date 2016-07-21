@@ -221,7 +221,7 @@
 
 
     <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
-    <string name="download_files_question_space">Tikrai parsiųsti {0} failą(-us)? Tam prireims {1} MB pastoviam saugojinui. Dabar laisvos vietos yra {2} MB.</string>
+    <string name="download_files_question_space">Tikrai parsiųsti {0} failą(-us)? Tam prireiks {1} MB pastoviam saugojimui. Dabar laisvos vietos yra {2} MB.</string>
 
 
     <string name="use_transparent_map_theme">Permatoma tema</string>
@@ -1312,7 +1312,7 @@
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
     <string name="osmo_plugin_description">"Pateikia OsMo - taip vadinamo pažangaus tiesioginio stebėjimo, nustatymus, daugiau http://osmo.mobi.
 \nSuteikia galimybę stebėti visus įrenginius konkrečioje grupėje realiuoju laiku bei bendrauti tarpusavyje. Tebėti glima tik konkrečios sesijos metu arba pastoviai.\nSusikurkite anonimines grupes tik kelioms dienoms su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
-    <string name="osmo_plugin_name">OpenStreetMap stebėjimas</string>
+    <string name="osmo_plugin_name">OpenStreetMap Stebėjimas</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
@@ -1327,16 +1327,16 @@
     <string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
     <string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
     <string name="osmo_connect_to_device_name">Vartotojo vardas</string>
-    <string name="osmo_connect_to_device_tracker_id">Sekiklio ID</string>
+    <string name="osmo_connect_to_device_tracker_id">Sekėjo ID</string>
     <string name="osmo_connect_to_device">Sujungti su įrenginiu</string>
 
 
     <string name="osmo_connected_devices">Prijungti įrenginiai</string>
-    <string name="osmo_groups">OsMo grupės</string>
-    <string name="osmo_auto_send_locations_descr">Automatiškai pradėti kelionę ir siųsti buvimo vietą tik paleidus programą</string>
+    <string name="osmo_groups">OsMo Grupės</string>
+    <string name="osmo_auto_send_locations_descr">Automatiškai pradėti kelionę ir siųsti buvimo vietą paleidus programą</string>
     <string name="osmo_auto_send_locations">Automatiškai pradėti kelionę</string>
-    <string name="osmo_tracker_id">Sekiklio ID</string>
-    <string name="osmo_tracker_id_descr">Paspauskite jei norite pamatyti sekiklio ID</string>
+    <string name="osmo_tracker_id">Sekėjo ID</string>
+    <string name="osmo_tracker_id_descr">Paspauskite norint peržiūrėti sekėjo ID</string>
     <string name="osmo_session_token">Sesijos žymė: %1$s</string>
     <string name="osmo_auth_pending">Laukiama autorizavimo…</string>
     <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
@@ -1457,7 +1457,7 @@
     <string name="osmo_start_service">OsMo paslauga</string>
     <string name="osmo_gpx_track_downloaded">OsMo įrašas %1$s parsiųstas.</string>
     <string name="osmo_group_by_invite">Prisijungti su pakvietimais</string>
-    <string name="osmo_group_information_desc">" - Kurdami grupą uteikiate jai pavadinimą ir aprašymą.\n- Grupėje gali būti iki 8 asmenų.\n- Jei grupėje nebus jokios veiklos arba veikloje dalyvaus tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi "</string>
+    <string name="osmo_group_information_desc">" - Kurdami grupę suteikiate jai pavadinimą ir aprašymą.\n- Grupėje gali būti iki 8 asmenų.\n- Jei grupėje nebus jokios veiklos arba veikloje dalyvaus tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi "</string>
     <string name="osmo_group_information">Perskaitykite prieš kurdami grupę!</string>
     <string name="osmo_not_signed_in">Prisijungti prie OsMo nepavyko</string>
     <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
@@ -1564,8 +1564,8 @@
     <string name="speed_limit_exceed">Greičio ribojimo viršijimo reikšmė</string>
     <string name="speed_limit_exceed_message">Pasirinkite greičio ribojimo viršijimo ribą, kurią pasiekus bus pranešta balsu.</string>
     <string name="osmo_device_not_found">Įrenginys neaptiktas</string>
-    <string name="osmo_no_connection_msg">Nepavykp prisijungti prie OsMo serverio:\n- patikrinkite internetinį ryšį;\n- patikrinkite nustatymus;\n- užeikite į Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonimas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įrenginius su sreveriu;\n- valdyti grupes bei įrenginius asmeniniame valdymo skydelyje interneto svetainėje.</string>
+    <string name="osmo_no_connection_msg">Nepavykp prisijungti prie OsMo serverio:\n- patikrinkite internetinį ryšį;\n- patikrinkite nustatymus;\n- patikrinkite mūsų Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anoniminis vartotojas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įrenginius su serveriu;\n- valdyti grupes bei įrenginius asmeniniame valdymo skydelyje interneto svetainėje.</string>
     <string name="anonymous_user">Anonimas</string>
     <string name="logged_as">Prisijungėte kaip %1$s</string>
     <string name="rendering_category_details">Detalės</string>
@@ -1771,7 +1771,7 @@
     <string name="routing_attr_height_description">Nurodykite transporto priemonės aukštį, leidžiamą maršrutuose</string>
     <string name="use_fast_recalculation_desc">Perskaičiuoti tik pradinę ilgos kelionės maršruto dalį</string>
     <string name="rendering_value_disabled_name">Išjungtas</string>
-    <string name="osmo_share_my_location">Perduoti mano vieta</string>
+    <string name="osmo_share_my_location">Perduoti mano vietą</string>
     <string name="shared_string_logoff">Atsijungti</string>
     <string name="search_poi_category_hint">Rašykite, norėdami pradėti paiešką</string>
     <string name="track_points">Maršruto taškai</string>
@@ -2114,20 +2114,20 @@
     <string name="osm_live_user_public_name">Viešas vardas</string>
     <string name="osm_live_hide_user_name">Nerodyti mano vardo ataskaitose</string>
     <string name="osm_live_month_cost">Mėnesio mokestis</string>
-    <string name="osm_live_month_cost_desc">Kasmėnesinis mokėjimas</string>
+    <string name="osm_live_month_cost_desc">Mėnesinis mokestis</string>
     <string name="osm_live_active">Aktyvus</string>
     <string name="osm_live_not_active">Neaktyvus</string>
-    <string name="osm_live_enter_email">Prašome įrašyti galiojantį el. pašto adresą</string>
-    <string name="osm_live_enter_user_name">Prašome įrašyti viešą vardą</string>
+    <string name="osm_live_enter_email">Prašome įvesti galiojantį el. pašto adresą</string>
+    <string name="osm_live_enter_user_name">Prašome įvesti viešą vardą</string>
     <string name="osm_live_subscription_settings">Prenumeratos nustatymai</string>
-    <string name="osm_live_ask_for_purchase">Prašome pirmiau įsigyti OSM Live prenumeratą</string>
+    <string name="osm_live_ask_for_purchase">Prašome pirma įsigyti OSM Live prenumeratą</string>
 
     <string name="download_files_error_not_enough_space">Nepakanka vietos! Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui. Šiuo metu prieinama tik {2} MB vietos.</string>
     <string name="report">Ataskaita</string>
     <string name="shared_string_move_up">Perkelti viršun</string>
     <string name="shared_string_move_down">Perkelti žemyn</string>
     <string name="avoid_road">Vengti kelių</string>
-    <string name="full_report">Visa ataskaita</string>
+    <string name="full_report">Pilna ataskaita</string>
     <string name="recalculate_route">Perskaičiuoti maršrutą</string>
     <string name="donations">Paremti</string>
     <string name="select_map_marker">Pasirinite žemėlapio žymę</string>
@@ -2141,9 +2141,9 @@
     <string name="lat_lon_pattern">Platuma: %1$.6f Ilguma: %2$.6f</string>
     <string name="follow_us">Sekite mus</string>
     <string name="use_osm_live_routing">OSM Live navigacija</string>
-    <string name="access_no_destination">Nenurodytas paskirties punktas</string>
+    <string name="access_no_destination">Tikslas nenustatytas</string>
     <string name="access_default_color">Numatytoji spalva</string>
-    <string name="access_category_choice">Pasirinkite kategoriją</string>
+    <string name="access_category_choice">Pasirinkti kategoriją</string>
     <string name="access_hint_enter_category">Įrašykite kategoriją</string>
     <string name="access_hint_enter_description">Įrašykite aprašymą</string>
     <string name="access_empty_list">Tuščias sąrašas</string>
@@ -2167,17 +2167,41 @@
     <string name="access_expanded_list">Išskleistas sąrašas</string>
     <string name="access_tree_list">Hierarchinis sąrašas</string>
     <string name="access_widget_expand">Išskleisti</string>
-    <string name="osm_editors_ranking">OSM redaktorių reitingas</string>
+    <string name="osm_editors_ranking">OSM Redaktorių reitingas</string>
     <string name="osm_live_subscription">OSM Live prenumerata</string>
     <string name="osm_live_header">Prenumerata leidžia kas valandą gauti viso žemėlapio atnaujinimus. Didžioji pajamų dalis grįžta OSM bendruomenei ir apmokamaas kiekvienas indėlis į OSM. Jei jums patinka OsmAnd ir OSMir norite jį patemti, tai yra idealus būdas tai padaryti.</string>
     
-    <string name="download_files_question_space_with_temp">Tikrai siųsti {0} failų? Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui. Šiuo metu prieinama tik {2} MB vietos.</string>
+    <string name="download_files_question_space_with_temp">Ar siųsti {0} failų? Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui. Šiuo metu prieinama tik {2} MB vietos.</string>
     <string name="lang_es_us">Ispanų (Amerikos)</string>
     <string name="lang_en_gb">Anglų (Junginė Karalystė)</string>
     <string name="lang_be_BY">Belarusų (Lotynų)</string>
     <string name="lang_hu_formal">Vengrų (oficiali)</string>
     <string name="search_categories">Kategorijos</string>
-    <string name="map_widget_battery">Akumuliatoriaus įkrova</string>
+    <string name="map_widget_battery">Baterijos būklė</string>
     <string name="city_type_neighbourhood">Kaimynystė</string>
     <string name="shared_string_from">iš</string>
+    <string name="coords_format_descr">Pritaikyti geografinėms koordinatėms</string>
+  	<string name="change_markers_position">Pakeisti žymeklio vietą</string>
+    <string name="move_marker_bottom_sheet_title">Slinkti žemėlapį, kad pakeisti žymeklio vietą</string>
+    <string name="access_direction_audio_feedback"/>
+    <string name="access_disable_offroute_recalc">Nekeisti maršruto, kai jūs esate iš kelio</string>
+    <string name="access_disable_offroute_recalc_descr">Nevykdyti automatinio maršruto perskaičiavimo, kai jūs esate ganėtinai toli nuo teisingo kelio</string>
+    <string name="access_disable_wrong_direction_recalc">Nekeisti maršruto važiuojant neteisinga kryptimi</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Nevykdyti automatinio maršruto perskaičiavimo, kai jūs judate ne į tą pusę</string>
+    <string name="access_smart_autoannounce">Išmanus autopranešėjas</string>
+    <string name="access_smart_autoannounce_descr">Pranešti tik kai kryptis iki tikslo taško yra pakeista</string>
+    <string name="access_autoannounce_period">Autopranešėjo periodas</string>
+    <string name="access_map_linked_to_location">Žemėlapis yra susietas su vietos pozicija</string>
+    <string name="access_shared_string_navigate_up">Vykti aukštyn</string>
+    <string name="map_mode">Žemėlapio režimas</string>
+    <string name="number_of_gpx_files_selected_pattern">Pasirinkti %s GPX failai</string>
+    <string name="no_map_markers_found">Prašome pridėti žemėlapio žymeklius per žemėlapį</string>
+    <string name="no_waypoints_found">Jokių krypčių taškų nerasta</string>
+    <string name="storage_permission_restart_is_required">Dabar programa gebės rašyti į išorinę atmintį. Būtinas rankinis programos paleidimas iš naujo.</string>
+    <string name="finish_navigation">Užbaigti navigaciją</string>
+    <string name="shared_string_topbar">Viršutinė lentelė</string>
+    <string name="osm_user_stat">Pakeitimai %1$s, pozicija %2$s, viso pakeitimų %3$s</string>
+    <string name="show_transparency_seekbar">Rodyti permatomumo būklės lentelę</string>
+    <string name="upload_osm_note_description"/>
+    <string name="upload_osm_note">Įkelti OSM pastabą</string>
     </resources>
