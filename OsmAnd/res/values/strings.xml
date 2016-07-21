@@ -386,6 +386,7 @@
     <string name="lang_et">Estonian</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="lang_ast">Asturian</string>
+    <string name="lang_hsb">Sorbian (Upper)</string>
     <string name="archive_wikipedia_data">You have old incompatible Wikipedia data downloaded. Do you want to archive it?</string>
     <string name="download_wikipedia_files">Do you want to download additional Wikipedia data (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>
