@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.ObjectType;
@@ -25,11 +28,13 @@ import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchWord;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 public class SearchUICore {
 
+	private static final int TIMEOUT_BETWEEN_CHARS = 200;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class); 
 	private SearchPhrase phrase;
 	private SearchResultCollection currentSearchResult = new SearchResultCollection(); 
@@ -43,6 +48,7 @@ public class SearchUICore {
 	List<SearchCoreAPI> apis = new ArrayList<>();
 	private SearchSettings searchSettings;
 	private MapPoiTypes poiTypes;
+	private Collator collator;
 	
 	
 	public SearchUICore(MapPoiTypes poiTypes, String locale, BinaryMapIndexReader[] searchIndexes) {
@@ -54,6 +60,7 @@ public class SearchUICore {
 		phrase = new SearchPhrase(searchSettings);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 		init();
+		collator = OsmAndCollator.primaryCollator();
 	}
 	
 	public static class SearchResultCollection {
@@ -141,6 +148,7 @@ public class SearchUICore {
 		return true;
 	}
 	
+	
 	public SearchResultCollection search(final String text, final ResultMatcher<SearchResult> matcher) {
 		SearchResultCollection quickRes = new SearchResultCollection();
 		final int request = requestNumber.incrementAndGet();
@@ -158,10 +166,13 @@ public class SearchUICore {
 					if(rm.isCancelled()) {
 						return;
 					}
-					Thread.sleep(200); // FIXME remove timeout
+					if(TIMEOUT_BETWEEN_CHARS > 0) { 
+						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
+					}
 					searchInBackground(phrase, rm);
 					if (!rm.isCancelled()) {
 						sortSearchResults(phrase, rm.getRequestResults());
+						filterSearchDuplicateResults(phrase, rm.getRequestResults());
 						LOG.info(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
 						SearchResultCollection collection = new SearchResultCollection(rm.getRequestResults(),
 								phrase);
@@ -214,14 +225,47 @@ public class SearchUICore {
 		}
 	}
 	
+	public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
+		if(r1.location != null && r2.location != null) {
+			Amenity a1 = null;
+			if(r1.object instanceof Amenity) {
+				a1 = (Amenity) r1.object;
+			}
+			Amenity a2 = null;
+			if(r2.object instanceof Amenity) {
+				a2 = (Amenity) r2.object;
+			}
+			if (r1.localeName.equals(r2.localeName)) {
+				double similarityRadius = 20;
+				if(a1 != null && a2 != null) {
+					if(a1.getType().getKeyName().equals("natural") && 
+							a2.getType().getKeyName().equals("natural")) {
+						similarityRadius = 1000;
+					}
+				}
+				return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
+			}
+		}
+		return false;
+	}
 	
+	public void filterSearchDuplicateResults(SearchPhrase sp, List<SearchResult> searchResults) {
+		Iterator<SearchResult> it = searchResults.iterator();
+		SearchResult found = null;
+		while(it.hasNext()) {
+			SearchResult r = it.next();
+			if(found != null && sameSearchResult(found, r)) {
+				it.remove();
+			} else {
+				found = r;
+			}
+		}
+	}
 	
-
 	
 	public void sortSearchResults(SearchPhrase sp, List<SearchResult> searchResults) {
 		// sort SearchResult by 1. searchDistance 2. Name
 		final LatLon loc = sp.getLastTokenLocation();
-		final net.osmand.Collator clt = OsmAndCollator.primaryCollator();
 		Collections.sort(searchResults, new Comparator<SearchResult>() {
 
 			@Override
@@ -237,7 +281,7 @@ public class SearchUICore {
 				if(st1 != st2) {
 					return Algorithms.compare(st1, st2);
 				}
-				return clt.compare(o1.localeName, o2.localeName);
+				return collator.compare(o1.localeName, o2.localeName);
 			}
 		});
 	}
