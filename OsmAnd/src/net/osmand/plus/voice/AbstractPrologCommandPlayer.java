@@ -274,7 +274,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		this.streamType = streamType;
 	}
 	
-	protected void requestAudioFocus() {
+	protected synchronized void requestAudioFocus() {
 		log.debug("requestAudioFocus");
 		if (android.os.Build.VERSION.SDK_INT >= 8) {
 			mAudioFocusHelper = getAudioFocus();
@@ -284,11 +284,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		}
 		// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
 		if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			startBtSco();
+			toggleBtSco(true);
 		}
 	}
 
-	private AudioFocusHelper getAudioFocus() {
+	private synchronized AudioFocusHelper getAudioFocus() {
 		try {
 			return new net.osmand.plus.api.AudioFocusHelperImpl();
 		} catch (Exception e) {
@@ -300,7 +300,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	protected void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
 		if ((ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) || (btScoStatus == true)) {
-			stopBtSco();
+			toggleBtSco(false);
 		}
 		if (mAudioFocusHelper != null) {
 			mAudioFocusHelper.abandonFocus(ctx, streamType);
@@ -313,41 +313,41 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public static final int BT_SCO_DELAY = 1500;
 
 	// This only needed for init debugging in TestVoiceActivity:
-				  public static String btScoInit = "";
+					  public static String btScoInit = "";
 
-	private boolean startBtSco() {
+	private synchronized boolean toggleBtSco(booelan on) {
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
-		try {
-			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
-			if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
-				  btScoInit = "BT SCO available:   NO";
+		if (on=true) {
+			try {
+				AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
+				if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
+					  btScoInit = "BT SCO available:   NO";
+					return false;
+				}
+				mAudioManager.setMode(0);
+				mAudioManager.startBluetoothSco();
+				mAudioManager.setBluetoothScoOn(true);
+				mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+				btScoStatus = true;
+			} catch (Exception e) {
+				System.out.println("Exception starting BT SCO " + e.getMessage() );
+				btScoStatus = false;
+					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: NO\n(" + e.getMessage() + ")";
 				return false;
 			}
-			mAudioManager.setMode(0);
-			mAudioManager.startBluetoothSco();
-			mAudioManager.setBluetoothScoOn(true);
-			mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-			btScoStatus = true;
-		} catch (Exception e) {
-			System.out.println("Exception starting BT SCO " + e.getMessage() );
+					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES\nBT SCO init delay:  " + BT_SCO_DELAY;
+			return true;
+		} else {
+			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
+			if (mAudioManager == null) {
+				return false;
+			}
+			mAudioManager.setBluetoothScoOn(false);
+			mAudioManager.stopBluetoothSco();
+			mAudioManager.setMode(AudioManager.MODE_NORMAL);
 			btScoStatus = false;
-				  btScoInit = "BT SCO available:   YES\nBT SCO initializes: NO\n(" + e.getMessage() + ")";
-			return false;
+			return true;
 		}
-				  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES\nBT SCO init delay:  " + BT_SCO_DELAY;
-		return true;
-	}
-
-	private boolean stopBtSco() {
-		AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
-		if (mAudioManager == null) {
-			return false;
-		}
-		mAudioManager.setBluetoothScoOn(false);
-		mAudioManager.stopBluetoothSco();
-		mAudioManager.setMode(AudioManager.MODE_NORMAL);
-		btScoStatus = false;
-		return true;
 	}
 
 }
