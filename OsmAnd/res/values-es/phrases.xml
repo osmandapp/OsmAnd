@@ -2926,4 +2926,108 @@
 	<string name="poi_crossing_on_demand_no">Cruce a demanda: no</string>
 	<string name="poi_crossing_supervision_yes">Cruce controlado</string>
 	<string name="poi_crossing_supervision_no">Cruce controlado: no</string>
+	<string name="poi_spoil_heap">Escombrera</string>
+	
+	<string name="poi_recreation_center">Centro recreativo</string>
+
+	<string name="poi_crossing_saltire_yes">Señal de paso a nivel</string>
+	<string name="poi_crossing_saltire_no">Señal de paso a nivel: no</string>
+	<string name="poi_crossing_supervision_attendant">Supervisión del paso a nivel: persona</string>
+	<string name="poi_crossing_supervision_camera">Supervisión del paso a nivel: cámara</string>
+
+	<string name="poi_dispensing_yes">Dispensa recetas: sí</string>
+	<string name="poi_dispensing_no">Dispensa recetas: no</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Público</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_military_public">Militar/Público</string>
+	<string name="poi_aerodrome_type_private">Privado</string>
+
+	<string name="poi_ventilation_shaft">Conducto de ventilación</string>
+
+	<string name="poi_pump_type_beam_pump">Tipo de bomba: bomba de varilla</string>
+	<string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mk II o III</string>
+	<string name="poi_pump_type_gravity">Tipo de bomba: de gravedad</string>
+	<string name="poi_pump_style_modern">Tipo de bomba: moderna</string>
+	<string name="poi_pump_style_historic">Tipo de bomba: histórica</string>
+	<string name="poi_pump_status_ok">Estado de la bomba: ok</string>
+	<string name="poi_pump_status_broken">Estado de la bomba: estropeada</string>
+	<string name="poi_pump_status_locked">Estado de la bomba: bloqueada</string>
+
+	<string name="poi_payment_troika_yes">Acepta tarjeta Troika</string>
+	<string name="poi_payment_troika_no">No acepta tarjeta Troika</string>
+
+	<string name="poi_telescope">Telescopio</string>
+	<string name="poi_telescope_type_optical">Tipo de telescopio: óptico</string>
+	<string name="poi_telescope_type_radio">Tipo de telescopio: radiotelescopio</string>
+	<string name="poi_telescope_type_gamma">Tipo de telescopio: de rayos gamma</string>
+	<string name="poi_telescope_diameter">Diámetro</string>
+	<string name="poi_telescope_spectrum">Espectro</string>
+	<string name="poi_telescope_usage_education">Uso: educativo</string>
+	<string name="poi_telescope_usage_espionage">Uso: espionaje</string>
+	<string name="poi_telescope_usage_research">Uso: investigación</string>
+
+	<string name="poi_observatory_type_espionage">Uso: espionaje</string>
+	<string name="poi_observatory_type_meteorological">Uso: meteorológico</string>
+	<string name="poi_observatory_type_gravitational">Uso: gravitacional</string>
+
+	<string name="poi_greenhouse_horticulture">Horticultura en invernadero</string>
+
+	<string name="poi_voltage">Voltaje</string>
+	<string name="poi_generator_output_electricity">Potencia de salida</string>
+	<string name="poi_generator_output_electricity_yes">Salida: electricidad</string>
+	<string name="poi_generator_output_hot_water">Potencia de salida de agua caliente</string>
+	<string name="poi_generator_output_hot_water_yes">Salida: agua caliente</string>
+	<string name="poi_generator_output_steam_yes">Salida: vapor</string>
+	<string name="poi_generator_output_hot_air_yes">Salida: aire caliente</string>
+	<string name="poi_generator_output_cold_water_yes">Salida: agua fría</string>
+	<string name="poi_generator_output_compressed_air">Potencia de salida de aire comprimido</string>
+	<string name="poi_generator_output_compressed_air_yes">Salida: aire comprimido</string>
+	<string name="poi_generator_output_vacuum_yes">Salida: vacío</string>
+	<string name="poi_generator_output_biogas">Potencia de salida de biogás</string>
+	<string name="poi_generator_output_biogas_yes">Salida: biogás</string>
+
+	<string name="poi_pumping_station">Estación de bombeo</string>
+
+	<string name="poi_display_yes">Pantalla: sí</string>
+	<string name="poi_display_no">Pantalla: no</string>
+	<string name="poi_display_analog_yes">Pantalla analógica</string>
+	<string name="poi_display_digital_yes">Pantalla digital</string>
+	<string name="poi_display_sundial_yes">Reloj de sol</string>
+
+	<string name="poi_barometer_yes">Barómetro: sí</string>
+	<string name="poi_barometer_no">Barómetro: no</string>
+	<string name="poi_thermometer_yes">Termómetro: sí</string>
+	<string name="poi_thermometer_no">Termómetro: no</string>
+	<string name="poi_hygrometer_yes">Higrómetro: sí</string>
+	<string name="poi_hygrometer_no">Higrómetro: no</string>
+	<string name="poi_date_yes">Muestra la fecha: sí</string>
+	<string name="poi_date_no">Muestra la fecha: no</string>
+
+	<string name="poi_support_pole">Soporte: poste</string>
+	<string name="poi_support_wall_mounted">Soporte: muro</string>
+	<string name="poi_support_tree">Soporte: árbol</string>
+	<string name="poi_support_pedestal">Soporte: pedestal</string>
+	<string name="poi_support_ground">Soporte: suelo</string>
+	<string name="poi_support_billboard">Soporte: cartel</string>
+	<string name="poi_support_ceiling">Soporte: techo</string>
+	<string name="poi_support_suspended">Soporte: suspendido</string>
+	<string name="poi_support_roof">Soporte: tejado</string>
+	<string name="poi_support_tower">Soporte: torre</string>
+
+	<string name="poi_passenger_information_display_yes">Pantalla de información al pasajero: sí</string>
+	<string name="poi_passenger_information_display_no">Pantalla de información al pasajero: no</string>
+
+	<string name="poi_aquaculture">Acuicultura</string>
+	<string name="poi_aquaculture_shrimp">Acuicultura: gambas</string>
+	<string name="poi_aquaculture_fish">Acuicultura: pescado</string>
+	<string name="poi_aquaculture_mussels">Acuicultura: mejillones</string>
+
+	<string name="poi_mdf">Red de distribución principal (MDF)</string>
+	<string name="poi_min_age">Edad mínima</string>
+
+	<string name="poi_organic_yes">Comida orgánica: sí</string>
+	<string name="poi_organic_no">Comida orgánica: no</string>
 	</resources>
