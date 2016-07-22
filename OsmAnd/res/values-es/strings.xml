@@ -726,7 +726,7 @@
     <string name="osmand_parking_event">Recoger el automóvil del aparcamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">Se añadió previamente al calendario una notificación para recoger su automóvil. Permanecerá allí hasta que se borre manualmente.</string>
-    <string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del aparcamiento</string>
+    <string name="osmand_parking_time_limit_title">Establecer el límite de tiempo de aparcamiento</string>
     <string name="osmand_parking_delete_confirm">¿Quiere eliminar el marcador de posición de aparcamiento?</string>
     <string name="osmand_parking_delete">Eliminar un marcador de aparcamiento</string>
     <string name="osmand_parking_choose_type">Elija el tipo de aparcamiento</string>
@@ -742,7 +742,7 @@
     <string name="osmand_parking_position_name">Posición de aparcamiento</string>
     <string name="osmand_parking_plugin_description">Este complemento, le deja memorizar fácilmente dónde se aparcó el automóvil y cuánto tiempo queda (si el estacionamiento está limitado por tiempo).\nPuede encontrar la localización y el tiempo de estacionamiento en la tarjeta del panel de control y en el control de la pantalla de mapas. Añada una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
-    <string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
+    <string name="context_menu_item_add_parking_point">Marcar como ubicación de aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
     <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
     <string name="shared_location">Compartir ubicación</string>
@@ -1648,7 +1648,7 @@
     <string name="watch">Ver</string>
     <string name="plugin_touringview_name">Mapa vista turística</string>
     <string name="rename_failed">Fallo al renombrar.</string>
-    <string name="shared_string_currently_recording_track">Actualmente grabando la traza</string>
+    <string name="shared_string_currently_recording_track">Grabando la traza en este momento</string>
     <string name="back_to_map">Volver al mapa</string>
     <string name="shared_string_selected">Seleccionado</string>
     <string name="track_segments">Segmentos de la traza</string>
@@ -2077,7 +2077,7 @@
     <string name="shared_string_toolbar">Barra de herramientas</string>
     <string name="shared_string_widgets">Controles</string>
     <string name="download_files_error_not_enough_space">No hay suficiente espacio! Necesitaría {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay solo {2} MB disponibles.</string>
-    <string name="download_files_question_space_with_temp">¿Realmente quieres descargar {0} archivo(s)? Esto necesita {3} MB temporalmente y {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
+    <string name="download_files_question_space_with_temp">¿Realmente quieres descargar {0} archivo(s)? Esto necesita temporalmente {3} MB y {1} MB permanentemente. Actualmente, hay {2} MB disponibles.</string>
     <string name="select_map_marker">Seleccionar marcador de mapa</string>
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_osm_note_description">Puedes subir tu nota de OSM anónimamente si utilizas tu perfil de OpenStreetMap.org.</string>
@@ -2150,7 +2150,7 @@
     <string name="access_tree_list">Lista de árbol</string>
     <string name="access_shared_string_not_installed">No instalado</string>
     <string name="access_widget_expand">Expandir</string>
-    <string name="access_shared_string_navigate_up">Navegar hacia arriba</string>
+    <string name="access_shared_string_navigate_up">Desplazarse al comienzo</string>
     <string name="access_sort">Ordenar</string>
     <string name="move_marker_bottom_sheet_title">Mover el mapa para cambiar la posición del marcador</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
