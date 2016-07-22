@@ -1182,6 +1182,137 @@ public class GPXUtilities {
 		return res;
 	}
 
+	public static GPXFile loadWptPt(Context ctx, File f) {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream(f);
+			GPXFile file = loadWptPt(ctx, fis);
+			file.path = f.getAbsolutePath();
+			try {
+				fis.close();
+			} catch (IOException e) {
+			}
+			return file;
+		} catch (FileNotFoundException e) {
+			GPXFile res = new GPXFile();
+			res.path = f.getAbsolutePath();
+			log.error("Error reading gpx", e); //$NON-NLS-1$
+			res.warning = ctx.getString(R.string.error_reading_gpx);
+			return res;
+		} finally {
+			try {
+				if (fis != null)
+					fis.close();
+			} catch (IOException ignore) {
+				// ignore
+			}
+		}
+	}
+
+	public static GPXFile loadWptPt(Context ctx, InputStream f) {
+		GPXFile res = new GPXFile();
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		try {
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+			parser.setInput(getUTF8Reader(f)); //$NON-NLS-1$
+			Stack<GPXExtensions> parserState = new Stack<GPXExtensions>();
+			boolean extensionReadMode = false;
+			parserState.push(res);
+			int tok;
+			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				if (tok == XmlPullParser.START_TAG) {
+					Object parse = parserState.peek();
+					String tag = parser.getName();
+					if (extensionReadMode && parse instanceof GPXExtensions) {
+						String value = readText(parser, tag);
+						if (value != null) {
+							((GPXExtensions) parse).getExtensionsToWrite().put(tag, value);
+							if (tag.equals("speed") && parse instanceof WptPt) {
+								try {
+									((WptPt) parse).speed = Float.parseFloat(value);
+								} catch (NumberFormatException e) {
+								}
+							}
+						}
+
+					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
+						extensionReadMode = true;
+					} else {
+						if (parse instanceof GPXFile) {
+							if (parser.getName().equals("wpt")) {
+								WptPt wptPt = parseWptAttributes(parser);
+								((GPXFile) parse).points.add(wptPt);
+								parserState.push(wptPt);
+							}
+						} else if (parse instanceof WptPt) {
+							if (parser.getName().equals("name")) {
+								((WptPt) parse).name = readText(parser, "name");
+							} else if (parser.getName().equals("desc")) {
+								((WptPt) parse).desc = readText(parser, "desc");
+							} else if (parser.getName().equals("link")) {
+								((WptPt) parse).link = parser.getAttributeValue("", "href");
+							} else if (tag.equals("category")) {
+								((WptPt) parse).category = readText(parser, "category");
+							} else if (tag.equals("type")) {
+								if (((WptPt) parse).category == null) {
+									((WptPt) parse).category = readText(parser, "type");
+								}
+							} else if (parser.getName().equals("ele")) {
+								String text = readText(parser, "ele");
+								if (text != null) {
+									try {
+										((WptPt) parse).ele = Float.parseFloat(text);
+									} catch (NumberFormatException e) {
+									}
+								}
+							} else if (parser.getName().equals("hdop")) {
+								String text = readText(parser, "hdop");
+								if (text != null) {
+									try {
+										((WptPt) parse).hdop = Float.parseFloat(text);
+									} catch (NumberFormatException e) {
+									}
+								}
+							} else if (parser.getName().equals("time")) {
+								String text = readText(parser, "time");
+								if (text != null) {
+									try {
+										((WptPt) parse).time = format.parse(text).getTime();
+									} catch (ParseException e) {
+									}
+								}
+							}
+						}
+					}
+
+				} else if (tok == XmlPullParser.END_TAG) {
+					Object parse = parserState.peek();
+					String tag = parser.getName();
+					if (parse instanceof GPXExtensions && tag.equals("extensions")) {
+						extensionReadMode = false;
+					}
+
+					if (tag.equals("wpt")) {
+						Object pop = parserState.pop();
+						assert pop instanceof WptPt;
+					}
+				}
+			}
+		} catch (RuntimeException e) {
+			log.error("Error reading gpx", e); //$NON-NLS-1$
+			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
+		} catch (XmlPullParserException e) {
+			log.error("Error reading gpx", e); //$NON-NLS-1$
+			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
+		} catch (IOException e) {
+			log.error("Error reading gpx", e); //$NON-NLS-1$
+			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
+		}
+
+		return res;
+	}
+
 	private static Reader getUTF8Reader(InputStream f) throws IOException {
 		BufferedInputStream bis = new BufferedInputStream(f);
 		assert bis.markSupported();

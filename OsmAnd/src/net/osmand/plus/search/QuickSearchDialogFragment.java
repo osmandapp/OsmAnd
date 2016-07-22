@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -36,6 +37,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -45,6 +47,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -62,6 +65,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -97,6 +101,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
+	public static final int SEARCH_WPT_API_PRIORITY = 2;
+	public static final int SEARCH_WPT_OBJECT_PRIORITY = 10;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
 
@@ -299,7 +305,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		});
 
-		// Setup favorites search api
+		// Register favorites search api
 		searchUICore.registerAPI(new SearchBaseAPI() {
 
 			@Override
@@ -330,6 +336,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return SEARCH_FAVORITE_API_PRIORITY;
 			}
 		});
+
+		// Register WptPt search api
+		searchUICore.registerAPI(new SearchWptAPI(app));
 	}
 
 	@Override
@@ -774,7 +783,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				protected GPXFile doInBackground(Void... params) {
 					GPXFile gpx = new GPXFile();
 					for (HistoryEntry h : historyEntries) {
-						GPXUtilities.WptPt pt = new GPXUtilities.WptPt();
+						WptPt pt = new WptPt();
 						pt.lat = h.getLat();
 						pt.lon = h.getLon();
 						pt.name = h.getName().getName();
@@ -957,6 +966,106 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return -1;
 			}
 			return SEARCH_HISTORY_API_PRIORITY;
+		}
+	}
+
+	public static class SearchWptAPI extends SearchBaseAPI {
+
+		private OsmandApplication app;
+		private LoadGpxTask asyncLoader = new LoadGpxTask();
+
+		public SearchWptAPI(OsmandApplication app) {
+			this.app = app;
+			asyncLoader.execute();
+		}
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+			if (asyncLoader.getResult() == null) {
+				return false;
+			}
+
+			List<GpxInfo> infos = asyncLoader.getResult();
+			for (GpxInfo info : infos) {
+				for (WptPt point : info.gpx.points) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = point.getPointDescription(app).getName();
+					sr.object = point;
+					sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
+					sr.objectType = ObjectType.WPT;
+					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+					sr.localeRelatedObjectName = info.getFileName();
+					sr.preferredZoom = 17;
+					if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
+						resultMatcher.publish(sr);
+					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+						resultMatcher.publish(sr);
+					}
+				}
+			}
+			return true;
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			if(!p.isNoSelectedType()) {
+				return -1;
+			}
+			return SEARCH_WPT_API_PRIORITY;
+		}
+
+
+		public class LoadGpxTask extends AsyncTask<Void, Void, List<GpxInfo>> {
+
+			private List<GpxInfo> result;
+
+			@Override
+			protected List<GpxInfo> doInBackground(Void... params) {
+				List<GpxInfo> result = new ArrayList<>();
+				loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, this);
+				return result;
+			}
+
+			@Override
+			protected void onPostExecute(List<GpxInfo> result) {
+				this.result = result;
+			}
+
+			private File[] listFilesSorted(File dir) {
+				File[] listFiles = dir.listFiles();
+				if (listFiles == null) {
+					return new File[0];
+				}
+				Arrays.sort(listFiles);
+				return listFiles;
+			}
+
+			private void loadGPXData(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask) {
+				if (mapPath.canRead()) {
+					loadGPXFolder(mapPath, result, loadTask, "");
+				}
+			}
+
+			private void loadGPXFolder(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask,
+									   String gpxSubfolder) {
+				for (File gpxFile : listFilesSorted(mapPath)) {
+					if (gpxFile.isDirectory()) {
+						String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
+								+ gpxFile.getName();
+						loadGPXFolder(gpxFile, result, loadTask, sub);
+					} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
+						GpxInfo info = new GpxInfo();
+						info.subfolder = gpxSubfolder;
+						info.file = gpxFile;
+						info.gpx = GPXUtilities.loadWptPt(app, gpxFile);
+						result.add(info);
+					}
+				}
+			}
+
+			public List<GpxInfo> getResult() {
+				return result;
+			}
 		}
 	}
 }
