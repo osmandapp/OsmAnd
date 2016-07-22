@@ -547,7 +547,7 @@
 	<string name="poi_resort">度假村</string>
 	<string name="poi_hanami">賞花</string>
 	<string name="poi_wine_cellar">酒窖</string>
-	<string name="poi_winery">酒廠</string>
+	<string name="poi_craft_winery">酒廠</string>
 
 	<string name="poi_club_art">藝文俱樂部</string>
 	<string name="poi_club_astronomy">天文俱樂部</string>

@@ -492,7 +492,7 @@
 	<string name="poi_picnic_table">Piknikező asztal</string>
 	<string name="poi_tomb">Sírkő</string>
 	<string name="poi_wine_cellar">Borospince</string>
-	<string name="poi_winery">Borászat</string>
+	<string name="poi_craft_winery">Borászat</string>
 
 	<string name="poi_club_art">Művészklub</string>
 	<string name="poi_club_sport">Sportklub</string>

@@ -762,7 +762,7 @@
 	<string name="poi_wood">Bos</string>
 	<string name="poi_communication">Communicatie</string>
 		<string name="poi_cabin">Hut</string>
-	<string name="poi_winery">Wijnhandel</string>
+	<string name="poi_craft_winery">Wijnhandel</string>
 
 	<string name="poi_piste_playground">Kinderskiweide</string>
 	<string name="poi_personal_transport">Persoonlijk vervoer</string>

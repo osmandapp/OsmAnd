@@ -553,7 +553,7 @@
 	<string name="poi_funicular">Funicular</string>
 	<string name="poi_resort">Resort</string>
 	<string name="poi_wine_cellar">Adega de vinho</string>
-	<string name="poi_winery">Vinícola</string>
+	<string name="poi_craft_winery">Vinícola</string>
 
 	<string name="poi_club_art">Clube de arte</string>
 	<string name="poi_club_astronomy">Clube de astronomia</string>

@@ -868,7 +868,7 @@
 
 	<string name="poi_picnic_table">Стол для пикника</string>
 	<string name="poi_tomb">Гробница</string>
-	<string name="poi_winery">Винный завод</string>
+	<string name="poi_craft_winery">Винодельня</string>
 
 	<string name="poi_piste_downhill">Скоростной спуск</string>
 	<string name="poi_gallery">Художественная галерея</string>
