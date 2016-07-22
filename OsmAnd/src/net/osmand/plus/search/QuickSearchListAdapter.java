@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,12 +30,32 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private OsmandApplication app;
 	private Activity activity;
+
 	private LatLon location;
 	private Float heading;
+
 	private int searchMoreItemPosition;
+	private int selectAllItemPosition;
+
 	private int screenOrientation;
 	private int dp56;
 	private int dp1;
+
+	private OnSelectionListener selectionListener;
+	private boolean selectionMode;
+	private boolean selectAll;
+	private List<QuickSearchListItem> selectedItems = new ArrayList<>();
+
+	private static final int ITEM_TYPE_REGULAR = 0;
+	private static final int ITEM_TYPE_SEARCH_MORE = 1;
+	private static final int ITEM_TYPE_SELECT_ALL = 2;
+
+	public interface OnSelectionListener {
+
+		void onUpdateSelectionMode(List<QuickSearchListItem> selectedItems);
+
+		void reloadData();
+	}
 
 	public QuickSearchListAdapter(OsmandApplication app, Activity activity) {
 		super(app, R.layout.search_list_item);
@@ -41,6 +63,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		this.activity = activity;
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
+	}
+
+	public OnSelectionListener getSelectionListener() {
+		return selectionListener;
+	}
+
+	public void setSelectionListener(OnSelectionListener selectionListener) {
+		this.selectionListener = selectionListener;
 	}
 
 	public int getScreenOrientation() {
@@ -67,11 +97,43 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		this.heading = heading;
 	}
 
+	public boolean isSelectionMode() {
+		return selectionMode;
+	}
+
+	public void setSelectionMode(boolean selectionMode, int position) {
+		this.selectionMode = selectionMode;
+		selectAll = false;
+		selectedItems.clear();
+		if (position != -1) {
+			QuickSearchListItem item = getItem(position);
+			selectedItems.add(item);
+		}
+		if (selectionMode) {
+			QuickSearchSelectAllListItem selectAllListItem = new QuickSearchSelectAllListItem(app, null, null);
+			insertListItem(selectAllListItem, 0);
+			if (selectionListener != null) {
+				selectionListener.onUpdateSelectionMode(selectedItems);
+			}
+		} else {
+			if (selectionListener != null) {
+				selectionListener.reloadData();
+			}
+		}
+		//notifyDataSetInvalidated();
+	}
+
+	public List<QuickSearchListItem> getSelectedItems() {
+		return selectedItems;
+	}
+
 	public void setListItems(List<QuickSearchListItem> items) {
 		setNotifyOnChange(false);
 		clear();
-		addAll(items);
-		searchMoreItemPosition = items.size() > 0 && items.get(items.size() - 1) instanceof QuickSearchMoreListItem ? items.size() - 1 : -1;
+		for (QuickSearchListItem item : items) {
+			add(item);
+		}
+		acquireAdditionalItemsPositions();
 		setNotifyOnChange(true);
 		notifyDataSetChanged();
 	}
@@ -79,9 +141,28 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	public void addListItem(QuickSearchListItem item) {
 		setNotifyOnChange(false);
 		add(item);
-		searchMoreItemPosition = item instanceof QuickSearchMoreListItem ? getCount() - 1 : -1;
+		acquireAdditionalItemsPositions();
 		setNotifyOnChange(true);
 		notifyDataSetChanged();
+	}
+
+	public void insertListItem(QuickSearchListItem item, int index) {
+		setNotifyOnChange(false);
+		insert(item, index);
+		acquireAdditionalItemsPositions();
+		setNotifyOnChange(true);
+		notifyDataSetChanged();
+	}
+
+	private void acquireAdditionalItemsPositions() {
+		selectAllItemPosition = -1;
+		searchMoreItemPosition = -1;
+		if (getCount() > 0) {
+			QuickSearchListItem first = getItem(0);
+			QuickSearchListItem last = getItem(getCount() - 1);
+			selectAllItemPosition = first instanceof QuickSearchSelectAllListItem ? 0 : -1;
+			searchMoreItemPosition = last instanceof QuickSearchMoreListItem ? getCount() - 1 : -1;
+		}
 	}
 
 	@Override
@@ -91,20 +172,26 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	@Override
 	public int getItemViewType(int position) {
-		return searchMoreItemPosition == position ? 0 : 1;
+		if (position == searchMoreItemPosition) {
+			return ITEM_TYPE_SEARCH_MORE;
+		} else if (position == selectAllItemPosition) {
+			return ITEM_TYPE_SELECT_ALL;
+		} else {
+			return ITEM_TYPE_REGULAR;
+		}
 	}
 
 	@Override
 	public int getViewTypeCount() {
-		return 2;
+		return 3;
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		QuickSearchListItem listItem = getItem(position);
-		int viewType = this.getItemViewType(position);
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		final QuickSearchListItem listItem = getItem(position);
+		int viewType = getItemViewType(position);
 		LinearLayout view;
-		if (viewType == 0) {
+		if (viewType == ITEM_TYPE_SEARCH_MORE) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -115,6 +202,25 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+		} else if (viewType == ITEM_TYPE_SELECT_ALL) {
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) app
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = (LinearLayout) inflater.inflate(
+						R.layout.select_all_list_item, null);
+			} else {
+				view = (LinearLayout) convertView;
+			}
+			final CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
+			ch.setVisibility(View.VISIBLE);
+			ch.setChecked(selectAll);
+			ch.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					toggleCheckbox(position, ch);
+				}
+			});
 		} else {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
@@ -123,6 +229,21 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 						R.layout.search_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
+			}
+
+			final CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
+			if (selectionMode) {
+				ch.setVisibility(View.VISIBLE);
+				ch.setChecked(selectedItems.contains(listItem));
+				ch.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						toggleCheckbox(position, ch);
+					}
+				});
+			} else {
+				ch.setVisibility(View.GONE);
 			}
 
 			ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
@@ -189,7 +310,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);
-				if (position + 1 == searchMoreItemPosition) {
+				if (position + 1 == searchMoreItemPosition || position == selectAllItemPosition) {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
 					p.setMargins(0, 0, 0 ,0);
 					divider.setLayoutParams(p);
@@ -201,6 +322,37 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		}
 		return view;
+	}
+
+	public void toggleCheckbox(int position, CheckBox ch) {
+		int viewType = getItemViewType(position);
+		if (viewType == ITEM_TYPE_SELECT_ALL) {
+			selectAll = ch.isChecked();
+			if (ch.isChecked()) {
+				selectedItems.clear();
+				for (int i = 0; i < getCount(); i++) {
+					if (getItemViewType(i) == ITEM_TYPE_REGULAR) {
+						selectedItems.add(getItem(i));
+					}
+				}
+			} else {
+				selectedItems.clear();
+			}
+			notifyDataSetChanged();
+			if (selectionListener != null) {
+				selectionListener.onUpdateSelectionMode(selectedItems);
+			}
+		} else {
+			QuickSearchListItem listItem = getItem(position);
+			if (ch.isChecked()) {
+				selectedItems.add(listItem);
+			} else {
+				selectedItems.remove(listItem);
+			}
+			if (selectionListener != null) {
+				selectionListener.onUpdateSelectionMode(selectedItems);
+			}
+		}
 	}
 
 	private void updateCompassVisibility(View view, QuickSearchListItem listItem) {
