@@ -2,12 +2,12 @@
 <resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
-    <string name="show_lanes">Mostrar carriles</string>
+    <string name="show_lanes">Carriles</string>
     <string name="avoid_unpaved">Evitar carreteras no pavimentadas</string>
     <string name="avoid_ferries">Evitar ferries</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="avoid_in_routing_descr">Evita carreteras con peaje, no pavimentadas, ferries</string>
-    <string name="show_warnings_title">Mostrar alarmas…</string>
+    <string name="show_warnings_title">Mostrar alertas…</string>
     <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, badenes), advertencias de radares de velocidad, e información de carriles</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
@@ -177,7 +177,7 @@
 \n\nPara utilizarlo, activarlo en \'Menú\' → \'Configurar mapa\' → \'Fuente del mapa…\' → \'Mapas vectoriales sin conexión\'.</string>
     <string name="choose_audio_stream">Salida de los avisos de voz</string>
     <string name="choose_audio_stream_descr">Elige el canal para reproducir los avisos de voz</string>
-    <string name="voice_stream_voice_call">Audio de llamada de voz</string>
+    <string name="voice_stream_voice_call">Audio de llamada de voz (también intenta interrumpir los altavoces BT del coche)</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
     <string name="voice_stream_music">Audio de multimedia</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa %1$s del mapa, intente reinstalar.</string>
@@ -208,8 +208,8 @@
     <string name="preferred_locale">Idioma de la pantalla</string>
     <string name="shared_string_next">Siguiente</string>
     <string name="shared_string_previous">Anterior</string>
-    <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
-    <string name="unit_of_length">Unidad de medida</string>
+    <string name="unit_of_length_descr">Cambia las unidades de longitud</string>
+    <string name="unit_of_length">Unidad de longitud</string>
     <string name="si_mi_foots">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
     <string name="si_km_m">Kilómetros/metros</string>
@@ -725,22 +725,22 @@
     <string name="gpxup_private">Privado</string>
     <string name="osmand_parking_event">Recoger el automóvil del aparcamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
-    <string name="osmand_parking_warning_text">La notificación para recoger su automóvil, fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>
+    <string name="osmand_parking_warning_text">Se añadió previamente al calendario una notificación para recoger su automóvil. Permanecerá allí hasta que se borre manualmente.</string>
     <string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del aparcamiento</string>
     <string name="osmand_parking_delete_confirm">¿Quiere eliminar el marcador de posición de aparcamiento?</string>
     <string name="osmand_parking_delete">Eliminar un marcador de aparcamiento</string>
     <string name="osmand_parking_choose_type">Elija el tipo de aparcamiento</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
     <string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
-    <string name="osmand_parking_add_event">Añadir notificación a la aplicación Calendario</string>
+    <string name="osmand_parking_add_event">Añadir una notificación al calendario</string>
     <string name="osmand_parking_time_limit">Aparcamiento de tiempo limitado</string>
     <string name="osmand_parking_time_no_limit">Aparcamiento sin tiempo limitado</string>
-    <string name="osmand_parking_position_description">La posición de su automóvil aparcado. %1$s</string>
+    <string name="osmand_parking_position_description">Localización de su automóvil aparcado. %1$s</string>
     <string name="osmand_parking_position_description_add">Recoger el automóvil a las:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Punto de aparcamiento</string>
-    <string name="osmand_parking_plugin_description">Este complemento, le deja memorizar fácilmente cuándo se aparcó el automóvil y cuánto tiempo queda (si el estacionamiento está limitado por tiempo).\n\nPuede encontrar su lugar y el tiempo de estacionamiento, en la tarjeta del tablero de instrumentos y en el control del mapa. Añada una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
+    <string name="osmand_parking_position_name">Posición de aparcamiento</string>
+    <string name="osmand_parking_plugin_description">Este complemento, le deja memorizar fácilmente dónde se aparcó el automóvil y cuánto tiempo queda (si el estacionamiento está limitado por tiempo).\nPuede encontrar la localización y el tiempo de estacionamiento en la tarjeta del panel de control y en el control de la pantalla de mapas. Añada una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
     <string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
@@ -758,8 +758,8 @@
     <string name="use_compass_navigation">Utilizar brújula</string>
     <string name="route_updated_loc_found">La ruta será calculada una vez encontrada la posición</string>
     <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
-    <string name="show_cameras">Mostrar radares</string>
-    <string name="show_traffic_warnings">Mostrar límites de velocidad</string>
+    <string name="show_cameras">Radares</string>
+    <string name="show_traffic_warnings">Límites de velocidad</string>
     <string name="avoid_toll_roads">Evitar peajes de carreteras</string>
     <string name="map_widget_top_text">Nombre de calle</string>
     <string name="map_widget_config">Configuración</string>
@@ -1282,8 +1282,8 @@
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Varios</string>
     <string name="localization_pref_title">Ubicación</string>
-    <string name="interrupt_music_descr">Interrumpe la música al hacer avisos</string>
-    <string name="interrupt_music">Interrumpir música</string>
+    <string name="interrupt_music_descr">Interrumpe totalmente la música durante los avisos de voz (no solo reduce el volumen)</string>
+    <string name="interrupt_music">Pausar música</string>
     <string name="osmo_settings_uuid">Identificador único del dispositivo</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y configura el canal de rastreo personal</string>
     <string name="osmo_plugin_description">"Este extra proporciona parcialmente la funcionalidad de Monitorización OpenStreetMap, ver https://osmo.mobi\n\nPuedes rastrear en tiempo real todos los dispositivos de un grupo en el que participes. También puedes ver el punto y las pistas subidas al grupo al que perteneces.
@@ -1465,8 +1465,8 @@
     <string name="lang_ar">Árabe</string>
     <string name="lang_sc">Sardo</string>
     <string name="lang_sr">Serbio</string>
-    <string name="lang_zh_CN">Chino Simplificado</string>
-    <string name="lang_zh_TW">Chino Tradicional</string>
+    <string name="lang_zh_CN">Chino (simplificado)</string>
+    <string name="lang_zh_TW">Chino (tradicional)</string>
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar navegación</string>
@@ -1540,7 +1540,7 @@
     <string name="map_widget_left">Panel izquierdo</string>
     <string name="shared_string_show">Mostrar</string>
     <string name="configure_map">Configurar mapa</string>
-    <string name="search_radius_proximity">En las proximidades de</string>
+    <string name="search_radius_proximity">En un radio de</string>
     <string name="rendering_category_routes">Rutas</string>
     <string name="impassable_road">Evitar carreteras…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
@@ -1586,8 +1586,8 @@
     <string name="rendering_value_germanRoadAtlas_name">Atlas alemán de carreteras</string>
     <string name="traffic_warning_railways">Cruce de ferrocarril</string>
     <string name="traffic_warning_pedestrian">Paso de peatones</string>
-    <string name="show_railway_warnings">Mostrar cruces de ferrocarril</string>
-    <string name="show_pedestrian_warnings">Mostrar pasos de peatones</string>
+    <string name="show_railway_warnings">Pasos a nivel</string>
+    <string name="show_pedestrian_warnings">Pasos de peatones</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas americano de carreteras</string>
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
@@ -1851,8 +1851,8 @@
     <string name="simulate_your_location_stop_descr">Parar simulación de posición</string>
     <string name="simulate_your_location_descr">Simule su ubicación, utilizando una ruta calculada o una grabación GPX</string>
     <string name="downloads_left_template">Quedan %1$s descargas</string>
-    <string name="default_speed_system_descr">Define el sistema de medición de velocidad</string>
-    <string name="default_speed_system">Medición de la velocidad</string>
+    <string name="default_speed_system_descr">Define la unidad de velocidad</string>
+    <string name="default_speed_system">Unidad de velocidad</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Millas náuticas</string>
     <string name="si_kmh">Kilómetros por hora</string>
@@ -2051,11 +2051,11 @@
 <string name="rendering_attr_hideUnderground_name">Objetos subterráneos</string>
     <string name="data_is_not_available">No hay datos disponibles</string>
     <string name="shared_string_read_more">Leer más</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas sin conexión a Internet. Descarga un mapa de un país antes de que viajes para encontrar sitios y rutas en un área que no te sea familiar. Opciones básicas: • Mapas detallados de 200 países • Navegador fuera de línea con avisos de voz • Búsqueda de direcciones en modo sin conexión • Información sobre ubicaciones en el mapa: sitios de interés, cafeterías, aparcamientos, tiendas • Añadir ubicaciones a tus favoritos • Opciones adicionales de navegación en modos Conducción, Ciclismo y Pedestre : • Capacidad de ver y grabar trazas GPX • Descripciones de Wikipedia de los PDI • Añadir notas de foto, audio y vídeo al mapa • Modos de mapa Día y Noche  para una conducción más conveniente • Información sobre rutas y paradas de transporte público • Vías ciclistas y caminos • Vías de senderismo para hacer turismo en todo el mundo • Mapas en línea de numerosas fuentes • Información sobre calidad del pavimento e iluminación de las calles • Añadir, editar y eliminar PDI (para usuarios deOpenstreetmap.org) • OsMo - monitorización de directo de otros dispositivos Consigue un explorador fiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Holanda, EE.UU., Rusia, Brasil o cualquiera otro estado. Extras: • Mapas de contorno y sombreado del terreno https://goo.gl/7mojP8 Datos de curvas de nivel y visualización de terreno añadidos al mapa básico OsmAnd . • Mapas de esquí https://goo.gl/pX6DxJ La información sobre pistas de esquí, pistas de esquí de fondo, telecabinas y ascensores de esquí. • Mapa náutico https://goo.gl/0hEdxm Estilo de mapa especial para ver señales de navegación náutica para arteriales y navegación costera. • Posición de aparcamiento https://goo.gl/6jxQXF Te ayuda a marcar la ubicación de tu vehículo aparcado y ver cuánto tiempo queda si el aparcamiento es por tiempo limitado. ¡Mantente informado! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sitio: http://osmand.net Si necesitas ayuda con la aplicación OsmAnd, por favor contacta con nuestro equipo de soporte: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas sin conexión a Internet. Descarga un mapa de un país antes de viajar para encontrar sitios y rutas en un área que no sea familiar. Opciones básicas: • Mapas detallados de 200 países • Navegador fuera de línea con avisos de voz • Búsqueda de direcciones en modo sin conexión • Información sobre ubicaciones en el mapa: puntos de interés, cafeterías, aparcamientos, tiendas • Añadir ubicaciones a tus favoritos • Opciones adicionales de navegación en modos Conducción, Ciclismo y Peatón : • Capacidad de ver y grabar trazas GPX • Descripciones de Wikipedia de los PDI • Añadir notas de imagen, audio y vídeo al mapa • Modos de mapa Día y Noche  para una conducción más adecuada • Información sobre rutas y paradas de transporte público • Vías ciclistas y senderos • Vías de senderismo para hacer turismo en todo el mundo • Mapas en línea de numerosas fuentes • Información sobre calidad del pavimento e iluminación de las calles • Añadir, editar y eliminar PDI (para usuarios de Openstreetmap.org) • OsMo - monitorización en directo de otros dispositivos Consigue un explorador fiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Holanda, EE.UU., Rusia, Brasil o cualquier otro estado. Extras: • Mapas de curvas de nivel y sombreado del terreno https://goo.gl/7mojP8 Datos de curvas de nivel y visualización de terreno añadidos al mapa básico OsmAnd . • Mapas de esquí https://goo.gl/pX6DxJ Información sobre pistas de esquí, pistas de esquí de fondo, telecabinas y remontes de esquí. • Mapa náutico https://goo.gl/0hEdxm Estilo de mapa especial para ver señales de navegación náutica para navegación fluvial y costera. • Posición de aparcamiento https://goo.gl/6jxQXF Te ayuda a marcar la ubicación de tu vehículo aparcado y ver cuánto tiempo queda si el aparcamiento es por tiempo limitado. ¡Mantente informado! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sitio: http://osmand.net Si necesitas ayuda con la aplicación OsmAnd, por favor contacta con nuestro equipo de soporte: support@osmand.net. "</string>
     <string name="shared_string_email_address">Dirección de correo electrónico</string>
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Guardar los cambios</string>
-    <string name="find_parking">Encontrar un aparcamiento</string>
+    <string name="find_parking">Encontrar aparcamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
     <string name="underlay_transparency">Transparencia de subyacente</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas MTB</string>
@@ -2168,4 +2168,22 @@
     <string name="map_widget_battery">Nivel de batería</string>
     <string name="change_markers_position">Cambiar ubicación del marcador</string>
     <string name="lang_hu_formal">Húngaro (formal)</string>
+    <string name="search_categories">Categorías</string>
+    <string name="postcode">Código postal</string>
+    <string name="shared_string_from">desde</string>
+    <string name="city_type_district">Distrito</string>
+    <string name="city_type_neighbourhood">Barrio</string>
+    <string name="map_widget_search">Buscar</string>
+	<string name="shared_string_is_open_24_7">Abierto 24/7</string>
+    <string name="storage_directory_card">Tarjeta de memoria</string>
+    <string name="coords_format">Formato de coordenadas</string>
+    <string name="coords_format_descr">Formato para las coordenadas geográficas</string>
+  	<string name="app_mode_bus">Autobús</string>
+ 	<string name="app_mode_train">Tren</string>
+    <string name="lang_es_us">Español (Estados Unidos)</string>
+    <string name="lang_ast">Asturiano</string>
+    <string name="lang_hsb">Alto sorabo</string>
+    <string name="lang_en_gb">Inglés (Reino Unido)</string>
+    <string name="lang_be_BY">Bielorruso (latino)</string>
+    <string name="lang_kn">Canarés</string>
     </resources>
