@@ -1662,7 +1662,7 @@
 	<string name="poi_vending_chewing_gums">Maĉgumoj</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkum-biletoj, biletoj publik-transportaj</string>
 	<string name="poi_vending_coffee">Kaftrinkaĵoj</string>
-	<string name="poi_vending_toll">Ludiloj</string>
+	<string name="poi_vending_toll">Vendo de vojimposto</string>
 	<string name="poi_vending_tickets">Biletoj</string>
 	<string name="poi_vending_water">Akvo</string>
 	<string name="poi_vending_telephone_vouchers">Telefonkartoj</string>
@@ -1672,4 +1672,11 @@
 	<string name="poi_vending_vouchers">Kuponoj</string>
 	<string name="poi_vending_dvd">Lumdiskegoj (DVD-oj)</string>
 	<string name="poi_vending_candles">Kandeloj</string>
+	<string name="poi_vending_toys">Ludiloj</string>
+	<string name="poi_vending_ice_cream">Glaciaĵoj</string>
+	<string name="poi_vending_sim_cards">SIM-kartoj</string>
+
+	<string name="poi_branch">Fako</string>
+
+	<string name="poi_memorial_war">Memorigaĵo milita</string>
 	</resources>
