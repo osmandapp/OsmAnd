@@ -3012,4 +3012,11 @@
 
 	<string name="poi_diaper_table_count">Diaper table count</string>
 
+	<string name="poi_water_tank">Water tank</string>
+
+	<string name="poi_toilets_disposal_flush">Toilets disposal: flush</string>
+	<string name="poi_toilets_disposal_pitlatrine">Toilets disposal: pitlatrine</string>
+	<string name="poi_toilets_disposal_chemical">Toilets disposal: chemical</string>
+	<string name="poi_toilets_disposal_bucket">Toilets disposal: bucket</string>
+
 </resources>
