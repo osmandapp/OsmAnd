@@ -15,6 +15,8 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -182,9 +184,9 @@ public class QuickSearchListItem {
 				return typeStr;
 			case LOCATION:
 				LatLon latLon = (LatLon) searchResult.object;
-				String country = app.getRegions().getCountryName(latLon);
-				if (!Algorithms.isEmpty(country)) {
-					return country;
+				String locationCountry = app.getRegions().getCountryName(latLon);
+				if (!Algorithms.isEmpty(locationCountry)) {
+					return locationCountry;
 				} else {
 					return "";
 				}
@@ -205,7 +207,19 @@ public class QuickSearchListItem {
 					return app.getString(R.string.shared_string_history);
 				}
 			case WPT:
-				break;
+				StringBuilder sb = new StringBuilder();
+				WptPt wpt = (WptPt) searchResult.object;
+				String wptCountry = app.getRegions().getCountryName(new LatLon(wpt.getLatitude(), wpt.getLongitude()));
+				if (!Algorithms.isEmpty(wptCountry)) {
+					sb.append(wptCountry);
+				}
+				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
+					if (sb.length() > 0) {
+						sb.append(", ");
+					}
+					sb.append(searchResult.localeRelatedObjectName);
+				}
+				return sb.toString();
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}
@@ -295,8 +309,8 @@ public class QuickSearchListItem {
 				return app.getIconsCache().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()),
 						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case WPT:
-				return app.getIconsCache().getIcon(R.drawable.map_action_flag_dark,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				WptPt wpt = (WptPt) searchResult.object;
+				return FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}
