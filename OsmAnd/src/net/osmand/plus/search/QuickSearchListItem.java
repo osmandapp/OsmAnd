@@ -8,6 +8,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
@@ -180,7 +181,13 @@ public class QuickSearchListItem {
 				}
 				return typeStr;
 			case LOCATION:
-				break;
+				LatLon latLon = (LatLon) searchResult.object;
+				String country = app.getRegions().getCountryName(latLon);
+				if (!Algorithms.isEmpty(country)) {
+					return country;
+				} else {
+					return "";
+				}
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return fav.getCategory().length() == 0 ?
@@ -275,7 +282,7 @@ public class QuickSearchListItem {
 					return null;
 				}
 			case LOCATION:
-				return app.getIconsCache().getIcon(R.drawable.ic_action_coordinates_latitude,
+				return app.getIconsCache().getIcon(R.drawable.ic_action_world_globe,
 						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
