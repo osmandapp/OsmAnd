@@ -29,7 +29,9 @@ public class SearchListAdapter extends ArrayAdapter<SearchListItem> {
 	public void setListItems(List<SearchListItem> items) {
 		setNotifyOnChange(false);
 		clear();
-		addAll(items);
+		for (SearchListItem item : items) {
+			add(item);
+		}
 		setNotifyOnChange(true);
 		notifyDataSetInvalidated();
 	}

@@ -3,6 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -58,6 +59,58 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dashboard_map_toolbar"
+            android:background="@color/osmand_orange"
+            android:minHeight="@dimen/dashboard_map_toolbar"
+            android:theme="?attr/toolbar_theme"
+            app:contentInsetLeft="54dp"
+            app:contentInsetStart="54dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/titleEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_white"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="5 selected"
+                    android:textSize="@dimen/default_list_text_size_large"/>
+
+                <ImageButton
+                    android:id="@+id/shareButton"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/shared_string_share"
+                    android:src="@drawable/ic_action_gshare_dark"/>
+
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/shared_string_delete"
+                    android:src="@drawable/ic_action_delete_dark"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
         <LinearLayout
             android:id="@+id/tab_toolbar_layout"
             android:layout_width="match_parent"
@@ -89,7 +142,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
+        <net.osmand.plus.LockableViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
