@@ -261,6 +261,27 @@ public class OsmandRegions {
 		}
 		return result;
 	}
+	
+	public String getCountryName(LatLon ll) {
+		double lat = ll.getLatitude();
+		double lon = ll.getLongitude();
+		int y = MapUtils.get31TileNumberY(lat);
+		int x = MapUtils.get31TileNumberX(lon);
+		try {
+			List<BinaryMapDataObject> list = query(x, y);
+			for(BinaryMapDataObject o : list) {
+				if(contain(o, x, y)) {
+					String name = mapIndexFields.get(mapIndexFields.nameType, o);
+					if(name != null) {
+						return name;
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 
 	public List<BinaryMapDataObject> query(final int tile31x, final int tile31y) throws IOException {
@@ -513,7 +534,6 @@ public class OsmandRegions {
 			mapIndexFields.roadSignsType = object.getMapIndex().getRule(FIELD_ROAD_SIGNS, null);
 			mapIndexFields.wikiLinkType = object.getMapIndex().getRule(FIELD_WIKI_LINK, null);
 			mapIndexFields.populationType = object.getMapIndex().getRule(FIELD_POPULATION, null);
-			mapIndexFields.nameType = object.getMapIndex().getRule(FIELD_NAME, null);
 		}
 	}
 
