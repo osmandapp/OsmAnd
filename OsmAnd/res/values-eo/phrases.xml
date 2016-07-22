@@ -1523,4 +1523,153 @@
 	<string name="poi_payment_sube_no">SUBE kartoj malakceptataj</string>
 	<string name="poi_payment_via_verde_yes">Via Verde akceptata</string>
 	<string name="poi_payment_via_verde_no">Via Verde malakceptata</string>
+	<string name="poi_payment_meal_voucher_yes">Viand-kuponoj akceptataj</string>
+	<string name="poi_payment_meal_voucher_no">Viand-kuponoj malakceptataj</string>
+	<string name="poi_payment_paypal_yes">PayPal akceptata</string>
+	<string name="poi_payment_paypal_no">PayPal malakceptata</string>
+	<string name="poi_payment_u_key_yes">U-Key akceptata</string>
+	<string name="poi_payment_u_key_no">U-Key malakceptata</string>
+	<string name="poi_payment_token_yes">Ĵetonoj akceptataj</string>
+	<string name="poi_payment_token_no">Ĵetonoj malakceptataj</string>
+	<string name="poi_payment_gift_card_yes">Donac-kartoj akceptataj</string>
+	<string name="poi_payment_gift_card_no">Donac-kartoj malakceptataj</string>
+	<string name="poi_payment_golden_crown_yes">Golden Crown kartoj akceptataj</string>
+	<string name="poi_payment_golden_crown_no">Golden Crown kartoj malakceptataj</string>
+	<string name="poi_payment_pro100_yes">PRO100 kartoj akceptataj</string>
+	<string name="poi_payment_pro100_no">PRO100 kartoj malakceptataj</string>
+	<string name="poi_payment_union_card_yes">Union Card akceptata</string>
+	<string name="poi_payment_union_card_no">Union Card malakceptata</string>
+	<string name="poi_payment_mtsmoney_no">MTS-Money malakceptata</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money akceptata</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money akceptata</string>
+	<string name="poi_payment_yandexmoney_no">Yandex.Money malakceptata</string>
+	<string name="poi_description_payment">Maniero de pagado</string>
+
+	<string name="poi_internet_access_fee_yes">Interret-aliro - pagenda</string>
+	<string name="poi_internet_access_fee_no">Interret-aliro - senpaga</string>
+
+	<string name="poi_events_venue">Domo de ceremonioj</string>
+
+	<string name="poi_diet_vegetarian_only">Nur senvianda dieto</string>
+	<string name="poi_diet_vegetarian_yes">Senvianda dieto</string>
+	<string name="poi_diet_vegetarian_no">Senvianda dieto: ne</string>
+	<string name="poi_diet_vegetarian_few">Senvianda dieto: kelkaj manĝaĵoj</string>
+	<string name="poi_diet_vegan_only">Nur senkreskaĵa dieto</string>
+	<string name="poi_diet_vegan_yes">Senreskaĵa dieto</string>
+	<string name="poi_diet_vegan_no">Senkreskaĵa dieto: ne</string>
+	<string name="poi_diet_gluten_free_only">Nur sen-glutena dieto</string>
+	<string name="poi_diet_gluten_free_yes">Sen-glutena dieto</string>
+	<string name="poi_diet_gluten_free_no">Senglutena dieto: ne</string>
+	<string name="poi_diet_kosher_only">Nur koŝera dieto</string>
+	<string name="poi_diet_kosher_yes">Koŝera dieto</string>
+	<string name="poi_diet_kosher_no">Koŝera dieto: ne</string>
+	<string name="poi_diet_halal_only">Nur halala dieto</string>
+	<string name="poi_diet_halal_yes">Halala dieto</string>
+	<string name="poi_diet_halal_no">Halala dieto: ne</string>
+	<string name="poi_diet_lactose_free_only">Nur sen-laktoza dieto</string>
+	<string name="poi_diet_lactose_free_yes">Sen-laktoza dieto</string>
+	<string name="poi_diet_lactose_free_no">Sen-laktoza dieto: ne</string>
+	<string name="poi_diet_pescetarian_yes">Sen-vianda-kun-fiŝa dieto</string>
+
+	<string name="poi_drive_in_yes">Sen-elaŭtiĝa servo: jes (aŭtoparko)</string>
+	<string name="poi_public_bath">Banejo publika</string>
+
+	<string name="poi_male_yes">Viroj</string>
+	<string name="poi_male_no">Viroj malpermesataj</string>
+	<string name="poi_female_yes">Inoj</string>
+	<string name="poi_female_no">Inoj malpermesataj</string>
+	<string name="poi_drive_in_no">Sen-elaŭtiĝa servo: ne (aŭtoparko)</string>
+	<string name="poi_drive_through_yes">Sen-elaŭtiĝa servo: jes (trans-veturo)</string>
+	<string name="poi_drive_through_no">Sen-elaŭtiĝa servo: ne (trans-veturo)</string>
+
+	<string name="poi_brewery_additional">Nomo de bierfarejo</string>
+	<string name="poi_microbrewery_yes">Bierfarejeto-restoracio</string>
+	<string name="poi_microbrewery_no">Sen bierfarejeto-restoracio</string>
+
+	<string name="poi_takeaway_yes">Elportado</string>
+	<string name="poi_takeaway_no">Sen elportado</string>
+	<string name="poi_takeaway_only">Nur elportado</string>
+
+	<string name="poi_delivery_yes">Hejmliverado</string>
+	<string name="poi_delivery_no">Sen hejmliverado</string>
+	<string name="poi_delivery_only">Nur hejmliverado</string>
+
+	<string name="poi_outdoor_seating_yes">Eksteraj seĝoj</string>
+	<string name="poi_outdoor_seating_no">Sen eksteraj seĝoj</string>
+	<string name="poi_outdoor_seating_terrace">Eksteraj seĝoj: altano</string>
+	<string name="poi_outdoor_seating_sidewalk">Eksteraj seĝoj: ĉe irejo</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Eksteraj seĝoj: ĉe irejego</string>
+	<string name="poi_outdoor_seating_garden">Eksteraj seĝoj: ĝardeno</string>
+	<string name="poi_outdoor_seating_patio">Eksteraj seĝoj: korto</string>
+
+	<string name="poi_cocktails_yes">Kokteloj</string>
+
+	<string name="poi_second_hand_yes">Brokantaĵoj</string>
+	<string name="poi_second_hand_no">Sen brokantaĵoj</string>
+	<string name="poi_second_hand_only">Nur brokantaĵoj</string>
+
+	<string name="poi_service_parts">Partoj</string>
+	<string name="poi_service_dealer">Vendado de aŭtoj</string>
+	<string name="poi_service_repair">Riparo</string>
+	<string name="poi_service_repair_no">Sen riparo</string>
+	<string name="poi_service_electrical">Riparo de elektraj aŭtoj</string>
+	<string name="poi_motorcycle_repair">Riparo de motorcikloj</string>
+	<string name="poi_self_service_yes">Memservo</string>
+	<string name="poi_self_service_no">Sen memservo</string>
+	<string name="poi_automated_yes">Aŭtomatigita</string>
+	<string name="poi_automated_no">Ne aŭtomatigita</string>
+	<string name="poi_full_service_yes">Plena servo</string>
+	<string name="poi_brushless_yes">Senbrosa</string>
+	<string name="poi_brushless_no">Senbrosa: ne</string>
+	<string name="poi_car_wash_no">Aŭtopurigejo: ne</string>
+
+	<string name="poi_aeroway_fuel">Benzinejo por aviadiloj</string>
+	<string name="poi_indoor_yes">Ene</string>
+	<string name="poi_indoor_no">Ekstere</string>
+	<string name="poi_toilets_yes">Kun necesejo</string>
+	<string name="poi_toilets_no">Sen necesejo</string>
+	<string name="poi_toilets_wheelchair_yes">Kun necesejo por malkapabluloj</string>
+	<string name="poi_toilets_wheelchair_no">Sen necesejo por malkapabluloj</string>
+	<string name="poi_toilets_access_customers">Necesejo: nur por klientoj</string>
+	<string name="poi_toilets_access_permissive">Necesejo: verŝajne alirebla</string>
+	<string name="poi_toilets_access_community">Necesejo: nur por anoj</string>
+	<string name="poi_toilets_access_public">Necesejo: publika aliro</string>
+
+	<string name="poi_diaper_yes">Tablo por tra-vindotuk-ado</string>
+	<string name="poi_diaper_no">Sen tablo por tra-vindotuk-ado</string>
+	<string name="poi_diaper_room">Ĉambro por tra-vindotuk-ado</string>
+
+	<string name="poi_maxstay">Tempolimo de parkumado</string>
+
+	<string name="poi_vending_parking_tickets">Parkum-biletoj</string>
+	<string name="poi_vending_cigarettes">Cigaredoj</string>
+	<string name="poi_vending_excrement_bags">Saketoj por fekaĵoj</string>
+	<string name="poi_vending_public_transport_tickets">Biletoj publik-transportaj</string>
+	<string name="poi_vending_drinks">Trinkaĵoj</string>
+	<string name="poi_vending_sweets">Sukeraĵoj</string>
+	<string name="poi_vending_condoms">Penisingoj</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Ricevo kaj sendo de pakaĵoj</string>
+	<string name="poi_vending_stamps">Poŝtmarkoj</string>
+	<string name="poi_vending_bicycle_tube">Biciklaj aertuboj</string>
+	<string name="poi_vending_food">Manĝaĵoj</string>
+	<string name="poi_vending_drinks_food">Trinkaĵoj kaj manĝaĵoj</string>
+	<string name="poi_vending_fuel">Brulaĵo</string>
+	<string name="poi_vending_parcel_pickup">Ricevo de pakaĵoj</string>
+	<string name="poi_vending_parcel_mail_in">Sendo de pakaĵoj</string>
+	<string name="poi_vending_milk">Lakto</string>
+	<string name="poi_vending_elongated_coin">Etenditaj moneroj</string>
+	<string name="poi_vending_bread">Panoj</string>
+	<string name="poi_vending_chewing_gums">Maĉgumoj</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkum-biletoj, biletoj publik-transportaj</string>
+	<string name="poi_vending_coffee">Kaftrinkaĵoj</string>
+	<string name="poi_vending_toll">Ludiloj</string>
+	<string name="poi_vending_tickets">Biletoj</string>
+	<string name="poi_vending_water">Akvo</string>
+	<string name="poi_vending_telephone_vouchers">Telefonkartoj</string>
+	<string name="poi_vending_animal_food">Manĝaĵo por bestoj</string>
+	<string name="poi_vending_public_transport_plans">Mapoj de publik-transporto</string>
+	<string name="poi_vending_drinks_sweets">Trinkaĵoj kaj sukeraĵoj</string>
+	<string name="poi_vending_vouchers">Kuponoj</string>
+	<string name="poi_vending_dvd">Lumdiskegoj (DVD-oj)</string>
+	<string name="poi_vending_candles">Kandeloj</string>
 	</resources>
