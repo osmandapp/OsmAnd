@@ -295,7 +295,7 @@
 
 	<string name="poi_tunnel">Tunelo</string>
 	<string name="poi_junction">Vojkruciĝo</string>
-	<string name="poi_rest_area">Servejo de vojaĝantoj</string>
+	<string name="poi_rest_area">Servejo de vojaĝantoj (sen vendejo)</string>
 
 	<string name="poi_water_well">Puto</string>
 	<string name="poi_bell_tower">Sonorilturo</string>
@@ -345,7 +345,7 @@
 	<string name="poi_basin">Baseno</string>
 	<string name="poi_runway">Avia dromo</string>
 	<string name="poi_aeroway_terminal">Flugstacio</string>
-	<string name="poi_meadow">Herbejo</string>
+	<string name="poi_meadow">Kultiv-herbejo</string>
 	<string name="poi_aeroway_gate">Aerodroma enirejo</string>
 
 	<string name="poi_slipway">Ŝipglitejo</string>
@@ -1225,4 +1225,182 @@
 	<string name="poi_fireplace_yes">Kameno</string>
 	<string name="poi_fireplace_no">Sen kameno</string>
 
+	<string name="poi_enforcement_traffic_signals">Kontrolo: trafiklumoj</string>
+	<string name="poi_enforcement_maxspeed">Kontrolo: rapido</string>
+	<string name="poi_enforcement_maxheight">Kontrolo: alto de veturilo</string>
+	<string name="poi_enforcement_mindistance">Kontrolo: minimuma distanco</string>
+	<string name="poi_enforcement_check">Kontrolo: norma kontrolo</string>
+	<string name="poi_enforcement_access">Kontrolo: aliro</string>
+	<string name="poi_enforcement_toll">Kontrolo: imposto</string>
+
+	<string name="poi_animal_shelter">Azilo por bestoj</string>
+	<string name="poi_animal_shelter_dog">Azilo por: hundoj</string>
+	<string name="poi_animal_shelter_cat">Azilo por: katoj</string>
+	<string name="poi_animal_shelter_dog_cat">Azilo por: hundoj kaj katoj</string>
+	<string name="poi_animal_shelter_bird">Azilo por: birdoj</string>
+
+	<string name="poi_seats">Seĝoj</string>
+	<string name="poi_backrest_yes">Seĝodorsoj: jes</string>
+	<string name="poi_backrest_no">Seĝodorsoj: ne</string>
+
+	<string name="poi_intermittent">Sezona</string>
+
+	<string name="poi_generator_source_coal">Energifonto: karbo</string>
+	<string name="poi_generator_source_gas">Energifonto: gaso</string>
+	<string name="poi_generator_source_nuclear">Energifonto: nuklea</string>
+	<string name="poi_generator_source_solar">Energifonto: Suno</string>
+	<string name="poi_generator_source_hydro">Energifonto: akvoforto</string>
+	<string name="poi_generator_source_wind">Energifonto: vento</string>
+	<string name="poi_generator_source_geothermal">Energifonto: geoterma</string>
+	<string name="poi_generator_source_oil">Energifonto: oleo</string>
+	<string name="poi_generator_source_diesel">Energifonto: dizeloleo</string>
+
+	<string name="poi_pump_manual">Pumpilo mana</string>
+	<string name="poi_pump_powered">Pumpilo maŝina</string>
+	<string name="poi_pump_no">Sen pumpilo</string>
+	<string name="poi_pump_yes">Pumpilo</string>
+
+	<string name="poi_water_characteristic_mineral">Akvospeco: minerala</string>
+	<string name="poi_water_characteristic_mud">Akvospeco: sediment-riĉa</string>
+	<string name="poi_water_characteristic_sulfuric">Akvospeco: sulfat(VI)-riĉa</string>
+
+	<string name="poi_water_point">Akvoĉerpejo</string>
+
+	<string name="poi_information_guidepost">Vojmontrilo</string>
+	<string name="poi_information_board">Tabulo informa</string>
+	<string name="poi_information_map">Mapo</string>
+	<string name="poi_information_office">Inform-oficejo</string>
+	<string name="poi_information_trail_blaze">Vojsigno</string>
+	<string name="poi_information_terminal">Inform-terminalo</string>
+	<string name="poi_information_route_marker">Vojsigno</string>
+	<string name="poi_information_hikingmap">Mapo piedirada</string>
+	<string name="poi_information_nature">Informoj pri: naturo</string>
+	<string name="poi_information_wildlife">Informoj pli: bestaro</string>
+	<string name="poi_information_history">Informoj pli: historio</string>
+	<string name="poi_information_sign">Signo</string>
+	<string name="poi_information_audioguide">Son-gvidilo</string>
+	<string name="poi_information_bicyclemap">Mapo bicikla</string>
+	<string name="poi_information_tactile_model">Modelo por blinduloj</string>
+	<string name="poi_information_tactile_map">Mapo por blinduloj</string>
+	<string name="poi_board_type_notice">Aktualaĵoj</string>
+	<string name="poi_board_type_plants">Informoj pri: plantoj</string>
+	<string name="poi_board_type_geology">Informoj pri: terscienco</string>
+	<string name="poi_board_type_public_transport">Informoj pri: transporto publika</string>
+	<string name="poi_board_type_technology">Informoj pri: teĥnologio</string>
+	<string name="poi_board_type_astronomy">Informoj pri: stelscienco</string>
+
+	<string name="poi_commercial">Oficeja tereno</string>
+	<string name="poi_covered_yes">Tegmentita</string>
+	<string name="poi_covered_no">Sen-tegmenta</string>
+
+	<string name="poi_smoking_no">Fumado malpermesita</string>
+	<string name="poi_smoking_outside">Fumado permesita nur ekstere</string>
+	<string name="poi_smoking_yes">Fumado permesita</string>
+	<string name="poi_smoking_separated">Fumado permesita nur en aparta ĉambro</string>
+	<string name="poi_smoking_isolated">Fumado permesita nur en izolita ĉambro</string>
+	<string name="poi_smoking_dedicated">Destinita por fumantoj</string>
+
+	<string name="poi_toll_yes">Imposto</string>
+	<string name="poi_toll_no">Sen imposto</string>
+	<string name="poi_toll_hgv_yes">Imposto por kamionoj</string>
+	<string name="poi_tactile_paving_yes">Kun reliefo por blinduloj</string>
+	<string name="poi_tactile_paving_no">Sen reliefo por blinduloj</string>
+	<string name="poi_traffic_signals_sound_yes">Kun sono</string>
+	<string name="poi_traffic_signals_sound_no">Sen sono</string>
+	<string name="poi_traffic_signals_sound_walk">Kun sono kiam irado permesita</string>
+
+	<string name="poi_leisure_common">Publika ripoza tereno</string>
+	<string name="poi_highway_steps">Ŝtuparo</string>
+	<string name="poi_rescue_station">Savserva stacio</string>
+
+	<string name="poi_services">Servejo de vojaĝantoj</string>
+	<string name="poi_mini_roundabout">Trafikcirkleto</string>
+	<string name="poi_railway_crossing">Traknivela pasejo (irejo)</string>
+	<string name="poi_railway_level_crossing">Traknivela pasejo (vojo)</string>
+	<string name="poi_bird_hide">Bird-observejo</string>
+	<string name="poi_horse_riding">Rajdadejo</string>
+	<string name="poi_heath">Sano</string>
+	<string name="poi_scrub">Arbustaro</string>
+	<string name="poi_grass">Herbotapiŝo</string>
+	<string name="poi_grassland">Herbejo</string>
+	<string name="poi_farmland">Farmejo</string>
+	<string name="poi_logging">Arbar-ekspluatadejo</string>
+	<string name="poi_sand">Sabla tereno</string>
+
+	<string name="poi_windfall">Faligita de vento</string>
+	<string name="poi_dead_wood">Malviva arbo</string>
+
+	<string name="poi_passing_place">Preterveturejoj</string>
+	<string name="poi_level">Etaĝo</string>
+	<string name="poi_rtsa_scale">RTSA-skalo</string>
+
+	<string name="poi_piste_difficulty_easy">Skivoja facilo: facila</string>
+	<string name="poi_piste_difficulty_intermediate">Skivoja facilo: meza</string>
+	<string name="poi_piste_difficulty_advanced">Skivoja facilo: malfacila</string>
+	<string name="poi_piste_difficulty_novice">Skivoja facilo: facilega</string>
+	<string name="poi_piste_difficulty_expert">Skivoja facilo: malfacilega</string>
+	<string name="poi_piste_difficulty_freeride">Skivoja facilo: tre malfacilega</string>
+	<string name="poi_piste_grooming_classic">Skivoja prepar-speco: klasika</string>
+	<string name="poi_piste_grooming_classic_skating">Skivoja prepar-speco: klasika k neĝtabulada</string>
+	<string name="poi_piste_grooming_backcountry">Skivoja prepar-speco: nenia</string>
+	<string name="poi_piste_grooming_scooter">Skivoja prepar-speco: motorsleda</string>
+	<string name="poi_piste_grooming_skating">Skivoja prepar-speco: neĝtabulada</string>
+	<string name="poi_piste_grooming_no">Skivoja prepar-speco: nenia</string>
+	<string name="poi_piste_grooming_mogul">Skivoja prepar-speco: ĝibetara</string>
+
+	<string name="poi_garden_type_residential">Ĝardena speco: ĉedoma</string>
+	<string name="poi_garden_type_community">Ĝardena speco: najbara</string>
+	<string name="poi_garden_type_private">Ĝardena speco: privata</string>
+	<string name="poi_garden_type_botanical">Ĝardena speco: botanika</string>
+
+	<string name="poi_garden_style_kitchen">Ĝardena stilo: fruktolegoma</string>
+	<string name="poi_garden_style_rosarium">Ĝardena stilo: rozejo</string>
+	<string name="poi_garden_style_french">Ĝardena stilo: Franca</string>
+	<string name="poi_garden_style_english">Ĝardena stilo: Angla</string>
+	<string name="poi_garden_style_japanese">Ĝardena stilo: Japana</string>
+
+	<string name="poi_capacity">Enhaveco</string>
+	<string name="poi_capacity_disabled_yes">Kun dediĉitaj ejoj por malkapabluloj</string>
+	<string name="poi_capacity_disabled_no">Sen dediĉitaj lokoj por malkapabluloj</string>
+	<string name="poi_capacity_disabled">Dediĉitaj ejoj por malkapabluloj</string>
+	<string name="poi_capacity_women_yes">Kun dediĉitaj ejoj por virinoj</string>
+	<string name="poi_capacity_women_no">Sen dediĉitaj ejoj por virinoj</string>
+	<string name="poi_capacity_women">Dediĉitaj ejoj por virinoj</string>
+	<string name="poi_capacity_pupils">Dediĉitaj ejoj por lernantoj</string>
+	<string name="poi_capacity_teachers">Dediĉitaj ejoj por instruistoj</string>
+	<string name="poi_capacity_parent_yes">Kun dediĉitaj ejoj por gepatroj</string>
+	<string name="poi_capacity_parent_no">Sen dediĉitaj ejoj por gepatroj</string>
+	<string name="poi_capacity_parent">Dediĉitaj ejoj por gepatroj</string>
+
+	<string name="poi_aerialway_occupancy">Nombro da homoj en vagoneto/seĝo</string>
+	<string name="poi_aerialway_capacity">Nombro da homoj hore</string>
+	<string name="poi_aerialway_duration">Mezuma vojaĝ-tempo (en minutoj)</string>
+	<string name="poi_aerialway_bubble_yes">Tegmenteto</string>
+	<string name="poi_aerialway_bubble_no">Sen tegmenteto</string>
+	<string name="poi_aerialway_heating_yes">Hejtado</string>
+	<string name="poi_aerialway_heating_no">Sen hejtado</string>
+	<string name="poi_aerialway_bicycle_yes">Bicikloj: permesitaj</string>
+	<string name="poi_aerialway_bicycle_no">Bicikloj: malpermesitaj</string>
+	<string name="poi_aerialway_bicycle_summer">Bicikloj: permesitaj nur somere</string>
+	<string name="poi_aerialway_access_entry">Nur eniro</string>
+	<string name="poi_aerialway_access_exit">Nur eliro</string>
+	<string name="poi_aerialway_access_both">Eniro kaj eliro</string>
+	<string name="poi_aerialway_summer_access_entry">Somere: nur eniro</string>
+	<string name="poi_aerialway_summer_access_exit">Somere: nur eliro</string>
+	<string name="poi_aerialway_summer_access_both">Somere: eniro kaj eliro</string>
+
+	<string name="poi_stars_1">Steloj: 1 (turisma)</string>
+	<string name="poi_rooms">Ĉambroj</string>
+
+	<string name="poi_stars_1s">Steloj: 1S (pli-bona turisma)</string>
+	<string name="poi_stars_2">Steloj: 2 (norma)</string>
+	<string name="poi_stars_2s">Steloj: 2S (pli-bona norma)</string>
+	<string name="poi_stars_3">Steloj: 3 (komforta)</string>
+	<string name="poi_stars_3s">Steloj: 3S (pli-bona komforta)</string>
+	<string name="poi_stars_4">Staloj: 4 (unua klaso)</string>
+	<string name="poi_stars_4s">Staloj: 4S (pli-bona unua klaso)</string>
+	<string name="poi_stars_5">Steloj: 5 (luksa)</string>
+	<string name="poi_stars_5s">Steloj: 5S (pli-bona luksa)</string>
+	<string name="poi_stars_6">Steloj: 6</string>
+	<string name="poi_stars_7">Steloj: 7</string>
 	</resources>
