@@ -2813,4 +2813,11 @@
 
 <string name="poi_diaper_table_count">Cambiador de pañales</string>
 
+<string name="poi_water_tank">Tanque de agua</string>
+
+	<string name="poi_toilets_disposal_flush">Eliminación de desechos: Por descarga</string>
+	<string name="poi_toilets_disposal_pitlatrine">Eliminación de desechos: Letrina</string>
+	<string name="poi_toilets_disposal_chemical">Eliminación de desechos: Químico</string>
+	<string name="poi_toilets_disposal_bucket">Eliminación de desechos: Balde</string>
+
 </resources>
