@@ -509,6 +509,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			@Override
 			public boolean publish(SearchResult object) {
 
+				if (mainSearchFragment == null) {
+					return false;
+				}
+
 				switch (object.objectType) {
 					case SEARCH_API_FINISHED:
 						final SearchCoreAPI searchApi = (SearchCoreAPI) object.object;
@@ -581,7 +585,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean isCancelled() {
-				return false;
+				return mainSearchFragment == null;
 			}
 		});
 	}
