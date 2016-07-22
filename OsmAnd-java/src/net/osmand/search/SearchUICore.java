@@ -191,7 +191,7 @@ public class SearchUICore {
 		});
 		return quickRes;
 	}
-
+	
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		for (SearchWord sw : phrase.getWords()) {
 			if(sw.getResult() != null && sw.getResult().file != null) {
