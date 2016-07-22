@@ -3008,4 +3008,10 @@
 
 	<string name="poi_diaper_table_count">Количество пеленальных столиков</string>
 
+	<string name="poi_water_tank">Пожарный резервуар с водой</string>
+
+	<string name="poi_toilets_disposal_flush">Смывается водой</string>
+	<string name="poi_toilets_disposal_pitlatrine">Выгребная яма</string>
+	<string name="poi_toilets_disposal_bucket">Утилизация отходов: контейнер</string>
+
 </resources>
