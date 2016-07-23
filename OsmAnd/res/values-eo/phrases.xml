@@ -706,7 +706,7 @@
 	<string name="poi_chalet">Dometo feria</string>
 	<string name="poi_apartment">Apartamento feria</string>
 	<string name="poi_wilderness_hut">Sovaĝeja kabano</string>
-	<string name="poi_lean_to">Senflankmura ŝirmejo</string>
+	<string name="poi_lean_to">Duon-malferma ŝirmejo</string>
 	<string name="poi_cabin">Kabano</string>
 	<string name="poi_hunting_lodge">Ĉasista dometo</string>
 
@@ -842,7 +842,7 @@
 	<string name="poi_piste_skitour">Skivojo ski-ekskursuma</string>
 	<string name="poi_piste_hike">Skivojo skikurada</string>
 	<string name="poi_piste_sleigh">Skivojo glitveturila</string>
-	<string name="poi_piste_sled">Skivoja glitveturila (tiranta de hundoj)</string>
+	<string name="poi_piste_sled">Skivojo glitveturila (tiranta de hundoj)</string>
 	<string name="poi_piste_snow_park">Skivojo neĝ-parka</string>
 	<string name="poi_piste_playground">Skivojo infanludeja</string>
 	<string name="poi_piste_ice_skate">Skivojo glitkurada</string>
@@ -1752,4 +1752,69 @@
 	<string name="poi_width">Larĝo</string>
 
 	<string name="poi_historic_yes">Historia objekto</string>
+	<string name="poi_wetland_wet_meadow">Malsekherbejo</string>
+	<string name="poi_wetland_bog">Pluvmarĉo (marĉo alta)</string>
+	<string name="poi_wetland_marsh">Aluvia grundo</string>
+	<string name="poi_wetland_reedbed">Kareksejo (kanejo)</string>
+	<string name="poi_wetland_swamp">Marĉo</string>
+	<string name="poi_wetland_saltern">Salejo</string>
+	<string name="poi_wetland_tidalflat">Vado</string>
+	<string name="poi_wetland_saltmarsh">Salmarĉo</string>
+	<string name="poi_wetland_mangrove">Mangrovo</string>
+	<string name="poi_wetland_string_bog">Aapa-marĉo</string>
+	<string name="poi_wetland_fen">Marĉo malalta</string>
+	<string name="poi_wetland_palsa_bog">Palsa-marĉo</string>
+	<string name="poi_wetland_mud">Kotejo</string>
+
+	<string name="poi_beach_sand">Strand-speco: sabla</string>
+	<string name="poi_beach_shingle">Strand-speco: ŝtoneta</string>
+	<string name="poi_beach_rocky">Strand-speco: ŝtona</string>
+
+	<string name="poi_bench_yes">Kun benko</string>
+	<string name="poi_bench_no">Sen benko</string>
+	<string name="poi_bin_yes">Kun rubujo</string>
+	<string name="poi_bin_no">Sen rubujo</string>
+
+	<string name="poi_shelter_type_public_transport">Ŝirmeja-speco: publik-transporta</string>
+	<string name="poi_shelter_type_tent">Ŝirmeja-speco: tendo</string>
+	<string name="poi_shelter_type_abandoned">Ŝirmeja-speco: forlasita objekto</string>
+
+	<string name="poi_shelter_type_sun_shelter">Ŝirmeja-speco: kontraŭ-suna</string>
+	<string name="poi_shelter_type_building">Ŝirmeja-speco: konstruaĵo</string>
+	<string name="poi_shelter_type_wildlife_hide">Ŝirmeja-speco: besto-observejo</string>
+	<string name="poi_shelter_type_rock_shelter">Ŝirmeja-speco: groto</string>
+	<string name="poi_shelter_type_picnic_shelter">Ŝirmeja-speco: senflankmura (piknika)</string>
+	<string name="poi_shelter_type_lean_to">Ŝirmeja-speco: duon-malferma</string>
+	<string name="poi_shelter_type_weather_shelter">Ŝirmeja-speco: budo kontraŭ-vetera</string>
+	<string name="poi_shelter_type_basic_hut">Ŝirmeja-speco: kabano</string>
+	<string name="poi_shelter_type_field_shelter">Ŝirmeja-speco: besto-ŝirmejo</string>
+	<string name="poi_internet_access_type_wlan">Interret-aliro: sendrata</string>
+	<string name="poi_internet_access_type_terminal">Interret-aliro: terminalo</string>
+	<string name="poi_internet_access_type_wired">Interret-aliro: drata</string>
+	<string name="poi_internet_access_type_public">Interret-aliro: publika</string>
+	<string name="poi_internet_access_type_service">Interret-aliro: priservo</string>
+	<string name="poi_internet_access_type_no">Sen interret-aliro</string>
+	<string name="poi_internet_access_type_yes">Kun interret-aliro</string>
+
+	<string name="poi_maxwidth">Maksimuma larĝo</string>
+	<string name="poi_iata">IATA-kodo</string>
+	<string name="poi_icao">ICAO-kodo</string>
+	<string name="poi_faa">FAA-kodo</string>
+	
+	<string name="poi_artwork_type_sculpture">Artverk-speco: skulptaĵo</string>
+	<string name="poi_artwork_type_mural">Artverk-speco: murpentraĵo</string>
+	<string name="poi_artwork_type_statue">Artverk-speco: statuo</string>
+	<string name="poi_artwork_type_architecture">Artverk-speco: konstru-artaĵo</string>
+	<string name="poi_artwork_type_painting">Artverk-speco: pentraĵo</string>
+	<string name="poi_artwork_type_stone">Artverk-speco: ŝtonego</string>
+	<string name="poi_artwork_type_bust">Artverk-speco: busto</string>
+	<string name="poi_artwork_type_installation">Artverk-speco: instal-arto</string>
+	<string name="poi_artwork_type_mosaic">Artverk-speco: mozaiko</string>
+	<string name="poi_artwork_type_relief">Artverk-speco: reliefo</string>
+	<string name="poi_artwork_type_graffiti">Artverk-speco: grafitio</string>
+	<string name="poi_artwork_type_stele">Artverk-speco: steleo</string>
+	<string name="poi_artwork_type_fountain">Artverk-speco: fontano</string>
+
+	<string name="poi_architect_name">Arĥitekturisto</string>
+
 	</resources>
