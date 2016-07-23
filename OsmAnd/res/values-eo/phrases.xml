@@ -706,7 +706,7 @@
 	<string name="poi_chalet">Dometo feria</string>
 	<string name="poi_apartment">Apartamento feria</string>
 	<string name="poi_wilderness_hut">Sovaĝeja kabano</string>
-	<string name="poi_lean_to">Duon-malferma ŝirmejo</string>
+	<string name="poi_lean_to">Duon-ferma ŝirmejo</string>
 	<string name="poi_cabin">Kabano</string>
 	<string name="poi_hunting_lodge">Ĉasista dometo</string>
 
@@ -1784,7 +1784,7 @@
 	<string name="poi_shelter_type_wildlife_hide">Ŝirmeja-speco: besto-observejo</string>
 	<string name="poi_shelter_type_rock_shelter">Ŝirmeja-speco: groto</string>
 	<string name="poi_shelter_type_picnic_shelter">Ŝirmeja-speco: senflankmura (piknika)</string>
-	<string name="poi_shelter_type_lean_to">Ŝirmeja-speco: duon-malferma</string>
+	<string name="poi_shelter_type_lean_to">Ŝirmeja-speco: duon-ferma</string>
 	<string name="poi_shelter_type_weather_shelter">Ŝirmeja-speco: budo kontraŭ-vetera</string>
 	<string name="poi_shelter_type_basic_hut">Ŝirmeja-speco: kabano</string>
 	<string name="poi_shelter_type_field_shelter">Ŝirmeja-speco: besto-ŝirmejo</string>
@@ -1817,4 +1817,26 @@
 
 	<string name="poi_architect_name">Arĥitekturisto</string>
 
+	<string name="poi_architecture_modern">Arĥitekturo: moderna</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arĥitekturo: stalinismo</string>
+	<string name="poi_architecture_eclectic">Arĥitekturo: eklektikismo</string>
+	<string name="poi_architecture_new_objectivity">Arĥitekturo: nova objektivismo</string>
+	<string name="poi_architecture_contemporary">Arĥitekturo: nuntempa</string>
+	<string name="poi_architecture_constructivism">Arĥitekturo: konstruktivismo</string>
+	<string name="poi_architecture_umgebinde">Arĥitekturo: arkozona domo</string>
+	<string name="poi_architecture_timber_frame">Arĥitekturo: trabfaka konstruado</string>
+	<string name="poi_architecture_art_nouveau">Arĥitekturo: secesi-stilo</string>
+	<string name="poi_architecture_neoclassicism">Arĥitekturo: novklasikismo</string>
+	<string name="poi_architecture_victorian">Arĥitekturo: viktoriana</string>
+	<string name="poi_architecture_brutalism">Arĥitekturo: brutalismo</string>
+	<string name="poi_architecture_classicism">Arĥitekturo: klasikismo</string>
+	<string name="poi_architecture_gothic">Arĥitekturo: gotika</string>
+	<string name="poi_architecture_oldrussian">Arĥitekturo: malnovrusa</string>
+	<string name="poi_architecture_baroque">Arĥitekturo: baroka</string>
+	<string name="poi_architecture_postconstructivism">Arĥitekturo: postkonstruktivismo</string>
+	<string name="poi_architecture_wilhelminian_style">Arĥitekturo: vilhelm-stilo</string>
+	<string name="poi_architecture_renaissance">Arĥitekturo: renesanca</string>
+	<string name="poi_architecture_romanesque">Arĥitekturo: romanika</string>
+
+	<string name="poi_cross">Kruco</string>
 	</resources>
