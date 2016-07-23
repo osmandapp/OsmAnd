@@ -1252,7 +1252,7 @@
 	<string name="poi_generator_source_hydro">Energifonto: akvoforto</string>
 	<string name="poi_generator_source_wind">Energifonto: vento</string>
 	<string name="poi_generator_source_geothermal">Energifonto: geoterma</string>
-	<string name="poi_generator_source_oil">Energifonto: oleo</string>
+	<string name="poi_generator_source_oil">Energifonto: petrolo</string>
 	<string name="poi_generator_source_diesel">Energifonto: dizeloleo</string>
 
 	<string name="poi_pump_manual">Pumpilo mana</string>
@@ -1679,4 +1679,77 @@
 	<string name="poi_branch">Fako</string>
 
 	<string name="poi_memorial_war">Memorigaĵo milita</string>
+	<string name="poi_memorial_plaque">Plato</string>
+	<string name="poi_memorial_statue">Statuo</string>
+	<string name="poi_memorial_stone">Roko</string>
+	<string name="poi_memorial_stele">Steleo</string>
+	<string name="poi_memorial_bust">Busto</string>
+	<string name="poi_memorial_koshinto">Koshintō</string>
+	<string name="poi_memorial_blue_plaque">Blua plato</string>
+	<string name="poi_memorial_cross">Kruco</string>
+	<string name="poi_memorial_vehicle">Veturilo</string>
+	<string name="poi_memorial_stolperstein">Stumbliga ŝtoneto</string>
+	<string name="poi_memorial_obelisk">Obelisko</string>
+	<string name="poi_memorial_column">Kolono</string>
+	<string name="poi_memorial_stupa">Stupao</string>
+	<string name="poi_inscription">Skribaĵo</string>
+	<string name="poi_historic_quarry">Historia minejo subĉiela</string>
+
+	<string name="poi_resource_aggregate">Volumenaĵo</string>
+	<string name="poi_resource_antimony">Antimono</string>
+	<string name="poi_resource_asbestos">Asbesto</string>
+	<string name="poi_resource_barite">Barita sulfato(VI)</string>
+	<string name="poi_resource_basalt">Bazalto</string>
+	<string name="poi_resource_bauxite">Baŭksito</string>
+	<string name="poi_resource_beryl">Berilo</string>
+	<string name="poi_resource_bismuth">Bismuto</string>
+	<string name="poi_resource_clay">Argilo</string>
+	<string name="poi_resource_coal">Karbo</string>
+	<string name="poi_resource_copper">Kupro</string>
+	<string name="poi_resource_diamond">Diamanto</string>
+	<string name="poi_resource_dimension_stone">Konstrua ŝtono</string>
+	<string name="poi_resource_dolomite">Dolomito</string>
+	<string name="poi_resource_graphite">Grafito</string>
+	<string name="poi_resource_gravel">Gruzo</string>
+	<string name="poi_resource_gas">Tergaso</string>
+	<string name="poi_resource_gypsum">Gipsoŝtono</string>
+	<string name="poi_resource_iron_ore">Fer-erco</string>
+	<string name="poi_resource_lead">Plumbo</string>
+	<string name="poi_resource_lignite">Lignito (karbo bruna)</string>
+	<string name="poi_resource_limestone">Kalkoŝtono</string>
+	<string name="poi_resource_marble">Marmoro</string>
+	<string name="poi_resource_mineral_oil">Oleo minerala</string>
+	<string name="poi_resource_mica">Glimo</string>
+	<string name="poi_resource_silver">Arĝento</string>
+	<string name="poi_resource_tin">Stano</string>
+	<string name="poi_resource_water">Akvo</string>
+	<string name="poi_resource_chromite">Ĥrom-fer-erco (kromito)</string>
+	<string name="poi_resource_nickel">Nikelo</string>
+	<string name="poi_resource_oil">Petrolo kruda</string>
+	<string name="poi_resource_opal">Opalo</string>
+	<string name="poi_resource_peat">Torfo</string>
+	<string name="poi_resource_platinum">Plateno</string>
+	<string name="poi_resource_radium">Radiumo</string>
+	<string name="poi_resource_ruby">Rubeno</string>
+	<string name="poi_resource_rutile">Rutilo</string>
+	<string name="poi_resource_salt">Salo</string>
+	<string name="poi_resource_sand">Sablo</string>
+	<string name="poi_resource_sandstone">Sabloŝtono</string>
+	<string name="poi_resource_silica">Siliko</string>
+	<string name="poi_resource_slate">Ardezo</string>
+	<string name="poi_resource_stone">Ŝtono</string>
+	<string name="poi_resource_tuff">Tofo</string>
+	<string name="poi_resource_uranium">Uranio</string>
+	<string name="poi_resource_vanadium">Vanado</string>
+	<string name="poi_resource_zinc">Zinko</string>
+	<string name="poi_resource_zircon">Zirkono</string>
+
+	<string name="poi_chimney">Kamentubo</string>
+	<string name="poi_cypress">Cipreso</string>
+	<string name="poi_palm">Palmo</string>
+	<string name="poi_flagpole">Flago</string>
+
+	<string name="poi_width">Larĝo</string>
+
+	<string name="poi_historic_yes">Historia objekto</string>
 	</resources>
