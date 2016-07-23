@@ -251,8 +251,11 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		FavouritesDbHelper fdb = app.getFavorites();
 		for(GpxDisplayItem i : modifiableList) {
 			if (i.locationStart != null) {
-				FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.name,
-						category);
+				String description = (i.description != null) ? i.description : "" ;
+				FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.name, category);
+				if (!"".equals(description)) {
+					fp.setDescription(description);
+				}
 				fdb.addFavourite(fp, false);
 			}
 		}
