@@ -362,7 +362,6 @@ public class GpxImportHelper {
 				favourites.add(fp);
 			}
 		}
-
 		return favourites;
 	}
 
