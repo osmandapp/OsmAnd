@@ -433,7 +433,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">Lasta elŝuto de A-GPS datumoj: %1$s</string>
-    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo, kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝaj. Aŭtoroj de OsmAnd ne responsos se vi rompos leĝon. Bonvolu elekti \"Jes\" nur tiam kiam vi havas rajton por uzi tiun ĉi funkcion.</string>
+    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo, kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. Aŭtoroj de OsmAnd ne respondumos se vi rompos leĝon. Bonvolu elekti \"Jes\" nur tiam kiam vi havas rajton por uzi tiun ĉi funkcion.</string>
     <string name="welcome_select_region">Por korekte prezenti viajn trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete!</string>
     <string name="current_route">Nuna kurso</string>
