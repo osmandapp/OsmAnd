@@ -354,7 +354,7 @@ public class GpxImportHelper {
 		final List<FavouritePoint> favourites = new ArrayList<>();
 		for (GPXUtilities.WptPt p : wptPts) {
 			if (p.name != null) {
-				final string fpCat = (p.category != null) ? p.category : "";
+				final String fpCat = (p.category != null) ? p.category : "";
 				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
 				if (p.desc != null) {
 					fp.setDescription(p.desc);
