@@ -352,16 +352,14 @@ public class GpxImportHelper {
 
 	private List<FavouritePoint> asFavourites(final List<GPXUtilities.WptPt> wptPts) {
 		final List<FavouritePoint> favourites = new ArrayList<>();
-
 		for (GPXUtilities.WptPt p : wptPts) {
-			if (p.category != null) {
-				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, p.category);
+			if (p.name != null) {
+				final string fpCat = (p.category != null) ? p.category : "";
+				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
 				if (p.desc != null) {
 					fp.setDescription(p.desc);
 				}
 				favourites.add(fp);
-			} else if (p.name != null) {
-				favourites.add(new FavouritePoint(p.lat, p.lon, p.name, ""));
 			}
 		}
 
