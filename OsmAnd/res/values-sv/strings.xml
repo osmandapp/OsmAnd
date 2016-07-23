@@ -2203,4 +2203,8 @@
     <string name="storage_directory_card">Minneskort</string>
     <string name="coords_format">Koordinatformat</string>
     <string name="coords_format_descr">Format för de geografiska koordinaterna</string>
-  	</resources>
+  	<string name="share_history_subject">Historik delad via OsmAnd</string>
+    <string name="search_categories">Kategorier</string>
+    <string name="postcode">Postnummer</string>
+    <string name="rec_split"></string>
+    </resources>
