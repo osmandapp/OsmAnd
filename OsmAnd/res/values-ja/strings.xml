@@ -405,7 +405,7 @@ POIの更新は利用できません</string>
      
      <string name="fav_points_edited">お気に入り地点が編集されました</string>
      <string name="fav_points_not_exist">お気に入り地点はありません</string>
-     <string name="update_existing">置換</string>
+     <string name="update_existing">登録済みと置き換え</string>
      <string name="only_show">表示のみ</string>
      <string name="follow">ナビゲーション開始</string>
      <string name="recalculate_route_to_your_location">トランスポートモード：</string>
@@ -2060,7 +2060,7 @@ POIの更新は利用できません</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX経由地点を削除しますか？</string>
     <string name="context_menu_item_edit_waypoint">GPX経由地点の編集</string>
-    <string name="shared_string_location">道路名称、市町村名</string>
+    <string name="shared_string_location">緯度・経度</string>
     <string name="share_osm_edits_subject">OSMの編集をOsmAndで共有</string>
     <string name="lang_nds">低地ドイツ語</string>
     <string name="lang_mk">マケドニア語</string>
