@@ -17,6 +17,7 @@ public class SearchResult {
 	public double priority;
 	public double priorityDistance;
 	
+	
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
 	}
@@ -39,8 +40,8 @@ public class SearchResult {
 	public Object relatedObject;
 	public double distRelatedObjectName;
 	
-	public int wordsSpan = 1;
-
+	public String wordsSpan ;
+	public SearchResult preciseSearchResult;
 
 	
 	

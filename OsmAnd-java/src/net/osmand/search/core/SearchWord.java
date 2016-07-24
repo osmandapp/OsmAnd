@@ -6,10 +6,6 @@ public class SearchWord {
 	private String word;
 	private SearchResult result;
 	
-	public SearchWord(String word) {
-		this.word = word.trim();
-	}
-	
 	public SearchWord(String word, SearchResult res) {
 		this.word = word.trim();
 		this.result = res;
