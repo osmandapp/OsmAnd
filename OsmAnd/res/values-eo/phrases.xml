@@ -1996,4 +1996,15 @@
 	<string name="poi_fuel_adblue">AdBlue (akvosolvaĵo de ureo) aldonaĵo</string>
 
 	<string name="poi_fuel_wood">Brulaĵo: ligno</string>
+	<string name="poi_fuel_charcoal">Brulaĵo: lignokarbo</string>
+	<string name="poi_fuel_coal">Brulaĵo: karbo</string>
+
+	<string name="poi_street_lamp">Stratlampo</string>
+
+	<string name="poi_escape_lane">Vivsava malrapidigejo</string>
+
+	<string name="poi_crop_rice">Kultivaĵo: rizo</string>
+	<string name="poi_crop_grass">Kultivaĵo: herbo</string>
+	<string name="poi_crop_corn">Kultivaĵo: maizo</string>
+	<string name="poi_crop_cereal">Kultivaĵo: panherbo</string>
 	</resources>
