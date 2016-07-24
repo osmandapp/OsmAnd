@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="release_2_4">
+	\u2022 New very powerful free text search. \n\n
+	\u2022 Much improved audio over Bluetooth.\n\n
+	\u2022 Improved route guidance with turn lanes. \n\n
+	\u2022 Many other improvements and bug fixes.\n\n
+	and more…
+    </string>
     <string name="show_on_map">Show on the map</string>
     <string name="share_history_subject"> shared via OsmAnd</string>
     <string name="search_categories">Categories</string>
