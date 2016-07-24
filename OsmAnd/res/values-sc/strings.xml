@@ -184,7 +184,7 @@
     <string name="settings_preset_descr">Issèbera unu profilu de impreu cun impostatziones pessonalizadas pro sa mapa e su nàvigu.</string>
     <string name="destination_point">Destinatzione %1$s</string>
     <string name="context_menu_item_destination_point">Imposta comente destinatzione</string>
-    <string name="please_select_address">Issèbera in antis sa citade o s’istrada</string>
+    <string name="please_select_address">Issèbera in antis sa tzitade o s’istrada</string>
 
     <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas tzitades prus a curtzu</string>
     <string name="intermediate_items_sort_return">Tapas intermèdias cussertadas pro perfetzionare s’andala dae sa positzione atuale a sa destinatzione.</string>
@@ -685,7 +685,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Puntu de parchègiu</string>
-	<string name="osmand_parking_plugin_description">S’estensione positzione parchègiu ti permìtit de ammentare cando est istada parchegiada sa màchina tua, e cantu tempus tenes galu (si su parchègiu tenet unu tempus limitadu).
+	<string name="osmand_parking_plugin_description">S’estensione positzione parchègiu ti permìtit de ammentare in ue est istada parchegiada sa màchina tua, e cantu tempus tenes galu (si su parchègiu tenet unu tempus limitadu).
 \nPodes agatare su logu e su tempus de parchègiu in su widget de sa mapa. Podes annànghere notìficas in su calendàriu pro ti l\'ammentare.</string>
     <string name="osmand_parking_plugin_name">Positzione parchègiu</string>
     <string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
@@ -2220,4 +2220,7 @@
     <string name="map_widget_search">Chirca</string>
 	<string name="city_type_district">Distretu</string>
     <string name="search_categories">Categorias</string>
+    <string name="show_on_map">Ammustra in sa mapa</string>
+    <string name="share_history_subject">" cumpartzidu pro mèdiu de OsmAnd"</string>
+    <string name="lang_hsb">Sorabu (superiore)</string>
     </resources>
