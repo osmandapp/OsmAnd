@@ -465,16 +465,16 @@ public class RouteResultPreparation {
 						ut = false;
 					}
 				}
-				String highway = result.get(i).getObject().getHighway();
-				if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
-						|| highway.endsWith("path")) {
+//				String highway = result.get(i).getObject().getHighway();
+//				if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
+//						|| highway.endsWith("path")) {
+//					ut = false;
+//				}
+				if (result.get(i - 1).getObject().getOneway() == 0 || result.get(i + 1).getObject().getOneway() == 0) {
 					ut = false;
 				}
-				if (result.get(i).getObject().getOneway() == 0 || result.get(i + 1).getObject().getOneway() == 0) {
-					ut = false;
-				}
-				if (!Algorithms.objectEquals(result.get(i).getObject().getName(), 
-						result.get(i + 1).getObject().getName())) {
+				if (!Algorithms.objectEquals(getStreetName(result, i - 1, false), 
+						getStreetName(result, i + 1, true))) {
 					ut = false;
 				}
 				if (ut) {
@@ -492,6 +492,23 @@ public class RouteResultPreparation {
 			}
 		}
 		return null;
+	}
+
+	private String getStreetName(List<RouteSegmentResult> result, int i, boolean dir) {
+		String nm = result.get(i).getObject().getName();
+		if (Algorithms.isEmpty(nm)) {
+			if (!dir) {
+				if (i > 0) {
+					nm = result.get(i - 1).getObject().getName();
+				}
+			} else {
+				if(i < result.size() - 1) {
+					nm = result.get(i + 1).getObject().getName();
+				}
+			}
+		}
+		
+		return nm;
 	}
 
 	private void determineTurnsToMerge(boolean leftside, List<RouteSegmentResult> result) {
