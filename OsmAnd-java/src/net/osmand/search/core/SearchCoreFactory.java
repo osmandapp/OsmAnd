@@ -556,10 +556,6 @@ public class SearchCoreFactory {
 								SearchResult res = new SearchResult(phrase);
 								res.localeName = object.getName(phrase.getSettings().getLang(), true);
 								res.otherNames = object.getAllNames(true);
-								if (!Algorithms.isEmpty(phrase.getLastWord())
-										&& !(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
-									return false;
-								}
 								if (Algorithms.isEmpty(res.localeName)) {
 									AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
 									if (st != null) {
@@ -568,6 +564,11 @@ public class SearchCoreFactory {
 										res.localeName = object.getSubType();
 									}
 								}
+								if (!Algorithms.isEmpty(phrase.getLastWord())
+										&& !(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
+									return false;
+								}
+								
 								res.object = object;
 								res.preferredZoom = 17;
 								res.file = selected[0];
