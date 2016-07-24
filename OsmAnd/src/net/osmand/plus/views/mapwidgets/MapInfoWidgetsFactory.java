@@ -333,6 +333,7 @@ public class MapInfoWidgetsFactory {
 				if (text == null) {
 					text = "";
 				}
+				text = "\u2316" + "  " + text;
 			}
 			if (map.isQuickSearchDialogActive()) {
 				updateVisibility(false);
@@ -364,7 +365,7 @@ public class MapInfoWidgetsFactory {
 						addressText.setCompoundDrawables(null, null, null, null);
 					}
 				}
-				if (!text.equals(addressText.getText().toString())) {
+				if (!text.equals(addressText.getText().toString()) && !text.equals("\u2316" + "  " + addressText.getText().toString())) {
 					if (!text.equals("")) {
 						topBar.setContentDescription(text);
 					} else {
