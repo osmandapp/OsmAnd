@@ -281,7 +281,7 @@
 	<string name="poi_observatory">Observatorio</string>
 	<string name="poi_astronomical_observatory">Observatorio astronómico</string>
 	<string name="poi_tower">Torre</string>
-	<string name="poi_mast">Mástil</string>
+	<string name="poi_mast">Antena de comunicación</string>
 	<string name="poi_radar">Radar</string>
 	<string name="poi_construction">Construcción</string>
 	<string name="poi_works">Fábrica</string>
@@ -2721,7 +2721,7 @@
 	<string name="poi_pump_status_broken">Bomba en mal estado</string>
 	<string name="poi_pump_status_locked">Bomba bloqueada</string>
 
-<string name="poi_valley_balka">Montes Balcanes</string>
+<string name="poi_valley_balka">Balka (cauce seco)</string>
 
 	<string name="poi_payment_troika_yes">Acepta tarjeta Troika</string>
 	<string name="poi_payment_troika_no">No acepta tarjeta Troika</string>
