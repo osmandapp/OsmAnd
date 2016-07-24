@@ -15,7 +15,6 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -23,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -184,12 +184,11 @@ public class QuickSearchListItem {
 				return typeStr;
 			case LOCATION:
 				LatLon latLon = (LatLon) searchResult.object;
-				String locationCountry = app.getRegions().getCountryName(latLon);
-				if (!Algorithms.isEmpty(locationCountry)) {
-					return locationCountry;
-				} else {
-					return "";
+				if (searchResult.localeRelatedObjectName == null) {
+					String locationCountry = app.getRegions().getCountryName(latLon);
+					searchResult.localeRelatedObjectName = locationCountry == null ? "" : locationCountry;
 				}
+				return searchResult.localeRelatedObjectName;
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return fav.getCategory().length() == 0 ?
@@ -209,15 +208,15 @@ public class QuickSearchListItem {
 			case WPT:
 				StringBuilder sb = new StringBuilder();
 				WptPt wpt = (WptPt) searchResult.object;
-				String wptCountry = app.getRegions().getCountryName(new LatLon(wpt.getLatitude(), wpt.getLongitude()));
-				if (!Algorithms.isEmpty(wptCountry)) {
-					sb.append(wptCountry);
-				}
+				GpxInfo gpxInfo = (GpxInfo) searchResult.relatedObject;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
+					sb.append(searchResult.localeRelatedObjectName);
+				}
+				if (gpxInfo != null && !Algorithms.isEmpty(gpxInfo.getFileName())) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 					}
-					sb.append(searchResult.localeRelatedObjectName);
+					sb.append(gpxInfo.getFileName());
 				}
 				return sb.toString();
 			case UNKNOWN_NAME_FILTER:
