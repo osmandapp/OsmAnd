@@ -35,6 +35,7 @@ import org.apache.commons.logging.Log;
 public class SearchUICore {
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 200;
+	private static final int LIMIT_JUSTIFY_RESULTS = 5;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class); 
 	private SearchPhrase phrase;
 	private SearchResultCollection currentSearchResult = new SearchResultCollection(); 
@@ -163,16 +164,18 @@ public class SearchUICore {
 			public void run() {
 				try {
 					SearchResultMatcher rm = new SearchResultMatcher(matcher, request, requestNumber, totalLimit);
-					if(rm.isCancelled()) {
-						return;
-					}
 					if(TIMEOUT_BETWEEN_CHARS > 0) { 
 						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
+					}
+					if(rm.isCancelled()) {
+						return;
 					}
 					searchInBackground(phrase, rm);
 					if (!rm.isCancelled()) {
 						sortSearchResults(phrase, rm.getRequestResults());
 						filterSearchDuplicateResults(phrase, rm.getRequestResults());
+						justifySearchResults(phrase, rm);
+						
 						LOG.info(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
 						SearchResultCollection collection = new SearchResultCollection(rm.getRequestResults(),
 								phrase);
@@ -192,6 +195,36 @@ public class SearchUICore {
 		return quickRes;
 	}
 	
+	protected void justifySearchResults(SearchPhrase phrase, SearchResultMatcher rm) {
+		List<SearchResult> res = rm.getRequestResults();
+		if(!phrase.getUnknownSearchWords().isEmpty()) {
+			boolean resort = false;
+			int presize = res.size();
+			for(int i = 0; i < presize || i < LIMIT_JUSTIFY_RESULTS; ) {
+				SearchResult st = res.get(i);
+				// st.foundWordCount could be used
+				SearchPhrase pp = phrase.selectWord(st, 
+						phrase.getUnknownSearchWords(), phrase.isLastUnknownSearchWordComplete());
+				
+				SearchResultMatcher srm = new SearchResultMatcher(null, rm.request, 
+						rm.requestNumber, totalLimit);
+				srm.setParentSearchResult(st);
+				searchInBackground(pp, srm);
+				if(srm.getRequestResults().size() > 0) {
+					rm.getRequestResults().remove(i);
+					rm.getRequestResults().addAll(srm.getRequestResults());
+					resort = true;
+				} else {
+					i++;
+				}
+			}
+			if(resort) {
+				sortSearchResults(phrase, rm.getRequestResults());
+				filterSearchDuplicateResults(phrase, rm.getRequestResults());
+			}
+		}
+	}
+
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		for (SearchWord sw : phrase.getWords()) {
 			if(sw.getResult() != null && sw.getResult().file != null) {
@@ -270,6 +303,9 @@ public class SearchUICore {
 
 			@Override
 			public int compare(SearchResult o1, SearchResult o2) {
+				if(o1.foundWordCount != o2.foundWordCount) {
+					return -Algorithms.compare(o1.foundWordCount, o2.foundWordCount);
+				}
 				double s1 = o1.getSearchDistance(loc);
 				double s2 = o2.getSearchDistance(loc);
 				int cmp = Double.compare(s1, s2);
@@ -291,6 +327,7 @@ public class SearchUICore {
 		private final ResultMatcher<SearchResult> matcher;
 		private final int request;
 		private final int totalLimit;
+		private SearchResult parentSearchResult;
 		private final AtomicInteger requestNumber;
 		int count = 0;
 		
@@ -303,6 +340,10 @@ public class SearchUICore {
 			this.totalLimit = totalLimit;
 		}
 		
+		public void setParentSearchResult(SearchResult parentSearchResult) {
+			this.parentSearchResult = parentSearchResult;
+		}
+		
 		public List<SearchResult> getRequestResults() {
 			return requestResults;
 		}
@@ -312,6 +353,7 @@ public class SearchUICore {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_FINISHED;
 				sr.object = api;
+				sr.parentSearchResult = parentSearchResult;
 				matcher.publish(sr);
 			}
 		}
@@ -321,6 +363,7 @@ public class SearchUICore {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
 				sr.object = api;
+				sr.parentSearchResult = parentSearchResult;
 				sr.file = region;
 				matcher.publish(sr);
 			}
@@ -330,6 +373,7 @@ public class SearchUICore {
 		public boolean publish(SearchResult object) {
 			if(matcher == null || matcher.publish(object)) {
 				count++;
+				object.parentSearchResult = parentSearchResult;
 				if(totalLimit == -1 || count < totalLimit) {
 					requestResults.add(object);	
 				}

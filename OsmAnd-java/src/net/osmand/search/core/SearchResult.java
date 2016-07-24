@@ -14,8 +14,11 @@ public class SearchResult {
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
 	
+	public int foundWordCount = 1;
 	public double priority;
 	public double priorityDistance;
+	public String wordsSpan ;
+	public SearchResult parentSearchResult;
 	
 	
 	public SearchResult(SearchPhrase sp) {
@@ -40,8 +43,8 @@ public class SearchResult {
 	public Object relatedObject;
 	public double distRelatedObjectName;
 	
-	public String wordsSpan ;
-	public SearchResult preciseSearchResult;
+	
+	
 
 	
 	

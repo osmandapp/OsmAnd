@@ -68,6 +68,7 @@ public class SearchCoreFactory {
 	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2 = 5;
 	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY = 5; 
 	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2 = 5;
+	
 	// context less (slower)	
 	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 7;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 7;
@@ -197,6 +198,7 @@ public class SearchCoreFactory {
 					sr.priorityDistance = 0.1;
 					sr.objectType = ObjectType.CITY;
 					if(nm.matches(sr.localeName) || nm.matches(sr.otherNames)) {
+						sr.foundWordCount += phrase.countUnknownWordsMatch(sr); 
 						resultMatcher.publish(sr);
 					}
 					if(limit++ > LIMIT * phrase.getRadiusLevel()) {
@@ -233,6 +235,7 @@ public class SearchCoreFactory {
 						sr.otherNames = object.getAllNames(true);
 						sr.localeRelatedObjectName = sr.file.getRegionName();
 						sr.relatedObject = sr.file;
+						sr.foundWordCount += phrase.countUnknownWordsMatch(sr);
 						sr.location = object.getLocation();
 						sr.priorityDistance = 1;
 						sr.priority = priority;
@@ -378,6 +381,7 @@ public class SearchCoreFactory {
 								sr.priorityDistance = 1;	
 							}
 							sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
+							sr.foundWordCount += phrase.countUnknownWordsMatch(sr);
 							
 							sr.objectType = ObjectType.POI;
 							
