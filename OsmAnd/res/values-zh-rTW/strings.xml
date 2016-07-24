@@ -113,7 +113,7 @@
     <string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
     <string name="osmand_parking_hours">小時</string>
     <string name="osmand_parking_minutes">分鐘</string>
-    <string name="osmand_parking_position_description_add_time">把愛車停在</string>
+    <string name="osmand_parking_position_description_add_time">把車子停在</string>
     <string name="select_animate_speedup">選擇模擬路線速度</string>
     <string name="global_app_allocated_memory_descr">已配置記憶體 %1$s MB (Android 限制%2$s MB, Dalvik %3$s MB)。</string>
     <string name="global_app_allocated_memory">已配置記憶體</string>
@@ -123,24 +123,24 @@
     <string name="shared_location">分享位置</string>
     <string name="osmand_parking_event">由停車場取車</string>
     <string name="osmand_parking_warning">警示</string>
-    <string name="osmand_parking_warning_text">取車通知在先前已加到您的行事曆中。它會一直保留在那裡，直到您手動刪除它。</string>
+    <string name="osmand_parking_warning_text">您的取車通知已加到您的行事曆中。它會一直保留在那裡，直到您手動刪除它。</string>
     <string name="osmand_parking_time_limit_title">設定停車時限</string>
     <string name="osmand_parking_delete_confirm">您要刪除停車位置標記嗎？</string>
     <string name="osmand_parking_delete">刪除停車位置標記</string>
     <string name="osmand_parking_choose_type">選擇停車場種類</string>
     <string name="osmand_parking_lim_text">時限</string>
     <string name="osmand_parking_no_lim_text">無時限</string>
-    <string name="osmand_parking_add_event">增加一個通知到行事曆</string>
+    <string name="osmand_parking_add_event">增加通知到行事曆</string>
     <string name="osmand_parking_time_limit">有時限停車場</string>
     <string name="osmand_parking_time_no_limit">無時限停車場</string>
-    <string name="osmand_parking_position_description">您停車的處所。%1$s</string>
+    <string name="osmand_parking_position_description">您停車的位置。%1$s</string>
     <string name="osmand_parking_position_description_add">取車處在：</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">停車地點</string>
-    <string name="osmand_parking_plugin_description">停車位置外掛元件，讓您記住停車地點和還剩多少停車時間（如果有時間限制）。\n在地圖螢幕上，位置和時間這兩者均可見於 OsmAnd 儀表板的小工具。警報可以增加到 Android 的日曆作為提醒。</string>
+    <string name="osmand_parking_plugin_description">停車位置外掛元件，讓您記得您的車停在哪和還剩多少停車時間（如果有時間限制）。\n在地圖螢幕上，位置和時間這兩者均可見於 OsmAnd 儀表板的小工具。警報可以增加到 Android 的日曆作為提醒。</string>
     <string name="osmand_parking_plugin_name">停車地點</string>
-    <string name="context_menu_item_add_parking_point">標記為停車地點</string>
+    <string name="context_menu_item_add_parking_point">標記為停車位置</string>
     <string name="context_menu_item_delete_parking_point">刪除停車標記</string>
     <string name="gpxup_public">公用的</string>
     <string name="gpxup_identifiable">可識別的</string>
@@ -1574,7 +1574,7 @@
 
 
     <string name="gps_status">GPS 狀態</string>
-    <string name="parking_place">停車地點</string>
+    <string name="parking_place">停車場所</string>
     <string name="remove_the_tag">移除標記</string>
     <string name="shared_string_disabled">已停用</string>
     <string name="shared_string_enabled">已啟用</string>
@@ -2209,4 +2209,6 @@
     <string name="city_type_neighbourhood">鄰近</string>
     <string name="search_categories">種類</string>
     <string name="postcode">郵遞區號</string>
+    <string name="share_history_subject">"透過 OsmAnd  分享歷程"</string>
+    <string name="lang_hsb">索布語 (上游)</string>
     </resources>
