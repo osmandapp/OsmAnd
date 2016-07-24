@@ -291,18 +291,17 @@ public class MapInfoWidgetsFactory {
 			remove.setImageDrawable(map.getMyApplication().getIconsCache()
 					.getIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
-		
-		
+
 
 		public boolean updateInfo(DrawSettings d) {
 			String text = null;
 			TurnType[] type = new TurnType[1];
 			boolean showNextTurn = false;
-			if (routingHelper != null && routingHelper.isRouteCalculated()) {
+			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				if (routingHelper.isFollowingMode()) {
-					if(settings.SHOW_STREET_NAME.get()) {
+					if (settings.SHOW_STREET_NAME.get()) {
 						text = routingHelper.getCurrentName(type);
-						if(text == null) {
+						if (text == null) {
 							text = "";
 						}
 					}
@@ -314,24 +313,24 @@ public class MapInfoWidgetsFactory {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 						type[0] = next.getTurnType();
 						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
-//						if(next.distance > 0) {
+//						if (next.distance > 0) {
 //							text += " " + OsmAndFormatter.getFormattedDistance(next.distance, map.getMyApplication());
 //						}
-						if(text == null) {
+						if (text == null) {
 							text = "";
 						}
 						
 					}
 				}
-			} else if(settings.getApplicationMode() != ApplicationMode.DEFAULT &&
+			} else if (settings.getApplicationMode() != ApplicationMode.DEFAULT &&
 					map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
-				if(rt != null) {
+				if (rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()), 
 							rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
 				} 
-				if(text == null) {
+				if (text == null) {
 					text = "";
 				}
 			}
@@ -341,7 +340,7 @@ public class MapInfoWidgetsFactory {
 				updateVisibility(true);
 				updateVisibility(addressText, false);
 				updateVisibility(addressTextShadow, false);
-			} else if(text == null) {
+			} else if (text == null) {
 				updateVisibility(false);
 			} else {
 				updateVisibility(true);
@@ -378,7 +377,7 @@ public class MapInfoWidgetsFactory {
 			}
 			return false;
 		}
-		
+
 		public boolean updateWaypoint() {
 			final LocationPointWrapper pnt = waypointHelper.getMostImportantLocationPoint(null);
 			boolean changed = this.lastPoint != pnt;
