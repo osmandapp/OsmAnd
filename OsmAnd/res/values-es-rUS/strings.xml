@@ -2202,4 +2202,7 @@
     <string name="lang_hsb">Sorabo (Alto)</string>
     <string name="share_history_subject">" compartido vía OsmAnd"</string>
     <string name="show_on_map">Mostrar en el mapa</string>
+    <string name="release_2_4">" • Nueva búsqueda de texto libre muy potente.
+\n\n • Muchas mejoras de audio mediante Bluetooth.\n\n • Mejoras en las indicaciones por voz con carriles de giro.
+\n\n • Muchas otras mejoras y correcciones de errores.\n\n y más… "</string>
     </resources>
