@@ -146,6 +146,66 @@
         </LinearLayout>
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/search_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/search_topbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dashboard_map_toolbar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/search_icon"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_search_dark"/>
+
+                <TextView
+                    android:id="@+id/search_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:textColor="?android:textColorPrimary"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Search"
+                    android:textSize="@dimen/abc_text_size_medium_material"/>
+
+                <ImageButton
+                    android:id="@+id/search_close_button"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/shared_string_close"
+                    android:src="@drawable/ic_action_remove_dark"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/search_topbar_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="@drawable/bg_contextmenu_shadow"
+                android:foregroundGravity="top|fill_horizontal"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/map_markers_top_bar"
@@ -153,7 +213,8 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:minHeight="@dimen/map_address_height"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"

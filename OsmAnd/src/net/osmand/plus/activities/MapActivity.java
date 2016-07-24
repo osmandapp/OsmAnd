@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
@@ -88,6 +89,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmAndMapLayersView;
@@ -166,6 +168,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
+	private boolean quickSearchActive = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -1353,5 +1356,36 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!mIsDestroyed) {
 			DestinationReachedMenu.show(this);
 		}
+	}
+
+	public void showQuickSearch() {
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.show();
+			refreshMap();
+		} else {
+			QuickSearchDialogFragment.showInstance(this, "");
+		}
+	}
+
+	public void closeQuickSearch() {
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.closeSearch();
+			refreshMap();
+		}
+	}
+
+	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(QuickSearchDialogFragment.TAG);
+		return fragment!= null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
+	}
+
+	public boolean isQuickSearchDialogActive() {
+		return quickSearchActive && getQuickSearchDialogFragment() != null;
+	}
+
+	public void setQuickSearchActive(boolean quickSearchActive) {
+		this.quickSearchActive = quickSearchActive;
 	}
 }

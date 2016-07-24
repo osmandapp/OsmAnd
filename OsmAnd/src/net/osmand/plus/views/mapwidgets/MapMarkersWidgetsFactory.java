@@ -202,7 +202,8 @@ public class MapMarkersWidgetsFactory {
 				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
 				|| map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()
-				|| addressTopBar.getVisibility() == View.VISIBLE) {
+				|| addressTopBar.getVisibility() == View.VISIBLE
+				|| map.isQuickSearchDialogActive()) {
 			updateVisibility(false);
 			return;
 		}

@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
@@ -159,7 +161,76 @@ public class MapInfoWidgetsFactory {
 		});
 		return gpsInfoControl;
 	}
-	
+
+	public static class QuickSearchView {
+		private final MapActivity map;
+		private View searchTopBar;
+		private View searchTopBarLayout;
+		private ImageView searchIcon;
+		private TextView searchTitle;
+		private ImageButton searchCloseButton;
+
+		public QuickSearchView(final MapActivity map) {
+			this.map = map;
+			searchTopBar = map.findViewById(R.id.search_topbar);
+			searchTopBarLayout = map.findViewById(R.id.search_topbar_layout);
+			searchIcon = (ImageView) map.findViewById(R.id.search_icon);
+			searchTitle = (TextView) map.findViewById(R.id.search_title);
+			searchTitle.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					map.showQuickSearch();
+				}
+			});
+			searchCloseButton = (ImageButton) map.findViewById(R.id.search_close_button);
+			searchCloseButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					map.closeQuickSearch();
+				}
+			});
+			updateVisibility(false);
+		}
+
+		public boolean updateVisibility(boolean visible) {
+			return updateVisibility(searchTopBar, visible);
+		}
+
+		public boolean updateVisibility(View v, boolean visible) {
+			if (visible != (v.getVisibility() == View.VISIBLE)) {
+				if (visible) {
+					v.setVisibility(View.VISIBLE);
+				} else {
+					v.setVisibility(View.GONE);
+				}
+				v.invalidate();
+				return true;
+			}
+			return false;
+		}
+
+		public void updateInfo() {
+			boolean isQuickSearchActive = map.isQuickSearchDialogActive();
+			if (isQuickSearchActive) {
+				QuickSearchDialogFragment fragment = map.getQuickSearchDialogFragment();
+				if (fragment != null) {
+					searchTitle.setText(fragment.getText());
+				}
+			}
+			updateVisibility(isQuickSearchActive);
+		}
+
+		public void updateTextColor(boolean nightMode, int textColor) {
+			OsmandApplication app = map.getMyApplication();
+			searchTitle.setTextColor(textColor);
+			searchIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_search_dark, !nightMode));
+			searchCloseButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
+		}
+
+		public void setBackgroundResource(int boxTop) {
+			searchTopBarLayout.setBackgroundResource(boxTop);
+		}
+	}
 
 	public static class TopTextView   {
 		private final RoutingHelper routingHelper;
@@ -264,7 +335,9 @@ public class MapInfoWidgetsFactory {
 					text = "";
 				}
 			}
-			if (!showNextTurn && updateWaypoint()) {
+			if (map.isQuickSearchDialogActive()) {
+				updateVisibility(false);
+			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);
 				updateVisibility(addressText, false);
 				updateVisibility(addressTextShadow, false);

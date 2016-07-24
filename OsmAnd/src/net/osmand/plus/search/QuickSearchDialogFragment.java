@@ -164,7 +164,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 					}
 					MapActivity.launchMapActivityMoveToTop(getActivity());
-					dismiss();
+					hide();
 				}
 			}
 		});
@@ -270,6 +270,24 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		AndroidUtils.softKeyboardDelayed(searchEditText);
 
 		return view;
+	}
+
+	public String getText() {
+		return searchEditText.getText().toString();
+	}
+
+	public void show() {
+		getDialog().show();
+	}
+
+	public void hide() {
+		getDialog().hide();
+	}
+
+	public void closeSearch() {
+		MapActivity mapActivity = getMapActivity();
+		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
+		dismiss();
 	}
 
 	public void addMainSearchFragment() {
@@ -393,12 +411,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		app.getLocationProvider().addLocationListener(this);
 		location = app.getLocationProvider().getLastKnownLocation();
 		updateLocation(location);
+		getMapActivity().setQuickSearchActive(true);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		OsmandApplication app = getMyApplication();
+		getMapActivity().setQuickSearchActive(false);
 		getChildFragmentManager().popBackStack();
 		app.getLocationProvider().removeLocationListener(this);
 		app.getLocationProvider().removeCompassListener(this);
@@ -519,7 +539,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}, 0, new AtomicInteger(0), -1));
 		List<QuickSearchListItem> rows = new ArrayList<>();
 		if (history.size() > 0) {
-			searchUICore.sortSearchResults(sp, history);
 			OsmandApplication app = getMyApplication();
 			for (SearchResult sr : history) {
 				rows.add(new QuickSearchListItem(app, sr));
