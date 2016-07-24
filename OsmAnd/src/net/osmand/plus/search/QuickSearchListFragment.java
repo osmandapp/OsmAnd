@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import net.osmand.data.Amenity;
+import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.Street;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -151,8 +152,17 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription = fav.getPointDescription();
 					break;
 				case HOUSE:
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
-							QuickSearchListItem.getName(app, searchResult) + ", " + QuickSearchListItem.getTypeName(app, searchResult));
+					String nm = searchResult.localeName;
+					if(searchResult.relatedObject instanceof City) {
+						nm = ((City)searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true) + " " + nm;
+					} else if(searchResult.relatedObject instanceof Street) {
+						String s = ((Street)searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String c = ((Street)searchResult.relatedObject).getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						nm = s + " " + nm +", " + c;
+					} else if(searchResult.localeRelatedObjectName != null) {
+						nm = searchResult.localeRelatedObjectName + " " + nm;
+					}
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, nm);
 					break;
 				case LOCATION:
 					LatLon latLon = (LatLon) object;
