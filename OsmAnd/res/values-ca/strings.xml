@@ -2058,4 +2058,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_hsb">Alt sòrab</string>
     <string name="show_on_map">Indica en el mapa</string>
     <string name="share_history_subject">" compartit via OsmAnd"</string>
+    <string name="release_2_4">" • Nova cerca de text lliure molt potent.
+\n\n • Àudio amb Bluetooth molt millorat.\n\n • Guia de navegació millorada amb carrils auxiliars.
+\n\n • Moltes més millores i correccions d\'errors.\n\n i més… "</string>
     </resources>
