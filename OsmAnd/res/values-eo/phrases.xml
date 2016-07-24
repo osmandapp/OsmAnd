@@ -1889,4 +1889,98 @@
 	<string name="poi_surface_compacted">Pavimo: ebenbatita gruzo</string>
 	<string name="poi_surface_sand">Pavimo: sablo</string>
 	<string name="poi_surface_grass">Pavimo: herbo</string>
+	<string name="poi_surface_grass_paver">Pavimo: herbo-krado</string>
+	<string name="poi_surface_ground">Pavimo: grundo</string>
+	<string name="poi_surface_dirt">Pavimo: grundo malebena</string>
+	<string name="poi_surface_mud">Pavimo: koto</string>
+	<string name="poi_surface_ice">Pavimo: glacio</string>
+	<string name="poi_surface_salt">Pavimo: salo</string>
+	<string name="poi_surface_snow">Pavimo: neĝo</string>
+
+	<string name="poi_route_bus_ref">Aŭtobuso</string>
+	<string name="poi_route_share_taxi_ref">Taksio</string>
+	<string name="poi_route_trolleybus_ref">Trolebuso</string>
+	<string name="poi_route_tram_ref">Tramo</string>
+	<string name="poi_route_train_ref">Fervojo</string>
+	<string name="poi_route_light_rail_ref">Fervojo malpeza</string>
+	<string name="poi_route_monorail_ref">Fervojo unurela</string>
+	<string name="poi_route_funicular_ref">Funikularo</string>
+	<string name="poi_route_ferry_ref">Pramo</string>
+
+	<string name="poi_route_railway_ref">Kurso fervoja</string>
+
+	<string name="poi_surveillance_yes">Gardo: jes</string>
+	<string name="poi_shop_additional_yes">Kun vendejo</string>
+
+	<string name="poi_service_bicycle_retail_yes">Vendo de bicikloj: jes</string>
+	<string name="poi_service_bicycle_retail_no">Vendo de bicikloj: ne</string>
+	<string name="poi_service_bicycle_repair_yes">Riparo de bicikloj: jes</string>
+	<string name="poi_service_bicycle_repair_no">Riparo de bicikloj: ne</string>
+	<string name="poi_service_bicycle_rental_yes">Prunto de bicikloj: jes</string>
+	<string name="poi_service_bicycle_rental_no">Prunto de bicikloj: ne</string>
+	<string name="poi_service_bicycle_pump_yes">Aerpumpilo: jes</string>
+	<string name="poi_service_bicycle_pump_no">Aerpumpilo: ne</string>
+	<string name="poi_service_bicycle_diy_yes">Iloj por mem-riparo de bicikloj: jes</string>
+	<string name="poi_service_bicycle_diy_no">Iloj por mem-riparo de bicikloj: ne</string>
+	<string name="poi_service_bicycle_cleaning_yes">Purigo de bicikloj: jes</string>
+	<string name="poi_service_bicycle_cleaning_no">Purigo de bicikloj: ne</string>
+	<string name="poi_service_bicycle_chaintool_yes">Iloj por ĉeno de biciklo: jes</string>
+	<string name="poi_service_bicycle_chaintool_no">Iloj por ĉeno de biciklo: ne</string>
+	<string name="poi_service_bicycle_second_hand_yes">Brokantado de bicikloj: jes</string>
+	<string name="poi_service_bicycle_second_hand_no">Brokantado de bicikloj: ne</string>
+
+	<string name="poi_wildlife_hide">Besto-observejo</string>
+
+	<string name="poi_training_language">Lernado: lingvo</string>
+	<string name="poi_training_music">Lernado: muziko</string>
+	<string name="poi_training_dance">Lernado: danco</string>
+	<string name="poi_training_sport">Lernado: sporto</string>
+	<string name="poi_training_art">Lernado: arto</string>
+	<string name="poi_training_cooking">Lernado: kuiro</string>
+	<string name="poi_training_computer">Lernado: komputilo</string>
+	<string name="poi_training_yoga">Lernado: jogo</string>
+	<string name="poi_training_martial_art">Lernado: batal-arto</string>
+	<string name="poi_training_aviation">Lernado: aviado</string>
+	<string name="poi_training_hairdressing">Lernado: hair-tondado</string>
+
+	<string name="poi_monument_yes">Monumenta objekto</string>
+
+	<string name="poi_industrial_oil">Speco: petrola industrio</string>
+	<string name="poi_industrial_brewery">Speco: bier-farejo</string>
+	<string name="poi_industrial_port">Speco: komerchaveno</string>
+	<string name="poi_industrial_wellsite">Speco: nafta puto</string>
+	<string name="poi_industrial_factory">Speco: fabriko</string>
+	<string name="poi_industrial_gas">Speco: tergasa industrio</string>
+	<string name="poi_industrial_timber">Speco: ligna industrio</string>
+	<string name="poi_industrial_refinery">Speco: naftorafinejo</string>
+	<string name="poi_industrial_warehouse">Speco: magazeno</string>
+	<string name="poi_industrial_auto_wrecker">Speco: aŭtovrakejo</string>
+	<string name="poi_industrial_agriculture">Speco: agrokultura</string>
+	<string name="poi_industrial_brickyard">Speco: brik-farejo</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Speco: granda ŝarĝejo de varoj</string>
+	<string name="poi_industrial_sawmill">Speco: segejo</string>
+	<string name="poi_industrial_water_purification">Speco: akvo-purigejo</string>
+	<string name="poi_industrial_depot">Speco: veturilejo</string>
+
+	<string name="poi_watering_place">Akvotrinkejo por bestoj</string>
+	<string name="poi_animal_boarding">Hotelo (prizorgejo) por hejmbestoj</string>
+	<string name="poi_animal_boarding_dog">Prizorgado pri: hundoj</string>
+	<string name="poi_animal_boarding_cat">Prizorgado pri: katoj</string>
+	<string name="poi_animal_boarding_dog_cat">Prizorgado pri: hundoj, katoj</string>
+	<string name="poi_animal_boarding_horse">Prizorgado pri: ĉevaloj</string>
+
+	<string name="poi_historic_aircraft">Aviadilo historia</string>
+
+	<string name="poi_honey">Miel-vendejo</string>
+
+	<string name="poi_elevator_yes">Kun lifto</string>
+	<string name="poi_elevator_no">Sen lifto</string>
+
+	<string name="poi_technical_monument">Teĥnika monumento</string>
+
+	<string name="poi_office_camping">Akceptejo de kampadejo</string>
+	<string name="poi_model_aerodrome">Model-aerodromo</string>
+	<string name="poi_guide">Oficejo de ekskursado</string>
+	<string name="poi_quango">Oficejo de duon-registara organizaĵo</string>
+	<string name="poi_consulting">Oficejo de konsilado</string>
 	</resources>
