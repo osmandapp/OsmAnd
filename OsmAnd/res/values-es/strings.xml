@@ -2186,5 +2186,6 @@
     <string name="lang_en_gb">Inglés (Reino Unido)</string>
     <string name="lang_be_BY">Bielorruso (latino)</string>
     <string name="lang_kn">Canarés</string>
-    <string name="share_history_subject">Historial compartido vía OsmAnd</string>
+    <string name="share_history_subject">" compartido vía OsmAnd"</string>
+    <string name="show_on_map">Mostrar en el mapa</string>
     </resources>
