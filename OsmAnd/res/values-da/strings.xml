@@ -2391,5 +2391,6 @@
     <string name="postcode">Postnummer</string>
     <string name="search_categories">Kategorier</string>
     <string name="lang_hsb">Sorbisk (øvresorbisk)</string>
-    <string name="share_history_subject">Historik delt via OsmAnd</string>
+    <string name="share_history_subject">" Delt via OsmAnd"</string>
+    <string name="show_on_map">Vis på kortet</string>
     </resources>
