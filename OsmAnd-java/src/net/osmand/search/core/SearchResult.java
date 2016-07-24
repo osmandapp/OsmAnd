@@ -42,6 +42,14 @@ public class SearchResult {
 		return priority - 1 / (1 + priorityDistance * distance);
 	}
 	
+	public double getSearchDistance(LatLon location, double pd) {
+		double distance = 0;
+		if (location != null && this.location != null) {
+			distance = MapUtils.getDistance(location, this.location);
+		}
+		return priority - 1 / (1 + pd * distance);
+	}
+	
 	public LatLon location;
 	public int preferredZoom = 15;
 	public String localeName;

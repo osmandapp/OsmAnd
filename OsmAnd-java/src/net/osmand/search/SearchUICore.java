@@ -294,7 +294,13 @@ public class SearchUICore {
 				if(st1 != st2) {
 					return Algorithms.compare(st1, st2);
 				}
-				return collator.compare(o1.localeName, o2.localeName);
+				cmp = collator.compare(o1.localeName, o2.localeName);
+				if(cmp != 0) {
+					return cmp;
+				}
+				s1 = o1.getSearchDistance(loc, 1);
+				s2 = o2.getSearchDistance(loc, 1);
+				return Double.compare(s1, s2);
 			}
 		});
 	}
