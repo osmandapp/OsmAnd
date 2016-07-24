@@ -505,7 +505,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						sendIntent.setType("text/plain");
 						startActivity(sendIntent);
 					} catch (IOException e) {
-						Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_LONG).show();
+						//Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}
 				}
