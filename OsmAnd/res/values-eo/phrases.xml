@@ -1877,5 +1877,16 @@
 	<string name="poi_surface_paved">Pavimo: firma</string>
 	<string name="poi_surface_asphalt">Pavimo: asfalto</string>
 	<string name="poi_surface_concrete">Pavimo: betono</string>
-	<string name="poi_surface_sett">Pavimo: ŝtona</string>
+	<string name="poi_surface_sett">Pavimo: kvadrataj ŝtonoj</string>
+	<string name="poi_surface_cobblestone">Pavimo: rulŝtonaj kaheloj</string>
+	<string name="poi_surface_paving_stones">Pavimo: trotuara plateto</string>
+	<string name="poi_surface_pebblestone">Pavimo: rulŝtonaĵoj</string>
+	<string name="poi_surface_stone">Pavimo: ŝtonoj</string>
+	<string name="poi_surface_metal">Pavimo: metalo</string>
+	<string name="poi_surface_wood">Pavimo: ligno</string>
+	<string name="poi_surface_gravel">Pavimo: gruzo</string>
+	<string name="poi_surface_fine_gravel">Pavimo: eta gruzo</string>
+	<string name="poi_surface_compacted">Pavimo: ebenbatita gruzo</string>
+	<string name="poi_surface_sand">Pavimo: sablo</string>
+	<string name="poi_surface_grass">Pavimo: herbo</string>
 	</resources>
