@@ -678,17 +678,17 @@
     <string name="osmand_parking_choose_type">Issèbera su tipu de parchègiu</string>
     <string name="osmand_parking_lim_text">A tempus</string>
     <string name="osmand_parking_no_lim_text">Chene lìmites de tempus</string>
-    <string name="osmand_parking_add_event">Annanghe una notìfica a s’aplicu Calendàriu</string>
+    <string name="osmand_parking_add_event">Annanghe una notìfica a s’aplicatzione Calendàriu</string>
     <string name="osmand_parking_time_limit">Parchègiu a tempus</string>
     <string name="osmand_parking_time_no_limit">Parchègiu chene lìmites de tempus</string>
     <string name="osmand_parking_position_description">Sa positzione de sa màchina parchegiada tua. %1$s</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Puntu de parchègiu</string>
+    <string name="osmand_parking_position_name">Logu de parchègiu</string>
 	<string name="osmand_parking_plugin_description">S’estensione positzione parchègiu ti permìtit de ammentare in ue est istada parchegiada sa màchina tua, e cantu tempus tenes galu (si su parchègiu tenet unu tempus limitadu).
 \nPodes agatare su logu e su tempus de parchègiu in su widget de sa mapa. Podes annànghere notìficas in su calendàriu pro ti l\'ammentare.</string>
     <string name="osmand_parking_plugin_name">Positzione parchègiu</string>
-    <string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
+    <string name="context_menu_item_add_parking_point">Marca comente logu de parchègiu</string>
     <string name="gpxup_public">Pùblicu</string>
     <string name="gpxup_identifiable">Identificàbile</string>
     <string name="gpxup_trackable">Arrastàbile</string>
@@ -875,7 +875,7 @@
 
     <string name="osmand_development_plugin_description">Custa estensione ammustrat sas impostatziones pro funtzionalidades pro isvilupu e debug comente sa simulatzione de su nàvigu, sa visualizatzione de sa prestatzione de su rèndering, o s\'interfàtzia vocale. Custas impostatziones sunt pensadas pro sos isvilupadores e non sunt netzessàrias pro sos àteros impitadores.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Sas mapas vetoriales diat dèpere apàrrere in manera prus lestra. In carchi dispositivu diat podere funtzionare male.</string>
-    <string name="osmand_parking_warning_text">Pretzdentemente est istada annangada a su tzeravallu/calendàriu tuo sa notìfica pro recuperare sa màchina. At a abarrare finas a cando non l\'as a burrare manualmente.</string>
+    <string name="osmand_parking_warning_text">Una notìfica pro recuperare sa màchina est istada annangada a su tzeravallu/calendàriu tuo. At a abarrare finas a cando non l\'as a cantzellare manualmente.</string>
     <string name="rendering_attr_noPolygons_description">Faghe divènnere transparentes totu sas caraterìsticas de sas àreas de su terrinu</string>
     <string name="rendering_attr_hmRendered_description">Aumenta sa cantidade ammustrada de minujos de sa mapa</string>
 	<string name="osmand_rastermaps_plugin_description">"Cun custa estensione podes atzèdere a medas castas de màpas in lìnia (cussas connotas comente \"a tasseddos\" o \"raster\"), dae sas predefinidas de  Openstreetmap (comente Mapnik) a sas immàgines satellitares e a sos istratos pro punnas ispetziales comente sas mapas metereològicas, climàticas, geològicas, e umbradura de sos rilievos etc.
