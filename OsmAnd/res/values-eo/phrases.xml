@@ -1983,4 +1983,17 @@
 	<string name="poi_guide">Oficejo de ekskursado</string>
 	<string name="poi_quango">Oficejo de duon-registara organizaĵo</string>
 	<string name="poi_consulting">Oficejo de konsilado</string>
+	<string name="poi_cooperative">Oficejo de kunlaborado</string>
+	<string name="poi_office_forestry">Oficejo de arbarkultivo</string>
+	<string name="poi_logistics">Oficejo de provizarto</string>
+	<string name="poi_parish">Oficejo de paroĥo</string>
+	<string name="poi_publisher">Oficejo de eldonisto</string>
+
+	<string name="poi_fuel_91ul">Benzino 91-oktannombra senplumba</string>
+	<string name="poi_fuel_100ll">Benzino 100-oktannombra plumba</string>
+	<string name="poi_fuel_autogas">Naftogaso likva (LPG) por aviadiloj</string>
+	<string name="poi_fuel_jeta1">Jet A-1 brulaĵo</string>
+	<string name="poi_fuel_adblue">AdBlue (akvosolvaĵo de ureo) aldonaĵo</string>
+
+	<string name="poi_fuel_wood">Brulaĵo: ligno</string>
 	</resources>
