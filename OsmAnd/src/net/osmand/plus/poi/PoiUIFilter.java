@@ -603,7 +603,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	@Override
 	public int compareTo(@NonNull PoiUIFilter another) {
 		if (another.filterId.equals(this.filterId)) {
-			return 0;
+			String thisFilterByName = this.filterByName == null ? "" : this.filterByName;
+			String anotherFilterByName = another.filterByName == null ? "" : another.filterByName;
+			return thisFilterByName.compareToIgnoreCase(anotherFilterByName);
 		} else {
 			return this.name.compareTo(another.name);
 		}

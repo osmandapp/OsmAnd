@@ -17,7 +17,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textColor="?attr/color_dialog_buttons"
-                android:textSize="@dimen/default_list_text_size"
+                android:textSize="@dimen/default_desc_text_size"
                 tools:text="Amsterdam"/>
 
 </LinearLayout>
