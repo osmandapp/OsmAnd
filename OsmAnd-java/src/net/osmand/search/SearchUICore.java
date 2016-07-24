@@ -22,6 +22,8 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -95,13 +97,16 @@ public class SearchUICore {
 	}
 	
 	public void init() {
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
 		apis.add(new SearchCoreFactory.SearchAmenityTypesAPI(poiTypes));
 		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes));
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
-		apis.add(new SearchCoreFactory.SearchStreetByCityAPI());
-		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
-		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
-		apis.add(new SearchCoreFactory.SearchAddressByNameAPI());
+		SearchBuildingAndIntersectionsByStreetAPI streetsApi = 
+				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
+		apis.add(streetsApi);
+		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
+		apis.add(cityApi);
+		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi));
 	}
 	
 	public void registerAPI(SearchCoreAPI api) {
@@ -174,7 +179,6 @@ public class SearchUICore {
 					if (!rm.isCancelled()) {
 						sortSearchResults(phrase, rm.getRequestResults());
 						filterSearchDuplicateResults(phrase, rm.getRequestResults());
-						justifySearchResults(phrase, rm);
 						
 						LOG.info(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
 						SearchResultCollection collection = new SearchResultCollection(rm.getRequestResults(),
@@ -195,35 +199,8 @@ public class SearchUICore {
 		return quickRes;
 	}
 	
-	protected void justifySearchResults(SearchPhrase phrase, SearchResultMatcher rm) {
-		List<SearchResult> res = rm.getRequestResults();
-		if(!phrase.getUnknownSearchWords().isEmpty()) {
-			boolean resort = false;
-			int presize = res.size();
-			for(int i = 0; i < presize || i < LIMIT_JUSTIFY_RESULTS; ) {
-				SearchResult st = res.get(i);
-				// st.foundWordCount could be used
-				SearchPhrase pp = phrase.selectWord(st, 
-						phrase.getUnknownSearchWords(), phrase.isLastUnknownSearchWordComplete());
-				
-				SearchResultMatcher srm = new SearchResultMatcher(null, rm.request, 
-						rm.requestNumber, totalLimit);
-				srm.setParentSearchResult(st);
-				searchInBackground(pp, srm);
-				if(srm.getRequestResults().size() > 0) {
-					rm.getRequestResults().remove(i);
-					rm.getRequestResults().addAll(srm.getRequestResults());
-					resort = true;
-				} else {
-					i++;
-				}
-			}
-			if(resort) {
-				sortSearchResults(phrase, rm.getRequestResults());
-				filterSearchDuplicateResults(phrase, rm.getRequestResults());
-			}
-		}
-	}
+	
+	
 
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		for (SearchWord sw : phrase.getWords()) {
@@ -303,8 +280,8 @@ public class SearchUICore {
 
 			@Override
 			public int compare(SearchResult o1, SearchResult o2) {
-				if(o1.foundWordCount != o2.foundWordCount) {
-					return -Algorithms.compare(o1.foundWordCount, o2.foundWordCount);
+				if(o1.getFoundWordCount() != o2.getFoundWordCount()) {
+					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 				}
 				double s1 = o1.getSearchDistance(loc);
 				double s2 = o2.getSearchDistance(loc);
@@ -322,7 +299,8 @@ public class SearchUICore {
 		});
 	}
 	
-	public static class SearchResultMatcher implements  ResultMatcher<SearchResult>{
+	public static class SearchResultMatcher
+	implements  ResultMatcher<SearchResult>{
 		private final List<SearchResult> requestResults = new ArrayList<>();
 		private final ResultMatcher<SearchResult> matcher;
 		private final int request;
@@ -340,12 +318,18 @@ public class SearchUICore {
 			this.totalLimit = totalLimit;
 		}
 		
-		public void setParentSearchResult(SearchResult parentSearchResult) {
+		public SearchResult setParentSearchResult(SearchResult parentSearchResult) {
+			SearchResult prev = this.parentSearchResult;
 			this.parentSearchResult = parentSearchResult;
+			return prev;
 		}
 		
 		public List<SearchResult> getRequestResults() {
 			return requestResults;
+		}
+		
+		public int getCount() {
+			return requestResults.size();
 		}
 		
 		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {

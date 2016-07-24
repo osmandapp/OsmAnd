@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import net.osmand.CollatorStringMatcher;
@@ -114,6 +115,20 @@ public class SearchPhrase {
 	public List<String> getUnknownSearchWords() {
 		return unknownWords;
 	}
+	
+	public List<String> getUnknownSearchWords(Collection<String> exclude) {
+		if(exclude == null || unknownWords.size() == 0 || exclude.size() == 0) {
+			return unknownWords;
+		}
+		List<String> l = new ArrayList<>();
+		for(String uw : unknownWords) {
+			if(exclude == null || !exclude.contains(uw)) {
+				l.add(uw);
+			}
+		}
+		return l;
+	}
+	
 	
 	public String getUnknownSearchWord() {
 		return unknownSearchWordTrim;
@@ -245,13 +260,13 @@ public class SearchPhrase {
 	
 	public SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
 		SearchPhrase sp = new SearchPhrase(this.settings);
-		sp.words.addAll(this.words);	
+		addResult(res, sp);
 		SearchResult prnt = res.parentSearchResult;
 		while(prnt != null) {
 			addResult(prnt, sp);
 			prnt = prnt.parentSearchResult;
 		}
-		addResult(res, sp);
+		sp.words.addAll(0, this.words);	
 		if(unknownWords != null) {
 			sp.lastUnknownSearchWordComplete = lastComplete;
 			for(int i = 0; i < unknownWords.size(); i++) {
@@ -267,7 +282,7 @@ public class SearchPhrase {
 
 	private void addResult(SearchResult res, SearchPhrase sp) {
 		SearchWord sw = new SearchWord(res.wordsSpan != null ? res.wordsSpan : res.localeName.trim(), res);
-		sp.words.add(sw);
+		sp.words.add(0, sw);
 	}
 	
 	public boolean isLastWord(ObjectType... p) {
@@ -436,8 +451,12 @@ public class SearchPhrase {
 		}
 		
 	}
-	public int countUnknownWordsMatch(SearchResult sr) {
-		int cnt = 0;
+	
+	public void countUnknownWordsMatch(SearchResult sr) {
+		countUnknownWordsMatch(sr, sr.localeName, sr.otherNames);
+	}
+	
+	public void countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames) {
 		if(unknownWords.size() > 0) {
 			for(int i = 0; i < unknownWords.size(); i++) {
 				if(unknownWordsMatcher.size() == i) {
@@ -446,12 +465,14 @@ public class SearchPhrase {
 								StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 				}
 				NameStringMatcher ms = unknownWordsMatcher.get(i);
-				if(ms.matches(sr.localeName) || ms.matches(sr.otherNames)) {
-					cnt++;
+				if(ms.matches(localeName) || ms.matches(otherNames)) {
+					if(sr.otherWordsMatch == null) {
+						sr.otherWordsMatch = new TreeSet<>();
+					}
+					sr.otherWordsMatch.add(unknownWords.get(i));
 				}
 			}
 		}
-		return cnt;
 	}
 	public int getRadiusSearch(int meters) {
 		return (1 << (getRadiusLevel() - 1)) * meters;

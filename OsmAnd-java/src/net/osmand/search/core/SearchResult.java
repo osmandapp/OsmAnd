@@ -1,6 +1,7 @@
 package net.osmand.search.core;
 
 import java.util.Collection;
+import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
@@ -14,15 +15,23 @@ public class SearchResult {
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
 	
-	public int foundWordCount = 1;
 	public double priority;
 	public double priorityDistance;
 	public String wordsSpan ;
 	public SearchResult parentSearchResult;
+	public Collection<String> otherWordsMatch = null;
+	
 	
 	
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
+	}
+	
+	public int getFoundWordCount() {
+		if(otherWordsMatch != null) {
+			return otherWordsMatch.size() + 1;
+		}
+		return 1;
 	}
 
 	public double getSearchDistance(LatLon location) {
