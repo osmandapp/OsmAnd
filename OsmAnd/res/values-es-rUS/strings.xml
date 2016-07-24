@@ -2200,5 +2200,6 @@
     <string name="postcode">Código postal</string>
     <string name="search_categories">Categorías</string>
     <string name="lang_hsb">Sorabo (Alto)</string>
-    <string name="share_history_subject">Historial compartido vía OsmAnd</string>
+    <string name="share_history_subject">" compartido vía OsmAnd"</string>
+    <string name="show_on_map">Mostrar en el mapa</string>
     </resources>

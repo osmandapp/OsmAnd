@@ -14,7 +14,6 @@ import java.util.Map.Entry;
 import java.util.TreeSet;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.LocationConvert;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -105,7 +104,7 @@ public class SearchCoreFactory {
 					sr.objectType = ObjectType.REGION;
 					sr.location = bmir.getRegionCenter();
 					sr.preferredZoom = 6;
-					if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
+					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
@@ -148,7 +147,7 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (phrase.getLastWord().isEmpty()) {
+			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
@@ -180,7 +179,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
-			if (phrase.isNoSelectedType() && bbox != null && phrase.getLastWord().length() > 0) {
+			if (phrase.isNoSelectedType() && bbox != null && phrase.isUnknownSearchWordPresent()) {
 				NameStringMatcher nm = phrase.getNameStringMatcher();
 				resArray.clear();
 				resArray = townCitiesQR.queryInBox(bbox, resArray);
@@ -210,7 +209,7 @@ public class SearchCoreFactory {
 
 		private void searchByName(final SearchPhrase phrase, final SearchResultMatcher resultMatcher)
 				throws IOException {
-			if(phrase.getRadiusLevel() > 1 || phrase.getLastWord().length() > 3) {
+			if(phrase.getRadiusLevel() > 1 || phrase.getUnknownSearchWordLength() > 3) {
 				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
 				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
@@ -314,7 +313,9 @@ public class SearchCoreFactory {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, phrase
-							.getLastWord().toLowerCase(), StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+							.getUnknownSearchWord().toLowerCase(),
+							phrase.isUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE : 
+							StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					if (locSpecified) {
 						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 10));
 					}
@@ -335,16 +336,17 @@ public class SearchCoreFactory {
 		
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if(phrase.getLastWord().length() == 0) {
+			if(!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS, 
 					SearchPhraseDataType.POI);
+			final NameStringMatcher nm = phrase.getNameStringMatcher();
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
-					phrase.getLastWord(), 
+					phrase.getUnknownSearchWord(), 
 					(int)bbox.left, (int)bbox.right, 
 					(int)bbox.top, (int)bbox.bottom,
 					new ResultMatcher<Amenity>() {
@@ -357,6 +359,11 @@ public class SearchCoreFactory {
 							SearchResult sr = new SearchResult(phrase);
 							sr.otherNames = object.getAllNames(true);
 							sr.localeName = object.getName(phrase.getSettings().getLang(), true);
+							if(phrase.isUnknownSearchWordComplete()) {
+								if(!nm.matches(sr.localeName) || !nm.matches(sr.otherNames)) {
+									return false;
+								}
+							}
 							sr.object = object;
 							sr.preferredZoom = 17;
 							sr.file = currentFile[0];
@@ -364,7 +371,7 @@ public class SearchCoreFactory {
 							if(object.getSubType().equals("city") || 
 									object.getSubType().equals("country")) {
 								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
-								sr.preferredZoom = object.getSubType().equals("country") ? 8 : 13;
+								sr.preferredZoom = object.getSubType().equals("country") ? 7 : 13;
 							} else if(object.getSubType().equals("town")) {
 								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
 							} else {
@@ -395,7 +402,7 @@ public class SearchCoreFactory {
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			if(p.hasObjectType(ObjectType.POI) || 
-					p.getLastWord().length() == 0) {
+					!p.isUnknownSearchWordPresent()) {
 				return -1;
 			}
 			if(p.hasObjectType(ObjectType.POI_TYPE)) {
@@ -405,7 +412,7 @@ public class SearchCoreFactory {
 					return -1;
 				}
 			}
-			if(p.getLastWord().length() > 3 || p.getRadiusLevel() > 1) {
+			if(p.getUnknownSearchWordLength() > 3 || p.getRadiusLevel() > 1) {
 				return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR;
 			}
 			return -1;
@@ -435,11 +442,11 @@ public class SearchCoreFactory {
 			});
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			for (PoiFilter pf : topVisibleFilters) {
-				if (Algorithms.isEmpty(phrase.getLastWord()) || nm.matches(pf.getTranslation())) {
+				if (!phrase.isUnknownSearchWordPresent() || nm.matches(pf.getTranslation())) {
 					results.add(pf);
 				}
 			}
-			if (!Algorithms.isEmpty(phrase.getLastWord())) {
+			if (phrase.isUnknownSearchWordPresent()) {
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 				while (it.hasNext()) {
 					Entry<String, PoiType> e = it.next();
@@ -465,7 +472,7 @@ public class SearchCoreFactory {
 			if (p.hasObjectType(ObjectType.POI) || p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
 			}
-			if(!p.isNoSelectedType() && p.getLastWord().isEmpty()) {
+			if(!p.isNoSelectedType() && !p.isUnknownSearchWordPresent()) {
 				return -1;
 			}
 			return SEARCH_AMENITY_TYPE_API_PRIORITY;
@@ -564,7 +571,7 @@ public class SearchCoreFactory {
 										res.localeName = object.getSubType();
 									}
 								}
-								if (!Algorithms.isEmpty(phrase.getLastWord())
+								if (phrase.isUnknownSearchWordPresent()
 										&& !(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
 									return false;
 								}
@@ -628,7 +635,7 @@ public class SearchCoreFactory {
 						// streets related to city
 						continue;
 					}
-					if (!Algorithms.isEmpty(phrase.getLastWord())
+					if (phrase.isUnknownSearchWordPresent()
 							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
 						continue;
 					}
@@ -697,7 +704,7 @@ public class SearchCoreFactory {
 			
 			if(s != null) {
 				BinaryMapIndexReader file = phrase.getLastSelectedWord().getResult().file;
-				String lw = phrase.getLastWord();
+				String lw = phrase.getUnknownSearchWord();
 				NameStringMatcher sm = phrase.getNameStringMatcher();
 				if (cacheBuilding != s) {
 					cacheBuilding = s;
@@ -813,12 +820,12 @@ public class SearchCoreFactory {
 		
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			if(phrase.getLastWord().length() == 0) {
+			if(!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
 			boolean parseUrl = parseUrl(phrase, resultMatcher);
 			if(!parseUrl) {
-				parseLocation2(phrase, resultMatcher);
+				parseLocation(phrase, resultMatcher);
 			}
 			return super.search(phrase, resultMatcher);
 		}
@@ -1106,23 +1113,16 @@ public class SearchCoreFactory {
 			}
 		}
 		
-		private void parseLocation2(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			String lw = phrase.getLastWord();
-			SearchWord sw = phrase.getLastSelectedWord();
-			LatLon l = null;
-			if (sw != null && sw.getType() == ObjectType.UNKNOWN_NAME_FILTER) {
-				l = parseLocation(sw.getWord() + ", " + lw);
-			}
-			if (l == null) {
-				l = parseLocation(lw);
-			}
+		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+			String lw = phrase.getUnknownSearchPhrase();
+			LatLon l = parseLocation(lw);
 			if (l != null) {
 				SearchResult sp = new SearchResult(phrase);
 				sp.priority = SEARCH_LOCATION_PRIORITY;
 				sp.object = sp.location = l;
 				sp.localeName = ((float) sp.location.getLatitude()) + ", " + ((float) sp.location.getLongitude());
 				sp.objectType = ObjectType.LOCATION;
-				sp.wordsSpan = 2;
+				sp.wordsSpan = lw;
 				resultMatcher.publish(sp);
 			} else if (phrase.isNoSelectedType()) {
 				LatLon ll = parsePartialLocation(lw);
@@ -1138,59 +1138,16 @@ public class SearchCoreFactory {
 			}
 		}
 		
-		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			String lw = phrase.getLastWord();
-			SearchWord sw = phrase.getLastSelectedWord();
-			double dd = LocationConvert.convert(lw, false);
-			if(!Double.isNaN(dd)) {
-				double pd = Double.NaN;
-				if(sw != null && sw.getType() == ObjectType.UNKNOWN_NAME_FILTER) {
-					if(isKindOfNumber(sw.getWord())) {
-						pd = LocationConvert.convert(sw.getWord(), false);
-					}
-				}
-				if(!Double.isNaN(pd)) {
-					SearchResult sp = new SearchResult(phrase);
-					sp.priority = SEARCH_LOCATION_PRIORITY;
-					sp.object = sp.location = new LatLon(pd, dd);
-					sp.localeName = ((float)sp.location.getLatitude()) +" " + ((float) sp.location.getLongitude());
-					sp.objectType = ObjectType.LOCATION;
-					sp.wordsSpan = 2;
-					resultMatcher.publish(sp);
-				} else if (phrase.isNoSelectedType()) {
-					SearchResult sp = new SearchResult(phrase);
-					sp.priority = SEARCH_LOCATION_PRIORITY;
-					sp.object = sp.location = new LatLon(dd, 0);
-					sp.localeName = ((float) sp.location.getLatitude()) + " <longitude> ";
-					sp.objectType = ObjectType.PARTIAL_LOCATION;
-					resultMatcher.publish(sp);
-				}
-			}
-		}
 
 
 		private boolean parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			String text = phrase.getLastWord();
+			String text = phrase.getUnknownSearchPhrase();
 			GeoParsedPoint pnt = GeoPointParserUtil.parse(text);
-			int wordsSpan= 1;
-			List<SearchWord> lst = phrase.getWords();
-			for (int i = lst.size() - 1; i >= 0 && (pnt == null || !pnt.isGeoPoint()); i--) {
-				SearchWord w = lst.get(i);
-				if (w.getType() != ObjectType.UNKNOWN_NAME_FILTER) {
-					break;
-				}
-				text = w.getWord() + "," + text;
-				wordsSpan++;
-				pnt = GeoPointParserUtil.parse(text);
-				if (pnt != null && pnt.isGeoPoint()) {
-					break;
-				}
-			}
 			if(pnt != null && pnt.isGeoPoint()) {
 				SearchResult sp = new SearchResult(phrase);
 				sp.priority = 0;
 				sp.object = pnt;
-				sp.wordsSpan = wordsSpan;
+				sp.wordsSpan = text;
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
 				sp.localeName = ((float)pnt.getLatitude()) +", " + ((float) pnt.getLongitude());
 				if(pnt.getZoom() > 0) {

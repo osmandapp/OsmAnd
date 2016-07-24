@@ -155,8 +155,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					OsmandSettings settings = app.getSettings();
 					AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
 					PoiUIFilter filter = new PoiUIFilter(abstractPoiType, app, "");
-					if (!Algorithms.isEmpty(searchPhrase.getLastWord())) {
-						filter.setFilterByName(searchPhrase.getLastWord());
+					if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+						filter.setFilterByName(searchPhrase.getUnknownSearchWord());
 					}
 					app.getPoiFilters().clearSelectedPoiFilters();
 					app.getPoiFilters().addSelectedPoiFilter(filter);
@@ -370,7 +370,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					sr.objectType = ObjectType.FAVORITE;
 					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 					sr.preferredZoom = 17;
-					if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
+					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
@@ -381,7 +381,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public int getSearchPriority(SearchPhrase p) {
-				if(!p.isNoSelectedType() || p.getLastWord().isEmpty()) {
+				if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
 					return -1;
 				}
 				return SEARCH_FAVORITE_API_PRIORITY;
@@ -664,7 +664,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void addMoreButton() {
 		OsmandApplication app = getMyApplication();
-		if ((!searchUICore.getPhrase().getLastWord().isEmpty() || searchUICore.getPhrase().isLastWord(ObjectType.POI_TYPE))
+		if ((searchUICore.getPhrase().isUnknownSearchWordPresent() || searchUICore.getPhrase().isLastWord(ObjectType.POI_TYPE))
 				&& searchUICore.getPhrase().getSettings().getRadiusLevel() < 7) {
 
 			QuickSearchMoreListItem moreListItem =
@@ -1006,7 +1006,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				sr.objectType = ObjectType.RECENT_OBJ;
 				sr.location = new LatLon(point.getLat(), point.getLon());
 				sr.preferredZoom = 17;
-				if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
+				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(sr);
 				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 					resultMatcher.publish(sr);
@@ -1051,7 +1051,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 					sr.localeRelatedObjectName = info.getFileName();
 					sr.preferredZoom = 17;
-					if (phrase.getLastWord().length() <= 1 && phrase.isNoSelectedType()) {
+					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);

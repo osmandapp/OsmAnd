@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -21,13 +22,19 @@ import net.osmand.util.MapUtils;
 public class SearchPhrase {
 	
 	private List<SearchWord> words = new ArrayList<>();
-	private String lastWord = "";
+	private List<String> unknownWords = new ArrayList<>();
+	private String unknownSearchWordTrim;
+	private String unknownSearchPhrase = "";
+	
 	private NameStringMatcher sm;
 	private SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
-	private String lastWordTrim;
+	
 	private QuadRect cache1kmRect;
+	private boolean unknownSearchWordComplete;
 	private static final String DELIMITER = ",";
+	private static final String ALLDELIMITERS = "\\s|,";
+	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	
 	
 	public enum SearchPhraseDataType {
@@ -50,24 +57,40 @@ public class SearchPhrase {
 			sp.words = new ArrayList<>(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
 		}
-		if (!restText.contains(DELIMITER)) {
-			sp.lastWord = restText;
+		for(SearchWord w : leftWords) {
+			if(restText.startsWith(w.getWord() + DELIMITER)) {
+				sp.words.add(w);
+				restText = restText.substring(w.getWord().length() + DELIMITER.length()).trim();
+			} else {
+				break;
+			}
+		}
+		sp.unknownSearchPhrase = restText;
+		sp.unknownWords.clear();
+		
+		if (!reg.matcher(restText).find()) {
+			sp.unknownSearchWordTrim = sp.unknownSearchPhrase.trim();
 		} else {
-			for(SearchWord w : leftWords) {
-				if(restText.startsWith(w.getWord() + DELIMITER)) {
-					sp.words.add(w);
-					restText = restText.substring(w.getWord().length() + DELIMITER.length()).trim();
-				} else {
-					break;
+			sp.unknownSearchWordTrim = "";
+			String[] ws = restText.split(ALLDELIMITERS);
+			for (int i = 0; i < ws.length ; i++) {
+				String wd = ws[i].trim();
+				if (wd.length() > 0) {
+					if (i == 0) {
+						sp.unknownSearchWordTrim = wd;
+					} else {
+						sp.unknownWords.add(wd);
+					}
 				}
 			}
-			String[] ws = restText.split(DELIMITER);
-			for (int i = 0; i < ws.length - 1; i++) {
-				sp.words.add(new SearchWord(ws[i].trim()));
-			}
-			sp.lastWord = ws[ws.length - 1];
 		}
-		sp.lastWordTrim = sp.lastWord.trim();
+		sp.unknownSearchWordComplete = sp.unknownWords.size() > 0;
+		if (text.length() > 0 && !sp.unknownSearchWordComplete) {
+			char ch = text.charAt(text.length() - 1);
+			sp.unknownSearchWordComplete = ch == ' ' || ch == ',' || ch == '\r' || ch == '\n'
+					|| ch == ';';
+		}
+		
 		return sp;
 	}
 	
@@ -76,7 +99,31 @@ public class SearchPhrase {
 		return words;
 	}
 	
+
+	public boolean isUnknownSearchWordComplete() {
+		return unknownSearchWordComplete;
+	}
+
+
+	public List<String> getUnknownSearchWords() {
+		return unknownWords;
+	}
 	
+	public String getUnknownSearchWord() {
+		return unknownSearchWordTrim;
+	}
+	
+	public String getUnknownSearchPhrase() {
+		return unknownSearchPhrase;
+	}
+	
+	public boolean isUnknownSearchWordPresent() {
+		return unknownSearchWordTrim.length() > 0;
+	}
+	
+	public int getUnknownSearchWordLength() {
+		return unknownSearchWordTrim.length() ;
+	}
 	
 	
 	public QuadRect getRadiusBBoxToSearch(int radius) {
@@ -188,14 +235,8 @@ public class SearchPhrase {
 	
 	public SearchPhrase selectWord(SearchResult res) {
 		SearchPhrase sp = new SearchPhrase(this.settings);
-		sp.words.addAll(this.words);
-		while(res.wordsSpan > 1) {
-			if(sp.words.size() > 0) {
-				sp.words.remove(sp.words.size() - 1);
-			}
-			res.wordsSpan--;
-		}
-		SearchWord sw = new SearchWord(res.localeName.trim(), res);
+		sp.words.addAll(this.words);		
+		SearchWord sw = new SearchWord(res.wordsSpan != null ? res.wordsSpan : res.localeName.trim(), res);
 		sp.words.add(sw);
 		return sp;
 	}
@@ -229,16 +270,14 @@ public class SearchPhrase {
 		return false;
 	}
 	
-	
-	
-	 
-	
-	
 	public NameStringMatcher getNameStringMatcher() {
 		if(sm != null) {
 			return sm;
 		}
-		sm = new NameStringMatcher(lastWordTrim, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		sm = new NameStringMatcher(unknownSearchWordTrim, 
+				(unknownSearchWordComplete ?  
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE : 
+					StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 		return sm;
 	}
 	
@@ -261,7 +300,7 @@ public class SearchPhrase {
 			sb.append(s.getWord()).append(DELIMITER.trim() + " ");
 		}
 		if(includeLastWord) {
-			sb.append(lastWord);
+			sb.append(unknownSearchPhrase);
 		}
 		return sb.toString();
 	}
@@ -269,11 +308,11 @@ public class SearchPhrase {
 	public String getTextWithoutLastWord() {
 		StringBuilder sb = new StringBuilder();
 		List<SearchWord> words = new ArrayList<>(this.words);
-		if(Algorithms.isEmpty(lastWordTrim) && words.size() > 0) {
+		if(Algorithms.isEmpty(unknownSearchWordTrim) && words.size() > 0) {
 			words.remove(words.size() - 1);
 		}
 		for(SearchWord s : words) {
-			sb.append(s.getWord()).append(", ");
+			sb.append(s.getWord()).append(DELIMITER.trim() + " ");
 		}
 		return sb.toString();
 	}
@@ -283,7 +322,7 @@ public class SearchPhrase {
 		for(SearchWord s : words) {
 			sb.append(s.getWord()).append(" [" + s.getType() + "], ");
 		}
-		sb.append(lastWord);
+		sb.append(unknownSearchPhrase);
 		return sb.toString();
 	}
 	
@@ -297,12 +336,7 @@ public class SearchPhrase {
 	}
 
 	public boolean isEmpty() {
-		return words.isEmpty() && lastWord.isEmpty();
-	}
-	
-	
-	public String getLastWord() {
-		return lastWordTrim;
+		return words.isEmpty() && unknownSearchPhrase.isEmpty();
 	}
 	
 	
@@ -369,8 +403,8 @@ public class SearchPhrase {
 
 		private CollatorStringMatcher sm;
 
-		public NameStringMatcher(String lastWordTrim, StringMatcherMode checkStartsFromSpace) {
-			sm = new CollatorStringMatcher(lastWordTrim, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		public NameStringMatcher(String lastWordTrim, StringMatcherMode mode) {
+			sm = new CollatorStringMatcher(lastWordTrim, mode);
 		}
 		
 		public boolean matches(Collection<String> map) {
