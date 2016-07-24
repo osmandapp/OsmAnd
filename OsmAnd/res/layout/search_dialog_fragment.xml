@@ -134,6 +134,54 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/button_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/ctx_menu_info_view_bg"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/ctx_menu_info_divider"/>
+
+            <LinearLayout
+                android:id="@+id/buttonToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/buttonToolbarImage"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_marker_dark"/>
+
+                <TextView
+                    android:id="@+id/buttonToolbarTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="@string/show_on_map"
+                    android:textColor="?attr/color_dialog_buttons"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout

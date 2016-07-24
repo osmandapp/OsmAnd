@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -48,6 +50,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -81,6 +84,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private View tabToolbarView;
 	private View tabsView;
 	private View searchView;
+	private View buttonToolbarView;
+	private ImageView buttonToolbarImage;
+	private TextView buttonToolbarText;
 	private QuickSearchMainListFragment mainSearchFragment;
 	private QuickSearchHistoryListFragment historySearchFragment;
 	private QuickSearchCategoriesListFragment categoriesSearchFragment;
@@ -135,6 +141,33 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		tabToolbarView = view.findViewById(R.id.tab_toolbar_layout);
 		tabsView = view.findViewById(R.id.tabs_view);
 		searchView = view.findViewById(R.id.search_view);
+
+		buttonToolbarView = view.findViewById(R.id.button_toolbar_layout);
+		buttonToolbarImage = (ImageView) view.findViewById(R.id.buttonToolbarImage);
+		buttonToolbarImage.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
+		buttonToolbarText = (TextView) view.findViewById(R.id.buttonToolbarTitle);
+		buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
+		view.findViewById(R.id.buttonToolbar).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SearchPhrase searchPhrase = searchUICore.getPhrase();
+				if (searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
+					OsmandSettings settings = app.getSettings();
+					AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
+					PoiUIFilter filter = new PoiUIFilter(abstractPoiType, app, "");
+					if (!Algorithms.isEmpty(searchPhrase.getLastWord())) {
+						filter.setFilterByName(searchPhrase.getLastWord());
+					}
+					app.getPoiFilters().clearSelectedPoiFilters();
+					app.getPoiFilters().addSelectedPoiFilter(filter);
+					if (location != null) {
+						settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
+					}
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+					dismiss();
+				}
+			}
+		});
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(app.getIconsCache().getThemedIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
@@ -399,10 +432,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void updateTabbarVisibility(boolean show) {
 		if (show && tabsView.getVisibility() == View.GONE) {
 			tabToolbarView.setVisibility(View.VISIBLE);
+			buttonToolbarView.setVisibility(View.GONE);
 			tabsView.setVisibility(View.VISIBLE);
 			searchView.setVisibility(View.GONE);
 		} else if (!show && tabsView.getVisibility() == View.VISIBLE) {
 			tabToolbarView.setVisibility(View.GONE);
+			buttonToolbarView.setVisibility(View.VISIBLE);
 			tabsView.setVisibility(View.GONE);
 			searchView.setVisibility(View.VISIBLE);
 		}
@@ -762,6 +797,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void enableSelectionMode(boolean selectionMode,int position) {
 		historySearchFragment.setSelectionMode(selectionMode, position);
 		tabToolbarView.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
+		buttonToolbarView.setVisibility(View.GONE);
 		toolbar.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
 		toolbarEdit.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 		viewPager.setSwipeLocked(selectionMode);
