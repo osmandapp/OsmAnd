@@ -1839,4 +1839,43 @@
 	<string name="poi_architecture_romanesque">Arĥitekturo: romanika</string>
 
 	<string name="poi_cross">Kruco</string>
+	<string name="poi_tunnel_waterway">Tunelo akvovoja</string>
+	<string name="poi_tunnel_car">Tunelo voja</string>
+	<string name="poi_tunnel_pedestrian">Tunelo piedirada</string>
+	<string name="poi_tunnel_railway">Tunelo fervoja</string>
+	<string name="poi_bridge_car">Ponto voja</string>
+	<string name="poi_bridge_pedestrian">Ponto piedirada</string>
+	<string name="poi_bridge_bicycle">Ponto bicikla</string>
+	<string name="poi_bridge_railway">Ponto fervoja</string>
+	<string name="poi_bridge_waterway">Ponto akvovoja</string>
+	<string name="poi_bridge_structure_beam">Strukturo: traboponto</string>
+	<string name="poi_bridge_structure_simple_suspension">Strukturo: ŝnurponto</string>
+	<string name="poi_bridge_structure_suspension">Strukturo: pendoponto</string>
+	<string name="poi_bridge_structure_arch">Strukturo: arkoponto</string>
+	<string name="poi_bridge_structure_truss">Strukturo: ĵaluziponto</string>
+	<string name="poi_bridge_structure_floating">Strukturo: flosponto</string>
+	<string name="poi_bridge_structure_humpback">Strukturo: arkoponto ĝiba</string>
+	<string name="poi_bridge_structure_cable_stayed">Strukturo: stajponto</string>
+	<string name="poi_bridge_structure_boardwalk">Strukturo: tramalsekejo</string>
+	<string name="poi_bridge_structure_simple_wooden">Strukturo: ligna simpla</string>
+	<string name="poi_bridge_structure_viaduct">Strukturo: viadukto</string>
+	<string name="poi_bridge_structure_aqueduct">Strukturo: akvedukto</string>
+	<string name="poi_bridge_structure_log">Strukturo: arbotrunka travadejo</string>
+	<string name="poi_bridge_type_movable">Ponto-speco: movebla</string>
+	<string name="poi_bridge_movable_bascule">Speco de moveblaponto: baskula</string>
+	<string name="poi_bridge_movable_swing">Speco de moveblaponto: turnebla</string>
+	<string name="poi_bridge_movable_lift">Speco de moveblaponto: liftoponto</string>
+	<string name="poi_bridge_movable_drawbridge">Speco de moveblaponto: levoponto</string>
+	<string name="poi_bridge_movable_submersible">Speco de moveblaponto: submergebla</string>
+	<string name="poi_bridge_movable_transporter">Speco de moveblaponto: transporta</string>
+	<string name="poi_bridge_movable_retractable">Speco de moveblaponto: ŝovebla</string>
+
+	<string name="poi_lit_yes">Prilumado: jes</string>
+	<string name="poi_lit_no">Prilumado: ne</string>
+
+	<string name="poi_surface_unpaved">Pavimo: malfirma</string>
+	<string name="poi_surface_paved">Pavimo: firma</string>
+	<string name="poi_surface_asphalt">Pavimo: asfalto</string>
+	<string name="poi_surface_concrete">Pavimo: betono</string>
+	<string name="poi_surface_sett">Pavimo: ŝtona</string>
 	</resources>
