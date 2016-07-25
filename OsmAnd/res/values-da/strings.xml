@@ -2397,4 +2397,5 @@
     <string name="show_something_on_map">Vis %1$s på kortet</string>
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
     <string name="confirmation_to_delete_history_items">Slet valgte historik elementer?</string>
+    <string name="back_to_search">Tilbage til søgning</string>
     </resources>
