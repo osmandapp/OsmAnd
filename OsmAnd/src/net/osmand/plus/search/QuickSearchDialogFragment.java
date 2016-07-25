@@ -484,8 +484,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	@Override
 	public void onDismiss(DialogInterface dialog) {
-		getMapActivity().setQuickSearchTopbarActive(false);
-		getChildFragmentManager().popBackStack();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			getMapActivity().setQuickSearchTopbarActive(false);
+			getChildFragmentManager().popBackStack();
+		}
 		super.onDismiss(dialog);
 	}
 
@@ -570,7 +573,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				break;
 
 			case MAIN:
-				if (!Algorithms.isEmpty(searchQuery)) {
+				if (!Algorithms.isEmpty(searchQuery) && !searchQuery.equals(searchEditText.getText().toString())) {
 					String txt = searchQuery;
 					searchQuery = "";
 					searchEditText.setText(txt);
