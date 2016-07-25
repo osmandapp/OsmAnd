@@ -2208,4 +2208,5 @@
     <string name="confirmation_to_delete_history_items">¿Quieres borrar los elementos del historial marcados?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en un radio de %1$s</string>
+    <string name="back_to_search">Volver a la búsqueda</string>
     </resources>
