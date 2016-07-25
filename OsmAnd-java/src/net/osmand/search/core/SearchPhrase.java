@@ -269,8 +269,8 @@ public class SearchPhrase {
 		sp.words.addAll(0, this.words);	
 		if(unknownWords != null) {
 			sp.lastUnknownSearchWordComplete = lastComplete;
-			for(int i = 0; i < unknownWords.size(); i++) {
-				if(i== 0) {
+			for (int i = 0; i < unknownWords.size(); i++) {
+				if (i == 0) {
 					sp.unknownSearchWordTrim = unknownWords.get(0);
 				} else {
 					sp.unknownWords.add(unknownWords.get(i));
