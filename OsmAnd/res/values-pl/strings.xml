@@ -2228,5 +2228,6 @@
     <string name="show_on_map">Pokaż na mapie</string>
     <string name="show_something_on_map">Pokaż %1$s na mapie</string>
     <string name="release_2_4">" • Nowa wszechstronna metoda wyszukiwania tekstowego.\n\n• Ulepszono działanie z zestawem audio Bleutooth.\n\n• Poprawiono wybór pasów ruchów podczas skrętów.\n\n• Mnóstwo innych ulepszeń i poprawek.\n\ni więcej... "</string>
-    <string name="dist_away_from_my_location">%1$s pozostało</string>
+    <string name="dist_away_from_my_location">Szukaj w odległości %1$s</string>
+    <string name="confirmation_to_delete_history_items">Czy chcesz usunąć wybrane elementy z historii?</string>
     </resources>
