@@ -448,7 +448,8 @@ public class MapActivityActions implements DialogProvider {
 		ApplicationMode mode = getRouteMode(null);
 		//app.getSettings().APPLICATION_MODE.set(mode);
 		app.getRoutingHelper().setAppMode(mode);
-		app.initVoiceCommandPlayer(mapActivity, true, null, false, false);
+		//Test for #2810: No need to init player here?
+		//app.initVoiceCommandPlayer(mapActivity, true, null, false, false);
 		// save application mode controls
 		settings.FOLLOW_THE_ROUTE.set(false);
 		app.getRoutingHelper().setFollowingMode(false);

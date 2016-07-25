@@ -60,7 +60,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	private static final String WEAR_ALERT = "WEAR_ALERT";
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;
-	private AudioFocusHelper mAudioFocusHelper;
+	private static AudioFocusHelper mAudioFocusHelper;
 	protected String language = "";
 	protected int streamType;
 	private int currentVersion;
