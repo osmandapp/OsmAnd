@@ -134,6 +134,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (mTts != null){
 			mTts.stop();
 		}
+		// TODO: Issue #2810: Audio focus issues when "off route" is detected during an ongoing prompt (then stop() is called here)
 		if (ctx != null) {
 			abandonAudioFocus();
 		}

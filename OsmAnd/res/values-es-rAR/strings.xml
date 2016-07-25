@@ -2205,4 +2205,6 @@
     <string name="release_2_4">" • Nueva búsqueda de texto libre muy potente.
 \n\n • Muchas mejoras de audio mediante Bluetooth.\n\n • Mejoras en las indicaciones por voz con carriles de giro.
 \n\n • Muchas otras mejoras y correcciones de errores.\n\n y más… "</string>
+    <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
+    <string name="dist_away_from_my_location">a %1$s</string>
     </resources>

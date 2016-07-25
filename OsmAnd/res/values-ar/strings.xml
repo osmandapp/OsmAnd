@@ -2191,4 +2191,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_create_groups_confirm">من أجل إنشاء مجموعات يجب أن تكون مستخدما مسجلا في OsMo.</string>
     <string name="osmo_set_moving_target">تعيين كهدف متنقل</string>
     <string name="osmo_group">مجموعة أوسمو OsMo</string>
+    <string name="show_something_on_map">اظهر %1$s على الخريطة</string>
+    <string name="release_2_4">" باحث نصوص جديد مجاني  وكفئ.\n\nتحسين الصوت كثيرا عن طريق البلوتوث.\n\nتحسين مرشد الطرقات مع التفاف الممرات.\n\nالعديد من التحسينات الاخرى واصلاح الخلل.\n\nواكثر … "</string>
+    <string name="dist_away_from_my_location">%1$s بعيد</string>
+    <string name="show_on_map">اظهر على الخريطة</string>
+    <string name="share_history_subject">" تمت مشاركته من طرف OsmAnd"</string>
     </resources>
