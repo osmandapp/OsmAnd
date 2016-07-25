@@ -2007,4 +2007,30 @@
 	<string name="poi_crop_grass">Kultivaĵo: herbo</string>
 	<string name="poi_crop_corn">Kultivaĵo: maizo</string>
 	<string name="poi_crop_cereal">Kultivaĵo: panherbo</string>
+	<string name="poi_crop_sugarcane">Kultivaĵo: sukerkano</string>
+	<string name="poi_crop_wheat">Kultivaĵo: tritiko</string>
+	<string name="poi_crop_soy">Kultivaĵo: sojo</string>
+	<string name="poi_crop_barley">Kultivaĵo: hordeo</string>
+	<string name="poi_crop_vegetables">Kultivaĵo: legomoj</string>
+	<string name="poi_crop_hop">Kultivaĵo: lupulo</string>
+	<string name="poi_crop_rape">Kultivaĵo: kolzo</string>
+	<string name="poi_crop_beet">Kultivaĵo: beto</string>
+	<string name="poi_crop_lavender">Kultivaĵo: lavendo</string>
+	<string name="poi_crop_tea">Kultivaĵo: teo</string>
+	<string name="poi_crop_coffee">Kultivaĵo: kafarbo</string>
+	<string name="poi_crop_poultry">Kultivaĵo: manĝaĵo por kortobirdoj</string>
+	<string name="poi_crop_sunflower">Kultivaĵo: sunfloro (helianto)</string>
+	<string name="poi_crop_raspberry">Kultivaĵo: frambo</string>
+	<string name="poi_crop_tobacco">Kultivaĵo: tabako</string>
+	<string name="poi_crop_strawberry">Kultivaĵo: frago</string>
+	<string name="poi_crop_vegetables_flowers">Kultivaĵo: legomoj, floroj</string>
+	<string name="poi_crop_cassava">Kultivaĵo: manioko</string>
+	<string name="poi_crop_cranberry">Kultivaĵo: oksikoko</string>
+	<string name="poi_crop_asparagus">Kultivaĵo: asparago</string>
+	<string name="poi_crop_flowers">Kultivaĵo: floroj</string>
+
+	<string name="poi_surveillance_indoor">Fara kontrolado: ene</string>
+	<string name="poi_surveillance_outdoor">Fara kontrolado: ekstere</string>
+	<string name="poi_surveillance_public">Fara kontrolado: publika ejo</string>
+
 	</resources>
