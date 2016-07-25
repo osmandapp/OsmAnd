@@ -61,11 +61,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		if (mediaPlayer != null){
 			mediaPlayer.stop();
 		}
-		// TODO: Issue #2810: Audio focus issues when ongoing prompt is interrupted by stop(), i.e. when off-route is detected. Temp workaround is to nullify and always re-init player.
-		//if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			mediaPlayer.release();
-			mediaPlayer = null;
-		//}
+		// TODO: Issue #2810: Audio focus issues when "off route" is detected during an ongoing prompt (then stop() is called here)
 		if (ctx != null) {
 			abandonAudioFocus();
 		}
