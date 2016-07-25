@@ -2579,6 +2579,7 @@ public class OsmandSettings {
 			new BooleanPreference("show_street_name", false).makeProfile();
 
 	{
+		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.DEFAULT, false);
 		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.CAR, true);
 		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);

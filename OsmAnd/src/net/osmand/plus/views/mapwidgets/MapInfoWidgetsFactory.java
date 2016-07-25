@@ -322,8 +322,7 @@ public class MapInfoWidgetsFactory {
 						
 					}
 				}
-			} else if (settings.getApplicationMode() != ApplicationMode.DEFAULT &&
-					map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
+			} else if (map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if (rt != null) {
