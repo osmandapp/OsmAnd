@@ -1,7 +1,6 @@
 package net.osmand.search.core;
 
 import java.util.Collection;
-import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;

@@ -21,4 +21,8 @@ public enum ObjectType {
 		return hasLocation;
 	}
 	
+	public static boolean isAddress(ObjectType t ) {
+		return t == CITY || t == VILLAGE || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
+	}
+	
 }
