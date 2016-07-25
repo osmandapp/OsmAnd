@@ -2223,4 +2223,6 @@
     <string name="show_on_map">Ammustra in sa mapa</string>
     <string name="share_history_subject">" cumpartzidu pro mèdiu de OsmAnd"</string>
     <string name="lang_hsb">Sorabu (superiore)</string>
+    <string name="show_something_on_map">Ammustra %1$s in sa mapa</string>
+    <string name="dist_away_from_my_location">a %1$s dae inoghe</string>
     </resources>
