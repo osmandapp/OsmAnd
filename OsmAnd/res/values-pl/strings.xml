@@ -2226,4 +2226,5 @@
     <string name="lang_hsb">Górnołużycki</string>
     <string name="share_history_subject">" udostępnione przez OsmAnd"</string>
     <string name="show_on_map">Pokaż na mapie</string>
+    <string name="show_something_on_map">Pokaż %1$s na mapie</string>
     </resources>
