@@ -2038,7 +2038,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 //		File fl = new File(System.getProperty("maps") + /Synthetic_test_rendering.obf");
-		File fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe_merge.obf");
+		File fl = new File(System.getProperty("maps") + "/Map.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2326,7 +2326,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "Benelux", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "Красноарм", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 //		req.setBBoxRadius(52.276142, 4.8608723, 15000);
 		reader.searchAddressDataByName(req);
 	}
