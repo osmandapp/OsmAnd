@@ -2394,4 +2394,6 @@
     <string name="share_history_subject">" Delt via OsmAnd"</string>
     <string name="show_on_map">Vis på kortet</string>
     <string name="release_2_4">" • Ny meget kraftfuld fritekstsøgning.\n\n  • Meget forbedret lyd via Bluetooth.\n\n  • Forbedret rutevejledning med svingbaner.\n\n  • Mange andre forbedringer og fejlrettelser.\n\n  og mere… "</string>
+    <string name="show_something_on_map">Vis %1$s på kortet</string>
+    <string name="dist_away_from_my_location">%1$s væk</string>
     </resources>
