@@ -15,7 +15,6 @@ import android.widget.TextView;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -210,7 +209,7 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public void updateInfo() {
-			boolean isQuickSearchActive = map.isQuickSearchDialogActive();
+			boolean isQuickSearchActive = map.isQuickSearchTopbarActive();
 			if (isQuickSearchActive) {
 				QuickSearchDialogFragment fragment = map.getQuickSearchDialogFragment();
 				if (fragment != null) {
@@ -335,7 +334,7 @@ public class MapInfoWidgetsFactory {
 					text = "\u2316+  " + text;
 				}
 			}
-			if (map.isQuickSearchDialogActive()) {
+			if (map.isQuickSearchTopbarActive()) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);

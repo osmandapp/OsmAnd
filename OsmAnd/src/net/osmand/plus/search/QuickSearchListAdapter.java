@@ -33,6 +33,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private LatLon location;
 	private Float heading;
+	private boolean useMapCenter;
 
 	private int searchMoreItemPosition;
 	private int selectAllItemPosition;
@@ -95,6 +96,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public void setHeading(Float heading) {
 		this.heading = heading;
+	}
+
+	public boolean isUseMapCenter() {
+		return useMapCenter;
+	}
+
+	public void setUseMapCenter(boolean useMapCenter) {
+		this.useMapCenter = useMapCenter;
 	}
 
 	public boolean isSelectionMode() {
@@ -376,9 +385,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		TextView distanceText = (TextView) view.findViewById(R.id.distance);
 		ImageView direction = (ImageView) view.findViewById(R.id.direction);
 
-		float myHeading = heading == null ? 0f : heading;
-		DashLocationFragment.updateLocationView(false, location,
-				myHeading, direction, distanceText,
+		DashLocationFragment.updateLocationView(useMapCenter, location,
+				heading, direction, distanceText,
 				listItem.getSearchResult().location.getLatitude(),
 				listItem.getSearchResult().location.getLongitude(),
 				screenOrientation, app, activity);
