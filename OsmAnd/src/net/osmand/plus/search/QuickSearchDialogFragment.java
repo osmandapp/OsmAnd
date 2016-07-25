@@ -2,6 +2,7 @@ package net.osmand.plus.search;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -209,14 +211,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		view.findViewById(R.id.deleteButton).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-				List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
-				for (QuickSearchListItem searchListItem : selectedItems) {
-					HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-					helper.remove(historyEntry);
-				}
-				reloadHistory();
-				enableSelectionMode(false, -1);
+				/*)
+				final AlertDialog.Builder builder = new AlertDialog.Builder(app);
+				builder.setTitle(R.string.confirmation_to_delete_history_items);
+				builder.setView(view);
+				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					*/
+						SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
+						for (QuickSearchListItem searchListItem : selectedItems) {
+							HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
+							helper.remove(historyEntry);
+						}
+						reloadHistory();
+						enableSelectionMode(false, -1);
+				/*
+					}
+				});
+				builder.setNegativeButton(R.string.shared_string_no, null);
+				builder.create().show();
+				*/
 			}
 		});
 
