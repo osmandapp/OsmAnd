@@ -2033,4 +2033,14 @@
 	<string name="poi_surveillance_outdoor">Fara kontrolado: ekstere</string>
 	<string name="poi_surveillance_public">Fara kontrolado: publika ejo</string>
 
+	<string name="poi_clothes_women">Inaj vestoj</string>
+	<string name="poi_clothes_underwear">Subvesto</string>
+	<string name="poi_clothes_men">Viraj vestoj</string>
+	<string name="poi_clothes_wedding">Roboj geedziĝaj</string>
+	<string name="poi_clothes_sports">Sportaj vestoj</string>
+	<string name="poi_clothes_babies">Bebaj vestoj</string>
+	<string name="poi_clothes_denim">Ĝinzoŝtofaj vestoj</string>
+	<string name="poi_clothes_workwear">Laborvestoj</string>
+	<string name="poi_clothes_hats">Kapvestoj</string>
+	<string name="poi_clothes_fur">Felaj vestoj</string>
 	</resources>
