@@ -2046,4 +2046,17 @@
 	<string name="poi_clothes_leather">Ledaj vestoj</string>
 	<string name="poi_clothes_costumes">Kostumoj</string>
 	<string name="poi_clothes_traditional">Tradiciaj vestoj</string>
+	<string name="poi_clothes_suits">Garnaĵoj</string>
+	<string name="poi_clothes_maternity">Vestoj por gravedulinoj</string>
+	<string name="poi_clothes_vintage">Eksmodaj vestoj</string>
+	<string name="poi_clothes_oversize">Vestoj por dikuloj</string>
+	<string name="poi_clothes_schoolwear">Pelerinoj de lernejanoj</string>
+	<string name="poi_clothes_swimwear">Banvestoj</string>
+	<string name="poi_clothes_socks">Ŝtrumpoj</string>
+	<string name="poi_clothes_shirts">Ĉemizoj</string>
+	<string name="poi_clothes_dance">Vestoj por danco</string>
+	<string name="poi_clothes_military">Militistaj vestoj</string>
+
+	<string name="poi_historic_milestone">Mejloŝtono historia</string>
+
 	</resources>
