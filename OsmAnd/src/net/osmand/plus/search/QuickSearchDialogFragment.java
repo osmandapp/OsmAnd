@@ -62,6 +62,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -260,6 +261,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					String newText = searchUICore.getPhrase().getTextWithoutLastWord();
 					searchEditText.setText(newText);
 					searchEditText.setSelection(newText.length());
+					SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
+					if (word != null && word.getResult() != null) {
+						buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
+					} else {
+						buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
+					}
 				}
 			}
 		});
@@ -659,6 +666,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchQuery = txt;
 		searchEditText.setText(txt);
 		searchEditText.setSelection(txt.length());
+		buttonToolbarText.setText(getMyApplication().getString(R.string.show_something_on_map, sr.localeName).toUpperCase());
 		runCoreSearch(txt);
 	}
 
