@@ -1401,7 +1401,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="logged_as">تسجيل الدخول ك %1$s</string>
 	<string name="speed_limit_exceed">الحد المسموح للسرعة</string>
 	<string name="fav_point_emoticons_message">تم تعديل اسم النقطة المفضلة لديك إلى %1$s لتسهيل حفظ النص مع الوجوه التعبيرية بشكل صحيح إلى ملف.</string>
-    <string name="print_route">طباعة الطريق</string>
+    <string name="print_route">طباعة مسار الطريق</string>
     <string name="text_size_descr">تعيين حجم النص على الخريطة.</string>
     <string name="text_size">حجم النص</string>
     <string name="traffic_warning_speed_limit">حد السرعة</string>
@@ -2192,8 +2192,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_set_moving_target">تعيين كهدف متنقل</string>
     <string name="osmo_group">مجموعة أوسمو OsMo</string>
     <string name="show_something_on_map">اظهر %1$s على الخريطة</string>
-    <string name="release_2_4">" باحث نصوص جديد مجاني  وكفئ.\n\nتحسين الصوت كثيرا عن طريق البلوتوث.\n\nتحسين مرشد الطرقات مع التفاف الممرات.\n\nالعديد من التحسينات الاخرى واصلاح الخلل.\n\nواكثر … "</string>
+    <string name="release_2_4">" • باحث نصوص جديد مجاني وكفئ\n\n • تحسين ملحوظ للصوت عن طريق البلوتوث\n\n • إدخال تحسينات في مرشد الطراقات، و الإعلانات الصوتية مع تعيين ممرات الالتفاف\n\n • إضافة باقة من اللغات و التراجم مع دعم لغات مناطق عدة\n\n • العديد من التحسينات الأخرى وإصلاحات خلل\n\nوأكثر … "</string>
     <string name="dist_away_from_my_location">%1$s بعيد</string>
     <string name="show_on_map">اظهر على الخريطة</string>
     <string name="share_history_subject">" تمت مشاركته من طرف OsmAnd"</string>
+    <string name="route_general_information">المسافة الإجمالية %1$s، مدة السفر %2$d سا و %3$d د.</string>
     </resources>
