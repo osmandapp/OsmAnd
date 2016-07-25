@@ -2395,5 +2395,6 @@
     <string name="show_on_map">Vis på kortet</string>
     <string name="release_2_4">" • Ny meget kraftfuld fritekstsøgning.\n\n  • Meget forbedret lyd via Bluetooth.\n\n  • Forbedret rutevejledning med svingbaner.\n\n  • Mange andre forbedringer og fejlrettelser.\n\n  og mere… "</string>
     <string name="show_something_on_map">Vis %1$s på kortet</string>
-    <string name="dist_away_from_my_location">%1$s væk</string>
+    <string name="dist_away_from_my_location">Søg %1$s væk</string>
+    <string name="confirmation_to_delete_history_items">Slet valgte historik elementer?</string>
     </resources>
