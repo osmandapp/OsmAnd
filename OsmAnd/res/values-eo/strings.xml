@@ -2025,4 +2025,5 @@
     <string name="release_2_4">" • Nova ebloplena tekstoserĉilo.\n\n• Plibonigitaj aŭd-sciigoj per Bludento.\n\n• Plibonigita elekto de koridoro dum navigado.\n\n• Multaj aliaj plibonigoj kaj korektoj.\n\nkaj pli... "</string>
     <string name="dist_away_from_my_location">Serĉi en radiuso de %1$s</string>
     <string name="confirmation_to_delete_history_items">Ĉu vi volas forigi elektitajn eroj de historio?</string>
+    <string name="back_to_search">Reveni al serĉo</string>
     </resources>
