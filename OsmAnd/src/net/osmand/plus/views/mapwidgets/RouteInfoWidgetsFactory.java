@@ -398,8 +398,10 @@ public class RouteInfoWidgetsFactory {
 						}
 						mx = ro.getMaximumSpeed(direction);
 					}
-				} else {
+				} else if (rh != null) {
 					mx = rh.getCurrentMaxSpeed();
+				} else {
+					mx = 0f;
 				}
 				if (cachedSpeed != mx) {
 					cachedSpeed = mx;
