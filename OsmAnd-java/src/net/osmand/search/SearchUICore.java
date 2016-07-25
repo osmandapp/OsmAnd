@@ -246,12 +246,15 @@ public class SearchUICore {
 				a2 = (Amenity) r2.object;
 			}
 			if (r1.localeName.equals(r2.localeName)) {
-				double similarityRadius = 20;
+				double similarityRadius = 30;
 				if(a1 != null && a2 != null) {
 					if(a1.getType().getKeyName().equals("natural") && 
 							a2.getType().getKeyName().equals("natural")) {
 						similarityRadius = 10000;
 					}
+				}
+				if(ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
+					similarityRadius = 100;
 				}
 				return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
 			}
