@@ -371,8 +371,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchEditText.setHint(R.string.search_poi_category_hint);
 		if (location != null) {
 			double d = MapUtils.getDistance(clt, location.getLatitude(), location.getLongitude());
-			if(MapUtils.getDistance(clt, location.getLatitude(), location.getLongitude()) < DISTANCE_THRESHOLD) {
+			if(d < DISTANCE_THRESHOLD) {
 				centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+			} else {
 				String n = getString(R.string.search_poi_category_hint);
 				String dist = OsmAndFormatter.getFormattedDistance((float) d, mapActivity.getMyApplication());
 				searchEditText.setHint(n +", " + getString(R.string.dist_away_from_my_location, dist));
