@@ -1,12 +1,14 @@
 package net.osmand.plus.search;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -30,28 +32,29 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.LockableViewPager;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.search.SearchUICore;
@@ -71,7 +74,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -107,6 +109,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private net.osmand.Location location = null;
 	private Float heading = null;
+	private boolean useMapCenter;
+	private boolean paused;
 
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
@@ -154,11 +158,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		view.findViewById(R.id.buttonToolbar).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				OsmandSettings settings = app.getSettings();
 				SearchPhrase searchPhrase = searchUICore.getPhrase();
-				if (searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
-					OsmandSettings settings = app.getSettings();
-					AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
-					PoiUIFilter filter = new PoiUIFilter(abstractPoiType, app, "");
+				if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
+					PoiUIFilter filter;
+					if (searchPhrase.isNoSelectedType()) {
+						filter = new PoiUIFilter(null, app, "");
+					} else {
+						AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
+						filter = new PoiUIFilter(abstractPoiType, app, "");
+					}
 					if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
 						filter.setFilterByName(searchPhrase.getUnknownSearchWord());
 					}
@@ -167,8 +176,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					if (location != null) {
 						settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 					}
+					getMapActivity().setQuickSearchTopbarActive(searchPhrase.isNoSelectedType());
 					MapActivity.launchMapActivityMoveToTop(getActivity());
-					hide();
+					if (searchPhrase.isNoSelectedType()) {
+						hide();
+					} else {
+						dismiss();
+					}
+				} else {
+					SearchWord word = searchPhrase.getLastSelectedWord();
+					if (word != null && word.getLocation() != null) {
+						SearchResult searchResult = word.getResult();
+						String name = QuickSearchListItem.getName(app, searchResult);
+						String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+						getMyApplication().getSettings().setMapLocationToShow(
+								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+								searchResult.preferredZoom, pointDescription, true, searchResult.object);
+
+						getMapActivity().setQuickSearchTopbarActive(true);
+						MapActivity.launchMapActivityMoveToTop(getActivity());
+						hide();
+					}
 				}
 			}
 		});
@@ -212,28 +241,30 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		view.findViewById(R.id.deleteButton).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				/*)
-				final AlertDialog.Builder builder = new AlertDialog.Builder(app);
-				builder.setTitle(R.string.confirmation_to_delete_history_items);
-				builder.setView(view);
-				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+
+				new DialogFragment() {
+					@NonNull
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-					*/
-						SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
-						for (QuickSearchListItem searchListItem : selectedItems) {
-							HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-							helper.remove(historyEntry);
-						}
-						reloadHistory();
-						enableSelectionMode(false, -1);
-				/*
+					public Dialog onCreateDialog(Bundle savedInstanceState) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+						builder.setTitle(R.string.confirmation_to_delete_history_items)
+								.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+										List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
+										for (QuickSearchListItem searchListItem : selectedItems) {
+											HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
+											helper.remove(historyEntry);
+										}
+										reloadHistory();
+										enableSelectionMode(false, -1);
+									}
+								})
+								.setNegativeButton(R.string.shared_string_no, null);
+						return builder.create();
 					}
-				});
-				builder.setNegativeButton(R.string.shared_string_no, null);
-				builder.create().show();
-				*/
+				}.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
 			}
 		});
 
@@ -257,6 +288,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			@Override
 			public void afterTextChanged(Editable s) {
 				String newQueryText = s.toString();
+				updateClearButtonAndHint();
 				updateClearButtonVisibility(newQueryText.length() > 0);
 				updateTabbarVisibility(newQueryText.length() == 0);
 				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
@@ -282,21 +314,22 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					} else {
 						buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
 					}
- 				} else {
- 					searchEditText.setHint(R.string.search_poi_category_hint);
- 					clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
- 					if(location != null && searchUICore != null) {
- 						LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
- 						SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
- 								new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
- 						searchUICore.updateSettings(ss);
- 					}
- 					
- 				}
+				} else if (useMapCenter && location != null) {
+					useMapCenter = false;
+					updateUseMapCenterUI();
+					startLocationUpdate();
+					LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+					SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
+							new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+					searchUICore.updateSettings(ss);
+					updateClearButtonAndHint();
+				}
 			}
 		});
+
 		setupSearch(mapActivity);
 
+		updateClearButtonAndHint();
 		addMainSearchFragment();
 
 		searchEditText.requestFocus();
@@ -310,6 +343,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void show() {
+		getMapActivity().setQuickSearchTopbarActive(false);
+		if (useMapCenter) {
+			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
+					new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
+			searchUICore.updateSettings(ss);
+			updateLocationUI(mapCenter, null);
+		}
 		getDialog().show();
 	}
 
@@ -347,37 +388,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		searchUICore = new SearchUICore(app.getPoiTypes(), locale, binaryMapIndexReaderArray);
 
-		/*
-		List<BinaryMapIndexReader> files = new ArrayList<>();
-		File file = new File(Environment.getExternalStorageDirectory() + "/osmand");
-		if (file.exists() && file.listFiles() != null) {
-			for (File obf : file.listFiles()) {
-				if (!obf.isDirectory() && obf.getName().endsWith(".obf")) {
-					try {
-						BinaryMapIndexReader bmir = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
-						files.add(bmir);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		}
-
-		searchUICore = new SearchUICore(app.getPoiTypes(), locale, files.toArray(new BinaryMapIndexReader[files.size()]));
-		*/
-
+		location = app.getLocationProvider().getLastKnownLocation();
 		LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		LatLon centerLatLon = clt;
 		searchEditText.setHint(R.string.search_poi_category_hint);
 		if (location != null) {
 			double d = MapUtils.getDistance(clt, location.getLatitude(), location.getLongitude());
-			if(d < DISTANCE_THRESHOLD) {
+			if (d < DISTANCE_THRESHOLD) {
 				centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
 			} else {
-				String n = getString(R.string.search_poi_category_hint);
-				String dist = OsmAndFormatter.getFormattedDistance((float) d, mapActivity.getMyApplication());
-				searchEditText.setHint(n +", " + getString(R.string.dist_away_from_my_location, dist));
-				clearButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_get_my_location, R.color.color_myloc_distance));
+				useMapCenter = true;
 			}
 		}
 		SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
@@ -415,6 +435,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						resultMatcher.publish(sr);
 					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
+					} else if (point.getCategory() != null && phrase.getNameStringMatcher().matches(point.getCategory())) {
+						resultMatcher.publish(sr);
 					}
 				}
 				return true;
@@ -447,29 +469,46 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandApplication app = getMyApplication();
-		app.getLocationProvider().addCompassListener(this);
-		app.getLocationProvider().addLocationListener(this);
-		location = app.getLocationProvider().getLastKnownLocation();
-		updateLocation(location);
-		getMapActivity().setQuickSearchActive(true);
+		if (!useMapCenter) {
+			startLocationUpdate();
+		}
+		paused = false;
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		OsmandApplication app = getMyApplication();
-		getMapActivity().setQuickSearchActive(false);
+		paused = true;
+		stopLocationUpdate();
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		getMapActivity().setQuickSearchTopbarActive(false);
 		getChildFragmentManager().popBackStack();
-		app.getLocationProvider().removeLocationListener(this);
-		app.getLocationProvider().removeCompassListener(this);
-		mainSearchFragment = null;
-		historySearchFragment = null;
-		categoriesSearchFragment = null;
+		super.onDismiss(dialog);
 	}
 
 	public Toolbar getToolbar() {
 		return toolbar;
+	}
+
+	public boolean isUseMapCenter() {
+		return useMapCenter;
+	}
+
+	private void startLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		app.getLocationProvider().addCompassListener(this);
+		app.getLocationProvider().addLocationListener(this);
+		location = app.getLocationProvider().getLastKnownLocation();
+		updateLocation(location);
+	}
+
+	private void stopLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		app.getLocationProvider().removeLocationListener(this);
+		app.getLocationProvider().removeCompassListener(this);
 	}
 
 	private void showProgressBar() {
@@ -482,9 +521,23 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		progressBar.setVisibility(View.GONE);
 	}
 
+	private void updateClearButtonAndHint() {
+		OsmandApplication app = getMyApplication();
+		if (useMapCenter && searchEditText.length() == 0) {
+			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
+			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
+			String dist = OsmAndFormatter.getFormattedDistance((float) d, app);
+			searchEditText.setHint(getString(R.string.dist_away_from_my_location, dist));
+			clearButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_get_my_location, R.color.color_myloc_distance));
+		} else {
+			searchEditText.setHint(R.string.search_poi_category_hint);
+			clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
+		}
+	}
+
 	private void updateClearButtonVisibility(boolean show) {
 		if (show) {
-			clearButton.setVisibility(searchEditText.length() > 0 ? View.VISIBLE : View.GONE);
+			clearButton.setVisibility(searchEditText.length() > 0 || useMapCenter ? View.VISIBLE : View.GONE);
 		} else {
 			clearButton.setVisibility(View.GONE);
 		}
@@ -505,7 +558,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void onSearchListFragmentResume(QuickSearchListFragment searchListFragment) {
-		SearchPhrase sp;
 		switch (searchListFragment.getType()) {
 			case HISTORY:
 				historySearchFragment = (QuickSearchHistoryListFragment) searchListFragment;
@@ -525,6 +577,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					searchEditText.setSelection(txt.length());
 				}
 				break;
+		}
+		LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		if (useMapCenter) {
+			searchListFragment.updateLocation(mapCenter, null);
 		}
 	}
 
@@ -613,7 +669,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			@Override
 			public boolean publish(SearchResult object) {
 
-				if (mainSearchFragment == null) {
+				if (paused) {
 					return false;
 				}
 
@@ -689,7 +745,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean isCancelled() {
-				return mainSearchFragment == null;
+				return paused;
 			}
 		});
 	}
@@ -719,7 +775,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						}
 					});
 
-			if (mainSearchFragment != null) {
+			if (!paused && mainSearchFragment != null) {
 				mainSearchFragment.addListItem(moreListItem);
 			}
 		}
@@ -727,15 +783,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateSearchResult(SearchResultCollection res, boolean appended) {
 
-		OsmandApplication app = getMyApplication();
-
-		List<QuickSearchListItem> rows = new ArrayList<>();
-		if (res.getCurrentSearchResults().size() > 0) {
-			for (final SearchResult sr : res.getCurrentSearchResults()) {
-				rows.add(new QuickSearchListItem(app, sr));
+		if (!paused && mainSearchFragment != null) {
+			OsmandApplication app = getMyApplication();
+			List<QuickSearchListItem> rows = new ArrayList<>();
+			if (res.getCurrentSearchResults().size() > 0) {
+				for (final SearchResult sr : res.getCurrentSearchResults()) {
+					rows.add(new QuickSearchListItem(app, sr));
+				}
 			}
-		}
-		if (mainSearchFragment != null) {
 			mainSearchFragment.updateListAdapter(rows, appended);
 		}
 	}
@@ -844,14 +899,34 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
 		}
-		if (mainSearchFragment != null) {
-			mainSearchFragment.updateLocation(latLon, heading);
+		updateLocationUI(latLon, heading);
+	}
+
+	private void updateLocationUI(LatLon latLon, Float heading) {
+		if (latLon != null && !paused) {
+			if (mainSearchFragment != null) {
+				mainSearchFragment.updateLocation(latLon, heading);
+			}
+			if (historySearchFragment != null) {
+				historySearchFragment.updateLocation(latLon, heading);
+			}
+			if (categoriesSearchFragment != null) {
+				categoriesSearchFragment.updateLocation(latLon, heading);
+			}
 		}
-		if (historySearchFragment != null) {
-			historySearchFragment.updateLocation(latLon, heading);
-		}
-		if (categoriesSearchFragment != null) {
-			categoriesSearchFragment.updateLocation(latLon, heading);
+	}
+
+	private void updateUseMapCenterUI() {
+		if (!paused) {
+			if (mainSearchFragment != null) {
+				mainSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
+			}
+			if (historySearchFragment != null) {
+				historySearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
+			}
+			if (categoriesSearchFragment != null) {
+				categoriesSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
+			}
 		}
 	}
 
@@ -1069,35 +1144,36 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public static class SearchWptAPI extends SearchBaseAPI {
 
 		private OsmandApplication app;
-		private LoadGpxTask asyncLoader = new LoadGpxTask();
 
 		public SearchWptAPI(OsmandApplication app) {
 			this.app = app;
-			asyncLoader.execute();
 		}
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			if (asyncLoader.getResult() == null) {
+
+			if (phrase.isEmpty()) {
 				return false;
 			}
 
-			List<GpxInfo> infos = asyncLoader.getResult();
-			for (GpxInfo info : infos) {
-				for (WptPt point : info.gpx.points) {
-					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = point.getPointDescription(app).getName();
-					sr.object = point;
-					sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
-					sr.objectType = ObjectType.WPT;
-					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-					sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
-					sr.relatedObject = info;
-					sr.preferredZoom = 17;
-					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-						resultMatcher.publish(sr);
-					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-						resultMatcher.publish(sr);
+			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
+			for (SelectedGpxFile selectedGpx : list) {
+				if (selectedGpx != null) {
+					for (WptPt point : selectedGpx.getGpxFile().points) {
+						SearchResult sr = new SearchResult(phrase);
+						sr.localeName = point.getPointDescription(app).getName();
+						sr.object = point;
+						sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
+						sr.objectType = ObjectType.WPT;
+						sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+						sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
+						sr.relatedObject = selectedGpx.getGpxFile();
+						sr.preferredZoom = 17;
+						if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
+							resultMatcher.publish(sr);
+						} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+							resultMatcher.publish(sr);
+						}
 					}
 				}
 			}
@@ -1110,60 +1186,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return -1;
 			}
 			return SEARCH_WPT_API_PRIORITY;
-		}
-
-
-		public class LoadGpxTask extends AsyncTask<Void, Void, List<GpxInfo>> {
-
-			private List<GpxInfo> result;
-
-			@Override
-			protected List<GpxInfo> doInBackground(Void... params) {
-				List<GpxInfo> result = new ArrayList<>();
-				loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, this);
-				return result;
-			}
-
-			@Override
-			protected void onPostExecute(List<GpxInfo> result) {
-				this.result = result;
-			}
-
-			private File[] listFilesSorted(File dir) {
-				File[] listFiles = dir.listFiles();
-				if (listFiles == null) {
-					return new File[0];
-				}
-				Arrays.sort(listFiles);
-				return listFiles;
-			}
-
-			private void loadGPXData(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask) {
-				if (mapPath.canRead()) {
-					loadGPXFolder(mapPath, result, loadTask, "");
-				}
-			}
-
-			private void loadGPXFolder(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask,
-									   String gpxSubfolder) {
-				for (File gpxFile : listFilesSorted(mapPath)) {
-					if (gpxFile.isDirectory()) {
-						String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
-								+ gpxFile.getName();
-						loadGPXFolder(gpxFile, result, loadTask, sub);
-					} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
-						GpxInfo info = new GpxInfo();
-						info.subfolder = gpxSubfolder;
-						info.file = gpxFile;
-						info.gpx = GPXUtilities.loadWptPt(app, gpxFile);
-						result.add(info);
-					}
-				}
-			}
-
-			public List<GpxInfo> getResult() {
-				return result;
-			}
 		}
 	}
 }

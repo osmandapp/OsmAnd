@@ -15,17 +15,21 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
+
+import java.io.File;
 
 public class QuickSearchListItem {
 
@@ -207,16 +211,15 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				StringBuilder sb = new StringBuilder();
-				WptPt wpt = (WptPt) searchResult.object;
-				GpxInfo gpxInfo = (GpxInfo) searchResult.relatedObject;
+				GPXFile gpx = (GPXFile) searchResult.relatedObject;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					sb.append(searchResult.localeRelatedObjectName);
 				}
-				if (gpxInfo != null && !Algorithms.isEmpty(gpxInfo.getFileName())) {
+				if (gpx != null && !Algorithms.isEmpty(gpx.path)) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 					}
-					sb.append(gpxInfo.getFileName());
+					sb.append(new File(gpx.path).getName());
 				}
 				return sb.toString();
 			case UNKNOWN_NAME_FILTER:

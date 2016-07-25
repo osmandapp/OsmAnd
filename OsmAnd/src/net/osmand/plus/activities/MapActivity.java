@@ -168,7 +168,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
-	private boolean quickSearchActive = false;
+	private boolean quickSearchTopbarActive = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -1381,11 +1381,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return fragment!= null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
 	}
 
-	public boolean isQuickSearchDialogActive() {
-		return quickSearchActive && getQuickSearchDialogFragment() != null;
+	public boolean isQuickSearchTopbarActive() {
+		return quickSearchTopbarActive && getQuickSearchDialogFragment() != null;
 	}
 
-	public void setQuickSearchActive(boolean quickSearchActive) {
-		this.quickSearchActive = quickSearchActive;
+	public void setQuickSearchTopbarActive(boolean quickSearchTopbarActive) {
+		this.quickSearchTopbarActive = quickSearchTopbarActive;
 	}
 }

@@ -87,6 +87,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		super.onActivityCreated(savedInstanceState);
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		listAdapter = new QuickSearchListAdapter(getMyApplication(), getActivity());
+		listAdapter.setUseMapCenter(dialogFragment.isUseMapCenter());
 		setListAdapter(listAdapter);
 		ListView listView = getListView();
 		listView.setBackgroundColor(getResources().getColor(

@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -130,15 +131,29 @@ public abstract class PointEditorFragment extends Fragment {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
 
-		view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-			@Override
-			public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-				if (descriptionEdit.isFocused()) {
-					ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
-					scrollView.scrollTo(0, bottom);
+		if (Build.VERSION.SDK_INT >= 11) {
+			view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+				@Override
+				public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+					if (descriptionEdit.isFocused()) {
+						ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
+						scrollView.scrollTo(0, bottom);
+					}
 				}
-			}
-		});
+			});
+		} else {
+			ViewTreeObserver vto = view.getViewTreeObserver();
+			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+				@Override
+				public void onGlobalLayout() {
+					if (descriptionEdit.isFocused()) {
+						ScrollView scrollView = (ScrollView) view.findViewById(R.id.editor_scroll_view);
+						scrollView.scrollTo(0, view.getBottom());
+					}
+				}
+			});
+		}
 
 		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
 		nameImage.setImageDrawable(getNameIcon());

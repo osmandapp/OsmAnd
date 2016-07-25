@@ -203,7 +203,7 @@ public class MapMarkersWidgetsFactory {
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
 				|| map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
-				|| map.isQuickSearchDialogActive()) {
+				|| map.isQuickSearchTopbarActive()) {
 			updateVisibility(false);
 			return;
 		}
