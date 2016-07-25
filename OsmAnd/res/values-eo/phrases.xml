@@ -2086,4 +2086,39 @@
 
 	<string name="poi_tents_yes">Tendoj permesitaj</string>
 	<string name="poi_tents_no">Tendoj malpermesitaj</string>
+	<string name="poi_openfire_yes">Fajro permesita</string>
+	<string name="poi_openfire_no">Fajro malpermesita</string>
+	<string name="poi_backcountry_yes">Kampadejo sen oportunaĵoj (sovaĝa)</string>
+	<string name="poi_backcountry_no">Kampadejo kun oportunaĵoj</string>
+	<string name="poi_scout_yes">Skolta kampadejo: jes</string>
+	<string name="poi_scout_no">Skolta kampadejo: ne</string>
+	<string name="poi_group_only_yes">Nur por grupoj: jes</string>
+	<string name="poi_group_only_no">Nur por grupoj: ne</string>
+	<string name="poi_washing_machine_yes">Lavmaŝino: jes</string>
+	<string name="poi_washing_machine_no">Lavmaŝino: ne</string>
+	<string name="poi_shower_yes">Duŝejo: jes</string>
+	<string name="poi_shower_no">Duŝejo: ne</string>
+	<string name="poi_shower_hot">Duŝejo: varma akvo</string>
+	<string name="poi_shower_outdoor">Duŝejo: ekster-dome</string>
+	<string name="poi_shower_cold">Duŝejo: malvarma akvo</string>
+	<string name="poi_shower_indoor">Duŝejo: en-dome</string>
+	<string name="poi_caravans_yes">Kampadveturiloj: permesitaj</string>
+	<string name="poi_caravans_no">Kampadveturiloj: malpermesitaj</string>
+	<string name="poi_impromptu_yes">Neformala: jes</string>
+	<string name="poi_impromptu_no">Neformala: ne</string>
+	<string name="poi_sanitary_dump_station_yes">Ejo por forigado de fekaĵoj: jes</string>
+	<string name="poi_sanitary_dump_station_no">Ejo por forigado de fekaĵoj: ne</string>
+	<string name="poi_sanitary_dump_station_customers">Ejo por forigado de fekaĵoj: nur por klientoj</string>
+	<string name="poi_power_supply_yes">Energifonto: jes</string>
+	<string name="poi_power_supply_no">Energifonto: ne</string>
+	<string name="poi_power_supply_cee_17_blue">Energifonto (ŝtopilo): CEE 17 blua (IEC 60309)</string>
+	<string name="poi_power_supply_cee_7_4">Energifonto (ŝtopilo): CEE 7/4 (F-tipo)</string>
+	<string name="poi_power_supply_cee_7_5">Energifonto (ŝtopilo): CEE 7/5 (E-tipo)</string>
+	<string name="poi_power_supply_nema_5_15">Energifonto (ŝtopilo): NEMA 5-15 (B-tipo)</string>
+
+	<string name="poi_capacity_tents">Nombro da tendoj</string>
+	<string name="poi_capacity_caravans">Nombro da kampadveturiloj</string>
+	<string name="poi_dog_yes">Hundoj permesitaj</string>
+	<string name="poi_dog_no">Hundoj malpermesitaj</string>
+
 	</resources>
