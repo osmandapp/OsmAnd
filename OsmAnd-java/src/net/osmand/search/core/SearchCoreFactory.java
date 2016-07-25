@@ -92,8 +92,9 @@ public class SearchCoreFactory {
 				throws IOException {
 			phrase.countUnknownWordsMatch(res);
 			int cnt = resultMatcher.getCount();
-			if(!phrase.getUnknownSearchWords().isEmpty() && api != null) {
-				SearchPhrase nphrase = phrase.selectWord(res, phrase.getUnknownSearchWords(res.otherWordsMatch), 
+			List<String> ws = phrase.getUnknownSearchWords(res.otherWordsMatch);
+			if(!ws.isEmpty() && api != null) {
+				SearchPhrase nphrase = phrase.selectWord(res, ws, 
 						phrase.isLastUnknownSearchWordComplete());
 				SearchResult prev = resultMatcher.setParentSearchResult(res);
 				res.parentSearchResult = prev; 
