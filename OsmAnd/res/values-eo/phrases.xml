@@ -2043,4 +2043,7 @@
 	<string name="poi_clothes_workwear">Laborvestoj</string>
 	<string name="poi_clothes_hats">Kapvestoj</string>
 	<string name="poi_clothes_fur">Felaj vestoj</string>
+	<string name="poi_clothes_leather">Ledaj vestoj</string>
+	<string name="poi_clothes_costumes">Kostumoj</string>
+	<string name="poi_clothes_traditional">Tradiciaj vestoj</string>
 	</resources>
