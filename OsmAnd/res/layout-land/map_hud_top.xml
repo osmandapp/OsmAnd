@@ -367,11 +367,13 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/search_icon"
+                    <ImageButton
+                        android:id="@+id/search_back_button"
+                        style="@style/Widget.AppCompat.ActionButton"
                         android:layout_width="54dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_action_search_dark"/>
+                        android:layout_height="48dp"
+                        android:contentDescription="@string/back_to_search"
+                        android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
 
                     <TextView
                         android:id="@+id/search_title"

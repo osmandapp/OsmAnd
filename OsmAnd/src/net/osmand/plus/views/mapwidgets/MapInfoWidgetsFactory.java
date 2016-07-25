@@ -165,7 +165,7 @@ public class MapInfoWidgetsFactory {
 		private final MapActivity map;
 		private View searchTopBar;
 		private View searchTopBarLayout;
-		private ImageView searchIcon;
+		private ImageButton searchBackButton;
 		private TextView searchTitle;
 		private ImageButton searchCloseButton;
 
@@ -173,7 +173,13 @@ public class MapInfoWidgetsFactory {
 			this.map = map;
 			searchTopBar = map.findViewById(R.id.search_topbar);
 			searchTopBarLayout = map.findViewById(R.id.search_topbar_layout);
-			searchIcon = (ImageView) map.findViewById(R.id.search_icon);
+			searchBackButton = (ImageButton) map.findViewById(R.id.search_back_button);
+			searchBackButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					map.showQuickSearch();
+				}
+			});
 			searchTitle = (TextView) map.findViewById(R.id.search_title);
 			searchTitle.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -222,7 +228,7 @@ public class MapInfoWidgetsFactory {
 		public void updateTextColor(boolean nightMode, int textColor) {
 			OsmandApplication app = map.getMyApplication();
 			searchTitle.setTextColor(textColor);
-			searchIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_search_dark, !nightMode));
+			searchBackButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha, !nightMode));
 			searchCloseButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
 
