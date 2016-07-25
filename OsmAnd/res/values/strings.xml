@@ -13,9 +13,10 @@
     <string name="confirmation_to_delete_history_items">Do you want to delete selected history items?</string>
     <string name="show_something_on_map">Show %1$s on the map</string>
     <string name="release_2_4">
-	\u2022 New very powerful free text search. \n\n
+	\u2022 New very powerful free text search.\n\n
 	\u2022 Much improved audio over Bluetooth.\n\n
-	\u2022 Improved route guidance with turn lanes. \n\n
+	\u2022 Improved route guidance, voice prompting, and turn lane indication.\n\n
+	\u2022 Added more locales and now support regional locales.\n\n
 	\u2022 Many other improvements and bug fixes.\n\n
 	and more…
     </string>
