@@ -30,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -45,6 +44,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -114,6 +114,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 10;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
+	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 
 
 	@Override
@@ -236,8 +237,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		});
 
-		setupSearch(mapActivity);
-
 		viewPager = (LockableViewPager) view.findViewById(R.id.pager);
 		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
@@ -266,7 +265,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 		});
-
+		
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
@@ -283,9 +282,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					} else {
 						buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
 					}
-				}
+ 				} else {
+ 					searchEditText.setHint(R.string.search_poi_category_hint);
+ 					clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
+ 					if(location != null && searchUICore != null) {
+ 						LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+ 						SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
+ 								new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+ 						searchUICore.updateSettings(ss);
+ 					}
+ 					
+ 				}
 			}
 		});
+		setupSearch(mapActivity);
 
 		addMainSearchFragment();
 
@@ -356,11 +366,18 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchUICore = new SearchUICore(app.getPoiTypes(), locale, files.toArray(new BinaryMapIndexReader[files.size()]));
 		*/
 
-		LatLon centerLatLon;
+		LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		LatLon centerLatLon = clt;
+		searchEditText.setHint(R.string.search_poi_category_hint);
 		if (location != null) {
-			centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
-		} else {
-			centerLatLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+			double d = MapUtils.getDistance(clt, location.getLatitude(), location.getLongitude());
+			if(MapUtils.getDistance(clt, location.getLatitude(), location.getLongitude()) < DISTANCE_THRESHOLD) {
+				centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+				String n = getString(R.string.search_poi_category_hint);
+				String dist = OsmAndFormatter.getFormattedDistance((float) d, mapActivity.getMyApplication());
+				searchEditText.setHint(n +", " + getString(R.string.dist_away_from_my_location, dist));
+				clearButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_get_my_location, R.color.color_myloc_distance));
+			}
 		}
 		SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
 				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
