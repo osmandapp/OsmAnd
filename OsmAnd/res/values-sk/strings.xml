@@ -2062,5 +2062,12 @@
     <string name="city_type_neighbourhood">Okolie</string>
     <string name="search_categories">Kategórie</string>
     <string name="lang_hsb">Lužickosrbsky</string>
-    <string name="share_history_subject">História zdieľaná cez OsmAnd</string>
+    <string name="share_history_subject">" zdieľaná cez OsmAnd"</string>
+    <string name="confirmation_to_delete_history_items">Chcete vymazať vybrané položky histórie?</string>
+    <string name="show_something_on_map">Zobraziť %1$s na mape</string>
+    <string name="release_2_4">" • Nové mocné vyhľadávanie ľubovoľného textu.
+\n\n • Vylepšený zvuk cez Bluetooth.\n\n • Vylepšená navigácia s jazdnými pruhmi.
+\n\n • Mnohé ďalšie vylepšenia a opravy chýb.\n\n a ďalšie… "</string>
+    <string name="dist_away_from_my_location">Hľadať do vzdialenosti %1$s</string>
+    <string name="show_on_map">Zobraziť na mape</string>
     </resources>
