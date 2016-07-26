@@ -223,6 +223,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					if (--ttsRequests <= 0)
 						abandonAudioFocus();
 					log.debug("ttsRequests="+ttsRequests);
+					if (ttsRequests < 0) {
+						ttsRequests == 0;
+					}
 				}
 			});
 		}
