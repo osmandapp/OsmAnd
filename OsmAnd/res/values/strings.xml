@@ -960,7 +960,7 @@
     <string name="calculate_osmand_route_without_internet">Calculate OsmAnd route segment without Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calculate OsmAnd route for first and last route segment</string>
     <string name="use_displayed_track_for_navigation">Do you want to use displayed track for navigation?</string>
-    <string name="keep_and_add_destination_point">Add as last destination point</string>
+    <string name="keep_and_add_destination_point">Add as subsequent destination</string>
     <string name="select_gpx">Select GPX…</string>
     <string name="route_descr_select_destination">Select Destination</string>
     <string name="route_preferences">Route preferences</string>
@@ -1134,7 +1134,7 @@
     <string name="local_indexes_cat_srtm">Contour lines</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
-    <string name="clear_dest_confirm">Are you sure you want to clear your destination point (and intermediate destinations)?</string>
+    <string name="clear_dest_confirm">Are you sure you want to clear your destination (and intermediate destinations)?</string>
     <string name="precise_routing_mode_descr">Enable to calculate precise routes without glitches. Still distance-limited and slow.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
     <string name="recording_context_menu_show">Show</string>
@@ -1219,8 +1219,8 @@
     <string name="add_as_last_destination_point">Add as last intermediate destination</string>
     <string name="add_as_first_destination_point">Add as first intermediate destination</string>
 
-    <string name="replace_destination_point">Replace destination point</string>
-    <string name="new_destination_point_dialog">You already have the destination point set.</string>
+    <string name="replace_destination_point">Replace the destination</string>
+    <string name="new_destination_point_dialog">You have aleady set a destination:</string>
     <string name="target_points">Destinations</string>
     <string name="intermediate_point_too_far">Intermediate destination %1$s is too far from the nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your intermediate destination</string>
