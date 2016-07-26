@@ -2185,4 +2185,10 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="postcode">Postleitzahl</string>
     <string name="search_categories">Kategorien</string>
     <string name="lang_hsb">Obersorbisch</string>
+    <string name="back_to_search">Zurück zur Suche</string>
+    <string name="confirmation_to_delete_history_items">Ausgewählte Verlaufselemente löschen?</string>
+    <string name="show_something_on_map">%1$s auf der Karte zeigen</string>
+    <string name="release_2_4">" • Neue sehr leistungsfähige Freitextsuche\n\n • Deutlich verbesserte Audiowiedergabe über Bluetooth\n\n • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise\n\n • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen\n\n • Viele andere Verbesserungen und Problembehebungen\n\n und mehr… "</string>
+    <string name="show_on_map">Zeige auf der Karte</string>
+    <string name="share_history_subject">" geteilt über OsmAnd"</string>
     </resources>
