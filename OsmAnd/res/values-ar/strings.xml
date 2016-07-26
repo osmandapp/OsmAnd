@@ -2197,4 +2197,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="show_on_map">اظهر على الخريطة</string>
     <string name="share_history_subject">" تمت مشاركته من طرف OsmAnd"</string>
     <string name="route_general_information">المسافة الإجمالية %1$s، مدة السفر %2$d سا و %3$d د.</string>
+    <string name="back_to_search">العودة إلى البحث</string>
+    <string name="consider_turning_polygons_off">من المستحسن إيقاف عرض المضلعات.</string>
+    <string name="access_from_map_description">يطلق زر القائمة لوحة التحكم و ليس القائمة بحد ذاتها</string>
     </resources>
