@@ -1,2 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="osmo_settings_uuid">Таны хэрэглэгчийн ID</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="osmo_settings_uuid">Таны хэрэглэгчийн ID</string>
+    <string name="back_to_search">Гэр тайхар</string>
     </resources>
