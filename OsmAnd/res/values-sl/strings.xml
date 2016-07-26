@@ -83,7 +83,7 @@
     <string name="add_as_last_destination_point">Dodaj kot zadnji vmesni cilj</string>
     <string name="add_as_first_destination_point">Dodaj kot prvo vmesni cilj</string>
     <string name="replace_destination_point">Zamenjaj cilj</string>
-    <string name="new_destination_point_dialog">Ciljna točka je že določena.</string>
+    <string name="new_destination_point_dialog">Ciljna točka je že določena:</string>
     <string name="context_menu_item_intermediate_point">Dodaj kot vmesni cilj</string>
     <string name="arrived_at_intermediate_point">Prispeli ste do vmesnega cilja</string>
     <string name="intermediate_point_too_far">Vmesni cilji %1$s je predaleč od najbližje ceste.</string>
@@ -363,7 +363,7 @@
 
     <string name="shared_location">Objavljen položaj</string>
     <string name="osmand_parking_event">Odpeljite vozilo s parkirišča</string>
-    <string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo s parkirišča, je bilo prej dodano v koledar. Ostalo bo zapisano, dokler ga ne izbrišete ročno.</string>
+    <string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo s parkirišča, je bilo dodano v koledar. Ostalo bo zapisano, dokler ga ne izbrišete ročno.</string>
     <string name="osmand_parking_time_limit_title">Nastavi časovno omejitev parkiranja</string>
     <string name="osmand_parking_delete_confirm">Ali želite izbrisati oznako mesta, kjer je vozilo parkirano?</string>
     <string name="osmand_parking_delete">Izbriši mesto parkiranja</string>
@@ -1266,7 +1266,7 @@
     <string name="localization_pref_title">Jezikovno prilagajanje</string>
     <string name="index_item_world_altitude_correction">Svetovni popravki nadmorske višine</string>
     <string name="index_item_world_seamarks">Svetovne pomorske oznake</string>
-    <string name="keep_and_add_destination_point">Dodaj kot zadnjo ciljno točko</string>
+    <string name="keep_and_add_destination_point">Dodaj kot naslednjo ciljno točko</string>
     <string name="select_gpx">Izbor sledi GPX …</string>
     <string name="route_descr_select_destination">Izbor cilja</string>
     <string name="shared_string_select_on_map">Izberi na zemljevidu</string>
@@ -2222,4 +2222,13 @@
     <string name="shared_string_from">od</string>
     <string name="city_type_district">Območje</string>
     <string name="city_type_neighbourhood">Soseska</string>
+    <string name="back_to_search">Nazaj na iskanje</string>
+    <string name="confirmation_to_delete_history_items">Ali res želite izbrisati izbrane predmete zgodovine?</string>
+    <string name="show_something_on_map">Pokaži %1$s na zemljevidu</string>
+    <string name="release_2_4">" • Zmogljivo besedilno iskanje\n\n • Posodobitev delovanja zvoka preko sistema Bluetooth\n\n • Izboljšano vodenje po poteh, glasovno sporočanje in nakazovanje menjave pasov\n\n • Dodane jezikovne prilagoditve in podpora krajevnim značilnostim prikaza\n\n • Veliko dodatnih izboljšav in odprav napak\n\n in mnogo več… "</string>
+    <string name="dist_away_from_my_location">Poišči %1$s</string>
+    <string name="show_on_map">Pokaži na zemljevidu</string>
+    <string name="share_history_subject">" v souporabi prek OsmAnd"</string>
+    <string name="search_categories">Kategorije</string>
+    <string name="lang_hsb">Sorbsčina (zgornja)</string>
     </resources>
