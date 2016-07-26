@@ -690,8 +690,8 @@
     <string name="context_menu_item_last_intermediate_point">Afegeix com la darrera fita</string>
     <string name="add_as_last_destination_point">Afegeix com la darrera fita</string>
     <string name="add_as_first_destination_point">Afegeix com la primera fita</string>
-    <string name="replace_destination_point">Substitueix el punt de destinació</string>
-    <string name="new_destination_point_dialog">Ja teniu definit el punt de destinació.</string>
+    <string name="replace_destination_point">Substitueix la destinació</string>
+    <string name="new_destination_point_dialog">Ja teniu definida la destinació:</string>
     <string name="target_point">Destinació %1$s</string>
     <string name="target_points">Destinacions</string>
     <string name="intermediate_point_too_far">La fita %1$s és massa lluny de la carretera més propera.</string>
@@ -881,7 +881,7 @@
     <string name="background_service_wait_int">Espera màxima per corregir</string>
     <string name="local_indexes_cat_av">Dades d\'àudio/vídeo</string>
     <string name="stop_routing_confirm">Esteu segurs de què voleu parar la navegació?</string>
-    <string name="clear_dest_confirm">"Esteu segurs de què voleu eliminar la vostra destinació  (i les vostres fites)?"</string>
+    <string name="clear_dest_confirm">"N\'esteu segurs que voleu eliminar la vostra destinació  (i les vostres fites)?"</string>
     <string name="recording_context_menu_show">Mostra</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
     <string name="av_def_action_picture">Fes una fotografia</string>
@@ -1100,7 +1100,7 @@
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
     <string name="osmand_srtm_long_description_1000_chars">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
-    <string name="keep_and_add_destination_point">Afegeix com a darrer punt de destinació</string>
+    <string name="keep_and_add_destination_point">Afegeix com el següent punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
     <string name="use_displayed_track_for_navigation">Voleu utilitzar la traça visualitzada per la navegació?</string>
@@ -2058,7 +2058,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_hsb">Alt sòrab</string>
     <string name="show_on_map">Indica en el mapa</string>
     <string name="share_history_subject">" compartit via OsmAnd"</string>
-    <string name="release_2_4">" • Nova cerca de text lliure molt potent.
-\n\n • Àudio amb Bluetooth molt millorat.\n\n • Guia de navegació millorada amb carrils auxiliars.
-\n\n • Moltes més millores i correccions d\'errors.\n\n i més… "</string>
+    <string name="release_2_4">" • Nova cerca de text lliure molt potent\n\n • Àudio amb Bluetooth molt millorat\n\n • Guia de navegació millorada amb carrils auxiliars\n\n • Moltes més millores i correccions d\'errors\n\n i més… "</string>
+    <string name="back_to_search">Torna a la cerca</string>
+    <string name="confirmation_to_delete_history_items">Voleu esborrar els elements seleccionats de l\'històric?</string>
+    <string name="show_something_on_map">Situa %1$s en el mapa</string>
+    <string name="dist_away_from_my_location">Cwrca %1$s més enllà</string>
     </resources>
