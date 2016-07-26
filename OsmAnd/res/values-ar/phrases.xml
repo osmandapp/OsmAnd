@@ -124,4 +124,40 @@
 	<string name="poi_artwork_type_fountain">نوع العمل الفني : نافورة</string>
 
 	<string name="poi_craft_carpenter">نجار</string>
+	<string name="poi_craft_plumber">سباك</string>
+	<string name="poi_car">تاجر سيارات</string>
+	<string name="poi_car_repair">تصليح السيارات</string>
+	<string name="poi_recycling_printer_cartridges">خراطيش الطابعة</string>
+	<string name="poi_recycling_car_batteries">بطاريات السيارات</string>
+	<string name="poi_recycling_cars">سيارات</string>
+	<string name="poi_caravan_site">موقع خاص للقوافل</string>
+	<string name="poi_int_name">الإسم الدولي</string>
+	<string name="poi_nat_name">الإسم الوطني</string>
+	<string name="poi_reg_name">الإسم الإقليمي</string>
+	<string name="poi_loc_name">الإسم المحلي</string>
+	<string name="poi_old_name">الإسم القديم</string>
+	<string name="poi_alt_name">الإسم البديل</string>
+
+	<string name="poi_official_name">الإسم الرسمي</string>
+
+	<string name="poi_village">قرية</string>
+	<string name="poi_town">مدينة</string>
+	<string name="poi_website">موقع إنترنت</string>
+	<string name="poi_emergency_phone">هاتف النجدة</string>
+	<string name="poi_recycling_mobile_phones">هواتف نقالة</string>
+	<string name="poi_phone">الهاتف</string>
+	<string name="poi_vending_telephone_vouchers">قسائم تعبئة الهاتف</string>
+	<string name="poi_fire_station">محطة إطفاء</string>
+	<string name="poi_fire_extinguisher">طفاية حريق</string>
+	<string name="poi_fire_hose">خرطوم إطفاء الحريق</string>
+	<string name="poi_fireworks">متجر الألعاب النارية</string>
+
+	<string name="poi_traffic_calming_hump">ممهل</string>
+	<string name="poi_cafe">مقهى</string>
+	<string name="poi_internet_cafe">مقهى إنترنت</string>
+
+	<string name="poi_hotel">فندق</string>
+	<string name="poi_university">جامعة</string>
+
+	<string name="poi_route_train_ref">قطار</string>
 	</resources>
