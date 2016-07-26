@@ -114,4 +114,14 @@
 
 	<string name="poi_vending_parking_tickets">تذاكر موقف السيارات</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">تذاكر موقف سيارات و تذاكر للنقل العام</string>
+	<string name="poi_beverages">محل للمشروبات</string>
+	<string name="poi_pharmacy">صيدلية</string>
+	<string name="poi_driving_school">مدرسة تعليم السياقة</string>
+	<string name="poi_school">مدرسة</string>
+	<string name="poi_building_type_mosque">نوع البناء : مسجد</string>
+	<string name="poi_hospital">مستشفى</string>
+	<string name="poi_police">شرطة</string>
+	<string name="poi_artwork_type_fountain">نوع العمل الفني : نافورة</string>
+
+	<string name="poi_craft_carpenter">نجار</string>
 	</resources>
