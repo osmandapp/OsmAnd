@@ -811,24 +811,24 @@
   <string name="gpxup_private">Privé</string>
   <string name="osmand_parking_event">Auto ophalen van de parkeerplaats</string>
   <string name="osmand_parking_warning">Waarschuwing</string>
-  <string name="osmand_parking_warning_text">Er staat nog een notitie voor het ophalen van de auto in de kalender. Deze blijft staan tot je hem zelf verwijdert.</string>
+  <string name="osmand_parking_warning_text">Een notitie voor het ophalen van de auto staat in de kalender. Deze blijft staan tot je hem zelf verwijdert.</string>
   <string name="osmand_parking_time_limit_title">Stel de parkeertijd-limiet in</string>
   <string name="osmand_parking_delete_confirm">De locatie van de geparkeerde auto wissen?</string>
   <string name="osmand_parking_delete">Verwijder parkeerlocatie</string>
   <string name="osmand_parking_choose_type">Kies het type parkeerplaats</string>
   <string name="osmand_parking_lim_text">Met tijdslimiet</string>
   <string name="osmand_parking_no_lim_text">Zonder tijdslimiet</string>
-  <string name="osmand_parking_add_event">Een notificatie aan de kalender toevoegen</string>
+  <string name="osmand_parking_add_event">Een notitie aan de Kalender toevoegen</string>
   <string name="osmand_parking_time_limit">parkeren met tijdslimiet</string>
   <string name="osmand_parking_time_no_limit">parkeren zonder tijdslimiet</string>
-  <string name="osmand_parking_position_description">De positie van de geparkeerde auto. %1$s</string>
+  <string name="osmand_parking_position_description">De locatie van de geparkeerde auto. %1$s</string>
   <string name="osmand_parking_position_description_add">De auto ophalen om:</string>
   <string name="osmand_parking_pm">\'s-middags</string>
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
   <string name="osmand_parking_plugin_description">De parkeerplaats-plugin bewaart de locatie waar de auto geparkeerd staat en de gekozen parkeertijd. U kunt uw parkeerplaats en resterende parkeertijd vinden op het Osmand dashboard en op de kaart zelf.\nKan ter herinnering ook een afspraak in uw agenda zetten.</string>
   <string name="osmand_parking_plugin_name">Parkeerplaats</string>
-  <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
+  <string name="context_menu_item_add_parking_point">Markeer als parkeerlocatie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
   <string name="shared_location">Gedeelde locatie</string>
@@ -1644,7 +1644,7 @@
 	<string name="show_pedestrian_warnings">Voetgangers-oversteekplaatsen</string>
     <string name="speak_pedestrian">Oversteekplaatsen</string>
     
-	<string name="parking_place">Parkeerplaats</string>
+	<string name="parking_place">Parkeerplek</string>
     <string name="remove_the_tag">Verwijder de parkeerlocatie</string>
     <string name="gps_status">GPS-status</string>
     <string name="version_settings_descr">Nightly builds downloaden</string>
@@ -2289,7 +2289,7 @@
     <string name="lang_ast">Asturisch</string>
     <string name="app_mode_bus">Lijnbus</string>
  	<string name="app_mode_train">Trein</string>
-    <string name="coords_format">Coördinatenformaat</string>
+    <string name="coords_format">Coördinatensysteem</string>
     <string name="shared_string_is_open_24_7">24 x 7 geopend</string>
     <string name="storage_directory_card">Geheugenkaart</string>
     <string name="coords_format_descr">Formaat voor de geografische coördinaten</string>
@@ -2299,4 +2299,12 @@
     <string name="shared_string_from">van</string>
     <string name="city_type_district">Stadsdeel</string>
     <string name="city_type_neighbourhood">Wijk</string>
+    <string name="back_to_search">Terug naar zoekscherm</string>
+    <string name="confirmation_to_delete_history_items">Geselecteerde items verwijderen uit geschiedenis?</string>
+    <string name="show_something_on_map">Toon %1$s op de kaart</string>
+    <string name="release_2_4">" • Nieuwe krachtige zoekfunctie\n\n • Audio via Bluetooth is verbeterd\n\n • Verbeterde route-instructies, gesproken aanwijzingen en rijstrook-informatie\n\n • Vertalingen in nieuwe talen; ook regionale talen worden nu ondersteund\n\n • Vele ander verbeteringen en bug-fixes\n\n en nog meer... "</string>
+    <string name="dist_away_from_my_location">Zoek tot %1$s ver weg</string>
+    <string name="show_on_map">Toon op de kaart</string>
+    <string name="share_history_subject">" gedeeld via OsmAnd"</string>
+    <string name="lang_hsb">Oppersorbisch</string>
     </resources>
