@@ -2209,6 +2209,12 @@
     <string name="city_type_neighbourhood">鄰近</string>
     <string name="search_categories">種類</string>
     <string name="postcode">郵遞區號</string>
-    <string name="share_history_subject">"透過 OsmAnd  分享歷程"</string>
+    <string name="share_history_subject">" 透過 OsmAnd  分享"</string>
     <string name="lang_hsb">索布語 (上游)</string>
+    <string name="back_to_search">返回查詢</string>
+    <string name="confirmation_to_delete_history_items">您要刪除所選取的歷程項目嗎？</string>
+    <string name="show_something_on_map">在地圖上顯示 %1$s</string>
+    <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
+    <string name="show_on_map">顯示在地圖上</string>
+    <string name="release_2_4">" • 新加入非常強大的自由文字查詢\n\n• 在藍牙上很大的改善了音訊\n\n• 改進的路線引導、語音提示，以及開啟車道指示\n\n• 增加更多的語言環境，現在支援區域的語言環境\n\n• 許多其它的改善和修正錯誤\n\n以及更多... "</string>
     </resources>
