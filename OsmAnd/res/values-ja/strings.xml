@@ -551,7 +551,7 @@ POIの更新は利用できません</string>
 
 <string name="shared_string_yes">はい</string>
 <string name="shared_string_cancel">キャンセル</string>
-<string name="shared_string_apply">適用</string>
+<string name="shared_string_apply">決定</string>
 <string name="shared_string_add">追加</string>
 <string name="shared_string_no">いいえ</string>
 <string name="add_favorite_dialog_top_text">お気に入りの名前を入力</string>
@@ -1676,7 +1676,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_top">ステータスバー</string>
 	<string name="map_widget_right">右パネル</string>
 	<string name="map_widget_left">左パネル</string>
-    <string name="shared_string_show">表示に関する設定</string>
+    <string name="shared_string_show">表示</string>
 	<string name="configure_map">マップ設定</string>
     <string name="search_radius_proximity">検索範囲</string>
     <string name="osmo_device_not_found">デバイスが見つかりません</string>
@@ -1728,9 +1728,9 @@ POIの更新は利用できません</string>
     <string name="navigate_point_zone">区域</string>
     <string name="navigate_point_northing">北進</string>
     <string name="navigate_point_easting">東進</string>
-    <string name="download_tab_downloads">すべてのダウンロード</string>
-    <string name="download_tab_updates">更新</string>
-    <string name="download_tab_local">ローカル</string>
+    <string name="download_tab_downloads">全データ</string>
+    <string name="download_tab_updates">更新データ</string>
+    <string name="download_tab_local">既存データ</string>
 	<string name="no_internet_connection">ダウンロード出来ません、インターネット接続を確認してください。</string>
     <string name="shared_string_dismiss">何もしない</string>
     <string name="everything_up_to_date">すべてのファイルを最新状態に</string>
@@ -2186,17 +2186,17 @@ POIの更新は利用できません</string>
     <string name="show_polygons">ポリゴンを表示</string>
     <string name="find_parking">駐車場を探す</string>
     <string name="road_blocked">通行止め</string>
-    <string name="rec_split">分割記録</string>
-    <string name="rec_split_title">分割記録を使用</string>
-    <string name="rec_split_desc">ストレージの最大記録サイズを超えた記録ファイル(動画等)を分割して書き込みます</string>
-    <string name="rec_split_clip_length">分割するファイルサイズ</string>
-    <string name="rec_split_clip_length_desc">全ての記録ファイルが指定したサイズ以上になることはありません</string>
+    <string name="rec_split">記録の制限</string>
+    <string name="rec_split_title">記録制限を使用</string>
+    <string name="rec_split_desc">設定された制限を超えた記録(音声、動画等)は分割又は上書きされます</string>
+    <string name="rec_split_clip_length">記録時間の指定</string>
+    <string name="rec_split_clip_length_desc">ここで指定した時間が記録関連ファイルの最大値になります</string>
     <string name="rec_split_storage_size">ストレージ容量</string>
-    <string name="rec_split_storage_size_desc">全ての記録ファイルが使用できる空き容量</string>
+    <string name="rec_split_storage_size_desc">記録関連ファイルを保存できる容量を割り当てます</string>
     <string name="live_updates">ライブ更新</string>
     <string name="available_maps">利用可能なマップ</string>
     <string name="select_voice_provider">音声案内を選択</string>
-    <string name="select_voice_provider_descr">使用したい言語の音声案内を選択しダウンロードします</string>
+    <string name="select_voice_provider_descr">任意の音声案内を選択または、ダウンロードしてください</string>
     <string name="impassable_road_desc">ルート検索やナビゲーション中に避けたい道路を選択します</string>
     <string name="shared_string_sound">音声</string>
     <string name="no_location_permission">指定されたデータ保存場所にアクセスする権限がありません。</string>
@@ -2255,7 +2255,7 @@ POIの更新は利用できません</string>
     <string name="current_track">現在の経路</string>
     <string name="map_widget_battery">バッテリ ーレベル</string>
     <string name="change_markers_position">マーカーの位置を変更</string>
-    <string name="move_marker_bottom_sheet_title">マーカー位置変更の為マップに移動</string>
+    <string name="move_marker_bottom_sheet_title">マップ画面のドラッグでマーカー位置を調整できます</string>
     <string name="lat_lon_pattern">"緯度:%1$.6f  経度:%2$.6f"</string>
     <string name="access_direction_audio_feedback_descr">目標地点の方向を音声で示す</string>
     <string name="access_direction_haptic_feedback_descr">目標地点の方向を振動で示す</string>
@@ -2281,7 +2281,7 @@ POIの更新は利用できません</string>
     <string name="access_shared_string_not_installed">インストールされていません</string>
     <string name="access_widget_expand">展開</string>
     <string name="access_sort">並べ替え</string>
-    <string name="map_mode">マップモード</string>
+    <string name="map_mode">マップモード切替</string>
     <string name="number_of_gpx_files_selected_pattern">%s個のGPXファイルが選択済み</string>
     <string name="rendering_value_thin_name">細線</string>
     <string name="rendering_value_medium_name">中線</string>
