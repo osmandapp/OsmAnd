@@ -943,11 +943,11 @@ POIの更新は利用できません</string>
 	<string name="osmand_parking_add_event">通知をカレンダーアプリに追加</string>
 	<string name="osmand_parking_time_limit">時間制限ありの駐車場</string>
 	<string name="osmand_parking_time_no_limit">時間制限なしの駐車場</string>
-	<string name="osmand_parking_position_description">あなたの車の駐車位置:%1$s</string>
+	<string name="osmand_parking_position_description">あなたの駐車位置:%1$s</string>
 	<string name="osmand_parking_position_description_add">車の場所を検索:</string>
 	<string name="osmand_parking_pm">午後</string>
 	<string name="osmand_parking_am">午前</string>
-	<string name="osmand_parking_position_name">駐車位置</string>
+	<string name="osmand_parking_position_name">駐車場</string>
 	<string name="osmand_parking_plugin_description">この駐車位置プラグインは、駐車位置、料金、(時間制限がある場合)残り駐車時間のメモを取ることができます。\n場所と時間共にOsmAndのダッシュボードだけでなく、マップ画面上のウィジェットに表示されます。Androidのカレンダー機能にアラームを追加することも出来ます。</string>
 	<string name="osmand_parking_plugin_name">駐車位置</string>
 	<string name="context_menu_item_add_parking_point">駐車位置としてマーク</string>
@@ -1298,7 +1298,7 @@ POIの更新は利用できません</string>
 	
 	
 	
-	<string name="keep_and_add_destination_point">最終目的地として追加</string>
+	<string name="keep_and_add_destination_point">より後の目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
     <string name="shared_string_select_on_map">マップから選択</string>
@@ -1678,7 +1678,7 @@ POIの更新は利用できません</string>
 	<string name="map_widget_left">左パネル</string>
     <string name="shared_string_show">表示</string>
 	<string name="configure_map">マップ設定</string>
-    <string name="search_radius_proximity">検索範囲</string>
+    <string name="search_radius_proximity">以内</string>
     <string name="osmo_device_not_found">デバイスが見つかりません</string>
     <string name="osmo_no_connection_msg">OsMoサーバーに接続できません:↵\n- インターネット接続を確認して下さい;↵\n- 設定を確認して下さい;↵\n- 私達のTwitterをご参照下さい: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- ウェブサイト上の個別ダッシュボードでのグループやデバイスの管理.</string>
@@ -2257,14 +2257,14 @@ POIの更新は利用できません</string>
     <string name="change_markers_position">マーカーの位置を変更</string>
     <string name="move_marker_bottom_sheet_title">マップ画面のドラッグでマーカー位置を調整できます</string>
     <string name="lat_lon_pattern">"緯度:%1$.6f  経度:%2$.6f"</string>
-    <string name="access_direction_audio_feedback_descr">目標地点の方向を音声で示す</string>
-    <string name="access_direction_haptic_feedback_descr">目標地点の方向を振動で示す</string>
+    <string name="access_direction_audio_feedback_descr">進行方向をビープ音で示して案内します</string>
+    <string name="access_direction_haptic_feedback_descr">進行方向を振動で示して案内します</string>
     <string name="use_osm_live_routing_description">OSMライブ更新(ベータ版)でのナビゲーションを有効化</string>
 	<string name="use_osm_live_routing">OSMライブナビゲーション</string>
     <string name="access_no_destination">目的地が設定されていません</string>
-    <string name="access_disable_offroute_recalc">ルートを外れてもリルート(再設定)を行わない</string>
-    <string name="access_disable_wrong_direction_recalc">誤った方向に進んだ場合リルートしない</string>
-    <string name="access_disable_wrong_direction_recalc_descr">目的地の方向と逆進した場合、自動的にルートを再計算されるのを防ぎます</string>
+    <string name="access_disable_offroute_recalc">道を外れてもルートを変更しない</string>
+    <string name="access_disable_wrong_direction_recalc">適切でない案内だった場合ルートを変更しない</string>
+    <string name="access_disable_wrong_direction_recalc_descr">目的地の方向と逆進した場合、自動的にルートの再計算をしないようにします</string>
     <string name="access_smart_autoannounce">スマート音声案内</string>
     <string name="access_smart_autoannounce_descr">目的地への方向が変更されたときのみ通知します</string>
     <string name="access_autoannounce_period">自動音声案内間隔</string>
@@ -2292,4 +2292,25 @@ POIの更新は利用できません</string>
     <string name="lang_be_BY">ベラルーシ語 (ラテン)</string>
     <string name="lang_kn">カンナダ語</string>
     <string name="follow_us">フォローはこちらから</string>
+    <string name="access_direction_audio_feedback">音シグナルで案内</string>
+    <string name="access_direction_haptic_feedback">振動シグナルで案内</string>
+    <string name="access_disable_offroute_recalc_descr">案内されたルートから大きく離れた場合、自動的にルートの再計算をしないようにします</string>
+    <string name="back_to_search">検索に戻る</string>
+    <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
+    <string name="show_something_on_map">%1$sをマップ上に表示</string>
+    <string name="release_2_4">" • 新しく、より強化されたフリーワード検索\n\n • Bluetooth関連の改善多数\n\n • ルート案内の改善、音声案内とターン及びレーン指示\n\n • 新たな言語と対象地域の追加\n\n • 他、多くの改善とバグ修正\n\n等々… "</string>
+    <string name="dist_away_from_my_location">%1$s離れた場所を検索</string>
+    <string name="show_on_map">マップ上に表示</string>
+    <string name="share_history_subject">" OsmAndにて共有"</string>
+    <string name="search_categories">カテゴリ</string>
+    <string name="postcode">郵便番号</string>
+    <string name="shared_string_from">差出人</string>
+    <string name="city_type_district">地区</string>
+    <string name="city_type_neighbourhood">付近</string>
+    <string name="map_widget_search">検索</string>
+	<string name="shared_string_is_open_24_7">24時間営業</string>
+    <string name="storage_directory_card">メモリーカード</string>
+    <string name="shared_string_topbar">トップバー</string>
+    <string name="lang_hsb">ソルビア語(Upper)</string>
+    <string name="lang_hu_formal">ハンガリー語(フォーマル)</string>
     </resources>
