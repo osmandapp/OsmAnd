@@ -2065,9 +2065,8 @@
     <string name="share_history_subject">" zdieľaná cez OsmAnd"</string>
     <string name="confirmation_to_delete_history_items">Chcete vymazať vybrané položky histórie?</string>
     <string name="show_something_on_map">Zobraziť %1$s na mape</string>
-    <string name="release_2_4">" • Nové mocné vyhľadávanie ľubovoľného textu.
-\n\n • Vylepšený zvuk cez Bluetooth.\n\n • Vylepšená navigácia s jazdnými pruhmi.
-\n\n • Mnohé ďalšie vylepšenia a opravy chýb.\n\n a ďalšie… "</string>
+    <string name="release_2_4">" • Nové mocné vyhľadávanie ľubovoľného textu\n\n • Vylepšený zvuk cez Bluetooth\n\n • Vylepšená navigácia s jazdnými pruhmi\n\n • Mnohé ďalšie vylepšenia a opravy chýb\n\n a ďalšie… "</string>
     <string name="dist_away_from_my_location">Hľadať do vzdialenosti %1$s</string>
     <string name="show_on_map">Zobraziť na mape</string>
+    <string name="back_to_search">Späť na vyhľadávanie</string>
     </resources>
