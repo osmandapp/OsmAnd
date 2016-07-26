@@ -799,8 +799,8 @@
     <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
     <string name="add_as_last_destination_point">Añadir como último destino intermedio</string>
     <string name="add_as_first_destination_point">Añadir como primer destino intermedio</string>
-    <string name="replace_destination_point">Sustituir punto de destino</string>
-    <string name="new_destination_point_dialog">Ya fijó el punto de destino.</string>
+    <string name="replace_destination_point">Reemplazar destino</string>
+    <string name="new_destination_point_dialog">Ya estableció el destino:</string>
     <string name="target_points">Destinos</string>
     <string name="intermediate_point_too_far">Destino intermedio, %1$s demasiado lejos del camino.</string>
     <string name="arrived_at_intermediate_point">Has llegado a tu destino intermedio</string>
