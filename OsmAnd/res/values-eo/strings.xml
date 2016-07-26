@@ -852,7 +852,7 @@
     <string name="calculate_osmand_route_without_internet">Loke kalkuli segmenton de OsmAnd-a kurso</string>
     <string name="use_displayed_track_for_navigation">Ĉu vi volas uzi montratan kurson por navigado?</string>
     <string name="gpx_option_calculate_first_last_segment">Kalkuli OsmAnd-an kurson por unua kaj fina segmentoj de kurso</string>
-    <string name="keep_and_add_destination_point">Aldoni kiel celon</string>
+    <string name="keep_and_add_destination_point">Aldoni kiel sekvan celon</string>
     <string name="select_gpx">Elekti GPX-on…</string>
     <string name="route_descr_select_destination">Elekti celon</string>
     <string name="route_preferences">Kursaj agordoj</string>
@@ -1013,7 +1013,7 @@
     <string name="download_hillshade_maps">Nivel-ombrumoj</string>
     <string name="local_indexes_cat_av">Sonaj/videaj datumoj</string>
     <string name="stop_routing_confirm">Ĉu vi certe volas ĉesigi navigadon?</string>
-    <string name="clear_dest_confirm">Ĉu vi certe volas vakigi la celpunkton (kaj inter-celojn)?</string>
+    <string name="clear_dest_confirm">Ĉu vi certe volas vakigi la celon (kaj inter-celojn)?</string>
     <string name="precise_routing_mode">Precizaj kursoj (alfa)</string>
     <string name="precise_routing_mode_descr">Aktivigas kalkuladon de precizaj senerarigaj kursoj. Nuntempe ĝi estas malrapida kaj nur por limigitaj distancoj.</string>
     <string name="recording_context_menu_show">Montri</string>
@@ -1100,8 +1100,8 @@
     <string name="add_as_last_destination_point">Aldoni kiel finan inter-celon</string>
     <string name="add_as_first_destination_point">Aldoni kiel unuan inter-celon</string>
 
-    <string name="replace_destination_point">Anstataŭigi celon</string>
-    <string name="new_destination_point_dialog">Vi jam elektis celpunkton.</string>
+    <string name="replace_destination_point">Anstataŭigi la celon</string>
+    <string name="new_destination_point_dialog">Vi jam elektis celon:</string>
     <string name="target_points">Celoj</string>
     <string name="intermediate_point_too_far">Inter-celo %1$s estas tro malproksime al la plej proksima vojo.</string>
     <string name="arrived_at_intermediate_point">Vi alvenis al la inter-celo</string>
@@ -2021,7 +2021,7 @@
     <string name="lang_hsb">Soraba Supra</string>
     <string name="share_history_subject">" kunhavigita per OsmAnd"</string>
     <string name="show_on_map">Montri sur la mapo</string>
-    <string name="show_something_on_map">Montri %1$sjn sur la mapo</string>
+    <string name="show_something_on_map">Montri na %1$s sur la mapo</string>
     <string name="release_2_4">" • Nova ebloplena tekstoserĉilo\n\n • Plibonigitaj aŭd-sciigoj per Bludento\n\n • Plibonigita navigado - voĉaj sciigoj, kaj subdiroj pri koridoroj\n\n • Aldonitaj novaj lingvoj kaj subteno por dialektoj\n\n • Multaj aliaj plibonigoj kaj korektoj\n\n kaj pli... "</string>
     <string name="dist_away_from_my_location">Serĉi en radiuso de %1$s</string>
     <string name="confirmation_to_delete_history_items">Ĉu vi volas forigi elektitajn erojn de historio?</string>
