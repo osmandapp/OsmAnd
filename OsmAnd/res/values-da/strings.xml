@@ -86,8 +86,8 @@
     <string name="context_menu_item_first_intermediate_point">Tilføj som første mellemliggende destination</string>
     <string name="add_as_last_destination_point">Tilføj som sidste mellemliggende destination</string>
     <string name="add_as_first_destination_point">Tilføj som første mellemliggende destination</string>
-    <string name="replace_destination_point">Udskift destinationspunktet</string>
-    <string name="new_destination_point_dialog">Destinationen er allerede sat.</string>
+    <string name="replace_destination_point">Udskift destinationen</string>
+    <string name="new_destination_point_dialog">Destinationen er allerede sat:</string>
     <string name="local_indexes_cat_av">Audio-/Videodata</string>
     <string name="stop_routing_confirm">Stop navigationen?</string>
     <string name="clear_dest_confirm">Slet destinationen (og mellemliggende destinationer)?</string>
@@ -1305,7 +1305,7 @@
     <string name="select_gpx">Vælg GPX…</string>
     <string name="route_preferences">Ruteindstillinger</string>
     <string name="route_descr_select_destination">Vælg destination</string>
-    <string name="keep_and_add_destination_point">Tilføj som sidste destinationspunkt</string>
+    <string name="keep_and_add_destination_point">Tilføj som efterfølgende destination</string>
 
     <string name="use_displayed_track_for_navigation">Brug viste spor til navigation?</string>
     <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uden internet</string>
