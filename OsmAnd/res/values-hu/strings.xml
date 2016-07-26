@@ -254,7 +254,7 @@
     <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'Menü\' → \'Térkép beállítása\' → \'Térképforrás…\' → \'Offline vektoros térképek\' menüben tudod.</string>
     <string name="choose_audio_stream">Hangnavigáció kimenete</string>
     <string name="choose_audio_stream_descr">Hangnavigáció csatornájának kiválasztása</string>
-    <string name="voice_stream_voice_call">Telefonhívás hangcsatorna</string>
+    <string name="voice_stream_voice_call">Telefonhívás hangcsatorna (megpróbélja megszakítani a Bluetooth zenelejátszást)</string>
     <string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
     <string name="voice_stream_music">Zene hangcsatorna</string>
     <string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, meg kell próbálni újratelepíteni.</string>
@@ -798,7 +798,7 @@
     <string name="gpxup_private">Magán</string>
     <string name="osmand_parking_event">Autót felvenni a parkolóból</string>
     <string name="osmand_parking_warning">Figyelmeztetés</string>
-    <string name="osmand_parking_warning_text">Az autó felvételére emlékeztető lett beállítva a naptárban. Ez az emlékeztető megmarad, amíg ki nem törlöd onnan.</string>
+    <string name="osmand_parking_warning_text">Az autó felvételére egy emlékeztető lett beállítva a naptáradban. Ez az emlékeztető megmarad, amíg ki nem törlöd onnan.</string>
     <string name="osmand_parking_time_limit_title">Parkolási időkorlát beállítása</string>
     <string name="osmand_parking_delete_confirm">Biztosan törlöd a parkolási hely jelölőjét?</string>
     <string name="osmand_parking_delete">Parkolási helyjelző törlése</string>
@@ -812,8 +812,8 @@
     <string name="osmand_parking_position_description_add">Parkolási engedély vége:</string>
     <string name="osmand_parking_pm">du.</string>
     <string name="osmand_parking_am">de.</string>
-    <string name="osmand_parking_position_name">Parkolási pont</string>
-    <string name="osmand_parking_plugin_description">A parkolási hely bővítmény könnyen megjegyezhetővé teszi, hogy mikor parkoltál le az autóval, és mennyi parkolási idő van még hátra (ha a parkolás időben korlátozott).\nA parkolási hely és az idő is látható az OsmAnd vezérlőpultján, valamint a térkép képernyő felületi elemén. Értesítés adható hozzá az Android naptárhoz emlékeztetőként.</string>
+    <string name="osmand_parking_position_name">Parkolóhely</string>
+    <string name="osmand_parking_plugin_description">A parkolási hely bővítmény könnyen megjegyezhetővé teszi, hogy hol parkoltál le az autóval, és mennyi parkolási idő van még hátra (ha a parkolás időben korlátozott).\nA parkolási hely és az idő is látható az OsmAnd vezérlőpultján, valamint a térkép képernyő felületi elemén. Értesítés adható hozzá az Android naptárhoz emlékeztetőként.</string>
     <string name="osmand_parking_plugin_name">Parkolási hely</string>
     <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
     <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
@@ -2221,4 +2221,13 @@
     <string name="postcode">Irányítószám</string>
     <string name="back_to_search">Vissza a kereséshez</string>
     <string name="confirmation_to_delete_history_items">Törölni akarod a kiválasztott előzményeket?</string>
+    <string name="show_something_on_map">%1$s megjelenítése a térképen</string>
+    <string name="release_2_4">" • Új, hatékony szabadszavas kereső\n\n • Javított hanglejátszás Bluetoothon keresztül\n\n • Továbbfejlesztett navigáció, hangutasítások, és kanyarodósáv kijelzés\n\n • Új nyelvek, valamint már nyelvjárások is elérhetőek\n\n • Sok más fejlesztés és hibajavítás "</string>
+    <string name="dist_away_from_my_location">Keresés %1$s távolságban</string>
+    <string name="show_on_map">Megjelenítés a térképen</string>
+    <string name="share_history_subject">" megosztva OsmAnd segítségével"</string>
+    <string name="search_categories">Kategóriák</string>
+    <string name="city_type_district">Kerület</string>
+    <string name="map_widget_search">Keresés</string>
+	<string name="lang_hsb">Szorb (felső)</string>
     </resources>
