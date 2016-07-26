@@ -1033,8 +1033,8 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="target_points">Ziele</string>
 	<string name="add_as_first_destination_point">Als erstes Zwischenziel einfügen</string>
 	<string name="add_as_last_destination_point">Als letztes Zwischenziel einfügen</string>
-	<string name="replace_destination_point">Zielpunkt ersetzen</string>
-	<string name="new_destination_point_dialog">Sie haben bereits einen Zielpunkt gewählt.</string>
+	<string name="replace_destination_point">Ziel ersetzen</string>
+	<string name="new_destination_point_dialog">Sie haben bereits ein Ziel gewählt:</string>
 	<string name="delete_target_point">Ziel löschen</string>
 	<string name="map_widget_monitoring_services">Aufzeichnungsdienste</string>
 	<string name="no_route">Keine Route</string>
@@ -1106,7 +1106,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
-	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihren Zielpunkt (und Zwischenziele) löschen möchten?</string>
+	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
 	<string name="precise_routing_mode_descr">Auswählen um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
 	<string name="local_indexes_cat_av">Audio/Video-Daten</string>
