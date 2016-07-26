@@ -409,7 +409,7 @@
     <string name="index_name_canada">Norte América - Canadá</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Gran Bretaña</string>
-    <string name="keep_and_add_destination_point">Añadir como último punto de destino</string>
+    <string name="keep_and_add_destination_point">Añadir como último destino</string>
     <string name="select_gpx">Elegir GPX…</string>
     <string name="route_descr_select_destination">Elige el destino</string>
     <string name="route_preferences">Preferencias de la ruta</string>
@@ -716,7 +716,7 @@
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Quieres parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Quieres quitar tu punto de destino (y los destinos intermedios)?</string>
+    <string name="clear_dest_confirm">¿Quieres quitar tu destino (y los destinos intermedios)?</string>
     <string name="precise_routing_mode_descr">Habilita el cálculo de rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -799,8 +799,8 @@
     <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
     <string name="add_as_last_destination_point">Añadir como último destino intermedio</string>
     <string name="add_as_first_destination_point">Añadir como primer destino intermedio</string>
-    <string name="replace_destination_point">Sustituir punto de destino</string>
-    <string name="new_destination_point_dialog">Ya fijó el punto de destino.</string>
+    <string name="replace_destination_point">Reemplazar destino</string>
+    <string name="new_destination_point_dialog">Ya estableció el destino:</string>
     <string name="target_points">Destinos</string>
     <string name="intermediate_point_too_far">Destino intermedio, %1$s demasiado lejos de la carretera.</string>
     <string name="arrived_at_intermediate_point">Has llegado a tu destino intermedio</string>
