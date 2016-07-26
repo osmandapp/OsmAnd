@@ -2204,4 +2204,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_direction_haptic_feedback">توجيه رد فعل الهزاز اللمسي</string>
     <string name="please_specify_poi_type_only_from_list">يرجى تحديد نوع POI الصحيح أو تخطيه</string>
     <string name="show_on_start_description">\'إيقاف\' تطلق مباشرة واجهة الخريطة</string>
+    <string name="release_2_2">" • واجهة مستخدم جديدة حساسة للضغط على المواقع في الخريطة والواجهان الأخرى\n • واجهة الخريطة تقلع الآن مباشرة إلا إذا \'اظهار لوحة القياس عند بدء التطبيق\' محددة\n • اعداد كيف وأي بطاقة يتم عرضها على لوحة القياس
+\n • تجاوز لوحة أجهزة القياس إذا كنت تحب التحكم في التطبيق عبر نمط القائمة\n • تنزيل الخرائط والمناطق يتم تحديده مباشرة بالضغط على خريطة العالم\n • البحث عن POI يدعم الآن استفسارات محددة أكثر\n • POI محسنة بالاضافة الى خاصية تحرير OSM\n • إعادة صياغة بنية تحميل بيانات الخرائط والواجهة وأكثر... "</string>
+    <string name="osm_edit_modified_poi">OSM POI معدل</string>
+    <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
+    <string name="osm_edit_removed_note">ملاحظة OSM محذوفة</string>
     </resources>
