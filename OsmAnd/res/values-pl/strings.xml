@@ -896,8 +896,8 @@
     <string name="context_menu_item_first_intermediate_point">Dodaj jako pierwszy cel pośredni</string>
     <string name="add_as_last_destination_point">Dodaj jako ostatni cel pośredni</string>
     <string name="add_as_first_destination_point">Dodaj jako pierwszy cel pośredni</string>
-    <string name="replace_destination_point">Zamień punkt docelowy</string>
-    <string name="new_destination_point_dialog">Już wybrałeś punkt docelowy.</string>
+    <string name="replace_destination_point">Zamień cel</string>
+    <string name="new_destination_point_dialog">Już wybrałeś punkt docelowy:</string>
     <string name="target_points">Cele podróży</string>
     <string name="intermediate_point_too_far">Cel pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
     <string name="arrived_at_intermediate_point">Dotarłeś do celu pośredniego</string>
@@ -1246,7 +1246,7 @@
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
     <string name="calculate_osmand_route_gpx">Wyznacz trasę offline w OsmAnd</string>
-    <string name="keep_and_add_destination_point">Dodaj jako ostatni cel podróży</string>
+    <string name="keep_and_add_destination_point">Dodaj jako następny cel</string>
     <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlaną trasę do nawigacji?</string>
 
     <string name="calculate_osmand_route_without_internet">Wyznacz segment trasy OsmAnd offline</string>
