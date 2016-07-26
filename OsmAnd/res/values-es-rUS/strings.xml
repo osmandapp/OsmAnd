@@ -2205,6 +2205,6 @@
     <string name="release_2_4">" • Nueva búsqueda de texto libre muy potente.\n\n • Muchas mejoras de audio mediante Bluetooth.\n\n • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro.\n\n • Se agregaron más idiomas y ahora soporta idiomas regionales.\n\n • Muchas otras mejoras y correcciones de errores.\n\n y más… "</string>
     <string name="confirmation_to_delete_history_items">¿Quieres borrar los elementos del historial marcados?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
-    <string name="dist_away_from_my_location">Buscar en un radio de %1$s</string>
+    <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="back_to_search">Volver a la búsqueda</string>
     </resources>
