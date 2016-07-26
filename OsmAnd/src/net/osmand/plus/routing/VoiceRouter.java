@@ -36,11 +36,11 @@ public class VoiceRouter {
 	private static final int STATUS_TOLD = 5;
 	
 	private final RoutingHelper router;
-	private static boolean mute = false;
 	private static CommandPlayer player;
 	private final OsmandSettings settings;
- 
-	private int currentStatus = STATUS_UNKNOWN;
+
+	private static boolean mute = false;
+	private static int currentStatus = STATUS_UNKNOWN;
 	private static boolean playedAndArriveAtTarget = false;
 	private static float playGoAheadDist = 0;
 	private static long lastAnnouncedSpeedLimit = 0;
@@ -49,9 +49,10 @@ public class VoiceRouter {
 	private static long waitAnnouncedOffRoute = 0;
 	private static boolean suppressDest = false;
 	private static boolean announceBackOnRoute = false;
-
 	// private static long lastTimeRouteRecalcAnnounced = 0;
-	
+	// Remember when last announcement was made
+	private static long lastAnnouncement = 0;
+
 	// Default speed to have comfortable announcements (Speed in m/s)
 	protected float DEFAULT_SPEED = 12;
 	protected float TURN_DEFAULT_SPEED = 5;
@@ -67,9 +68,6 @@ public class VoiceRouter {
 	protected static VoiceCommandPending pendingCommand = null;
 	private static RouteDirectionInfo nextRouteDirection;
 	private Term empty;
-
-	// Remember when last announcement was made
-	private static long lastAnnouncement = 0;
 
 	public interface VoiceMessageListener {
 		void onVoiceMessage();

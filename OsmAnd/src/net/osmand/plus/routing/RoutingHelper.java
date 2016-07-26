@@ -73,12 +73,12 @@ public class RoutingHelper {
 	private OsmandSettings settings;
 	
 	private RouteProvider provider;
-	private static VoiceRouter voiceRouter;
+	private VoiceRouter voiceRouter;
 
 	private static boolean isDeviatedFromRoute = false;
 	private long deviateFromRouteDetected = 0;
 	//private long wrongMovementDetected = 0;
-	private static boolean voiceRouterStopped = false;
+	private boolean voiceRouterStopped = false;
 
 	private RouteCalculationProgressCallback progressRoute;
 

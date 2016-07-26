@@ -28,7 +28,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	private static final Log log = PlatformUtil.getLog(MediaCommandPlayerImpl.class);
 	
 	// playing media
-	private static MediaPlayer mediaPlayer;
+	private MediaPlayer mediaPlayer;
 	// indicates that player is ready to play first file
 	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
 	private VoiceRouter vrt;

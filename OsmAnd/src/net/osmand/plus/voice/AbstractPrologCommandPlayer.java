@@ -47,6 +47,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	protected Prolog prologSystem;
 	protected static final String P_VERSION = "version";
 	protected static final String P_RESOLVE = "resolve";
+
 	public static final String A_LEFT = "left";
 	public static final String A_LEFT_SH = "left_sh";
 	public static final String A_LEFT_SL = "left_sl";
@@ -55,12 +56,12 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public static final String A_RIGHT_SH = "right_sh";
 	public static final String A_RIGHT_SL = "right_sl";
 	public static final String A_RIGHT_KEEP = "right_keep";
-	protected static final String DELAY_CONST = "delay_";
 
+	protected static final String DELAY_CONST = "delay_";
 	private static final String WEAR_ALERT = "WEAR_ALERT";
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;
-	private static AudioFocusHelper mAudioFocusHelper;
+	private AudioFocusHelper mAudioFocusHelper;
 	protected String language = "";
 	protected int streamType;
 	private int currentVersion;
