@@ -37,7 +37,6 @@ import org.apache.commons.logging.Log;
 public class SearchUICore {
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 200;
-	private static final int LIMIT_JUSTIFY_RESULTS = 5;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class); 
 	private SearchPhrase phrase;
 	private SearchResultCollection currentSearchResult = new SearchResultCollection(); 
