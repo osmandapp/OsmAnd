@@ -297,4 +297,17 @@
 	<string name="poi_tunnel_car">Veitunnel</string>
 	<string name="poi_tunnel_pedestrian">Fotgjengertunnel</string>
 	<string name="poi_summer_camp">Sommerleir</string>
+	<string name="poi_information_bicyclemap">Sykkelkart</string>
+	<string name="poi_aerialway_bicycle_yes">Sykkel: tillatt</string>
+	<string name="poi_aerialway_bicycle_no">Sykkel: ikke tillatt</string>
+	<string name="poi_aerialway_bicycle_summer">Sykkel: tillatt bare om sommeren</string>
+	<string name="poi_service_bicycle_retail_yes">Sykkelsalg: ja</string>
+	<string name="poi_service_bicycle_retail_no">Sykkelsalg: nei</string>
+	<string name="poi_service_bicycle_repair_yes">Sykkelreparasjon: ja</string>
+	<string name="poi_service_bicycle_repair_no">Sykkelreparasjon: nei</string>
+	<string name="poi_service_bicycle_rental_yes">Sykkelutleie: ja</string>
+	<string name="poi_service_bicycle_rental_no">Sykkelutleie: nei</string>
+	<string name="poi_landuse">Arealbruk</string>
+	<string name="poi_toll_booth">Bomstasjon</string>
+	<string name="poi_border_control">Grensekontroll</string>
 	</resources>
