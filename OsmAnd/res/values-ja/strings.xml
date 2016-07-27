@@ -2164,7 +2164,7 @@ POIの更新は利用できません</string>
     <string name="download_files_question_space_with_temp">{0}個のファイルを本当にダウンロードしますか? 一時的に {3}MB 保存のために {1}MB が必要です。現在利用可能なのは {2}MBです。</string>
     <string name="upload_osm_note_description">OpenStreetMap.orgプロファイルを使用する場合は、OSMメモを匿名でアップロードできます。</string>
     <string name="upload_osm_note">OSMメモをアップロード</string>
-    <string name="map_marker_1st">最初のマップマーカー</string>
+    <string name="map_marker_1st">1番目のマップマーカー</string>
     <string name="map_marker_2nd">2番目のマップマーカー</string>
     <string name="shared_string_toolbar">ツールバー</string>
     <string name="shared_string_widgets">ウィジェット</string>
@@ -2179,8 +2179,8 @@ POIの更新は利用できません</string>
     <string name="clear_active_markers_q">アクティブマーカーをすべて削除しますか？</string>
     <string name="clear_markers_history_q">マップマーカーの履歴を消去しますか？</string>
     <string name="active_markers">アクティブマーカー</string>
-    <string name="map_markers">マップマーカー</string>
-    <string name="map_marker">マップマーカー表示位置</string>
+    <string name="map_markers">マップマーカー表示位置</string>
+    <string name="map_marker">マップマーカー</string>
     <string name="consider_turning_polygons_off">ポリゴンによる描画をオフにすることを推奨します。</string>
     <string name="rendering_attr_showMtbRoutes_name">MTB用ルートを表示</string>
     <string name="show_polygons">ポリゴンを表示</string>
