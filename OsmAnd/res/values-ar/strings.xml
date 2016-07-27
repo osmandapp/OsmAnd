@@ -1764,7 +1764,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_widget_expand">وسع</string>
     <string name="access_sort">فرز</string>
     <string name="map_mode">وضع الخريطة</string>
-    <string name="number_of_gpx_files_selected_pattern">حدد % ملف جي بي إكس</string>
+    <string name="number_of_gpx_files_selected_pattern">%s ملفات GPX محددة</string>
     <string name="rendering_value_thin_name">رقيقة</string>
     <string name="rendering_value_medium_name">متوسط</string>
     <string name="no_map_markers_found">الرجاء إضافة علامات الخريطة عن طريق الخريطة</string>
@@ -1852,7 +1852,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_connect_to_group_id">معرف المجموعة</string>
     <string name="osmo_tracker_id">معرف المتعقب</string>
     <string name="osmo_tracker_id_descr">اضغط لمعاينة معرف المتعقب</string>
-    <string name="osmo_share_my_location">إبعث هذا الموقع</string>
+    <string name="osmo_share_my_location">إرسال الموقع</string>
     <string name="hello">تطبيق الملاحة أوسماند OSMAnd</string>
     <string name="update_poi_error_loading">خطأ أثناء تحميل البيانات من الخادم</string>
     <string name="context_menu_item_update_map_confirm">تحديث البيانات المحلية عبر الإنترنت ؟</string>
@@ -1959,7 +1959,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
     <string name="open_street_map_login_and_pass">اسم المستخدم وكلمة المرور ل اوبن ستريت ماب</string>
-    <string name="osm_live_email_desc">نحن بحاجة اليه لكي نوفر لك معلومات حول المساهمات</string>
+    <string name="osm_live_email_desc">نحن بحاجة اليه لكي لنوفر لك معلومات حول المساهمات</string>
     <string name="select_map_marker">اختر علامة موضعية</string>
     <string name="show_transparency_seekbar">اظهر شفافية شريط البحث</string>
     <string name="download_files_error_not_enough_space">لا يوجد مساحة كافية! قد يحتاج هذا الى {3} ميغابايت مؤقتا و {1} ميغابايت دائمة. حاليا هناك {2} ميغابايت متوفرة.</string>
@@ -2014,7 +2014,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_hideIcons_name">أيقونات ال POI</string>
     <string name="shared_string_type">النوع</string>
     <string name="shared_string_not_selected">غير محدد</string>
-    <string name="rec_split">مقسم التسجيلات</string>
+    <string name="rec_split">تقطيع المسجل</string>
     <string name="rec_split_title">إستعمل مقسم التسجيلات</string>
     <string name="rec_split_clip_length">طول المقطع</string>
     <string name="rec_split_storage_size">حجم التخزين</string>
