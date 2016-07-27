@@ -70,15 +70,15 @@ public class BinaryInspector {
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[]{
-					"-vpoi",
-					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+//					"-vpoi",
+//					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 					"-vrouting",
-					"-vaddress", "-vcities","-vstreetgroups",
-					"-vstreets", "-vbuildings", "-vintersections",
-					"-lang=ru",
-					"-bbox=4.8486,52.3084,4.8747,52.2970",
-//					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm" 
-					System.getProperty("maps.dir")+"/Netherlands_noord-holland_europe.obf"
+//					"-vaddress", "-vcities","-vstreetgroups",
+//					"-vstreets", "-vbuildings", "-vintersections",
+//					"-lang=ru",
+//					"-bbox=4.8486,52.3084,4.8747,52.2970",
+					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm", 
+					System.getProperty("maps.dir")+"/Map.obf"
 			});
 		} else {
 			in.inspector(args);
@@ -532,14 +532,38 @@ public class BinaryInspector {
 						MapUtils.get31TileNumberX(vInfo.lonright), MapUtils.get31TileNumberY(vInfo.lattop),
 						MapUtils.get31TileNumberY(vInfo.latbottom), vInfo.getZoom(), null),
 				p.getSubregions());
+		if (vInfo.osm) {
+			printToFile("<?xml version='1.0' encoding='UTF-8'?>\n" +
+					"<osm version='0.6'>\n");
+		}
 		index.loadRouteIndexData(regions, new ResultMatcher<RouteDataObject>() {
 			@Override
 			public boolean publish(RouteDataObject obj) {
 				mapObjectsCounter.value++;
+				if (vInfo.osm) {
+					b.setLength(0);
+					BinaryMapDataObject bobj = new BinaryMapDataObject();
+					bobj.setArea(false);
+					bobj.coordinates = new int[obj.pointsX.length * 2];
+					for(int i = 0; i < obj.pointsX.length; i++) {
+						bobj.coordinates[2*i] = obj.pointsX[i];
+						bobj.coordinates[2*i +1] = obj.pointsY[i];
+					}
+					bobj.types = obj.types;
+					bobj.setId(obj.getId() << 1);
+					bobj.objectNames = obj.getNames();
+					printOsmMapDetails(bobj, b, obj.region);
+					try {
+						printToFile(b.toString());
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+				} 
 				b.setLength(0);
 				b.append("Road ");
 				b.append(obj.id);
 				b.append(" osmid ").append(obj.getId() >> (SHIFT_ID));
+				
 				for (int i = 0; i < obj.getTypes().length; i++) {
 					RouteTypeRule rr = obj.region.quickGetEncodingRule(obj.getTypes()[i]);
 					b.append(" ").append(rr.getTag()).append("='").append(rr.getValue()).append("'");
@@ -559,7 +583,7 @@ public class BinaryInspector {
 						int[] nametypes = obj.getPointNameTypes(i);
 						int[] types = obj.getPointTypes(i);
 						if (types != null || names != null) {
-							b.append(" [ " + (i + 1) + ". ");
+							b.append("[" + (i + 1) + ". ");
 							if (names != null) {
 								for (int k = 0; k < names.length; k++) {
 									RouteTypeRule rr = obj.region.quickGetEncodingRule(nametypes[k]);
@@ -577,9 +601,10 @@ public class BinaryInspector {
 								float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
 								b.append(y).append(" / ").append(x).append(" ");
 							}
+							b.append("]");
 						}
-						b.append("]");
 					}
+					b.append("]");
 				}
 				if (obj.restrictions != null) {
 					b.append(" restrictions [");
@@ -610,6 +635,9 @@ public class BinaryInspector {
 			}
 		});
 		println("\tTotal map objects: " + mapObjectsCounter.value);
+		if (vInfo.osm) {
+			printToFile("</osm >\n");
+		}
 	}
 
 	private void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
@@ -858,7 +886,7 @@ public class BinaryInspector {
 						} else if (vInfo.vmapObjects) {
 							b.setLength(0);
 							if (vInfo.osm) {
-								printOsmMapDetails(obj, b);
+								printOsmMapDetails(obj, b, null);
 								try {
 									printToFile(b.toString());
 								} catch (IOException e) {
@@ -965,13 +993,13 @@ public class BinaryInspector {
 
 	private static int OSM_ID = 1;
 
-	private void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b) {
+	private void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b, RouteRegion reg) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
 		boolean point = obj.getPointsLength() == 1;
 		StringBuilder tags = new StringBuilder();
 		int[] types = obj.getTypes();
 		for (int j = 0; j < types.length; j++) {
-			TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
+			TagValuePair pair = reg != null ? convert(reg.quickGetEncodingRule(types[j])): obj.getMapIndex().decodeType(types[j]);
 			if (pair == null) {
 				throw new NullPointerException("Type " + types[j] + "was not found");
 			}
@@ -979,7 +1007,9 @@ public class BinaryInspector {
 		}
 		if (obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0) {
 			for (int j = 0; j < obj.getAdditionalTypes().length; j++) {
-				TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
+				int addtype = obj.getAdditionalTypes()[j];
+				TagValuePair pair = reg != null ? convert(reg.quickGetEncodingRule(addtype)): 
+						obj.getMapIndex().decodeType(addtype);
 				if (pair == null) {
 					throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 				}
@@ -990,7 +1020,7 @@ public class BinaryInspector {
 		if (names != null && !names.isEmpty()) {
 			int[] keys = names.keys();
 			for (int j = 0; j < keys.length; j++) {
-				TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
+				TagValuePair pair = reg != null ? convert(reg.quickGetEncodingRule(keys[j])): obj.getMapIndex().decodeType(keys[j]);
 				if (pair == null) {
 					throw new NullPointerException("Type " + keys[j] + "was not found");
 				}
@@ -1046,6 +1076,10 @@ public class BinaryInspector {
 				b.append("</relation>\n");
 			}
 		}
+	}
+
+	private TagValuePair convert(RouteTypeRule routeTypeRule) {
+		return new TagValuePair(routeTypeRule.getTag(), routeTypeRule.getValue(), 0);
 	}
 
 	private long printWay(TLongArrayList ids, StringBuilder b, StringBuilder tags) {
