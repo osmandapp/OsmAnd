@@ -11,8 +11,8 @@
     <string name="context_menu_item_first_intermediate_point">Určiť ako prvý prechodný bod</string>
     <string name="add_as_last_destination_point">Pridať ako posledný prechodný bod</string>
     <string name="add_as_first_destination_point">Pridať ako prvý prechodný bod</string>
-    <string name="replace_destination_point">Nahradiť cieľový bod</string>
-    <string name="new_destination_point_dialog">Už máte určený cieľový bod.</string>
+    <string name="replace_destination_point">Nahradiť cieľ</string>
+    <string name="new_destination_point_dialog">Už máte určený cieľ:</string>
     <string name="target_point">Cieľ %1$s</string>
     <string name="target_points">Ciele</string>
     <string name="intermediate_point_too_far">Prechodný bod %1$s je príliš ďaleko od najbližšej cesty.</string>
@@ -879,7 +879,7 @@
     <string name="dropbox_plugin_description">Zásuvný modul pre Dropbox vám umožňuje synchronizovať stopy a video/zvukové poznámky s vaším účtom na službe Dropbox.</string>
     <string name="dropbox_plugin_name">Zásuvný modul pre Dropbox</string>
     <string name="stop_routing_confirm">Naozaj chcete vypnúť navigáciu?</string>
-    <string name="clear_dest_confirm">Naozaj chcete zmazať váš cieľový bod (a prechodné body)?</string>
+    <string name="clear_dest_confirm">Naozaj chcete zmazať váš cieľ (a prechodné ciele)?</string>
     <string name="local_indexes_cat_av">Zvukové/video údaje</string>
     <string name="precise_routing_mode">Precízna navigácia (vo vývoji)</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1059,7 +1059,7 @@
     <string name="route_descr_select_destination">Vybrať cieľ</string>
     <string name="route_preferences">Predvoľby trasy</string>
     <string name="route_info">Informácie trasy</string>
-    <string name="keep_and_add_destination_point">Pridať ako posledný cieľový bod</string>
+    <string name="keep_and_add_destination_point">Pridať ako ďalší cieľ</string>
     <string name="use_displayed_track_for_navigation">Chcete použiť zobrazenú trasu pre navigáciu?</string>
     <string name="calculate_osmand_route_without_internet">Vypočítať OsmAnd trasu úseku bez pripojenia na Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Vypočítať OsmAnd trasu pre prvý a posledný úsek</string>
