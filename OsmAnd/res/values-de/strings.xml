@@ -945,10 +945,10 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmand_parking_position_description_add">Fahrzeug abholen um:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">Park-Position</string>
+	<string name="osmand_parking_position_name">Parkposition</string>
 	<string name="osmand_parking_plugin_description">Dieses Plugin ermöglicht es den Standort eines geparkten Fahrzeugs zu speichern sowie die restliche Parkzeit anzuzeigen (falls das Parken zeitlich begrenzt ist).\nParkplatz und Restzeit werden sowohl auf dem OsmAnd Dashboard wie auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android Kalender als Erinnerung hinzugefügt werden.</string>
 	<string name="osmand_parking_plugin_name">Parkplatz-Standort</string>
-	<string name="context_menu_item_add_parking_point">Parkplatz-Standort festlegen</string>
+	<string name="context_menu_item_add_parking_point">Parkplatzstandort festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
 	<string name="gpxup_public">Öffentlich</string>
 	<string name="gpxup_identifiable">Erkennbar</string>
@@ -1277,7 +1277,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
 	<string name="use_displayed_track_for_navigation">Soll der angezeigte Track zum Navigieren genutzt werden?</string>
-	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
+	<string name="keep_and_add_destination_point">Als Zwischenziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel wählen</string>
 	<string name="interrupt_music_descr">Jegliche Musikwiedergabe bei Sprachhinweisen vollständig pausieren (nicht nur leiser spielen)</string>
@@ -2191,4 +2191,5 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="release_2_4">" • Neue sehr leistungsfähige Freitextsuche\n\n • Deutlich verbesserte Audiowiedergabe über Bluetooth\n\n • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise\n\n • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen\n\n • Viele andere Verbesserungen und Problembehebungen\n\n und mehr… "</string>
     <string name="show_on_map">Zeige auf der Karte</string>
     <string name="share_history_subject">" geteilt über OsmAnd"</string>
+    <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
     </resources>
