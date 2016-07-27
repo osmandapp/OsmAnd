@@ -17,8 +17,8 @@
     <string name="context_menu_item_first_intermediate_point">增為第一個中途標點</string>
     <string name="add_as_last_destination_point">增為最後一個的中途標點</string>
     <string name="add_as_first_destination_point">增為第一個中途標點</string>
-    <string name="replace_destination_point">替換目的地標點</string>
-    <string name="new_destination_point_dialog">您已經有設定了目的地標點。</string>
+    <string name="replace_destination_point">替換目的地</string>
+    <string name="new_destination_point_dialog">您已經設定了一個目的地：</string>
     <string name="target_points">目的地</string>
     <string name="intermediate_point_too_far">中途標點 %1$s 離最近的道路太遠。</string>
     <string name="arrived_at_intermediate_point">您已經抵達您的中途標點</string>
@@ -943,7 +943,7 @@
     <string name="local_indexes_cat_srtm">等高線</string>
     <string name="local_indexes_cat_av">音訊/視訊資料</string>
     <string name="stop_routing_confirm">您確定要停止導航嗎？</string>
-    <string name="clear_dest_confirm">您確定想要清除您的目的地標點(含中途標點)？</string>
+    <string name="clear_dest_confirm">您確定想要清除您的目的地(含中間的目的地)？</string>
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
     <string name="precise_routing_mode_descr">允許去預估精確而無差錯的路線。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
@@ -1176,7 +1176,7 @@
     <string name="shared_string_favorite">我的最愛</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
-    <string name="keep_and_add_destination_point">加為最後的目的地標點</string>
+    <string name="keep_and_add_destination_point">增加為隨後的目的地</string>
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd 預計的路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
