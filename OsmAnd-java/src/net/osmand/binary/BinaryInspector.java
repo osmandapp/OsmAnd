@@ -1044,7 +1044,7 @@ public class BinaryInspector {
 				long ld = obj.getRestrictionId(i);
 				String tp = MapRenderingTypes.getRestrictionValue(obj.getRestrictionType(i));
 				int id = OSM_ID++;
-				b.append("\t<relation id = '" + id + "' version='1>\n");
+				b.append("<relation id = '" + id + "' version='1'>\n");
 				b.append("\t<member ref='").append(idway).append("' role='from' type='way' />\n");
 				b.append("\t<tag k='").append("from_osmand_id").append("' v='").append(obj.getId()).append("' />\n");
 				b.append("\t<tag k='").append("from_id").append("' v='").append(obj.getId() >> SHIFT_ID).append("' />\n");
@@ -1052,7 +1052,7 @@ public class BinaryInspector {
 				b.append("\t<tag k='").append("to_id").append("' v='").append(ld >> SHIFT_ID).append("' />\n");
 				b.append("\t<tag k='").append("type").append("' v='").append("restriction").append("' />\n");
 				b.append("\t<tag k='").append("restriction").append("' v='").append(tp).append("' />\n");
-				b.append("\t</relation>\n");
+				b.append("</relation>\n");
 			}
 		}
 	}
