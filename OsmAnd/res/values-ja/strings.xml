@@ -21,7 +21,7 @@
      
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します</string>
-     <string name="voice_stream_voice_call">音声呼出ストリーム(通話音とBT接続されたカーステレオの音楽)</string>
+     <string name="voice_stream_voice_call">通話ストリーム(BT接続カーステレオ含む)</string>
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>
      <string name="warning_tile_layer_not_downloadable">アプリケーションはマップレイヤー %1$sをダウンロードできません、再度インストールしてみてください。</string>
@@ -721,7 +721,7 @@ POIの更新は利用できません</string>
     <string name="download_using_mobile_internet">現在Wi-Fiに接続されていません。現在のインターネット接続を使用したままダウンロードを続行しますか？</string>
     <string name="street_name">道路名称</string>
 	<string name="hno">家屋番号</string>
-    <string name="monitoring_settings">旅程記録</string>
+    <string name="monitoring_settings">旅程・経路記録</string>
     <string name="monitoring_settings_descr">移動中の経路記録に関する設定をします</string>
     
     
@@ -884,13 +884,13 @@ POIの更新は利用できません</string>
 	<string name="map_widget_show_ruler">縮尺</string>
 	
 	<string name="map_widget_view_direction">視線方向</string>
-	<string name="map_widget_transparent">ウィジェットの透過</string>
+	<string name="map_widget_transparent">ウィジェット背景の透明化</string>
 	
 	
 	<string name="bg_service_sleep_mode_off">動作中\n バックグラウンドモード</string>
 	<string name="bg_service_sleep_mode_on">停止\n バックグラウンドモードの中断</string>
 	<string name="gps_wakeup_interval">GPS呼び出し間隔: %s</string>
-	<string name="int_continuosly">継続的に</string>
+	<string name="int_continuosly">可能な限り継続</string>
 	<string name="screen_is_locked">ロックを解除するには画面のロックアイコンをタップしてください</string>
 	<string name="map_widget_top_text">道路名称(国道、高速道路等)</string>
 	<string name="map_widget_config">画面設定</string>
@@ -1116,7 +1116,7 @@ POIの更新は利用できません</string>
 	<string name="live_monitoring_interval">オンライン追跡間隔</string>
 	<string name="live_monitoring_url_descr">指定したWebアドレスに経路データを送信します／使えるパラメータ:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
 	<string name="live_monitoring_url">オンライン追跡ウェブアドレス</string>
-	<string name="gpx_monitoring_disabled_warn">\'旅程記録\'での設定を使用しGPXウィジェットを使って経路を記録します。</string>
+	<string name="gpx_monitoring_disabled_warn">\'旅程・経路記録\'での設定を使用しGPXウィジェットを使って経路を記録します。</string>
 	<string name="show_current_gpx_title">現在のトラックを表示</string>
 	<string name="free_version_message">このOsmAnd 無料版はダウンロード数が%1$s個に制限されており、オフラインでのWikipedia記事利用もサポートしていません。</string>
 	<string name="free_version_title">無料版</string>
@@ -1184,8 +1184,8 @@ POIの更新は利用できません</string>
 	<string name="search_position_undefined">未定義</string>
 	
 	
-	<string name="search_position_map_view">マップ中心に表示</string>
-	<string name="select_search_position">指定地点から検索:</string>
+	<string name="search_position_map_view">マップ画面中心</string>
+	<string name="select_search_position">検索基点:</string>
 	<string name="context_menu_item_search">近隣を検索</string>
 	<string name="shared_string_save_as_gpx">GPXトラックとしてルートを保存</string>
 	<string name="route_successfully_saved_at">ルートを「%1$s」として保存しました。</string>
@@ -1348,7 +1348,7 @@ POIの更新は利用できません</string>
     <string name="local_map_names">ローカル名(その国での呼称)</string>
     <string name="lang_sw">スワヒリ語</string>
     <string name="lang_he">ヘブライ語</string>
-    <string name="home">ダッシュボードメニュー</string>
+    <string name="home">ダッシュボード</string>
     <string name="live_monitoring_m_descr">GPXログが有効になっている場合、指定したWebサービスへデータを送信します</string>
 	<string name="live_monitoring_m">オンライン追跡に関する設定(GPXが必要)</string>
     <string name="live_monitoring_start">オンライントラッキング開始</string>
@@ -1512,12 +1512,12 @@ POIの更新は利用できません</string>
     <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します</string>
     <string name="osmo_plugin_description">"このプラグインはOpenStreetMapモニタリング機能の一部を提供します。 https://osmo.mobi を参照して下さい。\n\nあなたはグループに参加している全てのデバイスをリアルタイムで追跡することが可能です。あなたが属しているグループのアップロードされた地点や経路を見ることも出来ます。\n\nあなたが OsMo.mobi のウェブサイト上で規則に従い作成したグループは、数ヶ月削除されることはありません。 "</string>
     <string name="osmo_plugin_name">OpenStreetMapモニタリング</string>
-   	<string name="always_center_position_on_map">位置を常に中央表示</string>
+   	<string name="always_center_position_on_map">移動時、現在地を画面中央よりに表示</string>
     <string name="voice_pref_title">音声関連設定</string>
     <string name="misc_pref_title">その他の設定</string>
     <string name="localization_pref_title">ローカライズ関連設定</string>
     <string name="index_item_nation_addresses">全国の住所</string>
-	<string name="index_item_world_altitude_correction">世界基準による標高補正</string>
+	<string name="index_item_world_altitude_correction">世界間標高補正データ</string>
 	<string name="index_item_world_seamarks">全世界の満潮水位線</string>
 	<string name="index_item_world_bitcoin_payments">全世界ビットコインでの支払い</string>
 	<string name="index_item_world_basemap">世界地図(ワールドベースマップ)</string>
@@ -1622,7 +1622,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">徒歩</string>
     <string name="record_plugin_description">"このプラグインはマップ画面のGPXログウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。\n\n記録された経路は、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。 "</string>
-    <string name="record_plugin_name">旅程記録</string>
+    <string name="record_plugin_name">旅程・経路記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
@@ -1672,7 +1672,7 @@ POIの更新は利用できません</string>
     <string name="rendering_category_details">詳細の追加描写</string>
     <string name="rendering_category_transport">交通機関の追加描写</string>
     <string name="rendering_category_others">他のマップ要素に関する設定</string>
-    <string name="map_widget_appearance_rem">残りの要素</string>
+    <string name="map_widget_appearance_rem">その他機能</string>
     <string name="map_widget_top">ステータスバー</string>
 	<string name="map_widget_right">右パネル</string>
 	<string name="map_widget_left">左パネル</string>
@@ -1728,9 +1728,9 @@ POIの更新は利用できません</string>
     <string name="navigate_point_zone">区域</string>
     <string name="navigate_point_northing">北進</string>
     <string name="navigate_point_easting">東進</string>
-    <string name="download_tab_downloads">全データ</string>
-    <string name="download_tab_updates">更新データ</string>
-    <string name="download_tab_local">既存データ</string>
+    <string name="download_tab_downloads">ダウンロード</string>
+    <string name="download_tab_updates">更新可能</string>
+    <string name="download_tab_local">保存済み</string>
 	<string name="no_internet_connection">ダウンロード出来ません、インターネット接続を確認してください。</string>
     <string name="shared_string_dismiss">何もしない</string>
     <string name="everything_up_to_date">ストレージ内ファイルはすべて最新です</string>
@@ -1771,7 +1771,7 @@ POIの更新は利用できません</string>
 	<string name="shared_string_export">エクスポート</string>
 	<string name="shared_string_unexpected_error">予期しないエラーが発生</string>
 	<string name="shared_string_action_template">アクション {0}</string>
-	<string name="shared_string_collapse">破綻</string>
+	<string name="shared_string_collapse">折り畳み表示</string>
 	<string name="shared_string_currently_recording_track">現在の経路を記録</string>
 	<string name="shared_string_audio">音声</string>
 	<string name="shared_string_video">ビデオ</string>
@@ -2003,7 +2003,7 @@ POIの更新は利用できません</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
-    <string name="shared_string_trip_recording">旅程記録</string>
+    <string name="shared_string_trip_recording">旅程・経路記録</string>
     <string name="shared_string_navigation">ナビゲーション</string>
     <string name="osmand_running_in_background">バックグラウンドで実行</string>
     <string name="favourites_edit_dialog_title">お気に入りの情報</string>
@@ -2036,7 +2036,7 @@ POIの更新は利用できません</string>
     <string name="please_specify_poi_type_only_from_list">正しいPOIの種類を指定するか、そうでなければ省略してください</string>
     <string name="access_from_map_description">メニューボタンでメニューではなくダッシュボードを開きます</string>
     <string name="access_from_map">マップ画面から開く</string>
-    <string name="show_on_start_description">ONでOsmAnd起動時ダッシュボードメニューを自動的に表示します</string>
+    <string name="show_on_start_description">ONでOsmAnd起動時ダッシュボードを自動的に表示します</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
     <string name="release_2_2">" • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新\n\n • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更\n\n • ダッシュボード設定で任意の項目だけ表示できる様に変更可能\n\n • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能\n\n • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に\n\n • POI検索時より具体的に検索できる様に変更\n\n • POIやOSMの項目編集機能を改善\n\n • マップやその他データのダウンロード構造とUIを刷新\n\n他多数… "</string>
     <string name="osm_save_offline">ｵﾌﾗｲﾝで保存</string>
@@ -2099,7 +2099,7 @@ POIの更新は利用できません</string>
     <string name="search_on_the_map_item">マップ内検索方法</string>
     <string name="instalation_troubleshooting_item">インストールとトラブルシューティング</string>
     <string name="techical_articles_item">技術的項目</string>
-    <string name="versions_item">バージョン</string>
+    <string name="versions_item">バージョン履歴</string>
     <string name="feedback">フィードバック</string>
     <string name="contact_us">問い合わせ先</string>
     <string name="map_legend">マップの簡易説明</string>
@@ -2169,7 +2169,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_toolbar">ツールバー</string>
     <string name="shared_string_widgets">ウィジェット</string>
     <string name="add_points_to_map_markers_q">マップマーカーにすべての地点を追加しますか?</string>
-    <string name="shared_string_add_to_map_markers">マップマーカーに追加</string>
+    <string name="shared_string_add_to_map_markers">マップマーカーを追加</string>
     <string name="select_map_markers">マップマーカーを選択</string>
     <string name="no_map_markers_found">マップ画面でマーカーを追加してください</string>
     <string name="no_waypoints_found">経由地点が見つかりませんでした</string>
@@ -2180,7 +2180,7 @@ POIの更新は利用できません</string>
     <string name="clear_markers_history_q">マップマーカーの履歴を消去しますか？</string>
     <string name="active_markers">アクティブマーカー</string>
     <string name="map_markers">マップマーカー</string>
-    <string name="map_marker">マップマーカー</string>
+    <string name="map_marker">マップマーカー表示位置</string>
     <string name="consider_turning_polygons_off">ポリゴンによる描画をオフにすることを推奨します。</string>
     <string name="rendering_attr_showMtbRoutes_name">MTB用ルートを表示</string>
     <string name="show_polygons">ポリゴンを表示</string>
@@ -2310,7 +2310,9 @@ POIの更新は利用できません</string>
     <string name="map_widget_search">検索</string>
 	<string name="shared_string_is_open_24_7">24時間営業</string>
     <string name="storage_directory_card">メモリーカード</string>
-    <string name="shared_string_topbar">トップバー</string>
+    <string name="shared_string_topbar">画面上部</string>
     <string name="lang_hsb">ソルビア語(Upper)</string>
     <string name="lang_hu_formal">ハンガリー語(フォーマル)</string>
+    <string name="map_widget_bearing">相対方位</string>
+    <string name="map_widget_magnetic_bearing">磁方位</string>
     </resources>
