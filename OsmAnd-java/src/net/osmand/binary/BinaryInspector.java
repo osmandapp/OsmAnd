@@ -49,6 +49,7 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
@@ -542,17 +543,7 @@ public class BinaryInspector {
 				mapObjectsCounter.value++;
 				if (vInfo.osm) {
 					b.setLength(0);
-					BinaryMapDataObject bobj = new BinaryMapDataObject();
-					bobj.setArea(false);
-					bobj.coordinates = new int[obj.pointsX.length * 2];
-					for(int i = 0; i < obj.pointsX.length; i++) {
-						bobj.coordinates[2*i] = obj.pointsX[i];
-						bobj.coordinates[2*i +1] = obj.pointsY[i];
-					}
-					bobj.types = obj.types;
-					bobj.setId(obj.getId() << 1);
-					bobj.objectNames = obj.getNames();
-					printOsmMapDetails(bobj, b, obj.region);
+					printOsmRouteDetails(obj, b);
 					try {
 						printToFile(b.toString());
 					} catch (IOException e) {
@@ -612,7 +603,9 @@ public class BinaryInspector {
 						if (i > 0) {
 							b.append(", ");
 						}
-						b.append(obj.getRestrictionId(i)).append(" (").append(obj.getRestrictionType(i)).append(") ");
+						b.append(obj.getRestrictionId(i)).append(" (").append(
+								MapRenderingTypes.getRestrictionValue(
+								obj.getRestrictionType(i))).append(") ");
 
 					}
 					b.append("] ");
@@ -886,7 +879,7 @@ public class BinaryInspector {
 						} else if (vInfo.vmapObjects) {
 							b.setLength(0);
 							if (vInfo.osm) {
-								printOsmMapDetails(obj, b, null);
+								printOsmMapDetails(obj, b);
 								try {
 									printToFile(b.toString());
 								} catch (IOException e) {
@@ -993,13 +986,90 @@ public class BinaryInspector {
 
 	private static int OSM_ID = 1;
 
-	private void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b, RouteRegion reg) {
+	private void printOsmRouteDetails(RouteDataObject obj, StringBuilder b) {
+		StringBuilder tags = new StringBuilder();
+		int[] types = obj.getTypes();
+		for (int j = 0; j < types.length; j++) {
+			RouteTypeRule rt = obj.region.quickGetEncodingRule(types[j]);
+			if (rt == null) {
+				throw new NullPointerException("Type " + types[j] + "was not found");
+			}
+			tags.append("\t<tag k='").append(rt.getTag()).append("' v='").append(rt.getValue()).append("' />\n");
+		}
+		TIntObjectHashMap<String> names = obj.getNames();
+		if (names != null && !names.isEmpty()) {
+			int[] keys = names.keys();
+			for (int j = 0; j < keys.length; j++) {
+				RouteTypeRule rt = obj.region.quickGetEncodingRule(keys[j]);
+				if (rt == null) {
+					throw new NullPointerException("Type " + keys[j] + "was not found");
+				}
+				String name = quoteName(names.get(keys[j]));
+				tags.append("\t<tag k='").append(rt.getTag()).append("' v='").append(name).append("' />\n");
+			}
+		}
+
+		tags.append("\t<tag k=\'").append("original_id").append("' v='").append(obj.getId() >> (SHIFT_ID))
+				.append("'/>\n");
+		tags.append("\t<tag k=\'").append("osmand_id").append("' v='").append(obj.getId()).append("'/>\n");
+
+		TLongArrayList ids = new TLongArrayList();
+		for (int i = 0; i < obj.getPointsLength(); i++) {
+			float lon = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
+			float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
+			int id = OSM_ID++;
+			b.append("\t<node id = '" + id + "' version='1' lat='" + lat + "' lon='" + lon + "' >\n");
+			if (obj.getPointNames(i) != null) {
+				String[] vs = obj.getPointNames(i);
+				int[] keys = obj.getPointNameTypes(i);
+				for (int j = 0; j < keys.length; j++) {
+					RouteTypeRule rt = obj.region.quickGetEncodingRule(keys[j]);
+					String name = quoteName(vs[j]);
+					tags.append("\t\t<tag k='").append(rt.getTag()).append("' v='").append(name).append("' />\n");
+				}
+			}
+			if (obj.getPointTypes(i) != null) {
+				int[] keys = obj.getPointTypes(i);
+				for (int j = 0; j < keys.length; j++) {
+					RouteTypeRule rt = obj.region.quickGetEncodingRule(keys[j]);
+					tags.append("\t\t<tag k='").append(rt.getTag()).append("' v='").append(rt.getValue()).append("' />\n");
+				}
+			}
+			b.append("\t</node >\n");
+			ids.add(id);
+		}
+		long idway = printWay(ids, b, tags);
+		if(obj.getRestrictionLength() > 0) {
+			for(int i = 0; i < obj.getRestrictionLength(); i ++) {
+				long ld = obj.getRestrictionId(i);
+				String tp = MapRenderingTypes.getRestrictionValue(obj.getRestrictionType(i));
+				int id = OSM_ID++;
+				b.append("\t<relation id = '" + id + "' version='1>\n");
+				b.append("\t<member ref='").append(idway).append("' role='from' type='way' />\n");
+				b.append("\t<tag k='").append("from_osmand_id").append("' v='").append(obj.getId()).append("' />\n");
+				b.append("\t<tag k='").append("from_id").append("' v='").append(obj.getId() >> SHIFT_ID).append("' />\n");
+				b.append("\t<tag k='").append("to_osmand_id").append("' v='").append(ld).append("' />\n");
+				b.append("\t<tag k='").append("to_id").append("' v='").append(ld >> SHIFT_ID).append("' />\n");
+				b.append("\t<tag k='").append("type").append("' v='").append("restriction").append("' />\n");
+				b.append("\t<tag k='").append("restriction").append("' v='").append(tp).append("' />\n");
+				b.append("\t</relation>\n");
+			}
+		}
+	}
+
+	private String quoteName(String name) {
+		name = name.replace("'", "&apos;");
+		name = name.replace("&", "&amp;");
+		return name;
+	}
+	
+	private void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
 		boolean point = obj.getPointsLength() == 1;
 		StringBuilder tags = new StringBuilder();
 		int[] types = obj.getTypes();
 		for (int j = 0; j < types.length; j++) {
-			TagValuePair pair = reg != null ? convert(reg.quickGetEncodingRule(types[j])): obj.getMapIndex().decodeType(types[j]);
+			TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
 			if (pair == null) {
 				throw new NullPointerException("Type " + types[j] + "was not found");
 			}
@@ -1008,8 +1078,7 @@ public class BinaryInspector {
 		if (obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0) {
 			for (int j = 0; j < obj.getAdditionalTypes().length; j++) {
 				int addtype = obj.getAdditionalTypes()[j];
-				TagValuePair pair = reg != null ? convert(reg.quickGetEncodingRule(addtype)): 
-						obj.getMapIndex().decodeType(addtype);
+				TagValuePair pair = obj.getMapIndex().decodeType(addtype);
 				if (pair == null) {
 					throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 				}
@@ -1020,13 +1089,12 @@ public class BinaryInspector {
 		if (names != null && !names.isEmpty()) {
 			int[] keys = names.keys();
 			for (int j = 0; j < keys.length; j++) {
-				TagValuePair pair = reg != null ? convert(reg.quickGetEncodingRule(keys[j])): obj.getMapIndex().decodeType(keys[j]);
+				TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
 				if (pair == null) {
 					throw new NullPointerException("Type " + keys[j] + "was not found");
 				}
 				String name = names.get(keys[j]);
-				name = name.replace("'", "&apos;");
-				name = name.replace("&", "&amp;");
+				name = quoteName(name);
 				tags.append("\t<tag k='").append(pair.tag).append("' v='").append(name).append("' />\n");
 			}
 		}
@@ -1078,9 +1146,6 @@ public class BinaryInspector {
 		}
 	}
 
-	private TagValuePair convert(RouteTypeRule routeTypeRule) {
-		return new TagValuePair(routeTypeRule.getTag(), routeTypeRule.getValue(), 0);
-	}
 
 	private long printWay(TLongArrayList ids, StringBuilder b, StringBuilder tags) {
 		int id = OSM_ID++;
