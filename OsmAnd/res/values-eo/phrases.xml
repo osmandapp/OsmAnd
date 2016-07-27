@@ -1635,9 +1635,9 @@
 	<string name="poi_toilets_access_community">Necesejo: nur por anoj</string>
 	<string name="poi_toilets_access_public">Necesejo: publika aliro</string>
 
-	<string name="poi_diaper_yes">Tablo por tra-vindotuk-ado</string>
-	<string name="poi_diaper_no">Sen tablo por tra-vindotuk-ado</string>
-	<string name="poi_diaper_room">Ĉambro por tra-vindotuk-ado</string>
+	<string name="poi_diaper_yes">Tablo por trans-vindotuk-ado</string>
+	<string name="poi_diaper_no">Sen tablo por trans-vindotuk-ado</string>
+	<string name="poi_diaper_room">Ĉambro por trans-vindotuk-ado</string>
 
 	<string name="poi_maxstay">Tempolimo de parkumado</string>
 
