@@ -10,7 +10,7 @@
     
     <string name="search_villages_and_postcodes">البحث عن المزيد من القرى/الرمز البريدي</string>
 	<string name="gps_not_available">يرجى تمكين GPS في إعدادات</string>
-    <string name="replace_destination_point">استبدل نقطة الوجهة</string>
+    <string name="replace_destination_point">استبدال الوجهة</string>
 <string name="email">بريد إلكتروني</string>
 	
 	<string name="filter_current_poiButton">تصفية</string>
@@ -37,7 +37,7 @@
     
     <string name="local_indexes_cat_av">بيانات الصوت / الفيديو</string>
     <string name="stop_routing_confirm">هل أنت متأكد أنك تريد إيقاف الملاحة؟</string>
-    <string name="clear_dest_confirm">هل أنت متأكد أنك تريد مسح نقطة الوجهة (والوجهات المتوسطة) ؟</string>
+    <string name="clear_dest_confirm">هل أنت متأكد أنك تريد مسح نقطة الوجهة (والوجهات الوسيطية) ؟</string>
     <string name="precise_routing_mode">التوجيه الدقيق (ألفا)</string>
     <string name="recording_context_menu_precord">التقاط صورة</string>
     <string name="dropbox_plugin_name">ملحق دروب بوكس</string>
@@ -78,7 +78,7 @@
     <string name="map_widget_monitoring_services">خدمات التسجيل</string>
 	<string name="no_route">لا طريق</string>
 	<string name="delete_target_point">إزالة وجهة</string>
-    <string name="new_destination_point_dialog">لديك نقطة وجهة بالفعل.</string>
+    <string name="new_destination_point_dialog">لقد حددت نقطة وجهة سابقا:</string>
     <string name="target_points">الوجهات</string>
     <string name="btn_advanced_mode">الوضع المتقدم…</string>
     <string name="poi_filter_parking">موقف سيارات</string>
@@ -232,7 +232,7 @@
     <string name="plugin_distance_point">نقطة</string>
     <string name="gpx_file_name">GPX اسم الملف</string>
     <string name="gpx_saved_sucessfully">ملف GPX حفظها بنجاح {0}</string>
-    <string name="osmand_distance_planning_plugin_description"/>
+    <string name="osmand_distance_planning_plugin_description">هاته الاضافة تتيح مؤشر على الخريطة يسمح بانشاء مسارات بالنقر على الخريطة، استعمال أو تعديل ملف GPX موجود، تخطيط رحلة أو حساب المسافة بين نقاط ما. النتائج يمكن حفظها كملف GPX الذي يمكن استخدامه للارشاد في وقت لاحق.</string>
     <string name="osmand_distance_planning_plugin_name">حاسبة مسافة وأداة التخطيط</string>
     <string name="shared_string_do_not_show_again">لا تظهر مرة أخرى</string>
     <string name="distance_measurement_start_editing">بدء تحرير</string>
@@ -312,7 +312,7 @@
 	<string name="show_view_angle">عرض عرض اتجاه</string>
 	<string name="use_english_names">استخدام الاسماء الانجليزية في الخرائط</string>
 	<string name="app_settings">إعدادات التطبيق</string>
-	<string name="save_current_track">حفظ المسار الحالي GPX</string>
+	<string name="save_current_track">حفظ مسار GPX الحالي</string>
 	<string name="shared_string_settings">إعدادات</string>
 	
     
@@ -355,7 +355,7 @@
     <string name="layer_recordings">طبقة التسجيل</string>
     <string name="recording_description">تسجيل %1$s %3$s %2$s</string>
     <string name="map_widget_av_notes">ملاحظات الصوت/الفيديو</string>
-    <string name="audionotes_plugin_description">تدوين الملاحظات السمعية/البصرية أثناء الرحلة</string>
+    <string name="audionotes_plugin_description">هاته الأداة توفر وظائف لتدوين الملاحظات الصوتية /المصورة/الفيديو خلال الرحلة، سواء باستخدام زر على شاشة الخريطة، أو مباشرة من القائمة لأي موقع على الخريطة.</string>
     <string name="audionotes_plugin_name">الملاحظات الصوتية / الفيديو</string>
     <string name="download_roads_only_maps">خرائط الطرقات فقط</string>
     
@@ -368,7 +368,7 @@
 	<string name="rendering_attr_showRoadMaps_name">خرائط الطرقات فقط</string>
     <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام تعليمات أندرويد البطيئة بدلا من التعليمات البرمجية الأصلية) .</string>
     <string name="native_library_not_running">يعمل التطبيق في الوضع الآمن ( عطّله من إعدادات ).</string>
-    <string name="background_service_is_enabled_question">خدمة وضع السكون لـOsmAnd لا تزال قيد التشغيل. هل تريد إيقافها ؟</string>
+    <string name="background_service_is_enabled_question">خدمة OsmAnd لا تزال قيد التشغيل في الخلفية. هل تريد إيقافها ؟</string>
     <string name="rendering_attr_roadColors_description">اختر نظام ألوان الطريق:</string>
 	<string name="rendering_attr_roadColors_name">نظام ألوان الطريق</string>
     <string name="target_point">الوجهة %1$s</string>
@@ -459,7 +459,7 @@
 	<string name="shared_location">موقع مشترك</string>
 	<string name="osmand_parking_event">استرجع السيارة من الموقف</string>
 	<string name="osmand_parking_warning_text">لقد أضيف تنبيه لاسترجاع سيارتك مسبقا إلى تقويمك. سيظل التنبيه هناك حتى تقوم بحذفه يدويا.</string>    
-	<string name="osmand_parking_time_limit_title">حدد المهلة القصوى لموقف السياراة</string>
+	<string name="osmand_parking_time_limit_title">حدد مهلة الركن</string>
 	<string name="osmand_parking_delete_confirm">هل تريد إزالة علامة موقع ركن السيارة ؟</string>
 	<string name="osmand_parking_delete">إزالة علامة وقوف السيارة</string>
 	<string name="osmand_parking_choose_type">اختر نوع مواقف السيارات</string>
@@ -485,8 +485,8 @@
 	<string name="osmand_parking_position_description_add">لأخذ السيارة من:</string>
 	<string name="osmand_parking_pm">م</string>
 	<string name="osmand_parking_am">ص</string>
-	<string name="osmand_parking_position_name">نقطة وقوف السيارات</string>
-	<string name="osmand_parking_plugin_description"/>
+	<string name="osmand_parking_position_name">نقطة ركن</string>
+	<string name="osmand_parking_plugin_description">اضافة موقف السيارات تسمح بحفظ الأماكن التي ركنت بها سيارتك والوقت المتبقي للركن(في حالة وقت محدد). كل من المكان والزمن متواجدان على لوحة القياس وكذلك في المؤشرات على شاشة الخريطة. يمكن اضافة منبه الى رزنامة جهازك كتذكير.</string>
 	<string name="osmand_parking_plugin_name">ملحق مواقف السيارة</string>
 	<string name="context_menu_item_add_parking_point">أشر إليه كموقف السيارات</string>
 	<string name="context_menu_item_delete_parking_point">احذف علامة وقوف السيارات</string>
@@ -522,7 +522,7 @@
 	
 	<string name="osmand_accessibility_description"/>
 	
-	<string name="osmand_development_plugin_description">عرض إعدادات مميزات التطوير والتنقيح من مثل محاكاة المسار أو عرض أداء التصيير.</string>
+	<string name="osmand_development_plugin_description">هذا البرنامج المساعد يعرض إعدادات لتطوير وتصحيح الميزات كاختبار أو محاكاة التوجيه، أداء الشاشة، أو الإشعار الصوتي. هاته الإعدادات معدة للمطورين و المستخدم العام لا يحتاجها.</string>
 	<string name="plugins_screen">ملحقات</string>
 	
 	<string name="prefs_plugins_descr">تفعّل الملحقات إعداداتٍ متقدمة ووظائف إضافية</string>
@@ -1002,7 +1002,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="gpx_option_reverse_route">عكس اتجاه GPX</string>
 	<string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
 	<string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-	<string name="switch_to_vector_map_to_see">لعرض الخرائط المتجهية المحفوظة لهذا الموقع.\n\t اضغط زر القائمة → \'ضبط الخريطة\' → \'مصدر الخريطة… \' → \'خرائط متجهية بدون إتصال\'.</string>
+	<string name="switch_to_vector_map_to_see">سهم التوجيه بدون أنترنت متوفر لهذا الموقع.
+للاستخدام اذهب القائمة← ضبط الخريطة ←مصدر الخريطة ←Offline vector maps.</string>
 	<string name="choose_audio_stream">خروج التوجيه الصوتي</string>
 	<string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي</string>
 	<string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
@@ -1225,11 +1226,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
 	<string name="shared_string_add_to_favorites">إضافة إلى المواقع المفضلة</string>
 	<string name="shared_string_my_places">مواقعي</string>
-	<string name="days_behind">يوما متأخرة</string>
+	<string name="days_behind">متخلف بأيام</string>
 	<string name="watch">شاهد</string>
-	<string name="routing_attr_no_new_routing_name">لا تستخدم قواعد الإصدار 1.9</string>
+	<string name="routing_attr_no_new_routing_name">قواعد توجيه No v1.9</string>
     <string name="navigate_point_northing">نحو الشمال</string>
-    <string name="home_button">البداية</string>
+    <string name="home_button">الصفحة الرئيسية</string>
     <string name="agps_data_last_downloaded">آخر ما تحميله من بيانات A-GPS: %1$s</string>
     <string name="welcome_text">OsmAnd يوفر تصفح خرائط عالمي بدون اتصال، وكذلك ملاحة عالمية بدون اتصال!</string>
 	<string name="welcome_header">أهلا</string>
@@ -1297,7 +1298,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="rotate_map_none_opt">بدون تدوير (الشمال إلى الأعلى)</string>
 	<string name="rotate_map_compass_opt">حسب البوصلة</string>
 	<string name="gpx_monitoring_start">ابدأ تسجيل GPX</string>
-	<string name="traffic_warning_stop">إشارة التوقف</string>
+	<string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
 	<string name="gpx_monitoring_stop">إيقاف تسجيل GPX</string>
     <string name="transport_Stop">موقف</string>
@@ -1305,18 +1306,18 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_audio">صوت</string>
 	<string name="shared_string_currently_recording_track">المسار الجاري تسجيله</string>
 	<string name="record_plugin_name">تسجيل الرحلة</string>
-	<string name="save_global_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار العام (ممكن عن طريق ويدجت تسجيل GPX على الخريطة)</string>
+	<string name="save_global_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار العام (مفعل عن طريق أداة تسجيل GPX على الخريطة)</string>
 	<string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
 	<string name="voice">صوت مسج</string>
 	<string name="get_directions">الاتجاهات</string>
 	<string name="show_point_options">إستخدام الموقع …</string>
 	<string name="favorite">مفضلة</string>
-	<string name="speak_favorites">نقاط مفضلة قريبة</string>
+	<string name="speak_favorites">نقاط مفضلة مجاورة</string>
 	<string name="save_as_favorites_points">إحفظ كمجموعة مفضلة</string>
     <string name="add_favorite_dialog_top_text">أدخل اسم المفضلة</string>
 	<string name="add_favorite_dialog_favourite_added_template">"تم إضافة النقطة المفضلة  \'\'{0}\'\' بنجاح."</string>
 	<string name="update_existing">استبدال</string>
-	<string name="fav_point_dublicate">تكرار في إسم النقطة المفضلة</string>
+	<string name="fav_point_dublicate">تكرارإسم النقطة المفضلة</string>
     <string name="fav_point_dublicate_message">تم تغيير اسم النقطة المفضلة الخاصة بك إلى %1$s لتجنب الأسماء المكررة.</string>
     <string name="fav_imported_sucessfully">تم بنجاح استيراد المفضلة</string>
 	<string name="fav_file_to_load_not_found">لم يتم العثور على ملف GPX يحتوي على الأماكن المفضلة في {0}</string>
@@ -1337,81 +1338,81 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="track_points">نقاط المسار</string>
 	<string name="plugin_touringview_name">عرض خريطة السياحة</string>
 	<string name="rename_failed">فشل إعادة التسمية.</string>
-	<string name="back_to_map">العودة إلى الخريطة</string>
-	<string name="share_note">مشاركة ملاحظة</string>
+	<string name="back_to_map">عودة إلى الخريطة</string>
+	<string name="share_note">شارك ملاحظة</string>
     <string name="location_on_map">"الموقع :\nالعرض %1$s\nالطول  %2$s"</string>
 	<string name="notes">ملاحظات</string>
-	<string name="online_map">خريطة على الإنترنت</string>
+	<string name="online_map">خريطة نت</string>
 	<string name="roads_only">الطرق فقط</string>
     <string name="device_memory">ذاكرة الجهاز</string>
-    <string name="edit_group">تحرير مجموعة</string>
-    <string name="remove_the_tag">قم بإزالة العلامة</string>
+    <string name="edit_group">تعديل مجموعة</string>
+    <string name="remove_the_tag">إزالة العلامة</string>
     <string name="gps_status">حالة GPS</string>
-    <string name="rendering_attr_streetLighting_name">إضاءة الشوارع</string>
+    <string name="rendering_attr_streetLighting_name">إنارة الشوارع</string>
     <string name="proxy_pref_title">بروكسي</string>
-    <string name="proxy_pref_descr">إعداد اتصال بروكسي إنترنت</string>
+    <string name="proxy_pref_descr">إعداد اتصال إنترنت بالبروكسي</string>
     <string name="settings_privacy">الخصوصية</string>
     <string name="points">نقاط</string>
 	<string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
-	<string name="avoid_roads_msg">يمكنك تشغيل مسار بديل عن طريق تحديد طرق لتجنبها</string>
+	<string name="avoid_roads_msg">يمكنك تشغيل مسار بديل بتحديد طرق متجنبة</string>
 	<string name="rendering_attr_roadStyle_name">نمط الطريق</string>
     <string name="rendering_value__name">الافتراضي</string>
     <string name="rendering_value_default_name">الافتراضي</string>
     <string name="rendering_value_orange_name">برتقالي</string>
     <string name="rendering_value_germanRoadAtlas_name">أطلس الطرق الألمانية</string>
-    <string name="rendering_value_highContrastRoads_name">تباين الطرق العالي</string>
-	<string name="traffic_warning_railways">عبور خط السكة الحديد</string>
+    <string name="rendering_value_highContrastRoads_name">طرق بتباين عالي</string>
+	<string name="traffic_warning_railways">عبور خط السكة الحديدية</string>
 	<string name="rendering_value_americanRoadAtlas_name">أطلس الطرق الأمريكية</string>
-    <string name="routing_attr_no_new_routing_description">لا تستخدم قواعد التوجيه التي أدخلت في إصدار v1.9</string>
-    <string name="dash_download_msg_none">هل تريد تنزيل الخرائط غير المتصلة؟</string>
-    <string name="dash_download_msg">"قمت بتنزيل خرائط  %1$s"</string>
+    <string name="routing_attr_no_new_routing_description">لا تستخدم قواعد توجيه الإصدار v1.9</string>
+    <string name="dash_download_msg_none">هل تريد تنزيل الخرائط غير المتصلة بالنت؟</string>
+    <string name="dash_download_msg">قمت بتنزيل %1$s من الخرائط</string>
     <string name="dash_download_new_one">تحميل خريطة جديدة</string>
     <string name="dash_download_manage">إدارة</string>
-    <string name="rendering_attr_transportStops_name">مواقف وسائل النقل</string>
+    <string name="rendering_attr_transportStops_name">مواقف المواصلات</string>
     
     <string name="navigate_point_zone">منطقة</string>
     <string name="download_tab_downloads">كافة التنزيلات</string>
     <string name="download_tab_updates">تحديثات</string>
     <string name="download_tab_local">محلي</string>
-	<string name="no_internet_connection">تحميل غير ممكن، الرجاء التحقق من اتصالك بالإنترنت.</string>
+	<string name="no_internet_connection">تحميل غير ممكن، رجاءا تحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
     <string name="use_opengl_render">استخدام OpenGL للتقديم</string>
-    <string name="use_opengl_render_descr">استخدام تسارع الأجهزة لتقديم OpenGL (قد لا تعمل على بعض الأجهزة)</string>
+    <string name="use_opengl_render_descr">"استخدام أداء OpenGL  مسرع (قد لا تعمل على بعض الأجهزة)"</string>
     <string name="osmo_use_https_descr">استخدام اتصال أمن إلى الخادم</string>
     <string name="osmo_use_https">استخدام HTTPS</string>
-	<string name="map_update">"التحديثات متتوفرة لخرائط  %1$s"</string>
+	<string name="map_update">التحديثات متوفرة لـ %1$s من الخرائط</string>
 	<string name="search_for">البحث عن</string>
 	<string name="coordinates">إحداثيات</string>
-	<string name="lock_screen_request_explanation">"%1$s  يحتاج هذا الإذن لإيقاف الشاشة للحصول على ميزة توفير الطاقة."</string>
-    <string name="wake_on_voice">قم بتشغيل الشاشة</string>
-    <string name="wake_on_voice_descr">قم بتشغيل شاشة الجهاز (إذا هي مغلقة) عندما تقترب من دوران</string>
-    <string name="impassable_road">تجنب الطرق…</string>
+	<string name="lock_screen_request_explanation">"%1$s  يحتاج هذا الإذن لإطفاء الشاشة لتوفير الطاقة."</string>
+    <string name="wake_on_voice">تشغيل الشاشة</string>
+    <string name="wake_on_voice_descr">تشغيل شاشة الجهاز (إذا كانت مغلقة) عندما الاقتراب من منعطف</string>
+    <string name="impassable_road">تجنب طرقات…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">طرق السكك الحديدية</string>
     <string name="rendering_attr_tramRoutes_name">خطوط الترام</string>
     <string name="rendering_category_routes">طرق</string>
-    <string name="rendering_category_transport">وسائل النقل</string>
+    <string name="rendering_category_transport">المواصلات</string>
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
     <string name="map_widget_appearance_rem">العناصر المتبقية</string>
     <string name="map_widget_top">شريط المعلومات</string>
-	<string name="map_widget_right">اللوحة اليمينية</string>
-	<string name="map_widget_left">اللوحة اليسارية</string>
-	<string name="search_radius_proximity">بالقرب من</string>
+	<string name="map_widget_right">اللوحة اليمنى</string>
+	<string name="map_widget_left">اللوحة اليسرى</string>
+	<string name="search_radius_proximity">ضمن</string>
     <string name="osmo_device_not_found">لم يتم العثور على الجهاز</string>
     <string name="anonymous_user">مستخدم مجهول</string>
-    <string name="logged_as">تسجيل الدخول ك %1$s</string>
+    <string name="logged_as">سجل الدخول بـ %1$s</string>
 	<string name="speed_limit_exceed">الحد المسموح للسرعة</string>
-	<string name="fav_point_emoticons_message">تم تعديل اسم النقطة المفضلة لديك إلى %1$s لتسهيل حفظ النص مع الوجوه التعبيرية بشكل صحيح إلى ملف.</string>
-    <string name="print_route">طباعة مسار الطريق</string>
+	<string name="fav_point_emoticons_message">تم تعديل اسم النقطة المفضلة إلى %1$s لتسهيل حفظ النص مع الوجوه التعبيرية بشكل صحيح إلى ملف.</string>
+    <string name="print_route">طباعة الطريق</string>
     <string name="text_size_descr">تعيين حجم النص على الخريطة.</string>
     <string name="text_size">حجم النص</string>
     <string name="traffic_warning_speed_limit">حد السرعة</string>
-    <string name="sleep_mode_stop_dialog">إيقاف وضع السكون لتحديد المواقع ؟</string>
+    <string name="sleep_mode_stop_dialog">"إيقاف وضع GPS المفعل في الخلفية  ؟"</string>
 	<string name="stop_navigation_service">إيقاف</string>
 	<string name="confirm_every_run">دائماً اسأل</string>
 	<string name="save_global_track_interval">الفاصل الزمني العام للتسجيل</string>
 	<string name="background_service_int">الفاصل الزمني لإيقاظ GPS</string>
-	<string name="enable_sleep_mode">تمكين وضع السكون لتحديد المواقع</string>
-	<string name="save_track_to_gpx_globally">سجل المسار إلى ملف GPX</string>
+	<string name="enable_sleep_mode">تفعيل وضع GPS في الخلفية</string>
+	<string name="save_track_to_gpx_globally">تسجيل المسار في ملف GPX</string>
 	<string name="save_current_track_descr">حفظ المسار الحالي إلى الذاكرة الآن</string>
 	<string name="save_track_to_gpx">سجل المسار إلى ملف GPX أثناء الملاحة</string>
 	<string name="save_track_to_gpx_descrp">سيتم حفظ المسارات إلى مجلد المسارات أثناء الملاحة</string>
@@ -1481,28 +1482,28 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_collapse">إغلاق</string>
 	<string name="drawer">قائمة منبسطة</string>
     <string name="osm_settings">تعديل OSM</string>
-	<string name="free">"حر %1$s "</string>
-	<string name="parking_place">مكان وقوف سيارات</string>
-    <string name="version_settings_descr">حمّل الإصدارات المبنية يوميا</string>
-    <string name="version_settings">إصدرات مبنية</string>
+	<string name="free">"مجاني %1$s "</string>
+	<string name="parking_place">مكان للركن</string>
+    <string name="version_settings_descr">تحميل الإصدارات اليومية</string>
+    <string name="version_settings">إصدرات</string>
     <string name="speak_pedestrian">معابر المشاة</string>
     <string name="traffic_warning_pedestrian">معابر المشاة</string>
 	<string name="show_railway_warnings">تقاطعات القطارات</string>
 	<string name="show_pedestrian_warnings">معابر المشاة</string>
     <string name="navigate_point_easting">تشريق</string>
     <string name="error_avoid_specific_road">لا يوجد منفذ للتجاوز</string>
-    <string name="rendering_attr_tramTrainRoutes_name">سكك الترام والقطارات</string>
+    <string name="rendering_attr_tramTrainRoutes_name">سكك القطارات والترام</string>
 	<string name="rendering_attr_trolleybusRoutes_name">طرق الحافلات الكهربائية</string>
     <string name="rendering_attr_busRoutes_name">طرق الحافلات</string>
     <string name="rendering_attr_subwayMode_name">سكك مترو الأنفاق</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">مشاركة طرق تاكسي الأجرة</string>
-    <string name="speed_limit_exceed_message">حدد حد السرعة المسموح به، أعلى منه سوف تتلقى تنبيها صوتيا.</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">شارك طرق التاكسي</string>
+    <string name="speed_limit_exceed_message">حدد حد السرعة المسموح به لتلقي تنبيه صوتي ما إذا تجاوزته.</string>
 	<string name="traffic_warning_border_control">مراقبة الحدود</string>
-    <string name="traffic_warning_payment">كشك تحصيل الرسوم</string>
-    <string name="traffic_warning_calming">هدوء مروري</string>
+    <string name="traffic_warning_payment">كشك الرسوم</string>
+    <string name="traffic_warning_calming">تخفيف الازدحام</string>
     <string name="traffic_warning_speed_camera">كاميرا مراقبة السرعة</string>
     <string name="traffic_warning">تنبيه مروري</string>
-	<string name="speak_poi">POI قريبة</string>
+	<string name="speak_poi">POI مجاورة</string>
 	<string name="way_alarms">تنبيهات مرورية</string>
 	<string name="save_track_to_gpx_globally_headline">تسجيل المسار حسب الطلب</string>
 	<string name="download_additional_maps">حمّل الخرائط المفقودة %1$s (%2$d MB)؟</string>
@@ -1578,7 +1579,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="calculate_osmand_route_without_internet">احسب قسم طريق OsmAnd بدون إنترنت</string>
     <string name="gpx_option_calculate_first_last_segment">احسب طريق OsmAnd لأول وآخر قسمين في الطريق</string>
     <string name="use_displayed_track_for_navigation">هل ترغب باستخدام المسار المعروض للملاحة؟</string>
-    <string name="keep_and_add_destination_point">أضف كنقطة وجهة أخيرة</string>
+    <string name="keep_and_add_destination_point">أضافة كنقطة وجهة لاحقة</string>
     <string name="select_gpx">اختر GPX…</string>
     <string name="route_descr_select_destination">حدد الوجهة</string>
     <string name="routing_attr_prefer_motorway_name">تفضيل طرق الدراجات النارية</string>
@@ -1651,7 +1652,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="daynight">وضع نهاري/ليلي</string>
 	<string name="plugin_nautical_name">عرض الخرائط البحرية</string>
 	<string name="plugin_ski_name">عرض خرائط التزلج</string>
-	<string name="rendering_attr_pisteRoutes_name">منحدرات التزلج</string>
+	<string name="rendering_attr_pisteRoutes_name">منحدرات تزلج</string>
 	<string name="osmo_auth_error_short">فشل الحصول على صلاحية</string>
     <string name="index_item_world_ski">خريطة التزلج العالمية</string>
     <string name="index_item_world_seamarks">خريطة العلامات البحرية العالمية</string>
@@ -2088,7 +2089,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_wikipedia">ويكيبيديا</string>
     <string name="local_indexes_cat_wiki">ويكيبيديا</string>
     <string name="shared_string_show_details">إظهار التفاصيل</string>
-    <string name="rendering_attr_roadStyle_description">شكل الطريق</string>
+    <string name="rendering_attr_roadStyle_description">نمط الطريق</string>
     <string name="proxy_host_title">وكيل البروكسي</string>
     <string name="proxy_port_title">منفذ وكيل البروكسي</string>
     <string name="proxy_port_descr">رقم منفذ البروكسي (مثلا 8118)</string>
@@ -2101,7 +2102,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="av_video_quality">جودة مخرج الفيديو</string>
     <string name="osm_edit_deleted_poi">حذف OSM POI</string>
     <string name="osmo_use_server_name">الإسم المسجل</string>
-    <string name="osmo_auth_pending">في انتظار التصريح للدخول …</string>
+    <string name="osmo_auth_pending">في انتظار الترخيص …</string>
     <string name="osmo_settings">OsMO</string>
     <string name="download_wikipedia_maps">ويكيبيديا</string>
     <string name="voice_is_not_available_title">لم يتم تحديد صوت للتوجيه</string>
@@ -2112,7 +2113,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="poi_context_menu_modify">تعديل الPOI</string>
     <string name="unzipping_file">تفكيك ظغط الملف …</string>
     <string name="search_poi_location">جاري البحث عن الإشارة …</string>
-    <string name="access_from_map">الولوج عبر الخريطة</string>
+    <string name="access_from_map">الدخول عبر الخريطة</string>
     <string name="show_on_start">إظهار عند البدء</string>
     <string name="osmo_enable_tracker">إرسل نقاط وضعيتي</string>
     <string name="map_widget_bearing">تاثير نسبي</string>
@@ -2209,4 +2210,20 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osm_edit_modified_poi">OSM POI معدل</string>
     <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
     <string name="osm_edit_removed_note">ملاحظة OSM محذوفة</string>
+    <string name="rendering_attr_pisteGrooming_name">مسار زلق</string>
+    <string name="world_ski_missing">لاظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية</string>
+    <string name="rendering_attr_publicTransportMode_name">حافلة، ترامواي وغيرها</string>
+    <string name="osm_edit_created_note">إنشاء ملاحظة OSM</string>
+    <string name="osn_add_dialog_error">حدث استثناء: لم يتم إنشاء الملاحظة</string>
+    <string name="osn_close_dialog_error">حدث استثناء: لم يتم غلق الملاحظة</string>
+    <string name="osb_comment_dialog_error">حدث استثناء: لم تتم إضافة التعليق</string>
+    <string name="shared_string_commit">ارتكاب</string>
+
+    <string name="context_menu_item_delete_waypoint">حذف إحداثية GPX ؟</string>
+    <string name="context_menu_item_edit_waypoint">تعديل إحداثية GPX</string>
+    <string name="lang_nds">ألمانية منخفضة</string>
+    <string name="lang_fy">اللغة الفريزية</string>
+    <string name="rendering_attr_hideProposed_name">الأشياء المقترحة</string>
+    <string name="osm_edit_created_poi">إنشاء OSM POI</string>
+
     </resources>
