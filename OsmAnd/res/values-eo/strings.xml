@@ -428,7 +428,7 @@
     <string name="open_street_map_login_and_pass">Uzantnomo kaj pasvorto al OpenStreetMap</string>
     <string name="application_dir">Datum-konservada dosierujo</string>
     <string name="filter_poi_hint">Filtri laŭ nomo</string>
-    <string name="search_poi_category_hint">Entajpu por serĉi ĉie</string>
+    <string name="search_poi_category_hint">Entajpu ion por serĉi</string>
     <string name="agps_info">A-GPS informoj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
     <string name="shared_string_manage">Administri</string>
