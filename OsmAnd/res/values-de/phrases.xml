@@ -2893,4 +2893,19 @@
 	<string name="poi_pump_status_broken">Pumpenzustand: defekt</string>
 	<string name="poi_pump_status_locked">Pumpenzustand: gesperrt</string>
 
-</resources>
+<string name="poi_payment_troika_yes">Troika-Karte akzeptiert</string>
+	<string name="poi_payment_troika_no">Troika-Karte nicht akzeptiert</string>
+
+	<string name="poi_telescope">Teleskop</string>
+	<string name="poi_telescope_type_optical">Teleskop: optisch</string>
+	<string name="poi_telescope_type_radio">Teleskop: Radio</string>
+	<string name="poi_telescope_type_gamma">Teleskop: Gamma</string>
+	<string name="poi_telescope_diameter">Durchmesser</string>
+	<string name="poi_telescope_spectrum">Spektrum</string>
+	<string name="poi_telescope_usage_education">Nutzung: Bildung</string>
+	<string name="poi_telescope_usage_espionage">Nutzung: Spionage</string>
+	<string name="poi_telescope_usage_research">Nutzung: Forschung</string>
+
+	<string name="poi_observatory_type_espionage">Nutzung: Spionage</string>
+	<string name="poi_observatory_type_meteorological">Nutzung: meteorologische</string>
+	</resources>
