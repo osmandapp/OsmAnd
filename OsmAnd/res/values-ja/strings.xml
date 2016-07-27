@@ -2298,7 +2298,19 @@ POIの更新は利用できません</string>
     <string name="back_to_search">検索に戻る</string>
     <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
     <string name="show_something_on_map">%1$sをマップ上に表示</string>
-    <string name="release_2_4">" • 新しく、より強化されたフリーワード検索\n\n • Bluetooth関連の改善多数\n\n • ルート案内の改善、音声案内とターン及びレーン指示\n\n • 新たな言語と対象地域の追加\n\n • 他、多くの改善とバグ修正\n\n等々… "</string>
+    <string name="release_2_4">"
+ • 新しくなって、より強化されたフリーワード検索
+
+ • Bluetooth関連の改善多数
+
+ • 音声案内とターン及びレーン指示等のルート案内の改善
+
+ • 新たな言語と対象地域の追加
+
+ • 他、多くの改善とバグ修正
+
+等々…
+ "</string>
     <string name="dist_away_from_my_location">%1$s離れた場所を検索</string>
     <string name="show_on_map">マップ上に表示</string>
     <string name="share_history_subject">" OsmAndにて共有"</string>
