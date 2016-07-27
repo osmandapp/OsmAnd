@@ -588,6 +588,26 @@ public abstract class MapRenderingTypes {
 		
 	}
 
+	public static String getRestrictionValue(int i) {
+		switch (i) {
+		case RESTRICTION_NO_RIGHT_TURN:
+			return "NO_RIGHT_TURN".toLowerCase();
+		case RESTRICTION_NO_LEFT_TURN:
+			return "NO_LEFT_TURN".toLowerCase();
+		case RESTRICTION_NO_U_TURN:
+			return "NO_U_TURN".toLowerCase();
+		case RESTRICTION_NO_STRAIGHT_ON:
+			return "NO_STRAIGHT_ON".toLowerCase();
+		case RESTRICTION_ONLY_RIGHT_TURN:
+			return "ONLY_RIGHT_TURN".toLowerCase();
+		case RESTRICTION_ONLY_LEFT_TURN:
+			return "ONLY_LEFT_TURN".toLowerCase();
+		case RESTRICTION_ONLY_STRAIGHT_ON:
+			return "ONLY_STRAIGHT_ON".toLowerCase();
+		}
+		return "unkonwn";
+
+	}
 	
 }
 
