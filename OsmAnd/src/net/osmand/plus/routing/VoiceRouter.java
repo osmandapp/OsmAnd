@@ -105,8 +105,7 @@ public class VoiceRouter {
 	public boolean isMute() {
 		return mute;
 	}
-	
-	
+
 	protected CommandBuilder getNewCommandPlayerToPlay() {
 		if (player == null) {
 			return null;
@@ -114,9 +113,7 @@ public class VoiceRouter {
 		lastAnnouncement = System.currentTimeMillis();
 		return player.newCommandBuilder();
 	}
-	
-	
-	
+
 	public void updateAppMode() {
 		// Turn prompt starts either at distance, or additionally (TURN_IN and TURN only) if actual-lead-time(currentSpeed) < maximum-lead-time(defined by default speed)
 		if (router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)) {
@@ -203,8 +200,7 @@ public class VoiceRouter {
 			return -1;
 		}
 	}
-	
-	
+
 	private void nextStatusAfter(int previousStatus) {
 		//STATUS_UNKNOWN=0 -> STATUS_LONG_PREPARE=1 -> STATUS_PREPARE=2 -> STATUS_TURN_IN=3 -> STATUS_TURN=4 -> STATUS_TOLD=5
 		if (previousStatus != STATUS_TOLD) {
@@ -474,7 +470,7 @@ public class VoiceRouter {
 			}
 			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
 				if (!next.getTurnType().goAhead()) {  // Avoids isolated "and arrive.." prompt
-					andSpeakArriveAtPoint(nextNextInfo);
+					playAndArriveAtDestination(nextNextInfo);
 				}
 			}
 			nextStatusAfter(STATUS_TURN);
@@ -488,7 +484,7 @@ public class VoiceRouter {
 				} else {
 					playMakeTurnIn(currentSegment, next, dist - (int) btScoDelayDistance, null);
 				}
-				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
+				playGoAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_TURN_IN);
 
@@ -499,7 +495,7 @@ public class VoiceRouter {
 					// Do not play prepare for keep left/right
 				} else {
 					playPrepareTurn(currentSegment, next, dist);
-					playAndArriveAtDestination(repeat, nextInfo, currentSegment);
+					playGoAndArriveAtDestination(repeat, nextInfo, currentSegment);
 				}
 			}
 			nextStatusAfter(STATUS_PREPARE);
@@ -508,7 +504,7 @@ public class VoiceRouter {
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
 				playPrepareTurn(currentSegment, next, dist);
-				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
+				playGoAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_LONG_PREPARE);
 
@@ -522,20 +518,6 @@ public class VoiceRouter {
 		}
 	}
 
-	private void playAndArriveAtDestination(boolean repeat, NextDirectionInfo nextInfo, RouteSegmentResult currentSegment) {
-		RouteDirectionInfo next = nextInfo.directionInfo;
-		if (isTargetPoint(nextInfo) && (!playedAndArriveAtTarget || repeat)) {
-			if (next.getTurnType().goAhead()) {
-				playGoAhead(nextInfo.distanceTo, getSpeakableStreetName(currentSegment, next, false));
-				andSpeakArriveAtPoint(nextInfo);
-				playedAndArriveAtTarget = true;
-			} else if (nextInfo.distanceTo <= 2 * TURN_IN_DISTANCE) {
-				andSpeakArriveAtPoint(nextInfo);
-				playedAndArriveAtTarget = true;
-			}
-		}
-	}
-
 	public void announceCurrentDirection(Location currentLocation) {
 		synchronized (router) {
 			if (currentStatus != STATUS_UTWP_TOLD) {
@@ -546,7 +528,6 @@ public class VoiceRouter {
 		}
 	}
 
-	
 	private boolean playMakeUTwp() {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
@@ -687,8 +668,22 @@ public class VoiceRouter {
 			}
 		}
 	}
+
+	private void playGoAndArriveAtDestination(boolean repeat, NextDirectionInfo nextInfo, RouteSegmentResult currentSegment) {
+		RouteDirectionInfo next = nextInfo.directionInfo;
+		if (isTargetPoint(nextInfo) && (!playedAndArriveAtTarget || repeat)) {
+			if (next.getTurnType().goAhead()) {
+				playGoAhead(nextInfo.distanceTo, getSpeakableStreetName(currentSegment, next, false));
+				playAndArriveAtDestination(nextInfo);
+				playedAndArriveAtTarget = true;
+			} else if (nextInfo.distanceTo <= 2 * TURN_IN_DISTANCE) {
+				playAndArriveAtDestination(nextInfo);
+				playedAndArriveAtTarget = true;
+			}
+		}
+	}
 	
-	private void andSpeakArriveAtPoint(NextDirectionInfo info) {
+	private void playAndArriveAtDestination(NextDirectionInfo info) {
 		if (isTargetPoint(info)) {
 			String pointName = info == null ? "" : info.pointName;
 			CommandBuilder play = getNewCommandPlayerToPlay();
