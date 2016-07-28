@@ -153,7 +153,10 @@ public class SearchUICore {
 		return true;
 	}
 	
-	
+	public void resetPhrase() {
+		this.phrase = this.phrase.generateNewPhrase("", searchSettings);
+	}
+
 	public SearchResultCollection search(final String text, final ResultMatcher<SearchResult> matcher) {
 		SearchResultCollection quickRes = new SearchResultCollection();
 		final int request = requestNumber.incrementAndGet();

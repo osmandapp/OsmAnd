@@ -48,6 +48,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedWriter;
@@ -97,6 +98,7 @@ public class OsmandApplication extends MultiDexApplication {
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
+	SearchUICore searchUICore;
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -356,6 +358,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public GeocodingLookupService getGeocodingLookupService() {
 		return geocodingLookupService;
+	}
+
+	public SearchUICore getSearchUICore() {
+		return searchUICore;
 	}
 
 	public CommandPlayer getPlayer() {

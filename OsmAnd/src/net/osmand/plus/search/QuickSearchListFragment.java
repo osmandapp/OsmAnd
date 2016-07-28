@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -32,6 +33,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	private QuickSearchDialogFragment dialogFragment;
 	private QuickSearchListAdapter listAdapter;
 	private boolean touching;
+	private boolean scrolling;
 
 	enum SearchListFragmentType {
 		HISTORY,
@@ -51,6 +53,14 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		super.onViewCreated(view, savedInstanceState);
 		ListView listView = getListView();
 		if (listView != null) {
+			listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+				public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				}
+
+				public void onScrollStateChanged(AbsListView view, int scrollState) {
+					scrolling = (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE);
+				}
+			});
 			View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);
 			View footer = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_footer, null);
 			listView.addHeaderView(header, null, false);
@@ -191,7 +201,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	public void updateLocation(LatLon latLon, Float heading) {
-		if (listAdapter != null && !touching) {
+		if (listAdapter != null && !touching && !scrolling) {
 			listAdapter.setLocation(latLon);
 			listAdapter.setHeading(heading);
 			listAdapter.notifyDataSetChanged();

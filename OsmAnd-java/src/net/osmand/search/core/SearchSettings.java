@@ -34,7 +34,11 @@ public class SearchSettings {
 	public List<BinaryMapIndexReader> getOfflineIndexes() {
 		return offlineIndexes;
 	}
-	
+
+	public void setOfflineIndexes(List<BinaryMapIndexReader> offlineIndexes) {
+		this.offlineIndexes = Collections.unmodifiableList(offlineIndexes);
+	}
+
 	public int getRadiusLevel() {
 		return radiusLevel;
 	}
