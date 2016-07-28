@@ -2524,4 +2524,6 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt m
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
     <string name="confirmation_to_delete_history_items">Slet valgte elementer fra historik?</string>
     <string name="back_to_search">Tilbage til søg</string>
+    <string name="coords_search">Søg på koordinater</string>
+    <string name="advanced_coords_search">Avanceret søg på koordinater</string>
     </resources>
