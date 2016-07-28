@@ -528,8 +528,26 @@
     <string name="gpx_monitoring_stop">Parar grabación GPX</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Carreteras no aptas para vehículos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
-    <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro expiró.\n ¿Quieres realizar un nuevo registro?</string>
-    <string name="osmo_group_information_desc">" - Al crear un grupo, debes darle un nombre y completar la descripción.\n - Desde la aplicación, los grupos sólo se crean con el tipo Simple, lee más en el sitio web https://osmo.mobi/g/new\n - Puedes gestionar un grupo desde un sitio web, para ubicar todas las trazas y puntos disponibles\n - No avalamos el uso de grupos con sólo un usuario, si esto no es el grupo de PDI\n - Los grupos privados se limitan sólo a 8 personas\n - Los detalles sobre términos y condiciones, se encuentran en el sitio web OsMo.mobi\n - Si necesitas condiciones especiales, contacta con el soporte: osmo.mobi@gmail.com "</string>
+    <string name="osmo_auth_error">Error de autorización OsMo: %1$s.
+
+ Puede deberse a que el servicio esté temporalmente caído o que tu registro expiró.
+
+ ¿Quieres realizar un nuevo registro?</string>
+    <string name="osmo_group_information_desc">"
+ - Al crear un grupo, debes darle un nombre y completar la descripción.
+
+ - Desde la aplicación, los grupos sólo se crean con el tipo Simple, lee más en el sitio web https://osmo.mobi/g/new
+
+ - Puedes gestionar un grupo desde un sitio web, para ubicar todas las trazas y puntos disponibles
+
+ - No avalamos el uso de grupos con sólo un usuario, si esto no es el grupo de PDI
+
+ - Los grupos privados se limitan sólo a 8 personas
+
+ - Los detalles sobre términos y condiciones, se encuentran en el sitio web OsMo.mobi
+
+ - Si necesitas condiciones especiales, contacta con el soporte: osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Falló conexión a OsMo</string>
     <string name="osmo_gpx_points_downloaded">%1$s puntos OsMo descargados.</string>
@@ -671,7 +689,13 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
-    <string name="use_distance_measurement_help">* Pulsa para marcar un punto.\n * Mantén pulsado el mapa para quitar el punto anterior.\n * Mantén pulsado el punto para ver e incluir descripción.\n * Pulsa en el control de medición para ver más acciones.</string>
+    <string name="use_distance_measurement_help">* Pulsa para marcar un punto.
+
+ * Mantén pulsado el mapa para quitar el punto anterior.
+
+ * Mantén pulsado el punto para ver e incluir descripción.
+
+ * Pulsa en el control de medición para ver más acciones.</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
@@ -800,7 +824,7 @@
     <string name="add_as_last_destination_point">Añadir como último destino intermedio</string>
     <string name="add_as_first_destination_point">Añadir como primer destino intermedio</string>
     <string name="replace_destination_point">Reemplazar destino</string>
-    <string name="new_destination_point_dialog">Ya estableció el destino:</string>
+    <string name="new_destination_point_dialog">Ya se estableció el destino:</string>
     <string name="target_points">Destinos</string>
     <string name="intermediate_point_too_far">Destino intermedio, %1$s demasiado lejos de la carretera.</string>
     <string name="arrived_at_intermediate_point">Has llegado a tu destino intermedio</string>
@@ -833,7 +857,31 @@
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM con y sin conexión</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapa del país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de automóvil, bicicleta, y peatón con: - opción de cambio automático de vista día/noche - opción de ampliación según la velocidad - alineación opcional del mapa, según brújula o dirección del movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas. Limitaciones de la versión gratuita de OsmAnd: - Límite del número de mapas descargados - Sin acceso a los PDIs descargados de Wikipedia. OsmAnd está siendo desarrollado activamente y nuestro proyecto y tu progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net. "</string>
+    <string name="osmand_long_description_1000_chars">"
+ OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
+
+ OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM).
+Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz.
+
+ Algunas de las funciones fundamentales:
+ - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo)
+ - Mapas vectoriales compactos disponibles de todo el planeta
+ - Descarga de mapa del país o región directamente desde la aplicación
+ - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+ - Búsqueda sin conexión de direcciones y lugares (PDI)
+ - Rutas sin conexión para distancias cortas (experimental)
+ - Modos de automóvil, bicicleta, y peatón con:
+ - opción de cambio automático de vista día/noche
+ - opción de ampliación según la velocidad
+ - alineación opcional del mapa, según brújula o dirección del movimiento
+ - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas.
+
+ Limitaciones de la versión gratuita de OsmAnd:
+ - Límite del número de mapas descargados
+ - Sin acceso a los PDIs descargados de Wikipedia.
+
+ OsmAnd está siendo desarrollado activamente y nuestro proyecto y tu progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net.
+ "</string>
     <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de tu dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y por voz, para automóvil, bicicleta y peatones. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las funciones principales:
@@ -894,7 +942,26 @@
 \n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botsuana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajistán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, San Bartolomé, Santa Helena, San Cristóbal y Nieves, Samoa, San Marino, San Martín, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global para mapas de OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (guardar los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) - Mapas mundiales vectoriales compactos disponibles - Descarga del mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de automóvil, bicicleta, y peatón con: - Cambio automático opcional de vista día/noche - Ampliación opcional según la velocidad - Alineación opcional del mapa, según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd+ (OSM Automated Navigation Directions)
+
+ OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
+
+ OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
+
+ Algunas de las funciones fundamentales:
+ - Completa funcionalidad sin conexión (guardar los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
+ - Mapas mundiales vectoriales compactos disponibles
+ - Descarga del mapa de país o región directamente desde la aplicación
+ - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+ - Búsqueda sin conexión de direcciones y lugares (PDI)
+ - Rutas sin conexión para distancias cortas (experimental)
+ - Modos de automóvil, bicicleta, y peatón con:
+ - Cambio automático opcional de vista día/noche
+ - Ampliación opcional según la velocidad
+ - Alineación opcional del mapa, según brújula o dirección de movimiento
+ - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales
+ "</string>
     <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de tu dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y por voz, para automóvil, bicicleta y peatones. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola soportas al proyecto, financias el desarrollo de nuevas funciones y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla, instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las funciones principales:
@@ -1007,7 +1074,8 @@
     <string name="select_animate_speedup">Elige la velocidad del simulador de ruta</string>
     <string name="global_app_allocated_memory_descr">Memoria asignada %1$s MB (Límite Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memoria asignada</string>
-    <string name="native_app_allocated_memory_descr">Memoria nativa total usada por la aplicación %1$s MB (Dalvik %2$s MB, otros %3$s MB). Memoria proporcional %4$s MB (Límite Android %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Memoria nativa total usada por la aplicación %1$s MB (Dalvik %2$s MB, otros %3$s MB).
+ Memoria proporcional %4$s MB (Límite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memoria nativa total</string>
     <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
     <string name="shared_location">Compartir ubicación</string>
@@ -1200,7 +1268,9 @@
     <string name="osmand_service">Modo reposo</string>
     <string name="osmand_service_descr">Ejecutar OsmAnd en segundo plano, mientras la pantalla este apagada</string>
     <string name="download_files_not_enough_space">Sin espacio suficiente para descargar %1$s MB (disponible: %2$s).</string>
-    <string name="download_files_question_space">¿Descargar realmente {0} archivo(s)? Se necesitará {1} MB constantemente. Actualmente, hay disponible {2} MB.</string>
+    <string name="download_files_question_space">¿Descargar realmente {0} archivo(s)?
+ Se necesitará {1} MB constantemente.
+ Actualmente, hay disponible {2} MB.</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
@@ -1969,7 +2039,27 @@
     <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
     <string name="poi_dialog_reopen">Reabrir</string>
 	<string name="osm_save_offline">Guardar sin conexión</string>
-    <string name="release_2_2">" • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.\n\n• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado.\n\n• Configura cuál y cómo se mostrarán las tarjetas en el panel de control.\n\n• Omite el panel del control, si quieres controlar la aplicación desde el menú.\n\n• Para descargar mapas, las regiones pueden seleccionarse directamente pulsando sobre el mapa mundial.\n\n• Mejor recálculo de la ruta (después de reiterados intentos, el motor ahora sugiere una ruta diferente).\n\n• La búsqueda de PDI, ahora soporta consultas más específicas.\n\n• Mejoras en PDI y funcionalidad de edición OSM.\n\n• Se rediseñó la estructura e interfaz de los datos de mapas.\n\n y más… "</string>
+    <string name="release_2_2">"
+ • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.
+
+• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado.
+
+• Configura cuál y cómo se mostrarán las tarjetas en el panel de control.
+
+• Omite el panel del control, si quieres controlar la aplicación desde el menú.
+
+• Para descargar mapas, las regiones pueden seleccionarse directamente pulsando sobre el mapa mundial.
+
+• Mejor recálculo de la ruta (después de reiterados intentos, el motor ahora sugiere una ruta diferente).
+
+• La búsqueda de PDI, ahora soporta consultas más específicas.
+
+• Mejoras en PDI y funcionalidad de edición OSM.
+
+• Se rediseñó la estructura e interfaz de los datos de mapas.
+
+ y más…
+ "</string>
     <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="use_dashboard_btn">Usar panel de control</string>
     <string name="use_drawer_btn">Usar menú</string>
@@ -2114,7 +2204,9 @@
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
     <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OSM Live</string>
 
-    <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo. La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM. En caso de que ames OsmAnd, OSM y quieras apoyarlo, esta sería una manera correcta de hacerlo.</string>
+    <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo.
+ La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM.
+ En caso de que ames OsmAnd, OSM y quieras apoyarlo, esta sería una manera correcta de hacerlo.</string>
     
     <string name="select_map_marker">Elegir marcador del mapa</string>
     <string name="map_markers_other">Otros marcadores</string>
@@ -2130,7 +2222,19 @@
     <string name="shared_string_move_down">Bajar</string>
     <string name="finish_navigation">Finalizar navegación</string>
     <string name="avoid_road">Evitar carretera</string>
-    <string name="release_2_3">" • OSM Live. Apoya a los editores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora.\n\n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa.\n\n • Mayor detalle en el mapa OSM con escudos viales de países específicos y muchas otras nuevas características.\n\n • Mejora visual en la preparación de la ruta.\n\n • Muchas mejoras en el menú contextual del mapa, como la búsqueda contextual de direcciones.\n\n y más… "</string>
+    <string name="release_2_3">"
+ • OSM Live. Apoya a los editores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora.
+
+ • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa.
+
+ • Mayor detalle en el mapa OSM con escudos viales de países específicos y muchas otras nuevas características.
+
+ • Mejora visual en la preparación de la ruta.
+
+ • Muchas mejoras en el menú contextual del mapa, como la búsqueda contextual de direcciones.
+
+ y más…
+ "</string>
     <string name="storage_permission_restart_is_required">Ahora, la aplicación puede escribir en el almacenamiento externo. Se requiere reiniciar la aplicación manualmente.</string>
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
@@ -2202,7 +2306,19 @@
     <string name="lang_hsb">Sorabo (Alto)</string>
     <string name="share_history_subject">" compartido vía OsmAnd"</string>
     <string name="show_on_map">Mostrar en el mapa</string>
-    <string name="release_2_4">" • Nueva búsqueda de texto libre muy potente.\n\n • Muchas mejoras de audio mediante Bluetooth.\n\n • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro.\n\n • Se agregaron más idiomas y ahora soporta idiomas regionales.\n\n • Muchas otras mejoras y correcciones de errores.\n\n y más… "</string>
+    <string name="release_2_4">"
+ • Nueva búsqueda de texto libre muy potente.
+
+ • Muchas mejoras de audio mediante Bluetooth.
+
+ • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro.
+
+ • Se agregaron más idiomas y ahora soporta idiomas regionales.
+
+ • Muchas otras mejoras y correcciones de errores.
+
+ y más…
+ "</string>
     <string name="confirmation_to_delete_history_items">¿Quieres borrar los elementos del historial marcados?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
