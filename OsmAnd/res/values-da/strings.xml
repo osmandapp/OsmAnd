@@ -559,23 +559,23 @@ I øjeblikket er {2} MB til rådighed.</string>
 \n\nListe over understøttede lande (stort set hele verden!): Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe "</string>
     <string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+ (OSM Automatisk Navigation og Rutevejledning) 
+
 OsmAnd+ er en open source navigations applikation med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving talevejledning. 
+
 
 OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer. Nogle af de centrale funktioner:
  - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort)
  - Kompakte offline vektorkort for hele verden tilgængelig
  - Ubegrænset hentning af lande- eller regionskort direkte fra applikationen
-
  - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing
  - Overlejring af flere kortlag mulige, ligesom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, kollektivtrafik stoppesteder, ekstra kort med brugerdefinerbar gennemsigtighed
  - Offline søgning efter adresser og steder interessepunkter (IP)
  - Offline ruteplanlægning til korte afstande (eksperimentel)
-
- - Bil, cykel, og fodgængere tilstand med:
+  - Bil, cykel, og fodgængere tilstand med:
  - valgfri automatisk dag/nat visning
  - valgfri hastighedsafhængig kort zoom
  - valgfri kort tilpasning i henhold til kompas eller bevægelsesretning
- - valgfri vognbaneskift, hastighedsgrænse visning, optaget eller TTS stemmer
+ - valgfri vognbaneskift, visning af hastighedsgrænser,  optagede- eller TTS stemmer
  "</string>
     <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automatisk Navigation og Rutevejledning) er et kort og navigations program med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via enhedens GPS, tilbyder OsmAnd rutevejledning, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (intet internet behov). OsmAnd+ er den betalte programversion. Ved at købe det støttes projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Test programmet, før det købes ved at installere den gratis version kaldet OsmAnd.
 \n\nNogle af de vigtigste funktioner:
