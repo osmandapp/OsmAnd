@@ -217,7 +217,7 @@ public class CommandBuilder {
 		return addCommand(C_REACHED_FAVORITE, name);
 	}
 
-	public CommandBuilder andArriveAtPoiWaypoint(String name) {
+	public CommandBuilder andArriveAtPoi(String name) {
 		return addCommand(C_AND_ARRIVE_POI_WAYPOINT, name);
 	}
 
