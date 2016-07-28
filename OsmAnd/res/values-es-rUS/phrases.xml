@@ -238,7 +238,7 @@
 	<string name="poi_speed_camera">Radar de velocidad</string>
 	<string name="poi_turning_circle">Círculo de giro</string>
 	<string name="poi_motorway_junction">Salida de autopista</string>
-	<string name="poi_junction">Cruce</string>
+	<string name="poi_junction">Cruce (intersección vial)</string>
 	<string name="poi_rest_area">Área de descanso</string>
 	<string name="poi_water_well">Pozo de agua</string>
 	<string name="poi_standpipe">Boca de incendios</string>
@@ -886,7 +886,7 @@
 	<string name="poi_access_no">Sin acceso</string>
 	<string name="poi_access_destination">Acceso a destino</string>
 	<string name="poi_access_permissive">Acceso permisivo</string>
-	<string name="poi_access_customers">Acceso a clientes</string>
+	<string name="poi_access_customers">Acceso sólo clientes</string>
 	<string name="poi_access_agricultural">Acceso agrícola</string>
 	<string name="poi_access_delivery">Acceso para entregas</string>
 	<string name="poi_monitoring_station">Estación de monitoreo</string>
