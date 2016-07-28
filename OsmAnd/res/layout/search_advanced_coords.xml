@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dashboard_map_toolbar"
+            android:background="@color/osmand_orange"
+            android:minHeight="@dimen/dashboard_map_toolbar"
+            android:theme="?attr/toolbar_theme"
+            app:contentInsetLeft="54dp"
+            app:contentInsetStart="54dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/titleEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="@string/coords_search"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_list_text_size_large"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/ctx_menu_info_view_bg"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/bg_color"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/latitudeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp">
+
+                    <ImageView
+                        android:id="@+id/latitudeImage"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_coordinates_latitude"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp">
+
+                            <EditText
+                                android:id="@+id/latitudeEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_latitude"
+                                android:imeOptions="actionNext"
+                                android:inputType="textCapSentences"
+                                tools:text="22.12345"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/latitudeClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            android:src="@drawable/ic_action_remove_dark"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/longitudeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp">
+
+                    <ImageView
+                        android:id="@+id/longitudeImage"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_coordinates_longitude"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp">
+
+                            <EditText
+                                android:id="@+id/longitudeEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_longitude"
+                                android:imeOptions="actionDone"
+                                android:inputType="textCapSentences"
+                                tools:text="22.12345"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/longitudeClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            android:src="@drawable/ic_action_remove_dark"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/northingLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/northingImage"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_coordinates_latitude"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp">
+
+                            <EditText
+                                android:id="@+id/northingEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_northing"
+                                android:imeOptions="actionNext"
+                                android:inputType="textCapSentences"
+                                tools:text="22.12345"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/northingClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            android:src="@drawable/ic_action_remove_dark"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/eastingLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/eastingImage"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_coordinates_longitude"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp">
+
+                            <EditText
+                                android:id="@+id/eastingEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_easting"
+                                android:imeOptions="actionNext"
+                                android:inputType="textCapSentences"
+                                tools:text="22.12345"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/eastingClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            android:src="@drawable/ic_action_remove_dark"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/zoneLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="54dp"
+                            android:layout_marginRight="16dp">
+
+                            <EditText
+                                android:id="@+id/zoneEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_zone"
+                                android:imeOptions="actionDone"
+                                android:inputType="textCapSentences"
+                                tools:text="22.12345"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/zoneClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            android:src="@drawable/ic_action_remove_dark"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/formatLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="16dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="54dp"
+                            android:layout_marginRight="16dp">
+
+                            <EditText
+                                android:id="@+id/formatEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:hint="@string/coords_format"
+                                android:imeOptions="actionNext"
+                                tools:text="DD.DDDDD"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/formatSelectButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/coords_format"
+                            android:src="@drawable/ic_action_arrow_drop_down"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <include layout="@layout/list_shadow_footer"/>
+
+                <View
+                    android:id="@+id/top_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/ctx_menu_info_divider"/>
+
+                <include layout="@layout/search_list_item"/>
+
+                <LinearLayout
+                    android:id="@+id/error_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/color_invalid"
+                        android:textSize="@dimen/default_desc_text_size"
+                        android:text="@string/invalid_locations"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/bottom_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/ctx_menu_info_divider"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

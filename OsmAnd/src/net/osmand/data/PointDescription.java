@@ -141,8 +141,8 @@ public class PointDescription {
 		int f = st.COORDINATES_FORMAT.get();
 		if (f == PointDescription.UTM_FORMAT) {
 			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.northing) + " "
-					+ ((long) pnt.easting);
+			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
+					+ ((long) pnt.northing);
 		} else {
 			try {
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, LocationConvert.convert(lat, f),
@@ -150,6 +150,23 @@ public class PointDescription {
 			} catch(RuntimeException e) {
 				e.printStackTrace();
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0); 
+			}
+		}
+	}
+
+	public static String getLocationNamePlain(Context ctx, double lat, double lon) {
+		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+		int f = st.COORDINATES_FORMAT.get();
+		if (f == PointDescription.UTM_FORMAT) {
+			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
+			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
+					+ ((long) pnt.northing);
+		} else {
+			try {
+				return LocationConvert.convert(lat, f) + ", " + LocationConvert.convert(lon, f);
+			} catch(RuntimeException e) {
+				e.printStackTrace();
+				return "0, 0";
 			}
 		}
 	}
