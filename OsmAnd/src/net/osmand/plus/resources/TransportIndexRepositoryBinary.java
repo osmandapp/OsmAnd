@@ -24,12 +24,6 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	private static final Log log = PlatformUtil.getLog(TransportIndexRepositoryBinary.class);
 	private final BinaryMapIndexReader file;
 	
-	protected List<TransportStop> cachedObjects = new ArrayList<TransportStop>(); 
-	protected double cTopLatitude;
-	protected double cBottomLatitude;
-	protected double cLeftLongitude;
-	protected double cRightLongitude;
-	private int cZoom;
 
 	public TransportIndexRepositoryBinary(BinaryMapIndexReader file) {
 		this.file = file;
@@ -45,28 +39,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	}
 	
 	@Override
-	public boolean checkCachedObjects(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill){
-		return checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, toFill, false);
-	}
-	
-	@Override
-	public synchronized boolean checkCachedObjects(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill, boolean fillFound){
-		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
-				&& cBottomLatitude <= bottomLatitude && cZoom == zoom;
-		boolean noNeedToSearch = inside;
-		if((inside || fillFound) && toFill != null){
-			for(TransportStop a : cachedObjects){
-				LatLon location = a.getLocation();
-				if (location.getLatitude() <= topLatitude && location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude
-						&& location.getLatitude() >= bottomLatitude) {
-					toFill.add(a);
-				}
-			}
-		}
-		return noNeedToSearch;
-	}
-
-	public List<TransportStop> searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
+	public void searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
 			int limit, List<TransportStop> stops, ResultMatcher<TransportStop> matcher) {
 		long now = System.currentTimeMillis();
 		try {
@@ -80,7 +53,6 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		} catch (IOException e) {
 			log.error("Disk error ", e); //$NON-NLS-1$
 		}
-		return stops;
 	}
 
 
@@ -115,23 +87,6 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		return res;
 	}
 
-	@Override
-	public void evaluateCachedTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-			int zoom, int limit, ResultMatcher<TransportStop> matcher) {
-		cTopLatitude = topLatitude ;
-		cBottomLatitude = bottomLatitude ;
-		cLeftLongitude = leftLongitude ;
-		cRightLongitude = rightLongitude ;
-		cZoom = zoom;
-		// first of all put all entities in temp list in order to not freeze other read threads
-		ArrayList<TransportStop> tempList = new ArrayList<TransportStop>();
-		searchTransportStops(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, tempList, matcher);
-		synchronized (this) {
-			cachedObjects.clear();
-			cachedObjects.addAll(tempList);
-		}
-
-	}
 	
 
 	@Override

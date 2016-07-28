@@ -1,15 +1,20 @@
 package net.osmand.plus.resources;
 
 
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.HandlerThread;
-import android.text.format.DateFormat;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
@@ -32,7 +37,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -42,7 +46,6 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
-import net.osmand.plus.resources.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
@@ -53,20 +56,15 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.HandlerThread;
+import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -97,8 +95,6 @@ public class ResourceManager {
 	protected File dirWithTiles ;
 	
 	private final OsmandApplication context;
-	
-	private BusyIndicator busyIndicator;
 	
 	public interface ResourceWatcher {
 		
@@ -916,20 +912,21 @@ public class ResourceManager {
 	}
 	
 	
-	public void searchTransportAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill){
+	public List<TransportStop> searchTransportSync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, ResultMatcher<TransportStop> matcher){
 		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
+		List<TransportStop> stops = new ArrayList<>();
 		for (TransportIndexRepository index : transportRepositories.values()) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-				if (!index.checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, toFill, true)) {
-					repos.add(index);
-				}
+				repos.add(index);
 			}
 		}
 		if(!repos.isEmpty()){
-			TransportLoadRequest req = asyncLoadingThread.new TransportLoadRequest(repos, zoom);
-			req.setBoundaries(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
-			asyncLoadingThread.requestToLoadTransport(req);
+			for (TransportIndexRepository repository : repos) {
+				repository.searchTransportStops(topLatitude, leftLongitude, bottomLatitude, rightLongitude, 
+						-1, stops, matcher);
+			}
 		}
+		return stops;
 	}
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
@@ -1002,13 +999,9 @@ public class ResourceManager {
 		transportRepositories.clear();
 	}
 	
-	public BusyIndicator getBusyIndicator() {
-		return busyIndicator;
-	}
 	
-	public synchronized void setBusyIndicator(BusyIndicator busyIndicator) {
-		this.busyIndicator = busyIndicator;
-	}
+	
+	
 
 	public synchronized void close(){
 		imagesOnFS.clear();
