@@ -2289,4 +2289,39 @@
 	<string name="poi_historic_period_roman_greece">Historia periodo: Romia Grekujo (146 a.K. – 330 p.K.)</string>
 	<string name="poi_historic_period_roman_kingdom">Historia periodo: Romia reĝeco (753 – 509 a.K.)</string>
 	<string name="poi_historic_period_dominate">Historia periodo: Dominato (285 – 476 p.K.)</string>
+	<string name="poi_historic_period_villager">Historia periodo: vilaĝana (1-a, 2-a epokoj, 1580 a.K. – 133 p.K.)</string>
+	<string name="poi_historic_period_urban">Historia periodo: urba (3-a epoko, 133 – 374 p.K.)</string>
+	<string name="poi_historic_period_classical">Historia periodo: klasika (4-a epoko, 374 – 900 p.K.)</string>
+	<string name="poi_historic_period_imperial">Historia periodo: imperia (5-a epoko, 900 – 1200 p.K.)</string>
+
+	<string name="poi_historic_era_paleolithic">Historia sub-periodo: paleolitiko (2,6M – 10k jaroj antaŭ nuntempo)</string>
+	<string name="poi_historic_era_mesolithic">Historia sub-periodo: mezolitiko</string>
+	<string name="poi_historic_era_neolithic">Historia sub-periodo: neolitiko</string>
+	<string name="poi_historic_era_chalcolithic">Historia sub-periodo: ĥalkolitiko (4-a – 3-a jarmilo a.K.)</string>
+
+	<string name="poi_stone_type_conciliation_cross">Speco: penta kruco</string>
+	<string name="poi_stone_type_coat_of_arms">Speco: blazono</string>
+
+	<string name="poi_material_wood">Materialo: ligno</string>
+	<string name="poi_material_metal">Materialo: metalo</string>
+	<string name="poi_material_reinforced_concrete">Materialo: ŝtalbetono</string>
+	<string name="poi_material_concrete">Materialo: betono</string>
+	<string name="poi_material_steel">Materialo: ŝtalo</string>
+	<string name="poi_material_stone">Materialo: ŝtono</string>
+	<string name="poi_material_masonry">Materialo: masonita</string>
+	<string name="poi_material_brick">Materialo: briko</string>
+	<string name="poi_material_plastic">Materialo: plasto</string>
+	<string name="poi_material_sandstone">Materialo: sabloŝtono</string>
+	<string name="poi_material_granite_stone">Materialo: granito</string>
+	<string name="poi_material_metal_wood">Materialo: metalo k ligno</string>
+	<string name="poi_material_glass">Materialo: vitro</string>
+	<string name="poi_material_bronze">Materialo: bronzo</string>
+	<string name="poi_material_earth">Materialo: tero</string>
+	<string name="poi_material_composite">Materialo: kompozito</string>
+	<string name="poi_material_limestone">Materialo: kalkoŝtono</string>
+	<string name="poi_material_marble">Materialo: marmoro</string>
+	<string name="poi_material_aluminium">Materialo: aluminio</string>
+
+	<string name="poi_site_type_megalith">Speco: megalito</string>
+	<string name="poi_site_type_tumulus">Speco: tumulo</string>
 	</resources>
