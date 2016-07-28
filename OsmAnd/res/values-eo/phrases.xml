@@ -2233,4 +2233,12 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Civilizo: Romio (753 a.K. – 284 p.K.)</string>
 	<string name="poi_historic_civilization_nuragic">Civilizo: Nurago-kulturo (18-a jarcento a.K. – 2-a jarcento p.K.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilizo: Etruskoj (12-a jarcento a.K. – 6-a jarcento a.K.)</string>
+	<string name="poi_historic_civilization_prehistoric">Civilizo: prahistoria</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilizo: antikva Grekujo</string>
+	<string name="poi_historic_civilization_roman">Civilizo: Romio</string>
+	<string name="poi_historic_civilization_byzantine">Civilizo: Bizanco (285 p.K. – 1453 p.K.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilizo: Ĉina imperio (221 a.K. – 1911 p.K.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilizo: antikva Egiptujo (ĝis 332 a.K.)</string>
+	<string name="poi_historic_civilization_celtic">Civilizo: Keltoj</string>
 	</resources>
