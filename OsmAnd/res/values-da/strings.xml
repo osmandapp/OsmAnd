@@ -562,20 +562,21 @@ I øjeblikket er {2} MB til rådighed.</string>
 
 OsmAnd+ er en open source navigations applikation med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving talevejledning. 
 
+OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer. 
 
-OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer. Nogle af de centrale funktioner:
+Nogle af de centrale funktioner:
  - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort)
  - Kompakte offline vektorkort for hele verden tilgængelig
  - Ubegrænset hentning af lande- eller regionskort direkte fra applikationen
  - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing
- - Overlejring af flere kortlag mulige, ligesom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, kollektivtrafik stoppesteder, ekstra kort med brugerdefinerbar gennemsigtighed
- - Offline søgning efter adresser og steder interessepunkter (IP)
+ - Overlejring af flere kortlag mulige, såsom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektivtrafik , ekstra kort med brugerdefinerbar gennemsigtighed
+ - Offline søgning efter adresser og steder (IP)
  - Offline ruteplanlægning til korte afstande (eksperimentel)
   - Bil, cykel, og fodgængere tilstand med:
- - valgfri automatisk dag/nat visning
- - valgfri hastighedsafhængig kort zoom
- - valgfri kort tilpasning i henhold til kompas eller bevægelsesretning
- - valgfri vognbaneskift, visning af hastighedsgrænser,  optagede- eller TTS stemmer
+ - Valgfri automatisk dag/nat visning
+ - Valgfri hastighedsafhængig kort zoom
+ - Valgfri kort tilpasning i henhold til kompas eller bevægelsesretning
+ - Valgfri vognbane vejledning, visning af hastighedsgrænser,  optagede- eller TTS stemmer
  "</string>
     <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automatisk Navigation og Rutevejledning) er et kort og navigations program med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via enhedens GPS, tilbyder OsmAnd rutevejledning, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (intet internet behov). OsmAnd+ er den betalte programversion. Ved at købe det støttes projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Test programmet, før det købes ved at installere den gratis version kaldet OsmAnd.
 \n\nNogle af de vigtigste funktioner:
@@ -2509,10 +2510,10 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt m
   • Meget forbedret lyd via Bluetooth
 
 
-  • Forbedret rutevejledning med svingbaner
+  • Forbedret rutevejledning, talevejledning og angivelse af svingbaner
 
 
-  • Tilføjet nye sprog og understøtter nu regionale sprog
+  • Tilføjet flere sprog og understøtter nu regionale sprog
 
 
   • Mange andre forbedringer og fejlrettelser
