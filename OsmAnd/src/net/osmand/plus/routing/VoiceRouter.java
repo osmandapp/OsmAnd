@@ -468,7 +468,7 @@ public class VoiceRouter {
 			} else {
 				playMakeTurn(currentSegment, next, null);
 			}
-			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
+			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE_END && isTargetPoint(nextNextInfo)) {
 				if (!next.getTurnType().goAhead()) {  // Avoids isolated "and arrive.." prompt
 					playAndArriveAtDestination(nextNextInfo);
 				}
