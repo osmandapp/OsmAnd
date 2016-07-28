@@ -468,8 +468,19 @@ public class VoiceRouter {
 			} else {
 				playMakeTurn(currentSegment, next, null);
 			}
-			if (nextNextInfo.distanceTo < TURN_IN_DISTANCE_END && isTargetPoint(nextNextInfo)) {
-				if (!next.getTurnType().goAhead()) {  // Avoids isolated "and arrive.." prompt
+			if (!next.getTurnType().goAhead() && isTargetPoint(nextNextInfo)) {   // !goAhead() avoids isolated "and arrive.." prompt, as goAhead() is not pronounced
+				if (nextNextInfo.distanceTo < TURN_IN_DISTANCE_END) {
+					// Issue #2865: Ensure a distance associated with the destination arrival is always announced, either here, or in subsequent "Turn in" prompt
+					// Distance fon non-straights already announced in "Turn (now)"'s nextnext  code above
+					if ((nextNextInfo != null) && (nextNextInfo.directionInfo != null) && nextNextInfo.directionInfo.getTurnType().goAhead()) {
+						playThen();
+						playGoAhead(nextNextInfo.distanceTo, empty);
+					}
+					playAndArriveAtDestination(nextNextInfo);
+				} else if (nextNextInfo.distanceTo < 1.2f * TURN_IN_DISTANCE_END) {
+					// 1.2 is safety margin should the subsequent "Turn in" prompt not fit in amy more
+					playThen();
+					playGoAhead(nextNextInfo.distanceTo, empty);
 					playAndArriveAtDestination(nextNextInfo);
 				}
 			}
@@ -536,6 +547,14 @@ public class VoiceRouter {
 			return true;
 		}
 		return false;
+	}
+
+	private void playThen() {
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if (play != null) {
+			notifyOnVoiceMessage();
+			play.then().play();
+		}
 	}
 
 	private void playGoAhead(int dist, Term streetName) {
