@@ -358,7 +358,8 @@
     <string name="map_widget_day_night">Svetlobni učinek</string>
     <string name="map_widget_vector_attributes">Značilnosti izrisovanja</string>
     <string name="map_widget_renderer">Slog zemljevida</string>
-    <string name="native_app_allocated_memory_descr">Skupna dodeljena velikost pomnilnika je %1$s MB (Dalvik %2$s MB, drugo %3$s MB). Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na dalviku %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Skupna dodeljena velikost pomnilnika je %1$s MB (Dalvik %2$s MB, drugo %3$s MB).
+Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na dalviku %6$s MB).</string>
     <string name="native_app_allocated_memory">Skupni izvorni pomnilnik</string>
 
     <string name="shared_location">Objavljen položaj</string>
@@ -376,7 +377,9 @@
     <string name="osmand_parking_position_description">Položaj parkiranega vozila: %1$s</string>
     <string name="osmand_parking_position_description_add">Prevzem vozila ob:</string>
     <string name="osmand_parking_position_name">Točka parkiranja</string>
-    <string name="osmand_parking_plugin_description">Vstavek za parkiranje omogoča enostavno shranjevanje mesta parkiranja vozila in časa parkirne ure. Podatki so prikazani na zaslonu za enostavno opozarjanje.\nOmogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih parkiranja (letališča, letovišča …).</string>
+    <string name="osmand_parking_plugin_description">Vstavek za parkiranje omogoča enostavno shranjevanje mesta parkiranja vozila in časa parkirne ure. Podatki so prikazani na zaslonu za enostavno opozarjanje.
+
+Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih parkiranja (letališča, letovišča …).</string>
     <string name="osmand_parking_plugin_name">Parkiranje (mesto in čas)</string>
     <string name="context_menu_item_add_parking_point">Označi kot kraj parkiranja</string>
     <string name="context_menu_item_delete_parking_point">Izbriši oznako parkirnega mesta</string>
@@ -559,7 +562,14 @@
     <string name="map_online_data_descr">Uporabi spletne zemljevide (prejem in shranjevanje na kartici SD)</string>
     <string name="shared_string_online_maps">Spletni zemljevidi</string>
     <string name="online_map_settings_descr">Nastavitev virov spletnih in shranjenih zemljevidov</string>
-    <string name="osmand_rastermaps_plugin_description">"Vstavek omogoča dostop do različnih vrst zemljevidov od vektorskih OpenStreetMap do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki in drugi zemljevidi. Vstavek omogoča tudi podporo za izrisovanje izohips, senčenje hribovitih predelov in podobno.\n\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga oziroma prekrivni zemljevid drugim standardnim zemljevidom. V ta namen je treba vektorske zemljevide OsmAnd skriti oziroma narediti prosojne med \'Nastavitvami zemljevida\' v vsebinskem meniju.\n\nVektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shraniti za delo brez povezave. Zemljevidi morajo biti shranjeni v osnovni mapi OsmAnd kot podatkovna zbirka SQLite. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Vstavek omogoča dostop do različnih vrst zemljevidov od vektorskih OpenStreetMap do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki in drugi zemljevidi. Vstavek omogoča tudi podporo za izrisovanje izohips, senčenje hribovitih predelov in podobno.
+
+
+Vsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga oziroma prekrivni zemljevid drugim standardnim zemljevidom. V ta namen je treba vektorske zemljevide OsmAnd skriti oziroma narediti prosojne med \'Nastavitvami zemljevida\' v vsebinskem meniju.
+
+
+Vektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shraniti za delo brez povezave. Zemljevidi morajo biti shranjeni v osnovni mapi OsmAnd kot podatkovna zbirka SQLite.
+ "</string>
     <string name="osm_editing_plugin_description">Vstavek omogoča upravljanje nastavitev, ki so namenjene pošiljanju poročil, hroščev in odzivov na delovanje programa OsmAnd (posodabljanje podatkov točk POI, objavljanje sledi GPX (zahteva ustrezna poverila OSM) in drugo). OSM je javni odprtokodni projekt, katerega kakovost je odvisna tudi od vaše dejavnosti.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se običajno izrisujejo hitreje, zgodi pa se, da na nekaterih napravah ne delujejo.</string>
     <string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
@@ -649,7 +659,9 @@
     <string name="daynight_descr">Izberi način svetlobnega učinka za izris zemljevida (dnevni/nočni način)</string>
 
     <string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB (prosto: %2$s).</string>
-    <string name="download_files_question_space">Ali res želite prejeti datoteke ({0} datotek)? Datoteke zahtevajo {1} MB pomnilnika, na voljo pa ga je le {2} MB.</string>
+    <string name="download_files_question_space">Ali res želite prejeti datoteke (skupno {0})?
+Datoteke zahtevajo {1} MB pomnilnika.
+Na voljo je le {2} MB.</string>
 
 
     <string name="native_library_not_supported">Izvorna knjižnica na tej napravi ni podprta.</string>
@@ -805,8 +817,44 @@
     <string name="show_route">Podrobnosti poti</string>
     <string name="fav_imported_sucessfully">Priljubljene točke so uspešno uvožene</string>
     <string name="fav_file_to_load_not_found">&gt;Datoteke GPX, ki vsebuje priljubljene točke, na {0} ni mogoče najti</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd je odprtokodna programska oprema za navigacijo, ki za prikaz uporablja širok nabor zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja.\n\nPomembnejše lastnosti:\n\t* Popolnoma delujoč tudi brez povezave (shrani podatke vektorskih zemljevidov v mapo po izbiri)\n\t* Na voljo so stisnjeni vektorski podatki zemljevida za cel svet\n\t* Prenos podatkov zemljevida posameznih držav ali področij znotraj programa\n\t* Prekrivanje zemljevidov s podatkovnimi sloji; na primer sledi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n\t* Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave\n\t* Izdelava načrta najkrajše poti (preizkusno)\n\t* Način za avtomobiliste, kolesarje in pešce:\n\t** z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n\t** z nastavljivo povečavo zemljevida glede na hitrost gibanja\n\t** z nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n\t** z nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).\n\nBrezplačna različica programa OsmAnd ima naslednje omejitve:\n\t*omejeno je število prenosov zemljevidov\n\t*brez povezave ni dostopa do vsebin z Wikipedije.\n\nOsmAnd je v program razvoju. Napredek projekta je odvisen od finančnih prispevkov, s katerimi se financira razvoj in testiranje novih funkcionalnosti. Razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti oziroma nenamensko donacijo na spletni strani osmand.net. "</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd je odprtokodna programska oprema za navigacijo, ki za prikaz uporablja širok nabor zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja.\n\nPomembnejše lastnosti:\n\t* Popolnoma delujoč tudi brez povezave (shrani podatke vektorskih zemljevidov v mapo po izbiri)\n\t* Na voljo so stisnjeni vektorski podatki zemljevida za cel svet\n\t* Prenos podatkov zemljevida posameznih držav ali področij znotraj programa\n\t* Prekrivanje zemljevidov s podatkovnimi plasmi; na primer sledmi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališči javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n\t* Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave\n\t* Izdelava načrta najkrajše poti (preizkusno)\n\t* Način za avtomobiliste, kolesarje in pešce:\n\t** z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n\t** z nastavljivo povečavo zemljevida glede na hitrost gibanja\n\t** z nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n\t** z nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS). "</string>
+    <string name="osmand_long_description_1000_chars">"
+ OsmAnd je odprtokodna programska oprema za navigacijo, ki za prikaz uporablja širok nabor zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja.
+
+Pomembnejše lastnosti:
+\t* Popolnoma delujoč tudi brez povezave (shrani podatke vektorskih zemljevidov v mapo po izbiri)
+\t* Na voljo so stisnjeni vektorski podatki zemljevida za cel svet
+\t* Prenos podatkov zemljevida posameznih držav ali področij znotraj programa
+\t* Prekrivanje zemljevidov s podatkovnimi sloji; na primer sledi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo
+\t* Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave
+\t* Izdelava načrta najkrajše poti (preizkusno)
+\t* Način za avtomobiliste, kolesarje in pešce:
+\t** z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom
+\t** z nastavljivo povečavo zemljevida glede na hitrost gibanja
+\t** z nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja
+\t** z nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).
+
+Brezplačna različica programa OsmAnd ima naslednje omejitve:
+\t*omejeno je število prenosov zemljevidov
+\t*brez povezave ni dostopa do vsebin z Wikipedije.
+
+OsmAnd je v program razvoju. Napredek projekta je odvisen od finančnih prispevkov, s katerimi se financira razvoj in testiranje novih funkcionalnosti. Razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti oziroma nenamensko donacijo na spletni strani osmand.net.
+ "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd je odprtokodna programska oprema za navigacijo, ki za prikaz uporablja širok nabor zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja.
+
+Pomembnejše lastnosti:
+\t* Popolnoma delujoč tudi brez povezave (shrani podatke vektorskih zemljevidov v mapo po izbiri)
+\t* Na voljo so stisnjeni vektorski podatki zemljevida za cel svet
+\t* Prenos podatkov zemljevida posameznih držav ali področij znotraj programa
+\t* Prekrivanje zemljevidov s podatkovnimi plasmi; na primer sledmi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališči javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo
+\t* Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave
+\t* Izdelava načrta najkrajše poti (preizkusno)
+\t* Način za avtomobiliste, kolesarje in pešce:
+\t** z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom
+\t** z nastavljivo povečavo zemljevida glede na hitrost gibanja
+\t** z nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja
+\t** z nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).
+ "</string>
     <string name="error_occurred_loading_gpx">Prišlo je do napake med nalaganjem datoteke GPX</string>
     <string name="send_report">Pošlji poročilo</string>
     <string name="none_region_found">Na kartici SD ni podatkov območij za uporabo brez povezave. Datoteke lahko prejmete z interneta.</string>
@@ -953,7 +1001,11 @@
 
 
     <string name="index_srtm_ele">Izris izohips</string>
-    <string name="srtm_plugin_description">"Vstavek omogoča prikaz izohips in senčenje hribovitih področij kot prekrivni zemljevid. Zmožnost je uporabna predvsem za pohodnike, športnike, raziskovalce in druge zanesenjake, ki si želijo ali potrebujejo natančen prikaz na zemljevidu.\n\nSplošni podatki med 70 stopinjami severno in 70 južno so opredeljeni z meritvami SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), napravo na satelitu Terra, ki je del NASINEGA sistema EOS (Earth Observing System). Satelit ASTER je razvit v sodelovanju med NASO in japonskim ministrstvom za ekonomijo, trgovino in industrijo (Trade and Industry - METI) in japonskim vesoljskim sistemom (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Vstavek omogoča prikaz izohips in senčenje hribovitih področij kot prekrivni zemljevid. Zmožnost je uporabna predvsem za pohodnike, športnike, raziskovalce in druge zanesenjake, ki si želijo ali potrebujejo natančen prikaz na zemljevidu.
+
+
+Splošni podatki med 70 stopinjami severno in 70 južno so opredeljeni z meritvami SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), napravo na satelitu Terra, ki je del NASINEGA sistema EOS (Earth Observing System). Satelit ASTER je razvit v sodelovanju med NASO in japonskim ministrstvom za ekonomijo, trgovino in industrijo (Trade and Industry - METI) in japonskim vesoljskim sistemom (J-spacesystems).
+ "</string>
     <string name="srtm_plugin_name">Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
@@ -997,7 +1049,11 @@
     <string name="av_settings">"Nastavitve za zvok/video "</string>
     <string name="recording_error">Med snemanjem je prišlo do napake </string>
     <string name="recording_camera_not_available">Kamera ni na voljo</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Ta vstavek omogoča prikaz izohips na shranjenih zemljevidih OsmAnd. Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med ameriško NASO, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Ta vstavek omogoča prikaz izohips in reliefa pokrajine na shranjenih zemljevidih OsmAnd.
+
+
+Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med ameriško NASO, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems).
+ "</string>
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z zaznamkom, še ni določeno. Z možnostjo \"Uporabi mesto …\" je mogoče dodeliti zaznamek za določeno mesto</string>
     <string name="srtm_paid_version_msg">Razmislite o nakupu vstavka za prikaz izohips v trgovini Market in s tem podprite nadaljnji razvoj.</string>
     <string name="srtm_paid_version_title">Vstavek Izohipse</string>
@@ -1094,9 +1150,150 @@
     <string name="accessibility_options">Možnosti dostopnosti</string>
     <string name="local_indexes_cat_srtm">Podatki izohips</string>
     <string name="shared_string_downloading">Poteka prejemanje</string>
-    <string name="use_distance_measurement_help">* Pritisnite za določitev točke.\n* Zadržite pritisk na zemljevidu za brisanje prejšnje točke.\n* Zadržite pritisk na točki za ogled ali dodajanje opisa.\n* Kliknite na gradnik za merjenje za prikaz več možnosti.</string>
-    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions - OSM Avtomatsko usmerjanje) je program za navigacijo z dostopom do kakovostnih brezplačnih zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti na pomnilniško kartico naprave ali telefona za uporabo brez povezave. OsmAnd omogoča vodenje z uporabo GPS, s prikazom na zaslonu in glasovno. Prikaz je mogoče prilagajati za avtomobiliste, kolesarje in pešce. Vse glavne zmožnosti programa delujejo brez povezave.\n\nNekatere glavne značilnosti\n\nNavigacija\n\t* Dela v povezavi (hitro) ali brez nje (ko ste v tujini ni potrebno plačevati gostovanja)\n\t* Glasovno vodenje od zavoja do zavoja (z registriranim ali sintetiziranim glasom)\n\t* Po želji usmerjanje po voznih pasovih, prikaz imen ulic in predvidevanje časa prihoda\n\t* Podpora dodajanja vmesnih ciljev na poti\n\t* Samodejno ponovno usmerjanje kadarkoli se oddaljite od določene poti\n\t* Iskanje krajev po naslovu, po vrsti (npr.: restavracija, hotel, bencinska črpalka, muzej) ali z geografskimi koordinatami\n\t* Prikaz vašega položaj in usmeritve na zemljevidu\n\t* Preklop usmerjanja zemljevida po kompasu ali v smeri premikanja\n\t* Shranjevanje najpomembnejših krajev kot priljubljenih točk\n\t* Prikaz zanimivih točk POI (Points Of Interest) v okolici\n\t* Možnost prikaza specializiranih spletnih zemljevidov\n\t* Možnost prikaza satelitski posnetkov (Bing)\n\t* Možnost prikaza različnih podatkov na zemljevidu, kot so sledi GPX, potovanja/navigacije in dodatni zemljevidi s prilagodljivo prosojnostjo\n\t* Možnost prikaza imen krajev v angleščini, s krajevnim ali fonetičnim črkovanjem\n\nUporaba podatkov zemljevidov OpenStreetMap in Wikipedije:\n\t* Visoka kakovost podatkov najboljših svetovnih skupinskih projektov\n\t* Globalni zemljevidi OpenStreetMap, na voljo za vsako državo ali regijo\n\t* Točke Wikipedia POI, ki so odlične za oglede (ni na voljo v brezplačni različici)\n\t* Neomejeni brezplačni prenos neposredno iz programa (prenos omejen na 10 map/datotek v brezplačni različici)\n\t* Vedno posodobljeni zemljevidi (posodobljeni vsaj enkrat mesečno)\n\t* Strnjeni krajevno shranjeni vektorski zemljevidi\n\t* Izbirati je mogoče med zemljevidi z vsemi podatki ali samo cestnim omrežjem (primer: vsa Japonska je velika 700 MB ali 200 MB samo cestno omrežje)\n\t* Podpora tudi shranjevanju spletnih zemljevidov\n\nVarnostne funkcije\n\t* Možnost avtomatskega preklopa med dnevnim in nočnim pogledom\n\t* Možnost prikazovanja omejitev hitrosti z obveščanjem ob prekoračitvi omejitve\n\t* Možnost povečave zemljevida glede na hitrost vožnje\n\t* Objavljanje trenutnega mesta, da vas lahko prijatelji najdejo\n\nFunkcije za kolesarje in pešce\n\t* Zemljevidi vključujejo pohodniške in kolesarske steze, odlični so za dejavnosti na prostem\n\t* Posebno usmerjanje in različni načini prikaza za kolesarje in pešce\n\t* Možnost prikaza postaj javnega prevoza (avtobus, tramvaj, vlak), vključno z imeni prog\n\t* Možno shranjevanje v krajevno datoteko sledi GPX ali spletno storitev\n\t* Možnost prikaza hitrosti in nadmorske višine\n\t* Prikaz izohips in senčenja terena (prek dodatnega vstavka)\n\nPrispevanje k projektu OpenStreetMap\n\t* Prijava napak zemljevida\n\t* Nalaganje sledi GPX v OSM neposredno iz programa\n\t* Dodajanje točk POI in neposreden prenos v OSM (tudi z zamikom do vzpostavitve povezave)\n\t* Možno snemanje v ozadju (medtem ko je naprave v pripravljenosti)\n\nOsmAnd je odprtokodni program v nenehnem razvoju. Vsakdo lahko prispeva z dopolnjevanjem opomb in s sporočanjem hroščev, izboljšanjem prevodov ali s kodiranjem nove funkcije. Projekt je v živahnem in nenehnem izboljševanju po zaslugi vseh teh oblik interakcij med razvijalci in uporabniki. Napredek projekta je odvisen tudi od finančnih prispevkov za razvoj, kodiranje in testiranje novih funkcij. Z nakupom OsmAnd+ omogočite, da se program še bolj intenzivno razvija! Možno je tudi financiranje posebne nove funkcije, ali pa splošna donacija prek osmand.net.\n\nOcena pokritost zemljevidov in kakovost:\n\t* Zahodna Evropa: ****\n\t* Vzhodna Evropa: ***\n\t* Rusija: ***\n\t* Severna Amerika: ***\n\t* Južna Amerika: **\n\t* Azija: **\n\t* Japonska in Koreja: ***\n\t* Bližnji vzhod: **\n\t* Afrika: **\n\t* Antarktika: *\n\nSeznam držav (praktično ves svet!):\nAfganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Argentina, Armenija, Aruba, Avstralija, Avstrija, Azerbajdžan, Bahami, Bahrajn, Bangladeš, Barbados, Belorusija, Belgija, Belize, Benin, Bermuda, Butan, Bolivija, Bonaire, Bosna in Hercegovina, Bocvana, Brazilija, Britanski Deviški otoki, Brunej, Bolgarija, Burkina Faso, Burundi, Kambodža, Kamerun, Kanada, Zelenortski otoki, Srednje-afriška republika, Čad, Čile, Kitajska, Kolumbija, Komori, Kongo, Kostarika, Slonokoščena obala, Hrvaška, Kuba, Curaçao, Ciper, Češka, Danska, Džibuti, Dominika, Dominikanska republika, Ekvador, Egipt, Salvador, Ekvatorialna Gvineja, Eritreja, Estonija, Etiopija, Fidži, Finska, Francija, Francoska Gvajana, Francoska Polinezija, Gabon, Gambija, Gruzija, Nemčija, Gana, Gibraltar, Grčija, Grenlandija, Grenada, Guadeloupe, Guam, Gvatemala, Guernsey, Gvineja, Gvineja Bissau, Gvajana, Haiti, Vatikan, Honduras, Hongkong, Madžarska, Islandija, Indija, Indonezija, Iran, Irak, Irska, otok Man, Izrael, Italija, Jamajka, Japonska, Jersey, Jordanija, Kazahstan, Kenija, Kiribati, Severna Koreja in Južna Koreja, Kuvajt, Kirgizistan, Laos, Latvija, Libanon, Lesoto, Liberija, Libija, Liechtenstein, Litva, Luksemburg, Macao, Makedonija, Madagaskar, Malavi, Malezija, Maldivi, Mali, Malta, Martinique, Mavretanija, Mauritius, Mayotte, Mehika, Mikronezija, Moldavija, Monako, Mongolija, Črna gora, Montserrat, Maroko, Mozambik, Mjanmar, Namibija, Nauru, Nepal, Nizozemska, Nizozemski Antili, Nova Kaledonija, Nova Zelandija, Nikaragva, Niger, Nigerija, Norveška, Oman, Pakistan, Palau, Palestinsko ozemlje, Panama, Papua Nova Gvineja, Paragvaj, Peru, Filipini, Poljska, Portugalska, Portoriko, Katar, Romunija, Rusija, Ruanda, Saint Barthelemy, Saint Helena, Saint Kitts in Nevis, Sveta Lucija, Saint Martin, Saint Pierre in Miquelon, Saint Vincent in Grenadine, Samoa, San Marino, Saudska Arabija, Senegal, Srbija, Sejšeli, Sierra Leone, Singapur, Slovaška, Slovenija, Somalija, Južna Afrika, Južna Georgia, Južni Sudan, Španija, Šrilanka, Sudan, Surinam, Svazi, Švedska, Švica, Sirija, Tajvan, Tadžikistan, Tanzanija, Tajska, Vzhodni Timor, Togo, Tokelau, Tonga, Trinidad in Tobago, Tunizija, Turčija, Turkmenistan, Tuvalu, Uganda, Ukrajina, Združeni arabski emirati, Velika Britanija (UK), Združene države Amerike (ZDA), Urugvaj, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis in Fortuna, Zahodna Sahara, Jemen, Zambija, Zimbabve. "</string>
-    <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions - Avtomatsko usmerjanje), je zemljevid in program za navigacijo z dostopom do svetovnih brezplačnih, zelo kakovostnih OpenStreetMap (OSM) podatkov. Vse podatke map je mogoče shraniti na pomnilniško kartico vašega telefona za uporabo brez povezave. OsmAnd ponuja usmerjanje preko sledilnika  GPS naprave, s prikazom na zaslonu in glasovno, za avto, kolo in pešce. Vse glavne funkcije delujejo tako v povezavi kot brez nje (internet ni potreben).\n\nOsmAnd+ je plačljiva različica programa. Z nakupom podprete razvoj projekta, financirate razvoj novih zmožnosti in seveda prejemate najnovejše posodobitve. Lahko preizkusite program pred nakupom tako, da namestite brezplačno različico OsmAnd.\n\nNekatere glavne značilnosti:\n\nNavigacija\n\t* Dela v povezavi (hitro) ali brez nje (ko ste v tujini ni potrebno plačevati gostovanja)\n\t* Glasovno vodenje od zavoja do zavoja (z registriranim ali sintetiziranim glasom)\n\t* Po želji usmerjanje po voznih pasovih, prikaz imena ulice in predvidevanje časa prihoda\n\t* Podpora vmesnim ciljem na poti\n\t* Samodejno ponovno usmerjanje kadarkoli se oddaljite od določene poti\n\t* Iskanje krajev po naslovu, po vrsti (npr.: restavracija, hotel, bencinska črpalka, muzej) ali z geografskimi koordinatami po zemljevidu\n\t* Prikaz vašega položaj in usmeritve na zemljevidu\n\t* Po želji uravnava zemljevida po kompasu ali v smeri gibanja\n\t* Shranjevanje najpomembnejših krajev kot priljubljeni\n\t* Prikaz POI (točke interesov) v okolici\n\t* Možnost prikaza specializiranih spletnih zemljevidov\n\t* Možnost prikaza satelitski posnetkov (Bing)\n\t* Možnost prikaza različnih podatkov na mapi, kot so GPX poti potovanja/navigacije in dodatni zemljevidi s prilagodljivo prozornostjo\n\t* Možnost prikaza imena krajev v angleščini, z izvornim ali fonetičnim črkovanjem\n\nUporaba podatkov iz OpenStreetMap-a in Wikipedije:\n\t* Visoka kakovost informacij od najboljših svetovnih skupinskih projektov\n\t* Globalni zemljevidi iz OpenStreetMap-a, na voljo za vsako državo ali regijo\n\t* Točke POI z Wikipedie, ki so odlične za seznanjanje s krajem\n\t* Neomejeni brezplačni prenos neposredno iz programa (prenos omejen na 16 map/datotek v brezplačni različici)\n\t* Vedno posodobljeni zemljevidi (posodobljeni vsaj enkrat mesečno)\n\t* Kompaktni lokalni vektorski zemljevidi\n\t* Izberite lahko med zemljevidi z vsemi podatki ali samo cestnim omrežjem (primer: vsa Japonska je velika 700 MB ali 200 MB samo za cestno omrežje)\n\t* Podpora tudi shranjevanju spletnih zemljevidov\n\nVarnostne funkcije\n\t* Možnost avtomatskega preklopa med dnevnim in nočnim pogledom\n\t* Možnost prikazovanja omejitev hitrosti z obveščanjem ob prekoračitvi omejitve\n\t* Možnost povečave zemljevida glede na hitrost vožnje\n\t* Delitev lokacije, tako da vas lahko vaši prijatelji najdejo\n\nFunkcije za kolesarje in pešce\n\t* Zemljevidi vključujejo pohodniške in kolesarske steze, odlični so za dejavnosti na prostem\n\t* Posebno usmerjanje in različni načini prikaza za kolesarje in pešce\n\t* Možnost prikaza postaj javnega prevoza (avtobus, tramvaj, vlak), vključno z imeni prog\n\t* Možno shranjevanje v lokalno GPX datoteko ali spletno storitev – Možnost prikaza hitrosti in nadmorske višine\n\t* Prikaz izohips in senčenja hribov (prek dodatnega vstavka)\n\nDirektno prispevanje k projektu OpenStreetMap\n\t* Prijava napak zemljevida\n\t* Nalaganje sledi GPX v OSM neposredno iz programa\n\t* Dodajanje točk POI in neposreden prenos v OSM (tudi kasneje, če brez povezave)\n\t* Možno snemanje v ozadju (medtem ko je naprave v pripravljenosti)\n\nOsmAnd je odprtokodni in je v stalnem v razvoju. Vsakdo lahko prispeva s sporočanjem hroščev, izboljšanjem prevodov ali s kodiranjem nove funkcije. Projekt je v živahnem in nenehnem izboljševanju po zaslugi vseh teh oblik interakcij med razvijalci in uporabniki. Napredek projekta je odvisen tudi od finančnih prispevkov za razvoj, kodiranje in testiranje novih funkcij. Z nakupom OsmAnd+ pomagate, da se program še bolj razvije! Možno je tudi financiranje posebne nove funkcije, ali pa splošna donacija na osmand.net.\n\nOcenjena pokritost zemljevidov in kakovost:\n\t* Zahodna Evropa: ****\n\t* Vzhodna Evropa: ***\n\t* Rusija: ***\n\t* Severna Amerika: ***\n\t* Južna Amerika: **\n\t* Azija: **\n\t* Japonska in Koreja: ***\n\t* Bližnji vzhod: **\n\t* Afrika: **\n\t* Antarktika: *\n\nSeznam držav (praktično ves svet!):\nAfganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Argentina, Armenija, Aruba, Avstralija, Avstrija, Azerbajdžan, Bahami, Bahrajn, Bangladeš, Barbados, Belorusija, Belgija, Belize, Benin, Bermudi, Butan, Bolivija, Bonaire, Bosna in Hercegovina, Bocvana, Brazilija, Britanski Deviški otoki, Brunej, Bolgarija, Burkina Faso, Burundi, Kambodža, Kamerun, Kanada, Zelenortski otoki, Srednje-afriška republika, Čad, Čile, Kitajska, Kolumbija, Komori, Kongo, Kostarika, Slonokoščena obala, Hrvaška, Kuba, Curaçao, Ciper, Češka, Danska, Džibuti, Dominika, Dominikanska republika, Ekvador, Egipt, Salvador, Ekvatorialna Gvineja, Eritreja, Estonija, Etiopija, Fidži, Finska, Francija, Francoska Gvajana, Francoska Polinezija, Gabon, Gambija, Gruzija, Nemčija, Gana, Gibraltar, Grčija, Grenlandija, Grenada, Guadeloupe, Guam, Gvatemala, Guernsey, Gvineja, Gvineja Bissau, Gvajana, Haiti, Vatikan, Honduras, Hongkong, Madžarska, Islandija, Indija, Indonezija, Iran, Irak, Irska, otok Man, Izrael, Italija, Jamajka, Japonska, Jersey, Jordanija, Kazahstan, Kenija, Kiribati, Severna Koreja in Južna Koreja, Kuvajt, Kirgizistan, Laos, Latvija, Libanon, Lesoto, Liberija, Libija, Liechtenstein, Litva, Luksemburg, Macao, Makedonija, Madagaskar, Malavi, Malezija, Maldivi, Mali, Malta, Martinique, Mavretanija, Mauritius, Mayotte, Mehika, Mikronezija, Moldavija, Monako, Mongolija, Črna gora, Montserrat, Maroko, Mozambik, Mjanmar, Namibija, Nauru, Nepal, Nizozemska, Nizozemski Antili, Nova Kaledonija, Nova Zelandija, Nikaragva, Niger, Nigerija, Norveška, Oman, Pakistan, Palau, Palestinsko ozemlje, Panama, Papua Nova Gvineja, Paragvaj, Peru, Filipini, Poljska, Portugalska, Portoriko, Katar, Romunija, Rusija, Ruanda, Saint Barthelemy, Saint Helena, Saint Kitts in Nevis, Sveta Lucija, Saint Martin, Saint Pierre in Miquelon, Saint Vincent in Grenadine, Samoa, San Marino, Saudska Arabija, Senegal, Srbija, Sejšeli, Sierra Leone, Singapur, Slovaška, Slovenija, Somalija, Južna Afrika, Južna Georgia, Južni Sudan, Španija, Šrilanka, Sudan, Surinam, Svazi, Švedska, Švica, Sirija, Tajvan, Tadžikistan, Tanzanija, Tajska, Vzhodni Timor, Togo, Tokelau, Tonga, Trinidad in Tobago, Tunizija, Turčija, Turkmenistan, Tuvalu, Uganda, Ukrajina, Združeni arabski emirati, Velika Britanija (UK), Združene države Amerike (ZDA), Urugvaj, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis in Fortuna, Zahodna Sahara, Jemen, Zambija, Zimbabve. "</string>
+    <string name="use_distance_measurement_help">* Pritisnite za določitev točke.
+
+* Zadržite pritisk na zemljevidu za brisanje prejšnje točke.
+
+* Zadržite pritisk na točki za ogled ali dodajanje opisa.
+
+* Kliknite na gradnik za merjenje za prikaz več možnosti.</string>
+    <string name="osmand_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions - OSM Avtomatsko usmerjanje) je program za navigacijo z dostopom do kakovostnih brezplačnih zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti na pomnilniško kartico naprave ali telefona za uporabo brez povezave. OsmAnd omogoča vodenje z uporabo GPS, s prikazom na zaslonu in glasovno. Prikaz je mogoče prilagajati za avtomobiliste, kolesarje in pešce. Vse glavne zmožnosti programa delujejo brez povezave.
+
+Nekatere glavne značilnosti
+
+Navigacija
+\t* Dela v povezavi (hitro) ali brez nje (ko ste v tujini ni potrebno plačevati gostovanja)
+\t* Glasovno vodenje od zavoja do zavoja (z registriranim ali sintetiziranim glasom)
+\t* Po želji usmerjanje po voznih pasovih, prikaz imen ulic in predvidevanje časa prihoda
+\t* Podpora dodajanja vmesnih ciljev na poti
+\t* Samodejno ponovno usmerjanje kadarkoli se oddaljite od določene poti
+\t* Iskanje krajev po naslovu, po vrsti (npr.: restavracija, hotel, bencinska črpalka, muzej) ali z geografskimi koordinatami
+\t* Prikaz vašega položaj in usmeritve na zemljevidu
+\t* Preklop usmerjanja zemljevida po kompasu ali v smeri premikanja
+\t* Shranjevanje najpomembnejših krajev kot priljubljenih točk
+\t* Prikaz zanimivih točk POI (Points Of Interest) v okolici
+\t* Možnost prikaza specializiranih spletnih zemljevidov
+\t* Možnost prikaza satelitski posnetkov (Bing)
+\t* Možnost prikaza različnih podatkov na zemljevidu, kot so sledi GPX, potovanja/navigacije in dodatni zemljevidi s prilagodljivo prosojnostjo
+\t* Možnost prikaza imen krajev v angleščini, s krajevnim ali fonetičnim črkovanjem
+
+Uporaba podatkov zemljevidov OpenStreetMap in Wikipedije:
+\t* Visoka kakovost podatkov najboljših svetovnih skupinskih projektov
+\t* Globalni zemljevidi OpenStreetMap, na voljo za vsako državo ali regijo
+\t* Točke Wikipedia POI, ki so odlične za oglede (ni na voljo v brezplačni različici)
+\t* Neomejeni brezplačni prenos neposredno iz programa (prenos omejen na 10 map/datotek v brezplačni različici)
+\t* Vedno posodobljeni zemljevidi (posodobljeni vsaj enkrat mesečno)
+\t* Strnjeni krajevno shranjeni vektorski zemljevidi
+\t* Izbirati je mogoče med zemljevidi z vsemi podatki ali samo cestnim omrežjem (primer: vsa Japonska je velika 700 MB ali 200 MB samo cestno omrežje)
+\t* Podpora tudi shranjevanju spletnih zemljevidov
+
+Varnostne funkcije
+\t* Možnost avtomatskega preklopa med dnevnim in nočnim pogledom
+\t* Možnost prikazovanja omejitev hitrosti z obveščanjem ob prekoračitvi omejitve
+\t* Možnost povečave zemljevida glede na hitrost vožnje
+\t* Objavljanje trenutnega mesta, da vas lahko prijatelji najdejo
+
+Funkcije za kolesarje in pešce
+\t* Zemljevidi vključujejo pohodniške in kolesarske steze, odlični so za dejavnosti na prostem
+\t* Posebno usmerjanje in različni načini prikaza za kolesarje in pešce
+\t* Možnost prikaza postaj javnega prevoza (avtobus, tramvaj, vlak), vključno z imeni prog
+\t* Možno shranjevanje v krajevno datoteko sledi GPX ali spletno storitev
+\t* Možnost prikaza hitrosti in nadmorske višine
+\t* Prikaz izohips in senčenja terena (prek dodatnega vstavka)
+
+Prispevanje k projektu OpenStreetMap
+\t* Prijava napak zemljevida
+\t* Nalaganje sledi GPX v OSM neposredno iz programa
+\t* Dodajanje točk POI in neposreden prenos v OSM (tudi z zamikom do vzpostavitve povezave)
+\t* Možno snemanje v ozadju (medtem ko je naprave v pripravljenosti)
+
+OsmAnd je odprtokodni program v nenehnem razvoju. Vsakdo lahko prispeva z dopolnjevanjem opomb in s sporočanjem hroščev, izboljšanjem prevodov ali s kodiranjem nove funkcije. Projekt je v živahnem in nenehnem izboljševanju po zaslugi vseh teh oblik interakcij med razvijalci in uporabniki. Napredek projekta je odvisen tudi od finančnih prispevkov za razvoj, kodiranje in testiranje novih funkcij. Z nakupom OsmAnd+ omogočite, da se program še bolj intenzivno razvija! Možno je tudi financiranje posebne nove funkcije, ali pa splošna donacija prek osmand.net.
+
+Ocena pokritost zemljevidov in kakovost:
+\t* Zahodna Evropa: ****
+\t* Vzhodna Evropa: ***
+\t* Rusija: ***
+\t* Severna Amerika: ***
+\t* Južna Amerika: **
+\t* Azija: **
+\t* Japonska in Koreja: ***
+\t* Bližnji vzhod: **
+\t* Afrika: **
+\t* Antarktika: *
+
+Seznam držav (praktično ves svet!):
+Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Argentina, Armenija, Aruba, Avstralija, Avstrija, Azerbajdžan, Bahami, Bahrajn, Bangladeš, Barbados, Belorusija, Belgija, Belize, Benin, Bermuda, Butan, Bolivija, Bonaire, Bosna in Hercegovina, Bocvana, Brazilija, Britanski Deviški otoki, Brunej, Bolgarija, Burkina Faso, Burundi, Kambodža, Kamerun, Kanada, Zelenortski otoki, Srednje-afriška republika, Čad, Čile, Kitajska, Kolumbija, Komori, Kongo, Kostarika, Slonokoščena obala, Hrvaška, Kuba, Curaçao, Ciper, Češka, Danska, Džibuti, Dominika, Dominikanska republika, Ekvador, Egipt, Salvador, Ekvatorialna Gvineja, Eritreja, Estonija, Etiopija, Fidži, Finska, Francija, Francoska Gvajana, Francoska Polinezija, Gabon, Gambija, Gruzija, Nemčija, Gana, Gibraltar, Grčija, Grenlandija, Grenada, Guadeloupe, Guam, Gvatemala, Guernsey, Gvineja, Gvineja Bissau, Gvajana, Haiti, Vatikan, Honduras, Hongkong, Madžarska, Islandija, Indija, Indonezija, Iran, Irak, Irska, otok Man, Izrael, Italija, Jamajka, Japonska, Jersey, Jordanija, Kazahstan, Kenija, Kiribati, Severna Koreja in Južna Koreja, Kuvajt, Kirgizistan, Laos, Latvija, Libanon, Lesoto, Liberija, Libija, Liechtenstein, Litva, Luksemburg, Macao, Makedonija, Madagaskar, Malavi, Malezija, Maldivi, Mali, Malta, Martinique, Mavretanija, Mauritius, Mayotte, Mehika, Mikronezija, Moldavija, Monako, Mongolija, Črna gora, Montserrat, Maroko, Mozambik, Mjanmar, Namibija, Nauru, Nepal, Nizozemska, Nizozemski Antili, Nova Kaledonija, Nova Zelandija, Nikaragva, Niger, Nigerija, Norveška, Oman, Pakistan, Palau, Palestinsko ozemlje, Panama, Papua Nova Gvineja, Paragvaj, Peru, Filipini, Poljska, Portugalska, Portoriko, Katar, Romunija, Rusija, Ruanda, Saint Barthelemy, Saint Helena, Saint Kitts in Nevis, Sveta Lucija, Saint Martin, Saint Pierre in Miquelon, Saint Vincent in Grenadine, Samoa, San Marino, Saudska Arabija, Senegal, Srbija, Sejšeli, Sierra Leone, Singapur, Slovaška, Slovenija, Somalija, Južna Afrika, Južna Georgia, Južni Sudan, Španija, Šrilanka, Sudan, Surinam, Svazi, Švedska, Švica, Sirija, Tajvan, Tadžikistan, Tanzanija, Tajska, Vzhodni Timor, Togo, Tokelau, Tonga, Trinidad in Tobago, Tunizija, Turčija, Turkmenistan, Tuvalu, Uganda, Ukrajina, Združeni arabski emirati, Velika Britanija (UK), Združene države Amerike (ZDA), Urugvaj, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis in Fortuna, Zahodna Sahara, Jemen, Zambija, Zimbabve.
+ "</string>
+    <string name="osmand_plus_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions - Avtomatsko usmerjanje), je zemljevid in program za navigacijo z dostopom do svetovnih brezplačnih, zelo kakovostnih OpenStreetMap (OSM) podatkov. Vse podatke map je mogoče shraniti na pomnilniško kartico vašega telefona za uporabo brez povezave. OsmAnd ponuja usmerjanje preko sledilnika  GPS naprave, s prikazom na zaslonu in glasovno, za avto, kolo in pešce. Vse glavne funkcije delujejo tako v povezavi kot brez nje (internet ni potreben).
+
+OsmAnd+ je plačljiva različica programa. Z nakupom podprete razvoj projekta, financirate razvoj novih zmožnosti in seveda prejemate najnovejše posodobitve. Lahko preizkusite program pred nakupom tako, da namestite brezplačno različico OsmAnd.
+
+Nekatere glavne značilnosti:
+
+Navigacija
+\t* Dela v povezavi (hitro) ali brez nje (ko ste v tujini ni potrebno plačevati gostovanja)
+\t* Glasovno vodenje od zavoja do zavoja (z registriranim ali sintetiziranim glasom)
+\t* Po želji usmerjanje po voznih pasovih, prikaz imena ulice in predvidevanje časa prihoda
+\t* Podpora vmesnim ciljem na poti
+\t* Samodejno ponovno usmerjanje kadarkoli se oddaljite od določene poti
+\t* Iskanje krajev po naslovu, po vrsti (npr.: restavracija, hotel, bencinska črpalka, muzej) ali z geografskimi koordinatami po zemljevidu
+\t* Prikaz vašega položaj in usmeritve na zemljevidu
+\t* Po želji uravnava zemljevida po kompasu ali v smeri gibanja
+\t* Shranjevanje najpomembnejših krajev kot priljubljeni
+\t* Prikaz POI (točke interesov) v okolici
+\t* Možnost prikaza specializiranih spletnih zemljevidov
+\t* Možnost prikaza satelitski posnetkov (Bing)
+\t* Možnost prikaza različnih podatkov na mapi, kot so GPX poti potovanja/navigacije in dodatni zemljevidi s prilagodljivo prozornostjo
+\t* Možnost prikaza imena krajev v angleščini, z izvornim ali fonetičnim črkovanjem
+
+Uporaba podatkov iz OpenStreetMap-a in Wikipedije:
+\t* Visoka kakovost informacij od najboljših svetovnih skupinskih projektov
+\t* Globalni zemljevidi iz OpenStreetMap-a, na voljo za vsako državo ali regijo
+\t* Točke POI z Wikipedie, ki so odlične za seznanjanje s krajem
+\t* Neomejeni brezplačni prenos neposredno iz programa (prenos omejen na 16 map/datotek v brezplačni različici)
+\t* Vedno posodobljeni zemljevidi (posodobljeni vsaj enkrat mesečno)
+\t* Kompaktni lokalni vektorski zemljevidi
+\t* Izberite lahko med zemljevidi z vsemi podatki ali samo cestnim omrežjem (primer: vsa Japonska je velika 700 MB ali 200 MB samo za cestno omrežje)
+\t* Podpora tudi shranjevanju spletnih zemljevidov
+
+Varnostne funkcije
+\t* Možnost avtomatskega preklopa med dnevnim in nočnim pogledom
+\t* Možnost prikazovanja omejitev hitrosti z obveščanjem ob prekoračitvi omejitve
+\t* Možnost povečave zemljevida glede na hitrost vožnje
+\t* Delitev lokacije, tako da vas lahko vaši prijatelji najdejo
+
+Funkcije za kolesarje in pešce
+\t* Zemljevidi vključujejo pohodniške in kolesarske steze, odlični so za dejavnosti na prostem
+\t* Posebno usmerjanje in različni načini prikaza za kolesarje in pešce
+\t* Možnost prikaza postaj javnega prevoza (avtobus, tramvaj, vlak), vključno z imeni prog
+\t* Možno shranjevanje v lokalno GPX datoteko ali spletno storitev – Možnost prikaza hitrosti in nadmorske višine
+\t* Prikaz izohips in senčenja hribov (prek dodatnega vstavka)
+
+Direktno prispevanje k projektu OpenStreetMap
+\t* Prijava napak zemljevida
+\t* Nalaganje sledi GPX v OSM neposredno iz programa
+\t* Dodajanje točk POI in neposreden prenos v OSM (tudi kasneje, če brez povezave)
+\t* Možno snemanje v ozadju (medtem ko je naprave v pripravljenosti)
+
+OsmAnd je odprtokodni in je v stalnem v razvoju. Vsakdo lahko prispeva s sporočanjem hroščev, izboljšanjem prevodov ali s kodiranjem nove funkcije. Projekt je v živahnem in nenehnem izboljševanju po zaslugi vseh teh oblik interakcij med razvijalci in uporabniki. Napredek projekta je odvisen tudi od finančnih prispevkov za razvoj, kodiranje in testiranje novih funkcij. Z nakupom OsmAnd+ pomagate, da se program še bolj razvije! Možno je tudi financiranje posebne nove funkcije, ali pa splošna donacija na osmand.net.
+
+Ocenjena pokritost zemljevidov in kakovost:
+\t* Zahodna Evropa: ****
+\t* Vzhodna Evropa: ***
+\t* Rusija: ***
+\t* Severna Amerika: ***
+\t* Južna Amerika: **
+\t* Azija: **
+\t* Japonska in Koreja: ***
+\t* Bližnji vzhod: **
+\t* Afrika: **
+\t* Antarktika: *
+
+Seznam držav (praktično ves svet!):
+Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Argentina, Armenija, Aruba, Avstralija, Avstrija, Azerbajdžan, Bahami, Bahrajn, Bangladeš, Barbados, Belorusija, Belgija, Belize, Benin, Bermudi, Butan, Bolivija, Bonaire, Bosna in Hercegovina, Bocvana, Brazilija, Britanski Deviški otoki, Brunej, Bolgarija, Burkina Faso, Burundi, Kambodža, Kamerun, Kanada, Zelenortski otoki, Srednje-afriška republika, Čad, Čile, Kitajska, Kolumbija, Komori, Kongo, Kostarika, Slonokoščena obala, Hrvaška, Kuba, Curaçao, Ciper, Češka, Danska, Džibuti, Dominika, Dominikanska republika, Ekvador, Egipt, Salvador, Ekvatorialna Gvineja, Eritreja, Estonija, Etiopija, Fidži, Finska, Francija, Francoska Gvajana, Francoska Polinezija, Gabon, Gambija, Gruzija, Nemčija, Gana, Gibraltar, Grčija, Grenlandija, Grenada, Guadeloupe, Guam, Gvatemala, Guernsey, Gvineja, Gvineja Bissau, Gvajana, Haiti, Vatikan, Honduras, Hongkong, Madžarska, Islandija, Indija, Indonezija, Iran, Irak, Irska, otok Man, Izrael, Italija, Jamajka, Japonska, Jersey, Jordanija, Kazahstan, Kenija, Kiribati, Severna Koreja in Južna Koreja, Kuvajt, Kirgizistan, Laos, Latvija, Libanon, Lesoto, Liberija, Libija, Liechtenstein, Litva, Luksemburg, Macao, Makedonija, Madagaskar, Malavi, Malezija, Maldivi, Mali, Malta, Martinique, Mavretanija, Mauritius, Mayotte, Mehika, Mikronezija, Moldavija, Monako, Mongolija, Črna gora, Montserrat, Maroko, Mozambik, Mjanmar, Namibija, Nauru, Nepal, Nizozemska, Nizozemski Antili, Nova Kaledonija, Nova Zelandija, Nikaragva, Niger, Nigerija, Norveška, Oman, Pakistan, Palau, Palestinsko ozemlje, Panama, Papua Nova Gvineja, Paragvaj, Peru, Filipini, Poljska, Portugalska, Portoriko, Katar, Romunija, Rusija, Ruanda, Saint Barthelemy, Saint Helena, Saint Kitts in Nevis, Sveta Lucija, Saint Martin, Saint Pierre in Miquelon, Saint Vincent in Grenadine, Samoa, San Marino, Saudska Arabija, Senegal, Srbija, Sejšeli, Sierra Leone, Singapur, Slovaška, Slovenija, Somalija, Južna Afrika, Južna Georgia, Južni Sudan, Španija, Šrilanka, Sudan, Surinam, Svazi, Švedska, Švica, Sirija, Tajvan, Tadžikistan, Tanzanija, Tajska, Vzhodni Timor, Togo, Tokelau, Tonga, Trinidad in Tobago, Tunizija, Turčija, Turkmenistan, Tuvalu, Uganda, Ukrajina, Združeni arabski emirati, Velika Britanija (UK), Združene države Amerike (ZDA), Urugvaj, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis in Fortuna, Zahodna Sahara, Jemen, Zambija, Zimbabve.
+ "</string>
 
 
     <string name="av_camera_focus">Vrsta ostrenja kamere</string>
@@ -1295,7 +1492,14 @@
 
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
-    <string name="osmo_plugin_description">"Vstavek OsMo omogoča delno podopo sledenja z OpenStreetMap. Za več informacij si oglejte spletno stran http://osmo.mobi.\n\nSledilnik Osmo omogoča sledenje napravam, ki objavljajo položaj in ustvarjanje točk, ki so vidne celotni skupini.\n\nSkupine, ki že mesece niso odstranjene, je treba uskladiti z novimi pravili prek spletišča OsMo.mobi. "</string>
+    <string name="osmo_plugin_description">"Vstavek OsMo omogoča delno podopo sledenja z OpenStreetMap. Za več informacij si oglejte spletno stran http://osmo.mobi.
+
+
+Sledilnik Osmo omogoča sledenje napravam, ki objavljajo položaj in ustvarjanje točk, ki so vidne celotni skupini.
+
+
+Skupine, ki že mesece niso odstranjene, je treba uskladiti z novimi pravili prek spletišča OsMo.mobi.
+ "</string>
     <string name="osmo_plugin_name">Sledilnik OpenStreetMap</string>
     <string name="keep_informing_never">Samo ročno (pritisnite na puščico)</string>
     <string name="keep_informing_descr">Ponovno najavi obvestila navigacije v rednih časovnih zamikih</string>
@@ -1473,7 +1677,11 @@
     <string name="osmo_start_service">Storitev OsMo</string>
     <string name="osmo_gpx_track_downloaded">Prejeta je sled OsMo %1$s.</string>
     <string name="lang_fa">Perzijščina</string>
-    <string name="osmo_auth_error">Overitev s sledilnikom OsMo je spodletelo: %1$s.\n Problem je lahko začasen zaradi nedelovanja storitve, ali pa je vaša registracija potekla.\n Ali želite nadaljevati z obnovitvijo registracije?</string>
+    <string name="osmo_auth_error">Overitev s sledilnikom OsMo je spodletelo: %1$s.
+
+Problem je lahko začasen zaradi nedelovanja storitve, ali pa je vaša registracija potekla.
+
+Ali želite nadaljevati z obnovitvijo registracije?</string>
     <string name="osmo_group_information_desc">" - Za ustvarjanje skupine vpišite ime in izpolnite opis\n - Iz programa so lahko ustvarjene le enostavne skupine. Več o tem si lahko preberete na https://osmo.mobi/g/new.\n - Prek spletnega vmesnika lahko urejate skupine, postavljate sledi in dodajate točke, ki so na voljo vsem.
 \n - Ne podpiramo možnosti skupin z enim uporabnikom. To niso skupine POI.\n - V zasebnih skupinah je lahko največ 8 oseb.\n - Podrobnosti možnosti in dovoljenja uporabe so na spletni strani OsMo.mobi.\n - Za ustvarjanje skupin, ki ne sledijo zgornjim omejitvam, stopite v stik s podporo na osmo.mobi@gmail.com. "</string>
     <string name="lang_al">Albanščina</string>
@@ -1524,7 +1732,11 @@
     <string name="pause_navigation">Ustavi navigacijo</string>
     <string name="save_global_track_interval_descr">Izberite časovni razmik beleženja za splošno shranjevanje (omogočeno z gumbom za beleženje sledi GPX na zemljevidu)</string>
     <string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti z gumbom za beleženje na zaslonu zemljevida</string>
-    <string name="record_plugin_description">"Vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX.\n\nShranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mogoče slediti dejavnostim, treningom ali potovanjem. Nekaj osnovne analize, kot so čas kroga, povprečna hitrost, razdalja in podobno, omogoča že program OsmAnd, podrobnejša analiza pa je mogoča s posebnimi orodji. "</string>
+    <string name="record_plugin_description">"Vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX.
+
+
+Shranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mogoče slediti dejavnostim, treningom ali potovanjem. Nekaj osnovne analize, kot so čas kroga, povprečna hitrost, razdalja in podobno, omogoča že program OsmAnd, podrobnejša analiza pa je mogoča s posebnimi orodji.
+ "</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Izris stez po sledeh OSMC</string>
 
     <string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
@@ -1749,8 +1961,19 @@
 \n\nOmogoča tudi posebne možnosti potovanja, kot je kolesarjenje ali pohodništvo v odročnih, gorskih ali težko prehodnih krajih.
 \n\nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso potrebni.
 \n\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
-    <string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.\n\nZ izborom tega pogleda se slog prikaza spremeni v \'Zimski pogled\' in kaže vse podrobnosti v zimskem pogledu. Izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
-    <string name="plugin_nautical_descr">"Vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov.\n\nS tem posebnim prekrivnim zemljevidom je mogoč izris posebnih navigacijskih oznak, ki so sicer značilne za navtične  zemljevide. Opisi posamezne oznake pripomorejo k določanju (kategorije, oblike, barve, zaporedja, sklica …).\n\nVrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni sloj ali pa spremenite slog zemljevida med \'Nastavitvami zemljevida\' v meniju. "</string>
+    <string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.
+
+
+Z izborom tega pogleda se slog prikaza spremeni v \'Zimski pogled\' in kaže vse podrobnosti v zimskem pogledu. Izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida.
+ "</string>
+    <string name="plugin_nautical_descr">"Vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov.
+
+
+S tem posebnim prekrivnim zemljevidom je mogoč izris posebnih navigacijskih oznak, ki so sicer značilne za navtične  zemljevide. Opisi posamezne oznake pripomorejo k določanju (kategorije, oblike, barve, zaporedja, sklica …).
+
+
+Vrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni sloj ali pa spremenite slog zemljevida med \'Nastavitvami zemljevida\' v meniju.
+ "</string>
     
     <string name="routing_attr_avoid_borders_description">Izogibanje prehodom meje z drugimi državami</string>
     <string name="routing_attr_height_name">Omejitev višine</string>
@@ -2021,7 +2244,33 @@
     <string name="dashboard_or_drawer_title">Upravljanje prek nadzorne plošče ali menija</string>
     <string name="dashboard_or_drawer_description">Ob meniju je po novem na voljo možnost upravljanja s programom preko prilagodljive nadzorne plošče. Možnost je mogoče spremeniti med nastavitvami.</string>
 <string name="osm_edit_commented_note">Opomba OSM z dodatnimi zapisi</string>
-    <string name="release_2_2">" • Prenovljen in posodobljen vmesnik, ki omogoča izbiranje mest na zemljevidu in prek drugih pogledov\n\n • Pogled zemljevida se zažene neposredno, če ni izbrana možnost \"Pokaži nadzorno ploščo ob zagonu programa\"\n\n • Možnost nastavitve prikazanih ikon v nadzorni plošči\n\n • Možnost zamenjave nadzorne plošče z menijem\n\n • Prejemanje zemljevidov je sedaj na voljo z enostavnim klikom na državo ali regijo na svetovnem zemljevidu\n\n • Iskanje točk POI podpira tudi podrobnejše poizvedbe\n\n • Izboljšane možnosti urejanja točk POI in OSM\n\n • Vmesnik za prejem zemljevidov je poenostavljen\n\n in še veliko več … "</string>
+    <string name="release_2_2">"
+ • Prenovljen in posodobljen vmesnik, ki omogoča izbiranje mest na zemljevidu in prek drugih pogledov
+
+
+ • Pogled zemljevida se zažene neposredno, če ni izbrana možnost \"Pokaži nadzorno ploščo ob zagonu programa\"
+
+
+ • Možnost nastavitve prikazanih ikon v nadzorni plošči
+
+
+ • Možnost zamenjave nadzorne plošče z menijem
+
+
+ • Prejemanje zemljevidov je sedaj na voljo z enostavnim klikom na državo ali regijo na svetovnem zemljevidu
+
+
+ • Iskanje točk POI podpira tudi podrobnejše poizvedbe
+
+
+ • Izboljšane možnosti urejanja točk POI in OSM
+
+
+ • Vmesnik za prejem zemljevidov je poenostavljen
+
+
+ in še veliko več …
+ "</string>
     <string name="routing_attr_avoid_stairs_name">Izogni se stopnicam</string>
 	<string name="routing_attr_avoid_stairs_description">Izogni se stopnicam</string>
 	<string name="routing_attr_avoid_borders_name">Izogni se mejnim prehodom</string>
@@ -2116,8 +2365,12 @@
     <string name="consider_turning_polygons_off">Priporočljivo je onemogočiti izrisovanje poligonov.</string>
     <string name="select_map_marker">Izbor oznake zemljevida</string>
     <string name="map_markers_other">Druge oznake</string>
-    <string name="download_files_error_not_enough_space">Ni dovolj prostora! Možnost zahteva {3} MB začasnega in {1} MB trajnega pomnilnika. Trenutno je na voljo le {2} MB prostora.</string>
-    <string name="download_files_question_space_with_temp">Ali res želite prejeti datoteke {0}? Prejem zahteva {3} MB začasnega pomnilnika in {1} MB trajnega prostora na napravi. Trenutno je na voljo {2} MB.</string>
+    <string name="download_files_error_not_enough_space">Ni dovolj prostora!
+Možnost zahteva {3} MB začasnega in {1} MB trajnega pomnilnika.
+Trenutno je na voljo le {2} MB prostora.</string>
+    <string name="download_files_question_space_with_temp">Ali res želite prejeti datoteke {0}?
+Prejem zahteva {3} MB začasnega in {1} MB trajnega pomnilnika.
+Trenutno je na voljo {2} MB.</string>
     <string name="upload_osm_note_description">Opombo OSM je mogoče poslati brezimno, v kolikor uporabljate profil OpenStreetMap.org.</string>
     <string name="upload_osm_note">Pošlji Opombo OSM</string>
     <string name="upload_anonymously">Pošlji anonimno</string>
@@ -2160,7 +2413,8 @@
     <string name="no_waypoints_found">Ni vmesnih točk</string>
     <string name="release_2_3">" • Uporabljajte OSM v živo. Pridobite si možnost urnih posodobitev zemljevidov. S podporo razvijalcem in skupnosti si pridobite dostop do trenutnih podatkov.\n\n • Z oznakami zemljevidov je mogoča enostavna izbira mest na zemljevidu.\n\n • Zemljevidi OSM so opremljeni s specifičnimi oznakami cest, dodani so tudi drugi podatki.\n\n • Uvedene so izboljšave uporabniške izkušnje pri pripravi poti potovanj.
 \n\n • Omogočene so različne posodobitve vsebinskega menija, kot je vsebinsko iskanje naslova.\n\n • Še in še in še ... "</string>
-    <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta. Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to dober način za začetek sodelovanja.</string>
+    <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta.
+Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to dober način za začetek sodelovanja.</string>
     
     <string name="rendering_value_thin_name">Tanko</string>
     <string name="rendering_value_medium_name">Srednje</string>
@@ -2189,7 +2443,45 @@
     <string name="access_sort">Razvrsti</string>
     <string name="map_mode">Način zemljevida</string>
     <string name="number_of_gpx_files_selected_pattern">%s izbranih datotek GPX</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" Zemljevidi in navigacija OsmAnd - iskanje točk in preračunavanje poti v načinu brez povezave\nPripravite si zemljevide neznanih krajev, ki so na vaši poti.\n\nOsnovne zmožnosti:\n• na voljo so podrobni zemljevidi več kot 200 držav,\n• podprta je navigacija brez povezave z glasovnim vodenjem,\n• mogoče je iskanje naslovov v načinu brez povezave,\n• na voljo je izpis podrobnosti točk na zemljevidu: točke POI, gostilne, parkirišča trgovine in drugo,\n• omogočeno je dodajanje mest med priljubljene točke,\n• vmesnik je prilagojen voznikom avtomobilov in koles, pa tudi pohodnikom in drugim popotnikom.\n\nDodatne možnosti:\n• program podpira beleženje in pregledovanja sledi GPX,\n• prikazani so opisi točk, ki so zbrani na Wikipediji.\n• omogočeno je dodajanje slik, zvoka in videa k opombam zemljevida,\n• podprt je dnevno-nočni način prikaza zemljevida,\n• na voljo so podatki o javnem prevozu, poteh in postajališčih.\n\n• na voljo so natančne kolesarske in gorske poti ter\n• turistične pohodne poti po vsem svetu,\n• podprti so številni viri spletnih zemljevidov,\n• omogočeno je obveščanje o kakovosti podlage poti in javni razsvetljavi,\n• omogočeno je dodajanje, urejanje in brisanje točk POI (za uporabnike spletišča OpenStreetMap.org)\n• vstavek OsMo - sledenje prijavljenih naprav v Franciji, Nemčiji, Mehiki, Združenem kraljestvu, Španiji, Nizozemskem, ZDA, Rusiji, Braziliji in tudi drugod.\n\nVstavki:\n• prikaz izohips in senčenje terena je dodan v osnovni pogled https://goo.gl/7mojP8,\n• smučarski zemljevidi za urejena in prosta smučišča s podatki o žičnicah, namestitvah in drugih značilnostih https://goo.gl/pX6DxJ,\n• navtični zemljevidi s podatki o znakih in pravilih https://goo.gl/0hEdxm\n• Pomnjenje položaja parkiranja in obveščanje o dovoljenem času uporabe parkirišča oziroma parkirne ure https://goo.gl/6JxQXF.\n\nOstanite v stiku!\nTwitter: https://twitter.com/osmandapp\nFacebook: https://www.facebook.com/osmandapp\nSpletna stran: http://osmand.net\n\nV kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skupino za podporo prek elektronskega naslova support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+Zemljevidi in navigacija OsmAnd - iskanje točk in preračunavanje poti v načinu brez povezave
+Pripravite si zemljevide neznanih krajev, ki so na vaši poti.
+
+Osnovne zmožnosti:
+• na voljo so podrobni zemljevidi več kot 200 držav,
+• podprta je navigacija brez povezave z glasovnim vodenjem,
+• mogoče je iskanje naslovov v načinu brez povezave,
+• na voljo je izpis podrobnosti točk na zemljevidu: točke POI, gostilne, parkirišča trgovine in drugo,
+• omogočeno je dodajanje mest med priljubljene točke,
+• vmesnik je prilagojen voznikom avtomobilov in koles, pa tudi pohodnikom in drugim popotnikom.
+
+Dodatne možnosti:
+• program podpira beleženje in pregledovanja sledi GPX,
+• prikazani so opisi točk, ki so zbrani na Wikipediji.
+• omogočeno je dodajanje slik, zvoka in videa k opombam zemljevida,
+• podprt je dnevno-nočni način prikaza zemljevida,
+• na voljo so podatki o javnem prevozu, poteh in postajališčih.
+
+• na voljo so natančne kolesarske in gorske poti ter
+• turistične pohodne poti po vsem svetu,
+• podprti so številni viri spletnih zemljevidov,
+• omogočeno je obveščanje o kakovosti podlage poti in javni razsvetljavi,
+• omogočeno je dodajanje, urejanje in brisanje točk POI (za uporabnike spletišča OpenStreetMap.org)
+• vstavek OsMo - sledenje prijavljenih naprav v Franciji, Nemčiji, Mehiki, Združenem kraljestvu, Španiji, Nizozemskem, ZDA, Rusiji, Braziliji in tudi drugod.
+
+Vstavki:
+• prikaz izohips in senčenje terena je dodan v osnovni pogled https://goo.gl/7mojP8,
+• smučarski zemljevidi za urejena in prosta smučišča s podatki o žičnicah, namestitvah in drugih značilnostih https://goo.gl/pX6DxJ,
+• navtični zemljevidi s podatki o znakih in pravilih https://goo.gl/0hEdxm
+• Pomnjenje položaja parkiranja in obveščanje o dovoljenem času uporabe parkirišča oziroma parkirne ure https://goo.gl/6JxQXF.
+
+Ostanite v stiku!
+Twitter: https://twitter.com/osmandapp
+Facebook: https://www.facebook.com/osmandapp
+Spletna stran: http://osmand.net
+
+V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skupino za podporo prek elektronskega naslova support@osmand.net. 
+ "</string>
     <string name="map_widget_bearing">Relativna smer</string>
     <string name="access_no_destination">Lokacija še ni zaznana</string>
     <string name="map_widget_magnetic_bearing">Smer po magnetnem polju</string>
@@ -2225,10 +2517,29 @@
     <string name="back_to_search">Nazaj na iskanje</string>
     <string name="confirmation_to_delete_history_items">Ali res želite izbrisati izbrane predmete zgodovine?</string>
     <string name="show_something_on_map">Pokaži %1$s na zemljevidu</string>
-    <string name="release_2_4">" • Zmogljivo besedilno iskanje\n\n • Posodobitev delovanja zvoka preko sistema Bluetooth\n\n • Izboljšano vodenje po poteh, glasovno sporočanje in nakazovanje menjave pasov\n\n • Dodane jezikovne prilagoditve in podpora krajevnim značilnostim prikaza\n\n • Veliko dodatnih izboljšav in odprav napak\n\n in mnogo več… "</string>
+    <string name="release_2_4">"
+ • Zmogljivo besedilno iskanje
+
+
+ • Posodobitev delovanja zvoka preko sistema Bluetooth
+
+
+ • Izboljšano vodenje po poteh, glasovno sporočanje in nakazovanje menjave pasov
+
+
+ • Dodane jezikovne prilagoditve in podpora krajevnim značilnostim prikaza
+
+
+ • Veliko dodatnih izboljšav in odprav napak
+
+
+ in mnogo več…
+ "</string>
     <string name="dist_away_from_my_location">Poišči %1$s</string>
     <string name="show_on_map">Pokaži na zemljevidu</string>
     <string name="share_history_subject">" v souporabi prek OsmAnd"</string>
     <string name="search_categories">Kategorije</string>
     <string name="lang_hsb">Sorbsčina (zgornja)</string>
+    <string name="coords_search">Iskanje po koordinatah</string>
+    <string name="advanced_coords_search">Napredno iskanje po koordinatah</string>
     </resources>
