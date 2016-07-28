@@ -364,9 +364,7 @@ public class AppInitializer implements IProgress {
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
-
-		app.searchUICore = startupInit(new SearchUICore(app.poiTypes, app.getSettings().MAP_PREFERRED_LOCALE.get(), new BinaryMapIndexReader[]{}), SearchUICore.class);
-		QuickSearchHelper.initSearchUICore(app);
+		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 	}
 
 
@@ -508,9 +506,9 @@ public class AppInitializer implements IProgress {
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
+			app.searchUICore.initSearchUICore();
 			checkLiveUpdatesAlerts();
-			LocalIndexHelper helper = new LocalIndexHelper(app);
-			QuickSearchHelper.setRepositoriesForSearchUICore(app);
+			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());

@@ -22,7 +22,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -46,9 +45,9 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RoutingConfiguration;
-import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedWriter;
@@ -98,7 +97,7 @@ public class OsmandApplication extends MultiDexApplication {
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
-	SearchUICore searchUICore;
+	QuickSearchHelper searchUICore;
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -360,7 +359,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return geocodingLookupService;
 	}
 
-	public SearchUICore getSearchUICore() {
+	public QuickSearchHelper getSearchUICore() {
 		return searchUICore;
 	}
 
