@@ -281,7 +281,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			public void afterTextChanged(Editable s) {
 				String newQueryText = s.toString();
 				updateClearButtonAndHint();
-				updateClearButtonVisibility(newQueryText.length() > 0);
+				updateClearButtonVisibility(true);
 				updateTabbarVisibility(newQueryText.length() == 0);
 				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 					searchQuery = newQueryText;
@@ -313,6 +313,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 					searchUICore.updateSettings(ss);
 					updateClearButtonAndHint();
+					updateClearButtonVisibility(true);
 				}
 				updateToolbarButton();
 			}
@@ -322,7 +323,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		updateToolbarButton();
 		updateClearButtonAndHint();
-		updateClearButtonVisibility(searchQuery.length() > 0);
+		updateClearButtonVisibility(true);
 		addMainSearchFragment();
 
 		searchEditText.requestFocus();
