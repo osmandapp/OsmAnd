@@ -273,8 +273,16 @@ public class QuickSearchListItem {
 						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case POI_TYPE:
 				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
+				int iconId = -1;
 				if (RenderingIcons.containsBigIcon(abstractPoiType.getIconKeyName())) {
-					int iconId = RenderingIcons.getBigIconResourceId(abstractPoiType.getIconKeyName());
+					iconId = RenderingIcons.getBigIconResourceId(abstractPoiType.getIconKeyName());
+				} else if (abstractPoiType instanceof PoiType
+						&& RenderingIcons.containsBigIcon(((PoiType) abstractPoiType).getOsmTag() + "_"
+						+ ((PoiType) abstractPoiType).getOsmValue())) {
+					iconId = RenderingIcons.getBigIconResourceId(((PoiType) abstractPoiType).getOsmTag() + "_"
+							+ ((PoiType) abstractPoiType).getOsmValue());
+				}
+				if (iconId != -1) {
 					return app.getIconsCache().getIcon(iconId,
 							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 				} else {
@@ -292,7 +300,7 @@ public class QuickSearchListItem {
 					}
 				}
 				if (id != null) {
-					int iconId = RenderingIcons.getBigIconResourceId(id);
+					iconId = RenderingIcons.getBigIconResourceId(id);
 					return app.getIconsCache().getIcon(iconId,
 							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 				} else {
