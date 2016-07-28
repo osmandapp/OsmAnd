@@ -2324,4 +2324,11 @@
 
 	<string name="poi_site_type_megalith">Speco: megalito</string>
 	<string name="poi_site_type_tumulus">Speco: tumulo</string>
+	<string name="poi_site_type_fortification">Speco: fortikaĵo</string>
+	<string name="poi_site_type_settlement">Speco: kolonio</string>
+	<string name="poi_site_type_city">Speco: urbo</string>
+	<string name="poi_site_type_hut_circle">Speco: restaĵo de ronda domo</string>
+	<string name="poi_site_type_necropolis">Speco: nekropolo</string>
+	<string name="poi_site_type_petroglyph">Speco: ŝtongrataĵo (petroglifo)</string>
+	<string name="poi_site_type_earthwork">Speco: artefarita terkonstruaĵo</string>
 	</resources>
