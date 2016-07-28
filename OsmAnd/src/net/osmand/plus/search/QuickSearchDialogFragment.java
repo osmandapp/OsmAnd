@@ -111,6 +111,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private Float heading = null;
 	private boolean useMapCenter;
 	private boolean paused;
+	private boolean foundPartialLocation;
 
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
@@ -154,13 +155,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarImage = (ImageView) view.findViewById(R.id.buttonToolbarImage);
 		buttonToolbarImage.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
 		buttonToolbarText = (TextView) view.findViewById(R.id.buttonToolbarTitle);
-		buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
 		view.findViewById(R.id.buttonToolbar).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				OsmandSettings settings = app.getSettings();
 				SearchPhrase searchPhrase = searchUICore.getPhrase();
-				if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
+				if (foundPartialLocation) {
+					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
+				} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
 					PoiUIFilter filter;
 					if (searchPhrase.isNoSelectedType()) {
 						filter = new PoiUIFilter(null, app, "");
@@ -308,12 +310,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					String newText = searchUICore.getPhrase().getTextWithoutLastWord();
 					searchEditText.setText(newText);
 					searchEditText.setSelection(newText.length());
-					SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
-					if (word != null && word.getResult() != null) {
-						buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
-					} else {
-						buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
-					}
 				} else if (useMapCenter && location != null) {
 					useMapCenter = false;
 					updateUseMapCenterUI();
@@ -324,11 +320,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					searchUICore.updateSettings(ss);
 					updateClearButtonAndHint();
 				}
+				updateToolbarButton();
 			}
 		});
 
 		setupSearch(mapActivity);
 
+		updateToolbarButton();
 		updateClearButtonAndHint();
 		addMainSearchFragment();
 
@@ -369,8 +367,23 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		FragmentTransaction childFragTrans = childFragMan.beginTransaction();
 		mainSearchFragment = new QuickSearchMainListFragment();
 		childFragTrans.add(R.id.search_view, mainSearchFragment);
-		childFragTrans.addToBackStack("QuickSearchMainListFragment");
 		childFragTrans.commit();
+	}
+
+	private void updateToolbarButton() {
+		OsmandApplication app = getMyApplication();
+		if (foundPartialLocation) {
+			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
+		} else if (searchEditText.getText().length() > 0) {
+			SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
+			if (word != null && word.getResult() != null) {
+				buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
+			} else {
+				buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
+			}
+		} else {
+			buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
+		}
 	}
 
 	private void setupSearch(final MapActivity mapActivity) {
@@ -663,6 +676,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private SearchResultCollection runCoreSearch(String text) {
 		showProgressBar();
+		foundPartialLocation = false;
+		updateToolbarButton();
 		return searchUICore.search(text, new ResultMatcher<SearchResult>() {
 
 			SearchResultCollection regionResultCollection = null;
@@ -737,7 +752,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						});
 						break;
 					case PARTIAL_LOCATION:
-						// todo
+						getMyApplication().runInUIThread(new Runnable() {
+							@Override
+							public void run() {
+								foundPartialLocation = true;
+								updateToolbarButton();
+							}
+						});
 						break;
 					default:
 						results.add(object);
@@ -759,7 +780,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchQuery = txt;
 		searchEditText.setText(txt);
 		searchEditText.setSelection(txt.length());
-		buttonToolbarText.setText(getMyApplication().getString(R.string.show_something_on_map, sr.localeName).toUpperCase());
+		updateToolbarButton();
 		runCoreSearch(txt);
 	}
 

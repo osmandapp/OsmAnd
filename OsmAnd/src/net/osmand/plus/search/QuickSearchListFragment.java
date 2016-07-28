@@ -74,7 +74,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					|| sr.objectType == ObjectType.WPT
 					|| sr.objectType == ObjectType.STREET_INTERSECTION) {
 
-				dialogFragment.dismiss();
 				showOnMap(sr);
 			} else {
 				dialogFragment.completeQueryWithObject(item.getSearchResult());
@@ -135,6 +134,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	private void showOnMap(SearchResult searchResult) {
 		if (searchResult.location != null) {
+			dialogFragment.dismiss();
 			OsmandApplication app = getMyApplication();
 			PointDescription pointDescription = null;
 			Object object = searchResult.object;

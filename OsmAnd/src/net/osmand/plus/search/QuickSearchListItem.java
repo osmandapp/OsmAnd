@@ -17,14 +17,12 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -89,6 +87,9 @@ public class QuickSearchListItem {
 				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
 				PointDescription pd = historyEntry.getName();
 				return pd.getSimpleName(app, false);
+			case LOCATION:
+				LatLon latLon = (LatLon) searchResult.object;
+				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
 		}
 		return searchResult.localeName;
 	}
