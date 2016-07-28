@@ -2454,4 +2454,6 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="dist_away_from_my_location">Szukaj w odległości %1$s</string>
     <string name="confirmation_to_delete_history_items">Czy chcesz usunąć wybrane elementy z historii?</string>
     <string name="back_to_search">Powrót do wyszukiwania</string>
+    <string name="coords_search">Wyszukiwanie współrzędnych</string>
+    <string name="advanced_coords_search">Zaawansowane wyszukiwanie współrzędnych</string>
     </resources>
