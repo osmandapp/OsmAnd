@@ -276,7 +276,7 @@ public class VoiceRouter {
 		notifyOnVoiceMessage();
 		double[] dist = new double[1];
 		String text = getText(location, points,  dist);
-		p.goAhead(dist[0], null).andArriveAtPoiWaypoint(text).play();
+		p.goAhead(dist[0], null).andArriveAtPoi(text).play();
 	}
 
 	public void announceWaypoint(List<LocationPointWrapper> points) {
