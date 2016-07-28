@@ -2282,4 +2282,6 @@
 	<string name="poi_historic_period_second_persian_period">Historia periodo: dua persa superregado</string>
 	<string name="poi_historic_period_alexander_the_great">Historia periodo: greka Egiptujo (de Aleksandro la Granda)</string>
 	<string name="poi_historic_period_ptolemaic_egypt">Historia periodo: ptolemea Egiptujo (305 – 30 a.K.)</string>
+	<string name="poi_historic_period_christian_egypt">Historia periodo: kristana Egiptujo</string>
+	<string name="poi_historic_period_byzantine_egypt">Historia periodo: bizancia Egiptujo (30 a.K. – 641 p.K.)</string>
 	</resources>
