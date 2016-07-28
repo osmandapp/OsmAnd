@@ -2402,4 +2402,6 @@ Cas que aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és una via perfecta per fe
     <string name="confirmation_to_delete_history_items">Voleu esborrar els elements seleccionats de l\'històric?</string>
     <string name="show_something_on_map">Situa %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Cwrca %1$s més enllà</string>
+    <string name="coords_search">Cerca per coordenades</string>
+    <string name="advanced_coords_search">Cerca avançada per coordenades</string>
     </resources>
