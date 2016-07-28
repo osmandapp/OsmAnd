@@ -2261,4 +2261,23 @@
 	<string name="poi_animal_no">Bestoj malpermesitaj</string>
 
 	<string name="poi_historic_period_nuragic">Historia periodo: nuraga</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Historia periodo: ŝtona epoko aŭ bronza epoko (nadeterminita)</string>
+	<string name="poi_historic_period_bronze_age">Historia periodo: bronza epoko</string>
+	<string name="poi_historic_period_principate">Historia periodo: principato (27 a.K. – 284 p.K.)</string>
+	<string name="poi_historic_period_classical_greece">Historia periodo: klasika Grekujo (5-a – 4-a jarcento a.K.)</string>
+	<string name="poi_historic_period_archaic_greece">Historia periodo: arĥaika Grekujo</string>
+	<string name="poi_historic_period_iron_age">Historia periodo: fera epoko</string>
+	<string name="poi_historic_period_roman_republic">Historia periodo: Romia respubliko (508 a.K. – 27 a.K.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Historia periodo: helenisma epoko</string>
+	<string name="poi_historic_period_new_kingdom">Historia periodo: nova imperio (1550 – 1069 a.K.)</string>
+	<string name="poi_historic_period_middle_kingdom">Historia periodo: meza imperio (2055 – 1650 a.K.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Historia periodo: antaŭ-dinastia epoko</string>
+	<string name="poi_historic_period_early_dynastic_period">Historia periodo: frua dinastia periodo (3100 – 2686 a.K.)</string>
+	<string name="poi_historic_period_old_kingdom">Historia periodo: malnova imperio (2686 – 2181 a.K.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Historia periodo: unua intertempa periodo (2181 – 2055 a.K.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Historia periodo: dua intertempa periodo (1650 – 1550 a.K.)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Historia periodo: tria intertempa periodo (1069 – 664 a.K.) "</string>
+	<string name="poi_historic_period_first_persian_period">Historia periodo: unua persa superregado</string>
+	<string name="poi_historic_period_late_period">Historia periodo: malfrua periodo (664 – 332 a.K.)</string>
+	<string name="poi_historic_period_second_persian_period">Historia periodo: dua persa superregado</string>
 	</resources>
