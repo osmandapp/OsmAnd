@@ -2021,15 +2021,16 @@ public class BinaryMapIndexReader {
 
 	private static boolean testMapSearch = false;
 	private static boolean testAddressSearch = false;
-	private static boolean testAddressSearchName = true;
+	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
 	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
-	private static boolean testTransportSearch = false;
-	private static int sleft = MapUtils.get31TileNumberX(6.3);
-	private static int sright = MapUtils.get31TileNumberX(6.5);
-	private static int stop = MapUtils.get31TileNumberY(49.9);
-	private static int sbottom = MapUtils.get31TileNumberY(49.7);
+	private static boolean testTransportSearch = true;
+	
+	private static int sleft = MapUtils.get31TileNumberX(4.7495);
+	private static int sright = MapUtils.get31TileNumberX(4.8608);
+	private static int stop = MapUtils.get31TileNumberY(52.3395);
+	private static int sbottom = MapUtils.get31TileNumberY(52.2589);
 	private static int szoom = 15;
 
 	private static void println(String s) {
@@ -2037,8 +2038,9 @@ public class BinaryMapIndexReader {
 	}
 
 	public static void main(String[] args) throws IOException {
-//		File fl = new File(System.getProperty("maps") + /Synthetic_test_rendering.obf");
-		File fl = new File(System.getProperty("maps") + "/Map.obf");
+		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
+		fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe.obf");
+		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2219,24 +2221,13 @@ public class BinaryMapIndexReader {
 		for (TransportIndex i : reader.transportIndexes) {
 			println("Transport bounds : " + i.left + " " + i.right + " " + i.top + " " + i.bottom);
 		}
-		{
-			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 15, null))) {
-				println(s.getName());
-				TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
-				for (net.osmand.data.TransportRoute route : routes.valueCollection()) {
-					println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
-							+ route.getAvgBothDistance());
-				}
-			}
-		}
-		{
-			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 16, null))) {
-				println(s.getName());
-				TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
-				for (net.osmand.data.TransportRoute route : routes.valueCollection()) {
-					println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
-							+ route.getAvgBothDistance());
-				}
+		for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom,
+				-1, null))) {
+			println(s.getName());
+			TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
+			for (net.osmand.data.TransportRoute route : routes.valueCollection()) {
+				println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
+						+ route.getAvgBothDistance());
 			}
 		}
 	}

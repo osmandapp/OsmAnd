@@ -67,8 +67,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (latLonBounds == null) {
 					return new ArrayList<>();
 				}
-				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
-
 				List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
 						latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {
 
