@@ -2139,24 +2139,52 @@ Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memor
     <string name="data_is_not_available">Datos no disponibles</string>
     <string name="rendering_attr_hideUnderground_name">Objetos subterráneos</string>
     <string name="shared_string_read_more">Leer más</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation (mapas y navegación de OsmAnd), encuentra ubicaciones en el mapa y calcula rutas sin conectarte a Internet. Descarga el mapa de un país antes de viajar para encontrar lugares y rutas en áreas desconocidas.\n\nOpciones básicas:\n• Mapas detallados en 200 países\n• Navegación sin conexión con indicaciones por voz\n• Búsqueda de direcciones en modo sin conexión\n• Información sobre ubicaciones en el mapa: lugares de interés, cafés, estacionamientos, tiendas\n• Añade tus ubicaciones a los favoritos\n• Navegación en automóvil, bicicleta y caminando\n\nOpciones adicionales:\n• Capacidad para ver y grabar trazas GPX\n• Descripción de Wikipedia en PDI
-\n• Añade notas de fotografías, audios y videos en el mapa
-\n• Modo de mapa Día y Noche para una conducción más cómoda\n• Información sobre rutas y paradas de transporte público
-\n• Rutas de ciclovías y senderos
-\n• Rutas de senderos para el turismo en todo el mundo\n• Mapas en línea de numerosas fuentes
-\n• Información sobre la calidad del pavimento y el alumbrado público
-\n• Añade, edita y quita PDI (para usuarios de OpenStreetMap.org)
-\n• OsMo - monitoriza en vivo otros dispositivos.
-\n• Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, los Países Bajos, EUA, Rusia, Brasil o cualquier otro estado.
-\n\nComplementos:
-\n• Mapas de curvas de nivel y sombreado del terreno: https://goo.gl/7mojP8 Datos de curvas de nivel y visualización del terreno se agrega al mapa básico de OsmAnd.
-\n• Mapa invernal: https://goo.gl/pX6DxJ Información sobre pistas de esquí, pistas de esquí de fondo, teleféricos y telesillas.
-\n• Mapa náutico: https://goo.gl/0hEdxm Estilo especial del mapa para la visualización de señales de navegación náutica y costera.
-\n• Estacionamiento: https://goo.gl/6JxQXF Ayuda a marcar la ubicación de tu vehículo estacionado y ver cuánto tiempo falta si el estacionamiento es limitado.
-\n\n¡Mantente al tanto!\nTwitter: https://twitter.com/osmandapp
-\nFacebook: https://www.facebook.com/osmandapp
-\nSitio web: http://osmand.net
-\nSi necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de soporte: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd Maps &amp; Navigation (mapas y navegación de OsmAnd), encuentra ubicaciones en el mapa y calcula rutas sin conectarte a Internet. Descarga el mapa de un país antes de viajar para encontrar lugares y rutas en áreas desconocidas.
+
+Opciones básicas:
+• Mapas detallados en 200 países
+• Navegación sin conexión con indicaciones por voz
+• Búsqueda de direcciones en modo sin conexión
+• Información sobre ubicaciones en el mapa: lugares de interés, cafés, estacionamientos, tiendas
+• Añade tus ubicaciones a los favoritos
+• Navegación en automóvil, bicicleta y caminando
+
+Opciones adicionales:
+• Capacidad para ver y grabar trazas GPX
+• Descripción de Wikipedia en PDI
+• Añade notas de fotografías, audios y videos en el mapa
+• Modo de mapa Día y Noche para una conducción más cómoda
+• Información sobre rutas y paradas de transporte público
+• Rutas de ciclovías y senderos
+• Rutas de senderos para el turismo en todo el mundo
+• Mapas en línea de numerosas fuentes
+• Información sobre la calidad del pavimento y el alumbrado público
+• Añade, edita y quita PDI (para usuarios de OpenStreetMap.org)
+• OsMo - monitoriza en vivo otros dispositivos.
+
+ Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, los Países Bajos, EUA, Rusia, Brasil o cualquier otro estado.
+
+Complementos:
+• Mapas de curvas de nivel y sombreado del terreno: https://goo.gl/7mojP8
+ Datos de curvas de nivel y visualización del terreno se agrega al mapa básico de OsmAnd.
+
+• Mapa invernal: https://goo.gl/pX6DxJ
+ Información sobre pistas de esquí, pistas de esquí de fondo, teleféricos y telesillas.
+
+• Mapa náutico: https://goo.gl/0hEdxm
+ Estilo especial del mapa para la visualización de señales de navegación náutica y costera.
+
+• Estacionamiento: https://goo.gl/6JxQXF
+ Ayuda a marcar la ubicación de tu vehículo estacionado y ver cuánto tiempo falta si el estacionamiento es limitado.
+
+¡Mantente al tanto!
+Twitter: https://twitter.com/osmandapp
+Facebook: https://www.facebook.com/osmandapp
+Sitio web: http://osmand.net
+
+Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de soporte: support@osmand.net. 
+ "</string>
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Guardar cambios</string>
     <string name="shared_string_email_address">Correo electrónico</string>
