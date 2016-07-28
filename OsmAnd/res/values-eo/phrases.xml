@@ -1427,7 +1427,7 @@
 	<string name="poi_payment_visa_no">Visa kartoj malakceptataj</string>
 	<string name="poi_payment_mastercard_yes">MasterCard kartoj akceptataj</string>
 	<string name="poi_payment_mastercard_no">MasterCard kartoj malakceptataj</string>
-	<string name="poi_payment_none">Senpage</string>
+	<string name="poi_payment_none">Senpaga</string>
 	<string name="poi_payment_maestro_yes">Maestro kartoj akceptataj</string>
 	<string name="poi_payment_maestro_no">Maestro kartoj malakceptataj</string>
 	<string name="poi_payment_american_express_yes">American Express (AMEX) kartoj akceptataj</string>
@@ -1571,16 +1571,16 @@
 	<string name="poi_diet_lactose_free_no">Sen-laktoza dieto: ne</string>
 	<string name="poi_diet_pescetarian_yes">Sen-vianda-kun-fiŝa dieto</string>
 
-	<string name="poi_drive_in_yes">Sen-elaŭtiĝa servo: jes (aŭtoparko)</string>
+	<string name="poi_drive_in_yes">Sen-elaŭtiĝa servo (aŭtoparko): jes</string>
 	<string name="poi_public_bath">Banejo publika</string>
 
 	<string name="poi_male_yes">Viroj</string>
 	<string name="poi_male_no">Viroj malpermesataj</string>
 	<string name="poi_female_yes">Inoj</string>
 	<string name="poi_female_no">Inoj malpermesataj</string>
-	<string name="poi_drive_in_no">Sen-elaŭtiĝa servo: ne (aŭtoparko)</string>
-	<string name="poi_drive_through_yes">Sen-elaŭtiĝa servo: jes (trans-veturo)</string>
-	<string name="poi_drive_through_no">Sen-elaŭtiĝa servo: ne (trans-veturo)</string>
+	<string name="poi_drive_in_no">Sen-elaŭtiĝa servo (aŭtoparko): ne</string>
+	<string name="poi_drive_through_yes">Sen-elaŭtiĝa servo (trans-veturo): jes</string>
+	<string name="poi_drive_through_no">Sen-elaŭtiĝa servo (trans-veturo): ne</string>
 
 	<string name="poi_brewery_additional">Nomo de bierfarejo</string>
 	<string name="poi_microbrewery_yes">Bierfarejeto-restoracio</string>
@@ -1635,9 +1635,9 @@
 	<string name="poi_toilets_access_community">Necesejo: nur por anoj</string>
 	<string name="poi_toilets_access_public">Necesejo: publika aliro</string>
 
-	<string name="poi_diaper_yes">Tablo por tra-vindotuk-ado</string>
-	<string name="poi_diaper_no">Sen tablo por tra-vindotuk-ado</string>
-	<string name="poi_diaper_room">Ĉambro por tra-vindotuk-ado</string>
+	<string name="poi_diaper_yes">Tablo por trans-vindotuk-ado</string>
+	<string name="poi_diaper_no">Sen tablo por trans-vindotuk-ado</string>
+	<string name="poi_diaper_room">Ĉambro por trans-vindotuk-ado</string>
 
 	<string name="poi_maxstay">Tempolimo de parkumado</string>
 
@@ -2155,4 +2155,82 @@
 
 	<string name="poi_billiards">Bilardo</string>
 
+	<string name="poi_refugee_yes">Servo por rifuĝintoj</string>
+	<string name="poi_refugee_no">Por rifuĝintoj: ne</string>
+
+	<string name="poi_social_facility_group_home">Socia servejo: grupa hejmo</string>
+	<string name="poi_social_facility_assisted_living">Socia servejo: subtenata loĝado</string>
+	<string name="poi_social_facility_outreach">Socia servejo: senpag-konsilejo</string>
+	<string name="poi_social_facility_food_bank">Socia servejo: manĝ-disdonejo</string>
+	<string name="poi_social_facility_shelter">Socia servejo: azilo</string>
+	<string name="poi_social_facility_ambulatory_care">Socia servejo: sanhelpejo</string>
+	<string name="poi_social_facility_workshop">Socia servejo: laborejo</string>
+	<string name="poi_social_facility_day_care">Socia servejo: tag-prizorgejo</string>
+
+	<string name="poi_social_facility_for_senior">Alcela grupo: maljunuloj</string>
+	<string name="poi_social_facility_for_child">Alcela grupo: infanoj</string>
+	<string name="poi_social_facility_for_orphan">Alcela grupo: orfoj</string>
+	<string name="poi_social_facility_for_disabled">Alcela grupo: malkapabluloj</string>
+	<string name="poi_social_facility_for_mental_health">Alcela grupo: afekci-perturb-uloj</string>
+	<string name="poi_social_facility_for_juvenile">Alcela grupo: junuloj</string>
+	<string name="poi_social_facility_for_homeless">Alcela grupo: senhejmuloj</string>
+	<string name="poi_social_facility_for_migrant">Alcela grupo: enmigrantoj</string>
+	<string name="poi_social_facility_for_underprivileged">Alcela grupo: malriĉuloj</string>
+	<string name="poi_social_facility_for_drug_addicted">Alcela grupo: drog-dependuloj</string>
+	<string name="poi_social_facility_for_unemployed">Alcela grupo: senlaboruloj</string>
+	<string name="poi_social_facility_for_diseased">Alcela grupo: malsanuloj</string>
+	<string name="poi_social_facility_for_child_juvenile">Alcela grupo: infanoj, junuloj</string>
+
+	<string name="poi_theatre_genre_philharmonic">Tipo: filharmonio</string>
+	<string name="poi_theatre_genre_musical">Tipo: muzikala teatro</string>
+	<string name="poi_theatre_genre_drama">Tipo: drama teatro</string>
+	<string name="poi_theatre_genre_opera">Tipo: operdomo</string>
+	<string name="poi_theatre_genre_cabaret">Tipo: kabareto</string>
+	<string name="poi_theatre_genre_puppet">Tipo: pupteatro</string>
+	<string name="poi_theatre_genre_comedy">Tipo: farsa teatro</string>
+	<string name="poi_theatre_genre_marionette">Tipo: teatro de marionetoj</string>
+	<string name="poi_theatre_genre_chamber_music">Tipo: teatro de solisto</string>
+	<string name="poi_theatre_genre_ballet">Tipo: baleta teatro</string>
+	<string name="poi_theatre_genre_shadow_play">Tipo: teatro de ombroj</string>
+
+	<string name="poi_product_brick">Produktaĵo: brikoj</string>
+	<string name="poi_product_quicklime">Produktaĵo: kalko neestingita (CaO)</string>
+	<string name="poi_product_leather">Produktaĵo: ledo</string>
+	<string name="poi_product_lime">Produktaĵo: kalko</string>
+	<string name="poi_product_beer">Produktaĵo: biero</string>
+	<string name="poi_product_charcoal">Produktaĵo: lignokarbo</string>
+	<string name="poi_product_meat">Produktaĵo: viando</string>
+
+	<string name="poi_handrail_yes">Apogrelo: jes</string>
+	<string name="poi_handrail_no">Apogrelo: ne</string>
+	<string name="poi_ramp_yes">Alveturejo: jes</string>
+	<string name="poi_ramp_no">Alveturejo: ne</string>
+	<string name="poi_ramp_wheelchair_yes">Alveturejo por rulseĝoj: jes</string>
+	<string name="poi_ramp_wheelchair_no">Alveturejo por rulseĝoj: ne</string>
+	<string name="poi_ramp_stroller_yes">Alveturejo por beboĉaroj: jes</string>
+	<string name="poi_ramp_stroller_no">Alveturejo por beboĉaroj: ne</string>
+	<string name="poi_ramp_bicycle_yes">Alveturejo por bicikloj: jes</string>
+	<string name="poi_ramp_bicycle_no">Alveturejo por bicikloj: ne</string>
+	<string name="poi_ramp_luggage_yes">Alveturejo por valizoj: jes</string>
+	<string name="poi_ramp_luggage_no">Alveturejo por valizoj: ne</string>
+	<string name="poi_step_condition_even">Ŝtupar-stato: ebenaj</string>
+	<string name="poi_step_condition_uneven">Ŝtupar-stato: malebenaj</string>
+	<string name="poi_step_condition_rough">Ŝtupar-stato: tre malebenaj</string>
+
+	<string name="poi_memorial_fassade_decoration">Dekoracio de fasado</string>
+	<string name="poi_defibrillator_yes">Defibrililo: jes</string>
+
+	<string name="poi_tomb_war_grave">Speco: tombo de militisto</string>
+	<string name="poi_tomb_tumulus">Speco: tumulo</string>
+	<string name="poi_tomb_rock_cut">Speco: tombo en roko</string>
+	<string name="poi_tomb_hypogeum">Speco: hipogeo</string>
+	<string name="poi_tomb_vault">Speco: familia tombo</string>
+	<string name="poi_tomb_columbarium">Speco: kolombario</string>
+	<string name="poi_tomb_mausoleum">Speco: maŭzoleo</string>
+	<string name="poi_tomb_sarcophagus">Speco: sarkofago</string>
+	<string name="poi_tomb_crypt">Speco: kripto</string>
+	<string name="poi_tomb_pyramid">Speco: piramido</string>
+
+	<string name="poi_historic_civilization_ancient_roman">Civilizo: Romio (753 a.K. – 284 p.K.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilizo: Nurago-kulturo (18-a jarcento a.K. – 2-a jarcento p.K.)</string>
 	</resources>

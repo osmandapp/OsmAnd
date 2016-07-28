@@ -911,8 +911,8 @@
     <string name="context_menu_item_first_intermediate_point">Ajouter comme première étape</string>
     <string name="add_as_last_destination_point">Ajouter comme dernière étape</string>
     <string name="add_as_first_destination_point">Ajouter comme première étape</string>
-    <string name="replace_destination_point">Remplacer le point de destination</string>
-    <string name="new_destination_point_dialog">Vous avez déjà indiqué une destination.</string>
+    <string name="replace_destination_point">Remplacer la destination</string>
+    <string name="new_destination_point_dialog">Vous avez déjà indiqué une destination :</string>
     <string name="target_point">Étape %1$s</string>
     <string name="target_points">Itinéraire</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>

@@ -61,15 +61,14 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	private static final String WEAR_ALERT = "WEAR_ALERT";
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;
-	private AudioFocusHelper mAudioFocusHelper;
+	private static AudioFocusHelper mAudioFocusHelper;
 	protected String language = "";
 	protected int streamType;
 	private int currentVersion;
 
 
 	protected AbstractPrologCommandPlayer(OsmandApplication ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
-		throws CommandPlayerException 
-	{
+			throws CommandPlayerException {
 		this.ctx = ctx;
 		this.sortedVoiceVersions = sortedVoiceVersions;
 		long time = System.currentTimeMillis();
@@ -83,20 +82,18 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		if (log.isInfoEnabled()) {
 			log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		}
-		this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.get();  
+		this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.get();
 		init(voiceProvider, ctx.getSettings(), configFile);
-        final Term langVal = solveSimplePredicate("language");
-        if (langVal instanceof Struct) {
-            language = ((Struct) langVal).getName();
-        }
+		final Term langVal = solveSimplePredicate("language");
+		if (langVal instanceof Struct) {
+			language = ((Struct) langVal).getName();
+		}
 	}
 
-    public String getLanguage() {
-        return language;
-    }
+	public String getLanguage() {
+		return language;
+	}
 
-
-	
 	public String[] getLibraries(){
 		return new String[] { "alice.tuprolog.lib.BasicLibrary",
 					"alice.tuprolog.lib.ISOLibrary"/*, "alice.tuprolog.lib.IOLibrary"*/};
@@ -192,7 +189,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 		}
 	}
-	
 
 	protected Term solveSimplePredicate(String predicate) {
 		Term val = null;
@@ -264,8 +260,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public void clear() {
 		if(ctx != null && ctx.getSettings() != null) {
 			ctx.getSettings().APPLICATION_MODE.removeListener(this);
-			abandonAudioFocus();
 		}
+		abandonAudioFocus();
 		ctx = null;
 		prologSystem = null;
 	}
@@ -274,18 +270,18 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public void updateAudioStream(int streamType) {
 		this.streamType = streamType;
 	}
-	
+
 	protected synchronized void requestAudioFocus() {
 		log.debug("requestAudioFocus");
 		if (android.os.Build.VERSION.SDK_INT >= 8) {
 			mAudioFocusHelper = getAudioFocus();
 		}
 		if (mAudioFocusHelper != null && ctx != null) {
-			mAudioFocusHelper.requestFocus(ctx, streamType);
-		}
-		// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
-		if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			toggleBtSco(true);
+			boolean audioFocusGranted = mAudioFocusHelper.requestFocus(ctx, streamType);
+			// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
+			if (audioFocusGranted && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+				toggleBtSco(true);
+			}
 		}
 	}
 
@@ -300,13 +296,13 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	
 	protected synchronized void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if ((ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) || (btScoStatus == true)) {
+		if ((ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) || (btScoStatus == true)) {
 			toggleBtSco(false);
 		}
-		if (mAudioFocusHelper != null) {
+		if (ctx != null && mAudioFocusHelper != null) {
 			mAudioFocusHelper.abandonFocus(ctx, streamType);
-			mAudioFocusHelper = null;
 		}
+		mAudioFocusHelper = null;
 	}
 
 	public static boolean btScoStatus = false;

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="poi_aerodrome">空港(Aireport)</string>
 	<string name="poi_bank">銀行(Bank)</string>
@@ -21,12 +21,12 @@
 	<string name="poi_theme_park">テーマパーク(Theme park)</string>
 	<string name="poi_university">大学(University)</string>
 	<string name="poi_zoo">動物園(Zoo)</string>
-<string name="poi_shop">店(Shop)</string>
+<string name="poi_shop">店(Store)</string>
 		<string name="poi_shop_food">食料品店(Food store)</string>
 	<string name="poi_emergency">救急施設(Emergency)</string>
 	<string name="poi_transportation">交通機関(Transportation)</string>
 		<string name="poi_road_obstacle">道路障害物(Road obstacle)</string>
-		<string name="poi_filling_station">給油所(Filling station)</string>
+		<string name="poi_filling_station">給油所(Gas station)</string>
 		<string name="poi_personal_transport">私設交通機関(Personal transport)</string>
 		<string name="poi_public_transport">公共交通機関(Public transport)</string>
 		<string name="poi_air_transport">航空路(Air transport)</string>
@@ -70,7 +70,7 @@
 	<string name="poi_beverages">飲料品店(Beverage store)</string>
 	<string name="poi_butcher">肉屋(Meat market)</string>
 	<string name="poi_deli">総菜屋(Deli)</string>
-	<string name="poi_farm">農作物直売所(Farm shop)</string>
+	<string name="poi_farm">農作物直売所(Farm store)</string>
 	<string name="poi_greengrocer">青果店(Greengrocery)</string>
 	<string name="poi_seafood">魚屋(Seafood store)</string>
 	<string name="poi_confectionery">菓子屋(Confectionery)</string>
@@ -79,31 +79,31 @@
 	<string name="poi_tea">ティーショップ(Tea shop)</string>
 	<string name="poi_dairy">乳製品店</string>
 	<string name="poi_vending_machine">自動販売機(Vending machine)</string>
-	<string name="poi_wine">ワインショップ(Wine shop)</string>
+	<string name="poi_wine">ワインショップ(Wine store)</string>
 
 	<string name="poi_books">書店(Bookstore)</string>
-	<string name="poi_bicycle">自転車屋(Bicycle shop)</string>
+	<string name="poi_bicycle">自転車店(Bicycle store)</string>
 	<string name="poi_anime">アニメショップ(Anime shop)</string>
 	<string name="poi_antiques">骨董品店(Antiques store)</string>
-	<string name="poi_art">絵画商・私設ギャラリー(Art shop)</string>
+	<string name="poi_art">絵画商・私設ギャラリー(Art store)</string>
 	<string name="poi_baby_goods">ベビー用品(Baby goods)</string>
-	<string name="poi_bag">カバン店(Bag shop)</string>
+	<string name="poi_bag">カバン店(Bag store)</string>
 	<string name="poi_bathroom_furnishing">浴室及びトイレ家具(Bathroom furnishings)</string>
 	<string name="poi_bed">寝具店(Bedding store)</string>
 	<string name="poi_boutique">ブティック(Fashion boutique)</string>
-	<string name="poi_carpet">敷物店(Carpet shop)</string>
+	<string name="poi_carpet">敷物店(Carpet store)</string>
 	<string name="poi_chemist">ドラッグストア・薬局(Drug store)</string>
 	<string name="poi_clothes">衣料品店(Apparel store)</string>
 	<string name="poi_clothes_children">子供用衣料品店(Childrens apparel)</string>
 	<string name="poi_shoes">靴屋(Shoe store)</string>
 	<string name="poi_computer">パソコンショップ(Computer store)</string>
 	<string name="poi_copyshop">印刷、現像店(Copy shop)</string>
-	<string name="poi_curtain">カーテンショップ(Curtain shop)</string>
-	<string name="poi_fabric">生地・呉服店(Drapery shop)</string>
+	<string name="poi_curtain">カーテンストア(Curtain store)</string>
+	<string name="poi_fabric">生地・呉服店(Drapery store)</string>
 	<string name="poi_bedding">寝具店(Bedding store)</string>
 	<string name="poi_dive">ダイビング用品(Diving equipment)</string>
 	<string name="poi_doityourself">DIY・日曜大工用品店(Home improvement store)</string>
-	<string name="poi_erotic">アダルトショップ(Erotic shop)</string>
+	<string name="poi_erotic">アダルト用品店(Erotic store)</string>
 	<string name="poi_fishing">釣り具(Fishing tackle)</string>
 	<string name="poi_florist">フラワーショップ(Flower shop)</string>
 	<string name="poi_frame">額縁屋(Picture frame shop)</string>
@@ -123,23 +123,23 @@
 	<string name="poi_kiosk">キオスク(Kiosk)</string>
 	<string name="poi_kitchen">キッチン家具(Kitchen furnishings)</string>
 	<string name="poi_mobile_phone">携帯電話ショップ(Cell phone store)</string>
-	<string name="poi_motorcycle">バイク屋(Motorcycle shop)</string>
+	<string name="poi_motorcycle">バイク屋(Motorcycle store)</string>
 	<string name="poi_musical_instrument">楽器(Musical instruments)</string>
-	<string name="poi_newsagent">新聞・週刊誌店(Newsagency)</string>
+	<string name="poi_newsagent">新聞・週刊誌販売店(Newsagent)</string>
 	<string name="poi_optician">検眼医(Optometrist)</string>
 	<string name="poi_organic">自然食品(Organic food)</string>
 	<string name="poi_outdoor">アウトドア用品店(Outdoor store)</string>
-	<string name="poi_paint">ペンキ・塗装屋(Paint shop)</string>
+	<string name="poi_paint">ペンキ・塗装屋(Paint store)</string>
 	<string name="poi_medical_supply">医療器具(Medical supply)</string>
-	<string name="poi_pet">ペットショップ(Pet shop)</string>
+	<string name="poi_pet">ペットショップ(Pet store)</string>
 	<string name="poi_second_hand">リサイクルショップ・中古屋(Second hand store)</string>
 	<string name="poi_ship_chandler">船舶雑貨商(Ship chandler)</string>
 	<string name="poi_sports">スポーツ用品(Sporting goods)</string>
-	<string name="poi_stationery">文房具店(Stationery shop)</string>
-	<string name="poi_tableware">食器店(Tableware shop)</string>
-	<string name="poi_ticket">チケットショップ(Ticket shop)</string>
+	<string name="poi_stationery">文房具店(Stationery store)</string>
+	<string name="poi_tableware">食器店(Tableware store)</string>
+	<string name="poi_ticket">チケットショップ(Ticket sales)</string>
 	<string name="poi_tobacco">煙草屋(Tobacco store)</string>
-	<string name="poi_toys">おもちゃ屋(Toys store)</string>
+	<string name="poi_toys">おもちゃ屋(Toyshop)</string>
 	<string name="poi_trade">交易所(Trading post)</string>
 	<string name="poi_vacuum_cleaner">掃除機専門店(Vacuum cleaner store)</string>
 	<string name="poi_variety_store">雑貨店(Variety store)</string>
@@ -147,8 +147,8 @@
 	<string name="poi_window_blind">窓＆ブラインド店(Window blind store)</string>
 	<string name="poi_department_store">百貨店(Department store)</string>
 	<string name="poi_electronics">電器屋(Electronics store)</string>
-	<string name="poi_car">車両販売店(Car shop)</string>
-	<string name="poi_car_parts">車用品(Car parts)</string>
+	<string name="poi_car">自動車ディーラー(Car dealer)</string>
+	<string name="poi_car_parts">自動車用品店(Auto parts)</string>
 	<string name="poi_cosmetics">化粧品(Cosmetics)</string>
 	<string name="poi_marketplace">市場(Marketplace)</string>
 	<string name="poi_sewing">毛皮・反物・呉服店(Dry goods store)</string>
@@ -204,12 +204,12 @@
 	<string name="poi_tram_stop">トラム停留所(Tram stop)</string>
 	<string name="poi_public_transport_station">公共交通機関駅(Public transport station)</string>
 	<string name="poi_bus_station">バスターミナル(Bus station)</string>
-	<string name="poi_railway_station">鉄道駅(Railway station)</string>
-	<string name="poi_railway_platform">鉄道プラットホーム(Railway platform)</string>
-	<string name="poi_halt">鉄道停車位置(Railway stop)</string>
+	<string name="poi_railway_station">鉄道駅(Railroad station)</string>
+	<string name="poi_railway_platform">鉄道プラットホーム(Railroad platform)</string>
+	<string name="poi_halt">鉄道停車位置(Railroad stop)</string>
 	<string name="poi_subway_entrance">地下鉄入り口(Subway entrance)</string>
 	<string name="poi_subway_station">地下鉄駅(Subway station)</string>
-	<string name="poi_railway_buffer_stop">鉄道用車止め(Railway buffer stop)</string>
+	<string name="poi_railway_buffer_stop">鉄道用車止め(Railroad buffer stop)</string>
 	<string name="poi_helipad">ヘリポート(Helipad)</string>
 	<string name="poi_runway">滑走路(Runway)</string>
 	<string name="poi_aeroway_terminal">空港旅客ターミナル(Aeroway terminal)</string>
@@ -294,8 +294,8 @@
 
 	<string name="poi_recycling">リサイクル施設・資源ごみ回収所(Recycling)</string>
 	<string name="poi_landfill">ゴミ埋立地(Landfill)</string>
-	<string name="poi_waste_disposal">ゴミ捨て場(Waste disposal)</string>
-	<string name="poi_waste_basket">ゴミ箱(Waste basket)</string>
+	<string name="poi_waste_disposal">ゴミ捨て場(Trash disposal)</string>
+	<string name="poi_waste_basket">ゴミ箱(Trash can)</string>
 
 	<string name="poi_industrial">工業地域(Industrial area)</string>
 	<string name="poi_quarry">採石場(Quarry)</string>
@@ -480,7 +480,7 @@
 	<string name="poi_monument">モニュメント・記念碑(Monument)</string>
 	<string name="poi_aquarium">水族館(Aquarium)</string>
 	<string name="poi_attraction">観光名所(Tourist attraction)</string>
-	<string name="poi_charity">チャリティーショップ(Charity shop)</string>
+	<string name="poi_charity">チャリティーストア(Charity store)</string>
 	<string name="poi_photo">写真屋(Photo shop)</string>
 	<string name="poi_sailing">セーリング(Sailing)</string>
 	<string name="poi_attraction_amusement_ride">遊園地の乗り物(Amusement ride)</string>
@@ -524,7 +524,7 @@
 	<string name="poi_historic_monastery">歴史的修道院(Historic monastery)</string>
 	<string name="poi_wayside_cross">十字架(Wayside cross)</string>
 	<string name="poi_wayside_shrine">歴史的礼拝所・地蔵(Wayside shrine)</string>
-	<string name="poi_information">旅行案内所(Tourist information)</string>
+	<string name="poi_information">案内所(information)</string>
 	<string name="poi_clock">時計(Clock)</string>
 	<string name="poi_travel_agent">旅行代理店(Travel agent)</string>
 	<string name="poi_viewpoint">展望台(Viewpoint)</string>
@@ -576,11 +576,11 @@
 	<string name="poi_piste_playground">雪遊び場・キッズゲレンデ(Playground piste)</string>
 	<string name="poi_piste_ice_skate">アイススケート(Ice skate)</string>
 
-	<string name="poi_arts_centre">アート公演・制作所(Arts centre)</string>
+	<string name="poi_arts_centre">アート公演・制作所(Arts center)</string>
 	<string name="poi_cinema">映画館(Cinema)</string>
-	<string name="poi_community_centre">コミュニティーセンター・集会所(Community centre)</string>
-	<string name="poi_social_centre">社会福祉センター(Social centre)</string>
-	<string name="poi_theatre">劇場(Theatre)</string>
+	<string name="poi_community_centre">コミュニティーセンター・集会所(Community center)</string>
+	<string name="poi_social_centre">社会福祉センター(Social center)</string>
+	<string name="poi_theatre">劇場(Theater)</string>
 	<string name="poi_circus">サーカス(Circus)</string>
 	<string name="poi_dance_floor">ダンスフロア(Dance floor)</string>
 	<string name="poi_nightclub">ナイトクラブ・ディスコ(Nightclub)</string>
@@ -734,7 +734,7 @@
 	<string name="poi_dyke">堤防(Dyke)</string>
 	<string name="poi_floating_dock">桟橋(Floating dock)</string>
 	<string name="poi_fog_signal">濃霧信号(Fog signal)</string>
-	<string name="poi_seamark_harbour">港(Harbour)</string>
+	<string name="poi_seamark_harbour">港(Harbor)</string>
 	<string name="poi_landmark">人工建造物(Landmark)</string>
 	<string name="poi_mooring">係留設備(Mooring)</string>
 	<string name="poi_military_landuse">軍用エリア(Military zone)</string>
@@ -745,7 +745,7 @@
 	<string name="poi_military_range">射撃場(Military range)</string>
 	<string name="poi_military_naval_base">海軍基地(Military naval base)</string>
 	<string name="poi_military_nuclear_explosion_site">核実験場(Nuclear explosion site)</string>
-<string name="poi_harbour_basin">港内湾(Harbour basin)</string>
+<string name="poi_harbour_basin">港内湾(Harbor basin)</string>
 	<string name="poi_seamark_light_major">光源-大、航路標識(Major light, seamark)</string>
 	<string name="poi_seamark_light_minor">光源-小、航路標識(Minor light, seamark)</string>
 	<string name="poi_seamark_light_float">ボート状光源、航路標識(Float light, seamark)</string>
@@ -792,14 +792,14 @@
 	<string name="poi_camera">カメラ店(Cameras and lenses)</string>
 	<string name="poi_candles">ろうそく店・キャンドルショップ(Candles store)</string>
 	<string name="poi_doors">ドア店(Doors)</string>
-	<string name="poi_fashion">ファッションショップ(Fashion shop)</string>
+	<string name="poi_fashion">ファッション店(Fashion store)</string>
 	<string name="poi_free_flying">スカイダイビング／フリーフライ用具店(Free flying goods store)</string>
-	<string name="poi_furnace">暖房機器店(Heating units shop)</string>
+	<string name="poi_furnace">暖房機器店(Heating units store)</string>
 	<string name="poi_garden_furniture">ガーデニングショップ(Garden furniture store)</string>
-	<string name="poi_leather">レザーショップ(Leather shop)</string>
-	<string name="poi_music">楽器店(Music shop)</string>
+	<string name="poi_leather">レザー製品店(Leather store)</string>
+	<string name="poi_music">楽器店(Music store)</string>
 	<string name="poi_scuba_diving_shop">スキューバダイビング用品店(Scuba diving goods store)</string>
-	<string name="poi_tyres">タイヤ店(Tyres store)</string>
+	<string name="poi_tyres">タイヤ店(Tire store)</string>
 	<string name="poi_energy">バッテリー販売店(Energy store)</string>
 	<string name="poi_watches">腕時計店(Watches shop)</string>
 	<string name="poi_swimming_pool_shop">プール用品店(Swimming pool goods store)</string>
@@ -809,7 +809,7 @@
 	<string name="poi_video_games">テレビゲーム(Video games)</string>
 	<string name="poi_pyrotechnics">花火(Pyrotechnics)</string>
 	<string name="poi_weapons">武器店(Weapons store)</string>
-	<string name="poi_perfumery">香水店(Perfume shop)</string>
+	<string name="poi_perfumery">香水店(Perfume store)</string>
 
 	<string name="poi_ford_stepping_stones">渡り石(Step-stone bridge)</string>
 	<string name="poi_aerialway_pylon">索道支柱(Aerial lift pylon)</string>
@@ -823,7 +823,7 @@
 
 	<string name="poi_cooling_tower">冷却塔(Cooling tower)</string>
 	<string name="poi_lighting_tower">照明塔(Lighting tower)</string>
-	<string name="poi_recycling_centre">リサイクルセンター(Type: recycling centre)</string>
+	<string name="poi_recycling_centre">リサイクルセンター(Type: recycling center)</string>
 	<string name="poi_recycling_container">リサイクル用コンテナ(Type: container)</string>
 	<string name="poi_recycling_glass">ガラス製品(Glass)</string>
 	<string name="poi_recycling_paper">紙類(Paper)</string>
@@ -862,7 +862,7 @@
 	<string name="poi_recycling_mobile_phones">携帯電話(Mobile phones)</string>
 	<string name="poi_recycling_hydrargyrum">水銀(Hydrargyrum)</string>
 	<string name="poi_recycling_computers">コンピューター(Computers)</string>
-	<string name="poi_recycling_tyres">タイヤ(Tyres)</string>
+	<string name="poi_recycling_tyres">タイヤ(Tires)</string>
 	<string name="poi_recycling_tv_monitor">テレビ、モニター類(TV, monitors)</string>
 	<string name="poi_recycling_tetrapak">食品用紙パック・テトラパック(Tetrapak)</string>
 	<string name="poi_recycling_rubble">廃材・瓦礫(Rubble)</string>
@@ -1035,4 +1035,95 @@
 	<string name="poi_wiki_lang_sw">スワヒリ語 wiki(Swahili wiki)</string>
 	<string name="poi_wiki_lang_te">テルグ語 wiki(Telugu wiki)</string>
 	<string name="poi_wiki_lang_th">タイ語 wiki(Thai wiki)</string>
+	<string name="poi_denomination_reform">改革派教会(Reform)</string>
+	<string name="poi_denomination_scientist">クリスチャン・サイエンス(Scientist)</string>
+	<string name="poi_seamark_dyke">堤防(Seamark dyke)</string>
+	<string name="poi_wiki_lang_tr">トルコ語 wiki(Turkish wiki)</string>
+	<string name="poi_wiki_lang_uk">ウクライナ語 wiki(Ukrainian wiki)</string>
+	<string name="poi_wiki_lang_vi">ベトナム語 wiki(Vietnamese wiki)</string>
+	<string name="poi_wiki_lang_vo">ボラピュク語 wiki(Volapük wiki)</string>
+	<string name="poi_wiki_lang_zh">中国語 wiki(Chinese wiki)</string>
+
+	<string name="poi_bollard">係船柱(Bollard)</string>
+	<string name="poi_cycle_barrier">自転車用車止め(Cycle barrier)</string>
+	<string name="poi_motorcycle_barrier">オートバイ用車止め(Motorcycle barrier)</string>
+	<string name="poi_block">ブロック(Block)</string>
+	<string name="poi_bus_trap">バストラップ(Bus trap)</string>
+	<string name="poi_cattle_grid">家畜脱出防止溝・テキサスゲート(Cattle grid)</string>
+	<string name="poi_full_height_turnstile">フルサイズ回転ドア(Full-height turnstile)</string>
+	<string name="poi_bump_gate">農地、牧場車両用ゲート(Bump gate)</string>
+	<string name="poi_stile">踏み段(Stile)</string>
+	<string name="poi_debris">瓦礫(Debris)</string>
+	<string name="poi_jersey_barrier">コンクリート防護柵(Jersey barrier)</string>
+	<string name="poi_height_restrictor">高さ制限バー(Height restrictor)</string>
+	<string name="poi_horse_stile">馬用ゲート(Horse stile)</string>
+	<string name="poi_kissing_gate">家畜止め(Kissing gate)</string>
+	<string name="poi_sally_port">出撃路(Sally port)</string>
+	<string name="poi_swing_gate">水平遮断機(Swing gate)</string>
+	<string name="poi_turnstile">回転ゲート・改札口(Turnstile)</string>
+	<string name="poi_kent_carriage_gap">ケント・キャリッジ・ギャップ／馬車専用門(Kent carriage gap)</string>
+	<string name="poi_barrier_entrance">壁やフェンス内通路(Passage in a wall or a fence)</string>
+	<string name="poi_entrance_main">正面玄関(Main entrance)</string>
+	<string name="poi_entrance">入り口(Entrance)</string>
+	<string name="poi_entrance_exit">出口(Exit)</string>
+
+	<string name="poi_highway_crossing">横断歩道(Highway crossing)</string>
+
+	<string name="poi_opening_hours">営業時間(Opening hours)</string>
+	<string name="poi_collection_times">収集時間(Collection times)</string>
+	<string name="poi_description">詳細(Description)</string>
+	<string name="poi_phone">電話番号(Phone)</string>
+	<string name="poi_website">ウェブサイト(Website)</string>
+	<string name="poi_email">メールアドレス(Email)</string>
+	<string name="poi_fax">FAX(Fax)</string>
+	<string name="facebook">Facebook(Facebook)</string>
+	<string name="twitter">Twitter(Twitter)</string>
+	<string name="poi_skype">Skype(Skype)</string>
+	<string name="poi_youtube">YouTube(YouTube)</string>
+	<string name="poi_instagram">Instagram(Instagram)</string>
+	<string name="vk">VKontakte(VKontakte)</string>
+	<string name="poi_google_plus">Google+(Google+)</string>
+	<string name="poi_mobile">モバイル(Mobile)</string>
+	<string name="poi_service_times">サービス提供時間(Service times)</string>
+	<string name="poi_maxheight">高さ制限(Maximum height)</string>
+	<string name="poi_maxweight">重量制限(Maximum weight)</string>
+	<string name="poi_height">高さ(Height)</string>
+	<string name="poi_ele">標高・海抜(Elevation above sea level)</string>
+	<string name="poi_abandoned">廃建造物(Abandoned)</string>
+	<string name="poi_abandoned_poi">廃棄物(Abandoned object)</string>
+	<string name="poi_disused">空き建造物(Disused)</string>
+
+	<string name="poi_operator">管理者(Operator)</string>
+	<string name="poi_brand">ブランド(Brand)</string>
+	<string name="poi_fee_yes">要料金(Fee is charged)</string>
+	<string name="poi_fee_no">無料(No fee)</string>
+	<string name="poi_drinking_water_yes">飲用可能(Drinking water: yes)</string>
+	<string name="poi_drinking_water_no">飲用不可(Drinking water: no)</string>
+	<string name="poi_supervised_yes">監督者(Supervised)</string>
+	<string name="poi_supervised_no">監督者無し(Without supervision)</string>
+	<string name="poi_seasonal_yes">季節限定(Seasonal)</string>
+	<string name="poi_seasonal_no">季節非限定(Not seasonal)</string>
+	<string name="poi_seasonal_dry_season">乾季(Dry season)</string>
+	<string name="poi_seasonal_wet_season">雨季(Wet season)</string>
+	<string name="poi_seasonal_spring">春(Spring)</string>
+	<string name="poi_seasonal_summer">夏(Summer)</string>
+	<string name="poi_seasonal_autumn">秋(Fall)</string>
+	<string name="poi_seasonal_winter">冬(Winter)</string>
+	<string name="poi_crossing_traffic_signals">信号機有り(With stop lights)</string>
+	<string name="poi_crossing_uncontrolled">信号機なし横断歩道(Uncontrolled)</string>
+	<string name="poi_crossing_unmarked">信号及び表示なし横断歩道(Unmarked)</string>
+	<string name="poi_start_date">完成日(Start date)</string>
+	<string name="poi_wheelchair">車椅子(Wheelchair)</string>
+	<string name="poi_wheelchair_no">車椅子:通行不可(Wheelchair: not accessible)</string>
+	<string name="poi_wheelchair_limited">車椅子:通行制限有り(Wheelchair: limited)</string>
+	<string name="poi_wholesale">卸売り(Wholesale)</string>
+
+	<string name="poi_access_private">要通行許可(Private access)</string>
+	<string name="poi_access_no">通行不可(No access)</string>
+	<string name="poi_access_destination">通り抜け不可(Destination access)</string>
+	<string name="poi_access_permissive">基本通行可・管理者による制限有り(Permissive access)</string>
+	<string name="poi_access_customers">店舗等利用者のみ可(Customer access)</string>
+	<string name="poi_access_delivery">配達時のみ通行可(Delivery access)</string>
+	<string name="poi_access_agricultural">農業目的のみ通行可(Agricultural access)</string>
+
 	</resources>

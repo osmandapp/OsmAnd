@@ -1222,7 +1222,7 @@
     <string name="add_as_first_destination_point">Add as first intermediate destination</string>
 
     <string name="replace_destination_point">Replace the destination</string>
-    <string name="new_destination_point_dialog">You have aleady set a destination:</string>
+    <string name="new_destination_point_dialog">You have already set a destination:</string>
     <string name="target_points">Destinations</string>
     <string name="intermediate_point_too_far">Intermediate destination %1$s is too far from the nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your intermediate destination</string>

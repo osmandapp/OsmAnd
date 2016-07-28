@@ -38,6 +38,8 @@ public class LocationSearchTest {
 	public void testUTMSearch() throws IOException {
 		search("17N6734294749123", new LatLon(42.875017, -78.87659050764749));
 		search("17 N 673429 4749123", new LatLon(42.875017, -78.87659050764749));
+		search("36N 609752 5064037", new LatLon(45.721184, 34.410328));
+		
 	}
 	
 	@Test

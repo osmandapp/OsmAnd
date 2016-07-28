@@ -237,7 +237,9 @@
     <string name="osmand_parking_position_description_add">Afhent bilen:</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Parkeringsplads</string>
-    <string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget tid der er tilbage (hvis der er en tidsfrist).\nBåde placering og tid er synlige på betjeningspanel samt i modul på kortskærmen. En alarm kan tilføjes til kalenderen, som en påmindelse.</string>
+    <string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget tid der er tilbage (hvis der er en tidsfrist).
+
+Både placering og tid er synlige på betjeningspanel samt i modul på kortskærmen. En alarm kan tilføjes til kalenderen, som en påmindelse.</string>
     <string name="osmand_parking_plugin_name">Parkering</string>
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
     <string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
@@ -438,7 +440,9 @@
     <string name="routing_settings">Navigation</string>
 
     <string name="download_files_not_enough_space">Der er ikke ledig plads nok til at hente %1$s MB (Ledig: %2$s).</string>
-    <string name="download_files_question_space">Hent {0} filer? Har brug for {1} MB permanent. I øjeblikket er {2} MB til rådighed.</string>
+    <string name="download_files_question_space">Hent {0} filer? 
+Har brug for {1} MB permanent. 
+I øjeblikket er {2} MB til rådighed.</string>
 
     <string name="use_transparent_map_theme">Gennemsigtigt tema</string>
     <string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
@@ -553,7 +557,26 @@
 \n- Afrika: **
 \n- Antarktis: *
 \n\nListe over understøttede lande (stort set hele verden!): Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe "</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatisk Navigation og Rutevejledning) OsmAnd+ er en open source navigations applikation med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving talevejledning. OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer. Nogle af de centrale funktioner: - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort) - Kompakte offline vektorkort for hele verden tilgængelig - Ubegrænset hentning af lande- eller regionskort direkte fra applikationen - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing - Overlejring af flere kortlag mulige, ligesom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, kollektivtrafik stoppesteder, ekstra kort med brugerdefinerbar gennemsigtighed - Offline søgning efter adresser og steder interessepunkter (IP) - Offline ruteplanlægning til korte afstande (eksperimentel) - Bil, cykel, og fodgængere tilstand med: - valgfri automatisk dag/nat visning - valgfri hastighedsafhængig kort zoom - valgfri kort tilpasning i henhold til kompas eller bevægelsesretning - valgfri vognbaneskift, hastighedsgrænse visning, optaget eller TTS stemmer "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd+ (OSM Automatisk Navigation og Rutevejledning) 
+OsmAnd+ er en open source navigations applikation med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving talevejledning. 
+
+OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer. Nogle af de centrale funktioner:
+ - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort)
+ - Kompakte offline vektorkort for hele verden tilgængelig
+ - Ubegrænset hentning af lande- eller regionskort direkte fra applikationen
+
+ - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing
+ - Overlejring af flere kortlag mulige, ligesom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, kollektivtrafik stoppesteder, ekstra kort med brugerdefinerbar gennemsigtighed
+ - Offline søgning efter adresser og steder interessepunkter (IP)
+ - Offline ruteplanlægning til korte afstande (eksperimentel)
+
+ - Bil, cykel, og fodgængere tilstand med:
+ - valgfri automatisk dag/nat visning
+ - valgfri hastighedsafhængig kort zoom
+ - valgfri kort tilpasning i henhold til kompas eller bevægelsesretning
+ - valgfri vognbaneskift, hastighedsgrænse visning, optaget eller TTS stemmer
+ "</string>
     <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automatisk Navigation og Rutevejledning) er et kort og navigations program med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via enhedens GPS, tilbyder OsmAnd rutevejledning, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (intet internet behov). OsmAnd+ er den betalte programversion. Ved at købe det støttes projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Test programmet, før det købes ved at installere den gratis version kaldet OsmAnd.
 \n\nNogle af de vigtigste funktioner:
 \nNavigation
@@ -1164,7 +1187,13 @@
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">"Udvidelsen giver et modul som gør det muligt at oprette stier, ved at trykke på kortet, eller bruge eller ændre en  eksisterende GPX-fil, til at planlægge en tur og måle afstanden mellem punkter. Resultaterne kan gemmes som en GPX-fil, som senere kan bruges til rutevejledning."</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
-    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n * Langt tryk på kortet for at slette tidligere punkt.\n * Langt tryk på punkt for at se og vedhæfte beskrivelse.\n * Klik på målemodul for at se flere handlinger.</string>
+    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.
+ 
+* Langt tryk på kortet for at slette tidligere punkt.
+
+ * Langt tryk på punkt for at se og vedhæfte beskrivelse.
+
+ * Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
     <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
@@ -1372,7 +1401,14 @@
     <string name="navigation_intent_invalid">Ugyldigt format: %s</string>
     <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"Udvidelsen giver delvis funktionalitet af OpenStreetMap ovetvågning, se http://osmo.mobi.\n\nSpor alle enheder i en deltagende gruppe tidstro. Se punkt og spor overført til den gruppe, du tilhører.\n\nGruppen er ikke blevet fjernet efter måneder, bring det i overensstemmelse med de regler grupper blev oprettet med på hjemmesiden OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Udvidelsen giver delvis funktionalitet af OpenStreetMap ovetvågning, se http://osmo.mobi.
+
+
+Spor alle enheder i en deltagende gruppe tidstro. Se punkt og spor overført til den gruppe, du tilhører.
+
+
+Gruppen er ikke blevet fjernet efter måneder, bring det i overensstemmelse med de regler grupper blev oprettet med på hjemmesiden OsMo.mobi
+ "</string>
     <string name="osmo_plugin_name">OpenStreetMap monitorering</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
@@ -1514,9 +1550,27 @@
     <string name="osmo_not_signed_in">OsMo log ind mislykkedes</string>
     <string name="osmo_group_information">Læs dette før oprettelse af en gruppe!</string>
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
-    <string name="osmo_group_information_desc">" - Oprettelse af en gruppe angiv et navn og udfyld beskrivelsen\n- Fra programmet kan kun oprettes en gruppe af simpel type, læs mere på hjemmesiden https://osmo.mobi/g/new\n- Via en hjemmeside kan administreres en gruppe, til at placere spor og punkter til rådighed for alle\n- Understøtter ikke brugen af en gruppe for kun én bruger, hvis dette ikke er IP-gruppen\n- Private grupper er begrænset til 8 personer\n- Detaljerede vilkår kan altid ses på hjemmesiden OsMo.mobi\n- Brug for  særlige vilkår - kontakt support: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">"
+ - Oprettelse af en gruppe angiv et navn og udfyld beskrivelsen
+
+- Fra programmet kan kun oprettes en gruppe af simpel type, læs mere på hjemmesiden https://osmo.mobi/g/new
+
+- Via en hjemmeside kan administreres en gruppe, til at placere spor og punkter til rådighed for alle
+
+- Understøtter ikke brugen af en gruppe for kun én bruger, hvis dette ikke er IP-gruppen
+
+- Private grupper er begrænset til 8 personer
+
+- Detaljerede vilkår kan altid ses på hjemmesiden OsMo.mobi
+
+- Brug for  særlige vilkår - kontakt support: osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_auth_error_short">Autorisation fejlede</string>
-    <string name="osmo_auth_error">"OsMo autorisation fejl: %1$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
+    <string name="osmo_auth_error">"OsMo autorisation fejl: %1$s.
+
+Det kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. 
+
+Fortsæt med en ny registrering?"</string>
     <string name="rendering_attr_hideBuildings_name">Bygninger</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Gang- og cykelstier</string>
     <string name="rendering_attr_hideText_name">Tekst</string>
@@ -1592,7 +1646,11 @@
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag ture</string>
-    <string name="record_plugin_description">"Udvidelsen aktiverer funktionalitet til at optage og gemme spor ved at klikke på GPX logning modul på kortskærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil.\n\nOptagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan bruge optagede spor til at monitere træning. Nogle grundlæggende spor analyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv, og spor kan selvfølgelig også senere analyseres i særlige 3. parts analyseværktøjer. "</string>
+    <string name="record_plugin_description">"Udvidelsen aktiverer funktionalitet til at optage og gemme spor ved at klikke på GPX logning modul på kortskærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil.
+
+
+Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan bruge optagede spor til at monitere træning. Nogle grundlæggende spor analyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv, og spor kan selvfølgelig også senere analyseres i særlige 3. parts analyseværktøjer.
+ "</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
     <string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
     <string name="save_track_interval_globally">Logningsinterval</string>
@@ -2142,7 +2200,33 @@
 	<string name="osn_close_dialog_success">Note lukket</string>
 	<string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
-    <string name="release_2_2">" • Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme\n\n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt\n\n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet\n\n • Forbigå betjeningspanel hvis der ønskes menuen-baserede app-kontrol\n\n • Hent kort, regioner ved at trykke direkte på verdenskortet\n\n • IP søgning understøtter nu mere specifikke forespørgsler\n\n • Forbedret IP og OSM redigeringsfunktionalitet\n\n • Administration af kortfiler struktur og grænseflade er omarbejdet\n\n og mere… "</string>
+    <string name="release_2_2">"
+ • Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme
+
+
+ • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt
+
+
+ • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet
+
+
+ • Forbigå betjeningspanel hvis der ønskes menuen-baserede app-kontrol
+
+
+ • Hent kort, regioner ved at trykke direkte på verdenskortet
+
+
+ • IP søgning understøtter nu mere specifikke forespørgsler
+
+
+ • Forbedret IP og OSM redigeringsfunktionalitet
+
+
+ • Administration af kortfiler struktur og grænseflade er omarbejdet
+
+
+ og mere…
+ "</string>
     <string name="osm_save_offline">Gem offline</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farve</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>
@@ -2281,8 +2365,12 @@
     <string name="map_marker_2nd">Anden kortmarkør</string>
     <string name="shared_string_toolbar">Værktøjslinie</string>
     <string name="shared_string_widgets">Moduler</string>
-    <string name="download_files_error_not_enough_space">Ikke plads nok! Har brug for {3} MB midlertidigt og {1} MB permanent. I øjeblikket, er kun {2} MB tilgængelig.</string>
-    <string name="download_files_question_space_with_temp">Hent {0} filer? Har brug for {3} MB midlertidigt og {1} MB permanent. I øjeblikket er {2} MB til rådighed.</string>
+    <string name="download_files_error_not_enough_space">Ikke plads nok! 
+Har brug for {3} MB midlertidigt og {1} MB permanent. 
+I øjeblikket, er kun {2} MB tilgængelig.</string>
+    <string name="download_files_question_space_with_temp">Hent {0} filer? 
+Har brug for {3} MB midlertidigt og {1} MB permanent. 
+I øjeblikket er {2} MB til rådighed.</string>
     <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
 <string name="upload_osm_note_description">Overfør OSM-noter anonymt hvis OpenStreetMap.org profilen bruges.</string>
@@ -2310,7 +2398,11 @@
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
     <string name="osm_live_ask_for_purchase">Køb først OSM Live-abonnement</string>
 
-    <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
+    <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. 
+
+Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. 
+
+Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
     
     <string name="recalculate_route">Genberegn ruten</string>
     <string name="shared_string_topbar">Topbjælke</string>
@@ -2320,7 +2412,24 @@
     <string name="finish_navigation">Afslut navigation</string>
     <string name="shared_string_move_up">Flyt op</string>
     <string name="shared_string_move_down">Flyt ned</string>
-    <string name="release_2_3">" • OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time.\n\n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet.\n\n • Mere detaljerede OSM kort med landespecifikke vejskilte og masser af nye kortfunktioner.\n\n • Forbedret ruteplanlægning.\n\n • Mange forbedringer i kontekstmenuen på kortet, såsom indholdsbestemt adresseopslag.\n\n   og mere... "</string>
+    <string name="release_2_3">"
+ • OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time.
+
+
+ • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet.
+
+
+ • Mere detaljerede OSM kort med landespecifikke vejskilte og masser af nye kortfunktioner.
+
+
+ • Forbedret ruteplanlægning.
+
+
+ • Mange forbedringer i kontekstmenuen på kortet, såsom indholdsbestemt adresseopslag.
+
+
+   og mere...
+ "</string>
     <string name="full_report">Fuldstændig rapport</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Nu har programmet lov til at skrive til ekstern lager. Manuel genstart er påkrævet.</string>
@@ -2393,7 +2502,24 @@
     <string name="lang_hsb">Øvresorbisk</string>
     <string name="share_history_subject">" delt via OsmAnd"</string>
     <string name="show_on_map">Vis på kortet</string>
-    <string name="release_2_4">" • Ny meget kraftfuld fritekstsøgning\n\n  • Meget forbedret lyd via Bluetooth\n\n  • Forbedret rutevejledning med svingbaner\n\n  • Tilføjet nye sprog og understøtter nu regionale sprog\n\n  • Mange andre forbedringer og fejlrettelser\n\n  og mere… "</string>
+    <string name="release_2_4">"
+ • Ny meget kraftfuld fritekstsøgning
+
+
+  • Meget forbedret lyd via Bluetooth
+
+
+  • Forbedret rutevejledning med svingbaner
+
+
+  • Tilføjet nye sprog og understøtter nu regionale sprog
+
+
+  • Mange andre forbedringer og fejlrettelser
+
+
+  og mere…
+ "</string>
     <string name="show_something_on_map">Vis %1$s på kortet</string>
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
     <string name="confirmation_to_delete_history_items">Slet valgte elementer fra historik?</string>

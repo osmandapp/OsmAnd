@@ -13,8 +13,8 @@
     <string name="context_menu_item_first_intermediate_point">Legg til som første mellomliggende reisemål</string>
     <string name="add_as_last_destination_point">Legg til som siste mellomliggende reisemål</string>
     <string name="add_as_first_destination_point">Legg til som første mellomliggende reisemål</string>
-    <string name="replace_destination_point">Erstatt reisemålpunkt</string>
-    <string name="new_destination_point_dialog">Du har allerede satt reisemålpunktet.</string>
+    <string name="replace_destination_point">Erstatt reisemålet</string>
+    <string name="new_destination_point_dialog">Du har allerede angitt et reisemål:</string>
     <string name="target_points">Reisemål</string>
     <string name="intermediate_point_too_far">Mellomliggende reisemål %1$s er for langt fra den nærmeste veien.</string>
     <string name="arrived_at_intermediate_point">Du har kommet til ditt mellomliggende reisemål</string>
@@ -92,7 +92,7 @@
     <string name="route_updated_loc_found">Rute blir beregnet når posisjon blir funnet</string>
     <string name="osmand_parking_hours">Timer</string>
     <string name="osmand_parking_minutes">Minutter</string>
-    <string name="osmand_parking_position_description_add_time">Bilen ble parkert</string>
+    <string name="osmand_parking_position_description_add_time">Bilen er parkert</string>
     <string name="rendering_attr_appMode_name">Opptegningsmodus</string>
     <string name="rendering_attr_contourLines_name">Vis koter</string>
     <string name="rendering_attr_hmRendered_description">Øk mengden av kartdetaljer vist</string>
@@ -821,7 +821,7 @@
     <string name="clear_destination">Slett reisemål</string>
     <string name="street_name">Gatenavn</string>
     <string name="choose_osmand_theme">Tema</string>
-    <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemålpunktet (og mellomliggende reisemål)?</string>
+    <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemål (og mellomliggende reisemål)?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
     <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
     <string name="safe_mode">Sikker modus</string>
@@ -900,7 +900,7 @@
     <string name="lang_sr">Serbisk</string>
     <string name="lang_zh_CN">Kinesisk (forenklet)</string>
     <string name="lang_zh_TW">Kinesisk (tradisjonell)</string>
-    <string name="keep_and_add_destination_point">Legg til som siste målpunkt</string>
+    <string name="keep_and_add_destination_point">Legg til som påfølgende reisemål</string>
     <string name="select_gpx">Velg GPX…</string>
 
     <string name="route_preferences">Ruteinnstillinger</string>
@@ -1686,4 +1686,10 @@
     <string name="city_type_neighbourhood">Nabolag</string>
     <string name="shared_string_from">fra</string>
     <string name="search_categories">Kategorier</string>
+    <string name="back_to_search">Tilbake til søk</string>
+    <string name="confirmation_to_delete_history_items">Slette valgte historikkelementer?</string>
+    <string name="show_something_on_map">Vis %1$s på kartet</string>
+    <string name="dist_away_from_my_location">Søk %1$s unna</string>
+    <string name="show_on_map">Vis på kartet</string>
+    <string name="share_history_subject">" delt via OsmAnd"</string>
     </resources>

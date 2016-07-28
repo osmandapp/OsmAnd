@@ -123,7 +123,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
-		} else if (ctx != null) {
+		} else if (ctx != null && vrt.isMute()) {
 			sendAlertToAndroidWear(ctx, bld.toString());
 		}
 	}
@@ -134,10 +134,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (mTts != null){
 			mTts.stop();
 		}
-		// TODO: Issue #2810: Audio focus issues when "off route" is detected during an ongoing prompt (then stop() is called here)
-		if (ctx != null) {
-			abandonAudioFocus();
-		}
+		abandonAudioFocus();
 	}
 
 	public void sendAlertToPebble(String bld) {
@@ -249,10 +246,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			mTts.shutdown();
 			mTts = null;
 		}
+		abandonAudioFocus();
 		mTtsContext = null;
-		if (ctx != null) {
-			abandonAudioFocus();
-		}
 	}
 	
 	@Override

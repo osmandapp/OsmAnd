@@ -160,4 +160,32 @@
 	<string name="poi_university">جامعة</string>
 
 	<string name="poi_route_train_ref">قطار</string>
+	<string name="poi_aerialway_transport">النقل الجوي</string>
+		<string name="poi_node_networks">نقاط شبكة التنزه/ركوب الدراجات</string>
+		<string name="poi_traffic_enforcement">قوانين المرور جارية المفعول</string>
+	<string name="poi_transport_construction">بنية المواصلات</string>
+		<string name="poi_trash_disposal">صرف القمامة</string>
+		<string name="poi_seamark">بحري</string>
+	<string name="poi_deli">أطعمة لذيذة</string>
+	<string name="poi_greengrocer">بقالة خضراء</string>
+	<string name="poi_seafood">متجر مأكولات بحرية</string>
+	<string name="poi_confectionery">صناعة الحلويات</string>
+	<string name="poi_ice_cream">ردهة مثلجات</string>
+	<string name="poi_dairy">متجر ألبان</string>
+	<string name="poi_wine">متجر نبيذ</string>
+	<string name="poi_books">محل كتب</string>
+	<string name="poi_anime">متجر أنيمي</string>
+	<string name="poi_art">متجر فنون</string>
+	<string name="poi_baby_goods">سلع أطفال</string>
+	<string name="poi_boutique">بوتيك الأزياء</string>
+	<string name="poi_charity">متجر جمعيات خيرية</string>
+	<string name="poi_clothes">متجر ملابس</string>
+	<string name="poi_copyshop">محل نسخ</string>
+	<string name="poi_curtain">متجر ستائر</string>
+	<string name="poi_doityourself">متجر تحسين المنازل</string>
+	<string name="poi_erotic">متجر جنسي</string>
+	<string name="poi_free_flying">متجر لوازم الطيران الحر</string>
+	<string name="poi_garden_centre">مركز الحديقة</string>
+	<string name="poi_glaziery">محل زجاج</string>
+	<string name="poi_hardware">متجر لواحق الحاسوب</string>
 	</resources>

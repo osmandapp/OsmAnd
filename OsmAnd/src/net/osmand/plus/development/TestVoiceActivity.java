@@ -189,6 +189,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(4.1)  After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
 		addButton(ll, "(4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
 		addButton(ll, "(4.3)  Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
+		addButton(ll, "(4.4)  Turn left onto 'Broadway', then in 100m keep right and arrive at your destination 'Town Hall'",
+				builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "Broadway"))
+				.then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 100, street(p, "")).andArriveAtDestination("Town Hall"));
 
 		addButton(ll, "       Roundabouts: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "(5.1)  After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
@@ -201,11 +204,14 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(6.3)  Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")));
 		addButton(ll, "(6.4)  When possible, make a U-turn", builder(p).makeUTwp());
 
-		addButton(ll, "       Go straight, follow the road:", builder(p));
+		addButton(ll, "       Go straight, follow the road, approaching:", builder(p));
 		addButton(ll, "(7.1)  Straight ahead", builder(p).goAhead());
 		addButton(ll, "(7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
 		addButton(ll, "(7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
-		addButton(ll, "(7.4)  Continue for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
+		addButton(ll, "(7.4)  Continue for 800m to 'A33' and arrive at your destination ' '", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
+		addButton(ll, "(7.5)  Continue for 200m and arrive at your GPX waypoint 'Trailhead'", builder(p).goAhead(200, null).andArriveAtWayPoint("Trailhead"));
+		addButton(ll, "(7.6)  Continue for 400m and arrive at your favorite 'Brewery'", builder(p).goAhead(400, null).andArriveAtFavorite("Brewery"));
+		addButton(ll, "(7.7)  Continue for 600m and arrive at your POI 'Museum'", builder(p).goAhead(600, null).andArriveAtPoi("Museum"));
 
 		addButton(ll, "       Arriving and passing points:", builder(p));
 		addButton(ll, "(8.1)  Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
