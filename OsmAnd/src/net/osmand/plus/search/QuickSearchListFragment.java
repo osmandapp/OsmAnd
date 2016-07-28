@@ -144,7 +144,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	private void showOnMap(SearchResult searchResult) {
 		if (searchResult.location != null) {
-			dialogFragment.dismiss();
 			OsmandApplication app = getMyApplication();
 			PointDescription pointDescription = null;
 			Object object = searchResult.object;
@@ -188,11 +187,13 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription = wpt.getPointDescription(getMyApplication());
 					break;
 			}
+			getMapActivity().setQuickSearchTopbarActive(true);
 			getMyApplication().getSettings().setMapLocationToShow(
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 					searchResult.preferredZoom, pointDescription, true, object);
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
+			dialogFragment.hide();
 		}
 	}
 

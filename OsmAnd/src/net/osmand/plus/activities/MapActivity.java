@@ -1360,6 +1360,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void showQuickSearch() {
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		mapContextMenu.hide();
 		if (fragment != null) {
 			fragment.show();
 			refreshMap();
