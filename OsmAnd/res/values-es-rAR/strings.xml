@@ -2327,4 +2327,6 @@ Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memor
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="confirmation_to_delete_history_items">¿Quieres borrar los elementos del historial marcados?</string>
     <string name="back_to_search">Volver a la búsqueda</string>
+    <string name="coords_search">Búsqueda de coordenadas</string>
+    <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     </resources>
