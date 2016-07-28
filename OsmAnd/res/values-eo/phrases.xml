@@ -2233,15 +2233,15 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Civilizo: Romio (753 a.K. – 284 p.K.)</string>
 	<string name="poi_historic_civilization_nuragic">Civilizo: Nurago-kulturo (18-a jarcento a.K. – 2-a jarcento p.K.)</string>
-	<string name="poi_historic_civilization_etruscan">Civilizo: Etruska (12-a jarcento a.K. – 6-a jarcento a.K.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilizo: Etruska (12-a – 6-a jarcento a.K.)</string>
 	<string name="poi_historic_civilization_prehistoric">Civilizo: prahistoria</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilizo: Helenujo</string>
 	<string name="poi_historic_civilization_roman">Civilizo: Romio</string>
-	<string name="poi_historic_civilization_byzantine">Civilizo: Bizanco (285 p.K. – 1453 p.K.)</string>
+	<string name="poi_historic_civilization_byzantine">Civilizo: Bizanco (285 – 1453 p.K.)</string>
 	<string name="poi_historic_civilization_imperial_chinese">Civilizo: Ĉina imperio (221 a.K. – 1911 p.K.)</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Civilizo: antikva Egiptujo (ĝis 332 a.K.)</string>
 	<string name="poi_historic_civilization_celtic">Civilizo: Kelta</string>
-	<string name="poi_historic_civilization_western_roman">Civilizo: Okcident-Romia Imperio (285 p.K. – 476 p.K.)</string>
+	<string name="poi_historic_civilization_western_roman">Civilizo: Okcident-Romia Imperio (285 – 476 p.K.)</string>
 	<string name="poi_historic_civilization_mycenaean">Civilizo: Mikena-kulturo</string>
 	<string name="poi_historic_civilization_dacian">Civilizo: Dakujo</string>
 	<string name="poi_historic_civilization_hernici">Civilizo: Ernici-kulturo</string>
@@ -2267,7 +2267,7 @@
 	<string name="poi_historic_period_classical_greece">Historia periodo: klasika Grekujo (5-a – 4-a jarcento a.K.)</string>
 	<string name="poi_historic_period_archaic_greece">Historia periodo: arĥaika Grekujo</string>
 	<string name="poi_historic_period_iron_age">Historia periodo: fera epoko</string>
-	<string name="poi_historic_period_roman_republic">Historia periodo: Romia respubliko (508 a.K. – 27 a.K.)</string>
+	<string name="poi_historic_period_roman_republic">Historia periodo: Romia respubliko (508 – 27 a.K.)</string>
 	<string name="poi_historic_period_hellenistic_greece">Historia periodo: helenisma epoko</string>
 	<string name="poi_historic_period_new_kingdom">Historia periodo: nova imperio (1550 – 1069 a.K.)</string>
 	<string name="poi_historic_period_middle_kingdom">Historia periodo: meza imperio (2055 – 1650 a.K.)</string>
@@ -2285,4 +2285,8 @@
 	<string name="poi_historic_period_christian_egypt">Historia periodo: kristana Egiptujo</string>
 	<string name="poi_historic_period_byzantine_egypt">Historia periodo: Bizanca Egiptujo (30 a.K. – 641 p.K.)</string>
 	<string name="poi_historic_period_persian_occupation">Historia periodo: Persa okupado</string>
+	<string name="poi_historic_period_greek_dark_ages">Historia periodo: Greka malluma epoko (1100 – 800 a.K.)</string>
+	<string name="poi_historic_period_roman_greece">Historia periodo: Romia Grekujo (146 a.K. – 330 p.K.)</string>
+	<string name="poi_historic_period_roman_kingdom">Historia periodo: Romia reĝeco (753 – 509 a.K.)</string>
+	<string name="poi_historic_period_dominate">Historia periodo: Dominato (285 – 476 p.K.)</string>
 	</resources>
