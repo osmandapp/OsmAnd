@@ -1132,7 +1132,9 @@
     <string name="open_street_map_login_descr">Trengs for bidrag til openstreetmap.org</string>
     <string name="user_password_descr">Trengs for bidrag til openstreetmap.org</string>
     <string name="download_files_not_enough_space">Det er ikke nok ledig plass til å laste ned %1$s MB (ledig: %2$s).</string>
-    <string name="download_files_question_space">Laste ned {0} fil(er)? Dette krever {1} MB permanent. Nå er det {2} MB tilgjengelig.</string>
+    <string name="download_files_question_space">Laste ned {0} fil(er)?
+ Dette krever {1} MB permanent.
+ Nå er det {2} MB tilgjengelig.</string>
     <string name="auto_follow_route_navigation">Auto-sentrer bare navigering</string>
     <string name="auto_follow_route_navigation_descr">Auto-sentrer kartvisning bare under navigering.</string>
     <string name="auto_follow_location_enabled">Auto-sentrer kartvisning i bruk.</string>
@@ -1692,4 +1694,6 @@
     <string name="dist_away_from_my_location">Søk %1$s unna</string>
     <string name="show_on_map">Vis på kartet</string>
     <string name="share_history_subject">" delt via OsmAnd"</string>
+    <string name="rendering_attr_horseRoutes_name">Hesteruter</string>
+    <string name="world_ski_missing">For å vise skikart må det spesielle offline-kartet lastes ned</string>
     </resources>
