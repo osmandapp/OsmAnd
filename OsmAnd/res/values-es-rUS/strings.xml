@@ -2323,4 +2323,6 @@ Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memor
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="back_to_search">Volver a la búsqueda</string>
+    <string name="coords_search">Búsqueda de coordenadas</string>
+    <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     </resources>
