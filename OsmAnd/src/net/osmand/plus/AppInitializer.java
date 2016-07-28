@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -35,6 +36,7 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
@@ -42,6 +44,7 @@ import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -352,13 +355,18 @@ public class AppInitializer implements IProgress {
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
+
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
 		updateRegionVars();
+
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
+
+		app.searchUICore = startupInit(new SearchUICore(app.poiTypes, app.getSettings().MAP_PREFERRED_LOCALE.get(), new BinaryMapIndexReader[]{}), SearchUICore.class);
+		QuickSearchHelper.initSearchUICore(app);
 	}
 
 
@@ -502,6 +510,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			checkLiveUpdatesAlerts();
 			LocalIndexHelper helper = new LocalIndexHelper(app);
+			QuickSearchHelper.setRepositoriesForSearchUICore(app);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());

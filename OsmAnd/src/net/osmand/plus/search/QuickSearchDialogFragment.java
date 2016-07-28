@@ -2,7 +2,6 @@ package net.osmand.plus.search;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -36,15 +35,14 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -56,14 +54,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
-import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -74,7 +71,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -113,12 +109,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean paused;
 	private boolean foundPartialLocation;
 
-	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
-	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
-	public static final int SEARCH_WPT_API_PRIORITY = 2;
-	public static final int SEARCH_WPT_OBJECT_PRIORITY = 10;
-	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
-	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 
 
@@ -295,7 +285,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				updateTabbarVisibility(newQueryText.length() == 0);
 				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 					searchQuery = newQueryText;
-					runSearch();
+					if (Algorithms.isEmpty(searchQuery)) {
+						searchUICore.resetPhrase();
+					} else {
+						runSearch();
+					}
 				}
 			}
 		});
@@ -328,6 +322,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		updateToolbarButton();
 		updateClearButtonAndHint();
+		updateClearButtonVisibility(searchQuery.length() > 0);
 		addMainSearchFragment();
 
 		searchEditText.requestFocus();
@@ -392,14 +387,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		// Setup search core
 		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-
-		Collection<RegionAddressRepository> regionAddressRepositories = app.getResourceManager().getAddressRepositories();
-		BinaryMapIndexReader[] binaryMapIndexReaderArray = new BinaryMapIndexReader[regionAddressRepositories.size()];
-		int i = 0;
-		for (RegionAddressRepository rep : regionAddressRepositories) {
-			binaryMapIndexReaderArray[i++] = rep.getFile();
-		}
-		searchUICore = new SearchUICore(app.getPoiTypes(), locale, binaryMapIndexReaderArray);
+		searchUICore = app.getSearchUICore();
+		searchUICore.resetPhrase();
 
 		location = app.getLocationProvider().getLastKnownLocation();
 		LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
@@ -413,7 +402,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				useMapCenter = true;
 			}
 		}
-		SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
+		SearchSettings settings = searchUICore.getSearchSettings().setOriginalLocation(
 				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 		settings = settings.setLang(locale);
 		searchUICore.updateSettings(settings);
@@ -429,43 +418,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				});
 			}
 		});
-
-		// Register favorites search api
-		searchUICore.registerAPI(new SearchBaseAPI() {
-
-			@Override
-			public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-				List<FavouritePoint> favList = getMyApplication().getFavorites().getFavouritePoints();
-				for (FavouritePoint point : favList) {
-					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = point.getName();
-					sr.object = point;
-					sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
-					sr.objectType = ObjectType.FAVORITE;
-					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-					sr.preferredZoom = 17;
-					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-						resultMatcher.publish(sr);
-					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-						resultMatcher.publish(sr);
-					} else if (point.getCategory() != null && phrase.getNameStringMatcher().matches(point.getCategory())) {
-						resultMatcher.publish(sr);
-					}
-				}
-				return true;
-			}
-
-			@Override
-			public int getSearchPriority(SearchPhrase p) {
-				if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
-					return -1;
-				}
-				return SEARCH_FAVORITE_API_PRIORITY;
-			}
-		});
-
-		// Register WptPt search api
-		searchUICore.registerAPI(new SearchWptAPI(app));
 	}
 
 	@Override
@@ -670,14 +622,39 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if(settings.getRadiusLevel() != 1){
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
-		SearchResultCollection c = runCoreSearch(text);
-		updateSearchResult(c, false);
+		runCoreSearch(text, true);
 	}
 
-	private SearchResultCollection runCoreSearch(String text) {
+	private void runCoreSearch(final String text, final boolean updateResult) {
 		showProgressBar();
 		foundPartialLocation = false;
 		updateToolbarButton();
+
+		final OsmandApplication app = getMyApplication();
+		if (app.isApplicationInitializing() && text.length() > 0) {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					SearchResultCollection c = runCoreSearchInternal(text);
+					if (updateResult) {
+						updateSearchResult(c, false);
+					}
+				}
+			});
+		} else {
+			SearchResultCollection c = runCoreSearchInternal(text);
+			if (updateResult) {
+				updateSearchResult(c, false);
+			}
+		}
+	}
+
+	private SearchResultCollection runCoreSearchInternal(String text) {
+
 		return searchUICore.search(text, new ResultMatcher<SearchResult>() {
 
 			SearchResultCollection regionResultCollection = null;
@@ -781,7 +758,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchEditText.setText(txt);
 		searchEditText.setSelection(txt.length());
 		updateToolbarButton();
-		runCoreSearch(txt);
+		SearchSettings settings = searchUICore.getPhrase().getSettings();
+		if(settings.getRadiusLevel() != 1){
+			searchUICore.updateSettings(settings.setRadiusLevel(1));
+		}
+		runCoreSearch(txt, false);
 	}
 
 	private void addMoreButton() {
@@ -795,7 +776,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						public void onClick(View v) {
 							SearchSettings settings = searchUICore.getPhrase().getSettings();
 							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
-							runCoreSearch(searchQuery);
+							runCoreSearch(searchQuery, false);
 						}
 					});
 
@@ -826,57 +807,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return false;
 			}
 
-			final OsmandApplication app = mapActivity.getMyApplication();
-			if (app.isApplicationInitializing()) {
-				new AsyncTask<Void, Void, Void>() {
-
-					private ProgressDialog dlg;
-
-					@Override
-					protected void onPreExecute() {
-						dlg = new ProgressDialog(mapActivity);
-						dlg.setTitle("");
-						dlg.setMessage(mapActivity.getString(R.string.wait_current_task_finished));
-						dlg.setCanceledOnTouchOutside(false);
-						dlg.show();
-					}
-
-					@Override
-					protected Void doInBackground(Void... params) {
-						while (app.isApplicationInitializing()) {
-							try {
-								Thread.sleep(50);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-						}
-						return null;
-					}
-
-					@Override
-					protected void onPostExecute(Void aVoid) {
-						dlg.hide();
-						showInternal(mapActivity, searchQuery);
-					}
-				}.execute();
-
-			} else {
-				showInternal(mapActivity, searchQuery);
-			}
-
+			Bundle bundle = new Bundle();
+			bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
+			QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
+			fragment.setArguments(bundle);
+			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 			return true;
 
 		} catch (RuntimeException e) {
 			return false;
 		}
-	}
-
-	private static void showInternal(MapActivity mapActivity, String searchQuery) {
-		Bundle bundle = new Bundle();
-		bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
-		QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
-		fragment.setArguments(bundle);
-		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 	}
 
 	private MapActivity getMapActivity() {
@@ -928,13 +868,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateLocationUI(LatLon latLon, Float heading) {
 		if (latLon != null && !paused) {
-			if (mainSearchFragment != null) {
+			if (mainSearchFragment != null && searchView.getVisibility() == View.VISIBLE) {
 				mainSearchFragment.updateLocation(latLon, heading);
-			}
-			if (historySearchFragment != null) {
+			} else if (historySearchFragment != null && viewPager.getCurrentItem() == 0) {
 				historySearchFragment.updateLocation(latLon, heading);
-			}
-			if (categoriesSearchFragment != null) {
+			} else if (categoriesSearchFragment != null && viewPager.getCurrentItem() == 1) {
 				categoriesSearchFragment.updateLocation(latLon, heading);
 			}
 		}
@@ -1124,92 +1062,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		@Override
 		public SearchListFragmentType getType() {
 			return SearchListFragmentType.MAIN;
-		}
-	}
-
-	public static class SearchHistoryAPI extends SearchBaseAPI {
-
-		private OsmandApplication app;
-
-		public SearchHistoryAPI(OsmandApplication app) {
-			this.app = app;
-		}
-
-		@Override
-		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-			SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-			List<HistoryEntry> points = helper.getHistoryEntries();
-			for (HistoryEntry point : points) {
-				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = point.getName().getName();
-				sr.object = point;
-				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY;
-				sr.objectType = ObjectType.RECENT_OBJ;
-				sr.location = new LatLon(point.getLat(), point.getLon());
-				sr.preferredZoom = 17;
-				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-					resultMatcher.publish(sr);
-				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-					resultMatcher.publish(sr);
-				}
-			}
-			return true;
-		}
-
-		@Override
-		public int getSearchPriority(SearchPhrase p) {
-			if(!p.isNoSelectedType()) {
-				return -1;
-			}
-			return SEARCH_HISTORY_API_PRIORITY;
-		}
-	}
-
-	public static class SearchWptAPI extends SearchBaseAPI {
-
-		private OsmandApplication app;
-
-		public SearchWptAPI(OsmandApplication app) {
-			this.app = app;
-		}
-
-		@Override
-		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
-
-			if (phrase.isEmpty()) {
-				return false;
-			}
-
-			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
-			for (SelectedGpxFile selectedGpx : list) {
-				if (selectedGpx != null) {
-					for (WptPt point : selectedGpx.getGpxFile().points) {
-						SearchResult sr = new SearchResult(phrase);
-						sr.localeName = point.getPointDescription(app).getName();
-						sr.object = point;
-						sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
-						sr.objectType = ObjectType.WPT;
-						sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-						sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
-						sr.relatedObject = selectedGpx.getGpxFile();
-						sr.preferredZoom = 17;
-						if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-							resultMatcher.publish(sr);
-						} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-							resultMatcher.publish(sr);
-						}
-					}
-				}
-			}
-			return true;
-		}
-
-		@Override
-		public int getSearchPriority(SearchPhrase p) {
-			if(!p.isNoSelectedType()) {
-				return -1;
-			}
-			return SEARCH_WPT_API_PRIORITY;
 		}
 	}
 }
