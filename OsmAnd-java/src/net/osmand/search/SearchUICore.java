@@ -87,6 +87,10 @@ public class SearchUICore {
 		}
 	}
 	
+	public void setPoiTypes(MapPoiTypes poiTypes) {
+		this.poiTypes = poiTypes;
+	}
+	
 	public int getTotalLimit() {
 		return totalLimit;
 	}

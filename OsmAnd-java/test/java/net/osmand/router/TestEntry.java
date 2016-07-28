@@ -15,7 +15,28 @@ public class TestEntry {
     private boolean ignore;
     private Map<Long, String> expectedResults;
     private Map<String, String> params;
+    private int planRoadDirection;
+    private boolean shortWay;
 
+    
+    public void setShortWay(boolean shortWay) {
+		this.shortWay = shortWay;
+	}
+    
+    public boolean isShortWay() {
+    	return shortWay;
+    }
+    
+    
+    public int getPlanRoadDirection() {
+		return planRoadDirection;
+	}
+    
+    
+    public void setPlanRoadDirection(int planRoadDirection) {
+		this.planRoadDirection = planRoadDirection;
+	}
+    
     public LatLon getStartPoint() {
         return startPoint;
     }

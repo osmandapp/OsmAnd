@@ -463,16 +463,20 @@ public class SearchCoreFactory {
 	
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
-		private Map<String, PoiType> translatedNames;
+		private Map<String, PoiType> translatedNames = new LinkedHashMap<>();
 		private List<PoiFilter> topVisibleFilters;
+		private MapPoiTypes types;
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
-			translatedNames = types.getAllTranslatedNames(false);
-			topVisibleFilters = types.getTopVisibleFilters();
+			this.types = types;
 		}
 		
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			if(translatedNames.isEmpty()) {
+				translatedNames = types.getAllTranslatedNames(false);
+				topVisibleFilters = types.getTopVisibleFilters();
+			}
 //			results.clear();
 			TreeSet<AbstractPoiType> results = new TreeSet<>(new Comparator<AbstractPoiType>() {
 
@@ -491,7 +495,7 @@ public class SearchCoreFactory {
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 				while (it.hasNext()) {
 					Entry<String, PoiType> e = it.next();
-					if (nm.matches(e.getKey())) {
+					if (nm.matches(e.getKey()) || nm.matches(e.getValue().getTranslation())) {
 						results.add(e.getValue());
 					}
 				}
@@ -521,7 +525,6 @@ public class SearchCoreFactory {
 	}
 	
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
-		
 		
 		private MapPoiTypes types;
 

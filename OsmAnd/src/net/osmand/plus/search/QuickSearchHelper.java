@@ -26,13 +26,22 @@ public class QuickSearchHelper {
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 10;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
+	private OsmandApplication app;
+	private SearchUICore core;
+	
+	public QuickSearchHelper(OsmandApplication app) {
+		this.app = app;
+		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(), new BinaryMapIndexReader[]{});
+	}
+	
+	public SearchUICore getCore() {
+		return core;
+	}
 
-	public static void initSearchUICore(final OsmandApplication app) {
-
-		SearchUICore searchUICore = app.getSearchUICore();
-
+	public void initSearchUICore() {
+		setRepositoriesForSearchUICore(app);
 		// Register favorites search api
-		searchUICore.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
+		core.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
 
 			@Override
 			public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
@@ -66,17 +75,17 @@ public class QuickSearchHelper {
 		});
 
 		// Register WptPt search api
-		searchUICore.registerAPI(new SearchWptAPI(app));
+		core.registerAPI(new SearchWptAPI(app));
 	}
 
-	public static void setRepositoriesForSearchUICore(final OsmandApplication app) {
+	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
 		Collection<RegionAddressRepository> regionAddressRepositories = app.getResourceManager().getAddressRepositories();
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = new BinaryMapIndexReader[regionAddressRepositories.size()];
 		int i = 0;
 		for (RegionAddressRepository rep : regionAddressRepositories) {
 			binaryMapIndexReaderArray[i++] = rep.getFile();
 		}
-		app.getSearchUICore().getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
+		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 	}
 
 	public static class SearchWptAPI extends SearchCoreFactory.SearchBaseAPI {
@@ -158,7 +167,7 @@ public class QuickSearchHelper {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if(!p.isNoSelectedType()) {
+			if (!p.isNoSelectedType()) {
 				return -1;
 			}
 			return SEARCH_HISTORY_API_PRIORITY;
