@@ -53,15 +53,13 @@ public class SearchUICore {
 	private Collator collator;
 	
 	
-	public SearchUICore(MapPoiTypes poiTypes, String locale, BinaryMapIndexReader[] searchIndexes) {
+	public SearchUICore(MapPoiTypes poiTypes, String locale) {
 		this.poiTypes = poiTypes;
-		List<BinaryMapIndexReader> searchIndexesList = Arrays.asList(searchIndexes);
 		taskQueue = new LinkedBlockingQueue<Runnable>();
-		searchSettings = new SearchSettings(searchIndexesList);
+		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
 		searchSettings = searchSettings.setLang(locale);
 		phrase = new SearchPhrase(searchSettings);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
-		init();
 		collator = OsmAndCollator.primaryCollator();
 	}
 	

@@ -31,7 +31,7 @@ public class QuickSearchHelper {
 	
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
-		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(), new BinaryMapIndexReader[]{});
+		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get());
 	}
 	
 	public SearchUICore getCore() {
@@ -40,6 +40,7 @@ public class QuickSearchHelper {
 
 	public void initSearchUICore() {
 		setRepositoriesForSearchUICore(app);
+		core.init();
 		// Register favorites search api
 		core.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
 
