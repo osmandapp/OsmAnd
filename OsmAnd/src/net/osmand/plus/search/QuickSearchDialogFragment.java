@@ -382,12 +382,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void setupSearch(final MapActivity mapActivity) {
-
 		final OsmandApplication app = mapActivity.getMyApplication();
-
 		// Setup search core
 		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		searchUICore = app.getSearchUICore();
+		searchUICore = app.getSearchUICore().getCore();
 		searchUICore.resetPhrase();
 
 		location = app.getLocationProvider().getLastKnownLocation();
