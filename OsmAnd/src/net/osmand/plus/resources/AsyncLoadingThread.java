@@ -5,25 +5,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
-import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import android.os.Handler;
-import android.os.HandlerThread;
 
 /**
  * Thread to load map objects (POI, transport stops )async
@@ -34,41 +26,12 @@ public class AsyncLoadingThread extends Thread {
 	
 	private static final Log log = PlatformUtil.getLog(AsyncLoadingThread.class); 
 	
-	private Handler asyncLoadingTransport;
-	
 	Stack<Object> requests = new Stack<Object>();
-	TransportLoadRequest transportLoadRequest = null;
-	
-	
 	private final ResourceManager resourceManger;
 
 	public AsyncLoadingThread(ResourceManager resourceManger) {
 		super("Loader map objects (synchronizer)"); //$NON-NLS-1$
 		this.resourceManger = resourceManger;
-	}
-	
-	
-	
-	private void startTransportLoadingThread() {
-		HandlerThread h = new HandlerThread("Loading transport");
-		h.start();
-		asyncLoadingTransport = new Handler(h.getLooper());
-	}
-
-	private int calculateProgressStatus() {
-		int progress = 0;
-		if (resourceManger.getMapTileDownloader() != null && resourceManger.getMapTileDownloader().isSomethingBeingDownloaded()) {
-			progress = BusyIndicator.STATUS_GREEN;
-		} else if (resourceManger.getContext().getRoutingHelper().isRouteBeingCalculated()) {
-			progress = BusyIndicator.STATUS_ORANGE;
-		} else if (resourceManger.isSearchAmenitiesInProgress()) {
-			progress = BusyIndicator.STATUS_BLACK;
-		} else if (!requests.isEmpty()) {
-			progress = BusyIndicator.STATUS_BLACK;
-		} else if (transportLoadRequest != null && transportLoadRequest.isRunning()) {
-			progress = BusyIndicator.STATUS_BLACK;
-		}
-		return progress;
 	}
 
 	@Override
@@ -76,33 +39,12 @@ public class AsyncLoadingThread extends Thread {
 		while (true) {
 			try {
 				boolean tileLoaded = false;
-				boolean amenityLoaded = false;
-				boolean transportLoaded = false;
 				boolean mapLoaded = false;
-				
-				int progress = calculateProgressStatus();
-				synchronized (resourceManger) {
-					if (resourceManger.getBusyIndicator() != null) {
-						resourceManger.getBusyIndicator().updateStatus(progress);
-					}
-				}
 				while (!requests.isEmpty()) {
 					Object req = requests.pop();
 					if (req instanceof TileLoadDownloadRequest) {
 						TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
 						tileLoaded |= resourceManger.getRequestedImageTile(r) != null;
-					} else if (req instanceof TransportLoadRequest) {
-						if (!transportLoaded) {
-							if (transportLoadRequest == null || asyncLoadingTransport == null) {
-								startTransportLoadingThread();
-								transportLoadRequest = (TransportLoadRequest) req;
-								asyncLoadingTransport.post(transportLoadRequest.prepareToRun());
-							} else if (transportLoadRequest.recalculateRequest((TransportLoadRequest) req)) {
-								transportLoadRequest = (TransportLoadRequest) req;
-								asyncLoadingTransport.post(transportLoadRequest.prepareToRun());
-							}
-							transportLoaded = true;
-						}
 					} else if (req instanceof MapLoadRequest) {
 						if (!mapLoaded) {
 							MapLoadRequest r = (MapLoadRequest) req;
@@ -111,17 +53,9 @@ public class AsyncLoadingThread extends Thread {
 						}
 					}
 				}
-				if (tileLoaded || amenityLoaded || transportLoaded || mapLoaded) {
+				if (tileLoaded  || mapLoaded) {
 					// use downloader callback
 					resourceManger.getMapTileDownloader().fireLoadCallback(null);
-				}
-				int newProgress = calculateProgressStatus();
-				if (progress != newProgress) {
-					synchronized (resourceManger) {
-						if (resourceManger.getBusyIndicator() != null) {
-							resourceManger.getBusyIndicator().updateStatus(newProgress);
-						}
-					}
 				}
 				sleep(750);
 			} catch (InterruptedException e) {
@@ -140,9 +74,6 @@ public class AsyncLoadingThread extends Thread {
 		requests.push(req);
 	}
 
-	public void requestToLoadTransport(TransportLoadRequest req) {
-		requests.push(req);
-	}
 	
 	public boolean isFilePendingToDownload(File fileToSave) {
 		return resourceManger.getMapTileDownloader().isFilePendingToDownload(fileToSave);
@@ -251,48 +182,6 @@ public class AsyncLoadingThread extends Thread {
 
 	}
 
-	
-
-	protected class TransportLoadRequest extends MapObjectLoadRequest<TransportStop> {
-		private final List<TransportIndexRepository> repos;
-		private int zoom;
-
-		public TransportLoadRequest(List<TransportIndexRepository> repos, int zoom) {
-			super();
-			this.repos = repos;
-			this.zoom = zoom;
-		}
-
-		public Runnable prepareToRun() {
-			final double ntopLatitude = topLatitude + (topLatitude - bottomLatitude) / 2;
-			final double nbottomLatitude = bottomLatitude - (topLatitude - bottomLatitude) / 2;
-			final double nleftLongitude = leftLongitude - (rightLongitude - leftLongitude) / 2;
-			final double nrightLongitude = rightLongitude + (rightLongitude - leftLongitude) / 2;
-			setBoundaries(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude);
-			return new Runnable() {
-				@Override
-				public void run() {
-					start();
-					try {
-						for (TransportIndexRepository repository : repos) {
-							repository.evaluateCachedTransportStops(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude, zoom,
-									LIMIT_TRANSPORT, TransportLoadRequest.this);
-						}
-					} finally {
-						finish();
-					}
-				}
-			};
-		}
-
-		public boolean recalculateRequest(TransportLoadRequest req) {
-			if (this.zoom != req.zoom) {
-				return true;
-			}
-			return !isContains(req.topLatitude, req.leftLongitude, req.bottomLatitude, req.rightLongitude);
-		}
-
-	}
 
 	protected static class MapLoadRequest {
 		public final RotatedTileBox tileBox;

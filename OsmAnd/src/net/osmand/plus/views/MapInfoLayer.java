@@ -329,10 +329,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return true;
 	}
 	
-	public View getProgressBar() {
-		// currently no progress on info layer
-		return null;
-	}
 
 	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {

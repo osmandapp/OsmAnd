@@ -560,12 +560,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapLayers.getMapControlsLayer().startNavigation();
 			}
 		}
-
-		View progress = mapLayers.getMapInfoLayer().getProgressBar();
-		if (progress != null) {
-			app.getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
-		}
-
 		mapView.refreshMap(true);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnResume();
@@ -938,7 +932,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		getMyApplication().getAppCustomization().pauseActivity(MapActivity.class);
 		app.getResourceManager().interruptRendering();
-		app.getResourceManager().setBusyIndicator(null);
 		OsmandPlugin.onMapActivityPause(this);
 	}
 

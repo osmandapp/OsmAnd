@@ -13,25 +13,13 @@ public interface TransportIndexRepository {
 
 	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude);
 	
-	public boolean checkCachedObjects(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill);
-	
-	public boolean checkCachedObjects(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill, boolean fillFound);
-	
 	public boolean acceptTransportStop(TransportStop stop);
 	
-	/**
-	 * 
-	 * @param stop
-	 * @param format {0} - ref, {1} - type, {2} - name, {3} - name_en
-	 * @return
-	 */
+	public void searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
+			int limit, List<TransportStop> stops, ResultMatcher<TransportStop> matcher);
+	
 	public List<String> getRouteDescriptionsForStop(TransportStop stop, String format);
-	
-	
-	public void evaluateCachedTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, int limit,  
-			ResultMatcher<TransportStop> matcher);
-	
-	
+
 	public List<RouteInfoLocation> searchTransportRouteStops(double latitude, double longitude, LatLon locationToGo, int zoom);
 		
 	public void close();
