@@ -154,7 +154,7 @@ public class TransportStopController extends MenuController {
 						if (topType == null && type != null && type.isTopType()) {
 							topType = type;
 						}
-						r.desc = rs.getRef() + " " + (useEnglishNames ? rs.getName() : rs.getEnName(true));
+						r.desc = rs.getRef() + " " + (useEnglishNames ?  rs.getEnName(true) : rs.getName());
 						r.route = rs;
 						r.stop = transportStop;
 						this.routes.add(r);
