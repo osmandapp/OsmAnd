@@ -256,5 +256,12 @@ public class Amenity extends MapObject {
 		return cmp;
 	}
 
-
+	@Override
+	public boolean equals(Object o) {
+		boolean res = super.equals(o);
+		if (res && o instanceof Amenity) {
+			return ((Amenity) o).getType().getKeyName().equals(getType().getKeyName());
+		}
+		return res;
+	}
 }
