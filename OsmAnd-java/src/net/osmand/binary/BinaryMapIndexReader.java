@@ -93,8 +93,6 @@ public class BinaryMapIndexReader {
 	};
 	
 	
-	
-	
 	private final RandomAccessFile raf;
 	protected final File file;
 	/*private*/ int version;
