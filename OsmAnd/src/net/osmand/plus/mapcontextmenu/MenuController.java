@@ -352,6 +352,11 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public void onHide() {
-		
+	}
+	
+	public void onClose() {
+	}
+	
+	public void onAcquireNewController(PointDescription pointDescription2, Object object) {
 	}
 }

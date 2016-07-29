@@ -164,26 +164,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb,
 			DrawSettings settings) {
 		if (tb.getZoom() >= startZoom) {
-			data.queryNewData(tb);;
-			float iconSize = stopBus.getWidth() * 3 / 2.5f;
-			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
-			List<TransportStop> fullObjects = new ArrayList<>();
-			for (TransportStop o : data.getResults()) {
-				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-
-				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2, paintIcon);
-				} else {
-					fullObjects.add(o);
-				}
-			}
-			for (TransportStop o : fullObjects) {
-				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				Bitmap b = stopBus;
-				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
-			}
+			data.queryNewData(tb);
 			if(route != null) {
 				attrs.updatePaints(view, settings, tb);
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
@@ -208,6 +189,27 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				}
 				
 			}
+			
+			float iconSize = stopBus.getWidth() * 3 / 2.5f;
+			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
+			List<TransportStop> fullObjects = new ArrayList<>();
+			for (TransportStop o : data.getResults()) {
+				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+
+				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+					canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2, paintIcon);
+				} else {
+					fullObjects.add(o);
+				}
+			}
+			for (TransportStop o : fullObjects) {
+				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				Bitmap b = stopBus;
+				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+			}
+			
 		}
 	}
 	
